@@ -11,7 +11,7 @@ import { HAIR_STYLES, CLOTHES, ACCESSORIES, accSlot, HAIR_COLOR_NAMES, CLOTH_COL
 import { FURNITURE, FURNITURE_LIST, HOUSE_LEVELS, WALLPAPERS, FLOORS } from '@/data/furniture';
 import { SHOPS } from '@/data/shops';
 import { QUESTS, TITLES, ACHIEVEMENTS } from '@/data/quests';
-import { ZONE_LIST } from '@/data/zones';
+import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
 import { VEHICLES } from '@/data/vehicles';
 import * as farming from '@/systems/farming';
@@ -635,11 +635,12 @@ export function registerAllPanels() {
       ctx.beginPath(); ctx.ellipse(cx, cy, r, r * 0.42, 0, 0, 7); ctx.fill();
     }
 
-    // marker các khu
+    // marker các khu (đứng ở cổng cũng tính là đang ở khu đó)
+    const hereId = ZONES[S.zone]?.gateTo ?? S.zone;
     for (const z of ZONE_LIST) {
       const pos = MAP_POS[z.id];
       if (!pos) continue;
-      const m = h('div', `map-marker ${S.zone === z.id ? 'here' : ''}`);
+      const m = h('div', `map-marker ${hereId === z.id ? 'here' : ''}`);
       m.style.left = pos.x + '%';
       m.style.top = pos.y + '%';
       m.innerHTML = `<div class="sign">${z.icon}</div><div class="tag">${z.name}</div>`;

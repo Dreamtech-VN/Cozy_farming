@@ -18,10 +18,14 @@ import { sfx } from '@/core/audio';
 const T = 16; // kích thước tile
 const FARM_ORIGIN = { x: 6, y: 12 }; // vị trí ruộng trong zone farm (theo tile)
 const BARN_RECT = { x: 30, y: 4, w: 12, h: 8 };
-const ROAD_TILES = 4; // đường xe chạy chiếm 4 hàng tile dưới cùng (khu ngoài trời)
+const ROAD_TILES = 4; // đường xe chạy chiếm 4 hàng tile dưới cùng (map cổng)
 
 // đang có chuyến xe tới khu mới (giữ qua lần restart scene)
 let busArrival = false;
+// vừa fade về map cổng để bắt xe đi tiếp tới zone này
+let pendingDepart: string | undefined;
+
+const TRAFFIC_KEYS = ['veh_bus', 'veh_truck_orange', 'veh_camper_pink', 'veh_camper_yellow', 'veh_truck_bee', 'veh_truck_gift'];
 
 // Decor đặt sẵn theo khu (sprite thật từ asset pack) — toạ độ tile, origin đáy giữa
 const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number }[]> = {
@@ -59,6 +63,34 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   pond: [
     { key: 'deco_bench', x: 12, y: 5 }, { key: 'deco_lamp_green', x: 24, y: 5 },
     { key: 'deco_barrel', x: 6, y: 8 }
+  ],
+  // map cổng: cây + đèn + ghế dọc vỉa hè
+  farm_gate: [
+    { key: 'deco_tree_round', x: 6, y: 8 }, { key: 'deco_tree_round2', x: 34, y: 8 },
+    { key: 'deco_scarecrow', x: 27, y: 7 }, { key: 'deco_barrel', x: 30, y: 7 },
+    { key: 'deco_lamp_black', x: 10, y: 11 }, { key: 'deco_lamp_black', x: 30, y: 11 },
+    { key: 'deco_flower_pot', x: 16, y: 11 }, { key: 'deco_flower_pot', x: 24, y: 11 }
+  ],
+  town_gate: [
+    { key: 'bld_cafe', x: 7, y: 8, s: 0.9 }, { key: 'bld_pub', x: 34, y: 8, s: 0.9 },
+    { key: 'deco_lamp_black', x: 13, y: 11 }, { key: 'deco_lamp_black', x: 27, y: 11 },
+    { key: 'deco_bench', x: 16, y: 11 }, { key: 'deco_bench', x: 24, y: 11 }
+  ],
+  beach_gate: [
+    { key: 'bld_beachbar', x: 32, y: 9, s: 0.9 },
+    { key: 'deco_lamp_green', x: 10, y: 11 }, { key: 'deco_lamp_green', x: 30, y: 11 },
+    { key: 'deco_barrel', x: 7, y: 9 }, { key: 'deco_bench', x: 14, y: 11 }
+  ],
+  park_gate: [
+    { key: 'deco_tree_round', x: 6, y: 8 }, { key: 'deco_tree_pine', x: 34, y: 8 },
+    { key: 'deco_bush', x: 9, y: 9 }, { key: 'deco_bush', x: 31, y: 9 },
+    { key: 'deco_lamp_green', x: 12, y: 11 }, { key: 'deco_lamp_green', x: 28, y: 11 },
+    { key: 'deco_bench', x: 16, y: 11 }, { key: 'deco_bench', x: 24, y: 11 }
+  ],
+  pond_gate: [
+    { key: 'deco_tree_pine', x: 6, y: 8 }, { key: 'deco_tree_pine', x: 34, y: 8 },
+    { key: 'deco_lamp_green', x: 12, y: 11 }, { key: 'deco_lamp_green', x: 28, y: 11 },
+    { key: 'deco_barrel', x: 9, y: 9 }, { key: 'deco_bench', x: 20, y: 11 }
   ]
 };
 
@@ -123,10 +155,15 @@ export class WorldScene extends Phaser.Scene {
     this.selector = this.add.image(0, 0, 'sel').setVisible(false).setDepth(900).setAlpha(0.9);
 
     this.cameras.main.startFollow(this.player, true, 0.12, 0.12);
-    // trong nhà: phóng to để căn phòng lấp đầy màn hình
     const bw = this.physics.world.bounds;
-    const fitZoom = Math.max(this.scale.width / bw.width, this.scale.height / bw.height);
-    this.cameras.main.setZoom(Math.max(2.4, fitZoom));
+    if (this.zone.road) {
+      // map cổng thấp: thu nhỏ vừa đủ để thấy cả cổng chào lẫn con đường
+      this.cameras.main.setZoom(Math.min(2.4, this.scale.height / bw.height));
+    } else {
+      // trong nhà: phóng to để căn phòng lấp đầy màn hình
+      const fitZoom = Math.max(this.scale.width / bw.width, this.scale.height / bw.height);
+      this.cameras.main.setZoom(Math.max(2.4, fitZoom));
+    }
 
     // lớp đêm + mưa
     this.darkOverlay = this.add.rectangle(0, 0, zw, zh, 0x0b1030).setOrigin(0).setDepth(5000).setAlpha(0);
@@ -136,8 +173,14 @@ export class WorldScene extends Phaser.Scene {
     this.wasd = this.input.keyboard!.addKeys('W,A,S,D,E,SPACE') as Record<string, Phaser.Input.Keyboard.Key>;
 
     this.cameras.main.fadeIn(250, 0, 0, 0);
-    // vừa đi xe tới khu này -> xe vào bến trả khách
-    if (busArrival && !this.zone.indoor) this.playArrival();
+    // vừa đi xe tới cổng khu này -> xe vào bến trả khách
+    if (busArrival && this.zone.road) this.playArrival();
+    // vừa fade ra cổng để đi tiếp -> xe đón luôn
+    else if (pendingDepart && this.zone.road) {
+      const target = pendingDepart;
+      pendingDepart = undefined;
+      this.time.delayedCall(350, () => this.playDeparture(target));
+    }
 
     // chạm vào thế giới: đi tới / tương tác côn trùng / đặt đồ
     this.input.on('pointerdown', (p: Phaser.Input.Pointer) => this.onTap(p));
@@ -224,15 +267,14 @@ export class WorldScene extends Phaser.Scene {
     return (this.zone.h - ROAD_TILES / 2) * T;
   }
   private roadWidth(): number {
-    // bãi biển: đường dừng trước mép nước
-    return this.zone.id === 'beach' ? (this.zone.w - 12) * T : this.zone.w * T;
+    return this.zone.w * T;
   }
   private busStopX(): number {
     return Math.min(this.roadWidth() - 6 * T, Math.max(6 * T, this.zone.spawn.x * T - 6 * T));
   }
 
   private drawRoad() {
-    if (this.zone.indoor) return;
+    if (!this.zone.road) return;
     const top = this.roadTopY(), w = this.roadWidth(), zh = this.zone.h * T;
     const g = this.add.graphics().setDepth(-85);
     // vỉa hè
@@ -253,6 +295,58 @@ export class WorldScene extends Phaser.Scene {
     if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
       this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(1.1);
     }
+
+    this.drawGateArch();
+    this.startTraffic();
+  }
+
+  // cổng chào dẫn vào map chính
+  private drawGateArch() {
+    const p = this.zone.portals[0];
+    if (!p) return;
+    const gx = p.x * T, gy = p.y * T;
+    const g = this.add.graphics().setDepth(gy - 40);
+    // hàng rào chạy ngang hai bên cổng
+    g.fillStyle(0x8a5a33);
+    g.fillRect(0, gy - 26, gx - 3 * T, 6);
+    g.fillRect(gx + 3 * T, gy - 26, this.zone.w * T - gx - 3 * T, 6);
+    for (let x = T; x < this.zone.w * T; x += 2 * T) {
+      if (Math.abs(x - gx) < 3 * T) continue;
+      g.fillRect(x - 2, gy - 32, 5, 18);
+    }
+    // hai trụ cổng + mái
+    g.fillStyle(0x6b4a2e);
+    g.fillRect(gx - 3 * T, gy - 44, 8, 34);
+    g.fillRect(gx + 3 * T - 8, gy - 44, 8, 34);
+    g.fillStyle(0xa9714b);
+    g.fillRoundedRect(gx - 3 * T - 6, gy - 56, 6 * T + 12, 16, 5);
+    const title = this.add.text(gx, gy - 48, `${this.zone.icon} ${ZONES[this.zone.gateTo ?? '']?.name ?? ''}`, {
+      fontSize: '9px', color: '#fff8e8', fontStyle: 'bold'
+    }).setOrigin(0.5).setDepth(gy - 39);
+    void title;
+  }
+
+  // xe cộ AI chạy qua lại trên đường
+  private startTraffic() {
+    const spawnCar = () => {
+      if (!this.scene.isActive()) return;
+      const key = TRAFFIC_KEYS[Math.floor(Math.random() * TRAFFIC_KEYS.length)];
+      if (!this.textures.exists(key)) return;
+      const toRight = Math.random() < 0.5;
+      const top = this.roadTopY(), zh = this.zone.h * T;
+      // 2 làn: làn trên chạy sang trái, làn dưới chạy sang phải
+      const laneY = toRight ? top + (zh - top) * 0.72 : top + (zh - top) * 0.3;
+      const w = this.zone.w * T;
+      const car = this.add.image(toRight ? -120 : w + 120, laneY, key)
+        .setDepth(laneY).setScale(1.05).setFlipX(!toRight);
+      this.tweens.add({
+        targets: car, x: toRight ? w + 120 : -120,
+        duration: 6000 + Math.random() * 4000,
+        onComplete: () => car.destroy()
+      });
+    };
+    this.time.addEvent({ delay: 2600, loop: true, callback: () => { if (Math.random() < 0.8) spawnCar(); } });
+    spawnCar();
   }
 
   // hiệu ứng xe buýt/xe riêng đón khách rồi rời bến
@@ -566,7 +660,7 @@ export class WorldScene extends Phaser.Scene {
         if (this.insects.length >= 5) return;
         const def = fishing.rollInsect(this.zone.id);
         if (!def) return;
-        const maxY = this.zone.indoor ? this.zone.h * T : this.roadTopY() - 16;
+        const maxY = this.zone.road ? this.roadTopY() - 16 : this.zone.h * T;
         const x = Math.random() * this.zone.w * T, y = Math.random() * maxY;
         if (this.inWater(x, y)) return;
         const obj = this.add.image(x, y, def.kind === 'butterfly' ? 'butterfly' : 'bug')
@@ -838,13 +932,30 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
     const to = ZONES[zoneId];
-    // ngoài trời <-> ngoài trời: đi xe buýt / xe riêng
-    if (!this.zone.indoor && to && !to.indoor) {
-      this.playDeparture(zoneId);
+    if (!to) return;
+    // khu ngoài trời -> đích thật là map cổng của khu đó (trừ khi đang đứng ngay cổng ấy)
+    const dest = (!to.indoor && !to.road && to.gate && this.zone.id !== to.gate) ? to.gate : zoneId;
+    const destZone = ZONES[dest];
+    // cần đi xe: đích là map cổng khác với cổng của khu hiện tại
+    if (destZone.road && dest !== this.zone.gate && dest !== this.zone.id) {
+      if (this.zone.road) {
+        // đang đứng ở cổng có đường: xe đón tại trạm
+        this.playDeparture(dest);
+      } else {
+        // đang trong khu/nhà: fade ra cổng khu mình rồi xe đón
+        const own = this.zone.gate;
+        if (!own) return;
+        pendingDepart = dest;
+        S.zone = own;
+        save(true);
+        this.stopFishing();
+        this.cameras.main.fadeOut(200, 0, 0, 0);
+        this.time.delayedCall(220, () => this.scene.restart());
+      }
       return;
     }
-    // vào/ra nhà: đi bộ qua cửa, chỉ fade
-    S.zone = zoneId;
+    // đi bộ qua cổng/cửa: chỉ fade
+    S.zone = dest;
     save(true);
     this.stopFishing();
     this.cameras.main.fadeOut(200, 0, 0, 0);
@@ -888,8 +999,8 @@ export class WorldScene extends Phaser.Scene {
       const bw = this.physics.world.bounds;
       nx = Phaser.Math.Clamp(nx, bw.x + 8, bw.right - 8);
       ny = Phaser.Math.Clamp(ny, bw.y + 8, bw.bottom - 8);
-      // không đi xuống lòng đường (khu ngoài trời)
-      if (!this.zone.indoor) ny = Math.min(ny, this.roadTopY() - 10);
+      // không đi xuống lòng đường (map cổng)
+      if (this.zone.road) ny = Math.min(ny, this.roadTopY() - 10);
       if (!this.inWater(nx, ny)) { this.player.x = nx; this.player.y = ny; }
       else if (!this.inWater(nx, this.player.y)) this.player.x = nx;
       else if (!this.inWater(this.player.x, ny)) this.player.y = ny;
