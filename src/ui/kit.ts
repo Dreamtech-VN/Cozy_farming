@@ -70,6 +70,14 @@ export function closeAllWindows() {
   openWindows.length = 0;
 }
 
+// nút giá tiền có icon xu/ruby thật (thay cho "🪙123")
+export function priceBtn(xu: number, cls = 'gold', onClick?: () => void, ruby = 0): HTMLButtonElement {
+  const b = h('button', `btn ${cls}`);
+  b.innerHTML = priceHtml(xu, ruby);
+  if (onClick) b.onclick = onClick;
+  return b;
+}
+
 export function btn(label: string, cls = '', onClick?: () => void): HTMLButtonElement {
   const b = h('button', `btn ${cls}`, label);
   if (onClick) b.onclick = onClick;
@@ -97,10 +105,41 @@ export function spr(url: string, sx: number, sy: number, sw: number, sh: number,
 
 export interface SpriteRef { url: string; sx: number; sy: number; sw: number; sh: number }
 
-// ===== Icon UI (Avatar iconmenu/iconshop + Cozy UI pack) =====
+// ===== Icon UI (Avatar iconmenu/iconshop + Cozy UI pack + icon cắt từ asset game) =====
+// Mỗi tên phải trỏ tới đúng hình nó mô tả — không dùng icon "cho có".
+const ICON_SRC: Record<string, string> = {
+  // tiền tệ & UI chung (Cozy UI pack)
+  coin: 'assets/ui/pack/icon_coin.png',
+  ruby: 'assets/ui/pack/icon_ruby.png',
+  rank: 'assets/ui/pack/icon_trophy.png',
+  shop: 'assets/ui/pack/icon_shop.png',
+  inventory: 'assets/ui/pack/icon_inventory.png',
+  wardrobe: 'assets/ui/pack/icon_wardrobe.png',
+  quest: 'assets/ui/pack/icon_quest.png',
+  collection: 'assets/ui/pack/icon_collection.png',
+  social: 'assets/ui/pack/icon_social.png',
+  // cắt từ asset trong game (xem public/assets/ui/act)
+  sit: 'assets/ui/act/sit.png',
+  lie: 'assets/ui/act/lie.png',
+  runner: 'assets/ui/act/run.png',
+  player: 'assets/ui/act/player.png',
+  feed: 'assets/ui/act/feed.png',
+  barn: 'assets/ui/act/barn.png',
+  tree: 'assets/ui/act/tree.png',
+  rod: 'assets/ui/act/rod.png',
+  pet: 'assets/ui/act/pet.png',
+  seed: 'assets/ui/act/seed.png',
+  minigame: 'assets/ui/act/minigame.png',
+  gift: 'assets/ui/act/gift.png',
+  act_kiss: 'assets/ui/act/act_kiss.png',
+  act_hug: 'assets/ui/act/act_hug.png',
+  act_kick: 'assets/ui/act/act_kick.png',
+  act_pat: 'assets/ui/act/act_pat.png'
+};
+
 export function uiIcon(name: string, size = 22): HTMLElement {
   const img = document.createElement('img');
-  img.src = `assets/ui/av/${name}.png`;
+  img.src = ICON_SRC[name] ?? `assets/ui/av/${name}.png`;
   img.draggable = false;
   img.style.cssText = `width:${size}px;height:${size}px;object-fit:contain;vertical-align:middle;flex:none`;
   return img;

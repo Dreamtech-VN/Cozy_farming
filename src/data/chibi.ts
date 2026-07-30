@@ -1,7 +1,7 @@
 // ===== Nhân vật chibi kiểu Avatar =====
 // Part export từ resource Avatar (xem docs/ASSETS.md — chỉ dùng dev/test).
 // Mỗi part: strip 15 frame 64x96 tại assets/chibi/<id>.png, neo chân (32,88).
-// zOrder: 5 cánh | 10 quần | 20 áo | 30 thân | 40 mắt | 50 tóc | 60 mũ | 65 kính | 70 phụ kiện cầm
+// zOrder: 10 quần | 20 áo | 30 thân | 40 mắt | 50 tóc | 60 mũ | 65 kính | 70 phụ kiện cầm
 
 import RAW from './chibi-parts.json';
 import { SKINS } from './skins';
@@ -25,7 +25,7 @@ export const BODY_ID = 0;   // thân "tròn"
 export const EYES_ID = 4;   // mắt đen mặc định
 
 export const Z_NAME: Record<number, string> = {
-  5: 'Cánh', 10: 'Quần', 20: 'Áo', 40: 'Mắt', 50: 'Tóc', 60: 'Mũ', 65: 'Kính', 70: 'Đồ cầm tay'
+  10: 'Quần', 20: 'Áo', 40: 'Mắt', 50: 'Tóc', 60: 'Mũ', 65: 'Kính', 70: 'Đồ cầm tay'
 };
 
 export function chibiList(z: number, gender?: number): ChibiPartDef[] {
@@ -69,7 +69,6 @@ export interface ChibiLook {
   eyes: number;
   hat: number;             // 0 = không đội
   glasses: number;         // 0 = không đeo
-  wing: number;            // 0 = không có cánh
   hand?: number;           // 0/undefined = tay không (đồ cầm tay z=70)
   skin?: string;           // id skin trọn bộ — mặc vào thay toàn bộ trang phục
 }
@@ -82,7 +81,7 @@ export function defaultLook(gender: number): ChibiLook {
     shirt: pick(20),
     hair: pick(50),
     eyes: EYES_ID,
-    hat: 0, glasses: 0, wing: 0, hand: 0
+    hat: 0, glasses: 0, hand: 0
   };
 }
 
@@ -93,7 +92,6 @@ export function lookLayers(l: ChibiLook): number[] {
     const sk = SKINS[l.skin];
     if (sk) {
       const o: number[] = [];
-      if (sk.parts.wing) o.push(sk.parts.wing);
       if (sk.parts.pant) o.push(sk.parts.pant);
       if (sk.parts.shirt) o.push(sk.parts.shirt);
       o.push(BODY_ID);
@@ -106,7 +104,6 @@ export function lookLayers(l: ChibiLook): number[] {
     }
   }
   const out: number[] = [];
-  if (l.wing) out.push(l.wing);
   if (l.pant) out.push(l.pant);
   if (l.shirt) out.push(l.shirt);
   out.push(BODY_ID);

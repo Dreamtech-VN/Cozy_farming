@@ -485,3 +485,6 @@ img.cur { width: 15px; height: 15px; object-fit: contain; vertical-align: -3px; 
   background: rgba(0,0,0,.08); border-radius: 14px; border: 2px dashed #b5836b66;
 }
 .tryon-info { text-align: center; margin-top: 8px; font-size: 13px; font-weight: 700; color: #4a3520; }
+
+/* icon ảnh thật trong ô lưới (thay emoji) */
+.cell img.ico-img, img.ico-img { width: 34px; height: 34px; object-fit: contain; image-rendering: pixelated; display: block; margin: 0 auto 2px; }

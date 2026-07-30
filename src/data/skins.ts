@@ -6,7 +6,7 @@ export interface SkinDef {
   id: string;
   name: string;
   gender: number;                 // 0 unisex, 1 nam, 2 nữ
-  parts: { hair?: number; shirt?: number; pant?: number; hat?: number; glasses?: number; wing?: number };
+  parts: { hair?: number; shirt?: number; pant?: number; hat?: number; glasses?: number };
   priceXu: number;
   priceRuby: number;
 }

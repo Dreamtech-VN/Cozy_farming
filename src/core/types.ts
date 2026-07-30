@@ -15,7 +15,7 @@ export interface Appearance {
 export interface ChibiLookState {
   gender: number;          // 0 nam, 1 nữ
   pant: number; shirt: number; hair: number; eyes: number;
-  hat: number; glasses: number; wing: number; hand?: number; skin?: string;
+  hat: number; glasses: number; hand?: number; skin?: string;
 }
 
 export interface PlayerProfile {

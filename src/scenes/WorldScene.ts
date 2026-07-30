@@ -651,7 +651,7 @@ export class WorldScene extends Phaser.Scene {
     return {
       gender: g,
       pant: pick(10, seed), shirt: pick(20, seed + 1), hair: pick(50, seed + 2),
-      eyes: EYES_ID, hat: 0, glasses: 0, wing: 0
+      eyes: EYES_ID, hat: 0, glasses: 0
     };
   }
 
@@ -786,7 +786,7 @@ export class WorldScene extends Phaser.Scene {
     if (!a) return;
     const def = ANIMALS[a.type];
     const acts: WorldAction[] = [];
-    if (livestock.isHungry(a)) acts.push({ icon: '', ui: 'basket', label: 'Cho ăn', cb: () => { livestock.feed(a); } });
+    if (livestock.isHungry(a)) acts.push({ icon: '', ui: 'feed', label: 'Cho ăn', cb: () => { livestock.feed(a); } });
     if (livestock.hasProduct(a)) acts.push({
       icon: '🧺', label: `Thu ${'' + def.name}`, cb: () => {
         livestock.collect(a); toast(`Thu được sản phẩm từ ${def.name}!`, def.icon);
@@ -1045,14 +1045,14 @@ export class WorldScene extends Phaser.Scene {
 
     // bảng xếp hạng (thành phố)
     if (this.zone.id === 'town' && Phaser.Math.Distance.Between(this.player.x, this.player.y, 31 * T, 16 * T) < 50) {
-      acts.push({ icon: '', ui: 'star', label: 'Xem bảng xếp hạng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'ranking' }) });
+      acts.push({ icon: '', ui: 'rank', label: 'Xem bảng xếp hạng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'ranking' }) });
     }
 
     // nhà kho + cây khế (nông trại)
     if (this.zone.id === 'farm') {
       // nhà kho: mở kho đồ
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, WAREHOUSE_POS.x, WAREHOUSE_POS.y + 40) < 80) {
-        acts.push({ icon: '', ui: 'basket', label: 'Mở nhà kho', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'inventory' }) });
+        acts.push({ icon: '', ui: 'inventory', label: 'Mở nhà kho', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'inventory' }) });
       }
       // cây khế: rung cây nhặt quả (hồi 10 phút)
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, KHE_POS.x, KHE_POS.y + 30) < 85) {
@@ -1060,7 +1060,7 @@ export class WorldScene extends Phaser.Scene {
         const readyIn = 10 * 60_000 - (Date.now() - last);
         if (readyIn <= 0) {
           acts.push({
-            icon: '', ui: 'star', label: 'Rung cây khế', cb: () => {
+            icon: '', ui: 'tree', label: 'Rung cây khế', cb: () => {
               this.busy = true;
               this.player.play('pickup', () => {
                 this.busy = false;
@@ -1080,22 +1080,22 @@ export class WorldScene extends Phaser.Scene {
     // nhà thú cưng (nông trại) — chỉ có khi đã nuôi
     if (this.zone.id === 'farm' && S.pets?.length &&
         Phaser.Math.Distance.Between(this.player.x, this.player.y, PETHOUSE_POS.x + 30, PETHOUSE_POS.y + 40) < 95) {
-      acts.push({ icon: '', ui: 'person', label: 'Thú cưng của tôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petbag' }) });
+      acts.push({ icon: '', ui: 'pet', label: 'Thú cưng của tôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petbag' }) });
     }
 
     // tiệm thú cưng (thành phố)
     if (this.zone.id === 'town' && Phaser.Math.Distance.Between(this.player.x, this.player.y, PETSHOP_POS.x, PETSHOP_POS.y + 30) < 110) {
-      acts.push({ icon: '', ui: 'person', label: 'Tiệm thú cưng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petshop' }) });
+      acts.push({ icon: '', ui: 'shop', label: 'Tiệm thú cưng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petshop' }) });
     }
 
     // chuồng
     if (this.zone.features.includes('barn')) {
       const bx = (BARN_RECT.x + BARN_RECT.w / 2) * T, by = (BARN_RECT.y + BARN_RECT.h / 2) * T;
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, bx, by) < (this.zone.bg ? 110 : 40)) {
-        if (S.livestock.barnLevel === 0) acts.push({ icon: '', ui: 'box', label: 'Xây chuồng (500 xu)', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
+        if (S.livestock.barnLevel === 0) acts.push({ icon: '', ui: 'barn', label: 'Xây chuồng (500 xu)', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
         else {
-          acts.push({ icon: '', ui: 'basket', label: 'Mua vật nuôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'animalshop' }) });
-          if (S.livestock.barnLevel < 3) acts.push({ icon: '', ui: 'star', label: 'Nâng chuồng', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
+          acts.push({ icon: '', ui: 'shop', label: 'Mua vật nuôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'animalshop' }) });
+          if (S.livestock.barnLevel < 3) acts.push({ icon: '', ui: 'barn', label: 'Nâng chuồng', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
         }
       }
     }
@@ -1103,15 +1103,15 @@ export class WorldScene extends Phaser.Scene {
     // câu cá
     if (this.nearWater()) {
       if (this.fishingState === 'idle') acts.push({ icon: '🎣', sprite: TOOL_ICON.rod, label: 'Câu cá', cb: () => this.startFishing() });
-      else acts.push({ icon: '', ui: 'star', label: 'Kéo cần!', cb: () => this.reelFish() });
+      else acts.push({ icon: '', ui: 'rod', label: 'Kéo cần!', cb: () => this.reelFish() });
     }
     return acts;
   }
 
   private talkNpc(def: NpcDef) {
     const acts: WorldAction[] = [];
-    if (def.shop) acts.push({ icon: '', ui: 'basket', label: 'Xem hàng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: def.shop } }) });
-    if (def.minigame) acts.push({ icon: '', ui: 'star', label: 'Chơi mini game', cb: () => bus.emit(EV.OPEN_PANEL, { panel: def.minigame }) });
+    if (def.shop) acts.push({ icon: '', ui: 'shop', label: 'Xem hàng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: def.shop } }) });
+    if (def.minigame) acts.push({ icon: '', ui: 'minigame', label: 'Chơi mini game', cb: () => bus.emit(EV.OPEN_PANEL, { panel: def.minigame }) });
     bus.emit(EV.OPEN_PANEL, {
       panel: 'dialog',
       data: {

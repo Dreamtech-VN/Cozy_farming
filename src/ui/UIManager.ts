@@ -45,8 +45,12 @@ export function initUI(game: Phaser.Game) {
   const toasts = h('div'); toasts.id = 'toasts'; root().append(toasts);
   bus.on(EV.TOAST, ({ msg, icon }: { msg: string; icon: string }) => {
     const t = h('div', 'toast');
-    t.innerHTML = `<span>${icon}</span><span></span>`;
-    (t.children[1] as HTMLElement).textContent = msg;
+    const ic = h('span');
+    // icon dạng tên (vd 'coin', 'act_kiss') -> ảnh thật; còn lại giữ nguyên text
+    if (/^[a-z][a-z0-9_]*$/.test(icon)) ic.append(uiIcon(icon, 20));
+    else ic.textContent = icon;
+    const tx = h('span'); tx.textContent = msg;
+    t.append(ic, tx);
     toasts.append(t);
     setTimeout(() => t.remove(), 2800);
     while (toasts.children.length > 4) toasts.firstChild?.remove();
@@ -157,7 +161,7 @@ function buildHud() {
       b.innerHTML = i === 0 ? `<span>${a.icon}</span>` : `<span>${a.icon}</span><span class="act-label"></span>`;
       // ưu tiên icon/sprite thật thay emoji
       if (a.ui) {
-        (b.querySelector('span') as HTMLElement).replaceWith(uiIcon(a.ui === 'coin' ? 'star' : a.ui, i === 0 ? 30 : 22));
+        (b.querySelector('span') as HTMLElement).replaceWith(uiIcon(a.ui, i === 0 ? 30 : 22));
       } else if (a.sprite) {
         const s = a.sprite;
         (b.querySelector('span') as HTMLElement).replaceWith(spr(s.url, s.sx, s.sy, s.sw, s.sh, i === 0 ? 30 : 22));

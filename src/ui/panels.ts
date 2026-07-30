@@ -1,5 +1,5 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, uiIcon, priceHtml } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, uiIcon, priceHtml, priceBtn } from './kit';
 import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
@@ -35,8 +35,8 @@ function sellPrice(base: number, qty = 1): number {
 
 function rewardText(r: Reward): string {
   const parts: string[] = [];
-  if (r.coins) parts.push(`🪙${r.coins}`);
-  if (r.rubies) parts.push(`💎${r.rubies}`);
+  if (r.coins) parts.push(priceHtml(r.coins));
+  if (r.rubies) parts.push(priceHtml(0, r.rubies));
   if (r.exp) parts.push(`⭐${r.exp}`);
   if (r.items) for (const [id, q] of Object.entries(r.items)) parts.push(`${item(id).icon}x${q}`);
   if (r.title) parts.push(`🏅${TITLES[r.title]?.name}`);
@@ -101,7 +101,7 @@ export function registerAllPanels() {
 
   function itemActions(id: string, closeParent: () => void) {
     const def = item(id);
-    const acts: { icon: string; label: string; cb: () => void }[] = [];
+    const acts: { icon: string; ui?: string; label: string; cb: () => void }[] = [];
     if (def.sell > 0) {
       acts.push({
         icon: '', label: `Bán 1 (+${sellPrice(def.sell)} xu)`, cb: () => {
@@ -116,7 +116,7 @@ export function registerAllPanels() {
       });
     }
     if (def.kind === 'gift' || def.kind === 'crop' || def.kind === 'food') {
-      acts.push({ icon: '🎁', label: 'Tặng bạn bè', cb: () => pickFriendToGift(id) });
+      acts.push({ icon: '', ui: 'gift', label: 'Tặng bạn bè', cb: () => pickFriendToGift(id) });
     }
     if (def.meta?.furniture) {
       acts.push({ icon: '🏠', label: 'Đặt trong nhà', cb: () => { closeParent(); bus.emit('world:place', id); } });
@@ -243,7 +243,7 @@ export function registerAllPanels() {
         body.append(btn('🛠️ Nâng cấp nông cụ', 'blue', () => openPanel('toolupgrade')));
       }
     };
-    tabs(['🛒 Mua', '🪙 Bán'], i => { mode = i; render(); });
+    tabs(['Mua', 'Bán'], i => { mode = i; render(); });
     render();
   });
 
@@ -264,7 +264,7 @@ export function registerAllPanels() {
           const info = h('div', 'grow');
           info.innerHTML = `<div class="t1">${rod.name}${S.tools.rod === rod.tier ? ' <span class="tl-lv">Đang dùng</span>' : ''}</div><div class="t2">+${Math.round(rod.bonus * 100)}% tỉ lệ cá hiếm</div>`;
           r.append(info);
-          r.append(owned ? btn('Đã có', '', undefined) : btn(`🪙${rod.price}`, 'gold', () => { if (buyRod(rod.tier)) render(); }));
+          r.append(owned ? btn('Đã có', '', undefined) : priceBtn(rod.price, 'gold', () => { if (buyRod(rod.tier)) render(); }));
           body.append(r);
         }
       } else if (tab === 1) {
@@ -275,7 +275,7 @@ export function registerAllPanels() {
           const info = h('div', 'grow');
           info.innerHTML = `<div class="t1">${def.name} <span class="qty">x${itemCount(id)}</span></div><div class="t2">${def.desc}</div>`;
           r.append(info);
-          r.append(btn(`🪙${def.buy}`, 'gold', () => {
+          r.append(priceBtn(def.buy ?? 0, 'gold', () => {
             if (spend(def.buy ?? 0)) { addItem(id); sfx.coin(); render(); }
           }));
           body.append(r);
@@ -291,7 +291,7 @@ export function registerAllPanels() {
           const info = h('div', 'grow');
           info.innerHTML = `<div class="t1">${net.name}</div><div class="t2">Bắt côn trùng</div>`;
           r.append(info);
-          r.append(owned ? btn('Đã có', '', undefined) : btn(`🪙${net.price}`, 'gold', () => {
+          r.append(owned ? btn('Đã có', '', undefined) : priceBtn(net.price, 'gold', () => {
             if (spend(net.price)) { S.tools.net = net.tier; save(); toast(`Đã mua ${net.name}!`, '🥅'); equipTool('net'); render(); }
           }));
           body.append(r);
@@ -306,7 +306,7 @@ export function registerAllPanels() {
   // [nhãn, z, icon UI]
   const CHIBI_TABS: [string, number, string][] = [
     ['Skin', -1, 'star'], ['Tóc', 50, 'person'], ['Áo', 20, 'shirt'], ['Quần', 10, 'pants'],
-    ['Mũ', 60, 'hat'], ['Kính', 65, 'glasses'], ['Cánh', 5, 'wand'], ['Đồ cầm tay', 70, 'candy']
+    ['Mũ', 60, 'hat'], ['Kính', 65, 'glasses'], ['Đồ cầm tay', 70, 'candy']
   ];
 
   // ảnh nhân vật mặc trọn bộ skin (xem trước)
@@ -416,7 +416,7 @@ export function registerAllPanels() {
     const wrap = h('div', 'tryon');
     // trái: nhân vật đang mặc thử  |  phải: món đồ phóng to
     const left = h('div', 'tryon-char');
-    const KEY: Record<number, keyof typeof look> = { 5: 'wing', 10: 'pant', 20: 'shirt', 40: 'eyes', 50: 'hair', 60: 'hat', 65: 'glasses', 70: 'hand' } as any;
+    const KEY: Record<number, keyof typeof look> = { 10: 'pant', 20: 'shirt', 40: 'eyes', 50: 'hair', 60: 'hat', 65: 'glasses', 70: 'hand' } as any;
     const preview = look ? { ...look, [KEY[z]]: p.id } as any : undefined;
     left.append(charFace(preview, 170), h('div', 'tryon-cap', 'Mặc thử'));
     const right = h('div', 'tryon-art');
@@ -470,13 +470,13 @@ export function registerAllPanels() {
           const lv = HOUSE_LEVELS[0];
           const r = h('div', 'row');
           r.innerHTML = `<div style="font-size:26px">🏠</div><div class="grow"><div class="t1">${lv.name}</div><div class="t2">Ngôi nhà đầu tiên của bạn!</div></div>`;
-          r.append(btn(`🪙${lv.price}`, 'gold', () => import('@/systems/housing').then(hh => { if (hh.buyHouse()) render(); })));
+          r.append(priceBtn(lv.price, 'gold', () => import('@/systems/housing').then(hh => { if (hh.buyHouse()) render(); })));
           body.append(r);
         } else if (S.house.level < HOUSE_LEVELS.length) {
           const next = HOUSE_LEVELS[S.house.level];
           const r = h('div', 'row');
           r.innerHTML = `<div style="font-size:26px">🏡</div><div class="grow"><div class="t1">Nâng cấp: ${next.name}</div><div class="t2">Phòng rộng hơn (${next.size}x${next.size})</div></div>`;
-          r.append(btn(`🪙${next.price}`, 'gold', () => { if (upgradeHouse()) render(); }));
+          r.append(btn(`${next.price} xu`, 'gold', () => { if (upgradeHouse()) render(); }));
           body.append(r);
         } else {
           body.append(h('div', 'hint', 'Nhà của bạn đã là Biệt thự xịn nhất rồi! 🎉'));
@@ -508,7 +508,7 @@ export function registerAllPanels() {
         const grid = h('div', 'grid');
         for (const f of FURNITURE_LIST) {
           const cell = h('div', 'cell');
-          const price = f.rubyPrice ? `💎${f.rubyPrice}` : `🪙${f.price}`;
+          const price = f.rubyPrice ? priceHtml(0, f.rubyPrice) : priceHtml(f.price);
           cell.innerHTML = `<div class="ico">${f.icon}</div><div class="nm"></div><div class="pr">${price}</div>`;
           (cell.querySelector('.nm') as HTMLElement).textContent = f.name;
           cell.onclick = () => {
@@ -533,7 +533,7 @@ export function registerAllPanels() {
       const r = h('div', 'row');
       r.append(spr(`assets/animals/${a.sheet}`, 0, 0, a.frameW, a.frameH, 36));
       r.innerHTML += `<div class="grow"><div class="t1">${a.name}</div><div class="t2">Cho ra ${item(a.product).name} mỗi ${a.produceMin} phút sau khi ăn</div></div>`;
-      r.append(btn(`🪙${a.price}`, 'gold', () => {
+      r.append(priceBtn(a.price, 'gold', () => {
         if (livestock.buyAnimal(a.id)) worldScene()?.scene?.restart();
       }));
       body.append(r);
@@ -612,7 +612,7 @@ export function registerAllPanels() {
           ['🧺 Thu hoạch', S.stats['harvested'] ?? 0],
           ['🐟 Cá đã câu', S.stats['fish_caught'] ?? 0],
           ['🦋 Côn trùng', S.stats['insects_caught'] ?? 0],
-          ['🪙 Xu kiếm được', S.stats['coins_earned'] ?? 0],
+          ['Xu kiếm được', S.stats['coins_earned'] ?? 0],
           ['🏆 Thành tựu', S.achievements.length],
           ['🎮 Thắng minigame', (S.minigames.caroWins + S.minigames.xiangqiWins + S.minigames.rpsWins)]
         ];
@@ -667,7 +667,7 @@ export function registerAllPanels() {
         if (ownsPet(p.id)) {
           r.append(btn('Đã nuôi', '', undefined));
         } else {
-          r.append(btn(`🪙${p.price}`, 'gold', () => {
+          r.append(priceBtn(p.price, 'gold', () => {
             if (!spend(p.price)) return;
             S.pets.push(p.id);
             if (!S.activePet) S.activePet = p.id;
@@ -732,11 +732,11 @@ export function registerAllPanels() {
       c.onclick = () => { sfx.click(); cb(); };
       grid.append(c);
     };
-    cell('basket', 'Túi đồ', () => { close(); openPanel('inventory'); });
-    cell('run', 'Chạy', () => { close(); bus.emit('world:selfact', 'run'); });
-    cell('star', 'Ngồi', () => { close(); bus.emit('world:selfact', 'sit'); });
-    cell('star', 'Nằm', () => { close(); bus.emit('world:selfact', 'lie'); });
-    cell('person', 'Thú cưng', () => { close(); openPanel('petbag'); });
+    cell('inventory', 'Túi đồ', () => { close(); openPanel('inventory'); });
+    cell('runner', 'Chạy', () => { close(); bus.emit('world:selfact', 'run'); });
+    cell('sit', 'Ngồi', () => { close(); bus.emit('world:selfact', 'sit'); });
+    cell('lie', 'Nằm', () => { close(); bus.emit('world:selfact', 'lie'); });
+    cell('pet', 'Thú cưng', () => { close(); openPanel('petbag'); });
     cell('smile', 'Biểu cảm', () => { close(); openPanel('emotes'); });
     body.append(grid);
   });
@@ -751,7 +751,7 @@ export function registerAllPanels() {
       const isFriend = S.social.friends.some(x => x.id === f.id);
       const head = h('div', 'row');
       head.innerHTML = `<div class="grow"><div class="t1">${f.name} <span class="tl-lv">Lv.${f.level}</span></div>` +
-        `<div class="t2">Thiện cảm: ${aff}/100 · ${affinityLabel(aff)}${isFriend ? ' · 🤝 Bạn bè' : ''}</div></div>`;
+        `<div class="t2">Thiện cảm: ${aff}/100 · ${affinityLabel(aff)}${isFriend ? ' · Bạn bè' : ''}</div></div>`;
       body.append(head);
       const bar = h('div', 'aff-bar');
       const fill = h('div', 'aff-fill'); fill.style.width = `${aff}%`;
@@ -765,19 +765,19 @@ export function registerAllPanels() {
         grid.append(c);
       };
       cell('person', 'Thông tin', () => openPanel('dialog', {
-        title: `👤 ${f.name}`,
+        title: f.name,
         text: `Cấp độ: ${f.level}\nThiện cảm: ${aff}/100 (${affinityLabel(aff)})\n${isFriend ? 'Đã là bạn bè của bạn.' : 'Chưa kết bạn.'}`
       }));
       if (!isFriend) cell('group', 'Kết bạn', () => { addFriend({ ...f, online: true }); addAffinity(f.id, 10); render(); });
       cell('chat', 'Nhắn tin', () => { close(); openPanel('chat', { to: f.name }); });
-      cell('run', 'Hành động', () => { close(); openPanel('playeract', { friend: f }); });
-      cell('box', 'Tặng quà', () => { close(); openPanel('playergift', { friend: f }); });
+      cell('runner', 'Hành động', () => { close(); openPanel('playeract', { friend: f }); });
+      cell('gift', 'Tặng quà', () => { close(); openPanel('playergift', { friend: f }); });
       cell('close', 'Chặn / Báo cáo', () => openPanel('dialog', {
-        title: '🚫 ' + f.name,
+        title: f.name,
         text: 'Bạn muốn làm gì với người chơi này?',
         actions: [
-          { icon: '🚫', label: 'Chặn', cb: () => { blockPlayer(f.id, f.name); close(); } },
-          { icon: '⚠️', label: 'Báo cáo', cb: () => reportPlayer(f.id, f.name) }
+          { icon: '', ui: 'close', label: 'Chặn', cb: () => { blockPlayer(f.id, f.name); close(); } },
+          { icon: '', ui: 'mail', label: 'Báo cáo', cb: () => reportPlayer(f.id, f.name) }
         ]
       }));
       body.append(grid);
@@ -788,10 +788,10 @@ export function registerAllPanels() {
   // ---- hành động thân mật với người chơi ----
   // [icon, tên, lời thoại, thiện cảm, animation]
   const PLAYER_ACTS: [string, string, string, number, string][] = [
-    ['💋', 'Hôn', '{a} hôn {b} một cái 😘', 6, 'kiss'],
-    ['🫂', 'Ôm', '{a} ôm {b} thật chặt', 5, 'hug'],
-    ['🦵', 'Đá đít', '{a} đá đít {b} một phát 😆', -3, 'kick'],
-    ['🥺', 'An ủi', '{a} vỗ vai an ủi {b}', 4, 'pat']
+    ['act_kiss', 'Hôn', '{a} hôn {b} một cái 😘', 6, 'kiss'],
+    ['act_hug', 'Ôm', '{a} ôm {b} thật chặt', 5, 'hug'],
+    ['act_kick', 'Đá đít', '{a} đá đít {b} một phát 😆', -3, 'kick'],
+    ['act_pat', 'An ủi', '{a} vỗ vai an ủi {b}', 4, 'pat']
   ];
   registerPanel('playeract', (data: { friend: { id: string; name: string } }) => {
     const f = data.friend;
@@ -799,7 +799,7 @@ export function registerAllPanels() {
     const grid = h('div', 'wd-grid');
     for (const [icon, label, tpl, aff, kind] of PLAYER_ACTS) {
       const c = h('button', 'wd-item');
-      c.append(h('div', 'wd-item-ico', icon), h('div', 'nm', label),
+      c.append(uiIcon(icon, 40), h('div', 'nm', label),
         h('div', 'pr', `${aff > 0 ? '+' : ''}${aff} thiện cảm`));
       c.onclick = () => {
         sfx.click();
@@ -831,13 +831,13 @@ export function registerAllPanels() {
       const def = item(id);
       const aff = def.kind === 'gift' ? 12 : def.kind === 'fish' ? 6 : 4;
       const c = h('div', 'cell');
-      c.append(iconOf(def), h('div', 'nm', def.name), h('div', 'qty', `x${qty}`), h('div', 'pr', `+${aff} ❤️`));
+      c.append(iconOf(def), h('div', 'nm', def.name), h('div', 'qty', `x${qty}`), h('div', 'pr', `+${aff} thiện cảm`));
       c.onclick = () => {
         if (!removeItem(id)) return;
         addAffinity(f.id, aff);
         addStat('gifts_sent');
         sfx.coin(); save();
-        toast(`Đã tặng ${def.name} cho ${f.name} (+${aff} thiện cảm)`, '🎁');
+        toast(`Đã tặng ${def.name} cho ${f.name} (+${aff} thiện cảm)`, 'gift');
         close();
       };
       grid.append(c);
@@ -861,18 +861,18 @@ export function registerAllPanels() {
         ic.append(spr(t.url, 0, 0, t.w, t.h, 34));
         const info = h('div', 'grow');
         if (lv <= 0) {
-          info.innerHTML = `<div class="t1">${t.name} — chưa sở hữu</div><div class="t2">Mua ở tab 🛒 của Bách hóa trước nhé.</div>`;
+          info.innerHTML = `<div class="t1">${t.name} — chưa sở hữu</div><div class="t2">Mua ở gian hàng nông cụ của Bách hóa trước nhé.</div>`;
           r.append(ic, info);
         } else {
           info.innerHTML = `<div class="t1">${cur?.name ?? t.name} <span class="tl-lv">Lv.${lv}</span></div><div class="t2">${cur?.desc ?? ''}${next ? `<br>➜ ${next.name}: ${next.desc}` : ''}</div>`;
           r.append(ic, info);
           if (next) {
-            r.append(btn(`🪙${next.price}`, 'gold', () => {
+            r.append(btn(`${next.price} xu`, 'gold', () => {
               if (!spend(next.price)) return;
               if (tid === 'hoe') S.tools.hoe = next.level;
               else if (tid === 'can') S.tools.can = next.level;
               else S.tools.basket = next.level;
-              save(); sfx.coin(); toast(`Nâng thành ${next.name}!`, '🛠️');
+              save(); sfx.coin(); toast(`Nâng thành ${next.name}!`, 'rank');
               bus.emit('hotbar:changed');
               render();
             }));
@@ -890,17 +890,16 @@ export function registerAllPanels() {
     if (!look) return;
     const apply = () => { save(); bus.emit(EV.APPEARANCE); };
 
-    type SlotKey = 'pant' | 'shirt' | 'hair' | 'eyes' | 'hat' | 'glasses' | 'wing' | 'hand' | 'skin';
+    type SlotKey = 'pant' | 'shirt' | 'hair' | 'eyes' | 'hat' | 'glasses' | 'hand' | 'skin';
     // [icon UI, nhãn, z, khoá, tuỳ chọn]   z = -1 -> ô Skin trọn bộ
     const SLOTS: [string, string, number, SlotKey, boolean][] = [
-      ['star', 'Skin', -1, 'skin', true],
+      ['wardrobe', 'Skin', -1, 'skin', true],
       ['person', 'Tóc', 50, 'hair', false],
       ['smile', 'Mắt', 40, 'eyes', false],
       ['hat', 'Mũ', 60, 'hat', true],
       ['glasses', 'Kính', 65, 'glasses', true],
       ['shirt', 'Áo', 20, 'shirt', false],
       ['pants', 'Quần', 10, 'pant', false],
-      ['wand', 'Cánh', 5, 'wing', true],
       ['candy', 'Đồ cầm tay', 70, 'hand', true]
     ];
     let tab = 0;
@@ -1094,7 +1093,7 @@ export function registerAllPanels() {
   });
 
   function pickGiftFor(friendId: string) {
-    const { body, close } = openWindow('🎁 Chọn quà', { size: 'small' });
+    const { body, close } = openWindow('Chọn quà', { size: 'small' });
     const giftable = Object.entries(S.inventory).filter(([id]) => ['gift', 'crop', 'food'].includes(item(id).kind));
     if (!giftable.length) body.append(h('div', 'hint', 'Không có gì để tặng — mua quà ở Tiệm quà (Khu mua sắm).'));
     const grid = h('div', 'grid');
@@ -1176,8 +1175,8 @@ export function registerAllPanels() {
         if (m.attachments && !m.claimed) {
           const a = m.attachments;
           const parts: string[] = [];
-          if (a.coins) parts.push(`🪙${a.coins}`);
-          if (a.rubies) parts.push(`💎${a.rubies}`);
+          if (a.coins) parts.push(priceHtml(a.coins));
+          if (a.rubies) parts.push(priceHtml(0, a.rubies));
           if (a.itemId) parts.push(`${item(a.itemId).icon}x${a.qty ?? 1}`);
           r.append(btn(`Nhận ${parts.join(' ')}`, 'gold', () => { claimMail(m.id); sfx.coin(); render(); }));
         }
@@ -1191,7 +1190,7 @@ export function registerAllPanels() {
 
   // ================= Điểm danh / quà ngày =================
   registerPanel('daily', () => {
-    const { body, tabs } = openWindow('🎁 Quà mỗi ngày');
+    const { body, tabs } = openWindow('Quà mỗi ngày');
     let tab = 0;
     const render = () => {
       body.innerHTML = '';
@@ -1201,7 +1200,7 @@ export function registerAllPanels() {
         LOGIN_REWARDS.forEach((r, i) => {
           const idx = (Math.max(1, S.daily.streak) - 1) % LOGIN_REWARDS.length;
           const cell = h('div', `cell ${i === idx ? 'selected' : ''} ${i < idx || (i === idx && S.daily.loginClaimed) ? 'owned' : ''}`);
-          cell.innerHTML = `<div class="ico">🎁</div><div class="nm">Ngày ${i + 1}</div><div class="pr">${rewardText(r)}</div>`;
+          cell.innerHTML = `<img class="ico-img" src="assets/ui/act/gift.png"><div class="nm">Ngày ${i + 1}</div><div class="pr">${rewardText(r)}</div>`;
           grid.append(cell);
         });
         body.append(grid);
@@ -1235,7 +1234,7 @@ export function registerAllPanels() {
         body.append(h('div', 'hint', 'Sự kiện cả năm: 🧧 Tết · 💝 Valentine · 🏖️ Lễ hội biển · 🥮 Trung Thu · 🎃 Halloween · 🎄 Noel · 🎂 Sinh nhật game'));
       }
     };
-    tabs(['🎁 Đăng nhập', '📅 Điểm danh', '🎊 Sự kiện'], i => { tab = i; render(); });
+    tabs(['Đăng nhập', 'Điểm danh', 'Sự kiện'], i => { tab = i; render(); });
     render();
   });
 
