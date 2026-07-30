@@ -1,4 +1,4 @@
-import { S, save, addItem, addExp, addStat, equipTool } from '@/core/save';
+import { S, save, addItem, addExp, addStat, equipTool, removeItem, itemCount } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { FISH_LIST, FISHES, RODS, RARITY_NAME, type FishDef } from '@/data/fish';
 import { INSECT_LIST, type InsectDef } from '@/data/insects';
@@ -18,10 +18,32 @@ export function buyRod(tier: number): boolean {
   return true;
 }
 
-// Chọn ngẫu nhiên cá theo khu + độ hiếm (cần xịn tăng tỉ lệ hiếm)
+// ===== Mồi câu =====
+// Tự dùng mồi xịn nhất trong túi khi thả câu; trả hiệu ứng cho lượt câu này
+const BAITS = ['bait_vip', 'bait_shrimp', 'bait_worm'];
+let baitRareBonus = 0;
+export function useBait(): { name: string; wait: number } | null {
+  for (const id of BAITS) {
+    if (itemCount(id) > 0) {
+      removeItem(id);
+      const def = ITEMS_BAIT[id];
+      baitRareBonus = def.rare;
+      return { name: def.name, wait: def.wait };
+    }
+  }
+  baitRareBonus = 0;
+  return null;
+}
+const ITEMS_BAIT: Record<string, { name: string; wait: number; rare: number }> = {
+  bait_worm: { name: 'Mồi giun', wait: 0.7, rare: 0 },
+  bait_shrimp: { name: 'Mồi tôm', wait: 0.6, rare: 0.1 },
+  bait_vip: { name: 'Mồi thượng hạng', wait: 0.3, rare: 0.25 }
+};
+
+// Chọn ngẫu nhiên cá theo khu + độ hiếm (cần xịn + mồi tăng tỉ lệ hiếm)
 export function rollFish(zone: string): FishDef | undefined {
   if (S.tools.rod <= 0) return undefined;
-  const rodBonus = RODS.find(r => r.tier === S.tools.rod)?.bonus ?? 0;
+  const rodBonus = (RODS.find(r => r.tier === S.tools.rod)?.bonus ?? 0) + baitRareBonus;
   const pool = FISH_LIST.filter(f => f.zones.includes(zone) && f.minRod <= S.tools.rod);
   if (!pool.length) return undefined;
   const weight = (f: FishDef) =>
@@ -35,6 +57,7 @@ export function rollFish(zone: string): FishDef | undefined {
 }
 
 export function landFish(fish: FishDef) {
+  baitRareBonus = 0;
   addItem(fish.id);
   addExp(fish.rarity === 'legendary' ? 100 : fish.rarity === 'epic' ? 40 : fish.rarity === 'rare' ? 15 : 6);
   addStat('fish_caught'); addStat('daily_fish');

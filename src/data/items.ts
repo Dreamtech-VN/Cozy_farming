@@ -51,6 +51,11 @@ defItem({ id: 'tool_basket', name: 'Giỏ thu hoạch', kind: 'tool', icon: '�
 defItem({ id: 'tool_axe', name: 'Rìu', kind: 'tool', icon: '🪓', sell: 0, buy: 800, desc: 'Đốn gỗ (tính năng sẽ mở trong bản cập nhật tới).', sprite: { url: 'assets/chibi/tools/axe.png', sx: 0, sy: 0, sw: 46, sh: 46 } });
 defItem({ id: 'tool_shovel', name: 'Xẻng', kind: 'tool', icon: '🦯', sell: 0, buy: 600, desc: 'Đào bới (tính năng sẽ mở trong bản cập nhật tới).', sprite: { url: 'assets/chibi/tools/shovel.png', sx: 0, sy: 0, sw: 46, sh: 46 } });
 
+// ---- Mồi câu (bán ở tiệm câu, tự dùng con xịn nhất khi thả câu) ----
+defItem({ id: 'bait_worm', name: 'Mồi giun', kind: 'material', icon: '🪱', sell: 1, buy: 5, desc: 'Cá cắn câu nhanh hơn 30%.', meta: { bait: { wait: 0.7, rare: 0 } } });
+defItem({ id: 'bait_shrimp', name: 'Mồi tôm', kind: 'material', icon: '🦐', sell: 5, buy: 25, desc: 'Cắn nhanh hơn 40%, +10% tỉ lệ cá hiếm.', meta: { bait: { wait: 0.6, rare: 0.1 } } });
+defItem({ id: 'bait_vip', name: 'Mồi thượng hạng', kind: 'material', icon: '✨', sell: 15, buy: 80, desc: 'Cá cắn gần như ngay, +25% tỉ lệ cá hiếm.', meta: { bait: { wait: 0.3, rare: 0.25 } }, sprite: { url: 'assets/chibi/tools/bait.png', sx: 0, sy: 0, sw: 28, sh: 33 } });
+
 // ---- Quả cây khế trong nông trại ----
 defItem({ id: 'crop_khe', name: 'Quả khế', kind: 'crop', icon: '⭐', sell: 12, desc: 'Ăn khế trả vàng~ rung cây khế ở Nông trại mỗi 10 phút.' });
 

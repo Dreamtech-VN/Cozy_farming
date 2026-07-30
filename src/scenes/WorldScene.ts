@@ -780,7 +780,9 @@ export class WorldScene extends Phaser.Scene {
     this.bobber = this.add.image(this.player.x + off.x, this.player.y + off.y, 'bobber').setDepth(3000);
     this.tweens.add({ targets: this.bobber, y: '+=2', duration: 500, yoyo: true, repeat: -1 });
     sfx.splash();
-    const wait = 1500 + Math.random() * 3500;
+    const bait = fishing.useBait();
+    if (bait) toast(`Đã móc ${bait.name}`, '🪱');
+    const wait = (1500 + Math.random() * 3500) * (bait?.wait ?? 1);
     this.biteTimer = this.time.delayedCall(wait, () => {
       this.fishingState = 'bite';
       this.bobber?.setTint(0xff0000);

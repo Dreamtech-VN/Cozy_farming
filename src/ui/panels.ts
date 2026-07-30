@@ -206,27 +206,58 @@ export function registerAllPanels() {
     render();
   });
 
-  // ---- shop cần câu / vợt ----
+  // ---- Tiệm câu: shop riêng — cần câu + mồi câu + vợt ----
   registerPanel('fishingshop', () => {
-    const { body } = openWindow('🎣 Tiệm câu Ông Biển', { size: 'small' });
-    for (const rod of RODS) {
-      const r = h('div', 'row');
-      const owned = S.tools.rod >= rod.tier;
-      r.innerHTML = `<div style="font-size:22px">🎣</div><div class="grow"><div class="t1">${rod.name}</div><div class="t2">+${Math.round(rod.bonus * 100)}% tỉ lệ cá hiếm</div></div>`;
-      r.append(owned ? btn('Đã có', '', undefined) : btn(`🪙${rod.price}`, 'gold', () => { if (buyRod(rod.tier)) openPanel('fishingshop'); }));
-      body.append(r);
-    }
-    body.append(h('div', 'sep'));
-    for (const net of NETS) {
-      const r = h('div', 'row');
-      const owned = S.tools.net >= net.tier;
-      r.innerHTML = `<div style="font-size:22px">🥅</div><div class="grow"><div class="t1">${net.name}</div><div class="t2">Bắt côn trùng</div></div>`;
-      r.append(owned ? btn('Đã có', '', undefined) : btn(`🪙${net.price}`, 'gold', () => {
-        if (spend(net.price)) { S.tools.net = net.tier; save(); toast(`Đã mua ${net.name}!`, '🥅'); equipTool('net'); openPanel('fishingshop'); }
-      }));
-      body.append(r);
-    }
-    body.append(h('div', 'hint', 'Bán cá: mở Kho đồ hoặc tab Bán ở Bách hóa.'));
+    const { body, tabs } = openWindow('🎣 Tiệm câu Ông Biển');
+    let tab = 0;
+    const render = () => {
+      body.innerHTML = '';
+      if (tab === 0) {
+        for (const rod of RODS) {
+          const r = h('div', 'row');
+          const owned = S.tools.rod >= rod.tier;
+          const ic = h('div');
+          ic.append(spr(TOOLS.rod.url, 0, 0, TOOLS.rod.w, TOOLS.rod.h, 34));
+          r.append(ic);
+          const info = h('div', 'grow');
+          info.innerHTML = `<div class="t1">${rod.name}${S.tools.rod === rod.tier ? ' <span class="tl-lv">Đang dùng</span>' : ''}</div><div class="t2">+${Math.round(rod.bonus * 100)}% tỉ lệ cá hiếm</div>`;
+          r.append(info);
+          r.append(owned ? btn('Đã có', '', undefined) : btn(`🪙${rod.price}`, 'gold', () => { if (buyRod(rod.tier)) render(); }));
+          body.append(r);
+        }
+      } else if (tab === 1) {
+        for (const id of ['bait_worm', 'bait_shrimp', 'bait_vip']) {
+          const def = item(id);
+          const r = h('div', 'row');
+          const ic = h('div'); ic.append(iconOf(def, 30)); r.append(ic);
+          const info = h('div', 'grow');
+          info.innerHTML = `<div class="t1">${def.name} <span class="qty">x${itemCount(id)}</span></div><div class="t2">${def.desc}</div>`;
+          r.append(info);
+          r.append(btn(`🪙${def.buy}`, 'gold', () => {
+            if (spend(def.buy ?? 0)) { addItem(id); sfx.coin(); render(); }
+          }));
+          body.append(r);
+        }
+        body.append(h('div', 'hint', 'Khi thả câu sẽ tự móc mồi xịn nhất trong túi.'));
+      } else {
+        for (const net of NETS) {
+          const r = h('div', 'row');
+          const owned = S.tools.net >= net.tier;
+          const ic = h('div');
+          ic.append(spr(TOOLS.net.url, 0, 0, TOOLS.net.w, TOOLS.net.h, 34));
+          r.append(ic);
+          const info = h('div', 'grow');
+          info.innerHTML = `<div class="t1">${net.name}</div><div class="t2">Bắt côn trùng</div>`;
+          r.append(info);
+          r.append(owned ? btn('Đã có', '', undefined) : btn(`🪙${net.price}`, 'gold', () => {
+            if (spend(net.price)) { S.tools.net = net.tier; save(); toast(`Đã mua ${net.name}!`, '🥅'); equipTool('net'); render(); }
+          }));
+          body.append(r);
+        }
+      }
+    };
+    tabs(['🎣 Cần câu', '🪱 Mồi câu', '🥅 Vợt'], i => { tab = i; render(); });
+    render();
   });
 
   // ---- shop thời trang chibi (part Avatar) ----
@@ -489,11 +520,6 @@ export function registerAllPanels() {
         }
         body.append(r);
       }
-      body.append(h('div', 'sep'));
-      const fr = h('div', 'row');
-      fr.innerHTML = `<div style="font-size:20px">🎣</div><div class="grow"><div class="t1">Cần câu & Vợt</div><div class="t2">Mua loại xịn hơn ở tiệm câu Ông Biển (Bãi biển) — cần xịn tăng tỉ lệ cá hiếm.</div></div>`;
-      fr.append(btn('Mở tiệm câu', 'blue', () => openPanel('fishingshop')));
-      body.append(fr);
     };
     render();
   });
