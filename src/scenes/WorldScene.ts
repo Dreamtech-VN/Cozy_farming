@@ -1212,6 +1212,7 @@ export class WorldScene extends Phaser.Scene {
 
         if (d.kind === 'kiss') {
           this.player.play('reach');
+          this.player.setFace('kiss', 1400);
           // nghiêng người tới hôn rồi lùi
           this.tweens.add({
             targets: this.player, x: near, duration: 260, yoyo: true, hold: 260, ease: 'sine.inout',
@@ -1227,6 +1228,7 @@ export class WorldScene extends Phaser.Scene {
               onComplete: () => heart.destroy()
             });
             target.sprite.play('cheer');
+            target.sprite.setFace('shy', 1600);
             this.time.delayedCall(700, () => { target.sprite.play('idle'); target.busy = false; });
           });
 
@@ -1237,6 +1239,8 @@ export class WorldScene extends Phaser.Scene {
           this.tweens.add({ targets: [target.sprite, target.label], x: `-=${side * 10}`, duration: 240, ease: 'sine.out' });
           this.time.delayedCall(260, () => {
             target.sprite.play('reach');
+            this.player.setFace('happy', 1500);
+            target.sprite.setFace('laugh', 1500);
             this.tweens.add({ targets: [this.player, target.sprite], x: `+=${side * 3}`, duration: 110, yoyo: true, repeat: 2 });
             for (let i = 0; i < 3; i++) {
               this.time.delayedCall(i * 180, () => this.fxFloat((this.player.x + tx) / 2, ty - headY + i * 6, '❤️', '#ff8787'));
@@ -1255,10 +1259,12 @@ export class WorldScene extends Phaser.Scene {
             targets: this.player, x: `+=${side * 16}`, duration: 180, ease: 'sine.out',
             onComplete: () => {
               this.player.play('strike');
+              this.player.setFace('tongue', 1600);
               this.tweens.add({
                 targets: this.player, x: near, duration: 130, ease: 'back.in',
                 onComplete: () => {
                   sfx.error();
+                  target.sprite.setFace('hurt');          // mặt đau lúc trúng đòn
                   this.fxBurst(tx, ty - headY * 0.4, 0xffd43b, 12);
                   this.fxFloat(tx, ty - headY, '💢', '#ff8787');
                   // văng ra sau rồi ngã nằm sõng soài
@@ -1269,6 +1275,7 @@ export class WorldScene extends Phaser.Scene {
                     targets: target.sprite, angle: side * -70, duration: 260, ease: 'back.out',
                     onComplete: () => {
                       target.sprite.play('lie');
+                      target.sprite.setFace('cry');       // nằm mếu máo
                       target.sprite.setAngle(0);
                       this.fxBurst(target.sprite.x, target.sprite.y, 0xd9c184, 8);   // bụi khi tiếp đất
                       // sao xoay quanh đầu lúc nằm
@@ -1280,6 +1287,7 @@ export class WorldScene extends Phaser.Scene {
                       this.time.delayedCall(1800, () => {
                         stars.destroy();
                         target.sprite.play('work');                                   // chống tay ngồi dậy
+                        target.sprite.setFace('angry', 2000);                         // dậy là quạu
                         this.tweens.add({
                           targets: [target.sprite, target.label], x: `+=${side * 46}`, duration: 420, ease: 'sine.inout'
                         });
@@ -1299,12 +1307,15 @@ export class WorldScene extends Phaser.Scene {
 
         } else {  // an ủi: vỗ vai
           this.player.play('pat');
+          this.player.setFace('happy', 1600);
+          target.sprite.setFace('sad');
           this.tweens.add({ targets: this.player, x: near, duration: 240, yoyo: true, hold: 700, ease: 'sine.inout', onComplete: done });
           this.time.delayedCall(300, () => {
             // tay vỗ nhẹ 2 cái -> đối phương gật gù
             this.tweens.add({ targets: target.sprite, y: `-=4`, duration: 160, yoyo: true, repeat: 1 });
             this.fxFloat(tx, ty - headY, '💛', '#ffd43b');
             target.sprite.play('cheer');
+            this.time.delayedCall(500, () => target.sprite.setFace('happy', 1200));   // được an ủi thì tươi lại
             this.time.delayedCall(800, () => { target.sprite.play('idle'); target.busy = false; });
           });
         }
@@ -1324,12 +1335,13 @@ export class WorldScene extends Phaser.Scene {
     if (kind === 'sit' || kind === 'lie') {
       this.busy = true;
       this.player.play(kind === 'sit' ? 'sit' : 'lie');
+      this.player.setFace(kind === 'lie' ? 'wink' : 'happy', 2500);   // nằm thì lim dim, ngồi thì thoải mái
       toast(kind === 'sit' ? 'Ngồi nghỉ một chút~' : 'Nằm thư giãn~', kind === 'sit' ? '🪑' : '🛌');
       // đứng dậy khi di chuyển
       const stand = this.time.addEvent({ delay: 200, loop: true, callback: () => {
         if (Math.hypot(virtualInput.x, virtualInput.y) > 0.25 ||
             this.cursors.left.isDown || this.cursors.right.isDown || this.cursors.up.isDown || this.cursors.down.isDown) {
-          this.busy = false; this.player.play('idle'); stand.remove();
+          this.busy = false; this.player.resetFace(); this.player.play('idle'); stand.remove();
         }
       } });
     }

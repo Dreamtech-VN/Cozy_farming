@@ -96,3 +96,20 @@ export function lookLayers(l: ChibiLook): number[] {
   if (l.glasses) out.push(l.glasses);
   return out;
 }
+
+// ===== Biểu cảm (part mắt Avatar) =====
+// Dùng khi diễn hành động: khóc khi bị đá, xấu hổ khi được hôn, vui khi được ôm...
+export const FACE = {
+  normal: EYES_ID,   // mắt thường
+  sad: 5,            // Mắt buồn
+  happy: 6,          // Mắt vui
+  wink: 7,           // Mắt nháy
+  angry: 8,          // Mắt giận
+  cry: 9,            // Mắt khóc
+  laugh: 10,         // Mắt cười to
+  tongue: 11,        // Mắt lè lưỡi
+  shy: 12,           // Mắt xấu hổ
+  hurt: 20,          // Mắt chảy máu (đau)
+  kiss: 107          // Mắt hôn (nhắm mắt)
+} as const;
+export type FaceKey = keyof typeof FACE;

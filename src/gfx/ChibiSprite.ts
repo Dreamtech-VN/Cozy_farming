@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { lookLayers, type ChibiLook } from '@/data/chibi';
+import { lookLayers, FACE, type ChibiLook, type FaceKey } from '@/data/chibi';
 
 // ===== Nhân vật chibi kiểu Avatar =====
 // Strip 15 frame 64x96/part, neo chân (32,88). Hướng: mặc định nhìn phải,
@@ -40,7 +40,29 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
     scene.add.existing(this);
   }
 
+  private look?: ChibiLook;
+  private faceTimer?: Phaser.Time.TimerEvent;
+
+  // đổi biểu cảm (mắt) trong `ms` mili-giây rồi trả về mắt gốc; ms<=0 = giữ tới khi gọi lại
+  setFace(key: FaceKey, ms = 0) {
+    if (!this.look) return;
+    this.faceTimer?.remove();
+    const eyes = FACE[key];
+    this.applyLook({ ...this.look, eyes }, false);
+    if (ms > 0) this.faceTimer = this.scene.time.delayedCall(ms, () => this.resetFace());
+  }
+
+  resetFace() {
+    this.faceTimer?.remove();
+    if (this.look) this.applyLook(this.look, false);
+  }
+
   setLook(look: ChibiLook) {
+    this.look = look;
+    this.applyLook(look, true);
+  }
+
+  private applyLook(look: ChibiLook, _store: boolean) {
     for (const l of this.layers) l.destroy();
     this.layers = [];
     for (const id of lookLayers(look)) {
