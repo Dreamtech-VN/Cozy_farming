@@ -307,15 +307,14 @@ export function registerMinigames() {
   });
 }
 
-// ===== Form tạo nhân vật =====
-import { HAIR_STYLES, CLOTHES, HAIR_COLOR_NAMES, CLOTH_COLOR_NAMES } from '@/data/clothing';
+// ===== Form tạo nhân vật chibi =====
 import { bus, EV } from '@/core/events';
-import { wearPreview } from './kit';
+import { chibiPreview } from './kit';
+import { defaultLook, starterList } from '@/data/chibi';
 
 function buildCharCreate(body: HTMLElement, done: () => void) {
-  const a = S.player.appearance;
-  const HAIR_HEX = ['#2b2b2b', '#e6c25a', '#8a5a33', '#c49a6c', '#b3592e', '#2e8b6f', '#4caf50', '#9aa5b1', '#c6a3e0', '#2c3e70', '#f7a3c2', '#8e44ad', '#c0392b', '#39c2c9'];
-  const CLOTH_HEX = ['#2b2b2b', '#3b5bdb', '#74c0fc', '#8a5a33', '#2f9e44', '#8ce99a', '#f783ac', '#9c36b5', '#e03131', '#dee2e6'];
+  if (!S.player.chibi) S.player.chibi = defaultLook(0);
+  const look = S.player.chibi;
   const emit = () => bus.emit(EV.APPEARANCE);
 
   const row = (label: string) => {
@@ -333,93 +332,64 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   nameInput.onkeydown = e => e.stopPropagation();
   r.append(nameInput);
 
-  // giới tính
-  r = row('🚻 Giới tính');
-  const gchips = h('div', 'chips');
-  const genders = [['male', '👦 Nam'], ['female', '👧 Nữ']] as const;
-  for (const [g, lbl] of genders) {
-    const c = h('div', `chip ${S.player.gender === g ? 'active' : ''}`, lbl);
-    c.onclick = () => {
-      S.player.gender = g;
-      // gợi ý mặc định theo giới tính (vẫn đổi thoải mái)
-      if (g === 'female' && a.hairStyle === 'buzzcut') a.hairStyle = 'bob';
-      gchips.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
-      c.classList.add('active');
-      emit();
+  const rebuild = () => { body.innerHTML = ''; body.append(...[]); buildCharCreateInner(); };
+
+  let sections: HTMLElement[] = [];
+  const buildCharCreateInner = () => {
+    for (const el of sections) el.remove();
+    sections = [];
+    const section = (label: string) => {
+      const d = h('div', 'cc-row');
+      d.append(h('div', 'lbl', label));
+      body.insertBefore(d, startBtn);
+      sections.push(d);
+      return d;
     };
-    gchips.append(c);
-  }
-  r.append(gchips);
 
-  // màu da / kiểu người
-  r = row('🧑 Ngoại hình');
-  const skin = h('div', 'chips');
-  for (let i = 0; i < 8; i++) {
-    const c = h('div', `chip ${a.charIndex === i ? 'active' : ''}`);
-    c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
-    c.append(wearPreview('base', `char${i + 1}`, 0, 26), h('span', '', `${i + 1}`));
-    c.onclick = () => { a.charIndex = i; skin.querySelectorAll('.chip').forEach(x => x.classList.remove('active')); c.classList.add('active'); emit(); };
-    skin.append(c);
-  }
-  r.append(skin);
+    // giới tính
+    let sec = section('🚻 Giới tính');
+    const gchips = h('div', 'chips');
+    const genders: [number, string][] = [[0, '👦 Nam'], [1, '👧 Nữ']];
+    for (const [g, lbl] of genders) {
+      const c = h('div', `chip ${look.gender === g ? 'active' : ''}`, lbl);
+      c.onclick = () => {
+        const fresh = defaultLook(g);
+        Object.assign(look, fresh);
+        S.player.gender = g === 1 ? 'female' : 'male';
+        emit(); buildCharCreateInner();
+      };
+      gchips.append(c);
+    }
+    sec.append(gchips);
 
-  // tóc
-  r = row('💇 Kiểu tóc');
-  const hchips = h('div', 'chips');
-  for (const hs of HAIR_STYLES) {
-    const c = h('div', `chip ${a.hairStyle === hs.id ? 'active' : ''}`);
-    c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
-    c.append(wearPreview('hair', hs.id, a.hairColor, 26), h('span', '', hs.name));
-    c.onclick = () => { a.hairStyle = hs.id; hchips.querySelectorAll('.chip').forEach(x => x.classList.remove('active')); c.classList.add('active'); emit(); };
-    hchips.append(c);
-  }
-  r.append(hchips);
-  r.append(swatches(HAIR_HEX, a.hairColor, i => { a.hairColor = i; emit(); }, HAIR_COLOR_NAMES));
+    // tóc / áo / quần từ đồ khởi đầu
+    const SLOTS: [string, number, 'hair' | 'shirt' | 'pant'][] = [
+      ['💇 Kiểu tóc', 50, 'hair'],
+      ['👕 Áo', 20, 'shirt'],
+      ['👖 Quần', 10, 'pant']
+    ];
+    for (const [label, z, slot] of SLOTS) {
+      sec = section(label);
+      const chips = h('div', 'chips');
+      for (const p of starterList(z, look.gender)) {
+        const c = h('div', `chip ${look[slot] === p.id ? 'active' : ''}`);
+        c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
+        c.append(chibiPreview(p.id, 34), h('span', '', p.name));
+        c.onclick = () => { look[slot] = p.id; emit(); buildCharCreateInner(); };
+        chips.append(c);
+      }
+      sec.append(chips);
+    }
+  };
 
-  // mắt
-  r = row('👁️ Màu mắt');
-  r.append(swatches(HAIR_HEX.slice(0, 10), a.eyesColor, i => { a.eyesColor = i; emit(); }));
-
-  // đồ khởi đầu
-  r = row('👕 Trang phục khởi đầu');
-  const cchips = h('div', 'chips');
-  for (const cl of CLOTHES.filter(x => x.price === 0 || ['overalls', 'dress', 'stripe'].includes(x.id))) {
-    const c = h('div', `chip ${a.clothes === cl.id ? 'active' : ''}`);
-    c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
-    c.append(wearPreview('clothes', cl.id, a.clothesColor, 26), h('span', '', cl.name));
-    c.onclick = () => {
-      a.clothes = cl.id;
-      if (!S.wardrobe.includes(`clothes:${cl.id}`)) S.wardrobe.push(`clothes:${cl.id}`);
-      cchips.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
-      c.classList.add('active');
-      emit();
-    };
-    cchips.append(c);
-  }
-  r.append(cchips);
-  r.append(swatches(CLOTH_HEX, a.clothesColor, i => { a.clothesColor = i; emit(); }, CLOTH_COLOR_NAMES));
-
-  const start = btn('🌾 BẮT ĐẦU CUỘC SỐNG MỚI!', 'gold', () => {
+  const startBtn = btn('🌾 BẮT ĐẦU CUỘC SỐNG MỚI!', 'gold', () => {
     const name = nameInput.value.trim();
     if (name.length < 2) { toast('Tên cần ít nhất 2 ký tự nha!', '📛'); return; }
     S.player.name = name;
-    if (!S.wardrobe.includes(`hair:${a.hairStyle}`)) S.wardrobe.push(`hair:${a.hairStyle}`);
     done();
     bus.emit('charcreate:done');
   });
-  start.style.cssText = 'width:100%;padding:14px;font-size:16px;margin-top:6px';
-  body.append(start);
-
-  function swatches(hex: string[], active: number, onPick: (i: number) => void, names?: string[]): HTMLElement {
-    const wrap = h('div', 'swatches');
-    wrap.style.marginTop = '5px';
-    hex.forEach((c, i) => {
-      const s = h('div', `sw ${active === i ? 'active' : ''}`);
-      s.style.background = c;
-      s.title = names?.[i] ?? '';
-      s.onclick = () => { onPick(i); wrap.querySelectorAll('.sw').forEach(x => x.classList.remove('active')); s.classList.add('active'); };
-      wrap.append(s);
-    });
-    return wrap;
-  }
+  startBtn.style.cssText = 'width:100%;padding:14px;font-size:16px;margin-top:6px';
+  body.append(startBtn);
+  buildCharCreateInner();
 }

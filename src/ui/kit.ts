@@ -1,4 +1,5 @@
 // Bộ công cụ dựng UI DOM nhỏ gọn
+import { lookLayers } from '@/data/chibi';
 export function h<K extends keyof HTMLElementTagNameMap>(
   tag: K, cls = '', text = ''
 ): HTMLElementTagNameMap[K] {
@@ -104,26 +105,23 @@ export function iconOf(def: { icon: string; sprite?: SpriteRef }, size = 32): HT
   return e;
 }
 
-// Xem trước 1 món thời trang (frame walk-down đầu tiên của biến thể màu)
-export function wearPreview(kind: 'hair' | 'clothes' | 'acc' | 'base' | 'eyes', id: string, variant = 0, size = 40): HTMLElement {
-  const url = kind === 'base' ? `assets/char/base/${id}.png` : `assets/char/${kind}/${id}.png`;
-  return spr(url, variant * 256, 0, 32, 32, size);
+// Xem trước 1 part chibi (frame đứng)
+export function chibiPreview(partId: number, size = 48): HTMLElement {
+  // strip 15 frame 64x96 — lấy frame 0
+  return spr(`assets/chibi/${partId}.png`, 0, 0, 64, 96, Math.round(size * 64 / 96));
 }
 
-// Chân dung nhân vật ghép lớp (dùng cho avatar HUD, hồ sơ)
-export function charFace(a: { charIndex: number; hairStyle: string; hairColor: number; eyesColor: number; clothes: string; clothesColor: number; acc: string[] }, size = 40): HTMLElement {
+// Chân dung chibi ghép lớp (avatar HUD, hồ sơ)
+export function charFace(look: import('@/data/chibi').ChibiLook | undefined, size = 40): HTMLElement {
   const wrap = h('div');
-  wrap.style.cssText = `width:${size}px;height:${size}px;position:relative;image-rendering:pixelated;`;
-  const layer = (kind: 'hair' | 'clothes' | 'acc' | 'base' | 'eyes', id: string, variant: number) => {
-    const el = wearPreview(kind, id, variant, size);
+  const w = Math.round(size * 64 / 96);
+  wrap.style.cssText = `width:${w}px;height:${size}px;position:relative;`;
+  if (!look) return wrap;
+  for (const pid of lookLayers(look)) {
+    const el = spr(`assets/chibi/${pid}.png`, 0, 0, 64, 96, w);
     el.style.position = 'absolute';
     el.style.left = '0'; el.style.top = '0';
     wrap.append(el);
-  };
-  layer('base', `char${a.charIndex + 1}`, 0);
-  layer('eyes', 'eyes', a.eyesColor);
-  layer('clothes', a.clothes, a.clothesColor);
-  layer('hair', a.hairStyle, a.hairColor);
-  for (const acc of a.acc) layer('acc', acc, 0);
+  }
   return wrap;
 }

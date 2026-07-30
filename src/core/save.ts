@@ -21,6 +21,7 @@ export function defaultState(): GameState {
     wallet: { coins: 500, rubies: 10 },
     inventory: { seed_carrot: 5 },
     wardrobe: ['hair:bob', 'clothes:basic'],
+    chibiWardrobe: [],
     tools: { rod: 0, can: 1, hoe: 1, net: 0 },
     farm: { unlocked: 6, plots: [] },
     livestock: { barnLevel: 0, animals: [] },
@@ -59,6 +60,7 @@ export function load(): boolean {
     const data = JSON.parse(raw) as GameState;
     // chỗ migrate giữa các version save về sau
     S = { ...defaultState(), ...data };
+    if (!S.chibiWardrobe) S.chibiWardrobe = [];
     return true;
   } catch {
     return false;

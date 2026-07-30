@@ -1,5 +1,5 @@
 import { registerPanel, openPanel, getGame } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, wearPreview, charFace } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, charFace } from './kit';
 import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
@@ -7,7 +7,7 @@ import { CROPS, CROP_LIST } from '@/data/crops';
 import { ANIMAL_LIST } from '@/data/animals';
 import { FISH_LIST, RODS, RARITY_COLOR, RARITY_NAME, FISHES } from '@/data/fish';
 import { INSECT_LIST, NETS, INSECTS } from '@/data/insects';
-import { HAIR_STYLES, CLOTHES, ACCESSORIES, accSlot, HAIR_COLOR_NAMES, CLOTH_COLOR_NAMES } from '@/data/clothing';
+import { chibiList, chibiPriceXu, chibiPriceRuby } from '@/data/chibi';
 import { FURNITURE, FURNITURE_LIST, HOUSE_LEVELS, WALLPAPERS, FLOORS } from '@/data/furniture';
 import { SHOPS } from '@/data/shops';
 import { QUESTS, TITLES, ACHIEVEMENTS } from '@/data/quests';
@@ -220,40 +220,32 @@ export function registerAllPanels() {
     body.append(h('div', 'hint', 'Bán cá: mở Kho đồ hoặc tab Bán ở Bách hóa.'));
   });
 
-  // ---- shop thời trang ----
+  // ---- shop thời trang chibi (part Avatar) ----
+  const CHIBI_TABS: [string, number][] = [
+    ['💇 Tóc', 50], ['👕 Áo', 20], ['👖 Quần', 10], ['🎩 Mũ', 60], ['👓 Kính', 65], ['🪽 Cánh', 5]
+  ];
+
   registerPanel('fashionshop', () => {
     const { body, tabs } = openWindow('👗 Thời trang Cô Trang', { size: 'large' });
-    const cats = [
-      ['💇 Tóc', HAIR_STYLES, 'hair'],
-      ['👕 Trang phục', CLOTHES, 'clothes'],
-      ['🎩 Phụ kiện', ACCESSORIES, 'acc']
-    ] as const;
     let tab = 0;
     const render = () => {
       body.innerHTML = '';
-      const [, list, prefix] = cats[tab];
+      const z = CHIBI_TABS[tab][1];
+      const g = S.player.chibi?.gender ?? 0;
       const grid = h('div', 'grid');
-      for (const w of list) {
-        const key = `${prefix}:${w.id}`;
-        const owned = S.wardrobe.includes(key);
+      for (const p of chibiList(z, g)) {
+        const owned = S.chibiWardrobe.includes(p.id);
         const cell = h('div', `cell ${owned ? 'owned' : ''}`);
-        const price = w.price === 0 ? 'Miễn phí' : w.rubyPrice ? `💎${w.rubyPrice}` : `🪙${w.price}`;
-        // xem trước sprite thật, kèm nhân vật nền cho dễ hình dung
-        const prev = h('div');
-        prev.style.cssText = 'position:relative;width:40px;height:40px';
-        const base = wearPreview('base', `char${S.player.appearance.charIndex + 1}`, 0, 40);
-        base.style.cssText += 'position:absolute;left:0;top:0;opacity:.45';
-        const it = wearPreview(prefix, w.id, prefix === 'hair' ? S.player.appearance.hairColor : prefix === 'clothes' ? S.player.appearance.clothesColor : 0, 40);
-        it.style.cssText += 'position:absolute;left:0;top:0';
-        prev.append(base, it);
-        cell.append(prev, h('div', 'nm', w.name), h('div', 'pr', owned ? '✅ Đã có' : price));
+        const xu = chibiPriceXu(p), ruby = chibiPriceRuby(p);
+        const price = owned ? '✅ Đã có' : ruby > 0 ? `💎${ruby}` : `🪙${fmt(xu)}`;
+        cell.append(chibiPreview(p.id, 52), h('div', 'nm', p.name), h('div', 'pr', price));
         cell.onclick = () => {
           if (owned) { openPanel('wardrobe'); return; }
-          const ok = w.rubyPrice ? spend(0, w.rubyPrice) : spend(w.price);
+          const ok = ruby > 0 ? spend(0, ruby) : spend(xu);
           if (ok) {
-            S.wardrobe.push(key); save();
+            S.chibiWardrobe.push(p.id); save();
             addStat('fashion_bought');
-            toast(`Đã mua ${w.name}! Vào Hồ sơ > Tủ đồ để mặc.`, '👗');
+            toast(`Đã mua ${p.name}! Vào Tủ đồ để mặc.`, '👗');
             render();
           }
         };
@@ -261,7 +253,7 @@ export function registerAllPanels() {
       }
       body.append(grid);
     };
-    tabs(cats.map(c => c[0]), i => { tab = i; render(); });
+    tabs(CHIBI_TABS.map(c => c[0]), i => { tab = i; render(); });
     render();
   });
 
@@ -410,7 +402,7 @@ export function registerAllPanels() {
           </div></div>
           <div class="progress"><div style="width:${Math.round(S.player.exp / (S.player.level * 100) * 100)}%"></div></div>`;
         (info.querySelector('#pf-name') as HTMLElement).textContent = S.player.name;
-        (info.querySelector('#pf-face') as HTMLElement).append(charFace(S.player.appearance, 56));
+        (info.querySelector('#pf-face') as HTMLElement).append(charFace(S.player.chibi, 56));
         body.append(info);
         const statsBox = h('div');
         statsBox.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px';
@@ -455,62 +447,45 @@ export function registerAllPanels() {
   });
 
   function openWardrobe(body: HTMLElement) {
-    const a = S.player.appearance;
+    const look = S.player.chibi;
+    if (!look) return;
     const apply = () => { save(); bus.emit(EV.APPEARANCE); };
+    // xem trước nhân vật hiện tại
+    const prevWrap = h('div');
+    prevWrap.style.cssText = 'display:flex;justify-content:center;margin-bottom:8px';
+    prevWrap.append(charFace(look, 96));
+    body.append(prevWrap);
 
-    const section = (label: string) => {
+    const SLOTS: [string, number, 'pant' | 'shirt' | 'hair' | 'hat' | 'glasses' | 'wing', boolean][] = [
+      ['💇 Tóc', 50, 'hair', false],
+      ['👕 Áo', 20, 'shirt', false],
+      ['👖 Quần', 10, 'pant', false],
+      ['🎩 Mũ', 60, 'hat', true],
+      ['👓 Kính', 65, 'glasses', true],
+      ['🪽 Cánh', 5, 'wing', true]
+    ];
+    for (const [label, z, slot, optional] of SLOTS) {
+      const owned = chibiList(z).filter(p => S.chibiWardrobe.includes(p.id));
+      if (!owned.length && optional) continue;
       const d = h('div', 'cc-row');
-      d.append(h('div', 'lbl', label));
+      d.append(h('div', 'lbl', `${label} (đã mua)`));
+      const chips = h('div', 'chips');
+      if (optional) {
+        const off = h('div', `chip ${look[slot] === 0 ? 'active' : ''}`, 'Không dùng');
+        off.onclick = () => { look[slot] = 0; apply(); body.innerHTML = ''; openWardrobe(body); };
+        chips.append(off);
+      }
+      for (const p of owned) {
+        const c = h('div', `chip ${look[slot] === p.id ? 'active' : ''}`);
+        c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
+        c.append(chibiPreview(p.id, 30), h('span', '', p.name));
+        c.onclick = () => { look[slot] = p.id; apply(); body.innerHTML = ''; openWardrobe(body); };
+        chips.append(c);
+      }
+      if (!owned.length) chips.append(h('div', 'hint', 'Chưa có — ghé shop thời trang ở Khu mua sắm!'));
+      d.append(chips);
       body.append(d);
-      return d;
-    };
-
-    // tóc
-    let sec = section('💇 Kiểu tóc (đã mua)');
-    let chips = h('div', 'chips');
-    for (const hs of HAIR_STYLES.filter(x => S.wardrobe.includes(`hair:${x.id}`))) {
-      const c = h('div', `chip ${a.hairStyle === hs.id ? 'active' : ''}`);
-      c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
-      c.append(wearPreview('hair', hs.id, a.hairColor, 26), h('span', '', hs.name));
-      c.onclick = () => { a.hairStyle = hs.id; apply(); body.innerHTML = ''; openWardrobe(body); };
-      chips.append(c);
     }
-    sec.append(chips);
-    sec.append(colorSwatches(14, a.hairColor, i => { a.hairColor = i; apply(); }, HAIR_COLOR_NAMES));
-
-    // trang phục
-    sec = section('👕 Trang phục (đã mua)');
-    chips = h('div', 'chips');
-    for (const cl of CLOTHES.filter(x => S.wardrobe.includes(`clothes:${x.id}`))) {
-      const c = h('div', `chip ${a.clothes === cl.id ? 'active' : ''}`);
-      c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
-      c.append(wearPreview('clothes', cl.id, a.clothesColor, 26), h('span', '', cl.name));
-      c.onclick = () => { a.clothes = cl.id; apply(); body.innerHTML = ''; openWardrobe(body); };
-      chips.append(c);
-    }
-    sec.append(chips);
-    sec.append(colorSwatches(10, a.clothesColor, i => { a.clothesColor = i; apply(); }, CLOTH_COLOR_NAMES));
-
-    // phụ kiện
-    sec = section('🎩 Phụ kiện (đeo nhiều món khác nhóm)');
-    chips = h('div', 'chips');
-    for (const ac of ACCESSORIES.filter(x => S.wardrobe.includes(`acc:${x.id}`))) {
-      const worn = a.acc.includes(ac.id);
-      const c = h('div', `chip ${worn ? 'active' : ''}`);
-      c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
-      c.append(wearPreview('acc', ac.id, 0, 26), h('span', '', ac.name));
-      c.onclick = () => {
-        if (worn) a.acc = a.acc.filter(x => x !== ac.id);
-        else {
-          a.acc = a.acc.filter(x => accSlot(x) !== accSlot(ac.id));
-          a.acc.push(ac.id);
-        }
-        apply(); body.innerHTML = ''; openWardrobe(body);
-      };
-      chips.append(c);
-    }
-    if (!chips.children.length) chips.append(h('div', 'hint', 'Chưa có phụ kiện — ghé shop thời trang ở Khu mua sắm!'));
-    sec.append(chips);
   }
 
   function colorSwatches(n: number, active: number, onPick: (i: number) => void, names?: string[]): HTMLElement {

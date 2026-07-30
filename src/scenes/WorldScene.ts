@@ -5,8 +5,11 @@ import { ZONES, type ZoneDef, type NpcDef } from '@/data/zones';
 import { CROPS } from '@/data/crops';
 import { ANIMALS } from '@/data/animals';
 import { FURNITURE, WALLPAPERS, FLOORS } from '@/data/furniture';
-import { CharacterSprite, type Dir } from '@/gfx/CharacterSprite';
+import { ChibiSprite } from '@/gfx/ChibiSprite';
+import { defaultLook, starterList, EYES_ID } from '@/data/chibi';
+type Dir = 0 | 1 | 2 | 3;
 import { virtualInput, consumeAction } from '@/core/input';
+import { RES } from '@/core/res';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import * as fishing from '@/systems/fishing';
@@ -89,15 +92,15 @@ interface InsectSprite { def: InsectDef; obj: Phaser.GameObjects.Image; vx: numb
 
 export class WorldScene extends Phaser.Scene {
   zone!: ZoneDef;
-  player!: CharacterSprite;
-  private npcs: { def: NpcDef; sprite: CharacterSprite }[] = [];
+  player!: ChibiSprite;
+  private npcs: { def: NpcDef; sprite: ChibiSprite }[] = [];
   private plotTiles: Phaser.GameObjects.Image[] = [];
   private cropSprites: (Phaser.GameObjects.Sprite | undefined)[] = [];
   private plotOverlays: Phaser.GameObjects.Image[] = [];
   private animalSprites = new Map<string, Phaser.GameObjects.Sprite>();
   private insects: InsectSprite[] = [];
   private furnitureObjs: Phaser.GameObjects.Container[] = [];
-  private partyGuests: CharacterSprite[] = [];
+  private partyGuests: ChibiSprite[] = [];
   private darkOverlay!: Phaser.GameObjects.Rectangle;
   private rain?: Phaser.GameObjects.Particles.ParticleEmitter;
   private waterRect?: Phaser.Geom.Rectangle;
@@ -138,25 +141,26 @@ export class WorldScene extends Phaser.Scene {
     if (this.zone.features.includes('barn')) this.buildBarn();
     if (this.zone.features.includes('insects')) this.spawnInsects();
 
-    // người chơi (map nền HD: nhân vật Avatar gốc cao 42px x hd2 = ~84px
-    // trên các map này -> 32px x 2.6 ≈ 84px cho đúng tỉ lệ)
-    const charScale = this.zone.bg ? 2.6 : 1;
-    this.player = new CharacterSprite(this, this.zone.spawn.x * T, this.zone.spawn.y * T, S.player.appearance);
+    // người chơi chibi Avatar: cao 84px native HD -> map nền HD scale 1,
+    // map tile 16px thu về 0.5 (=42px ~ 2.6 tile) cho cân cảnh pixel-art
+    const charScale = this.zone.bg ? 1 : 0.5;
+    this.player = new ChibiSprite(this, this.zone.spawn.x * T, this.zone.spawn.y * T, S.player.chibi ?? defaultLook(0));
     this.player.setDepth(1000).setScale(charScale);
     this.selector = this.add.image(0, 0, 'sel').setVisible(false).setDepth(900).setAlpha(0.9);
 
     this.cameras.main.startFollow(this.player, true, 0.12, 0.12);
+    // canvas render ở 960x540 * RES -> mọi zoom nhân RES để giữ nguyên khung nhìn
     const bw = this.physics.world.bounds;
     const fitZoom = Math.max(this.scale.width / bw.width, this.scale.height / bw.height);
     if (this.zone.road) {
       // map cổng thấp: thu nhỏ vừa đủ để thấy cả cổng chào lẫn con đường
-      this.cameras.main.setZoom(Math.min(2.4, this.scale.height / bw.height));
+      this.cameras.main.setZoom(Math.min(2.4 * RES, this.scale.height / bw.height));
     } else if (this.zone.bg) {
       // nền ảnh HD kiểu Avatar: zoom nhẹ để thấy khung cảnh đúng tỉ lệ art
-      this.cameras.main.setZoom(Math.max(1.6, fitZoom));
+      this.cameras.main.setZoom(Math.max(1.6 * RES, fitZoom));
     } else {
       // trong nhà: phóng to để căn phòng lấp đầy màn hình
-      this.cameras.main.setZoom(Math.max(2.4, fitZoom));
+      this.cameras.main.setZoom(Math.max(2.4 * RES, fitZoom));
     }
 
     // lớp đêm + mưa
@@ -196,7 +200,7 @@ export class WorldScene extends Phaser.Scene {
     initTimeOnce();
   }
 
-  private onAppearance() { this.player.setAppearance(S.player.appearance); }
+  private onAppearance() { if (S.player.chibi) this.player.setLook(S.player.chibi); }
   private onEmote(i: number) { this.player.showEmote(i); }
 
   // bong bóng chat trên đầu nhân vật khi nhắn Tổng/Gần
@@ -205,9 +209,9 @@ export class WorldScene extends Phaser.Scene {
   private onSay(text: string) {
     this.speech?.destroy();
     this.speechTimer?.remove();
-    const cs = this.zone.bg ? 2.6 : 1;
-    this.speech = this.add.text(this.player.x, this.player.y - 34 * cs, text.slice(0, 40), {
-      fontSize: cs > 1 ? '12px' : '8px', color: '#333', backgroundColor: '#ffffff',
+    const off = this.zone.bg ? 104 : 54;
+    this.speech = this.add.text(this.player.x, this.player.y - off, text.slice(0, 40), {
+      fontSize: this.zone.bg ? '12px' : '8px', color: '#333', backgroundColor: '#ffffff',
       padding: { x: 5, y: 3 }, wordWrap: { width: 140 }, align: 'center'
     }).setOrigin(0.5, 1).setDepth(9500);
     this.speechTimer = this.time.delayedCall(3500, () => { this.speech?.destroy(); this.speech = undefined; });
@@ -475,11 +479,8 @@ export class WorldScene extends Phaser.Scene {
     // khách dự tiệc
     if (partyActive()) {
       for (let i = 0; i < 3; i++) {
-        const guest = new CharacterSprite(this, (3 + i * 3) * T, 5 * T, {
-          charIndex: (i * 2 + 1) % 8, hairStyle: ['braids', 'curly', 'ponytail'][i], hairColor: i * 3,
-          eyesColor: i, clothes: ['dress', 'suit', 'floral'][i], clothesColor: i * 2, acc: []
-        });
-        guest.setDepth(500);
+        const guest = new ChibiSprite(this, (3 + i * 3) * T, 5 * T, this.npcLook(i + 1));
+        guest.setDepth(500).setScale(0.5);
         guest.play('walk');
         this.partyGuests.push(guest);
         this.tweens.add({
@@ -533,17 +534,27 @@ export class WorldScene extends Phaser.Scene {
   }
 
   // ================= NPC =================
+  // bộ đồ chibi cho NPC: chọn từ đồ khởi đầu theo chỉ số cố định
+  private npcLook(seed: number) {
+    const g = seed % 2;
+    const pick = (z: number, i: number) => {
+      const list = starterList(z, g);
+      return list.length ? list[i % list.length].id : 0;
+    };
+    return {
+      gender: g,
+      pant: pick(10, seed), shirt: pick(20, seed + 1), hair: pick(50, seed + 2),
+      eyes: EYES_ID, hat: 0, glasses: 0, wing: 0
+    };
+  }
+
   private spawnNpcs() {
-    const cs = this.zone.bg ? 2.6 : 1;
+    const cs = this.zone.bg ? 1 : 0.5;
+    const labelOff = cs === 1 ? 104 : 54;
     for (const def of this.zone.npcs) {
-      const sprite = new CharacterSprite(this, def.x * T, def.y * T, {
-        charIndex: def.charIndex, hairStyle: ['bob', 'gentleman', 'curly', 'braids', 'buzzcut', 'ponytail', 'wavy', 'spacebuns'][def.charIndex],
-        hairColor: (def.charIndex * 2) % 14, eyesColor: def.charIndex % 10,
-        clothes: ['basic', 'suit', 'overalls', 'stripe', 'dress', 'floral', 'sailor', 'sporty'][def.charIndex],
-        clothesColor: def.charIndex % 10, acc: []
-      });
+      const sprite = new ChibiSprite(this, def.x * T, def.y * T, this.npcLook(def.charIndex));
       sprite.setDepth(def.y * T).setScale(cs);
-      this.add.text(def.x * T, def.y * T - 26 * cs, def.name, { fontSize: cs > 1 ? '11px' : '7px', color: '#ffe066', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2000);
+      this.add.text(def.x * T, def.y * T - labelOff, def.name, { fontSize: cs === 1 ? '11px' : '8px', color: '#ffe066', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2000);
       this.npcs.push({ def, sprite });
     }
   }
@@ -1097,8 +1108,7 @@ export class WorldScene extends Phaser.Scene {
 
     // bong bóng chat bám theo người chơi
     if (this.speech) {
-      const cs = this.zone.bg ? 2.6 : 1;
-      this.speech.setPosition(this.player.x, this.player.y - 34 * cs);
+      this.speech.setPosition(this.player.x, this.player.y - (this.zone.bg ? 104 : 54));
     }
 
     // ghost đặt đồ theo con trỏ

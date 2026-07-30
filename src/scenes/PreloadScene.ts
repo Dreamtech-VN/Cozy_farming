@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
 import { HAIR_STYLES, CLOTHES, ACCESSORIES } from '@/data/clothing';
 import { ANIMAL_LIST } from '@/data/animals';
-import { hasSave, load } from '@/core/save';
+import { hasSave, load, S } from '@/core/save';
+import { CHIBI_PARTS, defaultLook, lookLayers } from '@/data/chibi';
 
 export class PreloadScene extends Phaser.Scene {
   constructor() { super('Preload'); }
@@ -49,6 +50,11 @@ export class PreloadScene extends Phaser.Scene {
     for (const d of ['tree_round', 'tree_round2', 'tree_pine', 'tree_khe', 'bench', 'lamp_green', 'lamp_black', 'scarecrow', 'barrel', 'flower_pot', 'bush', 'busstop']) {
       this.load.image(`deco_${d}`, `assets/deco/${d}.png`);
     }
+    // ---- Nhân vật chibi Avatar: strip 15 frame 64x96 mỗi part ----
+    for (const id of Object.keys(CHIBI_PARTS)) {
+      this.load.spritesheet(`chibi_${id}`, `assets/chibi/${id}.png`, { frameWidth: 64, frameHeight: 96 });
+    }
+
     // ---- Nền map Avatar (repo Lttt) ----
     for (const m of ['4', '10', '15', '22', '24', '101']) {
       this.load.image(`bg_${m}`, `assets/lttt/maps/${m}.png`);
@@ -75,6 +81,13 @@ export class PreloadScene extends Phaser.Scene {
     this.makeGroundTextures();
     this.makeMiscTextures();
     if (hasSave() && load()) {
+      // save cũ chưa có nhân vật chibi -> gán bộ mặc định theo giới tính
+      if (!S.player.chibi) {
+        S.player.chibi = defaultLook(S.player.gender === 'female' ? 1 : 0);
+        for (const id of lookLayers(S.player.chibi)) {
+          if (!S.chibiWardrobe.includes(id)) S.chibiWardrobe.push(id);
+        }
+      }
       this.scene.start('World');
     } else {
       this.scene.start('CharCreate');

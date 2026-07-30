@@ -1,11 +1,12 @@
 import Phaser from 'phaser';
 import { S, save } from '@/core/save';
 import { bus, EV } from '@/core/events';
-import { CharacterSprite } from '@/gfx/CharacterSprite';
+import { ChibiSprite } from '@/gfx/ChibiSprite';
+import { defaultLook, lookLayers } from '@/data/chibi';
 
-// Scene xem trước nhân vật khi tạo — điều khiển bằng panel DOM 'charcreate'
+// Scene xem trước nhân vật chibi khi tạo — điều khiển bằng panel DOM 'charcreate'
 export class CharCreateScene extends Phaser.Scene {
-  private preview?: CharacterSprite;
+  private preview?: ChibiSprite;
   private dirTimer = 0;
 
   constructor() { super('CharCreate'); }
@@ -13,10 +14,10 @@ export class CharCreateScene extends Phaser.Scene {
   create() {
     const W = this.scale.width, H = this.scale.height;
     this.add.rectangle(0, 0, W, H, 0x2d4a1e).setOrigin(0);
-    // sàn gỗ sân khấu
-    this.add.tileSprite(W * 0.3, H / 2 + 60, 260, 120, 'g_wood').setAlpha(0.9);
-    this.preview = new CharacterSprite(this, W * 0.3, H / 2 + 10, S.player.appearance);
-    this.preview.setScale(4);
+    this.add.tileSprite(W * 0.3, H / 2 + 90, 320, 90, 'g_wood').setAlpha(0.9);
+    if (!S.player.chibi) S.player.chibi = defaultLook(0);
+    this.preview = new ChibiSprite(this, W * 0.3, H / 2 + 90, S.player.chibi);
+    this.preview.setScale(2.4);
     this.preview.play('walk');
 
     bus.on(EV.APPEARANCE, this.refresh, this);
@@ -30,11 +31,17 @@ export class CharCreateScene extends Phaser.Scene {
   }
 
   private refresh() {
-    this.preview?.setAppearance(S.player.appearance);
+    if (S.player.chibi) this.preview?.setLook(S.player.chibi);
     this.preview?.play('walk');
   }
 
   private finish() {
+    // sở hữu sẵn các part đang mặc
+    if (S.player.chibi) {
+      for (const id of lookLayers(S.player.chibi)) {
+        if (!S.chibiWardrobe.includes(id)) S.chibiWardrobe.push(id);
+      }
+    }
     save(true);
     this.scene.start('World');
   }
@@ -45,7 +52,7 @@ export class CharCreateScene extends Phaser.Scene {
     this.dirTimer += dt;
     if (this.dirTimer > 1600) {
       this.dirTimer = 0;
-      this.preview.setDir(((this.preview.dir + (Math.random() < 0.5 ? 1 : 3)) % 4) as 0 | 1 | 2 | 3);
+      this.preview.setDir(this.preview.facingLeft ? 3 : 2);
     }
   }
 }

@@ -41,6 +41,15 @@ Sprite `assets/deco/busstop.png` hiện ghép từ ghế đá của tileset + kh
 "Sprite City Series 1 – Bus Station" trên OpenGameArt
 (https://opengameart.org/content/sprite-city-series-1-bus-station) — tải về thay file là xong.
 
+## Nhân vật chibi (hiện hành)
+
+Nhân vật đã chuyển sang **hệ paperdoll chibi Avatar**: 345 part (tóc/áo/quần/mũ/kính/cánh
++ thân + mắt) giải nén từ `res.rar` trong repo Lttt, mỗi part là strip 15 frame 64x96
+(`public/assets/chibi/`), metadata tên + giá gốc trong `src/data/chibi-parts.json`.
+Format được dịch ngược từ client (AvatarData.cs) + bảng `items` trong SQL server.
+⚠️ Cùng lưu ý bản quyền như các asset Lttt khác — dev/test OK, thương mại phải thay.
+Bộ nhân vật pixel Cozy (Character v2) vẫn còn trong repo nhưng không dùng nữa.
+
 ## Nhân vật cho map HD (nên mua)
 
 Nhân vật Character v2 (32px pixel) hơi nhỏ so với map nền HD kiểu Avatar — hiện game

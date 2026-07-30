@@ -4,8 +4,9 @@ import { CharCreateScene } from './scenes/CharCreateScene';
 import { WorldScene } from './scenes/WorldScene';
 import { initUI } from './ui/UIManager';
 import { startBgm } from './core/audio';
+import { RES } from './core/res';
 
-// Game màn hình ngang 960x540, scale FIT toàn màn hình
+// Game màn hình ngang 960x540 (x RES trên màn retina), scale FIT toàn màn hình
 const game = new Phaser.Game({
   type: Phaser.AUTO,
   parent: 'game-root',
@@ -15,8 +16,8 @@ const game = new Phaser.Game({
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: 960,
-    height: 540
+    width: 960 * RES,
+    height: 540 * RES
   },
   physics: { default: 'arcade' },
   scene: [PreloadScene, CharCreateScene, WorldScene]

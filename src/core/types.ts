@@ -12,10 +12,17 @@ export interface Appearance {
   acc: string[];            // id phụ kiện đang đeo (hat_*, glasses_*, mask_*...)
 }
 
+export interface ChibiLookState {
+  gender: number;          // 0 nam, 1 nữ
+  pant: number; shirt: number; hair: number; eyes: number;
+  hat: number; glasses: number; wing: number;
+}
+
 export interface PlayerProfile {
   name: string;
   gender: Gender;
-  appearance: Appearance;
+  appearance: Appearance;  // (cũ — giữ cho save tương thích)
+  chibi?: ChibiLookState;  // nhân vật chibi kiểu Avatar (hiện hành)
   level: number;
   exp: number;
   title: string;            // danh hiệu đang dùng
@@ -107,7 +114,8 @@ export interface GameState {
   player: PlayerProfile;
   wallet: { coins: number; rubies: number };
   inventory: Record<string, number>;
-  wardrobe: string[];       // thời trang đã sở hữu (clothing ids: "hair:xx", "clothes:xx", "acc:xx")
+  wardrobe: string[];       // (cũ) thời trang pack Cozy
+  chibiWardrobe: number[];  // part chibi đã sở hữu (id part Avatar)
   tools: { rod: number; can: number; hoe: number; net: number }; // cấp độ dụng cụ
   farm: { unlocked: number; plots: Plot[] };
   livestock: { barnLevel: number; animals: Animal[] };
