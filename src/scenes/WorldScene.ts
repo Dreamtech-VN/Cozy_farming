@@ -19,8 +19,13 @@ import { INSECTS, type InsectDef } from '@/data/insects';
 import { sfx } from '@/core/audio';
 
 const T = 16; // kích thước tile
-const FARM_ORIGIN = { x: 6, y: 12 }; // vị trí ruộng trong zone farm (theo tile)
-const BARN_RECT = { x: 30, y: 4, w: 12, h: 8 };
+// ---- Nông trại HD (nền imagemap Avatar 1008x506) — tọa độ px ----
+const FARM_PLOT = { ox: 84, oy: 218, pw: 42, ph: 45 };            // lưới ruộng 8x6
+const FARM_POND = { x: 850, y: 392, w: 274, h: 216 };             // hồ đá Avatar
+const KHE_POS = { x: 790, y: 195 };                               // cây khế
+const WAREHOUSE_POS = { x: 480, y: 175 };                         // nhà kho
+const BARN_RECT = { x: 34.5, y: 13.5, w: 9, h: 5.5 };             // sân chuồng thú (tile)
+const FARM_ORIGIN = { x: Math.round(FARM_PLOT.ox / T), y: Math.round(FARM_PLOT.oy / T) };
 const ROAD_TILES = 4; // đường xe chạy chiếm 4 hàng tile dưới cùng (map cổng)
 
 // đang có chuyến xe tới khu mới (giữ qua lần restart scene)
@@ -33,13 +38,13 @@ const TRAFFIC_KEYS = ['veh_bus', 'veh_truck_orange', 'veh_camper_pink', 'veh_cam
 // Decor đặt sẵn theo khu (sprite thật từ asset pack) — toạ độ tile, origin đáy giữa
 const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number }[]> = {
   farm: [
-    { key: 'bld_farm_house', x: 6, y: 8 },    // nhà bếp (cửa vào nhà riêng)
-    { key: 'bld_farm_market', x: 17, y: 8 },  // cửa hàng — Cô Mai đứng trước
-    { key: 'bld_farm_store', x: 26, y: 8 },   // nhà kho — mở kho đồ
-    { key: 'deco_tree_khe', x: 24, y: 11, s: 1.6 }, // cây khế
-    { key: 'deco_scarecrow', x: 4, y: 12 },
-    { key: 'deco_barrel', x: 28.5, y: 9 },
-    { key: 'deco_flower_pot', x: 9, y: 9 }, { key: 'deco_flower_pot', x: 14, y: 9 }
+    // nhà HD Avatar (object 1029/982/981/1033 + cây 243)
+    { key: 'lt_kitchen', x: 8.75, y: 12.6, s: 1 },     // nhà bếp (cửa vào nhà riêng)
+    { key: 'lt_store', x: 20.6, y: 12.9, s: 1 },       // cửa hàng — Cô Mai đứng trước
+    { key: 'lt_warehouse', x: 30, y: 12.7, s: 1 },     // nhà kho — mở kho đồ
+    { key: 'lt_petbarn', x: 40, y: 13, s: 1 },         // chuồng thú
+    { key: 'lt_tree', x: 49.4, y: 12.4, s: 1 },        // cây khế
+    { key: 'lt_tree', x: 58.6, y: 14.8, s: 0.8 }
   ],
   beach: [
     { key: 'bld_fishshop', x: 10, y: 7 },    // tiệm câu ông Biển
@@ -249,6 +254,13 @@ export class WorldScene extends Phaser.Scene {
     if (this.zone.bg) {
       this.add.rectangle(0, 0, w * T, h * T, 0x4e8a2a).setOrigin(0).setDepth(-101);
       this.add.image(0, 0, `bg_${this.zone.bg}`).setOrigin(0).setDepth(-100);
+      // nông trại HD: hồ đá Avatar góc phải dưới
+      if (this.zone.id === 'farm') {
+        const P = FARM_POND;
+        this.add.image(P.x, P.y, 'lt_pond').setDisplaySize(P.w, P.h).setDepth(-80);
+        this.pondEllipse = new Phaser.Geom.Ellipse(P.x, P.y + 8, P.w * 0.8, P.h * 0.62);
+        this.add.text(P.x, P.y - P.h / 2 - 10, '🐟 Hồ cá', { fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(2);
+      }
       return;
     }
 
@@ -622,14 +634,14 @@ export class WorldScene extends Phaser.Scene {
   // ================= ruộng =================
   private buildFarm() {
     farming.ensurePlots();
-    const { x: ox, y: oy } = FARM_ORIGIN;
+    const { ox, oy, pw, ph } = FARM_PLOT;
     for (let i = 0; i < farming.MAX_PLOTS; i++) {
       const col = i % farming.FARM_COLS, row = Math.floor(i / farming.FARM_COLS);
-      const x = (ox + col * 2) * T, y = (oy + row * 2) * T;
-      const img = this.add.image(x, y, 'fcell2').setOrigin(0).setDepth(-60).setDisplaySize(T * 1.9, T * 2);
+      const x = ox + col * pw, y = oy + row * ph;
+      const img = this.add.image(x, y, 'fcell2').setOrigin(0).setDepth(-60).setDisplaySize(pw, ph);
       this.plotTiles.push(img);
       // biển "MUA" cho ô sắp mở khóa
-      const overlay = this.add.image(x + T * 0.95, y + T * 0.7, 'buyland').setVisible(false).setDepth(y + T).setScale(0.5);
+      const overlay = this.add.image(x + pw / 2, y + ph * 0.55, 'buyland').setVisible(false).setDepth(y + ph).setScale(0.6);
       this.plotOverlays.push(overlay);
       this.cropSprites.push(undefined);
     }
@@ -656,12 +668,12 @@ export class WorldScene extends Phaser.Scene {
       if (p?.state === 'planted' && crop) {
         const stage = farming.stageOf(p);
         const frame = crop.row * 25 + 1 + stage; // crops_all: 25 cột, cột 0 là icon
-        // cây đứng giữa ô đất (ô hiển thị 1.9T x 2T), neo chân để gốc chạm đất
-        const cx = img.x + T * 0.95, cy = img.y + T * 1.55;
+        // cây đứng giữa ô đất, neo chân để gốc chạm đất
+        const cx = img.x + FARM_PLOT.pw / 2, cy = img.y + FARM_PLOT.ph * 0.86;
         if (!spr) {
           spr = this.add.sprite(cx, cy, 'crops', frame);
-          spr.setOrigin(0.5, 1).setScale(1.35);
-          spr.setDepth(img.y + T);
+          spr.setOrigin(0.5, 1).setScale(2);
+          spr.setDepth(img.y + FARM_PLOT.ph);
           this.cropSprites[i] = spr;
         } else spr.setFrame(frame);
         spr.setVisible(true);
@@ -673,7 +685,7 @@ export class WorldScene extends Phaser.Scene {
         if (!farming.isRipe(p) && spr.getData('bounce')) {
           spr.setData('bounce', false);
           this.tweens.killTweensOf(spr);
-          spr.setY(cy);
+          spr.setY(img.y + FARM_PLOT.ph * 0.86);
         }
       } else if (spr) {
         this.tweens.killTweensOf(spr);
@@ -691,13 +703,10 @@ export class WorldScene extends Phaser.Scene {
     g.lineStyle(2, 0x8d5a3a);
     g.strokeRect(x * T, y * T, w * T, h * T);
     g.fillStyle(0xc9a26b, 0.25); g.fillRect(x * T, y * T, w * T, h * T);
-    // chuồng thú (sprite barn + coop từ pack)
+    // nhà chuồng là building HD trong decor; ở đây chỉ vẽ sân + bảng tên
     const lvl = S.livestock.barnLevel;
-    const bx = (x + 3) * T, by = (y + 1.5) * T;
-    this.add.image(bx, by, 'bld_farm_barn').setOrigin(0.5, 1).setDepth(by).setAlpha(lvl === 0 ? 0.55 : 1);
-    if (lvl >= 2) this.add.image((x + 8) * T, (y + 1.2) * T, 'bld_farm_coop').setOrigin(0.5, 1).setScale(0.9).setDepth((y + 1.2) * T);
     const barnLabel = lvl === 0 ? '🏚️ Xây chuồng' : `🐄 Chuồng thú cấp ${lvl}`;
-    this.add.text(bx, by - 5.5 * T, barnLabel, { fontSize: '8px', color: '#fff', backgroundColor: '#00000080', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(3000);
+    this.add.text((x + w / 2) * T, (y - 0.4) * T, barnLabel, { fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(3000);
 
     for (const a of S.livestock.animals) this.spawnAnimal(a.id, a.type);
     this.time.addEvent({ delay: 1500, loop: true, callback: () => this.wanderAnimals() });
@@ -709,7 +718,7 @@ export class WorldScene extends Phaser.Scene {
     const { x, y, w, h } = BARN_RECT;
     const ax = (x + 1 + Math.random() * (w - 2)) * T;
     const ay = (y + 1 + Math.random() * (h - 2)) * T;
-    const spr = this.add.sprite(ax, ay, `animal_${type}`, 0).setDepth(ay);
+    const spr = this.add.sprite(ax, ay, `animal_${type}`, 0).setDepth(ay).setScale(this.zone.bg ? 1.9 : 1);
     spr.setInteractive({ useHandCursor: true });
     spr.on('pointerdown', () => this.animalDialog(id));
     this.animalSprites.set(id, spr);
@@ -798,7 +807,7 @@ export class WorldScene extends Phaser.Scene {
 
   private tryCatchInsect(ins: InsectSprite) {
     const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, ins.obj.x, ins.obj.y);
-    if (d > 48) { toast('Lại gần hơn chút nữa!', '🥅'); return; }
+    if (d > (this.zone.bg ? 95 : 48)) { toast('Lại gần hơn chút nữa!', '🥅'); return; }
     if (this.busy) return;
     this.busy = true;
     // quay mặt về phía côn trùng
@@ -936,11 +945,11 @@ export class WorldScene extends Phaser.Scene {
   // ================= hành động theo ngữ cảnh =================
   private nearestPlot(): number {
     if (!this.zone.features.includes('farm')) return -1;
-    const { x: ox, y: oy } = FARM_ORIGIN;
-    let best = -1, bd = 26;
+    const { ox, oy, pw, ph } = FARM_PLOT;
+    let best = -1, bd = 42;
     for (let i = 0; i < farming.MAX_PLOTS; i++) {
       const col = i % farming.FARM_COLS, row = Math.floor(i / farming.FARM_COLS);
-      const cx = (ox + col * 2) * T + T * 0.9, cy = (oy + row * 2) * T + T * 0.9;
+      const cx = ox + col * pw + pw / 2, cy = oy + row * ph + ph / 2;
       const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, cx, cy);
       if (d < bd) { bd = d; best = i; }
     }
@@ -949,7 +958,8 @@ export class WorldScene extends Phaser.Scene {
 
   private nearWater(): boolean {
     if (!this.zone.features.includes('fishing')) return false;
-    for (const off of [[0, 30], [0, -30], [-30, 0], [30, 0]]) {
+    const R = this.zone.bg ? 60 : 30;
+    for (const off of [[0, R], [0, -R], [-R, 0], [R, 0]]) {
       if (this.inWater(this.player.x + off[0], this.player.y + off[1])) return true;
     }
     return false;
@@ -975,7 +985,7 @@ export class WorldScene extends Phaser.Scene {
     const pi = this.nearestPlot();
     if (pi >= 0) {
       const p = S.farm.plots[pi];
-      this.selector.setVisible(true).setPosition(this.plotTiles[pi].x + T * 0.9, this.plotTiles[pi].y + T * 0.9).setScale(0.95);
+      this.selector.setVisible(true).setPosition(this.plotTiles[pi].x + FARM_PLOT.pw / 2, this.plotTiles[pi].y + FARM_PLOT.ph / 2).setScale(1.3);
       if (p.state === 'locked') acts.push({
         icon: '🪙', label: `Mua ô đất (${farming.plotPrice()} xu)`,
         cb: () => bus.emit(EV.OPEN_PANEL, {
@@ -1005,11 +1015,11 @@ export class WorldScene extends Phaser.Scene {
     // nhà kho + cây khế (nông trại)
     if (this.zone.id === 'farm') {
       // nhà kho: mở kho đồ
-      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, 26 * T, 8 * T) < 40) {
+      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, WAREHOUSE_POS.x, WAREHOUSE_POS.y + 40) < 80) {
         acts.push({ icon: '🎒', label: 'Mở nhà kho', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'inventory' }) });
       }
       // cây khế: rung cây nhặt quả (hồi 10 phút)
-      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, 24 * T, 11 * T) < 36) {
+      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, KHE_POS.x, KHE_POS.y + 30) < 85) {
         const last = S.stats['khe_last'] ?? 0;
         const readyIn = 10 * 60_000 - (Date.now() - last);
         if (readyIn <= 0) {
@@ -1033,8 +1043,8 @@ export class WorldScene extends Phaser.Scene {
 
     // chuồng
     if (this.zone.features.includes('barn')) {
-      const bx = (BARN_RECT.x + BARN_RECT.w / 2) * T, by = BARN_RECT.y * T;
-      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, bx, by) < 40) {
+      const bx = (BARN_RECT.x + BARN_RECT.w / 2) * T, by = (BARN_RECT.y + BARN_RECT.h / 2) * T;
+      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, bx, by) < (this.zone.bg ? 110 : 40)) {
         if (S.livestock.barnLevel === 0) acts.push({ icon: '🏚️', label: 'Xây chuồng (500 xu)', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
         else {
           acts.push({ icon: '🐔', label: 'Mua vật nuôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'animalshop' }) });
@@ -1105,9 +1115,9 @@ export class WorldScene extends Phaser.Scene {
   private mounds: Phaser.GameObjects.Image[] = [];
 
   private spawnChopTrees() {
-    // 3 cây gỗ cố định phía đông nông trại (ngoài vùng ruộng/chuồng/hồ nước)
-    for (const [tx, ty] of [[28, 16], [34, 19], [41, 22]] as [number, number][]) {
-      const obj = this.add.image(tx * T, ty * T, 'deco_tree_round2').setOrigin(0.5, 1).setDepth(ty * T);
+    // 3 cây gỗ HD giữa nông trại (ngoài ruộng/chuồng/hồ)
+    for (const [px2, py2] of [[485, 315], [610, 380], [500, 480]] as [number, number][]) {
+      const obj = this.add.image(px2, py2, 'lt_tree').setOrigin(0.5, 1).setScale(0.72).setDepth(py2);
       this.chopTrees.push({ obj, readyAt: 0 });
     }
   }
@@ -1122,12 +1132,11 @@ export class WorldScene extends Phaser.Scene {
       const tx = 3 + Math.floor(Math.random() * (this.zone.w - 6));
       const ty = 4 + Math.floor(Math.random() * (this.zone.h - 8));
       if (this.zone.id === 'farm') {
-        if (tx > 4 && tx < 24 && ty > 6 && ty < 26) continue;                       // ruộng + nhà
-        if (ty < 12) continue;                                                       // dãy công trình + chuồng
-        if (tx > 27 && tx < 41 && ty > 22) continue;                                 // hồ cá
+        if (tx > 3 && tx < 28 && ty > 12 && ty < 32) continue;                       // lưới ruộng
+        if (ty < 14) continue;                                                       // dãy nhà + chuồng
       }
       if (this.nearWaterTile(tx, ty)) continue;                                      // không mọc dưới nước
-      const obj = this.add.image(tx * T, ty * T, 'mound').setDepth(ty * T - 8);
+      const obj = this.add.image(tx * T, ty * T, 'mound').setDepth(ty * T - 8).setScale(this.zone.bg ? 1.9 : 1);
       this.mounds.push(obj);
       return;
     }
@@ -1139,7 +1148,7 @@ export class WorldScene extends Phaser.Scene {
       const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, t.obj.x, t.obj.y - 10);
       if (d < bd) { bd = d; best = t; }
     }
-    if (!best || bd > 56) { toast('Lại gần mấy cây gỗ phía đông nông trại nhé.', '🪓'); return; }
+    if (!best || bd > 95) { toast('Lại gần mấy cây gỗ giữa nông trại nhé.', '🪓'); return; }
     if (Date.now() < best.readyAt) {
       toast(`Cây đang mọc lại (${Math.ceil((best.readyAt - Date.now()) / 60000)} phút).`, '🌱');
       return;
@@ -1166,7 +1175,7 @@ export class WorldScene extends Phaser.Scene {
       const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, m.x, m.y);
       if (d < bd) { bd = d; best = m; }
     }
-    if (!best || bd > 52) { toast('Không có đống đất nào gần đây — tìm mấy ụ đất nâu nhé.', '🦯'); return; }
+    if (!best || bd > (this.zone.bg ? 90 : 52)) { toast('Không có đống đất nào gần đây — tìm mấy ụ đất nâu nhé.', '🦯'); return; }
     const mound = best;
     this.busy = true;
     this.player.play('hoe', () => {
@@ -1234,7 +1243,7 @@ export class WorldScene extends Phaser.Scene {
           const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, ins.obj.x, ins.obj.y);
           if (d < bd) { bd = d; best = ins; }
         }
-        if (best && bd <= 64) this.tryCatchInsect(best);
+        if (best && bd <= (this.zone.bg ? 100 : 64)) this.tryCatchInsect(best);
         else toast('Không có côn trùng nào trong tầm vợt.', '🥅');
         break;
       }
@@ -1253,7 +1262,7 @@ export class WorldScene extends Phaser.Scene {
 
   private plotCenter(i: number): { x: number; y: number } {
     const t = this.plotTiles[i];
-    return t ? { x: t.x + T * 0.95, y: t.y + T * 0.7 } : { x: this.player.x, y: this.player.y };
+    return t ? { x: t.x + FARM_PLOT.pw / 2, y: t.y + FARM_PLOT.ph / 2 } : { x: this.player.x, y: this.player.y };
   }
 
   private doTill(i: number) {
@@ -1379,10 +1388,11 @@ export class WorldScene extends Phaser.Scene {
       const dir: Dir = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 3 : 2) : (dy > 0 ? 0 : 1);
       this.player.setDir(dir);
       this.player.play('walk');
-      this.player.setDepth(this.player.y);
     } else if (!this.busy && this.player.current === 'walk') {
       this.player.play('idle');
     }
+    // depth theo trục y để đứng sau/trước nhà cửa đúng lớp
+    this.player.setDepth(this.player.y);
     this.player.tick(dt);
     for (const { sprite } of this.npcs) sprite.tick(dt);
     for (const g of this.partyGuests) g.tick(dt);

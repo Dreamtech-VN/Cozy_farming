@@ -51,16 +51,18 @@ export const ZONES: Record<string, ZoneDef> = {
   park_gate: gateZone('park_gate', 'Công viên', '🌳', 'park', 'grass'),
   pond_gate: gateZone('pond_gate', 'Hồ câu', '🎏', 'pond', 'grass'),
   farm: {
-    id: 'farm', name: 'Nông trại', icon: '🌾', w: 44, h: 34, ground: 'grass',
-    spawn: { x: 12, y: 10 }, gate: 'farm_gate',
+    // map HD dựng từ imagemap Avatar (map 7 đã vá chữ) + nhà/hồ/cây HD Avatar
+    id: 'farm', name: 'Nông trại', icon: '🌾', w: 63, h: 32, ground: 'grass',
+    spawn: { x: 31, y: 15 }, gate: 'farm_gate',
+    bg: 'farmbg', walkTop: 7, walkBottom: 29,
     portals: [
-      { x: 6, y: 8, to: 'house', label: 'Nhà bếp', icon: '🏠' },
-      { x: 22, y: 32, to: 'farm_gate', label: 'Ra cổng', icon: '🚏' }
+      { x: 9, y: 13, to: 'house', label: 'Nhà bếp', icon: '🏠' },
+      { x: 31, y: 29, to: 'farm_gate', label: 'Ra cổng', icon: '🚏' }
     ],
     npcs: [
-      { id: 'npc_mai', name: 'Cô Mai', x: 17, y: 9, charIndex: 5, gender: 2, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
+      { id: 'npc_mai', name: 'Cô Mai', x: 21, y: 14, charIndex: 5, gender: 2, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
     ],
-    features: ['farm', 'barn', 'fishing', 'insects', 'trees']
+    features: ['farm', 'barn', 'fishing', 'insects']
   },
   town: {
     id: 'town', name: 'Thành phố', icon: '🏙️', w: 50, h: 29, ground: 'stone',

@@ -60,13 +60,18 @@ export class PreloadScene extends Phaser.Scene {
     }
 
     // ---- Nền map Avatar (repo Lttt) ----
-    for (const m of ['4', '10', '15', '22', '24', '101']) {
+    for (const m of ['4', '10', '15', '22', '24', '101', 'farmbg']) {
       this.load.image(`bg_${m}`, `assets/lttt/maps/${m}.png`);
     }
     // ---- Decor Avatar (repo Lttt) ----
     for (const d of ['shelter', 'house_white', 'rank_sign', 'lamp_hd', 'icecream', 'love_tree']) {
       this.load.image(`lt_${d}`, `assets/lttt/${d}.png`);
     }
+    // ---- Nhà + cây + hồ HD Avatar cho nông trại ----
+    for (const b of ['kitchen', 'store', 'warehouse', 'petbarn', 'tree']) {
+      this.load.image(`lt_${b}`, `assets/lttt/bld/${b}.png`);
+    }
+    this.load.image('lt_pond', 'assets/lttt/pond.png');
     // ---- Ô ruộng kiểu Avatar (repo Lttt) ----
     for (let i = 0; i < 8; i++) this.load.image(`fcell${i}`, `assets/lttt/farm/cell${i}.png`);
     this.load.image('buyland', 'assets/lttt/farm/buyLand.png');
