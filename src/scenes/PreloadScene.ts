@@ -33,6 +33,8 @@ export class PreloadScene extends Phaser.Scene {
     this.load.spritesheet('tools', 'assets/farm/tools.png', { frameWidth: 16, frameHeight: 16 });
     this.load.spritesheet('items16', 'assets/farm/items.png', { frameWidth: 16, frameHeight: 16 });
     this.load.spritesheet('pond_deco', 'assets/farm/pond_deco.png', { frameWidth: 16, frameHeight: 16 });
+    this.load.image('av_water', 'assets/farm/av_water.png');
+    this.load.image('av_water_spark', 'assets/farm/av_water_spark.png');
 
     // ---- Vật nuôi ----
     for (const a of ANIMAL_LIST) {

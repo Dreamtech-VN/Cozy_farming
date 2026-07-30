@@ -305,16 +305,25 @@ export class WorldScene extends Phaser.Scene {
     // nước cho khu câu cá
     if (this.zone.features.includes('fishing')) {
       if (this.zone.id === 'beach' && this.waterRect) {
-        this.add.tileSprite(this.waterRect.x, 0, 12 * T, this.zone.h * T, 'g_water').setOrigin(0).setDepth(-80);
+        // biển dùng tile nước Avatar + dải sóng lấp lánh gần bờ
+        const sea = this.add.tileSprite(this.waterRect.x, 0, 12 * T, this.zone.h * T, 'av_water').setOrigin(0).setDepth(-80);
+        this.tweens.add({ targets: sea, tilePositionY: 48, duration: 6000, repeat: -1 });
+        const foam = this.add.tileSprite(this.waterRect.x, 0, 2.5 * T, this.zone.h * T, 'av_water_spark').setOrigin(0).setDepth(-79).setAlpha(0.8);
+        this.tweens.add({ targets: foam, alpha: 0.4, duration: 1400, yoyo: true, repeat: -1 });
       } else if (this.zone.id === 'farm') {
-        // hồ cá trong nông trại: viền cát + nước 2 lớp + lá súng + lấp lánh
+        // hồ cá trong nông trại: viền cát + nước tile Avatar (mask ellipse) + lá súng
         const cx = 34 * T, cy = 28 * T;
         const g = this.add.graphics().setDepth(-80);
         g.fillStyle(0xd9c184); g.fillEllipse(cx, cy, 10.9 * T, 5.9 * T);          // viền cát
         g.fillStyle(0x2e6f9e); g.fillEllipse(cx, cy, 10.2 * T, 5.2 * T);          // mép nước sẫm
-        g.fillStyle(0x3c8fc4); g.fillEllipse(cx, cy, 9.6 * T, 4.7 * T);
-        g.fillStyle(0x4aa5d9); g.fillEllipse(cx, cy, 8.6 * T, 4 * T);
-        g.fillStyle(0x62b7e6, 0.55); g.fillEllipse(cx, cy - 3, 7 * T, 3 * T);
+        const water = this.add.tileSprite(cx - 4.8 * T, cy - 2.4 * T, 9.6 * T, 4.8 * T, 'av_water').setOrigin(0).setDepth(-79);
+        const mg = this.make.graphics({}, false);
+        mg.fillStyle(0xffffff); mg.fillEllipse(cx, cy, 9.6 * T, 4.7 * T);
+        water.setMask(mg.createGeometryMask());
+        this.tweens.add({ targets: water, tilePositionX: 48, duration: 8000, repeat: -1 });
+        const shine = this.add.tileSprite(cx - 4.8 * T, cy - 2.4 * T, 9.6 * T, 4.8 * T, 'av_water_spark').setOrigin(0).setDepth(-78).setAlpha(0.35);
+        shine.setMask(mg.createGeometryMask());
+        this.tweens.add({ targets: shine, alpha: 0.75, duration: 1600, yoyo: true, repeat: -1 });
         // lá súng dập dềnh
         for (const [lx, ly, f] of [[-2.8, -0.9, 0], [1.6, -1.6, 1], [3, 0.9, 2], [-1.2, 1.3, 3]] as [number, number, number][]) {
           const lily = this.add.image(cx + lx * T, cy + ly * T, 'pond_deco', f).setDepth(-78).setScale(1.15);
