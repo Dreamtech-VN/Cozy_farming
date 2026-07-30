@@ -310,6 +310,7 @@ export function registerMinigames() {
 // ===== Form tạo nhân vật =====
 import { HAIR_STYLES, CLOTHES, HAIR_COLOR_NAMES, CLOTH_COLOR_NAMES } from '@/data/clothing';
 import { bus, EV } from '@/core/events';
+import { wearPreview } from './kit';
 
 function buildCharCreate(body: HTMLElement, done: () => void) {
   const a = S.player.appearance;
@@ -354,7 +355,9 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   r = row('🧑 Ngoại hình');
   const skin = h('div', 'chips');
   for (let i = 0; i < 8; i++) {
-    const c = h('div', `chip ${a.charIndex === i ? 'active' : ''}`, `Kiểu ${i + 1}`);
+    const c = h('div', `chip ${a.charIndex === i ? 'active' : ''}`);
+    c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
+    c.append(wearPreview('base', `char${i + 1}`, 0, 26), h('span', '', `${i + 1}`));
     c.onclick = () => { a.charIndex = i; skin.querySelectorAll('.chip').forEach(x => x.classList.remove('active')); c.classList.add('active'); emit(); };
     skin.append(c);
   }
@@ -364,7 +367,9 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   r = row('💇 Kiểu tóc');
   const hchips = h('div', 'chips');
   for (const hs of HAIR_STYLES) {
-    const c = h('div', `chip ${a.hairStyle === hs.id ? 'active' : ''}`, hs.name);
+    const c = h('div', `chip ${a.hairStyle === hs.id ? 'active' : ''}`);
+    c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
+    c.append(wearPreview('hair', hs.id, a.hairColor, 26), h('span', '', hs.name));
     c.onclick = () => { a.hairStyle = hs.id; hchips.querySelectorAll('.chip').forEach(x => x.classList.remove('active')); c.classList.add('active'); emit(); };
     hchips.append(c);
   }
@@ -379,7 +384,9 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   r = row('👕 Trang phục khởi đầu');
   const cchips = h('div', 'chips');
   for (const cl of CLOTHES.filter(x => x.price === 0 || ['overalls', 'dress', 'stripe'].includes(x.id))) {
-    const c = h('div', `chip ${a.clothes === cl.id ? 'active' : ''}`, cl.name);
+    const c = h('div', `chip ${a.clothes === cl.id ? 'active' : ''}`);
+    c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
+    c.append(wearPreview('clothes', cl.id, a.clothesColor, 26), h('span', '', cl.name));
     c.onclick = () => {
       a.clothes = cl.id;
       if (!S.wardrobe.includes(`clothes:${cl.id}`)) S.wardrobe.push(`clothes:${cl.id}`);

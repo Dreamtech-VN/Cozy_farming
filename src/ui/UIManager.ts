@@ -1,7 +1,7 @@
 import type Phaser from 'phaser';
 import { bus, EV } from '@/core/events';
 import { S } from '@/core/save';
-import { h, root, fmt } from './kit';
+import { h, root, fmt, charFace } from './kit';
 import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
 import { gameHour, currentWeather, WEATHER_ICON, season } from '@/systems/time';
@@ -70,7 +70,7 @@ function buildHud() {
   // hồ sơ
   const prof = h('div', 'hud-profile');
   prof.innerHTML = `
-    <div class="hud-avatar">🧑‍🌾</div>
+    <div class="hud-avatar"></div>
     <div>
       <div class="hud-name"></div>
       <div class="hud-title"></div>
@@ -152,6 +152,7 @@ function buildHud() {
   // cập nhật số liệu
   bus.on(EV.WALLET, refreshHud);
   bus.on(EV.STATE_CHANGED, refreshHud);
+  bus.on(EV.APPEARANCE, refreshHud);
   bus.on(EV.QUEST, refreshHud);
   bus.on(EV.TIME_TICK, refreshClock);
   setInterval(refreshClock, 10_000);
@@ -163,6 +164,8 @@ function refreshHud() {
   const q = (sel: string) => document.querySelector(sel) as HTMLElement | null;
   q('#hud-coins') && (q('#hud-coins')!.textContent = fmt(S.wallet.coins));
   q('#hud-rubies') && (q('#hud-rubies')!.textContent = fmt(S.wallet.rubies));
+  const av = q('.hud-avatar');
+  if (av) { av.innerHTML = ''; av.append(charFace(S.player.appearance, 34)); }
   const nm = q('.hud-name'), tt = q('.hud-title'), lv = q('.hud-lv');
   if (nm) nm.textContent = S.player.name || 'Nông dân';
   if (tt) {

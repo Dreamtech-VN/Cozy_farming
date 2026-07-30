@@ -1,5 +1,5 @@
 import { registerPanel, openPanel, getGame } from './UIManager';
-import { h, openWindow, btn, fmt } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, wearPreview, charFace } from './kit';
 import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
@@ -71,8 +71,7 @@ export function registerAllPanels() {
       for (const [id, qty] of entries) {
         const def = item(id);
         const c = h('div', 'cell');
-        c.innerHTML = `<div class="ico">${def.icon}</div><div class="nm"></div><div class="qty">x${qty}</div>`;
-        (c.querySelector('.nm') as HTMLElement).textContent = def.name;
+        c.append(iconOf(def), h('div', 'nm', def.name), h('div', 'qty', `x${qty}`));
         c.onclick = () => itemActions(id, close);
         grid.append(c);
       }
@@ -136,8 +135,7 @@ export function registerAllPanels() {
       if (qty <= 0) continue;
       has = true;
       const cell = h('div', 'cell');
-      cell.innerHTML = `<div class="ico">${c.icon}</div><div class="nm"></div><div class="qty">x${qty}</div><div class="pr">${c.growMin} phút</div>`;
-      (cell.querySelector('.nm') as HTMLElement).textContent = c.name;
+      cell.append(iconOf(item(`seed_${c.id}`)), h('div', 'nm', c.name), h('div', 'qty', `x${qty}`), h('div', 'pr', `${c.growMin} phút`));
       cell.onclick = () => { farming.plant(data.plot, c.id); close(); };
       grid.append(cell);
     }
@@ -166,8 +164,7 @@ export function registerAllPanels() {
           const def = item(id);
           const cell = h('div', 'cell');
           const price = def.rubyBuy ? `💎${def.rubyBuy}` : `🪙${def.buy ?? 0}`;
-          cell.innerHTML = `<div class="ico">${def.icon}</div><div class="nm"></div><div class="pr">${price}</div>`;
-          (cell.querySelector('.nm') as HTMLElement).textContent = def.name;
+          cell.append(iconOf(def), h('div', 'nm', def.name), h('div', 'pr', price));
           cell.onclick = () => {
             if (def.rubyBuy ? spend(0, def.rubyBuy) : spend(def.buy ?? 0)) {
               addItem(id); sfx.coin(); toast(`Đã mua ${def.name}`, def.icon);
@@ -181,8 +178,7 @@ export function registerAllPanels() {
         for (const [id, qty] of sellable) {
           const def = item(id);
           const cell = h('div', 'cell');
-          cell.innerHTML = `<div class="ico">${def.icon}</div><div class="nm"></div><div class="qty">x${qty}</div><div class="pr">+${def.sell}🪙</div>`;
-          (cell.querySelector('.nm') as HTMLElement).textContent = def.name;
+          cell.append(iconOf(def), h('div', 'nm', def.name), h('div', 'qty', `x${qty}`), h('div', 'pr', `+${def.sell}🪙`));
           cell.onclick = () => {
             if (removeItem(id)) {
               S.wallet.coins += def.sell;
@@ -241,9 +237,15 @@ export function registerAllPanels() {
         const owned = S.wardrobe.includes(key);
         const cell = h('div', `cell ${owned ? 'owned' : ''}`);
         const price = w.price === 0 ? 'Miễn phí' : w.rubyPrice ? `💎${w.rubyPrice}` : `🪙${w.price}`;
-        const icon = prefix === 'hair' ? '💇' : prefix === 'clothes' ? '👕' : w.id.startsWith('hat') ? '🎩' : w.id.startsWith('glasses') ? '👓' : w.id.startsWith('earring') ? '💎' : w.id.startsWith('mask') ? '🎭' : '🧔';
-        cell.innerHTML = `<div class="ico">${icon}</div><div class="nm"></div><div class="pr">${owned ? '✅ Đã có' : price}</div>`;
-        (cell.querySelector('.nm') as HTMLElement).textContent = w.name;
+        // xem trước sprite thật, kèm nhân vật nền cho dễ hình dung
+        const prev = h('div');
+        prev.style.cssText = 'position:relative;width:40px;height:40px';
+        const base = wearPreview('base', `char${S.player.appearance.charIndex + 1}`, 0, 40);
+        base.style.cssText += 'position:absolute;left:0;top:0;opacity:.45';
+        const it = wearPreview(prefix, w.id, prefix === 'hair' ? S.player.appearance.hairColor : prefix === 'clothes' ? S.player.appearance.clothesColor : 0, 40);
+        it.style.cssText += 'position:absolute;left:0;top:0';
+        prev.append(base, it);
+        cell.append(prev, h('div', 'nm', w.name), h('div', 'pr', owned ? '✅ Đã có' : price));
         cell.onclick = () => {
           if (owned) { openPanel('wardrobe'); return; }
           const ok = w.rubyPrice ? spend(0, w.rubyPrice) : spend(w.price);
@@ -334,7 +336,8 @@ export function registerAllPanels() {
     body.append(h('div', 'hint', `Chuồng cấp ${S.livestock.barnLevel}: ${S.livestock.animals.length}/${livestock.barnCapacity()} con`));
     for (const a of ANIMAL_LIST) {
       const r = h('div', 'row');
-      r.innerHTML = `<div style="font-size:24px">${a.icon}</div><div class="grow"><div class="t1">${a.name}</div><div class="t2">Cho ra ${item(a.product).name} mỗi ${a.produceMin} phút sau khi ăn</div></div>`;
+      r.append(spr(`assets/animals/${a.sheet}`, 0, 0, a.frameW, a.frameH, 36));
+      r.innerHTML += `<div class="grow"><div class="t1">${a.name}</div><div class="t2">Cho ra ${item(a.product).name} mỗi ${a.produceMin} phút sau khi ăn</div></div>`;
       r.append(btn(`🪙${a.price}`, 'gold', () => {
         if (livestock.buyAnimal(a.id)) worldScene()?.scene?.restart();
       }));
@@ -399,13 +402,14 @@ export function registerAllPanels() {
         const t = TITLES[S.player.title];
         const info = h('div');
         info.innerHTML = `
-          <div class="row"><div style="font-size:34px">🧑‍🌾</div><div class="grow">
+          <div class="row"><div id="pf-face"></div><div class="grow">
             <div class="t1" id="pf-name"></div>
             <div class="t2" style="color:${t?.color}">「${t?.name}」</div>
             <div class="t2">Cấp ${S.player.level} · ${S.player.exp}/${S.player.level * 100} EXP · ${S.player.gender === 'male' ? 'Nam' : 'Nữ'}</div>
           </div></div>
           <div class="progress"><div style="width:${Math.round(S.player.exp / (S.player.level * 100) * 100)}%"></div></div>`;
         (info.querySelector('#pf-name') as HTMLElement).textContent = S.player.name;
+        (info.querySelector('#pf-face') as HTMLElement).append(charFace(S.player.appearance, 56));
         body.append(info);
         const statsBox = h('div');
         statsBox.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px';
@@ -464,7 +468,9 @@ export function registerAllPanels() {
     let sec = section('💇 Kiểu tóc (đã mua)');
     let chips = h('div', 'chips');
     for (const hs of HAIR_STYLES.filter(x => S.wardrobe.includes(`hair:${x.id}`))) {
-      const c = h('div', `chip ${a.hairStyle === hs.id ? 'active' : ''}`, hs.name);
+      const c = h('div', `chip ${a.hairStyle === hs.id ? 'active' : ''}`);
+      c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
+      c.append(wearPreview('hair', hs.id, a.hairColor, 26), h('span', '', hs.name));
       c.onclick = () => { a.hairStyle = hs.id; apply(); body.innerHTML = ''; openWardrobe(body); };
       chips.append(c);
     }
@@ -475,7 +481,9 @@ export function registerAllPanels() {
     sec = section('👕 Trang phục (đã mua)');
     chips = h('div', 'chips');
     for (const cl of CLOTHES.filter(x => S.wardrobe.includes(`clothes:${x.id}`))) {
-      const c = h('div', `chip ${a.clothes === cl.id ? 'active' : ''}`, cl.name);
+      const c = h('div', `chip ${a.clothes === cl.id ? 'active' : ''}`);
+      c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
+      c.append(wearPreview('clothes', cl.id, a.clothesColor, 26), h('span', '', cl.name));
       c.onclick = () => { a.clothes = cl.id; apply(); body.innerHTML = ''; openWardrobe(body); };
       chips.append(c);
     }
@@ -487,7 +495,9 @@ export function registerAllPanels() {
     chips = h('div', 'chips');
     for (const ac of ACCESSORIES.filter(x => S.wardrobe.includes(`acc:${x.id}`))) {
       const worn = a.acc.includes(ac.id);
-      const c = h('div', `chip ${worn ? 'active' : ''}`, ac.name);
+      const c = h('div', `chip ${worn ? 'active' : ''}`);
+      c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
+      c.append(wearPreview('acc', ac.id, 0, 26), h('span', '', ac.name));
       c.onclick = () => {
         if (worn) a.acc = a.acc.filter(x => x !== ac.id);
         else {
@@ -581,8 +591,7 @@ export function registerAllPanels() {
     for (const [id, qty] of giftable) {
       const def = item(id);
       const cell = h('div', 'cell');
-      cell.innerHTML = `<div class="ico">${def.icon}</div><div class="nm"></div><div class="qty">x${qty}</div>`;
-      (cell.querySelector('.nm') as HTMLElement).textContent = def.name;
+      cell.append(iconOf(def), h('div', 'nm', def.name), h('div', 'qty', `x${qty}`));
       cell.onclick = () => { giveGift(friendId, id); close(); };
       grid.append(cell);
     }
@@ -777,7 +786,10 @@ export function registerAllPanels() {
         for (const f of FISH_LIST) {
           const got = S.collections.fish.includes(f.id);
           const cell = h('div', `cell ${got ? '' : 'locked'}`);
-          cell.innerHTML = `<div class="ico">🐟</div><div class="nm">${got ? f.name : '???'}</div><div class="pr" style="color:${RARITY_COLOR[f.rarity]}">${RARITY_NAME[f.rarity]}</div>`;
+          cell.append(iconOf(item(f.id)), h('div', 'nm', got ? f.name : '???'));
+          const pr = h('div', 'pr', RARITY_NAME[f.rarity]);
+          pr.style.color = RARITY_COLOR[f.rarity];
+          cell.append(pr);
           grid.append(cell);
         }
       } else if (tab === 1) {
@@ -793,7 +805,7 @@ export function registerAllPanels() {
         for (const c of CROP_LIST) {
           const got = S.collections.crops.includes(c.id);
           const cell = h('div', `cell ${got ? '' : 'locked'}`);
-          cell.innerHTML = `<div class="ico">${c.icon}</div><div class="nm">${got ? c.name : '???'}</div>`;
+          cell.append(iconOf(item(`crop_${c.id}`)), h('div', 'nm', got ? c.name : '???'));
           grid.append(cell);
         }
       }
@@ -819,14 +831,14 @@ export function registerAllPanels() {
   // ================= Biểu cảm =================
   registerPanel('emotes', () => {
     const { body, close } = openWindow('😊 Biểu cảm', { size: 'small' });
-    const emojis = ['😀', '😂', '😍', '😭', '😡', '😱', '😴', '🤔', '👍', '👋', '❤️', '💢', '💦', '⭐', '🎵', '💤', '❓', '❗', '🍀', '🔥'];
+    // dùng đúng sheet emoticons.png của asset pack (lưới 16px, 5 cột x 6 hàng)
     const grid = h('div', 'grid');
-    emojis.forEach((e, i) => {
+    for (let i = 0; i < 30; i++) {
       const cell = h('div', 'cell');
-      cell.innerHTML = `<div class="ico">${e}</div>`;
-      cell.onclick = () => { bus.emit('world:emote', i % 30); sendChat('area', e); close(); };
+      cell.append(spr('assets/char/emoticons.png', (i % 5) * 16, Math.floor(i / 5) * 16, 16, 16, 36));
+      cell.onclick = () => { bus.emit('world:emote', i); close(); };
       grid.append(cell);
-    });
+    }
     body.append(grid);
   });
 

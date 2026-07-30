@@ -51,7 +51,11 @@ NAMES.forEach(([name, rarity, price, zones], i) => {
   const id = `fish_${i}`;
   const minRod = rarity === 'legendary' ? 3 : rarity === 'epic' ? 2 : 1;
   FISHES[id] = { id, name, index: i, rarity, price, zones, minRod };
-  defItem({ id, name, kind: 'fish', icon: rarity === 'legendary' ? '🐠' : '🐟', sell: price, meta: { rarity } });
+  defItem({
+    id, name, kind: 'fish', icon: rarity === 'legendary' ? '🐠' : '🐟',
+    sprite: { url: 'assets/fishing/fish_all.png', sx: (i % 10) * 16, sy: Math.floor(i / 10) * 16, sw: 16, sh: 16 },
+    sell: price, meta: { rarity }
+  });
 });
 
 export const FISH_LIST = Object.values(FISHES);

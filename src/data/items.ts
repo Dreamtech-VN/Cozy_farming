@@ -5,11 +5,14 @@ export type ItemKind =
   | 'seed' | 'crop' | 'product' | 'fish' | 'insect' | 'food'
   | 'furniture' | 'deco' | 'tool' | 'gift' | 'material' | 'special';
 
+export interface ItemSprite { url: string; sx: number; sy: number; sw: number; sh: number }
+
 export interface ItemDef {
   id: string;
   name: string;
   kind: ItemKind;
-  icon: string;            // emoji
+  icon: string;            // emoji dự phòng
+  sprite?: ItemSprite;     // sprite thật từ asset pack (ưu tiên hiển thị)
   sell: number;            // giá bán cho NPC (0 = không bán được)
   buy?: number;            // giá mua ở shop (nếu bán trong shop)
   rubyBuy?: number;        // mua bằng ruby

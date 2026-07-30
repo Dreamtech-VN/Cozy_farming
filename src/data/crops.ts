@@ -17,10 +17,21 @@ export interface CropDef {
 
 export const CROPS: Record<string, CropDef> = {};
 
+const SHEET = 'assets/farm/crops_all.png';
+
 function defCrop(c: CropDef) {
   CROPS[c.id] = c;
-  defItem({ id: `seed_${c.id}`, name: `Hạt ${c.name}`, kind: 'seed', icon: '🌱', sell: Math.floor(c.seedPrice / 2), buy: c.seedPrice, meta: { crop: c.id } });
-  defItem({ id: `crop_${c.id}`, name: c.name, kind: 'crop', icon: c.icon, sell: c.sellPrice });
+  // cột 0 của mỗi hàng crops_all là icon túi hạt; cột 5 là cây chín
+  defItem({
+    id: `seed_${c.id}`, name: `Hạt ${c.name}`, kind: 'seed', icon: '🌱',
+    sprite: { url: SHEET, sx: 0, sy: c.row * 16, sw: 16, sh: 16 },
+    sell: Math.floor(c.seedPrice / 2), buy: c.seedPrice, meta: { crop: c.id }
+  });
+  defItem({
+    id: `crop_${c.id}`, name: c.name, kind: 'crop', icon: c.icon,
+    sprite: { url: SHEET, sx: c.stages * 16, sy: c.row * 16, sw: 16, sh: 16 },
+    sell: c.sellPrice
+  });
 }
 
 defCrop({ id: 'carrot',     name: 'Cà rốt',        icon: '🥕', row: 0,  stages: 5, growMin: 2,   seedPrice: 10,  sellPrice: 18,  exp: 3,  yieldQty: [1, 2] });

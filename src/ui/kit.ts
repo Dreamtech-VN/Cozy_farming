@@ -71,3 +71,59 @@ export function btn(label: string, cls = '', onClick?: () => void): HTMLButtonEl
   if (onClick) b.onclick = onClick;
   return b;
 }
+
+// ===== Sprite từ asset pack trong UI DOM =====
+// Cắt 1 vùng (sx,sy,sw,sh) từ sheet và phóng to size px (pixelated).
+export function spr(url: string, sx: number, sy: number, sw: number, sh: number, size = 32): HTMLElement {
+  const k = size / sw;
+  const wrap = h('div', 'spr');
+  wrap.style.cssText = `width:${Math.round(sw * k)}px;height:${Math.round(sh * k)}px;overflow:hidden;position:relative;image-rendering:pixelated;`;
+  const img = document.createElement('img');
+  img.src = url;
+  img.draggable = false;
+  img.style.cssText = `position:absolute;left:${-sx * k}px;top:${-sy * k}px;transform:scale(${k});transform-origin:0 0;image-rendering:pixelated;max-width:none;`;
+  // sheet ít biến thể màu hơn dự kiến -> lùi về biến thể 0
+  img.onload = () => {
+    if (sx + sw > img.naturalWidth) img.style.left = '0px';
+    if (sy + sh > img.naturalHeight) img.style.top = '0px';
+  };
+  wrap.append(img);
+  return wrap;
+}
+
+export interface SpriteRef { url: string; sx: number; sy: number; sw: number; sh: number }
+
+// Icon vật phẩm: ưu tiên sprite thật, thiếu mới dùng emoji
+export function iconOf(def: { icon: string; sprite?: SpriteRef }, size = 32): HTMLElement {
+  if (def.sprite) {
+    const s = def.sprite;
+    return spr(s.url, s.sx, s.sy, s.sw, s.sh, size);
+  }
+  const e = h('div', 'ico', def.icon);
+  e.style.fontSize = `${Math.round(size * 0.8)}px`;
+  return e;
+}
+
+// Xem trước 1 món thời trang (frame walk-down đầu tiên của biến thể màu)
+export function wearPreview(kind: 'hair' | 'clothes' | 'acc' | 'base' | 'eyes', id: string, variant = 0, size = 40): HTMLElement {
+  const url = kind === 'base' ? `assets/char/base/${id}.png` : `assets/char/${kind}/${id}.png`;
+  return spr(url, variant * 256, 0, 32, 32, size);
+}
+
+// Chân dung nhân vật ghép lớp (dùng cho avatar HUD, hồ sơ)
+export function charFace(a: { charIndex: number; hairStyle: string; hairColor: number; eyesColor: number; clothes: string; clothesColor: number; acc: string[] }, size = 40): HTMLElement {
+  const wrap = h('div');
+  wrap.style.cssText = `width:${size}px;height:${size}px;position:relative;image-rendering:pixelated;`;
+  const layer = (kind: 'hair' | 'clothes' | 'acc' | 'base' | 'eyes', id: string, variant: number) => {
+    const el = wearPreview(kind, id, variant, size);
+    el.style.position = 'absolute';
+    el.style.left = '0'; el.style.top = '0';
+    wrap.append(el);
+  };
+  layer('base', `char${a.charIndex + 1}`, 0);
+  layer('eyes', 'eyes', a.eyesColor);
+  layer('clothes', a.clothes, a.clothesColor);
+  layer('hair', a.hairStyle, a.hairColor);
+  for (const acc of a.acc) layer('acc', acc, 0);
+  return wrap;
+}
