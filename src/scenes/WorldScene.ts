@@ -120,6 +120,7 @@ export class WorldScene extends Phaser.Scene {
   private rain?: Phaser.GameObjects.Particles.ParticleEmitter;
   private waterRect?: Phaser.Geom.Rectangle;
   private pondEllipse?: Phaser.Geom.Ellipse;
+  private obstacles: Phaser.Geom.Rectangle[] = [];   // chân nhà/cây — không đi xuyên
   private fishingState: 'idle' | 'waiting' | 'bite' | 'reeling' = 'idle';
   private bobber?: Phaser.GameObjects.Image;
   private biteTimer?: Phaser.Time.TimerEvent;
@@ -138,7 +139,7 @@ export class WorldScene extends Phaser.Scene {
     this.animalSprites.clear(); this.insects = []; this.furnitureObjs = [];
     this.partyGuests = []; this.fishingState = 'idle'; this.busy = false;
     this.placingItem = undefined; this.lastHintKey = '';
-    this.chopTrees = []; this.mounds = [];
+    this.chopTrees = []; this.mounds = []; this.obstacles = [];
   }
 
   create() {
@@ -239,6 +240,17 @@ export class WorldScene extends Phaser.Scene {
   private onHouseChanged() { if (this.zone.id === 'house') this.scene.restart(); }
 
   // ================= vẽ nền =================
+  // chân vật thể (điểm neo giữa-dưới): chặn đi xuyên nhà/cây
+  private addFootprint(cx: number, baseY: number, w: number, h: number) {
+    this.obstacles.push(new Phaser.Geom.Rectangle(cx - w / 2, baseY - h, w, h));
+  }
+
+  private blockedAt(x: number, y: number): boolean {
+    if (this.inWater(x, y)) return true;
+    for (const r of this.obstacles) if (r.contains(x, y)) return true;
+    return false;
+  }
+
   // gần nước (kể cả mép) — dùng khi rải cây/hoa/ụ đất
   private nearWaterTile(tx: number, ty: number): boolean {
     for (const [dx, dy] of [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, 1]]) {
@@ -258,7 +270,7 @@ export class WorldScene extends Phaser.Scene {
       if (this.zone.id === 'farm') {
         const P = FARM_POND;
         this.add.image(P.x, P.y, 'lt_pond').setDisplaySize(P.w, P.h).setDepth(-80);
-        this.pondEllipse = new Phaser.Geom.Ellipse(P.x, P.y + 8, P.w * 0.8, P.h * 0.62);
+        this.pondEllipse = new Phaser.Geom.Ellipse(P.x, P.y + 4, P.w * 0.94, P.h * 0.84);
         this.add.text(P.x, P.y - P.h / 2 - 10, '🐟 Hồ cá', { fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(2);
       }
       return;
@@ -517,10 +529,14 @@ export class WorldScene extends Phaser.Scene {
   private drawZoneDecor() {
     for (const d of ZONE_DECOR[this.zone.id] ?? []) {
       if (!this.textures.exists(d.key)) continue;
-      this.add.image(d.x * T, d.y * T, d.key)
+      const img = this.add.image(d.x * T, d.y * T, d.key)
         .setOrigin(0.5, 1)
         .setScale(d.s ?? (d.key.startsWith('bld_') ? 1.1 : 1.2))
         .setDepth(d.y * T);
+      // chân nhà/cây chặn di chuyển (trừ decor nhỏ như hoa/đèn)
+      if (img.displayWidth >= 40) {
+        this.addFootprint(d.x * T, d.y * T, img.displayWidth * 0.68, Math.min(34, img.displayHeight * 0.24));
+      }
     }
   }
 
@@ -1118,6 +1134,7 @@ export class WorldScene extends Phaser.Scene {
     // 3 cây gỗ HD giữa nông trại (ngoài ruộng/chuồng/hồ)
     for (const [px2, py2] of [[485, 315], [610, 380], [500, 480]] as [number, number][]) {
       const obj = this.add.image(px2, py2, 'lt_tree').setOrigin(0.5, 1).setScale(0.72).setDepth(py2);
+      this.addFootprint(px2, py2, 46, 22);
       this.chopTrees.push({ obj, readyAt: 0 });
     }
   }
@@ -1382,9 +1399,9 @@ export class WorldScene extends Phaser.Scene {
       // giới hạn đi lại trên nền ảnh (tường nhà / mép đường trong ảnh)
       if (this.zone.walkTop) ny = Math.max(ny, this.zone.walkTop * T);
       if (this.zone.walkBottom) ny = Math.min(ny, this.zone.walkBottom * T);
-      if (!this.inWater(nx, ny)) { this.player.x = nx; this.player.y = ny; }
-      else if (!this.inWater(nx, this.player.y)) this.player.x = nx;
-      else if (!this.inWater(this.player.x, ny)) this.player.y = ny;
+      if (!this.blockedAt(nx, ny)) { this.player.x = nx; this.player.y = ny; }
+      else if (!this.blockedAt(nx, this.player.y)) this.player.x = nx;
+      else if (!this.blockedAt(this.player.x, ny)) this.player.y = ny;
       const dir: Dir = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 3 : 2) : (dy > 0 ? 0 : 1);
       this.player.setDir(dir);
       this.player.play('walk');
