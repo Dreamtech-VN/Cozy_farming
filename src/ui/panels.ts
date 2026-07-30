@@ -1213,7 +1213,8 @@ export function registerAllPanels() {
   };
 
   registerPanel('map', () => {
-    const { body, close } = openWindow('Bản đồ thế giới', { size: 'large' });
+    const { body, win, close } = openWindow('Bản đồ thế giới', { size: 'large' });
+    win.classList.add('win-map');            // ảnh bản đồ phủ kín popup
     const wrap = h('div', 'map-wrap');
     const img = document.createElement('img');
     img.src = 'assets/lttt/minimap.png';
