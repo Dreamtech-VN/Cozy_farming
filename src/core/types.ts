@@ -15,7 +15,7 @@ export interface Appearance {
 export interface ChibiLookState {
   gender: number;          // 0 nam, 1 nữ
   pant: number; shirt: number; hair: number; eyes: number;
-  hat: number; glasses: number; wing: number; hand?: number;
+  hat: number; glasses: number; wing: number; hand?: number; skin?: string;
 }
 
 export interface PlayerProfile {
@@ -120,6 +120,7 @@ export interface GameState {
   tools: { rod: number; can: number; hoe: number; net: number; basket: number }; // cấp độ dụng cụ
   farm: { unlocked: number; plots: Plot[]; hasDog?: boolean };  // hasDog: (cũ) chó giữ trại
   pets: string[];           // thú cưng đã nuôi
+  skins: string[];          // skin trọn bộ đã sở hữu
   activePet?: string;       // thú cưng đang dắt theo
   livestock: { barnLevel: number; animals: Animal[] };
   house: HouseState;

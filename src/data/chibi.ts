@@ -4,6 +4,7 @@
 // zOrder: 5 cánh | 10 quần | 20 áo | 30 thân | 40 mắt | 50 tóc | 60 mũ | 65 kính | 70 phụ kiện cầm
 
 import RAW from './chibi-parts.json';
+import { SKINS } from './skins';
 
 export interface ChibiPartDef {
   id: number;
@@ -70,6 +71,7 @@ export interface ChibiLook {
   glasses: number;         // 0 = không đeo
   wing: number;            // 0 = không có cánh
   hand?: number;           // 0/undefined = tay không (đồ cầm tay z=70)
+  skin?: string;           // id skin trọn bộ — mặc vào thay toàn bộ trang phục
 }
 
 export function defaultLook(gender: number): ChibiLook {
@@ -86,6 +88,23 @@ export function defaultLook(gender: number): ChibiLook {
 
 // thứ tự vẽ các lớp (dưới -> trên)
 export function lookLayers(l: ChibiLook): number[] {
+  // mặc skin -> dùng nguyên bộ của skin (giữ mắt + đồ cầm tay)
+  if (l.skin) {
+    const sk = SKINS[l.skin];
+    if (sk) {
+      const o: number[] = [];
+      if (sk.parts.wing) o.push(sk.parts.wing);
+      if (sk.parts.pant) o.push(sk.parts.pant);
+      if (sk.parts.shirt) o.push(sk.parts.shirt);
+      o.push(BODY_ID);
+      o.push(l.eyes || EYES_ID);
+      if (sk.parts.hair) o.push(sk.parts.hair);
+      if (sk.parts.hat) o.push(sk.parts.hat);
+      if (sk.parts.glasses) o.push(sk.parts.glasses);
+      if (l.hand) o.push(l.hand);
+      return o;
+    }
+  }
   const out: number[] = [];
   if (l.wing) out.push(l.wing);
   if (l.pant) out.push(l.pant);

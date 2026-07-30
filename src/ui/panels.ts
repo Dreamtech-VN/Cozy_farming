@@ -9,6 +9,7 @@ import { FISH_LIST, RODS, RARITY_COLOR, RARITY_NAME, FISHES } from '@/data/fish'
 import { INSECT_LIST, NETS, INSECTS } from '@/data/insects';
 import { chibiList, chibiPriceXu, chibiPriceRuby } from '@/data/chibi';
 import { handItemId } from '@/data/handitems';
+import { SKIN_LIST, SKINS, type SkinDef } from '@/data/skins';
 import { FURNITURE, FURNITURE_LIST, HOUSE_LEVELS, WALLPAPERS, FLOORS } from '@/data/furniture';
 import { SHOPS } from '@/data/shops';
 import { QUESTS, TITLES, ACHIEVEMENTS } from '@/data/quests';
@@ -297,9 +298,16 @@ export function registerAllPanels() {
   // ---- shop thời trang chibi (part Avatar) ----
   // [nhãn, z, icon UI]
   const CHIBI_TABS: [string, number, string][] = [
-    ['Tóc', 50, 'person'], ['Áo', 20, 'shirt'], ['Quần', 10, 'pants'], ['Mũ', 60, 'hat'],
-    ['Kính', 65, 'glasses'], ['Cánh', 5, 'wand'], ['Đồ cầm tay', 70, 'candy']
+    ['Skin', -1, 'star'], ['Tóc', 50, 'person'], ['Áo', 20, 'shirt'], ['Quần', 10, 'pants'],
+    ['Mũ', 60, 'hat'], ['Kính', 65, 'glasses'], ['Cánh', 5, 'wand'], ['Đồ cầm tay', 70, 'candy']
   ];
+
+  // ảnh nhân vật mặc trọn bộ skin (xem trước)
+  function skinFace(sk: SkinDef, size = 74): HTMLElement {
+    const base = S.player.chibi;
+    const look: any = { ...(base ?? { gender: sk.gender, eyes: 4 }), skin: sk.id, hand: 0 };
+    return charFace(look, size);
+  }
 
   registerPanel('fashionshop', () => {
     if (!atShopZone('fashionshop', 'Thời trang Cô Trang')) return;
@@ -310,6 +318,26 @@ export function registerAllPanels() {
       const z = CHIBI_TABS[tab][1];
       const g = S.player.chibi?.gender ?? 0;
       const grid = h('div', 'grid');
+      // ----- tab Skin: bán trọn bộ -----
+      if (z === -1) {
+        grid.className = 'grid grid-shop';
+        for (const sk of SKIN_LIST) {
+          if (sk.gender && g && sk.gender !== g) continue;
+          const owned = S.skins.includes(sk.id);
+          const cell = h('div', `cell cell-lg ${owned ? 'owned' : ''}`);
+          const art = h('div', 'cell-art');
+          art.append(skinFace(sk, 78));
+          const prEl = h('div', 'pr');
+          if (owned) prEl.textContent = 'Đã có';
+          else prEl.innerHTML = sk.priceRuby > 0 ? priceHtml(0, sk.priceRuby) : priceHtml(sk.priceXu);
+          cell.append(art, h('div', 'nm', sk.name), prEl);
+          cell.onclick = () => openPanel('skintry', { skin: sk, owned, onDone: render });
+          grid.append(cell);
+        }
+        body.append(grid);
+        return;
+      }
+
       const isHand = z === 70;
       grid.className = 'grid grid-shop';
       for (const p of chibiList(z, g)) {
@@ -331,6 +359,44 @@ export function registerAllPanels() {
     };
     tabs(CHIBI_TABS.map(c => c[0]), i => { tab = i; render(); }, CHIBI_TABS.map(c => c[2]));
     render();
+  });
+
+  // ---- xem thử SKIN trọn bộ ----
+  registerPanel('skintry', (data: { skin: SkinDef; owned: boolean; onDone?: () => void }) => {
+    const { skin: sk, owned, onDone } = data;
+    const { body, close } = openWindow(sk.name, { size: 'small' });
+    const look = S.player.chibi;
+
+    const wrap = h('div', 'tryon');
+    const before = h('div', 'tryon-char');
+    before.append(charFace(look ? { ...look, skin: undefined } as any : undefined, 150), h('div', 'tryon-cap', 'Hiện tại'));
+    const after = h('div', 'tryon-char');
+    after.append(skinFace(sk, 150), h('div', 'tryon-cap', 'Mặc skin'));
+    wrap.append(before, after);
+    body.append(wrap);
+
+    const info = h('div', 'tryon-info');
+    info.innerHTML = owned ? '<b>Bạn đã sở hữu skin này</b>'
+      : `Trọn bộ • Giá: ${sk.priceRuby > 0 ? priceHtml(0, sk.priceRuby) : priceHtml(sk.priceXu)}`;
+    body.append(info);
+
+    const bar = h('div');
+    bar.style.cssText = 'display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center';
+    const wear = () => {
+      if (!look) return;
+      look.skin = sk.id; save(); bus.emit(EV.APPEARANCE);
+      toast(`Đã mặc skin ${sk.name}!`, '');
+      onDone?.(); close();
+    };
+    if (owned) bar.append(btn('Mặc ngay', 'gold', wear));
+    else bar.append(btn('Mua & mặc', 'gold', () => {
+      const ok = sk.priceRuby > 0 ? spend(0, sk.priceRuby) : spend(sk.priceXu);
+      if (!ok) return;
+      S.skins.push(sk.id); addStat('fashion_bought'); sfx.coin();
+      wear();
+    }));
+    bar.append(btn('Đóng', '', close));
+    body.append(bar);
   });
 
   // ---- xem thử trang phục trước khi mua ----
@@ -817,9 +883,10 @@ export function registerAllPanels() {
     if (!look) return;
     const apply = () => { save(); bus.emit(EV.APPEARANCE); };
 
-    type SlotKey = 'pant' | 'shirt' | 'hair' | 'eyes' | 'hat' | 'glasses' | 'wing' | 'hand';
-    // [icon UI, nhãn, z, khoá, tuỳ chọn]
+    type SlotKey = 'pant' | 'shirt' | 'hair' | 'eyes' | 'hat' | 'glasses' | 'wing' | 'hand' | 'skin';
+    // [icon UI, nhãn, z, khoá, tuỳ chọn]   z = -1 -> ô Skin trọn bộ
     const SLOTS: [string, string, number, SlotKey, boolean][] = [
+      ['star', 'Skin', -1, 'skin', true],
       ['person', 'Tóc', 50, 'hair', false],
       ['smile', 'Mắt', 40, 'eyes', false],
       ['hat', 'Mũ', 60, 'hat', true],
@@ -843,7 +910,10 @@ export function registerAllPanels() {
       SLOTS.forEach(([ico, name, z, key], i) => {
         const cell = h('button', `wd-slot ${i === tab ? 'active' : ''}`);
         const cur = look[key];
-        if (cur) cell.append(z === 70 ? chibiPreview(cur, 32) : chibiHead(cur, 34, z));
+        if (z === -1) {
+          const sk = look.skin ? SKINS[look.skin] : undefined;
+          if (sk) cell.append(skinFace(sk, 34)); else cell.append(uiIcon(ico, 28));
+        } else if (cur) cell.append(z === 70 ? chibiPreview(cur as number, 32) : chibiHead(cur as number, 34, z));
         else cell.append(uiIcon(ico, 28));
         cell.append(h('span', 'wd-slot-name', name));
         cell.onclick = () => { tab = i; render(); };
@@ -868,18 +938,44 @@ export function registerAllPanels() {
       const [, , z, key, optional] = SLOTS[tab];
       const card = h('div', 'wd-card');
       const grid = h('div', 'wd-grid');
-      const owned = chibiList(z, look.gender).filter(p => S.chibiWardrobe.includes(p.id) || p.id === look[key]);
+
+      // ----- ô Skin: chọn trọn bộ đã sở hữu -----
+      if (z === -1) {
+        const off = h('button', `wd-item ${!look.skin ? 'active' : ''}`);
+        off.append(uiIcon('box', 34), h('div', 'nm', 'Không dùng'));
+        off.onclick = () => { look.skin = undefined; apply(); render(); };
+        grid.append(off);
+        let n = 1;
+        for (const sid of S.skins) {
+          const sk = SKINS[sid];
+          if (!sk) continue;
+          const cell2 = h('button', `wd-item ${look.skin === sid ? 'active' : ''}`);
+          cell2.append(skinFace(sk, 46), h('div', 'nm', sk.name));
+          cell2.onclick = () => { look.skin = sid; apply(); render(); };
+          grid.append(cell2); n++;
+        }
+        for (let i = n; i < Math.max(8, Math.ceil(n / 4) * 4); i++) grid.append(h('div', 'wd-item wd-empty'));
+        card.append(grid);
+        if (!S.skins.length) card.append(h('div', 'hint', 'Chưa có skin nào — mua trọn bộ ở tab Skin của Thời trang Cô Trang!'));
+        right.append(card);
+        wrap.append(left, right);
+        body.append(wrap);
+        return;
+      }
+      const pk = key as Exclude<SlotKey, 'skin'>;
+      const cur = (look as any)[pk] as number;
+      const owned = chibiList(z, look.gender).filter(p => S.chibiWardrobe.includes(p.id) || p.id === cur);
       let cells = 0;
       if (optional) {
-        const off = h('button', `wd-item ${look[key] === 0 ? 'active' : ''}`);
+        const off = h('button', `wd-item ${cur === 0 ? 'active' : ''}`);
         off.append(uiIcon('box', 34), h('div', 'nm', 'Không dùng'));
-        off.onclick = () => { look[key] = 0; apply(); render(); };
+        off.onclick = () => { (look as any)[pk] = 0; apply(); render(); };
         grid.append(off); cells++;
       }
       for (const p of owned) {
-        const cell = h('button', `wd-item ${look[key] === p.id ? 'active' : ''}`);
+        const cell = h('button', `wd-item ${cur === p.id ? 'active' : ''}`);
         cell.append(z <= 20 || z === 70 ? chibiPreview(p.id, 44) : chibiHead(p.id, 40, z), h('div', 'nm', p.name));
-        cell.onclick = () => { look[key] = p.id; apply(); render(); };
+        cell.onclick = () => { (look as any)[pk] = p.id; apply(); render(); };
         grid.append(cell); cells++;
       }
       // lấp ô trống cho đủ lưới (tối thiểu 12 ô)
