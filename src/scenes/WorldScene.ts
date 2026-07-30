@@ -29,40 +29,15 @@ const TRAFFIC_KEYS = ['veh_bus', 'veh_truck_orange', 'veh_camper_pink', 'veh_cam
 
 // Decor đặt sẵn theo khu (sprite thật từ asset pack) — toạ độ tile, origin đáy giữa
 const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number }[]> = {
-  town: [
-    { key: 'bld_arcade', x: 12, y: 8 },      // trên cổng Game Center
-    { key: 'bld_school', x: 24, y: 8 },      // trên cổng Trường học
-    { key: 'bld_supam', x: 36, y: 8 },       // trên cổng Khu mua sắm
-    { key: 'bld_pub', x: 6, y: 16 },
-    { key: 'bld_cafe', x: 15, y: 16 },
-    { key: 'bld_library', x: 26, y: 16 },
-    { key: 'bld_inn', x: 40, y: 17 },
-    { key: 'bld_shop', x: 8, y: 28 },
-    { key: 'bld_greenhouse', x: 24, y: 28 }, // cổng Nhà riêng ở cửa nhà này
-    { key: 'deco_lamp_black', x: 10, y: 20 }, { key: 'deco_lamp_black', x: 20, y: 20 },
-    { key: 'deco_lamp_black', x: 30, y: 20 }, { key: 'deco_lamp_black', x: 40, y: 20 },
-    { key: 'deco_bench', x: 14, y: 22 }, { key: 'deco_bench', x: 34, y: 22 },
-    { key: 'deco_flower_pot', x: 12, y: 22 }, { key: 'deco_flower_pot', x: 36, y: 22 }
-  ],
   farm: [
     { key: 'deco_scarecrow', x: 4, y: 12 },
     { key: 'deco_barrel', x: 28, y: 4 }, { key: 'deco_barrel', x: 28, y: 6 },
     { key: 'deco_flower_pot', x: 6, y: 8 }, { key: 'deco_flower_pot', x: 12, y: 8 }
   ],
-  park: [
-    { key: 'deco_bench', x: 10, y: 10 }, { key: 'deco_bench', x: 26, y: 16 }, { key: 'deco_bench', x: 16, y: 24 },
-    { key: 'deco_lamp_green', x: 14, y: 10 }, { key: 'deco_lamp_green', x: 30, y: 16 }, { key: 'deco_lamp_green', x: 20, y: 24 },
-    { key: 'deco_bush', x: 8, y: 14 }, { key: 'deco_bush', x: 22, y: 12 }, { key: 'deco_bush', x: 30, y: 22 },
-    { key: 'deco_flower_pot', x: 12, y: 10 }, { key: 'deco_flower_pot', x: 28, y: 16 }
-  ],
   beach: [
     { key: 'bld_fishshop', x: 10, y: 7 },    // tiệm câu ông Biển
     { key: 'bld_beachbar', x: 22, y: 12 },
     { key: 'deco_barrel', x: 15, y: 8 }, { key: 'deco_bench', x: 18, y: 16 }
-  ],
-  pond: [
-    { key: 'deco_bench', x: 12, y: 5 }, { key: 'deco_lamp_green', x: 24, y: 5 },
-    { key: 'deco_barrel', x: 6, y: 8 }
   ],
   // map cổng: cây + đèn + ghế dọc vỉa hè
   farm_gate: [
@@ -156,12 +131,15 @@ export class WorldScene extends Phaser.Scene {
 
     this.cameras.main.startFollow(this.player, true, 0.12, 0.12);
     const bw = this.physics.world.bounds;
+    const fitZoom = Math.max(this.scale.width / bw.width, this.scale.height / bw.height);
     if (this.zone.road) {
       // map cổng thấp: thu nhỏ vừa đủ để thấy cả cổng chào lẫn con đường
       this.cameras.main.setZoom(Math.min(2.4, this.scale.height / bw.height));
+    } else if (this.zone.bg) {
+      // nền ảnh HD kiểu Avatar: zoom nhẹ để thấy khung cảnh đúng tỉ lệ art
+      this.cameras.main.setZoom(Math.max(1.6, fitZoom));
     } else {
       // trong nhà: phóng to để căn phòng lấp đầy màn hình
-      const fitZoom = Math.max(this.scale.width / bw.width, this.scale.height / bw.height);
       this.cameras.main.setZoom(Math.max(2.4, fitZoom));
     }
 
@@ -207,6 +185,14 @@ export class WorldScene extends Phaser.Scene {
   // ================= vẽ nền =================
   private drawGround() {
     const { w, h, ground } = this.zone;
+
+    // nền ảnh (map Avatar từ repo Lttt)
+    if (this.zone.bg) {
+      this.add.rectangle(0, 0, w * T, h * T, 0x4e8a2a).setOrigin(0).setDepth(-101);
+      this.add.image(0, 0, `bg_${this.zone.bg}`).setOrigin(0).setDepth(-100);
+      return;
+    }
+
     this.add.tileSprite(0, 0, w * T, h * T, `g_${ground}`).setOrigin(0).setDepth(-100);
 
     if (this.zone.indoor && this.zone.id !== 'house') {
@@ -430,6 +416,10 @@ export class WorldScene extends Phaser.Scene {
   private inWater(x: number, y: number): boolean {
     if (this.waterRect?.contains(x, y)) return true;
     if (this.pondEllipse && Phaser.Geom.Ellipse.Contains(this.pondEllipse, x, y)) return true;
+    // vùng nước khai báo trên nền ảnh
+    for (const r of this.zone.water ?? []) {
+      if (x >= r.x * T && x < (r.x + r.w) * T && y >= r.y * T && y < (r.y + r.h) * T) return true;
+    }
     return false;
   }
 
@@ -1002,6 +992,9 @@ export class WorldScene extends Phaser.Scene {
       ny = Phaser.Math.Clamp(ny, bw.y + 8, bw.bottom - 8);
       // không đi xuống lòng đường (map cổng)
       if (this.zone.road) ny = Math.min(ny, this.roadTopY() - 10);
+      // giới hạn đi lại trên nền ảnh (tường nhà / mép đường trong ảnh)
+      if (this.zone.walkTop) ny = Math.max(ny, this.zone.walkTop * T);
+      if (this.zone.walkBottom) ny = Math.min(ny, this.zone.walkBottom * T);
       if (!this.inWater(nx, ny)) { this.player.x = nx; this.player.y = ny; }
       else if (!this.inWater(nx, this.player.y)) this.player.x = nx;
       else if (!this.inWater(this.player.x, ny)) this.player.y = ny;
