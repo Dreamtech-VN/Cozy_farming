@@ -153,9 +153,25 @@ export function registerAllPanels() {
   });
 
   // ================= Shop =================
+  // Shop nằm ở map nào thì phải đến map đó mới mở được (như đi chợ thật)
+  const SHOP_ZONE: Record<string, string> = {
+    shop_seed: 'farm', shop_general: 'town', shop_house: 'town',
+    shop_fishing: 'beach', shop_fashion: 'mall', shop_gift: 'mall',
+    fishingshop: 'beach', toolupgrade: 'town', fashionshop: 'mall',
+    houseshop: 'town', animalshop: 'farm'
+  };
+  function atShopZone(key: string, name: string): boolean {
+    const z = SHOP_ZONE[key];
+    if (!z || S.zone === z) return true;
+    toast(`${name} nằm ở ${ZONES[z]?.name ?? z} — bắt xe buýt tới đó nhé!`, '🚌');
+    sfx.error();
+    return false;
+  }
+
   registerPanel('shop', (data: { shopId: string }) => {
     const shop = SHOPS[data.shopId];
     if (!shop) return;
+    if (!atShopZone(shop.id, shop.name)) return;
     if (shop.special === 'fashion') return openPanel('fashionshop');
     if (shop.special === 'house') return openPanel('houseshop');
     if (shop.special === 'fishing') return openPanel('fishingshop');
@@ -208,6 +224,7 @@ export function registerAllPanels() {
 
   // ---- Tiệm câu: shop riêng — cần câu + mồi câu + vợt ----
   registerPanel('fishingshop', () => {
+    if (!atShopZone('fishingshop', 'Tiệm câu Ông Biển')) return;
     const { body, tabs } = openWindow('🎣 Tiệm câu Ông Biển');
     let tab = 0;
     const render = () => {
@@ -266,6 +283,7 @@ export function registerAllPanels() {
   ];
 
   registerPanel('fashionshop', () => {
+    if (!atShopZone('fashionshop', 'Thời trang Cô Trang')) return;
     const { body, tabs } = openWindow('👗 Thời trang Cô Trang', { size: 'large' });
     let tab = 0;
     const render = () => {
@@ -299,6 +317,7 @@ export function registerAllPanels() {
 
   // ---- shop nhà & nội thất ----
   registerPanel('houseshop', () => {
+    if (!atShopZone('houseshop', 'Nhà đất Chị Lan')) return;
     const { body, tabs } = openWindow('🏠 Nhà đất Chị Lan', { size: 'large' });
     let tab = 0;
     const render = () => {
@@ -365,6 +384,7 @@ export function registerAllPanels() {
 
   // ---- shop vật nuôi ----
   registerPanel('animalshop', () => {
+    if (!atShopZone('animalshop', 'Cửa hàng vật nuôi')) return;
     const { body } = openWindow('🐔 Mua vật nuôi', { size: 'small' });
     body.append(h('div', 'hint', `Chuồng cấp ${S.livestock.barnLevel}: ${S.livestock.animals.length}/${livestock.barnCapacity()} con`));
     for (const a of ANIMAL_LIST) {
@@ -488,6 +508,7 @@ export function registerAllPanels() {
 
   // ================= Nâng cấp nông cụ =================
   registerPanel('toolupgrade', () => {
+    if (!atShopZone('toolupgrade', 'Quầy nâng cấp nông cụ (Bách hóa)')) return;
     const { body } = openWindow('🛠️ Nâng cấp nông cụ');
     const render = () => {
       body.innerHTML = '';
