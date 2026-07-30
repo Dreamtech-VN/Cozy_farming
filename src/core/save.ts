@@ -1,0 +1,137 @@
+import type { GameState } from './types';
+import { bus, EV, toast } from './events';
+
+const KEY = 'cozy_farming_save_v1';
+const VERSION = 1;
+
+export function defaultState(): GameState {
+  return {
+    version: VERSION,
+    player: {
+      name: '',
+      gender: 'male',
+      appearance: {
+        charIndex: 0, hairStyle: 'bob', hairColor: 0, eyesColor: 0,
+        clothes: 'basic', clothesColor: 0, acc: []
+      },
+      level: 1, exp: 0,
+      title: 'title_newbie', titles: ['title_newbie'], badges: [],
+      createdAt: Date.now()
+    },
+    wallet: { coins: 500, rubies: 10 },
+    inventory: { seed_carrot: 5 },
+    wardrobe: ['hair:bob', 'clothes:basic'],
+    tools: { rod: 0, can: 1, hoe: 1, net: 0 },
+    farm: { unlocked: 6, plots: [] },
+    livestock: { barnLevel: 0, animals: [] },
+    house: { owned: false, level: 0, wallpaper: 0, floor: 0, furniture: [], aquarium: [] },
+    collections: { fish: [], insects: [], crops: [] },
+    quests: { active: {}, completed: [], claimed: [] },
+    achievements: [],
+    stats: {},
+    social: { friends: [], blocked: [], reported: [] },
+    mail: [],
+    daily: {
+      lastLoginDate: '', streak: 0, loginClaimed: false,
+      checkinDays: [], checkinMonth: '', wheelDate: '', wheelSpins: 0,
+      dailyQuestDate: '', dailyQuests: []
+    },
+    minigames: { caroWins: 0, xiangqiWins: 0, rpsWins: 0 },
+    settings: { music: true, sfx: true },
+    zone: 'farm',
+    clockOffset: 0
+  };
+}
+
+// Trạng thái toàn cục — mọi hệ thống đọc/ghi qua biến này
+export let S: GameState = defaultState();
+
+export function hasSave(): boolean {
+  return !!localStorage.getItem(KEY);
+}
+
+export function load(): boolean {
+  const raw = localStorage.getItem(KEY);
+  if (!raw) return false;
+  try {
+    const data = JSON.parse(raw) as GameState;
+    // chỗ migrate giữa các version save về sau
+    S = { ...defaultState(), ...data };
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+let saveTimer: number | undefined;
+export function save(immediate = false) {
+  if (immediate) {
+    localStorage.setItem(KEY, JSON.stringify(S));
+    return;
+  }
+  // gộp nhiều thay đổi liên tiếp thành 1 lần ghi
+  if (saveTimer) window.clearTimeout(saveTimer);
+  saveTimer = window.setTimeout(() => localStorage.setItem(KEY, JSON.stringify(S)), 400);
+}
+
+export function resetSave() {
+  localStorage.removeItem(KEY);
+  S = defaultState();
+}
+
+// ===== Helpers dùng chung =====
+
+export function addCoins(n: number) {
+  S.wallet.coins = Math.max(0, S.wallet.coins + n);
+  bus.emit(EV.WALLET); save();
+}
+export function addRubies(n: number) {
+  S.wallet.rubies = Math.max(0, S.wallet.rubies + n);
+  bus.emit(EV.WALLET); save();
+}
+export function canAfford(coins: number, rubies = 0): boolean {
+  return S.wallet.coins >= coins && S.wallet.rubies >= rubies;
+}
+export function spend(coins: number, rubies = 0): boolean {
+  if (!canAfford(coins, rubies)) { toast('Không đủ tiền!', '💰'); return false; }
+  S.wallet.coins -= coins; S.wallet.rubies -= rubies;
+  bus.emit(EV.WALLET); save();
+  return true;
+}
+
+export function addItem(itemId: string, qty = 1) {
+  S.inventory[itemId] = (S.inventory[itemId] ?? 0) + qty;
+  if (S.inventory[itemId] <= 0) delete S.inventory[itemId];
+  bus.emit(EV.INVENTORY); save();
+}
+export function itemCount(itemId: string): number {
+  return S.inventory[itemId] ?? 0;
+}
+export function removeItem(itemId: string, qty = 1): boolean {
+  if (itemCount(itemId) < qty) return false;
+  addItem(itemId, -qty);
+  return true;
+}
+
+// Cộng chỉ số thống kê -> hệ thống nhiệm vụ/thành tựu lắng nghe
+export function addStat(key: string, n = 1) {
+  S.stats[key] = (S.stats[key] ?? 0) + n;
+  bus.emit(EV.STAT, key); save();
+}
+
+export function addExp(n: number) {
+  S.player.exp += n;
+  const need = () => S.player.level * 100;
+  while (S.player.exp >= need()) {
+    S.player.exp -= need();
+    S.player.level++;
+    toast(`Lên cấp ${S.player.level}!`, '⭐');
+    addStat('level_up');
+  }
+  bus.emit(EV.STATE_CHANGED); save();
+}
+
+export function todayStr(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}

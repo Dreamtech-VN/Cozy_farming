@@ -1,0 +1,227 @@
+import type Phaser from 'phaser';
+import { bus, EV } from '@/core/events';
+import { S } from '@/core/save';
+import { h, root, fmt } from './kit';
+import { virtualInput, queueAction } from '@/core/input';
+import { TITLES } from '@/data/quests';
+import { gameHour, currentWeather, WEATHER_ICON, season } from '@/systems/time';
+import { initSocial, getChatLog } from '@/systems/social';
+import { initDaily } from '@/systems/meta';
+import { initQuests } from '@/systems/quests';
+import { sfx } from '@/core/audio';
+import { registerAllPanels } from './panels';
+import { registerMinigames } from './minigames';
+import type { ChatMessage } from '@/core/types';
+
+// ===== Quản lý UI DOM phủ trên canvas =====
+
+type PanelFn = (data?: any) => void;
+const panels: Record<string, PanelFn> = {};
+export function registerPanel(name: string, fn: PanelFn) { panels[name] = fn; }
+export function openPanel(name: string, data?: any) { panels[name]?.(data); }
+
+let gameRef: Phaser.Game;
+export function getGame(): Phaser.Game { return gameRef; }
+
+let hudBuilt = false;
+
+export function initUI(game: Phaser.Game) {
+  gameRef = game;
+  registerAllPanels();
+  registerMinigames();
+  // hook debug/automation (dùng cho test tự động)
+  (window as any).__cozy = { openPanel, bus };
+
+  // cảnh báo xoay ngang
+  const rot = h('div');
+  rot.id = 'rotate-hint';
+  rot.innerHTML = '<div class="phone">📱</div><div>Xoay ngang màn hình để chơi nhé!</div>';
+  document.body.append(rot);
+
+  // toast container
+  const toasts = h('div'); toasts.id = 'toasts'; root().append(toasts);
+  bus.on(EV.TOAST, ({ msg, icon }: { msg: string; icon: string }) => {
+    const t = h('div', 'toast');
+    t.innerHTML = `<span>${icon}</span><span></span>`;
+    (t.children[1] as HTMLElement).textContent = msg;
+    toasts.append(t);
+    setTimeout(() => t.remove(), 2800);
+    while (toasts.children.length > 4) toasts.firstChild?.remove();
+  });
+
+  bus.on(EV.OPEN_PANEL, (p: { panel: string; data?: any }) => openPanel(p.panel, p.data));
+  bus.on(EV.ZONE, () => { buildHud(); });
+
+  // khởi tạo hệ thống nền sau khi vào world lần đầu
+  bus.once(EV.ZONE, () => {
+    initQuests();
+    initDaily();
+    initSocial();
+    if (!S.daily.loginClaimed) setTimeout(() => openPanel('daily'), 600);
+  });
+}
+
+// ================= HUD =================
+function buildHud() {
+  if (hudBuilt) { refreshHud(); return; }
+  hudBuilt = true;
+
+  const top = h('div', 'hud-top');
+  // hồ sơ
+  const prof = h('div', 'hud-profile');
+  prof.innerHTML = `
+    <div class="hud-avatar">🧑‍🌾</div>
+    <div>
+      <div class="hud-name"></div>
+      <div class="hud-title"></div>
+      <div class="hud-lv"></div>
+    </div>`;
+  prof.onclick = () => { sfx.click(); openPanel('profile'); };
+  // tiền tệ + đồng hồ
+  const right = h('div', 'hud-currency');
+  right.innerHTML = `
+    <div class="pill">🪙 <span id="hud-coins">0</span> <span class="plus" id="coin-plus">+</span></div>
+    <div class="pill">💎 <span id="hud-rubies">0</span> <span class="plus" id="ruby-plus">+</span></div>
+    <div class="hud-clock" id="hud-clock"></div>`;
+  top.append(prof, right);
+  root().append(top);
+  (right.querySelector('#coin-plus') as HTMLElement).onclick = () => openPanel('topup');
+  (right.querySelector('#ruby-plus') as HTMLElement).onclick = () => openPanel('topup');
+
+  // cột nút phải
+  const col = h('div', 'hud-right');
+  const buttons: [string, string, string][] = [
+    ['🎒', 'inventory', 'Kho đồ'],
+    ['📜', 'quests', 'Nhiệm vụ'],
+    ['🗺️', 'map', 'Bản đồ'],
+    ['👥', 'social', 'Bạn bè'],
+    ['💬', 'chat', 'Chat'],
+    ['✉️', 'mail', 'Thư'],
+    ['🎁', 'daily', 'Điểm danh'],
+    ['🎡', 'wheel', 'Vòng quay'],
+    ['📖', 'collections', 'Sưu tập'],
+    ['🏆', 'ranking', 'Xếp hạng'],
+    ['😊', 'emotes', 'Biểu cảm'],
+    ['⚙️', 'settings', 'Cài đặt']
+  ];
+  for (const [icon, panel, title] of buttons) {
+    const b = h('button', 'hud-btn', icon);
+    b.title = title;
+    b.dataset.panel = panel;
+    b.innerHTML = `${icon}<span class="dot"></span>`;
+    b.onclick = () => { sfx.click(); openPanel(panel); };
+    col.append(b);
+  }
+  root().append(col);
+
+  // joystick
+  buildJoystick();
+
+  // nút hành động ngữ cảnh
+  const actions = h('div'); actions.id = 'actions'; root().append(actions);
+  bus.on(EV.ACTION_HINT, (acts: { icon: string; label: string; cb: () => void }[]) => {
+    actions.innerHTML = '';
+    acts.slice(0, 3).forEach((a, i) => {
+      const b = h('button', `act-btn ${i > 0 ? 'secondary' : ''}`);
+      b.innerHTML = i === 0 ? `<span>${a.icon}</span>` : `<span>${a.icon}</span><span class="act-label"></span>`;
+      if (i > 0) (b.querySelector('.act-label') as HTMLElement).textContent = a.label;
+      b.title = a.label;
+      b.onclick = () => { sfx.click(); a.cb(); };
+      actions.append(b);
+    });
+    if (acts.length) {
+      const lbl = h('div', 'act-label', acts[0].label);
+      lbl.style.cssText = 'color:#fff;text-shadow:0 1px 2px #000;text-align:center;margin-bottom:2px';
+      actions.append(lbl);
+    }
+  });
+
+  // chat mini
+  const cm = h('div'); cm.id = 'chat-mini'; root().append(cm);
+  const renderChat = (m: ChatMessage) => {
+    const el = h('div', `cm ch-${m.channel}`);
+    el.textContent = m.channel === 'private'
+      ? `[Riêng] ${m.from}: ${m.text}`
+      : `${m.from}: ${m.text}`;
+    cm.append(el);
+    while (cm.children.length > 5) cm.firstChild?.remove();
+  };
+  getChatLog().slice(-5).forEach(renderChat);
+  bus.on(EV.CHAT, renderChat);
+
+  // cập nhật số liệu
+  bus.on(EV.WALLET, refreshHud);
+  bus.on(EV.STATE_CHANGED, refreshHud);
+  bus.on(EV.QUEST, refreshHud);
+  bus.on(EV.TIME_TICK, refreshClock);
+  setInterval(refreshClock, 10_000);
+  refreshHud();
+  refreshClock();
+}
+
+function refreshHud() {
+  const q = (sel: string) => document.querySelector(sel) as HTMLElement | null;
+  q('#hud-coins') && (q('#hud-coins')!.textContent = fmt(S.wallet.coins));
+  q('#hud-rubies') && (q('#hud-rubies')!.textContent = fmt(S.wallet.rubies));
+  const nm = q('.hud-name'), tt = q('.hud-title'), lv = q('.hud-lv');
+  if (nm) nm.textContent = S.player.name || 'Nông dân';
+  if (tt) {
+    const t = TITLES[S.player.title];
+    tt.textContent = `「${t?.name ?? '...'}」`;
+    tt.style.color = t?.color ?? '#fff';
+  }
+  if (lv) lv.textContent = `Lv.${S.player.level} · ${S.player.exp}/${S.player.level * 100} EXP`;
+  // chấm đỏ: nhiệm vụ xong chưa nhận / thư chưa đọc / quà chưa nhận
+  const dot = (panel: string, on: boolean) =>
+    document.querySelector(`.hud-btn[data-panel="${panel}"]`)?.classList.toggle('notify', on);
+  dot('quests', S.quests.completed.some(id => !S.quests.claimed.includes(id)));
+  dot('mail', S.mail.some(m => !m.read));
+  dot('daily', !S.daily.loginClaimed || !S.daily.checkinDays.includes(new Date().getDate()));
+}
+
+function refreshClock() {
+  const el = document.getElementById('hud-clock');
+  if (!el) return;
+  const hh = Math.floor(gameHour());
+  const mm = Math.floor((gameHour() - hh) * 60);
+  const sz = season();
+  el.innerHTML = `${WEATHER_ICON[currentWeather()]} ${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}<br>${sz.icon} ${sz.name}`;
+}
+
+// ================= Joystick cảm ứng =================
+function buildJoystick() {
+  const js = h('div'); js.id = 'joystick';
+  const stick = h('div', 'stick');
+  js.append(stick);
+  root().append(js);
+
+  let active = false;
+  const center = () => {
+    const r = js.getBoundingClientRect();
+    return { x: r.left + r.width / 2, y: r.top + r.height / 2, rad: r.width / 2 };
+  };
+  const move = (cx: number, cy: number) => {
+    const c = center();
+    let dx = cx - c.x, dy = cy - c.y;
+    const d = Math.hypot(dx, dy);
+    const max = c.rad;
+    if (d > max) { dx = dx / d * max; dy = dy / d * max; }
+    stick.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+    virtualInput.x = dx / max;
+    virtualInput.y = dy / max;
+  };
+  const end = () => {
+    active = false;
+    stick.style.transform = 'translate(-50%, -50%)';
+    virtualInput.x = 0; virtualInput.y = 0;
+  };
+  js.addEventListener('pointerdown', e => { active = true; js.setPointerCapture(e.pointerId); move(e.clientX, e.clientY); });
+  js.addEventListener('pointermove', e => { if (active) move(e.clientX, e.clientY); });
+  js.addEventListener('pointerup', end);
+  js.addEventListener('pointercancel', end);
+
+  // phím SPACE/E = nút hành động chính
+  window.addEventListener('keydown', e => {
+    if (e.code === 'Space' || e.code === 'KeyE') queueAction();
+  });
+}
