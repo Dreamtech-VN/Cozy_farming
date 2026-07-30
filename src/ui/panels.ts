@@ -1,13 +1,13 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
 import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, uiIcon, priceHtml, priceBtn } from './kit';
-import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem } from '@/core/save';
+import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem, unequipTool } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
 import { CROPS, CROP_LIST } from '@/data/crops';
 import { ANIMAL_LIST } from '@/data/animals';
 import { FISH_LIST, RODS, RARITY_COLOR, RARITY_NAME, FISHES } from '@/data/fish';
 import { INSECT_LIST, NETS, INSECTS } from '@/data/insects';
-import { chibiList, chibiPriceXu, chibiPriceRuby } from '@/data/chibi';
+import { chibiList, chibiPriceXu, chibiPriceRuby, CHIBI_PARTS } from '@/data/chibi';
 import { handItemId } from '@/data/handitems';
 import { SKIN_LIST, SKINS, type SkinDef } from '@/data/skins';
 import { FURNITURE, FURNITURE_LIST, HOUSE_LEVELS, WALLPAPERS, FLOORS } from '@/data/furniture';
@@ -16,7 +16,7 @@ import { QUESTS, TITLES, ACHIEVEMENTS } from '@/data/quests';
 import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
 import { VEHICLES } from '@/data/vehicles';
-import { TOOL_LIST, TOOLS, toolUpgradeAt } from '@/data/tools';
+import { TOOL_LIST, TOOLS, toolUpgradeAt, toolIconSize } from '@/data/tools';
 import { PET_LIST, PETS, ownsPet, petBonus, petUrl } from '@/data/pets';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
@@ -588,12 +588,106 @@ export function registerAllPanels() {
   });
 
   // ================= Hồ sơ & Tủ đồ & Danh hiệu =================
-  registerPanel('profile', () => {
-    const { body, tabs } = openWindow('👤 Hồ sơ cá nhân');
-    let tab = 0;
-    const render = () => {
+  // ================= Nhân vật: hub có cột tab dọc bên phải (kiểu GunPow) =================
+  const CH_SECTIONS: [string, string][] = [
+    ['equip', 'Trang bị'], ['wardrobe', 'Tủ đồ'], ['title', 'Danh hiệu'],
+    ['pet', 'Thú cưng'], ['info', 'Thông tin']
+  ];
+
+  function openCharHub(sec = 'wardrobe') {
+    const { body } = openWindow('Nhân vật', { size: 'large' });
+    const draw = () => {
       body.innerHTML = '';
-      if (tab === 0) {
+      body.className = 'win-body ch-body';
+      const wrap = h('div', 'ch-wrap');
+      const main = h('div', 'ch-main');
+      const side = h('div', 'ch-side');
+      for (const [id, name] of CH_SECTIONS) {
+        const t = h('button', `ch-tab ${sec === id ? 'active' : ''}`, name);
+        t.onclick = () => { sfx.click(); sec = id; draw(); };
+        side.append(t);
+      }
+      wrap.append(main, side);
+      body.append(wrap);
+      openCharHubRefresh = draw;
+      if (sec === 'wardrobe') openWardrobe(main);
+      else if (sec === 'equip') renderEquip(main);
+      else if (sec === 'title') renderTitles(main, draw);
+      else if (sec === 'pet') renderPetList(main, draw);
+      else renderCharInfo(main);
+    };
+    draw();
+  }
+
+  // ---- Trang bị: nông cụ đã có, bấm để gắn xuống thanh nhanh ----
+  function renderEquip(box: HTMLElement) {
+    box.append(h('div', 'hint', 'Bấm "Trang bị" để đưa nông cụ xuống thanh ô dưới màn hình.'));
+    const grid = h('div', 'wd-grid');
+    let n = 0;
+    for (const t of TOOL_LIST) {
+      const lv = toolLevel(t.id);
+      const on = S.hotbar.includes(t.id);
+      const c = h('button', `wd-item ${on ? 'active' : ''}`);
+      const ic = h('div'); ic.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 42)));
+      c.append(ic, h('div', 'nm', t.name));
+      c.append(h('div', 'pr', lv <= 0 ? 'Chưa có' : on ? 'Đang gắn' : `Lv.${lv}`));
+      if (lv <= 0) c.classList.add('wd-lock');
+      c.onclick = () => {
+        sfx.click();
+        if (lv <= 0) { toast(`${t.name} chưa mua — ghé Bách hóa nhé!`, 'shop'); return; }
+        if (on) { unequipTool(S.hotbar.indexOf(t.id)); } else equipTool(t.id);
+        openCharHubRefresh();
+      };
+      grid.append(c); n++;
+    }
+    for (const key of S.hotbar.filter(k => k.startsWith('hand:'))) {
+      const pid = Number(key.slice(5));
+      const c = h('button', 'wd-item active');
+      c.append(chibiPreview(pid, 42), h('div', 'nm', CHIBI_PARTS[pid]?.name ?? 'Đồ cầm tay'), h('div', 'pr', 'Đang gắn'));
+      c.onclick = () => { unequipTool(S.hotbar.indexOf(key)); openCharHubRefresh(); };
+      grid.append(c); n++;
+    }
+    for (let i = n; i < Math.max(12, Math.ceil(n / 4) * 4); i++) grid.append(h('div', 'wd-item wd-empty'));
+    const card = h('div', 'wd-card'); card.append(grid); box.append(card);
+  }
+
+  function renderTitles(box: HTMLElement, redraw: () => void) {
+    for (const id of Object.keys(TITLES)) {
+      const owned = S.player.titles.includes(id);
+      const r = h('div', 'row');
+      r.style.opacity = owned ? '1' : '.5';
+      const ic = h('div'); ic.append(uiIcon('rank', 24));
+      const info = h('div', 'grow');
+      info.innerHTML = `<div class="t1" style="color:${TITLES[id].color}">${TITLES[id].name}</div>`;
+      r.append(ic, info);
+      if (owned) r.append(S.player.title === id
+        ? btn('Đang dùng', '', undefined)
+        : btn('Dùng', 'gold', () => { S.player.title = id; save(); bus.emit(EV.STATE_CHANGED); redraw(); }));
+      else r.append(h('div', 't2', 'Chưa mở'));
+      box.append(r);
+    }
+  }
+
+  function renderPetList(box: HTMLElement, redraw: () => void) {
+    if (!S.pets?.length) { box.append(h('div', 'hint', 'Chưa nuôi bé nào — ghé Tiệm thú cưng ở Thành phố nhé!')); return; }
+    for (const id of S.pets) {
+      const p = PETS[id]; if (!p) continue;
+      const active = S.activePet === id;
+      const r = h('div', `row ${active ? 'row-active' : ''}`);
+      const ic = h('div'); ic.append(spr(petUrl(id), 0, 0, p.frameW, p.frameH, 44));
+      const info = h('div', 'grow');
+      info.innerHTML = `<div class="t1">${p.name}${active ? ' <span class="tl-lv">đang theo</span>' : ''}</div><div class="t2">${p.perkFull}</div>`;
+      r.append(ic, info);
+      r.append(btn(active ? 'Cất về nhà' : 'Cho ra ngoài', active ? '' : 'gold', () => {
+        S.activePet = active ? undefined : id; save(true); bus.emit(EV.ZONE); redraw();
+      }));
+      box.append(r);
+    }
+  }
+
+  let openCharHubRefresh: () => void = () => {};
+
+  function renderCharInfo(body: HTMLElement) {
         const t = TITLES[S.player.title];
         const info = h('div');
         info.innerHTML = `
@@ -622,31 +716,10 @@ export function registerAllPanels() {
           statsBox.append(d);
         }
         body.append(statsBox);
-      } else if (tab === 1) {
-        openWardrobe(body);
-      } else {
-        // danh hiệu
-        for (const id of Object.keys(TITLES)) {
-          const owned = S.player.titles.includes(id);
-          const r = h('div', 'row');
-          r.style.opacity = owned ? '1' : '.5';
-          r.innerHTML = `<div style="font-size:20px">🏅</div><div class="grow"><div class="t1" style="color:${TITLES[id].color}">${TITLES[id].name}</div></div>`;
-          if (owned) r.append(S.player.title === id
-            ? btn('Đang dùng', '', undefined)
-            : btn('Dùng', 'gold', () => { S.player.title = id; save(); bus.emit(EV.STATE_CHANGED); render(); }));
-          else r.append(h('div', 't2', 'Chưa mở'));
-          body.append(r);
-        }
-      }
-    };
-    tabs(['📋 Thông tin', '👗 Tủ đồ', '🏅 Danh hiệu'], i => { tab = i; render(); });
-    render();
-  });
+  }
 
-  registerPanel('wardrobe', () => {
-    const { body } = openWindow('Tủ đồ', { size: 'large' });
-    openWardrobe(body);
-  });
+  registerPanel('profile', () => openCharHub('info'));
+  registerPanel('wardrobe', () => openCharHub('wardrobe'));
 
 
   // ================= Tiệm thú cưng =================
@@ -935,7 +1008,7 @@ export function registerAllPanels() {
       const tabBar = h('div', 'wd-tabs');
       SLOTS.forEach(([ic2, name2], i) => {
         const t = h('div', `tab ${i === tab ? 'active' : ''}`);
-        t.append(uiIcon(ic2, 16), h('span', '', name2));
+        t.append(uiIcon(ic2, 14), h('span', '', name2));
         t.onclick = () => { tab = i; render(); };
         tabBar.append(t);
       });
