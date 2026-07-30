@@ -744,8 +744,11 @@ export function registerAllPanels() {
   ];
 
   function openCharHub(sec = 'wardrobe') {
-    const { body } = openWindow('Nhân vật', { size: 'large' });
+    const { body, win } = openWindow('Tủ đồ', { size: 'large' });
+    const titleEl = win.querySelector('.win-head > div') as HTMLElement;
     const draw = () => {
+      // tiêu đề cửa sổ luôn là tên mục đang mở ở cột tab dọc
+      titleEl.textContent = CH_SECTIONS.find(c => c[0] === sec)?.[1] ?? 'Tủ đồ';
       body.innerHTML = '';
       body.className = 'win-body ch-body';
       const wrap = h('div', 'ch-wrap');
@@ -1139,7 +1142,7 @@ export function registerAllPanels() {
         }
         for (let i = n; i < WD_CAP; i++) grid.append(h('div', 'wd-item wd-empty'));
         card.append(grid);
-        card.append(h('div', 'hint', S.skins.length ? 'Mặc skin sẽ thay toàn bộ trang phục — bấm lại bộ đang mặc để cởi ra.' : 'Chưa có skin nào — mua trọn bộ ở tab Skin của Thời trang Cô Trang!'));
+        right.append(h('div', 'hint', S.skins.length ? 'Mặc skin sẽ thay toàn bộ trang phục — bấm lại bộ đang mặc để cởi ra.' : 'Chưa có skin nào — mua trọn bộ ở tab Skin của Thời trang Cô Trang!'));
         right.append(card);
         wrap.append(left, right);
         body.append(wrap);
@@ -1160,8 +1163,9 @@ export function registerAllPanels() {
       // lấp cho đủ sức chứa tủ đồ, ô trống để trống
       for (let i = cells; i < WD_CAP; i++) grid.append(h('div', 'wd-item wd-empty'));
       card.append(grid);
-      if (!owned.length) card.append(h('div', 'hint', 'Chưa có món nào — ghé shop thời trang ở Khu mua sắm!'));
-      else if (optional) card.append(h('div', 'hint', 'Bấm lại món đang mặc để cởi ra.'));
+      right.append(h('div', 'hint', !owned.length
+        ? 'Chưa có món nào — ghé shop thời trang ở Khu mua sắm!'
+        : optional ? 'Bấm lại món đang mặc để cởi ra.' : `Đang có ${owned.length} món`));
       right.append(card);
 
       wrap.append(left, right);
