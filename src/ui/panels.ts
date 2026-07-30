@@ -756,6 +756,7 @@ export function registerAllPanels() {
 
   function openCharHub(sec = 'wardrobe') {
     const { body, win } = openWindow('Tủ đồ', { size: 'large' });
+    win.classList.add('win-bag');            // dùng chung kiểu khung + tab dán ngoài
     const titleEl = win.querySelector('.win-head > div') as HTMLElement;
     const draw = () => {
       // tiêu đề cửa sổ luôn là tên mục đang mở ở cột tab dọc

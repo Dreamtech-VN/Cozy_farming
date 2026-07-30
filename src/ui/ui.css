@@ -423,7 +423,7 @@ input.ui-input, select.ui-input {
 .cc-chip-name { line-height: 1.1; }
 
 /* ===== Tủ đồ kiểu GunPow ===== */
-.wd-wrap { display: flex; gap: 12px; height: 356px; align-items: stretch; }
+.wd-wrap { display: flex; gap: 12px; flex: 1; min-height: 0; align-items: stretch; }
 .wd-left {
   flex: 0 0 44%; display: flex; align-items: center; justify-content: space-between; gap: 6px;
   background: rgba(0, 0, 0, .14); border-radius: 12px; padding: 12px 12px;
@@ -522,8 +522,8 @@ img.cur { width: 15px; height: 15px; object-fit: contain; vertical-align: -3px; 
 .cell img.ico-img, img.ico-img { width: 34px; height: 34px; object-fit: contain; image-rendering: pixelated; display: block; margin: 0 auto 2px; }
 
 /* ===== Nhân vật: cột tab dọc bên phải + tab thư mục ngang (kiểu GunPow) ===== */
-.ch-wrap { display: flex; gap: 10px; align-items: stretch; min-height: 340px; }
-.ch-main { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow-y: auto; max-height: 356px; }
+.ch-wrap { display: flex; gap: 10px; align-items: stretch; flex: 1; min-height: 0; }
+.ch-main { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow-y: auto; min-height: 0; }
 .ch-side { flex: 0 0 92px; display: flex; flex-direction: column; justify-content: flex-start; gap: 8px; }
 .ch-tab {
   font-family: inherit; font-size: 12.5px; font-weight: 800; color: #4a3520; cursor: pointer;
@@ -593,22 +593,33 @@ img.cur { width: 15px; height: 15px; object-fit: contain; vertical-align: -3px; 
 
 /* thân cửa sổ chứa túi đồ: co giãn để lưới cuộn được, chân khung luôn thấy */
 .win-body:has(> .bag-hub) { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
-/* túi đồ: full màn hình, card ô đồ ở giữa, tab dọc nằm ngoài card, tiêu đề nổi */
-.bag-hub { flex: 1; min-height: 0; }
+/* Túi đồ: khung gỗ, bảng tên gắn trên mép trên, tab dán ngoài mép phải */
+.bag-hub { flex: 1; min-height: 0; position: relative; }
 .win.win-bag {
-  width: 100vw; height: 100vh; max-height: 100vh; padding: 0;
-  border: none; border-image: none; background: rgba(18, 12, 4, .78); border-radius: 0;
+  width: min(940px, 84vw); height: 88vh; max-height: 88vh; overflow: visible;
+  margin-right: 84px;                     /* chừa chỗ cho cột tab dán ngoài */
 }
-.win.win-bag .win-body { padding: 52px 16px 16px; }
-.win.win-bag .win-head { position: absolute; left: 0; right: 0; top: 0; z-index: 3; padding: 0; pointer-events: none; }
+.win.win-bag .win-body { padding: 10px 14px 12px; overflow: visible; display: flex; flex-direction: column; min-height: 0; }
+/* bảng tên nằm đè lên viền trên */
+.win.win-bag .win-head { position: relative; padding: 4px 52px 2px; }
 .win.win-bag .win-head > div:first-child {
-  pointer-events: auto; margin-top: 12px; padding: 7px 22px; border-radius: 999px;
-  background: rgba(20, 12, 4, .62); color: #ffe9a8; font-size: 19px;
-  text-shadow: 0 2px 4px rgba(0,0,0,.6); backdrop-filter: blur(2px);
+  margin-top: -22px; padding: 7px 40px 9px; border-radius: 12px;
+  background: linear-gradient(#f6edd8, #e2c99a); border: 3px solid #b5836b;
+  box-shadow: 0 3px 0 #00000022, inset 0 2px 0 #fff8e8;
+  color: #5b3a1c; font-size: 18px;
 }
-.win.win-bag .win-close { pointer-events: auto; right: 14px; top: 26px; }
-/* chữ trên nền tối */
-.win.win-bag .bag-count { color: #ffe9a8; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+.win.win-bag .win-close { right: 6px; top: 8px; transform: none; }
+.win.win-bag .win-close:active { transform: scale(.88); }
+/* cột tab dán ra ngoài mép phải khung */
+.win.win-bag .ch-side, .win.win-bag .ch-wrap > .ch-side {
+  position: absolute; right: -84px; top: 6px; flex: none; width: 84px; z-index: 2;
+}
+.win.win-bag .ch-wrap { position: relative; }
+.win.win-bag .ch-tab {
+  border-radius: 0 12px 12px 0; margin-left: -10px; padding-left: 12px;
+  box-shadow: 3px 3px 0 #00000022, inset 0 -2px 0 #00000012;
+}
+.win.win-bag .ch-tab.active { transform: translateX(4px); }
 
 /* tiệm cắt tóc / viện thẩm mỹ: chỉ có nhân vật bên trái, không có ô trang bị */
 .wd-left.stylist-left { justify-content: center; }
