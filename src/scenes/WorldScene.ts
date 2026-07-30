@@ -1239,8 +1239,14 @@ export class WorldScene extends Phaser.Scene {
   // nhà thú cưng chỉ dựng khi đã nuôi ít nhất 1 bé
   private buildPetHouse() {
     if (!S.pets?.length) return;
-    const img = this.add.image(PETHOUSE_POS.x, PETHOUSE_POS.y + 60, 'lt_doghouse').setOrigin(0.5, 1).setDepth(PETHOUSE_POS.y + 60);
-    this.addFootprint(PETHOUSE_POS.x, PETHOUSE_POS.y + 60, img.displayWidth * 0.7, 22);
+    const baseY = PETHOUSE_POS.y + 60;
+    const img = this.add.image(PETHOUSE_POS.x, baseY, 'lt_doghouse').setOrigin(0.5, 1).setDepth(baseY);
+    this.addFootprint(PETHOUSE_POS.x, baseY, img.displayWidth * 0.72, 22);
+    // ổ nệm + bảng tên
+    this.add.image(PETHOUSE_POS.x + 82, baseY - 4, 'lt_petbed').setOrigin(0.5, 1).setDepth(baseY - 4);
+    this.add.text(PETHOUSE_POS.x, baseY - img.displayHeight - 6, '🐾 Nhà thú cưng', {
+      fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 }
+    }).setOrigin(0.5).setDepth(3000);
   }
 
   private spawnPet() {
