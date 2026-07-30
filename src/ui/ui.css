@@ -390,3 +390,52 @@ input.ui-input, select.ui-input {
 .sv-cell .sv-name { flex: 1; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sv-cell .sv-tag { font-size: 11px; font-weight: 700; }
 .lg-ok { text-align: center; color: #69db7c; font-size: 13px; font-weight: 700; }
+
+/* ===== Chip tạo nhân vật: icon + tên thẳng hàng ===== */
+.chip.cc-chip { display: inline-flex; align-items: center; gap: 7px; min-height: 42px; padding-top: 4px; padding-bottom: 6px; }
+.chip.cc-chip .spr { flex: none; }
+.cc-chip-name { line-height: 1.1; }
+
+/* ===== Tủ đồ kiểu GunPow ===== */
+.wd-wrap { display: flex; gap: 12px; min-height: 330px; }
+.wd-left {
+  flex: 0 0 46%; display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  background: rgba(0, 0, 0, .14); border-radius: 12px; padding: 10px 8px;
+}
+.wd-slot-col { display: flex; flex-direction: column; gap: 8px; }
+.wd-slot {
+  width: 62px; border: 2px solid #b5836b; border-radius: 10px; background: #f6edd8;
+  display: flex; flex-direction: column; align-items: center; gap: 1px; cursor: pointer;
+  padding: 4px 2px 3px; font-family: inherit;
+}
+.wd-slot.active { border-color: #e8890c; box-shadow: 0 0 0 2px #ffd43b66; background: #fff3d6; }
+.wd-slot-ico { font-size: 20px; line-height: 30px; }
+.wd-slot-name { font-size: 10px; font-weight: 800; color: #7a5b3a; }
+.wd-char { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.wd-char-name { font-size: 13px; font-weight: 800; color: #4a3520; background: #f6edd8cc; padding: 2px 10px; border-radius: 8px; }
+.wd-right { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.wd-right-title { font-weight: 800; color: #4a3520; margin-bottom: 6px; }
+.wd-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); gap: 7px;
+  overflow-y: auto; max-height: 300px; align-content: start;
+}
+.wd-item {
+  border: 2px solid #b5836b; border-radius: 10px; background: #f6edd8; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 7px 3px 5px;
+  font-family: inherit;
+}
+.wd-item.active { border-color: #e8890c; background: #fff3d6; box-shadow: 0 0 0 2px #ffd43b66; }
+.wd-item .nm { font-size: 10.5px; font-weight: 700; color: #4a3520; text-align: center; line-height: 1.15; }
+.wd-item-ico { font-size: 22px; line-height: 40px; }
+
+/* ===== Thanh nông cụ cạnh joystick ===== */
+#hotbar {
+  position: absolute; left: 160px; bottom: 26px; display: flex; gap: 7px;
+}
+.hb-slot {
+  width: 46px; height: 46px; border: 2px solid rgba(246, 237, 216, .65); border-radius: 10px;
+  background: rgba(20, 32, 12, .5); cursor: pointer; display: flex; align-items: center; justify-content: center;
+  padding: 0; position: relative;
+}
+.hb-slot:active { transform: scale(.92); }
+.hb-slot.empty { color: #f6edd8aa; font-size: 20px; font-weight: 800; }

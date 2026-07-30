@@ -309,7 +309,7 @@ export function registerMinigames() {
 
 // ===== Form tạo nhân vật chibi =====
 import { bus, EV } from '@/core/events';
-import { chibiPreview } from './kit';
+import { chibiPreview, chibiHead } from './kit';
 import { defaultLook, simplestList } from '@/data/chibi';
 
 function buildCharCreate(body: HTMLElement, done: () => void) {
@@ -384,9 +384,9 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
         chips.append(off);
       }
       for (const p of opts) {
-        const c = h('div', `chip ${look[slot] === p.id ? 'active' : ''}`);
-        c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
-        c.append(chibiPreview(p.id, 34), h('span', '', p.name));
+        const c = h('div', `chip cc-chip ${look[slot] === p.id ? 'active' : ''}`);
+        // tóc/mắt/mũ/kính xem cận đầu cho rõ, áo/quần xem cả thân
+        c.append(z >= 40 ? chibiHead(p.id, 32, z) : chibiPreview(p.id, 38), h('span', 'cc-chip-name', p.name));
         c.onclick = () => { look[slot] = p.id; emit(); rebuild(); };
         chips.append(c);
       }

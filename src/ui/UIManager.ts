@@ -6,6 +6,7 @@ import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
 import { gameHour, currentWeather, WEATHER_ICON, season } from '@/systems/time';
 import { initSocial, getChatLog } from '@/systems/social';
+import { TOOLS } from '@/data/tools';
 import { initDaily } from '@/systems/meta';
 import { initQuests } from '@/systems/quests';
 import { sfx } from '@/core/audio';
@@ -52,7 +53,7 @@ export function initUI(game: Phaser.Game) {
   });
 
   bus.on(EV.OPEN_PANEL, (p: { panel: string; data?: any }) => openPanel(p.panel, p.data));
-  bus.on(EV.ZONE, () => { buildHud(); });
+  bus.on(EV.ZONE, () => { buildHud(); refreshHotbar(); });
 
   // khởi tạo hệ thống nền sau khi vào world lần đầu
   bus.once(EV.ZONE, () => {
@@ -269,5 +270,34 @@ function buildJoystick() {
   // phím SPACE/E = nút hành động chính
   window.addEventListener('keydown', e => {
     if (e.code === 'Space' || e.code === 'KeyE') queueAction();
+    const m = /^Digit([1-5])$/.exec(e.code);
+    if (m) { const tid = S.hotbar[+m[1] - 1]; if (tid) bus.emit('hotbar:use', tid); }
   });
+}
+
+// ================= Thanh nông cụ (cạnh joystick) =================
+export function refreshHotbar() {
+  let bar = document.getElementById('hotbar');
+  if (!bar) { bar = h('div'); bar.id = 'hotbar'; root().append(bar); }
+  bar.innerHTML = '';
+  S.hotbar.forEach((tid, i) => {
+    const slot = h('button', 'hb-slot');
+    const t = TOOLS[tid];
+    if (t) {
+      slot.append(spr(t.url, 0, 0, 16, 16, 30));
+      slot.title = t.name;
+      slot.onclick = () => { sfx.click(); bus.emit('hotbar:use', tid); };
+    } else {
+      slot.classList.add('empty');
+      slot.textContent = '+';
+      slot.onclick = () => { sfx.click(); openPanel('hotbaredit', { slot: i }); };
+    }
+    // giữ lâu / chuột phải = đổi nông cụ trong ô
+    let hold = 0;
+    slot.onpointerdown = () => { hold = window.setTimeout(() => openPanel('hotbaredit', { slot: i }), 550); };
+    slot.onpointerup = slot.onpointerleave = () => clearTimeout(hold);
+    slot.oncontextmenu = e => { e.preventDefault(); openPanel('hotbaredit', { slot: i }); };
+    bar!.append(slot);
+  });
+  // phím 1..5 dùng nhanh
 }

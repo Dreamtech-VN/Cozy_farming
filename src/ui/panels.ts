@@ -1,5 +1,5 @@
-import { registerPanel, openPanel, getGame } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, charFace } from './kit';
+import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
+import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace } from './kit';
 import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
@@ -14,6 +14,7 @@ import { QUESTS, TITLES, ACHIEVEMENTS } from '@/data/quests';
 import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
 import { VEHICLES } from '@/data/vehicles';
+import { TOOL_LIST } from '@/data/tools';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import { buyRod, addToAquarium } from '@/systems/fishing';
@@ -442,51 +443,102 @@ export function registerAllPanels() {
   });
 
   registerPanel('wardrobe', () => {
-    const { body } = openWindow('👗 Tủ đồ');
+    const { body } = openWindow('👗 Tủ đồ', { size: 'large' });
     openWardrobe(body);
   });
 
+  // Tủ đồ kiểu GunPow: trái là nhân vật giữa các ô trang bị, phải là lưới đồ chia tab
   function openWardrobe(body: HTMLElement) {
     const look = S.player.chibi;
     if (!look) return;
     const apply = () => { save(); bus.emit(EV.APPEARANCE); };
-    // xem trước nhân vật hiện tại
-    const prevWrap = h('div');
-    prevWrap.style.cssText = 'display:flex;justify-content:center;margin-bottom:8px';
-    prevWrap.append(charFace(look, 96));
-    body.append(prevWrap);
 
-    const SLOTS: [string, number, 'pant' | 'shirt' | 'hair' | 'hat' | 'glasses' | 'wing', boolean][] = [
-      ['💇 Tóc', 50, 'hair', false],
-      ['👕 Áo', 20, 'shirt', false],
-      ['👖 Quần', 10, 'pant', false],
-      ['🎩 Mũ', 60, 'hat', true],
-      ['👓 Kính', 65, 'glasses', true],
-      ['🪽 Cánh', 5, 'wing', true]
+    type SlotKey = 'pant' | 'shirt' | 'hair' | 'eyes' | 'hat' | 'glasses' | 'wing';
+    const SLOTS: [string, string, number, SlotKey, boolean][] = [
+      ['💇', 'Tóc', 50, 'hair', false],
+      ['👁️', 'Mắt', 40, 'eyes', false],
+      ['🎩', 'Mũ', 60, 'hat', true],
+      ['👓', 'Kính', 65, 'glasses', true],
+      ['👕', 'Áo', 20, 'shirt', false],
+      ['👖', 'Quần', 10, 'pant', false],
+      ['🪽', 'Cánh', 5, 'wing', true]
     ];
-    for (const [label, z, slot, optional] of SLOTS) {
-      const owned = chibiList(z).filter(p => S.chibiWardrobe.includes(p.id));
-      if (!owned.length && optional) continue;
-      const d = h('div', 'cc-row');
-      d.append(h('div', 'lbl', `${label} (đã mua)`));
-      const chips = h('div', 'chips');
+    let tab = 0;
+
+    const render = () => {
+      body.innerHTML = '';
+      body.classList.add('wd-body');
+      const wrap = h('div', 'wd-wrap');
+
+      // ----- trái: nhân vật + ô trang bị xung quanh -----
+      const left = h('div', 'wd-left');
+      const colL = h('div', 'wd-slot-col');
+      const colR = h('div', 'wd-slot-col');
+      SLOTS.forEach(([ico, name, z, key], i) => {
+        const cell = h('button', `wd-slot ${i === tab ? 'active' : ''}`);
+        const cur = look[key];
+        if (cur) cell.append(chibiHead(cur, 34, z));
+        else cell.append(h('span', 'wd-slot-ico', ico));
+        cell.append(h('span', 'wd-slot-name', name));
+        cell.onclick = () => { tab = i; render(); };
+        (i < 4 ? colL : colR).append(cell);
+      });
+      const mid = h('div', 'wd-char');
+      mid.append(charFace(look, 190));
+      mid.append(h('div', 'wd-char-name', S.player.name));
+      left.append(colL, mid, colR);
+
+      // ----- phải: lưới đồ đang có, theo tab -----
+      const right = h('div', 'wd-right');
+      const [, tname, z, key, optional] = SLOTS[tab];
+      right.append(h('div', 'wd-right-title', `${tname} — đồ đang có`));
+      const grid = h('div', 'wd-grid');
+      const owned = chibiList(z, look.gender).filter(p => S.chibiWardrobe.includes(p.id) || p.id === look[key]);
       if (optional) {
-        const off = h('div', `chip ${look[slot] === 0 ? 'active' : ''}`, 'Không dùng');
-        off.onclick = () => { look[slot] = 0; apply(); body.innerHTML = ''; openWardrobe(body); };
-        chips.append(off);
+        const off = h('button', `wd-item ${look[key] === 0 ? 'active' : ''}`);
+        off.append(h('div', 'wd-item-ico', '🚫'), h('div', 'nm', 'Không dùng'));
+        off.onclick = () => { look[key] = 0; apply(); render(); };
+        grid.append(off);
       }
       for (const p of owned) {
-        const c = h('div', `chip ${look[slot] === p.id ? 'active' : ''}`);
-        c.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
-        c.append(chibiPreview(p.id, 30), h('span', '', p.name));
-        c.onclick = () => { look[slot] = p.id; apply(); body.innerHTML = ''; openWardrobe(body); };
-        chips.append(c);
+        const cell = h('button', `wd-item ${look[key] === p.id ? 'active' : ''}`);
+        cell.append(z <= 20 ? chibiPreview(p.id, 44) : chibiHead(p.id, 40, z), h('div', 'nm', p.name));
+        cell.onclick = () => { look[key] = p.id; apply(); render(); };
+        grid.append(cell);
       }
-      if (!owned.length) chips.append(h('div', 'hint', 'Chưa có — ghé shop thời trang ở Khu mua sắm!'));
-      d.append(chips);
-      body.append(d);
-    }
+      if (!owned.length) grid.append(h('div', 'hint', 'Chưa có món nào — ghé shop thời trang ở Khu mua sắm!'));
+      right.append(grid);
+
+      wrap.append(left, right);
+      body.append(wrap);
+    };
+    render();
   }
+
+  // Gán nông cụ vào ô trên thanh nhanh
+  registerPanel('hotbaredit', (data?: { slot?: number }) => {
+    const slotIdx = data?.slot ?? 0;
+    const { body, close } = openWindow('🛠️ Trang bị nông cụ', { size: 'small' });
+    body.append(h('div', 'hint', `Chọn nông cụ cho ô số ${slotIdx + 1}:`));
+    const grid = h('div', 'wd-grid');
+    for (const t of TOOL_LIST) {
+      const cell = h('button', `wd-item ${S.hotbar[slotIdx] === t.id ? 'active' : ''}`);
+      cell.append(spr(t.url, 0, 0, 16, 16, 36), h('div', 'nm', t.name));
+      cell.onclick = () => {
+        // 1 nông cụ chỉ nằm 1 ô: nếu đang ở ô khác thì hoán đổi
+        const old = S.hotbar.indexOf(t.id);
+        if (old >= 0 && old !== slotIdx) S.hotbar[old] = S.hotbar[slotIdx];
+        S.hotbar[slotIdx] = t.id;
+        save(); refreshHotbar(); close();
+      };
+      grid.append(cell);
+    }
+    const clear = h('button', 'wd-item');
+    clear.append(h('div', 'wd-item-ico', '🚫'), h('div', 'nm', 'Bỏ trống'));
+    clear.onclick = () => { S.hotbar[slotIdx] = ''; save(); refreshHotbar(); close(); };
+    grid.append(clear);
+    body.append(grid);
+  });
 
   function colorSwatches(n: number, active: number, onPick: (i: number) => void, names?: string[]): HTMLElement {
     const HAIR_HEX = ['#2b2b2b', '#e6c25a', '#8a5a33', '#c49a6c', '#b3592e', '#2e8b6f', '#4caf50', '#9aa5b1', '#c6a3e0', '#2c3e70', '#f7a3c2', '#8e44ad', '#c0392b', '#39c2c9'];

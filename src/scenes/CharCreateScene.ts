@@ -3,6 +3,7 @@ import { S, save } from '@/core/save';
 import { bus, EV } from '@/core/events';
 import { ChibiSprite } from '@/gfx/ChibiSprite';
 import { defaultLook, lookLayers } from '@/data/chibi';
+import { RES } from '@/core/res';
 
 // Scene xem trước nhân vật chibi khi tạo — điều khiển bằng panel DOM 'charcreate'
 export class CharCreateScene extends Phaser.Scene {
@@ -13,19 +14,28 @@ export class CharCreateScene extends Phaser.Scene {
 
   create() {
     const W = this.scale.width, H = this.scale.height;
-    // nền dùng ảnh title (đã tải ở Boot), phủ tối nhẹ cho nổi panel
-    if (this.textures.exists('title_bg')) {
-      const bg = this.add.image(W / 2, H / 2, 'title_bg');
-      bg.setScale(Math.max(W / bg.width, H / bg.height) * 1.02);
-      this.add.rectangle(0, 0, W, H, 0x0a1220, 0.4).setOrigin(0);
+    // nền hồ câu (bg 15) — khác màn đăng nhập, phủ tối nhẹ cho nổi panel
+    const bgKey = this.textures.exists('bg_15') ? 'bg_15' : 'title_bg';
+    if (this.textures.exists(bgKey)) {
+      const bg = this.add.image(W / 2, H / 2, bgKey);
+      bg.setScale(Math.max(W / bg.width, H / bg.height) * 1.04);
+      this.tweens.add({ targets: bg, scale: bg.scale * 1.05, duration: 10000, yoyo: true, repeat: -1, ease: 'sine.inout' });
+      this.add.rectangle(0, 0, W, H, 0x0a1220, 0.42).setOrigin(0);
     } else {
       this.add.rectangle(0, 0, W, H, 0x2d4a1e).setOrigin(0);
     }
-    this.add.tileSprite(W * 0.3, H / 2 + 90, 320, 90, 'g_wood').setAlpha(0.9);
+    // bục đứng cho nhân vật xem trước
+    const px = W * 0.3, py = H / 2 + 96 * RES;
+    const g = this.add.graphics();
+    g.fillStyle(0x000000, 0.35); g.fillEllipse(px, py + 8 * RES, 190 * RES, 46 * RES);
+    g.fillStyle(0xffd43b, 0.25); g.fillEllipse(px, py + 6 * RES, 160 * RES, 36 * RES);
+    this.add.text(px, py + 40 * RES, '✨ Nhân vật của bạn ✨', {
+      fontFamily: 'sans-serif', fontSize: `${15 * RES}px`, color: '#ffe9a3', fontStyle: 'bold'
+    }).setOrigin(0.5).setShadow(0, 2, '#000', 4);
     this.cameras.main.fadeIn(300, 10, 18, 32);
     if (!S.player.chibi) S.player.chibi = defaultLook(1);
-    this.preview = new ChibiSprite(this, W * 0.3, H / 2 + 90, S.player.chibi);
-    this.preview.setScale(2.4);
+    this.preview = new ChibiSprite(this, px, py - 6 * RES, S.player.chibi);
+    this.preview.setScale(2.4 * RES);
     this.preview.play('walk');
 
     bus.on(EV.APPEARANCE, this.refresh, this);

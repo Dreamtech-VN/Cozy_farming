@@ -111,6 +111,14 @@ export function chibiPreview(partId: number, size = 48): HTMLElement {
   return spr(`assets/chibi/${partId}.png`, 0, 0, 64, 96, Math.round(size * 64 / 96));
 }
 
+// Xem trước cận đầu (tóc/mắt/mũ/kính nhìn rõ hơn full thân); z để chọn vùng cắt
+export function chibiHead(partId: number, size = 40, z?: number): HTMLElement {
+  // theo bbox thực tế của part: mắt ~y46-56, tóc ~y18-66 -> cắt trúng vùng hiển thị
+  if (z === 40 || z === 65) return spr(`assets/chibi/${partId}.png`, 18, 40, 30, 22, size);
+  if (z === 50 || z === 60) return spr(`assets/chibi/${partId}.png`, 8, 16, 48, 50, size);
+  return spr(`assets/chibi/${partId}.png`, 10, 18, 44, 54, size);
+}
+
 // Chân dung chibi ghép lớp (avatar HUD, hồ sơ)
 export function charFace(look: import('@/data/chibi').ChibiLook | undefined, size = 40): HTMLElement {
   const wrap = h('div');

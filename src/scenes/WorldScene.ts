@@ -199,12 +199,14 @@ export class WorldScene extends Phaser.Scene {
     bus.on('world:place', this.startPlacing, this);
     bus.on('world:emote', this.onEmote, this);
     bus.on('world:say', this.onSay, this);
+    bus.on('hotbar:use', this.useTool, this);
     this.events.on('shutdown', () => {
       bus.off(EV.APPEARANCE, this.onAppearance, this);
       bus.off(EV.HOUSE, this.onHouseChanged, this);
       bus.off('world:place', this.startPlacing, this);
       bus.off('world:emote', this.onEmote, this);
       bus.off('world:say', this.onSay, this);
+      bus.off('hotbar:use', this.useTool, this);
     });
 
     initTimeOnce();
@@ -1046,6 +1048,45 @@ export class WorldScene extends Phaser.Scene {
     const w = (big ? 14 : 10) + t.width;
     img.x -= w / 2; t.x -= w / 2;
     this.tweens.add({ targets: c, y: y - (big ? 44 : 30), alpha: 0, duration: 950, ease: 'cubic.out', onComplete: () => c.destroy() });
+  }
+
+  // dùng nông cụ gắn trên thanh nhanh (hotbar): tác động lên mục tiêu gần nhất
+  private useTool(id: string) {
+    if (this.busy) return;
+    const pi = this.zone.features.includes('farm') ? this.nearestPlot() : -1;
+    const p = pi >= 0 ? S.farm.plots[pi] : undefined;
+    switch (id) {
+      case 'hoe':
+        if (p?.state === 'empty') this.doTill(pi);
+        else toast('Đứng cạnh ô đất trống rồi dùng cuốc nhé.', '⛏️');
+        break;
+      case 'can':
+        if (p?.state === 'planted' && !p.watered) this.doWater(pi);
+        else toast('Không có cây nào cần tưới ở gần đây.', '💧');
+        break;
+      case 'basket':
+        if (p && p.state === 'planted' && farming.isRipe(p)) this.doHarvest(pi);
+        else toast('Chưa có cây chín gần đây để thu hoạch.', '🧺');
+        break;
+      case 'rod':
+        if (this.fishingState === 'bite') this.reelFish();
+        else if (this.fishingState === 'waiting') this.stopFishing();
+        else if (this.nearWater()) this.startFishing();
+        else toast('Lại gần mép nước rồi thả câu nhé.', '🎣');
+        break;
+      case 'net': {
+        let best: InsectSprite | undefined; let bd = 1e9;
+        for (const ins of this.insects) {
+          const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, ins.obj.x, ins.obj.y);
+          if (d < bd) { bd = d; best = ins; }
+        }
+        if (best && bd <= 64) this.tryCatchInsect(best);
+        else toast('Không có côn trùng nào trong tầm vợt.', '🥅');
+        break;
+      }
+      default:
+        toast('Nông cụ này sẽ dùng được trong bản cập nhật tới!', '🛠️');
+    }
   }
 
   private plotCenter(i: number): { x: number; y: number } {
