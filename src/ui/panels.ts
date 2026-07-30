@@ -378,7 +378,7 @@ export function registerAllPanels() {
   // [nhãn, z, icon UI]
   const CHIBI_TABS: [string, number, string][] = [
     ['Skin', -1, 'star'], ['Tóc', 50, 'person'], ['Áo', 20, 'shirt'], ['Quần', 10, 'pants'],
-    ['Mũ', 60, 'hat'], ['Kính', 65, 'glasses'], ['Đồ cầm tay', 70, 'candy']
+    ['Mũ', 60, 'hat'], ['Kính', 65, 'glasses'], ['Cầm tay', 70, 'candy']
   ];
 
   // ảnh nhân vật mặc trọn bộ skin (xem trước)
@@ -662,8 +662,7 @@ export function registerAllPanels() {
   // ================= Hồ sơ & Tủ đồ & Danh hiệu =================
   // ================= Nhân vật: hub có cột tab dọc bên phải (kiểu GunPow) =================
   const CH_SECTIONS: [string, string][] = [
-    ['wardrobe', 'Tủ đồ'], ['skin', 'Skin'], ['title', 'Danh hiệu'],
-    ['pet', 'Thú cưng'], ['info', 'Thông tin']
+    ['wardrobe', 'Tủ đồ'], ['skin', 'Skin'], ['title', 'Danh hiệu']
   ];
 
   function openCharHub(sec = 'wardrobe') {
@@ -684,9 +683,7 @@ export function registerAllPanels() {
       openCharHubRefresh = draw;
       if (sec === 'wardrobe') openWardrobe(main);
       else if (sec === 'skin') openWardrobe(main, 'skin');
-      else if (sec === 'title') renderTitles(main, draw);
-      else if (sec === 'pet') renderPetList(main, draw);
-      else renderCharInfo(main);
+      else renderTitles(main, draw);
     };
     draw();
   }
@@ -704,23 +701,6 @@ export function registerAllPanels() {
         ? btn('Đang dùng', '', undefined)
         : btn('Dùng', 'gold', () => { S.player.title = id; save(); bus.emit(EV.STATE_CHANGED); redraw(); }));
       else r.append(h('div', 't2', 'Chưa mở'));
-      box.append(r);
-    }
-  }
-
-  function renderPetList(box: HTMLElement, redraw: () => void) {
-    if (!S.pets?.length) { box.append(h('div', 'hint', 'Chưa nuôi bé nào — ghé Tiệm thú cưng ở Thành phố nhé!')); return; }
-    for (const id of S.pets) {
-      const p = PETS[id]; if (!p) continue;
-      const active = S.activePet === id;
-      const r = h('div', `row ${active ? 'row-active' : ''}`);
-      const ic = h('div'); ic.append(spr(petUrl(id), 0, 0, p.frameW, p.frameH, 44));
-      const info = h('div', 'grow');
-      info.innerHTML = `<div class="t1">${p.name}${active ? ' <span class="tl-lv">đang theo</span>' : ''}</div><div class="t2">${p.perkFull}</div>`;
-      r.append(ic, info);
-      r.append(btn(active ? 'Cất về nhà' : 'Cho ra ngoài', active ? '' : 'gold', () => {
-        S.activePet = active ? undefined : id; save(true); bus.emit(EV.ZONE); redraw();
-      }));
       box.append(r);
     }
   }
@@ -758,7 +738,7 @@ export function registerAllPanels() {
         body.append(statsBox);
   }
 
-  registerPanel('profile', () => openCharHub('info'));
+  registerPanel('profile', () => { const { body } = openWindow('Hồ sơ cá nhân'); renderCharInfo(body); });
   registerPanel('wardrobe', () => openCharHub('wardrobe'));
 
 
@@ -1012,7 +992,7 @@ export function registerAllPanels() {
       ['glasses', 'Kính', 65, 'glasses', true],
       ['shirt', 'Áo', 20, 'shirt', false],
       ['pants', 'Quần', 10, 'pant', false],
-      ['candy', 'Đồ cầm tay', 70, 'hand', true]
+      ['candy', 'Cầm tay', 70, 'hand', true]
     ];
     // Skin là mục riêng ở cột tab dọc nên không nằm chung dải tab ngang
     const SLOTS: [string, string, number, SlotKey, boolean][] =
@@ -1035,7 +1015,7 @@ export function registerAllPanels() {
         if (z === -1) {
           const sk = look.skin ? SKINS[look.skin] : undefined;
           if (sk) cell.append(skinFace(sk, 34)); else cell.append(uiIcon(ico, 28));
-        } else if (cur) cell.append(z === 70 ? chibiPreview(cur as number, 32) : chibiHead(cur as number, 34, z));
+        } else if (cur) cell.append(z <= 20 || z === 70 ? chibiPreview(cur as number, 34) : chibiHead(cur as number, 34, z));
         else cell.append(uiIcon(ico, 28));
         cell.append(h('span', 'wd-slot-name', name));
         cell.onclick = () => { tab = i; render(); };
