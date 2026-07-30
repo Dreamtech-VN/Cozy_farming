@@ -60,7 +60,7 @@ export const ZONES: Record<string, ZoneDef> = {
       { x: 31, y: 29, to: 'farm_gate', label: 'Ra cổng', icon: '🚏' }
     ],
     npcs: [
-      { id: 'npc_mai', name: 'Cô Mai', x: 21, y: 14, charIndex: 5, gender: 2, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
+      { id: 'npc_mai', name: 'Cô Mai', x: 15, y: 14, charIndex: 5, gender: 2, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
     ],
     features: ['farm', 'barn', 'fishing', 'insects']
   },

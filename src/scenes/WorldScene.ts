@@ -23,8 +23,9 @@ const T = 16; // kích thước tile
 const FARM_PLOT = { ox: 84, oy: 218, pw: 42, ph: 45 };            // lưới ruộng 8x6
 const FARM_POND = { x: 850, y: 392, w: 274, h: 216 };             // hồ đá Avatar
 const KHE_POS = { x: 790, y: 195 };                               // cây khế
-const WAREHOUSE_POS = { x: 480, y: 175 };                         // nhà kho
-const BARN_RECT = { x: 34.5, y: 13.5, w: 9, h: 5.5 };             // sân chuồng thú (tile)
+const WAREHOUSE_POS = { x: 320, y: 175 };                         // nhà kho
+const DOGHOUSE_POS = { x: 648, y: 198 };                          // nhà chó
+const BARN_RECT = { x: 26.5, y: 13.5, w: 9, h: 5.5 };             // sân chuồng thú (tile)
 const FARM_ORIGIN = { x: Math.round(FARM_PLOT.ox / T), y: Math.round(FARM_PLOT.oy / T) };
 const ROAD_TILES = 4; // đường xe chạy chiếm 4 hàng tile dưới cùng (map cổng)
 
@@ -38,11 +39,11 @@ const TRAFFIC_KEYS = ['veh_bus', 'veh_truck_orange', 'veh_camper_pink', 'veh_cam
 // Decor đặt sẵn theo khu (sprite thật từ asset pack) — toạ độ tile, origin đáy giữa
 const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number }[]> = {
   farm: [
-    // nhà HD Avatar (object 1029/982/981/1033 + cây 243)
+    // nông trại chỉ gồm: nhà bếp, nhà kho, chuồng thú, nhà chó (+ cây khế, ao cá)
     { key: 'lt_kitchen', x: 8.75, y: 12.6, s: 1 },     // nhà bếp (cửa vào nhà riêng)
-    { key: 'lt_store', x: 20.6, y: 12.9, s: 1 },       // cửa hàng — Cô Mai đứng trước
-    { key: 'lt_warehouse', x: 30, y: 12.7, s: 1 },     // nhà kho — mở kho đồ
-    { key: 'lt_petbarn', x: 40, y: 13, s: 1 },         // chuồng thú
+    { key: 'lt_warehouse', x: 20, y: 12.7, s: 1 },     // nhà kho — mở kho đồ
+    { key: 'lt_petbarn', x: 31, y: 13, s: 1 },         // chuồng thú
+    { key: 'lt_doghouse', x: 40.5, y: 12.4, s: 1 },    // nhà chó giữ trại
     { key: 'lt_tree', x: 49.4, y: 12.4, s: 1 },        // cây khế
     { key: 'lt_tree', x: 58.6, y: 14.8, s: 0.8 }
   ],
@@ -158,6 +159,7 @@ export class WorldScene extends Phaser.Scene {
     if (this.zone.features.includes('barn')) this.buildBarn();
     if (this.zone.features.includes('insects')) this.spawnInsects();
     if (this.zone.id === 'farm') this.spawnChopTrees();
+    if (this.zone.id === 'farm' && S.farm.hasDog) this.spawnDog();
     if (this.zone.id === 'farm' || this.zone.id === 'beach') this.spawnMounds();
 
     // người chơi chibi Avatar: cao 84px native HD -> map nền HD scale 1,
@@ -1057,6 +1059,35 @@ export class WorldScene extends Phaser.Scene {
       }
     }
 
+    // nhà chó giữ trại
+    if (this.zone.id === 'farm' && Phaser.Math.Distance.Between(this.player.x, this.player.y, DOGHOUSE_POS.x + 30, DOGHOUSE_POS.y + 16) < 95) {
+      if (!S.farm.hasDog) {
+        acts.push({
+          icon: '🐶', label: 'Nhận nuôi chó (2000 xu)', cb: () => bus.emit(EV.OPEN_PANEL, {
+            panel: 'dialog',
+            data: {
+              title: '🐶 Chó giữ trại',
+              text: 'Nuôi một bé chó canh nông trại! Chó sẽ giảm bớt tỷ lệ bị trộm đồ khi người chơi khác ghé thăm nông trại của bạn (kích hoạt khi có chế độ online).',
+              actions: [{
+                icon: '🪙', label: 'Nhận nuôi (2000 xu)', cb: () => {
+                  import('@/core/save').then(m => {
+                    if (m.spend(2000)) { S.farm.hasDog = true; m.save(true); toast('Gâu gâu! Bé chó đã về nhà mới!', '🐶'); this.spawnDog(); }
+                  });
+                }
+              }]
+            }
+          })
+        });
+      } else {
+        acts.push({
+          icon: '🦴', label: 'Vuốt ve chó', cb: () => {
+            if (this.dog) this.fxFloat(this.dog.x, this.dog.y - 66, '❤️');
+            toast('Gâu gâu~ (chó canh trại, giảm trộm đồ khi có khách ghé thăm)', '🐶');
+          }
+        });
+      }
+    }
+
     // chuồng
     if (this.zone.features.includes('barn')) {
       const bx = (BARN_RECT.x + BARN_RECT.w / 2) * T, by = (BARN_RECT.y + BARN_RECT.h / 2) * T;
@@ -1137,6 +1168,32 @@ export class WorldScene extends Phaser.Scene {
       this.addFootprint(px2, py2, 46, 22);
       this.chopTrees.push({ obj, readyAt: 0 });
     }
+  }
+
+  // ================= chó giữ trại =================
+  private dog?: Phaser.GameObjects.Sprite;
+
+  private spawnDog() {
+    const dx = DOGHOUSE_POS.x + 46, dy = DOGHOUSE_POS.y + 14;
+    this.dog = this.add.sprite(dx, dy, 'avdog', 0).setOrigin(0.5, 1).setScale(1.15).setDepth(dy);
+    // vẫy đuôi / đổi tư thế
+    this.time.addEvent({ delay: 800, loop: true, callback: () => {
+      if (this.dog?.active && !this.tweens.isTweening(this.dog)) this.dog.setFrame(this.dog.frame.name === '0' ? 1 : 0);
+    } });
+    // đi loanh quanh gần nhà chó
+    const wander = () => {
+      if (!this.dog?.active) return;
+      const tx = DOGHOUSE_POS.x + 20 + Math.random() * 90;
+      const ty = DOGHOUSE_POS.y + 6 + Math.random() * 40;
+      this.dog.setFrame(2);
+      this.tweens.add({
+        targets: this.dog, x: tx, y: ty, duration: 1400 + Math.random() * 1200,
+        onUpdate: () => this.dog?.setDepth(this.dog.y),
+        onComplete: () => { this.dog?.setFrame(0); this.time.delayedCall(1200 + Math.random() * 2500, wander); }
+      });
+      this.dog.setFlipX(tx < this.dog.x);
+    };
+    this.time.delayedCall(1500, wander);
   }
 
   private spawnMounds(n = 3) {

@@ -118,7 +118,7 @@ export interface GameState {
   chibiWardrobe: number[];  // part chibi đã sở hữu (id part Avatar)
   hotbar: string[];         // nông cụ gắn trên thanh nhanh
   tools: { rod: number; can: number; hoe: number; net: number; basket: number }; // cấp độ dụng cụ
-  farm: { unlocked: number; plots: Plot[] };
+  farm: { unlocked: number; plots: Plot[]; hasDog?: boolean };  // hasDog: chó giữ trại
   livestock: { barnLevel: number; animals: Animal[] };
   house: HouseState;
   collections: { fish: string[]; insects: string[]; crops: string[] };
