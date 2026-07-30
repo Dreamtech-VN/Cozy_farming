@@ -1,4 +1,6 @@
-import { S, save, addItem, removeItem, itemCount, addExp, addStat, addCoins } from '@/core/save';
+import { S, save, addItem, removeItem, itemCount, addExp, addStat, addCoins, toolLevel } from '@/core/save';
+import { toolBonus } from '@/data/tools';
+import { CROP_LIST } from '@/data/crops';
 import { bus, EV, toast } from '@/core/events';
 import { CROPS } from '@/data/crops';
 import { sfx } from '@/core/audio';
@@ -46,6 +48,12 @@ export function till(i: number): boolean {
   const p = S.farm.plots[i];
   if (!p || p.state !== 'empty') return false;
   p.state = 'tilled';
+  // cuốc cấp cao: cơ hội nhặt được hạt giống ngẫu nhiên trong đất
+  if (Math.random() < toolBonus('hoe', S.tools.hoe)) {
+    const c = CROP_LIST[Math.floor(Math.random() * CROP_LIST.length)];
+    addItem(`seed_${c.id}`);
+    toast(`Cuốc trúng 1 Hạt ${c.name}!`, '🌱');
+  }
   addStat('tilled'); sfx.plant(); save();
   bus.emit(EV.STATE_CHANGED);
   return true;
@@ -89,6 +97,7 @@ export function growth(p: Plot): number {
   const c = CROPS[p.crop];
   let total = c.growMin * 60_000;
   if (p.fertilized) total *= 0.7;
+  if (p.watered) total *= 1 - toolBonus('can', S.tools.can);   // bình tưới cấp cao
   const t = (Date.now() - p.plantedAt) / total;
   if (!p.watered) return Math.min(t, 0.3);
   return Math.min(t, 1);
@@ -108,7 +117,9 @@ export function harvest(i: number): boolean {
   const p = S.farm.plots[i];
   if (!p || !isRipe(p) || !p.crop) return false;
   const c = CROPS[p.crop];
-  const qty = c.yieldQty[0] + Math.floor(Math.random() * (c.yieldQty[1] - c.yieldQty[0] + 1));
+  let qty = c.yieldQty[0] + Math.floor(Math.random() * (c.yieldQty[1] - c.yieldQty[0] + 1));
+  // giỏ cấp cao: cơ hội +1 nông sản
+  if (Math.random() < toolBonus('basket', toolLevel('basket'))) { qty += 1; toast('Giỏ xịn: +1 nông sản!', '🧺'); }
   addItem(`crop_${c.id}`, qty);
   addExp(c.exp);
   if (!S.collections.crops.includes(c.id)) {

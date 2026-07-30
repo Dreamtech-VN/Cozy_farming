@@ -1,6 +1,6 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
 import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace } from './kit';
-import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool } from '@/core/save';
+import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
 import { CROPS, CROP_LIST } from '@/data/crops';
@@ -14,7 +14,7 @@ import { QUESTS, TITLES, ACHIEVEMENTS } from '@/data/quests';
 import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
 import { VEHICLES } from '@/data/vehicles';
-import { TOOL_LIST } from '@/data/tools';
+import { TOOL_LIST, TOOLS, toolUpgradeAt } from '@/data/tools';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import { buyRod, addToAquarium } from '@/systems/fishing';
@@ -111,6 +111,7 @@ export function registerAllPanels() {
     }
     if (def.kind === 'tool' && id.startsWith('tool_')) {
       acts.push({ icon: '🛠️', label: 'Gắn lên thanh nông cụ', cb: () => equipTool(id.slice(5)) });
+      acts.push({ icon: '⬆️', label: 'Nâng cấp nông cụ', cb: () => openPanel('toolupgrade') });
     }
     if (def.id === 'food_cake') {
       acts.push({ icon: '🎉', label: 'Mở tiệc tại nhà', cb: () => { if (throwParty()) { closeParent(); } } });
@@ -196,6 +197,10 @@ export function registerAllPanels() {
         }
       }
       body.append(grid);
+      // bách hóa có quầy nâng cấp nông cụ
+      if (mode === 0 && shop.id === 'shop_general') {
+        body.append(btn('🛠️ Nâng cấp nông cụ', 'blue', () => openPanel('toolupgrade')));
+      }
     };
     tabs(['🛒 Mua', '🪙 Bán'], i => { mode = i; render(); });
     render();
@@ -448,6 +453,49 @@ export function registerAllPanels() {
   registerPanel('wardrobe', () => {
     const { body } = openWindow('👗 Tủ đồ', { size: 'large' });
     openWardrobe(body);
+  });
+
+  // ================= Nâng cấp nông cụ =================
+  registerPanel('toolupgrade', () => {
+    const { body } = openWindow('🛠️ Nâng cấp nông cụ');
+    const render = () => {
+      body.innerHTML = '';
+      for (const tid of ['hoe', 'can', 'basket']) {
+        const t = TOOLS[tid];
+        const lv = toolLevel(tid);
+        const cur = toolUpgradeAt(tid, lv);
+        const next = toolUpgradeAt(tid, lv + 1);
+        const r = h('div', 'row');
+        const ic = h('div');
+        ic.append(spr(t.url, 0, 0, t.w, t.h, 34));
+        const info = h('div', 'grow');
+        if (lv <= 0) {
+          info.innerHTML = `<div class="t1">${t.name} — chưa sở hữu</div><div class="t2">Mua ở tab 🛒 của Bách hóa trước nhé.</div>`;
+          r.append(ic, info);
+        } else {
+          info.innerHTML = `<div class="t1">${cur?.name ?? t.name} <span class="tl-lv">Lv.${lv}</span></div><div class="t2">${cur?.desc ?? ''}${next ? `<br>➜ ${next.name}: ${next.desc}` : ''}</div>`;
+          r.append(ic, info);
+          if (next) {
+            r.append(btn(`🪙${next.price}`, 'gold', () => {
+              if (!spend(next.price)) return;
+              if (tid === 'hoe') S.tools.hoe = next.level;
+              else if (tid === 'can') S.tools.can = next.level;
+              else S.tools.basket = next.level;
+              save(); sfx.coin(); toast(`Nâng thành ${next.name}!`, '🛠️');
+              bus.emit('hotbar:changed');
+              render();
+            }));
+          } else r.append(btn('MAX', '', undefined));
+        }
+        body.append(r);
+      }
+      body.append(h('div', 'sep'));
+      const fr = h('div', 'row');
+      fr.innerHTML = `<div style="font-size:20px">🎣</div><div class="grow"><div class="t1">Cần câu & Vợt</div><div class="t2">Mua loại xịn hơn ở tiệm câu Ông Biển (Bãi biển) — cần xịn tăng tỉ lệ cá hiếm.</div></div>`;
+      fr.append(btn('Mở tiệm câu', 'blue', () => openPanel('fishingshop')));
+      body.append(fr);
+    };
+    render();
   });
 
   // Tủ đồ kiểu GunPow: trái là nhân vật giữa các ô trang bị, phải là lưới đồ chia tab

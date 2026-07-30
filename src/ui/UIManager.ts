@@ -1,6 +1,6 @@
 import type Phaser from 'phaser';
 import { bus, EV, toast } from '@/core/events';
-import { S, unequipTool } from '@/core/save';
+import { S, unequipTool, toolLevel } from '@/core/save';
 import { h, root, fmt, charFace, spr } from './kit';
 import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
@@ -286,7 +286,9 @@ export function refreshHotbar() {
     const t = TOOLS[tid];
     if (t) {
       slot.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 32)));
-      slot.title = t.name;
+      const lv = toolLevel(tid);
+      if (lv >= 2) slot.append(h('span', 'hb-lv', `Lv${lv}`));
+      slot.title = `${t.name}${lv >= 2 ? ` Lv.${lv}` : ''}`;
       slot.onclick = () => { sfx.click(); bus.emit('hotbar:use', tid); };
       // giữ lâu / chuột phải = gỡ nông cụ khỏi ô
       let hold = 0;

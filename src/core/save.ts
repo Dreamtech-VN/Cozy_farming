@@ -23,7 +23,7 @@ export function defaultState(): GameState {
     wardrobe: ['hair:bob', 'clothes:basic'],
     chibiWardrobe: [],
     hotbar: ['hoe', 'can', '', '', ''],
-    tools: { rod: 0, can: 1, hoe: 1, net: 0 },
+    tools: { rod: 0, can: 1, hoe: 1, net: 0, basket: 0 },
     farm: { unlocked: 6, plots: [] },
     livestock: { barnLevel: 0, animals: [] },
     house: { owned: false, level: 0, wallpaper: 0, floor: 0, furniture: [], aquarium: [] },
@@ -57,12 +57,18 @@ export function hasSave(): boolean {
 // Nông cụ đã sở hữu chưa: cuốc/bình tưới có sẵn cấp 1, cần/vợt mua theo cấp,
 // giỏ/rìu/xẻng là vật phẩm mua ở bách hóa (nằm trong túi đồ)
 export function ownedTool(id: string): boolean {
-  if (!id) return false;
-  if (id === 'hoe') return S.tools.hoe > 0;
-  if (id === 'can') return S.tools.can > 0;
-  if (id === 'rod') return S.tools.rod > 0;
-  if (id === 'net') return S.tools.net > 0;
-  return (S.inventory[`tool_${id}`] ?? 0) > 0;
+  return toolLevel(id) > 0;
+}
+
+// Cấp hiện tại của nông cụ (0 = chưa sở hữu)
+export function toolLevel(id: string): number {
+  if (!id) return 0;
+  if (id === 'hoe') return S.tools.hoe;
+  if (id === 'can') return S.tools.can;
+  if (id === 'rod') return S.tools.rod;
+  if (id === 'net') return S.tools.net;
+  if (id === 'basket') return Math.max(S.tools.basket, (S.inventory['tool_basket'] ?? 0) > 0 ? 1 : 0);
+  return (S.inventory[`tool_${id}`] ?? 0) > 0 ? 1 : 0;
 }
 
 // Gắn nông cụ vào ô trống đầu tiên trên thanh (đã có thì thôi)
@@ -94,6 +100,7 @@ export function load(): boolean {
     // chỗ migrate giữa các version save về sau
     S = { ...defaultState(), ...data };
     if (!S.chibiWardrobe) S.chibiWardrobe = [];
+    if (S.tools.basket === undefined) S.tools.basket = (S.inventory['tool_basket'] ?? 0) > 0 ? 1 : 0;
     if (!S.hotbar) S.hotbar = ['hoe', 'can', '', '', ''];
     while (S.hotbar.length < 5) S.hotbar.push('');
     S.hotbar = S.hotbar.map(id => ownedTool(id) ? id : '');
