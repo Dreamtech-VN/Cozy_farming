@@ -593,10 +593,22 @@ img.cur { width: 15px; height: 15px; object-fit: contain; vertical-align: -3px; 
 
 /* thân cửa sổ chứa túi đồ: co giãn để lưới cuộn được, chân khung luôn thấy */
 .win-body:has(> .bag-hub) { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
-/* túi đồ: ô đồ chiếm hết bề ngang popup, tab dọc nằm ngoài card */
+/* túi đồ: full màn hình, card ô đồ ở giữa, tab dọc nằm ngoài card, tiêu đề nổi */
 .bag-hub { flex: 1; min-height: 0; }
-.win.win-bag { width: min(1100px, 97vw); height: 92vh; max-height: 92vh; }
-.win.win-bag .win-body { padding: 8px 12px 12px; }
+.win.win-bag {
+  width: 100vw; height: 100vh; max-height: 100vh; padding: 0;
+  border: none; border-image: none; background: rgba(18, 12, 4, .78); border-radius: 0;
+}
+.win.win-bag .win-body { padding: 52px 16px 16px; }
+.win.win-bag .win-head { position: absolute; left: 0; right: 0; top: 0; z-index: 3; padding: 0; pointer-events: none; }
+.win.win-bag .win-head > div:first-child {
+  pointer-events: auto; margin-top: 12px; padding: 7px 22px; border-radius: 999px;
+  background: rgba(20, 12, 4, .62); color: #ffe9a8; font-size: 19px;
+  text-shadow: 0 2px 4px rgba(0,0,0,.6); backdrop-filter: blur(2px);
+}
+.win.win-bag .win-close { pointer-events: auto; right: 14px; top: 26px; }
+/* chữ trên nền tối */
+.win.win-bag .bag-count { color: #ffe9a8; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
 
 /* tiệm cắt tóc / viện thẩm mỹ: chỉ có nhân vật bên trái, không có ô trang bị */
 .wd-left.stylist-left { justify-content: center; }
