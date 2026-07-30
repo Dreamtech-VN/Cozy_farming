@@ -311,36 +311,77 @@ export function registerAllPanels() {
       const g = S.player.chibi?.gender ?? 0;
       const grid = h('div', 'grid');
       const isHand = z === 70;
+      grid.className = 'grid grid-shop';
       for (const p of chibiList(z, g)) {
         // đồ cầm tay: mua về nằm trong túi đồ; đồ mặc: vào tủ đồ
         const owned = isHand ? itemCount(handItemId(p.id)) > 0 : S.chibiWardrobe.includes(p.id);
-        const cell = h('div', `cell ${owned ? 'owned' : ''}`);
+        const cell = h('div', `cell cell-lg ${owned ? 'owned' : ''}`);
         const xu = chibiPriceXu(p), ruby = chibiPriceRuby(p);
         const prEl = h('div', 'pr');
         if (owned && !isHand) prEl.textContent = 'Đã có';
         else prEl.innerHTML = ruby > 0 ? priceHtml(0, ruby) : priceHtml(xu);
-        cell.append(chibiPreview(p.id, 52), h('div', 'nm', p.name), prEl);
-        cell.onclick = () => {
-          if (owned && !isHand) { openPanel('wardrobe'); return; }
-          const ok = ruby > 0 ? spend(0, ruby) : spend(xu);
-          if (!ok) return;
-          if (isHand) {
-            addItem(handItemId(p.id));
-            toast(`Đã mua ${p.name}! Mở Túi đồ -> Dùng để đưa xuống ô trang bị.`, '🖐️');
-          } else {
-            S.chibiWardrobe.push(p.id);
-            toast(`Đã mua ${p.name}! Vào Tủ đồ để mặc.`, '👗');
-          }
-          save();
-          addStat('fashion_bought');
-          render();
-        };
+        const art = h('div', 'cell-art');
+        art.append(chibiPreview(p.id, 74));
+        cell.append(art, h('div', 'nm', p.name), prEl);
+        // bấm vào để xem thử trước khi mua
+        cell.onclick = () => openPanel('tryon', { part: p, z, isHand, owned, onDone: render });
         grid.append(cell);
       }
       body.append(grid);
     };
     tabs(CHIBI_TABS.map(c => c[0]), i => { tab = i; render(); }, CHIBI_TABS.map(c => c[2]));
     render();
+  });
+
+  // ---- xem thử trang phục trước khi mua ----
+  registerPanel('tryon', (data: { part: any; z: number; isHand: boolean; owned: boolean; onDone?: () => void }) => {
+    const { part: p, z, isHand, owned, onDone } = data;
+    const { body, close } = openWindow(p.name, { size: 'small' });
+    const look = S.player.chibi;
+    const xu = chibiPriceXu(p), ruby = chibiPriceRuby(p);
+
+    const wrap = h('div', 'tryon');
+    // trái: nhân vật đang mặc thử  |  phải: món đồ phóng to
+    const left = h('div', 'tryon-char');
+    const KEY: Record<number, keyof typeof look> = { 5: 'wing', 10: 'pant', 20: 'shirt', 40: 'eyes', 50: 'hair', 60: 'hat', 65: 'glasses', 70: 'hand' } as any;
+    const preview = look ? { ...look, [KEY[z]]: p.id } as any : undefined;
+    left.append(charFace(preview, 170), h('div', 'tryon-cap', 'Mặc thử'));
+    const right = h('div', 'tryon-art');
+    right.append(chibiPreview(p.id, 120));
+    wrap.append(left, right);
+    body.append(wrap);
+
+    const info = h('div', 'tryon-info');
+    info.innerHTML = owned && !isHand
+      ? '<b>Bạn đã sở hữu món này</b>'
+      : `Giá: ${ruby > 0 ? priceHtml(0, ruby) : priceHtml(xu)}`;
+    body.append(info);
+
+    const bar = h('div');
+    bar.style.cssText = 'display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center';
+    if (owned && !isHand) {
+      bar.append(btn('Mặc ngay', 'gold', () => {
+        if (look) { (look as any)[KEY[z]] = p.id; save(); bus.emit(EV.APPEARANCE); toast(`Đã mặc ${p.name}`, ''); }
+        close();
+      }));
+    } else {
+      bar.append(btn(`Mua`, 'gold', () => {
+        const ok = ruby > 0 ? spend(0, ruby) : spend(xu);
+        if (!ok) return;
+        if (isHand) {
+          addItem(handItemId(p.id));
+          toast(`Đã mua ${p.name}! Mở Túi đồ -> Dùng để đưa xuống ô trang bị.`, '');
+        } else {
+          S.chibiWardrobe.push(p.id);
+          if (look) { (look as any)[KEY[z]] = p.id; bus.emit(EV.APPEARANCE); }
+          toast(`Đã mua và mặc ${p.name}!`, '');
+        }
+        save(); addStat('fashion_bought'); sfx.coin();
+        onDone?.(); close();
+      }));
+    }
+    bar.append(btn('Đóng', '', close));
+    body.append(bar);
   });
 
   // ---- shop nhà & nội thất ----
