@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { BootScene } from './scenes/BootScene';
 import { PreloadScene } from './scenes/PreloadScene';
 import { CharCreateScene } from './scenes/CharCreateScene';
 import { WorldScene } from './scenes/WorldScene';
@@ -20,7 +21,7 @@ const game = new Phaser.Game({
     height: 540 * RES
   },
   physics: { default: 'arcade' },
-  scene: [PreloadScene, CharCreateScene, WorldScene]
+  scene: [BootScene, PreloadScene, CharCreateScene, WorldScene]
 });
 
 initUI(game);

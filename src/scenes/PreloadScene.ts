@@ -2,19 +2,19 @@ import Phaser from 'phaser';
 import { HAIR_STYLES, CLOTHES, ACCESSORIES } from '@/data/clothing';
 import { ANIMAL_LIST } from '@/data/animals';
 import { hasSave, load, S } from '@/core/save';
-import { CHIBI_PARTS, defaultLook, lookLayers } from '@/data/chibi';
+import { CHIBI_PARTS, defaultLook, lookLayers, G_MALE, G_FEMALE } from '@/data/chibi';
+import { RES } from '@/core/res';
+import { GAME_VERSION, resFresh, markResLoaded } from '@/core/version';
+import { showLoginFlow } from '@/ui/login';
+import { ChibiSprite } from '@/gfx/ChibiSprite';
 
 export class PreloadScene extends Phaser.Scene {
+  private mascots: ChibiSprite[] = [];
+
   constructor() { super('Preload'); }
 
   preload() {
-    const W = this.scale.width, H = this.scale.height;
-    this.add.rectangle(W / 2, H / 2, W, H, 0x1a2b12);
-    this.add.text(W / 2, H / 2 - 40, 'COZY FARMING', { fontFamily: 'monospace', fontSize: '42px', color: '#ffd43b' }).setOrigin(0.5);
-    const barBg = this.add.rectangle(W / 2, H / 2 + 20, 420, 22, 0x0e1a08).setOrigin(0.5);
-    const bar = this.add.rectangle(W / 2 - 208, H / 2 + 20, 4, 14, 0x8ce99a).setOrigin(0, 0.5);
-    this.load.on('progress', (v: number) => { bar.width = 4 + 412 * v; });
-    void barBg;
+    this.buildTitleScreen();
 
     // ---- Nhân vật (32px) ----
     for (let i = 1; i <= 8; i++) {
@@ -80,7 +80,10 @@ export class PreloadScene extends Phaser.Scene {
   create() {
     this.makeGroundTextures();
     this.makeMiscTextures();
-    if (hasSave() && load()) {
+    markResLoaded();
+
+    const hasChar = hasSave() && load();
+    if (hasChar) {
       // save cũ chưa có nhân vật chibi -> gán bộ mặc định theo giới tính
       // (save cũ hơn nữa lưu gender chibi = 0 theo quy ước sai -> đổi lại cho đúng data Avatar: 1 nam, 2 nữ)
       if (!S.player.chibi || (S.player.chibi.gender !== 1 && S.player.chibi.gender !== 2)) {
@@ -89,9 +92,76 @@ export class PreloadScene extends Phaser.Scene {
           if (!S.chibiWardrobe.includes(id)) S.chibiWardrobe.push(id);
         }
       }
-      this.scene.start('World');
+    }
+
+    // linh vật 2 bên phải màn hình (như key art GunPow)
+    const W = this.scale.width, H = this.scale.height;
+    const boy = new ChibiSprite(this, W * 0.86, H * 0.9, defaultLook(G_MALE));
+    boy.setScale(2.4 * RES); boy.play('idle'); boy.setDir(3);
+    const girl = new ChibiSprite(this, W * 0.72, H * 0.94, defaultLook(G_FEMALE));
+    girl.setScale(2.8 * RES); girl.play('idle');
+    this.mascots = [boy, girl];
+
+    // khung đăng nhập -> chọn máy chủ -> Bắt đầu
+    showLoginFlow(() => this.scene.start(hasChar ? 'World' : 'CharCreate'));
+  }
+
+  update(_t: number, dt: number) {
+    for (const m of this.mascots) m.tick(dt);
+  }
+
+  // Nền title: ảnh map + logo game + badge 12+ + thanh tải tài nguyên (chỉ khi bản mới)
+  private buildTitleScreen() {
+    const W = this.scale.width, H = this.scale.height;
+
+    const bg = this.add.image(W / 2, H / 2, 'title_bg');
+    const cover = Math.max(W / bg.width, H / bg.height) * 1.05;
+    bg.setScale(cover);
+    this.tweens.add({ targets: bg, scale: cover * 1.06, duration: 9000, yoyo: true, repeat: -1, ease: 'sine.inout' });
+    this.add.rectangle(0, 0, W, H, 0x0a1220, 0.28).setOrigin(0);
+
+    // logo game (góc trái trên như GunPow)
+    const lx = W * 0.17, ly = H * 0.14;
+    const t1 = this.add.text(lx, ly, 'COZY', {
+      fontFamily: 'Verdana, sans-serif', fontSize: `${40 * RES}px`, fontStyle: 'bold',
+      color: '#ffd43b', stroke: '#7a4a1f', strokeThickness: 7 * RES
+    }).setOrigin(0.5).setAngle(-4).setShadow(0, 4 * RES, '#00000088', 6 * RES);
+    const t2 = this.add.text(lx + 14 * RES, ly + 40 * RES, 'FARMING', {
+      fontFamily: 'Verdana, sans-serif', fontSize: `${30 * RES}px`, fontStyle: 'bold',
+      color: '#8ce99a', stroke: '#1f5c2c', strokeThickness: 6 * RES
+    }).setOrigin(0.5).setAngle(-4).setShadow(0, 4 * RES, '#00000088', 6 * RES);
+    this.tweens.add({ targets: [t1, t2], y: `+=${5 * RES}`, duration: 2200, yoyo: true, repeat: -1, ease: 'sine.inout' });
+
+    // badge 12+ và cảnh báo sức khỏe
+    const bx = W * 0.06, by = H * 0.38;
+    const g = this.add.graphics();
+    g.fillStyle(0xc9a227); g.fillCircle(bx, by, 17 * RES);
+    g.lineStyle(2 * RES, 0xfff3bf); g.strokeCircle(bx, by, 17 * RES);
+    this.add.text(bx, by, '12+', { fontFamily: 'Verdana', fontSize: `${11 * RES}px`, fontStyle: 'bold', color: '#3d2c05' }).setOrigin(0.5);
+    this.add.text(bx + 24 * RES, by, 'Chơi quá 180 phút một ngày\nsẽ ảnh hưởng xấu đến sức khỏe', {
+      fontFamily: 'sans-serif', fontSize: `${9 * RES}px`, color: '#e8e8e8', backgroundColor: '#00000066', padding: { x: 6 * RES, y: 4 * RES }
+    }).setOrigin(0, 0.5);
+
+    this.add.text(10 * RES, H - 16 * RES, `v${GAME_VERSION}`, { fontFamily: 'monospace', fontSize: `${10 * RES}px`, color: '#ffffffaa' });
+
+    // thanh tải: người mới / sau update thấy thanh to có %, còn lại chỉ 1 dòng nhỏ
+    if (!resFresh()) {
+      const barW = 440 * RES, barY = H * 0.86;
+      const barBg = this.add.rectangle(W / 2, barY, barW + 8 * RES, 24 * RES, 0x0e1a08, 0.85).setStrokeStyle(2 * RES, 0x8ce99a);
+      const bar = this.add.rectangle(W / 2 - barW / 2, barY, 4, 14 * RES, 0x8ce99a).setOrigin(0, 0.5);
+      const lbl = this.add.text(W / 2, barY - 24 * RES, 'Đang tải tài nguyên... 0%', {
+        fontFamily: 'sans-serif', fontSize: `${13 * RES}px`, color: '#fff'
+      }).setOrigin(0.5).setShadow(0, 2, '#000', 3);
+      this.load.on('progress', (v: number) => {
+        bar.width = 4 + (barW - 4) * v;
+        lbl.setText(`Đang tải tài nguyên... ${Math.round(v * 100)}%`);
+      });
+      this.load.on('complete', () => { bar.destroy(); lbl.destroy(); barBg.destroy(); });
     } else {
-      this.scene.start('CharCreate');
+      const lbl = this.add.text(W / 2, H * 0.86, 'Đang kiểm tra tài nguyên...', {
+        fontFamily: 'sans-serif', fontSize: `${11 * RES}px`, color: '#ffffffcc'
+      }).setOrigin(0.5).setShadow(0, 2, '#000', 3);
+      this.load.on('complete', () => lbl.destroy());
     }
   }
 
