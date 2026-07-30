@@ -39,11 +39,12 @@ defItem({ id: 'gift_choco', name: 'Sô-cô-la', kind: 'gift', icon: '🍫', sell
 defItem({ id: 'gift_teddy', name: 'Gấu bông', kind: 'gift', icon: '🧸', sell: 60, buy: 300, desc: 'Quà tặng dễ thương.' });
 defItem({ id: 'lucky_ticket', name: 'Vé quay may mắn', kind: 'special', icon: '🎟️', sell: 0, rubyBuy: 5, desc: 'Thêm 1 lượt quay Vòng quay may mắn.' });
 
-// ---- Sản phẩm chăn nuôi ----
-defItem({ id: 'egg', name: 'Trứng gà', kind: 'product', icon: '🥚', sell: 25 });
-defItem({ id: 'milk', name: 'Sữa bò', kind: 'product', icon: '🥛', sell: 60 });
-defItem({ id: 'pork', name: 'Nấm heo ủi', kind: 'product', icon: '🍄', sell: 45, desc: 'Heo ủi đất tìm được nấm quý.' });
-defItem({ id: 'wool', name: 'Len cừu', kind: 'product', icon: '🧶', sell: 70 });
+// ---- Sản phẩm chăn nuôi (icon từ ui/items.png của farm pack) ----
+const ITEMS_SHEET = 'assets/farm/items.png';
+defItem({ id: 'egg', name: 'Trứng gà', kind: 'product', icon: '🥚', sell: 25, sprite: { url: ITEMS_SHEET, sx: 0, sy: 64, sw: 16, sh: 16 } });
+defItem({ id: 'milk', name: 'Sữa bò', kind: 'product', icon: '🥛', sell: 60, sprite: { url: ITEMS_SHEET, sx: 0, sy: 48, sw: 16, sh: 16 } });
+defItem({ id: 'pork', name: 'Nấm heo ủi', kind: 'product', icon: '🍄', sell: 45, desc: 'Heo ủi đất tìm được nấm quý.', sprite: { url: ITEMS_SHEET, sx: 32, sy: 96, sw: 16, sh: 16 } });
+defItem({ id: 'wool', name: 'Len cừu', kind: 'product', icon: '🧶', sell: 70, sprite: { url: ITEMS_SHEET, sx: 0, sy: 80, sw: 16, sh: 16 } });
 
 // ---- Quả cây khế trong nông trại ----
 defItem({ id: 'crop_khe', name: 'Quả khế', kind: 'crop', icon: '⭐', sell: 12, desc: 'Ăn khế trả vàng~ rung cây khế ở Nông trại mỗi 10 phút.' });

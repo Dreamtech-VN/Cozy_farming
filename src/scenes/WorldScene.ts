@@ -86,7 +86,17 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   ]
 };
 
-interface WorldAction { icon: string; label: string; cb: () => void }
+interface WorldAction { icon: string; label: string; cb: () => void; sprite?: { url: string; sx: number; sy: number; sw: number; sh: number } }
+
+// icon nông cụ (vẽ pixel 16px theo palette pack + cần câu từ fishing pack)
+const TOOL_ICON = {
+  hoe: { url: 'assets/farm/tool_hoe.png', sx: 0, sy: 0, sw: 16, sh: 16 },
+  can: { url: 'assets/farm/tool_can.png', sx: 0, sy: 0, sw: 16, sh: 16 },
+  basket: { url: 'assets/farm/tool_basket.png', sx: 0, sy: 0, sw: 16, sh: 16 },
+  net: { url: 'assets/farm/tool_net.png', sx: 0, sy: 0, sw: 16, sh: 16 },
+  rod: { url: 'assets/farm/tool_rod.png', sx: 0, sy: 0, sw: 16, sh: 16 },
+  seed: { url: 'assets/farm/seeds.png', sx: 0, sy: 0, sw: 16, sh: 16 }
+};
 
 interface InsectSprite { def: InsectDef; obj: Phaser.GameObjects.Image; vx: number; vy: number; t: number }
 
@@ -596,8 +606,11 @@ export class WorldScene extends Phaser.Scene {
       if (p?.state === 'planted' && crop) {
         const stage = farming.stageOf(p);
         const frame = crop.row * 25 + 1 + stage; // crops_all: 25 cột, cột 0 là icon
+        // cây đứng giữa ô đất (ô hiển thị 1.9T x 2T), neo chân để gốc chạm đất
+        const cx = img.x + T * 0.95, cy = img.y + T * 1.55;
         if (!spr) {
-          spr = this.add.sprite(img.x + T * 0.9, img.y + T * 0.7, 'crops', frame);
+          spr = this.add.sprite(cx, cy, 'crops', frame);
+          spr.setOrigin(0.5, 1).setScale(1.35);
           spr.setDepth(img.y + T);
           this.cropSprites[i] = spr;
         } else spr.setFrame(frame);
@@ -605,12 +618,12 @@ export class WorldScene extends Phaser.Scene {
         // cây chín thì nhún nhảy
         if (farming.isRipe(p) && !spr.getData('bounce')) {
           spr.setData('bounce', true);
-          this.tweens.add({ targets: spr, y: spr.y - 2, duration: 400, yoyo: true, repeat: -1 });
+          this.tweens.add({ targets: spr, y: cy - 2, duration: 400, yoyo: true, repeat: -1 });
         }
         if (!farming.isRipe(p) && spr.getData('bounce')) {
           spr.setData('bounce', false);
           this.tweens.killTweensOf(spr);
-          spr.setY(img.y + T * 0.7);
+          spr.setY(cy);
         }
       } else if (spr) {
         this.tweens.killTweensOf(spr);
@@ -683,7 +696,12 @@ export class WorldScene extends Phaser.Scene {
       icon: '🧺', label: `Thu ${'' + def.name}`, cb: () => {
         livestock.collect(a); toast(`Thu được sản phẩm từ ${def.name}!`, def.icon);
         const spr = this.animalSprites.get(id);
-        if (spr) { this.fxBurst(spr.x, spr.y - 8, 0xffe066, 10); this.fxFloat(spr.x, spr.y - 20, `+${def.icon}`); }
+        if (spr) {
+          this.fxBurst(spr.x, spr.y - 8, 0xffe066, 10);
+          // frame trong items.png (10 cột): trứng 40, sữa 30, nấm 62, len 50
+          const pf: Record<string, number> = { egg: 40, milk: 30, pork: 62, wool: 50 };
+          this.fxFloatIcon(spr.x, spr.y - 20, 'items16', pf[def.product] ?? 40, '+1');
+        }
       }
     });
     acts.push({ icon: '🪙', label: 'Bán (50%)', cb: () => { livestock.sellAnimal(id); this.animalSprites.get(id)?.destroy(); this.animalSprites.delete(id); } });
@@ -742,7 +760,7 @@ export class WorldScene extends Phaser.Scene {
       const ok = fishing.catchInsect(ins.def);
       if (ok !== undefined) {
         this.fxBurst(ins.obj.x, ins.obj.y, 0x8ce99a, 8);
-        this.fxFloat(ins.obj.x, ins.obj.y - 12, `+${ins.def.icon}`, '#8ce99a');
+        this.fxFloatIcon(ins.obj.x, ins.obj.y - 12, 'nature', ins.def.frame, '+1', '#8ce99a');
         this.removeInsect(ins);
       }
     });
@@ -790,7 +808,7 @@ export class WorldScene extends Phaser.Scene {
       fishing.landFish(f);
       toast(`Câu được ${f.name}!`, '🐟');
       if (this.bobber) this.fxBurst(this.bobber.x, this.bobber.y, 0x74c0fc, 10);
-      this.fxFloat(this.player.x, this.player.y - (this.zone.bg ? 100 : 50), `+🐟 ${f.name}`, '#74c0fc');
+      this.fxFloatIcon(this.player.x, this.player.y - (this.zone.bg ? 100 : 50), 'fish', f.index, `+${f.name}`, '#74c0fc');
     }
     this.stopFishing();
   }
@@ -916,12 +934,12 @@ export class WorldScene extends Phaser.Scene {
           }
         })
       });
-      if (p.state === 'empty') acts.push({ icon: '⛏️', label: 'Cuốc đất', cb: () => this.doTill(pi) });
-      if (p.state === 'tilled') acts.push({ icon: '🌱', label: 'Trồng cây', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'seedpicker', data: { plot: pi } }) });
+      if (p.state === 'empty') acts.push({ icon: '⛏️', sprite: TOOL_ICON.hoe, label: 'Cuốc đất', cb: () => this.doTill(pi) });
+      if (p.state === 'tilled') acts.push({ icon: '🌱', sprite: TOOL_ICON.seed, label: 'Trồng cây', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'seedpicker', data: { plot: pi } }) });
       if (p.state === 'planted') {
-        if (farming.isRipe(p)) acts.push({ icon: '🧺', label: 'Thu hoạch', cb: () => this.doHarvest(pi) });
+        if (farming.isRipe(p)) acts.push({ icon: '🧺', sprite: TOOL_ICON.basket, label: 'Thu hoạch', cb: () => this.doHarvest(pi) });
         else {
-          if (!p.watered) acts.push({ icon: '💧', label: 'Tưới nước', cb: () => this.doWater(pi) });
+          if (!p.watered) acts.push({ icon: '💧', sprite: TOOL_ICON.can, label: 'Tưới nước', cb: () => this.doWater(pi) });
           if (!p.fertilized) acts.push({ icon: '💩', label: 'Bón phân', cb: () => farming.fertilize(pi) });
         }
       }
@@ -975,7 +993,7 @@ export class WorldScene extends Phaser.Scene {
 
     // câu cá
     if (this.nearWater()) {
-      if (this.fishingState === 'idle') acts.push({ icon: '🎣', label: 'Câu cá', cb: () => this.startFishing() });
+      if (this.fishingState === 'idle') acts.push({ icon: '🎣', sprite: TOOL_ICON.rod, label: 'Câu cá', cb: () => this.startFishing() });
       else acts.push({ icon: '❗', label: 'Kéo cần!', cb: () => this.reelFish() });
     }
     return acts;
@@ -1014,6 +1032,22 @@ export class WorldScene extends Phaser.Scene {
     this.tweens.add({ targets: t, y: y - (big ? 44 : 30), alpha: 0, duration: 950, ease: 'cubic.out', onComplete: () => t.destroy() });
   }
 
+  // chữ bay kèm sprite thật (thay emoji): [icon] +text
+  private fxFloatIcon(x: number, y: number, texture: string, frame: number, msg: string, color = '#ffd43b') {
+    const big = !!this.zone.bg;
+    const c = this.add.container(x, y).setDepth(7001);
+    const img = this.add.image(0, 0, texture, frame).setScale(big ? 1.6 : 1.1);
+    const t = this.add.text(big ? 14 : 10, 0, msg, {
+      fontSize: big ? '15px' : '11px', fontStyle: 'bold', color,
+      stroke: '#3d2c05', strokeThickness: 3
+    }).setOrigin(0, 0.5);
+    c.add([img, t]);
+    // căn giữa cụm icon + chữ
+    const w = (big ? 14 : 10) + t.width;
+    img.x -= w / 2; t.x -= w / 2;
+    this.tweens.add({ targets: c, y: y - (big ? 44 : 30), alpha: 0, duration: 950, ease: 'cubic.out', onComplete: () => c.destroy() });
+  }
+
   private plotCenter(i: number): { x: number; y: number } {
     const t = this.plotTiles[i];
     return t ? { x: t.x + T * 0.95, y: t.y + T * 0.7 } : { x: this.player.x, y: this.player.y };
@@ -1044,7 +1078,7 @@ export class WorldScene extends Phaser.Scene {
       if (farming.harvest(i) && crop) {
         const c = this.plotCenter(i);
         this.fxBurst(c.x, c.y, 0xffe066, 12);
-        this.fxFloat(c.x, c.y - 10, `+${crop.icon} ${crop.name}`);
+        this.fxFloatIcon(c.x, c.y - 10, 'crops', crop.row * 25 + crop.stages, `+${crop.name}`);
       }
       this.refreshFarm();
     });
