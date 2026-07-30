@@ -662,7 +662,7 @@ export function registerAllPanels() {
   // ================= Hồ sơ & Tủ đồ & Danh hiệu =================
   // ================= Nhân vật: hub có cột tab dọc bên phải (kiểu GunPow) =================
   const CH_SECTIONS: [string, string][] = [
-    ['wardrobe', 'Tủ đồ'], ['title', 'Danh hiệu'],
+    ['wardrobe', 'Tủ đồ'], ['skin', 'Skin'], ['title', 'Danh hiệu'],
     ['pet', 'Thú cưng'], ['info', 'Thông tin']
   ];
 
@@ -683,6 +683,7 @@ export function registerAllPanels() {
       body.append(wrap);
       openCharHubRefresh = draw;
       if (sec === 'wardrobe') openWardrobe(main);
+      else if (sec === 'skin') openWardrobe(main, 'skin');
       else if (sec === 'title') renderTitles(main, draw);
       else if (sec === 'pet') renderPetList(main, draw);
       else renderCharInfo(main);
@@ -997,15 +998,14 @@ export function registerAllPanels() {
   });
 
   // Tủ đồ kiểu GunPow: trái là nhân vật giữa các ô trang bị, phải là lưới đồ chia tab
-  function openWardrobe(body: HTMLElement) {
+  function openWardrobe(body: HTMLElement, mode: 'wear' | 'skin' = 'wear') {
     const look = S.player.chibi;
     if (!look) return;
     const apply = () => { save(); bus.emit(EV.APPEARANCE); };
 
     type SlotKey = 'pant' | 'shirt' | 'hair' | 'eyes' | 'hat' | 'glasses' | 'hand' | 'skin';
     // [icon UI, nhãn, z, khoá, tuỳ chọn]   z = -1 -> ô Skin trọn bộ
-    const SLOTS: [string, string, number, SlotKey, boolean][] = [
-      ['wardrobe', 'Skin', -1, 'skin', true],
+    const ALL: [string, string, number, SlotKey, boolean][] = [
       ['person', 'Tóc', 50, 'hair', false],
       ['smile', 'Mắt', 40, 'eyes', false],
       ['hat', 'Mũ', 60, 'hat', true],
@@ -1014,6 +1014,9 @@ export function registerAllPanels() {
       ['pants', 'Quần', 10, 'pant', false],
       ['candy', 'Đồ cầm tay', 70, 'hand', true]
     ];
+    // Skin là mục riêng ở cột tab dọc nên không nằm chung dải tab ngang
+    const SLOTS: [string, string, number, SlotKey, boolean][] =
+      mode === 'skin' ? [['wardrobe', 'Skin', -1, 'skin', true]] : ALL;
     let tab = 0;
 
     const render = () => {
@@ -1026,6 +1029,7 @@ export function registerAllPanels() {
       const colL = h('div', 'wd-slot-col');
       const colR = h('div', 'wd-slot-col');
       SLOTS.forEach(([ico, name, z, key], i) => {
+        if (mode === 'skin') return;                       // mục Skin không cần cột ô trang bị
         const cell = h('button', `wd-slot ${i === tab ? 'active' : ''}`);
         const cur = look[key];
         if (z === -1) {
@@ -1044,14 +1048,16 @@ export function registerAllPanels() {
 
       // ----- phải: chia tab + card lưới ô (có cả ô trống như tủ đồ game) -----
       const right = h('div', 'wd-right');
-      const tabBar = h('div', 'wd-tabs');
-      SLOTS.forEach(([ic2, name2], i) => {
-        const t = h('div', `tab ${i === tab ? 'active' : ''}`);
-        t.append(uiIcon(ic2, 14), h('span', '', name2));
-        t.onclick = () => { tab = i; render(); };
-        tabBar.append(t);
-      });
-      right.append(tabBar);
+      if (SLOTS.length > 1) {
+        const tabBar = h('div', 'wd-tabs');
+        SLOTS.forEach(([ic2, name2], i) => {
+          const t = h('div', `tab ${i === tab ? 'active' : ''}`);
+          t.append(uiIcon(ic2, 14), h('span', '', name2));
+          t.onclick = () => { tab = i; render(); };
+          tabBar.append(t);
+        });
+        right.append(tabBar);
+      }
 
       const [, , z, key, optional] = SLOTS[tab];
       const card = h('div', 'wd-card');
@@ -1072,7 +1078,7 @@ export function registerAllPanels() {
         }
         for (let i = n; i < Math.max(8, Math.ceil(n / 4) * 4); i++) grid.append(h('div', 'wd-item wd-empty'));
         card.append(grid);
-        card.append(h('div', 'hint', S.skins.length ? 'Bấm lại bộ đang mặc để cởi ra.' : 'Chưa có skin nào — mua trọn bộ ở tab Skin của Thời trang Cô Trang!'));
+        card.append(h('div', 'hint', S.skins.length ? 'Mặc skin sẽ thay toàn bộ trang phục — bấm lại bộ đang mặc để cởi ra.' : 'Chưa có skin nào — mua trọn bộ ở tab Skin của Thời trang Cô Trang!'));
         right.append(card);
         wrap.append(left, right);
         body.append(wrap);
