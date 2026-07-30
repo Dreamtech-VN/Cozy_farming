@@ -28,9 +28,9 @@ Nguồn: các pack đã mua trên itch.io (license thương mại), tải từ
 
 ## Icon nông cụ chibi (`assets/chibi/tools/`)
 
-- `hoe/can/basket/rod/net.png`: icon item gốc Avatar (res.rar repo Lttt, hd/item
-  11326 / 1429 / 7077 / 10131 / 10855) — **chỉ dùng dev/test, thay khi phát hành**.
-- `axe.png`, `shovel.png`: tự vẽ theo cùng style (dùng thoải mái).
+- `hoe/basket/rod/net.png`: icon item gốc Avatar (res.rar repo Lttt, hd/item
+  11326 / 7077 / 10131 / 10855) — **chỉ dùng dev/test, thay khi phát hành**.
+- `can.png` (bình tưới), `axe.png`, `shovel.png`: tự vẽ theo cùng style (dùng thoải mái).
 
 ## Asset từ repo Lttt (`assets/lttt/`)
 

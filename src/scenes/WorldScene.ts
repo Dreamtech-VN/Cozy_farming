@@ -91,7 +91,7 @@ interface WorldAction { icon: string; label: string; cb: () => void; sprite?: { 
 // icon nông cụ (vẽ pixel 16px theo palette pack + cần câu từ fishing pack)
 const TOOL_ICON = {
   hoe: { url: 'assets/chibi/tools/hoe.png', sx: 0, sy: 0, sw: 46, sh: 46 },
-  can: { url: 'assets/chibi/tools/can.png', sx: 0, sy: 0, sw: 34, sh: 38 },
+  can: { url: 'assets/chibi/tools/can.png', sx: 0, sy: 0, sw: 46, sh: 46 },
   basket: { url: 'assets/chibi/tools/basket.png', sx: 0, sy: 0, sw: 48, sh: 46 },
   net: { url: 'assets/chibi/tools/net.png', sx: 0, sy: 0, sw: 48, sh: 46 },
   rod: { url: 'assets/chibi/tools/rod.png', sx: 0, sy: 0, sw: 60, sh: 28 },
