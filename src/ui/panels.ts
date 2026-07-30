@@ -138,13 +138,14 @@ export function registerAllPanels() {
     let tab = 0;
     const draw = () => {
       box.innerHTML = '';
-      const bar = h('div', 'win-tabs bag-tabs');
+      const hub = h('div', 'ch-wrap bag-hub');
+      const wrap = h('div', 'bag-wrap');
+      const side = h('div', 'ch-side');
       BAG_TABS.forEach(([name], i) => {
-        const t = h('div', `tab ${i === tab ? 'active' : ''}`, name);
-        t.onclick = () => { tab = i; draw(); };
-        bar.append(t);
+        const t = h('button', `ch-tab ${i === tab ? 'active' : ''}`, name);
+        t.onclick = () => { sfx.click(); tab = i; draw(); };
+        side.append(t);
       });
-      box.append(bar);
 
       const all = bagEntries(close);
       const list = all.filter(e => BAG_TABS[tab][1](e.kind));
@@ -160,21 +161,22 @@ export function registerAllPanels() {
       }
       for (let i = list.length; i < BAG_CAP; i++) grid.append(h('div', 'bag-slot empty'));
 
-      const wrap = h('div', 'bag-wrap');
       const scroll = h('div', 'bag-scroll');
       scroll.append(grid);
       const foot = h('div', 'bag-foot');
       foot.append(h('div', 'bag-count', `Số ô sử dụng: ${all.length}/${BAG_CAP}`));
       foot.append(btn('Sắp xếp', 'gold', () => { sortBag(); sfx.click(); draw(); }));
       wrap.append(scroll, foot);
-      box.append(wrap);
+      hub.append(wrap, side);
+      box.append(hub);
     };
     draw();
     return draw;
   }
 
   registerPanel('inventory', () => {
-    const { body, close } = openWindow('Túi đồ', { size: 'large' });
+    const { body, win, close } = openWindow('Túi đồ', { size: 'large' });
+    win.classList.add('win-bag');
     let redraw = () => {};
     redraw = renderBag(body, close, () => redraw());
     bus.on(EV.INVENTORY, () => redraw());
