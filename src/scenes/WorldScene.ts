@@ -1314,7 +1314,7 @@ export class WorldScene extends Phaser.Scene {
     bus.emit(EV.OPEN_PANEL, {
       panel: 'dialog',
       data: {
-        title: `${def.icon} ${def.name}`,
+        title: def.name,
         text: def.perkFull,
         actions: [
           {

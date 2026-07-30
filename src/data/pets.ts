@@ -18,22 +18,25 @@ export interface PetDef {
   perkFull: string;
 }
 
+// đường dẫn ảnh strip (dùng cho UI DOM)
+export function petUrl(id: string): string { return `assets/farm/av${id}.png`; }
+
 export const PETS: Record<string, PetDef> = {
   dog: {
-    id: 'dog', name: 'Cún giữ nhà', icon: '🐶', sheet: 'avdog', frameW: 48, frameH: 36,
-    frames: { idle: [0, 1], move: 2 }, price: 2000, scale: 1.15,
+    id: 'dog', name: 'Cún giữ nhà', icon: '🐶', sheet: 'avdog', frameW: 46, frameH: 38,
+    frames: { idle: [0, 1], move: 2 }, price: 2000, scale: 1.1,
     perk: 'Giảm 50% mất đồ khi khách ghé thăm',
     perkFull: 'Cún canh nông trại: khi người chơi khác ghé thăm, tỉ lệ bị trộm nông sản giảm một nửa.'
   },
   cat: {
-    id: 'cat', name: 'Mèo bắt chuột', icon: '🐱', sheet: 'avcat', frameW: 38, frameH: 45,
-    frames: { idle: [0, 1], move: 2 }, price: 2500, scale: 1.05,
+    id: 'cat', name: 'Mèo bắt chuột', icon: '🐱', sheet: 'avcat', frameW: 40, frameH: 32,
+    frames: { idle: [0, 1], move: 2 }, price: 2500, scale: 1.2,
     perk: '+15% cơ hội thu hoạch thêm nông sản',
     perkFull: 'Mèo đuổi chuột phá mùa màng: mỗi lần thu hoạch có thêm 15% cơ hội được thêm 1 nông sản.'
   },
   parrot: {
-    id: 'parrot', name: 'Vẹt lanh lợi', icon: '🦜', sheet: 'avparrot', frameW: 34, frameH: 40,
-    frames: { idle: [0, 1], move: 2 }, price: 3000, scale: 1.1,
+    id: 'parrot', name: 'Vẹt lanh lợi', icon: '🦜', sheet: 'avparrot', frameW: 34, frameH: 42,
+    frames: { idle: [0, 1], move: 2 }, price: 3000, scale: 1.0,
     perk: '+10% xu khi bán vật phẩm',
     perkFull: 'Vẹt mặc cả giúp bạn: mọi lần bán vật phẩm đều được thêm 10% xu.'
   }

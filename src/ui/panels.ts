@@ -15,7 +15,7 @@ import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
 import { VEHICLES } from '@/data/vehicles';
 import { TOOL_LIST, TOOLS, toolUpgradeAt } from '@/data/tools';
-import { PET_LIST, PETS, ownsPet, petBonus } from '@/data/pets';
+import { PET_LIST, PETS, ownsPet, petBonus, petUrl } from '@/data/pets';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import { buyRod, addToAquarium } from '@/systems/fishing';
@@ -524,10 +524,10 @@ export function registerAllPanels() {
       for (const p of PET_LIST) {
         const r = h('div', 'row');
         const ic = h('div');
-        ic.append(spr(`assets/farm/av${p.id === 'dog' ? 'dog' : p.id === 'cat' ? 'cat' : 'parrot'}.png`, 0, 0, p.frameW, p.frameH, 40));
+        ic.append(spr(petUrl(p.id), 0, 0, p.frameW, p.frameH, 44));
         r.append(ic);
         const info = h('div', 'grow');
-        info.innerHTML = `<div class="t1">${p.icon} ${p.name}</div><div class="t2">${p.perk}</div>`;
+        info.innerHTML = `<div class="t1">${p.name}</div><div class="t2">${p.perk}</div>`;
         r.append(info);
         if (ownsPet(p.id)) {
           r.append(btn('Đã nuôi', '', undefined));
@@ -563,10 +563,10 @@ export function registerAllPanels() {
         const active = S.activePet === id;
         const r = h('div', `row ${active ? 'row-active' : ''}`);
         const ic = h('div');
-        ic.append(spr(`assets/farm/av${id}.png`, 0, 0, p.frameW, p.frameH, 40));
+        ic.append(spr(petUrl(id), 0, 0, p.frameW, p.frameH, 44));
         r.append(ic);
         const info = h('div', 'grow');
-        info.innerHTML = `<div class="t1">${p.icon} ${p.name}${active ? ' <span class="tl-lv">đang theo</span>' : ''}</div><div class="t2">${p.perkFull}</div>`;
+        info.innerHTML = `<div class="t1">${p.name}${active ? ' <span class="tl-lv">đang theo</span>' : ''}</div><div class="t2">${p.perkFull}</div>`;
         r.append(info);
         r.append(btn(active ? 'Cất về nhà' : 'Cho ra ngoài', active ? '' : 'gold', () => {
           S.activePet = active ? undefined : id;
