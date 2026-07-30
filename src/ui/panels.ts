@@ -662,7 +662,7 @@ export function registerAllPanels() {
   // ================= Hồ sơ & Tủ đồ & Danh hiệu =================
   // ================= Nhân vật: hub có cột tab dọc bên phải (kiểu GunPow) =================
   const CH_SECTIONS: [string, string][] = [
-    ['wardrobe', 'Tủ đồ'], ['bag', 'Túi đồ'], ['title', 'Danh hiệu'],
+    ['wardrobe', 'Tủ đồ'], ['title', 'Danh hiệu'],
     ['pet', 'Thú cưng'], ['info', 'Thông tin']
   ];
 
@@ -683,7 +683,6 @@ export function registerAllPanels() {
       body.append(wrap);
       openCharHubRefresh = draw;
       if (sec === 'wardrobe') openWardrobe(main);
-      else if (sec === 'bag') renderBag(main, () => {}, draw);
       else if (sec === 'title') renderTitles(main, draw);
       else if (sec === 'pet') renderPetList(main, draw);
       else renderCharInfo(main);
