@@ -204,13 +204,21 @@ img { image-rendering: auto; }
 }
 @keyframes pop { from { transform: scale(.6); opacity: 0 } to { transform: scale(1); opacity: 1 } }
 
-/* Chat nhỏ góc trái (bấm để mở chat) */
+/* Khung chat trên màn hình — bấm vào mở chat */
 #chat-mini {
-  position: absolute; left: 8px; bottom: 160px; width: 250px; max-height: 120px; overflow: hidden;
+  position: absolute; left: 8px; bottom: 158px; width: 252px; overflow: hidden;
   font-size: 11px; color: #fff; text-shadow: 0 1px 2px #000; cursor: pointer;
+  background: rgba(20, 32, 12, .45); border: 2px solid rgba(246, 237, 216, .35);
+  border-radius: 12px; padding: 5px 8px;
   display: flex; flex-direction: column; justify-content: flex-end;
 }
-#chat-mini .cm { background: rgba(0,0,0,.4); border-radius: 8px; padding: 2px 8px; margin-top: 3px; }
+#chat-mini:active { background: rgba(20, 32, 12, .65); }
+#chat-mini .cm { padding: 1px 2px; }
+#chat-mini-log { min-height: 16px; max-height: 68px; overflow: hidden; }
+#chat-mini-hint {
+  margin-top: 3px; padding-top: 3px; border-top: 1px solid rgba(255,255,255,.2);
+  color: #cfe8c0; opacity: .85; font-size: 11px;
+}
 #chat-mini .ch-public { color: #fff; } #chat-mini .ch-system { color: #ffd43b; }
 #chat-mini .ch-private { color: #f7a7ff; } #chat-mini .ch-area { color: #9be9ff; }
 
@@ -231,9 +239,12 @@ img { image-rendering: auto; }
 .wheel-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 #wheel { transition: transform 4s cubic-bezier(.15,.9,.25,1); }
 
-/* ===== Bản đồ thế giới (kiểu minh họa) ===== */
-.map-wrap { position: relative; width: 100%; border-radius: 12px; overflow: hidden; }
-.map-wrap canvas { width: 100%; display: block; }
+/* ===== Bản đồ thế giới ===== */
+.map-wrap {
+  position: relative; border-radius: 12px; overflow: hidden; margin: 0 auto;
+  width: fit-content; max-width: 100%;
+}
+.map-wrap img { display: block; max-width: 100%; max-height: 64vh; image-rendering: auto; }
 .map-marker {
   position: absolute; transform: translate(-50%, -100%); cursor: pointer; text-align: center;
   transition: transform .1s;

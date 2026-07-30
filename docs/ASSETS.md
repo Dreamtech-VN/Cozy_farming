@@ -26,6 +26,14 @@ Nguồn: các pack đã mua trên itch.io (license thương mại), tải từ
 - Nền đất/cỏ/cát/nước (tile đơn sắc có hoa văn, palette khớp pack) — autotile thật sẽ map ở v0.2.
 - Chuồng gia súc, đàn piano, đèn cây trong nhà, tranh treo tường.
 
+## Asset từ repo Lttt (`assets/lttt/`)
+
+Lấy từ https://github.com/thanhtinz/Lttt (client/unity/Assets/Resources/hd):
+world map (`minimap.png`), ô ruộng `cell0-7` + biển `buyLand`.
+⚠️ **Lưu ý bản quyền:** bộ này trông giống resource của game Avatar (TeaMobi) gốc —
+nếu đúng vậy thì chỉ nên dùng để dev/test; bản phát hành thương mại cần thay bằng
+asset tự vẽ hoặc có quyền sử dụng.
+
 ## Ghi chú trạm xe buýt
 
 Sprite `assets/deco/busstop.png` hiện ghép từ ghế đá của tileset + khung/mái vẽ tay

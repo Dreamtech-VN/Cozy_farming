@@ -132,7 +132,6 @@ function buildHud() {
     menuBtn,
     mkBtn('map', 'Bản đồ', () => openPanel('map'), 'map'),
     mkBtn('mail', 'Thư', () => openPanel('mail'), 'mail'),
-    mkBtn('chat', 'Chat', () => openPanel('chat')),
     mkBtn('emote', 'Biểu cảm', () => openPanel('emotes'))
   );
   root().append(quick);
@@ -165,18 +164,22 @@ function buildHud() {
     }
   });
 
-  // chat mini (bấm vào cũng mở chat)
+  // khung chat trên màn hình — bấm vào là mở chat (không có nút riêng)
   const cm = h('div'); cm.id = 'chat-mini'; root().append(cm);
-  cm.onclick = () => openPanel('chat');
+  cm.onclick = () => { sfx.click(); openPanel('chat'); };
+  const cmLog = h('div'); cmLog.id = 'chat-mini-log';
+  const cmHint = h('div'); cmHint.id = 'chat-mini-hint';
+  cmHint.textContent = '💬 Nhắn gì đó...';
+  cm.append(cmLog, cmHint);
   const renderChat = (m: ChatMessage) => {
     const el = h('div', `cm ch-${m.channel}`);
     el.textContent = m.channel === 'private'
       ? `[Riêng] ${m.from}: ${m.text}`
       : `${m.from}: ${m.text}`;
-    cm.append(el);
-    while (cm.children.length > 5) cm.firstChild?.remove();
+    cmLog.append(el);
+    while (cmLog.children.length > 4) cmLog.firstChild?.remove();
   };
-  getChatLog().slice(-5).forEach(renderChat);
+  getChatLog().slice(-4).forEach(renderChat);
   bus.on(EV.CHAT, renderChat);
 
   // cập nhật số liệu

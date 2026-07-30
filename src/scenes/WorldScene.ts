@@ -529,9 +529,10 @@ export class WorldScene extends Phaser.Scene {
     for (let i = 0; i < farming.MAX_PLOTS; i++) {
       const col = i % farming.FARM_COLS, row = Math.floor(i / farming.FARM_COLS);
       const x = (ox + col * 2) * T, y = (oy + row * 2) * T;
-      const img = this.add.image(x, y, 'g_soil').setOrigin(0).setDepth(-60).setDisplaySize(T * 1.8, T * 1.8);
+      const img = this.add.image(x, y, 'fcell2').setOrigin(0).setDepth(-60).setDisplaySize(T * 1.9, T * 2);
       this.plotTiles.push(img);
-      const overlay = this.add.image(x + T * 0.9, y + T * 0.4, 'sel').setVisible(false).setDepth(-30).setScale(0.5);
+      // biển "MUA" cho ô sắp mở khóa
+      const overlay = this.add.image(x + T * 0.95, y + T * 0.7, 'buyland').setVisible(false).setDepth(y + T).setScale(0.5);
       this.plotOverlays.push(overlay);
       this.cropSprites.push(undefined);
     }
@@ -545,9 +546,13 @@ export class WorldScene extends Phaser.Scene {
       const p = S.farm.plots[i];
       const img = this.plotTiles[i];
       if (!p || !img) continue;
-      if (p.state === 'locked') { img.setTexture('g_grass_dark').setAlpha(0.3); }
-      else if (p.state === 'empty') { img.setTexture('g_soil').setAlpha(0.55); }
-      else img.setTexture(p.watered ? 'g_soil_wet' : 'g_soil').setAlpha(1);
+      // ô ruộng kiểu Avatar: cell0 cỏ, cell2 đất trống, cell4 đã cuốc, cell7 tưới ẩm
+      if (p.state === 'locked') { img.setTexture('fcell0').setAlpha(0.45); }
+      else if (p.state === 'empty') { img.setTexture('fcell2').setAlpha(1); }
+      else img.setTexture(p.watered ? 'fcell7' : 'fcell4').setAlpha(1);
+      // biển MUA trên ô kế tiếp có thể mở khóa
+      const nextIdx = farming.UNLOCK_ORDER[S.farm.unlocked];
+      this.plotOverlays[i]?.setVisible(i === nextIdx && S.farm.unlocked < farming.MAX_PLOTS);
 
       const crop = p?.crop ? CROPS[p.crop] : undefined;
       let spr = this.cropSprites[i];
