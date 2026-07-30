@@ -72,6 +72,28 @@ export function toolLevel(id: string): number {
   return (S.inventory[`tool_${id}`] ?? 0) > 0 ? 1 : 0;
 }
 
+// Gắn đồ cầm tay (part Avatar) xuống ô trang bị
+export function equipHandItem(partId: number): boolean {
+  const key = `hand:${partId}`;
+  if (S.hotbar.includes(key)) { toast('Món này đã nằm trên thanh trang bị rồi.', '🖐️'); return false; }
+  let i = S.hotbar.findIndex(t => !t);
+  if (i < 0) i = S.hotbar.length - 1;
+  S.hotbar[i] = key;
+  save();
+  bus.emit('hotbar:changed');
+  toast('Đã đưa xuống ô trang bị — bấm vào ô để cầm lên tay!', '🖐️');
+  return true;
+}
+
+// Cầm / cất đồ trên tay
+export function toggleHand(partId: number) {
+  if (!S.player.chibi) return;
+  const now = S.player.chibi.hand ?? 0;
+  S.player.chibi.hand = now === partId ? 0 : partId;
+  save();
+  bus.emit(EV.APPEARANCE);
+}
+
 // Gắn nông cụ vào ô trống đầu tiên trên thanh (đã có thì thôi)
 export function equipTool(id: string): boolean {
   if (!ownedTool(id)) return false;

@@ -1,5 +1,6 @@
 // Bộ công cụ dựng UI DOM nhỏ gọn
 import { lookLayers } from '@/data/chibi';
+import BBOX from '@/data/chibi-bbox.json';
 export function h<K extends keyof HTMLElementTagNameMap>(
   tag: K, cls = '', text = ''
 ): HTMLElementTagNameMap[K] {
@@ -105,9 +106,14 @@ export function iconOf(def: { icon: string; sprite?: SpriteRef }, size = 32): HT
   return e;
 }
 
-// Xem trước 1 part chibi (frame đứng)
+// Xem trước 1 part chibi (frame đứng) — cắt vừa khít phần có hình
 export function chibiPreview(partId: number, size = 48): HTMLElement {
-  // strip 15 frame 64x96 — lấy frame 0
+  const b = (BBOX as Record<string, number[]>)[String(partId)];
+  if (b) {
+    const [x, y, w, hh] = b;
+    const k = size / Math.max(w, hh);        // vừa khung vuông `size`
+    return spr(`assets/chibi/${partId}.png`, x, y, w, hh, Math.round(w * k));
+  }
   return spr(`assets/chibi/${partId}.png`, 0, 0, 64, 96, Math.round(size * 64 / 96));
 }
 

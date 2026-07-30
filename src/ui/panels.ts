@@ -1,6 +1,6 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
 import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace } from './kit';
-import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel } from '@/core/save';
+import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
 import { CROPS, CROP_LIST } from '@/data/crops';
@@ -8,6 +8,7 @@ import { ANIMAL_LIST } from '@/data/animals';
 import { FISH_LIST, RODS, RARITY_COLOR, RARITY_NAME, FISHES } from '@/data/fish';
 import { INSECT_LIST, NETS, INSECTS } from '@/data/insects';
 import { chibiList, chibiPriceXu, chibiPriceRuby } from '@/data/chibi';
+import { handItemId } from '@/data/handitems';
 import { FURNITURE, FURNITURE_LIST, HOUSE_LEVELS, WALLPAPERS, FLOORS } from '@/data/furniture';
 import { SHOPS } from '@/data/shops';
 import { QUESTS, TITLES, ACHIEVEMENTS } from '@/data/quests';
@@ -114,6 +115,12 @@ export function registerAllPanels() {
     }
     if (def.kind === 'fish') {
       acts.push({ icon: '🐠', label: 'Thả vào hồ cá nhà', cb: () => addToAquarium(id) });
+    }
+    if (def.meta?.handPart) {
+      acts.push({
+        icon: '🖐️', label: 'Dùng (đưa xuống ô trang bị)',
+        cb: () => { equipHandItem(Number(def.meta!.handPart)); }
+      });
     }
     if (def.kind === 'tool' && id.startsWith('tool_')) {
       acts.push({ icon: '🛠️', label: 'Gắn lên thanh nông cụ', cb: () => equipTool(id.slice(5)) });
@@ -286,7 +293,7 @@ export function registerAllPanels() {
 
   // ---- shop thời trang chibi (part Avatar) ----
   const CHIBI_TABS: [string, number][] = [
-    ['💇 Tóc', 50], ['👕 Áo', 20], ['👖 Quần', 10], ['🎩 Mũ', 60], ['👓 Kính', 65], ['🪽 Cánh', 5]
+    ['💇 Tóc', 50], ['👕 Áo', 20], ['👖 Quần', 10], ['🎩 Mũ', 60], ['👓 Kính', 65], ['🪽 Cánh', 5], ['🖐️ Đồ cầm tay', 70]
   ];
 
   registerPanel('fashionshop', () => {
@@ -298,21 +305,28 @@ export function registerAllPanels() {
       const z = CHIBI_TABS[tab][1];
       const g = S.player.chibi?.gender ?? 0;
       const grid = h('div', 'grid');
+      const isHand = z === 70;
       for (const p of chibiList(z, g)) {
-        const owned = S.chibiWardrobe.includes(p.id);
+        // đồ cầm tay: mua về nằm trong túi đồ; đồ mặc: vào tủ đồ
+        const owned = isHand ? itemCount(handItemId(p.id)) > 0 : S.chibiWardrobe.includes(p.id);
         const cell = h('div', `cell ${owned ? 'owned' : ''}`);
         const xu = chibiPriceXu(p), ruby = chibiPriceRuby(p);
-        const price = owned ? '✅ Đã có' : ruby > 0 ? `💎${ruby}` : `🪙${fmt(xu)}`;
+        const price = owned && !isHand ? '✅ Đã có' : ruby > 0 ? `💎${ruby}` : `🪙${fmt(xu)}`;
         cell.append(chibiPreview(p.id, 52), h('div', 'nm', p.name), h('div', 'pr', price));
         cell.onclick = () => {
-          if (owned) { openPanel('wardrobe'); return; }
+          if (owned && !isHand) { openPanel('wardrobe'); return; }
           const ok = ruby > 0 ? spend(0, ruby) : spend(xu);
-          if (ok) {
-            S.chibiWardrobe.push(p.id); save();
-            addStat('fashion_bought');
+          if (!ok) return;
+          if (isHand) {
+            addItem(handItemId(p.id));
+            toast(`Đã mua ${p.name}! Mở Túi đồ -> Dùng để đưa xuống ô trang bị.`, '🖐️');
+          } else {
+            S.chibiWardrobe.push(p.id);
             toast(`Đã mua ${p.name}! Vào Tủ đồ để mặc.`, '👗');
-            render();
           }
+          save();
+          addStat('fashion_bought');
+          render();
         };
         grid.append(cell);
       }

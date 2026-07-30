@@ -24,7 +24,7 @@ export const BODY_ID = 0;   // thân "tròn"
 export const EYES_ID = 4;   // mắt đen mặc định
 
 export const Z_NAME: Record<number, string> = {
-  5: 'Cánh', 10: 'Quần', 20: 'Áo', 40: 'Mắt', 50: 'Tóc', 60: 'Mũ', 65: 'Kính', 70: 'Phụ kiện'
+  5: 'Cánh', 10: 'Quần', 20: 'Áo', 40: 'Mắt', 50: 'Tóc', 60: 'Mũ', 65: 'Kính', 70: 'Đồ cầm tay'
 };
 
 export function chibiList(z: number, gender?: number): ChibiPartDef[] {
@@ -69,6 +69,7 @@ export interface ChibiLook {
   hat: number;             // 0 = không đội
   glasses: number;         // 0 = không đeo
   wing: number;            // 0 = không có cánh
+  hand?: number;           // 0/undefined = tay không (đồ cầm tay z=70)
 }
 
 export function defaultLook(gender: number): ChibiLook {
@@ -79,7 +80,7 @@ export function defaultLook(gender: number): ChibiLook {
     shirt: pick(20),
     hair: pick(50),
     eyes: EYES_ID,
-    hat: 0, glasses: 0, wing: 0
+    hat: 0, glasses: 0, wing: 0, hand: 0
   };
 }
 
@@ -94,6 +95,7 @@ export function lookLayers(l: ChibiLook): number[] {
   if (l.hair) out.push(l.hair);
   if (l.hat) out.push(l.hat);
   if (l.glasses) out.push(l.glasses);
+  if (l.hand) out.push(l.hand);     // đồ cầm tay vẽ trên cùng
   return out;
 }
 

@@ -1,7 +1,7 @@
 import type Phaser from 'phaser';
 import { bus, EV, toast } from '@/core/events';
-import { S, unequipTool, toolLevel } from '@/core/save';
-import { h, root, fmt, charFace, spr } from './kit';
+import { S, unequipTool, toolLevel, toggleHand } from '@/core/save';
+import { h, root, fmt, charFace, spr, chibiPreview } from './kit';
 import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
 import { gameHour, currentWeather, WEATHER_ICON, season } from '@/systems/time';
@@ -55,6 +55,7 @@ export function initUI(game: Phaser.Game) {
   bus.on(EV.OPEN_PANEL, (p: { panel: string; data?: any }) => openPanel(p.panel, p.data));
   bus.on(EV.ZONE, () => { buildHud(); refreshHotbar(); });
   bus.on('hotbar:changed', () => refreshHotbar());
+  bus.on(EV.APPEARANCE, () => refreshHotbar());
 
   // khởi tạo hệ thống nền sau khi vào world lần đầu
   bus.once(EV.ZONE, () => {
@@ -283,6 +284,21 @@ export function refreshHotbar() {
   bar.innerHTML = '';
   S.hotbar.forEach((tid, i) => {
     const slot = h('button', 'hb-slot');
+    // ô đồ cầm tay: hand:<partId>
+    if (tid.startsWith('hand:')) {
+      const pid = Number(tid.slice(5));
+      const held = (S.player.chibi?.hand ?? 0) === pid;
+      if (held) slot.classList.add('hb-on');
+      slot.append(chibiPreview(pid, 30));
+      slot.title = 'Đồ cầm tay — bấm để cầm / cất';
+      slot.onclick = () => { sfx.click(); toggleHand(pid); refreshHotbar(); };
+      let hold2 = 0;
+      slot.onpointerdown = () => { hold2 = window.setTimeout(() => { unequipTool(i); refreshHotbar(); }, 550); };
+      slot.onpointerup = slot.onpointerleave = () => clearTimeout(hold2);
+      slot.oncontextmenu = e => { e.preventDefault(); unequipTool(i); refreshHotbar(); };
+      bar!.append(slot);
+      return;
+    }
     const t = TOOLS[tid];
     if (t) {
       slot.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 32)));
