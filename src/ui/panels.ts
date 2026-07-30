@@ -86,42 +86,89 @@ export function registerAllPanels() {
     toast('Đã sắp xếp túi đồ.', 'inventory');
   }
 
-  registerPanel('inventory', () => {
-    const { body, close, tabs } = openWindow('Kho đồ');
-    const kinds = [
-      ['Tất cả', () => true],
-      ['Nông sản', (k: string) => ['crop', 'seed', 'product'].includes(k)],
-      ['Cá & Côn trùng', (k: string) => ['fish', 'insect'].includes(k)],
-      ['Nội thất', (k: string) => ['furniture', 'deco'].includes(k)],
-      ['Khác', (k: string) => ['gift', 'material', 'food', 'special', 'tool'].includes(k)]
-    ] as const;
+  const BAG_TABS: [string, (k: string) => boolean][] = [
+    ['Tất cả', () => true],
+    ['Trang bị', k => k === 'tool' || k === 'hand'],
+    ['Nông sản', k => ['crop', 'seed', 'product'].includes(k)],
+    ['Cá & Côn trùng', k => ['fish', 'insect'].includes(k)],
+    ['Nội thất', k => ['furniture', 'deco'].includes(k)],
+    ['Khác', k => ['gift', 'material', 'food', 'special'].includes(k)]
+  ];
+
+  // Nông cụ & đồ cầm tay cũng nằm trong túi (kind ảo 'tool' / 'hand')
+  interface BagEntry { kind: string; name: string; qty: number; node: () => HTMLElement; equipped: boolean; onClick: () => void }
+
+  function bagEntries(close: () => void): BagEntry[] {
+    const out: BagEntry[] = [];
+    for (const t of TOOL_LIST) {
+      if (toolLevel(t.id) <= 0) continue;
+      const on = S.hotbar.includes(t.id);
+      out.push({
+        kind: 'tool', name: t.name, qty: 0, equipped: on,
+        node: () => { const d = h('div'); d.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 66))); return d; },
+        onClick: () => {
+          if (on) unequipTool(S.hotbar.indexOf(t.id));
+          else equipTool(t.id);
+        }
+      });
+    }
+    for (const [id, qty] of Object.entries(S.inventory)) {
+      const def = item(id);
+      const hand = def.meta?.handPart ? Number(def.meta.handPart) : 0;
+      out.push({
+        kind: hand ? 'hand' : def.kind, name: def.name, qty, equipped: hand ? S.hotbar.includes(`hand:${hand}`) : false,
+        node: () => hand ? chibiPreview(hand, 66) : iconOf(def, 62),
+        onClick: () => itemActions(id, close)
+      });
+    }
+    return out;
+  }
+
+  // Lưới túi đồ dùng chung cho panel Kho đồ và tab Túi đồ trong màn Nhân vật
+  function renderBag(box: HTMLElement, close: () => void, redraw: () => void) {
     let tab = 0;
-    const render = () => {
-      body.innerHTML = '';
+    const draw = () => {
+      box.innerHTML = '';
+      const bar = h('div', 'win-tabs bag-tabs');
+      BAG_TABS.forEach(([name], i) => {
+        const t = h('div', `tab ${i === tab ? 'active' : ''}`, name);
+        t.onclick = () => { tab = i; draw(); };
+        bar.append(t);
+      });
+      box.append(bar);
+
+      const all = bagEntries(close);
+      const list = all.filter(e => BAG_TABS[tab][1](e.kind));
       const grid = h('div', 'bag');
-      const entries = Object.entries(S.inventory).filter(([id]) => kinds[tab][1](item(id).kind) || tab === 0);
-      for (const [id, qty] of entries) {
-        const def = item(id);
-        const c = h('button', 'bag-slot');
-        c.append(iconOf(def, 34), h('div', 'qty', `x${qty}`));
-        c.title = def.name;
-        c.onclick = () => { sfx.click(); itemActions(id, close); };
+      for (const e of list) {
+        const c = h('button', `bag-slot ${e.equipped ? 'on' : ''}`);
+        c.append(e.node());
+        if (e.qty > 1) c.append(h('div', 'qty', `x${e.qty}`));
+        if (e.equipped) c.append(h('div', 'bag-on', 'Đang gắn'));
+        c.title = e.name;
+        c.onclick = () => { sfx.click(); e.onClick(); redraw(); };
         grid.append(c);
       }
-      // lấp cho đủ số ô của túi — ô trống để trống, không ghi gì
-      for (let i = entries.length; i < BAG_CAP; i++) grid.append(h('div', 'bag-slot empty'));
+      for (let i = list.length; i < BAG_CAP; i++) grid.append(h('div', 'bag-slot empty'));
+
       const wrap = h('div', 'bag-wrap');
       const scroll = h('div', 'bag-scroll');
       scroll.append(grid);
       const foot = h('div', 'bag-foot');
-      foot.append(h('div', 'bag-count', `Số ô sử dụng: ${Object.keys(S.inventory).length}/${BAG_CAP}`));
-      foot.append(btn('Sắp xếp', 'gold', () => { sortBag(); sfx.click(); render(); }));
+      foot.append(h('div', 'bag-count', `Số ô sử dụng: ${all.length}/${BAG_CAP}`));
+      foot.append(btn('Sắp xếp', 'gold', () => { sortBag(); sfx.click(); draw(); }));
       wrap.append(scroll, foot);
-      body.append(wrap);
+      box.append(wrap);
     };
-    tabs(kinds.map(k => k[0]), i => { tab = i; render(); });
-    render();
-    bus.on(EV.INVENTORY, render);
+    draw();
+    return draw;
+  }
+
+  registerPanel('inventory', () => {
+    const { body, close } = openWindow('Túi đồ', { size: 'large' });
+    let redraw = () => {};
+    redraw = renderBag(body, close, () => redraw());
+    bus.on(EV.INVENTORY, () => redraw());
   });
 
   function itemActions(id: string, closeParent: () => void) {
@@ -615,7 +662,7 @@ export function registerAllPanels() {
   // ================= Hồ sơ & Tủ đồ & Danh hiệu =================
   // ================= Nhân vật: hub có cột tab dọc bên phải (kiểu GunPow) =================
   const CH_SECTIONS: [string, string][] = [
-    ['equip', 'Trang bị'], ['wardrobe', 'Tủ đồ'], ['title', 'Danh hiệu'],
+    ['wardrobe', 'Tủ đồ'], ['bag', 'Túi đồ'], ['title', 'Danh hiệu'],
     ['pet', 'Thú cưng'], ['info', 'Thông tin']
   ];
 
@@ -636,44 +683,12 @@ export function registerAllPanels() {
       body.append(wrap);
       openCharHubRefresh = draw;
       if (sec === 'wardrobe') openWardrobe(main);
-      else if (sec === 'equip') renderEquip(main);
+      else if (sec === 'bag') renderBag(main, () => {}, draw);
       else if (sec === 'title') renderTitles(main, draw);
       else if (sec === 'pet') renderPetList(main, draw);
       else renderCharInfo(main);
     };
     draw();
-  }
-
-  // ---- Trang bị: nông cụ đã có, bấm để gắn xuống thanh nhanh ----
-  function renderEquip(box: HTMLElement) {
-    box.append(h('div', 'hint', 'Bấm "Trang bị" để đưa nông cụ xuống thanh ô dưới màn hình.'));
-    const grid = h('div', 'wd-grid');
-    let n = 0;
-    for (const t of TOOL_LIST) {
-      const lv = toolLevel(t.id);
-      const on = S.hotbar.includes(t.id);
-      const c = h('button', `wd-item ${on ? 'active' : ''}`);
-      const ic = h('div'); ic.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 42)));
-      c.append(ic, h('div', 'nm', t.name));
-      c.append(h('div', 'pr', lv <= 0 ? 'Chưa có' : on ? 'Đang gắn' : `Lv.${lv}`));
-      if (lv <= 0) c.classList.add('wd-lock');
-      c.onclick = () => {
-        sfx.click();
-        if (lv <= 0) { toast(`${t.name} chưa mua — ghé Bách hóa nhé!`, 'shop'); return; }
-        if (on) { unequipTool(S.hotbar.indexOf(t.id)); } else equipTool(t.id);
-        openCharHubRefresh();
-      };
-      grid.append(c); n++;
-    }
-    for (const key of S.hotbar.filter(k => k.startsWith('hand:'))) {
-      const pid = Number(key.slice(5));
-      const c = h('button', 'wd-item active');
-      c.append(chibiPreview(pid, 42), h('div', 'nm', CHIBI_PARTS[pid]?.name ?? 'Đồ cầm tay'), h('div', 'pr', 'Đang gắn'));
-      c.onclick = () => { unequipTool(S.hotbar.indexOf(key)); openCharHubRefresh(); };
-      grid.append(c); n++;
-    }
-    for (let i = n; i < Math.max(12, Math.ceil(n / 4) * 4); i++) grid.append(h('div', 'wd-item wd-empty'));
-    const card = h('div', 'wd-card'); card.append(grid); box.append(card);
   }
 
   function renderTitles(box: HTMLElement, redraw: () => void) {
