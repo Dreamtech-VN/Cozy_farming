@@ -314,15 +314,15 @@ export function refreshHotbar() {
       slot.onclick = () => { sfx.click(); bus.emit('hotbar:use', tid); };
       // giữ lâu / chuột phải = gỡ nông cụ khỏi ô
       let hold = 0;
-      slot.onpointerdown = () => { hold = window.setTimeout(() => { unequipTool(i); toast(`Đã gỡ ${t.name}.`, '🛠️'); }, 550); };
+      slot.onpointerdown = () => { hold = window.setTimeout(() => { unequipTool(i); toast(`Đã gỡ ${t.name}.`, 'hoe'); }, 550); };
       slot.onpointerup = slot.onpointerleave = () => clearTimeout(hold);
-      slot.oncontextmenu = e => { e.preventDefault(); unequipTool(i); toast(`Đã gỡ ${t.name}.`, '🛠️'); };
+      slot.oncontextmenu = e => { e.preventDefault(); unequipTool(i); toast(`Đã gỡ ${t.name}.`, 'hoe'); };
     } else {
       // ô trống: mở túi đồ — nông cụ mua về nằm trong túi, bấm món đồ để gắn
       slot.classList.add('empty');
       slot.textContent = '+';
       slot.title = 'Gắn nông cụ từ túi đồ';
-      slot.onclick = () => { sfx.click(); openPanel('inventory'); toast('Nông cụ mua về nằm trong túi đồ — bấm vào món để gắn.', '🎒'); };
+      slot.onclick = () => { sfx.click(); openPanel('inventory'); toast('Nông cụ mua về nằm trong túi đồ — bấm vào món để gắn.', 'inventory'); };
     }
     bar!.append(slot);
   });

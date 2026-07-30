@@ -11,7 +11,7 @@ function rewardWin(coins: number, statKey: 'caroWins' | 'xiangqiWins' | 'rpsWins
   if (statKey === 'caroWins') addStat('caro_wins');
   addStat('minigame_wins');
   save();
-  toast(`Thắng! +${coins} xu`, '🏆');
+  toast(`Thắng! +${coins} xu`, 'rank');
   sfx.win();
 }
 
@@ -20,7 +20,7 @@ export function registerMinigames() {
   // ================= Cờ caro (Gomoku 12x12, thắng 5) =================
   registerPanel('caro', () => {
     const N = 12;
-    const { body } = openWindow('⭕ Cờ caro — bạn là X', { size: 'large' });
+    const { body } = openWindow('Cờ caro — bạn là X', { size: 'large' });
     addStat('daily_minigame');
     let board: number[] = new Array(N * N).fill(0); // 0 trống, 1 người, 2 máy
     let over = false;
@@ -102,7 +102,7 @@ export function registerMinigames() {
 
   // ================= Oẳn tù tì =================
   registerPanel('rps', () => {
-    const { body } = openWindow('✊ Oẳn tù tì', { size: 'small' });
+    const { body } = openWindow('Oẳn tù tì', { size: 'small' });
     addStat('daily_minigame');
     const status = h('div', 't1', 'Chọn kéo, búa hoặc bao! Thắng +50 xu');
     status.style.cssText = 'text-align:center;margin-bottom:10px';
@@ -127,7 +127,7 @@ export function registerMinigames() {
 
   // ================= Cờ tướng =================
   registerPanel('xiangqi', () => {
-    const { body } = openWindow('♟️ Cờ tướng — bạn cầm Đỏ', { size: 'large' });
+    const { body } = openWindow('Cờ tướng — bạn cầm Đỏ', { size: 'large' });
     addStat('daily_minigame');
     // bàn 9x10; quân: chữ hoa = đỏ (người), thường = đen (máy)
     // K tướng, A sĩ, E tượng, H mã, R xe, C pháo, P tốt
@@ -329,7 +329,7 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
 
   const startBtn = btn('🌾 BẮT ĐẦU CUỘC SỐNG MỚI!', 'gold', () => {
     const name = nameInput.value.trim();
-    if (name.length < 2) { toast('Tên cần ít nhất 2 ký tự nha!', '📛'); return; }
+    if (name.length < 2) { toast('Tên cần ít nhất 2 ký tự nha!', 'alert'); return; }
     S.player.name = name;
     done();
     bus.emit('charcreate:done');

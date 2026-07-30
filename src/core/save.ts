@@ -76,13 +76,13 @@ export function toolLevel(id: string): number {
 // Gắn đồ cầm tay (part Avatar) xuống ô trang bị
 export function equipHandItem(partId: number): boolean {
   const key = `hand:${partId}`;
-  if (S.hotbar.includes(key)) { toast('Món này đã nằm trên thanh trang bị rồi.', '🖐️'); return false; }
+  if (S.hotbar.includes(key)) { toast('Món này đã nằm trên thanh trang bị rồi.', 'candy'); return false; }
   let i = S.hotbar.findIndex(t => !t);
   if (i < 0) i = S.hotbar.length - 1;
   S.hotbar[i] = key;
   save();
   bus.emit('hotbar:changed');
-  toast('Đã đưa xuống ô trang bị — bấm vào ô để cầm lên tay!', '🖐️');
+  toast('Đã đưa xuống ô trang bị — bấm vào ô để cầm lên tay!', 'candy');
   return true;
 }
 
@@ -98,13 +98,13 @@ export function toggleHand(partId: number) {
 // Gắn nông cụ vào ô trống đầu tiên trên thanh (đã có thì thôi)
 export function equipTool(id: string): boolean {
   if (!ownedTool(id)) return false;
-  if (S.hotbar.includes(id)) { toast('Nông cụ này đã nằm trên thanh rồi.', '🛠️'); return false; }
+  if (S.hotbar.includes(id)) { toast('Nông cụ này đã nằm trên thanh rồi.', 'hoe'); return false; }
   let i = S.hotbar.findIndex(t => !t);
   if (i < 0) i = S.hotbar.length - 1;   // hết chỗ -> thay ô cuối
   S.hotbar[i] = id;
   save();
   bus.emit('hotbar:changed');
-  toast('Đã gắn lên thanh nông cụ!', '🛠️');
+  toast('Đã gắn lên thanh nông cụ!', 'hoe');
   return true;
 }
 
@@ -166,7 +166,7 @@ export function canAfford(coins: number, rubies = 0): boolean {
   return S.wallet.coins >= coins && S.wallet.rubies >= rubies;
 }
 export function spend(coins: number, rubies = 0): boolean {
-  if (!canAfford(coins, rubies)) { toast('Không đủ tiền!', '💰'); return false; }
+  if (!canAfford(coins, rubies)) { toast('Không đủ tiền!', 'coin'); return false; }
   S.wallet.coins -= coins; S.wallet.rubies -= rubies;
   bus.emit(EV.WALLET); save();
   return true;
@@ -198,7 +198,7 @@ export function addExp(n: number) {
   while (S.player.exp >= need()) {
     S.player.exp -= need();
     S.player.level++;
-    toast(`Lên cấp ${S.player.level}!`, '⭐');
+    toast(`Lên cấp ${S.player.level}!`, 'rank');
     addStat('level_up');
   }
   bus.emit(EV.STATE_CHANGED); save();

@@ -44,7 +44,7 @@ export function claimLogin(): boolean {
   S.daily.loginClaimed = true;
   grantReward(loginRewardToday());
   sfx.coin(); save(); bus.emit(EV.STATE_CHANGED);
-  toast(`Quà đăng nhập ngày ${S.daily.streak}!`, '🎁');
+  toast(`Quà đăng nhập ngày ${S.daily.streak}!`, 'gift');
   return true;
 }
 
@@ -57,7 +57,7 @@ export function checkinToday(): boolean {
   for (const m of CHECKIN_MILESTONES) {
     if (S.daily.checkinDays.length === m.days) {
       grantReward(m.reward);
-      toast(`Mốc điểm danh ${m.days} ngày!`, '🏅');
+      toast(`Mốc điểm danh ${m.days} ngày!`, 'rank');
     }
   }
   sfx.coin(); save(); bus.emit(EV.STATE_CHANGED);
@@ -72,7 +72,7 @@ export function wheelSpinsLeft(): number {
 
 export function spinWheel(): { index: number } | undefined {
   if (S.daily.wheelSpins > 0) {
-    if (!removeItem('lucky_ticket')) { toast('Hết lượt quay — mua vé bằng ruby nhé.', '🎟️'); return undefined; }
+    if (!removeItem('lucky_ticket')) { toast('Hết lượt quay — mua vé bằng ruby nhé.', 'wheel'); return undefined; }
   }
   S.daily.wheelSpins++;
   const total = WHEEL.reduce((s, w) => s + w.weight, 0);

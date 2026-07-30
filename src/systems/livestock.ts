@@ -12,11 +12,11 @@ export function upgradeBarn(): boolean {
   const lv = S.livestock.barnLevel;
   if (lv >= 3) { toast('Chuồng đã cấp tối đa.'); return false; }
   const cost = BARN_UPGRADE_COST[lv];
-  if (S.wallet.coins < cost) { toast(`Cần ${cost} xu.`, '💰'); sfx.error(); return false; }
+  if (S.wallet.coins < cost) { toast(`Cần ${cost} xu.`, 'coin'); sfx.error(); return false; }
   S.wallet.coins -= cost;
   S.livestock.barnLevel++;
   bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); save();
-  toast(lv === 0 ? 'Đã xây chuồng!' : `Chuồng lên cấp ${S.livestock.barnLevel}!`, '🏚️');
+  toast(lv === 0 ? 'Đã xây chuồng!' : `Chuồng lên cấp ${S.livestock.barnLevel}!`, 'barn');
   sfx.coin();
   return true;
 }
@@ -24,9 +24,9 @@ export function upgradeBarn(): boolean {
 export function buyAnimal(type: string): boolean {
   const def = ANIMALS[type];
   if (!def) return false;
-  if (S.livestock.barnLevel === 0) { toast('Xây chuồng trước đã (bấm vào chuồng ở Nông trại).', '🏚️'); return false; }
-  if (S.livestock.animals.length >= barnCapacity()) { toast('Chuồng đầy rồi — nâng cấp chuồng nhé.', '🏚️'); return false; }
-  if (S.wallet.coins < def.price) { toast(`Cần ${def.price} xu.`, '💰'); sfx.error(); return false; }
+  if (S.livestock.barnLevel === 0) { toast('Xây chuồng trước đã (bấm vào chuồng ở Nông trại).', 'barn'); return false; }
+  if (S.livestock.animals.length >= barnCapacity()) { toast('Chuồng đầy rồi — nâng cấp chuồng nhé.', 'barn'); return false; }
+  if (S.wallet.coins < def.price) { toast(`Cần ${def.price} xu.`, 'coin'); sfx.error(); return false; }
   S.wallet.coins -= def.price;
   const a: Animal = {
     id: `a${Date.now()}${Math.floor(Math.random() * 999)}`,
@@ -82,6 +82,6 @@ export function sellAnimal(id: string): boolean {
   S.livestock.animals.splice(idx, 1);
   S.wallet.coins += refund;
   bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); save();
-  toast(`Đã bán ${a.name} được ${refund} xu.`, '🪙'); sfx.coin();
+  toast(`Đã bán ${a.name} được ${refund} xu.`, 'coin'); sfx.coin();
   return true;
 }

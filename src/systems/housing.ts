@@ -10,24 +10,24 @@ export function houseSize(): number {
 export function buyHouse(): boolean {
   if (S.house.owned) return false;
   const lv = HOUSE_LEVELS[0];
-  if (S.wallet.coins < lv.price) { toast(`Cần ${lv.price} xu để mua ${lv.name}.`, '💰'); sfx.error(); return false; }
+  if (S.wallet.coins < lv.price) { toast(`Cần ${lv.price} xu để mua ${lv.name}.`, 'coin'); sfx.error(); return false; }
   S.wallet.coins -= lv.price;
   S.house.owned = true; S.house.level = 1;
   addStat('house_bought');
   bus.emit(EV.WALLET); bus.emit(EV.HOUSE); bus.emit(EV.STATE_CHANGED); save();
-  toast(`Chúc mừng tân gia — ${lv.name}!`, '🏠'); sfx.win();
+  toast(`Chúc mừng tân gia — ${lv.name}!`, 'house'); sfx.win();
   return true;
 }
 
 export function upgradeHouse(): boolean {
   if (!S.house.owned || S.house.level >= HOUSE_LEVELS.length) return false;
   const next = HOUSE_LEVELS[S.house.level];
-  if (S.wallet.coins < next.price) { toast(`Cần ${next.price} xu.`, '💰'); sfx.error(); return false; }
+  if (S.wallet.coins < next.price) { toast(`Cần ${next.price} xu.`, 'coin'); sfx.error(); return false; }
   S.wallet.coins -= next.price;
   S.house.level++;
   addStat('house_upgraded');
   bus.emit(EV.WALLET); bus.emit(EV.HOUSE); bus.emit(EV.STATE_CHANGED); save();
-  toast(`Nhà nâng cấp thành ${next.name}!`, '🏡'); sfx.win();
+  toast(`Nhà nâng cấp thành ${next.name}!`, 'house'); sfx.win();
   return true;
 }
 
@@ -78,11 +78,11 @@ export function setFloor(i: number) {
 // Tổ chức tiệc: tốn 1 bánh kem, bạn NPC đến chơi 2 phút
 export function throwParty(): boolean {
   if (!S.house.owned) { toast('Bạn chưa có nhà.'); return false; }
-  if (!removeItem('food_cake')) { toast('Cần 1 Bánh kem để mở tiệc (mua ở Bách hóa).', '🎂'); return false; }
+  if (!removeItem('food_cake')) { toast('Cần 1 Bánh kem để mở tiệc (mua ở Bách hóa).', 'gift'); return false; }
   S.house.partyUntil = Date.now() + 2 * 60_000;
   addStat('parties');
   bus.emit(EV.HOUSE); save(); sfx.win();
-  toast('Tiệc bắt đầu! Bạn bè đang đến nhà bạn 🎉', '🎉');
+  toast('Tiệc bắt đầu! Bạn bè đang đến nhà bạn 🎉', 'gift');
   return true;
 }
 

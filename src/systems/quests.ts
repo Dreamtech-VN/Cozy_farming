@@ -10,7 +10,7 @@ export function grantReward(r: Reward) {
   if (r.items) for (const [id, qty] of Object.entries(r.items)) addItem(id, qty);
   if (r.title && !S.player.titles.includes(r.title)) {
     S.player.titles.push(r.title);
-    toast('Danh hiệu mới!', '🏅');
+    toast('Danh hiệu mới!', 'rank');
   }
   save();
 }
@@ -56,7 +56,7 @@ function onStat(key: string) {
     S.quests.active[id] = S.stats[key] ?? 0;
     if (S.quests.active[id] >= def.target && !S.quests.completed.includes(id)) {
       S.quests.completed.push(id);
-      toast(`Hoàn thành: ${def.name} — vào Nhiệm vụ nhận thưởng!`, '✅');
+      toast(`Hoàn thành: ${def.name} — vào Nhiệm vụ nhận thưởng!`, 'check');
       sfx.win();
       changed = true;
     }
@@ -67,7 +67,7 @@ function onStat(key: string) {
     if ((S.stats[key] ?? 0) >= a.target) {
       S.achievements.push(a.id);
       grantReward(a.reward);
-      toast(`Thành tựu: ${a.name}!`, '🏆');
+      toast(`Thành tựu: ${a.name}!`, 'rank');
       sfx.win();
       changed = true;
     }
@@ -89,7 +89,7 @@ export function claimQuest(id: string): boolean {
     const next = QUESTS[def.chain];
     // nếu chỉ số đã đạt sẵn thì đánh dấu hoàn thành luôn
     if (S.quests.active[def.chain] >= next.target) S.quests.completed.push(def.chain);
-    toast(`Nhiệm vụ mới: ${next.name}`, '📜');
+    toast(`Nhiệm vụ mới: ${next.name}`, 'quest');
   }
   save(); bus.emit(EV.QUEST);
   return true;

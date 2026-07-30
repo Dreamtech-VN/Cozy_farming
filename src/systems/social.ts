@@ -98,7 +98,7 @@ export function addFriend(f: Friend): boolean {
   S.social.friends.push({ ...f, online: true });
   addStat('friends_added');
   save(); bus.emit(EV.STATE_CHANGED);
-  toast(`Đã kết bạn với ${f.name}!`, '🤝');
+  toast(`Đã kết bạn với ${f.name}!`, 'group');
   return true;
 }
 
@@ -110,13 +110,13 @@ export function removeFriend(id: string) {
 export function blockPlayer(id: string, name: string) {
   if (!S.social.blocked.includes(id)) S.social.blocked.push(id);
   removeFriend(id);
-  toast(`Đã chặn ${name}.`, '🚫');
+  toast(`Đã chặn ${name}.`, 'close');
   save();
 }
 
 export function reportPlayer(id: string, name: string) {
   if (!S.social.reported.includes(id)) S.social.reported.push(id);
-  toast(`Đã gửi báo cáo về ${name}. Cảm ơn bạn!`, '🚨');
+  toast(`Đã gửi báo cáo về ${name}. Cảm ơn bạn!`, 'alert');
   save();
 }
 
@@ -125,7 +125,7 @@ export function giveGift(friendId: string, itemId: string): boolean {
   if (!f) return false;
   if (!removeItem(itemId)) { toast('Không có vật phẩm này.'); return false; }
   addStat('gifts_given'); addStat('daily_gifted');
-  toast(`Đã tặng ${item(itemId).name} cho ${f.name}!`, '🎁');
+  toast(`Đã tặng ${item(itemId).name} cho ${f.name}!`, 'gift');
   // bạn NPC gửi quà lại qua thư
   window.setTimeout(() => {
     sendMail({
@@ -142,7 +142,7 @@ export function sendMail(m: Omit<MailMessage, 'id' | 'read' | 'claimed' | 'at'>)
   S.mail.unshift({ ...m, id: `m${Date.now()}${Math.floor(Math.random() * 999)}`, read: false, claimed: false, at: Date.now() });
   if (S.mail.length > 50) S.mail.pop();
   save(); bus.emit(EV.STATE_CHANGED);
-  toast('Bạn có thư mới!', '✉️');
+  toast('Bạn có thư mới!', 'mail');
 }
 
 export function claimMail(id: string): boolean {

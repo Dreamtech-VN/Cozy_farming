@@ -788,7 +788,7 @@ export class WorldScene extends Phaser.Scene {
     const acts: WorldAction[] = [];
     if (livestock.isHungry(a)) acts.push({ icon: '', ui: 'feed', label: 'Cho ăn', cb: () => { livestock.feed(a); } });
     if (livestock.hasProduct(a)) acts.push({
-      icon: '🧺', label: `Thu ${'' + def.name}`, cb: () => {
+      icon: '', ui: 'basket', label: `Thu ${'' + def.name}`, cb: () => {
         livestock.collect(a); toast(`Thu được sản phẩm từ ${def.name}!`, def.icon);
         const spr = this.animalSprites.get(id);
         if (spr) {
@@ -843,7 +843,7 @@ export class WorldScene extends Phaser.Scene {
 
   private tryCatchInsect(ins: InsectSprite) {
     const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, ins.obj.x, ins.obj.y);
-    if (d > (this.zone.bg ? 95 : 48)) { toast('Lại gần hơn chút nữa!', '🥅'); return; }
+    if (d > (this.zone.bg ? 95 : 48)) { toast('Lại gần hơn chút nữa!', 'net'); return; }
     if (this.busy) return;
     this.busy = true;
     // quay mặt về phía côn trùng
@@ -863,7 +863,7 @@ export class WorldScene extends Phaser.Scene {
 
   // ================= câu cá =================
   private startFishing() {
-    if (S.tools.rod <= 0) { toast('Bạn chưa có cần câu — mua ở tiệm câu Bãi biển.', '🎣'); sfx.error(); return; }
+    if (S.tools.rod <= 0) { toast('Bạn chưa có cần câu — mua ở tiệm câu Bãi biển.', 'rod'); sfx.error(); return; }
     if (this.fishingState !== 'idle') return;
     this.fishingState = 'waiting';
     this.busy = true;
@@ -874,17 +874,17 @@ export class WorldScene extends Phaser.Scene {
     this.tweens.add({ targets: this.bobber, y: '+=2', duration: 500, yoyo: true, repeat: -1 });
     sfx.splash();
     const bait = fishing.useBait();
-    if (bait) toast(`Đã móc ${bait.name}`, '🪱');
+    if (bait) toast(`Đã móc ${bait.name}`, 'seed');
     const wait = (1500 + Math.random() * 3500) * (bait?.wait ?? 1);
     this.biteTimer = this.time.delayedCall(wait, () => {
       this.fishingState = 'bite';
       this.bobber?.setTint(0xff0000);
       this.tweens.add({ targets: this.bobber, scale: 1.6, duration: 120, yoyo: true, repeat: 3 });
-      toast('Cá cắn câu! Bấm ngay!', '❗');
+      toast('Cá cắn câu! Bấm ngay!', 'alert');
       sfx.click();
       this.time.delayedCall(900, () => {
         if (this.fishingState === 'bite') {
-          toast('Cá chạy mất rồi...', '💨');
+          toast('Cá chạy mất rồi...', 'alert');
           this.stopFishing();
         }
       });
@@ -893,7 +893,7 @@ export class WorldScene extends Phaser.Scene {
 
   private reelFish() {
     if (this.fishingState === 'waiting') {
-      toast('Chưa có cá cắn — kiên nhẫn nào.', '🎣');
+      toast('Chưa có cá cắn — kiên nhẫn nào.', 'rod');
       this.stopFishing();
       return;
     }
@@ -903,7 +903,7 @@ export class WorldScene extends Phaser.Scene {
     const f = fishing.rollFish(this.zone.id === 'farm' ? 'pond' : this.zone.id);
     if (f) {
       fishing.landFish(f);
-      toast(`Câu được ${f.name}!`, '🐟');
+      toast(`Câu được ${f.name}!`, 'fish');
       if (this.bobber) this.fxBurst(this.bobber.x, this.bobber.y, 0x74c0fc, 10);
       this.fxFloatIcon(this.player.x, this.player.y - (this.zone.bg ? 100 : 50), 'fish', f.index, `+${f.name}`, '#74c0fc');
     }
@@ -920,7 +920,7 @@ export class WorldScene extends Phaser.Scene {
 
   // ================= đặt nội thất =================
   private startPlacing(itemId: string) {
-    if (this.zone.id !== 'house') { toast('Về nhà để đặt nội thất nhé.', '🏠'); return; }
+    if (this.zone.id !== 'house') { toast('Về nhà để đặt nội thất nhé.', 'house'); return; }
     const def = FURNITURE[itemId];
     if (!def) return;
     this.placingItem = itemId;
@@ -936,7 +936,7 @@ export class WorldScene extends Phaser.Scene {
       c.add(this.add.text(def.w * T / 2, def.h * T / 2, def.icon, { fontSize: '12px' }).setOrigin(0.5));
     }
     this.placeGhost = c;
-    toast('Chạm vào sàn để đặt. Chạm 2 lần nhanh để hủy.', '📦');
+    toast('Chạm vào sàn để đặt. Chạm 2 lần nhanh để hủy.', 'box');
   }
 
   // ================= tap =================
@@ -969,7 +969,7 @@ export class WorldScene extends Phaser.Scene {
             panel: 'dialog',
             data: {
               title: '📦 Nội thất', text: 'Bạn muốn làm gì?',
-              actions: [{ icon: '🧺', label: 'Thu dọn về kho', cb: () => import('@/systems/housing').then(h => h.pickupFurniture(placedId)) }]
+              actions: [{ icon: '', ui: 'basket', label: 'Thu dọn về kho', cb: () => import('@/systems/housing').then(h => h.pickupFurniture(placedId)) }]
             }
           });
           return;
@@ -1008,7 +1008,7 @@ export class WorldScene extends Phaser.Scene {
     // NPC gần
     for (const { def, sprite } of this.npcs) {
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, sprite.x, sprite.y) < 34) {
-        acts.push({ icon: '💬', label: `Nói chuyện: ${def.name}`, cb: () => this.talkNpc(def) });
+        acts.push({ icon: '', ui: 'chat', label: `Nói chuyện: ${def.name}`, cb: () => this.talkNpc(def) });
       }
     }
     // cổng
@@ -1028,7 +1028,7 @@ export class WorldScene extends Phaser.Scene {
           panel: 'dialog',
           data: {
             title: '🟫 Mua đất', text: `Mở thêm 1 ô đất với giá ${farming.plotPrice()} xu?`,
-            actions: [{ icon: '🪙', label: 'Mua', cb: () => { farming.buyPlot(); this.refreshFarm(); } }]
+            actions: [{ icon: '', ui: 'coin', label: 'Mua', cb: () => { farming.buyPlot(); this.refreshFarm(); } }]
           }
         })
       });
@@ -1067,12 +1067,12 @@ export class WorldScene extends Phaser.Scene {
                 const qty = 1 + Math.floor(Math.random() * 3);
                 S.stats['khe_last'] = Date.now();
                 import('@/core/save').then(m => { m.addItem('crop_khe', qty); m.addStat('khe_shaken'); });
-                toast(`Rụng ${qty} quả khế!`, '⭐');
+                toast(`Rụng ${qty} quả khế!`, 'rank');
               });
             }
           });
         } else {
-          acts.push({ icon: '⏳', label: `Khế chưa chín (${Math.ceil(readyIn / 60000)} phút)`, cb: () => toast('Chờ khế chín đã nha!', '⭐') });
+          acts.push({ icon: '⏳', label: `Khế chưa chín (${Math.ceil(readyIn / 60000)} phút)`, cb: () => toast('Chờ khế chín đã nha!', 'rank') });
         }
       }
     }
@@ -1329,7 +1329,7 @@ export class WorldScene extends Phaser.Scene {
   private selfAct(kind: string) {
     if (kind === 'run') {
       this.running = !this.running;
-      toast(this.running ? 'Bật chế độ chạy 🏃' : 'Tắt chế độ chạy', '🏃');
+      toast(this.running ? 'Bật chế độ chạy 🏃' : 'Tắt chế độ chạy', 'runner');
       return;
     }
     if (kind === 'sit' || kind === 'lie') {
@@ -1482,7 +1482,7 @@ export class WorldScene extends Phaser.Scene {
             }
           },
           {
-            icon: '❤️', label: 'Vuốt ve', cb: () => {
+            icon: '', ui: 'heart', label: 'Vuốt ve', cb: () => {
               if (this.pet) this.fxFloat(this.pet.x, this.pet.y - 54, '❤️', '#ff8787');
               toast(`${def.name} kêu vui vẻ~`, def.icon);
             }
@@ -1518,9 +1518,9 @@ export class WorldScene extends Phaser.Scene {
       const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, t.obj.x, t.obj.y - 10);
       if (d < bd) { bd = d; best = t; }
     }
-    if (!best || bd > 95) { toast('Lại gần mấy cây gỗ giữa nông trại nhé.', '🪓'); return; }
+    if (!best || bd > 95) { toast('Lại gần mấy cây gỗ giữa nông trại nhé.', 'axe'); return; }
     if (Date.now() < best.readyAt) {
-      toast(`Cây đang mọc lại (${Math.ceil((best.readyAt - Date.now()) / 60000)} phút).`, '🌱');
+      toast(`Cây đang mọc lại (${Math.ceil((best.readyAt - Date.now()) / 60000)} phút).`, 'seed');
       return;
     }
     const tree = best;
@@ -1545,7 +1545,7 @@ export class WorldScene extends Phaser.Scene {
       const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, m.x, m.y);
       if (d < bd) { bd = d; best = m; }
     }
-    if (!best || bd > (this.zone.bg ? 90 : 52)) { toast('Không có đống đất nào gần đây — tìm mấy ụ đất nâu nhé.', '🦯'); return; }
+    if (!best || bd > (this.zone.bg ? 90 : 52)) { toast('Không có đống đất nào gần đây — tìm mấy ụ đất nâu nhé.', 'shovel'); return; }
     const mound = best;
     this.busy = true;
     this.player.play('hoe', () => {
@@ -1564,16 +1564,16 @@ export class WorldScene extends Phaser.Scene {
         } else if (r < 0.6) {
           const crop = CROP_LIST[Math.floor(Math.random() * CROP_LIST.length)];
           m.addItem(`seed_${crop.id}`);
-          toast(`Đào được Hạt ${crop.name}!`, '🌱');
+          toast(`Đào được Hạt ${crop.name}!`, 'seed');
         } else if (r < 0.75) {
           m.addItem('fertilizer');
-          toast('Đào được Phân bón!', '💩');
+          toast('Đào được Phân bón!', 'fertilizer');
         } else if (r < 0.93) {
           m.addItem('stone');
           this.fxFloatIcon(x, y - 10, 'items16', 71, '+1 Đá');
         } else {
           m.addRubies(1);
-          toast('Đào trúng 1 Ruby! 💎', '💎');
+          toast('Đào trúng 1 Ruby! 💎', 'ruby');
         }
         m.addStat('dug');
       });
@@ -1591,21 +1591,21 @@ export class WorldScene extends Phaser.Scene {
     switch (id) {
       case 'hoe':
         if (p?.state === 'empty') this.doTill(pi);
-        else toast('Đứng cạnh ô đất trống rồi dùng cuốc nhé.', '⛏️');
+        else toast('Đứng cạnh ô đất trống rồi dùng cuốc nhé.', 'hoe');
         break;
       case 'can':
         if (p?.state === 'planted' && !p.watered) this.doWater(pi);
-        else toast('Không có cây nào cần tưới ở gần đây.', '💧');
+        else toast('Không có cây nào cần tưới ở gần đây.', 'can');
         break;
       case 'basket':
         if (p && p.state === 'planted' && farming.isRipe(p)) this.doHarvest(pi);
-        else toast('Chưa có cây chín gần đây để thu hoạch.', '🧺');
+        else toast('Chưa có cây chín gần đây để thu hoạch.', 'basket');
         break;
       case 'rod':
         if (this.fishingState === 'bite') this.reelFish();
         else if (this.fishingState === 'waiting') this.stopFishing();
         else if (this.nearWater()) this.startFishing();
-        else toast('Lại gần mép nước rồi thả câu nhé.', '🎣');
+        else toast('Lại gần mép nước rồi thả câu nhé.', 'rod');
         break;
       case 'net': {
         let best: InsectSprite | undefined; let bd = 1e9;
@@ -1614,19 +1614,19 @@ export class WorldScene extends Phaser.Scene {
           if (d < bd) { bd = d; best = ins; }
         }
         if (best && bd <= (this.zone.bg ? 100 : 64)) this.tryCatchInsect(best);
-        else toast('Không có côn trùng nào trong tầm vợt.', '🥅');
+        else toast('Không có côn trùng nào trong tầm vợt.', 'net');
         break;
       }
       case 'axe':
         if (this.zone.id === 'farm') this.chopNearestTree();
-        else toast('Cây gỗ nằm ở Nông trại.', '🪓');
+        else toast('Cây gỗ nằm ở Nông trại.', 'axe');
         break;
       case 'shovel':
         if (this.mounds.length) this.digNearestMound();
-        else toast('Đống đất chỉ có ở Nông trại và Bãi biển.', '🦯');
+        else toast('Đống đất chỉ có ở Nông trại và Bãi biển.', 'shovel');
         break;
       default:
-        toast('Nông cụ này sẽ dùng được trong bản cập nhật tới!', '🛠️');
+        toast('Nông cụ này sẽ dùng được trong bản cập nhật tới!', 'hoe');
     }
   }
 
@@ -1673,7 +1673,7 @@ export class WorldScene extends Phaser.Scene {
         panel: 'dialog',
         data: {
           title: '🏠 Nhà riêng', text: 'Bạn chưa có nhà. Mua nhà gỗ nhỏ với 2000 xu?',
-          actions: [{ icon: '🪙', label: 'Mua nhà (2000 xu)', cb: () => import('@/systems/housing').then(h => { if (h.buyHouse()) this.travel('house'); }) }]
+          actions: [{ icon: '', ui: 'coin', label: 'Mua nhà (2000 xu)', cb: () => import('@/systems/housing').then(h => { if (h.buyHouse()) this.travel('house'); }) }]
         }
       });
       return;

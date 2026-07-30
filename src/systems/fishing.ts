@@ -9,11 +9,11 @@ import { sfx } from '@/core/audio';
 export function buyRod(tier: number): boolean {
   const rod = RODS.find(r => r.tier === tier);
   if (!rod || S.tools.rod >= tier) return false;
-  if (S.wallet.coins < rod.price) { toast(`Cần ${rod.price} xu.`, '💰'); sfx.error(); return false; }
+  if (S.wallet.coins < rod.price) { toast(`Cần ${rod.price} xu.`, 'coin'); sfx.error(); return false; }
   S.wallet.coins -= rod.price;
   S.tools.rod = tier;
   bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); save();
-  toast(`Đã mua ${rod.name}!`, '🎣'); sfx.coin();
+  toast(`Đã mua ${rod.name}!`, 'rod'); sfx.coin();
   equipTool('rod');
   return true;
 }
@@ -65,7 +65,7 @@ export function landFish(fish: FishDef) {
     S.collections.fish.push(fish.id);
     S.stats['fish_species'] = S.collections.fish.length;
     bus.emit(EV.STAT, 'fish_species');
-    toast(`Loài mới: ${fish.name} (${RARITY_NAME[fish.rarity]})!`, '📖');
+    toast(`Loài mới: ${fish.name} (${RARITY_NAME[fish.rarity]})!`, 'collection');
   }
   sfx.harvest(); save(); bus.emit(EV.STATE_CHANGED);
 }
@@ -73,7 +73,7 @@ export function landFish(fish: FishDef) {
 // Thả cá vào hồ trong nhà
 export function addToAquarium(fishId: string): boolean {
   const hasTank = S.house.furniture.some(f => f.itemId.startsWith('aquarium'));
-  if (!hasTank) { toast('Cần đặt Hồ cá trong nhà trước.', '🐠'); return false; }
+  if (!hasTank) { toast('Cần đặt Hồ cá trong nhà trước.', 'fish'); return false; }
   const cap = S.house.furniture.some(f => f.itemId === 'aquarium_big') ? 8 : 3;
   if (S.house.aquarium.length >= cap) { toast('Hồ cá đầy rồi!'); return false; }
   if (!S.inventory[fishId]) return false;
@@ -81,7 +81,7 @@ export function addToAquarium(fishId: string): boolean {
   if (S.inventory[fishId] <= 0) delete S.inventory[fishId];
   S.house.aquarium.push(fishId);
   bus.emit(EV.INVENTORY); bus.emit(EV.HOUSE); save();
-  toast(`Đã thả ${FISHES[fishId]?.name ?? 'cá'} vào hồ.`, '🐠');
+  toast(`Đã thả ${FISHES[fishId]?.name ?? 'cá'} vào hồ.`, 'fish');
   return true;
 }
 
@@ -102,16 +102,16 @@ export function rollInsect(zone: string): InsectDef | undefined {
 }
 
 export function catchInsect(ins: InsectDef): boolean {
-  if (S.tools.net <= 0) { toast('Cần mua vợt ở Bách hóa trước!', '🥅'); return false; }
+  if (S.tools.net <= 0) { toast('Cần mua vợt ở Bách hóa trước!', 'net'); return false; }
   // tỉ lệ bắt trượt với loài hiếm
   const chance = ins.rarity === 'common' ? 0.95 : ins.rarity === 'rare' ? 0.75 : ins.rarity === 'epic' ? 0.55 : 0.35;
-  if (Math.random() > chance) { toast(`${ins.name} bay mất rồi!`, '💨'); return false; }
+  if (Math.random() > chance) { toast(`${ins.name} bay mất rồi!`, 'alert'); return false; }
   addItem(ins.id);
   addExp(ins.rarity === 'legendary' ? 90 : ins.rarity === 'epic' ? 35 : ins.rarity === 'rare' ? 12 : 5);
   addStat('insects_caught'); addStat('daily_insects');
   if (!S.collections.insects.includes(ins.id)) {
     S.collections.insects.push(ins.id);
-    toast(`Loài mới: ${ins.name}!`, '📖');
+    toast(`Loài mới: ${ins.name}!`, 'collection');
   }
   sfx.harvest(); save(); bus.emit(EV.STATE_CHANGED);
   toast(`Bắt được ${ins.name}!`, ins.icon);

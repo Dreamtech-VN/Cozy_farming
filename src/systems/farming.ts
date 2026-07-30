@@ -35,12 +35,12 @@ export function plotPrice(): number {
 export function buyPlot(): boolean {
   if (S.farm.unlocked >= MAX_PLOTS) { toast('Đã mở hết đất!'); return false; }
   const price = plotPrice();
-  if (S.wallet.coins < price) { toast(`Cần ${price} xu để mua đất.`, '💰'); sfx.error(); return false; }
+  if (S.wallet.coins < price) { toast(`Cần ${price} xu để mua đất.`, 'coin'); sfx.error(); return false; }
   S.wallet.coins -= price;
   S.farm.unlocked++;
   ensurePlots();
   bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); save();
-  toast('Đã mua thêm 1 ô đất!', '🟫'); sfx.coin();
+  toast('Đã mua thêm 1 ô đất!', 'seed'); sfx.coin();
   addStat('plots_bought');
   return true;
 }
@@ -53,7 +53,7 @@ export function till(i: number): boolean {
   if (Math.random() < toolBonus('hoe', S.tools.hoe)) {
     const c = CROP_LIST[Math.floor(Math.random() * CROP_LIST.length)];
     addItem(`seed_${c.id}`);
-    toast(`Cuốc trúng 1 Hạt ${c.name}!`, '🌱');
+    toast(`Cuốc trúng 1 Hạt ${c.name}!`, 'seed');
   }
   addStat('tilled'); sfx.plant(); save();
   bus.emit(EV.STATE_CHANGED);
@@ -84,7 +84,7 @@ export function water(i: number): boolean {
 export function fertilize(i: number): boolean {
   const p = S.farm.plots[i];
   if (!p || p.state !== 'planted' || p.fertilized) return false;
-  if (itemCount('fertilizer') <= 0) { toast('Chưa có phân bón — mua ở shop nhé.', '💩'); return false; }
+  if (itemCount('fertilizer') <= 0) { toast('Chưa có phân bón — mua ở shop nhé.', 'fertilizer'); return false; }
   removeItem('fertilizer');
   p.fertilized = true;
   addStat('fertilized'); sfx.plant(); save();
@@ -120,14 +120,14 @@ export function harvest(i: number): boolean {
   const c = CROPS[p.crop];
   let qty = c.yieldQty[0] + Math.floor(Math.random() * (c.yieldQty[1] - c.yieldQty[0] + 1));
   // giỏ cấp cao: cơ hội +1 nông sản
-  if (Math.random() < toolBonus('basket', toolLevel('basket'))) { qty += 1; toast('Giỏ xịn: +1 nông sản!', '🧺'); }
+  if (Math.random() < toolBonus('basket', toolLevel('basket'))) { qty += 1; toast('Giỏ xịn: +1 nông sản!', 'basket'); }
   // mèo đuổi chuột phá mùa màng
-  if (Math.random() < petBonus('cat')) { qty += 1; toast('Mèo cưng giúp giữ mùa: +1 nông sản!', '🐱'); }
+  if (Math.random() < petBonus('cat')) { qty += 1; toast('Mèo cưng giúp giữ mùa: +1 nông sản!', 'pet'); }
   addItem(`crop_${c.id}`, qty);
   addExp(c.exp);
   if (!S.collections.crops.includes(c.id)) {
     S.collections.crops.push(c.id);
-    toast(`Bộ sưu tập mới: ${c.name}!`, '📖');
+    toast(`Bộ sưu tập mới: ${c.name}!`, 'collection');
   }
   S.farm.plots[i] = { state: 'tilled' };
   addStat('harvested', qty); addStat('daily_harvested', qty);
