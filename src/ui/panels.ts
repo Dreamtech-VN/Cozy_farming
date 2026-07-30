@@ -1063,13 +1063,13 @@ export function registerAllPanels() {
 
     type SlotKey = 'pant' | 'shirt' | 'hair' | 'eyes' | 'hat' | 'glasses' | 'hand' | 'skin';
     // [icon UI, nhãn, z, khoá, tuỳ chọn]   z = -1 -> ô Skin trọn bộ
-    // Tóc ở tiệm cắt tóc, mắt ở viện thẩm mỹ nên không nằm trong tủ đồ
+    // Tóc ở tiệm cắt tóc, mắt ở viện thẩm mỹ, đồ cầm tay nằm trong túi đồ
+    // (gắn thẳng xuống thanh ô ngang) nên không nằm trong tủ đồ
     const ALL: [string, string, number, SlotKey, boolean][] = [
       ['hat', 'Mũ', 60, 'hat', true],
       ['glasses', 'Kính', 65, 'glasses', true],
       ['shirt', 'Áo', 20, 'shirt', false],
-      ['pants', 'Quần', 10, 'pant', false],
-      ['candy', 'Cầm tay', 70, 'hand', true]
+      ['pants', 'Quần', 10, 'pant', false]
     ];
     // Skin là mục riêng ở cột tab dọc nên không nằm chung dải tab ngang
     const SLOTS: [string, string, number, SlotKey, boolean][] =
