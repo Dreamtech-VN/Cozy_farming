@@ -50,13 +50,20 @@ function worldScene(): any {
 export function registerAllPanels() {
 
   // ================= Hộp thoại chung =================
-  registerPanel('dialog', (data: { title: string; text: string; actions?: { icon: string; label: string; cb: () => void }[] }) => {
+  registerPanel('dialog', (data: { title: string; text: string; actions?: { icon: string; label: string; ui?: string; cb: () => void }[] }) => {
     const { body, close } = openWindow(data.title, { size: 'small' });
-    body.append(h('div', '', data.text));
+    const txt = h('div');
+    txt.style.whiteSpace = 'pre-line';
+    txt.textContent = data.text;
+    body.append(txt);
     const bar = h('div');
     bar.style.cssText = 'display:flex;gap:8px;margin-top:12px;flex-wrap:wrap';
     for (const a of data.actions ?? []) {
-      bar.append(btn(`${a.icon} ${a.label}`, 'gold', () => { close(); a.cb(); }));
+      const b = btn(a.label, 'gold', () => { close(); a.cb(); });
+      if (a.ui) b.prepend(uiIcon(a.ui, 18));
+      else if (a.icon) b.prepend(document.createTextNode(a.icon + ' '));
+      b.style.display = 'inline-flex'; b.style.alignItems = 'center'; b.style.gap = '5px';
+      bar.append(b);
     }
     bar.append(btn('Đóng', '', close));
     body.append(bar);

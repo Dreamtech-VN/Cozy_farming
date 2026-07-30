@@ -1,7 +1,7 @@
 import type Phaser from 'phaser';
 import { bus, EV, toast } from '@/core/events';
 import { S, unequipTool, toolLevel, toggleHand } from '@/core/save';
-import { h, root, fmt, charFace, spr, chibiPreview } from './kit';
+import { h, root, fmt, charFace, spr, chibiPreview, uiIcon } from './kit';
 import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
 import { gameHour, currentWeather, WEATHER_ICON, season } from '@/systems/time';
@@ -150,13 +150,15 @@ function buildHud() {
 
   // nút hành động ngữ cảnh
   const actions = h('div'); actions.id = 'actions'; root().append(actions);
-  bus.on(EV.ACTION_HINT, (acts: { icon: string; label: string; cb: () => void; sprite?: { url: string; sx: number; sy: number; sw: number; sh: number } }[]) => {
+  bus.on(EV.ACTION_HINT, (acts: { icon: string; label: string; cb: () => void; ui?: string; sprite?: { url: string; sx: number; sy: number; sw: number; sh: number } }[]) => {
     actions.innerHTML = '';
     acts.slice(0, 3).forEach((a, i) => {
       const b = h('button', `act-btn ${i > 0 ? 'secondary' : ''}`);
       b.innerHTML = i === 0 ? `<span>${a.icon}</span>` : `<span>${a.icon}</span><span class="act-label"></span>`;
-      // ưu tiên sprite thật thay emoji
-      if (a.sprite) {
+      // ưu tiên icon/sprite thật thay emoji
+      if (a.ui) {
+        (b.querySelector('span') as HTMLElement).replaceWith(uiIcon(a.ui === 'coin' ? 'star' : a.ui, i === 0 ? 30 : 22));
+      } else if (a.sprite) {
         const s = a.sprite;
         (b.querySelector('span') as HTMLElement).replaceWith(spr(s.url, s.sx, s.sy, s.sw, s.sh, i === 0 ? 30 : 22));
       }

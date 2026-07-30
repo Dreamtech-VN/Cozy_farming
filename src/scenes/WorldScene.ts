@@ -96,7 +96,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   ]
 };
 
-interface WorldAction { icon: string; label: string; cb: () => void; sprite?: { url: string; sx: number; sy: number; sw: number; sh: number } }
+interface WorldAction { icon: string; label: string; cb: () => void; ui?: string; sprite?: { url: string; sx: number; sy: number; sw: number; sh: number } }
 
 // icon nông cụ (vẽ pixel 16px theo palette pack + cần câu từ fishing pack)
 const TOOL_ICON = {
@@ -785,8 +785,8 @@ export class WorldScene extends Phaser.Scene {
     const a = S.livestock.animals.find(v => v.id === id);
     if (!a) return;
     const def = ANIMALS[a.type];
-    const acts: { icon: string; label: string; cb: () => void }[] = [];
-    if (livestock.isHungry(a)) acts.push({ icon: '🌾', label: 'Cho ăn', cb: () => { livestock.feed(a); } });
+    const acts: WorldAction[] = [];
+    if (livestock.isHungry(a)) acts.push({ icon: '', ui: 'basket', label: 'Cho ăn', cb: () => { livestock.feed(a); } });
     if (livestock.hasProduct(a)) acts.push({
       icon: '🧺', label: `Thu ${'' + def.name}`, cb: () => {
         livestock.collect(a); toast(`Thu được sản phẩm từ ${def.name}!`, def.icon);
@@ -799,7 +799,7 @@ export class WorldScene extends Phaser.Scene {
         }
       }
     });
-    acts.push({ icon: '🪙', label: 'Bán (50%)', cb: () => { livestock.sellAnimal(id); this.animalSprites.get(id)?.destroy(); this.animalSprites.delete(id); } });
+    acts.push({ icon: '', ui: 'coin', label: 'Bán (50%)', cb: () => { livestock.sellAnimal(id); this.animalSprites.get(id)?.destroy(); this.animalSprites.delete(id); } });
     bus.emit(EV.OPEN_PANEL, {
       panel: 'dialog',
       data: {
@@ -1023,7 +1023,7 @@ export class WorldScene extends Phaser.Scene {
       const p = S.farm.plots[pi];
       this.selector.setVisible(true).setPosition(this.plotTiles[pi].x + FARM_PLOT.pw / 2, this.plotTiles[pi].y + FARM_PLOT.ph / 2).setScale(1.3);
       if (p.state === 'locked') acts.push({
-        icon: '🪙', label: `Mua ô đất (${farming.plotPrice()} xu)`,
+        icon: '', ui: 'coin', label: `Mua ô đất (${farming.plotPrice()} xu)`,
         cb: () => bus.emit(EV.OPEN_PANEL, {
           panel: 'dialog',
           data: {
@@ -1038,21 +1038,21 @@ export class WorldScene extends Phaser.Scene {
         if (farming.isRipe(p)) acts.push({ icon: '🧺', sprite: TOOL_ICON.basket, label: 'Thu hoạch', cb: () => this.doHarvest(pi) });
         else {
           if (!p.watered) acts.push({ icon: '💧', sprite: TOOL_ICON.can, label: 'Tưới nước', cb: () => this.doWater(pi) });
-          if (!p.fertilized) acts.push({ icon: '💩', label: 'Bón phân', cb: () => farming.fertilize(pi) });
+          if (!p.fertilized) acts.push({ icon: '', sprite: { url: 'assets/farm/items.png', sx: 32, sy: 96, sw: 16, sh: 16 }, label: 'Bón phân', cb: () => farming.fertilize(pi) });
         }
       }
     } else this.selector.setVisible(false);
 
     // bảng xếp hạng (thành phố)
     if (this.zone.id === 'town' && Phaser.Math.Distance.Between(this.player.x, this.player.y, 31 * T, 16 * T) < 50) {
-      acts.push({ icon: '🏆', label: 'Xem bảng xếp hạng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'ranking' }) });
+      acts.push({ icon: '', ui: 'star', label: 'Xem bảng xếp hạng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'ranking' }) });
     }
 
     // nhà kho + cây khế (nông trại)
     if (this.zone.id === 'farm') {
       // nhà kho: mở kho đồ
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, WAREHOUSE_POS.x, WAREHOUSE_POS.y + 40) < 80) {
-        acts.push({ icon: '🎒', label: 'Mở nhà kho', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'inventory' }) });
+        acts.push({ icon: '', ui: 'basket', label: 'Mở nhà kho', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'inventory' }) });
       }
       // cây khế: rung cây nhặt quả (hồi 10 phút)
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, KHE_POS.x, KHE_POS.y + 30) < 85) {
@@ -1060,7 +1060,7 @@ export class WorldScene extends Phaser.Scene {
         const readyIn = 10 * 60_000 - (Date.now() - last);
         if (readyIn <= 0) {
           acts.push({
-            icon: '⭐', label: 'Rung cây khế', cb: () => {
+            icon: '', ui: 'star', label: 'Rung cây khế', cb: () => {
               this.busy = true;
               this.player.play('pickup', () => {
                 this.busy = false;
@@ -1080,22 +1080,22 @@ export class WorldScene extends Phaser.Scene {
     // nhà thú cưng (nông trại) — chỉ có khi đã nuôi
     if (this.zone.id === 'farm' && S.pets?.length &&
         Phaser.Math.Distance.Between(this.player.x, this.player.y, PETHOUSE_POS.x + 30, PETHOUSE_POS.y + 40) < 95) {
-      acts.push({ icon: '🐾', label: 'Thú cưng của tôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petbag' }) });
+      acts.push({ icon: '', ui: 'person', label: 'Thú cưng của tôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petbag' }) });
     }
 
     // tiệm thú cưng (thành phố)
     if (this.zone.id === 'town' && Phaser.Math.Distance.Between(this.player.x, this.player.y, PETSHOP_POS.x, PETSHOP_POS.y + 30) < 110) {
-      acts.push({ icon: '🐾', label: 'Tiệm thú cưng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petshop' }) });
+      acts.push({ icon: '', ui: 'person', label: 'Tiệm thú cưng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petshop' }) });
     }
 
     // chuồng
     if (this.zone.features.includes('barn')) {
       const bx = (BARN_RECT.x + BARN_RECT.w / 2) * T, by = (BARN_RECT.y + BARN_RECT.h / 2) * T;
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, bx, by) < (this.zone.bg ? 110 : 40)) {
-        if (S.livestock.barnLevel === 0) acts.push({ icon: '🏚️', label: 'Xây chuồng (500 xu)', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
+        if (S.livestock.barnLevel === 0) acts.push({ icon: '', ui: 'box', label: 'Xây chuồng (500 xu)', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
         else {
-          acts.push({ icon: '🐔', label: 'Mua vật nuôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'animalshop' }) });
-          if (S.livestock.barnLevel < 3) acts.push({ icon: '⬆️', label: 'Nâng chuồng', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
+          acts.push({ icon: '', ui: 'basket', label: 'Mua vật nuôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'animalshop' }) });
+          if (S.livestock.barnLevel < 3) acts.push({ icon: '', ui: 'star', label: 'Nâng chuồng', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
         }
       }
     }
@@ -1103,15 +1103,15 @@ export class WorldScene extends Phaser.Scene {
     // câu cá
     if (this.nearWater()) {
       if (this.fishingState === 'idle') acts.push({ icon: '🎣', sprite: TOOL_ICON.rod, label: 'Câu cá', cb: () => this.startFishing() });
-      else acts.push({ icon: '❗', label: 'Kéo cần!', cb: () => this.reelFish() });
+      else acts.push({ icon: '', ui: 'star', label: 'Kéo cần!', cb: () => this.reelFish() });
     }
     return acts;
   }
 
   private talkNpc(def: NpcDef) {
     const acts: WorldAction[] = [];
-    if (def.shop) acts.push({ icon: '🛒', label: 'Xem hàng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: def.shop } }) });
-    if (def.minigame) acts.push({ icon: '🎮', label: 'Chơi mini game', cb: () => bus.emit(EV.OPEN_PANEL, { panel: def.minigame }) });
+    if (def.shop) acts.push({ icon: '', ui: 'basket', label: 'Xem hàng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: def.shop } }) });
+    if (def.minigame) acts.push({ icon: '', ui: 'star', label: 'Chơi mini game', cb: () => bus.emit(EV.OPEN_PANEL, { panel: def.minigame }) });
     bus.emit(EV.OPEN_PANEL, {
       panel: 'dialog',
       data: {
