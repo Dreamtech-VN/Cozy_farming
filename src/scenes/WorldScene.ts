@@ -234,6 +234,14 @@ export class WorldScene extends Phaser.Scene {
   private onHouseChanged() { if (this.zone.id === 'house') this.scene.restart(); }
 
   // ================= vẽ nền =================
+  // gần nước (kể cả mép) — dùng khi rải cây/hoa/ụ đất
+  private nearWaterTile(tx: number, ty: number): boolean {
+    for (const [dx, dy] of [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, 1]]) {
+      if (this.inWater((tx + dx) * T, (ty + dy) * T)) return true;
+    }
+    return false;
+  }
+
   private drawGround() {
     const { w, h, ground } = this.zone;
 
@@ -242,6 +250,16 @@ export class WorldScene extends Phaser.Scene {
       this.add.rectangle(0, 0, w * T, h * T, 0x4e8a2a).setOrigin(0).setDepth(-101);
       this.add.image(0, 0, `bg_${this.zone.bg}`).setOrigin(0).setDepth(-100);
       return;
+    }
+
+    // khai báo vùng nước TRƯỚC khi rải decor để cây/hoa không mọc dưới hồ
+    if (this.zone.features.includes('fishing')) {
+      if (this.zone.id === 'beach') {
+        const wx = (this.zone.w - 12) * T;
+        this.waterRect = new Phaser.Geom.Rectangle(wx, 0, 12 * T, this.zone.h * T);
+      } else if (this.zone.id === 'farm') {
+        this.pondEllipse = new Phaser.Geom.Ellipse(34 * T, 28 * T, 10 * T, 5 * T);
+      }
     }
 
     this.add.tileSprite(0, 0, w * T, h * T, `g_${ground}`).setOrigin(0).setDepth(-100);
@@ -260,41 +278,59 @@ export class WorldScene extends Phaser.Scene {
         this.add.image(x * T, y * T, this.zone.ground === 'grass' ? 'g_grass_dark' : `g_${this.zone.ground}`)
           .setOrigin(0).setDepth(-99).setAlpha(0.5).setScale(0.5);
       }
-      // cây từ tileset (spring trees ở khoảng x0..128,y384..448 trong tiles.png)
+      // cây từ tileset (tránh ruộng, chuồng và mặt nước)
       if (this.zone.features.includes('trees')) {
         for (let i = 0; i < 10; i++) {
           const x = Math.floor(rnd() * (w - 6)) + 3, y = Math.floor(rnd() * (h - 8)) + 3;
           if (this.zone.features.includes('farm') && x > FARM_ORIGIN.x - 2 && x < FARM_ORIGIN.x + 18 && y > FARM_ORIGIN.y - 2 && y < FARM_ORIGIN.y + 14) continue;
           if (this.zone.features.includes('barn') && x > BARN_RECT.x - 2 && x < BARN_RECT.x + BARN_RECT.w + 2 && y > BARN_RECT.y - 2 && y < BARN_RECT.y + BARN_RECT.h + 2) continue;
+          if (this.nearWaterTile(x, y)) continue;
           const kind = Math.floor(rnd() * 3);
           this.add.image(x * T, y * T, ['deco_tree_round', 'deco_tree_round2', 'deco_tree_pine'][kind])
             .setOrigin(0.5, 0.9).setScale(1.4).setDepth(y * T);
         }
       }
-      if (this.zone.features.includes('flowers')) {
-        for (let i = 0; i < 14; i++) {
-          const x = rnd() * w * T, y = rnd() * h * T;
-          const c = [0xffd43b, 0xff8787, 0xdabfff, 0xffffff][Math.floor(rnd() * 4)];
-          this.add.circle(x, y, 2.2, c).setDepth(-50);
+      // hoa sprite thật (pack farm) cho map cỏ ngoài trời
+      if (ground === 'grass' && (this.zone.features.includes('flowers') || this.zone.features.includes('trees'))) {
+        for (let i = 0; i < 16; i++) {
+          const x = Math.floor(rnd() * (w - 4)) + 2, y = Math.floor(rnd() * (h - 6)) + 3;
+          if (this.zone.features.includes('farm') && x > FARM_ORIGIN.x - 1 && x < FARM_ORIGIN.x + 17 && y > FARM_ORIGIN.y - 1 && y < FARM_ORIGIN.y + 13) continue;
+          if (this.zone.features.includes('barn') && x > BARN_RECT.x - 1 && x < BARN_RECT.x + BARN_RECT.w + 1 && y > BARN_RECT.y - 1 && y < BARN_RECT.y + BARN_RECT.h + 1) continue;
+          if (this.nearWaterTile(x, y)) continue;
+          this.add.image(x * T, y * T, 'pond_deco', 7 + Math.floor(rnd() * 9)).setDepth(-49);
         }
       }
     }
 
     // nước cho khu câu cá
     if (this.zone.features.includes('fishing')) {
-      if (this.zone.id === 'beach') {
-        const wx = (this.zone.w - 12) * T;
-        this.add.tileSprite(wx, 0, 12 * T, this.zone.h * T, 'g_water').setOrigin(0).setDepth(-80);
-        this.waterRect = new Phaser.Geom.Rectangle(wx, 0, 12 * T, this.zone.h * T);
+      if (this.zone.id === 'beach' && this.waterRect) {
+        this.add.tileSprite(this.waterRect.x, 0, 12 * T, this.zone.h * T, 'g_water').setOrigin(0).setDepth(-80);
       } else if (this.zone.id === 'farm') {
-        // hồ cá trong nông trại (góc dưới phải)
+        // hồ cá trong nông trại: viền cát + nước 2 lớp + lá súng + lấp lánh
         const cx = 34 * T, cy = 28 * T;
-        this.pondEllipse = new Phaser.Geom.Ellipse(cx, cy, 10 * T, 5 * T);
         const g = this.add.graphics().setDepth(-80);
-        g.fillStyle(0x3c8fc4); g.fillEllipse(cx, cy, 10 * T, 5 * T);
-        g.fillStyle(0x4aa5d9); g.fillEllipse(cx, cy, 9.4 * T, 4.5 * T);
-        g.fillStyle(0x62b7e6, 0.6); g.fillEllipse(cx, cy - 3, 8 * T, 3.6 * T);
-        this.add.text(cx, cy - 5.5 * T, '🐟 Hồ cá', { fontSize: '8px', color: '#fff', backgroundColor: '#00000080', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2);
+        g.fillStyle(0xd9c184); g.fillEllipse(cx, cy, 10.9 * T, 5.9 * T);          // viền cát
+        g.fillStyle(0x2e6f9e); g.fillEllipse(cx, cy, 10.2 * T, 5.2 * T);          // mép nước sẫm
+        g.fillStyle(0x3c8fc4); g.fillEllipse(cx, cy, 9.6 * T, 4.7 * T);
+        g.fillStyle(0x4aa5d9); g.fillEllipse(cx, cy, 8.6 * T, 4 * T);
+        g.fillStyle(0x62b7e6, 0.55); g.fillEllipse(cx, cy - 3, 7 * T, 3 * T);
+        // lá súng dập dềnh
+        for (const [lx, ly, f] of [[-2.8, -0.9, 0], [1.6, -1.6, 1], [3, 0.9, 2], [-1.2, 1.3, 3]] as [number, number, number][]) {
+          const lily = this.add.image(cx + lx * T, cy + ly * T, 'pond_deco', f).setDepth(-78).setScale(1.15);
+          this.tweens.add({ targets: lily, y: lily.y - 2, duration: 1600 + f * 300, yoyo: true, repeat: -1, ease: 'sine.inout' });
+        }
+        // ánh nước lấp lánh
+        for (const [sx2, sy2, f] of [[-1, 0.2, 4], [2.2, -0.6, 5], [0.6, 1.5, 6]] as [number, number, number][]) {
+          const sp = this.add.image(cx + sx2 * T, cy + sy2 * T, 'pond_deco', f).setDepth(-77).setAlpha(0.4);
+          this.tweens.add({ targets: sp, alpha: 0.95, duration: 900 + f * 200, yoyo: true, repeat: -1 });
+        }
+        // hoa + bụi cây quanh mép hồ
+        this.add.image(cx - 5.6 * T, cy - 2.4 * T, 'pond_deco', 13).setDepth(-49);
+        this.add.image(cx + 5.4 * T, cy - 2.6 * T, 'pond_deco', 10).setDepth(-49);
+        this.add.image(cx - 5.9 * T, cy + 2 * T, 'deco_bush').setOrigin(0.5, 0.8).setDepth((cy + 2 * T));
+        this.add.image(cx + 5.7 * T, cy + 1.6 * T, 'deco_bush').setOrigin(0.5, 0.8).setDepth((cy + 1.6 * T));
+        this.add.text(cx, cy - 5.8 * T, '🐟 Hồ cá', { fontSize: '8px', color: '#fff', backgroundColor: '#00000080', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2);
       }
     }
   }
@@ -1060,8 +1096,8 @@ export class WorldScene extends Phaser.Scene {
   private mounds: Phaser.GameObjects.Image[] = [];
 
   private spawnChopTrees() {
-    // 3 cây gỗ cố định phía đông nông trại (ngoài vùng ruộng/công trình)
-    for (const [tx, ty] of [[31, 16], [37, 21], [33, 27]] as [number, number][]) {
+    // 3 cây gỗ cố định phía đông nông trại (ngoài vùng ruộng/chuồng/hồ nước)
+    for (const [tx, ty] of [[28, 16], [34, 19], [41, 22]] as [number, number][]) {
       const obj = this.add.image(tx * T, ty * T, 'deco_tree_round2').setOrigin(0.5, 1).setDepth(ty * T);
       this.chopTrees.push({ obj, readyAt: 0 });
     }
@@ -1073,10 +1109,15 @@ export class WorldScene extends Phaser.Scene {
 
   private spawnMound() {
     // vị trí ngẫu nhiên tránh vùng ruộng
-    for (let tries = 0; tries < 30; tries++) {
+    for (let tries = 0; tries < 40; tries++) {
       const tx = 3 + Math.floor(Math.random() * (this.zone.w - 6));
       const ty = 4 + Math.floor(Math.random() * (this.zone.h - 8));
-      if (this.zone.id === 'farm' && tx > 4 && tx < 24 && ty > 6 && ty < 26) continue;
+      if (this.zone.id === 'farm') {
+        if (tx > 4 && tx < 24 && ty > 6 && ty < 26) continue;                       // ruộng + nhà
+        if (ty < 12) continue;                                                       // dãy công trình + chuồng
+        if (tx > 27 && tx < 41 && ty > 22) continue;                                 // hồ cá
+      }
+      if (this.nearWaterTile(tx, ty)) continue;                                      // không mọc dưới nước
       const obj = this.add.image(tx * T, ty * T, 'mound').setDepth(ty * T - 8);
       this.mounds.push(obj);
       return;
