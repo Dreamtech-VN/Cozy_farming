@@ -656,7 +656,7 @@ export function registerAllPanels() {
     ['💋', 'Hôn', '{a} hôn {b} một cái 😘', 6, 'kiss'],
     ['🫂', 'Ôm', '{a} ôm {b} thật chặt', 5, 'hug'],
     ['🦵', 'Đá đít', '{a} đá đít {b} một phát 😆', -3, 'kick'],
-    ['🥺', 'An ủi', '{a} vỗ vai an ủi {b}', 4, 'comfort']
+    ['🥺', 'An ủi', '{a} vỗ vai an ủi {b}', 4, 'pat']
   ];
   registerPanel('playeract', (data: { friend: { id: string; name: string } }) => {
     const f = data.friend;

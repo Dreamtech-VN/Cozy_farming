@@ -1178,54 +1178,110 @@ export class WorldScene extends Phaser.Scene {
   }
 
   // ================= diễn hành động với người chơi khác =================
+  // Sprite Avatar không có tư thế hôn/ôm/đá riêng -> dựng hành động bằng
+  // chuyển động (tiến/lùi/nghiêng/văng) + hiệu ứng, kèm tư thế tay gần nhất.
   private playPlayerAct(d: { id: string; name: string; kind: string; icon: string; text: string; aff: number }) {
     const target = this.roamers.find(r => r.def.id === d.id);
-    if (!target) { toast(`${d.text}`, d.icon); return; }
+    if (!target) { toast(d.text, d.icon); return; }
     if (this.busy) return;
     this.busy = true;
-    // dừng bước chân đối phương để hai người đứng yên diễn
     this.tweens.killTweensOf(target.sprite);
     this.tweens.killTweensOf(target.label);
     target.sprite.play('idle');
 
+    const big = !!this.zone.bg;
     const tx = target.sprite.x, ty = target.sprite.y;
-    const side = this.player.x <= tx ? -1 : 1;                 // đứng cạnh, không chồng người
-    const gap = this.zone.bg ? 46 : 24;
-    const dest = { x: tx + side * gap, y: ty };
+    const side = this.player.x <= tx ? -1 : 1;              // đứng bên nào
+    const gap = big ? 46 : 24;
+    const headY = big ? 96 : 52;
+    const done = () => { this.busy = false; this.player.setAngle(0); this.player.play('idle'); };
 
-    // bước tới cạnh đối phương
+    // bước tới cạnh đối phương rồi diễn
     this.player.play('walk');
-    this.player.setDir(dest.x < this.player.x ? 2 : 3);
+    this.player.setDir(tx + side * gap < this.player.x ? 2 : 3);
     this.tweens.add({
-      targets: this.player, x: dest.x, y: dest.y,
-      duration: Math.min(900, Phaser.Math.Distance.Between(this.player.x, this.player.y, dest.x, dest.y) * 4),
+      targets: this.player, x: tx + side * gap, y: ty,
+      duration: Math.min(900, Phaser.Math.Distance.Between(this.player.x, this.player.y, tx, ty) * 4),
       onUpdate: () => this.player.setDepth(this.player.y),
       onComplete: () => {
-        // quay mặt vào nhau
-        this.player.setDir(tx < this.player.x ? 2 : 3);
-        target.sprite.setDir(this.player.x < tx ? 2 : 3);
-
-        this.player.play(d.kind, () => { this.busy = false; this.player.play('idle'); });
-
-
-        // đối phương phản ứng
-        this.time.delayedCall(360, () => {
-          if (d.kind === 'kick') {
-            // bị đá: nảy ra sau + mặt giận
-            this.tweens.add({ targets: target.sprite, x: tx + (side < 0 ? 26 : -26), duration: 140, yoyo: true, ease: 'back.out' });
-            target.sprite.play('cheer');
-            this.fxFloat(tx, ty - (this.zone.bg ? 96 : 52), '💢', '#ff8787');
-          } else {
-            target.sprite.play(d.kind === 'hug' ? 'hug' : 'cheer');
-            this.fxFloat(tx, ty - (this.zone.bg ? 96 : 52), d.aff > 0 ? '❤️' : '💢', d.aff > 0 ? '#ff8787' : '#ffd43b');
-          }
-          this.time.delayedCall(900, () => target.sprite.play('idle'));
-        });
-
-        // hiệu ứng quanh 2 người + lời thoại
-        const mx = (this.player.x + tx) / 2, my = (this.player.y + ty) / 2;
-        this.fxBurst(mx, my - (this.zone.bg ? 60 : 32), d.aff > 0 ? 0xffb3c1 : 0xffd43b, d.aff > 0 ? 12 : 8);
+        this.player.setDir(side < 0 ? 3 : 2);                // quay mặt vào nhau
+        target.sprite.setDir(side < 0 ? 2 : 3);
         this.onSay(d.text);
+        const near = tx + side * (gap * 0.45);               // vị trí áp sát
+
+        if (d.kind === 'kiss') {
+          this.player.play('reach');
+          // nghiêng người tới hôn rồi lùi
+          this.tweens.add({
+            targets: this.player, x: near, duration: 260, yoyo: true, hold: 260, ease: 'sine.inout',
+            onComplete: done
+          });
+          this.tweens.add({ targets: this.player, angle: side * -6, duration: 260, yoyo: true, hold: 260 });
+          // tim bay từ mình sang đối phương
+          this.time.delayedCall(320, () => {
+            const heart = this.add.text(this.player.x, this.player.y - headY, '❤️', { fontSize: big ? '18px' : '12px' })
+              .setOrigin(0.5).setDepth(9000);
+            this.tweens.add({
+              targets: heart, x: tx, y: ty - headY - 14, alpha: 0, duration: 900, ease: 'sine.out',
+              onComplete: () => heart.destroy()
+            });
+            target.sprite.play('cheer');
+            this.time.delayedCall(700, () => target.sprite.play('idle'));
+          });
+
+        } else if (d.kind === 'hug') {
+          this.player.play('reach');
+          // cả hai xích sát vào nhau rồi rung nhẹ
+          this.tweens.add({ targets: this.player, x: near, duration: 240, ease: 'sine.out' });
+          this.tweens.add({ targets: [target.sprite, target.label], x: `-=${side * 10}`, duration: 240, ease: 'sine.out' });
+          this.time.delayedCall(260, () => {
+            target.sprite.play('reach');
+            this.tweens.add({ targets: [this.player, target.sprite], x: `+=${side * 3}`, duration: 110, yoyo: true, repeat: 2 });
+            for (let i = 0; i < 3; i++) {
+              this.time.delayedCall(i * 180, () => this.fxFloat((this.player.x + tx) / 2, ty - headY + i * 6, '❤️', '#ff8787'));
+            }
+          });
+          this.time.delayedCall(1100, () => {
+            target.sprite.play('idle');
+            this.tweens.add({ targets: [target.sprite, target.label], x: `+=${side * 10}`, duration: 240 });
+            done();
+          });
+
+        } else if (d.kind === 'kick') {
+          // lùi lấy đà -> lao tới -> đối phương văng ra
+          this.tweens.add({
+            targets: this.player, x: `+=${side * 16}`, duration: 180, ease: 'sine.out',
+            onComplete: () => {
+              this.player.play('strike');
+              this.tweens.add({
+                targets: this.player, x: near, duration: 130, ease: 'back.in',
+                onComplete: () => {
+                  sfx.error();
+                  this.fxBurst(tx, ty - headY * 0.4, 0xffd43b, 10);
+                  this.fxFloat(tx, ty - headY, '💢', '#ff8787');
+                  target.sprite.play('cheer');
+                  this.tweens.add({
+                    targets: [target.sprite, target.label], x: `-=${side * 34}`, duration: 180,
+                    yoyo: true, hold: 120, ease: 'quad.out'
+                  });
+                  this.tweens.add({ targets: target.sprite, angle: side * 12, duration: 150, yoyo: true, hold: 120 });
+                  this.time.delayedCall(700, () => { target.sprite.play('idle'); done(); });
+                }
+              });
+            }
+          });
+
+        } else {  // an ủi: vỗ vai
+          this.player.play('pat');
+          this.tweens.add({ targets: this.player, x: near, duration: 240, yoyo: true, hold: 700, ease: 'sine.inout', onComplete: done });
+          this.time.delayedCall(300, () => {
+            // tay vỗ nhẹ 2 cái -> đối phương gật gù
+            this.tweens.add({ targets: target.sprite, y: `-=4`, duration: 160, yoyo: true, repeat: 1 });
+            this.fxFloat(tx, ty - headY, '💛', '#ffd43b');
+            target.sprite.play('cheer');
+            this.time.delayedCall(800, () => target.sprite.play('idle'));
+          });
+        }
       }
     });
   }
@@ -1260,8 +1316,8 @@ export class WorldScene extends Phaser.Scene {
     const cs = this.zone.bg ? 1 : 0.5;
     const list = roamersIn(this.zone.id, 3);
     list.forEach((def, i) => {
-      const bx = this.zone.spawn.x * T + (i - 1) * 140 + (i % 2 ? 60 : -40);
-      const by = this.zone.spawn.y * T + (i % 2 ? 60 : -30);
+      const bx = this.zone.spawn.x * T + (i - 1) * 230 + (i % 2 ? 70 : -70);
+      const by = this.zone.spawn.y * T + (i % 2 ? 90 : -60);
       const sprite = new ChibiSprite(this, bx, by, this.npcLook(i + 3, i % 2 ? 2 : 1));
       sprite.setScale(cs).setDepth(by);
       const label = this.add.text(bx, by - (cs === 1 ? 104 : 54), def.name, {

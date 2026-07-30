@@ -5,7 +5,7 @@ import { lookLayers, type ChibiLook } from '@/data/chibi';
 // Strip 15 frame 64x96/part, neo chân (32,88). Hướng: mặc định nhìn phải,
 // đi trái lật gương (Avatar chỉ có 2 hướng), lên/xuống dùng chung.
 
-export type ChibiAnim = 'idle' | 'walk' | 'work' | 'sit' | 'lie' | 'kiss' | 'hug' | 'kick' | 'comfort' | 'cheer';
+export type ChibiAnim = 'idle' | 'walk' | 'work' | 'sit' | 'lie' | 'reach' | 'pat' | 'strike' | 'cheer';
 
 interface AnimDef { frames: number[]; fps: number; loop: boolean }
 const ANIMS: Record<ChibiAnim, AnimDef> = {
@@ -14,12 +14,12 @@ const ANIMS: Record<ChibiAnim, AnimDef> = {
   work: { frames: [3, 0, 3, 0, 3], fps: 5, loop: false },           // cúi làm việc
   sit:  { frames: [4], fps: 1, loop: true },
   lie:  { frames: [5], fps: 1, loop: true },
-  // tư thế tương tác (frame Avatar: 6 đưa tay, 7 với tay, 10 dang tay, 11 tung đòn, 12 khoanh tay)
-  kiss:    { frames: [7, 7, 7, 0], fps: 2.6, loop: false },
-  hug:     { frames: [10, 10, 10, 10, 0], fps: 2.4, loop: false },
-  kick:    { frames: [2, 11, 11, 0], fps: 5, loop: false },
-  comfort: { frames: [6, 6, 6, 0], fps: 2.6, loop: false },
-  cheer:   { frames: [7, 0, 7, 0], fps: 4, loop: false }
+  // tư thế tương tác — sprite Avatar chỉ có các kiểu đưa/cầm tay,
+  // nên hành động chủ yếu diễn bằng chuyển động (xem WorldScene.playPlayerAct)
+  reach:   { frames: [7, 7, 7, 0], fps: 2.6, loop: false },   // vươn tay tới (hôn / ôm)
+  pat:     { frames: [6, 6, 6, 0], fps: 2.6, loop: false },   // đưa tay thấp (vỗ vai)
+  strike:  { frames: [2, 2, 0], fps: 6, loop: false },        // lao tới (đá)
+  cheer:   { frames: [11, 0, 11, 0], fps: 4, loop: false }    // giơ tay (vui / phản ứng)
 };
 
 export class ChibiSprite extends Phaser.GameObjects.Container {
@@ -59,7 +59,7 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
     const alias: Record<string, ChibiAnim> = {
       hoe: 'work', water: 'work', pickup: 'work', axe: 'work', fishing: 'sit',
       idle: 'idle', walk: 'walk', work: 'work', sit: 'sit', lie: 'lie',
-      kiss: 'kiss', hug: 'hug', kick: 'kick', comfort: 'comfort', cheer: 'cheer'
+      reach: 'reach', pat: 'pat', strike: 'strike', cheer: 'cheer'
     };
     const a = alias[anim] ?? 'idle';
     // các pose không loop phải gọi callback dù bị lặp lại
