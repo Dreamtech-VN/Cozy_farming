@@ -132,15 +132,17 @@ img { image-rendering: auto; }
 .win.small { width: min(460px, 90vw); }
 .win.large { width: min(880px, 96vw); }
 .win-head {
-  display: flex; align-items: center; justify-content: space-between; padding: 8px 14px 6px;
+  position: relative; display: flex; align-items: center; justify-content: center;
+  padding: 10px 52px 8px; text-align: center;
   font-weight: 900; font-size: 17px; color: #4a3520;
 }
 .win-close {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
   width: 38px; height: 40px; border: none; cursor: pointer;
   background: url('/assets/ui/pack/icon_close.png') no-repeat center / 30px 30px;
   font-size: 0;
 }
-.win-close:active { transform: scale(.88); }
+.win-close:active { transform: translateY(-50%) scale(.88); }
 .win-body { padding: 8px 14px 6px; overflow-y: auto; flex: 1; }
 .win-tabs { display: flex; gap: 6px; padding: 6px 14px 0; flex-wrap: wrap; }
 .tab {
