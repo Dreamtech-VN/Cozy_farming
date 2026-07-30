@@ -1,6 +1,6 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
 import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace } from './kit';
-import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave } from '@/core/save';
+import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
 import { CROPS, CROP_LIST } from '@/data/crops';
@@ -109,6 +109,9 @@ export function registerAllPanels() {
     if (def.kind === 'fish') {
       acts.push({ icon: '🐠', label: 'Thả vào hồ cá nhà', cb: () => addToAquarium(id) });
     }
+    if (def.kind === 'tool' && id.startsWith('tool_')) {
+      acts.push({ icon: '🛠️', label: 'Gắn lên thanh nông cụ', cb: () => equipTool(id.slice(5)) });
+    }
     if (def.id === 'food_cake') {
       acts.push({ icon: '🎉', label: 'Mở tiệc tại nhà', cb: () => { if (throwParty()) { closeParent(); } } });
     }
@@ -214,7 +217,7 @@ export function registerAllPanels() {
       const owned = S.tools.net >= net.tier;
       r.innerHTML = `<div style="font-size:22px">🥅</div><div class="grow"><div class="t1">${net.name}</div><div class="t2">Bắt côn trùng</div></div>`;
       r.append(owned ? btn('Đã có', '', undefined) : btn(`🪙${net.price}`, 'gold', () => {
-        if (spend(net.price)) { S.tools.net = net.tier; save(); toast(`Đã mua ${net.name}!`, '🥅'); openPanel('fishingshop'); }
+        if (spend(net.price)) { S.tools.net = net.tier; save(); toast(`Đã mua ${net.name}!`, '🥅'); equipTool('net'); openPanel('fishingshop'); }
       }));
       body.append(r);
     }
@@ -488,26 +491,39 @@ export function registerAllPanels() {
       mid.append(h('div', 'wd-char-name', S.player.name));
       left.append(colL, mid, colR);
 
-      // ----- phải: lưới đồ đang có, theo tab -----
+      // ----- phải: chia tab + card lưới ô (có cả ô trống như tủ đồ game) -----
       const right = h('div', 'wd-right');
-      const [, tname, z, key, optional] = SLOTS[tab];
-      right.append(h('div', 'wd-right-title', `${tname} — đồ đang có`));
+      const tabBar = h('div', 'wd-tabs');
+      SLOTS.forEach(([, name2], i) => {
+        const t = h('div', `tab ${i === tab ? 'active' : ''}`, name2);
+        t.onclick = () => { tab = i; render(); };
+        tabBar.append(t);
+      });
+      right.append(tabBar);
+
+      const [, , z, key, optional] = SLOTS[tab];
+      const card = h('div', 'wd-card');
       const grid = h('div', 'wd-grid');
       const owned = chibiList(z, look.gender).filter(p => S.chibiWardrobe.includes(p.id) || p.id === look[key]);
+      let cells = 0;
       if (optional) {
         const off = h('button', `wd-item ${look[key] === 0 ? 'active' : ''}`);
         off.append(h('div', 'wd-item-ico', '🚫'), h('div', 'nm', 'Không dùng'));
         off.onclick = () => { look[key] = 0; apply(); render(); };
-        grid.append(off);
+        grid.append(off); cells++;
       }
       for (const p of owned) {
         const cell = h('button', `wd-item ${look[key] === p.id ? 'active' : ''}`);
         cell.append(z <= 20 ? chibiPreview(p.id, 44) : chibiHead(p.id, 40, z), h('div', 'nm', p.name));
         cell.onclick = () => { look[key] = p.id; apply(); render(); };
-        grid.append(cell);
+        grid.append(cell); cells++;
       }
-      if (!owned.length) grid.append(h('div', 'hint', 'Chưa có món nào — ghé shop thời trang ở Khu mua sắm!'));
-      right.append(grid);
+      // lấp ô trống cho đủ lưới (tối thiểu 12 ô)
+      const total = Math.max(12, Math.ceil(cells / 4) * 4);
+      for (let i = cells; i < total; i++) grid.append(h('div', 'wd-item wd-empty'));
+      card.append(grid);
+      if (!owned.length) card.append(h('div', 'hint', 'Chưa có món nào — ghé shop thời trang ở Khu mua sắm!'));
+      right.append(card);
 
       wrap.append(left, right);
       body.append(wrap);
@@ -515,30 +531,6 @@ export function registerAllPanels() {
     render();
   }
 
-  // Gán nông cụ vào ô trên thanh nhanh
-  registerPanel('hotbaredit', (data?: { slot?: number }) => {
-    const slotIdx = data?.slot ?? 0;
-    const { body, close } = openWindow('🛠️ Trang bị nông cụ', { size: 'small' });
-    body.append(h('div', 'hint', `Chọn nông cụ cho ô số ${slotIdx + 1}:`));
-    const grid = h('div', 'wd-grid');
-    for (const t of TOOL_LIST) {
-      const cell = h('button', `wd-item ${S.hotbar[slotIdx] === t.id ? 'active' : ''}`);
-      cell.append(spr(t.url, 0, 0, 16, 16, 36), h('div', 'nm', t.name));
-      cell.onclick = () => {
-        // 1 nông cụ chỉ nằm 1 ô: nếu đang ở ô khác thì hoán đổi
-        const old = S.hotbar.indexOf(t.id);
-        if (old >= 0 && old !== slotIdx) S.hotbar[old] = S.hotbar[slotIdx];
-        S.hotbar[slotIdx] = t.id;
-        save(); refreshHotbar(); close();
-      };
-      grid.append(cell);
-    }
-    const clear = h('button', 'wd-item');
-    clear.append(h('div', 'wd-item-ico', '🚫'), h('div', 'nm', 'Bỏ trống'));
-    clear.onclick = () => { S.hotbar[slotIdx] = ''; save(); refreshHotbar(); close(); };
-    grid.append(clear);
-    body.append(grid);
-  });
 
   function colorSwatches(n: number, active: number, onPick: (i: number) => void, names?: string[]): HTMLElement {
     const HAIR_HEX = ['#2b2b2b', '#e6c25a', '#8a5a33', '#c49a6c', '#b3592e', '#2e8b6f', '#4caf50', '#9aa5b1', '#c6a3e0', '#2c3e70', '#f7a3c2', '#8e44ad', '#c0392b', '#39c2c9'];

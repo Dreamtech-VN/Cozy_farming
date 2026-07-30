@@ -46,6 +46,11 @@ defItem({ id: 'milk', name: 'Sữa bò', kind: 'product', icon: '🥛', sell: 60
 defItem({ id: 'pork', name: 'Nấm heo ủi', kind: 'product', icon: '🍄', sell: 45, desc: 'Heo ủi đất tìm được nấm quý.', sprite: { url: ITEMS_SHEET, sx: 32, sy: 96, sw: 16, sh: 16 } });
 defItem({ id: 'wool', name: 'Len cừu', kind: 'product', icon: '🧶', sell: 70, sprite: { url: ITEMS_SHEET, sx: 0, sy: 80, sw: 16, sh: 16 } });
 
+// ---- Nông cụ (mua ở bách hóa, gắn lên thanh nông cụ từ túi đồ) ----
+defItem({ id: 'tool_basket', name: 'Giỏ thu hoạch', kind: 'tool', icon: '🧺', sell: 0, buy: 400, desc: 'Gắn lên thanh nông cụ để thu hoạch nhanh cây chín gần nhất.', sprite: { url: 'assets/farm/tool_basket.png', sx: 0, sy: 0, sw: 16, sh: 16 } });
+defItem({ id: 'tool_axe', name: 'Rìu', kind: 'tool', icon: '🪓', sell: 0, buy: 800, desc: 'Đốn gỗ (tính năng sẽ mở trong bản cập nhật tới).', sprite: { url: 'assets/farm/tool_axe.png', sx: 0, sy: 0, sw: 16, sh: 16 } });
+defItem({ id: 'tool_shovel', name: 'Xẻng', kind: 'tool', icon: '🦯', sell: 0, buy: 600, desc: 'Đào bới (tính năng sẽ mở trong bản cập nhật tới).', sprite: { url: 'assets/farm/tool_shovel.png', sx: 0, sy: 0, sw: 16, sh: 16 } });
+
 // ---- Quả cây khế trong nông trại ----
 defItem({ id: 'crop_khe', name: 'Quả khế', kind: 'crop', icon: '⭐', sell: 12, desc: 'Ăn khế trả vàng~ rung cây khế ở Nông trại mỗi 10 phút.' });
 

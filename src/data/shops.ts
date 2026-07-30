@@ -20,7 +20,7 @@ export const SHOPS: Record<string, ShopDef> = {
   },
   shop_general: {
     id: 'shop_general', name: 'Bách hóa Chú Hùng', icon: '🏪',
-    items: ['fertilizer', 'feed', 'food_cake', 'food_juice', 'lucky_ticket'],
+    items: ['fertilizer', 'feed', 'food_cake', 'food_juice', 'lucky_ticket', 'tool_basket', 'tool_axe', 'tool_shovel'],
     buysKinds: ['crop', 'product', 'fish', 'insect', 'material', 'food']
   },
   shop_fishing: {

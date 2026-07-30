@@ -22,7 +22,7 @@ export function defaultState(): GameState {
     inventory: { seed_carrot: 5 },
     wardrobe: ['hair:bob', 'clothes:basic'],
     chibiWardrobe: [],
-    hotbar: ['hoe', 'can', 'basket', 'rod', 'net'],
+    hotbar: ['hoe', 'can', '', '', ''],
     tools: { rod: 0, can: 1, hoe: 1, net: 0 },
     farm: { unlocked: 6, plots: [] },
     livestock: { barnLevel: 0, animals: [] },
@@ -54,6 +54,38 @@ export function hasSave(): boolean {
   return !!localStorage.getItem(KEY);
 }
 
+// Nông cụ đã sở hữu chưa: cuốc/bình tưới có sẵn cấp 1, cần/vợt mua theo cấp,
+// giỏ/rìu/xẻng là vật phẩm mua ở bách hóa (nằm trong túi đồ)
+export function ownedTool(id: string): boolean {
+  if (!id) return false;
+  if (id === 'hoe') return S.tools.hoe > 0;
+  if (id === 'can') return S.tools.can > 0;
+  if (id === 'rod') return S.tools.rod > 0;
+  if (id === 'net') return S.tools.net > 0;
+  return (S.inventory[`tool_${id}`] ?? 0) > 0;
+}
+
+// Gắn nông cụ vào ô trống đầu tiên trên thanh (đã có thì thôi)
+export function equipTool(id: string): boolean {
+  if (!ownedTool(id)) return false;
+  if (S.hotbar.includes(id)) { toast('Nông cụ này đã nằm trên thanh rồi.', '🛠️'); return false; }
+  let i = S.hotbar.findIndex(t => !t);
+  if (i < 0) i = S.hotbar.length - 1;   // hết chỗ -> thay ô cuối
+  S.hotbar[i] = id;
+  save();
+  bus.emit('hotbar:changed');
+  toast('Đã gắn lên thanh nông cụ!', '🛠️');
+  return true;
+}
+
+export function unequipTool(slot: number) {
+  if (S.hotbar[slot]) {
+    S.hotbar[slot] = '';
+    save();
+    bus.emit('hotbar:changed');
+  }
+}
+
 export function load(): boolean {
   const raw = localStorage.getItem(KEY);
   if (!raw) return false;
@@ -62,7 +94,9 @@ export function load(): boolean {
     // chỗ migrate giữa các version save về sau
     S = { ...defaultState(), ...data };
     if (!S.chibiWardrobe) S.chibiWardrobe = [];
-    if (!S.hotbar) S.hotbar = ['hoe', 'can', 'basket', 'rod', 'net'];
+    if (!S.hotbar) S.hotbar = ['hoe', 'can', '', '', ''];
+    while (S.hotbar.length < 5) S.hotbar.push('');
+    S.hotbar = S.hotbar.map(id => ownedTool(id) ? id : '');
     return true;
   } catch {
     return false;

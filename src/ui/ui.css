@@ -439,3 +439,15 @@ input.ui-input, select.ui-input {
 }
 .hb-slot:active { transform: scale(.92); }
 .hb-slot.empty { color: #f6edd8aa; font-size: 20px; font-weight: 800; }
+
+/* Tủ đồ: tab + card ô trống; hotbar ở giữa dưới màn hình */
+.wd-tabs { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 7px; }
+.wd-card {
+  background: rgba(0, 0, 0, .12); border: 2px solid #b5836b88; border-radius: 12px;
+  padding: 9px; flex: 1; overflow-y: auto;
+}
+.wd-grid { grid-template-columns: repeat(4, 1fr); max-height: 264px; }
+.wd-item.wd-empty {
+  background: rgba(0, 0, 0, .10); border: 2px dashed #b5836b66; cursor: default; min-height: 64px;
+}
+#hotbar { left: 50%; transform: translateX(-50%); bottom: 14px; }

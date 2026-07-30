@@ -1,6 +1,6 @@
 import type Phaser from 'phaser';
-import { bus, EV } from '@/core/events';
-import { S } from '@/core/save';
+import { bus, EV, toast } from '@/core/events';
+import { S, unequipTool } from '@/core/save';
 import { h, root, fmt, charFace, spr } from './kit';
 import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
@@ -54,6 +54,7 @@ export function initUI(game: Phaser.Game) {
 
   bus.on(EV.OPEN_PANEL, (p: { panel: string; data?: any }) => openPanel(p.panel, p.data));
   bus.on(EV.ZONE, () => { buildHud(); refreshHotbar(); });
+  bus.on('hotbar:changed', () => refreshHotbar());
 
   // khởi tạo hệ thống nền sau khi vào world lần đầu
   bus.once(EV.ZONE, () => {
@@ -287,17 +288,18 @@ export function refreshHotbar() {
       slot.append(spr(t.url, 0, 0, 16, 16, 30));
       slot.title = t.name;
       slot.onclick = () => { sfx.click(); bus.emit('hotbar:use', tid); };
+      // giữ lâu / chuột phải = gỡ nông cụ khỏi ô
+      let hold = 0;
+      slot.onpointerdown = () => { hold = window.setTimeout(() => { unequipTool(i); toast(`Đã gỡ ${t.name}.`, '🛠️'); }, 550); };
+      slot.onpointerup = slot.onpointerleave = () => clearTimeout(hold);
+      slot.oncontextmenu = e => { e.preventDefault(); unequipTool(i); toast(`Đã gỡ ${t.name}.`, '🛠️'); };
     } else {
+      // ô trống: mở túi đồ — nông cụ mua về nằm trong túi, bấm món đồ để gắn
       slot.classList.add('empty');
       slot.textContent = '+';
-      slot.onclick = () => { sfx.click(); openPanel('hotbaredit', { slot: i }); };
+      slot.title = 'Gắn nông cụ từ túi đồ';
+      slot.onclick = () => { sfx.click(); openPanel('inventory'); toast('Nông cụ mua về nằm trong túi đồ — bấm vào món để gắn.', '🎒'); };
     }
-    // giữ lâu / chuột phải = đổi nông cụ trong ô
-    let hold = 0;
-    slot.onpointerdown = () => { hold = window.setTimeout(() => openPanel('hotbaredit', { slot: i }), 550); };
-    slot.onpointerup = slot.onpointerleave = () => clearTimeout(hold);
-    slot.oncontextmenu = e => { e.preventDefault(); openPanel('hotbaredit', { slot: i }); };
     bar!.append(slot);
   });
-  // phím 1..5 dùng nhanh
 }

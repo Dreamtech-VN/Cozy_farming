@@ -1,4 +1,4 @@
-import { S, save, addItem, addExp, addStat } from '@/core/save';
+import { S, save, addItem, addExp, addStat, equipTool } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { FISH_LIST, FISHES, RODS, RARITY_NAME, type FishDef } from '@/data/fish';
 import { INSECT_LIST, type InsectDef } from '@/data/insects';
@@ -14,6 +14,7 @@ export function buyRod(tier: number): boolean {
   S.tools.rod = tier;
   bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); save();
   toast(`Đã mua ${rod.name}!`, '🎣'); sfx.coin();
+  equipTool('rod');
   return true;
 }
 
