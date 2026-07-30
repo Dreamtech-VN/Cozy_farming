@@ -397,7 +397,7 @@ input.ui-input, select.ui-input {
 .cc-chip-name { line-height: 1.1; }
 
 /* ===== Tủ đồ kiểu GunPow ===== */
-.wd-wrap { display: flex; gap: 12px; min-height: 330px; }
+.wd-wrap { display: flex; gap: 12px; height: 356px; }
 .wd-left {
   flex: 0 0 46%; display: flex; align-items: center; justify-content: space-between; gap: 6px;
   background: rgba(0, 0, 0, .14); border-radius: 12px; padding: 10px 8px;
@@ -414,7 +414,7 @@ input.ui-input, select.ui-input {
 .wd-slot-name { font-size: 10px; font-weight: 800; color: #7a5b3a; }
 .wd-char { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .wd-char-name { font-size: 13px; font-weight: 800; color: #4a3520; background: #f6edd8cc; padding: 2px 10px; border-radius: 8px; }
-.wd-right { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.wd-right { flex: 1; min-width: 0; display: flex; flex-direction: column; min-height: 0; }
 .wd-right-title { font-weight: 800; color: #4a3520; margin-bottom: 6px; }
 .wd-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); gap: 7px;
@@ -444,10 +444,15 @@ input.ui-input, select.ui-input {
 /* Tủ đồ: tab + card ô trống; hotbar ở giữa dưới màn hình */
 .wd-tabs { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 7px; }
 .wd-card {
-  background: rgba(0, 0, 0, .12); border: 2px solid #b5836b88; border-radius: 12px;
-  padding: 9px; flex: 1; overflow-y: auto;
+  background: linear-gradient(#f3e4c4, #e8d5ae); border: 3px solid #c39a52; border-radius: 8px;
+  box-shadow: inset 0 0 0 2px #fff4d8aa;
+  padding: 9px; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
-.wd-grid { grid-template-columns: repeat(4, 1fr); max-height: 264px; }
+.wd-card::-webkit-scrollbar { width: 9px; }
+.wd-card::-webkit-scrollbar-track { background: #d9bf8e; border-radius: 5px; }
+.wd-card::-webkit-scrollbar-thumb { background: linear-gradient(#ffe9a8, #d3a13c); border-radius: 5px; border: 1px solid #a97c2e; }
+.wd-grid { grid-template-columns: repeat(4, 1fr); max-height: none; overflow: visible; }
 .wd-item.wd-empty {
   background: rgba(0, 0, 0, .10); border: 2px dashed #b5836b66; cursor: default; min-height: 64px;
 }

@@ -1056,6 +1056,9 @@ export function registerAllPanels() {
   });
 
   // Tủ đồ kiểu GunPow: trái là nhân vật giữa các ô trang bị, phải là lưới đồ chia tab
+  // sức chứa mỗi ngăn tủ đồ
+  const WD_CAP = 100;
+
   function openWardrobe(body: HTMLElement, mode: 'wear' | 'skin' = 'wear') {
     const look = S.player.chibi;
     if (!look) return;
@@ -1134,7 +1137,7 @@ export function registerAllPanels() {
           cell2.onclick = () => { look.skin = on ? undefined : sid; apply(); render(); };
           grid.append(cell2); n++;
         }
-        for (let i = n; i < Math.max(8, Math.ceil(n / 4) * 4); i++) grid.append(h('div', 'wd-item wd-empty'));
+        for (let i = n; i < WD_CAP; i++) grid.append(h('div', 'wd-item wd-empty'));
         card.append(grid);
         card.append(h('div', 'hint', S.skins.length ? 'Mặc skin sẽ thay toàn bộ trang phục — bấm lại bộ đang mặc để cởi ra.' : 'Chưa có skin nào — mua trọn bộ ở tab Skin của Thời trang Cô Trang!'));
         right.append(card);
@@ -1154,9 +1157,8 @@ export function registerAllPanels() {
         cell.onclick = () => { (look as any)[pk] = on && optional ? 0 : p.id; apply(); render(); };
         grid.append(cell); cells++;
       }
-      // lấp ô trống cho đủ lưới (tối thiểu 12 ô)
-      const total = Math.max(12, Math.ceil(cells / 4) * 4);
-      for (let i = cells; i < total; i++) grid.append(h('div', 'wd-item wd-empty'));
+      // lấp cho đủ sức chứa tủ đồ, ô trống để trống
+      for (let i = cells; i < WD_CAP; i++) grid.append(h('div', 'wd-item wd-empty'));
       card.append(grid);
       if (!owned.length) card.append(h('div', 'hint', 'Chưa có món nào — ghé shop thời trang ở Khu mua sắm!'));
       else if (optional) card.append(h('div', 'hint', 'Bấm lại món đang mặc để cởi ra.'));
