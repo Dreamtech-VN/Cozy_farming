@@ -108,12 +108,12 @@ export const ZONES: Record<string, ZoneDef> = {
     features: ['insects']
   },
   school: {
-    id: 'school', gate: 'town_gate', name: 'Trường học', icon: '🏫', w: 57, h: 30, ground: 'wood', indoor: true,
-    spawn: { x: 28, y: 22 },
-    bg: '19', walkTop: 13, walkBottom: 28,
-    portals: [{ x: 40, y: 26, to: 'town', label: 'Thành phố', icon: '🏙️' }],
+    id: 'school', gate: 'town_gate', name: 'Trường học', icon: '🏫', w: 60, h: 33, ground: 'wood', indoor: true,
+    spawn: { x: 30, y: 24 },
+    bg: '101', walkTop: 14, walkBottom: 30,
+    portals: [{ x: 45, y: 28, to: 'town', label: 'Thành phố', icon: '🏙️' }],
     npcs: [
-      { id: 'npc_thay', name: 'Thầy Giáo', x: 24, y: 17, charIndex: 4, lines: ['Chăm học, chăm làm nhé!', 'Muốn thử tài cờ tướng không?'], minigame: 'xiangqi' }
+      { id: 'npc_thay', name: 'Thầy Giáo', x: 24, y: 18, charIndex: 4, lines: ['Chăm học, chăm làm nhé!', 'Muốn thử tài cờ tướng không?'], minigame: 'xiangqi' }
     ],
     features: []
   },

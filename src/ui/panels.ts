@@ -658,7 +658,11 @@ export function registerAllPanels() {
     inp.placeholder = 'Nhập tin nhắn...';
     inp.maxLength = 120;
     const sendBtn = btn('Gửi', 'gold', () => {
-      sendChat(channel, inp.value, channel === 'private' ? privateTo : undefined);
+      const text = inp.value.trim();
+      if (!text) return;
+      sendChat(channel, text, channel === 'private' ? privateTo : undefined);
+      // nói Tổng/Gần thì hiện bong bóng trên đầu nhân vật
+      if (channel !== 'private') bus.emit('world:say', text);
       inp.value = '';
       renderLog();
     });

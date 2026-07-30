@@ -43,6 +43,16 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     { key: 'bld_beachbar', x: 22, y: 12 },
     { key: 'deco_barrel', x: 15, y: 8 }, { key: 'deco_bench', x: 18, y: 16 }
   ],
+  // decor Avatar trên map nền HD (scale 1 = đúng cỡ HD)
+  town: [
+    { key: 'lt_house_white', x: 4, y: 13, s: 1 },    // nhà trắng — cửa Nhà riêng
+    { key: 'lt_rank_sign', x: 31, y: 16, s: 1 },     // bảng xếp hạng
+    { key: 'lt_lamp_hd', x: 20, y: 14, s: 1 }, { key: 'lt_lamp_hd', x: 38, y: 18, s: 1 }
+  ],
+  park: [
+    { key: 'lt_icecream', x: 44, y: 14, s: 1 },      // quầy kem
+    { key: 'lt_love_tree', x: 50, y: 22, s: 1 }      // cây tình yêu
+  ],
   // map cổng: cây + đèn + ghế dọc vỉa hè
   farm_gate: [
     { key: 'deco_tree_round', x: 6, y: 8 }, { key: 'deco_tree_round2', x: 34, y: 8 },
@@ -174,11 +184,13 @@ export class WorldScene extends Phaser.Scene {
     bus.on(EV.HOUSE, this.onHouseChanged, this);
     bus.on('world:place', this.startPlacing, this);
     bus.on('world:emote', this.onEmote, this);
+    bus.on('world:say', this.onSay, this);
     this.events.on('shutdown', () => {
       bus.off(EV.APPEARANCE, this.onAppearance, this);
       bus.off(EV.HOUSE, this.onHouseChanged, this);
       bus.off('world:place', this.startPlacing, this);
       bus.off('world:emote', this.onEmote, this);
+      bus.off('world:say', this.onSay, this);
     });
 
     initTimeOnce();
@@ -186,6 +198,20 @@ export class WorldScene extends Phaser.Scene {
 
   private onAppearance() { this.player.setAppearance(S.player.appearance); }
   private onEmote(i: number) { this.player.showEmote(i); }
+
+  // bong bóng chat trên đầu nhân vật khi nhắn Tổng/Gần
+  private speech?: Phaser.GameObjects.Text;
+  private speechTimer?: Phaser.Time.TimerEvent;
+  private onSay(text: string) {
+    this.speech?.destroy();
+    this.speechTimer?.remove();
+    const cs = this.zone.bg ? 2.6 : 1;
+    this.speech = this.add.text(this.player.x, this.player.y - 34 * cs, text.slice(0, 40), {
+      fontSize: cs > 1 ? '12px' : '8px', color: '#333', backgroundColor: '#ffffff',
+      padding: { x: 5, y: 3 }, wordWrap: { width: 140 }, align: 'center'
+    }).setOrigin(0.5, 1).setDepth(9500);
+    this.speechTimer = this.time.delayedCall(3500, () => { this.speech?.destroy(); this.speech = undefined; });
+  }
   private onHouseChanged() { if (this.zone.id === 'house') this.scene.restart(); }
 
   // ================= vẽ nền =================
@@ -279,9 +305,9 @@ export class WorldScene extends Phaser.Scene {
     // vạch kẻ giữa
     g.fillStyle(0xe8e8e8);
     for (let x = 6; x < w - 20; x += 40) g.fillRect(x, top + (zh - top) / 2 - 1, 22, 3);
-    // trạm chờ xe buýt (sprite ghép từ pack: mái + kính + ghế)
+    // nhà chờ xe buýt Avatar (repo Lttt)
     const sx = this.busStopX();
-    this.add.image(sx, top - 2, 'deco_busstop').setOrigin(0.5, 1).setDepth(top - 40).setScale(1.1);
+    this.add.image(sx, top - 2, 'lt_shelter').setOrigin(0.5, 1).setDepth(top - 40).setScale(0.6);
     // xe riêng đậu mép đường
     if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
       this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(1.1);
@@ -878,6 +904,11 @@ export class WorldScene extends Phaser.Scene {
       }
     } else this.selector.setVisible(false);
 
+    // bảng xếp hạng (thành phố)
+    if (this.zone.id === 'town' && Phaser.Math.Distance.Between(this.player.x, this.player.y, 31 * T, 16 * T) < 50) {
+      acts.push({ icon: '🏆', label: 'Xem bảng xếp hạng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'ranking' }) });
+    }
+
     // nhà kho + cây khế (nông trại)
     if (this.zone.id === 'farm') {
       // nhà kho: mở kho đồ
@@ -1062,6 +1093,12 @@ export class WorldScene extends Phaser.Scene {
       if (Math.random() < 0.01) { ins.vx = Math.random() * 30 - 15; ins.vy = Math.random() * 30 - 15; }
       ins.obj.x = Phaser.Math.Clamp(ins.obj.x, 0, this.zone.w * T);
       ins.obj.y = Phaser.Math.Clamp(ins.obj.y, 0, this.zone.h * T);
+    }
+
+    // bong bóng chat bám theo người chơi
+    if (this.speech) {
+      const cs = this.zone.bg ? 2.6 : 1;
+      this.speech.setPosition(this.player.x, this.player.y - 34 * cs);
     }
 
     // ghost đặt đồ theo con trỏ
