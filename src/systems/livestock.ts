@@ -53,7 +53,7 @@ export function hasProduct(a: Animal): boolean {
 
 export function feed(a: Animal): boolean {
   if (!isHungry(a)) { toast('Bé này no rồi!'); return false; }
-  if (itemCount('feed') <= 0) { toast('Hết thức ăn — mua ở Bách hóa.', '🌾'); return false; }
+  if (itemCount('feed') <= 0) { toast('Hết thức ăn — mua ở Bách hóa.', 'feed'); return false; }
   removeItem('feed');
   a.fedAt = Date.now(); a.collectedAt = Date.now();
   addStat('fed'); addStat('daily_fed');

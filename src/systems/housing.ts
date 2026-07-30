@@ -82,7 +82,7 @@ export function throwParty(): boolean {
   S.house.partyUntil = Date.now() + 2 * 60_000;
   addStat('parties');
   bus.emit(EV.HOUSE); save(); sfx.win();
-  toast('Tiệc bắt đầu! Bạn bè đang đến nhà bạn 🎉', 'gift');
+  toast('Tiệc bắt đầu! Bạn bè đang đến nhà bạn', 'gift');
   return true;
 }
 

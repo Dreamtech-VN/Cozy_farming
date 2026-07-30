@@ -188,7 +188,7 @@ function openServerPopup(picked: string, onPick: (id: string) => void) {
     for (const c of [...CLUSTERS].reverse()) {  // mới trên, cũ dưới
       const newest = c.id === CLUSTERS.length;
       const t = h('div', `sv-tab ${c.id === curCluster ? 'active' : ''}`);
-      t.innerHTML = `<b>${c.name}</b><span>${newest ? '✨ Mới' : `S${c.servers[0].n}-S${c.servers[c.servers.length - 1].n}`}</span>`;
+      t.innerHTML = `<b>${c.name}</b><span>${newest ? 'Mới' : `S${c.servers[0].n}-S${c.servers[c.servers.length - 1].n}`}</span>`;
       t.onclick = () => { curCluster = c.id; paintTabs(); paintGrid(); };
       tabs.append(t);
     }

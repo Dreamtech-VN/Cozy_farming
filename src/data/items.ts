@@ -28,16 +28,16 @@ export function defItem(d: ItemDef): ItemDef {
 }
 
 export function item(id: string): ItemDef {
-  return ITEMS[id] ?? { id, name: id, kind: 'material', icon: '📦', sell: 0 };
+  return ITEMS[id] ?? { id, name: id, kind: 'material', icon: '', sell: 0 };
 }
 
 // ---- Vật phẩm chung ----
-defItem({ id: 'fertilizer', name: 'Phân bón', kind: 'material', icon: '💩', sell: 2, buy: 15, desc: 'Giảm 30% thời gian lớn của cây.' });
-defItem({ id: 'feed', name: 'Thức ăn gia súc', kind: 'material', icon: '🌾', sell: 2, buy: 10, desc: 'Cho gà/bò/heo ăn.' });
-defItem({ id: 'gift_flower', name: 'Bó hoa', kind: 'gift', icon: '💐', sell: 10, buy: 50, desc: 'Quà tặng bạn bè.' });
-defItem({ id: 'gift_choco', name: 'Sô-cô-la', kind: 'gift', icon: '🍫', sell: 20, buy: 100, desc: 'Quà tặng bạn bè.' });
-defItem({ id: 'gift_teddy', name: 'Gấu bông', kind: 'gift', icon: '🧸', sell: 60, buy: 300, desc: 'Quà tặng dễ thương.' });
-defItem({ id: 'lucky_ticket', name: 'Vé quay may mắn', kind: 'special', icon: '🎟️', sell: 0, rubyBuy: 5, desc: 'Thêm 1 lượt quay Vòng quay may mắn.' });
+defItem({ id: 'fertilizer', name: 'Phân bón', kind: 'material', icon: '', sprite: { url: 'assets/ui/act/fertilizer.png', sx: 0, sy: 0, sw: 13, sh: 16 }, sell: 2, buy: 15, desc: 'Giảm 30% thời gian lớn của cây.' });
+defItem({ id: 'feed', name: 'Thức ăn gia súc', kind: 'material', icon: '', sprite: { url: 'assets/ui/act/feed.png', sx: 0, sy: 0, sw: 16, sh: 16 }, sell: 2, buy: 10, desc: 'Cho gà/bò/heo ăn.' });
+defItem({ id: 'gift_flower', name: 'Bó hoa', kind: 'gift', icon: '', sprite: { url: 'assets/ui/act/flower_red.png', sx: 0, sy: 0, sw: 11, sh: 11 }, sell: 10, buy: 50, desc: 'Quà tặng bạn bè.' });
+defItem({ id: 'gift_choco', name: 'Sô-cô-la', kind: 'gift', icon: '', sprite: { url: 'assets/ui/act/choco.png', sx: 0, sy: 0, sw: 12, sh: 11 }, sell: 20, buy: 100, desc: 'Quà tặng bạn bè.' });
+defItem({ id: 'gift_teddy', name: 'Gấu bông', kind: 'gift', icon: '', sprite: { url: 'assets/ui/act/teddy.png', sx: 0, sy: 0, sw: 14, sh: 12 }, sell: 60, buy: 300, desc: 'Quà tặng dễ thương.' });
+defItem({ id: 'lucky_ticket', name: 'Vé quay may mắn', kind: 'special', icon: '', sprite: { url: 'assets/ui/act/ticket.png', sx: 0, sy: 0, sw: 14, sh: 9 }, sell: 0, rubyBuy: 5, desc: 'Thêm 1 lượt quay Vòng quay may mắn.' });
 
 // ---- Sản phẩm chăn nuôi (icon từ ui/items.png của farm pack) ----
 const ITEMS_SHEET = 'assets/farm/items.png';
@@ -56,13 +56,13 @@ defItem({ id: 'wood', name: 'Gỗ', kind: 'material', icon: '🪵', sell: 8, des
 defItem({ id: 'stone', name: 'Đá', kind: 'material', icon: '🪨', sell: 6, desc: 'Đào được bằng xẻng.', sprite: { url: ITEMS_SHEET, sx: 16, sy: 112, sw: 16, sh: 16 } });
 
 // ---- Mồi câu (bán ở tiệm câu, tự dùng con xịn nhất khi thả câu) ----
-defItem({ id: 'bait_worm', name: 'Mồi giun', kind: 'material', icon: '🪱', sell: 1, buy: 5, desc: 'Cá cắn câu nhanh hơn 30%.', meta: { bait: { wait: 0.7, rare: 0 } } });
-defItem({ id: 'bait_shrimp', name: 'Mồi tôm', kind: 'material', icon: '🦐', sell: 5, buy: 25, desc: 'Cắn nhanh hơn 40%, +10% tỉ lệ cá hiếm.', meta: { bait: { wait: 0.6, rare: 0.1 } } });
+defItem({ id: 'bait_worm', name: 'Mồi giun', kind: 'material', icon: '', sprite: { url: 'assets/ui/act/bait_worm.png', sx: 0, sy: 0, sw: 13, sh: 9 }, sell: 1, buy: 5, desc: 'Cá cắn câu nhanh hơn 30%.', meta: { bait: { wait: 0.7, rare: 0 } } });
+defItem({ id: 'bait_shrimp', name: 'Mồi tôm', kind: 'material', icon: '', sprite: { url: 'assets/ui/act/bait_shrimp.png', sx: 0, sy: 0, sw: 14, sh: 14 }, sell: 5, buy: 25, desc: 'Cắn nhanh hơn 40%, +10% tỉ lệ cá hiếm.', meta: { bait: { wait: 0.6, rare: 0.1 } } });
 defItem({ id: 'bait_vip', name: 'Mồi thượng hạng', kind: 'material', icon: '✨', sell: 15, buy: 80, desc: 'Cá cắn gần như ngay, +25% tỉ lệ cá hiếm.', meta: { bait: { wait: 0.3, rare: 0.25 } }, sprite: { url: 'assets/chibi/tools/bait.png', sx: 0, sy: 0, sw: 28, sh: 33 } });
 
 // ---- Quả cây khế trong nông trại ----
-defItem({ id: 'crop_khe', name: 'Quả khế', kind: 'crop', icon: '⭐', sell: 12, desc: 'Ăn khế trả vàng~ rung cây khế ở Nông trại mỗi 10 phút.' });
+defItem({ id: 'crop_khe', name: 'Quả khế', kind: 'crop', icon: '', sprite: { url: 'assets/ui/act/khe.png', sx: 0, sy: 0, sw: 15, sh: 15 }, sell: 12, desc: 'Ăn khế trả vàng~ rung cây khế ở Nông trại mỗi 10 phút.' });
 
 // ---- Đồ ăn (tiệc) ----
-defItem({ id: 'food_cake', name: 'Bánh kem', kind: 'food', icon: '🎂', sell: 40, buy: 200, desc: 'Dùng để mở tiệc tại nhà.' });
-defItem({ id: 'food_juice', name: 'Nước ép', kind: 'food', icon: '🧃', sell: 8, buy: 40 });
+defItem({ id: 'food_cake', name: 'Bánh kem', kind: 'food', icon: '', sprite: { url: 'assets/ui/act/cake.png', sx: 0, sy: 0, sw: 12, sh: 13 }, sell: 40, buy: 200, desc: 'Dùng để mở tiệc tại nhà.' });
+defItem({ id: 'food_juice', name: 'Nước ép', kind: 'food', icon: '', sprite: { url: 'assets/ui/act/juice.png', sx: 0, sy: 0, sw: 10, sh: 16 }, sell: 8, buy: 40 });

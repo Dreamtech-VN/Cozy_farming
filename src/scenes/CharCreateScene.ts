@@ -29,7 +29,7 @@ export class CharCreateScene extends Phaser.Scene {
     const g = this.add.graphics();
     g.fillStyle(0x000000, 0.35); g.fillEllipse(px, py + 8 * RES, 190 * RES, 46 * RES);
     g.fillStyle(0xffd43b, 0.25); g.fillEllipse(px, py + 6 * RES, 160 * RES, 36 * RES);
-    this.add.text(px, py + 40 * RES, '✨ Nhân vật của bạn ✨', {
+    this.add.text(px, py + 40 * RES, 'Nhân vật của bạn', {
       fontFamily: 'sans-serif', fontSize: `${15 * RES}px`, color: '#ffe9a3', fontStyle: 'bold'
     }).setOrigin(0.5).setShadow(0, 2, '#000', 4);
     this.cameras.main.fadeIn(300, 10, 18, 32);

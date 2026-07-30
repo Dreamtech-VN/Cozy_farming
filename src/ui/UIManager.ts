@@ -38,7 +38,7 @@ export function initUI(game: Phaser.Game) {
   // cảnh báo xoay ngang
   const rot = h('div');
   rot.id = 'rotate-hint';
-  rot.innerHTML = '<div class="phone">📱</div><div>Xoay ngang màn hình để chơi nhé!</div>';
+  rot.innerHTML = '<div class="phone"></div><div>Xoay ngang màn hình để chơi nhé!</div>';
   document.body.append(rot);
 
   // toast container
@@ -183,7 +183,7 @@ function buildHud() {
   cm.onclick = () => { sfx.click(); openPanel('chat'); };
   const cmLog = h('div'); cmLog.id = 'chat-mini-log';
   const cmHint = h('div'); cmHint.id = 'chat-mini-hint';
-  cmHint.textContent = '💬 Nhắn gì đó...';
+  cmHint.textContent = 'Nhắn gì đó...';
   cm.append(cmLog, cmHint);
   const renderChat = (m: ChatMessage) => {
     const el = h('div', `cm ch-${m.channel}`);

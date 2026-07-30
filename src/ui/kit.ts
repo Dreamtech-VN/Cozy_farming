@@ -131,6 +131,10 @@ const ICON_SRC: Record<string, string> = {
   seed: 'assets/ui/act/seed.png',
   minigame: 'assets/ui/act/minigame.png',
   gift: 'assets/ui/act/gift.png',
+  cake: 'assets/ui/act/cake.png',
+  choco: 'assets/ui/act/choco.png',
+  teddy: 'assets/ui/act/teddy.png',
+  ticket: 'assets/ui/act/ticket.png',
   w_sunny: 'assets/ui/act/w_sunny.png',
   w_rain: 'assets/ui/act/w_rain.png',
   w_cloudy: 'assets/ui/act/w_cloudy.png',
@@ -163,6 +167,11 @@ const ICON_SRC: Record<string, string> = {
   act_kick: 'assets/ui/act/act_kick.png',
   act_pat: 'assets/ui/act/act_pat.png'
 };
+
+// đường dẫn ảnh của 1 tên icon (dùng khi cần vẽ lên canvas)
+export function iconUrl(name: string): string {
+  return ICON_SRC[name] ?? `assets/ui/av/${name}.png`;
+}
 
 export function uiIcon(name: string, size = 22): HTMLElement {
   const img = document.createElement('img');

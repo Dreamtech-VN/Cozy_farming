@@ -24,7 +24,7 @@ export function pushChat(m: ChatMessage) {
 }
 
 const BOT_REPLIES = [
-  'Hôm nay thời tiết đẹp ghê!', 'Ai đi câu cá không?', 'Mình vừa thu hoạch cả vườn dâu 🍓',
+  'Hôm nay thời tiết đẹp ghê!', 'Ai đi câu cá không?', 'Mình vừa thu hoạch cả vườn dâu',
   'Có ai bán trứng gà không?', 'Tối nay tiệc ở nhà mình nha!', 'Mới thắng ván caro, vui quá!',
   'Ruộng nhà bạn đẹp thế~', 'Chăm chỉ lên nào các nông dân ơi!'
 ];
@@ -47,7 +47,7 @@ export function sendChat(channel: ChatMessage['channel'], text: string, to?: str
   // NPC trả lời chat riêng
   if (channel === 'private' && to) {
     window.setTimeout(() => {
-      pushChat({ channel: 'private', from: to, to: S.player.name, text: 'Ừa mình đây, có gì hông? 😊', at: Date.now() });
+      pushChat({ channel: 'private', from: to, to: S.player.name, text: 'Ừa mình đây, có gì hông?', at: Date.now() });
     }, 1200 + Math.random() * 1500);
   }
 }

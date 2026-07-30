@@ -1,5 +1,5 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, uiIcon, priceHtml, priceBtn } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, uiIcon, priceHtml, priceBtn, iconUrl } from './kit';
 import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem, unequipTool } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
@@ -1417,11 +1417,12 @@ export function registerAllPanels() {
         if (!evs.length) body.append(h('div', 'hint', 'Chưa có sự kiện nào trong tháng này.'));
         for (const e of evs) {
           const r = h('div', 'row');
-          r.innerHTML = `<div style="font-size:24px">${e.icon}</div><div class="grow"><div class="t1">${e.name}</div><div class="t2">${e.desc}</div></div><div class="t2">Đang diễn ra 🎊</div>`;
+          r.innerHTML = `<div class="grow"><div class="t1">${e.name}</div><div class="t2">${e.desc}</div></div><div class="t2">Đang diễn ra</div>`;
+          r.prepend(uiIcon(e.icon, 26));
           body.append(r);
         }
         body.append(h('div', 'sep'));
-        body.append(h('div', 'hint', 'Sự kiện cả năm: Tết · Valentine · Lễ hội biển · Trung Thu · Halloween · Noel · 🎂 Sinh nhật game'));
+        body.append(h('div', 'hint', 'Sự kiện cả năm: Tết · Valentine · Lễ hội biển · Trung Thu · Halloween · Noel · Sinh nhật game'));
       }
     };
     tabs(['Đăng nhập', 'Điểm danh', 'Sự kiện'], i => { tab = i; render(); });
@@ -1447,14 +1448,23 @@ export function registerAllPanels() {
       ctx.save();
       ctx.translate(size / 2, size / 2);
       ctx.rotate((i + 0.5) / n * Math.PI * 2 - Math.PI / 2);
-      ctx.fillStyle = '#fff';
-      ctx.font = '16px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(WHEEL[i].icon, size / 2 - 30, 6);
+      // icon phần thưởng: ảnh thật, vẽ khi tải xong
+      const im = new Image();
+      im.src = iconUrl(WHEEL[i].icon);
+      const ang = (i + 0.5) / n * Math.PI * 2 - Math.PI / 2;
+      im.onload = () => {
+        ctx.save();
+        ctx.translate(size / 2, size / 2);
+        ctx.rotate(ang);
+        ctx.imageSmoothingEnabled = false;
+        const k = 22 / Math.max(im.width, im.height);
+        ctx.drawImage(im, size / 2 - 30 - im.width * k / 2, -im.height * k / 2, im.width * k, im.height * k);
+        ctx.restore();
+      };
       ctx.restore();
     }
     const pointer = h('div', 'wheel-pointer');
-    pointer.style.cssText = 'font-size:24px;margin-bottom:-14px;z-index:2';
+    pointer.style.cssText = 'margin-bottom:-6px;z-index:2';
     const info = h('div', 'hint', `Lượt còn lại: ${wheelSpinsLeft()} (1 free/ngày, thêm bằng vé)`);
     let spinning = false;
     const spinBtn = btn('QUAY!', 'gold', () => {
