@@ -70,6 +70,22 @@ export function registerAllPanels() {
   });
 
   // ================= Kho đồ =================
+  // sức chứa túi đồ (ô trống vẫn hiện để nhìn ra còn bao nhiêu chỗ)
+  const BAG_CAP = 100;
+
+  // sắp xếp: gom theo loại rồi theo tên
+  function sortBag() {
+    const KIND_ORDER = ['tool', 'seed', 'crop', 'product', 'food', 'fish', 'insect', 'material', 'furniture', 'deco', 'gift', 'special'];
+    const ord = (k: string) => { const i = KIND_ORDER.indexOf(k); return i < 0 ? 99 : i; };
+    const rows = Object.entries(S.inventory).sort((a, b) => {
+      const da = item(a[0]), db = item(b[0]);
+      return ord(da.kind) - ord(db.kind) || da.name.localeCompare(db.name, 'vi');
+    });
+    S.inventory = Object.fromEntries(rows);
+    save();
+    toast('Đã sắp xếp túi đồ.', 'inventory');
+  }
+
   registerPanel('inventory', () => {
     const { body, close, tabs } = openWindow('Kho đồ');
     const kinds = [
@@ -82,17 +98,26 @@ export function registerAllPanels() {
     let tab = 0;
     const render = () => {
       body.innerHTML = '';
-      const grid = h('div', 'grid');
+      const grid = h('div', 'bag');
       const entries = Object.entries(S.inventory).filter(([id]) => kinds[tab][1](item(id).kind) || tab === 0);
-      if (!entries.length) body.append(h('div', 'hint', 'Trống trơn... đi làm việc thôi!'));
       for (const [id, qty] of entries) {
         const def = item(id);
-        const c = h('div', 'cell');
-        c.append(iconOf(def), h('div', 'nm', def.name), h('div', 'qty', `x${qty}`));
-        c.onclick = () => itemActions(id, close);
+        const c = h('button', 'bag-slot');
+        c.append(iconOf(def, 34), h('div', 'qty', `x${qty}`));
+        c.title = def.name;
+        c.onclick = () => { sfx.click(); itemActions(id, close); };
         grid.append(c);
       }
-      body.append(grid);
+      // lấp cho đủ số ô của túi — ô trống để trống, không ghi gì
+      for (let i = entries.length; i < BAG_CAP; i++) grid.append(h('div', 'bag-slot empty'));
+      const wrap = h('div', 'bag-wrap');
+      const scroll = h('div', 'bag-scroll');
+      scroll.append(grid);
+      const foot = h('div', 'bag-foot');
+      foot.append(h('div', 'bag-count', `Số ô sử dụng: ${Object.keys(S.inventory).length}/${BAG_CAP}`));
+      foot.append(btn('Sắp xếp', 'gold', () => { sortBag(); sfx.click(); render(); }));
+      wrap.append(scroll, foot);
+      body.append(wrap);
     };
     tabs(kinds.map(k => k[0]), i => { tab = i; render(); });
     render();
