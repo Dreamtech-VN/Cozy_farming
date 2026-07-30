@@ -175,9 +175,7 @@ export class WorldScene extends Phaser.Scene {
     this.selector = this.add.image(0, 0, 'sel').setVisible(false).setDepth(900).setAlpha(0.9);
 
     // chạm vào chính mình -> bảng thao tác cá nhân
-    this.player.setSize(46 * (this.zone.bg ? 1 : 0.6), 84 * (this.zone.bg ? 1 : 0.6));
-    this.player.setInteractive(new Phaser.Geom.Rectangle(-24, -88, 48, 90), Phaser.Geom.Rectangle.Contains);
-    this.player.on('pointerdown', () => bus.emit(EV.OPEN_PANEL, { panel: 'selfmenu' }));
+    this.attachTapZone(this.player, () => bus.emit(EV.OPEN_PANEL, { panel: 'selfmenu' }));
 
     this.spawnPet();
     this.spawnRoamers();
@@ -661,6 +659,7 @@ export class WorldScene extends Phaser.Scene {
     for (const def of this.zone.npcs) {
       const sprite = new ChibiSprite(this, def.x * T, def.y * T, this.npcLook(def.charIndex, def.gender));
       sprite.setDepth(def.y * T).setScale(cs);
+      this.attachTapZone(sprite, () => this.talkNpc(def));
       this.add.text(def.x * T, def.y * T - labelOff, def.name, { fontSize: cs === 1 ? '11px' : '8px', color: '#ffe066', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2000);
       this.npcs.push({ def, sprite });
     }
@@ -1169,6 +1168,13 @@ export class WorldScene extends Phaser.Scene {
     }
   }
 
+  // vùng chạm ôm trọn nhân vật (zone con trong container -> transform chuẩn)
+  private attachTapZone(c: ChibiSprite, cb: () => void) {
+    const z = this.add.zone(0, -44, 52, 92).setInteractive({ useHandCursor: true });
+    z.on('pointerdown', cb);
+    c.add(z);
+  }
+
   // ================= thao tác bản thân =================
   private running = false;
 
@@ -1208,8 +1214,7 @@ export class WorldScene extends Phaser.Scene {
         backgroundColor: '#00000090', padding: { x: 3, y: 1 }
       }).setOrigin(0.5).setDepth(2000);
       // vùng chạm rộng, không cần đứng sát
-      sprite.setInteractive(new Phaser.Geom.Rectangle(-24, -88, 48, 90), Phaser.Geom.Rectangle.Contains);
-      sprite.on('pointerdown', () => bus.emit(EV.OPEN_PANEL, { panel: 'playermenu', data: { friend: def } }));
+      this.attachTapZone(sprite, () => bus.emit(EV.OPEN_PANEL, { panel: 'playermenu', data: { friend: def } }));
       this.roamers.push({ def, sprite });
       // đi lại lững thững
       const walk = () => {
