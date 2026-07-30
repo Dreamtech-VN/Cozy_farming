@@ -5,7 +5,7 @@ import { lookLayers, type ChibiLook } from '@/data/chibi';
 // Strip 15 frame 64x96/part, neo chân (32,88). Hướng: mặc định nhìn phải,
 // đi trái lật gương (Avatar chỉ có 2 hướng), lên/xuống dùng chung.
 
-export type ChibiAnim = 'idle' | 'walk' | 'work' | 'sit' | 'lie';
+export type ChibiAnim = 'idle' | 'walk' | 'work' | 'sit' | 'lie' | 'kiss' | 'hug' | 'kick' | 'comfort' | 'cheer';
 
 interface AnimDef { frames: number[]; fps: number; loop: boolean }
 const ANIMS: Record<ChibiAnim, AnimDef> = {
@@ -13,7 +13,13 @@ const ANIMS: Record<ChibiAnim, AnimDef> = {
   walk: { frames: [0, 2], fps: 6, loop: true },
   work: { frames: [3, 0, 3, 0, 3], fps: 5, loop: false },           // cúi làm việc
   sit:  { frames: [4], fps: 1, loop: true },
-  lie:  { frames: [5], fps: 1, loop: true }
+  lie:  { frames: [5], fps: 1, loop: true },
+  // tư thế tương tác (frame Avatar: 6 đưa tay, 7 với tay, 10 dang tay, 11 tung đòn, 12 khoanh tay)
+  kiss:    { frames: [7, 7, 7, 0], fps: 2.6, loop: false },
+  hug:     { frames: [10, 10, 10, 10, 0], fps: 2.4, loop: false },
+  kick:    { frames: [2, 11, 11, 0], fps: 5, loop: false },
+  comfort: { frames: [6, 6, 6, 0], fps: 2.6, loop: false },
+  cheer:   { frames: [7, 0, 7, 0], fps: 4, loop: false }
 };
 
 export class ChibiSprite extends Phaser.GameObjects.Container {
@@ -52,7 +58,8 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
   play(anim: string, onDone?: () => void) {
     const alias: Record<string, ChibiAnim> = {
       hoe: 'work', water: 'work', pickup: 'work', axe: 'work', fishing: 'sit',
-      idle: 'idle', walk: 'walk', work: 'work', sit: 'sit', lie: 'lie'
+      idle: 'idle', walk: 'walk', work: 'work', sit: 'sit', lie: 'lie',
+      kiss: 'kiss', hug: 'hug', kick: 'kick', comfort: 'comfort', cheer: 'cheer'
     };
     const a = alias[anim] ?? 'idle';
     // các pose không loop phải gọi callback dù bị lặp lại

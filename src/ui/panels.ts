@@ -651,17 +651,18 @@ export function registerAllPanels() {
   });
 
   // ---- hành động thân mật với người chơi ----
-  const PLAYER_ACTS: [string, string, string, number][] = [
-    ['💋', 'Hôn', '{a} hôn {b} một cái 😘', 6],
-    ['🫂', 'Ôm', '{a} ôm {b} thật chặt', 5],
-    ['🦵', 'Đá đít', '{a} đá đít {b} một phát 😆', -3],
-    ['🥺', 'An ủi', '{a} vỗ vai an ủi {b}', 4]
+  // [icon, tên, lời thoại, thiện cảm, animation]
+  const PLAYER_ACTS: [string, string, string, number, string][] = [
+    ['💋', 'Hôn', '{a} hôn {b} một cái 😘', 6, 'kiss'],
+    ['🫂', 'Ôm', '{a} ôm {b} thật chặt', 5, 'hug'],
+    ['🦵', 'Đá đít', '{a} đá đít {b} một phát 😆', -3, 'kick'],
+    ['🥺', 'An ủi', '{a} vỗ vai an ủi {b}', 4, 'comfort']
   ];
   registerPanel('playeract', (data: { friend: { id: string; name: string } }) => {
     const f = data.friend;
     const { body, close } = openWindow(`🫂 Hành động với ${f.name}`, { size: 'small' });
     const grid = h('div', 'wd-grid');
-    for (const [icon, label, tpl, aff] of PLAYER_ACTS) {
+    for (const [icon, label, tpl, aff, kind] of PLAYER_ACTS) {
       const c = h('button', 'wd-item');
       c.append(h('div', 'wd-item-ico', icon), h('div', 'nm', label),
         h('div', 'pr', `${aff > 0 ? '+' : ''}${aff} thiện cảm`));
@@ -669,9 +670,9 @@ export function registerAllPanels() {
         sfx.click();
         addAffinity(f.id, aff);
         const msg = tpl.replace('{a}', S.player.name).replace('{b}', f.name);
-        bus.emit('world:selfemote', icon);
-        toast(msg, icon);
         close();
+        // diễn hành động ngay trong game
+        bus.emit('world:playeract', { id: f.id, name: f.name, kind, icon, text: msg, aff });
       };
       grid.append(c);
     }

@@ -223,6 +223,7 @@ export class WorldScene extends Phaser.Scene {
     bus.on('world:say', this.onSay, this);
     bus.on('hotbar:use', this.useTool, this);
     bus.on('world:selfact', this.selfAct, this);
+    bus.on('world:playeract', this.playPlayerAct, this);
     bus.on('world:selfemote', this.onEmote, this);
     this.events.on('shutdown', () => {
       bus.off(EV.APPEARANCE, this.onAppearance, this);
@@ -232,6 +233,7 @@ export class WorldScene extends Phaser.Scene {
       bus.off('world:say', this.onSay, this);
       bus.off('hotbar:use', this.useTool, this);
       bus.off('world:selfact', this.selfAct, this);
+      bus.off('world:playeract', this.playPlayerAct, this);
       bus.off('world:selfemote', this.onEmote, this);
     });
 
@@ -1175,6 +1177,59 @@ export class WorldScene extends Phaser.Scene {
     c.add(z);
   }
 
+  // ================= diễn hành động với người chơi khác =================
+  private playPlayerAct(d: { id: string; name: string; kind: string; icon: string; text: string; aff: number }) {
+    const target = this.roamers.find(r => r.def.id === d.id);
+    if (!target) { toast(`${d.text}`, d.icon); return; }
+    if (this.busy) return;
+    this.busy = true;
+    // dừng bước chân đối phương để hai người đứng yên diễn
+    this.tweens.killTweensOf(target.sprite);
+    this.tweens.killTweensOf(target.label);
+    target.sprite.play('idle');
+
+    const tx = target.sprite.x, ty = target.sprite.y;
+    const side = this.player.x <= tx ? -1 : 1;                 // đứng cạnh, không chồng người
+    const gap = this.zone.bg ? 46 : 24;
+    const dest = { x: tx + side * gap, y: ty };
+
+    // bước tới cạnh đối phương
+    this.player.play('walk');
+    this.player.setDir(dest.x < this.player.x ? 2 : 3);
+    this.tweens.add({
+      targets: this.player, x: dest.x, y: dest.y,
+      duration: Math.min(900, Phaser.Math.Distance.Between(this.player.x, this.player.y, dest.x, dest.y) * 4),
+      onUpdate: () => this.player.setDepth(this.player.y),
+      onComplete: () => {
+        // quay mặt vào nhau
+        this.player.setDir(tx < this.player.x ? 2 : 3);
+        target.sprite.setDir(this.player.x < tx ? 2 : 3);
+
+        this.player.play(d.kind, () => { this.busy = false; this.player.play('idle'); });
+
+
+        // đối phương phản ứng
+        this.time.delayedCall(360, () => {
+          if (d.kind === 'kick') {
+            // bị đá: nảy ra sau + mặt giận
+            this.tweens.add({ targets: target.sprite, x: tx + (side < 0 ? 26 : -26), duration: 140, yoyo: true, ease: 'back.out' });
+            target.sprite.play('cheer');
+            this.fxFloat(tx, ty - (this.zone.bg ? 96 : 52), '💢', '#ff8787');
+          } else {
+            target.sprite.play(d.kind === 'hug' ? 'hug' : 'cheer');
+            this.fxFloat(tx, ty - (this.zone.bg ? 96 : 52), d.aff > 0 ? '❤️' : '💢', d.aff > 0 ? '#ff8787' : '#ffd43b');
+          }
+          this.time.delayedCall(900, () => target.sprite.play('idle'));
+        });
+
+        // hiệu ứng quanh 2 người + lời thoại
+        const mx = (this.player.x + tx) / 2, my = (this.player.y + ty) / 2;
+        this.fxBurst(mx, my - (this.zone.bg ? 60 : 32), d.aff > 0 ? 0xffb3c1 : 0xffd43b, d.aff > 0 ? 12 : 8);
+        this.onSay(d.text);
+      }
+    });
+  }
+
   // ================= thao tác bản thân =================
   private running = false;
 
@@ -1215,7 +1270,7 @@ export class WorldScene extends Phaser.Scene {
       }).setOrigin(0.5).setDepth(2000);
       // vùng chạm rộng, không cần đứng sát
       this.attachTapZone(sprite, () => bus.emit(EV.OPEN_PANEL, { panel: 'playermenu', data: { friend: def } }));
-      this.roamers.push({ def, sprite });
+      this.roamers.push({ def, sprite, label });
       // đi lại lững thững
       const walk = () => {
         if (!sprite.active) return;
@@ -1239,7 +1294,7 @@ export class WorldScene extends Phaser.Scene {
   // ================= thú cưng =================
   private pet?: Phaser.GameObjects.Sprite;
   private petWalk = false;
-  private roamers: { def: Friend; sprite: ChibiSprite }[] = [];      // đang dắt đi dạo (đi theo người chơi)
+  private roamers: { def: Friend; sprite: ChibiSprite; label: Phaser.GameObjects.Text }[] = [];      // đang dắt đi dạo (đi theo người chơi)
 
   // nhà thú cưng chỉ dựng khi đã nuôi ít nhất 1 bé
   private buildPetHouse() {
