@@ -1187,6 +1187,7 @@ export class WorldScene extends Phaser.Scene {
     this.busy = true;
     this.tweens.killTweensOf(target.sprite);
     this.tweens.killTweensOf(target.label);
+    target.busy = true;
     target.sprite.play('idle');
 
     const big = !!this.zone.bg;
@@ -1226,7 +1227,7 @@ export class WorldScene extends Phaser.Scene {
               onComplete: () => heart.destroy()
             });
             target.sprite.play('cheer');
-            this.time.delayedCall(700, () => target.sprite.play('idle'));
+            this.time.delayedCall(700, () => { target.sprite.play('idle'); target.busy = false; });
           });
 
         } else if (d.kind === 'hug') {
@@ -1244,6 +1245,7 @@ export class WorldScene extends Phaser.Scene {
           this.time.delayedCall(1100, () => {
             target.sprite.play('idle');
             this.tweens.add({ targets: [target.sprite, target.label], x: `+=${side * 10}`, duration: 240 });
+            target.busy = false;
             done();
           });
 
@@ -1257,15 +1259,39 @@ export class WorldScene extends Phaser.Scene {
                 targets: this.player, x: near, duration: 130, ease: 'back.in',
                 onComplete: () => {
                   sfx.error();
-                  this.fxBurst(tx, ty - headY * 0.4, 0xffd43b, 10);
+                  this.fxBurst(tx, ty - headY * 0.4, 0xffd43b, 12);
                   this.fxFloat(tx, ty - headY, '💢', '#ff8787');
-                  target.sprite.play('cheer');
+                  // văng ra sau rồi ngã nằm sõng soài
                   this.tweens.add({
-                    targets: [target.sprite, target.label], x: `-=${side * 34}`, duration: 180,
-                    yoyo: true, hold: 120, ease: 'quad.out'
+                    targets: [target.sprite, target.label], x: `-=${side * 46}`, duration: 220, ease: 'quad.out'
                   });
-                  this.tweens.add({ targets: target.sprite, angle: side * 12, duration: 150, yoyo: true, hold: 120 });
-                  this.time.delayedCall(700, () => { target.sprite.play('idle'); done(); });
+                  this.tweens.add({
+                    targets: target.sprite, angle: side * -70, duration: 260, ease: 'back.out',
+                    onComplete: () => {
+                      target.sprite.play('lie');
+                      target.sprite.setAngle(0);
+                      this.fxBurst(target.sprite.x, target.sprite.y, 0xd9c184, 8);   // bụi khi tiếp đất
+                      // sao xoay quanh đầu lúc nằm
+                      const stars = this.add.text(target.sprite.x, target.sprite.y - headY * 0.45, '💫', {
+                        fontSize: big ? '16px' : '11px'
+                      }).setOrigin(0.5).setDepth(9000);
+                      this.tweens.add({ targets: stars, alpha: 0.3, duration: 420, yoyo: true, repeat: 2 });
+                      // nằm một lúc rồi lồm cồm bò dậy
+                      this.time.delayedCall(1800, () => {
+                        stars.destroy();
+                        target.sprite.play('work');                                   // chống tay ngồi dậy
+                        this.tweens.add({
+                          targets: [target.sprite, target.label], x: `+=${side * 46}`, duration: 420, ease: 'sine.inout'
+                        });
+                        this.time.delayedCall(500, () => {
+                          target.sprite.play('idle');
+                          target.busy = false;
+                          this.fxFloat(target.sprite.x, target.sprite.y - headY, '😤', '#ffd43b');
+                        });
+                      });
+                    }
+                  });
+                  this.time.delayedCall(900, done);
                 }
               });
             }
@@ -1279,7 +1305,7 @@ export class WorldScene extends Phaser.Scene {
             this.tweens.add({ targets: target.sprite, y: `-=4`, duration: 160, yoyo: true, repeat: 1 });
             this.fxFloat(tx, ty - headY, '💛', '#ffd43b');
             target.sprite.play('cheer');
-            this.time.delayedCall(800, () => target.sprite.play('idle'));
+            this.time.delayedCall(800, () => { target.sprite.play('idle'); target.busy = false; });
           });
         }
       }
@@ -1326,10 +1352,12 @@ export class WorldScene extends Phaser.Scene {
       }).setOrigin(0.5).setDepth(2000);
       // vùng chạm rộng, không cần đứng sát
       this.attachTapZone(sprite, () => bus.emit(EV.OPEN_PANEL, { panel: 'playermenu', data: { friend: def } }));
-      this.roamers.push({ def, sprite, label });
+      const entry: { def: Friend; sprite: ChibiSprite; label: Phaser.GameObjects.Text; busy?: boolean } = { def, sprite, label };
+      this.roamers.push(entry);
       // đi lại lững thững
       const walk = () => {
         if (!sprite.active) return;
+        if (entry.busy) { this.time.delayedCall(700, walk); return; }   // đang bị tác động -> chưa đi
         const tx = Phaser.Math.Clamp(bx + (Math.random() - 0.5) * 260, 60, this.zone.w * T - 60);
         const ty = Phaser.Math.Clamp(by + (Math.random() - 0.5) * 120,
           (this.zone.walkTop ?? 2) * T + 10, (this.zone.walkBottom ?? this.zone.h - 2) * T - 10);
@@ -1350,7 +1378,7 @@ export class WorldScene extends Phaser.Scene {
   // ================= thú cưng =================
   private pet?: Phaser.GameObjects.Sprite;
   private petWalk = false;
-  private roamers: { def: Friend; sprite: ChibiSprite; label: Phaser.GameObjects.Text }[] = [];      // đang dắt đi dạo (đi theo người chơi)
+  private roamers: { def: Friend; sprite: ChibiSprite; label: Phaser.GameObjects.Text; busy?: boolean }[] = [];      // đang dắt đi dạo (đi theo người chơi)
 
   // nhà thú cưng chỉ dựng khi đã nuôi ít nhất 1 bé
   private buildPetHouse() {
