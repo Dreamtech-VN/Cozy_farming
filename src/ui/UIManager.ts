@@ -30,7 +30,9 @@ export function initUI(game: Phaser.Game) {
   registerAllPanels();
   registerMinigames();
   // hook debug/automation (dùng cho test tự động)
-  (window as any).__cozy = { openPanel, bus };
+  import('@/core/save').then(saveMod => {
+    (window as any).__cozy = { openPanel, bus, save: saveMod };
+  });
 
   // cảnh báo xoay ngang
   const rot = h('div');

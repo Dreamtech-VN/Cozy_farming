@@ -19,6 +19,45 @@ const T = 16; // kích thước tile
 const FARM_ORIGIN = { x: 6, y: 12 }; // vị trí ruộng trong zone farm (theo tile)
 const BARN_RECT = { x: 30, y: 4, w: 12, h: 8 };
 
+// Decor đặt sẵn theo khu (sprite thật từ asset pack) — toạ độ tile, origin đáy giữa
+const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number }[]> = {
+  town: [
+    { key: 'bld_arcade', x: 12, y: 8 },      // trên cổng Game Center
+    { key: 'bld_school', x: 24, y: 8 },      // trên cổng Trường học
+    { key: 'bld_supam', x: 36, y: 8 },       // trên cổng Khu mua sắm
+    { key: 'bld_pub', x: 6, y: 16 },
+    { key: 'bld_cafe', x: 15, y: 16 },
+    { key: 'bld_library', x: 26, y: 16 },
+    { key: 'bld_inn', x: 40, y: 17 },
+    { key: 'bld_shop', x: 8, y: 28 },
+    { key: 'bld_greenhouse', x: 24, y: 33 }, // trên cổng Nhà riêng
+    { key: 'deco_lamp_black', x: 10, y: 20 }, { key: 'deco_lamp_black', x: 20, y: 20 },
+    { key: 'deco_lamp_black', x: 30, y: 20 }, { key: 'deco_lamp_black', x: 40, y: 20 },
+    { key: 'deco_bench', x: 14, y: 22 }, { key: 'deco_bench', x: 34, y: 22 },
+    { key: 'deco_flower_pot', x: 12, y: 22 }, { key: 'deco_flower_pot', x: 36, y: 22 }
+  ],
+  farm: [
+    { key: 'deco_scarecrow', x: 4, y: 12 },
+    { key: 'deco_barrel', x: 28, y: 4 }, { key: 'deco_barrel', x: 28, y: 6 },
+    { key: 'deco_flower_pot', x: 6, y: 8 }, { key: 'deco_flower_pot', x: 12, y: 8 }
+  ],
+  park: [
+    { key: 'deco_bench', x: 10, y: 10 }, { key: 'deco_bench', x: 26, y: 16 }, { key: 'deco_bench', x: 16, y: 24 },
+    { key: 'deco_lamp_green', x: 14, y: 10 }, { key: 'deco_lamp_green', x: 30, y: 16 }, { key: 'deco_lamp_green', x: 20, y: 24 },
+    { key: 'deco_bush', x: 8, y: 14 }, { key: 'deco_bush', x: 22, y: 12 }, { key: 'deco_bush', x: 30, y: 22 },
+    { key: 'deco_flower_pot', x: 12, y: 10 }, { key: 'deco_flower_pot', x: 28, y: 16 }
+  ],
+  beach: [
+    { key: 'bld_fishshop', x: 10, y: 7 },    // tiệm câu ông Biển
+    { key: 'bld_beachbar', x: 22, y: 12 },
+    { key: 'deco_barrel', x: 15, y: 8 }, { key: 'deco_bench', x: 18, y: 16 }
+  ],
+  pond: [
+    { key: 'deco_bench', x: 12, y: 5 }, { key: 'deco_lamp_green', x: 24, y: 5 },
+    { key: 'deco_barrel', x: 6, y: 8 }
+  ]
+};
+
 interface WorldAction { icon: string; label: string; cb: () => void }
 
 interface InsectSprite { def: InsectDef; obj: Phaser.GameObjects.Image; vx: number; vy: number; t: number }
@@ -66,6 +105,7 @@ export class WorldScene extends Phaser.Scene {
 
     this.drawGround();
     if (this.zone.id === 'house') this.drawHouse();
+    this.drawZoneDecor();
     this.drawPortals();
     this.spawnNpcs();
     if (this.zone.features.includes('farm')) this.buildFarm();
@@ -78,7 +118,10 @@ export class WorldScene extends Phaser.Scene {
     this.selector = this.add.image(0, 0, 'sel').setVisible(false).setDepth(900).setAlpha(0.9);
 
     this.cameras.main.startFollow(this.player, true, 0.12, 0.12);
-    this.cameras.main.setZoom(2.4);
+    // trong nhà: phóng to để căn phòng lấp đầy màn hình
+    const bw = this.physics.world.bounds;
+    const fitZoom = Math.max(this.scale.width / bw.width, this.scale.height / bw.height);
+    this.cameras.main.setZoom(Math.max(2.4, fitZoom));
 
     // lớp đêm + mưa
     this.darkOverlay = this.add.rectangle(0, 0, zw, zh, 0x0b1030).setOrigin(0).setDepth(5000).setAlpha(0);
@@ -134,8 +177,9 @@ export class WorldScene extends Phaser.Scene {
           const x = Math.floor(rnd() * (w - 6)) + 3, y = Math.floor(rnd() * (h - 8)) + 3;
           if (this.zone.features.includes('farm') && x > FARM_ORIGIN.x - 2 && x < FARM_ORIGIN.x + 18 && y > FARM_ORIGIN.y - 2 && y < FARM_ORIGIN.y + 14) continue;
           if (this.zone.features.includes('barn') && x > BARN_RECT.x - 2 && x < BARN_RECT.x + BARN_RECT.w + 2 && y > BARN_RECT.y - 2 && y < BARN_RECT.y + BARN_RECT.h + 2) continue;
-          const kind = Math.floor(rnd() * 2);
-          this.add.image(x * T, y * T, kind ? 'tree_pine' : 'tree_round').setOrigin(0.5, 0.9).setDepth(y * T);
+          const kind = Math.floor(rnd() * 3);
+          this.add.image(x * T, y * T, ['deco_tree_round', 'deco_tree_round2', 'deco_tree_pine'][kind])
+            .setOrigin(0.5, 0.9).setScale(1.4).setDepth(y * T);
         }
       }
       if (this.zone.features.includes('flowers')) {
@@ -160,6 +204,17 @@ export class WorldScene extends Phaser.Scene {
         g.fillStyle(0x4aa5d9); g.fillEllipse(cx, cy, 20 * T, 12 * T);
         g.fillStyle(0x62b7e6, 0.6); g.fillEllipse(cx, cy - 4, 18 * T, 10 * T);
       }
+    }
+  }
+
+  // Đặt nhà cửa/đèn/ghế... theo cấu hình ZONE_DECOR
+  private drawZoneDecor() {
+    for (const d of ZONE_DECOR[this.zone.id] ?? []) {
+      if (!this.textures.exists(d.key)) continue;
+      this.add.image(d.x * T, d.y * T, d.key)
+        .setOrigin(0.5, 1)
+        .setScale(d.s ?? (d.key.startsWith('bld_') ? 1.1 : 1.2))
+        .setDepth(d.y * T);
     }
   }
 
@@ -206,9 +261,18 @@ export class WorldScene extends Phaser.Scene {
     const def = FURNITURE[itemId];
     if (!def) return;
     const c = this.add.container(tx * T, ty * T).setDepth(ty * T + def.h * T);
-    const rect = this.add.rectangle(0, 0, def.w * T - 2, def.h * T - 2, def.color).setOrigin(0).setStrokeStyle(1, 0x00000060);
-    const label = this.add.text(def.w * T / 2, def.h * T / 2, def.icon, { fontSize: '12px' }).setOrigin(0.5);
-    c.add([rect, label]);
+    if (this.textures.exists(`fs_${itemId}`)) {
+      // sprite thật từ Interior pack, co vừa khung w x h tile
+      const img = this.add.image(def.w * T / 2, def.h * T, `fs_${itemId}`).setOrigin(0.5, 1);
+      const tex = this.textures.get(`fs_${itemId}`).getSourceImage() as HTMLImageElement;
+      const k = Math.min(def.w * T / tex.width, (def.h * T + 8) / tex.height);
+      img.setScale(k);
+      c.add(img);
+    } else {
+      const rect = this.add.rectangle(0, 0, def.w * T - 2, def.h * T - 2, def.color).setOrigin(0).setStrokeStyle(1, 0x00000060);
+      const label = this.add.text(def.w * T / 2, def.h * T / 2, def.icon, { fontSize: '12px' }).setOrigin(0.5);
+      c.add([rect, label]);
+    }
     if (def.category === 'painting') c.setY(0.5 * T).setDepth(10);
     if (def.category === 'aquarium') {
       // cá bơi trong hồ
@@ -478,8 +542,15 @@ export class WorldScene extends Phaser.Scene {
     this.placingItem = itemId;
     this.placeGhost?.destroy();
     const c = this.add.container(0, 0).setDepth(6000).setAlpha(0.7);
-    c.add(this.add.rectangle(0, 0, def.w * T - 2, def.h * T - 2, def.color).setOrigin(0));
-    c.add(this.add.text(def.w * T / 2, def.h * T / 2, def.icon, { fontSize: '12px' }).setOrigin(0.5));
+    if (this.textures.exists(`fs_${itemId}`)) {
+      const img = this.add.image(def.w * T / 2, def.h * T, `fs_${itemId}`).setOrigin(0.5, 1);
+      const tex = this.textures.get(`fs_${itemId}`).getSourceImage() as HTMLImageElement;
+      img.setScale(Math.min(def.w * T / tex.width, (def.h * T + 8) / tex.height));
+      c.add(img);
+    } else {
+      c.add(this.add.rectangle(0, 0, def.w * T - 2, def.h * T - 2, def.color).setOrigin(0));
+      c.add(this.add.text(def.w * T / 2, def.h * T / 2, def.icon, { fontSize: '12px' }).setOrigin(0.5));
+    }
     this.placeGhost = c;
     toast('Chạm vào sàn để đặt. Chạm 2 lần nhanh để hủy.', '📦');
   }

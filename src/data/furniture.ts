@@ -15,9 +15,23 @@ export interface FurnitureDef {
 
 export const FURNITURE: Record<string, FurnitureDef> = {};
 
+// kích thước file sprite đã cắt từ Interior pack (assets/interior/<id>.png)
+const SPRITE_SIZE: Record<string, [number, number]> = {
+  furn_bed: [31, 48], furn_bed_pink: [23, 48], furn_couch: [48, 32], furn_chair: [13, 19],
+  furn_table: [48, 44], furn_shelf: [29, 62], furn_kitchen: [80, 58], furn_fireplace: [15, 16],
+  furn_tv: [14, 16], deco_plant: [20, 40], deco_vase: [15, 20], deco_bear: [29, 46],
+  deco_rug: [48, 26], deco_xmas_tree: [30, 32], aquarium_small: [16, 15], aquarium_big: [30, 16]
+};
+
 function defFurn(f: FurnitureDef) {
   FURNITURE[f.id] = f;
-  defItem({ id: f.id, name: f.name, kind: f.category === 'painting' || f.category === 'deco' ? 'deco' : 'furniture', icon: f.icon, sell: Math.floor(f.price / 3), buy: f.price, rubyBuy: f.rubyPrice, meta: { furniture: true } });
+  const sz = SPRITE_SIZE[f.id];
+  defItem({
+    id: f.id, name: f.name, kind: f.category === 'painting' || f.category === 'deco' ? 'deco' : 'furniture',
+    icon: f.icon,
+    sprite: sz ? { url: `assets/interior/${f.id}.png`, sx: 0, sy: 0, sw: sz[0], sh: sz[1] } : undefined,
+    sell: Math.floor(f.price / 3), buy: f.price, rubyBuy: f.rubyPrice, meta: { furniture: true }
+  });
 }
 
 defFurn({ id: 'furn_bed', name: 'Giường gỗ', icon: '🛏️', price: 400, w: 2, h: 3, color: 0xc86f4a, category: 'furniture' });

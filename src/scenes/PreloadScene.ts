@@ -39,7 +39,19 @@ export class PreloadScene extends Phaser.Scene {
     // ---- Cá / thiên nhiên ----
     this.load.spritesheet('fish', 'assets/fishing/fish_all.png', { frameWidth: 16, frameHeight: 16 });
     this.load.spritesheet('nature', 'assets/nature/global.png', { frameWidth: 16, frameHeight: 16 });
-    this.load.image('tiles_img', 'assets/tiles/tiles.png');
+
+    // ---- Nhà cửa (town + beach) ----
+    for (const b of ['pub', 'cinema', 'school', 'cafe', 'inn', 'library', 'greenhouse', 'arcade', 'supam', 'shop', 'beachbar', 'fishshop']) {
+      this.load.image(`bld_${b}`, `assets/buildings/${b}.png`);
+    }
+    // ---- Decor ngoài trời (cắt từ tileset) ----
+    for (const d of ['tree_round', 'tree_round2', 'tree_pine', 'bench', 'lamp_green', 'lamp_black', 'scarecrow', 'barrel', 'flower_pot', 'bush']) {
+      this.load.image(`deco_${d}`, `assets/deco/${d}.png`);
+    }
+    // ---- Nội thất (cắt từ Interior pack) ----
+    for (const f of ['furn_bed', 'furn_bed_pink', 'furn_couch', 'furn_chair', 'furn_table', 'furn_shelf', 'furn_kitchen', 'furn_fireplace', 'furn_tv', 'deco_plant', 'deco_vase', 'deco_bear', 'deco_rug', 'deco_xmas_tree', 'aquarium_small', 'aquarium_big']) {
+      this.load.image(`fs_${f}`, `assets/interior/${f}.png`);
+    }
   }
 
   create() {
@@ -104,19 +116,6 @@ export class PreloadScene extends Phaser.Scene {
     // ô chọn
     g.clear(); g.lineStyle(2, 0xffd43b); g.strokeRect(1, 1, 30, 30);
     g.generateTexture('sel', 32, 32);
-    // cây tán tròn
-    g.clear();
-    g.fillStyle(0x6b4a2e); g.fillRect(14, 30, 6, 14);
-    g.fillStyle(0x3f6d21); g.fillCircle(17, 20, 15);
-    g.fillStyle(0x4e8429); g.fillCircle(12, 16, 10); g.fillCircle(23, 15, 9);
-    g.fillStyle(0x5fa032); g.fillCircle(16, 12, 8);
-    g.generateTexture('tree_round', 34, 46);
-    // cây thông
-    g.clear();
-    g.fillStyle(0x6b4a2e); g.fillRect(13, 34, 6, 12);
-    g.fillStyle(0x2f5e1e); g.fillTriangle(16, 0, 2, 26, 30, 26);
-    g.fillStyle(0x3f7a28); g.fillTriangle(16, 10, 4, 36, 28, 36);
-    g.generateTexture('tree_pine', 32, 48);
     g.destroy();
   }
 }

@@ -15,10 +15,16 @@ Nguồn: các pack đã mua trên itch.io (license thương mại), tải từ
 | `nature.full` | cây/bụi/quả tự nhiên |
 | `Cozy_UI_Pack_doboui` | Chưa dùng (UI hiện tại là DOM/CSS — nhẹ và dễ sửa hơn) |
 
-## Chỗ đang vẽ tạm bằng code (procedural)
+## Sprite đã cắt sẵn từ pack (scripts cắt bằng PIL, đã kiểm tra bằng mắt)
 
-- Nền đất/cỏ/cát/nước, cây to, chuồng, nhà — palette khớp pack, sẽ thay dần bằng tile thật khi map toạ độ tileset.
-- Nội thất trong nhà đang vẽ khối màu + icon (data đã đủ, chỉ cần map sprite `Interior.full/global.png`).
+- `assets/buildings/` — 10 nhà town (pub, cinema, school, cafe, inn, library, greenhouse, arcade, SUPAM, shop) + beachbar, fishshop (fishing pack)
+- `assets/deco/` — cây tán tròn ×2, thông, ghế đá, đèn đường ×2, bù nhìn, thùng gỗ, chậu hoa, bụi cây (từ tiles.png)
+- `assets/interior/` — giường ×2, sofa, ghế, bàn, kệ, bếp, lò sưởi, TV, chậu cây, bình hoa, gấu bông, thảm, cây thông Noel, hồ cá ×2 (từ Interior pack)
+
+## Chỗ còn vẽ tạm bằng code (procedural)
+
+- Nền đất/cỏ/cát/nước (tile đơn sắc có hoa văn, palette khớp pack) — autotile thật sẽ map ở v0.2.
+- Chuồng gia súc, đàn piano, đèn cây trong nhà, tranh treo tường.
 
 ## Cần mua thêm (đề xuất, ưu tiên từ trên xuống)
 
