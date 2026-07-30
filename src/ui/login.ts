@@ -83,31 +83,33 @@ function renderLogin(wrap: HTMLElement, rerender: () => void) {
   form.append(user, pass, err, go);
   accBtn.onclick = () => { form.style.display = form.style.display === 'none' ? 'flex' : 'none'; };
 
-  // Google / Apple: sau khi "đăng nhập" hỏi tên tài khoản (bản offline chưa lấy được tên thật)
-  const nameStep = (type: 'google' | 'apple') => {
-    body.innerHTML = '';
-    body.append(h('div', 'lg-ok', `${type === 'google' ? 'Google' : 'Apple'} — đăng nhập thành công ✓`));
-    const inp = h('input', 'ui-input') as HTMLInputElement;
-    inp.placeholder = 'Tên tài khoản'; inp.maxLength = 16;
-    const err = h('div', 'lg-err', '');
-    const ok = h('button', 'lg-btn lg-acc', 'Xác nhận');
-    ok.onclick = () => {
-      const n = inp.value.trim();
-      if (n.length < 3) { err.textContent = 'Tên tài khoản tối thiểu 3 ký tự'; return; }
-      loginAs({ type, name: n });
-    };
-    body.append(inp, err, ok);
-    inp.focus();
+  // Google / Apple: tên tài khoản tự lấy từ hồ sơ (như SDK thật trả về),
+  // bản offline: ưu tiên tên nhân vật đã lưu, chưa có thì sinh tên và giữ nguyên cho lần sau
+  const autoName = (type: 'google' | 'apple'): string => {
+    try {
+      const sv = JSON.parse(localStorage.getItem('cozy_farming_save_v1') || 'null');
+      if (sv?.player?.name) return sv.player.name;
+    } catch { /* ignore */ }
+    const k = `cozy_${type}_name`;
+    try {
+      const old = localStorage.getItem(k);
+      if (old) return old;
+      const n = `${type === 'google' ? 'GG' : 'AP'}${Math.floor(1000 + Math.random() * 9000)}`;
+      localStorage.setItem(k, n);
+      return n;
+    } catch {
+      return type === 'google' ? 'GG0000' : 'AP0000';
+    }
   };
 
   // nút Google / Apple theo đúng style nút đăng nhập chính chủ
   const ggBtn = h('button', 'lg-btn lg-google');
   ggBtn.innerHTML = `${GOOGLE_G}<span>Đăng nhập bằng Google</span>`;
-  ggBtn.onclick = () => nameStep('google');
+  ggBtn.onclick = () => loginAs({ type: 'google', name: autoName('google') });
 
   const apBtn = h('button', 'lg-btn lg-apple');
   apBtn.innerHTML = `${APPLE_LOGO}<span>Đăng nhập bằng Apple</span>`;
-  apBtn.onclick = () => nameStep('apple');
+  apBtn.onclick = () => loginAs({ type: 'apple', name: autoName('apple') });
 
   body.append(accBtn, form, ggBtn, apBtn,
     h('div', 'lg-note', 'Bản chơi offline — tài khoản lưu trên thiết bị'));
