@@ -679,7 +679,13 @@ export class WorldScene extends Phaser.Scene {
     const def = ANIMALS[a.type];
     const acts: { icon: string; label: string; cb: () => void }[] = [];
     if (livestock.isHungry(a)) acts.push({ icon: '🌾', label: 'Cho ăn', cb: () => { livestock.feed(a); } });
-    if (livestock.hasProduct(a)) acts.push({ icon: '🧺', label: `Thu ${'' + def.name}`, cb: () => { livestock.collect(a); toast(`Thu được sản phẩm từ ${def.name}!`, def.icon); } });
+    if (livestock.hasProduct(a)) acts.push({
+      icon: '🧺', label: `Thu ${'' + def.name}`, cb: () => {
+        livestock.collect(a); toast(`Thu được sản phẩm từ ${def.name}!`, def.icon);
+        const spr = this.animalSprites.get(id);
+        if (spr) { this.fxBurst(spr.x, spr.y - 8, 0xffe066, 10); this.fxFloat(spr.x, spr.y - 20, `+${def.icon}`); }
+      }
+    });
     acts.push({ icon: '🪙', label: 'Bán (50%)', cb: () => { livestock.sellAnimal(id); this.animalSprites.get(id)?.destroy(); this.animalSprites.delete(id); } });
     bus.emit(EV.OPEN_PANEL, {
       panel: 'dialog',
@@ -734,7 +740,11 @@ export class WorldScene extends Phaser.Scene {
     this.player.play('pickup', () => {
       this.busy = false;
       const ok = fishing.catchInsect(ins.def);
-      if (ok !== undefined) this.removeInsect(ins);
+      if (ok !== undefined) {
+        this.fxBurst(ins.obj.x, ins.obj.y, 0x8ce99a, 8);
+        this.fxFloat(ins.obj.x, ins.obj.y - 12, `+${ins.def.icon}`, '#8ce99a');
+        this.removeInsect(ins);
+      }
     });
   }
 
@@ -779,6 +789,8 @@ export class WorldScene extends Phaser.Scene {
     if (f) {
       fishing.landFish(f);
       toast(`Câu được ${f.name}!`, '🐟');
+      if (this.bobber) this.fxBurst(this.bobber.x, this.bobber.y, 0x74c0fc, 10);
+      this.fxFloat(this.player.x, this.player.y - (this.zone.bg ? 100 : 50), `+🐟 ${f.name}`, '#74c0fc');
     }
     this.stopFishing();
   }
@@ -983,17 +995,59 @@ export class WorldScene extends Phaser.Scene {
     });
   }
 
+  // ================= hiệu ứng thu hoạch / tương tác =================
+  private fxBurst(x: number, y: number, tint = 0xfff3bf, count = 10) {
+    const em = this.add.particles(x, y, 'glow', {
+      speed: { min: 30, max: 100 }, scale: { start: 0.45, end: 0 }, alpha: { start: 1, end: 0 },
+      lifespan: 450, tint, emitting: false
+    }).setDepth(7000);
+    em.explode(count, 0, 0);
+    this.time.delayedCall(650, () => em.destroy());
+  }
+
+  private fxFloat(x: number, y: number, msg: string, color = '#ffd43b') {
+    const big = !!this.zone.bg;
+    const t = this.add.text(x, y, msg, {
+      fontSize: big ? '15px' : '11px', fontStyle: 'bold', color,
+      stroke: '#3d2c05', strokeThickness: 3
+    }).setOrigin(0.5).setDepth(7001);
+    this.tweens.add({ targets: t, y: y - (big ? 44 : 30), alpha: 0, duration: 950, ease: 'cubic.out', onComplete: () => t.destroy() });
+  }
+
+  private plotCenter(i: number): { x: number; y: number } {
+    const t = this.plotTiles[i];
+    return t ? { x: t.x + T * 0.95, y: t.y + T * 0.7 } : { x: this.player.x, y: this.player.y };
+  }
+
   private doTill(i: number) {
     this.busy = true;
-    this.player.play('hoe', () => { this.busy = false; farming.till(i); this.refreshFarm(); });
+    this.player.play('hoe', () => {
+      this.busy = false;
+      if (farming.till(i)) { const c = this.plotCenter(i); this.fxBurst(c.x, c.y, 0xb08850, 6); }
+      this.refreshFarm();
+    });
   }
   private doWater(i: number) {
     this.busy = true;
-    this.player.play('water', () => { this.busy = false; farming.water(i); this.refreshFarm(); });
+    this.player.play('water', () => {
+      this.busy = false;
+      if (farming.water(i)) { const c = this.plotCenter(i); this.fxBurst(c.x, c.y, 0x4aa5d9, 8); this.fxFloat(c.x, c.y - 8, '💧', '#74c0fc'); }
+      this.refreshFarm();
+    });
   }
   private doHarvest(i: number) {
     this.busy = true;
-    this.player.play('pickup', () => { this.busy = false; farming.harvest(i); this.refreshFarm(); });
+    const p = S.farm.plots[i];
+    const crop = p?.crop ? CROPS[p.crop] : undefined;
+    this.player.play('pickup', () => {
+      this.busy = false;
+      if (farming.harvest(i) && crop) {
+        const c = this.plotCenter(i);
+        this.fxBurst(c.x, c.y, 0xffe066, 12);
+        this.fxFloat(c.x, c.y - 10, `+${crop.icon} ${crop.name}`);
+      }
+      this.refreshFarm();
+    });
   }
 
   travel(zoneId: string) {

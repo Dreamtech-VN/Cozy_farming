@@ -31,7 +31,7 @@ export function initUI(game: Phaser.Game) {
   registerMinigames();
   // hook debug/automation (dùng cho test tự động)
   import('@/core/save').then(saveMod => {
-    (window as any).__cozy = { openPanel, bus, save: saveMod };
+    (window as any).__cozy = { openPanel, bus, save: saveMod, game };
   });
 
   // cảnh báo xoay ngang

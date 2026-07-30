@@ -13,8 +13,16 @@ export class CharCreateScene extends Phaser.Scene {
 
   create() {
     const W = this.scale.width, H = this.scale.height;
-    this.add.rectangle(0, 0, W, H, 0x2d4a1e).setOrigin(0);
+    // nền dùng ảnh title (đã tải ở Boot), phủ tối nhẹ cho nổi panel
+    if (this.textures.exists('title_bg')) {
+      const bg = this.add.image(W / 2, H / 2, 'title_bg');
+      bg.setScale(Math.max(W / bg.width, H / bg.height) * 1.02);
+      this.add.rectangle(0, 0, W, H, 0x0a1220, 0.4).setOrigin(0);
+    } else {
+      this.add.rectangle(0, 0, W, H, 0x2d4a1e).setOrigin(0);
+    }
     this.add.tileSprite(W * 0.3, H / 2 + 90, 320, 90, 'g_wood').setAlpha(0.9);
+    this.cameras.main.fadeIn(300, 10, 18, 32);
     if (!S.player.chibi) S.player.chibi = defaultLook(1);
     this.preview = new ChibiSprite(this, W * 0.3, H / 2 + 90, S.player.chibi);
     this.preview.setScale(2.4);
