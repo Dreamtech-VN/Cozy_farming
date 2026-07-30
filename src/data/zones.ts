@@ -5,6 +5,7 @@ export type GroundKind = 'grass' | 'sand' | 'wood' | 'stone';
 export interface Portal { x: number; y: number; to: string; label: string; icon: string }
 export interface NpcDef {
   id: string; name: string; x: number; y: number; charIndex: number;
+  gender: number;          // 1 nam, 2 nữ (theo quy ước data Avatar)
   shop?: string;           // mở shop khi nói chuyện
   lines: string[];         // thoại
   minigame?: 'caro' | 'xiangqi' | 'rps';
@@ -57,7 +58,7 @@ export const ZONES: Record<string, ZoneDef> = {
       { x: 22, y: 32, to: 'farm_gate', label: 'Ra cổng', icon: '🚏' }
     ],
     npcs: [
-      { id: 'npc_mai', name: 'Cô Mai', x: 17, y: 9, charIndex: 5, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
+      { id: 'npc_mai', name: 'Cô Mai', x: 17, y: 9, charIndex: 5, gender: 2, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
     ],
     features: ['farm', 'barn', 'fishing', 'insects', 'trees']
   },
@@ -73,8 +74,8 @@ export const ZONES: Record<string, ZoneDef> = {
       { x: 45, y: 24, to: 'town_gate', label: 'Ra cổng', icon: '🚏' }
     ],
     npcs: [
-      { id: 'npc_hung', name: 'Chú Hùng', x: 18, y: 18, charIndex: 3, shop: 'shop_general', lines: ['Cửa hàng bách hóa đây!', 'Có phân bón, thức ăn gia súc, đủ cả.'] },
-      { id: 'npc_lan', name: 'Chị Lan', x: 33, y: 20, charIndex: 6, shop: 'shop_house', lines: ['Muốn mua nhà hay nội thất không nè?'] }
+      { id: 'npc_hung', name: 'Chú Hùng', x: 18, y: 18, charIndex: 3, gender: 1, shop: 'shop_general', lines: ['Cửa hàng bách hóa đây!', 'Có phân bón, thức ăn gia súc, đủ cả.'] },
+      { id: 'npc_lan', name: 'Chị Lan', x: 33, y: 20, charIndex: 6, gender: 2, shop: 'shop_house', lines: ['Muốn mua nhà hay nội thất không nè?'] }
     ],
     features: ['insects']
   },
@@ -83,7 +84,7 @@ export const ZONES: Record<string, ZoneDef> = {
     spawn: { x: 6, y: 15 }, gate: 'beach_gate',
     portals: [{ x: 6, y: 28, to: 'beach_gate', label: 'Ra cổng', icon: '🚏' }],
     npcs: [
-      { id: 'npc_bien', name: 'Ông Biển', x: 10, y: 9, charIndex: 2, shop: 'shop_fishing', lines: ['Cần câu tốt mới câu được cá to!', 'Cá huyền thoại chỉ cắn cần vàng.'] }
+      { id: 'npc_bien', name: 'Ông Biển', x: 10, y: 9, charIndex: 2, gender: 1, shop: 'shop_fishing', lines: ['Cần câu tốt mới câu được cá to!', 'Cá huyền thoại chỉ cắn cần vàng.'] }
     ],
     features: ['fishing', 'insects', 'water_edge']
   },
@@ -103,7 +104,7 @@ export const ZONES: Record<string, ZoneDef> = {
     water: [{ x: 9, y: 11, w: 26, h: 6 }],
     portals: [{ x: 28, y: 26, to: 'park_gate', label: 'Ra cổng', icon: '🚏' }],
     npcs: [
-      { id: 'npc_tuan', name: 'Bé Tuấn', x: 30, y: 20, charIndex: 7, lines: ['Chơi oẳn tù tì với em không?'], minigame: 'rps' }
+      { id: 'npc_tuan', name: 'Bé Tuấn', x: 30, y: 20, charIndex: 7, gender: 1, lines: ['Chơi oẳn tù tì với em không?'], minigame: 'rps' }
     ],
     features: ['insects']
   },
@@ -113,7 +114,7 @@ export const ZONES: Record<string, ZoneDef> = {
     bg: '101', walkTop: 14, walkBottom: 30,
     portals: [{ x: 45, y: 28, to: 'town', label: 'Thành phố', icon: '🏙️' }],
     npcs: [
-      { id: 'npc_thay', name: 'Thầy Giáo', x: 24, y: 18, charIndex: 4, lines: ['Chăm học, chăm làm nhé!', 'Muốn thử tài cờ tướng không?'], minigame: 'xiangqi' }
+      { id: 'npc_thay', name: 'Thầy Giáo', x: 24, y: 18, charIndex: 4, gender: 1, lines: ['Chăm học, chăm làm nhé!', 'Muốn thử tài cờ tướng không?'], minigame: 'xiangqi' }
     ],
     features: []
   },
@@ -123,9 +124,9 @@ export const ZONES: Record<string, ZoneDef> = {
     bg: '10', walkTop: 13, walkBottom: 29,
     portals: [{ x: 36, y: 27, to: 'town', label: 'Thành phố', icon: '🏙️' }],
     npcs: [
-      { id: 'npc_caro', name: 'Máy Caro', x: 13, y: 15, charIndex: 1, lines: ['Cờ caro 5 quân — dám đấu không?'], minigame: 'caro' },
-      { id: 'npc_cotuong', name: 'Cụ Cờ', x: 21, y: 15, charIndex: 2, lines: ['Cờ tướng là tinh hoa!'], minigame: 'xiangqi' },
-      { id: 'npc_rps', name: 'Bé Kéo Búa', x: 28, y: 15, charIndex: 7, lines: ['Oẳn tù tì ra cái gì ra cái này!'], minigame: 'rps' }
+      { id: 'npc_caro', name: 'Máy Caro', x: 13, y: 15, charIndex: 1, gender: 1, lines: ['Cờ caro 5 quân — dám đấu không?'], minigame: 'caro' },
+      { id: 'npc_cotuong', name: 'Cụ Cờ', x: 21, y: 15, charIndex: 2, gender: 1, lines: ['Cờ tướng là tinh hoa!'], minigame: 'xiangqi' },
+      { id: 'npc_rps', name: 'Bé Kéo Búa', x: 28, y: 15, charIndex: 7, gender: 2, lines: ['Oẳn tù tì ra cái gì ra cái này!'], minigame: 'rps' }
     ],
     features: []
   },
@@ -135,8 +136,8 @@ export const ZONES: Record<string, ZoneDef> = {
     bg: '24', walkTop: 13, walkBottom: 23,
     portals: [{ x: 40, y: 22, to: 'town', label: 'Thành phố', icon: '🏙️' }],
     npcs: [
-      { id: 'npc_fashion', name: 'Cô Trang', x: 10, y: 16, charIndex: 6, shop: 'shop_fashion', lines: ['Thời trang mới về nè!'] },
-      { id: 'npc_gift', name: 'Anh Quà', x: 28, y: 16, charIndex: 0, shop: 'shop_gift', lines: ['Quà tặng cho người thương~'] }
+      { id: 'npc_fashion', name: 'Cô Trang', x: 10, y: 16, charIndex: 6, gender: 2, shop: 'shop_fashion', lines: ['Thời trang mới về nè!'] },
+      { id: 'npc_gift', name: 'Anh Quà', x: 28, y: 16, charIndex: 0, gender: 1, shop: 'shop_gift', lines: ['Quà tặng cho người thương~'] }
     ],
     features: []
   },

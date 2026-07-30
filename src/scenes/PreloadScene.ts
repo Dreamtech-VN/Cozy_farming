@@ -82,8 +82,9 @@ export class PreloadScene extends Phaser.Scene {
     this.makeMiscTextures();
     if (hasSave() && load()) {
       // save cũ chưa có nhân vật chibi -> gán bộ mặc định theo giới tính
-      if (!S.player.chibi) {
-        S.player.chibi = defaultLook(S.player.gender === 'female' ? 0 : 1);
+      // (save cũ hơn nữa lưu gender chibi = 0 theo quy ước sai -> đổi lại cho đúng data Avatar: 1 nam, 2 nữ)
+      if (!S.player.chibi || (S.player.chibi.gender !== 1 && S.player.chibi.gender !== 2)) {
+        S.player.chibi = defaultLook(S.player.gender === 'female' ? 2 : 1);
         for (const id of lookLayers(S.player.chibi)) {
           if (!S.chibiWardrobe.includes(id)) S.chibiWardrobe.push(id);
         }

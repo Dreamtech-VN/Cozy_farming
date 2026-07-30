@@ -479,7 +479,7 @@ export class WorldScene extends Phaser.Scene {
     // khách dự tiệc
     if (partyActive()) {
       for (let i = 0; i < 3; i++) {
-        const guest = new ChibiSprite(this, (3 + i * 3) * T, 5 * T, this.npcLook(i + 1));
+        const guest = new ChibiSprite(this, (3 + i * 3) * T, 5 * T, this.npcLook(i + 1, i % 2 ? 2 : 1));
         guest.setDepth(500).setScale(0.5);
         guest.play('walk');
         this.partyGuests.push(guest);
@@ -534,9 +534,9 @@ export class WorldScene extends Phaser.Scene {
   }
 
   // ================= NPC =================
-  // bộ đồ chibi cho NPC: chọn từ đồ khởi đầu theo chỉ số cố định
-  private npcLook(seed: number) {
-    const g = seed % 2;
+  // bộ đồ chibi cho NPC: đúng giới tính khai báo, chọn đồ khởi đầu theo chỉ số cố định
+  private npcLook(seed: number, gender: number) {
+    const g = gender;
     const pick = (z: number, i: number) => {
       const list = starterList(z, g);
       return list.length ? list[i % list.length].id : 0;
@@ -552,7 +552,7 @@ export class WorldScene extends Phaser.Scene {
     const cs = this.zone.bg ? 1 : 0.5;
     const labelOff = cs === 1 ? 104 : 54;
     for (const def of this.zone.npcs) {
-      const sprite = new ChibiSprite(this, def.x * T, def.y * T, this.npcLook(def.charIndex));
+      const sprite = new ChibiSprite(this, def.x * T, def.y * T, this.npcLook(def.charIndex, def.gender));
       sprite.setDepth(def.y * T).setScale(cs);
       this.add.text(def.x * T, def.y * T - labelOff, def.name, { fontSize: cs === 1 ? '11px' : '8px', color: '#ffe066', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2000);
       this.npcs.push({ def, sprite });

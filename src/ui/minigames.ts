@@ -349,15 +349,15 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
       return d;
     };
 
-    // giới tính (data Avatar: 1 = nam, 0 = nữ)
+    // giới tính (data Avatar: 1 = nam, 2 = nữ)
     let sec = section('🚻 Giới tính');
     const gchips = h('div', 'chips');
-    const genders: [number, string][] = [[1, '👦 Nam'], [0, '👧 Nữ']];
+    const genders: [number, string][] = [[1, '👦 Nam'], [2, '👧 Nữ']];
     for (const [g, lbl] of genders) {
       const c = h('div', `chip ${look.gender === g ? 'active' : ''}`, lbl);
       c.onclick = () => {
         Object.assign(look, defaultLook(g));
-        S.player.gender = g === 0 ? 'female' : 'male';
+        S.player.gender = g === 2 ? 'female' : 'male';
         emit(); rebuild();
       };
       gchips.append(c);

@@ -9,7 +9,7 @@ export interface ChibiPartDef {
   id: number;
   name: string;
   z: number;
-  gender: number;          // 0 nam, 1 nữ, 2 unisex
+  gender: number;          // 0 unisex, 1 nam, 2 nữ (theo data Avatar)
   level: number;           // 0 = đồ khởi đầu
   coin: number;            // giá gốc Avatar (xu Avatar)
   gold: number;            // giá lượng (ruby)
@@ -29,7 +29,7 @@ export const Z_NAME: Record<number, string> = {
 
 export function chibiList(z: number, gender?: number): ChibiPartDef[] {
   return Object.values(CHIBI_PARTS)
-    .filter(p => p.z === z && (gender === undefined || p.gender === gender || p.gender === 2))
+    .filter(p => p.z === z && (gender === undefined || p.gender === gender || p.gender === 0))
     .sort((a, b) => a.level - b.level || a.id - b.id);
 }
 
@@ -37,9 +37,10 @@ export function starterList(z: number, gender: number): ChibiPartDef[] {
   return chibiList(z, gender).filter(p => p.level === 0);
 }
 
-// LƯU Ý: data Avatar quy ước gender 0 = NỮ, 1 = NAM, 2 = unisex
-export const G_FEMALE = 0;
+// LƯU Ý: data Avatar quy ước gender 0 = unisex (thân, mắt), 1 = NAM, 2 = NỮ
+// (kiểm chứng bằng tên đồ: "sơ mi/siêu nhân/thợ săn" = 1, "búp bê/bạch tuyết/thun nữ" = 2)
 export const G_MALE = 1;
+export const G_FEMALE = 2;
 
 // n món "đơn giản nhất" cho màn tạo nhân vật: đồ cơ bản đời đầu (id nhỏ, level 0),
 // loại đồ ruby và đồ sự kiện có hạn dùng "(30/45 ngày)"
@@ -60,7 +61,7 @@ export function chibiPriceRuby(p: ChibiPartDef): number {
 }
 
 export interface ChibiLook {
-  gender: number;          // 0 nam, 1 nữ
+  gender: number;          // 1 nam, 2 nữ
   pant: number;
   shirt: number;
   hair: number;
