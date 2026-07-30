@@ -18,6 +18,10 @@ import { sfx } from '@/core/audio';
 const T = 16; // kích thước tile
 const FARM_ORIGIN = { x: 6, y: 12 }; // vị trí ruộng trong zone farm (theo tile)
 const BARN_RECT = { x: 30, y: 4, w: 12, h: 8 };
+const ROAD_TILES = 4; // đường xe chạy chiếm 4 hàng tile dưới cùng (khu ngoài trời)
+
+// đang có chuyến xe tới khu mới (giữ qua lần restart scene)
+let busArrival = false;
 
 // Decor đặt sẵn theo khu (sprite thật từ asset pack) — toạ độ tile, origin đáy giữa
 const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number }[]> = {
@@ -30,7 +34,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     { key: 'bld_library', x: 26, y: 16 },
     { key: 'bld_inn', x: 40, y: 17 },
     { key: 'bld_shop', x: 8, y: 28 },
-    { key: 'bld_greenhouse', x: 24, y: 33 }, // trên cổng Nhà riêng
+    { key: 'bld_greenhouse', x: 24, y: 28 }, // cổng Nhà riêng ở cửa nhà này
     { key: 'deco_lamp_black', x: 10, y: 20 }, { key: 'deco_lamp_black', x: 20, y: 20 },
     { key: 'deco_lamp_black', x: 30, y: 20 }, { key: 'deco_lamp_black', x: 40, y: 20 },
     { key: 'deco_bench', x: 14, y: 22 }, { key: 'deco_bench', x: 34, y: 22 },
@@ -105,6 +109,7 @@ export class WorldScene extends Phaser.Scene {
 
     this.drawGround();
     if (this.zone.id === 'house') this.drawHouse();
+    this.drawRoad();
     this.drawZoneDecor();
     this.drawPortals();
     this.spawnNpcs();
@@ -129,6 +134,10 @@ export class WorldScene extends Phaser.Scene {
 
     this.cursors = this.input.keyboard!.createCursorKeys();
     this.wasd = this.input.keyboard!.addKeys('W,A,S,D,E,SPACE') as Record<string, Phaser.Input.Keyboard.Key>;
+
+    this.cameras.main.fadeIn(250, 0, 0, 0);
+    // vừa đi xe tới khu này -> xe vào bến trả khách
+    if (busArrival && !this.zone.indoor) this.playArrival();
 
     // chạm vào thế giới: đi tới / tương tác côn trùng / đặt đồ
     this.input.on('pointerdown', (p: Phaser.Input.Pointer) => this.onTap(p));
@@ -205,6 +214,116 @@ export class WorldScene extends Phaser.Scene {
         g.fillStyle(0x62b7e6, 0.6); g.fillEllipse(cx, cy - 4, 18 * T, 10 * T);
       }
     }
+  }
+
+  // ================= đường xe & trạm buýt (khu ngoài trời) =================
+  private roadTopY(): number {
+    return (this.zone.h - ROAD_TILES) * T;
+  }
+  private roadMidY(): number {
+    return (this.zone.h - ROAD_TILES / 2) * T;
+  }
+  private roadWidth(): number {
+    // bãi biển: đường dừng trước mép nước
+    return this.zone.id === 'beach' ? (this.zone.w - 12) * T : this.zone.w * T;
+  }
+  private busStopX(): number {
+    return Math.min(this.roadWidth() - 6 * T, Math.max(6 * T, this.zone.spawn.x * T - 6 * T));
+  }
+
+  private drawRoad() {
+    if (this.zone.indoor) return;
+    const top = this.roadTopY(), w = this.roadWidth(), zh = this.zone.h * T;
+    const g = this.add.graphics().setDepth(-85);
+    // vỉa hè
+    g.fillStyle(0xcfc3ae); g.fillRect(0, top - 6, w, 6);
+    // mặt đường
+    g.fillStyle(0x5b6068); g.fillRect(0, top, w, zh - top);
+    // vạch kẻ giữa
+    g.fillStyle(0xe8e8e8);
+    for (let x = 6; x < w - 20; x += 40) g.fillRect(x, top + (zh - top) / 2 - 1, 22, 3);
+    // trạm xe buýt: biển + mái nhỏ trên vỉa hè
+    const sx = this.busStopX();
+    const pole = this.add.graphics().setDepth(top - 2);
+    pole.fillStyle(0x8a5a33); pole.fillRect(sx - 2, top - 34, 4, 30);
+    pole.fillStyle(0xffd43b); pole.fillRoundedRect(sx - 16, top - 46, 32, 16, 4);
+    this.add.text(sx, top - 38, '🚌', { fontSize: '10px' }).setOrigin(0.5).setDepth(top - 1);
+    this.add.text(sx, top - 52, 'Trạm xe', { fontSize: '7px', color: '#fff', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(top - 1);
+    // xe riêng đậu mép đường
+    if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
+      this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(1.1);
+    }
+  }
+
+  // hiệu ứng xe buýt/xe riêng đón khách rồi rời bến
+  private playDeparture(zoneId: string) {
+    if (this.busy) return;
+    this.busy = true;
+    this.stopFishing();
+    const key = S.vehicle && this.textures.exists(`veh_${S.vehicle}`) ? `veh_${S.vehicle}` : 'veh_bus';
+    const stopX = this.busStopX();
+    const midY = this.roadMidY();
+    const exitLeft = this.roadWidth() < this.zone.w * T;
+    // 1) người chơi chạy tới trạm
+    this.tweens.add({
+      targets: this.player, x: stopX, y: this.roadTopY() - 10, duration: 450,
+      onStart: () => this.player.play('walk'),
+      onComplete: () => {
+        this.player.play('idle');
+        this.player.setDir(0);
+        // 2) xe chạy vào bến
+        const bus = this.add.image(-120, midY, key).setDepth(9000).setScale(1.15);
+        this.tweens.add({
+          targets: bus, x: stopX, duration: 1100, ease: 'Cubic.easeOut',
+          onComplete: () => {
+            sfx.click();
+            // 3) lên xe
+            this.time.delayedCall(350, () => {
+              this.player.setVisible(false);
+              // 4) xe rời bến
+              this.tweens.add({
+                targets: bus, x: exitLeft ? -140 : this.zone.w * T + 140, duration: 1100, ease: 'Cubic.easeIn',
+                onStart: () => {
+                  if (exitLeft) bus.setFlipX(true);
+                  this.cameras.main.fadeOut(900, 0, 0, 0);
+                },
+                onComplete: () => {
+                  busArrival = true;
+                  S.zone = zoneId;
+                  save(true);
+                  this.scene.restart();
+                }
+              });
+            });
+          }
+        });
+      }
+    });
+  }
+
+  // xe tới bến ở khu mới, người chơi bước xuống
+  private playArrival() {
+    busArrival = false;
+    this.busy = true;
+    const key = S.vehicle && this.textures.exists(`veh_${S.vehicle}`) ? `veh_${S.vehicle}` : 'veh_bus';
+    const stopX = this.busStopX();
+    this.player.setPosition(stopX, this.roadTopY() - 10);
+    this.player.setVisible(false);
+    const bus = this.add.image(-120, this.roadMidY(), key).setDepth(9000).setScale(1.15);
+    this.tweens.add({
+      targets: bus, x: stopX, duration: 1100, ease: 'Cubic.easeOut',
+      onComplete: () => {
+        this.time.delayedCall(300, () => {
+          this.player.setVisible(true);
+          this.player.setDir(1);
+          sfx.click();
+          this.tweens.add({
+            targets: bus, x: this.zone.w * T + 140, duration: 1100, ease: 'Cubic.easeIn',
+            onComplete: () => { bus.destroy(); this.busy = false; }
+          });
+        });
+      }
+    });
   }
 
   // Đặt nhà cửa/đèn/ghế... theo cấu hình ZONE_DECOR
@@ -447,7 +566,8 @@ export class WorldScene extends Phaser.Scene {
         if (this.insects.length >= 5) return;
         const def = fishing.rollInsect(this.zone.id);
         if (!def) return;
-        const x = Math.random() * this.zone.w * T, y = Math.random() * this.zone.h * T;
+        const maxY = this.zone.indoor ? this.zone.h * T : this.roadTopY() - 16;
+        const x = Math.random() * this.zone.w * T, y = Math.random() * maxY;
         if (this.inWater(x, y)) return;
         const obj = this.add.image(x, y, def.kind === 'butterfly' ? 'butterfly' : 'bug')
           .setTint(def.color).setDepth(2500).setScale(0.8);
@@ -706,6 +826,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   travel(zoneId: string) {
+    if (zoneId === this.zone.id || this.busy) return;
     if (zoneId === 'house' && !S.house.owned) {
       bus.emit(EV.OPEN_PANEL, {
         panel: 'dialog',
@@ -716,6 +837,13 @@ export class WorldScene extends Phaser.Scene {
       });
       return;
     }
+    const to = ZONES[zoneId];
+    // ngoài trời <-> ngoài trời: đi xe buýt / xe riêng
+    if (!this.zone.indoor && to && !to.indoor) {
+      this.playDeparture(zoneId);
+      return;
+    }
+    // vào/ra nhà: đi bộ qua cửa, chỉ fade
     S.zone = zoneId;
     save(true);
     this.stopFishing();
@@ -760,6 +888,8 @@ export class WorldScene extends Phaser.Scene {
       const bw = this.physics.world.bounds;
       nx = Phaser.Math.Clamp(nx, bw.x + 8, bw.right - 8);
       ny = Phaser.Math.Clamp(ny, bw.y + 8, bw.bottom - 8);
+      // không đi xuống lòng đường (khu ngoài trời)
+      if (!this.zone.indoor) ny = Math.min(ny, this.roadTopY() - 10);
       if (!this.inWater(nx, ny)) { this.player.x = nx; this.player.y = ny; }
       else if (!this.inWater(nx, this.player.y)) this.player.x = nx;
       else if (!this.inWater(this.player.x, ny)) this.player.y = ny;

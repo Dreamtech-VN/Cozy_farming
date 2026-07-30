@@ -48,6 +48,10 @@ export class PreloadScene extends Phaser.Scene {
     for (const d of ['tree_round', 'tree_round2', 'tree_pine', 'bench', 'lamp_green', 'lamp_black', 'scarecrow', 'barrel', 'flower_pot', 'bush']) {
       this.load.image(`deco_${d}`, `assets/deco/${d}.png`);
     }
+    // ---- Xe cộ ----
+    for (const v of ['bus', 'truck_orange', 'camper_pink', 'camper_yellow', 'truck_bee', 'truck_gift']) {
+      this.load.image(`veh_${v}`, `assets/vehicles/${v}.png`);
+    }
     // ---- Nội thất (cắt từ Interior pack) ----
     for (const f of ['furn_bed', 'furn_bed_pink', 'furn_couch', 'furn_chair', 'furn_table', 'furn_shelf', 'furn_kitchen', 'furn_fireplace', 'furn_tv', 'deco_plant', 'deco_vase', 'deco_bear', 'deco_rug', 'deco_xmas_tree', 'aquarium_small', 'aquarium_big']) {
       this.load.image(`fs_${f}`, `assets/interior/${f}.png`);

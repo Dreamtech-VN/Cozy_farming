@@ -108,13 +108,12 @@ function buildHud() {
     ['inventory', 'Kho đồ', 'inventory'],
     ['quest', 'Nhiệm vụ', 'quests'],
     ['social', 'Bạn bè', 'social'],
-    ['chat', 'Chat', 'chat'],
     ['daily', 'Điểm danh', 'daily'],
     ['wheel', 'Vòng quay', 'wheel'],
     ['collection', 'Sưu tập', 'collections'],
     ['trophy', 'Xếp hạng', 'ranking'],
-    ['emote', 'Biểu cảm', 'emotes'],
     ['wardrobe', 'Tủ đồ', 'wardrobe'],
+    ['shop', 'Garage', 'garage'],
     ['ruby', 'Nạp', 'topup'],
     ['settings', 'Cài đặt', 'settings']
   ];
@@ -164,8 +163,21 @@ function buildHud() {
     }
   });
 
-  // chat mini
+  // nút chat + biểu cảm luôn hiện (dễ tương tác)
+  const quickChat = h('button', 'hud-btn'); quickChat.id = 'chat-btn';
+  quickChat.title = 'Chat';
+  quickChat.innerHTML = `<img class="hicon" src="${ICON('chat')}">`;
+  quickChat.onclick = () => { sfx.click(); openPanel('chat'); };
+  root().append(quickChat);
+  const quickEmote = h('button', 'hud-btn'); quickEmote.id = 'emote-btn';
+  quickEmote.title = 'Biểu cảm';
+  quickEmote.innerHTML = `<img class="hicon" src="${ICON('emote')}">`;
+  quickEmote.onclick = () => { sfx.click(); openPanel('emotes'); };
+  root().append(quickEmote);
+
+  // chat mini (bấm vào cũng mở chat)
   const cm = h('div'); cm.id = 'chat-mini'; root().append(cm);
+  cm.onclick = () => openPanel('chat');
   const renderChat = (m: ChatMessage) => {
     const el = h('div', `cm ch-${m.channel}`);
     el.textContent = m.channel === 'private'
