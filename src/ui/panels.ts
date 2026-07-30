@@ -15,15 +15,21 @@ import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
 import { VEHICLES } from '@/data/vehicles';
 import { TOOL_LIST, TOOLS, toolUpgradeAt } from '@/data/tools';
+import { PET_LIST, PETS, ownsPet, petBonus } from '@/data/pets';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import { buyRod, addToAquarium } from '@/systems/fishing';
 import { claimQuest, activeQuestList, grantReward } from '@/systems/quests';
-import { suggestedFriends, addFriend, removeFriend, blockPlayer, reportPlayer, giveGift, sendChat, getChatLog, claimMail, leaderboard } from '@/systems/social';
+import { suggestedFriends, addFriend, removeFriend, blockPlayer, reportPlayer, giveGift, sendChat, getChatLog, claimMail, leaderboard, affinityOf, addAffinity, affinityLabel } from '@/systems/social';
 import { claimLogin, checkinToday, spinWheel, grantWheel, wheelSpinsLeft, loginRewardToday } from '@/systems/meta';
 import { upgradeHouse, setWallpaper, setFloor, throwParty } from '@/systems/housing';
 import { sfx, startBgm, stopBgm } from '@/core/audio';
 import type { Reward } from '@/data/quests';
+
+// giá bán thực nhận (vẹt lanh lợi +10%)
+function sellPrice(base: number, qty = 1): number {
+  return Math.round(base * qty * (1 + petBonus('parrot')));
+}
 
 function rewardText(r: Reward): string {
   const parts: string[] = [];
@@ -89,14 +95,14 @@ export function registerAllPanels() {
     const acts: { icon: string; label: string; cb: () => void }[] = [];
     if (def.sell > 0) {
       acts.push({
-        icon: '🪙', label: `Bán 1 (+${def.sell} xu)`, cb: () => {
-          if (removeItem(id)) { S.wallet.coins += def.sell; S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + def.sell; bus.emit(EV.WALLET); addStat('daily_sold'); if (def.kind === 'crop') addStat('sold_crops'); sfx.coin(); save(); }
+        icon: '🪙', label: `Bán 1 (+${sellPrice(def.sell)} xu)`, cb: () => {
+          if (removeItem(id)) { const g = sellPrice(def.sell); S.wallet.coins += g; S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + g; bus.emit(EV.WALLET); addStat('daily_sold'); if (def.kind === 'crop') addStat('sold_crops'); sfx.coin(); save(); }
         }
       });
       const qty = itemCount(id);
       if (qty > 1) acts.push({
-        icon: '💰', label: `Bán hết x${qty} (+${def.sell * qty})`, cb: () => {
-          if (removeItem(id, qty)) { S.wallet.coins += def.sell * qty; S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + def.sell * qty; bus.emit(EV.WALLET); addStat('daily_sold', qty); if (def.kind === 'crop') addStat('sold_crops', qty); sfx.coin(); save(); }
+        icon: '💰', label: `Bán hết x${qty} (+${sellPrice(def.sell, qty)})`, cb: () => {
+          if (removeItem(id, qty)) { const g = sellPrice(def.sell, qty); S.wallet.coins += g; S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + g; bus.emit(EV.WALLET); addStat('daily_sold', qty); if (def.kind === 'crop') addStat('sold_crops', qty); sfx.coin(); save(); }
         }
       });
     }
@@ -157,7 +163,7 @@ export function registerAllPanels() {
   const SHOP_ZONE: Record<string, string> = {
     shop_seed: 'farm', shop_general: 'town', shop_house: 'town',
     shop_fishing: 'beach', shop_fashion: 'mall', shop_gift: 'mall',
-    fishingshop: 'beach', toolupgrade: 'town', fashionshop: 'mall',
+    fishingshop: 'beach', toolupgrade: 'town', fashionshop: 'mall', petshop: 'town',
     houseshop: 'town', animalshop: 'farm'
   };
   function atShopZone(key: string, name: string): boolean {
@@ -200,11 +206,12 @@ export function registerAllPanels() {
         for (const [id, qty] of sellable) {
           const def = item(id);
           const cell = h('div', 'cell');
-          cell.append(iconOf(def), h('div', 'nm', def.name), h('div', 'qty', `x${qty}`), h('div', 'pr', `+${def.sell}🪙`));
+          cell.append(iconOf(def), h('div', 'nm', def.name), h('div', 'qty', `x${qty}`), h('div', 'pr', `+${sellPrice(def.sell)}🪙`));
           cell.onclick = () => {
             if (removeItem(id)) {
-              S.wallet.coins += def.sell;
-              S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + def.sell;
+              const g = sellPrice(def.sell);
+              S.wallet.coins += g;
+              S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + g;
               addStat('daily_sold'); if (def.kind === 'crop') addStat('sold_crops');
               bus.emit(EV.WALLET); sfx.coin(); save(); render();
             }
@@ -504,6 +511,202 @@ export function registerAllPanels() {
   registerPanel('wardrobe', () => {
     const { body } = openWindow('👗 Tủ đồ', { size: 'large' });
     openWardrobe(body);
+  });
+
+
+  // ================= Tiệm thú cưng =================
+  registerPanel('petshop', () => {
+    if (!atShopZone('petshop', 'Tiệm thú cưng')) return;
+    const { body } = openWindow('🐾 Tiệm thú cưng');
+    const render = () => {
+      body.innerHTML = '';
+      body.append(h('div', 'hint', 'Mỗi bé có một công dụng riêng — nuôi được cả ba!'));
+      for (const p of PET_LIST) {
+        const r = h('div', 'row');
+        const ic = h('div');
+        ic.append(spr(`assets/farm/av${p.id === 'dog' ? 'dog' : p.id === 'cat' ? 'cat' : 'parrot'}.png`, 0, 0, p.frameW, p.frameH, 40));
+        r.append(ic);
+        const info = h('div', 'grow');
+        info.innerHTML = `<div class="t1">${p.icon} ${p.name}</div><div class="t2">${p.perk}</div>`;
+        r.append(info);
+        if (ownsPet(p.id)) {
+          r.append(btn('Đã nuôi', '', undefined));
+        } else {
+          r.append(btn(`🪙${p.price}`, 'gold', () => {
+            if (!spend(p.price)) return;
+            S.pets.push(p.id);
+            if (!S.activePet) S.activePet = p.id;
+            save(true); sfx.coin();
+            toast(`${p.name} đã về nhà bạn! Nhà thú cưng đã dựng ở Nông trại.`, p.icon);
+            bus.emit(EV.ZONE);
+            render();
+          }));
+        }
+        body.append(r);
+      }
+    };
+    render();
+  });
+
+  // ================= Thú cưng của tôi =================
+  registerPanel('petbag', () => {
+    const { body } = openWindow('🐾 Thú cưng của tôi');
+    const render = () => {
+      body.innerHTML = '';
+      if (!S.pets?.length) {
+        body.append(h('div', 'hint', 'Chưa nuôi bé nào — ghé Tiệm thú cưng ở Thành phố nhé!'));
+        return;
+      }
+      for (const id of S.pets) {
+        const p = PETS[id];
+        if (!p) continue;
+        const active = S.activePet === id;
+        const r = h('div', `row ${active ? 'row-active' : ''}`);
+        const ic = h('div');
+        ic.append(spr(`assets/farm/av${id}.png`, 0, 0, p.frameW, p.frameH, 40));
+        r.append(ic);
+        const info = h('div', 'grow');
+        info.innerHTML = `<div class="t1">${p.icon} ${p.name}${active ? ' <span class="tl-lv">đang theo</span>' : ''}</div><div class="t2">${p.perkFull}</div>`;
+        r.append(info);
+        r.append(btn(active ? 'Cất về nhà' : 'Cho ra ngoài', active ? '' : 'gold', () => {
+          S.activePet = active ? undefined : id;
+          save(true);
+          toast(active ? `${p.name} về nhà nghỉ.` : `${p.name} đi cùng bạn!`, p.icon);
+          bus.emit(EV.ZONE);
+          render();
+        }));
+        body.append(r);
+      }
+      body.append(h('div', 'hint', 'Bấm vào thú cưng ngoài map để dắt đi dạo / vuốt ve.'));
+    };
+    render();
+  });
+
+  // ================= Chạm vào bản thân =================
+  registerPanel('selfmenu', () => {
+    const { body, close } = openWindow(`${S.player.name}`, { size: 'small' });
+    const face = h('div');
+    face.style.cssText = 'display:flex;justify-content:center;margin-bottom:6px';
+    face.append(charFace(S.player.chibi, 84));
+    body.append(face);
+
+    const grid = h('div', 'wd-grid');
+    const cell = (icon: string, label: string, cb: () => void) => {
+      const c = h('button', 'wd-item');
+      c.append(h('div', 'wd-item-ico', icon), h('div', 'nm', label));
+      c.onclick = () => { sfx.click(); cb(); };
+      grid.append(c);
+    };
+    cell('🎒', 'Túi đồ', () => { close(); openPanel('inventory'); });
+    cell('🏃', 'Chạy', () => { close(); bus.emit('world:selfact', 'run'); });
+    cell('🪑', 'Ngồi', () => { close(); bus.emit('world:selfact', 'sit'); });
+    cell('🛌', 'Nằm', () => { close(); bus.emit('world:selfact', 'lie'); });
+    cell('🐾', 'Thú cưng', () => { close(); openPanel('petbag'); });
+    cell('😊', 'Biểu cảm', () => { close(); openPanel('emotes'); });
+    body.append(grid);
+  });
+
+  // ================= Chạm vào người chơi khác =================
+  registerPanel('playermenu', (data: { friend: { id: string; name: string; level: number } }) => {
+    const f = data.friend;
+    const { body, close } = openWindow(`👤 ${f.name}`, { size: 'small' });
+    const render = () => {
+      body.innerHTML = '';
+      const aff = affinityOf(f.id);
+      const isFriend = S.social.friends.some(x => x.id === f.id);
+      const head = h('div', 'row');
+      head.innerHTML = `<div class="grow"><div class="t1">${f.name} <span class="tl-lv">Lv.${f.level}</span></div>` +
+        `<div class="t2">Thiện cảm: ${aff}/100 · ${affinityLabel(aff)}${isFriend ? ' · 🤝 Bạn bè' : ''}</div></div>`;
+      body.append(head);
+      const bar = h('div', 'aff-bar');
+      const fill = h('div', 'aff-fill'); fill.style.width = `${aff}%`;
+      bar.append(fill); body.append(bar);
+
+      const grid = h('div', 'wd-grid');
+      const cell = (icon: string, label: string, cb: () => void) => {
+        const c = h('button', 'wd-item');
+        c.append(h('div', 'wd-item-ico', icon), h('div', 'nm', label));
+        c.onclick = () => { sfx.click(); cb(); };
+        grid.append(c);
+      };
+      cell('📋', 'Thông tin', () => openPanel('dialog', {
+        title: `👤 ${f.name}`,
+        text: `Cấp độ: ${f.level}\nThiện cảm: ${aff}/100 (${affinityLabel(aff)})\n${isFriend ? 'Đã là bạn bè của bạn.' : 'Chưa kết bạn.'}`
+      }));
+      if (!isFriend) cell('🤝', 'Kết bạn', () => { addFriend({ ...f, online: true }); addAffinity(f.id, 10); render(); });
+      cell('💬', 'Nhắn tin', () => { close(); openPanel('chat', { to: f.name }); });
+      cell('🫂', 'Hành động', () => { close(); openPanel('playeract', { friend: f }); });
+      cell('🎁', 'Tặng quà', () => { close(); openPanel('playergift', { friend: f }); });
+      cell('🚫', 'Chặn / Báo cáo', () => openPanel('dialog', {
+        title: '🚫 ' + f.name,
+        text: 'Bạn muốn làm gì với người chơi này?',
+        actions: [
+          { icon: '🚫', label: 'Chặn', cb: () => { blockPlayer(f.id, f.name); close(); } },
+          { icon: '⚠️', label: 'Báo cáo', cb: () => reportPlayer(f.id, f.name) }
+        ]
+      }));
+      body.append(grid);
+    };
+    render();
+  });
+
+  // ---- hành động thân mật với người chơi ----
+  const PLAYER_ACTS: [string, string, string, number][] = [
+    ['💋', 'Hôn', '{a} hôn {b} một cái 😘', 6],
+    ['🫂', 'Ôm', '{a} ôm {b} thật chặt', 5],
+    ['🦵', 'Đá đít', '{a} đá đít {b} một phát 😆', -3],
+    ['🥺', 'An ủi', '{a} vỗ vai an ủi {b}', 4]
+  ];
+  registerPanel('playeract', (data: { friend: { id: string; name: string } }) => {
+    const f = data.friend;
+    const { body, close } = openWindow(`🫂 Hành động với ${f.name}`, { size: 'small' });
+    const grid = h('div', 'wd-grid');
+    for (const [icon, label, tpl, aff] of PLAYER_ACTS) {
+      const c = h('button', 'wd-item');
+      c.append(h('div', 'wd-item-ico', icon), h('div', 'nm', label),
+        h('div', 'pr', `${aff > 0 ? '+' : ''}${aff} thiện cảm`));
+      c.onclick = () => {
+        sfx.click();
+        addAffinity(f.id, aff);
+        const msg = tpl.replace('{a}', S.player.name).replace('{b}', f.name);
+        bus.emit('world:selfemote', icon);
+        toast(msg, icon);
+        close();
+      };
+      grid.append(c);
+    }
+    body.append(grid);
+  });
+
+  // ---- tặng quà tăng thiện cảm ----
+  registerPanel('playergift', (data: { friend: { id: string; name: string } }) => {
+    const f = data.friend;
+    const { body, close } = openWindow(`🎁 Tặng quà cho ${f.name}`, { size: 'small' });
+    const grid = h('div', 'grid');
+    const giftable = Object.entries(S.inventory).filter(([id]) => {
+      const k = item(id).kind;
+      return k === 'gift' || k === 'crop' || k === 'food' || k === 'fish';
+    });
+    if (!giftable.length) {
+      body.append(h('div', 'hint', 'Chưa có gì để tặng — mua quà ở Tiệm quà (Khu mua sắm) nhé!'));
+      return;
+    }
+    for (const [id, qty] of giftable) {
+      const def = item(id);
+      const aff = def.kind === 'gift' ? 12 : def.kind === 'fish' ? 6 : 4;
+      const c = h('div', 'cell');
+      c.append(iconOf(def), h('div', 'nm', def.name), h('div', 'qty', `x${qty}`), h('div', 'pr', `+${aff} ❤️`));
+      c.onclick = () => {
+        if (!removeItem(id)) return;
+        addAffinity(f.id, aff);
+        addStat('gifts_sent');
+        sfx.coin(); save();
+        toast(`Đã tặng ${def.name} cho ${f.name} (+${aff} thiện cảm)`, '🎁');
+        close();
+      };
+      grid.append(c);
+    }
+    body.append(grid);
   });
 
   // ================= Nâng cấp nông cụ =================

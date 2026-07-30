@@ -118,14 +118,16 @@ export interface GameState {
   chibiWardrobe: number[];  // part chibi đã sở hữu (id part Avatar)
   hotbar: string[];         // nông cụ gắn trên thanh nhanh
   tools: { rod: number; can: number; hoe: number; net: number; basket: number }; // cấp độ dụng cụ
-  farm: { unlocked: number; plots: Plot[]; hasDog?: boolean };  // hasDog: chó giữ trại
+  farm: { unlocked: number; plots: Plot[]; hasDog?: boolean };  // hasDog: (cũ) chó giữ trại
+  pets: string[];           // thú cưng đã nuôi
+  activePet?: string;       // thú cưng đang dắt theo
   livestock: { barnLevel: number; animals: Animal[] };
   house: HouseState;
   collections: { fish: string[]; insects: string[]; crops: string[] };
   quests: { active: QuestProgressMap; completed: string[]; claimed: string[] };
   achievements: string[];
   stats: Record<string, number>;
-  social: { friends: Friend[]; blocked: string[]; reported: string[] };
+  social: { friends: Friend[]; blocked: string[]; reported: string[]; affinity?: Record<string, number> };
   mail: MailMessage[];
   daily: DailyState;
   minigames: { caroWins: number; xiangqiWins: number; rpsWins: number };

@@ -22,6 +22,7 @@ export function defaultState(): GameState {
     inventory: { seed_carrot: 5 },
     wardrobe: ['hair:bob', 'clothes:basic'],
     chibiWardrobe: [],
+    pets: [],
     hotbar: ['hoe', 'can', '', '', ''],
     tools: { rod: 0, can: 1, hoe: 1, net: 0, basket: 0 },
     farm: { unlocked: 6, plots: [] },
@@ -100,6 +101,7 @@ export function load(): boolean {
     // chỗ migrate giữa các version save về sau
     S = { ...defaultState(), ...data };
     if (!S.chibiWardrobe) S.chibiWardrobe = [];
+    if (!S.pets) S.pets = S.farm?.hasDog ? ['dog'] : [];   // save cũ có chó -> chuyển sang hệ thú cưng
     if (S.tools.basket === undefined) S.tools.basket = (S.inventory['tool_basket'] ?? 0) > 0 ? 1 : 0;
     if (!S.hotbar) S.hotbar = ['hoe', 'can', '', '', ''];
     while (S.hotbar.length < 5) S.hotbar.push('');

@@ -1,5 +1,6 @@
 import { S, save, addItem, removeItem, itemCount, addExp, addStat, addCoins, toolLevel } from '@/core/save';
 import { toolBonus } from '@/data/tools';
+import { petBonus } from '@/data/pets';
 import { CROP_LIST } from '@/data/crops';
 import { bus, EV, toast } from '@/core/events';
 import { CROPS } from '@/data/crops';
@@ -120,6 +121,8 @@ export function harvest(i: number): boolean {
   let qty = c.yieldQty[0] + Math.floor(Math.random() * (c.yieldQty[1] - c.yieldQty[0] + 1));
   // giỏ cấp cao: cơ hội +1 nông sản
   if (Math.random() < toolBonus('basket', toolLevel('basket'))) { qty += 1; toast('Giỏ xịn: +1 nông sản!', '🧺'); }
+  // mèo đuổi chuột phá mùa màng
+  if (Math.random() < petBonus('cat')) { qty += 1; toast('Mèo cưng giúp giữ mùa: +1 nông sản!', '🐱'); }
   addItem(`crop_${c.id}`, qty);
   addExp(c.exp);
   if (!S.collections.crops.includes(c.id)) {

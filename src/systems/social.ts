@@ -52,6 +52,41 @@ export function sendChat(channel: ChatMessage['channel'], text: string, to?: str
   }
 }
 
+// ===== Người chơi khác đang ở ngoài map (offline: mô phỏng) =====
+const ROAMERS: Omit<Friend, 'online'>[] = [
+  { id: 'p_kem', name: 'KemDau', level: 8 },
+  { id: 'p_bo', name: 'BoSua99', level: 14 },
+  { id: 'p_na', name: 'NaNa', level: 21 },
+  { id: 'p_tom', name: 'TomHum', level: 6 },
+  { id: 'p_min', name: 'MinMin', level: 17 },
+  { id: 'p_bap', name: 'BapRang', level: 11 }
+];
+
+// danh sách người chơi xuất hiện ở 1 khu (ổn định theo tên khu)
+export function roamersIn(zoneId: string, n = 3): Friend[] {
+  let seed = 0;
+  for (const c of zoneId) seed = (seed * 31 + c.charCodeAt(0)) % 997;
+  const out: Friend[] = [];
+  for (let i = 0; i < n; i++) {
+    const f = ROAMERS[(seed + i * 3) % ROAMERS.length];
+    if (!S.social.blocked.includes(f.id)) out.push({ ...f, online: true });
+  }
+  return out;
+}
+
+// ===== Thiện cảm =====
+export function affinityOf(id: string): number {
+  return S.social.affinity?.[id] ?? 0;
+}
+export function addAffinity(id: string, n: number) {
+  if (!S.social.affinity) S.social.affinity = {};
+  S.social.affinity[id] = Math.min(100, affinityOf(id) + n);
+  save(); bus.emit(EV.STATE_CHANGED);
+}
+export function affinityLabel(v: number): string {
+  return v >= 80 ? 'Tri kỷ' : v >= 50 ? 'Thân thiết' : v >= 20 ? 'Quen biết' : 'Người lạ';
+}
+
 export function suggestedFriends(): Friend[] {
   return NPC_FRIENDS
     .filter(f => !S.social.friends.some(x => x.id === f.id) && !S.social.blocked.includes(f.id))

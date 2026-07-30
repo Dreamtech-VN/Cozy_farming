@@ -3,6 +3,9 @@ import { S, save } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ZONES, type ZoneDef, type NpcDef } from '@/data/zones';
 import { CROPS, CROP_LIST } from '@/data/crops';
+import { PETS } from '@/data/pets';
+import { roamersIn } from '@/systems/social';
+import type { Friend } from '@/core/types';
 import { ANIMALS } from '@/data/animals';
 import { FURNITURE, WALLPAPERS, FLOORS } from '@/data/furniture';
 import { ChibiSprite } from '@/gfx/ChibiSprite';
@@ -24,7 +27,8 @@ const FARM_PLOT = { ox: 84, oy: 218, pw: 42, ph: 45 };            // lưới ru�
 const FARM_POND = { x: 850, y: 392, w: 274, h: 216 };             // hồ đá Avatar
 const KHE_POS = { x: 790, y: 195 };                               // cây khế
 const WAREHOUSE_POS = { x: 320, y: 175 };                         // nhà kho
-const DOGHOUSE_POS = { x: 648, y: 198 };                          // nhà chó
+const PETHOUSE_POS = { x: 648, y: 198 };                          // nhà thú cưng (chỉ hiện khi đã nuôi)
+const PETSHOP_POS = { x: 21 * T, y: 13 * T };                     // tiệm thú cưng (Thành phố)
 const BARN_RECT = { x: 26.5, y: 13.5, w: 9, h: 5.5 };             // sân chuồng thú (tile)
 const FARM_ORIGIN = { x: Math.round(FARM_PLOT.ox / T), y: Math.round(FARM_PLOT.oy / T) };
 const ROAD_TILES = 4; // đường xe chạy chiếm 4 hàng tile dưới cùng (map cổng)
@@ -42,8 +46,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     // nông trại chỉ gồm: nhà bếp, nhà kho, chuồng thú, nhà chó (+ cây khế, ao cá)
     { key: 'lt_kitchen', x: 8.75, y: 12.6, s: 1 },     // nhà bếp (cửa vào nhà riêng)
     { key: 'lt_warehouse', x: 20, y: 12.7, s: 1 },     // nhà kho — mở kho đồ
-    { key: 'lt_petbarn', x: 31, y: 13, s: 1 },         // chuồng thú
-    { key: 'lt_doghouse', x: 40.5, y: 12.4, s: 1 },    // nhà chó giữ trại
+    { key: 'lt_barn', x: 31, y: 13.2, s: 1 },          // chuồng gia súc
     { key: 'lt_tree', x: 49.4, y: 12.4, s: 1 },        // cây khế
     { key: 'lt_tree', x: 58.6, y: 14.8, s: 0.8 }
   ],
@@ -54,6 +57,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   ],
   // decor Avatar trên map nền HD (scale 1 = đúng cỡ HD)
   town: [
+    { key: 'lt_petshop', x: 21, y: 13, s: 1 },       // tiệm thú cưng
     { key: 'lt_house_white', x: 4, y: 13, s: 1 },    // nhà trắng — cửa Nhà riêng
     { key: 'lt_rank_sign', x: 31, y: 16, s: 1 },     // bảng xếp hạng
     { key: 'lt_lamp_hd', x: 20, y: 14, s: 1 }, { key: 'lt_lamp_hd', x: 38, y: 18, s: 1 }
@@ -141,6 +145,7 @@ export class WorldScene extends Phaser.Scene {
     this.partyGuests = []; this.fishingState = 'idle'; this.busy = false;
     this.placingItem = undefined; this.lastHintKey = '';
     this.chopTrees = []; this.mounds = []; this.obstacles = [];
+    this.pet = undefined; this.petWalk = false; this.roamers = []; this.running = false;
   }
 
   create() {
@@ -159,7 +164,7 @@ export class WorldScene extends Phaser.Scene {
     if (this.zone.features.includes('barn')) this.buildBarn();
     if (this.zone.features.includes('insects')) this.spawnInsects();
     if (this.zone.id === 'farm') this.spawnChopTrees();
-    if (this.zone.id === 'farm' && S.farm.hasDog) this.spawnDog();
+    if (this.zone.id === 'farm') this.buildPetHouse();
     if (this.zone.id === 'farm' || this.zone.id === 'beach') this.spawnMounds();
 
     // người chơi chibi Avatar: cao 84px native HD -> map nền HD scale 1,
@@ -168,6 +173,14 @@ export class WorldScene extends Phaser.Scene {
     this.player = new ChibiSprite(this, this.zone.spawn.x * T, this.zone.spawn.y * T, S.player.chibi ?? defaultLook(0));
     this.player.setDepth(1000).setScale(charScale);
     this.selector = this.add.image(0, 0, 'sel').setVisible(false).setDepth(900).setAlpha(0.9);
+
+    // chạm vào chính mình -> bảng thao tác cá nhân
+    this.player.setSize(46 * (this.zone.bg ? 1 : 0.6), 84 * (this.zone.bg ? 1 : 0.6));
+    this.player.setInteractive(new Phaser.Geom.Rectangle(-24, -88, 48, 90), Phaser.Geom.Rectangle.Contains);
+    this.player.on('pointerdown', () => bus.emit(EV.OPEN_PANEL, { panel: 'selfmenu' }));
+
+    this.spawnPet();
+    this.spawnRoamers();
 
     this.cameras.main.startFollow(this.player, true, 0.12, 0.12);
     // canvas render ở 960x540 * RES -> mọi zoom nhân RES để giữ nguyên khung nhìn
@@ -211,6 +224,8 @@ export class WorldScene extends Phaser.Scene {
     bus.on('world:emote', this.onEmote, this);
     bus.on('world:say', this.onSay, this);
     bus.on('hotbar:use', this.useTool, this);
+    bus.on('world:selfact', this.selfAct, this);
+    bus.on('world:selfemote', this.onEmote, this);
     this.events.on('shutdown', () => {
       bus.off(EV.APPEARANCE, this.onAppearance, this);
       bus.off(EV.HOUSE, this.onHouseChanged, this);
@@ -218,6 +233,8 @@ export class WorldScene extends Phaser.Scene {
       bus.off('world:emote', this.onEmote, this);
       bus.off('world:say', this.onSay, this);
       bus.off('hotbar:use', this.useTool, this);
+      bus.off('world:selfact', this.selfAct, this);
+      bus.off('world:selfemote', this.onEmote, this);
     });
 
     initTimeOnce();
@@ -1059,33 +1076,15 @@ export class WorldScene extends Phaser.Scene {
       }
     }
 
-    // nhà chó giữ trại
-    if (this.zone.id === 'farm' && Phaser.Math.Distance.Between(this.player.x, this.player.y, DOGHOUSE_POS.x + 30, DOGHOUSE_POS.y + 16) < 95) {
-      if (!S.farm.hasDog) {
-        acts.push({
-          icon: '🐶', label: 'Nhận nuôi chó (2000 xu)', cb: () => bus.emit(EV.OPEN_PANEL, {
-            panel: 'dialog',
-            data: {
-              title: '🐶 Chó giữ trại',
-              text: 'Nuôi một bé chó canh nông trại! Chó sẽ giảm bớt tỷ lệ bị trộm đồ khi người chơi khác ghé thăm nông trại của bạn (kích hoạt khi có chế độ online).',
-              actions: [{
-                icon: '🪙', label: 'Nhận nuôi (2000 xu)', cb: () => {
-                  import('@/core/save').then(m => {
-                    if (m.spend(2000)) { S.farm.hasDog = true; m.save(true); toast('Gâu gâu! Bé chó đã về nhà mới!', '🐶'); this.spawnDog(); }
-                  });
-                }
-              }]
-            }
-          })
-        });
-      } else {
-        acts.push({
-          icon: '🦴', label: 'Vuốt ve chó', cb: () => {
-            if (this.dog) this.fxFloat(this.dog.x, this.dog.y - 66, '❤️');
-            toast('Gâu gâu~ (chó canh trại, giảm trộm đồ khi có khách ghé thăm)', '🐶');
-          }
-        });
-      }
+    // nhà thú cưng (nông trại) — chỉ có khi đã nuôi
+    if (this.zone.id === 'farm' && S.pets?.length &&
+        Phaser.Math.Distance.Between(this.player.x, this.player.y, PETHOUSE_POS.x + 30, PETHOUSE_POS.y + 40) < 95) {
+      acts.push({ icon: '🐾', label: 'Thú cưng của tôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petbag' }) });
+    }
+
+    // tiệm thú cưng (thành phố)
+    if (this.zone.id === 'town' && Phaser.Math.Distance.Between(this.player.x, this.player.y, PETSHOP_POS.x, PETSHOP_POS.y + 30) < 110) {
+      acts.push({ icon: '🐾', label: 'Tiệm thú cưng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petshop' }) });
     }
 
     // chuồng
@@ -1170,30 +1169,165 @@ export class WorldScene extends Phaser.Scene {
     }
   }
 
-  // ================= chó giữ trại =================
-  private dog?: Phaser.GameObjects.Sprite;
+  // ================= thao tác bản thân =================
+  private running = false;
 
-  private spawnDog() {
-    const dx = DOGHOUSE_POS.x + 46, dy = DOGHOUSE_POS.y + 14;
-    this.dog = this.add.sprite(dx, dy, 'avdog', 0).setOrigin(0.5, 1).setScale(1.15).setDepth(dy);
-    // vẫy đuôi / đổi tư thế
-    this.time.addEvent({ delay: 800, loop: true, callback: () => {
-      if (this.dog?.active && !this.tweens.isTweening(this.dog)) this.dog.setFrame(this.dog.frame.name === '0' ? 1 : 0);
+  private selfAct(kind: string) {
+    if (kind === 'run') {
+      this.running = !this.running;
+      toast(this.running ? 'Bật chế độ chạy 🏃' : 'Tắt chế độ chạy', '🏃');
+      return;
+    }
+    if (kind === 'sit' || kind === 'lie') {
+      this.busy = true;
+      this.player.play(kind === 'sit' ? 'sit' : 'lie');
+      toast(kind === 'sit' ? 'Ngồi nghỉ một chút~' : 'Nằm thư giãn~', kind === 'sit' ? '🪑' : '🛌');
+      // đứng dậy khi di chuyển
+      const stand = this.time.addEvent({ delay: 200, loop: true, callback: () => {
+        if (Math.hypot(virtualInput.x, virtualInput.y) > 0.25 ||
+            this.cursors.left.isDown || this.cursors.right.isDown || this.cursors.up.isDown || this.cursors.down.isDown) {
+          this.busy = false; this.player.play('idle'); stand.remove();
+        }
+      } });
+    }
+  }
+
+  // ================= người chơi khác trong khu =================
+  private spawnRoamers() {
+    // chỉ ở khu công cộng (không phải nông trại / nhà riêng / map cổng)
+    if (this.zone.id === 'farm' || this.zone.id === 'house' || this.zone.road) return;
+    const cs = this.zone.bg ? 1 : 0.5;
+    const list = roamersIn(this.zone.id, 3);
+    list.forEach((def, i) => {
+      const bx = this.zone.spawn.x * T + (i - 1) * 140 + (i % 2 ? 60 : -40);
+      const by = this.zone.spawn.y * T + (i % 2 ? 60 : -30);
+      const sprite = new ChibiSprite(this, bx, by, this.npcLook(i + 3, i % 2 ? 2 : 1));
+      sprite.setScale(cs).setDepth(by);
+      const label = this.add.text(bx, by - (cs === 1 ? 104 : 54), def.name, {
+        fontSize: cs === 1 ? '11px' : '8px', color: '#8ce99a',
+        backgroundColor: '#00000090', padding: { x: 3, y: 1 }
+      }).setOrigin(0.5).setDepth(2000);
+      // vùng chạm rộng, không cần đứng sát
+      sprite.setInteractive(new Phaser.Geom.Rectangle(-24, -88, 48, 90), Phaser.Geom.Rectangle.Contains);
+      sprite.on('pointerdown', () => bus.emit(EV.OPEN_PANEL, { panel: 'playermenu', data: { friend: def } }));
+      this.roamers.push({ def, sprite });
+      // đi lại lững thững
+      const walk = () => {
+        if (!sprite.active) return;
+        const tx = Phaser.Math.Clamp(bx + (Math.random() - 0.5) * 260, 60, this.zone.w * T - 60);
+        const ty = Phaser.Math.Clamp(by + (Math.random() - 0.5) * 120,
+          (this.zone.walkTop ?? 2) * T + 10, (this.zone.walkBottom ?? this.zone.h - 2) * T - 10);
+        sprite.setDir(tx < sprite.x ? 2 : 3);
+        sprite.play('walk');
+        this.tweens.add({
+          targets: [sprite, label], x: tx, duration: 2200 + Math.random() * 1500,
+          onUpdate: () => { sprite.setDepth(sprite.y); },
+          onComplete: () => { sprite.play('idle'); this.time.delayedCall(1500 + Math.random() * 3000, walk); }
+        });
+        this.tweens.add({ targets: sprite, y: ty, duration: 2200 + Math.random() * 1500 });
+        this.tweens.add({ targets: label, y: ty - (cs === 1 ? 104 : 54), duration: 2200 + Math.random() * 1500 });
+      };
+      this.time.delayedCall(800 + i * 600, walk);
+    });
+  }
+
+  // ================= thú cưng =================
+  private pet?: Phaser.GameObjects.Sprite;
+  private petWalk = false;
+  private roamers: { def: Friend; sprite: ChibiSprite }[] = [];      // đang dắt đi dạo (đi theo người chơi)
+
+  // nhà thú cưng chỉ dựng khi đã nuôi ít nhất 1 bé
+  private buildPetHouse() {
+    if (!S.pets?.length) return;
+    const img = this.add.image(PETHOUSE_POS.x, PETHOUSE_POS.y + 60, 'lt_doghouse').setOrigin(0.5, 1).setDepth(PETHOUSE_POS.y + 60);
+    this.addFootprint(PETHOUSE_POS.x, PETHOUSE_POS.y + 60, img.displayWidth * 0.7, 22);
+  }
+
+  private spawnPet() {
+    const id = S.activePet;
+    if (!id || !S.pets?.includes(id)) return;
+    const def = PETS[id];
+    if (!def || !this.textures.exists(def.sheet)) return;
+    const home = this.zone.id === 'farm'
+      ? { x: PETHOUSE_POS.x + 46, y: PETHOUSE_POS.y + 60 }
+      : { x: this.player.x + 40, y: this.player.y + 8 };
+    this.pet = this.add.sprite(home.x, home.y, def.sheet, def.frames.idle[0])
+      .setOrigin(0.5, 1).setScale(def.scale * (this.zone.bg ? 1 : 0.5)).setDepth(home.y);
+    this.pet.setInteractive({ useHandCursor: true });
+    this.pet.on('pointerdown', () => this.petMenu());
+
+    // thở / vẫy khi đứng yên
+    this.time.addEvent({ delay: 850, loop: true, callback: () => {
+      if (!this.pet?.active || this.tweens.isTweening(this.pet)) return;
+      const f = def.frames.idle;
+      this.pet.setFrame(this.pet.frame.name === String(f[0]) ? f[1] : f[0]);
     } });
-    // đi loanh quanh gần nhà chó
+
+    // đi loanh quanh khi không dắt
     const wander = () => {
-      if (!this.dog?.active) return;
-      const tx = DOGHOUSE_POS.x + 20 + Math.random() * 90;
-      const ty = DOGHOUSE_POS.y + 6 + Math.random() * 40;
-      this.dog.setFrame(2);
+      if (!this.pet?.active) return;
+      if (this.petWalk) { this.time.delayedCall(900, wander); return; }
+      const base = this.zone.id === 'farm' ? PETHOUSE_POS : { x: this.player.x, y: this.player.y };
+      const tx = base.x + (this.zone.id === 'farm' ? 20 + Math.random() * 90 : -50 + Math.random() * 100);
+      const ty = (this.zone.id === 'farm' ? PETHOUSE_POS.y + 10 : this.player.y - 10) + Math.random() * 40;
+      this.pet.setFrame(def.frames.move);
+      this.pet.setFlipX(tx < this.pet.x);
       this.tweens.add({
-        targets: this.dog, x: tx, y: ty, duration: 1400 + Math.random() * 1200,
-        onUpdate: () => this.dog?.setDepth(this.dog.y),
-        onComplete: () => { this.dog?.setFrame(0); this.time.delayedCall(1200 + Math.random() * 2500, wander); }
+        targets: this.pet, x: tx, y: ty, duration: 1400 + Math.random() * 1200,
+        onUpdate: () => this.pet?.setDepth(this.pet.y),
+        onComplete: () => { this.pet?.setFrame(def.frames.idle[0]); this.time.delayedCall(1200 + Math.random() * 2200, wander); }
       });
-      this.dog.setFlipX(tx < this.dog.x);
     };
-    this.time.delayedCall(1500, wander);
+    this.time.delayedCall(1200, wander);
+  }
+
+  // pet bám theo người chơi khi đang dắt đi dạo
+  private followPet(dt: number) {
+    if (!this.pet?.active || !this.petWalk) return;
+    const def = PETS[S.activePet ?? ''];
+    if (!def) return;
+    const gap = this.zone.bg ? 52 : 26;
+    const dx = this.player.x - this.pet.x, dy = this.player.y + 6 - this.pet.y;
+    const d = Math.hypot(dx, dy);
+    if (d > gap) {
+      const spd = Math.min(d - gap, (this.zone.bg ? 150 : 100) * (dt / 1000));
+      this.pet.x += (dx / d) * spd;
+      this.pet.y += (dy / d) * spd;
+      this.pet.setFlipX(dx < 0);
+      this.pet.setFrame(def.frames.move);
+      this.pet.setDepth(this.pet.y);
+    } else if (this.pet.frame.name === String(def.frames.move)) {
+      this.pet.setFrame(def.frames.idle[0]);
+    }
+  }
+
+  // bảng chọn khi bấm vào thú cưng
+  private petMenu() {
+    const def = PETS[S.activePet ?? ''];
+    if (!def) return;
+    bus.emit(EV.OPEN_PANEL, {
+      panel: 'dialog',
+      data: {
+        title: `${def.icon} ${def.name}`,
+        text: def.perkFull,
+        actions: [
+          {
+            icon: this.petWalk ? '🏠' : '🦮', label: this.petWalk ? 'Cho về nhà' : 'Dắt đi dạo',
+            cb: () => {
+              this.petWalk = !this.petWalk;
+              this.tweens.killTweensOf(this.pet!);
+              toast(this.petWalk ? `${def.name} đi dạo cùng bạn!` : `${def.name} về chỗ nghỉ.`, def.icon);
+            }
+          },
+          {
+            icon: '❤️', label: 'Vuốt ve', cb: () => {
+              if (this.pet) this.fxFloat(this.pet.x, this.pet.y - 54, '❤️', '#ff8787');
+              toast(`${def.name} kêu vui vẻ~`, def.icon);
+            }
+          }
+        ]
+      }
+    });
   }
 
   private spawnMounds(n = 3) {
@@ -1437,7 +1571,7 @@ export class WorldScene extends Phaser.Scene {
   update(_t: number, dt: number) {
     if (!this.player) return;
     // map HD nhân vật to hơn -> đi nhanh hơn cho cân cảm giác
-    const spd = (this.zone.bg ? 140 : 90) * (dt / 1000);
+    const spd = (this.zone.bg ? 140 : 90) * (this.running ? 1.7 : 1) * (dt / 1000);
     let dx = 0, dy = 0;
     if (this.cursors.left.isDown || this.wasd.A.isDown) dx -= 1;
     if (this.cursors.right.isDown || this.wasd.D.isDown) dx += 1;
@@ -1468,7 +1602,9 @@ export class WorldScene extends Phaser.Scene {
     // depth theo trục y để đứng sau/trước nhà cửa đúng lớp
     this.player.setDepth(this.player.y);
     this.player.tick(dt);
+    this.followPet(dt);
     for (const { sprite } of this.npcs) sprite.tick(dt);
+    for (const { sprite } of this.roamers) sprite.tick(dt);
     for (const g of this.partyGuests) g.tick(dt);
 
     // côn trùng bay
