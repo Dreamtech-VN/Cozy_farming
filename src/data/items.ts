@@ -48,8 +48,12 @@ defItem({ id: 'wool', name: 'Len cừu', kind: 'product', icon: '🧶', sell: 70
 
 // ---- Nông cụ (mua ở bách hóa, gắn lên thanh nông cụ từ túi đồ) ----
 defItem({ id: 'tool_basket', name: 'Giỏ thu hoạch', kind: 'tool', icon: '🧺', sell: 0, buy: 400, desc: 'Gắn lên thanh nông cụ để thu hoạch nhanh cây chín gần nhất.', sprite: { url: 'assets/chibi/tools/basket.png', sx: 0, sy: 0, sw: 48, sh: 46 } });
-defItem({ id: 'tool_axe', name: 'Rìu', kind: 'tool', icon: '🪓', sell: 0, buy: 800, desc: 'Đốn gỗ (tính năng sẽ mở trong bản cập nhật tới).', sprite: { url: 'assets/chibi/tools/axe.png', sx: 0, sy: 0, sw: 46, sh: 46 } });
-defItem({ id: 'tool_shovel', name: 'Xẻng', kind: 'tool', icon: '🦯', sell: 0, buy: 600, desc: 'Đào bới (tính năng sẽ mở trong bản cập nhật tới).', sprite: { url: 'assets/chibi/tools/shovel.png', sx: 0, sy: 0, sw: 46, sh: 46 } });
+defItem({ id: 'tool_axe', name: 'Rìu', kind: 'tool', icon: '🪓', sell: 0, buy: 800, desc: 'Chặt cây ở Nông trại lấy Gỗ (cây mọc lại sau vài phút).', sprite: { url: 'assets/chibi/tools/axe.png', sx: 0, sy: 0, sw: 46, sh: 46 } });
+defItem({ id: 'tool_shovel', name: 'Xẻng', kind: 'tool', icon: '🦯', sell: 0, buy: 600, desc: 'Đào các đống đất ở Nông trại/Bãi biển tìm kho báu.', sprite: { url: 'assets/chibi/tools/shovel.png', sx: 0, sy: 0, sw: 46, sh: 46 } });
+
+// ---- Nguyên liệu từ rìu / xẻng ----
+defItem({ id: 'wood', name: 'Gỗ', kind: 'material', icon: '🪵', sell: 8, desc: 'Chặt từ cây bằng rìu. Nguyên liệu xây dựng sau này.', sprite: { url: ITEMS_SHEET, sx: 0, sy: 112, sw: 16, sh: 16 } });
+defItem({ id: 'stone', name: 'Đá', kind: 'material', icon: '🪨', sell: 6, desc: 'Đào được bằng xẻng.', sprite: { url: ITEMS_SHEET, sx: 16, sy: 112, sw: 16, sh: 16 } });
 
 // ---- Mồi câu (bán ở tiệm câu, tự dùng con xịn nhất khi thả câu) ----
 defItem({ id: 'bait_worm', name: 'Mồi giun', kind: 'material', icon: '🪱', sell: 1, buy: 5, desc: 'Cá cắn câu nhanh hơn 30%.', meta: { bait: { wait: 0.7, rare: 0 } } });

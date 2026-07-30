@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { S, save } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ZONES, type ZoneDef, type NpcDef } from '@/data/zones';
-import { CROPS } from '@/data/crops';
+import { CROPS, CROP_LIST } from '@/data/crops';
 import { ANIMALS } from '@/data/animals';
 import { FURNITURE, WALLPAPERS, FLOORS } from '@/data/furniture';
 import { ChibiSprite } from '@/gfx/ChibiSprite';
@@ -133,6 +133,7 @@ export class WorldScene extends Phaser.Scene {
     this.animalSprites.clear(); this.insects = []; this.furnitureObjs = [];
     this.partyGuests = []; this.fishingState = 'idle'; this.busy = false;
     this.placingItem = undefined; this.lastHintKey = '';
+    this.chopTrees = []; this.mounds = [];
   }
 
   create() {
@@ -150,6 +151,8 @@ export class WorldScene extends Phaser.Scene {
     if (this.zone.features.includes('farm')) this.buildFarm();
     if (this.zone.features.includes('barn')) this.buildBarn();
     if (this.zone.features.includes('insects')) this.spawnInsects();
+    if (this.zone.id === 'farm') this.spawnChopTrees();
+    if (this.zone.id === 'farm' || this.zone.id === 'beach') this.spawnMounds();
 
     // người chơi chibi Avatar: cao 84px native HD -> map nền HD scale 1,
     // map tile 16px thu về 0.5 (=42px ~ 2.6 tile) cho cân cảnh pixel-art
@@ -1052,6 +1055,105 @@ export class WorldScene extends Phaser.Scene {
     this.tweens.add({ targets: c, y: y - (big ? 44 : 30), alpha: 0, duration: 950, ease: 'cubic.out', onComplete: () => c.destroy() });
   }
 
+  // ================= rìu chặt cây & xẻng đào đất =================
+  private chopTrees: { obj: Phaser.GameObjects.Image; readyAt: number }[] = [];
+  private mounds: Phaser.GameObjects.Image[] = [];
+
+  private spawnChopTrees() {
+    // 3 cây gỗ cố định phía đông nông trại (ngoài vùng ruộng/công trình)
+    for (const [tx, ty] of [[31, 16], [37, 21], [33, 27]] as [number, number][]) {
+      const obj = this.add.image(tx * T, ty * T, 'deco_tree_round2').setOrigin(0.5, 1).setDepth(ty * T);
+      this.chopTrees.push({ obj, readyAt: 0 });
+    }
+  }
+
+  private spawnMounds(n = 3) {
+    for (let i = 0; i < n; i++) this.spawnMound();
+  }
+
+  private spawnMound() {
+    // vị trí ngẫu nhiên tránh vùng ruộng
+    for (let tries = 0; tries < 30; tries++) {
+      const tx = 3 + Math.floor(Math.random() * (this.zone.w - 6));
+      const ty = 4 + Math.floor(Math.random() * (this.zone.h - 8));
+      if (this.zone.id === 'farm' && tx > 4 && tx < 24 && ty > 6 && ty < 26) continue;
+      const obj = this.add.image(tx * T, ty * T, 'mound').setDepth(ty * T - 8);
+      this.mounds.push(obj);
+      return;
+    }
+  }
+
+  private chopNearestTree() {
+    let best: { obj: Phaser.GameObjects.Image; readyAt: number } | undefined; let bd = 1e9;
+    for (const t of this.chopTrees) {
+      const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, t.obj.x, t.obj.y - 10);
+      if (d < bd) { bd = d; best = t; }
+    }
+    if (!best || bd > 56) { toast('Lại gần mấy cây gỗ phía đông nông trại nhé.', '🪓'); return; }
+    if (Date.now() < best.readyAt) {
+      toast(`Cây đang mọc lại (${Math.ceil((best.readyAt - Date.now()) / 60000)} phút).`, '🌱');
+      return;
+    }
+    const tree = best;
+    this.busy = true;
+    this.player.play('axe', () => {
+      this.busy = false;
+      const qty = 1 + Math.floor(Math.random() * 2);
+      import('@/core/save').then(m => { m.addItem('wood', qty); m.addStat('wood_chopped', qty); });
+      this.tweens.add({ targets: tree.obj, angle: { from: -4, to: 4 }, duration: 70, yoyo: true, repeat: 3, onComplete: () => tree.obj.setAngle(0) });
+      this.fxBurst(tree.obj.x, tree.obj.y - 16, 0xb08850, 8);
+      this.fxFloatIcon(tree.obj.x, tree.obj.y - 30, 'items16', 70, `+${qty} Gỗ`);
+      sfx.harvest();
+      tree.readyAt = Date.now() + 4 * 60_000;
+      tree.obj.setAlpha(0.45);
+      this.time.delayedCall(4 * 60_000, () => tree.obj.setAlpha(1));
+    });
+  }
+
+  private digNearestMound() {
+    let best: Phaser.GameObjects.Image | undefined; let bd = 1e9;
+    for (const m of this.mounds) {
+      const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, m.x, m.y);
+      if (d < bd) { bd = d; best = m; }
+    }
+    if (!best || bd > 52) { toast('Không có đống đất nào gần đây — tìm mấy ụ đất nâu nhé.', '🦯'); return; }
+    const mound = best;
+    this.busy = true;
+    this.player.play('hoe', () => {
+      this.busy = false;
+      this.mounds = this.mounds.filter(m => m !== mound);
+      const { x, y } = mound;
+      mound.destroy();
+      this.fxBurst(x, y, 0x8a5a33, 8);
+      // rương ngẫu nhiên
+      const r = Math.random();
+      import('@/core/save').then(m => {
+        if (r < 0.35) {
+          const coins = 10 + Math.floor(Math.random() * 31);
+          m.addCoins(coins);
+          this.fxFloat(x, y - 10, `+${coins} xu`);
+        } else if (r < 0.6) {
+          const crop = CROP_LIST[Math.floor(Math.random() * CROP_LIST.length)];
+          m.addItem(`seed_${crop.id}`);
+          toast(`Đào được Hạt ${crop.name}!`, '🌱');
+        } else if (r < 0.75) {
+          m.addItem('fertilizer');
+          toast('Đào được Phân bón!', '💩');
+        } else if (r < 0.93) {
+          m.addItem('stone');
+          this.fxFloatIcon(x, y - 10, 'items16', 71, '+1 Đá');
+        } else {
+          m.addRubies(1);
+          toast('Đào trúng 1 Ruby! 💎', '💎');
+        }
+        m.addStat('dug');
+      });
+      sfx.plant();
+      // ụ đất mới mọc chỗ khác sau 45s
+      this.time.delayedCall(45_000, () => { if (this.scene.isActive()) this.spawnMound(); });
+    });
+  }
+
   // dùng nông cụ gắn trên thanh nhanh (hotbar): tác động lên mục tiêu gần nhất
   private useTool(id: string) {
     if (this.busy) return;
@@ -1086,6 +1188,14 @@ export class WorldScene extends Phaser.Scene {
         else toast('Không có côn trùng nào trong tầm vợt.', '🥅');
         break;
       }
+      case 'axe':
+        if (this.zone.id === 'farm') this.chopNearestTree();
+        else toast('Cây gỗ nằm ở Nông trại.', '🪓');
+        break;
+      case 'shovel':
+        if (this.mounds.length) this.digNearestMound();
+        else toast('Đống đất chỉ có ở Nông trại và Bãi biển.', '🦯');
+        break;
       default:
         toast('Nông cụ này sẽ dùng được trong bản cập nhật tới!', '🛠️');
     }

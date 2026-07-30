@@ -218,6 +218,12 @@ export class PreloadScene extends Phaser.Scene {
     // ô chọn
     g.clear(); g.lineStyle(2, 0xffd43b); g.strokeRect(1, 1, 30, 30);
     g.generateTexture('sel', 32, 32);
+    // đống đất (xẻng đào)
+    g.clear();
+    g.fillStyle(0x8a5a33); g.fillEllipse(11, 12, 20, 10);
+    g.fillStyle(0x6f4626); g.fillEllipse(11, 10, 16, 8);
+    g.fillStyle(0xa9714b); g.fillRect(6, 6, 3, 2); g.fillRect(13, 8, 2, 2);
+    g.generateTexture('mound', 22, 16);
     g.destroy();
   }
 }
