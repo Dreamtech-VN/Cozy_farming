@@ -645,7 +645,7 @@ export function registerAllPanels() {
     };
 
     const chanBar = h('div', 'chips');
-    const chans: ['public' | 'area' | 'private', string][] = [['public', '🌍 Công khai'], ['area', '📍 Khu vực'], ['private', '🔒 Riêng']];
+    const chans: ['public' | 'area' | 'private', string][] = [['public', '🌍 Tổng'], ['area', '📍 Gần (người ở gần)'], ['private', '🔒 Riêng']];
     for (const [id, lbl] of chans) {
       const c = h('div', `chip ${channel === id ? 'active' : ''}`, lbl);
       c.onclick = () => { channel = id; chanBar.querySelectorAll('.chip').forEach(x => x.classList.remove('active')); c.classList.add('active'); renderLog(); };

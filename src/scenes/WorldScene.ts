@@ -30,9 +30,13 @@ const TRAFFIC_KEYS = ['veh_bus', 'veh_truck_orange', 'veh_camper_pink', 'veh_cam
 // Decor đặt sẵn theo khu (sprite thật từ asset pack) — toạ độ tile, origin đáy giữa
 const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number }[]> = {
   farm: [
+    { key: 'bld_farm_house', x: 6, y: 8 },    // nhà bếp (cửa vào nhà riêng)
+    { key: 'bld_farm_market', x: 17, y: 8 },  // cửa hàng — Cô Mai đứng trước
+    { key: 'bld_farm_store', x: 26, y: 8 },   // nhà kho — mở kho đồ
+    { key: 'deco_tree_khe', x: 24, y: 11, s: 1.6 }, // cây khế
     { key: 'deco_scarecrow', x: 4, y: 12 },
-    { key: 'deco_barrel', x: 28, y: 4 }, { key: 'deco_barrel', x: 28, y: 6 },
-    { key: 'deco_flower_pot', x: 6, y: 8 }, { key: 'deco_flower_pot', x: 12, y: 8 }
+    { key: 'deco_barrel', x: 28.5, y: 9 },
+    { key: 'deco_flower_pot', x: 9, y: 9 }, { key: 'deco_flower_pot', x: 14, y: 9 }
   ],
   beach: [
     { key: 'bld_fishshop', x: 10, y: 7 },    // tiệm câu ông Biển
@@ -124,9 +128,10 @@ export class WorldScene extends Phaser.Scene {
     if (this.zone.features.includes('barn')) this.buildBarn();
     if (this.zone.features.includes('insects')) this.spawnInsects();
 
-    // người chơi
+    // người chơi (map nền HD: phóng to nhân vật cho cân với cảnh vật)
+    const charScale = this.zone.bg ? 1.6 : 1;
     this.player = new CharacterSprite(this, this.zone.spawn.x * T, this.zone.spawn.y * T, S.player.appearance);
-    this.player.setDepth(1000);
+    this.player.setDepth(1000).setScale(charScale);
     this.selector = this.add.image(0, 0, 'sel').setVisible(false).setDepth(900).setAlpha(0.9);
 
     this.cameras.main.startFollow(this.player, true, 0.12, 0.12);
@@ -235,12 +240,15 @@ export class WorldScene extends Phaser.Scene {
         const wx = (this.zone.w - 12) * T;
         this.add.tileSprite(wx, 0, 12 * T, this.zone.h * T, 'g_water').setOrigin(0).setDepth(-80);
         this.waterRect = new Phaser.Geom.Rectangle(wx, 0, 12 * T, this.zone.h * T);
-      } else {
-        const cx = this.zone.w * T / 2, cy = this.zone.h * T / 2 + 2 * T;
-        this.pondEllipse = new Phaser.Geom.Ellipse(cx, cy, 20 * T, 12 * T);
+      } else if (this.zone.id === 'farm') {
+        // hồ cá trong nông trại (góc dưới phải)
+        const cx = 34 * T, cy = 28 * T;
+        this.pondEllipse = new Phaser.Geom.Ellipse(cx, cy, 10 * T, 5 * T);
         const g = this.add.graphics().setDepth(-80);
-        g.fillStyle(0x4aa5d9); g.fillEllipse(cx, cy, 20 * T, 12 * T);
-        g.fillStyle(0x62b7e6, 0.6); g.fillEllipse(cx, cy - 4, 18 * T, 10 * T);
+        g.fillStyle(0x3c8fc4); g.fillEllipse(cx, cy, 10 * T, 5 * T);
+        g.fillStyle(0x4aa5d9); g.fillEllipse(cx, cy, 9.4 * T, 4.5 * T);
+        g.fillStyle(0x62b7e6, 0.6); g.fillEllipse(cx, cy - 3, 8 * T, 3.6 * T);
+        this.add.text(cx, cy - 5.5 * T, '🐟 Hồ cá', { fontSize: '8px', color: '#fff', backgroundColor: '#00000080', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2);
       }
     }
   }
@@ -499,6 +507,7 @@ export class WorldScene extends Phaser.Scene {
 
   // ================= NPC =================
   private spawnNpcs() {
+    const cs = this.zone.bg ? 1.6 : 1;
     for (const def of this.zone.npcs) {
       const sprite = new CharacterSprite(this, def.x * T, def.y * T, {
         charIndex: def.charIndex, hairStyle: ['bob', 'gentleman', 'curly', 'braids', 'buzzcut', 'ponytail', 'wavy', 'spacebuns'][def.charIndex],
@@ -506,8 +515,8 @@ export class WorldScene extends Phaser.Scene {
         clothes: ['basic', 'suit', 'overalls', 'stripe', 'dress', 'floral', 'sailor', 'sporty'][def.charIndex],
         clothesColor: def.charIndex % 10, acc: []
       });
-      sprite.setDepth(def.y * T);
-      this.add.text(def.x * T, def.y * T - 26, def.name, { fontSize: '7px', color: '#ffe066', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2000);
+      sprite.setDepth(def.y * T).setScale(cs);
+      this.add.text(def.x * T, def.y * T - 26 * cs, def.name, { fontSize: '7px', color: '#ffe066', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2000);
       this.npcs.push({ def, sprite });
     }
   }
@@ -581,11 +590,13 @@ export class WorldScene extends Phaser.Scene {
     g.lineStyle(2, 0x8d5a3a);
     g.strokeRect(x * T, y * T, w * T, h * T);
     g.fillStyle(0xc9a26b, 0.25); g.fillRect(x * T, y * T, w * T, h * T);
-    // nhà chuồng
-    const bx = (x + w / 2) * T, by = y * T - 4;
-    this.add.rectangle(bx, by, 40, 22, 0xa9714b).setDepth(by).setStrokeStyle(2, 0x6b4a2e);
+    // chuồng thú (sprite barn + coop từ pack)
     const lvl = S.livestock.barnLevel;
-    this.add.text(bx, by, lvl === 0 ? '🏚️ Xây chuồng' : `🏚️ Chuồng cấp ${lvl}`, { fontSize: '7px', color: '#fff' }).setOrigin(0.5).setDepth(by + 1);
+    const bx = (x + 3) * T, by = (y + 1.5) * T;
+    this.add.image(bx, by, 'bld_farm_barn').setOrigin(0.5, 1).setDepth(by).setAlpha(lvl === 0 ? 0.55 : 1);
+    if (lvl >= 2) this.add.image((x + 8) * T, (y + 1.2) * T, 'bld_farm_coop').setOrigin(0.5, 1).setScale(0.9).setDepth((y + 1.2) * T);
+    const barnLabel = lvl === 0 ? '🏚️ Xây chuồng' : `🐄 Chuồng thú cấp ${lvl}`;
+    this.add.text(bx, by - 5.5 * T, barnLabel, { fontSize: '8px', color: '#fff', backgroundColor: '#00000080', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(3000);
 
     for (const a of S.livestock.animals) this.spawnAnimal(a.id, a.type);
     this.time.addEvent({ delay: 1500, loop: true, callback: () => this.wanderAnimals() });
@@ -654,8 +665,10 @@ export class WorldScene extends Phaser.Scene {
         const maxY = this.zone.road ? this.roadTopY() - 16 : this.zone.h * T;
         const x = Math.random() * this.zone.w * T, y = Math.random() * maxY;
         if (this.inWater(x, y)) return;
-        const obj = this.add.image(x, y, def.kind === 'butterfly' ? 'butterfly' : 'bug')
-          .setTint(def.color).setDepth(2500).setScale(0.8);
+        // sprite côn trùng thật từ nature pack (fallback procedural nếu thiếu)
+        const obj = this.textures.exists('nature')
+          ? this.add.sprite(x, y, 'nature', def.frame).setDepth(2500).setScale(this.zone.bg ? 1.6 : 1.1) as unknown as Phaser.GameObjects.Image
+          : this.add.image(x, y, def.kind === 'butterfly' ? 'butterfly' : 'bug').setTint(def.color).setDepth(2500).setScale(0.8);
         obj.setInteractive({ useHandCursor: true });
         const ins: InsectSprite = { def, obj, vx: Math.random() * 30 - 15, vy: Math.random() * 30 - 15, t: 0 };
         obj.on('pointerdown', () => this.tryCatchInsect(ins));
@@ -723,7 +736,8 @@ export class WorldScene extends Phaser.Scene {
     }
     if (this.fishingState !== 'bite') return;
     this.fishingState = 'reeling';
-    const f = fishing.rollFish(this.zone.id);
+    // hồ cá nông trại dùng bảng cá của hồ câu
+    const f = fishing.rollFish(this.zone.id === 'farm' ? 'pond' : this.zone.id);
     if (f) {
       fishing.landFish(f);
       toast(`Câu được ${f.name}!`, '🐟');
@@ -862,6 +876,35 @@ export class WorldScene extends Phaser.Scene {
         }
       }
     } else this.selector.setVisible(false);
+
+    // nhà kho + cây khế (nông trại)
+    if (this.zone.id === 'farm') {
+      // nhà kho: mở kho đồ
+      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, 26 * T, 8 * T) < 40) {
+        acts.push({ icon: '🎒', label: 'Mở nhà kho', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'inventory' }) });
+      }
+      // cây khế: rung cây nhặt quả (hồi 10 phút)
+      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, 24 * T, 11 * T) < 36) {
+        const last = S.stats['khe_last'] ?? 0;
+        const readyIn = 10 * 60_000 - (Date.now() - last);
+        if (readyIn <= 0) {
+          acts.push({
+            icon: '⭐', label: 'Rung cây khế', cb: () => {
+              this.busy = true;
+              this.player.play('pickup', () => {
+                this.busy = false;
+                const qty = 1 + Math.floor(Math.random() * 3);
+                S.stats['khe_last'] = Date.now();
+                import('@/core/save').then(m => { m.addItem('crop_khe', qty); m.addStat('khe_shaken'); });
+                toast(`Rụng ${qty} quả khế!`, '⭐');
+              });
+            }
+          });
+        } else {
+          acts.push({ icon: '⏳', label: `Khế chưa chín (${Math.ceil(readyIn / 60000)} phút)`, cb: () => toast('Chờ khế chín đã nha!', '⭐') });
+        }
+      }
+    }
 
     // chuồng
     if (this.zone.features.includes('barn')) {

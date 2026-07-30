@@ -173,9 +173,8 @@ function buildHud() {
   cm.append(cmLog, cmHint);
   const renderChat = (m: ChatMessage) => {
     const el = h('div', `cm ch-${m.channel}`);
-    el.textContent = m.channel === 'private'
-      ? `[Riêng] ${m.from}: ${m.text}`
-      : `${m.from}: ${m.text}`;
+    const tag = m.channel === 'private' ? '[Riêng] ' : m.channel === 'area' ? '[Gần] ' : m.channel === 'public' ? '[Tổng] ' : '';
+    el.textContent = `${tag}${m.from}: ${m.text}`;
     cmLog.append(el);
     while (cmLog.children.length > 4) cmLog.firstChild?.remove();
   };

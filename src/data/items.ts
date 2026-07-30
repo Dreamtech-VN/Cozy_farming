@@ -45,6 +45,9 @@ defItem({ id: 'milk', name: 'Sữa bò', kind: 'product', icon: '🥛', sell: 60
 defItem({ id: 'pork', name: 'Nấm heo ủi', kind: 'product', icon: '🍄', sell: 45, desc: 'Heo ủi đất tìm được nấm quý.' });
 defItem({ id: 'wool', name: 'Len cừu', kind: 'product', icon: '🧶', sell: 70 });
 
+// ---- Quả cây khế trong nông trại ----
+defItem({ id: 'crop_khe', name: 'Quả khế', kind: 'crop', icon: '⭐', sell: 12, desc: 'Ăn khế trả vàng~ rung cây khế ở Nông trại mỗi 10 phút.' });
+
 // ---- Đồ ăn (tiệc) ----
 defItem({ id: 'food_cake', name: 'Bánh kem', kind: 'food', icon: '🎂', sell: 40, buy: 200, desc: 'Dùng để mở tiệc tại nhà.' });
 defItem({ id: 'food_juice', name: 'Nước ép', kind: 'food', icon: '🧃', sell: 8, buy: 40 });

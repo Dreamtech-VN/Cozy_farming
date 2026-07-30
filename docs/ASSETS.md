@@ -41,6 +41,18 @@ Sprite `assets/deco/busstop.png` hiện ghép từ ghế đá của tileset + kh
 "Sprite City Series 1 – Bus Station" trên OpenGameArt
 (https://opengameart.org/content/sprite-city-series-1-bus-station) — tải về thay file là xong.
 
+## Nhân vật cho map HD (nên mua)
+
+Nhân vật Character v2 (32px pixel) hơi nhỏ so với map nền HD kiểu Avatar — hiện game
+tự phóng 1.6× ở các map nền ảnh. Muốn đẹp hẳn nên mua 1 pack nhân vật to hơn
+(license thương mại, tìm trên itch.io):
+
+1. **Sunnyside World** (danieldiggle) — nhân vật 32×64 HD, nhiều animation farm (cuốc/tưới/câu), phong cách rất gần map Avatar.
+2. **Cute Fantasy RPG** (Kenmi) — nhân vật + farm, nét mềm, dễ khớp.
+3. **Modern Interiors/Exteriors + Characters** (LimeZu) — bộ nhân vật 32×64 khổng lồ, nhiều trang phục, giá rẻ.
+
+Mua xong gửi mình sheet — cấu trúc `CharacterSprite` đã tách lớp sẵn, thay bộ render là xong.
+
 ## Cần mua thêm (đề xuất, ưu tiên từ trên xuống)
 
 1. **Pack côn trùng** (bướm/bọ pixel 16px) — hiện đang vẽ tạm bằng code. Gợi ý tìm: "pixel insects pack" trên itch.

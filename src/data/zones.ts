@@ -51,12 +51,15 @@ export const ZONES: Record<string, ZoneDef> = {
   pond_gate: gateZone('pond_gate', 'Hồ câu', '🎏', 'pond', 'grass'),
   farm: {
     id: 'farm', name: 'Nông trại', icon: '🌾', w: 44, h: 34, ground: 'grass',
-    spawn: { x: 9, y: 10 }, gate: 'farm_gate',
-    portals: [{ x: 22, y: 32, to: 'farm_gate', label: 'Ra cổng', icon: '🚏' }],
-    npcs: [
-      { id: 'npc_mai', name: 'Cô Mai', x: 8, y: 6, charIndex: 5, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
+    spawn: { x: 12, y: 10 }, gate: 'farm_gate',
+    portals: [
+      { x: 6, y: 8, to: 'house', label: 'Nhà bếp', icon: '🏠' },
+      { x: 22, y: 32, to: 'farm_gate', label: 'Ra cổng', icon: '🚏' }
     ],
-    features: ['farm', 'barn', 'insects', 'trees']
+    npcs: [
+      { id: 'npc_mai', name: 'Cô Mai', x: 17, y: 9, charIndex: 5, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
+    ],
+    features: ['farm', 'barn', 'fishing', 'insects', 'trees']
   },
   town: {
     id: 'town', name: 'Thành phố', icon: '🏙️', w: 50, h: 29, ground: 'stone',

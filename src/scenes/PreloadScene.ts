@@ -41,11 +41,12 @@ export class PreloadScene extends Phaser.Scene {
     this.load.spritesheet('nature', 'assets/nature/global.png', { frameWidth: 16, frameHeight: 16 });
 
     // ---- Nhà cửa (town + beach) ----
-    for (const b of ['pub', 'cinema', 'school', 'cafe', 'inn', 'library', 'greenhouse', 'arcade', 'supam', 'shop', 'beachbar', 'fishshop']) {
+    for (const b of ['pub', 'cinema', 'school', 'cafe', 'inn', 'library', 'greenhouse', 'arcade', 'supam', 'shop', 'beachbar', 'fishshop',
+      'farm_house', 'farm_store', 'farm_market', 'farm_barn', 'farm_coop']) {
       this.load.image(`bld_${b}`, `assets/buildings/${b}.png`);
     }
     // ---- Decor ngoài trời (cắt từ tileset) ----
-    for (const d of ['tree_round', 'tree_round2', 'tree_pine', 'bench', 'lamp_green', 'lamp_black', 'scarecrow', 'barrel', 'flower_pot', 'bush', 'busstop']) {
+    for (const d of ['tree_round', 'tree_round2', 'tree_pine', 'tree_khe', 'bench', 'lamp_green', 'lamp_black', 'scarecrow', 'barrel', 'flower_pot', 'bush', 'busstop']) {
       this.load.image(`deco_${d}`, `assets/deco/${d}.png`);
     }
     // ---- Nền map Avatar (repo Lttt) ----
