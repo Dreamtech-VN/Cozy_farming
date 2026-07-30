@@ -128,8 +128,9 @@ export class WorldScene extends Phaser.Scene {
     if (this.zone.features.includes('barn')) this.buildBarn();
     if (this.zone.features.includes('insects')) this.spawnInsects();
 
-    // người chơi (map nền HD: phóng to nhân vật cho cân với cảnh vật)
-    const charScale = this.zone.bg ? 1.6 : 1;
+    // người chơi (map nền HD: nhân vật Avatar gốc cao 42px x hd2 = ~84px
+    // trên các map này -> 32px x 2.6 ≈ 84px cho đúng tỉ lệ)
+    const charScale = this.zone.bg ? 2.6 : 1;
     this.player = new CharacterSprite(this, this.zone.spawn.x * T, this.zone.spawn.y * T, S.player.appearance);
     this.player.setDepth(1000).setScale(charScale);
     this.selector = this.add.image(0, 0, 'sel').setVisible(false).setDepth(900).setAlpha(0.9);
@@ -507,7 +508,7 @@ export class WorldScene extends Phaser.Scene {
 
   // ================= NPC =================
   private spawnNpcs() {
-    const cs = this.zone.bg ? 1.6 : 1;
+    const cs = this.zone.bg ? 2.6 : 1;
     for (const def of this.zone.npcs) {
       const sprite = new CharacterSprite(this, def.x * T, def.y * T, {
         charIndex: def.charIndex, hairStyle: ['bob', 'gentleman', 'curly', 'braids', 'buzzcut', 'ponytail', 'wavy', 'spacebuns'][def.charIndex],
@@ -516,7 +517,7 @@ export class WorldScene extends Phaser.Scene {
         clothesColor: def.charIndex % 10, acc: []
       });
       sprite.setDepth(def.y * T).setScale(cs);
-      this.add.text(def.x * T, def.y * T - 26 * cs, def.name, { fontSize: '7px', color: '#ffe066', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2000);
+      this.add.text(def.x * T, def.y * T - 26 * cs, def.name, { fontSize: cs > 1 ? '11px' : '7px', color: '#ffe066', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2000);
       this.npcs.push({ def, sprite });
     }
   }
@@ -667,7 +668,7 @@ export class WorldScene extends Phaser.Scene {
         if (this.inWater(x, y)) return;
         // sprite côn trùng thật từ nature pack (fallback procedural nếu thiếu)
         const obj = this.textures.exists('nature')
-          ? this.add.sprite(x, y, 'nature', def.frame).setDepth(2500).setScale(this.zone.bg ? 1.6 : 1.1) as unknown as Phaser.GameObjects.Image
+          ? this.add.sprite(x, y, 'nature', def.frame).setDepth(2500).setScale(this.zone.bg ? 2.4 : 1.1) as unknown as Phaser.GameObjects.Image
           : this.add.image(x, y, def.kind === 'butterfly' ? 'butterfly' : 'bug').setTint(def.color).setDepth(2500).setScale(0.8);
         obj.setInteractive({ useHandCursor: true });
         const ins: InsectSprite = { def, obj, vx: Math.random() * 30 - 15, vy: Math.random() * 30 - 15, t: 0 };
@@ -1019,7 +1020,8 @@ export class WorldScene extends Phaser.Scene {
   // ================= update =================
   update(_t: number, dt: number) {
     if (!this.player) return;
-    const spd = 90 * (dt / 1000);
+    // map HD nhân vật to hơn -> đi nhanh hơn cho cân cảm giác
+    const spd = (this.zone.bg ? 140 : 90) * (dt / 1000);
     let dx = 0, dy = 0;
     if (this.cursors.left.isDown || this.wasd.A.isDown) dx -= 1;
     if (this.cursors.right.isDown || this.wasd.D.isDown) dx += 1;
