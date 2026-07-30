@@ -342,3 +342,50 @@ input.ui-input, select.ui-input {
   text-shadow: 0 2px 3px rgba(0,0,0,.35);
 }
 .lg-start:active { transform: translateY(3px); box-shadow: 0 2px 0 #1f7a33; }
+
+/* ===== Nút đăng nhập chuẩn Google / Apple + popup chọn máy chủ ===== */
+.lg-btn { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.lg-logo { width: 18px; height: 18px; flex: none; }
+.lg-google { background: #fff; color: #1f1f1f; border: 1px solid #747775; font-weight: 600; }
+.lg-apple { background: #000; color: #fff; font-weight: 600; }
+
+.sv-pop-backdrop {
+  position: absolute; inset: 0; background: rgba(0, 0, 0, .55); z-index: 40;
+  display: flex; align-items: center; justify-content: center;
+}
+.sv-pop {
+  width: min(660px, 94vw); height: min(400px, 88vh); display: flex; flex-direction: column;
+  background: rgba(16, 20, 28, .96); border-radius: 10px; overflow: hidden;
+  box-shadow: 0 14px 44px rgba(0, 0, 0, .6); border: 1px solid rgba(255,255,255,.12);
+}
+.sv-pop-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; color: #fff; font-size: 16px; font-weight: 800;
+  border-bottom: 2px solid #4dabf7;
+}
+.sv-pop-body { flex: 1; display: flex; min-height: 0; }
+.sv-tabs {
+  width: 132px; flex: none; display: flex; flex-direction: column; gap: 6px;
+  padding: 10px 8px; background: rgba(0, 0, 0, .35); overflow-y: auto;
+}
+.sv-tab {
+  padding: 9px 10px; border-radius: 8px; cursor: pointer; color: #cfd6df;
+  border: 1px solid transparent; display: flex; flex-direction: column; gap: 2px;
+}
+.sv-tab b { font-size: 14px; }
+.sv-tab span { font-size: 11px; color: #8b96a5; }
+.sv-tab.active { background: rgba(77, 171, 247, .18); border-color: #4dabf7; color: #fff; }
+.sv-tab.active span { color: #74c0fc; }
+.sv-grid {
+  flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+  align-content: start; padding: 10px; overflow-y: auto;
+}
+.sv-cell {
+  display: flex; align-items: center; gap: 8px; padding: 9px 10px; border-radius: 8px;
+  background: rgba(255, 255, 255, .06); color: #fff; cursor: pointer; border: 1px solid transparent;
+  font-size: 13px; min-height: 38px;
+}
+.sv-cell:hover { background: rgba(255, 255, 255, .12); }
+.sv-cell.active { border-color: #ffd43b; background: rgba(255, 212, 59, .12); }
+.sv-cell .sv-name { flex: 1; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sv-cell .sv-tag { font-size: 11px; font-weight: 700; }
