@@ -1096,7 +1096,8 @@ export function registerAllPanels() {
         else cell.append(uiIcon(ico, 28));
         cell.append(h('span', 'wd-slot-name', name));
         cell.onclick = () => { tab = i; render(); };
-        (i < 4 ? colL : colR).append(cell);
+        // chia đôi cho hai cột hai bên nhân vật
+        (i < Math.ceil(SLOTS.length / 2) ? colL : colR).append(cell);
       });
       const mid = h('div', 'wd-char');
       mid.append(charFace(look, 190));
