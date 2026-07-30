@@ -90,11 +90,11 @@ interface WorldAction { icon: string; label: string; cb: () => void; sprite?: { 
 
 // icon nông cụ (vẽ pixel 16px theo palette pack + cần câu từ fishing pack)
 const TOOL_ICON = {
-  hoe: { url: 'assets/farm/tool_hoe.png', sx: 0, sy: 0, sw: 16, sh: 16 },
-  can: { url: 'assets/farm/tool_can.png', sx: 0, sy: 0, sw: 16, sh: 16 },
-  basket: { url: 'assets/farm/tool_basket.png', sx: 0, sy: 0, sw: 16, sh: 16 },
-  net: { url: 'assets/farm/tool_net.png', sx: 0, sy: 0, sw: 16, sh: 16 },
-  rod: { url: 'assets/farm/tool_rod.png', sx: 0, sy: 0, sw: 16, sh: 16 },
+  hoe: { url: 'assets/chibi/tools/hoe.png', sx: 0, sy: 0, sw: 46, sh: 46 },
+  can: { url: 'assets/chibi/tools/can.png', sx: 0, sy: 0, sw: 34, sh: 38 },
+  basket: { url: 'assets/chibi/tools/basket.png', sx: 0, sy: 0, sw: 48, sh: 46 },
+  net: { url: 'assets/chibi/tools/net.png', sx: 0, sy: 0, sw: 48, sh: 46 },
+  rod: { url: 'assets/chibi/tools/rod.png', sx: 0, sy: 0, sw: 60, sh: 28 },
   seed: { url: 'assets/farm/seeds.png', sx: 0, sy: 0, sw: 16, sh: 16 }
 };
 

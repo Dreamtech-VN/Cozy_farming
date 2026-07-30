@@ -6,7 +6,7 @@ import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
 import { gameHour, currentWeather, WEATHER_ICON, season } from '@/systems/time';
 import { initSocial, getChatLog } from '@/systems/social';
-import { TOOLS } from '@/data/tools';
+import { TOOLS, toolIconSize } from '@/data/tools';
 import { initDaily } from '@/systems/meta';
 import { initQuests } from '@/systems/quests';
 import { sfx } from '@/core/audio';
@@ -285,7 +285,7 @@ export function refreshHotbar() {
     const slot = h('button', 'hb-slot');
     const t = TOOLS[tid];
     if (t) {
-      slot.append(spr(t.url, 0, 0, 16, 16, 30));
+      slot.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 32)));
       slot.title = t.name;
       slot.onclick = () => { sfx.click(); bus.emit('hotbar:use', tid); };
       // giữ lâu / chuột phải = gỡ nông cụ khỏi ô

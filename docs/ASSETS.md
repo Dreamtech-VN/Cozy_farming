@@ -26,6 +26,12 @@ Nguồn: các pack đã mua trên itch.io (license thương mại), tải từ
 - Nền đất/cỏ/cát/nước (tile đơn sắc có hoa văn, palette khớp pack) — autotile thật sẽ map ở v0.2.
 - Chuồng gia súc, đàn piano, đèn cây trong nhà, tranh treo tường.
 
+## Icon nông cụ chibi (`assets/chibi/tools/`)
+
+- `hoe/can/basket/rod/net.png`: icon item gốc Avatar (res.rar repo Lttt, hd/item
+  11326 / 1429 / 7077 / 10131 / 10855) — **chỉ dùng dev/test, thay khi phát hành**.
+- `axe.png`, `shovel.png`: tự vẽ theo cùng style (dùng thoải mái).
+
 ## Asset từ repo Lttt (`assets/lttt/`)
 
 Lấy từ https://github.com/thanhtinz/Lttt (client/unity/Assets/Resources/hd):
