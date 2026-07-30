@@ -526,23 +526,131 @@ export function registerAllPanels() {
     return wrap;
   }
 
-  // ================= Bản đồ =================
+  // ================= Bản đồ thế giới (minh họa, bấm để di chuyển) =================
+  // vị trí các khu trên bản đồ (%)
+  const MAP_POS: Record<string, { x: number; y: number }> = {
+    gamecenter: { x: 24, y: 26 },
+    school: { x: 46, y: 16 },
+    mall: { x: 68, y: 24 },
+    park: { x: 12, y: 56 },
+    town: { x: 46, y: 50 },
+    beach: { x: 88, y: 48 },
+    house: { x: 60, y: 68 },
+    pond: { x: 22, y: 82 },
+    farm: { x: 74, y: 80 }
+  };
+  // các tuyến đường nối khu (vẽ gấp khúc chữ L)
+  const ROADS: [string, string][] = [
+    ['gamecenter', 'school'], ['school', 'mall'], ['gamecenter', 'town'],
+    ['school', 'town'], ['mall', 'town'], ['mall', 'beach'], ['park', 'town'],
+    ['town', 'house'], ['house', 'farm'], ['town', 'beach'], ['park', 'pond'],
+    ['pond', 'farm'], ['house', 'pond']
+  ];
+
   registerPanel('map', () => {
-    const { body, close } = openWindow('🗺️ Bản đồ thế giới');
-    const grid = h('div', 'grid');
-    grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(120px, 1fr))';
+    const { body, close } = openWindow('🗺️ Bản đồ thế giới', { size: 'large' });
+    const W = 880, H = 470;
+    const wrap = h('div', 'map-wrap');
+    const cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    wrap.append(cv);
+    const ctx = cv.getContext('2d')!;
+    const px = (id: string) => ({ x: MAP_POS[id].x / 100 * W, y: MAP_POS[id].y / 100 * H });
+
+    // random cố định để bản đồ không nhảy hình
+    let seed = 12345;
+    const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+
+    // nền cỏ
+    ctx.fillStyle = '#7ec850';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#8fd45e';
+    for (let i = 0; i < 500; i++) ctx.fillRect(rnd() * W, rnd() * H, 3, 3);
+    ctx.fillStyle = '#6cb840';
+    for (let i = 0; i < 300; i++) ctx.fillRect(rnd() * W, rnd() * H, 4, 2);
+
+    // sông chảy chéo (qua góc phải, xuống đáy như ảnh mẫu)
+    const river = (pts: [number, number][], w: number) => {
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.strokeStyle = '#8ed3e8'; ctx.lineWidth = w + 10;
+      ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+      for (let i = 1; i < pts.length - 1; i++) ctx.quadraticCurveTo(pts[i][0], pts[i][1], (pts[i][0] + pts[i + 1][0]) / 2, (pts[i][1] + pts[i + 1][1]) / 2);
+      ctx.stroke();
+      ctx.strokeStyle = '#4aa5d9'; ctx.lineWidth = w;
+      ctx.stroke();
+    };
+    river([[W * 0.55, -20], [W * 0.62, H * 0.18], [W * 0.8, H * 0.3], [W * 0.99, H * 0.34]], 26);
+    river([[W * 0.35, H + 20], [W * 0.42, H * 0.86], [W * 0.55, H * 0.9], [W * 0.75, H * 1.05]], 22);
+
+    // hồ ở công viên + hồ câu
+    const lake = (x: number, y: number, rx: number, ry: number) => {
+      ctx.fillStyle = '#8ed3e8'; ctx.beginPath(); ctx.ellipse(x, y, rx + 5, ry + 5, 0, 0, 7); ctx.fill();
+      ctx.fillStyle = '#4aa5d9'; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, 7); ctx.fill();
+    };
+    lake(W * 0.07, H * 0.72, 34, 18);
+    lake(W * 0.22, H * 0.9, 46, 20);
+
+    // đường nhựa nối các khu (gấp khúc chữ L)
+    ctx.strokeStyle = '#5b6068'; ctx.lineWidth = 16; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    const roadPath = () => {
+      ctx.beginPath();
+      for (const [a, b] of ROADS) {
+        const A = px(a), B = px(b);
+        ctx.moveTo(A.x, A.y);
+        ctx.lineTo(B.x, A.y);
+        ctx.lineTo(B.x, B.y);
+      }
+    };
+    roadPath(); ctx.stroke();
+    // vạch kẻ trắng
+    ctx.strokeStyle = '#e8e8e8'; ctx.lineWidth = 2; ctx.setLineDash([8, 10]);
+    roadPath(); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // cụm nhà quanh mỗi khu
+    const house = (x: number, y: number, s: number) => {
+      const w = 14 * s, hh = 10 * s;
+      ctx.fillStyle = ['#f6edd8', '#e8d5a3', '#d8e8f5'][Math.floor(rnd() * 3)];
+      ctx.fillRect(x - w / 2, y - hh, w, hh);
+      ctx.fillStyle = ['#d9534f', '#4a90c4', '#8a5a33'][Math.floor(rnd() * 3)];
+      ctx.beginPath(); ctx.moveTo(x - w / 2 - 2, y - hh); ctx.lineTo(x + w / 2 + 2, y - hh); ctx.lineTo(x, y - hh - 8 * s); ctx.closePath(); ctx.fill();
+    };
+    const tree = (x: number, y: number) => {
+      ctx.fillStyle = '#4e8429'; ctx.beginPath(); ctx.arc(x, y, 6, 0, 7); ctx.fill();
+      ctx.fillStyle = '#3f6d21'; ctx.beginPath(); ctx.arc(x + 3, y + 2, 4, 0, 7); ctx.fill();
+    };
+    for (const id of Object.keys(MAP_POS)) {
+      const p = px(id);
+      const n = 3 + Math.floor(rnd() * 3);
+      for (let i = 0; i < n; i++) house(p.x + (rnd() * 90 - 45), p.y + (rnd() * 50 - 30), 0.9 + rnd() * 0.5);
+    }
+    for (let i = 0; i < 60; i++) {
+      const x = rnd() * W, y = rnd() * H;
+      tree(x, y);
+    }
+    // mây
+    ctx.fillStyle = 'rgba(255,255,255,.5)';
+    for (const [cx, cy, r] of [[W * 0.4, H * 0.93, 60], [W * 0.56, H * 0.97, 46], [W * 0.13, H * 0.1, 40]] as [number, number, number][]) {
+      ctx.beginPath(); ctx.ellipse(cx, cy, r, r * 0.42, 0, 0, 7); ctx.fill();
+    }
+
+    // marker các khu
     for (const z of ZONE_LIST) {
-      const cell = h('div', `cell ${S.zone === z.id ? 'selected' : ''}`);
-      cell.innerHTML = `<div class="ico">${z.icon}</div><div class="nm">${z.name}</div>`;
-      cell.onclick = () => {
+      const pos = MAP_POS[z.id];
+      if (!pos) continue;
+      const m = h('div', `map-marker ${S.zone === z.id ? 'here' : ''}`);
+      m.style.left = pos.x + '%';
+      m.style.top = pos.y + '%';
+      m.innerHTML = `<div class="sign">${z.icon}</div><div class="tag">${z.name}</div>`;
+      m.onclick = () => {
+        sfx.click();
         close();
         const w = worldScene();
         if (w?.travel) w.travel(z.id);
       };
-      grid.append(cell);
+      wrap.append(m);
     }
-    body.append(grid);
-    body.append(h('div', 'hint', 'Đi bộ tới cổng sáng vàng trong màn chơi cũng chuyển khu được nhé.'));
+    body.append(wrap);
   });
 
   // ================= Bạn bè =================

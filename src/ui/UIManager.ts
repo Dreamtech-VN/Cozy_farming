@@ -80,39 +80,65 @@ function buildHud() {
   // tiền tệ + đồng hồ
   const right = h('div', 'hud-currency');
   right.innerHTML = `
-    <div class="pill">🪙 <span id="hud-coins">0</span> <span class="plus" id="coin-plus">+</span></div>
-    <div class="pill">💎 <span id="hud-rubies">0</span> <span class="plus" id="ruby-plus">+</span></div>
+    <div class="pill"><img src="assets/ui/pack/icon_coin.png"> <span id="hud-coins">0</span> <span class="plus" id="coin-plus">＋</span></div>
+    <div class="pill"><img src="assets/ui/pack/icon_ruby.png"> <span id="hud-rubies">0</span> <span class="plus" id="ruby-plus">＋</span></div>
     <div class="hud-clock" id="hud-clock"></div>`;
   top.append(prof, right);
   root().append(top);
   (right.querySelector('#coin-plus') as HTMLElement).onclick = () => openPanel('topup');
   (right.querySelector('#ruby-plus') as HTMLElement).onclick = () => openPanel('topup');
 
-  // cột nút phải
-  const col = h('div', 'hud-right');
-  const buttons: [string, string, string][] = [
-    ['🎒', 'inventory', 'Kho đồ'],
-    ['📜', 'quests', 'Nhiệm vụ'],
-    ['🗺️', 'map', 'Bản đồ'],
-    ['👥', 'social', 'Bạn bè'],
-    ['💬', 'chat', 'Chat'],
-    ['✉️', 'mail', 'Thư'],
-    ['🎁', 'daily', 'Điểm danh'],
-    ['🎡', 'wheel', 'Vòng quay'],
-    ['📖', 'collections', 'Sưu tập'],
-    ['🏆', 'ranking', 'Xếp hạng'],
-    ['😊', 'emotes', 'Biểu cảm'],
-    ['⚙️', 'settings', 'Cài đặt']
-  ];
-  for (const [icon, panel, title] of buttons) {
-    const b = h('button', 'hud-btn', icon);
+  // ---- HUD gọn: 3 nút nhanh + ngăn kéo menu (kiểu Avatar) ----
+  const ICON = (n: string) => `assets/ui/pack/icon_${n}.png`;
+  const quick = h('div', 'hud-quick');
+  const mkBtn = (icon: string, title: string, onClick: () => void, panel?: string) => {
+    const b = h('button', 'hud-btn');
     b.title = title;
-    b.dataset.panel = panel;
-    b.innerHTML = `${icon}<span class="dot"></span>`;
-    b.onclick = () => { sfx.click(); openPanel(panel); };
-    col.append(b);
+    if (panel) b.dataset.panel = panel;
+    b.innerHTML = `<img class="hicon" src="${ICON(icon)}"><span class="dot"></span>`;
+    b.onclick = () => { sfx.click(); onClick(); };
+    return b;
+  };
+
+  // ngăn kéo menu — mọi tính năng nằm trong này
+  const drawer = h('div'); drawer.id = 'menu-drawer';
+  const MENU: [string, string, string][] = [
+    ['inventory', 'Kho đồ', 'inventory'],
+    ['quest', 'Nhiệm vụ', 'quests'],
+    ['social', 'Bạn bè', 'social'],
+    ['chat', 'Chat', 'chat'],
+    ['daily', 'Điểm danh', 'daily'],
+    ['wheel', 'Vòng quay', 'wheel'],
+    ['collection', 'Sưu tập', 'collections'],
+    ['trophy', 'Xếp hạng', 'ranking'],
+    ['emote', 'Biểu cảm', 'emotes'],
+    ['wardrobe', 'Tủ đồ', 'wardrobe'],
+    ['ruby', 'Nạp', 'topup'],
+    ['settings', 'Cài đặt', 'settings']
+  ];
+  for (const [icon, label, panel] of MENU) {
+    const it = h('button', 'menu-item');
+    it.dataset.panel = panel;
+    it.innerHTML = `<img src="${ICON(icon)}"><span>${label}</span><span class="dot"></span>`;
+    it.onclick = () => { sfx.click(); drawer.classList.remove('open'); openPanel(panel); };
+    drawer.append(it);
   }
-  root().append(col);
+  root().append(drawer);
+
+  const menuBtn = mkBtn('menu', 'Menu', () => drawer.classList.toggle('open'));
+  menuBtn.id = 'menu-btn';
+  quick.append(
+    menuBtn,
+    mkBtn('map', 'Bản đồ', () => openPanel('map'), 'map'),
+    mkBtn('mail', 'Thư', () => openPanel('mail'), 'mail')
+  );
+  root().append(quick);
+  // chạm ra ngoài thì đóng ngăn kéo
+  document.addEventListener('pointerdown', e => {
+    if (drawer.classList.contains('open') && !drawer.contains(e.target as Node) && e.target !== menuBtn && !menuBtn.contains(e.target as Node)) {
+      drawer.classList.remove('open');
+    }
+  });
 
   // joystick
   buildJoystick();
@@ -175,11 +201,17 @@ function refreshHud() {
   }
   if (lv) lv.textContent = `Lv.${S.player.level} · ${S.player.exp}/${S.player.level * 100} EXP`;
   // chấm đỏ: nhiệm vụ xong chưa nhận / thư chưa đọc / quà chưa nhận
-  const dot = (panel: string, on: boolean) =>
+  const dot = (panel: string, on: boolean) => {
     document.querySelector(`.hud-btn[data-panel="${panel}"]`)?.classList.toggle('notify', on);
-  dot('quests', S.quests.completed.some(id => !S.quests.claimed.includes(id)));
+    document.querySelector(`.menu-item[data-panel="${panel}"]`)?.classList.toggle('notify', on);
+  };
+  const questsDot = S.quests.completed.some(id => !S.quests.claimed.includes(id));
+  const dailyDot = !S.daily.loginClaimed || !S.daily.checkinDays.includes(new Date().getDate());
+  dot('quests', questsDot);
   dot('mail', S.mail.some(m => !m.read));
-  dot('daily', !S.daily.loginClaimed || !S.daily.checkinDays.includes(new Date().getDate()));
+  dot('daily', dailyDot);
+  // nút menu sáng chấm nếu bên trong có gì cần chú ý
+  document.getElementById('menu-btn')?.classList.toggle('notify', questsDot || dailyDot);
 }
 
 function refreshClock() {
