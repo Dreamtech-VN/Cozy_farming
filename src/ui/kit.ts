@@ -24,7 +24,7 @@ export interface WinOpts { size?: 'small' | 'normal' | 'large'; onClose?: () => 
 
 const openWindows: HTMLElement[] = [];
 
-export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLElement; win: HTMLElement; close: () => void; tabs: (names: string[], onPick: (i: number) => void) => void } {
+export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLElement; win: HTMLElement; close: () => void; tabs: (names: string[], onPick: (i: number) => void, icons?: string[]) => void } {
   const backdrop = h('div', 'win-backdrop');
   const win = h('div', `win ${opts.size === 'small' ? 'small' : opts.size === 'large' ? 'large' : ''}`);
   const head = h('div', 'win-head');
@@ -46,10 +46,12 @@ export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLEleme
   closeBtn.onclick = close;
   backdrop.onclick = e => { if (e.target === backdrop) close(); };
 
-  const tabs = (names: string[], onPick: (i: number) => void) => {
+  const tabs = (names: string[], onPick: (i: number) => void, icons?: string[]) => {
     const bar = h('div', 'win-tabs');
     names.forEach((n, i) => {
-      const t = h('div', `tab ${i === 0 ? 'active' : ''}`, n);
+      const t = h('div', `tab ${i === 0 ? 'active' : ''}`);
+      if (icons?.[i]) t.append(uiIcon(icons[i], 18));
+      t.append(h('span', '', n));
       t.onclick = () => {
         bar.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
         t.classList.add('active');
@@ -94,6 +96,37 @@ export function spr(url: string, sx: number, sy: number, sw: number, sh: number,
 }
 
 export interface SpriteRef { url: string; sx: number; sy: number; sw: number; sh: number }
+
+// ===== Icon UI (Avatar iconmenu/iconshop + Cozy UI pack) =====
+export function uiIcon(name: string, size = 22): HTMLElement {
+  const img = document.createElement('img');
+  img.src = `assets/ui/av/${name}.png`;
+  img.draggable = false;
+  img.style.cssText = `width:${size}px;height:${size}px;object-fit:contain;vertical-align:middle;flex:none`;
+  return img;
+}
+
+// icon tiền tệ (dùng thay 🪙 / 💎)
+export function coinIcon(size = 16): HTMLElement {
+  const img = document.createElement('img');
+  img.src = 'assets/ui/pack/icon_coin.png';
+  img.style.cssText = `width:${size}px;height:${size}px;object-fit:contain;vertical-align:-2px;flex:none`;
+  return img;
+}
+export function rubyIcon(size = 16): HTMLElement {
+  const img = document.createElement('img');
+  img.src = 'assets/ui/pack/icon_ruby.png';
+  img.style.cssText = `width:${size}px;height:${size}px;object-fit:contain;vertical-align:-2px;flex:none`;
+  return img;
+}
+
+// chuỗi HTML giá tiền có icon (dùng trong innerHTML)
+export function priceHtml(xu?: number, ruby?: number): string {
+  const parts: string[] = [];
+  if (xu) parts.push(`<img class="cur" src="assets/ui/pack/icon_coin.png">${fmt(xu)}`);
+  if (ruby) parts.push(`<img class="cur" src="assets/ui/pack/icon_ruby.png">${ruby}`);
+  return parts.join(' ');
+}
 
 // Icon vật phẩm: ưu tiên sprite thật, thiếu mới dùng emoji
 export function iconOf(def: { icon: string; sprite?: SpriteRef }, size = 32): HTMLElement {

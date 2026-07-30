@@ -1,5 +1,5 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, uiIcon, priceHtml } from './kit';
 import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
@@ -63,7 +63,7 @@ export function registerAllPanels() {
 
   // ================= Kho đồ =================
   registerPanel('inventory', () => {
-    const { body, close, tabs } = openWindow('🎒 Kho đồ');
+    const { body, close, tabs } = openWindow('Kho đồ');
     const kinds = [
       ['Tất cả', () => true],
       ['Nông sản', (k: string) => ['crop', 'seed', 'product'].includes(k)],
@@ -96,13 +96,13 @@ export function registerAllPanels() {
     const acts: { icon: string; label: string; cb: () => void }[] = [];
     if (def.sell > 0) {
       acts.push({
-        icon: '🪙', label: `Bán 1 (+${sellPrice(def.sell)} xu)`, cb: () => {
+        icon: '', label: `Bán 1 (+${sellPrice(def.sell)} xu)`, cb: () => {
           if (removeItem(id)) { const g = sellPrice(def.sell); S.wallet.coins += g; S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + g; bus.emit(EV.WALLET); addStat('daily_sold'); if (def.kind === 'crop') addStat('sold_crops'); sfx.coin(); save(); }
         }
       });
       const qty = itemCount(id);
       if (qty > 1) acts.push({
-        icon: '💰', label: `Bán hết x${qty} (+${sellPrice(def.sell, qty)})`, cb: () => {
+        icon: '', label: `Bán hết x${qty} (+${sellPrice(def.sell, qty)} xu)`, cb: () => {
           if (removeItem(id, qty)) { const g = sellPrice(def.sell, qty); S.wallet.coins += g; S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + g; bus.emit(EV.WALLET); addStat('daily_sold', qty); if (def.kind === 'crop') addStat('sold_crops', qty); sfx.coin(); save(); }
         }
       });
@@ -133,7 +133,7 @@ export function registerAllPanels() {
   }
 
   function pickFriendToGift(itemId: string) {
-    const { body, close } = openWindow('🎁 Tặng cho ai?', { size: 'small' });
+    const { body, close } = openWindow('Tặng cho ai?', { size: 'small' });
     if (!S.social.friends.length) body.append(h('div', 'hint', 'Chưa có bạn bè — mở panel Bạn bè để kết bạn nhé!'));
     for (const f of S.social.friends) {
       const r = h('div', 'row');
@@ -146,7 +146,7 @@ export function registerAllPanels() {
 
   // ================= Chọn hạt giống =================
   registerPanel('seedpicker', (data: { plot: number }) => {
-    const { body, close } = openWindow('🌱 Trồng gì đây?', { size: 'small' });
+    const { body, close } = openWindow('Trồng gì đây?', { size: 'small' });
     const grid = h('div', 'grid');
     let has = false;
     for (const c of CROP_LIST) {
@@ -198,8 +198,9 @@ export function registerAllPanels() {
         for (const id of shop.items) {
           const def = item(id);
           const cell = h('div', 'cell');
-          const price = def.rubyBuy ? `💎${def.rubyBuy}` : `🪙${def.buy ?? 0}`;
-          cell.append(iconOf(def), h('div', 'nm', def.name), h('div', 'pr', price));
+          const priceEl = h('div', 'pr');
+          priceEl.innerHTML = priceHtml(def.rubyBuy ? 0 : (def.buy ?? 0), def.rubyBuy);
+          cell.append(iconOf(def), h('div', 'nm', def.name), priceEl);
           cell.onclick = () => {
             if (def.rubyBuy ? spend(0, def.rubyBuy) : spend(def.buy ?? 0)) {
               addItem(id); sfx.coin(); toast(`Đã mua ${def.name}`, def.icon);
@@ -213,7 +214,9 @@ export function registerAllPanels() {
         for (const [id, qty] of sellable) {
           const def = item(id);
           const cell = h('div', 'cell');
-          cell.append(iconOf(def), h('div', 'nm', def.name), h('div', 'qty', `x${qty}`), h('div', 'pr', `+${sellPrice(def.sell)}🪙`));
+          const prEl = h('div', 'pr');
+          prEl.innerHTML = '+' + priceHtml(sellPrice(def.sell));
+          cell.append(iconOf(def), h('div', 'nm', def.name), h('div', 'qty', `x${qty}`), prEl);
           cell.onclick = () => {
             if (removeItem(id)) {
               const g = sellPrice(def.sell);
@@ -239,7 +242,7 @@ export function registerAllPanels() {
   // ---- Tiệm câu: shop riêng — cần câu + mồi câu + vợt ----
   registerPanel('fishingshop', () => {
     if (!atShopZone('fishingshop', 'Tiệm câu Ông Biển')) return;
-    const { body, tabs } = openWindow('🎣 Tiệm câu Ông Biển');
+    const { body, tabs } = openWindow('Tiệm câu Ông Biển');
     let tab = 0;
     const render = () => {
       body.innerHTML = '';
@@ -292,13 +295,15 @@ export function registerAllPanels() {
   });
 
   // ---- shop thời trang chibi (part Avatar) ----
-  const CHIBI_TABS: [string, number][] = [
-    ['💇 Tóc', 50], ['👕 Áo', 20], ['👖 Quần', 10], ['🎩 Mũ', 60], ['👓 Kính', 65], ['🪽 Cánh', 5], ['🖐️ Đồ cầm tay', 70]
+  // [nhãn, z, icon UI]
+  const CHIBI_TABS: [string, number, string][] = [
+    ['Tóc', 50, 'person'], ['Áo', 20, 'shirt'], ['Quần', 10, 'pants'], ['Mũ', 60, 'hat'],
+    ['Kính', 65, 'glasses'], ['Cánh', 5, 'wand'], ['Đồ cầm tay', 70, 'candy']
   ];
 
   registerPanel('fashionshop', () => {
     if (!atShopZone('fashionshop', 'Thời trang Cô Trang')) return;
-    const { body, tabs } = openWindow('👗 Thời trang Cô Trang', { size: 'large' });
+    const { body, tabs } = openWindow('Thời trang Cô Trang', { size: 'large' });
     let tab = 0;
     const render = () => {
       body.innerHTML = '';
@@ -311,8 +316,10 @@ export function registerAllPanels() {
         const owned = isHand ? itemCount(handItemId(p.id)) > 0 : S.chibiWardrobe.includes(p.id);
         const cell = h('div', `cell ${owned ? 'owned' : ''}`);
         const xu = chibiPriceXu(p), ruby = chibiPriceRuby(p);
-        const price = owned && !isHand ? '✅ Đã có' : ruby > 0 ? `💎${ruby}` : `🪙${fmt(xu)}`;
-        cell.append(chibiPreview(p.id, 52), h('div', 'nm', p.name), h('div', 'pr', price));
+        const prEl = h('div', 'pr');
+        if (owned && !isHand) prEl.textContent = 'Đã có';
+        else prEl.innerHTML = ruby > 0 ? priceHtml(0, ruby) : priceHtml(xu);
+        cell.append(chibiPreview(p.id, 52), h('div', 'nm', p.name), prEl);
         cell.onclick = () => {
           if (owned && !isHand) { openPanel('wardrobe'); return; }
           const ok = ruby > 0 ? spend(0, ruby) : spend(xu);
@@ -332,14 +339,14 @@ export function registerAllPanels() {
       }
       body.append(grid);
     };
-    tabs(CHIBI_TABS.map(c => c[0]), i => { tab = i; render(); });
+    tabs(CHIBI_TABS.map(c => c[0]), i => { tab = i; render(); }, CHIBI_TABS.map(c => c[2]));
     render();
   });
 
   // ---- shop nhà & nội thất ----
   registerPanel('houseshop', () => {
     if (!atShopZone('houseshop', 'Nhà đất Chị Lan')) return;
-    const { body, tabs } = openWindow('🏠 Nhà đất Chị Lan', { size: 'large' });
+    const { body, tabs } = openWindow('Nhà đất Chị Lan', { size: 'large' });
     let tab = 0;
     const render = () => {
       body.innerHTML = '';
@@ -523,7 +530,7 @@ export function registerAllPanels() {
   });
 
   registerPanel('wardrobe', () => {
-    const { body } = openWindow('👗 Tủ đồ', { size: 'large' });
+    const { body } = openWindow('Tủ đồ', { size: 'large' });
     openWardrobe(body);
   });
 
@@ -531,7 +538,7 @@ export function registerAllPanels() {
   // ================= Tiệm thú cưng =================
   registerPanel('petshop', () => {
     if (!atShopZone('petshop', 'Tiệm thú cưng')) return;
-    const { body } = openWindow('🐾 Tiệm thú cưng');
+    const { body } = openWindow('Tiệm thú cưng');
     const render = () => {
       body.innerHTML = '';
       body.append(h('div', 'hint', 'Mỗi bé có một công dụng riêng — nuôi được cả ba!'));
@@ -564,7 +571,7 @@ export function registerAllPanels() {
 
   // ================= Thú cưng của tôi =================
   registerPanel('petbag', () => {
-    const { body } = openWindow('🐾 Thú cưng của tôi');
+    const { body } = openWindow('Thú cưng của tôi');
     const render = () => {
       body.innerHTML = '';
       if (!S.pets?.length) {
@@ -607,23 +614,23 @@ export function registerAllPanels() {
     const grid = h('div', 'wd-grid');
     const cell = (icon: string, label: string, cb: () => void) => {
       const c = h('button', 'wd-item');
-      c.append(h('div', 'wd-item-ico', icon), h('div', 'nm', label));
+      c.append(uiIcon(icon, 32), h('div', 'nm', label));
       c.onclick = () => { sfx.click(); cb(); };
       grid.append(c);
     };
-    cell('🎒', 'Túi đồ', () => { close(); openPanel('inventory'); });
-    cell('🏃', 'Chạy', () => { close(); bus.emit('world:selfact', 'run'); });
-    cell('🪑', 'Ngồi', () => { close(); bus.emit('world:selfact', 'sit'); });
-    cell('🛌', 'Nằm', () => { close(); bus.emit('world:selfact', 'lie'); });
-    cell('🐾', 'Thú cưng', () => { close(); openPanel('petbag'); });
-    cell('😊', 'Biểu cảm', () => { close(); openPanel('emotes'); });
+    cell('basket', 'Túi đồ', () => { close(); openPanel('inventory'); });
+    cell('run', 'Chạy', () => { close(); bus.emit('world:selfact', 'run'); });
+    cell('star', 'Ngồi', () => { close(); bus.emit('world:selfact', 'sit'); });
+    cell('star', 'Nằm', () => { close(); bus.emit('world:selfact', 'lie'); });
+    cell('person', 'Thú cưng', () => { close(); openPanel('petbag'); });
+    cell('smile', 'Biểu cảm', () => { close(); openPanel('emotes'); });
     body.append(grid);
   });
 
   // ================= Chạm vào người chơi khác =================
   registerPanel('playermenu', (data: { friend: { id: string; name: string; level: number } }) => {
     const f = data.friend;
-    const { body, close } = openWindow(`👤 ${f.name}`, { size: 'small' });
+    const { body, close } = openWindow(f.name, { size: 'small' });
     const render = () => {
       body.innerHTML = '';
       const aff = affinityOf(f.id);
@@ -639,19 +646,19 @@ export function registerAllPanels() {
       const grid = h('div', 'wd-grid');
       const cell = (icon: string, label: string, cb: () => void) => {
         const c = h('button', 'wd-item');
-        c.append(h('div', 'wd-item-ico', icon), h('div', 'nm', label));
+        c.append(uiIcon(icon, 30), h('div', 'nm', label));
         c.onclick = () => { sfx.click(); cb(); };
         grid.append(c);
       };
-      cell('📋', 'Thông tin', () => openPanel('dialog', {
+      cell('person', 'Thông tin', () => openPanel('dialog', {
         title: `👤 ${f.name}`,
         text: `Cấp độ: ${f.level}\nThiện cảm: ${aff}/100 (${affinityLabel(aff)})\n${isFriend ? 'Đã là bạn bè của bạn.' : 'Chưa kết bạn.'}`
       }));
-      if (!isFriend) cell('🤝', 'Kết bạn', () => { addFriend({ ...f, online: true }); addAffinity(f.id, 10); render(); });
-      cell('💬', 'Nhắn tin', () => { close(); openPanel('chat', { to: f.name }); });
-      cell('🫂', 'Hành động', () => { close(); openPanel('playeract', { friend: f }); });
-      cell('🎁', 'Tặng quà', () => { close(); openPanel('playergift', { friend: f }); });
-      cell('🚫', 'Chặn / Báo cáo', () => openPanel('dialog', {
+      if (!isFriend) cell('group', 'Kết bạn', () => { addFriend({ ...f, online: true }); addAffinity(f.id, 10); render(); });
+      cell('chat', 'Nhắn tin', () => { close(); openPanel('chat', { to: f.name }); });
+      cell('run', 'Hành động', () => { close(); openPanel('playeract', { friend: f }); });
+      cell('box', 'Tặng quà', () => { close(); openPanel('playergift', { friend: f }); });
+      cell('close', 'Chặn / Báo cáo', () => openPanel('dialog', {
         title: '🚫 ' + f.name,
         text: 'Bạn muốn làm gì với người chơi này?',
         actions: [
@@ -674,7 +681,7 @@ export function registerAllPanels() {
   ];
   registerPanel('playeract', (data: { friend: { id: string; name: string } }) => {
     const f = data.friend;
-    const { body, close } = openWindow(`🫂 Hành động với ${f.name}`, { size: 'small' });
+    const { body, close } = openWindow(`Hành động với ${f.name}`, { size: 'small' });
     const grid = h('div', 'wd-grid');
     for (const [icon, label, tpl, aff, kind] of PLAYER_ACTS) {
       const c = h('button', 'wd-item');
@@ -696,7 +703,7 @@ export function registerAllPanels() {
   // ---- tặng quà tăng thiện cảm ----
   registerPanel('playergift', (data: { friend: { id: string; name: string } }) => {
     const f = data.friend;
-    const { body, close } = openWindow(`🎁 Tặng quà cho ${f.name}`, { size: 'small' });
+    const { body, close } = openWindow(`Tặng quà cho ${f.name}`, { size: 'small' });
     const grid = h('div', 'grid');
     const giftable = Object.entries(S.inventory).filter(([id]) => {
       const k = item(id).kind;
@@ -727,7 +734,7 @@ export function registerAllPanels() {
   // ================= Nâng cấp nông cụ =================
   registerPanel('toolupgrade', () => {
     if (!atShopZone('toolupgrade', 'Quầy nâng cấp nông cụ (Bách hóa)')) return;
-    const { body } = openWindow('🛠️ Nâng cấp nông cụ');
+    const { body } = openWindow('Nâng cấp nông cụ');
     const render = () => {
       body.innerHTML = '';
       for (const tid of ['hoe', 'can', 'basket']) {
@@ -769,15 +776,17 @@ export function registerAllPanels() {
     if (!look) return;
     const apply = () => { save(); bus.emit(EV.APPEARANCE); };
 
-    type SlotKey = 'pant' | 'shirt' | 'hair' | 'eyes' | 'hat' | 'glasses' | 'wing';
+    type SlotKey = 'pant' | 'shirt' | 'hair' | 'eyes' | 'hat' | 'glasses' | 'wing' | 'hand';
+    // [icon UI, nhãn, z, khoá, tuỳ chọn]
     const SLOTS: [string, string, number, SlotKey, boolean][] = [
-      ['💇', 'Tóc', 50, 'hair', false],
-      ['👁️', 'Mắt', 40, 'eyes', false],
-      ['🎩', 'Mũ', 60, 'hat', true],
-      ['👓', 'Kính', 65, 'glasses', true],
-      ['👕', 'Áo', 20, 'shirt', false],
-      ['👖', 'Quần', 10, 'pant', false],
-      ['🪽', 'Cánh', 5, 'wing', true]
+      ['person', 'Tóc', 50, 'hair', false],
+      ['smile', 'Mắt', 40, 'eyes', false],
+      ['hat', 'Mũ', 60, 'hat', true],
+      ['glasses', 'Kính', 65, 'glasses', true],
+      ['shirt', 'Áo', 20, 'shirt', false],
+      ['pants', 'Quần', 10, 'pant', false],
+      ['wand', 'Cánh', 5, 'wing', true],
+      ['candy', 'Đồ cầm tay', 70, 'hand', true]
     ];
     let tab = 0;
 
@@ -793,8 +802,8 @@ export function registerAllPanels() {
       SLOTS.forEach(([ico, name, z, key], i) => {
         const cell = h('button', `wd-slot ${i === tab ? 'active' : ''}`);
         const cur = look[key];
-        if (cur) cell.append(chibiHead(cur, 34, z));
-        else cell.append(h('span', 'wd-slot-ico', ico));
+        if (cur) cell.append(z === 70 ? chibiPreview(cur, 32) : chibiHead(cur, 34, z));
+        else cell.append(uiIcon(ico, 28));
         cell.append(h('span', 'wd-slot-name', name));
         cell.onclick = () => { tab = i; render(); };
         (i < 4 ? colL : colR).append(cell);
@@ -807,8 +816,9 @@ export function registerAllPanels() {
       // ----- phải: chia tab + card lưới ô (có cả ô trống như tủ đồ game) -----
       const right = h('div', 'wd-right');
       const tabBar = h('div', 'wd-tabs');
-      SLOTS.forEach(([, name2], i) => {
-        const t = h('div', `tab ${i === tab ? 'active' : ''}`, name2);
+      SLOTS.forEach(([ic2, name2], i) => {
+        const t = h('div', `tab ${i === tab ? 'active' : ''}`);
+        t.append(uiIcon(ic2, 16), h('span', '', name2));
         t.onclick = () => { tab = i; render(); };
         tabBar.append(t);
       });
@@ -821,13 +831,13 @@ export function registerAllPanels() {
       let cells = 0;
       if (optional) {
         const off = h('button', `wd-item ${look[key] === 0 ? 'active' : ''}`);
-        off.append(h('div', 'wd-item-ico', '🚫'), h('div', 'nm', 'Không dùng'));
+        off.append(uiIcon('box', 34), h('div', 'nm', 'Không dùng'));
         off.onclick = () => { look[key] = 0; apply(); render(); };
         grid.append(off); cells++;
       }
       for (const p of owned) {
         const cell = h('button', `wd-item ${look[key] === p.id ? 'active' : ''}`);
-        cell.append(z <= 20 ? chibiPreview(p.id, 44) : chibiHead(p.id, 40, z), h('div', 'nm', p.name));
+        cell.append(z <= 20 || z === 70 ? chibiPreview(p.id, 44) : chibiHead(p.id, 40, z), h('div', 'nm', p.name));
         cell.onclick = () => { look[key] = p.id; apply(); render(); };
         grid.append(cell); cells++;
       }
