@@ -31,10 +31,10 @@ export function currentWeather(): Weather { return weather; }
 
 export function season(): { id: string; name: string; icon: string } {
   const m = new Date().getMonth() + 1;
-  if (m >= 3 && m <= 5) return { id: 'spring', name: 'Xuân', icon: '🌸' };
-  if (m >= 6 && m <= 8) return { id: 'summer', name: 'Hạ', icon: '☀️' };
-  if (m >= 9 && m <= 11) return { id: 'fall', name: 'Thu', icon: '🍁' };
-  return { id: 'winter', name: 'Đông', icon: '❄️' };
+  if (m >= 3 && m <= 5) return { id: 'spring', name: 'Xuân', icon: 'w_flower' };
+  if (m >= 6 && m <= 8) return { id: 'summer', name: 'Hạ', icon: 'w_sunny' };
+  if (m >= 9 && m <= 11) return { id: 'fall', name: 'Thu', icon: 'w_leaf' };
+  return { id: 'winter', name: 'Đông', icon: 'w_snow' };
 }
 
 export function initTime() {
@@ -55,4 +55,5 @@ function rollWeather() {
   }
 }
 
-export const WEATHER_ICON: Record<Weather, string> = { sunny: '☀️', rain: '🌧️', cloudy: '⛅' };
+// tên icon (xem ICON_SRC trong ui/kit.ts) — không dùng emoji
+export const WEATHER_ICON: Record<Weather, string> = { sunny: 'w_sunny', rain: 'w_rain', cloudy: 'w_cloudy' };

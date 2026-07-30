@@ -290,7 +290,7 @@ export class WorldScene extends Phaser.Scene {
         const P = FARM_POND;
         this.add.image(P.x, P.y, 'lt_pond').setDisplaySize(P.w, P.h).setDepth(-80);
         this.pondEllipse = new Phaser.Geom.Ellipse(P.x, P.y + 4, P.w * 0.94, P.h * 0.84);
-        this.add.text(P.x, P.y - P.h / 2 - 10, '🐟 Hồ cá', { fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(2);
+        this.add.text(P.x, P.y - P.h / 2 - 10, 'Hồ cá', { fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(2);
       }
       return;
     }
@@ -382,7 +382,7 @@ export class WorldScene extends Phaser.Scene {
         this.add.image(cx + 5.4 * T, cy - 2.6 * T, 'pond_deco', 10).setDepth(-49);
         this.add.image(cx - 5.9 * T, cy + 2 * T, 'deco_bush').setOrigin(0.5, 0.8).setDepth((cy + 2 * T));
         this.add.image(cx + 5.7 * T, cy + 1.6 * T, 'deco_bush').setOrigin(0.5, 0.8).setDepth((cy + 1.6 * T));
-        this.add.text(cx, cy - 5.8 * T, '🐟 Hồ cá', { fontSize: '8px', color: '#fff', backgroundColor: '#00000080', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2);
+        this.add.text(cx, cy - 5.8 * T, 'Hồ cá', { fontSize: '8px', color: '#fff', backgroundColor: '#00000080', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2);
       }
     }
   }
@@ -444,7 +444,7 @@ export class WorldScene extends Phaser.Scene {
     g.fillRect(gx + 3 * T - 8, gy - 44, 8, 34);
     g.fillStyle(0xa9714b);
     g.fillRoundedRect(gx - 3 * T - 6, gy - 56, 6 * T + 12, 16, 5);
-    const title = this.add.text(gx, gy - 48, `${this.zone.icon} ${ZONES[this.zone.gateTo ?? '']?.name ?? ''}`, {
+    const title = this.add.text(gx, gy - 48, ZONES[this.zone.gateTo ?? '']?.name ?? '', {
       fontSize: '9px', color: '#fff8e8', fontStyle: 'bold'
     }).setOrigin(0.5).setDepth(gy - 39);
     void title;
@@ -595,7 +595,7 @@ export class WorldScene extends Phaser.Scene {
           onYoyo: () => guest.setDir(2), onRepeat: () => guest.setDir(3)
         });
       }
-      this.add.text(size * T / 2, T, '🎉 TIỆC TÙNG 🎉', { fontSize: '10px', color: '#fff' }).setOrigin(0.5).setDepth(600);
+      this.add.text(size * T / 2, T, 'TIỆC TÙNG', { fontSize: '10px', color: '#fff' }).setOrigin(0.5).setDepth(600);
     }
   }
 
@@ -612,7 +612,7 @@ export class WorldScene extends Phaser.Scene {
       c.add(img);
     } else {
       const rect = this.add.rectangle(0, 0, def.w * T - 2, def.h * T - 2, def.color).setOrigin(0).setStrokeStyle(1, 0x00000060);
-      const label = this.add.text(def.w * T / 2, def.h * T / 2, def.icon, { fontSize: '12px' }).setOrigin(0.5);
+      const label = this.add.text(def.w * T / 2, def.h * T / 2, def.name, { fontSize: '7px', color: '#fff8e8' }).setOrigin(0.5);
       c.add([rect, label]);
     }
     if (def.category === 'painting') c.setY(0.5 * T).setDepth(10);
@@ -620,7 +620,7 @@ export class WorldScene extends Phaser.Scene {
       // cá bơi trong hồ
       const n = Math.min(S.house.aquarium.length, 5);
       for (let i = 0; i < n; i++) {
-        const fishDot = this.add.text(4 + i * 9, 4, '🐟', { fontSize: '7px' });
+        const fishDot = this.add.text(4 + i * 9, 4, '•', { fontSize: '9px', color: '#7ec8e3' });
         c.add(fishDot);
         this.tweens.add({ targets: fishDot, x: `+=${6}`, duration: 700 + i * 150, yoyo: true, repeat: -1 });
       }
@@ -635,7 +635,9 @@ export class WorldScene extends Phaser.Scene {
     for (const p of this.zone.portals) {
       const px = p.x * T, py = p.y * T;
       this.add.circle(px, py, 10, 0xffe066, 0.35).setDepth(1);
-      this.add.text(px, py - 14, `${p.icon}`, { fontSize: '12px' }).setOrigin(0.5).setDepth(2);
+      // mũi tên chỉ lối ra thay cho emoji
+      const arrow = this.add.triangle(px, py - 14, 0, 8, 5, 0, 10, 8, 0xffd43b).setOrigin(0.5).setDepth(2);
+      this.tweens.add({ targets: arrow, y: py - 18, duration: 620, yoyo: true, repeat: -1, ease: 'sine.inOut' });
       this.add.text(px, py + 12, p.label, { fontSize: '7px', color: '#fff', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2);
     }
   }
@@ -741,7 +743,7 @@ export class WorldScene extends Phaser.Scene {
     g.fillStyle(0xc9a26b, 0.25); g.fillRect(x * T, y * T, w * T, h * T);
     // nhà chuồng là building HD trong decor; ở đây chỉ vẽ sân + bảng tên
     const lvl = S.livestock.barnLevel;
-    const barnLabel = lvl === 0 ? '🏚️ Xây chuồng' : `🐄 Chuồng thú cấp ${lvl}`;
+    const barnLabel = lvl === 0 ? 'Xây chuồng' : `Chuồng thú cấp ${lvl}`;
     this.add.text((x + w / 2) * T, (y - 0.4) * T, barnLabel, { fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(3000);
 
     for (const a of S.livestock.animals) this.spawnAnimal(a.id, a.type);
@@ -770,7 +772,7 @@ export class WorldScene extends Phaser.Scene {
       const a = S.livestock.animals.find(v => v.id === id);
       if (a && livestock.hasProduct(a) && !spr.getData('mark')) {
         spr.setData('mark', true);
-        const m = this.add.text(spr.x, spr.y - 14, '❗', { fontSize: '10px' }).setOrigin(0.5).setDepth(3000);
+        const m = this.add.text(spr.x, spr.y - 14, '!', { fontSize: '12px', fontStyle: 'bold', color: '#ffd43b', stroke: '#3d2c05', strokeThickness: 3 }).setOrigin(0.5).setDepth(3000);
         spr.setData('markObj', m);
       }
       const m = spr.getData('markObj') as Phaser.GameObjects.Text | undefined;
@@ -968,7 +970,7 @@ export class WorldScene extends Phaser.Scene {
           bus.emit(EV.OPEN_PANEL, {
             panel: 'dialog',
             data: {
-              title: '📦 Nội thất', text: 'Bạn muốn làm gì?',
+              title: 'Nội thất', text: 'Bạn muốn làm gì?',
               actions: [{ icon: '', ui: 'basket', label: 'Thu dọn về kho', cb: () => import('@/systems/housing').then(h => h.pickupFurniture(placedId)) }]
             }
           });
@@ -1027,17 +1029,17 @@ export class WorldScene extends Phaser.Scene {
         cb: () => bus.emit(EV.OPEN_PANEL, {
           panel: 'dialog',
           data: {
-            title: '🟫 Mua đất', text: `Mở thêm 1 ô đất với giá ${farming.plotPrice()} xu?`,
+            title: 'Mua đất', text: `Mở thêm 1 ô đất với giá ${farming.plotPrice()} xu?`,
             actions: [{ icon: '', ui: 'coin', label: 'Mua', cb: () => { farming.buyPlot(); this.refreshFarm(); } }]
           }
         })
       });
-      if (p.state === 'empty') acts.push({ icon: '⛏️', sprite: TOOL_ICON.hoe, label: 'Cuốc đất', cb: () => this.doTill(pi) });
-      if (p.state === 'tilled') acts.push({ icon: '🌱', sprite: TOOL_ICON.seed, label: 'Trồng cây', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'seedpicker', data: { plot: pi } }) });
+      if (p.state === 'empty') acts.push({ icon: '', sprite: TOOL_ICON.hoe, label: 'Cuốc đất', cb: () => this.doTill(pi) });
+      if (p.state === 'tilled') acts.push({ icon: '', sprite: TOOL_ICON.seed, label: 'Trồng cây', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'seedpicker', data: { plot: pi } }) });
       if (p.state === 'planted') {
-        if (farming.isRipe(p)) acts.push({ icon: '🧺', sprite: TOOL_ICON.basket, label: 'Thu hoạch', cb: () => this.doHarvest(pi) });
+        if (farming.isRipe(p)) acts.push({ icon: '', sprite: TOOL_ICON.basket, label: 'Thu hoạch', cb: () => this.doHarvest(pi) });
         else {
-          if (!p.watered) acts.push({ icon: '💧', sprite: TOOL_ICON.can, label: 'Tưới nước', cb: () => this.doWater(pi) });
+          if (!p.watered) acts.push({ icon: '', sprite: TOOL_ICON.can, label: 'Tưới nước', cb: () => this.doWater(pi) });
           if (!p.fertilized) acts.push({ icon: '', sprite: { url: 'assets/farm/items.png', sx: 32, sy: 96, sw: 16, sh: 16 }, label: 'Bón phân', cb: () => farming.fertilize(pi) });
         }
       }
@@ -1102,7 +1104,7 @@ export class WorldScene extends Phaser.Scene {
 
     // câu cá
     if (this.nearWater()) {
-      if (this.fishingState === 'idle') acts.push({ icon: '🎣', sprite: TOOL_ICON.rod, label: 'Câu cá', cb: () => this.startFishing() });
+      if (this.fishingState === 'idle') acts.push({ icon: '', sprite: TOOL_ICON.rod, label: 'Câu cá', cb: () => this.startFishing() });
       else acts.push({ icon: '', ui: 'rod', label: 'Kéo cần!', cb: () => this.reelFish() });
     }
     return acts;
@@ -1115,7 +1117,7 @@ export class WorldScene extends Phaser.Scene {
     bus.emit(EV.OPEN_PANEL, {
       panel: 'dialog',
       data: {
-        title: `💬 ${def.name}`,
+        title: def.name,
         text: def.lines[Math.floor(Math.random() * def.lines.length)],
         actions: acts
       }
@@ -1139,6 +1141,13 @@ export class WorldScene extends Phaser.Scene {
       stroke: '#3d2c05', strokeThickness: 3
     }).setOrigin(0.5).setDepth(7001);
     this.tweens.add({ targets: t, y: y - (big ? 44 : 30), alpha: 0, duration: 950, ease: 'cubic.out', onComplete: () => t.destroy() });
+  }
+
+  // ảnh nhỏ bay lên (thay emoji ❤️/💛)
+  private fxImage(x: number, y: number, texture: string) {
+    const big = !!this.zone.bg;
+    const img = this.add.image(x, y, texture).setScale(big ? 2.4 : 1.6).setDepth(7001);
+    this.tweens.add({ targets: img, y: y - (big ? 44 : 30), alpha: 0, duration: 950, ease: 'cubic.out', onComplete: () => img.destroy() });
   }
 
   // chữ bay kèm sprite thật (thay emoji): [icon] +text
@@ -1221,7 +1230,7 @@ export class WorldScene extends Phaser.Scene {
           this.tweens.add({ targets: this.player, angle: side * -6, duration: 260, yoyo: true, hold: 260 });
           // tim bay từ mình sang đối phương
           this.time.delayedCall(320, () => {
-            const heart = this.add.text(this.player.x, this.player.y - headY, '❤️', { fontSize: big ? '18px' : '12px' })
+            const heart = this.add.image(this.player.x, this.player.y - headY, 'fx_heart').setScale(big ? 3 : 2)
               .setOrigin(0.5).setDepth(9000);
             this.tweens.add({
               targets: heart, x: tx, y: ty - headY - 14, alpha: 0, duration: 900, ease: 'sine.out',
@@ -1243,7 +1252,7 @@ export class WorldScene extends Phaser.Scene {
             target.sprite.setFace('laugh', 1500);
             this.tweens.add({ targets: [this.player, target.sprite], x: `+=${side * 3}`, duration: 110, yoyo: true, repeat: 2 });
             for (let i = 0; i < 3; i++) {
-              this.time.delayedCall(i * 180, () => this.fxFloat((this.player.x + tx) / 2, ty - headY + i * 6, '❤️', '#ff8787'));
+              this.time.delayedCall(i * 180, () => this.fxImage((this.player.x + tx) / 2, ty - headY + i * 6, 'fx_heart'));
             }
           });
           this.time.delayedCall(1100, () => {
@@ -1266,7 +1275,7 @@ export class WorldScene extends Phaser.Scene {
                   sfx.error();
                   target.sprite.setFace('hurt');          // mặt đau lúc trúng đòn
                   this.fxBurst(tx, ty - headY * 0.4, 0xffd43b, 12);
-                  this.fxFloat(tx, ty - headY, '💢', '#ff8787');
+                  this.fxBurst(tx, ty - headY, 0xff8787, 8);
                   // văng ra sau rồi ngã nằm sõng soài
                   this.tweens.add({
                     targets: [target.sprite, target.label], x: `-=${side * 46}`, duration: 220, ease: 'quad.out'
@@ -1279,7 +1288,7 @@ export class WorldScene extends Phaser.Scene {
                       target.sprite.setAngle(0);
                       this.fxBurst(target.sprite.x, target.sprite.y, 0xd9c184, 8);   // bụi khi tiếp đất
                       // sao xoay quanh đầu lúc nằm
-                      const stars = this.add.text(target.sprite.x, target.sprite.y - headY * 0.45, '💫', {
+                      const stars = this.add.text(target.sprite.x, target.sprite.y - headY * 0.45, '✦', {
                         fontSize: big ? '16px' : '11px'
                       }).setOrigin(0.5).setDepth(9000);
                       this.tweens.add({ targets: stars, alpha: 0.3, duration: 420, yoyo: true, repeat: 2 });
@@ -1294,7 +1303,7 @@ export class WorldScene extends Phaser.Scene {
                         this.time.delayedCall(500, () => {
                           target.sprite.play('idle');
                           target.busy = false;
-                          this.fxFloat(target.sprite.x, target.sprite.y - headY, '😤', '#ffd43b');
+                          this.fxBurst(target.sprite.x, target.sprite.y - headY, 0xffd43b, 8);
                         });
                       });
                     }
@@ -1313,7 +1322,7 @@ export class WorldScene extends Phaser.Scene {
           this.time.delayedCall(300, () => {
             // tay vỗ nhẹ 2 cái -> đối phương gật gù
             this.tweens.add({ targets: target.sprite, y: `-=4`, duration: 160, yoyo: true, repeat: 1 });
-            this.fxFloat(tx, ty - headY, '💛', '#ffd43b');
+            this.fxImage(tx, ty - headY, 'fx_heart');
             target.sprite.play('cheer');
             this.time.delayedCall(500, () => target.sprite.setFace('happy', 1200));   // được an ủi thì tươi lại
             this.time.delayedCall(800, () => { target.sprite.play('idle'); target.busy = false; });
@@ -1329,14 +1338,14 @@ export class WorldScene extends Phaser.Scene {
   private selfAct(kind: string) {
     if (kind === 'run') {
       this.running = !this.running;
-      toast(this.running ? 'Bật chế độ chạy 🏃' : 'Tắt chế độ chạy', 'runner');
+      toast(this.running ? 'Bật chế độ chạy' : 'Tắt chế độ chạy', 'runner');
       return;
     }
     if (kind === 'sit' || kind === 'lie') {
       this.busy = true;
       this.player.play(kind === 'sit' ? 'sit' : 'lie');
       this.player.setFace(kind === 'lie' ? 'wink' : 'happy', 2500);   // nằm thì lim dim, ngồi thì thoải mái
-      toast(kind === 'sit' ? 'Ngồi nghỉ một chút~' : 'Nằm thư giãn~', kind === 'sit' ? '🪑' : '🛌');
+      toast(kind === 'sit' ? 'Ngồi nghỉ một chút~' : 'Nằm thư giãn~', kind === 'sit' ? 'sit' : 'lie');
       // đứng dậy khi di chuyển
       const stand = this.time.addEvent({ delay: 200, loop: true, callback: () => {
         if (Math.hypot(virtualInput.x, virtualInput.y) > 0.25 ||
@@ -1400,7 +1409,7 @@ export class WorldScene extends Phaser.Scene {
     this.addFootprint(PETHOUSE_POS.x, baseY, img.displayWidth * 0.72, 22);
     // ổ nệm + bảng tên
     this.add.image(PETHOUSE_POS.x + 82, baseY - 4, 'lt_petbed').setOrigin(0.5, 1).setDepth(baseY - 4);
-    this.add.text(PETHOUSE_POS.x, baseY - img.displayHeight - 6, '🐾 Nhà thú cưng', {
+    this.add.text(PETHOUSE_POS.x, baseY - img.displayHeight - 6, 'Nhà thú cưng', {
       fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 }
     }).setOrigin(0.5).setDepth(3000);
   }
@@ -1474,7 +1483,7 @@ export class WorldScene extends Phaser.Scene {
         text: def.perkFull,
         actions: [
           {
-            icon: this.petWalk ? '🏠' : '🦮', label: this.petWalk ? 'Cho về nhà' : 'Dắt đi dạo',
+            icon: '', ui: this.petWalk ? 'house' : 'pet', label: this.petWalk ? 'Cho về nhà' : 'Dắt đi dạo',
             cb: () => {
               this.petWalk = !this.petWalk;
               this.tweens.killTweensOf(this.pet!);
@@ -1483,7 +1492,7 @@ export class WorldScene extends Phaser.Scene {
           },
           {
             icon: '', ui: 'heart', label: 'Vuốt ve', cb: () => {
-              if (this.pet) this.fxFloat(this.pet.x, this.pet.y - 54, '❤️', '#ff8787');
+              if (this.pet) this.fxImage(this.pet.x, this.pet.y - 54, 'fx_heart');
               toast(`${def.name} kêu vui vẻ~`, def.icon);
             }
           }
@@ -1573,7 +1582,7 @@ export class WorldScene extends Phaser.Scene {
           this.fxFloatIcon(x, y - 10, 'items16', 71, '+1 Đá');
         } else {
           m.addRubies(1);
-          toast('Đào trúng 1 Ruby! 💎', 'ruby');
+          toast('Đào trúng 1 Ruby!', 'ruby');
         }
         m.addStat('dug');
       });
@@ -1647,7 +1656,7 @@ export class WorldScene extends Phaser.Scene {
     this.busy = true;
     this.player.play('water', () => {
       this.busy = false;
-      if (farming.water(i)) { const c = this.plotCenter(i); this.fxBurst(c.x, c.y, 0x4aa5d9, 8); this.fxFloat(c.x, c.y - 8, '💧', '#74c0fc'); }
+      if (farming.water(i)) { const c = this.plotCenter(i); this.fxBurst(c.x, c.y, 0x4aa5d9, 10); }
       this.refreshFarm();
     });
   }
@@ -1672,7 +1681,7 @@ export class WorldScene extends Phaser.Scene {
       bus.emit(EV.OPEN_PANEL, {
         panel: 'dialog',
         data: {
-          title: '🏠 Nhà riêng', text: 'Bạn chưa có nhà. Mua nhà gỗ nhỏ với 2000 xu?',
+          title: 'Nhà riêng', text: 'Bạn chưa có nhà. Mua nhà gỗ nhỏ với 2000 xu?',
           actions: [{ icon: '', ui: 'coin', label: 'Mua nhà (2000 xu)', cb: () => import('@/systems/housing').then(h => { if (h.buyHouse()) this.travel('house'); }) }]
         }
       });

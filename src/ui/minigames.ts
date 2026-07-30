@@ -84,16 +84,16 @@ export function registerMinigames() {
       c.onclick = () => {
         if (over || board[i] !== 0) return;
         board[i] = 1; render(); sfx.click();
-        if (lines(i, 1)) { over = true; status.textContent = '🎉 Bạn thắng!'; rewardWin(200, 'caroWins'); return; }
+        if (lines(i, 1)) { over = true; status.textContent = 'Bạn thắng!'; rewardWin(200, 'caroWins'); return; }
         if (!board.includes(0)) { over = true; status.textContent = 'Hòa!'; return; }
         const m = aiMove();
         board[m] = 2; render();
-        if (lines(m, 2)) { over = true; status.textContent = '😢 Máy thắng rồi...'; sfx.lose(); }
+        if (lines(m, 2)) { over = true; status.textContent = 'Máy thắng rồi...'; sfx.lose(); }
       };
       cells.push(c);
       grid.append(c);
     }
-    const reset = btn('🔄 Ván mới', 'blue', () => { board = new Array(N * N).fill(0); over = false; status.textContent = 'Lượt của bạn!'; render(); });
+    const reset = btn('Ván mới', 'blue', () => { board = new Array(N * N).fill(0); over = false; status.textContent = 'Lượt của bạn!'; render(); });
     const bar = h('div');
     bar.style.cssText = 'display:flex;justify-content:center;gap:10px;margin-top:8px';
     bar.append(reset);
@@ -106,20 +106,20 @@ export function registerMinigames() {
     addStat('daily_minigame');
     const status = h('div', 't1', 'Chọn kéo, búa hoặc bao! Thắng +50 xu');
     status.style.cssText = 'text-align:center;margin-bottom:10px';
-    const show = h('div', '', '❔ vs ❔');
+    const show = h('div', '', '? vs ?');
     show.style.cssText = 'text-align:center;font-size:44px;margin:10px 0';
     const bar = h('div');
     bar.style.cssText = 'display:flex;justify-content:center;gap:10px';
-    const opts = [['✌️', 'Kéo'], ['✊', 'Búa'], ['🖐️', 'Bao']] as const;
-    opts.forEach(([icon, name], i) => {
-      bar.append(btn(`${icon} ${name}`, 'gold', () => {
+    const opts = ['Kéo', 'Búa', 'Bao'] as const;
+    opts.forEach((name, i) => {
+      bar.append(btn(name, 'gold', () => {
         const ai = Math.floor(Math.random() * 3);
-        show.textContent = `${icon} vs ${opts[ai][0]}`;
+        show.textContent = `${name} vs ${opts[ai]}`;
         if (ai === i) { status.textContent = 'Hòa! Chơi lại nào~'; return; }
         // kéo(0) thắng bao(2); búa(1) thắng kéo(0); bao(2) thắng búa(1)
         const win = (i === 0 && ai === 2) || (i === 1 && ai === 0) || (i === 2 && ai === 1);
-        if (win) { status.textContent = '🎉 Bạn thắng!'; rewardWin(50, 'rpsWins'); }
-        else { status.textContent = '😢 Thua rồi!'; sfx.lose(); }
+        if (win) { status.textContent = 'Bạn thắng!'; rewardWin(50, 'rpsWins'); }
+        else { status.textContent = 'Thua rồi!'; sfx.lose(); }
       }));
     });
     body.append(status, show, bar);
@@ -245,8 +245,8 @@ export function registerMinigames() {
       board[from] = null;
       if (captured?.toLowerCase() === 'k') {
         over = true;
-        if (isRed(captured)) { status.textContent = '😢 Mất tướng — thua rồi!'; sfx.lose(); }
-        else { status.textContent = '🎉 Bắt được tướng — bạn thắng!'; rewardWin(500, 'xiangqiWins'); }
+        if (isRed(captured)) { status.textContent = 'Mất tướng — thua rồi!'; sfx.lose(); }
+        else { status.textContent = 'Bắt được tướng — bạn thắng!'; rewardWin(500, 'xiangqiWins'); }
       }
     };
 
@@ -262,7 +262,7 @@ export function registerMinigames() {
           if (!best || score > best.score) best = { from: i, to: m, score };
         }
       }
-      if (!best) { over = true; status.textContent = '🎉 Máy hết nước đi — bạn thắng!'; rewardWin(500, 'xiangqiWins'); render(); return; }
+      if (!best) { over = true; status.textContent = 'Máy hết nước đi — bạn thắng!'; rewardWin(500, 'xiangqiWins'); render(); return; }
       doMove(best.from, best.to);
       if (!over) status.textContent = 'Lượt của bạn (Đỏ)';
       render();
@@ -287,7 +287,7 @@ export function registerMinigames() {
       cells.push(c);
       grid.append(c);
     }
-    const reset = btn('🔄 Ván mới', 'blue', () => { setup(); sel = -1; legal = []; over = false; status.textContent = 'Lượt của bạn (Đỏ)'; render(); });
+    const reset = btn('Ván mới', 'blue', () => { setup(); sel = -1; legal = []; over = false; status.textContent = 'Lượt của bạn (Đỏ)'; render(); });
     const bar = h('div');
     bar.style.cssText = 'display:flex;justify-content:center;margin-top:8px';
     bar.append(reset);
@@ -299,7 +299,7 @@ export function registerMinigames() {
   registerPanel('charcreate', () => {
     // panel cố định bên phải, không phải cửa sổ
     const wrap = h('div', 'cc-panel');
-    const head = h('div', 'win-head', '✨ Tạo nhân vật');
+    const head = h('div', 'win-head', 'Tạo nhân vật');
     const bodyEl = h('div', 'cc-body');
     wrap.append(head, bodyEl);
     document.getElementById('ui-root')!.append(wrap);
@@ -319,7 +319,7 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
 
   // tên
   const nameRow = h('div', 'cc-row');
-  nameRow.append(h('div', 'lbl', '📛 Tên nhân vật'));
+  nameRow.append(h('div', 'lbl', 'Tên nhân vật'));
   const nameInput = h('input', 'ui-input') as HTMLInputElement;
   nameInput.placeholder = 'Nhập tên (2-12 ký tự)';
   nameInput.maxLength = 12;
@@ -327,7 +327,7 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   nameRow.append(nameInput);
   body.append(nameRow);
 
-  const startBtn = btn('🌾 BẮT ĐẦU CUỘC SỐNG MỚI!', 'gold', () => {
+  const startBtn = btn('BẮT ĐẦU CUỘC SỐNG MỚI!', 'gold', () => {
     const name = nameInput.value.trim();
     if (name.length < 2) { toast('Tên cần ít nhất 2 ký tự nha!', 'alert'); return; }
     S.player.name = name;
@@ -350,9 +350,9 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
     };
 
     // giới tính (data Avatar: 1 = nam, 2 = nữ)
-    let sec = section('🚻 Giới tính');
+    let sec = section('Giới tính');
     const gchips = h('div', 'chips');
-    const genders: [number, string][] = [[1, '👦 Nam'], [2, '👧 Nữ']];
+    const genders: [number, string][] = [[1, 'Nam'], [2, 'Nữ']];
     for (const [g, lbl] of genders) {
       const c = h('div', `chip ${look.gender === g ? 'active' : ''}`, lbl);
       c.onclick = () => {
@@ -366,12 +366,12 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
 
     // mỗi mục 3 lựa chọn đơn giản nhất (mũ/kính có thêm "Không")
     const SLOTS: [string, number, 'hair' | 'eyes' | 'shirt' | 'pant' | 'hat' | 'glasses', boolean][] = [
-      ['💇 Tóc', 50, 'hair', false],
-      ['👁️ Mắt', 40, 'eyes', false],
-      ['👕 Áo', 20, 'shirt', false],
-      ['👖 Quần', 10, 'pant', false],
-      ['🎩 Mũ', 60, 'hat', true],
-      ['👓 Kính', 65, 'glasses', true]
+      ['Tóc', 50, 'hair', false],
+      ['Mắt', 40, 'eyes', false],
+      ['Áo', 20, 'shirt', false],
+      ['Quần', 10, 'pant', false],
+      ['Mũ', 60, 'hat', true],
+      ['Kính', 65, 'glasses', true]
     ];
     for (const [label, z, slot, optional] of SLOTS) {
       const opts = simplestList(z, look.gender, 3);

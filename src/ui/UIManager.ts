@@ -240,7 +240,8 @@ function refreshClock() {
   const hh = Math.floor(gameHour());
   const mm = Math.floor((gameHour() - hh) * 60);
   const sz = season();
-  el.innerHTML = `${WEATHER_ICON[currentWeather()]} ${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}<br>${sz.icon} ${sz.name}`;
+  el.innerHTML = `<img class="wx" src="assets/ui/act/${WEATHER_ICON[currentWeather()]}.png">${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}` +
+    `<br><img class="wx" src="assets/ui/act/${sz.icon}.png">${sz.name}`;
 }
 
 // ================= Joystick cảm ứng =================
