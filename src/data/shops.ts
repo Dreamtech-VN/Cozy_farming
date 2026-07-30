@@ -9,7 +9,7 @@ export interface ShopDef {
   icon: string;
   items: string[];         // itemId có bán (giá lấy từ ITEMS)
   buysKinds: string[];     // loại vật phẩm shop thu mua
-  special?: 'fashion' | 'house' | 'fishing';
+  special?: 'fashion' | 'house' | 'fishing' | 'barber' | 'salon';
 }
 
 export const SHOPS: Record<string, ShopDef> = {
@@ -30,6 +30,14 @@ export const SHOPS: Record<string, ShopDef> = {
   shop_fashion: {
     id: 'shop_fashion', name: 'Thời trang Cô Trang', icon: '👗',
     items: [], buysKinds: [], special: 'fashion'
+  },
+  shop_barber: {
+    id: 'shop_barber', name: 'Tiệm cắt tóc Anh Phong', icon: '💈',
+    items: [], buysKinds: [], special: 'barber'
+  },
+  shop_salon: {
+    id: 'shop_salon', name: 'Viện thẩm mỹ Cô Diễm', icon: '💄',
+    items: [], buysKinds: [], special: 'salon'
   },
   shop_gift: {
     id: 'shop_gift', name: 'Tiệm quà Anh Quà', icon: '🎁',

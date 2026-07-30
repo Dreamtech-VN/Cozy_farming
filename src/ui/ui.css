@@ -563,3 +563,6 @@ img.cur { width: 15px; height: 15px; object-fit: contain; vertical-align: -3px; 
 /* thân cửa sổ chứa túi đồ: co giãn để lưới cuộn được, chân khung luôn thấy */
 .win-body:has(> .bag-wrap), .win-body:has(> .bag-tabs) { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
 .ch-main:has(> .bag-tabs) { overflow: hidden; }
+
+/* tiệm cắt tóc / viện thẩm mỹ: chỉ có nhân vật bên trái, không có ô trang bị */
+.wd-left.stylist-left { justify-content: center; }

@@ -251,7 +251,8 @@ export function registerAllPanels() {
     shop_seed: 'farm', shop_general: 'town', shop_house: 'town',
     shop_fishing: 'beach', shop_fashion: 'mall', shop_gift: 'mall',
     fishingshop: 'beach', toolupgrade: 'town', fashionshop: 'mall', petshop: 'town',
-    houseshop: 'town', animalshop: 'farm'
+    houseshop: 'town', animalshop: 'farm',
+    shop_barber: 'mall', shop_salon: 'mall', barbershop: 'mall', salonshop: 'mall'
   };
   function atShopZone(key: string, name: string): boolean {
     const z = SHOP_ZONE[key];
@@ -268,6 +269,8 @@ export function registerAllPanels() {
     if (shop.special === 'fashion') return openPanel('fashionshop');
     if (shop.special === 'house') return openPanel('houseshop');
     if (shop.special === 'fishing') return openPanel('fishingshop');
+    if (shop.special === 'barber') return openPanel('barbershop');
+    if (shop.special === 'salon') return openPanel('salonshop');
 
     const { body, tabs } = openWindow(`${shop.icon} ${shop.name}`);
     let mode = 0;
@@ -377,7 +380,7 @@ export function registerAllPanels() {
   // ---- shop thời trang chibi (part Avatar) ----
   // [nhãn, z, icon UI]
   const CHIBI_TABS: [string, number, string][] = [
-    ['Skin', -1, 'star'], ['Tóc', 50, 'person'], ['Áo', 20, 'shirt'], ['Quần', 10, 'pants'],
+    ['Skin', -1, 'star'], ['Áo', 20, 'shirt'], ['Quần', 10, 'pants'],
     ['Mũ', 60, 'hat'], ['Kính', 65, 'glasses'], ['Cầm tay', 70, 'candy']
   ];
 
@@ -439,6 +442,81 @@ export function registerAllPanels() {
     tabs(CHIBI_TABS.map(c => c[0]), i => { tab = i; render(); }, CHIBI_TABS.map(c => c[2]));
     render();
   });
+
+  // ================= Tiệm cắt tóc & Viện thẩm mỹ =================
+  // Đổi kiểu tóc / đôi mắt ngay tại ghế: kiểu đã làm rồi thì đổi miễn phí,
+  // kiểu mới phải trả tiền cho thợ.
+  // tên part mắt trong data Avatar không dấu -> hiển thị lại cho tử tế
+  const EYE_NAME: Record<string, string> = {
+    'đen': 'Mắt đen', 'xanh': 'Mắt xanh', 'tím nhạt': 'Mắt tím nhạt',
+    'Mat Buon': 'Mắt buồn', 'Mat Vui': 'Mắt vui', 'Mat nhay': 'Mắt nháy',
+    'Mat gian': 'Mắt giận', 'Mat khoc': 'Mắt khóc', 'Mat cuoi to': 'Mắt cười to',
+    'Mat le luoi': 'Mắt lè lưỡi', 'Mat xau ho': 'Mắt xấu hổ', 'Mat chay mau': 'Mắt chảy máu'
+  };
+  const partLabel = (z: number, name: string) =>
+    z === 40 ? (EYE_NAME[name] ?? name.replace(/^Mat\b/i, 'Mắt')) : name;
+
+  function openStylist(cfg: { panel: string; shopKey: string; title: string; z: number; key: 'hair' | 'eyes'; hint: string }) {
+    if (!atShopZone(cfg.shopKey, cfg.title)) return;
+    const look = S.player.chibi;
+    if (!look) return;
+    const { body } = openWindow(cfg.title, { size: 'large' });
+    const render = () => {
+      body.innerHTML = '';
+      const wrap = h('div', 'wd-wrap');
+
+      const left = h('div', 'wd-left stylist-left');
+      const mid = h('div', 'wd-char');
+      mid.append(charFace(look, 190), h('div', 'wd-char-name', S.player.name));
+      left.append(mid);
+
+      const right = h('div', 'wd-right');
+      right.append(h('div', 'hint', cfg.hint));
+      const card = h('div', 'wd-card');
+      const grid = h('div', 'wd-grid');
+      const cur = look[cfg.key];
+      for (const p of chibiList(cfg.z, look.gender)) {
+        const done = S.chibiWardrobe.includes(p.id) || p.id === cur;
+        const on = cur === p.id;
+        const cell = h('button', `wd-item ${on ? 'active' : ''}`);
+        cell.append(chibiHead(p.id, 40, cfg.z), h('div', 'nm', partLabel(cfg.z, p.name)));
+        const xu = chibiPriceXu(p), ruby = chibiPriceRuby(p);
+        const pr = h('div', 'pr');
+        if (on) pr.textContent = 'Đang dùng';
+        else if (done) pr.textContent = 'Đổi lại';
+        else pr.innerHTML = ruby > 0 ? priceHtml(0, ruby) : priceHtml(xu);
+        cell.append(pr);
+        cell.onclick = () => {
+          sfx.click();
+          if (!on && !done) {
+            if (ruby > 0) { if (!spend(0, ruby)) return; }
+            else if (!spend(xu)) return;
+            S.chibiWardrobe.push(p.id);
+            sfx.coin();
+          }
+          look[cfg.key] = p.id;
+          save(); bus.emit(EV.APPEARANCE);
+          toast(cfg.key === 'hair' ? `Đã đổi kiểu tóc: ${p.name}` : `Đã đổi ${partLabel(40, p.name).toLowerCase()}`, 'wardrobe');
+          render();
+        };
+        grid.append(cell);
+      }
+      card.append(grid);
+      right.append(card);
+      wrap.append(left, right);
+      body.append(wrap);
+    };
+    render();
+  }
+
+  registerPanel('barbershop', () => openStylist({
+    panel: 'barbershop', shopKey: 'shop_barber', title: 'Tiệm cắt tóc Anh Phong',
+    z: 50, key: 'hair', hint: 'Chọn kiểu tóc — kiểu đã cắt rồi đổi lại miễn phí.'
+  }));
+  registerPanel('salonshop', () => openStylist({
+    panel: 'salonshop', shopKey: 'shop_salon', title: 'Viện thẩm mỹ Cô Diễm',
+    z: 40, key: 'eyes', hint: 'Chọn đôi mắt / biểu cảm — kiểu đã làm rồi đổi lại miễn phí.'
+  }));
 
   // ---- xem thử SKIN trọn bộ ----
   registerPanel('skintry', (data: { skin: SkinDef; owned: boolean; onDone?: () => void }) => {
@@ -985,9 +1063,8 @@ export function registerAllPanels() {
 
     type SlotKey = 'pant' | 'shirt' | 'hair' | 'eyes' | 'hat' | 'glasses' | 'hand' | 'skin';
     // [icon UI, nhãn, z, khoá, tuỳ chọn]   z = -1 -> ô Skin trọn bộ
+    // Tóc ở tiệm cắt tóc, mắt ở viện thẩm mỹ nên không nằm trong tủ đồ
     const ALL: [string, string, number, SlotKey, boolean][] = [
-      ['person', 'Tóc', 50, 'hair', false],
-      ['smile', 'Mắt', 40, 'eyes', false],
       ['hat', 'Mũ', 60, 'hat', true],
       ['glasses', 'Kính', 65, 'glasses', true],
       ['shirt', 'Áo', 20, 'shirt', false],

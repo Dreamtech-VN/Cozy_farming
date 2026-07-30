@@ -139,7 +139,9 @@ export const ZONES: Record<string, ZoneDef> = {
     portals: [{ x: 40, y: 22, to: 'town', label: 'Thành phố', icon: '🏙️' }],
     npcs: [
       { id: 'npc_fashion', name: 'Cô Trang', x: 10, y: 16, charIndex: 6, gender: 2, shop: 'shop_fashion', lines: ['Thời trang mới về nè!'] },
-      { id: 'npc_gift', name: 'Anh Quà', x: 28, y: 16, charIndex: 0, gender: 1, shop: 'shop_gift', lines: ['Quà tặng cho người thương~'] }
+      { id: 'npc_gift', name: 'Anh Quà', x: 28, y: 16, charIndex: 0, gender: 1, shop: 'shop_gift', lines: ['Quà tặng cho người thương~'] },
+      { id: 'npc_barber', name: 'Anh Phong', x: 16, y: 16, charIndex: 3, gender: 1, shop: 'shop_barber', lines: ['Cắt kiểu gì cũng đẹp!', 'Đổi tóc là đổi vận đó nha.'] },
+      { id: 'npc_salon', name: 'Cô Diễm', x: 22, y: 16, charIndex: 7, gender: 2, shop: 'shop_salon', lines: ['Vào đây chị làm cho đôi mắt biết nói.', 'Ánh mắt là hồn của gương mặt đó em.'] }
     ],
     features: []
   },
