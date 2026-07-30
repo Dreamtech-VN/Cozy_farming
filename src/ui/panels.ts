@@ -1020,22 +1020,20 @@ export function registerAllPanels() {
 
       // ----- ô Skin: chọn trọn bộ đã sở hữu -----
       if (z === -1) {
-        const off = h('button', `wd-item ${!look.skin ? 'active' : ''}`);
-        off.append(uiIcon('box', 34), h('div', 'nm', 'Không dùng'));
-        off.onclick = () => { look.skin = undefined; apply(); render(); };
-        grid.append(off);
-        let n = 1;
+        let n = 0;
         for (const sid of S.skins) {
           const sk = SKINS[sid];
           if (!sk) continue;
-          const cell2 = h('button', `wd-item ${look.skin === sid ? 'active' : ''}`);
+          const on = look.skin === sid;
+          const cell2 = h('button', `wd-item ${on ? 'active' : ''}`);
           cell2.append(skinFace(sk, 46), h('div', 'nm', sk.name));
-          cell2.onclick = () => { look.skin = sid; apply(); render(); };
+          // bấm lại món đang mặc = cởi ra (ô trống nghĩa là không dùng)
+          cell2.onclick = () => { look.skin = on ? undefined : sid; apply(); render(); };
           grid.append(cell2); n++;
         }
         for (let i = n; i < Math.max(8, Math.ceil(n / 4) * 4); i++) grid.append(h('div', 'wd-item wd-empty'));
         card.append(grid);
-        if (!S.skins.length) card.append(h('div', 'hint', 'Chưa có skin nào — mua trọn bộ ở tab Skin của Thời trang Cô Trang!'));
+        card.append(h('div', 'hint', S.skins.length ? 'Bấm lại bộ đang mặc để cởi ra.' : 'Chưa có skin nào — mua trọn bộ ở tab Skin của Thời trang Cô Trang!'));
         right.append(card);
         wrap.append(left, right);
         body.append(wrap);
@@ -1045,16 +1043,12 @@ export function registerAllPanels() {
       const cur = (look as any)[pk] as number;
       const owned = chibiList(z, look.gender).filter(p => S.chibiWardrobe.includes(p.id) || p.id === cur);
       let cells = 0;
-      if (optional) {
-        const off = h('button', `wd-item ${cur === 0 ? 'active' : ''}`);
-        off.append(uiIcon('box', 34), h('div', 'nm', 'Không dùng'));
-        off.onclick = () => { (look as any)[pk] = 0; apply(); render(); };
-        grid.append(off); cells++;
-      }
       for (const p of owned) {
-        const cell = h('button', `wd-item ${cur === p.id ? 'active' : ''}`);
+        const on = cur === p.id;
+        const cell = h('button', `wd-item ${on ? 'active' : ''}`);
         cell.append(z <= 20 || z === 70 ? chibiPreview(p.id, 44) : chibiHead(p.id, 40, z), h('div', 'nm', p.name));
-        cell.onclick = () => { (look as any)[pk] = p.id; apply(); render(); };
+        // món tuỳ chọn (mũ/kính/đồ cầm tay): bấm lại để cởi ra, ô trống = không dùng
+        cell.onclick = () => { (look as any)[pk] = on && optional ? 0 : p.id; apply(); render(); };
         grid.append(cell); cells++;
       }
       // lấp ô trống cho đủ lưới (tối thiểu 12 ô)
@@ -1062,6 +1056,7 @@ export function registerAllPanels() {
       for (let i = cells; i < total; i++) grid.append(h('div', 'wd-item wd-empty'));
       card.append(grid);
       if (!owned.length) card.append(h('div', 'hint', 'Chưa có món nào — ghé shop thời trang ở Khu mua sắm!'));
+      else if (optional) card.append(h('div', 'hint', 'Bấm lại món đang mặc để cởi ra.'));
       right.append(card);
 
       wrap.append(left, right);
