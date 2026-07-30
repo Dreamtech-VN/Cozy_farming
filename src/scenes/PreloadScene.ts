@@ -45,7 +45,7 @@ export class PreloadScene extends Phaser.Scene {
       this.load.image(`bld_${b}`, `assets/buildings/${b}.png`);
     }
     // ---- Decor ngoài trời (cắt từ tileset) ----
-    for (const d of ['tree_round', 'tree_round2', 'tree_pine', 'bench', 'lamp_green', 'lamp_black', 'scarecrow', 'barrel', 'flower_pot', 'bush']) {
+    for (const d of ['tree_round', 'tree_round2', 'tree_pine', 'bench', 'lamp_green', 'lamp_black', 'scarecrow', 'barrel', 'flower_pot', 'bush', 'busstop']) {
       this.load.image(`deco_${d}`, `assets/deco/${d}.png`);
     }
     // ---- Xe cộ ----

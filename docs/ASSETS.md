@@ -26,6 +26,13 @@ Nguồn: các pack đã mua trên itch.io (license thương mại), tải từ
 - Nền đất/cỏ/cát/nước (tile đơn sắc có hoa văn, palette khớp pack) — autotile thật sẽ map ở v0.2.
 - Chuồng gia súc, đàn piano, đèn cây trong nhà, tranh treo tường.
 
+## Ghi chú trạm xe buýt
+
+Sprite `assets/deco/busstop.png` hiện ghép từ ghế đá của tileset + khung/mái vẽ tay
+(môi trường dev chặn mạng ngoài nên chưa tải được asset online). Có asset CC0 phù hợp:
+"Sprite City Series 1 – Bus Station" trên OpenGameArt
+(https://opengameart.org/content/sprite-city-series-1-bus-station) — tải về thay file là xong.
+
 ## Cần mua thêm (đề xuất, ưu tiên từ trên xuống)
 
 1. **Pack côn trùng** (bướm/bọ pixel 16px) — hiện đang vẽ tạm bằng code. Gợi ý tìm: "pixel insects pack" trên itch.

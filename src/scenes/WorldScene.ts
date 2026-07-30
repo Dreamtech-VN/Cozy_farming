@@ -284,13 +284,9 @@ export class WorldScene extends Phaser.Scene {
     // vạch kẻ giữa
     g.fillStyle(0xe8e8e8);
     for (let x = 6; x < w - 20; x += 40) g.fillRect(x, top + (zh - top) / 2 - 1, 22, 3);
-    // trạm xe buýt: biển + mái nhỏ trên vỉa hè
+    // trạm chờ xe buýt (sprite ghép từ pack: mái + kính + ghế)
     const sx = this.busStopX();
-    const pole = this.add.graphics().setDepth(top - 2);
-    pole.fillStyle(0x8a5a33); pole.fillRect(sx - 2, top - 34, 4, 30);
-    pole.fillStyle(0xffd43b); pole.fillRoundedRect(sx - 16, top - 46, 32, 16, 4);
-    this.add.text(sx, top - 38, '🚌', { fontSize: '10px' }).setOrigin(0.5).setDepth(top - 1);
-    this.add.text(sx, top - 52, 'Trạm xe', { fontSize: '7px', color: '#fff', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(top - 1);
+    this.add.image(sx, top - 2, 'deco_busstop').setOrigin(0.5, 1).setDepth(top - 40).setScale(1.1);
     // xe riêng đậu mép đường
     if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
       this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(1.1);

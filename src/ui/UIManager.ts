@@ -131,7 +131,9 @@ function buildHud() {
   quick.append(
     menuBtn,
     mkBtn('map', 'Bản đồ', () => openPanel('map'), 'map'),
-    mkBtn('mail', 'Thư', () => openPanel('mail'), 'mail')
+    mkBtn('mail', 'Thư', () => openPanel('mail'), 'mail'),
+    mkBtn('chat', 'Chat', () => openPanel('chat')),
+    mkBtn('emote', 'Biểu cảm', () => openPanel('emotes'))
   );
   root().append(quick);
   // chạm ra ngoài thì đóng ngăn kéo
@@ -162,18 +164,6 @@ function buildHud() {
       actions.append(lbl);
     }
   });
-
-  // nút chat + biểu cảm luôn hiện (dễ tương tác)
-  const quickChat = h('button', 'hud-btn'); quickChat.id = 'chat-btn';
-  quickChat.title = 'Chat';
-  quickChat.innerHTML = `<img class="hicon" src="${ICON('chat')}">`;
-  quickChat.onclick = () => { sfx.click(); openPanel('chat'); };
-  root().append(quickChat);
-  const quickEmote = h('button', 'hud-btn'); quickEmote.id = 'emote-btn';
-  quickEmote.title = 'Biểu cảm';
-  quickEmote.innerHTML = `<img class="hicon" src="${ICON('emote')}">`;
-  quickEmote.onclick = () => { sfx.click(); openPanel('emotes'); };
-  root().append(quickEmote);
 
   // chat mini (bấm vào cũng mở chat)
   const cm = h('div'); cm.id = 'chat-mini'; root().append(cm);

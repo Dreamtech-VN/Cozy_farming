@@ -204,10 +204,6 @@ img { image-rendering: auto; }
 }
 @keyframes pop { from { transform: scale(.6); opacity: 0 } to { transform: scale(1); opacity: 1 } }
 
-/* Nút chat + biểu cảm luôn hiện */
-#chat-btn { position: absolute; left: 152px; bottom: 26px; }
-#emote-btn { position: absolute; right: 100px; bottom: 26px; }
-
 /* Chat nhỏ góc trái (bấm để mở chat) */
 #chat-mini {
   position: absolute; left: 8px; bottom: 160px; width: 250px; max-height: 120px; overflow: hidden;
