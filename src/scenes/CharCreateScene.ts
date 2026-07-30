@@ -15,7 +15,7 @@ export class CharCreateScene extends Phaser.Scene {
     const W = this.scale.width, H = this.scale.height;
     this.add.rectangle(0, 0, W, H, 0x2d4a1e).setOrigin(0);
     this.add.tileSprite(W * 0.3, H / 2 + 90, 320, 90, 'g_wood').setAlpha(0.9);
-    if (!S.player.chibi) S.player.chibi = defaultLook(0);
+    if (!S.player.chibi) S.player.chibi = defaultLook(1);
     this.preview = new ChibiSprite(this, W * 0.3, H / 2 + 90, S.player.chibi);
     this.preview.setScale(2.4);
     this.preview.play('walk');

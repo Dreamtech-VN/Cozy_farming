@@ -83,7 +83,7 @@ export class PreloadScene extends Phaser.Scene {
     if (hasSave() && load()) {
       // save cũ chưa có nhân vật chibi -> gán bộ mặc định theo giới tính
       if (!S.player.chibi) {
-        S.player.chibi = defaultLook(S.player.gender === 'female' ? 1 : 0);
+        S.player.chibi = defaultLook(S.player.gender === 'female' ? 0 : 1);
         for (const id of lookLayers(S.player.chibi)) {
           if (!S.chibiWardrobe.includes(id)) S.chibiWardrobe.push(id);
         }

@@ -37,6 +37,19 @@ export function starterList(z: number, gender: number): ChibiPartDef[] {
   return chibiList(z, gender).filter(p => p.level === 0);
 }
 
+// LƯU Ý: data Avatar quy ước gender 0 = NỮ, 1 = NAM, 2 = unisex
+export const G_FEMALE = 0;
+export const G_MALE = 1;
+
+// n món "đơn giản nhất" cho màn tạo nhân vật: đồ cơ bản đời đầu (id nhỏ, level 0),
+// loại đồ ruby và đồ sự kiện có hạn dùng "(30/45 ngày)"
+export function simplestList(z: number, gender: number, n = 3): ChibiPartDef[] {
+  return chibiList(z, gender)
+    .filter(p => p.gold <= 0 && !/\(\s*\d+\s*ngày\s*\)/i.test(p.name))
+    .sort((a, b) => a.level - b.level || a.id - b.id)
+    .slice(0, n);
+}
+
 // quy đổi giá gốc Avatar về kinh tế game (xu Avatar lớn hơn nhiều)
 export function chibiPriceXu(p: ChibiPartDef): number {
   if (p.gold > 0) return 0;
