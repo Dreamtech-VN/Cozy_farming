@@ -475,9 +475,11 @@ export function registerAllPanels() {
     if (!atShopZone(cfg.shopKey, cfg.title)) return;
     const look = S.player.chibi;
     if (!look) return;
-    const { body } = openWindow(cfg.title, { size: 'large' });
+    const { body, win } = openWindow(cfg.title, { size: 'large' });
+    win.classList.add('win-shop');
     const render = () => {
       body.innerHTML = '';
+      body.classList.add('wd-body');
       const wrap = h('div', 'wd-wrap');
 
       const left = h('div', 'wd-left stylist-left');
@@ -880,19 +882,28 @@ export function registerAllPanels() {
 
   function renderCharInfo(body: HTMLElement) {
         const t = TITLES[S.player.title];
-        const info = h('div');
+        const need = S.player.level * 100;
+        const pct = Math.round(S.player.exp / need * 100);
+        const info = h('div', 'pf-card');
         info.innerHTML = `
-          <div class="row"><div id="pf-face"></div><div class="grow">
-            <div class="t1" id="pf-name"></div>
-            <div class="t2" style="color:${t?.color}">「${t?.name}」</div>
-            <div class="t2">Cấp ${S.player.level} · ${S.player.exp}/${S.player.level * 100} EXP · ${S.player.gender === 'male' ? 'Nam' : 'Nữ'}</div>
-          </div></div>
-          <div class="progress"><div style="width:${Math.round(S.player.exp / (S.player.level * 100) * 100)}%"></div></div>`;
+          <div id="pf-face"></div>
+          <div class="pf-meta">
+            <div class="pf-name" id="pf-name"></div>
+            <div class="pf-title" style="color:${t?.color}">「${t?.name}」</div>
+            <div class="pf-sub">
+              <span class="pf-lv">Cấp ${S.player.level}</span>
+              <span>${S.player.gender === 'male' ? 'Nam' : 'Nữ'}</span>
+            </div>
+            <div class="pf-exp">
+              <div class="pf-exp-bar"><div class="pf-exp-fill" style="width:${pct}%"></div></div>
+              <span class="pf-exp-num">${fmt(S.player.exp)}/${fmt(need)}</span>
+            </div>
+          </div>`;
         (info.querySelector('#pf-name') as HTMLElement).textContent = S.player.name;
         const faceBox = info.querySelector('#pf-face') as HTMLElement;
         faceBox.className = 'pf-face-box';
-        faceBox.append(avatarEl(56));
-        const avaBtn = h('button', 'pf-ava-btn', 'Đổi ảnh đại diện');
+        faceBox.append(avatarEl(64));
+        const avaBtn = h('button', 'pf-ava-btn', 'Đổi ảnh');
         avaBtn.onclick = () => { sfx.click(); openPanel('avatarpick'); };
         faceBox.append(avaBtn);
         body.append(info);
@@ -941,19 +952,22 @@ export function registerAllPanels() {
         body.append(statGrid);
         render();
 
-        const statsBox = h('div');
-        statsBox.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px';
-        const rows: [string, number][] = [
-          ['Thu hoạch', S.stats['harvested'] ?? 0],
-          ['Cá đã câu', S.stats['fish_caught'] ?? 0],
-          ['Côn trùng', S.stats['insects_caught'] ?? 0],
-          ['Xu kiếm được', S.stats['coins_earned'] ?? 0],
-          ['Thành tựu', S.achievements.length],
-          ['Thắng minigame', (S.minigames.caroWins + S.minigames.xiangqiWins + S.minigames.rpsWins)]
+        body.append(h('div', 'pf-sec-head', 'Thành tích'));
+        const statsBox = h('div', 'pf-tiles');
+        const rows: [string, string, number][] = [
+          ['basket', 'Thu hoạch', S.stats['harvested'] ?? 0],
+          ['fish', 'Cá đã câu', S.stats['fish_caught'] ?? 0],
+          ['net', 'Côn trùng', S.stats['insects_caught'] ?? 0],
+          ['coin', 'Xu kiếm được', S.stats['coins_earned'] ?? 0],
+          ['rank', 'Thành tựu', S.achievements.length],
+          ['minigame', 'Thắng minigame', S.minigames.caroWins + S.minigames.xiangqiWins + S.minigames.rpsWins]
         ];
-        for (const [lbl, v] of rows) {
-          const d = h('div', 'row');
-          d.innerHTML = `<div class="grow t2">${lbl}</div><div class="t1">${fmt(v)}</div>`;
+        for (const [ico, lbl, v] of rows) {
+          const d = h('div', 'pf-tile');
+          d.append(uiIcon(ico, 24));
+          const txt = h('div', 'pf-tile-txt');
+          txt.append(h('div', 'pf-tile-val', fmt(v)), h('div', 'pf-tile-lbl', lbl));
+          d.append(txt);
           statsBox.append(d);
         }
         body.append(statsBox);
@@ -1120,29 +1134,6 @@ export function registerAllPanels() {
     render();
   });
 
-  // ================= Chạm vào bản thân =================
-  registerPanel('selfmenu', () => {
-    const { body, close } = openWindow(`${S.player.name}`, { size: 'small' });
-    const face = h('div');
-    face.style.cssText = 'display:flex;justify-content:center;margin-bottom:6px';
-    face.append(charFace(S.player.chibi, 84));
-    body.append(face);
-
-    const grid = h('div', 'wd-grid');
-    const cell = (icon: string, label: string, cb: () => void) => {
-      const c = h('button', 'wd-item');
-      c.append(uiIcon(icon, 32), h('div', 'nm', label));
-      c.onclick = () => { sfx.click(); cb(); };
-      grid.append(c);
-    };
-    cell('inventory', 'Túi đồ', () => { close(); openPanel('inventory'); });
-    cell('runner', 'Chạy', () => { close(); bus.emit('world:selfact', 'run'); });
-    cell('sit', 'Ngồi', () => { close(); bus.emit('world:selfact', 'sit'); });
-    cell('lie', 'Nằm', () => { close(); bus.emit('world:selfact', 'lie'); });
-    cell('pet', 'Thú cưng', () => { close(); openPanel('petbag'); });
-    cell('smile', 'Biểu cảm', () => { close(); openPanel('emotes'); });
-    body.append(grid);
-  });
 
   // ================= Chạm vào người chơi khác =================
   registerPanel('playermenu', (data: { friend: { id: string; name: string; level: number } }) => {
@@ -1823,6 +1814,20 @@ export function registerAllPanels() {
   // ================= Biểu cảm =================
   registerPanel('emotes', () => {
     const { body, close } = openWindow('Biểu cảm', { size: 'small' });
+
+    // Hành động của bản thân — trước nằm ở bảng "chạm vào mình", nay gom vào đây
+    const actRow = h('div', 'emo-acts');
+    const act = (icon: string, label: string, kind: string) => {
+      const b = h('button', 'emo-act');
+      b.append(uiIcon(icon, 26), h('span', '', label));
+      b.onclick = () => { sfx.click(); bus.emit('world:selfact', kind); close(); };
+      actRow.append(b);
+    };
+    act('runner', 'Chạy', 'run');
+    act('sit', 'Ngồi', 'sit');
+    act('lie', 'Nằm', 'lie');
+    body.append(actRow, h('div', 'sep'));
+
     // dùng đúng sheet emoticons.png của asset pack (lưới 16px, 5 cột x 6 hàng)
     const grid = h('div', 'grid');
     for (let i = 0; i < 30; i++) {

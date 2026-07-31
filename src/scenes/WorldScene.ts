@@ -188,8 +188,8 @@ export class WorldScene extends Phaser.Scene {
     this.player.setDepth(1000).setScale(charScale);
     this.selector = this.add.image(0, 0, 'sel').setVisible(false).setDepth(900).setAlpha(0.9);
 
-    // chạm vào chính mình -> bảng thao tác cá nhân
-    this.attachTapZone(this.player, () => bus.emit(EV.OPEN_PANEL, { panel: 'selfmenu' }));
+    // (bỏ chạm vào chính mình — hay bấm nhầm khi chỉ muốn đi tới chỗ đó.
+    //  Chạy/Ngồi/Nằm chuyển sang panel Biểu cảm.)
     this.buildTitleTag();
 
     this.spawnPet();

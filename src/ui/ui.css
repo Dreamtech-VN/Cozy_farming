@@ -232,6 +232,60 @@ img { image-rendering: auto; }
 .progress > div { height: 100%; background: linear-gradient(#8ce16a, #4fa32e); border-radius: 7px; }
 
 /* Chỉ số nhân vật */
+/* ===== Hồ sơ cá nhân ===== */
+.pf-card {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+  padding: 10px 12px; border-radius: 14px;
+  background: linear-gradient(135deg, #fff8e8, #f0dfbe);
+  border: 2px solid #b5836b; box-shadow: inset 0 2px 0 #fffdf4;
+}
+.pf-meta { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.pf-name { font-size: 17px; font-weight: 900; color: #4a3520; line-height: 1.15; }
+.pf-title { font-size: 12px; font-weight: 800; }
+.pf-sub { display: flex; gap: 8px; font-size: 11px; font-weight: 700; color: #8a6a45; }
+.pf-lv {
+  background: #b5836b; color: #fff8e8; padding: 1px 8px 2px; border-radius: 999px;
+}
+.pf-exp { display: flex; align-items: center; gap: 7px; margin-top: 3px; }
+.pf-exp-bar {
+  flex: 1; height: 11px; border-radius: 6px; background: #d9c4a5;
+  border: 2px solid #a9714b; overflow: hidden;
+}
+.pf-exp-fill {
+  height: 100%; border-radius: 4px; transition: width .3s;
+  background: linear-gradient(#8ce99a, #37b24d);
+}
+.pf-exp-num { font-size: 10px; font-weight: 800; color: #7a5b3a; flex: none; }
+
+.pf-sec-head {
+  font-size: 13px; font-weight: 900; color: #5b3a1c; margin: 12px 0 6px;
+  padding-bottom: 4px; border-bottom: 2px solid rgba(181,131,107,.3);
+}
+/* thành tích: ô vuông icon + số, gọn hơn danh sách dòng cũ */
+.pf-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+.pf-tile {
+  display: flex; align-items: center; gap: 7px; padding: 7px 9px;
+  border-radius: 11px; background: #f6edd8; border: 2px solid #b5836b;
+}
+.pf-tile .ui-ic { flex: none; }
+.pf-tile-txt { min-width: 0; }
+.pf-tile-val { font-size: 15px; font-weight: 900; color: #4a3520; line-height: 1.1; }
+.pf-tile-lbl {
+  font-size: 10px; font-weight: 700; color: #8a6a45; line-height: 1.15;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* hàng hành động trong bảng Biểu cảm (trước nằm ở "chạm vào bản thân") */
+.emo-acts { display: flex; gap: 8px; justify-content: center; }
+.emo-act {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 8px 4px 9px; cursor: pointer; font-family: inherit;
+  font-size: 11px; font-weight: 800; color: #4a3520;
+  background: linear-gradient(#fff8e8, #e8d4b0);
+  border: 2px solid #b5836b; border-radius: 11px;
+}
+.emo-act:active { transform: scale(.94); }
+
 /* Ảnh đại diện trong hồ sơ + nút đổi */
 .pf-face-box { display: flex; flex-direction: column; align-items: center; gap: 5px; flex: none; }
 /* :first-child chứ không phải div:first-child — ảnh pack/tải lên là <img> */
@@ -714,6 +768,15 @@ input.ui-input, select.ui-input {
 }
 .hb-slot:active { transform: scale(.92); }
 .hb-slot.empty { color: #f6edd8aa; font-size: 20px; font-weight: 800; }
+
+/* Cửa hàng thời trang / tiệm tóc: nhân vật bên trái đứng yên, chỉ lưới bên phải
+   cuộn. Trước đây .wd-body được gắn trong code nhưng KHÔNG có CSS nào, nên
+   .win-body tự cuộn và kéo trôi luôn cả nhân vật bên trái. */
+.win.win-shop { height: 84vh; max-height: 84vh; }
+.win-body.wd-body {
+  display: flex; flex-direction: column; min-height: 0; overflow: hidden;
+}
+.win-body.wd-body .wd-left { align-self: stretch; overflow: hidden; }
 
 /* Tủ đồ: tab + card ô trống; hotbar ở giữa dưới màn hình */
 .wd-tabs { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 7px; }
