@@ -328,6 +328,20 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   nameRow.append(nameInput);
   body.append(nameRow);
 
+  // tabs
+  const tabBar = h('div', 'cc-tabs');
+  const tabContent = h('div', 'cc-tab-content');
+  const TABS = ['Khuôn mặt', 'Trang phục'];
+  let activeTab = 0;
+  const tabBtns: HTMLElement[] = [];
+  for (let i = 0; i < TABS.length; i++) {
+    const t = h('div', `cc-tab ${i === 0 ? 'active' : ''}`, TABS[i]);
+    t.onclick = () => { activeTab = i; tabBtns.forEach((b, j) => b.classList.toggle('active', j === i)); rebuild(); };
+    tabBtns.push(t);
+    tabBar.append(t);
+  }
+  body.append(tabBar, tabContent);
+
   const startBtn = btn('BẮT ĐẦU CUỘC SỐNG MỚI!', 'gold', () => {
     const name = nameInput.value.trim();
     if (name.length < 2) { toast('Tên cần ít nhất 2 ký tự nha!', 'alert'); return; }
@@ -340,64 +354,85 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   foot.append(startBtn);
   body.parentElement?.append(foot);
 
-  let sections: HTMLElement[] = [];
   const rebuild = () => {
-    for (const el of sections) el.remove();
-    sections = [];
+    tabContent.innerHTML = '';
     const section = (label: string) => {
       const d = h('div', 'cc-sec');
       d.append(h('div', 'cc-label', label));
-      body.append(d);
-      sections.push(d);
+      tabContent.append(d);
       return d;
     };
 
-    // giới tính
-    let sec = section('Giới tính');
-    const gchips = h('div', 'cc-opts');
-    const genders: [number, string][] = [[1, 'Nam'], [2, 'Nữ']];
-    for (const [g, lbl] of genders) {
-      const c = h('div', `cc-opt ${look.gender === g ? 'active' : ''}`, lbl);
-      c.onclick = () => {
-        Object.assign(look, defaultLook(g));
-        S.player.gender = g === 2 ? 'female' : 'male';
-        emit(); rebuild();
-      };
-      gchips.append(c);
-    }
-    sec.append(gchips);
-
-    // tóc, áo, quần — 3 lựa chọn mỗi mục
-    const SLOTS: [string, number, 'hair' | 'shirt' | 'pant'][] = [
-      ['Tóc', 50, 'hair'],
-      ['Áo', 20, 'shirt'],
-      ['Quần', 10, 'pant'],
-    ];
-    for (const [label, z, slot] of SLOTS) {
-      const opts = simplestList(z, look.gender, 3);
-      if (!opts.length) continue;
-      sec = section(label);
-      const chips = h('div', 'cc-opts');
-      for (const p of opts) {
-        const c = h('div', `cc-opt cc-opt-icon ${look[slot] === p.id ? 'active' : ''}`);
-        c.append(chibiPreview(p.id, 42), h('span', 'cc-opt-name', p.name));
-        c.onclick = () => { look[slot] = p.id; emit(); rebuild(); };
-        chips.append(c);
+    if (activeTab === 0) {
+      // gioi tinh
+      let sec = section('Giới tính');
+      const gchips = h('div', 'cc-opts');
+      const genders: [number, string][] = [[1, 'Nam'], [2, 'Nữ']];
+      for (const [g, lbl] of genders) {
+        const c = h('div', `cc-opt ${look.gender === g ? 'active' : ''}`, lbl);
+        c.onclick = () => {
+          Object.assign(look, defaultLook(g));
+          S.player.gender = g === 2 ? 'female' : 'male';
+          emit(); rebuild();
+        };
+        gchips.append(c);
       }
-      sec.append(chips);
-    }
+      sec.append(gchips);
 
-    // mắt / biểu cảm — 3 kiểu khuôn mặt
-    const EXPRS: [number, string][] = [[FACE.normal, 'Bình thường'], [FACE.happy, 'Vui vẻ'], [FACE.wink, 'Tinh nghịch']];
-    sec = section('Mắt / Biểu cảm');
-    const echips = h('div', 'cc-opts');
-    for (const [id, lbl] of EXPRS) {
-      const c = h('div', `cc-opt cc-opt-icon ${look.eyes === id ? 'active' : ''}`);
-      c.append(chibiHead(id, 36, 40), h('span', 'cc-opt-name', lbl));
-      c.onclick = () => { look.eyes = id; emit(); rebuild(); };
-      echips.append(c);
+      // mat / bieu cam
+      const EXPRS: [number, string][] = [[FACE.normal, 'Bình thường'], [FACE.happy, 'Vui vẻ'], [FACE.wink, 'Tinh nghịch']];
+      sec = section('Biểu cảm');
+      const echips = h('div', 'cc-opts');
+      for (const [id, lbl] of EXPRS) {
+        const c = h('div', `cc-opt cc-opt-icon ${look.eyes === id ? 'active' : ''}`);
+        c.append(chibiHead(id, 36, 40), h('span', 'cc-opt-name', lbl));
+        c.onclick = () => { look.eyes = id; emit(); rebuild(); };
+        echips.append(c);
+      }
+      sec.append(echips);
+
+      // toc
+      const hairOpts = simplestList(50, look.gender, 3);
+      if (hairOpts.length) {
+        sec = section('Tóc');
+        const chips = h('div', 'cc-opts');
+        for (const p of hairOpts) {
+          const c = h('div', `cc-opt cc-opt-icon ${look.hair === p.id ? 'active' : ''}`);
+          c.append(chibiPreview(p.id, 42), h('span', 'cc-opt-name', p.name));
+          c.onclick = () => { look.hair = p.id; emit(); rebuild(); };
+          chips.append(c);
+        }
+        sec.append(chips);
+      }
+    } else {
+      // ao
+      const shirtOpts = simplestList(20, look.gender, 3);
+      if (shirtOpts.length) {
+        let sec = section('Áo');
+        const chips = h('div', 'cc-opts');
+        for (const p of shirtOpts) {
+          const c = h('div', `cc-opt cc-opt-icon ${look.shirt === p.id ? 'active' : ''}`);
+          c.append(chibiPreview(p.id, 42), h('span', 'cc-opt-name', p.name));
+          c.onclick = () => { look.shirt = p.id; emit(); rebuild(); };
+          chips.append(c);
+        }
+        sec.append(chips);
+      }
+
+      // quan
+      const pantOpts = simplestList(10, look.gender, 3);
+      if (pantOpts.length) {
+        const sec = section('Quần');
+        const chips = h('div', 'cc-opts');
+        for (const p of pantOpts) {
+          const c = h('div', `cc-opt cc-opt-icon ${look.pant === p.id ? 'active' : ''}`);
+          c.append(chibiPreview(p.id, 42), h('span', 'cc-opt-name', p.name));
+          c.onclick = () => { look.pant = p.id; emit(); rebuild(); };
+          chips.append(c);
+        }
+        sec.append(chips);
+      }
     }
-    sec.append(echips);
   };
   rebuild();
 }
