@@ -323,18 +323,18 @@ export function charFace(look: import('@/data/chibi').ChibiLook | undefined, siz
 
 // Chỉ phần đầu chibi (tóc, mắt, kính, nón) — dùng cho HUD avatar
 export function charHeadOnly(look: import('@/data/chibi').ChibiLook | undefined, size = 40): HTMLElement {
-  const cropY = 8, cropH = 48;
-  const k = size / cropH;
-  const w = Math.round(64 * k);
+  // ảnh part là strip 15 frame 64x96 -> phải cắt bằng spr() (scale + overflow),
+  // không được set width trực tiếp lên <img> (sẽ bóp cả strip lại).
+  const SX = 8, SY = 16, SW = 48, SH = 50;   // vùng đầu: tóc y16..66, mắt y40..62
+  const w = Math.round(SW * size / SH);
   const wrap = h('div');
-  wrap.style.cssText = `width:${w}px;height:${size}px;position:relative;overflow:hidden;border-radius:50%;`;
+  wrap.style.cssText = `width:${w}px;height:${size}px;position:relative;overflow:hidden;`;
   if (!look) return wrap;
   for (const pid of lookLayers(look)) {
-    const img = document.createElement('img');
-    img.src = `assets/chibi/${pid}.png`;
-    img.draggable = false;
-    img.style.cssText = `position:absolute;left:0;top:${-cropY * k}px;width:${w}px;height:${Math.round(96 * k)}px;image-rendering:pixelated;`;
-    wrap.append(img);
+    const el = spr(`assets/chibi/${pid}.png`, SX, SY, SW, SH, w);
+    el.style.position = 'absolute';
+    el.style.left = '0'; el.style.top = '0';
+    wrap.append(el);
   }
   return wrap;
 }
