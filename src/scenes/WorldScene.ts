@@ -1399,6 +1399,12 @@ export class WorldScene extends Phaser.Scene {
       }
     }
 
+    // đống đất: tới gần là đào được, không cần trang bị nữa
+    if (this.mounds.length) {
+      const near = this.mounds.some(m => Phaser.Math.Distance.Between(
+        this.player.x, this.player.y, m.x, m.y) < (this.zone.bg ? 90 : 52));
+      if (near) acts.push({ icon: '', ui: 'basket', label: 'Đào đống đất', cb: () => this.digNearestMound() });
+    }
     // câu cá
     if (this.nearWater()) {
       if (this.fishingState === 'idle') acts.push({ icon: '', sprite: TOOL_ICON.rod, label: 'Câu cá', cb: () => this.startFishing() });
@@ -1856,7 +1862,7 @@ export class WorldScene extends Phaser.Scene {
       const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, m.x, m.y);
       if (d < bd) { bd = d; best = m; }
     }
-    if (!best || bd > (this.zone.bg ? 90 : 52)) { toast('Không có chỗ nào để đào — ra bãi biển tìm mấy ụ cát nhé.', 'shovel'); return; }
+    if (!best || bd > (this.zone.bg ? 90 : 52)) { toast('Không có chỗ nào để đào quanh đây.', 'basket'); return; }
     const mound = best;
     this.busy = true;
     this.player.play('hoe', () => {
@@ -1928,10 +1934,6 @@ export class WorldScene extends Phaser.Scene {
       case 'axe':
         if (this.zone.id === 'farm') this.chopNearestTree();
         else toast('Cây gỗ nằm ở Nông trại.', 'axe');
-        break;
-      case 'shovel':
-        if (this.mounds.length) this.digNearestMound();
-        else toast('Đống đất chỉ có ở Nông trại và Bãi biển.', 'shovel');
         break;
       default:
         toast('Nông cụ này sẽ dùng được trong bản cập nhật tới!', 'hoe');

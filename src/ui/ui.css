@@ -56,17 +56,41 @@ img { image-rendering: auto; }
 .pill .plus { color: #2f9e44; cursor: pointer; font-weight: 900; font-size: 16px; }
 .hud-clock {
   border-image: url('/assets/ui/pack/label.png') 30 fill / 12px stretch;
-  color: #4a3520; padding: 4px 12px 6px; text-align: center; min-width: 84px;
-  display: flex; flex-direction: column; gap: 1px;
+  color: #4a3520; padding: 5px 12px 7px 8px; min-height: 46px;
+  display: flex; align-items: center; gap: 8px;
 }
-.clock-time {
-  display: flex; align-items: center; justify-content: center; gap: 3px;
-  font-size: 14px; font-weight: 900; letter-spacing: .5px; color: #3a2410;
+/* mặt đồng hồ: bầu trời tròn, mặt trời/trăng chạy theo giờ */
+.clk-dial {
+  position: relative; width: 36px; height: 36px; border-radius: 50%; flex: none;
+  border: 2px solid #a9714b; overflow: hidden;
+  box-shadow: inset 0 2px 5px #00000030;
+  background: linear-gradient(#8fd3f4, #d9f0ff);
 }
-.clock-season {
-  display: flex; align-items: center; justify-content: center; gap: 3px;
-  font-size: 10px; font-weight: 700; color: #7a5b3a;
+.hud-clock[data-phase="dawn"] .clk-dial { background: linear-gradient(#f8c8a0, #ffe9c9); }
+.hud-clock[data-phase="dusk"] .clk-dial { background: linear-gradient(#f09a5e, #ffd8a0); }
+.hud-clock[data-phase="night"] .clk-dial { background: linear-gradient(#2b3568, #4a5aa0); }
+.clk-orb {
+  position: absolute; width: 11px; height: 11px; border-radius: 50%;
+  transform: translate(-50%, -50%); transition: left .6s linear, top .6s linear;
 }
+.clk-orb.sun { background: radial-gradient(circle at 35% 30%, #fff3b0, #f59f00); box-shadow: 0 0 7px #ffd43b; }
+.clk-orb.moon { background: radial-gradient(circle at 35% 30%, #ffffff, #ced4e8); box-shadow: 0 0 7px #dbe4ff; }
+.clk-horizon {
+  position: absolute; left: -2px; right: -2px; bottom: -9px; height: 18px;
+  border-radius: 50% 50% 0 0; background: #8fbf5a; border-top: 2px solid #6d9c40;
+}
+.hud-clock[data-phase="night"] .clk-horizon { background: #3f5c39; border-top-color: #2f4a2b; }
+.clk-txt { display: flex; flex-direction: column; gap: 1px; }
+.clk-h {
+  font-size: 16px; font-weight: 900; letter-spacing: .5px; color: #3a2410; line-height: 1;
+}
+.clk-h i { font-style: normal; animation: clk-blink 1.6s step-end infinite; }
+@keyframes clk-blink { 50% { opacity: .25; } }
+.clk-sub {
+  display: flex; align-items: center; gap: 3px;
+  font-size: 10px; font-weight: 800; color: #7a5b3a;
+}
+.clk-sub img { width: 14px; height: 14px; object-fit: contain; image-rendering: pixelated; }
 
 /* Cụm nút nhanh (trái, dưới hồ sơ) */
 .hud-quick { position: absolute; left: 8px; top: 62px; display: flex; gap: 6px; }
@@ -1321,7 +1345,10 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .od-ing {
   width: 74px; padding: 7px 4px 6px; border-radius: 10px; text-align: center;
   background: #f6edd8; border: 2px solid #b5836b;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
 }
+.od-ing-art { height: 42px; display: flex; align-items: center; justify-content: center; }
+.od-ing img { image-rendering: pixelated; }
 .od-ing.ok { border-color: #51a83f; background: #eef8e9; }
 .od-ing.miss { border-color: #cf7b7b; background: #fbeeee; }
 .od-ing-n { font-size: 12px; font-weight: 900; color: #4a3520; margin-top: 2px; }

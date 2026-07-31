@@ -28,8 +28,8 @@ export function defaultState(): GameState {
     chibiWardrobe: [],
     pets: [],
     skins: [],
-    hotbar: ['hoe', 'axe', 'shovel', 'can', '', '', '', '', '', ''],
-    tools: { rod: 0, can: 1, hoe: 1, net: 0, basket: 0, axe: 1, shovel: 1 },
+    hotbar: ['hoe', 'axe', 'can', 'basket', '', '', '', '', '', ''],
+    tools: { rod: 0, can: 1, hoe: 1, net: 0, basket: 1, axe: 1 },
     farm: { unlocked: 6, plots: [] },
     farmStore: { seeds: { carrot: 5 }, produce: {}, fert: {} },
     orders: [],
@@ -144,10 +144,9 @@ export function load(): boolean {
     if (S.tools.basket === undefined) S.tools.basket = (S.inventory['tool_basket'] ?? 0) > 0 ? 1 : 0;
     if (!S.player.charStats) S.player.charStats = { health: 5, intellect: 5, strength: 5, agility: 5, charm: 5 };
     if (S.player.statPoints == null) S.player.statPoints = 0;
-    if (!S.hotbar) S.hotbar = ['hoe', 'axe', 'shovel', 'can'];
+    if (!S.hotbar) S.hotbar = ['hoe', 'axe', 'can', 'basket'];
     // save cũ 5 ô -> nới lên 10 ô, tặng luôn rìu/xẻng cho đủ bộ khởi đầu
     if (S.tools.axe === undefined) S.tools.axe = 1;
-    if (S.tools.shovel === undefined) S.tools.shovel = 1;
     while (S.hotbar.length < HOTBAR_SLOTS) S.hotbar.push('');
     S.hotbar.length = HOTBAR_SLOTS;
     S.hotbar = S.hotbar.map(id => ownedTool(id) ? id : '');

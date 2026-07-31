@@ -169,7 +169,6 @@ const ICON_SRC: Record<string, string> = {
   can: 'assets/farm/chibi/17_watering_can.png',
   net: 'assets/ui/act/tool_net.png',
   axe: 'assets/farm/chibi/20_axe.png',
-  shovel: 'assets/ui/act/tool_shovel.png',
   basket: 'assets/farm/chibi/19_sickle.png',
   check: 'assets/ui/pack/icon_check.png',
   alert: 'assets/ui/pack/icon_alert.png',

@@ -338,8 +338,8 @@ export function registerAllPanels() {
     const lineRow = (l: { id: string; qty: number }) => {
       const have = haveOf(l);
       const cell = h('div', `od-ing ${have >= l.qty ? 'ok' : 'miss'}`);
-      cell.append(produceIcon(l.id));
-      cell.append(h('div', 'od-ing-n', `${have}/${l.qty}`));
+      const art = h('div', 'od-ing-art'); art.append(produceIcon(l.id, 40));
+      cell.append(art, h('div', 'od-ing-n', `${have}/${l.qty}`));
       cell.title = orderName(l.id);
       return cell;
     };

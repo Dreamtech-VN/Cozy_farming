@@ -230,14 +230,43 @@ function refreshHud() {
   document.getElementById('menu-btn')?.classList.toggle('notify', questsDot || dailyDot);
 }
 
+// Đồng hồ: mặt tròn có bầu trời đổi màu theo giờ, mặt trời/trăng chạy vòng
+// quanh đúng vị trí trong ngày; bên cạnh là giờ, mùa và thời tiết.
+const CLOCK_PHASE: [number, string][] = [
+  [0, 'night'], [5, 'dawn'], [8, 'day'], [16.5, 'day'], [18, 'dusk'], [20, 'night']
+];
+function clockPhase(hgame: number): string {
+  let ph = 'night';
+  for (const [h, p] of CLOCK_PHASE) if (hgame >= h) ph = p;
+  return ph;
+}
+
 function refreshClock() {
   const el = document.getElementById('hud-clock');
   if (!el) return;
-  const hh = Math.floor(gameHour());
-  const mm = Math.floor((gameHour() - hh) * 60);
+  const hg = gameHour();
+  const hh = Math.floor(hg);
+  const mm = Math.floor((hg - hh) * 60);
   const sz = season();
-  el.innerHTML = `<div class="clock-time"><img class="wx" src="assets/ui/act/${WEATHER_ICON[currentWeather()]}.png"><span>${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}</span></div>` +
-    `<div class="clock-season"><img class="wx" src="assets/ui/act/${sz.icon}.png"><span>${sz.name}</span></div>`;
+  const night = hg >= 19 || hg < 5;
+  // 6h ở mép trái, 12h đỉnh, 18h mép phải -> góc = (giờ - 6) / 12 * 180 độ
+  const ang = ((hg - 6) / 12) * Math.PI - Math.PI;
+  const r = 15;
+  const ox = 18 + Math.cos(ang) * r, oy = 19 + Math.sin(ang) * r;
+
+  el.dataset.phase = clockPhase(hg);
+  el.innerHTML = `
+    <div class="clk-dial">
+      <span class="clk-orb ${night ? 'moon' : 'sun'}" style="left:${ox}px;top:${oy}px"></span>
+      <span class="clk-horizon"></span>
+    </div>
+    <div class="clk-txt">
+      <div class="clk-h">${String(hh).padStart(2, '0')}<i>:</i>${String(mm).padStart(2, '0')}</div>
+      <div class="clk-sub">
+        <img src="assets/ui/act/${WEATHER_ICON[currentWeather()]}.png">
+        <img src="assets/ui/act/${sz.icon}.png"><span>${sz.name}</span>
+      </div>
+    </div>`;
 }
 
 // ================= Joystick cảm ứng =================

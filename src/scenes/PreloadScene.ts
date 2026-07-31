@@ -109,7 +109,6 @@ export class PreloadScene extends Phaser.Scene {
       can: 'assets/farm/chibi/17_watering_can.png',
       basket: 'assets/farm/chibi/19_sickle.png',
       axe: 'assets/farm/chibi/20_axe.png',
-      shovel: 'assets/chibi/tools/shovel.png',
       rod: 'assets/chibi/tools/rod.png',
       net: 'assets/chibi/tools/net.png'
     })) this.load.image(`held_${k}`, u);

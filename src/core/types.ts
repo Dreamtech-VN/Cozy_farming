@@ -147,7 +147,7 @@ export interface GameState {
   wardrobe: string[];       // (cũ) thời trang pack Cozy
   chibiWardrobe: number[];  // part chibi đã sở hữu (id part Avatar)
   hotbar: string[];         // nông cụ gắn trên thanh nhanh
-  tools: { rod: number; can: number; hoe: number; net: number; basket: number; axe: number; shovel: number }; // cấp độ dụng cụ
+  tools: { rod: number; can: number; hoe: number; net: number; basket: number; axe: number }; // cấp độ dụng cụ
   farm: { unlocked: number; plots: Plot[]; hasDog?: boolean };  // hasDog: (cũ) chó giữ trại
   farmStore: FarmStore;     // kho nông trại — nông sản KHÔNG nằm trong túi đồ
   cooking?: CookState;      // món đang nấu ở nhà bếp

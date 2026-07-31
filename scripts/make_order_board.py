@@ -13,6 +13,7 @@ from PIL import Image
 
 SRC = 'public/assets/lttt/rank_sign.png'
 DST = 'public/assets/lttt/order_board.png'
+LOGO = 'public/assets/ui/logo.png'
 INK = (107, 73, 0, 255)         # nét chữ
 WOOD = (255, 203, 123, 255)     # gỗ nền mặt biển
 PANEL = {WOOD, (255, 231, 193, 255), (221, 175, 119, 255)}   # gỗ + vân sáng + vệt tối
@@ -32,5 +33,15 @@ for y in sorted({r for row in text_rows for r in (row - 1, row, row + 1)} & set(
         if px[x, y] in PANEL:
             px[x, y] = WOOD
 
+# Dán logo Sunny Town vào giữa mặt biển cho bảng đỡ trống
+panel = [(x, y) for y in range(H) for x in range(W) if px[x, y] in PANEL]
+x0, x1 = min(x for x, _ in panel), max(x for x, _ in panel)
+y0, y1 = min(y for _, y in panel), max(y for _, y in panel)
+pw, ph = (x1 - x0 + 1) - 12, (y1 - y0 + 1) - 12          # chừa lề 6px mỗi bên
+logo = Image.open(LOGO).convert('RGBA')
+k = min(pw / logo.width, ph / logo.height)
+logo = logo.resize((max(1, round(logo.width * k)), max(1, round(logo.height * k))), Image.LANCZOS)
+im.alpha_composite(logo, ((x0 + x1 + 1 - logo.width) // 2, (y0 + y1 + 1 - logo.height) // 2))
+
 im.save(DST)
-print(f'{DST}  {im.size}  trải phẳng {len(text_rows)} hàng chữ')
+print(f'{DST}  {im.size}  trải phẳng {len(text_rows)} hàng chữ, logo {logo.size}')
