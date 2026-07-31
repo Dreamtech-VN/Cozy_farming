@@ -86,6 +86,7 @@ sẵn nguyên bộ Inventory nên không tự dựng lại bằng CSS nữa:
 - `tab_on/off.png`, `ic_*.png`: tab và icon loại trang bị
 - `note.png` / `note_pink.png` (khách ghé trại) / `check.png`: tờ giấy và dấu
   tích cho bảng đơn hàng
+- `cur_pill.png` + `cur_coin/cur_gem/cur_plus.png`: thanh xu/ngọc trên HUD
 
 ## Cloverframe Cozy Farm Starter Pack (`assets/farm/cf/`)
 

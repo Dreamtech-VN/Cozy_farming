@@ -33,11 +33,18 @@ for y in sorted({r for row in text_rows for r in (row - 1, row, row + 1)} & set(
         if px[x, y] in PANEL:
             px[x, y] = WOOD
 
-# Dán logo Sunny Town vào giữa mặt biển cho bảng đỡ trống
+# Biển gốc chỉ 88x94 nên logo dán vào bị bé và nhoè. Phóng nearest x2 (giữ
+# nguyên nét pixel của biển) rồi mới dán logo ở độ phân giải gấp đôi -> chữ
+# Sunny Town rõ hẳn; trong game vẽ ở nửa scale nên kích thước vẫn như cũ.
+SCALE = 2
+im = im.resize((W * SCALE, H * SCALE), Image.NEAREST)
+W, H = im.size
+px = im.load()
+
 panel = [(x, y) for y in range(H) for x in range(W) if px[x, y] in PANEL]
 x0, x1 = min(x for x, _ in panel), max(x for x, _ in panel)
 y0, y1 = min(y for _, y in panel), max(y for _, y in panel)
-pw, ph = (x1 - x0 + 1) - 12, (y1 - y0 + 1) - 12          # chừa lề 6px mỗi bên
+pw, ph = (x1 - x0 + 1) - 10 * SCALE, (y1 - y0 + 1) - 10 * SCALE      # chừa lề
 logo = Image.open(LOGO).convert('RGBA')
 k = min(pw / logo.width, ph / logo.height)
 logo = logo.resize((max(1, round(logo.width * k)), max(1, round(logo.height * k))), Image.LANCZOS)

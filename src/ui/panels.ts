@@ -344,18 +344,67 @@ export function registerAllPanels() {
       return cell;
     };
 
+    // ảnh đại diện người đặt: vòng tròn chữ cái đầu, màu suy ra từ tên
+    const placeAva = (name: string, size = 46): HTMLElement => {
+      const d = h('div', 'od-ava');
+      let hsh = 0;
+      for (let i = 0; i < name.length; i++) hsh = (hsh * 131 + name.charCodeAt(i) * 977) % 100000;
+      const parts = name.trim().split(/\s+/);
+      const ini = parts.length > 1 ? parts[0][0] + parts[parts.length - 1][0] : parts[0].slice(0, 2);
+      d.style.cssText = `width:${size}px;height:${size}px;font-size:${Math.round(size * 0.36)}px;`
+        + `background:hsl(${hsh % 360} 55% ${40 + (hsh >> 3) % 12}%);`;
+      d.textContent = ini.toUpperCase();
+      return d;
+    };
+
     const renderSide = () => {
       sideCol.innerHTML = '';
       const o = orderList().find(x => x.id === sel);
-      if (!o) { sideCol.append(h('div', 'hint', 'Chọn một đơn bên trái để xem chi tiết.')); return; }
-      sideCol.append(h('div', 'od-side-title', o.place));
-      if (o.visitor) sideCol.append(h('div', 'od-visit', 'Khách ghé tận nông trại — thưởng cao hơn!'));
-      const pay = h('div', 'od-pay');
-      pay.append(uiIcon('coin', 20), h('span', '', fmt(o.coins)), uiIcon('level', 20), h('span', '', `${o.exp}`));
-      sideCol.append(pay);
+      if (!o) {
+        const e = h('div', 'od-empty');
+        const im = document.createElement('img'); im.src = 'assets/ui/inv/note.png';
+        e.append(im, h('div', '', 'Chọn một tờ đơn bên trái để xem chi tiết và giao hàng.'));
+        sideCol.append(e);
+        return;
+      }
+      // ----- đầu: ai đặt -----
+      const head = h('div', 'od-head');
+      head.append(placeAva(o.place));
+      const hi = h('div', 'grow');
+      hi.append(h('div', 'od-side-title', o.place),
+                h('div', 'od-side-sub', o.visitor ? 'Khách ghé tận nông trại' : 'Đặt hàng từ xa'));
+      head.append(hi);
+      sideCol.append(head);
+      if (o.visitor) sideCol.append(h('div', 'od-visit', 'Khách tới tận nơi nên thưởng cao hơn — giao sớm kẻo khách về!'));
+
+      // ----- hàng cần giao -----
+      const done = o.lines.filter(l => haveOf(l) >= l.qty).length;
+      const cap = h('div', 'od-cap');
+      cap.append(h('span', '', 'Hàng cần giao'), h('span', 'od-cap-n', `${done}/${o.lines.length}`));
+      sideCol.append(cap);
       const ing = h('div', 'od-ings');
       for (const l of o.lines) ing.append(lineRow(l));
       sideCol.append(ing);
+
+      // ----- danh sách từng món cho rõ tên + còn thiếu bao nhiêu -----
+      const list = h('div', 'od-list');
+      for (const l of o.lines) {
+        const have = haveOf(l);
+        const r = h('div', `od-line ${have >= l.qty ? 'ok' : ''}`);
+        r.append(h('span', 'od-line-nm', orderName(l.id)));
+        r.append(h('span', 'od-line-n', have >= l.qty ? 'đủ' : `còn thiếu ${l.qty - have}`));
+        list.append(r);
+      }
+      sideCol.append(list);
+
+      // ----- thưởng -----
+      sideCol.append(h('div', 'od-cap', 'Phần thưởng'));
+      const pay = h('div', 'od-pay');
+      const c1 = h('div', 'od-pay-item'); c1.append(uiIcon('coin', 24), h('span', '', fmt(o.coins)));
+      const c2 = h('div', 'od-pay-item'); c2.append(uiIcon('level', 24), h('span', '', `${o.exp} EXP`));
+      pay.append(c1, c2);
+      sideCol.append(pay);
+
       const ok = canDeliver(o);
       const bar = h('div', 'od-actions');
       bar.append(btn(ok ? 'Giao hàng' : 'Chưa đủ hàng', ok ? 'gold' : '', () => {
@@ -1063,29 +1112,36 @@ export function registerAllPanels() {
 
   // ================= Hồ sơ & Tủ đồ & Danh hiệu =================
   // ================= Nhân vật: hub có cột tab dọc bên phải (kiểu GunPow) =================
-  const CH_SECTIONS: [string, string][] = [
-    ['wardrobe', 'Tủ đồ'], ['skin', 'Skin'], ['title', 'Danh hiệu']
+  // [id, tên, icon trong assets/ui/inv]
+  const CH_SECTIONS: [string, string, string][] = [
+    ['wardrobe', 'Trang bị', 'ic_shirt'], ['skin', 'Skin', 'ic_skin'], ['title', 'Danh hiệu', 'ic_level']
   ];
 
+  // Tủ đồ dựng theo đúng mẫu Inventory của Cozy UI Pack: tab dán trên nóc,
+  // thân là tấm modal nét đứt, KHÔNG dùng khung gỗ chung của các popup khác.
   function openCharHub(sec = 'wardrobe') {
-    const { body, win } = openWindow('Tủ đồ', { size: 'large' });
-    win.classList.add('win-bag');            // dùng chung kiểu khung + tab dán ngoài
-    const titleEl = win.querySelector('.win-head > div') as HTMLElement;
+    const { body, win } = openWindow('', { size: 'large' });
+    win.classList.add('win-wardrobe');
+    win.querySelector('.win-head')?.remove();
+
+    const tabBar = h('div', 'wr-tabs');
+    win.insertBefore(tabBar, body);
+
     const draw = () => {
-      // tiêu đề cửa sổ luôn là tên mục đang mở ở cột tab dọc
-      titleEl.textContent = CH_SECTIONS.find(c => c[0] === sec)?.[1] ?? 'Tủ đồ';
+      tabBar.innerHTML = '';
+      for (const [id, name, ico] of CH_SECTIONS) {
+        const t = h('button', `wr-tab ${sec === id ? 'on' : ''}`);
+        const im = document.createElement('img'); im.src = `assets/ui/inv/${ico}.png`;
+        t.append(im);
+        if (sec === id) t.append(h('span', '', name));
+        t.title = name;
+        t.onclick = () => { sfx.click(); sec = id; draw(); };
+        tabBar.append(t);
+      }
       body.innerHTML = '';
       body.className = 'win-body ch-body';
-      const wrap = h('div', 'ch-wrap');
       const main = h('div', 'ch-main');
-      const side = h('div', 'ch-side');
-      for (const [id, name] of CH_SECTIONS) {
-        const t = h('button', `ch-tab ${sec === id ? 'active' : ''}`, name);
-        t.onclick = () => { sfx.click(); sec = id; draw(); };
-        side.append(t);
-      }
-      wrap.append(main, side);
-      body.append(wrap);
+      body.append(main);
       openCharHubRefresh = draw;
       if (sec === 'wardrobe') openWardrobe(main);
       else if (sec === 'skin') openWardrobe(main, 'skin');

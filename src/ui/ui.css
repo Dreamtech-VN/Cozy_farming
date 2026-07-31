@@ -46,14 +46,24 @@ img { image-rendering: auto; }
 .hud-title { font-size: 10px; font-weight: 700; }
 .hud-lv { font-size: 10px; color: #7a5b3a; font-weight: 700; }
 
-.hud-currency { display: flex; gap: 6px; align-items: flex-start; }
-.pill {
-  border-image: url('/assets/ui/pack/label.png') 30 fill / 12px stretch;
-  color: #4a3520; padding: 6px 12px 8px; font-size: 13px; font-weight: 800;
-  display: flex; gap: 5px; align-items: center; min-height: 36px;
+.hud-currency { display: flex; gap: 10px; align-items: flex-start; }
+/* Thanh tiền kiểu Cozy UI Pack: viên xu/ngọc đè lên mép trái viên thuốc */
+.cur {
+  position: relative; cursor: pointer; font-family: inherit; border: none;
+  height: 44px; min-width: 104px; padding: 0 14px 3px 44px;
+  display: flex; align-items: center; justify-content: flex-end;
+  border-image: url('/assets/ui/inv/cur_pill.png') 70 fill / 20px stretch;
 }
-.pill img { width: 20px; height: 20px; object-fit: contain; }
-.pill .plus { color: #2f9e44; cursor: pointer; font-weight: 900; font-size: 16px; }
+.cur:active { transform: translateY(2px); }
+.cur-ic {
+  position: absolute; left: -10px; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; object-fit: contain;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .28));
+}
+.cur-plus {
+  position: absolute; left: 12px; bottom: -3px; width: 19px; height: 19px; object-fit: contain;
+}
+.cur-n { font-size: 16px; font-weight: 900; color: #6b3a2e; letter-spacing: .3px; }
 .hud-clock {
   border-image: url('/assets/ui/pack/label.png') 30 fill / 12px stretch;
   color: #4a3520; padding: 5px 12px 7px 8px; min-height: 46px;
@@ -902,8 +912,36 @@ input.ui-input, select.ui-input {
 .chip.cc-chip .spr { flex: none; }
 .cc-chip-name { line-height: 1.1; }
 
-/* ===== Tủ đồ — dùng nguyên bộ giao diện Inventory của Cozy UI Pack ===== */
-.wd-wrap { display: flex; gap: 12px; flex: 1; min-height: 0; align-items: stretch; }
+/* ===== Tủ đồ — dựng theo mẫu Inventory của Cozy UI Pack ===== */
+/* Cửa sổ riêng: tấm modal nét đứt + tab dán trên nóc, không dùng khung gỗ chung */
+.win.win-wardrobe {
+  width: min(880px, 96vw); height: min(560px, 84vh); max-height: 84vh;
+  padding: 0; border: none; box-shadow: none; background: none;
+  border-image: url('/assets/ui/inv/modal.png') 40 fill / 18px stretch;
+  display: flex; flex-direction: column; overflow: visible;
+}
+.win.win-wardrobe > .win-body {
+  padding: 14px 16px 16px; flex: 1; min-height: 0; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.win.win-wardrobe .ch-main { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow: visible; }
+.win.win-wardrobe .win-close { width: 42px; height: 42px; right: -16px; top: -16px; }
+.wr-tabs { position: absolute; left: 22px; top: -34px; display: flex; align-items: flex-end; gap: 5px; z-index: 1; }
+.wr-tab {
+  display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; border: none; font-family: inherit;
+  min-width: 62px; height: 44px; padding: 0 16px 10px; color: #7a4f34;
+  font-size: 13px; font-weight: 900; white-space: nowrap;
+  background: url('/assets/ui/inv/tab_off.png') no-repeat center bottom / 100% 100%;
+}
+.wr-tab img { width: 24px; height: 22px; object-fit: contain; filter: saturate(.45) opacity(.8); }
+.wr-tab.on {
+  background-image: url('/assets/ui/inv/tab_on.png'); color: #17414f; z-index: 2;
+}
+.wr-tab.on img { filter: none; }
+
+
+.wd-wrap { display: flex; gap: 14px; flex: 1; min-height: 0; align-items: stretch; }
+.wd-wrap > .wd-right { border-left: 2px dashed #d9b48f; padding-left: 14px; }
 .wd-left {
   flex: 0 0 44%; display: flex; flex-direction: column; gap: 10px;
   padding: 14px 12px;
@@ -940,7 +978,11 @@ input.ui-input, select.ui-input {
 .wd-slot-name { font-size: 10px; font-weight: 800; color: #a9714b; }
 /* ô trống đã có sẵn icon mờ của pack rồi, khỏi đè chữ lên */
 .wd-slot.empty .wd-slot-name { display: none; }
-.wd-char { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; flex: 1; }
+.wd-char {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; flex: 1; align-self: center; padding: 10px 14px;
+  border: 2px solid #e3bd97; border-radius: 16px; background: rgba(255, 255, 255, .35);
+}
 .wd-char-name { font-size: 13px; font-weight: 800; color: #4a3520; background: #f6edd8cc; padding: 2px 10px; border-radius: 8px; }
 .wd-right { flex: 1; min-width: 0; display: flex; flex-direction: column; min-height: 0; }
 .wd-right-title { font-weight: 800; color: #4a3520; margin-bottom: 6px; }
@@ -1449,11 +1491,40 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   border-image: url('/assets/ui/inv/card.png') 95 70 70 70 fill / 34px 22px 22px 22px stretch;
   padding: 6px 14px 16px; overflow-y: auto;
 }
-.od-side-title { font-size: 14px; font-weight: 900; color: #7a4f1a; text-align: center; padding: 2px 0 6px; }
+.od-side-title { font-size: 15px; font-weight: 900; color: #6b3a1c; line-height: 1.15; }
+.od-side-sub { font-size: 10.5px; font-weight: 700; color: #a1815f; }
+.od-head { display: flex; align-items: center; gap: 10px; padding: 2px 0 4px; }
+.od-head .grow { flex: 1; min-width: 0; }
+.od-ava {
+  border-radius: 50%; flex: none; color: #fff; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: inset 0 -3px 8px rgba(0, 0, 0, .28), 0 2px 3px rgba(0, 0, 0, .18);
+}
+.od-cap {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 11px; font-weight: 900; color: #a1815f; letter-spacing: .4px;
+  border-bottom: 2px dashed #d9b48f; padding-bottom: 3px; margin-top: 4px;
+}
+.od-cap-n { color: #6b3a1c; }
+.od-list { display: flex; flex-direction: column; gap: 3px; }
+.od-line {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  font-size: 11.5px; font-weight: 800; color: #8a6a45;
+  background: rgba(255, 255, 255, .5); border-radius: 8px; padding: 4px 9px;
+}
+.od-line.ok { color: #2f7d32; background: rgba(209, 240, 205, .7); }
+.od-line-nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.od-line-n { flex: none; font-size: 10.5px; }
+.od-pay-item { display: flex; align-items: center; gap: 5px; }
+.od-empty {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  font-size: 12px; font-weight: 700; color: #a1815f; text-align: center; padding: 0 16px;
+}
+.od-empty img { width: 74px; opacity: .7; }
 .od-visit { font-size: 11px; font-weight: 800; color: #2f7d32; text-align: center; }
 .od-pay {
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  font-size: 15px; font-weight: 900; color: #4a3520;
+  display: flex; align-items: center; justify-content: space-around; gap: 6px;
+  font-size: 15px; font-weight: 900; color: #4a3520; padding: 2px 0;
 }
 .od-ings { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 .od-ing {

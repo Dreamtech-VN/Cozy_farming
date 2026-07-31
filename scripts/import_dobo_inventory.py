@@ -47,9 +47,14 @@ FILES = {
     'ic_level':   'Icons/IconsDefault/64px/IconsDefault41_64px.png',
     'chip_bar':   'Containers/Containers/Container1.png',
     'name_label': 'Labels/Label10.png',
+    # ---- thanh tiền tệ trên HUD ----
+    'cur_pill':   'Frames/Frame7.png',
+    'cur_coin':   'Icons/IconsDefault/128px/IconsDefault26_128px.png',
+    'cur_gem':    'Icons/IconsDefault/128px/IconsDefault23_128px.png',
+    'cur_plus':   'Icons/IconsDefault/128px/IconsDefault15_128px.png',
 }
 # ảnh khung to giữ nét hơn: cho phép cạnh dài tới 512
-BIG = {'modal', 'player', 'sep', 'note', 'note_pink', 'note_wide', 'quest', 'card', 'chip_bar', 'name_label'}
+BIG = {'modal', 'player', 'sep', 'note', 'note_pink', 'note_wide', 'quest', 'card', 'chip_bar', 'name_label', 'cur_pill'}
 
 os.makedirs(DST, exist_ok=True)
 for name, rel in FILES.items():

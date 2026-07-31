@@ -35,7 +35,7 @@ const FARM_PLOT = { ox: 1068, oy: 195, pw: 42, ph: 45 };          // lưới ru�
 const FARM_POND_TILES = { x: 110, y: 16, w: 12, h: 12 };          // lòng hồ cá (phủ nước động lên trên)
 const WAREHOUSE_POS = { x: 693, y: 175 };                         // nhà kho vẽ sẵn trên map 25
 const KITCHEN_POS = { x: 420, y: 175 };                           // nhà bếp vẽ sẵn trên map 25
-const ORDERBOARD_POS = { x: 38 * 16, y: 20.5 * 16 };              // bảng đơn hàng
+const ORDERBOARD_POS = { x: 56.2 * 16, y: 15.2 * 16 };            // bảng đơn hàng (chỗ cột đèn cũ)
 const PETHOUSE_POS = { x: 730, y: 320 };                          // nhà thú cưng (chỉ hiện khi đã nuôi)
 const PETSHOP_POS = { x: 21 * T, y: 13 * T };                     // tiệm thú cưng (Thành phố)
 const BARN_RECT = { x: 5.1, y: 11.6, w: 17.4, h: 10.8 };          // sân rào vẽ sẵn (px 82..360 / 185..358)
@@ -59,10 +59,11 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   // sân rào và hồ cá — không đắp thêm sprite nhà của pack khác lên nữa. Nông
   // trại KHÔNG có nhà riêng: nhà riêng nằm ở căn nhà trắng trong Thị trấn.
   farm: [
-    { key: 'lt_order_board', x: 38, y: 20.5, s: 1.15, label: 'Đơn hàng' },
+    // bảng đơn hàng đứng chỗ cột đèn cũ, ngay cạnh nhà kho
+    // (ảnh biển đã phóng x2 nên vẽ ở nửa scale)
+    { key: 'lt_order_board', x: 56.2, y: 15.2, s: 0.6, label: 'Đơn hàng' },
     // đèn đường: chân cột nằm hẳn trong thảm cỏ (cỏ hết ở y~240px)
     { key: 'lt_lamp_hd', x: 25.3, y: 14.5, s: 1 },
-    { key: 'lt_lamp_hd', x: 56.2, y: 14.5, s: 1 },
     { key: 'lt_lamp_hd', x: 107, y: 14.5, s: 1 }
   ],
   beach: [

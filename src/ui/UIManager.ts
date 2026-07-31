@@ -111,9 +111,18 @@ function buildHud() {
   prof.onclick = () => { sfx.click(); openPanel('profile'); };
   // tiền tệ + đồng hồ
   const right = h('div', 'hud-currency');
+  // thanh tiền: viên xu/ngọc đè lên viên thuốc kiểu Cozy UI Pack, nút + nằm
+  // ngay trên viên ngọc (bấm cả viên là mở nạp)
   right.innerHTML = `
-    <div class="pill"><img src="assets/ui/pack/icon_coin.png"> <span id="hud-coins">0</span> <span class="plus" id="coin-plus">＋</span></div>
-    <div class="pill"><img src="assets/ui/pack/icon_ruby.png"> <span id="hud-rubies">0</span> <span class="plus" id="ruby-plus">＋</span></div>
+    <button class="cur" id="coin-plus">
+      <img class="cur-ic" src="assets/ui/inv/cur_coin.png">
+      <span class="cur-n" id="hud-coins">0</span>
+    </button>
+    <button class="cur" id="ruby-plus">
+      <img class="cur-ic" src="assets/ui/inv/cur_gem.png">
+      <img class="cur-plus" src="assets/ui/inv/cur_plus.png">
+      <span class="cur-n" id="hud-rubies">0</span>
+    </button>
     <div class="hud-clock" id="hud-clock"></div>`;
   top.append(prof, right);
   root().append(top);

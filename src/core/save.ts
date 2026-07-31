@@ -78,6 +78,8 @@ export function toolLevel(id: string): number {
   if (id === 'basket') return Math.max(S.tools.basket, (S.inventory['tool_basket'] ?? 0) > 0 ? 1 : 0);
   // rìu được phát sẵn khi tạo nhân vật nên phải đọc cả S.tools, không chỉ túi đồ
   if (id === 'axe') return Math.max(S.tools.axe, (S.inventory['tool_axe'] ?? 0) > 0 ? 1 : 0);
+  // rìu được phát sẵn khi tạo nhân vật nên phải đọc cả S.tools, không chỉ túi đồ
+  if (id === 'axe') return Math.max(S.tools.axe, (S.inventory['tool_axe'] ?? 0) > 0 ? 1 : 0);
   return (S.inventory[`tool_${id}`] ?? 0) > 0 ? 1 : 0;
 }
 
