@@ -487,9 +487,7 @@ export class WorldScene extends Phaser.Scene {
     }
   }
 
-  // ghế trong nhà chờ xe buýt
-  private benchSeats: { x: number; y: number }[] = [];
-  private sitting = false;
+  private sitting = false;   // đang ngồi/nằm bằng lệnh trong menu
 
   // ================= đường xe & trạm buýt (khu ngoài trời) =================
   private roadTiles(): number {
@@ -526,14 +524,6 @@ export class WorldScene extends Phaser.Scene {
     const sh = this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setScale(this.zone.bg ? 0.9 : 0.55);
     // nhà chờ là phông nền: luôn nằm sau người chơi để đứng đợi xe vẫn thấy mình
     sh.setDepth(sy - sh.displayHeight);
-    // 3 chiếc ghế: người chơi ngồi HẲN LÊN mặt ghế bằng frame ngồi riêng
-    // (scripts/make_sit_frame.py), vẽ đè lên nhà chờ nên không bị che tí nào.
-    // Mặt ghế nằm cách chân nhà chờ 31px trong ảnh gốc; frame ngồi có hông cao
-    // 14px so với neo chân -> đặt neo chân ngay dưới mặt ghế bấy nhiêu.
-    const bsc = this.zone.bg ? 0.9 : 0.55;
-    const seatGap = sh.displayWidth * 0.3;
-    const seatY = sy - 31 * bsc + 8;
-    this.benchSeats = [-1, 0, 1].map(i => ({ x: sx + i * seatGap, y: seatY }));
     // xe riêng đậu mép đường
     if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
       this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(this.vehScale(`veh_${S.vehicle}`));
@@ -1276,13 +1266,6 @@ export class WorldScene extends Phaser.Scene {
         acts.push({ icon: '', ui: 'chat', label: `Nói chuyện: ${def.name}`, cb: () => this.talkNpc(def) });
       }
     }
-    // ghế nhà chờ xe buýt
-    if (this.benchSeats.length && !this.sitting) {
-      const seat = this.nearestSeat();
-      if (seat && Phaser.Math.Distance.Between(this.player.x, this.player.y, seat.x, seat.y) < 120) {
-        acts.push({ icon: '', ui: 'sit', label: 'Ngồi chờ xe', cb: () => this.sitOnBench(seat) });
-      }
-    }
     // cổng
     for (const p of this.zone.portals) {
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, p.x * T, p.y * T) < (this.zone.bg ? 64 : 26)) {
@@ -1598,44 +1581,10 @@ export class WorldScene extends Phaser.Scene {
     });
   }
 
-  // ---- ngồi ghế nhà chờ ----
-  private nearestSeat() {
-    let best: { x: number; y: number } | undefined; let bd = 1e9;
-    for (const s of this.benchSeats) {
-      const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, s.x, s.y);
-      if (d < bd) { bd = d; best = s; }
-    }
-    return best;
-  }
-
-  private sitOnBench(seat: { x: number; y: number }) {
-    this.moveTarget = undefined; this.pendingAct = false;
-    this.player.play('walk');
-    this.tweens.add({
-      targets: this.player, x: seat.x, y: seat.y, duration: 420,
-      onUpdate: () => this.player.setDepth(this.player.y),
-      onComplete: () => this.startSitting('Ngồi đợi xe buýt~', true)
-    });
-  }
-
-  // tư thế ngồi: giữ tới khi người chơi chạm để đi tiếp
-  // onBench = ngồi ghế -> giữ dáng đứng vì mặt ghế đã che nửa dưới người,
-  // còn frame 'sit' của Avatar thực chất là ngồi bệt/quỳ, đặt lên ghế nhìn sai.
-  private startSitting(msg: string, onBench = false) {
-    this.sitting = true;
-    this.busy = true;
-    this.player.setDir(3);
-    this.player.play(onBench ? 'chair' : 'sit');
-    if (onBench) this.player.showShadow(false);   // ngồi trên ghế, chân không chạm đất
-    this.player.setFace('happy', 2500);
-    toast(msg, 'sit');
-  }
-
   private standUp() {
     if (!this.sitting) return;
     this.sitting = false;
     this.busy = false;
-    this.player.showShadow(true);
     this.player.resetFace();
     this.player.play('idle');
   }

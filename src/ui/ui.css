@@ -292,11 +292,23 @@ img { image-rendering: auto; }
 
 /* Tạo nhân vật */
 .cc-panel {
-  position: absolute; right: 0; top: 0; bottom: 0; width: min(520px, 58vw);
+  position: absolute; right: 0; top: 22px; bottom: 10px; width: min(520px, 58vw);
   border-image: url('/assets/ui/pack/frame2.png') 70 fill / 18px stretch;
-  display: flex; flex-direction: column; color: #4a3520;
+  display: flex; flex-direction: column; color: #4a3520; overflow: visible;
 }
-.cc-body { flex: 1; overflow-y: auto; padding: 10px 14px; }
+/* bảng tên gắn đè lên viền trên, giống cửa sổ Túi đồ */
+.cc-panel > .win-head {
+  position: relative; padding: 4px 18px 2px; text-align: center;
+}
+.cc-panel > .win-head::before {
+  content: attr(data-title);
+  display: inline-block; margin-top: -20px; padding: 7px 40px 9px; border-radius: 12px;
+  background: linear-gradient(#f6edd8, #e2c99a); border: 3px solid #b5836b;
+  box-shadow: 0 3px 0 #00000022, inset 0 2px 0 #fff8e8;
+  color: #5b3a1c; font-size: 18px; font-weight: 900;
+}
+.cc-body { flex: 1; min-height: 0; overflow-y: auto; padding: 8px 14px 6px; }
+.cc-foot { flex: none; padding: 4px 14px 10px; }
 .cc-row { margin-bottom: 10px; }
 .cc-row .lbl, .lbl { font-size: 12px; font-weight: 900; color: #7a4a1f; margin-bottom: 4px; }
 .swatches { display: flex; gap: 5px; flex-wrap: wrap; }

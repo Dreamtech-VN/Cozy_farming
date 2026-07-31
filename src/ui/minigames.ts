@@ -299,7 +299,8 @@ export function registerMinigames() {
   registerPanel('charcreate', () => {
     // panel cố định bên phải, không phải cửa sổ
     const wrap = h('div', 'cc-panel');
-    const head = h('div', 'win-head', 'Tạo nhân vật');
+    const head = h('div', 'win-head');
+    head.dataset.title = 'Tạo nhân vật';   // bảng tên vẽ bằng ::before như Túi đồ
     const bodyEl = h('div', 'cc-body');
     wrap.append(head, bodyEl);
     document.getElementById('ui-root')!.append(wrap);
@@ -334,8 +335,11 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
     done();
     bus.emit('charcreate:done');
   });
-  startBtn.style.cssText = 'width:100%;padding:14px;font-size:16px;margin-top:6px';
-  body.append(startBtn);
+  startBtn.style.cssText = 'width:100%;padding:14px;font-size:16px';
+  // nút chính đặt ngoài vùng cuộn để lúc nào cũng thấy
+  const foot = h('div', 'cc-foot');
+  foot.append(startBtn);
+  body.parentElement?.append(foot);
 
   let sections: HTMLElement[] = [];
   const rebuild = () => {
@@ -344,7 +348,7 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
     const section = (label: string) => {
       const d = h('div', 'cc-row');
       d.append(h('div', 'lbl', label));
-      body.insertBefore(d, startBtn);
+      body.append(d);
       sections.push(d);
       return d;
     };
