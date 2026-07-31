@@ -1,3 +1,4 @@
+import { CROP_ANIM } from '@/data/crops';
 import Phaser from 'phaser';
 import { HAIR_STYLES, CLOTHES, ACCESSORIES } from '@/data/clothing';
 import { ANIMAL_LIST } from '@/data/animals';
@@ -29,6 +30,13 @@ export class PreloadScene extends Phaser.Scene {
 
     // ---- Nông trại ----
     this.load.spritesheet('crops', 'assets/farm/crops_all.png', { frameWidth: 16, frameHeight: 16 });
+    // cây trồng có animation lớn dần (Pack2)
+    for (const [id, a] of Object.entries(CROP_ANIM)) {
+      this.load.spritesheet(`grow_${id}`, `assets/pack2/crops/${id}.png`, { frameWidth: a[0], frameHeight: a[1] });
+    }
+    for (let i = 1; i <= 5; i++) {
+      this.load.spritesheet(`pwater${i}`, `assets/pack2/water/water_${i}.png`, { frameWidth: 16, frameHeight: 16 });
+    }
     this.load.spritesheet('seeds', 'assets/farm/seeds.png', { frameWidth: 16, frameHeight: 16 });
     this.load.spritesheet('tools', 'assets/farm/tools.png', { frameWidth: 16, frameHeight: 16 });
     this.load.spritesheet('items16', 'assets/farm/items.png', { frameWidth: 16, frameHeight: 16 });

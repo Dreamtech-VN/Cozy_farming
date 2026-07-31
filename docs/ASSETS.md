@@ -31,9 +31,18 @@ Nguồn: các pack đã mua trên itch.io (license thương mại), tải từ
 Pack pixel 16px do chủ dự án cung cấp (release `Pack2` của repo). Trong pack có
 tileset hàng rào, nhà cửa, vật nuôi, cây trồng, nước autotile, UI và **nhạc/âm thanh**.
 
-Đang dùng: `tiles/fence_01_16x16.png` -> `assets/pack2/fence.png`, từ đó ghép sẵn
-`assets/pack2/pen.png` (chuồng rào 12x8 ô, có 4 góc và cổng ở giữa cạnh dưới).
-Phần còn lại (nhạc nền, vật nuôi, cây trồng...) chưa tích hợp.
+Đang dùng:
+- `tiles/fence_01_16x16.png` -> `assets/pack2/fence.png`, ghép sẵn thành
+  `assets/pack2/pen.png` (chuồng rào 12x8 ô, 4 góc + cổng giữa cạnh dưới)
+- `crops/*/growth_basic/*.png` -> `assets/pack2/crops/<cây>.png`: cây trồng lớn
+  dần có animation. Frame cuối của pack là cây héo nên game chỉ dùng tới frame
+  n-2. Bảng ánh xạ ở `CROP_ANIM` trong `src/data/crops.ts`
+- `tiles/water_0*_16x16_5frames.png` -> `assets/pack2/water/` (chưa dùng, hồ đang
+  chạy hiệu ứng gợn/lấp lánh bằng tile nước Avatar)
+
+Pack chưa phủ hết: dưa hấu và 3 loại hoa (hướng dương, hồng, tulip) vẫn dùng
+sheet cũ; vật nuôi chỉ có bò và heo khớp (không có gà/cừu). Nhạc nền và ambient
+trong pack chưa tích hợp.
 
 ## Icon vật phẩm nông trại kiểu chibi (`assets/farm/chibi/`)
 

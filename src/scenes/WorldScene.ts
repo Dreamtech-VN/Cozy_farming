@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { S, save } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ZONES, type ZoneDef, type NpcDef } from '@/data/zones';
-import { CROPS, CROP_LIST } from '@/data/crops';
+import { CROPS, CROP_LIST, CROP_ANIM } from '@/data/crops';
 import { PETS } from '@/data/pets';
 import { roamersIn } from '@/systems/social';
 import type { Friend } from '@/core/types';
@@ -334,6 +334,19 @@ export class WorldScene extends Phaser.Scene {
       if (this.zone.id === 'farm') {
         const P = FARM_POND;
         this.add.image(P.x, P.y, 'lt_pond').setDisplaySize(P.w, P.h).setDepth(-80);
+        // mặt nước động: gợn sóng + lấp lánh, cắt theo hình hồ
+        const pm = this.make.graphics({}, false);
+        pm.fillStyle(0xffffff);
+        pm.fillRoundedRect(P.x - P.w / 2 + 10, P.y - P.h / 2 + 8, P.w - 20, P.h - 16, 34);
+        const ripple = this.add.tileSprite(P.x - P.w / 2, P.y - P.h / 2, P.w, P.h, 'av_water')
+          .setOrigin(0).setDepth(-79).setAlpha(0.28);
+        ripple.setMask(pm.createGeometryMask());
+        this.tweens.add({ targets: ripple, tilePositionX: 64, duration: 9000, repeat: -1 });
+        const glint = this.add.tileSprite(P.x - P.w / 2, P.y - P.h / 2, P.w, P.h, 'av_water_spark')
+          .setOrigin(0).setDepth(-78).setAlpha(0.18);
+        glint.setMask(pm.createGeometryMask());
+        this.tweens.add({ targets: glint, alpha: 0.5, duration: 1700, yoyo: true, repeat: -1 });
+        this.tweens.add({ targets: glint, tilePositionY: 32, duration: 7000, repeat: -1 });
         this.pondEllipse = new Phaser.Geom.Ellipse(P.x, P.y + 2, P.w * 0.82, P.h * 0.62);
         this.add.text(P.x, P.y - P.h / 2 - 10, 'Hồ cá', { fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(2);
       }
@@ -368,7 +381,7 @@ export class WorldScene extends Phaser.Scene {
       }
       // cây từ tileset (tránh ruộng, chuồng và mặt nước)
       if (this.zone.features.includes('trees')) {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 4; i++) {
           const x = Math.floor(rnd() * (w - 6)) + 3, y = Math.floor(rnd() * (h - 8)) + 3;
           if (this.zone.features.includes('farm') && x > FARM_ORIGIN.x - 2 && x < FARM_ORIGIN.x + 18 && y > FARM_ORIGIN.y - 2 && y < FARM_ORIGIN.y + 14) continue;
           if (this.zone.features.includes('barn') && x > BARN_RECT.x - 2 && x < BARN_RECT.x + BARN_RECT.w + 2 && y > BARN_RECT.y - 2 && y < BARN_RECT.y + BARN_RECT.h + 2) continue;
@@ -750,15 +763,23 @@ export class WorldScene extends Phaser.Scene {
       let spr = this.cropSprites[i];
       if (p?.state === 'planted' && crop) {
         const stage = farming.stageOf(p);
-        const frame = crop.row * 25 + 1 + stage; // crops_all: 25 cột, cột 0 là icon
+        const anim = CROP_ANIM[crop.id];
+        // cây có bộ frame lớn dần riêng -> trải đều các chặng lên frame (bỏ frame héo cuối)
+        const tex = anim ? `grow_${crop.id}` : 'crops';
+        const frame = anim
+          ? Math.min(anim[2] - 2, Math.round(stage / Math.max(1, crop.stages - 1) * (anim[2] - 2)))
+          : crop.row * 25 + 1 + stage;
         // cây đứng giữa ô đất, neo chân để gốc chạm đất
         const cx = img.x + FARM_PLOT.pw / 2, cy = img.y + FARM_PLOT.ph * 0.86;
         if (!spr) {
-          spr = this.add.sprite(cx, cy, 'crops', frame);
-          spr.setOrigin(0.5, 1).setScale(2);
+          spr = this.add.sprite(cx, cy, tex, frame);
+          spr.setOrigin(0.5, 1).setScale(anim ? 1.9 : 2);
           spr.setDepth(img.y + FARM_PLOT.ph);
           this.cropSprites[i] = spr;
-        } else spr.setFrame(frame);
+        } else {
+          if (spr.texture.key !== tex) spr.setTexture(tex, frame); else spr.setFrame(frame);
+          spr.setScale(anim ? 1.9 : 2);
+        }
         spr.setVisible(true);
         // cây chín thì nhún nhảy
         if (farming.isRipe(p) && !spr.getData('bounce')) {
@@ -1288,7 +1309,7 @@ export class WorldScene extends Phaser.Scene {
 
   private spawnChopTrees() {
     // 3 cây gỗ HD giữa nông trại (ngoài ruộng/chuồng/hồ)
-    for (const [px2, py2] of [[452, 486], [200, 150], [700, 470]] as [number, number][]) {
+    for (const [px2, py2] of [[452, 486], [700, 470]] as [number, number][]) {
       const obj = this.add.image(px2, py2, 'lt_tree').setOrigin(0.5, 1).setScale(0.72).setDepth(py2);
       this.addFootprint(px2, py2, 46, 22);
       this.chopTrees.push({ obj, readyAt: 0 });

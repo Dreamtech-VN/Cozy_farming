@@ -15,6 +15,14 @@ export interface CropDef {
   yieldQty: [number, number]; // số lượng thu hoạch min..max
 }
 
+// Cây trồng có animation lớn dần (pack SuperRetroRanch): [rộng, cao, số frame]
+// Frame cuối là cây héo -> dùng frame (n-2) làm lúc chín.
+export const CROP_ANIM: Record<string, [number, number, number]> = {
+  carrot: [16, 16, 7], turnip: [16, 16, 7], potato: [16, 32, 7], tomato: [16, 32, 23],
+  cabbage: [16, 16, 7], pumpkin: [16, 16, 7], strawberry: [16, 16, 7], corn: [16, 32, 8],
+  eggplant: [16, 32, 7], chili: [16, 32, 11]
+};
+
 export const CROPS: Record<string, CropDef> = {};
 
 const SHEET = 'assets/farm/crops_all.png';
