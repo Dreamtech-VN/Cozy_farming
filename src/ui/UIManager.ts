@@ -111,16 +111,16 @@ function buildHud() {
   prof.onclick = () => { sfx.click(); openPanel('profile'); };
   // tiền tệ + đồng hồ
   const right = h('div', 'hud-currency');
-  // thanh tiền: viên xu/ngọc đè lên viên thuốc kiểu Cozy UI Pack, nút + nằm
-  // ngay trên viên ngọc (bấm cả viên là mở nạp)
+  // Thanh tiền + đồng hồ vẽ hoàn toàn bằng CSS (không dùng ảnh pack): viên
+  // thuốc kem viền hồng, đồng xu và viên ngọc là gradient + clip-path.
   right.innerHTML = `
-    <button class="cur" id="coin-plus">
-      <img class="cur-ic" src="assets/ui/inv/cur_coin.png">
+    <button class="cur cur-coin" id="coin-plus">
+      <span class="cur-ic"><i></i></span>
       <span class="cur-n" id="hud-coins">0</span>
     </button>
-    <button class="cur" id="ruby-plus">
-      <img class="cur-ic" src="assets/ui/inv/cur_gem.png">
-      <img class="cur-plus" src="assets/ui/inv/cur_plus.png">
+    <button class="cur cur-gem" id="ruby-plus">
+      <span class="cur-ic"><i></i></span>
+      <span class="cur-plus"></span>
       <span class="cur-n" id="hud-rubies">0</span>
     </button>
     <div class="hud-clock" id="hud-clock"></div>`;
@@ -259,9 +259,11 @@ function refreshClock() {
   const hh = Math.floor(hg);
   const mm = Math.floor((hg - hh) * 60);
   const sz = season();
-  const night = hg >= 19 || hg < 5;
-  // 6h ở mép trái, 12h đỉnh, 18h mép phải -> góc = (giờ - 6) / 12 * 180 độ
-  const ang = ((hg - 6) / 12) * Math.PI - Math.PI;
+  const night = hg >= 18 || hg < 6;
+  // Ban ngày mặt trời mọc 6h ở mép trái, đỉnh lúc 12h, lặn 18h ở mép phải;
+  // ban đêm mặt trăng cũng chạy đúng vòng cung đó (mọc 18h, lặn 6h) cho thấy rõ.
+  const t = night ? ((hg - 18 + 24) % 24) / 12 : (hg - 6) / 12;
+  const ang = t * Math.PI - Math.PI;
   const r = 15;
   const ox = 18 + Math.cos(ang) * r, oy = 19 + Math.sin(ang) * r;
 
