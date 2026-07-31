@@ -53,31 +53,32 @@ img { image-rendering: auto; }
 .hud-currency { display: flex; gap: 12px; align-items: flex-start; }
 
 /* Thanh tiền: khung kính trong suốt cho thấy cảnh phía sau, viên xu/ngọc
-   (ảnh Cozy UI Pack) đè lên mép trái, nút + ở đầu bên phải */
-.cur, .hud-clock {
+   (ảnh Cozy UI Pack) đè lên mép trái, nút + ở đầu bên phải.
+   Dùng tiền tố .hud-cur- vì .cur đã là class của icon xu trong nút giá. */
+.hud-cur, .hud-clock {
   /* nền tối mờ để chữ trắng đọc được trên mọi khung cảnh, vẫn thấy xuyên qua */
   background: linear-gradient(rgba(28, 52, 36, .46), rgba(12, 28, 18, .62));
   backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
   border: 2px solid rgba(255, 255, 255, .55); border-radius: 999px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 3px 8px rgba(0, 0, 0, .3);
 }
-.cur {
+.hud-cur {
   position: relative; cursor: pointer; font-family: inherit;
   height: 40px; min-width: 116px; padding: 0 30px 0 40px;
   display: flex; align-items: center; justify-content: center;
 }
-.cur:active { transform: translateY(2px); }
-.cur-ic {
+.hud-cur:active { transform: translateY(2px); }
+.hud-cur-ic {
   position: absolute; left: -12px; top: 50%; transform: translateY(-50%);
   width: 40px; height: 40px; object-fit: contain;
   filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .4));
 }
-.cur-plus {
+.hud-cur-plus {
   position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
   width: 22px; height: 22px; object-fit: contain;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .4));
 }
-.cur-n {
+.hud-cur-n {
   font-size: 16px; font-weight: 900; color: #fff; letter-spacing: .3px;
   text-shadow: 0 1px 0 rgba(0, 0, 0, .35), 0 2px 5px rgba(0, 0, 0, .45);
 }
@@ -1079,7 +1080,7 @@ input.ui-input, select.ui-input {
 /* Cửa hàng thời trang / tiệm tóc: nhân vật bên trái đứng yên, chỉ lưới bên phải
    cuộn. Trước đây .wd-body được gắn trong code nhưng KHÔNG có CSS nào, nên
    .win-body tự cuộn và kéo trôi luôn cả nhân vật bên trái. */
-.win.win-shop { height: 84vh; max-height: 84vh; }
+.win.win-shop { height: min(540px, 86vh); max-height: 86vh; }
 .win-body.wd-body {
   display: flex; flex-direction: column; min-height: 0; overflow: hidden;
 }
@@ -1112,9 +1113,9 @@ input.ui-input, select.ui-input {
 .aff-fill { height: 100%; background: linear-gradient(90deg, #ff8787, #ffd43b); border-radius: 6px; transition: width .3s; }
 .row.row-active { background: rgba(255, 212, 59, .16); border-radius: 10px; }
 .hb-slot.hb-on { border-color: #ffd43b; box-shadow: 0 0 0 2px #ffd43b66; background: rgba(255, 212, 59, .22); }
-.hb-slot.hb-rod { opacity: .45; }
 
 /* icon tiền tệ trong chữ */
+/* icon xu/ruby nhỏ nằm trong chữ của nút giá */
 img.cur { width: 15px; height: 15px; object-fit: contain; vertical-align: -3px; margin-right: 2px; }
 .wd-item .ui-ic, .cell .ui-ic { display: block; margin: 0 auto 2px; }
 .win-tabs .tab { display: inline-flex; align-items: center; gap: 5px; }
@@ -1405,7 +1406,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .load-txt { color: #fff8e8; font-size: 14px; font-weight: 700; letter-spacing: .3px; }
 
 /* ===== Kho nông trại: thẻ sáng, số lượng nổi, nút bán full chiều ngang ===== */
-.win.win-wh { height: 80vh; max-height: 80vh; }
+.win.win-wh { height: min(520px, 86vh); max-height: 86vh; }
 .wh-wrap { display: flex; flex-direction: column; gap: 10px; }
 .wh-head { display: flex; align-items: center; gap: 10px; }
 .wh-hint { flex: 1; font-size: 11.5px; font-weight: 700; color: #8a6a45; line-height: 1.35; }
@@ -1440,12 +1441,12 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .wh-nosell { font-size: 11px; font-weight: 800; color: #9b7a55; padding: 4px 0 2px; }
 
 /* ===== Nhà bếp: bên trái là bếp, bên phải là danh sách công thức ===== */
-.win.win-kitchen { height: 82vh; max-height: 82vh; }
+.win.win-kitchen { height: min(520px, 86vh); max-height: 86vh; }
 .win.win-kitchen .win-body { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
 .kt-wrap { display: flex; gap: 12px; flex: 1; min-height: 0; }
 .kt-stove {
   flex: 0 0 44%; display: flex; flex-direction: column; align-items: center;
-  justify-content: center; gap: 9px;
+  justify-content: safe center; gap: 9px; overflow-y: auto; min-height: 0;
   padding: 16px 12px; border-radius: 14px;
   background: linear-gradient(#fff8e8, #efdcb6); border: 2px solid #b5836b;
   box-shadow: inset 0 2px 0 #fffdf4;
@@ -1481,7 +1482,11 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .kt-ing-art { height: 34px; display: flex; align-items: center; justify-content: center; }
 .kt-ing-art img { image-rendering: pixelated; }
 .kt-ing-n { font-size: 11px; font-weight: 900; color: #4a3520; margin-top: 2px; }
-.kt-act { width: 100%; display: flex; justify-content: center; }
+.kt-act {
+  width: 100%; display: flex; justify-content: center;
+  position: sticky; bottom: -16px; padding: 8px 0 2px; margin-top: auto;
+  background: linear-gradient(rgba(239, 220, 182, 0), #f2e0bb 40%);
+}
 .kt-act .btn { min-width: 62%; }
 
 .kt-list {
@@ -1503,7 +1508,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .kt-ok { color: #2f9e44; font-size: 17px; font-weight: 900; flex: none; margin-left: auto; }
 
 /* ===== Bảng đơn hàng (kiểu Hay Day) ===== */
-.win.win-orders { height: 84vh; max-height: 84vh; }
+.win.win-orders { height: min(540px, 86vh); max-height: 86vh; }
 .win.win-orders .win-body { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
 .od-wrap { display: flex; gap: 12px; flex: 1; min-height: 0; }
 .od-board {
@@ -1596,4 +1601,24 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .od-ing.ok { background-image: url('/assets/ui/inv/slot_sel.png'); }
 .od-ing-n { font-size: 12px; font-weight: 900; color: #fff3d6; text-shadow: 0 1px 2px #00000080; margin-top: 2px; }
 .od-ing.ok .od-ing-n { color: #4a3520; text-shadow: none; }
-.od-actions { display: flex; gap: 8px; justify-content: center; margin-top: auto; flex-wrap: wrap; }
+.od-actions {
+  display: flex; gap: 8px; justify-content: center; margin-top: auto; flex-wrap: wrap;
+  position: sticky; bottom: -16px; padding: 8px 0 2px;
+  background: linear-gradient(rgba(255, 250, 235, 0), #fffaeb 30%);
+}
+
+/* ===== Màn hình thấp (điện thoại nằm ngang): thu nhỏ cho vừa khung ===== */
+@media (max-height: 540px) {
+  .kt-art { width: 84px; height: 84px; }
+  .kt-name { font-size: 15px; }
+  .kt-ing { width: 50px; }
+  .kt-ing-art { height: 28px; }
+  .kt-sec-cap { display: none; }
+  .od-side { padding: 12px 12px 14px; }
+  .od-ing { width: 58px; padding: 6px 3px 9px; }
+  .od-ing-art { height: 34px; }
+  .wd-char { width: 160px; height: 196px; }
+  .wd-slot { width: 58px; height: 58px; }
+  .wr-tab { height: 46px; font-size: 13px; padding: 0 14px 10px; }
+  .wr-tabs { top: -36px; }
+}

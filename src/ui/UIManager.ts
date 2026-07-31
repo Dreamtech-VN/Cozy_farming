@@ -114,14 +114,14 @@ function buildHud() {
   // thanh tiền: viên xu/ngọc (ảnh Cozy UI Pack) đè lên mép trái viên thuốc,
   // nút + nằm ngay trên viên ngọc — bấm cả viên là mở nạp
   right.innerHTML = `
-    <button class="cur" id="coin-plus">
-      <img class="cur-ic" src="assets/ui/inv/cur_coin.png">
-      <span class="cur-n" id="hud-coins">0</span>
+    <button class="hud-cur" id="coin-plus">
+      <img class="hud-cur-ic" src="assets/ui/inv/cur_coin.png">
+      <span class="hud-cur-n" id="hud-coins">0</span>
     </button>
-    <button class="cur" id="ruby-plus">
-      <img class="cur-ic" src="assets/ui/inv/cur_gem.png">
-      <img class="cur-plus" src="assets/ui/inv/cur_plus.png">
-      <span class="cur-n" id="hud-rubies">0</span>
+    <button class="hud-cur" id="ruby-plus">
+      <img class="hud-cur-ic" src="assets/ui/inv/cur_gem.png">
+      <img class="hud-cur-plus" src="assets/ui/inv/cur_plus.png">
+      <span class="hud-cur-n" id="hud-rubies">0</span>
     </button>
     <div class="hud-clock" id="hud-clock"></div>`;
   top.append(prof, right);
@@ -335,12 +335,15 @@ export function refreshHotbar() {
       const lv = toolLevel(tid);
       if (lv >= 2) slot.append(h('span', 'hb-lv', `Lv${lv}`));
       if (heldTool() === tid) slot.classList.add('hb-on');
-      slot.title = `${t.name}${lv >= 2 ? ` Lv.${lv}` : ''} — bấm để cầm`;
-      // bấm = cầm nông cụ này (và dùng luôn nếu đang đứng cạnh chỗ dùng được)
+      const held = heldTool() === tid;
+      slot.title = `${t.name}${lv >= 2 ? ` Lv.${lv}` : ''} — bấm để ${held ? 'cất đi' : 'cầm'}`;
+      // bấm = cầm nông cụ này (và dùng luôn nếu đang đứng cạnh chỗ dùng được);
+      // bấm lại đúng món đang cầm = cất xuống, không cầm trên tay nữa
       slot.onclick = () => {
         sfx.click();
-        if (heldTool() !== tid) selectTool(tid);
-        bus.emit('hotbar:use', tid);
+        const wasHeld = heldTool() === tid;
+        selectTool(tid);
+        if (!wasHeld) bus.emit('hotbar:use', tid);
       };
       // giữ lâu / chuột phải = gỡ nông cụ khỏi ô
       let hold = 0;
@@ -348,9 +351,9 @@ export function refreshHotbar() {
       slot.onpointerup = slot.onpointerleave = () => clearTimeout(hold);
       slot.oncontextmenu = e => { e.preventDefault(); unequipTool(i); toast(`Đã gỡ ${t.name}.`, 'hoe'); };
     } else if (i === ROD_SLOT) {
-      // ô cuối để dành cho cần câu — chưa mua thì cứ để trống
-      slot.classList.add('empty', 'hb-rod');
-      slot.append(spr(TOOLS.rod.url, 0, 0, TOOLS.rod.w, TOOLS.rod.h, toolIconSize(TOOLS.rod, 30)));
+      // ô cuối để dành cho cần câu — chưa mua thì vẫn hiện dấu + như các ô khác
+      slot.classList.add('empty');
+      slot.textContent = '+';
       slot.title = 'Ô cần câu — mua cần ở tiệm câu Ông Biển';
       slot.onclick = () => { sfx.click(); toast('Ô này dành cho cần câu — mua cần ở tiệm câu Ông Biển nhé.', 'rod'); };
     } else {
