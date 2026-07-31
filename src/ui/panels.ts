@@ -16,7 +16,6 @@ import { SHOPS } from '@/data/shops';
 import { QUESTS, TITLES, ACHIEVEMENTS } from '@/data/quests';
 import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
-import { VEHICLES } from '@/data/vehicles';
 import { TOOL_LIST, TOOLS, toolUpgradeAt, toolIconSize } from '@/data/tools';
 import { PET_LIST, PETS, ownsPet, petBonus, petUrl } from '@/data/pets';
 import * as farming from '@/systems/farming';
@@ -1920,44 +1919,6 @@ export function registerAllPanels() {
     body.append(grid);
   });
 
-  // ================= Garage (xe cộ) =================
-  registerPanel('garage', () => {
-    const { body } = openWindow('Garage', { size: 'small' });
-    body.append(h('div', 'hint', 'Không có xe riêng thì đi xe buýt công cộng miễn phí. Xe riêng sẽ đón bạn tại trạm và đậu ở mép đường mỗi khu.'));
-    body.append(h('div', 'sep'));
-    // xe buýt công cộng
-    const busRow = h('div', 'row');
-    busRow.append(spr('assets/vehicles/bus.png', 0, 0, 105, 48, 64));
-    busRow.innerHTML += `<div class="grow"><div class="t1">Xe buýt công cộng</div><div class="t2">Miễn phí — luôn sẵn sàng</div></div>`;
-    busRow.append(S.vehicle === ''
-      ? btn('Đang dùng', '', undefined)
-      : btn('Dùng', 'gold', () => { S.vehicle = ''; save(); openPanel('garage'); }));
-    body.append(busRow);
-    // xe riêng
-    for (const v of Object.values(VEHICLES)) {
-      const r = h('div', 'row');
-      r.append(spr(`assets/vehicles/${v.id}.png`, 0, 0, v.w, v.h, 56));
-      r.innerHTML += `<div class="grow"><div class="t1">${v.name}</div><div class="t2">${v.desc}</div></div>`;
-      const owned = S.garage.includes(v.id);
-      if (owned) {
-        r.append(S.vehicle === v.id
-          ? btn('Đang dùng', '', undefined)
-          : btn('Dùng', 'gold', () => { S.vehicle = v.id; save(); toast(`Đã chọn ${v.name}!`, 'bus'); openPanel('garage'); }));
-      } else {
-        r.append(priceBtn(v.price, 'gold', () => {
-          if (spend(v.price)) {
-            S.garage.push(v.id);
-            S.vehicle = v.id;
-            addStat('vehicles_bought');
-            save(); sfx.win();
-            toast(`Chúc mừng xe mới: ${v.name}!`, 'gift');
-            openPanel('garage');
-          }
-        }));
-      }
-      body.append(r);
-    }
-  });
 
   // ================= Nạp (demo) =================
   registerPanel('topup', () => {

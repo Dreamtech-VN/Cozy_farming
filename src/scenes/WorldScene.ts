@@ -534,11 +534,6 @@ export class WorldScene extends Phaser.Scene {
     const sh = this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setScale(this.zone.bg ? 0.9 : 0.55);
     // nhà chờ là phông nền: luôn nằm sau người chơi để đứng đợi xe vẫn thấy mình
     sh.setDepth(sy - sh.displayHeight);
-    // xe riêng đậu mép đường
-    if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
-      this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(this.vehScale(`veh_${S.vehicle}`));
-    }
-
     if (!this.zone.bg) this.drawGateArch();   // ảnh nền gốc đã có cổng chào riêng
     this.startTraffic();
   }
@@ -602,12 +597,12 @@ export class WorldScene extends Phaser.Scene {
     return big ? 2.2 : 1.15;
   }
 
-  // hiệu ứng xe buýt/xe riêng đón khách rồi rời bến
+  // hiệu ứng xe buýt đón khách rồi rời bến (mọi chuyến đi đều bằng xe buýt)
   private playDeparture(zoneId: string) {
     if (this.busy) return;
     this.busy = true;
     this.stopFishing();
-    const key = S.vehicle && this.textures.exists(`veh_${S.vehicle}`) ? `veh_${S.vehicle}` : 'veh_bus';
+    const key = 'veh_bus';
     const stopX = this.busStopX();
     const midY = this.roadMidY();
     const exitLeft = this.roadWidth() < this.zone.w * T;
@@ -652,7 +647,7 @@ export class WorldScene extends Phaser.Scene {
   private playArrival() {
     busArrival = false;
     this.busy = true;
-    const key = S.vehicle && this.textures.exists(`veh_${S.vehicle}`) ? `veh_${S.vehicle}` : 'veh_bus';
+    const key = 'veh_bus';
     const stopX = this.busStopX();
     this.player.setPosition(stopX, this.roadTopY() - 10);
     this.player.setVisible(false);

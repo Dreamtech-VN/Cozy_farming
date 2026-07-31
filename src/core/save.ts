@@ -44,8 +44,6 @@ export function defaultState(): GameState {
       dailyQuestDate: '', dailyQuests: []
     },
     minigames: { caroWins: 0, xiangqiWins: 0, rpsWins: 0 },
-    garage: [],
-    vehicle: '',
     settings: { music: true, sfx: true },
     zone: 'farm_gate',
     clockOffset: 0

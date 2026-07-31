@@ -141,7 +141,6 @@ function buildHud() {
     ['collection', 'Sưu tập', 'collections'],
     ['trophy', 'Xếp hạng', 'ranking'],
     ['wardrobe', 'Tủ đồ', 'wardrobe'],
-    ['shop', 'Garage', 'garage'],
     ['ruby', 'Nạp', 'topup'],
     ['settings', 'Cài đặt', 'settings']
   ];

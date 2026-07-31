@@ -148,8 +148,6 @@ export interface GameState {
   mail: MailMessage[];
   daily: DailyState;
   minigames: { caroWins: number; xiangqiWins: number; rpsWins: number };
-  garage: string[];         // xe đã sở hữu
-  vehicle: string;          // xe đang dùng ('' = đi xe buýt công cộng)
   settings: { music: boolean; sfx: boolean };
   zone: string;
   clockOffset: number;      // phút cộng thêm vào giờ thật (đổi ngày/đêm nhanh)
