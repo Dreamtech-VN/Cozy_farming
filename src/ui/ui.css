@@ -42,6 +42,8 @@ img { image-rendering: auto; }
   border: 2px solid #b5836b; display: flex; align-items: center; justify-content: center; overflow: hidden;
   flex: none;
 }
+/* ảnh đại diện pack/tải lên đã là hình vuông kín -> phủ đầy khung tròn */
+.hud-avatar .ava-img { width: 100%; height: 100%; }
 .hud-name { font-weight: 800; font-size: 13px; line-height: 1.1; }
 .hud-title { font-size: 10px; font-weight: 700; }
 .hud-lv { font-size: 10px; color: #7a5b3a; font-weight: 700; }
@@ -234,7 +236,8 @@ img { image-rendering: auto; }
 /* Chỉ số nhân vật */
 /* Ảnh đại diện trong hồ sơ + nút đổi */
 .pf-face-box { display: flex; flex-direction: column; align-items: center; gap: 5px; flex: none; }
-.pf-face-box > div:first-child {
+/* :first-child chứ không phải div:first-child — ảnh pack/tải lên là <img> */
+.pf-face-box > :first-child {
   border-radius: 50%; background: #f6edd8; border: 2px solid #b5836b; overflow: hidden;
 }
 .pf-ava-btn {
@@ -246,7 +249,8 @@ img { image-rendering: auto; }
 
 /* Lưới chọn ảnh đại diện */
 .ava-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; margin-top: 8px;
+  max-height: 46vh; overflow-y: auto; padding-right: 4px; align-content: start;
 }
 .ava-cell {
   display: flex; align-items: center; justify-content: center; cursor: pointer;
@@ -255,6 +259,21 @@ img { image-rendering: auto; }
 }
 .ava-cell.active { border-color: #e8890c; box-shadow: 0 0 0 3px #ffd43b66; }
 .ava-cell:active { transform: scale(.93); }
+.ava-grid::-webkit-scrollbar { width: 9px; }
+.ava-grid::-webkit-scrollbar-track { background: #d9bf8e; border-radius: 5px; }
+.ava-grid::-webkit-scrollbar-thumb {
+  background: linear-gradient(#ffe9a8, #d3a13c); border-radius: 5px; border: 1px solid #a97c2e;
+}
+
+/* Xem trước ảnh tải lên */
+.ava-up-prev {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 104px; margin-top: 8px;
+}
+.ava-up-prev img {
+  width: 96px; height: 96px; object-fit: cover; border-radius: 50%;
+  border: 3px solid #b5836b; background: #f6edd8;
+}
 
 .pf-stat-head {
   display: flex; align-items: center; gap: 8px; margin: 12px 0 6px;

@@ -1,5 +1,6 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charHeadOnly, avatarLook, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
+import { AVATAR_PICS, avatarPicUrl, isUploadedPic } from '@/data/avatars';
 import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem, unequipTool, allocateStat, STAT_NAMES, STAT_KEYS } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
@@ -890,7 +891,7 @@ export function registerAllPanels() {
         (info.querySelector('#pf-name') as HTMLElement).textContent = S.player.name;
         const faceBox = info.querySelector('#pf-face') as HTMLElement;
         faceBox.className = 'pf-face-box';
-        faceBox.append(charHeadOnly(avatarLook(), 56));
+        faceBox.append(avatarEl(56));
         const avaBtn = h('button', 'pf-ava-btn', 'Đổi ảnh đại diện');
         avaBtn.onclick = () => { sfx.click(); openPanel('avatarpick'); };
         faceBox.append(avaBtn);
@@ -960,39 +961,111 @@ export function registerAllPanels() {
 
   registerPanel('profile', () => { const { body } = openWindow('Hồ sơ cá nhân'); renderCharInfo(body); });
 
-  // ===== Đổi ảnh đại diện: chọn biểu cảm hiển thị trên avatar =====
+  // ===== Đổi ảnh đại diện: ảnh có sẵn / đầu nhân vật / ảnh tự tải lên =====
   registerPanel('avatarpick', () => {
-    const { body, close } = openWindow('Đổi ảnh đại diện', { size: 'small' });
+    const { body, close, tabs } = openWindow('Đổi ảnh đại diện', { size: 'small' });
     const look = S.player.chibi;
-    if (!look) { body.append(h('div', 'hint', 'Chưa có nhân vật.')); return; }
-    body.append(h('div', 'hint', 'Chọn biểu cảm cho ảnh đại diện của bạn.'));
-    const grid = h('div', 'ava-grid');
-    const opts = chibiList(40, look.gender).filter(p => p.level === 0 && p.gold <= 0).slice(0, 12);
-    const cur = S.player.avatarFace || look.eyes;
-    for (const p of opts) {
-      const cell = h('div', `ava-cell ${cur === p.id ? 'active' : ''}`);
-      cell.append(charHeadOnly({ ...look, eyes: p.id }, 52));
-      cell.title = p.name;
-      cell.onclick = () => {
-        S.player.avatarFace = p.id;
-        save(true); sfx.click();
-        bus.emit(EV.STATE_CHANGED);
-        toast('Đã đổi ảnh đại diện!', 'check');
-        close();
-      };
-      grid.append(cell);
-    }
-    body.append(grid);
-    const reset = btn('Dùng mặt mặc định', '', () => {
-      S.player.avatarFace = undefined;
+    const content = h('div');
+
+    const apply = (pic: string | undefined, face?: number) => {
+      S.player.avatarPic = pic;
+      if (face !== undefined) S.player.avatarFace = face;
       save(true); sfx.click();
       bus.emit(EV.STATE_CHANGED);
+      // hồ sơ đang mở phía sau không tự dựng lại -> thay ảnh tại chỗ
+      const box = document.querySelector('.pf-face-box');
+      box?.firstElementChild?.replaceWith(avatarEl(56));
+      toast('Đã đổi ảnh đại diện!', 'check');
       close();
+    };
+
+    // --- tab 1: 35 ảnh dựng sẵn ---
+    const renderPack = () => {
+      content.innerHTML = '';
+      content.append(h('div', 'hint', 'Chọn một ảnh đại diện có sẵn.'));
+      const grid = h('div', 'ava-grid');
+      for (const id of AVATAR_PICS) {
+        const cell = h('div', `ava-cell ${S.player.avatarPic === `pack:${id}` ? 'active' : ''}`);
+        const img = document.createElement('img');
+        img.src = avatarPicUrl(id);
+        img.draggable = false;
+        img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block';
+        cell.append(img);
+        cell.onclick = () => apply(`pack:${id}`);
+        grid.append(cell);
+      }
+      content.append(grid);
+    };
+
+    // --- tab 2: đầu nhân vật theo biểu cảm ---
+    const renderFace = () => {
+      content.innerHTML = '';
+      if (!look) { content.append(h('div', 'hint', 'Chưa có nhân vật.')); return; }
+      content.append(h('div', 'hint', 'Dùng đầu nhân vật của bạn làm ảnh đại diện.'));
+      const grid = h('div', 'ava-grid');
+      const opts = chibiList(40, look.gender).filter(p => p.level === 0 && p.gold <= 0).slice(0, 12);
+      const cur = S.player.avatarPic ? -1 : (S.player.avatarFace || look.eyes);
+      for (const p of opts) {
+        const cell = h('div', `ava-cell ${cur === p.id ? 'active' : ''}`);
+        cell.append(charHeadOnly({ ...look, eyes: p.id }, 52));
+        cell.title = p.name;
+        cell.onclick = () => apply(undefined, p.id);
+        grid.append(cell);
+      }
+      content.append(grid);
+    };
+
+    // --- tab 3: tải ảnh từ máy ---
+    const renderUpload = () => {
+      content.innerHTML = '';
+      content.append(h('div', 'hint', 'Chọn ảnh từ máy — ảnh sẽ được cắt vuông và thu về 128×128.'));
+      const prev = h('div', 'ava-up-prev');
+      if (isUploadedPic(S.player.avatarPic)) {
+        const cur = document.createElement('img');
+        cur.src = S.player.avatarPic!;
+        prev.append(cur);
+      }
+      const file = h('input') as HTMLInputElement;
+      file.type = 'file';
+      file.accept = 'image/*';
+      file.style.display = 'none';
+      let picked = '';
+      const okBtn = btn('Dùng ảnh này', 'gold', () => { if (picked) apply(picked); });
+      okBtn.style.display = 'none';
+      file.onchange = () => {
+        const f = file.files?.[0];
+        if (!f) return;
+        if (f.size > 8 * 1024 * 1024) { toast('Ảnh quá lớn — tối đa 8MB', 'alert'); return; }
+        const fr = new FileReader();
+        fr.onload = () => {
+          const im = new Image();
+          im.onload = () => {
+            picked = squareThumb(im, 128);
+            prev.innerHTML = '';
+            const p = document.createElement('img');
+            p.src = picked;
+            prev.append(p);
+            okBtn.style.display = '';
+          };
+          im.onerror = () => toast('Không đọc được ảnh này', 'alert');
+          im.src = String(fr.result);
+        };
+        fr.onerror = () => toast('Không đọc được tệp', 'alert');
+        fr.readAsDataURL(f);
+      };
+      const row = h('div');
+      row.style.cssText = 'display:flex;gap:8px;justify-content:center;margin-top:10px';
+      row.append(btn('Chọn ảnh...', 'blue', () => file.click()), okBtn);
+      content.append(prev, row, file);
+    };
+
+    tabs(['Có sẵn', 'Nhân vật', 'Tải lên'], i => {
+      if (i === 0) renderPack();
+      else if (i === 1) renderFace();
+      else renderUpload();
     });
-    const foot = h('div');
-    foot.style.cssText = 'display:flex;justify-content:center;margin-top:8px';
-    foot.append(reset);
-    body.append(foot);
+    body.append(content);
+    renderPack();
   });
   registerPanel('wardrobe', () => openCharHub('wardrobe'));
 

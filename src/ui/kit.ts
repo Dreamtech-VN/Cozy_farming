@@ -1,6 +1,8 @@
 // Bộ công cụ dựng UI DOM nhỏ gọn
 import { S } from '@/core/save';
+import { bus } from '@/core/events';
 import { lookLayers } from '@/data/chibi';
+import { picSrc } from '@/data/avatars';
 import BBOX from '@/data/chibi-bbox.json';
 export function h<K extends keyof HTMLElementTagNameMap>(
   tag: K, cls = '', text = ''
@@ -25,6 +27,13 @@ export interface WinOpts { size?: 'small' | 'normal' | 'large'; onClose?: () => 
 
 const openWindows: HTMLElement[] = [];
 
+// Phaser nghe pointerdown trên window ở pha CAPTURE, nên stopPropagation của
+// backdrop (pha bubble) không chặn được -> chạm vào popup vẫn lọt xuống thế giới
+// (ví dụ bấm ô trong popup mà trúng chỗ nhân vật thì mở luôn menu bản thân).
+// Vì vậy báo cho scene tắt input khi còn popup đang mở.
+export function anyWindowOpen(): boolean { return openWindows.length > 0; }
+function syncModal() { bus.emit('ui:modal', openWindows.length > 0); }
+
 export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLElement; win: HTMLElement; close: () => void; tabs: (names: string[], onPick: (i: number) => void, icons?: string[]) => void } {
   const backdrop = h('div', 'win-backdrop');
   const win = h('div', `win ${opts.size === 'small' ? 'small' : opts.size === 'large' ? 'large' : ''}`);
@@ -37,6 +46,7 @@ export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLEleme
   backdrop.append(win);
   root().append(backdrop);
   openWindows.push(backdrop);
+  syncModal();
 
   root().style.pointerEvents = 'auto';
 
@@ -45,6 +55,7 @@ export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLEleme
     const i = openWindows.indexOf(backdrop);
     if (i >= 0) openWindows.splice(i, 1);
     if (!openWindows.length) root().style.pointerEvents = '';
+    syncModal();
     opts.onClose?.();
   };
   closeBtn.onclick = close;
@@ -74,6 +85,7 @@ export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLEleme
 export function closeAllWindows() {
   for (const w of [...openWindows]) w.remove();
   openWindows.length = 0;
+  syncModal();
 }
 
 // nút giá tiền có icon xu/ruby thật (thay cho "🪙123")
@@ -320,6 +332,33 @@ export function charFace(look: import('@/data/chibi').ChibiLook | undefined, siz
     wrap.append(el);
   }
   return wrap;
+}
+
+// Ảnh đại diện: ảnh pack / ảnh tự tải lên, không có thì dùng đầu chibi
+export function avatarEl(size = 40): HTMLElement {
+  const pic = S.player.avatarPic;
+  if (pic) {
+    const img = document.createElement('img');
+    img.className = 'ava-img';
+    img.src = picSrc(pic);
+    img.draggable = false;
+    img.style.cssText = `width:${size}px;height:${size}px;object-fit:cover;display:block;`;
+    return img;
+  }
+  return charHeadOnly(avatarLook(), size);
+}
+
+// Cắt vuông ở giữa + thu nhỏ -> data URL, dùng cho ảnh đại diện người chơi tự tải lên.
+// JPEG 128px ~8KB nên nhét vào save (localStorage) vẫn thoải mái.
+export function squareThumb(img: HTMLImageElement, size = 128): string {
+  const s = Math.min(img.naturalWidth, img.naturalHeight);
+  const sx = (img.naturalWidth - s) / 2, sy = (img.naturalHeight - s) / 2;
+  const cv = document.createElement('canvas');
+  cv.width = cv.height = size;
+  const ctx = cv.getContext('2d')!;
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, sx, sy, s, s, 0, 0, size, size);
+  return cv.toDataURL('image/jpeg', 0.85);
 }
 
 // Look dùng cho ảnh đại diện: giống nhân vật nhưng có thể đổi riêng biểu cảm

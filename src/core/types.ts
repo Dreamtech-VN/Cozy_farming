@@ -37,6 +37,7 @@ export interface PlayerProfile {
   charStats: CharStats;    // chỉ số nhân vật kiểu Avatar
   statPoints: number;      // điểm chưa phân bổ
   avatarFace?: number;     // part mắt riêng cho ảnh đại diện (0/undefined = theo nhân vật)
+  avatarPic?: string;      // 'pack:07' hoặc data URL ảnh tự tải lên; bỏ trống = dùng đầu chibi
   title: string;            // danh hiệu đang dùng
   titles: string[];         // danh hiệu đã mở
   badges: string[];         // huy hiệu

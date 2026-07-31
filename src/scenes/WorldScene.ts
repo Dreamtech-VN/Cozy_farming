@@ -14,7 +14,7 @@ type Dir = 0 | 1 | 2 | 3;
 import { virtualInput, consumeAction } from '@/core/input';
 import { RES } from '@/core/res';
 import { TITLES } from '@/data/quests';
-import { titleCanvas, nameCanvas } from '@/ui/kit';
+import { titleCanvas, nameCanvas, anyWindowOpen } from '@/ui/kit';
 import { hideLoading } from '@/ui/loading';
 import { setHudVisible } from '@/ui/UIManager';
 import * as farming from '@/systems/farming';
@@ -241,7 +241,11 @@ export class WorldScene extends Phaser.Scene {
     bus.on('world:selfact', this.selfAct, this);
     bus.on('world:playeract', this.playPlayerAct, this);
     bus.on('world:selfemote', this.onEmote, this);
+    bus.on('ui:modal', this.onModal, this);
+    // popup đang mở -> khoá input scene (xem chú thích ở kit.ts)
+    this.input.enabled = !anyWindowOpen();
     this.events.on('shutdown', () => {
+      bus.off('ui:modal', this.onModal, this);
       bus.off(EV.APPEARANCE, this.onAppearance, this);
       bus.off(EV.STATE_CHANGED, this.refreshTitleTag, this);
       bus.off(EV.HOUSE, this.onHouseChanged, this);
@@ -258,6 +262,8 @@ export class WorldScene extends Phaser.Scene {
     // cảnh đã dựng xong -> gỡ màn chờ
     this.time.delayedCall(120, () => hideLoading());
   }
+
+  private onModal(open: boolean) { this.input.enabled = !open; }
 
   private onAppearance() { if (S.player.chibi) this.player.setLook(S.player.chibi); }
 

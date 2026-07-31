@@ -193,6 +193,19 @@ Format được dịch ngược từ client (AvatarData.cs) + bảng `items` tro
 ⚠️ Cùng lưu ý bản quyền như các asset Lttt khác — dev/test OK, thương mại phải thay.
 Bộ nhân vật pixel Cozy (Character v2) vẫn còn trong repo nhưng không dùng nữa.
 
+## Ảnh đại diện (`assets/avatar/`)
+
+35 ảnh đại diện mèo/thú từ pack **"Cute Avatars Game Asset Pack"** của
+[craftpix.net](https://craftpix.net/file-licenses/) (bản Freebies). Nguồn 257×257,
+đã resize về 128×128 + quantize 128 màu (~4KB/ảnh, tổng ~139KB thay vì ~690KB).
+Danh sách trong `src/data/avatars.ts`, đánh số `01.png`…`35.png`.
+⚠️ License craftpix Freebies: dùng được trong game thương mại nhưng **không được
+bán lại / phát hành lại chính file asset**. Đọc kỹ link trên trước khi phát hành.
+
+Người chơi còn có thể **tự tải ảnh lên** làm đại diện: ảnh được cắt vuông ở giữa,
+thu về 128×128 rồi lưu dạng data URL JPEG (~8KB) ngay trong save — xem
+`squareThumb()` trong `src/ui/kit.ts`. Không có server nên ảnh chỉ nằm ở máy người chơi.
+
 ## Nhân vật cho map HD (nên mua)
 
 Nhân vật Character v2 (32px pixel) hơi nhỏ so với map nền HD kiểu Avatar — hiện game
