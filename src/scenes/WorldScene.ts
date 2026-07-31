@@ -33,9 +33,9 @@ const T = 16; // kích thước tile
 // nền nên ở đây chỉ cần khai báo đúng vị trí của chúng để logic bám theo.
 const FARM_PLOT = { ox: 1068, oy: 195, pw: 42, ph: 45 };          // lưới ruộng 13x4 trên bãi cỏ phải
 const FARM_POND_TILES = { x: 110, y: 16, w: 12, h: 12 };          // lòng hồ cá (phủ nước động lên trên)
-const WAREHOUSE_POS = { x: 700, y: 200 };                         // nhà kho vẽ sẵn
-const KITCHEN_POS = { x: 320, y: 200 };                           // nhà bếp (tile x=20)
-const ORDERBOARD_POS = { x: 31 * 16, y: 19.5 * 16 };              // bảng đơn hàng
+const WAREHOUSE_POS = { x: 693, y: 175 };                         // nhà kho vẽ sẵn trên map 25
+const KITCHEN_POS = { x: 420, y: 175 };                           // nhà bếp vẽ sẵn trên map 25
+const ORDERBOARD_POS = { x: 38 * 16, y: 20.5 * 16 };              // bảng đơn hàng
 const PETHOUSE_POS = { x: 730, y: 320 };                          // nhà thú cưng (chỉ hiện khi đã nuôi)
 const PETSHOP_POS = { x: 21 * T, y: 13 * T };                     // tiệm thú cưng (Thành phố)
 const BARN_RECT = { x: 5.1, y: 11.6, w: 17.4, h: 10.8 };          // sân rào vẽ sẵn (px 82..360 / 185..358)
@@ -55,15 +55,11 @@ const TRAFFIC_KEYS = ['veh_bus', 'veh_truck_orange', 'veh_camper_pink', 'veh_cam
 
 // Decor đặt sẵn theo khu (sprite thật từ asset pack) — toạ độ tile, origin đáy giữa
 const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number; label?: string }[]> = {
-  // Nền map 25 đã bị xoá sạch cây + 2 căn nhà gốc (scripts/clean_farm_map.py).
-  // Nhà bếp / nhà kho lấy thẳng sprite của repo Lttt (assets/lttt/bld) — nhà bếp
-  // vốn đã có biển "NHÀ BẾP" nên khỏi cần nhãn chữ. Nông trại KHÔNG có nhà riêng:
-  // nhà riêng nằm ở căn nhà trắng trong Thị trấn.
+  // Nền map 25 gốc Avatar đã vẽ sẵn nhà bếp (biển "NHÀ BẾP"), nhà kho, cây cối,
+  // sân rào và hồ cá — không đắp thêm sprite nhà của pack khác lên nữa. Nông
+  // trại KHÔNG có nhà riêng: nhà riêng nằm ở căn nhà trắng trong Thị trấn.
   farm: [
-    { key: 'lt_warehouse', x: 43.5, y: 15.3, s: 0.86, label: 'Nhà kho' },
-    { key: 'lt_kitchen', x: 20, y: 15.3, s: 1 },
-    { key: 'lt_order_board', x: 31, y: 19.5, s: 1.15, label: 'Đơn hàng' },
-    { key: 'lt_shop_av', x: 52, y: 15.3, s: 1, label: 'Cửa hàng' },
+    { key: 'lt_order_board', x: 38, y: 20.5, s: 1.15, label: 'Đơn hàng' },
     // đèn đường: chân cột nằm hẳn trong thảm cỏ (cỏ hết ở y~240px)
     { key: 'lt_lamp_hd', x: 25.3, y: 14.5, s: 1 },
     { key: 'lt_lamp_hd', x: 56.2, y: 14.5, s: 1 },
@@ -1227,11 +1223,6 @@ export class WorldScene extends Phaser.Scene {
     // tiệm thú cưng (thành phố)
     if (this.zone.id === 'town' && Phaser.Math.Distance.Between(this.player.x, this.player.y, PETSHOP_POS.x, PETSHOP_POS.y + 30) < 110) {
       acts.push({ icon: '', ui: 'shop', label: 'Tiệm thú cưng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petshop' }) });
-    }
-
-    // cửa hàng trong nông trại
-    if (this.zone.id === 'farm' && Phaser.Math.Distance.Between(this.player.x, this.player.y, 52 * T, 15.3 * T + 40) < 90) {
-      acts.push({ icon: '', ui: 'shop', label: 'Cửa hàng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: 'shop_seed' } }) });
     }
 
     // quầy kem (công viên)

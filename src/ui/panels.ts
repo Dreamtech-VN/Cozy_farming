@@ -385,7 +385,11 @@ export function registerAllPanels() {
         note.append(row);
         const row2 = h('div', 'od-note-pay');
         row2.append(uiIcon('level', 16), h('span', '', `${o.exp}`));
-        if (ok) row2.append(h('span', 'od-tick', '✔'));
+        if (ok) {
+          const tick = document.createElement('img');
+          tick.src = 'assets/ui/inv/check.png'; tick.className = 'od-tick';
+          row2.append(tick);
+        }
         note.append(row2);
         note.onclick = () => { sfx.click(); sel = o.id; render(); };
         boardCol.append(note);
@@ -1578,31 +1582,41 @@ export function registerAllPanels() {
       const colR = h('div', 'wd-slot-col');
       SLOTS.forEach(([ico, name, z, key], i) => {
         if (mode === 'skin') return;                       // mục Skin không cần cột ô trang bị
-        const cell = h('button', `wd-slot ${i === tab ? 'active' : ''}`);
+        const cell = h('button', `wd-slot eq-${key} ${i === tab ? 'active' : ''}`);
         const cur = look[key];
         if (z === -1) {
           const sk = look.skin ? SKINS[look.skin] : undefined;
           if (sk) cell.append(skinFace(sk, 34)); else cell.append(uiIcon(ico, 28));
         } else if (cur) cell.append(z <= 20 || z === 70 ? chibiPreview(cur as number, 34) : chibiHead(cur as number, 34, z));
-        else cell.append(uiIcon(ico, 28));
+        else cell.classList.add('empty');            // ô trống dùng ảnh mờ sẵn của pack
         cell.append(h('span', 'wd-slot-name', name));
         cell.onclick = () => { tab = i; render(); };
         // chia đôi cho hai cột hai bên nhân vật
         (i < Math.ceil(SLOTS.length / 2) ? colL : colR).append(cell);
       });
       const mid = h('div', 'wd-char');
-      mid.append(charFace(look, 190));
-      mid.append(h('div', 'wd-char-name', S.player.name));
-      left.append(colL, mid, colR);
+      mid.append(charFace(look, 210));
+      const nameRow = h('div', 'wd-name-row');
+      const lv = h('div', 'wd-lv'); lv.textContent = `${S.player.level}`;
+      const nm = h('div', 'wd-name'); nm.textContent = S.player.name;
+      nameRow.append(lv, nm);
+      const body2 = h('div', 'wd-left-body');
+      body2.append(colL, mid, colR);
+      left.append(nameRow, body2);
 
       // ----- phải: chia tab + card lưới ô (có cả ô trống như tủ đồ game) -----
       const right = h('div', 'wd-right');
       if (SLOTS.length > 1) {
-        const tabBar = h('div', 'wd-tabs');
-        SLOTS.forEach(([ic2, name2], i) => {
-          const t = h('div', `tab ${i === tab ? 'active' : ''}`);
-          t.append(uiIcon(ic2, 14), h('span', '', name2));
-          t.onclick = () => { tab = i; render(); };
+        // dải chip icon kiểu Cozy UI Pack: chọn cái nào thì có khung góc bao quanh
+        const tabBar = h('div', 'wd-chips');
+        SLOTS.forEach(([, name2, , key2], i) => {
+          const t = h('button', `wd-chip ${i === tab ? 'on' : ''}`);
+          const ic = document.createElement('img');
+          ic.src = `assets/ui/inv/ic_${key2 === 'pant' ? 'pants' : key2}.png`;
+          ic.alt = name2;
+          t.append(ic);
+          t.title = name2;
+          t.onclick = () => { sfx.click(); tab = i; render(); };
           tabBar.append(t);
         });
         right.append(tabBar);
@@ -1645,17 +1659,16 @@ export function registerAllPanels() {
       for (const p of owned) {
         const on = cur === p.id;
         const cell = h('button', `wd-item ${on ? 'active' : ''}`);
-        cell.append(z <= 20 || z === 70 ? chibiPreview(p.id, 44) : chibiHead(p.id, 40, z), h('div', 'nm', p.name));
-        const ps = partStats(p);
-        if (ps) {
-          const tag = h('div', 'wd-stats', formatStats(ps).join(' '));
-          cell.append(tag);
-        }
+        const box = h('div', 'wd-item-box');
+        box.append(z <= 20 || z === 70 ? chibiPreview(p.id, 44) : chibiHead(p.id, 40, z));
+        cell.append(box, h('div', 'nm', p.name));
         cell.onclick = () => { (look as any)[pk] = on && optional ? 0 : p.id; apply(); render(); };
         grid.append(cell); cells++;
       }
       // lấp cho đủ sức chứa tủ đồ, ô trống để trống
-      for (let i = cells; i < WD_CAP; i++) grid.append(h('div', 'wd-item wd-empty'));
+      for (let i = cells; i < WD_CAP; i++) {
+        const e = h('div', 'wd-item wd-empty'); e.append(h('div', 'wd-item-box')); grid.append(e);
+      }
       card.append(grid);
       right.append(h('div', 'hint', !owned.length
         ? 'Chưa có món nào — ghé shop thời trang ở Khu mua sắm!'

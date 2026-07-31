@@ -13,7 +13,7 @@ Nguồn: các pack đã mua trên itch.io (license thương mại), tải từ
 | `Interior.full` | global (nội thất — sẽ map chi tiết), pets (mèo/chó), aquarium gif |
 | `town.full` | tiles + buildings thành phố (sẽ map chi tiết) |
 | `nature.full` | cây/bụi/quả tự nhiên |
-| `Cozy_UI_Pack_doboui` | Chưa dùng (UI hiện tại là DOM/CSS — nhẹ và dễ sửa hơn) |
+| `Cozy_UI_Pack_doboui` | Khung/nút/nhãn chung + **nguyên bộ giao diện tủ đồ, túi đồ và đơn hàng** (`assets/ui/inv/`, xem `scripts/import_dobo_inventory.py`) |
 
 ## Sprite đã cắt sẵn từ pack (scripts cắt bằng PIL, đã kiểm tra bằng mắt)
 
@@ -72,6 +72,21 @@ Icon nông sản trong túi/kho ưu tiên bộ chibi này (bảng `IT_CROP` tron
 (`assets/pack2/icons/`), vì icon pack2 vẽ theo kiểu cây non nên trông lệch
 so với trứng/sữa/thịt.
 
+### Giao diện tủ đồ / túi đồ / đơn hàng (`assets/ui/inv/`)
+
+Cắt bằng `scripts/import_dobo_inventory.py` từ Cozy UI Pack (dobo_ui) — pack có
+sẵn nguyên bộ Inventory nên không tự dựng lại bằng CSS nữa:
+
+- `modal.png`, `player.png`, `card.png`, `chip_bar.png`, `name_label.png`: các
+  tấm nền (khung lưới, bảng nhân vật, thẻ chi tiết, dải chip, nhãn tên)
+- `slot.png` / `slot_sel.png`: ô vật phẩm thường / đang chọn — dùng chung cho
+  tủ đồ, túi đồ và ô hàng trên bảng đơn
+- `eq_empty.png` + `eq_<loại>.png`: ô trang bị, bản `eq_*` đã có sẵn icon mờ
+  từng loại nên ô trống khỏi cần vẽ chữ
+- `tab_on/off.png`, `ic_*.png`: tab và icon loại trang bị
+- `note.png` / `note_pink.png` (khách ghé trại) / `check.png`: tờ giấy và dấu
+  tích cho bảng đơn hàng
+
 ## Cloverframe Cozy Farm Starter Pack (`assets/farm/cf/`)
 
 20 icon 32x32 (nông sản, trứng/sữa/phô mai/bánh/mật ong, túi hạt, bình tưới, cuốc, liềm, rìu).
@@ -116,20 +131,18 @@ Hai map này đã vẽ sẵn **sân rào nuôi thú, hồ cá, đường đất 
 code chỉ khai báo toạ độ để logic (ruộng, chuồng, câu cá) bám theo — không còn
 cảnh đường đi/nhà/ruộng đè lên nhau.
 
-`scripts/clean_farm_map.py` chạy tiếp sau đó để **xoá hết cây (kể cả mấy khúc
-gỗ đã chặt) và các căn nhà vẽ sẵn**, trả lại hàng rào + thảm cỏ bằng cách lát
-gương một đoạn viền sạch lấy ngay trong chính map. Nhà bếp / nhà kho / cửa hàng
-sau đó dựng lại bằng sprite **pack Cozy** (`assets/buildings/farm_house`,
-`farm_barn`, `farm_market`) khai báo trong `ZONE_DECOR`, kèm tên treo phía trên
-— thay cho mốc cổng nhấp nháy (map nền đã có cổng/nhà, cứ đi tới là hiện nút).
+Map 25 còn vẽ sẵn cả **nhà bếp (biển "NHÀ BẾP") và nhà kho**, nên dùng nguyên
+map — không xoá đi rồi đắp sprite pack khác lên nữa (script `clean_farm_map.py`
+làm việc đó đã bỏ). `KITCHEN_POS` / `WAREHOUSE_POS` trong `WorldScene` chỉ trỏ
+đúng vị trí hai căn vẽ sẵn để hiện nút khi đi tới gần.
 
 ### Đèn đường, cửa hàng, đống đất (`scripts/fix_avatar_assets.py`)
 
 - `hd/home/845.png` → `assets/lttt/lamp_hd.png`: đèn đường. Trong game mỗi cột
   đèn kèm 2 lớp `glow` (blend ADD) sáng dần theo `darkness()` — trời càng tối
   đèn càng sáng, ban ngày tắt hẳn.
-- `hd/home/831.png` → `assets/lttt/bld/shop_av.png`: cửa hàng "CỬA HÀNG" gốc,
-  dùng cho map cổng (bản pack Cozy nhìn lệch style với nền vẽ tay).
+- `hd/home/831.png` → `assets/lttt/bld/shop_av.png`: cửa hàng "CỬA HÀNG" gốc
+  (hiện chưa đặt ở map nào — map cổng đã bỏ, nông trại mua hạt qua NPC Cô Mai).
 - `assets/lttt/trough.png` / `trough_full.png`: máng thức ăn. Bản cắt cũ lấy
   dư sang ô bên dưới nên dính thêm một đống cỏ khô rời — cắt lại còn 51x32,
   đúng cái máng (bản `_full` đã có cỏ nằm trong máng).
