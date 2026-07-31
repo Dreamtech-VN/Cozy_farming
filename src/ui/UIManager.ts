@@ -126,7 +126,7 @@ function buildHud() {
   const drawer = h('div'); drawer.id = 'menu-drawer';
   const MENU: [string, string, string][] = [
     ['inventory', 'Kho đồ', 'inventory'],
-    ['quest', 'Nhiệm vụ', 'quests'],
+    ['map', 'Bản đồ', 'map'],
     ['social', 'Bạn bè', 'social'],
     ['daily', 'Điểm danh', 'daily'],
     ['wheel', 'Vòng quay', 'wheel'],
@@ -150,7 +150,7 @@ function buildHud() {
   menuBtn.id = 'menu-btn';
   quick.append(
     menuBtn,
-    mkBtn('map', 'Bản đồ', () => openPanel('map'), 'map'),
+    mkBtn('quest', 'Nhiệm vụ', () => openPanel('quests'), 'quests'),
     mkBtn('mail', 'Thư', () => openPanel('mail'), 'mail'),
     mkBtn('emote', 'Biểu cảm', () => openPanel('emotes'))
   );

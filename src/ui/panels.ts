@@ -1292,14 +1292,15 @@ export function registerAllPanels() {
 
   registerPanel('map', () => {
     const { body, win, close } = openWindow('Bản đồ thế giới', { size: 'large' });
-    win.classList.add('win-map');            // ảnh bản đồ phủ kín popup
+    win.classList.add('win-map');
     const wrap = h('div', 'map-wrap');
+    const inner = h('div', 'map-inner');
     const img = document.createElement('img');
     img.src = 'assets/lttt/minimap.png';
     img.draggable = false;
-    wrap.append(img);
+    inner.append(img);
 
-    // marker các khu (đứng ở cổng cũng tính là đang ở khu đó)
+    // marker các khu
     const hereId = ZONES[S.zone]?.gateTo ?? S.zone;
     for (const z of ZONE_LIST) {
       const pos = MAP_POS[z.id];
@@ -1315,9 +1316,55 @@ export function registerAllPanels() {
         const w = worldScene();
         if (w?.travel) w.travel(z.id);
       };
-      wrap.append(m);
+      inner.append(m);
     }
+    wrap.append(inner);
     body.append(wrap);
+
+    // drag/pan + pinch zoom
+    let scale = 1, tx = 0, ty = 0;
+    let dragging = false, startX = 0, startY = 0, startTx = 0, startTy = 0;
+    let initDist = 0, initScale = 1;
+    const clamp = () => {
+      const maxT = Math.max(0, (scale - 1) * 50);
+      tx = Math.max(-maxT, Math.min(maxT, tx));
+      ty = Math.max(-maxT, Math.min(maxT, ty));
+    };
+    const apply = () => { clamp(); inner.style.transform = `translate(${tx}%, ${ty}%) scale(${scale})`; };
+
+    wrap.addEventListener('pointerdown', e => {
+      if ((e.target as HTMLElement).closest('.map-marker')) return;
+      dragging = true; startX = e.clientX; startY = e.clientY; startTx = tx; startTy = ty;
+      wrap.setPointerCapture(e.pointerId);
+    });
+    wrap.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const dx = (e.clientX - startX) / wrap.clientWidth * 100;
+      const dy = (e.clientY - startY) / wrap.clientHeight * 100;
+      tx = startTx + dx; ty = startTy + dy; apply();
+    });
+    wrap.addEventListener('pointerup', () => { dragging = false; });
+    wrap.addEventListener('pointercancel', () => { dragging = false; });
+
+    wrap.addEventListener('touchstart', e => {
+      if (e.touches.length === 2) {
+        const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+        initDist = d; initScale = scale;
+      }
+    }, { passive: true });
+    wrap.addEventListener('touchmove', e => {
+      if (e.touches.length === 2) {
+        const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+        scale = Math.max(1, Math.min(3, initScale * (d / initDist)));
+        apply();
+      }
+    }, { passive: true });
+
+    wrap.addEventListener('wheel', e => {
+      e.preventDefault();
+      scale = Math.max(1, Math.min(3, scale - e.deltaY * 0.002));
+      apply();
+    }, { passive: false });
   });
 
   // ================= Bạn bè =================

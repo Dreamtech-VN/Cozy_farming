@@ -15,7 +15,6 @@ export function initDaily() {
     S.daily.checkinDays = [];
   }
   if (S.daily.lastLoginDate !== today) {
-    // ngày mới
     const yesterday = new Date(Date.now() - 86400_000);
     const yStr = `${yesterday.getFullYear()}-${String(yesterday.getMonth() + 1).padStart(2, '0')}-${String(yesterday.getDate()).padStart(2, '0')}`;
     S.daily.streak = S.daily.lastLoginDate === yStr ? S.daily.streak + 1 : 1;
@@ -23,7 +22,14 @@ export function initDaily() {
     S.daily.loginClaimed = false;
     S.daily.wheelDate = today;
     S.daily.wheelSpins = 0;
-    // quà sự kiện đang diễn ra gửi qua thư
+    if (S.daily.streak === 1 && S.mail.length === 0) {
+      sendMail({
+        from: 'Sunny Town',
+        subject: 'Chào mừng bạn đến Sunny Town!',
+        body: 'Chào bạn mới! Đây là thị trấn nhỏ xinh của chúng mình. Hãy trồng trọt, câu cá, kết bạn và khám phá nhé!\nGửi bạn chút quà khởi đầu ~',
+        attachments: { coins: 500, rubies: 5 }
+      });
+    }
     for (const ev of activeEvents()) {
       sendMail({
         from: 'Ban tổ chức', subject: `${ev.icon} ${ev.name}`,
