@@ -157,17 +157,8 @@ export class PreloadScene extends Phaser.Scene {
     this.tweens.add({ targets: bg, scale: cover * 1.06, duration: 9000, yoyo: true, repeat: -1, ease: 'sine.inout' });
     this.add.rectangle(0, 0, W, H, 0x0a1220, 0.28).setOrigin(0);
 
-    // logo game (góc trái trên như GunPow)
-    const lx = W * 0.17, ly = H * 0.14;
-    const t1 = this.add.text(lx, ly, 'COZY', {
-      fontFamily: 'Verdana, sans-serif', fontSize: `${40 * RES}px`, fontStyle: 'bold',
-      color: '#ffd43b', stroke: '#7a4a1f', strokeThickness: 7 * RES
-    }).setOrigin(0.5).setAngle(-4).setShadow(0, 4 * RES, '#00000088', 6 * RES);
-    const t2 = this.add.text(lx + 14 * RES, ly + 40 * RES, 'FARMING', {
-      fontFamily: 'Verdana, sans-serif', fontSize: `${30 * RES}px`, fontStyle: 'bold',
-      color: '#8ce99a', stroke: '#1f5c2c', strokeThickness: 6 * RES
-    }).setOrigin(0.5).setAngle(-4).setShadow(0, 4 * RES, '#00000088', 6 * RES);
-    this.tweens.add({ targets: [t1, t2], y: `+=${5 * RES}`, duration: 2200, yoyo: true, repeat: -1, ease: 'sine.inout' });
+    // logo game là ảnh thật (assets/ui/logo.png), vẽ ở lớp DOM cùng khung
+    // đăng nhập trong showLoginFlow() -> ở đây không vẽ chữ nữa
 
     // badge 12+ và cảnh báo sức khỏe
     const bx = W * 0.06, by = H * 0.38;

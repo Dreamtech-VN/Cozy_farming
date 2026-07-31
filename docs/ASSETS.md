@@ -162,7 +162,17 @@ Tên file lấy từ `Bus.java` trong client java (`FilePack.getImage("839")` �
 
 `scripts/reskin_shelter.py` vẽ lại tấm biển trong nhà chờ xe buýt
 (`assets/lttt/shelter.png`) — ảnh gốc là poster logo của game khác, nay thay
-bằng poster nông trại dựng từ chính sprite pack Cozy.
+bằng poster mang **logo Sunny Town** trên nền trời + dải cỏ.
+
+## Logo game (`assets/ui/logo.png`)
+
+`scripts/make_logo.py` tách nền cho file logo do chủ dự án cung cấp: loang từ
+mép ảnh vào để xoá nền trắng/ô caro mà vẫn giữ mấy nét trắng nằm trong lòng
+chữ, rồi trim + thu về 512px. Dùng ở:
+
+- màn hình đăng nhập / chọn máy chủ (`.lg-brand`, nổi phía trên khung, có
+  hiệu ứng nhấp nhô nhẹ) — thay cho 2 dòng chữ vẽ bằng Phaser trước đây
+- tấm biển trong nhà chờ xe buýt
 ⚠️ **Lưu ý bản quyền:** bộ này trông giống resource của game Avatar (TeaMobi) gốc —
 nếu đúng vậy thì chỉ nên dùng để dev/test; bản phát hành thương mại cần thay bằng
 asset tự vẽ hoặc có quyền sử dụng.

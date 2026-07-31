@@ -37,7 +37,7 @@ export function initSocial() {
       pushChat({ channel: 'public', from: f.name, text: BOT_REPLIES[Math.floor(Math.random() * BOT_REPLIES.length)], at: Date.now() });
     }
   }, 25_000);
-  pushChat({ channel: 'system', from: 'Hệ thống', text: 'Chào mừng đến với Cozy Farming! Gõ chat để trò chuyện.', at: Date.now() });
+  pushChat({ channel: 'system', from: 'Hệ thống', text: 'Chào mừng đến với Sunny Town! Gõ chat để trò chuyện.', at: Date.now() });
 }
 
 export function sendChat(channel: ChatMessage['channel'], text: string, to?: string) {

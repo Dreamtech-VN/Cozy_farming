@@ -4,7 +4,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 // rồi chạy: npm run cap:add:android / npm run cap:add:ios
 const config: CapacitorConfig = {
   appId: 'com.cozyfarming.game',
-  appName: 'Cozy Farming',
+  appName: 'Sunny Town',
   webDir: 'dist',
   backgroundColor: '#1a2b12',
   android: { allowMixedContent: false },

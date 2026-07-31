@@ -1,5 +1,5 @@
 """Thay tấm quảng cáo trong nhà chờ xe buýt (asset gốc là logo của game khác)
-bằng một tấm poster nông trại tự dựng từ sprite pack Cozy.
+bằng poster mang logo Sunny Town.
 """
 from PIL import Image, ImageDraw
 
@@ -14,37 +14,20 @@ d = ImageDraw.Draw(poster)
 # trời chuyển sắc
 for y in range(h):
     t = y / h
-    d.line([(0, y), (w, y)], fill=(int(150 + 70 * t), int(205 + 35 * t), int(240 - 10 * t)))
-# mặt trời
-d.ellipse([w - 34, 5, w - 12, 27], fill=(255, 232, 150))
-d.ellipse([w - 31, 8, w - 15, 24], fill=(255, 246, 200))
-# đồi cỏ
-d.ellipse([-30, h - 40, w // 2 + 20, h + 30], fill=(126, 200, 92))
-d.ellipse([w // 2 - 30, h - 34, w + 40, h + 34], fill=(108, 186, 78))
-d.rectangle([0, h - 16, w, h], fill=(140, 208, 100))
-# luống đất
-for i in range(5):
-    y0 = h - 14 + i * 3
-    d.line([(6 + i * 2, y0), (w - 6 - i * 2, y0)], fill=(176, 146, 96))
+    d.line([(0, y), (w, y)], fill=(int(168 + 60 * t), int(214 + 30 * t), int(244 - 8 * t)))
+# mặt trời góc phải
+d.ellipse([w - 34, 5, w - 12, 27], fill=(255, 236, 168))
+d.ellipse([w - 31, 8, w - 15, 24], fill=(255, 248, 214))
+# dải cỏ mỏng dưới chân biển
+d.ellipse([-40, h - 20, w // 2 + 30, h + 26], fill=(140, 206, 104))
+d.ellipse([w // 2 - 40, h - 17, w + 50, h + 30], fill=(122, 194, 88))
+d.rectangle([0, h - 9, w, h], fill=(150, 212, 112))
 
-
-def paste_fit(name, box_h, pos):
-    im = Image.open(name).convert('RGBA')
-    bb = im.getbbox()
-    if bb:
-        im = im.crop(bb)
-    k = box_h / im.height
-    im = im.resize((max(1, int(im.width * k)), box_h), Image.NEAREST)
-    poster.alpha_composite(im, pos)
-
-
-# hàng rào trắng chạy ngang chân đồi
-d.line([(0, h - 20), (w, h - 20)], fill=(246, 244, 232), width=2)
-for x in range(4, w, 13):
-    d.line([(x, h - 26), (x, h - 15)], fill=(246, 244, 232), width=2)
-
-paste_fit('public/assets/buildings/farm_house.png', 42, (16, h - 56))
-paste_fit('public/assets/buildings/farm_barn.png', 32, (w - 62, h - 46))
+# logo game giữa tấm biển
+logo = Image.open('public/assets/ui/logo.png').convert('RGBA')
+k = min((w - 22) / logo.width, (h - 10) / logo.height)
+logo = logo.resize((max(1, int(logo.width * k)), max(1, int(logo.height * k))), Image.LANCZOS)
+poster.alpha_composite(logo, ((w - logo.width) // 2, (h - logo.height) // 2 - 3))
 
 sh.paste(poster, (PANEL[0], PANEL[1]))
 sh.save(SRC)

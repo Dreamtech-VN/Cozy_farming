@@ -1719,6 +1719,6 @@ export function registerAllPanels() {
     });
     del.style.marginTop = '8px';
     body.append(del);
-    body.append(h('div', 'hint', 'Cozy Farming v0.1 — làm bằng Phaser 3 + TypeScript'));
+    body.append(h('div', 'hint', 'Sunny Town v0.1 — làm bằng Phaser 3 + TypeScript'));
   });
 }

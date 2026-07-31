@@ -516,7 +516,9 @@ export class WorldScene extends Phaser.Scene {
     const sx = this.busStopX();
     // nền ảnh gốc: đường đất rộng hơn -> đẩy nhà chờ hẳn xuống mặt đường
     const sy = this.zone.bg ? top + 22 : top - 2;
-    this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setDepth(sy - 40).setScale(this.zone.bg ? 1.1 : 0.6);
+    const sh = this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setScale(this.zone.bg ? 1.1 : 0.6);
+    // nhà chờ là phông nền: luôn nằm sau người chơi để đứng đợi xe vẫn thấy mình
+    sh.setDepth(sy - sh.displayHeight);
     // xe riêng đậu mép đường
     if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
       this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(this.vehScale(`veh_${S.vehicle}`));
