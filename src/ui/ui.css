@@ -214,6 +214,43 @@ img { image-rendering: auto; }
 }
 .progress > div { height: 100%; background: linear-gradient(#8ce16a, #4fa32e); border-radius: 7px; }
 
+/* Chỉ số nhân vật */
+.pf-stat-head {
+  display: flex; align-items: center; gap: 8px; margin: 12px 0 6px;
+  padding-bottom: 5px; border-bottom: 2px solid rgba(181, 131, 107, .25);
+}
+.pf-stat-head .t1 { font-size: 14px; font-weight: 900; color: #5b3a1c; }
+.pf-stat-head .t2 { font-size: 11px; color: #9b8a72; }
+.pf-sp-badge {
+  margin-left: auto; padding: 2px 10px; font-size: 11px; font-weight: 900;
+  background: linear-gradient(#ffe066, #f0c040); color: #7a4a1f;
+  border-radius: 10px; border: 2px solid #d4a020; animation: pf-sp-pulse 1.2s infinite;
+}
+@keyframes pf-sp-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+.pf-stat-grid { display: flex; flex-direction: column; gap: 6px; }
+.pf-stat-row {
+  display: flex; align-items: center; gap: 8px; padding: 4px 0;
+}
+.pf-stat-name { width: 72px; font-size: 12px; font-weight: 800; color: #5b3a1c; flex: none; }
+.pf-stat-bar {
+  flex: 1; height: 14px; background: #e0d4c0; border-radius: 7px;
+  border: 2px solid #b5936b; overflow: hidden;
+}
+.pf-stat-fill {
+  height: 100%; border-radius: 5px; transition: width .3s;
+  background: linear-gradient(#7cc4f8, #3a8ed6);
+}
+.pf-stat-val {
+  width: 30px; text-align: right; font-size: 13px; font-weight: 900; color: #4a3520;
+}
+.pf-stat-plus {
+  width: 26px; height: 26px; border-radius: 50%; border: 2px solid #d4a020;
+  background: linear-gradient(#ffe066, #f0c040); color: #7a4a1f;
+  font-size: 16px; font-weight: 900; cursor: pointer; line-height: 1;
+  display: flex; align-items: center; justify-content: center; flex: none;
+}
+.pf-stat-plus:active { transform: scale(.9); }
+
 /* Toast */
 #toasts { position: absolute; top: 60px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; gap: 6px; align-items: center; z-index: 100; pointer-events: none; }
 .toast {

@@ -18,6 +18,15 @@ export interface ChibiLookState {
   hat: number; glasses: number; hand?: number; skin?: string;
 }
 
+export type StatKey = 'health' | 'intellect' | 'strength' | 'agility' | 'charm';
+export interface CharStats {
+  health: number;     // Sức khỏe
+  intellect: number;  // Trí tuệ
+  strength: number;   // Sức mạnh
+  agility: number;    // Nhanh nhẹn
+  charm: number;      // Quyến rũ
+}
+
 export interface PlayerProfile {
   name: string;
   gender: Gender;
@@ -25,6 +34,8 @@ export interface PlayerProfile {
   chibi?: ChibiLookState;  // nhân vật chibi kiểu Avatar (hiện hành)
   level: number;
   exp: number;
+  charStats: CharStats;    // chỉ số nhân vật kiểu Avatar
+  statPoints: number;      // điểm chưa phân bổ
   title: string;            // danh hiệu đang dùng
   titles: string[];         // danh hiệu đã mở
   badges: string[];         // huy hiệu

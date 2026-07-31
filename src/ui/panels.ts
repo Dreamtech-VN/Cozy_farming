@@ -1,6 +1,6 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
 import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
-import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem, unequipTool } from '@/core/save';
+import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem, unequipTool, allocateStat, STAT_NAMES, STAT_KEYS } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
 import { CROPS, CROP_LIST } from '@/data/crops';
@@ -883,6 +883,48 @@ export function registerAllPanels() {
         (info.querySelector('#pf-name') as HTMLElement).textContent = S.player.name;
         (info.querySelector('#pf-face') as HTMLElement).append(charFace(S.player.chibi, 56));
         body.append(info);
+
+        const cs = S.player.charStats;
+        const totalPts = STAT_KEYS.reduce((s, k) => s + cs[k], 0);
+        const statHead = h('div', 'pf-stat-head');
+        statHead.innerHTML = `<span class="t1">Chỉ số nhân vật</span><span class="t2">Tổng: ${totalPts}</span>`;
+        if (S.player.statPoints > 0) {
+          const badge = h('span', 'pf-sp-badge', `${S.player.statPoints} điểm`);
+          statHead.append(badge);
+        }
+        body.append(statHead);
+
+        const render = () => {
+          statGrid.innerHTML = '';
+          for (const key of STAT_KEYS) {
+            const row = h('div', 'pf-stat-row');
+            const val = cs[key];
+            const maxBar = 100;
+            const pct = Math.min(val / maxBar * 100, 100);
+            row.innerHTML = `<div class="pf-stat-name">${STAT_NAMES[key]}</div>` +
+              `<div class="pf-stat-bar"><div class="pf-stat-fill" style="width:${pct}%"></div></div>` +
+              `<div class="pf-stat-val">${val}</div>`;
+            if (S.player.statPoints > 0) {
+              const plus = h('button', 'pf-stat-plus', '+');
+              plus.onclick = () => {
+                if (allocateStat(key)) { sfx.click(); render(); }
+              };
+              row.append(plus);
+            }
+            statGrid.append(row);
+          }
+          if (S.player.statPoints > 0) {
+            statHead.querySelector('.pf-sp-badge')?.remove();
+            const badge = h('span', 'pf-sp-badge', `${S.player.statPoints} điểm`);
+            statHead.append(badge);
+          } else {
+            statHead.querySelector('.pf-sp-badge')?.remove();
+          }
+        };
+        const statGrid = h('div', 'pf-stat-grid');
+        body.append(statGrid);
+        render();
+
         const statsBox = h('div');
         statsBox.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px';
         const rows: [string, number][] = [
