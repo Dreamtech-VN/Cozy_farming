@@ -115,6 +115,27 @@ sau đó dựng lại bằng sprite **pack Cozy** (`assets/buildings/farm_house`
 `farm_barn`, `farm_market`) khai báo trong `ZONE_DECOR`, kèm tên treo phía trên
 — thay cho mốc cổng nhấp nháy (map nền đã có cổng/nhà, cứ đi tới là hiện nút).
 
+### Nền trời (`assets/lttt/sky/`)
+
+Lấy từ `assets/hd/bgHD` trong APK: `may10.png` → `sky.png` (trời + mây),
+`10.png` → `hills.png` (hàng cây xa), `20.png` → `fields.png` (đồng ruộng, để
+dành). Phần trên map nền vốn trong suốt, nay lấp bằng 2 lớp này (depth -130 /
+-129) rồi **nhuộm màu theo giờ trong game** (`WorldScene.tintSky`): hửng sáng
+→ trưa trong veo → hoàng hôn ngả vàng → đêm xanh thẫm. Mây trôi chậm bằng
+tween `tilePositionX`.
+
+### Nhà pack Cozy bản HD (`assets/buildings/hd/`)
+
+`scripts/hd_buildings.py` phóng 2x sprite nhà pack Cozy rồi làm mềm cạnh, đắp
+viền tối và bóng đổ để khớp với map nền vẽ tay (bản pixel 1x phóng NEAREST
+trông rất lệch style). Trong game dùng key `bldhd_<tên>` ở scale 1.
+
+### Xe cộ
+
+`scripts/recut_vehicles.py` — trong `assets/town/buildings_all.png` mỗi mẫu xe
+được vẽ 2 lần dính liền thành khối 160px; bản cắt cũ lấy 66–78px nên lẹm mất
+đầu xe. Nay cắt đúng nửa 80px rồi trim theo bbox (thêm được `camper_green`).
+
 `scripts/reskin_shelter.py` vẽ lại tấm biển trong nhà chờ xe buýt
 (`assets/lttt/shelter.png`) — ảnh gốc là poster logo của game khác, nay thay
 bằng poster nông trại dựng từ chính sprite pack Cozy.

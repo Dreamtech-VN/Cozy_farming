@@ -63,6 +63,14 @@ export class PreloadScene extends Phaser.Scene {
       'farm_house', 'farm_store', 'farm_market', 'farm_barn', 'farm_coop']) {
       this.load.image(`bld_${b}`, `assets/buildings/${b}.png`);
     }
+    // ---- Nhà pack Cozy bản HD (mềm cạnh + bóng đổ) cho map nền vẽ tay ----
+    for (const b of ['farm_house', 'farm_barn', 'farm_market', 'farm_coop', 'farm_store']) {
+      this.load.image(`bldhd_${b}`, `assets/buildings/hd/${b}.png`);
+    }
+    // ---- Trời + hàng cây xa (bgHD Avatar) ----
+    for (const b of ['sky', 'hills', 'fields']) {
+      this.load.image(`sky_${b}`, `assets/lttt/sky/${b}.png`);
+    }
     // ---- Decor ngoài trời (cắt từ tileset) ----
     for (const d of ['tree_round', 'tree_round2', 'tree_pine', 'tree_khe', 'bench', 'lamp_green', 'lamp_black', 'scarecrow', 'barrel', 'flower_pot', 'bush', 'busstop']) {
       this.load.image(`deco_${d}`, `assets/deco/${d}.png`);
@@ -94,7 +102,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('buyland', 'assets/lttt/farm/buyLand.png');
 
     // ---- Xe cộ ----
-    for (const v of ['bus', 'truck_orange', 'camper_pink', 'camper_yellow', 'truck_bee', 'truck_gift']) {
+    for (const v of ['bus', 'truck_orange', 'camper_pink', 'camper_yellow', 'camper_green', 'truck_bee', 'truck_gift']) {
       this.load.image(`veh_${v}`, `assets/vehicles/${v}.png`);
     }
     // ---- Nội thất (cắt từ Interior pack) ----

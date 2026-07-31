@@ -19,7 +19,7 @@ import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import * as fishing from '@/systems/fishing';
 import { houseSize, partyActive } from '@/systems/housing';
-import { darkness, currentWeather, initTime } from '@/systems/time';
+import { darkness, currentWeather, initTime, gameHour } from '@/systems/time';
 import { INSECTS, type InsectDef } from '@/data/insects';
 import { sfx } from '@/core/audio';
 
@@ -45,15 +45,15 @@ let busArrival = false;
 // vừa fade về map cổng để bắt xe đi tiếp tới zone này
 let pendingDepart: string | undefined;
 
-const TRAFFIC_KEYS = ['veh_bus', 'veh_truck_orange', 'veh_camper_pink', 'veh_camper_yellow', 'veh_truck_bee', 'veh_truck_gift'];
+const TRAFFIC_KEYS = ['veh_bus', 'veh_truck_orange', 'veh_camper_pink', 'veh_camper_yellow', 'veh_camper_green', 'veh_truck_bee', 'veh_truck_gift'];
 
 // Decor đặt sẵn theo khu (sprite thật từ asset pack) — toạ độ tile, origin đáy giữa
 const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number; label?: string }[]> = {
   // Nền map 25 đã bị xoá sạch cây + 2 căn nhà gốc (scripts/clean_farm_map.py),
   // nhà bếp và nhà kho dựng lại bằng sprite pack Cozy cho đồng bộ style.
   farm: [
-    { key: 'bld_farm_house', x: 32, y: 15, s: 2, label: 'Nhà bếp' },
-    { key: 'bld_farm_barn', x: 43.5, y: 15, s: 2, label: 'Nhà kho' }
+    { key: 'bldhd_farm_house', x: 32, y: 15.3, s: 1, label: 'Nhà bếp' },
+    { key: 'bldhd_farm_barn', x: 43.5, y: 15.3, s: 1, label: 'Nhà kho' }
   ],
   beach: [
     { key: 'bld_fishshop', x: 10, y: 7 },    // tiệm câu ông Biển
@@ -75,7 +75,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   // cổng nông trại: nền gốc chỉ còn biển FARM + hàng rào, cửa hàng dựng lại
   // bằng sprite pack Cozy cho khớp style với nhà bếp/nhà kho trong nông trại
   farm_gate: [
-    { key: 'bld_farm_market', x: 49, y: 11, s: 2, label: 'Cửa hàng' }
+    { key: 'bldhd_farm_market', x: 49, y: 11.4, s: 1, label: 'Cửa hàng' }
   ],
   town_gate: [
     { key: 'bld_cafe', x: 7, y: 8, s: 0.9 }, { key: 'bld_pub', x: 34, y: 8, s: 0.9 },
@@ -325,12 +325,58 @@ export class WorldScene extends Phaser.Scene {
     return false;
   }
 
+  // ================= nền trời (bgHD Avatar) =================
+  // Phần trên map nền là trong suốt -> lấp bằng bầu trời + hàng cây xa, rồi
+  // nhuộm màu theo giờ trong game (bình minh / trưa / hoàng hôn / đêm).
+  private sky?: Phaser.GameObjects.TileSprite;
+  private skyHills?: Phaser.GameObjects.TileSprite;
+
+  private buildSky() {
+    if (!this.textures.exists('sky_sky')) return;
+    const zw = this.zone.w * T;
+    const top = this.zone.skyTop ?? 160;              // mép dưới vùng trời (px)
+    this.sky = this.add.tileSprite(0, 0, zw, top, 'sky_sky').setOrigin(0).setDepth(-130);
+    this.sky.setTileScale(top / 340 * 1.6);
+    this.tweens.add({ targets: this.sky, tilePositionX: 400, duration: 120_000, repeat: -1 });
+
+    const hh = Math.min(top, 150);
+    this.skyHills = this.add.tileSprite(0, top - hh, zw, hh, 'sky_hills').setOrigin(0).setDepth(-129);
+    this.skyHills.setTileScale(hh / 214);
+    this.skyHills.setTilePosition(0, (214 - hh / (hh / 214)) / 2);
+    this.tintSky();
+  }
+
+  // màu trời theo giờ: 5h hửng sáng -> 11h trong veo -> 17h ngả vàng -> đêm xanh thẫm
+  private tintSky() {
+    if (!this.sky) return;
+    const stops: [number, number][] = [
+      [0, 0x3a4780], [4.5, 0x3a4780], [6, 0xd08a8a], [7.5, 0xffcfa0], [9, 0xffffff],
+      [16, 0xffffff], [17.5, 0xffc98f], [19, 0xff9a5e], [20.5, 0x6b6ba8], [22, 0x3a4780], [24, 0x3a4780]
+    ];
+    const hgame = gameHour();
+    let i = 0;
+    while (i < stops.length - 2 && stops[i + 1][0] <= hgame) i++;
+    const [h0, c0] = stops[i], [h1, c1] = stops[i + 1];
+    const t = Phaser.Math.Clamp((hgame - h0) / Math.max(0.001, h1 - h0), 0, 1);
+    const col = Phaser.Display.Color.Interpolate.ColorWithColor(
+      Phaser.Display.Color.ValueToColor(c0), Phaser.Display.Color.ValueToColor(c1), 100, t * 100);
+    const tint = Phaser.Display.Color.GetColor(col.r, col.g, col.b);
+    this.sky.setTint(tint);
+    this.skyHills?.setTint(tint);
+  }
+
   private drawGround() {
     const { w, h, ground } = this.zone;
 
     // nền ảnh (map Avatar từ repo Lttt)
     if (this.zone.bg) {
-      this.add.rectangle(0, 0, w * T, h * T, 0x4e8a2a).setOrigin(0).setDepth(-101);
+      if (!this.zone.indoor) this.buildSky();
+      // chỗ nào ảnh nền trong suốt mà không có trời thì lấp màu cỏ
+      if (!this.sky) this.add.rectangle(0, 0, w * T, h * T, 0x4e8a2a).setOrigin(0).setDepth(-101);
+      else {
+        const st = (this.zone.skyTop ?? 160) - 2;
+        this.add.rectangle(0, st, w * T, h * T - st, 0x4e8a2a).setOrigin(0).setDepth(-101);
+      }
       this.add.image(0, 0, `bg_${this.zone.bg}`).setOrigin(0).setDepth(-100);
       // nông trại HD: hồ đá Avatar góc phải dưới
       if (this.zone.id === 'farm') {
@@ -1899,7 +1945,8 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private applyWeather() {
-    this.darkOverlay.setAlpha(this.zone.indoor ? 0 : darkness() * 0.55);
+    this.darkOverlay.setAlpha(this.zone.indoor ? 0 : darkness() * 0.62);
+    this.tintSky();
     const raining = currentWeather() === 'rain' && !this.zone.indoor;
     if (raining && !this.rain) {
       this.rain = this.add.particles(0, 0, 'raindrop', {

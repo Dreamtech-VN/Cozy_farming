@@ -29,6 +29,7 @@ export interface ZoneDef {
   gateTo?: string;         // (zone cổng) map chính mà cổng dẫn vào
   bg?: string;             // nền ảnh (assets/lttt/maps/<bg>.png) thay cho nền procedural
   water?: { x: number; y: number; w: number; h: number }[]; // vùng nước trên nền ảnh (tile)
+  skyTop?: number;         // bề cao vùng trời phía trên map nền (px)
   walkTop?: number;        // giới hạn đi lại trên nền ảnh (hàng tile)
   walkBottom?: number;
 }
@@ -49,7 +50,7 @@ export const ZONES: Record<string, ZoneDef> = {
   // Cổng nông trại: nền là map 26 gốc Avatar (biển FARM + cửa hàng + đường đất)
   farm_gate: {
     ...gateZone('farm_gate', 'Nông trại', '', 'farm', 'grass'),
-    w: 82, h: 29, bg: 'farmgate', walkTop: 11, walkBottom: 26, roadTiles: 10,
+    w: 82, h: 29, bg: 'farmgate', walkTop: 11, walkBottom: 26, roadTiles: 10, skyTop: 150,
     spawn: { x: 26, y: 16 },
     portals: [{ x: 26, y: 11, to: 'farm', label: 'Vào Nông trại', icon: '' }]
   },
@@ -62,7 +63,7 @@ export const ZONES: Record<string, ZoneDef> = {
     // nuôi thú, hồ cá và đường đất đều đã vẽ sẵn nên không chồng lên nhau.
     id: 'farm', name: 'Nông trại', icon: '', w: 127, h: 33, ground: 'grass',
     spawn: { x: 34, y: 25 }, gate: 'farm_gate',
-    bg: 'farmbg', walkTop: 11, walkBottom: 28,
+    bg: 'farmbg', walkTop: 11, walkBottom: 28, skyTop: 150,
     water: [{ x: 110, y: 16, w: 12, h: 12 }],   // hồ cá vẽ sẵn ở góc phải
     portals: [
       { x: 33, y: 15, to: 'house', label: 'Nhà bếp', icon: '' },
