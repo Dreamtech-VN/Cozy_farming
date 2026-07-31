@@ -70,6 +70,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   // Khu Nông Trại (map 26 gốc): cửa hàng + nhà chờ xe buýt
   farm_gate: [
     { key: 'lt_shop_av', x: 48, y: 11.2, s: 1, label: 'Cửa hàng' },
+    { key: 'lt_atm', x: 60, y: 13, s: 1, label: 'ATM' },
     { key: 'lt_shelter', x: 14, y: 23.4, s: 0.9 },
     { key: 'lt_lamp_hd', x: 69, y: 18, s: 1 }
   ],
@@ -102,6 +103,7 @@ const SPOT_PANEL: Record<string, () => void> = {
   lt_shop_av: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: 'shop_seed' } }),
   lt_petshop: () => bus.emit(EV.OPEN_PANEL, { panel: 'petshop' }),
   lt_shelter: () => bus.emit(EV.OPEN_PANEL, { panel: 'map' }),
+  lt_atm: () => bus.emit(EV.OPEN_PANEL, { panel: 'atm' }),
   bld_fishshop: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: 'shop_fishing' } }),
   lt_icecream: () => bus.emit(EV.OPEN_PANEL, {
     panel: 'dialog', data: { title: 'Quầy kem', text: 'Kem mát lạnh giải nhiệt mùa hè! (Sắp ra mắt)', actions: [] }
@@ -193,16 +195,11 @@ export class WorldScene extends Phaser.Scene {
     this.spawnRoamers();
 
     this.cameras.main.startFollow(this.player, true, 0.12, 0.12);
-    // canvas render ở 960x540 * RES -> mọi zoom nhân RES để giữ nguyên khung nhìn
-    const bw = this.physics.world.bounds;
-    const fitZoom = Math.max(this.scale.width / bw.width, this.scale.height / bw.height);
-    if (this.zone.bg) {
-      // nền ảnh HD kiểu Avatar: zoom nhẹ để thấy khung cảnh đúng tỉ lệ art
-      this.cameras.main.setZoom(Math.max(1.6 * RES, fitZoom));
-    } else {
-      // trong nhà: phóng to để căn phòng lấp đầy màn hình
-      this.cameras.main.setZoom(Math.max(2.4 * RES, fitZoom));
-    }
+    this.applyCameraZoom();
+    // Khung game dùng Scale.EXPAND nên cỡ canvas còn đổi sau khi scene đã tạo
+    // (xoay máy, ẩn thanh địa chỉ trên mobile...). Không tính lại thì lúc vào
+    // game khung nhìn to nhỏ lệch lung tung -> nghe resize để chỉnh lại.
+    this.scale.on('resize', this.applyCameraZoom, this);
 
     // lớp đêm + mưa
     this.darkOverlay = this.add.rectangle(0, 0, zw, zh, 0x0b1030).setOrigin(0).setDepth(5000).setAlpha(0);
@@ -234,6 +231,7 @@ export class WorldScene extends Phaser.Scene {
     // popup đang mở -> khoá input scene (xem chú thích ở kit.ts)
     this.input.enabled = !anyWindowOpen();
     this.events.on('shutdown', () => {
+      this.scale.off('resize', this.applyCameraZoom, this);
       bus.off('ui:modal', this.onModal, this);
       bus.off('hotbar:changed', this.onHeldTool, this);
       bus.off(EV.APPEARANCE, this.onAppearance, this);
@@ -288,6 +286,16 @@ export class WorldScene extends Phaser.Scene {
   }
 
   // cầm nông cụ nào thì hiện đúng nông cụ đó trên tay nhân vật
+  // Khung nhìn quy chiếu theo chiều cao thiết kế (540 * RES) nên mọi máy, mọi
+  // tỉ lệ màn hình đều thấy đúng chừng đó thế giới — không còn lúc bự lúc nhỏ.
+  private applyCameraZoom() {
+    if (!this.zone) return;
+    const bw = this.physics.world.bounds;
+    const fit = Math.max(this.scale.width / bw.width, this.scale.height / bw.height);
+    const base = (this.zone.bg ? 1.6 : 2.4) * RES * (this.scale.height / (540 * RES));
+    this.cameras.main.setZoom(Math.max(base, fit));
+  }
+
   private onHeldTool() {
     const t = heldTool();
     this.player?.setTool(t ? `held_${t}` : '');
@@ -613,6 +621,14 @@ export class WorldScene extends Phaser.Scene {
   // Nhà bếp / nhà kho vẽ thẳng trong ảnh nền map 25 (không phải sprite decor)
   // nên phải khai báo khung bấm riêng.
   private registerDrawnSpots() {
+    if (this.zone.id === 'farm_gate') {
+      // lối mòn bên trái map 26 dẫn sang nông trại bạn bè
+      this.spots.push({
+        rect: new Phaser.Geom.Rectangle(9 * T - 40, 8 * T, 80, 80),
+        open: () => bus.emit(EV.OPEN_PANEL, { panel: 'friendfarm' })
+      });
+      return;
+    }
     if (this.zone.id !== 'farm') return;
     const box = (c: { x: number; y: number }, w: number, h: number, open: () => void) =>
       this.spots.push({ rect: new Phaser.Geom.Rectangle(c.x - w / 2, c.y + 40 - h, w, h), open });
@@ -692,23 +708,16 @@ export class WorldScene extends Phaser.Scene {
   }
 
   // ================= cổng khu vực =================
+  // Lttt không vẽ mốc cổng nhấp nháy: cửa/lối ra đã nằm sẵn trong ảnh nền,
+  // cứ đi tới là hiện nút. Ở đây chỉ đăng ký khung bấm để chạm thẳng vào cổng
+  // trên map là nhân vật tự đi tới rồi chuyển khu.
   private drawPortals() {
-    const hd = !!this.zone.bg;
     for (const p of this.zone.portals) {
       const px = p.x * T, py = p.y * T;
-      if (hd) {
-        const tag = this.add.text(px, py - 8, p.label, {
-          fontSize: '12px', color: '#fff8e8', backgroundColor: '#00000080',
-          padding: { x: 6, y: 3 }, fontStyle: 'bold'
-        }).setOrigin(0.5, 1).setDepth(5000);
-        this.tweens.add({ targets: tag, y: py - 14, duration: 800, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-        this.add.circle(px, py + 4, 18, 0xffe066, 0.25).setDepth(1);
-      } else {
-        this.add.circle(px, py, 10, 0xffe066, 0.35).setDepth(1);
-        const arrow = this.add.triangle(px, py - 14, 0, 8, 5, 0, 10, 8, 0xffd43b).setOrigin(0.5).setDepth(2);
-        this.tweens.add({ targets: arrow, y: py - 18, duration: 620, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-        this.add.text(px, py + 12, p.label, { fontSize: '7px', color: '#fff', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2);
-      }
+      this.spots.push({
+        rect: new Phaser.Geom.Rectangle(px - 34, py - 34, 68, 68),
+        open: () => this.travel(p.to)
+      });
     }
   }
 

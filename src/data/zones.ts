@@ -49,6 +49,7 @@ export const ZONES: Record<string, ZoneDef> = {
     bg: 'farmgate', walkTop: 11, walkBottom: 24, skyTop: 150,
     traffic: { topTile: 25 }, busStop: { x: 14, y: 22 },
     portals: [{ x: 26, y: 11, to: 'farm', label: 'Nông trại của bạn', icon: '' }],
+    // lối mòn bên trái map dẫn sang nông trại bạn bè (mở bằng panel)
     npcs: [],
     features: []
   },

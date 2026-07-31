@@ -142,7 +142,9 @@ export interface ChatMessage {
 export interface GameState {
   version: number;
   player: PlayerProfile;
-  wallet: { coins: number; rubies: number };
+  // Lttt: thu hoạch/bán nông sản vào TÀI KHOẢN NÔNG TRẠI, ra ATM mới
+  // chuyển sang ví chính tiêu được.
+  wallet: { coins: number; rubies: number; farmCoins: number };
   inventory: Record<string, number>;
   wardrobe: string[];       // (cũ) thời trang pack Cozy
   chibiWardrobe: number[];  // part chibi đã sở hữu (id part Avatar)

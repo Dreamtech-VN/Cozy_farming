@@ -89,7 +89,7 @@ export class PreloadScene extends Phaser.Scene {
     }
     this.load.image('lt_shop_av', 'assets/lttt/bld/shop_av.png');   // cửa hàng gốc Avatar
     // ---- Nhà + cây + hồ HD Avatar cho nông trại ----
-    for (const b of ['kitchen', 'store', 'warehouse', 'tree', 'doghouse', 'barn', 'petshop', 'petbed']) {
+    for (const b of ['kitchen', 'store', 'warehouse', 'tree', 'doghouse', 'barn', 'petshop', 'petbed', 'atm']) {
       this.load.image(`lt_${b}`, `assets/lttt/bld/${b}.png`);
     }
     this.load.image('lt_pond', 'assets/lttt/pond.png');

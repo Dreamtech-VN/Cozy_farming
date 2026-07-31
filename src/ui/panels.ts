@@ -6,7 +6,7 @@ import { orderList, canDeliver, deliver, dropOrder, haveOf, orderName } from '@/
 import { pond, POND_CAP, FRIES, FRY_LIST, isGrown, remainMin, stockFry, netFish } from '@/systems/fishfarm';
 import { countOf, takeFrom, listOf, type StoreKind } from '@/systems/farmstore';
 import { cookingFood, cookRemain, canCook, startCook, collectCook, cancelCook } from '@/systems/cooking';
-import { S, save, spend, addCoins, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, unequipTool, allocateStat, STAT_NAMES, STAT_KEYS } from '@/core/save';
+import { S, save, spend, addCoins, addFarmCoins, withdrawFarm, addExp, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, unequipTool, allocateStat, STAT_NAMES, STAT_KEYS } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
 import { CROPS, CROP_LIST } from '@/data/crops';
@@ -475,8 +475,9 @@ export function registerAllPanels() {
         if (price > 0) {
           const b = priceBtn(price, 'gold', () => {
             if (!takeFrom(kind, id, 1)) return;
-            addCoins(price); sfx.coin(); addStat('sold');
-            toast(`Bán 1 ${nameOf(kind, id)} +${price} xu`, 'coin');
+            // Lttt: tiền bán nông sản vào tài khoản nông trại, ra ATM mới rút
+            addFarmCoins(price); sfx.coin(); addStat('sold');
+            toast(`Bán 1 ${nameOf(kind, id)} +${price} xu vào tài khoản nông trại`, 'coin');
             render(kind);
           });
           b.prepend(document.createTextNode('Bán '));
@@ -493,6 +494,88 @@ export function registerAllPanels() {
     tabs(KINDS.map(k => k[1]), i => render(KINDS[i][0]));
     body.append(content);
     render('produce');
+  });
+
+  // ================= ATM nong trai (Lttt) =================
+  // "Sau khi thu hoach cay, vat nuoi, ban se co mot khoan tien nho trong tai
+  // khoan nong trai. Ban co the ra ATM de chuyen sang tai khoan chinh."
+  registerPanel('atm', () => {
+    const { body } = openWindow('ATM Nông trại', { size: 'small' });
+    const render = () => {
+      body.innerHTML = '';
+      body.append(h('div', 'hint', 'Tiền bán nông sản, trứng sữa, cá... nằm ở tài khoản nông trại. Rút về ví chính mới tiêu được.'));
+
+      const card = h('div', 'atm-card');
+      const line = (lb: string, v: number) => {
+        const r = h('div', 'atm-row');
+        r.append(h('span', 'atm-lb', lb));
+        const val = h('span', 'atm-val');
+        val.append(uiIcon('coin', 20), h('span', '', fmt(v)));
+        r.append(val);
+        return r;
+      };
+      card.append(line('Tài khoản nông trại', S.wallet.farmCoins ?? 0), line('Ví chính', S.wallet.coins));
+      body.append(card);
+
+      const bar = h('div', 'atm-actions');
+      const has = (S.wallet.farmCoins ?? 0) > 0;
+      bar.append(btn(has ? 'Rút hết về ví chính' : 'Chưa có tiền để rút', has ? 'gold' : '', () => {
+        const got = withdrawFarm();
+        if (got > 0) { sfx.coin(); toast(`Đã rút ${fmt(got)} xu về ví chính.`, 'coin'); }
+        render();
+      }));
+      if ((S.wallet.farmCoins ?? 0) > 100) {
+        bar.append(btn('Rút 100', '', () => {
+          const got = withdrawFarm(100);
+          if (got > 0) { sfx.coin(); toast(`Đã rút ${fmt(got)} xu.`, 'coin'); }
+          render();
+        }));
+      }
+      body.append(bar);
+    };
+    render();
+  });
+
+  // ================= Nong trai ban be (Lttt) =================
+  // Game chay offline nen ban be la NPC: vuon cua ho dung bang so gieo tu id
+  // (moi nguoi mot vuon co dinh), sang tuoi giup 1 lan/ngay de lay thien cam.
+  registerPanel('friendfarm', () => {
+    const { body } = openWindow('Nông trại bạn bè', { size: 'normal' });
+    const today = new Date().toDateString();
+    const render = () => {
+      body.innerHTML = '';
+      const list = S.social.friends;
+      if (!list.length) {
+        body.append(h('div', 'hint', 'Chưa có bạn nào — kết bạn ở mục Bạn bè rồi ghé thăm nông trại của họ nhé.'));
+        return;
+      }
+      body.append(h('div', 'hint', 'Ghé thăm và tưới giúp vườn của bạn bè, mỗi người 1 lần mỗi ngày.'));
+      for (const f of list) {
+        let sd = 0;
+        for (let i = 0; i < f.id.length; i++) sd = (sd * 131 + f.id.charCodeAt(i)) % 100000;
+        const plots = 6 + (sd % 7);
+        const crop = CROP_LIST[sd % CROP_LIST.length];
+        const key = `ff_${f.id}`;
+        const watered = String(S.stats[key] ?? '') === today;
+        const r = h('div', 'row');
+        const ic = h('div'); ic.append(iconOf(item(`crop_${crop.id}`), 34)); r.append(ic);
+        const info = h('div', 'grow');
+        info.append(h('div', 't1', `${f.name} · Lv.${f.level}`),
+                    h('div', 't2', `${plots} ô ${crop.name} đang lớn`));
+        r.append(info);
+        r.append(btn(watered ? 'Đã tưới hôm nay' : 'Tưới giúp', watered ? '' : 'gold', () => {
+          if (watered) return;
+          (S.stats as Record<string, unknown>)[key] = today;
+          addAffinity(f.id, 3);
+          addExp(4);
+          save(true); sfx.click();
+          toast(`Đã tưới giúp vườn của ${f.name}! +3 thiện cảm`, 'can');
+          render();
+        }));
+        body.append(r);
+      }
+    };
+    render();
   });
 
   // ================= Nhà bếp (Lttt: 1 món/lượt, có đếm giờ) =================

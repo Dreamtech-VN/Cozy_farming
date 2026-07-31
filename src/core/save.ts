@@ -26,7 +26,7 @@ export function defaultState(): GameState {
       title: 'title_newbie', titles: ['title_newbie'], badges: [],
       createdAt: Date.now()
     },
-    wallet: { coins: 500, rubies: 10 },
+    wallet: { farmCoins: 0, coins: 500, rubies: 10 },
     inventory: {},
     wardrobe: ['hair:bob', 'clothes:basic'],
     chibiWardrobe: [],
@@ -138,6 +138,7 @@ export function load(): boolean {
     // chỗ migrate giữa các version save về sau
     S = { ...defaultState(), ...data };
     if (!S.chibiWardrobe) S.chibiWardrobe = [];
+    if (S.wallet.farmCoins === undefined) S.wallet.farmCoins = 0;
     // save cũ để đồ cầm tay trong túi -> chuyển vào tủ quần áo (như Lttt)
     migrateHandItems(S.inventory, S.chibiWardrobe);
     if (!S.skins) S.skins = [];
@@ -183,6 +184,22 @@ export function resetSave() {
 }
 
 // ===== Helpers dùng chung =====
+
+// Tiền bán nông sản vào tài khoản nông trại (Lttt), ra ATM mới rút được
+export function addFarmCoins(n: number) {
+  S.wallet.farmCoins = Math.max(0, (S.wallet.farmCoins ?? 0) + n);
+  bus.emit(EV.WALLET); save();
+}
+
+export function withdrawFarm(n?: number): number {
+  const take = Math.min(S.wallet.farmCoins ?? 0, n ?? (S.wallet.farmCoins ?? 0));
+  if (take <= 0) return 0;
+  S.wallet.farmCoins -= take;
+  S.wallet.coins += take;
+  S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + take;
+  bus.emit(EV.WALLET); save(true);
+  return take;
+}
 
 export function addCoins(n: number) {
   S.wallet.coins = Math.max(0, S.wallet.coins + n);
