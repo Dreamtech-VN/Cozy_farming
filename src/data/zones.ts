@@ -61,8 +61,8 @@ export const ZONES: Record<string, ZoneDef> = {
     spawn: { x: 34, y: 25 }, gate: 'farm_gate',
     bg: 'farmbg', walkTop: 11, walkBottom: 28, skyTop: 150,
     water: [{ x: 110, y: 16, w: 12, h: 12 }],   // hồ cá vẽ sẵn ở góc phải
+    // Nông trại không có nhà riêng — cửa nhà riêng nằm ở căn nhà trắng Thị trấn.
     portals: [
-      { x: 33, y: 15, to: 'house', label: 'Nhà riêng', icon: '' },
       { x: 28, y: 27, to: 'farm_gate', label: 'Ra cổng', icon: '' }
     ],
     npcs: [

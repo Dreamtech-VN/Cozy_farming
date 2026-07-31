@@ -133,6 +133,15 @@ sau đó dựng lại bằng sprite **pack Cozy** (`assets/buildings/farm_house`
 - `assets/lttt/trough.png` / `trough_full.png`: máng thức ăn. Bản cắt cũ lấy
   dư sang ô bên dưới nên dính thêm một đống cỏ khô rời — cắt lại còn 51x32,
   đúng cái máng (bản `_full` đã có cỏ nằm trong máng).
+- `assets/lttt/order_board.png` (`scripts/make_order_board.py`): bảng đơn hàng
+  ngoài sân nông trại. Lấy biển "BẢNG XẾP HẠNG" (`assets/lttt/rank_sign.png`)
+  rồi xoá chữ: nét chữ là một màu nâu riêng nên xoá theo màu, còn bóng đổ của
+  chữ trùng màu vân gỗ nên trải phẳng đúng những hàng từng có chữ. Tên bảng do
+  game vẽ đè (giống nhãn "Nhà kho") nên không vẽ chữ vào ảnh.
+- Nhà bếp / nhà kho trong nông trại dùng thẳng `assets/lttt/bld/kitchen.png` và
+  `warehouse.png` của repo Lttt (nhà bếp có sẵn biển "NHÀ BẾP"), thay cho bản
+  pack Cozy trước đây. Nông trại không còn nhà riêng — cửa nhà riêng ở căn nhà
+  trắng trong Thị trấn.
 - `assets/farm/mound.png`: đống đất để đào xẻng — trước vẽ bằng graphics nên
   trông như cục bùn, nay vẽ lại thành gò đất tơi có cục, sỏi và cỏ, kèm một
   đốm sáng nhấp nháy trong game cho biết đào được.

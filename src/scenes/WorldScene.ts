@@ -24,7 +24,7 @@ import * as fishing from '@/systems/fishing';
 import { houseSize, partyActive } from '@/systems/housing';
 import { darkness, currentWeather, initTime, gameHour } from '@/systems/time';
 import { sfx, bgmForZone, setAmbient } from '@/core/audio';
-import { maybeSpawnVisitor } from '@/systems/orders';
+import { maybeSpawnVisitor, orderList, canDeliver } from '@/systems/orders';
 import { readyCount } from '@/systems/fishfarm';
 
 const T = 16; // kích thước tile
@@ -35,6 +35,7 @@ const FARM_PLOT = { ox: 1068, oy: 195, pw: 42, ph: 45 };          // lưới ru�
 const FARM_POND_TILES = { x: 110, y: 16, w: 12, h: 12 };          // lòng hồ cá (phủ nước động lên trên)
 const WAREHOUSE_POS = { x: 700, y: 200 };                         // nhà kho vẽ sẵn
 const KITCHEN_POS = { x: 320, y: 200 };                           // nhà bếp (tile x=20)
+const ORDERBOARD_POS = { x: 31 * 16, y: 19.5 * 16 };              // bảng đơn hàng
 const PETHOUSE_POS = { x: 730, y: 320 };                          // nhà thú cưng (chỉ hiện khi đã nuôi)
 const PETSHOP_POS = { x: 21 * T, y: 13 * T };                     // tiệm thú cưng (Thành phố)
 const BARN_RECT = { x: 5.1, y: 11.6, w: 17.4, h: 10.8 };          // sân rào vẽ sẵn (px 82..360 / 185..358)
@@ -54,13 +55,14 @@ const TRAFFIC_KEYS = ['veh_bus', 'veh_truck_orange', 'veh_camper_pink', 'veh_cam
 
 // Decor đặt sẵn theo khu (sprite thật từ asset pack) — toạ độ tile, origin đáy giữa
 const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number; label?: string }[]> = {
-  // Nền map 25 đã bị xoá sạch cây + 2 căn nhà gốc (scripts/clean_farm_map.py),
-  // nhà bếp và nhà kho dựng lại bằng sprite pack Cozy cho đồng bộ style.
+  // Nền map 25 đã bị xoá sạch cây + 2 căn nhà gốc (scripts/clean_farm_map.py).
+  // Nhà bếp / nhà kho lấy thẳng sprite của repo Lttt (assets/lttt/bld) — nhà bếp
+  // vốn đã có biển "NHÀ BẾP" nên khỏi cần nhãn chữ. Nông trại KHÔNG có nhà riêng:
+  // nhà riêng nằm ở căn nhà trắng trong Thị trấn.
   farm: [
-    // nhà quy về đúng cỡ 2 căn vẽ sẵn của map gốc (~130 và ~140 px cao)
-    { key: 'bldhd_farm_house', x: 32, y: 15.3, s: 0.78, label: 'Nhà riêng' },
-    { key: 'bldhd_farm_barn', x: 43.5, y: 15.3, s: 0.78, label: 'Nhà kho' },
-    { key: 'bldhd_farm_market', x: 20, y: 15.3, s: 0.78, label: 'Nhà bếp' },
+    { key: 'lt_warehouse', x: 43.5, y: 15.3, s: 0.86, label: 'Nhà kho' },
+    { key: 'lt_kitchen', x: 20, y: 15.3, s: 1 },
+    { key: 'lt_order_board', x: 31, y: 19.5, s: 1.15, label: 'Đơn hàng' },
     // đèn đường: chân cột nằm hẳn trong thảm cỏ (cỏ hết ở y~240px)
     { key: 'lt_lamp_hd', x: 25.3, y: 14.5, s: 1 },
     { key: 'lt_lamp_hd', x: 56.2, y: 14.5, s: 1 },
@@ -707,6 +709,12 @@ export class WorldScene extends Phaser.Scene {
           .setDepth(d.y * T + 1).setScale(0.16).setAlpha(0).setBlendMode(Phaser.BlendModes.ADD);
         this.lampGlows.push(halo, bulb);
       }
+      // bảng đơn hàng: nhớ khung ảnh để onTap bắt được cú bấm thẳng vào bảng
+      if (d.key === 'lt_order_board') {
+        this.orderBoardRect = new Phaser.Geom.Rectangle(
+          d.x * T - img.displayWidth / 2, d.y * T - img.displayHeight,
+          img.displayWidth, img.displayHeight);
+      }
       // tên công trình treo phía trên (thay cho mốc cổng nhấp nháy)
       if (d.label) {
         this.add.text(d.x * T, d.y * T - img.displayHeight - 6, d.label, {
@@ -1142,9 +1150,18 @@ export class WorldScene extends Phaser.Scene {
 
   // ================= tap =================
   private tapTimer = 0;
+  private orderBoardRect?: Phaser.Geom.Rectangle;
   private onTap(p: Phaser.Input.Pointer) {
     if (document.querySelector('.win-backdrop, .cc-panel')) return;
     const wp = this.cameras.main.getWorldPoint(p.x, p.y);
+    // bấm thẳng vào bảng đơn hàng: đi tới chân bảng rồi mở bảng
+    if (this.orderBoardRect?.contains(wp.x, wp.y)) {
+      this.standUp();
+      this.moveTarget = { x: this.orderBoardRect.centerX, y: this.orderBoardRect.bottom + 26 };
+      this.pendingAct = true;
+      this.showMoveMark(this.moveTarget.x, this.moveTarget.y);
+      return;
+    }
     // chế độ đặt đồ
     if (this.placingItem) {
       const now = Date.now();
@@ -1304,6 +1321,15 @@ export class WorldScene extends Phaser.Scene {
             cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'fishfarm' })
           });
         }
+      }
+      // bảng đơn hàng ghim ngoài sân: bấm vào mới mở bảng
+      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, ORDERBOARD_POS.x, ORDERBOARD_POS.y) < 90) {
+        const ready = orderList().filter(canDeliver).length;
+        acts.push({
+          icon: '', ui: 'quest',
+          label: ready > 0 ? `Bảng đơn hàng (${ready} đơn giao được)` : 'Bảng đơn hàng',
+          cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'orders' })
+        });
       }
       // khách đang chờ: mở bảng đơn hàng
       if (this.visitorSprite && Phaser.Math.Distance.Between(

@@ -134,7 +134,6 @@ function buildHud() {
   const drawer = h('div'); drawer.id = 'menu-drawer';
   const MENU: [string, string, string][] = [
     ['inventory', 'Kho đồ', 'inventory'],
-    ['quest', 'Đơn hàng', 'orders'],
     ['map', 'Bản đồ', 'map'],
     ['social', 'Bạn bè', 'social'],
     ['daily', 'Điểm danh', 'daily'],

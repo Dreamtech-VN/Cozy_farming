@@ -1285,6 +1285,22 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .od-note.sel { border-color: #e8890c; box-shadow: 0 0 0 3px #ffd43b66, 0 3px 0 #00000018; }
 .od-note.visit { background: linear-gradient(#e8f8e2, #cdebc4); border-color: #7ab86a; }
 .od-place { font-size: 12px; font-weight: 900; color: #5b3a1c; margin-bottom: 5px; line-height: 1.15; }
+.od-note-goods {
+  display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; margin-bottom: 6px;
+}
+.od-goods {
+  position: relative; width: 34px; height: 34px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff8e8; border: 2px solid #d9c48e;
+}
+.od-goods.ok { border-color: #51a83f; background: #eef8e9; }
+.od-goods img { image-rendering: pixelated; }
+.od-goods-n {
+  position: absolute; right: -3px; bottom: -4px; min-width: 15px; height: 15px; padding: 0 3px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 8px; background: #a9714b; border: 2px solid #7c4f30;
+  color: #fff8e8; font-size: 10px; font-weight: 900;
+}
 .od-note-pay {
   display: flex; align-items: center; justify-content: center; gap: 4px;
   font-size: 13px; font-weight: 900; color: #4a3520;

@@ -371,6 +371,15 @@ export function registerAllPanels() {
         const ok = canDeliver(o);
         const note = h('div', `od-note ${sel === o.id ? 'sel' : ''} ${o.visitor ? 'visit' : ''}`);
         note.append(h('div', 'od-place', o.place));
+        // hàng cần giao hiện ngay trên tờ giấy (kiểu Hay Day) chứ không phải chỉ tiền
+        const goods = h('div', 'od-note-goods');
+        for (const l of o.lines) {
+          const g = h('div', `od-goods ${haveOf(l) >= l.qty ? 'ok' : ''}`);
+          g.append(produceIcon(l.id, 30), h('div', 'od-goods-n', `${l.qty}`));
+          g.title = orderName(l.id);
+          goods.append(g);
+        }
+        note.append(goods);
         const row = h('div', 'od-note-pay');
         row.append(uiIcon('coin', 16), h('span', '', fmt(o.coins)));
         note.append(row);

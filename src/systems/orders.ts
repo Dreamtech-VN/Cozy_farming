@@ -45,27 +45,36 @@ function unitPrice(id: string): number {
 function rnd<T>(a: T[]): T { return a[Math.floor(Math.random() * a.length)]; }
 
 // Đơn chỉ gọi thứ người chơi trồng/nấu được — cây theo cấp, món khi đã mở bếp
-function poolFor(level: number): string[] {
+function cropPool(level: number): string[] {
   const crops = CROP_LIST.filter(c => (c.seedPrice ?? 0) <= 40 + level * 20).map(c => c.id);
-  const pool = crops.length ? crops : CROP_LIST.slice(0, 4).map(c => c.id);
-  // từ cấp 3 bắt đầu có đơn gọi món ăn
-  if (level >= 3) pool.push(...FOOD_LIST.map(f => `food_${f.id}`));
-  return pool;
+  return crops.length ? crops : CROP_LIST.slice(0, 4).map(c => c.id);
+}
+function foodPool(level: number): string[] {
+  return level >= 3 ? FOOD_LIST.map(f => `food_${f.id}`) : [];
 }
 
 export function makeOrder(visitor = false): Order {
   const lv = S.player.level;
-  const pool = poolFor(lv);
-  const nLines = 1 + Math.floor(Math.random() * Math.min(3, 1 + Math.floor(lv / 3)));
-  const picked: OrderLine[] = [];
-  for (let i = 0; i < nLines; i++) {
+  const crops = cropPool(lv);
+  const foods = foodPool(lv);
+  // Kiểu Hay Day: một đơn trộn cả món nấu sẵn lẫn nguyên liệu thô, không phải
+  // toàn cùng một loại. Từ cấp 3 (đã mở bếp) đơn luôn cố lấy ít nhất 1 món nấu
+  // rồi ghép thêm 1-2 nông sản.
+  const nLines = Math.min(3, 1 + Math.floor(Math.random() * (1 + Math.floor(lv / 3))));
+  const wanted: string[] = [];
+  if (foods.length && (nLines > 1 || Math.random() < 0.4)) wanted.push(rnd(foods));
+  while (wanted.length < nLines) {
+    const pool = wanted.length && foods.length && Math.random() < 0.25 ? foods : crops;
     const id = rnd(pool);
-    if (picked.some(l => l.id === id)) continue;
-    // món nấu đắt hơn nông sản nhiều -> chỉ gọi 1-2 phần cho đơn khỏi chênh lệch quá
-    const maxQty = id.startsWith('food_') ? 2 : 3;
-    picked.push({ id, qty: 1 + Math.floor(Math.random() * maxQty) });
+    if (!wanted.includes(id)) wanted.push(id);
+    else if (wanted.length >= crops.length + foods.length) break;
   }
-  if (!picked.length) picked.push({ id: rnd(pool), qty: 1 });
+  if (!wanted.length) wanted.push(rnd(crops));
+
+  const picked: OrderLine[] = wanted.map(id => ({
+    // món nấu đắt hơn nông sản nhiều -> chỉ gọi 1-2 phần cho đơn khỏi chênh lệch quá
+    id, qty: 1 + Math.floor(Math.random() * (id.startsWith('food_') ? 2 : 3))
+  }));
 
   const worth = picked.reduce((a, l) => a + unitPrice(l.id) * l.qty, 0);
   const mul = visitor ? 2.2 : 1.5;      // giao đơn lãi hơn bán lẻ
