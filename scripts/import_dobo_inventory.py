@@ -52,6 +52,7 @@ FILES = {
     'ic_hair':    'Icons/IconsDefault/64px/IconsDefault44_64px.png',
     'ic_hand':    'Icons/IconsDefault/64px/IconsDefault54_64px.png',
     'ic_level':   'Icons/IconsDefault/64px/IconsDefault41_64px.png',
+    'ic_title':   'Icons/IconsDefault/64px/IconsDefault57_64px.png',
     'chip_bar':   'Containers/Containers/Container2.png',
     'name_label': 'Labels/Label10.png',
     # ---- thanh tiền tệ trên HUD ----

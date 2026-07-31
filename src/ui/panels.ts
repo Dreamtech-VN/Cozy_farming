@@ -1109,7 +1109,7 @@ export function registerAllPanels() {
   // ================= Nhân vật: hub có cột tab dọc bên phải (kiểu GunPow) =================
   // [id, tên, icon trong assets/ui/inv]
   const CH_SECTIONS: [string, string, string][] = [
-    ['wardrobe', 'Quần áo', 'ic_shirt'], ['skin', 'Skin', 'ic_skin'], ['title', 'Danh hiệu', 'ic_level']
+    ['wardrobe', 'Quần áo', 'ic_shirt'], ['skin', 'Skin', 'ic_skin'], ['title', 'Danh hiệu', 'ic_title']
   ];
 
   // Tủ đồ dựng theo đúng mẫu Inventory của Cozy UI Pack: tab dán trên nóc,

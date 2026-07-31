@@ -964,16 +964,17 @@ input.ui-input, select.ui-input {
 }
 .wd-left-body { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; gap: 8px; }
 /* nhãn tên + huy hiệu cấp ở đầu bảng (như mẫu của pack) */
-.wd-name-row { position: relative; display: flex; align-items: center; flex: none; padding-left: 20px; }
+.wd-name-row { display: flex; align-items: center; justify-content: center; flex: none; }
 .wd-lv {
-  position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 2;
-  width: 48px; height: 48px; flex: none; display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 2; margin-right: -24px;
+  width: 46px; height: 46px; flex: none; display: flex; align-items: center; justify-content: center;
   background: url('/assets/ui/inv/ic_level.png') no-repeat center / 100% 100%;
   font-size: 16px; font-weight: 900; color: #12455c; padding-bottom: 6px;
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .25));
 }
 .wd-name {
-  flex: 1; min-width: 0; padding: 9px 20px 11px 34px; font-size: 15px; font-weight: 900; color: #7a4f1a;
+  flex: none; max-width: calc(100% - 30px); padding: 9px 22px 11px 36px;
+  font-size: 15px; font-weight: 900; color: #7a4f1a;
   border-image: url('/assets/ui/inv/name_label.png') 30 fill / 16px stretch;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center;
 }
