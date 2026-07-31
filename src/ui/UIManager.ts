@@ -1,6 +1,6 @@
 import type Phaser from 'phaser';
 import { bus, EV, toast } from '@/core/events';
-import { S, unequipTool, toolLevel, toggleHand } from '@/core/save';
+import { S, unequipTool, toolLevel, toggleHand, heldTool, selectTool } from '@/core/save';
 import { h, root, fmt, charFace, avatarEl, spr, chibiPreview, uiIcon } from './kit';
 import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
@@ -309,8 +309,14 @@ export function refreshHotbar() {
       slot.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 32)));
       const lv = toolLevel(tid);
       if (lv >= 2) slot.append(h('span', 'hb-lv', `Lv${lv}`));
-      slot.title = `${t.name}${lv >= 2 ? ` Lv.${lv}` : ''}`;
-      slot.onclick = () => { sfx.click(); bus.emit('hotbar:use', tid); };
+      if (heldTool() === tid) slot.classList.add('hb-on');
+      slot.title = `${t.name}${lv >= 2 ? ` Lv.${lv}` : ''} — bấm để cầm`;
+      // bấm = cầm nông cụ này (và dùng luôn nếu đang đứng cạnh chỗ dùng được)
+      slot.onclick = () => {
+        sfx.click();
+        if (heldTool() !== tid) selectTool(tid);
+        bus.emit('hotbar:use', tid);
+      };
       // giữ lâu / chuột phải = gỡ nông cụ khỏi ô
       let hold = 0;
       slot.onpointerdown = () => { hold = window.setTimeout(() => { unequipTool(i); toast(`Đã gỡ ${t.name}.`, 'hoe'); }, 550); };

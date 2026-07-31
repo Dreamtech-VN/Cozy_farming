@@ -90,6 +90,16 @@ export function equipHandItem(partId: number): boolean {
 }
 
 // Cầm / cất đồ trên tay
+// ===== Nông cụ đang cầm =====
+// Muốn cuốc/tưới/thu hoạch thì phải chọn đúng nông cụ ở thanh trang bị trước.
+// Không lưu vào save — mỗi lần vào game tự chọn lại.
+let _heldTool = '';
+export function heldTool(): string { return _heldTool; }
+export function selectTool(id: string): void {
+  _heldTool = _heldTool === id ? '' : id;
+  bus.emit('hotbar:changed');
+}
+
 export function toggleHand(partId: number) {
   if (!S.player.chibi) return;
   const now = S.player.chibi.hand ?? 0;

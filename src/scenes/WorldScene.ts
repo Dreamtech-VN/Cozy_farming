@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import { S, save } from '@/core/save';
+import { S, save, heldTool, selectTool } from '@/core/save';
+import { TOOLS } from '@/data/tools';
 import { bus, EV, toast } from '@/core/events';
 import { ZONES, type ZoneDef, type NpcDef } from '@/data/zones';
 import { CROPS, CROP_LIST, CROP_ANIM } from '@/data/crops';
@@ -1303,12 +1304,21 @@ export class WorldScene extends Phaser.Scene {
           }
         })
       });
-      if (p.state === 'empty') acts.push({ icon: '', sprite: TOOL_ICON.hoe, label: 'Cuốc đất', cb: () => this.doTill(pi) });
+      // Việc cần nông cụ chỉ hiện khi ĐANG CẦM đúng nông cụ đó; chưa cầm thì
+      // hiện mục nhắc, bấm vào là cầm luôn (nông cụ nằm sẵn trên thanh trang bị).
+      const needTool = (tool: 'hoe' | 'can' | 'basket', label: string, cb: () => void) => {
+        if (heldTool() === tool) { acts.push({ icon: '', sprite: TOOL_ICON[tool], label, cb }); return; }
+        acts.push({
+          icon: '', sprite: TOOL_ICON[tool], label: `Cầm ${TOOLS[tool].name.toLowerCase()}`,
+          cb: () => { selectTool(tool); toast(`Đã cầm ${TOOLS[tool].name.toLowerCase()} — chạm lại ô đất để làm.`, tool); }
+        });
+      };
+      if (p.state === 'empty') needTool('hoe', 'Cuốc đất', () => this.doTill(pi));
       if (p.state === 'tilled') acts.push({ icon: '', sprite: TOOL_ICON.seed, label: 'Trồng cây', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'seedpicker', data: { plot: pi } }) });
       if (p.state === 'planted') {
-        if (farming.isRipe(p)) acts.push({ icon: '', sprite: TOOL_ICON.basket, label: 'Thu hoạch', cb: () => this.doHarvest(pi) });
+        if (farming.isRipe(p)) needTool('basket', 'Thu hoạch', () => this.doHarvest(pi));
         else {
-          if (!p.watered) acts.push({ icon: '', sprite: TOOL_ICON.can, label: 'Tưới nước', cb: () => this.doWater(pi) });
+          if (!p.watered) needTool('can', 'Tưới nước', () => this.doWater(pi));
           if (!p.fertilized) acts.push({ icon: '', ui: 'fertilizer', label: 'Bón phân', cb: () => farming.fertilize(pi) });
         }
       }

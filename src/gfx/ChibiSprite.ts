@@ -5,13 +5,20 @@ import { lookLayers, FACE, type ChibiLook, type FaceKey } from '@/data/chibi';
 // Strip 15 frame 64x96/part, neo chân (32,88). Hướng: mặc định nhìn phải,
 // đi trái lật gương (Avatar chỉ có 2 hướng), lên/xuống dùng chung.
 
-export type ChibiAnim = 'idle' | 'walk' | 'work' | 'sit' | 'lie' | 'reach' | 'pat' | 'strike' | 'cheer';
+export type ChibiAnim = 'idle' | 'walk' | 'work' | 'till' | 'water' | 'pick'
+  | 'sit' | 'lie' | 'reach' | 'pat' | 'strike' | 'cheer';
 
 interface AnimDef { frames: number[]; fps: number; loop: boolean }
 const ANIMS: Record<ChibiAnim, AnimDef> = {
   idle: { frames: [0, 0, 0, 0, 0, 0, 0, 1], fps: 2.2, loop: true }, // thỉnh thoảng chớp mắt
   walk: { frames: [0, 2], fps: 6, loop: true },
   work: { frames: [3, 0, 3, 0, 3], fps: 5, loop: false },           // cúi làm việc
+  // Sprite Avatar KHÔNG có animation nông trại riêng (15 frame chỉ là tư thế
+  // đứng/ngồi/nằm + các kiểu đưa tay), nên 3 việc đồng áng được dựng lại từ
+  // các frame sẵn có cho khác nhau ra, thay vì dùng chung một kiểu cúi.
+  till:  { frames: [11, 3, 11, 3, 0], fps: 4.5, loop: false },      // giơ cuốc rồi bổ xuống
+  water: { frames: [7, 7, 6, 7, 0], fps: 3.5, loop: false },        // chìa bình ra tưới
+  pick:  { frames: [3, 3, 6, 0], fps: 4, loop: false },             // cúi nhặt rồi đứng lên
   sit:  { frames: [4], fps: 1, loop: true },
   lie:  { frames: [5], fps: 1, loop: true },
   // tư thế tương tác — sprite Avatar chỉ có các kiểu đưa/cầm tay,
@@ -79,8 +86,9 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
   // nhận cả tên animation cũ của CharacterSprite (hoe/water/pickup/axe/fishing)
   play(anim: string, onDone?: () => void) {
     const alias: Record<string, ChibiAnim> = {
-      hoe: 'work', water: 'work', pickup: 'work', axe: 'work', fishing: 'sit',
+      hoe: 'till', water: 'water', pickup: 'pick', axe: 'till', fishing: 'sit',
       idle: 'idle', walk: 'walk', work: 'work', sit: 'sit', lie: 'lie',
+      till: 'till', pick: 'pick',
       reach: 'reach', pat: 'pat', strike: 'strike', cheer: 'cheer'
     };
     const a = alias[anim] ?? 'idle';

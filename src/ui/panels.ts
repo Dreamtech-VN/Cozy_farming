@@ -1564,41 +1564,73 @@ export function registerAllPanels() {
 
   // ================= Chat =================
   registerPanel('chat', (data?: { to?: string }) => {
-    const { body, win } = openWindow('Trò chuyện');
+    // Chat KHÔNG dùng khung gỗ chung như các popup khác — nó là bảng chat
+    // tối, mỏng, neo góc dưới trái để vẫn nhìn được thế giới phía sau.
+    // khung chat mini trên màn hình nằm ngay dưới bảng này -> ẩn đi cho đỡ chồng chữ
+    const mini = document.getElementById('chat-mini');
+    if (mini) mini.style.visibility = 'hidden';
+    const { body, win, close } = openWindow('', {
+      size: 'small',
+      onClose: () => { if (mini) mini.style.visibility = ''; }
+    });
     win.classList.add('win-chat');
+    (win.parentElement as HTMLElement)?.classList.add('chat-backdrop');
+    win.querySelector('.win-head')?.remove();
+
     let channel: 'public' | 'area' | 'private' = data?.to ? 'private' : 'public';
     let privateTo = data?.to ?? S.social.friends[0]?.name ?? '';
 
+    const head = h('div', 'chat-head');
+    head.append(uiIcon('chat', 18), h('span', 'chat-title', 'Trò chuyện'));
+    const closeX = h('button', 'chat-x', '✕');
+    closeX.onclick = close;
+    head.append(closeX);
+
+    const chanBar = h('div', 'chat-tabs');
+    const chans: ['public' | 'area' | 'private', string][] =
+      [['public', 'Tổng'], ['area', 'Gần'], ['private', 'Riêng']];
+
     const log = h('div', 'chat-log');
-    log.style.cssText = 'flex:1;min-height:0;overflow-y:auto;background:rgba(0,0,0,.3);border-radius:10px;padding:8px;font-size:12px;display:flex;flex-direction:column;gap:3px';
     const renderLog = () => {
       log.innerHTML = '';
-      for (const m of getChatLog().filter(m =>
+      const list = getChatLog().filter(m =>
         m.channel === 'system' ||
         (channel === 'private'
           ? m.channel === 'private' && (m.from === privateTo || m.to === privateTo || m.from === S.player.name)
-          : m.channel === channel))) {
-        const el = h('div', `ch-${m.channel}`);
-        el.textContent = `${new Date(m.at).toLocaleTimeString('vi', { hour: '2-digit', minute: '2-digit' })} ${m.from}: ${m.text}`;
+          : m.channel === channel));
+      if (!list.length) log.append(h('div', 'chat-empty', 'Chưa có tin nhắn nào.'));
+      for (const m of list) {
+        const el = h('div', `chat-msg ch-${m.channel}`);
+        const mine = m.from === S.player.name;
+        if (mine) el.classList.add('mine');
+        const t = new Date(m.at).toLocaleTimeString('vi', { hour: '2-digit', minute: '2-digit' });
+        el.append(h('span', 'chat-time', t));
+        if (m.channel !== 'system') el.append(h('span', 'chat-from', `${m.from}:`));
+        el.append(h('span', 'chat-text', m.text));
         log.append(el);
       }
       log.scrollTop = log.scrollHeight;
     };
 
-    const chanBar = h('div', 'chips');
-    const chans: ['public' | 'area' | 'private', string][] = [['public', 'Tổng'], ['area', 'Gần (người ở gần)'], ['private', '🔒 Riêng']];
     for (const [id, lbl] of chans) {
-      const c = h('div', `chip ${channel === id ? 'active' : ''}`, lbl);
-      c.onclick = () => { channel = id; chanBar.querySelectorAll('.chip').forEach(x => x.classList.remove('active')); c.classList.add('active'); renderLog(); };
+      const c = h('button', `chat-tab ${channel === id ? 'active' : ''}`, lbl);
+      c.onclick = () => {
+        channel = id;
+        chanBar.querySelectorAll('.chat-tab').forEach(x => x.classList.remove('active'));
+        c.classList.add('active');
+        renderLog();
+      };
       chanBar.append(c);
     }
 
-    const inputBar = h('div');
-    inputBar.style.cssText = 'display:flex;gap:6px;margin-top:8px;flex:none';
-    const inp = h('input', 'ui-input') as HTMLInputElement;
+    const inputBar = h('div', 'chat-input-row');
+    const inp = h('input', 'chat-input') as HTMLInputElement;
     inp.placeholder = 'Nhập tin nhắn...';
     inp.maxLength = 120;
-    const sendBtn = btn('Gửi', 'gold', () => {
+    const sendBtn = h('button', 'chat-send');
+    sendBtn.append(uiIcon('chat', 18));
+    sendBtn.title = 'Gửi';
+    sendBtn.onclick = () => {
       const text = inp.value.trim();
       if (!text) return;
       sendChat(channel, text, channel === 'private' ? privateTo : undefined);
@@ -1606,12 +1638,13 @@ export function registerAllPanels() {
       if (channel !== 'private') bus.emit('world:say', text);
       inp.value = '';
       renderLog();
-    });
+    };
     inp.onkeydown = e => { if (e.key === 'Enter') sendBtn.click(); e.stopPropagation(); };
     inputBar.append(inp, sendBtn);
 
-    body.append(chanBar, log, inputBar);
+    body.append(head, chanBar, log, inputBar);
     renderLog();
+    setTimeout(() => inp.focus(), 50);
     bus.on(EV.CHAT, renderLog);
   });
 
