@@ -1654,7 +1654,7 @@ export function registerAllPanels() {
         (i < Math.ceil(SLOTS.length / 2) ? colL : colR).append(cell);
       });
       const mid = h('div', 'wd-char');
-      mid.append(charFace(look, 210));
+      mid.append(charFace(look, 200));
       const nameRow = h('div', 'wd-name-row');
       const lv = h('div', 'wd-lv'); lv.textContent = `${S.player.level}`;
       const nm = h('div', 'wd-name'); nm.textContent = S.player.name;
@@ -1662,6 +1662,16 @@ export function registerAllPanels() {
       const body2 = h('div', 'wd-left-body');
       body2.append(colL, mid, colR);
       left.append(nameRow, body2);
+      if (mode !== 'skin') {
+        // hàng ô phụ kiện dưới cùng: game chưa có loại nào nên để ô trống mờ
+        const extra = h('div', 'wd-slot-row');
+        for (let i = 0; i < 3; i++) {
+          const e = h('div', 'wd-slot eq-skin empty locked');
+          e.title = 'Ô phụ kiện — sắp có';
+          extra.append(e);
+        }
+        left.append(extra);
+      }
 
       // ----- phải: chia tab + card lưới ô (có cả ô trống như tủ đồ game) -----
       const right = h('div', 'wd-right');

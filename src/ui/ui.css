@@ -930,9 +930,9 @@ input.ui-input, select.ui-input {
 /* ===== Tủ đồ — dựng theo mẫu Inventory của Cozy UI Pack ===== */
 /* Cửa sổ riêng: tấm modal nét đứt + tab dán trên nóc, không dùng khung gỗ chung */
 .win.win-wardrobe {
-  width: min(880px, 96vw); height: min(560px, 84vh); max-height: 84vh;
+  width: min(940px, 96vw); height: min(500px, 80vh); max-height: 80vh;
   padding: 0; border: none; box-shadow: none; background: none;
-  border-image: url('/assets/ui/inv/modal.png') 40 fill / 18px stretch;
+  border-image: url('/assets/ui/inv/modal.png') 46 fill / 30px stretch;
   display: flex; flex-direction: column; overflow: visible;
 }
 .win.win-wardrobe::before {           /* đinh ghim đỏ ở góc trên trái */
@@ -952,14 +952,14 @@ input.ui-input, select.ui-input {
 }
 .win.win-wardrobe .ch-main { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow: visible; }
 .win.win-wardrobe .win-close { width: 42px; height: 42px; right: -16px; top: -16px; }
-.wr-tabs { position: absolute; left: 22px; top: -34px; display: flex; align-items: flex-end; gap: 5px; z-index: 1; }
+.wr-tabs { position: absolute; left: 26px; top: -46px; display: flex; align-items: flex-end; gap: 7px; z-index: 1; }
 .wr-tab {
   display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; border: none; font-family: inherit;
-  min-width: 62px; height: 44px; padding: 0 16px 10px; color: #7a4f34;
-  font-size: 13px; font-weight: 900; white-space: nowrap;
+  min-width: 76px; height: 58px; padding: 0 20px 14px; color: #7a4f34;
+  font-size: 15px; font-weight: 900; white-space: nowrap;
   background: url('/assets/ui/inv/tab_off.png') no-repeat center bottom / 100% 100%;
 }
-.wr-tab img { width: 24px; height: 22px; object-fit: contain; filter: saturate(.45) opacity(.8); }
+.wr-tab img { width: 30px; height: 28px; object-fit: contain; filter: saturate(.45) opacity(.8); }
 .wr-tab.on {
   background-image: url('/assets/ui/inv/tab_on.png'); color: #17414f; z-index: 2;
 }
@@ -977,19 +977,19 @@ input.ui-input, select.ui-input {
 /* nhãn tên + huy hiệu cấp ở đầu bảng (như mẫu của pack) */
 .wd-name-row { display: flex; align-items: center; gap: 6px; flex: none; }
 .wd-lv {
-  width: 34px; height: 34px; flex: none; display: flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; flex: none; display: flex; align-items: center; justify-content: center;
   background: url('/assets/ui/inv/ic_level.png') no-repeat center / 100% 100%;
-  font-size: 12px; font-weight: 900; color: #12455c; padding-bottom: 4px;
+  font-size: 16px; font-weight: 900; color: #12455c; padding-bottom: 6px;
 }
 .wd-name {
-  flex: 1; min-width: 0; padding: 6px 16px 8px; font-size: 13px; font-weight: 900; color: #7a4f1a;
-  border-image: url('/assets/ui/inv/name_label.png') 26 fill / 12px stretch;
+  flex: 1; min-width: 0; padding: 9px 20px 11px; font-size: 15px; font-weight: 900; color: #7a4f1a;
+  border-image: url('/assets/ui/inv/name_label.png') 30 fill / 16px stretch;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .wd-slot-col { display: flex; flex-direction: column; justify-content: flex-start; gap: 9px; }
 /* ô trang bị: ảnh ô của pack, ô trống dùng bản mờ có sẵn icon từng loại */
 .wd-slot {
-  width: 64px; height: 64px; border: none; background: url('/assets/ui/inv/eq_empty.png') no-repeat center / 100% 100%;
+  width: 70px; height: 70px; border: none; background: url('/assets/ui/inv/eq_empty.png') no-repeat center / 100% 100%;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
   cursor: pointer; padding: 3px 2px; font-family: inherit; overflow: hidden;
 }
@@ -1002,14 +1002,17 @@ input.ui-input, select.ui-input {
 .wd-slot.empty.eq-hair { background-image: url('/assets/ui/inv/eq_hair.png'); }
 .wd-slot.empty.eq-hand { background-image: url('/assets/ui/inv/eq_hand.png'); }
 .wd-slot.active { filter: drop-shadow(0 0 3px #ffd43b) drop-shadow(0 0 6px #e8890c88); }
+.wd-slot.locked { opacity: .55; cursor: default; pointer-events: none; }
+/* hàng ô phụ kiện dưới khung nhân vật */
+.wd-slot-row { display: flex; gap: 9px; justify-content: center; flex: none; padding-top: 2px; }
 .wd-slot-ico { font-size: 20px; line-height: 30px; }
 .wd-slot-name { font-size: 10px; font-weight: 800; color: #a9714b; }
 /* ô trang bị không ghi chữ (như mẫu pack) — tên hiện ở tooltip */
 .wd-slot-name { display: none; }
 .wd-char {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 4px; flex: none; width: 208px; height: 252px; padding: 8px;
-  border: 2px solid #e3bd97; border-radius: 16px; background: rgba(255, 255, 255, .38);
+  gap: 4px; flex: none; width: 190px; height: 236px; padding: 8px;
+  border: 3px dashed #dfb692; border-radius: 18px; background: rgba(255, 255, 255, .40);
 }
 .wd-char-name { font-size: 13px; font-weight: 800; color: #4a3520; background: #f6edd8cc; padding: 2px 10px; border-radius: 8px; }
 .wd-right { flex: 1; min-width: 0; display: flex; flex-direction: column; min-height: 0; }
