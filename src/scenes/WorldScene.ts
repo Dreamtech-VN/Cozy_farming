@@ -26,12 +26,12 @@ import { sfx } from '@/core/audio';
 const T = 16; // kích thước tile
 // ---- Nông trại HD (nền imagemap Avatar 1008x506) — tọa độ px ----
 const FARM_PLOT = { ox: 84, oy: 218, pw: 42, ph: 45 };            // lưới ruộng 8x6
-const FARM_POND_TILES = { x: 33, y: 7, w: 28, h: 12 };            // hồ cá lát tile (Pack2)
-const KHE_POS = { x: 790, y: 195 };                               // cây khế
+const FARM_POND_TILES = { x: 36, y: 5, w: 24, h: 10 };            // hồ cá lát tile (Pack2)
+const KHE_POS = { x: 480, y: 160 };                               // cây khế
 const WAREHOUSE_POS = { x: 320, y: 175 };                         // nhà kho
 const PETHOUSE_POS = { x: 648, y: 198 };                          // nhà thú cưng (chỉ hiện khi đã nuôi)
 const PETSHOP_POS = { x: 21 * T, y: 13 * T };                     // tiệm thú cưng (Thành phố)
-const BARN_RECT = { x: 35, y: 19, w: 12, h: 8 };                  // chuồng rào (dưới hồ cá) — khớp pen.png 192x128
+const BARN_RECT = { x: 41, y: 21, w: 12, h: 8 };                  // chuồng rào (dưới hồ cá) — khớp pen.png 192x128
 const FARM_ORIGIN = { x: Math.round(FARM_PLOT.ox / T), y: Math.round(FARM_PLOT.oy / T) };
 const ROAD_TILES = 4; // đường xe chạy chiếm 4 hàng tile dưới cùng (map cổng)
 
@@ -48,9 +48,8 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     // nông trại chỉ gồm: nhà bếp, nhà kho, chuồng thú, nhà chó (+ cây khế, ao cá)
     { key: 'lt_kitchen', x: 8.75, y: 12.6, s: 1 },     // nhà bếp (cửa vào nhà riêng)
     { key: 'lt_warehouse', x: 20, y: 12.7, s: 1 },     // nhà kho — mở kho đồ
-    { key: 'lt_barn', x: 31, y: 22.6, s: 1 },          // nhà chuồng (bên trái chuồng rào)
-    { key: 'lt_tree', x: 49.4, y: 12.4, s: 1 },        // cây khế
-    { key: 'lt_tree', x: 58.6, y: 14.8, s: 0.8 }
+    { key: 'lt_barn', x: 35, y: 26, s: 0.9 },          // nhà chuồng (bên trái chuồng rào)
+    { key: 'lt_tree', x: 30, y: 10, s: 1 }             // cây khế
   ],
   beach: [
     { key: 'bld_fishshop', x: 10, y: 7 },    // tiệm câu ông Biển
@@ -795,8 +794,7 @@ export class WorldScene extends Phaser.Scene {
     };
     addRect(6, 13, 27, 13);      // đường ngang trước dãy nhà
     addRect(28, 13, 29, 30);     // đường dọc giữa ruộng và chuồng/hồ
-    addRect(6, 29, 41, 30);      // đường ngang dưới ruộng
-    addRect(40, 27, 41, 29);     // nhánh lên cổng chuồng thú
+    addRect(6, 29, 47, 30);      // đường ngang dưới ruộng, chạy tới cổng chuồng thú
     addRect(31, 30, 32, 31);     // nối ra cổng nông trại
 
     // né ruộng
@@ -1409,7 +1407,7 @@ export class WorldScene extends Phaser.Scene {
 
   private spawnChopTrees() {
     // 3 cây gỗ HD giữa nông trại (ngoài ruộng/chuồng/hồ)
-    for (const [px2, py2] of [[452, 508], [828, 470]] as [number, number][]) {
+    for (const [px2, py2] of [[452, 502], [906, 462]] as [number, number][]) {
       const obj = this.add.image(px2, py2, 'lt_tree').setOrigin(0.5, 1).setScale(0.72).setDepth(py2);
       this.addFootprint(px2, py2, 46, 22);
       this.chopTrees.push({ obj, readyAt: 0 });
