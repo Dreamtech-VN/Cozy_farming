@@ -26,6 +26,20 @@ Nguồn: các pack đã mua trên itch.io (license thương mại), tải từ
 - Nền đất/cỏ/cát/nước (tile đơn sắc có hoa văn, palette khớp pack) — autotile thật sẽ map ở v0.2.
 - Chuồng gia súc, đàn piano, đèn cây trong nhà, tranh treo tường.
 
+## Icon vật phẩm nông trại kiểu chibi (`assets/farm/chibi/`)
+
+Nguồn: icon 16px cắt sẵn ở `assets/farm/it/` (một sheet duy nhất) và 5 icon
+Cloverframe ở `assets/farm/cf/`. Sinh ra bản chibi bằng script PIL:
+
+1. phóng nearest x3 (x2 với icon 32px) để giữ pixel vuông
+2. tăng độ rực 1.2 / tương phản 1.1
+3. giãn alpha (MaxFilter) rồi tô viền tối `#261a14` dày 2-3 px
+4. phủ vệt sáng bo tròn ở góc trên-trái, mask theo phần đặc của hình
+5. trim viền trong suốt
+
+Bộ chibi này là bộ đang dùng trong game; hai thư mục `it/` và `cf/` giữ lại
+làm bản gốc để chạy lại script khi cần.
+
 ## Cloverframe Cozy Farm Starter Pack (`assets/farm/cf/`)
 
 20 icon 32x32 (nông sản, trứng/sữa/phô mai/bánh/mật ong, túi hạt, bình tưới, cuốc, liềm, rìu).

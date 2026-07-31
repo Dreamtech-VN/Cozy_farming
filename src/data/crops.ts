@@ -18,13 +18,13 @@ export interface CropDef {
 export const CROPS: Record<string, CropDef> = {};
 
 const SHEET = 'assets/farm/crops_all.png';
-// Icon nông sản trong túi: cắt sẵn từ CÙNG MỘT sheet (assets/farm/it) cho đồng bộ.
-// [rộng, cao] sau khi trim viền trong suốt.
-const IT = 'assets/farm/it/';
+// Icon nông sản trong túi: cắt từ CÙNG MỘT sheet rồi chuyển sang style chibi
+// (viền đậm + ánh sáng bóng) — script ở docs/ASSETS.md, nguồn gốc ở assets/farm/it.
+const IT = 'assets/farm/chibi/';
 const IT_CROP: Record<string, [number, number]> = {
-  carrot: [16, 16], turnip: [15, 16], potato: [15, 12], tomato: [14, 13], cabbage: [16, 14],
-  pumpkin: [15, 13], watermelon: [14, 13], strawberry: [14, 14], corn: [16, 15],
-  eggplant: [16, 14], chili: [15, 15], sunflower: [14, 13], rose: [15, 15], tulip: [15, 16]
+  carrot: [52, 52], turnip: [49, 52], potato: [49, 40], tomato: [46, 43], cabbage: [52, 46],
+  pumpkin: [49, 43], watermelon: [46, 43], strawberry: [46, 46], corn: [52, 49],
+  eggplant: [52, 46], chili: [49, 49], sunflower: [46, 43], rose: [49, 49], tulip: [49, 52]
 };
 
 function defCrop(c: CropDef) {
@@ -32,7 +32,7 @@ function defCrop(c: CropDef) {
   // cột 0 của mỗi hàng crops_all là icon túi hạt; cột 5 là cây chín
   defItem({
     id: `seed_${c.id}`, name: `Hạt ${c.name}`, kind: 'seed', icon: '',
-    sprite: { url: 'assets/farm/cf/16_seed_bag.png', sx: 0, sy: 0, sw: 32, sh: 32 },
+    sprite: { url: 'assets/farm/chibi/16_seed_bag.png', sx: 0, sy: 0, sw: 56, sh: 62 },
     sell: Math.floor(c.seedPrice / 2), buy: c.seedPrice, meta: { crop: c.id }
   });
   defItem({

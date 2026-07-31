@@ -12,12 +12,12 @@ export interface ToolDef {
 }
 
 export const TOOLS: Record<string, ToolDef> = {
-  hoe: { id: 'hoe', name: 'Cuốc', icon: '', url: 'assets/farm/cf/18_hoe.png', w: 32, h: 32 },
-  can: { id: 'can', name: 'Bình tưới', icon: '', url: 'assets/farm/cf/17_watering_can.png', w: 32, h: 32 },
-  basket: { id: 'basket', name: 'Giỏ thu hoạch', icon: '', url: 'assets/farm/cf/19_sickle.png', w: 32, h: 32 },
+  hoe: { id: 'hoe', name: 'Cuốc', icon: '', url: 'assets/farm/chibi/18_hoe.png', w: 52, h: 62 },
+  can: { id: 'can', name: 'Bình tưới', icon: '', url: 'assets/farm/chibi/17_watering_can.png', w: 62, h: 50 },
+  basket: { id: 'basket', name: 'Giỏ thu hoạch', icon: '', url: 'assets/farm/chibi/19_sickle.png', w: 50, h: 62 },
   rod: { id: 'rod', name: 'Cần câu', icon: '🎣', url: 'assets/chibi/tools/rod.png', w: 60, h: 28 },
   net: { id: 'net', name: 'Vợt côn trùng', icon: '🥅', url: 'assets/chibi/tools/net.png', w: 48, h: 46 },
-  axe: { id: 'axe', name: 'Rìu', icon: '', url: 'assets/farm/cf/20_axe.png', w: 32, h: 32 },
+  axe: { id: 'axe', name: 'Rìu', icon: '', url: 'assets/farm/chibi/20_axe.png', w: 58, h: 62 },
   shovel: { id: 'shovel', name: 'Xẻng', icon: '🦯', url: 'assets/chibi/tools/shovel.png', w: 46, h: 46 }
 };
 
