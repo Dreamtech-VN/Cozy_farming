@@ -1916,7 +1916,8 @@ export function registerAllPanels() {
     // Chat KHÔNG dùng khung gỗ chung như các popup khác — nó là bảng chat
     // tối, neo góc dưới trái để vẫn nhìn được thế giới phía sau. Tin nhắn vẽ
     // kiểu bong bóng có ảnh đại diện, tin của mình dạt sang phải.
-    const mini = document.getElementById('chat-mini');
+    // Icon chat nổi nằm ngay dưới bảng này -> ẩn đi cho khỏi vướng.
+    const mini = document.getElementById('chat-fab');
     if (mini) mini.style.visibility = 'hidden';
     const { body, win, close } = openWindow('', {
       size: 'small',

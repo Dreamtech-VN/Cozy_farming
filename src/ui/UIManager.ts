@@ -7,10 +7,10 @@ import { TITLES } from '@/data/quests';
 import { gameHour, currentWeather, WEATHER_ICON, WEATHER_NAME } from '@/systems/time';
 import * as socialMod from '@/systems/social';
 import * as storeMod from '@/systems/farmstore';
-import { initSocial, getChatLog } from '@/systems/social';
+import { initSocial } from '@/systems/social';
 import { TOOLS, toolIconSize } from '@/data/tools';
 import { initDaily } from '@/systems/meta';
-import { initQuests } from '@/systems/quests';
+import { initQuests, activeQuestList } from '@/systems/quests';
 import { sfx } from '@/core/audio';
 import { registerAllPanels } from './panels';
 import { registerMinigames } from './minigames';
@@ -35,7 +35,7 @@ export function isHudVisible() { return hudVisible; }
 
 export function setHudVisible(show: boolean) {
   hudVisible = show;
-  const ids = ['hotbar', 'menu-drawer', 'chat-mini'];
+  const ids = ['hotbar', 'menu-drawer', 'chat-fab', 'quest-bar'];
   const cls = ['.hud-top', '.hud-quick'];
   for (const id of ids) {
     const el = document.getElementById(id);
@@ -145,6 +145,7 @@ function buildHud() {
   const drawer = h('div'); drawer.id = 'menu-drawer';
   const MENU: [string, string, string][] = [
     ['inventory', 'Kho đồ', 'inventory'],
+    ['mail', 'Thư', 'mail'],
     ['map', 'Bản đồ', 'map'],
     ['social', 'Bạn bè', 'social'],
     ['daily', 'Điểm danh', 'daily'],
@@ -166,14 +167,10 @@ function buildHud() {
 
   const menuBtn = mkBtn('menu', 'Menu', () => drawer.classList.toggle('open'));
   menuBtn.id = 'menu-btn';
-  quick.append(
-    menuBtn,
-    mkBtn('inventory', 'Túi đồ', () => openPanel('inventory'), 'inventory'),
-    mkBtn('quest', 'Nhiệm vụ', () => openPanel('quests'), 'quests'),
-    mkBtn('mail', 'Thư', () => openPanel('mail'), 'mail'),
-    mkBtn('emote', 'Biểu cảm', () => openPanel('emotes'))
-  );
+  // Túi đồ và Thư dời hẳn vào ngăn kéo cho gọn; ngoài chỉ còn menu + biểu cảm
+  quick.append(menuBtn, mkBtn('emote', 'Biểu cảm', () => openPanel('emotes')));
   root().append(quick);
+  buildQuestBar();
   // chạm ra ngoài thì đóng ngăn kéo
   document.addEventListener('pointerdown', e => {
     if (drawer.classList.contains('open') && !drawer.contains(e.target as Node) && e.target !== menuBtn && !menuBtn.contains(e.target as Node)) {
@@ -184,22 +181,8 @@ function buildHud() {
   // Điều khiển hoàn toàn bằng cảm ứng: chạm nền để đi, tới nơi tự mở hành động.
   // (không còn joystick và cụm nút hành động)
 
-  // khung chat trên màn hình — bấm vào là mở chat (không có nút riêng)
-  const cm = h('div'); cm.id = 'chat-mini'; root().append(cm);
-  cm.onclick = () => { sfx.click(); openPanel('chat'); };
-  const cmLog = h('div'); cmLog.id = 'chat-mini-log';
-  const cmHint = h('div'); cmHint.id = 'chat-mini-hint';
-  cmHint.textContent = 'Nhắn gì đó...';
-  cm.append(cmLog, cmHint);
-  const renderChat = (m: ChatMessage) => {
-    const el = h('div', `cm ch-${m.channel}`);
-    const tag = m.channel === 'private' ? '[Riêng] ' : m.channel === 'area' ? '[Gần] ' : m.channel === 'public' ? '[Tổng] ' : '';
-    el.textContent = `${tag}${m.from}: ${m.text}`;
-    cmLog.append(el);
-    while (cmLog.children.length > 4) cmLog.firstChild?.remove();
-  };
-  getChatLog().slice(-4).forEach(renderChat);
-  bus.on(EV.CHAT, renderChat);
+  // Chat gọn lại thành một icon nổi, kéo đi đâu cũng được, bấm mới mở khung chat
+  buildChatBubble();
 
   // cập nhật số liệu
   bus.on(EV.WALLET, refreshHud);
@@ -210,6 +193,106 @@ function buildHud() {
   setInterval(refreshClock, 10_000);
   refreshHud();
   refreshClock();
+}
+
+// ===== Icon chat nổi: kéo thả tự do, bấm là mở khung trò chuyện =====
+// Vị trí nhớ trong localStorage để lần sau mở game vẫn nằm đúng chỗ đã kéo.
+const CHAT_POS_KEY = 'cozy_chat_btn_pos';
+
+function buildChatBubble() {
+  const b = h('button', 'chat-fab');
+  b.id = 'chat-fab';
+  b.innerHTML = `<img src="assets/ui/pack/icon_chat.png"><span class="dot"></span>`;
+  b.title = 'Trò chuyện';
+  root().append(b);
+
+  const clamp = (x: number, y: number) => {
+    const r = root().getBoundingClientRect();
+    return {
+      x: Math.max(6, Math.min(r.width - b.offsetWidth - 6, x)),
+      y: Math.max(6, Math.min(r.height - b.offsetHeight - 6, y))
+    };
+  };
+  const place = (x: number, y: number) => {
+    const p = clamp(x, y);
+    b.style.left = `${p.x}px`;
+    b.style.top = `${p.y}px`;
+  };
+  try {
+    const saved = JSON.parse(localStorage.getItem(CHAT_POS_KEY) || 'null');
+    if (saved) place(saved.x, saved.y); else place(12, root().clientHeight - 130);
+  } catch { place(12, root().clientHeight - 130); }
+
+  // Listener move/up gắn sẵn trên window ngay từ đầu (gắn thêm ngay trong lúc
+  // đang xử lý pointerdown thì Chromium không giao pointermove cho nó nữa).
+  let dragging = false, moved = false, dx = 0, dy = 0, sx = 0, sy = 0;
+  window.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    if (Math.abs(e.clientX - sx) > 3 || Math.abs(e.clientY - sy) > 3) moved = true;
+    if (moved) { place(e.clientX - dx, e.clientY - dy); e.preventDefault(); }
+  }, { passive: false });
+  const endDrag = () => {
+    if (!dragging) return;
+    dragging = false;
+    if (moved) localStorage.setItem(CHAT_POS_KEY, JSON.stringify({ x: b.offsetLeft, y: b.offsetTop }));
+    else { sfx.click(); openPanel('chat'); }
+    b.classList.remove('unread');
+  };
+  window.addEventListener('pointerup', endDrag);
+  window.addEventListener('pointercancel', endDrag);
+  b.addEventListener('pointerdown', e => {
+    dragging = true; moved = false;
+    sx = e.clientX; sy = e.clientY;
+    dx = e.clientX - b.offsetLeft; dy = e.clientY - b.offsetTop;
+    e.stopPropagation();
+  });
+  window.addEventListener('resize', () => place(b.offsetLeft, b.offsetTop));
+
+  // có tin mới mà chưa mở chat -> chấm đỏ + nảy nhẹ
+  bus.on(EV.CHAT, (m: ChatMessage) => {
+    if (m.from === S.player.name) return;
+    if (document.querySelector('.win-chat')) return;
+    b.classList.add('unread');
+  });
+}
+
+// ===== Thanh nhiệm vụ dưới cụm nút: mỗi lần 1 nhiệm vụ, bấm mũi tên xem thêm =====
+let questIdx = 0;
+
+function buildQuestBar() {
+  const bar = h('div'); bar.id = 'quest-bar';
+  bar.innerHTML = `
+    <div class="qb-tab"><img src="assets/ui/pack/icon_quest.png"><span>Nhiệm vụ</span><span class="dot"></span></div>
+    <div class="qb-body"><div class="qb-text"></div><button class="qb-more">›</button></div>`;
+  root().append(bar);
+  (bar.querySelector('.qb-tab') as HTMLElement).onclick = () => { sfx.click(); openPanel('quests'); };
+  (bar.querySelector('.qb-text') as HTMLElement).onclick = () => { sfx.click(); openPanel('quests'); };
+  (bar.querySelector('.qb-more') as HTMLElement).onclick = e => {
+    e.stopPropagation();
+    sfx.click();
+    questIdx++;
+    refreshQuestBar();
+  };
+  bus.on(EV.QUEST, refreshQuestBar);
+  bus.on(EV.STATE_CHANGED, refreshQuestBar);
+  refreshQuestBar();
+}
+
+function refreshQuestBar() {
+  const bar = document.getElementById('quest-bar');
+  if (!bar) return;
+  const list = activeQuestList().filter(q => !q.claimed);
+  if (!list.length) { bar.style.display = 'none'; return; }
+  bar.style.display = '';
+  questIdx = ((questIdx % list.length) + list.length) % list.length;
+  const q = list[questIdx];
+  const txt = bar.querySelector('.qb-text') as HTMLElement;
+  txt.classList.toggle('done', q.done);
+  txt.textContent = q.done
+    ? `${q.def.name} — có thưởng chờ nhận`
+    : `${q.def.name} (${Math.min(q.progress, q.def.target)}/${q.def.target})`;
+  bar.querySelector('.qb-more')!.classList.toggle('hide', list.length < 2);
+  bar.querySelector('.qb-tab')!.classList.toggle('notify', list.some(x => x.done));
 }
 
 function refreshHud() {
