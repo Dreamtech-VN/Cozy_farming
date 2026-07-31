@@ -16,8 +16,8 @@ export class CharCreateScene extends Phaser.Scene {
   create() {
     const W = this.scale.width, H = this.scale.height;
     // nền phẳng một màu (không dùng ảnh) cho nổi khung tạo nhân vật
-    this.add.rectangle(0, 0, W, H, 0x2f6f3e).setOrigin(0);
-    const glow = this.add.circle(W * 0.3, H * 0.52, Math.max(W, H) * 0.42, 0x4f9a5c, 0.55);
+    this.add.rectangle(0, 0, W, H, 0x3b6d8c).setOrigin(0);
+    const glow = this.add.circle(W * 0.3, H * 0.52, Math.max(W, H) * 0.42, 0x5a9ab5, 0.45);
     this.tweens.add({ targets: glow, scale: 1.06, duration: 5200, yoyo: true, repeat: -1, ease: 'sine.inout' });
 
     // bục đứng cho nhân vật xem trước
@@ -26,8 +26,8 @@ export class CharCreateScene extends Phaser.Scene {
     g.fillStyle(0x000000, 0.35); g.fillEllipse(px, py + 8 * RES, 190 * RES, 46 * RES);
     g.fillStyle(0xffd43b, 0.25); g.fillEllipse(px, py + 6 * RES, 160 * RES, 36 * RES);
     this.add.text(px, py + 40 * RES, 'Nhân vật của bạn', {
-      fontFamily: 'sans-serif', fontSize: `${15 * RES}px`, color: '#ffe9a3', fontStyle: 'bold'
-    }).setOrigin(0.5).setShadow(0, 2, '#000', 4);
+      fontFamily: 'sans-serif', fontSize: `${15 * RES}px`, color: '#e0f0ff', fontStyle: 'bold'
+    }).setOrigin(0.5).setShadow(0, 2, '#1a3a55', 4);
     this.cameras.main.fadeIn(300, 10, 18, 32);
     if (!S.player.chibi) S.player.chibi = defaultLook(1);
     this.preview = new ChibiSprite(this, px, py - 6 * RES, S.player.chibi);

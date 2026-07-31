@@ -311,7 +311,7 @@ export function registerMinigames() {
 // ===== Form tạo nhân vật chibi =====
 import { bus, EV } from '@/core/events';
 import { chibiPreview, chibiHead } from './kit';
-import { defaultLook, simplestList } from '@/data/chibi';
+import { defaultLook, simplestList, FACE } from '@/data/chibi';
 
 function buildCharCreate(body: HTMLElement, done: () => void) {
   if (!S.player.chibi) S.player.chibi = defaultLook(1);
@@ -319,9 +319,9 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   const emit = () => bus.emit(EV.APPEARANCE);
 
   // tên
-  const nameRow = h('div', 'cc-row');
-  nameRow.append(h('div', 'lbl', 'Tên nhân vật'));
-  const nameInput = h('input', 'ui-input') as HTMLInputElement;
+  const nameRow = h('div', 'cc-sec');
+  nameRow.append(h('div', 'cc-label', 'Tên nhân vật'));
+  const nameInput = h('input', 'ui-input cc-input') as HTMLInputElement;
   nameInput.placeholder = 'Nhập tên (2-12 ký tự)';
   nameInput.maxLength = 12;
   nameInput.onkeydown = e => e.stopPropagation();
@@ -336,7 +336,6 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
     bus.emit('charcreate:done');
   });
   startBtn.style.cssText = 'width:100%;padding:14px;font-size:16px';
-  // nút chính đặt ngoài vùng cuộn để lúc nào cũng thấy
   const foot = h('div', 'cc-foot');
   foot.append(startBtn);
   body.parentElement?.append(foot);
@@ -346,19 +345,19 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
     for (const el of sections) el.remove();
     sections = [];
     const section = (label: string) => {
-      const d = h('div', 'cc-row');
-      d.append(h('div', 'lbl', label));
+      const d = h('div', 'cc-sec');
+      d.append(h('div', 'cc-label', label));
       body.append(d);
       sections.push(d);
       return d;
     };
 
-    // giới tính (data Avatar: 1 = nam, 2 = nữ)
+    // giới tính
     let sec = section('Giới tính');
-    const gchips = h('div', 'chips');
+    const gchips = h('div', 'cc-opts');
     const genders: [number, string][] = [[1, 'Nam'], [2, 'Nữ']];
     for (const [g, lbl] of genders) {
-      const c = h('div', `chip ${look.gender === g ? 'active' : ''}`, lbl);
+      const c = h('div', `cc-opt ${look.gender === g ? 'active' : ''}`, lbl);
       c.onclick = () => {
         Object.assign(look, defaultLook(g));
         S.player.gender = g === 2 ? 'female' : 'male';
@@ -368,34 +367,38 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
     }
     sec.append(gchips);
 
-    // mỗi mục 3 lựa chọn đơn giản nhất (mũ/kính có thêm "Không")
-    const SLOTS: [string, number, 'hair' | 'eyes' | 'shirt' | 'pant' | 'hat' | 'glasses', boolean][] = [
-      ['Tóc', 50, 'hair', false],
-      ['Mắt', 40, 'eyes', false],
-      ['Áo', 20, 'shirt', false],
-      ['Quần', 10, 'pant', false],
-      ['Mũ', 60, 'hat', true],
-      ['Kính', 65, 'glasses', true]
+    // tóc, mắt, áo, quần — 3 lựa chọn mỗi mục
+    const SLOTS: [string, number, 'hair' | 'eyes' | 'shirt' | 'pant'][] = [
+      ['Tóc', 50, 'hair'],
+      ['Mắt', 40, 'eyes'],
+      ['Áo', 20, 'shirt'],
+      ['Quần', 10, 'pant'],
     ];
-    for (const [label, z, slot, optional] of SLOTS) {
+    for (const [label, z, slot] of SLOTS) {
       const opts = simplestList(z, look.gender, 3);
       if (!opts.length) continue;
       sec = section(label);
-      const chips = h('div', 'chips');
-      if (optional) {
-        const off = h('div', `chip ${look[slot] === 0 ? 'active' : ''}`, 'Không');
-        off.onclick = () => { look[slot] = 0; emit(); rebuild(); };
-        chips.append(off);
-      }
+      const chips = h('div', 'cc-opts');
       for (const p of opts) {
-        const c = h('div', `chip cc-chip ${look[slot] === p.id ? 'active' : ''}`);
-        // tóc/mắt/mũ/kính xem cận đầu cho rõ, áo/quần xem cả thân
-        c.append(z >= 40 ? chibiHead(p.id, 32, z) : chibiPreview(p.id, 38), h('span', 'cc-chip-name', p.name));
+        const c = h('div', `cc-opt cc-opt-icon ${look[slot] === p.id ? 'active' : ''}`);
+        c.append(z >= 40 ? chibiHead(p.id, 36, z) : chibiPreview(p.id, 42), h('span', 'cc-opt-name', p.name));
         c.onclick = () => { look[slot] = p.id; emit(); rebuild(); };
         chips.append(c);
       }
       sec.append(chips);
     }
+
+    // biểu cảm — 3 kiểu khuôn mặt
+    const EXPRS: [number, string][] = [[FACE.normal, 'Bình thường'], [FACE.happy, 'Vui vẻ'], [FACE.wink, 'Tinh nghịch']];
+    sec = section('Biểu cảm');
+    const echips = h('div', 'cc-opts');
+    for (const [id, lbl] of EXPRS) {
+      const c = h('div', `cc-opt cc-opt-icon ${look.eyes === id ? 'active' : ''}`);
+      c.append(chibiHead(id, 36, 40), h('span', 'cc-opt-name', lbl));
+      c.onclick = () => { look.eyes = id; emit(); rebuild(); };
+      echips.append(c);
+    }
+    sec.append(echips);
   };
   rebuild();
 }
