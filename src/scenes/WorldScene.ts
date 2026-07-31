@@ -80,7 +80,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   // bằng sprite pack Cozy cho khớp style với nhà bếp/nhà kho trong nông trại
   farm_gate: [
     { key: 'lt_shop_av', x: 48, y: 11.2, s: 1, label: 'Cửa hàng' },
-    { key: 'lt_lamp_hd', x: 12, y: 18, s: 1 },
+    { key: 'lt_lamp_hd', x: 7.2, y: 18, s: 1 },   // tránh nhà chờ xe buýt (x 193..447)
     { key: 'lt_lamp_hd', x: 69, y: 18, s: 1 }
   ],
   town_gate: [
