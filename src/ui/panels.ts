@@ -1614,13 +1614,15 @@ export function registerAllPanels() {
 
     type SlotKey = 'pant' | 'shirt' | 'hair' | 'eyes' | 'hat' | 'glasses' | 'hand' | 'skin';
     // [icon UI, nhãn, z, khoá, tuỳ chọn]   z = -1 -> ô Skin trọn bộ
-    // Tóc ở tiệm cắt tóc, mắt ở viện thẩm mỹ, đồ cầm tay nằm trong túi đồ
-    // (gắn thẳng xuống thanh ô ngang) nên không nằm trong tủ đồ
+    // Xếp 3 ô mỗi bên nhân vật đúng như mẫu của pack: trái mũ/kính/tóc,
+    // phải áo/quần/đồ cầm tay. Mắt vẫn để ở viện thẩm mỹ.
     const ALL: [string, string, number, SlotKey, boolean][] = [
       ['hat', 'Mũ', 60, 'hat', true],
       ['glasses', 'Kính', 65, 'glasses', true],
+      ['hair', 'Tóc', 50, 'hair', false],
       ['shirt', 'Áo', 20, 'shirt', false],
-      ['pants', 'Quần', 10, 'pant', false]
+      ['pants', 'Quần', 10, 'pant', false],
+      ['hand', 'Cầm tay', 70, 'hand', true]
     ];
     // Skin là mục riêng ở cột tab dọc nên không nằm chung dải tab ngang
     const SLOTS: [string, string, number, SlotKey, boolean][] =
@@ -1646,7 +1648,8 @@ export function registerAllPanels() {
         } else if (cur) cell.append(z <= 20 || z === 70 ? chibiPreview(cur as number, 34) : chibiHead(cur as number, 34, z));
         else cell.classList.add('empty');            // ô trống dùng ảnh mờ sẵn của pack
         cell.append(h('span', 'wd-slot-name', name));
-        cell.onclick = () => { tab = i; render(); };
+        cell.title = name;
+        cell.onclick = () => { sfx.click(); tab = i; render(); };
         // chia đôi cho hai cột hai bên nhân vật
         (i < Math.ceil(SLOTS.length / 2) ? colL : colR).append(cell);
       });
@@ -1717,7 +1720,8 @@ export function registerAllPanels() {
         const cell = h('button', `wd-item ${on ? 'active' : ''}`);
         const box = h('div', 'wd-item-box');
         box.append(z <= 20 || z === 70 ? chibiPreview(p.id, 44) : chibiHead(p.id, 40, z));
-        cell.append(box, h('div', 'nm', p.name));
+        cell.append(box);
+        cell.title = p.name;
         cell.onclick = () => { (look as any)[pk] = on && optional ? 0 : p.id; apply(); render(); };
         grid.append(cell); cells++;
       }
@@ -1726,9 +1730,11 @@ export function registerAllPanels() {
         const e = h('div', 'wd-item wd-empty'); e.append(h('div', 'wd-item-box')); grid.append(e);
       }
       card.append(grid);
-      right.append(h('div', 'hint', !owned.length
+      const wearing = owned.find(p2 => p2.id === cur);
+      right.append(h('div', 'wd-note', !owned.length
         ? 'Chưa có món nào — ghé shop thời trang ở Khu mua sắm!'
-        : optional ? 'Bấm lại món đang mặc để cởi ra.' : `Đang có ${owned.length} món`));
+        : wearing ? `Đang mặc: ${wearing.name}${optional ? ' — bấm lại để cởi' : ''}`
+                  : `Đang có ${owned.length} món, bấm để mặc`));
       right.append(card);
 
       wrap.append(left, right);

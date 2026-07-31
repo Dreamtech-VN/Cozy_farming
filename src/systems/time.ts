@@ -57,3 +57,4 @@ function rollWeather() {
 
 // tên icon (xem ICON_SRC trong ui/kit.ts) — không dùng emoji
 export const WEATHER_ICON: Record<Weather, string> = { sunny: 'w_sunny', rain: 'w_rain', cloudy: 'w_cloudy' };
+export const WEATHER_NAME: Record<Weather, string> = { sunny: 'Nắng', rain: 'Mưa', cloudy: 'Nhiều mây' };

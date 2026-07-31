@@ -29,6 +29,8 @@ FILES = {
     'eq_shirt':   'Inventory/EquipmentSlots/EquipmenSlotFlat6.png',
     'eq_pants':   'Inventory/EquipmentSlots/EquipmenSlotFlat4.png',
     'eq_skin':    'Inventory/EquipmentSlots/EquipmenSlotFlat7.png',
+    'eq_hair':    'Inventory/EquipmentSlots/EquipmenSlotFlat2.png',
+    'eq_hand':    'Inventory/EquipmentSlots/EquipmenSlotFlat7.png',
     'tab_on':     'Inventory/InventoryTabs/InventoryTabShort3.png',
     'tab_off':    'Inventory/InventoryTabs/InventoryTabShort2.png',
     # ---- bảng đơn hàng: tờ giấy ghim + dấu tích của pack ----
@@ -44,6 +46,8 @@ FILES = {
     'ic_shirt':   'Icons/IconsDefault/64px/IconsDefault27_64px.png',
     'ic_pants':   'Icons/IconsDefault/64px/IconsDefault53_64px.png',
     'ic_skin':    'Icons/IconsDefault/64px/IconsDefault46_64px.png',
+    'ic_hair':    'Icons/IconsDefault/64px/IconsDefault44_64px.png',
+    'ic_hand':    'Icons/IconsDefault/64px/IconsDefault46_64px.png',
     'ic_level':   'Icons/IconsDefault/64px/IconsDefault41_64px.png',
     'chip_bar':   'Containers/Containers/Container1.png',
     'name_label': 'Labels/Label10.png',

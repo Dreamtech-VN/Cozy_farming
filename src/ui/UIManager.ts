@@ -4,7 +4,7 @@ import { S, unequipTool, toolLevel, toggleHand, heldTool, selectTool } from '@/c
 import { h, root, fmt, charFace, avatarEl, spr, chibiPreview, uiIcon } from './kit';
 import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
-import { gameHour, currentWeather, WEATHER_ICON, season } from '@/systems/time';
+import { gameHour, currentWeather, WEATHER_ICON, WEATHER_NAME } from '@/systems/time';
 import * as socialMod from '@/systems/social';
 import * as storeMod from '@/systems/farmstore';
 import { initSocial, getChatLog } from '@/systems/social';
@@ -111,16 +111,16 @@ function buildHud() {
   prof.onclick = () => { sfx.click(); openPanel('profile'); };
   // tiền tệ + đồng hồ
   const right = h('div', 'hud-currency');
-  // Thanh tiền + đồng hồ vẽ hoàn toàn bằng CSS (không dùng ảnh pack): viên
-  // thuốc kem viền hồng, đồng xu và viên ngọc là gradient + clip-path.
+  // thanh tiền: viên xu/ngọc (ảnh Cozy UI Pack) đè lên mép trái viên thuốc,
+  // nút + nằm ngay trên viên ngọc — bấm cả viên là mở nạp
   right.innerHTML = `
-    <button class="cur cur-coin" id="coin-plus">
-      <span class="cur-ic"><i></i></span>
+    <button class="cur" id="coin-plus">
+      <img class="cur-ic" src="assets/ui/inv/cur_coin.png">
       <span class="cur-n" id="hud-coins">0</span>
     </button>
-    <button class="cur cur-gem" id="ruby-plus">
-      <span class="cur-ic"><i></i></span>
-      <span class="cur-plus"></span>
+    <button class="cur" id="ruby-plus">
+      <img class="cur-ic" src="assets/ui/inv/cur_gem.png">
+      <img class="cur-plus" src="assets/ui/inv/cur_plus.png">
       <span class="cur-n" id="hud-rubies">0</span>
     </button>
     <div class="hud-clock" id="hud-clock"></div>`;
@@ -258,7 +258,6 @@ function refreshClock() {
   const hg = gameHour();
   const hh = Math.floor(hg);
   const mm = Math.floor((hg - hh) * 60);
-  const sz = season();
   const night = hg >= 18 || hg < 6;
   // Ban ngày mặt trời mọc 6h ở mép trái, đỉnh lúc 12h, lặn 18h ở mép phải;
   // ban đêm mặt trăng cũng chạy đúng vòng cung đó (mọc 18h, lặn 6h) cho thấy rõ.
@@ -277,7 +276,7 @@ function refreshClock() {
       <div class="clk-h">${String(hh).padStart(2, '0')}<i>:</i>${String(mm).padStart(2, '0')}</div>
       <div class="clk-sub">
         <img src="assets/ui/act/${WEATHER_ICON[currentWeather()]}.png">
-        <img src="assets/ui/act/${sz.icon}.png"><span>${sz.name}</span>
+        <span>${WEATHER_NAME[currentWeather()]}</span>
       </div>
     </div>`;
 }
