@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { showLoading } from '@/ui/loading';
 import { S, save } from '@/core/save';
 import { bus, EV } from '@/core/events';
 import { ChibiSprite } from '@/gfx/ChibiSprite';
@@ -61,6 +62,7 @@ export class CharCreateScene extends Phaser.Scene {
       }
     }
     save(true);
+    showLoading();
     this.scene.start('World');
   }
 

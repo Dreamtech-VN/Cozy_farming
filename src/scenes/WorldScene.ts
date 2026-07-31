@@ -15,6 +15,7 @@ import { virtualInput, consumeAction } from '@/core/input';
 import { RES } from '@/core/res';
 import { TITLES } from '@/data/quests';
 import { titleCanvas, nameCanvas } from '@/ui/kit';
+import { hideLoading } from '@/ui/loading';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import * as fishing from '@/systems/fishing';
@@ -252,6 +253,8 @@ export class WorldScene extends Phaser.Scene {
     });
 
     initTimeOnce();
+    // cảnh đã dựng xong -> gỡ màn chờ
+    this.time.delayedCall(120, () => hideLoading());
   }
 
   private onAppearance() { if (S.player.chibi) this.player.setLook(S.player.chibi); }
@@ -520,21 +523,23 @@ export class WorldScene extends Phaser.Scene {
     const sx = this.busStopX();
     // nền ảnh gốc: đường đất rộng hơn -> đẩy nhà chờ hẳn xuống mặt đường
     const sy = this.zone.bg ? top + 22 : top - 2;
-    const sh = this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setScale(this.zone.bg ? 0.85 : 0.55);
+    // cỡ nhà chờ lấy theo người: mặt ghế phải nằm ngang hông nhân vật (cao ~60px)
+    const sh = this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setScale(this.zone.bg ? 0.6 : 0.4);
     // nhà chờ là phông nền: luôn nằm sau người chơi để đứng đợi xe vẫn thấy mình
     sh.setDepth(sy - sh.displayHeight);
     // Mặt trước băng ghế vẽ đè lên người chơi: sprite Avatar không có tư thế
     // ngồi ghế (frame 4 là ngồi bệt/quỳ), nên che nửa dưới đi thì mới ra dáng
     // ngồi trên ghế. Depth = chân ghế -> ai đứng trước ghế vẫn đè lên bình thường.
-    const bsc = this.zone.bg ? 0.85 : 0.55;
+    const bsc = this.zone.bg ? 0.6 : 0.4;
     const benchTop = sy - 30 * bsc;
     if (this.textures.exists('lt_shelter_bench')) {
-      this.add.image(sx, benchTop, 'lt_shelter_bench').setOrigin(0.5, 0).setScale(bsc).setDepth(sy);
+      this.add.image(sx, benchTop, 'lt_shelter_bench').setOrigin(0.5, 0).setScale(bsc).setDepth(sy + 14);
     }
-    // 3 chiếc ghế: người ngồi đứng sau mặt ghế, phần chân bị ghế che nên nhìn
-    // đúng dáng ngồi (sprite Avatar không có tư thế ngồi ghế riêng)
+    // 3 chiếc ghế. Nhìn chính diện, người ngồi bị mặt ghế che đúng phần hông,
+    // còn cẳng chân và bàn chân vẫn thò xuống dưới ghế -> ra dáng ngồi thật,
+    // không bị cụt nửa người (sprite Avatar không có frame ngồi ghế riêng).
     const seatGap = sh.displayWidth * 0.3;
-    this.benchSeats = [-1, 0, 1].map(i => ({ x: sx + i * seatGap, y: sy - 12 * bsc }));
+    this.benchSeats = [-1, 0, 1].map(i => ({ x: sx + i * seatGap, y: sy + 6 }));
     // xe riêng đậu mép đường
     if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
       this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(this.vehScale(`veh_${S.vehicle}`));

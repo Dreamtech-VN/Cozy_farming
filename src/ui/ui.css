@@ -320,8 +320,7 @@ input.ui-input, select.ui-input {
 .login-wrap {
   /* key art có logo bên trái + nhân vật bên phải -> khung dồn xuống giữa dưới */
   position: absolute; inset: 0; display: flex; flex-direction: column;
-  align-items: flex-start; justify-content: flex-end;
-  padding: 0 0 4vh min(7vw, 70px);
+  align-items: center; justify-content: center;
 }
 .login-box {
   width: min(400px, 86vw); background: rgba(16, 20, 28, .86); border-radius: 10px;
@@ -749,3 +748,24 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 
 /* icon vật phẩm trong ô: giữ nét pixel, không làm mờ khi phóng */
 .bag-slot img, .wd-item img, .cell img, .skin-card img { image-rendering: pixelated; }
+
+/* ===== Màn chờ khi vào game ===== */
+.load-cover {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: url('/assets/ui/title_bg.jpg') no-repeat center / cover;
+  transition: opacity .4s ease;
+}
+.load-cover::after { content: ''; position: absolute; inset: 0; background: rgba(10, 18, 32, .18); }
+.load-cover.load-out { opacity: 0; }
+.load-box {
+  position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: 18px 30px; border-radius: 12px; background: rgba(16, 20, 28, .78);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+}
+.load-spin {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, .22); border-top-color: #ffd43b;
+  animation: load-turn .9s linear infinite;
+}
+@keyframes load-turn { to { transform: rotate(360deg); } }
+.load-txt { color: #fff8e8; font-size: 14px; font-weight: 700; letter-spacing: .3px; }

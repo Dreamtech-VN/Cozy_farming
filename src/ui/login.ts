@@ -112,8 +112,7 @@ function renderLogin(wrap: HTMLElement, rerender: () => void) {
   apBtn.innerHTML = `${APPLE_LOGO}<span>Đăng nhập bằng Apple</span>`;
   apBtn.onclick = () => loginAs({ type: 'apple', name: autoName('apple') });
 
-  body.append(accBtn, form, ggBtn, apBtn,
-    h('div', 'lg-note', 'Bản chơi offline — tài khoản lưu trên thiết bị'));
+  body.append(accBtn, form, ggBtn, apBtn);
   wrap.append(box);
 }
 

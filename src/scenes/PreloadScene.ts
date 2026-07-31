@@ -7,6 +7,7 @@ import { CHIBI_PARTS, defaultLook, lookLayers } from '@/data/chibi';
 import { RES } from '@/core/res';
 import { GAME_VERSION, resFresh, markResLoaded } from '@/core/version';
 import { showLoginFlow } from '@/ui/login';
+import { showLoading } from '@/ui/loading';
 
 export class PreloadScene extends Phaser.Scene {
 
@@ -132,7 +133,10 @@ export class PreloadScene extends Phaser.Scene {
     // key art đã vẽ sẵn logo + 2 nhân vật nên không dựng linh vật chibi nữa
 
     // khung đăng nhập -> chọn máy chủ -> Bắt đầu
-    showLoginFlow(() => this.scene.start(hasChar ? 'World' : 'CharCreate'));
+    showLoginFlow(() => {
+      if (hasChar) showLoading();   // vào thẳng game -> che bằng key art trong lúc dựng cảnh
+      this.scene.start(hasChar ? 'World' : 'CharCreate');
+    });
   }
 
 
