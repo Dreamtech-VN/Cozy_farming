@@ -649,3 +649,48 @@ img.cur { width: 15px; height: 15px; object-fit: contain; vertical-align: -3px; 
 
 /* icon thời tiết / mùa trên đồng hồ HUD */
 img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; margin-right: 3px; image-rendering: pixelated; }
+
+/* ===== Tab ngang trong Tủ đồ: chia đều ===== */
+.wd-tabs { display: flex; gap: 6px; }
+.wd-tabs .tab { flex: 1 1 0; min-width: 0; justify-content: center; }
+.wd-tabs .tab span { overflow: hidden; text-overflow: ellipsis; }
+
+/* ===== Tab Skin: card dọc thay ô vuông ===== */
+.wd-grid.skin-grid { grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 10px; }
+.skin-card {
+  position: relative; font-family: inherit; cursor: pointer; padding: 8px 6px 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(#efe0bd, #ddc79c);
+  border: 2px solid #b5836b; border-radius: 12px;
+  box-shadow: inset 0 2px 0 #fff8e8, 0 2px 0 #00000012;
+}
+.skin-card.active { border-color: #e8890c; background: linear-gradient(#fff3d6, #ffe3ae); box-shadow: 0 0 0 2px #ffd43b66; }
+.skin-card .skin-art { flex: 1; display: flex; align-items: center; justify-content: center; }
+.skin-card .nm { font-size: 11.5px; font-weight: 800; color: #4a3520; text-align: center; line-height: 1.15; }
+.skin-on {
+  position: absolute; top: 6px; right: 6px; font-size: 10px; font-weight: 900; color: #3d2c05;
+  background: linear-gradient(#ffe066, #f5a623); border: 1px solid #b5836b; border-radius: 7px; padding: 1px 6px;
+}
+.skin-card.skin-empty {
+  background: rgba(139, 94, 60, .16); border: 2px solid #b5836b66; box-shadow: inset 0 2px 5px #00000012; cursor: default;
+}
+
+/* ===== Danh hiệu dạng lưới tick ===== */
+.title-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+.title-cell {
+  position: relative; font-family: inherit; cursor: pointer; text-align: left;
+  padding: 9px 34px 9px 12px; border-radius: 10px;
+  background: linear-gradient(#efe0bd, #ddc79c); border: 2px solid #b5836b;
+  box-shadow: inset 0 2px 0 #fff8e8;
+}
+.title-cell.active { border-color: #e8890c; background: linear-gradient(#fff3d6, #ffe3ae); box-shadow: 0 0 0 2px #ffd43b66; }
+.title-cell.locked { opacity: .5; }
+.title-cell .tt-name { font-size: 13.5px; font-weight: 900; }
+.title-cell .tt-sub { font-size: 11px; color: #7a5b3a; }
+.title-cell .tt-tick {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  width: 22px; height: 22px; border-radius: 6px; border: 2px solid #b5836b; background: #fff8e8;
+  display: flex; align-items: center; justify-content: center;
+}
+.title-cell.active .tt-tick { border-color: #e8890c; background: #ffe9b0; }

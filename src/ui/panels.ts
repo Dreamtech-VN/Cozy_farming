@@ -114,7 +114,7 @@ export function registerAllPanels() {
       const on = S.hotbar.includes(t.id);
       out.push({
         kind: 'tool', name: t.name, qty: 0, equipped: on,
-        node: () => { const d = h('div'); d.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 66))); return d; },
+        node: () => { const d = h('div'); d.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 46))); return d; },
         onClick: () => {
           if (on) unequipTool(S.hotbar.indexOf(t.id));
           else equipTool(t.id);
@@ -126,7 +126,7 @@ export function registerAllPanels() {
       const hand = def.meta?.handPart ? Number(def.meta.handPart) : 0;
       out.push({
         kind: hand ? 'hand' : def.kind, name: def.name, qty, equipped: hand ? S.hotbar.includes(`hand:${hand}`) : false,
-        node: () => hand ? chibiPreview(hand, 66) : iconOf(def, 62),
+        node: () => hand ? chibiPreview(hand, 46) : iconOf(def, 44),
         onClick: () => itemActions(id, close)
       });
     }
@@ -154,7 +154,7 @@ export function registerAllPanels() {
         const c = h('button', `bag-slot ${e.equipped ? 'on' : ''}`);
         c.append(e.node());
         if (e.qty > 1) c.append(h('div', 'qty', `x${e.qty}`));
-        if (e.equipped) c.append(h('div', 'bag-on', 'Đang gắn'));
+        if (e.equipped) c.append(h('div', 'bag-on', 'Đang dùng'));
         c.title = e.name;
         c.onclick = () => { sfx.click(); e.onClick(); redraw(); };
         grid.append(c);
@@ -782,20 +782,29 @@ export function registerAllPanels() {
   }
 
   function renderTitles(box: HTMLElement, redraw: () => void) {
+    box.append(h('div', 'hint', 'Bấm vào danh hiệu đã mở để đeo — ô đang đeo có dấu tick.'));
+    const card = h('div', 'wd-card');
+    const grid = h('div', 'title-grid');
     for (const id of Object.keys(TITLES)) {
       const owned = S.player.titles.includes(id);
-      const r = h('div', 'row');
-      r.style.opacity = owned ? '1' : '.5';
-      const ic = h('div'); ic.append(uiIcon('rank', 24));
-      const info = h('div', 'grow');
-      info.innerHTML = `<div class="t1" style="color:${TITLES[id].color}">${TITLES[id].name}</div>`;
-      r.append(ic, info);
-      if (owned) r.append(S.player.title === id
-        ? btn('Đang dùng', '', undefined)
-        : btn('Dùng', 'gold', () => { S.player.title = id; save(); bus.emit(EV.STATE_CHANGED); redraw(); }));
-      else r.append(h('div', 't2', 'Chưa mở'));
-      box.append(r);
+      const on = S.player.title === id;
+      const c = h('button', `title-cell ${on ? 'active' : ''} ${owned ? '' : 'locked'}`);
+      const nm = h('div', 'tt-name'); nm.textContent = `【${TITLES[id].name}】`;
+      nm.style.color = TITLES[id].color;
+      c.append(nm, h('div', 'tt-sub', owned ? (on ? 'Đang đeo' : 'Đã mở') : 'Chưa mở'));
+      const tick = h('div', 'tt-tick');
+      if (on) tick.append(uiIcon('check', 16));
+      c.append(tick);
+      c.onclick = () => {
+        sfx.click();
+        if (!owned) { toast('Danh hiệu này chưa mở khoá.', 'alert'); return; }
+        S.player.title = on ? S.player.title : id;
+        save(); bus.emit(EV.STATE_CHANGED); redraw();
+      };
+      grid.append(c);
     }
+    card.append(grid);
+    box.append(card);
   }
 
   let openCharHubRefresh: () => void = () => {};
@@ -1141,18 +1150,21 @@ export function registerAllPanels() {
 
       // ----- ô Skin: chọn trọn bộ đã sở hữu -----
       if (z === -1) {
+        grid.className = 'wd-grid skin-grid';
         let n = 0;
         for (const sid of S.skins) {
           const sk = SKINS[sid];
           if (!sk) continue;
           const on = look.skin === sid;
-          const cell2 = h('button', `wd-item ${on ? 'active' : ''}`);
-          cell2.append(skinFace(sk, 46), h('div', 'nm', sk.name));
-          // bấm lại món đang mặc = cởi ra (ô trống nghĩa là không dùng)
+          const cell2 = h('button', `skin-card ${on ? 'active' : ''}`);
+          const art = h('div', 'skin-art'); art.append(skinFace(sk, 96));
+          cell2.append(art, h('div', 'nm', sk.name));
+          if (on) cell2.append(h('div', 'skin-on', 'Đang mặc'));
+          // bấm lại bộ đang mặc = cởi ra
           cell2.onclick = () => { look.skin = on ? undefined : sid; apply(); render(); };
           grid.append(cell2); n++;
         }
-        for (let i = n; i < WD_CAP; i++) grid.append(h('div', 'wd-item wd-empty'));
+        for (let i = n; i < Math.max(12, n); i++) grid.append(h('div', 'skin-card skin-empty'));
         card.append(grid);
         right.append(h('div', 'hint', S.skins.length ? 'Mặc skin sẽ thay toàn bộ trang phục — bấm lại bộ đang mặc để cởi ra.' : 'Chưa có skin nào — mua trọn bộ ở tab Skin của Thời trang Cô Trang!'));
         right.append(card);

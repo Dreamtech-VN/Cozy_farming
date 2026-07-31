@@ -13,7 +13,7 @@ export interface ToolDef {
 
 export const TOOLS: Record<string, ToolDef> = {
   hoe: { id: 'hoe', name: 'Cuốc', icon: '⛏️', url: 'assets/chibi/tools/hoe.png', w: 46, h: 46 },
-  can: { id: 'can', name: 'Bình tưới', icon: '💧', url: 'assets/chibi/tools/can.png', w: 46, h: 46 },
+  can: { id: 'can', name: 'Bình tưới', icon: '', url: 'assets/chibi/tools/can.png', w: 46, h: 46 },
   basket: { id: 'basket', name: 'Giỏ thu hoạch', icon: '🧺', url: 'assets/chibi/tools/basket.png', w: 48, h: 46 },
   rod: { id: 'rod', name: 'Cần câu', icon: '🎣', url: 'assets/chibi/tools/rod.png', w: 60, h: 28 },
   net: { id: 'net', name: 'Vợt côn trùng', icon: '🥅', url: 'assets/chibi/tools/net.png', w: 48, h: 46 },
