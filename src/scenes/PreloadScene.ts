@@ -3,14 +3,12 @@ import Phaser from 'phaser';
 import { HAIR_STYLES, CLOTHES, ACCESSORIES } from '@/data/clothing';
 import { ANIMAL_LIST } from '@/data/animals';
 import { hasSave, load, S } from '@/core/save';
-import { CHIBI_PARTS, defaultLook, lookLayers, G_MALE, G_FEMALE } from '@/data/chibi';
+import { CHIBI_PARTS, defaultLook, lookLayers } from '@/data/chibi';
 import { RES } from '@/core/res';
 import { GAME_VERSION, resFresh, markResLoaded } from '@/core/version';
 import { showLoginFlow } from '@/ui/login';
-import { ChibiSprite } from '@/gfx/ChibiSprite';
 
 export class PreloadScene extends Phaser.Scene {
-  private mascots: ChibiSprite[] = [];
 
   constructor() { super('Preload'); }
 
@@ -131,37 +129,29 @@ export class PreloadScene extends Phaser.Scene {
       }
     }
 
-    // linh vật 2 bên phải màn hình (như key art GunPow)
-    const W = this.scale.width, H = this.scale.height;
-    const boy = new ChibiSprite(this, W * 0.86, H * 0.9, defaultLook(G_MALE));
-    boy.setScale(2.4 * RES); boy.play('idle'); boy.setDir(3);
-    const girl = new ChibiSprite(this, W * 0.72, H * 0.94, defaultLook(G_FEMALE));
-    girl.setScale(2.8 * RES); girl.play('idle');
-    this.mascots = [boy, girl];
+    // key art đã vẽ sẵn logo + 2 nhân vật nên không dựng linh vật chibi nữa
 
     // khung đăng nhập -> chọn máy chủ -> Bắt đầu
     showLoginFlow(() => this.scene.start(hasChar ? 'World' : 'CharCreate'));
   }
 
-  update(_t: number, dt: number) {
-    for (const m of this.mascots) m.tick(dt);
-  }
 
   // Nền title: ảnh map + logo game + badge 12+ + thanh tải tài nguyên (chỉ khi bản mới)
   private buildTitleScreen() {
     const W = this.scale.width, H = this.scale.height;
 
-    const bg = this.add.image(W / 2, H / 2, 'title_bg');
-    const cover = Math.max(W / bg.width, H / bg.height) * 1.05;
+    // đẩy tranh lên chút để logo không bị khung đăng nhập che
+    const bg = this.add.image(W / 2, H / 2 - 36, 'title_bg');
+    const cover = Math.max(W / bg.width, H / bg.height);
     bg.setScale(cover);
-    this.tweens.add({ targets: bg, scale: cover * 1.06, duration: 9000, yoyo: true, repeat: -1, ease: 'sine.inout' });
-    this.add.rectangle(0, 0, W, H, 0x0a1220, 0.28).setOrigin(0);
+    this.tweens.add({ targets: bg, scale: cover * 1.03, duration: 11000, yoyo: true, repeat: -1, ease: 'sine.inout' });
+    this.add.rectangle(0, 0, W, H, 0x0a1220, 0.12).setOrigin(0);
 
     // logo game là ảnh thật (assets/ui/logo.png), vẽ ở lớp DOM cùng khung
     // đăng nhập trong showLoginFlow() -> ở đây không vẽ chữ nữa
 
     // badge 12+ (nhãn gốc Avatar, hd/12Plus.png) + cảnh báo sức khỏe
-    const bx = W * 0.06, by = H * 0.38;
+    const bx = W * 0.60, by = H * 0.07;   // góc phải trên (trái là logo + nút quay lại)
     if (this.textures.exists('age12')) {
       this.add.image(bx, by, 'age12').setScale(1.6 * RES).setOrigin(0.5);
     }

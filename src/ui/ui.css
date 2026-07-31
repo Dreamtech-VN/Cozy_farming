@@ -318,15 +318,11 @@ input.ui-input, select.ui-input {
 
 /* ===== Màn hình đăng nhập / chọn máy chủ ===== */
 .login-wrap {
-  position: absolute; inset: 0; display: flex; flex-direction: column; gap: 14px;
-  align-items: center; justify-content: center;
+  /* key art có logo bên trái + nhân vật bên phải -> khung dồn xuống giữa dưới */
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: flex-end;
+  padding: 0 0 4vh min(7vw, 70px);
 }
-.lg-brand {
-  width: min(300px, 62vw); height: auto; image-rendering: auto;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .45));
-  animation: lg-bob 3.2s ease-in-out infinite;
-}
-@keyframes lg-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 .login-box {
   width: min(400px, 86vw); background: rgba(16, 20, 28, .86); border-radius: 10px;
   overflow: hidden; box-shadow: 0 12px 40px rgba(0, 0, 0, .5); backdrop-filter: blur(2px);

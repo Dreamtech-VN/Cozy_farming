@@ -50,11 +50,7 @@ export function showLoginFlow(onStart: () => void) {
 
   const render = () => {
     wrap.innerHTML = '';
-    // logo game nổi phía trên khung đăng nhập / chọn máy chủ
-    const logo = h('img', 'lg-brand') as HTMLImageElement;
-    logo.src = 'assets/ui/logo.png';
-    logo.alt = 'Sunny Town';
-    wrap.append(logo);
+    // key art nền đã có sẵn logo Sunny Town nên không chồng thêm logo ở đây
     const acc = getAccount();
     acc ? renderServer(wrap, acc, render, done) : renderLogin(wrap, render);
   };
