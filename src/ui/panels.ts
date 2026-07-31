@@ -23,7 +23,7 @@ import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import { buyRod, addToAquarium } from '@/systems/fishing';
 import { claimQuest, activeQuestList, grantReward } from '@/systems/quests';
-import { suggestedFriends, addFriend, removeFriend, blockPlayer, reportPlayer, giveGift, sendChat, getChatLog, claimMail, leaderboard, affinityOf, addAffinity, affinityLabel } from '@/systems/social';
+import { suggestedFriends, addFriend, removeFriend, blockPlayer, reportPlayer, giveGift, sendChat, sendVoice, getChatLog, claimMail, leaderboard, affinityOf, addAffinity, affinityLabel } from '@/systems/social';
 import { claimLogin, checkinToday, spinWheel, grantWheel, wheelSpinsLeft, loginRewardToday } from '@/systems/meta';
 import { upgradeHouse, setWallpaper, setFloor, throwParty } from '@/systems/housing';
 import { sfx, startBgm, stopBgm } from '@/core/audio';
@@ -444,10 +444,8 @@ export function registerAllPanels() {
         else prEl.innerHTML = priceHtml(xu);
         const art = h('div', 'cell-art');
         art.append(chibiPreview(p.id, 74));
-        const ps = partStats(p);
-        cell.append(art, h('div', 'nm', p.name));
-        if (ps) cell.append(h('div', 'wd-stats', formatStats(ps).join(' ')));
-        cell.append(prEl);
+        // ô trong shop chỉ hiện icon + tên + giá; chỉ số xem ở bảng chi tiết
+        cell.append(art, h('div', 'nm', p.name), prEl);
         // bấm vào để xem thử trước khi mua
         cell.onclick = () => openPanel('tryon', { part: p, z, isHand, owned, onDone: render });
         grid.append(cell);
@@ -497,25 +495,24 @@ export function registerAllPanels() {
         const on = cur === p.id;
         const cell = h('button', `wd-item ${on ? 'active' : ''}`);
         cell.append(chibiHead(p.id, 40, cfg.z), h('div', 'nm', partLabel(cfg.z, p.name)));
-        const ps = partStats(p);
-        if (ps) cell.append(h('div', 'wd-stats', formatStats(ps).join(' ')));
         const xu = chibiPriceXu(p);
         const pr = h('div', 'pr');
         if (on) pr.textContent = 'Đang dùng';
         else if (done) pr.textContent = 'Đổi lại';
         else pr.innerHTML = priceHtml(xu);
         cell.append(pr);
+        // đã sở hữu thì đổi luôn; chưa có thì mở bảng chi tiết (xem chỉ số rồi mới mua)
         cell.onclick = () => {
           sfx.click();
-          if (!on && !done) {
-            if (!spend(xu)) return;
-            S.chibiWardrobe.push(p.id);
-            sfx.coin();
+          if (on) return;
+          if (done) {
+            look[cfg.key] = p.id;
+            save(); bus.emit(EV.APPEARANCE);
+            toast(cfg.key === 'hair' ? `Đã đổi kiểu tóc: ${p.name}` : `Đã đổi ${partLabel(40, p.name).toLowerCase()}`, 'wardrobe');
+            render();
+            return;
           }
-          look[cfg.key] = p.id;
-          save(); bus.emit(EV.APPEARANCE);
-          toast(cfg.key === 'hair' ? `Đã đổi kiểu tóc: ${p.name}` : `Đã đổi ${partLabel(40, p.name).toLowerCase()}`, 'wardrobe');
-          render();
+          openPanel('tryon', { part: p, z: cfg.z, isHand: false, owned: false, onDone: render });
         };
         grid.append(cell);
       }
@@ -1604,7 +1601,21 @@ export function registerAllPanels() {
         const t = new Date(m.at).toLocaleTimeString('vi', { hour: '2-digit', minute: '2-digit' });
         el.append(h('span', 'chat-time', t));
         if (m.channel !== 'system') el.append(h('span', 'chat-from', `${m.from}:`));
-        el.append(h('span', 'chat-text', m.text));
+        if (m.voice) {
+          const play = h('button', 'chat-voice');
+          play.append(h('span', 'chat-voice-ico'), h('span', '', `${m.dur ?? 0}"`));
+          let au: HTMLAudioElement | undefined;
+          play.onclick = () => {
+            if (au && !au.paused) { au.pause(); au.currentTime = 0; play.classList.remove('playing'); return; }
+            au = new Audio(m.voice);
+            play.classList.add('playing');
+            au.onended = () => play.classList.remove('playing');
+            void au.play().catch(() => play.classList.remove('playing'));
+          };
+          el.append(play);
+        } else {
+          el.append(h('span', 'chat-text', m.text));
+        }
         log.append(el);
       }
       log.scrollTop = log.scrollHeight;
@@ -1626,7 +1637,9 @@ export function registerAllPanels() {
     inp.placeholder = 'Nhập tin nhắn...';
     inp.maxLength = 120;
     const sendBtn = h('button', 'chat-send');
-    sendBtn.append(uiIcon('chat', 18));
+    sendBtn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">'
+      + '<path d="M4 12h13M11 6l6 6-6 6" fill="none" stroke="#6b3f10" stroke-width="3"'
+      + ' stroke-linecap="round" stroke-linejoin="round"/></svg>';
     sendBtn.title = 'Gửi';
     sendBtn.onclick = () => {
       const text = inp.value.trim();
@@ -1638,7 +1651,57 @@ export function registerAllPanels() {
       renderLog();
     };
     inp.onkeydown = e => { if (e.key === 'Enter') sendBtn.click(); e.stopPropagation(); };
-    inputBar.append(inp, sendBtn);
+
+    // ----- tin nhắn thoại -----
+    // Game chưa có server nên tin thoại chỉ nằm ở máy mình, không gửi được
+    // sang người chơi khác; ghi bằng MediaRecorder, giới hạn 15 giây.
+    const micBtn = h('button', 'chat-mic');
+    micBtn.innerHTML = '<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">'
+      + '<rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/>'
+      + '<path d="M5 11a7 7 0 0 0 14 0M12 18v3" fill="none" stroke="currentColor"'
+      + ' stroke-width="2" stroke-linecap="round"/></svg>';
+    micBtn.title = 'Giữ để ghi âm';
+    let rec: MediaRecorder | undefined;
+    let recTimer = 0, startedAt = 0;
+
+    const stopRec = () => {
+      if (rec && rec.state === 'recording') rec.stop();
+      window.clearTimeout(recTimer);
+    };
+    const startRec = async () => {
+      if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') {
+        toast('Thiết bị không hỗ trợ ghi âm.', 'alert'); return;
+      }
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const chunks: Blob[] = [];
+        rec = new MediaRecorder(stream);
+        startedAt = Date.now();
+        rec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+        rec.onstop = () => {
+          stream.getTracks().forEach(t => t.stop());
+          micBtn.classList.remove('rec');
+          const dur = Math.max(1, Math.round((Date.now() - startedAt) / 1000));
+          const blob = new Blob(chunks, { type: rec?.mimeType || 'audio/webm' });
+          const fr = new FileReader();
+          fr.onload = () => {
+            sendVoice(channel, String(fr.result), dur, channel === 'private' ? privateTo : undefined);
+            renderLog();
+          };
+          fr.readAsDataURL(blob);
+        };
+        rec.start();
+        micBtn.classList.add('rec');
+        recTimer = window.setTimeout(stopRec, 15000);   // tự dừng sau 15s
+      } catch {
+        toast('Không truy cập được micro.', 'alert');
+      }
+    };
+    micBtn.onclick = () => {
+      if (rec && rec.state === 'recording') stopRec(); else void startRec();
+    };
+
+    inputBar.append(micBtn, inp, sendBtn);
 
     body.append(head, chanBar, log, inputBar);
     renderLog();

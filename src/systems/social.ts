@@ -52,6 +52,13 @@ export function sendChat(channel: ChatMessage['channel'], text: string, to?: str
   }
 }
 
+// Tin nhắn thoại: game chưa có server nên tin chỉ nằm ở máy mình,
+// không truyền sang người chơi khác được.
+export function sendVoice(channel: ChatMessage['channel'], voice: string, dur: number, to?: string) {
+  pushChat({ channel, from: S.player.name, to, text: '', at: Date.now(), voice, dur });
+  addStat('chats_sent');
+}
+
 // ===== Người chơi khác đang ở ngoài map (offline: mô phỏng) =====
 const ROAMERS: Omit<Friend, 'online'>[] = [
   { id: 'p_kem', name: 'KemDau', level: 8 },

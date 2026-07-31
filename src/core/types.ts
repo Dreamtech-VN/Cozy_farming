@@ -121,6 +121,8 @@ export interface ChatMessage {
   to?: string;
   text: string;
   at: number;
+  voice?: string;          // data URL tin nhắn thoại (chỉ giữ trong phiên, không lưu save)
+  dur?: number;            // độ dài tin thoại (giây)
 }
 
 export interface GameState {
