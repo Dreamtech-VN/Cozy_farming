@@ -1577,7 +1577,10 @@ export class WorldScene extends Phaser.Scene {
         } else if (r < 0.75) {
           m.addItem('fertilizer');
           toast('Đào được Phân bón!', 'fertilizer');
-        } else if (r < 0.93) {
+        } else if (r < 0.86) {
+          m.addItem('crop_blueberry');
+          toast('Đào được bụi Việt quất!', 'plant');
+        } else if (r < 0.95) {
           m.addItem('stone');
           this.fxFloatIcon(x, y - 10, 'items16', 71, '+1 Đá');
         } else {

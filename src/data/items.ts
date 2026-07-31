@@ -65,4 +65,9 @@ defItem({ id: 'crop_khe', name: 'Quả khế', kind: 'crop', icon: '', sprite: {
 
 // ---- Đồ ăn (tiệc) ----
 defItem({ id: 'food_cake', name: 'Bánh kem', kind: 'food', icon: '', sprite: { url: 'assets/ui/act/cake.png', sx: 0, sy: 0, sw: 12, sh: 13 }, sell: 40, buy: 200, desc: 'Dùng để mở tiệc tại nhà.' });
+// ----- Chế biến từ nông sản (Cloverframe pack) -----
+defItem({ id: 'cheese', name: 'Phô mai', kind: 'food', icon: '', sprite: { url: 'assets/farm/cf/13_cheese.png', sx: 0, sy: 0, sw: 32, sh: 32 }, sell: 120, buy: 260, desc: 'Ủ từ sữa bò — bán được giá.' });
+defItem({ id: 'bread', name: 'Bánh mì', kind: 'food', icon: '', sprite: { url: 'assets/farm/cf/14_bread.png', sx: 0, sy: 0, sw: 32, sh: 32 }, sell: 55, buy: 120, desc: 'Nướng từ lúa mì, ăn cho chắc bụng.' });
+defItem({ id: 'honey', name: 'Mật ong', kind: 'product', icon: '', sprite: { url: 'assets/farm/cf/15_honey.png', sx: 0, sy: 0, sw: 32, sh: 32 }, sell: 150, buy: 320, desc: 'Ong lấy mật từ vườn hoa của bạn.' });
+defItem({ id: 'crop_blueberry', name: 'Việt quất', kind: 'crop', icon: '', sprite: { url: 'assets/farm/cf/08_blueberry.png', sx: 0, sy: 0, sw: 32, sh: 32 }, sell: 90, desc: 'Quả rừng hiếm — đào ụ đất ở Nông trại có thể nhặt được.' });
 defItem({ id: 'food_juice', name: 'Nước ép', kind: 'food', icon: '', sprite: { url: 'assets/ui/act/juice.png', sx: 0, sy: 0, sw: 10, sh: 16 }, sell: 8, buy: 40 });

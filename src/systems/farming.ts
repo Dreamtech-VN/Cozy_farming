@@ -124,6 +124,11 @@ export function harvest(i: number): boolean {
   // mèo đuổi chuột phá mùa màng
   if (Math.random() < petBonus('cat')) { qty += 1; toast('Mèo cưng giúp giữ mùa: +1 nông sản!', 'pet'); }
   addItem(`crop_${c.id}`, qty);
+  // thu hoạch hoa thì có cơ hội hứng được mật ong từ đàn ong quanh vườn
+  if (['rose', 'tulip', 'sunflower'].includes(c.id) && Math.random() < 0.25) {
+    addItem('honey');
+    toast('Ong làm mật trong vườn hoa: +1 Mật ong!', 'plant');
+  }
   addExp(c.exp);
   if (!S.collections.crops.includes(c.id)) {
     S.collections.crops.push(c.id);
