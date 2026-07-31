@@ -54,9 +54,10 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   farm: [
     { key: 'bldhd_farm_house', x: 32, y: 15.3, s: 1, label: 'Nhà bếp' },
     { key: 'bldhd_farm_barn', x: 43.5, y: 15.3, s: 1, label: 'Nhà kho' },
-    { key: 'lt_lamp_hd', x: 15.5, y: 26.6, s: 1 },
-    { key: 'lt_lamp_hd', x: 60, y: 26.8, s: 1 },
-    { key: 'lt_lamp_hd', x: 106, y: 26.8, s: 1 }
+    // đèn đường đứng trên thảm cỏ, thẳng hàng với dãy nhà
+    { key: 'lt_lamp_hd', x: 25, y: 15.7, s: 1 },
+    { key: 'lt_lamp_hd', x: 56.2, y: 15.7, s: 1 },
+    { key: 'lt_lamp_hd', x: 107, y: 15.7, s: 1 }
   ],
   beach: [
     { key: 'bld_fishshop', x: 10, y: 7 },    // tiệm câu ông Biển
@@ -79,8 +80,8 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   // bằng sprite pack Cozy cho khớp style với nhà bếp/nhà kho trong nông trại
   farm_gate: [
     { key: 'lt_shop_av', x: 48, y: 11.2, s: 1, label: 'Cửa hàng' },
-    { key: 'lt_lamp_hd', x: 12, y: 18.6, s: 1 },
-    { key: 'lt_lamp_hd', x: 69, y: 18.6, s: 1 }
+    { key: 'lt_lamp_hd', x: 12, y: 18, s: 1 },
+    { key: 'lt_lamp_hd', x: 69, y: 18, s: 1 }
   ],
   town_gate: [
     { key: 'bld_cafe', x: 7, y: 8, s: 0.9 }, { key: 'bld_pub', x: 34, y: 8, s: 0.9 },

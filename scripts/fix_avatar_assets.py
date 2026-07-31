@@ -77,3 +77,11 @@ for x in (6, 40):
     d.line([(x + 2, H - 3), (x + 4, H - 8)], fill=(120, 190, 92, 255), width=2)
 m.save('public/assets/farm/mound.png')
 print('mound', m.size)
+
+# ---- máng thức ăn: bản cắt cũ dính thêm đống cỏ khô của ô bên dưới ----
+for n in ('trough', 'trough_full'):
+    f = 'public/assets/lttt/%s.png' % n
+    t = Image.open(f).convert('RGBA')
+    if t.height > 32:                     # chỉ cắt 1 lần, chạy lại không hỏng
+        t.crop((0, 0, t.width, 32)).save(f)
+        print(n, '->', (t.width, 32))

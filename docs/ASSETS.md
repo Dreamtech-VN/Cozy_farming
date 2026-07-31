@@ -122,6 +122,9 @@ sau đó dựng lại bằng sprite **pack Cozy** (`assets/buildings/farm_house`
   đèn càng sáng, ban ngày tắt hẳn.
 - `hd/home/831.png` → `assets/lttt/bld/shop_av.png`: cửa hàng "CỬA HÀNG" gốc,
   dùng cho map cổng (bản pack Cozy nhìn lệch style với nền vẽ tay).
+- `assets/lttt/trough.png` / `trough_full.png`: máng thức ăn. Bản cắt cũ lấy
+  dư sang ô bên dưới nên dính thêm một đống cỏ khô rời — cắt lại còn 51x32,
+  đúng cái máng (bản `_full` đã có cỏ nằm trong máng).
 - `assets/farm/mound.png`: đống đất để đào xẻng — trước vẽ bằng graphics nên
   trông như cục bùn, nay vẽ lại thành gò đất tơi có cục, sỏi và cỏ, kèm một
   đốm sáng nhấp nháy trong game cho biết đào được.
