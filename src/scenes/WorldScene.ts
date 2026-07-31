@@ -52,8 +52,9 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   // Nền map 25 đã bị xoá sạch cây + 2 căn nhà gốc (scripts/clean_farm_map.py),
   // nhà bếp và nhà kho dựng lại bằng sprite pack Cozy cho đồng bộ style.
   farm: [
-    { key: 'bldhd_farm_house', x: 32, y: 15.3, s: 1, label: 'Nhà bếp' },
-    { key: 'bldhd_farm_barn', x: 43.5, y: 15.3, s: 1, label: 'Nhà kho' },
+    // nhà quy về đúng cỡ 2 căn vẽ sẵn của map gốc (~130 và ~140 px cao)
+    { key: 'bldhd_farm_house', x: 32, y: 15.3, s: 0.78, label: 'Nhà bếp' },
+    { key: 'bldhd_farm_barn', x: 43.5, y: 15.3, s: 0.78, label: 'Nhà kho' },
     // đèn đường: chân cột nằm hẳn trong thảm cỏ (cỏ hết ở y~240px)
     { key: 'lt_lamp_hd', x: 25.3, y: 14.5, s: 1 },
     { key: 'lt_lamp_hd', x: 56.2, y: 14.5, s: 1 },
@@ -919,7 +920,7 @@ export class WorldScene extends Phaser.Scene {
     // máng thức ăn: 1 trong chuồng, 1 ngoài sân cho thú 2 chân
     this.penTrough = { x: (x + 3) * T, y: (y + h - 1.4) * T };
     this.freeTrough = { x: (FREE_YARD.x + FREE_YARD.w / 2) * T, y: (FREE_YARD.y + FREE_YARD.h - 0.6) * T };
-    const tsc = this.zone.bg ? 0.8 : 0.45;
+    const tsc = this.zone.bg ? 1 : 0.5;
     this.troughImgs = [];
     for (const t of [this.penTrough, this.freeTrough]) {
       const im = this.add.image(t.x, t.y, 'trough').setOrigin(0.5, 0.9).setScale(tsc).setDepth(t.y);
@@ -954,7 +955,9 @@ export class WorldScene extends Phaser.Scene {
       ax = (FREE_YARD.x + Math.random() * FREE_YARD.w) * T;
       ay = (FREE_YARD.y + Math.random() * FREE_YARD.h) * T;
     }
-    const spr = this.add.sprite(ax, ay, `animal_${type}`, 0).setDepth(ay).setScale(this.zone.bg ? 1.9 : 1);
+    // cỡ vẽ quy theo tỉ lệ Avatar/Lttt: bò to nhất, gà bé nhất, so với nhân vật cao ~84px
+    const spr = this.add.sprite(ax, ay, `animal_${type}`, 0).setDepth(ay)
+      .setScale(this.zone.bg ? def.hdScale : def.hdScale * 0.5);
     spr.setInteractive({ useHandCursor: true });
     spr.on('pointerdown', () => this.animalDialog(id));
     this.animalSprites.set(id, spr);
