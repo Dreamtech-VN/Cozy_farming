@@ -17,7 +17,7 @@ Nguồn: các pack đã mua trên itch.io (license thương mại), tải từ
 
 ## Sprite đã cắt sẵn từ pack (scripts cắt bằng PIL, đã kiểm tra bằng mắt)
 
-- `assets/buildings/` — 10 nhà town (pub, cinema, school, cafe, inn, library, greenhouse, arcade, SUPAM, shop) + beachbar, fishshop (fishing pack)
+- `assets/buildings/` — nhà town pack Cozy. **Không map nào còn dùng**: nhà cửa và nền map đều lấy của repo Lttt (`assets/lttt/`). Giữ file lại phòng khi cần.
 - `assets/deco/` — cây tán tròn ×2, thông, ghế đá, đèn đường ×2, bù nhìn, thùng gỗ, chậu hoa, bụi cây (từ tiles.png)
 - `assets/interior/` — giường ×2, sofa, ghế, bàn, kệ, bếp, lò sưởi, TV, chậu cây, bình hoa, gấu bông, thảm, cây thông Noel, hồ cá ×2 (từ Interior pack)
 

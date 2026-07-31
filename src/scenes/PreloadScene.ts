@@ -58,14 +58,8 @@ export class PreloadScene extends Phaser.Scene {
     this.load.spritesheet('nature', 'assets/nature/global.png', { frameWidth: 16, frameHeight: 16 });
 
     // ---- Nhà cửa (town + beach) ----
-    for (const b of ['pub', 'cinema', 'school', 'cafe', 'inn', 'library', 'greenhouse', 'arcade', 'supam', 'shop', 'beachbar', 'fishshop',
-      'farm_house', 'farm_store', 'farm_market', 'farm_barn', 'farm_coop']) {
-      this.load.image(`bld_${b}`, `assets/buildings/${b}.png`);
-    }
-    // ---- Nhà pack Cozy bản HD (mềm cạnh + bóng đổ) cho map nền vẽ tay ----
-    for (const b of ['farm_house', 'farm_barn', 'farm_market', 'farm_coop', 'farm_store']) {
-      this.load.image(`bldhd_${b}`, `assets/buildings/hd/${b}.png`);
-    }
+    // Nhà cửa dùng asset repo Lttt (assets/lttt/bld) — bộ nhà pack Cozy chỉ
+    // còn giữ cho map cổng cũ, nay không map nào dùng nữa nên thôi nạp.
     // ---- Trời + hàng cây xa (bgHD Avatar) ----
     for (const b of ['sky', 'hills', 'fields']) {
       this.load.image(`sky_${b}`, `assets/lttt/sky/${b}.png`);
@@ -80,7 +74,7 @@ export class PreloadScene extends Phaser.Scene {
     }
 
     // ---- Nền map Avatar (repo Lttt) ----
-    for (const m of ['4', '10', '15', '22', '24', '101', 'farmbg', 'farmgate']) {
+    for (const m of ['4', '10', '14', '15', '22', '24', '101', 'farmbg', 'farmgate']) {
       this.load.image(`bg_${m}`, `assets/lttt/maps/${m}.png`);
     }
     // ---- Decor Avatar (repo Lttt) ----

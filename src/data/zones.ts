@@ -85,11 +85,14 @@ export const ZONES: Record<string, ZoneDef> = {
     features: []
   },
   beach: {
-    id: 'beach', name: 'Bãi biển', icon: '', w: 44, h: 30, ground: 'sand',
-    spawn: { x: 6, y: 15 }, hub: true, busStop: { x: 20, y: 20 },
+    // Nền map 14 gốc Avatar: bờ nước + kè đá + tiệm câu (biển SHOP có cần câu)
+    id: 'beach', name: 'Bãi biển', icon: '', w: 63, h: 28, ground: 'stone',
+    spawn: { x: 20, y: 17 }, hub: true, busStop: { x: 8, y: 19 },
+    bg: '14', walkTop: 12, walkBottom: 21, skyTop: 57, traffic: { topTile: 23 },
+    water: [{ x: 0, y: 4, w: 63, h: 5 }],
     portals: [],
     npcs: [
-      { id: 'npc_bien', name: 'Ông Biển', x: 10, y: 9, charIndex: 2, gender: 1, lines: ['Cần câu tốt mới câu được cá to — ghé tiệm của ta xem thử!', 'Cá huyền thoại chỉ cắn cần vàng.'] }
+      { id: 'npc_bien', name: 'Ông Biển', x: 40, y: 14, charIndex: 2, gender: 1, lines: ['Cần câu tốt mới câu được cá to — ghé tiệm của ta xem thử!', 'Cá huyền thoại chỉ cắn cần vàng.'] }
     ],
     features: ['fishing', 'water_edge']
   },

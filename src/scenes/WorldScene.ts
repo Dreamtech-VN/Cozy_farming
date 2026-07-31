@@ -86,11 +86,10 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     { key: 'lt_love_tree', x: 50, y: 22, s: 1 },     // cây tình yêu
     { key: 'lt_shelter', x: 50, y: 25, s: 0.9 }
   ],
+  // Bãi biển dùng nguyên map 14 gốc (đã có kè đá, cây, tiệm câu) nên chỉ thêm
+  // nhà chờ xe buýt.
   beach: [
-    { key: 'bld_fishshop', x: 10, y: 7 },
-    { key: 'bld_beachbar', x: 22, y: 12 },
-    { key: 'deco_barrel', x: 15, y: 8 }, { key: 'deco_bench', x: 18, y: 16 },
-    { key: 'lt_shelter', x: 20, y: 21, s: 0.9 }
+    { key: 'lt_shelter', x: 8, y: 20.6, s: 0.9 }
   ],
   pond: [
     { key: 'lt_shelter', x: 57, y: 11, s: 0.9 }
@@ -104,7 +103,6 @@ const SPOT_PANEL: Record<string, () => void> = {
   lt_petshop: () => bus.emit(EV.OPEN_PANEL, { panel: 'petshop' }),
   lt_shelter: () => bus.emit(EV.OPEN_PANEL, { panel: 'map' }),
   lt_atm: () => bus.emit(EV.OPEN_PANEL, { panel: 'atm' }),
-  bld_fishshop: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: 'shop_fishing' } }),
   lt_icecream: () => bus.emit(EV.OPEN_PANEL, {
     panel: 'dialog', data: { title: 'Quầy kem', text: 'Kem mát lạnh giải nhiệt mùa hè! (Sắp ra mắt)', actions: [] }
   })
@@ -582,7 +580,7 @@ export class WorldScene extends Phaser.Scene {
       if (!this.textures.exists(d.key)) continue;
       const img = this.add.image(d.x * T, d.y * T, d.key)
         .setOrigin(0.5, 1)
-        .setScale(d.s ?? (d.key.startsWith('bld_') ? 1.1 : 1.2))
+        .setScale(d.s ?? 1.2)
         .setDepth(d.y * T);
       // đèn đường: gắn quầng sáng, đêm mới bật
       if (d.key === 'lt_lamp_hd' && this.textures.exists('glow')) {
@@ -626,6 +624,14 @@ export class WorldScene extends Phaser.Scene {
       this.spots.push({
         rect: new Phaser.Geom.Rectangle(9 * T - 40, 8 * T, 80, 80),
         open: () => bus.emit(EV.OPEN_PANEL, { panel: 'friendfarm' })
+      });
+      return;
+    }
+    if (this.zone.id === 'beach') {
+      // tiệm câu vẽ sẵn trong map 14
+      this.spots.push({
+        rect: new Phaser.Geom.Rectangle(596, 20, 180, 130),
+        open: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: 'shop_fishing' } })
       });
       return;
     }
