@@ -207,77 +207,163 @@ img { image-rendering: auto; }
   padding: 0 0 74px 12px;
 }
 .win.win-chat {
-  width: min(430px, 92vw); height: min(360px, 62vh); max-height: 62vh;
+  width: min(440px, 93vw); height: min(400px, 66vh); max-height: 66vh;
   padding: 0; border: none; border-image: none;
-  background: linear-gradient(180deg, rgba(24, 34, 20, .93), rgba(16, 24, 14, .95));
-  border-radius: 14px; box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
-  outline: 2px solid rgba(246, 237, 216, .22); outline-offset: -2px;
+  background: linear-gradient(180deg, rgba(26, 36, 22, .95), rgba(15, 22, 13, .97));
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  border-radius: 16px; box-shadow: 0 12px 34px rgba(0, 0, 0, .5);
+  outline: 2px solid rgba(246, 237, 216, .20); outline-offset: -2px;
   display: flex; flex-direction: column; overflow: hidden;
 }
 .win.win-chat .win-close { display: none; }
 .win.win-chat .win-body {
   padding: 0; overflow: hidden; display: flex; flex-direction: column; flex: 1; min-height: 0;
 }
-.chat-head {
-  display: flex; align-items: center; gap: 7px; flex: none;
-  padding: 9px 10px 8px 12px; border-bottom: 1px solid rgba(246, 237, 216, .16);
+
+/* đầu bảng: ảnh đại diện + tên + số người trực tuyến */
+.cw-head {
+  display: flex; align-items: center; gap: 9px; flex: none;
+  padding: 10px 10px 9px 12px; border-bottom: 1px solid rgba(246, 237, 216, .14);
+  background: rgba(255, 255, 255, .04);
 }
-.chat-title { flex: 1; font-size: 13px; font-weight: 800; color: #f6edd8; letter-spacing: .2px; }
-.chat-x {
-  width: 24px; height: 24px; border-radius: 7px; cursor: pointer; flex: none;
+.cw-head .grow { flex: 1; min-width: 0; }
+.cw-head-ava {
+  width: 32px; height: 32px; border-radius: 50%; overflow: hidden; flex: none;
+  border: 2px solid rgba(246, 237, 216, .35); display: flex; align-items: center; justify-content: center;
+}
+.cw-head-name { font-size: 13px; font-weight: 900; color: #f6edd8; line-height: 1.15; }
+.cw-head-sub { font-size: 10.5px; font-weight: 700; color: #8fbf72; }
+.cw-x {
+  width: 26px; height: 26px; border-radius: 8px; cursor: pointer; flex: none;
   background: rgba(246, 237, 216, .12); border: none; color: #f6edd8;
   font-size: 13px; font-weight: 900; line-height: 1; font-family: inherit;
 }
-.chat-x:active { transform: scale(.9); }
-.chat-tabs { display: flex; gap: 6px; padding: 8px 12px 6px; flex: none; }
-.chat-tab {
-  padding: 4px 14px 5px; border-radius: 999px; cursor: pointer; font-family: inherit;
+.cw-x:active { transform: scale(.9); }
+
+.cw-tabs { display: flex; gap: 6px; padding: 9px 12px 5px; flex: none; }
+.cw-tab {
+  padding: 5px 15px 6px; border-radius: 999px; cursor: pointer; font-family: inherit;
   font-size: 11.5px; font-weight: 800; color: #c9d6bd;
   background: rgba(246, 237, 216, .10); border: 1px solid transparent;
 }
-.chat-tab.active { background: #ffd43b; color: #3a2a10; border-color: #ffe89a; }
-.chat-tab:active { transform: scale(.95); }
-.chat-log {
-  flex: 1; min-height: 0; overflow-y: auto; padding: 4px 12px 6px;
-  display: flex; flex-direction: column; gap: 4px;
-  font-size: 12px; line-height: 1.4; overscroll-behavior: contain;
+.cw-tab.active { background: #ffd43b; color: #3a2a10; border-color: #ffe89a; }
+.cw-tab:active { transform: scale(.95); }
+
+/* hàng chọn người nhận khi chat riêng */
+.cw-to {
+  display: flex; gap: 6px; padding: 2px 12px 6px; flex: none;
+  overflow-x: auto; scrollbar-width: none;
 }
-.chat-log::-webkit-scrollbar { width: 7px; }
-.chat-log::-webkit-scrollbar-thumb { background: rgba(246, 237, 216, .25); border-radius: 4px; }
-.chat-empty { color: #8fa085; font-style: italic; text-align: center; margin-top: 12px; }
-.chat-msg { color: #e6efdd; word-break: break-word; }
-.chat-time { color: #7f9074; font-size: 10px; margin-right: 5px; }
-.chat-from { font-weight: 800; margin-right: 4px; color: #ffd43b; }
-.chat-msg.mine .chat-from { color: #8ce99a; }
-.chat-msg.ch-system { color: #ffd8a8; font-style: italic; }
-.chat-msg.ch-private .chat-from { color: #ffa8d8; }
-.chat-msg.ch-area .chat-from { color: #8fd0ff; }
-.chat-input-row {
+.cw-to::-webkit-scrollbar { display: none; }
+.cw-to-empty { font-size: 11px; color: #8fa085; font-style: italic; }
+.cw-chip {
+  display: inline-flex; align-items: center; gap: 5px; flex: none; cursor: pointer;
+  padding: 3px 10px 3px 3px; border-radius: 999px; font-family: inherit;
+  font-size: 11px; font-weight: 800; color: #d8e4cc;
+  background: rgba(246, 237, 216, .09); border: 1px solid transparent;
+}
+.cw-chip.on { border-color: #ffd43b; background: rgba(255, 212, 59, .16); color: #ffe89a; }
+.cw-dot { width: 7px; height: 7px; border-radius: 50%; background: #51cf66; flex: none; }
+
+/* vòng tròn chữ cái đầu cho người khác */
+.cw-ava {
+  border-radius: 50%; flex: none; color: #fff; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: inset 0 -2px 6px rgba(0, 0, 0, .28);
+}
+
+.cw-log {
+  flex: 1; min-height: 0; overflow-y: auto; padding: 6px 12px 8px;
+  display: flex; flex-direction: column; gap: 7px; overscroll-behavior: contain;
+}
+.cw-log::-webkit-scrollbar { width: 7px; }
+.cw-log::-webkit-scrollbar-thumb { background: rgba(246, 237, 216, .22); border-radius: 4px; }
+.cw-empty { color: #8fa085; font-style: italic; text-align: center; margin-top: 16px; font-size: 12px; }
+.cw-sys {
+  align-self: center; max-width: 88%; text-align: center;
+  font-size: 10.5px; font-weight: 700; color: #ffd8a8; font-style: italic;
+  background: rgba(255, 216, 168, .10); border-radius: 999px; padding: 4px 12px;
+}
+
+.cw-row { display: flex; align-items: flex-end; gap: 7px; max-width: 86%; }
+.cw-row.me { align-self: flex-end; flex-direction: row-reverse; }
+.cw-row.cont { margin-top: -4px; }
+.cw-ava-slot { width: 30px; flex: none; display: flex; align-items: flex-end; justify-content: center; }
+.cw-ava-slot > * { border-radius: 50%; overflow: hidden; }
+.cw-col { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.cw-row.me .cw-col { align-items: flex-end; }
+.cw-name { font-size: 10.5px; font-weight: 800; color: #ffd43b; padding: 0 4px; }
+.cw-bubble {
+  position: relative; padding: 6px 11px 6px 11px; border-radius: 14px 14px 14px 4px;
+  background: rgba(246, 237, 216, .13); color: #eef5e6;
+  font-size: 12.5px; line-height: 1.4; word-break: break-word;
+  display: flex; align-items: flex-end; gap: 7px;
+}
+.cw-row.me .cw-bubble {
+  border-radius: 14px 14px 4px 14px;
+  background: linear-gradient(#5aa84a, #3f8a34); color: #fbfff7;
+}
+.cw-bubble.ch-private { background: rgba(255, 168, 216, .18); }
+.cw-row.me .cw-bubble.ch-private { background: linear-gradient(#c96aa8, #a84f8b); }
+.cw-bubble.ch-area { background: rgba(143, 208, 255, .16); }
+.cw-t { font-size: 9.5px; color: rgba(255, 255, 255, .5); flex: none; margin-bottom: 1px; }
+.cw-name + .cw-bubble { border-top-left-radius: 4px; }
+
+/* nhắn thoại */
+.cw-voice {
+  display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+  padding: 3px 10px 4px 8px; border-radius: 999px; font-family: inherit;
+  font-size: 11.5px; font-weight: 800; color: #10240e;
+  background: linear-gradient(#a9e34b, #74b816); border: none;
+}
+.cw-voice:active { transform: scale(.96); }
+.cw-voice-ico {
+  width: 0; height: 0; border-style: solid; border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent #10240e;
+}
+.cw-voice.playing .cw-voice-ico { width: 8px; height: 10px; border: none; background: #10240e; }
+.cw-voice-wave {
+  width: 26px; height: 12px; flex: none;
+  background:
+    linear-gradient(#10240e, #10240e) 0 50% / 2px 40% no-repeat,
+    linear-gradient(#10240e, #10240e) 6px 50% / 2px 90% no-repeat,
+    linear-gradient(#10240e, #10240e) 12px 50% / 2px 55% no-repeat,
+    linear-gradient(#10240e, #10240e) 18px 50% / 2px 100% no-repeat,
+    linear-gradient(#10240e, #10240e) 24px 50% / 2px 35% no-repeat;
+}
+
+/* dòng báo đang ghi âm */
+.cw-rec {
+  display: none; flex: none; padding: 4px 14px; font-size: 11px; font-weight: 800; color: #ff8787;
+}
+.cw-rec.on { display: block; }
+
+.cw-input-row {
   display: flex; gap: 7px; align-items: center; flex: none;
-  padding: 8px 10px 10px 12px; border-top: 1px solid rgba(246, 237, 216, .16);
+  padding: 8px 10px 10px 10px; border-top: 1px solid rgba(246, 237, 216, .14);
+  background: rgba(255, 255, 255, .04);
 }
-.chat-input {
+.cw-input {
   flex: 1; min-width: 0; font-family: inherit; font-size: 12.5px;
-  padding: 8px 12px; border-radius: 999px; color: #f6edd8;
-  background: rgba(0, 0, 0, .35); border: 1px solid rgba(246, 237, 216, .22); outline: none;
+  padding: 9px 14px; border-radius: 999px; color: #f6edd8;
+  background: rgba(0, 0, 0, .34); border: 1px solid rgba(246, 237, 216, .20); outline: none;
 }
-.chat-input::placeholder { color: #7f9074; }
-.chat-input:focus { border-color: #ffd43b88; background: rgba(0, 0, 0, .45); }
-.chat-send {
-  width: 36px; height: 36px; flex: none; border-radius: 50%; cursor: pointer; border: none;
+.cw-input::placeholder { color: #7f9074; }
+.cw-input:focus { border-color: #ffd43b88; background: rgba(0, 0, 0, .45); }
+.cw-send {
+  width: 38px; height: 38px; flex: none; border-radius: 50%; cursor: pointer; border: none;
   background: linear-gradient(#ffe066, #f0b429);
   display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 0 #c98a12;
 }
-.chat-send:active { transform: scale(.9); }
-
-/* nút ghi âm — đang ghi thì đỏ và nhấp nháy */
-.chat-mic {
-  width: 34px; height: 34px; flex: none; border-radius: 50%; cursor: pointer;
-  border: 1px solid rgba(246, 237, 216, .28); background: rgba(0, 0, 0, .35);
+.cw-send:active { transform: translateY(2px); box-shadow: none; }
+.cw-mic {
+  width: 36px; height: 36px; flex: none; border-radius: 50%; cursor: pointer;
+  border: 1px solid rgba(246, 237, 216, .26); background: rgba(0, 0, 0, .34);
   color: #d8e4cc; display: flex; align-items: center; justify-content: center;
 }
-.chat-mic:active { transform: scale(.9); }
-.chat-mic.rec {
+.cw-mic:active { transform: scale(.9); }
+.cw-mic.rec {
   background: #e03131; border-color: #ff8787; color: #fff;
   animation: mic-pulse .9s ease-in-out infinite;
 }
@@ -286,21 +372,6 @@ img { image-rendering: auto; }
   50% { box-shadow: 0 0 0 7px rgba(224, 49, 49, 0); }
 }
 
-/* bong bóng tin nhắn thoại */
-.chat-voice {
-  display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
-  padding: 3px 11px 4px 9px; border-radius: 999px; font-family: inherit;
-  font-size: 11.5px; font-weight: 800; color: #10240e;
-  background: linear-gradient(#a9e34b, #74b816); border: none;
-}
-.chat-voice:active { transform: scale(.96); }
-.chat-voice-ico {
-  width: 0; height: 0; border-style: solid; border-width: 5px 0 5px 8px;
-  border-color: transparent transparent transparent #10240e;
-}
-.chat-voice.playing .chat-voice-ico {
-  width: 8px; height: 10px; border: none; background: #10240e;
-}
 .win-tabs { display: flex; gap: 6px; padding: 6px 14px 0; flex-wrap: wrap; }
 .tab {
   padding: 7px 14px 9px; cursor: pointer; font-size: 13px; font-weight: 800; color: #4a3520;

@@ -1830,8 +1830,8 @@ export function registerAllPanels() {
   // ================= Chat =================
   registerPanel('chat', (data?: { to?: string }) => {
     // Chat KHÔNG dùng khung gỗ chung như các popup khác — nó là bảng chat
-    // tối, mỏng, neo góc dưới trái để vẫn nhìn được thế giới phía sau.
-    // khung chat mini trên màn hình nằm ngay dưới bảng này -> ẩn đi cho đỡ chồng chữ
+    // tối, neo góc dưới trái để vẫn nhìn được thế giới phía sau. Tin nhắn vẽ
+    // kiểu bong bóng có ảnh đại diện, tin của mình dạt sang phải.
     const mini = document.getElementById('chat-mini');
     if (mini) mini.style.visibility = 'hidden';
     const { body, win, close } = openWindow('', {
@@ -1845,17 +1845,70 @@ export function registerAllPanels() {
     let channel: 'public' | 'area' | 'private' = data?.to ? 'private' : 'public';
     let privateTo = data?.to ?? S.social.friends[0]?.name ?? '';
 
-    const head = h('div', 'chat-head');
-    head.append(uiIcon('chat', 18), h('span', 'chat-title', 'Trò chuyện'));
-    const closeX = h('button', 'chat-x', '✕');
+    // ----- đầu bảng -----
+    const head = h('div', 'cw-head');
+    const hAva = h('div', 'cw-head-ava'); hAva.append(avatarEl(30));
+    const hTxt = h('div', 'grow');
+    hTxt.append(h('div', 'cw-head-name', S.player.name || 'Bạn'));
+    const online = 1 + S.social.friends.filter(f => f.online).length;
+    hTxt.append(h('div', 'cw-head-sub', `${online} người đang trực tuyến`));
+    const closeX = h('button', 'cw-x', '✕');
     closeX.onclick = close;
-    head.append(closeX);
+    head.append(hAva, hTxt, closeX);
 
-    const chanBar = h('div', 'chat-tabs');
+    // ----- kênh -----
+    const chanBar = h('div', 'cw-tabs');
     const chans: ['public' | 'area' | 'private', string][] =
       [['public', 'Tổng'], ['area', 'Gần'], ['private', 'Riêng']];
 
-    const log = h('div', 'chat-log');
+    // ----- chọn người nhận khi chat riêng -----
+    const toBar = h('div', 'cw-to');
+    const renderTo = () => {
+      toBar.innerHTML = '';
+      toBar.style.display = channel === 'private' ? '' : 'none';
+      if (channel !== 'private') return;
+      const list = S.social.friends;
+      if (!list.length) { toBar.append(h('div', 'cw-to-empty', 'Chưa có bạn nào — kết bạn ở mục Bạn bè.')); return; }
+      for (const f of list) {
+        const c = h('button', `cw-chip ${privateTo === f.name ? 'on' : ''}`);
+        c.append(nameAva(f.name, 20), h('span', '', f.name));
+        if (f.online) c.append(h('span', 'cw-dot'));
+        c.onclick = () => { sfx.click(); privateTo = f.name; renderTo(); renderLog(); };
+        toBar.append(c);
+      }
+    };
+
+    // ảnh đại diện người khác: vòng tròn chữ cái đầu, màu suy ra từ tên
+    function nameAva(name: string, size = 30): HTMLElement {
+      const d = h('div', 'cw-ava');
+      let hsh = 0;
+      for (let i = 0; i < name.length; i++) hsh = (hsh * 131 + name.charCodeAt(i) * 977) % 100000;
+      // tên hai chữ thì lấy 2 chữ cái đầu cho khỏi trùng (Cô Mai / Chú Hùng)
+      const parts = name.trim().split(/\s+/);
+      const ini = (parts.length > 1 ? parts[0][0] + parts[parts.length - 1][0] : parts[0].slice(0, 2));
+      d.style.cssText = `width:${size}px;height:${size}px;font-size:${Math.round(size * 0.38)}px;`
+        + `background:hsl(${hsh % 360} 55% ${38 + (hsh >> 3) % 14}%);`;
+      d.textContent = ini.toUpperCase();
+      return d;
+    }
+
+    const log = h('div', 'cw-log');
+    const hhmm = (t: number) => new Date(t).toLocaleTimeString('vi', { hour: '2-digit', minute: '2-digit' });
+
+    const voiceBtn = (m: { voice?: string; dur?: number }) => {
+      const play = h('button', 'cw-voice');
+      play.append(h('span', 'cw-voice-ico'), h('span', 'cw-voice-wave'), h('span', '', `${m.dur ?? 0}"`));
+      let au: HTMLAudioElement | undefined;
+      play.onclick = () => {
+        if (au && !au.paused) { au.pause(); au.currentTime = 0; play.classList.remove('playing'); return; }
+        au = new Audio(m.voice);
+        play.classList.add('playing');
+        au.onended = () => play.classList.remove('playing');
+        void au.play().catch(() => play.classList.remove('playing'));
+      };
+      return play;
+    };
+
     const renderLog = () => {
       log.innerHTML = '';
       const list = getChatLog().filter(m =>
@@ -1863,80 +1916,90 @@ export function registerAllPanels() {
         (channel === 'private'
           ? m.channel === 'private' && (m.from === privateTo || m.to === privateTo || m.from === S.player.name)
           : m.channel === channel));
-      if (!list.length) log.append(h('div', 'chat-empty', 'Chưa có tin nhắn nào.'));
+      if (!list.length) {
+        log.append(h('div', 'cw-empty', channel === 'private' && !privateTo
+          ? 'Chọn một người bạn để nhắn riêng.' : 'Chưa có tin nhắn nào — nói gì đó đi!'));
+        return;
+      }
+      let lastFrom = '';
       for (const m of list) {
-        const el = h('div', `chat-msg ch-${m.channel}`);
-        const mine = m.from === S.player.name;
-        if (mine) el.classList.add('mine');
-        const t = new Date(m.at).toLocaleTimeString('vi', { hour: '2-digit', minute: '2-digit' });
-        el.append(h('span', 'chat-time', t));
-        if (m.channel !== 'system') el.append(h('span', 'chat-from', `${m.from}:`));
-        if (m.voice) {
-          const play = h('button', 'chat-voice');
-          play.append(h('span', 'chat-voice-ico'), h('span', '', `${m.dur ?? 0}"`));
-          let au: HTMLAudioElement | undefined;
-          play.onclick = () => {
-            if (au && !au.paused) { au.pause(); au.currentTime = 0; play.classList.remove('playing'); return; }
-            au = new Audio(m.voice);
-            play.classList.add('playing');
-            au.onended = () => play.classList.remove('playing');
-            void au.play().catch(() => play.classList.remove('playing'));
-          };
-          el.append(play);
-        } else {
-          el.append(h('span', 'chat-text', m.text));
+        if (m.channel === 'system') {
+          log.append(h('div', 'cw-sys', m.text));
+          lastFrom = '';
+          continue;
         }
-        log.append(el);
+        const mine = m.from === S.player.name;
+        const row = h('div', `cw-row ${mine ? 'me' : ''}`);
+        const same = m.from === lastFrom;                    // gộp tin liên tiếp cùng người
+        if (same) row.classList.add('cont');
+        const avaSlot = h('div', 'cw-ava-slot');
+        if (!same) avaSlot.append(mine ? avatarEl(30) : nameAva(m.from, 30));
+        const col = h('div', 'cw-col');
+        if (!same && !mine) col.append(h('div', 'cw-name', m.from));
+        const bubble = h('div', `cw-bubble ch-${m.channel}`);
+        if (m.voice) bubble.append(voiceBtn(m)); else bubble.append(h('span', '', m.text));
+        bubble.append(h('span', 'cw-t', hhmm(m.at)));
+        col.append(bubble);
+        row.append(avaSlot, col);
+        log.append(row);
+        lastFrom = m.from;
       }
       log.scrollTop = log.scrollHeight;
     };
 
     for (const [id, lbl] of chans) {
-      const c = h('button', `chat-tab ${channel === id ? 'active' : ''}`, lbl);
+      const c = h('button', `cw-tab ${channel === id ? 'active' : ''}`, lbl);
       c.onclick = () => {
+        sfx.click();
         channel = id;
-        chanBar.querySelectorAll('.chat-tab').forEach(x => x.classList.remove('active'));
+        chanBar.querySelectorAll('.cw-tab').forEach(x => x.classList.remove('active'));
         c.classList.add('active');
-        renderLog();
+        renderTo(); renderLog();
       };
       chanBar.append(c);
     }
 
-    const inputBar = h('div', 'chat-input-row');
-    const inp = h('input', 'chat-input') as HTMLInputElement;
+    // ----- ô nhập -----
+    const inputBar = h('div', 'cw-input-row');
+    const inp = h('input', 'cw-input') as HTMLInputElement;
     inp.placeholder = 'Nhập tin nhắn...';
     inp.maxLength = 120;
-    const sendBtn = h('button', 'chat-send');
+    const sendBtn = h('button', 'cw-send');
     sendBtn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">'
-      + '<path d="M4 12h13M11 6l6 6-6 6" fill="none" stroke="#6b3f10" stroke-width="3"'
+      + '<path d="M4 12h13M11 6l6 6-6 6" fill="none" stroke="#3a2a10" stroke-width="3"'
       + ' stroke-linecap="round" stroke-linejoin="round"/></svg>';
     sendBtn.title = 'Gửi';
-    sendBtn.onclick = () => {
+    const doSend = () => {
       const text = inp.value.trim();
       if (!text) return;
+      if (channel === 'private' && !privateTo) { toast('Chọn người nhận đã nhé.', 'alert'); return; }
       sendChat(channel, text, channel === 'private' ? privateTo : undefined);
       // nói Tổng/Gần thì hiện bong bóng trên đầu nhân vật
       if (channel !== 'private') bus.emit('world:say', text);
       inp.value = '';
       renderLog();
     };
-    inp.onkeydown = e => { if (e.key === 'Enter') sendBtn.click(); e.stopPropagation(); };
+    sendBtn.onclick = doSend;
+    inp.onkeydown = e => { if (e.key === 'Enter') doSend(); e.stopPropagation(); };
 
     // ----- tin nhắn thoại -----
     // Game chưa có server nên tin thoại chỉ nằm ở máy mình, không gửi được
     // sang người chơi khác; ghi bằng MediaRecorder, giới hạn 15 giây.
-    const micBtn = h('button', 'chat-mic');
+    const micBtn = h('button', 'cw-mic');
     micBtn.innerHTML = '<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">'
       + '<rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/>'
       + '<path d="M5 11a7 7 0 0 0 14 0M12 18v3" fill="none" stroke="currentColor"'
       + ' stroke-width="2" stroke-linecap="round"/></svg>';
-    micBtn.title = 'Giữ để ghi âm';
+    micBtn.title = 'Bấm để ghi âm';
     let rec: MediaRecorder | undefined;
-    let recTimer = 0, startedAt = 0;
+    let recTimer = 0, startedAt = 0, tick = 0;
+    const recLabel = h('div', 'cw-rec');
 
     const stopRec = () => {
       if (rec && rec.state === 'recording') rec.stop();
       window.clearTimeout(recTimer);
+      window.clearInterval(tick);
+      recLabel.classList.remove('on');
     };
     const startRec = async () => {
       if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') {
@@ -1962,6 +2025,10 @@ export function registerAllPanels() {
         };
         rec.start();
         micBtn.classList.add('rec');
+        recLabel.classList.add('on');
+        tick = window.setInterval(() => {
+          recLabel.textContent = `Đang ghi âm ${Math.round((Date.now() - startedAt) / 1000)}s — bấm lại để gửi`;
+        }, 200);
         recTimer = window.setTimeout(stopRec, 15000);   // tự dừng sau 15s
       } catch {
         toast('Không truy cập được micro.', 'alert');
@@ -1973,7 +2040,8 @@ export function registerAllPanels() {
 
     inputBar.append(micBtn, inp, sendBtn);
 
-    body.append(head, chanBar, log, inputBar);
+    body.append(head, chanBar, toBar, log, recLabel, inputBar);
+    renderTo();
     renderLog();
     setTimeout(() => inp.focus(), 50);
     bus.on(EV.CHAT, renderLog);
