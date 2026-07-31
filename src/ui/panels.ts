@@ -1277,17 +1277,17 @@ export function registerAllPanels() {
   }
 
   // ================= Bản đồ thế giới (ảnh world map Avatar, bấm để di chuyển) =================
-  // vị trí các khu trên ảnh minimap (%)
+  // vị trí các khu trên ảnh minimap (%) — khớp với ảnh minimap.png
   const MAP_POS: Record<string, { x: number; y: number }> = {
-    house: { x: 14, y: 16 },      // khu dân cư mái đỏ
-    school: { x: 38, y: 22 },     // dãy phố
-    gamecenter: { x: 46, y: 42 }, // cao ốc trung tâm
-    mall: { x: 63, y: 33 },       // khu thương mại
-    town: { x: 55, y: 51 },       // trung tâm thành phố
-    park: { x: 25, y: 50 },       // công viên đài phun nước
-    beach: { x: 59, y: 12 },      // hồ lớn phía trên
-    pond: { x: 22, y: 76 },       // bờ sông dưới trái
-    farm: { x: 72, y: 82 }        // đồng ruộng dưới phải
+    house: { x: 10, y: 8 },       // khu nhà mái đỏ góc trái trên
+    school: { x: 33, y: 12 },     // dãy nhà trường trên giữa
+    beach: { x: 56, y: 9 },       // hồ lớn phía trên phải
+    town: { x: 44, y: 30 },       // khu phố trung tâm
+    gamecenter: { x: 48, y: 42 }, // cao ốc trung tâm
+    mall: { x: 66, y: 34 },       // khu thương mại bên phải
+    park: { x: 26, y: 48 },       // công viên đài phun nước bên trái
+    pond: { x: 82, y: 88 },       // hồ nhỏ góc dưới phải
+    farm: { x: 56, y: 80 }        // đồng ruộng dưới giữa
   };
 
   registerPanel('map', () => {

@@ -66,7 +66,7 @@ export const ZONES: Record<string, ZoneDef> = {
     bg: 'farmbg', walkTop: 11, walkBottom: 28, skyTop: 150,
     water: [{ x: 110, y: 16, w: 12, h: 12 }],   // hồ cá vẽ sẵn ở góc phải
     portals: [
-      { x: 33, y: 15, to: 'house', label: 'Nhà bếp', icon: '' },
+      { x: 33, y: 15, to: 'house', label: 'Nhà riêng', icon: '' },
       { x: 28, y: 27, to: 'farm_gate', label: 'Ra cổng', icon: '' }
     ],
     npcs: [

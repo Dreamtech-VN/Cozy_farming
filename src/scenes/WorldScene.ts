@@ -55,7 +55,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   // nhà bếp và nhà kho dựng lại bằng sprite pack Cozy cho đồng bộ style.
   farm: [
     // nhà quy về đúng cỡ 2 căn vẽ sẵn của map gốc (~130 và ~140 px cao)
-    { key: 'bldhd_farm_house', x: 32, y: 15.3, s: 0.78, label: 'Nhà bếp' },
+    { key: 'bldhd_farm_house', x: 32, y: 15.3, s: 0.78, label: 'Nhà riêng' },
     { key: 'bldhd_farm_barn', x: 43.5, y: 15.3, s: 0.78, label: 'Nhà kho' },
     // đèn đường: chân cột nằm hẳn trong thảm cỏ (cỏ hết ở y~240px)
     { key: 'lt_lamp_hd', x: 25.3, y: 14.5, s: 1 },
@@ -778,16 +778,22 @@ export class WorldScene extends Phaser.Scene {
 
   // ================= cổng khu vực =================
   private drawPortals() {
-    // map dùng ảnh nền gốc đã có cổng/nhà vẽ sẵn -> không cần mốc nhấp nháy,
-    // cứ đi tới là hiện nút đi tiếp.
-    if (this.zone.bg) return;
+    const hd = !!this.zone.bg;
     for (const p of this.zone.portals) {
       const px = p.x * T, py = p.y * T;
-      this.add.circle(px, py, 10, 0xffe066, 0.35).setDepth(1);
-      // mũi tên chỉ lối ra thay cho emoji
-      const arrow = this.add.triangle(px, py - 14, 0, 8, 5, 0, 10, 8, 0xffd43b).setOrigin(0.5).setDepth(2);
-      this.tweens.add({ targets: arrow, y: py - 18, duration: 620, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-      this.add.text(px, py + 12, p.label, { fontSize: '7px', color: '#fff', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2);
+      if (hd) {
+        const tag = this.add.text(px, py - 8, p.label, {
+          fontSize: '12px', color: '#fff8e8', backgroundColor: '#00000080',
+          padding: { x: 6, y: 3 }, fontStyle: 'bold'
+        }).setOrigin(0.5, 1).setDepth(5000);
+        this.tweens.add({ targets: tag, y: py - 14, duration: 800, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+        this.add.circle(px, py + 4, 18, 0xffe066, 0.25).setDepth(1);
+      } else {
+        this.add.circle(px, py, 10, 0xffe066, 0.35).setDepth(1);
+        const arrow = this.add.triangle(px, py - 14, 0, 8, 5, 0, 10, 8, 0xffd43b).setOrigin(0.5).setDepth(2);
+        this.tweens.add({ targets: arrow, y: py - 18, duration: 620, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+        this.add.text(px, py + 12, p.label, { fontSize: '7px', color: '#fff', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2);
+      }
     }
   }
 
@@ -1344,6 +1350,23 @@ export class WorldScene extends Phaser.Scene {
     // tiệm thú cưng (thành phố)
     if (this.zone.id === 'town' && Phaser.Math.Distance.Between(this.player.x, this.player.y, PETSHOP_POS.x, PETSHOP_POS.y + 30) < 110) {
       acts.push({ icon: '', ui: 'shop', label: 'Tiệm thú cưng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petshop' }) });
+    }
+
+    // cửa hàng cổng nông trại
+    if (this.zone.id === 'farm_gate' && Phaser.Math.Distance.Between(this.player.x, this.player.y, 48 * T, 11.2 * T) < 80) {
+      acts.push({ icon: '', ui: 'shop', label: 'Cửa hàng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: 'shop_seed' } }) });
+    }
+
+    // quầy kem (công viên)
+    if (this.zone.id === 'park' && Phaser.Math.Distance.Between(this.player.x, this.player.y, 44 * T, 14 * T) < 80) {
+      acts.push({ icon: '', ui: 'shop', label: 'Mua kem', cb: () => bus.emit(EV.OPEN_PANEL, {
+        panel: 'dialog', data: { title: 'Quầy kem', text: 'Kem mát lạnh giải nhiệt mùa hè! (Sắp ra mắt)', actions: [] }
+      }) });
+    }
+
+    // tiệm câu (bãi biển)
+    if (this.zone.id === 'beach' && Phaser.Math.Distance.Between(this.player.x, this.player.y, 10 * T, 7 * T) < 80) {
+      acts.push({ icon: '', ui: 'shop', label: 'Tiệm câu Ông Biển', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'fishingshop' }) });
     }
 
     // chuồng
