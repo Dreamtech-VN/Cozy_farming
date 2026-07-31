@@ -2,10 +2,13 @@ import type { GameState, StatKey } from './types';
 import { ZONES } from '@/data/zones';
 import { bus, EV, toast } from './events';
 import { migrateBagToStore } from '@/systems/farmstore';
+import { migrateHandItems } from '@/data/handitems';
 
 const KEY = 'cozy_farming_save_v1';
 const VERSION = 1;
-export const HOTBAR_SLOTS = 10;
+export const HOTBAR_SLOTS = 5;
+// ô cuối cùng dành riêng cho cần câu — chưa có cần thì cứ để trống
+export const ROD_SLOT = HOTBAR_SLOTS - 1;
 
 export function defaultState(): GameState {
   return {
@@ -29,7 +32,7 @@ export function defaultState(): GameState {
     chibiWardrobe: [],
     pets: [],
     skins: [],
-    hotbar: ['hoe', 'axe', 'can', 'basket', '', '', '', '', '', ''],
+    hotbar: ['hoe', 'axe', 'can', 'basket', ''],
     tools: { rod: 0, can: 1, hoe: 1, net: 0, basket: 1, axe: 1 },
     farm: { unlocked: 6, plots: [] },
     farmStore: { seeds: { carrot: 5 }, produce: {}, fert: {} },
@@ -83,19 +86,6 @@ export function toolLevel(id: string): number {
   return (S.inventory[`tool_${id}`] ?? 0) > 0 ? 1 : 0;
 }
 
-// Gắn đồ cầm tay (part Avatar) xuống ô trang bị
-export function equipHandItem(partId: number): boolean {
-  const key = `hand:${partId}`;
-  if (S.hotbar.includes(key)) { toast('Món này đã nằm trên thanh trang bị rồi.', 'candy'); return false; }
-  let i = S.hotbar.findIndex(t => !t);
-  if (i < 0) i = S.hotbar.length - 1;
-  S.hotbar[i] = key;
-  save();
-  bus.emit('hotbar:changed');
-  toast('Đã đưa xuống ô trang bị — bấm vào ô để cầm lên tay!', 'candy');
-  return true;
-}
-
 // Cầm / cất đồ trên tay
 // ===== Nông cụ đang cầm =====
 // Muốn cuốc/tưới/thu hoạch thì phải chọn đúng nông cụ ở thanh trang bị trước.
@@ -119,9 +109,13 @@ export function toggleHand(partId: number) {
 export function equipTool(id: string): boolean {
   if (!ownedTool(id)) return false;
   if (S.hotbar.includes(id)) { toast('Nông cụ này đã nằm trên thanh rồi.', 'hoe'); return false; }
-  let i = S.hotbar.findIndex(t => !t);
-  if (i < 0) i = S.hotbar.length - 1;   // hết chỗ -> thay ô cuối
-  S.hotbar[i] = id;
+  // cần câu có ô riêng ở cuối thanh; nông cụ khác chỉ dùng các ô trước đó
+  if (id === 'rod') { S.hotbar[ROD_SLOT] = id; }
+  else {
+    let i = S.hotbar.findIndex((t, k) => !t && k < ROD_SLOT);
+    if (i < 0) i = ROD_SLOT - 1;        // hết chỗ -> thay ô cuối trước ô cần câu
+    S.hotbar[i] = id;
+  }
   save();
   bus.emit('hotbar:changed');
   toast('Đã gắn lên thanh nông cụ!', 'hoe');
@@ -144,16 +138,20 @@ export function load(): boolean {
     // chỗ migrate giữa các version save về sau
     S = { ...defaultState(), ...data };
     if (!S.chibiWardrobe) S.chibiWardrobe = [];
+    // save cũ để đồ cầm tay trong túi -> chuyển vào tủ quần áo (như Lttt)
+    migrateHandItems(S.inventory, S.chibiWardrobe);
     if (!S.skins) S.skins = [];
     if (!S.pets) S.pets = S.farm?.hasDog ? ['dog'] : [];   // save cũ có chó -> chuyển sang hệ thú cưng
     if (S.tools.basket === undefined) S.tools.basket = (S.inventory['tool_basket'] ?? 0) > 0 ? 1 : 0;
     if (!S.player.charStats) S.player.charStats = { health: 5, intellect: 5, strength: 5, agility: 5, charm: 5 };
     if (S.player.statPoints == null) S.player.statPoints = 0;
-    if (!S.hotbar) S.hotbar = ['hoe', 'axe', 'can', 'basket'];
+    if (!S.hotbar) S.hotbar = ['hoe', 'axe', 'can', 'basket', ''];
     // save cũ 5 ô -> nới lên 10 ô, tặng luôn rìu/xẻng cho đủ bộ khởi đầu
     if (S.tools.axe === undefined) S.tools.axe = 1;
-    while (S.hotbar.length < HOTBAR_SLOTS) S.hotbar.push('');
-    S.hotbar.length = HOTBAR_SLOTS;
+    // save cũ có 10 ô: giữ lại các món ở 4 ô đầu, ô cuối để dành cho cần câu
+    S.hotbar = S.hotbar.filter(id => id && id !== 'rod').slice(0, ROD_SLOT);
+    while (S.hotbar.length < ROD_SLOT) S.hotbar.push('');
+    S.hotbar.push(toolLevel('rod') > 0 ? 'rod' : '');
     S.hotbar = S.hotbar.map(id => ownedTool(id) ? id : '');
     // save cũ để hạt/nông sản/phân trong túi -> chuyển sang kho nông trại
     if (!S.farmStore) S.farmStore = { seeds: {}, produce: {}, fert: {} };

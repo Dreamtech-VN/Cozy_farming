@@ -32,19 +32,23 @@ img { image-rendering: auto; }
   position: absolute; top: 6px; left: 8px; right: 8px; display: flex;
   justify-content: space-between; align-items: flex-start; gap: 8px;
 }
+/* khung hồ sơ dùng chung kiểu kính trong suốt với thanh tiền */
 .hud-profile {
-  display: flex; align-items: center; gap: 9px; cursor: pointer; color: #4a3520;
-  border-image: url('/assets/ui/pack/label.png') 30 fill / 14px stretch;
-  padding: 6px 18px 8px 16px; min-height: 48px;
+  display: flex; align-items: center; gap: 9px; cursor: pointer; color: #fff;
+  padding: 5px 18px 5px 5px; height: 48px;
+  background: linear-gradient(rgba(28, 52, 36, .46), rgba(12, 28, 18, .62));
+  backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+  border: 2px solid rgba(255, 255, 255, .55); border-radius: 999px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 3px 8px rgba(0, 0, 0, .3);
 }
 .hud-avatar {
-  width: 42px; height: 42px; border-radius: 50%; background: #f6edd8;
-  border: 2px solid #b5836b; display: flex; align-items: center; justify-content: center; overflow: hidden;
-  flex: none;
+  width: 38px; height: 38px; border-radius: 50%; background: #f6edd8;
+  border: 2px solid rgba(255, 255, 255, .8); display: flex; align-items: center; justify-content: center;
+  overflow: hidden; flex: none;
 }
-.hud-name { font-weight: 800; font-size: 13px; line-height: 1.1; }
-.hud-title { font-size: 10px; font-weight: 700; }
-.hud-lv { font-size: 10px; color: #7a5b3a; font-weight: 700; }
+.hud-name { font-weight: 900; font-size: 13px; line-height: 1.15; text-shadow: 0 1px 3px rgba(0, 0, 0, .5); }
+.hud-title { font-size: 10px; font-weight: 800; text-shadow: 0 1px 3px rgba(0, 0, 0, .5); }
+.hud-lv { font-size: 10px; color: #d9e6cf; font-weight: 800; text-shadow: 0 1px 3px rgba(0, 0, 0, .5); }
 
 .hud-currency { display: flex; gap: 12px; align-items: flex-start; }
 
@@ -1093,6 +1097,7 @@ input.ui-input, select.ui-input {
 .aff-fill { height: 100%; background: linear-gradient(90deg, #ff8787, #ffd43b); border-radius: 6px; transition: width .3s; }
 .row.row-active { background: rgba(255, 212, 59, .16); border-radius: 10px; }
 .hb-slot.hb-on { border-color: #ffd43b; box-shadow: 0 0 0 2px #ffd43b66; background: rgba(255, 212, 59, .22); }
+.hb-slot.hb-rod { opacity: .45; }
 
 /* icon tiền tệ trong chữ */
 img.cur { width: 15px; height: 15px; object-fit: contain; vertical-align: -3px; margin-right: 2px; }

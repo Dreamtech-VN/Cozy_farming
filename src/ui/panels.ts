@@ -6,14 +6,13 @@ import { orderList, canDeliver, deliver, dropOrder, haveOf, orderName } from '@/
 import { pond, POND_CAP, FRIES, FRY_LIST, isGrown, remainMin, stockFry, netFish } from '@/systems/fishfarm';
 import { countOf, takeFrom, listOf, type StoreKind } from '@/systems/farmstore';
 import { cookingFood, cookRemain, canCook, startCook, collectCook, cancelCook } from '@/systems/cooking';
-import { S, save, spend, addCoins, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem, unequipTool, allocateStat, STAT_NAMES, STAT_KEYS } from '@/core/save';
+import { S, save, spend, addCoins, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, unequipTool, allocateStat, STAT_NAMES, STAT_KEYS } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
 import { CROPS, CROP_LIST } from '@/data/crops';
 import { ANIMAL_LIST, ANIMALS, BARN_CAPACITY, BARN_UPGRADE_COST } from '@/data/animals';
 import { FISH_LIST, RODS, RARITY_COLOR, RARITY_NAME, FISHES } from '@/data/fish';
 import { chibiList, chibiPriceXu, CHIBI_PARTS, partStats, equipStats, formatStats } from '@/data/chibi';
-import { handItemId } from '@/data/handitems';
 import { SKIN_LIST, SKINS, type SkinDef } from '@/data/skins';
 import { FURNITURE, FURNITURE_LIST, HOUSE_LEVELS, WALLPAPERS, FLOORS } from '@/data/furniture';
 import { SHOPS } from '@/data/shops';
@@ -755,11 +754,11 @@ export function registerAllPanels() {
       grid.className = 'grid grid-shop';
       for (const p of chibiList(z, g)) {
         // đồ cầm tay: mua về nằm trong túi đồ; đồ mặc: vào tủ đồ
-        const owned = isHand ? itemCount(handItemId(p.id)) > 0 : S.chibiWardrobe.includes(p.id);
+        const owned = S.chibiWardrobe.includes(p.id);
         const cell = h('div', `cell cell-lg ${owned ? 'owned' : ''}`);
         const xu = chibiPriceXu(p);
         const prEl = h('div', 'pr');
-        if (owned && !isHand) prEl.textContent = 'Đã có';
+        if (owned) prEl.textContent = 'Đã có';
         else prEl.innerHTML = priceHtml(xu);
         const art = h('div', 'cell-art');
         art.append(chibiPreview(p.id, 74));
@@ -911,14 +910,14 @@ export function registerAllPanels() {
     const info = h('div', 'tryon-info');
     const ps = partStats(p);
     const statsLine = ps ? ` · ${formatStats(ps).join(' ')}` : '';
-    info.innerHTML = owned && !isHand
+    info.innerHTML = owned
       ? `<b>Bạn đã sở hữu món này</b>${statsLine}`
       : `Giá: ${priceHtml(xu)}${statsLine}`;
     body.append(info);
 
     const bar = h('div');
     bar.style.cssText = 'display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center';
-    if (owned && !isHand) {
+    if (owned) {
       bar.append(btn('Mặc ngay', 'gold', () => {
         if (look) { (look as any)[KEY[z]] = p.id; save(); bus.emit(EV.APPEARANCE); toast(`Đã mặc ${p.name}`, ''); }
         close();
@@ -926,14 +925,9 @@ export function registerAllPanels() {
     } else {
       bar.append(btn(`Mua`, 'gold', () => {
         if (!spend(xu)) return;
-        if (isHand) {
-          addItem(handItemId(p.id));
-          toast(`Đã mua ${p.name}! Mở Túi đồ -> Dùng để đưa xuống ô trang bị.`, '');
-        } else {
-          S.chibiWardrobe.push(p.id);
-          if (look) { (look as any)[KEY[z]] = p.id; bus.emit(EV.APPEARANCE); }
-          toast(`Đã mua và mặc ${p.name}!`, '');
-        }
+        S.chibiWardrobe.push(p.id);
+        if (look) { (look as any)[KEY[z]] = p.id; bus.emit(EV.APPEARANCE); }
+        toast(`Đã mua và mặc ${p.name}!`, '');
         save(); addStat('fashion_bought'); sfx.coin();
         onDone?.(); close();
       }));
@@ -1728,10 +1722,7 @@ export function registerAllPanels() {
       }
       const pk = key as Exclude<SlotKey, 'skin'>;
       const cur = (look as any)[pk] as number;
-      // đồ cầm tay là vật phẩm trong túi, các loại còn lại nằm trong tủ quần áo
-      const ownedOf = (pid: number) => pk === 'hand'
-        ? itemCount(handItemId(pid)) > 0 : S.chibiWardrobe.includes(pid);
-      const owned = chibiList(z, look.gender).filter(p => ownedOf(p.id) || p.id === cur);
+      const owned = chibiList(z, look.gender).filter(p => S.chibiWardrobe.includes(p.id) || p.id === cur);
       let cells = 0;
       for (const p of owned) {
         const on = cur === p.id;

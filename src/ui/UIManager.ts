@@ -1,6 +1,6 @@
 import type Phaser from 'phaser';
 import { bus, EV, toast } from '@/core/events';
-import { S, unequipTool, toolLevel, toggleHand, heldTool, selectTool } from '@/core/save';
+import { S, unequipTool, toolLevel, toggleHand, heldTool, selectTool, ROD_SLOT } from '@/core/save';
 import { h, root, fmt, charFace, avatarEl, spr, chibiPreview, uiIcon } from './kit';
 import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
@@ -329,21 +329,6 @@ export function refreshHotbar() {
   bar.innerHTML = '';
   S.hotbar.forEach((tid, i) => {
     const slot = h('button', 'hb-slot');
-    // ô đồ cầm tay: hand:<partId>
-    if (tid.startsWith('hand:')) {
-      const pid = Number(tid.slice(5));
-      const held = (S.player.chibi?.hand ?? 0) === pid;
-      if (held) slot.classList.add('hb-on');
-      slot.append(chibiPreview(pid, 30));
-      slot.title = 'Đồ cầm tay — bấm để cầm / cất';
-      slot.onclick = () => { sfx.click(); toggleHand(pid); refreshHotbar(); };
-      let hold2 = 0;
-      slot.onpointerdown = () => { hold2 = window.setTimeout(() => { unequipTool(i); refreshHotbar(); }, 550); };
-      slot.onpointerup = slot.onpointerleave = () => clearTimeout(hold2);
-      slot.oncontextmenu = e => { e.preventDefault(); unequipTool(i); refreshHotbar(); };
-      bar!.append(slot);
-      return;
-    }
     const t = TOOLS[tid];
     if (t) {
       slot.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 32)));
@@ -362,6 +347,12 @@ export function refreshHotbar() {
       slot.onpointerdown = () => { hold = window.setTimeout(() => { unequipTool(i); toast(`Đã gỡ ${t.name}.`, 'hoe'); }, 550); };
       slot.onpointerup = slot.onpointerleave = () => clearTimeout(hold);
       slot.oncontextmenu = e => { e.preventDefault(); unequipTool(i); toast(`Đã gỡ ${t.name}.`, 'hoe'); };
+    } else if (i === ROD_SLOT) {
+      // ô cuối để dành cho cần câu — chưa mua thì cứ để trống
+      slot.classList.add('empty', 'hb-rod');
+      slot.append(spr(TOOLS.rod.url, 0, 0, TOOLS.rod.w, TOOLS.rod.h, toolIconSize(TOOLS.rod, 30)));
+      slot.title = 'Ô cần câu — mua cần ở tiệm câu Ông Biển';
+      slot.onclick = () => { sfx.click(); toast('Ô này dành cho cần câu — mua cần ở tiệm câu Ông Biển nhé.', 'rod'); };
     } else {
       // ô trống: mở túi đồ — nông cụ mua về nằm trong túi, bấm món đồ để gắn
       slot.classList.add('empty');
