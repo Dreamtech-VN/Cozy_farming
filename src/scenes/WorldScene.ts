@@ -24,14 +24,19 @@ import { INSECTS, type InsectDef } from '@/data/insects';
 import { sfx } from '@/core/audio';
 
 const T = 16; // kích thước tile
-// ---- Nông trại HD (nền imagemap Avatar 1008x506) — tọa độ px ----
-const FARM_PLOT = { ox: 84, oy: 218, pw: 42, ph: 45 };            // lưới ruộng 8x6
-const FARM_POND_TILES = { x: 36, y: 5, w: 24, h: 10 };            // hồ cá lát tile (Pack2)
-const KHE_POS = { x: 480, y: 160 };                               // cây khế
-const WAREHOUSE_POS = { x: 320, y: 175 };                         // nhà kho
-const PETHOUSE_POS = { x: 648, y: 198 };                          // nhà thú cưng (chỉ hiện khi đã nuôi)
+// ---- Nông trại (nền = imageMap 25 gốc Avatar, 2032x528) — tọa độ px ----
+// Nhà bếp, nhà kho, sân rào nuôi thú, hồ cá và đường đất đã được vẽ sẵn trong
+// nền nên ở đây chỉ cần khai báo đúng vị trí của chúng để logic bám theo.
+const FARM_PLOT = { ox: 1075, oy: 190, pw: 42, ph: 45 };          // lưới ruộng 10x4 trên bãi cỏ phải
+const FARM_POND_TILES = { x: 110, y: 16, w: 12, h: 12 };          // lòng hồ cá (phủ nước động lên trên)
+const WAREHOUSE_POS = { x: 700, y: 200 };                         // nhà kho vẽ sẵn
+const PETHOUSE_POS = { x: 730, y: 320 };                          // nhà thú cưng (chỉ hiện khi đã nuôi)
 const PETSHOP_POS = { x: 21 * T, y: 13 * T };                     // tiệm thú cưng (Thành phố)
-const BARN_RECT = { x: 41, y: 21, w: 12, h: 8 };                  // chuồng rào (dưới hồ cá) — khớp pen.png 192x128
+const BARN_RECT = { x: 5.1, y: 11.6, w: 17.4, h: 10.8 };          // sân rào vẽ sẵn (px 82..360 / 185..358)
+const FREE_YARD = { x: 27, y: 18, w: 9, h: 5 };                   // bãi cỏ thả thú 2 chân (tile)
+// gốc cây vẽ sẵn trên hàng rào — mốc để chặt gỗ / rung khế
+const CHOP_POS: [number, number][] = [[404, 182], [1290, 182]];
+const KHE_POS = { x: 1650, y: 182 };
 const FARM_ORIGIN = { x: Math.round(FARM_PLOT.ox / T), y: Math.round(FARM_PLOT.oy / T) };
 const ROAD_TILES = 4; // đường xe chạy chiếm 4 hàng tile dưới cùng (map cổng)
 
@@ -44,13 +49,9 @@ const TRAFFIC_KEYS = ['veh_bus', 'veh_truck_orange', 'veh_camper_pink', 'veh_cam
 
 // Decor đặt sẵn theo khu (sprite thật từ asset pack) — toạ độ tile, origin đáy giữa
 const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number }[]> = {
-  farm: [
-    // nông trại chỉ gồm: nhà bếp, nhà kho, chuồng thú, nhà chó (+ cây khế, ao cá)
-    { key: 'lt_kitchen', x: 8.75, y: 12.6, s: 1 },     // nhà bếp (cửa vào nhà riêng)
-    { key: 'lt_warehouse', x: 20, y: 12.7, s: 1 },     // nhà kho — mở kho đồ
-    { key: 'lt_barn', x: 35, y: 26, s: 0.9 },          // nhà chuồng (bên trái chuồng rào)
-    { key: 'lt_tree', x: 30, y: 10, s: 1 }             // cây khế
-  ],
+  // Nông trại không đặt thêm công trình nào: nhà bếp, nhà kho, sân rào, hồ cá
+  // và cây cối đều nằm sẵn trong ảnh nền map 25 -> không thể chồng lên nhau.
+  farm: [],
   beach: [
     { key: 'bld_fishshop', x: 10, y: 7 },    // tiệm câu ông Biển
     { key: 'bld_beachbar', x: 22, y: 12 },
@@ -68,12 +69,8 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     { key: 'lt_love_tree', x: 50, y: 22, s: 1 }      // cây tình yêu
   ],
   // map cổng: cây + đèn + ghế dọc vỉa hè
-  farm_gate: [
-    { key: 'deco_tree_round', x: 6, y: 8 }, { key: 'deco_tree_round2', x: 34, y: 8 },
-    { key: 'deco_scarecrow', x: 27, y: 7 }, { key: 'deco_barrel', x: 30, y: 7 },
-    { key: 'deco_lamp_black', x: 10, y: 11 }, { key: 'deco_lamp_black', x: 30, y: 11 },
-    { key: 'deco_flower_pot', x: 16, y: 11 }, { key: 'deco_flower_pot', x: 24, y: 11 }
-  ],
+  // cổng nông trại cũng dùng ảnh nền gốc (biển FARM, cửa hàng, cây) -> để trống
+  farm_gate: [],
   town_gate: [
     { key: 'bld_cafe', x: 7, y: 8, s: 0.9 }, { key: 'bld_pub', x: 34, y: 8, s: 0.9 },
     { key: 'deco_lamp_black', x: 13, y: 11 }, { key: 'deco_lamp_black', x: 27, y: 11 },
@@ -163,7 +160,6 @@ export class WorldScene extends Phaser.Scene {
     this.spawnNpcs();
     if (this.zone.features.includes('farm')) this.buildFarm();
     if (this.zone.features.includes('barn')) this.buildBarn();
-    if (this.zone.id === 'farm') this.buildPaths();
     if (this.zone.features.includes('insects')) this.spawnInsects();
     if (this.zone.id === 'farm') this.spawnChopTrees();
     if (this.zone.id === 'farm') this.buildPetHouse();
@@ -367,7 +363,7 @@ export class WorldScene extends Phaser.Scene {
       if (this.zone.features.includes('trees')) {
         for (let i = 0; i < 4; i++) {
           const x = Math.floor(rnd() * (w - 6)) + 3, y = Math.floor(rnd() * (h - 8)) + 3;
-          if (this.zone.features.includes('farm') && x > FARM_ORIGIN.x - 2 && x < FARM_ORIGIN.x + 18 && y > FARM_ORIGIN.y - 2 && y < FARM_ORIGIN.y + 14) continue;
+          if (this.zone.features.includes('farm')) continue;   // nông trại dùng nền vẽ sẵn, không rải thêm cây
           if (this.zone.features.includes('barn') && x > BARN_RECT.x - 2 && x < BARN_RECT.x + BARN_RECT.w + 2 && y > BARN_RECT.y - 2 && y < BARN_RECT.y + BARN_RECT.h + 2) continue;
           if (this.nearWaterTile(x, y)) continue;
           const kind = Math.floor(rnd() * 3);
@@ -379,7 +375,7 @@ export class WorldScene extends Phaser.Scene {
       if (ground === 'grass' && (this.zone.features.includes('flowers') || this.zone.features.includes('trees'))) {
         for (let i = 0; i < 16; i++) {
           const x = Math.floor(rnd() * (w - 4)) + 2, y = Math.floor(rnd() * (h - 6)) + 3;
-          if (this.zone.features.includes('farm') && x > FARM_ORIGIN.x - 1 && x < FARM_ORIGIN.x + 17 && y > FARM_ORIGIN.y - 1 && y < FARM_ORIGIN.y + 13) continue;
+          if (this.zone.features.includes('farm')) continue;   // nông trại dùng nền vẽ sẵn, không rải thêm hoa
           if (this.zone.features.includes('barn') && x > BARN_RECT.x - 1 && x < BARN_RECT.x + BARN_RECT.w + 1 && y > BARN_RECT.y - 1 && y < BARN_RECT.y + BARN_RECT.h + 1) continue;
           if (this.nearWaterTile(x, y)) continue;
           this.add.image(x * T, y * T, 'pond_deco', 7 + Math.floor(rnd() * 9)).setDepth(-49);
@@ -430,11 +426,14 @@ export class WorldScene extends Phaser.Scene {
   }
 
   // ================= đường xe & trạm buýt (khu ngoài trời) =================
+  private roadTiles(): number {
+    return this.zone.roadTiles ?? ROAD_TILES;
+  }
   private roadTopY(): number {
-    return (this.zone.h - ROAD_TILES) * T;
+    return (this.zone.h - this.roadTiles()) * T;
   }
   private roadMidY(): number {
-    return (this.zone.h - ROAD_TILES / 2) * T;
+    return (this.zone.h - this.roadTiles() / 2) * T;
   }
   private roadWidth(): number {
     return this.zone.w * T;
@@ -446,23 +445,25 @@ export class WorldScene extends Phaser.Scene {
   private drawRoad() {
     if (!this.zone.road) return;
     const top = this.roadTopY(), w = this.roadWidth(), zh = this.zone.h * T;
-    const g = this.add.graphics().setDepth(-85);
-    // vỉa hè
-    g.fillStyle(0xcfc3ae); g.fillRect(0, top - 6, w, 6);
-    // mặt đường
-    g.fillStyle(0x5b6068); g.fillRect(0, top, w, zh - top);
-    // vạch kẻ giữa
-    g.fillStyle(0xe8e8e8);
-    for (let x = 6; x < w - 20; x += 40) g.fillRect(x, top + (zh - top) / 2 - 1, 22, 3);
+    // map cổng có ảnh nền gốc (đã vẽ sẵn đường đất) thì khỏi vẽ nhựa + vỉa hè
+    if (!this.zone.bg) {
+      const g = this.add.graphics().setDepth(-85);
+      g.fillStyle(0xcfc3ae); g.fillRect(0, top - 6, w, 6);            // vỉa hè
+      g.fillStyle(0x5b6068); g.fillRect(0, top, w, zh - top);         // mặt đường
+      g.fillStyle(0xe8e8e8);                                          // vạch kẻ giữa
+      for (let x = 6; x < w - 20; x += 40) g.fillRect(x, top + (zh - top) / 2 - 1, 22, 3);
+    }
     // nhà chờ xe buýt Avatar (repo Lttt)
     const sx = this.busStopX();
-    this.add.image(sx, top - 2, 'lt_shelter').setOrigin(0.5, 1).setDepth(top - 40).setScale(0.6);
+    // nền ảnh gốc: đường đất rộng hơn -> đẩy nhà chờ hẳn xuống mặt đường
+    const sy = this.zone.bg ? top + 22 : top - 2;
+    this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setDepth(sy - 40).setScale(0.6);
     // xe riêng đậu mép đường
     if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
       this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(1.1);
     }
 
-    this.drawGateArch();
+    if (!this.zone.bg) this.drawGateArch();   // ảnh nền gốc đã có cổng chào riêng
     this.startTraffic();
   }
 
@@ -501,7 +502,9 @@ export class WorldScene extends Phaser.Scene {
       const toRight = Math.random() < 0.5;
       const top = this.roadTopY(), zh = this.zone.h * T;
       // 2 làn: làn trên chạy sang trái, làn dưới chạy sang phải
-      const laneY = toRight ? top + (zh - top) * 0.72 : top + (zh - top) * 0.3;
+      const laneY = this.zone.bg
+        ? top + (zh - top) * (toRight ? 0.55 : 0.18)
+        : top + (zh - top) * (toRight ? 0.72 : 0.3);
       const w = this.zone.w * T;
       const car = this.add.image(toRight ? -120 : w + 120, laneY, key)
         .setDepth(laneY).setScale(1.05).setFlipX(!toRight);
@@ -719,49 +722,13 @@ export class WorldScene extends Phaser.Scene {
   }
 
   // ================= ruộng =================
-  // ================= hồ cá lát tile (nước động + bờ đất của Pack2) =================
+  // Hồ cá đã được vẽ sẵn trong nền map 25 (có bờ gỗ, lá súng). Ở đây chỉ phủ
+  // thêm 2 lớp tile nước động của Pack2 lên đúng lòng hồ cho mặt nước gợn sóng.
   private buildTilePond() {
     const R = FARM_POND_TILES;
-    const water = new Set<string>();
-    for (let y = 0; y < R.h; y++) {
-      for (let x = 0; x < R.w; x++) {
-        // bo 4 góc cho hồ đỡ vuông
-        const cx = Math.min(x, R.w - 1 - x), cy = Math.min(y, R.h - 1 - y);
-        if (cx + cy < 2) continue;
-        water.add(`${R.x + x},${R.y + y}`);
-      }
-    }
-    // bờ đất quanh hồ (dùng autotile đất của Pack2)
-    const bank = new Set<string>();
-    for (const k of water) {
-      const [x, y] = k.split(',').map(Number);
-      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
-        const n = `${x + dx},${y + dy}`;
-        if (!water.has(n)) bank.add(n);
-      }
-    }
-    for (const k of bank) {
-      const [x, y] = k.split(',').map(Number);
-      const up = bank.has(`${x},${y - 1}`) || water.has(`${x},${y - 1}`);
-      const dn = bank.has(`${x},${y + 1}`) || water.has(`${x},${y + 1}`);
-      const lf = bank.has(`${x - 1},${y}`) || water.has(`${x - 1},${y}`);
-      const rt = bank.has(`${x + 1},${y}`) || water.has(`${x + 1},${y}`);
-      const col = lf && rt ? 1 : lf ? 2 : rt ? 0 : 1;
-      const row = up && dn ? 1 : up ? 2 : dn ? 0 : 1;
-      this.add.image(x * T, y * T, 'path', row * 3 + col).setOrigin(0).setDepth(-84);
-    }
-    // mặt nước: 2 lớp tile động, cắt đúng hình hồ
-    const g = this.make.graphics({}, false);
-    g.fillStyle(0xffffff);
-    for (const k of water) {
-      const [x, y] = k.split(',').map(Number);
-      g.fillRect(x * T, y * T, T, T);
-    }
-    const mask = g.createGeometryMask();
     const bx = R.x * T, by = R.y * T, bw = R.w * T, bh = R.h * T;
-    this.add.rectangle(bx, by, bw, bh, 0x27688f).setOrigin(0).setDepth(-83).setMask(mask);
-    const w1 = this.add.tileSprite(bx, by, bw, bh, 'pwater1', 0).setOrigin(0).setDepth(-82).setMask(mask).setAlpha(0.85);
-    const w2 = this.add.tileSprite(bx, by, bw, bh, 'pwater3', 0).setOrigin(0).setDepth(-81).setMask(mask).setAlpha(0.28);
+    const w1 = this.add.tileSprite(bx, by, bw, bh, 'pwater1', 0).setOrigin(0).setDepth(-82).setAlpha(0.3);
+    const w2 = this.add.tileSprite(bx, by, bw, bh, 'pwater3', 0).setOrigin(0).setDepth(-81).setAlpha(0.14);
     let fr = 0;
     this.time.addEvent({
       delay: 220, loop: true, callback: () => {
@@ -770,60 +737,9 @@ export class WorldScene extends Phaser.Scene {
       }
     });
     this.tweens.add({ targets: w2, tilePositionX: 32, duration: 9000, repeat: -1 });
-    // vùng nước dùng cho câu cá / chặn đi lại
-    this.pondEllipse = new Phaser.Geom.Ellipse(bx + bw / 2, by + bh / 2, bw * 0.98, bh * 0.98);
-    // rải đá quanh bờ hồ
-    let rs = 7;
-    const rnd = () => (rs = (rs * 9301 + 49297) % 233280) / 233280;
-    for (const k of bank) {
-      const [x, y] = k.split(',').map(Number);
-      if (rnd() > 0.32) continue;
-      this.add.image(x * T + 8, y * T + 10, 'rocks', Math.floor(rnd() * 6))
-        .setOrigin(0.5, 0.7).setScale(1.15).setDepth(y * T + 6);
-    }
-    this.add.text(bx + bw / 2, by - 12, 'Hồ cá', {
+    this.add.text(bx + bw / 2, by - 14, 'Hồ cá', {
       fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 }
     }).setOrigin(0.5).setDepth(2);
-  }
-
-  // ================= đường đi trong nông trại =================
-  private buildPaths() {
-    const tiles = new Set<string>();
-    const addRect = (x0: number, y0: number, x1: number, y1: number) => {
-      for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) tiles.add(`${x},${y}`);
-    };
-    addRect(6, 13, 27, 13);      // đường ngang trước dãy nhà
-    addRect(28, 13, 29, 30);     // đường dọc giữa ruộng và chuồng/hồ
-    addRect(6, 29, 47, 30);      // đường ngang dưới ruộng, chạy tới cổng chuồng thú
-    addRect(31, 30, 32, 31);     // nối ra cổng nông trại
-
-    // né ruộng
-    const p0 = FARM_ORIGIN;
-    const px1 = p0.x + Math.ceil(farming.FARM_COLS * FARM_PLOT.pw / T);
-    const py1 = p0.y + Math.ceil(farming.FARM_ROWS * FARM_PLOT.ph / T);
-    // né chuồng rào và hồ cá
-    const B = BARN_RECT, W = FARM_POND_TILES;
-    const blocked = (x: number, y: number) => {
-      if (x >= p0.x && x < px1 && y >= p0.y && y < py1) return true;
-      if (x >= B.x - 1 && x <= B.x + B.w && y >= B.y - 1 && y <= B.y + B.h - 1) return true;
-      if (x >= W.x - 2 && x <= W.x + W.w + 1 && y >= W.y - 2 && y <= W.y + W.h + 1) return true;
-      // né chân nhà cửa
-      const r = new Phaser.Geom.Rectangle(x * T, y * T, T, T);
-      return this.decorRects.some(d => Phaser.Geom.Intersects.RectangleToRectangle(d, r));
-    };
-    for (const k of [...tiles]) {
-      const [x, y] = k.split(',').map(Number);
-      if (blocked(x, y)) tiles.delete(k);
-    }
-
-    for (const key of tiles) {
-      const [x, y] = key.split(',').map(Number);
-      const up = tiles.has(`${x},${y - 1}`), down = tiles.has(`${x},${y + 1}`);
-      const left = tiles.has(`${x - 1},${y}`), right = tiles.has(`${x + 1},${y}`);
-      const col = left && right ? 1 : left ? 2 : right ? 0 : 1;
-      const row = up && down ? 1 : up ? 2 : down ? 0 : 1;
-      this.add.image(x * T, y * T, 'path', row * 3 + col).setOrigin(0).setDepth(-95);
-    }
   }
 
   private buildFarm() {
@@ -904,11 +820,9 @@ export class WorldScene extends Phaser.Scene {
   private buildBarn() {
     const { x, y, w, h } = BARN_RECT;
     const lvl = S.livestock.barnLevel;
-    // hàng rào Avatar: 1 ảnh ghép sẵn (assets/lttt/pen.png)
-    this.add.image(x * T, y * T, 'pen').setOrigin(0, 0).setDepth((y + h) * T - 6);
-
-    // chặn 4 cạnh, chừa cổng ở giữa cạnh dưới
-    const gx = (x + w * 0.5) * T, gw = w * T * 0.25;
+    // Sân rào đã vẽ sẵn trong nền map 25 -> chỉ dựng va chạm theo đúng hàng rào,
+    // chừa lỗ hổng cổng ở giữa cạnh dưới.
+    const gx = (x + w * 0.5) * T, gw = w * T * 0.32;
     this.obstacles.push(new Phaser.Geom.Rectangle(x * T, y * T - 4, w * T, 10));
     this.obstacles.push(new Phaser.Geom.Rectangle(x * T - 4, y * T, 10, h * T));
     this.obstacles.push(new Phaser.Geom.Rectangle((x + w) * T - 6, y * T, 10, h * T));
@@ -916,8 +830,8 @@ export class WorldScene extends Phaser.Scene {
     this.obstacles.push(new Phaser.Geom.Rectangle(gx + gw / 2, (y + h) * T - 4, (x + w) * T - (gx + gw / 2), 10));
 
     // máng thức ăn: 1 trong chuồng, 1 ngoài sân cho thú 2 chân
-    this.penTrough = { x: (x + 2) * T, y: (y + 1.9) * T };
-    this.freeTrough = { x: (x - 3.4) * T, y: (y + h + 1.4) * T };
+    this.penTrough = { x: (x + 3) * T, y: (y + h - 1.4) * T };
+    this.freeTrough = { x: (FREE_YARD.x + FREE_YARD.w / 2) * T, y: (FREE_YARD.y + FREE_YARD.h - 0.6) * T };
     const tsc = this.zone.bg ? 0.8 : 0.45;
     this.troughImgs = [];
     for (const t of [this.penTrough, this.freeTrough]) {
@@ -926,7 +840,7 @@ export class WorldScene extends Phaser.Scene {
     }
 
     if (lvl > 0) {
-      this.add.text((x + w / 2) * T, (y - 0.6) * T, `Chuồng thú cấp ${lvl}`, {
+      this.add.text((x + w / 2) * T, (y + 0.7) * T, `Chuồng thú cấp ${lvl}`, {
         fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 }
       }).setOrigin(0.5).setDepth(3000);
     }
@@ -950,8 +864,8 @@ export class WorldScene extends Phaser.Scene {
       ax = (x + 1.5 + Math.random() * (w - 3)) * T;
       ay = (y + 2.4 + Math.random() * (h - 3.6)) * T;
     } else {
-      ax = (x - 5 + Math.random() * 5) * T;
-      ay = (y + h + 1 + Math.random() * 3) * T;
+      ax = (FREE_YARD.x + Math.random() * FREE_YARD.w) * T;
+      ay = (FREE_YARD.y + Math.random() * FREE_YARD.h) * T;
     }
     const spr = this.add.sprite(ax, ay, `animal_${type}`, 0).setDepth(ay).setScale(this.zone.bg ? 1.9 : 1);
     spr.setInteractive({ useHandCursor: true });
@@ -978,9 +892,9 @@ export class WorldScene extends Phaser.Scene {
         nx = Phaser.Math.Clamp(spr.x + (Math.random() * 40 - 20), (x + 1.5) * T, (x + w - 1.5) * T);
         ny = Phaser.Math.Clamp(spr.y + (Math.random() * 30 - 15), (y + 2.4) * T, (y + h - 1.2) * T);
       } else {
-        // thú 2 chân đi tự do quanh sân, tránh vào trong chuồng
-        nx = Phaser.Math.Clamp(spr.x + (Math.random() * 60 - 30), (x - 8) * T, (x + w + 6) * T);
-        ny = Phaser.Math.Clamp(spr.y + (Math.random() * 40 - 20), (y + h + 0.5) * T, (y + h + 5) * T);
+        // thú 2 chân đi tự do trên bãi cỏ cạnh sân rào, không lọt vào trong chuồng
+        nx = Phaser.Math.Clamp(spr.x + (Math.random() * 60 - 30), FREE_YARD.x * T, (FREE_YARD.x + FREE_YARD.w) * T);
+        ny = Phaser.Math.Clamp(spr.y + (Math.random() * 40 - 20), FREE_YARD.y * T, (FREE_YARD.y + FREE_YARD.h) * T);
       }
       this.tweens.add({ targets: spr, x: nx, y: ny, duration: eating ? 700 : 1200, onUpdate: () => spr.setDepth(spr.y) });
       if (a && livestock.hasProduct(a) && !spr.getData('mark')) {
@@ -1034,8 +948,10 @@ export class WorldScene extends Phaser.Scene {
         if (this.insects.length >= 5) return;
         const def = fishing.rollInsect(this.zone.id);
         if (!def) return;
-        const maxY = this.zone.road ? this.roadTopY() - 16 : this.zone.h * T;
-        const x = Math.random() * this.zone.w * T, y = Math.random() * maxY;
+        // chỉ bay trong vùng người chơi với tới được
+        const minY = (this.zone.walkTop ?? 0) * T + 16;
+        const maxY = this.zone.road ? this.roadTopY() - 16 : (this.zone.walkBottom ?? this.zone.h) * T;
+        const x = Math.random() * this.zone.w * T, y = minY + Math.random() * Math.max(32, maxY - minY);
         if (this.inWater(x, y)) return;
         // sprite côn trùng thật từ nature pack (fallback procedural nếu thiếu)
         const obj = this.textures.exists('nature')
@@ -1406,10 +1322,10 @@ export class WorldScene extends Phaser.Scene {
   private mounds: Phaser.GameObjects.Image[] = [];
 
   private spawnChopTrees() {
-    // 3 cây gỗ HD giữa nông trại (ngoài ruộng/chuồng/hồ)
-    for (const [px2, py2] of [[452, 502], [906, 462]] as [number, number][]) {
-      const obj = this.add.image(px2, py2, 'lt_tree').setOrigin(0.5, 1).setScale(0.72).setDepth(py2);
-      this.addFootprint(px2, py2, 46, 22);
+    // Không đặt thêm cây nào lên nông trại nữa: bám vào đúng mấy gốc cây đã vẽ
+    // sẵn trên hàng rào, mốc chặt gỗ là điểm vô hình ngay dưới tán.
+    for (const [px2, py2] of CHOP_POS) {
+      const obj = this.add.image(px2, py2, 'lt_tree').setVisible(false).setDepth(py2);
       this.chopTrees.push({ obj, readyAt: 0 });
     }
   }
@@ -1746,8 +1662,13 @@ export class WorldScene extends Phaser.Scene {
       const tx = 3 + Math.floor(Math.random() * (this.zone.w - 6));
       const ty = 4 + Math.floor(Math.random() * (this.zone.h - 8));
       if (this.zone.id === 'farm') {
-        if (tx > 3 && tx < 28 && ty > 12 && ty < 32) continue;                       // lưới ruộng
-        if (ty < 14) continue;                                                       // dãy nhà + chuồng
+        const p0 = FARM_ORIGIN;
+        if (tx > p0.x - 2 && tx < p0.x + farming.FARM_COLS * FARM_PLOT.pw / T + 2 &&
+            ty > p0.y - 2 && ty < p0.y + farming.FARM_ROWS * FARM_PLOT.ph / T + 2) continue;   // lưới ruộng
+        if (ty < 13 || ty > 27 || tx < 5 || tx > 121) continue;                      // ngoài vùng đi lại
+        if (tx > BARN_RECT.x - 2 && tx < BARN_RECT.x + BARN_RECT.w + 2 &&
+            ty < BARN_RECT.y + BARN_RECT.h + 2) continue;                            // sân rào nuôi thú
+        if (tx > 26 && tx < 49 && ty < 16) continue;                                 // nhà bếp + nhà kho
       }
       if (this.nearWaterTile(tx, ty)) continue;                                      // không mọc dưới nước
       const obj = this.add.image(tx * T, ty * T, 'mound').setDepth(ty * T - 8).setScale(this.zone.bg ? 1.9 : 1);

@@ -88,6 +88,26 @@ nếu muốn chặt chẽ, nên chuyển pack sang repo riêng tư hoặc build 
 
 Lấy từ https://github.com/thanhtinz/Lttt (client/unity/Assets/Resources/hd):
 world map (`minimap.png`), ô ruộng `cell0-7` + biển `buyLand`.
+
+### Nền map nông trại + cổng nông trại (`assets/lttt/maps/`)
+
+Bản unity trong repo chỉ kèm **mảnh đầu tiên** của mỗi imagemap, còn bản APK
+(`client/android/Avatar-PGaming.apk`, giải nén ra `assets/hd/imageMap/<id>/*.png`)
+có đủ các mảnh. Ghép các mảnh theo thứ tự số, canh mép **dưới**:
+
+| Map | Mảnh | Cỡ sau khi ghép | Dùng cho |
+|-----|------|-----------------|----------|
+| 25  | 6    | 2030x520        | `farmbg.png` — Nông trại |
+| 26  | 3    | 1302x466        | `farmgate.png` — Cổng Nông trại |
+
+Script ghép: `scripts/build_farm_maps.py` (sửa biến `APK` trỏ tới thư mục đã
+giải nén rồi chạy) — ghép mảnh xong kéo dài pixel mép cho khớp cỡ zone
+(2032x528 và 1312x464).
+
+Hai map này đã vẽ sẵn **nhà bếp, nhà kho, sân rào nuôi thú, hồ cá, đường đất,
+hàng rào và cây cối**, nên trong code không đặt thêm sprite công trình nào lên
+nông trại nữa — chỉ khai báo toạ độ để logic (ruộng, chuồng, câu cá) bám theo.
+Nhờ vậy không còn cảnh đường đi/nhà/ruộng đè lên nhau.
 ⚠️ **Lưu ý bản quyền:** bộ này trông giống resource của game Avatar (TeaMobi) gốc —
 nếu đúng vậy thì chỉ nên dùng để dev/test; bản phát hành thương mại cần thay bằng
 asset tự vẽ hoặc có quyền sử dụng.

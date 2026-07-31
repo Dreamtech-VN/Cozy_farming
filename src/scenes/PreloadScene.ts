@@ -44,9 +44,6 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('fx_heart', 'assets/animals/heart.png');
     this.load.image('fx_star', 'assets/ui/pack/icon_level.png');
     this.load.image('fx_drop', 'assets/ui/act/tool_can.png');
-    this.load.image('pen', 'assets/pack2/pen.png');
-    this.load.spritesheet('path', 'assets/pack2/path.png', { frameWidth: 16, frameHeight: 16 });
-    this.load.spritesheet('rocks', 'assets/pack2/rocks.png', { frameWidth: 16, frameHeight: 16 });
     this.load.image('trough', 'assets/lttt/trough.png');
     this.load.image('trough_full', 'assets/lttt/trough_full.png');
     this.load.image('av_water', 'assets/farm/av_water.png');
@@ -76,7 +73,7 @@ export class PreloadScene extends Phaser.Scene {
     }
 
     // ---- Nền map Avatar (repo Lttt) ----
-    for (const m of ['4', '10', '15', '22', '24', '101', 'farmbg']) {
+    for (const m of ['4', '10', '15', '22', '24', '101', 'farmbg', 'farmgate']) {
       this.load.image(`bg_${m}`, `assets/lttt/maps/${m}.png`);
     }
     // ---- Decor Avatar (repo Lttt) ----

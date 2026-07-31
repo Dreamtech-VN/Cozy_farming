@@ -7,8 +7,8 @@ import { CROPS } from '@/data/crops';
 import { sfx } from '@/core/audio';
 import type { Plot } from '@/core/types';
 
-export const FARM_COLS = 8;
-export const FARM_ROWS = 5;   // tối đa 8 x 5 = 40 ô đất
+export const FARM_COLS = 10;
+export const FARM_ROWS = 4;   // tối đa 10 x 4 = 40 ô đất
 export const MAX_PLOTS = FARM_COLS * FARM_ROWS;
 export const PLOT_PRICE_BASE = 200;      // giá mua thêm 1 ô đất, tăng dần
 

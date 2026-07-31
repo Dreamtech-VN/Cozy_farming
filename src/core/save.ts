@@ -44,7 +44,7 @@ export function defaultState(): GameState {
     garage: [],
     vehicle: '',
     settings: { music: true, sfx: true },
-    zone: 'farm',
+    zone: 'farm_gate',
     clockOffset: 0
   };
 }

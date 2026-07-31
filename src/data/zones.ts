@@ -24,6 +24,7 @@ export interface ZoneDef {
   features: ('farm' | 'barn' | 'fishing' | 'insects' | 'house_door' | 'trees' | 'flowers' | 'water_edge')[];
   indoor?: boolean;
   road?: boolean;          // map cổng: có đường xe chạy + trạm buýt ở mép dưới
+  roadTiles?: number;      // bề cao dải đường xe (hàng tile), mặc định 4
   gate?: string;           // zone cổng phục vụ khu này (đi xe buýt phải qua đây)
   gateTo?: string;         // (zone cổng) map chính mà cổng dẫn vào
   bg?: string;             // nền ảnh (assets/lttt/maps/<bg>.png) thay cho nền procedural
@@ -45,22 +46,30 @@ function gateZone(id: string, name: string, icon: string, to: string, ground: Gr
 }
 
 export const ZONES: Record<string, ZoneDef> = {
-  farm_gate: gateZone('farm_gate', 'Nông trại', '', 'farm', 'grass'),
+  // Cổng nông trại: nền là map 26 gốc Avatar (biển FARM + cửa hàng + đường đất)
+  farm_gate: {
+    ...gateZone('farm_gate', 'Nông trại', '', 'farm', 'grass'),
+    w: 82, h: 29, bg: 'farmgate', walkTop: 11, walkBottom: 26, roadTiles: 10,
+    spawn: { x: 26, y: 16 },
+    portals: [{ x: 26, y: 11, to: 'farm', label: 'Vào Nông trại', icon: '' }]
+  },
   town_gate: gateZone('town_gate', 'Thành phố', '', 'town', 'stone'),
   beach_gate: gateZone('beach_gate', 'Bãi biển', '', 'beach', 'sand'),
   park_gate: gateZone('park_gate', 'Công viên', '', 'park', 'grass'),
   pond_gate: gateZone('pond_gate', 'Hồ câu', '', 'pond', 'grass'),
   farm: {
-    // map HD dựng từ imagemap Avatar (map 7 đã vá chữ) + nhà/hồ/cây HD Avatar
-    id: 'farm', name: 'Nông trại', icon: '', w: 63, h: 32, ground: 'grass',
-    spawn: { x: 31, y: 15 }, gate: 'farm_gate',
-    bg: 'farmbg', walkTop: 7, walkBottom: 29,
+    // Nền là map 25 gốc Avatar (ghép đủ 6 mảnh): nhà bếp, nhà kho, sân rào
+    // nuôi thú, hồ cá và đường đất đều đã vẽ sẵn nên không chồng lên nhau.
+    id: 'farm', name: 'Nông trại', icon: '', w: 127, h: 33, ground: 'grass',
+    spawn: { x: 34, y: 25 }, gate: 'farm_gate',
+    bg: 'farmbg', walkTop: 11, walkBottom: 28,
+    water: [{ x: 110, y: 16, w: 12, h: 12 }],   // hồ cá vẽ sẵn ở góc phải
     portals: [
-      { x: 9, y: 13, to: 'house', label: 'Nhà bếp', icon: '' },
-      { x: 31, y: 29, to: 'farm_gate', label: 'Ra cổng', icon: '' }
+      { x: 33, y: 15, to: 'house', label: 'Nhà bếp', icon: '' },
+      { x: 28, y: 27, to: 'farm_gate', label: 'Ra cổng', icon: '' }
     ],
     npcs: [
-      { id: 'npc_mai', name: 'Cô Mai', x: 15, y: 14, charIndex: 5, gender: 2, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
+      { id: 'npc_mai', name: 'Cô Mai', x: 24, y: 16, charIndex: 5, gender: 2, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
     ],
     features: ['farm', 'barn', 'fishing', 'insects']
   },
