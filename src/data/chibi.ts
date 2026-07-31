@@ -115,6 +115,65 @@ export function lookLayers(l: ChibiLook): number[] {
   return out;
 }
 
+// ===== Chỉ số trang bị (kiểu Avatar/Lttt) =====
+// Quần(10), Áo(20), Mắt(40), Tóc(50), Mũ(60), Kính(65) tăng chỉ số.
+// Đồ cầm tay(70) và Skin KHÔNG tăng chỉ số.
+import type { CharStats, StatKey } from '@/core/types';
+
+const STAT_LAYERS = new Set([10, 20, 40, 50, 60, 65]);
+const STAT_KEYS: StatKey[] = ['health', 'intellect', 'strength', 'agility', 'charm'];
+
+// Mỗi z-layer thiên về 1-2 chỉ số chính
+const Z_BIAS: Record<number, StatKey[]> = {
+  10: ['agility', 'strength'],    // quần → nhanh nhẹn, sức mạnh
+  20: ['strength', 'health'],     // áo → sức mạnh, sức khỏe
+  40: ['charm', 'intellect'],     // mắt → quyến rũ, trí tuệ
+  50: ['charm', 'agility'],       // tóc → quyến rũ, nhanh nhẹn
+  60: ['health', 'intellect'],    // mũ → sức khỏe, trí tuệ
+  65: ['intellect', 'charm'],     // kính → trí tuệ, quyến rũ
+};
+
+export function partStats(p: ChibiPartDef): CharStats | null {
+  if (!STAT_LAYERS.has(p.z)) return null;
+  const tier = p.level <= 0 ? 1 : Math.min(p.level, 10);
+  const price = p.gold > 0 ? p.gold * 50 : p.coin;
+  const priceTier = price <= 1000 ? 0 : price <= 5000 ? 1 : price <= 20000 ? 2 : 3;
+  const base = tier + priceTier;
+  const bias = Z_BIAS[p.z] || ['charm'];
+  const stats: CharStats = { health: 0, intellect: 0, strength: 0, agility: 0, charm: 0 };
+  // chỉ số chính
+  stats[bias[0]] = base + 1;
+  if (bias[1]) stats[bias[1]] = base;
+  // chỉ số phụ: dùng id part để phân phối đều
+  const rest = STAT_KEYS.filter(k => !bias.includes(k));
+  for (let i = 0; i < rest.length; i++) {
+    stats[rest[i]] = Math.max(0, Math.floor(base * 0.4) + ((p.id + i) % 2));
+  }
+  return stats;
+}
+
+export function equipStats(look: ChibiLook): CharStats {
+  const total: CharStats = { health: 0, intellect: 0, strength: 0, agility: 0, charm: 0 };
+  if (look.skin) return total; // skin không cộng chỉ số
+  const slots = [look.pant, look.shirt, look.eyes, look.hair, look.hat, look.glasses];
+  for (const pid of slots) {
+    if (!pid) continue;
+    const p = CHIBI_PARTS[pid];
+    if (!p) continue;
+    const s = partStats(p);
+    if (!s) continue;
+    for (const k of STAT_KEYS) total[k] += s[k];
+  }
+  return total;
+}
+
+export function formatStats(s: CharStats): string[] {
+  const names: Record<StatKey, string> = {
+    health: 'SK', intellect: 'TT', strength: 'SM', agility: 'NN', charm: 'QR'
+  };
+  return STAT_KEYS.filter(k => s[k] > 0).map(k => `${names[k]}+${s[k]}`);
+}
+
 // ===== Biểu cảm (part mắt Avatar) =====
 // Dùng khi diễn hành động: khóc khi bị đá, xấu hổ khi được hôn, vui khi được ôm...
 export const FACE = {

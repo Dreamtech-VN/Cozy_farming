@@ -7,7 +7,7 @@ import { CROPS, CROP_LIST } from '@/data/crops';
 import { ANIMAL_LIST, ANIMALS, BARN_CAPACITY, BARN_UPGRADE_COST } from '@/data/animals';
 import { FISH_LIST, RODS, RARITY_COLOR, RARITY_NAME, FISHES } from '@/data/fish';
 import { INSECT_LIST, NETS, INSECTS } from '@/data/insects';
-import { chibiList, chibiPriceXu, chibiPriceRuby, CHIBI_PARTS } from '@/data/chibi';
+import { chibiList, chibiPriceXu, chibiPriceRuby, CHIBI_PARTS, partStats, equipStats, formatStats } from '@/data/chibi';
 import { handItemId } from '@/data/handitems';
 import { SKIN_LIST, SKINS, type SkinDef } from '@/data/skins';
 import { FURNITURE, FURNITURE_LIST, HOUSE_LEVELS, WALLPAPERS, FLOORS } from '@/data/furniture';
@@ -443,7 +443,10 @@ export function registerAllPanels() {
         else prEl.innerHTML = ruby > 0 ? priceHtml(0, ruby) : priceHtml(xu);
         const art = h('div', 'cell-art');
         art.append(chibiPreview(p.id, 74));
-        cell.append(art, h('div', 'nm', p.name), prEl);
+        const ps = partStats(p);
+        cell.append(art, h('div', 'nm', p.name));
+        if (ps) cell.append(h('div', 'wd-stats', formatStats(ps).join(' ')));
+        cell.append(prEl);
         // bấm vào để xem thử trước khi mua
         cell.onclick = () => openPanel('tryon', { part: p, z, isHand, owned, onDone: render });
         grid.append(cell);
@@ -491,6 +494,8 @@ export function registerAllPanels() {
         const on = cur === p.id;
         const cell = h('button', `wd-item ${on ? 'active' : ''}`);
         cell.append(chibiHead(p.id, 40, cfg.z), h('div', 'nm', partLabel(cfg.z, p.name)));
+        const ps = partStats(p);
+        if (ps) cell.append(h('div', 'wd-stats', formatStats(ps).join(' ')));
         const xu = chibiPriceXu(p), ruby = chibiPriceRuby(p);
         const pr = h('div', 'pr');
         if (on) pr.textContent = 'Đang dùng';
@@ -586,9 +591,11 @@ export function registerAllPanels() {
     body.append(wrap);
 
     const info = h('div', 'tryon-info');
+    const ps = partStats(p);
+    const statsLine = ps ? ` · ${formatStats(ps).join(' ')}` : '';
     info.innerHTML = owned && !isHand
-      ? '<b>Bạn đã sở hữu món này</b>'
-      : `Giá: ${ruby > 0 ? priceHtml(0, ruby) : priceHtml(xu)}`;
+      ? `<b>Bạn đã sở hữu món này</b>${statsLine}`
+      : `Giá: ${ruby > 0 ? priceHtml(0, ruby) : priceHtml(xu)}${statsLine}`;
     body.append(info);
 
     const bar = h('div');
@@ -885,9 +892,9 @@ export function registerAllPanels() {
         body.append(info);
 
         const cs = S.player.charStats;
-        const totalPts = STAT_KEYS.reduce((s, k) => s + cs[k], 0);
+        const eq = S.player.chibi ? equipStats(S.player.chibi) : { health: 0, intellect: 0, strength: 0, agility: 0, charm: 0 } as import('@/core/types').CharStats;
         const statHead = h('div', 'pf-stat-head');
-        statHead.innerHTML = `<span class="t1">Chỉ số nhân vật</span><span class="t2">Tổng: ${totalPts}</span>`;
+        statHead.innerHTML = `<span class="t1">Chỉ số nhân vật</span>`;
         if (S.player.statPoints > 0) {
           const badge = h('span', 'pf-sp-badge', `${S.player.statPoints} điểm`);
           statHead.append(badge);
@@ -898,12 +905,15 @@ export function registerAllPanels() {
           statGrid.innerHTML = '';
           for (const key of STAT_KEYS) {
             const row = h('div', 'pf-stat-row');
-            const val = cs[key];
+            const base = cs[key];
+            const bonus = eq[key];
+            const total = base + bonus;
             const maxBar = 100;
-            const pct = Math.min(val / maxBar * 100, 100);
+            const basePct = Math.min(base / maxBar * 100, 100);
+            const totalPct = Math.min(total / maxBar * 100, 100);
             row.innerHTML = `<div class="pf-stat-name">${STAT_NAMES[key]}</div>` +
-              `<div class="pf-stat-bar"><div class="pf-stat-fill" style="width:${pct}%"></div></div>` +
-              `<div class="pf-stat-val">${val}</div>`;
+              `<div class="pf-stat-bar"><div class="pf-stat-fill pf-eq" style="width:${totalPct}%"></div><div class="pf-stat-fill pf-base" style="width:${basePct}%"></div></div>` +
+              `<div class="pf-stat-val">${total}${bonus > 0 ? `<span class="pf-bonus">(+${bonus})</span>` : ''}</div>`;
             if (S.player.statPoints > 0) {
               const plus = h('button', 'pf-stat-plus', '+');
               plus.onclick = () => {
@@ -1285,7 +1295,11 @@ export function registerAllPanels() {
         const on = cur === p.id;
         const cell = h('button', `wd-item ${on ? 'active' : ''}`);
         cell.append(z <= 20 || z === 70 ? chibiPreview(p.id, 44) : chibiHead(p.id, 40, z), h('div', 'nm', p.name));
-        // món tuỳ chọn (mũ/kính/đồ cầm tay): bấm lại để cởi ra, ô trống = không dùng
+        const ps = partStats(p);
+        if (ps) {
+          const tag = h('div', 'wd-stats', formatStats(ps).join(' '));
+          cell.append(tag);
+        }
         cell.onclick = () => { (look as any)[pk] = on && optional ? 0 : p.id; apply(); render(); };
         grid.append(cell); cells++;
       }
