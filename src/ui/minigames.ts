@@ -310,20 +310,35 @@ export function registerMinigames() {
 
 // ===== Form tạo nhân vật chibi =====
 import { bus, EV } from '@/core/events';
-import { chibiPreview, chibiHead, charFace } from './kit';
-import { defaultLook, simplestList, FACE } from '@/data/chibi';
+import { chibiPreview, charFace, charHeadOnly } from './kit';
+import { defaultLook, simplestList, chibiList, FACE } from '@/data/chibi';
 
 function buildCharCreate(body: HTMLElement, done: () => void) {
   if (!S.player.chibi) S.player.chibi = defaultLook(1);
   const look = S.player.chibi;
   const emit = () => bus.emit(EV.APPEARANCE);
 
-  // --- Trên cùng: preview + giới tính + biểu cảm ---
+  // --- Tên nhân vật: trên cùng ---
+  const nameInput = h('input', 'ui-input cc-input') as HTMLInputElement;
+  nameInput.placeholder = 'Nhập tên...';
+  nameInput.maxLength = 12;
+  nameInput.onkeydown = e => e.stopPropagation();
+  body.append(h('div', 'cc-mini-label', 'Tên nhân vật'), nameInput);
+
+  // --- preview + giới tính + biểu cảm ---
   const topArea = h('div', 'cc-top');
 
-  // preview nhân vật
+  // preview nhân vật + 2 nút xoay trái/phải
+  const previewWrap = h('div', 'cc-preview-wrap');
   const preview = h('div', 'cc-preview');
-  topArea.append(preview);
+  let faceLeft = false;                       // art chỉ có 1 hướng -> lật ngang
+  const turnL = h('button', 'cc-turn cc-turn-l');
+  const turnR = h('button', 'cc-turn cc-turn-r');
+  turnL.title = 'Quay sang trái'; turnR.title = 'Quay sang phải';
+  turnL.onclick = () => { faceLeft = true; refreshPreview(); };
+  turnR.onclick = () => { faceLeft = false; refreshPreview(); };
+  previewWrap.append(turnL, preview, turnR);
+  topArea.append(previewWrap);
 
   // giới tính nằm cạnh preview
   const sideInfo = h('div', 'cc-side');
@@ -350,7 +365,7 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
     exprRow.innerHTML = '';
     for (const [id, lbl] of EXPRS) {
       const c = h('div', `cc-expr ${look.eyes === id ? 'active' : ''}`);
-      c.append(chibiHead(id, 28, 40));
+      c.append(charHeadOnly({ ...look, eyes: id }, 30));
       c.title = lbl;
       c.onclick = () => { look.eyes = id; emit(); rebuild(); };
       exprRow.append(c);
@@ -358,20 +373,13 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   };
   sideInfo.append(h('div', 'cc-mini-label', 'Biểu cảm'), exprRow);
 
-  // tên nhân vật
-  const nameInput = h('input', 'ui-input cc-input') as HTMLInputElement;
-  nameInput.placeholder = 'Nhập tên...';
-  nameInput.maxLength = 12;
-  nameInput.onkeydown = e => e.stopPropagation();
-  sideInfo.append(h('div', 'cc-mini-label', 'Tên'), nameInput);
-
   topArea.append(sideInfo);
   body.append(topArea);
 
   // --- Tabs: Tóc / Trang phục ---
   const tabBar = h('div', 'cc-tabs');
   const tabContent = h('div', 'cc-tab-content');
-  const TABS = ['Tóc', 'Trang phục'];
+  const TABS = ['Tóc', 'Mắt', 'Trang phục'];
   let activeTab = 0;
   const tabBtns: HTMLElement[] = [];
   for (let i = 0; i < TABS.length; i++) {
@@ -395,11 +403,15 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   foot.append(startBtn);
   body.parentElement?.append(foot);
 
-  const refreshPreview = () => {
+  function refreshPreview() {
     preview.innerHTML = '';
     const face = charFace(look, 100);
+    // sprite chỉ vẽ 1 hướng -> lật ngang giống lúc chạy trong game (setFlipX)
+    face.style.transform = faceLeft ? 'scaleX(-1)' : '';
     preview.append(face);
-  };
+    turnL.classList.toggle('active', faceLeft);
+    turnR.classList.toggle('active', !faceLeft);
+  }
 
   const rebuildTabs = () => {
     tabContent.innerHTML = '';
@@ -411,6 +423,17 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
         const c = h('div', `cc-opt cc-opt-icon ${look.hair === p.id ? 'active' : ''}`);
         c.append(chibiPreview(p.id, 38), h('span', 'cc-opt-name', p.name));
         c.onclick = () => { look.hair = p.id; emit(); rebuild(); };
+        chips.append(c);
+      }
+    } else if (activeTab === 1) {
+      // màu mắt (bỏ các part "Mat ..." vì đó là biểu cảm, đã có hàng riêng ở trên)
+      const eyeOpts = chibiList(40, look.gender)
+        .filter(p => p.level === 0 && p.gold <= 0 && !/^mat\s/i.test(p.name))
+        .slice(0, 6);
+      for (const p of eyeOpts) {
+        const c = h('div', `cc-opt cc-opt-icon ${look.eyes === p.id ? 'active' : ''}`);
+        c.append(charHeadOnly({ ...look, eyes: p.id }, 32), h('span', 'cc-opt-name', p.name));
+        c.onclick = () => { look.eyes = p.id; emit(); rebuild(); };
         chips.append(c);
       }
     } else {

@@ -33,9 +33,9 @@ img { image-rendering: auto; }
   justify-content: space-between; align-items: flex-start; gap: 8px;
 }
 .hud-profile {
-  display: flex; align-items: center; gap: 8px; cursor: pointer; color: #4a3520;
+  display: flex; align-items: center; gap: 9px; cursor: pointer; color: #4a3520;
   border-image: url('/assets/ui/pack/label.png') 30 fill / 14px stretch;
-  padding: 6px 16px 8px 8px; min-height: 48px;
+  padding: 6px 18px 8px 16px; min-height: 48px;
 }
 .hud-avatar {
   width: 42px; height: 42px; border-radius: 50%; background: #f6edd8;
@@ -232,6 +232,30 @@ img { image-rendering: auto; }
 .progress > div { height: 100%; background: linear-gradient(#8ce16a, #4fa32e); border-radius: 7px; }
 
 /* Chỉ số nhân vật */
+/* Ảnh đại diện trong hồ sơ + nút đổi */
+.pf-face-box { display: flex; flex-direction: column; align-items: center; gap: 5px; flex: none; }
+.pf-face-box > div:first-child {
+  border-radius: 50%; background: #f6edd8; border: 2px solid #b5836b; overflow: hidden;
+}
+.pf-ava-btn {
+  font-size: 10px; font-weight: 800; color: #4a3520; cursor: pointer; white-space: nowrap;
+  padding: 4px 9px 5px; border: 2px solid #b5836b; border-radius: 7px;
+  background: linear-gradient(#fff3d6, #ffe3ae); font-family: inherit;
+}
+.pf-ava-btn:active { transform: scale(.94); }
+
+/* Lưới chọn ảnh đại diện */
+.ava-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px;
+}
+.ava-cell {
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  border: 2px solid #b5836b; border-radius: 50%; background: #f6edd8;
+  aspect-ratio: 1; overflow: hidden; transition: transform .1s;
+}
+.ava-cell.active { border-color: #e8890c; box-shadow: 0 0 0 3px #ffd43b66; }
+.ava-cell:active { transform: scale(.93); }
+
 .pf-stat-head {
   display: flex; align-items: center; gap: 8px; margin: 12px 0 6px;
   padding-bottom: 5px; border-bottom: 2px solid rgba(181, 131, 107, .25);
@@ -365,7 +389,9 @@ img { image-rendering: auto; }
 
 /* Tạo nhân vật */
 .cc-panel {
-  position: absolute; right: 0; top: 22px; bottom: 10px; width: min(460px, 52vw);
+  /* cao theo nội dung + căn giữa dọc, tránh khoảng trống thừa phía dưới */
+  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  width: min(460px, 52vw); max-height: 94vh;
   border-image: url('/assets/ui/pack/frame2.png') 70 fill / 18px stretch;
   display: flex; flex-direction: column; color: #4a3520; overflow: visible;
   padding-right: env(safe-area-inset-right, 0);
@@ -381,18 +407,35 @@ img { image-rendering: auto; }
   box-shadow: 0 3px 0 #00000022, inset 0 2px 0 #fff8e8;
   color: #5b3a1c; font-size: 18px; font-weight: 900;
 }
-.cc-body { flex: 1; min-height: 0; overflow-y: auto; padding: 6px 12px 4px; }
+.cc-body { flex: 0 1 auto; min-height: 0; overflow-y: auto; padding: 6px 12px 4px; }
+/* vùng chọn có chiều cao tối thiểu để đổi tab không nhảy khung */
+.cc-tab-content { min-height: 104px; }
 .cc-foot { flex: none; padding: 4px 16px 10px; text-align: center; }
 .cc-start {
   padding: 10px 40px; font-size: 15px; display: inline-block; width: auto;
 }
 /* Top area: preview + side info */
 .cc-top { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; }
+.cc-preview-wrap { flex: none; display: flex; align-items: center; gap: 3px; }
 .cc-preview {
   flex: none; width: 72px; height: 100px;
   background: rgba(181,131,107,.12); border-radius: 10px; border: 2px solid rgba(181,131,107,.25);
   display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
+/* 2 nút xoay nhân vật trái/phải */
+.cc-turn {
+  flex: none; width: 22px; height: 34px; cursor: pointer; padding: 0;
+  border: 2px solid #b5836b; border-radius: 7px; background: #f6edd8;
+  position: relative; transition: transform .1s, background .15s;
+}
+.cc-turn::before {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 7px; height: 7px;
+  border-top: 3px solid #7a5a3a; border-left: 3px solid #7a5a3a;
+}
+.cc-turn-l::before { transform: translate(-40%, -50%) rotate(-45deg); }
+.cc-turn-r::before { transform: translate(-60%, -50%) rotate(135deg); }
+.cc-turn.active { background: linear-gradient(#ffe066, #f0c040); border-color: #d4a020; }
+.cc-turn:active { transform: scale(.9); }
 .cc-side { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
 .cc-mini-label { font-size: 11px; font-weight: 900; color: #7a5a3a; margin-bottom: 2px; }
 .cc-gender-row { display: flex; gap: 6px; }

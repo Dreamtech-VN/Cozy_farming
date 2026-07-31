@@ -36,6 +36,7 @@ export interface PlayerProfile {
   exp: number;
   charStats: CharStats;    // chỉ số nhân vật kiểu Avatar
   statPoints: number;      // điểm chưa phân bổ
+  avatarFace?: number;     // part mắt riêng cho ảnh đại diện (0/undefined = theo nhân vật)
   title: string;            // danh hiệu đang dùng
   titles: string[];         // danh hiệu đã mở
   badges: string[];         // huy hiệu

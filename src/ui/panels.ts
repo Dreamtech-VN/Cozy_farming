@@ -1,5 +1,5 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charHeadOnly, avatarLook, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
 import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem, unequipTool, allocateStat, STAT_NAMES, STAT_KEYS } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
@@ -888,7 +888,12 @@ export function registerAllPanels() {
           </div></div>
           <div class="progress"><div style="width:${Math.round(S.player.exp / (S.player.level * 100) * 100)}%"></div></div>`;
         (info.querySelector('#pf-name') as HTMLElement).textContent = S.player.name;
-        (info.querySelector('#pf-face') as HTMLElement).append(charFace(S.player.chibi, 56));
+        const faceBox = info.querySelector('#pf-face') as HTMLElement;
+        faceBox.className = 'pf-face-box';
+        faceBox.append(charHeadOnly(avatarLook(), 56));
+        const avaBtn = h('button', 'pf-ava-btn', 'Đổi ảnh đại diện');
+        avaBtn.onclick = () => { sfx.click(); openPanel('avatarpick'); };
+        faceBox.append(avaBtn);
         body.append(info);
 
         const cs = S.player.charStats;
@@ -954,6 +959,41 @@ export function registerAllPanels() {
   }
 
   registerPanel('profile', () => { const { body } = openWindow('Hồ sơ cá nhân'); renderCharInfo(body); });
+
+  // ===== Đổi ảnh đại diện: chọn biểu cảm hiển thị trên avatar =====
+  registerPanel('avatarpick', () => {
+    const { body, close } = openWindow('Đổi ảnh đại diện', { size: 'small' });
+    const look = S.player.chibi;
+    if (!look) { body.append(h('div', 'hint', 'Chưa có nhân vật.')); return; }
+    body.append(h('div', 'hint', 'Chọn biểu cảm cho ảnh đại diện của bạn.'));
+    const grid = h('div', 'ava-grid');
+    const opts = chibiList(40, look.gender).filter(p => p.level === 0 && p.gold <= 0).slice(0, 12);
+    const cur = S.player.avatarFace || look.eyes;
+    for (const p of opts) {
+      const cell = h('div', `ava-cell ${cur === p.id ? 'active' : ''}`);
+      cell.append(charHeadOnly({ ...look, eyes: p.id }, 52));
+      cell.title = p.name;
+      cell.onclick = () => {
+        S.player.avatarFace = p.id;
+        save(true); sfx.click();
+        bus.emit(EV.STATE_CHANGED);
+        toast('Đã đổi ảnh đại diện!', 'check');
+        close();
+      };
+      grid.append(cell);
+    }
+    body.append(grid);
+    const reset = btn('Dùng mặt mặc định', '', () => {
+      S.player.avatarFace = undefined;
+      save(true); sfx.click();
+      bus.emit(EV.STATE_CHANGED);
+      close();
+    });
+    const foot = h('div');
+    foot.style.cssText = 'display:flex;justify-content:center;margin-top:8px';
+    foot.append(reset);
+    body.append(foot);
+  });
   registerPanel('wardrobe', () => openCharHub('wardrobe'));
 
 

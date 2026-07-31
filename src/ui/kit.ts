@@ -1,4 +1,5 @@
 // Bộ công cụ dựng UI DOM nhỏ gọn
+import { S } from '@/core/save';
 import { lookLayers } from '@/data/chibi';
 import BBOX from '@/data/chibi-bbox.json';
 export function h<K extends keyof HTMLElementTagNameMap>(
@@ -321,11 +322,21 @@ export function charFace(look: import('@/data/chibi').ChibiLook | undefined, siz
   return wrap;
 }
 
+// Look dùng cho ảnh đại diện: giống nhân vật nhưng có thể đổi riêng biểu cảm
+export function avatarLook(): import('@/data/chibi').ChibiLook | undefined {
+  const c = S.player.chibi;
+  if (!c) return undefined;
+  const face = S.player.avatarFace;
+  return face ? { ...c, eyes: face } : c;
+}
+
 // Chỉ phần đầu chibi (tóc, mắt, kính, nón) — dùng cho HUD avatar
 export function charHeadOnly(look: import('@/data/chibi').ChibiLook | undefined, size = 40): HTMLElement {
   // ảnh part là strip 15 frame 64x96 -> phải cắt bằng spr() (scale + overflow),
   // không được set width trực tiếp lên <img> (sẽ bóp cả strip lại).
-  const SX = 8, SY = 16, SW = 48, SH = 50;   // vùng đầu: tóc y16..66, mắt y40..62
+  // bbox thật: tóc (10,18,48,50), mắt (22,46,44,56), thân (8,28,49,64)
+  // -> đầu nằm trong x8..49 (tâm 28.5), y18..62. Cắt vuông quanh tâm đó cho khung tròn.
+  const SX = 6, SY = 16, SW = 46, SH = 46;
   const w = Math.round(SW * size / SH);
   const wrap = h('div');
   wrap.style.cssText = `width:${w}px;height:${size}px;position:relative;overflow:hidden;`;
