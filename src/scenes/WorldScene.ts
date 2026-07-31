@@ -1725,10 +1725,16 @@ export class WorldScene extends Phaser.Scene {
 
   private spawnMound() {
     // vị trí ngẫu nhiên (chỉ dùng ở bãi biển — đào cát)
+    // Map nền Lttt lát đá hết phần dưới, chỉ có dải cỏ sát bờ là đào được nên
+    // ụ đất chỉ mọc trong dải cỏ đó, không nằm chỏng chơ giữa kè đá.
+    const gTop = this.zone.bg ? (this.zone.walkTop ?? 4) : 4;
+    const gBottom = this.zone.bg ? gTop + 1 : this.zone.h - 4;
     for (let tries = 0; tries < 40; tries++) {
       const tx = 3 + Math.floor(Math.random() * (this.zone.w - 6));
-      const ty = 4 + Math.floor(Math.random() * (this.zone.h - 8));
+      const ty = gTop + Math.floor(Math.random() * (gBottom - gTop + 1));
       if (this.nearWaterTile(tx, ty)) continue;                                      // không mọc dưới nước
+      if (this.spots.some(sp => sp.rect.contains(tx * T, ty * T))) continue;         // không đè lên công trình
+      if (this.mounds.some(m => Math.abs(m.x - tx * T) < 3 * T && Math.abs(m.y - ty * T) < 2 * T)) continue;
       const obj = this.add.image(tx * T, ty * T, 'mound').setOrigin(0.5, 0.85)
         .setDepth(ty * T - 8).setScale(this.zone.bg ? 1 : 0.55);
       // nhấp nháy nhẹ cho biết đây là chỗ đào được, không phải cục đất vô tri
