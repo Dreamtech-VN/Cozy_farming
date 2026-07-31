@@ -25,6 +25,7 @@ import { houseSize, partyActive } from '@/systems/housing';
 import { darkness, currentWeather, initTime, gameHour } from '@/systems/time';
 import { INSECTS, type InsectDef } from '@/data/insects';
 import { sfx, bgmForZone, setAmbient } from '@/core/audio';
+import { maybeSpawnVisitor } from '@/systems/orders';
 
 const T = 16; // kích thước tile
 // ---- Nông trại (nền = imageMap 25 gốc Avatar, 2032x528) — tọa độ px ----
@@ -265,12 +266,44 @@ export class WorldScene extends Phaser.Scene {
       bus.off('world:selfemote', this.onEmote, this);
     });
 
+    // khách ghé nông trại đặt hàng (kiểu Hay Day)
+    if (this.zone.id === 'farm') {
+      this.time.addEvent({ delay: 60_000, loop: true, callback: () => this.refreshVisitor() });
+      this.time.delayedCall(1500, () => this.refreshVisitor());
+    }
+
     initTimeOnce();
     // cảnh đã dựng xong -> gỡ màn chờ
     this.time.delayedCall(120, () => hideLoading());
   }
 
   private onModal(open: boolean) { this.input.enabled = !open; }
+
+  // ===== Khách ghé tận nông trại đặt hàng =====
+  private visitorSprite?: ChibiSprite;
+  private visitorLabel?: Phaser.GameObjects.Text;
+
+  private clearVisitor() {
+    this.visitorSprite?.destroy(); this.visitorSprite = undefined;
+    this.visitorLabel?.destroy(); this.visitorLabel = undefined;
+  }
+
+  private refreshVisitor() {
+    if (!this.scene.isActive() || this.zone.id !== 'farm') return;
+    const o = maybeSpawnVisitor();
+    if (!o) { this.clearVisitor(); return; }
+    if (this.visitorSprite) return;                 // đã đứng sẵn rồi
+    const x = WAREHOUSE_POS.x + 90, y = WAREHOUSE_POS.y + 60;
+    const look = defaultLook(Math.random() < 0.5 ? 1 : 2);
+    const spr = new ChibiSprite(this, x, y, look);
+    spr.setDepth(y).setScale(this.zone.bg ? 1 : 0.5);
+    spr.play('idle');
+    this.visitorSprite = spr;
+    this.visitorLabel = this.add.text(x, y - 62, `${o.place}\nĐang chờ hàng`, {
+      fontFamily: 'sans-serif', fontSize: '11px', color: '#fff8e8',
+      align: 'center', backgroundColor: '#2f7d32cc', padding: { x: 5, y: 2 }
+    }).setOrigin(0.5).setDepth(y + 1);
+  }
 
   // cầm nông cụ nào thì hiện đúng nông cụ đó trên tay nhân vật
   private onHeldTool() {
@@ -1314,6 +1347,11 @@ export class WorldScene extends Phaser.Scene {
       // nhà kho: kho nông trại riêng (hạt giống / nông sản / phân bón)
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, WAREHOUSE_POS.x, WAREHOUSE_POS.y + 40) < 80) {
         acts.push({ icon: '', ui: 'inventory', label: 'Mở nhà kho', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'warehouse' }) });
+      }
+      // khách đang chờ: mở bảng đơn hàng
+      if (this.visitorSprite && Phaser.Math.Distance.Between(
+        this.player.x, this.player.y, this.visitorSprite.x, this.visitorSprite.y) < 70) {
+        acts.push({ icon: '', ui: 'chat', label: 'Tiếp khách đặt hàng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'orders' }) });
       }
       // nhà bếp: nấu món từ nông sản trong kho
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, KITCHEN_POS.x, KITCHEN_POS.y + 40) < 80) {

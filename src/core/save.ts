@@ -32,6 +32,7 @@ export function defaultState(): GameState {
     tools: { rod: 0, can: 1, hoe: 1, net: 0, basket: 0, axe: 1, shovel: 1 },
     farm: { unlocked: 6, plots: [] },
     farmStore: { seeds: { carrot: 5 }, produce: {}, fert: {} },
+    orders: [],
     livestock: { barnLevel: 0, animals: [] },
     house: { owned: false, level: 0, wallpaper: 0, floor: 0, furniture: [], aquarium: [] },
     collections: { fish: [], insects: [], crops: [] },
@@ -152,6 +153,7 @@ export function load(): boolean {
     // save cũ để hạt/nông sản/phân trong túi -> chuyển sang kho nông trại
     if (!S.farmStore) S.farmStore = { seeds: {}, produce: {}, fert: {} };
     migrateBagToStore();
+    if (!S.orders) S.orders = [];
     return true;
   } catch {
     return false;

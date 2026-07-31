@@ -2,6 +2,7 @@ import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
 import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
 import { AVATAR_PICS, avatarPicUrl, isUploadedPic } from '@/data/avatars';
 import { FOODS, FOOD_LIST } from '@/data/foods';
+import { orderList, canDeliver, deliver, dropOrder, haveOf, orderName, orderIconCrop } from '@/systems/orders';
 import { countOf, takeFrom, listOf, type StoreKind } from '@/systems/farmstore';
 import { cookingFood, cookRemain, canCook, startCook, collectCook, cancelCook } from '@/systems/cooking';
 import { S, save, spend, addCoins, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem, unequipTool, allocateStat, STAT_NAMES, STAT_KEYS } from '@/core/save';
@@ -257,6 +258,69 @@ export function registerAllPanels() {
       body.append(btn('Mở tiệm hạt giống', 'gold', () => { close(); openPanel('shop', { shopId: 'shop_seed' }); }));
     }
     body.append(grid);
+  });
+
+  // ================= Bảng đơn hàng (kiểu Hay Day) =================
+  registerPanel('orders', () => {
+    const { body, win } = openWindow('Đơn hàng', { size: 'large' });
+    win.classList.add('win-orders');
+    let sel = '';
+
+    const wrap = h('div', 'od-wrap');
+    const boardCol = h('div', 'od-board');
+    const sideCol = h('div', 'od-side');
+    wrap.append(boardCol, sideCol);
+    body.append(wrap);
+
+    const lineRow = (l: { id: string; qty: number }) => {
+      const have = haveOf(l);
+      const cell = h('div', `od-ing ${have >= l.qty ? 'ok' : 'miss'}`);
+      cell.append(iconOf(item(`crop_${orderIconCrop(l.id)}`)));
+      cell.append(h('div', 'od-ing-n', `${have}/${l.qty}`));
+      cell.title = orderName(l.id);
+      return cell;
+    };
+
+    const renderSide = () => {
+      sideCol.innerHTML = '';
+      const o = orderList().find(x => x.id === sel);
+      if (!o) { sideCol.append(h('div', 'hint', 'Chọn một đơn bên trái để xem chi tiết.')); return; }
+      sideCol.append(h('div', 'od-side-title', o.place));
+      if (o.visitor) sideCol.append(h('div', 'od-visit', 'Khách ghé tận nông trại — thưởng cao hơn!'));
+      const pay = h('div', 'od-pay');
+      pay.append(uiIcon('coin', 20), h('span', '', fmt(o.coins)), uiIcon('level', 20), h('span', '', `${o.exp}`));
+      sideCol.append(pay);
+      const ing = h('div', 'od-ings');
+      for (const l of o.lines) ing.append(lineRow(l));
+      sideCol.append(ing);
+      const ok = canDeliver(o);
+      const bar = h('div', 'od-actions');
+      bar.append(btn(ok ? 'Giao hàng' : 'Chưa đủ hàng', ok ? 'gold' : '', () => {
+        if (deliver(o.id)) { sel = ''; render(); }
+      }));
+      bar.append(btn('Bỏ đơn', '', () => { if (dropOrder(o.id)) { sel = ''; render(); } }));
+      sideCol.append(bar);
+    };
+
+    const render = () => {
+      boardCol.innerHTML = '';
+      for (const o of orderList()) {
+        const ok = canDeliver(o);
+        const note = h('div', `od-note ${sel === o.id ? 'sel' : ''} ${o.visitor ? 'visit' : ''}`);
+        note.append(h('div', 'od-place', o.place));
+        const row = h('div', 'od-note-pay');
+        row.append(uiIcon('coin', 16), h('span', '', fmt(o.coins)));
+        note.append(row);
+        const row2 = h('div', 'od-note-pay');
+        row2.append(uiIcon('level', 16), h('span', '', `${o.exp}`));
+        if (ok) row2.append(h('span', 'od-tick', '✔'));
+        note.append(row2);
+        note.onclick = () => { sfx.click(); sel = o.id; render(); };
+        boardCol.append(note);
+      }
+      renderSide();
+    };
+    render();
   });
 
   // ================= Kho nông trại (Lttt: tách khỏi túi đồ) =================

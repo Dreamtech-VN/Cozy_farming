@@ -151,6 +151,7 @@ export interface GameState {
   farm: { unlocked: number; plots: Plot[]; hasDog?: boolean };  // hasDog: (cũ) chó giữ trại
   farmStore: FarmStore;     // kho nông trại — nông sản KHÔNG nằm trong túi đồ
   cooking?: CookState;      // món đang nấu ở nhà bếp
+  orders: import('@/systems/orders').Order[];   // bảng đơn hàng kiểu Hay Day
   pets: string[];           // thú cưng đã nuôi
   skins: string[];          // skin trọn bộ đã sở hữu
   activePet?: string;       // thú cưng đang dắt theo
