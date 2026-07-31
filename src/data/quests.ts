@@ -54,17 +54,19 @@ q({ id: 'a_level10', name: 'Thăng tiến', desc: 'Đạt cấp 10.', stat: 'lev
 export const ACHIEVEMENTS = Object.values(QUESTS).filter(x => x.type === 'achievement');
 
 // ---- Danh hiệu ----
-export const TITLES: Record<string, { name: string; color: string }> = {
-  title_newbie: { name: 'Tân binh', color: '#9aa5b1' },
-  title_homeowner: { name: 'Chủ nhà', color: '#74c0fc' },
-  title_farmer: { name: 'Nông dân chăm chỉ', color: '#8ce99a' },
-  title_farm_king: { name: 'Vua nông trại', color: '#ffd43b' },
-  title_angler: { name: 'Cần thủ', color: '#66d9e8' },
-  title_fish_master: { name: 'Bậc thầy câu cá', color: '#3bc9db' },
-  title_bug_hunter: { name: 'Thợ săn côn trùng', color: '#b197fc' },
-  title_millionaire: { name: 'Triệu phú', color: '#ffa94d' },
-  title_social: { name: 'Quảng giao', color: '#faa2c1' },
-  title_party: { name: 'Chủ tiệc', color: '#ff8787' },
-  title_caro: { name: 'Kỳ thủ caro', color: '#a9e34b' },
-  title_veteran: { name: 'Lão làng', color: '#e599f7' }
+// Danh hiệu: source = nhận từ đâu, how = điều kiện cụ thể
+export interface TitleDef { name: string; color: string; source: string; how: string }
+export const TITLES: Record<string, TitleDef> = {
+  title_newbie: { name: 'Tân binh', color: '#9aa5b1', source: 'Mặc định', how: 'Có sẵn khi tạo nhân vật.' },
+  title_homeowner: { name: 'Chủ nhà', color: '#74c0fc', source: 'Nhiệm vụ', how: 'Hoàn thành nhiệm vụ "An cư lạc nghiệp" — mua nhà riêng ở Thành phố.' },
+  title_farmer: { name: 'Nông dân chăm chỉ', color: '#8ce99a', source: 'Thành tựu', how: 'Thu hoạch 100 nông sản.' },
+  title_farm_king: { name: 'Vua nông trại', color: '#ffd43b', source: 'Thành tựu', how: 'Thu hoạch 1000 nông sản.' },
+  title_angler: { name: 'Cần thủ', color: '#66d9e8', source: 'Thành tựu', how: 'Câu được 50 con cá.' },
+  title_fish_master: { name: 'Bậc thầy câu cá', color: '#3bc9db', source: 'Thành tựu', how: 'Sưu tập đủ 30 loài cá.' },
+  title_bug_hunter: { name: 'Thợ săn côn trùng', color: '#b197fc', source: 'Thành tựu', how: 'Bắt 30 côn trùng.' },
+  title_millionaire: { name: 'Triệu phú', color: '#ffa94d', source: 'Thành tựu', how: 'Kiếm được tổng cộng 100.000 xu.' },
+  title_social: { name: 'Quảng giao', color: '#faa2c1', source: 'Thành tựu', how: 'Kết bạn với 5 người chơi.' },
+  title_party: { name: 'Chủ tiệc', color: '#ff8787', source: 'Thành tựu', how: 'Tổ chức 1 bữa tiệc tại nhà.' },
+  title_caro: { name: 'Kỳ thủ caro', color: '#a9e34b', source: 'Minigame', how: 'Thắng 10 ván cờ caro ở Game Center.' },
+  title_veteran: { name: 'Lão làng', color: '#e599f7', source: 'Cấp độ', how: 'Đạt cấp 10.' }
 };

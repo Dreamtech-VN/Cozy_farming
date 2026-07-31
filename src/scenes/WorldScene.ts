@@ -13,6 +13,8 @@ import { defaultLook, starterList, EYES_ID } from '@/data/chibi';
 type Dir = 0 | 1 | 2 | 3;
 import { virtualInput, consumeAction } from '@/core/input';
 import { RES } from '@/core/res';
+import { TITLES } from '@/data/quests';
+import { titleCanvas } from '@/ui/kit';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import * as fishing from '@/systems/fishing';
@@ -176,6 +178,7 @@ export class WorldScene extends Phaser.Scene {
 
     // chạm vào chính mình -> bảng thao tác cá nhân
     this.attachTapZone(this.player, () => bus.emit(EV.OPEN_PANEL, { panel: 'selfmenu' }));
+    this.buildTitleTag();
 
     this.spawnPet();
     this.spawnRoamers();
@@ -217,6 +220,7 @@ export class WorldScene extends Phaser.Scene {
 
     bus.emit(EV.ZONE, this.zone);
     bus.on(EV.APPEARANCE, this.onAppearance, this);
+    bus.on(EV.STATE_CHANGED, this.refreshTitleTag, this);
     bus.on(EV.HOUSE, this.onHouseChanged, this);
     bus.on('world:place', this.startPlacing, this);
     bus.on('world:emote', this.onEmote, this);
@@ -227,6 +231,7 @@ export class WorldScene extends Phaser.Scene {
     bus.on('world:selfemote', this.onEmote, this);
     this.events.on('shutdown', () => {
       bus.off(EV.APPEARANCE, this.onAppearance, this);
+      bus.off(EV.STATE_CHANGED, this.refreshTitleTag, this);
       bus.off(EV.HOUSE, this.onHouseChanged, this);
       bus.off('world:place', this.startPlacing, this);
       bus.off('world:emote', this.onEmote, this);
@@ -241,6 +246,32 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private onAppearance() { if (S.player.chibi) this.player.setLook(S.player.chibi); }
+
+  // ===== bảng danh hiệu (ảnh) trên đầu nhân vật =====
+  private titleTag?: Phaser.GameObjects.Image;
+  private titleKey = '';
+  private buildTitleTag() {
+    const id = S.player.title;
+    const t = TITLES[id];
+    if (!t) { this.titleTag?.destroy(); this.titleTag = undefined; return; }
+    const key = `ttl_${id}`;
+    if (!this.textures.exists(key)) {
+      this.textures.addCanvas(key, titleCanvas(t.name, t.color, 2) as HTMLCanvasElement);
+    }
+    this.titleKey = key;
+    this.titleTag?.destroy();
+    this.titleTag = this.add.image(this.player.x, 0, key).setOrigin(0.5, 1).setDepth(9000)
+      .setScale(this.zone.bg ? 0.5 : 0.32);
+  }
+  private refreshTitleTag() {
+    if (this.titleKey !== `ttl_${S.player.title}`) this.buildTitleTag();
+  }
+  private updateTitleTag() {
+    if (!this.titleTag) return;
+    const head = this.zone.bg ? 80 : 46;
+    this.titleTag.setPosition(this.player.x, this.player.y - head);
+    this.titleTag.setDepth(this.player.y + 1);
+  }
   private onEmote(i: number) { this.player.showEmote(i); }
 
   // bong bóng chat trên đầu nhân vật khi nhắn Tổng/Gần
@@ -1775,6 +1806,7 @@ export class WorldScene extends Phaser.Scene {
     }
     // depth theo trục y để đứng sau/trước nhà cửa đúng lớp
     this.player.setDepth(this.player.y);
+    this.updateTitleTag();
     this.player.tick(dt);
     this.followPet(dt);
     for (const { sprite } of this.npcs) sprite.tick(dt);

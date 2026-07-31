@@ -168,6 +168,48 @@ const ICON_SRC: Record<string, string> = {
   act_pat: 'assets/ui/act/act_pat.png'
 };
 
+// ===== Bảng danh hiệu (vẽ thành ảnh, dùng chung cho UI và trên đầu nhân vật) =====
+export function titleCanvas(name: string, color: string, scale = 1): HTMLCanvasElement {
+  const cv = document.createElement('canvas');
+  const ctx = cv.getContext('2d')!;
+  const font = `bold ${11 * scale}px "Segoe UI", system-ui, sans-serif`;
+  ctx.font = font;
+  const tw = ctx.measureText(name).width;
+  const padX = 12 * scale, w = Math.ceil(tw + padX * 2), hgt = Math.round(19 * scale);
+  cv.width = w; cv.height = hgt;
+  const c = cv.getContext('2d')!;
+  c.font = font; c.textAlign = 'center'; c.textBaseline = 'middle';
+  // nền
+  const g = c.createLinearGradient(0, 0, 0, hgt);
+  g.addColorStop(0, '#4a3418'); g.addColorStop(1, '#2b1d0c');
+  const r = 6 * scale;
+  c.beginPath();
+  c.moveTo(r, 0); c.lineTo(w - r, 0); c.quadraticCurveTo(w, 0, w, r);
+  c.lineTo(w, hgt - r); c.quadraticCurveTo(w, hgt, w - r, hgt);
+  c.lineTo(r, hgt); c.quadraticCurveTo(0, hgt, 0, hgt - r);
+  c.lineTo(0, r); c.quadraticCurveTo(0, 0, r, 0); c.closePath();
+  c.fillStyle = g; c.fill();
+  c.lineWidth = Math.max(1, scale); c.strokeStyle = '#d3a13c'; c.stroke();
+  // hai viên ngọc hai đầu
+  c.fillStyle = '#ffd97a';
+  for (const x of [padX * 0.45, w - padX * 0.45]) {
+    c.beginPath(); c.arc(x, hgt / 2, 2.2 * scale, 0, Math.PI * 2); c.fill();
+  }
+  // chữ
+  c.fillStyle = 'rgba(0,0,0,.55)';
+  c.fillText(name, w / 2, hgt / 2 + Math.max(1, scale));
+  c.fillStyle = color;
+  c.fillText(name, w / 2, hgt / 2);
+  return cv;
+}
+
+// bản dùng trong DOM
+export function titlePlaque(name: string, color: string, scale = 1): HTMLElement {
+  const cv = titleCanvas(name, color, scale);
+  cv.style.cssText = 'display:block;image-rendering:auto';
+  return cv;
+}
+
 // đường dẫn ảnh của 1 tên icon (dùng khi cần vẽ lên canvas)
 export function iconUrl(name: string): string {
   return ICON_SRC[name] ?? `assets/ui/av/${name}.png`;

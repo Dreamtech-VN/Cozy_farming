@@ -1,5 +1,5 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, uiIcon, priceHtml, priceBtn, iconUrl } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
 import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem, unequipTool } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
@@ -782,29 +782,57 @@ export function registerAllPanels() {
   }
 
   function renderTitles(box: HTMLElement, redraw: () => void) {
-    box.append(h('div', 'hint', 'Bấm vào danh hiệu đã mở để đeo — ô đang đeo có dấu tick. Danh hiệu xám là chưa mở.'));
+    box.append(h('div', 'hint', 'Bấm vào một danh hiệu để xem chi tiết và đeo lên. Danh hiệu xám là chưa mở khoá.'));
     const card = h('div', 'wd-card');
     const grid = h('div', 'title-grid');
     for (const id of Object.keys(TITLES)) {
+      const t = TITLES[id];
       const owned = S.player.titles.includes(id);
       const on = S.player.title === id;
-      const c = h('button', `title-cell ${on ? 'active' : ''} ${owned ? '' : 'locked'}`);
-      const nm = h('div', 'tt-name'); nm.textContent = `【${TITLES[id].name}】`;
-      nm.style.color = TITLES[id].color;
-      c.append(nm, h('div', 'tt-sub', owned ? (on ? 'Đang đeo' : 'Đã mở') : 'Chưa mở'));
+      const c = h('button', `title-row ${on ? 'active' : ''} ${owned ? '' : 'locked'}`);
+      const src = h('div', 'tt-src', t.source);
+      const mid = h('div', 'tt-mid');
+      const nm = h('div', 'tt-name'); nm.textContent = `【${t.name}】`;
+      nm.style.color = owned ? t.color : '#9b8a72';
+      mid.append(nm, h('div', 'tt-how', t.how));
       const tick = h('div', 'tt-tick');
-      if (on) tick.append(uiIcon('check', 16));
-      c.append(tick);
-      c.onclick = () => {
-        sfx.click();
-        if (!owned) { toast('Danh hiệu này chưa mở khoá.', 'alert'); return; }
-        S.player.title = on ? S.player.title : id;
-        save(); bus.emit(EV.STATE_CHANGED); redraw();
-      };
+      if (on) tick.append(uiIcon('check', 18));
+      c.append(src, mid, tick);
+      c.onclick = () => { sfx.click(); openTitleDetail(id, redraw); };
       grid.append(c);
     }
     card.append(grid);
     box.append(card);
+  }
+
+  // chi tiết 1 danh hiệu: xem trước dạng ảnh (như hiện trên đầu nhân vật) + nút đeo
+  function openTitleDetail(id: string, redraw: () => void) {
+    const t = TITLES[id];
+    const owned = S.player.titles.includes(id);
+    const on = S.player.title === id;
+    const { body, close } = openWindow('Danh hiệu', { size: 'small' });
+
+    const prev = h('div', 'tt-prev');
+    prev.append(titlePlaque(t.name, t.color, 2));
+    body.append(prev);
+    body.append(h('div', 'tt-prev-cap', 'Hiển thị trên đầu nhân vật'));
+
+    const info = h('div', 'tt-detail');
+    info.innerHTML = `<div class="row"><div class="grow t2">Nguồn</div><div class="t1">${t.source}</div></div>` +
+      `<div class="row"><div class="grow t2">Điều kiện</div></div>` +
+      `<div class="t1 tt-how-full"></div>` +
+      `<div class="row"><div class="grow t2">Trạng thái</div><div class="t1">${owned ? (on ? 'Đang đeo' : 'Đã mở khoá') : 'Chưa mở khoá'}</div></div>`;
+    (info.querySelector('.tt-how-full') as HTMLElement).textContent = t.how;
+    body.append(info);
+
+    const bar = h('div'); bar.style.cssText = 'display:flex;gap:8px;justify-content:center;margin-top:10px';
+    if (!owned) bar.append(btn('Chưa mở khoá', '', undefined));
+    else if (on) bar.append(btn('Đang đeo', '', undefined));
+    else bar.append(btn('Đeo danh hiệu', 'gold', () => {
+      S.player.title = id; save(); bus.emit(EV.STATE_CHANGED); close(); redraw();
+      toast(`Đã đeo danh hiệu 【${t.name}】`, 'rank');
+    }));
+    body.append(bar);
   }
 
   let openCharHubRefresh: () => void = () => {};
