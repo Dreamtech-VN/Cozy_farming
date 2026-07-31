@@ -60,12 +60,26 @@ NAMES.forEach(([name, rarity, price, zones], i) => {
 
 export const FISH_LIST = Object.values(FISHES);
 
-// Cần câu
-export const RODS = [
-  { tier: 1, name: 'Cần trúc', price: 200, icon: '🎣', bonus: 0 },
-  { tier: 2, name: 'Cần sợi thủy tinh', price: 1500, icon: '🎣', bonus: 0.1 },
-  { tier: 3, name: 'Cần vàng', price: 8000, icon: '🎣', bonus: 0.25 }
+// Cần câu — 3 bậc lấy đúng theo Lttt (bảng items: 442 tre / 445 sắt / 446 VIP).
+// `part` là id part chibi Avatar: mua cần là có luôn hình cầm tay trong tủ đồ.
+// Icon riêng từng bậc nằm chung sheet assets/fishing/rods.png (3 ô 16x16).
+export const ROD_SHEET = 'assets/fishing/rods.png';
+
+export interface RodDef {
+  tier: number; name: string; price: number; bonus: number; part: number;
+}
+
+export const RODS: RodDef[] = [
+  { tier: 1, name: 'Cần câu tre', price: 200, bonus: 0, part: 442 },
+  { tier: 2, name: 'Cần câu sắt', price: 1500, bonus: 0.1, part: 445 },
+  { tier: 3, name: 'Cần câu VIP', price: 8000, bonus: 0.25, part: 446 }
 ];
+
+// ô icon của bậc cần (tier 0 = chưa có cần thì lấy tạm ô cần tre)
+export function rodIconRect(tier: number) {
+  const i = Math.min(Math.max(tier, 1), RODS.length) - 1;
+  return { url: ROD_SHEET, sx: i * 16, sy: 0, sw: 16, sh: 16 };
+}
 
 export const RARITY_COLOR: Record<FishRarity, string> = {
   common: '#9aa5b1', rare: '#4dabf7', epic: '#b197fc', legendary: '#ffd43b'

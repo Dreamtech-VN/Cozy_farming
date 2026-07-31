@@ -9,6 +9,7 @@ import * as socialMod from '@/systems/social';
 import * as storeMod from '@/systems/farmstore';
 import { initSocial } from '@/systems/social';
 import { TOOLS, toolIconSize } from '@/data/tools';
+import { rodIconRect } from '@/data/fish';
 import { initDaily } from '@/systems/meta';
 import { initQuests, activeQuestList } from '@/systems/quests';
 import { sfx } from '@/core/audio';
@@ -414,7 +415,13 @@ export function refreshHotbar() {
     const slot = h('button', 'hb-slot');
     const t = TOOLS[tid];
     if (t) {
-      slot.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 32)));
+      // cần câu hiện đúng bậc đang dùng (tre / sắt / VIP)
+      if (tid === 'rod') {
+        const ri = rodIconRect(S.tools.rod);
+        slot.append(spr(ri.url, ri.sx, ri.sy, ri.sw, ri.sh, 30));
+      } else {
+        slot.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 32)));
+      }
       const lv = toolLevel(tid);
       if (lv >= 2) slot.append(h('span', 'hb-lv', `Lv${lv}`));
       if (heldTool() === tid) slot.classList.add('hb-on');

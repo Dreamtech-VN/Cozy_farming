@@ -21,6 +21,7 @@ import { setHudVisible } from '@/ui/UIManager';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import * as fishing from '@/systems/fishing';
+import { RODS } from '@/data/fish';
 import { houseSize, partyActive } from '@/systems/housing';
 import { darkness, currentWeather, initTime, gameHour } from '@/systems/time';
 import { sfx, bgmForZone, setAmbient } from '@/core/audio';
@@ -296,7 +297,23 @@ export class WorldScene extends Phaser.Scene {
 
   private onHeldTool() {
     const t = heldTool();
+    // Cần câu có sẵn part cầm tay Avatar (Lttt item 442/445/446) nên vẽ hẳn
+    // thành lớp paperdoll như trong Lttt, không dán ảnh icon lên tay.
+    if (t === 'rod') {
+      this.player?.setTool('');
+      this.applyRodInHand(true);
+      return;
+    }
+    this.applyRodInHand(false);
     this.player?.setTool(t ? `held_${t}` : '');
+  }
+
+  // gắn / tháo cần câu vào lớp "đồ cầm tay" của nhân vật
+  private applyRodInHand(on: boolean) {
+    const look = S.player.chibi;
+    if (!look || !this.player) return;
+    const part = RODS.find(r => r.tier === S.tools.rod)?.part;
+    this.player.setLook(on && part ? { ...look, hand: part } : look);
   }
 
   private onAppearance() { if (S.player.chibi) this.player.setLook(S.player.chibi); }
@@ -632,6 +649,14 @@ export class WorldScene extends Phaser.Scene {
       this.spots.push({
         rect: new Phaser.Geom.Rectangle(596, 20, 180, 130),
         open: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: 'shop_fishing' } })
+      });
+      return;
+    }
+    if (this.zone.id === 'gamecenter') {
+      // map 10 vẽ sẵn buồng ATM ngay đầu phố (cùng cái đem về khu Nông Trại)
+      this.spots.push({
+        rect: new Phaser.Geom.Rectangle(48, 108, 146, 112),
+        open: () => bus.emit(EV.OPEN_PANEL, { panel: 'atm' })
       });
       return;
     }

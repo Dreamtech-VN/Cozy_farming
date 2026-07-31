@@ -11,7 +11,9 @@ export function buyRod(tier: number): boolean {
   if (S.wallet.coins < rod.price) { toast(`Cần ${rod.price} xu.`, 'coin'); sfx.error(); return false; }
   S.wallet.coins -= rod.price;
   S.tools.rod = tier;
-  bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); save();
+  // Lttt: cần câu là món "Cầm tay" -> mua xong có luôn trong tủ quần áo
+  if (!S.chibiWardrobe.includes(rod.part)) S.chibiWardrobe.push(rod.part);
+  bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); bus.emit(EV.APPEARANCE); save();
   toast(`Đã mua ${rod.name}!`, 'rod'); sfx.coin();
   equipTool('rod');
   return true;

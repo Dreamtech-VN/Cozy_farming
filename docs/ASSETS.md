@@ -123,6 +123,11 @@ có đủ các mảnh. Ghép các mảnh theo thứ tự số, canh mép **dư�
 |-----|------|-----------------|----------|
 | 25  | 6    | 2030x520        | `farmbg.png` — Nông trại |
 | 26  | 3    | 1302x466        | `farmgate.png` — Cổng Nông trại |
+| 14  | 3    | 1008x448        | `14.png` — Bãi biển (kè đá + tiệm câu) |
+| 10  | 3    | 4037x511        | `10.png` (mảnh đầu) — phố Game Center, có buồng ATM |
+
+⚠️ Map 10 còn kèm `daydien0/1/2.png` (dây điện) — đó là **lớp phủ riêng**, không
+nằm trong dải nền; ghép nền chỉ lấy các mảnh đánh số.
 
 Script ghép: `scripts/build_farm_maps.py` (sửa biến `APK` trỏ tới thư mục đã
 giải nén rồi chạy) — ghép mảnh xong kéo dài pixel mép cho khớp cỡ zone
@@ -161,6 +166,11 @@ làm việc đó đã bỏ). `KITCHEN_POS` / `WAREHOUSE_POS` trong `WorldScene` 
   `warehouse.png` của repo Lttt (nhà bếp có sẵn biển "NHÀ BẾP"), thay cho bản
   pack Cozy trước đây. Nông trại không còn nhà riêng — cửa nhà riêng ở căn nhà
   trắng trong Thị trấn.
+- `assets/lttt/bld/atm.png` (`scripts/import_atm_rods.py`): **buồng ATM thật của
+  Avatar**, cắt từ map 10 (dãy phố Game Center có sẵn buồng hai máy, biển xanh
+  chữ "ATM") rồi loang từ mép xoá cỏ nền. Trước đây tưởng Lttt không có ATM nên
+  mượn tạm ki-ốt `hd/home/1036.png` — bỏ bản đó đi. Buồng vẽ sẵn trong map 10
+  cũng được đăng ký thành điểm bấm được ở khu Game Center.
 - `assets/farm/mound.png`: đống đất để đào xẻng — trước vẽ bằng graphics nên
   trông như cục bùn, nay vẽ lại thành gò đất tơi có cục, sỏi và cỏ, kèm một
   đốm sáng nhấp nháy trong game cho biết đào được.
@@ -228,6 +238,22 @@ Nhân vật đã chuyển sang **hệ paperdoll chibi Avatar**: 345 part (tóc/�
 Format được dịch ngược từ client (AvatarData.cs) + bảng `items` trong SQL server.
 ⚠️ Cùng lưu ý bản quyền như các asset Lttt khác — dev/test OK, thương mại phải thay.
 Bộ nhân vật pixel Cozy (Character v2) vẫn còn trong repo nhưng không dùng nữa.
+
+## Cần câu (`assets/fishing/`)
+
+Ba bậc cần trong game lấy đúng theo bảng `items` của server Lttt: **cần câu tre**
+(442) · **cần câu sắt** (445) · **cần câu VIP** (446), `zorder` 70 = đồ cầm tay.
+
+- **Hình cầm trên tay** dùng thẳng part chibi Avatar `assets/chibi/442|445|446.png`
+  — mua cần là part vào luôn tủ quần áo (tab "Đồ cầm tay") và nhân vật cầm cần
+  thật khi chọn ô cần câu, không còn dán icon lên tay.
+- **Icon shop / thanh nông cụ** lấy từ Cozy Fishing Asset Pack (shubibubi),
+  `Fish Forage Items/inv_items.png` — lưới 16x16, 9 cột: ô (0,4) gỗ nâu = tre,
+  (0,3) xanh = sắt, (5,2) đỏ-vàng = VIP → gộp thành `assets/fishing/rods.png`
+  (48x16) + `rod.png` (ô đầu, dùng khi chưa biết bậc). Part Avatar gốc chỉ là
+  cái cần mảnh dính vào tay, thu nhỏ xuống làm icon thì không đọc ra hình gì.
+
+Script: `scripts/import_atm_rods.py` (cắt cả buồng ATM lẫn icon cần).
 
 ## Ảnh đại diện (`assets/avatar/`)
 
