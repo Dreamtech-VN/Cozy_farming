@@ -208,8 +208,13 @@ thu về 128×128 rồi lưu dạng data URL JPEG (~8KB) ngay trong save — xem
 
 ## Âm thanh (`assets/sfx/`, `assets/bgm/`)
 
-⚠️ **Pack2 (SuperRetroRanch) KHÔNG có âm thanh** — pack đó chỉ gồm `crops/`,
-`icons/`, `water/`. Âm thanh hiện lấy từ repo Lttt
+Pack2 (SuperRetroRanch) **có nhạc** — 8 file .wav trong `musics/`: 3 nhạc nền
+(`field` 30.8MB, `town` 27MB, `village` 25.7MB) + 5 ambient (night, rain, fanfare,
+inn, gameover), tổng ~119MB chưa nén. Nhưng Pack2 **không có hiệu ứng** (không có
+tiếng bấm/thu hoạch/tưới nước), nên hiệu ứng vẫn lấy từ Lttt.
+(Phần đã copy vào `assets/pack2/` mới chỉ gồm `crops/`, `icons/`, `water/`.)
+
+Hiệu ứng hiện lấy từ repo Lttt
 (`client/unity/Assets/Resources/sound/`, 96 file .ogg), chọn ra 16 file hợp game:
 
 | Game | File gốc Lttt |
