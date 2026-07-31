@@ -1,7 +1,7 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
 import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
 import { AVATAR_PICS, avatarPicUrl, isUploadedPic } from '@/data/avatars';
-import { FOODS, FOOD_LIST } from '@/data/foods';
+import { FOODS, FOOD_LIST, type FoodDef } from '@/data/foods';
 import { orderList, canDeliver, deliver, dropOrder, haveOf, orderName } from '@/systems/orders';
 import { pond, POND_CAP, FRIES, FRY_LIST, isGrown, remainMin, stockFry, netFish } from '@/systems/fishfarm';
 import { countOf, takeFrom, listOf, type StoreKind } from '@/systems/farmstore';
@@ -388,28 +388,33 @@ export function registerAllPanels() {
 
   // ================= Kho nông trại (Lttt: tách khỏi túi đồ) =================
   registerPanel('warehouse', () => {
-    const { body, tabs } = openWindow('Kho nông trại', { size: 'large' });
-    const content = h('div');
+    const { body, tabs, win } = openWindow('Kho nông trại', { size: 'large' });
+    win.classList.add('win-wh');
+    const content = h('div', 'wh-wrap');
     const KINDS: [StoreKind, string][] = [['produce', 'Nông sản'], ['seeds', 'Hạt giống'], ['fert', 'Phân bón']];
 
     const nameOf = (kind: StoreKind, id: string) =>
       kind === 'fert' ? 'Phân bón' : kind === 'seeds' ? (CROPS[id]?.name ?? id) : produceName(id);
     const iconFor = (kind: StoreKind, id: string) =>
-      kind === 'fert' ? uiIcon('fertilizer', 40)
-        : kind === 'seeds' ? iconOf(item(`seed_${id}`)) : produceIcon(id);
+      kind === 'fert' ? uiIcon('fertilizer', 46)
+        : kind === 'seeds' ? iconOf(item(`seed_${id}`), 46) : produceIcon(id, 46);
     const sellOf = (kind: StoreKind, id: string) => kind === 'produce' ? produceSell(id) : 0;
 
     const render = (kind: StoreKind) => {
       content.innerHTML = '';
       const rows = listOf(kind);
-      content.append(h('div', 'hint', kind === 'produce'
-        ? 'Nông sản, trứng/sữa/thịt từ vật nuôi, cá nuôi và món đã nấu đều cất ở đây.'
+      const head = h('div', 'wh-head');
+      head.append(h('div', 'wh-hint', kind === 'produce'
+        ? 'Nông sản, trứng/sữa/thịt từ chuồng, cá nuôi và món đã nấu đều cất ở đây.'
         : kind === 'seeds' ? 'Hạt giống dùng để gieo ngoài ruộng.' : 'Phân bón giúp cây nhanh lớn và khỏe hơn.'));
-      if (!rows.length) { content.append(h('div', 'hint', 'Ngăn này đang trống.')); return; }
-      const grid = h('div', 'grid grid-shop');
+      head.append(h('div', 'wh-total', `${rows.reduce((a, [, n]) => a + n, 0)} món`));
+      content.append(head);
+      if (!rows.length) { content.append(h('div', 'wh-empty', 'Ngăn này đang trống.')); return; }
+      const grid = h('div', 'wh-grid');
       for (const [id, qty] of rows) {
-        const cell = h('div', 'cell cell-lg');
-        cell.append(iconFor(kind, id), h('div', 'nm', nameOf(kind, id)), h('div', 'qty', `x${qty}`));
+        const cell = h('div', 'wh-cell');
+        const art = h('div', 'wh-art'); art.append(iconFor(kind, id));
+        cell.append(art, h('div', 'wh-name', nameOf(kind, id)), h('div', 'wh-qty', `${qty}`));
         const price = sellOf(kind, id);
         if (price > 0) {
           const b = priceBtn(price, 'gold', () => {
@@ -419,7 +424,10 @@ export function registerAllPanels() {
             render(kind);
           });
           b.prepend(document.createTextNode('Bán '));
+          b.classList.add('wh-sell');
           cell.append(b);
+        } else {
+          cell.append(h('div', 'wh-nosell', kind === 'seeds' ? 'Đem gieo' : 'Đem bón'));
         }
         grid.append(cell);
       }
@@ -443,51 +451,62 @@ export function registerAllPanels() {
     const listCol = h('div', 'kt-list');
     content.append(stove, listCol);
 
+    // ô nguyên liệu — dùng chung cho lúc đang nấu và lúc xem trước
+    const ingBox = (f: FoodDef, live: boolean) => {
+      const wrap = h('div', 'kt-sec');
+      wrap.append(h('div', 'kt-sec-cap', 'Nguyên liệu'));
+      const ing = h('div', 'kt-ings');
+      for (const [id, n] of f.material) {
+        const have = live ? n : countOf('produce', id);
+        const box = h('div', `kt-ing ${have >= n ? 'ok' : 'miss'}`);
+        const art = h('div', 'kt-ing-art'); art.append(produceIcon(id, 34));
+        box.append(art, h('div', 'kt-ing-n', live ? `x${n}` : `${have}/${n}`));
+        box.title = produceName(id);
+        ing.append(box);
+      }
+      wrap.append(ing);
+      return wrap;
+    };
+
     const renderStove = () => {
       stove.innerHTML = '';
       const cur = cookingFood();
+      const f = cur ?? FOODS[sel];
+      stove.append(h('div', 'kt-cap', cur ? (cookRemain() > 0 ? 'ĐANG NẤU' : 'ĐÃ XONG!') : 'BẾP ĐANG RẢNH'));
+      if (!f) { stove.append(h('div', 'kt-empty', 'Chọn một món ở danh sách bên phải.')); return; }
+
+      const art = h('div', `kt-art ${cur && cookRemain() > 0 ? 'cooking' : ''}`);
+      art.append(produceIcon(f.icon, 66));
+      stove.append(art);
+      stove.append(h('div', 'kt-name', f.name));
+
       if (cur) {
         const left = cookRemain();
-        const total = cur.cookMin * 60;
-        const pct = Math.max(0, Math.min(100, (1 - left / total) * 100));
-        stove.append(h('div', 'kt-cap', left > 0 ? 'Đang nấu' : 'Đã xong!'));
-        const art = h('div', 'kt-art cooking');
-        art.append(produceIcon(cur.icon, 64));
-        stove.append(art);
-        stove.append(h('div', 'kt-name', cur.name));
+        const pct = Math.max(0, Math.min(100, (1 - left / (cur.cookMin * 60)) * 100));
         const bar = h('div', 'kt-bar');
         const fill = h('div', 'kt-bar-fill'); fill.style.width = `${pct}%`;
         bar.append(fill);
         stove.append(bar);
         const mm = Math.floor(left / 60), ss = left % 60;
-        stove.append(h('div', 'kt-time', left > 0 ? `${mm}:${String(ss).padStart(2, '0')}` : 'Lấy món thôi!'));
-        stove.append(left > 0
+        stove.append(h('div', `kt-time ${left > 0 ? '' : 'done'}`,
+          left > 0 ? `Còn ${mm}:${String(ss).padStart(2, '0')}` : 'Món đã chín, vào lấy thôi!'));
+        stove.append(ingBox(cur, true));
+        const bar2 = h('div', 'kt-act');
+        bar2.append(left > 0
           ? btn('Hủy nấu', '', () => { cancelCook(); render(); })
           : btn('Lấy món', 'gold', () => { collectCook(); render(); }));
+        stove.append(bar2);
         return;
       }
-      // chưa nấu -> xem trước món đang chọn
-      const f = FOODS[sel];
-      stove.append(h('div', 'kt-cap', 'Bếp đang rảnh'));
-      const art = h('div', 'kt-art');
-      if (f) art.append(produceIcon(f.icon, 64));
-      stove.append(art);
-      if (!f) { stove.append(h('div', 'hint', 'Chọn một món bên phải.')); return; }
-      stove.append(h('div', 'kt-name', f.name));
-      const ing = h('div', 'kt-ings');
-      for (const [id, n] of f.material) {
-        const have = countOf('produce', id);
-        const box = h('div', `kt-ing ${have >= n ? 'ok' : 'miss'}`);
-        box.append(produceIcon(id), h('div', 'kt-ing-n', `${have}/${n}`));
-        box.title = produceName(id);
-        ing.append(box);
-      }
-      stove.append(ing);
-      stove.append(h('div', 'kt-time', `${f.cookMin} phút · bán ${f.sell} xu`));
+
+      stove.append(h('div', 'kt-time', `${f.cookMin} phút · bán ${f.sell} xu · +${f.exp} EXP`));
+      stove.append(ingBox(f, false));
       const ok = canCook(f);
-      stove.append(btn(ok ? 'Bắt đầu nấu' : 'Thiếu nguyên liệu', ok ? 'gold' : '', () => {
+      const bar2 = h('div', 'kt-act');
+      bar2.append(btn(ok ? 'Bắt đầu nấu' : 'Thiếu nguyên liệu', ok ? 'gold' : '', () => {
         if (startCook(f.id)) render();
       }));
+      stove.append(bar2);
     };
 
     const renderList = () => {
@@ -496,7 +515,8 @@ export function registerAllPanels() {
       for (const f of FOOD_LIST) {
         const ok = canCook(f);
         const row = h('div', `kt-row ${sel === f.id ? 'sel' : ''}`);
-        row.append(produceIcon(f.icon, 36));
+        const ic = h('div', 'kt-row-art'); ic.append(produceIcon(f.icon, 34));
+        row.append(ic);
         const info = h('div', 'grow');
         info.append(h('div', 'kt-row-name', f.name),
                     h('div', 'kt-row-sub', `${f.cookMin} phút · ${f.sell} xu`));
