@@ -364,14 +364,45 @@ img { image-rendering: auto; }
   box-shadow: 0 3px 0 #00000022, inset 0 2px 0 #fff8e8;
   color: #5b3a1c; font-size: 18px; font-weight: 900;
 }
-.cc-body { flex: 1; min-height: 0; overflow-y: auto; padding: 10px 16px 8px; }
-.cc-foot { flex: none; padding: 6px 16px 12px; }
+.cc-body { flex: 1; min-height: 0; overflow-y: auto; padding: 6px 12px 4px; }
+.cc-foot { flex: none; padding: 4px 16px 10px; text-align: center; }
+.cc-start {
+  padding: 10px 40px; font-size: 15px; display: inline-block; width: auto;
+}
+/* Top area: preview + side info */
+.cc-top { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; }
+.cc-preview {
+  flex: none; width: 72px; height: 100px;
+  background: rgba(181,131,107,.12); border-radius: 10px; border: 2px solid rgba(181,131,107,.25);
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.cc-side { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.cc-mini-label { font-size: 11px; font-weight: 900; color: #7a5a3a; margin-bottom: 2px; }
+.cc-gender-row { display: flex; gap: 6px; }
+.cc-chip {
+  padding: 5px 16px 6px; font-size: 12px; font-weight: 800; cursor: pointer; color: #4a3520;
+  background: url('/assets/ui/pack/btn_cream.png') no-repeat center / 100% 100%; border: none;
+  border-radius: 4px; transition: transform .1s;
+}
+.cc-chip.active { background-image: url('/assets/ui/pack/btn_yellow.png'); }
+.cc-chip:active { transform: scale(.95); }
+.cc-expr-row { display: flex; gap: 6px; }
+.cc-expr {
+  width: 36px; height: 36px; border-radius: 8px; cursor: pointer;
+  background: rgba(181,131,107,.12); border: 2px solid rgba(181,131,107,.2);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .1s;
+}
+.cc-expr.active { border-color: #e0a020; background: rgba(224,160,32,.15); }
+.cc-expr:active { transform: scale(.92); }
+.cc-input { font-size: 13px; padding: 7px 10px; }
+/* Tabs */
 .cc-tabs {
-  display: flex; gap: 4px; padding: 0 16px; margin-bottom: 10px;
+  display: flex; gap: 4px; margin-bottom: 0;
 }
 .cc-tab {
-  flex: 1; text-align: center; padding: 9px 0 10px; font-size: 14px; font-weight: 900;
-  color: #7a5a3a; cursor: pointer; border-radius: 10px 10px 0 0;
+  flex: 1; text-align: center; padding: 7px 0 8px; font-size: 13px; font-weight: 900;
+  color: #7a5a3a; cursor: pointer; border-radius: 8px 8px 0 0;
   background: linear-gradient(#f0e0c8, #ddc8a4); border: 2px solid #b5836b;
   border-bottom: none; opacity: .65; transition: opacity .15s;
 }
@@ -384,32 +415,31 @@ img { image-rendering: auto; }
   height: 3px; background: #fff8e8;
 }
 .cc-tab-content {
-  padding: 10px 16px 4px;
+  padding: 8px 0 4px;
   border-top: 2px solid #b5836b;
   margin-top: -2px;
 }
-.cc-sec { margin-bottom: 14px; }
+.cc-tab-label { margin-top: 6px; }
+.cc-sec { margin-bottom: 10px; }
 .cc-label {
-  font-size: 13px; font-weight: 900; color: #5b3a1c; margin-bottom: 6px;
-  padding-bottom: 4px; border-bottom: 2px solid rgba(181, 131, 107, .25);
-  letter-spacing: .3px;
+  font-size: 12px; font-weight: 900; color: #5b3a1c; margin-bottom: 4px;
+  padding-bottom: 3px; border-bottom: 2px solid rgba(181, 131, 107, .25);
 }
 .cc-row .lbl, .lbl { font-size: 12px; font-weight: 900; color: #7a4a1f; margin-bottom: 4px; }
-.cc-input { font-size: 15px; padding: 10px 12px; }
-.cc-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+.cc-opts { display: flex; gap: 6px; flex-wrap: wrap; }
 .cc-opt {
-  padding: 8px 16px 10px; font-size: 13px; cursor: pointer; color: #4a3520; font-weight: 800;
+  padding: 5px 12px 6px; font-size: 12px; cursor: pointer; color: #4a3520; font-weight: 800;
   background: url('/assets/ui/pack/btn_cream.png') no-repeat center / 100% 100%; border: none;
   border-radius: 4px; transition: transform .1s;
 }
 .cc-opt:active { transform: scale(.95); }
 .cc-opt.active { background-image: url('/assets/ui/pack/btn_yellow.png'); }
 .cc-opt.cc-opt-icon {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 48px;
-  padding: 6px 14px 8px;
+  display: inline-flex; align-items: center; gap: 6px; min-height: 40px;
+  padding: 4px 10px 5px;
 }
 .cc-opt-icon .spr { flex: none; }
-.cc-opt-name { line-height: 1.15; }
+.cc-opt-name { font-size: 11px; line-height: 1.15; }
 .swatches { display: flex; gap: 5px; flex-wrap: wrap; }
 .sw { width: 26px; height: 26px; border-radius: 8px; border: 2px solid rgba(0,0,0,.25); cursor: pointer; }
 .sw.active { border-color: #e0a020; transform: scale(1.15); }

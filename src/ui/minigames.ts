@@ -310,7 +310,7 @@ export function registerMinigames() {
 
 // ===== Form tạo nhân vật chibi =====
 import { bus, EV } from '@/core/events';
-import { chibiPreview, chibiHead } from './kit';
+import { chibiPreview, chibiHead, charFace } from './kit';
 import { defaultLook, simplestList, FACE } from '@/data/chibi';
 
 function buildCharCreate(body: HTMLElement, done: () => void) {
@@ -318,121 +318,138 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   const look = S.player.chibi;
   const emit = () => bus.emit(EV.APPEARANCE);
 
-  // tên
-  const nameRow = h('div', 'cc-sec');
-  nameRow.append(h('div', 'cc-label', 'Tên nhân vật'));
+  // --- Trên cùng: preview + giới tính + biểu cảm ---
+  const topArea = h('div', 'cc-top');
+
+  // preview nhân vật
+  const preview = h('div', 'cc-preview');
+  topArea.append(preview);
+
+  // giới tính nằm cạnh preview
+  const sideInfo = h('div', 'cc-side');
+  const gRow = h('div', 'cc-gender-row');
+  const genders: [number, string][] = [[1, 'Nam'], [2, 'Nữ']];
+  const buildGender = () => {
+    gRow.innerHTML = '';
+    for (const [g, lbl] of genders) {
+      const c = h('div', `cc-chip ${look.gender === g ? 'active' : ''}`, lbl);
+      c.onclick = () => {
+        Object.assign(look, defaultLook(g));
+        S.player.gender = g === 2 ? 'female' : 'male';
+        emit(); rebuild();
+      };
+      gRow.append(c);
+    }
+  };
+  sideInfo.append(h('div', 'cc-mini-label', 'Giới tính'), gRow);
+
+  // biểu cảm ngay dưới giới tính
+  const exprRow = h('div', 'cc-expr-row');
+  const EXPRS: [number, string][] = [[FACE.normal, 'Bình thường'], [FACE.happy, 'Vui vẻ'], [FACE.wink, 'Tinh nghịch']];
+  const buildExpr = () => {
+    exprRow.innerHTML = '';
+    for (const [id, lbl] of EXPRS) {
+      const c = h('div', `cc-expr ${look.eyes === id ? 'active' : ''}`);
+      c.append(chibiHead(id, 28, 40));
+      c.title = lbl;
+      c.onclick = () => { look.eyes = id; emit(); rebuild(); };
+      exprRow.append(c);
+    }
+  };
+  sideInfo.append(h('div', 'cc-mini-label', 'Biểu cảm'), exprRow);
+
+  // tên nhân vật
   const nameInput = h('input', 'ui-input cc-input') as HTMLInputElement;
-  nameInput.placeholder = 'Nhập tên (2-12 ký tự)';
+  nameInput.placeholder = 'Nhập tên...';
   nameInput.maxLength = 12;
   nameInput.onkeydown = e => e.stopPropagation();
-  nameRow.append(nameInput);
-  body.append(nameRow);
+  sideInfo.append(h('div', 'cc-mini-label', 'Tên'), nameInput);
 
-  // tabs
+  topArea.append(sideInfo);
+  body.append(topArea);
+
+  // --- Tabs: Tóc / Trang phục ---
   const tabBar = h('div', 'cc-tabs');
   const tabContent = h('div', 'cc-tab-content');
-  const TABS = ['Khuôn mặt', 'Trang phục'];
+  const TABS = ['Tóc', 'Trang phục'];
   let activeTab = 0;
   const tabBtns: HTMLElement[] = [];
   for (let i = 0; i < TABS.length; i++) {
     const t = h('div', `cc-tab ${i === 0 ? 'active' : ''}`, TABS[i]);
-    t.onclick = () => { activeTab = i; tabBtns.forEach((b, j) => b.classList.toggle('active', j === i)); rebuild(); };
+    t.onclick = () => { activeTab = i; tabBtns.forEach((b, j) => b.classList.toggle('active', j === i)); rebuildTabs(); };
     tabBtns.push(t);
     tabBar.append(t);
   }
   body.append(tabBar, tabContent);
 
-  const startBtn = btn('BẮT ĐẦU CUỘC SỐNG MỚI!', 'gold', () => {
+  // --- Nút bắt đầu ---
+  const startBtn = btn('Bắt đầu!', 'gold', () => {
     const name = nameInput.value.trim();
     if (name.length < 2) { toast('Tên cần ít nhất 2 ký tự nha!', 'alert'); return; }
     S.player.name = name;
     done();
     bus.emit('charcreate:done');
   });
-  startBtn.style.cssText = 'width:100%;padding:14px;font-size:16px';
+  startBtn.classList.add('cc-start');
   const foot = h('div', 'cc-foot');
   foot.append(startBtn);
   body.parentElement?.append(foot);
 
-  const rebuild = () => {
+  const refreshPreview = () => {
+    preview.innerHTML = '';
+    const face = charFace(look, 100);
+    preview.append(face);
+  };
+
+  const rebuildTabs = () => {
     tabContent.innerHTML = '';
-    const section = (label: string) => {
-      const d = h('div', 'cc-sec');
-      d.append(h('div', 'cc-label', label));
-      tabContent.append(d);
-      return d;
-    };
+    const chips = h('div', 'cc-opts');
 
     if (activeTab === 0) {
-      // gioi tinh
-      let sec = section('Giới tính');
-      const gchips = h('div', 'cc-opts');
-      const genders: [number, string][] = [[1, 'Nam'], [2, 'Nữ']];
-      for (const [g, lbl] of genders) {
-        const c = h('div', `cc-opt ${look.gender === g ? 'active' : ''}`, lbl);
-        c.onclick = () => {
-          Object.assign(look, defaultLook(g));
-          S.player.gender = g === 2 ? 'female' : 'male';
-          emit(); rebuild();
-        };
-        gchips.append(c);
-      }
-      sec.append(gchips);
-
-      // mat / bieu cam
-      const EXPRS: [number, string][] = [[FACE.normal, 'Bình thường'], [FACE.happy, 'Vui vẻ'], [FACE.wink, 'Tinh nghịch']];
-      sec = section('Biểu cảm');
-      const echips = h('div', 'cc-opts');
-      for (const [id, lbl] of EXPRS) {
-        const c = h('div', `cc-opt cc-opt-icon ${look.eyes === id ? 'active' : ''}`);
-        c.append(chibiHead(id, 36, 40), h('span', 'cc-opt-name', lbl));
-        c.onclick = () => { look.eyes = id; emit(); rebuild(); };
-        echips.append(c);
-      }
-      sec.append(echips);
-
-      // toc
       const hairOpts = simplestList(50, look.gender, 3);
-      if (hairOpts.length) {
-        sec = section('Tóc');
-        const chips = h('div', 'cc-opts');
-        for (const p of hairOpts) {
-          const c = h('div', `cc-opt cc-opt-icon ${look.hair === p.id ? 'active' : ''}`);
-          c.append(chibiPreview(p.id, 42), h('span', 'cc-opt-name', p.name));
-          c.onclick = () => { look.hair = p.id; emit(); rebuild(); };
-          chips.append(c);
-        }
-        sec.append(chips);
+      for (const p of hairOpts) {
+        const c = h('div', `cc-opt cc-opt-icon ${look.hair === p.id ? 'active' : ''}`);
+        c.append(chibiPreview(p.id, 38), h('span', 'cc-opt-name', p.name));
+        c.onclick = () => { look.hair = p.id; emit(); rebuild(); };
+        chips.append(c);
       }
     } else {
-      // ao
       const shirtOpts = simplestList(20, look.gender, 3);
+      const pantOpts = simplestList(10, look.gender, 3);
       if (shirtOpts.length) {
-        let sec = section('Áo');
-        const chips = h('div', 'cc-opts');
+        const lbl = h('div', 'cc-mini-label cc-tab-label', 'Áo');
+        tabContent.append(lbl);
+        const sc = h('div', 'cc-opts');
         for (const p of shirtOpts) {
           const c = h('div', `cc-opt cc-opt-icon ${look.shirt === p.id ? 'active' : ''}`);
-          c.append(chibiPreview(p.id, 42), h('span', 'cc-opt-name', p.name));
+          c.append(chibiPreview(p.id, 38), h('span', 'cc-opt-name', p.name));
           c.onclick = () => { look.shirt = p.id; emit(); rebuild(); };
-          chips.append(c);
+          sc.append(c);
         }
-        sec.append(chips);
+        tabContent.append(sc);
       }
-
-      // quan
-      const pantOpts = simplestList(10, look.gender, 3);
       if (pantOpts.length) {
-        const sec = section('Quần');
-        const chips = h('div', 'cc-opts');
+        const lbl = h('div', 'cc-mini-label cc-tab-label', 'Quần');
+        tabContent.append(lbl);
+        const pc = h('div', 'cc-opts');
         for (const p of pantOpts) {
           const c = h('div', `cc-opt cc-opt-icon ${look.pant === p.id ? 'active' : ''}`);
-          c.append(chibiPreview(p.id, 42), h('span', 'cc-opt-name', p.name));
+          c.append(chibiPreview(p.id, 38), h('span', 'cc-opt-name', p.name));
           c.onclick = () => { look.pant = p.id; emit(); rebuild(); };
-          chips.append(c);
+          pc.append(c);
         }
-        sec.append(chips);
+        tabContent.append(pc);
       }
+      return;
     }
+    tabContent.append(chips);
+  };
+
+  const rebuild = () => {
+    buildGender();
+    buildExpr();
+    refreshPreview();
+    rebuildTabs();
   };
   rebuild();
 }
