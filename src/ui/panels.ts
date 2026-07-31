@@ -689,19 +689,25 @@ export function registerAllPanels() {
   registerPanel('animalshop', () => {
     if (!atShopZone('animalshop', 'Cửa hàng vật nuôi')) return;
     const { body } = openWindow('Mua vật nuôi', { size: 'small' });
-    body.append(h('div', 'hint', `Chuồng cấp ${S.livestock.barnLevel}: ${S.livestock.animals.length}/${livestock.barnCapacity()} con`));
-    for (const a of ANIMAL_LIST) {
-      const r = h('div', 'row');
-      r.append(spr(`assets/animals/${a.sheet}`, 0, 0, a.frameW, a.frameH, 36));
-      r.innerHTML += `<div class="grow"><div class="t1">${a.name}</div><div class="t2">Cho ra ${item(a.product).name} mỗi ${a.produceMin} phút sau khi ăn</div></div>`;
-      r.append(priceBtn(a.price, 'gold', () => {
-        if (livestock.buyAnimal(a.id)) worldScene()?.scene?.restart();
-      }));
-      body.append(r);
-    }
+    const render = () => {
+      body.innerHTML = '';
+      const lv = S.livestock.barnLevel;
+      body.append(h('div', 'hint', lv === 0
+        ? 'Mua con đầu tiên là chuồng thú tự dựng ở Nông trại.'
+        : `Chuồng cấp ${lv}: ${S.livestock.animals.length}/${livestock.barnCapacity()} con`));
+      for (const a of ANIMAL_LIST) {
+        const r = h('div', 'row');
+        r.append(spr(`assets/animals/${a.sheet}`, 0, 0, a.frameW, a.frameH, 36));
+        r.innerHTML += `<div class="grow"><div class="t1">${a.name}</div><div class="t2">Cho ra ${item(a.product).name} mỗi ${a.produceMin} phút sau khi ăn</div></div>`;
+        r.append(priceBtn(a.price, 'gold', () => {
+          if (livestock.buyAnimal(a.id)) { render(); worldScene()?.scene?.restart(); }
+        }));
+        body.append(r);
+      }
+    };
+    render();
   });
 
-  // ================= Nhiệm vụ / Thành tựu =================
   registerPanel('quests', () => {
     const { body, tabs } = openWindow('Nhiệm vụ');
     let tab = 0;

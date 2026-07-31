@@ -210,6 +210,32 @@ export function titlePlaque(name: string, color: string, scale = 1): HTMLElement
   return cv;
 }
 
+// tên nhân vật (kèm hội nhóm trong ngoặc) vẽ thành ảnh, đặt dưới bảng danh hiệu
+export function nameCanvas(name: string, guild?: string, scale = 1): HTMLCanvasElement {
+  const cv = document.createElement('canvas');
+  const ctx = cv.getContext('2d')!;
+  const gtxt = guild ? `(${guild})` : '';
+  const fontG = `bold ${10 * scale}px "Segoe UI", system-ui, sans-serif`;
+  const fontN = `bold ${11 * scale}px "Segoe UI", system-ui, sans-serif`;
+  ctx.font = fontG; const gw = guild ? ctx.measureText(gtxt).width : 0;
+  ctx.font = fontN; const nw = ctx.measureText(name).width;
+  const pad = 4 * scale;
+  cv.width = Math.ceil(gw + nw + pad * 2 + (guild ? 2 * scale : 0)); cv.height = Math.round(16 * scale);
+  const c = cv.getContext('2d')!;
+  c.textBaseline = 'middle';
+  const y = cv.height / 2;
+  let x = pad;
+  const stroke = (t: string, col: string, f: string) => {
+    c.font = f; c.lineJoin = 'round';
+    c.lineWidth = 3 * scale; c.strokeStyle = 'rgba(20,12,4,.85)'; c.strokeText(t, x, y);
+    c.fillStyle = col; c.fillText(t, x, y);
+    x += c.measureText(t).width;
+  };
+  if (guild) { stroke(gtxt, '#7ee0a8', fontG); x += 2 * scale; }
+  stroke(name, '#fff8e8', fontN);
+  return cv;
+}
+
 // đường dẫn ảnh của 1 tên icon (dùng khi cần vẽ lên canvas)
 export function iconUrl(name: string): string {
   return ICON_SRC[name] ?? `assets/ui/av/${name}.png`;

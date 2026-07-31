@@ -28,6 +28,7 @@ export interface PlayerProfile {
   title: string;            // danh hiệu đang dùng
   titles: string[];         // danh hiệu đã mở
   badges: string[];         // huy hiệu
+  guild?: string;           // tên hội nhóm — hiện trong () trước tên
   createdAt: number;
 }
 

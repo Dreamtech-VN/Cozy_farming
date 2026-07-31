@@ -14,7 +14,7 @@ type Dir = 0 | 1 | 2 | 3;
 import { virtualInput, consumeAction } from '@/core/input';
 import { RES } from '@/core/res';
 import { TITLES } from '@/data/quests';
-import { titleCanvas } from '@/ui/kit';
+import { titleCanvas, nameCanvas } from '@/ui/kit';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import * as fishing from '@/systems/fishing';
@@ -247,32 +247,46 @@ export class WorldScene extends Phaser.Scene {
 
   private onAppearance() { if (S.player.chibi) this.player.setLook(S.player.chibi); }
 
-  // ===== bảng danh hiệu (ảnh) trên đầu nhân vật =====
+  private onEmote(i: number) { this.player.showEmote(i); }
+
+  // ===== bảng danh hiệu + tên (ảnh) trên đầu nhân vật =====
   private titleTag?: Phaser.GameObjects.Image;
-  private titleKey = '';
+  private nameTag?: Phaser.GameObjects.Image;
+  private tagKey = '';
+  private tagSig() {
+    return `${S.player.title}|${S.player.name}|${S.player.guild ?? ''}`;
+  }
   private buildTitleTag() {
-    const id = S.player.title;
-    const t = TITLES[id];
-    if (!t) { this.titleTag?.destroy(); this.titleTag = undefined; return; }
-    const key = `ttl_${id}`;
-    if (!this.textures.exists(key)) {
-      this.textures.addCanvas(key, titleCanvas(t.name, t.color, 2) as HTMLCanvasElement);
+    this.tagKey = this.tagSig();
+    this.titleTag?.destroy(); this.titleTag = undefined;
+    this.nameTag?.destroy(); this.nameTag = undefined;
+    const sc = this.zone.bg ? 0.5 : 0.32;
+
+    const t = TITLES[S.player.title];
+    if (t) {
+      const key = `ttl_${S.player.title}`;
+      if (!this.textures.exists(key)) this.textures.addCanvas(key, titleCanvas(t.name, t.color, 2) as HTMLCanvasElement);
+      this.titleTag = this.add.image(this.player.x, 0, key).setOrigin(0.5, 1).setDepth(9000).setScale(sc);
     }
-    this.titleKey = key;
-    this.titleTag?.destroy();
-    this.titleTag = this.add.image(this.player.x, 0, key).setOrigin(0.5, 1).setDepth(9000)
-      .setScale(this.zone.bg ? 0.5 : 0.32);
+    // tên nhân vật (kèm hội nhóm) nằm ngay dưới danh hiệu
+    const nkey = `nm_${S.player.name}_${S.player.guild ?? ''}`;
+    if (this.textures.exists(nkey)) this.textures.remove(nkey);
+    this.textures.addCanvas(nkey, nameCanvas(S.player.name, S.player.guild, 2) as HTMLCanvasElement);
+    this.nameTag = this.add.image(this.player.x, 0, nkey).setOrigin(0.5, 0).setDepth(9000).setScale(sc);
   }
   private refreshTitleTag() {
-    if (this.titleKey !== `ttl_${S.player.title}`) this.buildTitleTag();
+    if (this.tagKey !== this.tagSig()) this.buildTitleTag();
   }
   private updateTitleTag() {
-    if (!this.titleTag) return;
     const head = this.zone.bg ? 80 : 46;
-    this.titleTag.setPosition(this.player.x, this.player.y - head);
-    this.titleTag.setDepth(this.player.y + 1);
+    const y = this.player.y - head;
+    if (this.titleTag) {
+      this.titleTag.setPosition(this.player.x, y).setDepth(this.player.y + 2);
+      this.nameTag?.setPosition(this.player.x, y + 1).setDepth(this.player.y + 2);
+    } else {
+      this.nameTag?.setPosition(this.player.x, y).setDepth(this.player.y + 2);
+    }
   }
-  private onEmote(i: number) { this.player.showEmote(i); }
 
   // bong bóng chat trên đầu nhân vật khi nhắn Tổng/Gần
   private speech?: Phaser.GameObjects.Text;
@@ -774,7 +788,7 @@ export class WorldScene extends Phaser.Scene {
     g.fillStyle(0xc9a26b, 0.25); g.fillRect(x * T, y * T, w * T, h * T);
     // nhà chuồng là building HD trong decor; ở đây chỉ vẽ sân + bảng tên
     const lvl = S.livestock.barnLevel;
-    const barnLabel = lvl === 0 ? 'Xây chuồng' : `Chuồng thú cấp ${lvl}`;
+    const barnLabel = lvl === 0 ? 'Sân nuôi (chưa có con nào)' : `Chuồng thú cấp ${lvl}`;
     this.add.text((x + w / 2) * T, (y - 0.4) * T, barnLabel, { fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(3000);
 
     for (const a of S.livestock.animals) this.spawnAnimal(a.id, a.type);
@@ -1125,10 +1139,9 @@ export class WorldScene extends Phaser.Scene {
     if (this.zone.features.includes('barn')) {
       const bx = (BARN_RECT.x + BARN_RECT.w / 2) * T, by = (BARN_RECT.y + BARN_RECT.h / 2) * T;
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, bx, by) < (this.zone.bg ? 110 : 40)) {
-        if (S.livestock.barnLevel === 0) acts.push({ icon: '', ui: 'barn', label: 'Xây chuồng (500 xu)', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
-        else {
-          acts.push({ icon: '', ui: 'shop', label: 'Mua vật nuôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'animalshop' }) });
-          if (S.livestock.barnLevel < 3) acts.push({ icon: '', ui: 'barn', label: 'Nâng chuồng', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
+        acts.push({ icon: '', ui: 'shop', label: 'Mua vật nuôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'animalshop' }) });
+        if (S.livestock.barnLevel > 0 && S.livestock.barnLevel < 3) {
+          acts.push({ icon: '', ui: 'barn', label: 'Nâng chuồng', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
         }
       }
     }

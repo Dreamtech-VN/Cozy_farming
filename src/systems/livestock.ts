@@ -10,13 +10,14 @@ export function barnCapacity(): number {
 
 export function upgradeBarn(): boolean {
   const lv = S.livestock.barnLevel;
+  if (lv === 0) { toast('Mua vật nuôi đầu tiên là có chuồng luôn.', 'barn'); return false; }
   if (lv >= 3) { toast('Chuồng đã cấp tối đa.'); return false; }
   const cost = BARN_UPGRADE_COST[lv];
   if (S.wallet.coins < cost) { toast(`Cần ${cost} xu.`, 'coin'); sfx.error(); return false; }
   S.wallet.coins -= cost;
   S.livestock.barnLevel++;
   bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); save();
-  toast(lv === 0 ? 'Đã xây chuồng!' : `Chuồng lên cấp ${S.livestock.barnLevel}!`, 'barn');
+  toast(`Chuồng lên cấp ${S.livestock.barnLevel}!`, 'barn');
   sfx.coin();
   return true;
 }
@@ -24,10 +25,12 @@ export function upgradeBarn(): boolean {
 export function buyAnimal(type: string): boolean {
   const def = ANIMALS[type];
   if (!def) return false;
-  if (S.livestock.barnLevel === 0) { toast('Xây chuồng trước đã (bấm vào chuồng ở Nông trại).', 'barn'); return false; }
-  if (S.livestock.animals.length >= barnCapacity()) { toast('Chuồng đầy rồi — nâng cấp chuồng nhé.', 'barn'); return false; }
+  // mua con đầu tiên là dựng luôn chuồng, không bắt xây riêng nữa
+  const firstBuy = S.livestock.barnLevel === 0;
+  if (!firstBuy && S.livestock.animals.length >= barnCapacity()) { toast('Chuồng đầy rồi — nâng cấp chuồng nhé.', 'barn'); return false; }
   if (S.wallet.coins < def.price) { toast(`Cần ${def.price} xu.`, 'coin'); sfx.error(); return false; }
   S.wallet.coins -= def.price;
+  if (firstBuy) S.livestock.barnLevel = 1;
   const a: Animal = {
     id: `a${Date.now()}${Math.floor(Math.random() * 999)}`,
     type, name: def.name, boughtAt: Date.now(), fedAt: 0, collectedAt: Date.now()
@@ -35,7 +38,8 @@ export function buyAnimal(type: string): boolean {
   S.livestock.animals.push(a);
   addStat('animals_bought');
   bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); save();
-  toast(`Đã mua ${def.name}!`, def.icon); sfx.coin();
+  toast(firstBuy ? `Đã mua ${def.name} — chuồng thú đã dựng ở Nông trại!` : `Đã mua ${def.name}!`, 'barn');
+  sfx.coin();
   return true;
 }
 
