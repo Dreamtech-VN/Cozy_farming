@@ -512,7 +512,7 @@ export class WorldScene extends Phaser.Scene {
     this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setDepth(sy - 40).setScale(this.zone.bg ? 1.1 : 0.6);
     // xe riêng đậu mép đường
     if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
-      this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(this.zone.bg ? 2.2 : 1.1);
+      this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(this.vehScale(`veh_${S.vehicle}`));
     }
 
     if (!this.zone.bg) this.drawGateArch();   // ảnh nền gốc đã có cổng chào riêng
@@ -559,7 +559,7 @@ export class WorldScene extends Phaser.Scene {
         : top + (zh - top) * (toRight ? 0.72 : 0.3);
       const w = this.zone.w * T;
       const car = this.add.image(toRight ? -120 : w + 120, laneY, key)
-        .setDepth(laneY).setScale(this.zone.bg ? 2.2 : 1.05).setFlipX(!toRight);
+        .setDepth(laneY).setScale(this.vehScale(key)).setFlipX(!toRight);
       this.tweens.add({
         targets: car, x: toRight ? w + 120 : -120,
         duration: 6000 + Math.random() * 4000,
@@ -568,6 +568,14 @@ export class WorldScene extends Phaser.Scene {
     };
     this.time.addEvent({ delay: 2600, loop: true, callback: () => { if (Math.random() < 0.8) spawnCar(); } });
     spawnCar();
+  }
+
+  // Xe buýt dùng asset gốc Avatar (repo Lttt, hd/home/839) — ảnh HD 234x194,
+  // to hơn hẳn sprite xe pack pixel nên phải quy về cùng chiều cao.
+  private vehScale(key: string): number {
+    const big = !!this.zone.bg;
+    if (key === 'veh_bus') return big ? 0.62 : 0.34;
+    return big ? 2.2 : 1.15;
   }
 
   // hiệu ứng xe buýt/xe riêng đón khách rồi rời bến
@@ -587,7 +595,7 @@ export class WorldScene extends Phaser.Scene {
         this.player.play('idle');
         this.player.setDir(0);
         // 2) xe chạy vào bến
-        const bus = this.add.image(-120, midY, key).setDepth(9000).setScale(1.15);
+        const bus = this.add.image(-120, midY, key).setDepth(9000).setScale(this.vehScale(key));
         this.tweens.add({
           targets: bus, x: stopX, duration: 1100, ease: 'Cubic.easeOut',
           onComplete: () => {
@@ -624,7 +632,7 @@ export class WorldScene extends Phaser.Scene {
     const stopX = this.busStopX();
     this.player.setPosition(stopX, this.roadTopY() - 10);
     this.player.setVisible(false);
-    const bus = this.add.image(-120, this.roadMidY(), key).setDepth(9000).setScale(1.15);
+    const bus = this.add.image(-120, this.roadMidY(), key).setDepth(9000).setScale(this.vehScale(key));
     this.tweens.add({
       targets: bus, x: stopX, duration: 1100, ease: 'Cubic.easeOut',
       onComplete: () => {

@@ -22,4 +22,4 @@ export const VEHICLES: Record<string, VehicleDef> = {
 };
 
 export const VEHICLE_LIST = Object.values(VEHICLES);
-export const BUS_SPRITE = { w: 105, h: 48 };
+export const BUS_SPRITE = { w: 234, h: 194 };   // xe buýt gốc Avatar (repo Lttt)

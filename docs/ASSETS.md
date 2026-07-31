@@ -132,6 +132,13 @@ trông rất lệch style). Trong game dùng key `bldhd_<tên>` ở scale 1.
 
 ### Xe cộ
 
+**Xe buýt** dùng asset gốc Avatar: `assets/hd/home/839.png` trong APK (234x194,
+xe khách xanh có hành khách trong cửa sổ) — lật ngang cho quay phải như mấy xe
+còn lại rồi lưu thành `assets/vehicles/bus.png`. Vì là ảnh HD nên
+`WorldScene.vehScale()` quy nó về cùng chiều cao với sprite xe pack pixel.
+Tên file lấy từ `Bus.java` trong client java (`FilePack.getImage("839")` ở pack
+`/home.av`); thư mục `hd/home` là bản HD đã giải nén sẵn của pack đó.
+
 `scripts/recut_vehicles.py` — trong `assets/town/buildings_all.png` mỗi mẫu xe
 được vẽ 2 lần dính liền thành khối 160px; bản cắt cũ lấy 66–78px nên lẹm mất
 đầu xe. Nay cắt đúng nửa 80px rồi trim theo bbox (thêm được `camper_green`).
