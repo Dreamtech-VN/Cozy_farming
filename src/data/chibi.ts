@@ -52,13 +52,13 @@ export function simplestList(z: number, gender: number, n = 3): ChibiPartDef[] {
     .slice(0, n);
 }
 
-// quy đổi giá gốc Avatar về kinh tế game (xu Avatar lớn hơn nhiều)
+// Quy đổi giá gốc Avatar về kinh tế game (xu Avatar lớn hơn nhiều).
+// MỌI món trong shop đều bán bằng XU — ruby (tiền nạp) để dành cho thứ khác.
+// Đồ vốn tính bằng "lượng" quy sang xu theo bậc cao hơn đồ thường cho vẫn hiếm:
+// đồ thường 100..6.000 xu, đồ lượng 500..48.000 xu.
 export function chibiPriceXu(p: ChibiPartDef): number {
-  if (p.gold > 0) return 0;
+  if (p.gold > 0) return Math.max(500, p.gold * 100);
   return Math.max(100, Math.round(p.coin / 100));
-}
-export function chibiPriceRuby(p: ChibiPartDef): number {
-  return p.gold > 0 ? Math.max(1, Math.round(p.gold / 2)) : 0;
 }
 
 export interface ChibiLook {

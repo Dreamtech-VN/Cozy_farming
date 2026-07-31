@@ -3,7 +3,7 @@
 // bấm ô đó là nhân vật cầm lên tay.
 
 import { defItem } from './items';
-import { chibiList, chibiPriceXu, chibiPriceRuby } from './chibi';
+import { chibiList, chibiPriceXu } from './chibi';
 
 export const HAND_Z = 70;
 export const HAND_PREFIX = 'hand_';
@@ -21,7 +21,6 @@ for (const p of HAND_PARTS) {
     sprite: { url: `assets/chibi/${p.id}.png`, sx: 0, sy: 0, sw: 64, sh: 96 },
     sell: 0,
     buy: chibiPriceXu(p) || undefined,
-    rubyBuy: chibiPriceRuby(p) || undefined,
     desc: 'Đồ cầm tay — bấm Dùng để đưa xuống ô trang bị, rồi bấm ô đó để cầm lên tay.',
     meta: { handPart: p.id }
   });

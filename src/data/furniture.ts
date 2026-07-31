@@ -6,7 +6,6 @@ export interface FurnitureDef {
   name: string;
   icon: string;
   price: number;
-  rubyPrice?: number;
   w: number;               // kích thước theo tile 16px
   h: number;
   color: number;           // màu vẽ tạm
@@ -30,7 +29,7 @@ function defFurn(f: FurnitureDef) {
     id: f.id, name: f.name, kind: f.category === 'painting' || f.category === 'deco' ? 'deco' : 'furniture',
     icon: f.icon,
     sprite: sz ? { url: `assets/interior/${f.id}.png`, sx: 0, sy: 0, sw: sz[0], sh: sz[1] } : undefined,
-    sell: Math.floor(f.price / 3), buy: f.price, rubyBuy: f.rubyPrice, meta: { furniture: true }
+    sell: Math.floor(f.price / 3), buy: f.price, meta: { furniture: true }
   });
 }
 
@@ -50,15 +49,15 @@ defFurn({ id: 'deco_plant', name: 'Chậu cây', icon: '🪴', price: 120, w: 1,
 defFurn({ id: 'deco_lamp', name: 'Đèn cây', icon: '🛋', price: 200, w: 1, h: 1, color: 0xffd43b, category: 'deco' });
 defFurn({ id: 'deco_vase', name: 'Bình hoa', icon: '🏺', price: 180, w: 1, h: 1, color: 0x9c36b5, category: 'deco' });
 defFurn({ id: 'deco_bear', name: 'Gấu bông lớn', icon: '🧸', price: 500, w: 1, h: 1, color: 0xd9480f, category: 'deco' });
-defFurn({ id: 'deco_xmas_tree', name: 'Cây thông Noel', icon: '🎄', price: 999, rubyPrice: 10, w: 2, h: 2, color: 0x087f5b, category: 'deco' });
+defFurn({ id: 'deco_xmas_tree', name: 'Cây thông Noel', icon: '🎄', price: 999, w: 2, h: 2, color: 0x087f5b, category: 'deco' });
 
 defFurn({ id: 'paint_sunset', name: 'Tranh hoàng hôn', icon: '🖼️', price: 300, w: 1, h: 1, color: 0xff922b, category: 'painting' });
 defFurn({ id: 'paint_sea', name: 'Tranh biển', icon: '🖼️', price: 300, w: 1, h: 1, color: 0x339af0, category: 'painting' });
 defFurn({ id: 'paint_farm', name: 'Tranh nông trại', icon: '🖼️', price: 350, w: 1, h: 1, color: 0x66a80f, category: 'painting' });
-defFurn({ id: 'paint_abstract', name: 'Tranh trừu tượng', icon: '🖼️', price: 600, rubyPrice: 5, w: 1, h: 1, color: 0xcc5de8, category: 'painting' });
+defFurn({ id: 'paint_abstract', name: 'Tranh trừu tượng', icon: '🖼️', price: 600, w: 1, h: 1, color: 0xcc5de8, category: 'painting' });
 
 defFurn({ id: 'aquarium_small', name: 'Hồ cá nhỏ', icon: '🐠', price: 800, w: 2, h: 1, color: 0x22b8cf, category: 'aquarium' });
-defFurn({ id: 'aquarium_big', name: 'Hồ cá lớn', icon: '🐠', price: 3000, rubyPrice: 15, w: 3, h: 1, color: 0x15aabf, category: 'aquarium' });
+defFurn({ id: 'aquarium_big', name: 'Hồ cá lớn', icon: '🐠', price: 3000, w: 3, h: 1, color: 0x15aabf, category: 'aquarium' });
 
 export const FURNITURE_LIST = Object.values(FURNITURE);
 

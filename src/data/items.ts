@@ -15,7 +15,6 @@ export interface ItemDef {
   sprite?: ItemSprite;     // sprite thật từ asset pack (ưu tiên hiển thị)
   sell: number;            // giá bán cho NPC (0 = không bán được)
   buy?: number;            // giá mua ở shop (nếu bán trong shop)
-  rubyBuy?: number;        // mua bằng ruby
   desc?: string;
   meta?: Record<string, unknown>;
 }
@@ -37,7 +36,7 @@ defItem({ id: 'feed', name: 'Thức ăn gia súc', kind: 'material', icon: '', s
 defItem({ id: 'gift_flower', name: 'Bó hoa', kind: 'gift', icon: '', sprite: { url: 'assets/ui/act/flower_red.png', sx: 0, sy: 0, sw: 11, sh: 11 }, sell: 10, buy: 50, desc: 'Quà tặng bạn bè.' });
 defItem({ id: 'gift_choco', name: 'Sô-cô-la', kind: 'gift', icon: '', sprite: { url: 'assets/ui/act/choco.png', sx: 0, sy: 0, sw: 12, sh: 11 }, sell: 20, buy: 100, desc: 'Quà tặng bạn bè.' });
 defItem({ id: 'gift_teddy', name: 'Gấu bông', kind: 'gift', icon: '', sprite: { url: 'assets/ui/act/teddy.png', sx: 0, sy: 0, sw: 14, sh: 12 }, sell: 60, buy: 300, desc: 'Quà tặng dễ thương.' });
-defItem({ id: 'lucky_ticket', name: 'Vé quay may mắn', kind: 'special', icon: '', sprite: { url: 'assets/ui/act/ticket.png', sx: 0, sy: 0, sw: 14, sh: 9 }, sell: 0, rubyBuy: 5, desc: 'Thêm 1 lượt quay Vòng quay may mắn.' });
+defItem({ id: 'lucky_ticket', name: 'Vé quay may mắn', kind: 'special', icon: '', sprite: { url: 'assets/ui/act/ticket.png', sx: 0, sy: 0, sw: 14, sh: 9 }, sell: 0, buy: 2000, desc: 'Thêm 1 lượt quay Vòng quay may mắn.' });
 
 // ---- Sản phẩm chăn nuôi (icon từ ui/items.png của farm pack) ----
 const ITEMS_SHEET = 'assets/farm/items.png';

@@ -4,7 +4,6 @@ export interface WearDef {
   id: string;              // tên file không đuôi, vd 'bob'
   name: string;
   price: number;           // xu; 0 = mặc định miễn phí
-  rubyPrice?: number;
 }
 
 // Kiểu tóc (sheet có 14 màu)
@@ -40,10 +39,10 @@ export const CLOTHES: WearDef[] = [
   { id: 'sporty', name: 'Thể thao', price: 420 },
   { id: 'suit', name: 'Vest lịch lãm', price: 900 },
   { id: 'pants_suit', name: 'Vest quần âu', price: 950 },
-  { id: 'witch', name: 'Phù thủy', price: 800, rubyPrice: 20 },
-  { id: 'pumpkin', name: 'Bí ngô Halloween', price: 800, rubyPrice: 20 },
-  { id: 'spooky', name: 'Ma quái', price: 850, rubyPrice: 25 },
-  { id: 'skull', name: 'Đầu lâu', price: 850, rubyPrice: 25 },
+  { id: 'witch', name: 'Phù thủy', price: 800 },
+  { id: 'pumpkin', name: 'Bí ngô Halloween', price: 800 },
+  { id: 'spooky', name: 'Ma quái', price: 850 },
+  { id: 'skull', name: 'Đầu lâu', price: 850 },
   { id: 'clown', name: 'Chú hề', price: 700 }
 ];
 
@@ -51,7 +50,7 @@ export const CLOTHES: WearDef[] = [
 export const ACCESSORIES: WearDef[] = [
   { id: 'hat_cowboy', name: 'Mũ cao bồi', price: 500 },
   { id: 'hat_lucky', name: 'Mũ may mắn', price: 600 },
-  { id: 'hat_witch', name: 'Mũ phù thủy', price: 700, rubyPrice: 15 },
+  { id: 'hat_witch', name: 'Mũ phù thủy', price: 700 },
   { id: 'hat_pumpkin', name: 'Mũ bí ngô', price: 650 },
   { id: 'hat_pumpkin_purple', name: 'Mũ bí ngô tím', price: 680 },
   { id: 'glasses', name: 'Kính cận', price: 250 },

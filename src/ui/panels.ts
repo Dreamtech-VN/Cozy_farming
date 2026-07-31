@@ -8,7 +8,7 @@ import { CROPS, CROP_LIST } from '@/data/crops';
 import { ANIMAL_LIST, ANIMALS, BARN_CAPACITY, BARN_UPGRADE_COST } from '@/data/animals';
 import { FISH_LIST, RODS, RARITY_COLOR, RARITY_NAME, FISHES } from '@/data/fish';
 import { INSECT_LIST, NETS, INSECTS } from '@/data/insects';
-import { chibiList, chibiPriceXu, chibiPriceRuby, CHIBI_PARTS, partStats, equipStats, formatStats } from '@/data/chibi';
+import { chibiList, chibiPriceXu, CHIBI_PARTS, partStats, equipStats, formatStats } from '@/data/chibi';
 import { handItemId } from '@/data/handitems';
 import { SKIN_LIST, SKINS, type SkinDef } from '@/data/skins';
 import { FURNITURE, FURNITURE_LIST, HOUSE_LEVELS, WALLPAPERS, FLOORS } from '@/data/furniture';
@@ -294,10 +294,10 @@ export function registerAllPanels() {
           const def = item(id);
           const cell = h('div', 'cell');
           const priceEl = h('div', 'pr');
-          priceEl.innerHTML = priceHtml(def.rubyBuy ? 0 : (def.buy ?? 0), def.rubyBuy);
+          priceEl.innerHTML = priceHtml(def.buy ?? 0);
           cell.append(iconOf(def), h('div', 'nm', def.name), priceEl);
           cell.onclick = () => {
-            if (def.rubyBuy ? spend(0, def.rubyBuy) : spend(def.buy ?? 0)) {
+            if (spend(def.buy ?? 0)) {
               addItem(id); sfx.coin(); toast(`Đã mua ${def.name}`, def.icon);
             }
           };
@@ -423,7 +423,7 @@ export function registerAllPanels() {
           art.append(skinFace(sk, 78));
           const prEl = h('div', 'pr');
           if (owned) prEl.textContent = 'Đã có';
-          else prEl.innerHTML = sk.priceRuby > 0 ? priceHtml(0, sk.priceRuby) : priceHtml(sk.priceXu);
+          else prEl.innerHTML = priceHtml(sk.priceXu);
           cell.append(art, h('div', 'nm', sk.name), prEl);
           cell.onclick = () => openPanel('skintry', { skin: sk, owned, onDone: render });
           grid.append(cell);
@@ -438,10 +438,10 @@ export function registerAllPanels() {
         // đồ cầm tay: mua về nằm trong túi đồ; đồ mặc: vào tủ đồ
         const owned = isHand ? itemCount(handItemId(p.id)) > 0 : S.chibiWardrobe.includes(p.id);
         const cell = h('div', `cell cell-lg ${owned ? 'owned' : ''}`);
-        const xu = chibiPriceXu(p), ruby = chibiPriceRuby(p);
+        const xu = chibiPriceXu(p);
         const prEl = h('div', 'pr');
         if (owned && !isHand) prEl.textContent = 'Đã có';
-        else prEl.innerHTML = ruby > 0 ? priceHtml(0, ruby) : priceHtml(xu);
+        else prEl.innerHTML = priceHtml(xu);
         const art = h('div', 'cell-art');
         art.append(chibiPreview(p.id, 74));
         const ps = partStats(p);
@@ -499,17 +499,16 @@ export function registerAllPanels() {
         cell.append(chibiHead(p.id, 40, cfg.z), h('div', 'nm', partLabel(cfg.z, p.name)));
         const ps = partStats(p);
         if (ps) cell.append(h('div', 'wd-stats', formatStats(ps).join(' ')));
-        const xu = chibiPriceXu(p), ruby = chibiPriceRuby(p);
+        const xu = chibiPriceXu(p);
         const pr = h('div', 'pr');
         if (on) pr.textContent = 'Đang dùng';
         else if (done) pr.textContent = 'Đổi lại';
-        else pr.innerHTML = ruby > 0 ? priceHtml(0, ruby) : priceHtml(xu);
+        else pr.innerHTML = priceHtml(xu);
         cell.append(pr);
         cell.onclick = () => {
           sfx.click();
           if (!on && !done) {
-            if (ruby > 0) { if (!spend(0, ruby)) return; }
-            else if (!spend(xu)) return;
+            if (!spend(xu)) return;
             S.chibiWardrobe.push(p.id);
             sfx.coin();
           }
@@ -553,7 +552,7 @@ export function registerAllPanels() {
 
     const info = h('div', 'tryon-info');
     info.innerHTML = owned ? '<b>Bạn đã sở hữu skin này</b>'
-      : `Trọn bộ • Giá: ${sk.priceRuby > 0 ? priceHtml(0, sk.priceRuby) : priceHtml(sk.priceXu)}`;
+      : `Trọn bộ • Giá: ${priceHtml(sk.priceXu)}`;
     body.append(info);
 
     const bar = h('div');
@@ -566,7 +565,7 @@ export function registerAllPanels() {
     };
     if (owned) bar.append(btn('Mặc ngay', 'gold', wear));
     else bar.append(btn('Mua & mặc', 'gold', () => {
-      const ok = sk.priceRuby > 0 ? spend(0, sk.priceRuby) : spend(sk.priceXu);
+      const ok = spend(sk.priceXu);
       if (!ok) return;
       S.skins.push(sk.id); addStat('fashion_bought'); sfx.coin();
       wear();
@@ -580,7 +579,7 @@ export function registerAllPanels() {
     const { part: p, z, isHand, owned, onDone } = data;
     const { body, close } = openWindow(p.name, { size: 'small' });
     const look = S.player.chibi;
-    const xu = chibiPriceXu(p), ruby = chibiPriceRuby(p);
+    const xu = chibiPriceXu(p);
 
     const wrap = h('div', 'tryon');
     // trái: nhân vật đang mặc thử  |  phải: món đồ phóng to
@@ -598,7 +597,7 @@ export function registerAllPanels() {
     const statsLine = ps ? ` · ${formatStats(ps).join(' ')}` : '';
     info.innerHTML = owned && !isHand
       ? `<b>Bạn đã sở hữu món này</b>${statsLine}`
-      : `Giá: ${ruby > 0 ? priceHtml(0, ruby) : priceHtml(xu)}${statsLine}`;
+      : `Giá: ${priceHtml(xu)}${statsLine}`;
     body.append(info);
 
     const bar = h('div');
@@ -610,8 +609,7 @@ export function registerAllPanels() {
       }));
     } else {
       bar.append(btn(`Mua`, 'gold', () => {
-        const ok = ruby > 0 ? spend(0, ruby) : spend(xu);
-        if (!ok) return;
+        if (!spend(xu)) return;
         if (isHand) {
           addItem(handItemId(p.id));
           toast(`Đã mua ${p.name}! Mở Túi đồ -> Dùng để đưa xuống ô trang bị.`, '');
@@ -679,11 +677,11 @@ export function registerAllPanels() {
         const grid = h('div', 'grid');
         for (const f of FURNITURE_LIST) {
           const cell = h('div', 'cell');
-          const price = f.rubyPrice ? priceHtml(0, f.rubyPrice) : priceHtml(f.price);
+          const price = priceHtml(f.price);
           cell.innerHTML = `<div class="ico">${f.icon}</div><div class="nm"></div><div class="pr">${price}</div>`;
           (cell.querySelector('.nm') as HTMLElement).textContent = f.name;
           cell.onclick = () => {
-            const ok = f.rubyPrice ? spend(0, f.rubyPrice) : spend(f.price);
+            const ok = spend(f.price);
             if (ok) { addItem(f.id); toast(`Đã mua ${f.name} — vào Kho đồ để đặt trong nhà.`, f.icon); }
           };
           grid.append(cell);
@@ -1848,19 +1846,6 @@ export function registerAllPanels() {
   registerPanel('emotes', () => {
     const { body, close } = openWindow('Biểu cảm', { size: 'small' });
 
-    // Hành động của bản thân — trước nằm ở bảng "chạm vào mình", nay gom vào đây
-    const actRow = h('div', 'emo-acts');
-    const act = (icon: string, label: string, kind: string) => {
-      const b = h('button', 'emo-act');
-      b.append(uiIcon(icon, 26), h('span', '', label));
-      b.onclick = () => { sfx.click(); bus.emit('world:selfact', kind); close(); };
-      actRow.append(b);
-    };
-    act('runner', 'Chạy', 'run');
-    act('sit', 'Ngồi', 'sit');
-    act('lie', 'Nằm', 'lie');
-    body.append(actRow, h('div', 'sep'));
-
     // dùng đúng sheet emoticons.png của asset pack (lưới 16px, 5 cột x 6 hàng)
     const grid = h('div', 'grid');
     for (let i = 0; i < 30; i++) {
@@ -1896,8 +1881,8 @@ export function registerAllPanels() {
           ? btn('Đang dùng', '', undefined)
           : btn('Dùng', 'gold', () => { S.vehicle = v.id; save(); toast(`Đã chọn ${v.name}!`, 'bus'); openPanel('garage'); }));
       } else {
-        r.append(priceBtn(v.rubyPrice ? 0 : v.price, 'gold', () => {
-          if (v.rubyPrice ? spend(0, v.rubyPrice) : spend(v.price)) {
+        r.append(priceBtn(v.price, 'gold', () => {
+          if (spend(v.price)) {
             S.garage.push(v.id);
             S.vehicle = v.id;
             addStat('vehicles_bought');
