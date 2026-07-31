@@ -26,12 +26,12 @@ import { sfx } from '@/core/audio';
 const T = 16; // kích thước tile
 // ---- Nông trại HD (nền imagemap Avatar 1008x506) — tọa độ px ----
 const FARM_PLOT = { ox: 84, oy: 218, pw: 42, ph: 45 };            // lưới ruộng 8x6
-const FARM_POND = { x: 850, y: 392, w: 274, h: 216 };             // hồ đá Avatar
+const FARM_POND = { x: 773, y: 176, w: 426, h: 110 };             // hồ nước Avatar (map 4), cắt sát mép nước
 const KHE_POS = { x: 790, y: 195 };                               // cây khế
 const WAREHOUSE_POS = { x: 320, y: 175 };                         // nhà kho
 const PETHOUSE_POS = { x: 648, y: 198 };                          // nhà thú cưng (chỉ hiện khi đã nuôi)
 const PETSHOP_POS = { x: 21 * T, y: 13 * T };                     // tiệm thú cưng (Thành phố)
-const BARN_RECT = { x: 26.5, y: 13.5, w: 9, h: 5.5 };             // sân chuồng thú (tile)
+const BARN_RECT = { x: 30, y: 18.75, w: 12, h: 8 };               // chuồng rào (khớp pen.png 192x128 của Pack2)
 const FARM_ORIGIN = { x: Math.round(FARM_PLOT.ox / T), y: Math.round(FARM_PLOT.oy / T) };
 const ROAD_TILES = 4; // đường xe chạy chiếm 4 hàng tile dưới cùng (map cổng)
 
@@ -48,7 +48,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     // nông trại chỉ gồm: nhà bếp, nhà kho, chuồng thú, nhà chó (+ cây khế, ao cá)
     { key: 'lt_kitchen', x: 8.75, y: 12.6, s: 1 },     // nhà bếp (cửa vào nhà riêng)
     { key: 'lt_warehouse', x: 20, y: 12.7, s: 1 },     // nhà kho — mở kho đồ
-    { key: 'lt_barn', x: 31, y: 13.2, s: 1 },          // chuồng gia súc
+    { key: 'lt_barn', x: 33, y: 17.6, s: 1 },          // nhà chuồng (ngay trên hàng rào)
     { key: 'lt_tree', x: 49.4, y: 12.4, s: 1 },        // cây khế
     { key: 'lt_tree', x: 58.6, y: 14.8, s: 0.8 }
   ],
@@ -334,7 +334,7 @@ export class WorldScene extends Phaser.Scene {
       if (this.zone.id === 'farm') {
         const P = FARM_POND;
         this.add.image(P.x, P.y, 'lt_pond').setDisplaySize(P.w, P.h).setDepth(-80);
-        this.pondEllipse = new Phaser.Geom.Ellipse(P.x, P.y + 4, P.w * 0.94, P.h * 0.84);
+        this.pondEllipse = new Phaser.Geom.Ellipse(P.x, P.y + 2, P.w * 0.82, P.h * 0.62);
         this.add.text(P.x, P.y - P.h / 2 - 10, 'Hồ cá', { fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(2);
       }
       return;
@@ -779,12 +779,35 @@ export class WorldScene extends Phaser.Scene {
   }
 
   // ================= chuồng =================
+  private penTrough = { x: 0, y: 0 };     // máng trong chuồng rào
+  private freeTrough = { x: 0, y: 0 };    // máng ngoài sân cho thú 2 chân
+
   private buildBarn() {
     const { x, y, w, h } = BARN_RECT;
     const lvl = S.livestock.barnLevel;
-    // chưa nuôi con nào thì không vẽ gì thêm — nhà chuồng đã có sẵn trong decor
+    // hàng rào Avatar: 1 ảnh ghép sẵn (assets/lttt/pen.png)
+    this.add.image(x * T, y * T, 'pen').setOrigin(0, 0).setDepth((y + h) * T - 6);
+
+    // chặn 4 cạnh, chừa cổng ở giữa cạnh dưới
+    const gx = (x + w * 0.5) * T, gw = w * T * 0.25;
+    this.obstacles.push(new Phaser.Geom.Rectangle(x * T, y * T - 4, w * T, 10));
+    this.obstacles.push(new Phaser.Geom.Rectangle(x * T - 4, y * T, 10, h * T));
+    this.obstacles.push(new Phaser.Geom.Rectangle((x + w) * T - 6, y * T, 10, h * T));
+    this.obstacles.push(new Phaser.Geom.Rectangle(x * T, (y + h) * T - 4, gx - gw / 2 - x * T, 10));
+    this.obstacles.push(new Phaser.Geom.Rectangle(gx + gw / 2, (y + h) * T - 4, (x + w) * T - (gx + gw / 2), 10));
+
+    // máng thức ăn: 1 trong chuồng, 1 ngoài sân cho thú 2 chân
+    this.penTrough = { x: (x + 2) * T, y: (y + 1.9) * T };
+    this.freeTrough = { x: (x - 3.4) * T, y: (y + h + 1.4) * T };
+    const tsc = this.zone.bg ? 0.8 : 0.45;
+    this.troughImgs = [];
+    for (const t of [this.penTrough, this.freeTrough]) {
+      const im = this.add.image(t.x, t.y, 'trough').setOrigin(0.5, 0.9).setScale(tsc).setDepth(t.y);
+      this.troughImgs.push(im);
+    }
+
     if (lvl > 0) {
-      this.add.text((x + w / 2) * T, (y - 0.4) * T, `Chuồng thú cấp ${lvl}`, {
+      this.add.text((x + w / 2) * T, (y - 0.6) * T, `Chuồng thú cấp ${lvl}`, {
         fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 }
       }).setOrigin(0.5).setDepth(3000);
     }
@@ -792,12 +815,25 @@ export class WorldScene extends Phaser.Scene {
     this.time.addEvent({ delay: 1500, loop: true, callback: () => this.wanderAnimals() });
   }
 
+  // máng đầy cỏ khi vừa cho ăn
+  private troughImgs: Phaser.GameObjects.Image[] = [];
+  private refreshTroughs(feeding: boolean) {
+    for (const im of this.troughImgs) im.setTexture(feeding ? 'trough_full' : 'trough');
+  }
+
   private spawnAnimal(id: string, type: string) {
     const def = ANIMALS[type];
     if (!def) return;
     const { x, y, w, h } = BARN_RECT;
-    const ax = (x + 1 + Math.random() * (w - 2)) * T;
-    const ay = (y + 1 + Math.random() * (h - 2)) * T;
+    // 4 chân nhốt trong chuồng rào, 2 chân thả rông quanh sân
+    let ax: number, ay: number;
+    if (def.legs === 4) {
+      ax = (x + 1.5 + Math.random() * (w - 3)) * T;
+      ay = (y + 2.4 + Math.random() * (h - 3.6)) * T;
+    } else {
+      ax = (x - 5 + Math.random() * 5) * T;
+      ay = (y + h + 1 + Math.random() * 3) * T;
+    }
     const spr = this.add.sprite(ax, ay, `animal_${type}`, 0).setDepth(ay).setScale(this.zone.bg ? 1.9 : 1);
     spr.setInteractive({ useHandCursor: true });
     spr.on('pointerdown', () => this.animalDialog(id));
@@ -806,12 +842,28 @@ export class WorldScene extends Phaser.Scene {
 
   private wanderAnimals() {
     const { x, y, w, h } = BARN_RECT;
+    const now = Date.now();
+    this.refreshTroughs(S.livestock.animals.some(a => now - a.fedAt < 25_000));
     for (const [id, spr] of this.animalSprites) {
-      if (Math.random() < 0.5) continue;
-      const nx = Phaser.Math.Clamp(spr.x + (Math.random() * 40 - 20), (x + 1) * T, (x + w - 1) * T);
-      const ny = Phaser.Math.Clamp(spr.y + (Math.random() * 30 - 15), (y + 1) * T, (y + h - 1) * T);
-      this.tweens.add({ targets: spr, x: nx, y: ny, duration: 1200, onUpdate: () => spr.setDepth(spr.y) });
       const a = S.livestock.animals.find(v => v.id === id);
+      const def = a ? ANIMALS[a.type] : undefined;
+      if (Math.random() < 0.5) continue;
+      let nx: number, ny: number;
+      // vừa được cho ăn -> kéo về máng đứng ăn
+      const eating = a && now - a.fedAt < 25_000;
+      if (eating) {
+        const t = def?.legs === 4 ? this.penTrough : this.freeTrough;
+        nx = t.x + (Math.random() * 26 - 13);
+        ny = t.y + (Math.random() * 18 - 4);
+      } else if (def?.legs === 4) {
+        nx = Phaser.Math.Clamp(spr.x + (Math.random() * 40 - 20), (x + 1.5) * T, (x + w - 1.5) * T);
+        ny = Phaser.Math.Clamp(spr.y + (Math.random() * 30 - 15), (y + 2.4) * T, (y + h - 1.2) * T);
+      } else {
+        // thú 2 chân đi tự do quanh sân, tránh vào trong chuồng
+        nx = Phaser.Math.Clamp(spr.x + (Math.random() * 60 - 30), (x - 8) * T, (x + w + 6) * T);
+        ny = Phaser.Math.Clamp(spr.y + (Math.random() * 40 - 20), (y + h + 0.5) * T, (y + h + 5) * T);
+      }
+      this.tweens.add({ targets: spr, x: nx, y: ny, duration: eating ? 700 : 1200, onUpdate: () => spr.setDepth(spr.y) });
       if (a && livestock.hasProduct(a) && !spr.getData('mark')) {
         spr.setData('mark', true);
         const m = this.add.text(spr.x, spr.y - 14, '!', { fontSize: '12px', fontStyle: 'bold', color: '#ffd43b', stroke: '#3d2c05', strokeThickness: 3 }).setOrigin(0.5).setDepth(3000);
@@ -1236,7 +1288,7 @@ export class WorldScene extends Phaser.Scene {
 
   private spawnChopTrees() {
     // 3 cây gỗ HD giữa nông trại (ngoài ruộng/chuồng/hồ)
-    for (const [px2, py2] of [[485, 315], [610, 380], [500, 480]] as [number, number][]) {
+    for (const [px2, py2] of [[452, 486], [200, 150], [700, 470]] as [number, number][]) {
       const obj = this.add.image(px2, py2, 'lt_tree').setOrigin(0.5, 1).setScale(0.72).setDepth(py2);
       this.addFootprint(px2, py2, 46, 22);
       this.chopTrees.push({ obj, readyAt: 0 });

@@ -26,6 +26,15 @@ Nguồn: các pack đã mua trên itch.io (license thương mại), tải từ
 - Nền đất/cỏ/cát/nước (tile đơn sắc có hoa văn, palette khớp pack) — autotile thật sẽ map ở v0.2.
 - Chuồng gia súc, đàn piano, đèn cây trong nhà, tranh treo tường.
 
+## SuperRetroRanch Premium (release Pack2) — `assets/pack2/`
+
+Pack pixel 16px do chủ dự án cung cấp (release `Pack2` của repo). Trong pack có
+tileset hàng rào, nhà cửa, vật nuôi, cây trồng, nước autotile, UI và **nhạc/âm thanh**.
+
+Đang dùng: `tiles/fence_01_16x16.png` -> `assets/pack2/fence.png`, từ đó ghép sẵn
+`assets/pack2/pen.png` (chuồng rào 12x8 ô, có 4 góc và cổng ở giữa cạnh dưới).
+Phần còn lại (nhạc nền, vật nuôi, cây trồng...) chưa tích hợp.
+
 ## Icon vật phẩm nông trại kiểu chibi (`assets/farm/chibi/`)
 
 Nguồn: icon 16px cắt sẵn ở `assets/farm/it/` (một sheet duy nhất) và 5 icon
