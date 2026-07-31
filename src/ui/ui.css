@@ -58,13 +58,15 @@ img { image-rendering: auto; }
 /* Cụm nút nhanh (trái, dưới hồ sơ) */
 .hud-quick { position: absolute; left: 8px; top: 62px; display: flex; gap: 6px; }
 .hud-btn {
-  width: 50px; height: 52px; border: none; cursor: pointer; position: relative;
-  background: url('/assets/ui/pack/btn_round_wood.png') no-repeat center / 100% 100%;
+  width: 50px; height: 50px; cursor: pointer; position: relative; border-radius: 50%;
+  background: radial-gradient(circle at 34% 28%, #f3d9b4 0%, #dfae7e 62%, #cf9a68 100%);
+  border: 3px solid #a5663f;
+  box-shadow: inset 0 2px 0 #fff3dc88, inset 0 -3px 0 #00000018, 0 3px 0 #7a4a2a;
   display: flex; align-items: center; justify-content: center;
-  transition: transform .08s; padding: 0;
+  transition: transform .08s, box-shadow .08s; padding: 0;
 }
 .hud-btn img.hicon { width: 26px; height: 26px; object-fit: contain; pointer-events: none; }
-.hud-btn:active { transform: scale(.9); }
+.hud-btn:active { transform: translateY(2px) scale(.96); box-shadow: inset 0 2px 0 #fff3dc66, 0 1px 0 #7a4a2a; }
 .hud-btn .dot {
   position: absolute; top: 2px; right: 2px; width: 13px; height: 13px; border-radius: 50%;
   background: #fa5252; border: 2px solid #fff; display: none;

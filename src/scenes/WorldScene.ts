@@ -26,7 +26,7 @@ import { sfx } from '@/core/audio';
 const T = 16; // kích thước tile
 // ---- Nông trại HD (nền imagemap Avatar 1008x506) — tọa độ px ----
 const FARM_PLOT = { ox: 84, oy: 218, pw: 42, ph: 45 };            // lưới ruộng 8x6
-const FARM_POND_TILES = { x: 34, y: 9, w: 26, h: 8 };             // hồ cá lát tile (Pack2)
+const FARM_POND_TILES = { x: 33, y: 7, w: 28, h: 12 };            // hồ cá lát tile (Pack2)
 const KHE_POS = { x: 790, y: 195 };                               // cây khế
 const WAREHOUSE_POS = { x: 320, y: 175 };                         // nhà kho
 const PETHOUSE_POS = { x: 648, y: 198 };                          // nhà thú cưng (chỉ hiện khi đã nuôi)
@@ -162,9 +162,9 @@ export class WorldScene extends Phaser.Scene {
     this.drawZoneDecor();
     this.drawPortals();
     this.spawnNpcs();
-    if (this.zone.id === 'farm') this.buildPaths();
     if (this.zone.features.includes('farm')) this.buildFarm();
     if (this.zone.features.includes('barn')) this.buildBarn();
+    if (this.zone.id === 'farm') this.buildPaths();
     if (this.zone.features.includes('insects')) this.spawnInsects();
     if (this.zone.id === 'farm') this.spawnChopTrees();
     if (this.zone.id === 'farm') this.buildPetHouse();
@@ -587,14 +587,21 @@ export class WorldScene extends Phaser.Scene {
     });
   }
 
+  // vùng nhà cửa (dùng để đường đi né ra)
+  private decorRects: Phaser.Geom.Rectangle[] = [];
+
   // Đặt nhà cửa/đèn/ghế... theo cấu hình ZONE_DECOR
   private drawZoneDecor() {
+    this.decorRects = [];
     for (const d of ZONE_DECOR[this.zone.id] ?? []) {
       if (!this.textures.exists(d.key)) continue;
       const img = this.add.image(d.x * T, d.y * T, d.key)
         .setOrigin(0.5, 1)
         .setScale(d.s ?? (d.key.startsWith('bld_') ? 1.1 : 1.2))
         .setDepth(d.y * T);
+      // chỉ lấy phần chân nhà để đường đi né, không lấy cả mái
+      this.decorRects.push(new Phaser.Geom.Rectangle(
+        d.x * T - img.displayWidth * 0.36, d.y * T - 14, img.displayWidth * 0.72, 20));
       // chân nhà/cây chặn di chuyển (trừ decor nhỏ như hoa/đèn)
       if (img.displayWidth >= 40) {
         this.addFootprint(d.x * T, d.y * T, img.displayWidth * 0.68, Math.min(34, img.displayHeight * 0.24));
@@ -766,6 +773,15 @@ export class WorldScene extends Phaser.Scene {
     this.tweens.add({ targets: w2, tilePositionX: 32, duration: 9000, repeat: -1 });
     // vùng nước dùng cho câu cá / chặn đi lại
     this.pondEllipse = new Phaser.Geom.Ellipse(bx + bw / 2, by + bh / 2, bw * 0.98, bh * 0.98);
+    // rải đá quanh bờ hồ
+    let rs = 7;
+    const rnd = () => (rs = (rs * 9301 + 49297) % 233280) / 233280;
+    for (const k of bank) {
+      const [x, y] = k.split(',').map(Number);
+      if (rnd() > 0.32) continue;
+      this.add.image(x * T + 8, y * T + 10, 'rocks', Math.floor(rnd() * 6))
+        .setOrigin(0.5, 0.7).setScale(1.15).setDepth(y * T + 6);
+    }
     this.add.text(bx + bw / 2, by - 12, 'Hồ cá', {
       fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 }
     }).setOrigin(0.5).setDepth(2);
@@ -777,10 +793,30 @@ export class WorldScene extends Phaser.Scene {
     const addRect = (x0: number, y0: number, x1: number, y1: number) => {
       for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) tiles.add(`${x},${y}`);
     };
-    addRect(6, 12, 48, 13);      // đường ngang trên: nhà bếp -> nhà kho -> sang phải
-    addRect(28, 13, 29, 29);     // đường dọc bên phải ruộng
-    addRect(29, 28, 41, 29);     // nhánh sang chuồng thú
-    addRect(31, 29, 32, 31);     // nối xuống cổng ra
+    addRect(6, 13, 27, 13);      // đường ngang trước dãy nhà
+    addRect(28, 13, 29, 30);     // đường dọc giữa ruộng và chuồng/hồ
+    addRect(6, 29, 41, 30);      // đường ngang dưới ruộng
+    addRect(40, 27, 41, 29);     // nhánh lên cổng chuồng thú
+    addRect(31, 30, 32, 31);     // nối ra cổng nông trại
+
+    // né ruộng
+    const p0 = FARM_ORIGIN;
+    const px1 = p0.x + Math.ceil(farming.FARM_COLS * FARM_PLOT.pw / T);
+    const py1 = p0.y + Math.ceil(farming.FARM_ROWS * FARM_PLOT.ph / T);
+    // né chuồng rào và hồ cá
+    const B = BARN_RECT, W = FARM_POND_TILES;
+    const blocked = (x: number, y: number) => {
+      if (x >= p0.x && x < px1 && y >= p0.y && y < py1) return true;
+      if (x >= B.x - 1 && x <= B.x + B.w && y >= B.y - 1 && y <= B.y + B.h - 1) return true;
+      if (x >= W.x - 2 && x <= W.x + W.w + 1 && y >= W.y - 2 && y <= W.y + W.h + 1) return true;
+      // né chân nhà cửa
+      const r = new Phaser.Geom.Rectangle(x * T, y * T, T, T);
+      return this.decorRects.some(d => Phaser.Geom.Intersects.RectangleToRectangle(d, r));
+    };
+    for (const k of [...tiles]) {
+      const [x, y] = k.split(',').map(Number);
+      if (blocked(x, y)) tiles.delete(k);
+    }
 
     for (const key of tiles) {
       const [x, y] = key.split(',').map(Number);
