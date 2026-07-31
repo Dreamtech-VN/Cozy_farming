@@ -10,6 +10,7 @@ export class BootScene extends Phaser.Scene {
 
   preload() {
     this.load.image('title_bg', 'assets/lttt/maps/4.png');
+    this.load.image('age12', 'assets/ui/age12.png');   // nhãn 12+ gốc Avatar, cần sẵn ở màn title
     this.load.on('complete', () => { this.ready = true; this.tryNext(); });
   }
 

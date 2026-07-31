@@ -1,6 +1,6 @@
-# 🌾 Cozy Farming
+# 🌾 Sunny Town
 
-Game nông trại phong cách cozy (tham khảo Avatar TeaMobi, Stardew Valley, Harvest Town) — **một codebase chạy 4 nền tảng**: H5 (trình duyệt), PC, Android, iOS.
+Game nông trại phong cách cozy — **Sunny Town** (tham khảo Avatar TeaMobi, Stardew Valley, Harvest Town) — **một codebase chạy 4 nền tảng**: H5 (trình duyệt), PC, Android, iOS.
 
 - **Ngôn ngữ / engine:** TypeScript + [Phaser 3](https://phaser.io) + Vite — dễ code, dễ sửa lỗi, cập nhật nóng qua web, cộng đồng lớn.
 - **Màn hình ngang (landscape)**, điều khiển cảm ứng: joystick ảo + nút hành động theo ngữ cảnh; PC dùng WASD/phím mũi tên + E/Space.

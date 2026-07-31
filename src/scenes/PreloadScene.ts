@@ -160,12 +160,11 @@ export class PreloadScene extends Phaser.Scene {
     // logo game là ảnh thật (assets/ui/logo.png), vẽ ở lớp DOM cùng khung
     // đăng nhập trong showLoginFlow() -> ở đây không vẽ chữ nữa
 
-    // badge 12+ và cảnh báo sức khỏe
+    // badge 12+ (nhãn gốc Avatar, hd/12Plus.png) + cảnh báo sức khỏe
     const bx = W * 0.06, by = H * 0.38;
-    const g = this.add.graphics();
-    g.fillStyle(0xc9a227); g.fillCircle(bx, by, 17 * RES);
-    g.lineStyle(2 * RES, 0xfff3bf); g.strokeCircle(bx, by, 17 * RES);
-    this.add.text(bx, by, '12+', { fontFamily: 'Verdana', fontSize: `${11 * RES}px`, fontStyle: 'bold', color: '#3d2c05' }).setOrigin(0.5);
+    if (this.textures.exists('age12')) {
+      this.add.image(bx, by, 'age12').setScale(1.6 * RES).setOrigin(0.5);
+    }
     this.add.text(bx + 24 * RES, by, 'Chơi quá 180 phút một ngày\nsẽ ảnh hưởng xấu đến sức khỏe', {
       fontFamily: 'sans-serif', fontSize: `${9 * RES}px`, color: '#e8e8e8', backgroundColor: '#00000066', padding: { x: 6 * RES, y: 4 * RES }
     }).setOrigin(0, 0.5);

@@ -484,6 +484,10 @@ export class WorldScene extends Phaser.Scene {
     }
   }
 
+  // ghế trong nhà chờ xe buýt
+  private benchSeats: { x: number; y: number }[] = [];
+  private sitting = false;
+
   // ================= đường xe & trạm buýt (khu ngoài trời) =================
   private roadTiles(): number {
     return this.zone.roadTiles ?? ROAD_TILES;
@@ -519,6 +523,9 @@ export class WorldScene extends Phaser.Scene {
     const sh = this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setScale(this.zone.bg ? 1.1 : 0.6);
     // nhà chờ là phông nền: luôn nằm sau người chơi để đứng đợi xe vẫn thấy mình
     sh.setDepth(sy - sh.displayHeight);
+    // 3 chiếc ghế trong nhà chờ — ngồi đợi xe cho tử tế
+    const seatGap = sh.displayWidth * 0.3;
+    this.benchSeats = [-1, 0, 1].map(i => ({ x: sx + i * seatGap, y: sy - sh.displayHeight * 0.05 }));
     // xe riêng đậu mép đường
     if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
       this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(this.vehScale(`veh_${S.vehicle}`));
@@ -1200,6 +1207,7 @@ export class WorldScene extends Phaser.Scene {
       }
     }
     // chạm nền -> đi tới đó, tới nơi thì tự mở hành động tại chỗ
+    this.standUp();
     this.moveTarget = { x: wp.x, y: wp.y };
     this.pendingAct = true;
     this.showMoveMark(wp.x, wp.y);
@@ -1258,6 +1266,13 @@ export class WorldScene extends Phaser.Scene {
     for (const { def, sprite } of this.npcs) {
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, sprite.x, sprite.y) < 34) {
         acts.push({ icon: '', ui: 'chat', label: `Nói chuyện: ${def.name}`, cb: () => this.talkNpc(def) });
+      }
+    }
+    // ghế nhà chờ xe buýt
+    if (this.benchSeats.length && !this.sitting) {
+      const seat = this.nearestSeat();
+      if (seat && Phaser.Math.Distance.Between(this.player.x, this.player.y, seat.x, seat.y) < 120) {
+        acts.push({ icon: '', ui: 'sit', label: 'Ngồi chờ xe', cb: () => this.sitOnBench(seat) });
       }
     }
     // cổng
@@ -1575,6 +1590,44 @@ export class WorldScene extends Phaser.Scene {
     });
   }
 
+  // ---- ngồi ghế nhà chờ ----
+  private nearestSeat() {
+    let best: { x: number; y: number } | undefined; let bd = 1e9;
+    for (const s of this.benchSeats) {
+      const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, s.x, s.y);
+      if (d < bd) { bd = d; best = s; }
+    }
+    return best;
+  }
+
+  private sitOnBench(seat: { x: number; y: number }) {
+    this.moveTarget = undefined; this.pendingAct = false;
+    this.player.play('walk');
+    this.tweens.add({
+      targets: this.player, x: seat.x, y: seat.y, duration: 420,
+      onUpdate: () => this.player.setDepth(this.player.y),
+      onComplete: () => this.startSitting('Ngồi đợi xe buýt~')
+    });
+  }
+
+  // tư thế ngồi: giữ tới khi người chơi chạm để đi tiếp
+  private startSitting(msg: string) {
+    this.sitting = true;
+    this.busy = true;
+    this.player.setDir(0);
+    this.player.play('sit');
+    this.player.setFace('happy', 2500);
+    toast(msg, 'sit');
+  }
+
+  private standUp() {
+    if (!this.sitting) return;
+    this.sitting = false;
+    this.busy = false;
+    this.player.resetFace();
+    this.player.play('idle');
+  }
+
   // ================= thao tác bản thân =================
   private running = false;
 
@@ -1585,17 +1638,12 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
     if (kind === 'sit' || kind === 'lie') {
+      this.sitting = true;
       this.busy = true;
       this.player.play(kind === 'sit' ? 'sit' : 'lie');
       this.player.setFace(kind === 'lie' ? 'wink' : 'happy', 2500);   // nằm thì lim dim, ngồi thì thoải mái
       toast(kind === 'sit' ? 'Ngồi nghỉ một chút~' : 'Nằm thư giãn~', kind === 'sit' ? 'sit' : 'lie');
-      // đứng dậy khi di chuyển
-      const stand = this.time.addEvent({ delay: 200, loop: true, callback: () => {
-        if (Math.hypot(virtualInput.x, virtualInput.y) > 0.25 ||
-            this.cursors.left.isDown || this.cursors.right.isDown || this.cursors.up.isDown || this.cursors.down.isDown) {
-          this.busy = false; this.player.resetFace(); this.player.play('idle'); stand.remove();
-        }
-      } });
+      // chạm để đi tiếp là tự đứng dậy (xử lý trong onTap -> standUp)
     }
   }
 
