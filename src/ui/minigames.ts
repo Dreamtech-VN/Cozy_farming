@@ -330,26 +330,22 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   nameInput.onkeydown = e => e.stopPropagation();
   body.append(h('div', 'cc-mini-label', 'Tên nhân vật'), nameInput);
 
-  // --- Nhân vật đứng giữa, 2 nút xoay trái/phải ---
-  const previewWrap = h('div', 'cc-preview-wrap');
-  const preview = h('div', 'cc-preview');
+  // --- 2 nút xoay: điều khiển nhân vật bên trái (scene), panel không vẽ lại ---
+  const turnRow = h('div', 'cc-turn-row');
   let faceLeft = false;                       // art chỉ có 1 hướng -> lật ngang
   const turnL = h('button', 'cc-turn cc-turn-l');
   const turnR = h('button', 'cc-turn cc-turn-r');
   turnL.title = 'Quay sang trái'; turnR.title = 'Quay sang phải';
-  turnL.onclick = () => { faceLeft = true; refreshPreview(); };
-  turnR.onclick = () => { faceLeft = false; refreshPreview(); };
-  previewWrap.append(turnL, preview, turnR);
-  body.append(previewWrap);
-
-  function refreshPreview() {
-    preview.innerHTML = '';
-    const face = charFace(look, 104);
-    face.style.transform = faceLeft ? 'scaleX(-1)' : '';
-    preview.append(face);
+  const setFace = (left: boolean) => {
+    faceLeft = left;
+    bus.emit('charcreate:turn', left);
     turnL.classList.toggle('active', faceLeft);
     turnR.classList.toggle('active', !faceLeft);
-  }
+  };
+  turnL.onclick = () => setFace(true);
+  turnR.onclick = () => setFace(false);
+  turnRow.append(turnL, h('span', 'cc-turn-cap', 'Xoay nhân vật'), turnR);
+  body.append(turnRow);
 
   // --- Các hàng chọn kiểu Lttt: ◄ nhãn ► ---
   interface RowDef {
@@ -448,8 +444,10 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
 
   const rebuild = () => {
     normalize();
-    refreshPreview();
     buildRows();
   };
   rebuild();
+  // chỉ tô nút, không bắn sự kiện — để nhân vật vẫn tự đảo hướng cho tới khi
+  // người chơi bấm xoay lần đầu
+  turnR.classList.add('active');
 }

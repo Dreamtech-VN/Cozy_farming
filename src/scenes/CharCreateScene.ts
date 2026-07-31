@@ -11,6 +11,7 @@ import { RES } from '@/core/res';
 export class CharCreateScene extends Phaser.Scene {
   private preview?: ChibiSprite;
   private dirTimer = 0;
+  private userTurned = false;
 
   constructor() { super('CharCreate'); }
 
@@ -38,9 +39,11 @@ export class CharCreateScene extends Phaser.Scene {
 
     bus.on(EV.APPEARANCE, this.refresh, this);
     bus.on('charcreate:done', this.finish, this);
+    bus.on('charcreate:turn', this.turn, this);
     this.events.on('shutdown', () => {
       bus.off(EV.APPEARANCE, this.refresh, this);
       bus.off('charcreate:done', this.finish, this);
+      bus.off('charcreate:turn', this.turn, this);
     });
 
     bus.emit(EV.OPEN_PANEL, { panel: 'charcreate' });
@@ -49,6 +52,12 @@ export class CharCreateScene extends Phaser.Scene {
   private refresh() {
     if (S.player.chibi) this.preview?.setLook(S.player.chibi);
     this.preview?.play('walk');
+  }
+
+  // nút xoay trên panel DOM -> lật nhân vật xem trước
+  private turn(left: boolean) {
+    this.userTurned = true;            // người chơi tự xoay -> thôi tự đảo hướng
+    this.preview?.setDir(left ? 2 : 3);
   }
 
   private finish() {
@@ -66,6 +75,7 @@ export class CharCreateScene extends Phaser.Scene {
   update(_t: number, dt: number) {
     if (!this.preview) return;
     this.preview.tick(dt);
+    if (this.userTurned) return;
     this.dirTimer += dt;
     if (this.dirTimer > 1600) {
       this.dirTimer = 0;

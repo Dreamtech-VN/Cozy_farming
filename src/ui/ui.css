@@ -428,18 +428,22 @@ img { image-rendering: auto; }
 /* vùng chọn có chiều cao tối thiểu để đổi tab không nhảy khung */
 .cc-tab-content { min-height: 104px; }
 .cc-foot { flex: none; padding: 4px 16px 10px; text-align: center; }
-.cc-start {
-  padding: 10px 40px; font-size: 15px; display: inline-block; width: auto;
+/* nút chữ nhật bo góc — phải là .btn.cc-start mới thắng nổi .btn.gold
+   (cùng 2 class) để bỏ ảnh nút bầu dục của pack */
+.btn.cc-start {
+  padding: 11px 44px 12px; font-size: 15px; display: inline-block; width: auto;
+  background: linear-gradient(#ffe066, #f0b429) no-repeat center / 100% 100%;
+  border: 3px solid #d4a020; border-radius: 12px; color: #6b3f10;
+  box-shadow: 0 3px 0 #a8761a, inset 0 2px 0 #fff6cc; letter-spacing: .3px;
 }
-/* Nhân vật đứng giữa + 2 nút xoay (kiểu RegisterScr của Lttt) */
-.cc-preview-wrap {
-  display: flex; align-items: center; justify-content: center; gap: 10px; margin: 4px 0 8px;
+.btn.cc-start:active {
+  transform: translateY(2px); box-shadow: 0 1px 0 #a8761a, inset 0 2px 0 #fff6cc;
 }
-.cc-preview {
-  flex: none; width: 78px; height: 106px;
-  background: rgba(181,131,107,.12); border-radius: 10px; border: 2px solid rgba(181,131,107,.25);
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
+/* Panel không vẽ lại nhân vật (đã có ở scene bên trái) — chỉ còn nút xoay */
+.cc-turn-row {
+  display: flex; align-items: center; justify-content: center; gap: 12px; margin: 8px 0;
 }
+.cc-turn-cap { font-size: 11px; font-weight: 900; color: #9b7a55; }
 .cc-turn {
   flex: none; width: 26px; height: 38px; cursor: pointer; padding: 0;
   border: 2px solid #b5836b; border-radius: 8px; background: #f6edd8;

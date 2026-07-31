@@ -26,7 +26,13 @@ export function getGame(): Phaser.Game { return gameRef; }
 
 let hudBuilt = false;
 
+// Nhớ trạng thái ẩn/hiện: refreshHotbar() có thể chạy lại lúc đang tạo nhân vật
+// (EV.APPEARANCE bắn mỗi lần đổi đồ) và tạo mới thẻ #hotbar -> phải ẩn lại cho đúng.
+let hudVisible = false;
+export function isHudVisible() { return hudVisible; }
+
 export function setHudVisible(show: boolean) {
+  hudVisible = show;
   const ids = ['hotbar', 'menu-drawer', 'chat-mini'];
   const cls = ['.hud-top', '.hud-quick'];
   for (const id of ids) {
@@ -87,6 +93,8 @@ export function initUI(game: Phaser.Game) {
 function buildHud() {
   if (hudBuilt) { refreshHud(); return; }
   hudBuilt = true;
+  // dựng xong thì áp lại trạng thái ẩn/hiện hiện hành (xem setHudVisible)
+  queueMicrotask(() => setHudVisible(hudVisible));
 
   const top = h('div', 'hud-top');
   // hồ sơ
@@ -277,6 +285,7 @@ function buildJoystick() {
 export function refreshHotbar() {
   let bar = document.getElementById('hotbar');
   if (!bar) { bar = h('div'); bar.id = 'hotbar'; root().append(bar); }
+  bar.style.display = hudVisible ? '' : 'none';
   bar.innerHTML = '';
   S.hotbar.forEach((tid, i) => {
     const slot = h('button', 'hb-slot');
