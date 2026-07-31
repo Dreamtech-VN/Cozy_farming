@@ -23,7 +23,7 @@ import * as fishing from '@/systems/fishing';
 import { houseSize, partyActive } from '@/systems/housing';
 import { darkness, currentWeather, initTime, gameHour } from '@/systems/time';
 import { INSECTS, type InsectDef } from '@/data/insects';
-import { sfx, bgmForZone } from '@/core/audio';
+import { sfx, bgmForZone, setAmbient } from '@/core/audio';
 
 const T = 16; // kích thước tile
 // ---- Nông trại (nền = imageMap 25 gốc Avatar, 2032x528) — tọa độ px ----
@@ -2021,6 +2021,8 @@ export class WorldScene extends Phaser.Scene {
     const lamp = Phaser.Math.Clamp(darkness() / 0.7, 0, 1);
     for (const gl of this.lampGlows) gl.setAlpha(lamp * (gl.scaleX > 0.4 ? 0.6 : 0.95));
     const raining = currentWeather() === 'rain' && !this.zone.indoor;
+    // ambient Pack2 chồng lên nhạc nền: mưa ưu tiên hơn đêm, trong nhà thì tắt
+    setAmbient(this.zone.indoor ? null : raining ? 'rain' : darkness() > 0.45 ? 'night' : null);
     if (raining && !this.rain) {
       this.rain = this.add.particles(0, 0, 'raindrop', {
         x: { min: 0, max: this.zone.w * T }, y: -10,

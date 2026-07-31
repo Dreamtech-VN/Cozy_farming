@@ -47,8 +47,8 @@ tileset hàng rào, nhà cửa, vật nuôi, cây trồng, nước autotile, UI 
   (đã xoá phần cỏ), dùng cho đường đi trong nông trại và bờ hồ
 - `tiles/water_0*_16x16_5frames.png` -> `assets/pack2/water/`: mặt nước động 5 frame
 
-Vật nuôi vẫn giữ bộ cũ (pack không có gà/cừu). Nhạc nền và ambient trong pack
-chưa tích hợp.
+Vật nuôi vẫn giữ bộ cũ (pack không có gà/cừu). Nhạc nền và ambient của pack
+**đã tích hợp** — xem mục "Âm thanh" bên dưới.
 
 ## Icon vật phẩm nông trại kiểu chibi (`assets/farm/chibi/`)
 
@@ -208,13 +208,29 @@ thu về 128×128 rồi lưu dạng data URL JPEG (~8KB) ngay trong save — xem
 
 ## Âm thanh (`assets/sfx/`, `assets/bgm/`)
 
-Pack2 (SuperRetroRanch) **có nhạc** — 8 file .wav trong `musics/`: 3 nhạc nền
-(`field` 30.8MB, `town` 27MB, `village` 25.7MB) + 5 ambient (night, rain, fanfare,
-inn, gameover), tổng ~119MB chưa nén. Nhưng Pack2 **không có hiệu ứng** (không có
-tiếng bấm/thu hoạch/tưới nước), nên hiệu ứng vẫn lấy từ Lttt.
-(Phần đã copy vào `assets/pack2/` mới chỉ gồm `crops/`, `icons/`, `water/`.)
+**Nhạc nền dùng cả hai pack.** Pack2 (SuperRetroRanch) có 8 file .wav trong
+`musics/` (3 theme + 5 ambient, ~119MB chưa nén); dùng 5 file, chuyển sang .ogg
+(`ffmpeg -c:a libvorbis -q:a 3`) còn ~3.7MB:
 
-Hiệu ứng hiện lấy từ repo Lttt
+| Game | Nguồn | Dài |
+|---|---|---|
+| `bgm/p2_field` | Pack2 `music_themes/field` | 84s |
+| `bgm/p2_town` | Pack2 `music_themes/town` | 74s |
+| `bgm/p2_village` | Pack2 `music_themes/village` | 70s |
+| `bgm/p2_night` | Pack2 `ambients/night` | 30s |
+| `bgm/p2_rain` | Pack2 `ambients/rain` | 30s |
+
+Chia khu: Nông trại `p2_field` · Thành phố `p2_town` · Công viên/Bãi biển
+`p2_village` · Hồ câu `pond` (Lttt) · Trong nhà/Trường `house` (Lttt) ·
+Mall/Game center `shop` (Lttt). `p2_night` / `p2_rain` phát chồng lên nhạc nền
+(âm lượng 0.18) khi trời tối hoặc mưa, ở trong nhà thì tắt — xem `setAmbient()`.
+
+Pack1 (`full version`, 445 file) **không có file âm thanh nào**, và cũng không có
+icon nông cụ — `farming/tools.png` của pack đó là kệ gỗ/bình sữa, không phải
+nông cụ cầm tay.
+
+Pack2 **không có hiệu ứng** (không có tiếng bấm/thu hoạch/tưới nước), nên hiệu
+ứng lấy từ repo Lttt
 (`client/unity/Assets/Resources/sound/`, 96 file .ogg), chọn ra 16 file hợp game:
 
 | Game | File gốc Lttt |

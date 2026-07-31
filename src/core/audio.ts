@@ -1,7 +1,8 @@
 import { S } from './save';
 
-// Âm thanh dùng file .ogg lấy từ repo Lttt (xem docs/ASSETS.md).
-// Pack2 (SuperRetroRanch) KHÔNG kèm âm thanh — chỉ có crops/icons/water.
+// Âm thanh .ogg từ hai nguồn (xem docs/ASSETS.md):
+//  - nhạc nền: theme + ambient của Pack2 (SuperRetroRanch) và đoạn ngắn của Lttt
+//  - hiệu ứng: toàn bộ từ Lttt (Pack2 chỉ có nhạc, không có hiệu ứng)
 // Trình duyệt chặn phát tiếng trước khi người dùng chạm màn hình, nên phần
 // tổng hợp bằng WebAudio vẫn giữ lại làm phương án dự phòng khi file lỗi.
 let ctx: AudioContext | undefined;
@@ -98,11 +99,24 @@ export const sfx = {
 };
 
 // ===== Nhạc nền theo khu =====
+// Dùng nhạc của CẢ HAI pack: 3 theme dài của Pack2 (SuperRetroRanch) cho khu
+// ngoài trời, 4 đoạn ngắn của Lttt cho khu trong nhà/cửa hàng/hồ câu.
 const BGM_URL: Record<string, string> = {
+  // Pack2 — theme dài 70-84s
+  p2_field: 'assets/bgm/p2_field.ogg',
+  p2_town: 'assets/bgm/p2_town.ogg',
+  p2_village: 'assets/bgm/p2_village.ogg',
+  // Lttt — đoạn ngắn 24-44s
   town: 'assets/bgm/town.ogg',
   house: 'assets/bgm/house.ogg',
   shop: 'assets/bgm/shop.ogg',
   pond: 'assets/bgm/pond.ogg'
+};
+
+// Ambient chồng lên nhạc nền (cũng của Pack2): đêm + mưa
+const AMB_URL: Record<string, string> = {
+  night: 'assets/bgm/p2_night.ogg',
+  rain: 'assets/bgm/p2_rain.ogg'
 };
 
 let bgmEl: HTMLAudioElement | undefined;
@@ -123,19 +137,42 @@ export function playBgm(key: string) {
   } catch { /* ignore */ }
 }
 
-export function startBgm() { playBgm(bgmKey || 'town'); }
+export function startBgm() { playBgm(bgmKey || 'p2_field'); }
 
-// Mỗi khu một nền nhạc; khu chưa có nhạc riêng thì dùng nhạc thị trấn.
+// Mỗi khu một nền nhạc, trộn nhạc của cả hai pack.
 const ZONE_BGM: Record<string, string> = {
-  pond: 'pond', beach: 'pond',
-  house: 'house', school: 'house',
-  town: 'town', mall: 'shop', gamecenter: 'shop'
+  farm: 'p2_field',                       // Pack2: đồng quê
+  park: 'p2_village', beach: 'p2_village',
+  town: 'p2_town',                        // Pack2: thị trấn
+  pond: 'pond',                           // Lttt: nhạc câu cá
+  house: 'house', school: 'house',        // Lttt: trong nhà
+  mall: 'shop', gamecenter: 'shop'        // Lttt: cửa hàng
 };
 export function bgmForZone(zoneId: string) {
-  playBgm(ZONE_BGM[zoneId] ?? 'town');
+  playBgm(ZONE_BGM[zoneId] ?? 'p2_field');
+}
+
+// ===== Lớp ambient (đêm / mưa) chồng lên nhạc nền =====
+let ambEl: HTMLAudioElement | undefined;
+let ambKey = '';
+
+export function setAmbient(key: string | null) {
+  if (ambKey === (key ?? '') && (!key || (ambEl && !ambEl.paused))) return;
+  ambKey = key ?? '';
+  if (ambEl) { ambEl.pause(); ambEl.src = ''; ambEl = undefined; }
+  if (!key || !AMB_URL[key] || !S.settings.music) return;
+  try {
+    const el = new Audio(AMB_URL[key]);
+    el.loop = true;
+    el.volume = 0.18;                     // nhỏ hơn nhạc nền để không lấn
+    void el.play().catch(() => { /* chờ user chạm màn hình */ });
+    ambEl = el;
+  } catch { /* ignore */ }
 }
 
 export function stopBgm() {
   if (bgmEl) { bgmEl.pause(); bgmEl.src = ''; }
   bgmEl = undefined;
+  if (ambEl) { ambEl.pause(); ambEl.src = ''; ambEl = undefined; }
+  ambKey = '';
 }
