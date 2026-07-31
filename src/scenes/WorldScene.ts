@@ -100,12 +100,12 @@ interface WorldAction { icon: string; label: string; cb: () => void; ui?: string
 
 // icon nông cụ (vẽ pixel 16px theo palette pack + cần câu từ fishing pack)
 const TOOL_ICON = {
-  hoe: { url: 'assets/chibi/tools/hoe.png', sx: 0, sy: 0, sw: 46, sh: 46 },
-  can: { url: 'assets/chibi/tools/can.png', sx: 0, sy: 0, sw: 46, sh: 46 },
-  basket: { url: 'assets/chibi/tools/basket.png', sx: 0, sy: 0, sw: 48, sh: 46 },
+  hoe: { url: 'assets/farm/cf/18_hoe.png', sx: 0, sy: 0, sw: 32, sh: 32 },
+  can: { url: 'assets/farm/cf/17_watering_can.png', sx: 0, sy: 0, sw: 32, sh: 32 },
+  basket: { url: 'assets/farm/cf/19_sickle.png', sx: 0, sy: 0, sw: 32, sh: 32 },
   net: { url: 'assets/chibi/tools/net.png', sx: 0, sy: 0, sw: 48, sh: 46 },
   rod: { url: 'assets/chibi/tools/rod.png', sx: 0, sy: 0, sw: 60, sh: 28 },
-  seed: { url: 'assets/farm/seeds.png', sx: 0, sy: 0, sw: 16, sh: 16 }
+  seed: { url: 'assets/farm/cf/16_seed_bag.png', sx: 0, sy: 0, sw: 32, sh: 32 }
 };
 
 interface InsectSprite { def: InsectDef; obj: Phaser.GameObjects.Image; vx: number; vy: number; t: number }

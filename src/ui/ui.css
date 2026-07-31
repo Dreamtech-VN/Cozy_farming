@@ -650,9 +650,20 @@ img.cur { width: 15px; height: 15px; object-fit: contain; vertical-align: -3px; 
 /* icon thời tiết / mùa trên đồng hồ HUD */
 img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; margin-right: 3px; image-rendering: pixelated; }
 
-/* ===== Tab ngang trong Tủ đồ: chia đều ===== */
+/* ===== Tab ngang trong Tủ đồ: chia đều, cùng một kiểu thẻ ===== */
 .wd-tabs { display: flex; gap: 6px; }
-.wd-tabs .tab { flex: 1 1 0; min-width: 0; justify-content: center; }
+.wd-tabs .tab {
+  flex: 1 1 0; min-width: 0; justify-content: center; opacity: 1;
+  background: linear-gradient(#f6edd8, #e2c99a);
+  border: 2px solid #b5836b; border-bottom: none;
+  border-radius: 11px 11px 0 0; margin-bottom: -2px;
+  padding: 6px 8px 8px; color: #7a5b3a;
+  box-shadow: inset 0 2px 0 #fff8e8;
+}
+.wd-tabs .tab.active {
+  background: linear-gradient(#fff8e4, #ffe9b8); border-color: #e8890c; color: #6b3d05;
+  box-shadow: inset 0 2px 0 #fffdf4;
+}
 .wd-tabs .tab span { overflow: hidden; text-overflow: ellipsis; }
 
 /* ===== Tab Skin: card dọc thay ô vuông ===== */
@@ -672,12 +683,18 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   position: absolute; top: 6px; right: 6px; font-size: 10px; font-weight: 900; color: #3d2c05;
   background: linear-gradient(#ffe066, #f5a623); border: 1px solid #b5836b; border-radius: 7px; padding: 1px 6px;
 }
-.skin-card.skin-empty {
-  background: rgba(139, 94, 60, .16); border: 2px solid #b5836b66; box-shadow: inset 0 2px 5px #00000012; cursor: default;
+/* skin chưa sở hữu: xám */
+.skin-card.locked { opacity: .95; }
+.skin-card.locked .skin-art { filter: grayscale(1) brightness(.85); }
+.skin-card.locked .nm { color: #8b7357; }
+.skin-lock {
+  position: absolute; top: 6px; right: 6px; font-size: 10px; font-weight: 900; color: #f6edd8;
+  background: rgba(60, 44, 24, .72); border-radius: 7px; padding: 1px 6px;
 }
 
 /* ===== Danh hiệu dạng lưới tick ===== */
-.title-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+/* danh hiệu: lưới dọc 1 cột */
+.title-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
 .title-cell {
   position: relative; font-family: inherit; cursor: pointer; text-align: left;
   padding: 9px 34px 9px 12px; border-radius: 10px;

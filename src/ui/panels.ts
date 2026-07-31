@@ -782,7 +782,7 @@ export function registerAllPanels() {
   }
 
   function renderTitles(box: HTMLElement, redraw: () => void) {
-    box.append(h('div', 'hint', 'Bấm vào danh hiệu đã mở để đeo — ô đang đeo có dấu tick.'));
+    box.append(h('div', 'hint', 'Bấm vào danh hiệu đã mở để đeo — ô đang đeo có dấu tick. Danh hiệu xám là chưa mở.'));
     const card = h('div', 'wd-card');
     const grid = h('div', 'title-grid');
     for (const id of Object.keys(TITLES)) {
@@ -1151,20 +1151,22 @@ export function registerAllPanels() {
       // ----- ô Skin: chọn trọn bộ đã sở hữu -----
       if (z === -1) {
         grid.className = 'wd-grid skin-grid';
-        let n = 0;
-        for (const sid of S.skins) {
-          const sk = SKINS[sid];
-          if (!sk) continue;
-          const on = look.skin === sid;
-          const cell2 = h('button', `skin-card ${on ? 'active' : ''}`);
+        // hiện toàn bộ skin hệ thống có; bộ chưa sở hữu để xám
+        for (const sk of SKIN_LIST) {
+          const owned = S.skins.includes(sk.id);
+          const on = look.skin === sk.id;
+          const cell2 = h('button', `skin-card ${on ? 'active' : ''} ${owned ? '' : 'locked'}`);
           const art = h('div', 'skin-art'); art.append(skinFace(sk, 96));
           cell2.append(art, h('div', 'nm', sk.name));
           if (on) cell2.append(h('div', 'skin-on', 'Đang mặc'));
-          // bấm lại bộ đang mặc = cởi ra
-          cell2.onclick = () => { look.skin = on ? undefined : sid; apply(); render(); };
-          grid.append(cell2); n++;
+          else if (!owned) cell2.append(h('div', 'skin-lock', 'Chưa có'));
+          cell2.onclick = () => {
+            sfx.click();
+            if (!owned) { toast(`${sk.name} chưa sở hữu — mua ở tab Skin của Thời trang Cô Trang.`, 'shop'); return; }
+            look.skin = on ? undefined : sk.id; apply(); render();
+          };
+          grid.append(cell2);
         }
-        for (let i = n; i < Math.max(12, n); i++) grid.append(h('div', 'skin-card skin-empty'));
         card.append(grid);
         right.append(h('div', 'hint', S.skins.length ? 'Mặc skin sẽ thay toàn bộ trang phục — bấm lại bộ đang mặc để cởi ra.' : 'Chưa có skin nào — mua trọn bộ ở tab Skin của Thời trang Cô Trang!'));
         right.append(card);

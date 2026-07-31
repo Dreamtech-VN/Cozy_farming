@@ -26,6 +26,20 @@ Nguồn: các pack đã mua trên itch.io (license thương mại), tải từ
 - Nền đất/cỏ/cát/nước (tile đơn sắc có hoa văn, palette khớp pack) — autotile thật sẽ map ở v0.2.
 - Chuồng gia súc, đàn piano, đèn cây trong nhà, tranh treo tường.
 
+## Cloverframe Cozy Farm Starter Pack (`assets/farm/cf/`)
+
+20 icon 32x32 (nông sản, trứng/sữa/phô mai/bánh/mật ong, túi hạt, bình tưới, cuốc, liềm, rìu).
+
+Đang dùng cho: icon nông sản trong túi (cà rốt, củ cải, cà chua, bí đỏ, ngô, dâu,
+khoai tây, bắp cải), túi hạt giống, trứng, sữa, thức ăn gia súc (bó lúa mì),
+và 4 nông cụ cuốc / bình tưới / liềm (giỏ thu hoạch) / rìu.
+
+Giấy phép Cloverframe Studio v1.0: **được** dùng trong game thương mại và sửa đổi;
+**không được** bán lại / phát tán file gốc hoặc file đã sửa dưới dạng file rời,
+không đóng gói lại thành pack khác, không dùng để train AI.
+Lưu ý: repo này công khai nên file gốc nằm trong repo có thể bị coi là "phát tán file rời" —
+nếu muốn chặt chẽ, nên chuyển pack sang repo riêng tư hoặc build asset đã gộp sheet.
+
 ## Icon nông cụ chibi (`assets/chibi/tools/`)
 
 - `hoe/basket/rod/net.png`: icon item gốc Avatar (res.rar repo Lttt, hd/item

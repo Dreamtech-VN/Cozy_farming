@@ -33,7 +33,7 @@ export function item(id: string): ItemDef {
 
 // ---- Vật phẩm chung ----
 defItem({ id: 'fertilizer', name: 'Phân bón', kind: 'material', icon: '', sprite: { url: 'assets/ui/act/fertilizer.png', sx: 0, sy: 0, sw: 13, sh: 16 }, sell: 2, buy: 15, desc: 'Giảm 30% thời gian lớn của cây.' });
-defItem({ id: 'feed', name: 'Thức ăn gia súc', kind: 'material', icon: '', sprite: { url: 'assets/ui/act/feed.png', sx: 0, sy: 0, sw: 16, sh: 16 }, sell: 2, buy: 10, desc: 'Cho gà/bò/heo ăn.' });
+defItem({ id: 'feed', name: 'Thức ăn gia súc', kind: 'material', icon: '', sprite: { url: 'assets/farm/cf/01_wheat.png', sx: 0, sy: 0, sw: 32, sh: 32 }, sell: 2, buy: 10, desc: 'Cho gà/bò/heo ăn.' });
 defItem({ id: 'gift_flower', name: 'Bó hoa', kind: 'gift', icon: '', sprite: { url: 'assets/ui/act/flower_red.png', sx: 0, sy: 0, sw: 11, sh: 11 }, sell: 10, buy: 50, desc: 'Quà tặng bạn bè.' });
 defItem({ id: 'gift_choco', name: 'Sô-cô-la', kind: 'gift', icon: '', sprite: { url: 'assets/ui/act/choco.png', sx: 0, sy: 0, sw: 12, sh: 11 }, sell: 20, buy: 100, desc: 'Quà tặng bạn bè.' });
 defItem({ id: 'gift_teddy', name: 'Gấu bông', kind: 'gift', icon: '', sprite: { url: 'assets/ui/act/teddy.png', sx: 0, sy: 0, sw: 14, sh: 12 }, sell: 60, buy: 300, desc: 'Quà tặng dễ thương.' });
@@ -41,14 +41,14 @@ defItem({ id: 'lucky_ticket', name: 'Vé quay may mắn', kind: 'special', icon:
 
 // ---- Sản phẩm chăn nuôi (icon từ ui/items.png của farm pack) ----
 const ITEMS_SHEET = 'assets/farm/items.png';
-defItem({ id: 'egg', name: 'Trứng gà', kind: 'product', icon: '🥚', sell: 25, sprite: { url: ITEMS_SHEET, sx: 0, sy: 64, sw: 16, sh: 16 } });
-defItem({ id: 'milk', name: 'Sữa bò', kind: 'product', icon: '🥛', sell: 60, sprite: { url: ITEMS_SHEET, sx: 0, sy: 48, sw: 16, sh: 16 } });
+defItem({ id: 'egg', name: 'Trứng gà', kind: 'product', icon: '', sell: 25, sprite: { url: 'assets/farm/cf/11_egg.png', sx: 0, sy: 0, sw: 32, sh: 32 } });
+defItem({ id: 'milk', name: 'Sữa bò', kind: 'product', icon: '', sell: 60, sprite: { url: 'assets/farm/cf/12_milk.png', sx: 0, sy: 0, sw: 32, sh: 32 } });
 defItem({ id: 'pork', name: 'Nấm heo ủi', kind: 'product', icon: '🍄', sell: 45, desc: 'Heo ủi đất tìm được nấm quý.', sprite: { url: ITEMS_SHEET, sx: 32, sy: 96, sw: 16, sh: 16 } });
 defItem({ id: 'wool', name: 'Len cừu', kind: 'product', icon: '🧶', sell: 70, sprite: { url: ITEMS_SHEET, sx: 0, sy: 80, sw: 16, sh: 16 } });
 
 // ---- Nông cụ (mua ở bách hóa, gắn lên thanh nông cụ từ túi đồ) ----
-defItem({ id: 'tool_basket', name: 'Giỏ thu hoạch', kind: 'tool', icon: '🧺', sell: 0, buy: 400, desc: 'Gắn lên thanh nông cụ để thu hoạch nhanh cây chín gần nhất.', sprite: { url: 'assets/chibi/tools/basket.png', sx: 0, sy: 0, sw: 48, sh: 46 } });
-defItem({ id: 'tool_axe', name: 'Rìu', kind: 'tool', icon: '🪓', sell: 0, buy: 800, desc: 'Chặt cây ở Nông trại lấy Gỗ (cây mọc lại sau vài phút).', sprite: { url: 'assets/chibi/tools/axe.png', sx: 0, sy: 0, sw: 46, sh: 46 } });
+defItem({ id: 'tool_basket', name: 'Giỏ thu hoạch', kind: 'tool', icon: '', sell: 0, buy: 400, desc: 'Gắn lên thanh nông cụ để thu hoạch nhanh cây chín gần nhất.', sprite: { url: 'assets/chibi/tools/basket.png', sx: 0, sy: 0, sw: 48, sh: 46 } });
+defItem({ id: 'tool_axe', name: 'Rìu', kind: 'tool', icon: '', sell: 0, buy: 800, desc: 'Chặt cây ở Nông trại lấy Gỗ (cây mọc lại sau vài phút).', sprite: { url: 'assets/chibi/tools/axe.png', sx: 0, sy: 0, sw: 46, sh: 46 } });
 defItem({ id: 'tool_shovel', name: 'Xẻng', kind: 'tool', icon: '🦯', sell: 0, buy: 600, desc: 'Đào các đống đất ở Nông trại/Bãi biển tìm kho báu.', sprite: { url: 'assets/chibi/tools/shovel.png', sx: 0, sy: 0, sw: 46, sh: 46 } });
 
 // ---- Nguyên liệu từ rìu / xẻng ----

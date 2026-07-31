@@ -18,18 +18,26 @@ export interface CropDef {
 export const CROPS: Record<string, CropDef> = {};
 
 const SHEET = 'assets/farm/crops_all.png';
+// Icon nông sản/hạt giống nét hơn từ Cloverframe Cozy Farm pack (32x32)
+const CF = 'assets/farm/cf/';
+const CF_CROP: Record<string, string> = {
+  carrot: '02_carrot', turnip: '03_turnip', tomato: '04_tomato', pumpkin: '05_pumpkin',
+  corn: '06_corn', strawberry: '07_strawberry', potato: '09_potato', cabbage: '10_cabbage'
+};
 
 function defCrop(c: CropDef) {
   CROPS[c.id] = c;
   // cột 0 của mỗi hàng crops_all là icon túi hạt; cột 5 là cây chín
   defItem({
-    id: `seed_${c.id}`, name: `Hạt ${c.name}`, kind: 'seed', icon: '🌱',
-    sprite: { url: SHEET, sx: 0, sy: c.row * 16, sw: 16, sh: 16 },
+    id: `seed_${c.id}`, name: `Hạt ${c.name}`, kind: 'seed', icon: '',
+    sprite: { url: `${CF}16_seed_bag.png`, sx: 0, sy: 0, sw: 32, sh: 32 },
     sell: Math.floor(c.seedPrice / 2), buy: c.seedPrice, meta: { crop: c.id }
   });
   defItem({
     id: `crop_${c.id}`, name: c.name, kind: 'crop', icon: c.icon,
-    sprite: { url: SHEET, sx: c.stages * 16, sy: c.row * 16, sw: 16, sh: 16 },
+    sprite: CF_CROP[c.id]
+      ? { url: `${CF}${CF_CROP[c.id]}.png`, sx: 0, sy: 0, sw: 32, sh: 32 }
+      : { url: SHEET, sx: c.stages * 16, sy: c.row * 16, sw: 16, sh: 16 },
     sell: c.sellPrice
   });
 }
