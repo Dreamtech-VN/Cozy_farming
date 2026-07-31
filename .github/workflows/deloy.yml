@@ -1,0 +1,31 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Smoke test (node parse các module)
+        run: node tests/smoke.mjs
+
+      # Deploy bằng cách đẩy toàn bộ site tĩnh sang nhánh gh-pages
+      # (không cần quyền Pages API — nguồn Pages đặt là nhánh gh-pages)
+      - name: Push sang gh-pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B gh-pages
+          git push -f origin gh-pages
