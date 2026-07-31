@@ -367,10 +367,9 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
     }
     sec.append(gchips);
 
-    // tóc, mắt, áo, quần — 3 lựa chọn mỗi mục
-    const SLOTS: [string, number, 'hair' | 'eyes' | 'shirt' | 'pant'][] = [
+    // tóc, áo, quần — 3 lựa chọn mỗi mục
+    const SLOTS: [string, number, 'hair' | 'shirt' | 'pant'][] = [
       ['Tóc', 50, 'hair'],
-      ['Mắt', 40, 'eyes'],
       ['Áo', 20, 'shirt'],
       ['Quần', 10, 'pant'],
     ];
@@ -381,16 +380,16 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
       const chips = h('div', 'cc-opts');
       for (const p of opts) {
         const c = h('div', `cc-opt cc-opt-icon ${look[slot] === p.id ? 'active' : ''}`);
-        c.append(z >= 40 ? chibiHead(p.id, 36, z) : chibiPreview(p.id, 42), h('span', 'cc-opt-name', p.name));
+        c.append(chibiPreview(p.id, 42), h('span', 'cc-opt-name', p.name));
         c.onclick = () => { look[slot] = p.id; emit(); rebuild(); };
         chips.append(c);
       }
       sec.append(chips);
     }
 
-    // biểu cảm — 3 kiểu khuôn mặt
+    // mắt / biểu cảm — 3 kiểu khuôn mặt
     const EXPRS: [number, string][] = [[FACE.normal, 'Bình thường'], [FACE.happy, 'Vui vẻ'], [FACE.wink, 'Tinh nghịch']];
-    sec = section('Biểu cảm');
+    sec = section('Mắt / Biểu cảm');
     const echips = h('div', 'cc-opts');
     for (const [id, lbl] of EXPRS) {
       const c = h('div', `cc-opt cc-opt-icon ${look.eyes === id ? 'active' : ''}`);
