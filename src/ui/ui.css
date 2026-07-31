@@ -5,7 +5,10 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; user-select: none; }
 
 #app { position: fixed; inset: 0; }
 #game-root, #game-root canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-#ui-root { position: absolute; inset: 0; pointer-events: none; z-index: 10; }
+#ui-root {
+  position: absolute; inset: 0; pointer-events: none; z-index: 10;
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+}
 #ui-root > * { pointer-events: auto; }
 img { image-rendering: auto; }
 
@@ -130,14 +133,15 @@ img { image-rendering: auto; }
 .win-backdrop {
   position: absolute; inset: 0; background: rgba(30, 20, 10, .5); display: flex;
   align-items: center; justify-content: center; z-index: 50;
+  touch-action: none;
 }
 .win {
   border-image: url('/assets/ui/pack/frame2.png') 70 fill / 22px stretch;
-  width: min(720px, 92vw); max-height: 88vh; display: flex; flex-direction: column;
+  width: min(720px, 88vw); max-height: 82vh; display: flex; flex-direction: column;
   color: #4a3520; padding: 6px 4px 10px;
 }
-.win.small { width: min(460px, 90vw); }
-.win.large { width: min(880px, 96vw); }
+.win.small { width: min(400px, 80vw); max-height: 75vh; }
+.win.large { width: min(780px, 92vw); max-height: 82vh; }
 .win-head {
   position: relative; display: flex; align-items: center; justify-content: center;
   padding: 10px 52px 8px; text-align: center;
@@ -292,9 +296,10 @@ img { image-rendering: auto; }
 
 /* Tạo nhân vật */
 .cc-panel {
-  position: absolute; right: 0; top: 22px; bottom: 10px; width: min(520px, 58vw);
+  position: absolute; right: 0; top: 22px; bottom: 10px; width: min(460px, 52vw);
   border-image: url('/assets/ui/pack/frame2.png') 70 fill / 18px stretch;
   display: flex; flex-direction: column; color: #4a3520; overflow: visible;
+  padding-right: env(safe-area-inset-right, 0);
 }
 /* bảng tên gắn đè lên viền trên, giống cửa sổ Túi đồ */
 .cc-panel > .win-head {

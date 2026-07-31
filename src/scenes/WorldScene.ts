@@ -16,6 +16,7 @@ import { RES } from '@/core/res';
 import { TITLES } from '@/data/quests';
 import { titleCanvas, nameCanvas } from '@/ui/kit';
 import { hideLoading } from '@/ui/loading';
+import { setHudVisible } from '@/ui/UIManager';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import * as fishing from '@/systems/fishing';
@@ -161,6 +162,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   create() {
+    setHudVisible(true);
     this.zone = ZONES[S.zone] ?? ZONES.farm;
     const zw = this.zone.w * T, zh = this.zone.h * T;
     this.cameras.main.setBounds(0, 0, zw, zh);
@@ -1170,6 +1172,7 @@ export class WorldScene extends Phaser.Scene {
   // ================= tap =================
   private tapTimer = 0;
   private onTap(p: Phaser.Input.Pointer) {
+    if (document.querySelector('.win-backdrop, .cc-panel')) return;
     const wp = this.cameras.main.getWorldPoint(p.x, p.y);
     // chế độ đặt đồ
     if (this.placingItem) {

@@ -7,7 +7,7 @@ import { initUI } from './ui/UIManager';
 import { startBgm } from './core/audio';
 import { RES } from './core/res';
 
-// Game màn hình ngang 960x540 (x RES trên màn retina), scale FIT toàn màn hình
+// Game màn hình ngang, EXPAND để phủ hết màn hình (không viền đen trên mobile)
 const game = new Phaser.Game({
   type: Phaser.AUTO,
   parent: 'game-root',
@@ -15,7 +15,7 @@ const game = new Phaser.Game({
   pixelArt: true,
   roundPixels: true,
   scale: {
-    mode: Phaser.Scale.FIT,
+    mode: Phaser.Scale.EXPAND,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: 960 * RES,
     height: 540 * RES

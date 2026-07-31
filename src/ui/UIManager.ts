@@ -26,6 +26,19 @@ export function getGame(): Phaser.Game { return gameRef; }
 
 let hudBuilt = false;
 
+export function setHudVisible(show: boolean) {
+  const ids = ['hotbar', 'menu-drawer', 'chat-mini'];
+  const cls = ['.hud-top', '.hud-quick'];
+  for (const id of ids) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = show ? '' : 'none';
+  }
+  for (const sel of cls) {
+    const el = document.querySelector(sel) as HTMLElement | null;
+    if (el) el.style.display = show ? '' : 'none';
+  }
+}
+
 export function initUI(game: Phaser.Game) {
   gameRef = game;
   registerAllPanels();

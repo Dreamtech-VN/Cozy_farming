@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { showLoading } from '@/ui/loading';
+import { setHudVisible } from '@/ui/UIManager';
 import { S, save } from '@/core/save';
 import { bus, EV } from '@/core/events';
 import { ChibiSprite } from '@/gfx/ChibiSprite';
@@ -28,6 +29,7 @@ export class CharCreateScene extends Phaser.Scene {
     this.add.text(px, py + 40 * RES, 'Nhân vật của bạn', {
       fontFamily: 'sans-serif', fontSize: `${15 * RES}px`, color: '#e0f0ff', fontStyle: 'bold'
     }).setOrigin(0.5).setShadow(0, 2, '#1a3a55', 4);
+    setHudVisible(false);
     this.cameras.main.fadeIn(300, 10, 18, 32);
     if (!S.player.chibi) S.player.chibi = defaultLook(1);
     this.preview = new ChibiSprite(this, px, py - 6 * RES, S.player.chibi);

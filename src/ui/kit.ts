@@ -45,6 +45,8 @@ export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLEleme
   };
   closeBtn.onclick = close;
   backdrop.onclick = e => { if (e.target === backdrop) close(); };
+  backdrop.addEventListener('pointerdown', e => e.stopPropagation());
+  backdrop.addEventListener('touchstart', e => { if (e.target === backdrop) e.preventDefault(); }, { passive: false });
 
   const tabs = (names: string[], onPick: (i: number) => void, icons?: string[]) => {
     const bar = h('div', 'win-tabs');
