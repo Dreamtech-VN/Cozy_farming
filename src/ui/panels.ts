@@ -1708,7 +1708,7 @@ export function registerAllPanels() {
     inner.append(img);
 
     // marker các khu
-    const hereId = ZONES[S.zone]?.gateTo ?? S.zone;
+    const hereId = S.zone;
     for (const z of ZONE_LIST) {
       const pos = MAP_POS[z.id];
       if (!pos) continue;

@@ -16,7 +16,7 @@ import { virtualInput, consumeAction } from '@/core/input';
 import { RES } from '@/core/res';
 import { TITLES } from '@/data/quests';
 import { titleCanvas, nameCanvas, anyWindowOpen } from '@/ui/kit';
-import { hideLoading } from '@/ui/loading';
+import { showLoading, hideLoading } from '@/ui/loading';
 import { setHudVisible } from '@/ui/UIManager';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
@@ -63,6 +63,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     { key: 'lt_warehouse', x: 43.5, y: 15.3, s: 0.86, label: 'Nhà kho' },
     { key: 'lt_kitchen', x: 20, y: 15.3, s: 1 },
     { key: 'lt_order_board', x: 31, y: 19.5, s: 1.15, label: 'Đơn hàng' },
+    { key: 'lt_shop_av', x: 52, y: 15.3, s: 1, label: 'Cửa hàng' },
     // đèn đường: chân cột nằm hẳn trong thảm cỏ (cỏ hết ở y~240px)
     { key: 'lt_lamp_hd', x: 25.3, y: 14.5, s: 1 },
     { key: 'lt_lamp_hd', x: 56.2, y: 14.5, s: 1 },
@@ -75,6 +76,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   ],
   // decor Avatar trên map nền HD (scale 1 = đúng cỡ HD)
   town: [
+    { key: 'lt_shelter', x: 33, y: 25.6, s: 0.9 },   // nhà chờ xe buýt bên đường
     { key: 'lt_petshop', x: 21, y: 13, s: 1 },       // tiệm thú cưng
     { key: 'lt_house_white', x: 4, y: 13, s: 1 },    // nhà trắng — cửa Nhà riêng
     { key: 'lt_rank_sign', x: 31, y: 16, s: 1 },     // bảng xếp hạng
@@ -84,35 +86,6 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     { key: 'lt_icecream', x: 44, y: 14, s: 1 },      // quầy kem
     { key: 'lt_love_tree', x: 50, y: 22, s: 1 }      // cây tình yêu
   ],
-  // map cổng: cây + đèn + ghế dọc vỉa hè
-  // cổng nông trại: nền gốc chỉ còn biển FARM + hàng rào, cửa hàng dựng lại
-  // bằng sprite pack Cozy cho khớp style với nhà bếp/nhà kho trong nông trại
-  farm_gate: [
-    { key: 'lt_shop_av', x: 48, y: 11.2, s: 1, label: 'Cửa hàng' },
-    { key: 'lt_lamp_hd', x: 7.2, y: 18, s: 1 },   // tránh nhà chờ xe buýt (x 193..447)
-    { key: 'lt_lamp_hd', x: 69, y: 18, s: 1 }
-  ],
-  town_gate: [
-    { key: 'bld_cafe', x: 7, y: 8, s: 0.9 }, { key: 'bld_pub', x: 34, y: 8, s: 0.9 },
-    { key: 'deco_lamp_black', x: 13, y: 11 }, { key: 'deco_lamp_black', x: 27, y: 11 },
-    { key: 'deco_bench', x: 16, y: 11 }, { key: 'deco_bench', x: 24, y: 11 }
-  ],
-  beach_gate: [
-    { key: 'bld_beachbar', x: 32, y: 9, s: 0.9 },
-    { key: 'deco_lamp_green', x: 10, y: 11 }, { key: 'deco_lamp_green', x: 30, y: 11 },
-    { key: 'deco_barrel', x: 7, y: 9 }, { key: 'deco_bench', x: 14, y: 11 }
-  ],
-  park_gate: [
-    { key: 'deco_tree_round', x: 6, y: 8 }, { key: 'deco_tree_pine', x: 34, y: 8 },
-    { key: 'deco_bush', x: 9, y: 9 }, { key: 'deco_bush', x: 31, y: 9 },
-    { key: 'deco_lamp_green', x: 12, y: 11 }, { key: 'deco_lamp_green', x: 28, y: 11 },
-    { key: 'deco_bench', x: 16, y: 11 }, { key: 'deco_bench', x: 24, y: 11 }
-  ],
-  pond_gate: [
-    { key: 'deco_tree_pine', x: 6, y: 8 }, { key: 'deco_tree_pine', x: 34, y: 8 },
-    { key: 'deco_lamp_green', x: 12, y: 11 }, { key: 'deco_lamp_green', x: 28, y: 11 },
-    { key: 'deco_barrel', x: 9, y: 9 }, { key: 'deco_bench', x: 20, y: 11 }
-  ]
 };
 
 interface WorldAction { icon: string; label: string; cb: () => void; ui?: string; sprite?: { url: string; sx: number; sy: number; sw: number; sh: number } }
@@ -174,7 +147,7 @@ export class WorldScene extends Phaser.Scene {
 
     this.drawGround();
     if (this.zone.id === 'house') this.drawHouse();
-    this.drawRoad();
+    this.startTraffic();
     this.drawZoneDecor();
     this.drawPortals();
     this.spawnNpcs();
@@ -202,10 +175,7 @@ export class WorldScene extends Phaser.Scene {
     // canvas render ở 960x540 * RES -> mọi zoom nhân RES để giữ nguyên khung nhìn
     const bw = this.physics.world.bounds;
     const fitZoom = Math.max(this.scale.width / bw.width, this.scale.height / bw.height);
-    if (this.zone.road) {
-      // map cổng thấp: thu nhỏ vừa đủ để thấy cả cổng chào lẫn con đường
-      this.cameras.main.setZoom(Math.min(2.4 * RES, this.scale.height / bw.height));
-    } else if (this.zone.bg) {
+    if (this.zone.bg) {
       // nền ảnh HD kiểu Avatar: zoom nhẹ để thấy khung cảnh đúng tỉ lệ art
       this.cameras.main.setZoom(Math.max(1.6 * RES, fitZoom));
     } else {
@@ -221,14 +191,6 @@ export class WorldScene extends Phaser.Scene {
     this.wasd = this.input.keyboard!.addKeys('W,A,S,D,E,SPACE') as Record<string, Phaser.Input.Keyboard.Key>;
 
     this.cameras.main.fadeIn(250, 0, 0, 0);
-    // vừa đi xe tới cổng khu này -> xe vào bến trả khách
-    if (busArrival && this.zone.road) this.playArrival();
-    // vừa fade ra cổng để đi tiếp -> xe đón luôn
-    else if (pendingDepart && this.zone.road) {
-      const target = pendingDepart;
-      pendingDepart = undefined;
-      this.time.delayedCall(350, () => this.playDeparture(target));
-    }
 
     // chạm vào thế giới: đi tới / tương tác côn trùng / đặt đồ
     this.input.on('pointerdown', (p: Phaser.Input.Pointer) => this.onTap(p));
@@ -542,57 +504,23 @@ export class WorldScene extends Phaser.Scene {
 
   private sitting = false;   // đang ngồi/nằm bằng lệnh trong menu
 
-  // ================= đường xe & trạm buýt (khu ngoài trời) =================
-  private roadTiles(): number {
-    return this.zone.roadTiles ?? ROAD_TILES;
-  }
-  private roadTopY(): number {
-    return (this.zone.h - this.roadTiles()) * T;
-  }
-  private roadMidY(): number {
-    return (this.zone.h - this.roadTiles() / 2) * T;
-  }
-  private roadWidth(): number {
-    return this.zone.w * T;
-  }
-  private busStopX(): number {
-    return Math.min(this.roadWidth() - 6 * T, Math.max(6 * T, this.zone.spawn.x * T - 6 * T));
+  // ================= xe cộ AI trên đường =================
+  // Không còn map cổng riêng (chuyển khu bằng bản đồ thế giới như Lttt); map
+  // nào nền có sẵn con đường thì khai báo traffic.topTile để xe chạy bên dưới.
+  private trafficTopY(): number {
+    return (this.zone.traffic?.topTile ?? this.zone.h) * T;
   }
 
-  private drawRoad() {
-    if (!this.zone.road) return;
-    const top = this.roadTopY(), w = this.roadWidth(), zh = this.zone.h * T;
-    // map cổng có ảnh nền gốc (đã vẽ sẵn đường đất) thì khỏi vẽ nhựa + vỉa hè
-    if (!this.zone.bg) {
-      const g = this.add.graphics().setDepth(-85);
-      g.fillStyle(0xcfc3ae); g.fillRect(0, top - 6, w, 6);            // vỉa hè
-      g.fillStyle(0x5b6068); g.fillRect(0, top, w, zh - top);         // mặt đường
-      g.fillStyle(0xe8e8e8);                                          // vạch kẻ giữa
-      for (let x = 6; x < w - 20; x += 40) g.fillRect(x, top + (zh - top) / 2 - 1, 22, 3);
-    }
-    // nhà chờ xe buýt Avatar (repo Lttt)
-    const sx = this.busStopX();
-    // nền ảnh gốc: đường đất rộng hơn -> đẩy nhà chờ hẳn xuống mặt đường
-    const sy = this.zone.bg ? top + 22 : top - 2;
-    const sh = this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setScale(this.zone.bg ? 0.9 : 0.55);
-    // nhà chờ là phông nền: luôn nằm sau người chơi để đứng đợi xe vẫn thấy mình
-    sh.setDepth(sy - sh.displayHeight);
-    this.startTraffic();
-  }
-
-  // cổng chào dẫn vào map chính
-  // xe cộ AI chạy qua lại trên đường
   private startTraffic() {
+    if (!this.zone.traffic) return;
     const spawnCar = () => {
       if (!this.scene.isActive()) return;
       const key = TRAFFIC_KEYS[Math.floor(Math.random() * TRAFFIC_KEYS.length)];
       if (!this.textures.exists(key)) return;
       const toRight = Math.random() < 0.5;
-      const top = this.roadTopY(), zh = this.zone.h * T;
+      const top = this.trafficTopY(), zh = this.zone.h * T;
       // 2 làn: làn trên chạy sang trái, làn dưới chạy sang phải
-      const laneY = this.zone.bg
-        ? top + (zh - top) * (toRight ? 0.55 : 0.18)
-        : top + (zh - top) * (toRight ? 0.72 : 0.3);
+      const laneY = top + (zh - top) * (toRight ? 0.62 : 0.28);
       const w = this.zone.w * T;
       const car = this.add.image(toRight ? -120 : w + 120, laneY, key)
         .setDepth(laneY).setScale(this.vehScale(key)).setFlipX(!toRight);
@@ -609,80 +537,7 @@ export class WorldScene extends Phaser.Scene {
   // Xe buýt dùng asset gốc Avatar (repo Lttt, hd/home/839) — ảnh HD 234x194,
   // to hơn hẳn sprite xe pack pixel nên phải quy về cùng chiều cao.
   private vehScale(key: string): number {
-    const big = !!this.zone.bg;
-    if (key === 'veh_bus') return big ? 0.62 : 0.34;
-    return big ? 2.2 : 1.15;
-  }
-
-  // hiệu ứng xe buýt đón khách rồi rời bến (mọi chuyến đi đều bằng xe buýt)
-  private playDeparture(zoneId: string) {
-    if (this.busy) return;
-    this.busy = true;
-    this.stopFishing();
-    const key = 'veh_bus';
-    const stopX = this.busStopX();
-    const midY = this.roadMidY();
-    const exitLeft = this.roadWidth() < this.zone.w * T;
-    // 1) người chơi chạy tới trạm
-    this.tweens.add({
-      targets: this.player, x: stopX, y: this.roadTopY() - 10, duration: 450,
-      onStart: () => this.player.play('walk'),
-      onComplete: () => {
-        this.player.play('idle');
-        this.player.setDir(0);
-        // 2) xe chạy vào bến
-        const bus = this.add.image(-120, midY, key).setDepth(9000).setScale(this.vehScale(key));
-        this.tweens.add({
-          targets: bus, x: stopX, duration: 1100, ease: 'Cubic.easeOut',
-          onComplete: () => {
-            sfx.click();
-            // 3) lên xe
-            this.time.delayedCall(350, () => {
-              this.player.setVisible(false);
-              // 4) xe rời bến
-              this.tweens.add({
-                targets: bus, x: exitLeft ? -140 : this.zone.w * T + 140, duration: 1100, ease: 'Cubic.easeIn',
-                onStart: () => {
-                  if (exitLeft) bus.setFlipX(true);
-                  this.cameras.main.fadeOut(900, 0, 0, 0);
-                },
-                onComplete: () => {
-                  busArrival = true;
-                  S.zone = zoneId;
-                  save(true);
-                  this.scene.restart();
-                }
-              });
-            });
-          }
-        });
-      }
-    });
-  }
-
-  // xe tới bến ở khu mới, người chơi bước xuống
-  private playArrival() {
-    busArrival = false;
-    this.busy = true;
-    const key = 'veh_bus';
-    const stopX = this.busStopX();
-    this.player.setPosition(stopX, this.roadTopY() - 10);
-    this.player.setVisible(false);
-    const bus = this.add.image(-120, this.roadMidY(), key).setDepth(9000).setScale(this.vehScale(key));
-    this.tweens.add({
-      targets: bus, x: stopX, duration: 1100, ease: 'Cubic.easeOut',
-      onComplete: () => {
-        this.time.delayedCall(300, () => {
-          this.player.setVisible(true);
-          this.player.setDir(1);
-          sfx.click();
-          this.tweens.add({
-            targets: bus, x: this.zone.w * T + 140, duration: 1100, ease: 'Cubic.easeIn',
-            onComplete: () => { bus.destroy(); this.busy = false; }
-          });
-        });
-      }
-    });
+    return key === 'veh_bus' ? 0.62 : 2.2;
   }
 
   // vùng nhà cửa (dùng để đường đi né ra)
@@ -1374,8 +1229,8 @@ export class WorldScene extends Phaser.Scene {
       acts.push({ icon: '', ui: 'shop', label: 'Tiệm thú cưng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'petshop' }) });
     }
 
-    // cửa hàng cổng nông trại
-    if (this.zone.id === 'farm_gate' && Phaser.Math.Distance.Between(this.player.x, this.player.y, 48 * T, 11.2 * T) < 80) {
+    // cửa hàng trong nông trại
+    if (this.zone.id === 'farm' && Phaser.Math.Distance.Between(this.player.x, this.player.y, 52 * T, 15.3 * T + 40) < 90) {
       acts.push({ icon: '', ui: 'shop', label: 'Cửa hàng', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: 'shop_seed' } }) });
     }
 
@@ -1664,8 +1519,8 @@ export class WorldScene extends Phaser.Scene {
 
   // ================= người chơi khác trong khu =================
   private spawnRoamers() {
-    // chỉ ở khu công cộng (không phải nông trại / nhà riêng / map cổng)
-    if (this.zone.id === 'farm' || this.zone.id === 'house' || this.zone.road) return;
+    // chỉ ở khu công cộng (không phải nông trại / nhà riêng)
+    if (this.zone.id === 'farm' || this.zone.id === 'house') return;
     const cs = this.zone.bg ? 1 : 0.5;
     const list = roamersIn(this.zone.id, 3);
     list.forEach((def, i) => {
@@ -1988,35 +1843,20 @@ export class WorldScene extends Phaser.Scene {
       });
       return;
     }
-    const to = ZONES[zoneId];
-    if (!to) return;
-    // khu ngoài trời -> đích thật là map cổng của khu đó (trừ khi đang đứng ngay cổng ấy)
-    const dest = (!to.indoor && !to.road && to.gate && this.zone.id !== to.gate) ? to.gate : zoneId;
-    const destZone = ZONES[dest];
-    // cần đi xe: đích là map cổng khác với cổng của khu hiện tại
-    if (destZone.road && dest !== this.zone.gate && dest !== this.zone.id) {
-      if (this.zone.road) {
-        // đang đứng ở cổng có đường: xe đón tại trạm
-        this.playDeparture(dest);
-      } else {
-        // đang trong khu/nhà: fade ra cổng khu mình rồi xe đón
-        const own = this.zone.gate;
-        if (!own) return;
-        pendingDepart = dest;
-        S.zone = own;
-        save(true);
-        this.stopFishing();
-        this.cameras.main.fadeOut(200, 0, 0, 0);
-        this.time.delayedCall(220, () => this.scene.restart());
-      }
-      return;
-    }
-    // đi bộ qua cổng/cửa: chỉ fade
-    S.zone = dest;
-    save(true);
+    if (!ZONES[zoneId]) return;
+    // Lttt: chọn điểm trên bản đồ là đi thẳng tới nơi, không lội qua map cổng.
+    // Giữa hai khu chỉ có màn chờ ngắn cho đỡ giật.
+    this.busy = true;
     this.stopFishing();
-    this.cameras.main.fadeOut(200, 0, 0, 0);
-    this.time.delayedCall(220, () => this.scene.restart());
+    sfx.click();
+    showLoading(`Đang tới ${ZONES[zoneId].name}...`);
+    this.cameras.main.fadeOut(260, 0, 0, 0);
+    this.time.delayedCall(300, () => {
+      S.zone = zoneId;
+      save(true);
+      this.scene.restart();
+      window.setTimeout(hideLoading, 520);
+    });
   }
 
   // ================= thời tiết / đêm =================
@@ -2075,8 +1915,6 @@ export class WorldScene extends Phaser.Scene {
       const bw = this.physics.world.bounds;
       nx = Phaser.Math.Clamp(nx, bw.x + 8, bw.right - 8);
       ny = Phaser.Math.Clamp(ny, bw.y + 8, bw.bottom - 8);
-      // không đi xuống lòng đường (map cổng)
-      if (this.zone.road) ny = Math.min(ny, this.roadTopY() - 10);
       // giới hạn đi lại trên nền ảnh (tường nhà / mép đường trong ảnh)
       if (this.zone.walkTop) ny = Math.max(ny, this.zone.walkTop * T);
       if (this.zone.walkBottom) ny = Math.min(ny, this.zone.walkBottom * T);

@@ -23,10 +23,10 @@ export interface ZoneDef {
   npcs: NpcDef[];
   features: ('farm' | 'barn' | 'fishing' | 'fishfarm' | 'house_door' | 'trees' | 'flowers' | 'water_edge')[];
   indoor?: boolean;
-  road?: boolean;          // map cổng: có đường xe chạy + trạm buýt ở mép dưới
-  roadTiles?: number;      // bề cao dải đường xe (hàng tile), mặc định 4
-  gate?: string;           // zone cổng phục vụ khu này (đi xe buýt phải qua đây)
-  gateTo?: string;         // (zone cổng) map chính mà cổng dẫn vào
+  // Nền map nào có sẵn con đường nhựa thì cho xe cộ AI chạy bên dưới mốc này
+  // (theo hàng tile). Không còn map cổng riêng — chuyển khu bằng bản đồ thế
+  // giới như Lttt: chọn điểm trên bản đồ là đi thẳng tới nơi.
+  traffic?: { topTile: number };
   bg?: string;             // nền ảnh (assets/lttt/maps/<bg>.png) thay cho nền procedural
   water?: { x: number; y: number; w: number; h: number }[]; // vùng nước trên nền ảnh (tile)
   skyTop?: number;         // bề cao vùng trời phía trên map nền (px)
@@ -34,37 +34,17 @@ export interface ZoneDef {
   walkBottom?: number;
 }
 
-// Tạo map cổng cho 1 khu: dưới là đường xe, trên là vỉa hè + cổng vào
-function gateZone(id: string, name: string, icon: string, to: string, ground: GroundKind): ZoneDef {
-  return {
-    id, name: `Cổng ${name}`, icon, w: 40, h: 16, ground,
-    road: true, gateTo: to,
-    spawn: { x: 20, y: 8 },
-    portals: [{ x: 20, y: 5, to, label: `Vào ${name}`, icon }],
-    npcs: [],
-    features: []
-  };
-}
-
 export const ZONES: Record<string, ZoneDef> = {
-  // Cổng nông trại: nền là map 26 gốc Avatar (biển FARM + cửa hàng + đường đất)
-  farm_gate: {
-    ...gateZone('farm_gate', 'Nông trại', '', 'farm', 'grass'),
-    w: 82, h: 29, bg: 'farmgate', walkTop: 11, walkBottom: 26, roadTiles: 10, skyTop: 150,
-    spawn: { x: 26, y: 16 },
-    portals: [{ x: 26, y: 11, to: 'farm', label: 'Vào Nông trại', icon: '' }]
-  },
   farm: {
     // Nền là map 25 gốc Avatar (ghép đủ 6 mảnh): nhà bếp, nhà kho, sân rào
     // nuôi thú, hồ cá và đường đất đều đã vẽ sẵn nên không chồng lên nhau.
     id: 'farm', name: 'Nông trại', icon: '', w: 127, h: 33, ground: 'grass',
-    spawn: { x: 34, y: 25 }, gate: 'farm_gate',
+    spawn: { x: 34, y: 25 },
     bg: 'farmbg', walkTop: 11, walkBottom: 28, skyTop: 150,
     water: [{ x: 110, y: 16, w: 12, h: 12 }],   // hồ cá vẽ sẵn ở góc phải
     // Nông trại không có nhà riêng — cửa nhà riêng nằm ở căn nhà trắng Thị trấn.
-    portals: [
-      { x: 28, y: 27, to: 'farm_gate', label: 'Ra cổng', icon: '' }
-    ],
+    // Muốn đi khu khác thì mở bản đồ thế giới (như Lttt), không có cổng ra.
+    portals: [],
     npcs: [
       { id: 'npc_mai', name: 'Cô Mai', x: 24, y: 16, charIndex: 5, gender: 2, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
     ],
@@ -73,7 +53,7 @@ export const ZONES: Record<string, ZoneDef> = {
   town: {
     id: 'town', name: 'Thành phố', icon: '', w: 50, h: 29, ground: 'stone',
     spawn: { x: 25, y: 18 },
-    bg: '22', walkTop: 11, walkBottom: 25,
+    bg: '22', walkTop: 11, walkBottom: 25, traffic: { topTile: 26 },
     portals: [
       { x: 12, y: 12, to: 'gamecenter', label: 'Game Center', icon: '' },
       { x: 26, y: 12, to: 'school', label: 'Trường học', icon: '' },

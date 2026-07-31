@@ -11,7 +11,7 @@
 
 ```
 main.ts → Phaser.Game [Preload → CharCreate | World] + initUI()
-World đọc ZONES[S.zone] → dựng nền, cổng, NPC, ruộng/chuồng/nước/côn trùng
+World đọc ZONES[S.zone] → dựng nền, cổng, NPC, ruộng/chuồng/ao cá
 Người chơi (CharacterSprite ghép lớp) → contextActions() → HUD hiện nút hành động
 UI DOM: HUD, joystick ảo, cửa sổ (panel registry) — mở qua bus EV.OPEN_PANEL
 ```
@@ -33,3 +33,19 @@ UI DOM: HUD, joystick ảo, cửa sổ (panel registry) — mở qua bus EV.OPEN
 - `systems/social.ts` đang chạy chế độ offline (bạn NPC, chat bot) — thay bằng client WebSocket theo `docs/SERVER_PROTOCOL.md` là thành online, UI giữ nguyên.
 - `panels.ts > topup`: chỗ nối IAP (Capacitor purchase plugin) / cổng thanh toán.
 - `data/meta.ts > EVENTS`: sự kiện theo tháng, gắn shop/skin riêng từng event.
+
+## Chuyển khu (theo Lttt)
+
+Lttt không cho đi bộ qua map trung gian: mở **bản đồ thế giới** (MiniMap trong
+`MapScr`), mỗi khu là một điểm ghim (`PositionMap`), bấm vào là đi thẳng tới nơi.
+Sunny Town làm y vậy — panel `map` vẽ `assets/lttt/minimap.png` với các điểm ghim
+lấy từ `MAP_POS`, bấm là gọi `WorldScene.travel(zoneId)`: fade + màn chờ ngắn rồi
+`scene.restart()` ở khu mới.
+
+Vì thế **không còn map cổng** (`*_gate`) và cũng không còn đoạn xe buýt đưa đón
+giữa hai map. Xe cộ AI vẫn chạy: map nào nền có sẵn con đường thì khai báo
+`traffic: { topTile }` trong `ZoneDef` (hiện có Thị trấn — nền `22.png` có dải
+đường nhựa ở đáy), `WorldScene.startTraffic()` thả xe chạy hai làn bên dưới mốc
+đó. Nhà chờ xe buýt giờ là decor của Thị trấn.
+
+Save cũ còn `S.zone = 'farm_gate'` sẽ được đưa về `farm` khi load.

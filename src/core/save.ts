@@ -1,4 +1,5 @@
 import type { GameState, StatKey } from './types';
+import { ZONES } from '@/data/zones';
 import { bus, EV, toast } from './events';
 import { migrateBagToStore } from '@/systems/farmstore';
 
@@ -49,7 +50,7 @@ export function defaultState(): GameState {
     },
     minigames: { caroWins: 0, xiangqiWins: 0, rpsWins: 0 },
     settings: { music: true, sfx: true },
-    zone: 'farm_gate',
+    zone: 'farm',
     clockOffset: 0
   };
 }
@@ -153,6 +154,8 @@ export function load(): boolean {
     // save cũ để hạt/nông sản/phân trong túi -> chuyển sang kho nông trại
     if (!S.farmStore) S.farmStore = { seeds: {}, produce: {}, fert: {} };
     migrateBagToStore();
+    // save cũ còn đứng ở map cổng (đã bỏ) -> đưa về nông trại
+    if (!ZONES[S.zone]) S.zone = 'farm';
     if (!S.orders) S.orders = [];
     if (!S.fishfarm) S.fishfarm = [];
     return true;

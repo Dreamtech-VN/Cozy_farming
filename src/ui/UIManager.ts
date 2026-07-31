@@ -6,6 +6,7 @@ import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
 import { gameHour, currentWeather, WEATHER_ICON, season } from '@/systems/time';
 import * as socialMod from '@/systems/social';
+import * as storeMod from '@/systems/farmstore';
 import { initSocial, getChatLog } from '@/systems/social';
 import { TOOLS, toolIconSize } from '@/data/tools';
 import { initDaily } from '@/systems/meta';
@@ -52,7 +53,7 @@ export function initUI(game: Phaser.Game) {
   registerMinigames();
   // hook debug/automation (dùng cho test tự động)
   import('@/core/save').then(saveMod => {
-    (window as any).__cozy = { openPanel, bus, save: saveMod, game, social: socialMod };
+    (window as any).__cozy = { openPanel, bus, save: saveMod, game, social: socialMod, store: storeMod };
   });
 
   // cảnh báo xoay ngang
