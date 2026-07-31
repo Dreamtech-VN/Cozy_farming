@@ -1071,7 +1071,7 @@ export class WorldScene extends Phaser.Scene {
         if (farming.isRipe(p)) acts.push({ icon: '', sprite: TOOL_ICON.basket, label: 'Thu hoạch', cb: () => this.doHarvest(pi) });
         else {
           if (!p.watered) acts.push({ icon: '', sprite: TOOL_ICON.can, label: 'Tưới nước', cb: () => this.doWater(pi) });
-          if (!p.fertilized) acts.push({ icon: '', sprite: { url: 'assets/farm/items.png', sx: 32, sy: 96, sw: 16, sh: 16 }, label: 'Bón phân', cb: () => farming.fertilize(pi) });
+          if (!p.fertilized) acts.push({ icon: '', ui: 'fertilizer', label: 'Bón phân', cb: () => farming.fertilize(pi) });
         }
       }
     } else this.selector.setVisible(false);
