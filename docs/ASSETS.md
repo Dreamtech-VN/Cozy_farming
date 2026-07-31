@@ -119,21 +119,44 @@ Bản unity trong repo chỉ kèm **mảnh đầu tiên** của mỗi imagemap, 
 (`client/android/Avatar-PGaming.apk`, giải nén ra `assets/hd/imageMap/<id>/*.png`)
 có đủ các mảnh. Ghép các mảnh theo thứ tự số, canh mép **dưới**:
 
-| Map | Mảnh | Cỡ sau khi ghép | Dùng cho |
-|-----|------|-----------------|----------|
-| 25  | 6    | 2030x520        | `farmbg.png` — Nông trại |
-| 26  | 3    | 1302x466        | `farmgate.png` — Cổng Nông trại |
-| 14  | 3    | 1008x448        | `14.png` — Bãi biển (kè đá + tiệm câu) |
-| 10  | 3    | 4037x511        | `10.png` (mảnh đầu) — phố Game Center, có buồng ATM |
+Script ghép tất cả: **`scripts/build_lttt_maps.py`** (đặt `APK_ASSETS` trỏ tới
+thư mục assets đã giải nén rồi chạy). Bảng dưới là danh tính thật của từng map,
+đọc ra bằng cách ghép rồi nhìn ảnh, đối chiếu `T.nameRegion` trong client java
+(8 khu: *Khu nhà ở, Khu sinh thái, Sân bay, Khu giải trí, Khu mua sắm, Công
+viên, Khu ngoại ô, Nông trại*):
+
+| Map | Mảnh | Cỡ đã ghép | Zone trong game | Trong ảnh có sẵn |
+|-----|------|-----------|-----------------|------------------|
+| 25  | 6 | 2030x520 | `farm` Nông trại | bếp, kho, sân rào, hồ cá |
+| 26  | 3 | 1302x466 | `farm_gate` Khu Nông Trại | biển FARM, cửa hàng |
+| 22  | 4 | 2406x473 | `town` **Khu nhà ở** | 8 căn nhà 2-3 tầng |
+| 24  | 4 | 2118x516 | `mall` **Khu mua sắm** | Mỹ Viện, Gift, ATM, tiệm thú cưng, Premium, trang sức, Shop |
+| 10  | 3 | 2022x511 | `gamecenter` **Khu giải trí** | ATM, GAME (2 máy thùng), toà nhà lớn, xe bói, VÒNG QUAY, Pet Racing |
+| 4   | 2 | 912x517  | `park` Công viên | hồ, ghế đá |
+| 15  | 2 | 1008x384 | `pond` Hồ câu | hồ lớn |
+| 14  | 3 | 1008x448 | `beach` Bãi biển | kè đá, tiệm câu |
+| 58  | 1 | 576x526  | `fashion_shop` Tiệm thời trang | giá treo quần áo + cô bán hàng |
+| 59  | 1 | 576x526  | `gift_shop` Tiệm quà | quầy vàng + cô bán hàng |
+| 104 | 2 | 864x528  | `salon_shop` Mỹ Viện | gương lớn, quầy trang điểm |
+| 105 | 1 | 672x528  | `pet_shop` Tiệm thú cưng | tường vân chân thú, lồng thú |
+| 101 | 2 | 960x528  | `school` Trường học | kệ sách, quầy sách vở |
+
+*Sân bay* và *Khu ngoại ô* chưa dựng — bộ imageMap trong APK không có nền hai khu này.
 
 ⚠️ Map 10 còn kèm `daydien0/1/2.png` (dây điện) — đó là **lớp phủ riêng**, không
 nằm trong dải nền; ghép nền chỉ lấy các mảnh đánh số.
 
-Script ghép: `scripts/build_farm_maps.py` (sửa biến `APK` trỏ tới thư mục đã
-giải nén rồi chạy) — ghép mảnh xong kéo dài pixel mép cho khớp cỡ zone
-(2032x528 và 1312x464).
+Công trình vẽ sẵn trong ảnh nền không có sprite riêng nên không tự bấm được:
+bảng `DRAWN_SPOTS` trong `WorldScene` khai toạ độ px của từng cái (ATM, Premium,
+tiệm trang sức, vòng quay, Pet Racing, quầy các tiệm) để bấm vào là mở bảng
+tương ứng. Cửa vào tiệm khai bằng `portals` (khung bấm trùm mặt tiền); cửa ra
+của map nội thất khai thêm `spot: 'door'` để khung bấm chỉ bằng ô cửa.
 
-Hai map này đã vẽ sẵn **sân rào nuôi thú, hồ cá, đường đất và hàng rào**, nên
+Ghép mảnh xong kéo dài pixel mép cho khớp đúng số tile của zone.
+(`scripts/build_farm_maps.py` là bản cũ chỉ ghép 2 map nông trại, giữ lại làm
+tham chiếu; dùng `build_lttt_maps.py` cho toàn bộ.)
+
+Hai map nông trại đã vẽ sẵn **sân rào nuôi thú, hồ cá, đường đất và hàng rào**, nên
 code chỉ khai báo toạ độ để logic (ruộng, chuồng, câu cá) bám theo — không còn
 cảnh đường đi/nhà/ruộng đè lên nhau.
 

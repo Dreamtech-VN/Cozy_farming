@@ -675,12 +675,15 @@ export function registerAllPanels() {
 
   // ================= Shop =================
   // Shop nằm ở map nào thì phải đến map đó mới mở được (như đi chợ thật)
+  // Mỗi tiệm giờ có map nội thất riêng (theo imageMap Lttt) nên khoá theo đúng
+  // map của tiệm; bách hóa / nội thất vẫn bán ngay ngoài phố Khu mua sắm.
   const SHOP_ZONE: Record<string, string> = {
-    shop_seed: 'farm', shop_general: 'town', shop_house: 'town',
-    shop_fishing: 'beach', shop_fashion: 'mall', shop_gift: 'mall',
-    fishingshop: 'beach', toolupgrade: 'town', fashionshop: 'mall', petshop: 'town',
-    houseshop: 'town', animalshop: 'farm',
-    shop_barber: 'mall', shop_salon: 'mall', barbershop: 'mall', salonshop: 'mall'
+    shop_seed: 'farm_gate', shop_general: 'mall', shop_house: 'mall',
+    shop_fishing: 'beach', shop_fashion: 'fashion_shop', shop_gift: 'gift_shop',
+    fishingshop: 'beach', toolupgrade: 'mall', fashionshop: 'fashion_shop',
+    petshop: 'pet_shop', houseshop: 'mall', animalshop: 'farm',
+    shop_barber: 'salon_shop', shop_salon: 'salon_shop',
+    barbershop: 'salon_shop', salonshop: 'salon_shop'
   };
   function atShopZone(key: string, name: string): boolean {
     const z = SHOP_ZONE[key];
@@ -1856,12 +1859,15 @@ export function registerAllPanels() {
   // Bản đồ thành phố chỉ ghim các KHU chính (Lttt: "Thành phố có rất nhiều
   // khu"). Map con — nông trại riêng, nhà, trường, game center, khu mua sắm —
   // phải đi qua cổng bên trong khu chứ không nhảy thẳng từ bản đồ.
+  // Bản đồ thành phố = các KHU của Lttt (T.nameRegion)
   const MAP_POS: Record<string, { x: number; y: number }> = {
-    beach: { x: 56, y: 9 },       // hồ lớn phía trên phải
-    town: { x: 44, y: 30 },       // khu phố trung tâm
-    park: { x: 26, y: 48 },       // công viên đài phun nước bên trái
-    pond: { x: 82, y: 88 },       // hồ nhỏ góc dưới phải
-    farm_gate: { x: 56, y: 80 }   // đồng ruộng dưới giữa
+    beach: { x: 56, y: 9 },        // hồ lớn phía trên phải
+    town: { x: 44, y: 30 },        // Khu nhà ở
+    mall: { x: 70, y: 40 },        // Khu mua sắm
+    gamecenter: { x: 24, y: 22 },  // Khu giải trí
+    park: { x: 26, y: 48 },        // Công viên
+    pond: { x: 82, y: 88 },        // Khu sinh thái — hồ câu
+    farm_gate: { x: 56, y: 80 }    // Nông trại
   };
 
   registerPanel('map', () => {

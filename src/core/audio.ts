@@ -146,7 +146,10 @@ const ZONE_BGM: Record<string, string> = {
   town: 'p2_town',                        // Pack2: thị trấn
   pond: 'pond',                           // Lttt: nhạc câu cá
   house: 'house', school: 'house',        // Lttt: trong nhà
-  mall: 'shop', gamecenter: 'shop'        // Lttt: cửa hàng
+  mall: 'shop', gamecenter: 'shop',       // Lttt: cửa hàng
+  // nội thất các tiệm trong Khu mua sắm / Khu giải trí
+  fashion_shop: 'shop', gift_shop: 'shop', salon_shop: 'shop',
+  pet_shop: 'shop'
 };
 export function bgmForZone(zoneId: string) {
   playBgm(ZONE_BGM[zoneId] ?? 'p2_field');

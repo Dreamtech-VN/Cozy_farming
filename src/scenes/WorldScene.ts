@@ -75,12 +75,21 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     { key: 'lt_shelter', x: 14, y: 23.4, s: 0.9 },
     { key: 'lt_lamp_hd', x: 69, y: 18, s: 1 }
   ],
+  // Khu nhà ở (map 22): dãy nhà đã vẽ sẵn trong nền, chỉ thêm nhà chờ + bảng
+  // xếp hạng + đèn đường cho có sinh khí.
   town: [
-    { key: 'lt_shelter', x: 33, y: 25.6, s: 0.9 },   // nhà chờ xe buýt bên đường
-    { key: 'lt_petshop', x: 21, y: 13, s: 1 },       // tiệm thú cưng
-    { key: 'lt_house_white', x: 4, y: 13, s: 1 },    // nhà trắng — cửa Nhà riêng
-    { key: 'lt_rank_sign', x: 31, y: 16, s: 1 },     // bảng xếp hạng
-    { key: 'lt_lamp_hd', x: 20, y: 14, s: 1 }, { key: 'lt_lamp_hd', x: 38, y: 18, s: 1 }
+    { key: 'lt_shelter', x: 5, y: 25.6, s: 0.9 },
+    { key: 'lt_rank_sign', x: 60, y: 17, s: 1 },
+    { key: 'lt_lamp_hd', x: 36, y: 15, s: 1 }, { key: 'lt_lamp_hd', x: 100, y: 15, s: 1 }
+  ],
+  // Khu mua sắm (map 24): 7 mặt tiền vẽ sẵn (Mỹ Viện, Gift, ATM, thú cưng,
+  // Premium, trang sức, Shop) -> chỉ cần nhà chờ xe buýt.
+  mall: [
+    { key: 'lt_shelter', x: 5, y: 27.6, s: 0.9 }
+  ],
+  // Khu giải trí (map 10): ATM, GAME, vòng quay, Pet Racing đều vẽ sẵn.
+  gamecenter: [
+    { key: 'lt_shelter', x: 5, y: 27.6, s: 0.9 }
   ],
   park: [
     { key: 'lt_icecream', x: 44, y: 14, s: 1 },      // quầy kem
@@ -95,6 +104,41 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   pond: [
     { key: 'lt_shelter', x: 57, y: 11, s: 0.9 }
   ],
+};
+
+// Công trình VẼ SẴN trong ảnh nền imageMap Lttt (không phải sprite decor) —
+// toạ độ px đo thẳng trên ảnh nền, dùng làm khung bấm.
+const openPanelSpot = (panel: string, data?: unknown) =>
+  () => bus.emit(EV.OPEN_PANEL, data === undefined ? { panel } : { panel, data });
+const soonDialog = (title: string, text: string) =>
+  openPanelSpot('dialog', { title, text, actions: [] });
+
+const DRAWN_SPOTS: Record<string, { x: number; y: number; w: number; h: number; open: () => void }[]> = {
+  // map 24 — Khu mua sắm. Mặt tiền có cửa vào (Mỹ Viện / Gift / thú cưng /
+  // Shop) đã là portal nên chỉ khai báo mấy chỗ mở thẳng bảng.
+  mall: [
+    { x: 630, y: 112, w: 136, h: 104, open: openPanelSpot('atm') },                                   // buồng ATM
+    { x: 1046, y: 104, w: 208, h: 112, open: openPanelSpot('shop', { shopId: 'shop_general' }) },      // Premium = bách hóa
+    { x: 1348, y: 104, w: 188, h: 112, open: openPanelSpot('shop', { shopId: 'shop_house' }) }         // tiệm trang sức = nhà & nội thất
+  ],
+  // Nội thất các tiệm: người bán + quầy đều vẽ sẵn trong ảnh nền -> bấm quầy
+  fashion_shop: [
+    { x: 424, y: 168, w: 152, h: 192, open: openPanelSpot('shop', { shopId: 'shop_fashion' }) }
+  ],
+  gift_shop: [
+    { x: 196, y: 180, w: 224, h: 112, open: openPanelSpot('shop', { shopId: 'shop_gift' }) }
+  ],
+  pet_shop: [
+    { x: 88, y: 196, w: 232, h: 96, open: openPanelSpot('petshop') }
+  ],
+  // map 10 — Khu giải trí
+  gamecenter: [
+    { x: 48, y: 108, w: 146, h: 112, open: openPanelSpot('atm') },                                    // buồng ATM
+    { x: 524, y: 96, w: 188, h: 124, open: openPanelSpot('ranking') },                                // toà nhà lớn = bảng xếp hạng
+    { x: 800, y: 108, w: 132, h: 110, open: openPanelSpot('daily') },                                 // xe bói = điểm danh
+    { x: 992, y: 56, w: 164, h: 162, open: openPanelSpot('wheel') },                                  // VÒNG QUAY MAY MẮN
+    { x: 1300, y: 84, w: 272, h: 134, open: soonDialog('Pet Racing', 'Trường đua thú cưng — sắp mở!') }
+  ]
 };
 
 // Bấm thẳng vào công trình là mở, khỏi phải bắt chuyện NPC
@@ -440,8 +484,10 @@ export class WorldScene extends Phaser.Scene {
     // nền ảnh (map Avatar từ repo Lttt)
     if (this.zone.bg) {
       if (!this.zone.indoor) this.buildSky();
-      // chỗ nào ảnh nền trong suốt mà không có trời thì lấp màu cỏ
-      if (!this.sky) this.add.rectangle(0, 0, w * T, h * T, 0x4e8a2a).setOrigin(0).setDepth(-101);
+      // chỗ nào ảnh nền trong suốt mà không có trời thì lấp: trong nhà lấp nền
+      // tối cho ra bức tường, ngoài trời lấp màu cỏ
+      if (this.zone.indoor) this.add.rectangle(0, 0, w * T, h * T, 0x241c28).setOrigin(0).setDepth(-101);
+      else if (!this.sky) this.add.rectangle(0, 0, w * T, h * T, 0x4e8a2a).setOrigin(0).setDepth(-101);
       else {
         const st = (this.zone.skyTop ?? 160) - 2;
         this.add.rectangle(0, st, w * T, h * T - st, 0x4e8a2a).setOrigin(0).setDepth(-101);
@@ -652,12 +698,12 @@ export class WorldScene extends Phaser.Scene {
       });
       return;
     }
-    if (this.zone.id === 'gamecenter') {
-      // map 10 vẽ sẵn buồng ATM ngay đầu phố (cùng cái đem về khu Nông Trại)
-      this.spots.push({
-        rect: new Phaser.Geom.Rectangle(48, 108, 146, 112),
-        open: () => bus.emit(EV.OPEN_PANEL, { panel: 'atm' })
-      });
+    // Công trình vẽ sẵn trong nền imageMap Lttt: toạ độ px trên chính ảnh nền
+    const drawn = DRAWN_SPOTS[this.zone.id];
+    if (drawn) {
+      for (const d of drawn) {
+        this.spots.push({ rect: new Phaser.Geom.Rectangle(d.x, d.y, d.w, d.h), open: d.open });
+      }
       return;
     }
     if (this.zone.id !== 'farm') return;
@@ -745,10 +791,12 @@ export class WorldScene extends Phaser.Scene {
   private drawPortals() {
     for (const p of this.zone.portals) {
       const px = p.x * T, py = p.y * T;
-      this.spots.push({
-        rect: new Phaser.Geom.Rectangle(px - 34, py - 34, 68, 68),
-        open: () => this.travel(p.to)
-      });
+      // cửa vào nằm ở chân công trình -> khung bấm trùm lên cả mặt tiền;
+      // cửa RA của map nội thất chỉ lấy đúng ô cửa cho khỏi bấm nhầm
+      const rect = p.spot === 'door'
+        ? new Phaser.Geom.Rectangle(px - 26, py - 30, 52, 52)
+        : new Phaser.Geom.Rectangle(px - 48, py - 76, 96, 100);
+      this.spots.push({ rect, open: () => this.travel(p.to) });
     }
   }
 
@@ -1089,7 +1137,14 @@ export class WorldScene extends Phaser.Scene {
     const spot = this.spots.find(sp => sp.rect.contains(wp.x, wp.y));
     if (spot) {
       this.standUp();
-      this.moveTarget = { x: spot.rect.centerX, y: spot.rect.bottom + 26 };
+      // chân công trình có thể nằm ngoài dải đi được (cửa sát mép map) -> kẹp
+      // lại trong dải, không thì đi hoài không tới nên chẳng bao giờ mở ra
+      const top = (this.zone.walkTop ?? 0) * T;
+      const bottom = (this.zone.walkBottom ?? this.zone.h) * T;
+      this.moveTarget = {
+        x: Phaser.Math.Clamp(spot.rect.centerX, T, (this.zone.w - 1) * T),
+        y: Phaser.Math.Clamp(spot.rect.bottom + 26, top, bottom)
+      };
       this.pendingAct = true;
       this.pendingSpot = spot.open;
       this.showMoveMark(this.moveTarget.x, this.moveTarget.y);

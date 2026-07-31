@@ -74,7 +74,7 @@ export class PreloadScene extends Phaser.Scene {
     }
 
     // ---- Nền map Avatar (repo Lttt) ----
-    for (const m of ['4', '10', '14', '15', '22', '24', '101', 'farmbg', 'farmgate']) {
+    for (const m of ['4', '10', '14', '15', '22', '24', '58', '59', '101', '104', '105', 'farmbg', 'farmgate']) {
       this.load.image(`bg_${m}`, `assets/lttt/maps/${m}.png`);
     }
     // ---- Decor Avatar (repo Lttt) ----
