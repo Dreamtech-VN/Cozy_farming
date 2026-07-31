@@ -27,7 +27,7 @@ const T = 16; // kích thước tile
 // ---- Nông trại (nền = imageMap 25 gốc Avatar, 2032x528) — tọa độ px ----
 // Nhà bếp, nhà kho, sân rào nuôi thú, hồ cá và đường đất đã được vẽ sẵn trong
 // nền nên ở đây chỉ cần khai báo đúng vị trí của chúng để logic bám theo.
-const FARM_PLOT = { ox: 1075, oy: 190, pw: 42, ph: 45 };          // lưới ruộng 10x4 trên bãi cỏ phải
+const FARM_PLOT = { ox: 1068, oy: 195, pw: 42, ph: 45 };          // lưới ruộng 13x4 trên bãi cỏ phải
 const FARM_POND_TILES = { x: 110, y: 16, w: 12, h: 12 };          // lòng hồ cá (phủ nước động lên trên)
 const WAREHOUSE_POS = { x: 700, y: 200 };                         // nhà kho vẽ sẵn
 const PETHOUSE_POS = { x: 730, y: 320 };                          // nhà thú cưng (chỉ hiện khi đã nuôi)
@@ -54,10 +54,10 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   farm: [
     { key: 'bldhd_farm_house', x: 32, y: 15.3, s: 1, label: 'Nhà bếp' },
     { key: 'bldhd_farm_barn', x: 43.5, y: 15.3, s: 1, label: 'Nhà kho' },
-    // đèn đường đứng trên thảm cỏ, thẳng hàng với dãy nhà
-    { key: 'lt_lamp_hd', x: 25, y: 15.7, s: 1 },
-    { key: 'lt_lamp_hd', x: 56.2, y: 15.7, s: 1 },
-    { key: 'lt_lamp_hd', x: 107, y: 15.7, s: 1 }
+    // đèn đường: chân cột nằm hẳn trong thảm cỏ (cỏ hết ở y~240px)
+    { key: 'lt_lamp_hd', x: 25.3, y: 14.5, s: 1 },
+    { key: 'lt_lamp_hd', x: 56.2, y: 14.5, s: 1 },
+    { key: 'lt_lamp_hd', x: 107, y: 14.5, s: 1 }
   ],
   beach: [
     { key: 'bld_fishshop', x: 10, y: 7 },    // tiệm câu ông Biển
@@ -175,7 +175,7 @@ export class WorldScene extends Phaser.Scene {
     if (this.zone.features.includes('insects')) this.spawnInsects();
     if (this.zone.id === 'farm') this.spawnChopTrees();
     if (this.zone.id === 'farm') this.buildPetHouse();
-    if (this.zone.id === 'farm' || this.zone.id === 'beach') this.spawnMounds();
+    if (this.zone.id === 'beach') this.spawnMounds();   // đào cát ở biển, nông trại không rải đống đất
 
     // người chơi chibi Avatar: cao 84px native HD -> map nền HD scale 1,
     // map tile 16px thu về 0.5 (=42px ~ 2.6 tile) cho cân cảnh pixel-art
@@ -1744,19 +1744,10 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private spawnMound() {
-    // vị trí ngẫu nhiên tránh vùng ruộng
+    // vị trí ngẫu nhiên (chỉ dùng ở bãi biển — đào cát)
     for (let tries = 0; tries < 40; tries++) {
       const tx = 3 + Math.floor(Math.random() * (this.zone.w - 6));
       const ty = 4 + Math.floor(Math.random() * (this.zone.h - 8));
-      if (this.zone.id === 'farm') {
-        const p0 = FARM_ORIGIN;
-        if (tx > p0.x - 2 && tx < p0.x + farming.FARM_COLS * FARM_PLOT.pw / T + 2 &&
-            ty > p0.y - 2 && ty < p0.y + farming.FARM_ROWS * FARM_PLOT.ph / T + 2) continue;   // lưới ruộng
-        if (ty < 13 || ty > 27 || tx < 5 || tx > 121) continue;                      // ngoài vùng đi lại
-        if (tx > BARN_RECT.x - 2 && tx < BARN_RECT.x + BARN_RECT.w + 2 &&
-            ty < BARN_RECT.y + BARN_RECT.h + 2) continue;                            // sân rào nuôi thú
-        if (tx > 26 && tx < 49 && ty < 16) continue;                                 // nhà bếp + nhà kho
-      }
       if (this.nearWaterTile(tx, ty)) continue;                                      // không mọc dưới nước
       const obj = this.add.image(tx * T, ty * T, 'mound').setOrigin(0.5, 0.85)
         .setDepth(ty * T - 8).setScale(this.zone.bg ? 1 : 0.55);
@@ -1803,7 +1794,7 @@ export class WorldScene extends Phaser.Scene {
       const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, m.x, m.y);
       if (d < bd) { bd = d; best = m; }
     }
-    if (!best || bd > (this.zone.bg ? 90 : 52)) { toast('Không có đống đất nào gần đây — tìm mấy ụ đất nâu nhé.', 'shovel'); return; }
+    if (!best || bd > (this.zone.bg ? 90 : 52)) { toast('Không có chỗ nào để đào — ra bãi biển tìm mấy ụ cát nhé.', 'shovel'); return; }
     const mound = best;
     this.busy = true;
     this.player.play('hoe', () => {
