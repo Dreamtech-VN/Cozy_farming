@@ -48,10 +48,13 @@ let pendingDepart: string | undefined;
 const TRAFFIC_KEYS = ['veh_bus', 'veh_truck_orange', 'veh_camper_pink', 'veh_camper_yellow', 'veh_truck_bee', 'veh_truck_gift'];
 
 // Decor đặt sẵn theo khu (sprite thật từ asset pack) — toạ độ tile, origin đáy giữa
-const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number }[]> = {
-  // Nông trại không đặt thêm công trình nào: nhà bếp, nhà kho, sân rào, hồ cá
-  // và cây cối đều nằm sẵn trong ảnh nền map 25 -> không thể chồng lên nhau.
-  farm: [],
+const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number; label?: string }[]> = {
+  // Nền map 25 đã bị xoá sạch cây + 2 căn nhà gốc (scripts/clean_farm_map.py),
+  // nhà bếp và nhà kho dựng lại bằng sprite pack Cozy cho đồng bộ style.
+  farm: [
+    { key: 'bld_farm_house', x: 32, y: 15, s: 2, label: 'Nhà bếp' },
+    { key: 'bld_farm_barn', x: 43.5, y: 15, s: 2, label: 'Nhà kho' }
+  ],
   beach: [
     { key: 'bld_fishshop', x: 10, y: 7 },    // tiệm câu ông Biển
     { key: 'bld_beachbar', x: 22, y: 12 },
@@ -69,8 +72,11 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     { key: 'lt_love_tree', x: 50, y: 22, s: 1 }      // cây tình yêu
   ],
   // map cổng: cây + đèn + ghế dọc vỉa hè
-  // cổng nông trại cũng dùng ảnh nền gốc (biển FARM, cửa hàng, cây) -> để trống
-  farm_gate: [],
+  // cổng nông trại: nền gốc chỉ còn biển FARM + hàng rào, cửa hàng dựng lại
+  // bằng sprite pack Cozy cho khớp style với nhà bếp/nhà kho trong nông trại
+  farm_gate: [
+    { key: 'bld_farm_market', x: 49, y: 11, s: 2, label: 'Cửa hàng' }
+  ],
   town_gate: [
     { key: 'bld_cafe', x: 7, y: 8, s: 0.9 }, { key: 'bld_pub', x: 34, y: 8, s: 0.9 },
     { key: 'deco_lamp_black', x: 13, y: 11 }, { key: 'deco_lamp_black', x: 27, y: 11 },
@@ -457,10 +463,10 @@ export class WorldScene extends Phaser.Scene {
     const sx = this.busStopX();
     // nền ảnh gốc: đường đất rộng hơn -> đẩy nhà chờ hẳn xuống mặt đường
     const sy = this.zone.bg ? top + 22 : top - 2;
-    this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setDepth(sy - 40).setScale(0.6);
+    this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setDepth(sy - 40).setScale(this.zone.bg ? 1.1 : 0.6);
     // xe riêng đậu mép đường
     if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
-      this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(1.1);
+      this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(this.zone.bg ? 2.2 : 1.1);
     }
 
     if (!this.zone.bg) this.drawGateArch();   // ảnh nền gốc đã có cổng chào riêng
@@ -507,7 +513,7 @@ export class WorldScene extends Phaser.Scene {
         : top + (zh - top) * (toRight ? 0.72 : 0.3);
       const w = this.zone.w * T;
       const car = this.add.image(toRight ? -120 : w + 120, laneY, key)
-        .setDepth(laneY).setScale(1.05).setFlipX(!toRight);
+        .setDepth(laneY).setScale(this.zone.bg ? 2.2 : 1.05).setFlipX(!toRight);
       this.tweens.add({
         targets: car, x: toRight ? w + 120 : -120,
         duration: 6000 + Math.random() * 4000,
@@ -601,6 +607,12 @@ export class WorldScene extends Phaser.Scene {
         .setOrigin(0.5, 1)
         .setScale(d.s ?? (d.key.startsWith('bld_') ? 1.1 : 1.2))
         .setDepth(d.y * T);
+      // tên công trình treo phía trên (thay cho mốc cổng nhấp nháy)
+      if (d.label) {
+        this.add.text(d.x * T, d.y * T - img.displayHeight - 6, d.label, {
+          fontSize: '11px', color: '#fff8e8', backgroundColor: '#00000090', padding: { x: 5, y: 2 }
+        }).setOrigin(0.5, 1).setDepth(d.y * T + 1);
+      }
       // chỉ lấy phần chân nhà để đường đi né, không lấy cả mái
       this.decorRects.push(new Phaser.Geom.Rectangle(
         d.x * T - img.displayWidth * 0.36, d.y * T - 14, img.displayWidth * 0.72, 20));
@@ -684,6 +696,9 @@ export class WorldScene extends Phaser.Scene {
 
   // ================= cổng khu vực =================
   private drawPortals() {
+    // map dùng ảnh nền gốc đã có cổng/nhà vẽ sẵn -> không cần mốc nhấp nháy,
+    // cứ đi tới là hiện nút đi tiếp.
+    if (this.zone.bg) return;
     for (const p of this.zone.portals) {
       const px = p.x * T, py = p.y * T;
       this.add.circle(px, py, 10, 0xffe066, 0.35).setDepth(1);
@@ -1170,7 +1185,7 @@ export class WorldScene extends Phaser.Scene {
     }
     // cổng
     for (const p of this.zone.portals) {
-      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, p.x * T, p.y * T) < 26) {
+      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, p.x * T, p.y * T) < (this.zone.bg ? 64 : 26)) {
         acts.push({ icon: p.icon, label: `Đi tới ${p.label}`, cb: () => this.travel(p.to) });
       }
     }

@@ -104,10 +104,20 @@ Script ghép: `scripts/build_farm_maps.py` (sửa biến `APK` trỏ tới thư 
 giải nén rồi chạy) — ghép mảnh xong kéo dài pixel mép cho khớp cỡ zone
 (2032x528 và 1312x464).
 
-Hai map này đã vẽ sẵn **nhà bếp, nhà kho, sân rào nuôi thú, hồ cá, đường đất,
-hàng rào và cây cối**, nên trong code không đặt thêm sprite công trình nào lên
-nông trại nữa — chỉ khai báo toạ độ để logic (ruộng, chuồng, câu cá) bám theo.
-Nhờ vậy không còn cảnh đường đi/nhà/ruộng đè lên nhau.
+Hai map này đã vẽ sẵn **sân rào nuôi thú, hồ cá, đường đất và hàng rào**, nên
+code chỉ khai báo toạ độ để logic (ruộng, chuồng, câu cá) bám theo — không còn
+cảnh đường đi/nhà/ruộng đè lên nhau.
+
+`scripts/clean_farm_map.py` chạy tiếp sau đó để **xoá hết cây (kể cả mấy khúc
+gỗ đã chặt) và các căn nhà vẽ sẵn**, trả lại hàng rào + thảm cỏ bằng cách lát
+gương một đoạn viền sạch lấy ngay trong chính map. Nhà bếp / nhà kho / cửa hàng
+sau đó dựng lại bằng sprite **pack Cozy** (`assets/buildings/farm_house`,
+`farm_barn`, `farm_market`) khai báo trong `ZONE_DECOR`, kèm tên treo phía trên
+— thay cho mốc cổng nhấp nháy (map nền đã có cổng/nhà, cứ đi tới là hiện nút).
+
+`scripts/reskin_shelter.py` vẽ lại tấm biển trong nhà chờ xe buýt
+(`assets/lttt/shelter.png`) — ảnh gốc là poster logo của game khác, nay thay
+bằng poster nông trại dựng từ chính sprite pack Cozy.
 ⚠️ **Lưu ý bản quyền:** bộ này trông giống resource của game Avatar (TeaMobi) gốc —
 nếu đúng vậy thì chỉ nên dùng để dev/test; bản phát hành thương mại cần thay bằng
 asset tự vẽ hoặc có quyền sử dụng.
