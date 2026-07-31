@@ -702,7 +702,7 @@ export function registerAllPanels() {
         const def = ANIMALS[a.type];
         if (!def) continue;
         const r = h('div', 'row');
-        r.append(spr(`assets/animals/${def.sheet}`, 0, 0, def.frameW, def.frameH, 34));
+        r.append(spr(`assets/animals/${def.sheet}`, 0, def.frameH * 2, def.frameW, def.frameH, 40));
         const info = h('div', 'grow');
         info.innerHTML = `<div class="t1">${def.name}</div><div class="t2">${livestock.isHungry(a) ? 'Đang đói — cho ăn để có sản phẩm' : 'Khoẻ mạnh'}</div>`;
         r.append(info);
@@ -724,7 +724,7 @@ export function registerAllPanels() {
       body.append(h('div', 'lbl', 'Mua vật nuôi'));
       for (const a of ANIMAL_LIST) {
         const r = h('div', 'row');
-        r.append(spr(`assets/animals/${a.sheet}`, 0, 0, a.frameW, a.frameH, 36));
+        r.append(spr(`assets/animals/${a.sheet}`, 0, a.frameH * 2, a.frameW, a.frameH, 44));
         r.innerHTML += `<div class="grow"><div class="t1">${a.name}</div><div class="t2">Cho ra ${item(a.product).name} mỗi ${a.produceMin} phút sau khi ăn</div></div>`;
         r.append(priceBtn(a.price, 'gold', () => {
           if (livestock.buyAnimal(a.id)) { render(); worldScene()?.scene?.restart(); }
