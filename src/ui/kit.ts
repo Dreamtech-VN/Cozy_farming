@@ -338,12 +338,18 @@ export function charFace(look: import('@/data/chibi').ChibiLook | undefined, siz
 export function avatarEl(size = 40): HTMLElement {
   const pic = S.player.avatarPic;
   if (pic) {
+    // Ảnh pack là hình vuông bo góc: góc bo trong suốt nên viền tròn bị hở
+    // 4 chỗ chéo (chỉ phủ kín khi bán kính bo <= 0.17 * bán kính tròn).
+    // Phóng nhẹ 6% rồi cắt tròn -> tròn đều, không còn "ngoài tròn trong vuông".
+    const wrap = h('div', 'ava-img');
+    wrap.style.cssText =
+      `width:${size}px;height:${size}px;border-radius:50%;overflow:hidden;flex:none;`;
     const img = document.createElement('img');
-    img.className = 'ava-img';
     img.src = picSrc(pic);
     img.draggable = false;
-    img.style.cssText = `width:${size}px;height:${size}px;object-fit:cover;display:block;`;
-    return img;
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.06);';
+    wrap.append(img);
+    return wrap;
   }
   return charHeadOnly(avatarLook(), size);
 }

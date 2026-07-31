@@ -967,55 +967,38 @@ export function registerAllPanels() {
     const look = S.player.chibi;
     const content = h('div');
 
-    const apply = (pic: string | undefined, face?: number) => {
+    const apply = (pic: string | undefined) => {
       S.player.avatarPic = pic;
-      if (face !== undefined) S.player.avatarFace = face;
       save(true); sfx.click();
       bus.emit(EV.STATE_CHANGED);
       // hồ sơ đang mở phía sau không tự dựng lại -> thay ảnh tại chỗ
       const box = document.querySelector('.pf-face-box');
       box?.firstElementChild?.replaceWith(avatarEl(56));
-      toast('Đã đổi ảnh đại diện!', 'check');
+      toast(pic ? 'Đã đổi ảnh đại diện!' : 'Đã gỡ ảnh — dùng lại đầu nhân vật.', 'check');
       close();
     };
 
-    // --- tab 1: 35 ảnh dựng sẵn ---
+    // --- tab 1: 35 ảnh dựng sẵn (bấm lại ảnh đang chọn = gỡ, quay về đầu nhân vật) ---
     const renderPack = () => {
       content.innerHTML = '';
-      content.append(h('div', 'hint', 'Chọn một ảnh đại diện có sẵn.'));
+      content.append(h('div', 'hint',
+        'Chọn một ảnh đại diện. Bấm lại đúng ảnh đang dùng để gỡ và hiện lại đầu nhân vật.'));
       const grid = h('div', 'ava-grid');
       for (const id of AVATAR_PICS) {
-        const cell = h('div', `ava-cell ${S.player.avatarPic === `pack:${id}` ? 'active' : ''}`);
+        const mine = S.player.avatarPic === `pack:${id}`;
+        const cell = h('div', `ava-cell ${mine ? 'active' : ''}`);
         const img = document.createElement('img');
         img.src = avatarPicUrl(id);
         img.draggable = false;
         img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block';
         cell.append(img);
-        cell.onclick = () => apply(`pack:${id}`);
+        cell.onclick = () => apply(mine ? undefined : `pack:${id}`);
         grid.append(cell);
       }
       content.append(grid);
     };
 
-    // --- tab 2: đầu nhân vật theo biểu cảm ---
-    const renderFace = () => {
-      content.innerHTML = '';
-      if (!look) { content.append(h('div', 'hint', 'Chưa có nhân vật.')); return; }
-      content.append(h('div', 'hint', 'Dùng đầu nhân vật của bạn làm ảnh đại diện.'));
-      const grid = h('div', 'ava-grid');
-      const opts = chibiList(40, look.gender).filter(p => p.level === 0 && p.gold <= 0).slice(0, 12);
-      const cur = S.player.avatarPic ? -1 : (S.player.avatarFace || look.eyes);
-      for (const p of opts) {
-        const cell = h('div', `ava-cell ${cur === p.id ? 'active' : ''}`);
-        cell.append(charHeadOnly({ ...look, eyes: p.id }, 52));
-        cell.title = p.name;
-        cell.onclick = () => apply(undefined, p.id);
-        grid.append(cell);
-      }
-      content.append(grid);
-    };
-
-    // --- tab 3: tải ảnh từ máy ---
+    // --- tab 2: tải ảnh từ máy ---
     const renderUpload = () => {
       content.innerHTML = '';
       content.append(h('div', 'hint', 'Chọn ảnh từ máy — ảnh sẽ được cắt vuông và thu về 128×128.'));
@@ -1056,14 +1039,13 @@ export function registerAllPanels() {
       const row = h('div');
       row.style.cssText = 'display:flex;gap:8px;justify-content:center;margin-top:10px';
       row.append(btn('Chọn ảnh...', 'blue', () => file.click()), okBtn);
+      if (isUploadedPic(S.player.avatarPic)) {
+        row.append(btn('Gỡ ảnh', '', () => apply(undefined)));
+      }
       content.append(prev, row, file);
     };
 
-    tabs(['Có sẵn', 'Nhân vật', 'Tải lên'], i => {
-      if (i === 0) renderPack();
-      else if (i === 1) renderFace();
-      else renderUpload();
-    });
+    tabs(['Có sẵn', 'Tải lên'], i => { if (i === 0) renderPack(); else renderUpload(); });
     body.append(content);
     renderPack();
   });

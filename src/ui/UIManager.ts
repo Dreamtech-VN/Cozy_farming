@@ -199,7 +199,8 @@ function refreshHud() {
   q('#hud-coins') && (q('#hud-coins')!.textContent = fmt(S.wallet.coins));
   q('#hud-rubies') && (q('#hud-rubies')!.textContent = fmt(S.wallet.rubies));
   const av = q('.hud-avatar');
-  if (av) { av.innerHTML = ''; av.append(avatarEl(34)); }
+  // 38 = đúng lòng khung .hud-avatar (42 - viền 2px mỗi bên) -> ảnh phủ kín hình tròn
+  if (av) { av.innerHTML = ''; av.append(avatarEl(38)); }
   const nm = q('.hud-name'), tt = q('.hud-title'), lv = q('.hud-lv');
   if (nm) nm.textContent = S.player.name || 'Nông dân';
   if (tt) {

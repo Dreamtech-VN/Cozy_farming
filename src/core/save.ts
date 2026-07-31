@@ -3,6 +3,7 @@ import { bus, EV, toast } from './events';
 
 const KEY = 'cozy_farming_save_v1';
 const VERSION = 1;
+export const HOTBAR_SLOTS = 10;
 
 export function defaultState(): GameState {
   return {
@@ -26,8 +27,8 @@ export function defaultState(): GameState {
     chibiWardrobe: [],
     pets: [],
     skins: [],
-    hotbar: ['hoe', 'can', '', '', ''],
-    tools: { rod: 0, can: 1, hoe: 1, net: 0, basket: 0 },
+    hotbar: ['hoe', 'axe', 'shovel', 'can', '', '', '', '', '', ''],
+    tools: { rod: 0, can: 1, hoe: 1, net: 0, basket: 0, axe: 1, shovel: 1 },
     farm: { unlocked: 6, plots: [] },
     livestock: { barnLevel: 0, animals: [] },
     house: { owned: false, level: 0, wallpaper: 0, floor: 0, furniture: [], aquarium: [] },
@@ -131,8 +132,12 @@ export function load(): boolean {
     if (S.tools.basket === undefined) S.tools.basket = (S.inventory['tool_basket'] ?? 0) > 0 ? 1 : 0;
     if (!S.player.charStats) S.player.charStats = { health: 5, intellect: 5, strength: 5, agility: 5, charm: 5 };
     if (S.player.statPoints == null) S.player.statPoints = 0;
-    if (!S.hotbar) S.hotbar = ['hoe', 'can', '', '', ''];
-    while (S.hotbar.length < 5) S.hotbar.push('');
+    if (!S.hotbar) S.hotbar = ['hoe', 'axe', 'shovel', 'can'];
+    // save cũ 5 ô -> nới lên 10 ô, tặng luôn rìu/xẻng cho đủ bộ khởi đầu
+    if (S.tools.axe === undefined) S.tools.axe = 1;
+    if (S.tools.shovel === undefined) S.tools.shovel = 1;
+    while (S.hotbar.length < HOTBAR_SLOTS) S.hotbar.push('');
+    S.hotbar.length = HOTBAR_SLOTS;
     S.hotbar = S.hotbar.map(id => ownedTool(id) ? id : '');
     return true;
   } catch {

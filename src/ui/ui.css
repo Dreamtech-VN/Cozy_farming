@@ -42,8 +42,6 @@ img { image-rendering: auto; }
   border: 2px solid #b5836b; display: flex; align-items: center; justify-content: center; overflow: hidden;
   flex: none;
 }
-/* ảnh đại diện pack/tải lên đã là hình vuông kín -> phủ đầy khung tròn */
-.hud-avatar .ava-img { width: 100%; height: 100%; }
 .hud-name { font-weight: 800; font-size: 13px; line-height: 1.1; }
 .hud-title { font-size: 10px; font-weight: 700; }
 .hud-lv { font-size: 10px; color: #7a5b3a; font-weight: 700; }
@@ -433,47 +431,62 @@ img { image-rendering: auto; }
 .cc-start {
   padding: 10px 40px; font-size: 15px; display: inline-block; width: auto;
 }
-/* Top area: preview + side info */
-.cc-top { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; }
-.cc-preview-wrap { flex: none; display: flex; align-items: center; gap: 3px; }
+/* Nhân vật đứng giữa + 2 nút xoay (kiểu RegisterScr của Lttt) */
+.cc-preview-wrap {
+  display: flex; align-items: center; justify-content: center; gap: 10px; margin: 4px 0 8px;
+}
 .cc-preview {
-  flex: none; width: 72px; height: 100px;
+  flex: none; width: 78px; height: 106px;
   background: rgba(181,131,107,.12); border-radius: 10px; border: 2px solid rgba(181,131,107,.25);
   display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
-/* 2 nút xoay nhân vật trái/phải */
 .cc-turn {
-  flex: none; width: 22px; height: 34px; cursor: pointer; padding: 0;
-  border: 2px solid #b5836b; border-radius: 7px; background: #f6edd8;
+  flex: none; width: 26px; height: 38px; cursor: pointer; padding: 0;
+  border: 2px solid #b5836b; border-radius: 8px; background: #f6edd8;
   position: relative; transition: transform .1s, background .15s;
 }
 .cc-turn::before {
-  content: ''; position: absolute; left: 50%; top: 50%; width: 7px; height: 7px;
+  content: ''; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px;
   border-top: 3px solid #7a5a3a; border-left: 3px solid #7a5a3a;
 }
 .cc-turn-l::before { transform: translate(-40%, -50%) rotate(-45deg); }
 .cc-turn-r::before { transform: translate(-60%, -50%) rotate(135deg); }
 .cc-turn.active { background: linear-gradient(#ffe066, #f0c040); border-color: #d4a020; }
 .cc-turn:active { transform: scale(.9); }
-.cc-side { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+
+/* Mỗi thuộc tính = 1 hàng "◄ nhãn ►", hàng đang chọn tô sáng (giống Lttt) */
+.cc-rows { display: flex; flex-direction: column; gap: 5px; }
+.cc-row {
+  display: flex; align-items: center; gap: 8px; cursor: pointer;
+  padding: 4px 8px; border-radius: 9px;
+  border: 2px solid transparent; background: rgba(181,131,107,.10);
+  transition: background .14s, border-color .14s;
+}
+.cc-row.active { background: #fff3d6; border-color: #e8890c; }
+.cc-row-mid {
+  flex: 1; min-width: 0; display: flex; align-items: baseline;
+  justify-content: center; gap: 8px; text-align: center;
+}
+.cc-row-label { font-size: 11px; font-weight: 900; color: #9b7a55; flex: none; }
+.cc-row-val {
+  font-size: 13px; font-weight: 900; color: #5b3a1c;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.cc-arrow {
+  flex: none; width: 30px; height: 30px; cursor: pointer; padding: 0;
+  border: 2px solid #b5836b; border-radius: 50%; position: relative;
+  background: linear-gradient(#fff8e8, #e8d4b0); transition: transform .1s;
+}
+.cc-arrow::before {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px;
+  border-top: 3px solid #7a5a3a; border-left: 3px solid #7a5a3a;
+}
+.cc-arrow-l::before { transform: translate(-30%, -50%) rotate(-45deg); }
+.cc-arrow-r::before { transform: translate(-70%, -50%) rotate(135deg); }
+.cc-row.active .cc-arrow { background: linear-gradient(#ffe066, #f0c040); border-color: #d4a020; }
+.cc-arrow:active { transform: scale(.88); }
+
 .cc-mini-label { font-size: 11px; font-weight: 900; color: #7a5a3a; margin-bottom: 2px; }
-.cc-gender-row { display: flex; gap: 6px; }
-.cc-chip {
-  padding: 5px 16px 6px; font-size: 12px; font-weight: 800; cursor: pointer; color: #4a3520;
-  background: url('/assets/ui/pack/btn_cream.png') no-repeat center / 100% 100%; border: none;
-  border-radius: 4px; transition: transform .1s;
-}
-.cc-chip.active { background-image: url('/assets/ui/pack/btn_yellow.png'); }
-.cc-chip:active { transform: scale(.95); }
-.cc-expr-row { display: flex; gap: 6px; }
-.cc-expr {
-  width: 36px; height: 36px; border-radius: 8px; cursor: pointer;
-  background: rgba(181,131,107,.12); border: 2px solid rgba(181,131,107,.2);
-  display: flex; align-items: center; justify-content: center;
-  transition: transform .1s;
-}
-.cc-expr.active { border-color: #e0a020; background: rgba(224,160,32,.15); }
-.cc-expr:active { transform: scale(.92); }
 .cc-input { font-size: 13px; padding: 7px 10px; }
 /* Tabs */
 .cc-tabs {

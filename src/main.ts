@@ -4,7 +4,7 @@ import { PreloadScene } from './scenes/PreloadScene';
 import { CharCreateScene } from './scenes/CharCreateScene';
 import { WorldScene } from './scenes/WorldScene';
 import { initUI } from './ui/UIManager';
-import { startBgm } from './core/audio';
+import { startBgm, preloadSfx } from './core/audio';
 import { RES } from './core/res';
 
 // Game màn hình ngang, EXPAND để phủ hết màn hình (không viền đen trên mobile)
@@ -32,8 +32,8 @@ try {
   so.lock?.('landscape').catch(() => { /* trình duyệt không cho phép thì thôi */ });
 } catch { /* ignore */ }
 
-// Nhạc nền bật sau tương tác đầu tiên (chính sách autoplay)
-window.addEventListener('pointerdown', () => startBgm(), { once: true });
+// Nhạc nền + hiệu ứng bật sau tương tác đầu tiên (chính sách autoplay)
+window.addEventListener('pointerdown', () => { void preloadSfx(); startBgm(); }, { once: true });
 
 // Vào chế độ toàn màn hình khi chơi trên mobile H5
 document.addEventListener('dblclick', () => {

@@ -318,6 +318,11 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   const look = S.player.chibi;
   const emit = () => bus.emit(EV.APPEARANCE);
 
+  // ===== Bố cục theo RegisterScr của Lttt =====
+  // Lttt không dùng tab: mỗi thuộc tính là một HÀNG có mũi tên ◄ ► hai bên,
+  // hàng đang chọn được tô sáng, nhân vật đứng giữa. Ở đây giữ đúng kiểu đó,
+  // thêm hàng "Mắt" (Lttt cố định mắt = part 4) và ô tên.
+
   // --- Tên nhân vật: trên cùng ---
   const nameInput = h('input', 'ui-input cc-input') as HTMLInputElement;
   nameInput.placeholder = 'Nhập tên...';
@@ -325,10 +330,7 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   nameInput.onkeydown = e => e.stopPropagation();
   body.append(h('div', 'cc-mini-label', 'Tên nhân vật'), nameInput);
 
-  // --- preview + giới tính + biểu cảm ---
-  const topArea = h('div', 'cc-top');
-
-  // preview nhân vật + 2 nút xoay trái/phải
+  // --- Nhân vật đứng giữa, 2 nút xoay trái/phải ---
   const previewWrap = h('div', 'cc-preview-wrap');
   const preview = h('div', 'cc-preview');
   let faceLeft = false;                       // art chỉ có 1 hướng -> lật ngang
@@ -338,57 +340,89 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   turnL.onclick = () => { faceLeft = true; refreshPreview(); };
   turnR.onclick = () => { faceLeft = false; refreshPreview(); };
   previewWrap.append(turnL, preview, turnR);
-  topArea.append(previewWrap);
+  body.append(previewWrap);
 
-  // giới tính nằm cạnh preview
-  const sideInfo = h('div', 'cc-side');
-  const gRow = h('div', 'cc-gender-row');
-  const genders: [number, string][] = [[1, 'Nam'], [2, 'Nữ']];
-  const buildGender = () => {
-    gRow.innerHTML = '';
-    for (const [g, lbl] of genders) {
-      const c = h('div', `cc-chip ${look.gender === g ? 'active' : ''}`, lbl);
-      c.onclick = () => {
-        Object.assign(look, defaultLook(g));
-        S.player.gender = g === 2 ? 'female' : 'male';
-        emit(); rebuild();
-      };
-      gRow.append(c);
-    }
-  };
-  sideInfo.append(h('div', 'cc-mini-label', 'Giới tính'), gRow);
-
-  // biểu cảm ngay dưới giới tính
-  const exprRow = h('div', 'cc-expr-row');
-  const EXPRS: [number, string][] = [[FACE.normal, 'Bình thường'], [FACE.happy, 'Vui vẻ'], [FACE.wink, 'Tinh nghịch']];
-  const buildExpr = () => {
-    exprRow.innerHTML = '';
-    for (const [id, lbl] of EXPRS) {
-      const c = h('div', `cc-expr ${look.eyes === id ? 'active' : ''}`);
-      c.append(charHeadOnly({ ...look, eyes: id }, 30));
-      c.title = lbl;
-      c.onclick = () => { look.eyes = id; emit(); rebuild(); };
-      exprRow.append(c);
-    }
-  };
-  sideInfo.append(h('div', 'cc-mini-label', 'Biểu cảm'), exprRow);
-
-  topArea.append(sideInfo);
-  body.append(topArea);
-
-  // --- Tabs: Tóc / Trang phục ---
-  const tabBar = h('div', 'cc-tabs');
-  const tabContent = h('div', 'cc-tab-content');
-  const TABS = ['Tóc', 'Mắt', 'Trang phục'];
-  let activeTab = 0;
-  const tabBtns: HTMLElement[] = [];
-  for (let i = 0; i < TABS.length; i++) {
-    const t = h('div', `cc-tab ${i === 0 ? 'active' : ''}`, TABS[i]);
-    t.onclick = () => { activeTab = i; tabBtns.forEach((b, j) => b.classList.toggle('active', j === i)); rebuildTabs(); };
-    tabBtns.push(t);
-    tabBar.append(t);
+  function refreshPreview() {
+    preview.innerHTML = '';
+    const face = charFace(look, 104);
+    face.style.transform = faceLeft ? 'scaleX(-1)' : '';
+    preview.append(face);
+    turnL.classList.toggle('active', faceLeft);
+    turnR.classList.toggle('active', !faceLeft);
   }
-  body.append(tabBar, tabContent);
+
+  // --- Các hàng chọn kiểu Lttt: ◄ nhãn ► ---
+  interface RowDef {
+    label: string;
+    options: () => { id: number; name: string }[];
+    get: () => number;
+    set: (id: number) => void;
+  }
+
+  const opts = (z: number, n = 8) =>
+    () => simplestList(z, look.gender, n).map(p => ({ id: p.id, name: p.name }));
+
+  const ROWS: RowDef[] = [
+    {
+      label: 'Giới tính',
+      options: () => [{ id: 1, name: 'Nam' }, { id: 2, name: 'Nữ' }],
+      get: () => look.gender,
+      set: id => {
+        Object.assign(look, defaultLook(id));
+        S.player.gender = id === 2 ? 'female' : 'male';
+      }
+    },
+    { label: 'Kiểu tóc', options: opts(50), get: () => look.hair, set: id => { look.hair = id; } },
+    {
+      label: 'Màu mắt',
+      options: () => chibiList(40, look.gender)
+        .filter(p => p.level === 0 && p.gold <= 0 && !/^mat\s/i.test(p.name))
+        .slice(0, 8).map(p => ({ id: p.id, name: p.name })),
+      get: () => look.eyes,
+      set: id => { look.eyes = id; }
+    },
+    { label: 'Áo', options: opts(20), get: () => look.shirt, set: id => { look.shirt = id; } },
+    { label: 'Quần', options: opts(10), get: () => look.pant, set: id => { look.pant = id; } }
+  ];
+
+  let activeRow = 0;
+  const rowsBox = h('div', 'cc-rows');
+  body.append(rowsBox);
+
+  const cycle = (r: RowDef, dir: number) => {
+    const list = r.options();
+    if (!list.length) return;
+    let i = list.findIndex(o => o.id === r.get());
+    if (i < 0) i = 0;
+    i = (i + dir + list.length) % list.length;
+    r.set(list[i].id);
+    emit();
+    rebuild();
+  };
+
+  const buildRows = () => {
+    rowsBox.innerHTML = '';
+    ROWS.forEach((r, idx) => {
+      const list = r.options();
+      const cur = list.find(o => o.id === r.get());
+      const row = h('div', `cc-row ${idx === activeRow ? 'active' : ''}`);
+      row.onpointerdown = () => {
+        activeRow = idx;
+        rowsBox.querySelectorAll('.cc-row').forEach((x, j) => x.classList.toggle('active', j === idx));
+      };
+      const left = h('button', 'cc-arrow cc-arrow-l');
+      const right = h('button', 'cc-arrow cc-arrow-r');
+      left.onclick = () => { activeRow = idx; cycle(r, -1); };
+      right.onclick = () => { activeRow = idx; cycle(r, 1); };
+      const mid = h('div', 'cc-row-mid');
+      mid.append(
+        h('div', 'cc-row-label', r.label),
+        h('div', 'cc-row-val', cur?.name ?? '—')
+      );
+      row.append(left, mid, right);
+      rowsBox.append(row);
+    });
+  };
 
   // --- Nút bắt đầu ---
   const startBtn = btn('Bắt đầu!', 'gold', () => {
@@ -403,76 +437,19 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
   foot.append(startBtn);
   body.parentElement?.append(foot);
 
-  function refreshPreview() {
-    preview.innerHTML = '';
-    const face = charFace(look, 100);
-    // sprite chỉ vẽ 1 hướng -> lật ngang giống lúc chạy trong game (setFlipX)
-    face.style.transform = faceLeft ? 'scaleX(-1)' : '';
-    preview.append(face);
-    turnL.classList.toggle('active', faceLeft);
-    turnR.classList.toggle('active', !faceLeft);
-  }
-
-  const rebuildTabs = () => {
-    tabContent.innerHTML = '';
-    const chips = h('div', 'cc-opts');
-
-    if (activeTab === 0) {
-      const hairOpts = simplestList(50, look.gender, 3);
-      for (const p of hairOpts) {
-        const c = h('div', `cc-opt cc-opt-icon ${look.hair === p.id ? 'active' : ''}`);
-        c.append(chibiPreview(p.id, 38), h('span', 'cc-opt-name', p.name));
-        c.onclick = () => { look.hair = p.id; emit(); rebuild(); };
-        chips.append(c);
-      }
-    } else if (activeTab === 1) {
-      // màu mắt (bỏ các part "Mat ..." vì đó là biểu cảm, đã có hàng riêng ở trên)
-      const eyeOpts = chibiList(40, look.gender)
-        .filter(p => p.level === 0 && p.gold <= 0 && !/^mat\s/i.test(p.name))
-        .slice(0, 6);
-      for (const p of eyeOpts) {
-        const c = h('div', `cc-opt cc-opt-icon ${look.eyes === p.id ? 'active' : ''}`);
-        c.append(charHeadOnly({ ...look, eyes: p.id }, 32), h('span', 'cc-opt-name', p.name));
-        c.onclick = () => { look.eyes = p.id; emit(); rebuild(); };
-        chips.append(c);
-      }
-    } else {
-      const shirtOpts = simplestList(20, look.gender, 3);
-      const pantOpts = simplestList(10, look.gender, 3);
-      if (shirtOpts.length) {
-        const lbl = h('div', 'cc-mini-label cc-tab-label', 'Áo');
-        tabContent.append(lbl);
-        const sc = h('div', 'cc-opts');
-        for (const p of shirtOpts) {
-          const c = h('div', `cc-opt cc-opt-icon ${look.shirt === p.id ? 'active' : ''}`);
-          c.append(chibiPreview(p.id, 38), h('span', 'cc-opt-name', p.name));
-          c.onclick = () => { look.shirt = p.id; emit(); rebuild(); };
-          sc.append(c);
-        }
-        tabContent.append(sc);
-      }
-      if (pantOpts.length) {
-        const lbl = h('div', 'cc-mini-label cc-tab-label', 'Quần');
-        tabContent.append(lbl);
-        const pc = h('div', 'cc-opts');
-        for (const p of pantOpts) {
-          const c = h('div', `cc-opt cc-opt-icon ${look.pant === p.id ? 'active' : ''}`);
-          c.append(chibiPreview(p.id, 38), h('span', 'cc-opt-name', p.name));
-          c.onclick = () => { look.pant = p.id; emit(); rebuild(); };
-          pc.append(c);
-        }
-        tabContent.append(pc);
-      }
-      return;
+  // defaultLook() lấy từ starterList rộng hơn danh sách hiển thị -> có món không
+  // nằm trong list (đổi sang Nữ là tóc hiện "—"). Kéo về món đầu cho khớp.
+  const normalize = () => {
+    for (const r of ROWS) {
+      const list = r.options();
+      if (list.length && !list.some(o => o.id === r.get())) r.set(list[0].id);
     }
-    tabContent.append(chips);
   };
 
   const rebuild = () => {
-    buildGender();
-    buildExpr();
+    normalize();
     refreshPreview();
-    rebuildTabs();
+    buildRows();
   };
   rebuild();
 }

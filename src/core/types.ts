@@ -131,7 +131,7 @@ export interface GameState {
   wardrobe: string[];       // (cũ) thời trang pack Cozy
   chibiWardrobe: number[];  // part chibi đã sở hữu (id part Avatar)
   hotbar: string[];         // nông cụ gắn trên thanh nhanh
-  tools: { rod: number; can: number; hoe: number; net: number; basket: number }; // cấp độ dụng cụ
+  tools: { rod: number; can: number; hoe: number; net: number; basket: number; axe: number; shovel: number }; // cấp độ dụng cụ
   farm: { unlocked: number; plots: Plot[]; hasDog?: boolean };  // hasDog: (cũ) chó giữ trại
   pets: string[];           // thú cưng đã nuôi
   skins: string[];          // skin trọn bộ đã sở hữu

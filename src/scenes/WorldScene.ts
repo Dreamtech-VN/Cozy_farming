@@ -23,7 +23,7 @@ import * as fishing from '@/systems/fishing';
 import { houseSize, partyActive } from '@/systems/housing';
 import { darkness, currentWeather, initTime, gameHour } from '@/systems/time';
 import { INSECTS, type InsectDef } from '@/data/insects';
-import { sfx } from '@/core/audio';
+import { sfx, bgmForZone } from '@/core/audio';
 
 const T = 16; // kích thước tile
 // ---- Nông trại (nền = imageMap 25 gốc Avatar, 2032x528) — tọa độ px ----
@@ -231,6 +231,7 @@ export class WorldScene extends Phaser.Scene {
     this.input.on('pointerdown', (p: Phaser.Input.Pointer) => this.onTap(p));
 
     bus.emit(EV.ZONE, this.zone);
+    bgmForZone(this.zone.id);
     bus.on(EV.APPEARANCE, this.onAppearance, this);
     bus.on(EV.STATE_CHANGED, this.refreshTitleTag, this);
     bus.on(EV.HOUSE, this.onHouseChanged, this);
