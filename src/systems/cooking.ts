@@ -42,7 +42,7 @@ export function collectCook(): boolean {
   if (!f || cookRemain() > 0) return false;
   addTo('produce', `food_${f.id}`, 1);
   addExp(f.exp);
-  addStat('cooked');
+  addStat('cooked'); addStat('daily_cook');
   S.cooking = undefined;
   save(true); sfx.harvest();
   bus.emit(EV.STATE_CHANGED);

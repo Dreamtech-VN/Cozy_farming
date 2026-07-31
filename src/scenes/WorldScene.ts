@@ -23,9 +23,9 @@ import * as livestock from '@/systems/livestock';
 import * as fishing from '@/systems/fishing';
 import { houseSize, partyActive } from '@/systems/housing';
 import { darkness, currentWeather, initTime, gameHour } from '@/systems/time';
-import { INSECTS, type InsectDef } from '@/data/insects';
 import { sfx, bgmForZone, setAmbient } from '@/core/audio';
 import { maybeSpawnVisitor } from '@/systems/orders';
+import { readyCount } from '@/systems/fishfarm';
 
 const T = 16; // kích thước tile
 // ---- Nông trại (nền = imageMap 25 gốc Avatar, 2032x528) — tọa độ px ----
@@ -125,7 +125,6 @@ const TOOL_ICON = {
   seed: { url: 'assets/farm/chibi/16_seed_bag.png', sx: 0, sy: 0, sw: 56, sh: 62 }
 };
 
-interface InsectSprite { def: InsectDef; obj: Phaser.GameObjects.Image; vx: number; vy: number; t: number }
 
 export class WorldScene extends Phaser.Scene {
   zone!: ZoneDef;
@@ -135,7 +134,6 @@ export class WorldScene extends Phaser.Scene {
   private cropSprites: (Phaser.GameObjects.Sprite | undefined)[] = [];
   private plotOverlays: Phaser.GameObjects.Image[] = [];
   private animalSprites = new Map<string, Phaser.GameObjects.Sprite>();
-  private insects: InsectSprite[] = [];
   private furnitureObjs: Phaser.GameObjects.Container[] = [];
   private partyGuests: ChibiSprite[] = [];
   private darkOverlay!: Phaser.GameObjects.Rectangle;
@@ -158,7 +156,7 @@ export class WorldScene extends Phaser.Scene {
 
   init() {
     this.npcs = []; this.plotTiles = []; this.cropSprites = []; this.plotOverlays = [];
-    this.animalSprites.clear(); this.insects = []; this.furnitureObjs = [];
+    this.animalSprites.clear(); this.furnitureObjs = [];
     this.partyGuests = []; this.fishingState = 'idle'; this.busy = false;
     this.placingItem = undefined; this.lastHintKey = '';
     this.chopTrees = []; this.mounds = []; this.obstacles = [];
@@ -180,7 +178,6 @@ export class WorldScene extends Phaser.Scene {
     this.spawnNpcs();
     if (this.zone.features.includes('farm')) this.buildFarm();
     if (this.zone.features.includes('barn')) this.buildBarn();
-    if (this.zone.features.includes('insects')) this.spawnInsects();
     if (this.zone.id === 'farm') this.spawnChopTrees();
     if (this.zone.id === 'farm') this.buildPetHouse();
     if (this.zone.id === 'beach') this.spawnMounds();   // đào cát ở biển, nông trại không rải đống đất
@@ -1048,8 +1045,8 @@ export class WorldScene extends Phaser.Scene {
         const spr = this.animalSprites.get(id);
         if (spr) {
           this.fxBurst(spr.x, spr.y - 8, 0xffe066, 10);
-          // frame trong items.png (10 cột): trứng 40, sữa 30, nấm 62, len 50
-          const pf: Record<string, number> = { egg: 40, milk: 30, pork: 62, wool: 50 };
+          // frame trong items.png (10 cột): trứng 40, sữa 30, thịt 36, len 50
+          const pf: Record<string, number> = { egg: 40, milk: 30, meat: 36, wool: 50 };
           this.fxFloatIcon(spr.x, spr.y - 20, 'items16', pf[def.product] ?? 40, '+1');
         }
       }
@@ -1061,59 +1058,6 @@ export class WorldScene extends Phaser.Scene {
         title: `${def.icon} ${a.name}`,
         text: livestock.isHungry(a) ? 'Bé đang đói meo...' : livestock.hasProduct(a) ? 'Có sản phẩm rồi nè!' : 'Bé đang no và vui vẻ ~',
         actions: acts
-      }
-    });
-  }
-
-  // ================= côn trùng =================
-  private spawnInsects() {
-    const pool = Object.values(INSECTS).filter(i => i.zones.includes(this.zone.id));
-    if (!pool.length) return;
-    this.time.addEvent({
-      delay: 4000, loop: true, callback: () => {
-        if (this.insects.length >= 5) return;
-        const def = fishing.rollInsect(this.zone.id);
-        if (!def) return;
-        // chỉ bay trong vùng người chơi với tới được
-        const minY = (this.zone.walkTop ?? 0) * T + 16;
-        const maxY = this.zone.road ? this.roadTopY() - 16 : (this.zone.walkBottom ?? this.zone.h) * T;
-        const x = Math.random() * this.zone.w * T, y = minY + Math.random() * Math.max(32, maxY - minY);
-        if (this.inWater(x, y)) return;
-        // sprite côn trùng thật từ nature pack (fallback procedural nếu thiếu)
-        const obj = this.textures.exists('nature')
-          ? this.add.sprite(x, y, 'nature', def.frame).setDepth(2500).setScale(this.zone.bg ? 2.4 : 1.1) as unknown as Phaser.GameObjects.Image
-          : this.add.image(x, y, def.kind === 'butterfly' ? 'butterfly' : 'bug').setTint(def.color).setDepth(2500).setScale(0.8);
-        obj.setInteractive({ useHandCursor: true });
-        const ins: InsectSprite = { def, obj, vx: Math.random() * 30 - 15, vy: Math.random() * 30 - 15, t: 0 };
-        obj.on('pointerdown', () => this.tryCatchInsect(ins));
-        this.insects.push(ins);
-        // tự bay đi sau 25s
-        this.time.delayedCall(25_000, () => this.removeInsect(ins));
-      }
-    });
-  }
-
-  private removeInsect(ins: InsectSprite) {
-    ins.obj.destroy();
-    this.insects = this.insects.filter(i => i !== ins);
-  }
-
-  private tryCatchInsect(ins: InsectSprite) {
-    const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, ins.obj.x, ins.obj.y);
-    if (d > (this.zone.bg ? 95 : 48)) { toast('Lại gần hơn chút nữa!', 'net'); return; }
-    if (this.busy) return;
-    this.busy = true;
-    // quay mặt về phía côn trùng
-    const ang = Math.atan2(ins.obj.y - this.player.y, ins.obj.x - this.player.x);
-    const adir: Dir = Math.abs(Math.cos(ang)) > Math.abs(Math.sin(ang)) ? (Math.cos(ang) > 0 ? 3 : 2) : (Math.sin(ang) > 0 ? 0 : 1);
-    this.player.setDir(adir);
-    this.player.play('pickup', () => {
-      this.busy = false;
-      const ok = fishing.catchInsect(ins.def);
-      if (ok !== undefined) {
-        this.fxBurst(ins.obj.x, ins.obj.y, 0x8ce99a, 8);
-        this.fxFloatIcon(ins.obj.x, ins.obj.y - 12, 'nature', ins.def.frame, '+1', '#8ce99a');
-        this.removeInsect(ins);
       }
     });
   }
@@ -1347,6 +1291,19 @@ export class WorldScene extends Phaser.Scene {
       // nhà kho: kho nông trại riêng (hạt giống / nông sản / phân bón)
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, WAREHOUSE_POS.x, WAREHOUSE_POS.y + 40) < 80) {
         acts.push({ icon: '', ui: 'inventory', label: 'Mở nhà kho', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'warehouse' }) });
+      }
+      // ao nuôi cá (Lttt: nuôi chứ không câu)
+      if (this.zone.features.includes('fishfarm')) {
+        const px = (FARM_POND_TILES.x + FARM_POND_TILES.w / 2) * T;
+        const py = (FARM_POND_TILES.y + FARM_POND_TILES.h / 2) * T;
+        if (Phaser.Math.Distance.Between(this.player.x, this.player.y, px, py) < 130) {
+          const rc = readyCount();
+          acts.push({
+            icon: '', ui: 'fish',
+            label: rc > 0 ? `Ao nuôi cá (${rc} con đã lớn)` : 'Ao nuôi cá',
+            cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'fishfarm' })
+          });
+        }
       }
       // khách đang chờ: mở bảng đơn hàng
       if (this.visitorSprite && Phaser.Math.Distance.Between(
@@ -1939,16 +1896,9 @@ export class WorldScene extends Phaser.Scene {
         else if (this.nearWater()) this.startFishing();
         else toast('Lại gần mép nước rồi thả câu nhé.', 'rod');
         break;
-      case 'net': {
-        let best: InsectSprite | undefined; let bd = 1e9;
-        for (const ins of this.insects) {
-          const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, ins.obj.x, ins.obj.y);
-          if (d < bd) { bd = d; best = ins; }
-        }
-        if (best && bd <= (this.zone.bg ? 100 : 64)) this.tryCatchInsect(best);
-        else toast('Không có côn trùng nào trong tầm vợt.', 'net');
+      case 'net':
+        toast('Vợt dùng để vớt cá ở ao nuôi trong Nông trại.', 'net');
         break;
-      }
       case 'axe':
         if (this.zone.id === 'farm') this.chopNearestTree();
         else toast('Cây gỗ nằm ở Nông trại.', 'axe');
@@ -2124,16 +2074,6 @@ export class WorldScene extends Phaser.Scene {
     for (const { sprite } of this.npcs) sprite.tick(dt);
     for (const { sprite } of this.roamers) sprite.tick(dt);
     for (const g of this.partyGuests) g.tick(dt);
-
-    // côn trùng bay
-    for (const ins of this.insects) {
-      ins.t += dt / 1000;
-      ins.obj.x += ins.vx * dt / 1000;
-      ins.obj.y += ins.vy * dt / 1000 + Math.sin(ins.t * 6) * 0.4;
-      if (Math.random() < 0.01) { ins.vx = Math.random() * 30 - 15; ins.vy = Math.random() * 30 - 15; }
-      ins.obj.x = Phaser.Math.Clamp(ins.obj.x, 0, this.zone.w * T);
-      ins.obj.y = Phaser.Math.Clamp(ins.obj.y, 0, this.zone.h * T);
-    }
 
     // bong bóng chat bám theo người chơi
     if (this.speech) {

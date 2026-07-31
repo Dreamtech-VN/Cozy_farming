@@ -37,10 +37,6 @@ export function orderName(id: string): string {
   if (id.startsWith('food_')) return FOODS[id.slice(5)]?.name ?? id;
   return CROPS[id]?.name ?? id;
 }
-export function orderIconCrop(id: string): string {
-  // cả nông sản lẫn món ăn đều mượn ảnh nông sản để hiển thị
-  return id.startsWith('food_') ? (FOODS[id.slice(5)]?.icon ?? 'carrot') : id;
-}
 function unitPrice(id: string): number {
   if (id.startsWith('food_')) return FOODS[id.slice(5)]?.sell ?? 200;
   return CROPS[id]?.sellPrice ?? 20;

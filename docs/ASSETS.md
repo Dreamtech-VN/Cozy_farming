@@ -64,6 +64,14 @@ Cloverframe ở `assets/farm/cf/`. Sinh ra bản chibi bằng script PIL:
 Bộ chibi này là bộ đang dùng trong game; hai thư mục `it/` và `cf/` giữ lại
 làm bản gốc để chạy lại script khi cần.
 
+`chibi/meat.png` (thịt heo thu từ chuồng) cắt từ `assets/farm/items.png` — sheet
+16px 10 cột, ô hàng 3 cột 6 (miếng ba chỉ) — rồi chạy đúng 5 bước trên.
+
+Icon nông sản trong túi/kho ưu tiên bộ chibi này (bảng `IT_CROP` trong
+`src/data/crops.ts`); cây nào bộ chibi không có mới lấy icon pack2
+(`assets/pack2/icons/`), vì icon pack2 vẽ theo kiểu cây non nên trông lệch
+so với trứng/sữa/thịt.
+
 ## Cloverframe Cozy Farm Starter Pack (`assets/farm/cf/`)
 
 20 icon 32x32 (nông sản, trứng/sữa/phô mai/bánh/mật ong, túi hạt, bình tưới, cuốc, liềm, rìu).

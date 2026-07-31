@@ -31,7 +31,7 @@ q({ id: 'tut_house', name: 'An cư lạc nghiệp', desc: 'Mua nhà riêng ở T
 q({ id: 'd_water5', name: 'Tưới 5 lần', desc: 'Tưới nước cho cây 5 lần hôm nay.', stat: 'daily_watered', target: 5, reward: { coins: 150, exp: 15 }, type: 'daily' });
 q({ id: 'd_harvest5', name: 'Thu hoạch 5 nông sản', desc: 'Thu hoạch 5 nông sản hôm nay.', stat: 'daily_harvested', target: 5, reward: { coins: 200, exp: 20 }, type: 'daily' });
 q({ id: 'd_fish3', name: 'Câu 3 con cá', desc: 'Câu được 3 con cá hôm nay.', stat: 'daily_fish', target: 3, reward: { coins: 200, exp: 20 }, type: 'daily' });
-q({ id: 'd_insect2', name: 'Bắt 2 côn trùng', desc: 'Bắt 2 côn trùng hôm nay.', stat: 'daily_insects', target: 2, reward: { coins: 180, exp: 18 }, type: 'daily' });
+q({ id: 'd_cook1', name: 'Nấu 1 món', desc: 'Nấu xong 1 món ở nhà bếp hôm nay.', stat: 'daily_cook', target: 1, reward: { coins: 200, exp: 20 }, type: 'daily' });
 q({ id: 'd_feed2', name: 'Chăm vật nuôi', desc: 'Cho vật nuôi ăn 2 lần hôm nay.', stat: 'daily_fed', target: 2, reward: { coins: 150, exp: 15 }, type: 'daily' });
 q({ id: 'd_sell10', name: 'Buôn bán nhỏ', desc: 'Bán 10 vật phẩm bất kỳ hôm nay.', stat: 'daily_sold', target: 10, reward: { coins: 250, exp: 25 }, type: 'daily' });
 q({ id: 'd_minigame1', name: 'Giải trí', desc: 'Chơi 1 ván mini game hôm nay.', stat: 'daily_minigame', target: 1, reward: { coins: 120, exp: 12 }, type: 'daily' });
@@ -44,7 +44,7 @@ q({ id: 'a_harvest100', name: 'Nông dân chăm chỉ', desc: 'Thu hoạch 100 n
 q({ id: 'a_harvest1000', name: 'Vua nông trại', desc: 'Thu hoạch 1000 nông sản.', stat: 'harvested', target: 1000, reward: { rubies: 50, title: 'title_farm_king', exp: 500 }, type: 'achievement' });
 q({ id: 'a_fish50', name: 'Cần thủ', desc: 'Câu 50 con cá.', stat: 'fish_caught', target: 50, reward: { coins: 1500, title: 'title_angler', exp: 150 }, type: 'achievement' });
 q({ id: 'a_fish_all', name: 'Bách khoa cá', desc: 'Sưu tập đủ 30 loài cá.', stat: 'fish_species', target: 30, reward: { rubies: 100, title: 'title_fish_master', exp: 800 }, type: 'achievement' });
-q({ id: 'a_insect30', name: 'Thợ săn côn trùng', desc: 'Bắt 30 côn trùng.', stat: 'insects_caught', target: 30, reward: { coins: 1200, title: 'title_bug_hunter', exp: 120 }, type: 'achievement' });
+q({ id: 'a_order30', name: 'Chủ tiệm giao hàng', desc: 'Giao 30 đơn hàng.', stat: 'orders_done', target: 30, reward: { coins: 1200, title: 'title_courier', exp: 120 }, type: 'achievement' });
 q({ id: 'a_rich', name: 'Triệu phú', desc: 'Sở hữu 100.000 xu (tích lũy kiếm được).', stat: 'coins_earned', target: 100000, reward: { rubies: 30, title: 'title_millionaire', exp: 300 }, type: 'achievement' });
 q({ id: 'a_friend5', name: 'Quảng giao', desc: 'Kết bạn với 5 người.', stat: 'friends_added', target: 5, reward: { coins: 500, title: 'title_social', exp: 80 }, type: 'achievement' });
 q({ id: 'a_party', name: 'Chủ tiệc', desc: 'Tổ chức 1 bữa tiệc tại nhà.', stat: 'parties', target: 1, reward: { coins: 800, title: 'title_party', exp: 100 }, type: 'achievement' });
@@ -63,7 +63,7 @@ export const TITLES: Record<string, TitleDef> = {
   title_farm_king: { name: 'Vua nông trại', color: '#ffd43b', source: 'Thành tựu', how: 'Thu hoạch 1000 nông sản.' },
   title_angler: { name: 'Cần thủ', color: '#66d9e8', source: 'Thành tựu', how: 'Câu được 50 con cá.' },
   title_fish_master: { name: 'Bậc thầy câu cá', color: '#3bc9db', source: 'Thành tựu', how: 'Sưu tập đủ 30 loài cá.' },
-  title_bug_hunter: { name: 'Thợ săn côn trùng', color: '#b197fc', source: 'Thành tựu', how: 'Bắt 30 côn trùng.' },
+  title_courier: { name: 'Chủ tiệm giao hàng', color: '#b197fc', source: 'Thành tựu', how: 'Giao 30 đơn hàng.' },
   title_millionaire: { name: 'Triệu phú', color: '#ffa94d', source: 'Thành tựu', how: 'Kiếm được tổng cộng 100.000 xu.' },
   title_social: { name: 'Quảng giao', color: '#faa2c1', source: 'Thành tựu', how: 'Kết bạn với 5 người chơi.' },
   title_party: { name: 'Chủ tiệc', color: '#ff8787', source: 'Thành tựu', how: 'Tổ chức 1 bữa tiệc tại nhà.' },

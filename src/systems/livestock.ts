@@ -1,6 +1,7 @@
 import { S, save, addItem, removeItem, itemCount, addExp, addStat } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ANIMALS, BARN_CAPACITY, BARN_UPGRADE_COST } from '@/data/animals';
+import { addTo } from './farmstore';
 import { sfx } from '@/core/audio';
 import type { Animal } from '@/core/types';
 
@@ -70,7 +71,7 @@ export function collect(a: Animal): boolean {
   const def = ANIMALS[a.type];
   if (!hasProduct(a)) return false;
   const qty = def.productQty[0] + Math.floor(Math.random() * (def.productQty[1] - def.productQty[0] + 1));
-  addItem(def.product, qty);
+  addTo('produce', def.product, qty);   // trứng/sữa/thịt/len -> kho nông trại
   addExp(def.exp);
   a.collectedAt = Date.now();
   addStat('collected_products', qty);

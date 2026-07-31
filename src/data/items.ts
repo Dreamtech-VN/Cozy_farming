@@ -42,6 +42,8 @@ defItem({ id: 'lucky_ticket', name: 'Vé quay may mắn', kind: 'special', icon:
 const ITEMS_SHEET = 'assets/farm/items.png';
 defItem({ id: 'egg', name: 'Trứng gà', kind: 'product', icon: '', sell: 25, sprite: { url: 'assets/farm/chibi/egg.png', sx: 0, sy: 0, sw: 43, sh: 52 } });
 defItem({ id: 'milk', name: 'Sữa bò', kind: 'product', icon: '', sell: 60, sprite: { url: 'assets/farm/chibi/milk.png', sx: 0, sy: 0, sw: 34, sh: 52 } });
+defItem({ id: 'meat', name: 'Thịt heo', kind: 'product', icon: '', sell: 90, desc: 'Thịt tươi thu từ chuồng heo, nấu món gì cũng ngon.', sprite: { url: 'assets/farm/chibi/meat.png', sx: 0, sy: 0, sw: 46, sh: 52 } });
+// save cũ còn giữ "nấm heo ủi" nên vẫn khai báo để kho hiện đúng tên/ảnh
 defItem({ id: 'pork', name: 'Nấm heo ủi', kind: 'product', icon: '', sell: 45, desc: 'Heo ủi đất tìm được nấm quý.', sprite: { url: 'assets/farm/chibi/mushroom.png', sx: 0, sy: 0, sw: 49, sh: 52 } });
 defItem({ id: 'wool', name: 'Len cừu', kind: 'product', icon: '', sell: 70, sprite: { url: 'assets/farm/chibi/wool.png', sx: 0, sy: 0, sw: 52, sh: 49 } });
 

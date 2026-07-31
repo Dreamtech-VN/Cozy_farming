@@ -6,7 +6,7 @@
 export interface FoodDef {
   id: string;
   name: string;
-  icon: string;            // cropId dùng làm ảnh minh hoạ món
+  icon: string;            // id trong kho dùng làm ảnh minh hoạ (cropId hoặc item)
   cookMin: number;         // phút nấu
   sell: number;            // giá bán món
   exp: number;
@@ -40,6 +40,20 @@ def({
 def({
   id: 'veggie_stew', name: 'Canh thập cẩm', icon: 'turnip', cookMin: 18, sell: 720, exp: 26,
   material: [['turnip', 2], ['carrot', 2], ['potato', 2]]
+});
+
+// Món dùng sản phẩm chăn nuôi (trứng/sữa/thịt) — nguyên liệu cũng lấy từ kho
+def({
+  id: 'meat_grill', name: 'Thịt nướng', icon: 'meat', cookMin: 15, sell: 560, exp: 22,
+  material: [['meat', 1], ['corn', 1]]
+});
+def({
+  id: 'meat_stew', name: 'Thịt kho trứng', icon: 'meat', cookMin: 22, sell: 880, exp: 32,
+  material: [['meat', 2], ['egg', 2], ['carrot', 1]]
+});
+def({
+  id: 'milk_cake', name: 'Bánh sữa trứng', icon: 'milk', cookMin: 20, sell: 700, exp: 27,
+  material: [['milk', 2], ['egg', 2], ['wheat', 2]]
 });
 
 export const FOOD_LIST = Object.values(FOODS);

@@ -1,7 +1,6 @@
 import { S, save, addItem, addExp, addStat, equipTool, removeItem, itemCount } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { FISH_LIST, FISHES, RODS, RARITY_NAME, type FishDef } from '@/data/fish';
-import { INSECT_LIST, type InsectDef } from '@/data/insects';
 import { sfx } from '@/core/audio';
 
 // ===== Câu cá =====
@@ -82,38 +81,5 @@ export function addToAquarium(fishId: string): boolean {
   S.house.aquarium.push(fishId);
   bus.emit(EV.INVENTORY); bus.emit(EV.HOUSE); save();
   toast(`Đã thả ${FISHES[fishId]?.name ?? 'cá'} vào hồ.`, 'fish');
-  return true;
-}
-
-// ===== Bắt côn trùng =====
-
-export function rollInsect(zone: string): InsectDef | undefined {
-  const pool = INSECT_LIST.filter(i => i.zones.includes(zone));
-  if (!pool.length) return undefined;
-  const netBonus = S.tools.net >= 2 ? 1.8 : 1;
-  const weight = (i: InsectDef) =>
-    i.rarity === 'common' ? 100 :
-    i.rarity === 'rare' ? 22 * netBonus :
-    i.rarity === 'epic' ? 7 * netBonus : 1.2 * netBonus;
-  let total = 0;
-  const acc = pool.map(i => (total += weight(i), total));
-  const r = Math.random() * total;
-  return pool[acc.findIndex(a => r <= a)];
-}
-
-export function catchInsect(ins: InsectDef): boolean {
-  if (S.tools.net <= 0) { toast('Cần mua vợt ở Bách hóa trước!', 'net'); return false; }
-  // tỉ lệ bắt trượt với loài hiếm
-  const chance = ins.rarity === 'common' ? 0.95 : ins.rarity === 'rare' ? 0.75 : ins.rarity === 'epic' ? 0.55 : 0.35;
-  if (Math.random() > chance) { toast(`${ins.name} bay mất rồi!`, 'alert'); return false; }
-  addItem(ins.id);
-  addExp(ins.rarity === 'legendary' ? 90 : ins.rarity === 'epic' ? 35 : ins.rarity === 'rare' ? 12 : 5);
-  addStat('insects_caught'); addStat('daily_insects');
-  if (!S.collections.insects.includes(ins.id)) {
-    S.collections.insects.push(ins.id);
-    toast(`Loài mới: ${ins.name}!`, 'collection');
-  }
-  sfx.harvest(); save(); bus.emit(EV.STATE_CHANGED);
-  toast(`Bắt được ${ins.name}!`, ins.icon);
   return true;
 }

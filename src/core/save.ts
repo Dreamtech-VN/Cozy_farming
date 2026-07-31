@@ -33,6 +33,7 @@ export function defaultState(): GameState {
     farm: { unlocked: 6, plots: [] },
     farmStore: { seeds: { carrot: 5 }, produce: {}, fert: {} },
     orders: [],
+    fishfarm: [],
     livestock: { barnLevel: 0, animals: [] },
     house: { owned: false, level: 0, wallpaper: 0, floor: 0, furniture: [], aquarium: [] },
     collections: { fish: [], insects: [], crops: [] },
@@ -154,6 +155,7 @@ export function load(): boolean {
     if (!S.farmStore) S.farmStore = { seeds: {}, produce: {}, fert: {} };
     migrateBagToStore();
     if (!S.orders) S.orders = [];
+    if (!S.fishfarm) S.fishfarm = [];
     return true;
   } catch {
     return false;

@@ -53,9 +53,12 @@ function defCrop(c: CropDef) {
   });
   defItem({
     id: `crop_${c.id}`, name: c.name, kind: 'crop', icon: c.icon,
-    sprite: CROP_ICON[c.id]
-      ? { url: `assets/pack2/icons/${c.id}.png`, sx: 0, sy: 0, sw: CROP_ICON[c.id][0], sh: CROP_ICON[c.id][1] }
-      : { url: SHEET, sx: c.stages * 16, sy: c.row * 16, sw: 16, sh: 16 },
+    // ưu tiên icon chibi (cùng style với trứng/sữa/thịt), thiếu thì lấy icon pack2
+    sprite: IT_CROP[c.id]
+      ? { url: `${IT}${c.id}.png`, sx: 0, sy: 0, sw: IT_CROP[c.id][0], sh: IT_CROP[c.id][1] }
+      : CROP_ICON[c.id]
+        ? { url: `assets/pack2/icons/${c.id}.png`, sx: 0, sy: 0, sw: CROP_ICON[c.id][0], sh: CROP_ICON[c.id][1] }
+        : { url: SHEET, sx: c.stages * 16, sy: c.row * 16, sw: 16, sh: 16 },
     sell: c.sellPrice
   });
 }

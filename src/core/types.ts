@@ -152,6 +152,7 @@ export interface GameState {
   farmStore: FarmStore;     // kho nông trại — nông sản KHÔNG nằm trong túi đồ
   cooking?: CookState;      // món đang nấu ở nhà bếp
   orders: import('@/systems/orders').Order[];   // bảng đơn hàng kiểu Hay Day
+  fishfarm: { id: string; type: string; at: number }[];   // cá đang nuôi trong ao
   pets: string[];           // thú cưng đã nuôi
   skins: string[];          // skin trọn bộ đã sở hữu
   activePet?: string;       // thú cưng đang dắt theo

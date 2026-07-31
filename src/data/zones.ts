@@ -21,7 +21,7 @@ export interface ZoneDef {
   spawn: { x: number; y: number };
   portals: Portal[];
   npcs: NpcDef[];
-  features: ('farm' | 'barn' | 'fishing' | 'insects' | 'house_door' | 'trees' | 'flowers' | 'water_edge')[];
+  features: ('farm' | 'barn' | 'fishing' | 'fishfarm' | 'house_door' | 'trees' | 'flowers' | 'water_edge')[];
   indoor?: boolean;
   road?: boolean;          // map cổng: có đường xe chạy + trạm buýt ở mép dưới
   roadTiles?: number;      // bề cao dải đường xe (hàng tile), mặc định 4
@@ -68,7 +68,7 @@ export const ZONES: Record<string, ZoneDef> = {
     npcs: [
       { id: 'npc_mai', name: 'Cô Mai', x: 24, y: 16, charIndex: 5, gender: 2, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
     ],
-    features: ['farm', 'barn', 'fishing', 'insects']
+    features: ['farm', 'barn', 'fishfarm']
   },
   town: {
     id: 'town', name: 'Thành phố', icon: '', w: 50, h: 29, ground: 'stone',
@@ -84,7 +84,7 @@ export const ZONES: Record<string, ZoneDef> = {
       { id: 'npc_hung', name: 'Chú Hùng', x: 18, y: 18, charIndex: 3, gender: 1, shop: 'shop_general', lines: ['Cửa hàng bách hóa đây!', 'Có phân bón, thức ăn gia súc, đủ cả.'] },
       { id: 'npc_lan', name: 'Chị Lan', x: 33, y: 20, charIndex: 6, gender: 2, shop: 'shop_house', lines: ['Muốn mua nhà hay nội thất không nè?'] }
     ],
-    features: ['insects']
+    features: []
   },
   beach: {
     id: 'beach', name: 'Bãi biển', icon: '', w: 44, h: 30, ground: 'sand',
@@ -93,7 +93,7 @@ export const ZONES: Record<string, ZoneDef> = {
     npcs: [
       { id: 'npc_bien', name: 'Ông Biển', x: 10, y: 9, charIndex: 2, gender: 1, shop: 'shop_fishing', lines: ['Cần câu tốt mới câu được cá to!', 'Cá huyền thoại chỉ cắn cần vàng.'] }
     ],
-    features: ['fishing', 'insects', 'water_edge']
+    features: ['fishing', 'water_edge']
   },
   pond: {
     id: 'pond', name: 'Hồ câu', icon: '', w: 63, h: 24, ground: 'grass',
@@ -102,7 +102,7 @@ export const ZONES: Record<string, ZoneDef> = {
     water: [{ x: 12, y: 9, w: 36, h: 15 }],
     portals: [],
     npcs: [],
-    features: ['fishing', 'insects', 'water_edge']
+    features: ['fishing', 'water_edge']
   },
   park: {
     id: 'park', name: 'Công viên', icon: '', w: 57, h: 32, ground: 'grass',
@@ -113,7 +113,7 @@ export const ZONES: Record<string, ZoneDef> = {
     npcs: [
       { id: 'npc_tuan', name: 'Bé Tuấn', x: 30, y: 20, charIndex: 7, gender: 1, lines: ['Chơi oẳn tù tì với em không?'], minigame: 'rps' }
     ],
-    features: ['insects']
+    features: []
   },
   school: {
     id: 'school', name: 'Trường học', icon: '', w: 60, h: 33, ground: 'wood', indoor: true,
