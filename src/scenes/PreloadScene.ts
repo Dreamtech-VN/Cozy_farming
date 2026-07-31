@@ -88,6 +88,7 @@ export class PreloadScene extends Phaser.Scene {
     for (const d of ['shelter', 'house_white', 'rank_sign', 'lamp_hd', 'icecream', 'love_tree']) {
       this.load.image(`lt_${d}`, `assets/lttt/${d}.png`);
     }
+    this.load.image('lt_shop_av', 'assets/lttt/bld/shop_av.png');   // cửa hàng gốc Avatar
     // ---- Nhà + cây + hồ HD Avatar cho nông trại ----
     for (const b of ['kitchen', 'store', 'warehouse', 'tree', 'doghouse', 'barn', 'petshop', 'petbed']) {
       this.load.image(`lt_${b}`, `assets/lttt/bld/${b}.png`);
@@ -100,6 +101,8 @@ export class PreloadScene extends Phaser.Scene {
     // ô ruộng đã bỏ viền cỏ để không đè lên nền cỏ của map
     for (let i = 0; i < 8; i++) this.load.image(`fcell${i}`, `assets/lttt/farm/cellin${i}.png`);
     this.load.image('buyland', 'assets/lttt/farm/buyLand.png');
+    this.load.image('mound', 'assets/farm/mound.png');          // đống đất để đào xẻng
+    this.load.image('glow', 'assets/farm/glow.png');            // quầng sáng đèn đường
 
     // ---- Xe cộ ----
     for (const v of ['bus', 'truck_orange', 'camper_pink', 'camper_yellow', 'camper_green', 'truck_bee', 'truck_gift']) {
@@ -251,12 +254,6 @@ export class PreloadScene extends Phaser.Scene {
     // ô chọn
     g.clear(); g.lineStyle(2, 0xffd43b); g.strokeRect(1, 1, 30, 30);
     g.generateTexture('sel', 32, 32);
-    // đống đất (xẻng đào)
-    g.clear();
-    g.fillStyle(0x8a5a33); g.fillEllipse(11, 12, 20, 10);
-    g.fillStyle(0x6f4626); g.fillEllipse(11, 10, 16, 8);
-    g.fillStyle(0xa9714b); g.fillRect(6, 6, 3, 2); g.fillRect(13, 8, 2, 2);
-    g.generateTexture('mound', 22, 16);
     g.destroy();
   }
 }

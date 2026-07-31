@@ -53,7 +53,10 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   // nhà bếp và nhà kho dựng lại bằng sprite pack Cozy cho đồng bộ style.
   farm: [
     { key: 'bldhd_farm_house', x: 32, y: 15.3, s: 1, label: 'Nhà bếp' },
-    { key: 'bldhd_farm_barn', x: 43.5, y: 15.3, s: 1, label: 'Nhà kho' }
+    { key: 'bldhd_farm_barn', x: 43.5, y: 15.3, s: 1, label: 'Nhà kho' },
+    { key: 'lt_lamp_hd', x: 15.5, y: 26.6, s: 1 },
+    { key: 'lt_lamp_hd', x: 60, y: 26.8, s: 1 },
+    { key: 'lt_lamp_hd', x: 106, y: 26.8, s: 1 }
   ],
   beach: [
     { key: 'bld_fishshop', x: 10, y: 7 },    // tiệm câu ông Biển
@@ -75,7 +78,9 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   // cổng nông trại: nền gốc chỉ còn biển FARM + hàng rào, cửa hàng dựng lại
   // bằng sprite pack Cozy cho khớp style với nhà bếp/nhà kho trong nông trại
   farm_gate: [
-    { key: 'bldhd_farm_market', x: 49, y: 11.4, s: 1, label: 'Cửa hàng' }
+    { key: 'lt_shop_av', x: 48, y: 11.2, s: 1, label: 'Cửa hàng' },
+    { key: 'lt_lamp_hd', x: 12, y: 18.6, s: 1 },
+    { key: 'lt_lamp_hd', x: 69, y: 18.6, s: 1 }
   ],
   town_gate: [
     { key: 'bld_cafe', x: 7, y: 8, s: 0.9 }, { key: 'bld_pub', x: 34, y: 8, s: 0.9 },
@@ -651,16 +656,28 @@ export class WorldScene extends Phaser.Scene {
 
   // vùng nhà cửa (dùng để đường đi né ra)
   private decorRects: Phaser.Geom.Rectangle[] = [];
+  // quầng sáng đèn đường — sáng dần theo độ tối của trời
+  private lampGlows: Phaser.GameObjects.Image[] = [];
 
   // Đặt nhà cửa/đèn/ghế... theo cấu hình ZONE_DECOR
   private drawZoneDecor() {
     this.decorRects = [];
+    this.lampGlows = [];
     for (const d of ZONE_DECOR[this.zone.id] ?? []) {
       if (!this.textures.exists(d.key)) continue;
       const img = this.add.image(d.x * T, d.y * T, d.key)
         .setOrigin(0.5, 1)
         .setScale(d.s ?? (d.key.startsWith('bld_') ? 1.1 : 1.2))
         .setDepth(d.y * T);
+      // đèn đường: gắn quầng sáng, đêm mới bật
+      if (d.key === 'lt_lamp_hd' && this.textures.exists('glow')) {
+        const gy = d.y * T - img.displayHeight + 16;
+        const halo = this.add.image(d.x * T, gy, 'glow')
+          .setDepth(d.y * T - 1).setScale(0.95).setAlpha(0).setBlendMode(Phaser.BlendModes.ADD);
+        const bulb = this.add.image(d.x * T, gy, 'glow')
+          .setDepth(d.y * T + 1).setScale(0.16).setAlpha(0).setBlendMode(Phaser.BlendModes.ADD);
+        this.lampGlows.push(halo, bulb);
+      }
       // tên công trình treo phía trên (thay cho mốc cổng nhấp nháy)
       if (d.label) {
         this.add.text(d.x * T, d.y * T - img.displayHeight - 6, d.label, {
@@ -1740,7 +1757,13 @@ export class WorldScene extends Phaser.Scene {
         if (tx > 26 && tx < 49 && ty < 16) continue;                                 // nhà bếp + nhà kho
       }
       if (this.nearWaterTile(tx, ty)) continue;                                      // không mọc dưới nước
-      const obj = this.add.image(tx * T, ty * T, 'mound').setDepth(ty * T - 8).setScale(this.zone.bg ? 1.9 : 1);
+      const obj = this.add.image(tx * T, ty * T, 'mound').setOrigin(0.5, 0.85)
+        .setDepth(ty * T - 8).setScale(this.zone.bg ? 1 : 0.55);
+      // nhấp nháy nhẹ cho biết đây là chỗ đào được, không phải cục đất vô tri
+      const sp = this.add.image(tx * T + 12, ty * T - 14, 'glow')
+        .setDepth(ty * T - 7).setScale(0.06).setAlpha(0.6).setBlendMode(Phaser.BlendModes.ADD);
+      this.tweens.add({ targets: sp, alpha: 0.15, scale: 0.09, duration: 900, yoyo: true, repeat: -1 });
+      obj.setData('spark', sp);
       this.mounds.push(obj);
       return;
     }
@@ -1786,6 +1809,7 @@ export class WorldScene extends Phaser.Scene {
       this.busy = false;
       this.mounds = this.mounds.filter(m => m !== mound);
       const { x, y } = mound;
+      (mound.getData('spark') as Phaser.GameObjects.Image | undefined)?.destroy();
       mound.destroy();
       this.fxBurst(x, y, 0x8a5a33, 8);
       // rương ngẫu nhiên
@@ -1955,6 +1979,8 @@ export class WorldScene extends Phaser.Scene {
   private applyWeather() {
     this.darkOverlay.setAlpha(this.zone.indoor ? 0 : darkness() * 0.62);
     this.tintSky();
+    const lamp = Phaser.Math.Clamp(darkness() / 0.7, 0, 1);
+    for (const gl of this.lampGlows) gl.setAlpha(lamp * (gl.scaleX > 0.4 ? 0.6 : 0.95));
     const raining = currentWeather() === 'rain' && !this.zone.indoor;
     if (raining && !this.rain) {
       this.rain = this.add.particles(0, 0, 'raindrop', {

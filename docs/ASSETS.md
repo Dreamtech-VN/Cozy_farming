@@ -115,6 +115,17 @@ sau đó dựng lại bằng sprite **pack Cozy** (`assets/buildings/farm_house`
 `farm_barn`, `farm_market`) khai báo trong `ZONE_DECOR`, kèm tên treo phía trên
 — thay cho mốc cổng nhấp nháy (map nền đã có cổng/nhà, cứ đi tới là hiện nút).
 
+### Đèn đường, cửa hàng, đống đất (`scripts/fix_avatar_assets.py`)
+
+- `hd/home/845.png` → `assets/lttt/lamp_hd.png`: đèn đường. Trong game mỗi cột
+  đèn kèm 2 lớp `glow` (blend ADD) sáng dần theo `darkness()` — trời càng tối
+  đèn càng sáng, ban ngày tắt hẳn.
+- `hd/home/831.png` → `assets/lttt/bld/shop_av.png`: cửa hàng "CỬA HÀNG" gốc,
+  dùng cho map cổng (bản pack Cozy nhìn lệch style với nền vẽ tay).
+- `assets/farm/mound.png`: đống đất để đào xẻng — trước vẽ bằng graphics nên
+  trông như cục bùn, nay vẽ lại thành gò đất tơi có cục, sỏi và cỏ, kèm một
+  đốm sáng nhấp nháy trong game cho biết đào được.
+
 ### Nền trời (`assets/lttt/sky/`)
 
 Lấy từ `assets/hd/bgHD` trong APK: `may10.png` → `sky.png` (trời + mây),
@@ -134,7 +145,10 @@ trông rất lệch style). Trong game dùng key `bldhd_<tên>` ở scale 1.
 
 **Xe buýt** dùng asset gốc Avatar: `assets/hd/home/839.png` trong APK (234x194,
 xe khách xanh có hành khách trong cửa sổ) — lật ngang cho quay phải như mấy xe
-còn lại rồi lưu thành `assets/vehicles/bus.png`. Vì là ảnh HD nên
+còn lại rồi lưu thành `assets/vehicles/bus.png`. Ảnh gốc kiểu J2ME **không có
+alpha thật**: bóng dưới gầm xe vẽ bằng lưới caro pixel `#494949`, phóng to lên
+trông như bị rỗ — `scripts/fix_avatar_assets.py` dò đúng lưới đó rồi đổi thành
+bóng mờ liền. Vì là ảnh HD nên
 `WorldScene.vehScale()` quy nó về cùng chiều cao với sprite xe pack pixel.
 Tên file lấy từ `Bus.java` trong client java (`FilePack.getImage("839")` ở pack
 `/home.av`); thư mục `hd/home` là bản HD đã giải nén sẵn của pack đó.
