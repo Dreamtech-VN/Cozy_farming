@@ -26,12 +26,12 @@ import { sfx } from '@/core/audio';
 const T = 16; // kích thước tile
 // ---- Nông trại HD (nền imagemap Avatar 1008x506) — tọa độ px ----
 const FARM_PLOT = { ox: 84, oy: 218, pw: 42, ph: 45 };            // lưới ruộng 8x6
-const FARM_POND = { x: 773, y: 176, w: 426, h: 110 };             // hồ nước Avatar (map 4), cắt sát mép nước
+const FARM_POND_TILES = { x: 34, y: 9, w: 26, h: 8 };             // hồ cá lát tile (Pack2)
 const KHE_POS = { x: 790, y: 195 };                               // cây khế
 const WAREHOUSE_POS = { x: 320, y: 175 };                         // nhà kho
 const PETHOUSE_POS = { x: 648, y: 198 };                          // nhà thú cưng (chỉ hiện khi đã nuôi)
 const PETSHOP_POS = { x: 21 * T, y: 13 * T };                     // tiệm thú cưng (Thành phố)
-const BARN_RECT = { x: 30, y: 18.75, w: 12, h: 8 };               // chuồng rào (khớp pen.png 192x128 của Pack2)
+const BARN_RECT = { x: 35, y: 19, w: 12, h: 8 };                  // chuồng rào (dưới hồ cá) — khớp pen.png 192x128
 const FARM_ORIGIN = { x: Math.round(FARM_PLOT.ox / T), y: Math.round(FARM_PLOT.oy / T) };
 const ROAD_TILES = 4; // đường xe chạy chiếm 4 hàng tile dưới cùng (map cổng)
 
@@ -48,7 +48,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     // nông trại chỉ gồm: nhà bếp, nhà kho, chuồng thú, nhà chó (+ cây khế, ao cá)
     { key: 'lt_kitchen', x: 8.75, y: 12.6, s: 1 },     // nhà bếp (cửa vào nhà riêng)
     { key: 'lt_warehouse', x: 20, y: 12.7, s: 1 },     // nhà kho — mở kho đồ
-    { key: 'lt_barn', x: 33, y: 17.6, s: 1 },          // nhà chuồng (ngay trên hàng rào)
+    { key: 'lt_barn', x: 31, y: 22.6, s: 1 },          // nhà chuồng (bên trái chuồng rào)
     { key: 'lt_tree', x: 49.4, y: 12.4, s: 1 },        // cây khế
     { key: 'lt_tree', x: 58.6, y: 14.8, s: 0.8 }
   ],
@@ -162,6 +162,7 @@ export class WorldScene extends Phaser.Scene {
     this.drawZoneDecor();
     this.drawPortals();
     this.spawnNpcs();
+    if (this.zone.id === 'farm') this.buildPaths();
     if (this.zone.features.includes('farm')) this.buildFarm();
     if (this.zone.features.includes('barn')) this.buildBarn();
     if (this.zone.features.includes('insects')) this.spawnInsects();
@@ -332,23 +333,7 @@ export class WorldScene extends Phaser.Scene {
       this.add.image(0, 0, `bg_${this.zone.bg}`).setOrigin(0).setDepth(-100);
       // nông trại HD: hồ đá Avatar góc phải dưới
       if (this.zone.id === 'farm') {
-        const P = FARM_POND;
-        this.add.image(P.x, P.y, 'lt_pond').setDisplaySize(P.w, P.h).setDepth(-80);
-        // mặt nước động: gợn sóng + lấp lánh, cắt theo hình hồ
-        const pm = this.make.graphics({}, false);
-        pm.fillStyle(0xffffff);
-        pm.fillRoundedRect(P.x - P.w / 2 + 10, P.y - P.h / 2 + 8, P.w - 20, P.h - 16, 34);
-        const ripple = this.add.tileSprite(P.x - P.w / 2, P.y - P.h / 2, P.w, P.h, 'av_water')
-          .setOrigin(0).setDepth(-79).setAlpha(0.28);
-        ripple.setMask(pm.createGeometryMask());
-        this.tweens.add({ targets: ripple, tilePositionX: 64, duration: 9000, repeat: -1 });
-        const glint = this.add.tileSprite(P.x - P.w / 2, P.y - P.h / 2, P.w, P.h, 'av_water_spark')
-          .setOrigin(0).setDepth(-78).setAlpha(0.18);
-        glint.setMask(pm.createGeometryMask());
-        this.tweens.add({ targets: glint, alpha: 0.5, duration: 1700, yoyo: true, repeat: -1 });
-        this.tweens.add({ targets: glint, tilePositionY: 32, duration: 7000, repeat: -1 });
-        this.pondEllipse = new Phaser.Geom.Ellipse(P.x, P.y + 2, P.w * 0.82, P.h * 0.62);
-        this.add.text(P.x, P.y - P.h / 2 - 10, 'Hồ cá', { fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(2);
+        this.buildTilePond();
       }
       return;
     }
@@ -728,6 +713,85 @@ export class WorldScene extends Phaser.Scene {
   }
 
   // ================= ruộng =================
+  // ================= hồ cá lát tile (nước động + bờ đất của Pack2) =================
+  private buildTilePond() {
+    const R = FARM_POND_TILES;
+    const water = new Set<string>();
+    for (let y = 0; y < R.h; y++) {
+      for (let x = 0; x < R.w; x++) {
+        // bo 4 góc cho hồ đỡ vuông
+        const cx = Math.min(x, R.w - 1 - x), cy = Math.min(y, R.h - 1 - y);
+        if (cx + cy < 2) continue;
+        water.add(`${R.x + x},${R.y + y}`);
+      }
+    }
+    // bờ đất quanh hồ (dùng autotile đất của Pack2)
+    const bank = new Set<string>();
+    for (const k of water) {
+      const [x, y] = k.split(',').map(Number);
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        const n = `${x + dx},${y + dy}`;
+        if (!water.has(n)) bank.add(n);
+      }
+    }
+    for (const k of bank) {
+      const [x, y] = k.split(',').map(Number);
+      const up = bank.has(`${x},${y - 1}`) || water.has(`${x},${y - 1}`);
+      const dn = bank.has(`${x},${y + 1}`) || water.has(`${x},${y + 1}`);
+      const lf = bank.has(`${x - 1},${y}`) || water.has(`${x - 1},${y}`);
+      const rt = bank.has(`${x + 1},${y}`) || water.has(`${x + 1},${y}`);
+      const col = lf && rt ? 1 : lf ? 2 : rt ? 0 : 1;
+      const row = up && dn ? 1 : up ? 2 : dn ? 0 : 1;
+      this.add.image(x * T, y * T, 'path', row * 3 + col).setOrigin(0).setDepth(-84);
+    }
+    // mặt nước: 2 lớp tile động, cắt đúng hình hồ
+    const g = this.make.graphics({}, false);
+    g.fillStyle(0xffffff);
+    for (const k of water) {
+      const [x, y] = k.split(',').map(Number);
+      g.fillRect(x * T, y * T, T, T);
+    }
+    const mask = g.createGeometryMask();
+    const bx = R.x * T, by = R.y * T, bw = R.w * T, bh = R.h * T;
+    this.add.rectangle(bx, by, bw, bh, 0x27688f).setOrigin(0).setDepth(-83).setMask(mask);
+    const w1 = this.add.tileSprite(bx, by, bw, bh, 'pwater1', 0).setOrigin(0).setDepth(-82).setMask(mask).setAlpha(0.85);
+    const w2 = this.add.tileSprite(bx, by, bw, bh, 'pwater3', 0).setOrigin(0).setDepth(-81).setMask(mask).setAlpha(0.28);
+    let fr = 0;
+    this.time.addEvent({
+      delay: 220, loop: true, callback: () => {
+        fr = (fr + 1) % 5;
+        w1.setTexture('pwater1', fr); w2.setTexture('pwater3', (fr + 2) % 5);
+      }
+    });
+    this.tweens.add({ targets: w2, tilePositionX: 32, duration: 9000, repeat: -1 });
+    // vùng nước dùng cho câu cá / chặn đi lại
+    this.pondEllipse = new Phaser.Geom.Ellipse(bx + bw / 2, by + bh / 2, bw * 0.98, bh * 0.98);
+    this.add.text(bx + bw / 2, by - 12, 'Hồ cá', {
+      fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 }
+    }).setOrigin(0.5).setDepth(2);
+  }
+
+  // ================= đường đi trong nông trại =================
+  private buildPaths() {
+    const tiles = new Set<string>();
+    const addRect = (x0: number, y0: number, x1: number, y1: number) => {
+      for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) tiles.add(`${x},${y}`);
+    };
+    addRect(6, 12, 48, 13);      // đường ngang trên: nhà bếp -> nhà kho -> sang phải
+    addRect(28, 13, 29, 29);     // đường dọc bên phải ruộng
+    addRect(29, 28, 41, 29);     // nhánh sang chuồng thú
+    addRect(31, 29, 32, 31);     // nối xuống cổng ra
+
+    for (const key of tiles) {
+      const [x, y] = key.split(',').map(Number);
+      const up = tiles.has(`${x},${y - 1}`), down = tiles.has(`${x},${y + 1}`);
+      const left = tiles.has(`${x - 1},${y}`), right = tiles.has(`${x + 1},${y}`);
+      const col = left && right ? 1 : left ? 2 : right ? 0 : 1;
+      const row = up && down ? 1 : up ? 2 : down ? 0 : 1;
+      this.add.image(x * T, y * T, 'path', row * 3 + col).setOrigin(0).setDepth(-95);
+    }
+  }
+
   private buildFarm() {
     farming.ensurePlots();
     const { ox, oy, pw, ph } = FARM_PLOT;
@@ -1309,7 +1373,7 @@ export class WorldScene extends Phaser.Scene {
 
   private spawnChopTrees() {
     // 3 cây gỗ HD giữa nông trại (ngoài ruộng/chuồng/hồ)
-    for (const [px2, py2] of [[452, 486], [700, 470]] as [number, number][]) {
+    for (const [px2, py2] of [[452, 508], [828, 470]] as [number, number][]) {
       const obj = this.add.image(px2, py2, 'lt_tree').setOrigin(0.5, 1).setScale(0.72).setDepth(py2);
       this.addFootprint(px2, py2, 46, 22);
       this.chopTrees.push({ obj, readyAt: 0 });

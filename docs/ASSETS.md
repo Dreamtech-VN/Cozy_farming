@@ -40,9 +40,15 @@ tileset hàng rào, nhà cửa, vật nuôi, cây trồng, nước autotile, UI 
 - `tiles/water_0*_16x16_5frames.png` -> `assets/pack2/water/` (chưa dùng, hồ đang
   chạy hiệu ứng gợn/lấp lánh bằng tile nước Avatar)
 
-Pack chưa phủ hết: dưa hấu và 3 loại hoa (hướng dương, hồng, tulip) vẫn dùng
-sheet cũ; vật nuôi chỉ có bò và heo khớp (không có gà/cừu). Nhạc nền và ambient
-trong pack chưa tích hợp.
+- `crops/*/icon/*.png` -> `assets/pack2/icons/`: icon nông sản trong túi. Icon gốc
+  có viền trắng nên phải xoá viền trắng (flood fill từ mép) rồi mới chuyển style
+  chibi, để đồng bộ với các icon còn lại
+- `tiles/ground_01_16x16.png` -> `assets/pack2/path.png`: autotile 3x3 đường đất
+  (đã xoá phần cỏ), dùng cho đường đi trong nông trại và bờ hồ
+- `tiles/water_0*_16x16_5frames.png` -> `assets/pack2/water/`: mặt nước động 5 frame
+
+Vật nuôi vẫn giữ bộ cũ (pack không có gà/cừu). Nhạc nền và ambient trong pack
+chưa tích hợp.
 
 ## Icon vật phẩm nông trại kiểu chibi (`assets/farm/chibi/`)
 

@@ -20,7 +20,15 @@ export interface CropDef {
 export const CROP_ANIM: Record<string, [number, number, number]> = {
   carrot: [16, 16, 7], turnip: [16, 16, 7], potato: [16, 32, 7], tomato: [16, 32, 23],
   cabbage: [16, 16, 7], pumpkin: [16, 16, 7], strawberry: [16, 16, 7], corn: [16, 32, 8],
-  eggplant: [16, 32, 7], chili: [16, 32, 11]
+  eggplant: [16, 32, 7], chili: [16, 32, 11], grape: [18, 32, 7], wheat: [18, 32, 8],
+  onion: [16, 32, 7], broccoli: [16, 32, 7]
+};
+
+// icon nông sản trong túi (đã chuyển style chibi) — [rộng, cao]
+export const CROP_ICON: Record<string, [number, number]> = {
+  carrot: [31, 37], turnip: [40, 46], potato: [37, 34], tomato: [28, 31], cabbage: [46, 40],
+  pumpkin: [34, 28], strawberry: [31, 31], corn: [43, 43], eggplant: [46, 46], chili: [43, 43],
+  grape: [37, 43], wheat: [37, 37], onion: [31, 34], broccoli: [43, 46]
 };
 
 export const CROPS: Record<string, CropDef> = {};
@@ -45,8 +53,8 @@ function defCrop(c: CropDef) {
   });
   defItem({
     id: `crop_${c.id}`, name: c.name, kind: 'crop', icon: c.icon,
-    sprite: IT_CROP[c.id]
-      ? { url: `${IT}${c.id}.png`, sx: 0, sy: 0, sw: IT_CROP[c.id][0], sh: IT_CROP[c.id][1] }
+    sprite: CROP_ICON[c.id]
+      ? { url: `assets/pack2/icons/${c.id}.png`, sx: 0, sy: 0, sw: CROP_ICON[c.id][0], sh: CROP_ICON[c.id][1] }
       : { url: SHEET, sx: c.stages * 16, sy: c.row * 16, sw: 16, sh: 16 },
     sell: c.sellPrice
   });
@@ -58,13 +66,13 @@ defCrop({ id: 'potato',     name: 'Khoai tây',     icon: '🥔', row: 2,  stage
 defCrop({ id: 'tomato',     name: 'Cà chua',       icon: '🍅', row: 3,  stages: 5, growMin: 15,  seedPrice: 40,  sellPrice: 70,  exp: 9,  yieldQty: [2, 3] });
 defCrop({ id: 'cabbage',    name: 'Bắp cải',       icon: '🥬', row: 4,  stages: 5, growMin: 25,  seedPrice: 60,  sellPrice: 110, exp: 12, yieldQty: [1, 2] });
 defCrop({ id: 'pumpkin',    name: 'Bí đỏ',         icon: '🎃', row: 5,  stages: 5, growMin: 45,  seedPrice: 100, sellPrice: 190, exp: 18, yieldQty: [1, 1] });
-defCrop({ id: 'watermelon', name: 'Dưa hấu',       icon: '🍉', row: 6,  stages: 5, growMin: 60,  seedPrice: 130, sellPrice: 250, exp: 22, yieldQty: [1, 1] });
+defCrop({ id: 'grape',      name: 'Nho',           icon: '', row: 6,  stages: 5, growMin: 60,  seedPrice: 130, sellPrice: 250, exp: 22, yieldQty: [1, 2] });
 defCrop({ id: 'strawberry', name: 'Dâu tây',       icon: '🍓', row: 7,  stages: 5, growMin: 30,  seedPrice: 80,  sellPrice: 150, exp: 14, yieldQty: [2, 4] });
 defCrop({ id: 'corn',       name: 'Ngô',           icon: '🌽', row: 10, stages: 5, growMin: 40,  seedPrice: 90,  sellPrice: 170, exp: 16, yieldQty: [2, 3] });
 defCrop({ id: 'eggplant',   name: 'Cà tím',        icon: '🍆', row: 12, stages: 5, growMin: 35,  seedPrice: 85,  sellPrice: 160, exp: 15, yieldQty: [1, 2] });
 defCrop({ id: 'chili',      name: 'Ớt',            icon: '🌶️', row: 14, stages: 5, growMin: 20,  seedPrice: 50,  sellPrice: 95,  exp: 10, yieldQty: [2, 3] });
-defCrop({ id: 'sunflower',  name: 'Hướng dương',   icon: '🌻', row: 20, stages: 5, growMin: 90,  seedPrice: 200, sellPrice: 380, exp: 30, yieldQty: [1, 1] });
-defCrop({ id: 'rose',       name: 'Hoa hồng',      icon: '🌹', row: 22, stages: 5, growMin: 120, seedPrice: 260, sellPrice: 520, exp: 40, yieldQty: [1, 1] });
-defCrop({ id: 'tulip',      name: 'Tulip',         icon: '🌷', row: 24, stages: 5, growMin: 75,  seedPrice: 160, sellPrice: 310, exp: 26, yieldQty: [1, 2] });
+defCrop({ id: 'wheat',      name: 'Lúa mì',        icon: '', row: 20, stages: 5, growMin: 90,  seedPrice: 200, sellPrice: 380, exp: 30, yieldQty: [2, 3] });
+defCrop({ id: 'onion',      name: 'Hành tây',      icon: '', row: 22, stages: 5, growMin: 120, seedPrice: 260, sellPrice: 520, exp: 40, yieldQty: [1, 2] });
+defCrop({ id: 'broccoli',   name: 'Bông cải',      icon: '', row: 24, stages: 5, growMin: 75,  seedPrice: 160, sellPrice: 310, exp: 26, yieldQty: [1, 2] });
 
 export const CROP_LIST = Object.values(CROPS);

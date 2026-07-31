@@ -8,7 +8,7 @@ import { sfx } from '@/core/audio';
 import type { Plot } from '@/core/types';
 
 export const FARM_COLS = 8;
-export const FARM_ROWS = 6;
+export const FARM_ROWS = 5;   // tối đa 8 x 5 = 40 ô đất
 export const MAX_PLOTS = FARM_COLS * FARM_ROWS;
 export const PLOT_PRICE_BASE = 200;      // giá mua thêm 1 ô đất, tăng dần
 
@@ -125,9 +125,9 @@ export function harvest(i: number): boolean {
   if (Math.random() < petBonus('cat')) { qty += 1; toast('Mèo cưng giúp giữ mùa: +1 nông sản!', 'pet'); }
   addItem(`crop_${c.id}`, qty);
   // thu hoạch hoa thì có cơ hội hứng được mật ong từ đàn ong quanh vườn
-  if (['rose', 'tulip', 'sunflower'].includes(c.id) && Math.random() < 0.25) {
+  if (['grape', 'strawberry'].includes(c.id) && Math.random() < 0.25) {
     addItem('honey');
-    toast('Ong làm mật trong vườn hoa: +1 Mật ong!', 'plant');
+    toast('Đàn ong ghé vườn: +1 Mật ong!', 'plant');
   }
   addExp(c.exp);
   if (!S.collections.crops.includes(c.id)) {

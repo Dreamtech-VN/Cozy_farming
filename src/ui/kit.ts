@@ -145,7 +145,7 @@ const ICON_SRC: Record<string, string> = {
   bus: 'assets/ui/act/bus.png',
   house: 'assets/ui/act/house.png',
   heart: 'assets/ui/act/heart.png',
-  plant: 'assets/farm/chibi/sunflower.png',
+  plant: 'assets/pack2/icons/wheat.png',
   fertilizer: 'assets/farm/chibi/fertilizer.png',
   hoe: 'assets/farm/chibi/18_hoe.png',
   can: 'assets/farm/chibi/17_watering_can.png',

@@ -45,6 +45,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('fx_star', 'assets/ui/pack/icon_level.png');
     this.load.image('fx_drop', 'assets/ui/act/tool_can.png');
     this.load.image('pen', 'assets/pack2/pen.png');
+    this.load.spritesheet('path', 'assets/pack2/path.png', { frameWidth: 16, frameHeight: 16 });
     this.load.image('trough', 'assets/lttt/trough.png');
     this.load.image('trough_full', 'assets/lttt/trough_full.png');
     this.load.image('av_water', 'assets/farm/av_water.png');
