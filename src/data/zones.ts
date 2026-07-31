@@ -63,7 +63,7 @@ export const ZONES: Record<string, ZoneDef> = {
     // hàng + trạm xe buýt), giống Lttt. Nhà riêng nằm ở nhà trắng Thị trấn.
     portals: [{ x: 28, y: 27, to: 'farm_gate', label: 'Ra khu Nông Trại', icon: '' }],
     npcs: [
-      { id: 'npc_mai', name: 'Cô Mai', x: 24, y: 16, charIndex: 5, gender: 2, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
+      { id: 'npc_mai', name: 'Cô Mai', x: 24, y: 16, charIndex: 5, gender: 2, lines: ['Chào con! Muốn mua hạt giống thì ra Cửa hàng ngoài khu Nông Trại nhé.', 'Nhớ tưới nước mỗi ngày nha!'] }
     ],
     features: ['farm', 'barn', 'fishfarm']
   },
@@ -88,7 +88,7 @@ export const ZONES: Record<string, ZoneDef> = {
     spawn: { x: 6, y: 15 }, hub: true, busStop: { x: 20, y: 20 },
     portals: [],
     npcs: [
-      { id: 'npc_bien', name: 'Ông Biển', x: 10, y: 9, charIndex: 2, gender: 1, shop: 'shop_fishing', lines: ['Cần câu tốt mới câu được cá to!', 'Cá huyền thoại chỉ cắn cần vàng.'] }
+      { id: 'npc_bien', name: 'Ông Biển', x: 10, y: 9, charIndex: 2, gender: 1, lines: ['Cần câu tốt mới câu được cá to — ghé tiệm của ta xem thử!', 'Cá huyền thoại chỉ cắn cần vàng.'] }
     ],
     features: ['fishing', 'water_edge']
   },

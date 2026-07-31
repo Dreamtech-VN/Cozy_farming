@@ -1813,17 +1813,32 @@ export function registerAllPanels() {
     wrap.append(inner);
     body.append(wrap);
 
-    // drag/pan + pinch zoom
-    let scale = 1, tx = 0, ty = 0;
+    // ----- kéo / phóng to bản đồ -----
+    // Ảnh có tỉ lệ cố định 1600x900 và marker đặt theo % của .map-inner, nên
+    // .map-inner phải đúng tỉ lệ ảnh thì ghim mới trùng địa điểm. Mức phóng
+    // nhỏ nhất là mức vừa đủ phủ kín khung, kéo được trong đúng phần thừa ra.
+    let scale = 1, tx = 0, ty = 0, base = 1;
+    const size = () => ({
+      w: inner.offsetWidth, h: inner.offsetHeight,
+      vw: wrap.clientWidth, vh: wrap.clientHeight
+    });
+    const apply = () => {
+      const { w, h, vw, vh } = size();
+      base = Math.max(vw / w, vh / h) || 1;
+      scale = Math.max(base, Math.min(base * 3, scale));
+      const mx = Math.max(0, (w * scale - vw) / 2);
+      const my = Math.max(0, (h * scale - vh) / 2);
+      tx = Math.max(-mx, Math.min(mx, tx));
+      ty = Math.max(-my, Math.min(my, ty));
+      inner.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    };
+    const fit = () => { scale = 0; tx = 0; ty = 0; apply(); };
+    img.addEventListener('load', fit);
+    setTimeout(fit, 0);
+    window.addEventListener('resize', apply);
+
     let dragging = false, startX = 0, startY = 0, startTx = 0, startTy = 0;
     let initDist = 0, initScale = 1;
-    const clamp = () => {
-      const maxT = Math.max(0, (scale - 1) * 50);
-      tx = Math.max(-maxT, Math.min(maxT, tx));
-      ty = Math.max(-maxT, Math.min(maxT, ty));
-    };
-    const apply = () => { clamp(); inner.style.transform = `translate(${tx}%, ${ty}%) scale(${scale})`; };
-
     wrap.addEventListener('pointerdown', e => {
       if ((e.target as HTMLElement).closest('.map-marker')) return;
       dragging = true; startX = e.clientX; startY = e.clientY; startTx = tx; startTy = ty;
@@ -1831,30 +1846,34 @@ export function registerAllPanels() {
     });
     wrap.addEventListener('pointermove', e => {
       if (!dragging) return;
-      const dx = (e.clientX - startX) / wrap.clientWidth * 100;
-      const dy = (e.clientY - startY) / wrap.clientHeight * 100;
-      tx = startTx + dx; ty = startTy + dy; apply();
+      tx = startTx + (e.clientX - startX);
+      ty = startTy + (e.clientY - startY);
+      apply();
     });
-    wrap.addEventListener('pointerup', () => { dragging = false; });
-    wrap.addEventListener('pointercancel', () => { dragging = false; });
+    const stop = () => { dragging = false; };
+    wrap.addEventListener('pointerup', stop);
+    wrap.addEventListener('pointercancel', stop);
 
     wrap.addEventListener('touchstart', e => {
       if (e.touches.length === 2) {
-        const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-        initDist = d; initScale = scale;
+        initDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX,
+                              e.touches[0].clientY - e.touches[1].clientY);
+        initScale = scale;
+        dragging = false;
       }
     }, { passive: true });
     wrap.addEventListener('touchmove', e => {
-      if (e.touches.length === 2) {
-        const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-        scale = Math.max(1, Math.min(3, initScale * (d / initDist)));
+      if (e.touches.length === 2 && initDist) {
+        const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX,
+                             e.touches[0].clientY - e.touches[1].clientY);
+        scale = initScale * (d / initDist);
         apply();
       }
     }, { passive: true });
 
     wrap.addEventListener('wheel', e => {
       e.preventDefault();
-      scale = Math.max(1, Math.min(3, scale - e.deltaY * 0.002));
+      scale -= e.deltaY * 0.0015 * scale;
       apply();
     }, { passive: false });
   });

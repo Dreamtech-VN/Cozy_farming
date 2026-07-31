@@ -96,6 +96,18 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   ],
 };
 
+// Bấm thẳng vào công trình là mở, khỏi phải bắt chuyện NPC
+const SPOT_PANEL: Record<string, () => void> = {
+  lt_order_board: () => bus.emit(EV.OPEN_PANEL, { panel: 'orders' }),
+  lt_shop_av: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: 'shop_seed' } }),
+  lt_petshop: () => bus.emit(EV.OPEN_PANEL, { panel: 'petshop' }),
+  lt_shelter: () => bus.emit(EV.OPEN_PANEL, { panel: 'map' }),
+  bld_fishshop: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: 'shop_fishing' } }),
+  lt_icecream: () => bus.emit(EV.OPEN_PANEL, {
+    panel: 'dialog', data: { title: 'Quầy kem', text: 'Kem mát lạnh giải nhiệt mùa hè! (Sắp ra mắt)', actions: [] }
+  })
+};
+
 interface WorldAction { icon: string; label: string; cb: () => void; ui?: string; sprite?: { url: string; sx: number; sy: number; sw: number; sh: number } }
 
 // icon nông cụ (vẽ pixel 16px theo palette pack + cần câu từ fishing pack)
@@ -142,7 +154,7 @@ export class WorldScene extends Phaser.Scene {
     this.animalSprites.clear(); this.furnitureObjs = [];
     this.partyGuests = []; this.fishingState = 'idle'; this.busy = false;
     this.placingItem = undefined; this.lastHintKey = '';
-    this.chopTrees = []; this.mounds = []; this.obstacles = [];
+    this.chopTrees = []; this.mounds = []; this.obstacles = []; this.spots = [];
     this.pet = undefined; this.petWalk = false; this.roamers = []; this.running = false;
   }
 
@@ -157,6 +169,7 @@ export class WorldScene extends Phaser.Scene {
     if (this.zone.id === 'house') this.drawHouse();
     this.startTraffic();
     this.drawZoneDecor();
+    this.registerDrawnSpots();
     this.drawPortals();
     this.spawnNpcs();
     if (this.zone.features.includes('farm')) this.buildFarm();
@@ -572,11 +585,14 @@ export class WorldScene extends Phaser.Scene {
           .setDepth(d.y * T + 1).setScale(0.16).setAlpha(0).setBlendMode(Phaser.BlendModes.ADD);
         this.lampGlows.push(halo, bulb);
       }
-      // bảng đơn hàng: nhớ khung ảnh để onTap bắt được cú bấm thẳng vào bảng
-      if (d.key === 'lt_order_board') {
-        this.orderBoardRect = new Phaser.Geom.Rectangle(
-          d.x * T - img.displayWidth / 2, d.y * T - img.displayHeight,
-          img.displayWidth, img.displayHeight);
+      // địa điểm bấm được: nhớ khung ảnh để onTap bắt cú bấm thẳng vào công trình
+      if (SPOT_PANEL[d.key]) {
+        this.spots.push({
+          rect: new Phaser.Geom.Rectangle(
+            d.x * T - img.displayWidth / 2, d.y * T - img.displayHeight,
+            img.displayWidth, img.displayHeight),
+          open: SPOT_PANEL[d.key]
+        });
       }
       // tên công trình treo phía trên (thay cho mốc cổng nhấp nháy)
       if (d.label) {
@@ -592,6 +608,16 @@ export class WorldScene extends Phaser.Scene {
         this.addFootprint(d.x * T, d.y * T, img.displayWidth * 0.68, Math.min(34, img.displayHeight * 0.24));
       }
     }
+  }
+
+  // Nhà bếp / nhà kho vẽ thẳng trong ảnh nền map 25 (không phải sprite decor)
+  // nên phải khai báo khung bấm riêng.
+  private registerDrawnSpots() {
+    if (this.zone.id !== 'farm') return;
+    const box = (c: { x: number; y: number }, w: number, h: number, open: () => void) =>
+      this.spots.push({ rect: new Phaser.Geom.Rectangle(c.x - w / 2, c.y + 40 - h, w, h), open });
+    box(KITCHEN_POS, 108, 96, () => bus.emit(EV.OPEN_PANEL, { panel: 'kitchen' }));
+    box(WAREHOUSE_POS, 108, 96, () => bus.emit(EV.OPEN_PANEL, { panel: 'warehouse' }));
   }
 
   private inWater(x: number, y: number): boolean {
@@ -1013,15 +1039,19 @@ export class WorldScene extends Phaser.Scene {
 
   // ================= tap =================
   private tapTimer = 0;
-  private orderBoardRect?: Phaser.Geom.Rectangle;
+  // địa điểm bấm thẳng vào là mở (cửa hàng, bảng đơn, nhà bếp, nhà kho...)
+  private spots: { rect: Phaser.Geom.Rectangle; open: () => void }[] = [];
+  private pendingSpot?: () => void;
   private onTap(p: Phaser.Input.Pointer) {
     if (document.querySelector('.win-backdrop, .cc-panel')) return;
     const wp = this.cameras.main.getWorldPoint(p.x, p.y);
-    // bấm thẳng vào bảng đơn hàng: đi tới chân bảng rồi mở bảng
-    if (this.orderBoardRect?.contains(wp.x, wp.y)) {
+    // bấm thẳng vào một địa điểm: đi tới chân công trình rồi mở luôn
+    const spot = this.spots.find(sp => sp.rect.contains(wp.x, wp.y));
+    if (spot) {
       this.standUp();
-      this.moveTarget = { x: this.orderBoardRect.centerX, y: this.orderBoardRect.bottom + 26 };
+      this.moveTarget = { x: spot.rect.centerX, y: spot.rect.bottom + 26 };
       this.pendingAct = true;
+      this.pendingSpot = spot.open;
       this.showMoveMark(this.moveTarget.x, this.moveTarget.y);
       return;
     }
@@ -1078,6 +1108,8 @@ export class WorldScene extends Phaser.Scene {
 
   // tới nơi rồi: 1 hành động thì làm luôn, nhiều thì hiện bảng chọn
   private runTapActions() {
+    // vừa bấm vào một địa điểm -> mở thẳng cái đó, khỏi hỏi lại
+    if (this.pendingSpot) { const f = this.pendingSpot; this.pendingSpot = undefined; f(); return; }
     const acts = this.contextActions();
     if (!acts.length) return;
     if (acts.length === 1) { acts[0].cb(); return; }
@@ -1915,7 +1947,7 @@ export class WorldScene extends Phaser.Scene {
       } else if (dx === 0 && dy === 0) {
         dx = tx / d; dy = ty / d;
       } else {
-        this.moveTarget = undefined; this.pendingAct = false;   // bấm phím thì huỷ đi tự động
+        this.moveTarget = undefined; this.pendingAct = false; this.pendingSpot = undefined;   // bấm phím thì huỷ đi tự động
       }
     }
     const len = Math.hypot(dx, dy);
