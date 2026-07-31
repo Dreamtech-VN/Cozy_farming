@@ -38,8 +38,9 @@ img { image-rendering: auto; }
   padding: 6px 16px 8px 8px; min-height: 48px;
 }
 .hud-avatar {
-  width: 40px; height: 40px; border-radius: 12px; background: #f6edd8;
+  width: 40px; height: 40px; border-radius: 50%; background: #f6edd8;
   border: 2px solid #b5836b; display: flex; align-items: center; justify-content: center; overflow: hidden;
+  flex: none;
 }
 .hud-name { font-weight: 800; font-size: 13px; line-height: 1.1; }
 .hud-title { font-size: 10px; font-weight: 700; }

@@ -320,3 +320,21 @@ export function charFace(look: import('@/data/chibi').ChibiLook | undefined, siz
   }
   return wrap;
 }
+
+// Chỉ phần đầu chibi (tóc, mắt, kính, nón) — dùng cho HUD avatar
+export function charHeadOnly(look: import('@/data/chibi').ChibiLook | undefined, size = 40): HTMLElement {
+  const cropY = 8, cropH = 48;
+  const k = size / cropH;
+  const w = Math.round(64 * k);
+  const wrap = h('div');
+  wrap.style.cssText = `width:${w}px;height:${size}px;position:relative;overflow:hidden;border-radius:50%;`;
+  if (!look) return wrap;
+  for (const pid of lookLayers(look)) {
+    const img = document.createElement('img');
+    img.src = `assets/chibi/${pid}.png`;
+    img.draggable = false;
+    img.style.cssText = `position:absolute;left:0;top:${-cropY * k}px;width:${w}px;height:${Math.round(96 * k)}px;image-rendering:pixelated;`;
+    wrap.append(img);
+  }
+  return wrap;
+}

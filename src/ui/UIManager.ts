@@ -1,7 +1,7 @@
 import type Phaser from 'phaser';
 import { bus, EV, toast } from '@/core/events';
 import { S, unequipTool, toolLevel, toggleHand } from '@/core/save';
-import { h, root, fmt, charFace, spr, chibiPreview, uiIcon } from './kit';
+import { h, root, fmt, charFace, charHeadOnly, spr, chibiPreview, uiIcon } from './kit';
 import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
 import { gameHour, currentWeather, WEATHER_ICON, season } from '@/systems/time';
@@ -199,7 +199,7 @@ function refreshHud() {
   q('#hud-coins') && (q('#hud-coins')!.textContent = fmt(S.wallet.coins));
   q('#hud-rubies') && (q('#hud-rubies')!.textContent = fmt(S.wallet.rubies));
   const av = q('.hud-avatar');
-  if (av) { av.innerHTML = ''; av.append(charFace(S.player.chibi, 34)); }
+  if (av) { av.innerHTML = ''; av.append(charHeadOnly(S.player.chibi, 36)); }
   const nm = q('.hud-name'), tt = q('.hud-title'), lv = q('.hud-lv');
   if (nm) nm.textContent = S.player.name || 'Nông dân';
   if (tt) {
