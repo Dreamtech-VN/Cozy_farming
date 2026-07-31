@@ -781,16 +781,13 @@ export class WorldScene extends Phaser.Scene {
   // ================= chuồng =================
   private buildBarn() {
     const { x, y, w, h } = BARN_RECT;
-    // hàng rào
-    const g = this.add.graphics().setDepth(-70);
-    g.lineStyle(2, 0x8d5a3a);
-    g.strokeRect(x * T, y * T, w * T, h * T);
-    g.fillStyle(0xc9a26b, 0.25); g.fillRect(x * T, y * T, w * T, h * T);
-    // nhà chuồng là building HD trong decor; ở đây chỉ vẽ sân + bảng tên
     const lvl = S.livestock.barnLevel;
-    const barnLabel = lvl === 0 ? 'Sân nuôi (chưa có con nào)' : `Chuồng thú cấp ${lvl}`;
-    this.add.text((x + w / 2) * T, (y - 0.4) * T, barnLabel, { fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(3000);
-
+    // chưa nuôi con nào thì không vẽ gì thêm — nhà chuồng đã có sẵn trong decor
+    if (lvl > 0) {
+      this.add.text((x + w / 2) * T, (y - 0.4) * T, `Chuồng thú cấp ${lvl}`, {
+        fontSize: '10px', color: '#fff', backgroundColor: '#00000080', padding: { x: 4, y: 2 }
+      }).setOrigin(0.5).setDepth(3000);
+    }
     for (const a of S.livestock.animals) this.spawnAnimal(a.id, a.type);
     this.time.addEvent({ delay: 1500, loop: true, callback: () => this.wanderAnimals() });
   }
