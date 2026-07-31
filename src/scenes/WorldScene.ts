@@ -244,10 +244,13 @@ export class WorldScene extends Phaser.Scene {
     bus.on('world:playeract', this.playPlayerAct, this);
     bus.on('world:selfemote', this.onEmote, this);
     bus.on('ui:modal', this.onModal, this);
+    bus.on('hotbar:changed', this.onHeldTool, this);
+    this.onHeldTool();
     // popup đang mở -> khoá input scene (xem chú thích ở kit.ts)
     this.input.enabled = !anyWindowOpen();
     this.events.on('shutdown', () => {
       bus.off('ui:modal', this.onModal, this);
+      bus.off('hotbar:changed', this.onHeldTool, this);
       bus.off(EV.APPEARANCE, this.onAppearance, this);
       bus.off(EV.STATE_CHANGED, this.refreshTitleTag, this);
       bus.off(EV.HOUSE, this.onHouseChanged, this);
@@ -266,6 +269,12 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private onModal(open: boolean) { this.input.enabled = !open; }
+
+  // cầm nông cụ nào thì hiện đúng nông cụ đó trên tay nhân vật
+  private onHeldTool() {
+    const t = heldTool();
+    this.player?.setTool(t ? `held_${t}` : '');
+  }
 
   private onAppearance() { if (S.player.chibi) this.player.setLook(S.player.chibi); }
 
@@ -534,36 +543,10 @@ export class WorldScene extends Phaser.Scene {
     const sh = this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setScale(this.zone.bg ? 0.9 : 0.55);
     // nhà chờ là phông nền: luôn nằm sau người chơi để đứng đợi xe vẫn thấy mình
     sh.setDepth(sy - sh.displayHeight);
-    if (!this.zone.bg) this.drawGateArch();   // ảnh nền gốc đã có cổng chào riêng
     this.startTraffic();
   }
 
   // cổng chào dẫn vào map chính
-  private drawGateArch() {
-    const p = this.zone.portals[0];
-    if (!p) return;
-    const gx = p.x * T, gy = p.y * T;
-    const g = this.add.graphics().setDepth(gy - 40);
-    // hàng rào chạy ngang hai bên cổng
-    g.fillStyle(0x8a5a33);
-    g.fillRect(0, gy - 26, gx - 3 * T, 6);
-    g.fillRect(gx + 3 * T, gy - 26, this.zone.w * T - gx - 3 * T, 6);
-    for (let x = T; x < this.zone.w * T; x += 2 * T) {
-      if (Math.abs(x - gx) < 3 * T) continue;
-      g.fillRect(x - 2, gy - 32, 5, 18);
-    }
-    // hai trụ cổng + mái
-    g.fillStyle(0x6b4a2e);
-    g.fillRect(gx - 3 * T, gy - 44, 8, 34);
-    g.fillRect(gx + 3 * T - 8, gy - 44, 8, 34);
-    g.fillStyle(0xa9714b);
-    g.fillRoundedRect(gx - 3 * T - 6, gy - 56, 6 * T + 12, 16, 5);
-    const title = this.add.text(gx, gy - 48, ZONES[this.zone.gateTo ?? '']?.name ?? '', {
-      fontSize: '9px', color: '#fff8e8', fontStyle: 'bold'
-    }).setOrigin(0.5).setDepth(gy - 39);
-    void title;
-  }
-
   // xe cộ AI chạy qua lại trên đường
   private startTraffic() {
     const spawnCar = () => {

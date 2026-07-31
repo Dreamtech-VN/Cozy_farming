@@ -69,6 +69,24 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
     this.applyLook(look, true);
   }
 
+  // ===== Nông cụ đang cầm hiện trên tay =====
+  private toolImg?: Phaser.GameObjects.Image;
+  private toolKey = '';
+
+  setTool(key: string) {
+    if (this.toolKey === key) return;
+    this.toolKey = key;
+    this.toolImg?.destroy();
+    this.toolImg = undefined;
+    if (!key || !this.scene.textures.exists(key)) return;
+    // đặt ngang tầm tay, hơi lệch sang phải; lật theo hướng nhân vật
+    const img = this.scene.add.image(9, -26, key).setOrigin(0.5).setScale(0.34);
+    this.add(img);
+    img.setFlipX(this.facingLeft);
+    if (this.facingLeft) img.x = -9;
+    this.toolImg = img;
+  }
+
   private applyLook(look: ChibiLook, _store: boolean) {
     for (const l of this.layers) l.destroy();
     this.layers = [];
@@ -80,6 +98,8 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
       this.add(s);
       this.layers.push(s);
     }
+    // đổi đồ dựng lại toàn bộ layer -> gắn lại nông cụ đang cầm
+    if (this.toolKey) { const k = this.toolKey; this.toolKey = ''; this.setTool(k); }
     this.applyFrame();
   }
 
@@ -105,6 +125,10 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
     if (d === 2) this.facingLeft = true;
     if (d === 3) this.facingLeft = false;
     for (const l of this.layers) l.setFlipX(this.facingLeft);
+    if (this.toolImg) {
+      this.toolImg.setFlipX(this.facingLeft);
+      this.toolImg.x = this.facingLeft ? -9 : 9;
+    }
   }
   get dir(): 0 | 1 | 2 | 3 { return this.facingLeft ? 2 : 3; }
 

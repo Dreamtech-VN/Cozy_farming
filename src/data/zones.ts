@@ -54,10 +54,6 @@ export const ZONES: Record<string, ZoneDef> = {
     spawn: { x: 26, y: 16 },
     portals: [{ x: 26, y: 11, to: 'farm', label: 'Vào Nông trại', icon: '' }]
   },
-  town_gate: gateZone('town_gate', 'Thành phố', '', 'town', 'stone'),
-  beach_gate: gateZone('beach_gate', 'Bãi biển', '', 'beach', 'sand'),
-  park_gate: gateZone('park_gate', 'Công viên', '', 'park', 'grass'),
-  pond_gate: gateZone('pond_gate', 'Hồ câu', '', 'pond', 'grass'),
   farm: {
     // Nền là map 25 gốc Avatar (ghép đủ 6 mảnh): nhà bếp, nhà kho, sân rào
     // nuôi thú, hồ cá và đường đất đều đã vẽ sẵn nên không chồng lên nhau.
@@ -76,14 +72,13 @@ export const ZONES: Record<string, ZoneDef> = {
   },
   town: {
     id: 'town', name: 'Thành phố', icon: '', w: 50, h: 29, ground: 'stone',
-    spawn: { x: 25, y: 18 }, gate: 'town_gate',
+    spawn: { x: 25, y: 18 },
     bg: '22', walkTop: 11, walkBottom: 25,
     portals: [
       { x: 12, y: 12, to: 'gamecenter', label: 'Game Center', icon: '' },
       { x: 26, y: 12, to: 'school', label: 'Trường học', icon: '' },
       { x: 41, y: 12, to: 'mall', label: 'Khu mua sắm', icon: '' },
       { x: 4, y: 13, to: 'house', label: 'Nhà riêng', icon: '' },
-      { x: 45, y: 24, to: 'town_gate', label: 'Ra cổng', icon: '' }
     ],
     npcs: [
       { id: 'npc_hung', name: 'Chú Hùng', x: 18, y: 18, charIndex: 3, gender: 1, shop: 'shop_general', lines: ['Cửa hàng bách hóa đây!', 'Có phân bón, thức ăn gia súc, đủ cả.'] },
@@ -93,8 +88,8 @@ export const ZONES: Record<string, ZoneDef> = {
   },
   beach: {
     id: 'beach', name: 'Bãi biển', icon: '', w: 44, h: 30, ground: 'sand',
-    spawn: { x: 6, y: 15 }, gate: 'beach_gate',
-    portals: [{ x: 6, y: 28, to: 'beach_gate', label: 'Ra cổng', icon: '' }],
+    spawn: { x: 6, y: 15 },
+    portals: [],
     npcs: [
       { id: 'npc_bien', name: 'Ông Biển', x: 10, y: 9, charIndex: 2, gender: 1, shop: 'shop_fishing', lines: ['Cần câu tốt mới câu được cá to!', 'Cá huyền thoại chỉ cắn cần vàng.'] }
     ],
@@ -102,26 +97,26 @@ export const ZONES: Record<string, ZoneDef> = {
   },
   pond: {
     id: 'pond', name: 'Hồ câu', icon: '', w: 63, h: 24, ground: 'grass',
-    spawn: { x: 55, y: 8 }, gate: 'pond_gate',
+    spawn: { x: 55, y: 8 },
     bg: '15', walkTop: 5,
     water: [{ x: 12, y: 9, w: 36, h: 15 }],
-    portals: [{ x: 56, y: 21, to: 'pond_gate', label: 'Ra cổng', icon: '' }],
+    portals: [],
     npcs: [],
     features: ['fishing', 'insects', 'water_edge']
   },
   park: {
     id: 'park', name: 'Công viên', icon: '', w: 57, h: 32, ground: 'grass',
-    spawn: { x: 44, y: 20 }, gate: 'park_gate',
+    spawn: { x: 44, y: 20 },
     bg: '4', walkTop: 10, walkBottom: 27,
     water: [{ x: 9, y: 11, w: 26, h: 6 }],
-    portals: [{ x: 28, y: 26, to: 'park_gate', label: 'Ra cổng', icon: '' }],
+    portals: [],
     npcs: [
       { id: 'npc_tuan', name: 'Bé Tuấn', x: 30, y: 20, charIndex: 7, gender: 1, lines: ['Chơi oẳn tù tì với em không?'], minigame: 'rps' }
     ],
     features: ['insects']
   },
   school: {
-    id: 'school', gate: 'town_gate', name: 'Trường học', icon: '', w: 60, h: 33, ground: 'wood', indoor: true,
+    id: 'school', name: 'Trường học', icon: '', w: 60, h: 33, ground: 'wood', indoor: true,
     spawn: { x: 30, y: 24 },
     bg: '101', walkTop: 14, walkBottom: 30,
     portals: [{ x: 45, y: 28, to: 'town', label: 'Thành phố', icon: '' }],
@@ -131,7 +126,7 @@ export const ZONES: Record<string, ZoneDef> = {
     features: []
   },
   gamecenter: {
-    id: 'gamecenter', gate: 'town_gate', name: 'Game Center', icon: '', w: 42, h: 31, ground: 'wood', indoor: true,
+    id: 'gamecenter', name: 'Game Center', icon: '', w: 42, h: 31, ground: 'wood', indoor: true,
     spawn: { x: 21, y: 20 },
     bg: '10', walkTop: 13, walkBottom: 29,
     portals: [{ x: 36, y: 27, to: 'town', label: 'Thành phố', icon: '' }],
@@ -143,7 +138,7 @@ export const ZONES: Record<string, ZoneDef> = {
     features: []
   },
   mall: {
-    id: 'mall', gate: 'town_gate', name: 'Khu mua sắm', icon: '', w: 44, h: 32, ground: 'wood', indoor: true,
+    id: 'mall', name: 'Khu mua sắm', icon: '', w: 44, h: 32, ground: 'wood', indoor: true,
     spawn: { x: 22, y: 20 },
     bg: '24', walkTop: 13, walkBottom: 23,
     portals: [{ x: 40, y: 22, to: 'town', label: 'Thành phố', icon: '' }],
@@ -156,7 +151,7 @@ export const ZONES: Record<string, ZoneDef> = {
     features: []
   },
   house: {
-    id: 'house', gate: 'town_gate', name: 'Nhà riêng', icon: '', w: 14, h: 12, ground: 'wood', indoor: true,
+    id: 'house', name: 'Nhà riêng', icon: '', w: 14, h: 12, ground: 'wood', indoor: true,
     spawn: { x: 7, y: 10 },
     portals: [{ x: 7, y: 11, to: 'town', label: 'Thành phố', icon: '' }],
     npcs: [],

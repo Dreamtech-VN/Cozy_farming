@@ -103,6 +103,17 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('mound', 'assets/farm/mound.png');          // đống đất để đào xẻng
     this.load.image('glow', 'assets/farm/glow.png');            // quầng sáng đèn đường
 
+    // ---- Nông cụ cầm trên tay ----
+    for (const [k, u] of Object.entries({
+      hoe: 'assets/farm/chibi/18_hoe.png',
+      can: 'assets/farm/chibi/17_watering_can.png',
+      basket: 'assets/farm/chibi/19_sickle.png',
+      axe: 'assets/farm/chibi/20_axe.png',
+      shovel: 'assets/chibi/tools/shovel.png',
+      rod: 'assets/chibi/tools/rod.png',
+      net: 'assets/chibi/tools/net.png'
+    })) this.load.image(`held_${k}`, u);
+
     // ---- Xe cộ ----
     for (const v of ['bus', 'truck_orange', 'camper_pink', 'camper_yellow', 'camper_green', 'truck_bee', 'truck_gift']) {
       this.load.image(`veh_${v}`, `assets/vehicles/${v}.png`);
