@@ -36,16 +36,30 @@ UI DOM: HUD, joystick ảo, cửa sổ (panel registry) — mở qua bus EV.OPEN
 
 ## Chuyển khu (theo Lttt)
 
-Lttt không cho đi bộ qua map trung gian: mở **bản đồ thế giới** (MiniMap trong
-`MapScr`), mỗi khu là một điểm ghim (`PositionMap`), bấm vào là đi thẳng tới nơi.
-Sunny Town làm y vậy — panel `map` vẽ `assets/lttt/minimap.png` với các điểm ghim
-lấy từ `MAP_POS`, bấm là gọi `WorldScene.travel(zoneId)`: fade + màn chờ ngắn rồi
-`scene.restart()` ở khu mới.
+Lttt chia thế giới thành **khu** và **map con**:
 
-Vì thế **không còn map cổng** (`*_gate`) và cũng không còn đoạn xe buýt đưa đón
-giữa hai map. Xe cộ AI vẫn chạy: map nào nền có sẵn con đường thì khai báo
-`traffic: { topTile }` trong `ZoneDef` (hiện có Thị trấn — nền `22.png` có dải
-đường nhựa ở đáy), `WorldScene.startTraffic()` thả xe chạy hai làn bên dưới mốc
-đó. Nhà chờ xe buýt giờ là decor của Thị trấn.
+- **Bản đồ thành phố** (MiniMap trong `MapScr`) ghim các KHU chính, mỗi khu là
+  một `PositionMap`; bấm vào là tới thẳng khu đó.
+- Trong mỗi khu đi bộ tới **cổng** để vào map con. Ví dụ tutorial gốc:
+  *"Khu vực nông trại có 4 nơi bạn có thể vào: Cửa hàng, ATM, Nông trại của
+  mình, và Nông trại của bạn bè."*
+- Muốn sang khu khác thì ra **Trạm Xe Buýt** trong khu: *"Sau khi dạo một vòng
+  hãy đến Trạm Xe Buýt để trở lại nơi này nhé!"*
 
-Save cũ còn `S.zone = 'farm_gate'` sẽ được đưa về `farm` khi load.
+Sunny Town làm y vậy:
+
+- `ZoneDef.hub` đánh dấu khu chính — chỉ khu mới hiện trên bản đồ (`MAP_POS`
+  trong panel `map`). Map con (nông trại riêng, nhà, trường, game center, khu
+  mua sắm) không ghim trên bản đồ, phải đi qua cổng trong khu.
+- `ZoneDef.busStop` là toạ độ trạm xe buýt; tới gần là có nút "Bắt xe buýt đi
+  khu khác" mở bản đồ thành phố. Nhà chờ (`lt_shelter`) dựng đúng chỗ đó.
+- Khu Nông Trại (`farm_gate`, nền map 26 gốc Avatar) có Cửa hàng và cổng
+  "Nông trại của bạn"; nông trại riêng (`farm`, map 25) có cổng ra ngược lại.
+  ATM và nông trại bạn bè để dành cho bản sau.
+- `travel(zoneId)` vẫn là fade + màn chờ ngắn rồi `scene.restart()`.
+
+Xe cộ AI: map nào nền có sẵn đường nhựa thì khai báo `traffic: { topTile }`
+(hiện có Thị trấn và Khu Nông Trại), `WorldScene.startTraffic()` thả xe chạy
+hai làn bên dưới mốc đó.
+
+Save cũ đang đứng ở zone không còn tồn tại sẽ được đưa về `farm` khi load.

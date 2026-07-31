@@ -1769,16 +1769,15 @@ export function registerAllPanels() {
 
   // ================= Bản đồ thế giới (ảnh world map Avatar, bấm để di chuyển) =================
   // vị trí các khu trên ảnh minimap (%) — khớp với ảnh minimap.png
+  // Bản đồ thành phố chỉ ghim các KHU chính (Lttt: "Thành phố có rất nhiều
+  // khu"). Map con — nông trại riêng, nhà, trường, game center, khu mua sắm —
+  // phải đi qua cổng bên trong khu chứ không nhảy thẳng từ bản đồ.
   const MAP_POS: Record<string, { x: number; y: number }> = {
-    house: { x: 10, y: 8 },       // khu nhà mái đỏ góc trái trên
-    school: { x: 33, y: 12 },     // dãy nhà trường trên giữa
     beach: { x: 56, y: 9 },       // hồ lớn phía trên phải
     town: { x: 44, y: 30 },       // khu phố trung tâm
-    gamecenter: { x: 48, y: 42 }, // cao ốc trung tâm
-    mall: { x: 66, y: 34 },       // khu thương mại bên phải
     park: { x: 26, y: 48 },       // công viên đài phun nước bên trái
     pond: { x: 82, y: 88 },       // hồ nhỏ góc dưới phải
-    farm: { x: 56, y: 80 }        // đồng ruộng dưới giữa
+    farm_gate: { x: 56, y: 80 }   // đồng ruộng dưới giữa
   };
 
   registerPanel('map', () => {
@@ -1799,7 +1798,9 @@ export function registerAllPanels() {
       const m = h('div', `map-marker ${hereId === z.id ? 'here' : ''}`);
       m.style.left = pos.x + '%';
       m.style.top = pos.y + '%';
-      m.innerHTML = `<div class="sign"><img src="assets/ui/act/zone_${z.id}.png"></div><div class="tag"></div>`;
+      // khu Nông Trại mượn biển của nông trại
+      const sign = z.id === 'farm_gate' ? 'farm' : z.id;
+      m.innerHTML = `<div class="sign"><img src="assets/ui/act/zone_${sign}.png"></div><div class="tag"></div>`;
       (m.querySelector('.tag') as HTMLElement).textContent = z.name;
       m.onclick = () => {
         sfx.click();

@@ -66,12 +66,13 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     { key: 'lt_lamp_hd', x: 25.3, y: 14.5, s: 1 },
     { key: 'lt_lamp_hd', x: 107, y: 14.5, s: 1 }
   ],
-  beach: [
-    { key: 'bld_fishshop', x: 10, y: 7 },    // tiệm câu ông Biển
-    { key: 'bld_beachbar', x: 22, y: 12 },
-    { key: 'deco_barrel', x: 15, y: 8 }, { key: 'deco_bench', x: 18, y: 16 }
-  ],
   // decor Avatar trên map nền HD (scale 1 = đúng cỡ HD)
+  // Khu Nông Trại (map 26 gốc): cửa hàng + nhà chờ xe buýt
+  farm_gate: [
+    { key: 'lt_shop_av', x: 48, y: 11.2, s: 1, label: 'Cửa hàng' },
+    { key: 'lt_shelter', x: 14, y: 23.4, s: 0.9 },
+    { key: 'lt_lamp_hd', x: 69, y: 18, s: 1 }
+  ],
   town: [
     { key: 'lt_shelter', x: 33, y: 25.6, s: 0.9 },   // nhà chờ xe buýt bên đường
     { key: 'lt_petshop', x: 21, y: 13, s: 1 },       // tiệm thú cưng
@@ -81,7 +82,17 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   ],
   park: [
     { key: 'lt_icecream', x: 44, y: 14, s: 1 },      // quầy kem
-    { key: 'lt_love_tree', x: 50, y: 22, s: 1 }      // cây tình yêu
+    { key: 'lt_love_tree', x: 50, y: 22, s: 1 },     // cây tình yêu
+    { key: 'lt_shelter', x: 50, y: 25, s: 0.9 }
+  ],
+  beach: [
+    { key: 'bld_fishshop', x: 10, y: 7 },
+    { key: 'bld_beachbar', x: 22, y: 12 },
+    { key: 'deco_barrel', x: 15, y: 8 }, { key: 'deco_bench', x: 18, y: 16 },
+    { key: 'lt_shelter', x: 20, y: 21, s: 0.9 }
+  ],
+  pond: [
+    { key: 'lt_shelter', x: 57, y: 11, s: 0.9 }
   ],
 };
 
@@ -1246,6 +1257,13 @@ export class WorldScene extends Phaser.Scene {
       }
     }
 
+    // trạm xe buýt: bắt xe về bản đồ thành phố để sang khu khác (như Lttt)
+    if (this.zone.busStop) {
+      const bx = this.zone.busStop.x * T, by = this.zone.busStop.y * T;
+      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, bx, by) < 90) {
+        acts.push({ icon: '', ui: 'bus', label: 'Bắt xe buýt đi khu khác', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'map' }) });
+      }
+    }
     // đống đất: tới gần là đào được, không cần trang bị nữa
     if (this.mounds.length) {
       const near = this.mounds.some(m => Phaser.Math.Distance.Between(

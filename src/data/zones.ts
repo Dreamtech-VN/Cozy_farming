@@ -23,10 +23,14 @@ export interface ZoneDef {
   npcs: NpcDef[];
   features: ('farm' | 'barn' | 'fishing' | 'fishfarm' | 'house_door' | 'trees' | 'flowers' | 'water_edge')[];
   indoor?: boolean;
-  // Nền map nào có sẵn con đường nhựa thì cho xe cộ AI chạy bên dưới mốc này
-  // (theo hàng tile). Không còn map cổng riêng — chuyển khu bằng bản đồ thế
-  // giới như Lttt: chọn điểm trên bản đồ là đi thẳng tới nơi.
+  // Nền map nào có sẵn con đường nhựa thì cho xe cộ AI chạy bên dưới mốc này (hàng tile)
   traffic?: { topTile: number };
+  // Trạm xe buýt: đứng gần là bắt xe về bản đồ thành phố để sang khu khác
+  // (Lttt: "Sau khi dạo một vòng hãy đến Trạm Xe Buýt để trở lại nơi này nhé!")
+  busStop?: { x: number; y: number };
+  // Khu chính hiện trên bản đồ thành phố; map con (nông trại riêng, nhà, nội
+  // thất...) không hiện trên bản đồ mà phải đi qua cổng trong khu.
+  hub?: boolean;
   bg?: string;             // nền ảnh (assets/lttt/maps/<bg>.png) thay cho nền procedural
   water?: { x: number; y: number; w: number; h: number }[]; // vùng nước trên nền ảnh (tile)
   skyTop?: number;         // bề cao vùng trời phía trên map nền (px)
@@ -35,6 +39,19 @@ export interface ZoneDef {
 }
 
 export const ZONES: Record<string, ZoneDef> = {
+  // Khu Nông Trại — nền map 26 gốc Avatar (biển FARM + cửa hàng + đường đất).
+  // Lttt: "Khu vực nông trại có 4 nơi bạn có thể vào: Cửa hàng, ATM, Nông trại
+  // của mình, và Nông trại của bạn bè." Bản này mới có Cửa hàng + Nông trại
+  // của mình; ATM và nông trại bạn bè để dành.
+  farm_gate: {
+    id: 'farm_gate', name: 'Khu Nông Trại', icon: '', w: 82, h: 29, ground: 'grass',
+    spawn: { x: 26, y: 16 }, hub: true,
+    bg: 'farmgate', walkTop: 11, walkBottom: 24, skyTop: 150,
+    traffic: { topTile: 25 }, busStop: { x: 14, y: 22 },
+    portals: [{ x: 26, y: 11, to: 'farm', label: 'Nông trại của bạn', icon: '' }],
+    npcs: [],
+    features: []
+  },
   farm: {
     // Nền là map 25 gốc Avatar (ghép đủ 6 mảnh): nhà bếp, nhà kho, sân rào
     // nuôi thú, hồ cá và đường đất đều đã vẽ sẵn nên không chồng lên nhau.
@@ -42,9 +59,9 @@ export const ZONES: Record<string, ZoneDef> = {
     spawn: { x: 34, y: 25 },
     bg: 'farmbg', walkTop: 11, walkBottom: 28, skyTop: 150,
     water: [{ x: 110, y: 16, w: 12, h: 12 }],   // hồ cá vẽ sẵn ở góc phải
-    // Nông trại không có nhà riêng — cửa nhà riêng nằm ở căn nhà trắng Thị trấn.
-    // Muốn đi khu khác thì mở bản đồ thế giới (như Lttt), không có cổng ra.
-    portals: [],
+    // Nông trại riêng là map con: ra ngoài là về khu Nông Trại (nơi có cửa
+    // hàng + trạm xe buýt), giống Lttt. Nhà riêng nằm ở nhà trắng Thị trấn.
+    portals: [{ x: 28, y: 27, to: 'farm_gate', label: 'Ra khu Nông Trại', icon: '' }],
     npcs: [
       { id: 'npc_mai', name: 'Cô Mai', x: 24, y: 16, charIndex: 5, gender: 2, shop: 'shop_seed', lines: ['Chào con! Mua hạt giống không?', 'Nhớ tưới nước mỗi ngày nhé!'] }
     ],
@@ -52,7 +69,7 @@ export const ZONES: Record<string, ZoneDef> = {
   },
   town: {
     id: 'town', name: 'Thành phố', icon: '', w: 50, h: 29, ground: 'stone',
-    spawn: { x: 25, y: 18 },
+    spawn: { x: 25, y: 18 }, hub: true, busStop: { x: 33, y: 24 },
     bg: '22', walkTop: 11, walkBottom: 25, traffic: { topTile: 26 },
     portals: [
       { x: 12, y: 12, to: 'gamecenter', label: 'Game Center', icon: '' },
@@ -68,7 +85,7 @@ export const ZONES: Record<string, ZoneDef> = {
   },
   beach: {
     id: 'beach', name: 'Bãi biển', icon: '', w: 44, h: 30, ground: 'sand',
-    spawn: { x: 6, y: 15 },
+    spawn: { x: 6, y: 15 }, hub: true, busStop: { x: 20, y: 20 },
     portals: [],
     npcs: [
       { id: 'npc_bien', name: 'Ông Biển', x: 10, y: 9, charIndex: 2, gender: 1, shop: 'shop_fishing', lines: ['Cần câu tốt mới câu được cá to!', 'Cá huyền thoại chỉ cắn cần vàng.'] }
@@ -77,7 +94,7 @@ export const ZONES: Record<string, ZoneDef> = {
   },
   pond: {
     id: 'pond', name: 'Hồ câu', icon: '', w: 63, h: 24, ground: 'grass',
-    spawn: { x: 55, y: 8 },
+    spawn: { x: 55, y: 8 }, hub: true, busStop: { x: 57, y: 10 },
     bg: '15', walkTop: 5,
     water: [{ x: 12, y: 9, w: 36, h: 15 }],
     portals: [],
@@ -86,7 +103,7 @@ export const ZONES: Record<string, ZoneDef> = {
   },
   park: {
     id: 'park', name: 'Công viên', icon: '', w: 57, h: 32, ground: 'grass',
-    spawn: { x: 44, y: 20 },
+    spawn: { x: 44, y: 20 }, hub: true, busStop: { x: 50, y: 24 },
     bg: '4', walkTop: 10, walkBottom: 27,
     water: [{ x: 9, y: 11, w: 26, h: 6 }],
     portals: [],
