@@ -1,3 +1,6 @@
+# Riêng eq_hand.png (ô đồ cầm tay) pack không có sẵn: ghép ô trống
+# EquipmenSlotDefault với icon 54 (lọ) đã nhuộm nâu mờ cho cùng kiểu các ô còn lại.
+
 """Lấy bộ giao diện tủ đồ / túi đồ / đơn hàng trong Cozy UI Pack (dobo_ui) vào game.
 
 Pack có sẵn nguyên bộ tủ đồ: khung modal, tấm nền phần nhân vật, ô trang bị
@@ -30,7 +33,7 @@ FILES = {
     'eq_pants':   'Inventory/EquipmentSlots/EquipmenSlotFlat4.png',
     'eq_skin':    'Inventory/EquipmentSlots/EquipmenSlotFlat7.png',
     'eq_hair':    'Inventory/EquipmentSlots/EquipmenSlotFlat2.png',
-    'eq_hand':    'Inventory/EquipmentSlots/EquipmenSlotFlat7.png',
+
     'tab_on':     'Inventory/InventoryTabs/InventoryTabShort3.png',
     'tab_off':    'Inventory/InventoryTabs/InventoryTabShort2.png',
     # ---- bảng đơn hàng: tờ giấy ghim + dấu tích của pack ----

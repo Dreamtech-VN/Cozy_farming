@@ -935,17 +935,6 @@ input.ui-input, select.ui-input {
   border-image: url('/assets/ui/inv/modal.png') 46 fill / 30px stretch;
   display: flex; flex-direction: column; overflow: visible;
 }
-.win.win-wardrobe::before {           /* đinh ghim đỏ ở góc trên trái */
-  content: ''; position: absolute; left: -14px; top: -10px; width: 34px; height: 34px;
-  border-radius: 50%; z-index: 3;
-  background: radial-gradient(circle at 34% 30%, #ff9b9b 0%, #e64a4a 55%, #a81f1f 100%);
-  box-shadow: 0 3px 4px rgba(0, 0, 0, .35), inset 0 -3px 5px #8d1a1a88;
-}
-.win.win-wardrobe::after {            /* thân ghim */
-  content: ''; position: absolute; left: 6px; top: 16px; width: 9px; height: 26px; z-index: 2;
-  border-radius: 3px; transform: rotate(28deg);
-  background: linear-gradient(90deg, #c93a3a, #ff8a8a 45%, #b52c2c);
-}
 .win.win-wardrobe > .win-body {
   padding: 14px 16px 16px; flex: 1; min-height: 0; overflow: hidden;
   display: flex; flex-direction: column;
@@ -975,16 +964,18 @@ input.ui-input, select.ui-input {
 }
 .wd-left-body { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; gap: 8px; }
 /* nhãn tên + huy hiệu cấp ở đầu bảng (như mẫu của pack) */
-.wd-name-row { display: flex; align-items: center; gap: 6px; flex: none; }
+.wd-name-row { position: relative; display: flex; align-items: center; flex: none; padding-left: 20px; }
 .wd-lv {
-  width: 46px; height: 46px; flex: none; display: flex; align-items: center; justify-content: center;
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 2;
+  width: 48px; height: 48px; flex: none; display: flex; align-items: center; justify-content: center;
   background: url('/assets/ui/inv/ic_level.png') no-repeat center / 100% 100%;
   font-size: 16px; font-weight: 900; color: #12455c; padding-bottom: 6px;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .25));
 }
 .wd-name {
-  flex: 1; min-width: 0; padding: 9px 20px 11px; font-size: 15px; font-weight: 900; color: #7a4f1a;
+  flex: 1; min-width: 0; padding: 9px 20px 11px 34px; font-size: 15px; font-weight: 900; color: #7a4f1a;
   border-image: url('/assets/ui/inv/name_label.png') 30 fill / 16px stretch;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center;
 }
 .wd-slot-col { display: flex; flex-direction: column; justify-content: flex-start; gap: 9px; }
 /* ô trang bị: ảnh ô của pack, ô trống dùng bản mờ có sẵn icon từng loại */
@@ -1003,8 +994,17 @@ input.ui-input, select.ui-input {
 .wd-slot.empty.eq-hand { background-image: url('/assets/ui/inv/eq_hand.png'); }
 .wd-slot.active { filter: drop-shadow(0 0 3px #ffd43b) drop-shadow(0 0 6px #e8890c88); }
 .wd-slot.locked { opacity: .55; cursor: default; pointer-events: none; }
-/* hàng ô phụ kiện dưới khung nhân vật */
-.wd-slot-row { display: flex; gap: 9px; justify-content: center; flex: none; padding-top: 2px; }
+/* thanh chỉ số dưới khung nhân vật */
+.wd-stats-box { display: flex; flex-direction: column; gap: 5px; flex: none; padding: 2px 6px 0; }
+.wd-stat { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 800; color: #8a6a45; }
+.wd-stat-nm { width: 62px; flex: none; }
+.wd-stat-bar {
+  flex: 1; height: 11px; border-radius: 6px; overflow: hidden; display: flex;
+  background: #e6cfb2; box-shadow: inset 0 1px 2px #00000022;
+}
+.wd-stat-f { background: linear-gradient(#ffd66b, #f08c00); }
+.wd-stat-f2 { background: linear-gradient(#8ce99a, #37b24d); }
+.wd-stat-n { width: 44px; flex: none; text-align: right; color: #6b3a1c; }
 .wd-slot-ico { font-size: 20px; line-height: 30px; }
 .wd-slot-name { font-size: 10px; font-weight: 800; color: #a9714b; }
 /* ô trang bị không ghi chữ (như mẫu pack) — tên hiện ở tooltip */
@@ -1137,8 +1137,10 @@ img.cur { width: 15px; height: 15px; object-fit: contain; vertical-align: -3px; 
 /* tab thư mục ngang: 1 hàng, cuộn ngang thay vì xuống dòng */
 .wd-chips {
   display: flex; align-items: center; justify-content: center; gap: 8px; flex: none;
-  align-self: center; padding: 6px 16px; margin-bottom: 10px;
-  border-image: url('/assets/ui/inv/chip_bar.png') 90 fill / 26px stretch;
+  align-self: center; padding: 7px 18px; margin-bottom: 10px;
+  /* khung ngoài dải chip để mờ như mẫu */
+  background: rgba(255, 255, 255, .45); border: 2px solid rgba(184, 138, 100, .45);
+  border-radius: 999px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7);
 }
 .wd-chip {
   position: relative; width: 52px; height: 48px; flex: none; cursor: pointer;

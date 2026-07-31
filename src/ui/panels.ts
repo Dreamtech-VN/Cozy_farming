@@ -1663,14 +1663,24 @@ export function registerAllPanels() {
       body2.append(colL, mid, colR);
       left.append(nameRow, body2);
       if (mode !== 'skin') {
-        // hàng ô phụ kiện dưới cùng: game chưa có loại nào nên để ô trống mờ
-        const extra = h('div', 'wd-slot-row');
-        for (let i = 0; i < 3; i++) {
-          const e = h('div', 'wd-slot eq-skin empty locked');
-          e.title = 'Ô phụ kiện — sắp có';
-          extra.append(e);
+        // dưới khung nhân vật là các thanh chỉ số (điểm cộng + điểm do quần áo)
+        const eq = equipStats(look);
+        const bars = h('div', 'wd-stats-box');
+        const max = Math.max(10, ...STAT_KEYS.map(k => S.player.charStats[k] + eq[k]));
+        for (const k of STAT_KEYS) {
+          const base = S.player.charStats[k], bonus = eq[k];
+          const row = h('div', 'wd-stat');
+          row.append(h('span', 'wd-stat-nm', STAT_NAMES[k]));
+          const bar = h('div', 'wd-stat-bar');
+          const f1 = h('div', 'wd-stat-f'); f1.style.width = `${(base / max) * 100}%`;
+          const f2 = h('div', 'wd-stat-f2'); f2.style.width = `${(bonus / max) * 100}%`;
+          bar.append(f1, f2);
+          row.append(bar);
+          row.append(h('span', 'wd-stat-n', bonus ? `${base}+${bonus}` : `${base}`));
+          row.title = `${STAT_NAMES[k]}: ${base} gốc${bonus ? ` + ${bonus} từ quần áo` : ''}`;
+          bars.append(row);
         }
-        left.append(extra);
+        left.append(bars);
       }
 
       // ----- phải: chia tab + card lưới ô (có cả ô trống như tủ đồ game) -----
