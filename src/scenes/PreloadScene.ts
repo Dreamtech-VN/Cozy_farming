@@ -85,7 +85,7 @@ export class PreloadScene extends Phaser.Scene {
       this.load.image(`bg_${m}`, `assets/lttt/maps/${m}.png`);
     }
     // ---- Decor Avatar (repo Lttt) ----
-    for (const d of ['shelter', 'house_white', 'rank_sign', 'lamp_hd', 'icecream', 'love_tree']) {
+    for (const d of ['shelter', 'shelter_bench', 'house_white', 'rank_sign', 'lamp_hd', 'icecream', 'love_tree']) {
       this.load.image(`lt_${d}`, `assets/lttt/${d}.png`);
     }
     this.load.image('lt_shop_av', 'assets/lttt/bld/shop_av.png');   // cửa hàng gốc Avatar

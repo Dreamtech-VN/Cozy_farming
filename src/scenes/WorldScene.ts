@@ -520,12 +520,21 @@ export class WorldScene extends Phaser.Scene {
     const sx = this.busStopX();
     // nền ảnh gốc: đường đất rộng hơn -> đẩy nhà chờ hẳn xuống mặt đường
     const sy = this.zone.bg ? top + 22 : top - 2;
-    const sh = this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setScale(this.zone.bg ? 1.1 : 0.6);
+    const sh = this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setScale(this.zone.bg ? 0.85 : 0.55);
     // nhà chờ là phông nền: luôn nằm sau người chơi để đứng đợi xe vẫn thấy mình
     sh.setDepth(sy - sh.displayHeight);
-    // 3 chiếc ghế trong nhà chờ — ngồi đợi xe cho tử tế
+    // Mặt trước băng ghế vẽ đè lên người chơi: sprite Avatar không có tư thế
+    // ngồi ghế (frame 4 là ngồi bệt/quỳ), nên che nửa dưới đi thì mới ra dáng
+    // ngồi trên ghế. Depth = chân ghế -> ai đứng trước ghế vẫn đè lên bình thường.
+    const bsc = this.zone.bg ? 0.85 : 0.55;
+    const benchTop = sy - 30 * bsc;
+    if (this.textures.exists('lt_shelter_bench')) {
+      this.add.image(sx, benchTop, 'lt_shelter_bench').setOrigin(0.5, 0).setScale(bsc).setDepth(sy);
+    }
+    // 3 chiếc ghế: người ngồi đứng sau mặt ghế, phần chân bị ghế che nên nhìn
+    // đúng dáng ngồi (sprite Avatar không có tư thế ngồi ghế riêng)
     const seatGap = sh.displayWidth * 0.3;
-    this.benchSeats = [-1, 0, 1].map(i => ({ x: sx + i * seatGap, y: sy - sh.displayHeight * 0.05 }));
+    this.benchSeats = [-1, 0, 1].map(i => ({ x: sx + i * seatGap, y: sy - 12 * bsc }));
     // xe riêng đậu mép đường
     if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
       this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(this.vehScale(`veh_${S.vehicle}`));
@@ -1606,16 +1615,18 @@ export class WorldScene extends Phaser.Scene {
     this.tweens.add({
       targets: this.player, x: seat.x, y: seat.y, duration: 420,
       onUpdate: () => this.player.setDepth(this.player.y),
-      onComplete: () => this.startSitting('Ngồi đợi xe buýt~')
+      onComplete: () => this.startSitting('Ngồi đợi xe buýt~', true)
     });
   }
 
   // tư thế ngồi: giữ tới khi người chơi chạm để đi tiếp
-  private startSitting(msg: string) {
+  // onBench = ngồi ghế -> giữ dáng đứng vì mặt ghế đã che nửa dưới người,
+  // còn frame 'sit' của Avatar thực chất là ngồi bệt/quỳ, đặt lên ghế nhìn sai.
+  private startSitting(msg: string, onBench = false) {
     this.sitting = true;
     this.busy = true;
-    this.player.setDir(0);
-    this.player.play('sit');
+    this.player.setDir(3);
+    this.player.play(onBench ? 'idle' : 'sit');
     this.player.setFace('happy', 2500);
     toast(msg, 'sit');
   }
