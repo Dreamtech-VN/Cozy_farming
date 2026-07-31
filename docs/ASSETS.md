@@ -139,6 +139,11 @@ làm việc đó đã bỏ). `KITCHEN_POS` / `WAREHOUSE_POS` trong `WorldScene` 
 
 ### Đèn đường, cửa hàng, đống đất (`scripts/fix_avatar_assets.py`)
 
+- `hd/iconmenu/chat0.png` → `assets/ui/pack/icon_chat.png`
+  (`scripts/cut_chat_icon.py`): bong bóng thoại. Ảnh gốc là cả cái nút (khung
+  bo góc xám + nền trắng) nên loang từ mép vào xoá hết vùng xám-trắng, chỉ giữ
+  bong bóng. Trước đây icon "chat" bị gán nhầm sang hình phong thư có mặt mèo
+  của Cozy UI Pack — đó là icon thư, không phải chat.
 - `hd/home/845.png` → `assets/lttt/lamp_hd.png`: đèn đường. Trong game mỗi cột
   đèn kèm 2 lớp `glow` (blend ADD) sáng dần theo `darkness()` — trời càng tối
   đèn càng sáng, ban ngày tắt hẳn.
