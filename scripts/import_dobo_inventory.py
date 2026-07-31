@@ -50,7 +50,7 @@ FILES = {
     'ic_pants':   'Icons/IconsDefault/64px/IconsDefault53_64px.png',
     'ic_skin':    'Icons/IconsDefault/64px/IconsDefault46_64px.png',
     'ic_hair':    'Icons/IconsDefault/64px/IconsDefault44_64px.png',
-    'ic_hand':    'Icons/IconsDefault/64px/IconsDefault46_64px.png',
+    'ic_hand':    'Icons/IconsDefault/64px/IconsDefault54_64px.png',
     'ic_level':   'Icons/IconsDefault/64px/IconsDefault41_64px.png',
     'chip_bar':   'Containers/Containers/Container2.png',
     'name_label': 'Labels/Label10.png',

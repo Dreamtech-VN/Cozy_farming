@@ -122,14 +122,14 @@ export function registerAllPanels() {
 
   const BAG_TABS: [string, (k: string) => boolean][] = [
     ['Tất cả', () => true],
-    ['Trang bị', k => k === 'tool' || k === 'hand'],
+    ['Trang bị', k => k === 'tool'],
     ['Nông sản', k => ['crop', 'seed', 'product'].includes(k)],
     ['Cá', k => k === 'fish'],
     ['Nội thất', k => ['furniture', 'deco'].includes(k)],
     ['Khác', k => ['gift', 'material', 'food', 'special'].includes(k)]
   ];
 
-  // Nông cụ & đồ cầm tay cũng nằm trong túi (kind ảo 'tool' / 'hand')
+  // Nông cụ cũng nằm trong túi (kind ảo 'tool'); đồ cầm tay ở tủ đồ
   interface BagEntry { kind: string; name: string; qty: number; node: () => HTMLElement; equipped: boolean; onClick: () => void }
 
   function bagEntries(close: () => void): BagEntry[] {
@@ -148,10 +148,11 @@ export function registerAllPanels() {
     }
     for (const [id, qty] of Object.entries(S.inventory)) {
       const def = item(id);
-      const hand = def.meta?.handPart ? Number(def.meta.handPart) : 0;
+      // đồ cầm tay đã chuyển hẳn sang tủ đồ (tab Quần áo), không bày trong túi nữa
+      if (def.meta?.handPart) continue;
       out.push({
-        kind: hand ? 'hand' : def.kind, name: def.name, qty, equipped: hand ? S.hotbar.includes(`hand:${hand}`) : false,
-        node: () => hand ? chibiPreview(hand, 58) : iconOf(def, 58),
+        kind: def.kind, name: def.name, qty, equipped: false,
+        node: () => iconOf(def, 58),
         onClick: () => itemActions(id, close)
       });
     }
@@ -231,12 +232,6 @@ export function registerAllPanels() {
     }
     if (def.kind === 'fish') {
       acts.push({ icon: '', ui: 'fish', label: 'Thả vào hồ cá nhà', cb: () => addToAquarium(id) });
-    }
-    if (def.meta?.handPart) {
-      acts.push({
-        icon: '', ui: 'candy', label: 'Dùng (đưa xuống ô trang bị)',
-        cb: () => { equipHandItem(Number(def.meta!.handPart)); }
-      });
     }
     if (def.kind === 'tool' && id.startsWith('tool_')) {
       acts.push({ icon: '', ui: 'hoe', label: 'Gắn lên thanh nông cụ', cb: () => equipTool(id.slice(5)) });
@@ -1733,7 +1728,10 @@ export function registerAllPanels() {
       }
       const pk = key as Exclude<SlotKey, 'skin'>;
       const cur = (look as any)[pk] as number;
-      const owned = chibiList(z, look.gender).filter(p => S.chibiWardrobe.includes(p.id) || p.id === cur);
+      // đồ cầm tay là vật phẩm trong túi, các loại còn lại nằm trong tủ quần áo
+      const ownedOf = (pid: number) => pk === 'hand'
+        ? itemCount(handItemId(pid)) > 0 : S.chibiWardrobe.includes(pid);
+      const owned = chibiList(z, look.gender).filter(p => ownedOf(p.id) || p.id === cur);
       let cells = 0;
       for (const p of owned) {
         const on = cur === p.id;
