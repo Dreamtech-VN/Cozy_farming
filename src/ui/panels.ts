@@ -1491,7 +1491,9 @@ export function registerAllPanels() {
           if (a.coins) parts.push(priceHtml(a.coins));
           if (a.rubies) parts.push(priceHtml(0, a.rubies));
           if (a.itemId) parts.push(`${item(a.itemId).icon}x${a.qty ?? 1}`);
-          r.append(btn(`Nhận ${parts.join(' ')}`, 'gold', () => { claimMail(m.id); sfx.coin(); render(); }));
+          const cb = btn('', 'gold', () => { claimMail(m.id); sfx.coin(); render(); });
+          cb.innerHTML = `Nhận ${parts.join(' ')}`;
+          r.append(cb);
         }
         if (!m.read) { m.read = true; save(); }
         body.append(r);

@@ -150,6 +150,7 @@ function buildHud() {
   menuBtn.id = 'menu-btn';
   quick.append(
     menuBtn,
+    mkBtn('inventory', 'Túi đồ', () => openPanel('inventory'), 'inventory'),
     mkBtn('quest', 'Nhiệm vụ', () => openPanel('quests'), 'quests'),
     mkBtn('mail', 'Thư', () => openPanel('mail'), 'mail'),
     mkBtn('emote', 'Biểu cảm', () => openPanel('emotes'))
