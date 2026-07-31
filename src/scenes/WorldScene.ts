@@ -523,23 +523,17 @@ export class WorldScene extends Phaser.Scene {
     const sx = this.busStopX();
     // nền ảnh gốc: đường đất rộng hơn -> đẩy nhà chờ hẳn xuống mặt đường
     const sy = this.zone.bg ? top + 22 : top - 2;
-    // cỡ nhà chờ lấy theo người: mặt ghế phải nằm ngang hông nhân vật (cao ~60px)
-    const sh = this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setScale(this.zone.bg ? 0.6 : 0.4);
+    const sh = this.add.image(sx, sy, 'lt_shelter').setOrigin(0.5, 1).setScale(this.zone.bg ? 0.9 : 0.55);
     // nhà chờ là phông nền: luôn nằm sau người chơi để đứng đợi xe vẫn thấy mình
     sh.setDepth(sy - sh.displayHeight);
-    // Mặt trước băng ghế vẽ đè lên người chơi: sprite Avatar không có tư thế
-    // ngồi ghế (frame 4 là ngồi bệt/quỳ), nên che nửa dưới đi thì mới ra dáng
-    // ngồi trên ghế. Depth = chân ghế -> ai đứng trước ghế vẫn đè lên bình thường.
-    const bsc = this.zone.bg ? 0.6 : 0.4;
-    const benchTop = sy - 30 * bsc;
-    if (this.textures.exists('lt_shelter_bench')) {
-      this.add.image(sx, benchTop, 'lt_shelter_bench').setOrigin(0.5, 0).setScale(bsc).setDepth(sy + 14);
-    }
-    // 3 chiếc ghế. Nhìn chính diện, người ngồi bị mặt ghế che đúng phần hông,
-    // còn cẳng chân và bàn chân vẫn thò xuống dưới ghế -> ra dáng ngồi thật,
-    // không bị cụt nửa người (sprite Avatar không có frame ngồi ghế riêng).
+    // 3 chiếc ghế: người chơi ngồi HẲN LÊN mặt ghế bằng frame ngồi riêng
+    // (scripts/make_sit_frame.py), vẽ đè lên nhà chờ nên không bị che tí nào.
+    // Mặt ghế nằm cách chân nhà chờ 31px trong ảnh gốc; frame ngồi có hông cao
+    // 14px so với neo chân -> đặt neo chân ngay dưới mặt ghế bấy nhiêu.
+    const bsc = this.zone.bg ? 0.9 : 0.55;
     const seatGap = sh.displayWidth * 0.3;
-    this.benchSeats = [-1, 0, 1].map(i => ({ x: sx + i * seatGap, y: sy + 6 }));
+    const seatY = sy - 31 * bsc + 8;
+    this.benchSeats = [-1, 0, 1].map(i => ({ x: sx + i * seatGap, y: seatY }));
     // xe riêng đậu mép đường
     if (S.vehicle && this.textures.exists(`veh_${S.vehicle}`)) {
       this.add.image(sx + 7 * T, this.roadMidY(), `veh_${S.vehicle}`).setDepth(this.roadMidY()).setScale(this.vehScale(`veh_${S.vehicle}`));
@@ -1631,7 +1625,8 @@ export class WorldScene extends Phaser.Scene {
     this.sitting = true;
     this.busy = true;
     this.player.setDir(3);
-    this.player.play(onBench ? 'idle' : 'sit');
+    this.player.play(onBench ? 'chair' : 'sit');
+    if (onBench) this.player.showShadow(false);   // ngồi trên ghế, chân không chạm đất
     this.player.setFace('happy', 2500);
     toast(msg, 'sit');
   }
@@ -1640,6 +1635,7 @@ export class WorldScene extends Phaser.Scene {
     if (!this.sitting) return;
     this.sitting = false;
     this.busy = false;
+    this.player.showShadow(true);
     this.player.resetFace();
     this.player.play('idle');
   }

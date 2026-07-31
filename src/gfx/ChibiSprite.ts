@@ -5,7 +5,7 @@ import { lookLayers, FACE, type ChibiLook, type FaceKey } from '@/data/chibi';
 // Strip 15 frame 64x96/part, neo chân (32,88). Hướng: mặc định nhìn phải,
 // đi trái lật gương (Avatar chỉ có 2 hướng), lên/xuống dùng chung.
 
-export type ChibiAnim = 'idle' | 'walk' | 'work' | 'sit' | 'lie' | 'reach' | 'pat' | 'strike' | 'cheer';
+export type ChibiAnim = 'idle' | 'walk' | 'work' | 'sit' | 'chair' | 'lie' | 'reach' | 'pat' | 'strike' | 'cheer';
 
 interface AnimDef { frames: number[]; fps: number; loop: boolean }
 const ANIMS: Record<ChibiAnim, AnimDef> = {
@@ -13,6 +13,8 @@ const ANIMS: Record<ChibiAnim, AnimDef> = {
   walk: { frames: [0, 2], fps: 6, loop: true },
   work: { frames: [3, 0, 3, 0, 3], fps: 5, loop: false },           // cúi làm việc
   sit:  { frames: [4], fps: 1, loop: true },
+  // frame 15 do scripts/make_sit_frame.py dựng thêm: tư thế ngồi ghế
+  chair: { frames: [15], fps: 1, loop: true },
   lie:  { frames: [5], fps: 1, loop: true },
   // tư thế tương tác — sprite Avatar chỉ có các kiểu đưa/cầm tay,
   // nên hành động chủ yếu diễn bằng chuyển động (xem WorldScene.playPlayerAct)
@@ -80,7 +82,7 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
   play(anim: string, onDone?: () => void) {
     const alias: Record<string, ChibiAnim> = {
       hoe: 'work', water: 'work', pickup: 'work', axe: 'work', fishing: 'sit',
-      idle: 'idle', walk: 'walk', work: 'work', sit: 'sit', lie: 'lie',
+      idle: 'idle', walk: 'walk', work: 'work', sit: 'sit', chair: 'chair', lie: 'lie',
       reach: 'reach', pat: 'pat', strike: 'strike', cheer: 'cheer'
     };
     const a = alias[anim] ?? 'idle';
@@ -99,6 +101,9 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
     for (const l of this.layers) l.setFlipX(this.facingLeft);
   }
   get dir(): 0 | 1 | 2 | 3 { return this.facingLeft ? 2 : 3; }
+
+  // tắt bóng đổ khi ngồi trên ghế (chân không chạm đất)
+  showShadow(on: boolean) { this.shadowObj.setVisible(on); }
 
   showEmote(index: number) {
     this.emote?.destroy();

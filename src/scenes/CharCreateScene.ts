@@ -15,13 +15,13 @@ export class CharCreateScene extends Phaser.Scene {
 
   create() {
     const W = this.scale.width, H = this.scale.height;
-    // nền hồ câu (bg 15) — khác màn đăng nhập, phủ tối nhẹ cho nổi panel
-    const bgKey = this.textures.exists('bg_15') ? 'bg_15' : 'title_bg';
+    // dùng chung key art với màn đăng nhập, phủ tối nhẹ cho nổi panel
+    const bgKey = 'title_bg';
     if (this.textures.exists(bgKey)) {
       const bg = this.add.image(W / 2, H / 2, bgKey);
       bg.setScale(Math.max(W / bg.width, H / bg.height) * 1.04);
       this.tweens.add({ targets: bg, scale: bg.scale * 1.05, duration: 10000, yoyo: true, repeat: -1, ease: 'sine.inout' });
-      this.add.rectangle(0, 0, W, H, 0x0a1220, 0.42).setOrigin(0);
+      this.add.rectangle(0, 0, W, H, 0x0a1220, 0.34).setOrigin(0);
     } else {
       this.add.rectangle(0, 0, W, H, 0x2d4a1e).setOrigin(0);
     }

@@ -184,6 +184,16 @@ Sprite `assets/deco/busstop.png` hiện ghép từ ghế đá của tileset + kh
 "Sprite City Series 1 – Bus Station" trên OpenGameArt
 (https://opengameart.org/content/sprite-city-series-1-bus-station) — tải về thay file là xong.
 
+## Frame "ngồi ghế" tự dựng (`scripts/make_sit_frame.py`)
+
+Bộ sprite Avatar chỉ có 15 frame và **không có tư thế ngồi ghế** (frame 4 là
+ngồi bệt/quỳ). Nhìn chính diện, người ngồi khác người đứng chủ yếu ở chỗ đùi bị
+thu ngắn nên thân tụt xuống — script dựng frame 15 cho **cả 345 part** theo
+đúng quy tắc đó: phần từ hông trở lên đẩy xuống 12px, phần chân nén từ 26px
+còn 14px. Làm đồng loạt nên các lớp vẫn khớp nhau. Sheet rộng 960 -> 1024px.
+
+Chạy lại được nhiều lần: part nào đã có 16 frame thì script bỏ qua.
+
 ## Nhân vật chibi (hiện hành)
 
 Nhân vật đã chuyển sang **hệ paperdoll chibi Avatar**: 345 part (tóc/áo/quần/mũ/kính/cánh

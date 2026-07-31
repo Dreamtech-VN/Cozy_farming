@@ -86,6 +86,14 @@ for n in ('trough', 'trough_full'):
         t.crop((0, 0, t.width, 32)).save(f)
         print(n, '->', (t.width, 32))
 
+# ---- máng thức ăn: bản cắt cũ dính thêm đống cỏ khô của ô bên dưới ----
+for n in ('trough', 'trough_full'):
+    f = 'public/assets/lttt/%s.png' % n
+    t = Image.open(f).convert('RGBA')
+    if t.height > 32:                     # chỉ cắt 1 lần, chạy lại không hỏng
+        t.crop((0, 0, t.width, 32)).save(f)
+        print(n, '->', (t.width, 32))
+
 # ---- mặt trước băng ghế nhà chờ (vẽ đè lên người ngồi cho ra tư thế ngồi ghế) ----
 sh_full = Image.open('public/assets/lttt/shelter.png').convert('RGBA')
 sh_full.crop((0, 106, sh_full.width, sh_full.height)).save('public/assets/lttt/shelter_bench.png')
