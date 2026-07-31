@@ -1,7 +1,10 @@
 import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
 import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
 import { AVATAR_PICS, avatarPicUrl, isUploadedPic } from '@/data/avatars';
-import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem, unequipTool, allocateStat, STAT_NAMES, STAT_KEYS } from '@/core/save';
+import { FOODS, FOOD_LIST } from '@/data/foods';
+import { countOf, takeFrom, listOf, type StoreKind } from '@/systems/farmstore';
+import { cookingFood, cookRemain, canCook, startCook, collectCook, cancelCook } from '@/systems/cooking';
+import { S, save, spend, addCoins, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, equipHandItem, unequipTool, allocateStat, STAT_NAMES, STAT_KEYS } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
 import { CROPS, CROP_LIST } from '@/data/crops';
@@ -241,7 +244,7 @@ export function registerAllPanels() {
     const grid = h('div', 'grid');
     let has = false;
     for (const c of CROP_LIST) {
-      const qty = itemCount(`seed_${c.id}`);
+      const qty = countOf('seeds', c.id);
       if (qty <= 0) continue;
       has = true;
       const cell = h('div', 'cell');
@@ -250,10 +253,117 @@ export function registerAllPanels() {
       grid.append(cell);
     }
     if (!has) {
-      body.append(h('div', 'hint', 'Bạn không có hạt giống nào. Mua ở tiệm Cô Mai (Nông trại) nhé!'));
+      body.append(h('div', 'hint', 'Kho không còn hạt giống. Mua ở tiệm Cô Mai (Nông trại) nhé!'));
       body.append(btn('Mở tiệm hạt giống', 'gold', () => { close(); openPanel('shop', { shopId: 'shop_seed' }); }));
     }
     body.append(grid);
+  });
+
+  // ================= Kho nông trại (Lttt: tách khỏi túi đồ) =================
+  registerPanel('warehouse', () => {
+    const { body, tabs } = openWindow('Kho nông trại', { size: 'large' });
+    const content = h('div');
+    const KINDS: [StoreKind, string][] = [['produce', 'Nông sản'], ['seeds', 'Hạt giống'], ['fert', 'Phân bón']];
+
+    const nameOf = (kind: StoreKind, id: string) => {
+      if (kind === 'fert') return 'Phân bón';
+      if (id.startsWith('food_')) return FOODS[id.slice(5)]?.name ?? id;
+      return CROPS[id]?.name ?? id;
+    };
+    const iconFor = (kind: StoreKind, id: string) => {
+      if (kind === 'fert') return uiIcon('fertilizer', 40);
+      if (id.startsWith('food_')) return iconOf(item(`crop_${FOODS[id.slice(5)]?.icon ?? 'carrot'}`));
+      const c = CROPS[id];
+      return c ? iconOf(item(`crop_${id}`)) : uiIcon('plant', 40);
+    };
+    const sellOf = (kind: StoreKind, id: string) => {
+      if (kind !== 'produce') return 0;
+      if (id.startsWith('food_')) return FOODS[id.slice(5)]?.sell ?? 0;
+      return CROPS[id]?.sellPrice ?? 0;
+    };
+
+    const render = (kind: StoreKind) => {
+      content.innerHTML = '';
+      const rows = listOf(kind);
+      content.append(h('div', 'hint', kind === 'produce'
+        ? 'Nông sản và món ăn cất ở đây — túi đồ không chứa nông sản nữa.'
+        : kind === 'seeds' ? 'Hạt giống dùng để gieo ngoài ruộng.' : 'Phân bón giúp cây nhanh lớn và khỏe hơn.'));
+      if (!rows.length) { content.append(h('div', 'hint', 'Ngăn này đang trống.')); return; }
+      const grid = h('div', 'grid grid-shop');
+      for (const [id, qty] of rows) {
+        const cell = h('div', 'cell cell-lg');
+        cell.append(iconFor(kind, id), h('div', 'nm', nameOf(kind, id)), h('div', 'qty', `x${qty}`));
+        const price = sellOf(kind, id);
+        if (price > 0) {
+          const b = priceBtn(price, 'gold', () => {
+            if (!takeFrom(kind, id, 1)) return;
+            addCoins(price); sfx.coin(); addStat('sold');
+            toast(`Bán 1 ${nameOf(kind, id)} +${price} xu`, 'coin');
+            render(kind);
+          });
+          b.prepend(document.createTextNode('Bán '));
+          cell.append(b);
+        }
+        grid.append(cell);
+      }
+      content.append(grid);
+    };
+
+    tabs(KINDS.map(k => k[1]), i => render(KINDS[i][0]));
+    body.append(content);
+    render('produce');
+  });
+
+  // ================= Nhà bếp (Lttt: 1 món/lượt, có đếm giờ) =================
+  registerPanel('kitchen', () => {
+    const { body, close } = openWindow('Nhà bếp', { size: 'large' });
+    const content = h('div');
+    let timer = 0;
+
+    const render = () => {
+      content.innerHTML = '';
+      const cur = cookingFood();
+      if (cur) {
+        const left = cookRemain();
+        const box = h('div', 'kt-now');
+        box.append(iconOf(item(`crop_${cur.icon}`)));
+        const info = h('div', 'grow');
+        const mm = Math.floor(left / 60), ss = left % 60;
+        info.innerHTML = `<div class="t1">Đang nấu: ${cur.name}</div>` +
+          `<div class="t2">${left > 0 ? `Còn ${mm}:${String(ss).padStart(2, '0')}` : 'Đã xong!'}</div>`;
+        box.append(info);
+        box.append(left > 0
+          ? btn('Hủy', '', () => { cancelCook(); render(); })
+          : btn('Lấy món', 'gold', () => { collectCook(); render(); }));
+        content.append(box);
+        content.append(h('div', 'sep'));
+      }
+
+      content.append(h('div', 'hint', 'Nguyên liệu lấy từ Kho nông trại, món nấu xong cũng cất vào kho.'));
+      const grid = h('div', 'grid grid-shop');
+      for (const f of FOOD_LIST) {
+        const cell = h('div', 'cell cell-lg');
+        cell.append(iconOf(item(`crop_${f.icon}`)), h('div', 'nm', f.name));
+        const mat = h('div', 'kt-mat');
+        for (const [id, n] of f.material) {
+          const have = countOf('produce', id);
+          const tag = h('span', `kt-ing ${have >= n ? 'ok' : 'miss'}`, `${CROPS[id]?.name ?? id} ${have}/${n}`);
+          mat.append(tag);
+        }
+        cell.append(mat, h('div', 'pr', `${f.cookMin} phút · bán ${f.sell} xu`));
+        if (!cur) {
+          cell.append(btn('Nấu', canCook(f) ? 'gold' : '', () => { if (startCook(f.id)) render(); }));
+        }
+        grid.append(cell);
+      }
+      content.append(grid);
+    };
+
+    body.append(content);
+    render();
+    timer = window.setInterval(() => { if (cookingFood()) render(); }, 1000);
+    body.addEventListener('DOMNodeRemoved', () => clearInterval(timer), { once: true });
+    void close;
   });
 
   // ================= Shop =================

@@ -33,6 +33,7 @@ const T = 16; // kích thước tile
 const FARM_PLOT = { ox: 1068, oy: 195, pw: 42, ph: 45 };          // lưới ruộng 13x4 trên bãi cỏ phải
 const FARM_POND_TILES = { x: 110, y: 16, w: 12, h: 12 };          // lòng hồ cá (phủ nước động lên trên)
 const WAREHOUSE_POS = { x: 700, y: 200 };                         // nhà kho vẽ sẵn
+const KITCHEN_POS = { x: 320, y: 200 };                           // nhà bếp (tile x=20)
 const PETHOUSE_POS = { x: 730, y: 320 };                          // nhà thú cưng (chỉ hiện khi đã nuôi)
 const PETSHOP_POS = { x: 21 * T, y: 13 * T };                     // tiệm thú cưng (Thành phố)
 const BARN_RECT = { x: 5.1, y: 11.6, w: 17.4, h: 10.8 };          // sân rào vẽ sẵn (px 82..360 / 185..358)
@@ -58,6 +59,7 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
     // nhà quy về đúng cỡ 2 căn vẽ sẵn của map gốc (~130 và ~140 px cao)
     { key: 'bldhd_farm_house', x: 32, y: 15.3, s: 0.78, label: 'Nhà riêng' },
     { key: 'bldhd_farm_barn', x: 43.5, y: 15.3, s: 0.78, label: 'Nhà kho' },
+    { key: 'bldhd_farm_market', x: 20, y: 15.3, s: 0.78, label: 'Nhà bếp' },
     // đèn đường: chân cột nằm hẳn trong thảm cỏ (cỏ hết ở y~240px)
     { key: 'lt_lamp_hd', x: 25.3, y: 14.5, s: 1 },
     { key: 'lt_lamp_hd', x: 56.2, y: 14.5, s: 1 },
@@ -1309,9 +1311,13 @@ export class WorldScene extends Phaser.Scene {
 
     // nhà kho + cây khế (nông trại)
     if (this.zone.id === 'farm') {
-      // nhà kho: mở kho đồ
+      // nhà kho: kho nông trại riêng (hạt giống / nông sản / phân bón)
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, WAREHOUSE_POS.x, WAREHOUSE_POS.y + 40) < 80) {
-        acts.push({ icon: '', ui: 'inventory', label: 'Mở nhà kho', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'inventory' }) });
+        acts.push({ icon: '', ui: 'inventory', label: 'Mở nhà kho', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'warehouse' }) });
+      }
+      // nhà bếp: nấu món từ nông sản trong kho
+      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, KITCHEN_POS.x, KITCHEN_POS.y + 40) < 80) {
+        acts.push({ icon: '', ui: 'plant', label: 'Vào nhà bếp', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'kitchen' }) });
       }
       // cây khế: rung cây nhặt quả (hồi 10 phút)
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, KHE_POS.x, KHE_POS.y + 30) < 85) {

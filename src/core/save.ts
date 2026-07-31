@@ -1,5 +1,6 @@
 import type { GameState, StatKey } from './types';
 import { bus, EV, toast } from './events';
+import { migrateBagToStore } from '@/systems/farmstore';
 
 const KEY = 'cozy_farming_save_v1';
 const VERSION = 1;
@@ -22,7 +23,7 @@ export function defaultState(): GameState {
       createdAt: Date.now()
     },
     wallet: { coins: 500, rubies: 10 },
-    inventory: { seed_carrot: 5 },
+    inventory: {},
     wardrobe: ['hair:bob', 'clothes:basic'],
     chibiWardrobe: [],
     pets: [],
@@ -30,6 +31,7 @@ export function defaultState(): GameState {
     hotbar: ['hoe', 'axe', 'shovel', 'can', '', '', '', '', '', ''],
     tools: { rod: 0, can: 1, hoe: 1, net: 0, basket: 0, axe: 1, shovel: 1 },
     farm: { unlocked: 6, plots: [] },
+    farmStore: { seeds: { carrot: 5 }, produce: {}, fert: {} },
     livestock: { barnLevel: 0, animals: [] },
     house: { owned: false, level: 0, wallpaper: 0, floor: 0, furniture: [], aquarium: [] },
     collections: { fish: [], insects: [], crops: [] },
@@ -147,6 +149,9 @@ export function load(): boolean {
     while (S.hotbar.length < HOTBAR_SLOTS) S.hotbar.push('');
     S.hotbar.length = HOTBAR_SLOTS;
     S.hotbar = S.hotbar.map(id => ownedTool(id) ? id : '');
+    // save cũ để hạt/nông sản/phân trong túi -> chuyển sang kho nông trại
+    if (!S.farmStore) S.farmStore = { seeds: {}, produce: {}, fert: {} };
+    migrateBagToStore();
     return true;
   } catch {
     return false;

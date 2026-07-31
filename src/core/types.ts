@@ -54,6 +54,20 @@ export interface Plot {
   watered?: boolean;
   wateredAt?: number;
   fertilized?: boolean;     // bón phân: giảm 30% thời gian
+  health?: number;          // sức khỏe cây 0..100 (Lttt) — quyết định sản lượng
+}
+
+// Kho nông trại (Lttt tách hẳn khỏi túi đồ: hatgiong / NongSan / PhanBon)
+export interface FarmStore {
+  seeds: Record<string, number>;     // cropId -> số hạt
+  produce: Record<string, number>;   // cropId -> số nông sản
+  fert: Record<string, number>;      // loại phân -> số lượng
+}
+
+// Đang nấu ở nhà bếp (Lttt: mỗi lúc 1 món, có đếm giờ)
+export interface CookState {
+  foodId: string;
+  startedAt: number;
 }
 
 export interface Animal {
@@ -135,6 +149,8 @@ export interface GameState {
   hotbar: string[];         // nông cụ gắn trên thanh nhanh
   tools: { rod: number; can: number; hoe: number; net: number; basket: number; axe: number; shovel: number }; // cấp độ dụng cụ
   farm: { unlocked: number; plots: Plot[]; hasDog?: boolean };  // hasDog: (cũ) chó giữ trại
+  farmStore: FarmStore;     // kho nông trại — nông sản KHÔNG nằm trong túi đồ
+  cooking?: CookState;      // món đang nấu ở nhà bếp
   pets: string[];           // thú cưng đã nuôi
   skins: string[];          // skin trọn bộ đã sở hữu
   activePet?: string;       // thú cưng đang dắt theo
