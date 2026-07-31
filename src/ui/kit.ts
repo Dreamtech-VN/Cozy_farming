@@ -30,9 +30,9 @@ export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLEleme
   const head = h('div', 'win-head');
   const titleEl = h('div', '', title);
   const closeBtn = h('button', 'win-close', '✕');
-  head.append(titleEl, closeBtn);
+  head.append(titleEl);
   const body = h('div', 'win-body');
-  win.append(head, body);
+  win.append(head, body, closeBtn);
   backdrop.append(win);
   root().append(backdrop);
   openWindows.push(backdrop);
