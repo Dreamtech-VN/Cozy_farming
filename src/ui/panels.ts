@@ -4,7 +4,7 @@ import { S, save, spend, addRubies, addItem, removeItem, itemCount, addStat, res
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
 import { CROPS, CROP_LIST } from '@/data/crops';
-import { ANIMAL_LIST } from '@/data/animals';
+import { ANIMAL_LIST, ANIMALS, BARN_CAPACITY, BARN_UPGRADE_COST } from '@/data/animals';
 import { FISH_LIST, RODS, RARITY_COLOR, RARITY_NAME, FISHES } from '@/data/fish';
 import { INSECT_LIST, NETS, INSECTS } from '@/data/insects';
 import { chibiList, chibiPriceXu, chibiPriceRuby, CHIBI_PARTS } from '@/data/chibi';
@@ -114,7 +114,7 @@ export function registerAllPanels() {
       const on = S.hotbar.includes(t.id);
       out.push({
         kind: 'tool', name: t.name, qty: 0, equipped: on,
-        node: () => { const d = h('div'); d.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 46))); return d; },
+        node: () => { const d = h('div'); d.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 62))); return d; },
         onClick: () => {
           if (on) unequipTool(S.hotbar.indexOf(t.id));
           else equipTool(t.id);
@@ -126,7 +126,7 @@ export function registerAllPanels() {
       const hand = def.meta?.handPart ? Number(def.meta.handPart) : 0;
       out.push({
         kind: hand ? 'hand' : def.kind, name: def.name, qty, equipped: hand ? S.hotbar.includes(`hand:${hand}`) : false,
-        node: () => hand ? chibiPreview(hand, 46) : iconOf(def, 44),
+        node: () => hand ? chibiPreview(hand, 58) : iconOf(def, 58),
         onClick: () => itemActions(id, close)
       });
     }
@@ -686,15 +686,42 @@ export function registerAllPanels() {
   });
 
   // ---- shop vật nuôi ----
+  // ================= Chuồng thú (vào chuồng rồi mới mua/nâng cấp) =================
   registerPanel('animalshop', () => {
-    if (!atShopZone('animalshop', 'Cửa hàng vật nuôi')) return;
-    const { body } = openWindow('Mua vật nuôi', { size: 'small' });
+    if (!atShopZone('animalshop', 'Chuồng thú')) return;
+    const { body } = openWindow('Chuồng thú', { size: 'normal' });
     const render = () => {
       body.innerHTML = '';
       const lv = S.livestock.barnLevel;
       body.append(h('div', 'hint', lv === 0
-        ? 'Mua con đầu tiên là chuồng thú tự dựng ở Nông trại.'
-        : `Chuồng cấp ${lv}: ${S.livestock.animals.length}/${livestock.barnCapacity()} con`));
+        ? 'Chuồng trống — mua con đầu tiên là chuồng tự dựng ở Nông trại.'
+        : `Chuồng cấp ${lv} · ${S.livestock.animals.length}/${livestock.barnCapacity()} con`));
+
+      // đang nuôi
+      for (const a of S.livestock.animals) {
+        const def = ANIMALS[a.type];
+        if (!def) continue;
+        const r = h('div', 'row');
+        r.append(spr(`assets/animals/${def.sheet}`, 0, 0, def.frameW, def.frameH, 34));
+        const info = h('div', 'grow');
+        info.innerHTML = `<div class="t1">${def.name}</div><div class="t2">${livestock.isHungry(a) ? 'Đang đói — cho ăn để có sản phẩm' : 'Khoẻ mạnh'}</div>`;
+        r.append(info);
+        body.append(r);
+      }
+
+      // nâng cấp chuồng
+      if (lv > 0 && lv < 3) {
+        const up = h('div', 'row');
+        up.append(uiIcon('barn', 30));
+        const ui2 = h('div', 'grow');
+        ui2.innerHTML = `<div class="t1">Nâng chuồng lên cấp ${lv + 1}</div><div class="t2">Chứa tối đa ${BARN_CAPACITY[lv + 1]} con</div>`;
+        up.append(ui2, priceBtn(BARN_UPGRADE_COST[lv], 'gold', () => {
+          if (livestock.upgradeBarn()) { render(); worldScene()?.scene?.restart(); }
+        }));
+        body.append(up);
+      }
+
+      body.append(h('div', 'lbl', 'Mua vật nuôi'));
       for (const a of ANIMAL_LIST) {
         const r = h('div', 'row');
         r.append(spr(`assets/animals/${a.sheet}`, 0, 0, a.frameW, a.frameH, 36));

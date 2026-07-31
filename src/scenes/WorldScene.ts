@@ -1020,6 +1020,32 @@ export class WorldScene extends Phaser.Scene {
         }
       }
     }
+    // chạm nền -> đi tới đó, tới nơi thì tự mở hành động tại chỗ
+    this.moveTarget = { x: wp.x, y: wp.y };
+    this.pendingAct = true;
+    this.showMoveMark(wp.x, wp.y);
+  }
+
+  // ---- đi theo điểm chạm ----
+  private moveTarget?: { x: number; y: number };
+  private pendingAct = false;
+  private moveMark?: Phaser.GameObjects.Arc;
+  private showMoveMark(x: number, y: number) {
+    this.moveMark?.destroy();
+    const m = this.add.circle(x, y, 9, 0xffe066, 0.55).setDepth(5).setStrokeStyle(2, 0xffffff, 0.8);
+    this.moveMark = m;
+    this.tweens.add({ targets: m, scale: 0.3, alpha: 0, duration: 520, onComplete: () => m.destroy() });
+  }
+
+  // tới nơi rồi: 1 hành động thì làm luôn, nhiều thì hiện bảng chọn
+  private runTapActions() {
+    const acts = this.contextActions();
+    if (!acts.length) return;
+    if (acts.length === 1) { acts[0].cb(); return; }
+    bus.emit(EV.OPEN_PANEL, {
+      panel: 'dialog',
+      data: { title: 'Bạn muốn làm gì?', text: '', actions: acts.map(a => ({ icon: a.icon, ui: a.ui, label: a.label, cb: a.cb })) }
+    });
   }
 
   // ================= hành động theo ngữ cảnh =================
@@ -1136,10 +1162,7 @@ export class WorldScene extends Phaser.Scene {
     if (this.zone.features.includes('barn')) {
       const bx = (BARN_RECT.x + BARN_RECT.w / 2) * T, by = (BARN_RECT.y + BARN_RECT.h / 2) * T;
       if (Phaser.Math.Distance.Between(this.player.x, this.player.y, bx, by) < (this.zone.bg ? 110 : 40)) {
-        acts.push({ icon: '', ui: 'shop', label: 'Mua vật nuôi', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'animalshop' }) });
-        if (S.livestock.barnLevel > 0 && S.livestock.barnLevel < 3) {
-          acts.push({ icon: '', ui: 'barn', label: 'Nâng chuồng', cb: () => { livestock.upgradeBarn(); this.scene.restart(); } });
-        }
+        acts.push({ icon: '', ui: 'barn', label: 'Vào chuồng thú', cb: () => bus.emit(EV.OPEN_PANEL, { panel: 'animalshop' }) });
       }
     }
 
@@ -1793,6 +1816,19 @@ export class WorldScene extends Phaser.Scene {
     if (this.cursors.up.isDown || this.wasd.W.isDown) dy -= 1;
     if (this.cursors.down.isDown || this.wasd.S.isDown) dy += 1;
     dx += virtualInput.x; dy += virtualInput.y;
+    // đi theo điểm vừa chạm (điều khiển cảm ứng)
+    if (this.moveTarget && !this.busy) {
+      const tx = this.moveTarget.x - this.player.x, ty = this.moveTarget.y - this.player.y;
+      const d = Math.hypot(tx, ty);
+      if (d < 10) {
+        this.moveTarget = undefined;
+        if (this.pendingAct) { this.pendingAct = false; this.runTapActions(); }
+      } else if (dx === 0 && dy === 0) {
+        dx = tx / d; dy = ty / d;
+      } else {
+        this.moveTarget = undefined; this.pendingAct = false;   // bấm phím thì huỷ đi tự động
+      }
+    }
     const len = Math.hypot(dx, dy);
     if (len > 0.2 && !this.busy) {
       dx /= Math.max(1, len); dy /= Math.max(1, len);
@@ -1808,6 +1844,11 @@ export class WorldScene extends Phaser.Scene {
       if (!this.blockedAt(nx, ny)) { this.player.x = nx; this.player.y = ny; }
       else if (!this.blockedAt(nx, this.player.y)) this.player.x = nx;
       else if (!this.blockedAt(this.player.x, ny)) this.player.y = ny;
+      else if (this.moveTarget) {
+        // đụng vật cản: dừng lại và vẫn mở hành động tại chỗ nếu có
+        this.moveTarget = undefined;
+        if (this.pendingAct) { this.pendingAct = false; this.runTapActions(); }
+      }
       const dir: Dir = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 3 : 2) : (dy > 0 ? 0 : 1);
       this.player.setDir(dir);
       this.player.play('walk');
@@ -1845,15 +1886,11 @@ export class WorldScene extends Phaser.Scene {
       this.placeGhost.setPosition(Math.floor(wp.x / T) * T, Math.floor(wp.y / T) * T);
     }
 
-    // gợi ý hành động cho HUD
-    const acts = this.contextActions();
-    const key = acts.map(a => a.label).join('|');
-    if (key !== this.lastHintKey) {
-      this.lastHintKey = key;
-      bus.emit(EV.ACTION_HINT, acts);
+    // phím Space/E (bản PC) vẫn chạy hành động đầu tiên tại chỗ
+    if (consumeAction()) {
+      const acts = this.contextActions();
+      if (acts.length) acts[0].cb();
     }
-    // nút hành động (A): chạy hành động đầu tiên
-    if (consumeAction() && acts.length) acts[0].cb();
   }
 }
 
