@@ -199,7 +199,7 @@ function refreshHud() {
   q('#hud-coins') && (q('#hud-coins')!.textContent = fmt(S.wallet.coins));
   q('#hud-rubies') && (q('#hud-rubies')!.textContent = fmt(S.wallet.rubies));
   const av = q('.hud-avatar');
-  if (av) { av.innerHTML = ''; av.append(charHeadOnly(S.player.chibi, 36)); }
+  if (av) { av.innerHTML = ''; av.append(charHeadOnly(S.player.chibi, 34)); }
   const nm = q('.hud-name'), tt = q('.hud-title'), lv = q('.hud-lv');
   if (nm) nm.textContent = S.player.name || 'Nông dân';
   if (tt) {
@@ -228,8 +228,8 @@ function refreshClock() {
   const hh = Math.floor(gameHour());
   const mm = Math.floor((gameHour() - hh) * 60);
   const sz = season();
-  el.innerHTML = `<img class="wx" src="assets/ui/act/${WEATHER_ICON[currentWeather()]}.png">${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}` +
-    `<br><img class="wx" src="assets/ui/act/${sz.icon}.png">${sz.name}`;
+  el.innerHTML = `<div class="clock-time"><img class="wx" src="assets/ui/act/${WEATHER_ICON[currentWeather()]}.png"><span>${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}</span></div>` +
+    `<div class="clock-season"><img class="wx" src="assets/ui/act/${sz.icon}.png"><span>${sz.name}</span></div>`;
 }
 
 // ================= Joystick cảm ứng =================

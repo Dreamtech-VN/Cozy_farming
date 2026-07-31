@@ -38,7 +38,7 @@ img { image-rendering: auto; }
   padding: 6px 16px 8px 8px; min-height: 48px;
 }
 .hud-avatar {
-  width: 40px; height: 40px; border-radius: 50%; background: #f6edd8;
+  width: 42px; height: 42px; border-radius: 50%; background: #f6edd8;
   border: 2px solid #b5836b; display: flex; align-items: center; justify-content: center; overflow: hidden;
   flex: none;
 }
@@ -56,7 +56,16 @@ img { image-rendering: auto; }
 .pill .plus { color: #2f9e44; cursor: pointer; font-weight: 900; font-size: 16px; }
 .hud-clock {
   border-image: url('/assets/ui/pack/label.png') 30 fill / 12px stretch;
-  color: #4a3520; padding: 5px 12px 7px; font-size: 11px; font-weight: 700; text-align: center;
+  color: #4a3520; padding: 4px 12px 6px; text-align: center; min-width: 84px;
+  display: flex; flex-direction: column; gap: 1px;
+}
+.clock-time {
+  display: flex; align-items: center; justify-content: center; gap: 3px;
+  font-size: 14px; font-weight: 900; letter-spacing: .5px; color: #3a2410;
+}
+.clock-season {
+  display: flex; align-items: center; justify-content: center; gap: 3px;
+  font-size: 10px; font-weight: 700; color: #7a5b3a;
 }
 
 /* Cụm nút nhanh (trái, dưới hồ sơ) */
@@ -165,6 +174,10 @@ img { image-rendering: auto; }
 }
 .win-close:active { transform: scale(.88); }
 .win-body { padding: 8px 14px 6px; overflow-y: auto; flex: 1; }
+
+/* Chat: cố định đầy màn hình, không cuộn body */
+.win.win-chat { width: min(560px, 90vw); height: 72vh; max-height: 72vh; }
+.win.win-chat .win-body { display: flex; flex-direction: column; overflow: hidden; }
 .win-tabs { display: flex; gap: 6px; padding: 6px 14px 0; flex-wrap: wrap; }
 .tab {
   padding: 7px 14px 9px; cursor: pointer; font-size: 13px; font-weight: 800; color: #4a3520;

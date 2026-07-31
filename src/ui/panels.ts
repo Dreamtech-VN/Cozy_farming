@@ -1478,12 +1478,13 @@ export function registerAllPanels() {
 
   // ================= Chat =================
   registerPanel('chat', (data?: { to?: string }) => {
-    const { body } = openWindow('Trò chuyện');
+    const { body, win } = openWindow('Trò chuyện');
+    win.classList.add('win-chat');
     let channel: 'public' | 'area' | 'private' = data?.to ? 'private' : 'public';
     let privateTo = data?.to ?? S.social.friends[0]?.name ?? '';
 
-    const log = h('div');
-    log.style.cssText = 'height:220px;overflow-y:auto;background:rgba(0,0,0,.3);border-radius:10px;padding:8px;font-size:12px;display:flex;flex-direction:column;gap:3px';
+    const log = h('div', 'chat-log');
+    log.style.cssText = 'flex:1;min-height:0;overflow-y:auto;background:rgba(0,0,0,.3);border-radius:10px;padding:8px;font-size:12px;display:flex;flex-direction:column;gap:3px';
     const renderLog = () => {
       log.innerHTML = '';
       for (const m of getChatLog().filter(m =>
@@ -1507,7 +1508,7 @@ export function registerAllPanels() {
     }
 
     const inputBar = h('div');
-    inputBar.style.cssText = 'display:flex;gap:6px;margin-top:8px';
+    inputBar.style.cssText = 'display:flex;gap:6px;margin-top:8px;flex:none';
     const inp = h('input', 'ui-input') as HTMLInputElement;
     inp.placeholder = 'Nhập tin nhắn...';
     inp.maxLength = 120;
