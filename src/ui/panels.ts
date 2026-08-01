@@ -2408,13 +2408,6 @@ export function registerAllPanels() {
       else figure.append(doll);
       side.append(figure);
 
-      const need = S.player.level * 100;
-      const pct = Math.min(100, Math.round(S.player.exp / need * 1000) / 10);
-      const bar = h('div', 'ch-exp');
-      const fill = h('div', 'ch-exp-f'); fill.style.width = `${pct}%`;
-      bar.append(fill, h('div', 'ch-exp-t', `${S.player.exp}/${need}`));
-      side.append(bar);
-
       const b2 = cpBreakdown();
       const cpRow = h('div', 'ch-cprow');
       const fast = h('button', 'ch-fast');
