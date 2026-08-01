@@ -1,4 +1,4 @@
-import type { GameState, StatKey } from './types';
+import type { GameState } from './types';
 import { ZONES } from '@/data/zones';
 import { bus, EV, toast } from './events';
 import { migrateBagToStore, addTo, countOf, takeFrom, type StoreKind } from '@/systems/farmstore';
@@ -22,22 +22,11 @@ export function defaultState(): GameState {
         clothes: 'basic', clothesColor: 0, acc: []
       },
       level: 1, exp: 0,
-      charStats: { health: 5, intellect: 5, strength: 5, agility: 5, charm: 5 },
-      statPoints: 0,
-      title: 'title_newbie', titles: ['title_newbie'], badges: [],
+      title: 'title_newbie', titles: ['title_newbie'],
       createdAt: Date.now()
     },
     wallet: { farmCoins: 0, coins: 500, rubies: 10 },
-    equip: { weapon: '', hand: '', necklace: '', treasure: '', ring: '', medal: '', earring: '', offhand: '' },
-    equipLv: {},
-    equipBag: [],
-    equipStar: {},
-    equipGems: {},
-    gemBag: {},
-    equipRef: {},
-    equipRefLock: {},
     achClaimed: {},
-    badgeLv: {},
     inventory: {},
     wardrobe: ['hair:bob', 'clothes:basic'],
     chibiWardrobe: [],
@@ -154,26 +143,13 @@ export function load(): boolean {
     // chỗ migrate giữa các version save về sau
     S = { ...defaultState(), ...data };
     if (!S.chibiWardrobe) S.chibiWardrobe = [];
-    if (!S.equip) S.equip = {};
-    for (const k of ['weapon','hand','necklace','treasure','ring','medal','earring','offhand'])
-      if (S.equip[k] === undefined) S.equip[k] = '';
-    if (!S.equipLv) S.equipLv = {};
-    if (!S.equipBag) S.equipBag = [];
-    if (!S.equipStar) S.equipStar = {};
-    if (!S.equipGems) S.equipGems = {};
-    if (!S.gemBag) S.gemBag = {};
-    if (!S.equipRef) S.equipRef = {};
-    if (!S.equipRefLock) S.equipRefLock = {};
     if (!S.achClaimed) S.achClaimed = {};
-    if (!S.badgeLv) S.badgeLv = {};
     if (S.wallet.farmCoins === undefined) S.wallet.farmCoins = 0;
     // save cũ để đồ cầm tay trong túi -> chuyển vào tủ quần áo (như Lttt)
     migrateHandItems(S.inventory, S.chibiWardrobe);
     if (!S.skins) S.skins = [];
     if (!S.pets) S.pets = S.farm?.hasDog ? ['dog'] : [];   // save cũ có chó -> chuyển sang hệ thú cưng
     if (S.tools.basket === undefined) S.tools.basket = (S.inventory['tool_basket'] ?? 0) > 0 ? 1 : 0;
-    if (!S.player.charStats) S.player.charStats = { health: 5, intellect: 5, strength: 5, agility: 5, charm: 5 };
-    if (S.player.statPoints == null) S.player.statPoints = 0;
     // 4 công cụ cơ bản luôn có sẵn (save cũ có thể thiếu rìu/liềm)
     if (S.tools.axe === undefined) S.tools.axe = 1;
     if (!S.tools.basket) S.tools.basket = 1;
@@ -316,28 +292,10 @@ export function addExp(n: number) {
   while (S.player.exp >= need()) {
     S.player.exp -= need();
     S.player.level++;
-    S.player.statPoints += 3;
-    toast(`Lên cấp ${S.player.level}! (+3 điểm chỉ số)`, 'rank');
+    toast(`Lên cấp ${S.player.level}!`, 'rank');
     addStat('level_up');
   }
   bus.emit(EV.STATE_CHANGED); save();
-}
-
-export const STAT_NAMES: Record<StatKey, string> = {
-  health: 'Sức khỏe', intellect: 'Trí tuệ', strength: 'Sức mạnh',
-  agility: 'Nhanh nhẹn', charm: 'Quyến rũ'
-};
-export const STAT_ICONS: Record<StatKey, string> = {
-  health: '❤️', intellect: '📘', strength: '💪', agility: '⚡', charm: '✨'
-};
-export const STAT_KEYS: StatKey[] = ['health', 'intellect', 'strength', 'agility', 'charm'];
-
-export function allocateStat(key: StatKey, n = 1): boolean {
-  if (S.player.statPoints < n) return false;
-  S.player.charStats[key] += n;
-  S.player.statPoints -= n;
-  bus.emit(EV.STATE_CHANGED); save();
-  return true;
 }
 
 export function todayStr(): string {

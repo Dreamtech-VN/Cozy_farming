@@ -10,7 +10,6 @@
 // Nội dung thì trộn việc của nông trại (trồng trọt, câu cá, chăn nuôi, nấu ăn)
 // với việc kiểu GunPow (rèn đúc, sưu tập, giao lưu).
 
-import type { StatKey } from '@/core/types';
 
 export interface AchCat { id: string; name: string }
 
@@ -20,7 +19,7 @@ export const ACH_CATS: AchCat[] = [
   { id: 'fish', name: 'Cần Thủ' },
   { id: 'animal', name: 'Chăn Nuôi' },
   { id: 'kitchen', name: 'Bếp Núc' },
-  { id: 'forge', name: 'Bậc Thầy Rèn' },
+  { id: 'craft', name: 'Khéo Tay' },
   { id: 'social', name: 'Giải Trí' },
   { id: 'home', name: 'Tổ Ấm' },
   { id: 'collect', name: 'Sưu Tập' }
@@ -77,15 +76,12 @@ a({ id: 'ac_order1', cat: 'kitchen', name: 'Giao Hàng', desc: 'Giao xong 30 đ�
 a({ id: 'ac_order2', cat: 'kitchen', name: 'Chủ Tiệm Uy Tín', desc: 'Giao xong 300 đơn hàng.', stat: 'orders_done', target: 300, point: P[3], coins: 15000, title: 'ti_shopkeep' });
 a({ id: 'ac_sell', cat: 'kitchen', name: 'Buôn May Bán Đắt', desc: 'Bán 2.000 vật phẩm.', stat: 'sold', target: 2000, point: P[2], coins: 8000, title: 'ti_trader' });
 
-// ---- Bậc Thầy Rèn (phần lấy logic GunPow) ----
-a({ id: 'ac_smash1', cat: 'forge', name: 'Học Nghề Rèn', desc: 'Cường hoá thành công 20 lần.', stat: 'equip_smashed', target: 20, point: P[0], coins: 1000 });
-a({ id: 'ac_smash2', cat: 'forge', name: 'Thợ Rèn Lành Nghề', desc: 'Cường hoá thành công 200 lần.', stat: 'equip_smashed', target: 200, point: P[2], coins: 8000, title: 'ti_smith' });
-a({ id: 'ac_smash3', cat: 'forge', name: 'Bậc Thầy Rèn', desc: 'Cường hoá thành công 1.000 lần.', stat: 'equip_smashed', target: 1000, point: P[4], coins: 45000, title: 'ti_forge_master' });
-a({ id: 'ac_star', cat: 'forge', name: 'Thăng Tinh', desc: 'Tăng sao thành công 50 lần.', stat: 'equip_starred', target: 50, point: P[2], coins: 8000, title: 'ti_starman' });
-a({ id: 'ac_ref', cat: 'forge', name: 'Tẩy Luyện Gia', desc: 'Tẩy luyện 100 lần.', stat: 'equip_reforged', target: 100, point: P[2], coins: 8000 });
-a({ id: 'ac_inherit', cat: 'forge', name: 'Kế Thừa Y Bát', desc: 'Kế thừa trang bị 20 lần.', stat: 'equip_inherited', target: 20, point: P[2], coins: 8000, title: 'ti_heir' });
-a({ id: 'ac_chest', cat: 'forge', name: 'Săn Rương', desc: 'Mở 100 rương trang bị.', stat: 'chest_opened', target: 100, point: P[2], coins: 8000, title: 'ti_chest' });
-a({ id: 'ac_tool', cat: 'forge', name: 'Nâng Cấp Công Cụ', desc: 'Nâng cấp công cụ 20 lần.', stat: 'tool_upgraded', target: 20, point: P[1], coins: 3000 });
+// ---- Khéo Tay: nông cụ & việc vặt quanh nông trại ----
+a({ id: 'ac_tool', cat: 'craft', name: 'Mài Cuốc', desc: 'Nâng cấp công cụ 20 lần.', stat: 'tool_upgraded', target: 20, point: P[1], coins: 3000, title: 'ti_smith' });
+a({ id: 'ac_tool2', cat: 'craft', name: 'Bộ Đồ Nghề Xịn', desc: 'Nâng cấp công cụ 100 lần.', stat: 'tool_upgraded', target: 100, point: P[3], coins: 15000, title: 'ti_forge_master' });
+a({ id: 'ac_khe', cat: 'craft', name: 'Ăn Khế Trả Vàng', desc: 'Rung cây khế 200 lần.', stat: 'khe_shaken', target: 200, point: P[2], coins: 6000, title: 'ti_chest' });
+a({ id: 'ac_prod', cat: 'craft', name: 'Gom Góp', desc: 'Thu 500 sản phẩm chăn nuôi.', stat: 'collected_products', target: 500, point: P[2], coins: 6000 });
+a({ id: 'ac_sellcrop', cat: 'craft', name: 'Được Mùa Được Giá', desc: 'Bán 1.000 nông sản.', stat: 'sold_crops', target: 1000, point: P[2], coins: 8000, title: 'ti_starman' });
 
 // ---- Giải Trí ----
 a({ id: 'ac_friend', cat: 'social', name: 'Quảng Giao', desc: 'Kết bạn với 10 người.', stat: 'friends_added', target: 10, point: P[1], coins: 1500, title: 'ti_social' });
@@ -105,37 +101,10 @@ a({ id: 'ac_lvl', cat: 'home', name: 'Thăng Tiến', desc: 'Đạt cấp 30.', 
 a({ id: 'ac_fashion', cat: 'collect', name: 'Tín Đồ Thời Trang', desc: 'Sắm 50 món thời trang.', stat: 'fashion_bought', target: 50, point: P[2], coins: 6000, title: 'ti_fashion' });
 a({ id: 'ac_skin', cat: 'collect', name: 'Sưu Tập Ảo Hoá', desc: 'Sở hữu 5 bộ skin.', stat: 'skins_owned', target: 5, point: P[3], coins: 15000, title: 'ti_skinner' });
 a({ id: 'ac_title', cat: 'collect', name: 'Danh Gia Vọng Tộc', desc: 'Mở khoá 20 danh hiệu.', stat: 'titles_owned', target: 20, point: P[3], coins: 15000, title: 'ti_titled' });
-a({ id: 'ac_gear', cat: 'collect', name: 'Đủ Bộ Đồ Nghề', desc: 'Đeo đủ 8 ô trang bị.', stat: 'gear_full', target: 8, point: P[2], coins: 8000, title: 'ti_geared' });
 a({ id: 'ac_rich', cat: 'collect', name: 'Triệu Phú', desc: 'Kiếm được tổng cộng 1.000.000 xu.', stat: 'coins_earned', target: 1000000, point: P[4], coins: 50000, title: 'ti_millionaire' });
 
 export const ACH_TOTAL_POINT = ACHS.reduce((n, x) => n + x.point, 0);
 export function achsOfCat(cat: string): AchDef[] { return ACHS.filter(x => x.cat === cat); }
 export function catTotal(cat: string): number {
   return achsOfCat(cat).reduce((n, x) => n + x.point, 0);
-}
-
-// ===== Huy hiệu =====
-// Đúng như màn Huy Hiệu của GunPow: chỉ có 3 cái (Sinh lực · Tấn công ·
-// Phòng thủ), mỗi cái có CẤP và nâng bằng ĐIỂM THÀNH TỰU. Nâng cấp thì tiêu
-// điểm, nên "Thành tựu còn" là số điểm chưa xài.
-// Chỉ số mỗi cấp cố ý để nhỏ — huy hiệu chỉ là phần thưởng phụ cho việc cày
-// thành tựu, không được lấn át trang bị.
-export interface BadgeDef {
-  id: string;
-  name: string;
-  stat: StatKey;
-  per: number;        // chỉ số cộng thêm mỗi cấp
-  icon: string;
-}
-
-export const BADGE_MAX = 20;
-export const BADGES: BadgeDef[] = [
-  { id: 'bd_hp', name: 'Huy Hiệu Sinh Lực', stat: 'health', per: 3, icon: 'bd_hp' },
-  { id: 'bd_atk', name: 'Huy Hiệu Tấn Công', stat: 'strength', per: 2, icon: 'bd_atk' },
-  { id: 'bd_def', name: 'Huy Hiệu Phòng Thủ', stat: 'agility', per: 2, icon: 'bd_def' }
-];
-
-/** Điểm thành tựu phải trả để lên cấp `lv+1`. */
-export function badgeCost(lv: number): number {
-  return 400 + lv * 200;
 }

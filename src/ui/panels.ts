@@ -1,18 +1,18 @@
 import { registerPanel, openPanel, getGame, refreshHotbar, chatFabPos, setChatFabPos } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charFaceFluid, burstFx, floatText, forgeCircle, type FxKind, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charFaceFluid, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
 import { AVATAR_PICS, avatarPicUrl, isUploadedPic } from '@/data/avatars';
 import { FOODS, FOOD_LIST, type FoodDef } from '@/data/foods';
 import { orderList, canDeliver, deliver, dropOrder, haveOf, orderName } from '@/systems/orders';
 import { pond, POND_CAP, FRIES, FRY_LIST, isGrown, remainMin, stockFry, netFish } from '@/systems/fishfarm';
 import { countOf, takeFrom, listOf, type StoreKind } from '@/systems/farmstore';
 import { cookingFood, cookRemain, canCook, startCook, collectCook, cancelCook } from '@/systems/cooking';
-import { S, save, spend, addCoins, addFarmCoins, withdrawFarm, addExp, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, unequipTool, allocateStat, STAT_NAMES, STAT_KEYS } from '@/core/save';
+import { S, save, spend, addCoins, addFarmCoins, withdrawFarm, addExp, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, unequipTool } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
 import { CROPS, CROP_LIST } from '@/data/crops';
 import { ANIMAL_LIST, ANIMALS, BARN_CAPACITY, BARN_UPGRADE_COST } from '@/data/animals';
 import { FISH_LIST, RODS, RARITY_COLOR, RARITY_NAME, FISHES, rodIconRect } from '@/data/fish';
-import { chibiList, chibiPriceXu, CHIBI_PARTS, partStats, equipStats, formatStats } from '@/data/chibi';
+import { chibiList, chibiPriceXu, CHIBI_PARTS } from '@/data/chibi';
 import { SKIN_LIST, SKINS, SKIN_RANKS, skinRank, type SkinDef } from '@/data/skins';
 import { FURNITURE, FURNITURE_LIST, HOUSE_LEVELS, WALLPAPERS, FLOORS } from '@/data/furniture';
 import { SHOPS } from '@/data/shops';
@@ -29,17 +29,10 @@ import { ROOM_COUNT, ROOM_CAP, roomPlayers, roomFull, suggestedFriends, addFrien
 import { claimLogin, checkinToday, spinWheel, grantWheel, wheelSpinsLeft, loginRewardToday } from '@/systems/meta';
 import { upgradeHouse, setWallpaper, setFloor, throwParty } from '@/systems/housing';
 import { sfx, startBgm, stopBgm } from '@/core/audio';
-import { EQUIP_SLOTS, equipDef, enhanceRate, enhanceCost, dropsOnFail, MAX_ENHANCE, ENHANCE_STONE,
-  MAX_STAR, starCost, starRate, gemDef, GEM_LIST, gemPower, gemMergeTo, GEM_MERGE_N,
-  REFORGE_STONE, REFORGE_LINES, reforgeMax, reforgePower, reforgeCost, equipGrade, SLOT_OF,
-  type EquipSlot, type EquipDef } from '@/data/equip';
-import { equipLevel, pieceStats, combatPower, cpBreakdown, equipPiece, unequipPiece, autoEquip, smash, smashUntil, openChestMany, inherit, canInherit, inheritCost,
-  equipStar, upStar, gemsOn, gemCount, socketGem, unsocketGem, mergeGem, addGem, EQUIP_CHESTS, openChest,
-  refLines, refLocks, toggleRefLock, refScore, reforge, worn } from '@/systems/equipment';
-import { ACH_CATS, achsOfCat, catTotal, ACH_TOTAL_POINT, BADGES, BADGE_MAX, badgeCost,
+import { ACH_CATS, achsOfCat, catTotal, ACH_TOTAL_POINT,
   type AchDef } from '@/data/achievements';
 import { progressOf, isDone, isClaimed, canClaim, claim, claimAll, achPoints, pendingPoints,
-  catPoints, achLeft, badgeLv, upBadge } from '@/systems/achievements';
+  catPoints } from '@/systems/achievements';
 import { upgradeTool, upgradeRate, missingMats, failStreak, UPGRADABLE, FAIL_BONUS, FAIL_BONUS_MAX } from '@/systems/toolcraft';
 import type { Reward } from '@/data/quests';
 
@@ -868,8 +861,7 @@ export function registerAllPanels() {
       // bách hóa có quầy nâng cấp công cụ
       if (mode === 0 && shop.id === 'shop_general') {
         const row = h('div'); row.style.cssText = 'display:flex;gap:8px;justify-content:center;flex-wrap:wrap';
-        row.append(btn('Nâng cấp công cụ', 'blue', () => openPanel('toolupgrade')),
-          btn('Quầy trang bị', 'blue', () => openPanel('equipshop')));
+        row.append(btn('Nâng cấp công cụ', 'blue', () => openPanel('toolupgrade')));
         body.append(row);
       }
     };
@@ -1120,11 +1112,9 @@ export function registerAllPanels() {
     body.append(wrap);
 
     const info = h('div', 'tryon-info');
-    const ps = partStats(p);
-    const statsLine = ps ? ` · ${formatStats(ps).join(' ')}` : '';
     info.innerHTML = owned
-      ? `<b>Bạn đã sở hữu món này</b>${statsLine}`
-      : `Giá: ${priceHtml(xu)}${statsLine}`;
+      ? '<b>Bạn đã sở hữu món này</b>'
+      : `Giá: ${priceHtml(xu)}`;
     body.append(info);
 
     const bar = h('div');
@@ -1289,7 +1279,7 @@ export function registerAllPanels() {
           body.append(r);
         }
       } else {
-        // Thành tựu có trang riêng (Thành tựu / Huy hiệu) — ở đây chỉ tóm tắt
+        // Thành tựu có trang riêng — ở đây chỉ tóm tắt
         const box = h('div', 'row');
         box.innerHTML = `<img class="ico-img" src="assets/ui/pack/icon_trophy.png">
           <div class="grow"><div class="t1">Điểm thành tựu</div>
@@ -1298,8 +1288,6 @@ export function registerAllPanels() {
           + `</div></div>`;
         box.append(btn('Mở trang Thành tựu', 'gold', () => openPanel('achievement')));
         body.append(box);
-        body.append(h('div', 'hint',
-          `Điểm còn xài được: ${fmt(achLeft())} — dùng để nâng cấp huy hiệu.`));
       }
     };
     tabs(['Nhiệm vụ', 'Thành tựu'], i => { tab = i; render(); });
@@ -1310,13 +1298,13 @@ export function registerAllPanels() {
   // ================= Nhân vật: hub có cột tab dọc bên phải (kiểu GunPow) =================
   // [id, tên, icon trong assets/ui/inv]
   const CH_SECTIONS: [string, string, string][] = [
-    ['equip', 'Trang bị', 'ic_hand'], ['wardrobe', 'Tủ đồ', 'ic_shirt'],
+    ['wardrobe', 'Tủ đồ', 'ic_shirt'],
     ['title', 'Danh hiệu', 'ic_title'], ['skin', 'Skin', 'ic_skin']
   ];
 
   // Tủ đồ dựng theo đúng mẫu Inventory của Cozy UI Pack: tab dán trên nóc,
   // thân là tấm modal nét đứt, KHÔNG dùng khung gỗ chung của các popup khác.
-  function openCharHub(sec = 'equip') {
+  function openCharHub(sec = 'wardrobe') {
     // Tủ đồ mở HẲN MỘT TRANG như GunPow (WndBagRole là trang đầy đủ, không popup)
     const { body, win } = openWindow('Nhân vật', { page: true });
     win.classList.add('win-wardrobe');
@@ -1409,50 +1397,6 @@ export function registerAllPanels() {
         avaBtn.onclick = () => { sfx.click(); openPanel('avatarpick'); };
         faceBox.append(avaBtn);
         body.append(info);
-
-        const cs = S.player.charStats;
-        const eq = S.player.chibi ? equipStats(S.player.chibi) : { health: 0, intellect: 0, strength: 0, agility: 0, charm: 0 } as import('@/core/types').CharStats;
-        const statHead = h('div', 'pf-stat-head');
-        statHead.innerHTML = `<span class="t1">Chỉ số nhân vật</span>`;
-        if (S.player.statPoints > 0) {
-          const badge = h('span', 'pf-sp-badge', `${S.player.statPoints} điểm`);
-          statHead.append(badge);
-        }
-        body.append(statHead);
-
-        const render = () => {
-          statGrid.innerHTML = '';
-          for (const key of STAT_KEYS) {
-            const row = h('div', 'pf-stat-row');
-            const base = cs[key];
-            const bonus = eq[key];
-            const total = base + bonus;
-            const maxBar = 100;
-            const basePct = Math.min(base / maxBar * 100, 100);
-            const totalPct = Math.min(total / maxBar * 100, 100);
-            row.innerHTML = `<div class="pf-stat-name">${STAT_NAMES[key]}</div>` +
-              `<div class="pf-stat-bar"><div class="pf-stat-fill pf-eq" style="width:${totalPct}%"></div><div class="pf-stat-fill pf-base" style="width:${basePct}%"></div></div>` +
-              `<div class="pf-stat-val">${total}${bonus > 0 ? `<span class="pf-bonus">(+${bonus})</span>` : ''}</div>`;
-            if (S.player.statPoints > 0) {
-              const plus = h('button', 'pf-stat-plus', '+');
-              plus.onclick = () => {
-                if (allocateStat(key)) { sfx.click(); render(); }
-              };
-              row.append(plus);
-            }
-            statGrid.append(row);
-          }
-          if (S.player.statPoints > 0) {
-            statHead.querySelector('.pf-sp-badge')?.remove();
-            const badge = h('span', 'pf-sp-badge', `${S.player.statPoints} điểm`);
-            statHead.append(badge);
-          } else {
-            statHead.querySelector('.pf-sp-badge')?.remove();
-          }
-        };
-        const statGrid = h('div', 'pf-stat-grid');
-        body.append(statGrid);
-        render();
 
         body.append(h('div', 'pf-sec-head', 'Thành tích'));
         const statsBox = h('div', 'pf-tiles');
@@ -1564,7 +1508,7 @@ export function registerAllPanels() {
     body.append(content);
     renderPack();
   });
-  registerPanel('wardrobe', () => openCharHub('equip'));
+  registerPanel('wardrobe', () => openCharHub('wardrobe'));
 
 
   // ================= Tiệm thú cưng =================
@@ -1740,595 +1684,11 @@ export function registerAllPanels() {
     body.append(grid);
   });
 
-  // ================= Quầy trang bị (Bách hóa) =================
-  // Bán 6 ô trang bị + đá cường hoá. Tất cả bằng XU — lượng là tiền nạp, chỉ
-  // dùng cho gacha / skin giới hạn.
-  registerPanel('equipshop', () => {
-    if (!atShopZone('equipshop', 'Quầy trang bị (Bách hóa)')) return;
-    const { body } = openWindow('Quầy trang bị');
-    const render = () => {
-      body.innerHTML = '';
-      body.append(h('div', 'hint', 'Trang bị KHÔNG bán thẳng — như GunPow, đồ chỉ ra từ rương.'));
-      for (const c of EQUIP_CHESTS) {
-        const have = itemCount(c.id);
-        const r = h('div', 'row');
-        const ic = h('div'); ic.append(iconOf(item(c.id), 30));
-        const info = h('div', 'grow');
-        info.innerHTML = `<div class="t1">${c.name} <span class="qty">x${have}</span></div><div class="t2">Mở ra 1 trang bị bậc ${c.lo}-${c.hi}.</div>`;
-        r.append(ic, info);
-        r.append(btn('Mở rương', 'blue', () => openPanel('chestopen', { id: c.id })));
-        r.append(priceBtn(c.price, 'gold', () => { if (spend(c.price)) { addItem(c.id); sfx.coin(); render(); } }));
-        body.append(r);
-      }
-      const sr = h('div', 'row');
-      const si = h('div'); si.append(iconOf(item(ENHANCE_STONE), 30));
-      const sinfo = h('div', 'grow');
-      sinfo.innerHTML = `<div class="t1">Đá cường hoá <span class="qty">x${itemCount(ENHANCE_STONE)}</span></div><div class="t2">Nguyên liệu cường hoá trang bị.</div>`;
-      sr.append(si, sinfo, priceBtn(200, 'gold', () => { if (spend(200)) { addItem(ENHANCE_STONE); sfx.coin(); render(); } }));
-      body.append(sr);
-      body.append(btn('Quầy đá (lên sao / đá quý)', 'blue', () => openPanel('gemshop')));
-    };
-    render();
-  });
-
-  // Bố cục chép theo WndOpenChest.xml của GunPow: ảnh rương ở trên, hàng chọn
-  // số lượng -10 / − / N / + / +10, dòng giải thích, rồi nút mở to ở dưới.
-  registerPanel('chestopen', (arg) => {
-    let cid = (arg as { id?: string })?.id ?? EQUIP_CHESTS[0].id;
-    let n = 1;
-    const { body } = openWindow('Mở rương trang bị', { page: true });
-    const render = () => {
-      body.innerHTML = '';
-      const wrap = h('div', 'ch-wrap');
-
-      // chọn loại rương
-      const tabs = h('div', 'ch-tabs');
-      for (const c of EQUIP_CHESTS) {
-        const t = h('button', `ch-tab ${c.id === cid ? 'on' : ''}`, c.name.replace('Rương trang bị ', ''));
-        t.onclick = () => { sfx.click(); cid = c.id; n = 1; render(); };
-        tabs.append(t);
-      }
-      wrap.append(tabs);
-
-      const c = EQUIP_CHESTS.find(x => x.id === cid)!;
-      const have = itemCount(cid);
-
-      // ảnh rương
-      const art = h('div', 'ch-art');
-      art.append(iconOf(item(cid), 72));
-      art.append(h('div', 'ch-have', `Đang có ${have}`));
-      wrap.append(art);
-      wrap.append(h('div', 'ch-desc', `Mở ra 1 trang bị ngẫu nhiên bậc ${c.lo}-${c.hi} (mọi ô, kể cả vũ khí).`));
-
-      // hàng chọn số lượng: -10 / − / N / + / +10
-      const step = h('div', 'ch-step');
-      const set = (v: number) => { n = Math.max(1, Math.min(Math.max(1, have), v)); render(); };
-      step.append(
-        btn('-10', 'mini', () => set(n - 10)),
-        btn('−', 'mini', () => set(n - 1)));
-      step.append(h('div', 'ch-n', `${n}`));
-      step.append(
-        btn('+', 'mini', () => set(n + 1)),
-        btn('+10', 'mini', () => set(n + 10)));
-      wrap.append(step);
-
-      // nút mở
-      const go = btn(`Mở ${n} rương`, 'gold', () => {
-        const got = openChestMany(cid, n);
-        if (!got.length) { toast('Không có rương để mở.', 'inventory'); sfx.error(); return; }
-        sfx.coin();
-        toast(`Mở ${got.length} rương, nhận ${got.length} món!`, 'rank');
-        last = got.map(g => g.id);
-        n = Math.min(n, Math.max(1, itemCount(cid)));
-        render();
-      });
-      go.classList.add('ch-go');
-      if (!have) go.classList.add('dim');
-      wrap.append(go);
-
-      // kết quả vừa mở
-      if (last.length) {
-        wrap.append(h('div', 'fg-cap', `VỪA NHẬN (${last.length})`));
-        const grid = h('div', 'eq-grid');
-        for (const gid of last.slice(0, 24)) {
-          const d = equipDef(gid); if (!d) continue;
-          const cell = h('div', 'eq-cell');
-          cell.append(spr(d.url, 0, 0, d.w, d.h, 32), h('div', 'eq-nm', d.name));
-          grid.append(cell);
-        }
-        wrap.append(grid);
-      }
-      body.append(wrap);
-    };
-    let last: string[] = [];
-    render();
-  });
-
-  registerPanel('gemshop', () => {
-    const { body } = openWindow('Quầy đá');
-    const render = () => {
-      body.innerHTML = '';
-      for (const id of ['star_stone_1', 'star_stone_2', 'star_stone_3', 'ref_stone']) {
-        const def = item(id);
-        const r = h('div', 'row');
-        const ic = h('div'); ic.append(iconOf(def, 30));
-        const info = h('div', 'grow');
-        info.innerHTML = `<div class="t1">${def.name} <span class="qty">x${itemCount(id)}</span></div><div class="t2">${def.desc ?? ''}</div>`;
-        r.append(ic, info, priceBtn(def.buy ?? 0, 'gold', () => {
-          if (spend(def.buy ?? 0)) { addItem(id); sfx.coin(); render(); }
-        }));
-        body.append(r);
-      }
-      body.append(h('div', 'hint', 'Đá quý cấp 1-2 bán ở đây — ghép 3 viên cùng loại thành 1 viên cấp trên ở trang Gắn đá.'));
-      const grid = h('div', 'gem-grid');
-      for (const g of GEM_LIST.filter(x => x.lv <= 2)) {
-        const price = g.lv * 500;
-        const c = h('button', 'gem-cell');
-        c.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 30),
-          h('div', 'gem-nm', g.name), h('div', 'qty', `${gemCount(g.id)}`));
-        c.title = `${g.name} — ${STAT_NAMES[g.stat]} +${gemPower(g)} · ${price} xu`;
-        c.onclick = () => { if (spend(price)) { addGem(g.id); sfx.coin(); render(); } };
-        grid.append(c);
-      }
-      body.append(grid);
-    };
-    render();
-  });
-
-  // ================= 3 trang riêng cho trang bị (kiểu GunPow) =================
-  function pickTarget(arg?: Record<string, unknown>): string {
-    const id = typeof arg?.id === 'string' ? arg.id : '';
-    if (id && equipDef(id)) return id;
-    for (const sl of EQUIP_SLOTS) if (S.equip[sl.id]) return S.equip[sl.id];
-    return '';
-  }
-
-  /** Dải chọn món (đang đeo + trong túi) dùng chung cho cả 3 trang. */
-  function targetStrip(cur: string, onPick: (id: string) => void): HTMLElement {
-    const strip = h('div', 'tg-strip');
-    const ids = [...EQUIP_SLOTS.map(sl => S.equip[sl.id]).filter(Boolean), ...S.equipBag];
-    for (const id of ids) {
-      const d = equipDef(id); if (!d) continue;
-      const c = h('button', `tg-cell ${id === cur ? 'on' : ''}`);
-      c.append(spr(d.url, 0, 0, d.w, d.h, 30));
-      const lv = equipLevel(id);
-      if (lv) c.append(h('div', 'eq-plus', `+${lv}`));
-      const st = equipStar(id);
-      if (st) c.append(h('div', 'tg-star', '★'.repeat(st)));
-      c.title = d.name;
-      c.onclick = () => { sfx.click(); onPick(id); };
-      strip.append(c);
-    }
-    if (!ids.length) strip.append(h('div', 'hint', 'Chưa có trang bị nào — mở rương ở Quầy trang bị.'));
-    return strip;
-  }
-
-  function bigPiece(d: EquipDef, id: string): HTMLElement {
-    const box = h('div', 'bp');
-    const art = h('div', 'bp-art');
-    art.append(spr(d.url, 0, 0, d.w, d.h, 52));
-    const lv = equipLevel(id);
-    if (lv) art.append(h('div', 'eq-plus', `+${lv}`));
-    const st = pieceStats(d, lv, equipStar(id), gemsOn(id));
-    const txt = STAT_KEYS.filter(k => st[k] > 0).map(k => `${STAT_NAMES[k]} +${st[k]}`).join(' · ');
-    box.append(art,
-      h('div', 'bp-nm', `${d.name}${lv ? ` +${lv}` : ''}`),
-      h('div', 'bp-star', '★'.repeat(equipStar(id)) + '☆'.repeat(MAX_STAR - equipStar(id))),
-      h('div', 'bp-st', txt));
-    return box;
-  }
-
-  function rateRow(rate: number): HTMLElement {
-    const rr = h('div', 'sm-rate');
-    const bar = h('div', 'sm-rate-bar');
-    const fill = h('div', 'sm-rate-f'); fill.style.width = `${Math.round(rate * 100)}%`;
-    if (rate < 0.6) fill.classList.add('low');
-    bar.append(fill);
-    rr.append(bar, h('div', 'sm-rate-n', `${Math.round(rate * 100)}%`));
-    return rr;
-  }
-
-  // ===== Trang Rèn đúc: một trang 3 cột đúng như màn Cường hóa của GunPow =====
-  //   [ tab chức năng + khung thao tác ]  [ danh sách trang bị ]  [ cột ô dọc ]
-  // Chỉ khác GunPow ở lớp da: bên mình dùng kính xanh thay khung gỗ nâu.
-  type ForgeTab = 'smith' | 'star' | 'gem' | 'inherit' | 'reforge';
-  // thứ tự tab đúng như màn Rèn đúc của GunPow
-  // Giữ đúng tên tab của GunPow
-  const FORGE_TABS: [ForgeTab, string][] = [
-    ['smith', 'Cường hoá'], ['inherit', 'Kế thừa'], ['reforge', 'Tẩy luyện'],
-    ['star', 'Tăng sao'], ['gem', 'Khảm']
-  ];
-
-  function openForge(tab: ForgeTab, startId?: string) {
-    let sel = tab;
-    let slot: EquipSlot | 'worn' = 'worn';
-    let id = startId && equipDef(startId) ? startId : '';
-    if (!id) for (const sl of EQUIP_SLOTS) if (S.equip[sl.id]) { id = S.equip[sl.id]; break; }
-    let pickSlot = 0;
-    let src = '';                       // món nguồn của Kế thừa
-    let refPrev: number[] | undefined;   // 5 dòng tẩy luyện trước lần tẩy vừa rồi
-    const { body } = openWindow('Lò rèn', { page: true });
-
-    // Bắn hiệu ứng lên vòng phép SAU khi vẽ lại — render() thay sạch DOM nên
-    // phải tìm lại phần tử rồi mới gắn hạt sáng, không thì hiệu ứng bị xoá ngay.
-    const fxAfter = (kind: FxKind, text?: string) => {
-      const ring = body.querySelector<HTMLElement>('.gp-ring') ?? body.querySelector<HTMLElement>('.gp-stage');
-      if (!ring) return;
-      burstFx(ring, kind);
-      if (text) floatText(ring, text, kind === 'bad' ? 'bad' : '');
-    };
-
-    const render = () => {
-      body.innerHTML = '';
-      const page = h('div', 'gp-page');
-      const d = equipDef(id);
-
-      // ---------- CỘT TRÁI: tab chức năng + khung thao tác ----------
-      const left = h('div', 'gp-left');
-      const ftabs = h('div', 'gp-ftabs');
-      for (const [k, nm] of FORGE_TABS) {
-        const t = h('button', `gp-ftab ${k === sel ? 'on' : ''}`, nm);
-        t.onclick = () => { sfx.click(); sel = k; refPrev = undefined; render(); };
-        ftabs.append(t);
-      }
-      left.append(ftabs);
-
-      const stage = h('div', `gp-stage ${sel === 'reforge' ? 'rf' : ''}`);
-      // Hàng giá + nút LUÔN ghim ngoài vùng cuộn: khung cuộn kiểu flex column
-      // sẽ nuốt mất padding-bottom ở cuối, nút nằm trong đó là bị cụt ngay.
-      const foot = h('div', 'gp-foot');
-      if (!d) {
-        stage.append(h('div', 'hint', 'Chưa có trang bị nào — mở rương ở Quầy trang bị.'));
-      } else {
-        const lv = equipLevel(id), star = equipStar(id);
-        // vòng phép + món ở giữa
-        const ring = h('div', 'gp-ring');
-        ring.append(forgeCircle());
-        const cell = h('div', 'gp-item');
-        cell.append(spr(d.url, 0, 0, d.w, d.h, sel === 'reforge' ? 40 : 54));
-        if (star) cell.append(h('div', 'gp-star', `★${star}`));
-        if (lv) cell.append(h('div', 'eq-plus', `+${lv}`));
-        ring.append(cell);
-        stage.append(ring, h('div', 'gp-lv',
-          sel === 'reforge' ? `${d.name}\n+${lv}/${MAX_ENHANCE}` : `${d.name} · +${lv}/${MAX_ENHANCE}`));
-
-        const statLine = (st: import('@/core/types').CharStats) =>
-          STAT_KEYS.filter(k => st[k] > 0).map(k => `${STAT_NAMES[k]} +${st[k]}`).join('  ');
-        const now = pieceStats(d, lv, star, gemsOn(id));
-
-        if (sel === 'smith') {
-          const cmp = h('div', 'gp-cmp');
-          const cl = h('div', 'gp-c'); cl.append(h('div', 'gp-c-t', `+${lv}`), h('div', 'gp-c-s', statLine(now)));
-          cmp.append(cl, h('div', 'gp-c-ar', '❯'));
-          if (lv < MAX_ENHANCE) {
-            const nx = pieceStats(d, lv + 1, star, gemsOn(id));
-            const cr = h('div', 'gp-c up'); cr.append(h('div', 'gp-c-t', `+${lv + 1}`), h('div', 'gp-c-s', statLine(nx)));
-            cmp.append(cr);
-          } else cmp.append(h('div', 'gp-c up', 'TỐI ĐA'));
-          stage.append(cmp);
-          if (lv < MAX_ENHANCE) {
-            const c = enhanceCost(d, lv);
-            const cost = h('div', 'gp-cost');
-            cost.innerHTML = `Tốn: ${priceHtml(c.coins)}`;
-            const st2 = h('span', 'gp-mat');
-            st2.append(iconOf(item(ENHANCE_STONE), 18),
-              h('span', itemCount(ENHANCE_STONE) >= c.stones ? 'ok' : 'miss', `${itemCount(ENHANCE_STONE)}/${c.stones}`));
-            cost.append(st2, rateRow(enhanceRate(lv)));
-            foot.append(cost);
-            if (dropsOnFail(lv)) foot.append(h('div', 'sm-warn', 'Từ +7, hỏng sẽ TỤT 1 cấp.'));
-            const acts = h('div', 'gp-acts');
-            acts.append(
-              btn('Cường hoá nhanh', '', () => {
-                const b = equipLevel(id); const r = smashUntil(id);
-                if (r.tries) toast(`Đập ${r.tries} lần, lên ${r.up} cấp.`, 'rank');
-                render(); fxAfter(r.up > 0 ? 'good' : 'bad', r.up > 0 ? `+${equipLevel(id) - b} cấp` : 'KHÔNG LÊN');
-              }),
-              btn('Cường hoá', 'gold', () => {
-                const r = smash(id); render();
-                if (r.ok) fxAfter(r.win ? 'good' : 'bad', r.win ? `+${r.lv}` : 'HỎNG');
-              }));
-            foot.append(acts);
-          }
-        } else if (sel === 'star') {
-          const cmp = h('div', 'gp-cmp');
-          const cl = h('div', 'gp-c'); cl.append(h('div', 'gp-c-t', `${star} ★`), h('div', 'gp-c-s', statLine(now)));
-          cmp.append(cl, h('div', 'gp-c-ar', '❯'));
-          if (star < MAX_STAR) {
-            const nx = pieceStats(d, lv, star + 1, gemsOn(id));
-            const cr = h('div', 'gp-c up'); cr.append(h('div', 'gp-c-t', `${star + 1} ★`), h('div', 'gp-c-s', statLine(nx)));
-            cmp.append(cr);
-          } else cmp.append(h('div', 'gp-c up', 'ĐỦ 5 SAO'));
-          stage.append(cmp);
-          if (star < MAX_STAR) {
-            const c = starCost(d, star);
-            const cost = h('div', 'gp-cost');
-            cost.innerHTML = `Tốn: ${priceHtml(c.coins)}`;
-            const m = h('span', 'gp-mat');
-            m.append(iconOf(item(c.kind), 18),
-              h('span', itemCount(c.kind) >= c.n ? 'ok' : 'miss', `${itemCount(c.kind)}/${c.n}`));
-            cost.append(m, rateRow(starRate(star)));
-            foot.append(cost, h('div', 'sm-warn', 'Mỗi sao cộng 15% chỉ số gốc. Hỏng chỉ mất nguyên liệu.'));
-            const acts = h('div', 'gp-acts');
-            acts.append(btn(`Tăng lên ${star + 1} sao`, 'gold', () => {
-              const r = upStar(id); render();
-              if (r.ok) fxAfter(r.win ? 'star' : 'bad', r.win ? `${star + 1} ★` : 'HỎNG');
-            }));
-            foot.append(acts);
-          }
-        } else if (sel === 'reforge') {
-          // 5 dòng phụ, dòng nào ưng thì bấm ổ khoá giữ lại, còn lại gieo tiếp
-          const lines = refLines(id), locks = refLocks(id);
-          const maxLv = reforgeMax(d);
-          const box = h('div', 'rf-lines');
-          REFORGE_LINES.forEach((k, i) => {
-            const lv = lines[i] ?? 0;
-            const row = h('div', `rf-line ${locks[i] ? 'locked' : ''}`);
-            const val = reforgePower(d, lv);
-            const old = refPrev?.[i];
-            const cls = old === undefined || old === lv ? '' : (lv > old ? 'up' : 'down');
-            row.append(
-              h('div', 'rf-nm', STAT_NAMES[k]),
-              h('div', `rf-lv ${lv ? '' : 'zero'}`, `L${lv}/${maxLv}`),
-              h('div', `rf-val ${cls}`, val ? `+${val}` : '—'));
-            const lk = h('button', `rf-lock ${locks[i] ? 'on' : ''}`);
-            lk.append(spr(locks[i] ? 'assets/forge/lock_on.png' : 'assets/forge/lock_off.png',
-              0, 0, 26, 35, 14));
-            lk.title = locks[i] ? 'Bỏ khoá dòng này' : 'Khoá dòng này (tẩy đắt hơn)';
-            lk.onclick = () => { sfx.click(); if (toggleRefLock(id, i)) render(); };
-            row.append(lk);
-            box.append(row);
-          });
-          stage.append(box);
-
-          const nLock = locks.filter(Boolean).length;
-          const c = reforgeCost(d, nLock);
-          const cost = h('div', 'gp-cost');
-          cost.innerHTML = `Tốn: ${priceHtml(c.coins)}`;
-          const m = h('span', 'gp-mat');
-          m.append(iconOf(item(REFORGE_STONE), 18),
-            h('span', itemCount(REFORGE_STONE) >= c.stones ? 'ok' : 'miss',
-              `${itemCount(REFORGE_STONE)}/${c.stones}`));
-          cost.append(m);
-          foot.append(cost, h('div', 'sm-warn',
-            nLock ? `Đang khoá ${nLock} dòng — mỗi ổ khoá làm tiền tẩy đắt thêm 50%.`
-                  : 'Tẩy sẽ gieo lại cả 5 dòng. Khoá dòng đẹp lại trước khi tẩy.'));
-          const acts = h('div', 'gp-acts');
-          acts.append(btn('Tẩy luyện', 'gold', () => {
-            const before = refScore(d, refLines(id).slice());
-            const r = reforge(id);
-            if (!r.ok) return;
-            refPrev = r.before;
-            const dd = refScore(d, r.after!) - before;
-            render();
-            fxAfter(dd >= 0 ? 'wash' : 'bad', dd > 0 ? `+${dd} chỉ số` : dd < 0 ? `${dd} chỉ số` : 'HOÀ');
-          }));
-          foot.append(acts);
-        } else if (sel === 'inherit') {
-          const sd = equipDef(src);
-          const mini = (dd: EquipDef | undefined, cap: string, cls = '') => {
-            const c = h('div', `gp-c ${cls}`);
-            c.append(h('div', 'gp-c-t', cap));
-            if (!dd) { c.append(h('div', 'gp-c-s', 'Chọn ở danh sách bên phải')); return c; }
-            const art = h('div', 'gp-row-art');
-            art.append(spr(dd.url, 0, 0, dd.w, dd.h, 30));
-            const l3 = equipLevel(dd.id), s3 = equipStar(dd.id);
-            if (s3) art.append(h('div', 'gp-star', `★${s3}`));
-            if (l3) art.append(h('div', 'eq-plus', `+${l3}`));
-            const wrapc = h('div', 'gp-mini');
-            wrapc.append(art, h('div', 'gp-c-s', `${dd.name}\n+${l3} · ${s3}★ · ${gemsOn(dd.id).filter(Boolean).length} đá`));
-            c.append(wrapc);
-            return c;
-          };
-          const cmp = h('div', 'gp-cmp');
-          cmp.append(mini(sd, 'NGUỒN (sẽ mất)'), h('div', 'gp-c-ar', '❯'), mini(d, 'ĐÍCH', 'up'));
-          stage.append(cmp);
-          const chk = src ? canInherit(src, id) : { ok: false, why: 'Chọn món nguồn ở danh sách bên phải.' };
-          if (!chk.ok) foot.append(h('div', 'sm-warn', chk.why ?? ''));
-          else {
-            const cost = inheritCost(sd!, d);
-            const cs = h('div', 'gp-cost');
-            cs.innerHTML = `Tốn: ${priceHtml(cost)}`;
-            foot.append(cs, h('div', 'sm-warn', 'Món nguồn sẽ biến mất; cấp, sao và đá chuyển hết sang món đích.'));
-          }
-          const acts = h('div', 'gp-acts');
-          const go = btn('Kế thừa', 'gold', () => {
-            if (inherit(src, id)) { src = ''; render(); fxAfter('inherit', 'KẾ THỪA'); }
-          });
-          if (!chk.ok) go.classList.add('dim');
-          acts.append(go);
-          foot.append(acts);
-        } else {
-          stage.append(h('div', 'gp-c-s', statLine(now)));
-          const socks = h('div', 'sk-row');
-          gemsOn(id).forEach((gid, i) => {
-            const c = h('button', `sk-slot ${i === pickSlot ? 'on' : ''} ${gid ? 'filled' : ''}`);
-            const g = gemDef(gid);
-            if (g) c.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 30));
-            else c.append(h('div', 'sk-empty', '+'));
-            c.onclick = () => { sfx.click(); pickSlot = i; render(); };
-            socks.append(c);
-          });
-          stage.append(socks);
-          if (gemsOn(id)[pickSlot]) stage.append(btn('Gỡ viên này', 'mini', () => { unsocketGem(id, pickSlot); render(); }));
-          const owned = GEM_LIST.filter(g => gemCount(g.id) > 0);
-          stage.append(h('div', 'gp-cap', owned.length ? 'TÚI ĐÁ — bấm để khảm' : 'Chưa có đá — mua ở Quầy đá'));
-          const grid = h('div', 'gem-grid');
-          for (const g of owned) {
-            const n2 = gemCount(g.id);
-            const c = h('button', 'gem-cell');
-            c.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 26),
-              h('div', 'gem-nm', g.name), h('div', 'qty', `${n2}`));
-            c.title = `${g.name} — ${STAT_NAMES[g.stat]} +${gemPower(g)}`;
-            c.onclick = () => { if (socketGem(id, pickSlot, g.id)) { render(); fxAfter('gem', g.name); } };
-            const to = gemMergeTo(g);
-            if (to && n2 >= GEM_MERGE_N) {
-              const mg = h('div', 'gem-merge', '⇪');
-              mg.onclick = e => { e.stopPropagation(); mergeGem(g.id); render(); };
-              c.append(mg);
-            }
-            grid.append(c);
-          }
-          stage.append(grid);
-        }
-      }
-      left.append(stage, foot);
-
-      // ---------- CỘT GIỮA: danh sách trang bị ----------
-      const mid = h('div', 'gp-mid');
-      mid.append(h('div', 'gp-mid-h', sel === 'inherit' ? 'Chọn món nguồn' : 'Trang bị'));
-      const list = h('div', 'gp-list');
-      const ids = slot === 'worn'
-        ? EQUIP_SLOTS.map(sl => S.equip[sl.id]).filter(Boolean)
-        : [S.equip[slot], ...S.equipBag].filter(x => x && equipDef(x)?.slot === slot);
-      if (!ids.length) list.append(h('div', 'hint', 'Không có món nào ở mục này.'));
-      for (const eid of ids) {
-        const ed = equipDef(eid); if (!ed) continue;
-        const on = S.equip[ed.slot] === eid;
-        const row = h('button', `gp-row ${sel !== 'inherit' && eid === id ? 'sel' : ''}`);
-        const art = h('div', 'gp-row-art');
-        art.append(spr(ed.url, 0, 0, ed.w, ed.h, 34));
-        const l2 = equipLevel(eid), s2 = equipStar(eid);
-        if (s2) art.append(h('div', 'gp-star', `★${s2}`));
-        if (l2) art.append(h('div', 'eq-plus', `+${l2}`));
-        const info = h('div', 'gp-row-i');
-        const st = pieceStats(ed, l2, s2, gemsOn(eid));
-        const best = STAT_KEYS.filter(k => st[k] > 0).slice(0, 1).map(k => `${STAT_NAMES[k]} +${st[k]}`).join('');
-        info.append(h('div', 'gp-row-n', ed.name),
-          h('div', 'gp-row-s', `${best}${on ? '  (Đã trang bị)' : ''}`));
-        row.append(art, info);
-        if (sel === 'inherit' && eid === src) row.classList.add('sel');
-        row.onclick = () => {
-          sfx.click();
-          if (sel === 'inherit') { if (eid !== id) src = eid; }
-          else { id = eid; pickSlot = 0; refPrev = undefined; if (!on) equipPiece(eid); }
-          render();
-        };
-        list.append(row);
-      }
-      mid.append(list);
-
-      // ---------- CỘT PHẢI: rail ô dọc ----------
-      const rail = h('div', 'gp-rail');
-      const mk = (k: EquipSlot | 'worn', nm: string) => {
-        const t = h('button', `gp-rt ${slot === k ? 'on' : ''}`, nm);
-        t.onclick = () => { sfx.click(); slot = k; render(); };
-        rail.append(t);
-      };
-      mk('worn', 'Trên người');
-      for (const sl of EQUIP_SLOTS) mk(sl.id, sl.name);
-
-      page.append(left, mid, rail);
-      body.append(page);
-    };
-    render();
-  }
-
-  registerPanel('smithy', (arg) => openForge('smith', (arg as { id?: string })?.id));
-  registerPanel('starup', (arg) => openForge('star', (arg as { id?: string })?.id));
-  registerPanel('socket', (arg) => openForge('gem', (arg as { id?: string })?.id));
-  registerPanel('reforge', (arg) => openForge('reforge', (arg as { id?: string })?.id));
-  registerPanel('inheritpage', (arg) => openForge('inherit', (arg as { id?: string })?.id));
-
-  registerPanel('toolupgrade', () => {
-    if (!atShopZone('toolupgrade', 'Quầy nâng cấp công cụ (Bách hóa)')) return;
-    const { body } = openWindow('Nâng cấp công cụ', { size: 'large' });
-    let sel = UPGRADABLE[0];
-    const render = () => {
-      body.innerHTML = '';
-      const wrap = h('div', 'up-wrap');
-
-      // ----- cột trái: 4 công cụ nâng được -----
-      const list = h('div', 'up-list');
-      for (const tid of UPGRADABLE) {
-        const t = TOOLS[tid];
-        const lv = toolLevel(tid);
-        const cur = toolUpgradeAt(tid, lv);
-        const maxed = !toolUpgradeAt(tid, lv + 1);
-        const c = h('button', `up-cell ${tid === sel ? 'sel' : ''}`);
-        const art = h('div', 'up-cell-art');
-        art.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 40)));
-        c.append(art, h('div', 'up-cell-nm', cur?.name ?? t.name),
-          h('div', `up-cell-lv ${maxed ? 'max' : ''}`, maxed ? 'MAX' : `Lv.${lv}`));
-        c.onclick = () => { sfx.click(); sel = tid; render(); };
-        list.append(c);
-      }
-
-      // ----- cột phải: chi tiết bậc kế tiếp -----
-      const t = TOOLS[sel];
-      const lv = toolLevel(sel);
-      const cur = toolUpgradeAt(sel, lv);
-      const next = toolUpgradeAt(sel, lv + 1);
-      const card = h('div', 'up-card');
-      // nội dung cuộn riêng, nút Nâng cấp luôn dính đáy thẻ
-      const cbody = h('div', 'up-body');
-      card.append(cbody);
-
-      const head = h('div', 'up-head');
-      const a1 = h('div', 'up-art'); a1.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 52)));
-      head.append(a1, h('div', 'up-arrow', '➜'));
-      const a2 = h('div', 'up-art next');
-      a2.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 52)));
-      head.append(a2);
-      cbody.append(head);
-      cbody.append(h('div', 'up-nm', next ? `${cur?.name ?? t.name} ➜ ${next.name}` : `${cur?.name ?? t.name} — cấp tối đa`));
-
-      if (!next) {
-        cbody.append(h('div', 'up-desc', cur?.desc ?? ''));
-        cbody.append(h('div', 'up-note', 'Công cụ này đã lên hết cấp rồi.'));
-      } else {
-        cbody.append(h('div', 'up-desc', next.desc));
-
-        // tỉ lệ thành công
-        const rate = upgradeRate(sel, next);
-        const streak = failStreak(sel);
-        const rr = h('div', 'up-rate');
-        const bar = h('div', 'up-rate-bar');
-        const fill = h('div', 'up-rate-f'); fill.style.width = `${Math.round(rate * 100)}%`;
-        if (rate < 0.6) fill.classList.add('low');
-        bar.append(fill);
-        rr.append(bar, h('div', 'up-rate-n', `${Math.round(rate * 100)}%`));
-        cbody.append(h('div', 'up-cap', 'TỈ LỆ THÀNH CÔNG'), rr);
-        cbody.append(h('div', 'up-note', streak
-          ? `Hỏng ${streak} lần rồi — đang được cộng thêm ${Math.round(Math.min(FAIL_BONUS_MAX, streak * FAIL_BONUS) * 100)}% may mắn.`
-          : 'Hỏng thì mất xu + nguyên liệu, cấp giữ nguyên và lần sau dễ ăn hơn.'));
-
-        // nguyên liệu
-        const mats = h('div', 'up-mats');
-        for (const [id, need] of Object.entries(next.mats ?? {})) {
-          const have = itemCount(id);
-          const cell = h('div', `up-mat ${have >= need ? 'ok' : 'miss'}`);
-          const ma = h('div', 'up-mat-art'); ma.append(iconOf(item(id), 30));
-          cell.append(ma, h('div', 'up-mat-n', `${have}/${need}`));
-          cell.title = item(id).name;
-          mats.append(cell);
-        }
-        if (!Object.keys(next.mats ?? {}).length) mats.append(h('div', 'up-note', 'Không cần nguyên liệu'));
-        cbody.append(h('div', 'up-cap', 'NGUYÊN LIỆU'), mats);
-
-        const ready = !missingMats(next).length && S.wallet.coins >= next.price;
-        const b = priceBtn(next.price, 'gold', () => { upgradeTool(sel); render(); });
-        b.classList.add('up-go');
-        b.innerHTML = `Nâng cấp · ${b.innerHTML}`;
-        if (!ready) b.classList.add('dim');
-        card.append(b);
-      }
-
-      wrap.append(list, card);
-      body.append(wrap);
-    };
-    render();
-  });
-
-  // Tủ đồ kiểu GunPow: trái là nhân vật giữa các ô trang bị, phải là lưới đồ chia tab
-  // sức chứa mỗi ngăn tủ đồ
-  const WD_CAP = 100;
-
-  // ===== Tab Trang bị: 6 ô đồ + đập đồ (lấy hệ trang bị của GunPow, bỏ vũ khí) =====
   // ================= MÀN NHÂN VẬT =================
   // MỘT bố cục dùng chung cho cả 4 mục (Trang bị / Tủ đồ / Danh hiệu / Skin),
   // để chuyển mục chỉ thấy nội dung đổi chứ không thấy đổi hẳn kiểu màn:
   //
-  //   [ khung trái: danh hiệu · dải ô | nhân vật | dải ô · tên+ID · cấp · lực chiến ]
+  //   [ khung trái: danh hiệu · nhân vật · tên · cấp ]
   //   [ khung phải: hàng lọc · lưới ô · tối đa 2 nút to                              ]
   //
   // Mỗi mục chỉ khai báo: dải ô hai bên là gì, hàng lọc có gì, lưới vẽ ô ra sao,
@@ -2353,42 +1713,19 @@ export function registerAllPanels() {
     foot: HTMLElement[];
     /** kiểu lưới: ô vuông (mặc định) | ô cao cho skin | hàng ngang cho danh hiệu */
     grid?: 'tall' | 'rows';
-    /** cụm nút tròn dưới chân nhân vật */
-    quick?: HTMLElement;
     /** mấy dòng tiến độ ở đáy khung (nằm bên trái, cùng hàng với nút) */
     note?: string[];
     /** true = khung trái chỉ có nhân vật, không kèm dải ô trang bị */
     bare?: boolean;
     /** true = bỏ hẳn khung trái, nội dung chiếm cả trang */
     full?: boolean;
-    /** true = có nút "Trang bị nhanh" ở góc dưới trái */
-    fast?: boolean;
-  }
-
-  /** Dải 8 ô trang bị quanh nhân vật — dùng chung cho mọi mục của màn Nhân vật. */
-  function equipSlotStrip(redraw: () => void): ChSlot[] {
-    return EQUIP_SLOTS.map(sl => {
-      const d = equipDef(S.equip[sl.id]);
-      return {
-        key: sl.id,
-        name: d ? `${d.name}${equipLevel(d.id) ? ` +${equipLevel(d.id)}` : ''}` : sl.name,
-        art: d ? spr(d.url, 0, 0, d.w, d.h, 34) : undefined,
-        grade: d ? `gr-${equipGrade(d.tier)}` : undefined,
-        badge: d && equipLevel(d.id) ? `+${equipLevel(d.id)}` : undefined,
-        star: d ? equipStar(d.id) : 0,
-        pips: d ? [d.sockets, gemsOn(d.id).map(Boolean)] as [number, boolean[]] : undefined,
-        emptyIcon: `assets/equip/slot/${sl.id}.png`,
-        click: () => { if (d) equipDetail(d, redraw); }
-      };
-    });
   }
 
   function openCharSection(box: HTMLElement, sec: string) {
     let filter = '';
     const render = () => {
       box.innerHTML = '';
-      const build = () => sec === 'equip' ? viewEquip(filter, render)
-        : sec === 'title' ? viewTitle(filter, render)
+      const build = () => sec === 'title' ? viewTitle(filter, render)
         : sec === 'skin' ? viewSkin(filter, render)
         : viewCloset(filter, render);
       // lần đầu vào mục thì chưa có bộ lọc nào được chọn: lấy cái đầu rồi
@@ -2398,9 +1735,9 @@ export function registerAllPanels() {
         filter = view.filters[0]?.key ?? '';
         view = build();
       }
-      // Trang bị / Tủ đồ có dải ô hai bên nhân vật; Danh hiệu và Skin thì chỉ
-      // để nhân vật cho rộng, không cần ô trang bị.
-      const slots = view.bare ? [] : (view.slots.length ? view.slots : equipSlotStrip(render));
+      // Tủ đồ có dải ô quần áo hai bên nhân vật; Danh hiệu và Skin thì chỉ để
+      // nhân vật cho rộng.
+      const slots = view.bare ? [] : view.slots;
 
       const page = h('div', 'ch-page');
 
@@ -2439,26 +1776,10 @@ export function registerAllPanels() {
         (i < half ? colL : colR).append(cell);
       });
       for (let i = colR.children.length; i < half; i++) colR.append(h('div', 'ch-slot pad'));
-      if (view.quick) doll.append(view.quick);
       if (slots.length) figure.append(colL, doll, colR);
       else figure.append(doll);
       side.append(figure);
 
-      const b2 = cpBreakdown();
-      const cpRow = h('div', 'ch-cprow');
-      if (view.fast) {
-        const fast = h('button', 'ch-fast');
-        fast.append(h('span', '', 'Trang bị'), h('span', '', 'nhanh'));
-        fast.title = 'Tự mặc bộ mạnh nhất đang có';
-        fast.onclick = () => { sfx.click(); autoEquip(); render(); };
-        cpRow.append(fast);
-      }
-      const cp = h('div', 'ch-cp');
-      cp.append(h('span', 'ch-cp-k', 'Lực chiến:'), h('span', 'ch-cp-n', fmt(combatPower())));
-      cp.title = `Gốc ${b2.base} · Quần áo ${b2.clothes} · Trang bị ${b2.equip}`
-        + ` · Cấp ${b2.level} · Cường hoá ${b2.enhance}`;
-      cpRow.append(cp);
-      side.append(cpRow);
       if (!view.full) page.append(side);
 
       // ---------- khung phải: hàng lọc + lưới + nút ----------
@@ -2522,58 +1843,6 @@ export function registerAllPanels() {
       return r;
     };
 
-    // ---------- mục TRANG BỊ ----------
-    const viewEquip = (f: string, redraw: () => void): ChView => {
-      const bag = S.equipBag.map(equipDef).filter((d): d is EquipDef => !!d);
-      const gradeOf = (d: EquipDef) => `gr-${equipGrade(d.tier)}`;
-      const slots = equipSlotStrip(redraw);
-
-      // 3 nút tròn: trong GunPow (WndPlayer.xml, khối conPlayerFire) đây là
-      // onTip1/onTip2/onTip3 — nút MỞ BẢNG CHÚ THÍCH cho từng nguồn lực chiến,
-      // luôn hiện chứ không phải nút tắt sang trang khác. Bên mình cũng vậy:
-      // bấm ra bảng nói rõ lực chiến đang tới từ đâu.
-      const b3 = cpBreakdown();
-      const quick = h('div', 'ch-quick');
-      const qbtn = (icon: string, tip: string, lines: [string, number][]) => {
-        const q = h('button', 'ch-q');
-        const im = document.createElement('img'); im.src = `assets/equip/${icon}`; im.alt = tip;
-        q.append(im);
-        q.title = tip;
-        q.onclick = () => { sfx.click(); cpTip(tip, lines); };
-        return q;
-      };
-      quick.append(
-        qbtn('btn_forge.png', 'Lực chiến từ trang bị',
-          [['Chỉ số trang bị', b3.equip], ['Cường hoá & sao', b3.enhance]]),
-        qbtn('btn_gem.png', 'Lực chiến từ bản thân',
-          [['Chỉ số gốc', b3.base], ['Cấp nhân vật', b3.level]]),
-        qbtn('btn_shop.png', 'Lực chiến từ thời trang',
-          [['Quần áo & skin', b3.clothes]]));
-      // "Toàn bộ" gồm CẢ đồ đang mặc lẫn đồ để trong túi; lọc theo ô cũng vậy.
-      const all = [...worn().map(w => w.def), ...bag];
-      const list = f === 'worn' ? worn().map(w => w.def)
-        : all.filter(d => f === 'all' || d.slot === f).sort((a, c) => c.tier - a.tier);
-      return {
-        slots,
-        filters: [{ key: 'all', name: 'Toàn bộ', n: worn().length + bag.length },
-                  { key: 'worn', name: 'Trên người', n: worn().length },
-                  ...EQUIP_SLOTS.map(sl => ({ key: sl.id, name: sl.name,
-                    n: (S.equip[sl.id] ? 1 : 0) + bag.filter(d => d.slot === sl.id).length }))],
-        cells: list.map(d => ({
-          name: d.name, art: spr(d.url, 0, 0, d.w, d.h, 40), grade: gradeOf(d),
-          badge: equipLevel(d.id) ? `+${equipLevel(d.id)}` : undefined,
-          star: equipStar(d.id), pips: [d.sockets, gemsOn(d.id).map(Boolean)],
-          flag: S.equip[d.slot] === d.id ? 'Đang đeo' : undefined,
-          on: S.equip[d.slot] === d.id,
-          click: () => equipDetail(d, redraw)
-        })),
-        empty: f === 'worn' ? 'Chưa đeo món nào.'
-          : 'Chưa có món nào ở mục này — mở rương trang bị để kiếm.',
-        quick, fast: true,
-        foot: []
-      };
-    };
-
     // ---------- mục TỦ ĐỒ (quần áo chibi) ----------
     type ClosetKey = 'hat' | 'glasses' | 'hair' | 'shirt' | 'pant' | 'hand';
     const CLOSET: [ClosetKey, string, number, boolean][] = [
@@ -2597,7 +1866,7 @@ export function registerAllPanels() {
             key: k, name: id ? (CHIBI_PARTS[id]?.name ?? nm) : nm,
             art: id ? art(id, zz, 34) : undefined, on: k === key,
             emptyIcon: k === 'hand'
-              ? 'assets/equip/slot/clothhand.png'
+              ? 'assets/ui/inv/ic_handitem.png'
               : `assets/ui/inv/ic_${k === 'pant' ? 'pants' : k}.png`,
             click: () => {
               // bấm ô đang mặc thì cởi luôn (nếu món đó cởi được)
@@ -2621,7 +1890,7 @@ export function registerAllPanels() {
     // ---------- mục DANH HIỆU ----------
     // Dựng theo màn Danh hiệu của GunPow: tab ngang theo nhóm thành tựu, mỗi
     // dòng là một danh hiệu kèm điều kiện và trạng thái nhận, dưới cùng là
-    // thanh tiến độ điểm + nút mở trang Thành tựu / Huy hiệu.
+    // thanh tiến độ điểm + nút mở trang Thành tựu.
     const viewTitle = (f: string, redraw: () => void): ChView => {
       const cat = ACH_CATS.find(c => c.id === f) ?? ACH_CATS[0];
       const list = achsOfCat(cat.id).filter(a => a.title);
@@ -2653,8 +1922,8 @@ export function registerAllPanels() {
         grid: 'rows',
         full: true,
         note: [`【${cat.name}】${fmt(got)}/${fmt(need)}`,
-               `Thành tựu còn: ${fmt(achLeft())}\tTổng tiến độ: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`],
-        foot: [btn('Huy hiệu', 'gold', () => openPanel('achievement'))]
+               `Tổng tiến độ: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`],
+        foot: [btn('Thành tựu', 'gold', () => openPanel('achievement'))]
       };
     };
 
@@ -2705,23 +1974,7 @@ export function registerAllPanels() {
     render();
   }
 
-  /** Bảng chú thích một nguồn lực chiến (3 nút tròn dưới chân nhân vật). */
-  function cpTip(title: string, lines: [string, number][]) {
-    const { body } = openWindow(title, { size: 'small' });
-    let sum = 0;
-    for (const [k, v] of lines) {
-      sum += v;
-      const r = h('div', 'row');
-      r.append(h('div', 'grow t2', k), h('div', 't1', fmt(v)));
-      body.append(r);
-    }
-    const tot = h('div', 'row');
-    tot.append(h('div', 'grow t1', 'Cộng'), h('div', 't1', fmt(sum)));
-    body.append(tot);
-    body.append(h('div', 'hint', `Tổng lực chiến hiện tại: ${fmt(combatPower())}`));
-  }
-
-  // ================= Trang Thành tựu / Danh hiệu / Huy hiệu =================
+  // ================= Trang Thành tựu =================
   // Dựng theo màn Thành tựu của GunPow:
   //   · Thanh trên: "Thành tựu còn ◆N" (điểm chưa xài) và "Tiến độ x/y".
   //   · Dải mục dọc bên PHẢI: Thành tựu · Danh hiệu · Huy hiệu, có chấm đỏ.
@@ -2729,7 +1982,6 @@ export function registerAllPanels() {
   //     sách bên phải, mỗi dòng có điều kiện, danh hiệu thưởng và nút Nhận.
   //   · Tab Huy hiệu: 3 huy hiệu nâng cấp bằng điểm thành tựu.
   registerPanel('achievement', (arg) => {
-    let tab = ((arg as { tab?: string })?.tab ?? 'ach') as 'ach' | 'badge';
     let cat = ACH_CATS[0].id;
     const { body } = openWindow('Thành tựu', { page: true });
 
@@ -2740,26 +1992,13 @@ export function registerAllPanels() {
 
       // ---- thanh trên ----
       const top = h('div', 'av-top');
-      const pim0 = document.createElement('img'); pim0.src = 'assets/ach/point.png'; pim0.className = 'av-pico big';
-      top.append(h('div', 'av-left-k', 'Thành tựu còn:'), pim0, h('div', 'av-pt-big', fmt(achLeft())));
+      top.append(h('div', 'av-left-k', 'Thành tựu'));
       top.append(h('div', 'grow'));
       top.append(h('div', 'av-prog', `Tiến độ: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`));
       page2.append(top);
 
-      page2.append(tab === 'ach' ? bodyAch() : bodyBadge());
-
-      // ---- dải mục dọc bên phải ----
-      const rail = h('div', 'av-rail');
-      const mk = (k: 'ach' | 'badge', nm: string, dot: boolean) => {
-        const t = h('button', `av-rt ${tab === k ? 'on' : ''}`, nm);
-        if (dot) t.append(h('i', 'av-rdot'));
-        t.onclick = () => { sfx.click(); tab = k; render(); };
-        rail.append(t);
-      };
-      mk('ach', 'Thành tựu', pendingPoints() > 0);
-      mk('badge', 'Huy hiệu', BADGES.some(b => achLeft() >= badgeCost(badgeLv(b.id)) && badgeLv(b.id) < BADGE_MAX));
-
-      wrap.append(page2, rail);
+      page2.append(bodyAch());
+      wrap.append(page2);
       body.append(wrap);
     };
 
@@ -2834,89 +2073,8 @@ export function registerAllPanels() {
       return row;
     };
 
-    // ---- tab Huy hiệu ----
-    const bodyBadge = () => {
-      const box = h('div', 'av-bwrap');
-      for (const b of BADGES) {
-        const lv = badgeLv(b.id), max = lv >= BADGE_MAX;
-        const card = h('div', 'av-bcard');
-        const hd = h('div', 'av-bname');
-        hd.append(h('span', '', b.name), h('span', 'av-blv', `Lv${lv}`));
-        card.append(hd);
-        const art = h('div', 'av-bart');
-        const im = document.createElement('img');
-        im.src = `assets/ach/${b.icon}.png`; im.alt = b.name; im.className = 'av-bimg';
-        art.append(im);
-        card.append(art);
-        const cmp = h('div', 'av-bcmp');
-        cmp.append(h('div', 'av-bs', `${STAT_NAMES[b.stat]}\n+${b.per * lv}`),
-          h('div', 'av-barrow', '➜'),
-          h('div', 'av-bs up', max ? 'TỐI ĐA' : `${STAT_NAMES[b.stat]}\n+${b.per * (lv + 1)}`));
-        card.append(cmp);
-        if (!max) {
-          const cost = badgeCost(lv);
-          const cs = h('div', 'av-bcost');
-          const cim = document.createElement('img'); cim.src = 'assets/ach/point.png'; cim.className = 'av-pico';
-          cs.append(document.createTextNode('Tốn '), cim, document.createTextNode(fmt(cost)));
-          card.append(cs);
-          const go = btn('Tăng cấp', 'green', () => { upBadge(b.id); render(); });
-          if (achLeft() < cost) go.classList.add('dim');
-          card.append(go);
-        }
-        box.append(card);
-      }
-      const w = h('div', 'av-side');
-      w.append(box, h('div', 'hint',
-        `Huy hiệu nâng bằng điểm thành tựu, mỗi cấp cộng ít chỉ số (tối đa Lv${BADGE_MAX}) — `
-        + 'chỉ là thưởng thêm cho việc cày thành tựu, không lấn át trang bị.'));
-      return w;
-    };
-
     render();
   });
-
-  // Thẻ chi tiết một món trang bị — mở từ ô trên người hoặc ô trong lưới
-  function equipDetail(d: EquipDef, redraw: () => void) {
-    const lv = equipLevel(d.id), star = equipStar(d.id);
-    const isWorn = S.equip[d.slot] === d.id;
-    const { body, close } = openWindow(`${d.name}${lv ? ` +${lv}` : ''}`, { size: 'small' });
-    const st = pieceStats(d, lv, star, gemsOn(d.id));
-    const line = STAT_KEYS.filter(k => st[k] > 0).map(k => `${STAT_NAMES[k]} +${st[k]}`).join(' · ');
-
-    const head = h('div', 'eqd-head');
-    const art = h('div', `eqd-art gr-${equipGrade(d.tier)}`);
-    art.append(spr(d.url, 0, 0, d.w, d.h, 46));
-    if (lv > 0) art.append(h('div', 'ch-badge', `+${lv}`));
-    const info = h('div', 'eqd-info');
-    info.append(h('div', 'eqd-slot', `${SLOT_OF[d.slot].name} · bậc ${d.tier}`),
-      h('div', 'eqd-star', '★'.repeat(star) + '☆'.repeat(MAX_STAR - star)),
-      h('div', 'eqd-st', line));
-    head.append(art, info);
-    body.append(head);
-
-    if (d.sockets) {
-      const socks = h('div', 'eqd-socks');
-      gemsOn(d.id).forEach(gid => {
-        const sk = h('div', `eqd-sock ${gid ? 'on' : ''}`);
-        const g = gemDef(gid);
-        if (g) sk.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 20));
-        socks.append(sk);
-      });
-      body.append(socks);
-    }
-
-    const acts = h('div', 'eqd-acts');
-    acts.append(isWorn
-      ? btn('Cởi ra', '', () => { unequipPiece(d.slot); close(); redraw(); })
-      : btn('Trang bị', 'gold', () => { equipPiece(d.id); close(); redraw(); }));
-    acts.append(
-      btn('Cường hoá', 'blue', () => { close(); openPanel('smithy', { id: d.id }); }),
-      btn('Tẩy luyện', '', () => { close(); openPanel('reforge', { id: d.id }); }),
-      btn('Tăng sao', '', () => { close(); openPanel('starup', { id: d.id }); }),
-      btn('Khảm', '', () => { close(); openPanel('socket', { id: d.id }); }),
-      btn('Kế thừa', '', () => { close(); openPanel('inheritpage', { id: d.id }); }));
-    body.append(acts);
-  }
 
   function colorSwatches(n: number, active: number, onPick: (i: number) => void, names?: string[]): HTMLElement {
     const HAIR_HEX = ['#2b2b2b', '#e6c25a', '#8a5a33', '#c49a6c', '#b3592e', '#2e8b6f', '#4caf50', '#9aa5b1', '#c6a3e0', '#2c3e70', '#f7a3c2', '#8e44ad', '#c0392b', '#39c2c9'];

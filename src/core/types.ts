@@ -18,15 +18,6 @@ export interface ChibiLookState {
   hat: number; glasses: number; hand?: number; skin?: string;
 }
 
-export type StatKey = 'health' | 'intellect' | 'strength' | 'agility' | 'charm';
-export interface CharStats {
-  health: number;     // Sức khỏe
-  intellect: number;  // Trí tuệ
-  strength: number;   // Sức mạnh
-  agility: number;    // Nhanh nhẹn
-  charm: number;      // Quyến rũ
-}
-
 export interface PlayerProfile {
   name: string;
   gender: Gender;
@@ -34,13 +25,10 @@ export interface PlayerProfile {
   chibi?: ChibiLookState;  // nhân vật chibi kiểu Avatar (hiện hành)
   level: number;
   exp: number;
-  charStats: CharStats;    // chỉ số nhân vật kiểu Avatar
-  statPoints: number;      // điểm chưa phân bổ
   avatarFace?: number;     // part mắt riêng cho ảnh đại diện (0/undefined = theo nhân vật)
   avatarPic?: string;      // 'pack:07' hoặc data URL ảnh tự tải lên; bỏ trống = dùng đầu chibi
   title: string;            // danh hiệu đang dùng
   titles: string[];         // danh hiệu đã mở
-  badges: string[];         // huy hiệu
   guild?: string;           // tên hội nhóm — hiện trong () trước tên
   createdAt: number;
 }
@@ -146,17 +134,7 @@ export interface GameState {
   // Lttt: thu hoạch/bán nông sản vào TÀI KHOẢN NÔNG TRẠI, ra ATM mới
   // chuyển sang ví chính tiêu được.
   wallet: { coins: number; rubies: number; farmCoins: number };
-  // trang bị (lấy từ GunPow, không có vũ khí)
-  equip: Record<string, string>;        // ô -> id món đang đeo
-  equipLv: Record<string, number>;      // id món -> cấp đập
-  equipBag: string[];                   // món đang cất trong túi trang bị
-  equipStar: Record<string, number>;    // id món -> số sao
-  equipGems: Record<string, string[]>;  // id món -> đá đã gắn từng lỗ
-  gemBag: Record<string, number>;       // id đá -> số viên đang có
-  equipRef: Record<string, number[]>;   // id món -> cấp 5 dòng tẩy luyện
-  equipRefLock: Record<string, boolean[]>; // id món -> dòng nào đang khoá
   achClaimed: Record<string, boolean>;  // thành tựu đã bấm nhận
-  badgeLv: Record<string, number>;      // cấp từng huy hiệu
   inventory: Record<string, number>;
   wardrobe: string[];       // (cũ) thời trang pack Cozy
   chibiWardrobe: number[];  // part chibi đã sở hữu (id part Avatar)
