@@ -28,7 +28,7 @@ export function defaultState(): GameState {
       createdAt: Date.now()
     },
     wallet: { farmCoins: 0, coins: 500, rubies: 10 },
-    equip: { ring: '', necklace: '', hand: '', medal: '', treasure: '', earring: '' },
+    equip: { weapon: '', hand: '', necklace: '', treasure: '', ring: '', medal: '', earring: '', offhand: '' },
     equipLv: {},
     equipBag: [],
     equipStar: {},
@@ -152,7 +152,9 @@ export function load(): boolean {
     // chỗ migrate giữa các version save về sau
     S = { ...defaultState(), ...data };
     if (!S.chibiWardrobe) S.chibiWardrobe = [];
-    if (!S.equip) S.equip = { ring: '', necklace: '', hand: '', medal: '', treasure: '', earring: '' };
+    if (!S.equip) S.equip = {};
+    for (const k of ['weapon','hand','necklace','treasure','ring','medal','earring','offhand'])
+      if (S.equip[k] === undefined) S.equip[k] = '';
     if (!S.equipLv) S.equipLv = {};
     if (!S.equipBag) S.equipBag = [];
     if (!S.equipStar) S.equipStar = {};
