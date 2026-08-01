@@ -31,7 +31,7 @@ import { upgradeHouse, setWallpaper, setFloor, throwParty } from '@/systems/hous
 import { sfx, startBgm, stopBgm } from '@/core/audio';
 import { EQUIP_SLOTS, equipDef, enhanceRate, enhanceCost, dropsOnFail, MAX_ENHANCE, ENHANCE_STONE,
   MAX_STAR, starCost, starRate, gemDef, GEM_LIST, gemPower, gemMergeTo, GEM_MERGE_N, type EquipSlot, type EquipDef } from '@/data/equip';
-import { equipLevel, pieceStats, combatPower, cpBreakdown, equipPiece, unequipPiece, autoEquip, smash, smashUntil, openChestMany,
+import { equipLevel, pieceStats, combatPower, cpBreakdown, equipPiece, unequipPiece, autoEquip, smash, smashUntil, openChestMany, inherit, canInherit, inheritCost,
   equipStar, upStar, gemsOn, gemCount, socketGem, unsocketGem, mergeGem, addGem, EQUIP_CHESTS, openChest } from '@/systems/equipment';
 import { upgradeTool, upgradeRate, missingMats, failStreak, UPGRADABLE, FAIL_BONUS, FAIL_BONUS_MAX } from '@/systems/toolcraft';
 import type { Reward } from '@/data/quests';
@@ -1951,8 +1951,10 @@ export function registerAllPanels() {
   // ===== Trang Rèn đúc: một trang 3 cột đúng như màn Cường hóa của GunPow =====
   //   [ tab chức năng + khung thao tác ]  [ danh sách trang bị ]  [ cột ô dọc ]
   // Chỉ khác GunPow ở lớp da: bên mình dùng kính xanh thay khung gỗ nâu.
-  type ForgeTab = 'smith' | 'star' | 'gem';
-  const FORGE_TABS: [ForgeTab, string][] = [['smith', 'Cường hoá'], ['star', 'Tăng sao'], ['gem', 'Khảm đá']];
+  type ForgeTab = 'smith' | 'star' | 'gem' | 'inherit';
+  const FORGE_TABS: [ForgeTab, string][] = [
+    ['smith', 'Cường hoá'], ['star', 'Tăng sao'], ['gem', 'Khảm đá'], ['inherit', 'Kế thừa']
+  ];
 
   function openForge(tab: ForgeTab, startId?: string) {
     let sel = tab;
@@ -1960,6 +1962,7 @@ export function registerAllPanels() {
     let id = startId && equipDef(startId) ? startId : '';
     if (!id) for (const sl of EQUIP_SLOTS) if (S.equip[sl.id]) { id = S.equip[sl.id]; break; }
     let pickSlot = 0;
+    let src = '';                       // món nguồn của Kế thừa
     const { body } = openWindow('Rèn đúc trang bị', { page: true });
 
     const render = () => {
@@ -2044,6 +2047,38 @@ export function registerAllPanels() {
             acts.append(btn(`Tăng lên ${star + 1} sao`, 'gold', () => { upStar(id); render(); }));
             stage.append(acts);
           }
+        } else if (sel === 'inherit') {
+          const sd = equipDef(src);
+          const mini = (dd: EquipDef | undefined, cap: string, cls = '') => {
+            const c = h('div', `gp-c ${cls}`);
+            c.append(h('div', 'gp-c-t', cap));
+            if (!dd) { c.append(h('div', 'gp-c-s', 'Chọn ở danh sách bên phải')); return c; }
+            const art = h('div', 'gp-row-art');
+            art.append(spr(dd.url, 0, 0, dd.w, dd.h, 30));
+            const l3 = equipLevel(dd.id), s3 = equipStar(dd.id);
+            if (s3) art.append(h('div', 'gp-star', `★${s3}`));
+            if (l3) art.append(h('div', 'eq-plus', `+${l3}`));
+            const wrapc = h('div', 'gp-mini');
+            wrapc.append(art, h('div', 'gp-c-s', `${dd.name}\n+${l3} · ${s3}★ · ${gemsOn(dd.id).filter(Boolean).length} đá`));
+            c.append(wrapc);
+            return c;
+          };
+          const cmp = h('div', 'gp-cmp');
+          cmp.append(mini(sd, 'NGUỒN (sẽ mất)'), h('div', 'gp-c-ar', '❯'), mini(d, 'ĐÍCH', 'up'));
+          stage.append(cmp);
+          const chk = src ? canInherit(src, id) : { ok: false, why: 'Chọn món nguồn ở danh sách bên phải.' };
+          if (!chk.ok) stage.append(h('div', 'sm-warn', chk.why ?? ''));
+          else {
+            const cost = inheritCost(sd!, d);
+            const cs = h('div', 'gp-cost');
+            cs.innerHTML = `Tốn: ${priceHtml(cost)}`;
+            stage.append(cs, h('div', 'sm-warn', 'Món nguồn sẽ biến mất; cấp, sao và đá chuyển hết sang món đích.'));
+          }
+          const acts = h('div', 'gp-acts');
+          const go = btn('Kế thừa', 'gold', () => { if (inherit(src, id)) { src = ''; render(); } });
+          if (!chk.ok) go.classList.add('dim');
+          acts.append(go);
+          stage.append(acts);
         } else {
           stage.append(h('div', 'gp-c-s', statLine(now)));
           const socks = h('div', 'sk-row');
@@ -2082,7 +2117,7 @@ export function registerAllPanels() {
 
       // ---------- CỘT GIỮA: danh sách trang bị ----------
       const mid = h('div', 'gp-mid');
-      mid.append(h('div', 'gp-mid-h', 'Trang bị'));
+      mid.append(h('div', 'gp-mid-h', sel === 'inherit' ? 'Chọn món nguồn' : 'Trang bị'));
       const list = h('div', 'gp-list');
       const ids = slot === 'worn'
         ? EQUIP_SLOTS.map(sl => S.equip[sl.id]).filter(Boolean)
@@ -2091,7 +2126,7 @@ export function registerAllPanels() {
       for (const eid of ids) {
         const ed = equipDef(eid); if (!ed) continue;
         const on = S.equip[ed.slot] === eid;
-        const row = h('button', `gp-row ${eid === id ? 'sel' : ''}`);
+        const row = h('button', `gp-row ${sel !== 'inherit' && eid === id ? 'sel' : ''}`);
         const art = h('div', 'gp-row-art');
         art.append(spr(ed.url, 0, 0, ed.w, ed.h, 34));
         const l2 = equipLevel(eid), s2 = equipStar(eid);
@@ -2103,7 +2138,13 @@ export function registerAllPanels() {
         info.append(h('div', 'gp-row-n', ed.name),
           h('div', 'gp-row-s', `${best}${on ? '  (Đã trang bị)' : ''}`));
         row.append(art, info);
-        row.onclick = () => { sfx.click(); id = eid; pickSlot = 0; if (!on) equipPiece(eid); render(); };
+        if (sel === 'inherit' && eid === src) row.classList.add('sel');
+        row.onclick = () => {
+          sfx.click();
+          if (sel === 'inherit') { if (eid !== id) src = eid; }
+          else { id = eid; pickSlot = 0; if (!on) equipPiece(eid); }
+          render();
+        };
         list.append(row);
       }
       mid.append(list);

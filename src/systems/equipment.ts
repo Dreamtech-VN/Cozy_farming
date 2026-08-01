@@ -332,3 +332,67 @@ export function openChestMany(chestId: string, n: number): EquipDef[] {
   }
   return out;
 }
+
+// ===== Kế thừa =====
+// Chuyển toàn bộ công sức (cấp cường hoá, sao, đá đã khảm) từ món CŨ sang món
+// MỚI, món cũ mất luôn. Dùng khi đào được món bậc cao hơn mà không muốn đập lại
+// từ đầu. Hai món phải cùng ô; món mới không được đang có cấp cao hơn.
+export function inheritCost(from: EquipDef, to: EquipDef): number {
+  return Math.round((from.price + to.price) * 0.15 / 100) * 100;
+}
+
+export interface InheritCheck { ok: boolean; why?: string }
+export function canInherit(fromId: string, toId: string): InheritCheck {
+  const f = equipDef(fromId), t = equipDef(toId);
+  if (!f || !t) return { ok: false, why: 'Thiếu món.' };
+  if (fromId === toId) return { ok: false, why: 'Phải chọn hai món khác nhau.' };
+  if (f.slot !== t.slot) return { ok: false, why: 'Hai món phải cùng một ô.' };
+  if (equipLevel(fromId) === 0 && equipStar(fromId) === 0 && !gemsOn(fromId).some(Boolean))
+    return { ok: false, why: 'Món nguồn chưa có gì để kế thừa.' };
+  if (equipLevel(toId) > equipLevel(fromId))
+    return { ok: false, why: 'Món đích đang cao cấp hơn món nguồn.' };
+  return { ok: true };
+}
+
+export function inherit(fromId: string, toId: string): boolean {
+  const c = canInherit(fromId, toId);
+  if (!c.ok) { toast(c.why ?? 'Không kế thừa được.', 'alert'); sfx.error(); return false; }
+  const f = equipDef(fromId)!, t = equipDef(toId)!;
+  const cost = inheritCost(f, t);
+  if (S.wallet.coins < cost) { toast(`Cần ${cost} xu.`, 'coin'); sfx.error(); return false; }
+  S.wallet.coins -= cost;
+
+  // chuyển cấp + sao + đá
+  if (!S.equipLv) S.equipLv = {};
+  if (!S.equipStar) S.equipStar = {};
+  if (!S.equipGems) S.equipGems = {};
+  const gems = gemsOn(fromId);
+  // đá đang nằm trên món đích thì trả về túi trước
+  for (const gid of gemsOn(toId)) if (gid) addGem(gid);
+  S.equipLv[toId] = equipLevel(fromId);
+  S.equipStar[toId] = equipStar(fromId);
+  // món đích ít lỗ hơn thì phần đá dư trả về túi
+  const keep = gems.slice(0, t.sockets);
+  for (const gid of gems.slice(t.sockets)) if (gid) addGem(gid);
+  S.equipGems[toId] = keep;
+
+  // xoá sạch món nguồn; nếu nó đang đeo thì cho món đích đeo thay luôn,
+  // không thì người chơi kế thừa xong lại thấy ô trống
+  const wasWorn = EQUIP_SLOTS.some(sl => S.equip[sl.id] === fromId);
+  delete S.equipLv[fromId];
+  delete S.equipStar[fromId];
+  delete S.equipGems[fromId];
+  S.equipBag = S.equipBag.filter(x => x !== fromId);
+  for (const sl of EQUIP_SLOTS) if (S.equip[sl.id] === fromId) S.equip[sl.id] = '';
+  if (wasWorn) {
+    const old = S.equip[t.slot];
+    if (old && old !== toId) S.equipBag.push(old);
+    S.equipBag = S.equipBag.filter(x => x !== toId);
+    S.equip[t.slot] = toId;
+  }
+
+  addStat('equip_inherited');
+  save(); bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); sfx.coin();
+  toast(`Đã kế thừa sang ${t.name}.`, 'rank');
+  return true;
+}

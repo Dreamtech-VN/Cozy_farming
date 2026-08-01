@@ -2383,3 +2383,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   background: rgba(255, 255, 255, .13); border: 1px solid rgba(255, 255, 255, .24); border-right: none;
 }
 .gp-rt.on { background: linear-gradient(#ffe066, #f0a318); border-color: #ffe9a8; color: #4a3005; }
+/* Kế thừa: khối món nhỏ trong 2 ô nguồn / đích */
+.gp-mini { display: flex; align-items: center; gap: 7px; justify-content: center; margin-top: 3px; }
+.gp-mini .gp-c-s { white-space: pre-line; text-align: left; }
+.gp-acts .btn.dim { opacity: .5; }
