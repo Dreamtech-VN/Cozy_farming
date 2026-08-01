@@ -146,6 +146,10 @@ viên, Khu ngoại ô, Nông trại*):
 ⚠️ Map 10 còn kèm `daydien0/1/2.png` (dây điện) — đó là **lớp phủ riêng**, không
 nằm trong dải nền; ghép nền chỉ lấy các mảnh đánh số.
 
+Nhân vật đi xuyên bàn ghế vì nền chỉ là một tấm ảnh: bảng `DRAWN_BLOCKS` trong
+`WorldScene` khai chân các món vẽ sẵn (quầy, kệ, lồng thú, giá treo đồ) làm vật
+cản. Toạ độ đo thẳng trên ảnh nền, đơn vị px.
+
 Công trình vẽ sẵn trong ảnh nền không có sprite riêng nên không tự bấm được:
 bảng `DRAWN_SPOTS` trong `WorldScene` khai toạ độ px của từng cái (ATM, Premium,
 tiệm trang sức, vòng quay, Pet Racing, quầy các tiệm) để bấm vào là mở bảng

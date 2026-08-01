@@ -170,5 +170,6 @@ export interface GameState {
   minigames: { caroWins: number; xiangqiWins: number; rpsWins: number };
   settings: { music: boolean; sfx: boolean };
   zone: string;
+  zoneRoom: number;         // "khu vực" của map hiện tại (Lttt: 10 khu / map)
   clockOffset: number;      // phút cộng thêm vào giờ thật (đổi ngày/đêm nhanh)
 }

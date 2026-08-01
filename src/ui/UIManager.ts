@@ -148,6 +148,7 @@ function buildHud() {
     ['inventory', 'Kho đồ', 'inventory'],
     ['mail', 'Thư', 'mail'],
     ['map', 'Bản đồ', 'map'],
+    ['room', 'Đổi khu', 'changeroom'],
     ['social', 'Bạn bè', 'social'],
     ['daily', 'Điểm danh', 'daily'],
     ['wheel', 'Vòng quay', 'wheel'],

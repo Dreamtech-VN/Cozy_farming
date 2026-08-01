@@ -25,7 +25,7 @@ import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import { buyRod, addToAquarium } from '@/systems/fishing';
 import { claimQuest, activeQuestList, grantReward } from '@/systems/quests';
-import { suggestedFriends, addFriend, removeFriend, blockPlayer, reportPlayer, giveGift, sendChat, sendVoice, getChatLog, claimMail, leaderboard, affinityOf, addAffinity, affinityLabel } from '@/systems/social';
+import { ROOM_COUNT, ROOM_CAP, roomPlayers, roomFull, suggestedFriends, addFriend, removeFriend, blockPlayer, reportPlayer, giveGift, sendChat, sendVoice, getChatLog, claimMail, leaderboard, affinityOf, addAffinity, affinityLabel } from '@/systems/social';
 import { claimLogin, checkinToday, spinWheel, grantWheel, wheelSpinsLeft, loginRewardToday } from '@/systems/meta';
 import { upgradeHouse, setWallpaper, setFloor, throwParty } from '@/systems/housing';
 import { sfx, startBgm, stopBgm } from '@/core/audio';
@@ -500,6 +500,42 @@ export function registerAllPanels() {
   // ================= ATM nong trai (Lttt) =================
   // "Sau khi thu hoach cay, vat nuoi, ban se co mot khoan tien nho trong tai
   // khoan nong trai. Ban co the ra ATM de chuyen sang tai khoan chinh."
+  // ===== Đổi khu (zone instance) — theo Lttt =====
+  // Server Lttt mở sẵn 10 khu cho mỗi map; đổi khu là vào cùng map nhưng gặp
+  // nhóm người chơi khác. Khu đầy (T.areaIsFull "Khu vực đã đầy.") thì không vào.
+  registerPanel('changeroom', () => {
+    const zone = ZONES[S.zone];
+    const { body, close } = openWindow(`Đổi khu — ${zone?.name ?? S.zone}`, { size: 'small' });
+    body.append(h('div', 'hint', `Mỗi khu chứa tối đa ${ROOM_CAP} người. Đổi khu là vào cùng địa điểm nhưng gặp nhóm người chơi khác.`));
+    const grid = h('div', 'room-grid');
+    for (let r = 1; r <= ROOM_COUNT; r++) {
+      const n = r === S.zoneRoom ? Math.max(1, roomPlayers(S.zone, r)) : roomPlayers(S.zone, r);
+      const full = roomFull(S.zone, r);
+      const here = r === S.zoneRoom;
+      const c = h('button', `room-cell ${here ? 'here' : ''} ${full && !here ? 'full' : ''}`);
+      c.append(h('div', 'room-no', `Khu ${r}`));
+      const bar = h('div', 'room-bar');
+      const fill = h('div', 'room-fill');
+      fill.style.width = `${Math.round(n / ROOM_CAP * 100)}%`;
+      if (n >= ROOM_CAP * 0.8) fill.classList.add('hot');
+      bar.append(fill);
+      c.append(bar, h('div', 'room-n', `${n}/${ROOM_CAP}`));
+      if (here) c.append(h('div', 'room-tag', 'Đang ở đây'));
+      c.onclick = () => {
+        sfx.click();
+        if (here) { toast('Bạn đang ở khu này rồi.', 'alert'); return; }
+        if (full) { toast('Khu vực đã đầy.', 'alert'); sfx.error(); return; }
+        S.zoneRoom = r;
+        save();
+        close();
+        toast(`Đã sang Khu ${r}`, 'bus');
+        worldScene()?.reenter?.();
+      };
+      grid.append(c);
+    }
+    body.append(grid);
+  });
+
   registerPanel('atm', () => {
     const { body } = openWindow('ATM Nông trại', { size: 'small' });
     const render = () => {

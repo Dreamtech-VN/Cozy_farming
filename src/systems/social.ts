@@ -69,13 +69,37 @@ const ROAMERS: Omit<Friend, 'online'>[] = [
   { id: 'p_bap', name: 'BapRang', level: 11 }
 ];
 
-// danh sách người chơi xuất hiện ở 1 khu (ổn định theo tên khu)
-export function roamersIn(zoneId: string, n = 3): Friend[] {
-  let seed = 0;
-  for (const c of zoneId) seed = (seed * 31 + c.charCodeAt(0)) % 997;
+// ===== Khu vực (zone instance) như Lttt =====
+// Server Lttt tạo sẵn 10 "khu" cho mỗi map (`new Map(i, 0, 10)` trong
+// ServerManager) — cùng một map nhưng chứa những người chơi khác nhau, đầy thì
+// báo "Khu vực đã đầy." (T.areaIsFull). Bản offline mô phỏng lại: số người mỗi
+// khu sinh ổn định theo (map, khu, ngày) nên nhìn vào thấy khu đông khu vắng.
+export const ROOM_COUNT = 10;
+export const ROOM_CAP = 20;
+
+function hash(str: string): number {
+  let x = 2166136261;
+  for (const c of str) x = Math.imul(x ^ c.charCodeAt(0), 16777619) >>> 0;
+  return x >>> 0;
+}
+
+// số người đang ở khu `room` của map `zoneId` (0 = trống, ROOM_CAP = đầy)
+export function roomPlayers(zoneId: string, room: number): number {
+  const day = Math.floor(Date.now() / 3_600_000);      // đổi theo từng giờ
+  return hash(`${zoneId}|${room}|${day}`) % (ROOM_CAP + 1);
+}
+
+export function roomFull(zoneId: string, room: number): boolean {
+  return roomPlayers(zoneId, room) >= ROOM_CAP;
+}
+
+// danh sách người chơi xuất hiện ở 1 khu (ổn định theo map + khu)
+export function roamersIn(zoneId: string, n = 3, room = S.zoneRoom ?? 1): Friend[] {
+  const seed = hash(`${zoneId}#${room}`) % 997;
   const out: Friend[] = [];
   for (let i = 0; i < n; i++) {
-    const f = ROAMERS[(seed + i * 3) % ROAMERS.length];
+    // bước 1 để 3 người không trùng nhau (bước 3 với 6 người thì i=0 và i=2 trùng)
+    const f = ROAMERS[(seed + i) % ROAMERS.length];
     if (!S.social.blocked.includes(f.id)) out.push({ ...f, online: true });
   }
   return out;

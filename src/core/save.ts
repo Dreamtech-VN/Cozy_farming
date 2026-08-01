@@ -54,6 +54,7 @@ export function defaultState(): GameState {
     minigames: { caroWins: 0, xiangqiWins: 0, rpsWins: 0 },
     settings: { music: true, sfx: true },
     zone: 'farm',
+    zoneRoom: 1,
     clockOffset: 0
   };
 }
@@ -159,6 +160,7 @@ export function load(): boolean {
     migrateBagToStore();
     // save cũ còn đứng ở map cổng (đã bỏ) -> đưa về nông trại
     if (!ZONES[S.zone]) S.zone = 'farm';
+    if (!S.zoneRoom) S.zoneRoom = 1;
     if (!S.orders) S.orders = [];
     if (!S.fishfarm) S.fishfarm = [];
     return true;

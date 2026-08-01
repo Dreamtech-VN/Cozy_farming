@@ -2017,6 +2017,21 @@ export class WorldScene extends Phaser.Scene {
     });
   }
 
+  // Vào lại đúng map hiện tại (dùng khi đổi khu): dựng lại scene để danh sách
+  // người chơi trong khu đổi theo, kèm màn chờ ngắn như lúc chuyển map.
+  reenter() {
+    if (this.busy) return;
+    this.busy = true;
+    this.stopFishing();
+    showLoading(`Đang vào Khu ${S.zoneRoom}...`);
+    this.cameras.main.fadeOut(220, 0, 0, 0);
+    this.time.delayedCall(260, () => {
+      save(true);
+      this.scene.restart();
+      this.time.delayedCall(420, () => hideLoading());
+    });
+  }
+
   travel(zoneId: string) {
     if (zoneId === this.zone.id || this.busy) return;
     if (zoneId === 'house' && !S.house.owned) {
