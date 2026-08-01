@@ -31,11 +31,11 @@ import { upgradeHouse, setWallpaper, setFloor, throwParty } from '@/systems/hous
 import { sfx, startBgm, stopBgm } from '@/core/audio';
 import { EQUIP_SLOTS, equipDef, enhanceRate, enhanceCost, dropsOnFail, MAX_ENHANCE, ENHANCE_STONE,
   MAX_STAR, starCost, starRate, gemDef, GEM_LIST, gemPower, gemMergeTo, GEM_MERGE_N,
-  REFORGE_STONE, REFORGE_LINES, reforgeMax, reforgePower, reforgeCost, equipGrade,
+  REFORGE_STONE, REFORGE_LINES, reforgeMax, reforgePower, reforgeCost, equipGrade, SLOT_OF,
   type EquipSlot, type EquipDef } from '@/data/equip';
 import { equipLevel, pieceStats, combatPower, cpBreakdown, equipPiece, unequipPiece, autoEquip, smash, smashUntil, openChestMany, inherit, canInherit, inheritCost,
   equipStar, upStar, gemsOn, gemCount, socketGem, unsocketGem, mergeGem, addGem, EQUIP_CHESTS, openChest,
-  refLines, refLocks, toggleRefLock, refScore, reforge } from '@/systems/equipment';
+  refLines, refLocks, toggleRefLock, refScore, reforge, worn } from '@/systems/equipment';
 import { upgradeTool, upgradeRate, missingMats, failStreak, UPGRADABLE, FAIL_BONUS, FAIL_BONUS_MAX } from '@/systems/toolcraft';
 import type { Reward } from '@/data/quests';
 
@@ -1307,13 +1307,13 @@ export function registerAllPanels() {
   // ================= Nhân vật: hub có cột tab dọc bên phải (kiểu GunPow) =================
   // [id, tên, icon trong assets/ui/inv]
   const CH_SECTIONS: [string, string, string][] = [
-    ['wardrobe', 'Quần áo', 'ic_shirt'], ['equip', 'Trang bị', 'ic_hand'],
-    ['skin', 'Skin', 'ic_skin'], ['title', 'Danh hiệu', 'ic_title']
+    ['equip', 'Trang bị', 'ic_hand'], ['wardrobe', 'Tủ đồ', 'ic_shirt'],
+    ['title', 'Danh hiệu', 'ic_title'], ['skin', 'Skin', 'ic_skin']
   ];
 
   // Tủ đồ dựng theo đúng mẫu Inventory của Cozy UI Pack: tab dán trên nóc,
   // thân là tấm modal nét đứt, KHÔNG dùng khung gỗ chung của các popup khác.
-  function openCharHub(sec = 'wardrobe') {
+  function openCharHub(sec = 'equip') {
     // Tủ đồ mở HẲN MỘT TRANG như GunPow (WndBagRole là trang đầy đủ, không popup)
     const { body, win } = openWindow('Nhân vật', { page: true });
     win.classList.add('win-wardrobe');
@@ -1324,7 +1324,8 @@ export function registerAllPanels() {
     win.classList.add('win-wr-side');
     const tabBar = h('div', 'wr-tabs');
     const inner = h('div', 'wr-body-in');
-    body.append(tabBar, inner);
+    // dải mục dán ở mép PHẢI như mẫu
+    body.append(inner, tabBar);
 
     const draw = () => {
       tabBar.innerHTML = '';
@@ -1341,36 +1342,9 @@ export function registerAllPanels() {
       const main = h('div', 'ch-main');
       inner.append(main);
       openCharHubRefresh = draw;
-      if (sec === 'wardrobe') openWardrobe(main);
-      else if (sec === 'skin') openWardrobe(main, 'skin');
-      else if (sec === 'equip') openEquip(main);
-      else renderTitles(main, draw);
+      openCharSection(main, sec);
     };
     draw();
-  }
-
-  function renderTitles(box: HTMLElement, redraw: () => void) {
-    box.append(h('div', 'hint', 'Bấm vào một danh hiệu để xem chi tiết và đeo lên. Danh hiệu xám là chưa mở khoá.'));
-    const card = h('div', 'wd-card');
-    const grid = h('div', 'title-grid');
-    for (const id of Object.keys(TITLES)) {
-      const t = TITLES[id];
-      const owned = S.player.titles.includes(id);
-      const on = S.player.title === id;
-      const c = h('button', `title-row ${on ? 'active' : ''} ${owned ? '' : 'locked'}`);
-      const src = h('div', 'tt-src', t.source);
-      const mid = h('div', 'tt-mid');
-      const nm = h('div', 'tt-name'); nm.textContent = `【${t.name}】`;
-      nm.style.color = owned ? t.color : '#9b8a72';
-      mid.append(nm, h('div', 'tt-how', t.how));
-      const tick = h('div', 'tt-tick');
-      if (on) tick.append(uiIcon('check', 18));
-      c.append(src, mid, tick);
-      c.onclick = () => { sfx.click(); openTitleDetail(id, redraw); };
-      grid.append(c);
-    }
-    card.append(grid);
-    box.append(card);
   }
 
   // chi tiết 1 danh hiệu: xem trước dạng ảnh (như hiện trên đầu nhân vật) + nút đeo
@@ -1587,7 +1561,7 @@ export function registerAllPanels() {
     body.append(content);
     renderPack();
   });
-  registerPanel('wardrobe', () => openCharHub('wardrobe'));
+  registerPanel('wardrobe', () => openCharHub('equip'));
 
 
   // ================= Tiệm thú cưng =================
@@ -2347,378 +2321,364 @@ export function registerAllPanels() {
   const WD_CAP = 100;
 
   // ===== Tab Trang bị: 6 ô đồ + đập đồ (lấy hệ trang bị của GunPow, bỏ vũ khí) =====
-  function openEquip(body: HTMLElement) {
-    // 'all' = xem hết đồ trong túi, như mục "Toàn bộ" của GunPow
-    let sel: EquipSlot | 'all' = 'ring';
-    const render = () => {
-      body.innerHTML = '';
-      body.classList.add('wd-body');
-      const wrap = h('div', 'wd-wrap');
+  // ================= MÀN NHÂN VẬT =================
+  // MỘT bố cục dùng chung cho cả 4 mục (Trang bị / Tủ đồ / Danh hiệu / Skin),
+  // để chuyển mục chỉ thấy nội dung đổi chứ không thấy đổi hẳn kiểu màn:
+  //
+  //   [ khung trái: danh hiệu · dải ô | nhân vật | dải ô · tên+ID · cấp · lực chiến ]
+  //   [ khung phải: hàng lọc · lưới ô · tối đa 2 nút to                              ]
+  //
+  // Mỗi mục chỉ khai báo: dải ô hai bên là gì, hàng lọc có gì, lưới vẽ ô ra sao,
+  // hai nút dưới cùng làm gì.
+  type ChSlot = { key: string; name: string; art?: HTMLElement; badge?: string;
+                  star?: number; pips?: [number, boolean[]]; grade?: string;
+                  on?: boolean; click: () => void };
+  type ChCell = { name: string; art: HTMLElement; grade?: string; badge?: string;
+                  star?: number; pips?: [number, boolean[]]; flag?: string;
+                  dim?: boolean; on?: boolean; click: () => void };
+  interface ChView {
+    slots: ChSlot[];
+    filters: { key: string; name: string; n?: number }[];
+    cells: ChCell[];
+    empty: string;
+    foot: HTMLElement[];
+    /** kiểu lưới: ô vuông (mặc định) | ô ngang cho danh hiệu | ô cao cho skin */
+    grid?: 'wide' | 'tall';
+    /** vũ khí vẽ trên tay nhân vật (mục Trang bị) */
+    hand?: HTMLElement;
+    /** cụm nút tròn dưới chân nhân vật */
+    quick?: HTMLElement;
+  }
 
-      // ---- trái: nhân vật + 6 ô trang bị + lực chiến ----
-      const left = h('div', 'wd-left');
-      const figure = h('div', 'wd-figure');
-      const colL = h('div', 'wd-slot-col');
-      const colR = h('div', 'wd-slot-col');
-      const mid = h('div', 'wd-char eq-stage');
-      // vòng phép sau lưng nhân vật đúng như màn Nhân vật của GunPow
-      mid.append(forgeCircle());
-      if (S.player.chibi) mid.append(charFaceFluid(S.player.chibi));
-      const half = Math.ceil(EQUIP_SLOTS.length / 2);
-      EQUIP_SLOTS.forEach((sl, i) => {
-        const cell = h('button', `wd-slot eqs-${sl.id} ${sl.id === sel ? 'active' : ''}`);
-        const def = equipDef(S.equip[sl.id]);
-        if (def) {
-          cell.classList.add(`gr-${equipGrade(def.tier)}`);
-          cell.append(spr(def.url, 0, 0, def.w, def.h, 30));
-          const lv = equipLevel(def.id);
-          if (lv > 0) cell.append(h('div', 'eq-plus', `+${lv}`));
-          const st = equipStar(def.id);
-          if (st > 0) cell.append(h('div', 'wd-slot-star', '★'.repeat(st)));
-          // chấm tròn dưới ô = mấy lỗ đá, lỗ nào có đá thì sáng lên
-          const gs = gemsOn(def.id);
-          if (def.sockets > 0) {
-            const pips = h('div', 'wd-slot-pips');
-            for (let k = 0; k < def.sockets; k++) pips.append(h('i', gs[k] ? 'on' : ''));
-            cell.append(pips);
-          }
-          cell.classList.add('has');
-        } else {
-          cell.classList.add('empty');
-          // chỉ ô trống mới cần chữ; ô có đồ thì để ảnh chiếm hết cho gọn,
-          // tên đầy đủ đã nằm ở thẻ bên phải rồi
-          cell.append(h('span', 'wd-slot-name', sl.name));
-        }
-        cell.title = def ? `${def.name}${equipLevel(def.id) ? ` +${equipLevel(def.id)}` : ''}` : sl.name;
-        cell.onclick = () => { sfx.click(); sel = sl.id; render(); };
+  function openCharSection(box: HTMLElement, sec: string) {
+    let filter = '';
+    const render = () => {
+      box.innerHTML = '';
+      const build = () => sec === 'equip' ? viewEquip(filter, render)
+        : sec === 'title' ? viewTitle(filter, render)
+        : sec === 'skin' ? viewSkin(filter, render)
+        : viewCloset(filter, render);
+      // lần đầu vào mục thì chưa có bộ lọc nào được chọn: lấy cái đầu rồi
+      // dựng lại, không thì lưới ra rỗng dù đang có đồ
+      let view = build();
+      if (!view.filters.some(f => f.key === filter)) {
+        filter = view.filters[0]?.key ?? '';
+        view = build();
+      }
+
+      const page = h('div', 'ch-page');
+
+      // ---------- khung trái: nhân vật ----------
+      const side = h('div', 'ch-side');
+      const tt = S.player.title ? TITLES[S.player.title] : undefined;
+      const top = h('div', 'ch-top');
+      const plaque = h('div', 'ch-plaque');
+      if (tt) plaque.append(titlePlaque(tt.name, tt.color ?? '#ffe066', 1.4));
+      else plaque.append(h('div', 'ch-plaque-none', 'Chưa gắn danh hiệu'));
+      const who = h('div', 'ch-who');
+      who.append(h('span', 'ch-lv', `Lv${S.player.level}`), h('span', 'ch-nm', S.player.name));
+      top.append(plaque, who);
+      side.append(top);
+
+      const figure = h('div', `ch-figure ${view.slots.length ? '' : 'bare'}`);
+      const colL = h('div', 'ch-slots');
+      const colR = h('div', 'ch-slots');
+      const doll = h('div', 'ch-doll');
+      if (S.player.chibi) doll.append(charFaceFluid(S.player.chibi));
+
+      const half = Math.ceil(view.slots.length / 2);
+      view.slots.forEach((sl, i) => {
+        const cell = h('button', `ch-slot ${sl.grade ?? ''} ${sl.art ? '' : 'empty'} ${sl.on ? 'on' : ''}`);
+        if (sl.art) cell.append(sl.art);
+        else cell.append(h('span', 'ch-slot-nm', sl.name));
+        if (sl.badge) cell.append(h('div', 'ch-badge', sl.badge));
+        if (sl.star) cell.append(h('div', 'ch-star', '★'.repeat(sl.star)));
+        if (sl.pips) cell.append(pipRow(sl.pips));
+        cell.title = sl.name;
+        cell.onclick = () => { sfx.click(); sl.click(); };
         (i < half ? colL : colR).append(cell);
       });
-      figure.append(colL, mid, colR);
+      for (let i = colR.children.length; i < half; i++) colR.append(h('div', 'ch-slot pad'));
+      if (view.hand) doll.append(view.hand);
+      if (view.quick) doll.append(view.quick);
+      if (view.slots.length) figure.append(colL, doll, colR);
+      else figure.append(doll);
+      side.append(figure);
 
-      // 3 nút tắt dưới chân nhân vật, y như GunPow (cường hoá / gắn đá / cửa hàng đá)
-      const quick = h('div', 'eq-quick');
+      const need = S.player.level * 100;
+      const pct = Math.min(100, Math.round(S.player.exp / need * 1000) / 10);
+      const bar = h('div', 'ch-exp');
+      const fill = h('div', 'ch-exp-f'); fill.style.width = `${pct}%`;
+      bar.append(fill, h('div', 'ch-exp-t', `${S.player.exp}/${need}`));
+      side.append(bar);
+
+      const b2 = cpBreakdown();
+      const cp = h('div', 'ch-cp');
+      cp.append(h('span', 'ch-cp-k', 'Lực chiến:'), h('span', 'ch-cp-n', fmt(combatPower())));
+      cp.title = `Gốc ${b2.base} · Quần áo ${b2.clothes} · Trang bị ${b2.equip}`
+        + ` · Cấp ${b2.level} · Cường hoá ${b2.enhance}`;
+      side.append(cp);
+      page.append(side);
+
+      // ---------- khung phải: hàng lọc + lưới + nút ----------
+      const panel = h('div', 'ch-panel');
+      if (view.filters.length > 1) {
+        const fr = h('div', 'ch-filters');
+        for (const f of view.filters) {
+          const t = h('button', `ch-filter ${f.key === filter ? 'on' : ''}`, f.name);
+          if (f.n) t.append(h('span', 'ch-filter-n', `${f.n}`));
+          t.onclick = () => { sfx.click(); filter = f.key; render(); };
+          fr.append(t);
+        }
+        panel.append(fr);
+      }
+
+      const grid = h('div', `ch-list ${view.grid ? `ch-list-${view.grid}` : ''}`);
+      if (!view.cells.length) grid.append(h('div', 'ch-blank', view.empty));
+      for (const c of view.cells) {
+        const cell = h('button', `ch-cell ${c.grade ?? ''} ${c.on ? 'on' : ''} ${c.dim ? 'dim' : ''}`);
+        cell.append(c.art);
+        if (c.badge) cell.append(h('div', 'ch-badge', c.badge));
+        if (c.star) cell.append(h('div', 'ch-star', '★'.repeat(c.star)));
+        if (c.pips) cell.append(pipRow(c.pips));
+        cell.append(h('div', 'ch-cell-nm', c.name));
+        if (c.flag) cell.append(h('div', 'ch-flag', c.flag));
+        cell.title = c.name;
+        cell.onclick = () => { sfx.click(); c.click(); };
+        grid.append(cell);
+      }
+      panel.append(grid);
+
+      if (view.foot.length) {
+        const ft = h('div', 'ch-foot');
+        view.foot.forEach(x => ft.append(x));
+        panel.append(ft);
+      }
+      page.append(panel);
+      box.append(page);
+    };
+
+    const pipRow = ([n, on]: [number, boolean[]]) => {
+      const r = h('div', 'ch-pips');
+      for (let k = 0; k < n; k++) r.append(h('i', on[k] ? 'on' : ''));
+      return r;
+    };
+
+    // ---------- mục TRANG BỊ ----------
+    const viewEquip = (f: string, redraw: () => void): ChView => {
+      const bag = S.equipBag.map(equipDef).filter((d): d is EquipDef => !!d);
+      const gradeOf = (d: EquipDef) => `gr-${equipGrade(d.tier)}`;
+      // Vũ khí không nằm trong dải ô — nhân vật CẦM nó trên tay như mẫu,
+      // 6 ô còn lại chia đều 3 trái / 3 phải.
+      const slots: ChSlot[] = EQUIP_SLOTS.filter(sl => sl.id !== 'weapon').map(sl => {
+        const d = equipDef(S.equip[sl.id]);
+        return {
+          key: sl.id, name: d ? `${d.name}${equipLevel(d.id) ? ` +${equipLevel(d.id)}` : ''}` : sl.name,
+          art: d ? spr(d.url, 0, 0, d.w, d.h, 34) : undefined,
+          grade: d ? gradeOf(d) : undefined,
+          badge: d && equipLevel(d.id) ? `+${equipLevel(d.id)}` : undefined,
+          star: d ? equipStar(d.id) : 0,
+          pips: d ? [d.sockets, gemsOn(d.id).map(Boolean)] as [number, boolean[]] : undefined,
+          click: () => { if (d) equipDetail(d, redraw); else { filter = sl.id; redraw(); } }
+        };
+      });
+
+      const wp = equipDef(S.equip.weapon);
+      const hand = h('button', `ch-hand ${wp ? gradeOf(wp) : 'empty'}`);
+      if (wp) {
+        hand.append(spr(wp.url, 0, 0, wp.w, wp.h, 52));
+        const wl = equipLevel(wp.id);
+        if (wl) hand.append(h('div', 'ch-badge', `+${wl}`));
+        hand.title = `${wp.name}${wl ? ` +${wl}` : ''}`;
+        hand.onclick = () => { sfx.click(); equipDetail(wp, redraw); };
+      } else {
+        hand.append(h('span', 'ch-slot-nm', 'Vũ khí'));
+        hand.title = 'Chưa cầm vũ khí';
+        hand.onclick = () => { sfx.click(); filter = 'weapon'; redraw(); };
+      }
+
+      const quick = h('div', 'ch-quick');
       const qbtn = (icon: string, w: number, hh: number, tip: string, go: () => void) => {
-        const b2 = h('button', 'eq-q');
-        b2.append(spr(icon, 0, 0, w, hh, 22));
-        b2.title = tip; b2.onclick = () => { sfx.click(); go(); };
-        return b2;
+        const q = h('button', 'ch-q');
+        q.append(spr(icon, 0, 0, w, hh, 22));
+        q.title = tip; q.onclick = () => { sfx.click(); go(); };
+        return q;
       };
       quick.append(
-        qbtn('assets/forge/ic_forge.png', 56, 44, 'Lò rèn',
-          () => openPanel('smithy', { id: S.equip[sel] })),
+        qbtn('assets/forge/ic_forge.png', 56, 44, 'Lò rèn', () => openPanel('smithy')),
         qbtn('assets/equip/stone_034.png', 58, 62, 'Quầy đá', () => openPanel('gemshop')),
-        qbtn('assets/ui/act/gift.png', 13, 12, 'Quầy trang bị', () => openPanel('equipshop')));
-      mid.append(quick);
-
-      const nameRow = h('div', 'wd-name-row');
-      const lvb = h('div', 'wd-lv'); lvb.textContent = `${S.player.level}`;
-      const nm = h('div', 'wd-name'); nm.textContent = S.player.name;
-      nameRow.append(lvb, nm);
-
-      const need = S.player.level * 100;
-      const pct = Math.min(100, Math.round(S.player.exp / need * 1000) / 10);
-      const expRow = h('div', 'wd-exp');
-      const eb = h('div', 'wd-exp-bar');
-      const ef = h('div', 'wd-exp-f'); ef.style.width = `${pct}%`;
-      eb.append(ef);
-      expRow.append(h('div', 'wd-exp-k', 'Cấp'), eb, h('div', 'wd-exp-n', `${pct}%`));
-
-      // lực chiến thay cho bảng chỉ số
-      const b = cpBreakdown();
-      const cpBox = h('div', 'cp-box');
-      const cpN = h('div', 'cp-n'); cpN.textContent = fmt(combatPower());
-      cpBox.append(h('div', 'cp-k', 'LỰC CHIẾN'), cpN);
-      const parts = h('div', 'cp-parts');
-      for (const [k, v] of [['Gốc', b.base], ['Quần áo', b.clothes], ['Trang bị', b.equip], ['Cấp', b.level], ['Đập', b.enhance]] as [string, number][]) {
-        const c = h('div', 'cp-part');
-        c.append(h('div', 'cp-part-k', k), h('div', 'cp-part-v', fmt(v)));
-        parts.append(c);
-      }
-      left.append(figure, nameRow, expRow, cpBox, parts);
-
-      // ---- phải: danh sách món của ô đang chọn + khu đập ----
-      const right = h('div', 'wd-right');
-      const chips = h('div', 'wd-chips');
-      const allChip = h('button', `wd-chip ${sel === 'all' ? 'on' : ''}`);
-      allChip.append(h('div', 'wd-chip-art'), h('span', 'wd-chip-nm', 'Toàn bộ'));
-      const nAll = S.equipBag.filter(id => equipDef(id)).length;
-      if (nAll) allChip.append(h('span', 'wd-chip-n', `${nAll}`));
-      allChip.onclick = () => { sfx.click(); sel = 'all'; render(); };
-      chips.append(allChip);
-      EQUIP_SLOTS.forEach(sl => {
-        const t = h('button', `wd-chip ${sl.id === sel ? 'on' : ''}`);
-        const art = h('div', 'wd-chip-art');
-        const cur = equipDef(S.equip[sl.id]);
-        if (cur) art.append(spr(cur.url, 0, 0, cur.w, cur.h, 24));
-        else { const im = document.createElement('img'); im.src = 'assets/ui/inv/ic_hand.png'; art.append(im); }
-        t.append(art, h('span', 'wd-chip-nm', sl.name));
-        const n = S.equipBag.filter(id => equipDef(id)?.slot === sl.id).length;
-        if (n) t.append(h('span', 'wd-chip-n', `${n}`));
-        t.onclick = () => { sfx.click(); sel = sl.id; render(); };
-        chips.append(t);
-      });
-      right.append(chips);
-
-      const card = h('div', 'wd-card');
-      const cur = sel === 'all' ? undefined : equipDef(S.equip[sel]);
-
-      // khu đập cho món đang đeo
-      if (cur) {
-        const lv = equipLevel(cur.id);
-        const box = h('div', 'sm-box');
-        const art = h('div', 'sm-art');
-        art.append(spr(cur.url, 0, 0, cur.w, cur.h, 44));
-        if (lv > 0) art.append(h('div', 'eq-plus', `+${lv}`));
-        const info = h('div', 'sm-info');
-        const st = pieceStats(cur, lv, equipStar(cur.id), gemsOn(cur.id));
-        const txt = STAT_KEYS.filter(k => st[k] > 0).map(k => `${STAT_NAMES[k]} +${st[k]}`).join(' · ');
-        info.append(h('div', 'sm-nm', `${cur.name}${lv ? ` +${lv}` : ''}`), h('div', 'sm-st', txt));
-        box.append(art, info);
-
-        // sao + lỗ đá ngay trong thẻ tóm tắt
-        const meta = h('div', 'sm-meta');
-        meta.append(h('div', 'sm-star', '★'.repeat(equipStar(cur.id)) + '☆'.repeat(MAX_STAR - equipStar(cur.id))));
-        const socks = h('div', 'sm-socks');
-        gemsOn(cur.id).forEach(gid => {
-          const sk = h('div', `sm-sock ${gid ? 'on' : ''}`);
-          const g = gemDef(gid);
-          if (g) sk.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 18));
-          socks.append(sk);
-        });
-        meta.append(socks, btn('Cởi ra', 'mini', () => { unequipPiece(cur.slot); render(); }));
-        box.append(meta);
-        card.append(box);
-        // 3 trang riêng như GunPow
-        const acts = h('div', 'eq-acts');
-        acts.append(
-          btn('Cường hoá', 'gold', () => openPanel('smithy', { id: cur.id })),
-          btn('Tẩy luyện', 'blue', () => openPanel('reforge', { id: cur.id })),
-          btn('Tăng sao', '', () => openPanel('starup', { id: cur.id })),
-          btn('Gắn đá', '', () => openPanel('socket', { id: cur.id })),
-          btn('Kế thừa', '', () => openPanel('inheritpage', { id: cur.id })));
-        card.append(acts);
-      }
-
-      // danh sách món cùng ô trong túi
-      const list = S.equipBag.map(equipDef)
-        .filter((d): d is EquipDef => !!d && (sel === 'all' || d.slot === sel))
-        .sort((a, b2) => b2.tier - a.tier);
-      card.append(h('div', 'up-cap', `TRONG TÚI (${list.length})`));
-      if (!list.length) {
-        card.append(h('div', 'wd-blank', sel === 'all'
-          ? 'Túi trang bị đang trống — mở rương trang bị ở Bách hóa để kiếm.'
-          : 'Chưa có món nào cho ô này — mở rương trang bị ở Bách hóa để kiếm.'));
-      } else {
-        const grid = h('div', 'eq-grid');
-        for (const d of list) {
-          const c = h('button', `eq-cell gr-${equipGrade(d.tier)}`);
-          c.append(spr(d.url, 0, 0, d.w, d.h, 34));
-          const l2 = equipLevel(d.id);
-          if (l2 > 0) c.append(h('div', 'eq-plus', `+${l2}`));
-          c.append(h('div', 'eq-nm', d.name));
-          c.title = `${d.name} — bậc ${d.tier}`;
-          c.onclick = () => { equipPiece(d.id); render(); };
-          grid.append(c);
-        }
-        card.append(grid);
-      }
-      right.append(card);
-
-      const foot = h('div', 'eq-foot');
-      foot.append(btn('Mặc tối ưu', 'gold', () => { autoEquip(); render(); }));
-      right.append(foot);
-
-      wrap.append(left, right);
-      body.append(wrap);
+        qbtn('assets/ui/act/gift.png', 13, 12, 'Rương trang bị', () => openPanel('chestopen')));
+      const list = f === 'worn' ? worn().map(w => w.def)
+        : bag.filter(d => f === 'all' || d.slot === f).sort((a, c) => c.tier - a.tier);
+      return {
+        slots,
+        filters: [{ key: 'all', name: 'Toàn bộ', n: bag.length },
+                  { key: 'worn', name: 'Trên người', n: worn().length },
+                  ...EQUIP_SLOTS.map(sl => ({ key: sl.id, name: sl.name,
+                    n: bag.filter(d => d.slot === sl.id).length }))],
+        cells: list.map(d => ({
+          name: d.name, art: spr(d.url, 0, 0, d.w, d.h, 40), grade: gradeOf(d),
+          badge: equipLevel(d.id) ? `+${equipLevel(d.id)}` : undefined,
+          star: equipStar(d.id), pips: [d.sockets, gemsOn(d.id).map(Boolean)],
+          flag: S.equip[d.slot] === d.id ? 'Đang đeo' : undefined,
+          on: S.equip[d.slot] === d.id,
+          click: () => equipDetail(d, redraw)
+        })),
+        empty: f === 'worn' ? 'Chưa đeo món nào.'
+          : 'Không có món nào ở mục này — mở rương trang bị để kiếm.',
+        hand, quick,
+        foot: [btn('Lò rèn', 'gold', () => openPanel('smithy')),
+               btn('Mặc tối ưu', 'green', () => { autoEquip(); redraw(); })]
+      };
     };
-    render();
-  }
 
-  function openWardrobe(body: HTMLElement, mode: 'wear' | 'skin' = 'wear') {
-    const look = S.player.chibi;
-    if (!look) return;
-    const apply = () => { save(); bus.emit(EV.APPEARANCE); };
-
-    type SlotKey = 'pant' | 'shirt' | 'hair' | 'eyes' | 'hat' | 'glasses' | 'hand' | 'skin';
-    // [icon UI, nhãn, z, khoá, tuỳ chọn]   z = -1 -> ô Skin trọn bộ
-    // Xếp 3 ô mỗi bên nhân vật đúng như mẫu của pack: trái mũ/kính/tóc,
-    // phải áo/quần/đồ cầm tay. Mắt vẫn để ở viện thẩm mỹ.
-    const ALL: [string, string, number, SlotKey, boolean][] = [
-      ['hat', 'Mũ', 60, 'hat', true],
-      ['glasses', 'Kính', 65, 'glasses', true],
-      ['hair', 'Tóc', 50, 'hair', false],
-      ['shirt', 'Áo', 20, 'shirt', false],
-      ['pants', 'Quần', 10, 'pant', false],
-      ['hand', 'Cầm tay', 70, 'hand', true]
+    // ---------- mục TỦ ĐỒ (quần áo chibi) ----------
+    type ClosetKey = 'hat' | 'glasses' | 'hair' | 'shirt' | 'pant' | 'hand';
+    const CLOSET: [ClosetKey, string, number, boolean][] = [
+      ['hat', 'Mũ', 60, true], ['glasses', 'Kính', 65, true], ['hair', 'Tóc', 50, false],
+      ['shirt', 'Áo', 20, false], ['pant', 'Quần', 10, false], ['hand', 'Cầm tay', 70, true]
     ];
-    // Skin là mục riêng ở cột tab dọc nên không nằm chung dải tab ngang
-    const SLOTS: [string, string, number, SlotKey, boolean][] =
-      mode === 'skin' ? [['wardrobe', 'Skin', -1, 'skin', true]] : ALL;
-    let tab = 0;
-
-    const render = () => {
-      body.innerHTML = '';
-      body.classList.add('wd-body');
-      const wrap = h('div', 'wd-wrap');
-
-      // ----- trái: nhân vật đứng giữa 2 cột ô trang bị, dưới là tên + cấp + chỉ số -----
-      // Bố cục theo mẫu màn Equipment: 3 ô mỗi bên, nhân vật trên bục tròn.
-      // Chiều cao hàng do CỘT Ô quyết định (không phải ảnh nhân vật) nên ảnh
-      // không bao giờ đẩy khung phình ra rồi bị cắt mất chân.
-      const left = h('div', 'wd-left');
-      const figure = h('div', 'wd-figure');
-      const colL = h('div', 'wd-slot-col');
-      const colR = h('div', 'wd-slot-col');
-      const mid = h('div', 'wd-char');
-      mid.append(charFaceFluid(look));
-      if (mode !== 'skin') {
-        SLOTS.forEach(([ico, name, z, key], i) => {
-          const cell = h('button', `wd-slot eq-${key} ${i === tab ? 'active' : ''}`);
-          const cur = look[key];
-          if (cur) cell.append(z <= 20 || z === 70 ? chibiPreview(cur as number, 30) : chibiHead(cur as number, 30, z));
-          else { cell.classList.add('empty'); void ico; }
-          cell.append(h('span', 'wd-slot-name', name));
-          cell.title = name;
-          cell.onclick = () => { sfx.click(); tab = i; render(); };
-          (i < Math.ceil(SLOTS.length / 2) ? colL : colR).append(cell);
-        });
-        figure.append(colL, mid, colR);
-      } else {
-        figure.append(mid);
-      }
-
-      const nameRow = h('div', 'wd-name-row');
-      const lv = h('div', 'wd-lv'); lv.textContent = `${S.player.level}`;
-      const nm = h('div', 'wd-name'); nm.textContent = S.player.name;
-      nameRow.append(lv, nm);
-
-      // thanh kinh nghiệm như mẫu: "Cấp 3 ... 31.8%"
-      const need = S.player.level * 100;
-      const pct = Math.min(100, Math.round(S.player.exp / need * 1000) / 10);
-      const expRow = h('div', 'wd-exp');
-      const eb = h('div', 'wd-exp-bar');
-      const ef = h('div', 'wd-exp-f'); ef.style.width = `${pct}%`;
-      eb.append(ef);
-      expRow.append(h('div', 'wd-exp-k', 'Cấp'), eb, h('div', 'wd-exp-n', `${pct}%`));
-
-      left.append(figure, nameRow, expRow);
-
-      if (mode !== 'skin') {
-        // Ở đây hiện LỰC CHIẾN chứ không bày bảng chỉ số nữa — chỉ số chi tiết
-        // xem ở tab Trang bị.
-        const b = cpBreakdown();
-        const cpBox = h('div', 'cp-box');
-        const cpN = h('div', 'cp-n'); cpN.textContent = fmt(combatPower());
-        cpBox.append(h('div', 'cp-k', 'LỰC CHIẾN'), cpN);
-        const parts = h('div', 'cp-parts');
-        for (const [k, v] of [['Gốc', b.base], ['Quần áo', b.clothes], ['Trang bị', b.equip], ['Cấp', b.level], ['Đập', b.enhance]] as [string, number][]) {
-          const c = h('div', 'cp-part');
-          c.append(h('div', 'cp-part-k', k), h('div', 'cp-part-v', fmt(v)));
-          parts.append(c);
-        }
-        left.append(cpBox, parts);
-      }
-
-      // ----- phải: chia tab + card lưới ô (có cả ô trống như tủ đồ game) -----
-      const right = h('div', 'wd-right');
-      if (SLOTS.length > 1) {
-        // dải chip icon kiểu Cozy UI Pack: chọn cái nào thì có khung góc bao quanh
-        const tabBar = h('div', 'wd-chips');
-        SLOTS.forEach(([, name2, z2, key2], i) => {
-          const t = h('button', `wd-chip ${i === tab ? 'on' : ''}`);
-          const ic = document.createElement('img');
-          ic.src = `assets/ui/inv/ic_${key2 === 'pant' ? 'pants' : key2}.png`;
-          ic.alt = name2;
-          const art = h('div', 'wd-chip-art'); art.append(ic);
-          t.append(art, h('span', 'wd-chip-nm', name2));
-          // số món đang có của mục này, để biết chỗ nào có đồ mà bấm
-          const n = chibiList(z2, look.gender).filter(p => S.chibiWardrobe.includes(p.id)).length;
-          if (n) t.append(h('span', 'wd-chip-n', `${n}`));
-          t.title = name2;
-          t.onclick = () => { sfx.click(); tab = i; render(); };
-          tabBar.append(t);
-        });
-        right.append(tabBar);
-      }
-
-      const [, , z, key, optional] = SLOTS[tab];
-      const card = h('div', 'wd-card');
-      const grid = h('div', 'wd-grid');
-
-      // ----- ô Skin: chọn trọn bộ đã sở hữu -----
-      if (z === -1) {
-        grid.className = 'wd-grid skin-grid';
-        // hiện toàn bộ skin hệ thống có; bộ chưa sở hữu để xám
-        for (const sk of SKIN_LIST) {
-          const owned = S.skins.includes(sk.id);
-          const on = look.skin === sk.id;
-          const cell2 = h('button', `skin-card ${on ? 'active' : ''} ${owned ? '' : 'locked'}`);
-          const art = h('div', 'skin-art'); art.append(skinFace(sk, 96));
-          cell2.append(art, h('div', 'nm', sk.name));
-          if (on) cell2.append(h('div', 'skin-on', 'Đang mặc'));
-          else if (!owned) cell2.append(h('div', 'skin-lock', 'Chưa có'));
-          cell2.onclick = () => {
-            sfx.click();
-            if (!owned) { toast(`${sk.name} chưa sở hữu — mua ở tab Skin của Thời trang Cô Trang.`, 'shop'); return; }
-            look.skin = on ? undefined : sk.id; apply(); render();
+    const viewCloset = (f: string, redraw: () => void): ChView => {
+      const look = S.player.chibi!;
+      const apply = () => { save(); bus.emit(EV.APPEARANCE); redraw(); };
+      const art = (id: number, z: number, size: number) =>
+        z <= 20 || z === 70 ? chibiPreview(id, size) : chibiHead(id, size, z);
+      const cur = CLOSET.find(c => c[0] === f) ?? CLOSET[0];
+      const [key, , z, optional] = cur;
+      const wearing = look[key] as number;
+      const owned = chibiList(z, look.gender).filter(p => S.chibiWardrobe.includes(p.id) || p.id === wearing);
+      return {
+        slots: CLOSET.map(([k, nm, zz]) => {
+          const id = look[k] as number;
+          return {
+            key: k, name: id ? (CHIBI_PARTS[id]?.name ?? nm) : nm,
+            art: id ? art(id, zz, 34) : undefined, on: k === key,
+            click: () => { filter = k; redraw(); }
           };
-          grid.append(cell2);
-        }
-        card.append(grid);
-        right.append(h('div', 'hint', S.skins.length ? 'Mặc skin sẽ thay toàn bộ trang phục — bấm lại bộ đang mặc để cởi ra.' : 'Chưa có skin nào — mua trọn bộ ở tab Skin của Thời trang Cô Trang!'));
-        right.append(card);
-        wrap.append(left, right);
-        body.append(wrap);
-        return;
-      }
-      const pk = key as Exclude<SlotKey, 'skin'>;
-      const cur = (look as any)[pk] as number;
-      const owned = chibiList(z, look.gender).filter(p => S.chibiWardrobe.includes(p.id) || p.id === cur);
-      let cells = 0;
-      for (const p of owned) {
-        const on = cur === p.id;
-        const cell = h('button', `wd-item ${on ? 'active' : ''}`);
-        const box = h('div', 'wd-item-box');
-        box.append(z <= 20 || z === 70 ? chibiPreview(p.id, 44) : chibiHead(p.id, 40, z));
-        if (on) box.append(h('div', 'wd-item-on', 'Đang mặc'));
-        cell.append(box, h('div', 'nm', p.name));
-        cell.title = p.name;
-        cell.onclick = () => { (look as any)[pk] = on && optional ? 0 : p.id; apply(); render(); };
-        grid.append(cell); cells++;
-      }
-      const wearing = owned.find(p2 => p2.id === cur);
-      if (!cells) {
-        // chưa có món nào: hiện hẳn một khối rỗng có icon cho đỡ trống trơn
-        const em = h('div', 'wd-blank');
-        const ei = document.createElement('img');
-        ei.src = `assets/ui/inv/ic_${key === 'pant' ? 'pants' : key}.png`;
-        em.append(ei, h('div', '', `Chưa có ${SLOTS[tab][1].toLowerCase()} nào`),
-          h('div', 'sub', 'Ghé shop thời trang ở Khu mua sắm để sắm nhé!'));
-        card.append(em);
-      } else {
-        // lấp cho đủ hàng (không vẽ hết 100 ô rỗng — cuộn cả màn ô trống nhìn rất trống)
-        const perRow = 5;
-        const pad = cells <= perRow * 2 ? perRow * 2 - cells : (perRow - cells % perRow) % perRow;
-        for (let i = 0; i < Math.min(pad, WD_CAP - cells); i++) {
-          const e = h('div', 'wd-item wd-empty'); e.append(h('div', 'wd-item-box')); grid.append(e);
-        }
-        card.append(grid);
-      }
-      const note = h('div', 'wd-note');
-      note.append(h('span', 'wd-note-t', wearing ? `Đang mặc: ${wearing.name}`
-        : cells ? `Đang có ${cells} món — bấm để mặc` : ''));
-      if (wearing && optional) note.append(btn('Cởi ra', 'mini', () => {
-        sfx.click(); (look as any)[pk] = 0; apply(); render();
-      }));
-      right.append(card);
-      if (note.textContent) right.append(note);
-
-      wrap.append(left, right);
-      body.append(wrap);
+        }),
+        filters: CLOSET.map(([k, nm, zz]) => ({ key: k, name: nm,
+          n: chibiList(zz, look.gender).filter(p => S.chibiWardrobe.includes(p.id)).length })),
+        cells: owned.map(p => ({
+          name: p.name, art: art(p.id, z, 40),
+          flag: wearing === p.id ? 'Đang mặc' : undefined, on: wearing === p.id,
+          click: () => { (look as unknown as Record<string, unknown>)[key] = wearing === p.id && optional ? 0 : p.id; apply(); }
+        })),
+        empty: `Chưa có ${cur[1].toLowerCase()} nào — ghé shop thời trang ở Khu mua sắm.`,
+        foot: [
+          btn('Cởi món này', '', () => {
+            if (!optional) { toast(`${cur[1]} không cởi được.`, 'alert'); return; }
+            (look as unknown as Record<string, unknown>)[key] = 0; apply();
+          }),
+          btn('Shop thời trang', 'gold', () => openPanel('fashion'))]
+      };
     };
+
+    // ---------- mục DANH HIỆU ----------
+    const viewTitle = (f: string, redraw: () => void): ChView => {
+      const ids = Object.keys(TITLES);
+      const mine = ids.filter(id => S.player.titles.includes(id));
+      const list = f === 'mine' ? mine : ids;
+      return {
+        slots: [],
+        filters: [{ key: 'mine', name: 'Đang có', n: mine.length },
+                  { key: 'all', name: 'Tất cả', n: ids.length }],
+        cells: list.map(id => {
+          const t = TITLES[id];
+          const has = S.player.titles.includes(id);
+          const wrapc = h('div', 'ch-title-art');
+          wrapc.append(titlePlaque(t.name, has ? t.color : '#9b8a72', 1));
+          return {
+            name: t.source, art: wrapc, dim: !has, on: S.player.title === id,
+            flag: S.player.title === id ? 'Đang đeo' : undefined,
+            click: () => openTitleDetail(id, redraw)
+          };
+        }),
+        empty: 'Chưa mở khoá danh hiệu nào.',
+        grid: 'wide',
+        foot: [btn('Gỡ danh hiệu', '', () => {
+          if (!S.player.title) { toast('Đang không đeo danh hiệu nào.', 'alert'); return; }
+          S.player.title = ''; save(); bus.emit(EV.STATE_CHANGED); redraw();
+        })]
+      };
+    };
+
+    // ---------- mục SKIN ----------
+    const viewSkin = (f: string, redraw: () => void): ChView => {
+      const look = S.player.chibi!;
+      const mine = SKIN_LIST.filter(sk => S.skins.includes(sk.id));
+      const list = f === 'mine' ? mine : SKIN_LIST;
+      return {
+        slots: [],
+        filters: [{ key: 'mine', name: 'Đang có', n: mine.length },
+                  { key: 'all', name: 'Tất cả', n: SKIN_LIST.length }],
+        cells: list.map(sk => {
+          const has = S.skins.includes(sk.id);
+          const on = look.skin === sk.id;
+          const wrapc = h('div', 'ch-skin-art'); wrapc.append(skinFace(sk, 72));
+          return {
+            name: sk.name, art: wrapc, dim: !has, on,
+            flag: on ? 'Đang mặc' : undefined,
+            click: () => {
+              if (!has) { toast(`${sk.name} chưa sở hữu — mua ở tab Skin của Thời trang Cô Trang.`, 'shop'); return; }
+              look.skin = on ? undefined : sk.id;
+              save(); bus.emit(EV.APPEARANCE); redraw();
+            }
+          };
+        }),
+        empty: 'Chưa có skin nào — mua trọn bộ ở Thời trang Cô Trang.',
+        grid: 'tall',
+        foot: [btn('Cởi skin', '', () => {
+          if (!look.skin) { toast('Đang không mặc skin nào.', 'alert'); return; }
+          look.skin = undefined; save(); bus.emit(EV.APPEARANCE); redraw();
+        })]
+      };
+    };
+
     render();
   }
 
+  // Thẻ chi tiết một món trang bị — mở từ ô trên người hoặc ô trong lưới
+  function equipDetail(d: EquipDef, redraw: () => void) {
+    const lv = equipLevel(d.id), star = equipStar(d.id);
+    const isWorn = S.equip[d.slot] === d.id;
+    const { body, close } = openWindow(`${d.name}${lv ? ` +${lv}` : ''}`, { size: 'small' });
+    const st = pieceStats(d, lv, star, gemsOn(d.id));
+    const line = STAT_KEYS.filter(k => st[k] > 0).map(k => `${STAT_NAMES[k]} +${st[k]}`).join(' · ');
+
+    const head = h('div', 'eqd-head');
+    const art = h('div', `eqd-art gr-${equipGrade(d.tier)}`);
+    art.append(spr(d.url, 0, 0, d.w, d.h, 46));
+    if (lv > 0) art.append(h('div', 'ch-badge', `+${lv}`));
+    const info = h('div', 'eqd-info');
+    info.append(h('div', 'eqd-slot', `${SLOT_OF[d.slot].name} · bậc ${d.tier}`),
+      h('div', 'eqd-star', '★'.repeat(star) + '☆'.repeat(MAX_STAR - star)),
+      h('div', 'eqd-st', line));
+    head.append(art, info);
+    body.append(head);
+
+    if (d.sockets) {
+      const socks = h('div', 'eqd-socks');
+      gemsOn(d.id).forEach(gid => {
+        const sk = h('div', `eqd-sock ${gid ? 'on' : ''}`);
+        const g = gemDef(gid);
+        if (g) sk.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 20));
+        socks.append(sk);
+      });
+      body.append(socks);
+    }
+
+    const acts = h('div', 'eqd-acts');
+    acts.append(isWorn
+      ? btn('Cởi ra', '', () => { unequipPiece(d.slot); close(); redraw(); })
+      : btn('Trang bị', 'gold', () => { equipPiece(d.id); close(); redraw(); }));
+    acts.append(
+      btn('Cường hoá', 'blue', () => { close(); openPanel('smithy', { id: d.id }); }),
+      btn('Tẩy luyện', '', () => { close(); openPanel('reforge', { id: d.id }); }),
+      btn('Tăng sao', '', () => { close(); openPanel('starup', { id: d.id }); }),
+      btn('Khảm', '', () => { close(); openPanel('socket', { id: d.id }); }),
+      btn('Kế thừa', '', () => { close(); openPanel('inheritpage', { id: d.id }); }));
+    body.append(acts);
+  }
 
   function colorSwatches(n: number, active: number, onPick: (i: number) => void, names?: string[]): HTMLElement {
     const HAIR_HEX = ['#2b2b2b', '#e6c25a', '#8a5a33', '#c49a6c', '#b3592e', '#2e8b6f', '#4caf50', '#9aa5b1', '#c6a3e0', '#2c3e70', '#f7a3c2', '#8e44ad', '#c0392b', '#39c2c9'];

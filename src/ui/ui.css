@@ -992,17 +992,17 @@ input.ui-input, select.ui-input {
    điện thoại thiếu chiều cao nên bỏ dải tab ngang trên đầu cho nội dung rộng ra */
 .wr-tabs {
   flex: none; width: 92px; display: flex; flex-direction: column; gap: 8px;
-  padding: 34px 8px 14px 0; justify-content: flex-start;
-  background: rgba(0, 0, 0, .12); border-right: 1px solid rgba(255, 255, 255, .18);
+  padding: 34px 0 14px 8px; justify-content: flex-start; overflow: hidden;
+  background: rgba(0, 0, 0, .12); border-left: 1px solid rgba(255, 255, 255, .18);
 }
 /* dải tab bám mép TRÁI nên chỉ bo tròn phía PHẢI — mép trái phải phẳng để
    ăn liền vào thành khung, bo cả 4 góc trông như đang trôi giữa trời */
 .wr-tab {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-  cursor: pointer; font-family: inherit; padding: 7px 6px 8px 4px; width: 100%;
+  cursor: pointer; font-family: inherit; padding: 7px 4px 8px 6px; width: 100%;
   font-size: 10px; font-weight: 900; color: #e7f0dd;
   background: rgba(255, 255, 255, .18); border: 1px solid rgba(255, 255, 255, .26);
-  border-left: none; border-radius: 0 14px 14px 0; text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+  border-right: none; border-radius: 14px 0 0 14px; text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
 }
 .wr-tab span { max-width: 100%; white-space: normal; line-height: 1.15; text-align: center; }
 .wr-tab img { width: 24px; height: 22px; object-fit: contain; filter: saturate(.4) opacity(.75); }
@@ -1802,7 +1802,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   .od-ing { width: 58px; padding: 6px 3px 9px; }
   .od-ing-art { height: 34px; }
   .wd-slot-col { width: 40px; }
-  .wr-tabs { width: 76px; padding: 26px 6px 10px 0; }
+  .wr-tabs { width: 76px; padding: 26px 0 10px 6px; }
   .wr-tab { font-size: 9px; padding: 5px 3px 6px; }
 }
 
@@ -2491,51 +2491,228 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .gp-stage.rf .rf-nm { font-size: 11.5px; }
 .gp-stage.rf .rf-lock { height: 21px; width: 24px; font-size: 11px; }
 
-/* ===== Màn Trang bị: dựng theo màn Nhân vật của GunPow ===== */
-/* vòng phép sau lưng nhân vật — nằm dưới cùng, không ăn vào chiều cao khung */
-.wd-char.eq-stage > .fx-circle { inset: 6% 8% 22%; opacity: .5; z-index: 0; }
-/* chừa chỗ dưới chân cho cụm nút tắt, không thì nút đè lên nhân vật */
-.wd-char.eq-stage > .chibi-fluid { z-index: 1; bottom: 40px; }
-
-/* số sao + chấm lỗ đá gắn trên từng ô trang bị, y như GunPow */
-.wd-slot-star {
-  position: absolute; left: 0; right: 0; top: 1px; z-index: 3; text-align: center;
-  font-size: 7px; line-height: 1; letter-spacing: -.5px; color: #ffe066;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .85);
-}
-.wd-slot-pips {
-  position: absolute; left: 0; right: 0; bottom: 12px; z-index: 3;
-  display: flex; gap: 2px; justify-content: center;
-}
-.wd-slot-pips i {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: rgba(0, 0, 0, .45); box-shadow: 0 0 0 1px rgba(255, 255, 255, .35);
-}
-.wd-slot-pips i.on { background: #7be0ff; box-shadow: 0 0 4px 1px rgba(120, 210, 255, .9); }
-
-/* cụm nút tắt dưới chân nhân vật */
-.eq-quick {
-  position: absolute; left: 0; right: 0; bottom: 2px; z-index: 4;
-  display: flex; gap: 6px; justify-content: center;
-}
-.eq-q {
-  width: 30px; height: 30px; padding: 0; cursor: pointer; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(rgba(126, 166, 128, .6), rgba(78, 118, 86, .74));
-  border: 1px solid rgba(255, 233, 168, .6);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 2px 5px rgba(0, 0, 0, .3);
-}
-.eq-q:active { transform: scale(.92); }
-
-/* Ô trang bị có đồ: ảnh chiếm hết ô như GunPow, không còn dòng chữ cắt cụt.
-   Ô trống vẫn giữ chữ để biết đó là ô gì. */
-.wd-slot.has { padding: 0; }
-.wd-slot.has > .spr { max-height: 88%; }
-.wd-slot.has .wd-slot-pips { bottom: 2px; }
-
 /* Viền ô theo hạng phẩm chất, đọc màu là biết đồ xịn hay không (kiểu GunPow) */
 .gr-thuong { border-color: rgba(255, 255, 255, .45) !important; }
 .gr-tot    { border-color: #8ce06a !important; box-shadow: inset 0 0 8px rgba(140, 224, 106, .3); }
 .gr-hiem   { border-color: #63b8ff !important; box-shadow: inset 0 0 8px rgba(99, 184, 255, .32); }
 .gr-quy    { border-color: #c98cff !important; box-shadow: inset 0 0 9px rgba(201, 140, 255, .35); }
 .gr-thanh  { border-color: #ffb347 !important; box-shadow: inset 0 0 10px rgba(255, 179, 71, .4); }
+
+
+/* --- thẻ chi tiết một món --- */
+.eqd-head { display: flex; gap: 10px; align-items: center; }
+.eqd-art {
+  position: relative; flex: none; width: 58px; height: 58px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, .26); border: 2px solid rgba(255, 255, 255, .34);
+}
+.eqd-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.eqd-slot { font-size: 11px; font-weight: 800; color: rgba(255, 255, 255, .6); }
+.eqd-star { font-size: 12px; letter-spacing: 1px; color: #ffe066; }
+.eqd-st { font-size: 11.5px; font-weight: 800; color: #b6f2a0; line-height: 1.35; }
+.eqd-socks { display: flex; gap: 6px; justify-content: center; margin-top: 9px; }
+.eqd-sock {
+  width: 28px; height: 28px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, .3); border: 1px dashed rgba(255, 255, 255, .35);
+}
+.eqd-sock.on { border-style: solid; border-color: rgba(120, 210, 255, .8); }
+.eqd-acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 11px; }
+.eqd-acts .btn { flex: 1 1 30%; }
+
+
+/* ================= MÀN NHÂN VẬT =================
+   Một bộ quy tắc dùng chung cho cả 4 mục: Trang bị · Tủ đồ · Danh hiệu · Skin.
+   Khung trái luôn là nhân vật, khung phải luôn là hàng lọc + lưới + nút.       */
+.ch-page { display: flex; gap: 10px; height: 100%; min-height: 0; }
+.ch-side, .ch-panel {
+  min-width: 0; min-height: 0; display: flex; flex-direction: column;
+  border-radius: 16px; padding: 8px 10px 10px;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22);
+}
+.ch-side { flex: 0 0 44%; }
+.ch-panel { flex: 1; padding: 8px 8px 9px; }
+
+/* --- khung trái --- */
+.ch-top { flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.ch-plaque { flex: none; height: 26px; display: flex; align-items: center; justify-content: center; }
+.ch-who { display: flex; align-items: baseline; gap: 6px; max-width: 100%; }
+.ch-lv { flex: none; font-size: 12px; font-weight: 900; color: #ffe066; }
+.ch-nm {
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 13px; font-weight: 900; color: #fff8e8; text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+}
+.ch-plaque canvas { max-height: 26px; width: auto; }
+.ch-plaque-none { font-size: 10px; font-weight: 800; color: rgba(255, 255, 255, .42); }
+
+.ch-figure { flex: 1 1 0; min-height: 0; display: flex; gap: 6px; align-items: stretch; }
+.ch-slots { flex: 0 0 52px; display: flex; flex-direction: column; gap: 5px; }
+.ch-slot {
+  position: relative; flex: 1 1 0; min-height: 0; width: 100%;
+  border-radius: 10px; padding: 0; cursor: pointer; font-family: inherit; overflow: visible;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(rgba(126, 166, 128, .5), rgba(78, 118, 86, .66));
+  border: 2px solid rgba(255, 255, 255, .32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22);
+}
+.ch-slot.pad { visibility: hidden; }
+.ch-slot.empty { background: rgba(0, 0, 0, .16); border-style: dashed; }
+.ch-slot.on { border-color: #ffd43b; box-shadow: 0 0 0 2px rgba(255, 212, 59, .4); }
+.ch-slot:active { transform: scale(.94); }
+.ch-slot-nm {
+  font-size: 8px; font-weight: 900; color: rgba(255, 255, 255, .55);
+  text-align: center; line-height: 1.15; padding: 0 2px;
+}
+
+/* nhân vật: nền tròn mềm cho có chỗ đứng, không mượn vòng phép của lò rèn */
+.ch-doll { position: relative; flex: 1 1 0; min-width: 0; min-height: 0; overflow: hidden; }
+.ch-doll::before {
+  content: ''; position: absolute; left: 50%; top: 52%; translate: -50% -50%;
+  width: 84%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, .16) 0 42%, rgba(255, 255, 255, .04) 62%, transparent 72%);
+}
+.ch-doll > .chibi-fluid { position: absolute; left: 50%; translate: -50% 0; top: 2px; bottom: 36px; }
+.ch-figure.bare .ch-doll { flex: 1; }
+
+/* vũ khí nhân vật đang cầm — đặt chếch bên trái ngang tầm tay như mẫu */
+/* lớp hạng phẩm chất có sẵn viền + quầng trong; món cầm trên tay thì bỏ hết,
+   chỉ để đúng cái ảnh vũ khí */
+.ch-hand:not(.empty) { box-shadow: none !important; border-color: transparent !important; }
+.ch-hand {
+  position: absolute; left: 1%; top: 44%; z-index: 2;
+  width: 58px; height: 58px; padding: 0; cursor: pointer; font-family: inherit;
+  display: flex; align-items: center; justify-content: center;
+  border: none; background: none;
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, .45));
+}
+.ch-hand.empty {
+  width: 46px; height: 46px; border-radius: 11px;
+  border: 2px dashed rgba(255, 255, 255, .3); background: rgba(0, 0, 0, .16);
+  filter: none;
+}
+.ch-hand:active { transform: scale(.94); }
+
+.ch-quick {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 4;
+  display: flex; gap: 7px; justify-content: center;
+}
+.ch-q {
+  width: 30px; height: 30px; padding: 0; cursor: pointer; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(rgba(126, 166, 128, .62), rgba(78, 118, 86, .76));
+  border: 1px solid rgba(255, 233, 168, .6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 2px 5px rgba(0, 0, 0, .3);
+}
+.ch-q:active { transform: scale(.9); }
+
+.ch-name { flex: none; display: flex; align-items: center; gap: 7px; padding-top: 6px; }
+.ch-name .wd-lv { margin-right: 0; }
+.ch-name-t {
+  flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 13px; font-weight: 900; color: #fff8e8; text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+}
+.ch-id { flex: none; font-size: 10px; font-weight: 800; color: rgba(255, 255, 255, .5); }
+.ch-exp {
+  flex: none; position: relative; height: 13px; margin-top: 4px;
+  border-radius: 999px; overflow: hidden;
+  background: rgba(0, 0, 0, .35); border: 1px solid rgba(255, 255, 255, .22);
+}
+.ch-exp-f { height: 100%; background: linear-gradient(#b6f2a0, #5fbf58); }
+.ch-exp-t {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 8.5px; font-weight: 900; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .7);
+}
+.ch-cp {
+  flex: none; display: flex; align-items: baseline; gap: 6px; margin-top: 5px;
+  justify-content: center; padding: 3px 10px 4px; border-radius: 999px;
+  background: linear-gradient(rgba(255, 255, 255, .2), rgba(255, 255, 255, .06));
+  border: 1px solid rgba(255, 233, 168, .5);
+}
+.ch-cp-k { font-size: 11px; font-weight: 900; color: #e7f0dd; }
+.ch-cp-n { font-size: 19px; font-weight: 900; color: #ffe066; text-shadow: 0 2px 4px rgba(0, 0, 0, .55); }
+
+/* --- khung phải --- */
+.ch-filters {
+  flex: none; display: flex; gap: 4px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none;
+  mask-image: linear-gradient(to right, #000 calc(100% - 22px), transparent);
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 22px), transparent);
+}
+.ch-filters::-webkit-scrollbar { display: none; }
+.ch-filter {
+  flex: none; padding: 5px 11px 6px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+  font-family: inherit; font-size: 11px; font-weight: 900; color: #e7f0dd;
+  background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .26);
+}
+.ch-filter.on { background: linear-gradient(#ffe066, #f0a318); border-color: #ffe9a8; color: #4a3005; }
+.ch-filter-n {
+  margin-left: 4px; font-size: 9px; padding: 0 4px; border-radius: 999px;
+  background: rgba(0, 0, 0, .28); color: #fff8e0;
+}
+.ch-filter.on .ch-filter-n { background: rgba(74, 48, 5, .28); color: #4a3005; }
+
+.ch-list {
+  flex: 1 1 0; min-height: 0; overflow-y: auto; align-content: start;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 2px;
+}
+.ch-blank {
+  grid-column: 1 / -1; padding: 26px 10px; text-align: center;
+  font-size: 12px; font-weight: 800; color: rgba(255, 255, 255, .55);
+}
+.ch-cell {
+  position: relative; aspect-ratio: 1 / 1; border-radius: 11px; padding: 0; cursor: pointer;
+  font-family: inherit; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(rgba(126, 166, 128, .46), rgba(78, 118, 86, .6));
+  border: 2px solid rgba(255, 255, 255, .3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2);
+}
+.ch-cell:active { transform: scale(.94); }
+.ch-cell.on { box-shadow: 0 0 0 2px rgba(255, 212, 59, .55); }
+.ch-cell.dim { opacity: .45; }
+.ch-cell-nm {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 1px 2px;
+  font-size: 7.5px; font-weight: 900; color: #eef6e6; text-align: center; line-height: 1.1;
+  background: rgba(0, 0, 0, .38);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+/* danh hiệu và skin vẽ rộng hơn ô vuông nên cho tràn vừa khung */
+.ch-title-art, .ch-skin-art {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  overflow: hidden; padding: 4px 3px 12px;
+}
+.ch-title-art canvas { max-width: 100%; height: auto; }
+
+/* huy hiệu / sao / lỗ đá dùng chung cho cả ô trên người lẫn ô trong lưới */
+.ch-badge {
+  position: absolute; right: -4px; top: -6px; z-index: 3;
+  font-size: 9px; font-weight: 900; color: #4a3005; line-height: 14px; padding: 0 5px;
+  border-radius: 999px; background: linear-gradient(#ffe066, #f0a318);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .45);
+}
+.ch-star {
+  position: absolute; left: 0; right: 0; top: -1px; z-index: 3; text-align: center;
+  font-size: 8px; line-height: 1; letter-spacing: -1px; color: #ffe066;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .85);
+}
+.ch-pips { position: absolute; left: 0; right: 0; bottom: 2px; z-index: 3; display: flex; gap: 2px; justify-content: center; }
+.ch-cell .ch-pips { bottom: 12px; }
+.ch-pips i {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(0, 0, 0, .5); box-shadow: 0 0 0 1px rgba(255, 255, 255, .4);
+}
+.ch-pips i.on { background: #7be0ff; box-shadow: 0 0 4px 1px rgba(120, 210, 255, .9); }
+.ch-flag {
+  position: absolute; left: -2px; top: 8px; z-index: 3; padding: 0 4px;
+  font-size: 7.5px; font-weight: 900; color: #fff; line-height: 13px;
+  background: linear-gradient(#f0664a, #c53b26); border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+}
+.ch-foot { flex: none; display: flex; gap: 8px; padding-top: 8px; }
+.ch-foot .btn { flex: 1; }
+
+/* Danh hiệu là tấm bảng nằm ngang, skin là cả bộ đồ đứng — hai mục này cần ô
+   khác tỉ lệ ô vuông của trang bị / quần áo. */
+.ch-list-wide { grid-template-columns: repeat(2, 1fr); }
+.ch-list-wide .ch-cell { aspect-ratio: 3.4 / 1; }
+.ch-list-tall { grid-template-columns: repeat(3, 1fr); }
+.ch-list-tall .ch-cell { aspect-ratio: 3 / 4; }
