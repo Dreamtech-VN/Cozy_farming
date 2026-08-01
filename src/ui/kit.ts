@@ -44,6 +44,14 @@ export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLEleme
   const win = h('div', `win ${opts.page ? 'win-page' : opts.size === 'small' ? 'small' : opts.size === 'large' ? 'large' : ''}`);
   const head = h('div', 'win-head');
   const titleEl = h('div', '', title);
+  // Trang đầy đủ: bảng tên có hoa văn xoắn hai bên, cắt từ asset gốc GunPow
+  // (common_icon_sgxtpzk) — trước chỉ là chữ trần nên trông trống trải.
+  if (opts.page) {
+    titleEl.className = 'win-title';
+    const txt = h('span', 'win-title-t', title);
+    titleEl.textContent = '';
+    titleEl.append(h('i', 'win-orn l'), txt, h('i', 'win-orn r'));
+  }
   // trang đầy đủ dùng nút quay lại ở góc trái, popup dùng dấu X góc phải
   const closeBtn = h('button', opts.page ? 'win-back' : 'win-close', opts.page ? '‹ Quay lại' : '✕');
   head.append(titleEl);
@@ -423,26 +431,45 @@ export function charHeadOnly(look: import('@/data/chibi').ChibiLook | undefined,
 }
 
 // ===== Hiệu ứng lò rèn =====
-// Bắn hạt sáng quanh món đồ khi cường hoá / tăng sao / khảm đá / kế thừa /
-// tẩy luyện. Thuần CSS: mỗi hạt là một span mang góc + quãng bay riêng, chạy
-// xong thì lớp hiệu ứng tự gỡ nên không rác DOM.
+// Dùng đúng hiệu ứng gốc của GunPow đã bung từ apk
+// (armatures/ui/ui_duanzao_*.plist) chứ không tự vẽ hạt bằng CSS:
+//   burst   7 khung 120x120  — nổ vàng khi cường hoá
+//   spark   9 khung  96x96   — tia sáng khi tẩy luyện / khảm đá
+//   star    9 khung 162x70   — vệt sao khi tăng sao
+//   inherit 13 khung 215x72  — luồng sáng khi kế thừa
 export type FxKind = 'good' | 'bad' | 'star' | 'gem' | 'wash' | 'inherit';
 
-export function burstFx(host: HTMLElement, kind: FxKind = 'good', n = 16): void {
+interface FxSheet { file: string; fw: number; fh: number; n: number; dur: number }
+const FX_SHEETS: Record<FxKind, FxSheet> = {
+  good:    { file: 'burst',   fw: 120, fh: 120, n: 7,  dur: 0.58 },
+  bad:     { file: 'burst',   fw: 120, fh: 120, n: 7,  dur: 0.58 },
+  gem:     { file: 'spark',   fw: 96,  fh: 96,  n: 9,  dur: 0.62 },
+  wash:    { file: 'spark',   fw: 96,  fh: 96,  n: 9,  dur: 0.62 },
+  star:    { file: 'star',    fw: 162, fh: 70,  n: 9,  dur: 0.66 },
+  inherit: { file: 'inherit', fw: 215, fh: 72,  n: 13, dur: 0.78 }
+};
+
+/** Vòng phép lục giác của GunPow — đặt sau món đồ ở trang rèn. */
+export function forgeCircle(): HTMLElement {
+  return h('div', 'fx-circle');
+}
+
+export function burstFx(host: HTMLElement, kind: FxKind = 'good'): void {
   if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+  const sh = FX_SHEETS[kind];
   const layer = h('div', `fx-layer fx-${kind}`);
-  for (let i = 0; i < n; i++) {
-    const p = h('span', 'fx-p');
-    const a = (i / n) * 360 + Math.random() * 18;
-    p.style.setProperty('--a', `${a}deg`);
-    p.style.setProperty('--d', `${38 + Math.random() * 42}px`);
-    p.style.animationDelay = `${Math.random() * 0.12}s`;
-    layer.append(p);
-  }
-  layer.append(h('div', 'fx-ring2'), h('div', 'fx-flash'));
+  const sp = h('div', 'fx-sprite');
+  // dải khung nằm ngang: kéo ảnh rộng gấp n lần rồi nhảy từng bước bằng steps()
+  sp.style.cssText =
+    `width:${sh.fw}px;height:${sh.fh}px;` +
+    `background-image:url(assets/forge/${sh.file}.png);` +
+    `background-size:${sh.fw * sh.n}px ${sh.fh}px;` +
+    `animation:fx-sheet ${sh.dur}s steps(${sh.n}) 1 forwards;` +
+    `--fx-end:-${sh.fw * sh.n}px`;
+  layer.append(sp);
   host.append(layer);
   host.classList.add(kind === 'bad' ? 'fx-shake' : 'fx-pop');
-  setTimeout(() => { layer.remove(); host.classList.remove('fx-shake', 'fx-pop'); }, 900);
+  setTimeout(() => { layer.remove(); host.classList.remove('fx-shake', 'fx-pop'); }, sh.dur * 1000 + 120);
 }
 
 /** Chữ bay lên giữa khung — "+1", "THÀNH CÔNG", "HỎNG"… */

@@ -992,7 +992,7 @@ input.ui-input, select.ui-input {
    điện thoại thiếu chiều cao nên bỏ dải tab ngang trên đầu cho nội dung rộng ra */
 .wr-tabs {
   flex: none; width: 92px; display: flex; flex-direction: column; gap: 8px;
-  padding: 14px 8px 14px 0; justify-content: flex-start;
+  padding: 34px 8px 14px 0; justify-content: flex-start;
   background: rgba(0, 0, 0, .12); border-right: 1px solid rgba(255, 255, 255, .18);
 }
 /* dải tab bám mép TRÁI nên chỉ bo tròn phía PHẢI — mép trái phải phẳng để
@@ -1802,7 +1802,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   .od-ing { width: 58px; padding: 6px 3px 9px; }
   .od-ing-art { height: 34px; }
   .wd-slot-col { width: 40px; }
-  .wr-tabs { width: 76px; padding: 10px 6px 10px 0; }
+  .wr-tabs { width: 76px; padding: 26px 6px 10px 0; }
   .wr-tab { font-size: 9px; padding: 5px 3px 6px; }
 }
 
@@ -2249,7 +2249,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   background: linear-gradient(rgba(120, 160, 124, .60), rgba(64, 104, 74, .74));
 }
 .win.win-page > .win-head {
-  position: relative; flex: none; height: 46px;
+  position: relative; flex: none; height: 52px;
   /* chừa đều hai bên đúng bằng chỗ nút "Quay lại" nằm, để tiêu đề nằm chính
      giữa phần trống thật chứ không bị nút đè lệch sang phải */
   padding: 0 108px;
@@ -2257,12 +2257,24 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   background: linear-gradient(rgba(255, 255, 255, .14), rgba(255, 255, 255, .04));
   border-bottom: 2px solid rgba(255, 255, 255, .3);
 }
-.win.win-page > .win-head > div {
-  flex: 1; min-width: 0; text-align: center;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  font-size: 16px; font-weight: 900; color: #fff8e8; letter-spacing: .3px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, .5); background: none; border: none; padding: 0;
+/* Bảng tên: nền kính bo tròn + hoa văn xoắn gốc GunPow hai đầu */
+.win.win-page > .win-head > .win-title {
+  flex: 0 1 auto; min-width: 0; display: flex; align-items: center; gap: 6px;
+  padding: 3px 12px 4px; border-radius: 999px;
+  background: linear-gradient(rgba(255, 255, 255, .2), rgba(255, 255, 255, .06));
+  border: 1px solid rgba(255, 233, 168, .55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 2px 6px rgba(0, 0, 0, .28);
 }
+.win-title-t {
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 16px; font-weight: 900; color: #fff8e8; letter-spacing: .3px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .55);
+}
+.win-orn {
+  flex: none; width: 21px; height: 26px;
+  background: url('/assets/forge/ornament.png') center / contain no-repeat;
+}
+.win-orn.r { transform: scaleX(-1); }
 .win-back {
   position: absolute; left: 10px; top: 50%; translate: 0 -50%;
   padding: 5px 14px 6px; border-radius: 999px; cursor: pointer; font-family: inherit;
@@ -2281,10 +2293,13 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 
 /* --- cột trái: tab chức năng + khung thao tác --- */
 .gp-left { flex: 0 0 46%; min-width: 0; display: flex; flex-direction: column; min-height: 0; }
-.gp-ftabs { flex: none; display: flex; gap: 4px; padding-left: 4px; }
+/* Dải tab nằm gọn đúng bề ngang khung bên dưới: mỗi tab tự co (flex:1) nên
+   không món nào lòi ra ngoài mép bo tròn nữa. */
+.gp-ftabs { flex: none; display: flex; gap: 3px; width: 100%; }
 .gp-ftab {
-  padding: 6px 14px 9px; margin-bottom: -3px; border-radius: 12px 12px 0 0; cursor: pointer;
-  font-family: inherit; font-size: 12.5px; font-weight: 900; color: #e7f0dd;
+  flex: 1 1 0; min-width: 0; padding: 6px 4px 9px; margin-bottom: -3px;
+  border-radius: 12px 12px 0 0; cursor: pointer; text-align: center;
+  font-family: inherit; font-size: 11.5px; font-weight: 900; color: #e7f0dd; line-height: 1.15;
   background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .26); border-bottom: none;
 }
 .gp-ftab.on {
@@ -2293,25 +2308,16 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 }
 .gp-stage {
   flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column;
-  align-items: center; gap: 7px; padding: 12px 14px 14px; border-radius: 14px;
+  align-items: center; justify-content: safe center;
+  gap: 7px; padding: 12px 14px 14px; border-radius: 14px;
   background: rgba(255, 255, 255, .09); border: 1px solid rgba(255, 255, 255, .3);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2);
 }
-/* vòng phép sau món đồ (GunPow vẽ ngôi sao 6 cánh) */
+/* Vòng phép sau món đồ: dùng thẳng ảnh gốc GunPow (ui_duanzao_qianghuafazhen)
+   thay cho conic-gradient tự vẽ hồi trước. */
 .gp-ring {
   position: relative; width: 118px; height: 118px; flex: none;
   display: flex; align-items: center; justify-content: center;
-  background:
-    radial-gradient(circle, rgba(255, 224, 102, .18) 0 38%, rgba(255, 224, 102, 0) 39%),
-    conic-gradient(from 0deg, rgba(255,224,102,.30) 0 4%, rgba(255,224,102,0) 4% 12.5%,
-                   rgba(255,224,102,.30) 12.5% 16.5%, rgba(255,224,102,0) 16.5% 25%,
-                   rgba(255,224,102,.30) 25% 29%, rgba(255,224,102,0) 29% 37.5%,
-                   rgba(255,224,102,.30) 37.5% 41.5%, rgba(255,224,102,0) 41.5% 50%,
-                   rgba(255,224,102,.30) 50% 54%, rgba(255,224,102,0) 54% 62.5%,
-                   rgba(255,224,102,.30) 62.5% 66.5%, rgba(255,224,102,0) 66.5% 75%,
-                   rgba(255,224,102,.30) 75% 79%, rgba(255,224,102,0) 79% 87.5%,
-                   rgba(255,224,102,.30) 87.5% 91.5%, rgba(255,224,102,0) 91.5%);
-  border-radius: 50%; border: 1px solid rgba(255, 224, 102, .35);
 }
 .gp-item {
   position: relative; width: 68px; height: 68px; border-radius: 12px;
@@ -2395,49 +2401,27 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .gp-mini .gp-c-s { white-space: pre-line; text-align: left; }
 .gp-acts .btn.dim { opacity: .5; }
 
-/* ===== Hiệu ứng lò rèn (cường hoá / tăng sao / khảm đá / tẩy luyện / kế thừa) ===== */
-.fx-layer { position: absolute; inset: 0; pointer-events: none; z-index: 30; overflow: visible; }
-.fx-p {
-  position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; border-radius: 50%;
-  margin: -3.5px 0 0 -3.5px;
-  /* lõi trắng cho hạt nổi hẳn trên nền vòng phép vàng, không bị chìm màu */
-  background: radial-gradient(circle, #fff 0 38%, #ffe066 60%, #f0a318 100%);
-  box-shadow: 0 0 9px 3px rgba(255, 224, 102, .95), 0 0 3px 1px rgba(255, 255, 255, .9);
-  animation: fx-fly .95s cubic-bezier(.14, .75, .28, 1) forwards;
+/* ===== Hiệu ứng lò rèn — sprite gốc GunPow (public/assets/forge) ===== */
+.fx-layer {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  pointer-events: none; z-index: 30; overflow: visible;
+  display: flex; align-items: center; justify-content: center;
 }
-@keyframes fx-fly {
-  0%   { transform: rotate(var(--a)) translateX(6px) scale(.4); opacity: 0; }
-  14%  { opacity: 1; transform: rotate(var(--a)) translateX(20px) scale(1.15); }
-  62%  { opacity: 1; }
-  100% { transform: rotate(var(--a)) translateX(var(--d)) scale(.35); opacity: 0; }
-}
-.fx-ring2 {
-  position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px;
-  border-radius: 50%; border: 3px solid rgba(255, 233, 168, .95);
-  animation: fx-ring 0.72s ease-out forwards;
-}
-@keyframes fx-ring {
-  0%   { transform: scale(.4); opacity: .95; }
-  100% { transform: scale(3.1); opacity: 0; }
-}
-.fx-flash {
-  position: absolute; inset: -12%; border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 250, 220, .85) 0 22%, rgba(255, 224, 102, 0) 62%);
-  animation: fx-flash .42s ease-out forwards;
-}
-@keyframes fx-flash { 0% { opacity: 0; transform: scale(.5); } 30% { opacity: 1; } 100% { opacity: 0; transform: scale(1.35); } }
+.fx-sprite { background-repeat: no-repeat; background-position: 0 0; }
+@keyframes fx-sheet { to { background-position-x: var(--fx-end); } }
+/* hỏng thì phủ đỏ lên chính khung nổ đó, khỏi phải có bộ sprite riêng */
+.fx-bad .fx-sprite { filter: hue-rotate(-38deg) saturate(1.5) brightness(.92); }
+.fx-gem .fx-sprite { filter: hue-rotate(168deg) saturate(1.2); }
+.fx-wash .fx-sprite { filter: hue-rotate(96deg) saturate(1.15); }
+.fx-inherit .fx-sprite { filter: hue-rotate(232deg) saturate(1.1); }
 
-/* màu theo loại việc */
-.fx-bad .fx-p { background: radial-gradient(circle, #fff 0 38%, #ff9c86 60%, #d9422a 100%); box-shadow: 0 0 9px 3px rgba(255, 110, 90, .95); }
-.fx-bad .fx-ring2 { border-color: rgba(255, 130, 110, .95); }
-.fx-bad .fx-flash { background: radial-gradient(circle, rgba(255, 150, 130, .7) 0 22%, rgba(255, 110, 90, 0) 62%); }
-.fx-star .fx-p { width: 10px; height: 10px; margin: -5px 0 0 -5px; }
-.fx-gem .fx-p { background: radial-gradient(circle, #fff 0 38%, #8fdcff 60%, #1e8ecb 100%); box-shadow: 0 0 9px 3px rgba(120, 210, 255, .95); }
-.fx-gem .fx-ring2 { border-color: rgba(150, 225, 255, .95); }
-.fx-wash .fx-p { background: radial-gradient(circle, #fff 0 38%, #9cf0cd 60%, #1fae7c 100%); box-shadow: 0 0 9px 3px rgba(120, 240, 190, .95); }
-.fx-wash .fx-ring2 { border-color: rgba(150, 245, 200, .95); }
-.fx-inherit .fx-p { background: radial-gradient(circle, #fff 0 38%, #ddb3ff 60%, #8b3fd6 100%); box-shadow: 0 0 9px 3px rgba(200, 140, 255, .95); }
-.fx-inherit .fx-ring2 { border-color: rgba(214, 165, 255, .95); }
+/* vòng phép lục giác gốc GunPow, quay chậm sau món đồ */
+.fx-circle {
+  position: absolute; inset: -14%; z-index: 0; pointer-events: none;
+  background: url('/assets/forge/circle.png') center / contain no-repeat;
+  animation: fx-spin 14s linear infinite;
+}
+@keyframes fx-spin { to { transform: rotate(360deg); } }
 
 .fx-pop { animation: fx-pop .38s ease-out; }
 @keyframes fx-pop { 0% { transform: scale(1); } 35% { transform: scale(1.14); } 100% { transform: scale(1); } }
@@ -2449,7 +2433,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 }
 
 .fx-text {
-  position: absolute; left: 50%; top: 34%; translate: -50% 0; z-index: 31; pointer-events: none;
+  position: absolute; left: 50%; top: 30%; translate: -50% 0; z-index: 31; pointer-events: none;
   font-size: 17px; font-weight: 900; color: #fff8e0; white-space: nowrap;
   text-shadow: 0 2px 5px rgba(0, 0, 0, .65), 0 0 12px rgba(255, 224, 102, .8);
   animation: fx-text 1.05s ease-out forwards;
@@ -2479,10 +2463,12 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .rf-val.up { color: #b6f2a0; } .rf-val.down { color: #ffb0a0; }
 .rf-lock {
   flex: none; width: 26px; height: 24px; padding: 0; cursor: pointer; font-family: inherit;
-  font-size: 13px; border-radius: 8px; background: rgba(255, 255, 255, .16);
-  border: 1px solid rgba(255, 255, 255, .3); color: #eef6e6;
+  border-radius: 8px; background: rgba(255, 255, 255, .16);
+  border: 1px solid rgba(255, 255, 255, .3);
+  display: flex; align-items: center; justify-content: center;
 }
-.rf-line.locked .rf-lock { background: linear-gradient(#ffe066, #f0a318); border-color: #ffe9a8; color: #4a3005; }
+.rf-lock:not(.on) { filter: grayscale(.65) opacity(.6); }
+.rf-line.locked .rf-lock { background: linear-gradient(#ffe066, #f0a318); border-color: #ffe9a8; }
 
 /* Hàng giá + nút của trang rèn: ghim ngoài vùng cuộn nên không bao giờ bị cụt */
 .gp-foot {
@@ -2493,11 +2479,11 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 /* Trang Tẩy luyện có tới 5 dòng phụ nên xếp 2 cột: món đồ bên trái, các dòng
    bên phải — màn ngang điện thoại không đủ cao để xếp dọc hết. */
 .gp-stage.rf {
-  display: grid; grid-template-columns: 104px 1fr; align-content: start;
+  display: grid; grid-template-columns: 132px 1fr; align-content: center;
   column-gap: 10px; row-gap: 4px; padding: 10px 12px 12px; justify-items: center;
 }
 .gp-stage.rf .gp-ring { grid-column: 1; grid-row: 1; width: 84px; height: 84px; }
-.gp-stage.rf .gp-lv { grid-column: 1; grid-row: 2; font-size: 11px; }
+.gp-stage.rf .gp-lv { grid-column: 1; grid-row: 2; font-size: 11px; white-space: pre-line; line-height: 1.3; }
 .gp-stage.rf .rf-lines { grid-column: 2; grid-row: 1 / span 2; align-self: start; }
 .gp-stage.rf .rf-line { padding: 3px 6px 4px; gap: 6px; }
 .gp-stage.rf .rf-nm { font-size: 11.5px; }

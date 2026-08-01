@@ -195,9 +195,9 @@ export function smash(id: string): SmashResult {
 // ở Bách hóa, mở ra được 1 món ngẫu nhiên trong khoảng bậc của rương.
 export interface ChestDef { id: string; name: string; lo: number; hi: number; price: number }
 export const EQUIP_CHESTS: ChestDef[] = [
-  { id: 'chest_eq1', name: 'Rương trang bị Sơ cấp', lo: 1, hi: 6, price: 3000 },
-  { id: 'chest_eq2', name: 'Rương trang bị Trung cấp', lo: 5, hi: 12, price: 15000 },
-  { id: 'chest_eq3', name: 'Rương trang bị Cao cấp', lo: 11, hi: 20, price: 60000 }
+  { id: 'chest_eq1', name: 'Rương Trang Bị Thường', lo: 1, hi: 6, price: 3000 },
+  { id: 'chest_eq2', name: 'Rương Trang Bị Khá', lo: 5, hi: 12, price: 15000 },
+  { id: 'chest_eq3', name: 'Rương Trang Bị Xịn', lo: 11, hi: 20, price: 60000 }
 ];
 export function chestDef(id: string) { return EQUIP_CHESTS.find(c => c.id === id); }
 
@@ -354,15 +354,15 @@ export function canInherit(fromId: string, toId: string): InheritCheck {
   if (fromId === toId) return { ok: false, why: 'Phải chọn hai món khác nhau.' };
   if (f.slot !== t.slot) return { ok: false, why: 'Hai món phải cùng một ô.' };
   if (equipLevel(fromId) === 0 && equipStar(fromId) === 0 && !gemsOn(fromId).some(Boolean))
-    return { ok: false, why: 'Món nguồn chưa có gì để kế thừa.' };
+    return { ok: false, why: 'Món cho chưa có gì để chuyển.' };
   if (equipLevel(toId) > equipLevel(fromId))
-    return { ok: false, why: 'Món đích đang cao cấp hơn món nguồn.' };
+    return { ok: false, why: 'Món nhận đang cao cấp hơn món cho.' };
   return { ok: true };
 }
 
 export function inherit(fromId: string, toId: string): boolean {
   const c = canInherit(fromId, toId);
-  if (!c.ok) { toast(c.why ?? 'Không kế thừa được.', 'alert'); sfx.error(); return false; }
+  if (!c.ok) { toast(c.why ?? 'Không chuyển được.', 'alert'); sfx.error(); return false; }
   const f = equipDef(fromId)!, t = equipDef(toId)!;
   const cost = inheritCost(f, t);
   if (S.wallet.coins < cost) { toast(`Cần ${cost} xu.`, 'coin'); sfx.error(); return false; }
@@ -399,7 +399,7 @@ export function inherit(fromId: string, toId: string): boolean {
 
   addStat('equip_inherited');
   save(); bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); sfx.coin();
-  toast(`Đã kế thừa sang ${t.name}.`, 'rank');
+  toast(`Đã chuyển sang ${t.name}.`, 'rank');
   return true;
 }
 
@@ -424,7 +424,7 @@ export function refLocks(id: string): boolean[] {
 export function toggleRefLock(id: string, i: number): boolean {
   const lk = refLocks(id);
   if (!lk[i] && lk.filter(Boolean).length >= REFORGE_LINES.length - 1) {
-    toast('Phải chừa ít nhất một dòng để tẩy.', 'alert'); sfx.error(); return false;
+    toast('Phải chừa ít nhất một dòng để rửa.', 'alert'); sfx.error(); return false;
   }
   lk[i] = !lk[i];
   save(); bus.emit(EV.STATE_CHANGED);
@@ -444,7 +444,7 @@ export function reforge(id: string): ReforgeResult {
   const lk = refLocks(id);
   const c = reforgeCost(def, lk.filter(Boolean).length);
   if (itemCount(REFORGE_STONE) < c.stones) {
-    toast('Thiếu Tẩy Luyện Thạch.', 'alert'); sfx.error(); return { ok: false };
+    toast('Thiếu Đá Rửa Chỉ Số.', 'alert'); sfx.error(); return { ok: false };
   }
   if (S.wallet.coins < c.coins) {
     toast(`Cần ${c.coins} xu.`, 'coin'); sfx.error(); return { ok: false };
@@ -460,7 +460,7 @@ export function reforge(id: string): ReforgeResult {
   addStat('equip_reforged');
   save(); bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED);
   const d = refScore(def, after) - refScore(def, before);
-  if (d > 0) { sfx.win(); toast(`Tẩy luyện đẹp! +${d} điểm chỉ số.`, 'rank'); }
+  if (d > 0) { sfx.win(); toast(`Rửa được chỉ số đẹp! +${d} điểm.`, 'rank'); }
   else { sfx.click(); toast(d < 0 ? `Lần này xấu hơn ${-d} điểm.` : 'Không đổi được gì.', 'alert'); }
   return { ok: true, before, after };
 }
