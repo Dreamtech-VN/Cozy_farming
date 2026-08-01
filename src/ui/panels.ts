@@ -914,7 +914,7 @@ export function registerAllPanels() {
   // ---- shop thời trang chibi (part Avatar) ----
   // [nhãn, z, icon UI]
   const CHIBI_TABS: [string, number, string][] = [
-    ['Skin', -1, 'star'], ['Áo', 20, 'shirt'], ['Quần', 10, 'pants'],
+    ['Áo', 20, 'shirt'], ['Quần', 10, 'pants'],
     ['Mũ', 60, 'hat'], ['Kính', 65, 'glasses'], ['Cầm tay', 70, 'candy']
   ];
 
@@ -934,28 +934,6 @@ export function registerAllPanels() {
       const z = CHIBI_TABS[tab][1];
       const g = S.player.chibi?.gender ?? 0;
       const grid = h('div', 'grid');
-      // ----- tab Skin: bán trọn bộ -----
-      if (z === -1) {
-        grid.className = 'grid grid-shop';
-        for (const sk of SKIN_LIST) {
-          // skin nguyên hình (Pack4) không bán ở shop — để dành sự kiện / gacha
-          if (sk.art) continue;
-          if (sk.gender && g && sk.gender !== g) continue;
-          const owned = S.skins.includes(sk.id);
-          const cell = h('div', `cell cell-lg ${owned ? 'owned' : ''}`);
-          const art = h('div', 'cell-art');
-          art.append(skinFace(sk, 78));
-          const prEl = h('div', 'pr');
-          if (owned) prEl.textContent = 'Đã có';
-          else prEl.innerHTML = priceHtml(sk.priceXu);
-          cell.append(art, h('div', 'nm', sk.name), prEl);
-          cell.onclick = () => openPanel('skintry', { skin: sk, owned, onDone: render });
-          grid.append(cell);
-        }
-        body.append(grid);
-        return;
-      }
-
       const isHand = z === 70;
       grid.className = 'grid grid-shop';
       for (const p of chibiList(z, g)) {
@@ -1954,14 +1932,14 @@ export function registerAllPanels() {
             name: sk.name, art: wrapc, dim: !has, on,
             flag: on ? 'Đang dùng' : undefined,
             click: () => {
-              if (!has) { toast(`${sk.name} chưa sở hữu — mua ở tab Skin của Thời trang Cô Trang.`, 'shop'); return; }
+              if (!has) { toast(`${sk.name} chưa sở hữu — sẽ phát qua sự kiện / gacha.`, 'shop'); return; }
               look.skin = on ? undefined : sk.id;
               save(); bus.emit(EV.APPEARANCE); redraw();
             }
           };
         }),
         empty: f === 'mine'
-          ? 'Chưa có bộ ảo hoá nào — mở rương hoặc mua ở Thời trang Cô Trang.'
+          ? 'Chưa có bộ ảo hoá nào — sắp phát qua sự kiện / gacha.'
           : 'Chưa có dữ liệu ảo hoá.',
         grid: 'tall',
         bare: true,
