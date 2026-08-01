@@ -14,7 +14,9 @@ export interface ToolDef {
 export const TOOLS: Record<string, ToolDef> = {
   hoe: { id: 'hoe', name: 'Cuốc', icon: '', url: 'assets/farm/chibi/18_hoe.png', w: 52, h: 62 },
   can: { id: 'can', name: 'Bình tưới', icon: '', url: 'assets/farm/chibi/17_watering_can.png', w: 62, h: 50 },
-  basket: { id: 'basket', name: 'Giỏ thu hoạch', icon: '', url: 'assets/farm/chibi/19_sickle.png', w: 50, h: 62 },
+  // ảnh 19_sickle là cái LIỀM nên tên phải là Liềm (trước gọi "Giỏ thu hoạch"
+  // mà vẽ cái liềm). Công dụng vẫn là gặt nhanh cây chín gần nhất.
+  basket: { id: 'basket', name: 'Liềm gặt', icon: '', url: 'assets/farm/chibi/19_sickle.png', w: 50, h: 62 },
   rod: { id: 'rod', name: 'Cần câu', icon: '🎣', url: 'assets/fishing/rod.png', w: 16, h: 16 },
   net: { id: 'net', name: 'Vợt côn trùng', icon: '🥅', url: 'assets/chibi/tools/net.png', w: 48, h: 46 },
   axe: { id: 'axe', name: 'Rìu', icon: '', url: 'assets/farm/chibi/20_axe.png', w: 58, h: 62 }
@@ -38,9 +40,9 @@ export const TOOL_UPGRADES: Record<string, ToolUpgrade[]> = {
     { level: 3, name: 'Bình tưới vàng', price: 2000, desc: 'Cây đã tưới lớn nhanh thêm 20%', bonus: 0.2 }
   ],
   basket: [
-    { level: 1, name: 'Giỏ mây', price: 0, desc: 'Thu hoạch cơ bản', bonus: 0 },
-    { level: 2, name: 'Giỏ chắc chắn', price: 1200, desc: '15% cơ hội +1 nông sản khi thu hoạch', bonus: 0.15 },
-    { level: 3, name: 'Giỏ hoàng kim', price: 4000, desc: '35% cơ hội +1 nông sản khi thu hoạch', bonus: 0.35 }
+    { level: 1, name: 'Liềm sắt', price: 0, desc: 'Thu hoạch cơ bản', bonus: 0 },
+    { level: 2, name: 'Liềm thép', price: 1200, desc: '15% cơ hội +1 nông sản khi thu hoạch', bonus: 0.15 },
+    { level: 3, name: 'Liềm vàng', price: 4000, desc: '35% cơ hội +1 nông sản khi thu hoạch', bonus: 0.35 }
   ]
 };
 

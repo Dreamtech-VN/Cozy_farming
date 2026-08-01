@@ -125,10 +125,15 @@ function buildHud() {
       <span class="hud-cur-n" id="hud-rubies">0</span>
     </button>
     <div class="hud-clock" id="hud-clock"></div>`;
-  top.append(prof, right);
+  // thanh khu nằm HẲN dưới thanh thời tiết -> bọc thêm một cột bên phải
+  const rightCol = h('div', 'hud-right');
+  const roomBtn = h('button', 'hud-room'); roomBtn.id = 'hud-room';
+  rightCol.append(right, roomBtn);
+  top.append(prof, rightCol);
   root().append(top);
   (right.querySelector('#coin-plus') as HTMLElement).onclick = () => openPanel('topup');
   (right.querySelector('#ruby-plus') as HTMLElement).onclick = () => openPanel('topup');
+  roomBtn.onclick = () => { sfx.click(); openPanel('changeroom'); };
 
   // ---- HUD gọn: 3 nút nhanh + ngăn kéo menu (kiểu Avatar) ----
   const ICON = (n: string) => `assets/ui/pack/icon_${n}.png`;
@@ -192,9 +197,11 @@ function buildHud() {
   bus.on(EV.APPEARANCE, refreshHud);
   bus.on(EV.QUEST, refreshHud);
   bus.on(EV.TIME_TICK, refreshClock);
+  bus.on(EV.ZONE, refreshRoomBar);
   setInterval(refreshClock, 10_000);
   refreshHud();
   refreshClock();
+  refreshRoomBar();
 }
 
 // ===== Icon chat nổi: kéo thả tự do, bấm là mở khung trò chuyện =====
@@ -354,6 +361,21 @@ function clockPhase(hgame: number): string {
   let ph = 'night';
   for (const [h, p] of CLOCK_PHASE) if (hgame >= h) ph = p;
   return ph;
+}
+
+// Thanh khu dưới thanh thời tiết — chỉ hiện ở map đông người (nông trại riêng
+// và nhà riêng là map cá nhân, không có khu).
+function personalZone(id: string) { return id === 'farm' || id === 'house'; }
+
+export function refreshRoomBar() {
+  const el = document.getElementById('hud-room');
+  if (!el) return;
+  if (personalZone(S.zone)) { el.style.display = 'none'; return; }
+  el.style.display = '';
+  const n = socialMod.roomPlayers(S.zone, S.zoneRoom);
+  el.innerHTML = `<span class="hr-no">Khu ${S.zoneRoom}</span>`
+    + `<span class="hr-n">${n}/${socialMod.ROOM_CAP}</span><span class="hr-more">›</span>`;
+  el.title = 'Đổi khu';
 }
 
 function refreshClock() {

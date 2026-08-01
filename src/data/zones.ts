@@ -74,7 +74,16 @@ export const ZONES: Record<string, ZoneDef> = {
     id: 'farm', name: 'Nông trại', icon: '', w: 127, h: 33, ground: 'grass',
     spawn: { x: 34, y: 25 },
     bg: 'farmbg', walkTop: 11, walkBottom: 28, skyTop: 150,
-    water: [{ x: 110, y: 16, w: 12, h: 12 }],   // hồ cá vẽ sẵn ở góc phải
+    // hồ cá vẽ sẵn ở góc phải — mặt nước thật rộng 108.8..123.3 x 15.4..29.4 tile,
+    // khai thiếu 1 ô mỗi bên nên vành hồ đứng lên được (đi trên mặt nước)
+    // Hồ cá vẽ sẵn góc phải. Trước khai gọn 1 hình chữ nhật 12x12 nên vành hồ
+    // (rộng hơn 1 ô mỗi bên) đứng lên được — nhìn như đi trên mặt nước. Nay bám
+    // đúng mặt nước đo từ ảnh, chia theo từng dải hàng.
+    water: [
+      { x: 109, y: 15, w: 14, h: 5 }, { x: 109, y: 20, w: 15, h: 5 },
+      { x: 108, y: 25, w: 16, h: 2 }, { x: 109, y: 27, w: 15, h: 2 },
+      { x: 111, y: 29, w: 12, h: 1 }
+    ],
     portals: [{ x: 28, y: 27, to: 'farm_gate', label: 'Ra khu Nông Trại', icon: '', spot: 'door' }],
     npcs: [
       { id: 'npc_mai', name: 'Cô Mai', x: 24, y: 16, charIndex: 5, gender: 2, lines: ['Chào con! Muốn mua hạt giống thì ra Cửa hàng ngoài khu Nông Trại nhé.', 'Nhớ tưới nước mỗi ngày nha!'] }
@@ -190,7 +199,7 @@ export const ZONES: Record<string, ZoneDef> = {
     id: 'park', name: 'Công viên', icon: '', w: 57, h: 32, ground: 'grass',
     spawn: { x: 44, y: 20 }, hub: true, busStop: { x: 50, y: 24 },
     bg: '4', walkTop: 10, walkBottom: 27,
-    water: [{ x: 9, y: 11, w: 26, h: 6 }],
+    water: [{ x: 9, y: 11, w: 27, h: 6 }],
     portals: [],
     npcs: [
       { id: 'npc_tuan', name: 'Bé Tuấn', x: 30, y: 20, charIndex: 7, gender: 1, lines: ['Chơi oẳn tù tì với em không?'], minigame: 'rps' }

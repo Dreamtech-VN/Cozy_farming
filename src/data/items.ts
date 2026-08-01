@@ -48,8 +48,8 @@ defItem({ id: 'pork', name: 'Nấm heo ủi', kind: 'product', icon: '', sell: 4
 defItem({ id: 'wool', name: 'Len cừu', kind: 'product', icon: '', sell: 70, sprite: { url: 'assets/farm/chibi/wool.png', sx: 0, sy: 0, sw: 52, sh: 49 } });
 
 // ---- Nông cụ (mua ở bách hóa, gắn lên thanh nông cụ từ túi đồ) ----
-defItem({ id: 'tool_basket', name: 'Giỏ thu hoạch', kind: 'tool', icon: '', sell: 0, buy: 400, desc: 'Gắn lên thanh nông cụ để thu hoạch nhanh cây chín gần nhất.', sprite: { url: 'assets/chibi/tools/basket.png', sx: 0, sy: 0, sw: 48, sh: 46 } });
-defItem({ id: 'tool_axe', name: 'Rìu', kind: 'tool', icon: '', sell: 0, buy: 800, desc: 'Chặt cây ở Nông trại lấy Gỗ (cây mọc lại sau vài phút).', sprite: { url: 'assets/chibi/tools/axe.png', sx: 0, sy: 0, sw: 46, sh: 46 } });
+defItem({ id: 'tool_basket', name: 'Liềm gặt', kind: 'tool', icon: '', sell: 0, buy: 400, desc: 'Gắn lên thanh nông cụ để thu hoạch nhanh cây chín gần nhất.', sprite: { url: 'assets/farm/chibi/19_sickle.png', sx: 0, sy: 0, sw: 50, sh: 62 } });
+defItem({ id: 'tool_axe', name: 'Rìu', kind: 'tool', icon: '', sell: 0, buy: 800, desc: 'Chặt cây ở Nông trại lấy Gỗ (cây mọc lại sau vài phút).', sprite: { url: 'assets/farm/chibi/20_axe.png', sx: 0, sy: 0, sw: 58, sh: 62 } });
 
 // ---- Nguyên liệu từ rìu / đào đất ----
 defItem({ id: 'wood', name: 'Gỗ', kind: 'material', icon: '', sell: 8, desc: 'Chặt từ cây bằng rìu. Nguyên liệu xây dựng sau này.', sprite: { url: 'assets/farm/chibi/wood.png', sx: 0, sy: 0, sw: 46, sh: 46 } });

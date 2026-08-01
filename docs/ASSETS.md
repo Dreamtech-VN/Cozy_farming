@@ -104,9 +104,13 @@ nếu muốn chặt chẽ, nên chuyển pack sang repo riêng tư hoặc build 
 
 ## Icon nông cụ chibi (`assets/chibi/tools/`)
 
-- `hoe/basket/rod/net.png`: icon item gốc Avatar (res.rar repo Lttt, hd/item
-  11326 / 7077 / 10131 / 10855) — **chỉ dùng dev/test, thay khi phát hành**.
-- `can.png` (bình tưới), `axe.png`, `shovel.png`: tự vẽ theo cùng style (dùng thoải mái).
+- `rod/net.png`: icon item gốc Avatar (res.rar repo Lttt, hd/item 10131 / 10855)
+  — **chỉ dùng dev/test, thay khi phát hành**. `bait.png`, `can.png`,
+  `shovel.png`: tự vẽ theo cùng style (dùng thoải mái).
+- Đã bỏ `hoe.png` (vẽ ra cái cúp chim), `axe.png` (vẽ ra cái liềm) và
+  `basket.png`: ba cái này gán nhầm nên trong game nông cụ hiện sai hình. Cuốc /
+  rìu / liềm nay dùng thẳng bộ `assets/farm/chibi/18_hoe · 20_axe · 19_sickle`.
+  Nông cụ `basket` cũng đổi tên thành **Liềm gặt** cho khớp hình cái liềm.
 
 ## Asset từ repo Lttt (`assets/lttt/`)
 

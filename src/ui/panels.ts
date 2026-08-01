@@ -119,30 +119,38 @@ export function registerAllPanels() {
     toast('Đã sắp xếp túi đồ.', 'inventory');
   }
 
+  // Nông sản / hạt giống / trứng - sữa - thịt / món đã nấu nằm ở KHO NÔNG TRẠI
+  // (như Lttt), túi đồ chỉ giữ nông cụ, cá câu, nội thất, quà và nguyên liệu.
   const BAG_TABS: [string, (k: string) => boolean][] = [
     ['Tất cả', () => true],
-    ['Trang bị', k => k === 'tool'],
-    ['Nông sản', k => ['crop', 'seed', 'product'].includes(k)],
+    ['Nông cụ', k => k === 'tool'],
     ['Cá', k => k === 'fish'],
     ['Nội thất', k => ['furniture', 'deco'].includes(k)],
-    ['Khác', k => ['gift', 'material', 'food', 'special'].includes(k)]
+    ['Khác', k => ['gift', 'material', 'special'].includes(k)]
   ];
 
   // Nông cụ cũng nằm trong túi (kind ảo 'tool'); đồ cầm tay ở tủ đồ
-  interface BagEntry { kind: string; name: string; qty: number; node: () => HTMLElement; equipped: boolean; onClick: () => void }
+  interface BagEntry {
+    key: string; kind: string; name: string; desc: string; qty: number;
+    node: (size?: number) => HTMLElement; equipped: boolean;
+    actions: (close: () => void, redraw: () => void) => { label: string; kind?: string; cb: () => void }[];
+  }
 
-  function bagEntries(close: () => void): BagEntry[] {
+  function bagEntries(): BagEntry[] {
     const out: BagEntry[] = [];
     for (const t of TOOL_LIST) {
       if (toolLevel(t.id) <= 0) continue;
       const on = S.hotbar.includes(t.id);
+      const lv = toolLevel(t.id);
       out.push({
-        kind: 'tool', name: t.name, qty: 0, equipped: on,
-        node: () => { const d = h('div'); d.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 62))); return d; },
-        onClick: () => {
-          if (on) unequipTool(S.hotbar.indexOf(t.id));
-          else equipTool(t.id);
-        }
+        key: `tool:${t.id}`, kind: 'tool', name: t.name, qty: 0, equipped: on,
+        desc: on ? 'Đang gắn trên thanh nông cụ.' : 'Gắn lên thanh nông cụ để dùng ngoài đồng.',
+        node: (size = 58) => { const d = h('div'); d.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, size))); return d; },
+        actions: (_c, redraw) => [
+          { label: on ? 'Gỡ khỏi thanh' : 'Gắn lên thanh', kind: on ? '' : 'gold',
+            cb: () => { if (on) unequipTool(S.hotbar.indexOf(t.id)); else equipTool(t.id); redraw(); } },
+          ...(lv >= 1 && toolUpgradeAt(t.id, lv + 1) ? [{ label: 'Nâng cấp', kind: 'blue', cb: () => openPanel('toolupgrade') }] : [])
+        ]
       });
     }
     for (const [id, qty] of Object.entries(S.inventory)) {
@@ -150,9 +158,10 @@ export function registerAllPanels() {
       // đồ cầm tay đã chuyển hẳn sang tủ đồ (tab Quần áo), không bày trong túi nữa
       if (def.meta?.handPart) continue;
       out.push({
-        kind: def.kind, name: def.name, qty, equipped: false,
-        node: () => iconOf(def, 58),
-        onClick: () => itemActions(id, close)
+        key: id, kind: def.kind, name: def.name, qty, equipped: false,
+        desc: def.desc ?? (def.sell > 0 ? `Bán được ${sellPrice(def.sell)} xu/cái.` : ''),
+        node: (size = 58) => iconOf(def, size),
+        actions: (close, redraw) => itemActionList(id, close, redraw)
       });
     }
     return out;
@@ -161,39 +170,75 @@ export function registerAllPanels() {
   // Lưới túi đồ dùng chung cho panel Kho đồ và tab Túi đồ trong màn Nhân vật
   function renderBag(box: HTMLElement, close: () => void, redraw: () => void) {
     let tab = 0;
+    let sel = '';
     const draw = () => {
       box.innerHTML = '';
-      const hub = h('div', 'ch-wrap bag-hub');
       const wrap = h('div', 'bag-wrap');
-      const side = h('div', 'ch-side');
+
+      // ----- dải tab ngang (thay cột tab dọc bên phải) -----
+      const tabs = h('div', 'bag-tabs');
       BAG_TABS.forEach(([name], i) => {
-        const t = h('button', `ch-tab ${i === tab ? 'active' : ''}`, name);
+        const t = h('button', `bag-tab ${i === tab ? 'on' : ''}`, name);
         t.onclick = () => { sfx.click(); tab = i; draw(); };
-        side.append(t);
+        tabs.append(t);
       });
 
-      const all = bagEntries(close);
+      const all = bagEntries();
       const list = all.filter(e => BAG_TABS[tab][1](e.kind));
+      if (!list.some(e => e.key === sel)) sel = list[0]?.key ?? '';
+
+      // ----- lưới ô -----
       const grid = h('div', 'bag');
       for (const e of list) {
-        const c = h('button', `bag-slot ${e.equipped ? 'on' : ''}`);
-        c.append(e.node());
-        if (e.qty > 1) c.append(h('div', 'qty', `x${e.qty}`));
-        if (e.equipped) c.append(h('div', 'bag-on', 'Đang dùng'));
+        const c = h('button', `bag-slot ${e.equipped ? 'on' : ''} ${e.key === sel ? 'sel' : ''}`);
+        const art = h('div', 'bag-art'); art.append(e.node(46));
+        c.append(art, h('div', 'bag-nm', e.name));
+        if (e.qty > 1) c.append(h('div', 'qty', `${e.qty}`));
+        if (e.equipped) c.append(h('div', 'bag-on'));
         c.title = e.name;
-        c.onclick = () => { sfx.click(); e.onClick(); redraw(); };
+        c.onclick = () => { sfx.click(); sel = e.key; draw(); };
         grid.append(c);
       }
-      for (let i = list.length; i < BAG_CAP; i++) grid.append(h('div', 'bag-slot empty'));
+      // chỉ đệm cho đủ hàng, không vẽ hết 100 ô trống (cuộn cả màn ô rỗng nhìn rất trống)
+      const perRow = 4;
+      const pad = list.length <= perRow * 2
+        ? perRow * 2 - list.length
+        : (perRow - list.length % perRow) % perRow;
+      for (let i = 0; i < pad; i++) grid.append(h('div', 'bag-slot empty'));
 
+      const left = h('div', 'bag-left');
       const scroll = h('div', 'bag-scroll');
       scroll.append(grid);
       const foot = h('div', 'bag-foot');
-      foot.append(h('div', 'bag-count', `Số ô sử dụng: ${all.length}/${BAG_CAP}`));
-      foot.append(btn('Sắp xếp', 'gold', () => { sortBag(); sfx.click(); draw(); }));
-      wrap.append(scroll, foot);
-      hub.append(wrap, side);
-      box.append(hub);
+      const capBar = h('div', 'bag-cap');
+      const capFill = h('div', 'bag-cap-f');
+      capFill.style.width = `${Math.min(100, all.length / BAG_CAP * 100)}%`;
+      capBar.append(capFill);
+      foot.append(h('div', 'bag-count', `${all.length}/${BAG_CAP} ô`), capBar,
+        btn('Sắp xếp', 'gold', () => { sortBag(); sfx.click(); draw(); }));
+      left.append(tabs, scroll, foot);
+
+      // ----- thẻ chi tiết món đang chọn (thay bảng hỏi đè lên) -----
+      const card = h('div', 'bag-card');
+      const e = list.find(x => x.key === sel);
+      if (!e) {
+        card.append(h('div', 'bag-card-empty', tab === 0
+          ? 'Túi đang trống. Nông sản, trứng/sữa/thịt và món đã nấu nằm ở Kho nông trại.'
+          : 'Không có món nào trong mục này.'));
+      } else {
+        const art = h('div', 'bag-card-art'); art.append(e.node(72));
+        card.append(art, h('div', 'bag-card-nm', e.name));
+        if (e.qty > 1) card.append(h('div', 'bag-card-qty', `Đang có x${e.qty}`));
+        if (e.desc) card.append(h('div', 'bag-card-desc', e.desc));
+        const acts = h('div', 'bag-card-acts');
+        for (const a of e.actions(close, () => { sfx.click(); draw(); })) {
+          acts.append(btn(a.label, a.kind ?? '', a.cb));
+        }
+        card.append(acts);
+      }
+
+      wrap.append(left, card);
+      box.append(wrap);
     };
     draw();
     return draw;
@@ -207,39 +252,40 @@ export function registerAllPanels() {
     bus.on(EV.INVENTORY, () => redraw());
   });
 
-  function itemActions(id: string, closeParent: () => void) {
+  // Danh sách hành động của 1 món — dùng cho thẻ chi tiết trong túi đồ.
+  function itemActionList(id: string, closeParent: () => void, redraw: () => void) {
     const def = item(id);
-    const acts: { icon: string; ui?: string; label: string; cb: () => void }[] = [];
+    const acts: { label: string; kind?: string; cb: () => void }[] = [];
+    const gain = (n: number) => {
+      const g = sellPrice(def.sell, n);
+      S.wallet.coins += g;
+      S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + g;
+      bus.emit(EV.WALLET); addStat('daily_sold', n);
+      if (def.kind === 'crop') addStat('sold_crops', n);
+      sfx.coin(); save();
+    };
     if (def.sell > 0) {
-      acts.push({
-        icon: '', label: `Bán 1 (+${sellPrice(def.sell)} xu)`, cb: () => {
-          if (removeItem(id)) { const g = sellPrice(def.sell); S.wallet.coins += g; S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + g; bus.emit(EV.WALLET); addStat('daily_sold'); if (def.kind === 'crop') addStat('sold_crops'); sfx.coin(); save(); }
-        }
-      });
+      acts.push({ label: `Bán 1 · ${sellPrice(def.sell)} xu`, kind: 'gold', cb: () => { if (removeItem(id)) { gain(1); redraw(); } } });
       const qty = itemCount(id);
-      if (qty > 1) acts.push({
-        icon: '', label: `Bán hết x${qty} (+${sellPrice(def.sell, qty)} xu)`, cb: () => {
-          if (removeItem(id, qty)) { const g = sellPrice(def.sell, qty); S.wallet.coins += g; S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + g; bus.emit(EV.WALLET); addStat('daily_sold', qty); if (def.kind === 'crop') addStat('sold_crops', qty); sfx.coin(); save(); }
-        }
-      });
+      if (qty > 1) acts.push({ label: `Bán hết · ${sellPrice(def.sell, qty)} xu`, cb: () => { if (removeItem(id, qty)) { gain(qty); redraw(); } } });
     }
     if (def.kind === 'gift' || def.kind === 'crop' || def.kind === 'food') {
-      acts.push({ icon: '', ui: 'gift', label: 'Tặng bạn bè', cb: () => pickFriendToGift(id) });
+      acts.push({ label: 'Tặng bạn', cb: () => pickFriendToGift(id) });
     }
     if (def.meta?.furniture) {
-      acts.push({ icon: '', ui: 'house', label: 'Đặt trong nhà', cb: () => { closeParent(); bus.emit('world:place', id); } });
+      acts.push({ label: 'Đặt trong nhà', kind: 'blue', cb: () => { closeParent(); bus.emit('world:place', id); } });
     }
     if (def.kind === 'fish') {
-      acts.push({ icon: '', ui: 'fish', label: 'Thả vào hồ cá nhà', cb: () => addToAquarium(id) });
+      acts.push({ label: 'Thả vào hồ cá', kind: 'blue', cb: () => addToAquarium(id) });
     }
     if (def.kind === 'tool' && id.startsWith('tool_')) {
-      acts.push({ icon: '', ui: 'hoe', label: 'Gắn lên thanh nông cụ', cb: () => equipTool(id.slice(5)) });
-      acts.push({ icon: '', ui: 'rank', label: 'Nâng cấp nông cụ', cb: () => openPanel('toolupgrade') });
+      acts.push({ label: 'Gắn lên thanh', kind: 'gold', cb: () => { equipTool(id.slice(5)); redraw(); } });
+      acts.push({ label: 'Nâng cấp', kind: 'blue', cb: () => openPanel('toolupgrade') });
     }
     if (def.id === 'food_cake') {
-      acts.push({ icon: '', ui: 'gift', label: 'Mở tiệc tại nhà', cb: () => { if (throwParty()) { closeParent(); } } });
+      acts.push({ label: 'Mở tiệc tại nhà', kind: 'blue', cb: () => { if (throwParty()) closeParent(); } });
     }
-    openPanel('dialog', { title: def.name, text: def.desc ?? `Giá bán: ${def.sell} xu`, actions: acts });
+    return acts;
   }
 
   function pickFriendToGift(itemId: string) {
@@ -506,7 +552,6 @@ export function registerAllPanels() {
   registerPanel('changeroom', () => {
     const zone = ZONES[S.zone];
     const { body, close } = openWindow(`Đổi khu — ${zone?.name ?? S.zone}`, { size: 'small' });
-    body.append(h('div', 'hint', `Mỗi khu chứa tối đa ${ROOM_CAP} người. Đổi khu là vào cùng địa điểm nhưng gặp nhóm người chơi khác.`));
     const grid = h('div', 'room-grid');
     for (let r = 1; r <= ROOM_COUNT; r++) {
       const n = r === S.zoneRoom ? Math.max(1, roomPlayers(S.zone, r)) : roomPlayers(S.zone, r);
@@ -2093,16 +2138,12 @@ export function registerAllPanels() {
     let channel: 'public' | 'area' | 'private' = data?.to ? 'private' : 'public';
     let privateTo = data?.to ?? S.social.friends[0]?.name ?? '';
 
-    // ----- đầu bảng -----
+    // ----- đầu bảng: chỉ là thanh kéo + nút đóng (bỏ ảnh đại diện, tên và
+    // số người trực tuyến — đã có sẵn trên HUD, để đây chỉ tổ chật) -----
     const head = h('div', 'cw-head');
-    const hAva = h('div', 'cw-head-ava'); hAva.append(avatarEl(30));
-    const hTxt = h('div', 'grow');
-    hTxt.append(h('div', 'cw-head-name', S.player.name || 'Bạn'));
-    const online = 1 + S.social.friends.filter(f => f.online).length;
-    hTxt.append(h('div', 'cw-head-sub', `${online} người đang trực tuyến`));
     const closeX = h('button', 'cw-x', '✕');
     closeX.onclick = close;
-    head.append(hAva, hTxt, closeX);
+    head.append(h('div', 'cw-grip'), closeX);
 
     // kéo đầu bảng = dời khung; dời xong đặt luôn nút chat về đó để lần sau
     // mở lại vẫn đúng chỗ (nút là mốc neo duy nhất)

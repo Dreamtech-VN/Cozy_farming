@@ -144,7 +144,7 @@ export function harvest(i: number): boolean {
   addTo('produce', c.id, qty);        // nông sản vào KHO, không vào túi
   // thu hoạch hoa thì có cơ hội hứng được mật ong từ đàn ong quanh vườn
   if (['grape', 'strawberry'].includes(c.id) && Math.random() < 0.25) {
-    addItem('honey');
+    addItem('honey');   // addItem tự chuyển mật ong vào kho nông trại
     toast('Đàn ong ghé vườn: +1 Mật ong!', 'plant');
   }
   addExp(c.exp);

@@ -33,7 +33,7 @@ const T = 16; // kích thước tile
 // Nhà bếp, nhà kho, sân rào nuôi thú, hồ cá và đường đất đã được vẽ sẵn trong
 // nền nên ở đây chỉ cần khai báo đúng vị trí của chúng để logic bám theo.
 const FARM_PLOT = { ox: 1068, oy: 195, pw: 42, ph: 45 };          // lưới ruộng 13x4 trên bãi cỏ phải
-const FARM_POND_TILES = { x: 110, y: 16, w: 12, h: 12 };          // lòng hồ cá (phủ nước động lên trên)
+const FARM_POND_TILES = { x: 109, y: 15, w: 15, h: 14 };          // lòng hồ cá (phủ nước động lên trên)
 const WAREHOUSE_POS = { x: 693, y: 175 };                         // nhà kho vẽ sẵn trên map 25
 const KITCHEN_POS = { x: 420, y: 175 };                           // nhà bếp vẽ sẵn trên map 25
 const ORDERBOARD_POS = { x: 56.2 * 16, y: 15.2 * 16 };            // bảng đơn hàng (chỗ cột đèn cũ)

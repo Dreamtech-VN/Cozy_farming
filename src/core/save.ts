@@ -1,7 +1,7 @@
 import type { GameState, StatKey } from './types';
 import { ZONES } from '@/data/zones';
 import { bus, EV, toast } from './events';
-import { migrateBagToStore } from '@/systems/farmstore';
+import { migrateBagToStore, addTo, type StoreKind } from '@/systems/farmstore';
 import { migrateHandItems } from '@/data/handitems';
 
 const KEY = 'cozy_farming_save_v1';
@@ -221,7 +221,26 @@ export function spend(coins: number, rubies = 0): boolean {
   return true;
 }
 
+// Nông sản / trứng - sữa - thịt - len / món đã nấu / hạt giống / phân bón nằm ở
+// KHO NÔNG TRẠI chứ không phải túi đồ (Lttt tách hẳn hai kho). Định tuyến ngay
+// trong addItem để mọi chỗ cộng đồ (đào đất, rung cây khế, quà nhiệm vụ, quà
+// bạn bè...) đều rơi đúng chỗ, khỏi phải nhớ sửa từng nơi.
+const PRODUCE_IDS = new Set([
+  'egg', 'milk', 'meat', 'pork', 'wool', 'honey', 'cheese', 'bread'
+]);
+
+export function storeSlotOf(itemId: string): [StoreKind, string] | null {
+  if (itemId.startsWith('seed_')) return ['seeds', itemId.slice(5)];
+  if (itemId.startsWith('crop_')) return ['produce', itemId.slice(5)];
+  if (itemId.startsWith('food_')) return ['produce', itemId];
+  if (itemId === 'fertilizer') return ['fert', 'fertilizer'];
+  if (PRODUCE_IDS.has(itemId)) return ['produce', itemId];
+  return null;
+}
+
 export function addItem(itemId: string, qty = 1) {
+  const slot = storeSlotOf(itemId);
+  if (slot && qty > 0) { addTo(slot[0], slot[1], qty); return; }
   S.inventory[itemId] = (S.inventory[itemId] ?? 0) + qty;
   if (S.inventory[itemId] <= 0) delete S.inventory[itemId];
   bus.emit(EV.INVENTORY); save();
