@@ -2497,7 +2497,12 @@ export function registerAllPanels() {
         const bar = h('div', 'ch-bottom');
         if (view.note?.length) {
           const nt = h('div', 'ch-note');
-          view.note.forEach(t => nt.append(h('div', '', t)));
+          // mỗi dòng có thể tách nhiều cụm bằng \t — cụm cách nhau một quãng rộng
+          view.note.forEach(t => {
+            const line = h('div', 'ch-note-l');
+            t.split('\t').forEach(part => line.append(h('span', '', part)));
+            nt.append(line);
+          });
           bar.append(nt);
         }
         if (view.foot.length) {
@@ -2648,7 +2653,7 @@ export function registerAllPanels() {
         grid: 'rows',
         full: true,
         note: [`【${cat.name}】${fmt(got)}/${fmt(need)}`,
-               `Thành tựu còn: ${fmt(achLeft())}     Tổng tiến độ: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`],
+               `Thành tựu còn: ${fmt(achLeft())}\tTổng tiến độ: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`],
         foot: [btn('Huy hiệu', 'gold', () => openPanel('achievement'))]
       };
     };
