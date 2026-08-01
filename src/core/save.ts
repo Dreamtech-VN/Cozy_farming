@@ -28,6 +28,9 @@ export function defaultState(): GameState {
       createdAt: Date.now()
     },
     wallet: { farmCoins: 0, coins: 500, rubies: 10 },
+    equip: { ring: '', necklace: '', hand: '', medal: '', treasure: '', earring: '' },
+    equipLv: {},
+    equipBag: [],
     inventory: {},
     wardrobe: ['hair:bob', 'clothes:basic'],
     chibiWardrobe: [],
@@ -90,7 +93,7 @@ export function toolLevel(id: string): number {
 
 // Cầm / cất đồ trên tay
 // ===== Nông cụ đang cầm =====
-// Muốn cuốc/tưới/thu hoạch thì phải chọn đúng nông cụ ở thanh trang bị trước.
+// Muốn cuốc/tưới/thu hoạch thì phải chọn đúng công cụ ở thanh công cụ trước.
 // Không lưu vào save — mỗi lần vào game tự chọn lại.
 let _heldTool = '';
 export function heldTool(): string { return _heldTool; }
@@ -107,13 +110,13 @@ export function toggleHand(partId: number) {
   bus.emit(EV.APPEARANCE);
 }
 
-// Thanh nông cụ giờ CỐ ĐỊNH: 4 ô đầu luôn là cuốc / bình tưới / liềm / rìu,
+// Thanh công cụ giờ CỐ ĐỊNH: 4 ô đầu luôn là cuốc / bình tưới / liềm / rìu,
 // ô cuối là cần câu (trống khi chưa mua). Không còn gắn - gỡ lung tung nữa.
 export function syncHotbar(): void {
   S.hotbar = [...FIXED_TOOLS, toolLevel('rod') > 0 ? 'rod' : ''];
 }
 
-/** Nông cụ này có bị khoá trên thanh không (không gỡ ra được). */
+/** Công cụ này có bị khoá trên thanh không (không gỡ ra được). */
 export function isFixedTool(id: string): boolean {
   return FIXED_TOOLS.includes(id);
 }
@@ -129,7 +132,7 @@ export function equipTool(id: string): boolean {
 }
 
 export function unequipTool(slot: number) {
-  // 4 nông cụ cơ bản là đồ cố định, chỉ ô cần câu mới gỡ được
+  // 4 công cụ cơ bản là đồ cố định, chỉ ô cần câu mới gỡ được
   if (slot !== ROD_SLOT || !S.hotbar[slot]) return;
   S.hotbar[slot] = '';
   save();
@@ -144,6 +147,9 @@ export function load(): boolean {
     // chỗ migrate giữa các version save về sau
     S = { ...defaultState(), ...data };
     if (!S.chibiWardrobe) S.chibiWardrobe = [];
+    if (!S.equip) S.equip = { ring: '', necklace: '', hand: '', medal: '', treasure: '', earring: '' };
+    if (!S.equipLv) S.equipLv = {};
+    if (!S.equipBag) S.equipBag = [];
     if (S.wallet.farmCoins === undefined) S.wallet.farmCoins = 0;
     // save cũ để đồ cầm tay trong túi -> chuyển vào tủ quần áo (như Lttt)
     migrateHandItems(S.inventory, S.chibiWardrobe);
@@ -152,7 +158,7 @@ export function load(): boolean {
     if (S.tools.basket === undefined) S.tools.basket = (S.inventory['tool_basket'] ?? 0) > 0 ? 1 : 0;
     if (!S.player.charStats) S.player.charStats = { health: 5, intellect: 5, strength: 5, agility: 5, charm: 5 };
     if (S.player.statPoints == null) S.player.statPoints = 0;
-    // 4 nông cụ cơ bản luôn có sẵn (save cũ có thể thiếu rìu/liềm)
+    // 4 công cụ cơ bản luôn có sẵn (save cũ có thể thiếu rìu/liềm)
     if (S.tools.axe === undefined) S.tools.axe = 1;
     if (!S.tools.basket) S.tools.basket = 1;
     if (!S.tools.hoe) S.tools.hoe = 1;

@@ -145,6 +145,10 @@ export interface GameState {
   // Lttt: thu hoạch/bán nông sản vào TÀI KHOẢN NÔNG TRẠI, ra ATM mới
   // chuyển sang ví chính tiêu được.
   wallet: { coins: number; rubies: number; farmCoins: number };
+  // trang bị (lấy từ GunPow, không có vũ khí)
+  equip: Record<string, string>;        // ô -> id món đang đeo
+  equipLv: Record<string, number>;      // id món -> cấp đập
+  equipBag: string[];                   // món đang cất trong túi trang bị
   inventory: Record<string, number>;
   wardrobe: string[];       // (cũ) thời trang pack Cozy
   chibiWardrobe: number[];  // part chibi đã sở hữu (id part Avatar)

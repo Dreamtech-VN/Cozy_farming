@@ -47,13 +47,16 @@ defItem({ id: 'meat', name: 'Thịt heo', kind: 'product', icon: '', sell: 90, d
 defItem({ id: 'pork', name: 'Nấm heo ủi', kind: 'product', icon: '', sell: 45, desc: 'Heo ủi đất tìm được nấm quý.', sprite: { url: 'assets/farm/chibi/mushroom.png', sx: 0, sy: 0, sw: 49, sh: 52 } });
 defItem({ id: 'wool', name: 'Len cừu', kind: 'product', icon: '', sell: 70, sprite: { url: 'assets/farm/chibi/wool.png', sx: 0, sy: 0, sw: 52, sh: 49 } });
 
-// ---- Nông cụ (mua ở bách hóa, gắn lên thanh nông cụ từ túi đồ) ----
-defItem({ id: 'tool_basket', name: 'Liềm gặt', kind: 'tool', icon: '', sell: 0, buy: 400, desc: 'Gắn lên thanh nông cụ để thu hoạch nhanh cây chín gần nhất.', sprite: { url: 'assets/farm/chibi/19_sickle.png', sx: 0, sy: 0, sw: 50, sh: 62 } });
+// ---- Công cụ (mua ở bách hóa) ----
+defItem({ id: 'tool_basket', name: 'Liềm gặt', kind: 'tool', icon: '', sell: 0, buy: 400, desc: 'Nằm sẵn trên thanh công cụ, thu hoạch nhanh cây chín gần nhất.', sprite: { url: 'assets/farm/chibi/19_sickle.png', sx: 0, sy: 0, sw: 50, sh: 62 } });
 defItem({ id: 'tool_axe', name: 'Rìu', kind: 'tool', icon: '', sell: 0, buy: 800, desc: 'Chặt cây ở Nông trại lấy Gỗ (cây mọc lại sau vài phút).', sprite: { url: 'assets/farm/chibi/20_axe.png', sx: 0, sy: 0, sw: 58, sh: 62 } });
 
 // ---- Nguyên liệu từ rìu / đào đất ----
 defItem({ id: 'wood', name: 'Gỗ', kind: 'material', icon: '', sell: 8, desc: 'Chặt từ cây bằng rìu. Nguyên liệu xây dựng sau này.', sprite: { url: 'assets/farm/chibi/wood.png', sx: 0, sy: 0, sw: 46, sh: 46 } });
 defItem({ id: 'stone', name: 'Đá', kind: 'material', icon: '', sell: 6, desc: 'Đào từ mấy đống đất ngoài nông trại / bãi biển.', sprite: { url: 'assets/farm/chibi/stone.png', sx: 0, sy: 0, sw: 52, sh: 49 } });
+
+// ---- Đá cường hoá: dùng để đập trang bị ----
+defItem({ id: 'enh_stone', name: 'Đá cường hoá', kind: 'material', icon: '', sprite: { url: 'assets/farm/chibi/stone.png', sx: 0, sy: 0, sw: 52, sh: 49 }, sell: 20, buy: 200, desc: 'Nguyên liệu đập trang bị. Mua ở quầy trang bị hoặc rơi ra khi đập hỏng.' });
 
 // ---- Mồi câu ----
 // Đúng 3 loại mồi của Lttt (bảng `items` trong avatar_2x.sql):

@@ -4,7 +4,7 @@ import { sfx } from '@/core/audio';
 import { TOOL_UPGRADES, toolUpgradeAt, TOOLS, type ToolUpgrade } from '@/data/tools';
 import { item } from '@/data/items';
 
-// ===== Nâng cấp nông cụ =====
+// ===== Nâng cấp công cụ =====
 // Không phải cứ có xu là lên cấp: mỗi bậc còn đòi NGUYÊN LIỆU (gỗ từ chặt cây,
 // đá từ đập đống đá) và có TỈ LỆ THÀNH CÔNG. Hỏng thì mất nguyên liệu + xu,
 // cấp giữ nguyên — nhưng mỗi lần hỏng được cộng dồn 8% cho lần sau (tối đa
@@ -13,7 +13,7 @@ import { item } from '@/data/items';
 export const FAIL_BONUS = 0.08;
 export const FAIL_BONUS_MAX = 0.4;
 
-/** Số lần hỏng đã cộng dồn cho nông cụ này. */
+/** Số lần hỏng đã cộng dồn cho công cụ này. */
 export function failStreak(tool: string): number {
   return S.stats[`upfail_${tool}`] ?? 0;
 }
@@ -36,9 +36,9 @@ export interface UpgradeResult { ok: boolean; done?: boolean; msg?: string }
 
 export function upgradeTool(tool: string): UpgradeResult {
   const lv = toolLevel(tool);
-  if (lv <= 0) return { ok: false, msg: 'Chưa sở hữu nông cụ này.' };
+  if (lv <= 0) return { ok: false, msg: 'Chưa sở hữu công cụ này.' };
   const next = toolUpgradeAt(tool, lv + 1);
-  if (!next) return { ok: false, msg: 'Nông cụ đã ở cấp cao nhất.' };
+  if (!next) return { ok: false, msg: 'Công cụ đã ở cấp cao nhất.' };
 
   const miss = missingMats(next);
   if (miss.length) {
@@ -75,5 +75,5 @@ export function upgradeTool(tool: string): UpgradeResult {
   return { ok: true, done: win };
 }
 
-/** Danh sách nông cụ có đường nâng cấp (dùng cho panel). */
+/** Danh sách công cụ có đường nâng cấp (dùng cho panel). */
 export const UPGRADABLE = Object.keys(TOOL_UPGRADES);

@@ -62,7 +62,7 @@ export const FISH_LIST = Object.values(FISHES);
 
 // Cần câu — 3 bậc lấy đúng theo Lttt (bảng items: 442 tre / 445 sắt / 446 VIP).
 // `part` là id part chibi Avatar: mua cần là có luôn hình cầm tay trong tủ đồ.
-// Icon shop/thanh nông cụ cắt ra từ CHÍNH 3 part đó (scripts/make_rod_icons.py)
+// Icon shop/thanh công cụ cắt ra từ CHÍNH 3 part đó (scripts/make_rod_icons.py)
 // nên icon và cái cần cầm trên tay là cùng một hình — sheet 3 ô 32x32.
 export const ROD_SHEET = 'assets/fishing/rods.png';
 

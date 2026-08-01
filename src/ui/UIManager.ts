@@ -447,7 +447,7 @@ function buildJoystick() {
   });
 }
 
-// ================= Thanh nông cụ (cạnh joystick) =================
+// ================= Thanh công cụ (cạnh joystick) =================
 export function refreshHotbar() {
   let bar = document.getElementById('hotbar');
   if (!bar) { bar = h('div'); bar.id = 'hotbar'; root().append(bar); }
@@ -469,7 +469,7 @@ export function refreshHotbar() {
       if (heldTool() === tid) slot.classList.add('hb-on');
       const held = heldTool() === tid;
       slot.title = `${t.name}${lv >= 2 ? ` Lv.${lv}` : ''} — bấm để ${held ? 'cất đi' : 'cầm'}`;
-      // bấm = cầm nông cụ này (và dùng luôn nếu đang đứng cạnh chỗ dùng được);
+      // bấm = cầm công cụ này (và dùng luôn nếu đang đứng cạnh chỗ dùng được);
       // bấm lại đúng món đang cầm = cất xuống, không cầm trên tay nữa
       slot.onclick = () => {
         sfx.click();
@@ -477,7 +477,7 @@ export function refreshHotbar() {
         selectTool(tid);
         if (!wasHeld) bus.emit('hotbar:use', tid);
       };
-      // 4 nông cụ cơ bản là đồ cố định — chỉ ô cần câu mới gỡ được
+      // 4 công cụ cơ bản là đồ cố định — chỉ ô cần câu mới gỡ được
       if (i === ROD_SLOT) {
         const off = () => { unequipTool(i); toast(`Đã cất ${t.name}.`, 'rod'); };
         let hold = 0;
@@ -492,7 +492,7 @@ export function refreshHotbar() {
       slot.title = 'Ô cần câu — mua cần ở tiệm câu Ông Biển';
       slot.onclick = () => { sfx.click(); toast('Ô này dành cho cần câu — mua cần ở tiệm câu Ông Biển nhé.', 'rod'); };
     } else {
-      // 4 ô đầu luôn có nông cụ nên nhánh này gần như không xảy ra
+      // 4 ô đầu luôn có công cụ nên nhánh này gần như không xảy ra
       slot.classList.add('empty');
       slot.textContent = '+';
     }

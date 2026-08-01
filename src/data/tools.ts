@@ -1,4 +1,4 @@
-// ===== Nông cụ trang bị trên thanh nhanh (hotbar) =====
+// ===== Công cụ trên thanh nhanh (hotbar) =====
 // Cuốc / bình tưới / rìu / liềm dùng Cloverframe Cozy Farm pack (assets/farm/cf).
 // Cần câu / vợt / xẻng vẫn dùng icon style chibi Avatar (xem docs/ASSETS.md).
 
@@ -24,12 +24,12 @@ export const TOOLS: Record<string, ToolDef> = {
 
 export const TOOL_LIST = Object.values(TOOLS);
 
-// 4 nông cụ cơ bản LUÔN nằm sẵn trên thanh, không gỡ ra được — đi làm đồng là
+// 4 công cụ cơ bản LUÔN nằm sẵn trên thanh, không gỡ ra được — đi làm đồng là
 // có đủ cuốc/tưới/gặt/chặt, khỏi phải vào túi gắn từng cái.
 export const FIXED_TOOLS = ['hoe', 'can', 'basket', 'axe'];
 export const DEFAULT_HOTBAR = [...FIXED_TOOLS, ''];
 
-// ===== Nâng cấp nông cụ (tăng chỉ số) =====
+// ===== Nâng cấp công cụ (tăng chỉ số) =====
 // Cần câu & vợt không nâng tại chỗ — mua loại xịn hơn ở tiệm câu Ông Biển (RODS/NETS).
 //
 // Nâng cấp không chỉ tốn xu: phải gom đủ NGUYÊN LIỆU (gỗ chặt cây, đá đập đống

@@ -29,6 +29,8 @@ import { ROOM_COUNT, ROOM_CAP, roomPlayers, roomFull, suggestedFriends, addFrien
 import { claimLogin, checkinToday, spinWheel, grantWheel, wheelSpinsLeft, loginRewardToday } from '@/systems/meta';
 import { upgradeHouse, setWallpaper, setFloor, throwParty } from '@/systems/housing';
 import { sfx, startBgm, stopBgm } from '@/core/audio';
+import { EQUIP_SLOTS, equipsOfSlot, equipDef, enhanceRate, enhanceCost, dropsOnFail, MAX_ENHANCE, ENHANCE_STONE, type EquipSlot, type EquipDef } from '@/data/equip';
+import { equipLevel, pieceStats, combatPower, cpBreakdown, equipPiece, unequipPiece, autoEquip, smash, buyEquip } from '@/systems/equipment';
 import { upgradeTool, upgradeRate, missingMats, failStreak, UPGRADABLE, FAIL_BONUS, FAIL_BONUS_MAX } from '@/systems/toolcraft';
 import type { Reward } from '@/data/quests';
 
@@ -121,16 +123,16 @@ export function registerAllPanels() {
   }
 
   // Nông sản / hạt giống / trứng - sữa - thịt / món đã nấu nằm ở KHO NÔNG TRẠI
-  // (như Lttt), túi đồ chỉ giữ nông cụ, cá câu, nội thất, quà và nguyên liệu.
+  // (như Lttt), túi đồ chỉ giữ công cụ, cá câu, nội thất, quà và nguyên liệu.
   const BAG_TABS: [string, (k: string) => boolean][] = [
     ['Tất cả', () => true],
-    ['Nông cụ', k => k === 'tool'],
+    ['Công cụ', k => k === 'tool'],
     ['Cá', k => k === 'fish'],
     ['Nội thất', k => ['furniture', 'deco'].includes(k)],
     ['Khác', k => ['gift', 'material', 'special'].includes(k)]
   ];
 
-  // Nông cụ cũng nằm trong túi (kind ảo 'tool'); đồ cầm tay ở tủ đồ
+  // Công cụ cũng nằm trong túi (kind ảo 'tool'); đồ cầm tay ở tủ đồ
   interface BagEntry {
     key: string; kind: string; name: string; desc: string; qty: number;
     node: (size?: number) => HTMLElement; equipped: boolean;
@@ -145,7 +147,7 @@ export function registerAllPanels() {
       const lv = toolLevel(t.id);
       out.push({
         key: `tool:${t.id}`, kind: 'tool', name: t.name, qty: 0, equipped: on,
-        desc: on ? 'Đang gắn trên thanh nông cụ.' : 'Gắn lên thanh nông cụ để dùng ngoài đồng.',
+        desc: on ? 'Đang nằm trên thanh công cụ.' : 'Công cụ cơ bản luôn nằm sẵn trên thanh.',
         node: (size = 58) => { const d = h('div'); d.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, size))); return d; },
         actions: (_c, redraw) => [
           { label: on ? 'Gỡ khỏi thanh' : 'Gắn lên thanh', kind: on ? '' : 'gold',
@@ -237,7 +239,7 @@ export function registerAllPanels() {
 
         // bảng thông số nhỏ: loại · đang có · bán được bao nhiêu xu
         const KIND_NAME: Record<string, string> = {
-          tool: 'Nông cụ', fish: 'Cá', furniture: 'Nội thất', deco: 'Trang trí',
+          tool: 'Công cụ', fish: 'Cá', furniture: 'Nội thất', deco: 'Trang trí',
           gift: 'Quà', material: 'Nguyên liệu', special: 'Đặc biệt',
           seed: 'Hạt giống', crop: 'Nông sản', product: 'Sản phẩm', food: 'Món ăn'
         };
@@ -850,9 +852,12 @@ export function registerAllPanels() {
         }
       }
       body.append(grid);
-      // bách hóa có quầy nâng cấp nông cụ
+      // bách hóa có quầy nâng cấp công cụ
       if (mode === 0 && shop.id === 'shop_general') {
-        body.append(btn('Nâng cấp nông cụ', 'blue', () => openPanel('toolupgrade')));
+        const row = h('div'); row.style.cssText = 'display:flex;gap:8px;justify-content:center;flex-wrap:wrap';
+        row.append(btn('Nâng cấp công cụ', 'blue', () => openPanel('toolupgrade')),
+          btn('Quầy trang bị', 'blue', () => openPanel('equipshop')));
+        body.append(row);
       }
     };
     tabs(['Mua', 'Bán'], i => { mode = i; render(); });
@@ -1297,7 +1302,8 @@ export function registerAllPanels() {
   // ================= Nhân vật: hub có cột tab dọc bên phải (kiểu GunPow) =================
   // [id, tên, icon trong assets/ui/inv]
   const CH_SECTIONS: [string, string, string][] = [
-    ['wardrobe', 'Quần áo', 'ic_shirt'], ['skin', 'Skin', 'ic_skin'], ['title', 'Danh hiệu', 'ic_title']
+    ['wardrobe', 'Quần áo', 'ic_shirt'], ['equip', 'Trang bị', 'ic_hand'],
+    ['skin', 'Skin', 'ic_skin'], ['title', 'Danh hiệu', 'ic_title']
   ];
 
   // Tủ đồ dựng theo đúng mẫu Inventory của Cozy UI Pack: tab dán trên nóc,
@@ -1331,6 +1337,7 @@ export function registerAllPanels() {
       openCharHubRefresh = draw;
       if (sec === 'wardrobe') openWardrobe(main);
       else if (sec === 'skin') openWardrobe(main, 'skin');
+      else if (sec === 'equip') openEquip(main);
       else renderTitles(main, draw);
     };
     draw();
@@ -1750,16 +1757,50 @@ export function registerAllPanels() {
     body.append(grid);
   });
 
-  // ================= Nâng cấp nông cụ =================
+  // ================= Quầy trang bị (Bách hóa) =================
+  // Bán 6 ô trang bị + đá cường hoá. Tất cả bằng XU — lượng là tiền nạp, chỉ
+  // dùng cho gacha / skin giới hạn.
+  registerPanel('equipshop', () => {
+    if (!atShopZone('equipshop', 'Quầy trang bị (Bách hóa)')) return;
+    const { body, tabs } = openWindow('Quầy trang bị', { size: 'large' });
+    let slot: EquipSlot = 'ring';
+    const render = () => {
+      body.innerHTML = '';
+      const stoneRow = h('div', 'row');
+      const si = h('div'); si.append(iconOf(item(ENHANCE_STONE), 32));
+      const sinfo = h('div', 'grow');
+      sinfo.innerHTML = `<div class="t1">Đá cường hoá <span class="qty">x${itemCount(ENHANCE_STONE)}</span></div><div class="t2">Nguyên liệu đập trang bị.</div>`;
+      stoneRow.append(si, sinfo, priceBtn(200, 'gold', () => {
+        if (spend(200)) { addItem(ENHANCE_STONE); sfx.coin(); render(); }
+      }));
+      body.append(stoneRow);
+
+      const grid = h('div', 'eq-grid');
+      for (const d of equipsOfSlot(slot)) {
+        const owned = S.equipBag.includes(d.id) || S.equip[d.slot] === d.id;
+        const c = h('button', `eq-cell ${owned ? 'owned' : ''}`);
+        c.append(spr(d.url, 0, 0, d.w, d.h, 34), h('div', 'eq-nm', d.name));
+        c.append(h('div', 'eq-price', owned ? 'Đã có' : fmt(d.price)));
+        c.title = `${d.name} — bậc ${d.tier}`;
+        c.onclick = () => { if (!owned) { if (buyEquip(d.id)) render(); } else toast('Món này đã có rồi.', 'inventory'); };
+        grid.append(c);
+      }
+      body.append(grid);
+    };
+    tabs(EQUIP_SLOTS.map(s2 => s2.name), i => { slot = EQUIP_SLOTS[i].id; render(); });
+    render();
+  });
+
+  // ================= Nâng cấp công cụ =================
   registerPanel('toolupgrade', () => {
-    if (!atShopZone('toolupgrade', 'Quầy nâng cấp nông cụ (Bách hóa)')) return;
-    const { body } = openWindow('Nâng cấp nông cụ', { size: 'large' });
+    if (!atShopZone('toolupgrade', 'Quầy nâng cấp công cụ (Bách hóa)')) return;
+    const { body } = openWindow('Nâng cấp công cụ', { size: 'large' });
     let sel = UPGRADABLE[0];
     const render = () => {
       body.innerHTML = '';
       const wrap = h('div', 'up-wrap');
 
-      // ----- cột trái: 4 nông cụ nâng được -----
+      // ----- cột trái: 4 công cụ nâng được -----
       const list = h('div', 'up-list');
       for (const tid of UPGRADABLE) {
         const t = TOOLS[tid];
@@ -1796,7 +1837,7 @@ export function registerAllPanels() {
 
       if (!next) {
         cbody.append(h('div', 'up-desc', cur?.desc ?? ''));
-        cbody.append(h('div', 'up-note', 'Nông cụ này đã lên hết cấp rồi.'));
+        cbody.append(h('div', 'up-note', 'Công cụ này đã lên hết cấp rồi.'));
       } else {
         cbody.append(h('div', 'up-desc', next.desc));
 
@@ -1844,6 +1885,144 @@ export function registerAllPanels() {
   // Tủ đồ kiểu GunPow: trái là nhân vật giữa các ô trang bị, phải là lưới đồ chia tab
   // sức chứa mỗi ngăn tủ đồ
   const WD_CAP = 100;
+
+  // ===== Tab Trang bị: 6 ô đồ + đập đồ (lấy hệ trang bị của GunPow, bỏ vũ khí) =====
+  function openEquip(body: HTMLElement) {
+    let sel: EquipSlot = 'ring';
+    const render = () => {
+      body.innerHTML = '';
+      body.classList.add('wd-body');
+      const wrap = h('div', 'wd-wrap');
+
+      // ---- trái: nhân vật + 6 ô trang bị + lực chiến ----
+      const left = h('div', 'wd-left');
+      const figure = h('div', 'wd-figure');
+      const colL = h('div', 'wd-slot-col');
+      const colR = h('div', 'wd-slot-col');
+      const mid = h('div', 'wd-char');
+      if (S.player.chibi) mid.append(charFaceFluid(S.player.chibi));
+      EQUIP_SLOTS.forEach((sl, i) => {
+        const cell = h('button', `wd-slot eqs-${sl.id} ${sl.id === sel ? 'active' : ''}`);
+        const def = equipDef(S.equip[sl.id]);
+        if (def) {
+          cell.append(spr(def.url, 0, 0, def.w, def.h, 30));
+          const lv = equipLevel(def.id);
+          if (lv > 0) cell.append(h('div', 'eq-plus', `+${lv}`));
+        } else cell.classList.add('empty');
+        cell.append(h('span', 'wd-slot-name', sl.name));
+        cell.title = sl.name;
+        cell.onclick = () => { sfx.click(); sel = sl.id; render(); };
+        (i < 3 ? colL : colR).append(cell);
+      });
+      figure.append(colL, mid, colR);
+
+      const nameRow = h('div', 'wd-name-row');
+      const lvb = h('div', 'wd-lv'); lvb.textContent = `${S.player.level}`;
+      const nm = h('div', 'wd-name'); nm.textContent = S.player.name;
+      nameRow.append(lvb, nm);
+
+      // lực chiến thay cho bảng chỉ số
+      const b = cpBreakdown();
+      const cpBox = h('div', 'cp-box');
+      const cpN = h('div', 'cp-n'); cpN.textContent = fmt(combatPower());
+      cpBox.append(h('div', 'cp-k', 'LỰC CHIẾN'), cpN);
+      const parts = h('div', 'cp-parts');
+      for (const [k, v] of [['Gốc', b.base], ['Quần áo', b.clothes], ['Trang bị', b.equip], ['Cấp', b.level], ['Đập', b.enhance]] as [string, number][]) {
+        const c = h('div', 'cp-part');
+        c.append(h('div', 'cp-part-k', k), h('div', 'cp-part-v', fmt(v)));
+        parts.append(c);
+      }
+      left.append(figure, nameRow, cpBox, parts);
+
+      // ---- phải: danh sách món của ô đang chọn + khu đập ----
+      const right = h('div', 'wd-right');
+      const chips = h('div', 'wd-chips');
+      EQUIP_SLOTS.forEach(sl => {
+        const t = h('button', `wd-chip ${sl.id === sel ? 'on' : ''}`);
+        const art = h('div', 'wd-chip-art');
+        const cur = equipDef(S.equip[sl.id]);
+        if (cur) art.append(spr(cur.url, 0, 0, cur.w, cur.h, 24));
+        else { const im = document.createElement('img'); im.src = 'assets/ui/inv/ic_hand.png'; art.append(im); }
+        t.append(art, h('span', 'wd-chip-nm', sl.name));
+        const n = S.equipBag.filter(id => equipDef(id)?.slot === sl.id).length;
+        if (n) t.append(h('span', 'wd-chip-n', `${n}`));
+        t.onclick = () => { sfx.click(); sel = sl.id; render(); };
+        chips.append(t);
+      });
+      right.append(chips);
+
+      const card = h('div', 'wd-card');
+      const cur = equipDef(S.equip[sel]);
+
+      // khu đập cho món đang đeo
+      if (cur) {
+        const lv = equipLevel(cur.id);
+        const box = h('div', 'sm-box');
+        const art = h('div', 'sm-art');
+        art.append(spr(cur.url, 0, 0, cur.w, cur.h, 44));
+        if (lv > 0) art.append(h('div', 'eq-plus', `+${lv}`));
+        const info = h('div', 'sm-info');
+        const st = pieceStats(cur, lv);
+        const txt = STAT_KEYS.filter(k => st[k] > 0).map(k => `${STAT_NAMES[k]} +${st[k]}`).join(' · ');
+        info.append(h('div', 'sm-nm', `${cur.name}${lv ? ` +${lv}` : ''}`), h('div', 'sm-st', txt));
+        box.append(art, info);
+
+        if (lv >= MAX_ENHANCE) {
+          box.append(btn('Tối đa', '', undefined));
+        } else {
+          const cost = enhanceCost(cur, lv);
+          const rate = enhanceRate(lv);
+          const side = h('div', 'sm-side');
+          const rr = h('div', 'sm-rate');
+          const bar = h('div', 'sm-rate-bar');
+          const fill = h('div', 'sm-rate-f'); fill.style.width = `${Math.round(rate * 100)}%`;
+          if (rate < 0.6) fill.classList.add('low');
+          bar.append(fill);
+          rr.append(bar, h('div', 'sm-rate-n', `${Math.round(rate * 100)}%`));
+          const need = h('div', 'sm-need');
+          need.innerHTML = `${priceHtml(cost.coins)} · <b>${itemCount(ENHANCE_STONE)}/${cost.stones}</b> đá`;
+          const go = btn(`Đập +${lv + 1}`, 'gold', () => { smash(cur.id); render(); });
+          go.classList.add('sm-go');
+          side.append(rr, need, go);
+          box.append(side);
+        }
+        card.append(box);
+        if (dropsOnFail(lv)) card.append(h('div', 'sm-warn', 'Từ +7 trở lên, đập hỏng sẽ TỤT 1 cấp.'));
+        const off = btn('Cởi ra', 'mini', () => { unequipPiece(sel); render(); });
+        card.append(off);
+      }
+
+      // danh sách món cùng ô trong túi
+      const list = S.equipBag.map(equipDef).filter((d): d is EquipDef => !!d && d.slot === sel)
+        .sort((a, b2) => b2.tier - a.tier);
+      card.append(h('div', 'up-cap', `TRONG TÚI (${list.length})`));
+      if (!list.length) {
+        card.append(h('div', 'wd-blank', 'Chưa có món nào cho ô này — mua ở Quầy trang bị (Bách hóa).'));
+      } else {
+        const grid = h('div', 'eq-grid');
+        for (const d of list) {
+          const c = h('button', 'eq-cell');
+          c.append(spr(d.url, 0, 0, d.w, d.h, 34));
+          const l2 = equipLevel(d.id);
+          if (l2 > 0) c.append(h('div', 'eq-plus', `+${l2}`));
+          c.append(h('div', 'eq-nm', d.name));
+          c.title = `${d.name} — bậc ${d.tier}`;
+          c.onclick = () => { equipPiece(d.id); render(); };
+          grid.append(c);
+        }
+        card.append(grid);
+      }
+      right.append(card);
+
+      const foot = h('div', 'eq-foot');
+      foot.append(btn('Mặc tối ưu', 'gold', () => { autoEquip(); render(); }));
+      right.append(foot);
+
+      wrap.append(left, right);
+      body.append(wrap);
+    };
+    render();
+  }
 
   function openWardrobe(body: HTMLElement, mode: 'wear' | 'skin' = 'wear') {
     const look = S.player.chibi;
@@ -1915,23 +2094,19 @@ export function registerAllPanels() {
       left.append(figure, nameRow, expRow);
 
       if (mode !== 'skin') {
-        // chỉ số xếp 2 cột như mẫu
-        const eq = equipStats(look);
-        const max = Math.max(10, ...STAT_KEYS.map(k => S.player.charStats[k] + eq[k]));
-        const box = h('div', 'wd-stats-box');
-        for (const k of STAT_KEYS) {
-          const base = S.player.charStats[k], bonus = eq[k];
-          const row = h('div', 'wd-stat');
-          row.append(h('span', 'wd-stat-nm', STAT_NAMES[k]));
-          const bar = h('div', 'wd-stat-bar');
-          const f1 = h('div', 'wd-stat-f'); f1.style.width = `${(base / max) * 100}%`;
-          const f2 = h('div', 'wd-stat-f2'); f2.style.width = `${(bonus / max) * 100}%`;
-          bar.append(f1, f2);
-          row.append(bar, h('span', 'wd-stat-n', bonus ? `${base}+${bonus}` : `${base}`));
-          row.title = `${STAT_NAMES[k]}: ${base} gốc${bonus ? ` + ${bonus} từ quần áo` : ''}`;
-          box.append(row);
+        // Ở đây hiện LỰC CHIẾN chứ không bày bảng chỉ số nữa — chỉ số chi tiết
+        // xem ở tab Trang bị.
+        const b = cpBreakdown();
+        const cpBox = h('div', 'cp-box');
+        const cpN = h('div', 'cp-n'); cpN.textContent = fmt(combatPower());
+        cpBox.append(h('div', 'cp-k', 'LỰC CHIẾN'), cpN);
+        const parts = h('div', 'cp-parts');
+        for (const [k, v] of [['Gốc', b.base], ['Quần áo', b.clothes], ['Trang bị', b.equip], ['Cấp', b.level], ['Đập', b.enhance]] as [string, number][]) {
+          const c = h('div', 'cp-part');
+          c.append(h('div', 'cp-part-k', k), h('div', 'cp-part-v', fmt(v)));
+          parts.append(c);
         }
-        left.append(box);
+        left.append(cpBox, parts);
       }
 
       // ----- phải: chia tab + card lưới ô (có cả ô trống như tủ đồ game) -----

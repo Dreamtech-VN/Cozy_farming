@@ -1347,7 +1347,7 @@ export class WorldScene extends Phaser.Scene {
         })
       });
       // Việc cần nông cụ chỉ hiện khi ĐANG CẦM đúng nông cụ đó; chưa cầm thì
-      // hiện mục nhắc, bấm vào là cầm luôn (nông cụ nằm sẵn trên thanh trang bị).
+      // hiện mục nhắc, bấm vào là cầm luôn (công cụ nằm sẵn trên thanh công cụ).
       const needTool = (tool: 'hoe' | 'can' | 'basket', label: string, cb: () => void) => {
         if (heldTool() === tool) { acts.push({ icon: '', sprite: TOOL_ICON[tool], label, cb }); return; }
         acts.push({
