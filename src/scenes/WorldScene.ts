@@ -179,7 +179,7 @@ const TOOL_ICON = {
   can: { url: 'assets/farm/chibi/17_watering_can.png', sx: 0, sy: 0, sw: 62, sh: 50 },
   basket: { url: 'assets/farm/chibi/19_sickle.png', sx: 0, sy: 0, sw: 50, sh: 62 },
   net: { url: 'assets/chibi/tools/net.png', sx: 0, sy: 0, sw: 48, sh: 46 },
-  rod: { url: 'assets/fishing/rod.png', sx: 0, sy: 0, sw: 16, sh: 16 },
+  rod: { url: 'assets/fishing/rod.png', sx: 0, sy: 0, sw: 32, sh: 32 },
   seed: { url: 'assets/farm/chibi/16_seed_bag.png', sx: 0, sy: 0, sw: 56, sh: 62 }
 };
 

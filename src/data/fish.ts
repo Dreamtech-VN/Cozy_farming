@@ -62,7 +62,8 @@ export const FISH_LIST = Object.values(FISHES);
 
 // Cần câu — 3 bậc lấy đúng theo Lttt (bảng items: 442 tre / 445 sắt / 446 VIP).
 // `part` là id part chibi Avatar: mua cần là có luôn hình cầm tay trong tủ đồ.
-// Icon riêng từng bậc nằm chung sheet assets/fishing/rods.png (3 ô 16x16).
+// Icon shop/thanh nông cụ cắt ra từ CHÍNH 3 part đó (scripts/make_rod_icons.py)
+// nên icon và cái cần cầm trên tay là cùng một hình — sheet 3 ô 32x32.
 export const ROD_SHEET = 'assets/fishing/rods.png';
 
 export interface RodDef {
@@ -82,7 +83,7 @@ export const RODS: RodDef[] = [
 // ô icon của bậc cần (tier 0 = chưa có cần thì lấy tạm ô cần tre)
 export function rodIconRect(tier: number) {
   const i = Math.min(Math.max(tier, 1), RODS.length) - 1;
-  return { url: ROD_SHEET, sx: i * 16, sy: 0, sw: 16, sh: 16 };
+  return { url: ROD_SHEET, sx: i * 32, sy: 0, sw: 32, sh: 32 };
 }
 
 export const RARITY_COLOR: Record<FishRarity, string> = {

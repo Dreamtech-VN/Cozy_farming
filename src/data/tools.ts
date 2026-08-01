@@ -17,7 +17,7 @@ export const TOOLS: Record<string, ToolDef> = {
   // ảnh 19_sickle là cái LIỀM nên tên phải là Liềm (trước gọi "Giỏ thu hoạch"
   // mà vẽ cái liềm). Công dụng vẫn là gặt nhanh cây chín gần nhất.
   basket: { id: 'basket', name: 'Liềm gặt', icon: '', url: 'assets/farm/chibi/19_sickle.png', w: 50, h: 62 },
-  rod: { id: 'rod', name: 'Cần câu', icon: '🎣', url: 'assets/fishing/rod.png', w: 16, h: 16 },
+  rod: { id: 'rod', name: 'Cần câu', icon: '🎣', url: 'assets/fishing/rod.png', w: 32, h: 32 },
   net: { id: 'net', name: 'Vợt côn trùng', icon: '🥅', url: 'assets/chibi/tools/net.png', w: 48, h: 46 },
   axe: { id: 'axe', name: 'Rìu', icon: '', url: 'assets/farm/chibi/20_axe.png', w: 58, h: 62 }
 };
