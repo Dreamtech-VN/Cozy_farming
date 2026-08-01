@@ -2350,6 +2350,24 @@ export function registerAllPanels() {
     quick?: HTMLElement;
   }
 
+  /** Dải 8 ô trang bị quanh nhân vật — dùng chung cho mọi mục của màn Nhân vật. */
+  function equipSlotStrip(redraw: () => void): ChSlot[] {
+    return EQUIP_SLOTS.map(sl => {
+      const d = equipDef(S.equip[sl.id]);
+      return {
+        key: sl.id,
+        name: d ? `${d.name}${equipLevel(d.id) ? ` +${equipLevel(d.id)}` : ''}` : sl.name,
+        art: d ? spr(d.url, 0, 0, d.w, d.h, 34) : undefined,
+        grade: d ? `gr-${equipGrade(d.tier)}` : undefined,
+        badge: d && equipLevel(d.id) ? `+${equipLevel(d.id)}` : undefined,
+        star: d ? equipStar(d.id) : 0,
+        pips: d ? [d.sockets, gemsOn(d.id).map(Boolean)] as [number, boolean[]] : undefined,
+        emptyIcon: `assets/equip/slot/${sl.id}.png`,
+        click: () => { if (d) equipDetail(d, redraw); }
+      };
+    });
+  }
+
   function openCharSection(box: HTMLElement, sec: string) {
     let filter = '';
     const render = () => {
@@ -2365,6 +2383,9 @@ export function registerAllPanels() {
         filter = view.filters[0]?.key ?? '';
         view = build();
       }
+      // Dải ô trang bị luôn nằm hai bên nhân vật ở MỌI mục — đổi mục chỉ đổi
+      // nội dung khung phải, giống GunPow.
+      const slots = view.slots.length ? view.slots : equipSlotStrip(render);
 
       const page = h('div', 'ch-page');
 
@@ -2386,8 +2407,8 @@ export function registerAllPanels() {
       const doll = h('div', 'ch-doll');
       if (S.player.chibi) doll.append(charFaceFluid(S.player.chibi));
 
-      const half = Math.ceil(view.slots.length / 2);
-      view.slots.forEach((sl, i) => {
+      const half = Math.ceil(slots.length / 2);
+      slots.forEach((sl, i) => {
         const cell = h('button', `ch-slot ${sl.grade ?? ''} ${sl.art ? '' : 'empty'} ${sl.on ? 'on' : ''}`);
         if (sl.art) cell.append(sl.art);
         else if (sl.emptyIcon) {
@@ -2404,8 +2425,7 @@ export function registerAllPanels() {
       });
       for (let i = colR.children.length; i < half; i++) colR.append(h('div', 'ch-slot pad'));
       if (view.quick) doll.append(view.quick);
-      if (view.slots.length) figure.append(colL, doll, colR);
-      else figure.append(doll);
+      figure.append(colL, doll, colR);
       side.append(figure);
 
       const b2 = cpBreakdown();
@@ -2470,21 +2490,7 @@ export function registerAllPanels() {
     const viewEquip = (f: string, redraw: () => void): ChView => {
       const bag = S.equipBag.map(equipDef).filter((d): d is EquipDef => !!d);
       const gradeOf = (d: EquipDef) => `gr-${equipGrade(d.tier)}`;
-      // Đủ 8 ô của GunPow, chia đều 4 trái / 4 phải. Vũ khí là MỘT Ô như các ô
-      // khác — "đồ cầm tay" là món thời trang chibi bên Tủ đồ, chuyện khác hẳn.
-      const slots: ChSlot[] = EQUIP_SLOTS.map(sl => {
-        const d = equipDef(S.equip[sl.id]);
-        return {
-          key: sl.id, name: d ? `${d.name}${equipLevel(d.id) ? ` +${equipLevel(d.id)}` : ''}` : sl.name,
-          art: d ? spr(d.url, 0, 0, d.w, d.h, 34) : undefined,
-          grade: d ? gradeOf(d) : undefined,
-          badge: d && equipLevel(d.id) ? `+${equipLevel(d.id)}` : undefined,
-          star: d ? equipStar(d.id) : 0,
-          pips: d ? [d.sockets, gemsOn(d.id).map(Boolean)] as [number, boolean[]] : undefined,
-          emptyIcon: `assets/equip/slot/${sl.id}.png`,
-          click: () => { if (d) equipDetail(d, redraw); else { filter = sl.id; redraw(); } }
-        };
-      });
+      const slots = equipSlotStrip(redraw);
 
       // 3 nút tròn dùng đúng icon buff_02/03/04 trong ui/bag của apk
       const quick = h('div', 'ch-quick');
@@ -2541,14 +2547,8 @@ export function registerAllPanels() {
       const wearing = look[key] as number;
       const owned = chibiList(z, look.gender).filter(p => S.chibiWardrobe.includes(p.id) || p.id === wearing);
       return {
-        slots: CLOSET.map(([k, nm, zz]) => {
-          const id = look[k] as number;
-          return {
-            key: k, name: id ? (CHIBI_PARTS[id]?.name ?? nm) : nm,
-            art: id ? art(id, zz, 34) : undefined, on: k === key,
-            click: () => { filter = k; redraw(); }
-          };
-        }),
+        // khung trái vẫn là dải ô trang bị chung; quần áo chọn ở khung phải
+        slots: [],
         filters: CLOSET.map(([k, nm, zz]) => ({ key: k, name: nm,
           n: chibiList(zz, look.gender).filter(p => S.chibiWardrobe.includes(p.id)).length })),
         cells: owned.map(p => ({
