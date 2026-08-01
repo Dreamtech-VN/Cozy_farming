@@ -62,6 +62,7 @@ export interface FarmStore {
   seeds: Record<string, number>;     // cropId -> số hạt
   produce: Record<string, number>;   // cropId -> số nông sản
   fert: Record<string, number>;      // loại phân -> số lượng
+  fish: Record<string, number>;      // fishId -> số con (cá cũng nằm ở kho, không ở túi)
 }
 
 // Đang nấu ở nhà bếp (Lttt: mỗi lúc 1 món, có đếm giờ)

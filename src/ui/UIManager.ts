@@ -150,16 +150,15 @@ function buildHud() {
   // ngăn kéo menu — mọi tính năng nằm trong này
   const drawer = h('div'); drawer.id = 'menu-drawer';
   const MENU: [string, string, string][] = [
-    ['inventory', 'Kho đồ', 'inventory'],
+    ['inventory', 'Túi đồ', 'inventory'],
     ['mail', 'Thư', 'mail'],
     ['map', 'Bản đồ', 'map'],
-    ['room', 'Đổi khu', 'changeroom'],
     ['social', 'Bạn bè', 'social'],
     ['daily', 'Điểm danh', 'daily'],
     ['wheel', 'Vòng quay', 'wheel'],
     ['collection', 'Sưu tập', 'collections'],
     ['trophy', 'Xếp hạng', 'ranking'],
-    ['wardrobe', 'Tủ đồ', 'wardrobe'],
+    ['wardrobe', 'Nhân vật', 'wardrobe'],
     ['ruby', 'Nạp', 'topup'],
     ['settings', 'Cài đặt', 'settings']
   ];

@@ -529,20 +529,24 @@ export function registerAllPanels() {
     const { body, tabs, win } = openWindow('Kho nông trại', { size: 'large' });
     win.classList.add('win-wh');
     const content = h('div', 'wh-wrap');
-    const KINDS: [StoreKind, string][] = [['produce', 'Nông sản'], ['seeds', 'Hạt giống'], ['fert', 'Phân bón']];
+    const KINDS: [StoreKind, string][] =
+      [['produce', 'Nông sản'], ['fish', 'Cá'], ['seeds', 'Hạt giống'], ['fert', 'Phân bón']];
 
     const nameOf = (kind: StoreKind, id: string) =>
-      kind === 'fert' ? 'Phân bón' : kind === 'seeds' ? (CROPS[id]?.name ?? id) : produceName(id);
+      kind === 'fert' ? 'Phân bón' : kind === 'seeds' ? (CROPS[id]?.name ?? id)
+        : kind === 'fish' ? (item(id).name ?? id) : produceName(id);
     const iconFor = (kind: StoreKind, id: string) =>
       kind === 'fert' ? uiIcon('fertilizer', 46)
-        : kind === 'seeds' ? iconOf(item(`seed_${id}`), 46) : produceIcon(id, 46);
-    const sellOf = (kind: StoreKind, id: string) => kind === 'produce' ? produceSell(id) : 0;
+        : kind === 'seeds' ? iconOf(item(`seed_${id}`), 46)
+          : kind === 'fish' ? iconOf(item(id), 46) : produceIcon(id, 46);
+    const sellOf = (kind: StoreKind, id: string) =>
+      kind === 'produce' ? produceSell(id) : kind === 'fish' ? (item(id).sell ?? 0) : 0;
 
     const render = (kind: StoreKind) => {
       content.innerHTML = '';
       const rows = listOf(kind);
       const head = h('div', 'wh-head');
-      head.append(h('div', 'wh-hint', kind === 'produce'
+      head.append(h('div', 'wh-hint', kind === 'fish' ? 'Cá câu được cất ở kho, bán được giá.' : kind === 'produce'
         ? 'Nông sản, trứng/sữa/thịt từ chuồng, cá nuôi và món đã nấu đều cất ở đây.'
         : kind === 'seeds' ? 'Hạt giống dùng để gieo ngoài ruộng.' : 'Phân bón giúp cây nhanh lớn và khỏe hơn.'));
       head.append(h('div', 'wh-total', `${rows.reduce((a, [, n]) => a + n, 0)} món`));
@@ -2338,6 +2342,8 @@ export function registerAllPanels() {
                   star?: number; pips?: [number, boolean[]]; flag?: string;
                   /** đang có việc để bấm (nhận thưởng) — tô nổi lên */
                   hot?: boolean;
+                  /** ô tích ở cột phải: true = đang bật, false = tắt, undefined = không có */
+                  check?: boolean;
                   dim?: boolean; on?: boolean; click: () => void };
   interface ChView {
     slots: ChSlot[];
@@ -2478,6 +2484,7 @@ export function registerAllPanels() {
         if (c.star) cell.append(h('div', 'ch-star', '★'.repeat(c.star)));
         if (c.pips) cell.append(pipRow(c.pips));
         cell.append(h('div', 'ch-cell-nm', c.name));
+        if (c.check !== undefined) cell.append(h('div', `ch-check ${c.check ? 'on' : ''}`));
         if (c.flag) cell.append(h('div', 'ch-flag', c.flag));
         cell.title = c.name;
         cell.onclick = () => { sfx.click(); c.click(); };
@@ -2549,8 +2556,7 @@ export function registerAllPanels() {
         empty: f === 'worn' ? 'Chưa đeo món nào.'
           : 'Chưa có món nào ở mục này — mở rương trang bị để kiếm.',
         quick, fast: true,
-        foot: [btn('Lò rèn', 'gold', () => openPanel('smithy')),
-               btn('Mặc tối ưu', 'green', () => { autoEquip(); redraw(); })]
+        foot: []
       };
     };
 
@@ -2570,8 +2576,20 @@ export function registerAllPanels() {
       const wearing = look[key] as number;
       const owned = chibiList(z, look.gender).filter(p => S.chibiWardrobe.includes(p.id) || p.id === wearing);
       return {
-        // khung trái vẫn là dải ô trang bị chung; quần áo chọn ở khung phải
-        slots: [],
+        // khung trái là 6 ô QUẦN ÁO của chibi (mũ, kính, tóc, áo, quần, cầm tay)
+        slots: CLOSET.map(([k, nm, zz, opt]) => {
+          const id = look[k] as number;
+          return {
+            key: k, name: id ? (CHIBI_PARTS[id]?.name ?? nm) : nm,
+            art: id ? art(id, zz, 34) : undefined, on: k === key,
+            emptyIcon: `assets/ui/inv/ic_${k === 'pant' ? 'pants' : k}.png`,
+            click: () => {
+              // bấm ô đang mặc thì cởi luôn (nếu món đó cởi được)
+              if (k === key && id && opt) { (look as unknown as Record<string, unknown>)[k] = 0; apply(); return; }
+              filter = k; redraw();
+            }
+          };
+        }),
         filters: CLOSET.map(([k, nm, zz]) => ({ key: k, name: nm,
           n: chibiList(zz, look.gender).filter(p => S.chibiWardrobe.includes(p.id)).length })),
         cells: owned.map(p => ({
@@ -2580,12 +2598,7 @@ export function registerAllPanels() {
           click: () => { (look as unknown as Record<string, unknown>)[key] = wearing === p.id && optional ? 0 : p.id; apply(); }
         })),
         empty: `Chưa có ${cur[1].toLowerCase()} nào — ghé shop thời trang ở Khu mua sắm.`,
-        foot: [
-          btn('Cởi món này', '', () => {
-            if (!optional) { toast(`${cur[1]} không cởi được.`, 'alert'); return; }
-            (look as unknown as Record<string, unknown>)[key] = 0; apply();
-          }),
-          btn('Shop thời trang', 'gold', () => openPanel('fashion'))]
+        foot: []
       };
     };
 
@@ -2609,7 +2622,9 @@ export function registerAllPanels() {
           wrapc.append(titlePlaque(t?.name ?? a.title!, has ? (t?.color ?? '#ffe066') : '#9b8a72', 1.1));
           return {
             name: a.desc, art: wrapc, dim: !has && !canClaim(a), on, hot: canClaim(a),
-            flag: on ? 'Đang đeo' : canClaim(a) ? 'Nhận ngay' : has ? 'Đã mở' : 'Chưa nhận',
+            // đã mở khoá thì cột phải là Ô TÍCH: tích = đang đeo, bỏ tích = gỡ
+            check: has ? on : undefined,
+            flag: has ? undefined : canClaim(a) ? 'Nhận ngay' : 'Chưa nhận',
             click: () => {
               if (canClaim(a)) { claim(a.id); redraw(); return; }
               if (!has) { toast(a.desc, 'quest'); return; }
@@ -2623,12 +2638,7 @@ export function registerAllPanels() {
         full: true,
         note: `【${cat.name}】${fmt(got)}/${fmt(need)}  ·  Chờ nhận: ${fmt(pendingPoints())}`
           + `  ·  Tổng: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`,
-        foot: [
-          btn('Gỡ danh hiệu', '', () => {
-            if (!S.player.title) { toast('Đang không đeo danh hiệu nào.', 'alert'); return; }
-            S.player.title = ''; save(); bus.emit(EV.STATE_CHANGED); redraw();
-          }),
-          btn('Huy hiệu', 'gold', () => openPanel('achievement'))]
+        foot: [btn('Huy hiệu', 'gold', () => openPanel('achievement'))]
       };
     };
 
@@ -2672,12 +2682,7 @@ export function registerAllPanels() {
         note: wearing
           ? `Đang dùng 【${SKIN_RANKS[skinRank(wearing)].name}】${wearing.name}`
           : 'Chưa mặc bộ ảo hoá nào.',
-        foot: [
-          btn('Hủy ảo hoá', '', () => {
-            if (!look.skin) { toast('Đang không mặc bộ nào.', 'alert'); return; }
-            look.skin = undefined; save(); bus.emit(EV.APPEARANCE); redraw();
-          }),
-          btn('Rương ảo hoá', 'green', () => openPanel('fashion'))]
+        foot: []
       };
     };
 

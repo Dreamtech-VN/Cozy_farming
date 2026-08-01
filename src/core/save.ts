@@ -46,7 +46,7 @@ export function defaultState(): GameState {
     hotbar: [...FIXED_TOOLS, ''],
     tools: { rod: 0, can: 1, hoe: 1, net: 0, basket: 1, axe: 1 },
     farm: { unlocked: 6, plots: [] },
-    farmStore: { seeds: { carrot: 5 }, produce: {}, fert: {} },
+    farmStore: { seeds: { carrot: 5 }, produce: {}, fert: {}, fish: {} },
     orders: [],
     fishfarm: [],
     livestock: { barnLevel: 0, animals: [] },
@@ -181,7 +181,7 @@ export function load(): boolean {
     if (!S.tools.can) S.tools.can = 1;
     syncHotbar();
     // save cũ để hạt/nông sản/phân trong túi -> chuyển sang kho nông trại
-    if (!S.farmStore) S.farmStore = { seeds: {}, produce: {}, fert: {} };
+    if (!S.farmStore) S.farmStore = { seeds: {}, produce: {}, fert: {}, fish: {} };
     migrateBagToStore();
     // save cũ còn đứng ở map cổng (đã bỏ) -> đưa về nông trại
     if (!ZONES[S.zone]) S.zone = 'farm';

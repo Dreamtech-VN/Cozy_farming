@@ -1,21 +1,22 @@
 // ===== Kho nông trại (theo Lttt) =====
 // Lttt tách hẳn kho nông trại khỏi túi đồ: FarmService.getInventory() trả về
 // 3 danh sách riêng — hatgiong (hạt giống), NongSan (nông sản), PhanBon (phân bón).
-// Túi đồ chỉ giữ đồ dùng/quà/cá..., KHÔNG chứa nông sản nữa.
+// Túi đồ chỉ giữ đồ dùng / quà / nguyên liệu; nông sản VÀ CÁ đều nằm ở kho.
 
 import { S, save } from '@/core/save';
 import { bus, EV } from '@/core/events';
 import type { FarmStore } from '@/core/types';
+import { item } from '@/data/items';
 
 export type StoreKind = keyof FarmStore;   // 'seeds' | 'produce' | 'fert'
 
 export function emptyStore(): FarmStore {
-  return { seeds: {}, produce: {}, fert: {} };
+  return { seeds: {}, produce: {}, fert: {}, fish: {} };
 }
 
 export function ensureStore() {
   if (!S.farmStore) S.farmStore = emptyStore();
-  for (const k of ['seeds', 'produce', 'fert'] as StoreKind[]) {
+  for (const k of ['seeds', 'produce', 'fert', 'fish'] as StoreKind[]) {
     if (!S.farmStore[k]) S.farmStore[k] = {};
   }
 }
@@ -62,6 +63,10 @@ export function migrateBagToStore() {
       delete S.inventory[itemId];
     } else if (itemId === 'fertilizer') {
       addTo('fert', 'fertilizer', qty);
+      delete S.inventory[itemId];
+    } else if (item(itemId).kind === 'fish') {
+      // cá câu được cũng thuộc kho nông trại, save cũ để trong túi thì dọn sang
+      addTo('fish', itemId, qty);
       delete S.inventory[itemId];
     }
   }

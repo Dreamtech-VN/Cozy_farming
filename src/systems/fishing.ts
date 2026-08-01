@@ -2,6 +2,7 @@ import { S, save, addItem, addExp, addStat, equipTool, removeItem, itemCount } f
 import { bus, EV, toast } from '@/core/events';
 import { FISH_LIST, FISHES, RODS, RARITY_NAME, type FishDef } from '@/data/fish';
 import { sfx } from '@/core/audio';
+import { addTo, takeFrom } from './farmstore';
 
 // ===== Câu cá =====
 
@@ -69,7 +70,8 @@ export function rollFish(zone: string): FishDef | undefined {
 
 export function landFish(fish: FishDef) {
   baitRareBonus = 0;
-  addItem(fish.id);
+  // cá vào KHO NÔNG TRẠI chứ không vào túi đồ
+  addTo('fish', fish.id);
   addExp(fish.rarity === 'legendary' ? 100 : fish.rarity === 'epic' ? 40 : fish.rarity === 'rare' ? 15 : 6);
   addStat('fish_caught'); addStat('daily_fish');
   if (!S.collections.fish.includes(fish.id)) {
@@ -87,9 +89,7 @@ export function addToAquarium(fishId: string): boolean {
   if (!hasTank) { toast('Cần đặt Hồ cá trong nhà trước.', 'fish'); return false; }
   const cap = S.house.furniture.some(f => f.itemId === 'aquarium_big') ? 8 : 3;
   if (S.house.aquarium.length >= cap) { toast('Hồ cá đầy rồi!'); return false; }
-  if (!S.inventory[fishId]) return false;
-  S.inventory[fishId]--;
-  if (S.inventory[fishId] <= 0) delete S.inventory[fishId];
+  if (!takeFrom('fish', fishId)) return false;
   S.house.aquarium.push(fishId);
   bus.emit(EV.INVENTORY); bus.emit(EV.HOUSE); save();
   toast(`Đã thả ${FISHES[fishId]?.name ?? 'cá'} vào hồ.`, 'fish');
