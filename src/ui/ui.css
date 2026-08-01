@@ -993,10 +993,9 @@ input.ui-input, select.ui-input {
 .wr-tabs {
   flex: none; width: 92px; display: flex; flex-direction: column; gap: 8px;
   padding: 34px 10px 14px 0; justify-content: flex-start; overflow: hidden;
-  background: rgba(0, 0, 0, .12); border-left: 1px solid rgba(255, 255, 255, .18);
+  /* không có khung nền — chỉ mấy cái tab nổi trên nền trang */
 }
-/* dải tab bám mép TRÁI nên chỉ bo tròn phía PHẢI — mép trái phải phẳng để
-   ăn liền vào thành khung, bo cả 4 góc trông như đang trôi giữa trời */
+/* tab bo tròn phía PHẢI, mép trái phẳng */
 .wr-tab {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
   cursor: pointer; font-family: inherit; padding: 7px 6px 8px 4px; width: 100%;
