@@ -31,7 +31,8 @@ import { upgradeHouse, setWallpaper, setFloor, throwParty } from '@/systems/hous
 import { sfx, startBgm, stopBgm } from '@/core/audio';
 import { EQUIP_SLOTS, equipDef, enhanceRate, enhanceCost, dropsOnFail, MAX_ENHANCE, ENHANCE_STONE,
   MAX_STAR, starCost, starRate, gemDef, GEM_LIST, gemPower, gemMergeTo, GEM_MERGE_N,
-  REFORGE_STONE, REFORGE_LINES, reforgeMax, reforgePower, reforgeCost, type EquipSlot, type EquipDef } from '@/data/equip';
+  REFORGE_STONE, REFORGE_LINES, reforgeMax, reforgePower, reforgeCost, equipGrade,
+  type EquipSlot, type EquipDef } from '@/data/equip';
 import { equipLevel, pieceStats, combatPower, cpBreakdown, equipPiece, unequipPiece, autoEquip, smash, smashUntil, openChestMany, inherit, canInherit, inheritCost,
   equipStar, upStar, gemsOn, gemCount, socketGem, unsocketGem, mergeGem, addGem, EQUIP_CHESTS, openChest,
   refLines, refLocks, toggleRefLock, refScore, reforge } from '@/systems/equipment';
@@ -2347,7 +2348,8 @@ export function registerAllPanels() {
 
   // ===== Tab Trang bị: 6 ô đồ + đập đồ (lấy hệ trang bị của GunPow, bỏ vũ khí) =====
   function openEquip(body: HTMLElement) {
-    let sel: EquipSlot = 'ring';
+    // 'all' = xem hết đồ trong túi, như mục "Toàn bộ" của GunPow
+    let sel: EquipSlot | 'all' = 'ring';
     const render = () => {
       body.innerHTML = '';
       body.classList.add('wd-body');
@@ -2367,6 +2369,7 @@ export function registerAllPanels() {
         const cell = h('button', `wd-slot eqs-${sl.id} ${sl.id === sel ? 'active' : ''}`);
         const def = equipDef(S.equip[sl.id]);
         if (def) {
+          cell.classList.add(`gr-${equipGrade(def.tier)}`);
           cell.append(spr(def.url, 0, 0, def.w, def.h, 30));
           const lv = equipLevel(def.id);
           if (lv > 0) cell.append(h('div', 'eq-plus', `+${lv}`));
@@ -2379,9 +2382,14 @@ export function registerAllPanels() {
             for (let k = 0; k < def.sockets; k++) pips.append(h('i', gs[k] ? 'on' : ''));
             cell.append(pips);
           }
-        } else cell.classList.add('empty');
-        cell.append(h('span', 'wd-slot-name', sl.name));
-        cell.title = sl.name;
+          cell.classList.add('has');
+        } else {
+          cell.classList.add('empty');
+          // chỉ ô trống mới cần chữ; ô có đồ thì để ảnh chiếm hết cho gọn,
+          // tên đầy đủ đã nằm ở thẻ bên phải rồi
+          cell.append(h('span', 'wd-slot-name', sl.name));
+        }
+        cell.title = def ? `${def.name}${equipLevel(def.id) ? ` +${equipLevel(def.id)}` : ''}` : sl.name;
         cell.onclick = () => { sfx.click(); sel = sl.id; render(); };
         (i < half ? colL : colR).append(cell);
       });
@@ -2407,6 +2415,14 @@ export function registerAllPanels() {
       const nm = h('div', 'wd-name'); nm.textContent = S.player.name;
       nameRow.append(lvb, nm);
 
+      const need = S.player.level * 100;
+      const pct = Math.min(100, Math.round(S.player.exp / need * 1000) / 10);
+      const expRow = h('div', 'wd-exp');
+      const eb = h('div', 'wd-exp-bar');
+      const ef = h('div', 'wd-exp-f'); ef.style.width = `${pct}%`;
+      eb.append(ef);
+      expRow.append(h('div', 'wd-exp-k', 'Cấp'), eb, h('div', 'wd-exp-n', `${pct}%`));
+
       // lực chiến thay cho bảng chỉ số
       const b = cpBreakdown();
       const cpBox = h('div', 'cp-box');
@@ -2418,11 +2434,17 @@ export function registerAllPanels() {
         c.append(h('div', 'cp-part-k', k), h('div', 'cp-part-v', fmt(v)));
         parts.append(c);
       }
-      left.append(figure, nameRow, cpBox, parts);
+      left.append(figure, nameRow, expRow, cpBox, parts);
 
       // ---- phải: danh sách món của ô đang chọn + khu đập ----
       const right = h('div', 'wd-right');
       const chips = h('div', 'wd-chips');
+      const allChip = h('button', `wd-chip ${sel === 'all' ? 'on' : ''}`);
+      allChip.append(h('div', 'wd-chip-art'), h('span', 'wd-chip-nm', 'Toàn bộ'));
+      const nAll = S.equipBag.filter(id => equipDef(id)).length;
+      if (nAll) allChip.append(h('span', 'wd-chip-n', `${nAll}`));
+      allChip.onclick = () => { sfx.click(); sel = 'all'; render(); };
+      chips.append(allChip);
       EQUIP_SLOTS.forEach(sl => {
         const t = h('button', `wd-chip ${sl.id === sel ? 'on' : ''}`);
         const art = h('div', 'wd-chip-art');
@@ -2438,7 +2460,7 @@ export function registerAllPanels() {
       right.append(chips);
 
       const card = h('div', 'wd-card');
-      const cur = equipDef(S.equip[sel]);
+      const cur = sel === 'all' ? undefined : equipDef(S.equip[sel]);
 
       // khu đập cho món đang đeo
       if (cur) {
@@ -2463,7 +2485,7 @@ export function registerAllPanels() {
           if (g) sk.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 18));
           socks.append(sk);
         });
-        meta.append(socks, btn('Cởi ra', 'mini', () => { unequipPiece(sel); render(); }));
+        meta.append(socks, btn('Cởi ra', 'mini', () => { unequipPiece(cur.slot); render(); }));
         box.append(meta);
         card.append(box);
         // 3 trang riêng như GunPow
@@ -2478,15 +2500,18 @@ export function registerAllPanels() {
       }
 
       // danh sách món cùng ô trong túi
-      const list = S.equipBag.map(equipDef).filter((d): d is EquipDef => !!d && d.slot === sel)
+      const list = S.equipBag.map(equipDef)
+        .filter((d): d is EquipDef => !!d && (sel === 'all' || d.slot === sel))
         .sort((a, b2) => b2.tier - a.tier);
       card.append(h('div', 'up-cap', `TRONG TÚI (${list.length})`));
       if (!list.length) {
-        card.append(h('div', 'wd-blank', 'Chưa có món nào cho ô này — mở rương trang bị ở Bách hóa để kiếm.'));
+        card.append(h('div', 'wd-blank', sel === 'all'
+          ? 'Túi trang bị đang trống — mở rương trang bị ở Bách hóa để kiếm.'
+          : 'Chưa có món nào cho ô này — mở rương trang bị ở Bách hóa để kiếm.'));
       } else {
         const grid = h('div', 'eq-grid');
         for (const d of list) {
-          const c = h('button', 'eq-cell');
+          const c = h('button', `eq-cell gr-${equipGrade(d.tier)}`);
           c.append(spr(d.url, 0, 0, d.w, d.h, 34));
           const l2 = equipLevel(d.id);
           if (l2 > 0) c.append(h('div', 'eq-plus', `+${l2}`));

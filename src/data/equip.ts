@@ -77,6 +77,16 @@ export function equipDef(id?: string): EquipDef | undefined {
 // ===== Đập trang bị (cường hoá kiểu GunPow) =====
 // Mỗi món đập được tới +15. Mỗi cấp cộng thêm 12% chỉ số gốc của món.
 // Càng lên cao tỉ lệ càng thấp và cần nhiều đá cường hoá hơn.
+/** Bậc món -> hạng phẩm chất, dùng để tô viền ô như GunPow. */
+export type EquipGrade = 'thuong' | 'tot' | 'hiem' | 'quy' | 'thanh';
+export function equipGrade(tier: number): EquipGrade {
+  if (tier >= 19) return 'thanh';
+  if (tier >= 15) return 'quy';
+  if (tier >= 10) return 'hiem';
+  if (tier >= 5) return 'tot';
+  return 'thuong';
+}
+
 export const MAX_ENHANCE = 15;
 export const ENHANCE_STONE = 'enh_stone';
 
