@@ -2344,8 +2344,6 @@ export function registerAllPanels() {
     foot: HTMLElement[];
     /** kiểu lưới: ô vuông (mặc định) | ô ngang cho danh hiệu | ô cao cho skin */
     grid?: 'wide' | 'tall';
-    /** vũ khí vẽ trên tay nhân vật (mục Trang bị) */
-    hand?: HTMLElement;
     /** cụm nút tròn dưới chân nhân vật */
     quick?: HTMLElement;
   }
@@ -2399,7 +2397,6 @@ export function registerAllPanels() {
         (i < half ? colL : colR).append(cell);
       });
       for (let i = colR.children.length; i < half; i++) colR.append(h('div', 'ch-slot pad'));
-      if (view.hand) doll.append(view.hand);
       if (view.quick) doll.append(view.quick);
       if (view.slots.length) figure.append(colL, doll, colR);
       else figure.append(doll);
@@ -2468,9 +2465,9 @@ export function registerAllPanels() {
     const viewEquip = (f: string, redraw: () => void): ChView => {
       const bag = S.equipBag.map(equipDef).filter((d): d is EquipDef => !!d);
       const gradeOf = (d: EquipDef) => `gr-${equipGrade(d.tier)}`;
-      // Vũ khí không nằm trong dải ô — nhân vật CẦM nó trên tay như mẫu,
-      // 6 ô còn lại chia đều 3 trái / 3 phải.
-      const slots: ChSlot[] = EQUIP_SLOTS.filter(sl => sl.id !== 'weapon').map(sl => {
+      // Đủ 8 ô của GunPow, chia đều 4 trái / 4 phải. Vũ khí là MỘT Ô như các ô
+      // khác — "đồ cầm tay" là món thời trang chibi bên Tủ đồ, chuyện khác hẳn.
+      const slots: ChSlot[] = EQUIP_SLOTS.map(sl => {
         const d = equipDef(S.equip[sl.id]);
         return {
           key: sl.id, name: d ? `${d.name}${equipLevel(d.id) ? ` +${equipLevel(d.id)}` : ''}` : sl.name,
@@ -2482,20 +2479,6 @@ export function registerAllPanels() {
           click: () => { if (d) equipDetail(d, redraw); else { filter = sl.id; redraw(); } }
         };
       });
-
-      const wp = equipDef(S.equip.weapon);
-      const hand = h('button', `ch-hand ${wp ? gradeOf(wp) : 'empty'}`);
-      if (wp) {
-        hand.append(spr(wp.url, 0, 0, wp.w, wp.h, 52));
-        const wl = equipLevel(wp.id);
-        if (wl) hand.append(h('div', 'ch-badge', `+${wl}`));
-        hand.title = `${wp.name}${wl ? ` +${wl}` : ''}`;
-        hand.onclick = () => { sfx.click(); equipDetail(wp, redraw); };
-      } else {
-        hand.append(h('span', 'ch-slot-nm', 'Vũ khí'));
-        hand.title = 'Chưa cầm vũ khí';
-        hand.onclick = () => { sfx.click(); filter = 'weapon'; redraw(); };
-      }
 
       const quick = h('div', 'ch-quick');
       const qbtn = (icon: string, w: number, hh: number, tip: string, go: () => void) => {
@@ -2526,7 +2509,7 @@ export function registerAllPanels() {
         })),
         empty: f === 'worn' ? 'Chưa đeo món nào.'
           : 'Không có món nào ở mục này — mở rương trang bị để kiếm.',
-        hand, quick,
+        quick,
         foot: [btn('Lò rèn', 'gold', () => openPanel('smithy')),
                btn('Mặc tối ưu', 'green', () => { autoEquip(); redraw(); })]
       };
