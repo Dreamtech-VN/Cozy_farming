@@ -2293,13 +2293,14 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 
 /* --- cột trái: tab chức năng + khung thao tác --- */
 .gp-left { flex: 0 0 46%; min-width: 0; display: flex; flex-direction: column; min-height: 0; }
-/* Dải tab nằm gọn đúng bề ngang khung bên dưới: mỗi tab tự co (flex:1) nên
-   không món nào lòi ra ngoài mép bo tròn nữa. */
-.gp-ftabs { flex: none; display: flex; gap: 3px; width: 100%; }
+/* Dải tab nằm gọn trong bề ngang khung bên dưới: mỗi tab tự co (flex:1), và
+   cả dải thụt vào đúng bằng bán kính bo góc của khung nên góc vuông của tab
+   đầu/cuối không còn thò ra ngoài chỗ bo tròn. */
+.gp-ftabs { flex: none; display: flex; gap: 3px; width: 100%; padding: 0 14px; }
 .gp-ftab {
-  flex: 1 1 0; min-width: 0; padding: 6px 4px 9px; margin-bottom: -3px;
-  border-radius: 12px 12px 0 0; cursor: pointer; text-align: center;
-  font-family: inherit; font-size: 11.5px; font-weight: 900; color: #e7f0dd; line-height: 1.15;
+  flex: 1 1 0; min-width: 0; padding: 7px 2px 9px; margin-bottom: -3px;
+  border-radius: 12px 12px 0 0; cursor: pointer; text-align: center; white-space: nowrap;
+  font-family: inherit; font-size: 10.5px; font-weight: 900; color: #e7f0dd; line-height: 1.15;
   background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .26); border-bottom: none;
 }
 .gp-ftab.on {
@@ -2389,11 +2390,17 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .gp-row-s { font-size: 10.5px; font-weight: 800; color: #b2f2bb; }
 
 /* --- cột phải: rail ô dọc --- */
-.gp-rail { flex: 0 0 88px; display: flex; flex-direction: column; gap: 5px; overflow-y: auto; }
+/* Rail dọc: lùi xuống cho ngang tầm khung thao tác, bo góc quay sang PHẢI
+   (mép trái phẳng để ăn liền vào cột danh sách bên cạnh). */
+.gp-rail {
+  flex: 0 0 88px; display: flex; flex-direction: column; gap: 5px;
+  overflow-y: auto; padding-top: 26px;
+}
 .gp-rt {
-  flex: none; padding: 8px 4px 9px; border-radius: 10px 0 0 10px; cursor: pointer; font-family: inherit;
+  flex: none; padding: 8px 4px 9px 6px; border-radius: 0 10px 10px 0; cursor: pointer;
+  font-family: inherit; text-align: center;
   font-size: 11.5px; font-weight: 900; color: #e7f0dd;
-  background: rgba(255, 255, 255, .13); border: 1px solid rgba(255, 255, 255, .24); border-right: none;
+  background: rgba(255, 255, 255, .13); border: 1px solid rgba(255, 255, 255, .24); border-left: none;
 }
 .gp-rt.on { background: linear-gradient(#ffe066, #f0a318); border-color: #ffe9a8; color: #4a3005; }
 /* Kế thừa: khối món nhỏ trong 2 ô nguồn / đích */
