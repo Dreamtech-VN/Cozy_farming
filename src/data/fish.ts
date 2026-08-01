@@ -66,13 +66,17 @@ export const FISH_LIST = Object.values(FISHES);
 export const ROD_SHEET = 'assets/fishing/rods.png';
 
 export interface RodDef {
-  tier: number; name: string; price: number; bonus: number; part: number;
+  tier: number; name: string; price: number; cur: 'coin' | 'ruby'; bonus: number; part: number;
 }
 
+// Giá + loại tiền chép nguyên bảng `items`:
+//   (442, 10000, -1, ... 'cần câu tre')   -> 10.000 xu
+//   (445,    -1, 25, ... 'cần câu sắt')   -> 25 lượng
+//   (446,    -1, 100, ... 'cần câu VIP')  -> 100 lượng
 export const RODS: RodDef[] = [
-  { tier: 1, name: 'Cần câu tre', price: 200, bonus: 0, part: 442 },
-  { tier: 2, name: 'Cần câu sắt', price: 1500, bonus: 0.1, part: 445 },
-  { tier: 3, name: 'Cần câu VIP', price: 8000, bonus: 0.25, part: 446 }
+  { tier: 1, name: 'Cần câu tre', price: 10000, cur: 'coin', bonus: 0, part: 442 },
+  { tier: 2, name: 'Cần câu sắt', price: 25, cur: 'ruby', bonus: 0.1, part: 445 },
+  { tier: 3, name: 'Cần câu VIP', price: 100, cur: 'ruby', bonus: 0.25, part: 446 }
 ];
 
 // ô icon của bậc cần (tier 0 = chưa có cần thì lấy tạm ô cần tre)

@@ -1118,6 +1118,8 @@ export class WorldScene extends Phaser.Scene {
   // ================= câu cá =================
   private startFishing() {
     if (S.tools.rod <= 0) { toast('Bạn chưa có cần câu — mua ở tiệm câu Bãi biển.', 'rod'); sfx.error(); return; }
+    // Lttt: quăng câu là trừ 1 mồi, hết mồi thì "Hết mồi rồi sếp"
+    if (!fishing.hasBait()) { toast('Hết mồi rồi sếp — ghé tiệm câu mua thêm nhé.', 'rod'); sfx.error(); return; }
     if (this.fishingState !== 'idle') return;
     this.fishingState = 'waiting';
     this.busy = true;

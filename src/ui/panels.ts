@@ -228,8 +228,27 @@ export function registerAllPanels() {
       } else {
         const art = h('div', 'bag-card-art'); art.append(e.node(72));
         card.append(art, h('div', 'bag-card-nm', e.name));
-        if (e.qty > 1) card.append(h('div', 'bag-card-qty', `Đang có x${e.qty}`));
         if (e.desc) card.append(h('div', 'bag-card-desc', e.desc));
+
+        // bảng thông số nhỏ: loại · đang có · bán được bao nhiêu xu
+        const KIND_NAME: Record<string, string> = {
+          tool: 'Nông cụ', fish: 'Cá', furniture: 'Nội thất', deco: 'Trang trí',
+          gift: 'Quà', material: 'Nguyên liệu', special: 'Đặc biệt',
+          seed: 'Hạt giống', crop: 'Nông sản', product: 'Sản phẩm', food: 'Món ăn'
+        };
+        const stats = h('div', 'bag-card-stats');
+        const stat = (k: string, v: string, html = false) => {
+          const b = h('div', 'bag-card-stat');
+          const vv = h('div', 'v'); if (html) vv.innerHTML = v; else vv.textContent = v;
+          b.append(h('div', 'k', k), vv); return b;
+        };
+        const def = e.kind === 'tool' ? undefined : item(e.key);
+        stats.append(stat('LOẠI', KIND_NAME[e.kind] ?? 'Khác'));
+        stats.append(stat('ĐANG CÓ', e.kind === 'tool' ? `Lv.${toolLevel(e.key.slice(5))}` : `x${e.qty}`));
+        stats.append(def && def.sell > 0
+          ? stat('BÁN', priceHtml(sellPrice(def.sell)), true)
+          : stat('BÁN', '—'));
+        card.append(stats);
         const acts = h('div', 'bag-card-acts');
         for (const a of e.actions(close, () => { sfx.click(); draw(); })) {
           acts.append(btn(a.label, a.kind ?? '', a.cb));
@@ -853,11 +872,13 @@ export function registerAllPanels() {
           const info = h('div', 'grow');
           info.innerHTML = `<div class="t1">${rod.name}${S.tools.rod === rod.tier ? ' <span class="tl-lv">Đang dùng</span>' : ''}</div><div class="t2">+${Math.round(rod.bonus * 100)}% tỉ lệ cá hiếm · cầm tay được trong tủ đồ</div>`;
           r.append(info);
-          r.append(owned ? btn('Đã có', '', undefined) : priceBtn(rod.price, 'gold', () => { if (buyRod(rod.tier)) render(); }));
+          const buy = () => { if (buyRod(rod.tier)) render(); };
+          r.append(owned ? btn('Đã có', '', undefined)
+            : rod.cur === 'ruby' ? priceBtn(0, 'gold', buy, rod.price) : priceBtn(rod.price, 'gold', buy));
           body.append(r);
         }
       } else if (tab === 1) {
-        for (const id of ['bait_worm', 'bait_shrimp', 'bait_vip']) {
+        for (const id of ['bait_rice', 'bait_worm', 'bait_ant_egg']) {
           const def = item(id);
           const r = h('div', 'row');
           const ic = h('div'); ic.append(iconOf(def, 30)); r.append(ic);
@@ -869,7 +890,7 @@ export function registerAllPanels() {
           }));
           body.append(r);
         }
-        body.append(h('div', 'hint', 'Khi thả câu sẽ tự móc mồi xịn nhất trong túi.'));
+        body.append(h('div', 'hint', 'Mỗi lần quăng câu mất 1 mồi — hết mồi là không câu được (y như Lttt). Game tự móc mồi xịn nhất đang có.'));
       }
     };
     tabs(['Cần câu', 'Mồi câu'], i => { tab = i; render(); });

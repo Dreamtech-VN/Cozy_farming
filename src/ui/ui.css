@@ -36,7 +36,7 @@ img { image-rendering: auto; }
 .hud-profile {
   display: flex; align-items: center; gap: 9px; cursor: pointer; color: #fff;
   padding: 5px 18px 5px 5px; height: 48px;
-  background: linear-gradient(rgba(86, 122, 92, .46), rgba(48, 80, 58, .60));
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58));
   backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
   border: 2px solid rgba(255, 255, 255, .55); border-radius: 999px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 3px 8px rgba(0, 0, 0, .3);
@@ -59,7 +59,7 @@ img { image-rendering: auto; }
   height: 26px; padding: 0 10px 0 12px; cursor: pointer;
   display: flex; align-items: center; gap: 7px; font-family: inherit;
   font-size: 12px; font-weight: 900; color: #fff;
-  background: linear-gradient(rgba(86, 122, 92, .46), rgba(48, 80, 58, .60));
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58));
   backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
   border: 2px solid rgba(255, 255, 255, .5); border-radius: 999px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 3px 8px rgba(0, 0, 0, .3);
@@ -74,7 +74,7 @@ img { image-rendering: auto; }
    Dùng tiền tố .hud-cur- vì .cur đã là class của icon xu trong nút giá. */
 .hud-cur, .hud-clock {
   /* nền tối mờ để chữ trắng đọc được trên mọi khung cảnh, vẫn thấy xuyên qua */
-  background: linear-gradient(rgba(86, 122, 92, .46), rgba(48, 80, 58, .60));
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58));
   backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
   border: 2px solid rgba(255, 255, 255, .55); border-radius: 999px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 3px 8px rgba(0, 0, 0, .3);
@@ -144,7 +144,7 @@ img { image-rendering: auto; }
 /* nút nhanh dùng chung kiểu kính trong suốt với khung hồ sơ / thanh tiền */
 .hud-btn {
   width: 50px; height: 50px; cursor: pointer; position: relative; border-radius: 50%;
-  background: linear-gradient(rgba(86, 122, 92, .46), rgba(48, 80, 58, .60));
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58));
   backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
   border: 2px solid rgba(255, 255, 255, .55);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 3px 8px rgba(0, 0, 0, .3);
@@ -165,7 +165,7 @@ img { image-rendering: auto; }
 /* Ngăn kéo menu */
 #menu-drawer {
   position: absolute; left: 8px; top: 120px; z-index: 40;
-  background: linear-gradient(rgba(28, 52, 36, .52), rgba(12, 28, 18, .66));
+  background: linear-gradient(rgba(64, 100, 72, .50), rgba(34, 64, 44, .64));
   backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   border: 2px solid rgba(255, 255, 255, .5); border-radius: 18px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 6px 16px rgba(0, 0, 0, .35);
@@ -233,7 +233,7 @@ img { image-rendering: auto; }
 .win {
   width: min(600px, 84vw); max-height: 76vh; display: flex; flex-direction: column;
   color: #f2ece0; padding: 10px 8px 12px; position: relative; border-radius: 20px;
-  background: linear-gradient(rgba(72, 108, 80, .58), rgba(38, 68, 48, .70));
+  background: linear-gradient(rgba(120, 160, 124, .54), rgba(70, 110, 80, .68));
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, .5);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 12px 30px rgba(0, 0, 0, .45);
@@ -454,7 +454,7 @@ img { image-rendering: auto; }
   padding: 8px 4px 10px; text-align: center; cursor: pointer; position: relative; min-height: 82px;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
   border-radius: 12px; color: #f2ece0;
-  background: linear-gradient(rgba(86, 122, 92, .46), rgba(48, 80, 58, .60));
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58));
   border: 1px solid rgba(255, 255, 255, .3);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18);
 }
@@ -1045,7 +1045,7 @@ input.ui-input, select.ui-input {
   flex: 0 1 44px; min-height: 0;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; font-family: inherit; overflow: hidden;
-  background: linear-gradient(rgba(86, 122, 92, .50), rgba(48, 80, 58, .64));
+  background: linear-gradient(rgba(126, 166, 128, .48), rgba(78, 118, 86, .62));
   border: 1px solid rgba(255, 255, 255, .3);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22);
 }
@@ -1110,7 +1110,7 @@ input.ui-input, select.ui-input {
 .wd-item-box {
   width: 100%; aspect-ratio: 1; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(rgba(86, 122, 92, .46), rgba(48, 80, 58, .60));
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58));
   border: 1px solid rgba(255, 255, 255, .3);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18);
 }
@@ -1131,7 +1131,7 @@ input.ui-input, select.ui-input {
 }
 .hb-slot {
   width: 46px; height: 46px; border: 2px solid rgba(255, 255, 255, .55); border-radius: 12px;
-  background: linear-gradient(rgba(86, 122, 92, .46), rgba(48, 80, 58, .60));
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58));
   backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 3px 8px rgba(0, 0, 0, .28);
   cursor: pointer; display: flex; align-items: center; justify-content: center;
@@ -1284,14 +1284,14 @@ img.cur { width: 15px; height: 15px; object-fit: contain; vertical-align: -3px; 
   position: relative; aspect-ratio: 1 / 1; padding: 5px 3px 4px; font-family: inherit; cursor: pointer;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
   color: #e7f0dd; border-radius: 12px;
-  background: linear-gradient(rgba(86, 122, 92, .46), rgba(48, 80, 58, .60));
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58));
   border: 1px solid rgba(255, 255, 255, .3);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18);
 }
 .bag-art { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
 .bag-nm {
-  flex: none; width: 100%; font-size: 9.5px; font-weight: 800; line-height: 1.1; text-align: center;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: .9;
+  flex: none; width: 100%; font-size: 9.5px; font-weight: 800; line-height: 1.35; text-align: center;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: .92; padding: 0 1px;
 }
 .bag-slot.empty { cursor: default; background: rgba(255, 255, 255, .05); border-color: rgba(255, 255, 255, .13); }
 .bag-slot:not(.empty):active { transform: scale(.94); }
@@ -1327,8 +1327,22 @@ img.cur { width: 15px; height: 15px; object-fit: contain; vertical-align: -3px; 
 .bag-card-nm { font-size: 15px; font-weight: 900; color: #f6edd8; text-align: center; line-height: 1.2; }
 .bag-card-qty { font-size: 11px; font-weight: 800; color: #ffd43b; }
 .bag-card-desc {
-  font-size: 11.5px; font-weight: 700; color: #c6cfba; text-align: center; line-height: 1.35;
+  font-size: 11.5px; font-weight: 700; color: #d4ddc8; text-align: center; line-height: 1.35;
 }
+/* bảng thông số nhỏ trong thẻ chi tiết (loại / số lượng / giá bán) */
+.bag-card-stats {
+  width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 2px;
+}
+.bag-card-stat {
+  display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 5px 2px 6px;
+  border-radius: 10px; background: rgba(255, 255, 255, .10); border: 1px solid rgba(255, 255, 255, .24);
+}
+.bag-card-stat .k { font-size: 8.5px; font-weight: 900; color: #bccbb0; letter-spacing: .3px; }
+.bag-card-stat .v {
+  font-size: 12px; font-weight: 900; color: #ffe066; line-height: 1.2; text-align: center;
+  display: flex; align-items: center; gap: 3px;
+}
+.bag-card-stat .v img.cur { width: 13px; height: 13px; object-fit: contain; }
 .bag-card-acts { display: flex; flex-direction: column; gap: 6px; width: 100%; margin-top: auto; padding-top: 6px; }
 .bag-card-acts .btn { width: 100%; }
 .bag-card-empty { margin: auto; font-size: 12px; font-weight: 700; color: #c6cfba; text-align: center; }
@@ -1393,7 +1407,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   position: relative; font-family: inherit; cursor: pointer; padding: 8px 6px 10px;
   display: flex; flex-direction: column; align-items: center; gap: 4px;
   aspect-ratio: 3 / 4;
-  background: linear-gradient(rgba(86, 122, 92, .46), rgba(48, 80, 58, .60));
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58));
   border: 1px solid rgba(255, 255, 255, .3); border-radius: 12px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18);
 }
@@ -1502,7 +1516,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .wh-cell {
   position: relative; display: flex; flex-direction: column; align-items: center; gap: 5px;
   padding: 12px 8px 10px; border-radius: 14px;
-  background: linear-gradient(rgba(86, 122, 92, .46), rgba(48, 80, 58, .60)); border: 1px solid rgba(255, 255, 255, .3);
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58)); border: 1px solid rgba(255, 255, 255, .3);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18);
 }
 .wh-art { height: 54px; display: flex; align-items: center; justify-content: center; }
@@ -1599,7 +1613,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .od-note {
   border-radius: 14px; padding: 12px 10px 11px; cursor: pointer; position: relative;
   text-align: center; transition: transform .12s;
-  background: linear-gradient(rgba(86, 122, 92, .50), rgba(48, 80, 58, .64));
+  background: linear-gradient(rgba(126, 166, 128, .48), rgba(78, 118, 86, .62));
   border: 1px solid rgba(255, 255, 255, .26);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 3px 10px rgba(0, 0, 0, .28);
 }
@@ -1609,7 +1623,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 /* khách ghé tận trại: viền hồng cho nổi hơn đơn thường */
 .od-note.visit {
   border-color: rgba(255, 168, 200, .7);
-  background: linear-gradient(rgba(72, 32, 52, .5), rgba(36, 14, 28, .68));
+  background: linear-gradient(rgba(118, 70, 98, .50), rgba(64, 32, 54, .66));
 }
 .od-place { font-size: 12px; font-weight: 900; color: #f2ece0; margin-bottom: 5px; line-height: 1.15; }
 .od-note-goods {
@@ -1720,7 +1734,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .chat-fab {
   position: absolute; z-index: 45; width: 52px; height: 52px; border-radius: 50%;
   cursor: grab; padding: 0; touch-action: none;
-  background: linear-gradient(rgba(86, 122, 92, .46), rgba(48, 80, 58, .60));
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58));
   backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
   border: 2px solid rgba(255, 255, 255, .55);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 3px 8px rgba(0, 0, 0, .3);
@@ -1757,7 +1771,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .qb-body {
   display: flex; align-items: center; gap: 6px; width: 100%;
   padding: 7px 6px 8px 12px; border-radius: 0 14px 14px 14px;
-  background: linear-gradient(rgba(86, 122, 92, .50), rgba(48, 80, 58, .64));
+  background: linear-gradient(rgba(126, 166, 128, .48), rgba(78, 118, 86, .62));
   backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
   border: 2px solid rgba(255, 255, 255, .5);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 3px 8px rgba(0, 0, 0, .3);

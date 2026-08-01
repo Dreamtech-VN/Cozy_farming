@@ -116,7 +116,7 @@ tự vẽ nào:
 | Liềm gặt | `assets/farm/chibi/19_sickle.png` |
 | Rìu | `assets/farm/chibi/20_axe.png` |
 | Cần câu | `assets/fishing/rod.png` + `rods.png` (Cozy Fishing pack) |
-| Mồi thượng hạng | `assets/fishing/lure.png` (Cozy Fishing pack, ô (4,0) của `inv_items.png`) |
+| Mồi cơm / Mồi trùng / Trứng kiến | `assets/farm/chibi/bread.png` · `assets/ui/act/bait_worm.png` · `assets/farm/chibi/egg.png` |
 
 Đã xoá `hoe.png` (vẽ ra cái cúp chim), `axe.png` (vẽ ra cái liềm), `basket.png`,
 `can.png`, `shovel.png`, `bait.png`, `rod.png`: mấy cái này hoặc tự vẽ hoặc gán
@@ -321,6 +321,21 @@ Ba bậc cần trong game lấy đúng theo bảng `items` của server Lttt: **
 
 Script: `scripts/import_atm_rods.py` (cắt cả buồng ATM lẫn icon cần).
 
+**Giá + loại tiền** cũng chép nguyên bảng `items`: tre 10.000 xu, sắt 25 lượng,
+VIP 100 lượng.
+
+## Mồi câu
+
+Ba loại mồi lấy đúng bảng `items` của Lttt: **mồi cơm** (443, 5 xu) · **mồi
+trùng** (447, 20 xu) · **trứng kiến** (448, 30 xu). Logic cũng theo
+`ParkService.handleQuangCau`: mỗi lần quăng câu trừ 1 mồi, hết mồi thì không
+câu được.
+
+⚠️ Cột `icon` của 3 dòng này (771 / 763 / 772) trong bản `res.rar` mình có lại
+trỏ vào ảnh quần áo chứ không ra hình mồi, nên **hình** phải lấy từ pack:
+bánh mì (`farm/chibi/bread.png`) làm mồi cơm, con trùng (`ui/act/bait_worm.png`)
+làm mồi trùng, quả trứng (`farm/chibi/egg.png`) làm trứng kiến.
+
 ## Ảnh đại diện (`assets/avatar/`)
 
 35 ảnh đại diện mèo/thú từ pack **"Cute Avatars Game Asset Pack"** của
@@ -389,6 +404,29 @@ tự phóng 1.6× ở các map nền ảnh. Muốn đẹp hẳn nên mua 1 pack 
 3. **Modern Interiors/Exteriors + Characters** (LimeZu) — bộ nhân vật 32×64 khổng lồ, nhiều trang phục, giá rẻ.
 
 Mua xong gửi mình sheet — cấu trúc `CharacterSprite` đã tách lớp sẵn, thay bộ render là xong.
+
+## Tool đổi asset pixel sang style 2D — `scripts/pixel_to_2d.py`
+
+Game đang trộn hai phong cách: map/nhân vật lấy của Avatar (Lttt) là tranh vẽ
+tay bo mượt, còn cây trồng/vật phẩm lấy từ pack pixel 16px thì răng cưa, màu
+phẳng. Tool này làm mượt ảnh pixel về phía style vẽ tay:
+
+1. phóng NEAREST lên `--up` lần rồi median + gaussian → bỏ bậc thang, giữ khối
+2. làm mượt riêng kênh alpha rồi cắt ngưỡng → viền ngoài thành đường cong
+3. nở alpha, tô màu viền, làm mờ rồi đặt dưới hình → nét viền bút
+4. nhân gradient tối dần xuống đáy → có khối
+5. vệt sáng mềm góc trên-trái
+6. thu về `--scale` lần cỡ gốc bằng LANCZOS rồi trim viền trong suốt
+
+```
+python3 scripts/pixel_to_2d.py <vào.png|thư mục> <ra.png|thư mục> \
+        [--scale 2] [--up 8] [--outline 1] [--soft 1.2] [--no-shade]
+```
+
+Lưu ý: tool chỉ làm mượt được ảnh **pixel gốc**. Ảnh pixel đã bị phóng to sẵn
+(ví dụ icon 16px lưu thành file 64px) thì bậc thang đã "nướng" vào ảnh, chạy
+tool không cứu được — phải vẽ lại ở độ phân giải cao rồi thu nhỏ, đúng như
+`scripts/make_chat_icon.py` đang làm cho icon chat.
 
 ## Cần mua thêm (đề xuất, ưu tiên từ trên xuống)
 

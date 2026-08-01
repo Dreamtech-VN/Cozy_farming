@@ -8,8 +8,13 @@ import { sfx } from '@/core/audio';
 export function buyRod(tier: number): boolean {
   const rod = RODS.find(r => r.tier === tier);
   if (!rod || S.tools.rod >= tier) return false;
-  if (S.wallet.coins < rod.price) { toast(`Cần ${rod.price} xu.`, 'coin'); sfx.error(); return false; }
-  S.wallet.coins -= rod.price;
+  if (rod.cur === 'ruby') {
+    if (S.wallet.rubies < rod.price) { toast(`Cần ${rod.price} lượng.`, 'ruby'); sfx.error(); return false; }
+    S.wallet.rubies -= rod.price;
+  } else {
+    if (S.wallet.coins < rod.price) { toast(`Cần ${rod.price} xu.`, 'coin'); sfx.error(); return false; }
+    S.wallet.coins -= rod.price;
+  }
   S.tools.rod = tier;
   // Lttt: cần câu là món "Cầm tay" -> mua xong có luôn trong tủ quần áo
   if (!S.chibiWardrobe.includes(rod.part)) S.chibiWardrobe.push(rod.part);
@@ -20,11 +25,25 @@ export function buyRod(tier: number): boolean {
 }
 
 // ===== Mồi câu =====
-// Tự dùng mồi xịn nhất trong túi khi thả câu; trả hiệu ứng cho lượt câu này
-const BAITS = ['bait_vip', 'bait_shrimp', 'bait_worm'];
+// Theo ParkService.handleQuangCau của Lttt: mỗi lần quăng câu là trừ 1 mồi,
+// hết mồi thì không quăng được ("Hết mồi rồi sếp"). Ở đây dùng mồi xịn nhất
+// đang có trong túi. 3 loại mồi lấy đúng bảng `items` (443 / 447 / 448).
+export const BAIT_IDS = ['bait_ant_egg', 'bait_worm', 'bait_rice'];
+const ITEMS_BAIT: Record<string, { name: string; wait: number; rare: number }> = {
+  bait_rice: { name: 'Mồi cơm', wait: 1, rare: 0 },
+  bait_worm: { name: 'Mồi trùng', wait: 0.7, rare: 0.1 },
+  bait_ant_egg: { name: 'Trứng kiến', wait: 0.5, rare: 0.25 }
+};
+
 let baitRareBonus = 0;
+
+/** Còn mồi nào trong túi không (kiểm trước khi quăng câu). */
+export function hasBait(): boolean {
+  return BAIT_IDS.some(id => itemCount(id) > 0);
+}
+
 export function useBait(): { name: string; wait: number } | null {
-  for (const id of BAITS) {
+  for (const id of BAIT_IDS) {
     if (itemCount(id) > 0) {
       removeItem(id);
       const def = ITEMS_BAIT[id];
@@ -35,11 +54,6 @@ export function useBait(): { name: string; wait: number } | null {
   baitRareBonus = 0;
   return null;
 }
-const ITEMS_BAIT: Record<string, { name: string; wait: number; rare: number }> = {
-  bait_worm: { name: 'Mồi giun', wait: 0.7, rare: 0 },
-  bait_shrimp: { name: 'Mồi tôm', wait: 0.6, rare: 0.1 },
-  bait_vip: { name: 'Mồi thượng hạng', wait: 0.3, rare: 0.25 }
-};
 
 // Chọn ngẫu nhiên cá theo khu + độ hiếm (cần xịn + mồi tăng tỉ lệ hiếm)
 export function rollFish(zone: string): FishDef | undefined {
