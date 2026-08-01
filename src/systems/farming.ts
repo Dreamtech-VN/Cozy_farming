@@ -140,7 +140,7 @@ export function harvest(i: number): boolean {
   // giỏ cấp cao: cơ hội +1 nông sản
   if (Math.random() < toolBonus('basket', toolLevel('basket'))) { qty += 1; toast('Giỏ xịn: +1 nông sản!', 'basket'); }
   // mèo đuổi chuột phá mùa màng
-  if (Math.random() < petBonus('cat')) { qty += 1; toast('Mèo cưng giúp giữ mùa: +1 nông sản!', 'pet'); }
+  if (Math.random() < petBonus('harvest')) { qty += 1; toast('Thú cưng lục lọi giúp: +1 nông sản!', 'pet'); }
   addTo('produce', c.id, qty);        // nông sản vào KHO, không vào túi
   // thu hoạch hoa thì có cơ hội hứng được mật ong từ đàn ong quanh vườn
   if (['grape', 'strawberry'].includes(c.id) && Math.random() < 0.25) {

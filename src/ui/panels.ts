@@ -6,7 +6,7 @@ import { orderList, canDeliver, deliver, dropOrder, haveOf, orderName } from '@/
 import { pond, POND_CAP, FRIES, FRY_LIST, isGrown, remainMin, stockFry, netFish } from '@/systems/fishfarm';
 import { countOf, takeFrom, listOf, type StoreKind } from '@/systems/farmstore';
 import { cookingFood, cookRemain, canCook, startCook, collectCook, cancelCook } from '@/systems/cooking';
-import { S, save, spend, addCoins, addFarmCoins, withdrawFarm, addExp, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, unequipTool } from '@/core/save';
+import { S, save, spend, spendRubies, addCoins, addFarmCoins, withdrawFarm, addExp, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, unequipTool } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { ITEMS, item } from '@/data/items';
 import { CROPS, CROP_LIST } from '@/data/crops';
@@ -20,7 +20,7 @@ import { QUESTS, TITLES } from '@/data/quests';
 import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
 import { TOOL_LIST, TOOLS, toolUpgradeAt, toolIconSize } from '@/data/tools';
-import { PET_LIST, PETS, ownsPet, petBonus, petUrl } from '@/data/pets';
+import { PET_LIST, PETS, ownsPet, petBonus, petArt } from '@/data/pets';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import { buyRod, addToAquarium } from '@/systems/fishing';
@@ -38,7 +38,7 @@ import type { Reward } from '@/data/quests';
 
 // giá bán thực nhận (vẹt lanh lợi +10%)
 function sellPrice(base: number, qty = 1): number {
-  return Math.round(base * qty * (1 + petBonus('parrot')));
+  return Math.round(base * qty * (1 + petBonus('sell')));
 }
 
 function rewardText(r: Reward): string {
@@ -1494,33 +1494,55 @@ export function registerAllPanels() {
   // ================= Tiệm thú cưng =================
   registerPanel('petshop', () => {
     if (!atShopZone('petshop', 'Tiệm thú cưng')) return;
-    const { body } = openWindow('Tiệm thú cưng');
+    const { body } = openWindow('Tiệm thú cưng', { size: 'large' });
+    let tab = 0;
+    const TABS: [string, (p: typeof PET_LIST[number]) => boolean][] = [
+      ['Tất cả', () => true],
+      ['Đã nuôi', p => ownsPet(p.id)]
+    ];
     const render = () => {
       body.innerHTML = '';
-      body.append(h('div', 'hint', 'Mỗi bé có một công dụng riêng — nuôi được cả ba!'));
-      for (const p of PET_LIST) {
-        const r = h('div', 'row');
-        const ic = h('div');
-        ic.append(spr(petUrl(p.id), 0, 0, p.frameW, p.frameH, 44));
-        r.append(ic);
-        const info = h('div', 'grow');
-        info.innerHTML = `<div class="t1">${p.name}</div><div class="t2">${p.perk}</div>`;
-        r.append(info);
-        if (ownsPet(p.id)) {
-          r.append(btn('Đã nuôi', '', undefined));
-        } else {
-          r.append(priceBtn(p.price, 'gold', () => {
-            if (!spend(p.price)) return;
-            S.pets.push(p.id);
-            if (!S.activePet) S.activePet = p.id;
-            save(true); sfx.coin();
-            toast(`${p.name} đã về nhà bạn! Nhà thú cưng đã dựng ở Nông trại.`, p.icon);
-            bus.emit(EV.ZONE);
-            render();
-          }));
-        }
-        body.append(r);
+      const bar = h('div', 'pet-tabs');
+      TABS.forEach(([nm], i) => {
+        const t = h('button', `pet-tab ${i === tab ? 'on' : ''}`, nm);
+        t.onclick = () => { sfx.click(); tab = i; render(); };
+        bar.append(t);
+      });
+      body.append(bar);
+
+      const grid = h('div', 'pet-grid');
+      for (const p of PET_LIST.filter(TABS[tab][1])) {
+        const owned = ownsPet(p.id);
+        const cell = h('button', `pet-cell ${owned ? 'owned' : ''}`);
+        cell.append(petArt(p, 66));
+        cell.append(h('div', 'pet-nm', p.name));
+        cell.append(h('div', 'pet-pk', p.perkText));
+        cell.append(owned ? h('div', 'pet-own', 'Đã nuôi') : (() => {
+          const pr = h('div', 'pet-price'); pr.innerHTML = priceHtml(0, p.price); return pr;
+        })());
+        cell.onclick = () => {
+          sfx.click();
+          openPanel('dialog', {
+            title: p.name,
+            text: p.perkFull,
+            actions: owned ? [] : [{
+              icon: '', ui: 'ruby', label: `Mua ${fmt(p.price)} ruby`,
+              cb: () => {
+                if (!spendRubies(p.price, 'pet')) return;
+                S.pets.push(p.id);
+                if (!S.activePet) S.activePet = p.id;
+                save(true); sfx.coin();
+                toast(`${p.name} đã về nhà bạn!`, 'pet');
+                bus.emit(EV.ZONE);
+                render();
+              }
+            }]
+          });
+        };
+        grid.append(cell);
       }
+      body.append(grid);
+      body.append(h('div', 'hint', 'Chỉ bé đang thả mới cộng công dụng — đổi bé ở mục Thú cưng của tôi.'));
     };
     render();
   });
@@ -1540,7 +1562,7 @@ export function registerAllPanels() {
         const active = S.activePet === id;
         const r = h('div', `row ${active ? 'row-active' : ''}`);
         const ic = h('div');
-        ic.append(spr(petUrl(id), 0, 0, p.frameW, p.frameH, 44));
+        ic.append(petArt(p, 46));
         r.append(ic);
         const info = h('div', 'grow');
         info.innerHTML = `<div class="t1">${p.name}${active ? ' <span class="tl-lv">đang theo</span>' : ''}</div><div class="t2">${p.perkFull}</div>`;
@@ -1548,7 +1570,7 @@ export function registerAllPanels() {
         r.append(btn(active ? 'Cất về nhà' : 'Cho ra ngoài', active ? '' : 'gold', () => {
           S.activePet = active ? undefined : id;
           save(true);
-          toast(active ? `${p.name} về nhà nghỉ.` : `${p.name} đi cùng bạn!`, p.icon);
+          toast(active ? `${p.name} về nhà nghỉ.` : `${p.name} đi cùng bạn!`, 'pet');
           bus.emit(EV.ZONE);
           render();
         }));
