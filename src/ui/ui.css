@@ -2085,3 +2085,86 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .eq-price { font-size: 10px; font-weight: 900; color: #ffe066; }
 .eq-cell.owned { opacity: .55; }
 .eq-cell.owned .eq-price { color: #b2f2bb; }
+
+/* ===== 3 trang trang bị: Cường hoá / Nâng sao / Gắn đá ===== */
+.win:has(> .win-body > .fg-wrap) { width: min(680px, 94vw); height: min(430px, 82vh); }
+.win-body:has(> .fg-wrap) { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+.fg-wrap { display: flex; flex-direction: column; gap: 8px; flex: 1; min-height: 0; overflow-y: auto; }
+
+.tg-strip { flex: none; display: flex; gap: 6px; overflow-x: auto; padding-bottom: 3px; }
+.tg-cell {
+  position: relative; flex: none; width: 46px; height: 46px; border-radius: 11px; padding: 0;
+  display: flex; align-items: center; justify-content: center; cursor: pointer; font-family: inherit;
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58));
+  border: 1px solid rgba(255, 255, 255, .3);
+}
+.tg-cell.on { border-color: #ffd43b; box-shadow: 0 0 0 2px rgba(255, 212, 59, .4); }
+.tg-star { position: absolute; left: 2px; bottom: 0; font-size: 7px; color: #ffe066; letter-spacing: -1px; }
+
+.fg-main { display: flex; gap: 12px; align-items: stretch; flex: none; }
+.bp {
+  flex: 0 0 44%; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 10px 8px; border-radius: 14px;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .26);
+}
+.bp-art {
+  position: relative; width: 78px; height: 78px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, .18); border: 1px solid rgba(255, 255, 255, .24);
+}
+.bp-nm { font-size: 13px; font-weight: 900; color: #f6edd8; text-align: center; line-height: 1.2; }
+.bp-star { font-size: 13px; color: #ffe066; letter-spacing: 1px; }
+.bp-st { font-size: 10.5px; font-weight: 700; color: #b2f2bb; text-align: center; line-height: 1.35; }
+
+.fg-side { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.fg-cap {
+  font-size: 10px; font-weight: 900; color: #bccbb0; letter-spacing: .6px;
+  border-bottom: 1px dashed rgba(255, 255, 255, .2); padding-bottom: 3px;
+}
+.fg-note { font-size: 10.5px; font-weight: 700; color: #d4ddc8; }
+.fg-need { font-size: 11.5px; font-weight: 800; color: #e7f0dd; }
+.fg-need img.cur { width: 14px; height: 14px; vertical-align: -3px; }
+
+/* lỗ đá */
+.sk-row { display: flex; gap: 8px; }
+.sk-slot {
+  width: 46px; height: 46px; border-radius: 12px; cursor: pointer; padding: 0; font-family: inherit;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, .22); border: 2px dashed rgba(255, 255, 255, .3);
+}
+.sk-slot.filled { border-style: solid; background: rgba(255, 255, 255, .12); }
+.sk-slot.on { border-color: #ffd43b; box-shadow: 0 0 0 2px rgba(255, 212, 59, .4); }
+.sk-empty { font-size: 19px; font-weight: 900; color: rgba(255, 255, 255, .45); }
+
+.gem-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; }
+.gem-cell {
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 6px 3px 5px; border-radius: 11px; cursor: pointer; font-family: inherit; color: #e7f0dd;
+  background: linear-gradient(rgba(126, 166, 128, .44), rgba(78, 118, 86, .58));
+  border: 1px solid rgba(255, 255, 255, .3);
+}
+.gem-nm { font-size: 8.5px; font-weight: 800; line-height: 1.2; text-align: center;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; }
+.gem-cell .qty {
+  position: absolute; right: 3px; top: 2px; min-width: 15px; padding: 0 3px;
+  font-size: 9px; font-weight: 900; color: #4a3005; line-height: 14px; text-align: center;
+  background: linear-gradient(#ffe066, #f0a318); border-radius: 999px;
+}
+.gem-merge {
+  position: absolute; left: 3px; top: 2px; width: 16px; height: 16px; border-radius: 5px;
+  font-size: 11px; font-weight: 900; line-height: 16px; text-align: center; color: #05310f;
+  background: linear-gradient(#8ce99a, #37b24d);
+}
+
+/* thẻ tóm tắt trong tab Trang bị */
+.eq-acts { display: flex; gap: 7px; margin-bottom: 8px; }
+.eq-acts .btn { flex: 1 1 0; min-width: 0; padding: 6px 4px 7px; font-size: 12px; }
+.sm-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.sm-star { font-size: 12px; color: #ffe066; letter-spacing: 1px; }
+.sm-socks { display: flex; gap: 3px; }
+.sm-sock {
+  width: 22px; height: 22px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, .22); border: 1px dashed rgba(255, 255, 255, .3);
+}
+.sm-sock.on { border-style: solid; background: rgba(255, 255, 255, .12); }

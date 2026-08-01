@@ -4,9 +4,11 @@ import { sfx } from '@/core/audio';
 import type { CharStats, StatKey } from '@/core/types';
 import { equipStats } from '@/data/chibi';
 import {
-  EQUIP_SLOTS, SLOT_OF, equipDef, enhanceMul, enhanceRate, enhanceCost,
-  dropsOnFail, MAX_ENHANCE, ENHANCE_STONE, type EquipSlot, type EquipDef
+  EQUIP_SLOTS, EQUIP_LIST, SLOT_OF, equipDef, enhanceMul, enhanceRate, enhanceCost,
+  dropsOnFail, MAX_ENHANCE, ENHANCE_STONE, MAX_STAR, starMul, starCost, starRate,
+  gemDef, gemMergeTo, gemPower, GEM_MERGE_N, type EquipSlot, type EquipDef
 } from '@/data/equip';
+import { item } from '@/data/items';
 
 // ===== Trang bị: mặc / cởi / đập =====
 // S.equip     : ô nào đang đeo món nào  { ring: 'ring_003', ... }
@@ -34,12 +36,16 @@ export function worn(): WornPiece[] {
 }
 
 /** Chỉ số của một món ở cấp đập hiện tại. */
-export function pieceStats(def: EquipDef, lv: number): CharStats {
+export function pieceStats(def: EquipDef, lv: number, star = 0, gems: string[] = []): CharStats {
   const s = SLOT_OF[def.slot];
   const out = zeroStats();
-  const m = enhanceMul(lv);
+  const m = enhanceMul(lv) * starMul(star);
   out[s.main] += Math.round(def.main * m);
   out[s.sub] += Math.round(def.sub * m);
+  for (const gid of gems) {
+    const g = gemDef(gid);
+    if (g) out[g.stat] += gemPower(g);
+  }
   return out;
 }
 
@@ -47,7 +53,7 @@ export function pieceStats(def: EquipDef, lv: number): CharStats {
 export function equipTotal(): CharStats {
   const total = zeroStats();
   for (const p of worn()) {
-    const s = pieceStats(p.def, p.lv);
+    const s = pieceStats(p.def, p.lv, equipStar(p.def.id), gemsOn(p.def.id));
     for (const k of STAT_KEYS) total[k] += s[k];
   }
   return total;
@@ -70,7 +76,7 @@ export function combatPower(): number {
   }
   cp += S.player.level * 25;
   // mỗi cấp đập cộng thêm một ít cho thấy công đập không phí
-  for (const p of worn()) cp += p.lv * 12;
+  for (const p of worn()) cp += p.lv * 12 + equipStar(p.def.id) * 40;
   return Math.round(cp);
 }
 
@@ -85,7 +91,7 @@ export function cpBreakdown() {
     clothes: Math.round(w(cloth)),
     equip: Math.round(w(eq)),
     level: S.player.level * 25,
-    enhance: worn().reduce((n, p) => n + p.lv * 12, 0)
+    enhance: worn().reduce((n, p) => n + p.lv * 12 + equipStar(p.def.id) * 40, 0)
   };
 }
 
@@ -177,17 +183,125 @@ export function smash(id: string): SmashResult {
   return { ok: true, win, lv: S.equipLv[id] };
 }
 
-/** Mua trang bị (bằng xu — lượng là tiền nạp, chỉ cho gacha / skin giới hạn). */
-export function buyEquip(id: string): boolean {
-  const def = equipDef(id);
-  if (!def) return false;
-  if (S.wallet.coins < def.price) { toast(`Cần ${def.price} xu.`, 'coin'); sfx.error(); return false; }
-  S.wallet.coins -= def.price;
-  S.equipBag.push(id);
-  save(); bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED);
-  toast(`Đã mua ${def.name}!`, 'shop'); sfx.coin();
-  return true;
+// ===== Nguồn trang bị: MỞ RƯƠNG, không bán thẳng =====
+// GunPow không cho mua trang bị ở shop — đồ ra từ rương. Bên mình cũng vậy:
+// rương rơi ra khi làm nông (đào đất, câu cá, hoàn thành đơn) hoặc đổi bằng xu
+// ở Bách hóa, mở ra được 1 món ngẫu nhiên trong khoảng bậc của rương.
+export interface ChestDef { id: string; name: string; lo: number; hi: number; price: number }
+export const EQUIP_CHESTS: ChestDef[] = [
+  { id: 'chest_eq1', name: 'Rương trang bị Sơ cấp', lo: 1, hi: 6, price: 3000 },
+  { id: 'chest_eq2', name: 'Rương trang bị Trung cấp', lo: 5, hi: 12, price: 15000 },
+  { id: 'chest_eq3', name: 'Rương trang bị Cao cấp', lo: 11, hi: 20, price: 60000 }
+];
+export function chestDef(id: string) { return EQUIP_CHESTS.find(c => c.id === id); }
+
+/** Mở 1 rương -> nhận 1 món ngẫu nhiên (mọi ô, bậc trong khoảng của rương). */
+export function openChest(chestId: string): EquipDef | undefined {
+  const c = chestDef(chestId);
+  if (!c) return undefined;
+  if (itemCount(chestId) <= 0) { toast('Không có rương này.', 'inventory'); sfx.error(); return undefined; }
+  const pool = EQUIP_LIST.filter(e => e.tier >= c.lo && e.tier <= c.hi);
+  if (!pool.length) return undefined;
+  removeItem(chestId, 1);
+  const got = pool[Math.floor(Math.random() * pool.length)];
+  S.equipBag.push(got.id);
+  addStat('chest_opened');
+  save(); bus.emit(EV.INVENTORY); bus.emit(EV.STATE_CHANGED);
+  sfx.coin();
+  toast(`Mở rương được ${got.name}!`, 'rank');
+  return got;
+}
+
+/** Rơi rương khi làm việc đồng áng — gọi từ WorldScene/hệ thống khác. */
+export function rollChestDrop(chance = 0.04) {
+  if (Math.random() > chance) return;
+  const r = Math.random();
+  const id = r < 0.7 ? 'chest_eq1' : r < 0.95 ? 'chest_eq2' : 'chest_eq3';
+  addItem(id, 1);
+  toast(`Nhặt được ${chestDef(id)!.name}!`, 'gift');
 }
 
 /** Đá cường hoá — vật phẩm dùng để đập đồ. */
 export function addStones(n: number) { addItem(ENHANCE_STONE, n); }
+
+// ===== Nâng sao =====
+export function equipStar(id: string): number { return S.equipStar?.[id] ?? 0; }
+
+export function upStar(id: string): { ok: boolean; win?: boolean } {
+  const def = equipDef(id); if (!def) return { ok: false };
+  const st = equipStar(id);
+  if (st >= MAX_STAR) { toast('Món này đã đủ 5 sao.', 'alert'); return { ok: false }; }
+  const c = starCost(def, st);
+  if (itemCount(c.kind) < c.n) {
+    toast(`Thiếu ${c.n - itemCount(c.kind)} ${item(c.kind).name}.`, 'inventory'); sfx.error();
+    return { ok: false };
+  }
+  if (S.wallet.coins < c.coins) { toast(`Cần ${c.coins} xu.`, 'coin'); sfx.error(); return { ok: false }; }
+  S.wallet.coins -= c.coins;
+  removeItem(c.kind, c.n);
+  const win = Math.random() < starRate(st);
+  if (!S.equipStar) S.equipStar = {};
+  if (win) {
+    S.equipStar[id] = st + 1;
+    addStat('equip_starred'); sfx.coin();
+    toast(`${def.name} lên ${st + 1} sao!`, 'rank');
+  } else { sfx.error(); toast('Nâng sao thất bại — sao giữ nguyên.', 'alert'); }
+  save(); bus.emit(EV.WALLET); bus.emit(EV.INVENTORY); bus.emit(EV.STATE_CHANGED);
+  return { ok: true, win };
+}
+
+// ===== Gắn đá =====
+export function gemsOn(id: string): string[] {
+  const def = equipDef(id);
+  const arr = (S.equipGems?.[id] ?? []).slice(0, def?.sockets ?? 0);
+  while (def && arr.length < def.sockets) arr.push('');
+  return arr;
+}
+export function gemCount(gid: string): number { return S.gemBag?.[gid] ?? 0; }
+export function addGem(gid: string, n = 1) {
+  if (!S.gemBag) S.gemBag = {};
+  S.gemBag[gid] = (S.gemBag[gid] ?? 0) + n;
+  save(); bus.emit(EV.STATE_CHANGED);
+}
+
+export function socketGem(id: string, slotIdx: number, gid: string): boolean {
+  const def = equipDef(id); if (!def || slotIdx >= def.sockets) return false;
+  if (gemCount(gid) <= 0) { toast('Không còn viên đá này.', 'inventory'); return false; }
+  const arr = gemsOn(id);
+  const old = arr[slotIdx];
+  arr[slotIdx] = gid;
+  S.gemBag[gid] -= 1;
+  if (S.gemBag[gid] <= 0) delete S.gemBag[gid];
+  if (old) addGem(old);                  // gỡ viên cũ về túi
+  if (!S.equipGems) S.equipGems = {};
+  S.equipGems[id] = arr;
+  save(); bus.emit(EV.STATE_CHANGED); sfx.coin();
+  toast(`Đã gắn ${gemDef(gid)?.name}.`, 'rank');
+  return true;
+}
+
+export function unsocketGem(id: string, slotIdx: number): boolean {
+  const arr = gemsOn(id);
+  const gid = arr[slotIdx];
+  if (!gid) return false;
+  arr[slotIdx] = '';
+  S.equipGems[id] = arr;
+  addGem(gid);
+  save(); bus.emit(EV.STATE_CHANGED);
+  return true;
+}
+
+/** Ghép 3 viên cùng loại cùng cấp thành 1 viên cấp trên. */
+export function mergeGem(gid: string): boolean {
+  const g = gemDef(gid); if (!g) return false;
+  const to = gemMergeTo(g);
+  if (!to) { toast('Đá đã ở cấp cao nhất.', 'alert'); return false; }
+  if (gemCount(gid) < GEM_MERGE_N) {
+    toast(`Cần ${GEM_MERGE_N} viên ${g.name} để ghép.`, 'inventory'); sfx.error(); return false;
+  }
+  S.gemBag[gid] -= GEM_MERGE_N;
+  if (S.gemBag[gid] <= 0) delete S.gemBag[gid];
+  addGem(to.id);
+  sfx.coin(); toast(`Ghép thành ${to.name}!`, 'rank');
+  return true;
+}

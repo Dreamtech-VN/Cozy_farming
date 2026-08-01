@@ -2001,6 +2001,8 @@ export class WorldScene extends Phaser.Scene {
           m.addCoins(120);
           toast('Đào trúng 120 xu!', 'coin');
         }
+        // đào đất có cơ hội ra rương trang bị (nguồn đồ chính, không mua được)
+        import('@/systems/equipment').then(eq => eq.rollChestDrop(0.06));
         m.addStat('dug');
       });
       sfx.plant();

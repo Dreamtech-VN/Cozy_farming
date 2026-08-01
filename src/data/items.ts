@@ -58,6 +58,16 @@ defItem({ id: 'stone', name: 'Đá', kind: 'material', icon: '', sell: 6, desc: 
 // ---- Đá cường hoá: dùng để đập trang bị ----
 defItem({ id: 'enh_stone', name: 'Đá cường hoá', kind: 'material', icon: '', sprite: { url: 'assets/farm/chibi/stone.png', sx: 0, sy: 0, sw: 52, sh: 49 }, sell: 20, buy: 200, desc: 'Nguyên liệu đập trang bị. Mua ở quầy trang bị hoặc rơi ra khi đập hỏng.' });
 
+// ---- Rương trang bị: nguồn DUY NHẤT ra trang bị (GunPow không bán thẳng đồ) ----
+defItem({ id: 'chest_eq1', name: 'Rương trang bị Sơ cấp', kind: 'special', icon: '', sprite: { url: 'assets/ui/act/gift.png', sx: 0, sy: 0, sw: 13, sh: 12 }, sell: 0, buy: 3000, desc: 'Mở ra 1 trang bị bậc 1-6.' });
+defItem({ id: 'chest_eq2', name: 'Rương trang bị Trung cấp', kind: 'special', icon: '', sprite: { url: 'assets/ui/act/gift.png', sx: 0, sy: 0, sw: 13, sh: 12 }, sell: 0, buy: 15000, desc: 'Mở ra 1 trang bị bậc 5-12.' });
+defItem({ id: 'chest_eq3', name: 'Rương trang bị Cao cấp', kind: 'special', icon: '', sprite: { url: 'assets/ui/act/gift.png', sx: 0, sy: 0, sw: 13, sh: 12 }, sell: 0, buy: 60000, desc: 'Mở ra 1 trang bị bậc 11-20.' });
+
+// ---- Đá thăng tinh: dùng để nâng sao trang bị (3 cấp như GunPow) ----
+defItem({ id: 'star_stone_1', name: 'Sơ Cấp Thăng Tinh Thạch', kind: 'material', icon: '', sprite: { url: 'assets/equip/stone_004.png', sx: 0, sy: 0, sw: 57, sh: 56 }, sell: 40, buy: 400, desc: 'Nâng sao trang bị (sao 1-2).' });
+defItem({ id: 'star_stone_2', name: 'Trung Cấp Thăng Tinh Thạch', kind: 'material', icon: '', sprite: { url: 'assets/equip/stone_014.png', sx: 0, sy: 0, sw: 57, sh: 60 }, sell: 120, buy: 1200, desc: 'Nâng sao trang bị (sao 3-4).' });
+defItem({ id: 'star_stone_3', name: 'Cao Cấp Thăng Tinh Thạch', kind: 'material', icon: '', sprite: { url: 'assets/equip/stone_024.png', sx: 0, sy: 0, sw: 57, sh: 57 }, sell: 300, buy: 3000, desc: 'Nâng sao trang bị (sao 5).' });
+
 // ---- Mồi câu ----
 // Đúng 3 loại mồi của Lttt (bảng `items` trong avatar_2x.sql):
 //   443 'mồi cơm'   giá 5 xu

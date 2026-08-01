@@ -29,8 +29,10 @@ import { ROOM_COUNT, ROOM_CAP, roomPlayers, roomFull, suggestedFriends, addFrien
 import { claimLogin, checkinToday, spinWheel, grantWheel, wheelSpinsLeft, loginRewardToday } from '@/systems/meta';
 import { upgradeHouse, setWallpaper, setFloor, throwParty } from '@/systems/housing';
 import { sfx, startBgm, stopBgm } from '@/core/audio';
-import { EQUIP_SLOTS, equipsOfSlot, equipDef, enhanceRate, enhanceCost, dropsOnFail, MAX_ENHANCE, ENHANCE_STONE, type EquipSlot, type EquipDef } from '@/data/equip';
-import { equipLevel, pieceStats, combatPower, cpBreakdown, equipPiece, unequipPiece, autoEquip, smash, buyEquip } from '@/systems/equipment';
+import { EQUIP_SLOTS, equipDef, enhanceRate, enhanceCost, dropsOnFail, MAX_ENHANCE, ENHANCE_STONE,
+  MAX_STAR, starCost, starRate, gemDef, GEM_LIST, gemPower, gemMergeTo, GEM_MERGE_N, type EquipSlot, type EquipDef } from '@/data/equip';
+import { equipLevel, pieceStats, combatPower, cpBreakdown, equipPiece, unequipPiece, autoEquip, smash,
+  equipStar, upStar, gemsOn, gemCount, socketGem, unsocketGem, mergeGem, addGem, EQUIP_CHESTS, openChest } from '@/systems/equipment';
 import { upgradeTool, upgradeRate, missingMats, failStreak, UPGRADABLE, FAIL_BONUS, FAIL_BONUS_MAX } from '@/systems/toolcraft';
 import type { Reward } from '@/data/quests';
 
@@ -1323,9 +1325,10 @@ export function registerAllPanels() {
     const draw = () => {
       tabBar.innerHTML = '';
       for (const [id, name, ico] of CH_SECTIONS) {
+        // Tab lớn dùng CHỮ như bên GunPow, bỏ icon
         const t = h('button', `wr-tab ${sec === id ? 'on' : ''}`);
-        const im = document.createElement('img'); im.src = `assets/ui/inv/${ico}.png`;
-        t.append(im, h('span', '', name));
+        void ico;
+        t.append(h('span', '', name));
         t.title = name;
         t.onclick = () => { sfx.click(); sec = id; draw(); };
         tabBar.append(t);
@@ -1762,36 +1765,232 @@ export function registerAllPanels() {
   // dùng cho gacha / skin giới hạn.
   registerPanel('equipshop', () => {
     if (!atShopZone('equipshop', 'Quầy trang bị (Bách hóa)')) return;
-    const { body, tabs } = openWindow('Quầy trang bị', { size: 'large' });
-    let slot: EquipSlot = 'ring';
+    const { body } = openWindow('Quầy trang bị');
     const render = () => {
       body.innerHTML = '';
-      const stoneRow = h('div', 'row');
-      const si = h('div'); si.append(iconOf(item(ENHANCE_STONE), 32));
+      body.append(h('div', 'hint', 'Trang bị KHÔNG bán thẳng — như GunPow, đồ chỉ ra từ rương.'));
+      for (const c of EQUIP_CHESTS) {
+        const have = itemCount(c.id);
+        const r = h('div', 'row');
+        const ic = h('div'); ic.append(iconOf(item(c.id), 30));
+        const info = h('div', 'grow');
+        info.innerHTML = `<div class="t1">${c.name} <span class="qty">x${have}</span></div><div class="t2">Mở ra 1 trang bị bậc ${c.lo}-${c.hi}.</div>`;
+        r.append(ic, info);
+        if (have > 0) r.append(btn('Mở', 'blue', () => { openChest(c.id); render(); }));
+        r.append(priceBtn(c.price, 'gold', () => { if (spend(c.price)) { addItem(c.id); sfx.coin(); render(); } }));
+        body.append(r);
+      }
+      const sr = h('div', 'row');
+      const si = h('div'); si.append(iconOf(item(ENHANCE_STONE), 30));
       const sinfo = h('div', 'grow');
-      sinfo.innerHTML = `<div class="t1">Đá cường hoá <span class="qty">x${itemCount(ENHANCE_STONE)}</span></div><div class="t2">Nguyên liệu đập trang bị.</div>`;
-      stoneRow.append(si, sinfo, priceBtn(200, 'gold', () => {
-        if (spend(200)) { addItem(ENHANCE_STONE); sfx.coin(); render(); }
-      }));
-      body.append(stoneRow);
+      sinfo.innerHTML = `<div class="t1">Đá cường hoá <span class="qty">x${itemCount(ENHANCE_STONE)}</span></div><div class="t2">Nguyên liệu cường hoá trang bị.</div>`;
+      sr.append(si, sinfo, priceBtn(200, 'gold', () => { if (spend(200)) { addItem(ENHANCE_STONE); sfx.coin(); render(); } }));
+      body.append(sr);
+      body.append(btn('Quầy đá (thăng tinh / đá quý)', 'blue', () => openPanel('gemshop')));
+    };
+    render();
+  });
 
-      const grid = h('div', 'eq-grid');
-      for (const d of equipsOfSlot(slot)) {
-        const owned = S.equipBag.includes(d.id) || S.equip[d.slot] === d.id;
-        const c = h('button', `eq-cell ${owned ? 'owned' : ''}`);
-        c.append(spr(d.url, 0, 0, d.w, d.h, 34), h('div', 'eq-nm', d.name));
-        c.append(h('div', 'eq-price', owned ? 'Đã có' : fmt(d.price)));
-        c.title = `${d.name} — bậc ${d.tier}`;
-        c.onclick = () => { if (!owned) { if (buyEquip(d.id)) render(); } else toast('Món này đã có rồi.', 'inventory'); };
+  registerPanel('gemshop', () => {
+    const { body } = openWindow('Quầy đá');
+    const render = () => {
+      body.innerHTML = '';
+      for (const id of ['star_stone_1', 'star_stone_2', 'star_stone_3']) {
+        const def = item(id);
+        const r = h('div', 'row');
+        const ic = h('div'); ic.append(iconOf(def, 30));
+        const info = h('div', 'grow');
+        info.innerHTML = `<div class="t1">${def.name} <span class="qty">x${itemCount(id)}</span></div><div class="t2">${def.desc ?? ''}</div>`;
+        r.append(ic, info, priceBtn(def.buy ?? 0, 'gold', () => {
+          if (spend(def.buy ?? 0)) { addItem(id); sfx.coin(); render(); }
+        }));
+        body.append(r);
+      }
+      body.append(h('div', 'hint', 'Đá quý cấp 1-2 bán ở đây — ghép 3 viên cùng loại thành 1 viên cấp trên ở trang Gắn đá.'));
+      const grid = h('div', 'gem-grid');
+      for (const g of GEM_LIST.filter(x => x.lv <= 2)) {
+        const price = g.lv * 500;
+        const c = h('button', 'gem-cell');
+        c.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 30),
+          h('div', 'gem-nm', g.name), h('div', 'qty', `${gemCount(g.id)}`));
+        c.title = `${g.name} — ${STAT_NAMES[g.stat]} +${gemPower(g)} · ${price} xu`;
+        c.onclick = () => { if (spend(price)) { addGem(g.id); sfx.coin(); render(); } };
         grid.append(c);
       }
       body.append(grid);
     };
-    tabs(EQUIP_SLOTS.map(s2 => s2.name), i => { slot = EQUIP_SLOTS[i].id; render(); });
     render();
   });
 
-  // ================= Nâng cấp công cụ =================
+  // ================= 3 trang riêng cho trang bị (kiểu GunPow) =================
+  function pickTarget(arg?: Record<string, unknown>): string {
+    const id = typeof arg?.id === 'string' ? arg.id : '';
+    if (id && equipDef(id)) return id;
+    for (const sl of EQUIP_SLOTS) if (S.equip[sl.id]) return S.equip[sl.id];
+    return '';
+  }
+
+  /** Dải chọn món (đang đeo + trong túi) dùng chung cho cả 3 trang. */
+  function targetStrip(cur: string, onPick: (id: string) => void): HTMLElement {
+    const strip = h('div', 'tg-strip');
+    const ids = [...EQUIP_SLOTS.map(sl => S.equip[sl.id]).filter(Boolean), ...S.equipBag];
+    for (const id of ids) {
+      const d = equipDef(id); if (!d) continue;
+      const c = h('button', `tg-cell ${id === cur ? 'on' : ''}`);
+      c.append(spr(d.url, 0, 0, d.w, d.h, 30));
+      const lv = equipLevel(id);
+      if (lv) c.append(h('div', 'eq-plus', `+${lv}`));
+      const st = equipStar(id);
+      if (st) c.append(h('div', 'tg-star', '★'.repeat(st)));
+      c.title = d.name;
+      c.onclick = () => { sfx.click(); onPick(id); };
+      strip.append(c);
+    }
+    if (!ids.length) strip.append(h('div', 'hint', 'Chưa có trang bị nào — mở rương ở Quầy trang bị.'));
+    return strip;
+  }
+
+  function bigPiece(d: EquipDef, id: string): HTMLElement {
+    const box = h('div', 'bp');
+    const art = h('div', 'bp-art');
+    art.append(spr(d.url, 0, 0, d.w, d.h, 66));
+    const lv = equipLevel(id);
+    if (lv) art.append(h('div', 'eq-plus', `+${lv}`));
+    const st = pieceStats(d, lv, equipStar(id), gemsOn(id));
+    const txt = STAT_KEYS.filter(k => st[k] > 0).map(k => `${STAT_NAMES[k]} +${st[k]}`).join(' · ');
+    box.append(art,
+      h('div', 'bp-nm', `${d.name}${lv ? ` +${lv}` : ''}`),
+      h('div', 'bp-star', '★'.repeat(equipStar(id)) + '☆'.repeat(MAX_STAR - equipStar(id))),
+      h('div', 'bp-st', txt));
+    return box;
+  }
+
+  function rateRow(rate: number): HTMLElement {
+    const rr = h('div', 'sm-rate');
+    const bar = h('div', 'sm-rate-bar');
+    const fill = h('div', 'sm-rate-f'); fill.style.width = `${Math.round(rate * 100)}%`;
+    if (rate < 0.6) fill.classList.add('low');
+    bar.append(fill);
+    rr.append(bar, h('div', 'sm-rate-n', `${Math.round(rate * 100)}%`));
+    return rr;
+  }
+
+  registerPanel('smithy', (arg) => {
+    let id = pickTarget(arg as Record<string, unknown>);
+    const { body } = openWindow('Cường hoá trang bị', { size: 'large' });
+    const render = () => {
+      body.innerHTML = '';
+      const wrap = h('div', 'fg-wrap');
+      wrap.append(targetStrip(id, x => { id = x; render(); }));
+      const d = equipDef(id);
+      if (d) {
+        const main = h('div', 'fg-main');
+        main.append(bigPiece(d, id));
+        const lv = equipLevel(id);
+        const side = h('div', 'fg-side');
+        if (lv >= MAX_ENHANCE) side.append(h('div', 'fg-cap', 'ĐÃ TỐI ĐA'), btn('+15 rồi', '', undefined));
+        else {
+          const cost = enhanceCost(d, lv);
+          side.append(h('div', 'fg-cap', `+${lv} ➜ +${lv + 1}`), rateRow(enhanceRate(lv)));
+          const need = h('div', 'fg-need');
+          need.innerHTML = `${priceHtml(cost.coins)} &nbsp; <b>${itemCount(ENHANCE_STONE)}/${cost.stones}</b> đá cường hoá`;
+          side.append(need, btn(`Cường hoá +${lv + 1}`, 'gold', () => { smash(id); render(); }));
+          if (dropsOnFail(lv)) side.append(h('div', 'sm-warn', 'Từ +7, hỏng là TỤT 1 cấp.'));
+        }
+        main.append(side);
+        wrap.append(main);
+      }
+      body.append(wrap);
+    };
+    render();
+  });
+
+  registerPanel('starup', (arg) => {
+    let id = pickTarget(arg as Record<string, unknown>);
+    const { body } = openWindow('Nâng sao trang bị', { size: 'large' });
+    const render = () => {
+      body.innerHTML = '';
+      const wrap = h('div', 'fg-wrap');
+      wrap.append(targetStrip(id, x => { id = x; render(); }));
+      const d = equipDef(id);
+      if (d) {
+        const main = h('div', 'fg-main');
+        main.append(bigPiece(d, id));
+        const st = equipStar(id);
+        const side = h('div', 'fg-side');
+        if (st >= MAX_STAR) side.append(h('div', 'fg-cap', 'ĐỦ 5 SAO'), btn('Tối đa', '', undefined));
+        else {
+          const c = starCost(d, st);
+          side.append(h('div', 'fg-cap', `${st} ★ ➜ ${st + 1} ★`),
+            h('div', 'fg-note', 'Mỗi sao cộng thêm 15% chỉ số gốc của món.'), rateRow(starRate(st)));
+          const need = h('div', 'fg-need');
+          need.innerHTML = `${priceHtml(c.coins)} &nbsp; <b>${itemCount(c.kind)}/${c.n}</b> ${item(c.kind).name}`;
+          side.append(need, btn(`Nâng lên ${st + 1} sao`, 'gold', () => { upStar(id); render(); }),
+            h('div', 'sm-warn', 'Thất bại chỉ mất nguyên liệu, sao giữ nguyên.'));
+        }
+        main.append(side);
+        wrap.append(main);
+      }
+      body.append(wrap);
+    };
+    render();
+  });
+
+  registerPanel('socket', (arg) => {
+    let id = pickTarget(arg as Record<string, unknown>);
+    let pickSlot = 0;
+    const { body } = openWindow('Gắn đá trang bị', { size: 'large' });
+    const render = () => {
+      body.innerHTML = '';
+      const wrap = h('div', 'fg-wrap');
+      wrap.append(targetStrip(id, x => { id = x; pickSlot = 0; render(); }));
+      const d = equipDef(id);
+      if (d) {
+        const main = h('div', 'fg-main');
+        main.append(bigPiece(d, id));
+        const side = h('div', 'fg-side');
+        side.append(h('div', 'fg-cap', `LỖ ĐÁ (${d.sockets})`));
+        const socks = h('div', 'sk-row');
+        gemsOn(id).forEach((gid, i) => {
+          const c = h('button', `sk-slot ${i === pickSlot ? 'on' : ''} ${gid ? 'filled' : ''}`);
+          const g = gemDef(gid);
+          if (g) c.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 32));
+          else c.append(h('div', 'sk-empty', '+'));
+          c.onclick = () => { sfx.click(); pickSlot = i; render(); };
+          socks.append(c);
+        });
+        side.append(socks);
+        if (gemsOn(id)[pickSlot]) side.append(btn('Gỡ viên này', 'mini', () => { unsocketGem(id, pickSlot); render(); }));
+        main.append(side);
+        wrap.append(main);
+
+        wrap.append(h('div', 'fg-cap', 'TÚI ĐÁ — bấm để gắn vào lỗ đang chọn'));
+        const grid = h('div', 'gem-grid');
+        const owned = GEM_LIST.filter(g => gemCount(g.id) > 0);
+        if (!owned.length) grid.append(h('div', 'hint', 'Chưa có viên đá nào — mua ở Quầy đá.'));
+        for (const g of owned) {
+          const n = gemCount(g.id);
+          const c = h('button', 'gem-cell');
+          c.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 30),
+            h('div', 'gem-nm', g.name), h('div', 'qty', `${n}`));
+          c.title = `${g.name} — ${STAT_NAMES[g.stat]} +${gemPower(g)}`;
+          c.onclick = () => { socketGem(id, pickSlot, g.id); render(); };
+          const to = gemMergeTo(g);
+          if (to && n >= GEM_MERGE_N) {
+            const m = h('div', 'gem-merge', '⇪');
+            m.title = `Ghép ${GEM_MERGE_N} viên thành ${to.name}`;
+            m.onclick = e => { e.stopPropagation(); mergeGem(g.id); render(); };
+            c.append(m);
+          }
+          grid.append(c);
+        }
+        wrap.append(grid);
+      }
+      body.append(wrap);
+    };
+    render();
+  });
+
   registerPanel('toolupgrade', () => {
     if (!atShopZone('toolupgrade', 'Quầy nâng cấp công cụ (Bách hóa)')) return;
     const { body } = openWindow('Nâng cấp công cụ', { size: 'large' });
@@ -1962,34 +2161,31 @@ export function registerAllPanels() {
         art.append(spr(cur.url, 0, 0, cur.w, cur.h, 44));
         if (lv > 0) art.append(h('div', 'eq-plus', `+${lv}`));
         const info = h('div', 'sm-info');
-        const st = pieceStats(cur, lv);
+        const st = pieceStats(cur, lv, equipStar(cur.id), gemsOn(cur.id));
         const txt = STAT_KEYS.filter(k => st[k] > 0).map(k => `${STAT_NAMES[k]} +${st[k]}`).join(' · ');
         info.append(h('div', 'sm-nm', `${cur.name}${lv ? ` +${lv}` : ''}`), h('div', 'sm-st', txt));
         box.append(art, info);
 
-        if (lv >= MAX_ENHANCE) {
-          box.append(btn('Tối đa', '', undefined));
-        } else {
-          const cost = enhanceCost(cur, lv);
-          const rate = enhanceRate(lv);
-          const side = h('div', 'sm-side');
-          const rr = h('div', 'sm-rate');
-          const bar = h('div', 'sm-rate-bar');
-          const fill = h('div', 'sm-rate-f'); fill.style.width = `${Math.round(rate * 100)}%`;
-          if (rate < 0.6) fill.classList.add('low');
-          bar.append(fill);
-          rr.append(bar, h('div', 'sm-rate-n', `${Math.round(rate * 100)}%`));
-          const need = h('div', 'sm-need');
-          need.innerHTML = `${priceHtml(cost.coins)} · <b>${itemCount(ENHANCE_STONE)}/${cost.stones}</b> đá`;
-          const go = btn(`Đập +${lv + 1}`, 'gold', () => { smash(cur.id); render(); });
-          go.classList.add('sm-go');
-          side.append(rr, need, go);
-          box.append(side);
-        }
+        // sao + lỗ đá ngay trong thẻ tóm tắt
+        const meta = h('div', 'sm-meta');
+        meta.append(h('div', 'sm-star', '★'.repeat(equipStar(cur.id)) + '☆'.repeat(MAX_STAR - equipStar(cur.id))));
+        const socks = h('div', 'sm-socks');
+        gemsOn(cur.id).forEach(gid => {
+          const sk = h('div', `sm-sock ${gid ? 'on' : ''}`);
+          const g = gemDef(gid);
+          if (g) sk.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 18));
+          socks.append(sk);
+        });
+        meta.append(socks, btn('Cởi ra', 'mini', () => { unequipPiece(sel); render(); }));
+        box.append(meta);
         card.append(box);
-        if (dropsOnFail(lv)) card.append(h('div', 'sm-warn', 'Từ +7 trở lên, đập hỏng sẽ TỤT 1 cấp.'));
-        const off = btn('Cởi ra', 'mini', () => { unequipPiece(sel); render(); });
-        card.append(off);
+        // 3 trang riêng như GunPow
+        const acts = h('div', 'eq-acts');
+        acts.append(
+          btn('Cường hoá', 'gold', () => openPanel('smithy', { id: cur.id })),
+          btn('Nâng sao', 'blue', () => openPanel('starup', { id: cur.id })),
+          btn('Gắn đá', '', () => openPanel('socket', { id: cur.id })));
+        card.append(acts);
       }
 
       // danh sách món cùng ô trong túi

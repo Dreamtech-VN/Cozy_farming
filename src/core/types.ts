@@ -149,6 +149,9 @@ export interface GameState {
   equip: Record<string, string>;        // ô -> id món đang đeo
   equipLv: Record<string, number>;      // id món -> cấp đập
   equipBag: string[];                   // món đang cất trong túi trang bị
+  equipStar: Record<string, number>;    // id món -> số sao
+  equipGems: Record<string, string[]>;  // id món -> đá đã gắn từng lỗ
+  gemBag: Record<string, number>;       // id đá -> số viên đang có
   inventory: Record<string, number>;
   wardrobe: string[];       // (cũ) thời trang pack Cozy
   chibiWardrobe: number[];  // part chibi đã sở hữu (id part Avatar)

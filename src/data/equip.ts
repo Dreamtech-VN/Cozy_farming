@@ -4,12 +4,13 @@
 // 7200 Chi Liên, 7300 Hộ Oản, 7400 Huy Chương, 7500 Chi Bảo, 7600 Chi Trụy);
 // icon giải từ ảnh .pkm của client bằng scripts/pkm_to_png.py.
 //
-// Vũ khí thì bỏ hẳn — game này là game nông trại, không có đánh nhau.
+// Có cả VŨ KHÍ (24 khẩu đầu của bảng 7000+) — đây là ô mạnh nhất, chỉ số x1.6.
 
 import RAW from './equip-items.json';
+import GEMS_RAW from './gems.json';
 import type { StatKey } from '@/core/types';
 
-export type EquipSlot = 'ring' | 'necklace' | 'hand' | 'medal' | 'treasure' | 'earring';
+export type EquipSlot = 'weapon' | 'ring' | 'necklace' | 'hand' | 'medal' | 'treasure' | 'earring';
 
 export interface EquipSlotDef {
   id: EquipSlot;
@@ -19,6 +20,7 @@ export interface EquipSlotDef {
 }
 
 export const EQUIP_SLOTS: EquipSlotDef[] = [
+  { id: 'weapon', name: 'Vũ khí', main: 'strength', sub: 'agility' },
   { id: 'ring', name: 'Nhẫn', main: 'charm', sub: 'intellect' },
   { id: 'necklace', name: 'Dây chuyền', main: 'intellect', sub: 'health' },
   { id: 'hand', name: 'Găng tay', main: 'strength', sub: 'agility' },
@@ -40,6 +42,7 @@ export interface EquipDef {
   price: number;
   main: number;        // điểm chỉ số chính khi chưa đập
   sub: number;
+  sockets: number;     // số lỗ gắn đá
 }
 
 type Row = { i: number; name: string; w: number; h: number };
@@ -55,8 +58,10 @@ for (const s of EQUIP_SLOTS) {
       url: `assets/equip/${id}.png`, w: r.w, h: r.h,
       // giá tăng dần theo bậc; toàn bộ mua bằng XU (lượng là tiền nạp)
       price: Math.round(600 * Math.pow(1.55, tier - 1) / 100) * 100,
-      main: tier * 3,
-      sub: Math.max(1, Math.round(tier * 1.5))
+      // vũ khí là món mạnh nhất nên chỉ số nhân 1.6
+      main: Math.round(tier * 3 * (s.id === 'weapon' ? 1.6 : 1)),
+      sub: Math.max(1, Math.round(tier * 1.5 * (s.id === 'weapon' ? 1.6 : 1))),
+      sockets: Math.min(3, 1 + Math.floor(tier / 8))
     };
   });
 }
@@ -98,3 +103,38 @@ export function enhanceCost(def: EquipDef, lv: number) {
 export function dropsOnFail(lv: number): boolean {
   return lv >= 7;
 }
+
+
+// ===== Nâng sao (thăng tinh kiểu GunPow) =====
+// Mỗi món lên tối đa 5 sao. Mỗi sao nhân thêm 15% chỉ số gốc, và cần
+// "Thăng Tinh Thạch" — cấp sao càng cao thì đòi loại đá càng xịn.
+export const MAX_STAR = 5;
+export const STAR_STONES = ['star_stone_1', 'star_stone_2', 'star_stone_3'] as const;
+
+export function starMul(star: number): number {
+  return 1 + 0.15 * Math.max(0, Math.min(MAX_STAR, star));
+}
+/** Sao thứ `star+1` cần loại đá nào + bao nhiêu viên + bao nhiêu xu. */
+export function starCost(def: EquipDef, star: number) {
+  const kind = STAR_STONES[Math.min(2, Math.floor(star / 2))];
+  return { kind, n: 2 + star * 2, coins: Math.round((def.price * 0.3 + 500) * (1 + star)) };
+}
+export function starRate(star: number): number {
+  return [1, 0.85, 0.65, 0.45, 0.3][Math.min(4, star)];
+}
+
+// ===== Đá quý (gắn đá) =====
+export interface GemDef {
+  id: string; lv: number; stat: StatKey; name: string; icon: string; w: number; h: number;
+}
+export const GEMS: Record<string, GemDef> = {};
+for (const g of GEMS_RAW as unknown as GemDef[]) GEMS[g.id] = g;
+export const GEM_LIST = Object.values(GEMS);
+export function gemDef(id?: string): GemDef | undefined { return id ? GEMS[id] : undefined; }
+/** Điểm chỉ số một viên đá cộng vào. */
+export function gemPower(g: GemDef): number { return g.lv * 6; }
+/** Ghép 3 viên cùng loại cùng cấp -> 1 viên cấp trên. */
+export function gemMergeTo(g: GemDef): GemDef | undefined {
+  return g.lv >= 10 ? undefined : GEM_LIST.find(x => x.stat === g.stat && x.lv === g.lv + 1);
+}
+export const GEM_MERGE_N = 3;

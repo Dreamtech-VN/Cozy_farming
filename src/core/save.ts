@@ -31,6 +31,9 @@ export function defaultState(): GameState {
     equip: { ring: '', necklace: '', hand: '', medal: '', treasure: '', earring: '' },
     equipLv: {},
     equipBag: [],
+    equipStar: {},
+    equipGems: {},
+    gemBag: {},
     inventory: {},
     wardrobe: ['hair:bob', 'clothes:basic'],
     chibiWardrobe: [],
@@ -150,6 +153,9 @@ export function load(): boolean {
     if (!S.equip) S.equip = { ring: '', necklace: '', hand: '', medal: '', treasure: '', earring: '' };
     if (!S.equipLv) S.equipLv = {};
     if (!S.equipBag) S.equipBag = [];
+    if (!S.equipStar) S.equipStar = {};
+    if (!S.equipGems) S.equipGems = {};
+    if (!S.gemBag) S.gemBag = {};
     if (S.wallet.farmCoins === undefined) S.wallet.farmCoins = 0;
     // save cũ để đồ cầm tay trong túi -> chuyển vào tủ quần áo (như Lttt)
     migrateHandItems(S.inventory, S.chibiWardrobe);
