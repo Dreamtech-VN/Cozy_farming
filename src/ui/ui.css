@@ -675,11 +675,16 @@ img { image-rendering: auto; }
 /* Tạo nhân vật */
 .cc-panel {
   /* cao theo nội dung + căn giữa dọc, tránh khoảng trống thừa phía dưới */
-  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  position: absolute; top: 50%; transform: translateY(-50%);
   width: min(460px, 52vw); max-height: 94vh;
   border-image: url('/assets/ui/pack/frame2.png') 70 fill / 18px stretch;
   display: flex; flex-direction: column; color: #4a3520; overflow: visible;
   padding-right: env(safe-area-inset-right, 0);
+  /* Ở màn rộng/vuông (tablet) ghim theo mép phải sẽ để hở khoảng trống lớn bên
+     trái vì nhân vật xem trước (Phaser) chỉ neo theo % chiều rộng cố định.
+     Giới hạn khung bố cục trong 900px và tự căn giữa để cặp
+     nhân vật + bảng luôn dính sát nhau, không dạt ra hai đầu màn hình. */
+  right: max(0px, calc((100vw - 900px) / 2));
 }
 /* bảng tên gắn đè lên viền trên, giống cửa sổ Túi đồ */
 .cc-panel > .win-head {
