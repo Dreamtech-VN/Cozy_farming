@@ -2359,8 +2359,11 @@ export function registerAllPanels() {
       const figure = h('div', 'wd-figure');
       const colL = h('div', 'wd-slot-col');
       const colR = h('div', 'wd-slot-col');
-      const mid = h('div', 'wd-char');
+      const mid = h('div', 'wd-char eq-stage');
+      // vòng phép sau lưng nhân vật đúng như màn Nhân vật của GunPow
+      mid.append(forgeCircle());
       if (S.player.chibi) mid.append(charFaceFluid(S.player.chibi));
+      const half = Math.ceil(EQUIP_SLOTS.length / 2);
       EQUIP_SLOTS.forEach((sl, i) => {
         const cell = h('button', `wd-slot eqs-${sl.id} ${sl.id === sel ? 'active' : ''}`);
         const def = equipDef(S.equip[sl.id]);
@@ -2368,13 +2371,37 @@ export function registerAllPanels() {
           cell.append(spr(def.url, 0, 0, def.w, def.h, 30));
           const lv = equipLevel(def.id);
           if (lv > 0) cell.append(h('div', 'eq-plus', `+${lv}`));
+          const st = equipStar(def.id);
+          if (st > 0) cell.append(h('div', 'wd-slot-star', '★'.repeat(st)));
+          // chấm tròn dưới ô = mấy lỗ đá, lỗ nào có đá thì sáng lên
+          const gs = gemsOn(def.id);
+          if (def.sockets > 0) {
+            const pips = h('div', 'wd-slot-pips');
+            for (let k = 0; k < def.sockets; k++) pips.append(h('i', gs[k] ? 'on' : ''));
+            cell.append(pips);
+          }
         } else cell.classList.add('empty');
         cell.append(h('span', 'wd-slot-name', sl.name));
         cell.title = sl.name;
         cell.onclick = () => { sfx.click(); sel = sl.id; render(); };
-        (i < 3 ? colL : colR).append(cell);
+        (i < half ? colL : colR).append(cell);
       });
       figure.append(colL, mid, colR);
+
+      // 3 nút tắt dưới chân nhân vật, y như GunPow (cường hoá / gắn đá / cửa hàng đá)
+      const quick = h('div', 'eq-quick');
+      const qbtn = (icon: string, w: number, hh: number, tip: string, go: () => void) => {
+        const b2 = h('button', 'eq-q');
+        b2.append(spr(icon, 0, 0, w, hh, 22));
+        b2.title = tip; b2.onclick = () => { sfx.click(); go(); };
+        return b2;
+      };
+      quick.append(
+        qbtn('assets/forge/ic_forge.png', 56, 44, 'Lò rèn',
+          () => openPanel('smithy', { id: S.equip[sel] })),
+        qbtn('assets/equip/stone_034.png', 58, 62, 'Quầy đá', () => openPanel('gemshop')),
+        qbtn('assets/ui/act/gift.png', 13, 12, 'Quầy trang bị', () => openPanel('equipshop')));
+      mid.append(quick);
 
       const nameRow = h('div', 'wd-name-row');
       const lvb = h('div', 'wd-lv'); lvb.textContent = `${S.player.level}`;
@@ -2456,7 +2483,7 @@ export function registerAllPanels() {
         .sort((a, b2) => b2.tier - a.tier);
       card.append(h('div', 'up-cap', `TRONG TÚI (${list.length})`));
       if (!list.length) {
-        card.append(h('div', 'wd-blank', 'Chưa có món nào cho ô này — mua ở Quầy trang bị (Bách hóa).'));
+        card.append(h('div', 'wd-blank', 'Chưa có món nào cho ô này — mở rương trang bị ở Bách hóa để kiếm.'));
       } else {
         const grid = h('div', 'eq-grid');
         for (const d of list) {
