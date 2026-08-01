@@ -1132,6 +1132,12 @@ export class WorldScene extends Phaser.Scene {
   private pendingSpot?: () => void;
   private onTap(p: Phaser.Input.Pointer) {
     if (document.querySelector('.win-backdrop, .cc-panel')) return;
+    // Giao diện là lớp DOM nằm TRÊN canvas, mà Phaser nghe pointerdown ở
+    // window (pha capture) nên bấm nút menu/hotbar/chat vẫn lọt xuống world và
+    // dính luôn vào nhân vật đứng ngay chỗ đó. Cú chạm nào không rơi trúng
+    // canvas thì bỏ qua.
+    const target = p.event?.target;
+    if (target instanceof Element && target.id !== 'ui-root' && target.closest('#ui-root')) return;
     const wp = this.cameras.main.getWorldPoint(p.x, p.y);
     // bấm thẳng vào một địa điểm: đi tới chân công trình rồi mở luôn
     const spot = this.spots.find(sp => sp.rect.contains(wp.x, wp.y));

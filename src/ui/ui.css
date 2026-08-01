@@ -250,10 +250,12 @@ img { image-rendering: auto; }
 /* ===== Chat: bảng riêng, KHÔNG dùng khung gỗ như popup khác =====
    Neo góc dưới trái, nền tối mờ để vẫn thấy thế giới phía sau. */
 .win-backdrop.chat-backdrop {
-  /* chừa chỗ cho thanh trang bị (cao 46px, cách đáy 14px) để không che nhau */
-  background: none; align-items: flex-end; justify-content: flex-start;
-  padding: 0 0 74px 12px;
+  /* khung chat tự định vị theo nút chat nổi nên bỏ canh giữa của backdrop */
+  background: none; display: block; padding: 0;
 }
+.win.win-chat { position: absolute; left: 12px; top: 40px; }
+.cw-head.cw-drag { cursor: grab; touch-action: none; }
+.cw-head.cw-drag:active { cursor: grabbing; }
 .win.win-chat {
   width: min(440px, 93vw); height: min(400px, 66vh); max-height: 66vh;
   padding: 0; border: none; border-image: none;

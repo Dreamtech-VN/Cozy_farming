@@ -200,6 +200,25 @@ function buildHud() {
 // Vị trí nhớ trong localStorage để lần sau mở game vẫn nằm đúng chỗ đã kéo.
 const CHAT_POS_KEY = 'cozy_chat_btn_pos';
 
+// Nút chat là MỐC NEO của khung trò chuyện: kéo nút tới đâu thì lần sau mở
+// khung ra ngay đó, và kéo khung cũng dời nút theo cho hai cái luôn đi cùng nhau.
+export function chatFabPos(): { x: number; y: number; w: number; h: number } {
+  const b = document.getElementById('chat-fab');
+  if (!b) return { x: 12, y: root().clientHeight - 130, w: 56, h: 56 };
+  return { x: b.offsetLeft, y: b.offsetTop, w: b.offsetWidth, h: b.offsetHeight };
+}
+
+export function setChatFabPos(x: number, y: number) {
+  const b = document.getElementById('chat-fab');
+  if (!b) return;
+  const r = root().getBoundingClientRect();
+  const nx = Math.max(6, Math.min(r.width - b.offsetWidth - 6, x));
+  const ny = Math.max(6, Math.min(r.height - b.offsetHeight - 6, y));
+  b.style.left = `${nx}px`;
+  b.style.top = `${ny}px`;
+  localStorage.setItem(CHAT_POS_KEY, JSON.stringify({ x: nx, y: ny }));
+}
+
 function buildChatBubble() {
   const b = h('button', 'chat-fab');
   b.id = 'chat-fab';

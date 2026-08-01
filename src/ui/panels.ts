@@ -1,4 +1,4 @@
-import { registerPanel, openPanel, getGame, refreshHotbar } from './UIManager';
+import { registerPanel, openPanel, getGame, refreshHotbar, chatFabPos, setChatFabPos } from './UIManager';
 import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
 import { AVATAR_PICS, avatarPicUrl, isUploadedPic } from '@/data/avatars';
 import { FOODS, FOOD_LIST, type FoodDef } from '@/data/foods';
@@ -2037,6 +2037,21 @@ export function registerAllPanels() {
     (win.parentElement as HTMLElement)?.classList.add('chat-backdrop');
     win.querySelector('.win-head')?.remove();
 
+    // ----- khung mở ra ngay chỗ nút chat đang đứng, và kéo đi được -----
+    const placeWin = (x: number, y: number) => {
+      const r = (win.parentElement as HTMLElement).getBoundingClientRect();
+      const nx = Math.max(6, Math.min(r.width - win.offsetWidth - 6, x));
+      const ny = Math.max(6, Math.min(r.height - win.offsetHeight - 6, y));
+      win.style.left = `${nx}px`;
+      win.style.top = `${ny}px`;
+      return { x: nx, y: ny };
+    };
+    requestAnimationFrame(() => {
+      // nút chat nằm ở đâu thì khung dựng lên ngay trên nút đó
+      const f = chatFabPos();
+      placeWin(f.x, f.y + f.h - win.offsetHeight);
+    });
+
     let channel: 'public' | 'area' | 'private' = data?.to ? 'private' : 'public';
     let privateTo = data?.to ?? S.social.friends[0]?.name ?? '';
 
@@ -2050,6 +2065,42 @@ export function registerAllPanels() {
     const closeX = h('button', 'cw-x', '✕');
     closeX.onclick = close;
     head.append(hAva, hTxt, closeX);
+
+    // kéo đầu bảng = dời khung; dời xong đặt luôn nút chat về đó để lần sau
+    // mở lại vẫn đúng chỗ (nút là mốc neo duy nhất)
+    head.classList.add('cw-drag');
+    let dragging = false, dx = 0, dy = 0;
+    const onMove = (e: PointerEvent) => {
+      if (!dragging) return;
+      placeWin(e.clientX - dx, e.clientY - dy);
+      e.preventDefault();
+    };
+    const onUp = () => {
+      if (!dragging) return;
+      dragging = false;
+      const f = chatFabPos();
+      setChatFabPos(win.offsetLeft, win.offsetTop + win.offsetHeight - f.h);
+    };
+    window.addEventListener('pointermove', onMove, { passive: false });
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+    head.addEventListener('pointerdown', e => {
+      if ((e.target as HTMLElement).closest('.cw-x')) return;
+      dragging = true;
+      dx = e.clientX - win.offsetLeft;
+      dy = e.clientY - win.offsetTop;
+      e.stopPropagation();
+    });
+    // gỡ listener khi đóng bảng
+    const detach = () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onUp);
+    };
+    closeX.addEventListener('click', detach);
+    (win.parentElement as HTMLElement)?.addEventListener('click', e => {
+      if (e.target === win.parentElement) detach();
+    });
 
     // ----- kênh -----
     const chanBar = h('div', 'cw-tabs');

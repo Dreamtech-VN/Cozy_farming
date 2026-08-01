@@ -1,54 +1,55 @@
-"""Cắt icon bong bóng chat từ nút chat gốc của repo Lttt.
+"""Cắt bong bóng chat từ nút chat gốc của repo Lttt.
 
-`hd/iconmenu/chat0.png` là cả một cái nút: khung bo góc xám + nền trắng, bên
-trong mới là bong bóng thoại xanh. Game dùng nút kính riêng nên chỉ cần bong
-bóng: xoá mọi vùng màu nhạt/xám nối liền với mép ảnh (khung + nền), giữ lại
-phần bong bóng ở giữa rồi trim viền trong suốt.
+`hd/iconMenu/chat0.png` (73x73) là cả một cái nút: nền trắng bo góc + viền xám,
+bên trong mới là bong bóng thoại xanh CÓ viền bạc và cái đuôi chỉ xuống trái.
+Game dùng nút kính riêng nên chỉ cần bong bóng.
 
-Chạy: python3 scripts/cut_chat_icon.py <thư mục hd/iconmenu>
+Bản cắt cũ loang từ mép vào rồi xoá theo "màu nhạt/xám" nên ăn luôn viền bạc và
+một phần đuôi bong bóng -> nhìn lem nhem. Bản này bám theo phần XANH: dựng mặt
+nạ pixel xanh, nở ra vài pixel để ôm trọn viền bạc + đuôi, rồi xoá tất cả những
+gì nằm ngoài mặt nạ đó.
+
+Chạy: python3 scripts/cut_chat_icon.py <thư mục hd/iconMenu>
 """
 import os
 import sys
-from collections import deque
 
-from PIL import Image
+from PIL import Image, ImageFilter
 
-SRC = sys.argv[1] if len(sys.argv) > 1 else 'iconmenu'
-DST = 'public/assets/ui/pack/icon_chat.png'
-
-im = Image.open(os.path.join(SRC, 'chat0.png')).convert('RGBA')
-W, H = im.size
-px = im.load()
+SRC = sys.argv[1] if len(sys.argv) > 1 else 'iconMenu'
+DST = os.path.join(os.path.dirname(__file__), '..',
+                   'public', 'assets', 'ui', 'pack', 'icon_chat.png')
+GROW = 3          # số pixel nở ra để ôm viền bạc quanh bong bóng
 
 
-def framey(p):
-    """Pixel thuộc khung/nền: trong suốt, hoặc xám-trắng (3 kênh sát nhau)."""
-    r, g, b, a = p
-    if a < 20:
-        return True
-    return max(r, g, b) - min(r, g, b) < 26
+def main():
+    im = Image.open(os.path.join(SRC, 'chat0.png')).convert('RGBA')
+    w, h = im.size
+    px = im.load()
+
+    # 1. mặt nạ phần xanh của bong bóng
+    mask = Image.new('L', (w, h), 0)
+    mp = mask.load()
+    for y in range(h):
+        for x in range(w):
+            r, _g, b, a = px[x, y]
+            if a > 40 and b > 120 and b > r + 30:
+                mp[x, y] = 255
+
+    # 2. nở mặt nạ ra để lấy cả viền bạc + đuôi
+    mask = mask.filter(ImageFilter.MaxFilter(GROW * 2 + 1))
+
+    # 3. ngoài mặt nạ thì xoá sạch (nền trắng + khung nút)
+    mp = mask.load()
+    for y in range(h):
+        for x in range(w):
+            if not mp[x, y]:
+                px[x, y] = (0, 0, 0, 0)
+
+    im = im.crop(im.getbbox())
+    im.save(DST)
+    print(f'{DST}  {im.size}')
 
 
-# loang từ mép ảnh vào, xoá hết phần khung + nền quanh bong bóng
-seen = [[False] * W for _ in range(H)]
-q = deque()
-for x in range(W):
-    for y in (0, H - 1):
-        q.append((x, y))
-for y in range(H):
-    for x in (0, W - 1):
-        q.append((x, y))
-while q:
-    x, y = q.popleft()
-    if not (0 <= x < W and 0 <= y < H) or seen[y][x]:
-        continue
-    if not framey(px[x, y]):
-        continue
-    seen[y][x] = True
-    px[x, y] = (0, 0, 0, 0)
-    for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-        q.append((x + dx, y + dy))
-
-im = im.crop(im.getbbox())
-im.save(DST)
-print(f'{DST}  {im.size}')
+if __name__ == '__main__':
+    main()
