@@ -477,11 +477,14 @@ export function refreshHotbar() {
         selectTool(tid);
         if (!wasHeld) bus.emit('hotbar:use', tid);
       };
-      // giữ lâu / chuột phải = gỡ nông cụ khỏi ô
-      let hold = 0;
-      slot.onpointerdown = () => { hold = window.setTimeout(() => { unequipTool(i); toast(`Đã gỡ ${t.name}.`, 'hoe'); }, 550); };
-      slot.onpointerup = slot.onpointerleave = () => clearTimeout(hold);
-      slot.oncontextmenu = e => { e.preventDefault(); unequipTool(i); toast(`Đã gỡ ${t.name}.`, 'hoe'); };
+      // 4 nông cụ cơ bản là đồ cố định — chỉ ô cần câu mới gỡ được
+      if (i === ROD_SLOT) {
+        const off = () => { unequipTool(i); toast(`Đã cất ${t.name}.`, 'rod'); };
+        let hold = 0;
+        slot.onpointerdown = () => { hold = window.setTimeout(off, 550); };
+        slot.onpointerup = slot.onpointerleave = () => clearTimeout(hold);
+        slot.oncontextmenu = e => { e.preventDefault(); off(); };
+      }
     } else if (i === ROD_SLOT) {
       // ô cuối để dành cho cần câu — chưa mua thì vẫn hiện dấu + như các ô khác
       slot.classList.add('empty');
@@ -489,11 +492,9 @@ export function refreshHotbar() {
       slot.title = 'Ô cần câu — mua cần ở tiệm câu Ông Biển';
       slot.onclick = () => { sfx.click(); toast('Ô này dành cho cần câu — mua cần ở tiệm câu Ông Biển nhé.', 'rod'); };
     } else {
-      // ô trống: mở túi đồ — nông cụ mua về nằm trong túi, bấm món đồ để gắn
+      // 4 ô đầu luôn có nông cụ nên nhánh này gần như không xảy ra
       slot.classList.add('empty');
       slot.textContent = '+';
-      slot.title = 'Gắn nông cụ từ túi đồ';
-      slot.onclick = () => { sfx.click(); openPanel('inventory'); toast('Nông cụ mua về nằm trong túi đồ — bấm vào món để gắn.', 'inventory'); };
     }
     bar!.append(slot);
   });

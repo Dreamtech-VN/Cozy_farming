@@ -29,6 +29,7 @@ import { ROOM_COUNT, ROOM_CAP, roomPlayers, roomFull, suggestedFriends, addFrien
 import { claimLogin, checkinToday, spinWheel, grantWheel, wheelSpinsLeft, loginRewardToday } from '@/systems/meta';
 import { upgradeHouse, setWallpaper, setFloor, throwParty } from '@/systems/housing';
 import { sfx, startBgm, stopBgm } from '@/core/audio';
+import { upgradeTool, upgradeRate, missingMats, failStreak, UPGRADABLE, FAIL_BONUS, FAIL_BONUS_MAX } from '@/systems/toolcraft';
 import type { Reward } from '@/data/quests';
 
 // giá bán thực nhận (vẹt lanh lợi +10%)
@@ -220,15 +221,19 @@ export function registerAllPanels() {
 
       // ----- thẻ chi tiết món đang chọn (thay bảng hỏi đè lên) -----
       const card = h('div', 'bag-card');
+      // phần trên cuộn được, cụm nút luôn dính đáy thẻ (màn thấp trước đây cuộn
+      // mất nút, nút cuối bị viền thẻ cắt ngang)
+      const cbody = h('div', 'bag-card-body');
+      card.append(cbody);
       const e = list.find(x => x.key === sel);
       if (!e) {
-        card.append(h('div', 'bag-card-empty', tab === 0
+        cbody.append(h('div', 'bag-card-empty', tab === 0
           ? 'Túi đang trống. Nông sản, trứng/sữa/thịt và món đã nấu nằm ở Kho nông trại.'
           : 'Không có món nào trong mục này.'));
       } else {
         const art = h('div', 'bag-card-art'); art.append(e.node(72));
-        card.append(art, h('div', 'bag-card-nm', e.name));
-        if (e.desc) card.append(h('div', 'bag-card-desc', e.desc));
+        cbody.append(art, h('div', 'bag-card-nm', e.name));
+        if (e.desc) cbody.append(h('div', 'bag-card-desc', e.desc));
 
         // bảng thông số nhỏ: loại · đang có · bán được bao nhiêu xu
         const KIND_NAME: Record<string, string> = {
@@ -248,7 +253,7 @@ export function registerAllPanels() {
         stats.append(def && def.sell > 0
           ? stat('BÁN', priceHtml(sellPrice(def.sell)), true)
           : stat('BÁN', '—'));
-        card.append(stats);
+        cbody.append(stats);
         const acts = h('div', 'bag-card-acts');
         for (const a of e.actions(close, () => { sfx.click(); draw(); })) {
           acts.append(btn(a.label, a.kind ?? '', a.cb));
@@ -1746,38 +1751,90 @@ export function registerAllPanels() {
   // ================= Nâng cấp nông cụ =================
   registerPanel('toolupgrade', () => {
     if (!atShopZone('toolupgrade', 'Quầy nâng cấp nông cụ (Bách hóa)')) return;
-    const { body } = openWindow('Nâng cấp nông cụ');
+    const { body } = openWindow('Nâng cấp nông cụ', { size: 'large' });
+    let sel = UPGRADABLE[0];
     const render = () => {
       body.innerHTML = '';
-      for (const tid of ['hoe', 'can', 'basket']) {
+      const wrap = h('div', 'up-wrap');
+
+      // ----- cột trái: 4 nông cụ nâng được -----
+      const list = h('div', 'up-list');
+      for (const tid of UPGRADABLE) {
         const t = TOOLS[tid];
         const lv = toolLevel(tid);
         const cur = toolUpgradeAt(tid, lv);
-        const next = toolUpgradeAt(tid, lv + 1);
-        const r = h('div', 'row');
-        const ic = h('div');
-        ic.append(spr(t.url, 0, 0, t.w, t.h, 34));
-        const info = h('div', 'grow');
-        if (lv <= 0) {
-          info.innerHTML = `<div class="t1">${t.name} — chưa sở hữu</div><div class="t2">Mua ở gian hàng nông cụ của Bách hóa trước nhé.</div>`;
-          r.append(ic, info);
-        } else {
-          info.innerHTML = `<div class="t1">${cur?.name ?? t.name} <span class="tl-lv">Lv.${lv}</span></div><div class="t2">${cur?.desc ?? ''}${next ? `<br>➜ ${next.name}: ${next.desc}` : ''}</div>`;
-          r.append(ic, info);
-          if (next) {
-            r.append(btn(`${next.price} xu`, 'gold', () => {
-              if (!spend(next.price)) return;
-              if (tid === 'hoe') S.tools.hoe = next.level;
-              else if (tid === 'can') S.tools.can = next.level;
-              else S.tools.basket = next.level;
-              save(); sfx.coin(); toast(`Nâng thành ${next.name}!`, 'rank');
-              bus.emit('hotbar:changed');
-              render();
-            }));
-          } else r.append(btn('MAX', '', undefined));
-        }
-        body.append(r);
+        const maxed = !toolUpgradeAt(tid, lv + 1);
+        const c = h('button', `up-cell ${tid === sel ? 'sel' : ''}`);
+        const art = h('div', 'up-cell-art');
+        art.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 40)));
+        c.append(art, h('div', 'up-cell-nm', cur?.name ?? t.name),
+          h('div', `up-cell-lv ${maxed ? 'max' : ''}`, maxed ? 'MAX' : `Lv.${lv}`));
+        c.onclick = () => { sfx.click(); sel = tid; render(); };
+        list.append(c);
       }
+
+      // ----- cột phải: chi tiết bậc kế tiếp -----
+      const t = TOOLS[sel];
+      const lv = toolLevel(sel);
+      const cur = toolUpgradeAt(sel, lv);
+      const next = toolUpgradeAt(sel, lv + 1);
+      const card = h('div', 'up-card');
+      // nội dung cuộn riêng, nút Nâng cấp luôn dính đáy thẻ
+      const cbody = h('div', 'up-body');
+      card.append(cbody);
+
+      const head = h('div', 'up-head');
+      const a1 = h('div', 'up-art'); a1.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 52)));
+      head.append(a1, h('div', 'up-arrow', '➜'));
+      const a2 = h('div', 'up-art next');
+      a2.append(spr(t.url, 0, 0, t.w, t.h, toolIconSize(t, 52)));
+      head.append(a2);
+      cbody.append(head);
+      cbody.append(h('div', 'up-nm', next ? `${cur?.name ?? t.name} ➜ ${next.name}` : `${cur?.name ?? t.name} — cấp tối đa`));
+
+      if (!next) {
+        cbody.append(h('div', 'up-desc', cur?.desc ?? ''));
+        cbody.append(h('div', 'up-note', 'Nông cụ này đã lên hết cấp rồi.'));
+      } else {
+        cbody.append(h('div', 'up-desc', next.desc));
+
+        // tỉ lệ thành công
+        const rate = upgradeRate(sel, next);
+        const streak = failStreak(sel);
+        const rr = h('div', 'up-rate');
+        const bar = h('div', 'up-rate-bar');
+        const fill = h('div', 'up-rate-f'); fill.style.width = `${Math.round(rate * 100)}%`;
+        if (rate < 0.6) fill.classList.add('low');
+        bar.append(fill);
+        rr.append(bar, h('div', 'up-rate-n', `${Math.round(rate * 100)}%`));
+        cbody.append(h('div', 'up-cap', 'TỈ LỆ THÀNH CÔNG'), rr);
+        cbody.append(h('div', 'up-note', streak
+          ? `Hỏng ${streak} lần rồi — đang được cộng thêm ${Math.round(Math.min(FAIL_BONUS_MAX, streak * FAIL_BONUS) * 100)}% may mắn.`
+          : 'Hỏng thì mất xu + nguyên liệu, cấp giữ nguyên và lần sau dễ ăn hơn.'));
+
+        // nguyên liệu
+        const mats = h('div', 'up-mats');
+        for (const [id, need] of Object.entries(next.mats ?? {})) {
+          const have = itemCount(id);
+          const cell = h('div', `up-mat ${have >= need ? 'ok' : 'miss'}`);
+          const ma = h('div', 'up-mat-art'); ma.append(iconOf(item(id), 30));
+          cell.append(ma, h('div', 'up-mat-n', `${have}/${need}`));
+          cell.title = item(id).name;
+          mats.append(cell);
+        }
+        if (!Object.keys(next.mats ?? {}).length) mats.append(h('div', 'up-note', 'Không cần nguyên liệu'));
+        cbody.append(h('div', 'up-cap', 'NGUYÊN LIỆU'), mats);
+
+        const ready = !missingMats(next).length && S.wallet.coins >= next.price;
+        const b = priceBtn(next.price, 'gold', () => { upgradeTool(sel); render(); });
+        b.classList.add('up-go');
+        b.innerHTML = `Nâng cấp · ${b.innerHTML}`;
+        if (!ready) b.classList.add('dim');
+        card.append(b);
+      }
+
+      wrap.append(list, card);
+      body.append(wrap);
     };
     render();
   });
@@ -1833,14 +1890,29 @@ export function registerAllPanels() {
         (i < Math.ceil(SLOTS.length / 2) ? colL : colR).append(cell);
       });
       const mid = h('div', 'wd-char');
-      // ảnh nhân vật vừa khung: to hơn thì tràn xuống đè lên thanh chỉ số
+      // Ảnh nhân vật là ảnh cỡ cố định (px) nên phải đo chỗ trống thật rồi mới
+      // vẽ, không thì màn ngang điện thoại thấp là bị cắt mất chân.
       mid.append(charFace(look, 116));
+
       const nameRow = h('div', 'wd-name-row');
       const lv = h('div', 'wd-lv'); lv.textContent = `${S.player.level}`;
       const nm = h('div', 'wd-name'); nm.textContent = S.player.name;
       nameRow.append(lv, nm);
       const body2 = h('div', 'wd-left-body');
       body2.append(colL, mid, colR);
+      // Phải đo Ở KHUNG CHA: chính ảnh nhân vật quyết định chiều cao của .wd-char
+      // nên đo nó là vòng lặp quẩn (ảnh to -> ô to -> ảnh vẫn to -> tràn, mất chân).
+      let charSize = 0;
+      const fitChar = () => {
+        const avail = Math.floor(Math.min(body2.clientHeight - 10, mid.clientWidth * 96 / 64));
+        const size = Math.max(64, Math.min(150, avail));
+        if (avail <= 0 || size === charSize) return;
+        charSize = size;
+        mid.innerHTML = '';
+        mid.append(charFace(look, size));
+      };
+      // cửa sổ mở bằng animation nên cỡ thật chỉ có sau vài frame
+      new ResizeObserver(fitChar).observe(body2);
       left.append(nameRow, body2);
       if (mode !== 'skin') {
         // dưới khung nhân vật là các thanh chỉ số (điểm cộng + điểm do quần áo)
@@ -1868,12 +1940,16 @@ export function registerAllPanels() {
       if (SLOTS.length > 1) {
         // dải chip icon kiểu Cozy UI Pack: chọn cái nào thì có khung góc bao quanh
         const tabBar = h('div', 'wd-chips');
-        SLOTS.forEach(([, name2, , key2], i) => {
+        SLOTS.forEach(([, name2, z2, key2], i) => {
           const t = h('button', `wd-chip ${i === tab ? 'on' : ''}`);
           const ic = document.createElement('img');
           ic.src = `assets/ui/inv/ic_${key2 === 'pant' ? 'pants' : key2}.png`;
           ic.alt = name2;
-          t.append(ic);
+          const art = h('div', 'wd-chip-art'); art.append(ic);
+          t.append(art, h('span', 'wd-chip-nm', name2));
+          // số món đang có của mục này, để biết chỗ nào có đồ mà bấm
+          const n = chibiList(z2, look.gender).filter(p => S.chibiWardrobe.includes(p.id)).length;
+          if (n) t.append(h('span', 'wd-chip-n', `${n}`));
           t.title = name2;
           t.onclick = () => { sfx.click(); tab = i; render(); };
           tabBar.append(t);
@@ -1920,22 +1996,38 @@ export function registerAllPanels() {
         const cell = h('button', `wd-item ${on ? 'active' : ''}`);
         const box = h('div', 'wd-item-box');
         box.append(z <= 20 || z === 70 ? chibiPreview(p.id, 44) : chibiHead(p.id, 40, z));
-        cell.append(box);
+        if (on) box.append(h('div', 'wd-item-on', 'Đang mặc'));
+        cell.append(box, h('div', 'nm', p.name));
         cell.title = p.name;
         cell.onclick = () => { (look as any)[pk] = on && optional ? 0 : p.id; apply(); render(); };
         grid.append(cell); cells++;
       }
-      // lấp cho đủ sức chứa tủ đồ, ô trống để trống
-      for (let i = cells; i < WD_CAP; i++) {
-        const e = h('div', 'wd-item wd-empty'); e.append(h('div', 'wd-item-box')); grid.append(e);
-      }
-      card.append(grid);
       const wearing = owned.find(p2 => p2.id === cur);
-      right.append(h('div', 'wd-note', !owned.length
-        ? 'Chưa có món nào — ghé shop thời trang ở Khu mua sắm!'
-        : wearing ? `Đang mặc: ${wearing.name}${optional ? ' — bấm lại để cởi' : ''}`
-                  : `Đang có ${owned.length} món, bấm để mặc`));
+      if (!cells) {
+        // chưa có món nào: hiện hẳn một khối rỗng có icon cho đỡ trống trơn
+        const em = h('div', 'wd-blank');
+        const ei = document.createElement('img');
+        ei.src = `assets/ui/inv/ic_${key === 'pant' ? 'pants' : key}.png`;
+        em.append(ei, h('div', '', `Chưa có ${SLOTS[tab][1].toLowerCase()} nào`),
+          h('div', 'sub', 'Ghé shop thời trang ở Khu mua sắm để sắm nhé!'));
+        card.append(em);
+      } else {
+        // lấp cho đủ hàng (không vẽ hết 100 ô rỗng — cuộn cả màn ô trống nhìn rất trống)
+        const perRow = 5;
+        const pad = cells <= perRow * 2 ? perRow * 2 - cells : (perRow - cells % perRow) % perRow;
+        for (let i = 0; i < Math.min(pad, WD_CAP - cells); i++) {
+          const e = h('div', 'wd-item wd-empty'); e.append(h('div', 'wd-item-box')); grid.append(e);
+        }
+        card.append(grid);
+      }
+      const note = h('div', 'wd-note');
+      note.append(h('span', 'wd-note-t', wearing ? `Đang mặc: ${wearing.name}`
+        : cells ? `Đang có ${cells} món — bấm để mặc` : ''));
+      if (wearing && optional) note.append(btn('Cởi ra', 'mini', () => {
+        sfx.click(); (look as any)[pk] = 0; apply(); render();
+      }));
       right.append(card);
+      if (note.textContent) right.append(note);
 
       wrap.append(left, right);
       body.append(wrap);
