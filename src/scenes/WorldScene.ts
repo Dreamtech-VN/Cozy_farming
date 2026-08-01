@@ -624,6 +624,8 @@ export class WorldScene extends Phaser.Scene {
   // Không còn map cổng riêng (chuyển khu bằng bản đồ thế giới như Lttt); map
   // nào nền có sẵn con đường thì khai báo traffic.topTile để xe chạy bên dưới.
   private trafficTopY(): number {
+    // map có lưới ô gốc: đường nằm ở hàng ô cuối (hàng bị chặn dưới vỉa hè)
+    if (this.lmap) return this.lmap.gridTopPx + (this.lmap.h - 1) * this.lmap.tile;
     return (this.zone.traffic?.topTile ?? this.zone.h) * T;
   }
 
@@ -631,7 +633,11 @@ export class WorldScene extends Phaser.Scene {
     if (!this.zone.traffic) return;
     const spawnCar = () => {
       if (!this.scene.isActive()) return;
-      const key = TRAFFIC_KEYS[Math.floor(Math.random() * TRAFFIC_KEYS.length)];
+      // Map gốc Lttt chỉ có ĐÚNG MỘT loại xe: chiếc buýt xanh hd/home/839
+      // (quét cả hd/home lẫn hd/object của res.rar, không có xe nào khác), nên
+      // trên map Lttt chỉ cho buýt chạy; map tự dựng mới dùng xe pack Cozy.
+      const pool = this.lmap ? ['veh_bus'] : TRAFFIC_KEYS;
+      const key = pool[Math.floor(Math.random() * pool.length)];
       if (!this.textures.exists(key)) return;
       const toRight = Math.random() < 0.5;
       const top = this.trafficTopY(), zh = this.zone.h * T;
