@@ -1311,16 +1311,17 @@ export function registerAllPanels() {
   // Tủ đồ dựng theo đúng mẫu Inventory của Cozy UI Pack: tab dán trên nóc,
   // thân là tấm modal nét đứt, KHÔNG dùng khung gỗ chung của các popup khác.
   function openCharHub(sec = 'wardrobe') {
-    const { body, win } = openWindow('', { size: 'large' });
+    // Tủ đồ mở HẲN MỘT TRANG như GunPow (WndBagRole là trang đầy đủ, không popup)
+    const { body, win } = openWindow('Nhân vật', { page: true });
     win.classList.add('win-wardrobe');
-    win.querySelector('.win-head')?.remove();
 
     // Tab lớn (Quần áo / Skin / Danh hiệu) dựng thành CỘT DỌC bên trái thay vì
     // dải ngang trên đầu: màn ngang điện thoại thiếu chiều cao chứ không thiếu
     // chiều ngang, bỏ dải ngang là phần nội dung có thêm ~56px.
     win.classList.add('win-wr-side');
     const tabBar = h('div', 'wr-tabs');
-    body.parentElement?.insertBefore(tabBar, body);
+    const inner = h('div', 'wr-body-in');
+    body.append(tabBar, inner);
 
     const draw = () => {
       tabBar.innerHTML = '';
@@ -1333,10 +1334,9 @@ export function registerAllPanels() {
         t.onclick = () => { sfx.click(); sec = id; draw(); };
         tabBar.append(t);
       }
-      body.innerHTML = '';
-      body.className = 'win-body ch-body';
+      inner.innerHTML = '';
       const main = h('div', 'ch-main');
-      body.append(main);
+      inner.append(main);
       openCharHubRefresh = draw;
       if (sec === 'wardrobe') openWardrobe(main);
       else if (sec === 'skin') openWardrobe(main, 'skin');
@@ -1796,7 +1796,7 @@ export function registerAllPanels() {
   registerPanel('chestopen', (arg) => {
     let cid = (arg as { id?: string })?.id ?? EQUIP_CHESTS[0].id;
     let n = 1;
-    const { body } = openWindow('Mở rương trang bị', { size: 'large' });
+    const { body } = openWindow('Mở rương trang bị', { page: true });
     const render = () => {
       body.innerHTML = '';
       const wrap = h('div', 'ch-wrap');
@@ -1948,167 +1948,185 @@ export function registerAllPanels() {
     return rr;
   }
 
-  // Bố cục chép theo WndIntensifyStrengthen.xml của GunPow:
-  //   [ món đang cường hoá, to, trên cùng ]
-  //   [ Lv N + chỉ số ]  ➜  [ Lv N+1 + chỉ số ]     (so sánh trước / sau)
-  //   [ hàng chi phí ]
-  //   [ Cường hoá ] [ Cường hoá liên tục ]
-  // Chỉ khác GunPow ở lớp da: bên mình dùng style kính.
-  registerPanel('smithy', (arg) => {
-    let id = pickTarget(arg as Record<string, unknown>);
-    const { body } = openWindow('Cường hoá trang bị', { size: 'large' });
-    const render = () => {
-      body.innerHTML = '';
-      const wrap = h('div', 'fg-wrap');
-      wrap.append(targetStrip(id, x => { id = x; render(); }));
-      const d = equipDef(id);
-      if (d) {
-        const lv = equipLevel(id);
-        const head = bigPiece(d, id);
-        head.classList.add('bp-slim');      // bỏ dòng chỉ số, bảng so sánh đã có
-        wrap.append(head);
+  // ===== Trang Rèn đúc: một trang 3 cột đúng như màn Cường hóa của GunPow =====
+  //   [ tab chức năng + khung thao tác ]  [ danh sách trang bị ]  [ cột ô dọc ]
+  // Chỉ khác GunPow ở lớp da: bên mình dùng kính xanh thay khung gỗ nâu.
+  type ForgeTab = 'smith' | 'star' | 'gem';
+  const FORGE_TABS: [ForgeTab, string][] = [['smith', 'Cường hoá'], ['star', 'Tăng sao'], ['gem', 'Khảm đá']];
 
-        // ----- so sánh trước / sau -----
-        const cmp = h('div', 'gx-cmp');
-        const col = (title: string, st: import('@/core/types').CharStats, cls = '') => {
-          const c = h('div', `gx-col ${cls}`);
-          c.append(h('div', 'gx-lv', title));
-          const box = h('div', 'gx-stats');
-          for (const k of STAT_KEYS) {
-            if (!st[k]) continue;
-            const r = h('div', 'gx-st');
-            r.append(h('span', 'gx-st-k', STAT_NAMES[k]), h('span', 'gx-st-v', `${st[k]}`));
-            box.append(r);
-          }
-          c.append(box);
-          return c;
-        };
-        const now = pieceStats(d, lv, equipStar(id), gemsOn(id));
-        cmp.append(col(`+${lv}`, now));
-        cmp.append(h('div', 'gx-arrow', '➜'));
-        if (lv < MAX_ENHANCE) {
-          const next = pieceStats(d, lv + 1, equipStar(id), gemsOn(id));
-          cmp.append(col(`+${lv + 1}`, next, 'up'));
-        } else {
-          cmp.append(h('div', 'gx-col up', 'TỐI ĐA'));
-        }
-        wrap.append(cmp);
-
-        if (lv < MAX_ENHANCE) {
-          const cost = enhanceCost(d, lv);
-          // ----- hàng chi phí -----
-          const cs = h('div', 'gx-cost');
-          const c1 = h('div', 'gx-cost-i'); c1.innerHTML = priceHtml(cost.coins);
-          const c2 = h('div', 'gx-cost-i');
-          c2.append(iconOf(item(ENHANCE_STONE), 20),
-            h('span', itemCount(ENHANCE_STONE) >= cost.stones ? 'ok' : 'miss',
-              `${itemCount(ENHANCE_STONE)}/${cost.stones}`));
-          cs.append(c1, c2, rateRow(enhanceRate(lv)));
-          wrap.append(cs);
-          if (dropsOnFail(lv)) wrap.append(h('div', 'sm-warn', 'Từ +7, cường hoá hỏng sẽ TỤT 1 cấp.'));
-
-          // ----- 2 nút như GunPow -----
-          const acts = h('div', 'gx-acts');
-          acts.append(
-            btn('Cường hoá', 'gold', () => { smash(id); render(); }),
-            btn('Cường hoá liên tục', 'blue', () => {
-              const r = smashUntil(id);
-              if (r.tries) toast(`Đập ${r.tries} lần, lên ${r.up} cấp.`, 'rank');
-              render();
-            }));
-          wrap.append(acts);
-        }
-      }
-      body.append(wrap);
-    };
-    render();
-  });
-
-  registerPanel('starup', (arg) => {
-    let id = pickTarget(arg as Record<string, unknown>);
-    const { body } = openWindow('Nâng sao trang bị', { size: 'large' });
-    const render = () => {
-      body.innerHTML = '';
-      const wrap = h('div', 'fg-wrap');
-      wrap.append(targetStrip(id, x => { id = x; render(); }));
-      const d = equipDef(id);
-      if (d) {
-        const main = h('div', 'fg-main');
-        main.append(bigPiece(d, id));
-        const st = equipStar(id);
-        const side = h('div', 'fg-side');
-        if (st >= MAX_STAR) side.append(h('div', 'fg-cap', 'ĐỦ 5 SAO'), btn('Tối đa', '', undefined));
-        else {
-          const c = starCost(d, st);
-          side.append(h('div', 'fg-cap', `${st} ★ ➜ ${st + 1} ★`),
-            h('div', 'fg-note', 'Mỗi sao cộng thêm 15% chỉ số gốc của món.'), rateRow(starRate(st)));
-          const need = h('div', 'fg-need');
-          need.innerHTML = `${priceHtml(c.coins)} &nbsp; <b>${itemCount(c.kind)}/${c.n}</b> ${item(c.kind).name}`;
-          side.append(need, btn(`Nâng lên ${st + 1} sao`, 'gold', () => { upStar(id); render(); }),
-            h('div', 'sm-warn', 'Thất bại chỉ mất nguyên liệu, sao giữ nguyên.'));
-        }
-        main.append(side);
-        wrap.append(main);
-      }
-      body.append(wrap);
-    };
-    render();
-  });
-
-  registerPanel('socket', (arg) => {
-    let id = pickTarget(arg as Record<string, unknown>);
+  function openForge(tab: ForgeTab, startId?: string) {
+    let sel = tab;
+    let slot: EquipSlot | 'worn' = 'worn';
+    let id = startId && equipDef(startId) ? startId : '';
+    if (!id) for (const sl of EQUIP_SLOTS) if (S.equip[sl.id]) { id = S.equip[sl.id]; break; }
     let pickSlot = 0;
-    const { body } = openWindow('Gắn đá trang bị', { size: 'large' });
+    const { body } = openWindow('Rèn đúc trang bị', { page: true });
+
     const render = () => {
       body.innerHTML = '';
-      const wrap = h('div', 'fg-wrap');
-      wrap.append(targetStrip(id, x => { id = x; pickSlot = 0; render(); }));
+      const page = h('div', 'gp-page');
       const d = equipDef(id);
-      if (d) {
-        const main = h('div', 'fg-main');
-        main.append(bigPiece(d, id));
-        const side = h('div', 'fg-side');
-        side.append(h('div', 'fg-cap', `LỖ ĐÁ (${d.sockets})`));
-        const socks = h('div', 'sk-row');
-        gemsOn(id).forEach((gid, i) => {
-          const c = h('button', `sk-slot ${i === pickSlot ? 'on' : ''} ${gid ? 'filled' : ''}`);
-          const g = gemDef(gid);
-          if (g) c.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 32));
-          else c.append(h('div', 'sk-empty', '+'));
-          c.onclick = () => { sfx.click(); pickSlot = i; render(); };
-          socks.append(c);
-        });
-        side.append(socks);
-        if (gemsOn(id)[pickSlot]) side.append(btn('Gỡ viên này', 'mini', () => { unsocketGem(id, pickSlot); render(); }));
-        main.append(side);
-        wrap.append(main);
 
-        wrap.append(h('div', 'fg-cap', 'TÚI ĐÁ — bấm để gắn vào lỗ đang chọn'));
-        const grid = h('div', 'gem-grid');
-        const owned = GEM_LIST.filter(g => gemCount(g.id) > 0);
-        if (!owned.length) grid.append(h('div', 'hint', 'Chưa có viên đá nào — mua ở Quầy đá.'));
-        for (const g of owned) {
-          const n = gemCount(g.id);
-          const c = h('button', 'gem-cell');
-          c.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 30),
-            h('div', 'gem-nm', g.name), h('div', 'qty', `${n}`));
-          c.title = `${g.name} — ${STAT_NAMES[g.stat]} +${gemPower(g)}`;
-          c.onclick = () => { socketGem(id, pickSlot, g.id); render(); };
-          const to = gemMergeTo(g);
-          if (to && n >= GEM_MERGE_N) {
-            const m = h('div', 'gem-merge', '⇪');
-            m.title = `Ghép ${GEM_MERGE_N} viên thành ${to.name}`;
-            m.onclick = e => { e.stopPropagation(); mergeGem(g.id); render(); };
-            c.append(m);
-          }
-          grid.append(c);
-        }
-        wrap.append(grid);
+      // ---------- CỘT TRÁI: tab chức năng + khung thao tác ----------
+      const left = h('div', 'gp-left');
+      const ftabs = h('div', 'gp-ftabs');
+      for (const [k, nm] of FORGE_TABS) {
+        const t = h('button', `gp-ftab ${k === sel ? 'on' : ''}`, nm);
+        t.onclick = () => { sfx.click(); sel = k; render(); };
+        ftabs.append(t);
       }
-      body.append(wrap);
+      left.append(ftabs);
+
+      const stage = h('div', 'gp-stage');
+      if (!d) {
+        stage.append(h('div', 'hint', 'Chưa có trang bị nào — mở rương ở Quầy trang bị.'));
+      } else {
+        const lv = equipLevel(id), star = equipStar(id);
+        // vòng phép + món ở giữa
+        const ring = h('div', 'gp-ring');
+        const cell = h('div', 'gp-item');
+        cell.append(spr(d.url, 0, 0, d.w, d.h, 54));
+        if (star) cell.append(h('div', 'gp-star', `★${star}`));
+        if (lv) cell.append(h('div', 'eq-plus', `+${lv}`));
+        ring.append(cell);
+        stage.append(ring, h('div', 'gp-lv', `${d.name} · +${lv}/${MAX_ENHANCE}`));
+
+        const statLine = (st: import('@/core/types').CharStats) =>
+          STAT_KEYS.filter(k => st[k] > 0).map(k => `${STAT_NAMES[k]} +${st[k]}`).join('  ');
+        const now = pieceStats(d, lv, star, gemsOn(id));
+
+        if (sel === 'smith') {
+          const cmp = h('div', 'gp-cmp');
+          const cl = h('div', 'gp-c'); cl.append(h('div', 'gp-c-t', `+${lv}`), h('div', 'gp-c-s', statLine(now)));
+          cmp.append(cl, h('div', 'gp-c-ar', '❯'));
+          if (lv < MAX_ENHANCE) {
+            const nx = pieceStats(d, lv + 1, star, gemsOn(id));
+            const cr = h('div', 'gp-c up'); cr.append(h('div', 'gp-c-t', `+${lv + 1}`), h('div', 'gp-c-s', statLine(nx)));
+            cmp.append(cr);
+          } else cmp.append(h('div', 'gp-c up', 'TỐI ĐA'));
+          stage.append(cmp);
+          if (lv < MAX_ENHANCE) {
+            const c = enhanceCost(d, lv);
+            const cost = h('div', 'gp-cost');
+            cost.innerHTML = `Tốn: ${priceHtml(c.coins)}`;
+            const st2 = h('span', 'gp-mat');
+            st2.append(iconOf(item(ENHANCE_STONE), 18),
+              h('span', itemCount(ENHANCE_STONE) >= c.stones ? 'ok' : 'miss', `${itemCount(ENHANCE_STONE)}/${c.stones}`));
+            cost.append(st2, rateRow(enhanceRate(lv)));
+            stage.append(cost);
+            if (dropsOnFail(lv)) stage.append(h('div', 'sm-warn', 'Từ +7, hỏng sẽ TỤT 1 cấp.'));
+            const acts = h('div', 'gp-acts');
+            acts.append(
+              btn('Cường hoá nhanh', '', () => { const r = smashUntil(id); if (r.tries) toast(`Đập ${r.tries} lần, lên ${r.up} cấp.`, 'rank'); render(); }),
+              btn('Cường hoá', 'gold', () => { smash(id); render(); }));
+            stage.append(acts);
+          }
+        } else if (sel === 'star') {
+          const cmp = h('div', 'gp-cmp');
+          const cl = h('div', 'gp-c'); cl.append(h('div', 'gp-c-t', `${star} ★`), h('div', 'gp-c-s', statLine(now)));
+          cmp.append(cl, h('div', 'gp-c-ar', '❯'));
+          if (star < MAX_STAR) {
+            const nx = pieceStats(d, lv, star + 1, gemsOn(id));
+            const cr = h('div', 'gp-c up'); cr.append(h('div', 'gp-c-t', `${star + 1} ★`), h('div', 'gp-c-s', statLine(nx)));
+            cmp.append(cr);
+          } else cmp.append(h('div', 'gp-c up', 'ĐỦ 5 SAO'));
+          stage.append(cmp);
+          if (star < MAX_STAR) {
+            const c = starCost(d, star);
+            const cost = h('div', 'gp-cost');
+            cost.innerHTML = `Tốn: ${priceHtml(c.coins)}`;
+            const m = h('span', 'gp-mat');
+            m.append(iconOf(item(c.kind), 18),
+              h('span', itemCount(c.kind) >= c.n ? 'ok' : 'miss', `${itemCount(c.kind)}/${c.n}`));
+            cost.append(m, rateRow(starRate(star)));
+            stage.append(cost, h('div', 'sm-warn', 'Mỗi sao cộng 15% chỉ số gốc. Hỏng chỉ mất nguyên liệu.'));
+            const acts = h('div', 'gp-acts');
+            acts.append(btn(`Tăng lên ${star + 1} sao`, 'gold', () => { upStar(id); render(); }));
+            stage.append(acts);
+          }
+        } else {
+          stage.append(h('div', 'gp-c-s', statLine(now)));
+          const socks = h('div', 'sk-row');
+          gemsOn(id).forEach((gid, i) => {
+            const c = h('button', `sk-slot ${i === pickSlot ? 'on' : ''} ${gid ? 'filled' : ''}`);
+            const g = gemDef(gid);
+            if (g) c.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 30));
+            else c.append(h('div', 'sk-empty', '+'));
+            c.onclick = () => { sfx.click(); pickSlot = i; render(); };
+            socks.append(c);
+          });
+          stage.append(socks);
+          if (gemsOn(id)[pickSlot]) stage.append(btn('Gỡ viên này', 'mini', () => { unsocketGem(id, pickSlot); render(); }));
+          const owned = GEM_LIST.filter(g => gemCount(g.id) > 0);
+          stage.append(h('div', 'gp-cap', owned.length ? 'TÚI ĐÁ — bấm để khảm' : 'Chưa có đá — mua ở Quầy đá'));
+          const grid = h('div', 'gem-grid');
+          for (const g of owned) {
+            const n2 = gemCount(g.id);
+            const c = h('button', 'gem-cell');
+            c.append(spr(`assets/equip/${g.icon}.png`, 0, 0, g.w, g.h, 26),
+              h('div', 'gem-nm', g.name), h('div', 'qty', `${n2}`));
+            c.title = `${g.name} — ${STAT_NAMES[g.stat]} +${gemPower(g)}`;
+            c.onclick = () => { socketGem(id, pickSlot, g.id); render(); };
+            const to = gemMergeTo(g);
+            if (to && n2 >= GEM_MERGE_N) {
+              const mg = h('div', 'gem-merge', '⇪');
+              mg.onclick = e => { e.stopPropagation(); mergeGem(g.id); render(); };
+              c.append(mg);
+            }
+            grid.append(c);
+          }
+          stage.append(grid);
+        }
+      }
+      left.append(stage);
+
+      // ---------- CỘT GIỮA: danh sách trang bị ----------
+      const mid = h('div', 'gp-mid');
+      mid.append(h('div', 'gp-mid-h', 'Trang bị'));
+      const list = h('div', 'gp-list');
+      const ids = slot === 'worn'
+        ? EQUIP_SLOTS.map(sl => S.equip[sl.id]).filter(Boolean)
+        : [S.equip[slot], ...S.equipBag].filter(x => x && equipDef(x)?.slot === slot);
+      if (!ids.length) list.append(h('div', 'hint', 'Không có món nào ở mục này.'));
+      for (const eid of ids) {
+        const ed = equipDef(eid); if (!ed) continue;
+        const on = S.equip[ed.slot] === eid;
+        const row = h('button', `gp-row ${eid === id ? 'sel' : ''}`);
+        const art = h('div', 'gp-row-art');
+        art.append(spr(ed.url, 0, 0, ed.w, ed.h, 34));
+        const l2 = equipLevel(eid), s2 = equipStar(eid);
+        if (s2) art.append(h('div', 'gp-star', `★${s2}`));
+        if (l2) art.append(h('div', 'eq-plus', `+${l2}`));
+        const info = h('div', 'gp-row-i');
+        const st = pieceStats(ed, l2, s2, gemsOn(eid));
+        const best = STAT_KEYS.filter(k => st[k] > 0).slice(0, 1).map(k => `${STAT_NAMES[k]} +${st[k]}`).join('');
+        info.append(h('div', 'gp-row-n', ed.name),
+          h('div', 'gp-row-s', `${best}${on ? '  (Đã trang bị)' : ''}`));
+        row.append(art, info);
+        row.onclick = () => { sfx.click(); id = eid; pickSlot = 0; if (!on) equipPiece(eid); render(); };
+        list.append(row);
+      }
+      mid.append(list);
+
+      // ---------- CỘT PHẢI: rail ô dọc ----------
+      const rail = h('div', 'gp-rail');
+      const mk = (k: EquipSlot | 'worn', nm: string) => {
+        const t = h('button', `gp-rt ${slot === k ? 'on' : ''}`, nm);
+        t.onclick = () => { sfx.click(); slot = k; render(); };
+        rail.append(t);
+      };
+      mk('worn', 'Trên người');
+      for (const sl of EQUIP_SLOTS) mk(sl.id, sl.name);
+
+      page.append(left, mid, rail);
+      body.append(page);
     };
     render();
-  });
+  }
+
+  registerPanel('smithy', (arg) => openForge('smith', (arg as { id?: string })?.id));
+  registerPanel('starup', (arg) => openForge('star', (arg as { id?: string })?.id));
+  registerPanel('socket', (arg) => openForge('gem', (arg as { id?: string })?.id));
 
   registerPanel('toolupgrade', () => {
     if (!atShopZone('toolupgrade', 'Quầy nâng cấp công cụ (Bách hóa)')) return;

@@ -23,7 +23,12 @@ export function fmt(n: number): string {
   return String(n);
 }
 
-export interface WinOpts { size?: 'small' | 'normal' | 'large'; onClose?: () => void }
+export interface WinOpts {
+  size?: 'small' | 'normal' | 'large';
+  /** true = mở HẲN MỘT TRANG chiếm trọn màn (kiểu GunPow) thay vì popup nhỏ. */
+  page?: boolean;
+  onClose?: () => void;
+}
 
 const openWindows: HTMLElement[] = [];
 
@@ -35,14 +40,18 @@ export function anyWindowOpen(): boolean { return openWindows.length > 0; }
 function syncModal() { bus.emit('ui:modal', openWindows.length > 0); }
 
 export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLElement; win: HTMLElement; close: () => void; tabs: (names: string[], onPick: (i: number) => void, icons?: string[]) => void } {
-  const backdrop = h('div', 'win-backdrop');
-  const win = h('div', `win ${opts.size === 'small' ? 'small' : opts.size === 'large' ? 'large' : ''}`);
+  const backdrop = h('div', `win-backdrop ${opts.page ? 'page-backdrop' : ''}`);
+  const win = h('div', `win ${opts.page ? 'win-page' : opts.size === 'small' ? 'small' : opts.size === 'large' ? 'large' : ''}`);
   const head = h('div', 'win-head');
   const titleEl = h('div', '', title);
-  const closeBtn = h('button', 'win-close', '✕');
+  // trang đầy đủ dùng nút quay lại ở góc trái, popup dùng dấu X góc phải
+  const closeBtn = h('button', opts.page ? 'win-back' : 'win-close', opts.page ? '‹ Quay lại' : '✕');
   head.append(titleEl);
   const body = h('div', 'win-body');
-  win.append(head, body, closeBtn);
+  // trang đầy đủ: nút quay lại nằm TRONG thanh tiêu đề (không thì nó bị canh
+  // theo cả trang rồi rơi xuống giữa màn, đè lên nội dung)
+  if (opts.page) { head.append(closeBtn); win.append(head, body); }
+  else win.append(head, body, closeBtn);
   backdrop.append(win);
   root().append(backdrop);
   openWindows.push(backdrop);
@@ -59,7 +68,7 @@ export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLEleme
     opts.onClose?.();
   };
   closeBtn.onclick = close;
-  backdrop.onclick = e => { if (e.target === backdrop) close(); };
+  if (!opts.page) backdrop.onclick = e => { if (e.target === backdrop) close(); };
   backdrop.addEventListener('pointerdown', e => e.stopPropagation());
   backdrop.addEventListener('touchstart', e => e.stopPropagation(), { passive: false });
 
