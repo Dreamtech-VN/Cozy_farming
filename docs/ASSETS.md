@@ -104,13 +104,24 @@ nếu muốn chặt chẽ, nên chuyển pack sang repo riêng tư hoặc build 
 
 ## Icon nông cụ chibi (`assets/chibi/tools/`)
 
-- `rod/net.png`: icon item gốc Avatar (res.rar repo Lttt, hd/item 10131 / 10855)
-  — **chỉ dùng dev/test, thay khi phát hành**. `bait.png`, `can.png`,
-  `shovel.png`: tự vẽ theo cùng style (dùng thoải mái).
-- Đã bỏ `hoe.png` (vẽ ra cái cúp chim), `axe.png` (vẽ ra cái liềm) và
-  `basket.png`: ba cái này gán nhầm nên trong game nông cụ hiện sai hình. Cuốc /
-  rìu / liềm nay dùng thẳng bộ `assets/farm/chibi/18_hoe · 20_axe · 19_sickle`.
-  Nông cụ `basket` cũng đổi tên thành **Liềm gặt** cho khớp hình cái liềm.
+Thư mục này giờ **chỉ còn `net.png`** (vợt côn trùng — icon item gốc Avatar,
+res.rar repo Lttt hd/item 10855, **chỉ dùng dev/test, thay khi phát hành**).
+Toàn bộ nông cụ khác đã chuyển sang asset thật của pack đã mua, không còn file
+tự vẽ nào:
+
+| Nông cụ | Ảnh dùng |
+|---|---|
+| Cuốc | `assets/farm/chibi/18_hoe.png` (Cozy Farm pack) |
+| Bình tưới | `assets/farm/chibi/17_watering_can.png` |
+| Liềm gặt | `assets/farm/chibi/19_sickle.png` |
+| Rìu | `assets/farm/chibi/20_axe.png` |
+| Cần câu | `assets/fishing/rod.png` + `rods.png` (Cozy Fishing pack) |
+| Mồi thượng hạng | `assets/fishing/lure.png` (Cozy Fishing pack, ô (4,0) của `inv_items.png`) |
+
+Đã xoá `hoe.png` (vẽ ra cái cúp chim), `axe.png` (vẽ ra cái liềm), `basket.png`,
+`can.png`, `shovel.png`, `bait.png`, `rod.png`: mấy cái này hoặc tự vẽ hoặc gán
+nhầm nên trong game nông cụ hiện sai hình. Nông cụ `basket` cũng đổi tên thành
+**Liềm gặt** cho khớp hình cái liềm.
 
 ## Asset từ repo Lttt (`assets/lttt/`)
 

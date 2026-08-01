@@ -193,7 +193,7 @@ const TOOL_ICON = {
   can: { url: 'assets/farm/chibi/17_watering_can.png', sx: 0, sy: 0, sw: 62, sh: 50 },
   basket: { url: 'assets/farm/chibi/19_sickle.png', sx: 0, sy: 0, sw: 50, sh: 62 },
   net: { url: 'assets/chibi/tools/net.png', sx: 0, sy: 0, sw: 48, sh: 46 },
-  rod: { url: 'assets/chibi/tools/rod.png', sx: 0, sy: 0, sw: 60, sh: 28 },
+  rod: { url: 'assets/fishing/rod.png', sx: 0, sy: 0, sw: 16, sh: 16 },
   seed: { url: 'assets/farm/chibi/16_seed_bag.png', sx: 0, sy: 0, sw: 56, sh: 62 }
 };
 
@@ -854,10 +854,12 @@ export class WorldScene extends Phaser.Scene {
     const cs = this.zone.bg ? 1 : 0.5;
     const labelOff = cs === 1 ? 104 : 54;
     for (const def of this.zone.npcs) {
-      const sprite = new ChibiSprite(this, def.x * T, def.y * T, this.npcLook(def.charIndex, def.gender));
-      sprite.setDepth(def.y * T).setScale(cs);
+      // toạ độ trong data có thể rơi vào hồ/vật cản -> dời ra chỗ đứng được
+      const pos = this.freeSpot(def.x * T, def.y * T, 90, 50);
+      const sprite = new ChibiSprite(this, pos.x, pos.y, this.npcLook(def.charIndex, def.gender));
+      sprite.setDepth(pos.y).setScale(cs);
       this.attachTapZone(sprite, () => this.talkNpc(def));
-      this.add.text(def.x * T, def.y * T - labelOff, def.name, { fontSize: cs === 1 ? '11px' : '8px', color: '#ffe066', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2000);
+      this.add.text(pos.x, pos.y - labelOff, def.name, { fontSize: cs === 1 ? '11px' : '8px', color: '#ffe066', backgroundColor: '#00000090', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(2000);
       this.npcs.push({ def, sprite });
     }
   }
@@ -1698,14 +1700,40 @@ export class WorldScene extends Phaser.Scene {
   }
 
   // ================= người chơi khác trong khu =================
+  // Tìm chỗ đứng hợp lệ gần (x, y): trong dải đi được và không rơi vào hồ nước
+  // hay vật cản. Người chơi ảo / thú cưng trước đây thả bừa nên hay đứng và đi
+  // lững thững ngay giữa mặt hồ.
+  private freeSpot(x: number, y: number, spreadX = 120, spreadY = 60): { x: number; y: number } {
+    const top = (this.zone.walkTop ?? 2) * T + 10;
+    const bottom = (this.zone.walkBottom ?? this.zone.h - 2) * T - 10;
+    const clamp = (px: number, py: number) => ({
+      x: Phaser.Math.Clamp(px, 60, this.zone.w * T - 60),
+      y: Phaser.Math.Clamp(py, top, bottom)
+    });
+    let p = clamp(x, y);
+    if (!this.blockedAt(p.x, p.y)) return p;
+    for (let i = 0; i < 60; i++) {
+      p = clamp(x + (Math.random() - 0.5) * spreadX * 2, y + (Math.random() - 0.5) * spreadY * 2);
+      if (!this.blockedAt(p.x, p.y)) return p;
+    }
+    // bí quá thì quét cả dải ngang ở chỗ đứng của người chơi
+    for (let dx = 0; dx < this.zone.w * T; dx += T) {
+      p = clamp(dx, this.zone.spawn.y * T);
+      if (!this.blockedAt(p.x, p.y)) return p;
+    }
+    return clamp(this.zone.spawn.x * T, this.zone.spawn.y * T);
+  }
+
   private spawnRoamers() {
     // chỉ ở khu công cộng (không phải nông trại / nhà riêng)
     if (this.zone.id === 'farm' || this.zone.id === 'house') return;
     const cs = this.zone.bg ? 1 : 0.5;
     const list = roamersIn(this.zone.id, 3);
     list.forEach((def, i) => {
-      const bx = this.zone.spawn.x * T + (i - 1) * 230 + (i % 2 ? 70 : -70);
-      const by = this.zone.spawn.y * T + (i % 2 ? 90 : -60);
+      const home = this.freeSpot(
+        this.zone.spawn.x * T + (i - 1) * 230 + (i % 2 ? 70 : -70),
+        this.zone.spawn.y * T + (i % 2 ? 90 : -60));
+      const bx = home.x, by = home.y;
       const sprite = new ChibiSprite(this, bx, by, this.npcLook(i + 3, i % 2 ? 2 : 1));
       sprite.setScale(cs).setDepth(by);
       const label = this.add.text(bx, by - (cs === 1 ? 104 : 54), def.name, {
@@ -1720,9 +1748,9 @@ export class WorldScene extends Phaser.Scene {
       const walk = () => {
         if (!sprite.active) return;
         if (entry.busy) { this.time.delayedCall(700, walk); return; }   // đang bị tác động -> chưa đi
-        const tx = Phaser.Math.Clamp(bx + (Math.random() - 0.5) * 260, 60, this.zone.w * T - 60);
-        const ty = Phaser.Math.Clamp(by + (Math.random() - 0.5) * 120,
-          (this.zone.walkTop ?? 2) * T + 10, (this.zone.walkBottom ?? this.zone.h - 2) * T - 10);
+        // đích đi dạo cũng phải là chỗ đứng được, không thì lại lội qua hồ
+        const dst = this.freeSpot(bx + (Math.random() - 0.5) * 260, by + (Math.random() - 0.5) * 120, 130, 60);
+        const tx = dst.x, ty = dst.y;
         sprite.setDir(tx < sprite.x ? 2 : 3);
         sprite.play('walk');
         this.tweens.add({
@@ -1780,8 +1808,10 @@ export class WorldScene extends Phaser.Scene {
       if (!this.pet?.active) return;
       if (this.petWalk) { this.time.delayedCall(900, wander); return; }
       const base = this.zone.id === 'farm' ? PETHOUSE_POS : { x: this.player.x, y: this.player.y };
-      const tx = base.x + (this.zone.id === 'farm' ? 20 + Math.random() * 90 : -50 + Math.random() * 100);
-      const ty = (this.zone.id === 'farm' ? PETHOUSE_POS.y + 10 : this.player.y - 10) + Math.random() * 40;
+      const spot = this.freeSpot(
+        base.x + (this.zone.id === 'farm' ? 20 + Math.random() * 90 : -50 + Math.random() * 100),
+        (this.zone.id === 'farm' ? PETHOUSE_POS.y + 10 : this.player.y - 10) + Math.random() * 40, 80, 40);
+      const tx = spot.x, ty = spot.y;
       this.pet.setFrame(def.frames.move);
       this.pet.setFlipX(tx < this.pet.x);
       this.tweens.add({
