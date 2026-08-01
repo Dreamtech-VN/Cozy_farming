@@ -2041,9 +2041,13 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .ch-plaque-none { font-size: 10px; font-weight: 800; color: rgba(255, 255, 255, .42); }
 
 .ch-figure { flex: 1 1 0; min-height: 0; display: flex; gap: 6px; align-items: stretch; }
-.ch-slots { flex: 0 0 52px; display: flex; flex-direction: column; gap: 5px; }
+/* dải ô hai bên: ô VUÔNG, cả cột căn giữa theo chiều cao nhân vật — để flex:1
+   thì ô bị kéo dài thượt khi khung cao */
+.ch-slots {
+  flex: 0 0 54px; display: flex; flex-direction: column; gap: 6px; justify-content: center;
+}
 .ch-slot {
-  position: relative; flex: 1 1 0; min-height: 0; width: 100%;
+  position: relative; flex: 0 0 auto; width: 100%; aspect-ratio: 1;
   border-radius: 10px; padding: 0; cursor: pointer; font-family: inherit; overflow: visible;
   display: flex; align-items: center; justify-content: center;
   background: linear-gradient(rgba(126, 166, 128, .5), rgba(78, 118, 86, .66));
@@ -2051,6 +2055,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22);
 }
 .ch-slot.pad { visibility: hidden; }
+.ch-slot-ghost, .ch-slot > .spr, .ch-slot > .chibi-part { pointer-events: none; }
 .ch-slot.empty { background: rgba(0, 0, 0, .16); border-style: dashed; }
 .ch-slot.on { border-color: #ffd43b; box-shadow: 0 0 0 2px rgba(255, 212, 59, .4); }
 .ch-slot:active { transform: scale(.94); }
