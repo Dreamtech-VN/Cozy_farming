@@ -1020,13 +1020,13 @@ input.ui-input, select.ui-input {
 /* hàng nhân vật + 2 cột ô trang bị: chiều cao do khung cha chia, ảnh nhân vật
    không được quyết định chiều cao (nếu không là phình ra rồi bị cắt) */
 /* mục Skin không có bảng chỉ số nên nhường thêm chiều cao cho nhân vật */
-.wd-left:not(:has(.wd-stats-box)) .wd-figure { flex-basis: 72%; }
 
-/* Cao theo PHẦN TRĂM khung trái (khung trái có chiều cao xác định) chứ không
-   flex:1 — để `height:100%` của nhân vật co giãn có mốc mà tính, không thì
-   nhân vật lấy chiều cao theo nội dung rồi đè lên tên/chỉ số bên dưới. */
+/* Hàng nhân vật ăn ĐÚNG phần chiều cao còn thừa (flex:1), nên bảng tên / thanh
+   cấp / chỉ số bên dưới không bao giờ bị cắt dù màn cao bao nhiêu.
+   Mấu chốt: ảnh nhân vật bên trong đặt position:absolute nên không tính vào
+   chiều cao nội dung — trước đây nó tự quyết chiều cao rồi làm phình khung. */
 .wd-figure {
-  flex: 0 0 68%; min-height: 0; overflow: hidden;
+  position: relative; flex: 1 1 0; min-height: 0; overflow: hidden;
   display: flex; align-items: stretch; justify-content: center; gap: 7px;
 }
 .wd-slot-col {
@@ -1066,9 +1066,8 @@ input.ui-input, select.ui-input {
 
 /* khung nhân vật ở giữa: bục tròn + bóng đổ */
 .wd-char {
-  position: relative; flex: 1; min-width: 0; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  padding: 6px 4px 12px; overflow: hidden; border-radius: 14px;
+  position: relative; flex: 1; min-width: 0; min-height: 0; align-self: stretch;
+  overflow: hidden; border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, .22);
   background:
     radial-gradient(120% 78% at 50% 12%, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 70%),
@@ -1080,7 +1079,10 @@ input.ui-input, select.ui-input {
   width: 56%; height: 12px; border-radius: 50%;
   background: radial-gradient(closest-side, rgba(0, 0, 0, .42), rgba(0, 0, 0, 0));
 }
-.wd-char > * { position: relative; z-index: 1; }
+.wd-char > .chibi-fluid {
+  position: absolute; left: 50%; top: 7px; bottom: 13px; translate: -50% 0;
+  height: auto; width: auto; aspect-ratio: 64 / 96; z-index: 1;
+}
 .wd-char-name { display: none; }
 
 /* ô trang bị */
@@ -1797,8 +1799,6 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   .od-side { padding: 12px 12px 14px; }
   .od-ing { width: 58px; padding: 6px 3px 9px; }
   .od-ing-art { height: 34px; }
-  .wd-figure { flex-basis: 63%; }
-  .wd-left:not(:has(.wd-stats-box)) .wd-figure { flex-basis: 70%; }
   .wd-slot-col { width: 40px; }
   .wr-tabs { width: 64px; padding: 10px 0 10px 10px; }
   .wr-tab { font-size: 9px; padding: 5px 3px 6px; }
@@ -2000,7 +2000,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 
 /* nhân vật chibi co giãn theo khung (xem charFaceFluid trong ui/kit.ts) */
 .chibi-fluid {
-  position: relative; height: 100%; aspect-ratio: 64 / 96; flex: none;
+  position: relative; height: 100%; aspect-ratio: 64 / 96; flex: none; max-width: 100%;
 }
 .chibi-fluid-l {
   position: absolute; inset: 0;
@@ -2008,11 +2008,4 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   background-size: 1500% 100%;      /* strip 15 frame -> lấy frame 0 */
   background-position: 0 0;
   image-rendering: pixelated;
-}
-
-/* điện thoại ngang thật thấp (~390px): bảng chỉ số chiếm tỉ lệ lớn hơn nên
-   phải nhường lại chiều cao, không thì dòng chỉ số cuối bị cắt */
-@media (max-height: 420px) {
-  .wd-figure { flex-basis: 55%; }
-  .wd-left:not(:has(.wd-stats-box)) .wd-figure { flex-basis: 66%; }
 }
