@@ -29,10 +29,10 @@ import { ROOM_COUNT, ROOM_CAP, roomPlayers, roomFull, suggestedFriends, addFrien
 import { claimLogin, checkinToday, spinWheel, grantWheel, wheelSpinsLeft, loginRewardToday } from '@/systems/meta';
 import { upgradeHouse, setWallpaper, setFloor, throwParty } from '@/systems/housing';
 import { sfx, startBgm, stopBgm } from '@/core/audio';
-import { ACH_CATS, achsOfCat, catTotal, ACH_TOTAL_POINT,
+import { ACH_CATS, achsOfCat, catTotal, ACH_TOTAL,
   type AchDef } from '@/data/achievements';
-import { progressOf, isDone, isClaimed, canClaim, claim, claimAll, achPoints, pendingPoints,
-  catPoints } from '@/systems/achievements';
+import { progressOf, isDone, isClaimed, canClaim, claim, claimAll, achDone, pendingCount,
+  catDone } from '@/systems/achievements';
 import { upgradeTool, upgradeRate, missingMats, failStreak, UPGRADABLE, FAIL_BONUS, FAIL_BONUS_MAX } from '@/systems/toolcraft';
 import type { Reward } from '@/data/quests';
 
@@ -1282,9 +1282,9 @@ export function registerAllPanels() {
         // Thành tựu có trang riêng — ở đây chỉ tóm tắt
         const box = h('div', 'row');
         box.innerHTML = `<img class="ico-img" src="assets/ui/pack/icon_trophy.png">
-          <div class="grow"><div class="t1">Điểm thành tựu</div>
-          <div class="t2">${fmt(achPoints())} / ${fmt(ACH_TOTAL_POINT)}`
-          + (pendingPoints() ? ` · đang có ${fmt(pendingPoints())} điểm chờ nhận` : '')
+          <div class="grow"><div class="t1">Thành tựu</div>
+          <div class="t2">${achDone()} / ${ACH_TOTAL} thành tựu`
+          + (pendingCount() ? ` · có ${pendingCount()} cái đang chờ nhận` : '')
           + `</div></div>`;
         box.append(btn('Mở trang Thành tựu', 'gold', () => openPanel('achievement')));
         body.append(box);
@@ -1894,7 +1894,7 @@ export function registerAllPanels() {
     const viewTitle = (f: string, redraw: () => void): ChView => {
       const cat = ACH_CATS.find(c => c.id === f) ?? ACH_CATS[0];
       const list = achsOfCat(cat.id).filter(a => a.title);
-      const got = catPoints(cat.id), need = catTotal(cat.id);
+      const got = catDone(cat.id), need = catTotal(cat.id);
       return {
         slots: [],
         filters: ACH_CATS.map(c => ({ key: c.id, name: c.name })),
@@ -1921,8 +1921,8 @@ export function registerAllPanels() {
         empty: 'Nhóm này chưa có danh hiệu.',
         grid: 'rows',
         full: true,
-        note: [`【${cat.name}】${fmt(got)}/${fmt(need)}`,
-               `Tổng tiến độ: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`],
+        note: [`【${cat.name}】${got}/${need}`,
+               `Tổng tiến độ: ${achDone()}/${ACH_TOTAL}`],
         foot: [btn('Thành tựu', 'gold', () => openPanel('achievement'))]
       };
     };
@@ -1994,7 +1994,7 @@ export function registerAllPanels() {
       const top = h('div', 'av-top');
       top.append(h('div', 'av-left-k', 'Thành tựu'));
       top.append(h('div', 'grow'));
-      top.append(h('div', 'av-prog', `Tiến độ: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`));
+      top.append(h('div', 'av-prog', `Tiến độ: ${achDone()}/${ACH_TOTAL} thành tựu`));
       page2.append(top);
 
       page2.append(bodyAch());
@@ -2011,7 +2011,7 @@ export function registerAllPanels() {
         t.append(h('div', 'av-cat-n', c.name));
         const bar = h('div', 'av-cat-bar');
         const f = h('div', 'av-cat-f');
-        f.style.width = `${Math.min(100, catPoints(c.id) / catTotal(c.id) * 100)}%`;
+        f.style.width = `${Math.min(100, catDone(c.id) / catTotal(c.id) * 100)}%`;
         bar.append(f);
         t.append(bar);
         if (achsOfCat(c.id).some(a => canClaim(a))) t.append(h('i', 'av-rdot'));
@@ -2025,18 +2025,18 @@ export function registerAllPanels() {
       hd.append(h('span', 'av-hd-k', `【${c2.name}】Thành tựu:`));
       const hb = h('div', 'av-hd-bar');
       const hf = h('div', 'av-hd-f');
-      hf.style.width = `${Math.min(100, catPoints(cat) / catTotal(cat) * 100)}%`;
+      hf.style.width = `${Math.min(100, catDone(cat) / catTotal(cat) * 100)}%`;
       hb.append(hf);
-      hd.append(hb, h('span', 'av-hd-n', `${fmt(catPoints(cat))}/${fmt(catTotal(cat))}`));
+      hd.append(hb, h('span', 'av-hd-n', `${catDone(cat)}/${catTotal(cat)}`));
       right.append(hd);
 
       const list = h('div', 'av-list');
       for (const a of achsOfCat(cat)) list.append(achRow(a));
       right.append(list);
 
-      if (pendingPoints() > 0) {
+      if (pendingCount() > 0) {
         const ft = h('div', 'av-foot');
-        ft.append(btn(`Nhận tất cả (+${fmt(pendingPoints())})`, 'gold', () => { claimAll(); render(); }));
+        ft.append(btn(`Nhận tất cả (${pendingCount()})`, 'gold', () => { claimAll(); render(); }));
         right.append(ft);
       }
       box.append(cats, right);
@@ -2054,10 +2054,6 @@ export function registerAllPanels() {
       }
       const rw = h('div', 'av-rw');
       if (a.coins) rw.innerHTML = priceHtml(a.coins);
-      const pt = h('span', 'av-pt');
-      const pim = document.createElement('img'); pim.src = 'assets/ach/point.png'; pim.className = 'av-pico';
-      pt.append(pim, document.createTextNode(fmt(a.point)));
-      rw.append(pt);
       info.append(rw);
       const bar = h('div', 'av-row-bar');
       const f = h('div', 'av-row-f');

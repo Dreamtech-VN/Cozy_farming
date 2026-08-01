@@ -1,11 +1,11 @@
 // ===== Hệ thống Thành tựu =====
-// Thành tựu KHÔNG tự cộng thưởng, phải bấm "Nhận". Nhận xong mới cộng điểm
-// thành tựu, xu và danh hiệu. Điểm chỉ để khoe tiến độ, không đổi ra chỉ số.
+// Thành tựu KHÔNG tự cộng thưởng, phải bấm "Nhận". Nhận xong mới ăn xu và
+// danh hiệu. Tiến độ đếm theo SỐ thành tựu, không còn điểm đổi huy hiệu.
 
 import { S, save, addCoins, addStat } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { sfx } from '@/core/audio';
-import { ACHS, ACH_TOTAL_POINT, achsOfCat, catTotal, type AchDef } from '@/data/achievements';
+import { ACHS, ACH_TOTAL, achsOfCat, catTotal, type AchDef } from '@/data/achievements';
 import { TITLES } from '@/data/quests';
 
 /** Vài chỉ số không do addStat cộng mà tính lại từ trạng thái hiện tại. */
@@ -27,18 +27,18 @@ export function isDone(a: AchDef): boolean { return progressOf(a) >= a.target; }
 export function isClaimed(a: AchDef): boolean { return !!S.achClaimed?.[a.id]; }
 export function canClaim(a: AchDef): boolean { return isDone(a) && !isClaimed(a); }
 
-/** Tổng điểm thành tựu ĐÃ nhận. */
-export function achPoints(): number {
+/** Số thành tựu ĐÃ nhận. */
+export function achDone(): number {
   if (!S.achClaimed) return 0;
-  return ACHS.reduce((n, a) => n + (S.achClaimed[a.id] ? a.point : 0), 0);
+  return ACHS.reduce((n, a) => n + (S.achClaimed[a.id] ? 1 : 0), 0);
 }
-/** Điểm đang chờ nhận. */
-export function pendingPoints(): number {
-  return ACHS.reduce((n, a) => n + (canClaim(a) ? a.point : 0), 0);
+/** Số thành tựu đang chờ bấm nhận. */
+export function pendingCount(): number {
+  return ACHS.reduce((n, a) => n + (canClaim(a) ? 1 : 0), 0);
 }
-/** Điểm đã nhận trong một nhóm. */
-export function catPoints(cat: string): number {
-  return achsOfCat(cat).reduce((n, a) => n + (isClaimed(a) ? a.point : 0), 0);
+/** Số thành tựu đã nhận trong một nhóm. */
+export function catDone(cat: string): number {
+  return achsOfCat(cat).reduce((n, a) => n + (isClaimed(a) ? 1 : 0), 0);
 }
 
 export function claim(id: string): boolean {
@@ -56,7 +56,7 @@ export function claim(id: string): boolean {
   addStat('ach_claimed');
   save(); bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED);
   sfx.coin();
-  toast(`Nhận thành tựu ${a.name}: +${a.point} điểm`, 'rank');
+  toast(`Nhận thành tựu ${a.name}!`, 'rank');
   return true;
 }
 
@@ -68,4 +68,4 @@ export function claimAll(): number {
   return n;
 }
 
-export { ACHS, ACH_TOTAL_POINT, achsOfCat, catTotal };
+export { ACHS, ACH_TOTAL, achsOfCat, catTotal };
