@@ -1,0 +1,179 @@
+#!/usr/bin/env python3
+"""Dựng ảnh tư thế gốc (setup pose) của một bộ Spine trong Pack4.
+
+Pack4 (Anime-Chibi / Tam-Quoc-Chibi) là skeleton Spine 3.x: file .json ghi cây
+xương + slot + attachment, mỗi mảnh là một .png rời cùng thư mục. Đọc cây
+xương, tính ma trận thế giới cho từng xương rồi vẽ các slot theo đúng thứ tự
+là ra hình nhân vật đứng — không cần chạy runtime Spine.
+"""
+import json, math, os, sys
+from PIL import Image
+
+
+def world_bones(data):
+    """Ma trận [a, b, c, d, tx, ty] của từng xương ở tư thế gốc."""
+    out = {}
+    for b in data['bones']:
+        rot = math.radians(b.get('rotation', 0))
+        sx, sy = b.get('scaleX', 1), b.get('scaleY', 1)
+        x, y = b.get('x', 0), b.get('y', 0)
+        la = math.cos(rot) * sx
+        lb = math.sin(rot) * sx
+        lc = -math.sin(rot) * sy
+        ld = math.cos(rot) * sy
+        p = out.get(b.get('parent'))
+        if p is None:
+            out[b['name']] = [la, lb, lc, ld, x, y]
+        else:
+            pa, pb, pc, pd, ptx, pty = p
+            out[b['name']] = [
+                pa * la + pc * lb, pb * la + pd * lb,
+                pa * lc + pc * ld, pb * lc + pd * ld,
+                pa * x + pc * y + ptx, pb * x + pd * y + pty
+            ]
+    return out
+
+
+def region_of(skins, slot_name, att_name):
+    """Attachment 'region' của slot trong skin default."""
+    if isinstance(skins, dict):
+        sk = skins.get('default', {})
+    else:
+        sk = next((s['attachments'] for s in skins if s.get('name') == 'default'), {})
+    return (sk.get(slot_name) or {}).get(att_name)
+
+
+
+def mesh_world_points(reg, bones, m):
+    """Toạ độ thế giới của các đỉnh mesh ở tư thế gốc.
+
+    Mesh không gán trọng số: vertices là [x, y, ...] trong hệ của xương slot.
+    Mesh có trọng số: mỗi đỉnh là [số xương, (id xương, x, y, trọng số) * n].
+    """
+    v = reg['vertices']
+    n_uv = len(reg['uvs']) // 2
+    pts = []
+    if len(v) == n_uv * 2:                       # không trọng số
+        a, b, c, d, tx, ty = m
+        for i in range(n_uv):
+            x, y = v[i * 2], v[i * 2 + 1]
+            pts.append((a * x + c * y + tx, b * x + d * y + ty))
+        return pts
+    order = [bn['name'] for bn in bones['_order']]
+    i = 0
+    while len(pts) < n_uv:
+        cnt = int(v[i]); i += 1
+        wx = wy = 0.0
+        for _ in range(cnt):
+            bi, bx, by, w = int(v[i]), v[i + 1], v[i + 2], v[i + 3]
+            i += 4
+            a, b, c, d, tx, ty = bones[order[bi]]
+            wx += (a * bx + c * by + tx) * w
+            wy += (b * bx + d * by + ty) * w
+        pts.append((wx, wy))
+    return pts
+
+
+def draw_mesh(canvas, im, reg, pts, PAD):
+    """Dán texture lên mesh bằng cách biến đổi affine từng tam giác."""
+    from PIL import ImageDraw
+    uvs = reg['uvs']
+    tris = reg['triangles']
+    src = [(uvs[i * 2] * im.width, uvs[i * 2 + 1] * im.height) for i in range(len(uvs) // 2)]
+    dst = [(PAD + x, PAD - y) for x, y in pts]
+    for t in range(0, len(tris), 3):
+        i0, i1, i2 = tris[t], tris[t + 1], tris[t + 2]
+        d0, d1, d2 = dst[i0], dst[i1], dst[i2]
+        s0, s1, s2 = src[i0], src[i1], src[i2]
+        xs = [p[0] for p in (d0, d1, d2)]
+        ys = [p[1] for p in (d0, d1, d2)]
+        x0, y0 = int(math.floor(min(xs))), int(math.floor(min(ys)))
+        w = int(math.ceil(max(xs))) - x0 + 1
+        h = int(math.ceil(max(ys))) - y0 + 1
+        if w <= 0 or h <= 0 or w > 4000 or h > 4000:
+            continue
+        # giải hệ để có affine (đích -> nguồn)
+        ax, ay = d1[0] - d0[0], d1[1] - d0[1]
+        bx, by = d2[0] - d0[0], d2[1] - d0[1]
+        det = ax * by - bx * ay
+        if abs(det) < 1e-6:
+            continue
+        ux, uy = s1[0] - s0[0], s1[1] - s0[1]
+        vx, vy = s2[0] - s0[0], s2[1] - s0[1]
+        a = (ux * by - vx * ay) / det
+        b = (vx * ax - ux * bx) / det
+        c = (uy * by - vy * ay) / det
+        d = (vy * ax - uy * bx) / det
+        e = s0[0] - a * d0[0] - b * d0[1]
+        f = s0[1] - c * d0[0] - d * d0[1]
+        piece = im.transform((w, h), Image.AFFINE,
+                             (a, b, a * x0 + b * y0 + e, c, d, c * x0 + d * y0 + f),
+                             resample=Image.BILINEAR)
+        mask = Image.new('L', (w, h), 0)
+        ImageDraw.Draw(mask).polygon([(d0[0] - x0, d0[1] - y0), (d1[0] - x0, d1[1] - y0),
+                                      (d2[0] - x0, d2[1] - y0)], fill=255)
+        mask = Image.composite(piece.split()[3], Image.new('L', (w, h), 0), mask)
+        canvas.paste(piece, (x0, y0), mask)
+
+
+def compose(folder, name, max_h=None):
+    data = json.load(open(os.path.join(folder, name + '.json'), encoding='utf-8'))
+    bones = world_bones(data)
+    bones['_order'] = data['bones']
+    PAD = 900
+    canvas = Image.new('RGBA', (PAD * 2, PAD * 2), (0, 0, 0, 0))
+    for slot in data['slots']:
+        att = slot.get('attachment')
+        if not att:
+            continue
+        reg = region_of(data['skins'], slot['name'], att) or {}
+        kind = reg.get('type', 'region')
+        if kind not in ('region', 'mesh', 'weightedmesh', 'skinnedmesh'):
+            continue          # bỏ clipping / boundingbox
+        path = reg.get('path', att)
+        # ảnh mảnh nằm cạnh json, vài bộ lại để trong thư mục con images/
+        f = os.path.join(folder, path + '.png')
+        if not os.path.exists(f):
+            f = os.path.join(folder, 'images', path + '.png')
+        if not os.path.exists(f):
+            continue
+        im = Image.open(f).convert('RGBA')
+        m = bones.get(slot['bone'])
+        if not m:
+            continue
+        if kind != 'region':
+            pts = mesh_world_points(reg, bones, m)
+            draw_mesh(canvas, im, reg, pts, PAD)
+            continue
+        a, b, c, d, tx, ty = m
+        rx, ry = reg.get('x', 0), reg.get('y', 0)
+        wx = a * rx + c * ry + tx
+        wy = b * rx + d * ry + ty
+        # góc + tỉ lệ tổng = của xương cộng của attachment
+        bone_rot = math.degrees(math.atan2(b, a))
+        rot = bone_rot + reg.get('rotation', 0)
+        sx = math.hypot(a, b) * reg.get('scaleX', 1)
+        sy = math.hypot(c, d) * reg.get('scaleY', 1)
+        w = max(1, int(round(reg.get('width', im.width) * sx)))
+        h = max(1, int(round(reg.get('height', im.height) * sy)))
+        if (w, h) != im.size:
+            im = im.resize((w, h), Image.LANCZOS)
+        if rot % 360:
+            im = im.rotate(rot, resample=Image.BICUBIC, expand=True)
+        canvas.alpha_composite(im, (int(round(PAD + wx - im.width / 2)),
+                                    int(round(PAD - wy - im.height / 2))))
+    bb = canvas.getbbox()
+    if bb:
+        canvas = canvas.crop(bb)
+    if max_h and canvas.height > max_h:
+        k = max_h / canvas.height
+        canvas = canvas.resize((max(1, int(canvas.width * k)), max_h), Image.LANCZOS)
+    return canvas
+
+
+if __name__ == '__main__':
+    folder, name, out = sys.argv[1], sys.argv[2], sys.argv[3]
+    mh = int(sys.argv[4]) if len(sys.argv) > 4 else None
+    im = compose(folder, name, mh)
+    im.save(out)
+    print(out, im.size)

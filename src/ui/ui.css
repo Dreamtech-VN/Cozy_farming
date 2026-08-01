@@ -1971,6 +1971,9 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   background-position: 0 0;
   image-rendering: pixelated;
 }
+/* skin nguyên hình (Pack4): ảnh liền một mảnh, cao hết khung, tự căn giữa */
+.chibi-fluid.art { aspect-ratio: auto; width: 100%; display: flex; align-items: flex-end; justify-content: center; }
+.chibi-fluid.art > img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
 /* ===== Trang đầy đủ (kiểu GunPow): chiếm trọn màn, không phải popup ===== */
 .win-backdrop.page-backdrop { background: rgba(18, 30, 16, .55); align-items: stretch; justify-content: stretch; }

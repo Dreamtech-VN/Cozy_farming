@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { lookLayers, FACE, type ChibiLook, type FaceKey } from '@/data/chibi';
+import { skinArt } from '@/data/skins';
 
 // ===== Nhân vật chibi kiểu Avatar =====
 // Strip 15 frame 64x96/part, neo chân (32,88). Hướng: mặc định nhìn phải,
@@ -47,6 +48,17 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
     scene.add.existing(this);
   }
 
+  /** Gắn ảnh skin nguyên hình, co về đúng chiều cao nhân vật (84px). */
+  private addArt(key: string) {
+    const img = this.scene.textures.get(key).getSourceImage() as { width: number; height: number };
+    const sc = 84 / img.height;
+    const s = this.scene.add.sprite(0, 0, key).setOrigin(0.5, 1).setScale(sc);
+    this.add(s);
+    this.layers.push(s);
+    this.artMode = true;
+  }
+  private artMode = false;
+
   private look?: ChibiLook;
   private faceTimer?: Phaser.Time.TimerEvent;
 
@@ -90,6 +102,29 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
   private applyLook(look: ChibiLook, _store: boolean) {
     for (const l of this.layers) l.destroy();
     this.layers = [];
+    this.artMode = false;
+    // skin nguyên hình (Pack4): một ảnh thay cả bộ layer, tải khi cần
+    const art = skinArt(look.skin);
+    if (art) {
+      const key = `skinart_${look.skin}`;
+      if (this.scene.textures.exists(key)) {
+        this.addArt(key);
+      } else {
+        this.scene.load.image(key, art.url);
+        this.scene.load.once(`filecomplete-image-${key}`, () => {
+          if (this.scene && skinArt(this.look?.skin)?.url === art.url) {
+            for (const l of this.layers) l.destroy();
+            this.layers = [];
+            this.addArt(key);
+            this.applyFrame();
+          }
+        });
+        this.scene.load.start();
+      }
+      if (this.toolKey) { const k = this.toolKey; this.toolKey = ''; this.setTool(k); }
+      this.applyFrame();
+      return;
+    }
     for (const id of lookLayers(look)) {
       const key = `chibi_${id}`;
       if (!this.scene.textures.exists(key)) continue;
@@ -162,6 +197,14 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
   }
 
   private applyFrame() {
+    // skin nguyên hình chỉ có 1 hình: không đổi frame, đi bộ thì nhún nhẹ
+    if (this.artMode) {
+      for (const l of this.layers) {
+        l.setFlipX(this.facingLeft);
+        l.y = this.anim === 'walk' && this.fi % 2 ? -2 : 0;
+      }
+      return;
+    }
     const f = ANIMS[this.anim].frames[Math.min(this.fi, ANIMS[this.anim].frames.length - 1)];
     for (const l of this.layers) {
       if (f < l.texture.frameTotal - 1) l.setFrame(f);

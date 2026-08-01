@@ -938,6 +938,8 @@ export function registerAllPanels() {
       if (z === -1) {
         grid.className = 'grid grid-shop';
         for (const sk of SKIN_LIST) {
+          // skin nguyên hình (Pack4) không bán ở shop — để dành sự kiện / gacha
+          if (sk.art) continue;
           if (sk.gender && g && sk.gender !== g) continue;
           const owned = S.skins.includes(sk.id);
           const cell = h('div', `cell cell-lg ${owned ? 'owned' : ''}`);

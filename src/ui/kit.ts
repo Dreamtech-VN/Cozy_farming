@@ -2,6 +2,7 @@
 import { S } from '@/core/save';
 import { bus } from '@/core/events';
 import { lookLayers } from '@/data/chibi';
+import { skinArt } from '@/data/skins';
 import { picSrc } from '@/data/avatars';
 import BBOX from '@/data/chibi-bbox.json';
 export function h<K extends keyof HTMLElementTagNameMap>(
@@ -345,6 +346,15 @@ export function chibiHead(partId: number, size = 40, z?: number): HTMLElement {
 export function charFaceFluid(look: import('@/data/chibi').ChibiLook | undefined): HTMLElement {
   const wrap = h('div', 'chibi-fluid');
   if (!look) return wrap;
+  // skin nguyên hình (Pack4): một ảnh thay cả nhân vật
+  const art = skinArt(look.skin);
+  if (art) {
+    wrap.classList.add('art');
+    const im = document.createElement('img');
+    im.src = art.url; im.draggable = false;
+    wrap.append(im);
+    return wrap;
+  }
   for (const pid of lookLayers(look)) {
     const l = h('div', 'chibi-fluid-l');
     l.style.backgroundImage = `url(assets/chibi/${pid}.png)`;
@@ -358,6 +368,15 @@ export function charFace(look: import('@/data/chibi').ChibiLook | undefined, siz
   const w = Math.round(size * 64 / 96);
   wrap.style.cssText = `width:${w}px;height:${size}px;position:relative;`;
   if (!look) return wrap;
+  const art = skinArt(look.skin);
+  if (art) {
+    wrap.style.width = `${Math.round(size * art.w / art.h)}px`;
+    const im = document.createElement('img');
+    im.src = art.url; im.draggable = false;
+    im.style.cssText = 'width:100%;height:100%;object-fit:contain;';
+    wrap.append(im);
+    return wrap;
+  }
   for (const pid of lookLayers(look)) {
     const el = spr(`assets/chibi/${pid}.png`, 0, 0, 64, 96, w);
     el.style.position = 'absolute';
