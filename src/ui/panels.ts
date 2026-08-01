@@ -2336,6 +2336,8 @@ export function registerAllPanels() {
                   on?: boolean; click: () => void };
   type ChCell = { name: string; art: HTMLElement; grade?: string; badge?: string;
                   star?: number; pips?: [number, boolean[]]; flag?: string;
+                  /** đang có việc để bấm (nhận thưởng) — tô nổi lên */
+                  hot?: boolean;
                   dim?: boolean; on?: boolean; click: () => void };
   interface ChView {
     slots: ChSlot[];
@@ -2343,8 +2345,8 @@ export function registerAllPanels() {
     cells: ChCell[];
     empty: string;
     foot: HTMLElement[];
-    /** kiểu lưới: ô vuông (mặc định) | ô ngang cho danh hiệu | ô cao cho skin */
-    grid?: 'wide' | 'tall';
+    /** kiểu lưới: ô vuông (mặc định) | ô cao cho skin | hàng ngang cho danh hiệu */
+    grid?: 'tall' | 'rows';
     /** cụm nút tròn dưới chân nhân vật */
     quick?: HTMLElement;
     /** dòng tiến độ nhỏ nằm giữa lưới và hàng nút */
@@ -2469,7 +2471,8 @@ export function registerAllPanels() {
       const grid = h('div', `ch-list ${view.grid ? `ch-list-${view.grid}` : ''}`);
       if (!view.cells.length) grid.append(h('div', 'ch-blank', view.empty));
       for (const c of view.cells) {
-        const cell = h('button', `ch-cell ${c.grade ?? ''} ${c.on ? 'on' : ''} ${c.dim ? 'dim' : ''}`);
+        const cell = h('button',
+          `ch-cell ${c.grade ?? ''} ${c.on ? 'on' : ''} ${c.dim ? 'dim' : ''} ${c.hot ? 'hot' : ''}`);
         cell.append(c.art);
         if (c.badge) cell.append(h('div', 'ch-badge', c.badge));
         if (c.star) cell.append(h('div', 'ch-star', '★'.repeat(c.star)));
@@ -2597,24 +2600,26 @@ export function registerAllPanels() {
       return {
         slots: [],
         filters: ACH_CATS.map(c => ({ key: c.id, name: c.name })),
+        // mỗi danh hiệu là MỘT HÀNG: bảng tên | điều kiện | trạng thái
         cells: list.map(a => {
           const t = TITLES[a.title!];
           const has = S.player.titles.includes(a.title!);
+          const on = S.player.title === a.title;
           const wrapc = h('div', 'ch-title-art');
-          wrapc.append(titlePlaque(t?.name ?? a.title!, has ? (t?.color ?? '#ffe066') : '#9b8a72', 1));
+          wrapc.append(titlePlaque(t?.name ?? a.title!, has ? (t?.color ?? '#ffe066') : '#9b8a72', 1.1));
           return {
-            name: a.desc, art: wrapc, dim: !has, on: S.player.title === a.title,
-            flag: S.player.title === a.title ? 'Đang đeo'
-              : canClaim(a) ? 'Nhận được' : undefined,
+            name: a.desc, art: wrapc, dim: !has && !canClaim(a), on, hot: canClaim(a),
+            flag: on ? 'Đang đeo' : canClaim(a) ? 'Nhận ngay' : has ? 'Đã mở' : 'Chưa nhận',
             click: () => {
               if (canClaim(a)) { claim(a.id); redraw(); return; }
               if (!has) { toast(a.desc, 'quest'); return; }
-              openTitleDetail(a.title!, redraw);
+              S.player.title = on ? '' : a.title!;
+              save(); bus.emit(EV.STATE_CHANGED); redraw();
             }
           };
         }),
         empty: 'Nhóm này chưa có danh hiệu.',
-        grid: 'wide',
+        grid: 'rows',
         full: true,
         note: `【${cat.name}】${fmt(got)}/${fmt(need)}  ·  Chờ nhận: ${fmt(pendingPoints())}`
           + `  ·  Tổng: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`,

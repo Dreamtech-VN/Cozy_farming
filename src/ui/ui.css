@@ -2697,149 +2697,31 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .ch-foot { flex: none; display: flex; gap: 8px; padding-top: 8px; }
 .ch-foot .btn { flex: 1; }
 
-/* Danh hiệu là tấm bảng nằm ngang, skin là cả bộ đồ đứng — hai mục này cần ô
-   khác tỉ lệ ô vuông của trang bị / quần áo. */
-/* mục Danh hiệu chiếm cả trang nên xếp được nhiều cột hơn */
-.ch-list-wide { grid-template-columns: repeat(3, 1fr); }
-.ch-list-wide .ch-cell { aspect-ratio: 3.4 / 1; }
+/* Skin là cả bộ đồ đứng nên ô cao hơn ô vuông của trang bị / quần áo. */
 .ch-list-tall { grid-template-columns: repeat(3, 1fr); }
 .ch-list-tall .ch-cell { aspect-ratio: 3 / 4; }
 
-/* dòng tiến độ nhỏ dưới lưới của mục Danh hiệu */
-.ch-note {
-  flex: none; padding: 6px 4px 0; text-align: center;
-  font-size: 10.5px; font-weight: 800; color: rgba(255, 255, 255, .6);
+/* Danh hiệu xếp thành BẢNG: bảng tên | điều kiện | trạng thái, đúng như mẫu. */
+.ch-list-rows { grid-template-columns: 1fr; gap: 5px; }
+.ch-list-rows .ch-cell {
+  aspect-ratio: auto; min-height: 44px; padding: 5px 10px 6px; border-radius: 11px;
+  display: grid; grid-template-columns: 168px 1fr 96px; align-items: center; gap: 10px;
 }
-
-/* ================= Trang Thành tựu / Danh hiệu / Huy hiệu ================= */
-.av-wrap { display: flex; gap: 8px; height: 100%; min-height: 0; }
-.av-page {
-  flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 8px;
+.ch-list-rows .ch-title-art { width: auto; height: auto; padding: 0; }
+.ch-list-rows .ch-title-art canvas { max-width: 100%; height: auto; }
+.ch-list-rows .ch-cell-nm {
+  position: static; background: none; padding: 0;
+  font-size: 11px; font-weight: 800; color: rgba(255, 255, 255, .78);
+  text-align: left; white-space: normal; overflow: visible; line-height: 1.3;
 }
-.av-top {
-  flex: none; display: flex; align-items: center; gap: 8px; padding: 6px 12px 7px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .28);
+.ch-list-rows .ch-flag {
+  position: static; justify-self: center; padding: 3px 10px 4px; border-radius: 999px;
+  font-size: 10.5px; line-height: 1.2; background: rgba(255, 255, 255, .12);
+  color: rgba(255, 255, 255, .55); box-shadow: none;
 }
-.av-left-k { font-size: 12px; font-weight: 900; color: #e7f0dd; }
-.av-pt-big { font-size: 17px; font-weight: 900; color: #ffe066; }
-.av-prog { font-size: 12px; font-weight: 900; color: rgba(255, 255, 255, .7); }
-
-/* dải mục dọc bên phải, bo góc quay sang trái cho ăn vào thành */
-.av-rail { flex: 0 0 84px; display: flex; flex-direction: column; gap: 5px; padding: 10px 8px 0 0; }
-.av-rt {
-  position: relative; flex: none; padding: 9px 6px 10px 4px; cursor: pointer; font-family: inherit;
-  border-radius: 0 12px 12px 0; text-align: center;
-  font-size: 11.5px; font-weight: 900; color: #e7f0dd;
-  background: rgba(255, 255, 255, .13); border: 1px solid rgba(255, 255, 255, .24); border-left: none;
-}
-.av-rt.on { background: linear-gradient(#ffe066, #f0a318); border-color: #ffe9a8; color: #4a3005; }
-.av-rdot {
-  position: absolute; left: 4px; top: 4px; width: 8px; height: 8px; border-radius: 50%;
-  background: #e8503a; border: 1px solid #fff;
-}
-
-/* thân: cột nhóm bên trái + danh sách bên phải */
-.av-two { flex: 1; min-height: 0; display: flex; gap: 8px; }
-.av-cats {
-  flex: 0 0 118px; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 5px;
-  scrollbar-width: none;
-}
-.av-cats::-webkit-scrollbar { display: none; }
-.av-cat {
-  position: relative; flex: none; padding: 6px 8px 7px; border-radius: 11px; cursor: pointer;
-  font-family: inherit; text-align: center;
-  background: rgba(255, 255, 255, .13); border: 1px solid rgba(255, 255, 255, .24);
-}
-.av-cat.on { background: linear-gradient(#ffe066, #f0a318); border-color: #ffe9a8; }
-.av-cat-n { font-size: 11.5px; font-weight: 900; color: #e7f0dd; }
-.av-cat.on .av-cat-n { color: #4a3005; }
-.av-cat-bar {
-  height: 7px; margin-top: 4px; border-radius: 999px; overflow: hidden;
-  background: rgba(0, 0, 0, .35);
-}
-.av-cat-f { height: 100%; background: linear-gradient(#b6f2a0, #5fbf58); }
-
-.av-side { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 6px; }
-.av-hd {
-  flex: none; display: flex; align-items: center; gap: 7px; padding: 4px 8px 5px;
-  border-radius: 10px; background: rgba(255, 255, 255, .07);
-}
-.av-hd-k { flex: none; font-size: 11.5px; font-weight: 900; color: #ffe066; }
-.av-hd-bar {
-  flex: 1; height: 10px; border-radius: 999px; overflow: hidden;
-  background: rgba(0, 0, 0, .35); border: 1px solid rgba(255, 255, 255, .2);
-}
-.av-hd-f { height: 100%; background: linear-gradient(#ffe066, #f0a318); }
-.av-hd-n { flex: none; font-size: 10.5px; font-weight: 900; color: rgba(255, 255, 255, .7); }
-
-.av-list {
-  flex: 1 1 0; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;
-}
-.av-foot { flex: none; display: flex; justify-content: center; padding-top: 2px; }
-.av-row {
-  display: flex; align-items: center; gap: 10px; padding: 7px 10px 8px; border-radius: 12px;
-  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .24);
-}
-.av-row.done { opacity: .55; }
-.av-row-i { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.av-row-n { font-size: 12.5px; font-weight: 900; color: #fff8e8; }
-.av-row-d { font-size: 10.5px; font-weight: 700; color: rgba(255, 255, 255, .6); }
-.av-row-t { font-size: 10.5px; font-weight: 900; color: #b6f2a0; }
-.av-rw { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 900; color: #ffe9c4; }
-.av-pt { color: #ffe066; }
-.av-row-bar {
-  position: relative; height: 11px; border-radius: 999px; overflow: hidden; margin-top: 3px;
-  background: rgba(0, 0, 0, .32); border: 1px solid rgba(255, 255, 255, .2);
-}
-.av-row-f { height: 100%; background: linear-gradient(#b6f2a0, #5fbf58); }
-.av-row-bt {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  font-size: 8px; font-weight: 900; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .7);
-}
-.av-row-r { flex: none; width: 88px; display: flex; justify-content: center; }
-.av-got { font-size: 10.5px; font-weight: 900; color: rgba(255, 255, 255, .5); }
-.av-wait { font-size: 10.5px; font-weight: 900; color: rgba(255, 255, 255, .38); }
-
-/* tab Danh hiệu */
-.av-tgrid {
-  flex: 1 1 0; min-height: 0; overflow-y: auto; align-content: start;
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
-}
-.av-tcell {
-  position: relative; padding: 8px 6px 9px; border-radius: 12px; cursor: pointer; font-family: inherit;
-  display: flex; flex-direction: column; align-items: center; gap: 4px;
-  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .24);
-}
-.av-tcell.locked { opacity: .5; }
-.av-tcell.on { box-shadow: 0 0 0 2px rgba(255, 212, 59, .55); }
-.av-tcell canvas { max-width: 100%; height: auto; }
-.av-tdesc { font-size: 9.5px; font-weight: 700; color: rgba(255, 255, 255, .6); text-align: center; }
-
-/* tab Huy hiệu — 3 thẻ nâng cấp */
-.av-bwrap { flex: 1 1 0; min-height: 0; overflow-y: auto; display: flex; gap: 8px; align-items: stretch; }
-.av-bcard {
-  flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 5px;
-  padding: 9px 8px 11px; border-radius: 14px;
-  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .26);
-}
-.av-bname { display: flex; align-items: baseline; gap: 6px; font-size: 12px; font-weight: 900; color: #ffe9c4; }
-.av-blv { color: #ff8787; }
-.av-bart {
-  width: 68px; height: 68px; border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(0, 0, 0, .25); border: 1px solid rgba(255, 233, 168, .5);
-}
-.av-bcmp { display: flex; align-items: center; gap: 6px; }
-.av-bs {
-  font-size: 10.5px; font-weight: 900; color: #eef6e6; text-align: center;
-  white-space: pre-line; line-height: 1.2;
-}
-.av-bs.up { color: #b6f2a0; }
-.av-barrow { font-size: 12px; color: #b6f2a0; }
-.av-bcost { font-size: 11px; font-weight: 900; color: #ffe066; }
-.av-bcard .btn { padding: 5px 18px 6px; font-size: 12px; }
-.av-bcard .btn.dim { opacity: .5; }
+.ch-list-rows .ch-cell.on .ch-flag,
+.ch-list-rows .ch-cell:not(.dim) .ch-flag { color: #fff8e0; }
+.ch-list-rows .ch-cell.on .ch-flag { background: linear-gradient(#ffe066, #f0a318); color: #4a3005; }
 
 /* nhãn bậc hiếm trên ô Ảo Hoá */
 .sk-rank {
@@ -2851,3 +2733,9 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .av-pico { width: 13px; height: 13px; object-fit: contain; vertical-align: -2px; margin-right: 3px; }
 .av-pico.big { width: 20px; height: 20px; margin: 0 2px; }
 .av-bimg { width: 100%; height: 100%; object-fit: contain; }
+
+/* hàng danh hiệu đang có thưởng chờ nhận — tô nổi cho dễ thấy */
+.ch-cell.hot { border-color: #b6f2a0; box-shadow: 0 0 0 2px rgba(140, 233, 154, .35); }
+.ch-list-rows .ch-cell.hot .ch-flag {
+  background: linear-gradient(#8ce99a, #51cf66); color: #16341d;
+}
