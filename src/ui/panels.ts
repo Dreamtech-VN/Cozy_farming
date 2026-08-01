@@ -1955,11 +1955,10 @@ export function registerAllPanels() {
   // Chỉ khác GunPow ở lớp da: bên mình dùng kính xanh thay khung gỗ nâu.
   type ForgeTab = 'smith' | 'star' | 'gem' | 'inherit' | 'reforge';
   // thứ tự tab đúng như màn Rèn đúc của GunPow
-  // Tên tiếng Việt dễ đọc thay cho chữ Hán-Việt của GunPow
-  // (Cường hoá / Kế thừa / Tẩy luyện / Thăng tinh / Khảm nạm)
+  // Giữ đúng tên tab của GunPow
   const FORGE_TABS: [ForgeTab, string][] = [
-    ['smith', 'Nâng cấp'], ['inherit', 'Chuyển đồ'], ['reforge', 'Rửa chỉ số'],
-    ['star', 'Lên sao'], ['gem', 'Gắn đá']
+    ['smith', 'Cường hoá'], ['inherit', 'Kế thừa'], ['reforge', 'Tẩy luyện'],
+    ['star', 'Tăng sao'], ['gem', 'Khảm']
   ];
 
   function openForge(tab: ForgeTab, startId?: string) {
@@ -2041,12 +2040,12 @@ export function registerAllPanels() {
             if (dropsOnFail(lv)) foot.append(h('div', 'sm-warn', 'Từ +7, hỏng sẽ TỤT 1 cấp.'));
             const acts = h('div', 'gp-acts');
             acts.append(
-              btn('Nâng cấp nhanh', '', () => {
+              btn('Cường hoá nhanh', '', () => {
                 const b = equipLevel(id); const r = smashUntil(id);
                 if (r.tries) toast(`Đập ${r.tries} lần, lên ${r.up} cấp.`, 'rank');
                 render(); fxAfter(r.up > 0 ? 'good' : 'bad', r.up > 0 ? `+${equipLevel(id) - b} cấp` : 'KHÔNG LÊN');
               }),
-              btn('Nâng cấp', 'gold', () => {
+              btn('Cường hoá', 'gold', () => {
                 const r = smash(id); render();
                 if (r.ok) fxAfter(r.win ? 'good' : 'bad', r.win ? `+${r.lv}` : 'HỎNG');
               }));
@@ -2096,7 +2095,7 @@ export function registerAllPanels() {
             const lk = h('button', `rf-lock ${locks[i] ? 'on' : ''}`);
             lk.append(spr(locks[i] ? 'assets/forge/lock_on.png' : 'assets/forge/lock_off.png',
               0, 0, 26, 35, 14));
-            lk.title = locks[i] ? 'Bỏ khoá dòng này' : 'Khoá dòng này (rửa đắt hơn)';
+            lk.title = locks[i] ? 'Bỏ khoá dòng này' : 'Khoá dòng này (tẩy đắt hơn)';
             lk.onclick = () => { sfx.click(); if (toggleRefLock(id, i)) render(); };
             row.append(lk);
             box.append(row);
@@ -2113,10 +2112,10 @@ export function registerAllPanels() {
               `${itemCount(REFORGE_STONE)}/${c.stones}`));
           cost.append(m);
           foot.append(cost, h('div', 'sm-warn',
-            nLock ? `Đang khoá ${nLock} dòng — mỗi ổ khoá làm tiền rửa đắt thêm 50%.`
-                  : 'Rửa sẽ gieo lại cả 5 dòng. Khoá dòng đẹp lại trước khi rửa.'));
+            nLock ? `Đang khoá ${nLock} dòng — mỗi ổ khoá làm tiền tẩy đắt thêm 50%.`
+                  : 'Tẩy sẽ gieo lại cả 5 dòng. Khoá dòng đẹp lại trước khi tẩy.'));
           const acts = h('div', 'gp-acts');
-          acts.append(btn('Rửa chỉ số', 'gold', () => {
+          acts.append(btn('Tẩy luyện', 'gold', () => {
             const before = refScore(d, refLines(id).slice());
             const r = reforge(id);
             if (!r.ok) return;
@@ -2143,18 +2142,18 @@ export function registerAllPanels() {
             return c;
           };
           const cmp = h('div', 'gp-cmp');
-          cmp.append(mini(sd, 'MÓN CHO (sẽ mất)'), h('div', 'gp-c-ar', '❯'), mini(d, 'MÓN NHẬN', 'up'));
+          cmp.append(mini(sd, 'NGUỒN (sẽ mất)'), h('div', 'gp-c-ar', '❯'), mini(d, 'ĐÍCH', 'up'));
           stage.append(cmp);
-          const chk = src ? canInherit(src, id) : { ok: false, why: 'Chọn món cho ở danh sách bên phải.' };
+          const chk = src ? canInherit(src, id) : { ok: false, why: 'Chọn món nguồn ở danh sách bên phải.' };
           if (!chk.ok) foot.append(h('div', 'sm-warn', chk.why ?? ''));
           else {
             const cost = inheritCost(sd!, d);
             const cs = h('div', 'gp-cost');
             cs.innerHTML = `Tốn: ${priceHtml(cost)}`;
-            foot.append(cs, h('div', 'sm-warn', 'Món cho sẽ biến mất; cấp, sao và đá chuyển hết sang món nhận.'));
+            foot.append(cs, h('div', 'sm-warn', 'Món nguồn sẽ biến mất; cấp, sao và đá chuyển hết sang món đích.'));
           }
           const acts = h('div', 'gp-acts');
-          const go = btn('Chuyển đồ', 'gold', () => {
+          const go = btn('Kế thừa', 'gold', () => {
             if (inherit(src, id)) { src = ''; render(); fxAfter('inherit', 'KẾ THỪA'); }
           });
           if (!chk.ok) go.classList.add('dim');
@@ -2198,7 +2197,7 @@ export function registerAllPanels() {
 
       // ---------- CỘT GIỮA: danh sách trang bị ----------
       const mid = h('div', 'gp-mid');
-      mid.append(h('div', 'gp-mid-h', sel === 'inherit' ? 'Chọn món cho' : 'Trang bị'));
+      mid.append(h('div', 'gp-mid-h', sel === 'inherit' ? 'Chọn món nguồn' : 'Trang bị'));
       const list = h('div', 'gp-list');
       const ids = slot === 'worn'
         ? EQUIP_SLOTS.map(sl => S.equip[sl.id]).filter(Boolean)
@@ -2470,11 +2469,11 @@ export function registerAllPanels() {
         // 3 trang riêng như GunPow
         const acts = h('div', 'eq-acts');
         acts.append(
-          btn('Nâng cấp', 'gold', () => openPanel('smithy', { id: cur.id })),
-          btn('Rửa chỉ số', 'blue', () => openPanel('reforge', { id: cur.id })),
-          btn('Lên sao', '', () => openPanel('starup', { id: cur.id })),
+          btn('Cường hoá', 'gold', () => openPanel('smithy', { id: cur.id })),
+          btn('Tẩy luyện', 'blue', () => openPanel('reforge', { id: cur.id })),
+          btn('Tăng sao', '', () => openPanel('starup', { id: cur.id })),
           btn('Gắn đá', '', () => openPanel('socket', { id: cur.id })),
-          btn('Chuyển đồ', '', () => openPanel('inheritpage', { id: cur.id })));
+          btn('Kế thừa', '', () => openPanel('inheritpage', { id: cur.id })));
         card.append(acts);
       }
 

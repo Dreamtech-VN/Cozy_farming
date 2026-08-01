@@ -354,15 +354,15 @@ export function canInherit(fromId: string, toId: string): InheritCheck {
   if (fromId === toId) return { ok: false, why: 'Phải chọn hai món khác nhau.' };
   if (f.slot !== t.slot) return { ok: false, why: 'Hai món phải cùng một ô.' };
   if (equipLevel(fromId) === 0 && equipStar(fromId) === 0 && !gemsOn(fromId).some(Boolean))
-    return { ok: false, why: 'Món cho chưa có gì để chuyển.' };
+    return { ok: false, why: 'Món nguồn chưa có gì để kế thừa.' };
   if (equipLevel(toId) > equipLevel(fromId))
-    return { ok: false, why: 'Món nhận đang cao cấp hơn món cho.' };
+    return { ok: false, why: 'Món đích đang cao cấp hơn món nguồn.' };
   return { ok: true };
 }
 
 export function inherit(fromId: string, toId: string): boolean {
   const c = canInherit(fromId, toId);
-  if (!c.ok) { toast(c.why ?? 'Không chuyển được.', 'alert'); sfx.error(); return false; }
+  if (!c.ok) { toast(c.why ?? 'Không kế thừa được.', 'alert'); sfx.error(); return false; }
   const f = equipDef(fromId)!, t = equipDef(toId)!;
   const cost = inheritCost(f, t);
   if (S.wallet.coins < cost) { toast(`Cần ${cost} xu.`, 'coin'); sfx.error(); return false; }
@@ -399,7 +399,7 @@ export function inherit(fromId: string, toId: string): boolean {
 
   addStat('equip_inherited');
   save(); bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); sfx.coin();
-  toast(`Đã chuyển sang ${t.name}.`, 'rank');
+  toast(`Đã kế thừa sang ${t.name}.`, 'rank');
   return true;
 }
 
@@ -424,7 +424,7 @@ export function refLocks(id: string): boolean[] {
 export function toggleRefLock(id: string, i: number): boolean {
   const lk = refLocks(id);
   if (!lk[i] && lk.filter(Boolean).length >= REFORGE_LINES.length - 1) {
-    toast('Phải chừa ít nhất một dòng để rửa.', 'alert'); sfx.error(); return false;
+    toast('Phải chừa ít nhất một dòng để tẩy.', 'alert'); sfx.error(); return false;
   }
   lk[i] = !lk[i];
   save(); bus.emit(EV.STATE_CHANGED);
@@ -460,7 +460,7 @@ export function reforge(id: string): ReforgeResult {
   addStat('equip_reforged');
   save(); bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED);
   const d = refScore(def, after) - refScore(def, before);
-  if (d > 0) { sfx.win(); toast(`Rửa được chỉ số đẹp! +${d} điểm.`, 'rank'); }
+  if (d > 0) { sfx.win(); toast(`Tẩy luyện đẹp! +${d} điểm chỉ số.`, 'rank'); }
   else { sfx.click(); toast(d < 0 ? `Lần này xấu hơn ${-d} điểm.` : 'Không đổi được gì.', 'alert'); }
   return { ok: true, before, after };
 }
