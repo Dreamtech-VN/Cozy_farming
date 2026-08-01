@@ -40,23 +40,52 @@ q({ id: 'd_gift1', name: 'Trao yêu thương', desc: 'Tặng 1 món quà cho b�
 export const DAILY_POOL = Object.values(QUESTS).filter(x => x.type === 'daily').map(x => x.id);
 
 // ---- Thành tựu ----
-q({ id: 'a_harvest100', name: 'Nông dân chăm chỉ', desc: 'Thu hoạch 100 nông sản.', stat: 'harvested', target: 100, reward: { coins: 1000, title: 'title_farmer', exp: 100 }, type: 'achievement' });
-q({ id: 'a_harvest1000', name: 'Vua nông trại', desc: 'Thu hoạch 1000 nông sản.', stat: 'harvested', target: 1000, reward: { coins: 15000, title: 'title_farm_king', exp: 500 }, type: 'achievement' });
-q({ id: 'a_fish50', name: 'Cần thủ', desc: 'Câu 50 con cá.', stat: 'fish_caught', target: 50, reward: { coins: 1500, title: 'title_angler', exp: 150 }, type: 'achievement' });
-q({ id: 'a_fish_all', name: 'Bách khoa cá', desc: 'Sưu tập đủ 30 loài cá.', stat: 'fish_species', target: 30, reward: { coins: 30000, title: 'title_fish_master', exp: 800 }, type: 'achievement' });
-q({ id: 'a_order30', name: 'Chủ tiệm giao hàng', desc: 'Giao 30 đơn hàng.', stat: 'orders_done', target: 30, reward: { coins: 1200, title: 'title_courier', exp: 120 }, type: 'achievement' });
-q({ id: 'a_rich', name: 'Triệu phú', desc: 'Sở hữu 100.000 xu (tích lũy kiếm được).', stat: 'coins_earned', target: 100000, reward: { coins: 9000, title: 'title_millionaire', exp: 300 }, type: 'achievement' });
-q({ id: 'a_friend5', name: 'Quảng giao', desc: 'Kết bạn với 5 người.', stat: 'friends_added', target: 5, reward: { coins: 500, title: 'title_social', exp: 80 }, type: 'achievement' });
-q({ id: 'a_party', name: 'Chủ tiệc', desc: 'Tổ chức 1 bữa tiệc tại nhà.', stat: 'parties', target: 1, reward: { coins: 800, title: 'title_party', exp: 100 }, type: 'achievement' });
-q({ id: 'a_caro10', name: 'Kỳ thủ caro', desc: 'Thắng 10 ván cờ caro.', stat: 'caro_wins', target: 10, reward: { coins: 1000, title: 'title_caro', exp: 150 }, type: 'achievement' });
-q({ id: 'a_level10', name: 'Thăng tiến', desc: 'Đạt cấp 10.', stat: 'level_up', target: 9, reward: { coins: 6000, exp: 0, title: 'title_veteran' }, type: 'achievement' });
+// Bộ thành tựu cũ đã bỏ; hệ mới nằm ở src/data/achievements.ts (chia nhóm,
+// có điểm thành tựu và huy hiệu theo cách GunPow làm).
 
-export const ACHIEVEMENTS = Object.values(QUESTS).filter(x => x.type === 'achievement');
+export const ACHIEVEMENTS = Object.values(QUESTS).filter(x => x.type === 'achievement');  // rỗng
 
 // ---- Danh hiệu ----
 // Danh hiệu: source = nhận từ đâu, how = điều kiện cụ thể
 export interface TitleDef { name: string; color: string; source: string; how: string }
 export const TITLES: Record<string, TitleDef> = {
+  // ---- Danh hiệu của bộ thành tựu (mỗi thành tựu lớn tặng một cái) ----
+  ti_seeder: { name: 'Người Gieo Mầm', color: '#8ce99a', source: 'Nhà Nông', how: 'Trồng 200 hạt giống.' },
+  ti_farmer: { name: 'Nông Dân Chăm Chỉ', color: '#8ce99a', source: 'Nhà Nông', how: 'Thu hoạch 100 nông sản.' },
+  ti_harvest_king: { name: 'Mùa Vàng', color: '#ffd43b', source: 'Nhà Nông', how: 'Thu hoạch 1.000 nông sản.' },
+  ti_farm_king: { name: 'Vua Nông Trại', color: '#ffa94d', source: 'Nhà Nông', how: 'Thu hoạch 5.000 nông sản.' },
+  ti_woodman: { name: 'Tiều Phu', color: '#b08968', source: 'Nhà Nông', how: 'Chặt 200 cây lấy gỗ.' },
+  ti_angler: { name: 'Cần Thủ', color: '#66d9e8', source: 'Cần Thủ', how: 'Câu được 50 con cá.' },
+  ti_angler_pro: { name: 'Tay Câu Cứng', color: '#3bc9db', source: 'Cần Thủ', how: 'Câu được 500 con cá.' },
+  ti_fish_king: { name: 'Ngư Ông Đắc Lợi', color: '#22b8cf', source: 'Cần Thủ', how: 'Câu được 2.000 con cá.' },
+  ti_fish_master: { name: 'Bậc Thầy Câu Cá', color: '#15aabf', source: 'Cần Thủ', how: 'Sưu tập đủ 30 loài cá.' },
+  ti_pond: { name: 'Chủ Ao', color: '#4dabf7', source: 'Cần Thủ', how: 'Vớt 200 con cá nuôi.' },
+  ti_herder: { name: 'Người Chăn Nuôi', color: '#ffd8a8', source: 'Chăn Nuôi', how: 'Cho vật nuôi ăn 200 lần.' },
+  ti_rancher: { name: 'Chủ Trại', color: '#e8b04b', source: 'Chăn Nuôi', how: 'Thu 500 sản phẩm từ vật nuôi.' },
+  ti_chef: { name: 'Đầu Bếp', color: '#ff922b', source: 'Bếp Núc', how: 'Nấu xong 300 món ăn.' },
+  ti_courier: { name: 'Người Giao Hàng', color: '#b197fc', source: 'Bếp Núc', how: 'Giao xong 30 đơn hàng.' },
+  ti_shopkeep: { name: 'Chủ Tiệm Uy Tín', color: '#9775fa', source: 'Bếp Núc', how: 'Giao xong 300 đơn hàng.' },
+  ti_trader: { name: 'Con Buôn', color: '#f783ac', source: 'Bếp Núc', how: 'Bán 2.000 vật phẩm.' },
+  ti_smith: { name: 'Thợ Rèn', color: '#ced4da', source: 'Bậc Thầy Rèn', how: 'Cường hoá thành công 200 lần.' },
+  ti_forge_master: { name: 'Bậc Thầy Rèn', color: '#ff6b6b', source: 'Bậc Thầy Rèn', how: 'Cường hoá thành công 1.000 lần.' },
+  ti_starman: { name: 'Thăng Tinh Sư', color: '#ffe066', source: 'Bậc Thầy Rèn', how: 'Tăng sao thành công 50 lần.' },
+  ti_heir: { name: 'Kế Thừa Y Bát', color: '#d0bfff', source: 'Bậc Thầy Rèn', how: 'Kế thừa trang bị 20 lần.' },
+  ti_chest: { name: 'Săn Rương', color: '#ffc078', source: 'Bậc Thầy Rèn', how: 'Mở 100 rương trang bị.' },
+  ti_social: { name: 'Quảng Giao', color: '#faa2c1', source: 'Giải Trí', how: 'Kết bạn với 10 người.' },
+  ti_gifter: { name: 'Trao Yêu Thương', color: '#ff8787', source: 'Giải Trí', how: 'Tặng 100 món quà.' },
+  ti_gamer: { name: 'Cao Thủ Mini Game', color: '#a9e34b', source: 'Giải Trí', how: 'Thắng 50 ván mini game.' },
+  ti_caro: { name: 'Kỳ Thủ Caro', color: '#94d82d', source: 'Giải Trí', how: 'Thắng 30 ván cờ caro.' },
+  ti_party: { name: 'Chủ Tiệc', color: '#ff8787', source: 'Giải Trí', how: 'Tổ chức 10 bữa tiệc.' },
+  ti_homeowner: { name: 'Chủ Nhà', color: '#74c0fc', source: 'Tổ Ấm', how: 'Mua nhà riêng.' },
+  ti_mansion: { name: 'Nhà Cao Cửa Rộng', color: '#4dabf7', source: 'Tổ Ấm', how: 'Nâng cấp nhà 3 lần.' },
+  ti_decor: { name: 'Tay Bày Biện', color: '#66d9e8', source: 'Tổ Ấm', how: 'Đặt 50 món nội thất.' },
+  ti_veteran: { name: 'Kỳ Cựu', color: '#ffd43b', source: 'Tổ Ấm', how: 'Đạt cấp 30.' },
+  ti_fashion: { name: 'Tín Đồ Thời Trang', color: '#f06595', source: 'Sưu Tập', how: 'Sắm 50 món thời trang.' },
+  ti_skinner: { name: 'Nhà Sưu Tầm Ảo Hoá', color: '#cc5de8', source: 'Sưu Tập', how: 'Sở hữu 5 bộ skin.' },
+  ti_titled: { name: 'Danh Gia Vọng Tộc', color: '#ffa94d', source: 'Sưu Tập', how: 'Mở khoá 20 danh hiệu.' },
+  ti_geared: { name: 'Đủ Bộ Đồ Nghề', color: '#a5d8ff', source: 'Sưu Tập', how: 'Đeo đủ 8 ô trang bị.' },
+  ti_millionaire: { name: 'Triệu Phú', color: '#ffd43b', source: 'Sưu Tập', how: 'Kiếm được tổng cộng 1.000.000 xu.' },
+  // ---- Danh hiệu cũ / gacha ----
   title_newbie: { name: 'Tân binh', color: '#9aa5b1', source: 'Mặc định', how: 'Có sẵn khi tạo nhân vật.' },
   title_homeowner: { name: 'Chủ nhà', color: '#74c0fc', source: 'Nhiệm vụ', how: 'Hoàn thành nhiệm vụ "An cư lạc nghiệp" — mua nhà riêng ở Thành phố.' },
   title_farmer: { name: 'Nông dân chăm chỉ', color: '#8ce99a', source: 'Thành tựu', how: 'Thu hoạch 100 nông sản.' },

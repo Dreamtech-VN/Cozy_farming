@@ -13,10 +13,10 @@ import { CROPS, CROP_LIST } from '@/data/crops';
 import { ANIMAL_LIST, ANIMALS, BARN_CAPACITY, BARN_UPGRADE_COST } from '@/data/animals';
 import { FISH_LIST, RODS, RARITY_COLOR, RARITY_NAME, FISHES, rodIconRect } from '@/data/fish';
 import { chibiList, chibiPriceXu, CHIBI_PARTS, partStats, equipStats, formatStats } from '@/data/chibi';
-import { SKIN_LIST, SKINS, type SkinDef } from '@/data/skins';
+import { SKIN_LIST, SKINS, SKIN_RANKS, skinRank, skinPower, type SkinDef } from '@/data/skins';
 import { FURNITURE, FURNITURE_LIST, HOUSE_LEVELS, WALLPAPERS, FLOORS } from '@/data/furniture';
 import { SHOPS } from '@/data/shops';
-import { QUESTS, TITLES, ACHIEVEMENTS } from '@/data/quests';
+import { QUESTS, TITLES } from '@/data/quests';
 import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
 import { TOOL_LIST, TOOLS, toolUpgradeAt, toolIconSize } from '@/data/tools';
@@ -36,6 +36,9 @@ import { EQUIP_SLOTS, equipDef, enhanceRate, enhanceCost, dropsOnFail, MAX_ENHAN
 import { equipLevel, pieceStats, combatPower, cpBreakdown, equipPiece, unequipPiece, autoEquip, smash, smashUntil, openChestMany, inherit, canInherit, inheritCost,
   equipStar, upStar, gemsOn, gemCount, socketGem, unsocketGem, mergeGem, addGem, EQUIP_CHESTS, openChest,
   refLines, refLocks, toggleRefLock, refScore, reforge, worn } from '@/systems/equipment';
+import { ACH_CATS, achsOfCat, catTotal, ACH_TOTAL_POINT, BADGES, type AchDef } from '@/data/achievements';
+import { progressOf, isDone, isClaimed, canClaim, claim, claimAll, achPoints, pendingPoints,
+  catPoints, ownedBadges, currentBadge } from '@/systems/achievements';
 import { upgradeTool, upgradeRate, missingMats, failStreak, UPGRADABLE, FAIL_BONUS, FAIL_BONUS_MAX } from '@/systems/toolcraft';
 import type { Reward } from '@/data/quests';
 
@@ -1281,22 +1284,19 @@ export function registerAllPanels() {
           body.append(r);
         }
       } else {
-        for (const a of ACHIEVEMENTS) {
-          const got = S.achievements.includes(a.id);
-          const prog = Math.min(S.stats[a.stat] ?? 0, a.target);
-          const r = h('div', 'row');
-          r.style.opacity = got ? '1' : '.8';
-          r.innerHTML = `
-            <img class="ico-img" src="assets/ui/pack/icon_${got ? 'trophy' : 'quest'}.png">
-            <div class="grow">
-              <div class="t1"></div><div class="t2"></div>
-              <div class="progress" style="margin-top:4px"><div style="width:${Math.round(prog / a.target * 100)}%"></div></div>
-              <div class="t2">${prog}/${a.target} · ${rewardText(a.reward)}</div>
-            </div>`;
-          (r.querySelector('.t1') as HTMLElement).textContent = a.name;
-          (r.querySelector('.t2') as HTMLElement).textContent = a.desc;
-          body.append(r);
-        }
+        // Thành tựu có trang riêng (Thành tựu / Huy hiệu) — ở đây chỉ tóm tắt
+        const box = h('div', 'row');
+        box.innerHTML = `<img class="ico-img" src="assets/ui/pack/icon_trophy.png">
+          <div class="grow"><div class="t1">Điểm thành tựu</div>
+          <div class="t2">${fmt(achPoints())} / ${fmt(ACH_TOTAL_POINT)}`
+          + (pendingPoints() ? ` · đang có ${fmt(pendingPoints())} điểm chờ nhận` : '')
+          + `</div></div>`;
+        box.append(btn('Mở trang Thành tựu', 'gold', () => openPanel('achievement')));
+        body.append(box);
+        const cur = currentBadge();
+        body.append(h('div', 'hint', cur
+          ? `Huy hiệu đang có: ${cur.name} — cộng chỉ số vĩnh viễn cho nhân vật.`
+          : 'Gom đủ điểm thành tựu để mở huy hiệu đầu tiên.'));
       }
     };
     tabs(['Nhiệm vụ', 'Thành tựu'], i => { tab = i; render(); });
@@ -2348,6 +2348,8 @@ export function registerAllPanels() {
     grid?: 'wide' | 'tall';
     /** cụm nút tròn dưới chân nhân vật */
     quick?: HTMLElement;
+    /** dòng tiến độ nhỏ nằm giữa lưới và hàng nút */
+    note?: string;
   }
 
   /** Dải 8 ô trang bị quanh nhân vật — dùng chung cho mọi mục của màn Nhân vật. */
@@ -2470,6 +2472,7 @@ export function registerAllPanels() {
         grid.append(cell);
       }
       panel.append(grid);
+      if (view.note) panel.append(h('div', 'ch-note', view.note));
 
       if (view.foot.length) {
         const ft = h('div', 'ch-foot');
@@ -2575,50 +2578,69 @@ export function registerAllPanels() {
     };
 
     // ---------- mục DANH HIỆU ----------
+    // Dựng theo màn Danh hiệu của GunPow: tab ngang theo nhóm thành tựu, mỗi
+    // dòng là một danh hiệu kèm điều kiện và trạng thái nhận, dưới cùng là
+    // thanh tiến độ điểm + nút mở trang Thành tựu / Huy hiệu.
     const viewTitle = (f: string, redraw: () => void): ChView => {
-      const ids = Object.keys(TITLES);
-      const mine = ids.filter(id => S.player.titles.includes(id));
-      const list = f === 'mine' ? mine : ids;
+      const cat = ACH_CATS.find(c => c.id === f) ?? ACH_CATS[0];
+      const list = achsOfCat(cat.id).filter(a => a.title);
+      const got = catPoints(cat.id), need = catTotal(cat.id);
       return {
         slots: [],
-        filters: [{ key: 'mine', name: 'Đang có', n: mine.length },
-                  { key: 'all', name: 'Tất cả', n: ids.length }],
-        cells: list.map(id => {
-          const t = TITLES[id];
-          const has = S.player.titles.includes(id);
+        filters: ACH_CATS.map(c => ({ key: c.id, name: c.name })),
+        cells: list.map(a => {
+          const t = TITLES[a.title!];
+          const has = S.player.titles.includes(a.title!);
           const wrapc = h('div', 'ch-title-art');
-          wrapc.append(titlePlaque(t.name, has ? t.color : '#9b8a72', 1));
+          wrapc.append(titlePlaque(t?.name ?? a.title!, has ? (t?.color ?? '#ffe066') : '#9b8a72', 1));
           return {
-            name: t.source, art: wrapc, dim: !has, on: S.player.title === id,
-            flag: S.player.title === id ? 'Đang đeo' : undefined,
-            click: () => openTitleDetail(id, redraw)
+            name: a.desc, art: wrapc, dim: !has, on: S.player.title === a.title,
+            flag: S.player.title === a.title ? 'Đang đeo'
+              : canClaim(a) ? 'Nhận được' : undefined,
+            click: () => {
+              if (canClaim(a)) { claim(a.id); redraw(); return; }
+              if (!has) { toast(a.desc, 'quest'); return; }
+              openTitleDetail(a.title!, redraw);
+            }
           };
         }),
-        empty: 'Chưa mở khoá danh hiệu nào.',
+        empty: 'Nhóm này chưa có danh hiệu.',
         grid: 'wide',
-        foot: [btn('Gỡ danh hiệu', '', () => {
-          if (!S.player.title) { toast('Đang không đeo danh hiệu nào.', 'alert'); return; }
-          S.player.title = ''; save(); bus.emit(EV.STATE_CHANGED); redraw();
-        })]
+        note: `【${cat.name}】${fmt(got)}/${fmt(need)}  ·  Chờ nhận: ${fmt(pendingPoints())}`
+          + `  ·  Tổng: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`,
+        foot: [
+          btn('Gỡ danh hiệu', '', () => {
+            if (!S.player.title) { toast('Đang không đeo danh hiệu nào.', 'alert'); return; }
+            S.player.title = ''; save(); bus.emit(EV.STATE_CHANGED); redraw();
+          }),
+          btn('Huy hiệu', 'gold', () => openPanel('achievement'))]
       };
     };
 
-    // ---------- mục SKIN ----------
+    // ---------- mục SKIN (Ảo Hoá) ----------
+    // Theo màn Ảo Hoá của GunPow: lọc Toàn bộ / Đã có, mỗi ô là một bộ kèm
+    // nhãn bậc hiếm, bộ đang mặc có cờ "Đang dùng"; dưới cùng nút mở rương.
     const viewSkin = (f: string, redraw: () => void): ChView => {
       const look = S.player.chibi!;
       const mine = SKIN_LIST.filter(sk => S.skins.includes(sk.id));
       const list = f === 'mine' ? mine : SKIN_LIST;
+      const wearing = SKIN_LIST.find(sk => sk.id === look.skin);
       return {
         slots: [],
-        filters: [{ key: 'mine', name: 'Đang có', n: mine.length },
-                  { key: 'all', name: 'Tất cả', n: SKIN_LIST.length }],
+        filters: [{ key: 'all', name: 'Toàn bộ', n: SKIN_LIST.length },
+                  { key: 'mine', name: 'Đã có', n: mine.length }],
         cells: list.map(sk => {
           const has = S.skins.includes(sk.id);
           const on = look.skin === sk.id;
-          const wrapc = h('div', 'ch-skin-art'); wrapc.append(skinFace(sk, 72));
+          const rk = SKIN_RANKS[skinRank(sk)];
+          const wrapc = h('div', 'ch-skin-art');
+          wrapc.append(skinFace(sk, 72));
+          const tag = h('div', 'sk-rank', `【${rk.name}】`);
+          tag.style.color = rk.color;
+          wrapc.append(tag);
           return {
             name: sk.name, art: wrapc, dim: !has, on,
-            flag: on ? 'Đang mặc' : undefined,
+            flag: on ? 'Đang dùng' : undefined,
             click: () => {
               if (!has) { toast(`${sk.name} chưa sở hữu — mua ở tab Skin của Thời trang Cô Trang.`, 'shop'); return; }
               look.skin = on ? undefined : sk.id;
@@ -2626,12 +2648,19 @@ export function registerAllPanels() {
             }
           };
         }),
-        empty: 'Chưa có skin nào — mua trọn bộ ở Thời trang Cô Trang.',
+        empty: f === 'mine'
+          ? 'Chưa có bộ ảo hoá nào — mở rương hoặc mua ở Thời trang Cô Trang.'
+          : 'Chưa có dữ liệu ảo hoá.',
         grid: 'tall',
-        foot: [btn('Cởi skin', '', () => {
-          if (!look.skin) { toast('Đang không mặc skin nào.', 'alert'); return; }
-          look.skin = undefined; save(); bus.emit(EV.APPEARANCE); redraw();
-        })]
+        note: wearing
+          ? `Đang dùng 【${SKIN_RANKS[skinRank(wearing)].name}】${wearing.name} · Ảo lực +${skinPower(wearing)}`
+          : 'Chưa mặc bộ ảo hoá nào.',
+        foot: [
+          btn('Hủy ảo hoá', '', () => {
+            if (!look.skin) { toast('Đang không mặc bộ nào.', 'alert'); return; }
+            look.skin = undefined; save(); bus.emit(EV.APPEARANCE); redraw();
+          }),
+          btn('Rương ảo hoá', 'green', () => openPanel('fashion'))]
       };
     };
 
@@ -2653,6 +2682,100 @@ export function registerAllPanels() {
     body.append(tot);
     body.append(h('div', 'hint', `Tổng lực chiến hiện tại: ${fmt(combatPower())}`));
   }
+
+  // ================= Trang Thành tựu / Huy hiệu =================
+  // Bấm nút "Huy hiệu" ở mục Danh hiệu thì mở trang này: 2 tab.
+  //   Thành tựu — chia nhóm, mỗi dòng có thanh tiến độ và nút Nhận (điểm ◆).
+  //   Huy hiệu  — mở dần theo TỔNG điểm thành tựu, mỗi cái cộng chỉ số.
+  registerPanel('achievement', () => {
+    let tab: 'ach' | 'badge' = 'ach';
+    let cat = ACH_CATS[0].id;
+    const { body } = openWindow('Thành tựu', { page: true });
+
+    const render = () => {
+      body.innerHTML = '';
+      const page2 = h('div', 'av-page');
+
+      const tabs = h('div', 'av-tabs');
+      for (const [k, nm] of [['ach', 'Thành tựu'], ['badge', 'Huy hiệu']] as ['ach' | 'badge', string][]) {
+        const t = h('button', `av-tab ${tab === k ? 'on' : ''}`, nm);
+        t.onclick = () => { sfx.click(); tab = k; render(); };
+        tabs.append(t);
+      }
+      page2.append(tabs);
+
+      // thanh tổng: điểm đã nhận / tổng điểm + huy hiệu đang có
+      const cur = currentBadge();
+      const head = h('div', 'av-sum');
+      const bar = h('div', 'av-bar');
+      const fill = h('div', 'av-bar-f');
+      fill.style.width = `${Math.min(100, achPoints() / ACH_TOTAL_POINT * 100)}%`;
+      bar.append(fill, h('div', 'av-bar-t', `${fmt(achPoints())} / ${fmt(ACH_TOTAL_POINT)} điểm`));
+      head.append(h('div', 'av-sum-k', cur ? cur.name : 'Chưa có huy hiệu'), bar);
+      if (pendingPoints() > 0) head.append(btn(`Nhận tất cả (+${fmt(pendingPoints())})`, 'gold',
+        () => { claimAll(); render(); }));
+      page2.append(head);
+
+      if (tab === 'ach') {
+        const cr = h('div', 'av-cats');
+        for (const c of ACH_CATS) {
+          const t = h('button', `av-cat ${cat === c.id ? 'on' : ''}`, c.name);
+          const p = achsOfCat(c.id).filter(a => canClaim(a)).length;
+          if (p) t.append(h('span', 'av-dot', `${p}`));
+          t.onclick = () => { sfx.click(); cat = c.id; render(); };
+          cr.append(t);
+        }
+        page2.append(cr);
+
+        const list = h('div', 'av-list');
+        for (const a of achsOfCat(cat)) list.append(achRow(a, render));
+        page2.append(list);
+      } else {
+        const list = h('div', 'av-badges');
+        for (const b of BADGES) {
+          const has = achPoints() >= b.need;
+          const row = h('div', `av-badge ${has ? '' : 'locked'}`);
+          const art = h('div', 'av-badge-art');
+          art.append(spr(`assets/equip/${b.icon}.png`, 0, 0, 60, 60, 40));
+          const info = h('div', 'av-badge-i');
+          const st = STAT_KEYS.filter(k => b.stats[k]).map(k => `${STAT_NAMES[k]} +${b.stats[k]}`).join(' · ');
+          info.append(h('div', 'av-badge-n', b.name), h('div', 'av-badge-s', st));
+          const right = h('div', 'av-badge-r',
+            has ? 'Đã mở' : `Cần ${fmt(b.need)} điểm`);
+          row.append(art, info, right);
+          list.append(row);
+        }
+        page2.append(list, h('div', 'hint',
+          'Huy hiệu mở theo tổng điểm thành tựu và cộng chỉ số vĩnh viễn — đã mở cái nào thì cộng dồn hết.'));
+      }
+      body.append(page2);
+    };
+
+    const achRow = (a: AchDef, redraw: () => void) => {
+      const cur2 = progressOf(a), done = isDone(a), taken = isClaimed(a);
+      const row = h('div', `av-row ${taken ? 'done' : ''}`);
+      const info = h('div', 'av-row-i');
+      info.append(h('div', 'av-row-n', a.name), h('div', 'av-row-d', a.desc));
+      const bar = h('div', 'av-row-bar');
+      const f = h('div', 'av-row-f');
+      f.style.width = `${Math.min(100, cur2 / a.target * 100)}%`;
+      bar.append(f, h('div', 'av-row-t', `${fmt(cur2)}/${fmt(a.target)}`));
+      info.append(bar);
+      const right = h('div', 'av-row-r');
+      right.append(h('div', 'av-pt', `+${fmt(a.point)}`));
+      if (a.title) {
+        const t = TITLES[a.title];
+        right.append(h('div', 'av-ti', `【${t?.name ?? a.title}】`));
+      }
+      if (taken) right.append(h('div', 'av-got', 'Đã nhận'));
+      else if (done) right.append(btn('Nhận', 'gold', () => { claim(a.id); redraw(); }));
+      else right.append(h('div', 'av-wait', 'Chưa đạt'));
+      row.append(info, right);
+      return row;
+    };
+
+    render();
+  });
 
   // Thẻ chi tiết một món trang bị — mở từ ô trên người hoặc ô trong lưới
   function equipDetail(d: EquipDef, redraw: () => void) {

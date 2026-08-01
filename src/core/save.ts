@@ -36,6 +36,7 @@ export function defaultState(): GameState {
     gemBag: {},
     equipRef: {},
     equipRefLock: {},
+    achClaimed: {},
     inventory: {},
     wardrobe: ['hair:bob', 'clothes:basic'],
     chibiWardrobe: [],
@@ -162,6 +163,7 @@ export function load(): boolean {
     if (!S.gemBag) S.gemBag = {};
     if (!S.equipRef) S.equipRef = {};
     if (!S.equipRefLock) S.equipRefLock = {};
+    if (!S.achClaimed) S.achClaimed = {};
     if (S.wallet.farmCoins === undefined) S.wallet.farmCoins = 0;
     // save cũ để đồ cầm tay trong túi -> chuyển vào tủ quần áo (như Lttt)
     migrateHandItems(S.inventory, S.chibiWardrobe);

@@ -62,17 +62,8 @@ function onStat(key: string) {
       changed = true;
     }
   }
-  // thành tựu (tự động theo dõi tất cả)
-  for (const a of ACHIEVEMENTS) {
-    if (a.stat !== key || S.achievements.includes(a.id)) continue;
-    if ((S.stats[key] ?? 0) >= a.target) {
-      S.achievements.push(a.id);
-      grantReward(a.reward);
-      toast(`Thành tựu: ${a.name}!`, 'rank');
-      sfx.win();
-      changed = true;
-    }
-  }
+  // Thành tựu KHÔNG tự cộng thưởng nữa — bộ mới ở systems/achievements.ts,
+  // người chơi tự bấm Nhận ở trang Thành tựu (đúng cách GunPow làm).
   if (changed) { save(); }
   bus.emit(EV.QUEST);
 }

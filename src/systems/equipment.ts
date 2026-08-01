@@ -11,6 +11,7 @@ import {
   type EquipSlot, type EquipDef
 } from '@/data/equip';
 import { item } from '@/data/items';
+import { badgeStats } from './achievements';
 
 // ===== Trang bị: mặc / cởi / đập =====
 // S.equip     : ô nào đang đeo món nào  { ring: 'ring_003', ... }
@@ -76,9 +77,10 @@ export function combatPower(): number {
   const look = S.player.chibi;
   const cloth = look ? equipStats(look) : zeroStats();
   const eq = equipTotal();
+  const bd = badgeStats();
   let cp = 0;
   for (const k of STAT_KEYS) {
-    cp += (S.player.charStats[k] + cloth[k] + eq[k]) * CP_WEIGHT[k];
+    cp += (S.player.charStats[k] + cloth[k] + eq[k] + bd[k]) * CP_WEIGHT[k];
   }
   cp += S.player.level * 25;
   // mỗi cấp đập cộng thêm một ít cho thấy công đập không phí
@@ -96,6 +98,7 @@ export function cpBreakdown() {
     base: Math.round(w(S.player.charStats)),
     clothes: Math.round(w(cloth)),
     equip: Math.round(w(eq)),
+    badge: Math.round(w(badgeStats())),
     level: S.player.level * 25,
     enhance: worn().reduce((n, p) => n + p.lv * 12 + equipStar(p.def.id) * 40, 0)
   };
