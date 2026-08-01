@@ -10,22 +10,57 @@ import json, math, os, sys
 from PIL import Image
 
 
-def world_bones(data):
-    """Ma trận [a, b, c, d, tx, ty] của từng xương ở tư thế gốc."""
+def anim_pose(data, anim_name):
+    """Giá trị khung hình ĐẦU TIÊN của một animation, theo từng xương.
+
+    Nhiều bộ Spine để vũ khí / cánh tay đúng chỗ trong animation đứng yên chứ
+    không phải ở tư thế gốc, nên dựng bằng tư thế gốc là thấy kiếm bay lơ lửng.
+    Lấy khung 0 của animation đắp lên tư thế gốc thì mới đúng vị trí.
+    """
+    anims = data.get('animations') or {}
+    a = anims.get(anim_name)
+    if a is None:
+        for k in ('holdon', 'idle', 'stand', 'wait'):
+            if k in anims:
+                a = anims[k]
+                break
+    if a is None and anims:
+        a = anims[next(iter(anims))]
+    out = {}
+    for name, tl in (a or {}).get('bones', {}).items():
+        d = {}
+        for key, fields in (('rotate', ('angle',)), ('translate', ('x', 'y')),
+                            ('scale', ('x', 'y'))):
+            fr = tl.get(key)
+            if not fr:
+                continue
+            f0 = min(fr, key=lambda k: k.get('time', 0))
+            for f in fields:
+                d[f'{key}.{f}'] = f0.get(f, 0 if key != 'scale' else 1)
+        out[name] = d
+    return out
+
+
+def world_bones(data, pose=None):
+    """Ma trận [a, b, c, d, tx, ty] của từng xương."""
+    pose = pose or {}
     out = {}
     for b in data['bones']:
-        rot = math.radians(b.get('rotation', 0))
-        sx, sy = b.get('scaleX', 1), b.get('scaleY', 1)
-        x, y = b.get('x', 0), b.get('y', 0)
+        p = pose.get(b['name'], {})
+        rot = math.radians(b.get('rotation', 0) + p.get('rotate.angle', 0))
+        sx = b.get('scaleX', 1) * p.get('scale.x', 1)
+        sy = b.get('scaleY', 1) * p.get('scale.y', 1)
+        x = b.get('x', 0) + p.get('translate.x', 0)
+        y = b.get('y', 0) + p.get('translate.y', 0)
         la = math.cos(rot) * sx
         lb = math.sin(rot) * sx
         lc = -math.sin(rot) * sy
         ld = math.cos(rot) * sy
-        p = out.get(b.get('parent'))
-        if p is None:
+        pm = out.get(b.get('parent'))
+        if pm is None:
             out[b['name']] = [la, lb, lc, ld, x, y]
         else:
-            pa, pb, pc, pd, ptx, pty = p
+            pa, pb, pc, pd, ptx, pty = pm
             out[b['name']] = [
                 pa * la + pc * lb, pb * la + pd * lb,
                 pa * lc + pc * ld, pb * lc + pd * ld,
@@ -116,9 +151,9 @@ def draw_mesh(canvas, im, reg, pts, PAD):
         canvas.paste(piece, (x0, y0), mask)
 
 
-def compose(folder, name, max_h=None):
+def compose(folder, name, max_h=None, anim='holdon'):
     data = json.load(open(os.path.join(folder, name + '.json'), encoding='utf-8'))
-    bones = world_bones(data)
+    bones = world_bones(data, anim_pose(data, anim))
     bones['_order'] = data['bones']
     PAD = 900
     canvas = Image.new('RGBA', (PAD * 2, PAD * 2), (0, 0, 0, 0))
