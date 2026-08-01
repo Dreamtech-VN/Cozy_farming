@@ -44,13 +44,11 @@ export function openWindow(title: string, opts: WinOpts = {}): { body: HTMLEleme
   const win = h('div', `win ${opts.page ? 'win-page' : opts.size === 'small' ? 'small' : opts.size === 'large' ? 'large' : ''}`);
   const head = h('div', 'win-head');
   const titleEl = h('div', '', title);
-  // Trang đầy đủ: bảng tên có hoa văn xoắn hai bên, cắt từ asset gốc GunPow
-  // (common_icon_sgxtpzk) — trước chỉ là chữ trần nên trông trống trải.
+  // Trang đầy đủ: tên đặt trên tấm bảng kính bo tròn, không thêm hoa văn hai bên
   if (opts.page) {
     titleEl.className = 'win-title';
-    const txt = h('span', 'win-title-t', title);
     titleEl.textContent = '';
-    titleEl.append(h('i', 'win-orn l'), txt, h('i', 'win-orn r'));
+    titleEl.append(h('span', 'win-title-t', title));
   }
   // trang đầy đủ dùng nút quay lại ở góc trái, popup dùng dấu X góc phải
   const closeBtn = h('button', opts.page ? 'win-back' : 'win-close', opts.page ? '‹ Quay lại' : '✕');
