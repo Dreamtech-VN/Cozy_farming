@@ -992,17 +992,17 @@ input.ui-input, select.ui-input {
    điện thoại thiếu chiều cao nên bỏ dải tab ngang trên đầu cho nội dung rộng ra */
 .wr-tabs {
   flex: none; width: 92px; display: flex; flex-direction: column; gap: 8px;
-  padding: 34px 0 14px 8px; justify-content: flex-start; overflow: hidden;
+  padding: 34px 10px 14px 0; justify-content: flex-start; overflow: hidden;
   background: rgba(0, 0, 0, .12); border-left: 1px solid rgba(255, 255, 255, .18);
 }
 /* dải tab bám mép TRÁI nên chỉ bo tròn phía PHẢI — mép trái phải phẳng để
    ăn liền vào thành khung, bo cả 4 góc trông như đang trôi giữa trời */
 .wr-tab {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-  cursor: pointer; font-family: inherit; padding: 7px 4px 8px 6px; width: 100%;
+  cursor: pointer; font-family: inherit; padding: 7px 6px 8px 4px; width: 100%;
   font-size: 10px; font-weight: 900; color: #e7f0dd;
   background: rgba(255, 255, 255, .18); border: 1px solid rgba(255, 255, 255, .26);
-  border-right: none; border-radius: 14px 0 0 14px; text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+  border-left: none; border-radius: 0 14px 14px 0; text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
 }
 .wr-tab span { max-width: 100%; white-space: normal; line-height: 1.15; text-align: center; }
 .wr-tab img { width: 24px; height: 22px; object-fit: contain; filter: saturate(.4) opacity(.75); }
@@ -1802,7 +1802,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   .od-ing { width: 58px; padding: 6px 3px 9px; }
   .od-ing-art { height: 34px; }
   .wd-slot-col { width: 40px; }
-  .wr-tabs { width: 76px; padding: 26px 0 10px 6px; }
+  .wr-tabs { width: 76px; padding: 26px 8px 10px 0; }
   .wr-tab { font-size: 9px; padding: 5px 3px 6px; }
 }
 
@@ -2389,7 +2389,7 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
    (mép trái phẳng để ăn liền vào cột danh sách bên cạnh). */
 .gp-rail {
   flex: 0 0 88px; display: flex; flex-direction: column; gap: 5px;
-  overflow-y: auto; padding-top: 26px;
+  overflow-y: auto; padding: 26px 8px 0 0;
 }
 .gp-rt {
   flex: none; padding: 8px 4px 9px 6px; border-radius: 0 10px 10px 0; cursor: pointer;
@@ -2726,16 +2726,16 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .av-prog { font-size: 12px; font-weight: 900; color: rgba(255, 255, 255, .7); }
 
 /* dải mục dọc bên phải, bo góc quay sang trái cho ăn vào thành */
-.av-rail { flex: 0 0 84px; display: flex; flex-direction: column; gap: 5px; padding-top: 10px; }
+.av-rail { flex: 0 0 84px; display: flex; flex-direction: column; gap: 5px; padding: 10px 8px 0 0; }
 .av-rt {
-  position: relative; flex: none; padding: 9px 4px 10px 6px; cursor: pointer; font-family: inherit;
-  border-radius: 12px 0 0 12px; text-align: center;
+  position: relative; flex: none; padding: 9px 6px 10px 4px; cursor: pointer; font-family: inherit;
+  border-radius: 0 12px 12px 0; text-align: center;
   font-size: 11.5px; font-weight: 900; color: #e7f0dd;
-  background: rgba(255, 255, 255, .13); border: 1px solid rgba(255, 255, 255, .24); border-right: none;
+  background: rgba(255, 255, 255, .13); border: 1px solid rgba(255, 255, 255, .24); border-left: none;
 }
 .av-rt.on { background: linear-gradient(#ffe066, #f0a318); border-color: #ffe9a8; color: #4a3005; }
 .av-rdot {
-  position: absolute; right: 4px; top: 4px; width: 8px; height: 8px; border-radius: 50%;
+  position: absolute; left: 4px; top: 4px; width: 8px; height: 8px; border-radius: 50%;
   background: #e8503a; border: 1px solid #fff;
 }
 

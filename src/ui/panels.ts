@@ -2349,6 +2349,8 @@ export function registerAllPanels() {
     quick?: HTMLElement;
     /** dòng tiến độ nhỏ nằm giữa lưới và hàng nút */
     note?: string;
+    /** true = khung trái chỉ có nhân vật, không kèm dải ô trang bị */
+    bare?: boolean;
   }
 
   /** Dải 8 ô trang bị quanh nhân vật — dùng chung cho mọi mục của màn Nhân vật. */
@@ -2384,9 +2386,9 @@ export function registerAllPanels() {
         filter = view.filters[0]?.key ?? '';
         view = build();
       }
-      // Dải ô trang bị luôn nằm hai bên nhân vật ở MỌI mục — đổi mục chỉ đổi
-      // nội dung khung phải, giống GunPow.
-      const slots = view.slots.length ? view.slots : equipSlotStrip(render);
+      // Trang bị / Tủ đồ có dải ô hai bên nhân vật; Danh hiệu và Skin thì chỉ
+      // để nhân vật cho rộng, không cần ô trang bị.
+      const slots = view.bare ? [] : (view.slots.length ? view.slots : equipSlotStrip(render));
 
       const page = h('div', 'ch-page');
 
@@ -2426,7 +2428,8 @@ export function registerAllPanels() {
       });
       for (let i = colR.children.length; i < half; i++) colR.append(h('div', 'ch-slot pad'));
       if (view.quick) doll.append(view.quick);
-      figure.append(colL, doll, colR);
+      if (slots.length) figure.append(colL, doll, colR);
+      else figure.append(doll);
       side.append(figure);
 
       const b2 = cpBreakdown();
@@ -2605,6 +2608,7 @@ export function registerAllPanels() {
         }),
         empty: 'Nhóm này chưa có danh hiệu.',
         grid: 'wide',
+        bare: true,
         note: `【${cat.name}】${fmt(got)}/${fmt(need)}  ·  Chờ nhận: ${fmt(pendingPoints())}`
           + `  ·  Tổng: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`,
         foot: [
@@ -2651,6 +2655,7 @@ export function registerAllPanels() {
           ? 'Chưa có bộ ảo hoá nào — mở rương hoặc mua ở Thời trang Cô Trang.'
           : 'Chưa có dữ liệu ảo hoá.',
         grid: 'tall',
+        bare: true,
         // skin chỉ để đẹp, không cộng chỉ số
         note: wearing
           ? `Đang dùng 【${SKIN_RANKS[skinRank(wearing)].name}】${wearing.name}`
@@ -2691,7 +2696,7 @@ export function registerAllPanels() {
   //     sách bên phải, mỗi dòng có điều kiện, danh hiệu thưởng và nút Nhận.
   //   · Tab Huy hiệu: 3 huy hiệu nâng cấp bằng điểm thành tựu.
   registerPanel('achievement', (arg) => {
-    let tab = ((arg as { tab?: string })?.tab ?? 'ach') as 'ach' | 'title' | 'badge';
+    let tab = ((arg as { tab?: string })?.tab ?? 'ach') as 'ach' | 'badge';
     let cat = ACH_CATS[0].id;
     const { body } = openWindow('Thành tựu', { page: true });
 
@@ -2708,20 +2713,17 @@ export function registerAllPanels() {
       top.append(h('div', 'av-prog', `Tiến độ: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`));
       page2.append(top);
 
-      if (tab === 'ach') page2.append(bodyAch());
-      else if (tab === 'title') page2.append(bodyTitle());
-      else page2.append(bodyBadge());
+      page2.append(tab === 'ach' ? bodyAch() : bodyBadge());
 
       // ---- dải mục dọc bên phải ----
       const rail = h('div', 'av-rail');
-      const mk = (k: 'ach' | 'title' | 'badge', nm: string, dot: boolean) => {
+      const mk = (k: 'ach' | 'badge', nm: string, dot: boolean) => {
         const t = h('button', `av-rt ${tab === k ? 'on' : ''}`, nm);
         if (dot) t.append(h('i', 'av-rdot'));
         t.onclick = () => { sfx.click(); tab = k; render(); };
         rail.append(t);
       };
       mk('ach', 'Thành tựu', pendingPoints() > 0);
-      mk('title', 'Danh hiệu', false);
       mk('badge', 'Huy hiệu', BADGES.some(b => achLeft() >= badgeCost(badgeLv(b.id)) && badgeLv(b.id) < BADGE_MAX));
 
       wrap.append(page2, rail);
@@ -2797,40 +2799,6 @@ export function registerAllPanels() {
       else right.append(h('div', 'av-wait', 'Chưa đạt'));
       row.append(info, right);
       return row;
-    };
-
-    // ---- tab Danh hiệu ----
-    const bodyTitle = () => {
-      const box = h('div', 'av-two');
-      const cats = h('div', 'av-cats');
-      for (const c of ACH_CATS) {
-        const t = h('button', `av-cat ${cat === c.id ? 'on' : ''}`);
-        t.append(h('div', 'av-cat-n', c.name));
-        t.onclick = () => { sfx.click(); cat = c.id; render(); };
-        cats.append(t);
-      }
-      const right = h('div', 'av-side');
-      const grid = h('div', 'av-tgrid');
-      const list = achsOfCat(cat).filter(a => a.title);
-      if (!list.length) grid.append(h('div', 'hint', 'Nhóm này chưa có danh hiệu.'));
-      for (const a of list) {
-        const t = TITLES[a.title!];
-        const has = S.player.titles.includes(a.title!);
-        const on = S.player.title === a.title;
-        const c = h('button', `av-tcell ${on ? 'on' : ''} ${has ? '' : 'locked'}`);
-        c.append(titlePlaque(t?.name ?? a.title!, has ? (t?.color ?? '#ffe066') : '#9b8a72', 1));
-        c.append(h('div', 'av-tdesc', a.desc));
-        if (on) c.append(h('div', 'ch-flag', 'Đang đeo'));
-        c.onclick = () => {
-          if (!has) { toast(a.desc, 'quest'); return; }
-          S.player.title = on ? '' : a.title!;
-          save(); bus.emit(EV.STATE_CHANGED); render();
-        };
-        grid.append(c);
-      }
-      right.append(grid, h('div', 'hint', 'Danh hiệu chỉ để khoe, không cộng chỉ số.'));
-      box.append(cats, right);
-      return box;
     };
 
     // ---- tab Huy hiệu ----
