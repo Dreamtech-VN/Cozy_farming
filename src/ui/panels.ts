@@ -356,8 +356,9 @@ export function registerAllPanels() {
       const o = orderList().find(x => x.id === sel);
       if (!o) {
         const e = h('div', 'od-empty');
-        const im = document.createElement('img'); im.src = 'assets/ui/inv/note.png';
-        e.append(im, h('div', '', 'Chọn một tờ đơn bên trái để xem chi tiết và giao hàng.'));
+        // khung rỗng vẽ bằng CSS cho hợp nền kính (trước dùng ảnh tờ giấy trắng
+        // của pack, nổi bần bật giữa bảng kính)
+        e.append(h('div', 'od-empty-art'), h('div', '', 'Chọn một tờ đơn bên trái để xem chi tiết và giao hàng.'));
         sideCol.append(e);
         return;
       }
@@ -1730,7 +1731,8 @@ export function registerAllPanels() {
         (i < Math.ceil(SLOTS.length / 2) ? colL : colR).append(cell);
       });
       const mid = h('div', 'wd-char');
-      mid.append(charFace(look, 200));
+      // ảnh nhân vật vừa khung: to hơn thì tràn xuống đè lên thanh chỉ số
+      mid.append(charFace(look, 116));
       const nameRow = h('div', 'wd-name-row');
       const lv = h('div', 'wd-lv'); lv.textContent = `${S.player.level}`;
       const nm = h('div', 'wd-name'); nm.textContent = S.player.name;
