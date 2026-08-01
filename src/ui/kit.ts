@@ -421,3 +421,34 @@ export function charHeadOnly(look: import('@/data/chibi').ChibiLook | undefined,
   }
   return wrap;
 }
+
+// ===== Hiệu ứng lò rèn =====
+// Bắn hạt sáng quanh món đồ khi cường hoá / tăng sao / khảm đá / kế thừa /
+// tẩy luyện. Thuần CSS: mỗi hạt là một span mang góc + quãng bay riêng, chạy
+// xong thì lớp hiệu ứng tự gỡ nên không rác DOM.
+export type FxKind = 'good' | 'bad' | 'star' | 'gem' | 'wash' | 'inherit';
+
+export function burstFx(host: HTMLElement, kind: FxKind = 'good', n = 16): void {
+  if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+  const layer = h('div', `fx-layer fx-${kind}`);
+  for (let i = 0; i < n; i++) {
+    const p = h('span', 'fx-p');
+    const a = (i / n) * 360 + Math.random() * 18;
+    p.style.setProperty('--a', `${a}deg`);
+    p.style.setProperty('--d', `${38 + Math.random() * 42}px`);
+    p.style.animationDelay = `${Math.random() * 0.12}s`;
+    layer.append(p);
+  }
+  layer.append(h('div', 'fx-ring2'), h('div', 'fx-flash'));
+  host.append(layer);
+  host.classList.add(kind === 'bad' ? 'fx-shake' : 'fx-pop');
+  setTimeout(() => { layer.remove(); host.classList.remove('fx-shake', 'fx-pop'); }, 900);
+}
+
+/** Chữ bay lên giữa khung — "+1", "THÀNH CÔNG", "HỎNG"… */
+export function floatText(host: HTMLElement, text: string, cls = ''): void {
+  if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+  const t = h('div', `fx-text ${cls}`, text);
+  host.append(t);
+  setTimeout(() => t.remove(), 1100);
+}

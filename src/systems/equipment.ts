@@ -6,7 +6,9 @@ import { equipStats } from '@/data/chibi';
 import {
   EQUIP_SLOTS, EQUIP_LIST, SLOT_OF, equipDef, enhanceMul, enhanceRate, enhanceCost,
   dropsOnFail, MAX_ENHANCE, ENHANCE_STONE, MAX_STAR, starMul, starCost, starRate,
-  gemDef, gemMergeTo, gemPower, GEM_MERGE_N, type EquipSlot, type EquipDef
+  gemDef, gemMergeTo, gemPower, GEM_MERGE_N,
+  REFORGE_STONE, REFORGE_LINES, reforgeMax, reforgePower, reforgeCost, rollReforgeLine,
+  type EquipSlot, type EquipDef
 } from '@/data/equip';
 import { item } from '@/data/items';
 
@@ -36,7 +38,9 @@ export function worn(): WornPiece[] {
 }
 
 /** Chỉ số của một món ở cấp đập hiện tại. */
-export function pieceStats(def: EquipDef, lv: number, star = 0, gems: string[] = []): CharStats {
+export function pieceStats(
+  def: EquipDef, lv: number, star = 0, gems: string[] = [], ref?: number[]
+): CharStats {
   const s = SLOT_OF[def.slot];
   const out = zeroStats();
   const m = enhanceMul(lv) * starMul(star);
@@ -46,6 +50,8 @@ export function pieceStats(def: EquipDef, lv: number, star = 0, gems: string[] =
     const g = gemDef(gid);
     if (g) out[g.stat] += gemPower(g);
   }
+  const rl = ref ?? refLines(def.id);
+  REFORGE_LINES.forEach((k, i) => { out[k] += reforgePower(def, rl[i] ?? 0); });
   return out;
 }
 
@@ -395,4 +401,66 @@ export function inherit(fromId: string, toId: string): boolean {
   save(); bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED); sfx.coin();
   toast(`Đã kế thừa sang ${t.name}.`, 'rank');
   return true;
+}
+
+// ===== Tẩy luyện =====
+// Mỗi món có 5 dòng phụ (sức mạnh / thể lực / nhanh nhẹn / trí tuệ / quyến rũ).
+// Một lần tẩy gieo lại TẤT CẢ dòng chưa khoá; dòng đã khoá giữ nguyên nhưng
+// mỗi ổ khoá làm tiền tẩy đắt thêm 50%. Đúng logic GunPow, chỉ khác là bên mình
+// trả bằng xu thay vì mua khoá riêng.
+export function refLines(id: string): number[] {
+  if (!S.equipRef) S.equipRef = {};
+  if (!S.equipRef[id]) S.equipRef[id] = REFORGE_LINES.map(() => 0);
+  return S.equipRef[id];
+}
+
+export function refLocks(id: string): boolean[] {
+  if (!S.equipRefLock) S.equipRefLock = {};
+  if (!S.equipRefLock[id]) S.equipRefLock[id] = REFORGE_LINES.map(() => false);
+  return S.equipRefLock[id];
+}
+
+/** Bật/tắt khoá một dòng — tối đa khoá 4 dòng, phải chừa ít nhất một dòng để gieo. */
+export function toggleRefLock(id: string, i: number): boolean {
+  const lk = refLocks(id);
+  if (!lk[i] && lk.filter(Boolean).length >= REFORGE_LINES.length - 1) {
+    toast('Phải chừa ít nhất một dòng để tẩy.', 'alert'); sfx.error(); return false;
+  }
+  lk[i] = !lk[i];
+  save(); bus.emit(EV.STATE_CHANGED);
+  return true;
+}
+
+/** Tổng điểm chỉ số 5 dòng đang có — để so trước/sau cho dễ nhìn. */
+export function refScore(def: EquipDef, lines: number[]): number {
+  return lines.reduce((n, lv) => n + reforgePower(def, lv), 0);
+}
+
+export interface ReforgeResult { ok: boolean; before?: number[]; after?: number[] }
+
+export function reforge(id: string): ReforgeResult {
+  const def = equipDef(id);
+  if (!def) return { ok: false };
+  const lk = refLocks(id);
+  const c = reforgeCost(def, lk.filter(Boolean).length);
+  if (itemCount(REFORGE_STONE) < c.stones) {
+    toast('Thiếu Tẩy Luyện Thạch.', 'alert'); sfx.error(); return { ok: false };
+  }
+  if (S.wallet.coins < c.coins) {
+    toast(`Cần ${c.coins} xu.`, 'coin'); sfx.error(); return { ok: false };
+  }
+  removeItem(REFORGE_STONE, c.stones);
+  S.wallet.coins -= c.coins;
+
+  const before = refLines(id).slice();
+  const max = reforgeMax(def);
+  const after = before.map((v, i) => (lk[i] ? v : rollReforgeLine(max)));
+  S.equipRef[id] = after;
+
+  addStat('equip_reforged');
+  save(); bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED);
+  const d = refScore(def, after) - refScore(def, before);
+  if (d > 0) { sfx.win(); toast(`Tẩy luyện đẹp! +${d} điểm chỉ số.`, 'rank'); }
+  else { sfx.click(); toast(d < 0 ? `Lần này xấu hơn ${-d} điểm.` : 'Không đổi được gì.', 'alert'); }
+  return { ok: true, before, after };
 }

@@ -68,6 +68,9 @@ defItem({ id: 'star_stone_1', name: 'Sơ Cấp Thăng Tinh Thạch', kind: 'mate
 defItem({ id: 'star_stone_2', name: 'Trung Cấp Thăng Tinh Thạch', kind: 'material', icon: '', sprite: { url: 'assets/equip/stone_014.png', sx: 0, sy: 0, sw: 57, sh: 60 }, sell: 120, buy: 1200, desc: 'Nâng sao trang bị (sao 3-4).' });
 defItem({ id: 'star_stone_3', name: 'Cao Cấp Thăng Tinh Thạch', kind: 'material', icon: '', sprite: { url: 'assets/equip/stone_024.png', sx: 0, sy: 0, sw: 57, sh: 57 }, sell: 300, buy: 3000, desc: 'Nâng sao trang bị (sao 5).' });
 
+// ---- Đá tẩy luyện: gieo lại 5 dòng phụ của trang bị ----
+defItem({ id: 'ref_stone', name: 'Tẩy Luyện Thạch', kind: 'material', icon: '', sprite: { url: 'assets/equip/stone_066.png', sx: 0, sy: 0, sw: 59, sh: 64 }, sell: 60, buy: 600, desc: 'Gieo lại các dòng tẩy luyện của trang bị.' });
+
 // ---- Mồi câu ----
 // Đúng 3 loại mồi của Lttt (bảng `items` trong avatar_2x.sql):
 //   443 'mồi cơm'   giá 5 xu

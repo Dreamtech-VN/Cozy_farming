@@ -123,6 +123,36 @@ export function starRate(star: number): number {
   return [1, 0.85, 0.65, 0.45, 0.3][Math.min(4, star)];
 }
 
+// ===== Tẩy luyện (rửa lại dòng phụ kiểu GunPow) =====
+// Ngoài chỉ số gốc, mỗi món còn 5 DÒNG TẨY LUYỆN — mỗi dòng là một loại chỉ số
+// với một cấp từ 0 đến trần của món. Tẩy luyện gieo lại toàn bộ dòng chưa khoá;
+// muốn giữ dòng đẹp thì khoá nó lại, mỗi ổ khoá tốn thêm một "Khoá Tẩy Luyện".
+export const REFORGE_STONE = 'ref_stone';
+export const REFORGE_LOCK = 'ref_lock';
+export const REFORGE_LINES: StatKey[] = ['strength', 'health', 'agility', 'intellect', 'charm'];
+
+/** Cấp cao nhất một dòng tẩy luyện của món này có thể gieo ra. */
+export function reforgeMax(def: EquipDef): number {
+  return Math.max(2, Math.min(10, 1 + Math.floor(def.tier / 2)));
+}
+/** Một dòng cấp `lv` cộng bao nhiêu điểm chỉ số. */
+export function reforgePower(def: EquipDef, lv: number): number {
+  return lv <= 0 ? 0 : Math.round(lv * (1 + def.tier * 0.25));
+}
+/** Xu phải trả cho một lần tẩy, tính cả tiền khoá. */
+export function reforgeCost(def: EquipDef, locks: number) {
+  return {
+    coins: Math.round((def.price * 0.12 + 300) * (1 + locks * 0.5) / 10) * 10,
+    stones: 1,
+    locks
+  };
+}
+/** Gieo một dòng: cấp thấp dễ ra, cấp trần hiếm. */
+export function rollReforgeLine(max: number): number {
+  const r = Math.random();
+  return Math.max(0, Math.min(max, Math.floor(max * (1 - Math.pow(r, 0.55))) + (r < 0.04 ? 1 : 0)));
+}
+
 // ===== Đá quý (gắn đá) =====
 export interface GemDef {
   id: string; lv: number; stat: StatKey; name: string; icon: string; w: number; h: number;
