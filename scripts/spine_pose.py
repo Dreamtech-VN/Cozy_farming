@@ -41,13 +41,122 @@ def anim_pose(data, anim_name):
     return out
 
 
-def world_bones(data, pose=None):
+def anim_slots(data, anim_name):
+    """Slot nào dùng mảnh nào ở khung 0 của animation đứng.
+
+    Một bộ thường có sẵn vài kiểu đầu / bàn tay trong cùng skin; animation mới
+    là chỗ quyết định lấy cái nào. Không đọc timeline này thì các mảnh chồng
+    lên nhau -> thừa mặt, thừa tay.
+    """
+    anims = data.get('animations') or {}
+    a = anims.get(anim_name)
+    if a is None:
+        for k in ('holdon', 'idle', 'stand', 'wait'):
+            if k in anims:
+                a = anims[k]
+                break
+    if a is None and anims:
+        a = anims[next(iter(anims))]
+    out = {}
+    for name, tl in (a or {}).get('slots', {}).items():
+        fr = tl.get('attachment')
+        if not fr:
+            continue
+        f0 = min(fr, key=lambda k: k.get('time', 0))
+        out[name] = f0.get('name')          # None = ẩn slot
+    return out
+
+
+
+def _local_of(data):
+    """Bảng khai báo xương theo tên, và danh sách con của mỗi xương."""
+    by = {b['name']: b for b in data['bones']}
+    return by
+
+
+def solve_ik(data, locals_, order, ik_list, pose):
+    """Giải IK 2 xương (Spine) cho chân/tay.
+
+    Pack này dùng IK cho hai chân (target tên jiao_*). Không giải thì bàn chân
+    nằm sai chỗ vì animation chỉ dời xương đích chứ không xoay đùi/cẳng.
+    Trả về dict {tên xương: góc xoay cục bộ mới}.
+    """
+    fix = {}
+    for c in sorted(ik_list, key=lambda k: k.get('order', 0)):
+        chain = c.get('bones') or []
+        if len(chain) != 2:
+            continue
+        pname, cname = chain
+        world = world_bones(data, pose, fix)
+        if pname not in world or cname not in world or c['target'] not in world:
+            continue
+        pb, cb = locals_[pname], locals_[cname]
+        pw, cw, tw = world[pname], world[cname], world[c['target']]
+        # đưa đích về hệ của xương cha (gốc của xương đùi)
+        ppname = pb.get('parent')
+        ppw = world.get(ppname, [1, 0, 0, 1, 0, 0])
+        det = ppw[0] * ppw[3] - ppw[2] * ppw[1]
+        if abs(det) < 1e-8:
+            continue
+        dx, dy = tw[4] - ppw[4], tw[5] - ppw[5]
+        tx = (dx * ppw[3] - dy * ppw[2]) / det
+        ty = (dy * ppw[0] - dx * ppw[1]) / det
+        ox, oy = pb.get('x', 0), pb.get('y', 0)
+        tx -= ox; ty -= oy
+        l1 = abs(pb.get('length', 0)) * math.hypot(pw[0], pw[1]) / max(1e-6, math.hypot(ppw[0], ppw[1]))
+        l1 = abs(pb.get('length', 0))
+        l2 = abs(cb.get('length', 0))
+        if l1 <= 0 or l2 <= 0:
+            continue
+        dist = math.hypot(tx, ty)
+        dist = max(1e-4, min(dist, l1 + l2 - 1e-4))
+        # định lý cosin
+        cosang = (dist * dist + l1 * l1 - l2 * l2) / (2 * dist * l1)
+        cosang = max(-1.0, min(1.0, cosang))
+        a = math.degrees(math.atan2(ty, tx))
+        bend = 1 if c.get('bendPositive', True) else -1
+        a1 = a - math.degrees(math.acos(cosang)) * bend
+        cos2 = (l1 * l1 + l2 * l2 - dist * dist) / (2 * l1 * l2)
+        cos2 = max(-1.0, min(1.0, cos2))
+        a2 = (180 - math.degrees(math.acos(cos2))) * bend
+        fix[pname] = a1 - pb.get('rotation', 0) - pose.get(pname, {}).get('rotate.angle', 0)
+        fix[cname] = a2 - cb.get('rotation', 0) - pose.get(cname, {}).get('rotate.angle', 0)
+    return fix
+
+
+def anim_ik(data, anim_name, ik_list):
+    """bendPositive ở khung 0 của animation đứng."""
+    anims = data.get('animations') or {}
+    a = anims.get(anim_name)
+    if a is None:
+        for k in ('holdon', 'idle', 'stand', 'wait'):
+            if k in anims:
+                a = anims[k]
+                break
+    if a is None and anims:
+        a = anims[next(iter(anims))]
+    tl = (a or {}).get('ik', {})
+    out = []
+    for c in ik_list:
+        c = dict(c)
+        fr = tl.get(c['name'])
+        if fr:
+            f0 = min(fr, key=lambda k: k.get('time', 0))
+            if 'bendPositive' in f0:
+                c['bendPositive'] = f0['bendPositive']
+        out.append(c)
+    return out
+
+
+def world_bones(data, pose=None, extra_rot=None):
     """Ma trận [a, b, c, d, tx, ty] của từng xương."""
     pose = pose or {}
+    extra_rot = extra_rot or {}
     out = {}
     for b in data['bones']:
         p = pose.get(b['name'], {})
-        rot = math.radians(b.get('rotation', 0) + p.get('rotate.angle', 0))
+        rot = math.radians(b.get('rotation', 0) + p.get('rotate.angle', 0)
+                           + extra_rot.get(b['name'], 0))
         sx = b.get('scaleX', 1) * p.get('scale.x', 1)
         sy = b.get('scaleY', 1) * p.get('scale.y', 1)
         x = b.get('x', 0) + p.get('translate.x', 0)
@@ -153,12 +262,16 @@ def draw_mesh(canvas, im, reg, pts, PAD):
 
 def compose(folder, name, max_h=None, anim='holdon'):
     data = json.load(open(os.path.join(folder, name + '.json'), encoding='utf-8'))
-    bones = world_bones(data, anim_pose(data, anim))
+    pose = anim_pose(data, anim)
+    iks = anim_ik(data, anim, data.get('ik') or [])
+    fix = solve_ik(data, _local_of(data), None, iks, pose) if iks else {}
+    bones = world_bones(data, pose, fix)
+    slot_att = anim_slots(data, anim)
     bones['_order'] = data['bones']
     PAD = 900
     canvas = Image.new('RGBA', (PAD * 2, PAD * 2), (0, 0, 0, 0))
     for slot in data['slots']:
-        att = slot.get('attachment')
+        att = slot_att[slot['name']] if slot['name'] in slot_att else slot.get('attachment')
         if not att:
             continue
         reg = region_of(data['skins'], slot['name'], att) or {}

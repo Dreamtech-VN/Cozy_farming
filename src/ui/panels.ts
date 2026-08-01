@@ -1932,14 +1932,14 @@ export function registerAllPanels() {
             name: sk.name, art: wrapc, dim: !has, on,
             flag: on ? 'Đang dùng' : undefined,
             click: () => {
-              if (!has) { toast(`${sk.name} chưa sở hữu — sẽ phát qua sự kiện / gacha.`, 'shop'); return; }
+              if (!has) { toast(`${sk.name} chưa sở hữu — Cách nhận: chưa rõ.`, 'wardrobe'); return; }
               look.skin = on ? undefined : sk.id;
               save(); bus.emit(EV.APPEARANCE); redraw();
             }
           };
         }),
         empty: f === 'mine'
-          ? 'Chưa có bộ ảo hoá nào — sắp phát qua sự kiện / gacha.'
+          ? 'Chưa có bộ ảo hoá nào — cách nhận chưa rõ.'
           : 'Chưa có dữ liệu ảo hoá.',
         grid: 'tall',
         bare: true,
