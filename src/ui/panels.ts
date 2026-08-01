@@ -2492,19 +2492,27 @@ export function registerAllPanels() {
       const gradeOf = (d: EquipDef) => `gr-${equipGrade(d.tier)}`;
       const slots = equipSlotStrip(redraw);
 
-      // 3 nút tròn dùng đúng icon buff_02/03/04 trong ui/bag của apk
+      // 3 nút tròn: trong GunPow (WndPlayer.xml, khối conPlayerFire) đây là
+      // onTip1/onTip2/onTip3 — nút MỞ BẢNG CHÚ THÍCH cho từng nguồn lực chiến,
+      // luôn hiện chứ không phải nút tắt sang trang khác. Bên mình cũng vậy:
+      // bấm ra bảng nói rõ lực chiến đang tới từ đâu.
+      const b3 = cpBreakdown();
       const quick = h('div', 'ch-quick');
-      const qbtn = (icon: string, tip: string, go: () => void) => {
+      const qbtn = (icon: string, tip: string, lines: [string, number][]) => {
         const q = h('button', 'ch-q');
         const im = document.createElement('img'); im.src = `assets/equip/${icon}`; im.alt = tip;
         q.append(im);
-        q.title = tip; q.onclick = () => { sfx.click(); go(); };
+        q.title = tip;
+        q.onclick = () => { sfx.click(); cpTip(tip, lines); };
         return q;
       };
       quick.append(
-        qbtn('btn_forge.png', 'Cường hoá', () => openPanel('smithy')),
-        qbtn('btn_gem.png', 'Khảm đá', () => openPanel('socket')),
-        qbtn('btn_shop.png', 'Rương trang bị', () => openPanel('chestopen')));
+        qbtn('btn_forge.png', 'Lực chiến từ trang bị',
+          [['Chỉ số trang bị', b3.equip], ['Cường hoá & sao', b3.enhance]]),
+        qbtn('btn_gem.png', 'Lực chiến từ bản thân',
+          [['Chỉ số gốc', b3.base], ['Cấp nhân vật', b3.level]]),
+        qbtn('btn_shop.png', 'Lực chiến từ thời trang',
+          [['Quần áo & skin', b3.clothes]]));
       // "Toàn bộ" gồm CẢ đồ đang mặc lẫn đồ để trong túi; lọc theo ô cũng vậy.
       const all = [...worn().map(w => w.def), ...bag];
       const list = f === 'worn' ? worn().map(w => w.def)
@@ -2628,6 +2636,22 @@ export function registerAllPanels() {
     };
 
     render();
+  }
+
+  /** Bảng chú thích một nguồn lực chiến (3 nút tròn dưới chân nhân vật). */
+  function cpTip(title: string, lines: [string, number][]) {
+    const { body } = openWindow(title, { size: 'small' });
+    let sum = 0;
+    for (const [k, v] of lines) {
+      sum += v;
+      const r = h('div', 'row');
+      r.append(h('div', 'grow t2', k), h('div', 't1', fmt(v)));
+      body.append(r);
+    }
+    const tot = h('div', 'row');
+    tot.append(h('div', 'grow t1', 'Cộng'), h('div', 't1', fmt(sum)));
+    body.append(tot);
+    body.append(h('div', 'hint', `Tổng lực chiến hiện tại: ${fmt(combatPower())}`));
   }
 
   // Thẻ chi tiết một món trang bị — mở từ ô trên người hoặc ô trong lưới
