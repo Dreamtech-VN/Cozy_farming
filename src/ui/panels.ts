@@ -2351,6 +2351,10 @@ export function registerAllPanels() {
     note?: string;
     /** true = khung trái chỉ có nhân vật, không kèm dải ô trang bị */
     bare?: boolean;
+    /** true = bỏ hẳn khung trái, nội dung chiếm cả trang */
+    full?: boolean;
+    /** true = có nút "Trang bị nhanh" ở góc dưới trái */
+    fast?: boolean;
   }
 
   /** Dải 8 ô trang bị quanh nhân vật — dùng chung cho mọi mục của màn Nhân vật. */
@@ -2434,17 +2438,20 @@ export function registerAllPanels() {
 
       const b2 = cpBreakdown();
       const cpRow = h('div', 'ch-cprow');
-      const fast = h('button', 'ch-fast');
-      fast.append(h('span', '', 'Trang bị'), h('span', '', 'nhanh'));
-      fast.title = 'Tự mặc bộ mạnh nhất đang có';
-      fast.onclick = () => { sfx.click(); autoEquip(); render(); };
+      if (view.fast) {
+        const fast = h('button', 'ch-fast');
+        fast.append(h('span', '', 'Trang bị'), h('span', '', 'nhanh'));
+        fast.title = 'Tự mặc bộ mạnh nhất đang có';
+        fast.onclick = () => { sfx.click(); autoEquip(); render(); };
+        cpRow.append(fast);
+      }
       const cp = h('div', 'ch-cp');
       cp.append(h('span', 'ch-cp-k', 'Lực chiến:'), h('span', 'ch-cp-n', fmt(combatPower())));
       cp.title = `Gốc ${b2.base} · Quần áo ${b2.clothes} · Trang bị ${b2.equip}`
         + ` · Cấp ${b2.level} · Cường hoá ${b2.enhance}`;
-      cpRow.append(fast, cp);
+      cpRow.append(cp);
       side.append(cpRow);
-      page.append(side);
+      if (!view.full) page.append(side);
 
       // ---------- khung phải: hàng lọc + lưới + nút ----------
       const panel = h('div', 'ch-panel');
@@ -2538,7 +2545,7 @@ export function registerAllPanels() {
         })),
         empty: f === 'worn' ? 'Chưa đeo món nào.'
           : 'Chưa có món nào ở mục này — mở rương trang bị để kiếm.',
-        quick,
+        quick, fast: true,
         foot: [btn('Lò rèn', 'gold', () => openPanel('smithy')),
                btn('Mặc tối ưu', 'green', () => { autoEquip(); redraw(); })]
       };
@@ -2608,7 +2615,7 @@ export function registerAllPanels() {
         }),
         empty: 'Nhóm này chưa có danh hiệu.',
         grid: 'wide',
-        bare: true,
+        full: true,
         note: `【${cat.name}】${fmt(got)}/${fmt(need)}  ·  Chờ nhận: ${fmt(pendingPoints())}`
           + `  ·  Tổng: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`,
         foot: [

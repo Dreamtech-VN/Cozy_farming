@@ -2700,7 +2700,8 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 
 /* Danh hiệu là tấm bảng nằm ngang, skin là cả bộ đồ đứng — hai mục này cần ô
    khác tỉ lệ ô vuông của trang bị / quần áo. */
-.ch-list-wide { grid-template-columns: repeat(2, 1fr); }
+/* mục Danh hiệu chiếm cả trang nên xếp được nhiều cột hơn */
+.ch-list-wide { grid-template-columns: repeat(3, 1fr); }
 .ch-list-wide .ch-cell { aspect-ratio: 3.4 / 1; }
 .ch-list-tall { grid-template-columns: repeat(3, 1fr); }
 .ch-list-tall .ch-cell { aspect-ratio: 3 / 4; }
