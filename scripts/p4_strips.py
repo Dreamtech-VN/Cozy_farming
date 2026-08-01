@@ -12,8 +12,31 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spine_pose import compose, anim_len
 
 FRAMES = 6
-HEIGHT = 200
+HEIGHT = 220        # chiều cao khung ảnh
+BODY = 165          # chiều cao THÂN NGƯỜI trong khung — mọi skin bằng nhau
+FOOT_PAD = 6        # chừa dưới chân vài pixel
 BIG = (0, 0, 1800, 1800)
+
+
+def body_box(im):
+    """Khung của phần THÂN, bỏ qua vũ khí / cánh thò ra hai bên.
+
+    Chỉ soi dải cột giữa (40% bề ngang quanh trọng tâm) nên kiếm cầm chếch hay
+    cánh dang rộng không kéo dài khung, nhờ vậy đo được chiều cao người thật.
+    """
+    a = im.split()[3]
+    w, h = im.size
+    px = a.load()
+    cols = [x for x in range(w) if any(px[x, y] > 60 for y in range(0, h, 2))]
+    if not cols:
+        return im.getbbox()
+    cx = sum(cols) / len(cols)
+    half = max(6, int(w * 0.20))
+    x0, x1 = max(0, int(cx - half)), min(w, int(cx + half))
+    rows = [y for y in range(h) if any(px[x, y] > 60 for x in range(x0, x1))]
+    if not rows:
+        return im.getbbox()
+    return (x0, rows[0], x1, rows[-1] + 1)
 
 
 def strip(folder, name, frames=FRAMES, height=HEIGHT):
@@ -27,11 +50,22 @@ def strip(folder, name, frames=FRAMES, height=HEIGHT):
         raise ValueError('rỗng')
     x0 = min(b[0] for b in boxes); y0 = min(b[1] for b in boxes)
     x1 = max(b[2] for b in boxes); y1 = max(b[3] for b in boxes)
-    k = height / (y1 - y0)
-    w = max(1, round((x1 - x0) * k))
+
+    # tỉ lệ tính theo chiều cao THÂN của khung đầu -> mọi skin cao bằng nhau
+    bb = body_box(raws[0])
+    k = BODY / max(1, bb[3] - bb[1])
+    foot = bb[3]                     # đáy bàn chân
+    cx = (bb[0] + bb[2]) / 2         # trục dọc thân
+
+    full_w = max(x1 - x0, 1)
+    w = max(1, round(full_w * k))
     out = Image.new('RGBA', (w * frames, height))
     for i, im in enumerate(raws):
-        out.paste(im.crop((x0, y0, x1, y1)).resize((w, height), Image.LANCZOS), (i * w, 0))
+        sc = im.resize((max(1, round(im.width * k)), max(1, round(im.height * k))), Image.LANCZOS)
+        # chân chạm đáy khung, thân nằm giữa theo chiều ngang
+        ox = round(w / 2 - cx * k)
+        oy = round(height - FOOT_PAD - foot * k)
+        out.paste(sc, (i * w + ox, oy), sc)
     return out, w
 
 
