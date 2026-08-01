@@ -161,6 +161,30 @@ viên, Khu ngoại ô, Nông trại*):
 ⚠️ Map 10 còn kèm `daydien0/1/2.png` (dây điện) — đó là **lớp phủ riêng**, không
 nằm trong dải nền; ghép nền chỉ lấy các mảnh đánh số.
 
+### Lưới ô gốc của map (`src/data/lttt-maps.json`)
+
+**Toàn bộ map của Avatar nằm trong `client/java/resources/a.clazz`** — một
+FilePack (xem `avt/FilePack.java`) bị XOR với khoá `NguyenVanMinh`.
+`scripts/decode_lttt_maps.py` giải ra và xuất JSON cho từng map:
+
+- **lưới ô đi được** — mã ô đổi ra `type[]` theo `LoadMap.setMap`, đi được khi
+  `type == 80 || type == 51 || setTypeJoint(type)` (đúng như `LoadMap.findPath`)
+- **mặt tiền công trình** — dải ô mã ≥ 127, mỗi dải là một cửa "vào"
+- **trạm xe buýt** (mã 139) và **chỗ đứng chờ xe** (mã 152)
+
+Cỡ ô = 24 (`LoadMap.w`) × 2 (`AvMain.hd`) = **48px** trên ảnh HD, và
+`paintCreateMap` vẽ ảnh nền sao cho **đáy ảnh trùng đáy lưới**, các mảnh ảnh
+**chồng nhau 2px**. `scripts/build_lttt_maps.py` ghép đúng như vậy và giữ nguyên
+cỡ gốc để toạ độ khớp 1:1 với lưới.
+
+Nhờ đó va chạm, cửa vào và trạm buýt trong game nằm **đúng chỗ client Avatar
+vẽ**, không còn căn tay: zone chỉ cần khai `lttt: '<id map>'`, bảng `LTTT_ENTRY`
+trong `WorldScene` nói mã mặt tiền nào dẫn đi đâu.
+
+⚠️ Hai map nông trại (25/26) không nằm trong hệ này — Lttt dùng màn hình riêng
+(`FarmScr`) nên lưới trong `a.clazz` không khớp ảnh; hai map đó vẫn khai
+`walkTop`/`walkBottom`/`water` bằng tay.
+
 Nhân vật đi xuyên bàn ghế vì nền chỉ là một tấm ảnh: bảng `DRAWN_BLOCKS` trong
 `WorldScene` khai chân các món vẽ sẵn (quầy, kệ, lồng thú, giá treo đồ) làm vật
 cản. Toạ độ đo thẳng trên ảnh nền, đơn vị px.

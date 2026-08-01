@@ -48,6 +48,10 @@ export interface ZoneDef {
   // thất tiệm...) không hiện trên bản đồ mà phải đi qua cửa trong khu.
   hub?: boolean;
   bg?: string;             // nền ảnh (assets/lttt/maps/<bg>.png) thay cho nền procedural
+  // id map Lttt trong src/data/lttt-maps.json: có thì lấy NGUYÊN lưới ô gốc
+  // (đi được / mặt tiền công trình / trạm buýt / chỗ chờ) thay cho walkTop,
+  // walkBottom và water khai tay
+  lttt?: string;
   water?: { x: number; y: number; w: number; h: number }[]; // vùng nước trên nền ảnh (tile)
   skyTop?: number;         // bề cao vùng trời phía trên map nền (px)
   walkTop?: number;        // giới hạn đi lại trên nền ảnh (hàng tile)
@@ -94,24 +98,21 @@ export const ZONES: Record<string, ZoneDef> = {
   // ===================== KHU NHÀ Ở =====================
   // map 22: dãy 8 căn nhà 2-3 tầng, vỉa hè lát đá, đường nhựa chạy dọc mép dưới
   town: {
-    id: 'town', name: 'Khu nhà ở', icon: '', w: 150, h: 29, ground: 'stone',
-    spawn: { x: 24, y: 18 }, hub: true, busStop: { x: 5, y: 24 },
-    bg: '22', walkTop: 12, walkBottom: 25, traffic: { topTile: 26 },
-    portals: [
-      { x: 28, y: 12, to: 'school', label: 'Trường học', icon: '' },
-      { x: 81, y: 12, to: 'house', label: 'Nhà riêng', icon: '' }
-    ],
+    id: 'town', name: 'Khu nhà ở', icon: '', w: 151, h: 30, ground: 'stone',
+    spawn: { x: 74, y: 20 }, hub: true,
+    bg: '22', lttt: '22', traffic: { topTile: 27 },
+    portals: [],
     npcs: [],
     features: []
   },
   school: {
     // map 101: sàn gỗ, kệ sách, quầy có sách vở + đồng hồ — dùng làm Trường học
     id: 'school', name: 'Trường học', icon: '', w: 60, h: 33, ground: 'wood', indoor: true,
-    spawn: { x: 24, y: 26 },
-    bg: '101', walkTop: 12, walkBottom: 29,
-    portals: [{ x: 30, y: 30, to: 'town', label: 'Ra Khu nhà ở', icon: '', spot: 'door' }],
+    spawn: { x: 28, y: 26 },
+    bg: '101', lttt: '101',
+    portals: [],
     npcs: [
-      { id: 'npc_thay', name: 'Thầy Giáo', x: 32, y: 13, charIndex: 4, gender: 1, lines: ['Chăm học, chăm làm nhé!', 'Muốn thử tài cờ tướng không?'], minigame: 'xiangqi' }
+      { id: 'npc_thay', name: 'Thầy Giáo', x: 32, y: 14, charIndex: 4, gender: 1, lines: ['Chăm học, chăm làm nhé!', 'Muốn thử tài cờ tướng không?'], minigame: 'xiangqi' }
     ],
     features: []
   },
@@ -126,56 +127,48 @@ export const ZONES: Record<string, ZoneDef> = {
   // ===================== KHU MUA SẮM =====================
   // map 24: Mỹ Viện · Gift · ATM · tiệm thú cưng · Premium · trang sức · Shop
   mall: {
-    id: 'mall', name: 'Khu mua sắm', icon: '', w: 132, h: 32, ground: 'stone',
-    spawn: { x: 30, y: 20 }, hub: true, busStop: { x: 5, y: 26 },
-    bg: '24', walkTop: 14, walkBottom: 27, traffic: { topTile: 28 },
-    portals: [
-      { x: 12, y: 14, to: 'salon_shop', label: 'Mỹ Viện', icon: '' },
-      { x: 30, y: 14, to: 'gift_shop', label: 'Tiệm quà', icon: '' },
-      { x: 55, y: 14, to: 'pet_shop', label: 'Tiệm thú cưng', icon: '' },
-      { x: 110, y: 14, to: 'fashion_shop', label: 'Tiệm thời trang', icon: '' }
-    ],
-    npcs: [
-      { id: 'npc_hung', name: 'Chú Hùng', x: 72, y: 16, charIndex: 3, gender: 1, shop: 'shop_general', lines: ['Bách hóa Premium đây!', 'Có phân bón, thức ăn gia súc, đủ cả.'] },
-      { id: 'npc_lan', name: 'Chị Lan', x: 90, y: 16, charIndex: 6, gender: 2, shop: 'shop_house', lines: ['Muốn mua nhà hay nội thất không nè?'] }
-    ],
+    id: 'mall', name: 'Khu mua sắm', icon: '', w: 133, h: 33, ground: 'stone',
+    spawn: { x: 62, y: 26 }, hub: true,
+    bg: '24', lttt: '24', traffic: { topTile: 29 },
+    portals: [],
+    npcs: [],
     features: []
   },
   fashion_shop: {
     id: 'fashion_shop', name: 'Tiệm thời trang', icon: '', w: 36, h: 33, ground: 'wood', indoor: true,
-    spawn: { x: 14, y: 26 },
-    bg: '58', walkTop: 12, walkBottom: 27,
-    portals: [{ x: 18, y: 26, to: 'mall', label: 'Ra Khu mua sắm', icon: '', spot: 'door' }],
+    spawn: { x: 22, y: 26 },
+    bg: '58', lttt: '58',
     // cô bán hàng đã vẽ sẵn sau quầy trong ảnh nền -> bấm vào quầy là mở shop
+    portals: [],
     npcs: [],
     features: []
   },
   gift_shop: {
     id: 'gift_shop', name: 'Tiệm quà', icon: '', w: 36, h: 33, ground: 'wood', indoor: true,
-    spawn: { x: 14, y: 26 },
-    bg: '59', walkTop: 12, walkBottom: 27,
-    portals: [{ x: 18, y: 26, to: 'mall', label: 'Ra Khu mua sắm', icon: '', spot: 'door' }],
+    spawn: { x: 16, y: 26 },
+    bg: '59', lttt: '59',
+    portals: [],
     npcs: [],
     features: []
   },
   salon_shop: {
     id: 'salon_shop', name: 'Mỹ Viện', icon: '', w: 54, h: 33, ground: 'wood', indoor: true,
-    spawn: { x: 22, y: 26 },
-    bg: '104', walkTop: 12, walkBottom: 28,
-    portals: [{ x: 27, y: 27, to: 'mall', label: 'Ra Khu mua sắm', icon: '', spot: 'door' }],
+    spawn: { x: 26, y: 26 },
+    bg: '104', lttt: '104',
+    portals: [],
     npcs: [
-      { id: 'npc_barber', name: 'Anh Phong', x: 21, y: 13, charIndex: 3, gender: 1, shop: 'shop_barber', lines: ['Cắt kiểu gì cũng đẹp!', 'Đổi tóc là đổi vận đó nha.'] },
-      { id: 'npc_salon', name: 'Cô Diễm', x: 33, y: 13, charIndex: 7, gender: 2, shop: 'shop_salon', lines: ['Vào đây chị làm cho đôi mắt biết nói.', 'Ánh mắt là hồn của gương mặt đó em.'] }
+      { id: 'npc_barber', name: 'Anh Phong', x: 21, y: 14, charIndex: 3, gender: 1, shop: 'shop_barber', lines: ['Cắt kiểu gì cũng đẹp!', 'Đổi tóc là đổi vận đó nha.'] },
+      { id: 'npc_salon', name: 'Cô Diễm', x: 33, y: 14, charIndex: 7, gender: 2, shop: 'shop_salon', lines: ['Vào đây chị làm cho đôi mắt biết nói.', 'Ánh mắt là hồn của gương mặt đó em.'] }
     ],
     features: []
   },
   pet_shop: {
     id: 'pet_shop', name: 'Tiệm thú cưng', icon: '', w: 42, h: 33, ground: 'wood', indoor: true,
-    spawn: { x: 17, y: 26 },
-    bg: '105', walkTop: 12, walkBottom: 28,
-    portals: [{ x: 21, y: 27, to: 'mall', label: 'Ra Khu mua sắm', icon: '', spot: 'door' }],
+    spawn: { x: 20, y: 26 },
+    bg: '105', lttt: '105',
+    portals: [],
     npcs: [
-      { id: 'npc_pet', name: 'Chị Mèo', x: 26, y: 14, charIndex: 5, gender: 2, lines: ['Bé nào cũng ngoan hết á!', 'Nuôi thú cưng nhớ cho ăn đều nha.'] }
+      { id: 'npc_pet', name: 'Chị Mèo', x: 26, y: 15, charIndex: 5, gender: 2, lines: ['Bé nào cũng ngoan hết á!', 'Nuôi thú cưng nhớ cho ăn đều nha.'] }
     ],
     features: []
   },
@@ -183,26 +176,25 @@ export const ZONES: Record<string, ZoneDef> = {
   // ===================== KHU GIẢI TRÍ =====================
   // map 10: ATM · GAME (2 máy thùng) · nhà lớn · xe bói · VÒNG QUAY · Pet Racing
   gamecenter: {
-    id: 'gamecenter', name: 'Khu giải trí', icon: '', w: 126, h: 32, ground: 'stone',
-    spawn: { x: 26, y: 20 }, hub: true, busStop: { x: 5, y: 26 },
-    bg: '10', walkTop: 14, walkBottom: 27, traffic: { topTile: 28 },
+    id: 'gamecenter', name: 'Khu giải trí', icon: '', w: 127, h: 32, ground: 'stone',
+    spawn: { x: 56, y: 25 }, hub: true,
+    bg: '10', lttt: '10', traffic: { topTile: 28 },
     portals: [],
     npcs: [
-      { id: 'npc_caro', name: 'Máy Caro', x: 19, y: 15, charIndex: 1, gender: 1, lines: ['Cờ caro 5 quân — dám đấu không?'], minigame: 'caro' },
-      { id: 'npc_rps', name: 'Bé Kéo Búa', x: 25, y: 15, charIndex: 7, gender: 2, lines: ['Oẳn tù tì ra cái gì ra cái này!'], minigame: 'rps' },
-      { id: 'npc_cotuong', name: 'Cụ Cờ', x: 40, y: 16, charIndex: 2, gender: 1, lines: ['Cờ tướng là tinh hoa!', 'Ngồi xuống làm ván đi cháu.'], minigame: 'xiangqi' }
+      { id: 'npc_caro', name: 'Máy Caro', x: 20, y: 20, charIndex: 1, gender: 1, lines: ['Cờ caro 5 quân — dám đấu không?'], minigame: 'caro' },
+      { id: 'npc_rps', name: 'Bé Kéo Búa', x: 26, y: 20, charIndex: 7, gender: 2, lines: ['Oẳn tù tì ra cái gì ra cái này!'], minigame: 'rps' },
+      { id: 'npc_cotuong', name: 'Cụ Cờ', x: 44, y: 21, charIndex: 2, gender: 1, lines: ['Cờ tướng là tinh hoa!', 'Ngồi xuống làm ván đi cháu.'], minigame: 'xiangqi' }
     ],
     features: []
   },
   // ===================== CÔNG VIÊN =====================
   park: {
-    id: 'park', name: 'Công viên', icon: '', w: 57, h: 32, ground: 'grass',
-    spawn: { x: 44, y: 20 }, hub: true, busStop: { x: 50, y: 24 },
-    bg: '4', walkTop: 10, walkBottom: 27,
-    water: [{ x: 9, y: 11, w: 27, h: 6 }],
+    id: 'park', name: 'Công viên', icon: '', w: 57, h: 33, ground: 'grass',
+    spawn: { x: 28, y: 26 }, hub: true,
+    bg: '4', lttt: '4',
     portals: [],
     npcs: [
-      { id: 'npc_tuan', name: 'Bé Tuấn', x: 30, y: 20, charIndex: 7, gender: 1, lines: ['Chơi oẳn tù tì với em không?'], minigame: 'rps' }
+      { id: 'npc_tuan', name: 'Bé Tuấn', x: 30, y: 24, charIndex: 7, gender: 1, lines: ['Chơi oẳn tù tì với em không?'], minigame: 'rps' }
     ],
     features: []
   },
@@ -210,9 +202,8 @@ export const ZONES: Record<string, ZoneDef> = {
   // ===================== KHU SINH THÁI =====================
   pond: {
     id: 'pond', name: 'Hồ câu', icon: '', w: 63, h: 24, ground: 'grass',
-    spawn: { x: 55, y: 8 }, hub: true, busStop: { x: 57, y: 10 },
-    bg: '15', walkTop: 5,
-    water: [{ x: 12, y: 9, w: 36, h: 15 }],
+    spawn: { x: 32, y: 18 }, hub: true,
+    bg: '15', lttt: '15',
     portals: [],
     npcs: [],
     features: ['fishing', 'water_edge']
@@ -220,12 +211,11 @@ export const ZONES: Record<string, ZoneDef> = {
   beach: {
     // Nền map 14 gốc Avatar: bờ nước + kè đá + tiệm câu (biển SHOP có cần câu)
     id: 'beach', name: 'Bãi biển', icon: '', w: 63, h: 28, ground: 'stone',
-    spawn: { x: 20, y: 17 }, hub: true, busStop: { x: 8, y: 19 },
-    bg: '14', walkTop: 12, walkBottom: 21, skyTop: 57, traffic: { topTile: 23 },
-    water: [{ x: 0, y: 4, w: 63, h: 5 }],
+    spawn: { x: 32, y: 22 }, hub: true,
+    bg: '14', lttt: '14', skyTop: 57, traffic: { topTile: 24 },
     portals: [],
     npcs: [
-      { id: 'npc_bien', name: 'Ông Biển', x: 40, y: 14, charIndex: 2, gender: 1, lines: ['Cần câu tốt mới câu được cá to — ghé tiệm của ta xem thử!', 'Cá huyền thoại chỉ cắn cần vàng.'] }
+      { id: 'npc_bien', name: 'Ông Biển', x: 40, y: 17, charIndex: 2, gender: 1, lines: ['Cần câu tốt mới câu được cá to — ghé tiệm của ta xem thử!', 'Cá huyền thoại chỉ cắn cần vàng.'] }
     ],
     features: ['fishing', 'water_edge']
   }

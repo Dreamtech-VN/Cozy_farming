@@ -1,74 +1,72 @@
-"""Ghép nền TẤT CẢ map Avatar (Lttt) từ imageMap trong APK client.
+"""Ghép nền map Avatar (Lttt) từ imageMap trong APK client — ĐÚNG cách client vẽ.
 
-APK client (client/android/Avatar-PGaming.apk trong repo Lttt) chứa đủ các mảnh
-ảnh của từng map, khác với bản unity chỉ có mảnh đầu tiên. Ghép theo thứ tự số,
-canh mép **dưới**; file tên chữ (vd daydien0/1/2 của map 10 = dây điện) là lớp
-phủ riêng nên bỏ qua.
+`LoadMap.paintCreateMap` (client unity):
 
-Bảng dưới là danh tính thật của từng map — đọc ra bằng cách ghép rồi nhìn ảnh,
-đối chiếu với `T.nameRegion` trong client java (8 khu: Khu nhà ở, Khu sinh thái,
-Sân bay, Khu giải trí, Khu mua sắm, Công viên, Khu ngoại ô, Nông trại).
+    for i in slices:
+        g.drawImage(img[i], x - 1 + num, Hmap * w * hd - img[i].h)
+        num += img[i].w - 2
+
+nên các mảnh **chồng nhau 2px** (không phải nối sát nhau như bản ghép cũ), và
+ghép xong thì **đáy ảnh trùng đáy lưới ô** của map. Với w = 24, hd = 2 thì mỗi ô
+lưới = 48px trên ảnh HD.
+
+Ảnh xuất ra giữ NGUYÊN cỡ gốc (không kéo/cắt cho tròn tile 16px nữa) để toạ độ
+trong game khớp 1:1 với data map giải ra từ `a.clazz`
+(xem `scripts/decode_lttt_maps.py`).
+
+Chạy: python3 scripts/build_lttt_maps.py [thư mục assets đã giải nén của APK]
 """
-from PIL import Image
 import os
+import sys
 
-APK = os.environ.get(
+from PIL import Image
+
+APK = (sys.argv[1] if len(sys.argv) > 1 else os.environ.get(
     'APK_ASSETS',
     '/tmp/claude-0/-home-user-Cozy-farming/b40e10a2-4a20-5fd7-b845-31972e4262c8/scratchpad/apk/assets'
-) + '/hd/imageMap'
+)) + '/hd/imageMap'
 DST = os.path.join(os.path.dirname(__file__), '..', 'public', 'assets', 'lttt', 'maps')
 
-# map Avatar -> (tên file, số tile ngang, số tile dọc, ghi chú)
+OVERLAP = 2      # mảnh nối nhau chồng 2px, theo paintCreateMap
+
+# map Avatar -> tên file trong game (danh tính đọc ra từ ảnh, đối chiếu
+# T.nameRegion trong client java — xem docs/ASSETS.md)
 MAPS = [
-    ('25', 'farmbg',   127, 33, 'Nông trại (bếp, kho, sân rào, hồ cá vẽ sẵn)'),
-    ('26', 'farmgate',  82, 29, 'Khu Nông Trại (biển FARM, cửa hàng)'),
-    ('14', '14',        63, 28, 'Bãi biển (kè đá, tiệm câu)'),
-    ('15', '15',        63, 24, 'Hồ câu'),
-    ('4',  '4',         57, 32, 'Công viên'),
-    ('22', '22',       150, 29, 'Khu nhà ở (dãy nhà 2-3 tầng)'),
-    ('24', '24',       132, 32, 'Khu mua sắm (Mỹ Viện, Gift, ATM, thú cưng, Premium, trang sức, Shop)'),
-    ('10', '10',       126, 32, 'Khu giải trí (ATM, GAME, nhà hàng, PetRacing)'),
-    # nội thất
-    ('101', '101',      60, 33, 'Trường học (sàn gỗ, kệ sách, quầy sách vở)'),
-    ('58',  '58',       36, 33, 'Tiệm thời trang (giá treo quần áo)'),
-    ('59',  '59',       36, 33, 'Tiệm quà / trang sức (quầy vàng)'),
-    ('104', '104',      54, 33, 'Mỹ viện (gương lớn, quầy trang điểm)'),
-    ('105', '105',      42, 33, 'Tiệm thú cưng (tường vân chân thú, lồng thú)'),
+    ('25', 'farmbg',   'Nông trại (bếp, kho, sân rào, hồ cá vẽ sẵn)'),
+    ('26', 'farmgate', 'Khu Nông Trại (biển FARM, cửa hàng)'),
+    ('14', '14',       'Bãi biển (kè đá, tiệm câu)'),
+    ('15', '15',       'Hồ câu'),
+    ('4',  '4',        'Công viên'),
+    ('22', '22',       'Khu nhà ở (dãy nhà 2-3 tầng)'),
+    ('24', '24',       'Khu mua sắm (Mỹ Viện, Gift, ATM, thú cưng, Premium, trang sức, Shop)'),
+    ('10', '10',       'Khu giải trí (ATM, GAME, nhà hàng, vòng quay, PetRacing)'),
+    ('101', '101',     'Trường học (sàn gỗ, kệ sách, quầy sách vở)'),
+    ('58',  '58',      'Tiệm thời trang (giá treo quần áo)'),
+    ('59',  '59',      'Tiệm quà / trang sức (quầy vàng)'),
+    ('104', '104',     'Mỹ viện (gương lớn, quầy trang điểm)'),
+    ('105', '105',     'Tiệm thú cưng (tường vân chân thú, lồng thú)'),
 ]
 
 
-def compose(mid):
+def compose(mid: str) -> Image.Image:
     d = os.path.join(APK, mid)
     fs = sorted((f for f in os.listdir(d) if f.split('.')[0].isdigit()),
                 key=lambda f: int(f.split('.')[0]))
     ims = [Image.open(os.path.join(d, f)).convert('RGBA') for f in fs]
-    H = max(i.height for i in ims)
-    out = Image.new('RGBA', (sum(i.width for i in ims), H), (0, 0, 0, 0))
-    x = 0
-    for i in ims:
-        out.alpha_composite(i, (x, H - i.height))   # các mảnh canh mép dưới
-        x += i.width
-    return out
-
-
-def fit(im, w, h):
-    """Đưa về đúng cỡ zone: thiếu thì kéo dài pixel mép, thừa thì cắt."""
+    ov = OVERLAP if len(ims) > 1 else 0
+    w = sum(i.width for i in ims) - ov * (len(ims) - 1)
+    h = max(i.height for i in ims)
     out = Image.new('RGBA', (w, h), (0, 0, 0, 0))
-    out.alpha_composite(im.crop((0, 0, min(w, im.width), min(h, im.height))), (0, 0))
-    if im.width < w:
-        col = out.crop((im.width - 1, 0, im.width, h))
-        for x in range(im.width, w):
-            out.paste(col, (x, 0))
-    if im.height < h:
-        row = out.crop((0, im.height - 1, w, im.height))
-        for y in range(im.height, h):
-            out.paste(row, (0, y))
+    x = 0
+    for im in ims:
+        out.alpha_composite(im, (x, h - im.height))   # các mảnh canh mép dưới
+        x += im.width - ov
     return out
 
 
 if __name__ == '__main__':
-    for mid, name, tw, th, note in MAPS:
-        raw = compose(mid)
-        out = fit(raw, tw * 16, th * 16)
+    for mid, name, note in MAPS:
+        out = compose(mid)
         out.save(os.path.join(DST, f'{name}.png'))
-        print(f'{mid:>4} -> {name}.png  ghép {raw.size} -> {out.size}  ({tw}x{th} tile)  {note}')
+        print(f'{mid:>4} -> {name}.png  {out.size[0]}x{out.size[1]}px '
+              f'({out.size[0] / 16:.2f}x{out.size[1] / 16:.2f} tile 16px)  {note}')

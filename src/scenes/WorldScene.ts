@@ -22,6 +22,7 @@ import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import * as fishing from '@/systems/fishing';
 import { RODS } from '@/data/fish';
+import { ltttMap, ltttWalkable, ltttRect, ltttFoot, type LtttMap } from '@/data/ltttmap';
 import { houseSize, partyActive } from '@/systems/housing';
 import { darkness, currentWeather, initTime, gameHour } from '@/systems/time';
 import { sfx, bgmForZone, setAmbient } from '@/core/audio';
@@ -78,32 +79,18 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   // Khu nhà ở (map 22): dãy nhà đã vẽ sẵn trong nền, chỉ thêm nhà chờ + bảng
   // xếp hạng + đèn đường cho có sinh khí.
   town: [
-    { key: 'lt_shelter', x: 5, y: 25.6, s: 0.9 },
     { key: 'lt_rank_sign', x: 60, y: 17, s: 1 },
     { key: 'lt_lamp_hd', x: 36, y: 15, s: 1 }, { key: 'lt_lamp_hd', x: 100, y: 15, s: 1 }
   ],
   // Khu mua sắm (map 24): 7 mặt tiền vẽ sẵn (Mỹ Viện, Gift, ATM, thú cưng,
   // Premium, trang sức, Shop) -> chỉ cần nhà chờ xe buýt.
-  mall: [
-    { key: 'lt_shelter', x: 5, y: 27.6, s: 0.9 }
-  ],
   // Khu giải trí (map 10): ATM, GAME, vòng quay, Pet Racing đều vẽ sẵn.
-  gamecenter: [
-    { key: 'lt_shelter', x: 5, y: 27.6, s: 0.9 }
-  ],
   park: [
     { key: 'lt_icecream', x: 44, y: 14, s: 1 },      // quầy kem
     { key: 'lt_love_tree', x: 50, y: 22, s: 1 },     // cây tình yêu
-    { key: 'lt_shelter', x: 50, y: 25, s: 0.9 }
   ],
   // Bãi biển dùng nguyên map 14 gốc (đã có kè đá, cây, tiệm câu) nên chỉ thêm
   // nhà chờ xe buýt.
-  beach: [
-    { key: 'lt_shelter', x: 8, y: 20.6, s: 0.9 }
-  ],
-  pond: [
-    { key: 'lt_shelter', x: 57, y: 11, s: 0.9 }
-  ],
 };
 
 // Công trình VẼ SẴN trong ảnh nền imageMap Lttt (không phải sprite decor) —
@@ -113,15 +100,54 @@ const openPanelSpot = (panel: string, data?: unknown) =>
 const soonDialog = (title: string, text: string) =>
   openPanelSpot('dialog', { title, text, actions: [] });
 
+// ===== Cửa vào lấy từ data map gốc Lttt =====
+// Mỗi dải "mặt tiền" trong lưới ô có một MÃ riêng (xem scripts/decode_lttt_maps.py);
+// bảng này chỉ việc nói mã đó dẫn đi đâu, còn TOẠ ĐỘ thì lấy thẳng từ data nên
+// cửa nằm đúng chỗ client Avatar vẽ, không phải căn tay.
+interface LtttEntry { label: string; to?: string; panel?: string; data?: unknown }
+const LTTT_ENTRY: Record<string, Record<number, LtttEntry>> = {
+  // map 24 — Khu mua sắm
+  mall: {
+    147: { label: 'Mỹ Viện', to: 'salon_shop' },
+    148: { label: 'Tiệm quà', to: 'gift_shop' },
+    128: { label: 'ATM', panel: 'atm' },
+    197: { label: 'Tiệm thú cưng', to: 'pet_shop' },
+    196: { label: 'Bách hóa', panel: 'shop', data: { shopId: 'shop_general' } },
+    195: { label: 'Nhà & Nội thất', panel: 'shop', data: { shopId: 'shop_house' } },
+    129: { label: 'Tiệm thời trang', to: 'fashion_shop' }
+  },
+  // map 10 — Khu giải trí
+  gamecenter: {
+    128: { label: 'ATM', panel: 'atm' },
+    193: { label: 'Bảng xếp hạng', panel: 'ranking' },
+    194: { label: 'Quà mỗi ngày', panel: 'daily' },
+    192: { label: 'Vòng quay may mắn', panel: 'wheel' },
+    200: { label: 'Pet Racing', panel: 'dialog', data: { title: 'Pet Racing', text: 'Trường đua thú cưng — sắp mở!', actions: [] } }
+  },
+  // map 22 — Khu nhà ở: mỗi căn có 3 dải, dải giữa mới là cửa
+  town: {
+    175: { label: 'Trường học', to: 'school' },
+    176: { label: 'Nhà riêng', to: 'house' }
+  },
+  // map 14 — Bãi biển: biển SHOP có cần câu = tiệm câu
+  beach: {
+    167: { label: 'Tiệm câu', panel: 'shop', data: { shopId: 'shop_fishing' } }
+  },
+  // nội thất: dải duy nhất là cửa ra
+  fashion_shop: { 191: { label: 'Ra Khu mua sắm', to: 'mall' } },
+  gift_shop: { 145: { label: 'Ra Khu mua sắm', to: 'mall' } },
+  salon_shop: { 191: { label: 'Ra Khu mua sắm', to: 'mall' } },
+  pet_shop: { 191: { label: 'Ra Khu mua sắm', to: 'mall' } },
+  school: { 145: { label: 'Ra Khu nhà ở', to: 'town' } }
+};
+
+// Vật cản VẼ SẴN trong ảnh nền — chỉ dùng cho map KHÔNG có lưới ô gốc
+// (nông trại / khu nông trại). Map nào có lưới thì lưới đã chặn sẵn.
+const DRAWN_BLOCKS: Record<string, [number, number, number, number][]> = {};
+
 const DRAWN_SPOTS: Record<string, { x: number; y: number; w: number; h: number; open: () => void }[]> = {
-  // map 24 — Khu mua sắm. Mặt tiền có cửa vào (Mỹ Viện / Gift / thú cưng /
-  // Shop) đã là portal nên chỉ khai báo mấy chỗ mở thẳng bảng.
-  mall: [
-    { x: 630, y: 112, w: 136, h: 104, open: openPanelSpot('atm') },                                   // buồng ATM
-    { x: 1046, y: 104, w: 208, h: 112, open: openPanelSpot('shop', { shopId: 'shop_general' }) },      // Premium = bách hóa
-    { x: 1348, y: 104, w: 188, h: 112, open: openPanelSpot('shop', { shopId: 'shop_house' }) }         // tiệm trang sức = nhà & nội thất
-  ],
   // Nội thất các tiệm: người bán + quầy đều vẽ sẵn trong ảnh nền -> bấm quầy
+  // (cửa ra và mặt tiền ngoài phố nay lấy thẳng từ lưới ô gốc, xem LTTT_ENTRY)
   fashion_shop: [
     { x: 424, y: 168, w: 152, h: 192, open: openPanelSpot('shop', { shopId: 'shop_fashion' }) }
   ],
@@ -130,46 +156,6 @@ const DRAWN_SPOTS: Record<string, { x: number; y: number; w: number; h: number; 
   ],
   pet_shop: [
     { x: 88, y: 196, w: 232, h: 96, open: openPanelSpot('petshop') }
-  ],
-  // map 10 — Khu giải trí
-  gamecenter: [
-    { x: 48, y: 108, w: 146, h: 112, open: openPanelSpot('atm') },                                    // buồng ATM
-    { x: 524, y: 96, w: 188, h: 124, open: openPanelSpot('ranking') },                                // toà nhà lớn = bảng xếp hạng
-    { x: 800, y: 108, w: 132, h: 110, open: openPanelSpot('daily') },                                 // xe bói = điểm danh
-    { x: 992, y: 56, w: 164, h: 162, open: openPanelSpot('wheel') },                                  // VÒNG QUAY MAY MẮN
-    { x: 1300, y: 84, w: 272, h: 134, open: soonDialog('Pet Racing', 'Trường đua thú cưng — sắp mở!') }
-  ]
-};
-
-// Vật cản VẼ SẴN trong ảnh nền (quầy, kệ, lồng thú, giá treo đồ...) — toạ độ px
-// trên ảnh nền, là phần CHÂN vật (chỗ nhân vật không đứng lên được).
-// Trước đây nhân vật đi xuyên hết bàn ghế vì nền chỉ là một tấm ảnh, không có
-// lớp va chạm nào.
-const DRAWN_BLOCKS: Record<string, [number, number, number, number][]> = {
-  // 58 — tiệm thời trang: 2 giá treo đồ bên trái + quầy thu ngân bên phải
-  fashion_shop: [
-    [40, 188, 200, 62], [40, 250, 200, 76], [40, 330, 200, 74],
-    [424, 188, 152, 172]
-  ],
-  // 59 — tiệm quà: quầy vàng giữa phòng
-  gift_shop: [
-    [195, 188, 228, 104]
-  ],
-  // 104 — mỹ viện: rèm, quầy trang điểm, kệ tường phải, kệ góc trái dưới
-  salon_shop: [
-    [28, 188, 164, 136], [284, 196, 292, 100],
-    [696, 188, 140, 116], [696, 316, 140, 68], [696, 396, 140, 76],
-    [36, 328, 156, 72]
-  ],
-  // 105 — tiệm thú cưng: quầy + hai dãy lồng thú
-  pet_shop: [
-    [86, 188, 236, 106],
-    [36, 304, 168, 80], [36, 392, 168, 80],
-    [424, 188, 200, 104], [424, 304, 200, 80], [424, 392, 200, 80]
-  ],
-  // 101 — trường học: quầy sách vở giữa phòng
-  school: [
-    [418, 236, 314, 52]
   ]
 };
 
@@ -238,6 +224,7 @@ export class WorldScene extends Phaser.Scene {
   create() {
     setHudVisible(true);
     this.zone = ZONES[S.zone] ?? ZONES.farm;
+    this.lmap = ltttMap(this.zone.lttt);
     const zw = this.zone.w * T, zh = this.zone.h * T;
     this.cameras.main.setBounds(0, 0, zw, zh);
     this.physics.world.setBounds(0, 0, zw, zh);
@@ -456,8 +443,15 @@ export class WorldScene extends Phaser.Scene {
     this.obstacles.push(new Phaser.Geom.Rectangle(cx - w / 2, baseY - h, w, h));
   }
 
+  // Lưới ô gốc của map Lttt (nếu zone khai `lttt`) — đi được đúng như client
+  private lmap?: LtttMap;
+
   private blockedAt(x: number, y: number): boolean {
-    if (this.inWater(x, y)) return true;
+    if (this.lmap) {
+      if (!ltttWalkable(this.lmap, x, y)) return true;
+    } else if (this.inWater(x, y)) {
+      return true;
+    }
     for (const r of this.obstacles) if (r.contains(x, y)) return true;
     return false;
   }
@@ -714,31 +708,62 @@ export class WorldScene extends Phaser.Scene {
   // Nhà bếp / nhà kho vẽ thẳng trong ảnh nền map 25 (không phải sprite decor)
   // nên phải khai báo khung bấm riêng.
   private registerDrawnSpots() {
-    for (const [x, y, w, hh] of DRAWN_BLOCKS[this.zone.id] ?? []) {
-      this.obstacles.push(new Phaser.Geom.Rectangle(x, y, w, hh));
+    // map có lưới ô gốc thì lưới đã chặn sẵn quầy/kệ, khỏi cần khai tay
+    if (!this.lmap) {
+      for (const [x, y, w, hh] of DRAWN_BLOCKS[this.zone.id] ?? []) {
+        this.obstacles.push(new Phaser.Geom.Rectangle(x, y, w, hh));
+      }
     }
+    for (const d of DRAWN_SPOTS[this.zone.id] ?? []) {
+      this.spots.push({ rect: new Phaser.Geom.Rectangle(d.x, d.y, d.w, d.h), open: d.open });
+    }
+
+    // ---- cửa vào / trạm buýt lấy thẳng từ lưới ô gốc Lttt ----
+    if (this.lmap) {
+      const m = this.lmap;
+      const table = LTTT_ENTRY[this.zone.id] ?? {};
+      for (const run of m.fronts) {
+        const e = table[run[3]];
+        if (!e) continue;
+        const r = ltttRect(m, run);
+        // khung bấm phủ cả mặt tiền: từ dải ô lên trên 1.5 ô cho dễ chạm
+        this.spots.push({
+          rect: new Phaser.Geom.Rectangle(r.x, r.y - m.tile * 1.5, r.w, r.h + m.tile * 1.5),
+          open: e.to
+            ? () => this.travel(e.to!)
+            : () => bus.emit(EV.OPEN_PANEL, { panel: e.panel!, data: e.data })
+        });
+        const f = ltttFoot(m, run);
+        this.add.text(f.x, r.y - 6, e.label, {
+          fontSize: '11px', color: '#ffe066', backgroundColor: '#00000090', padding: { x: 4, y: 1 }
+        }).setOrigin(0.5, 1).setDepth(1900);
+      }
+      // trạm xe buýt đứng đúng ô 139, nhà chờ dựng trên dải ô chờ (mã 152)
+      for (const run of m.busStop) {
+        const r = ltttRect(m, run);
+        this.spots.push({
+          rect: new Phaser.Geom.Rectangle(r.x, r.y - m.tile, r.w, r.h + m.tile),
+          open: () => bus.emit(EV.OPEN_PANEL, { panel: 'map' })
+        });
+      }
+      for (const run of m.wait) {
+        const f = ltttFoot(m, run);
+        if (this.textures.exists('lt_shelter')) {
+          const img = this.add.image(f.x, f.y, 'lt_shelter').setOrigin(0.5, 1).setScale(0.9).setDepth(f.y);
+          this.add.text(f.x, f.y - img.displayHeight - 2, 'Trạm xe buýt', {
+            fontSize: '11px', color: '#ffe066', backgroundColor: '#00000090', padding: { x: 4, y: 1 }
+          }).setOrigin(0.5, 1).setDepth(1900);
+        }
+      }
+      return;
+    }
+
     if (this.zone.id === 'farm_gate') {
       // lối mòn bên trái map 26 dẫn sang nông trại bạn bè
       this.spots.push({
         rect: new Phaser.Geom.Rectangle(9 * T - 40, 8 * T, 80, 80),
         open: () => bus.emit(EV.OPEN_PANEL, { panel: 'friendfarm' })
       });
-      return;
-    }
-    if (this.zone.id === 'beach') {
-      // tiệm câu vẽ sẵn trong map 14
-      this.spots.push({
-        rect: new Phaser.Geom.Rectangle(596, 20, 180, 130),
-        open: () => bus.emit(EV.OPEN_PANEL, { panel: 'shop', data: { shopId: 'shop_fishing' } })
-      });
-      return;
-    }
-    // Công trình vẽ sẵn trong nền imageMap Lttt: toạ độ px trên chính ảnh nền
-    const drawn = DRAWN_SPOTS[this.zone.id];
-    if (drawn) {
-      for (const d of drawn) {
-        this.spots.push({ rect: new Phaser.Geom.Rectangle(d.x, d.y, d.w, d.h), open: d.open });
-      }
       return;
     }
     if (this.zone.id !== 'farm') return;
