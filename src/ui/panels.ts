@@ -915,7 +915,7 @@ export function registerAllPanels() {
   // [nhãn, z, icon UI]
   const CHIBI_TABS: [string, number, string][] = [
     ['Áo', 20, 'shirt'], ['Quần', 10, 'pants'],
-    ['Mũ', 60, 'hat'], ['Kính', 65, 'glasses'], ['Cầm tay', 70, 'candy']
+    ['Mũ', 60, 'hat'], ['Cầm tay', 70, 'candy']
   ];
 
   // ảnh nhân vật mặc trọn bộ skin (xem trước)
@@ -1846,9 +1846,9 @@ export function registerAllPanels() {
     };
 
     // ---------- mục TỦ ĐỒ (quần áo chibi) ----------
-    type ClosetKey = 'hat' | 'glasses' | 'hair' | 'shirt' | 'pant' | 'hand';
+    type ClosetKey = 'hat' | 'hair' | 'shirt' | 'pant' | 'hand';
     const CLOSET: [ClosetKey, string, number, boolean][] = [
-      ['hat', 'Mũ', 60, true], ['glasses', 'Kính', 65, true], ['hair', 'Tóc', 50, false],
+      ['hat', 'Mũ', 60, true], ['hair', 'Tóc', 50, false],
       ['shirt', 'Áo', 20, false], ['pant', 'Quần', 10, false], ['hand', 'Cầm tay', 70, true]
     ];
     const viewCloset = (f: string, redraw: () => void): ChView => {

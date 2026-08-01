@@ -19,11 +19,17 @@ export class CharCreateScene extends Phaser.Scene {
     const W = this.scale.width, H = this.scale.height;
     // nền phẳng một màu (không dùng ảnh) cho nổi khung tạo nhân vật
     this.add.rectangle(0, 0, W, H, 0x3b6d8c).setOrigin(0);
-    const glow = this.add.circle(W * 0.3, H * 0.52, Math.max(W, H) * 0.42, 0x5a9ab5, 0.45);
+    // Bảng chọn (DOM .cc-panel) bó gọn bố cục trong 900px rồi tự căn giữa trên
+    // màn rộng/vuông (tablet) — nhân vật xem trước phải neo theo ĐÚNG khung
+    // 900px đó (không phải theo W thật) để hai bên không bị dạt xa nhau.
+    const CAP = 900;
+    const marginL = Math.max(0, (W - CAP) / 2);
+    const effW = Math.min(W, CAP);
+    const glow = this.add.circle(marginL + effW * 0.3, H * 0.52, Math.max(effW, H) * 0.42, 0x5a9ab5, 0.45);
     this.tweens.add({ targets: glow, scale: 1.06, duration: 5200, yoyo: true, repeat: -1, ease: 'sine.inout' });
 
     // bục đứng cho nhân vật xem trước
-    const px = W * 0.3, py = H / 2 + 96 * RES;
+    const px = marginL + effW * 0.3, py = H / 2 + 96 * RES;
     const g = this.add.graphics();
     g.fillStyle(0x000000, 0.35); g.fillEllipse(px, py + 8 * RES, 190 * RES, 46 * RES);
     g.fillStyle(0xffd43b, 0.25); g.fillEllipse(px, py + 6 * RES, 160 * RES, 36 * RES);

@@ -16,8 +16,17 @@ export interface ChibiPartDef {
   gold: number;            // giá lượng (ruby)
 }
 
+// Data Avatar gốc có vài id ảnh rỗng trắng xoá (đồ sự kiện cũ, hết hạn khi lấy về) —
+// bỏ hẳn để không hiện món đồ vô hình trong tủ đồ/shop. Riêng z=65 (kính) chỉ có
+// đúng 2 id trong data gốc và cả hai đều rỗng nên bỏ luôn slot "Kính".
+const BROKEN_PARTS = new Set([
+  313, 318, 319, 320, 321, 433, 435, 436, 437, 438, 439, 471, 479, 481, 483, 484,
+  527, 554, 555, 561, 562, 566, 568, 588, 589, 594, 601, 602, 607, 637, 642
+]);
+
 export const CHIBI_PARTS: Record<number, ChibiPartDef> = {};
 for (const [id, p] of Object.entries(RAW as Record<string, Omit<ChibiPartDef, 'id'>>)) {
+  if (BROKEN_PARTS.has(Number(id)) || p.z === 65) continue;
   CHIBI_PARTS[Number(id)] = { id: Number(id), ...p };
 }
 
@@ -25,7 +34,7 @@ export const BODY_ID = 0;   // thân "tròn"
 export const EYES_ID = 4;   // mắt đen mặc định
 
 export const Z_NAME: Record<number, string> = {
-  10: 'Quần', 20: 'Áo', 40: 'Mắt', 50: 'Tóc', 60: 'Mũ', 65: 'Kính', 70: 'Đồ cầm tay'
+  10: 'Quần', 20: 'Áo', 40: 'Mắt', 50: 'Tóc', 60: 'Mũ', 70: 'Đồ cầm tay'
 };
 
 export function chibiList(z: number, gender?: number): ChibiPartDef[] {
