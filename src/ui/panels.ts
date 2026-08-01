@@ -1307,16 +1307,19 @@ export function registerAllPanels() {
     win.classList.add('win-wardrobe');
     win.querySelector('.win-head')?.remove();
 
+    // Tab lớn (Quần áo / Skin / Danh hiệu) dựng thành CỘT DỌC bên trái thay vì
+    // dải ngang trên đầu: màn ngang điện thoại thiếu chiều cao chứ không thiếu
+    // chiều ngang, bỏ dải ngang là phần nội dung có thêm ~56px.
+    win.classList.add('win-wr-side');
     const tabBar = h('div', 'wr-tabs');
-    win.insertBefore(tabBar, body);
+    body.parentElement?.insertBefore(tabBar, body);
 
     const draw = () => {
       tabBar.innerHTML = '';
       for (const [id, name, ico] of CH_SECTIONS) {
         const t = h('button', `wr-tab ${sec === id ? 'on' : ''}`);
         const im = document.createElement('img'); im.src = `assets/ui/inv/${ico}.png`;
-        t.append(im);
-        if (sec === id) t.append(h('span', '', name));
+        t.append(im, h('span', '', name));
         t.title = name;
         t.onclick = () => { sfx.click(); sec = id; draw(); };
         tabBar.append(t);

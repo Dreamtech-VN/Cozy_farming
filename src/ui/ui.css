@@ -980,27 +980,29 @@ input.ui-input, select.ui-input {
    lại: tab tràn lên trên khung, ô đồ là mấy khối nâu to, thanh chỉ số đè lên
    nhân vật. Nay dựng lại toàn bộ bằng kính, chỉ giữ lại mấy icon loại đồ. */
 .win.win-wardrobe {
-  width: min(780px, 94vw); height: min(430px, 82vh); max-height: 82vh;
-  display: flex; flex-direction: column; overflow: visible;
+  width: min(820px, 96vw); height: min(430px, 82vh); max-height: 82vh;
+  display: flex; flex-direction: row; overflow: visible;
 }
 .win.win-wardrobe > .win-body {
-  padding: 12px 14px 14px; flex: 1; min-height: 0; overflow: hidden;
+  padding: 12px 14px 14px; flex: 1; min-width: 0; min-height: 0; overflow: hidden;
   display: flex; flex-direction: column; gap: 10px;
 }
 .win.win-wardrobe .ch-main { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
 
-/* tab lớn (Quần áo / Skin / Danh hiệu) nằm TRONG khung, không tràn lên trên */
+/* tab lớn (Quần áo / Skin / Danh hiệu): CỘT DỌC sát mép trái khung — màn ngang
+   điện thoại thiếu chiều cao nên bỏ dải tab ngang trên đầu cho nội dung rộng ra */
 .wr-tabs {
-  display: flex; align-items: center; gap: 8px; flex: none;
-  padding: 12px 14px 0;
+  flex: none; width: 74px; display: flex; flex-direction: column; gap: 7px;
+  padding: 14px 0 14px 12px; justify-content: flex-start;
 }
 .wr-tab {
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  cursor: pointer; font-family: inherit; height: 38px; padding: 0 14px;
-  font-size: 13px; font-weight: 900; white-space: nowrap; color: #e7f0dd;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  cursor: pointer; font-family: inherit; padding: 7px 4px 8px; width: 100%;
+  font-size: 10px; font-weight: 900; color: #e7f0dd;
   background: rgba(255, 255, 255, .18); border: 1px solid rgba(255, 255, 255, .26);
-  border-radius: 999px; text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+  border-radius: 14px; text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
 }
+.wr-tab span { max-width: 100%; white-space: normal; line-height: 1.15; text-align: center; }
 .wr-tab img { width: 24px; height: 22px; object-fit: contain; filter: saturate(.4) opacity(.75); }
 .wr-tab.on {
   background: linear-gradient(#ffe066, #f0a318); border-color: #ffe9a8;
@@ -1791,8 +1793,8 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   .od-ing-art { height: 34px; }
   .wd-figure { flex-basis: 52%; }
   .wd-slot-col { width: 40px; }
-  .wr-tab { height: 46px; font-size: 13px; padding: 0 14px 10px; }
-  .wr-tabs { top: -36px; }
+  .wr-tabs { width: 64px; padding: 10px 0 10px 10px; }
+  .wr-tab { font-size: 9px; padding: 5px 3px 6px; }
 }
 
 /* ===== Icon chat nổi (kéo thả được) ===== */
