@@ -56,9 +56,10 @@ const CURATED: { sid: string; name: string; price: number }[] = [
   { sid: '0044', name: 'Mèo Máy Xanh', price: 25 },
   { sid: '0056', name: 'Nữ Xạ Thủ Bạch Thố', price: 30 },
   { sid: '0065', name: 'Tiên Nữ Cánh Hồng', price: 30 },
-  { sid: '0023', name: 'Gấu Trúc Giáp Vàng', price: 40 },
+  { sid: '0156', name: 'Sói Tuyết Có Cánh', price: 35 },
   { sid: '0032', name: 'Pháp Sư Bóng Đêm', price: 45 },
   { sid: '0084', name: 'Rồng Ngọc Lam', price: 50 },
+  { sid: '0108', name: 'Rồng Băng Giáp Vàng', price: 55 },
   { sid: '0009', name: 'Rồng Bạc Cổ Đại', price: 60 }
 ];
 
