@@ -10,6 +10,60 @@ import json, math, os, sys
 from PIL import Image
 
 
+
+def load_atlas(folder, name):
+    """Đọc atlas libgdx (.atlas) + ảnh chung -> {tên vùng: ảnh đã cắt}.
+
+    Pack thú cưng của GunPow gói mọi mảnh vào MỘT ảnh và mô tả vị trí trong
+    file .atlas, khác Pack4 để ảnh rời. Vùng nào ghi rotate:true là đã xoay 90°
+    khi đóng gói, cắt xong phải xoay lại.
+    """
+    ap = os.path.join(folder, name + '.atlas')
+    if not os.path.exists(ap):
+        return None
+    raw = open(ap, 'rb').read()
+    try:
+        text = raw.decode('utf-8')
+    except UnicodeDecodeError:
+        # mấy pet ra sau bị mã hoá atlas bằng XOR khoá 10 byte lặp lại
+        # (dò ra bằng cách so với atlas không mã hoá: khoá = cipher ^ plaintext)
+        key = bytes([0xb2, 0xba, 0xa3, 0xbf, 0xbe, 0xb0, 0xbc, 0xba, 0xa4, 0xbd])
+        text = bytes(c ^ key[i % len(key)] for i, c in enumerate(raw)).decode('utf-8', 'replace')
+    lines = text.splitlines()
+    page = None
+    out = {}
+    cur = None
+    for ln in lines:
+        if not ln.strip():
+            continue
+        if not ln.startswith(' ') and ':' not in ln:
+            if ln.strip().endswith('.png'):
+                pp = os.path.join(folder, ln.strip())
+                page = Image.open(pp).convert('RGBA') if os.path.exists(pp) else None
+                cur = None
+            else:
+                cur = {'name': ln.strip()}
+                out[cur['name']] = cur
+            continue
+        if cur is None:
+            continue
+        k, _, v = ln.strip().partition(':')
+        cur[k.strip()] = v.strip()
+    regs = {}
+    for nm, d in out.items():
+        if 'xy' not in d or 'size' not in d or page is None:
+            continue
+        x, y = [int(v) for v in d['xy'].split(',')]
+        w, h = [int(v) for v in d['size'].split(',')]
+        rot = d.get('rotate', 'false') == 'true'
+        if rot:
+            im = page.crop((x, y, x + h, y + w)).transpose(Image.ROTATE_90)
+        else:
+            im = page.crop((x, y, x + w, y + h))
+        regs[nm] = im
+    return regs
+
+
 def _val(fr, t, fields, default):
     """Nội suy tuyến tính giá trị của một timeline tại thời điểm t."""
     if not fr:
@@ -316,6 +370,7 @@ def draw_mesh(canvas, im, reg, pts, PAD):
 
 def compose(folder, name, max_h=None, anim='holdon', at=None, pad_box=None):
     data = json.load(open(os.path.join(folder, name + '.json'), encoding='utf-8'))
+    atlas = load_atlas(folder, name)
     pose = anim_pose_at(data, anim, at) if at is not None else anim_pose(data, anim)
     iks = anim_ik(data, anim, data.get('ik') or [])
     fix = solve_ik(data, _local_of(data), None, iks, pose) if iks else {}
@@ -334,12 +389,16 @@ def compose(folder, name, max_h=None, anim='holdon', at=None, pad_box=None):
             continue          # bỏ clipping / boundingbox
         path = reg.get('path', att)
         # ảnh mảnh nằm cạnh json, vài bộ lại để trong thư mục con images/
-        f = os.path.join(folder, path + '.png')
-        if not os.path.exists(f):
-            f = os.path.join(folder, 'images', path + '.png')
-        if not os.path.exists(f):
-            continue
-        im = Image.open(f).convert('RGBA')
+        im = None
+        if atlas and path in atlas:
+            im = atlas[path]
+        else:
+            f = os.path.join(folder, path + '.png')
+            if not os.path.exists(f):
+                f = os.path.join(folder, 'images', path + '.png')
+            if not os.path.exists(f):
+                continue
+            im = Image.open(f).convert('RGBA')
         m = bones.get(slot['bone'])
         if not m:
             continue

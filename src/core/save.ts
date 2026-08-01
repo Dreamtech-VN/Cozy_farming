@@ -148,7 +148,10 @@ export function load(): boolean {
     // save cũ để đồ cầm tay trong túi -> chuyển vào tủ quần áo (như Lttt)
     migrateHandItems(S.inventory, S.chibiWardrobe);
     if (!S.skins) S.skins = [];
-    if (!S.pets) S.pets = S.farm?.hasDog ? ['dog'] : [];   // save cũ có chó -> chuyển sang hệ thú cưng
+    if (!S.pets) S.pets = [];
+    // save cũ nuôi chó/mèo/vẹt (hệ thú cũ) -> bỏ, thú giờ lấy từ pack GunPow
+    S.pets = S.pets.filter(p => p.startsWith('gp_'));
+    if (S.activePet && !S.activePet.startsWith('gp_')) S.activePet = undefined;
     if (S.tools.basket === undefined) S.tools.basket = (S.inventory['tool_basket'] ?? 0) > 0 ? 1 : 0;
     // 4 công cụ cơ bản luôn có sẵn (save cũ có thể thiếu rìu/liềm)
     if (S.tools.axe === undefined) S.tools.axe = 1;
@@ -221,7 +224,7 @@ export function addRubies(n: number, source: RubySource) {
 }
 
 /** Trừ lượng — chỉ dùng cho gacha / skin giới hạn. */
-export type RubySink = 'gacha' | 'limited_skin';
+export type RubySink = 'gacha' | 'limited_skin' | 'pet';
 export function spendRubies(n: number, _sink: RubySink): boolean {
   if (S.wallet.rubies < n) { toast(`Cần ${n} lượng — nạp thêm ở mục Nạp nhé.`, 'ruby'); return false; }
   S.wallet.rubies -= n;

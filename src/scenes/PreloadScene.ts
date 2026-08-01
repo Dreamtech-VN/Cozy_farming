@@ -87,9 +87,7 @@ export class PreloadScene extends Phaser.Scene {
       this.load.image(`lt_${b}`, `assets/lttt/bld/${b}.png`);
     }
     this.load.image('lt_pond', 'assets/lttt/pond.png');
-    this.load.spritesheet('avdog', 'assets/farm/avdog.png', { frameWidth: 46, frameHeight: 38 });
-    this.load.spritesheet('avcat', 'assets/farm/avcat.png', { frameWidth: 40, frameHeight: 32 });
-    this.load.spritesheet('avparrot', 'assets/farm/avparrot.png', { frameWidth: 34, frameHeight: 42 });
+    // thú cưng GunPow nạp khi thả ra map (xem WorldScene.spawnPet)
     // ---- Ô ruộng kiểu Avatar (repo Lttt) ----
     // ô ruộng đã bỏ viền cỏ để không đè lên nền cỏ của map
     for (let i = 0; i < 8; i++) this.load.image(`fcell${i}`, `assets/lttt/farm/cellin${i}.png`);

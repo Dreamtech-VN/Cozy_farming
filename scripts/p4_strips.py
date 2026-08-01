@@ -39,10 +39,10 @@ def body_box(im):
     return (x0, rows[0], x1, rows[-1] + 1)
 
 
-def strip(folder, name, frames=FRAMES, height=HEIGHT):
+def strip(folder, name, frames=FRAMES, height=HEIGHT, anim='holdon'):
     data = json.load(open(os.path.join(folder, name + '.json'), encoding='utf-8'))
-    dur = anim_len(data, 'holdon')
-    raws = [compose(folder, name, None, 'holdon',
+    dur = anim_len(data, anim)
+    raws = [compose(folder, name, None, anim,
                     at=(dur * i / frames if dur else None), pad_box=BIG)
             for i in range(frames)]
     boxes = [im.getbbox() for im in raws if im.getbbox()]
@@ -71,20 +71,22 @@ def strip(folder, name, frames=FRAMES, height=HEIGHT):
 
 if __name__ == '__main__':
     src, dst, keep_json = sys.argv[1], sys.argv[2], sys.argv[3]
-    keep = set(json.load(open(keep_json)))
+    anim = sys.argv[4] if len(sys.argv) > 4 else 'holdon'
+    out_json = sys.argv[5] if len(sys.argv) > 5 else 'src/data/skins-p4.json'
+    keep = set(json.load(open(keep_json))) if keep_json != '-' else None
     os.makedirs(dst, exist_ok=True)
     idx = {}
     for j in sorted(glob.glob(f'{src}/**/*.json', recursive=True)):
         name = os.path.basename(j)[:-5]
-        sid = name.replace('sbody_', '')
-        if sid not in keep:
+        sid = name.replace('sbody_', '').replace('character_', '')
+        if keep is not None and sid not in keep:
             continue
         try:
-            im, w = strip(os.path.dirname(j), name)
+            im, w = strip(os.path.dirname(j), name, anim=anim)
         except Exception as e:
             print('lỗi', sid, e)
             continue
         im.save(f'{dst}/{sid}.webp', 'WEBP', quality=82, method=6)
         idx[sid] = [w, HEIGHT, FRAMES]
-    json.dump(idx, open('src/data/skins-p4.json', 'w'), indent=0, sort_keys=True)
+    json.dump(idx, open(out_json, 'w'), indent=0, sort_keys=True)
     print('xong', len(idx), 'bộ')

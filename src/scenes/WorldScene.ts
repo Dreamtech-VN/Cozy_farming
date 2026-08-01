@@ -4,7 +4,7 @@ import { TOOLS } from '@/data/tools';
 import { bus, EV, toast } from '@/core/events';
 import { ZONES, type ZoneDef, type NpcDef } from '@/data/zones';
 import { CROPS, CROP_LIST, CROP_ANIM } from '@/data/crops';
-import { PETS } from '@/data/pets';
+import { PETS, petDef } from '@/data/pets';
 import { roamersIn } from '@/systems/social';
 import type { Friend } from '@/core/types';
 import { ANIMALS } from '@/data/animals';
@@ -1836,46 +1836,55 @@ export class WorldScene extends Phaser.Scene {
     const id = S.activePet;
     if (!id || !S.pets?.includes(id)) return;
     const def = PETS[id];
-    if (!def || !this.textures.exists(def.sheet)) return;
-    const home = this.zone.id === 'farm'
-      ? { x: PETHOUSE_POS.x + 46, y: PETHOUSE_POS.y + 60 }
-      : { x: this.player.x + 40, y: this.player.y + 8 };
-    this.pet = this.add.sprite(home.x, home.y, def.sheet, def.frames.idle[0])
-      .setOrigin(0.5, 1).setScale(def.scale * (this.zone.bg ? 1 : 0.5)).setDepth(home.y);
-    this.pet.setInteractive({ useHandCursor: true });
-    this.pet.on('pointerdown', () => this.petMenu());
+    if (!def) return;
+    const key = `petart_${id}`;
+    const put = () => {
+      const home = this.zone.id === 'farm'
+        ? { x: PETHOUSE_POS.x + 46, y: PETHOUSE_POS.y + 60 }
+        : { x: this.player.x + 40, y: this.player.y + 8 };
+      // thú cao 96px trong ảnh -> co về ~40px ngoài map cho vừa nhân vật
+      const sc = (40 / def.art.h) * (this.zone.bg ? 1 : 0.55);
+      this.pet = this.add.sprite(home.x, home.y, key, 0)
+        .setOrigin(0.5, 1).setScale(sc).setDepth(home.y);
+      this.pet.setInteractive({ useHandCursor: true });
+      this.pet.on('pointerdown', () => this.petMenu());
 
-    // thở / vẫy khi đứng yên
-    this.time.addEvent({ delay: 850, loop: true, callback: () => {
-      if (!this.pet?.active || this.tweens.isTweening(this.pet)) return;
-      const f = def.frames.idle;
-      this.pet.setFrame(this.pet.frame.name === String(f[0]) ? f[1] : f[0]);
-    } });
+      // đứng thở: chạy vòng 4 khung của animation 'wait'
+      this.time.addEvent({ delay: 220, loop: true, callback: () => {
+        if (!this.pet?.active) return;
+        this.petFi = (this.petFi + 1) % def.art.frames;
+        this.pet.setFrame(this.petFi);
+      } });
 
-    // đi loanh quanh khi không dắt
-    const wander = () => {
-      if (!this.pet?.active) return;
-      if (this.petWalk) { this.time.delayedCall(900, wander); return; }
-      const base = this.zone.id === 'farm' ? PETHOUSE_POS : { x: this.player.x, y: this.player.y };
-      const spot = this.freeSpot(
-        base.x + (this.zone.id === 'farm' ? 20 + Math.random() * 90 : -50 + Math.random() * 100),
-        (this.zone.id === 'farm' ? PETHOUSE_POS.y + 10 : this.player.y - 10) + Math.random() * 40, 80, 40);
-      const tx = spot.x, ty = spot.y;
-      this.pet.setFrame(def.frames.move);
-      this.pet.setFlipX(tx < this.pet.x);
-      this.tweens.add({
-        targets: this.pet, x: tx, y: ty, duration: 1400 + Math.random() * 1200,
-        onUpdate: () => this.pet?.setDepth(this.pet.y),
-        onComplete: () => { this.pet?.setFrame(def.frames.idle[0]); this.time.delayedCall(1200 + Math.random() * 2200, wander); }
-      });
+      // đi loanh quanh khi không dắt
+      const wander = () => {
+        if (!this.pet?.active) return;
+        if (this.petWalk) { this.time.delayedCall(900, wander); return; }
+        const base = this.zone.id === 'farm' ? PETHOUSE_POS : { x: this.player.x, y: this.player.y };
+        const spot = this.freeSpot(
+          base.x + (this.zone.id === 'farm' ? 20 + Math.random() * 90 : -50 + Math.random() * 100),
+          (this.zone.id === 'farm' ? PETHOUSE_POS.y + 10 : this.player.y - 10) + Math.random() * 40, 80, 40);
+        this.pet.setFlipX(spot.x < this.pet.x);
+        this.tweens.add({
+          targets: this.pet, x: spot.x, y: spot.y, duration: 1400 + Math.random() * 1200,
+          onUpdate: () => this.pet?.setDepth(this.pet.y),
+          onComplete: () => this.time.delayedCall(1200 + Math.random() * 2200, wander)
+        });
+      };
+      this.time.delayedCall(1200, wander);
     };
-    this.time.delayedCall(1200, wander);
+
+    if (this.textures.exists(key)) { put(); return; }
+    this.load.spritesheet(key, def.art.url, { frameWidth: def.art.w, frameHeight: def.art.h });
+    this.load.once(`filecomplete-spritesheet-${key}`, put);
+    this.load.start();
   }
+  private petFi = 0;
 
   // pet bám theo người chơi khi đang dắt đi dạo
   private followPet(dt: number) {
     if (!this.pet?.active || !this.petWalk) return;
-    const def = PETS[S.activePet ?? ''];
+    const def = petDef(S.activePet);
     if (!def) return;
     const gap = this.zone.bg ? 52 : 26;
     const dx = this.player.x - this.pet.x, dy = this.player.y + 6 - this.pet.y;
@@ -1885,16 +1894,13 @@ export class WorldScene extends Phaser.Scene {
       this.pet.x += (dx / d) * spd;
       this.pet.y += (dy / d) * spd;
       this.pet.setFlipX(dx < 0);
-      this.pet.setFrame(def.frames.move);
       this.pet.setDepth(this.pet.y);
-    } else if (this.pet.frame.name === String(def.frames.move)) {
-      this.pet.setFrame(def.frames.idle[0]);
     }
   }
 
   // bảng chọn khi bấm vào thú cưng
   private petMenu() {
-    const def = PETS[S.activePet ?? ''];
+    const def = petDef(S.activePet);
     if (!def) return;
     bus.emit(EV.OPEN_PANEL, {
       panel: 'dialog',
@@ -1907,13 +1913,13 @@ export class WorldScene extends Phaser.Scene {
             cb: () => {
               this.petWalk = !this.petWalk;
               this.tweens.killTweensOf(this.pet!);
-              toast(this.petWalk ? `${def.name} đi dạo cùng bạn!` : `${def.name} về chỗ nghỉ.`, def.icon);
+              toast(this.petWalk ? `${def.name} đi dạo cùng bạn!` : `${def.name} về chỗ nghỉ.`, 'pet');
             }
           },
           {
             icon: '', ui: 'heart', label: 'Vuốt ve', cb: () => {
               if (this.pet) this.fxImage(this.pet.x, this.pet.y - 54, 'fx_heart');
-              toast(`${def.name} kêu vui vẻ~`, def.icon);
+              toast(`${def.name} kêu vui vẻ~`, 'pet');
             }
           }
         ]
