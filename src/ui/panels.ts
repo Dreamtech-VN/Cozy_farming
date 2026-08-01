@@ -2355,8 +2355,8 @@ export function registerAllPanels() {
     grid?: 'tall' | 'rows';
     /** cụm nút tròn dưới chân nhân vật */
     quick?: HTMLElement;
-    /** dòng tiến độ nhỏ nằm giữa lưới và hàng nút */
-    note?: string;
+    /** mấy dòng tiến độ ở đáy khung (nằm bên trái, cùng hàng với nút) */
+    note?: string[];
     /** true = khung trái chỉ có nhân vật, không kèm dải ô trang bị */
     bare?: boolean;
     /** true = bỏ hẳn khung trái, nội dung chiếm cả trang */
@@ -2491,12 +2491,21 @@ export function registerAllPanels() {
         grid.append(cell);
       }
       panel.append(grid);
-      if (view.note) panel.append(h('div', 'ch-note', view.note));
 
-      if (view.foot.length) {
-        const ft = h('div', 'ch-foot');
-        view.foot.forEach(x => ft.append(x));
-        panel.append(ft);
+      // đáy khung: chữ tiến độ bên trái, nút bên phải — đúng như mẫu
+      if (view.note?.length || view.foot.length) {
+        const bar = h('div', 'ch-bottom');
+        if (view.note?.length) {
+          const nt = h('div', 'ch-note');
+          view.note.forEach(t => nt.append(h('div', '', t)));
+          bar.append(nt);
+        }
+        if (view.foot.length) {
+          const ft = h('div', 'ch-foot');
+          view.foot.forEach(x => ft.append(x));
+          bar.append(ft);
+        }
+        panel.append(bar);
       }
       page.append(panel);
       box.append(page);
@@ -2638,8 +2647,8 @@ export function registerAllPanels() {
         empty: 'Nhóm này chưa có danh hiệu.',
         grid: 'rows',
         full: true,
-        note: `【${cat.name}】${fmt(got)}/${fmt(need)}  ·  Chờ nhận: ${fmt(pendingPoints())}`
-          + `  ·  Tổng: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`,
+        note: [`【${cat.name}】${fmt(got)}/${fmt(need)}`,
+               `Thành tựu còn: ${fmt(achLeft())}     Tổng tiến độ: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`],
         foot: [btn('Huy hiệu', 'gold', () => openPanel('achievement'))]
       };
     };
@@ -2681,9 +2690,9 @@ export function registerAllPanels() {
         grid: 'tall',
         bare: true,
         // skin chỉ để đẹp, không cộng chỉ số
-        note: wearing
+        note: [wearing
           ? `Đang dùng 【${SKIN_RANKS[skinRank(wearing)].name}】${wearing.name}`
-          : 'Chưa mặc bộ ảo hoá nào.',
+          : 'Chưa mặc bộ ảo hoá nào.'],
         foot: []
       };
     };
