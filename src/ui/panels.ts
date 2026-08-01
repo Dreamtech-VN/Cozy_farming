@@ -2332,6 +2332,8 @@ export function registerAllPanels() {
   // hai nút dưới cùng làm gì.
   type ChSlot = { key: string; name: string; art?: HTMLElement; badge?: string;
                   star?: number; pips?: [number, boolean[]]; grade?: string;
+                  /** ảnh bóng mờ khi ô trống (icon gốc trong ui/bag của apk) */
+                  emptyIcon?: string;
                   on?: boolean; click: () => void };
   type ChCell = { name: string; art: HTMLElement; grade?: string; badge?: string;
                   star?: number; pips?: [number, boolean[]]; flag?: string;
@@ -2388,7 +2390,11 @@ export function registerAllPanels() {
       view.slots.forEach((sl, i) => {
         const cell = h('button', `ch-slot ${sl.grade ?? ''} ${sl.art ? '' : 'empty'} ${sl.on ? 'on' : ''}`);
         if (sl.art) cell.append(sl.art);
-        else cell.append(h('span', 'ch-slot-nm', sl.name));
+        else if (sl.emptyIcon) {
+          const im = document.createElement('img');
+          im.className = 'ch-slot-ghost'; im.src = sl.emptyIcon; im.alt = sl.name;
+          cell.append(im);
+        } else cell.append(h('span', 'ch-slot-nm', sl.name));
         if (sl.badge) cell.append(h('div', 'ch-badge', sl.badge));
         if (sl.star) cell.append(h('div', 'ch-star', '★'.repeat(sl.star)));
         if (sl.pips) cell.append(pipRow(sl.pips));
@@ -2410,11 +2416,17 @@ export function registerAllPanels() {
       side.append(bar);
 
       const b2 = cpBreakdown();
+      const cpRow = h('div', 'ch-cprow');
+      const fast = h('button', 'ch-fast');
+      fast.append(h('span', '', 'Trang bị'), h('span', '', 'nhanh'));
+      fast.title = 'Tự mặc bộ mạnh nhất đang có';
+      fast.onclick = () => { sfx.click(); autoEquip(); render(); };
       const cp = h('div', 'ch-cp');
       cp.append(h('span', 'ch-cp-k', 'Lực chiến:'), h('span', 'ch-cp-n', fmt(combatPower())));
       cp.title = `Gốc ${b2.base} · Quần áo ${b2.clothes} · Trang bị ${b2.equip}`
         + ` · Cấp ${b2.level} · Cường hoá ${b2.enhance}`;
-      side.append(cp);
+      cpRow.append(fast, cp);
+      side.append(cpRow);
       page.append(side);
 
       // ---------- khung phải: hàng lọc + lưới + nút ----------
@@ -2476,21 +2488,24 @@ export function registerAllPanels() {
           badge: d && equipLevel(d.id) ? `+${equipLevel(d.id)}` : undefined,
           star: d ? equipStar(d.id) : 0,
           pips: d ? [d.sockets, gemsOn(d.id).map(Boolean)] as [number, boolean[]] : undefined,
+          emptyIcon: `assets/equip/slot/${sl.id}.png`,
           click: () => { if (d) equipDetail(d, redraw); else { filter = sl.id; redraw(); } }
         };
       });
 
+      // 3 nút tròn dùng đúng icon buff_02/03/04 trong ui/bag của apk
       const quick = h('div', 'ch-quick');
-      const qbtn = (icon: string, w: number, hh: number, tip: string, go: () => void) => {
+      const qbtn = (icon: string, tip: string, go: () => void) => {
         const q = h('button', 'ch-q');
-        q.append(spr(icon, 0, 0, w, hh, 22));
+        const im = document.createElement('img'); im.src = `assets/equip/${icon}`; im.alt = tip;
+        q.append(im);
         q.title = tip; q.onclick = () => { sfx.click(); go(); };
         return q;
       };
       quick.append(
-        qbtn('assets/forge/ic_forge.png', 56, 44, 'Lò rèn', () => openPanel('smithy')),
-        qbtn('assets/equip/stone_034.png', 58, 62, 'Quầy đá', () => openPanel('gemshop')),
-        qbtn('assets/ui/act/gift.png', 13, 12, 'Rương trang bị', () => openPanel('chestopen')));
+        qbtn('btn_forge.png', 'Cường hoá', () => openPanel('smithy')),
+        qbtn('btn_gem.png', 'Khảm đá', () => openPanel('socket')),
+        qbtn('btn_shop.png', 'Rương trang bị', () => openPanel('chestopen')));
       const list = f === 'worn' ? worn().map(w => w.def)
         : bag.filter(d => f === 'all' || d.slot === f).sort((a, c) => c.tier - a.tier);
       return {
