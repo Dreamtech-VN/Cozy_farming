@@ -59,9 +59,9 @@ defItem({ id: 'stone', name: 'Đá', kind: 'material', icon: '', sell: 6, desc: 
 defItem({ id: 'enh_stone', name: 'Đá Nâng Cấp', kind: 'material', icon: '', sprite: { url: 'assets/farm/chibi/stone.png', sx: 0, sy: 0, sw: 52, sh: 49 }, sell: 20, buy: 200, desc: 'Nguyên liệu đập trang bị. Mua ở quầy trang bị hoặc rơi ra khi đập hỏng.' });
 
 // ---- Rương trang bị: nguồn DUY NHẤT ra trang bị (GunPow không bán thẳng đồ) ----
-defItem({ id: 'chest_eq1', name: 'Rương Trang Bị Thường', kind: 'special', icon: '', sprite: { url: 'assets/ui/act/gift.png', sx: 0, sy: 0, sw: 13, sh: 12 }, sell: 0, buy: 3000, desc: 'Mở ra 1 trang bị bậc 1-6.' });
-defItem({ id: 'chest_eq2', name: 'Rương Trang Bị Khá', kind: 'special', icon: '', sprite: { url: 'assets/ui/act/gift.png', sx: 0, sy: 0, sw: 13, sh: 12 }, sell: 0, buy: 15000, desc: 'Mở ra 1 trang bị bậc 5-12.' });
-defItem({ id: 'chest_eq3', name: 'Rương Trang Bị Xịn', kind: 'special', icon: '', sprite: { url: 'assets/ui/act/gift.png', sx: 0, sy: 0, sw: 13, sh: 12 }, sell: 0, buy: 60000, desc: 'Mở ra 1 trang bị bậc 11-20.' });
+defItem({ id: 'chest_eq1', name: 'Rương Trang Bị Thường', kind: 'special', icon: '', sprite: { url: 'assets/equip/chest/eq1.png', sx: 0, sy: 0, sw: 63, sh: 53 }, sell: 0, buy: 3000, desc: 'Mở ra 1 trang bị bậc 1-6.' });
+defItem({ id: 'chest_eq2', name: 'Rương Trang Bị Khá', kind: 'special', icon: '', sprite: { url: 'assets/equip/chest/eq2.png', sx: 0, sy: 0, sw: 63, sh: 52 }, sell: 0, buy: 15000, desc: 'Mở ra 1 trang bị bậc 5-12.' });
+defItem({ id: 'chest_eq3', name: 'Rương Trang Bị Xịn', kind: 'special', icon: '', sprite: { url: 'assets/equip/chest/eq3.png', sx: 0, sy: 0, sw: 64, sh: 54 }, sell: 0, buy: 60000, desc: 'Mở ra 1 trang bị bậc 11-20.' });
 
 // ---- Đá thăng tinh: dùng để nâng sao trang bị (3 cấp như GunPow) ----
 defItem({ id: 'star_stone_1', name: 'Đá Lên Sao Nhỏ', kind: 'material', icon: '', sprite: { url: 'assets/equip/stone_004.png', sx: 0, sy: 0, sw: 57, sh: 56 }, sell: 40, buy: 400, desc: 'Dùng để lên sao trang bị (sao 1-2).' });
