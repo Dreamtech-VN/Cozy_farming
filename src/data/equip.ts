@@ -1,8 +1,8 @@
 // ===== Trang bị — đúng 8 ô của GunPow =====
-// Bảng 7800-7807 của server GunPow ghi rõ 8 ô trang bị:
-//   7800 Vũ Khí · 7801 Thủ Trạc · 7802 Hạng Liên · 7803 Bảo Vật
-//   7804 Giới Chỉ · 7805 Huân Chương · 7806 Nhĩ Trụy · 7807 Phó Thủ
-// Tên từng món cũng lấy nguyên từ bảng đó:
+// Bảng 7800-7807 của server GunPow ghi rõ 8 ô trang bị (Hán-Việt gốc là
+// Vũ Khí · Thủ Trạc · Hạng Liên · Bảo Vật · Giới Chỉ · Huân Chương · Nhĩ Trụy ·
+// Phó Thủ) — bên mình dịch sang tiếng Việt dễ đọc cho người chơi.
+// Danh sách món lấy nguyên từ bảng vật phẩm của server rồi dịch tên:
 //   7000 vũ khí (99) · 7100 Chi Giới · 7200 Chi Liên · 7300 Hộ Oản
 //   7400 Huy Chương · 7500 Chi Bảo · 7600 Chi Trụy · 7700 Phó Thủ
 // Icon giải từ .pkm của client (image/shopitems) bằng scripts/pkm_to_png.py.
@@ -25,13 +25,13 @@ export interface EquipSlotDef {
 // thứ tự đúng theo bảng 7800-7807
 export const EQUIP_SLOTS: EquipSlotDef[] = [
   { id: 'weapon', name: 'Vũ khí', main: 'strength', sub: 'agility' },
-  { id: 'hand', name: 'Thủ trạc', main: 'strength', sub: 'agility' },
-  { id: 'necklace', name: 'Hạng liên', main: 'intellect', sub: 'health' },
+  { id: 'hand', name: 'Vòng tay', main: 'strength', sub: 'agility' },
+  { id: 'necklace', name: 'Dây chuyền', main: 'intellect', sub: 'health' },
   { id: 'treasure', name: 'Bảo vật', main: 'agility', sub: 'charm' },
-  { id: 'ring', name: 'Giới chỉ', main: 'charm', sub: 'intellect' },
-  { id: 'medal', name: 'Huân chương', main: 'health', sub: 'strength' },
-  { id: 'earring', name: 'Nhĩ trụy', main: 'charm', sub: 'agility' },
-  { id: 'offhand', name: 'Phó thủ', main: 'intellect', sub: 'strength' }
+  { id: 'ring', name: 'Nhẫn', main: 'charm', sub: 'intellect' },
+  { id: 'medal', name: 'Huy chương', main: 'health', sub: 'strength' },
+  { id: 'earring', name: 'Bông tai', main: 'charm', sub: 'agility' },
+  { id: 'offhand', name: 'Tay phụ', main: 'intellect', sub: 'strength' }
 ];
 
 export const SLOT_OF: Record<EquipSlot, EquipSlotDef> =

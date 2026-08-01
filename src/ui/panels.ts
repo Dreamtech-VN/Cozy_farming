@@ -2506,14 +2506,16 @@ export function registerAllPanels() {
         qbtn('btn_forge.png', 'Cường hoá', () => openPanel('smithy')),
         qbtn('btn_gem.png', 'Khảm đá', () => openPanel('socket')),
         qbtn('btn_shop.png', 'Rương trang bị', () => openPanel('chestopen')));
+      // "Toàn bộ" gồm CẢ đồ đang mặc lẫn đồ để trong túi; lọc theo ô cũng vậy.
+      const all = [...worn().map(w => w.def), ...bag];
       const list = f === 'worn' ? worn().map(w => w.def)
-        : bag.filter(d => f === 'all' || d.slot === f).sort((a, c) => c.tier - a.tier);
+        : all.filter(d => f === 'all' || d.slot === f).sort((a, c) => c.tier - a.tier);
       return {
         slots,
-        filters: [{ key: 'all', name: 'Toàn bộ', n: bag.length },
+        filters: [{ key: 'all', name: 'Toàn bộ', n: worn().length + bag.length },
                   { key: 'worn', name: 'Trên người', n: worn().length },
                   ...EQUIP_SLOTS.map(sl => ({ key: sl.id, name: sl.name,
-                    n: bag.filter(d => d.slot === sl.id).length }))],
+                    n: (S.equip[sl.id] ? 1 : 0) + bag.filter(d => d.slot === sl.id).length }))],
         cells: list.map(d => ({
           name: d.name, art: spr(d.url, 0, 0, d.w, d.h, 40), grade: gradeOf(d),
           badge: equipLevel(d.id) ? `+${equipLevel(d.id)}` : undefined,
@@ -2523,7 +2525,7 @@ export function registerAllPanels() {
           click: () => equipDetail(d, redraw)
         })),
         empty: f === 'worn' ? 'Chưa đeo món nào.'
-          : 'Không có món nào ở mục này — mở rương trang bị để kiếm.',
+          : 'Chưa có món nào ở mục này — mở rương trang bị để kiếm.',
         quick,
         foot: [btn('Lò rèn', 'gold', () => openPanel('smithy')),
                btn('Mặc tối ưu', 'green', () => { autoEquip(); redraw(); })]
