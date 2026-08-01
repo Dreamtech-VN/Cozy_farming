@@ -1336,21 +1336,21 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   position: relative; font-family: inherit; cursor: pointer; padding: 8px 6px 10px;
   display: flex; flex-direction: column; align-items: center; gap: 4px;
   aspect-ratio: 3 / 4;
-  background: linear-gradient(#efe0bd, #ddc79c);
-  border: 2px solid rgba(255, 255, 255, .22); border-radius: 12px;
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .10), 0 2px 0 #00000012;
+  background: linear-gradient(rgba(28, 52, 36, .46), rgba(12, 28, 18, .62));
+  border: 1px solid rgba(255, 255, 255, .22); border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18);
 }
 .skin-card.active { border-color: #ffd43b; background: rgba(255, 212, 59, .2); box-shadow: 0 0 0 2px rgba(255, 212, 59, .35); }
 .skin-card .skin-art { flex: 1; display: flex; align-items: center; justify-content: center; }
 .skin-card .nm { font-size: 11.5px; font-weight: 800; color: #f2ece0; text-align: center; line-height: 1.15; }
 .skin-on {
   position: absolute; top: 6px; right: 6px; font-size: 10px; font-weight: 900; color: #3d2c05;
-  background: linear-gradient(#ffe066, #f5a623); border: 1px solid #b5836b; border-radius: 7px; padding: 1px 6px;
+  background: linear-gradient(#ffe066, #f5a623); border: 1px solid #ffe9a8; border-radius: 999px; padding: 1px 7px;
 }
 /* skin chưa sở hữu: xám */
 .skin-card.locked { opacity: .95; }
 .skin-card.locked .skin-art { filter: grayscale(1) brightness(.85); }
-.skin-card.locked .nm { color: #8b7357; }
+.skin-card.locked .nm { color: #a9b39d; }
 .skin-lock {
   position: absolute; top: 6px; right: 6px; font-size: 10px; font-weight: 900; color: #f6edd8;
   background: rgba(60, 44, 24, .72); border-radius: 7px; padding: 1px 6px;
