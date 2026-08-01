@@ -280,6 +280,7 @@ export class WorldScene extends Phaser.Scene {
     bus.on(EV.APPEARANCE, this.onAppearance, this);
     bus.on(EV.STATE_CHANGED, this.refreshTitleTag, this);
     bus.on(EV.HOUSE, this.onHouseChanged, this);
+    bus.on(EV.ZONE, this.refreshPet, this);
     bus.on('world:place', this.startPlacing, this);
     bus.on('world:emote', this.onEmote, this);
     bus.on('world:say', this.onSay, this);
@@ -299,6 +300,7 @@ export class WorldScene extends Phaser.Scene {
       bus.off(EV.APPEARANCE, this.onAppearance, this);
       bus.off(EV.STATE_CHANGED, this.refreshTitleTag, this);
       bus.off(EV.HOUSE, this.onHouseChanged, this);
+      bus.off(EV.ZONE, this.refreshPet, this);
       bus.off('world:place', this.startPlacing, this);
       bus.off('world:emote', this.onEmote, this);
       bus.off('world:say', this.onSay, this);
@@ -1880,6 +1882,14 @@ export class WorldScene extends Phaser.Scene {
     this.load.start();
   }
   private petFi = 0;
+
+  // Vừa mua thú / đổi bé đang thả (panels.ts bắn EV.ZONE sau hai việc đó) ->
+  // dựng lại thú trong scene đang chạy, khỏi phải đổi khu mới thấy được.
+  private refreshPet() {
+    if (this.pet) { this.pet.destroy(); this.pet = undefined; }
+    this.petWalk = false;
+    this.spawnPet();
+  }
 
   // pet bám theo người chơi khi đang dắt đi dạo
   private followPet(dt: number) {
