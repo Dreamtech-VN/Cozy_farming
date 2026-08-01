@@ -2,6 +2,7 @@
 import { S } from '@/core/save';
 import { bus } from '@/core/events';
 import { lookLayers } from '@/data/chibi';
+import { TITLES } from '@/data/quests';
 import { skinArt } from '@/data/skins';
 import { picSrc } from '@/data/avatars';
 import BBOX from '@/data/chibi-bbox.json';
@@ -237,7 +238,17 @@ export function titleCanvas(name: string, color: string, scale = 1): HTMLCanvasE
 }
 
 // bản dùng trong DOM
-export function titlePlaque(name: string, color: string, scale = 1): HTMLElement {
+// Danh hiệu nào đã có ảnh nhãn riêng (assets/title/<id>.png) thì dùng ảnh,
+// chưa có thì vẽ tạm bằng canvas như cũ.
+export function titlePlaque(name: string, color: string, scale = 1, id?: string): HTMLElement {
+  if (id && TITLES[id]?.art) {
+    const img = document.createElement('img');
+    img.src = `assets/title/${id}.png`;
+    img.alt = name;
+    img.draggable = false;
+    img.style.cssText = `display:block;height:${Math.round(26 * scale)}px;width:auto;`;
+    return img;
+  }
   const cv = titleCanvas(name, color, scale);
   cv.style.cssText = 'display:block;image-rendering:auto';
   return cv;

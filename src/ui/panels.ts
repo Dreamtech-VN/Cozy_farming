@@ -1326,7 +1326,7 @@ export function registerAllPanels() {
     const { body, close } = openWindow('Danh hiệu', { size: 'small' });
 
     const prev = h('div', 'tt-prev');
-    prev.append(titlePlaque(t.name, t.color, 2));
+    prev.append(titlePlaque(t.name, t.color, 2, id));
     body.append(prev);
     body.append(h('div', 'tt-prev-cap', 'Hiển thị trên đầu nhân vật'));
 
@@ -1726,7 +1726,7 @@ export function registerAllPanels() {
       const tt = S.player.title ? TITLES[S.player.title] : undefined;
       const top = h('div', 'ch-top');
       const plaque = h('div', 'ch-plaque');
-      if (tt) plaque.append(titlePlaque(tt.name, tt.color ?? '#ffe066', 1.4));
+      if (tt) plaque.append(titlePlaque(tt.name, tt.color ?? '#ffe066', 1.4, S.player.title));
       else plaque.append(h('div', 'ch-plaque-none', 'Chưa gắn danh hiệu'));
       const who = h('div', 'ch-who');
       who.append(h('span', 'ch-lv', `Lv${S.player.level}`), h('span', 'ch-nm', S.player.name));
@@ -1884,7 +1884,7 @@ export function registerAllPanels() {
           const has = S.player.titles.includes(a.title!);
           const on = S.player.title === a.title;
           const wrapc = h('div', 'ch-title-art');
-          wrapc.append(titlePlaque(t?.name ?? a.title!, has ? (t?.color ?? '#ffe066') : '#9b8a72', 1.1));
+          wrapc.append(titlePlaque(t?.name ?? a.title!, has ? (t?.color ?? '#ffe066') : '#9b8a72', 1.1, a.title));
           return {
             name: a.desc, art: wrapc, dim: !has && !canClaim(a), on, hot: canClaim(a),
             // đã mở khoá thì cột phải là Ô TÍCH: tích = đang đeo, bỏ tích = gỡ

@@ -47,10 +47,17 @@ export const ACHIEVEMENTS = Object.values(QUESTS).filter(x => x.type === 'achiev
 
 // ---- Danh hiệu ----
 // Danh hiệu: source = nhận từ đâu, how = điều kiện cụ thể
-export interface TitleDef { name: string; color: string; source: string; how: string }
+export interface TitleDef {
+  name: string;
+  color: string;
+  source: string;
+  how: string;
+  /** true = đã có ảnh nhãn riêng ở public/assets/title/<id>.png, không vẽ bằng canvas nữa */
+  art?: boolean;
+}
 export const TITLES: Record<string, TitleDef> = {
   // ---- Danh hiệu của bộ thành tựu (mỗi thành tựu lớn tặng một cái) ----
-  ti_seeder: { name: 'Người Gieo Mầm', color: '#8ce99a', source: 'Nhà Nông', how: 'Trồng 200 hạt giống.' },
+  ti_seeder: { name: 'Người Gieo Mầm', color: '#8ce99a', source: 'Nhà Nông', how: 'Trồng 200 hạt giống.', art: true },
   ti_farmer: { name: 'Nông Dân Chăm Chỉ', color: '#8ce99a', source: 'Nhà Nông', how: 'Thu hoạch 100 nông sản.' },
   ti_harvest_king: { name: 'Mùa Vàng', color: '#ffd43b', source: 'Nhà Nông', how: 'Thu hoạch 1.000 nông sản.' },
   ti_farm_king: { name: 'Vua Nông Trại', color: '#ffa94d', source: 'Nhà Nông', how: 'Thu hoạch 5.000 nông sản.' },
@@ -86,59 +93,7 @@ export const TITLES: Record<string, TitleDef> = {
   // ---- Danh hiệu cũ / gacha ----
   title_newbie: { name: 'Tân binh', color: '#9aa5b1', source: 'Mặc định', how: 'Có sẵn khi tạo nhân vật.' },
   title_homeowner: { name: 'Chủ nhà', color: '#74c0fc', source: 'Nhiệm vụ', how: 'Hoàn thành nhiệm vụ "An cư lạc nghiệp" — mua nhà riêng ở Thành phố.' },
-  title_farmer: { name: 'Nông dân chăm chỉ', color: '#8ce99a', source: 'Thành tựu', how: 'Thu hoạch 100 nông sản.' },
-  title_farm_king: { name: 'Vua nông trại', color: '#ffd43b', source: 'Thành tựu', how: 'Thu hoạch 1000 nông sản.' },
-  title_angler: { name: 'Cần thủ', color: '#66d9e8', source: 'Thành tựu', how: 'Câu được 50 con cá.' },
-  title_fish_master: { name: 'Bậc thầy câu cá', color: '#3bc9db', source: 'Thành tựu', how: 'Sưu tập đủ 30 loài cá.' },
-  title_courier: { name: 'Chủ tiệm giao hàng', color: '#b197fc', source: 'Thành tựu', how: 'Giao 30 đơn hàng.' },
-  title_millionaire: { name: 'Triệu phú', color: '#ffa94d', source: 'Thành tựu', how: 'Kiếm được tổng cộng 100.000 xu.' },
-  title_social: { name: 'Quảng giao', color: '#faa2c1', source: 'Thành tựu', how: 'Kết bạn với 5 người chơi.' },
-  title_party: { name: 'Chủ tiệc', color: '#ff8787', source: 'Thành tựu', how: 'Tổ chức 1 bữa tiệc tại nhà.' },
-  title_caro: { name: 'Kỳ thủ caro', color: '#a9e34b', source: 'Minigame', how: 'Thắng 10 ván cờ caro ở Game Center.' },
-  title_veteran: { name: 'Lão làng', color: '#e599f7', source: 'Cấp độ', how: 'Đạt cấp 10.' },
 
-  // ---- Danh hiệu GunPow (lấy từ bảng vật phẩm của server GunPow) ----
-  // Trong GunPow đây là các "Xưng Hào Tạp" — hộp mở ra được danh hiệu. Bên
-  // mình gom hết vào Rương danh hiệu của gacha vật phẩm, đúng luật tiền nạp:
-  // lượng chỉ tiêu cho gacha / skin giới hạn.
-  gp_dan_dan_chien_than: { name: 'Đạn Đạn Chiến Thần', color: '#ffd43b', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_trung_cap_than_thoai: { name: 'Trùng Cấp Thần Thoại', color: '#ff8787', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_trung_cap_phong_ma: { name: 'Trùng Cấp Phong Ma', color: '#74c0fc', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_trung_cap_dat_nhan: { name: 'Trùng Cấp Đạt Nhân', color: '#b197fc', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_trung_cap_nang_thu: { name: 'Trùng Cấp Năng Thủ', color: '#8ce99a', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_canh_ky_vuong_gia: { name: 'Cạnh Kỹ Vương Giả', color: '#ffa94d', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_canh_ky_dai_su: { name: 'Cạnh Kỹ Đại Sư', color: '#faa2c1', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_canh_ky_dat_nhan: { name: 'Cạnh Kỹ Đạt Nhân', color: '#66d9e8', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_canh_ky_cuong_gia: { name: 'Cạnh Kỹ Cường Giả', color: '#a9e34b', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_truyen_ky_dan_than: { name: 'Truyện Kỳ Đạn Thần', color: '#e599f7', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_vinh_dieu_dan_hoang: { name: 'Vinh Diệu Đạn Hoàng', color: '#ffd43b', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_sieu_cap_dan_vuong: { name: 'Siêu Cấp Đạn Vương', color: '#ff8787', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_anh_dung_dan_tuong: { name: 'Anh Dũng Đạn Tương', color: '#74c0fc', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_ung_dung_bao_dung_si: { name: 'Ứng Dụng Bảo Dũng Sĩ', color: '#b197fc', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_nga_thi_lao_ti_ky: { name: 'Ngã Thị Lão Ti Ky', color: '#8ce99a', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_cuu_du_than_phao_thu: { name: 'Cửu Du Thần Pháo Thủ', color: '#ffa94d', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_mi_luc_vo_song: { name: 'Mị Lực Vô Song', color: '#faa2c1', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_mi_luc_dat_nhan: { name: 'Mị Lực Đạt Nhân', color: '#66d9e8', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_mi_luc_su_gia: { name: 'Mị Lực Sử Giả', color: '#a9e34b', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_diem_cau_dai_su: { name: 'Điểm Cầu Đại Sư', color: '#e599f7', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_dong_cau_de: { name: 'Đổng Cầu Đế', color: '#ffd43b', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_tram_ma_gia: { name: 'Trảm Ma Giả', color: '#ff8787', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_thien_lai_chi_am: { name: 'Thiên Lại Chi Âm', color: '#74c0fc', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_truy_mong_ca_thu: { name: 'Truy Mộng Ca Thủ', color: '#b197fc', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_canh_ky_chi_vuong: { name: 'Cạnh Kỹ Chi Vương', color: '#8ce99a', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_canh_ky_cao_thu: { name: 'Cạnh Kỹ Cao Thủ', color: '#ffa94d', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_toi_cuong_vuong_gia: { name: 'Tối Cường Vương Giả', color: '#faa2c1', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_sieu_pham_dai_su: { name: 'Siêu Phàm Đại Sư', color: '#66d9e8', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_tuyet_the_cao_thu: { name: 'Tuyệt Thế Cao Thủ', color: '#a9e34b', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_thua_phong_pha_lang: { name: 'Thừa Phong Phá Lãng', color: '#e599f7', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_ai_tinh_cong_ngu: { name: 'Ái Tình Công Ngụ', color: '#ffd43b', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_chien_luc_chi_vuong: { name: 'Chiến Lực Chi Vương', color: '#ff8787', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_trung_thanh_ngoan_gia: { name: 'Trung Thành Ngoạn Gia', color: '#74c0fc', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_huu_tien_vo_dich_mot_tien_mong_buc: { name: 'Hữu Tiễn Vô Địch Một Tiễn Mộng Bức', color: '#b197fc', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_trieu_luu_chi_ton: { name: 'Triều Lưu Chí Tôn', color: '#8ce99a', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_thi_thuong_tien_phong: { name: 'Thì Thượng Tiên Phong', color: '#ffa94d', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_thi_thuong_su_gia: { name: 'Thì Thượng Sử Giả', color: '#faa2c1', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
-  gp_khai_phuc: { name: 'Khai Phục', color: '#66d9e8', source: 'Rương danh hiệu', how: 'Mở Rương danh hiệu (gacha vật phẩm).' },
 };
 
 /** Danh hiệu mở từ Rương danh hiệu (gacha) — không nhận qua nhiệm vụ thường. */

@@ -399,8 +399,24 @@ export class WorldScene extends Phaser.Scene {
     const t = TITLES[S.player.title];
     if (t) {
       const key = `ttl_${S.player.title}`;
-      if (!this.textures.exists(key)) this.textures.addCanvas(key, titleCanvas(t.name, t.color, 2) as HTMLCanvasElement);
-      this.titleTag = this.add.image(this.player.x, 0, key).setOrigin(0.5, 1).setDepth(9000).setScale(sc);
+      if (t.art) {
+        // danh hiệu đã có ảnh nhãn riêng -> nạp ảnh, dựng xong mới gắn
+        const put = () => {
+          this.titleTag?.destroy();
+          this.titleTag = this.add.image(this.player.x, 0, key)
+            .setOrigin(0.5, 1).setDepth(9000);
+          this.titleTag.setScale((46 * sc) / this.titleTag.height);
+        };
+        if (this.textures.exists(key)) put();
+        else {
+          this.load.image(key, `assets/title/${S.player.title}.png`);
+          this.load.once(`filecomplete-image-${key}`, put);
+          this.load.start();
+        }
+      } else {
+        if (!this.textures.exists(key)) this.textures.addCanvas(key, titleCanvas(t.name, t.color, 2) as HTMLCanvasElement);
+        this.titleTag = this.add.image(this.player.x, 0, key).setOrigin(0.5, 1).setDepth(9000).setScale(sc);
+      }
     }
     // tên nhân vật (kèm hội nhóm) nằm ngay dưới danh hiệu
     const nkey = `nm_${S.player.name}_${S.player.guild ?? ''}`;
