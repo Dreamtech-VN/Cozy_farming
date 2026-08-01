@@ -1972,8 +1972,16 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   image-rendering: pixelated;
 }
 /* skin nguyên hình (Pack4): ảnh liền một mảnh, cao hết khung, tự căn giữa */
+/* skin nguyên hình (Pack4): dải 6 khung animation đứng, chạy lặp */
 .chibi-fluid.art { aspect-ratio: auto; width: 100%; display: flex; align-items: flex-end; justify-content: center; }
-.chibi-fluid.art > img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.skin-anim { height: 100%; width: auto; max-width: 100%; overflow: hidden; position: relative; }
+.skin-anim > img {
+  height: 100%; width: auto; max-width: none; display: block;
+  animation-name: skin-run; animation-iteration-count: infinite;
+}
+@keyframes skin-run { to { transform: translateX(-100%); } }
+/* ô trong lưới chọn skin để đứng yên ở khung đầu — chạy cả 76 ô thì tốn máy */
+.ch-cell .skin-anim > img, .cell .skin-anim > img { animation: none; }
 
 /* ===== Trang đầy đủ (kiểu GunPow): chiếm trọn màn, không phải popup ===== */
 .win-backdrop.page-backdrop { background: rgba(18, 30, 16, .55); align-items: stretch; justify-content: stretch; }

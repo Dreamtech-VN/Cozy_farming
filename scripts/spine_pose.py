@@ -10,6 +10,60 @@ import json, math, os, sys
 from PIL import Image
 
 
+def _val(fr, t, fields, default):
+    """Nội suy tuyến tính giá trị của một timeline tại thời điểm t."""
+    if not fr:
+        return {f: default[i] for i, f in enumerate(fields)}
+    fr = sorted(fr, key=lambda k: k.get('time', 0))
+    if t <= fr[0].get('time', 0):
+        a = b = fr[0]
+        u = 0.0
+    elif t >= fr[-1].get('time', 0):
+        a = b = fr[-1]
+        u = 0.0
+    else:
+        i = 0
+        while i + 1 < len(fr) and fr[i + 1].get('time', 0) <= t:
+            i += 1
+        a, b = fr[i], fr[i + 1]
+        t0, t1 = a.get('time', 0), b.get('time', 0)
+        u = 0.0 if t1 <= t0 else (t - t0) / (t1 - t0)
+        if a.get('curve') == 'stepped':
+            u = 0.0
+    out = {}
+    for i, f in enumerate(fields):
+        va = a.get(f, default[i])
+        vb = b.get(f, default[i])
+        out[f] = va + (vb - va) * u
+    return out
+
+
+def anim_len(data, anim_name):
+    """Độ dài (giây) của một animation."""
+    a = (data.get('animations') or {}).get(anim_name) or {}
+    t = 0.0
+    for tl in a.get('bones', {}).values():
+        for fr in tl.values():
+            t = max(t, max((f.get('time', 0) for f in fr), default=0))
+    return t
+
+
+def anim_pose_at(data, anim_name, t):
+    """Tư thế của mọi xương tại thời điểm t trong animation."""
+    a = (data.get('animations') or {}).get(anim_name) or {}
+    out = {}
+    for name, tl in a.get('bones', {}).items():
+        d = {}
+        r = _val(tl.get('rotate'), t, ('angle',), (0,))
+        d['rotate.angle'] = r['angle']
+        tr = _val(tl.get('translate'), t, ('x', 'y'), (0, 0))
+        d['translate.x'], d['translate.y'] = tr['x'], tr['y']
+        sc = _val(tl.get('scale'), t, ('x', 'y'), (1, 1))
+        d['scale.x'], d['scale.y'] = sc['x'], sc['y']
+        out[name] = d
+    return out
+
+
 def anim_pose(data, anim_name):
     """Giá trị khung hình ĐẦU TIÊN của một animation, theo từng xương.
 
@@ -260,9 +314,9 @@ def draw_mesh(canvas, im, reg, pts, PAD):
         canvas.paste(piece, (x0, y0), mask)
 
 
-def compose(folder, name, max_h=None, anim='holdon'):
+def compose(folder, name, max_h=None, anim='holdon', at=None, pad_box=None):
     data = json.load(open(os.path.join(folder, name + '.json'), encoding='utf-8'))
-    pose = anim_pose(data, anim)
+    pose = anim_pose_at(data, anim, at) if at is not None else anim_pose(data, anim)
     iks = anim_ik(data, anim, data.get('ik') or [])
     fix = solve_ik(data, _local_of(data), None, iks, pose) if iks else {}
     bones = world_bones(data, pose, fix)
@@ -310,9 +364,11 @@ def compose(folder, name, max_h=None, anim='holdon'):
             im = im.rotate(rot, resample=Image.BICUBIC, expand=True)
         canvas.alpha_composite(im, (int(round(PAD + wx - im.width / 2)),
                                     int(round(PAD - wy - im.height / 2))))
-    bb = canvas.getbbox()
+    bb = pad_box or canvas.getbbox()
     if bb:
         canvas = canvas.crop(bb)
+    if pad_box:
+        return canvas
     if max_h and canvas.height > max_h:
         k = max_h / canvas.height
         canvas = canvas.resize((max(1, int(canvas.width * k)), max_h), Image.LANCZOS)

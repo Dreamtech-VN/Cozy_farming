@@ -48,16 +48,20 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
     scene.add.existing(this);
   }
 
-  /** Gắn ảnh skin nguyên hình, co về đúng chiều cao nhân vật (84px). */
-  private addArt(key: string) {
+  /** Gắn dải sprite skin, co về đúng chiều cao nhân vật (84px). */
+  private addArt(key: string, frames: number) {
     const img = this.scene.textures.get(key).getSourceImage() as { width: number; height: number };
     const sc = 84 / img.height;
-    const s = this.scene.add.sprite(0, 0, key).setOrigin(0.5, 1).setScale(sc);
+    const s = this.scene.add.sprite(0, 0, key, 0).setOrigin(0.5, 1).setScale(sc);
     this.add(s);
     this.layers.push(s);
     this.artMode = true;
+    this.artFrames = frames;
   }
   private artMode = false;
+  private artFrames = 1;
+  private artAcc = 0;
+  private artFi = 0;
 
   private look?: ChibiLook;
   private faceTimer?: Phaser.Time.TimerEvent;
@@ -108,14 +112,16 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
     if (art) {
       const key = `skinart_${look.skin}`;
       if (this.scene.textures.exists(key)) {
-        this.addArt(key);
+        this.addArt(key, art.frames);
       } else {
-        this.scene.load.image(key, art.url);
-        this.scene.load.once(`filecomplete-image-${key}`, () => {
+        this.scene.load.spritesheet(key, art.url,
+          { frameWidth: art.w, frameHeight: art.h });
+        // nạp dạng spritesheet -> sự kiện là filecomplete-spritesheet-<key>
+        this.scene.load.once(`filecomplete-spritesheet-${key}`, () => {
           if (this.scene && skinArt(this.look?.skin)?.url === art.url) {
             for (const l of this.layers) l.destroy();
             this.layers = [];
-            this.addArt(key);
+            this.addArt(key, art.frames);
             this.applyFrame();
           }
         });
@@ -176,6 +182,12 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
   }
 
   tick(deltaMs: number) {
+    // skin nguyên hình chạy dải khung riêng (animation đứng của Spine, ~9 fps)
+    if (this.artMode && this.artFrames > 1) {
+      this.artAcc += deltaMs;
+      const aft = this.anim === 'walk' ? 80 : 110;
+      while (this.artAcc >= aft) { this.artAcc -= aft; this.artFi++; this.applyFrame(); }
+    }
     const def = ANIMS[this.anim];
     if (def.frames.length <= 1 && def.loop) return;
     this.acc += deltaMs;
@@ -201,6 +213,7 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
     if (this.artMode) {
       for (const l of this.layers) {
         l.setFlipX(this.facingLeft);
+        l.setFrame(this.artFi % this.artFrames);
         l.y = this.anim === 'walk' && this.fi % 2 ? -2 : 0;
       }
       return;

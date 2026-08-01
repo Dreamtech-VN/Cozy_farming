@@ -119,6 +119,24 @@ export function btn(label: string, cls = '', onClick?: () => void): HTMLButtonEl
   return b;
 }
 
+/** Ô chạy dải sprite skin — trượt ảnh trong khung cắt, mỗi bước một khung.
+ *
+ * Không dùng background-position vì đơn vị % của nó tính theo phần ẢNH THỪA
+ * chứ không phải bề rộng ô, nên bước nhảy sai. transform: translateX(%) thì
+ * tính theo chính bề rộng ảnh -> chia đều đúng số khung.
+ */
+export function skinFrames(art: { url: string; w: number; h: number; frames: number }): HTMLElement {
+  const box = h('div', 'skin-anim');
+  box.style.aspectRatio = `${art.w} / ${art.h}`;
+  const img = document.createElement('img');
+  img.src = art.url;
+  img.draggable = false;
+  img.style.animationDuration = `${(art.frames / 6).toFixed(2)}s`;
+  img.style.animationTimingFunction = `steps(${art.frames})`;
+  box.append(img);
+  return box;
+}
+
 // ===== Sprite từ asset pack trong UI DOM =====
 // Cắt 1 vùng (sx,sy,sw,sh) từ sheet và phóng to size px (pixelated).
 export function spr(url: string, sx: number, sy: number, sw: number, sh: number, size = 32): HTMLElement {
@@ -361,9 +379,7 @@ export function charFaceFluid(look: import('@/data/chibi').ChibiLook | undefined
   const art = skinArt(look.skin);
   if (art) {
     wrap.classList.add('art');
-    const im = document.createElement('img');
-    im.src = art.url; im.draggable = false;
-    wrap.append(im);
+    wrap.append(skinFrames(art));
     return wrap;
   }
   for (const pid of lookLayers(look)) {
@@ -382,10 +398,7 @@ export function charFace(look: import('@/data/chibi').ChibiLook | undefined, siz
   const art = skinArt(look.skin);
   if (art) {
     wrap.style.width = `${Math.round(size * art.w / art.h)}px`;
-    const im = document.createElement('img');
-    im.src = art.url; im.draggable = false;
-    im.style.cssText = 'width:100%;height:100%;object-fit:contain;';
-    wrap.append(im);
+    wrap.append(skinFrames(art));
     return wrap;
   }
   for (const pid of lookLayers(look)) {
