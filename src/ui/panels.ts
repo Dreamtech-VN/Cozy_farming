@@ -1,5 +1,5 @@
 import { registerPanel, openPanel, getGame, refreshHotbar, chatFabPos, setChatFabPos } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charFaceFluid, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
 import { AVATAR_PICS, avatarPicUrl, isUploadedPic } from '@/data/avatars';
 import { FOODS, FOOD_LIST, type FoodDef } from '@/data/foods';
 import { orderList, canDeliver, deliver, dropOrder, haveOf, orderName } from '@/systems/orders';
@@ -877,9 +877,8 @@ export function registerAllPanels() {
           const info = h('div', 'grow');
           info.innerHTML = `<div class="t1">${rod.name}${S.tools.rod === rod.tier ? ' <span class="tl-lv">Đang dùng</span>' : ''}</div><div class="t2">+${Math.round(rod.bonus * 100)}% tỉ lệ cá hiếm · cầm tay được trong tủ đồ</div>`;
           r.append(info);
-          const buy = () => { if (buyRod(rod.tier)) render(); };
           r.append(owned ? btn('Đã có', '', undefined)
-            : rod.cur === 'ruby' ? priceBtn(0, 'gold', buy, rod.price) : priceBtn(rod.price, 'gold', buy));
+            : priceBtn(rod.price, 'gold', () => { if (buyRod(rod.tier)) render(); }));
           body.append(r);
         }
       } else if (tab === 1) {
@@ -1870,55 +1869,53 @@ export function registerAllPanels() {
       body.classList.add('wd-body');
       const wrap = h('div', 'wd-wrap');
 
-      // ----- trái: nhân vật + ô trang bị xung quanh -----
+      // ----- trái: nhân vật đứng giữa 2 cột ô trang bị, dưới là tên + cấp + chỉ số -----
+      // Bố cục theo mẫu màn Equipment: 3 ô mỗi bên, nhân vật trên bục tròn.
+      // Chiều cao hàng do CỘT Ô quyết định (không phải ảnh nhân vật) nên ảnh
+      // không bao giờ đẩy khung phình ra rồi bị cắt mất chân.
       const left = h('div', 'wd-left');
+      const figure = h('div', 'wd-figure');
       const colL = h('div', 'wd-slot-col');
       const colR = h('div', 'wd-slot-col');
-      SLOTS.forEach(([ico, name, z, key], i) => {
-        if (mode === 'skin') return;                       // mục Skin không cần cột ô trang bị
-        const cell = h('button', `wd-slot eq-${key} ${i === tab ? 'active' : ''}`);
-        const cur = look[key];
-        if (z === -1) {
-          const sk = look.skin ? SKINS[look.skin] : undefined;
-          if (sk) cell.append(skinFace(sk, 34)); else cell.append(uiIcon(ico, 28));
-        } else if (cur) cell.append(z <= 20 || z === 70 ? chibiPreview(cur as number, 34) : chibiHead(cur as number, 34, z));
-        else cell.classList.add('empty');            // ô trống dùng ảnh mờ sẵn của pack
-        cell.append(h('span', 'wd-slot-name', name));
-        cell.title = name;
-        cell.onclick = () => { sfx.click(); tab = i; render(); };
-        // chia đôi cho hai cột hai bên nhân vật
-        (i < Math.ceil(SLOTS.length / 2) ? colL : colR).append(cell);
-      });
       const mid = h('div', 'wd-char');
-      // Ảnh nhân vật là ảnh cỡ cố định (px) nên phải đo chỗ trống thật rồi mới
-      // vẽ, không thì màn ngang điện thoại thấp là bị cắt mất chân.
-      mid.append(charFace(look, 116));
+      mid.append(charFaceFluid(look));
+      if (mode !== 'skin') {
+        SLOTS.forEach(([ico, name, z, key], i) => {
+          const cell = h('button', `wd-slot eq-${key} ${i === tab ? 'active' : ''}`);
+          const cur = look[key];
+          if (cur) cell.append(z <= 20 || z === 70 ? chibiPreview(cur as number, 30) : chibiHead(cur as number, 30, z));
+          else { cell.classList.add('empty'); void ico; }
+          cell.append(h('span', 'wd-slot-name', name));
+          cell.title = name;
+          cell.onclick = () => { sfx.click(); tab = i; render(); };
+          (i < Math.ceil(SLOTS.length / 2) ? colL : colR).append(cell);
+        });
+        figure.append(colL, mid, colR);
+      } else {
+        figure.append(mid);
+      }
 
       const nameRow = h('div', 'wd-name-row');
       const lv = h('div', 'wd-lv'); lv.textContent = `${S.player.level}`;
       const nm = h('div', 'wd-name'); nm.textContent = S.player.name;
       nameRow.append(lv, nm);
-      const body2 = h('div', 'wd-left-body');
-      body2.append(colL, mid, colR);
-      // Phải đo Ở KHUNG CHA: chính ảnh nhân vật quyết định chiều cao của .wd-char
-      // nên đo nó là vòng lặp quẩn (ảnh to -> ô to -> ảnh vẫn to -> tràn, mất chân).
-      let charSize = 0;
-      const fitChar = () => {
-        const avail = Math.floor(Math.min(body2.clientHeight - 10, mid.clientWidth * 96 / 64));
-        const size = Math.max(64, Math.min(150, avail));
-        if (avail <= 0 || size === charSize) return;
-        charSize = size;
-        mid.innerHTML = '';
-        mid.append(charFace(look, size));
-      };
-      // cửa sổ mở bằng animation nên cỡ thật chỉ có sau vài frame
-      new ResizeObserver(fitChar).observe(body2);
-      left.append(nameRow, body2);
+
+      // thanh kinh nghiệm như mẫu: "Cấp 3 ... 31.8%"
+      const need = S.player.level * 100;
+      const pct = Math.min(100, Math.round(S.player.exp / need * 1000) / 10);
+      const expRow = h('div', 'wd-exp');
+      const eb = h('div', 'wd-exp-bar');
+      const ef = h('div', 'wd-exp-f'); ef.style.width = `${pct}%`;
+      eb.append(ef);
+      expRow.append(h('div', 'wd-exp-k', 'Cấp'), eb, h('div', 'wd-exp-n', `${pct}%`));
+
+      left.append(figure, nameRow, expRow);
+
       if (mode !== 'skin') {
-        // dưới khung nhân vật là các thanh chỉ số (điểm cộng + điểm do quần áo)
+        // chỉ số xếp 2 cột như mẫu
         const eq = equipStats(look);
-        const bars = h('div', 'wd-stats-box');
         const max = Math.max(10, ...STAT_KEYS.map(k => S.player.charStats[k] + eq[k]));
+        const box = h('div', 'wd-stats-box');
         for (const k of STAT_KEYS) {
           const base = S.player.charStats[k], bonus = eq[k];
           const row = h('div', 'wd-stat');
@@ -1927,12 +1924,11 @@ export function registerAllPanels() {
           const f1 = h('div', 'wd-stat-f'); f1.style.width = `${(base / max) * 100}%`;
           const f2 = h('div', 'wd-stat-f2'); f2.style.width = `${(bonus / max) * 100}%`;
           bar.append(f1, f2);
-          row.append(bar);
-          row.append(h('span', 'wd-stat-n', bonus ? `${base}+${bonus}` : `${base}`));
+          row.append(bar, h('span', 'wd-stat-n', bonus ? `${base}+${bonus}` : `${base}`));
           row.title = `${STAT_NAMES[k]}: ${base} gốc${bonus ? ` + ${bonus} từ quần áo` : ''}`;
-          bars.append(row);
+          box.append(row);
         }
-        left.append(bars);
+        left.append(box);
       }
 
       // ----- phải: chia tab + card lưới ô (có cả ô trống như tủ đồ game) -----
@@ -2702,7 +2698,7 @@ export function registerAllPanels() {
     for (const p of packs) {
       const r = h('div', 'row');
       r.innerHTML = `<img class="ico-img" src="assets/ui/pack/icon_ruby.png"><div class="grow"><div class="t1">${p.rubies} Ruby</div><div class="t2">${p.price}</div></div>`;
-      r.append(btn('Nhận (demo)', 'gold', () => { addRubies(p.rubies); toast(`+${p.rubies} ruby!`, 'ruby'); sfx.coin(); }));
+      r.append(btn('Nhận (demo)', 'gold', () => { addRubies(p.rubies, 'purchase'); toast(`+${p.rubies} ruby!`, 'ruby'); sfx.coin(); }));
       body.append(r);
     }
   });

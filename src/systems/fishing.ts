@@ -8,13 +8,9 @@ import { sfx } from '@/core/audio';
 export function buyRod(tier: number): boolean {
   const rod = RODS.find(r => r.tier === tier);
   if (!rod || S.tools.rod >= tier) return false;
-  if (rod.cur === 'ruby') {
-    if (S.wallet.rubies < rod.price) { toast(`Cần ${rod.price} lượng.`, 'ruby'); sfx.error(); return false; }
-    S.wallet.rubies -= rod.price;
-  } else {
-    if (S.wallet.coins < rod.price) { toast(`Cần ${rod.price} xu.`, 'coin'); sfx.error(); return false; }
-    S.wallet.coins -= rod.price;
-  }
+  // cần câu mua bằng xu — lượng là tiền nạp, chỉ dành cho gacha / skin giới hạn
+  if (S.wallet.coins < rod.price) { toast(`Cần ${rod.price} xu.`, 'coin'); sfx.error(); return false; }
+  S.wallet.coins -= rod.price;
   S.tools.rod = tier;
   // Lttt: cần câu là món "Cầm tay" -> mua xong có luôn trong tủ quần áo
   if (!S.chibiWardrobe.includes(rod.part)) S.chibiWardrobe.push(rod.part);

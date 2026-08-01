@@ -210,16 +210,33 @@ export function addCoins(n: number) {
   S.wallet.coins = Math.max(0, S.wallet.coins + n);
   bus.emit(EV.WALLET); save();
 }
-export function addRubies(n: number) {
+// ===== LUẬT TIỀN NẠP =====
+// Lượng (ruby) là TIỀN NẠP: chỉ vào ví qua nạp thật, không phát qua nhiệm vụ,
+// điểm danh, vòng quay hay thư. Và chỉ tiêu vào gacha vật phẩm / skin giới hạn.
+// Tham số `source` bắt buộc để mọi chỗ gọi phải nói rõ nguồn — thêm nguồn mới
+// là phải sửa union này, không lỡ tay phát lượng miễn phí được.
+export type RubySource = 'purchase';
+export function addRubies(n: number, source: RubySource) {
+  if (source !== 'purchase') return;
   S.wallet.rubies = Math.max(0, S.wallet.rubies + n);
   bus.emit(EV.WALLET); save();
 }
-export function canAfford(coins: number, rubies = 0): boolean {
-  return S.wallet.coins >= coins && S.wallet.rubies >= rubies;
+
+/** Trừ lượng — chỉ dùng cho gacha / skin giới hạn. */
+export type RubySink = 'gacha' | 'limited_skin';
+export function spendRubies(n: number, _sink: RubySink): boolean {
+  if (S.wallet.rubies < n) { toast(`Cần ${n} lượng — nạp thêm ở mục Nạp nhé.`, 'ruby'); return false; }
+  S.wallet.rubies -= n;
+  bus.emit(EV.WALLET); save();
+  return true;
 }
-export function spend(coins: number, rubies = 0): boolean {
-  if (!canAfford(coins, rubies)) { toast('Không đủ tiền!', 'coin'); return false; }
-  S.wallet.coins -= coins; S.wallet.rubies -= rubies;
+export function canAfford(coins: number): boolean {
+  return S.wallet.coins >= coins;
+}
+/** Trả bằng XU. Muốn trừ lượng thì phải gọi spendRubies() và nói rõ mục đích. */
+export function spend(coins: number): boolean {
+  if (!canAfford(coins)) { toast('Không đủ xu!', 'coin'); return false; }
+  S.wallet.coins -= coins;
   bus.emit(EV.WALLET); save();
   return true;
 }

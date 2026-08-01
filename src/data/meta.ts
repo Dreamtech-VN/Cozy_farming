@@ -1,4 +1,6 @@
 // ===== Quà đăng nhập, điểm danh, vòng quay may mắn, sự kiện theo mùa =====
+// Lưu ý: KHÔNG mục nào ở đây phát lượng. Lượng là tiền nạp, chỉ vào ví qua nạp
+// thật và chỉ tiêu cho gacha / skin giới hạn (xem addRubies trong core/save.ts).
 import type { Reward } from './quests';
 
 // Quà đăng nhập theo chuỗi ngày (streak) — lặp sau 7 ngày
@@ -6,19 +8,19 @@ export const LOGIN_REWARDS: Reward[] = [
   { coins: 100 },
   { coins: 150 },
   { coins: 200, items: { seed_tomato: 2 } },
-  { coins: 250, rubies: 1 },
+  { coins: 550 },
   { coins: 300, items: { fertilizer: 3 } },
-  { coins: 400, rubies: 2 },
-  { coins: 800, rubies: 5, items: { lucky_ticket: 1 } }
+  { coins: 1000 },
+  { coins: 2300, items: { lucky_ticket: 1 } }
 ];
 
 // Điểm danh tháng: mốc thưởng
 export const CHECKIN_MILESTONES: { days: number; reward: Reward }[] = [
   { days: 5, reward: { coins: 500 } },
-  { days: 10, reward: { rubies: 5 } },
+  { days: 10, reward: { coins: 1500 } },
   { days: 15, reward: { coins: 1500, items: { gift_teddy: 1 } } },
-  { days: 20, reward: { rubies: 10 } },
-  { days: 25, reward: { coins: 3000, rubies: 10, items: { lucky_ticket: 2 } } }
+  { days: 20, reward: { coins: 3000 } },
+  { days: 25, reward: { coins: 6000, items: { lucky_ticket: 2 } } }
 ];
 
 // Vòng quay may mắn (1 lượt miễn phí/ngày, thêm lượt bằng vé)
@@ -27,12 +29,12 @@ export interface WheelSlice { label: string; icon: string; weight: number; rewar
 export const WHEEL: WheelSlice[] = [
   { label: '50 xu', icon: 'coin', weight: 30, reward: { coins: 50 } },
   { label: '200 xu', icon: 'coin', weight: 20, reward: { coins: 200 } },
-  { label: '1 Ruby', icon: 'ruby', weight: 15, reward: { rubies: 1 } },
+  { label: '300 xu', icon: 'coin', weight: 15, reward: { coins: 300 } },
   { label: 'Phân bón x3', icon: 'fertilizer', weight: 12, reward: { items: { fertilizer: 3 } } },
   { label: 'Hạt dâu x2', icon: 'seed', weight: 10, reward: { items: { seed_strawberry: 2 } } },
   { label: '500 xu', icon: 'coin', weight: 8, reward: { coins: 500 } },
-  { label: '5 Ruby', icon: 'ruby', weight: 4, reward: { rubies: 5 } },
-  { label: 'JACKPOT 2000 xu', icon: 'rank', weight: 1, reward: { coins: 2000, rubies: 10 } }
+  { label: '1.500 xu', icon: 'coin', weight: 4, reward: { coins: 1500 } },
+  { label: 'JACKPOT 5.000 xu', icon: 'rank', weight: 1, reward: { coins: 5000 } }
 ];
 
 // Sự kiện theo tháng (trang trí + shop đặc biệt sẽ mở theo mùa)

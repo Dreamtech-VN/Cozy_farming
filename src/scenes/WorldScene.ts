@@ -1997,8 +1997,9 @@ export class WorldScene extends Phaser.Scene {
           m.addItem('stone');
           this.fxFloatIcon(x, y - 10, 'items16', 71, '+1 Đá');
         } else {
-          m.addRubies(1);
-          toast('Đào trúng 1 Ruby!', 'ruby');
+          // trước đây đào ra Ruby — lượng là tiền nạp nên đổi thành xu
+          m.addCoins(120);
+          toast('Đào trúng 120 xu!', 'coin');
         }
         m.addStat('dug');
       });

@@ -1010,50 +1010,85 @@ input.ui-input, select.ui-input {
 
 .wd-wrap { display: flex; gap: 12px; flex: 1; min-height: 0; align-items: stretch; }
 .wd-left {
-  flex: 0 0 43%; display: flex; flex-direction: column; gap: 8px; min-height: 0;
-  padding: 10px 10px 12px; border-radius: 16px;
+  flex: 0 0 43%; display: flex; flex-direction: column; gap: 4px; min-height: 0;
+  padding: 8px 10px 10px; border-radius: 16px;
   background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .28);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2);
 }
-.wd-left-body {
-  flex: 1; min-height: 0; overflow: hidden;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
+/* hàng nhân vật + 2 cột ô trang bị: chiều cao do khung cha chia, ảnh nhân vật
+   không được quyết định chiều cao (nếu không là phình ra rồi bị cắt) */
+/* Cao theo PHẦN TRĂM khung trái (khung trái có chiều cao xác định) chứ không
+   flex:1 — để `height:100%` của nhân vật co giãn có mốc mà tính, không thì
+   nhân vật lấy chiều cao theo nội dung rồi đè lên tên/chỉ số bên dưới. */
+.wd-figure {
+  flex: 0 0 55%; min-height: 0; overflow: hidden;
+  display: flex; align-items: stretch; justify-content: center; gap: 7px;
+}
+.wd-slot-col {
+  flex: none; width: 44px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 5px;
+  min-height: 0; overflow: hidden;
 }
 
 /* nhãn tên gọn ở giữa, huy hiệu cấp đè lên mép trái nhãn */
-.wd-name-row { display: flex; align-items: center; justify-content: center; flex: none; }
+.wd-name-row { display: flex; align-items: center; justify-content: center; flex: none; margin-top: 2px; }
 .wd-lv {
   position: relative; z-index: 2; margin-right: -14px;
-  width: 34px; height: 34px; flex: none; display: flex; align-items: center; justify-content: center;
-  border-radius: 50%; font-size: 13px; font-weight: 900; color: #4a3005;
+  width: 26px; height: 26px; flex: none; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; font-size: 11.5px; font-weight: 900; color: #4a3005;
   background: linear-gradient(#ffe066, #f0a318); border: 2px solid rgba(255, 255, 255, .7);
   box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
 }
 .wd-name {
-  flex: none; max-width: calc(100% - 40px); padding: 5px 14px 6px 22px;
-  font-size: 13px; font-weight: 900; color: #f6edd8; border-radius: 999px;
+  flex: none; max-width: calc(100% - 36px); padding: 3px 13px 4px 20px;
+  font-size: 12px; font-weight: 900; color: #f6edd8; border-radius: 999px;
   background: rgba(0, 0, 0, .3); border: 1px solid rgba(255, 255, 255, .28);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
 }
 
-/* ô trang bị hai bên nhân vật */
-.wd-slot-col { display: flex; flex-direction: column; justify-content: center; gap: 5px; height: 100%; }
+/* thanh kinh nghiệm dưới tên */
+.wd-exp { flex: none; display: flex; align-items: center; gap: 7px; margin: 2px 2px 0; }
+.wd-exp-k { font-size: 10px; font-weight: 900; color: #bccbb0; flex: none; }
+.wd-exp-bar {
+  flex: 1; height: 9px; border-radius: 5px; overflow: hidden;
+  background: rgba(0, 0, 0, .34); border: 1px solid rgba(255, 255, 255, .2);
+}
+.wd-exp-f { height: 100%; background: linear-gradient(90deg, #b2f2bb, #37b24d); }
+.wd-exp-n { font-size: 10px; font-weight: 900; color: #ffe066; flex: none; width: 38px; text-align: right; }
+
+/* khung nhân vật ở giữa: bục tròn + bóng đổ */
+.wd-char {
+  position: relative; flex: 1; min-width: 0; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  padding: 6px 4px 12px; overflow: hidden; border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  background:
+    radial-gradient(120% 78% at 50% 12%, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 70%),
+    linear-gradient(rgba(126, 166, 128, .40), rgba(70, 110, 80, .58));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .26);
+}
+.wd-char::after {
+  content: ''; position: absolute; left: 50%; bottom: 9px; translate: -50% 0;
+  width: 56%; height: 12px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, .42), rgba(0, 0, 0, 0));
+}
+.wd-char > * { position: relative; z-index: 1; }
+.wd-char-name { display: none; }
+
+/* ô trang bị */
 .wd-slot {
-  /* ô co lại cho vừa chiều cao khung (màn ngang điện thoại rất thấp) */
-  position: relative; width: 44px; aspect-ratio: 1; border-radius: 11px; padding: 0;
-  flex: 0 1 44px; min-height: 0;
+  position: relative; width: 100%; flex: 1 1 0; min-height: 0; max-height: 52px;
+  border-radius: 11px; padding: 0 0 10px;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; font-family: inherit; overflow: hidden;
   background: linear-gradient(rgba(126, 166, 128, .48), rgba(78, 118, 86, .62));
   border: 1px solid rgba(255, 255, 255, .3);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22);
 }
-.wd-slot > .spr, .wd-slot > img { flex: none; }
-/* ô trống: icon loại đồ mờ làm gợi ý */
+.wd-slot > .spr, .wd-slot > img { flex: none; max-height: 100%; }
 .wd-slot.empty::before {
-  content: ''; position: absolute; inset: 0; opacity: .32;
-  background: var(--eq) no-repeat center / 26px 24px;
+  content: ''; position: absolute; left: 0; right: 0; top: 1px; bottom: 10px; opacity: .32;
+  background: var(--eq) no-repeat center / 20px 18px;
 }
 .wd-slot.empty.eq-hat { --eq: url('/assets/ui/inv/ic_hat.png'); }
 .wd-slot.empty.eq-glasses { --eq: url('/assets/ui/inv/ic_glasses.png'); }
@@ -1065,39 +1100,22 @@ input.ui-input, select.ui-input {
 .wd-slot.active { border-color: #ffd43b; box-shadow: 0 0 0 2px rgba(255, 212, 59, .4); }
 .wd-slot:active { transform: scale(.94); }
 .wd-slot.locked { opacity: .5; cursor: default; pointer-events: none; }
-.wd-slot-name { display: none; }
-
-/* khung nhân vật ở giữa */
-.wd-char {
-  position: relative; display: flex; align-items: center; justify-content: center;
-  flex: 0 1 auto; min-height: 0; align-self: stretch; width: 132px; padding: 6px 4px 12px; overflow: hidden;
-  border-radius: 16px; border: 1px solid rgba(255, 255, 255, .22);
-  background:
-    radial-gradient(120% 78% at 50% 12%, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 70%),
-    linear-gradient(rgba(126, 166, 128, .40), rgba(70, 110, 80, .58));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .26);
+.wd-slot-name {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  font-size: 7.5px; font-weight: 900; color: #e7f0dd; text-align: center; line-height: 11px;
+  background: rgba(0, 0, 0, .32);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-/* bóng đổ dưới chân cho nhân vật đứng chứ không lơ lửng */
-.wd-char::after {
-  content: ''; position: absolute; left: 50%; bottom: 8px; translate: -50% 0;
-  width: 62%; height: 11px; border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(0, 0, 0, .38), rgba(0, 0, 0, 0));
-}
-.wd-char > * { position: relative; z-index: 1; max-height: 100%; object-fit: contain; }
-.wd-char > * { max-height: 100%; }
-.wd-char-name { display: none; }
 
-/* thanh chỉ số dưới khung nhân vật — xếp 2 cột cho gọn chiều cao, màn hình
-   ngang của điện thoại chỉ cao ~350px nên xếp dọc 5 dòng là hết chỗ */
+/* chỉ số: 2 cột như mẫu */
 .wd-stats-box {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 3px 8px; flex: none; padding: 0 2px;
+  flex: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1px 9px; padding: 3px 2px 0;
+  border-top: 1px solid rgba(255, 255, 255, .16); margin-top: 3px;
 }
 .wd-stat { display: flex; align-items: center; gap: 6px; font-size: 9.5px; font-weight: 800; color: #d9e6cd; }
-.wd-stat-nm {
-  width: 62px; flex: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
+.wd-stat-nm { width: 58px; flex: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .wd-stat-bar {
-  flex: 1; height: 8px; border-radius: 5px; overflow: hidden; display: flex;
+  flex: 1; height: 7px; border-radius: 5px; overflow: hidden; display: flex;
   background: rgba(0, 0, 0, .34); box-shadow: inset 0 1px 2px rgba(0, 0, 0, .35);
 }
 .wd-stat-f { background: linear-gradient(#ffe066, #f0a318); }
@@ -1771,8 +1789,8 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   .od-side { padding: 12px 12px 14px; }
   .od-ing { width: 58px; padding: 6px 3px 9px; }
   .od-ing-art { height: 34px; }
-  .wd-char { width: 160px; height: 196px; }
-  .wd-slot { width: 58px; height: 58px; }
+  .wd-figure { flex-basis: 52%; }
+  .wd-slot-col { width: 40px; }
   .wr-tab { height: 46px; font-size: 13px; padding: 0 14px 10px; }
   .wr-tabs { top: -36px; }
 }
@@ -1969,4 +1987,16 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   .up-nm { font-size: 12.5px; }
   .up-mat { width: 48px; }
   .up-mat-art { height: 26px; }
+}
+
+/* nhân vật chibi co giãn theo khung (xem charFaceFluid trong ui/kit.ts) */
+.chibi-fluid {
+  position: relative; height: 100%; aspect-ratio: 64 / 96; flex: none;
+}
+.chibi-fluid-l {
+  position: absolute; inset: 0;
+  background-repeat: no-repeat;
+  background-size: 1500% 100%;      /* strip 15 frame -> lấy frame 0 */
+  background-position: 0 0;
+  image-rendering: pixelated;
 }

@@ -1,11 +1,12 @@
-import { S, save, addCoins, addRubies, addItem, addExp, todayStr } from '@/core/save';
+import { S, save, addCoins, addItem, addExp, todayStr } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { QUESTS, DAILY_POOL, ACHIEVEMENTS, type QuestDef, type Reward } from '@/data/quests';
 import { sfx } from '@/core/audio';
 
 export function grantReward(r: Reward) {
   if (r.coins) { addCoins(r.coins); S.stats['coins_earned'] = (S.stats['coins_earned'] ?? 0) + r.coins; }
-  if (r.rubies) addRubies(r.rubies);
+  // Lượng là tiền nạp -> nhiệm vụ / điểm danh / vòng quay không phát lượng nữa.
+  // Reward.rubies chỉ còn để hiện trong bảng mô tả của các gói nạp.
   if (r.exp) addExp(r.exp);
   if (r.items) for (const [id, qty] of Object.entries(r.items)) addItem(id, qty);
   if (r.title && !S.player.titles.includes(r.title)) {

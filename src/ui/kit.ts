@@ -319,6 +319,25 @@ export function chibiHead(partId: number, size = 40, z?: number): HTMLElement {
 }
 
 // Chân dung chibi ghép lớp (avatar HUD, hồ sơ)
+/** Nhân vật chibi CO GIÃN THEO KHUNG (không phải cỡ px cố định).
+ *
+ * charFace() trả về ảnh cỡ px cứng, nên trong khung flex thấp (màn ngang điện
+ * thoại) nó tự quyết chiều cao rồi làm phình khung và bị cắt mất chân. Bản này
+ * vẽ mỗi lớp bằng background-image trên div phủ kín khung: mọi strip part đều
+ * là 15 frame 64x96 nên chỉ cần background-size 1500% 100% là ra frame 0, và
+ * khung to nhỏ bao nhiêu thì nhân vật co giãn theo bấy nhiêu.
+ */
+export function charFaceFluid(look: import('@/data/chibi').ChibiLook | undefined): HTMLElement {
+  const wrap = h('div', 'chibi-fluid');
+  if (!look) return wrap;
+  for (const pid of lookLayers(look)) {
+    const l = h('div', 'chibi-fluid-l');
+    l.style.backgroundImage = `url(assets/chibi/${pid}.png)`;
+    wrap.append(l);
+  }
+  return wrap;
+}
+
 export function charFace(look: import('@/data/chibi').ChibiLook | undefined, size = 40): HTMLElement {
   const wrap = h('div');
   const w = Math.round(size * 64 / 96);

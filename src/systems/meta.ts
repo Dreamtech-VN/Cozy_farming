@@ -27,14 +27,14 @@ export function initDaily() {
         from: 'Sunny Town',
         subject: 'Chào mừng bạn đến Sunny Town!',
         body: 'Chào bạn mới! Đây là thị trấn nhỏ xinh của chúng mình. Hãy trồng trọt, câu cá, kết bạn và khám phá nhé!\nGửi bạn chút quà khởi đầu ~',
-        attachments: { coins: 500, rubies: 5 }
+        attachments: { coins: 2000 }
       });
     }
     for (const ev of activeEvents()) {
       sendMail({
         from: 'Ban tổ chức', subject: `${ev.icon} ${ev.name}`,
         body: `${ev.desc}\nQuà sự kiện gửi tặng bạn!`,
-        attachments: { coins: 200, rubies: 1 }
+        attachments: { coins: 500 }
       });
     }
     save();

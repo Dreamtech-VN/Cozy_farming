@@ -182,7 +182,6 @@ export function claimMail(id: string): boolean {
   m.claimed = true; m.read = true;
   const a = m.attachments;
   if (a.coins) { S.wallet.coins += a.coins; bus.emit(EV.WALLET); }
-  if (a.rubies) { S.wallet.rubies += a.rubies; bus.emit(EV.WALLET); }
   if (a.itemId) addItem(a.itemId, a.qty ?? 1);
   save(); bus.emit(EV.STATE_CHANGED);
   return true;
