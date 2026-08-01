@@ -141,6 +141,38 @@ const DRAWN_SPOTS: Record<string, { x: number; y: number; w: number; h: number; 
   ]
 };
 
+// Vật cản VẼ SẴN trong ảnh nền (quầy, kệ, lồng thú, giá treo đồ...) — toạ độ px
+// trên ảnh nền, là phần CHÂN vật (chỗ nhân vật không đứng lên được).
+// Trước đây nhân vật đi xuyên hết bàn ghế vì nền chỉ là một tấm ảnh, không có
+// lớp va chạm nào.
+const DRAWN_BLOCKS: Record<string, [number, number, number, number][]> = {
+  // 58 — tiệm thời trang: 2 giá treo đồ bên trái + quầy thu ngân bên phải
+  fashion_shop: [
+    [40, 188, 200, 62], [40, 250, 200, 76], [40, 330, 200, 74],
+    [424, 188, 152, 172]
+  ],
+  // 59 — tiệm quà: quầy vàng giữa phòng
+  gift_shop: [
+    [195, 188, 228, 104]
+  ],
+  // 104 — mỹ viện: rèm, quầy trang điểm, kệ tường phải, kệ góc trái dưới
+  salon_shop: [
+    [28, 188, 164, 136], [284, 196, 292, 100],
+    [696, 188, 140, 116], [696, 316, 140, 68], [696, 396, 140, 76],
+    [36, 328, 156, 72]
+  ],
+  // 105 — tiệm thú cưng: quầy + hai dãy lồng thú
+  pet_shop: [
+    [86, 188, 236, 106],
+    [36, 304, 168, 80], [36, 392, 168, 80],
+    [424, 188, 200, 104], [424, 304, 200, 80], [424, 392, 200, 80]
+  ],
+  // 101 — trường học: quầy sách vở giữa phòng
+  school: [
+    [418, 236, 314, 52]
+  ]
+};
+
 // Bấm thẳng vào công trình là mở, khỏi phải bắt chuyện NPC
 const SPOT_PANEL: Record<string, () => void> = {
   lt_order_board: () => bus.emit(EV.OPEN_PANEL, { panel: 'orders' }),
@@ -682,6 +714,9 @@ export class WorldScene extends Phaser.Scene {
   // Nhà bếp / nhà kho vẽ thẳng trong ảnh nền map 25 (không phải sprite decor)
   // nên phải khai báo khung bấm riêng.
   private registerDrawnSpots() {
+    for (const [x, y, w, hh] of DRAWN_BLOCKS[this.zone.id] ?? []) {
+      this.obstacles.push(new Phaser.Geom.Rectangle(x, y, w, hh));
+    }
     if (this.zone.id === 'farm_gate') {
       // lối mòn bên trái map 26 dẫn sang nông trại bạn bè
       this.spots.push({
@@ -1247,9 +1282,11 @@ export class WorldScene extends Phaser.Scene {
     const acts: WorldAction[] = [];
     if (this.busy) return acts;
 
-    // NPC gần
+    // NPC gần — map nền HD nhân vật cao gấp đôi, mà người bán lại đứng sau
+    // quầy (quầy chặn đường) nên tầm bắt chuyện phải rộng hơn
+    const npcReach = this.zone.bg ? 96 : 34;
     for (const { def, sprite } of this.npcs) {
-      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, sprite.x, sprite.y) < 34) {
+      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, sprite.x, sprite.y) < npcReach) {
         acts.push({ icon: '', ui: 'chat', label: `Nói chuyện: ${def.name}`, cb: () => this.talkNpc(def) });
       }
     }
