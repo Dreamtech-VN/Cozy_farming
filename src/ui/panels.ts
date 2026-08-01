@@ -31,7 +31,7 @@ import { upgradeHouse, setWallpaper, setFloor, throwParty } from '@/systems/hous
 import { sfx, startBgm, stopBgm } from '@/core/audio';
 import { EQUIP_SLOTS, equipDef, enhanceRate, enhanceCost, dropsOnFail, MAX_ENHANCE, ENHANCE_STONE,
   MAX_STAR, starCost, starRate, gemDef, GEM_LIST, gemPower, gemMergeTo, GEM_MERGE_N, type EquipSlot, type EquipDef } from '@/data/equip';
-import { equipLevel, pieceStats, combatPower, cpBreakdown, equipPiece, unequipPiece, autoEquip, smash,
+import { equipLevel, pieceStats, combatPower, cpBreakdown, equipPiece, unequipPiece, autoEquip, smash, smashUntil, openChestMany,
   equipStar, upStar, gemsOn, gemCount, socketGem, unsocketGem, mergeGem, addGem, EQUIP_CHESTS, openChest } from '@/systems/equipment';
 import { upgradeTool, upgradeRate, missingMats, failStreak, UPGRADABLE, FAIL_BONUS, FAIL_BONUS_MAX } from '@/systems/toolcraft';
 import type { Reward } from '@/data/quests';
@@ -1776,7 +1776,7 @@ export function registerAllPanels() {
         const info = h('div', 'grow');
         info.innerHTML = `<div class="t1">${c.name} <span class="qty">x${have}</span></div><div class="t2">Mở ra 1 trang bị bậc ${c.lo}-${c.hi}.</div>`;
         r.append(ic, info);
-        if (have > 0) r.append(btn('Mở', 'blue', () => { openChest(c.id); render(); }));
+        r.append(btn('Mở rương', 'blue', () => openPanel('chestopen', { id: c.id })));
         r.append(priceBtn(c.price, 'gold', () => { if (spend(c.price)) { addItem(c.id); sfx.coin(); render(); } }));
         body.append(r);
       }
@@ -1788,6 +1788,79 @@ export function registerAllPanels() {
       body.append(sr);
       body.append(btn('Quầy đá (thăng tinh / đá quý)', 'blue', () => openPanel('gemshop')));
     };
+    render();
+  });
+
+  // Bố cục chép theo WndOpenChest.xml của GunPow: ảnh rương ở trên, hàng chọn
+  // số lượng -10 / − / N / + / +10, dòng giải thích, rồi nút mở to ở dưới.
+  registerPanel('chestopen', (arg) => {
+    let cid = (arg as { id?: string })?.id ?? EQUIP_CHESTS[0].id;
+    let n = 1;
+    const { body } = openWindow('Mở rương trang bị', { size: 'large' });
+    const render = () => {
+      body.innerHTML = '';
+      const wrap = h('div', 'ch-wrap');
+
+      // chọn loại rương
+      const tabs = h('div', 'ch-tabs');
+      for (const c of EQUIP_CHESTS) {
+        const t = h('button', `ch-tab ${c.id === cid ? 'on' : ''}`, c.name.replace('Rương trang bị ', ''));
+        t.onclick = () => { sfx.click(); cid = c.id; n = 1; render(); };
+        tabs.append(t);
+      }
+      wrap.append(tabs);
+
+      const c = EQUIP_CHESTS.find(x => x.id === cid)!;
+      const have = itemCount(cid);
+
+      // ảnh rương
+      const art = h('div', 'ch-art');
+      art.append(iconOf(item(cid), 72));
+      art.append(h('div', 'ch-have', `Đang có ${have}`));
+      wrap.append(art);
+      wrap.append(h('div', 'ch-desc', `Mở ra 1 trang bị ngẫu nhiên bậc ${c.lo}-${c.hi} (mọi ô, kể cả vũ khí).`));
+
+      // hàng chọn số lượng: -10 / − / N / + / +10
+      const step = h('div', 'ch-step');
+      const set = (v: number) => { n = Math.max(1, Math.min(Math.max(1, have), v)); render(); };
+      step.append(
+        btn('-10', 'mini', () => set(n - 10)),
+        btn('−', 'mini', () => set(n - 1)));
+      step.append(h('div', 'ch-n', `${n}`));
+      step.append(
+        btn('+', 'mini', () => set(n + 1)),
+        btn('+10', 'mini', () => set(n + 10)));
+      wrap.append(step);
+
+      // nút mở
+      const go = btn(`Mở ${n} rương`, 'gold', () => {
+        const got = openChestMany(cid, n);
+        if (!got.length) { toast('Không có rương để mở.', 'inventory'); sfx.error(); return; }
+        sfx.coin();
+        toast(`Mở ${got.length} rương, nhận ${got.length} món!`, 'rank');
+        last = got.map(g => g.id);
+        n = Math.min(n, Math.max(1, itemCount(cid)));
+        render();
+      });
+      go.classList.add('ch-go');
+      if (!have) go.classList.add('dim');
+      wrap.append(go);
+
+      // kết quả vừa mở
+      if (last.length) {
+        wrap.append(h('div', 'fg-cap', `VỪA NHẬN (${last.length})`));
+        const grid = h('div', 'eq-grid');
+        for (const gid of last.slice(0, 24)) {
+          const d = equipDef(gid); if (!d) continue;
+          const cell = h('div', 'eq-cell');
+          cell.append(spr(d.url, 0, 0, d.w, d.h, 32), h('div', 'eq-nm', d.name));
+          grid.append(cell);
+        }
+        wrap.append(grid);
+      }
+      body.append(wrap);
+    };
+    let last: string[] = [];
     render();
   });
 
@@ -1853,7 +1926,7 @@ export function registerAllPanels() {
   function bigPiece(d: EquipDef, id: string): HTMLElement {
     const box = h('div', 'bp');
     const art = h('div', 'bp-art');
-    art.append(spr(d.url, 0, 0, d.w, d.h, 66));
+    art.append(spr(d.url, 0, 0, d.w, d.h, 52));
     const lv = equipLevel(id);
     if (lv) art.append(h('div', 'eq-plus', `+${lv}`));
     const st = pieceStats(d, lv, equipStar(id), gemsOn(id));
@@ -1875,6 +1948,12 @@ export function registerAllPanels() {
     return rr;
   }
 
+  // Bố cục chép theo WndIntensifyStrengthen.xml của GunPow:
+  //   [ món đang cường hoá, to, trên cùng ]
+  //   [ Lv N + chỉ số ]  ➜  [ Lv N+1 + chỉ số ]     (so sánh trước / sau)
+  //   [ hàng chi phí ]
+  //   [ Cường hoá ] [ Cường hoá liên tục ]
+  // Chỉ khác GunPow ở lớp da: bên mình dùng style kính.
   registerPanel('smithy', (arg) => {
     let id = pickTarget(arg as Record<string, unknown>);
     const { body } = openWindow('Cường hoá trang bị', { size: 'large' });
@@ -1884,21 +1963,61 @@ export function registerAllPanels() {
       wrap.append(targetStrip(id, x => { id = x; render(); }));
       const d = equipDef(id);
       if (d) {
-        const main = h('div', 'fg-main');
-        main.append(bigPiece(d, id));
         const lv = equipLevel(id);
-        const side = h('div', 'fg-side');
-        if (lv >= MAX_ENHANCE) side.append(h('div', 'fg-cap', 'ĐÃ TỐI ĐA'), btn('+15 rồi', '', undefined));
-        else {
-          const cost = enhanceCost(d, lv);
-          side.append(h('div', 'fg-cap', `+${lv} ➜ +${lv + 1}`), rateRow(enhanceRate(lv)));
-          const need = h('div', 'fg-need');
-          need.innerHTML = `${priceHtml(cost.coins)} &nbsp; <b>${itemCount(ENHANCE_STONE)}/${cost.stones}</b> đá cường hoá`;
-          side.append(need, btn(`Cường hoá +${lv + 1}`, 'gold', () => { smash(id); render(); }));
-          if (dropsOnFail(lv)) side.append(h('div', 'sm-warn', 'Từ +7, hỏng là TỤT 1 cấp.'));
+        const head = bigPiece(d, id);
+        head.classList.add('bp-slim');      // bỏ dòng chỉ số, bảng so sánh đã có
+        wrap.append(head);
+
+        // ----- so sánh trước / sau -----
+        const cmp = h('div', 'gx-cmp');
+        const col = (title: string, st: import('@/core/types').CharStats, cls = '') => {
+          const c = h('div', `gx-col ${cls}`);
+          c.append(h('div', 'gx-lv', title));
+          const box = h('div', 'gx-stats');
+          for (const k of STAT_KEYS) {
+            if (!st[k]) continue;
+            const r = h('div', 'gx-st');
+            r.append(h('span', 'gx-st-k', STAT_NAMES[k]), h('span', 'gx-st-v', `${st[k]}`));
+            box.append(r);
+          }
+          c.append(box);
+          return c;
+        };
+        const now = pieceStats(d, lv, equipStar(id), gemsOn(id));
+        cmp.append(col(`+${lv}`, now));
+        cmp.append(h('div', 'gx-arrow', '➜'));
+        if (lv < MAX_ENHANCE) {
+          const next = pieceStats(d, lv + 1, equipStar(id), gemsOn(id));
+          cmp.append(col(`+${lv + 1}`, next, 'up'));
+        } else {
+          cmp.append(h('div', 'gx-col up', 'TỐI ĐA'));
         }
-        main.append(side);
-        wrap.append(main);
+        wrap.append(cmp);
+
+        if (lv < MAX_ENHANCE) {
+          const cost = enhanceCost(d, lv);
+          // ----- hàng chi phí -----
+          const cs = h('div', 'gx-cost');
+          const c1 = h('div', 'gx-cost-i'); c1.innerHTML = priceHtml(cost.coins);
+          const c2 = h('div', 'gx-cost-i');
+          c2.append(iconOf(item(ENHANCE_STONE), 20),
+            h('span', itemCount(ENHANCE_STONE) >= cost.stones ? 'ok' : 'miss',
+              `${itemCount(ENHANCE_STONE)}/${cost.stones}`));
+          cs.append(c1, c2, rateRow(enhanceRate(lv)));
+          wrap.append(cs);
+          if (dropsOnFail(lv)) wrap.append(h('div', 'sm-warn', 'Từ +7, cường hoá hỏng sẽ TỤT 1 cấp.'));
+
+          // ----- 2 nút như GunPow -----
+          const acts = h('div', 'gx-acts');
+          acts.append(
+            btn('Cường hoá', 'gold', () => { smash(id); render(); }),
+            btn('Cường hoá liên tục', 'blue', () => {
+              const r = smashUntil(id);
+              if (r.tries) toast(`Đập ${r.tries} lần, lên ${r.up} cấp.`, 'rank');
+              render();
+            }));
+          wrap.append(acts);
+        }
       }
       body.append(wrap);
     };

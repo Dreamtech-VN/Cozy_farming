@@ -196,7 +196,7 @@ export const EQUIP_CHESTS: ChestDef[] = [
 export function chestDef(id: string) { return EQUIP_CHESTS.find(c => c.id === id); }
 
 /** Mở 1 rương -> nhận 1 món ngẫu nhiên (mọi ô, bậc trong khoảng của rương). */
-export function openChest(chestId: string): EquipDef | undefined {
+export function openChest(chestId: string, quiet = false): EquipDef | undefined {
   const c = chestDef(chestId);
   if (!c) return undefined;
   if (itemCount(chestId) <= 0) { toast('Không có rương này.', 'inventory'); sfx.error(); return undefined; }
@@ -207,8 +207,7 @@ export function openChest(chestId: string): EquipDef | undefined {
   S.equipBag.push(got.id);
   addStat('chest_opened');
   save(); bus.emit(EV.INVENTORY); bus.emit(EV.STATE_CHANGED);
-  sfx.coin();
-  toast(`Mở rương được ${got.name}!`, 'rank');
+  if (!quiet) { sfx.coin(); toast(`Mở rương được ${got.name}!`, 'rank'); }
   return got;
 }
 
@@ -304,4 +303,32 @@ export function mergeGem(gid: string): boolean {
   addGem(to.id);
   sfx.coin(); toast(`Ghép thành ${to.name}!`, 'rank');
   return true;
+}
+
+/** Cường hoá liên tục (nút "1 chạm" của GunPow): đập tới khi hết tài nguyên. */
+export function smashUntil(id: string, maxTry = 30): { tries: number; up: number } {
+  let tries = 0, up = 0;
+  const start = equipLevel(id);
+  for (let i = 0; i < maxTry; i++) {
+    const lv = equipLevel(id);
+    if (lv >= MAX_ENHANCE) break;
+    const def = equipDef(id); if (!def) break;
+    const c = enhanceCost(def, lv);
+    if (itemCount(ENHANCE_STONE) < c.stones || S.wallet.coins < c.coins) break;
+    smash(id); tries++;
+  }
+  up = equipLevel(id) - start;
+  if (!tries) toast('Không đủ xu hoặc đá cường hoá.', 'coin');
+  return { tries, up };
+}
+
+/** Mở nhiều rương một lượt (trang mở rương có nút -10/+10 như GunPow). */
+export function openChestMany(chestId: string, n: number): EquipDef[] {
+  const out: EquipDef[] = [];
+  for (let i = 0; i < n; i++) {
+    const g = openChest(chestId, true);
+    if (!g) break;
+    out.push(g);
+  }
+  return out;
 }

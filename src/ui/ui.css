@@ -2103,12 +2103,12 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 
 .fg-main { display: flex; gap: 12px; align-items: stretch; flex: none; }
 .bp {
-  flex: 0 0 44%; display: flex; flex-direction: column; align-items: center; gap: 3px;
-  padding: 10px 8px; border-radius: 14px;
+  flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 7px 8px 8px; border-radius: 14px;
   background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .26);
 }
 .bp-art {
-  position: relative; width: 78px; height: 78px; border-radius: 14px;
+  position: relative; width: 62px; height: 62px; border-radius: 13px;
   display: flex; align-items: center; justify-content: center;
   background: rgba(0, 0, 0, .18); border: 1px solid rgba(255, 255, 255, .24);
 }
@@ -2168,3 +2168,72 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   background: rgba(0, 0, 0, .22); border: 1px dashed rgba(255, 255, 255, .3);
 }
 .sm-sock.on { border-style: solid; background: rgba(255, 255, 255, .12); }
+
+/* ===== Cường hoá: bố cục theo WndIntensifyStrengthen của GunPow ===== */
+.gx-cmp { flex: none; display: flex; align-items: stretch; gap: 8px; }
+.gx-col {
+  flex: 1 1 0; min-width: 0; padding: 7px 9px 8px; border-radius: 12px;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .26);
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+.gx-col.up { border-color: rgba(255, 212, 59, .55); background: rgba(255, 212, 59, .12); }
+.gx-lv { font-size: 14px; font-weight: 900; color: #f6edd8; }
+.gx-col.up .gx-lv { color: #ffe066; }
+.gx-stats { width: 100%; display: flex; flex-direction: column; gap: 1px; }
+.gx-st { display: flex; justify-content: space-between; gap: 8px; font-size: 10.5px; font-weight: 800; }
+.gx-st-k { color: #bccbb0; }
+.gx-st-v { color: #b2f2bb; }
+.gx-col.up .gx-st-v { color: #ffe066; }
+.gx-arrow { align-self: center; font-size: 18px; font-weight: 900; color: #ffe066; flex: none; }
+
+.gx-cost { flex: none; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.gx-cost-i {
+  display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 900; color: #e7f0dd;
+  padding: 4px 10px 5px; border-radius: 10px;
+  background: rgba(255, 255, 255, .09); border: 1px solid rgba(255, 255, 255, .24);
+}
+.gx-cost-i img.cur { width: 15px; height: 15px; }
+.gx-cost-i .ok { color: #8ce99a; }
+.gx-cost-i .miss { color: #ffa8a8; }
+.gx-cost .sm-rate { flex: 1 1 120px; min-width: 100px; }
+.gx-acts { flex: none; display: flex; gap: 8px; }
+.gx-acts .btn { flex: 1 1 0; min-width: 0; }
+
+/* ===== Mở rương: bố cục theo WndOpenChest của GunPow ===== */
+.win:has(> .win-body > .ch-wrap) { width: min(560px, 92vw); height: min(430px, 82vh); }
+.win-body:has(> .ch-wrap) { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+.ch-wrap { display: flex; flex-direction: column; gap: 8px; flex: 1; min-height: 0; overflow-y: auto; align-items: center; }
+.ch-tabs { flex: none; display: flex; gap: 6px; }
+.ch-tab {
+  padding: 5px 14px 6px; border-radius: 999px; cursor: pointer; font-family: inherit;
+  font-size: 12px; font-weight: 900; color: #e7f0dd;
+  background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .3);
+}
+.ch-tab.on { background: linear-gradient(#ffe066, #f0a318); border-color: #ffe9a8; color: #4a3005; }
+.ch-art {
+  position: relative; width: 108px; height: 108px; flex: none; border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 45% 35%, rgba(255, 255, 255, .22), rgba(0, 0, 0, .25));
+  border: 1px solid rgba(255, 255, 255, .3); box-shadow: inset 0 2px 5px rgba(0, 0, 0, .3);
+}
+.ch-have {
+  position: absolute; bottom: -8px; left: 50%; translate: -50% 0; white-space: nowrap;
+  font-size: 10px; font-weight: 900; color: #4a3005; padding: 1px 9px 2px;
+  background: linear-gradient(#ffe066, #f0a318); border-radius: 999px;
+}
+.ch-desc { font-size: 11.5px; font-weight: 700; color: #d4ddc8; text-align: center; padding-top: 6px; }
+.ch-step { flex: none; display: flex; align-items: center; gap: 7px; }
+.ch-step .btn { padding: 5px 11px 6px; font-size: 12px; min-width: 44px; }
+.ch-n {
+  min-width: 62px; text-align: center; font-size: 19px; font-weight: 900; color: #ffe066;
+  padding: 3px 10px 4px; border-radius: 10px;
+  background: rgba(0, 0, 0, .26); border: 1px solid rgba(255, 255, 255, .26);
+}
+.ch-go { min-width: 190px; }
+.ch-go.dim { opacity: .5; }
+
+/* trang Cường hoá: đầu trang gọn lại, chỉ số để bảng so sánh lo */
+.bp.bp-slim { flex-direction: row; align-items: center; gap: 10px; padding: 6px 10px; }
+.bp.bp-slim .bp-st { display: none; }
+.bp.bp-slim .bp-art { width: 52px; height: 52px; }
+.bp.bp-slim .bp-nm { font-size: 13px; }
