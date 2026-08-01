@@ -2694,8 +2694,10 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
   background: linear-gradient(#f0664a, #c53b26); border-radius: 3px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
 }
-.ch-foot { flex: none; display: flex; gap: 8px; padding-top: 8px; }
-.ch-foot .btn { flex: 1; }
+/* hàng nút dưới cùng: một nút thì để cỡ tự nhiên và căn giữa, nhiều nút mới
+   chia đều — kéo dãn cả trang làm ảnh nền của nút méo hết góc bo */
+.ch-foot { flex: none; display: flex; gap: 8px; padding-top: 8px; justify-content: center; }
+.ch-foot .btn { flex: 0 1 auto; min-width: 150px; }
 
 /* Skin là cả bộ đồ đứng nên ô cao hơn ô vuông của trang bị / quần áo. */
 .ch-list-tall { grid-template-columns: repeat(3, 1fr); }

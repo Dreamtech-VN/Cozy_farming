@@ -2582,7 +2582,9 @@ export function registerAllPanels() {
           return {
             key: k, name: id ? (CHIBI_PARTS[id]?.name ?? nm) : nm,
             art: id ? art(id, zz, 34) : undefined, on: k === key,
-            emptyIcon: `assets/ui/inv/ic_${k === 'pant' ? 'pants' : k}.png`,
+            emptyIcon: k === 'hand'
+              ? 'assets/equip/slot/clothhand.png'
+              : `assets/ui/inv/ic_${k === 'pant' ? 'pants' : k}.png`,
             click: () => {
               // bấm ô đang mặc thì cởi luôn (nếu món đó cởi được)
               if (k === key && id && opt) { (look as unknown as Record<string, unknown>)[k] = 0; apply(); return; }
