@@ -1,7 +1,7 @@
 import type { GameState, StatKey } from './types';
 import { ZONES } from '@/data/zones';
 import { bus, EV, toast } from './events';
-import { migrateBagToStore, addTo, type StoreKind } from '@/systems/farmstore';
+import { migrateBagToStore, addTo, countOf, takeFrom, type StoreKind } from '@/systems/farmstore';
 import { migrateHandItems } from '@/data/handitems';
 
 const KEY = 'cozy_farming_save_v1';
@@ -245,12 +245,20 @@ export function addItem(itemId: string, qty = 1) {
   if (S.inventory[itemId] <= 0) delete S.inventory[itemId];
   bus.emit(EV.INVENTORY); save();
 }
+// đếm / trừ cũng phải nhìn vào kho nông trại, không thì mấy chỗ dùng nguyên
+// liệu (mở tiệc bằng bánh kem, tặng nông sản...) sẽ báo "không có vật phẩm"
 export function itemCount(itemId: string): number {
+  const slot = storeSlotOf(itemId);
+  if (slot) return countOf(slot[0], slot[1]);
   return S.inventory[itemId] ?? 0;
 }
 export function removeItem(itemId: string, qty = 1): boolean {
-  if (itemCount(itemId) < qty) return false;
-  addItem(itemId, -qty);
+  const slot = storeSlotOf(itemId);
+  if (slot) return takeFrom(slot[0], slot[1], qty);
+  if ((S.inventory[itemId] ?? 0) < qty) return false;
+  S.inventory[itemId] -= qty;
+  if (S.inventory[itemId] <= 0) delete S.inventory[itemId];
+  bus.emit(EV.INVENTORY); save();
   return true;
 }
 
