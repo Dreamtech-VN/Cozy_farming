@@ -115,27 +115,27 @@ export function catTotal(cat: string): number {
 }
 
 // ===== Huy hiệu =====
-// Mở theo TỔNG điểm thành tựu. Mỗi huy hiệu cộng thẳng chỉ số cho nhân vật —
-// đây là phần thưởng chính khiến người chơi đi cày thành tựu.
+// Đúng như màn Huy Hiệu của GunPow: chỉ có 3 cái (Sinh lực · Tấn công ·
+// Phòng thủ), mỗi cái có CẤP và nâng bằng ĐIỂM THÀNH TỰU. Nâng cấp thì tiêu
+// điểm, nên "Thành tựu còn" là số điểm chưa xài.
+// Chỉ số mỗi cấp cố ý để nhỏ — huy hiệu chỉ là phần thưởng phụ cho việc cày
+// thành tựu, không được lấn át trang bị.
 export interface BadgeDef {
   id: string;
   name: string;
-  need: number;                       // điểm thành tựu cần có
-  stats: Partial<Record<StatKey, number>>;
-  icon: string;                       // ảnh trong assets/equip/slot hoặc equip
+  stat: StatKey;
+  per: number;        // chỉ số cộng thêm mỗi cấp
+  icon: string;
 }
 
+export const BADGE_MAX = 20;
 export const BADGES: BadgeDef[] = [
-  { id: 'bd1', name: 'Huy Hiệu Đồng', need: 2000, stats: { health: 20, strength: 10 }, icon: 'medal_003' },
-  { id: 'bd2', name: 'Huy Hiệu Bạc', need: 8000, stats: { health: 40, strength: 25, agility: 15 }, icon: 'medal_008' },
-  { id: 'bd3', name: 'Huy Hiệu Vàng', need: 20000, stats: { health: 80, strength: 50, agility: 30, intellect: 20 }, icon: 'medal_013' },
-  { id: 'bd4', name: 'Huy Hiệu Bạch Kim', need: 45000, stats: { health: 150, strength: 90, agility: 60, intellect: 45, charm: 30 }, icon: 'medal_018' },
-  { id: 'bd5', name: 'Huy Hiệu Kim Cương', need: 90000, stats: { health: 260, strength: 160, agility: 110, intellect: 85, charm: 60 }, icon: 'medal_024' },
-  { id: 'bd6', name: 'Huy Hiệu Huyền Thoại', need: 160000, stats: { health: 420, strength: 260, agility: 180, intellect: 140, charm: 100 }, icon: 'medal_030' }
+  { id: 'bd_hp', name: 'Huy Hiệu Sinh Lực', stat: 'health', per: 3, icon: 'bd_hp' },
+  { id: 'bd_atk', name: 'Huy Hiệu Tấn Công', stat: 'strength', per: 2, icon: 'bd_atk' },
+  { id: 'bd_def', name: 'Huy Hiệu Phòng Thủ', stat: 'agility', per: 2, icon: 'bd_def' }
 ];
 
-export function badgeAt(points: number): BadgeDef | undefined {
-  let cur: BadgeDef | undefined;
-  for (const b of BADGES) if (points >= b.need) cur = b;
-  return cur;
+/** Điểm thành tựu phải trả để lên cấp `lv+1`. */
+export function badgeCost(lv: number): number {
+  return 400 + lv * 200;
 }

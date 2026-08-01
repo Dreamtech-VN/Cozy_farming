@@ -6,7 +6,7 @@
 import { S, save, addCoins, addStat } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { sfx } from '@/core/audio';
-import { ACHS, BADGES, ACH_TOTAL_POINT, achsOfCat, catTotal, badgeAt, type AchDef, type BadgeDef } from '@/data/achievements';
+import { ACHS, BADGES, BADGE_MAX, badgeCost, ACH_TOTAL_POINT, achsOfCat, catTotal, type AchDef } from '@/data/achievements';
 import { TITLES } from '@/data/quests';
 import { EQUIP_SLOTS } from '@/data/equip';
 import type { CharStats } from '@/core/types';
@@ -58,14 +58,9 @@ export function claim(id: string): boolean {
     toast(`Mở khoá danh hiệu 【${TITLES[a.title]?.name ?? a.title}】`, 'rank');
   }
   addStat('ach_claimed');
-  const before = badgeAt(achPoints() - a.point);
-  const after = badgeAt(achPoints());
   save(); bus.emit(EV.WALLET); bus.emit(EV.STATE_CHANGED);
   sfx.coin();
   toast(`Nhận thành tựu ${a.name}: +${a.point} điểm`, 'rank');
-  if (after && after.id !== before?.id) {
-    toast(`Lên ${after.name}!`, 'rank');
-  }
   return true;
 }
 
@@ -77,19 +72,36 @@ export function claimAll(): number {
   return n;
 }
 
-export function ownedBadges(): BadgeDef[] {
-  const p = achPoints();
-  return BADGES.filter(b => p >= b.need);
-}
-export function currentBadge(): BadgeDef | undefined { return badgeAt(achPoints()); }
+export function badgeLv(id: string): number { return S.badgeLv?.[id] ?? 0; }
 
-/** Chỉ số cộng thêm từ huy hiệu — cộng dồn TẤT CẢ huy hiệu đã mở. */
+/** Điểm thành tựu đã tiêu để nâng huy hiệu. */
+export function achSpent(): number {
+  let n = 0;
+  for (const b of BADGES) for (let i = 0; i < badgeLv(b.id); i++) n += badgeCost(i);
+  return n;
+}
+/** Điểm còn xài được ("Thành tựu còn" của GunPow). */
+export function achLeft(): number { return achPoints() - achSpent(); }
+
+export function upBadge(id: string): boolean {
+  const b = BADGES.find(x => x.id === id);
+  if (!b) return false;
+  const lv = badgeLv(id);
+  if (lv >= BADGE_MAX) { toast('Huy hiệu đã tối đa.', 'alert'); return false; }
+  const cost = badgeCost(lv);
+  if (achLeft() < cost) { toast(`Cần ${cost} điểm thành tựu.`, 'alert'); sfx.error(); return false; }
+  if (!S.badgeLv) S.badgeLv = {};
+  S.badgeLv[id] = lv + 1;
+  save(); bus.emit(EV.STATE_CHANGED); sfx.coin();
+  toast(`${b.name} lên Lv${lv + 1}.`, 'rank');
+  return true;
+}
+
+/** Chỉ số cộng thêm từ huy hiệu. */
 export function badgeStats(): CharStats {
   const out: CharStats = { health: 0, intellect: 0, strength: 0, agility: 0, charm: 0 };
-  for (const b of ownedBadges()) {
-    for (const k of Object.keys(b.stats) as (keyof CharStats)[]) out[k] += b.stats[k] ?? 0;
-  }
+  for (const b of BADGES) out[b.stat] += b.per * badgeLv(b.id);
   return out;
 }
 
-export { ACHS, BADGES, ACH_TOTAL_POINT, achsOfCat, catTotal };
+export { ACHS, BADGES, BADGE_MAX, badgeCost, ACH_TOTAL_POINT, achsOfCat, catTotal };

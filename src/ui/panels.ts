@@ -13,7 +13,7 @@ import { CROPS, CROP_LIST } from '@/data/crops';
 import { ANIMAL_LIST, ANIMALS, BARN_CAPACITY, BARN_UPGRADE_COST } from '@/data/animals';
 import { FISH_LIST, RODS, RARITY_COLOR, RARITY_NAME, FISHES, rodIconRect } from '@/data/fish';
 import { chibiList, chibiPriceXu, CHIBI_PARTS, partStats, equipStats, formatStats } from '@/data/chibi';
-import { SKIN_LIST, SKINS, SKIN_RANKS, skinRank, skinPower, type SkinDef } from '@/data/skins';
+import { SKIN_LIST, SKINS, SKIN_RANKS, skinRank, type SkinDef } from '@/data/skins';
 import { FURNITURE, FURNITURE_LIST, HOUSE_LEVELS, WALLPAPERS, FLOORS } from '@/data/furniture';
 import { SHOPS } from '@/data/shops';
 import { QUESTS, TITLES } from '@/data/quests';
@@ -36,9 +36,10 @@ import { EQUIP_SLOTS, equipDef, enhanceRate, enhanceCost, dropsOnFail, MAX_ENHAN
 import { equipLevel, pieceStats, combatPower, cpBreakdown, equipPiece, unequipPiece, autoEquip, smash, smashUntil, openChestMany, inherit, canInherit, inheritCost,
   equipStar, upStar, gemsOn, gemCount, socketGem, unsocketGem, mergeGem, addGem, EQUIP_CHESTS, openChest,
   refLines, refLocks, toggleRefLock, refScore, reforge, worn } from '@/systems/equipment';
-import { ACH_CATS, achsOfCat, catTotal, ACH_TOTAL_POINT, BADGES, type AchDef } from '@/data/achievements';
+import { ACH_CATS, achsOfCat, catTotal, ACH_TOTAL_POINT, BADGES, BADGE_MAX, badgeCost,
+  type AchDef } from '@/data/achievements';
 import { progressOf, isDone, isClaimed, canClaim, claim, claimAll, achPoints, pendingPoints,
-  catPoints, ownedBadges, currentBadge } from '@/systems/achievements';
+  catPoints, achLeft, badgeLv, upBadge } from '@/systems/achievements';
 import { upgradeTool, upgradeRate, missingMats, failStreak, UPGRADABLE, FAIL_BONUS, FAIL_BONUS_MAX } from '@/systems/toolcraft';
 import type { Reward } from '@/data/quests';
 
@@ -1293,10 +1294,8 @@ export function registerAllPanels() {
           + `</div></div>`;
         box.append(btn('Mở trang Thành tựu', 'gold', () => openPanel('achievement')));
         body.append(box);
-        const cur = currentBadge();
-        body.append(h('div', 'hint', cur
-          ? `Huy hiệu đang có: ${cur.name} — cộng chỉ số vĩnh viễn cho nhân vật.`
-          : 'Gom đủ điểm thành tựu để mở huy hiệu đầu tiên.'));
+        body.append(h('div', 'hint',
+          `Điểm còn xài được: ${fmt(achLeft())} — dùng để nâng cấp huy hiệu.`));
       }
     };
     tabs(['Nhiệm vụ', 'Thành tựu'], i => { tab = i; render(); });
@@ -2652,8 +2651,9 @@ export function registerAllPanels() {
           ? 'Chưa có bộ ảo hoá nào — mở rương hoặc mua ở Thời trang Cô Trang.'
           : 'Chưa có dữ liệu ảo hoá.',
         grid: 'tall',
+        // skin chỉ để đẹp, không cộng chỉ số
         note: wearing
-          ? `Đang dùng 【${SKIN_RANKS[skinRank(wearing)].name}】${wearing.name} · Ảo lực +${skinPower(wearing)}`
+          ? `Đang dùng 【${SKIN_RANKS[skinRank(wearing)].name}】${wearing.name}`
           : 'Chưa mặc bộ ảo hoá nào.',
         foot: [
           btn('Hủy ảo hoá', '', () => {
@@ -2683,95 +2683,192 @@ export function registerAllPanels() {
     body.append(h('div', 'hint', `Tổng lực chiến hiện tại: ${fmt(combatPower())}`));
   }
 
-  // ================= Trang Thành tựu / Huy hiệu =================
-  // Bấm nút "Huy hiệu" ở mục Danh hiệu thì mở trang này: 2 tab.
-  //   Thành tựu — chia nhóm, mỗi dòng có thanh tiến độ và nút Nhận (điểm ◆).
-  //   Huy hiệu  — mở dần theo TỔNG điểm thành tựu, mỗi cái cộng chỉ số.
-  registerPanel('achievement', () => {
-    let tab: 'ach' | 'badge' = 'ach';
+  // ================= Trang Thành tựu / Danh hiệu / Huy hiệu =================
+  // Dựng theo màn Thành tựu của GunPow:
+  //   · Thanh trên: "Thành tựu còn ◆N" (điểm chưa xài) và "Tiến độ x/y".
+  //   · Dải mục dọc bên PHẢI: Thành tựu · Danh hiệu · Huy hiệu, có chấm đỏ.
+  //   · Tab Thành tựu: cột nhóm bên trái (mỗi nhóm một thanh tiến độ) + danh
+  //     sách bên phải, mỗi dòng có điều kiện, danh hiệu thưởng và nút Nhận.
+  //   · Tab Huy hiệu: 3 huy hiệu nâng cấp bằng điểm thành tựu.
+  registerPanel('achievement', (arg) => {
+    let tab = ((arg as { tab?: string })?.tab ?? 'ach') as 'ach' | 'title' | 'badge';
     let cat = ACH_CATS[0].id;
     const { body } = openWindow('Thành tựu', { page: true });
 
     const render = () => {
       body.innerHTML = '';
+      const wrap = h('div', 'av-wrap');
       const page2 = h('div', 'av-page');
 
-      const tabs = h('div', 'av-tabs');
-      for (const [k, nm] of [['ach', 'Thành tựu'], ['badge', 'Huy hiệu']] as ['ach' | 'badge', string][]) {
-        const t = h('button', `av-tab ${tab === k ? 'on' : ''}`, nm);
+      // ---- thanh trên ----
+      const top = h('div', 'av-top');
+      const pim0 = document.createElement('img'); pim0.src = 'assets/ach/point.png'; pim0.className = 'av-pico big';
+      top.append(h('div', 'av-left-k', 'Thành tựu còn:'), pim0, h('div', 'av-pt-big', fmt(achLeft())));
+      top.append(h('div', 'grow'));
+      top.append(h('div', 'av-prog', `Tiến độ: ${fmt(achPoints())}/${fmt(ACH_TOTAL_POINT)}`));
+      page2.append(top);
+
+      if (tab === 'ach') page2.append(bodyAch());
+      else if (tab === 'title') page2.append(bodyTitle());
+      else page2.append(bodyBadge());
+
+      // ---- dải mục dọc bên phải ----
+      const rail = h('div', 'av-rail');
+      const mk = (k: 'ach' | 'title' | 'badge', nm: string, dot: boolean) => {
+        const t = h('button', `av-rt ${tab === k ? 'on' : ''}`, nm);
+        if (dot) t.append(h('i', 'av-rdot'));
         t.onclick = () => { sfx.click(); tab = k; render(); };
-        tabs.append(t);
-      }
-      page2.append(tabs);
+        rail.append(t);
+      };
+      mk('ach', 'Thành tựu', pendingPoints() > 0);
+      mk('title', 'Danh hiệu', false);
+      mk('badge', 'Huy hiệu', BADGES.some(b => achLeft() >= badgeCost(badgeLv(b.id)) && badgeLv(b.id) < BADGE_MAX));
 
-      // thanh tổng: điểm đã nhận / tổng điểm + huy hiệu đang có
-      const cur = currentBadge();
-      const head = h('div', 'av-sum');
-      const bar = h('div', 'av-bar');
-      const fill = h('div', 'av-bar-f');
-      fill.style.width = `${Math.min(100, achPoints() / ACH_TOTAL_POINT * 100)}%`;
-      bar.append(fill, h('div', 'av-bar-t', `${fmt(achPoints())} / ${fmt(ACH_TOTAL_POINT)} điểm`));
-      head.append(h('div', 'av-sum-k', cur ? cur.name : 'Chưa có huy hiệu'), bar);
-      if (pendingPoints() > 0) head.append(btn(`Nhận tất cả (+${fmt(pendingPoints())})`, 'gold',
-        () => { claimAll(); render(); }));
-      page2.append(head);
-
-      if (tab === 'ach') {
-        const cr = h('div', 'av-cats');
-        for (const c of ACH_CATS) {
-          const t = h('button', `av-cat ${cat === c.id ? 'on' : ''}`, c.name);
-          const p = achsOfCat(c.id).filter(a => canClaim(a)).length;
-          if (p) t.append(h('span', 'av-dot', `${p}`));
-          t.onclick = () => { sfx.click(); cat = c.id; render(); };
-          cr.append(t);
-        }
-        page2.append(cr);
-
-        const list = h('div', 'av-list');
-        for (const a of achsOfCat(cat)) list.append(achRow(a, render));
-        page2.append(list);
-      } else {
-        const list = h('div', 'av-badges');
-        for (const b of BADGES) {
-          const has = achPoints() >= b.need;
-          const row = h('div', `av-badge ${has ? '' : 'locked'}`);
-          const art = h('div', 'av-badge-art');
-          art.append(spr(`assets/equip/${b.icon}.png`, 0, 0, 60, 60, 40));
-          const info = h('div', 'av-badge-i');
-          const st = STAT_KEYS.filter(k => b.stats[k]).map(k => `${STAT_NAMES[k]} +${b.stats[k]}`).join(' · ');
-          info.append(h('div', 'av-badge-n', b.name), h('div', 'av-badge-s', st));
-          const right = h('div', 'av-badge-r',
-            has ? 'Đã mở' : `Cần ${fmt(b.need)} điểm`);
-          row.append(art, info, right);
-          list.append(row);
-        }
-        page2.append(list, h('div', 'hint',
-          'Huy hiệu mở theo tổng điểm thành tựu và cộng chỉ số vĩnh viễn — đã mở cái nào thì cộng dồn hết.'));
-      }
-      body.append(page2);
+      wrap.append(page2, rail);
+      body.append(wrap);
     };
 
-    const achRow = (a: AchDef, redraw: () => void) => {
-      const cur2 = progressOf(a), done = isDone(a), taken = isClaimed(a);
+    // ---- tab Thành tựu ----
+    const bodyAch = () => {
+      const box = h('div', 'av-two');
+      const cats = h('div', 'av-cats');
+      for (const c of ACH_CATS) {
+        const t = h('button', `av-cat ${cat === c.id ? 'on' : ''}`);
+        t.append(h('div', 'av-cat-n', c.name));
+        const bar = h('div', 'av-cat-bar');
+        const f = h('div', 'av-cat-f');
+        f.style.width = `${Math.min(100, catPoints(c.id) / catTotal(c.id) * 100)}%`;
+        bar.append(f);
+        t.append(bar);
+        if (achsOfCat(c.id).some(a => canClaim(a))) t.append(h('i', 'av-rdot'));
+        t.onclick = () => { sfx.click(); cat = c.id; render(); };
+        cats.append(t);
+      }
+
+      const right = h('div', 'av-side');
+      const c2 = ACH_CATS.find(c => c.id === cat)!;
+      const hd = h('div', 'av-hd');
+      hd.append(h('span', 'av-hd-k', `【${c2.name}】Thành tựu:`));
+      const hb = h('div', 'av-hd-bar');
+      const hf = h('div', 'av-hd-f');
+      hf.style.width = `${Math.min(100, catPoints(cat) / catTotal(cat) * 100)}%`;
+      hb.append(hf);
+      hd.append(hb, h('span', 'av-hd-n', `${fmt(catPoints(cat))}/${fmt(catTotal(cat))}`));
+      right.append(hd);
+
+      const list = h('div', 'av-list');
+      for (const a of achsOfCat(cat)) list.append(achRow(a));
+      right.append(list);
+
+      if (pendingPoints() > 0) {
+        const ft = h('div', 'av-foot');
+        ft.append(btn(`Nhận tất cả (+${fmt(pendingPoints())})`, 'gold', () => { claimAll(); render(); }));
+        right.append(ft);
+      }
+      box.append(cats, right);
+      return box;
+    };
+
+    const achRow = (a: AchDef) => {
+      const cur = progressOf(a), done = isDone(a), taken = isClaimed(a);
       const row = h('div', `av-row ${taken ? 'done' : ''}`);
       const info = h('div', 'av-row-i');
       info.append(h('div', 'av-row-n', a.name), h('div', 'av-row-d', a.desc));
-      const bar = h('div', 'av-row-bar');
-      const f = h('div', 'av-row-f');
-      f.style.width = `${Math.min(100, cur2 / a.target * 100)}%`;
-      bar.append(f, h('div', 'av-row-t', `${fmt(cur2)}/${fmt(a.target)}`));
-      info.append(bar);
-      const right = h('div', 'av-row-r');
-      right.append(h('div', 'av-pt', `+${fmt(a.point)}`));
       if (a.title) {
         const t = TITLES[a.title];
-        right.append(h('div', 'av-ti', `【${t?.name ?? a.title}】`));
+        info.append(h('div', 'av-row-t', `Nhận danh hiệu 【${t?.name ?? a.title}】`));
       }
+      const rw = h('div', 'av-rw');
+      if (a.coins) rw.innerHTML = priceHtml(a.coins);
+      const pt = h('span', 'av-pt');
+      const pim = document.createElement('img'); pim.src = 'assets/ach/point.png'; pim.className = 'av-pico';
+      pt.append(pim, document.createTextNode(fmt(a.point)));
+      rw.append(pt);
+      info.append(rw);
+      const bar = h('div', 'av-row-bar');
+      const f = h('div', 'av-row-f');
+      f.style.width = `${Math.min(100, cur / a.target * 100)}%`;
+      bar.append(f, h('div', 'av-row-bt', `${fmt(cur)}/${fmt(a.target)}`));
+      info.append(bar);
+
+      const right = h('div', 'av-row-r');
       if (taken) right.append(h('div', 'av-got', 'Đã nhận'));
-      else if (done) right.append(btn('Nhận', 'gold', () => { claim(a.id); redraw(); }));
+      else if (done) right.append(btn('Nhận', 'green', () => { claim(a.id); render(); }));
       else right.append(h('div', 'av-wait', 'Chưa đạt'));
       row.append(info, right);
       return row;
+    };
+
+    // ---- tab Danh hiệu ----
+    const bodyTitle = () => {
+      const box = h('div', 'av-two');
+      const cats = h('div', 'av-cats');
+      for (const c of ACH_CATS) {
+        const t = h('button', `av-cat ${cat === c.id ? 'on' : ''}`);
+        t.append(h('div', 'av-cat-n', c.name));
+        t.onclick = () => { sfx.click(); cat = c.id; render(); };
+        cats.append(t);
+      }
+      const right = h('div', 'av-side');
+      const grid = h('div', 'av-tgrid');
+      const list = achsOfCat(cat).filter(a => a.title);
+      if (!list.length) grid.append(h('div', 'hint', 'Nhóm này chưa có danh hiệu.'));
+      for (const a of list) {
+        const t = TITLES[a.title!];
+        const has = S.player.titles.includes(a.title!);
+        const on = S.player.title === a.title;
+        const c = h('button', `av-tcell ${on ? 'on' : ''} ${has ? '' : 'locked'}`);
+        c.append(titlePlaque(t?.name ?? a.title!, has ? (t?.color ?? '#ffe066') : '#9b8a72', 1));
+        c.append(h('div', 'av-tdesc', a.desc));
+        if (on) c.append(h('div', 'ch-flag', 'Đang đeo'));
+        c.onclick = () => {
+          if (!has) { toast(a.desc, 'quest'); return; }
+          S.player.title = on ? '' : a.title!;
+          save(); bus.emit(EV.STATE_CHANGED); render();
+        };
+        grid.append(c);
+      }
+      right.append(grid, h('div', 'hint', 'Danh hiệu chỉ để khoe, không cộng chỉ số.'));
+      box.append(cats, right);
+      return box;
+    };
+
+    // ---- tab Huy hiệu ----
+    const bodyBadge = () => {
+      const box = h('div', 'av-bwrap');
+      for (const b of BADGES) {
+        const lv = badgeLv(b.id), max = lv >= BADGE_MAX;
+        const card = h('div', 'av-bcard');
+        const hd = h('div', 'av-bname');
+        hd.append(h('span', '', b.name), h('span', 'av-blv', `Lv${lv}`));
+        card.append(hd);
+        const art = h('div', 'av-bart');
+        const im = document.createElement('img');
+        im.src = `assets/ach/${b.icon}.png`; im.alt = b.name; im.className = 'av-bimg';
+        art.append(im);
+        card.append(art);
+        const cmp = h('div', 'av-bcmp');
+        cmp.append(h('div', 'av-bs', `${STAT_NAMES[b.stat]}\n+${b.per * lv}`),
+          h('div', 'av-barrow', '➜'),
+          h('div', 'av-bs up', max ? 'TỐI ĐA' : `${STAT_NAMES[b.stat]}\n+${b.per * (lv + 1)}`));
+        card.append(cmp);
+        if (!max) {
+          const cost = badgeCost(lv);
+          const cs = h('div', 'av-bcost');
+          const cim = document.createElement('img'); cim.src = 'assets/ach/point.png'; cim.className = 'av-pico';
+          cs.append(document.createTextNode('Tốn '), cim, document.createTextNode(fmt(cost)));
+          card.append(cs);
+          const go = btn('Tăng cấp', 'green', () => { upBadge(b.id); render(); });
+          if (achLeft() < cost) go.classList.add('dim');
+          card.append(go);
+        }
+        box.append(card);
+      }
+      const w = h('div', 'av-side');
+      w.append(box, h('div', 'hint',
+        `Huy hiệu nâng bằng điểm thành tựu, mỗi cấp cộng ít chỉ số (tối đa Lv${BADGE_MAX}) — `
+        + 'chỉ là thưởng thêm cho việc cày thành tựu, không lấn át trang bị.'));
+      return w;
     };
 
     render();

@@ -2,14 +2,14 @@
 // Mặc skin -> thay TOÀN BỘ hình dạng nhân vật (tóc/áo/quần/mũ...) chứ không phải từng món.
 // Bộ ghép từ trang phục cùng tên trong data Avatar (xem docs/ASSETS.md).
 
-// Bậc hiếm đúng kiểu Ảo Hoá của GunPow, quyết định màu nhãn và "Ảo lực"
-// (chỉ số cộng thêm khi đang mặc bộ đó).
+// Bậc hiếm đúng kiểu Ảo Hoá của GunPow — CHỈ để phân màu nhãn cho đẹp,
+// skin không cộng chỉ số gì cả.
 export type SkinRank = 'thuong' | 'dungsi' | 'suthi' | 'master';
-export const SKIN_RANKS: Record<SkinRank, { name: string; color: string; power: number }> = {
-  thuong: { name: 'Thường', color: '#8ce99a', power: 20 },
-  dungsi: { name: 'Dũng Sĩ', color: '#74c0fc', power: 45 },
-  suthi: { name: 'Sử Thi', color: '#cc5de8', power: 80 },
-  master: { name: 'Master', color: '#ffa94d', power: 150 }
+export const SKIN_RANKS: Record<SkinRank, { name: string; color: string }> = {
+  thuong: { name: 'Thường', color: '#8ce99a' },
+  dungsi: { name: 'Dũng Sĩ', color: '#74c0fc' },
+  suthi: { name: 'Sử Thi', color: '#cc5de8' },
+  master: { name: 'Master', color: '#ffa94d' }
 };
 
 export interface SkinDef {
@@ -29,8 +29,7 @@ export function skinRank(sk: SkinDef): SkinRank {
   if (sk.priceXu >= 5000) return 'dungsi';
   return 'thuong';
 }
-/** Ảo lực bộ skin cộng thêm khi đang mặc. */
-export function skinPower(sk: SkinDef): number { return SKIN_RANKS[skinRank(sk)].power; }
+
 
 export const SKINS: Record<string, SkinDef> = {
   hon_nhien: { id: 'hon_nhien', name: 'Hồn Nhiên', gender: 2, parts: { hair: 76, shirt: 77, pant: 78 }, priceXu: 1200 },
