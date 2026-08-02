@@ -165,18 +165,28 @@ export class PreloadScene extends Phaser.Scene {
     // (public/assets/ui/title_bg.jpg đã inpaint lại) -> giờ vẽ đè badge 12+
     // THẬT (hd/12Plus.png gốc Lttt) + dòng cảnh báo lên khung kính tối cho
     // rõ chữ (chữ tối trên nền sáng trước đó mờ, khó đọc).
+    // Khung nền phải đo đúng theo chữ thật -> trước đây để cỡ cố định rộng
+    // hơn nội dung, dư ra một mảng đen trống trông như lỗi đồ hoạ.
     const padX = 8 * RES, padBottom = 6 * RES;
-    const barH = 46 * RES, barW = 300 * RES;
-    const barCX = padX + barW / 2, barCY = H - padBottom - barH / 2;
+    const barH = 46 * RES;
+    const badgeX = padX + 18 * RES, badgeY = H - padBottom - barH / 2;
+    const warnStyle = { fontFamily: 'sans-serif', fontSize: `${9.5 * RES}px`, color: '#ffffff', fontStyle: 'bold' };
+    const warnMsg = 'Chơi quá 180 phút một ngày\nsẽ ảnh hưởng xấu đến sức khỏe';
+    // đo trước bằng text tạm (không add vào scene) để vẽ khung nền KHÍT chữ
+    // thật -> trước đây để khung rộng cố định hơn nội dung, dư ra một mảng
+    // đen trống nhìn như lỗi đồ hoạ.
+    const probe = this.make.text({ text: warnMsg, style: warnStyle }, false);
+    const textW = probe.width;
+    probe.destroy();
+    const barW = (badgeX + 24 * RES + textW + 10 * RES) - padX;
+    const barCX = padX + barW / 2, barCY = badgeY;
     this.add.graphics().fillStyle(0x000000, 0.55)
       .fillRoundedRect(barCX - barW / 2, barCY - barH / 2, barW, barH, 8 * RES);
-    const badgeX = padX + 18 * RES, badgeY = barCY;
     if (this.textures.exists('age12')) {
       this.add.image(badgeX, badgeY, 'age12').setScale(2 * RES).setOrigin(0.5);
     }
-    this.add.text(badgeX + 24 * RES, badgeY, 'Chơi quá 180 phút một ngày\nsẽ ảnh hưởng xấu đến sức khỏe', {
-      fontFamily: 'sans-serif', fontSize: `${9.5 * RES}px`, color: '#ffffff', fontStyle: 'bold'
-    }).setOrigin(0, 0.5).setShadow(0, 1, '#000000cc', 2, true, true);
+    this.add.text(badgeX + 24 * RES, badgeY, warnMsg, warnStyle)
+      .setOrigin(0, 0.5).setShadow(0, 1, '#000000cc', 2, true, true);
 
     // dòng bản quyền viết lại bằng text thật (thay cho dòng AI vẽ sẵn đã xoá)
     this.add.text(W / 2, H - padBottom - 8 * RES, '© 2026 Dreamtech Studio. All right reserved.', {
