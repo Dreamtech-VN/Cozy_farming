@@ -155,10 +155,10 @@ export class PreloadScene extends Phaser.Scene {
     // logo chữ "Sunny Town" thật (ảnh wordmark thật, nền đã tách trong suốt)
     // — góc trái trên, cao cố định rồi co ngang theo đúng tỉ lệ ảnh gốc.
     if (this.textures.exists('sunny_logo')) {
-      const logoH = 50 * RES;
+      const logoH = 74 * RES;   // to hơn cho rõ chữ (trước 50*RES nhỏ + xa cỡ ảnh gốc nên mờ)
       const src = this.textures.get('sunny_logo').getSourceImage();
       const logoW = logoH * (src.width / src.height);
-      this.add.image(14 * RES, 10 * RES, 'sunny_logo').setOrigin(0, 0).setDisplaySize(logoW, logoH);
+      this.add.image(12 * RES, 8 * RES, 'sunny_logo').setOrigin(0, 0).setDisplaySize(logoW, logoH);
     }
 
     // Key art gốc đã được xoá sạch badge 12+ + dòng bản quyền AI vẽ sẵn
