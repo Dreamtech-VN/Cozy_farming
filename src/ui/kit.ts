@@ -368,6 +368,8 @@ export function applyBubbleSkin(el: HTMLElement, id: string, k = 0.55) {
   el.style.background = 'none';
   el.style.boxShadow = 'none';
   el.style.padding = '2px 8px';
+  // ruột khung sáng thì chữ trắng đọc không ra -> đổi mực theo nền khung
+  el.classList.toggle('ink-dark', b.ink === 'dark');
   if (b.anim) {
     ensureBubbleAnim(id);
     el.style.animation = `bub-${id} 1s infinite`;

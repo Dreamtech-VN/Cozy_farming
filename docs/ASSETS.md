@@ -324,7 +324,9 @@ python3 scripts/gp_chat_bubbles.py <giải nén apk>/assets/gameresources/resour
 ```
 
 Khung dùng kiểu 9 ô (`border-image`) nên co giãn theo độ dài tin nhắn: 4 góc giữ
-nguyên hình trang trí, cạnh và ruột kéo giãn. Bảng tên + giá + độ dày viền ở
+nguyên hình trang trí, cạnh và ruột kéo giãn. Ruột khung sáng tối khác nhau nên
+mỗi khung có sẵn `ink` (đo độ sáng vùng ruột ảnh): ruột sáng thì chữ nâu đen
+viền sáng, ruột tối thì chữ trắng viền tối — chữ không bị chìm vào khung. Bảng tên + giá + độ dày viền ở
 `src/data/bubbles.ts` (khung thường bán bằng xu, khung cầu kỳ từ `talk_53` trở đi
 bán bằng kim cương); mua/đổi trong Chat > nút bánh răng > tab "Bong bóng chat".
 
