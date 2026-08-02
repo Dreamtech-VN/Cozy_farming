@@ -63,6 +63,7 @@ export function showLoginFlow(onStart: () => void) {
 
   const renderAuth = () => {
     wrap.innerHTML = '';
+    wrap.classList.remove('anchor-bottom');   // form đăng nhập canh giữa; chọn server thì canh dưới (renderServer tự thêm lại)
     const acc = getAccount();
     acc ? renderServer(wrap, acc, renderAuth, done) : renderLogin(wrap, renderAuth);
   };
@@ -71,32 +72,27 @@ export function showLoginFlow(onStart: () => void) {
 }
 
 // Cụm nút icon dọc góc phải trên: Thông báo + Xoá bộ nhớ đệm (+ Tài khoản
-// tuỳ màn). Dùng chung cho cổng vào game và màn chọn máy chủ.
+// tuỳ màn). Dùng chung cho cổng vào game và màn chọn máy chủ. Mỗi nút có
+// chữ chú thích kế icon để không đoán mò biểu tượng.
 function iconStack(wrap: HTMLElement, extra?: { icon: string; title: string; onClick: () => void }) {
   const stack = h('div', 'gate-icons');
 
-  const bellBtn = h('button', 'gate-icon-btn');
-  bellBtn.title = 'Thông báo';
-  bellBtn.innerHTML = BELL_ICON;
-  bellBtn.onclick = () => openNoticePopup();
+  const mk = (icon: string, label: string, onClick: () => void) => {
+    const b = h('button', 'gate-icon-btn');
+    b.innerHTML = `${icon}<span>${label}</span>`;
+    b.onclick = onClick;
+    return b;
+  };
 
-  const trashBtn = h('button', 'gate-icon-btn');
-  trashBtn.title = 'Xoá bộ nhớ đệm';
-  trashBtn.innerHTML = TRASH_ICON;
-  trashBtn.onclick = () => {
+  const bellBtn = mk(BELL_ICON, 'Thông báo', () => openNoticePopup());
+  const trashBtn = mk(TRASH_ICON, 'Xoá bộ nhớ đệm', () => {
     try { localStorage.removeItem(RES_VERSION_KEY); } catch { /* ignore */ }
     toast('Đã xoá bộ nhớ đệm, đang tải lại...', '');
     setTimeout(() => location.reload(), 500);
-  };
+  });
 
   stack.append(bellBtn, trashBtn);
-  if (extra) {
-    const b = h('button', 'gate-icon-btn');
-    b.title = extra.title;
-    b.innerHTML = extra.icon;
-    b.onclick = extra.onClick;
-    stack.append(b);
-  }
+  if (extra) stack.append(mk(extra.icon, extra.title, extra.onClick));
   wrap.append(stack);
 }
 
@@ -126,6 +122,7 @@ function noticeItem(title: string, text: string): HTMLElement {
 
 // Cổng vào game: nền key art, nút Vào game to giữa dưới + ô tích điều khoản
 function renderGate(wrap: HTMLElement, onEnter: () => void) {
+  wrap.classList.add('anchor-bottom');
   iconStack(wrap);
 
   const box = h('div', 'gate-box');
@@ -257,6 +254,7 @@ function renderLogin(wrap: HTMLElement, rerender: () => void) {
 }
 
 function renderServer(wrap: HTMLElement, acc: Account, rerender: () => void, done: () => void) {
+  wrap.classList.add('anchor-bottom');
   iconStack(wrap, {
     icon: USER_ICON, title: 'Đổi tài khoản',
     onClick: () => { setAccount(null); rerender(); }
