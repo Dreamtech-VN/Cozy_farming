@@ -10,8 +10,11 @@ export class BootScene extends Phaser.Scene {
   constructor() { super('Boot'); }
 
   preload() {
-    // key art Dreamtech Studio: đã có sẵn badge 12+, cảnh báo sức khỏe, bản quyền
+    // key art Dreamtech Studio: badge 12+ + dòng bản quyền AI vẽ sẵn trong ảnh
+    // gốc đã được xoá (inpaint lại nền sạch) -> vẽ đè logo chữ + badge 12+
+    // THẬT (asset gốc Lttt) + bản quyền thật lên trên ở buildTitleScreen()
     this.load.image('title_bg', 'assets/ui/title_bg.jpg');
+    this.load.image('age12', 'assets/ui/age12.png');          // hd/12Plus.png gốc Lttt
     this.load.on('complete', () => { this.ready = true; this.tryNext(); });
   }
 

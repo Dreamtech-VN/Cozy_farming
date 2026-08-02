@@ -152,12 +152,39 @@ export class PreloadScene extends Phaser.Scene {
     this.tweens.add({ targets: bg, scale: cover * 1.03, duration: 11000, yoyo: true, repeat: -1, ease: 'sine.inout' });
     this.add.rectangle(0, 0, W, H, 0x0a1220, 0.12).setOrigin(0);
 
-    // logo game là ảnh thật (assets/ui/logo.png), vẽ ở lớp DOM cùng khung
-    // đăng nhập trong showLoginFlow() -> ở đây không vẽ chữ nữa
+    // logo chữ "Sunny Town" — dựng bằng text (không dùng ảnh icon app vì đó
+    // là ảnh nền có sẵn khung cảnh, cắt ra không sạch), góc trái trên.
+    const logoX = 16 * RES, logoY = 14 * RES;
+    this.add.text(logoX, logoY, 'Sunny', {
+      fontFamily: 'Verdana, Arial, sans-serif', fontSize: `${22 * RES}px`, fontStyle: 'bold', color: '#ffc94d'
+    }).setOrigin(0, 0).setStroke('#ffffff', 3 * RES).setShadow(0, 2, '#00000066', 3, true, true);
+    this.add.text(logoX, logoY + 20 * RES, 'Town', {
+      fontFamily: 'Verdana, Arial, sans-serif', fontSize: `${22 * RES}px`, fontStyle: 'bold', color: '#69db7c'
+    }).setOrigin(0, 0).setStroke('#ffffff', 3 * RES).setShadow(0, 2, '#00000066', 3, true, true);
 
-    // key art mới (Dreamtech Studio) đã có sẵn badge 12+, cảnh báo sức khỏe và
-    // dòng bản quyền ngay trong ảnh -> không vẽ đè lên nữa, chỉ còn số bản build.
-    this.add.text(10 * RES, H - 16 * RES, `v${GAME_VERSION}`, { fontFamily: 'monospace', fontSize: `${10 * RES}px`, color: '#ffffffaa' });
+    // Key art gốc đã được xoá sạch badge 12+ + dòng bản quyền AI vẽ sẵn
+    // (public/assets/ui/title_bg.jpg đã inpaint lại) -> giờ vẽ đè badge 12+
+    // THẬT (hd/12Plus.png gốc Lttt) + dòng cảnh báo lên nền sạch, không cần
+    // khung che tối nữa.
+    const padX = 10 * RES, padBottom = 8 * RES;
+    const badgeY = H - padBottom - 20 * RES;
+    const badgeX = padX + 14 * RES;
+    if (this.textures.exists('age12')) {
+      this.add.image(badgeX, badgeY, 'age12').setScale(1.6 * RES).setOrigin(0.5);
+    }
+    this.add.text(badgeX + 20 * RES, badgeY, 'Chơi quá 180 phút một ngày\nsẽ ảnh hưởng xấu đến sức khỏe', {
+      fontFamily: 'sans-serif', fontSize: `${9 * RES}px`, color: '#3a3a3a'
+    }).setOrigin(0, 0.5).setShadow(0, 1, '#ffffffaa', 2, true, true);
+
+    // dòng bản quyền viết lại bằng text thật (thay cho dòng AI vẽ sẵn đã xoá)
+    this.add.text(W / 2, H - padBottom - 8 * RES, '© 2026 Dreamtech Studio. All right reserved.', {
+      fontFamily: 'sans-serif', fontSize: `${11 * RES}px`, color: '#3a3a3a'
+    }).setOrigin(0.5).setShadow(0, 1, '#ffffffaa', 2, true, true);
+
+    // số bản build góc phải dưới
+    this.add.text(W - 8 * RES, H - 16 * RES, `v${GAME_VERSION}`, {
+      fontFamily: 'monospace', fontSize: `${10 * RES}px`, color: '#ffffffaa'
+    }).setOrigin(1, 0.5);
 
     // thanh tải: người mới / sau update thấy thanh to có %, còn lại chỉ 1 dòng nhỏ
     if (!resFresh()) {
