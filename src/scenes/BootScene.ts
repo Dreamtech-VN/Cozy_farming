@@ -15,7 +15,15 @@ export class BootScene extends Phaser.Scene {
     // THẬT (asset gốc Lttt) + bản quyền thật lên trên ở buildTitleScreen()
     this.load.image('title_bg', 'assets/ui/title_bg.jpg');
     this.load.image('age12', 'assets/ui/age12.png');          // hd/12Plus.png gốc Lttt
-    this.load.on('complete', () => { this.ready = true; this.tryNext(); });
+    this.load.image('sunny_logo', 'assets/ui/logo/sunny_town_wordmark.png');
+    this.load.on('complete', () => {
+      // game bật pixelArt (lọc NEAREST toàn cục) cho sprite pixel-art, nhưng
+      // 2 ảnh này là ảnh vector/HD nên phóng to theo NEAREST bị vỡ hạt/lởm
+      // chởm -> ép riêng 2 texture này sang lọc mượt (LINEAR).
+      this.textures.get('age12').setFilter(Phaser.Textures.FilterMode.LINEAR);
+      this.textures.get('sunny_logo').setFilter(Phaser.Textures.FilterMode.LINEAR);
+      this.ready = true; this.tryNext();
+    });
   }
 
   create() {
