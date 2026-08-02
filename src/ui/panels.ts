@@ -3,7 +3,7 @@ import { h, openWindow, btn, fmt, iconOf, spr, emojiEl, richText, applyBubbleSki
 import { AVATAR_PICS, avatarPicUrl, isUploadedPic } from '@/data/avatars';
 import { FOODS, FOOD_LIST, type FoodDef } from '@/data/foods';
 import { orderList, canDeliver, deliver, dropOrder, haveOf, orderName } from '@/systems/orders';
-import { pond, POND_CAP, FRIES, FRY_LIST, isGrown, remainMin, stockFry, netFish } from '@/systems/fishfarm';
+import { pond, POND_CAP, FRIES, FRY_LIST, isGrown, remainMin, stockFry, netFish, isHungryFish, feedFish } from '@/systems/fishfarm';
 import { countOf, takeFrom, listOf, type StoreKind } from '@/systems/farmstore';
 import { cookingFood, cookRemain, canCook, startCook, collectCook, cancelCook } from '@/systems/cooking';
 import { S, save, spend, spendRubies, addCoins, addFarmCoins, withdrawFarm, addExp, addRubies, addItem, removeItem, itemCount, addStat, resetSave, equipTool, toolLevel, unequipTool } from '@/core/save';
@@ -368,10 +368,13 @@ export function registerAllPanels() {
         for (const f of list) {
           const def = FRIES[f.type];
           const done = isGrown(f);
+          const hungry = isHungryFish(f);
           const cell = h('div', `cell cell-lg ${done ? 'owned' : ''}`);
           cell.append(uiIcon('fish', 44), h('div', 'nm', def?.name ?? f.type));
-          cell.append(h('div', 'pr', done ? 'Đã lớn!' : `Còn ${remainMin(f)} phút`));
+          const statusTxt = done ? 'Đã lớn!' : hungry ? 'Đói — cần cho ăn để lớn' : `Còn ${remainMin(f)} phút`;
+          cell.append(h('div', 'pr', statusTxt));
           if (done) cell.append(btn('Vớt cá', 'gold', () => { netFish(f.id); render(); }));
+          else if (hungry) cell.append(btn('Cho ăn', 'green', () => { feedFish(f); render(); }));
           grid.append(cell);
         }
         content.append(grid);

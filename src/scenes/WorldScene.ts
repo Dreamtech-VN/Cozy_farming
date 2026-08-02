@@ -1081,8 +1081,13 @@ export class WorldScene extends Phaser.Scene {
       ay = (FREE_YARD.y + Math.random() * FREE_YARD.h) * T;
     }
     // cỡ vẽ quy theo tỉ lệ Avatar/Lttt: bò to nhất, gà bé nhất, so với nhân vật cao ~84px
+    // con còn nhỏ vẽ bé lại theo period (0/1/2) — không có art riêng cho con non nên
+    // dùng cách này để phân biệt bằng mắt (Lttt gốc thật ra đổi hẳn sprite theo period,
+    // ta không có art nên chỉ scale nhỏ dần)
+    const a0 = S.livestock.animals.find(v => v.id === id);
+    const growScale = a0 ? [0.6, 0.8, 1][livestock.growthPeriod(a0)] : 1;
     const spr = this.add.sprite(ax, ay, `animal_${type}`, 0).setDepth(ay)
-      .setScale(this.zone.bg ? def.hdScale : def.hdScale * 0.5);
+      .setScale((this.zone.bg ? def.hdScale : def.hdScale * 0.5) * growScale);
     spr.setInteractive({ useHandCursor: true });
     spr.on('pointerdown', (_p: Phaser.Input.Pointer, _lx: number, _ly: number, event: Phaser.Types.Input.EventData) => {
       event.stopPropagation();
@@ -1133,6 +1138,7 @@ export class WorldScene extends Phaser.Scene {
     if (!a) return;
     const def = ANIMALS[a.type];
     const acts: WorldAction[] = [];
+    if (livestock.isSick(a)) acts.push({ icon: '', ui: 'coin', label: 'Chữa bệnh', cb: () => { livestock.cureAnimal(a); } });
     if (livestock.isHungry(a)) acts.push({ icon: '', ui: 'feed', label: 'Cho ăn', cb: () => { livestock.feed(a); } });
     if (livestock.hasProduct(a)) acts.push({
       icon: '', ui: 'basket', label: `Thu ${'' + def.name}`, cb: () => {
@@ -1147,11 +1153,19 @@ export class WorldScene extends Phaser.Scene {
       }
     });
     acts.push({ icon: '', ui: 'coin', label: 'Bán (50%)', cb: () => { livestock.sellAnimal(id); this.animalSprites.get(id)?.destroy(); this.animalSprites.delete(id); } });
+    const period = livestock.growthPeriod(a);
+    const health = livestock.getHealth(a);
+    let text = livestock.isSick(a) ? 'Bé đang bệnh, cần chữa trị!'
+      : livestock.isHungry(a) ? 'Bé đang đói meo...'
+      : period < 2 ? 'Bé còn nhỏ, chưa cho sản phẩm được đâu.'
+      : livestock.hasProduct(a) ? 'Có sản phẩm rồi nè!'
+      : 'Bé đang no và vui vẻ ~';
+    if (health < 20) text += ' (sức khoẻ yếu, cho ăn đều nhé)';
     bus.emit(EV.OPEN_PANEL, {
       panel: 'dialog',
       data: {
         title: `${def.icon} ${a.name}`,
-        text: livestock.isHungry(a) ? 'Bé đang đói meo...' : livestock.hasProduct(a) ? 'Có sản phẩm rồi nè!' : 'Bé đang no và vui vẻ ~',
+        text,
         actions: acts
       }
     });

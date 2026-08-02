@@ -49,9 +49,69 @@ export function isHungry(a: Animal): boolean {
   return Date.now() - a.fedAt > 4 * 3600_000;
 }
 
+// ===== Giai đoạn lớn (period 0/1/2, theo Lttt gốc — FarmScr.cs:3639-3646) =====
+// period = tuổi(phút) / (maturityMin/2), tối đa 2 (2 = đã lớn, mới cho sản phẩm được).
+// Tính thuần theo boughtAt (không lưu state riêng) nên save cũ tự nhiên ra period=2
+// vì boughtAt đã xa — không cần migrate field này.
+export function growthPeriod(a: Animal): number {
+  const def = ANIMALS[a.type];
+  if (!def) return 2;
+  const ageMin = (Date.now() - a.boughtAt) / 60_000;
+  const step = def.maturityMin / 2;
+  if (step <= 0) return 2;
+  return Math.min(2, Math.floor(ageMin / step));
+}
+export function isMature(a: Animal): boolean {
+  return growthPeriod(a) >= 2;
+}
+
+// ===== Sức khoẻ / bệnh (Lttt gốc: server tính, ta mô phỏng lại vì không trích
+// được công thức suy giảm/xác suất thật — FarmMsgHandler.cs chỉ đọc byte health
+// và 2 cờ disease từ mạng, không thấy logic tính ở phía client) =====
+const HEALTH_DECAY_PER_HOUR = 2;   // ước lượng — giảm nhẹ khi đói
+const HEALTH_REGEN_PER_HOUR = 3;   // hồi khi no
+const SICK_CHANCE_PER_HOUR = 0.02; // ước lượng — chỉ roll khi đói hoặc sức khoẻ thấp
+
+function tickAnimal(a: Animal): void {
+  if (a.health === undefined) a.health = 100;
+  if (a.sick === undefined) a.sick = false;
+  const last = a.healthAt ?? a.boughtAt;
+  const hrs = (Date.now() - last) / 3600_000;
+  if (hrs < 0.05) return; // đỡ tính lại liên tục mỗi lần mở dialog
+  if (isHungry(a) || a.health < 50) {
+    a.health = Math.max(0, a.health - HEALTH_DECAY_PER_HOUR * hrs);
+    if (!a.sick && Math.random() < SICK_CHANCE_PER_HOUR * hrs) a.sick = true;
+  } else if (a.health < 100) {
+    a.health = Math.min(100, a.health + HEALTH_REGEN_PER_HOUR * hrs);
+  }
+  a.healthAt = Date.now();
+}
+
+export function getHealth(a: Animal): number {
+  tickAnimal(a);
+  return Math.round(a.health ?? 100);
+}
+export function isSick(a: Animal): boolean {
+  tickAnimal(a);
+  return !!a.sick;
+}
+
+export function cureAnimal(a: Animal): boolean {
+  if (!isSick(a)) { toast('Bé này khoẻ mạnh, không cần chữa.'); return false; }
+  if (itemCount('animal_med') <= 0) { toast('Hết thuốc thú y — mua ở Bách hóa.', 'feed'); return false; }
+  removeItem('animal_med');
+  a.sick = false;
+  a.health = Math.min(100, (a.health ?? 100) + 20);
+  a.healthAt = Date.now();
+  save(); bus.emit(EV.STATE_CHANGED);
+  toast(`${ANIMALS[a.type].name} đã khỏi bệnh!`, ANIMALS[a.type].icon);
+  return true;
+}
+
 export function hasProduct(a: Animal): boolean {
   const def = ANIMALS[a.type];
   if (isHungry(a)) return false;
+  if (growthPeriod(a) < 2) return false; // còn nhỏ, chưa cho sản phẩm (Lttt: period phải =2)
   return Date.now() - Math.max(a.fedAt, a.collectedAt) > def.produceMin * 60_000
     && a.collectedAt < a.fedAt + 24 * 3600_000;
 }
