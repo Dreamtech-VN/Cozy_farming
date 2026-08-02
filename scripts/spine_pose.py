@@ -8,6 +8,8 @@ là ra hình nhân vật đứng — không cần chạy runtime Spine.
 """
 import json, math, os, sys
 from PIL import Image
+import numpy as np
+from scipy import ndimage
 
 
 
@@ -368,6 +370,46 @@ def draw_mesh(canvas, im, reg, pts, PAD):
         canvas.paste(piece, (x0, y0), mask)
 
 
+def drop_floaters(canvas, keep_ratio=0.15, gap_px=2.5):
+    """Xoá mảnh nhỏ rời khỏi khối chính (đo bằng liên thông trên kênh alpha).
+
+    Vài bộ xương (đuôi/tai nhiều khớp) có phần trang trí chỉ nằm đúng chỗ nhờ
+    animation khác (vd 'attack') còn ở 'wait' vẫn giữ vị trí bind-pose gốc —
+    trôi lơ lửng cách hẳn thân chính vài pixel. Mảnh nào nhỏ (< keep_ratio lần
+    khối lớn nhất) VÀ cách khối lớn nhất hơn gap_px thì coi là lỗi, xoá đi.
+    Mảnh lớn (cánh, đuôi dài...) hoặc mảnh chạm/gần sát thân đều được giữ.
+    """
+    bbox = canvas.getbbox()
+    if not bbox:
+        return canvas
+    crop = canvas.crop(bbox)
+    arr = np.array(crop)
+    mask = arr[:, :, 3] > 20
+    labeled, n = ndimage.label(mask, structure=np.ones((3, 3), dtype=int))
+    if n <= 1:
+        return canvas
+    sizes = ndimage.sum(mask, labeled, index=range(1, n + 1))
+    main_label = int(np.argmax(sizes)) + 1
+    main_mask = labeled == main_label
+    main_size = sizes[main_label - 1]
+    dist_to_main = ndimage.distance_transform_edt(~main_mask)
+    changed = False
+    for lbl in range(1, n + 1):
+        if lbl == main_label:
+            continue
+        comp_mask = labeled == lbl
+        ratio = sizes[lbl - 1] / main_size
+        gap = float(dist_to_main[comp_mask].min())
+        if ratio < keep_ratio and gap > gap_px:
+            arr[comp_mask, 3] = 0
+            changed = True
+    if not changed:
+        return canvas
+    out = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
+    out.paste(Image.fromarray(arr, 'RGBA'), (bbox[0], bbox[1]))
+    return out
+
+
 def compose(folder, name, max_h=None, anim='holdon', at=None, pad_box=None):
     data = json.load(open(os.path.join(folder, name + '.json'), encoding='utf-8'))
     atlas = load_atlas(folder, name)
@@ -423,6 +465,7 @@ def compose(folder, name, max_h=None, anim='holdon', at=None, pad_box=None):
             im = im.rotate(rot, resample=Image.BICUBIC, expand=True)
         canvas.alpha_composite(im, (int(round(PAD + wx - im.width / 2)),
                                     int(round(PAD - wy - im.height / 2))))
+    canvas = drop_floaters(canvas)
     bb = pad_box or canvas.getbbox()
     if bb:
         canvas = canvas.crop(bb)
