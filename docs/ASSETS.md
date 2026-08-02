@@ -313,16 +313,20 @@ spritesheet Phaser nạp theo nhu cầu (`WorldScene.onEmote`). Bộ emoticon pi
 
 ## Khung bong bóng chat (`assets/chat/bubble/`)
 
-31 khung bong bóng cắt từ atlas `resources/pack/chat/pack_chat_0.{pkm,plist}`
-trong apk GunPow (các sprite `talk_XX.png`) bằng `scripts/gp_chat_bubbles.py`:
+32 khung bong bóng cắt từ atlas `resources/pack/chat/pack_chat_0.{pkm,plist}`
+trong apk GunPow (các sprite `talk_XX.png`) bằng `scripts/gp_chat_bubbles.py`.
+Phần lớn khung là ẢNH ĐỘNG 2 khung hình — atlas để hai khung cách nhau 12 số
+(vd `talk_01` + `talk_13` là cùng mẫu mèo, khác mỗi cái đuôi) nên script lưu
+thành `<id>.png` + `<id>_b.png`, web đổi qua lại bằng `@keyframes`:
 
 ```
 python3 scripts/gp_chat_bubbles.py <giải nén apk>/assets/gameresources/resources/pack/chat
 ```
 
 Khung dùng kiểu 9 ô (`border-image`) nên co giãn theo độ dài tin nhắn: 4 góc giữ
-nguyên hình trang trí, cạnh và ruột kéo giãn. Bảng tên + giá xu + độ dày viền ở
-`src/data/bubbles.ts`; mua/đổi trong Chat > nút bánh răng > tab "Bong bóng chat".
+nguyên hình trang trí, cạnh và ruột kéo giãn. Bảng tên + giá + độ dày viền ở
+`src/data/bubbles.ts` (khung thường bán bằng xu, khung cầu kỳ từ `talk_53` trở đi
+bán bằng kim cương); mua/đổi trong Chat > nút bánh răng > tab "Bong bóng chat".
 
 ## Ghi chú trạm xe buýt
 

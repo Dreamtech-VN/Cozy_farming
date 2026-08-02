@@ -1,5 +1,5 @@
 import { registerPanel, openPanel, getGame, refreshHotbar, chatFabPos, setChatFabPos } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, emojiEl, richText, chibiPreview, chibiHead, charFace, charFaceFluid, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, emojiEl, richText, applyBubbleSkin, chibiPreview, chibiHead, charFace, charFaceFluid, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
 import { AVATAR_PICS, avatarPicUrl, isUploadedPic } from '@/data/avatars';
 import { FOODS, FOOD_LIST, type FoodDef } from '@/data/foods';
 import { orderList, canDeliver, deliver, dropOrder, haveOf, orderName } from '@/systems/orders';
@@ -21,7 +21,7 @@ import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
 import { TOOL_LIST, TOOLS, toolUpgradeAt, toolIconSize } from '@/data/tools';
 import { EMOJIS } from '@/data/emoji';
-import { BUBBLES, bubbleStyle } from '@/data/bubbles';
+import { BUBBLES } from '@/data/bubbles';
 import { PET_LIST, PETS, ownsPet, petBonus, petArt } from '@/data/pets';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
@@ -2420,10 +2420,7 @@ export function registerAllPanels() {
         if (!same && !mine) col.append(h('div', 'cw-name', m.from));
         const bubble = h('div', `cw-bubble ch-${m.channel}`);
         // khung bong bóng đã mua chỉ đắp lên tin của mình
-        if (mine && S.chat?.bubble && S.chat.bubble !== 'b_default') {
-          bubble.classList.add('skin');
-          bubble.style.cssText = bubbleStyle(S.chat.bubble);
-        }
+        if (mine && S.chat?.bubble) applyBubbleSkin(bubble, S.chat.bubble);
         if (m.voice) bubble.append(voiceBtn(m));
         else {
           const sp = h('span');
@@ -2760,13 +2757,13 @@ export function registerAllPanels() {
     const owned = (id: string) => id === 'b_default' || (S.chat?.bubbles ?? []).includes(id);
 
     const renderBubbles = () => {
-      wrap.append(h('div', 'hint', 'Khung chỉ hiện ở tin nhắn của bạn. Mua một lần dùng mãi.'));
+      wrap.append(h('div', 'hint', 'Khung chỉ hiện ở tin nhắn của bạn, phần lớn là khung động. Mua một lần dùng mãi.'));
       const grid = h('div', 'bub-grid');
       for (const b of BUBBLES) {
         const cell = h('div', `bub-cell ${S.chat.bubble === b.id ? 'on' : ''}`);
         const prev = h('div', 'bub-prev', 'Xin chào!');
         // khung xem trước nhỏ hơn trong chat một chút cho vừa ô
-        if (b.id !== 'b_default') prev.style.cssText = bubbleStyle(b.id, 0.5);
+        applyBubbleSkin(prev, b.id, 0.5);
         cell.append(prev, h('div', 'bub-name', b.name));
         if (owned(b.id)) {
           cell.append(h('div', `bub-tag ${S.chat.bubble === b.id ? 'on' : ''}`,
@@ -2779,10 +2776,12 @@ export function registerAllPanels() {
           };
         } else {
           const pr = h('div', 'bub-price');
-          pr.innerHTML = priceHtml(b.price);
+          // khung cầu kỳ bán bằng kim cương, khung thường bán bằng xu
+          pr.innerHTML = b.cur === 'ruby' ? priceHtml(0, b.price) : priceHtml(b.price);
           cell.append(pr);
           cell.onclick = () => {
-            if (!spend(b.price)) { toast('Không đủ xu.', 'alert'); return; }
+            const ok = b.cur === 'ruby' ? spendRubies(b.price, 'chat_bubble') : spend(b.price);
+            if (!ok) { toast(b.cur === 'ruby' ? 'Không đủ kim cương.' : 'Không đủ xu.', 'alert'); return; }
             sfx.coin();
             S.chat.bubbles.push(b.id);
             S.chat.bubble = b.id;

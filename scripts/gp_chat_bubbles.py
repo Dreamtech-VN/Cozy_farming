@@ -1,9 +1,14 @@
 """Bóc khung bong bóng chat của GunPow ra PNG rời.
 
 Khung nằm trong atlas `resources/pack/chat/pack_chat_0.{pkm,plist}` của apk
-GunPow (release Pack3) dưới tên `talk_XX.png`. Script cắt đúng những khung
-được liệt kê ở PICK rồi lưu thành `public/assets/chat/bubble/<id>.png`
-(bảng giá + tên tiếng Việt xem `src/data/bubbles.ts`).
+GunPow (release Pack3) dưới tên `talk_XX.png`. Phần lớn khung là ẢNH ĐỘNG 2
+khung hình: atlas để hai khung cách nhau (vd `talk_01` và `talk_13` là cùng một
+mẫu, con mèo vẫy đuôi). Script cắt cả hai và lưu thành:
+
+    public/assets/chat/bubble/<id>.png     khung 1
+    public/assets/chat/bubble/<id>_b.png   khung 2 (chỉ khung động mới có)
+
+Bảng tên + giá xem `src/data/bubbles.ts`.
 
 Dùng:
     python3 scripts/gp_chat_bubbles.py <thư mục pack/chat> --out public/assets/chat/bubble
@@ -17,19 +22,45 @@ from PIL import Image
 
 from pkm_to_png import load_rgba
 
-# talk_XX trong atlas -> id dùng trong game (xem src/data/bubbles.ts)
-PICK = {
-    'talk_10': 'b_plain_beige', 'talk_11': 'b_plain_green', 'talk_12': 'b_plain_yellow',
-    'talk_01': 'b_cat', 'talk_02': 'b_snowman', 'talk_03': 'b_snowflake',
-    'talk_04': 'b_bunny', 'talk_05': 'b_frog', 'talk_06': 'b_owl',
-    'talk_07': 'b_violet', 'talk_08': 'b_leaf',
-    'talk_34': 'b_pinkcat', 'talk_35': 'b_sakura_violet', 'talk_36': 'b_chick',
-    'talk_37': 'b_dolphin', 'talk_38': 'b_bird', 'talk_39': 'b_sakura_red',
-    'talk_53': 'b_wood', 'talk_56': 'b_angel', 'talk_59': 'b_butterfly',
-    'talk_62': 'b_forest', 'talk_65': 'b_beach', 'talk_71': 'b_ruby',
-    'talk_74': 'b_royal', 'talk_78': 'b_blossom',
-    'talk_80': 'b_lotus', 'talk_82': 'b_sword', 'talk_84': 'b_aurora',
-    'talk_89': 'b_galaxy', 'talk_90': 'b_phoenix', 'talk_91': 'b_meteor',
+# id trong game -> (khung 1, khung 2 hoặc None nếu là ảnh tĩnh)
+PICK: dict[str, tuple[str, str | None]] = {
+    # ---- khung trơn (tĩnh) ----
+    'b_plain_beige': ('talk_10', None),
+    'b_plain_green': ('talk_11', None),
+    'b_plain_yellow': ('talk_12', None),
+    # ---- thú cưng & hoa lá (động) ----
+    'b_cat': ('talk_01', 'talk_13'),
+    'b_snowman': ('talk_02', 'talk_14'),
+    'b_snowflake': ('talk_03', 'talk_15'),
+    'b_bunny': ('talk_04', 'talk_16'),
+    'b_frog': ('talk_05', 'talk_17'),
+    'b_owl': ('talk_06', 'talk_18'),
+    'b_violet': ('talk_07', 'talk_19'),
+    'b_leaf': ('talk_08', 'talk_20'),
+    'b_pinkcat': ('talk_34', 'talk_40'),
+    'b_sakura_violet': ('talk_35', 'talk_41'),
+    'b_chick': ('talk_36', 'talk_42'),
+    'b_dolphin': ('talk_37', 'talk_43'),
+    'b_bird': ('talk_38', 'talk_44'),
+    'b_sakura_red': ('talk_39', 'talk_45'),
+    # ---- khung cầu kỳ (động) ----
+    'b_wood': ('talk_53', 'talk_54'),
+    'b_angel': ('talk_56', 'talk_57'),
+    'b_butterfly': ('talk_59', 'talk_60'),
+    'b_forest': ('talk_62', 'talk_63'),
+    'b_beach': ('talk_65', 'talk_66'),
+    'b_ruby': ('talk_71', 'talk_72'),
+    'b_royal': ('talk_74', 'talk_75'),
+    'b_blossom': ('talk_77', 'talk_78'),
+    # ---- hàng hiếm (khung to 170x70) ----
+    'b_lotus': ('talk_80', 'talk_81'),
+    'b_sword': ('talk_82', None),
+    'b_deer': ('talk_83', None),
+    'b_aurora': ('talk_84', None),
+    'b_mountain': ('talk_87', None),
+    'b_galaxy': ('talk_89', None),
+    'b_phoenix': ('talk_90', None),
+    'b_meteor': ('talk_91', None),
 }
 
 
@@ -46,16 +77,22 @@ def main():
     tex = load_rgba(os.path.join(a.src, 'pack_chat_0.pkm'))
     frames = plistlib.load(open(os.path.join(a.src, 'pack_chat_0.plist'), 'rb'))['frames']
     os.makedirs(a.out, exist_ok=True)
-    for key, name in PICK.items():
+
+    def cut(key: str) -> Image.Image:
         v = frames[f'{key}.png']
         x, y, w, h = _nums(v['textureRect'])
         rot = bool(v.get('textureRotated'))
         im = tex.crop((x, y, x + (h if rot else w), y + (w if rot else h)))
-        if rot:
-            im = im.rotate(-90, expand=True)
-        im.quantize(colors=255, method=Image.FASTOCTREE).save(
-            os.path.join(a.out, f'{name}.png'), optimize=True)
-        print(f'{key} -> {name}.png  {im.size}')
+        return im.rotate(-90, expand=True) if rot else im
+
+    for name, (f1, f2) in PICK.items():
+        for suffix, key in (('', f1), ('_b', f2)):
+            if not key:
+                continue
+            im = cut(key)
+            im.quantize(colors=255, method=Image.FASTOCTREE).save(
+                os.path.join(a.out, f'{name}{suffix}.png'), optimize=True)
+        print(f'{f1}{"+" + f2 if f2 else ""} -> {name}  {cut(f1).size}')
 
 
 if __name__ == '__main__':

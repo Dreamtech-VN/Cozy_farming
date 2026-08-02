@@ -226,8 +226,8 @@ export function addRubies(n: number, source: RubySource) {
   bus.emit(EV.WALLET); save();
 }
 
-/** Trừ lượng — chỉ dùng cho gacha / skin giới hạn. */
-export type RubySink = 'gacha' | 'limited_skin' | 'pet';
+/** Trừ lượng — chỉ dùng cho gacha / skin giới hạn / đồ trang trí. */
+export type RubySink = 'gacha' | 'limited_skin' | 'pet' | 'chat_bubble';
 export function spendRubies(n: number, _sink: RubySink): boolean {
   if (S.wallet.rubies < n) { toast(`Cần ${n} lượng — nạp thêm ở mục Nạp nhé.`, 'ruby'); return false; }
   S.wallet.rubies -= n;

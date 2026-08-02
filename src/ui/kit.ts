@@ -6,6 +6,7 @@ import { TITLES } from '@/data/quests';
 import { skinArt } from '@/data/skins';
 import { picSrc } from '@/data/avatars';
 import { EMOJI_BY_ID, EMOJI_RE, emojiUrl } from '@/data/emoji';
+import { BUBBLE_BY_ID, bubbleUrl } from '@/data/bubbles';
 import BBOX from '@/data/chibi-bbox.json';
 export function h<K extends keyof HTMLElementTagNameMap>(
   tag: K, cls = '', text = ''
@@ -332,6 +333,45 @@ export function priceHtml(xu?: number, ruby?: number): string {
   if (xu) parts.push(`<img class="cur" src="assets/ui/pack/icon_coin.png">${fmt(xu)}`);
   if (ruby) parts.push(`<img class="cur" src="assets/ui/pack/icon_ruby.png">${ruby}`);
   return parts.join(' ');
+}
+
+// ===== Khung bong bóng chat (xem src/data/bubbles.ts) =====
+// Khung động có 2 khung hình -> nhét sẵn một @keyframes đổi border-image-source
+// cho từng khung (chỉ tạo 1 lần cho mỗi loại).
+const bubbleAnimAdded = new Set<string>();
+
+function ensureBubbleAnim(id: string) {
+  if (bubbleAnimAdded.has(id)) return;
+  bubbleAnimAdded.add(id);
+  let sheet = document.getElementById('bubble-anim') as HTMLStyleElement | null;
+  if (!sheet) {
+    sheet = document.createElement('style');
+    sheet.id = 'bubble-anim';
+    document.head.append(sheet);
+  }
+  sheet.append(document.createTextNode(
+    `@keyframes bub-${id}{0%,49.9%{border-image-source:url(${bubbleUrl(id)})}`
+    + `50%,100%{border-image-source:url(${bubbleUrl(id, true)})}}`));
+}
+
+/** Đắp khung mua ở cửa hàng lên một bong bóng chat.
+ *  `k` thu nhỏ viền so với ảnh gốc (khung gốc to hơn bong bóng chat). */
+export function applyBubbleSkin(el: HTMLElement, id: string, k = 0.55) {
+  const b = BUBBLE_BY_ID[id];
+  if (!b || b.id === 'b_default') return;
+  const [t, r, bo, l] = b.slice;
+  const bw = (v: number) => `${Math.round(v * k)}px`;
+  el.classList.add('skin');
+  el.style.borderImage = `url(${bubbleUrl(id)}) ${t} ${r} ${bo} ${l} fill stretch`;
+  el.style.borderWidth = `${bw(t)} ${bw(r)} ${bw(bo)} ${bw(l)}`;
+  el.style.borderStyle = 'solid';
+  el.style.background = 'none';
+  el.style.boxShadow = 'none';
+  el.style.padding = '2px 8px';
+  if (b.anim) {
+    ensureBubbleAnim(id);
+    el.style.animation = `bub-${id} 1s infinite`;
+  }
 }
 
 // ===== Emoji chat (biểu cảm động, bóc từ GunPow — xem src/data/emoji.ts) =====
