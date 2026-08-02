@@ -5,6 +5,7 @@ import { lookLayers } from '@/data/chibi';
 import { TITLES } from '@/data/quests';
 import { skinArt } from '@/data/skins';
 import { picSrc } from '@/data/avatars';
+import { EMOJI_BY_ID, EMOJI_RE, emojiUrl } from '@/data/emoji';
 import BBOX from '@/data/chibi-bbox.json';
 export function h<K extends keyof HTMLElementTagNameMap>(
   tag: K, cls = '', text = ''
@@ -331,6 +332,44 @@ export function priceHtml(xu?: number, ruby?: number): string {
   if (xu) parts.push(`<img class="cur" src="assets/ui/pack/icon_coin.png">${fmt(xu)}`);
   if (ruby) parts.push(`<img class="cur" src="assets/ui/pack/icon_ruby.png">${ruby}`);
   return parts.join(' ');
+}
+
+// ===== Emoji chat (biểu cảm động, bóc từ GunPow — xem src/data/emoji.ts) =====
+// Mỗi emoji là một dải ngang: đặt background-size = số khung x 100% rồi cho
+// background-position chạy bằng steps() là ra hoạt hình, không cần canvas.
+export function emojiEl(id: string, size = 28): HTMLElement {
+  const d = EMOJI_BY_ID[id];
+  const e = h('span', 'emo');
+  if (!d) return e;
+  const k = size / Math.max(d.w, d.h);
+  const w = Math.round(d.w * k);
+  e.style.width = `${w}px`;
+  e.style.height = `${Math.round(d.h * k)}px`;
+  e.style.backgroundImage = `url(${emojiUrl(id)})`;
+  e.style.backgroundSize = `${w * d.frames}px 100%`;
+  e.style.setProperty('--emo-end', `-${w * d.frames}px`);
+  e.style.animationDuration = `${d.dur}s`;
+  e.style.animationTimingFunction = `steps(${d.frames})`;
+  return e;
+}
+
+/** Chuỗi có mã emoji `[e01]` -> các nút text + emoji để nhét vào bong bóng chat. */
+export function richText(text: string, size = 26): DocumentFragment {
+  const frag = document.createDocumentFragment();
+  let last = 0;
+  EMOJI_RE.lastIndex = 0;
+  for (let m = EMOJI_RE.exec(text); m; m = EMOJI_RE.exec(text)) {
+    if (m.index > last) frag.append(document.createTextNode(text.slice(last, m.index)));
+    frag.append(EMOJI_BY_ID[m[1]] ? emojiEl(m[1], size) : document.createTextNode(m[0]));
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) frag.append(document.createTextNode(text.slice(last)));
+  return frag;
+}
+
+/** Bỏ mã emoji khỏi chuỗi (chỗ nào chỉ hiện được chữ thuần). */
+export function stripEmoji(text: string): string {
+  return text.replace(EMOJI_RE, '').replace(/\s+/g, ' ').trim();
 }
 
 // Icon vật phẩm: ưu tiên sprite thật, thiếu mới dùng emoji

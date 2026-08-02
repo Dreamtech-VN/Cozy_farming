@@ -437,6 +437,36 @@ img { image-rendering: auto; }
   50% { box-shadow: 0 0 0 7px rgba(224, 49, 49, 0); }
 }
 
+/* ===== Emoji chat (dải khung chạy bằng steps) ===== */
+.emo {
+  display: inline-block; vertical-align: -.32em; flex: none;
+  background-repeat: no-repeat; background-position: 0 0;
+  animation-name: emo-run; animation-iteration-count: infinite;
+}
+/* --emo-end = -(số khung x bề ngang 1 khung): chạy tới đó bằng steps() là
+   mỗi bước nhảy đúng một khung (dùng % sẽ lệch vì % tính theo phần dư ảnh). */
+@keyframes emo-run { from { background-position-x: 0; } to { background-position-x: var(--emo-end); } }
+
+/* nút mở bảng emoji + bảng chọn emoji trong khung chat */
+.cw-emo {
+  width: 36px; height: 36px; flex: none; border-radius: 50%; cursor: pointer;
+  border: 1px solid rgba(246, 237, 216, .26); background: rgba(0, 0, 0, .34);
+  display: flex; align-items: center; justify-content: center; padding: 0;
+}
+.cw-emo:active { transform: scale(.9); }
+.cw-emo.on { background: rgba(255, 224, 102, .22); border-color: #ffe066; }
+.cw-emo-pad {
+  display: none; flex: none; gap: 2px; flex-wrap: wrap; overflow-y: auto;
+  max-height: 132px; padding: 6px 8px;
+  border-top: 1px solid rgba(246, 237, 216, .14); background: rgba(0, 0, 0, .28);
+}
+.cw-emo-pad.open { display: flex; }
+.cw-emo-pad button {
+  width: 40px; height: 40px; border: none; background: none; padding: 0; cursor: pointer;
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+}
+.cw-emo-pad button:active { background: rgba(255, 255, 255, .12); }
+
 .win-tabs { display: flex; gap: 6px; padding: 6px 14px 0; flex-wrap: wrap; }
 .tab {
   padding: 6px 14px 7px; cursor: pointer; font-size: 13px; font-weight: 800; color: #e7f0dd;

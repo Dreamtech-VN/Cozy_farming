@@ -289,6 +289,28 @@ chữ, rồi trim + thu về 512px. Dùng ở:
 nếu đúng vậy thì chỉ nên dùng để dev/test; bản phát hành thương mại cần thay bằng
 asset tự vẽ hoặc có quyền sử dụng.
 
+## Biểu cảm chat (`assets/chat/emoji/`)
+
+41 biểu cảm ĐỘNG bóc từ client GunPow (release `Pack3`, file `.xapk` — phần
+`Android/obb/.../main.*.obb`, thư mục `resources/armatures/chat/faceNNN.*` và bản
+đè ở `resources_vn/`). Mỗi biểu cảm trong client là một armature nhỏ: ảnh ETC1
+(`.pkm` + `_alpha.pkm`) chứa mọi khung, `.plist` cho toạ độ khung, `.xml` cho thứ
+tự phát và tốc độ.
+
+`scripts/gp_chat_emoji.py` giải ETC1 (dùng lại `scripts/pkm_to_png.py`), ghép các
+khung theo đúng thứ tự phát thành MỘT dải ngang 72px/khung, giảm còn 255 màu
+(3.8MB -> 0.73MB) rồi sinh luôn bảng `src/data/emoji.ts`:
+
+```
+python3 scripts/gp_chat_emoji.py \
+    <giải nén obb>/assets/gameresources/resources/armatures/chat \
+    <giải nén obb>/assets/gameresources/resources_vn/armatures/chat
+```
+
+Web chạy dải bằng CSS `steps()` (`.emo` trong `ui.css`), world chạy bằng
+spritesheet Phaser nạp theo nhu cầu (`WorldScene.onEmote`). Bộ emoticon pixel
+16px cũ (`assets/char/emoticons.png`) đã bỏ hẳn.
+
 ## Ghi chú trạm xe buýt
 
 Sprite `assets/deco/busstop.png` hiện ghép từ ghế đá của tileset + khung/mái vẽ tay

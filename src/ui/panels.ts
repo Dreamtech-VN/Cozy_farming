@@ -1,5 +1,5 @@
 import { registerPanel, openPanel, getGame, refreshHotbar, chatFabPos, setChatFabPos } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charFaceFluid, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, emojiEl, richText, chibiPreview, chibiHead, charFace, charFaceFluid, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
 import { AVATAR_PICS, avatarPicUrl, isUploadedPic } from '@/data/avatars';
 import { FOODS, FOOD_LIST, type FoodDef } from '@/data/foods';
 import { orderList, canDeliver, deliver, dropOrder, haveOf, orderName } from '@/systems/orders';
@@ -20,6 +20,7 @@ import { QUESTS, TITLES } from '@/data/quests';
 import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
 import { TOOL_LIST, TOOLS, toolUpgradeAt, toolIconSize } from '@/data/tools';
+import { EMOJIS } from '@/data/emoji';
 import { PET_LIST, PETS, ownsPet, petBonus, petArt } from '@/data/pets';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
@@ -2413,7 +2414,12 @@ export function registerAllPanels() {
         const col = h('div', 'cw-col');
         if (!same && !mine) col.append(h('div', 'cw-name', m.from));
         const bubble = h('div', `cw-bubble ch-${m.channel}`);
-        if (m.voice) bubble.append(voiceBtn(m)); else bubble.append(h('span', '', m.text));
+        if (m.voice) bubble.append(voiceBtn(m));
+        else {
+          const sp = h('span');
+          sp.append(richText(m.text, 30));           // [e01] -> biểu cảm động
+          bubble.append(sp);
+        }
         bubble.append(h('span', 'cw-t', hhmm(m.at)));
         col.append(bubble);
         row.append(avaSlot, col);
@@ -2457,6 +2463,28 @@ export function registerAllPanels() {
     };
     sendBtn.onclick = doSend;
     inp.onkeydown = e => { if (e.key === 'Enter') doSend(); e.stopPropagation(); };
+
+    // ----- bảng biểu cảm: chèn mã [eNN] vào ô nhập -----
+    const emoPad = h('div', 'cw-emo-pad');
+    for (const e of EMOJIS) {
+      const b = h('button');
+      b.append(emojiEl(e.id, 34));
+      b.onclick = () => {
+        sfx.click();
+        if (inp.value.length + 5 > inp.maxLength) return;
+        inp.value += `[${e.id}]`;
+        inp.focus();
+      };
+      emoPad.append(b);
+    }
+    const emoBtn = h('button', 'cw-emo');
+    emoBtn.append(emojiEl('e05', 26));
+    emoBtn.title = 'Biểu cảm';
+    emoBtn.onclick = () => {
+      sfx.click();
+      emoPad.classList.toggle('open');
+      emoBtn.classList.toggle('on', emoPad.classList.contains('open'));
+    };
 
     // ----- tin nhắn thoại -----
     // Game chưa có server nên tin thoại chỉ nằm ở máy mình, không gửi được
@@ -2514,9 +2542,9 @@ export function registerAllPanels() {
       if (rec && rec.state === 'recording') stopRec(); else void startRec();
     };
 
-    inputBar.append(micBtn, inp, sendBtn);
+    inputBar.append(micBtn, emoBtn, inp, sendBtn);
 
-    body.append(head, chanBar, toBar, log, recLabel, inputBar);
+    body.append(head, chanBar, toBar, log, recLabel, emoPad, inputBar);
     renderTo();
     renderLog();
     setTimeout(() => inp.focus(), 50);
@@ -2715,12 +2743,12 @@ export function registerAllPanels() {
   registerPanel('emotes', () => {
     const { body, close } = openWindow('Biểu cảm', { size: 'small' });
 
-    // dùng đúng sheet emoticons.png của asset pack (lưới 16px, 5 cột x 6 hàng)
+    // bộ biểu cảm động bóc từ GunPow (src/data/emoji.ts) — bấm là hiện trên đầu
     const grid = h('div', 'grid');
-    for (let i = 0; i < 30; i++) {
+    for (const e of EMOJIS) {
       const cell = h('div', 'cell');
-      cell.append(spr('assets/char/emoticons.png', (i % 5) * 16, Math.floor(i / 5) * 16, 16, 16, 36));
-      cell.onclick = () => { bus.emit('world:emote', i); close(); };
+      cell.append(emojiEl(e.id, 40));
+      cell.onclick = () => { bus.emit('world:emote', e.id); close(); };
       grid.append(cell);
     }
     body.append(grid);
