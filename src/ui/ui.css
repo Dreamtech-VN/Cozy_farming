@@ -376,9 +376,7 @@ img { image-rendering: auto; }
 /* màu chữ theo nền khung — dùng chung cho bong bóng chat và ô xem trước ở shop:
    ruột tối -> chữ trắng viền tối; ruột sáng -> chữ nâu đen viền sáng */
 .skin { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .75), 0 0 3px rgba(0, 0, 0, .5); }
-.skin .cw-t { color: rgba(255, 255, 255, .8); }
 .skin.ink-dark { color: #33281c; text-shadow: 0 1px 0 rgba(255, 255, 255, .6); }
-.skin.ink-dark .cw-t { color: rgba(45, 34, 22, .72); }
 .cw-row.me .cw-bubble {
   border-radius: 14px 14px 4px 14px;
   background: linear-gradient(#5aa84a, #3f8a34); color: #fbfff7;
@@ -386,7 +384,10 @@ img { image-rendering: auto; }
 .cw-bubble.ch-private { background: rgba(255, 168, 216, .18); }
 .cw-row.me .cw-bubble.ch-private { background: linear-gradient(#c96aa8, #a84f8b); }
 .cw-bubble.ch-area { background: rgba(143, 208, 255, .16); }
-.cw-t { font-size: 9.5px; color: rgba(255, 255, 255, .5); flex: none; margin-bottom: 1px; }
+/* giờ gửi nằm ngoài bong bóng: tin người khác thì bên phải, tin mình thì bên trái */
+.cw-line { display: flex; align-items: flex-end; gap: 6px; min-width: 0; }
+.cw-row.me .cw-line { flex-direction: row-reverse; }
+.cw-t { font-size: 9.5px; color: rgba(255, 255, 255, .45); flex: none; margin-bottom: 3px; }
 .cw-name + .cw-bubble { border-top-left-radius: 4px; }
 
 /* nhắn thoại */

@@ -2427,8 +2427,10 @@ export function registerAllPanels() {
           sp.append(richText(m.text, 30));           // [e01] -> biểu cảm động
           bubble.append(sp);
         }
-        bubble.append(h('span', 'cw-t', hhmm(m.at)));
-        col.append(bubble);
+        // giờ gửi để NGOÀI bong bóng (khung có hoa văn, nhét vào trong là đè lên)
+        const line = h('div', 'cw-line');
+        line.append(bubble, h('span', 'cw-t', hhmm(m.at)));
+        col.append(line);
         row.append(avaSlot, col);
         log.append(row);
         lastFrom = m.from;
