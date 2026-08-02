@@ -58,3 +58,13 @@ function rollWeather() {
 // tên icon (xem ICON_SRC trong ui/kit.ts) — không dùng emoji
 export const WEATHER_ICON: Record<Weather, string> = { sunny: 'w_sunny', rain: 'w_rain', cloudy: 'w_cloudy' };
 export const WEATHER_NAME: Record<Weather, string> = { sunny: 'Nắng', rain: 'Mưa', cloudy: 'Nhiều mây' };
+
+// HUD hiện theo giờ THẬT chứ không riêng thời tiết: đêm mà báo "Nắng" kèm mặt
+// trời là sai — trời quang ban đêm thì đổi sang trăng, mưa/mây thì giữ nguyên
+// (mưa đêm vẫn là mưa).
+export function hudWeatherIcon(): string {
+  return currentWeather() === 'sunny' && isNight() ? 'w_moon' : WEATHER_ICON[currentWeather()];
+}
+export function hudWeatherName(): string {
+  return currentWeather() === 'sunny' && isNight() ? 'Trời quang' : WEATHER_NAME[currentWeather()];
+}

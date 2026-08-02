@@ -329,6 +329,15 @@ python3 scripts/p4_strips.py <thư mục sbody đã giải nén> public/assets/s
 
 `src/data/skins-p4.json` ghi `[rộng, cao, số khung, rộng bản nhẹ, cao bản nhẹ]`.
 
+## Icon mặt trăng (`assets/ui/act/w_moon.png`)
+
+Bộ icon thời tiết `w_*` (nắng/mưa/mây/tuyết) không có bản đêm — GunPow cũng
+không có sẵn icon trăng lưỡi liềm đứng riêng để cắt. Vẽ tay bằng PIL
+(`scripts/` không lưu vì chỉ vài dòng), 16px, cùng kiểu viền tối + đổ bóng như
+các icon `w_*` khác (palette lạnh thay vì palette vàng của mặt trời).
+HUD dùng icon này khi trời quang mà đang là ban đêm (`hudWeatherIcon()` trong
+`src/systems/time.ts`) — trước đó ban đêm trời quang vẫn hiện mặt trời + "Nắng".
+
 ## Bản web và bản đóng gói app
 
 `npm run build` là bản WEB (GitHub Pages) nên `base` = `/Cozy_farming/`.

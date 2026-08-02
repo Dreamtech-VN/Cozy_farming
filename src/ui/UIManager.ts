@@ -4,7 +4,7 @@ import { S, unequipTool, toolLevel, toggleHand, heldTool, selectTool, ROD_SLOT }
 import { h, root, fmt, charFace, avatarEl, spr, chibiPreview, uiIcon } from './kit';
 import { virtualInput, queueAction } from '@/core/input';
 import { TITLES } from '@/data/quests';
-import { gameHour, currentWeather, WEATHER_ICON, WEATHER_NAME } from '@/systems/time';
+import { gameHour, hudWeatherIcon, hudWeatherName } from '@/systems/time';
 import * as socialMod from '@/systems/social';
 import * as storeMod from '@/systems/farmstore';
 import { initSocial } from '@/systems/social';
@@ -405,8 +405,8 @@ function refreshClock() {
     <div class="clk-txt">
       <div class="clk-h">${String(hh).padStart(2, '0')}<i>:</i>${String(mm).padStart(2, '0')}</div>
       <div class="clk-sub">
-        <img src="assets/ui/act/${WEATHER_ICON[currentWeather()]}.png">
-        <span>${WEATHER_NAME[currentWeather()]}</span>
+        <img src="assets/ui/act/${hudWeatherIcon()}.png">
+        <span>${hudWeatherName()}</span>
       </div>
     </div>`;
 }
