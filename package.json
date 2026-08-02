@@ -7,13 +7,14 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "build:app": "tsc --noEmit && vite build --base=./",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "assets:manifest": "python3 scripts/make_preload_manifest.py",
-    "electron": "npm run build && electron electron/main.cjs",
-    "cap:add:android": "npm run build && npx cap add android && npx cap sync",
-    "cap:add:ios": "npm run build && npx cap add ios && npx cap sync",
-    "cap:sync": "npm run build && npx cap sync"
+    "electron": "npm run build:app && electron electron/main.cjs",
+    "cap:add:android": "npm run build:app && npx cap add android && npx cap sync",
+    "cap:add:ios": "npm run build:app && npx cap add ios && npx cap sync",
+    "cap:sync": "npm run build:app && npx cap sync"
   },
   "dependencies": {
     "phaser": "^3.90.0"

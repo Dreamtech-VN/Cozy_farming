@@ -329,6 +329,19 @@ python3 scripts/p4_strips.py <thư mục sbody đã giải nén> public/assets/s
 
 `src/data/skins-p4.json` ghi `[rộng, cao, số khung, rộng bản nhẹ, cao bản nhẹ]`.
 
+## Bản web và bản đóng gói app
+
+`npm run build` là bản WEB (GitHub Pages) nên `base` = `/Cozy_farming/`.
+Bản đóng gói app phải dùng đường dẫn tương đối: **`npm run build:app`**
+(`vite build --base=./`) — mấy lệnh `electron` / `cap:*` đã trỏ sẵn vào lệnh này.
+
+- **Capacitor (Android/iOS)**: WebView phục vụ từ gốc `https://localhost` nên
+  đường dẫn tương đối chạy đúng, tài nguyên nằm luôn trong app -> màn chờ "tải
+  hết" chỉ đọc file trong máy, xong trong vài giây.
+- **Electron**: KHÔNG mở bằng `file://` được (ES module + CSS bị chặn CORS vì
+  origin `null`, mở ra là màn hình đen). `electron/main.cjs` đăng ký giao thức
+  riêng `app://` trỏ vào `dist` rồi `loadURL('app://local/index.html')`.
+
 ## Tải hết tài nguyên ở màn chờ
 
 `scripts/make_preload_manifest.py` (hoặc `npm run assets:manifest`) quét
