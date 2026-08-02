@@ -77,11 +77,14 @@ export function showLoginFlow(onStart: () => void) {
 function iconStack(wrap: HTMLElement, extra?: { icon: string; title: string; onClick: () => void }) {
   const stack = h('div', 'gate-icons');
 
+  // chữ chú thích nằm RIÊNG bên dưới nút tròn, không dính chung khối với icon
   const mk = (icon: string, label: string, onClick: () => void) => {
+    const item = h('div', 'gate-icon-item');
     const b = h('button', 'gate-icon-btn');
-    b.innerHTML = `${icon}<span>${label}</span>`;
+    b.innerHTML = icon;
     b.onclick = onClick;
-    return b;
+    item.append(b, h('span', 'gate-icon-label', label));
+    return item;
   };
 
   const bellBtn = mk(BELL_ICON, 'Thông báo', () => openNoticePopup());
