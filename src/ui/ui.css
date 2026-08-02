@@ -366,6 +366,8 @@ img { image-rendering: auto; }
 }
 /* tin của mình khi đang đắp khung mua ở cửa hàng: nền/bo góc do khung lo */
 .cw-row.me .cw-bubble.skin { border-radius: 0; min-width: 42px; }
+/* chữ nằm giữa khung (khung có hoa văn hai bên nên canh trái trông lệch) */
+.cw-bubble.skin { align-items: center; justify-content: center; text-align: center; }
 /* khung ruột tối -> chữ trắng viền tối; khung ruột sáng -> chữ nâu đen viền sáng */
 .cw-bubble.skin { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .75), 0 0 3px rgba(0, 0, 0, .5); }
 .cw-bubble.skin .cw-t { color: rgba(255, 255, 255, .8); }
