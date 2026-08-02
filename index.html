@@ -6,14 +6,22 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
   <title>Sunny Town</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>" />
-  <script type="module" crossorigin src="/Cozy_farming/assets/index-DHKQilSd.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/Cozy_farming/assets/ui/icon/favicon_32.png" />
+  <link rel="apple-touch-icon" href="/Cozy_farming/assets/ui/icon/apple_touch.png" />
+  <link rel="manifest" href="/Cozy_farming/manifest.webmanifest" />
+  <meta name="theme-color" content="#ffb703" />
+  <script type="module" crossorigin src="/Cozy_farming/assets/index-CIQhgxtF.js"></script>
   <link rel="stylesheet" crossorigin href="/Cozy_farming/assets/index-BW8WvTmK.css">
 </head>
 <body>
   <div id="app">
     <div id="game-root"></div>
     <div id="ui-root"></div>
+    <video id="intro-video" muted playsinline preload="auto"
+      style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;background:#07050f;z-index:9999;cursor:pointer">
+      <source src="assets/video/studio_intro.webm" type="video/webm" />
+      <source src="assets/video/studio_intro.mp4" type="video/mp4" />
+    </video>
   </div>
 </body>
 </html>
