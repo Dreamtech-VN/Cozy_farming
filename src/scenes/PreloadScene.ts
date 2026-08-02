@@ -152,39 +152,44 @@ export class PreloadScene extends Phaser.Scene {
     this.tweens.add({ targets: bg, scale: cover * 1.03, duration: 11000, yoyo: true, repeat: -1, ease: 'sine.inout' });
     this.add.rectangle(0, 0, W, H, 0x0a1220, 0.12).setOrigin(0);
 
-    // logo chữ "Sunny Town" — dựng bằng text (không dùng ảnh icon app vì đó
-    // là ảnh nền có sẵn khung cảnh, cắt ra không sạch), góc trái trên.
-    const logoX = 16 * RES, logoY = 14 * RES;
+    // logo chữ "Sunny Town" — dựng bằng text, viền đen dày + khung kính nhẹ
+    // phía sau cho nổi rõ trên nền trời sáng (trước viền trắng mảnh quá mờ).
+    const logoX = 16 * RES, logoY = 12 * RES;
+    this.add.graphics().fillStyle(0x000000, 0.32)
+      .fillRoundedRect(logoX - 8 * RES, logoY - 6 * RES, 106 * RES, 56 * RES, 10 * RES);
     this.add.text(logoX, logoY, 'Sunny', {
-      fontFamily: 'Verdana, Arial, sans-serif', fontSize: `${22 * RES}px`, fontStyle: 'bold', color: '#ffc94d'
-    }).setOrigin(0, 0).setStroke('#ffffff', 3 * RES).setShadow(0, 2, '#00000066', 3, true, true);
-    this.add.text(logoX, logoY + 20 * RES, 'Town', {
-      fontFamily: 'Verdana, Arial, sans-serif', fontSize: `${22 * RES}px`, fontStyle: 'bold', color: '#69db7c'
-    }).setOrigin(0, 0).setStroke('#ffffff', 3 * RES).setShadow(0, 2, '#00000066', 3, true, true);
+      fontFamily: 'Verdana, Arial, sans-serif', fontSize: `${24 * RES}px`, fontStyle: 'bold', color: '#ffd43b'
+    }).setOrigin(0, 0).setStroke('#3d2a00', 5 * RES).setShadow(0, 2, '#000000', 2, true, true);
+    this.add.text(logoX, logoY + 22 * RES, 'Town', {
+      fontFamily: 'Verdana, Arial, sans-serif', fontSize: `${24 * RES}px`, fontStyle: 'bold', color: '#8ce99a'
+    }).setOrigin(0, 0).setStroke('#0d3d1a', 5 * RES).setShadow(0, 2, '#000000', 2, true, true);
 
     // Key art gốc đã được xoá sạch badge 12+ + dòng bản quyền AI vẽ sẵn
     // (public/assets/ui/title_bg.jpg đã inpaint lại) -> giờ vẽ đè badge 12+
-    // THẬT (hd/12Plus.png gốc Lttt) + dòng cảnh báo lên nền sạch, không cần
-    // khung che tối nữa.
-    const padX = 10 * RES, padBottom = 8 * RES;
-    const badgeY = H - padBottom - 20 * RES;
-    const badgeX = padX + 14 * RES;
+    // THẬT (hd/12Plus.png gốc Lttt) + dòng cảnh báo lên khung kính tối cho
+    // rõ chữ (chữ tối trên nền sáng trước đó mờ, khó đọc).
+    const padX = 8 * RES, padBottom = 6 * RES;
+    const barH = 46 * RES, barW = 300 * RES;
+    const barCX = padX + barW / 2, barCY = H - padBottom - barH / 2;
+    this.add.graphics().fillStyle(0x000000, 0.55)
+      .fillRoundedRect(barCX - barW / 2, barCY - barH / 2, barW, barH, 8 * RES);
+    const badgeX = padX + 18 * RES, badgeY = barCY;
     if (this.textures.exists('age12')) {
-      this.add.image(badgeX, badgeY, 'age12').setScale(1.6 * RES).setOrigin(0.5);
+      this.add.image(badgeX, badgeY, 'age12').setScale(2 * RES).setOrigin(0.5);
     }
-    this.add.text(badgeX + 20 * RES, badgeY, 'Chơi quá 180 phút một ngày\nsẽ ảnh hưởng xấu đến sức khỏe', {
-      fontFamily: 'sans-serif', fontSize: `${9 * RES}px`, color: '#3a3a3a'
-    }).setOrigin(0, 0.5).setShadow(0, 1, '#ffffffaa', 2, true, true);
+    this.add.text(badgeX + 24 * RES, badgeY, 'Chơi quá 180 phút một ngày\nsẽ ảnh hưởng xấu đến sức khỏe', {
+      fontFamily: 'sans-serif', fontSize: `${9.5 * RES}px`, color: '#ffffff', fontStyle: 'bold'
+    }).setOrigin(0, 0.5).setShadow(0, 1, '#000000cc', 2, true, true);
 
     // dòng bản quyền viết lại bằng text thật (thay cho dòng AI vẽ sẵn đã xoá)
     this.add.text(W / 2, H - padBottom - 8 * RES, '© 2026 Dreamtech Studio. All right reserved.', {
-      fontFamily: 'sans-serif', fontSize: `${11 * RES}px`, color: '#3a3a3a'
-    }).setOrigin(0.5).setShadow(0, 1, '#ffffffaa', 2, true, true);
+      fontFamily: 'sans-serif', fontSize: `${11 * RES}px`, color: '#ffffff', fontStyle: 'bold'
+    }).setOrigin(0.5).setShadow(0, 1, '#000000cc', 3, true, true);
 
     // số bản build góc phải dưới
     this.add.text(W - 8 * RES, H - 16 * RES, `v${GAME_VERSION}`, {
-      fontFamily: 'monospace', fontSize: `${10 * RES}px`, color: '#ffffffaa'
-    }).setOrigin(1, 0.5);
+      fontFamily: 'monospace', fontSize: `${10 * RES}px`, color: '#ffffff'
+    }).setOrigin(1, 0.5).setShadow(0, 1, '#000000cc', 2, true, true);
 
     // thanh tải: người mới / sau update thấy thanh to có %, còn lại chỉ 1 dòng nhỏ
     if (!resFresh()) {
