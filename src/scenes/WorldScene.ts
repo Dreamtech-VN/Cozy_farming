@@ -1063,7 +1063,10 @@ export class WorldScene extends Phaser.Scene {
     const spr = this.add.sprite(ax, ay, `animal_${type}`, 0).setDepth(ay)
       .setScale(this.zone.bg ? def.hdScale : def.hdScale * 0.5);
     spr.setInteractive({ useHandCursor: true });
-    spr.on('pointerdown', () => this.animalDialog(id));
+    spr.on('pointerdown', (_p: Phaser.Input.Pointer, _lx: number, _ly: number, event: Phaser.Types.Input.EventData) => {
+      event.stopPropagation();
+      this.animalDialog(id);
+    });
     this.animalSprites.set(id, spr);
   }
 
@@ -1573,7 +1576,12 @@ export class WorldScene extends Phaser.Scene {
   // vùng chạm ôm trọn nhân vật (zone con trong container -> transform chuẩn)
   private attachTapZone(c: ChibiSprite, cb: () => void) {
     const z = this.add.zone(0, -44, 52, 92).setInteractive({ useHandCursor: true });
-    z.on('pointerdown', cb);
+    // event.stopPropagation() để onTap() không xử lý lại y hệt cú chạm này
+    // như "chạm nền" (double dialog / đi lố tới NPC vừa nói chuyện xong).
+    z.on('pointerdown', (_p: Phaser.Input.Pointer, _lx: number, _ly: number, event: Phaser.Types.Input.EventData) => {
+      event.stopPropagation();
+      cb();
+    });
     c.add(z);
   }
 
@@ -1849,7 +1857,10 @@ export class WorldScene extends Phaser.Scene {
       this.pet = this.add.sprite(home.x, home.y, key, 0)
         .setOrigin(0.5, 1).setScale(sc).setDepth(home.y);
       this.pet.setInteractive({ useHandCursor: true });
-      this.pet.on('pointerdown', () => this.petMenu());
+      this.pet.on('pointerdown', (_p: Phaser.Input.Pointer, _lx: number, _ly: number, event: Phaser.Types.Input.EventData) => {
+        event.stopPropagation();
+        this.petMenu();
+      });
 
       // đứng thở: chạy vòng 4 khung của animation 'wait'
       this.time.addEvent({ delay: 220, loop: true, callback: () => {

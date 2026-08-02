@@ -21,6 +21,8 @@ const game = new Phaser.Game({
     height: 540 * RES
   },
   physics: { default: 'arcade' },
+  // 2 ngón: joystick ảo (DOM) giữ trong khi tay kia chạm world/hotbar vẫn ăn
+  input: { activePointers: 2 },
   scene: [BootScene, PreloadScene, CharCreateScene, WorldScene]
 });
 
