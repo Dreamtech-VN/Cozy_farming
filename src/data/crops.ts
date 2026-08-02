@@ -21,7 +21,11 @@ export const CROP_ANIM: Record<string, [number, number, number]> = {
   carrot: [16, 16, 7], turnip: [16, 16, 7], potato: [16, 32, 7], tomato: [16, 32, 23],
   cabbage: [16, 16, 7], pumpkin: [16, 16, 7], strawberry: [16, 16, 7], corn: [16, 32, 8],
   eggplant: [16, 32, 7], chili: [16, 32, 11], grape: [18, 32, 7], wheat: [18, 32, 8],
-  onion: [16, 32, 7], broccoli: [16, 32, 7]
+  onion: [16, 32, 7], broccoli: [16, 32, 7],
+  // 4 cây mới (theo bảng farmitems thật của Lttt) chưa có sẵn dải hoạt cảnh lớn
+  // dần trong pack nào — dựng tạm bằng cách phóng to dần icon túi có sẵn rồi
+  // xỉn màu ở khung cuối (script tại docs/ASSETS.md, mục "Cây trồng mới").
+  rose: [49, 49, 5], tulip: [49, 52, 5], watermelon: [46, 43, 5], sunflower: [46, 43, 5]
 };
 
 // icon nông sản trong túi (đã chuyển style chibi) — [rộng, cao]
@@ -77,5 +81,16 @@ defCrop({ id: 'chili',      name: 'Ớt',            icon: '🌶️', row: 14, s
 defCrop({ id: 'wheat',      name: 'Lúa mì',        icon: '', row: 20, stages: 5, growMin: 90,  seedPrice: 200, sellPrice: 380, exp: 30, yieldQty: [2, 3] });
 defCrop({ id: 'onion',      name: 'Hành tây',      icon: '', row: 22, stages: 5, growMin: 120, seedPrice: 260, sellPrice: 520, exp: 40, yieldQty: [1, 2] });
 defCrop({ id: 'broccoli',   name: 'Bông cải',      icon: '', row: 24, stages: 5, growMin: 75,  seedPrice: 160, sellPrice: 310, exp: 26, yieldQty: [1, 2] });
+
+// ---- 4 cây mới, theo bảng farmitems thật của Lttt (Hoa Hồng/Tulip/Dưa Hấu/
+// Hướng Dương) — xếp growMin theo ĐÚNG thứ tự nhanh→chậm thật của Lttt (Hoa
+// Hồng 120' < Tulip 360' < Dưa Hấu 480' < Hướng Dương 720', đều nhanh hơn
+// Nho 960'), giữ nguyên các cây cũ để không phá nhịp độ tân thủ (cà rốt vẫn
+// là cây nhanh nhất — Lttt thật ra cho cà rốt chậm hơn cà chua/bí đỏ, không
+// hợp làm cây mở màn nên KHÔNG áp nguyên số phút thật cho 14 cây cũ).
+defCrop({ id: 'rose',       name: 'Hoa hồng',      icon: '', row: 26, stages: 5, growMin: 22,  seedPrice: 54,  sellPrice: 104, exp: 7,  yieldQty: [1, 2] });
+defCrop({ id: 'tulip',      name: 'Hoa tulip',     icon: '', row: 27, stages: 5, growMin: 32,  seedPrice: 76,  sellPrice: 146, exp: 11, yieldQty: [1, 2] });
+defCrop({ id: 'watermelon', name: 'Dưa hấu',       icon: '', row: 28, stages: 5, growMin: 48,  seedPrice: 111, sellPrice: 214, exp: 16, yieldQty: [1, 1] });
+defCrop({ id: 'sunflower',  name: 'Hoa hướng dương', icon: '', row: 29, stages: 5, growMin: 55,  seedPrice: 127, sellPrice: 244, exp: 18, yieldQty: [1, 2] });
 
 export const CROP_LIST = Object.values(CROPS);

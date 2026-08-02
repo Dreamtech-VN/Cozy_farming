@@ -329,6 +329,41 @@ python3 scripts/p4_strips.py <thư mục sbody đã giải nén> public/assets/s
 
 `src/data/skins-p4.json` ghi `[rộng, cao, số khung, rộng bản nhẹ, cao bản nhẹ]`.
 
+## Cây trồng mới: Hoa hồng / Tulip / Dưa hấu / Hướng dương
+
+Đọc client Unity thật của Lttt (release Pack5, `project-client-avt-main.zip`) và
+DB mới `127_0_0_1.sql`, bảng `farmitems` có đúng 24 cây với thời gian chín/sản
+lượng/giá thật — 10 cây trùng tên với bộ 14 cây hiện tại (Cà chua, Cà rốt,
+Khoai tây, Bí đỏ, Cà tím, Dâu tây, Ớt, Ngô, Lúa, Nho), còn lại là hoa/trái cây
+không có trong game. Không áp thẳng số phút thật cho 14 cây cũ vì lệch nặng với
+nhịp tân thủ đang có (Lttt cho cà rốt CHẬM hơn cà chua/bí đỏ, trong khi game
+này cố ý để cà rốt là cây nhanh nhất mở màn) — xem chú thích trong
+`src/data/crops.ts`.
+
+4 cây thêm mới (Hoa hồng/Tulip/Dưa hấu/Hướng dương) dùng icon túi có sẵn
+(`assets/farm/chibi/`) nhưng thiếu dải hoạt cảnh lớn dần, nên dựng tạm 5 khung
+bằng cách phóng to dần icon rồi xỉn màu khung cuối:
+
+```python
+from PIL import Image, ImageEnhance
+for name in ['rose', 'tulip', 'watermelon', 'sunflower']:
+    src = Image.open(f'public/assets/farm/chibi/{name}.png').convert('RGBA')
+    w, h = src.size
+    strip = Image.new('RGBA', (w * 5, h), (0, 0, 0, 0))
+    for i, sc in enumerate([0.35, 0.6, 0.85, 1.0]):
+        fw, fh = round(w * sc), round(h * sc)
+        im = src.resize((fw, fh), Image.LANCZOS)
+        strip.paste(im, (i * w + (w - fw) // 2, h - fh), im)
+    wilt = ImageEnhance.Brightness(ImageEnhance.Color(src).enhance(.35)).enhance(.75)
+    strip.paste(wilt, (w * 4, 0), wilt)
+    strip.save(f'public/assets/pack2/crops/{name}.png')
+```
+
+growMin xếp theo ĐÚNG thứ tự nhanh→chậm thật của Lttt (Hồng 120' < Tulip 360'
+< Dưa hấu 480' < Hướng dương 720', đều nhanh hơn Nho 960' — Nho đã có sẵn
+trong game từ trước), quy đổi vào thang thời gian ngắn của game này (22-55
+phút) rồi tính giá theo công thức nội bộ đang dùng (sell ≈ 4.25×growMin+10).
+
 ## Icon mặt trăng (`assets/ui/act/w_moon.png`)
 
 Bộ icon thời tiết `w_*` (nắng/mưa/mây/tuyết) không có bản đêm — GunPow cũng
