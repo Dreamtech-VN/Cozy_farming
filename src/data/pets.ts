@@ -49,16 +49,13 @@ export const PERKS: Record<PetPerk, { rate: number; text: string; full: string }
 const PERK_ORDER: PetPerk[] = ['harvest', 'sell', 'guard', 'fish', 'grow'];
 
 // pack không kèm bảng tên gốc nên tự đặt tên + giá ruby theo độ hiếm nhìn bằng mắt
+// (đã bỏ 0006/0032/0084/0156 — ráp bị dư mảnh rời phía sau lưng không sửa nổi)
 const CURATED: { sid: string; name: string; price: number }[] = [
   { sid: '0003', name: 'Gấu Mèo Lãng Tử', price: 15 },
-  { sid: '0006', name: 'Cáo Con Tinh Nghịch', price: 15 },
   { sid: '0019', name: 'Thỏ Bông Nhóc Tì', price: 20 },
   { sid: '0044', name: 'Mèo Máy Xanh', price: 25 },
   { sid: '0056', name: 'Nữ Xạ Thủ Bạch Thố', price: 30 },
   { sid: '0065', name: 'Tiên Nữ Cánh Hồng', price: 30 },
-  { sid: '0156', name: 'Sói Tuyết Có Cánh', price: 35 },
-  { sid: '0032', name: 'Pháp Sư Bóng Đêm', price: 45 },
-  { sid: '0084', name: 'Rồng Ngọc Lam', price: 50 },
   { sid: '0108', name: 'Rồng Băng Giáp Vàng', price: 55 },
   { sid: '0009', name: 'Rồng Bạc Cổ Đại', price: 60 }
 ];
