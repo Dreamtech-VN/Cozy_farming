@@ -361,9 +361,12 @@ img { image-rendering: auto; }
 .cw-bubble {
   position: relative; padding: 6px 11px 6px 11px; border-radius: 14px 14px 14px 4px;
   background: rgba(246, 237, 216, .13); color: #eef5e6;
-  font-size: 12.5px; line-height: 1.4; word-break: break-word;
+  font-size: var(--chat-font, 12.5px); line-height: 1.4; word-break: break-word;
   display: flex; align-items: flex-end; gap: 7px;
 }
+/* tin của mình khi đang đắp khung mua ở cửa hàng: nền/bo góc do khung lo */
+.cw-row.me .cw-bubble.skin { border-radius: 0; min-width: 42px; }
+.cw-bubble.skin .cw-t { color: rgba(255, 255, 255, .72); text-shadow: 0 1px 2px rgba(0, 0, 0, .6); }
 .cw-row.me .cw-bubble {
   border-radius: 14px 14px 4px 14px;
   background: linear-gradient(#5aa84a, #3f8a34); color: #fbfff7;
@@ -409,7 +412,7 @@ img { image-rendering: auto; }
   background: rgba(255, 255, 255, .04);
 }
 .cw-input {
-  flex: 1; min-width: 0; font-family: inherit; font-size: 12.5px;
+  flex: 1; min-width: 0; font-family: inherit; font-size: var(--chat-font, 12.5px);
   padding: 9px 14px; border-radius: 999px; color: #f6edd8;
   background: rgba(0, 0, 0, .34); border: 1px solid rgba(246, 237, 216, .20); outline: none;
 }
@@ -436,6 +439,29 @@ img { image-rendering: auto; }
   0%, 100% { box-shadow: 0 0 0 0 rgba(224, 49, 49, .55); }
   50% { box-shadow: 0 0 0 7px rgba(224, 49, 49, 0); }
 }
+
+/* ===== Cửa hàng khung bong bóng chat ===== */
+.bub-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: 9px; padding: 4px 2px 8px;
+}
+.bub-cell {
+  padding: 8px 6px 7px; border-radius: 12px; cursor: pointer; text-align: center;
+  background: rgba(0, 0, 0, .16); border: 2px solid transparent;
+}
+.bub-cell.on { border-color: #ffe066; background: rgba(255, 224, 102, .12); }
+.bub-cell:active { transform: scale(.97); }
+.bub-prev {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 34px; min-width: 74px; padding: 5px 10px; margin-bottom: 5px;
+  border-radius: 12px; background: rgba(255, 255, 255, .14);
+  font-size: 11.5px; font-weight: 700; color: #fff; line-height: 1.35;
+}
+.bub-name { font-size: 11.5px; font-weight: 800; color: #f4ecd8; }
+.bub-price { font-size: 11.5px; font-weight: 800; color: #ffe066; margin-top: 2px; }
+.bub-tag { font-size: 10.5px; font-weight: 800; color: #a9d99a; margin-top: 2px; }
+.bub-tag.on { color: #ffe066; }
+.bub-fonts { display: flex; gap: 8px; padding: 6px 2px; }
 
 /* ===== Emoji chat (dải khung chạy bằng steps) ===== */
 .emo {

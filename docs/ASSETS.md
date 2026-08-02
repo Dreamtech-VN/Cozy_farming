@@ -311,6 +311,19 @@ Web chạy dải bằng CSS `steps()` (`.emo` trong `ui.css`), world chạy bằ
 spritesheet Phaser nạp theo nhu cầu (`WorldScene.onEmote`). Bộ emoticon pixel
 16px cũ (`assets/char/emoticons.png`) đã bỏ hẳn.
 
+## Khung bong bóng chat (`assets/chat/bubble/`)
+
+31 khung bong bóng cắt từ atlas `resources/pack/chat/pack_chat_0.{pkm,plist}`
+trong apk GunPow (các sprite `talk_XX.png`) bằng `scripts/gp_chat_bubbles.py`:
+
+```
+python3 scripts/gp_chat_bubbles.py <giải nén apk>/assets/gameresources/resources/pack/chat
+```
+
+Khung dùng kiểu 9 ô (`border-image`) nên co giãn theo độ dài tin nhắn: 4 góc giữ
+nguyên hình trang trí, cạnh và ruột kéo giãn. Bảng tên + giá xu + độ dày viền ở
+`src/data/bubbles.ts`; mua/đổi trong Chat > nút bánh răng > tab "Bong bóng chat".
+
 ## Ghi chú trạm xe buýt
 
 Sprite `assets/deco/busstop.png` hiện ghép từ ghế đá của tileset + khung/mái vẽ tay

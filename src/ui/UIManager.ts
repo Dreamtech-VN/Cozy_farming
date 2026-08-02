@@ -63,6 +63,11 @@ export function initUI(game: Phaser.Game) {
   rot.innerHTML = '<div class="phone"></div><div>Xoay ngang màn hình để chơi nhé!</div>';
   document.body.append(rot);
 
+  // cỡ chữ chat người chơi tự chỉnh (Cài đặt chat > Khác)
+  if (S.settings.chatFont) {
+    document.documentElement.style.setProperty('--chat-font', `${S.settings.chatFont}px`);
+  }
+
   // toast container
   const toasts = h('div'); toasts.id = 'toasts'; root().append(toasts);
   bus.on(EV.TOAST, ({ msg, icon }: { msg: string; icon: string }) => {

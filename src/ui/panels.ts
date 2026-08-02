@@ -21,6 +21,7 @@ import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
 import { TOOL_LIST, TOOLS, toolUpgradeAt, toolIconSize } from '@/data/tools';
 import { EMOJIS } from '@/data/emoji';
+import { BUBBLES, bubbleStyle } from '@/data/bubbles';
 import { PET_LIST, PETS, ownsPet, petBonus, petArt } from '@/data/pets';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
@@ -2293,9 +2294,13 @@ export function registerAllPanels() {
     // ----- đầu bảng: chỉ là thanh kéo + nút đóng (bỏ ảnh đại diện, tên và
     // số người trực tuyến — đã có sẵn trên HUD, để đây chỉ tổ chật) -----
     const head = h('div', 'cw-head');
+    const gear = h('button', 'cw-x cw-gear');
+    gear.append(uiIcon('settings', 16));
+    gear.title = 'Cài đặt chat';
+    gear.onclick = () => { sfx.click(); openPanel('chatsettings'); };
     const closeX = h('button', 'cw-x', '✕');
     closeX.onclick = close;
-    head.append(h('div', 'cw-grip'), closeX);
+    head.append(h('div', 'cw-grip'), gear, closeX);
 
     // kéo đầu bảng = dời khung; dời xong đặt luôn nút chat về đó để lần sau
     // mở lại vẫn đúng chỗ (nút là mốc neo duy nhất)
@@ -2316,7 +2321,7 @@ export function registerAllPanels() {
     window.addEventListener('pointerup', onUp);
     window.addEventListener('pointercancel', onUp);
     head.addEventListener('pointerdown', e => {
-      if ((e.target as HTMLElement).closest('.cw-x')) return;
+      if ((e.target as HTMLElement).closest('.cw-x')) return;   // nút đóng / cài đặt
       dragging = true;
       dx = e.clientX - win.offsetLeft;
       dy = e.clientY - win.offsetTop;
@@ -2414,6 +2419,11 @@ export function registerAllPanels() {
         const col = h('div', 'cw-col');
         if (!same && !mine) col.append(h('div', 'cw-name', m.from));
         const bubble = h('div', `cw-bubble ch-${m.channel}`);
+        // khung bong bóng đã mua chỉ đắp lên tin của mình
+        if (mine && S.chat?.bubble && S.chat.bubble !== 'b_default') {
+          bubble.classList.add('skin');
+          bubble.style.cssText = bubbleStyle(S.chat.bubble);
+        }
         if (m.voice) bubble.append(voiceBtn(m));
         else {
           const sp = h('span');
@@ -2737,6 +2747,75 @@ export function registerAllPanels() {
       (row.querySelector('.t1') as HTMLElement).textContent = r.name + (r.me ? ' (bạn)' : '');
       body.append(row);
     });
+  });
+
+  // ================= Cài đặt chat =================
+  // Tab 1: cửa hàng khung bong bóng (mua bằng xu, mua rồi thì bấm để dùng).
+  registerPanel('chatsettings', () => {
+    const { body, tabs } = openWindow('Cài đặt chat', { size: 'normal' });
+    const wrap = h('div');
+    body.append(wrap);
+    let tab = 0;
+
+    const owned = (id: string) => id === 'b_default' || (S.chat?.bubbles ?? []).includes(id);
+
+    const renderBubbles = () => {
+      wrap.append(h('div', 'hint', 'Khung chỉ hiện ở tin nhắn của bạn. Mua một lần dùng mãi.'));
+      const grid = h('div', 'bub-grid');
+      for (const b of BUBBLES) {
+        const cell = h('div', `bub-cell ${S.chat.bubble === b.id ? 'on' : ''}`);
+        const prev = h('div', 'bub-prev', 'Xin chào!');
+        // khung xem trước nhỏ hơn trong chat một chút cho vừa ô
+        if (b.id !== 'b_default') prev.style.cssText = bubbleStyle(b.id, 0.5);
+        cell.append(prev, h('div', 'bub-name', b.name));
+        if (owned(b.id)) {
+          cell.append(h('div', `bub-tag ${S.chat.bubble === b.id ? 'on' : ''}`,
+            S.chat.bubble === b.id ? 'Đang dùng' : 'Đã có'));
+          cell.onclick = () => {
+            sfx.click();
+            S.chat.bubble = b.id; save();
+            toast(`Đã đổi khung chat: ${b.name}`, 'check');
+            render();
+          };
+        } else {
+          const pr = h('div', 'bub-price');
+          pr.innerHTML = priceHtml(b.price);
+          cell.append(pr);
+          cell.onclick = () => {
+            if (!spend(b.price)) { toast('Không đủ xu.', 'alert'); return; }
+            sfx.coin();
+            S.chat.bubbles.push(b.id);
+            S.chat.bubble = b.id;
+            save();
+            toast(`Đã mua khung ${b.name}!`, 'check');
+            render();
+          };
+        }
+        grid.append(cell);
+      }
+      wrap.append(grid);
+    };
+
+    const renderOther = () => {
+      wrap.append(h('div', 'hint', 'Cỡ chữ trong khung chat.'));
+      const row = h('div', 'bub-fonts');
+      const SIZES: [string, number][] = [['Nhỏ', 11.5], ['Vừa', 12.5], ['Lớn', 14]];
+      for (const [label, px] of SIZES) {
+        row.append(btn(label, S.settings.chatFont === px ? 'gold' : '', () => {
+          S.settings.chatFont = px; save();
+          document.documentElement.style.setProperty('--chat-font', `${px}px`);
+          render();
+        }));
+      }
+      wrap.append(row);
+    };
+
+    function render() {
+      wrap.innerHTML = '';
+      if (tab === 0) renderBubbles(); else renderOther();
+    }
+    tabs(['Bong bóng chat', 'Khác'], i => { tab = i; render(); });
+    render();
   });
 
   // ================= Biểu cảm =================

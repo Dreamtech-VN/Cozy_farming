@@ -53,6 +53,7 @@ export function defaultState(): GameState {
     },
     minigames: { caroWins: 0, xiangqiWins: 0, rpsWins: 0 },
     settings: { music: true, sfx: true },
+    chat: { bubble: 'b_default', bubbles: ['b_default'] },
     zone: 'farm',
     zoneRoom: 1,
     clockOffset: 0
@@ -143,6 +144,8 @@ export function load(): boolean {
     // chỗ migrate giữa các version save về sau
     S = { ...defaultState(), ...data };
     if (!S.chibiWardrobe) S.chibiWardrobe = [];
+    // save cũ chưa có phần trang trí chat
+    if (!S.chat) S.chat = { bubble: 'b_default', bubbles: ['b_default'] };
     if (!S.achClaimed) S.achClaimed = {};
     if (S.wallet.farmCoins === undefined) S.wallet.farmCoins = 0;
     // save cũ để đồ cầm tay trong túi -> chuyển vào tủ quần áo (như Lttt)
