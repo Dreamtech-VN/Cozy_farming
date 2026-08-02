@@ -14,10 +14,12 @@ Dùng:
     python3 scripts/gp_chat_bubbles.py <thư mục pack/chat> --out public/assets/chat/bubble
 """
 import argparse
+import json
 import os
 import plistlib
 import re
 
+import numpy as np
 from PIL import Image, ImageFilter
 
 from pkm_to_png import load_rgba
@@ -68,10 +70,31 @@ def _nums(s: str) -> list[int]:
     return [int(x) for x in re.findall(r'-?\d+', s)]
 
 
+def auto_slice(im: Image.Image, band: int = 4) -> list[int]:
+    """Lát cắt 9 ô cho một khung: [trên, phải, dưới, trái].
+
+    Hoa văn của khung (con mèo, cụm hoa, mũi nhọn) trải gần hết CHIỀU CAO ảnh.
+    Cắt lát mỏng thì hoa văn rơi vào dải cạnh rồi bị kéo giãn theo chiều cao
+    bong bóng — nhìn méo hẳn. Nên chiều dọc chỉ chừa đúng một dải mỏng ở chỗ
+    ảnh ít đổi nhất (ruột khung) để co giãn, hoa văn nằm trọn trong 4 góc.
+
+    Chiều ngang thì ngược lại: hoa văn nằm ở hai ĐẦU nên chỉ cần lát vừa phải
+    (~29% bề ngang), chừa ruột rộng để bong bóng dài ra mà không phình viền.
+    """
+    a = np.asarray(im.convert('RGBA')).astype(float)
+    h, w, _ = a.shape
+    dy = np.abs(np.diff(a, axis=0)).mean(axis=(1, 2))
+    lo, hi = int(h * 0.30), int(h * 0.70)
+    y = lo + int(np.argmin(dy[lo:hi]))
+    side = round(w * 0.29)
+    return [max(2, y - band // 2), side, max(2, h - (y + band // 2)), side]
+
+
 def main():
     ap = argparse.ArgumentParser(description='Bóc khung bong bóng chat GunPow')
     ap.add_argument('src', help='thư mục chứa pack_chat_0.pkm/.plist')
     ap.add_argument('--out', default='public/assets/chat/bubble')
+    ap.add_argument('--slices', default='src/data/bubble-slices.json')
     a = ap.parse_args()
 
     tex = load_rgba(os.path.join(a.src, 'pack_chat_0.pkm'))
@@ -85,6 +108,7 @@ def main():
         im = tex.crop((x, y, x + (h if rot else w), y + (w if rot else h)))
         return im.rotate(-90, expand=True) if rot else im
 
+    slices: dict[str, list[int]] = {}
     for name, (f1, f2) in PICK.items():
         for suffix, key in (('', f1), ('_b', f2)):
             if not key:
@@ -97,7 +121,14 @@ def main():
             im = im.filter(ImageFilter.UnsharpMask(radius=1.2, percent=60, threshold=2))
             im.quantize(colors=255, method=Image.FASTOCTREE).save(
                 os.path.join(a.out, f'{name}{suffix}.png'), optimize=True)
-        print(f'{f1}{"+" + f2 if f2 else ""} -> {name}  {cut(f1).size} (xuất 2x)')
+            if not suffix:
+                slices[name] = auto_slice(im)
+        print(f'{f1}{"+" + f2 if f2 else ""} -> {name}  {cut(f1).size} (xuất 2x)  lát {slices[name]}')
+
+    if a.slices:
+        with open(a.slices, 'w', encoding='utf8') as f:
+            json.dump(slices, f, indent=0, sort_keys=True)
+        print('->', a.slices)
 
 
 if __name__ == '__main__':

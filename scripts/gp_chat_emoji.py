@@ -26,7 +26,8 @@ from PIL import Image
 
 from pkm_to_png import load_rgba
 
-FRAME_PX = 72          # cỡ mỗi khung sau khi thu nhỏ (đủ nét cho bong bóng chat)
+FRAME_PX = 160         # trần cỡ một khung; ảnh gốc nhỏ hơn thì GIỮ NGUYÊN
+                       # (đa số khung gốc 124px — thu nhỏ là mất nét trên màn DPR cao)
 
 
 def _nums(s: str) -> list[int]:
@@ -89,7 +90,7 @@ def build_strip(face_dir: str, face: str) -> tuple[Image.Image, int, float, int,
     imgs = [frames[k] for k in keys]
     bw = max(i.width for i in imgs)
     bh = max(i.height for i in imgs)
-    k = FRAME_PX / max(bw, bh)
+    k = min(1.0, FRAME_PX / max(bw, bh))     # không phóng to, chỉ thu khi quá khổ
     fw, fh = max(1, round(bw * k)), max(1, round(bh * k))
     strip = Image.new('RGBA', (fw * len(imgs), fh), (0, 0, 0, 0))
     for i, im in enumerate(imgs):
@@ -118,7 +119,7 @@ def main():
     for i, face in enumerate(order, 1):
         strip, n, dur, fw, fh = build_strip(faces[face], face)
         name = f'e{i:02d}'
-        # 41 dải RGBA 72px là ~3.8MB, giảm còn 255 màu (vẫn giữ alpha) là ~0.7MB
+        # dải RGBA nguyên cỡ nặng vài MB, giảm còn 255 màu (vẫn giữ alpha) nhẹ ~4 lần
         strip.quantize(colors=255, method=Image.FASTOCTREE).save(
             os.path.join(a.out, f'{name}.png'), optimize=True)
         rows.append((name, n, dur, fw, fh, face))

@@ -280,8 +280,8 @@ img { image-rendering: auto; }
 .win.win-chat {
   width: min(440px, 93vw); height: min(400px, 66vh); max-height: 66vh;
   padding: 0; border: none; border-image: none;
-  background: linear-gradient(180deg, rgba(58, 82, 58, .93), rgba(32, 50, 34, .95));
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  /* bảng chat để đặc hẳn cho dễ đọc — không cần nhìn xuyên xuống thế giới */
+  background: linear-gradient(180deg, #3a523a, #203222);
   border-radius: 16px; box-shadow: 0 12px 34px rgba(0, 0, 0, .5);
   outline: 2px solid rgba(246, 237, 216, .20); outline-offset: -2px;
   display: flex; flex-direction: column; overflow: hidden;

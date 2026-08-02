@@ -6,7 +6,7 @@ import { TITLES } from '@/data/quests';
 import { skinArt } from '@/data/skins';
 import { picSrc } from '@/data/avatars';
 import { EMOJI_BY_ID, EMOJI_RE, emojiUrl } from '@/data/emoji';
-import { BUBBLE_BY_ID, bubbleUrl } from '@/data/bubbles';
+import { BUBBLE_BY_ID, bubbleSlice, bubbleUrl } from '@/data/bubbles';
 import BBOX from '@/data/chibi-bbox.json';
 export function h<K extends keyof HTMLElementTagNameMap>(
   tag: K, cls = '', text = ''
@@ -359,7 +359,7 @@ function ensureBubbleAnim(id: string) {
 export function applyBubbleSkin(el: HTMLElement, id: string, k = 0.275) {
   const b = BUBBLE_BY_ID[id];
   if (!b || b.id === 'b_default') return;
-  const [t, r, bo, l] = b.slice;
+  const [t, r, bo, l] = bubbleSlice(id);
   const bw = (v: number) => `${Math.round(v * k)}px`;
   el.classList.add('skin');
   el.style.borderImage = `url(${bubbleUrl(id)}) ${t} ${r} ${bo} ${l} fill stretch`;

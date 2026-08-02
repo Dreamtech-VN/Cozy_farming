@@ -298,8 +298,9 @@ asset tự vẽ hoặc có quyền sử dụng.
 tự phát và tốc độ.
 
 `scripts/gp_chat_emoji.py` giải ETC1 (dùng lại `scripts/pkm_to_png.py`), ghép các
-khung theo đúng thứ tự phát thành MỘT dải ngang 72px/khung, giảm còn 255 màu
-(3.8MB -> 0.73MB) rồi sinh luôn bảng `src/data/emoji.ts`:
+khung theo đúng thứ tự phát thành MỘT dải ngang **giữ nguyên cỡ gốc** (đa số
+124px/khung, trần 160px — thu nhỏ là mất nét trên màn DPR cao), giảm còn 255 màu
+rồi sinh luôn bảng `src/data/emoji.ts`:
 
 ```
 python3 scripts/gp_chat_emoji.py \
@@ -326,8 +327,11 @@ thị không đổi:
 python3 scripts/gp_chat_bubbles.py <giải nén apk>/assets/gameresources/resources/pack/chat
 ```
 
-Khung dùng kiểu 9 ô (`border-image`) nên co giãn theo độ dài tin nhắn: 4 góc giữ
-nguyên hình trang trí, cạnh và ruột kéo giãn. Ruột khung sáng tối khác nhau nên
+Khung dùng kiểu 9 ô (`border-image`). Lát cắt do script **dò tự động** và ghi ra
+`src/data/bubble-slices.json`: chiều dọc chỉ chừa một dải 4px ở chỗ ảnh phẳng
+nhất để co giãn (hoa văn trải gần hết chiều cao, lọt vào dải cạnh là bị kéo méo),
+chiều ngang cắt ~29% mỗi bên (hoa văn nằm ở hai đầu). Nhờ vậy mọi hoa văn nằm
+trọn trong 4 góc — luôn vẽ đúng cỡ, chỉ ruột trơn mới giãn theo tin nhắn. Ruột khung sáng tối khác nhau nên
 mỗi khung có sẵn `ink` (đo độ sáng vùng ruột ảnh): ruột sáng thì chữ nâu đen
 viền sáng, ruột tối thì chữ trắng viền tối — chữ không bị chìm vào khung. Bảng tên + giá + độ dày viền ở
 `src/data/bubbles.ts` (khung thường bán bằng xu, khung cầu kỳ từ `talk_53` trở đi
