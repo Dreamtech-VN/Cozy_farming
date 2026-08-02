@@ -368,6 +368,11 @@ img { image-rendering: auto; }
 .cw-row.me .cw-bubble.skin { border-radius: 0; min-width: 42px; }
 /* chữ nằm giữa khung (khung có hoa văn hai bên nên canh trái trông lệch) */
 .cw-bubble.skin { align-items: center; justify-content: center; text-align: center; }
+/* GunPow vẽ khung cho bong bóng bên TRÁI (đuôi + hoa văn ở phía trái), mà tin
+   của mình lại nằm bên phải -> lật gương cái khung, rồi lật ngược nội dung lại
+   cho chữ và emoji vẫn đúng chiều. */
+.cw-row.me .cw-bubble.skin { transform: scaleX(-1); flex-direction: row-reverse; }
+.cw-row.me .cw-bubble.skin > * { transform: scaleX(-1); }
 /* màu chữ theo nền khung — dùng chung cho bong bóng chat và ô xem trước ở shop:
    ruột tối -> chữ trắng viền tối; ruột sáng -> chữ nâu đen viền sáng */
 .skin { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .75), 0 0 3px rgba(0, 0, 0, .5); }
