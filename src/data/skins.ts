@@ -18,8 +18,10 @@ export interface SkinDef {
   gender: number;                 // 0 unisex, 1 nam, 2 nữ
   /** bộ ghép từ part Avatar — bỏ trống nếu skin dùng ảnh nguyên khối */
   parts: { hair?: number; shirt?: number; pant?: number; hat?: number; glasses?: number };
-  /** skin vẽ nguyên hình (Pack4): dải sprite thay cả nhân vật */
-  art?: { url: string; w: number; h: number; frames: number };
+  /** skin vẽ nguyên hình (Pack4): dải sprite thay cả nhân vật.
+   *  `url` là bản HD (gần cỡ vẽ gốc của Spine) dùng cho nhân vật trên map và
+   *  khung xem cận; `thumb` là bản nhẹ dùng cho lưới chọn skin. */
+  art?: { url: string; w: number; h: number; frames: number; thumb?: string };
   priceXu: number;
   rank?: SkinRank;
 }
@@ -45,14 +47,18 @@ export const SKINS: Record<string, SkinDef> = {};
 // ghép part Avatar mà thay nguyên hình nhân vật.
 import P4 from './skins-p4.json';
 
-const P4_SIZE = P4 as unknown as Record<string, [number, number, number]>;
+const P4_SIZE = P4 as unknown as Record<string, number[]>;
 const p4Ids = Object.keys(P4_SIZE).sort();
 p4Ids.forEach((sid, i) => {
   const [w, h, frames] = P4_SIZE[sid];
   // pack không kèm bảng tên nên đặt theo số thứ tự, giữ id gốc để tra ngược
   SKINS[`p4_${sid}`] = {
     id: `p4_${sid}`, name: `Ảo Hoá #${String(i + 1).padStart(2, '0')}`, gender: 0,
-    parts: {}, art: { url: `assets/skin/p4/${sid}.webp`, w, h, frames },
+    parts: {},
+    art: {
+      url: `assets/skin/p4hd/${sid}.webp`, w, h, frames,
+      thumb: `assets/skin/p4sm/${sid}.webp`
+    },
     priceXu: 0, rank: 'master'
   };
 });

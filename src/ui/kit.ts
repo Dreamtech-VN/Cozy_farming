@@ -127,11 +127,15 @@ export function btn(label: string, cls = '', onClick?: () => void): HTMLButtonEl
  * chứ không phải bề rộng ô, nên bước nhảy sai. transform: translateX(%) thì
  * tính theo chính bề rộng ảnh -> chia đều đúng số khung.
  */
-export function skinFrames(art: { url: string; w: number; h: number; frames: number }): HTMLElement {
+export function skinFrames(
+  art: { url: string; w: number; h: number; frames: number; thumb?: string },
+  small = false
+): HTMLElement {
   const box = h('div', 'skin-anim');
   box.style.aspectRatio = `${art.w} / ${art.h}`;
   const img = document.createElement('img');
-  img.src = art.url;
+  // ô nhỏ trong lưới dùng bản nhẹ, xem cận mới tải bản HD
+  img.src = (small && art.thumb) || art.url;
   img.draggable = false;
   img.style.animationDuration = `${(art.frames / 6).toFixed(2)}s`;
   img.style.animationTimingFunction = `steps(${art.frames})`;
@@ -479,7 +483,8 @@ export function charFace(look: import('@/data/chibi').ChibiLook | undefined, siz
   const art = skinArt(look.skin);
   if (art) {
     wrap.style.width = `${Math.round(size * art.w / art.h)}px`;
-    wrap.append(skinFrames(art));
+    // ô cỡ cố định (lưới chọn skin, hàng bạn bè...) chỉ cần bản nhẹ
+    wrap.append(skinFrames(art, size <= 160));
     return wrap;
   }
   for (const pid of lookLayers(look)) {

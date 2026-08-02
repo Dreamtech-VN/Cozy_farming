@@ -312,6 +312,23 @@ Web chạy dải bằng CSS `steps()` (`.emo` trong `ui.css`), world chạy bằ
 spritesheet Phaser nạp theo nhu cầu (`WorldScene.onEmote`). Bộ emoticon pixel
 16px cũ (`assets/char/emoticons.png`) đã bỏ hẳn.
 
+## Skin Ảo Hoá HD (`assets/skin/p4hd/` + `assets/skin/p4sm/`)
+
+Skin Pack4 là skeleton Spine vẽ nhân vật cao ~440px, trước đây `p4_strips.py`
+nướng xuống thân 165px nên mất gần 3 lần độ nét. Nay script nướng HAI cỡ:
+
+- `p4hd/<id>.webp` — khung 580px (thân 440px, gần bằng cỡ vẽ gốc): dùng cho
+  nhân vật trên map và khung xem cận (`charFaceFluid`).
+- `p4sm/<id>.webp` — khung 220px: dùng cho lưới chọn skin, mở tủ đồ khỏi phải
+  tải 57 file HD (`charFace` cỡ <= 160px tự lấy bản này).
+
+```
+python3 scripts/p4_strips.py <thư mục sbody đã giải nén> public/assets/skin/p4hd \
+    <file json danh sách id giữ lại> holdon src/data/skins-p4.json
+```
+
+`src/data/skins-p4.json` ghi `[rộng, cao, số khung, rộng bản nhẹ, cao bản nhẹ]`.
+
 ## Khung bong bóng chat (`assets/chat/bubble/`)
 
 32 khung bong bóng cắt từ atlas `resources/pack/chat/pack_chat_0.{pkm,plist}`
