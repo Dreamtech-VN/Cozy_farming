@@ -2763,7 +2763,7 @@ export function registerAllPanels() {
         const cell = h('div', `bub-cell ${S.chat.bubble === b.id ? 'on' : ''}`);
         const prev = h('div', 'bub-prev', 'Chào!');
         // khung xem trước nhỏ hơn trong chat một chút cho vừa ô
-        applyBubbleSkin(prev, b.id, 0.42);
+        applyBubbleSkin(prev, b.id, 0.21);
         cell.append(prev, h('div', 'bub-name', b.name));
         if (owned(b.id)) {
           cell.append(h('div', `bub-tag ${S.chat.bubble === b.id ? 'on' : ''}`,

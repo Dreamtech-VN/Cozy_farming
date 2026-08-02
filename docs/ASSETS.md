@@ -317,7 +317,10 @@ spritesheet Phaser nạp theo nhu cầu (`WorldScene.onEmote`). Bộ emoticon pi
 trong apk GunPow (các sprite `talk_XX.png`) bằng `scripts/gp_chat_bubbles.py`.
 Phần lớn khung là ẢNH ĐỘNG 2 khung hình — atlas để hai khung cách nhau 12 số
 (vd `talk_01` + `talk_13` là cùng mẫu mèo, khác mỗi cái đuôi) nên script lưu
-thành `<id>.png` + `<id>_b.png`, web đổi qua lại bằng `@keyframes`:
+thành `<id>.png` + `<id>_b.png`, web đổi qua lại bằng `@keyframes`. Ảnh gốc chỉ
+139x65 mà màn điện thoại DPR 2-3 phóng to lên nên nhìn mờ, vì vậy script **xuất
+sẵn bản 2x** (LANCZOS + unsharp); lát cắt trong `bubbles.ts` cũng x2 nên cỡ hiển
+thị không đổi:
 
 ```
 python3 scripts/gp_chat_bubbles.py <giải nén apk>/assets/gameresources/resources/pack/chat

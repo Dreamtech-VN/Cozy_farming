@@ -355,8 +355,8 @@ function ensureBubbleAnim(id: string) {
 }
 
 /** Đắp khung mua ở cửa hàng lên một bong bóng chat.
- *  `k` thu nhỏ viền so với ảnh gốc (khung gốc to hơn bong bóng chat). */
-export function applyBubbleSkin(el: HTMLElement, id: string, k = 0.55) {
+ *  `k` thu nhỏ viền so với ảnh (ảnh xuất 2x nên k quanh 0.27 là cỡ gốc/2). */
+export function applyBubbleSkin(el: HTMLElement, id: string, k = 0.275) {
   const b = BUBBLE_BY_ID[id];
   if (!b || b.id === 'b_default') return;
   const [t, r, bo, l] = b.slice;

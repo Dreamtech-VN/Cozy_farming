@@ -18,7 +18,7 @@ import os
 import plistlib
 import re
 
-from PIL import Image
+from PIL import Image, ImageFilter
 
 from pkm_to_png import load_rgba
 
@@ -89,10 +89,15 @@ def main():
         for suffix, key in (('', f1), ('_b', f2)):
             if not key:
                 continue
+            # Ảnh gốc chỉ 139x65 mà màn điện thoại DPR 2-3 nên trình duyệt phóng
+            # to lên -> khung nhìn mờ. Xuất sẵn bản 2x (LANCZOS + nét lại) cho đủ
+            # điểm ảnh; cỡ hiển thị không đổi vì lát cắt trong bubbles.ts cũng x2.
             im = cut(key)
+            im = im.resize((im.width * 2, im.height * 2), Image.LANCZOS)
+            im = im.filter(ImageFilter.UnsharpMask(radius=1.2, percent=60, threshold=2))
             im.quantize(colors=255, method=Image.FASTOCTREE).save(
                 os.path.join(a.out, f'{name}{suffix}.png'), optimize=True)
-        print(f'{f1}{"+" + f2 if f2 else ""} -> {name}  {cut(f1).size}')
+        print(f'{f1}{"+" + f2 if f2 else ""} -> {name}  {cut(f1).size} (xuất 2x)')
 
 
 if __name__ == '__main__':
