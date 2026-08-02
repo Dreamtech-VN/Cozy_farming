@@ -832,54 +832,61 @@ input.ui-input, select.ui-input {
   position: absolute; inset: 0; display: flex; flex-direction: column;
   align-items: center; justify-content: center;
 }
+/* Màn hình chỉ ngang (landscape lock) -> chiều CAO viewport mới là cái hay
+   bị chật (điện thoại ngang chỉ ~360-430px cao), nên toàn bộ chữ/khoảng
+   cách trong khung login/chọn-server co theo vh bằng clamp(), không dùng
+   px cứng nữa -> màn nhỏ không còn cảm giác chữ/nút bự quá khổ. */
 .login-box {
-  width: min(400px, 86vw); background: rgba(16, 20, 28, .86); border-radius: 10px;
-  overflow: hidden; box-shadow: 0 12px 40px rgba(0, 0, 0, .5); backdrop-filter: blur(2px);
+  width: min(400px, 86vw); max-height: 92vh; overflow-y: auto;
+  background: rgba(16, 20, 28, .86); border-radius: 10px;
+  overflow-x: hidden; box-shadow: 0 12px 40px rgba(0, 0, 0, .5); backdrop-filter: blur(2px);
 }
 .login-head {
-  padding: 14px 0 12px; text-align: center; color: #fff; font-size: 19px; font-weight: 800;
+  padding: clamp(8px, 2.6vh, 14px) 0 clamp(7px, 2.2vh, 12px); text-align: center; color: #fff;
+  font-size: clamp(13px, 3.4vh, 19px); font-weight: 800;
   border-bottom: 2px solid #4dabf7;
 }
-.login-body { display: flex; flex-direction: column; gap: 10px; padding: 20px 26px 14px; }
+.login-body { display: flex; flex-direction: column; gap: clamp(6px, 1.8vh, 10px); padding: clamp(10px, 3.4vh, 20px) clamp(14px, 4.5vw, 26px) clamp(8px, 2.4vh, 14px); }
 .lg-btn {
-  display: block; width: 100%; padding: 11px 0; border: 0; border-radius: 6px;
-  font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit;
+  display: block; width: 100%; padding: clamp(7px, 2vh, 11px) 0; border: 0; border-radius: 6px;
+  font-size: clamp(12px, 2.8vh, 15px); font-weight: 700; cursor: pointer; font-family: inherit;
 }
 .lg-btn:active { transform: scale(.97); }
 .lg-acc { background: linear-gradient(#f5a623, #e8890c); color: #fff; }
 .lg-google { background: #fff; color: #3c4043; }
 .gg-g { font-weight: 900; background: linear-gradient(90deg,#4285f4,#ea4335,#fbbc05,#34a853); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .lg-apple { background: #0b0b0d; color: #fff; }
-.lg-form { display: flex; flex-direction: column; gap: 8px; padding: 4px 2px; }
+.lg-form { display: flex; flex-direction: column; gap: clamp(5px, 1.4vh, 8px); padding: 4px 2px; }
 .lg-form .ui-input { width: 100%; }
-.lg-err { color: #ff8787; font-size: 12px; min-height: 14px; }
-.lg-note { text-align: center; color: #8b96a5; font-size: 11px; padding-top: 4px; }
+.lg-err { color: #ff8787; font-size: clamp(10px, 2vh, 12px); min-height: 14px; }
+.lg-note { text-align: center; color: #8b96a5; font-size: clamp(9px, 1.8vh, 11px); padding-top: 4px; }
 
 .lg-back {
   position: absolute; top: 12px; left: 12px; width: 44px; height: 40px; border: 0; border-radius: 8px;
   background: linear-gradient(#f5a623, #d97706); color: #fff; font-size: 20px; font-weight: 900; cursor: pointer;
   box-shadow: 0 3px 8px rgba(0,0,0,.4);
 }
-.server-box { display: flex; flex-direction: column; gap: 12px; align-items: center; width: min(430px, 88vw); }
-.sv-hello { color: #fff; font-size: 14px; font-weight: 700; text-shadow: 0 1px 3px #000; }
+.server-box { display: flex; flex-direction: column; gap: clamp(6px, 2vh, 12px); align-items: center; width: min(430px, 88vw); max-height: 92vh; }
+.sv-hello { color: #fff; font-size: clamp(11px, 2.4vh, 14px); font-weight: 700; text-shadow: 0 1px 3px #000; }
 .sv-row {
-  display: flex; align-items: center; gap: 10px; width: 100%; padding: 13px 18px; border-radius: 8px;
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: clamp(8px, 2.4vh, 13px) clamp(10px, 3vw, 18px); border-radius: 8px;
   background: rgba(16, 20, 28, .82); color: #fff; cursor: pointer; border: 1px solid rgba(255,255,255,.15);
 }
-.sv-row .sv-name { flex: 1; font-weight: 800; color: #51cf66; }
-.sv-change { color: #ffd43b; font-size: 13px; font-weight: 700; }
-.sv-dot { width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 6px currentColor; }
-.sv-list { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+.sv-row .sv-name { flex: 1; font-weight: 800; color: #51cf66; font-size: clamp(12px, 2.6vh, 15px); }
+.sv-change { color: #ffd43b; font-size: clamp(11px, 2.2vh, 13px); font-weight: 700; }
+.sv-dot { width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 6px currentColor; flex: none; }
+.sv-list { display: flex; flex-direction: column; gap: 6px; width: 100%; max-height: 40vh; overflow-y: auto; }
 .sv-item {
-  display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 8px;
+  display: flex; align-items: center; gap: 10px; padding: clamp(6px, 1.8vh, 10px) clamp(10px, 3vw, 18px); border-radius: 8px;
   background: rgba(16, 20, 28, .75); color: #fff; cursor: pointer; border: 1px solid transparent;
+  font-size: clamp(11px, 2.2vh, 13px);
 }
 .sv-item.active { border-color: #ffd43b; }
 .sv-item .sv-name { flex: 1; font-weight: 700; }
-.sv-tag { font-size: 12px; font-weight: 700; }
+.sv-tag { font-size: clamp(10px, 2vh, 12px); font-weight: 700; }
 .lg-start {
-  margin-top: 6px; padding: 13px 64px; border: 0; border-radius: 12px; cursor: pointer;
-  font-size: 24px; font-weight: 900; color: #fff; font-family: inherit;
+  margin-top: 6px; padding: clamp(8px, 2.4vh, 13px) clamp(28px, 10vw, 64px); border: 0; border-radius: 12px; cursor: pointer;
+  font-size: clamp(15px, 4.2vh, 24px); font-weight: 900; color: #fff; font-family: inherit;
   background: linear-gradient(#7ae582, #2f9e44); box-shadow: 0 5px 0 #1f7a33, 0 8px 18px rgba(0,0,0,.45);
   text-shadow: 0 2px 3px rgba(0,0,0,.35);
 }
@@ -887,7 +894,7 @@ input.ui-input, select.ui-input {
 
 /* ===== Nút đăng nhập chuẩn Google / Apple + popup chọn máy chủ ===== */
 .lg-btn { display: flex; align-items: center; justify-content: center; gap: 10px; }
-.lg-logo { width: 18px; height: 18px; flex: none; }
+.lg-logo { width: clamp(15px, 3vh, 18px); height: clamp(15px, 3vh, 18px); flex: none; }
 .lg-google { background: #fff; color: #1f1f1f; border: 1px solid #747775; font-weight: 600; }
 .lg-apple { background: #000; color: #fff; font-weight: 600; }
 
@@ -902,7 +909,7 @@ input.ui-input, select.ui-input {
 }
 .sv-pop-head {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 14px; color: #fff; font-size: 16px; font-weight: 800;
+  padding: clamp(7px, 2vh, 10px) 14px; color: #fff; font-size: clamp(13px, 2.8vh, 16px); font-weight: 800;
   border-bottom: 2px solid #4dabf7;
 }
 .sv-pop-body { flex: 1; display: flex; min-height: 0; }
@@ -911,11 +918,11 @@ input.ui-input, select.ui-input {
   padding: 10px 8px; background: rgba(0, 0, 0, .35); overflow-y: auto;
 }
 .sv-tab {
-  padding: 9px 10px; border-radius: 8px; cursor: pointer; color: #cfd6df;
+  padding: clamp(6px, 1.8vh, 9px) 10px; border-radius: 8px; cursor: pointer; color: #cfd6df;
   border: 1px solid transparent; display: flex; flex-direction: column; gap: 2px;
 }
-.sv-tab b { font-size: 14px; }
-.sv-tab span { font-size: 11px; color: #8b96a5; }
+.sv-tab b { font-size: clamp(12px, 2.4vh, 14px); }
+.sv-tab span { font-size: clamp(10px, 1.8vh, 11px); color: #8b96a5; }
 .sv-tab.active { background: rgba(77, 171, 247, .18); border-color: #4dabf7; color: #fff; }
 .sv-tab.active span { color: #74c0fc; }
 .sv-grid {
@@ -923,15 +930,15 @@ input.ui-input, select.ui-input {
   align-content: start; padding: 10px; overflow-y: auto;
 }
 .sv-cell {
-  display: flex; align-items: center; gap: 8px; padding: 9px 10px; border-radius: 8px;
+  display: flex; align-items: center; gap: 8px; padding: clamp(6px, 1.6vh, 9px) 10px; border-radius: 8px;
   background: rgba(255, 255, 255, .06); color: #fff; cursor: pointer; border: 1px solid transparent;
-  font-size: 13px; min-height: 38px;
+  font-size: clamp(11px, 2.2vh, 13px); min-height: 38px;
 }
 .sv-cell:hover { background: rgba(255, 255, 255, .18); }
 .sv-cell.active { border-color: #ffd43b; background: rgba(255, 212, 59, .12); }
 .sv-cell .sv-name { flex: 1; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.sv-cell .sv-tag { font-size: 11px; font-weight: 700; }
-.lg-ok { text-align: center; color: #69db7c; font-size: 13px; font-weight: 700; }
+.sv-cell .sv-tag { font-size: clamp(9px, 1.8vh, 11px); font-weight: 700; }
+.lg-ok { text-align: center; color: #69db7c; font-size: clamp(11px, 2.2vh, 13px); font-weight: 700; }
 
 /* ===== Chip tạo nhân vật: icon + tên thẳng hàng ===== */
 .chip.cc-chip { display: inline-flex; align-items: center; gap: 7px; min-height: 42px; padding-top: 4px; padding-bottom: 6px; }
