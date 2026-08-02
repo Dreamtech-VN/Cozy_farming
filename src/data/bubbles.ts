@@ -16,8 +16,10 @@ export interface BubbleDef {
   slice: [number, number, number, number];  // trên, phải, dưới, trái (px trên ảnh gốc)
 }
 
-const S1: [number, number, number, number] = [22, 30, 22, 30];   // khung 139x65
-const S2: [number, number, number, number] = [24, 52, 24, 52];   // khung 170x70 (đầu nhọn)
+// Lát cắt để 4 GÓC ôm trọn phần hoa văn hai đầu khung: góc vẽ đúng cỡ, không
+// bị kéo giãn — chỉ dải giữa (nền trơn) mới giãn theo độ dài tin nhắn.
+const S1: [number, number, number, number] = [26, 40, 26, 40];   // khung 139x65
+const S2: [number, number, number, number] = [28, 58, 28, 58];   // khung 170x70 (đầu nhọn)
 
 export const BUBBLES: BubbleDef[] = [
   { id: 'b_default', name: 'Mặc định', price: 0, cur: 'xu', slice: [0, 0, 0, 0] },
