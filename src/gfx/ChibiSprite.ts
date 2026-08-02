@@ -98,10 +98,14 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
     // đặt ngang tầm tay, hơi lệch sang phải; lật theo hướng nhân vật.
     // Icon nông cụ vẽ chéo, cán cầm nằm ở góc dưới-trái — neo origin ở đó
     // (thay vì tâm ảnh) để chỗ tay nắm đúng vào vị trí tay, không trôi lên mặt.
-    const img = this.scene.add.image(11, -11, key).setOrigin(0.32, 0.8).setScale(0.34);
+    // Nhân vật cao 84px neo GÓC CHÂN (y=0 ở chân) -> tay ở khoảng nửa thân
+    // trên, tức y ~ -40, không phải -11 (chỗ đó chỉ ngang đầu gối, nhìn như
+    // nông cụ rời khỏi tay, lơ lửng cạnh chân).
+    const TX = 13, TY = -27;
+    const img = this.scene.add.image(TX, TY, key).setOrigin(0.32, 0.8).setScale(0.34);
     this.add(img);
     img.setFlipX(this.facingLeft);
-    if (this.facingLeft) img.x = -11;
+    if (this.facingLeft) img.x = -TX;
     this.toolImg = img;
   }
 
