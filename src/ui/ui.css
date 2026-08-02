@@ -940,6 +940,107 @@ input.ui-input, select.ui-input {
 .sv-cell .sv-tag { font-size: clamp(9px, 1.8vh, 11px); font-weight: 700; }
 .lg-ok { text-align: center; color: #69db7c; font-size: clamp(11px, 2.2vh, 13px); font-weight: 700; }
 
+/* ===== Cổng vào game: nút Vào game + tích điều khoản + cụm icon góc phải ===== */
+.gate-icons {
+  position: absolute; top: max(10px, env(safe-area-inset-top, 0px)); right: max(10px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: clamp(6px, 1.4vh, 10px); z-index: 5;
+}
+.gate-icon-btn {
+  width: clamp(30px, 6.5vh, 40px); height: clamp(30px, 6.5vh, 40px); border-radius: 50%; border: 1px solid rgba(255,255,255,.25);
+  background: rgba(16, 20, 28, .68); cursor: pointer; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,.35);
+}
+.gate-icon-btn svg { width: 52%; height: 52%; }
+.gate-icon-btn:active { transform: scale(.92); }
+
+.gate-box {
+  display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 2vh, 14px);
+  margin-bottom: clamp(18px, 6vh, 44px);
+}
+.gate-start {
+  padding: clamp(10px, 2.6vh, 15px) clamp(50px, 13vw, 80px); border: 0; border-radius: 999px; cursor: pointer;
+  font-size: clamp(16px, 4vh, 23px); font-weight: 900; color: #fff; font-family: inherit; letter-spacing: 1px;
+  background: linear-gradient(#7ae582, #2f9e44); box-shadow: 0 5px 0 #1f7a33, 0 10px 22px rgba(0,0,0,.5);
+  text-shadow: 0 2px 3px rgba(0,0,0,.35);
+}
+.gate-start:active { transform: translateY(3px); box-shadow: 0 2px 0 #1f7a33; }
+.gate-tos { display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,.4); padding: 6px 14px; border-radius: 999px; }
+.gate-check {
+  width: clamp(16px, 3vh, 20px); height: clamp(16px, 3vh, 20px); border-radius: 50%; border: 2px solid #fff; background: transparent;
+  cursor: pointer; flex: none; position: relative;
+}
+.gate-check.on { background: #51cf66; border-color: #51cf66; }
+.gate-check.on::after {
+  content: ''; position: absolute; left: 50%; top: 46%; width: 32%; height: 55%; transform: translate(-50%, -55%) rotate(45deg);
+  border-right: 2px solid #fff; border-bottom: 2px solid #fff;
+}
+.gate-check.shake { animation: gate-shake .4s; border-color: #ff8787; }
+@keyframes gate-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+.gate-tos-label { color: #fff; font-size: clamp(10px, 2vh, 12px); text-shadow: 0 1px 2px #000; }
+.gate-tos-link, a.gate-tos-link { color: #74c0fc; text-decoration: underline; }
+
+/* ===== Popup thông báo ===== */
+.notice-pop { height: min(320px, 70vh); }
+.notice-body { flex: 1; overflow-y: auto; padding: 10px 14px; display: flex; flex-direction: column; gap: 10px; }
+.notice-item { background: rgba(255,255,255,.06); border-radius: 8px; padding: 10px 12px; }
+.notice-title { color: #ffd43b; font-weight: 800; font-size: 13px; margin-bottom: 4px; }
+.notice-text { color: #cfd6df; font-size: 12px; line-height: 1.4; }
+
+/* ===== Màn đăng nhập kiểu thẻ ấm (theo mẫu thiết kế) ===== */
+.login-box2 {
+  background: linear-gradient(#fffaf0, #fdf1dc); border: 3px solid #f2ddb0; color: #6b4a2b;
+  padding-bottom: clamp(10px, 2vh, 16px);
+}
+.login-head2 {
+  text-align: center; padding: clamp(12px, 3vh, 18px) 14px 2px; font-weight: 900; color: #4a7c2f;
+  font-size: clamp(15px, 3.4vh, 20px);
+}
+.lg-arrow { color: #7cc25b; }
+.lg-sub { text-align: center; color: #9c8060; font-size: clamp(10px, 2vh, 12px); padding-bottom: clamp(8px, 2vh, 12px); }
+.login-box2 .login-body { padding: 0 clamp(16px, 4.5vw, 26px) clamp(6px, 1.6vh, 10px); gap: clamp(8px, 1.8vh, 12px); }
+
+.lg-inputwrap {
+  display: flex; align-items: center; gap: 8px; background: #fff; border: 2px solid #e8d3a8; border-radius: 999px;
+  padding: 0 clamp(10px, 2.6vw, 14px); height: clamp(34px, 6.6vh, 44px);
+}
+.lg-inputwrap svg { width: clamp(14px, 2.8vh, 18px); height: clamp(14px, 2.8vh, 18px); flex: none; }
+.lg-inputwrap svg path { fill: #c9a876; }
+.lg-inputwrap .ui-input {
+  border: 0; background: transparent; padding: 0; color: #5a4020; font-size: clamp(12px, 2.4vh, 14px);
+}
+.lg-eye {
+  border: 0; background: transparent; cursor: pointer; color: #c9a876; flex: none;
+  width: clamp(16px, 3vh, 20px); height: clamp(16px, 3vh, 20px); padding: 0;
+}
+.lg-forgot-row { display: flex; justify-content: flex-end; margin-top: -4px; }
+.lg-forgot, a.lg-forgot { color: #4a9e3a; font-size: clamp(10px, 2vh, 12px); font-weight: 700; text-decoration: none; }
+
+.lg-start-btn {
+  border: 0; border-radius: 999px; cursor: pointer; font-family: inherit; font-weight: 900; letter-spacing: 1px;
+  color: #fff; padding: clamp(9px, 2.2vh, 12px) 0; font-size: clamp(13px, 2.6vh, 15px);
+  background: linear-gradient(#f8b64c, #e8890c); box-shadow: 0 4px 0 #c96f05, 0 6px 14px rgba(0,0,0,.25);
+}
+.lg-start-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #c96f05; }
+
+.lg-or { display: flex; align-items: center; gap: 10px; color: #b39568; font-size: clamp(10px, 2vh, 12px); font-weight: 800; }
+.lg-or span { flex: 1; height: 1px; background: #e8d3a8; }
+
+.lg-social-row { display: flex; justify-content: center; gap: clamp(8px, 2vw, 14px); }
+.lg-social-btn {
+  width: clamp(34px, 7vh, 46px); height: clamp(34px, 7vh, 46px); border-radius: 12px; border: 1px solid rgba(0,0,0,.08);
+  cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,.15);
+}
+.lg-social-btn svg { width: 52%; height: 52%; }
+.lg-social-btn:active { transform: scale(.93); }
+.lg-s-google { background: #fff; }
+.lg-s-fb { background: #1877f2; }
+.lg-s-apple { background: #000; }
+.lg-s-guest { background: linear-gradient(#4dabf7, #3b82c4); }
+
+.login-box2 .lg-note { padding-top: 2px; color: #9c8060; }
+.login-box2 .lg-note .gate-tos-link { color: #4a9e3a; font-weight: 700; }
+.login-box2 .lg-err { min-height: 12px; }
+
 /* ===== Chip tạo nhân vật: icon + tên thẳng hàng ===== */
 .chip.cc-chip { display: inline-flex; align-items: center; gap: 7px; min-height: 42px; padding-top: 4px; padding-bottom: 6px; }
 .chip.cc-chip .spr { flex: none; }

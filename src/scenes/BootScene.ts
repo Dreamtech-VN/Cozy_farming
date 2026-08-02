@@ -10,8 +10,8 @@ export class BootScene extends Phaser.Scene {
   constructor() { super('Boot'); }
 
   preload() {
-    this.load.image('title_bg', 'assets/ui/title_bg.jpg');   // key art Sunny Town (đã có logo + nhân vật)
-    this.load.image('age12', 'assets/ui/age12.png');   // nhãn 12+ gốc Avatar, cần sẵn ở màn title
+    // key art Dreamtech Studio: đã có sẵn badge 12+, cảnh báo sức khỏe, bản quyền
+    this.load.image('title_bg', 'assets/ui/title_bg.jpg');
     this.load.on('complete', () => { this.ready = true; this.tryNext(); });
   }
 
