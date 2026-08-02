@@ -42,4 +42,24 @@ document.addEventListener('dblclick', () => {
   if (!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {});
 });
 
+// ---- Chặn zoom + ép canvas fit đúng khi xoay màn hình ----
+// touch-action:none (ui.css) chặn được đa số, nhưng Safari còn bắn riêng
+// gesturestart/gesturechange khi 2 ngón chụm/xoè -> chặn thêm ở đây, không
+// thì trang bị phóng to/thu nhỏ và canvas EXPAND lệch cỡ theo layout viewport.
+document.addEventListener('gesturestart', (e) => e.preventDefault());
+document.addEventListener('gesturechange', (e) => e.preventDefault());
+// chụm 2 ngón trên một số Android vẫn lọt qua touch-action -> chặn luôn ở
+// mức touchmove khi có từ 2 điểm chạm trở lên.
+document.addEventListener('touchmove', (e) => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+
+// Sau khi xoay màn hình, innerWidth/innerHeight của trình duyệt có độ trễ
+// (đọc ra kích thước CŨ trong vài trăm ms đầu) nên EXPAND tính sai cỡ canvas
+// một nhịp rồi mới đúng -> chủ động refresh vài lần sau khi xoay/resize để
+// canvas luôn khớp kích thước thật, không bị kẹt cỡ cũ.
+function refreshScale() {
+  for (const t of [0, 120, 320, 600]) setTimeout(() => game.scale.refresh(), t);
+}
+window.addEventListener('orientationchange', refreshScale);
+window.visualViewport?.addEventListener('resize', refreshScale);
+
 export default game;
