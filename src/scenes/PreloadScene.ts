@@ -152,17 +152,14 @@ export class PreloadScene extends Phaser.Scene {
     this.tweens.add({ targets: bg, scale: cover * 1.03, duration: 11000, yoyo: true, repeat: -1, ease: 'sine.inout' });
     this.add.rectangle(0, 0, W, H, 0x0a1220, 0.12).setOrigin(0);
 
-    // logo chữ "Sunny Town" — dựng bằng text, viền đen dày + khung kính nhẹ
-    // phía sau cho nổi rõ trên nền trời sáng (trước viền trắng mảnh quá mờ).
-    const logoX = 16 * RES, logoY = 12 * RES;
-    this.add.graphics().fillStyle(0x000000, 0.32)
-      .fillRoundedRect(logoX - 8 * RES, logoY - 6 * RES, 106 * RES, 56 * RES, 10 * RES);
-    this.add.text(logoX, logoY, 'Sunny', {
-      fontFamily: 'Verdana, Arial, sans-serif', fontSize: `${24 * RES}px`, fontStyle: 'bold', color: '#ffd43b'
-    }).setOrigin(0, 0).setStroke('#3d2a00', 5 * RES).setShadow(0, 2, '#000000', 2, true, true);
-    this.add.text(logoX, logoY + 22 * RES, 'Town', {
-      fontFamily: 'Verdana, Arial, sans-serif', fontSize: `${24 * RES}px`, fontStyle: 'bold', color: '#8ce99a'
-    }).setOrigin(0, 0).setStroke('#0d3d1a', 5 * RES).setShadow(0, 2, '#000000', 2, true, true);
+    // logo chữ "Sunny Town" thật (ảnh wordmark thật, nền đã tách trong suốt)
+    // — góc trái trên, cao cố định rồi co ngang theo đúng tỉ lệ ảnh gốc.
+    if (this.textures.exists('sunny_logo')) {
+      const logoH = 50 * RES;
+      const src = this.textures.get('sunny_logo').getSourceImage();
+      const logoW = logoH * (src.width / src.height);
+      this.add.image(14 * RES, 10 * RES, 'sunny_logo').setOrigin(0, 0).setDisplaySize(logoW, logoH);
+    }
 
     // Key art gốc đã được xoá sạch badge 12+ + dòng bản quyền AI vẽ sẵn
     // (public/assets/ui/title_bg.jpg đã inpaint lại) -> giờ vẽ đè badge 12+
