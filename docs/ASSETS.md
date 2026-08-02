@@ -454,6 +454,30 @@ Format được dịch ngược từ client (AvatarData.cs) + bảng `items` tro
 ⚠️ Cùng lưu ý bản quyền như các asset Lttt khác — dev/test OK, thương mại phải thay.
 Bộ nhân vật pixel Cozy (Character v2) vẫn còn trong repo nhưng không dùng nữa.
 
+### Màn tạo nhân vật — đúng theo `RegisterScr.cs` gốc
+
+Giải nén lại TOÀN BỘ source Unity từ release Pack5 (204 file .cs, trước chỉ lấy
+vài file lẻ) và đọc `RegisterScr.cs` — script tạo nhân vật DUY NHẤT trong
+project gốc. Kết luận:
+
+- Chỉ có **giới tính + tóc + áo + quần**, KHÔNG có hàng chọn màu mắt (mắt cố
+  định = part id 4, `EYES_ID` trong `chibi.ts`) và KHÔNG có "đồ cầm tay/công
+  cụ" nào ở màn này (project gốc không có khái niệm đó lúc tạo nhân vật).
+- Bộ lọc đúng theo `getAvatarPart()`: chỉ lấy part `level == 0` (không yêu cầu
+  cấp) của đúng giới tính; đồ sự kiện có hạn `"(N ngày)"` không đủ điều kiện.
+  Sắp theo id tăng dần (id nhỏ nhất = đồ đời đầu: sơ mi/short, siêu nhân, thợ
+  săn, quý tộc, comple lịch lãm, sành điệu, võ sĩ, hiệp sĩ...) rồi lấy N item
+  đầu — đúng 5 tóc / 9 áo / 9 quần mỗi giới như trên game thật (xác nhận với
+  chủ dự án, không suy đoán). Hàm `registerList()` trong `chibi.ts` thay cho
+  `simplestList()` cũ (vốn lọc theo giá rẻ chứ không phải `level==0`, ra sai
+  số lượng và lẫn cả đồ sự kiện).
+- `RegisterScr.cs` gốc (J2ME cũ) thực ra chỉ cho đảo qua lại ĐÚNG 2 tổ hợp
+  tóc+áo+quần cùng lúc bằng phím trái/phải (không chọn riêng từng loại) — đây
+  rõ ràng là giao diện bàn phím thời J2ME, KHÔNG phải trải nghiệm game thật
+  hiện tại (chạm màn hình, 3 hàng riêng). Giữ nguyên 3 hàng chọn riêng
+  (trải nghiệm tốt hơn cho cảm ứng), chỉ sửa đúng SỐ LƯỢNG + BỘ LỌC theo dữ
+  liệu thật, không theo máy móc cơ chế bàn phím cũ.
+
 ## Cần câu (`assets/fishing/`)
 
 Ba bậc cần trong game lấy đúng theo bảng `items` của server Lttt: **cần câu tre**

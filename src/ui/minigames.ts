@@ -311,7 +311,7 @@ export function registerMinigames() {
 // ===== Form tạo nhân vật chibi =====
 import { bus, EV } from '@/core/events';
 import { chibiPreview, charFace, charHeadOnly } from './kit';
-import { defaultLook, simplestList, chibiList, FACE } from '@/data/chibi';
+import { defaultLook, registerList } from '@/data/chibi';
 
 function buildCharCreate(body: HTMLElement, done: () => void) {
   if (!S.player.chibi) S.player.chibi = defaultLook(1);
@@ -355,8 +355,12 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
     set: (id: number) => void;
   }
 
-  const opts = (z: number, n = 8) =>
-    () => simplestList(z, look.gender, n).map(p => ({ id: p.id, name: p.name }));
+  // ĐÚNG màn RegisterScr gốc: chỉ giới tính + tóc(5) + áo(9) + quần(9), không
+  // có hàng chọn màu mắt (RegisterScr.cs gốc cố định mắt = part 4, không cho
+  // đổi lúc tạo nhân vật) và không có "đồ cầm tay/công cụ" (project gốc không
+  // có khái niệm này ở màn tạo nhân vật).
+  const opts = (z: number, n: number) =>
+    () => registerList(z, look.gender, n).map(p => ({ id: p.id, name: p.name }));
 
   const ROWS: RowDef[] = [
     {
@@ -368,17 +372,9 @@ function buildCharCreate(body: HTMLElement, done: () => void) {
         S.player.gender = id === 2 ? 'female' : 'male';
       }
     },
-    { label: 'Kiểu tóc', options: opts(50), get: () => look.hair, set: id => { look.hair = id; } },
-    {
-      label: 'Màu mắt',
-      options: () => chibiList(40, look.gender)
-        .filter(p => p.level === 0 && p.gold <= 0 && !/^mat\s/i.test(p.name))
-        .slice(0, 8).map(p => ({ id: p.id, name: p.name })),
-      get: () => look.eyes,
-      set: id => { look.eyes = id; }
-    },
-    { label: 'Áo', options: opts(20), get: () => look.shirt, set: id => { look.shirt = id; } },
-    { label: 'Quần', options: opts(10), get: () => look.pant, set: id => { look.pant = id; } }
+    { label: 'Kiểu tóc', options: opts(50, 5), get: () => look.hair, set: id => { look.hair = id; } },
+    { label: 'Áo', options: opts(20, 9), get: () => look.shirt, set: id => { look.shirt = id; } },
+    { label: 'Quần', options: opts(10, 9), get: () => look.pant, set: id => { look.pant = id; } }
   ];
 
   let activeRow = 0;
