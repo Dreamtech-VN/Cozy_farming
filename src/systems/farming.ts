@@ -14,18 +14,21 @@ import type { Plot } from '@/core/types';
 export const BLOCK_COLS = 3;
 export const BLOCK_ROWS = 4;
 export const BLOCKS = 4;
-export const BLOCK_GAP_COLS = 1;   // 1 cột trống ngăn cách các khối cho rõ ràng
+// Ngăn cách giữa 2 khối: chỉ chừa một rãnh nhỏ (px) chứ KHÔNG bỏ trống hẳn một
+// cột đất — chừa cả cột thì nhìn 4 khối rời rạc, ruộng trông thưa thớt.
+export const BLOCK_GAP_PX = 10;
 export const MAX_PLOTS = BLOCK_COLS * BLOCK_ROWS * BLOCKS;
 export const PLOT_PRICE_BASE = 200;      // giá mua thêm 1 ô đất, tăng dần
 
-/** Vị trí lưới (cột, hàng) của ô đất thứ i — điền theo cột trong từng khối, khối cách nhau 1 cột trống. */
-export function plotColRow(i: number): { col: number; row: number } {
+/** Vị trí lưới của ô đất thứ i — điền theo cột trong từng khối.
+ *  `col` đếm liền mạch qua các khối, `block` để cộng thêm rãnh ngăn cách. */
+export function plotColRow(i: number): { col: number; row: number; block: number } {
   const perBlock = BLOCK_COLS * BLOCK_ROWS;
   const b = Math.floor(i / perBlock);
   const j = i % perBlock;
   const localCol = Math.floor(j / BLOCK_ROWS);
   const row = j % BLOCK_ROWS;
-  return { col: b * (BLOCK_COLS + BLOCK_GAP_COLS) + localCol, row };
+  return { col: b * BLOCK_COLS + localCol, row, block: b };
 }
 
 // Thứ tự mở khóa: lần lượt hết khối này tới khối kia, mỗi khối tự lan theo

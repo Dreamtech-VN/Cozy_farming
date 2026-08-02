@@ -63,6 +63,18 @@ PICK: dict[str, tuple[str, str | None]] = {
     'b_galaxy': ('talk_89', None),
     'b_phoenix': ('talk_90', None),
     'b_meteor': ('talk_91', None),
+    # ---- khung lễ hội / còn lại trong atlas (bán bằng xu) ----
+    'b_tet_open': ('talk_hb_1', None),
+    'b_tet_tiger': ('talk_hb_2', None),
+    'b_tet_star': ('talk_hb_3', None),
+    'b_tet_rich': ('talk_hb_5', None),
+    'b_tet_blessing': ('talk_hb_6', None),
+    'b_tet_dragon': ('talk_hb_7', None),
+    'b_tet_gold': ('talk_hb_8', None),
+    'b_ink': ('talk_85', None),
+    'b_lantern': ('talk_96', None),
+    'b_soccer': ('talk_102', None),
+    'b_plain_frame': ('talk_xz', None),
 }
 
 

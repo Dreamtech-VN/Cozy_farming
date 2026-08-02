@@ -59,7 +59,20 @@ export const BUBBLES: BubbleDef[] = [
   { id: 'b_aurora', name: 'Cực quang', price: 300, cur: 'ruby', ink: 'light' },
   { id: 'b_galaxy', name: 'Ngân hà', price: 350, cur: 'ruby', ink: 'light' },
   { id: 'b_phoenix', name: 'Phượng hoàng', price: 400, cur: 'ruby', ink: 'light' },
-  { id: 'b_meteor', name: 'Sao băng', price: 500, cur: 'ruby', ink: 'light' }
+  { id: 'b_meteor', name: 'Sao băng', price: 500, cur: 'ruby', ink: 'light' },
+
+  // ---- khung lễ hội / còn lại trong atlas (bán bằng xu) ----
+  { id: 'b_plain_frame', name: 'Khung giấy', price: 1500, cur: 'xu', ink: 'light' },
+  { id: 'b_ink', name: 'Mực tàu', price: 12000, cur: 'xu', ink: 'light' },
+  { id: 'b_tet_open', name: 'Khai xuân', price: 9000, cur: 'xu', ink: 'light' },
+  { id: 'b_tet_tiger', name: 'Hổ vàng', price: 9000, cur: 'xu', ink: 'light' },
+  { id: 'b_tet_star', name: 'Sao đỏ', price: 9000, cur: 'xu', ink: 'light' },
+  { id: 'b_tet_rich', name: 'Thần tài', price: 12000, cur: 'xu', ink: 'light' },
+  { id: 'b_tet_blessing', name: 'Phúc lộc', price: 12000, cur: 'xu', ink: 'light' },
+  { id: 'b_tet_dragon', name: 'Rồng vàng', price: 15000, cur: 'xu', ink: 'light' },
+  { id: 'b_tet_gold', name: 'Thỏi vàng', price: 15000, cur: 'xu', ink: 'light' },
+  { id: 'b_lantern', name: 'Đèn lồng', price: 18000, cur: 'xu', ink: 'dark' },
+  { id: 'b_soccer', name: 'Sân cỏ', price: 10000, cur: 'xu', ink: 'light' }
 ];
 
 export const BUBBLE_BY_ID: Record<string, BubbleDef> =
