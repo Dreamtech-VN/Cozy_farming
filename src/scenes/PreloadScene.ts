@@ -8,6 +8,7 @@ import { RES } from '@/core/res';
 import { GAME_VERSION, resFresh, markResLoaded } from '@/core/version';
 import { showLoginFlow } from '@/ui/login';
 import { showLoading } from '@/ui/loading';
+import { preloadAll, preloadTotalBytes, mb } from '@/core/preload';
 
 export class PreloadScene extends Phaser.Scene {
 
@@ -132,6 +133,19 @@ export class PreloadScene extends Phaser.Scene {
 
     // key art đã vẽ sẵn logo + 2 nhân vật nên không dựng linh vật chibi nữa
 
+    // Tải HẾT tài nguyên còn lại rồi mới mở khung đăng nhập: vào game là chạy
+    // mượt, không phải chờ tải lắt nhắt từng bảng nữa.
+    void preloadAll(p => this.onAssetProgress?.(p.bytes / p.totalBytes, p.bytes))
+      .then(() => {
+        this.onAssetDone?.();
+        this.startLogin(hasChar);
+      });
+  }
+
+  private onAssetProgress?: (frac: number, loadedBytes: number) => void;
+  private onAssetDone?: () => void;
+
+  private startLogin(hasChar: boolean) {
     // khung đăng nhập -> chọn máy chủ -> Bắt đầu
     showLoginFlow(() => {
       if (hasChar) showLoading();   // vào thẳng game -> che bằng key art trong lúc dựng cảnh
@@ -206,16 +220,30 @@ export class PreloadScene extends Phaser.Scene {
       const lbl = this.add.text(W / 2, barY - 24 * RES, 'Đang tải tài nguyên... 0%', {
         fontFamily: 'sans-serif', fontSize: `${13 * RES}px`, color: '#fff'
       }).setOrigin(0.5).setShadow(0, 2, '#000', 3);
+      // Phaser nạp sprite của cảnh chiếm 30% thanh, 70% còn lại là kéo TOÀN BỘ
+      // tài nguyên còn lại (ảnh DOM, skin, nhạc...) về cache — xem core/preload.ts
+      const setBar = (v: number, text: string) => {
+        bar.width = 4 + (barW - 4) * Math.max(0, Math.min(1, v));
+        lbl.setText(text);
+      };
       this.load.on('progress', (v: number) => {
-        bar.width = 4 + (barW - 4) * v;
-        lbl.setText(`Đang tải tài nguyên... ${Math.round(v * 100)}%`);
+        setBar(v * 0.3, `Đang tải tài nguyên... ${Math.round(v * 30)}%`);
       });
-      this.load.on('complete', () => { bar.destroy(); lbl.destroy(); barBg.destroy(); });
+      this.load.on('complete', () => {
+        setBar(0.3, 'Đang tải tài nguyên... 30%');
+      });
+      this.onAssetProgress = (frac, loaded) => {
+        setBar(0.3 + frac * 0.7, `Đang tải tài nguyên... ${Math.round(30 + frac * 70)}%`
+          + `  (${mb(loaded)}/${mb(preloadTotalBytes)}MB)`);
+      };
+      this.onAssetDone = () => { bar.destroy(); lbl.destroy(); barBg.destroy(); };
     } else {
+      // đã tải lần trước: tài nguyên nằm sẵn trong cache nên chỉ hiện dòng nhỏ
       const lbl = this.add.text(W / 2, H * 0.86, 'Đang kiểm tra tài nguyên...', {
         fontFamily: 'sans-serif', fontSize: `${11 * RES}px`, color: '#ffffffcc'
       }).setOrigin(0.5).setShadow(0, 2, '#000', 3);
-      this.load.on('complete', () => lbl.destroy());
+      this.onAssetProgress = frac => lbl.setText(`Đang kiểm tra tài nguyên... ${Math.round(frac * 100)}%`);
+      this.onAssetDone = () => lbl.destroy();
     }
   }
 

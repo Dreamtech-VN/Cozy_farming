@@ -9,6 +9,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
+    "assets:manifest": "python3 scripts/make_preload_manifest.py",
     "electron": "npm run build && electron electron/main.cjs",
     "cap:add:android": "npm run build && npx cap add android && npx cap sync",
     "cap:add:ios": "npm run build && npx cap add ios && npx cap sync",

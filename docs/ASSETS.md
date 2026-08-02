@@ -329,6 +329,18 @@ python3 scripts/p4_strips.py <thư mục sbody đã giải nén> public/assets/s
 
 `src/data/skins-p4.json` ghi `[rộng, cao, số khung, rộng bản nhẹ, cao bản nhẹ]`.
 
+## Tải hết tài nguyên ở màn chờ
+
+`scripts/make_preload_manifest.py` (hoặc `npm run assets:manifest`) quét
+`public/assets`, bỏ mấy file chỉ dùng làm nguồn cắt rồi ghi
+`src/data/preload-manifest.json` ([đường dẫn, số byte], ~41MB / 1078 file).
+Màn chờ chạy `preloadAll()` trong `src/core/preload.ts`: kéo sạch danh sách này
+về cache trình duyệt (8 file một lúc) rồi mới mở khung đăng nhập — vào game là
+chạy mượt, không còn cảnh mở bảng nào mới tải ảnh bảng đó.
+
+**Thêm/đổi asset thì nhớ chạy lại script này**, không thì file mới không nằm
+trong danh sách tải trước.
+
 ## Khung bong bóng chat (`assets/chat/bubble/`)
 
 32 khung bong bóng cắt từ atlas `resources/pack/chat/pack_chat_0.{pkm,plist}`
