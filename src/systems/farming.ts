@@ -8,18 +8,29 @@ import { CROPS } from '@/data/crops';
 import { sfx } from '@/core/audio';
 import type { Plot } from '@/core/types';
 
-export const FARM_COLS = 13;
-export const FARM_ROWS = 4;   // tối đa 13 x 4 = 52 ô đất
-export const MAX_PLOTS = FARM_COLS * FARM_ROWS;
+// Lttt gốc: đất chia 4 khối riêng, mỗi khối 3 cột x 4 hàng = 12 ô, điền
+// theo CỘT trong khối (col = j / numH, row = j % numH — không phải theo
+// hàng như bản cũ). Tổng 4 khối x 12 = 48 ô, không phải 1 khối liền 52 ô.
+export const BLOCK_COLS = 3;
+export const BLOCK_ROWS = 4;
+export const BLOCKS = 4;
+export const BLOCK_GAP_COLS = 1;   // 1 cột trống ngăn cách các khối cho rõ ràng
+export const MAX_PLOTS = BLOCK_COLS * BLOCK_ROWS * BLOCKS;
 export const PLOT_PRICE_BASE = 200;      // giá mua thêm 1 ô đất, tăng dần
 
-// Thứ tự mở khóa: lan dần từ góc trên-trái thành khối (dễ với tới từ spawn)
-export const UNLOCK_ORDER: number[] = Array.from({ length: MAX_PLOTS }, (_, i) => i)
-  .sort((a, b) => {
-    const ka = (a % FARM_COLS) + Math.floor(a / FARM_COLS) * 1.5;
-    const kb = (b % FARM_COLS) + Math.floor(b / FARM_COLS) * 1.5;
-    return ka - kb;
-  });
+/** Vị trí lưới (cột, hàng) của ô đất thứ i — điền theo cột trong từng khối, khối cách nhau 1 cột trống. */
+export function plotColRow(i: number): { col: number; row: number } {
+  const perBlock = BLOCK_COLS * BLOCK_ROWS;
+  const b = Math.floor(i / perBlock);
+  const j = i % perBlock;
+  const localCol = Math.floor(j / BLOCK_ROWS);
+  const row = j % BLOCK_ROWS;
+  return { col: b * (BLOCK_COLS + BLOCK_GAP_COLS) + localCol, row };
+}
+
+// Thứ tự mở khóa: lần lượt hết khối này tới khối kia, mỗi khối tự lan theo
+// đúng thứ tự điền của nó (đã dễ với tới từ spawn vì khối 0 gần nhất).
+export const UNLOCK_ORDER: number[] = Array.from({ length: MAX_PLOTS }, (_, i) => i);
 
 export function ensurePlots() {
   while (S.farm.plots.length < MAX_PLOTS) S.farm.plots.push({ state: 'locked' });
@@ -152,7 +163,10 @@ export function harvest(i: number): boolean {
     S.collections.crops.push(c.id);
     toast(`Bộ sưu tập mới: ${c.name}!`, 'collection');
   }
-  S.farm.plots[i] = { state: 'tilled' };
+  // Lttt: treeHarvest() set lại landItem.type=-1 (đất trống) sau khi thu
+  // hoạch, không giữ trạng thái "đã cuốc" — phải cuốc lại từ đầu mới trồng
+  // tiếp được, không phải cứ thu xong là trồng ngay.
+  S.farm.plots[i] = { state: 'empty' };
   addStat('harvested', qty); addStat('daily_harvested', qty);
   sfx.harvest(); save();
   bus.emit(EV.STATE_CHANGED);
