@@ -155,15 +155,8 @@ export class PreloadScene extends Phaser.Scene {
     // logo game là ảnh thật (assets/ui/logo.png), vẽ ở lớp DOM cùng khung
     // đăng nhập trong showLoginFlow() -> ở đây không vẽ chữ nữa
 
-    // badge 12+ (nhãn gốc Avatar, hd/12Plus.png) + cảnh báo sức khỏe
-    const bx = W * 0.60, by = H * 0.07;   // góc phải trên (trái là logo + nút quay lại)
-    if (this.textures.exists('age12')) {
-      this.add.image(bx, by, 'age12').setScale(1.6 * RES).setOrigin(0.5);
-    }
-    this.add.text(bx + 24 * RES, by, 'Chơi quá 180 phút một ngày\nsẽ ảnh hưởng xấu đến sức khỏe', {
-      fontFamily: 'sans-serif', fontSize: `${9 * RES}px`, color: '#e8e8e8', backgroundColor: '#00000066', padding: { x: 6 * RES, y: 4 * RES }
-    }).setOrigin(0, 0.5);
-
+    // key art mới (Dreamtech Studio) đã có sẵn badge 12+, cảnh báo sức khỏe và
+    // dòng bản quyền ngay trong ảnh -> không vẽ đè lên nữa, chỉ còn số bản build.
     this.add.text(10 * RES, H - 16 * RES, `v${GAME_VERSION}`, { fontFamily: 'monospace', fontSize: `${10 * RES}px`, color: '#ffffffaa' });
 
     // thanh tải: người mới / sau update thấy thanh to có %, còn lại chỉ 1 dòng nhỏ
