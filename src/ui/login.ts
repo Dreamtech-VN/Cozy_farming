@@ -283,12 +283,12 @@ function renderServer(wrap: HTMLElement, acc: Account, rerender: () => void, don
   });
   paint();
 
-  // chữ khớp nút "VÀO GAME" ở cổng, nhưng vị trí đặt TRÊN dòng chọn server
-  // (không dán sát đáy như cổng) để hai màn không nhìn giống hệt nhau.
+  // chữ khớp nút "VÀO GAME" ở cổng; khung chọn server nằm TRÊN nút (đúng thứ
+  // tự thao tác: chọn server rồi mới bấm vào game).
   const start = h('button', 'lg-start', 'VÀO GAME');
   start.onclick = done;
 
-  box.append(start, svRow);
+  box.append(svRow, start);
   wrap.append(box);
 }
 
