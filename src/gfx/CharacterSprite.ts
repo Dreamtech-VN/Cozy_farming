@@ -77,13 +77,25 @@ export class CharacterSprite extends Phaser.GameObjects.Container {
     if (this.dir !== d) { this.dir = d; this.applyFrame(); }
   }
 
-  showEmote(index: number) {
-    // emoticons.png: lưới 16px 5 cột
+  /** Biểu cảm động (xem ChibiSprite.showEmote — cùng cách dùng). */
+  showEmote(key: string, frames: number, dur: number, size = 22) {
     this.emote?.destroy();
-    this.emote = this.scene.add.sprite(0, -30, 'emoticons', index);
-    this.add(this.emote);
-    this.scene.tweens.add({ targets: this.emote, y: -34, duration: 200, yoyo: true, repeat: 3 });
-    this.scene.time.delayedCall(2000, () => { this.emote?.destroy(); this.emote = undefined; });
+    const s = this.scene.add.sprite(0, -30, key, 0);
+    s.setDisplaySize(size * (s.width / s.height), size);
+    this.emote = s;
+    this.add(s);
+    if (frames > 1) {
+      const anim = `${key}_play`;
+      if (!this.scene.anims.exists(anim)) {
+        this.scene.anims.create({
+          key: anim, repeat: -1, frameRate: Math.max(1, frames / dur),
+          frames: this.scene.anims.generateFrameNumbers(key, { start: 0, end: frames - 1 })
+        });
+      }
+      s.play(anim);
+    }
+    this.scene.tweens.add({ targets: s, y: -34, duration: 200, yoyo: true, repeat: 3 });
+    this.scene.time.delayedCall(2600, () => { this.emote?.destroy(); this.emote = undefined; });
   }
 
   tick(deltaMs: number) {

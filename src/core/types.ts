@@ -158,7 +158,9 @@ export interface GameState {
   mail: MailMessage[];
   daily: DailyState;
   minigames: { caroWins: number; xiangqiWins: number; rpsWins: number };
-  settings: { music: boolean; sfx: boolean };
+  settings: { music: boolean; sfx: boolean; chatFont?: number };
+  // trang trí chat: khung bong bóng đã mua + cái đang dùng (xem src/data/bubbles.ts)
+  chat: { bubble: string; bubbles: string[] };
   zone: string;
   zoneRoom: number;         // "khu vực" của map hiện tại (Lttt: 10 khu / map)
   clockOffset: number;      // phút cộng thêm vào giờ thật (đổi ngày/đêm nhanh)

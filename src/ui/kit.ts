@@ -5,6 +5,8 @@ import { lookLayers } from '@/data/chibi';
 import { TITLES } from '@/data/quests';
 import { skinArt } from '@/data/skins';
 import { picSrc } from '@/data/avatars';
+import { EMOJI_BY_ID, EMOJI_RE, emojiUrl } from '@/data/emoji';
+import { BUBBLE_BY_ID, bubbleSlice, bubbleUrl } from '@/data/bubbles';
 import BBOX from '@/data/chibi-bbox.json';
 export function h<K extends keyof HTMLElementTagNameMap>(
   tag: K, cls = '', text = ''
@@ -125,11 +127,15 @@ export function btn(label: string, cls = '', onClick?: () => void): HTMLButtonEl
  * chứ không phải bề rộng ô, nên bước nhảy sai. transform: translateX(%) thì
  * tính theo chính bề rộng ảnh -> chia đều đúng số khung.
  */
-export function skinFrames(art: { url: string; w: number; h: number; frames: number }): HTMLElement {
+export function skinFrames(
+  art: { url: string; w: number; h: number; frames: number; thumb?: string },
+  small = false
+): HTMLElement {
   const box = h('div', 'skin-anim');
   box.style.aspectRatio = `${art.w} / ${art.h}`;
   const img = document.createElement('img');
-  img.src = art.url;
+  // ô nhỏ trong lưới dùng bản nhẹ, xem cận mới tải bản HD
+  img.src = (small && art.thumb) || art.url;
   img.draggable = false;
   img.style.animationDuration = `${(art.frames / 6).toFixed(2)}s`;
   img.style.animationTimingFunction = `steps(${art.frames})`;
@@ -333,6 +339,85 @@ export function priceHtml(xu?: number, ruby?: number): string {
   return parts.join(' ');
 }
 
+// ===== Khung bong bóng chat (xem src/data/bubbles.ts) =====
+// Khung động có 2 khung hình -> nhét sẵn một @keyframes đổi border-image-source
+// cho từng khung (chỉ tạo 1 lần cho mỗi loại).
+const bubbleAnimAdded = new Set<string>();
+
+function ensureBubbleAnim(id: string) {
+  if (bubbleAnimAdded.has(id)) return;
+  bubbleAnimAdded.add(id);
+  let sheet = document.getElementById('bubble-anim') as HTMLStyleElement | null;
+  if (!sheet) {
+    sheet = document.createElement('style');
+    sheet.id = 'bubble-anim';
+    document.head.append(sheet);
+  }
+  sheet.append(document.createTextNode(
+    `@keyframes bub-${id}{0%,49.9%{border-image-source:url(${bubbleUrl(id)})}`
+    + `50%,100%{border-image-source:url(${bubbleUrl(id, true)})}}`));
+}
+
+/** Đắp khung mua ở cửa hàng lên một bong bóng chat.
+ *  `k` thu nhỏ viền so với ảnh (ảnh xuất 2x nên k quanh 0.27 là cỡ gốc/2). */
+export function applyBubbleSkin(el: HTMLElement, id: string, k = 0.275) {
+  const b = BUBBLE_BY_ID[id];
+  if (!b || b.id === 'b_default') return;
+  const [t, r, bo, l] = bubbleSlice(id);
+  const bw = (v: number) => `${Math.round(v * k)}px`;
+  el.classList.add('skin');
+  el.style.borderImage = `url(${bubbleUrl(id)}) ${t} ${r} ${bo} ${l} fill stretch`;
+  el.style.borderWidth = `${bw(t)} ${bw(r)} ${bw(bo)} ${bw(l)}`;
+  el.style.borderStyle = 'solid';
+  el.style.background = 'none';
+  el.style.boxShadow = 'none';
+  el.style.padding = '2px 8px';
+  // ruột khung sáng thì chữ trắng đọc không ra -> đổi mực theo nền khung
+  el.classList.toggle('ink-dark', b.ink === 'dark');
+  if (b.anim) {
+    ensureBubbleAnim(id);
+    el.style.animation = `bub-${id} 1s infinite`;
+  }
+}
+
+// ===== Emoji chat (biểu cảm động, bóc từ GunPow — xem src/data/emoji.ts) =====
+// Mỗi emoji là một dải ngang: đặt background-size = số khung x 100% rồi cho
+// background-position chạy bằng steps() là ra hoạt hình, không cần canvas.
+export function emojiEl(id: string, size = 28): HTMLElement {
+  const d = EMOJI_BY_ID[id];
+  const e = h('span', 'emo');
+  if (!d) return e;
+  const k = size / Math.max(d.w, d.h);
+  const w = Math.round(d.w * k);
+  e.style.width = `${w}px`;
+  e.style.height = `${Math.round(d.h * k)}px`;
+  e.style.backgroundImage = `url(${emojiUrl(id)})`;
+  e.style.backgroundSize = `${w * d.frames}px 100%`;
+  e.style.setProperty('--emo-end', `-${w * d.frames}px`);
+  e.style.animationDuration = `${d.dur}s`;
+  e.style.animationTimingFunction = `steps(${d.frames})`;
+  return e;
+}
+
+/** Chuỗi có mã emoji `[e01]` -> các nút text + emoji để nhét vào bong bóng chat. */
+export function richText(text: string, size = 26): DocumentFragment {
+  const frag = document.createDocumentFragment();
+  let last = 0;
+  EMOJI_RE.lastIndex = 0;
+  for (let m = EMOJI_RE.exec(text); m; m = EMOJI_RE.exec(text)) {
+    if (m.index > last) frag.append(document.createTextNode(text.slice(last, m.index)));
+    frag.append(EMOJI_BY_ID[m[1]] ? emojiEl(m[1], size) : document.createTextNode(m[0]));
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) frag.append(document.createTextNode(text.slice(last)));
+  return frag;
+}
+
+/** Bỏ mã emoji khỏi chuỗi (chỗ nào chỉ hiện được chữ thuần). */
+export function stripEmoji(text: string): string {
+  return text.replace(EMOJI_RE, '').replace(/\s+/g, ' ').trim();
+}
+
 // Icon vật phẩm: ưu tiên sprite thật, thiếu mới dùng emoji
 export function iconOf(def: { icon: string; sprite?: SpriteRef }, size = 32): HTMLElement {
   if (def.sprite) {
@@ -398,7 +483,8 @@ export function charFace(look: import('@/data/chibi').ChibiLook | undefined, siz
   const art = skinArt(look.skin);
   if (art) {
     wrap.style.width = `${Math.round(size * art.w / art.h)}px`;
-    wrap.append(skinFrames(art));
+    // ô cỡ cố định (lưới chọn skin, hàng bạn bè...) chỉ cần bản nhẹ
+    wrap.append(skinFrames(art, size <= 160));
     return wrap;
   }
   for (const pid of lookLayers(look)) {

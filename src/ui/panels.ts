@@ -1,5 +1,5 @@
 import { registerPanel, openPanel, getGame, refreshHotbar, chatFabPos, setChatFabPos } from './UIManager';
-import { h, openWindow, btn, fmt, iconOf, spr, chibiPreview, chibiHead, charFace, charFaceFluid, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
+import { h, openWindow, btn, fmt, iconOf, spr, emojiEl, richText, applyBubbleSkin, chibiPreview, chibiHead, charFace, charFaceFluid, charHeadOnly, avatarEl, squareThumb, uiIcon, priceHtml, priceBtn, iconUrl, titlePlaque } from './kit';
 import { AVATAR_PICS, avatarPicUrl, isUploadedPic } from '@/data/avatars';
 import { FOODS, FOOD_LIST, type FoodDef } from '@/data/foods';
 import { orderList, canDeliver, deliver, dropOrder, haveOf, orderName } from '@/systems/orders';
@@ -20,6 +20,8 @@ import { QUESTS, TITLES } from '@/data/quests';
 import { ZONE_LIST, ZONES } from '@/data/zones';
 import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/meta';
 import { TOOL_LIST, TOOLS, toolUpgradeAt, toolIconSize } from '@/data/tools';
+import { EMOJIS } from '@/data/emoji';
+import { BUBBLES } from '@/data/bubbles';
 import { PET_LIST, PETS, ownsPet, petBonus, petArt } from '@/data/pets';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
@@ -2292,9 +2294,13 @@ export function registerAllPanels() {
     // ----- đầu bảng: chỉ là thanh kéo + nút đóng (bỏ ảnh đại diện, tên và
     // số người trực tuyến — đã có sẵn trên HUD, để đây chỉ tổ chật) -----
     const head = h('div', 'cw-head');
+    const gear = h('button', 'cw-x cw-gear');
+    gear.append(uiIcon('settings', 16));
+    gear.title = 'Cài đặt chat';
+    gear.onclick = () => { sfx.click(); openPanel('chatsettings'); };
     const closeX = h('button', 'cw-x', '✕');
     closeX.onclick = close;
-    head.append(h('div', 'cw-grip'), closeX);
+    head.append(h('div', 'cw-grip'), gear, closeX);
 
     // kéo đầu bảng = dời khung; dời xong đặt luôn nút chat về đó để lần sau
     // mở lại vẫn đúng chỗ (nút là mốc neo duy nhất)
@@ -2315,7 +2321,7 @@ export function registerAllPanels() {
     window.addEventListener('pointerup', onUp);
     window.addEventListener('pointercancel', onUp);
     head.addEventListener('pointerdown', e => {
-      if ((e.target as HTMLElement).closest('.cw-x')) return;
+      if ((e.target as HTMLElement).closest('.cw-x')) return;   // nút đóng / cài đặt
       dragging = true;
       dx = e.clientX - win.offsetLeft;
       dy = e.clientY - win.offsetTop;
@@ -2413,9 +2419,18 @@ export function registerAllPanels() {
         const col = h('div', 'cw-col');
         if (!same && !mine) col.append(h('div', 'cw-name', m.from));
         const bubble = h('div', `cw-bubble ch-${m.channel}`);
-        if (m.voice) bubble.append(voiceBtn(m)); else bubble.append(h('span', '', m.text));
-        bubble.append(h('span', 'cw-t', hhmm(m.at)));
-        col.append(bubble);
+        // khung bong bóng đã mua chỉ đắp lên tin của mình
+        if (mine && S.chat?.bubble) applyBubbleSkin(bubble, S.chat.bubble);
+        if (m.voice) bubble.append(voiceBtn(m));
+        else {
+          const sp = h('span');
+          sp.append(richText(m.text, 30));           // [e01] -> biểu cảm động
+          bubble.append(sp);
+        }
+        // giờ gửi để NGOÀI bong bóng (khung có hoa văn, nhét vào trong là đè lên)
+        const line = h('div', 'cw-line');
+        line.append(bubble, h('span', 'cw-t', hhmm(m.at)));
+        col.append(line);
         row.append(avaSlot, col);
         log.append(row);
         lastFrom = m.from;
@@ -2457,6 +2472,28 @@ export function registerAllPanels() {
     };
     sendBtn.onclick = doSend;
     inp.onkeydown = e => { if (e.key === 'Enter') doSend(); e.stopPropagation(); };
+
+    // ----- bảng biểu cảm: chèn mã [eNN] vào ô nhập -----
+    const emoPad = h('div', 'cw-emo-pad');
+    for (const e of EMOJIS) {
+      const b = h('button');
+      b.append(emojiEl(e.id, 34));
+      b.onclick = () => {
+        sfx.click();
+        if (inp.value.length + 5 > inp.maxLength) return;
+        inp.value += `[${e.id}]`;
+        inp.focus();
+      };
+      emoPad.append(b);
+    }
+    const emoBtn = h('button', 'cw-emo');
+    emoBtn.append(emojiEl('e05', 26));
+    emoBtn.title = 'Biểu cảm';
+    emoBtn.onclick = () => {
+      sfx.click();
+      emoPad.classList.toggle('open');
+      emoBtn.classList.toggle('on', emoPad.classList.contains('open'));
+    };
 
     // ----- tin nhắn thoại -----
     // Game chưa có server nên tin thoại chỉ nằm ở máy mình, không gửi được
@@ -2514,9 +2551,9 @@ export function registerAllPanels() {
       if (rec && rec.state === 'recording') stopRec(); else void startRec();
     };
 
-    inputBar.append(micBtn, inp, sendBtn);
+    inputBar.append(micBtn, emoBtn, inp, sendBtn);
 
-    body.append(head, chanBar, toBar, log, recLabel, inputBar);
+    body.append(head, chanBar, toBar, log, recLabel, emoPad, inputBar);
     renderTo();
     renderLog();
     setTimeout(() => inp.focus(), 50);
@@ -2711,16 +2748,87 @@ export function registerAllPanels() {
     });
   });
 
+  // ================= Cài đặt chat =================
+  // Tab 1: cửa hàng khung bong bóng (mua bằng xu, mua rồi thì bấm để dùng).
+  registerPanel('chatsettings', () => {
+    const { body, tabs } = openWindow('Cài đặt chat', { size: 'normal' });
+    const wrap = h('div');
+    body.append(wrap);
+    let tab = 0;
+
+    const owned = (id: string) => id === 'b_default' || (S.chat?.bubbles ?? []).includes(id);
+
+    const renderBubbles = () => {
+      wrap.append(h('div', 'hint', 'Khung chỉ hiện ở tin nhắn của bạn, phần lớn là khung động. Mua một lần dùng mãi.'));
+      const grid = h('div', 'bub-grid');
+      for (const b of BUBBLES) {
+        const cell = h('div', `bub-cell ${S.chat.bubble === b.id ? 'on' : ''}`);
+        const prev = h('div', 'bub-prev', 'Chào!');
+        // khung xem trước nhỏ hơn trong chat một chút cho vừa ô
+        applyBubbleSkin(prev, b.id, 0.21);
+        cell.append(prev, h('div', 'bub-name', b.name));
+        if (owned(b.id)) {
+          cell.append(h('div', `bub-tag ${S.chat.bubble === b.id ? 'on' : ''}`,
+            S.chat.bubble === b.id ? 'Đang dùng' : 'Đã có'));
+          cell.onclick = () => {
+            sfx.click();
+            S.chat.bubble = b.id; save();
+            toast(`Đã đổi khung chat: ${b.name}`, 'check');
+            render();
+          };
+        } else {
+          const pr = h('div', 'bub-price');
+          // khung cầu kỳ bán bằng kim cương, khung thường bán bằng xu
+          pr.innerHTML = b.cur === 'ruby' ? priceHtml(0, b.price) : priceHtml(b.price);
+          cell.append(pr);
+          cell.onclick = () => {
+            const ok = b.cur === 'ruby' ? spendRubies(b.price, 'chat_bubble') : spend(b.price);
+            if (!ok) { toast(b.cur === 'ruby' ? 'Không đủ kim cương.' : 'Không đủ xu.', 'alert'); return; }
+            sfx.coin();
+            S.chat.bubbles.push(b.id);
+            S.chat.bubble = b.id;
+            save();
+            toast(`Đã mua khung ${b.name}!`, 'check');
+            render();
+          };
+        }
+        grid.append(cell);
+      }
+      wrap.append(grid);
+    };
+
+    const renderOther = () => {
+      wrap.append(h('div', 'hint', 'Cỡ chữ trong khung chat.'));
+      const row = h('div', 'bub-fonts');
+      const SIZES: [string, number][] = [['Nhỏ', 11.5], ['Vừa', 12.5], ['Lớn', 14]];
+      for (const [label, px] of SIZES) {
+        row.append(btn(label, S.settings.chatFont === px ? 'gold' : '', () => {
+          S.settings.chatFont = px; save();
+          document.documentElement.style.setProperty('--chat-font', `${px}px`);
+          render();
+        }));
+      }
+      wrap.append(row);
+    };
+
+    function render() {
+      wrap.innerHTML = '';
+      if (tab === 0) renderBubbles(); else renderOther();
+    }
+    tabs(['Bong bóng chat', 'Khác'], i => { tab = i; render(); });
+    render();
+  });
+
   // ================= Biểu cảm =================
   registerPanel('emotes', () => {
     const { body, close } = openWindow('Biểu cảm', { size: 'small' });
 
-    // dùng đúng sheet emoticons.png của asset pack (lưới 16px, 5 cột x 6 hàng)
+    // bộ biểu cảm động bóc từ GunPow (src/data/emoji.ts) — bấm là hiện trên đầu
     const grid = h('div', 'grid');
-    for (let i = 0; i < 30; i++) {
+    for (const e of EMOJIS) {
       const cell = h('div', 'cell');
-      cell.append(spr('assets/char/emoticons.png', (i % 5) * 16, Math.floor(i / 5) * 16, 16, 16, 36));
-      cell.onclick = () => { bus.emit('world:emote', i); close(); };
+      cell.append(emojiEl(e.id, 40));
+      cell.onclick = () => { bus.emit('world:emote', e.id); close(); };
       grid.append(cell);
     }
     body.append(grid);

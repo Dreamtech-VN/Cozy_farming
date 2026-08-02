@@ -23,10 +23,11 @@ export function pushChat(m: ChatMessage) {
   bus.emit(EV.CHAT, m);
 }
 
+// `[eNN]` là mã biểu cảm (xem src/data/emoji.ts) — chat hiện thành ảnh động
 const BOT_REPLIES = [
-  'Hôm nay thời tiết đẹp ghê!', 'Ai đi câu cá không?', 'Mình vừa thu hoạch cả vườn dâu',
-  'Có ai bán trứng gà không?', 'Tối nay tiệc ở nhà mình nha!', 'Mới thắng ván caro, vui quá!',
-  'Ruộng nhà bạn đẹp thế~', 'Chăm chỉ lên nào các nông dân ơi!'
+  'Hôm nay thời tiết đẹp ghê! [e05]', 'Ai đi câu cá không?', 'Mình vừa thu hoạch cả vườn dâu [e08]',
+  'Có ai bán trứng gà không?', 'Tối nay tiệc ở nhà mình nha! [e21]', 'Mới thắng ván caro, vui quá!',
+  'Ruộng nhà bạn đẹp thế~ [e06]', 'Chăm chỉ lên nào các nông dân ơi!'
 ];
 
 export function initSocial() {
@@ -37,7 +38,7 @@ export function initSocial() {
       pushChat({ channel: 'public', from: f.name, text: BOT_REPLIES[Math.floor(Math.random() * BOT_REPLIES.length)], at: Date.now() });
     }
   }, 25_000);
-  pushChat({ channel: 'system', from: 'Hệ thống', text: 'Chào mừng đến với Sunny Town! Gõ chat để trò chuyện.', at: Date.now() });
+  pushChat({ channel: 'system', from: 'Hệ thống', text: 'Chào mừng đến với Sunny Town! Gõ chat hoặc bấm nút mặt cười để gửi biểu cảm nhé.', at: Date.now() });
 }
 
 export function sendChat(channel: ChatMessage['channel'], text: string, to?: string) {
@@ -47,7 +48,7 @@ export function sendChat(channel: ChatMessage['channel'], text: string, to?: str
   // NPC trả lời chat riêng
   if (channel === 'private' && to) {
     window.setTimeout(() => {
-      pushChat({ channel: 'private', from: to, to: S.player.name, text: 'Ừa mình đây, có gì hông?', at: Date.now() });
+      pushChat({ channel: 'private', from: to, to: S.player.name, text: 'Ừa mình đây, có gì hông? [e13]', at: Date.now() });
     }, 1200 + Math.random() * 1500);
   }
 }

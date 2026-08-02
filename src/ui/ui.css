@@ -280,8 +280,8 @@ img { image-rendering: auto; }
 .win.win-chat {
   width: min(440px, 93vw); height: min(400px, 66vh); max-height: 66vh;
   padding: 0; border: none; border-image: none;
-  background: linear-gradient(180deg, rgba(58, 82, 58, .93), rgba(32, 50, 34, .95));
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  /* bảng chat để đặc hẳn cho dễ đọc — không cần nhìn xuyên xuống thế giới */
+  background: linear-gradient(180deg, #3a523a, #203222);
   border-radius: 16px; box-shadow: 0 12px 34px rgba(0, 0, 0, .5);
   outline: 2px solid rgba(246, 237, 216, .20); outline-offset: -2px;
   display: flex; flex-direction: column; overflow: hidden;
@@ -361,9 +361,22 @@ img { image-rendering: auto; }
 .cw-bubble {
   position: relative; padding: 6px 11px 6px 11px; border-radius: 14px 14px 14px 4px;
   background: rgba(246, 237, 216, .13); color: #eef5e6;
-  font-size: 12.5px; line-height: 1.4; word-break: break-word;
+  font-size: var(--chat-font, 12.5px); line-height: 1.4; word-break: break-word;
   display: flex; align-items: flex-end; gap: 7px;
 }
+/* tin của mình khi đang đắp khung mua ở cửa hàng: nền/bo góc do khung lo */
+.cw-row.me .cw-bubble.skin { border-radius: 0; min-width: 42px; }
+/* chữ nằm giữa khung (khung có hoa văn hai bên nên canh trái trông lệch) */
+.cw-bubble.skin { align-items: center; justify-content: center; text-align: center; }
+/* GunPow vẽ khung cho bong bóng bên TRÁI (đuôi + hoa văn ở phía trái), mà tin
+   của mình lại nằm bên phải -> lật gương cái khung, rồi lật ngược nội dung lại
+   cho chữ và emoji vẫn đúng chiều. */
+.cw-row.me .cw-bubble.skin { transform: scaleX(-1); flex-direction: row-reverse; }
+.cw-row.me .cw-bubble.skin > * { transform: scaleX(-1); }
+/* màu chữ theo nền khung — dùng chung cho bong bóng chat và ô xem trước ở shop:
+   ruột tối -> chữ trắng viền tối; ruột sáng -> chữ nâu đen viền sáng */
+.skin { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .75), 0 0 3px rgba(0, 0, 0, .5); }
+.skin.ink-dark { color: #33281c; text-shadow: 0 1px 0 rgba(255, 255, 255, .6); }
 .cw-row.me .cw-bubble {
   border-radius: 14px 14px 4px 14px;
   background: linear-gradient(#5aa84a, #3f8a34); color: #fbfff7;
@@ -371,7 +384,10 @@ img { image-rendering: auto; }
 .cw-bubble.ch-private { background: rgba(255, 168, 216, .18); }
 .cw-row.me .cw-bubble.ch-private { background: linear-gradient(#c96aa8, #a84f8b); }
 .cw-bubble.ch-area { background: rgba(143, 208, 255, .16); }
-.cw-t { font-size: 9.5px; color: rgba(255, 255, 255, .5); flex: none; margin-bottom: 1px; }
+/* giờ gửi nằm ngoài bong bóng: tin người khác thì bên phải, tin mình thì bên trái */
+.cw-line { display: flex; align-items: flex-end; gap: 6px; min-width: 0; }
+.cw-row.me .cw-line { flex-direction: row-reverse; }
+.cw-t { font-size: 9.5px; color: rgba(255, 255, 255, .45); flex: none; margin-bottom: 3px; }
 .cw-name + .cw-bubble { border-top-left-radius: 4px; }
 
 /* nhắn thoại */
@@ -409,7 +425,7 @@ img { image-rendering: auto; }
   background: rgba(255, 255, 255, .04);
 }
 .cw-input {
-  flex: 1; min-width: 0; font-family: inherit; font-size: 12.5px;
+  flex: 1; min-width: 0; font-family: inherit; font-size: var(--chat-font, 12.5px);
   padding: 9px 14px; border-radius: 999px; color: #f6edd8;
   background: rgba(0, 0, 0, .34); border: 1px solid rgba(246, 237, 216, .20); outline: none;
 }
@@ -436,6 +452,59 @@ img { image-rendering: auto; }
   0%, 100% { box-shadow: 0 0 0 0 rgba(224, 49, 49, .55); }
   50% { box-shadow: 0 0 0 7px rgba(224, 49, 49, 0); }
 }
+
+/* ===== Cửa hàng khung bong bóng chat ===== */
+.bub-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: 9px; padding: 4px 2px 8px;
+}
+.bub-cell {
+  padding: 8px 6px 7px; border-radius: 12px; cursor: pointer; text-align: center;
+  background: rgba(0, 0, 0, .16); border: 2px solid transparent;
+}
+.bub-cell.on { border-color: #ffe066; background: rgba(255, 224, 102, .12); }
+.bub-cell:active { transform: scale(.97); }
+.bub-prev {
+  display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
+  min-height: 34px; min-width: 74px; padding: 5px 10px; margin-bottom: 5px;
+  border-radius: 12px; background: rgba(255, 255, 255, .14);
+  font-size: 11.5px; font-weight: 700; color: #fff; line-height: 1.35;
+}
+.bub-name { font-size: 11.5px; font-weight: 800; color: #f4ecd8; }
+.bub-price { font-size: 11.5px; font-weight: 800; color: #ffe066; margin-top: 2px; }
+.bub-tag { font-size: 10.5px; font-weight: 800; color: #a9d99a; margin-top: 2px; }
+.bub-tag.on { color: #ffe066; }
+.bub-fonts { display: flex; gap: 8px; padding: 6px 2px; }
+
+/* ===== Emoji chat (dải khung chạy bằng steps) ===== */
+.emo {
+  display: inline-block; vertical-align: -.32em; flex: none;
+  background-repeat: no-repeat; background-position: 0 0;
+  animation-name: emo-run; animation-iteration-count: infinite;
+}
+/* --emo-end = -(số khung x bề ngang 1 khung): chạy tới đó bằng steps() là
+   mỗi bước nhảy đúng một khung (dùng % sẽ lệch vì % tính theo phần dư ảnh). */
+@keyframes emo-run { from { background-position-x: 0; } to { background-position-x: var(--emo-end); } }
+
+/* nút mở bảng emoji + bảng chọn emoji trong khung chat */
+.cw-emo {
+  width: 36px; height: 36px; flex: none; border-radius: 50%; cursor: pointer;
+  border: 1px solid rgba(246, 237, 216, .26); background: rgba(0, 0, 0, .34);
+  display: flex; align-items: center; justify-content: center; padding: 0;
+}
+.cw-emo:active { transform: scale(.9); }
+.cw-emo.on { background: rgba(255, 224, 102, .22); border-color: #ffe066; }
+.cw-emo-pad {
+  display: none; flex: none; gap: 2px; flex-wrap: wrap; overflow-y: auto;
+  max-height: 132px; padding: 6px 8px;
+  border-top: 1px solid rgba(246, 237, 216, .14); background: rgba(0, 0, 0, .28);
+}
+.cw-emo-pad.open { display: flex; }
+.cw-emo-pad button {
+  width: 40px; height: 40px; border: none; background: none; padding: 0; cursor: pointer;
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+}
+.cw-emo-pad button:active { background: rgba(255, 255, 255, .12); }
 
 .win-tabs { display: flex; gap: 6px; padding: 6px 14px 0; flex-wrap: wrap; }
 .tab {

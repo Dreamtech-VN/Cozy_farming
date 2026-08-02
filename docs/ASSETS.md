@@ -289,6 +289,140 @@ chữ, rồi trim + thu về 512px. Dùng ở:
 nếu đúng vậy thì chỉ nên dùng để dev/test; bản phát hành thương mại cần thay bằng
 asset tự vẽ hoặc có quyền sử dụng.
 
+## Biểu cảm chat (`assets/chat/emoji/`)
+
+41 biểu cảm ĐỘNG bóc từ client GunPow (release `Pack3`, file `.xapk` — phần
+`Android/obb/.../main.*.obb`, thư mục `resources/armatures/chat/faceNNN.*` và bản
+đè ở `resources_vn/`). Mỗi biểu cảm trong client là một armature nhỏ: ảnh ETC1
+(`.pkm` + `_alpha.pkm`) chứa mọi khung, `.plist` cho toạ độ khung, `.xml` cho thứ
+tự phát và tốc độ.
+
+`scripts/gp_chat_emoji.py` giải ETC1 (dùng lại `scripts/pkm_to_png.py`), ghép các
+khung theo đúng thứ tự phát thành MỘT dải ngang **giữ nguyên cỡ gốc** (đa số
+124px/khung, trần 160px — thu nhỏ là mất nét trên màn DPR cao), giảm còn 255 màu
+rồi sinh luôn bảng `src/data/emoji.ts`:
+
+```
+python3 scripts/gp_chat_emoji.py \
+    <giải nén obb>/assets/gameresources/resources/armatures/chat \
+    <giải nén obb>/assets/gameresources/resources_vn/armatures/chat
+```
+
+Web chạy dải bằng CSS `steps()` (`.emo` trong `ui.css`), world chạy bằng
+spritesheet Phaser nạp theo nhu cầu (`WorldScene.onEmote`). Bộ emoticon pixel
+16px cũ (`assets/char/emoticons.png`) đã bỏ hẳn.
+
+## Skin Ảo Hoá HD (`assets/skin/p4hd/` + `assets/skin/p4sm/`)
+
+Skin Pack4 là skeleton Spine vẽ nhân vật cao ~440px, trước đây `p4_strips.py`
+nướng xuống thân 165px nên mất gần 3 lần độ nét. Nay script nướng HAI cỡ:
+
+- `p4hd/<id>.webp` — khung 580px (thân 440px, gần bằng cỡ vẽ gốc): dùng cho
+  nhân vật trên map và khung xem cận (`charFaceFluid`).
+- `p4sm/<id>.webp` — khung 220px: dùng cho lưới chọn skin, mở tủ đồ khỏi phải
+  tải 57 file HD (`charFace` cỡ <= 160px tự lấy bản này).
+
+```
+python3 scripts/p4_strips.py <thư mục sbody đã giải nén> public/assets/skin/p4hd \
+    <file json danh sách id giữ lại> holdon src/data/skins-p4.json
+```
+
+`src/data/skins-p4.json` ghi `[rộng, cao, số khung, rộng bản nhẹ, cao bản nhẹ]`.
+
+## Cây trồng mới: Hoa hồng / Tulip / Dưa hấu / Hướng dương
+
+Đọc client Unity thật của Lttt (release Pack5, `project-client-avt-main.zip`) và
+DB mới `127_0_0_1.sql`, bảng `farmitems` có đúng 24 cây với thời gian chín/sản
+lượng/giá thật — 10 cây trùng tên với bộ 14 cây hiện tại (Cà chua, Cà rốt,
+Khoai tây, Bí đỏ, Cà tím, Dâu tây, Ớt, Ngô, Lúa, Nho), còn lại là hoa/trái cây
+không có trong game. Không áp thẳng số phút thật cho 14 cây cũ vì lệch nặng với
+nhịp tân thủ đang có (Lttt cho cà rốt CHẬM hơn cà chua/bí đỏ, trong khi game
+này cố ý để cà rốt là cây nhanh nhất mở màn) — xem chú thích trong
+`src/data/crops.ts`.
+
+4 cây thêm mới (Hoa hồng/Tulip/Dưa hấu/Hướng dương) dùng icon túi có sẵn
+(`assets/farm/chibi/`) nhưng thiếu dải hoạt cảnh lớn dần, nên dựng tạm 5 khung
+bằng cách phóng to dần icon rồi xỉn màu khung cuối:
+
+```python
+from PIL import Image, ImageEnhance
+for name in ['rose', 'tulip', 'watermelon', 'sunflower']:
+    src = Image.open(f'public/assets/farm/chibi/{name}.png').convert('RGBA')
+    w, h = src.size
+    strip = Image.new('RGBA', (w * 5, h), (0, 0, 0, 0))
+    for i, sc in enumerate([0.35, 0.6, 0.85, 1.0]):
+        fw, fh = round(w * sc), round(h * sc)
+        im = src.resize((fw, fh), Image.LANCZOS)
+        strip.paste(im, (i * w + (w - fw) // 2, h - fh), im)
+    wilt = ImageEnhance.Brightness(ImageEnhance.Color(src).enhance(.35)).enhance(.75)
+    strip.paste(wilt, (w * 4, 0), wilt)
+    strip.save(f'public/assets/pack2/crops/{name}.png')
+```
+
+growMin xếp theo ĐÚNG thứ tự nhanh→chậm thật của Lttt (Hồng 120' < Tulip 360'
+< Dưa hấu 480' < Hướng dương 720', đều nhanh hơn Nho 960' — Nho đã có sẵn
+trong game từ trước), quy đổi vào thang thời gian ngắn của game này (22-55
+phút) rồi tính giá theo công thức nội bộ đang dùng (sell ≈ 4.25×growMin+10).
+
+## Icon mặt trăng (`assets/ui/act/w_moon.png`)
+
+Bộ icon thời tiết `w_*` (nắng/mưa/mây/tuyết) không có bản đêm — GunPow cũng
+không có sẵn icon trăng lưỡi liềm đứng riêng để cắt. Vẽ tay bằng PIL
+(`scripts/` không lưu vì chỉ vài dòng), 16px, cùng kiểu viền tối + đổ bóng như
+các icon `w_*` khác (palette lạnh thay vì palette vàng của mặt trời).
+HUD dùng icon này khi trời quang mà đang là ban đêm (`hudWeatherIcon()` trong
+`src/systems/time.ts`) — trước đó ban đêm trời quang vẫn hiện mặt trời + "Nắng".
+
+## Bản web và bản đóng gói app
+
+`npm run build` là bản WEB (GitHub Pages) nên `base` = `/Cozy_farming/`.
+Bản đóng gói app phải dùng đường dẫn tương đối: **`npm run build:app`**
+(`vite build --base=./`) — mấy lệnh `electron` / `cap:*` đã trỏ sẵn vào lệnh này.
+
+- **Capacitor (Android/iOS)**: WebView phục vụ từ gốc `https://localhost` nên
+  đường dẫn tương đối chạy đúng, tài nguyên nằm luôn trong app -> màn chờ "tải
+  hết" chỉ đọc file trong máy, xong trong vài giây.
+- **Electron**: KHÔNG mở bằng `file://` được (ES module + CSS bị chặn CORS vì
+  origin `null`, mở ra là màn hình đen). `electron/main.cjs` đăng ký giao thức
+  riêng `app://` trỏ vào `dist` rồi `loadURL('app://local/index.html')`.
+
+## Tải hết tài nguyên ở màn chờ
+
+`scripts/make_preload_manifest.py` (hoặc `npm run assets:manifest`) quét
+`public/assets`, bỏ mấy file chỉ dùng làm nguồn cắt rồi ghi
+`src/data/preload-manifest.json` ([đường dẫn, số byte], ~41MB / 1078 file).
+Màn chờ chạy `preloadAll()` trong `src/core/preload.ts`: kéo sạch danh sách này
+về cache trình duyệt (8 file một lúc) rồi mới mở khung đăng nhập — vào game là
+chạy mượt, không còn cảnh mở bảng nào mới tải ảnh bảng đó.
+
+**Thêm/đổi asset thì nhớ chạy lại script này**, không thì file mới không nằm
+trong danh sách tải trước.
+
+## Khung bong bóng chat (`assets/chat/bubble/`)
+
+32 khung bong bóng cắt từ atlas `resources/pack/chat/pack_chat_0.{pkm,plist}`
+trong apk GunPow (các sprite `talk_XX.png`) bằng `scripts/gp_chat_bubbles.py`.
+Phần lớn khung là ẢNH ĐỘNG 2 khung hình — atlas để hai khung cách nhau 12 số
+(vd `talk_01` + `talk_13` là cùng mẫu mèo, khác mỗi cái đuôi) nên script lưu
+thành `<id>.png` + `<id>_b.png`, web đổi qua lại bằng `@keyframes`. Ảnh gốc chỉ
+139x65 mà màn điện thoại DPR 2-3 phóng to lên nên nhìn mờ, vì vậy script **xuất
+sẵn bản 2x** (LANCZOS + unsharp); lát cắt trong `bubbles.ts` cũng x2 nên cỡ hiển
+thị không đổi:
+
+```
+python3 scripts/gp_chat_bubbles.py <giải nén apk>/assets/gameresources/resources/pack/chat
+```
+
+Khung dùng kiểu 9 ô (`border-image`). Lát cắt do script **dò tự động** và ghi ra
+`src/data/bubble-slices.json`: chiều dọc chỉ chừa một dải 4px ở chỗ ảnh phẳng
+nhất để co giãn (hoa văn trải gần hết chiều cao, lọt vào dải cạnh là bị kéo méo),
+chiều ngang cắt ~29% mỗi bên (hoa văn nằm ở hai đầu). Nhờ vậy mọi hoa văn nằm
+trọn trong 4 góc — luôn vẽ đúng cỡ, chỉ ruột trơn mới giãn theo tin nhắn. Ruột khung sáng tối khác nhau nên
+mỗi khung có sẵn `ink` (đo độ sáng vùng ruột ảnh): ruột sáng thì chữ nâu đen
+viền sáng, ruột tối thì chữ trắng viền tối — chữ không bị chìm vào khung. Bảng tên + giá + độ dày viền ở
+`src/data/bubbles.ts` (khung thường bán bằng xu, khung cầu kỳ từ `talk_53` trở đi
+bán bằng kim cương); mua/đổi trong Chat > nút bánh răng > tab "Bong bóng chat".
+
 ## Ghi chú trạm xe buýt
 
 Sprite `assets/deco/busstop.png` hiện ghép từ ghế đá của tileset + khung/mái vẽ tay

@@ -12,9 +12,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spine_pose import compose, anim_len
 
 FRAMES = 6
-HEIGHT = 220        # chiều cao khung ảnh
-BODY = 165          # chiều cao THÂN NGƯỜI trong khung — mọi skin bằng nhau
-FOOT_PAD = 6        # chừa dưới chân vài pixel
+# Nướng HAI cỡ: bản HD gần bằng cỡ vẽ gốc của Spine (thân ~440px) để xem cận
+# và để trên map không bị mờ; bản nhỏ để lưới chọn skin đỡ tải nặng.
+HEIGHT = 580        # chiều cao khung ảnh (bản HD)
+BODY = 440          # chiều cao THÂN NGƯỜI trong khung — mọi skin bằng nhau
+FOOT_PAD = 16       # chừa dưới chân vài pixel
+THUMB_H = 220       # chiều cao bản nhỏ dùng cho lưới chọn
 BIG = (0, 0, 1800, 1800)
 
 
@@ -39,7 +42,7 @@ def body_box(im):
     return (x0, rows[0], x1, rows[-1] + 1)
 
 
-def strip(folder, name, frames=FRAMES, height=HEIGHT, anim='holdon'):
+def strip(folder, name, frames=FRAMES, height=HEIGHT, anim='holdon', body=None):
     data = json.load(open(os.path.join(folder, name + '.json'), encoding='utf-8'))
     dur = anim_len(data, anim)
     raws = [compose(folder, name, None, anim,
@@ -53,7 +56,7 @@ def strip(folder, name, frames=FRAMES, height=HEIGHT, anim='holdon'):
 
     # tỉ lệ tính theo chiều cao THÂN của khung đầu -> mọi skin cao bằng nhau
     bb = body_box(raws[0])
-    k = BODY / max(1, bb[3] - bb[1])
+    k = (body or BODY) / max(1, bb[3] - bb[1])
     foot = bb[3]                     # đáy bàn chân
     cx = (bb[0] + bb[2]) / 2         # trục dọc thân
 
@@ -64,7 +67,7 @@ def strip(folder, name, frames=FRAMES, height=HEIGHT, anim='holdon'):
         sc = im.resize((max(1, round(im.width * k)), max(1, round(im.height * k))), Image.LANCZOS)
         # chân chạm đáy khung, thân nằm giữa theo chiều ngang
         ox = round(w / 2 - cx * k)
-        oy = round(height - FOOT_PAD - foot * k)
+        oy = round(height - round(FOOT_PAD * height / HEIGHT) - foot * k)
         out.paste(sc, (i * w + ox, oy), sc)
     return out, w
 
@@ -74,6 +77,8 @@ if __name__ == '__main__':
     anim = sys.argv[4] if len(sys.argv) > 4 else 'holdon'
     out_json = sys.argv[5] if len(sys.argv) > 5 else 'src/data/skins-p4.json'
     keep = set(json.load(open(keep_json))) if keep_json != '-' else None
+    # bản HD vào <dst>, bản nhẹ vào thư mục cùng cấp tên p4sm
+    SMALL_DIR = os.path.join(os.path.dirname(dst.rstrip('/')), 'p4sm')
     os.makedirs(dst, exist_ok=True)
     idx = {}
     for j in sorted(glob.glob(f'{src}/**/*.json', recursive=True)):
@@ -86,7 +91,12 @@ if __name__ == '__main__':
         except Exception as e:
             print('lỗi', sid, e)
             continue
-        im.save(f'{dst}/{sid}.webp', 'WEBP', quality=82, method=6)
-        idx[sid] = [w, HEIGHT, FRAMES]
+        im.save(f'{dst}/{sid}.webp', 'WEBP', quality=88, method=6)
+        # bản nhỏ cho lưới chọn skin (thu từ bản HD nên khớp khung từng chữ)
+        os.makedirs(SMALL_DIR, exist_ok=True)
+        sm_w = max(1, round(w * THUMB_H / HEIGHT))
+        im.resize((sm_w * FRAMES, THUMB_H), Image.LANCZOS).save(
+            f'{SMALL_DIR}/{sid}.webp', 'WEBP', quality=86, method=6)
+        idx[sid] = [w, HEIGHT, FRAMES, sm_w, THUMB_H]
     json.dump(idx, open(out_json, 'w'), indent=0, sort_keys=True)
     print('xong', len(idx), 'bộ')

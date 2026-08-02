@@ -15,7 +15,8 @@ type Dir = 0 | 1 | 2 | 3;
 import { virtualInput, consumeAction } from '@/core/input';
 import { RES } from '@/core/res';
 import { TITLES } from '@/data/quests';
-import { titleCanvas, nameCanvas, anyWindowOpen } from '@/ui/kit';
+import { titleCanvas, nameCanvas, anyWindowOpen, stripEmoji } from '@/ui/kit';
+import { EMOJI_BY_ID, EMOJI_RE, emojiUrl } from '@/data/emoji';
 import { showLoading, hideLoading } from '@/ui/loading';
 import { setHudVisible } from '@/ui/UIManager';
 import * as farming from '@/systems/farming';
@@ -383,7 +384,18 @@ export class WorldScene extends Phaser.Scene {
 
   private onAppearance() { if (S.player.chibi) this.player.setLook(S.player.chibi); }
 
-  private onEmote(i: number) { this.player.showEmote(i); }
+  /** Biểu cảm GunPow: dải khung khá nặng nên chỉ nạp cái nào được dùng. */
+  private onEmote(id: string) {
+    const def = EMOJI_BY_ID[id];
+    if (!def) return;
+    const key = `emo_${id}`;
+    if (this.textures.exists(key)) { this.player.showEmote(key, def.frames, def.dur); return; }
+    this.load.spritesheet(key, emojiUrl(id), { frameWidth: def.w, frameHeight: def.h });
+    this.load.once(`filecomplete-spritesheet-${key}`, () => {
+      this.player.showEmote(key, def.frames, def.dur);
+    });
+    this.load.start();
+  }
 
   // ===== bảng danh hiệu + tên (ảnh) trên đầu nhân vật =====
   private titleTag?: Phaser.GameObjects.Image;
@@ -443,7 +455,12 @@ export class WorldScene extends Phaser.Scene {
   // bong bóng chat trên đầu nhân vật khi nhắn Tổng/Gần
   private speech?: Phaser.GameObjects.Text;
   private speechTimer?: Phaser.Time.TimerEvent;
-  private onSay(text: string) {
+  private onSay(raw: string) {
+    // tin nhắn có mã emoji: hiện biểu cảm trên đầu, bong bóng chỉ giữ phần chữ
+    const emo = raw.match(EMOJI_RE);
+    if (emo) this.onEmote(emo[0].slice(1, -1));
+    const text = stripEmoji(raw);
+    if (!text) return;
     this.speech?.destroy();
     this.speechTimer?.remove();
     const off = this.zone.bg ? 104 : 54;
@@ -938,8 +955,8 @@ export class WorldScene extends Phaser.Scene {
     farming.ensurePlots();
     const { ox, oy, pw, ph } = FARM_PLOT;
     for (let i = 0; i < farming.MAX_PLOTS; i++) {
-      const { col, row } = farming.plotColRow(i);
-      const x = ox + col * pw, y = oy + row * ph;
+      const { col, row, block } = farming.plotColRow(i);
+      const x = ox + col * pw + block * farming.BLOCK_GAP_PX, y = oy + row * ph;
       const img = this.add.image(x, y, 'fcell2').setOrigin(0).setDepth(-60).setDisplaySize(pw, ph);
       this.plotTiles.push(img);
       // biển "MUA" cho ô sắp mở khóa
@@ -1317,8 +1334,8 @@ export class WorldScene extends Phaser.Scene {
     const { ox, oy, pw, ph } = FARM_PLOT;
     let best = -1, bd = 42;
     for (let i = 0; i < farming.MAX_PLOTS; i++) {
-      const { col, row } = farming.plotColRow(i);
-      const cx = ox + col * pw + pw / 2, cy = oy + row * ph + ph / 2;
+      const { col, row, block } = farming.plotColRow(i);
+      const cx = ox + col * pw + block * farming.BLOCK_GAP_PX + pw / 2, cy = oy + row * ph + ph / 2;
       const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, cx, cy);
       if (d < bd) { bd = d; best = i; }
     }

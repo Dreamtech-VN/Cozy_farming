@@ -179,12 +179,26 @@ export class ChibiSprite extends Phaser.GameObjects.Container {
   }
   get dir(): 0 | 1 | 2 | 3 { return this.facingLeft ? 2 : 3; }
 
-  showEmote(index: number) {
+  /** Biểu cảm động (dải khung GunPow đã nạp sẵn thành texture `key`). */
+  // đặt cao hơn bảng danh hiệu + tên (chúng nằm ngay trên đầu) cho khỏi che nhau
+  showEmote(key: string, frames: number, dur: number, size = 44) {
     this.emote?.destroy();
-    this.emote = this.scene.add.sprite(0, -104, 'emoticons', index).setScale(2);
-    this.add(this.emote);
-    this.scene.tweens.add({ targets: this.emote, y: -110, duration: 200, yoyo: true, repeat: 3 });
-    this.scene.time.delayedCall(2000, () => { this.emote?.destroy(); this.emote = undefined; });
+    const s = this.scene.add.sprite(0, -152, key, 0);
+    s.setDisplaySize(size * (s.width / s.height), size);
+    this.emote = s;
+    this.add(s);
+    if (frames > 1) {
+      const anim = `${key}_play`;
+      if (!this.scene.anims.exists(anim)) {
+        this.scene.anims.create({
+          key: anim, repeat: -1, frameRate: Math.max(1, frames / dur),
+          frames: this.scene.anims.generateFrameNumbers(key, { start: 0, end: frames - 1 })
+        });
+      }
+      s.play(anim);
+    }
+    this.scene.tweens.add({ targets: s, y: -158, duration: 200, yoyo: true, repeat: 3 });
+    this.scene.time.delayedCall(2600, () => { this.emote?.destroy(); this.emote = undefined; });
   }
 
   tick(deltaMs: number) {
