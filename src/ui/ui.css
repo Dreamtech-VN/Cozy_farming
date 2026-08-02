@@ -832,6 +832,9 @@ input.ui-input, select.ui-input {
   position: absolute; inset: 0; display: flex; flex-direction: column;
   align-items: center; justify-content: center;
 }
+/* Cổng vào game + chọn server: nút chính neo GẦN ĐÁY màn hình (không phải
+   giữa màn) cho đỡ cảm giác lơ lửng cao quá; form đăng nhập vẫn canh giữa. */
+.login-wrap.anchor-bottom { justify-content: flex-end; padding-bottom: clamp(22px, 7vh, 64px); }
 /* Màn hình chỉ ngang (landscape lock) -> chiều CAO viewport mới là cái hay
    bị chật (điện thoại ngang chỉ ~360-430px cao), nên toàn bộ chữ/khoảng
    cách trong khung login/chọn-server co theo vh bằng clamp(), không dùng
@@ -943,15 +946,16 @@ input.ui-input, select.ui-input {
 /* ===== Cổng vào game: nút Vào game + tích điều khoản + cụm icon góc phải ===== */
 .gate-icons {
   position: absolute; top: max(10px, env(safe-area-inset-top, 0px)); right: max(10px, env(safe-area-inset-right, 0px));
-  display: flex; flex-direction: column; gap: clamp(6px, 1.4vh, 10px); z-index: 5;
+  display: flex; flex-direction: column; align-items: flex-end; gap: clamp(6px, 1.4vh, 10px); z-index: 5;
 }
 .gate-icon-btn {
-  width: clamp(30px, 6.5vh, 40px); height: clamp(30px, 6.5vh, 40px); border-radius: 50%; border: 1px solid rgba(255,255,255,.25);
-  background: rgba(16, 20, 28, .68); cursor: pointer; display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 3px 8px rgba(0,0,0,.35);
+  height: clamp(26px, 5.6vh, 34px); border-radius: 999px; border: 1px solid rgba(255,255,255,.25);
+  background: rgba(16, 20, 28, .72); cursor: pointer; display: flex; align-items: center; gap: 6px;
+  padding: 0 clamp(10px, 2.6vw, 14px); box-shadow: 0 3px 8px rgba(0,0,0,.35);
+  color: #f2ece0; font-size: clamp(10px, 2vh, 12px); font-weight: 700; white-space: nowrap; font-family: inherit;
 }
-.gate-icon-btn svg { width: 52%; height: 52%; }
-.gate-icon-btn:active { transform: scale(.92); }
+.gate-icon-btn svg { width: clamp(13px, 2.6vh, 16px); height: clamp(13px, 2.6vh, 16px); flex: none; }
+.gate-icon-btn:active { transform: scale(.95); }
 
 .gate-box {
   display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 2vh, 14px);
@@ -986,59 +990,69 @@ input.ui-input, select.ui-input {
 .notice-title { color: #ffd43b; font-weight: 800; font-size: 13px; margin-bottom: 4px; }
 .notice-text { color: #cfd6df; font-size: 12px; line-height: 1.4; }
 
-/* ===== Màn đăng nhập kiểu thẻ ấm (theo mẫu thiết kế) ===== */
+/* ===== Màn đăng nhập kiểu KÍNH — cùng chất liệu với popup .win trong game:
+   nền xanh trong mờ + blur, viền trắng mảnh, chữ sáng, không dùng thẻ kem nữa. */
 .login-box2 {
-  background: linear-gradient(#fffaf0, #fdf1dc); border: 3px solid #f2ddb0; color: #6b4a2b;
-  padding-bottom: clamp(10px, 2vh, 16px);
+  background: linear-gradient(rgba(120, 160, 124, .54), rgba(70, 110, 80, .68));
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, .5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 12px 30px rgba(0, 0, 0, .45);
+  color: #f2ece0; padding-bottom: clamp(10px, 2vh, 16px);
 }
 .login-head2 {
-  text-align: center; padding: clamp(12px, 3vh, 18px) 14px 2px; font-weight: 900; color: #4a7c2f;
-  font-size: clamp(15px, 3.4vh, 20px);
+  text-align: center; padding: clamp(12px, 3vh, 18px) 14px 2px; font-weight: 900; color: #fff;
+  font-size: clamp(15px, 3.4vh, 20px); text-shadow: 0 1px 3px rgba(0,0,0,.4);
 }
-.lg-arrow { color: #7cc25b; }
-.lg-sub { text-align: center; color: #9c8060; font-size: clamp(10px, 2vh, 12px); padding-bottom: clamp(8px, 2vh, 12px); }
+.lg-arrow { color: #d8f5a2; }
+.lg-sub { text-align: center; color: #dce8d2; font-size: clamp(10px, 2vh, 12px); padding-bottom: clamp(8px, 2vh, 12px); }
 .login-box2 .login-body { padding: 0 clamp(16px, 4.5vw, 26px) clamp(6px, 1.6vh, 10px); gap: clamp(8px, 1.8vh, 12px); }
 
 .lg-inputwrap {
-  display: flex; align-items: center; gap: 8px; background: #fff; border: 2px solid #e8d3a8; border-radius: 999px;
+  display: flex; align-items: center; gap: 8px; border-radius: 999px;
+  background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .38);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25);
   padding: 0 clamp(10px, 2.6vw, 14px); height: clamp(34px, 6.6vh, 44px);
 }
 .lg-inputwrap svg { width: clamp(14px, 2.8vh, 18px); height: clamp(14px, 2.8vh, 18px); flex: none; }
-.lg-inputwrap svg path { fill: #c9a876; }
+.lg-inputwrap svg path { fill: #f2ece0; opacity: .85; }
 .lg-inputwrap .ui-input {
-  border: 0; background: transparent; padding: 0; color: #5a4020; font-size: clamp(12px, 2.4vh, 14px);
+  border: 0; background: transparent; padding: 0; color: #fff; font-size: clamp(12px, 2.4vh, 14px);
 }
+.lg-inputwrap .ui-input::placeholder { color: #e8ecdf; opacity: .65; }
 .lg-eye {
-  border: 0; background: transparent; cursor: pointer; color: #c9a876; flex: none;
+  border: 0; background: transparent; cursor: pointer; color: #f2ece0; opacity: .85; flex: none;
   width: clamp(16px, 3vh, 20px); height: clamp(16px, 3vh, 20px); padding: 0;
 }
 .lg-forgot-row { display: flex; justify-content: flex-end; margin-top: -4px; }
-.lg-forgot, a.lg-forgot { color: #4a9e3a; font-size: clamp(10px, 2vh, 12px); font-weight: 700; text-decoration: none; }
+.lg-forgot, a.lg-forgot { color: #d8f5a2; font-size: clamp(10px, 2vh, 12px); font-weight: 700; text-decoration: none; }
 
 .lg-start-btn {
   border: 0; border-radius: 999px; cursor: pointer; font-family: inherit; font-weight: 900; letter-spacing: 1px;
-  color: #fff; padding: clamp(9px, 2.2vh, 12px) 0; font-size: clamp(13px, 2.6vh, 15px);
-  background: linear-gradient(#f8b64c, #e8890c); box-shadow: 0 4px 0 #c96f05, 0 6px 14px rgba(0,0,0,.25);
+  color: #4a3005; padding: clamp(9px, 2.2vh, 12px) 0; font-size: clamp(13px, 2.6vh, 15px);
+  background: linear-gradient(#ffe066, #f0a318); text-shadow: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 4px 0 #c9820f, 0 6px 14px rgba(0,0,0,.25);
 }
-.lg-start-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #c96f05; }
+.lg-start-btn:active { transform: translateY(2px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 2px 0 #c9820f; }
 
-.lg-or { display: flex; align-items: center; gap: 10px; color: #b39568; font-size: clamp(10px, 2vh, 12px); font-weight: 800; }
-.lg-or span { flex: 1; height: 1px; background: #e8d3a8; }
+.lg-or { display: flex; align-items: center; gap: 10px; color: #dce8d2; font-size: clamp(10px, 2vh, 12px); font-weight: 800; }
+.lg-or span { flex: 1; height: 1px; background: rgba(255, 255, 255, .3); }
 
 .lg-social-row { display: flex; justify-content: center; gap: clamp(8px, 2vw, 14px); }
 .lg-social-btn {
-  width: clamp(34px, 7vh, 46px); height: clamp(34px, 7vh, 46px); border-radius: 12px; border: 1px solid rgba(0,0,0,.08);
-  cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  width: clamp(34px, 7vh, 46px); height: clamp(34px, 7vh, 46px); border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .38); background: rgba(255, 255, 255, .16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 2px 6px rgba(0,0,0,.2);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
 }
 .lg-social-btn svg { width: 52%; height: 52%; }
 .lg-social-btn:active { transform: scale(.93); }
 .lg-s-google { background: #fff; }
-.lg-s-fb { background: #1877f2; }
-.lg-s-apple { background: #000; }
-.lg-s-guest { background: linear-gradient(#4dabf7, #3b82c4); }
+.lg-s-fb { background: #1877f2; border-color: #1877f2; }
+.lg-s-apple { background: #000; border-color: #000; }
+.lg-s-guest { background: linear-gradient(#4dabf7, #3b82c4); border-color: #4dabf7; }
 
-.login-box2 .lg-note { padding-top: 2px; color: #9c8060; }
-.login-box2 .lg-note .gate-tos-link { color: #4a9e3a; font-weight: 700; }
+.login-box2 .lg-note { padding-top: 2px; color: #dce8d2; }
+.login-box2 .lg-note .gate-tos-link { color: #d8f5a2; font-weight: 700; }
 .login-box2 .lg-err { min-height: 12px; }
 
 /* ===== Chip tạo nhân vật: icon + tên thẳng hàng ===== */
