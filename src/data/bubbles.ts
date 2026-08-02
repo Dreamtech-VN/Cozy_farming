@@ -31,14 +31,14 @@ export const BUBBLES: BubbleDef[] = [
   { id: 'b_snowflake', name: 'Bông tuyết', price: 3000, cur: 'xu', anim: true, slice: S1 },
   { id: 'b_bunny', name: 'Thỏ hồng', price: 3500, cur: 'xu', anim: true, slice: S1 },
   { id: 'b_frog', name: 'Ếch cỏ', price: 3500, cur: 'xu', anim: true, slice: S1 },
-  { id: 'b_owl', name: 'Cú mèo', price: 3500, cur: 'xu', anim: true, slice: S1 },
+  { id: 'b_kitten', name: 'Mèo tam thể', price: 3500, cur: 'xu', anim: true, slice: S1 },
   { id: 'b_violet', name: 'Hoa tím', price: 4000, cur: 'xu', anim: true, slice: S1 },
   { id: 'b_leaf', name: 'Lá hồng', price: 4000, cur: 'xu', anim: true, slice: S1 },
   { id: 'b_pinkcat', name: 'Mèo hồng', price: 6000, cur: 'xu', anim: true, slice: S1 },
   { id: 'b_sakura_violet', name: 'Anh đào tím', price: 6000, cur: 'xu', anim: true, slice: S1 },
   { id: 'b_chick', name: 'Gà con', price: 6000, cur: 'xu', anim: true, slice: S1 },
   { id: 'b_dolphin', name: 'Cá heo', price: 8000, cur: 'xu', anim: true, slice: S1 },
-  { id: 'b_bird', name: 'Chim sẻ', price: 8000, cur: 'xu', anim: true, slice: S1 },
+  { id: 'b_dove', name: 'Bồ câu', price: 8000, cur: 'xu', anim: true, slice: S1 },
   { id: 'b_sakura_red', name: 'Anh đào đỏ', price: 8000, cur: 'xu', anim: true, slice: S1 },
 
   // ---- khung cầu kỳ (động, mua bằng kim cương) ----
