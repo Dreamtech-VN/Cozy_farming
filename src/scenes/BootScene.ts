@@ -3,6 +3,15 @@ import Phaser from 'phaser';
 // Màn hình đầu tiên: phát video intro studio Dreamtech thật (public/assets/video/
 // studio_intro.mp4), đồng thời tải trước ảnh nền màn hình chính ở dưới nền.
 // Bấm vào video là bỏ qua luôn.
+//
+// Chỉ phát intro 1 LẦN mỗi tab: đánh dấu vào sessionStorage ngay khi vào Boot.
+// Lý do: trang bị load lại (F5, HMR lúc code đang chạy, mất mạng rồi tự nạp
+// lại...) thì index.html chạy lại từ đầu -> intro phát lại dù người chơi đã
+// xem xong lúc nãy. sessionStorage sống hết phiên tab (khác localStorage vốn
+// ở lại vĩnh viễn) nên mở tab MỚI vẫn thấy intro như cũ, chỉ có tải lại trang
+// trong CÙNG tab mới bị bỏ qua.
+const SEEN_KEY = 'cozy_intro_seen';
+
 export class BootScene extends Phaser.Scene {
   private ready = false;
   private videoDone = false;
@@ -30,7 +39,13 @@ export class BootScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(0x07050f);
 
     const video = document.getElementById('intro-video') as HTMLVideoElement | null;
-    if (!video) { this.videoDone = true; this.tryNext(); return; }
+    let alreadySeen = false;
+    try { alreadySeen = sessionStorage.getItem(SEEN_KEY) === '1'; } catch { /* ignore */ }
+    if (!video || alreadySeen) {
+      if (video) video.style.display = 'none';
+      this.videoDone = true; this.tryNext(); return;
+    }
+    try { sessionStorage.setItem(SEEN_KEY, '1'); } catch { /* ignore */ }
 
     const finish = () => {
       if (this.videoDone) return;
