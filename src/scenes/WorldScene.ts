@@ -43,8 +43,10 @@ const PETHOUSE_POS = { x: 730, y: 320 };                          // nhà thú c
 const PETSHOP_POS = { x: 21 * T, y: 13 * T };                     // tiệm thú cưng (Thành phố)
 const BARN_RECT = { x: 5.1, y: 11.6, w: 17.4, h: 10.8 };          // sân rào vẽ sẵn (px 82..360 / 185..358)
 const FREE_YARD = { x: 27, y: 18, w: 9, h: 5 };                   // bãi cỏ thả thú 2 chân (tile)
-// gốc cây vẽ sẵn trên hàng rào — mốc để chặt gỗ / rung khế
-const CHOP_POS: [number, number][] = [[404, 182], [1290, 182]];
+// gốc cây vẽ sẵn trên hàng rào — mốc để chặt gỗ / rung khế. Toạ độ lấy đúng 4
+// mã ô 142 (posTree) giải mã từ a.clazz map 25 (xem scripts/decode_lttt_maps.py):
+// tile x=22/25/28/31, y=1 -> px ảnh nền = (x+0.5)*48, gridTopPx+(y+0.5)*48.
+const CHOP_POS: [number, number][] = [[1080, 208], [1224, 208], [1368, 208], [1512, 208]];
 const KHE_POS = { x: 1650, y: 182 };
 const FARM_ORIGIN = { x: Math.round(FARM_PLOT.ox / T), y: Math.round(FARM_PLOT.oy / T) };
 const ROAD_TILES = 4; // đường xe chạy chiếm 4 hàng tile dưới cùng (map cổng)
@@ -73,8 +75,10 @@ const ZONE_DECOR: Record<string, { key: string; x: number; y: number; s?: number
   // Khu Nông Trại (map 26 gốc): cửa hàng + nhà chờ xe buýt
   farm_gate: [
     { key: 'lt_shop_av', x: 48, y: 11.2, s: 1, label: 'Cửa hàng' },
-    { key: 'lt_atm', x: 60, y: 13, s: 1, label: 'ATM' },
-    { key: 'lt_shelter', x: 14, y: 23.4, s: 0.9 },
+    // KHÔNG có ATM ở đây: ảnh nền thật (farmgate.png) chỉ vẽ biển "FARM" + nhà
+    // "CỬA HÀNG" — 4 dải mã khác trong lưới gốc (128/144/150/159) chỉ là
+    // cây/bụi trang trí (addObjTree trong LoadMap.cs), map26 không có ATM.
+    { key: 'lt_shelter', x: 27, y: 23.4, s: 0.9 },
     { key: 'lt_lamp_hd', x: 69, y: 18, s: 1 }
   ],
   // Khu nhà ở (map 22): dãy nhà đã vẽ sẵn trong nền, chỉ thêm nhà chờ + bảng

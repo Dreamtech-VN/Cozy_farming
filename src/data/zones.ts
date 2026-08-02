@@ -66,7 +66,9 @@ export const ZONES: Record<string, ZoneDef> = {
     id: 'farm_gate', name: 'Khu Nông Trại', icon: '', w: 82, h: 29, ground: 'grass',
     spawn: { x: 26, y: 16 }, hub: true,
     bg: 'farmgate', walkTop: 11, walkBottom: 24, skyTop: 150,
-    traffic: { topTile: 25 }, busStop: { x: 14, y: 22 },
+    // trạm buýt: mã ô 139 giải mã từ a.clazz map 26, dải x7-10,y5 (xem
+    // scripts/decode_lttt_maps.py) -> px ảnh = (7+2)*48, 130+(5+0.5)*48 -> /16
+    traffic: { topTile: 25 }, busStop: { x: 27, y: 24.6 },
     portals: [{ x: 26, y: 11, to: 'farm', label: 'Nông trại của bạn', icon: '' }],
     // lối mòn bên trái map dẫn sang nông trại bạn bè (mở bằng panel)
     npcs: [],

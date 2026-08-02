@@ -181,9 +181,24 @@ Nhờ đó va chạm, cửa vào và trạm buýt trong game nằm **đúng ch�
 vẽ**, không còn căn tay: zone chỉ cần khai `lttt: '<id map>'`, bảng `LTTT_ENTRY`
 trong `WorldScene` nói mã mặt tiền nào dẫn đi đâu.
 
-⚠️ Hai map nông trại (25/26) không nằm trong hệ này — Lttt dùng màn hình riêng
-(`FarmScr`) nên lưới trong `a.clazz` không khớp ảnh; hai map đó vẫn khai
-`walkTop`/`walkBottom`/`water` bằng tay.
+Hai map nông trại (25/26) KHÔNG dùng `LTTT_ENTRY` (Lttt dùng màn hình riêng
+`FarmScr` để chạy logic ruộng/chuồng/hồ cá, không phải cơ chế "mặt tiền -> mở
+panel" như các khu khác) nên `walkTop`/`walkBottom`/`water` vẫn khai bằng tay.
+Nhưng **lưới ô của chúng VẪN nằm trong `a.clazz`** (file "25" 336 byte = 42×8,
+file "26" 189 byte = 27×7 — khớp `imgw/48 × imgh/48` của `farmbg.png`/
+`farmgate.png`) và giải mã bình thường bằng `decode_lttt_maps.py`, nên các mốc
+toạ độ (gốc cây chặt gỗ, trạm buýt, chuồng, hồ...) vẫn lấy được CHÍNH XÁC từ đó
+thay vì đoán bằng mắt — quy đổi: `px ảnh = tile_x*48` (ngang) / `gridTopPx +
+tile_y*48` (dọc, `gridTopPx = imgh - h*48`), rồi `world_px = px ảnh` (nền vẽ
+1:1, không scale) và `tile của zone (T=16px) = world_px / 16`. Áp dụng việc
+này đã sửa: 4 gốc cây chặt gỗ ở `farm` (mã ô 142, trước chỉ có 2 điểm căn tay,
+giờ đủ 4 tile x=22/25/28/31,y=1), trạm buýt ở `farm_gate` (mã 139, dải
+x7-10,y5 → tile zone x:27,y:24.6, trước để x:14,y:22 lệch hẳn), và xác nhận
+`farm_gate` KHÔNG có ATM thật (4 dải mã 128/144/150/159 trong lưới gốc chỉ là
+cây/bụi trang trí `addObjTree` trong `LoadMap.cs`, không phải cửa vào — đã bỏ
+sprite ATM tự thêm trước đó khỏi `ZONE_DECOR.farm_gate`). Cửa hàng (mã 143) và
+biển FARM (mã 141) đã khớp gần đúng 100% với toạ độ căn tay cũ nên giữ nguyên;
+chuồng/hồ cá cũng lệch không đáng kể (~1 tile) nên không sửa.
 
 Nhân vật đi xuyên bàn ghế vì nền chỉ là một tấm ảnh: bảng `DRAWN_BLOCKS` trong
 `WorldScene` khai chân các món vẽ sẵn (quầy, kệ, lồng thú, giá treo đồ) làm vật
