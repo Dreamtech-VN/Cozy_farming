@@ -938,7 +938,7 @@ export class WorldScene extends Phaser.Scene {
     farming.ensurePlots();
     const { ox, oy, pw, ph } = FARM_PLOT;
     for (let i = 0; i < farming.MAX_PLOTS; i++) {
-      const col = i % farming.FARM_COLS, row = Math.floor(i / farming.FARM_COLS);
+      const { col, row } = farming.plotColRow(i);
       const x = ox + col * pw, y = oy + row * ph;
       const img = this.add.image(x, y, 'fcell2').setOrigin(0).setDepth(-60).setDisplaySize(pw, ph);
       this.plotTiles.push(img);
@@ -1317,7 +1317,7 @@ export class WorldScene extends Phaser.Scene {
     const { ox, oy, pw, ph } = FARM_PLOT;
     let best = -1, bd = 42;
     for (let i = 0; i < farming.MAX_PLOTS; i++) {
-      const col = i % farming.FARM_COLS, row = Math.floor(i / farming.FARM_COLS);
+      const { col, row } = farming.plotColRow(i);
       const cx = ox + col * pw + pw / 2, cy = oy + row * ph + ph / 2;
       const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, cx, cy);
       if (d < bd) { bd = d; best = i; }
