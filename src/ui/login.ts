@@ -9,8 +9,34 @@ import { GAME_VERSION, RES_VERSION_KEY } from '@/core/version';
 const ACC_KEY = 'cozy_account';
 const SRV_KEY = 'cozy_server';
 const TOS_KEY = 'cozy_tos_ok';
+const ACCOUNTS_KEY = 'cozy_accounts';   // sổ tài khoản tên/mật khẩu tạo trên máy
 
 interface Account { type: 'account' | 'google' | 'apple' | 'facebook' | 'guest'; name: string }
+
+// Sổ tài khoản offline: tên -> {hash mật khẩu, mã khôi phục}. hash() bên dưới
+// CHỈ để chặn gõ sai mật khẩu trên máy — không phải mã hoá an toàn, vì chưa
+// có server thật (theo đúng ghi chú đầu file). Khi nối server thật, thay toàn
+// bộ khối account/password này bằng gọi API, form giữ nguyên không đổi.
+interface StoredAccount { hash: string; recovery: string; createdAt: number }
+
+function getAccounts(): Record<string, StoredAccount> {
+  try { return JSON.parse(localStorage.getItem(ACCOUNTS_KEY) || '{}'); } catch { return {}; }
+}
+function saveAccounts(a: Record<string, StoredAccount>) {
+  try { localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(a)); } catch { /* ignore */ }
+}
+// djb2 — đủ để so khớp mật khẩu offline, KHÔNG dùng cho bảo mật thật
+function hashPass(s: string): string {
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+  return h.toString(36);
+}
+// mã khôi phục dạng XXXX-XXXX, bỏ ký tự dễ nhầm (0/O, 1/I)
+function genRecoveryCode(): string {
+  const AB = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const part = () => Array.from({ length: 4 }, () => AB[Math.floor(Math.random() * AB.length)]).join('');
+  return `${part()}-${part()}`;
+}
 
 export interface ServerDef { id: string; n: number; name: string; status: 'new' | 'normal' | 'full' }
 export interface ClusterDef { id: number; name: string; servers: ServerDef[] }
@@ -61,11 +87,23 @@ export function showLoginFlow(onStart: () => void) {
   root().append(wrap);
   const done = () => { wrap.remove(); onStart(); };
 
+  // Trong lúc chưa có tài khoản: 3 màn con luân phiên (đăng nhập / đăng ký /
+  // quên mật khẩu) — nhớ view hiện tại để link "Đăng ký ngay"/"Quên mật khẩu?"
+  // chuyển màn tại chỗ, không văng ra ngoài.
+  let authView: 'login' | 'register' | 'forgot' = 'login';
+
   const renderAuth = () => {
     wrap.innerHTML = '';
     wrap.classList.remove('anchor-bottom');   // form đăng nhập canh giữa; chọn server thì canh dưới (renderServer tự thêm lại)
     const acc = getAccount();
-    acc ? renderServer(wrap, acc, renderAuth, done) : renderLogin(wrap, renderAuth);
+    // đăng xuất ("Đổi tài khoản") phải về lại màn đăng nhập, không kẹt ở
+    // đăng ký/quên mật khẩu nếu người chơi vừa đi qua 2 màn đó trước lúc đăng nhập
+    if (acc) { renderServer(wrap, acc, () => { authView = 'login'; renderAuth(); }, done); return; }
+    const goto = (v: typeof authView) => { authView = v; renderAuth(); };
+    const loginAs = (a: Account) => { setAccount(a); renderAuth(); };
+    if (authView === 'register') renderRegister(wrap, loginAs, () => goto('login'));
+    else if (authView === 'forgot') renderForgot(wrap, () => goto('login'));
+    else renderLogin(wrap, loginAs, () => goto('register'), () => goto('forgot'));
   };
 
   renderGate(wrap, renderAuth);
@@ -161,28 +199,17 @@ function renderGate(wrap: HTMLElement, onEnter: () => void) {
   wrap.append(box);
 }
 
-function renderLogin(wrap: HTMLElement, rerender: () => void) {
-  const box = h('div', 'login-box login-box2');
-  const head = h('div', 'login-head2');
-  head.innerHTML = '<span class="lg-arrow">»</span> Chào mừng trở lại! <span class="lg-arrow">«</span>';
-  const sub = h('div', 'lg-sub', 'Đăng nhập để tiếp tục hành trình của bạn');
-  const body = h('div', 'login-body');
-  box.append(head, sub, body);
-
-  const loginAs = (a: Account) => { setAccount(a); rerender(); };
-
-  // --- form tên + mật khẩu (lưu trên máy) — cũng dùng làm "Đăng ký" luôn,
-  // vì bản offline không có backend riêng để tách 2 luồng ---
-  const userWrap = h('div', 'lg-inputwrap');
-  userWrap.innerHTML = USER_ICON;
-  const user = h('input', 'ui-input') as HTMLInputElement;
-  user.placeholder = 'Tên đăng nhập / Email'; user.maxLength = 24;
-  userWrap.append(user);
-
-  const passWrap = h('div', 'lg-inputwrap');
-  passWrap.innerHTML = LOCK_ICON;
-  const pass = h('input', 'ui-input') as HTMLInputElement;
-  pass.placeholder = 'Mật khẩu'; pass.type = 'password'; pass.maxLength = 24;
+// tạo cặp ô nhập chuẩn (icon + input), dùng chung cho cả 3 form login/register/forgot
+function mkField(icon: string, placeholder: string, type = 'text'): [HTMLElement, HTMLInputElement] {
+  const wrap = h('div', 'lg-inputwrap');
+  wrap.innerHTML = icon;
+  const input = h('input', 'ui-input') as HTMLInputElement;
+  input.placeholder = placeholder; input.maxLength = 24; input.type = type;
+  wrap.append(input);
+  return [wrap, input];
+}
+// nút ẩn/hiện mật khẩu, gắn liền sau input password
+function mkEyeBtn(pass: HTMLInputElement, wrap: HTMLElement) {
   const eyeBtn = h('button', 'lg-eye');
   eyeBtn.type = 'button';
   eyeBtn.innerHTML = EYE_ICON;
@@ -191,21 +218,38 @@ function renderLogin(wrap: HTMLElement, rerender: () => void) {
     pass.type = showing ? 'password' : 'text';
     eyeBtn.innerHTML = showing ? EYE_ICON : EYE_SLASH_ICON;
   };
-  passWrap.append(pass, eyeBtn);
+  wrap.append(eyeBtn);
+}
+
+function renderLogin(wrap: HTMLElement, loginAs: (a: Account) => void, goRegister: () => void, goForgot: () => void) {
+  const box = h('div', 'login-box login-box2');
+  const head = h('div', 'login-head2');
+  head.innerHTML = '<span class="lg-arrow">»</span> Chào mừng trở lại! <span class="lg-arrow">«</span>';
+  const sub = h('div', 'lg-sub', 'Đăng nhập để tiếp tục hành trình của bạn');
+  const body = h('div', 'login-body');
+  box.append(head, sub, body);
+
+  const [userWrap, user] = mkField(USER_ICON, 'Tên đăng nhập');
+  const [passWrap, pass] = mkField(LOCK_ICON, 'Mật khẩu', 'password');
+  mkEyeBtn(pass, passWrap);
 
   const forgotRow = h('div', 'lg-forgot-row');
   const forgot = h('a', 'lg-forgot', 'Quên mật khẩu?');
   forgot.href = '#';
-  forgot.onclick = (e) => { e.preventDefault(); toast('Tài khoản lưu trên máy này, xoá bộ nhớ đệm ở góc phải trên là chơi lại từ đầu.', ''); };
+  forgot.onclick = (e) => { e.preventDefault(); goForgot(); };
   forgotRow.append(forgot);
 
   const err = h('div', 'lg-err', '');
   const go = h('button', 'lg-start-btn', 'ĐĂNG NHẬP');
   go.onclick = () => {
     const u = user.value.trim();
-    if (u.length < 3 || pass.value.length < 3) { err.textContent = 'Tên và mật khẩu tối thiểu 3 ký tự'; return; }
+    if (!u || !pass.value) { err.textContent = 'Nhập đủ tên đăng nhập và mật khẩu'; return; }
+    const acc = getAccounts()[u.toLowerCase()];
+    if (!acc) { err.textContent = 'Tài khoản chưa tồn tại — bấm "Đăng ký ngay" bên dưới'; return; }
+    if (acc.hash !== hashPass(pass.value)) { err.textContent = 'Sai mật khẩu'; return; }
     loginAs({ type: 'account', name: u });
   };
+  [user, pass].forEach(el => el.onkeydown = e => { if (e.key === 'Enter') go.click(); });
 
   const orRow = h('div', 'lg-or'); orRow.innerHTML = '<span></span><b>HOẶC</b><span></span>';
 
@@ -249,10 +293,136 @@ function renderLogin(wrap: HTMLElement, rerender: () => void) {
   regRow.append(document.createTextNode('Chưa có tài khoản? '));
   const regLink = h('a', 'gate-tos-link', 'Đăng ký ngay');
   regLink.href = '#';
-  regLink.onclick = (e) => { e.preventDefault(); user.focus(); toast('Điền tên + mật khẩu rồi bấm Đăng nhập là tự tạo tài khoản mới luôn.', ''); };
+  regLink.onclick = (e) => { e.preventDefault(); goRegister(); };
   regRow.append(regLink);
 
   body.append(userWrap, passWrap, forgotRow, err, go, orRow, socialRow, regRow);
+  wrap.append(box);
+}
+
+function renderRegister(wrap: HTMLElement, loginAs: (a: Account) => void, goLogin: () => void) {
+  const box = h('div', 'login-box login-box2');
+  const head = h('div', 'login-head2');
+  head.innerHTML = '<span class="lg-arrow">»</span> Tạo tài khoản mới <span class="lg-arrow">«</span>';
+  const sub = h('div', 'lg-sub', 'Vài bước là có nông trại của riêng bạn');
+  const body = h('div', 'login-body');
+  box.append(head, sub, body);
+
+  const [userWrap, user] = mkField(USER_ICON, 'Tên đăng nhập (3-24 ký tự)');
+  const [passWrap, pass] = mkField(LOCK_ICON, 'Mật khẩu (tối thiểu 6 ký tự)', 'password');
+  mkEyeBtn(pass, passWrap);
+  const [pass2Wrap, pass2] = mkField(LOCK_ICON, 'Nhập lại mật khẩu', 'password');
+  mkEyeBtn(pass2, pass2Wrap);
+
+  const err = h('div', 'lg-err', '');
+  const go = h('button', 'lg-start-btn', 'ĐĂNG KÝ');
+  go.onclick = () => {
+    const u = user.value.trim();
+    if (u.length < 3 || u.length > 24) { err.textContent = 'Tên đăng nhập phải từ 3-24 ký tự'; return; }
+    if (pass.value.length < 6) { err.textContent = 'Mật khẩu tối thiểu 6 ký tự'; return; }
+    if (pass.value !== pass2.value) { err.textContent = 'Mật khẩu nhập lại không khớp'; return; }
+    const accounts = getAccounts();
+    const key = u.toLowerCase();
+    if (accounts[key]) { err.textContent = 'Tên đăng nhập đã có người dùng — thử tên khác'; return; }
+    const recovery = genRecoveryCode();
+    accounts[key] = { hash: hashPass(pass.value), recovery, createdAt: Date.now() };
+    saveAccounts(accounts);
+    renderRecoveryReveal(wrap, u, recovery, () => loginAs({ type: 'account', name: u }));
+  };
+  [user, pass, pass2].forEach(el => el.onkeydown = e => { if (e.key === 'Enter') go.click(); });
+
+  const backRow = h('div', 'lg-note');
+  backRow.append(document.createTextNode('Đã có tài khoản? '));
+  const backLink = h('a', 'gate-tos-link', 'Đăng nhập');
+  backLink.href = '#';
+  backLink.onclick = (e) => { e.preventDefault(); goLogin(); };
+  backRow.append(backLink);
+
+  body.append(userWrap, passWrap, pass2Wrap, err, go, backRow);
+  wrap.append(box);
+}
+
+// Hiện đúng 1 lần ngay sau khi đăng ký: mã khôi phục dùng để lấy lại mật khẩu
+// sau này (không có email/SMS thật vì chưa có server) — bắt lưu lại rồi mới cho tiếp tục.
+function renderRecoveryReveal(wrap: HTMLElement, name: string, recovery: string, cont: () => void) {
+  wrap.innerHTML = '';
+  const box = h('div', 'login-box login-box2');
+  const head = h('div', 'login-head2');
+  head.innerHTML = '<span class="lg-arrow">»</span> Lưu lại mã khôi phục <span class="lg-arrow">«</span>';
+  const sub = h('div', 'lg-sub', `Chào ${name}! Ghi lại mã này — dùng để lấy lại mật khẩu nếu quên, vì tài khoản chỉ lưu trên máy này.`);
+  const code = h('div', 'lg-recovery-code', recovery);
+  const warn = h('div', 'lg-err', 'Mất mã này = mất tài khoản, không ai khôi phục giúp được (chưa có server thật).');
+  const go = h('button', 'lg-start-btn', 'TÔI ĐÃ LƯU, TIẾP TỤC');
+  go.onclick = cont;
+  box.append(head, sub, code, warn, go);
+  wrap.append(box);
+}
+
+function renderForgot(wrap: HTMLElement, goLogin: () => void) {
+  const box = h('div', 'login-box login-box2');
+  const head = h('div', 'login-head2');
+  head.innerHTML = '<span class="lg-arrow">»</span> Quên mật khẩu <span class="lg-arrow">«</span>';
+  const sub = h('div', 'lg-sub', 'Nhập tên đăng nhập và mã khôi phục đã lưu lúc đăng ký');
+  const body = h('div', 'login-body');
+  box.append(head, sub, body);
+
+  const [userWrap, user] = mkField(USER_ICON, 'Tên đăng nhập');
+  const codeWrap = h('div', 'lg-inputwrap');
+  const code = h('input', 'ui-input') as HTMLInputElement;
+  code.placeholder = 'Mã khôi phục (VD: AB3D-9KX2)'; code.maxLength = 9;
+  codeWrap.append(code);
+
+  const err = h('div', 'lg-err', '');
+  const next = h('button', 'lg-start-btn', 'XÁC NHẬN');
+  next.onclick = () => {
+    const u = user.value.trim();
+    const accounts = getAccounts();
+    const acc = accounts[u.toLowerCase()];
+    if (!acc) { err.textContent = 'Tài khoản chưa tồn tại'; return; }
+    if (acc.recovery.toUpperCase() !== code.value.trim().toUpperCase()) { err.textContent = 'Mã khôi phục không đúng'; return; }
+    renderResetPassword(wrap, u, goLogin);
+  };
+  [user, code].forEach(el => el.onkeydown = e => { if (e.key === 'Enter') next.click(); });
+
+  const backRow = h('div', 'lg-note');
+  const backLink = h('a', 'gate-tos-link', '« Quay lại đăng nhập');
+  backLink.href = '#';
+  backLink.onclick = (e) => { e.preventDefault(); goLogin(); };
+  backRow.append(backLink);
+
+  body.append(userWrap, codeWrap, err, next, backRow);
+  wrap.append(box);
+}
+
+function renderResetPassword(wrap: HTMLElement, name: string, goLogin: () => void) {
+  wrap.innerHTML = '';
+  const box = h('div', 'login-box login-box2');
+  const head = h('div', 'login-head2');
+  head.innerHTML = '<span class="lg-arrow">»</span> Đặt mật khẩu mới <span class="lg-arrow">«</span>';
+  const sub = h('div', 'lg-sub', `Đặt mật khẩu mới cho ${name}`);
+  const body = h('div', 'login-body');
+  box.append(head, sub, body);
+
+  const [passWrap, pass] = mkField(LOCK_ICON, 'Mật khẩu mới (tối thiểu 6 ký tự)', 'password');
+  mkEyeBtn(pass, passWrap);
+  const [pass2Wrap, pass2] = mkField(LOCK_ICON, 'Nhập lại mật khẩu mới', 'password');
+  mkEyeBtn(pass2, pass2Wrap);
+
+  const err = h('div', 'lg-err', '');
+  const go = h('button', 'lg-start-btn', 'ĐẶT LẠI MẬT KHẨU');
+  go.onclick = () => {
+    if (pass.value.length < 6) { err.textContent = 'Mật khẩu tối thiểu 6 ký tự'; return; }
+    if (pass.value !== pass2.value) { err.textContent = 'Mật khẩu nhập lại không khớp'; return; }
+    const accounts = getAccounts();
+    const key = name.toLowerCase();
+    if (accounts[key]) accounts[key].hash = hashPass(pass.value);
+    saveAccounts(accounts);
+    toast('Đã đặt lại mật khẩu — đăng nhập lại nhé!', '');
+    goLogin();
+  };
+  [pass, pass2].forEach(el => el.onkeydown = e => { if (e.key === 'Enter') go.click(); });
+
+  body.append(passWrap, pass2Wrap, err, go);
   wrap.append(box);
 }
 

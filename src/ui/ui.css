@@ -1131,6 +1131,13 @@ input.ui-input, select.ui-input {
 .login-box2 .lg-note .gate-tos-link { color: #d8f5a2; font-weight: 700; }
 .login-box2 .lg-err { min-height: 12px; }
 
+.lg-recovery-code {
+  text-align: center; font-weight: 900; letter-spacing: 4px; font-size: clamp(18px, 4vh, 26px);
+  color: #4a3005; background: linear-gradient(#ffe066, #f0a318); border-radius: 12px;
+  padding: clamp(10px, 2.4vh, 14px) 0; margin: clamp(6px, 1.6vh, 10px) clamp(16px, 4.5vw, 26px) 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 4px 0 #c9820f;
+}
+
 /* ===== Chip tạo nhân vật: icon + tên thẳng hàng ===== */
 .chip.cc-chip { display: inline-flex; align-items: center; gap: 7px; min-height: 42px; padding-top: 4px; padding-bottom: 6px; }
 .chip.cc-chip .spr { flex: none; }
