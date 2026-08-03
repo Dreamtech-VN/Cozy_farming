@@ -677,6 +677,36 @@ tool không cứu được — phải vẽ lại ở độ phân giải cao rồ
   cùng ngưỡng với `livestock.isHungry`). Panel "Ao nuôi cá" (`src/ui/panels.ts`) có nút
   "Cho ăn" khi cá đói.
 
+**Thú cưng — đổi từ hệ "shop 5 loại % thưởng" tự chế sang bám sát bản gốc:**
+- `Pet.cs` (client Lttt gốc, `Assets/Scripts/Assembly-CSharp/Pet.cs`) cho thấy thú cưng
+  KHÔNG phải một catalog loài riêng: `Pet extends Animal`, có `follow` trỏ tới `Avatar`
+  chủ, và tạo hình vẽ ra bằng `AvatarData.getPart(follow.idPet)` — **cùng bảng part**
+  dùng cho tóc/áo/quần avatar, tức pet chỉ là một item trang phục nữa được "mặc" vào.
+  Không có % thưởng thu hoạch/bán/câu cá/canh trại nào trong code — hệ `perk` (harvest/
+  sell/guard/fish/grow) ở bản cũ của ta là tự bịa, đã bỏ hoàn toàn.
+- `move()` thật: tốc độ đi theo chủ tỉ lệ với `follow.hungerPet` (`v * hungerPet/100`,
+  chỉ full tốc khi `hungerPet >= 70`) — thú đói thì lết theo chậm hẳn. `paintIcon()` vẽ
+  một thanh đói nhỏ ngay trên đầu thú (`PaintPopup.fill`, 2 lớp màu nền/mức đói).
+- **Giữ nguyên bộ art đã dựng** (`src/data/pets.ts`'s `CURATED`, `pets-gp.json`, sprite
+  strip `assets/pet/gp/*.webp` từ `scripts/pet_strips.py`) — chỉ đổi CƠ CHẾ, không phải
+  bộ sưu tập; 7-10 con GunPow curated vẫn dùng được vì Lttt gốc thì bộ "pet" cũng chỉ là
+  item bất kỳ trong bảng part, số lượng/tạo hình không có ý nghĩa đặc biệt.
+- **Đã approximate** (không có công thức suy giảm hunger thật của server, tương tự phần
+  vật nuôi/cá ở trên):
+  - `src/systems/pets.ts`: `S.petFedAt` (timestamp cho ăn gần nhất) thay cho
+    `hungerPet` 0-100 thật; `petFullness()` suy giảm tuyến tính về 0 sau 4 giờ — dùng
+    lại đúng ngưỡng 4 giờ đã áp cho vật nuôi trên cạn (`livestock.isHungry`) và cá
+    (`fishfarm.isHungryFish`) cho đồng bộ, thay vì bịa ra một công thức riêng.
+  - Cho ăn dùng lại item `feed` sẵn có (`itemCount('feed')`/`removeItem('feed')`) —
+    không có loại "thức ăn thú cưng" riêng vì bản gốc cũng dùng chung khái niệm hunger
+    với `Animal`.
+  - `petSpeedMult()` phỏng theo `move()`: no ≥70% thì full tốc, dưới đó giảm dần còn tối
+    thiểu 35% tốc (bản gốc không có sàn tối thiểu rõ ràng — thêm sàn để tránh thú đứng
+    hình khi quá đói, giữ trải nghiệm chơi được).
+  - UI: icon 🍖 nhỏ nổi trên đầu thú khi đói (thay cho thanh pixel vẽ tay như
+    `paintIcon`), panel "Thú cưng của tôi" và bảng chọn khi bấm vào thú ngoài map
+    (`WorldScene.petMenu`) đều có nút "Cho ăn" — cùng tông với UI cho ăn vật nuôi.
+
 ## Cần mua thêm (đề xuất, ưu tiên từ trên xuống)
 
 1. **Pack côn trùng** (bướm/bọ pixel 16px) — hiện đang vẽ tạm bằng code. Gợi ý tìm: "pixel insects pack" trên itch.

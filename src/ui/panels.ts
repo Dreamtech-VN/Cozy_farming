@@ -22,7 +22,8 @@ import { WHEEL, LOGIN_REWARDS, CHECKIN_MILESTONES, activeEvents } from '@/data/m
 import { TOOL_LIST, TOOLS, toolUpgradeAt, toolIconSize } from '@/data/tools';
 import { EMOJIS } from '@/data/emoji';
 import { BUBBLES } from '@/data/bubbles';
-import { PET_LIST, PETS, ownsPet, petBonus, petArt } from '@/data/pets';
+import { PET_LIST, PETS, ownsPet, petArt } from '@/data/pets';
+import { petFullness, isPetHungry, feedPet } from '@/systems/pets';
 import * as farming from '@/systems/farming';
 import * as livestock from '@/systems/livestock';
 import { buyRod, addToAquarium } from '@/systems/fishing';
@@ -38,9 +39,8 @@ import { progressOf, isDone, isClaimed, canClaim, claim, claimAll, achDone, pend
 import { upgradeTool, upgradeRate, missingMats, failStreak, UPGRADABLE, FAIL_BONUS, FAIL_BONUS_MAX } from '@/systems/toolcraft';
 import type { Reward } from '@/data/quests';
 
-// giá bán thực nhận (vẹt lanh lợi +10%)
 function sellPrice(base: number, qty = 1): number {
-  return Math.round(base * qty * (1 + petBonus('sell')));
+  return Math.round(base * qty);
 }
 
 function rewardText(r: Reward): string {
@@ -1521,7 +1521,7 @@ export function registerAllPanels() {
         const cell = h('button', `pet-cell ${owned ? 'owned' : ''}`);
         cell.append(petArt(p, 66));
         cell.append(h('div', 'pet-nm', p.name));
-        cell.append(h('div', 'pet-pk', p.perkText));
+        cell.append(h('div', 'pet-pk', 'Bạn đồng hành — đi theo bạn khắp nông trại'));
         cell.append(owned ? h('div', 'pet-own', 'Đã nuôi') : (() => {
           const pr = h('div', 'pet-price'); pr.innerHTML = priceHtml(0, p.price); return pr;
         })());
@@ -1529,13 +1529,13 @@ export function registerAllPanels() {
           sfx.click();
           openPanel('dialog', {
             title: p.name,
-            text: p.perkFull,
+            text: 'Một người bạn nhỏ cùng bạn dạo quanh nông trại — nhớ cho ăn để bé luôn vui và theo kịp bạn nhé.',
             actions: owned ? [] : [{
               icon: '', ui: 'ruby', label: `Mua ${fmt(p.price)} ruby`,
               cb: () => {
                 if (!spendRubies(p.price, 'pet')) return;
                 S.pets.push(p.id);
-                if (!S.activePet) S.activePet = p.id;
+                if (!S.activePet) { S.activePet = p.id; S.petFedAt = Date.now(); }
                 save(true); sfx.coin();
                 toast(`${p.name} đã về nhà bạn!`, 'pet');
                 bus.emit(EV.ZONE);
@@ -1547,7 +1547,7 @@ export function registerAllPanels() {
         grid.append(cell);
       }
       body.append(grid);
-      body.append(h('div', 'hint', 'Chỉ bé đang thả mới cộng công dụng — đổi bé ở mục Thú cưng của tôi.'));
+      body.append(h('div', 'hint', 'Thú cưng là bạn đồng hành — chỉ đơn thuần cho vui, không cộng chỉ số. Đổi bé đang thả ở mục Thú cưng của tôi.'));
     };
     render();
   });
@@ -1570,10 +1570,15 @@ export function registerAllPanels() {
         ic.append(petArt(p, 46));
         r.append(ic);
         const info = h('div', 'grow');
-        info.innerHTML = `<div class="t1">${p.name}${active ? ' <span class="tl-lv">đang theo</span>' : ''}</div><div class="t2">${p.perkFull}</div>`;
+        const hungerNote = active ? (isPetHungry() ? `<span class="tl-lv" style="color:#e66">đói bụng — no ${petFullness()}%</span>` : `no ${petFullness()}%`) : '';
+        info.innerHTML = `<div class="t1">${p.name}${active ? ' <span class="tl-lv">đang theo</span>' : ''}</div><div class="t2">${hungerNote}</div>`;
         r.append(info);
+        if (active && isPetHungry()) {
+          r.append(btn('Cho ăn', 'gold', () => { feedPet(); render(); }));
+        }
         r.append(btn(active ? 'Cất về nhà' : 'Cho ra ngoài', active ? '' : 'gold', () => {
           S.activePet = active ? undefined : id;
+          if (!active) S.petFedAt = Date.now(); // vừa đưa ra ngoài, cho là đang no sẵn
           save(true);
           toast(active ? `${p.name} về nhà nghỉ.` : `${p.name} đi cùng bạn!`, 'pet');
           bus.emit(EV.ZONE);
@@ -1581,7 +1586,7 @@ export function registerAllPanels() {
         }));
         body.append(r);
       }
-      body.append(h('div', 'hint', 'Bấm vào thú cưng ngoài map để dắt đi dạo / vuốt ve.'));
+      body.append(h('div', 'hint', 'Bấm vào thú cưng ngoài map để dắt đi dạo / cho ăn / vuốt ve.'));
     };
     render();
   });

@@ -1,7 +1,6 @@
 import { S, save, addItem, removeItem, itemCount, addExp, addStat, addCoins, toolLevel } from '@/core/save';
 import { toolBonus } from '@/data/tools';
 import { addTo, takeFrom, countOf } from './farmstore';
-import { petBonus } from '@/data/pets';
 import { CROP_LIST } from '@/data/crops';
 import { bus, EV, toast } from '@/core/events';
 import { CROPS } from '@/data/crops';
@@ -153,8 +152,6 @@ export function harvest(i: number): boolean {
   qty = Math.max(1, Math.round(qty * hp / 100));
   // giỏ cấp cao: cơ hội +1 nông sản
   if (Math.random() < toolBonus('basket', toolLevel('basket'))) { qty += 1; toast('Giỏ xịn: +1 nông sản!', 'basket'); }
-  // mèo đuổi chuột phá mùa màng
-  if (Math.random() < petBonus('harvest')) { qty += 1; toast('Thú cưng lục lọi giúp: +1 nông sản!', 'pet'); }
   addTo('produce', c.id, qty);        // nông sản vào KHO, không vào túi
   // thu hoạch hoa thì có cơ hội hứng được mật ong từ đàn ong quanh vườn
   if (['grape', 'strawberry'].includes(c.id) && Math.random() < 0.25) {
