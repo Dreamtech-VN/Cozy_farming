@@ -28,6 +28,17 @@ UI DOM: HUD, joystick ảo, cửa sổ (panel registry) — mở qua bus EV.OPEN
 - TypeScript bắt lỗi khi compile, refactor an toàn — "dễ update, sửa lỗi" đúng yêu cầu.
 - Phaser 3: engine 2D web phổ biến nhất, pixel-art tốt, tài liệu nhiều.
 
+## Đăng ký / đăng nhập / quên mật khẩu (`src/ui/login.ts`)
+
+Chưa có server thật nên toàn bộ tài khoản sống trong `localStorage` (`cozy_accounts`:
+tên -> {hash, mã khôi phục}), nhưng UI dựng đủ 3 màn tách bạch (Đăng nhập / Đăng ký /
+Quên mật khẩu) như có backend thật, để sau này cắm server chỉ cần thay các hàm
+`getAccounts/saveAccounts/hashPass` bằng gọi API — form không cần sửa. `hashPass()`
+chỉ là hash tay (djb2) để chặn gõ sai mật khẩu trên máy, KHÔNG phải mã hoá an toàn;
+khi có server phải hash mật khẩu ở phía server (bcrypt/argon2...), không gửi hash
+kiểu này qua mạng. Quên mật khẩu dùng "mã khôi phục" hiện đúng 1 lần lúc đăng ký
+(không có email/SMS thật) — mất mã thì mất tài khoản, vì đây là giả lập offline.
+
 ## Điểm mở rộng đã chừa sẵn
 
 - `systems/social.ts` đang chạy chế độ offline (bạn NPC, chat bot) — thay bằng client WebSocket theo `docs/SERVER_PROTOCOL.md` là thành online, UI giữ nguyên.

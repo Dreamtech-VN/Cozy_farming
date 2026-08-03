@@ -379,6 +379,36 @@ growMin xếp theo ĐÚNG thứ tự nhanh→chậm thật của Lttt (Hồng 12
 trong game từ trước), quy đổi vào thang thời gian ngắn của game này (22-55
 phút) rồi tính giá theo công thức nội bộ đang dùng (sell ≈ 4.25×growMin+10).
 
+### Icon `assets/ui/act/` cắt sai — vẽ lại tay
+
+Soát lại vì bị báo icon "quà" ở màn Điểm danh trông như bông hoa/trái tim. Kiểm
+tra cả thư mục `assets/ui/act/` (icon nhỏ 12-30px, cắt tay từ nhiều sheet khác
+nhau qua nhiều đợt) thì thấy đúng là cắt lệch/gán nhầm khá nhiều, không phải
+riêng 1 file:
+
+- `gift.png` (icon "Nhận quà" màn Điểm danh): thật ra là hình trái tim (giống
+  hệt `heart.png`, chắc copy nhầm lúc cắt) — vẽ lại thành hộp quà nơ vàng.
+- `fertilizer.png`: cắt ra hình quả TRỨNG (chắc lấy nhầm ô trên sheet gốc) —
+  vẽ lại thành bao phân bón nâu có hạt xanh.
+- `fish.png`: cắt ra hình như con chim/côn trùng nhỏ, không giống cá — vẽ lại
+  thành hình cá bầu dục + đuôi tam giác rõ ràng.
+- `minigame.png`: là ẢNH THẬT lá bài "3 bích" (trông như ảnh chụp/stock, khác
+  hẳn phong cách pixel phẳng của game, còn có nguy cơ dính bản quyền ảnh gốc) —
+  thay bằng xúc xắc pixel tự vẽ.
+
+Đã tìm trong source Unity Pack5 giải nén đầy đủ (`Assets/Resources/hd/`, 690
+ảnh cắt sẵn riêng lẻ: `iconmenu/`, `iconshop/`, `card/`, `effect/`...) xem có
+icon quà/phân bón/cá nào dùng thẳng được không — không có icon nào khớp tên
+(`iconmenu`/`iconshop` toàn icon UI menu/shop, không có vật phẩm nông trại),
+nên 4 icon trên vẫn vẽ tay bằng PIL (cùng kiểu viền đậm phẳng như `w_moon.png`
+vẽ trước đó), không lấy asset ngoài.
+
+⚠️ Đây mới là 4 icon RÕ RÀNG sai/lạc phong cách nhất trong `assets/ui/act/`
+(53 file); phần còn lại (act_*, bait_*, tool_*, zone_*, w_*...) xem qua ảnh
+contact-sheet thì ổn, nhưng CHƯA soát hết từng file từng pixel — nếu thấy icon
+nào khác sai/lệch thì báo tiếp, cứ theo đúng cách này (dò trong `hd/` Unity
+trước, không có mới vẽ tay) chứ không đoán bừa.
+
 ### 12 cây còn thiếu (Khóm, Lúa, Xoài, Thanh Long, Nha Đam, Dưa Leo, Tỏi,
 ### Chuối, Đào, Vải, cúc chuồn chuồn, sen) — CHẶN VÌ THIẾU ART
 
