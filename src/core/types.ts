@@ -156,6 +156,7 @@ export interface GameState {
   pets: string[];           // thú cưng đã nuôi
   skins: string[];          // skin trọn bộ đã sở hữu
   activePet?: string;       // thú cưng đang dắt theo
+  petFedAt?: number;        // lần cho thú đang thả ăn gần nhất (Pet.cs: hunger theo follow.hungerPet)
   livestock: { barnLevel: number; animals: Animal[] };
   house: HouseState;
   collections: { fish: string[]; insects: string[]; crops: string[] };

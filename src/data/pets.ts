@@ -3,13 +3,13 @@
 // animation 'wait' bằng scripts/pet_strips.py) — bỏ hết bản trùng chỉ khác màu,
 // mỗi con một tạo hình riêng. Mua bằng RUBY (không phải xu), vì đây là thú hiếm.
 //
-// Game không đánh nhau nên thú cưng KHÔNG có chỉ số chiến đấu: mỗi con mang
-// một công dụng nhà nông, gán theo vòng để con nào cũng có việc.
+// Theo bản gốc Lttt (Pet.cs): thú cưng chỉ là MỘT MÓN TRANG PHỤC nữa của avatar
+// (đọc từ AvatarData.getPart(follow.idPet) — cùng bảng part với tóc/áo/quần),
+// bám theo người chơi và có thanh đói cần cho ăn — KHÔNG có % thưởng thu hoạch/
+// bán/câu cá/canh trại nào cả (hệ đó là ta tự chế trước đây, đã bỏ).
 
 import { S } from '@/core/save';
 import GP from './pets-gp.json';
-
-export type PetPerk = 'harvest' | 'sell' | 'guard' | 'fish' | 'grow';
 
 export interface PetDef {
   id: string;
@@ -17,36 +17,7 @@ export interface PetDef {
   art: { url: string; w: number; h: number; frames: number };
   price: number;         // giá tính bằng RUBY
   scale: number;
-  perk: PetPerk;
-  perkText: string;      // dòng ngắn trong shop
-  perkFull: string;      // giải thích đầy đủ
 }
-
-/** Công dụng của từng loại — số nhỏ, chỉ để thưởng cho việc nuôi thú. */
-export const PERKS: Record<PetPerk, { rate: number; text: string; full: string }> = {
-  harvest: {
-    rate: 0.15, text: '+15% cơ hội thu thêm nông sản',
-    full: 'Bé lục lọi quanh ruộng: mỗi lần thu hoạch có thêm 15% cơ hội được thêm 1 nông sản.'
-  },
-  sell: {
-    rate: 0.10, text: '+10% xu khi bán',
-    full: 'Bé nhanh mồm mặc cả giúp bạn: mọi lần bán vật phẩm đều được thêm 10% xu.'
-  },
-  guard: {
-    rate: 0.50, text: 'Giảm 50% mất đồ khi khách ghé',
-    full: 'Bé canh nông trại: khi người chơi khác ghé thăm, tỉ lệ bị trộm nông sản giảm một nửa.'
-  },
-  fish: {
-    rate: 0.10, text: '+10% tỉ lệ câu được cá hiếm',
-    full: 'Bé ngồi rình bên hồ: mỗi lần câu, tỉ lệ dính cá hiếm tăng thêm 10%.'
-  },
-  grow: {
-    rate: 0.05, text: 'Cây lớn nhanh hơn 5%',
-    full: 'Bé chạy nhảy làm đất tơi: mọi cây trong nông trại lớn nhanh hơn 5%.'
-  }
-};
-
-const PERK_ORDER: PetPerk[] = ['harvest', 'sell', 'guard', 'fish', 'grow'];
 
 // pack không kèm bảng tên gốc nên tự đặt tên + giá ruby theo độ hiếm nhìn bằng mắt
 // (đã bỏ 0006/0032/0084/0156 — ráp bị dư mảnh rời phía sau lưng không sửa nổi)
@@ -63,18 +34,14 @@ const CURATED: { sid: string; name: string; price: number }[] = [
 const SIZE = GP as unknown as Record<string, [number, number, number]>;
 
 export const PETS: Record<string, PetDef> = {};
-CURATED.forEach((c, i) => {
+CURATED.forEach(c => {
   const [w, h, frames] = SIZE[c.sid];
-  const perk = PERK_ORDER[i % PERK_ORDER.length];
   PETS[`gp_${c.sid}`] = {
     id: `gp_${c.sid}`,
     name: c.name,
     art: { url: `assets/pet/gp/${c.sid}.webp`, w, h, frames },
     price: c.price,
-    scale: 1,
-    perk,
-    perkText: PERKS[perk].text,
-    perkFull: PERKS[perk].full
+    scale: 1
   };
 });
 
@@ -97,13 +64,3 @@ export function petArt(def: PetDef, size = 48): HTMLElement {
 
 export function petDef(id?: string): PetDef | undefined { return id ? PETS[id] : undefined; }
 export function ownsPet(id: string): boolean { return (S.pets ?? []).includes(id); }
-
-/**
- * Hệ số thưởng của thú ĐANG THẢ (0 nếu không có).
- * Chỉ con đang thả mới tính — nuôi cả đàn không cộng dồn.
- */
-export function petBonus(perk: PetPerk): number {
-  const def = petDef(S.activePet);
-  if (!def || !ownsPet(def.id)) return 0;
-  return def.perk === perk ? PERKS[perk].rate : 0;
-}

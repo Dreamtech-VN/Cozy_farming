@@ -5,6 +5,7 @@ import { bus, EV, toast } from '@/core/events';
 import { ZONES, type ZoneDef, type NpcDef } from '@/data/zones';
 import { CROPS, CROP_LIST, CROP_ANIM } from '@/data/crops';
 import { PETS, petDef } from '@/data/pets';
+import { petFullness, isPetHungry, petSpeedMult, feedPet } from '@/systems/pets';
 import { roamersIn } from '@/systems/social';
 import type { Friend } from '@/core/types';
 import { ANIMALS } from '@/data/animals';
@@ -1904,6 +1905,15 @@ export class WorldScene extends Phaser.Scene {
         this.pet.setFrame(this.petFi);
       } });
 
+      // thanh đói nhỏ phía trên đầu, phỏng theo Pet.cs paintIcon — chỉ hiện khi đói
+      this.petHungerIcon = this.add.text(home.x, home.y - this.pet.displayHeight - 6, '🍖', { fontSize: '14px' })
+        .setOrigin(0.5).setDepth(9999).setVisible(false);
+      this.time.addEvent({ delay: 1000, loop: true, callback: () => {
+        if (!this.pet?.active || !this.petHungerIcon) return;
+        this.petHungerIcon.setVisible(isPetHungry());
+        this.petHungerIcon.setPosition(this.pet.x, this.pet.y - this.pet.displayHeight - 6);
+      } });
+
       // đi loanh quanh khi không dắt
       const wander = () => {
         if (!this.pet?.active) return;
@@ -1928,16 +1938,18 @@ export class WorldScene extends Phaser.Scene {
     this.load.start();
   }
   private petFi = 0;
+  private petHungerIcon?: Phaser.GameObjects.Text;
 
   // Vừa mua thú / đổi bé đang thả (panels.ts bắn EV.ZONE sau hai việc đó) ->
   // dựng lại thú trong scene đang chạy, khỏi phải đổi khu mới thấy được.
   private refreshPet() {
     if (this.pet) { this.pet.destroy(); this.pet = undefined; }
+    if (this.petHungerIcon) { this.petHungerIcon.destroy(); this.petHungerIcon = undefined; }
     this.petWalk = false;
     this.spawnPet();
   }
 
-  // pet bám theo người chơi khi đang dắt đi dạo
+  // pet bám theo người chơi khi đang dắt đi dạo — Pet.cs move(): đói thì đi ì ạch
   private followPet(dt: number) {
     if (!this.pet?.active || !this.petWalk) return;
     const def = petDef(S.activePet);
@@ -1946,7 +1958,7 @@ export class WorldScene extends Phaser.Scene {
     const dx = this.player.x - this.pet.x, dy = this.player.y + 6 - this.pet.y;
     const d = Math.hypot(dx, dy);
     if (d > gap) {
-      const spd = Math.min(d - gap, (this.zone.bg ? 150 : 100) * (dt / 1000));
+      const spd = Math.min(d - gap, (this.zone.bg ? 150 : 100) * petSpeedMult() * (dt / 1000));
       this.pet.x += (dx / d) * spd;
       this.pet.y += (dy / d) * spd;
       this.pet.setFlipX(dx < 0);
@@ -1958,11 +1970,12 @@ export class WorldScene extends Phaser.Scene {
   private petMenu() {
     const def = petDef(S.activePet);
     if (!def) return;
+    const hungry = isPetHungry();
     bus.emit(EV.OPEN_PANEL, {
       panel: 'dialog',
       data: {
         title: def.name,
-        text: def.perkFull,
+        text: hungry ? `Bé đang đói (no ${petFullness()}%), đi lại chậm hẳn — cho ăn để bé khoẻ lại nhé.` : `Bé đang no ${petFullness()}%, khoẻ re!`,
         actions: [
           {
             icon: '', ui: this.petWalk ? 'house' : 'pet', label: this.petWalk ? 'Cho về nhà' : 'Dắt đi dạo',
@@ -1971,6 +1984,9 @@ export class WorldScene extends Phaser.Scene {
               this.tweens.killTweensOf(this.pet!);
               toast(this.petWalk ? `${def.name} đi dạo cùng bạn!` : `${def.name} về chỗ nghỉ.`, 'pet');
             }
+          },
+          {
+            icon: '', ui: 'feed', label: 'Cho ăn', cb: () => { feedPet(); }
           },
           {
             icon: '', ui: 'heart', label: 'Vuốt ve', cb: () => {
