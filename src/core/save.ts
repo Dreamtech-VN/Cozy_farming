@@ -32,6 +32,7 @@ export function defaultState(): GameState {
     chibiWardrobe: [],
     pets: [],
     skins: [],
+    petFedAt: Date.now(),  // thú mới nuôi coi như đang no sẵn
     hotbar: [...FIXED_TOOLS, ''],
     tools: { rod: 0, can: 1, hoe: 1, net: 0, basket: 1, axe: 1 },
     farm: { unlocked: 6, plots: [] },
@@ -155,6 +156,8 @@ export function load(): boolean {
     // save cũ nuôi chó/mèo/vẹt (hệ thú cũ) -> bỏ, thú giờ lấy từ pack GunPow
     S.pets = S.pets.filter(p => p.startsWith('gp_'));
     if (S.activePet && !S.activePet.startsWith('gp_')) S.activePet = undefined;
+    // save cũ chưa có hunger — coi như đang no, khỏi bắt cho ăn ngay khi vừa cập nhật
+    if (S.petFedAt === undefined) S.petFedAt = Date.now();
     if (S.tools.basket === undefined) S.tools.basket = (S.inventory['tool_basket'] ?? 0) > 0 ? 1 : 0;
     // 4 công cụ cơ bản luôn có sẵn (save cũ có thể thiếu rìu/liềm)
     if (S.tools.axe === undefined) S.tools.axe = 1;

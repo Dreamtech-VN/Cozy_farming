@@ -379,6 +379,27 @@ growMin xếp theo ĐÚNG thứ tự nhanh→chậm thật của Lttt (Hồng 12
 trong game từ trước), quy đổi vào thang thời gian ngắn của game này (22-55
 phút) rồi tính giá theo công thức nội bộ đang dùng (sell ≈ 4.25×growMin+10).
 
+### 12 cây còn thiếu (Khóm, Lúa, Xoài, Thanh Long, Nha Đam, Dưa Leo, Tỏi,
+### Chuối, Đào, Vải, cúc chuồn chuồn, sen) — CHẶN VÌ THIẾU ART
+
+Bảng `farmitems` thật (`127_0_0_1.sql`) còn 24 dòng, trừ 10 dòng trùng tên
+14 cây cũ và 3 dòng trùng tên vùng miền (bí ngô = bí đỏ, cây ớt = ớt, Bắp =
+ngô — đã có), còn lại 12 cây chưa có trong game: Khóm (dứa), Lúa (khác
+Lúa mì `wheat` đang có — giữ riêng, không gộp), Xoài, Thanh Long, Nha Đam,
+Dưa Leo, Tỏi, Chuối, Đào, Vải, "cúc chuồn chuồn", sen.
+
+Đã soát toàn bộ `public/assets/` (farm/chibi, farm/it, farm/cf, pack2/icons,
+pack2/crops, deco, ui/*, chat/bubble...) tìm icon túi khớp tên/tiếng Anh cho
+từng cây — **không có file nào khớp**. `assets/farm/crops_all.png` còn vài
+hàng (30-36) chưa dùng tới nhưng khi cắt ra xem thì toàn là biến thể màu của
+MỘT loại hoa tím/chậu kiểng chung chung, không phải dứa/xoài/thanh long/nha
+đam/dưa leo/tỏi/chuối/đào/vải/cúc/sen/lúa — không có cây nào trong 12 cây này
+đủ giống thật để dùng (không tự vẽ pixel art mới, không gán bừa icon không
+khớp, theo đúng nguyên tắc đã áp dụng lúc thêm Hồng/Tulip/Dưa hấu/Hướng
+dương). Vì vậy **không thêm cây nào trong đợt này** — để dành khi nào có
+nguồn art thật (icon riêng cho từng loại) mới làm tiếp theo đúng quy trình ở
+mục trên (phóng to icon 0.35/0.6/0.85/1.0 + khung héo cuối).
+
 ## Icon mặt trăng (`assets/ui/act/w_moon.png`)
 
 Bộ icon thời tiết `w_*` (nắng/mưa/mây/tuyết) không có bản đêm — GunPow cũng
@@ -655,6 +676,36 @@ tool không cứu được — phải vẽ lại ở độ phân giải cao rồ
   đói** (`isHungryFish` — đói nếu chưa từng cho ăn, hoặc quá 4 giờ từ lần ăn gần nhất,
   cùng ngưỡng với `livestock.isHungry`). Panel "Ao nuôi cá" (`src/ui/panels.ts`) có nút
   "Cho ăn" khi cá đói.
+
+**Thú cưng — đổi từ hệ "shop 5 loại % thưởng" tự chế sang bám sát bản gốc:**
+- `Pet.cs` (client Lttt gốc, `Assets/Scripts/Assembly-CSharp/Pet.cs`) cho thấy thú cưng
+  KHÔNG phải một catalog loài riêng: `Pet extends Animal`, có `follow` trỏ tới `Avatar`
+  chủ, và tạo hình vẽ ra bằng `AvatarData.getPart(follow.idPet)` — **cùng bảng part**
+  dùng cho tóc/áo/quần avatar, tức pet chỉ là một item trang phục nữa được "mặc" vào.
+  Không có % thưởng thu hoạch/bán/câu cá/canh trại nào trong code — hệ `perk` (harvest/
+  sell/guard/fish/grow) ở bản cũ của ta là tự bịa, đã bỏ hoàn toàn.
+- `move()` thật: tốc độ đi theo chủ tỉ lệ với `follow.hungerPet` (`v * hungerPet/100`,
+  chỉ full tốc khi `hungerPet >= 70`) — thú đói thì lết theo chậm hẳn. `paintIcon()` vẽ
+  một thanh đói nhỏ ngay trên đầu thú (`PaintPopup.fill`, 2 lớp màu nền/mức đói).
+- **Giữ nguyên bộ art đã dựng** (`src/data/pets.ts`'s `CURATED`, `pets-gp.json`, sprite
+  strip `assets/pet/gp/*.webp` từ `scripts/pet_strips.py`) — chỉ đổi CƠ CHẾ, không phải
+  bộ sưu tập; 7-10 con GunPow curated vẫn dùng được vì Lttt gốc thì bộ "pet" cũng chỉ là
+  item bất kỳ trong bảng part, số lượng/tạo hình không có ý nghĩa đặc biệt.
+- **Đã approximate** (không có công thức suy giảm hunger thật của server, tương tự phần
+  vật nuôi/cá ở trên):
+  - `src/systems/pets.ts`: `S.petFedAt` (timestamp cho ăn gần nhất) thay cho
+    `hungerPet` 0-100 thật; `petFullness()` suy giảm tuyến tính về 0 sau 4 giờ — dùng
+    lại đúng ngưỡng 4 giờ đã áp cho vật nuôi trên cạn (`livestock.isHungry`) và cá
+    (`fishfarm.isHungryFish`) cho đồng bộ, thay vì bịa ra một công thức riêng.
+  - Cho ăn dùng lại item `feed` sẵn có (`itemCount('feed')`/`removeItem('feed')`) —
+    không có loại "thức ăn thú cưng" riêng vì bản gốc cũng dùng chung khái niệm hunger
+    với `Animal`.
+  - `petSpeedMult()` phỏng theo `move()`: no ≥70% thì full tốc, dưới đó giảm dần còn tối
+    thiểu 35% tốc (bản gốc không có sàn tối thiểu rõ ràng — thêm sàn để tránh thú đứng
+    hình khi quá đói, giữ trải nghiệm chơi được).
+  - UI: icon 🍖 nhỏ nổi trên đầu thú khi đói (thay cho thanh pixel vẽ tay như
+    `paintIcon`), panel "Thú cưng của tôi" và bảng chọn khi bấm vào thú ngoài map
+    (`WorldScene.petMenu`) đều có nút "Cho ăn" — cùng tông với UI cho ăn vật nuôi.
 
 ## Cần mua thêm (đề xuất, ưu tiên từ trên xuống)
 
