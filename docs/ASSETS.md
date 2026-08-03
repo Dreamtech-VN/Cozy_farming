@@ -379,6 +379,27 @@ growMin xếp theo ĐÚNG thứ tự nhanh→chậm thật của Lttt (Hồng 12
 trong game từ trước), quy đổi vào thang thời gian ngắn của game này (22-55
 phút) rồi tính giá theo công thức nội bộ đang dùng (sell ≈ 4.25×growMin+10).
 
+### 12 cây còn thiếu (Khóm, Lúa, Xoài, Thanh Long, Nha Đam, Dưa Leo, Tỏi,
+### Chuối, Đào, Vải, cúc chuồn chuồn, sen) — CHẶN VÌ THIẾU ART
+
+Bảng `farmitems` thật (`127_0_0_1.sql`) còn 24 dòng, trừ 10 dòng trùng tên
+14 cây cũ và 3 dòng trùng tên vùng miền (bí ngô = bí đỏ, cây ớt = ớt, Bắp =
+ngô — đã có), còn lại 12 cây chưa có trong game: Khóm (dứa), Lúa (khác
+Lúa mì `wheat` đang có — giữ riêng, không gộp), Xoài, Thanh Long, Nha Đam,
+Dưa Leo, Tỏi, Chuối, Đào, Vải, "cúc chuồn chuồn", sen.
+
+Đã soát toàn bộ `public/assets/` (farm/chibi, farm/it, farm/cf, pack2/icons,
+pack2/crops, deco, ui/*, chat/bubble...) tìm icon túi khớp tên/tiếng Anh cho
+từng cây — **không có file nào khớp**. `assets/farm/crops_all.png` còn vài
+hàng (30-36) chưa dùng tới nhưng khi cắt ra xem thì toàn là biến thể màu của
+MỘT loại hoa tím/chậu kiểng chung chung, không phải dứa/xoài/thanh long/nha
+đam/dưa leo/tỏi/chuối/đào/vải/cúc/sen/lúa — không có cây nào trong 12 cây này
+đủ giống thật để dùng (không tự vẽ pixel art mới, không gán bừa icon không
+khớp, theo đúng nguyên tắc đã áp dụng lúc thêm Hồng/Tulip/Dưa hấu/Hướng
+dương). Vì vậy **không thêm cây nào trong đợt này** — để dành khi nào có
+nguồn art thật (icon riêng cho từng loại) mới làm tiếp theo đúng quy trình ở
+mục trên (phóng to icon 0.35/0.6/0.85/1.0 + khung héo cuối).
+
 ## Icon mặt trăng (`assets/ui/act/w_moon.png`)
 
 Bộ icon thời tiết `w_*` (nắng/mưa/mây/tuyết) không có bản đêm — GunPow cũng
