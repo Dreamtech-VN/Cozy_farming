@@ -409,6 +409,50 @@ contact-sheet thì ổn, nhưng CHƯA soát hết từng file từng pixel — n
 nào khác sai/lệch thì báo tiếp, cứ theo đúng cách này (dò trong `hd/` Unity
 trước, không có mới vẽ tay) chứ không đoán bừa.
 
+### Soát thêm 4 thư mục icon khác — chỉ `farm/it/` có lỗi thật
+
+Theo đúng phương pháp trên (dựng contact-sheet PIL phóng to từng icon rồi xem
+bằng mắt, không đoán theo tên file), soát thêm 4 thư mục icon nhỏ hay bị cắt
+tay hay gặp lỗi:
+
+- `assets/ui/pack/` (39 file, icon menu/HUD Cozy UI Pack): xem hết cả 39 icon
+  — tất cả đúng vật thể (cúp, ba lô, la bàn quay thưởng, chiếc áo, xe bus...),
+  không có icon nào rõ ràng sai. `icon_room.png` (xe bus) và `icon_emote.png`
+  (mái tóc giả) hơi lạ so với tên file nhưng không phải "sai vật thể rõ ràng"
+  kiểu trứng-thay-phân-bón — để nguyên, không đoán bừa.
+- `assets/farm/cf/` (20 icon 32x32, Cloverframe Cozy Farm Starter Pack): xem
+  hết — toàn bộ đúng và đẹp (kể cả `15_honey.png` là lọ mật ong hổ phách rất
+  chuẩn). Không sửa gì.
+- `assets/deco/` (12 file): xem hết — thùng gỗ, ghế, bụi cây, trạm xe bus, chậu
+  hoa, cột đèn, bù nhìn, 4 loại cây đều đúng vật thể. Không sửa gì.
+- `assets/farm/it/` (27 icon 16px, sheet cắt sẵn) — **2 icon sai rõ**:
+  - `honey.png` và `chibi/honey.png` (bản chibi dùng thật trong game, item
+    "Mật ong"): so khớp pixel thì `it/honey.png` được cắt đúng từ ô (8,4) của
+    `assets/farm/items.png`, nhưng bản thân ô đó lại KHÔNG PHẢI mật ong — nắp
+    xanh, thân be, có ô vuông cam ở giữa như khoá ba lô/bình đông, không vàng
+    hổ phách, không tổ ong — tức lỗi từ sheet gốc bị gán nhầm chứ không phải
+    lỗi cắt.
+  - `juice.png` và `chibi/juice.png` (item "Nước ép"): tương tự, khớp pixel
+    ô (1,3) của `items.png` — cũng là hình "ba lô/bình đông" đỏ có chữ "G" nổi
+    trên thân, không phải chai nước ép.
+  - Không thấy icon mật ong/nước ép nào dùng được trong `hd/` Unity Pack5
+    (thư mục `iconshop/`, `farm/` chỉ có icon tab shop và icon ô đất, không có
+    vật phẩm nông trại lẻ) — không dùng vì khác hẳn phong cách pixel phẳng
+    của bộ `chibi/`. Trong repo đã có `farm/cf/15_honey.png` đúng và đẹp,
+    nhưng nó là hình vuông 32x32 phong cách khác (chi tiết/gradient hơn) nên
+    không ghép thẳng vào bộ `chibi/` cho đồng bộ được — tự vẽ tay 2 icon
+    nguồn mới bằng PIL (`it/honey.png` 11x16: lọ nắp nâu, thân vàng hổ phách,
+    có vệt sáng; `it/juice.png` 10x16: chai nắp cam, thân đỏ cam) rồi chạy lại
+    đúng pipeline 5 bước ở mục trên (phóng x3, tăng rực/tương phản, viền tối
+    dày, vệt sáng góc trên-trái, trim) để sinh `chibi/honey.png` (37x52) và
+    `chibi/juice.png` (34x52) — **giữ đúng kích thước cũ** vì `src/data/items.ts`
+    có `sprite:{sx:0,sy:0,sw,sh}` hard-code đúng bằng kích thước file, không
+    phải sửa code.
+  - `milk.png` (ô (0,3)) và `cheese.png` (ô (3,3)) khớp pixel với `items.png`
+    và nhìn đúng là chai sữa/miếng phô mai — để nguyên. 25 icon còn lại của
+    `farm/it/` (rau củ, hoa, đá, gỗ, len...) xem hết cũng đúng vật thể — không
+    sửa gì thêm.
+
 ### 12 cây còn thiếu (Khóm, Lúa, Xoài, Thanh Long, Nha Đam, Dưa Leo, Tỏi,
 ### Chuối, Đào, Vải, cúc chuồn chuồn, sen) — CHẶN VÌ THIẾU ART
 

@@ -1957,8 +1957,12 @@ img.wx { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; m
 .od-ing.ok .od-ing-n { color: #f2ece0; text-shadow: none; }
 .od-actions {
   display: flex; gap: 8px; justify-content: center; margin-top: auto; flex-wrap: wrap;
-  position: sticky; bottom: -16px; padding: 8px 0 2px;
-  background: linear-gradient(rgba(255, 250, 235, 0), #fffaeb 30%);
+  /* bottom ÂM trước đây đẩy thanh nút ra ngoài vùng cuộn của .od-side (overflow-y:
+     auto) nên bị cắt mất — sticky phải neo đúng mép trong (bottom: 0) mới hiện được.
+     Màu nền cũng đổi từ kem trắng (#fffaeb, lạc hẳn tông) sang khớp nền kính xanh
+     rêu của bảng .od-side/.win, không thì nút nổi bật lên như mảng trắng vá lỗi. */
+  position: sticky; bottom: 0; padding: 8px 0 2px;
+  background: linear-gradient(rgba(70, 110, 80, 0), rgba(58, 92, 66, .92) 45%);
 }
 
 /* ===== Màn hình thấp (điện thoại nằm ngang): thu nhỏ cho vừa khung ===== */
