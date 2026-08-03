@@ -52,12 +52,17 @@ export function starterList(z: number, gender: number): ChibiPartDef[] {
 export const G_MALE = 1;
 export const G_FEMALE = 2;
 
-// n món "đơn giản nhất" cho màn tạo nhân vật: đồ cơ bản đời đầu (id nhỏ, level 0),
-// loại đồ ruby và đồ sự kiện có hạn dùng "(30/45 ngày)"
-export function simplestList(z: number, gender: number, n = 3): ChibiPartDef[] {
+// Bộ đồ màn tạo nhân vật, ĐÚNG như RegisterScr.cs gốc: chỉ lấy part
+// `level == 0` (không yêu cầu cấp) của đúng giới tính, loại đồ sự kiện có hạn
+// dùng "(N ngày)" (không đủ điều kiện lúc mới tạo), rồi sắp theo id tăng dần
+// — id nhỏ nhất trong bảng `items` là bộ đồ gốc đời đầu (sơ mi/short, siêu
+// nhân, thợ săn, quý tộc...). Ngoài đời thật màn tạo nhân vật cho đúng 5 kiểu
+// tóc, 9 áo, 9 quần mỗi giới — không phải cứ item nào rẻ nhất là được, mà
+// đúng N item ĐẦU TIÊN theo thứ tự này.
+export function registerList(z: number, gender: number, n: number): ChibiPartDef[] {
   return chibiList(z, gender)
-    .filter(p => p.gold <= 0 && !/\(\s*\d+\s*ngày\s*\)/i.test(p.name))
-    .sort((a, b) => a.level - b.level || a.id - b.id)
+    .filter(p => p.level === 0 && !/\(\s*\d+\s*ngày\s*\)/i.test(p.name))
+    .sort((a, b) => a.id - b.id)
     .slice(0, n);
 }
 

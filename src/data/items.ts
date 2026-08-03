@@ -33,6 +33,10 @@ export function item(id: string): ItemDef {
 // ---- Vật phẩm chung ----
 defItem({ id: 'fertilizer', name: 'Phân bón', kind: 'material', icon: '', sprite: { url: 'assets/farm/chibi/fertilizer.png', sx: 0, sy: 0, sw: 34, sh: 37 }, sell: 2, buy: 15, desc: 'Giảm 30% thời gian lớn của cây.' });
 defItem({ id: 'feed', name: 'Thức ăn gia súc', kind: 'material', icon: '', sprite: { url: 'assets/farm/chibi/wheat.png', sx: 0, sy: 0, sw: 52, sh: 52 }, sell: 2, buy: 10, desc: 'Cho gà/bò/heo ăn.' });
+// Lttt thật có 2 loại thuốc bệnh riêng (item ID 120/121, xem FarmScr.cs IActionTriBenh1/2)
+// + 1 loại "thuốc bổ" (farmItem.action==6) cho health<80 — ta gộp lại thành 1 vật phẩm
+// chữa bệnh cho gọn, không tách quá chi tiết như bản gốc.
+defItem({ id: 'animal_med', name: 'Thuốc thú y', kind: 'material', icon: '', sprite: { url: 'assets/farm/chibi/fertilizer.png', sx: 0, sy: 0, sw: 34, sh: 37 }, sell: 3, buy: 25, desc: 'Chữa bệnh cho vật nuôi, hồi thêm sức khoẻ.' });
 defItem({ id: 'gift_flower', name: 'Bó hoa', kind: 'gift', icon: '', sprite: { url: 'assets/ui/act/flower_red.png', sx: 0, sy: 0, sw: 11, sh: 11 }, sell: 10, buy: 50, desc: 'Quà tặng bạn bè.' });
 defItem({ id: 'gift_choco', name: 'Sô-cô-la', kind: 'gift', icon: '', sprite: { url: 'assets/ui/act/choco.png', sx: 0, sy: 0, sw: 12, sh: 11 }, sell: 20, buy: 100, desc: 'Quà tặng bạn bè.' });
 defItem({ id: 'gift_teddy', name: 'Gấu bông', kind: 'gift', icon: '', sprite: { url: 'assets/ui/act/teddy.png', sx: 0, sy: 0, sw: 14, sh: 12 }, sell: 60, buy: 300, desc: 'Quà tặng dễ thương.' });

@@ -454,6 +454,30 @@ Format được dịch ngược từ client (AvatarData.cs) + bảng `items` tro
 ⚠️ Cùng lưu ý bản quyền như các asset Lttt khác — dev/test OK, thương mại phải thay.
 Bộ nhân vật pixel Cozy (Character v2) vẫn còn trong repo nhưng không dùng nữa.
 
+### Màn tạo nhân vật — đúng theo `RegisterScr.cs` gốc
+
+Giải nén lại TOÀN BỘ source Unity từ release Pack5 (204 file .cs, trước chỉ lấy
+vài file lẻ) và đọc `RegisterScr.cs` — script tạo nhân vật DUY NHẤT trong
+project gốc. Kết luận:
+
+- Chỉ có **giới tính + tóc + áo + quần**, KHÔNG có hàng chọn màu mắt (mắt cố
+  định = part id 4, `EYES_ID` trong `chibi.ts`) và KHÔNG có "đồ cầm tay/công
+  cụ" nào ở màn này (project gốc không có khái niệm đó lúc tạo nhân vật).
+- Bộ lọc đúng theo `getAvatarPart()`: chỉ lấy part `level == 0` (không yêu cầu
+  cấp) của đúng giới tính; đồ sự kiện có hạn `"(N ngày)"` không đủ điều kiện.
+  Sắp theo id tăng dần (id nhỏ nhất = đồ đời đầu: sơ mi/short, siêu nhân, thợ
+  săn, quý tộc, comple lịch lãm, sành điệu, võ sĩ, hiệp sĩ...) rồi lấy N item
+  đầu — đúng 5 tóc / 9 áo / 9 quần mỗi giới như trên game thật (xác nhận với
+  chủ dự án, không suy đoán). Hàm `registerList()` trong `chibi.ts` thay cho
+  `simplestList()` cũ (vốn lọc theo giá rẻ chứ không phải `level==0`, ra sai
+  số lượng và lẫn cả đồ sự kiện).
+- `RegisterScr.cs` gốc (J2ME cũ) thực ra chỉ cho đảo qua lại ĐÚNG 2 tổ hợp
+  tóc+áo+quần cùng lúc bằng phím trái/phải (không chọn riêng từng loại) — đây
+  rõ ràng là giao diện bàn phím thời J2ME, KHÔNG phải trải nghiệm game thật
+  hiện tại (chạm màn hình, 3 hàng riêng). Giữ nguyên 3 hàng chọn riêng
+  (trải nghiệm tốt hơn cho cảm ứng), chỉ sửa đúng SỐ LƯỢNG + BỘ LỌC theo dữ
+  liệu thật, không theo máy móc cơ chế bàn phím cũ.
+
 ## Cần câu (`assets/fishing/`)
 
 Ba bậc cần trong game lấy đúng theo bảng `items` của server Lttt: **cần câu tre**
@@ -576,6 +600,61 @@ Lưu ý: tool chỉ làm mượt được ảnh **pixel gốc**. Ảnh pixel đ�
 (ví dụ icon 16px lưu thành file 64px) thì bậc thang đã "nướng" vào ảnh, chạy
 tool không cứu được — phải vẽ lại ở độ phân giải cao rồi thu nhỏ, đúng như
 `scripts/make_chat_icon.py` đang làm cho icon chat.
+
+## Vật nuôi: giai đoạn lớn + sức khoẻ/bệnh
+
+Đối chiếu lại với source thật của Lttt ở `/home/user/gp5/src_extract/project-client-avt-main/Assets/Scripts/Assembly-CSharp/`:
+
+**Giai đoạn lớn (period 0/1/2) — có số liệu thật:**
+- `Animal.cs` (field `period`, `bornTime`) + `FarmScr.cs:3639-3646`:
+  ```
+  int num = animalByID.harvestTime * 60 / 3;
+  if (num > 0) animal.period = animal.bornTime / num;
+  if (animal.period > 2) animal.period = 2;
+  ```
+  `bornTime` tính bằng **giây**, `harvestTime` tính bằng **phút** (1 số duy nhất mỗi loài,
+  hiển thị ở shop dạng `"(Xh)"` — `FarmScr.cs:883`). Suy ra: con lớn hẳn (period=2) khi
+  `bornTime(giây) >= harvestTime*60*2/3`, quy đổi ra phút: **tuổi cần để lớn hẳn = harvestTime × 2/3**.
+- Không tìm được bảng `harvestTime` thật cho species=50 (gà)/51 (bò)/52 (heo) — bảng
+  `farmitems` trong `127_0_0_1.sql` chỉ có dữ liệu **cây trồng** (`so_phut_chin`...), không
+  có vật nuôi (`AnimalInfo` load từ resource nhị phân, không nằm trong SQL dump).
+- **Đã làm**: coi `produceMin` hiện có (đúng khái niệm `harvestTime` — "thời gian ra sản
+  phẩm") là `harvestTime`, áp thẳng công thức thật ở trên ra field `maturityMin` mới trong
+  `src/data/animals.ts` (VD gà `produceMin=10` → `maturityMin=7`). `src/systems/livestock.ts`
+  hàm `growthPeriod()` tính period thuần theo `boughtAt` (không lưu state riêng, save cũ tự
+  ra period=2 vì đã mua từ lâu — không cần migrate).
+- `hasProduct()`/`collect()` giờ chặn thêm `growthPeriod(a) < 2` — con non chưa cho sản phẩm.
+- Không có art riêng cho con non, nên `WorldScene.spawnAnimal()` chỉ scale sprite nhỏ lại
+  theo period (0.6 / 0.8 / 1.0) để phân biệt bằng mắt.
+
+**Sức khoẻ / bệnh — CHỈ tìm được cấu trúc dữ liệu thật, KHÔNG có công thức suy giảm:**
+- `Animal.cs`: `health` (int), `hunger` (bool), `disease[2]` (bool[] — 2 loại bệnh, xem
+  `FarmScr.cs:2765-2792` map ra `T.diarrhea`/`T.flu`).
+- `FarmScr.cs:4137-4172` (`doAutoVatNuoi`): thứ tự ưu tiên xử lý là bệnh > đói > sức khoẻ
+  thấp — `health < 20` gắn với text "mệt" (`T.tire`), `health < 80` gợi ý dùng "Thuốc bổ".
+  Có 2 vật phẩm chữa bệnh riêng (ID 120/121, `IActionTriBenh1/2`) + 1 "thuốc bổ"
+  (`farmItem.action == 6`, `IActionTriBenh3`).
+- `FarmMsgHandler.cs:readInfoAnimal()`: `health`/`hunger`/`disease` đều **đọc thẳng từ gói
+  tin server gửi** (`msg.reader().readByte()/readBoolean()`) — công thức suy giảm theo giờ
+  và xác suất random ra bệnh nằm ở server (Java), mà dump Java trích được
+  (`Avatar-Sv-master-master`) chỉ có POJO chứa dữ liệu, không có logic tính toán này.
+- **Đã approximate** (ghi rõ trong code, `src/systems/livestock.ts`):
+  - `health` 0..100, giảm `-2/giờ` khi đói (hoặc đã <50), hồi `+3/giờ` khi no.
+  - `sick` (gộp 2 loại bệnh thật thành 1 cờ cho gọn): roll ngẫu nhiên `~2%/giờ` khi đói
+    hoặc sức khoẻ thấp, hết khi dùng vật phẩm mới `animal_med` ("Thuốc thú y",
+    `src/data/items.ts`) — gộp cả 2 thuốc bệnh + thuốc bổ thật thành 1 item duy nhất
+    thay vì tách 3 loại như bản gốc.
+  - UI: dialog vật nuôi (`WorldScene.animalDialog`) hiện trạng thái bệnh/sức khoẻ yếu,
+    có nút "Chữa bệnh" khi `sick`.
+
+**Ao cá cũng cho ăn (theo yêu cầu, đồng bộ với vật nuôi trên cạn):**
+- Lttt gốc: `FishFarm.cs extends AnimalDan` — cá trong ao dùng chung pipeline ăn/lớn với
+  vật nuôi trên cạn, không phải hẹn giờ thuần tuý.
+- `src/systems/fishfarm.ts`: thêm `fedAt` vào mỗi con cá, dùng chung item `feed` như trên
+  cạn (không bịa loại thức ăn cá riêng). `isGrown()` giờ đòi hỏi vừa đủ giờ vừa **không
+  đói** (`isHungryFish` — đói nếu chưa từng cho ăn, hoặc quá 4 giờ từ lần ăn gần nhất,
+  cùng ngưỡng với `livestock.isHungry`). Panel "Ao nuôi cá" (`src/ui/panels.ts`) có nút
+  "Cho ăn" khi cá đói.
 
 ## Cần mua thêm (đề xuất, ưu tiên từ trên xuống)
 

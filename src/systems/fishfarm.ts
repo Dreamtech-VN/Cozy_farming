@@ -3,10 +3,16 @@
 // cửa hàng bên ngoài" — tức là NUÔI, không phải câu. Mua cá giống thả xuống ao,
 // đợi lớn rồi vớt, cá thu được cất vào kho nông trại.
 
-import { S, save, spend, addExp, addStat } from '@/core/save';
+import { S, save, spend, addExp, addStat, itemCount, removeItem } from '@/core/save';
 import { bus, EV, toast } from '@/core/events';
 import { addTo } from './farmstore';
 import { sfx } from '@/core/audio';
+
+// Người dùng yêu cầu: cá trong ao cũng phải cho ăn mới lớn, giống hệt vật nuôi
+// trên cạn (livestock.ts) — Lttt gốc thật ra FishFarm kế thừa AnimalDan, dùng
+// chung pipeline ăn/lớn với vật nuôi trên cạn (xem FishFarm.cs, AnimalDan.cs).
+// Dùng chung item 'feed' như trên cạn, không bịa loại thức ăn cá riêng.
+export type PondFish = { id: string; type: string; at: number; fedAt?: number };
 
 export interface FryDef {
   id: string;
@@ -26,7 +32,7 @@ export const FRY_LIST = Object.values(FRIES);
 
 export const POND_CAP = 6;                 // số con nuôi cùng lúc
 
-export function pond(): { id: string; type: string; at: number }[] {
+export function pond(): PondFish[] {
   if (!S.fishfarm) S.fishfarm = [];
   return S.fishfarm;
 }
@@ -34,11 +40,25 @@ export function pond(): { id: string; type: string; at: number }[] {
 export function grownAt(f: { type: string; at: number }): number {
   return f.at + (FRIES[f.type]?.growMin ?? 20) * 60_000;
 }
-export function isGrown(f: { type: string; at: number }): boolean {
-  return Date.now() >= grownAt(f);
+// đói nếu chưa từng cho ăn, hoặc quá 4 giờ kể từ lần ăn gần nhất (ngưỡng giống livestock.ts)
+export function isHungryFish(f: PondFish): boolean {
+  return f.fedAt === undefined || Date.now() - f.fedAt > 4 * 3600_000;
+}
+export function isGrown(f: PondFish): boolean {
+  return Date.now() >= grownAt(f) && !isHungryFish(f);
 }
 export function remainMin(f: { type: string; at: number }): number {
   return Math.max(0, Math.ceil((grownAt(f) - Date.now()) / 60_000));
+}
+
+export function feedFish(f: PondFish): boolean {
+  if (!isHungryFish(f)) { toast('Cá này no rồi!'); return false; }
+  if (itemCount('feed') <= 0) { toast('Hết thức ăn — mua ở Bách hóa.', 'feed'); return false; }
+  removeItem('feed');
+  f.fedAt = Date.now();
+  save(true); bus.emit(EV.STATE_CHANGED);
+  toast(`${FRIES[f.type]?.name ?? 'Cá'} măm măm~`, 'fish');
+  return true;
 }
 
 export function stockFry(typeId: string): boolean {

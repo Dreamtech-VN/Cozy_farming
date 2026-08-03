@@ -66,6 +66,14 @@ export interface Animal {
   boughtAt: number;
   fedAt: number;            // lần cho ăn gần nhất
   collectedAt: number;      // lần thu sản phẩm gần nhất
+  // Lttt thật: health/hunger/disease do server tính & đẩy về (FarmMsgHandler.cs
+  // readInfoAnimal) — không trích được công thức suy giảm/xác suất bệnh thật vì
+  // đó là logic server, không nằm trong client C# hay dump Java trích được.
+  // health/sick optional để save cũ (chưa có field) coi như con vật khoẻ mạnh
+  // (backfill ở core/save.ts load()).
+  health?: number;          // 0..100, mặc định 100 nếu thiếu (save cũ)
+  sick?: boolean;            // đang bệnh, cần "Thuốc thú y" mới chữa được
+  healthAt?: number;        // lần cuối tính suy giảm/hồi sức khoẻ (mốc để tính delta)
 }
 
 export interface PlacedFurniture {
@@ -144,7 +152,7 @@ export interface GameState {
   farmStore: FarmStore;     // kho nông trại — nông sản KHÔNG nằm trong túi đồ
   cooking?: CookState;      // món đang nấu ở nhà bếp
   orders: import('@/systems/orders').Order[];   // bảng đơn hàng kiểu Hay Day
-  fishfarm: { id: string; type: string; at: number }[];   // cá đang nuôi trong ao
+  fishfarm: { id: string; type: string; at: number; fedAt?: number }[];   // cá đang nuôi trong ao — fedAt: lần cho ăn gần nhất (giống vật nuôi trên cạn)
   pets: string[];           // thú cưng đã nuôi
   skins: string[];          // skin trọn bộ đã sở hữu
   activePet?: string;       // thú cưng đang dắt theo

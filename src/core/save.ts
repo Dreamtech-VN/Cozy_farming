@@ -170,6 +170,12 @@ export function load(): boolean {
     if (!S.zoneRoom) S.zoneRoom = 1;
     if (!S.orders) S.orders = [];
     if (!S.fishfarm) S.fishfarm = [];
+    // save cũ chưa có health/sick trên vật nuôi -> coi như đang khoẻ mạnh bình thường
+    // (period tự suy ra period=2 vì boughtAt đã cũ, không cần migrate riêng)
+    for (const a of S.livestock.animals) {
+      if (a.health === undefined) a.health = 100;
+      if (a.sick === undefined) a.sick = false;
+    }
     return true;
   } catch {
     return false;
