@@ -33,8 +33,29 @@ Gson thay json-simple, mysql-connector-j thay bản cũ).
       Test: `AuthFlowTest` gọi HTTP thật (không mock) qua toàn bộ luồng đăng
       ký → sai mật khẩu bị chặn → quên mật khẩu → đặt lại → đăng nhập bằng
       mật khẩu mới, cộng 2 test biên (trùng tên, sai mã khôi phục).
-- [ ] Các giai đoạn sau: nông trại (trồng/thu hoạch/vật nuôi/ao cá), tủ đồ,
-      chat, đơn hàng... — mỗi module server khớp đúng 1 hệ thống client đã có.
+- [x] **Giai đoạn 4 — tủ đồ trang bị**: `GET /api/items?zorder=&gender=` —
+      dùng lại `ItemDao` sẵn có, chuyển việc lọc tóc/áo/quần/kính/đồ cầm tay
+      từ client sang server (`registerList()` trong `chibi.ts` phía client
+      sẽ gọi API này thay vì tự lọc, ở đợt nối client sau).
+- [x] **Giai đoạn 5 — nông trại (cuốc/trồng/tưới/thu hoạch)**:
+      `GET /api/farm/plots`, `POST /api/farm/{till,plant,water,harvest}` —
+      `FarmService` chép ĐÚNG công thức `growth()`/`healthOf()` trong
+      `farming.ts` (chưa tưới chỉ lớn tối đa 30%, khô mỗi giờ mất 8 điểm sức
+      khỏe), server tự tính chín/sản lượng theo mốc thời gian lưu DB — không
+      tin số liệu client gửi lên (chặn sửa giờ máy/code JS để thu hoạch sớm).
+      `CropCatalog` chép số liệu cân bằng từ `crops.ts` (18 cây, TODO sinh tự
+      động thay vì chép tay ở giai đoạn sau). Bảng MỚI `farm_plots` (không có
+      trong schema thật gốc — server Lttt gốc lưu đất theo file save nhị
+      phân riêng, không phải bảng SQL).
+      ⚠️ CHƯA nối kho/inventory (hệ kho chưa lên server) — trồng chưa trừ hạt
+      giống thật, thu hoạch trả số lượng trong response để client tự cộng
+      kho tạm, và CHƯA áp dụng thưởng công cụ (bình tưới/cuốc/giỏ cấp cao) vì
+      hệ công cụ cũng chưa lên server — cả hai để giai đoạn sau khi tủ
+      đồ/kho được đưa lên server đầy đủ.
+      Test: `FarmFlowTest` chạy trọn luồng cuốc → trồng → tưới → (thu hoạch
+      quá sớm bị chặn) → xem danh sách ô đất qua HTTP thật.
+- [ ] Các giai đoạn sau: vật nuôi/ao cá, kho/inventory, chat, đơn hàng... —
+      mỗi module server khớp đúng 1 hệ thống client đã có.
 
 ## Chạy thử
 
