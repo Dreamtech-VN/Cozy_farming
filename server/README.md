@@ -68,8 +68,25 @@ Gson thay json-simple, mysql-connector-j thay bản cũ).
       công) → cho ăn lại ngay (bị chặn, 409) → xem danh sách (chưa lớn nên
       chưa có sản phẩm dù không đói) → thu hoạch sớm (bị chặn) → bán (hoàn
       đúng 50% giá).
-- [ ] Các giai đoạn sau: ao cá, kho/inventory, ví/xu, chat, đơn hàng... —
-      mỗi module server khớp đúng 1 hệ thống client đã có.
+- [x] **Giai đoạn 7 — ví xu/kim cương**: `GET /api/wallet?userId=` —
+      `WalletDao` quản bảng MỚI `wallets` (`user_id, coins, gems`), tách biệt
+      hẳn với cột `vnd`/`tongnap` thật trong bảng `users` (đó là tiền nạp
+      thật/IAP, còn `coins`/`gems` ở đây là xu/kim cương trong game — hai hệ
+      khác nhau, không gộp). User mới truy vấn lần đầu tự được cấp
+      `STARTING_COINS = 500` (khớp số dư khởi điểm hợp lý cho nhân vật mới).
+      Nối thật vào vật nuôi: `BuyAnimalHandler` giờ trừ xu thật qua
+      `walletDao.spendCoins()` trước khi tạo vật nuôi (402 nếu không đủ xu),
+      `SellAnimalHandler` cộng thẳng 50% giá hoàn vào ví qua
+      `walletDao.addCoins()`. Tách `QueryParam.intParam()` dùng chung (trước
+      đó `FarmPlotsHandler`/`AnimalsHandler` mỗi cái có bản riêng trùng lặp).
+      ⚠️ CHƯA nối ví vào nông trại (mua hạt giống/công cụ chưa trừ xu) — TODO
+      giai đoạn kho/inventory.
+      Test: `WalletDaoTest`, `WalletHandlerTest` (đơn vị), và
+      `LivestockFlowTest` cập nhật để xác nhận đúng số xu bị trừ lúc mua
+      (500 → 200 với gà giá 300) và được cộng lúc bán (200 → 350 với hoàn
+      150), cùng loại vật nuôi không hợp lệ không bị trừ xu.
+- [ ] Các giai đoạn sau: ao cá, kho/inventory, chat, đơn hàng... — mỗi module
+      server khớp đúng 1 hệ thống client đã có.
 
 ## Chạy thử
 
