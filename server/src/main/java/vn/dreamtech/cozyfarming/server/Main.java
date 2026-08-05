@@ -7,18 +7,26 @@ import vn.dreamtech.cozyfarming.server.auth.ForgotPasswordRequestHandler;
 import vn.dreamtech.cozyfarming.server.auth.ForgotPasswordResetHandler;
 import vn.dreamtech.cozyfarming.server.auth.LoginHandler;
 import vn.dreamtech.cozyfarming.server.auth.RegisterHandler;
+import vn.dreamtech.cozyfarming.server.dao.FarmPlotDao;
+import vn.dreamtech.cozyfarming.server.dao.ItemDao;
 import vn.dreamtech.cozyfarming.server.dao.PasswordResetDao;
 import vn.dreamtech.cozyfarming.server.dao.UserDao;
 import vn.dreamtech.cozyfarming.server.db.DataSourceProvider;
+import vn.dreamtech.cozyfarming.server.farm.FarmPlotsHandler;
+import vn.dreamtech.cozyfarming.server.farm.HarvestHandler;
+import vn.dreamtech.cozyfarming.server.farm.PlantHandler;
+import vn.dreamtech.cozyfarming.server.farm.TillHandler;
+import vn.dreamtech.cozyfarming.server.farm.WaterHandler;
+import vn.dreamtech.cozyfarming.server.wardrobe.ItemsHandler;
 
 import javax.sql.DataSource;
 import java.net.InetSocketAddress;
 
 /**
  * Điểm khởi động server. Giai đoạn 1: khung HTTP tối thiểu (/health). Giai
- * đoạn 2: DB + DAO. Giai đoạn 3 (hiện tại): API đăng ký/đăng nhập/quên mật
- * khẩu. Các module còn lại (nông trại, vật nuôi, tủ đồ, chat...) thêm dần ở
- * giai đoạn sau, mỗi giai đoạn xong mới sang giai đoạn kế tiếp.
+ * đoạn 2: DB + DAO. Giai đoạn 3: API đăng ký/đăng nhập/quên mật khẩu. Giai
+ * đoạn 4: tủ đồ trang bị. Giai đoạn 5 (hiện tại): nông trại (cuốc/trồng/
+ * tưới/thu hoạch). Các module còn lại (vật nuôi, ao cá...) thêm dần.
  */
 public final class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
@@ -28,6 +36,8 @@ public final class Main {
         DataSource dataSource = DataSourceProvider.create();
         UserDao userDao = new UserDao(dataSource);
         PasswordResetDao resetDao = new PasswordResetDao(dataSource);
+        ItemDao itemDao = new ItemDao(dataSource);
+        FarmPlotDao plotDao = new FarmPlotDao(dataSource);
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/health", new HealthCheckHandler());
@@ -35,6 +45,12 @@ public final class Main {
         server.createContext("/api/login", new LoginHandler(userDao));
         server.createContext("/api/forgot/request", new ForgotPasswordRequestHandler(userDao, resetDao));
         server.createContext("/api/forgot/reset", new ForgotPasswordResetHandler(userDao, resetDao));
+        server.createContext("/api/items", new ItemsHandler(itemDao));
+        server.createContext("/api/farm/plots", new FarmPlotsHandler(plotDao));
+        server.createContext("/api/farm/till", new TillHandler(plotDao));
+        server.createContext("/api/farm/plant", new PlantHandler(plotDao));
+        server.createContext("/api/farm/water", new WaterHandler(plotDao));
+        server.createContext("/api/farm/harvest", new HarvestHandler(plotDao));
         server.setExecutor(null);
         server.start();
         log.info("Cozy Farming server đang chạy ở cổng {}", port);
