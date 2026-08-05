@@ -54,7 +54,21 @@ Gson thay json-simple, mysql-connector-j thay bản cũ).
       đồ/kho được đưa lên server đầy đủ.
       Test: `FarmFlowTest` chạy trọn luồng cuốc → trồng → tưới → (thu hoạch
       quá sớm bị chặn) → xem danh sách ô đất qua HTTP thật.
-- [ ] Các giai đoạn sau: vật nuôi/ao cá, kho/inventory, chat, đơn hàng... —
+- [x] **Giai đoạn 6 — vật nuôi**: `GET /api/livestock?userId=`,
+      `POST /api/livestock/{buy,feed,collect,sell}` — `AnimalService` chép
+      đúng công thức trong `livestock.ts` (giai đoạn lớn theo Lttt thật,
+      sức khoẻ/bệnh là ước lượng — xem chú thích trong `livestock.ts`). Bảng
+      MỚI `animals` (server gốc lưu trong file save nhị phân, không phải
+      bảng SQL). Vật nuôi mới mua đã ĐÓI NGAY (`fedAt=0`, khớp đúng
+      `buyAnimal()` client — phải cho ăn liền, không phải "no sẵn").
+      ⚠️ CHƯA nối ví/kho/chuồng thật (trừ xu lúc mua, trừ item `feed` lúc
+      cho ăn, cộng sản phẩm vào kho lúc thu, kiểm tra sức chứa chuồng) — 3
+      hệ đó chưa lên server, TODO trong code.
+      Test: `LivestockFlowTest` chạy trọn luồng mua → cho ăn lần đầu (thành
+      công) → cho ăn lại ngay (bị chặn, 409) → xem danh sách (chưa lớn nên
+      chưa có sản phẩm dù không đói) → thu hoạch sớm (bị chặn) → bán (hoàn
+      đúng 50% giá).
+- [ ] Các giai đoạn sau: ao cá, kho/inventory, ví/xu, chat, đơn hàng... —
       mỗi module server khớp đúng 1 hệ thống client đã có.
 
 ## Chạy thử
