@@ -18,10 +18,21 @@ Gson thay json-simple, mysql-connector-j thay bản cũ).
       thích MySQL) vì môi trường build chưa có MySQL thật chạy sẵn — khi
       triển khai thật chỉ cần trỏ `DB_URL` sang MySQL thật, code DAO không
       đổi.
-- [ ] **Giai đoạn 3**: API đăng ký/đăng nhập/quên mật khẩu — khớp đúng luồng
-      3 màn đã làm ở client (`src/ui/login.ts`), thay `localStorage` bằng gọi
-      API thật. Bảng `users` thật (avatar_2x.sql) đã có `username`/`password`/
-      `phone`/`gmail`/`vnd`(số dư nạp)/`tongnap`(tổng đã nạp)/`login_lock`.
+- [x] **Giai đoạn 3 — đăng ký/đăng nhập/quên mật khẩu**:
+      `POST /api/register`, `POST /api/login`, `POST /api/forgot/request`,
+      `POST /api/forgot/reset` — khớp đúng luồng 3 màn đã làm ở client
+      (`src/ui/login.ts`). Mật khẩu băm THẬT bằng PBKDF2-HMAC-SHA256 có salt
+      (`PasswordHasher`, khác hẳn hash tay djb2 phía client — đó chỉ để chặn
+      gõ sai khi CHƯA có server). Quên mật khẩu dùng bảng phụ MỚI
+      `password_resets` (không sửa bảng `users` thật) — mã 6 số, hạn 15
+      phút, dùng 1 lần.
+      ⚠️ **Chưa gửi email/SMS thật** — response `forgot/request` trả thẳng
+      `devOnlyCode` để còn test được luồng; PHẢI thay bằng gửi email/SMS thật
+      (dùng cột `gmail`/`phone` sẵn có) trước khi triển khai thật, xem TODO
+      trong `ForgotPasswordRequestHandler`.
+      Test: `AuthFlowTest` gọi HTTP thật (không mock) qua toàn bộ luồng đăng
+      ký → sai mật khẩu bị chặn → quên mật khẩu → đặt lại → đăng nhập bằng
+      mật khẩu mới, cộng 2 test biên (trùng tên, sai mã khôi phục).
 - [ ] Các giai đoạn sau: nông trại (trồng/thu hoạch/vật nuôi/ao cá), tủ đồ,
       chat, đơn hàng... — mỗi module server khớp đúng 1 hệ thống client đã có.
 
