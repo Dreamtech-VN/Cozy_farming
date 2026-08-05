@@ -49,6 +49,14 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+    <!-- DB nhúng cho test DAO (chế độ tương thích MySQL) — chưa có server MySQL
+         thật để test tích hợp; ở giai đoạn triển khai thật thay bằng MySQL thật -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.2.224</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>

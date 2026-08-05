@@ -10,12 +10,18 @@ Gson thay json-simple, mysql-connector-j thay bản cũ).
 
 - [x] **Giai đoạn 1 — khung project**: Maven project biên dịch + chạy được,
       1 endpoint `/health` xác nhận server sống, có test JUnit xác nhận.
-- [ ] **Giai đoạn 2**: kết nối DB thật (HikariCP + MySQL, dùng lại schema từ
-      `database/avatar_2x.sql` trong Pack5 — bảng `items`, `farmitems`...) +
-      lớp DAO đầu tiên.
+- [x] **Giai đoạn 2 — DB + DAO đầu tiên**: `DataSourceProvider` (HikariCP,
+      đọc `DB_URL`/`DB_USER`/`DB_PASSWORD` từ biến môi trường, không hardcode
+      tài khoản) + `ItemDao` khớp đúng schema thật bảng `items` trong
+      `database/avatar_2x.sql` (Pack5) — bảng CHUNG cho tóc/áo/quần/kính/đồ
+      cầm tay, lọc theo `zorder`+`gender`. Test bằng H2 nhúng (chế độ tương
+      thích MySQL) vì môi trường build chưa có MySQL thật chạy sẵn — khi
+      triển khai thật chỉ cần trỏ `DB_URL` sang MySQL thật, code DAO không
+      đổi.
 - [ ] **Giai đoạn 3**: API đăng ký/đăng nhập/quên mật khẩu — khớp đúng luồng
       3 màn đã làm ở client (`src/ui/login.ts`), thay `localStorage` bằng gọi
-      API thật.
+      API thật. Bảng `users` thật (avatar_2x.sql) đã có `username`/`password`/
+      `phone`/`gmail`/`vnd`(số dư nạp)/`tongnap`(tổng đã nạp)/`login_lock`.
 - [ ] Các giai đoạn sau: nông trại (trồng/thu hoạch/vật nuôi/ao cá), tủ đồ,
       chat, đơn hàng... — mỗi module server khớp đúng 1 hệ thống client đã có.
 
