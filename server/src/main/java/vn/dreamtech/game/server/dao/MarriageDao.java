@@ -18,8 +18,8 @@ import java.util.Optional;
  *   PRIMARY KEY (user_id_a, user_id_b)
  * );
  * </pre>
- * Chuẩn hoá {@code userIdA < userIdB} giống {@link FriendshipDao}. Chưa làm
- * ly hôn (không có yêu cầu) — kết hôn 1 lần là vĩnh viễn ở phiên bản này.
+ * Chuẩn hoá {@code userIdA < userIdB} giống {@link FriendshipDao}. Ly hôn
+ * (giai đoạn 10) xoá thẳng dòng này — không lưu lịch sử hôn nhân cũ.
  */
 public final class MarriageDao {
     private final DataSource dataSource;
@@ -64,5 +64,15 @@ public final class MarriageDao {
             ps.executeUpdate();
         }
         return new Marriage(a, b, now);
+    }
+
+    /** Ly hôn — xoá dòng hôn nhân của {@code userId} (không quan tâm cột A/B). */
+    public void deleteByUser(int userId) throws SQLException {
+        String sql = "DELETE FROM marriages WHERE user_id_a = ? OR user_id_b = ?";
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setInt(2, userId);
+            ps.executeUpdate();
+        }
     }
 }

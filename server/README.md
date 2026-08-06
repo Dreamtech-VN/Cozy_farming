@@ -196,16 +196,32 @@ cũ.
       Test: `LevelServiceTest` (đơn vị, công thức lên level kể cả lên nhiều
       level 1 lần cộng exp), `LevelDaoTest`, `WalletDaoTest` (đơn vị);
       `LevelFlowTest`, `WalletFlowTest` (luồng HTTP thật).
-- [ ] **Giai đoạn 10 (tiếp theo) — nâng cấp hệ kết hôn theo bản thiết kế**:
-      thêm điều kiện level (≥25) + cả hai đang online (dùng `lobby_presence`
-      sẵn có) vào `ProposeHandler`; đổi chi phí cầu hôn từ trừ điểm thân mật
-      sang trừ vàng/kim cương thật (100.000 Gold HOẶC 500 Kim cương — chưa có
-      hệ vật phẩm nên KHÔNG có "nhẫn cưới" dạng item, chỉ trừ tiền); thêm ly
-      hôn + thời gian chờ trước khi cưới lại. Các phần còn lại của bản thiết
-      kế (chơi trận/nhiệm vụ đôi/thắng trận/sự kiện cặp đôi tăng thân mật,
-      online cùng +1đ/10 phút, couple house/buff tổ đội/bảng xếp hạng/nhiệm
-      vụ hằng ngày cặp đôi) cần hệ chiến đấu/nhiệm vụ/nhà ở/đội nhóm/leaderboard
-      CHƯA XÂY — để giai đoạn sau khi có hệ gốc, không bịa tạm.
+- [x] **Giai đoạn 10 — nâng cấp hệ kết hôn theo bản thiết kế**: `ProposeHandler`
+      kiểm tra ĐỦ điều kiện theo thứ tự (dừng ở điều kiện đầu tiên không đạt):
+      bạn bè → đủ level `MIN_LEVEL=25` cả hai → kết bạn đủ 7 ngày (thêm
+      `created_at` vào `Friendship`/`FriendshipDao`) → đủ 1000 điểm thân mật
+      → cả hai đang online (`PresenceDao.isOnline()`, dùng lại
+      `PresenceDao.ONLINE_WINDOW_MS` — tách hằng số này ra khỏi
+      `LobbyPlayersHandler` để `ProposeHandler` dùng chung) → chưa ai kết hôn
+      → không ai đang trong thời gian chờ sau ly hôn.
+      - `currency` ("gold"/"diamond") trong request cầu hôn — "mua nhẫn" trừ
+        THẬT vào ví (100.000 Gold HOẶC 500 Kim cương, người cầu hôn chọn 1
+        trong 2). Chưa có hệ vật phẩm nên KHÔNG có "nhẫn cưới" dạng item thật,
+        chỉ trừ tiền tương ứng.
+      - `POST /api/marriage/divorce` {userId} — ly hôn ĐƠN PHƯƠNG (không cần
+        đối phương đồng ý, tránh bị "giam" hôn nhân mãi mãi). Cả HAI người
+        đều bị áp thời gian chờ 3 ngày (`divorce_cooldowns`) trước khi cưới
+        lại được, với BẤT KỲ ai chứ không riêng người vừa ly hôn.
+      - Các phần còn lại của bản thiết kế (chơi trận/nhiệm vụ đôi/thắng trận/
+        sự kiện cặp đôi tăng thân mật, online cùng +1đ/10 phút, couple
+        house/buff tổ đội/bảng xếp hạng/nhiệm vụ hằng ngày cặp đôi) cần hệ
+        chiến đấu/nhiệm vụ/nhà ở/đội nhóm/leaderboard CHƯA XÂY — để giai đoạn
+        sau khi có hệ gốc, không bịa tạm.
+      Test: `DivorceCooldownDaoTest` (đơn vị); `MarriageFlowTest` viết lại
+      hoàn toàn — mỗi điều kiện mới có test riêng (thiếu level/kết bạn chưa
+      đủ lâu/đối phương offline/không đủ vàng đều bị chặn 409/402), cộng luồng
+      đầy đủ: cầu hôn trừ đúng vàng → chấp nhận tạo hôn nhân → ly hôn → cả
+      hai vào cooldown → cầu hôn lại ngay bị chặn.
 
 ## Chạy thử
 

@@ -70,7 +70,7 @@ public final class FriendshipDao {
 
     public Optional<Friendship> find(int userA, int userB) throws SQLException {
         int[] pair = canonical(userA, userB);
-        String sql = "SELECT user_id_a, user_id_b, intimacy_points, last_gift_at FROM friendships WHERE user_id_a = ? AND user_id_b = ?";
+        String sql = "SELECT user_id_a, user_id_b, intimacy_points, last_gift_at, created_at FROM friendships WHERE user_id_a = ? AND user_id_b = ?";
         try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, pair[0]);
             ps.setInt(2, pair[1]);
@@ -125,6 +125,6 @@ public final class FriendshipDao {
     private static Friendship map(ResultSet rs) throws SQLException {
         Timestamp lastGift = rs.getTimestamp("last_gift_at");
         return new Friendship(rs.getInt("user_id_a"), rs.getInt("user_id_b"), rs.getInt("intimacy_points"),
-                lastGift == null ? null : lastGift.getTime());
+                lastGift == null ? null : lastGift.getTime(), rs.getTimestamp("created_at").getTime());
     }
 }

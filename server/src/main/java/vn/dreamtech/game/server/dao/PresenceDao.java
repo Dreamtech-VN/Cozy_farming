@@ -25,6 +25,9 @@ import java.util.List;
  * chuyển mượt hơn — polling đủ dùng cho sảnh tĩnh (đứng nói chuyện/chọn menu).
  */
 public final class PresenceDao {
+    /** Coi là "đang online" nếu heartbeat trong khoảng này — dùng chung cho sảnh (giai đoạn 4) và điều kiện "cả hai đang online" của hệ kết hôn (giai đoạn 10). */
+    public static final long ONLINE_WINDOW_MS = 15_000;
+
     private final DataSource dataSource;
 
     public PresenceDao(DataSource dataSource) {
@@ -53,6 +56,18 @@ public final class PresenceDao {
                     out.add(new Presence(rs.getInt("user_id"), rs.getInt("x"), rs.getInt("y"), rs.getTimestamp("last_seen").getTime()));
                 }
                 return out;
+            }
+        }
+    }
+
+    /** Còn heartbeat trong {@code activeWithinMs} gần nhất — dùng chung cho sảnh và điều kiện "cả hai đang online" của hệ kết hôn. */
+    public boolean isOnline(int userId, long now, long activeWithinMs) throws SQLException {
+        String sql = "SELECT 1 FROM lobby_presence WHERE user_id = ? AND last_seen >= ?";
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setTimestamp(2, new Timestamp(now - activeWithinMs));
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
             }
         }
     }
