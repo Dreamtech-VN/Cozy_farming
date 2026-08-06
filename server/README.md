@@ -177,8 +177,32 @@ Gson thay json-simple, mysql-connector-j thay bản cũ).
       mới), `CookingFlowTest` (luồng HTTP thật: thiếu nguyên liệu bị chặn,
       trừ đúng nguyên liệu lúc bắt đầu, bận bếp chặn món 2, chưa chín chặn
       lấy, hủy trả đúng nguyên liệu).
-- [ ] Các giai đoạn sau: chat, đơn hàng... — mỗi module server khớp đúng 1
-      hệ thống client đã có.
+- [x] **Giai đoạn 12 — câu cá (cần/mồi)**: `POST /api/fishing/cast` {userId}
+      — KHÁC hẳn `src/systems/fishing.ts` phía client (hệ zone/cần câu/mồi
+      phân cấp — kiểm tra lại thì đó là TỰ BỊA, không có thật trong Lttt).
+      Đào lại đúng logic gốc từ source Java thật (`ParkService.java`,
+      `Fish.java`, `AvatarService.sellFish()` trong `Avatar-Sv-full.zip`):
+      quay trọng số CỐ ĐỊNH (không theo zone/mồi) trong 12 giá trị gốc — 6
+      loài cá + "cá mập" trọng số 80:80:80:80:80:80:**1** (cá mập cực hiếm),
+      cộng 5 giá trị id âm gốc (không có trong bảng `items` thật) gộp thành
+      400 trọng số "trượt". Trừ đúng 1 mồi câu thật (item `448` "trứng
+      kiến") trong túi đồ mỗi lần quăng. Câu được thì **TỰ BÁN NGAY** — cộng
+      thẳng xu theo đúng cột `coin` thật của item trong `avatar_2x.sql` (cá
+      chim 100, cá đuối 110, cá ngựa 120, cá hề 1000, cá đuôi gai 1500, cá
+      thiên thần 2000, **cá mập 500.000**), KHÔNG giữ cá trong túi (khớp
+      `sellFish()` gốc). Câu được cá mập còn thưởng thêm 1 "Mảnh ghép Cá đuối
+      đại dương" (item `6822`, có thật trong bảng `items`).
+      ⚠️ CHƯA kiểm tra cần câu đang trang bị (item `446`, zorder=70 — đã có
+      sẵn trong bảng `items`/`ItemDao`) vì hệ "đang mặc gì" (trạng thái trang
+      bị thật của user) chưa lên server — TODO giai đoạn sau.
+      Test: `FishingServiceTest` (đơn vị, thống kê 2000-5000 lượt quay xác
+      nhận cá mập hiếm hơn hẳn cá thường, có trượt), `FishingFlowTest` (luồng
+      HTTP thật: hết mồi bị chặn, mỗi lần quăng trừ đúng 1 mồi, câu được cộng
+      đúng số xu bằng giá cá — lặp 200 lần để chắc chắn gặp ít nhất 1 lần
+      trúng, do kết quả ngẫu nhiên thật).
+- [ ] Các giai đoạn sau: nhà ở, đơn hàng, chat... — mỗi module server khớp
+      đúng 1 hệ thống client đã có (achievements/quests/pets/toolcraft đã bỏ
+      theo yêu cầu — không phải tính năng thật của Lttt, hoặc không cần làm).
 
 ## Chạy thử
 
