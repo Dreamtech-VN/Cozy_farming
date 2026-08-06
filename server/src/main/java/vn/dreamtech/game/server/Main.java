@@ -14,6 +14,12 @@ import vn.dreamtech.game.server.auth.UpgradeGuestHandler;
 import vn.dreamtech.game.server.auth.oauth.AppleTokenVerifier;
 import vn.dreamtech.game.server.auth.oauth.GoogleTokenVerifier;
 import vn.dreamtech.game.server.account.ChangePasswordHandler;
+import vn.dreamtech.game.server.battle.BattleService;
+import vn.dreamtech.game.server.battle.BattleStateHandler;
+import vn.dreamtech.game.server.battle.StartStoryHandler;
+import vn.dreamtech.game.server.battle.StoryLevelsHandler;
+import vn.dreamtech.game.server.battle.SwapHandler;
+import vn.dreamtech.game.server.battle.UltimateHandler;
 import vn.dreamtech.game.server.account.DeleteAccountHandler;
 import vn.dreamtech.game.server.character.CharacterHandler;
 import vn.dreamtech.game.server.character.CosmeticCatalogHandler;
@@ -97,6 +103,7 @@ public final class Main {
         DivorceCooldownDao divorceCooldownDao = new DivorceCooldownDao(dataSource);
         CharacterAppearanceDao characterAppearanceDao = new CharacterAppearanceDao(dataSource);
         PlayerCosmeticDao playerCosmeticDao = new PlayerCosmeticDao(dataSource);
+        BattleService battleService = new BattleService(levelDao, walletDao);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
         var appleVerifier = new AppleTokenVerifier();
 
@@ -146,6 +153,11 @@ public final class Main {
         server.createContext("/api/cosmetics/unlock", new UnlockCosmeticHandler(playerCosmeticDao));
         server.createContext("/api/character/appearance/equip", new EquipCosmeticHandler(characterDao, characterAppearanceDao, playerCosmeticDao));
         server.createContext("/api/character/appearance", new GetAppearanceHandler(characterAppearanceDao));
+        server.createContext("/api/battle/story/levels", new StoryLevelsHandler());
+        server.createContext("/api/battle/story/start", new StartStoryHandler(battleService));
+        server.createContext("/api/battle/swap", new SwapHandler(battleService));
+        server.createContext("/api/battle/ultimate", new UltimateHandler(battleService));
+        server.createContext("/api/battle/state", new BattleStateHandler(battleService));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);

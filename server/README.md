@@ -246,6 +246,41 @@ cũ.
       Test: `PlayerCosmeticDaoTest`, `CharacterAppearanceDaoTest` (đơn vị);
       `AppearanceFlowTest` (luồng HTTP thật: mở khoá → trang bị → tháo, chặn
       trang bị khi chưa sở hữu/sai loại ô/chưa có nhân vật).
+- [x] **Giai đoạn 12 — lõi gameplay match-3 (Story mode)**: package
+      `vn.dreamtech.game.server.battle`. KHÔNG có client Unity để chạy thử
+      bằng mắt — logic server-authoritative, kiểm bằng unit test (engine) +
+      test luồng HTTP thật (chấp nhận theo lựa chọn của người dùng).
+      - `battle.engine`: `TileBoard` (bàn cờ 8x8, 6 màu), `BoardGenerator`
+        (sinh bàn không có sẵn khớp), `MatchFinder` (dò hàng/cột >=3 cùng
+        màu), `CascadeResolver` (lặp xoá→rơi→lấp đầy→dò lại cho tới hết
+        khớp — mỗi vòng lặp là 1 tầng **chain**).
+      - Cơ chế: **combo** (khớp liên tiếp không trượt lượt nào +10%/tầng,
+        tối đa 5 tầng, trượt 1 lượt là reset về 0); **mana** (+2/ô khớp, tối
+        đa 100); **ultimate** (đủ mana → tốn hết mana, gây 80 sát thương cố
+        định, không phụ thuộc bàn cờ); **buff/debuff** (`BuffType` — khớp
+        critical (nhóm ≥5 ô) tự nhận buff +20% sát thương 2 lượt kế; địch cứ
+        3 lượt phản đòn 1 lần, tự áp debuff -50% mana nhận 2 lượt kế); **chain**
+        (mỗi tầng dây chuyền +20% sát thương tầng đó); **critical** (nhóm ≥5
+        ô = x2 sát thương, nhóm 4 ô = x1.5).
+      - `StoryLevelCatalog` (tĩnh, 3 màn tuyến tính, MVP) — thắng trận cộng
+        exp/vàng thật qua `LevelDao`/`WalletDao` (nối vào nền tảng Giai đoạn
+        9). `BattleService` giữ phiên trận TRONG BỘ NHỚ (không lưu DB — trận
+        đấu là phiên thời gian thực, không phải dữ liệu cần bền vững).
+      - `POST /api/battle/story/start` {userId, levelId},
+        `POST /api/battle/swap` {battleId, r1, c1, r2, c2},
+        `POST /api/battle/ultimate` {battleId},
+        `GET /api/battle/state?battleId=`,
+        `GET /api/battle/story/levels`.
+      - CHƯA làm: Adventure/Daily/Weekly Challenge/Event Puzzle, toàn bộ
+        PvP (Ranked/Casual/Custom Room/Tournament/Guild War/Season/Replay/
+        Spectate) và phần còn lại của PvE (Dungeon/Elite Dungeon/Tower/Raid/
+        Boss Rush/World Boss/Guild Boss) — cần thêm hệ guild/matchmaking/
+        replay chưa xây, để giai đoạn sau khi lõi match-3 đã ổn định.
+      Test: `MatchFinderTest`, `BoardGeneratorTest`, `CascadeResolverTest`
+      (đơn vị, engine thuần logic); `BattleServiceTest` (đơn vị service —
+      dò nước đi khớp/không khớp thật trên bàn cờ ngẫu nhiên bằng chính
+      `MatchFinder`, không giả lập, để test đúng hành vi server); `BattleFlowTest`
+      (luồng HTTP thật cho các endpoint).
 
 ## Chạy thử
 
