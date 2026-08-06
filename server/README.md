@@ -222,6 +222,30 @@ cũ.
       đủ lâu/đối phương offline/không đủ vàng đều bị chặn 409/402), cộng luồng
       đầy đủ: cầu hôn trừ đúng vàng → chấp nhận tạo hôn nhân → ly hôn → cả
       hai vào cooldown → cầu hôn lại ngay bị chặn.
+- [x] **Giai đoạn 11 — hệ thống nhân vật mở rộng (tuỳ chỉnh + trang bị làm
+      đẹp)**: tách khỏi `Character` (chỉ giữ tóc/áo/quần lúc tạo) sang bảng
+      mới `character_appearance` cho các ô chỉnh SAU khi vào game — mắt,
+      avatar, khung avatar, danh hiệu, biểu cảm — CỘNG các ô "trang bị cho
+      đẹp" không có chỉ số — mũ, áo, quần, giày, pet, skin. 11 ô này gộp
+      chung 1 enum `CosmeticType`.
+      - `CosmeticCatalog` (tĩnh, giống `GiftCatalog`) — danh mục vật phẩm.
+        `GET /api/cosmetics/catalog`.
+      - `player_cosmetics` — sở hữu vật phẩm. `GET /api/cosmetics/owned?userId=`.
+        `POST /api/cosmetics/unlock` {userId, itemId} — hệ shop/thành tựu/
+        gacha CHƯA XÂY nên đây là HOOK tạm (giống `AddCurrencyHandler`) đứng
+        thay cho nguồn mở khoá thật sau này.
+      - `GET /api/character/appearance?userId=` — các ô đang trang bị (mặc
+        định toàn `null` = chưa trang bị gì, client tự vẽ mặc định).
+      - `POST /api/character/appearance/equip` {userId, slot, itemId} — trang
+        bị 1 vật phẩm vào 1 ô (`itemId` = 0/null để tháo ra). Chặn nếu: chưa
+        có nhân vật (404), vật phẩm không khớp loại ô (400), chưa sở hữu vật
+        phẩm (403).
+      - Giới tính (nam/nữ) và chọn set quần áo lúc tạo nhân vật đã có sẵn từ
+        Giai đoạn 3 (`CreateCharacterHandler`, `hairId`/`topId`/`bottomId`),
+        không làm lại.
+      Test: `PlayerCosmeticDaoTest`, `CharacterAppearanceDaoTest` (đơn vị);
+      `AppearanceFlowTest` (luồng HTTP thật: mở khoá → trang bị → tháo, chặn
+      trang bị khi chưa sở hữu/sai loại ô/chưa có nhân vật).
 
 ## Chạy thử
 
