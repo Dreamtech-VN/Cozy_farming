@@ -3,6 +3,7 @@ package vn.dreamtech.cozyfarming.server.farm;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import vn.dreamtech.cozyfarming.server.dao.FarmPlotDao;
+import vn.dreamtech.cozyfarming.server.dao.FarmStoreDao;
 import vn.dreamtech.cozyfarming.server.http.JsonHttp;
 import vn.dreamtech.cozyfarming.server.model.FarmPlot;
 
@@ -15,18 +16,17 @@ import java.util.Optional;
  * POST /api/farm/harvest {userId, index} — thu hoạch cây chín, khớp {@code
  * harvest()} client: sản lượng ngẫu nhiên trong [yieldMin,yieldMax] rồi
  * nhân theo % sức khỏe (cây yếu thu ít hơn), ô đất reset về "empty" (Lttt
- * gốc: phải cuốc lại từ đầu, không giữ trạng thái đã cuốc).
- *
- * Giai đoạn này CHƯA cộng nông sản vào kho (hệ kho chưa lên server) — trả
- * số lượng thu được trong response để client tự cộng kho tạm thời, TODO nối
- * thẳng vào kho server khi có API kho.
+ * gốc: phải cuốc lại từ đầu, không giữ trạng thái đã cuốc). Nông sản cộng
+ * thẳng vào ngăn "produce" của kho nông trại qua {@link FarmStoreDao}.
  */
 public final class HarvestHandler implements HttpHandler {
     private final FarmPlotDao plotDao;
+    private final FarmStoreDao farmStoreDao;
     private final SecureRandom random = new SecureRandom();
 
-    public HarvestHandler(FarmPlotDao plotDao) {
+    public HarvestHandler(FarmPlotDao plotDao, FarmStoreDao farmStoreDao) {
         this.plotDao = plotDao;
+        this.farmStoreDao = farmStoreDao;
     }
 
     record Req(int userId, int index) {
@@ -56,6 +56,7 @@ public final class HarvestHandler implements HttpHandler {
             int qty = Math.max(1, Math.round(baseQty * health / 100f));
 
             plotDao.upsert(req.userId(), FarmPlot.empty(req.index()));
+            farmStoreDao.addTo(req.userId(), "produce", crop.id(), qty);
             JsonHttp.write(exchange, 200, new Res(crop.id(), qty, health));
         } catch (SQLException e) {
             JsonHttp.writeError(exchange, 500, "Lỗi thu hoạch: " + e.getMessage());

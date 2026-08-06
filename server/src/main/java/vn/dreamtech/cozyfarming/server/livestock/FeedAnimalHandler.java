@@ -3,6 +3,7 @@ package vn.dreamtech.cozyfarming.server.livestock;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import vn.dreamtech.cozyfarming.server.dao.AnimalDao;
+import vn.dreamtech.cozyfarming.server.dao.BagDao;
 import vn.dreamtech.cozyfarming.server.http.JsonHttp;
 import vn.dreamtech.cozyfarming.server.model.Animal;
 
@@ -11,14 +12,18 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 /**
- * POST /api/livestock/feed {userId, id} — khớp {@code feed()} client.
- * ⚠️ CHƯA trừ item `feed` trong kho (hệ kho chưa lên server) — TODO giai đoạn sau.
+ * POST /api/livestock/feed {userId, id} — khớp {@code feed()} client: trừ 1
+ * item {@code feed} thật trong túi đồ qua {@link BagDao} trước khi cho ăn.
  */
 public final class FeedAnimalHandler implements HttpHandler {
-    private final AnimalDao animalDao;
+    private static final String FEED_ITEM = "feed";
 
-    public FeedAnimalHandler(AnimalDao animalDao) {
+    private final AnimalDao animalDao;
+    private final BagDao bagDao;
+
+    public FeedAnimalHandler(AnimalDao animalDao, BagDao bagDao) {
         this.animalDao = animalDao;
+        this.bagDao = bagDao;
     }
 
     record Req(int userId, String id) {
@@ -40,6 +45,10 @@ public final class FeedAnimalHandler implements HttpHandler {
             Animal a = found.get();
             if (!AnimalService.isHungry(a)) {
                 JsonHttp.writeError(exchange, 409, "Bé này no rồi");
+                return;
+            }
+            if (!bagDao.takeFrom(req.userId(), FEED_ITEM, 1)) {
+                JsonHttp.writeError(exchange, 409, "Hết thức ăn trong túi đồ");
                 return;
             }
             long now = System.currentTimeMillis();
