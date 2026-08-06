@@ -3,6 +3,7 @@ package vn.dreamtech.cozyfarming.server.farm;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import vn.dreamtech.cozyfarming.server.dao.FarmPlotDao;
+import vn.dreamtech.cozyfarming.server.dao.FarmStoreDao;
 import vn.dreamtech.cozyfarming.server.http.JsonHttp;
 import vn.dreamtech.cozyfarming.server.model.FarmPlot;
 
@@ -12,15 +13,16 @@ import java.util.Optional;
 
 /**
  * POST /api/farm/plant {userId, index, cropId} — gieo hạt lên ô đã cuốc,
- * khớp {@code plant()} client. Giai đoạn này CHƯA trừ hạt giống trong kho
- * (hệ kho/inventory chưa lên server) — chỉ kiểm tra cropId có thật trong
- * `CropCatalog`, TODO trừ kho khi có API kho ở giai đoạn sau.
+ * khớp {@code plant()} client: trừ 1 hạt giống thật trong kho nông trại
+ * (ngăn "seeds") qua {@link FarmStoreDao} trước khi gieo, 409 nếu không đủ.
  */
 public final class PlantHandler implements HttpHandler {
     private final FarmPlotDao plotDao;
+    private final FarmStoreDao farmStoreDao;
 
-    public PlantHandler(FarmPlotDao plotDao) {
+    public PlantHandler(FarmPlotDao plotDao, FarmStoreDao farmStoreDao) {
         this.plotDao = plotDao;
+        this.farmStoreDao = farmStoreDao;
     }
 
     record Req(int userId, int index, String cropId) {
@@ -41,6 +43,10 @@ public final class PlantHandler implements HttpHandler {
             Optional<FarmPlot> found = plotDao.find(req.userId(), req.index());
             if (found.isEmpty() || !"tilled".equals(found.get().state())) {
                 JsonHttp.writeError(exchange, 409, "Ô đất chưa được cuốc");
+                return;
+            }
+            if (!farmStoreDao.takeFrom(req.userId(), "seeds", req.cropId(), 1)) {
+                JsonHttp.writeError(exchange, 409, "Không đủ hạt giống trong kho");
                 return;
             }
             FarmPlot planted = new FarmPlot(req.index(), "planted", req.cropId(),

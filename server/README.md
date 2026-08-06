@@ -85,8 +85,30 @@ Gson thay json-simple, mysql-connector-j thay bản cũ).
       `LivestockFlowTest` cập nhật để xác nhận đúng số xu bị trừ lúc mua
       (500 → 200 với gà giá 300) và được cộng lúc bán (200 → 350 với hoàn
       150), cùng loại vật nuôi không hợp lệ không bị trừ xu.
-- [ ] Các giai đoạn sau: ao cá, kho/inventory, chat, đơn hàng... — mỗi module
-      server khớp đúng 1 hệ thống client đã có.
+- [x] **Giai đoạn 8 — kho nông trại + túi đồ**: `GET /api/inventory/farmstore?userId=&kind=`
+      (`kind` bỏ trống -> trả cả 4 ngăn), `GET /api/inventory/bag?userId=` —
+      `FarmStoreDao` quản bảng MỚI `farm_store` khớp ĐÚNG `FarmStore` client
+      (`src/systems/farmstore.ts`): 4 ngăn riêng `seeds`/`produce`/`fert`/`fish`,
+      mỗi ngăn là map id -> số lượng, xóa hẳn dòng khi về 0 (khớp `addTo()`
+      client). `BagDao` quản bảng MỚI `bag_items` khớp `S.inventory` client
+      (đồ dùng/quà/nguyên liệu KHÔNG thuộc kho nông trại, ví dụ `feed`,
+      `animal_med`). Nối thật vào nông trại + vật nuôi:
+      - `PlantHandler` trừ 1 hạt giống thật (`farm_store` ngăn `seeds`) trước
+        khi gieo, 409 nếu không đủ.
+      - `HarvestHandler` cộng thẳng nông sản vào ngăn `produce`.
+      - `FeedAnimalHandler` trừ 1 item `feed` trong túi đồ trước khi cho ăn,
+        409 nếu hết.
+      - `CollectAnimalHandler` cộng sản phẩm (trứng/sữa/thịt/len) vào CHUNG
+        ngăn `produce` (khớp `addTo('produce', ...)` trong `livestock.ts` —
+        client gộp sản phẩm vật nuôi với nông sản, không tách riêng).
+      ⚠️ Chưa nối kho vào mua hạt giống/thức ăn ở tiệm (hệ shop/mua bằng ví
+      chưa lên server ngoài vật nuôi) — TODO giai đoạn sau.
+      Test: `FarmStoreDaoTest`, `BagDaoTest`, `FarmStoreHandlerTest`,
+      `BagHandlerTest` (đơn vị); `FarmFlowTest`/`LivestockFlowTest` cập nhật
+      xác nhận đúng số hạt giống bị trừ lúc trồng và số thức ăn bị trừ lúc
+      cho ăn.
+- [ ] Các giai đoạn sau: ao cá, chat, đơn hàng, tiệm/mua bằng ví... — mỗi
+      module server khớp đúng 1 hệ thống client đã có.
 
 ## Chạy thử
 

@@ -3,6 +3,7 @@ package vn.dreamtech.cozyfarming.server.livestock;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import vn.dreamtech.cozyfarming.server.dao.AnimalDao;
+import vn.dreamtech.cozyfarming.server.dao.FarmStoreDao;
 import vn.dreamtech.cozyfarming.server.http.JsonHttp;
 import vn.dreamtech.cozyfarming.server.model.Animal;
 
@@ -13,15 +14,19 @@ import java.util.Optional;
 
 /**
  * POST /api/livestock/collect {userId, id} — khớp {@code collect()} client:
- * trả sản phẩm (trứng/sữa/thịt/len) + exp. ⚠️ CHƯA cộng thẳng vào kho server
- * (hệ kho chưa lên server) — trả trong response, client tự cộng kho tạm.
+ * trả sản phẩm (trứng/sữa/thịt/len) + exp, cộng thẳng vào ngăn "produce" của
+ * kho nông trại qua {@link FarmStoreDao} (client thật cũng gộp sản phẩm vật
+ * nuôi chung kho với nông sản, xem {@code addTo('produce', ...)} trong
+ * {@code livestock.ts}).
  */
 public final class CollectAnimalHandler implements HttpHandler {
     private final AnimalDao animalDao;
+    private final FarmStoreDao farmStoreDao;
     private final SecureRandom random = new SecureRandom();
 
-    public CollectAnimalHandler(AnimalDao animalDao) {
+    public CollectAnimalHandler(AnimalDao animalDao, FarmStoreDao farmStoreDao) {
         this.animalDao = animalDao;
+        this.farmStoreDao = farmStoreDao;
     }
 
     record Req(int userId, String id) {
@@ -54,6 +59,7 @@ public final class CollectAnimalHandler implements HttpHandler {
             long now = System.currentTimeMillis();
             Animal collected = new Animal(a.id(), a.type(), a.boughtAt(), a.fedAt(), now, a.health(), a.sick(), a.healthAt());
             animalDao.upsert(req.userId(), collected);
+            farmStoreDao.addTo(req.userId(), "produce", def.product(), qty);
             JsonHttp.write(exchange, 200, new Res(def.product(), qty, def.exp()));
         } catch (SQLException e) {
             JsonHttp.writeError(exchange, 500, "Lỗi thu sản phẩm: " + e.getMessage());

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import vn.dreamtech.cozyfarming.server.dao.FarmPlotDao;
+import vn.dreamtech.cozyfarming.server.dao.FarmStoreDao;
 
 import javax.sql.DataSource;
 import java.net.InetSocketAddress;
@@ -26,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class FarmFlowTest {
     private HttpServer server;
     private int port;
+    private FarmStoreDao farmStoreDao;
     private final Gson gson = new Gson();
     private final HttpClient http = HttpClient.newHttpClient();
 
@@ -45,15 +47,19 @@ class FarmFlowTest {
                 """);
             // ô 0 bắt đầu ở trạng thái "empty" (đất đã mở nhưng chưa cuốc)
             st.execute("INSERT INTO farm_plots (user_id, idx, state, health) VALUES (1, 0, 'empty', 100)");
+            st.execute("CREATE TABLE farm_store (user_id INT NOT NULL, kind VARCHAR(10) NOT NULL, item_id VARCHAR(60) NOT NULL, qty INT NOT NULL DEFAULT 0, PRIMARY KEY (user_id, kind, item_id))");
+            // sẵn 5 hạt cà rốt trong kho để test trồng được
+            st.execute("INSERT INTO farm_store VALUES (1, 'seeds', 'carrot', 5)");
         }
         FarmPlotDao plotDao = new FarmPlotDao(dataSource);
+        farmStoreDao = new FarmStoreDao(dataSource);
 
         server = HttpServer.create(new InetSocketAddress(0), 0);
         server.createContext("/api/farm/plots", new FarmPlotsHandler(plotDao));
         server.createContext("/api/farm/till", new TillHandler(plotDao));
-        server.createContext("/api/farm/plant", new PlantHandler(plotDao));
+        server.createContext("/api/farm/plant", new PlantHandler(plotDao, farmStoreDao));
         server.createContext("/api/farm/water", new WaterHandler(plotDao));
-        server.createContext("/api/farm/harvest", new HarvestHandler(plotDao));
+        server.createContext("/api/farm/harvest", new HarvestHandler(plotDao, farmStoreDao));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -90,6 +96,8 @@ class FarmFlowTest {
 
         var plant = post("/api/farm/plant", new PlantHandler.Req(1, 0, "carrot"));
         assertEquals(200, plant.statusCode());
+        // trồng xong phải trừ đúng 1 hạt trong kho (5 -> 4)
+        assertEquals(4, farmStoreDao.countOf(1, "seeds", "carrot"));
 
         var water = post("/api/farm/water", new WaterHandler.Req(1, 0));
         assertEquals(200, water.statusCode());

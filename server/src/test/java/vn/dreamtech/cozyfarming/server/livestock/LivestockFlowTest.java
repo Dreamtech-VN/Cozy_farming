@@ -9,6 +9,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import vn.dreamtech.cozyfarming.server.dao.AnimalDao;
+import vn.dreamtech.cozyfarming.server.dao.BagDao;
+import vn.dreamtech.cozyfarming.server.dao.FarmStoreDao;
 import vn.dreamtech.cozyfarming.server.dao.WalletDao;
 
 import javax.sql.DataSource;
@@ -28,6 +30,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class LivestockFlowTest {
     private HttpServer server;
     private int port;
+    private FarmStoreDao farmStoreDao;
+    private BagDao bagDao;
     private final Gson gson = new Gson();
     private final HttpClient http = HttpClient.newHttpClient();
 
@@ -45,15 +49,21 @@ class LivestockFlowTest {
                 )
                 """);
             st.execute("CREATE TABLE wallets (user_id INT NOT NULL PRIMARY KEY, coins BIGINT NOT NULL DEFAULT 500, gems BIGINT NOT NULL DEFAULT 0)");
+            st.execute("CREATE TABLE farm_store (user_id INT NOT NULL, kind VARCHAR(10) NOT NULL, item_id VARCHAR(60) NOT NULL, qty INT NOT NULL DEFAULT 0, PRIMARY KEY (user_id, kind, item_id))");
+            st.execute("CREATE TABLE bag_items (user_id INT NOT NULL, item_id VARCHAR(60) NOT NULL, qty INT NOT NULL DEFAULT 0, PRIMARY KEY (user_id, item_id))");
+            // sẵn 3 phần thức ăn trong túi để test cho ăn được
+            st.execute("INSERT INTO bag_items VALUES (1, 'feed', 3)");
         }
         AnimalDao animalDao = new AnimalDao(dataSource);
         WalletDao walletDao = new WalletDao(dataSource);
+        farmStoreDao = new FarmStoreDao(dataSource);
+        bagDao = new BagDao(dataSource);
 
         server = HttpServer.create(new InetSocketAddress(0), 0);
         server.createContext("/api/livestock", new AnimalsHandler(animalDao));
         server.createContext("/api/livestock/buy", new BuyAnimalHandler(animalDao, walletDao));
-        server.createContext("/api/livestock/feed", new FeedAnimalHandler(animalDao));
-        server.createContext("/api/livestock/collect", new CollectAnimalHandler(animalDao));
+        server.createContext("/api/livestock/feed", new FeedAnimalHandler(animalDao, bagDao));
+        server.createContext("/api/livestock/collect", new CollectAnimalHandler(animalDao, farmStoreDao));
         server.createContext("/api/livestock/sell", new SellAnimalHandler(animalDao, walletDao));
         server.createContext("/api/wallet", new vn.dreamtech.cozyfarming.server.wallet.WalletHandler(walletDao));
         server.setExecutor(null);
@@ -106,6 +116,8 @@ class LivestockFlowTest {
         // vừa mua xong (fedAt=0, khớp buyAnimal() client) -> đã đói ngay, phải cho ăn được luôn
         var feedFirst = post("/api/livestock/feed", new FeedAnimalHandler.Req(1, id));
         assertEquals(200, feedFirst.statusCode());
+        // cho ăn xong phải trừ đúng 1 phần thức ăn trong túi (3 -> 2)
+        assertEquals(2, bagDao.countOf(1, "feed"));
         // vừa cho ăn xong -> no rồi, cho ăn lại ngay phải bị chặn
         var feedTooSoon = post("/api/livestock/feed", new FeedAnimalHandler.Req(1, id));
         assertEquals(409, feedTooSoon.statusCode());
