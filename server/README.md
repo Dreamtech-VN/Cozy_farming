@@ -4,6 +4,9 @@ Server Java cho game mới (client Unity/C#). Bắt đầu lại từ đầu sau
 dự án nông trại cũ (Cozy Farming) — xem lịch sử git nếu cần tham khảo code
 cũ.
 
+- Mới setup máy lần đầu? Đọc **[SETUP.md](SETUP.md)**.
+- Đang làm client Unity? Đọc **[UNITY_INTEGRATION.md](UNITY_INTEGRATION.md)**.
+
 ## Quy trình: từng giai đoạn, xong mới sang giai đoạn kế
 
 - [x] **Giai đoạn 1 — khung project**: Maven project biên dịch + chạy được,
