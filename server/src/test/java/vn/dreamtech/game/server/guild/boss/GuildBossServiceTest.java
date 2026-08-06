@@ -39,6 +39,7 @@ class GuildBossServiceTest {
     private UserDao userDao;
     private CharacterDao characterDao;
     private WalletDao walletDao;
+    private GuildBossContributionDao contributionDao;
 
     @BeforeEach
     void setUp() throws SQLException {
@@ -76,7 +77,7 @@ class GuildBossServiceTest {
         GuildMemberDao guildMemberDao = new GuildMemberDao(dataSource);
         GuildBossCycleDao cycleDao = new GuildBossCycleDao(dataSource);
         GuildBossAttemptDao attemptDao = new GuildBossAttemptDao(dataSource);
-        GuildBossContributionDao contributionDao = new GuildBossContributionDao(dataSource);
+        contributionDao = new GuildBossContributionDao(dataSource);
         battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource));
         guildService = new GuildService(guildDao, guildMemberDao, characterDao, walletDao);
         guildBossService = new GuildBossService(guildMemberDao, cycleDao, attemptDao, contributionDao, battleService, levelDao, walletDao);
@@ -187,6 +188,62 @@ class GuildBossServiceTest {
         // báo cáo lại cùng battleId lần 2 -> bị chặn
         var e = assertThrows(GuildException.class, () -> guildBossService.report(leader, battleId));
         assertEquals(409, e.status());
+    }
+
+    @Test
+    void leaderboardEmptyInitially() throws SQLException {
+        int leader = newPlayer("Leader", 20_000);
+        var guild = guildService.create(leader, "Rồng Lửa", "RL", null);
+
+        var leaderboard = guildBossService.leaderboard(guild.id());
+        assertEquals(0, leaderboard.size());
+    }
+
+    @Test
+    void leaderboardOrderedByDamageDescending() throws SQLException {
+        int leader = newPlayer("Leader", 20_000);
+        var guild = guildService.create(leader, "Rồng Lửa", "RL", null);
+        int member = newPlayer("Member", 0);
+        guildService.join(member, guild.id());
+
+        var status = guildBossService.status(guild.id());
+        contributionDao.addDamage(guild.id(), leader, status.cycleStartedAt(), 100);
+        contributionDao.addDamage(guild.id(), member, status.cycleStartedAt(), 250);
+
+        var leaderboard = guildBossService.leaderboard(guild.id());
+        assertEquals(2, leaderboard.size());
+        assertEquals(1, leaderboard.get(0).rank());
+        assertEquals(member, leaderboard.get(0).userId());
+        assertEquals(250, leaderboard.get(0).totalDamage());
+        assertEquals(2, leaderboard.get(1).rank());
+        assertEquals(leader, leaderboard.get(1).userId());
+    }
+
+    @Test
+    void reportAddsToLeaderboard() throws SQLException {
+        int leader = newPlayer("Leader", 20_000);
+        var guild = guildService.create(leader, "Rồng Lửa", "RL", null);
+        BattleStateView view = guildBossService.attack(leader);
+        String battleId = view.battleId();
+
+        int guard = 0;
+        while (guard++ < 2000) {
+            BattleStateView state = battleService.getState(battleId);
+            if (state.status() != BattleStatus.ONGOING) break;
+            int[] swap = findAnyMatchingSwap(state.board());
+            if (swap == null) break;
+            battleService.swap(battleId, swap[0], swap[1], swap[2], swap[3]);
+        }
+        var report = guildBossService.report(leader, battleId);
+
+        var leaderboard = guildBossService.leaderboard(guild.id());
+        if (report.damageApplied() > 0) {
+            assertEquals(1, leaderboard.size());
+            assertEquals(leader, leaderboard.get(0).userId());
+            assertEquals(report.damageApplied(), leaderboard.get(0).totalDamage());
+        } else {
+            assertEquals(0, leaderboard.size());
+        }
     }
 
     private static int[] findAnyMatchingSwap(int[][] grid) {
