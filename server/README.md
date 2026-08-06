@@ -128,8 +128,37 @@ cũ.
       đổi được, xoá tài khoản thường cần đúng mật khẩu, xoá tài khoản khách
       không cần mật khẩu); `SupportFlowTest` (category/nội dung không hợp lệ
       bị chặn, chỉ thấy báo cáo của chính mình).
-- [ ] Đã xong đủ danh sách "server cơ bản" ban đầu. Các mục còn lại (nếu có)
-      để bàn khi có yêu cầu mới.
+- [x] **Giai đoạn 7 — bạn bè + quà tặng/thân mật**: 1 cặp bạn bè chỉ 1 dòng
+      duy nhất trong `friendships` (chuẩn hoá `userIdA < userIdB`, không quan
+      trọng ai gửi lời mời trước) — điểm thân mật (`intimacy_points`) gắn
+      liền với tình bạn, mất bạn là mất điểm.
+      - `POST /api/friends/request` {fromUserId, toUserId} — tôn trọng cài
+        đặt "Privacy & Social" của người NHẬN (giai đoạn 6): `NOBODY` thì
+        chặn thẳng (403).
+      - `POST /api/friends/respond` {requestId, userId, accept} — `userId`
+        BẮT BUỘC là người nhận lời mời (chặn tự duyệt lời mời của mình hoặc
+        người thứ 3 duyệt hộ, 403).
+      - `GET /api/friends?userId=`, `GET /api/friends/requests?userId=`
+        (lời mời đang chờ phản hồi), `POST /api/friends/remove`.
+      - `POST /api/friends/gift` {fromUserId, toUserId, giftId} — tặng quà
+        CỘNG THẲNG điểm thân mật, chỉ tặng được cho bạn bè (404 nếu chưa kết
+        bạn). ⚠️ Game chưa có ví/xu (chưa làm shop/economy) nên quà tặng
+        CHƯA tốn tiền — giới hạn 1 LẦN/CẶP BẠN/NGÀY (429 nếu tặng lại sớm)
+        để tránh gọi API liên tục max điểm thân mật tức thì, TODO đổi sang
+        tốn xu khi có ví. `GiftCatalog` 4 loại quà (hoa/socola/gấu bông/
+        trang sức), điểm tăng dần theo độ "đắt" của quà.
+      Test: `FriendshipDaoTest` (đơn vị, chuẩn hoá thứ tự cặp/cộng-trừ điểm
+      không phụ thuộc thứ tự tham số); `FriendFlowTest` (luồng HTTP thật: tự
+      kết bạn bị chặn, privacy NOBODY chặn lời mời, gửi trùng bị chặn, duyệt
+      sai người bị chặn, chấp nhận rồi xuất hiện trong danh sách bạn, huỷ kết
+      bạn, từ chối không tạo tình bạn); `GiftFlowTest` (tặng cho người lạ bị
+      chặn, quà không hợp lệ bị chặn, tặng cộng đúng điểm rồi tặng lại ngay bị
+      chặn theo cooldown, hoạt động đúng dù đổi thứ tự from/to).
+- [ ] **Giai đoạn 8 (tiếp theo) — kết hôn/đám cưới**: cần đủ điểm thân mật +
+      "mua nhẫn cầu hôn" (trừ điểm thân mật, vì chưa có ví/xu — xem TODO giai
+      đoạn 7), cầu hôn/chấp nhận, thành vợ chồng. "Đám cưới" tạm hiểu là
+      chính trạng thái kết hôn hoàn tất (chưa làm hệ sự kiện/lễ cưới riêng),
+      sẽ xác nhận lại nếu cần chi tiết hơn.
 
 ## Chạy thử
 

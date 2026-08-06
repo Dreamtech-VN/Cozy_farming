@@ -24,6 +24,8 @@ import vn.dreamtech.game.server.dao.CharacterDao;
 import vn.dreamtech.game.server.dao.ChatMessageDao;
 import vn.dreamtech.game.server.dao.PasswordResetDao;
 import vn.dreamtech.game.server.dao.PresenceDao;
+import vn.dreamtech.game.server.dao.FriendRequestDao;
+import vn.dreamtech.game.server.dao.FriendshipDao;
 import vn.dreamtech.game.server.dao.SupportTicketDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.UserSettingsDao;
@@ -33,6 +35,12 @@ import vn.dreamtech.game.server.lobby.LeaveLobbyHandler;
 import vn.dreamtech.game.server.lobby.LobbyPlayersHandler;
 import vn.dreamtech.game.server.settings.GetSettingsHandler;
 import vn.dreamtech.game.server.settings.UpdateSettingsHandler;
+import vn.dreamtech.game.server.social.friend.FriendsListHandler;
+import vn.dreamtech.game.server.social.friend.PendingRequestsHandler;
+import vn.dreamtech.game.server.social.friend.RemoveFriendHandler;
+import vn.dreamtech.game.server.social.friend.RespondFriendRequestHandler;
+import vn.dreamtech.game.server.social.friend.SendFriendRequestHandler;
+import vn.dreamtech.game.server.social.gift.SendGiftHandler;
 import vn.dreamtech.game.server.support.MyTicketsHandler;
 import vn.dreamtech.game.server.support.ReportHandler;
 
@@ -60,6 +68,8 @@ public final class Main {
         ChatMessageDao chatMessageDao = new ChatMessageDao(dataSource);
         UserSettingsDao settingsDao = new UserSettingsDao(dataSource);
         SupportTicketDao supportTicketDao = new SupportTicketDao(dataSource);
+        FriendRequestDao friendRequestDao = new FriendRequestDao(dataSource);
+        FriendshipDao friendshipDao = new FriendshipDao(dataSource);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
         var appleVerifier = new AppleTokenVerifier();
 
@@ -89,6 +99,12 @@ public final class Main {
         server.createContext("/api/account/delete", new DeleteAccountHandler(userDao));
         server.createContext("/api/support/report", new ReportHandler(supportTicketDao));
         server.createContext("/api/support/tickets", new MyTicketsHandler(supportTicketDao));
+        server.createContext("/api/friends/request", new SendFriendRequestHandler(friendRequestDao, friendshipDao, settingsDao));
+        server.createContext("/api/friends/respond", new RespondFriendRequestHandler(friendRequestDao, friendshipDao));
+        server.createContext("/api/friends/requests", new PendingRequestsHandler(friendRequestDao));
+        server.createContext("/api/friends/remove", new RemoveFriendHandler(friendshipDao));
+        server.createContext("/api/friends/gift", new SendGiftHandler(friendshipDao));
+        server.createContext("/api/friends", new FriendsListHandler(friendshipDao, characterDao));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);
