@@ -13,6 +13,10 @@ import vn.dreamtech.game.server.auth.SocialLoginHandler;
 import vn.dreamtech.game.server.auth.UpgradeGuestHandler;
 import vn.dreamtech.game.server.auth.oauth.AppleTokenVerifier;
 import vn.dreamtech.game.server.auth.oauth.GoogleTokenVerifier;
+import vn.dreamtech.game.server.character.CharacterHandler;
+import vn.dreamtech.game.server.character.CreateCharacterHandler;
+import vn.dreamtech.game.server.character.UpdateOutfitHandler;
+import vn.dreamtech.game.server.dao.CharacterDao;
 import vn.dreamtech.game.server.dao.PasswordResetDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.db.DataSourceProvider;
@@ -22,10 +26,11 @@ import java.net.InetSocketAddress;
 
 /**
  * Điểm khởi động server. Giai đoạn 1: khung HTTP tối thiểu (/health) + DB.
- * Giai đoạn 2 (hiện tại): tài khoản — đăng ký/đăng nhập/quên mật khẩu/khách,
- * liên kết khách->thường, đăng nhập/liên kết Google/Apple (khung xác thực
- * dựng sẵn, Apple chưa xong thật — xem {@code AppleTokenVerifier}). Tạo
- * nhân vật, sảnh, chat, cài đặt thêm dần ở các giai đoạn sau.
+ * Giai đoạn 2: tài khoản — đăng ký/đăng nhập/quên mật khẩu/khách, liên kết
+ * khách->thường, đăng nhập/liên kết Google/Apple (khung xác thực dựng sẵn,
+ * Apple chưa xong thật — xem {@code AppleTokenVerifier}). Giai đoạn 3 (hiện
+ * tại): tạo nhân vật (giới tính/tên/trang phục cơ bản). Sảnh, chat, cài đặt
+ * thêm dần ở các giai đoạn sau.
  */
 public final class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
@@ -35,6 +40,7 @@ public final class Main {
         DataSource dataSource = DataSourceProvider.create();
         UserDao userDao = new UserDao(dataSource);
         PasswordResetDao resetDao = new PasswordResetDao(dataSource);
+        CharacterDao characterDao = new CharacterDao(dataSource);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
         var appleVerifier = new AppleTokenVerifier();
 
@@ -50,6 +56,9 @@ public final class Main {
         server.createContext("/api/auth/social/apple", new SocialLoginHandler(userDao, appleVerifier, SocialLoginHandler.Provider.APPLE));
         server.createContext("/api/auth/link/google", new LinkSocialHandler(userDao, googleVerifier, SocialLoginHandler.Provider.GOOGLE));
         server.createContext("/api/auth/link/apple", new LinkSocialHandler(userDao, appleVerifier, SocialLoginHandler.Provider.APPLE));
+        server.createContext("/api/character/create", new CreateCharacterHandler(userDao, characterDao));
+        server.createContext("/api/character", new CharacterHandler(characterDao));
+        server.createContext("/api/character/outfit", new UpdateOutfitHandler(characterDao));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);
