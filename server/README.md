@@ -130,7 +130,31 @@ Gson thay json-simple, mysql-connector-j thay bản cũ).
       Test: `PondFishDaoTest`, `FishPondServiceTest` (đơn vị, có ca đủ tuổi
       nhưng đói để xác nhận không vớt được), `FishPondFlowTest` (luồng HTTP
       thật: thả cá trừ xu đúng, cho ăn trừ đúng 1 feed, ao đầy bị chặn).
-- [ ] Các giai đoạn sau: chat, đơn hàng, tiệm/mua bằng ví... — mỗi module
+- [x] **Giai đoạn 10 — tiệm (mua/bán bằng ví)**: `POST /api/shop/{buy,sell}`
+      {userId, itemId, qty} — `ShopService` định giá + định tuyến kho, chép
+      ĐÚNG `storeSlotOf()` (`src/core/save.ts`) và `produceSell()`
+      (`src/ui/panels.ts`), thứ tự nhánh giữ y hệt client. Giá hạt giống lấy
+      thẳng từ `CropCatalog` (không chép 2 lần), giá vật phẩm chung
+      (phân bón/thức ăn/thuốc thú y/quà/vé quay/công cụ/mồi câu/đồ ăn) từ
+      `ShopCatalog` — chép nguyên từ `items.ts`. `FoodCatalog` (chỉ giá bán,
+      9 món) chép từ `foods.ts` để bán đúng giá vật phẩm kho dạng
+      `food_<tên món>` — hệ nấu ăn đầy đủ (nguyên liệu/thời gian nấu) CHƯA
+      lên server, TODO giai đoạn "nhà bếp" sau, bảng này giữ sẵn tránh 2
+      nguồn số liệu lệch nhau.
+      ⚠️ Quirk THẬT chép nguyên từ client: `food_cake`/`food_juice` mua ở
+      tiệm có giá trong `items.ts` nhưng KHÔNG bán lại được từ kho (id bắt
+      đầu `food_` luôn tra qua `FoodCatalog`, không có "cake"/"juice" trong
+      đó -> sellPrice 0) — test `boughtFoodCakeIsNotSellableFromKho` xác
+      nhận đúng quirk này, KHÔNG "sửa" lại cho hợp lý.
+      2 nhánh định tuyến KHÔNG có bên client (`resolveSlot` cho id cây trồng
+      trần như `carrot` và id sản phẩm ao `fish_ca_ro`) — client không cần vì
+      UI kho đã biết sẵn đang ở tab nào, còn API 1-itemId ở đây phải tự suy,
+      xem comment trong `ShopService`.
+      Test: `ShopServiceTest` (đơn vị, định giá + định tuyến), `ShopFlowTest`
+      (luồng HTTP thật: mua hạt giống trừ đúng xu + vào đúng ngăn kho, bán
+      nông sản cộng đúng xu, mua vật phẩm không cho phép mua bị chặn, bán
+      thiếu số lượng bị chặn).
+- [ ] Các giai đoạn sau: chat, đơn hàng, nhà bếp (nấu ăn)... — mỗi module
       server khớp đúng 1 hệ thống client đã có.
 
 ## Chạy thử
