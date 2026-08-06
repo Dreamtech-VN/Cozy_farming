@@ -4,7 +4,8 @@ import java.util.List;
 
 public record BattleStateView(
         String battleId,
-        int levelId,
+        BattleMode mode,
+        Integer levelId,
         BattleStatus status,
         int[][] board,
         int playerHp,

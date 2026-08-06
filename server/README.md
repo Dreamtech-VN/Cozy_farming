@@ -281,6 +281,24 @@ cũ.
       dò nước đi khớp/không khớp thật trên bàn cờ ngẫu nhiên bằng chính
       `MatchFinder`, không giả lập, để test đúng hành vi server); `BattleFlowTest`
       (luồng HTTP thật cho các endpoint).
+- [x] **Giai đoạn 13 — Daily/Weekly Challenge**: dùng lại NGUYÊN lõi match-3
+      của Giai đoạn 12 (`EnemyDef` — interface chung cho `StoryLevelDef` và
+      `ChallengeDef` — để `BattleSession`/`BattleService` không cần biết
+      trận đấu tới từ đâu). Mỗi loại (Daily/Weekly) MVP chỉ có ĐÚNG 1 con
+      trùm cố định (`ChallengeCatalog`), TODO xoay vòng nội dung thật sau.
+      - Cooldown tính từ LẦN THẮNG gần nhất (không reset theo mốc lịch/tuần
+        thật — đơn giản hoá cho MVP): Daily 24h, Weekly 7 ngày
+        (`challenge_attempts`, `ChallengeAttemptDao`). Thắng mới tính là
+        hoàn thành — thua không bị tính cooldown, được thử lại ngay.
+      - `POST /api/battle/challenge/start` {userId, type} — 429 nếu còn
+        trong thời gian chờ (kèm số ms còn lại).
+      - `GET /api/battle/challenge/status?userId=&type=` — còn làm được
+        không, còn bao lâu nếu chưa.
+      - `swap`/`ultimate`/`state` dùng chung y hệt endpoint của Story
+        (không tách riêng — cùng `battleId`).
+      Test: `ChallengeFlowTest` (luồng HTTP thật: mặc định làm được ngay,
+      chặn loại thử thách sai, chặn làm lại khi còn cooldown, làm lại được
+      khi cooldown đã hết).
 
 ## Chạy thử
 

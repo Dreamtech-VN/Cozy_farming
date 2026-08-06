@@ -1,4 +1,4 @@
-package vn.dreamtech.game.server.battle;
+package vn.dreamtech.game.server.battle.challenge;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -7,6 +7,10 @@ import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import vn.dreamtech.game.server.battle.BattleService;
+import vn.dreamtech.game.server.battle.BattleStateHandler;
+import vn.dreamtech.game.server.battle.SwapHandler;
+import vn.dreamtech.game.server.battle.UltimateHandler;
 import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
 import vn.dreamtech.game.server.dao.LevelDao;
 import vn.dreamtech.game.server.dao.WalletDao;
@@ -23,33 +27,32 @@ import java.sql.Statement;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** Test nối dây HTTP thật cho các endpoint /api/battle/* — logic chi tiết đã kiểm ở BattleServiceTest. */
-class BattleFlowTest {
+class ChallengeFlowTest {
     private HttpServer server;
     private int port;
+    private ChallengeAttemptDao challengeAttemptDao;
     private final Gson gson = new Gson();
     private final HttpClient http = HttpClient.newHttpClient();
 
     @BeforeEach
     void start() throws Exception {
         JdbcDataSource ds = new JdbcDataSource();
-        ds.setURL("jdbc:h2:mem:battle_flow_" + System.nanoTime() + ";DB_CLOSE_DELAY=-1;MODE=MySQL");
+        ds.setURL("jdbc:h2:mem:challenge_flow_" + System.nanoTime() + ";DB_CLOSE_DELAY=-1;MODE=MySQL");
         DataSource dataSource = ds;
         try (Connection c = dataSource.getConnection(); Statement st = c.createStatement()) {
             st.execute("CREATE TABLE character_levels (user_id INT NOT NULL PRIMARY KEY, level INT NOT NULL DEFAULT 1, exp INT NOT NULL DEFAULT 0)");
             st.execute("CREATE TABLE wallets (user_id INT NOT NULL PRIMARY KEY, gold BIGINT NOT NULL DEFAULT 0, diamond BIGINT NOT NULL DEFAULT 0)");
             st.execute("CREATE TABLE challenge_attempts (user_id INT NOT NULL, challenge_type VARCHAR(10) NOT NULL, last_completed_at TIMESTAMP NOT NULL, PRIMARY KEY (user_id, challenge_type))");
         }
-        BattleService battleService = new BattleService(new LevelDao(dataSource), new WalletDao(dataSource), new ChallengeAttemptDao(dataSource));
+        challengeAttemptDao = new ChallengeAttemptDao(dataSource);
+        BattleService battleService = new BattleService(new LevelDao(dataSource), new WalletDao(dataSource), challengeAttemptDao);
 
         server = HttpServer.create(new InetSocketAddress(0), 0);
-        server.createContext("/api/battle/story/levels", new StoryLevelsHandler());
-        server.createContext("/api/battle/story/start", new StartStoryHandler(battleService));
+        server.createContext("/api/battle/challenge/start", new StartChallengeHandler(battleService));
+        server.createContext("/api/battle/challenge/status", new ChallengeStatusHandler(battleService));
         server.createContext("/api/battle/swap", new SwapHandler(battleService));
         server.createContext("/api/battle/ultimate", new UltimateHandler(battleService));
         server.createContext("/api/battle/state", new BattleStateHandler(battleService));
-        server.createContext("/api/battle/challenge/start", new vn.dreamtech.game.server.battle.challenge.StartChallengeHandler(battleService));
-        server.createContext("/api/battle/challenge/status", new vn.dreamtech.game.server.battle.challenge.ChallengeStatusHandler(battleService));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -74,36 +77,47 @@ class BattleFlowTest {
     }
 
     @Test
-    void levelsListed() throws Exception {
-        var res = get("/api/battle/story/levels");
+    void statusAvailableByDefault() throws Exception {
+        var res = get("/api/battle/challenge/status?userId=1&type=DAILY");
         assertEquals(200, res.statusCode());
-        assertTrue(res.body().contains("Cánh đồng ban mai"));
+        JsonObject body = gson.fromJson(res.body(), JsonObject.class);
+        assertTrue(body.get("available").getAsBoolean());
+        assertEquals(0, body.get("cooldownRemainingMs").getAsLong());
     }
 
     @Test
-    void startUnknownLevelRejected() throws Exception {
-        var res = post("/api/battle/story/start", new StartStoryHandler.Req(1, 999));
-        assertEquals(404, res.statusCode());
+    void invalidTypeRejected() throws Exception {
+        var res = post("/api/battle/challenge/start", new StartChallengeHandler.Req(1, "MONTHLY"));
+        assertEquals(400, res.statusCode());
     }
 
     @Test
-    void fullCycle_startGetStateInvalidSwap() throws Exception {
-        var start = post("/api/battle/story/start", new StartStoryHandler.Req(1, 1));
-        assertEquals(201, start.statusCode());
-        JsonObject started = gson.fromJson(start.body(), JsonObject.class);
-        String battleId = started.get("battleId").getAsString();
-        assertEquals("ONGOING", started.get("status").getAsString());
+    void startChallengeCreatesOngoingBattle() throws Exception {
+        var res = post("/api/battle/challenge/start", new StartChallengeHandler.Req(1, "DAILY"));
+        assertEquals(201, res.statusCode());
+        JsonObject body = gson.fromJson(res.body(), JsonObject.class);
+        assertEquals("ONGOING", body.get("status").getAsString());
+        assertEquals("DAILY", body.get("mode").getAsString());
+    }
 
-        var state = get("/api/battle/state?battleId=" + battleId);
-        assertEquals(200, state.statusCode());
+    @Test
+    void secondAttemptBlockedAfterCompletion() throws Exception {
+        challengeAttemptDao.recordCompletion(1, ChallengeType.DAILY, System.currentTimeMillis());
+        var statusRes = get("/api/battle/challenge/status?userId=1&type=DAILY");
+        JsonObject status = gson.fromJson(statusRes.body(), JsonObject.class);
+        assertEquals(false, status.get("available").getAsBoolean());
+        assertTrue(status.get("cooldownRemainingMs").getAsLong() > 0);
 
-        var badSwap = post("/api/battle/swap", new SwapHandler.Req(battleId, 0, 0, 5, 5));
-        assertEquals(400, badSwap.statusCode());
+        var startRes = post("/api/battle/challenge/start", new StartChallengeHandler.Req(1, "DAILY"));
+        assertEquals(429, startRes.statusCode());
+    }
 
-        var ultimateTooEarly = post("/api/battle/ultimate", new UltimateHandler.Req(battleId));
-        assertEquals(400, ultimateTooEarly.statusCode());
+    @Test
+    void availableAgainAfterCooldownExpired() throws Exception {
+        long longAgo = System.currentTimeMillis() - ChallengeType.DAILY.cooldownMs - 1000;
+        challengeAttemptDao.recordCompletion(1, ChallengeType.DAILY, longAgo);
 
-        var unknownState = get("/api/battle/state?battleId=does-not-exist");
-        assertEquals(404, unknownState.statusCode());
+        var startRes = post("/api/battle/challenge/start", new StartChallengeHandler.Req(1, "DAILY"));
+        assertEquals(201, startRes.statusCode());
     }
 }

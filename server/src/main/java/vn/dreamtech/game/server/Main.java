@@ -20,6 +20,8 @@ import vn.dreamtech.game.server.battle.StartStoryHandler;
 import vn.dreamtech.game.server.battle.StoryLevelsHandler;
 import vn.dreamtech.game.server.battle.SwapHandler;
 import vn.dreamtech.game.server.battle.UltimateHandler;
+import vn.dreamtech.game.server.battle.challenge.ChallengeStatusHandler;
+import vn.dreamtech.game.server.battle.challenge.StartChallengeHandler;
 import vn.dreamtech.game.server.account.DeleteAccountHandler;
 import vn.dreamtech.game.server.character.CharacterHandler;
 import vn.dreamtech.game.server.character.CosmeticCatalogHandler;
@@ -31,6 +33,7 @@ import vn.dreamtech.game.server.character.UnlockCosmeticHandler;
 import vn.dreamtech.game.server.character.UpdateOutfitHandler;
 import vn.dreamtech.game.server.chat.RecentMessagesHandler;
 import vn.dreamtech.game.server.chat.SendMessageHandler;
+import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
 import vn.dreamtech.game.server.dao.CharacterAppearanceDao;
 import vn.dreamtech.game.server.dao.CharacterDao;
 import vn.dreamtech.game.server.dao.ChatMessageDao;
@@ -103,7 +106,8 @@ public final class Main {
         DivorceCooldownDao divorceCooldownDao = new DivorceCooldownDao(dataSource);
         CharacterAppearanceDao characterAppearanceDao = new CharacterAppearanceDao(dataSource);
         PlayerCosmeticDao playerCosmeticDao = new PlayerCosmeticDao(dataSource);
-        BattleService battleService = new BattleService(levelDao, walletDao);
+        ChallengeAttemptDao challengeAttemptDao = new ChallengeAttemptDao(dataSource);
+        BattleService battleService = new BattleService(levelDao, walletDao, challengeAttemptDao);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
         var appleVerifier = new AppleTokenVerifier();
 
@@ -158,6 +162,8 @@ public final class Main {
         server.createContext("/api/battle/swap", new SwapHandler(battleService));
         server.createContext("/api/battle/ultimate", new UltimateHandler(battleService));
         server.createContext("/api/battle/state", new BattleStateHandler(battleService));
+        server.createContext("/api/battle/challenge/start", new StartChallengeHandler(battleService));
+        server.createContext("/api/battle/challenge/status", new ChallengeStatusHandler(battleService));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);

@@ -1,5 +1,6 @@
 package vn.dreamtech.game.server.battle;
 
+import vn.dreamtech.game.server.battle.challenge.ChallengeType;
 import vn.dreamtech.game.server.battle.engine.TileBoard;
 
 import java.util.ArrayList;
@@ -15,7 +16,10 @@ import java.util.Random;
 public final class BattleSession {
     final String id;
     final int userId;
-    final StoryLevelDef level;
+    final EnemyDef level;
+    final BattleMode mode;
+    final Integer storyLevelId; // chỉ có ý nghĩa khi mode == STORY
+    final ChallengeType challengeType; // chỉ có ý nghĩa khi mode == DAILY/WEEKLY
     final TileBoard board;
     final Random random;
 
@@ -28,10 +32,14 @@ public final class BattleSession {
     boolean rewardGranted = false;
     List<ActiveEffect> effects = new ArrayList<>();
 
-    BattleSession(String id, int userId, StoryLevelDef level, TileBoard board, Random random) {
+    BattleSession(String id, int userId, EnemyDef level, BattleMode mode, Integer storyLevelId,
+                  ChallengeType challengeType, TileBoard board, Random random) {
         this.id = id;
         this.userId = userId;
         this.level = level;
+        this.mode = mode;
+        this.storyLevelId = storyLevelId;
+        this.challengeType = challengeType;
         this.board = board;
         this.random = random;
         this.enemyHp = level.enemyHp();
