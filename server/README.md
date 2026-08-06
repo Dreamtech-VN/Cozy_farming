@@ -494,3 +494,17 @@ mvn test
 mvn -Dserver.port=8080 exec:java
 # hoặc: mvn package && java -jar target/game-server-0.1.0-SNAPSHOT.jar
 ```
+
+### Chạy nhanh bằng file build (bấm 1 phát)
+
+`pom.xml` đã cấu hình `maven-shade-plugin` — `mvn package` ra 1 file
+`.jar` gộp sẵn hết thư viện (`target/game-server-0.1.0-SNAPSHOT.jar`),
+chạy được bằng `java -jar` mà không cần Maven/IDE nữa. Để tiện hơn nữa,
+dùng script tự build (nếu chưa có `.jar`) + tự chạy:
+
+- Windows: bấm đúp `start.bat` (hoặc chạy trong Command Prompt).
+- Mac/Linux: `./start.sh`.
+
+Mặc định nối `jdbc:mysql://localhost:3306/game` (user `root`, không mật
+khẩu) ở cổng `8080` — đổi bằng biến môi trường trước khi chạy nếu cần:
+`DB_URL`, `DB_USER`, `DB_PASSWORD`, `DB_POOL_SIZE`, `SERVER_PORT`.
