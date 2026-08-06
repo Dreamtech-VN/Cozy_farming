@@ -154,11 +154,30 @@ cũ.
       bạn, từ chối không tạo tình bạn); `GiftFlowTest` (tặng cho người lạ bị
       chặn, quà không hợp lệ bị chặn, tặng cộng đúng điểm rồi tặng lại ngay bị
       chặn theo cooldown, hoạt động đúng dù đổi thứ tự from/to).
-- [ ] **Giai đoạn 8 (tiếp theo) — kết hôn/đám cưới**: cần đủ điểm thân mật +
-      "mua nhẫn cầu hôn" (trừ điểm thân mật, vì chưa có ví/xu — xem TODO giai
-      đoạn 7), cầu hôn/chấp nhận, thành vợ chồng. "Đám cưới" tạm hiểu là
-      chính trạng thái kết hôn hoàn tất (chưa làm hệ sự kiện/lễ cưới riêng),
-      sẽ xác nhận lại nếu cần chi tiết hơn.
+- [x] **Giai đoạn 8 — kết hôn/đám cưới**: "Đám cưới" hiểu là chính trạng thái
+      kết hôn hoàn tất (chưa làm hệ sự kiện/lễ cưới riêng, ví dụ đặt lịch/mời
+      khách — chỉ số liệu cân bằng ở `MarriageConstants` là tự đặt, game mới
+      không có gốc thật để đối chiếu).
+      - `POST /api/marriage/propose` {fromUserId, toUserId} — cầu hôn: phải
+        đang là bạn bè (404), chưa ai kết hôn (409), đủ 1000 điểm thân mật
+        (409 nếu thiếu). "Mua nhẫn" = TRỪ 200 điểm thân mật chung của cặp
+        NGAY khi gửi (chưa có ví/xu, xem TODO giai đoạn 7) — dù bị từ chối
+        CŨNG KHÔNG hoàn lại (giống mua nhẫn thật ngoài đời, tăng cân nhắc
+        trước khi cầu hôn).
+      - `POST /api/marriage/respond` {proposalId, userId, accept} —
+        `userId` BẮT BUỘC là người ĐƯỢC cầu hôn (chặn tự chấp nhận lời cầu
+        hôn của chính mình, 403). Chấp nhận = tạo hôn nhân (bảng `marriages`,
+        chuẩn hoá `userIdA < userIdB` giống `friendships`) + xoá lời cầu
+        hôn. Từ chối chỉ xoá lời cầu hôn.
+      - `GET /api/marriage/status?userId=` — {married, spouseUserId}.
+      - Chưa làm ly hôn (không có yêu cầu) — kết hôn 1 lần vĩnh viễn ở phiên
+        bản này.
+      Test: `MarriageDaoTest` (đơn vị, chuẩn hoá thứ tự cặp); `MarriageFlowTest`
+      (luồng HTTP thật: tự cầu hôn bị chặn, cầu hôn người lạ bị chặn, thiếu
+      điểm thân mật bị chặn, chấp nhận sai người bị chặn, cầu hôn thành công
+      trừ đúng tiền nhẫn rồi chấp nhận tạo hôn nhân, đã kết hôn rồi không cầu
+      hôn người khác được, từ chối không tạo hôn nhân và không hoàn tiền
+      nhẫn).
 
 ## Chạy thử
 

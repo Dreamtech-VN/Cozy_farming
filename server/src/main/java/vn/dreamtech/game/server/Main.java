@@ -26,6 +26,8 @@ import vn.dreamtech.game.server.dao.PasswordResetDao;
 import vn.dreamtech.game.server.dao.PresenceDao;
 import vn.dreamtech.game.server.dao.FriendRequestDao;
 import vn.dreamtech.game.server.dao.FriendshipDao;
+import vn.dreamtech.game.server.dao.MarriageDao;
+import vn.dreamtech.game.server.dao.MarriageProposalDao;
 import vn.dreamtech.game.server.dao.SupportTicketDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.UserSettingsDao;
@@ -41,6 +43,9 @@ import vn.dreamtech.game.server.social.friend.RemoveFriendHandler;
 import vn.dreamtech.game.server.social.friend.RespondFriendRequestHandler;
 import vn.dreamtech.game.server.social.friend.SendFriendRequestHandler;
 import vn.dreamtech.game.server.social.gift.SendGiftHandler;
+import vn.dreamtech.game.server.social.marriage.MarriageStatusHandler;
+import vn.dreamtech.game.server.social.marriage.ProposeHandler;
+import vn.dreamtech.game.server.social.marriage.RespondProposalHandler;
 import vn.dreamtech.game.server.support.MyTicketsHandler;
 import vn.dreamtech.game.server.support.ReportHandler;
 
@@ -70,6 +75,8 @@ public final class Main {
         SupportTicketDao supportTicketDao = new SupportTicketDao(dataSource);
         FriendRequestDao friendRequestDao = new FriendRequestDao(dataSource);
         FriendshipDao friendshipDao = new FriendshipDao(dataSource);
+        MarriageProposalDao marriageProposalDao = new MarriageProposalDao(dataSource);
+        MarriageDao marriageDao = new MarriageDao(dataSource);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
         var appleVerifier = new AppleTokenVerifier();
 
@@ -105,6 +112,9 @@ public final class Main {
         server.createContext("/api/friends/remove", new RemoveFriendHandler(friendshipDao));
         server.createContext("/api/friends/gift", new SendGiftHandler(friendshipDao));
         server.createContext("/api/friends", new FriendsListHandler(friendshipDao, characterDao));
+        server.createContext("/api/marriage/propose", new ProposeHandler(friendshipDao, marriageDao, marriageProposalDao));
+        server.createContext("/api/marriage/respond", new RespondProposalHandler(marriageProposalDao, marriageDao));
+        server.createContext("/api/marriage/status", new MarriageStatusHandler(marriageDao));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);
