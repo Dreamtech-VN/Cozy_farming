@@ -94,6 +94,8 @@ trong code, để tránh lộ mật khẩu khi đưa code lên GitHub):
 | `DB_PASSWORD` | (rỗng) | Mật khẩu MySQL |
 | `DB_POOL_SIZE` | `10` | Số kết nối tối đa (không cần đổi lúc dev) |
 | `SERVER_PORT` | `8080` | Cổng HTTP server lắng nghe |
+| `GOOGLE_CLIENT_ID` | (rỗng — đăng nhập Google báo lỗi) | OAuth client ID thật từ Google Cloud Console, cần cho `/api/auth/social/google` và `/api/auth/link/google` |
+| `APPLE_CLIENT_ID` | (rỗng — đăng nhập Apple báo lỗi) | Services ID thật đăng ký với Apple, cần cho `/api/auth/social/apple` và `/api/auth/link/apple` |
 
 Nếu MySQL cài local với user `root` không mật khẩu ở cổng mặc định
 3306, KHÔNG CẦN đặt gì thêm — cứ chạy thẳng theo bước 5. Nếu khác (mật

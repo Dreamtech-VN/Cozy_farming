@@ -40,11 +40,8 @@ cũ.
         thực THẬT qua endpoint `tokeninfo` chính chủ Google (không phải
         placeholder) — cần biến môi trường `GOOGLE_CLIENT_ID` (OAuth client
         ID thật từ Google Cloud Console) để so khớp `aud`. `AppleTokenVerifier`
-        CHƯA xong thật (Apple ID token cần verify chữ ký JWT qua JWKS, chưa
-        thêm thư viện JWT) — chủ động báo lỗi 401 thay vì tin token gửi lên
-        (không chấp nhận kiểu "placeholder tin tưởng luôn" vì đó là lỗ hổng
-        bảo mật thật), TODO thêm thư viện JWT (vd. nimbus-jose-jwt) khi làm
-        thật.
+        (khi ra đời ở giai đoạn này) CHƯA xong thật — chủ động báo lỗi 401
+        thay vì tin token gửi lên, xem Giai đoạn 26 để biết bản THẬT sau này.
       Test: `PasswordHasherTest`, `UserDaoTest` (đơn vị); `AuthFlowTest`
       (luồng HTTP thật: đăng ký→đăng nhập→quên mật khẩu→đặt lại→đăng nhập
       lại; khách tạo mới rồi vào lại đúng tài khoản bằng token cũ; nâng cấp
@@ -579,6 +576,27 @@ cũ.
       khi vợ/chồng chưa online, cooldown tick/nhiệm vụ đôi hoạt động đúng,
       trận hợp tác chỉ thưởng khi CẢ HAI cùng hoàn thành trong khung thời
       gian chứ không phải 1 người đánh 2 lần).
+- [x] **Giai đoạn 26 — xác thực Apple THẬT**: hoàn thành TODO ghi ở Giai
+      đoạn 2 — `AppleTokenVerifier` trước đây CHỦ ĐỘNG báo lỗi thay vì tin
+      token gửi lên (đúng nguyên tắc an toàn, nhưng chưa dùng được thật).
+      Giờ verify chữ ký JWT THẬT bằng JWKS chính chủ Apple
+      (`https://appleid.apple.com/auth/keys`) qua thư viện `nimbus-jose-jwt`
+      (dependency MỚI, đã thêm `pom.xml`) — không tự chế lại logic JWT/JWK.
+      - Tải JWKS 1 lần rồi cache (`volatile JWKSet`, double-checked locking)
+        — mỗi request KHÔNG gọi Apple lại; nếu gặp `kid` lạ (Apple xoay khoá
+        định kỳ) thì tự tải lại JWKS 1 lần trước khi báo lỗi hẳn.
+      - Kiểm ĐỦ những gì 1 verifier JWT thật cần: chữ ký (`RSASSAVerifier`
+        theo đúng khoá công khai khớp `kid`), `iss` phải là
+        `https://appleid.apple.com`, `aud` phải khớp biến môi trường
+        `APPLE_CLIENT_ID` (Services ID thật đăng ký với Apple — thêm mới,
+        sinh đôi với `GOOGLE_CLIENT_ID`), `exp` chưa hết hạn.
+      - Test KHÔNG gọi Apple thật: `AppleTokenVerifierTest` tự sinh cặp khoá
+        RSA + tự ký JWT cục bộ (`nimbus-jose-jwt` cũng dùng để ký trong
+        test), tiêm JWKS giả qua constructor package-private thay vì
+        constructor công khai (constructor công khai vẫn luôn gọi Apple
+        thật, không đổi hành vi production) — kiểm đủ: verify đúng token
+        hợp lệ, từ chối sai `aud`/sai `iss`/hết hạn/ký bằng khoá sai/`kid`
+        lạ/thiếu cấu hình `APPLE_CLIENT_ID`/token sai định dạng.
 
 ## Chạy thử
 

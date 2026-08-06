@@ -137,10 +137,10 @@ import java.net.InetSocketAddress;
 /**
  * Điểm khởi động server. Giai đoạn 1: khung HTTP tối thiểu (/health) + DB.
  * Giai đoạn 2: tài khoản — đăng ký/đăng nhập/quên mật khẩu/khách, liên kết
- * khách->thường, đăng nhập/liên kết Google/Apple (khung xác thực dựng sẵn,
- * Apple chưa xong thật — xem {@code AppleTokenVerifier}). Giai đoạn 3 (hiện
- * tại): tạo nhân vật (giới tính/tên/trang phục cơ bản). Sảnh, chat, cài đặt
- * thêm dần ở các giai đoạn sau.
+ * khách->thường, đăng nhập/liên kết Google/Apple thật (xem
+ * {@code GoogleTokenVerifier}/{@code AppleTokenVerifier}, giai đoạn 26).
+ * Giai đoạn 3: tạo nhân vật (giới tính/tên/trang phục cơ bản). Sảnh, chat,
+ * cài đặt thêm dần ở các giai đoạn sau.
  */
 public final class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
@@ -188,7 +188,7 @@ public final class Main {
         MarriageActivityService marriageActivityService = new MarriageActivityService(marriageDao, marriageActivityDao, friendshipDao, presenceDao, battleService);
         PvpService pvpService = new PvpService(characterDao, battleService, pvpRankDao, pvpMatchHistoryDao);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
-        var appleVerifier = new AppleTokenVerifier();
+        var appleVerifier = new AppleTokenVerifier(System.getenv("APPLE_CLIENT_ID"));
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/health", new HealthCheckHandler());
