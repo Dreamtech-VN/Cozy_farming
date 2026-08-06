@@ -154,8 +154,31 @@ Gson thay json-simple, mysql-connector-j thay bản cũ).
       (luồng HTTP thật: mua hạt giống trừ đúng xu + vào đúng ngăn kho, bán
       nông sản cộng đúng xu, mua vật phẩm không cho phép mua bị chặn, bán
       thiếu số lượng bị chặn).
-- [ ] Các giai đoạn sau: chat, đơn hàng, nhà bếp (nấu ăn)... — mỗi module
-      server khớp đúng 1 hệ thống client đã có.
+- [x] **Giai đoạn 11 — nhà bếp (nấu ăn)**: `GET /api/cooking?userId=`,
+      `POST /api/cooking/{start,collect,cancel}` — chép ĐÚNG
+      `src/systems/cooking.ts`: mỗi user chỉ nấu 1 món/lượt (`cooking_state`
+      bảng MỚI, 1 dòng/user), bận bếp thì chặn món khác (409). `FoodCatalog`
+      chuyển từ package `shop` (chỉ có giá bán, đặt tạm ở giai đoạn 10) sang
+      package `cooking` riêng, giờ có ĐẦY ĐỦ công thức (nguyên liệu, thời
+      gian nấu, exp) chép từ `FOODS` trong `src/data/foods.ts` — `ShopService`
+      cập nhật theo import mới, không đổi hành vi bán.
+      - `StartCookHandler` trừ nguyên liệu thật từ ngăn "produce" của kho
+        nông trại TRƯỚC khi nấu, thiếu nguyên liệu (kiểm tra đủ hết TRƯỚC khi
+        trừ bất kỳ nguyên liệu nào, tránh trừ dở dang) hoặc bếp đang bận đều
+        409.
+      - `CollectCookHandler` chặn lấy món khi chưa chín (409), chín rồi cộng
+        vào ngăn "produce" với id `food_<tên món>` (khớp
+        `addTo('produce', 'food_'+id, 1)` — đây chính là loại id mà
+        `ShopService`/`FoodCatalog` giai đoạn 10 đã định giá bán sẵn).
+      - `CancelCookHandler` hủy nấu (chín hay chưa đều được), trả lại đúng
+        số nguyên liệu đã trừ vào kho.
+      Test: `CookingServiceTest` (đơn vị, công thức còn giờ/đã chín),
+      `CookingStateDaoTest` (đơn vị, mỗi user 1 dòng, ghi đè khi nấu món
+      mới), `CookingFlowTest` (luồng HTTP thật: thiếu nguyên liệu bị chặn,
+      trừ đúng nguyên liệu lúc bắt đầu, bận bếp chặn món 2, chưa chín chặn
+      lấy, hủy trả đúng nguyên liệu).
+- [ ] Các giai đoạn sau: chat, đơn hàng... — mỗi module server khớp đúng 1
+      hệ thống client đã có.
 
 ## Chạy thử
 
