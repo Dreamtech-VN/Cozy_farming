@@ -338,6 +338,33 @@ cũ.
       Test: `TowerFlowTest` (qua `BattleService` trực tiếp — tầng đầu đúng
       chỉ số gốc, tầng 2 chỉ số tăng đúng công thức, mana reset khi sang
       tầng); `TowerHttpFlowTest` (nối dây HTTP).
+- [x] **Giai đoạn 16 — Guild (nền tảng)**: 1 user chỉ ở ĐÚNG 1 guild tại 1
+      thời điểm (PK trên `user_id` ở `guild_members`, giống cách
+      `characters` chỉ cho 1 nhân vật/user). Tạo guild tốn 10.000 vàng, trừ
+      NGAY không hoàn — cùng triết lý "không hoàn tiền" đã dùng ở nhẫn cầu
+      hôn (Giai đoạn 10).
+      - 3 cấp bậc: LEADER/OFFICER/MEMBER. Hội trưởng rời guild khi còn
+        thành viên khác bị CHẶN (409) — phải `transfer-leader` trước, tránh
+        guild mất chủ; hội trưởng duy nhất rời = tự giải tán.
+      - `POST /api/guild/create` {userId, name, tag, description},
+        `POST /api/guild/join` {userId, guildId} (vào thẳng, CHƯA có duyệt
+        đơn — MVP, TODO khi cần), `POST /api/guild/leave` {userId},
+        `POST /api/guild/kick` {actorUserId, targetUserId} (hội trưởng/phó,
+        không đuổi được hội trưởng), `POST /api/guild/role`
+        {actorUserId, targetUserId, role} (chỉ hội trưởng, thăng/giáng
+        OFFICER/MEMBER — dùng `transfer-leader` riêng để đặt LEADER),
+        `POST /api/guild/transfer-leader` {actorUserId, targetUserId} (hội
+        trưởng cũ tự xuống OFFICER), `POST /api/guild/disband` {userId}
+        (chỉ hội trưởng), `GET /api/guild/list`,
+        `GET /api/guild/info?guildId=`, `GET /api/guild/my?userId=`.
+      - Đặt nền cho Guild War/World Boss/Guild Boss/bảng xếp hạng guild sau
+        này — CHƯA làm các phần đó (cần thêm hệ chiến đấu chung/matchmaking
+        guild, để giai đoạn sau).
+      Test: `GuildDaoTest`, `GuildMemberDaoTest` (đơn vị); `GuildFlowTest`
+      (luồng HTTP thật: chặn tạo khi chưa có nhân vật/không đủ vàng, trừ
+      đúng vàng khi tạo, tên/tag trùng bị chặn, vào/rời/đuổi/đổi cấp
+      bậc/chuyển quyền hội trưởng/giải tán đầy đủ, hội trưởng duy nhất rời
+      = tự giải tán).
 
 ## Chạy thử
 
