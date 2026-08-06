@@ -64,7 +64,26 @@ cũ.
       thật: chưa tạo trả 404, user không tồn tại bị chặn, tên/giới tính
       không hợp lệ bị chặn, tạo 2 lần bị chặn, tên trùng người khác bị chặn,
       đổi trang phục sau khi tạo).
-- [ ] Các giai đoạn sau: sảnh, chat, cài đặt trong game
+- [x] **Giai đoạn 4 — sảnh**: Sảnh = màn hình chính sau khi đăng nhập + tạo
+      nhân vật, mọi người đứng chung 1 world, thấy được nhân vật/vị trí của
+      nhau. ⚠️ Làm bằng REST POLLING (bảng `lobby_presence`), KHÔNG phải
+      WebSocket — server hiện tại chỉ có `com.sun.net.httpserver` thuần,
+      chưa thêm dependency WebSocket. Polling đủ dùng cho sảnh tĩnh (đứng
+      nói chuyện/chọn menu), TODO nâng cấp WebSocket nếu cần đồng bộ di
+      chuyển mượt hơn sau này.
+      - `POST /api/lobby/heartbeat` {userId, x, y} — client gọi định kỳ
+        (khuyến nghị mỗi 1-2 giây) để báo còn hoạt động + cập nhật vị trí.
+        404 nếu chưa tạo nhân vật (sảnh chỉ hiện người có nhân vật).
+      - `GET /api/lobby/players` — danh sách người ĐANG hoạt động (heartbeat
+        trong 15 giây gần nhất), JOIN với `characters` để trả kèm
+        tên/giới tính/trang phục cho client vẽ được, không chỉ toạ độ trần.
+      - `POST /api/lobby/leave` {userId} — thoát chủ động, gỡ khỏi danh sách
+        ngay thay vì chờ hết hạn 15 giây.
+      Test: `PresenceDaoTest` (đơn vị, heartbeat/hết hạn/ghi đè vị trí/gỡ
+      khỏi danh sách); `LobbyFlowTest` (luồng HTTP thật: chưa có nhân vật bị
+      chặn, sảnh trống mặc định, heartbeat hiện đúng tên+vị trí, thoát gỡ
+      khỏi danh sách ngay).
+- [ ] Các giai đoạn sau: chat, cài đặt trong game
       (graphics/audio/controls/gameplay/notifications/language/privacy &
       social/account/support/about).
 
