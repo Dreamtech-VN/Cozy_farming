@@ -55,6 +55,8 @@ import vn.dreamtech.game.server.dao.GuildMemberDao;
 import vn.dreamtech.game.server.dao.LevelDao;
 import vn.dreamtech.game.server.dao.MarriageDao;
 import vn.dreamtech.game.server.dao.MarriageProposalDao;
+import vn.dreamtech.game.server.dao.PvpMatchHistoryDao;
+import vn.dreamtech.game.server.dao.PvpRankDao;
 import vn.dreamtech.game.server.dao.SupportTicketDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.UserSettingsDao;
@@ -81,6 +83,15 @@ import vn.dreamtech.game.server.guild.boss.GuildBossService;
 import vn.dreamtech.game.server.guild.boss.LeaderboardHandler;
 import vn.dreamtech.game.server.guild.boss.ReportBossResultHandler;
 import vn.dreamtech.game.server.level.AddExpHandler;
+import vn.dreamtech.game.server.pvp.JoinQueueHandler;
+import vn.dreamtech.game.server.pvp.LeaveQueueHandler;
+import vn.dreamtech.game.server.pvp.MatchStatusHandler;
+import vn.dreamtech.game.server.pvp.MyMatchHandler;
+import vn.dreamtech.game.server.pvp.PvpService;
+import vn.dreamtech.game.server.pvp.RankHandler;
+import vn.dreamtech.game.server.pvp.RankingListHandler;
+import vn.dreamtech.game.server.pvp.ReportScoreHandler;
+import vn.dreamtech.game.server.pvp.StartMatchHandler;
 import vn.dreamtech.game.server.level.GetLevelHandler;
 import vn.dreamtech.game.server.lobby.HeartbeatHandler;
 import vn.dreamtech.game.server.lobby.LeaveLobbyHandler;
@@ -146,12 +157,15 @@ public final class Main {
         WorldBossCycleDao worldBossCycleDao = new WorldBossCycleDao(dataSource);
         WorldBossAttemptDao worldBossAttemptDao = new WorldBossAttemptDao(dataSource);
         WorldBossContributionDao worldBossContributionDao = new WorldBossContributionDao(dataSource);
+        PvpRankDao pvpRankDao = new PvpRankDao(dataSource);
+        PvpMatchHistoryDao pvpMatchHistoryDao = new PvpMatchHistoryDao(dataSource);
         BattleService battleService = new BattleService(levelDao, walletDao, challengeAttemptDao);
         GuildService guildService = new GuildService(guildDao, guildMemberDao, characterDao, walletDao);
         GuildBossService guildBossService = new GuildBossService(guildMemberDao, guildBossCycleDao, guildBossAttemptDao,
                 guildBossContributionDao, battleService, levelDao, walletDao);
         WorldBossService worldBossService = new WorldBossService(characterDao, worldBossCycleDao, worldBossAttemptDao,
                 worldBossContributionDao, battleService, levelDao, walletDao);
+        PvpService pvpService = new PvpService(characterDao, battleService, pvpRankDao, pvpMatchHistoryDao);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
         var appleVerifier = new AppleTokenVerifier();
 
@@ -232,6 +246,14 @@ public final class Main {
         server.createContext("/api/world-boss/status", new StatusHandler(worldBossService));
         server.createContext("/api/world-boss/attack-status", new vn.dreamtech.game.server.worldboss.AttackStatusHandler(worldBossService));
         server.createContext("/api/world-boss/leaderboard", new vn.dreamtech.game.server.worldboss.LeaderboardHandler(worldBossService));
+        server.createContext("/api/pvp/queue/join", new JoinQueueHandler(pvpService));
+        server.createContext("/api/pvp/queue/leave", new LeaveQueueHandler(pvpService));
+        server.createContext("/api/pvp/match/start", new StartMatchHandler(pvpService));
+        server.createContext("/api/pvp/match/report", new ReportScoreHandler(pvpService));
+        server.createContext("/api/pvp/match/status", new MatchStatusHandler(pvpService));
+        server.createContext("/api/pvp/match/my", new MyMatchHandler(pvpService));
+        server.createContext("/api/pvp/rank", new RankHandler(pvpService));
+        server.createContext("/api/pvp/leaderboard", new RankingListHandler(pvpService));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);

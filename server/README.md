@@ -444,6 +444,46 @@ cũ.
       chung giữa nhiều người chơi khác nhau, đánh tới khi trận kết thúc rồi
       report đúng + phát thưởng + lên bảng xếp hạng); `WorldBossHttpFlowTest`
       (nối dây HTTP).
+- [x] **Giai đoạn 20 — PvP Ranked**: server CHỈ có REST polling, KHÔNG có
+      WebSocket (xem Giai đoạn 4) — nên 2 người chơi KHÔNG thể thao tác
+      chung 1 bàn cờ theo thời gian thực. Giải pháp: PvP dạng "đấu song
+      song không chung bàn cờ" (async score-attack) — ghép cặp xong, mỗi
+      bên tự chơi ĐỘC LẬP trong giới hạn `BattleConstants.PVP_MOVE_LIMIT`
+      (20 lượt, địch gần như bất tử — `PvpFightDef`, HP 999999, không đấu
+      tới khi hết máu địch), ai TỔNG SÁT THƯƠNG cao hơn thắng.
+      - Thêm `BattleMode.PVP` + `BattleService.startPvp` (sinh đôi với
+        `startGuildBoss`/`startWorldBoss`). `resolveOutcome` thêm nhánh:
+        PVP mà đủ `PVP_MOVE_LIMIT` lượt thì dừng trận (dùng lại
+        `BattleStatus.LOST` làm "đã kết thúc", KHÔNG mang nghĩa "thua thật"
+        — `PvpService` chỉ đọc `totalDamageDealt`, không quan tâm status).
+      - Ghép cặp: CHỈ 1 vị trí chờ (MVP, chưa phải hàng đợi thật nhiều
+        người/theo rating — TODO nâng cấp sau). Người thứ 2 vào hàng chờ
+        được ghép NGAY, người thứ 1 phải tự poll `match/my` để biết đã
+        được ghép (không có cách "đẩy" thông báo qua REST polling thuần).
+      - Mỗi bên tự `match/start` trận cá nhân riêng, tự `swap`/`ultimate`
+        (dùng CHUNG endpoint), rồi `match/report` nộp điểm SAU khi trận cá
+        nhân kết thúc. Trận CHỈ resolve khi CẢ HAI đã report — chống báo
+        cáo trùng bằng tập `battleId` đã báo cáo (in-memory, giống Guild/
+        World Boss).
+      - Elo-lite đơn giản (`pvp_ranks`): thắng +20, thua -10, hoà +5 mỗi
+        bên (không phải Elo thật có tính theo chênh lệch rating đối thủ —
+        TODO khi cần cân bằng công bằng hơn), rating tối thiểu 0.
+        `pvp_match_history` chỉ ghi kết quả cuối lúc resolve, không lưu
+        từng lượt (giống triết lý "chỉ lưu kết quả cuối" của
+        `BattleSession`).
+      - `POST /api/pvp/queue/join` {userId} (ghép ngay thì trả `matchId`
+        luôn), `POST /api/pvp/queue/leave` {userId},
+        `POST /api/pvp/match/start` {userId, matchId},
+        `POST /api/pvp/match/report` {userId, matchId, battleId},
+        `GET /api/pvp/match/status?matchId=`, `GET /api/pvp/match/my?userId=`
+        (kể cả trận đã xong, để xem kết quả), `GET /api/pvp/rank?userId=`,
+        `GET /api/pvp/leaderboard`.
+      Test: `PvpRankDaoTest`, `PvpMatchHistoryDaoTest` (đơn vị);
+      `PvpServiceTest` (qua service trực tiếp — chặn ghép khi chưa có nhân
+      vật/đã trong hàng chờ/đã có trận chưa xong, chặn report khi trận cá
+      nhân chưa xong/report trùng, đấu tới hết lượt cả 2 bên rồi report
+      đúng điểm + resolve đúng thắng-thua-hoà + cập nhật rating, sau khi
+      resolve vào hàng chờ lại được); `PvpHttpFlowTest` (nối dây HTTP).
 
 ## Chạy thử
 

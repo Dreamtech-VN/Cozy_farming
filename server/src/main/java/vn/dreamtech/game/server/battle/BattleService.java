@@ -76,6 +76,11 @@ public final class BattleService {
         return toView(session, false, false, 0, 0, 0, false, false);
     }
 
+    public BattleStateView startPvp(int userId, EnemyDef fight) {
+        BattleSession session = createSession(userId, fight, BattleMode.PVP, null, null, null);
+        return toView(session, false, false, 0, 0, 0, false, false);
+    }
+
     public BattleStateView startChallenge(int userId, ChallengeType type) {
         ChallengeDef def = ChallengeCatalog.find(type);
         try {
@@ -225,6 +230,10 @@ public final class BattleService {
             session.status = BattleStatus.WON;
             grantRewardOnce(session);
         } else if (session.playerHp <= 0) {
+            session.status = BattleStatus.LOST;
+        } else if (session.mode == BattleMode.PVP && session.swapCount >= PVP_MOVE_LIMIT) {
+            // PvP không đấu tới khi 1 bên hết máu (địch HP gần như vô hạn) — hết lượt là dừng,
+            // PvpService chỉ đọc totalDamageDealt để so điểm, KHÔNG coi LOST là "thua" thật.
             session.status = BattleStatus.LOST;
         }
         return false;
