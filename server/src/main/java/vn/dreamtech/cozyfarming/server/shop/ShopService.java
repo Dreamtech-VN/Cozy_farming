@@ -1,5 +1,6 @@
 package vn.dreamtech.cozyfarming.server.shop;
 
+import vn.dreamtech.cozyfarming.server.cooking.FoodCatalog;
 import vn.dreamtech.cozyfarming.server.farm.CropCatalog;
 
 import java.util.Optional;
@@ -51,7 +52,7 @@ public final class ShopService {
     /** Giá bán, khớp {@code produceSell()} — 0 nếu không bán được. */
     public static int sellPriceOf(String itemId) {
         if (itemId.startsWith("food_")) {
-            return FoodCatalog.sellPriceOf(itemId.substring(5)).orElse(0);
+            return FoodCatalog.sellPriceOf(itemId.substring(5));
         }
         if (itemId.startsWith("fish_")) {
             return vn.dreamtech.cozyfarming.server.fishpond.FryCatalog.find(itemId.substring(5))

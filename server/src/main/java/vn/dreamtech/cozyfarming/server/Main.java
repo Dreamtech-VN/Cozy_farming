@@ -7,8 +7,13 @@ import vn.dreamtech.cozyfarming.server.auth.ForgotPasswordRequestHandler;
 import vn.dreamtech.cozyfarming.server.auth.ForgotPasswordResetHandler;
 import vn.dreamtech.cozyfarming.server.auth.LoginHandler;
 import vn.dreamtech.cozyfarming.server.auth.RegisterHandler;
+import vn.dreamtech.cozyfarming.server.cooking.CancelCookHandler;
+import vn.dreamtech.cozyfarming.server.cooking.CollectCookHandler;
+import vn.dreamtech.cozyfarming.server.cooking.CookingHandler;
+import vn.dreamtech.cozyfarming.server.cooking.StartCookHandler;
 import vn.dreamtech.cozyfarming.server.dao.AnimalDao;
 import vn.dreamtech.cozyfarming.server.dao.BagDao;
+import vn.dreamtech.cozyfarming.server.dao.CookingStateDao;
 import vn.dreamtech.cozyfarming.server.dao.FarmPlotDao;
 import vn.dreamtech.cozyfarming.server.dao.FarmStoreDao;
 import vn.dreamtech.cozyfarming.server.dao.ItemDao;
@@ -63,6 +68,7 @@ public final class Main {
         FarmStoreDao farmStoreDao = new FarmStoreDao(dataSource);
         BagDao bagDao = new BagDao(dataSource);
         PondFishDao pondFishDao = new PondFishDao(dataSource);
+        CookingStateDao cookingStateDao = new CookingStateDao(dataSource);
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/health", new HealthCheckHandler());
@@ -90,6 +96,10 @@ public final class Main {
         server.createContext("/api/fishpond/net", new NetFishHandler(pondFishDao, farmStoreDao));
         server.createContext("/api/shop/buy", new BuyItemHandler(farmStoreDao, bagDao, walletDao));
         server.createContext("/api/shop/sell", new SellItemHandler(farmStoreDao, bagDao, walletDao));
+        server.createContext("/api/cooking", new CookingHandler(cookingStateDao));
+        server.createContext("/api/cooking/start", new StartCookHandler(cookingStateDao, farmStoreDao));
+        server.createContext("/api/cooking/collect", new CollectCookHandler(cookingStateDao, farmStoreDao));
+        server.createContext("/api/cooking/cancel", new CancelCookHandler(cookingStateDao, farmStoreDao));
         server.setExecutor(null);
         server.start();
         log.info("Cozy Farming server đang chạy ở cổng {}", port);
