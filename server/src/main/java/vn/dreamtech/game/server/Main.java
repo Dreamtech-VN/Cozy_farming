@@ -18,8 +18,12 @@ import vn.dreamtech.game.server.character.CreateCharacterHandler;
 import vn.dreamtech.game.server.character.UpdateOutfitHandler;
 import vn.dreamtech.game.server.dao.CharacterDao;
 import vn.dreamtech.game.server.dao.PasswordResetDao;
+import vn.dreamtech.game.server.dao.PresenceDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.db.DataSourceProvider;
+import vn.dreamtech.game.server.lobby.HeartbeatHandler;
+import vn.dreamtech.game.server.lobby.LeaveLobbyHandler;
+import vn.dreamtech.game.server.lobby.LobbyPlayersHandler;
 
 import javax.sql.DataSource;
 import java.net.InetSocketAddress;
@@ -41,6 +45,7 @@ public final class Main {
         UserDao userDao = new UserDao(dataSource);
         PasswordResetDao resetDao = new PasswordResetDao(dataSource);
         CharacterDao characterDao = new CharacterDao(dataSource);
+        PresenceDao presenceDao = new PresenceDao(dataSource);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
         var appleVerifier = new AppleTokenVerifier();
 
@@ -59,6 +64,9 @@ public final class Main {
         server.createContext("/api/character/create", new CreateCharacterHandler(userDao, characterDao));
         server.createContext("/api/character", new CharacterHandler(characterDao));
         server.createContext("/api/character/outfit", new UpdateOutfitHandler(characterDao));
+        server.createContext("/api/lobby/heartbeat", new HeartbeatHandler(characterDao, presenceDao));
+        server.createContext("/api/lobby/leave", new LeaveLobbyHandler(presenceDao));
+        server.createContext("/api/lobby/players", new LobbyPlayersHandler(presenceDao, characterDao));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);
