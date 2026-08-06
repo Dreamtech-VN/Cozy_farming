@@ -487,6 +487,98 @@ cũ.
       nhân chưa xong/report trùng, đấu tới hết lượt cả 2 bên rồi report
       đúng điểm + resolve đúng thắng-thua-hoà + cập nhật rating, sau khi
       resolve vào hàng chờ lại được); `PvpHttpFlowTest` (nối dây HTTP).
+- [x] **Giai đoạn 21 — hàng chờ PvP thật (nhiều người cùng chờ)**: nâng cấp
+      hàng chờ 1-vị-trí ở Giai đoạn 20 lên `Set<Integer> waitingUserIds`
+      thật — nhưng CHỈ ghép khi chênh rating trong ngưỡng
+      `PvpConstants.MAX_MATCH_RATING_DIFF` (300), nếu không ai đủ gần thì
+      TIẾP TỤC chờ thay vì ghép bừa. Đây là điểm mấu chốt: không có ngưỡng
+      thì hàng chờ KHÔNG BAO GIỜ giữ được >1 người (ai vào cũng ghép ngay
+      với người đang chờ) — có ngưỡng mới thật sự mô phỏng được nhiều người
+      cùng chờ đồng thời. TODO: nới ngưỡng dần theo thời gian chờ.
+      Test: `PvpServiceTest` thêm 2 test — nhiều người chờ cùng lúc, ghép
+      đúng người gần rating nhất (không phải cứ vào trước là ghép trước);
+      rời hàng chờ chỉ ảnh hưởng đúng người đó.
+- [x] **Giai đoạn 22 — thêm nội dung Story/Adventure/Event Puzzle**: Story
+      mở rộng từ 3 lên 6 màn. Thêm 2 chế độ MỚI dùng lại nguyên lõi
+      `EnemyDef`/`BattleService` (không sửa engine): **Adventure**
+      (`AdventureLevelCatalog`, 4 màn, không giới hạn lượt chơi lại — khác
+      Story chỉ ở chỗ tách catalog/endpoint riêng để dễ mở rộng nội dung
+      song song) và **Event Puzzle** (`EventPuzzleCatalog`, sự kiện có
+      `startAt`/`endAt` theo mốc thời gian THẬT — chỉ chơi được trong
+      khung thời gian, tự kiểm tra lúc `start`, KHÔNG cần cron; hiện có 2
+      sự kiện mẫu hardcode theo lịch, TODO công cụ admin thêm sự kiện mới
+      mà không cần sửa code).
+      - `BattleMode` thêm `ADVENTURE`, `EVENT_PUZZLE`; đổi tên field
+        `BattleSession.storyLevelId` → `catalogLevelId` (dùng chung cho cả
+        3 chế độ catalog-based: Story/Adventure/Event Puzzle).
+      - `GET /api/battle/adventure/levels`, `POST /api/battle/adventure/start`
+        {userId, levelId}; `GET /api/battle/event-puzzle/list`,
+        `POST /api/battle/event-puzzle/start` {userId, eventId}.
+      Test: `BattleServiceTest` thêm test cho cả 2 chế độ mới (bắt đầu
+      đúng, từ chối id không tồn tại, Event Puzzle từ chối ngoài khung thời
+      gian).
+- [x] **Giai đoạn 23 — thêm nội dung Dungeon/Tower**: Dungeon mở rộng từ 2
+      lên 4 hầm ngục, Tower mở rộng từ 1 lên 2 tháp — chỉ thêm dữ liệu vào
+      catalog có sẵn (`DungeonCatalog`/`TowerCatalog`), không đổi cơ chế.
+- [x] **Giai đoạn 24 — Guild War**: PvP giữa 2 GUILD (điều còn thiếu đã ghi
+      chú ở Giai đoạn 17) — cùng triết lý "bản sao cá nhân + report" như
+      Guild Boss/World Boss/PvP: hội trưởng/phó tuyên chiến guild khác
+      (`POST /api/guild/war/declare`), mỗi thành viên đánh 1 lần
+      MỘT-LẦN-DUY-NHẤT cho CUỘC CHIẾN đó (không phải theo chu kỳ như Guild
+      Boss — Guild War là sự kiện 1 LẦN, `guild_war_attempts` khoá theo
+      `war_id` chứ không phải mốc chu kỳ), tổng sát thương cộng dồn vào
+      điểm CHUNG của guild mình (`guild_wars.score_a`/`score_b`).
+      - Thời hạn 24h (`GuildWarConstants.WAR_DURATION_MS`) — hết hạn thì
+        guild điểm cao hơn thắng, tự resolve LAZY khi có request tiếp theo
+        (giống chu kỳ Guild/World Boss, KHÔNG dùng cron). Guild đang chiến
+        tranh chưa xong thì không tuyên chiến tiếp được (cả 2 phía).
+      - `GuildWarDao`/`GuildWarAttemptDao` (bảng `guild_wars`,
+        `guild_war_attempts`); `GuildWarService`
+        (declare/attack/report/status/myWar); `BattleMode.GUILD_WAR` +
+        `BattleService.startGuildWar` (sinh đôi với `startPvp`/
+        `startGuildBoss`).
+      - `POST /api/guild/war/declare` {userId, targetGuildId},
+        `POST /api/guild/war/attack` {userId},
+        `POST /api/guild/war/report` {userId, battleId},
+        `GET /api/guild/war/status?guildId=`, `GET /api/guild/war/my?userId=`.
+      - Trùng tên class `AttackHandler` với `guild.boss`/`worldboss` —
+        `Main.java` dùng tên đầy đủ (fully-qualified) tại nơi gọi, đúng
+        pattern đã dùng ở Giai đoạn 19.
+      Test: `GuildWarDaoTest`, `GuildWarAttemptDaoTest` (đơn vị);
+      `GuildWarServiceTest` (qua service trực tiếp — chặn tuyên chiến khi
+      chưa vào guild/không phải hội trưởng-phó/tuyên chiến chính mình/đang
+      chiến tranh khác, chặn đánh khi không trong cuộc chiến/đã đánh rồi,
+      chặn report khi trận chưa xong, đánh tới khi trận kết thúc rồi report
+      đúng cộng vào điểm ĐÚNG BÊN guild mình).
+- [x] **Giai đoạn 25 — nguồn điểm thân mật sau khi cưới**: trước đây chỉ có
+      quà tặng (`SendGiftHandler`, giai đoạn 9) làm nguồn thân mật. Thêm 3
+      nguồn MỚI, riêng cho VỢ CHỒNG đã cưới (`MarriageActivityService`,
+      vẫn cộng điểm vào ĐÚNG bảng `friendships` — vợ chồng vẫn là bạn bè):
+      1. **Online cùng nhau**: `POST /api/marriage/online-tick` {userId} —
+         cộng điểm nếu CẢ HAI đang online (dùng lại `PresenceDao`, cửa sổ
+         `ONLINE_WINDOW_MS` có sẵn từ giai đoạn Lobby), chặn spam bằng
+         cooldown 5 phút/cặp (không phải theo ngày).
+      2. **Nhiệm vụ đôi hàng ngày**: `POST /api/marriage/duo-quest/claim`
+         {userId} — cần cả 2 đang online, 1 lần/24h/cặp, thưởng lớn hơn
+         tick thường.
+      3. **Trận đánh hợp tác**: `POST /api/marriage/battle/start` {userId}
+         bắt đầu 1 "bản sao" cá nhân (`MarriageCoopFightDef`, giống Guild
+         War/Guild Boss về ý tưởng), `POST /api/marriage/battle/report`
+         {userId, battleId} sau khi xong — nếu VỢ/CHỒNG cũng đã hoàn thành
+         lượt của họ trong vòng `COOP_BATTLE_WINDOW_MS` (24h) tính từ lượt
+         này, CẢ HAI nhận thêm điểm thưởng chung; chống thưởng trùng bằng
+         so sánh mốc `coop_last_awarded_at` với mốc hoàn thành của người
+         kia (chỉ thưởng nếu chưa thưởng cho VÒNG đánh hiện tại).
+      - `BattleMode` thêm `MARRIAGE_COOP` +
+        `BattleService.startMarriageCoop` (sinh đôi với `startGuildWar`).
+      - `MarriageActivityDao` (bảng `marriage_activity`, khoá theo cặp
+        `userIdA < userIdB` giống `MarriageDao`/`FriendshipDao`) lưu mốc
+        thời gian cho cả 3 nguồn trên trong 1 bảng duy nhất.
+      Test: `MarriageActivityDaoTest` (đơn vị); `MarriageActivityServiceTest`
+      (qua service trực tiếp — chặn khi chưa cưới, chặn tick/nhiệm vụ đôi
+      khi vợ/chồng chưa online, cooldown tick/nhiệm vụ đôi hoạt động đúng,
+      trận hợp tác chỉ thưởng khi CẢ HAI cùng hoàn thành trong khung thời
+      gian chứ không phải 1 người đánh 2 lần).
 
 ## Chạy thử
 

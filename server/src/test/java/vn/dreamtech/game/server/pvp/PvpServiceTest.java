@@ -34,6 +34,7 @@ class PvpServiceTest {
     private BattleService battleService;
     private UserDao userDao;
     private CharacterDao characterDao;
+    private PvpRankDao rankDao;
 
     @BeforeEach
     void setUp() throws SQLException {
@@ -64,7 +65,7 @@ class PvpServiceTest {
         characterDao = new CharacterDao(dataSource);
         WalletDao walletDao = new WalletDao(dataSource);
         LevelDao levelDao = new LevelDao(dataSource);
-        PvpRankDao rankDao = new PvpRankDao(dataSource);
+        rankDao = new PvpRankDao(dataSource);
         PvpMatchHistoryDao historyDao = new PvpMatchHistoryDao(dataSource);
         battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource));
         pvpService = new PvpService(characterDao, battleService, rankDao, historyDao);
@@ -99,6 +100,53 @@ class PvpServiceTest {
         assertTrue(result.matched());
         assertNotNull(result.matchId());
         assertEquals(p1, result.opponentUserId());
+    }
+
+    @Test
+    void multipleWaitersMatchedByClosestRatingWithinThreshold() throws SQLException {
+        int p1 = newPlayer("P1"); // rating 1000 (mặc định)
+        int p2 = newPlayer("P2");
+        int p3 = newPlayer("P3");
+        int p4 = newPlayer("P4");
+        rankDao.save(new PvpRankDao.Rank(p2, 1500, 0, 0, 0)); // chênh 500 so với p1 -> ngoài ngưỡng 300
+        rankDao.save(new PvpRankDao.Rank(p3, 1050, 0, 0, 0)); // chênh 50 so với p1 -> trong ngưỡng
+        rankDao.save(new PvpRankDao.Rank(p4, 1450, 0, 0, 0)); // chênh 50 so với p2 -> trong ngưỡng
+
+        var join1 = pvpService.joinQueue(p1);
+        assertFalse(join1.matched()); // hàng chờ trống, p1 phải chờ
+
+        var join2 = pvpService.joinQueue(p2);
+        assertFalse(join2.matched()); // chênh rating với p1 quá ngưỡng -> KHÔNG ghép bừa, p2 cũng phải chờ
+        // -> tại đây cả p1 lẫn p2 đang cùng chờ, chứng minh hàng chờ giữ được NHIỀU người cùng lúc
+
+        var join3 = pvpService.joinQueue(p3); // gần p1 hơn p2 nhiều -> phải ghép với p1, không phải FIFO (p2 vào trước)
+        assertTrue(join3.matched());
+        assertEquals(p1, join3.opponentUserId());
+
+        var join4 = pvpService.joinQueue(p4); // chỉ còn p2 đang chờ, đủ gần -> ghép với p2
+        assertTrue(join4.matched());
+        assertEquals(p2, join4.opponentUserId());
+    }
+
+    @Test
+    void leaveQueueOnlyRemovesThatPlayer() throws SQLException {
+        int p1 = newPlayer("P1");
+        int p2 = newPlayer("P2");
+        rankDao.save(new PvpRankDao.Rank(p2, 1500, 0, 0, 0)); // ngoài ngưỡng ghép với p1
+
+        pvpService.joinQueue(p1);
+        pvpService.joinQueue(p2); // cả 2 cùng chờ (rating cách xa nhau)
+
+        pvpService.leaveQueue(p1);
+        var e = assertThrows(PvpException.class, () -> pvpService.leaveQueue(p1));
+        assertEquals(404, e.status()); // p1 đã rời rồi, rời lần nữa bị chặn
+
+        // p2 vẫn còn trong hàng chờ -> người mới rating gần p2 sẽ ghép được
+        int p3 = newPlayer("P3");
+        rankDao.save(new PvpRankDao.Rank(p3, 1480, 0, 0, 0));
+        var result = pvpService.joinQueue(p3);
+        assertTrue(result.matched());
+        assertEquals(p2, result.opponentUserId());
     }
 
     @Test

@@ -10,6 +10,9 @@ public final class PvpConstants {
     public static final int RATING_DRAW = 5;
     public static final int MIN_RATING = 0;
 
+    /** Chỉ ghép nếu chênh rating trong khoảng này — nếu không ai đủ gần, cứ chờ tiếp thay vì ghép bừa. TODO: nới dần theo thời gian chờ. */
+    public static final int MAX_MATCH_RATING_DIFF = 300;
+
     private PvpConstants() {
     }
 }

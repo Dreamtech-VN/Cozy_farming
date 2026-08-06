@@ -17,7 +17,7 @@ public final class BattleSession {
     final String id;
     final int userId;
     final BattleMode mode;
-    final Integer storyLevelId; // chỉ có ý nghĩa khi mode == STORY
+    final Integer catalogLevelId; // chỉ có ý nghĩa khi mode == STORY/ADVENTURE/EVENT_PUZZLE
     final ChallengeType challengeType; // chỉ có ý nghĩa khi mode == DAILY/WEEKLY
     final FloorSource floorSource; // chỉ có ý nghĩa khi mode == DUNGEON/TOWER
     final Random random;
@@ -36,13 +36,13 @@ public final class BattleSession {
     boolean rewardGranted = false;
     List<ActiveEffect> effects = new ArrayList<>();
 
-    BattleSession(String id, int userId, EnemyDef level, BattleMode mode, Integer storyLevelId,
+    BattleSession(String id, int userId, EnemyDef level, BattleMode mode, Integer catalogLevelId,
                   ChallengeType challengeType, FloorSource floorSource, TileBoard board, Random random) {
         this.id = id;
         this.userId = userId;
         this.level = level;
         this.mode = mode;
-        this.storyLevelId = storyLevelId;
+        this.catalogLevelId = catalogLevelId;
         this.challengeType = challengeType;
         this.floorSource = floorSource;
         this.board = board;

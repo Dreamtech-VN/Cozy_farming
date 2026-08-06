@@ -10,6 +10,7 @@ import vn.dreamtech.game.server.dao.PvpRankDao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -25,8 +26,11 @@ import static vn.dreamtech.game.server.pvp.PvpConstants.*;
  * thao tác trên cùng 1 bàn cờ theo thời gian thực. Thay vào đó: ghép cặp,
  * mỗi bên tự chơi độc lập trong giới hạn {@value vn.dreamtech.game.server.battle.BattleConstants#PVP_MOVE_LIMIT}
  * lượt (địch gần như bất tử — xem {@code PvpFightDef}), ai tổng sát thương
- * cao hơn thắng. Ghép cặp CHỈ 1 vị trí chờ (MVP, chưa phải hàng đợi thật —
- * TODO nâng cấp khi cần ghép theo rating/nhiều người chờ cùng lúc).
+ * cao hơn thắng. Hàng chờ THẬT (nhiều người chờ cùng lúc) — người mới vào
+ * được ghép với người có rating GẦN NHẤT đang chờ TRONG NGƯỠNG
+ * {@value PvpConstants#MAX_MATCH_RATING_DIFF} (không phải FIFO đơn
+ * thuần); nếu không ai đủ gần thì cứ chờ tiếp — nhờ vậy nhiều người có
+ * thể cùng chờ 1 lúc thay vì luôn ghép ngay người đầu tiên tìm thấy.
  */
 public final class PvpService {
     private final CharacterDao characterDao;
@@ -37,7 +41,7 @@ public final class PvpService {
     private final Map<String, PvpMatch> matches = new ConcurrentHashMap<>();
     private final Map<Integer, String> userActiveMatch = new ConcurrentHashMap<>();
     private final Set<String> reportedBattles = ConcurrentHashMap.newKeySet();
-    private Integer waitingUserId;
+    private final Set<Integer> waitingUserIds = new LinkedHashSet<>();
 
     public PvpService(CharacterDao characterDao, BattleService battleService, PvpRankDao rankDao, PvpMatchHistoryDao historyDao) {
         this.characterDao = characterDao;
@@ -58,12 +62,12 @@ public final class PvpService {
         if (existing != null && existing.status == PvpMatchStatus.ONGOING) {
             throw new PvpException(409, "Đang có trận PvP chưa xong");
         }
-        if (waitingUserId != null && waitingUserId == userId) {
+        if (waitingUserIds.contains(userId)) {
             throw new PvpException(409, "Đã trong hàng chờ rồi");
         }
-        if (waitingUserId != null) {
-            int opponent = waitingUserId;
-            waitingUserId = null;
+        Integer opponent = pickClosestRatingOpponent(userId);
+        if (opponent != null) {
+            waitingUserIds.remove(opponent);
             String matchId = UUID.randomUUID().toString();
             PvpMatch match = new PvpMatch(matchId, opponent, userId);
             matches.put(matchId, match);
@@ -71,16 +75,32 @@ public final class PvpService {
             userActiveMatch.put(userId, matchId);
             return new QueueJoinView(true, matchId, opponent);
         }
-        waitingUserId = userId;
+        waitingUserIds.add(userId);
         return new QueueJoinView(false, null, null);
     }
 
     public synchronized void leaveQueue(int userId) {
-        if (waitingUserId == null || waitingUserId != userId) {
+        if (!waitingUserIds.remove(userId)) {
             throw new PvpException(404, "Không trong hàng chờ");
         }
-        waitingUserId = null;
     }
+
+    private Integer pickClosestRatingOpponent(int userId) {
+        if (waitingUserIds.isEmpty()) return null;
+        int myRating = rank(userId).rating();
+        Integer best = null;
+        int bestDiff = Integer.MAX_VALUE;
+        for (int candidate : waitingUserIds) {
+            int diff = Math.abs(rank(candidate).rating() - myRating);
+            if (diff < bestDiff) {
+                bestDiff = diff;
+                best = candidate;
+            }
+        }
+        // Không ai đủ gần rating thì cứ để tất cả tiếp tục chờ thay vì ghép bừa.
+        return (best != null && bestDiff <= MAX_MATCH_RATING_DIFF) ? best : null;
+    }
+
 
     public BattleStateView startMatch(int userId, String matchId) {
         PvpMatch match = find(matchId);
