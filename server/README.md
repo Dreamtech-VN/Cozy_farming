@@ -99,9 +99,37 @@ cũ.
       lượng); `ChatFlowTest` (luồng HTTP thật: chưa có nhân vật bị chặn, nội
       dung rỗng bị chặn, chat trống mặc định, gửi rồi poll tăng dần không lặp
       lại tin đã thấy).
-- [ ] Các giai đoạn sau: cài đặt trong game
-      (graphics/audio/controls/gameplay/notifications/language/privacy &
-      social/account/support/about).
+- [x] **Giai đoạn 6 — cài đặt (phần cần server)**: 10 mục cài đặt trong
+      game, nhưng CHỈ notifications/privacy & social/account/support cần
+      server — graphics/audio/controls/gameplay/language/about là cấu hình
+      thuần client (Unity lưu local), không có gì để đồng bộ.
+      - `GET /api/settings?userId=` / `POST /api/settings/update` — gộp
+        chung "Notifications" (bật/tắt push) + "Privacy & Social"
+        (`friendRequestPrivacy`/`messagePrivacy`: EVERYONE/NOBODY) +
+        "Language" (đồng bộ đa thiết bị, dù bản thân ngôn ngữ hiển thị vẫn
+        client tự xử lý) vào 1 bảng `user_settings`. Update là CẬP NHẬT MỘT
+        PHẦN — field nào không gửi (null) thì giữ nguyên, khớp cách người
+        dùng thật chỉ đổi 1 mục mỗi lần trong màn cài đặt. Chưa từng lưu thì
+        trả về mặc định (khớp cách `WalletDao` đã làm ở dự án trước).
+      - **Account**: `POST /api/account/change-password` (đổi mật khẩu khi
+        ĐANG đăng nhập, khác `ForgotPasswordResetHandler` — endpoint đó
+        dùng khi KHÔNG đăng nhập được). `POST /api/account/delete` — tài
+        khoản có mật khẩu bắt buộc xác nhận đúng mật khẩu (401 nếu sai,
+        chặn xoá phá hoại nếu lộ userId), tài khoản khách thuần xoá thẳng
+        không cần xác nhận gì thêm.
+      - **Support**: `POST /api/support/report` {userId, category(bug|contact),
+        message} — lưu vào `support_tickets`, chưa có màn admin (xem trực
+        tiếp DB). `GET /api/support/tickets?userId=` — người chơi xem lại
+        báo cáo của chính mình.
+      Test: `UserSettingsDaoTest` (đơn vị); `SettingsFlowTest` (luồng HTTP
+      thật: mặc định khi chưa lưu, giá trị riêng tư sai bị chặn, cập nhật
+      một phần không ghi đè field không gửi); `AccountFlowTest` (đổi mật
+      khẩu sai mật khẩu cũ bị chặn, tài khoản khách chưa có mật khẩu không
+      đổi được, xoá tài khoản thường cần đúng mật khẩu, xoá tài khoản khách
+      không cần mật khẩu); `SupportFlowTest` (category/nội dung không hợp lệ
+      bị chặn, chỉ thấy báo cáo của chính mình).
+- [ ] Đã xong đủ danh sách "server cơ bản" ban đầu. Các mục còn lại (nếu có)
+      để bàn khi có yêu cầu mới.
 
 ## Chạy thử
 
