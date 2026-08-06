@@ -1,7 +1,6 @@
 package vn.dreamtech.game.server.battle;
 
 import vn.dreamtech.game.server.battle.challenge.ChallengeType;
-import vn.dreamtech.game.server.battle.dungeon.DungeonDef;
 import vn.dreamtech.game.server.battle.engine.TileBoard;
 
 import java.util.ArrayList;
@@ -20,12 +19,12 @@ public final class BattleSession {
     final BattleMode mode;
     final Integer storyLevelId; // chỉ có ý nghĩa khi mode == STORY
     final ChallengeType challengeType; // chỉ có ý nghĩa khi mode == DAILY/WEEKLY
-    final DungeonDef dungeonDef; // chỉ có ý nghĩa khi mode == DUNGEON
+    final FloorSource floorSource; // chỉ có ý nghĩa khi mode == DUNGEON/TOWER
     final Random random;
 
-    EnemyDef level; // đổi được: Dungeon sang tầng mới thì đổi sang địch tầng đó
-    TileBoard board; // đổi được: Dungeon sang tầng mới thì sinh bàn mới
-    int floorIndex = 0; // 0-based, chỉ có ý nghĩa khi mode == DUNGEON
+    EnemyDef level; // đổi được: sang tầng mới thì đổi sang địch tầng đó
+    TileBoard board; // đổi được: sang tầng mới thì sinh bàn mới
+    int floorIndex = 0; // 0-based, chỉ có ý nghĩa khi floorSource != null
 
     int playerHp = BattleConstants.PLAYER_HP_MAX;
     int enemyHp;
@@ -37,14 +36,14 @@ public final class BattleSession {
     List<ActiveEffect> effects = new ArrayList<>();
 
     BattleSession(String id, int userId, EnemyDef level, BattleMode mode, Integer storyLevelId,
-                  ChallengeType challengeType, DungeonDef dungeonDef, TileBoard board, Random random) {
+                  ChallengeType challengeType, FloorSource floorSource, TileBoard board, Random random) {
         this.id = id;
         this.userId = userId;
         this.level = level;
         this.mode = mode;
         this.storyLevelId = storyLevelId;
         this.challengeType = challengeType;
-        this.dungeonDef = dungeonDef;
+        this.floorSource = floorSource;
         this.board = board;
         this.random = random;
         this.enemyHp = level.enemyHp();
@@ -66,17 +65,17 @@ public final class BattleSession {
     }
 
     boolean hasNextFloor() {
-        return dungeonDef != null && floorIndex + 1 < dungeonDef.floors().size();
+        return floorSource != null && floorSource.hasNextFloor(floorIndex);
     }
 
     int totalFloors() {
-        return dungeonDef == null ? 0 : dungeonDef.floors().size();
+        return floorSource == null ? 0 : floorSource.totalFloors();
     }
 
     /** Sang tầng kế — máu người chơi/hiệu ứng KHÔNG hồi lại, chỉ mana/combo/lượt bàn cờ reset theo tầng mới. */
     void advanceFloor(TileBoard newBoard) {
         floorIndex++;
-        level = dungeonDef.floorEnemy(floorIndex);
+        level = floorSource.floorEnemy(floorIndex);
         enemyHp = level.enemyHp();
         mana = 0;
         comboCount = 0;

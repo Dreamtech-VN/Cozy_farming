@@ -11,6 +11,8 @@ import vn.dreamtech.game.server.battle.engine.MatchFinder;
 import vn.dreamtech.game.server.battle.engine.TileBoard;
 import vn.dreamtech.game.server.battle.dungeon.DungeonCatalog;
 import vn.dreamtech.game.server.battle.dungeon.DungeonDef;
+import vn.dreamtech.game.server.battle.tower.TowerCatalog;
+import vn.dreamtech.game.server.battle.tower.TowerDef;
 import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
 import vn.dreamtech.game.server.dao.LevelDao;
 import vn.dreamtech.game.server.dao.WalletDao;
@@ -57,6 +59,13 @@ public final class BattleService {
         return toView(session, false, false, 0, 0, 0, false, false);
     }
 
+    public BattleStateView startTower(int userId, int towerId) {
+        TowerDef tower = TowerCatalog.find(towerId)
+                .orElseThrow(() -> new BattleException(404, "Không tìm thấy tháp"));
+        BattleSession session = createSession(userId, tower.floorEnemy(0), BattleMode.TOWER, null, null, tower);
+        return toView(session, false, false, 0, 0, 0, false, false);
+    }
+
     public BattleStateView startChallenge(int userId, ChallengeType type) {
         ChallengeDef def = ChallengeCatalog.find(type);
         try {
@@ -76,11 +85,11 @@ public final class BattleService {
     }
 
     private BattleSession createSession(int userId, EnemyDef level, BattleMode mode, Integer storyLevelId,
-                                         ChallengeType challengeType, DungeonDef dungeonDef) {
+                                         ChallengeType challengeType, FloorSource floorSource) {
         Random random = new Random();
         TileBoard board = BoardGenerator.generate(BOARD_ROWS, BOARD_COLS, COLOR_COUNT, random);
         String id = UUID.randomUUID().toString();
-        BattleSession session = new BattleSession(id, userId, level, mode, storyLevelId, challengeType, dungeonDef, board, random);
+        BattleSession session = new BattleSession(id, userId, level, mode, storyLevelId, challengeType, floorSource, board, random);
         sessions.put(id, session);
         return session;
     }
@@ -190,11 +199,13 @@ public final class BattleService {
         return toView(session, false, false, 0, ULTIMATE_DAMAGE, 0, false, floorCleared);
     }
 
-    /** @return true nếu vừa qua 1 tầng dungeon (còn tầng tiếp theo, trận vẫn ONGOING). */
+    /** @return true nếu vừa qua 1 tầng (Dungeon/Tower, còn tầng tiếp theo, trận vẫn ONGOING). */
     private boolean resolveOutcome(BattleSession session) {
         if (session.status != BattleStatus.ONGOING) return false;
         if (session.enemyHp <= 0) {
             if (session.hasNextFloor()) {
+                // Dungeon: thưởng tầng giữa là 0/0 (no-op). Tower: mỗi tầng đều có thưởng, phát ngay khi qua tầng.
+                grantFloorReward(session, session.level);
                 TileBoard nextBoard = BoardGenerator.generate(BOARD_ROWS, BOARD_COLS, COLOR_COUNT, session.random);
                 session.advanceFloor(nextBoard);
                 return true;
@@ -207,18 +218,27 @@ public final class BattleService {
         return false;
     }
 
+    private void grantFloorReward(BattleSession session, EnemyDef floor) {
+        if (floor.rewardExp() == 0 && floor.rewardGold() == 0) return;
+        try {
+            var levelInfo = levelDao.find(session.userId);
+            levelDao.save(LevelService.addExp(levelInfo, floor.rewardExp()));
+            walletDao.addGold(session.userId, floor.rewardGold());
+        } catch (SQLException e) {
+            throw new BattleException(500, "Lỗi phát thưởng: " + e.getMessage());
+        }
+    }
+
     private void grantRewardOnce(BattleSession session) {
         if (session.rewardGranted) return;
         session.rewardGranted = true;
-        try {
-            var levelInfo = levelDao.find(session.userId);
-            levelDao.save(LevelService.addExp(levelInfo, session.level.rewardExp()));
-            walletDao.addGold(session.userId, session.level.rewardGold());
-            if (session.challengeType != null) {
+        grantFloorReward(session, session.level);
+        if (session.challengeType != null) {
+            try {
                 challengeAttemptDao.recordCompletion(session.userId, session.challengeType, System.currentTimeMillis());
+            } catch (SQLException e) {
+                throw new BattleException(500, "Lỗi ghi nhận hoàn thành: " + e.getMessage());
             }
-        } catch (SQLException e) {
-            throw new BattleException(500, "Lỗi phát thưởng: " + e.getMessage());
         }
     }
 
@@ -237,8 +257,8 @@ public final class BattleService {
     private BattleStateView toView(BattleSession s, boolean matched, boolean critical, int chainLevels,
                                     int damageDealt, int manaGained, boolean enemyCountered, boolean floorCleared) {
         List<BuffType> activeEffects = s.effects.stream().map(ActiveEffect::type).toList();
-        Integer floorIndex = s.dungeonDef == null ? null : s.floorIndex + 1;
-        Integer totalFloors = s.dungeonDef == null ? null : s.totalFloors();
+        Integer floorIndex = s.floorSource == null ? null : s.floorIndex + 1;
+        Integer totalFloors = s.floorSource == null ? null : s.totalFloors();
         return new BattleStateView(
                 s.id, s.mode, s.storyLevelId, s.status, s.board.toArray(),
                 s.playerHp, PLAYER_HP_MAX, s.enemyHp, s.level.enemyHp(),
