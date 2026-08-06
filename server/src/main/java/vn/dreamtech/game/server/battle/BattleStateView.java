@@ -4,6 +4,7 @@ import java.util.List;
 
 public record BattleStateView(
         String battleId,
+        int userId,
         BattleMode mode,
         Integer levelId,
         BattleStatus status,
@@ -28,6 +29,7 @@ public record BattleStateView(
         int rewardGold,
         Integer floorIndex,
         Integer totalFloors,
-        boolean floorCleared
+        boolean floorCleared,
+        int totalDamageDealt
 ) {
 }

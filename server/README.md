@@ -365,6 +365,44 @@ cũ.
       đúng vàng khi tạo, tên/tag trùng bị chặn, vào/rời/đuổi/đổi cấp
       bậc/chuyển quyền hội trưởng/giải tán đầy đủ, hội trưởng duy nhất rời
       = tự giải tán).
+- [x] **Giai đoạn 17 — Guild Boss**: dùng lại NGUYÊN lõi match-3 lần thứ 4
+      qua `BattleService.startGuildBoss(userId, EnemyDef)` (generic, không
+      qua Story/Dungeon/Tower catalog) — mỗi thành viên đánh 1 "bản sao" cá
+      nhân của trùm (`GuildBossFightDef`, HP cố định 300), sát thương
+      KHÔNG trực tiếp trừ vào HP chung của guild trong lúc đánh (mỗi phiên
+      độc lập trong bộ nhớ, không có gì để đồng bộ ngay lập tức) — thay vào
+      đó, sau khi trận cá nhân kết thúc (WON/LOST), client gọi
+      `POST /api/guild/boss/report` để đồng bộ 1 LẦN tổng sát thương
+      (`BattleSession.totalDamageDealt`, field mới cộng dồn theo trận) vào
+      HP chung (`guild_boss_cycles`), chống báo cáo trùng bằng tập
+      `battleId` đã báo cáo (in-memory).
+      - Thêm `BattleStateView.userId` (để `GuildBossService` xác minh trận
+        đúng là của người gọi report, chặn báo cáo hộ) và
+        `BattleStateView.totalDamageDealt`.
+      - Chu kỳ trùm (5000 HP, 24h) KHÔNG dùng cron — tự phát hiện hết hạn
+        và tạo chu kỳ mới ngay khi có request tiếp theo (lazy reset, khớp
+        cách server chưa có background job nào). Mỗi thành viên chỉ đánh
+        được 1 lần/chu kỳ (`guild_boss_attempts`, lưu MỐC chu kỳ đã đánh
+        thay vì cooldown tuyệt đối — tự "reset" khi sang chu kỳ mới).
+      - Thắng/thua đều tính là 1 lượt đã dùng (đã trừ lúc BẮT ĐẦU đánh,
+        không phải lúc thắng) — tránh spam nhiều phiên trước khi report.
+        Thưởng (20 exp/40 vàng) chỉ phát nếu gây được sát thương >0.
+      - `guild_boss_contributions` — đóng góp sát thương từng thành viên
+        theo chu kỳ, để sau này hiển thị bảng xếp hạng đóng góp guild.
+      - `POST /api/guild/boss/attack` {userId}, `POST /api/guild/boss/report`
+        {userId, battleId}, `GET /api/guild/boss/status?guildId=`,
+        `GET /api/guild/boss/attack-status?userId=`. `swap`/`ultimate`/
+        `state` dùng CHUNG endpoint với Story/Challenge/Dungeon/Tower.
+      - CHƯA làm: bảng xếp hạng guild theo đóng góp (dữ liệu đã có, thiếu
+        endpoint hiển thị), World Boss (trùm chung TOÀN SERVER thay vì
+        từng guild), Guild War (PvP giữa 2 guild — cần matchmaking).
+      Test: `GuildBossCycleDaoTest`, `GuildBossAttemptDaoTest`,
+      `GuildBossContributionDaoTest` (đơn vị); `GuildBossServiceTest` (qua
+      service trực tiếp — chặn đánh khi chưa vào guild, chặn đánh 2 lần/chu
+      kỳ, chặn report khi trận chưa xong/report hộ người khác/report trùng,
+      đánh tới khi trận kết thúc rồi report đúng tổng sát thương + trừ
+      đúng HP chung + phát thưởng đúng); `GuildBossHttpFlowTest` (nối dây
+      HTTP).
 
 ## Chạy thử
 

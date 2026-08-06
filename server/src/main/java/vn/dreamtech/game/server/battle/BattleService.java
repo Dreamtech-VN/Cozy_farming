@@ -66,6 +66,11 @@ public final class BattleService {
         return toView(session, false, false, 0, 0, 0, false, false);
     }
 
+    public BattleStateView startGuildBoss(int userId, EnemyDef bossFight) {
+        BattleSession session = createSession(userId, bossFight, BattleMode.GUILD_BOSS, null, null, null);
+        return toView(session, false, false, 0, 0, 0, false, false);
+    }
+
     public BattleStateView startChallenge(int userId, ChallengeType type) {
         ChallengeDef def = ChallengeCatalog.find(type);
         try {
@@ -165,6 +170,7 @@ public final class BattleService {
             session.comboCount++;
             session.enemyHp = Math.max(0, session.enemyHp - damageDealt);
             session.mana = Math.min(MANA_MAX, session.mana + manaGained);
+            session.totalDamageDealt += damageDealt;
         } else {
             session.comboCount = 0;
         }
@@ -195,6 +201,7 @@ public final class BattleService {
         }
         session.mana = 0;
         session.enemyHp = Math.max(0, session.enemyHp - ULTIMATE_DAMAGE);
+        session.totalDamageDealt += ULTIMATE_DAMAGE;
         boolean floorCleared = resolveOutcome(session);
         return toView(session, false, false, 0, ULTIMATE_DAMAGE, 0, false, floorCleared);
     }
@@ -260,13 +267,13 @@ public final class BattleService {
         Integer floorIndex = s.floorSource == null ? null : s.floorIndex + 1;
         Integer totalFloors = s.floorSource == null ? null : s.totalFloors();
         return new BattleStateView(
-                s.id, s.mode, s.storyLevelId, s.status, s.board.toArray(),
+                s.id, s.userId, s.mode, s.storyLevelId, s.status, s.board.toArray(),
                 s.playerHp, PLAYER_HP_MAX, s.enemyHp, s.level.enemyHp(),
                 s.mana, MANA_MAX, s.comboCount, activeEffects,
                 matched, critical, chainLevels, damageDealt, manaGained,
                 enemyCountered, s.level.enemyCounterDamage(),
                 s.rewardGranted && s.status == BattleStatus.WON, s.level.rewardExp(), s.level.rewardGold(),
-                floorIndex, totalFloors, floorCleared
+                floorIndex, totalFloors, floorCleared, s.totalDamageDealt
         );
     }
 }
