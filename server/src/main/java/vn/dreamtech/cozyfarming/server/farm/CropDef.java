@@ -7,5 +7,5 @@ package vn.dreamtech.cozyfarming.server.farm;
  * riêng bảng này để tự tính chín/sản lượng, không tin số liệu client gửi
  * lên (chặn gian lận: đổi giờ máy, sửa code JS để thu hoạch sớm...).
  */
-public record CropDef(String id, int growMin, int yieldMin, int yieldMax, int sellPrice, int exp) {
+public record CropDef(String id, int growMin, int yieldMin, int yieldMax, int sellPrice, int exp, int seedPrice) {
 }

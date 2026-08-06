@@ -33,6 +33,8 @@ import vn.dreamtech.cozyfarming.server.livestock.BuyAnimalHandler;
 import vn.dreamtech.cozyfarming.server.livestock.CollectAnimalHandler;
 import vn.dreamtech.cozyfarming.server.livestock.FeedAnimalHandler;
 import vn.dreamtech.cozyfarming.server.livestock.SellAnimalHandler;
+import vn.dreamtech.cozyfarming.server.shop.BuyItemHandler;
+import vn.dreamtech.cozyfarming.server.shop.SellItemHandler;
 import vn.dreamtech.cozyfarming.server.wallet.WalletHandler;
 import vn.dreamtech.cozyfarming.server.wardrobe.ItemsHandler;
 
@@ -86,6 +88,8 @@ public final class Main {
         server.createContext("/api/fishpond/stock", new StockFryHandler(pondFishDao, walletDao));
         server.createContext("/api/fishpond/feed", new FeedFishHandler(pondFishDao, bagDao));
         server.createContext("/api/fishpond/net", new NetFishHandler(pondFishDao, farmStoreDao));
+        server.createContext("/api/shop/buy", new BuyItemHandler(farmStoreDao, bagDao, walletDao));
+        server.createContext("/api/shop/sell", new SellItemHandler(farmStoreDao, bagDao, walletDao));
         server.setExecutor(null);
         server.start();
         log.info("Cozy Farming server đang chạy ở cổng {}", port);
