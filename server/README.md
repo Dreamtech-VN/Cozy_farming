@@ -319,6 +319,25 @@ cũ.
       khớp thật để đẩy trận qua nhiều tầng, kiểm tầng mới hồi đầy máu địch
       MỚI chứ không cộng dồn máu tầng cũ, mana/combo reset về 0, thắng đủ
       tầng cuối mới phát thưởng); `DungeonHttpFlowTest` (nối dây HTTP).
+- [x] **Giai đoạn 15 — Tower**: tách interface `FloorSource` (Dungeon lẫn
+      Tower cùng implement) khỏi `DungeonDef` để `BattleSession` dùng lại
+      NGUYÊN cơ chế nhiều tầng của Giai đoạn 14 mà không cần biết tầng tới
+      từ đâu. Khác Dungeon (danh sách tầng cố định): `TowerDef` sinh địch
+      theo CÔNG THỨC tuyến tính (`enemyHp = start + step * floorIndex`,
+      tương tự `enemyCounterDamage`) — mạnh dần vô hạn về mặt thiết kế
+      nhưng có mốc `maxFloors` (MVP đơn giản hoá, chưa phải "leo mãi thật" —
+      TODO leaderboard theo tầng cao nhất khi có hệ leaderboard).
+      - KHÁC Dungeon: MỖI tầng qua đều phát thưởng NGAY
+        (`rewardExpPerFloor`/`rewardGoldPerFloor` cố định mỗi tầng), không
+        đợi tới tầng cuối — hợp lý vì không đảm bảo người chơi lên được tới
+        đỉnh. `BattleService` gộp chung logic này (`grantFloorReward`) dùng
+        được cho cả Dungeon (tầng giữa thưởng 0/0 nên no-op) lẫn Tower.
+      - `POST /api/battle/tower/start` {userId, towerId},
+        `GET /api/battle/tower/list`. `swap`/`ultimate`/`state` dùng CHUNG
+        endpoint với Story/Challenge/Dungeon.
+      Test: `TowerFlowTest` (qua `BattleService` trực tiếp — tầng đầu đúng
+      chỉ số gốc, tầng 2 chỉ số tăng đúng công thức, mana reset khi sang
+      tầng); `TowerHttpFlowTest` (nối dây HTTP).
 
 ## Chạy thử
 
