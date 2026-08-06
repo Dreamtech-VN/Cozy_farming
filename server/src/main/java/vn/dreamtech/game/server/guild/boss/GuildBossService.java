@@ -15,6 +15,8 @@ import vn.dreamtech.game.server.level.LevelService;
 import vn.dreamtech.game.server.model.GuildMembership;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -114,6 +116,22 @@ public final class GuildBossService {
             return new GuildBossStatusView(guildId, cycle.remainingHp(), POOL_HP, cycle.cycleStartedAt(), cycle.cycleEndsAt());
         } catch (SQLException e) {
             throw new GuildException(500, "Lỗi lấy trạng thái trùm guild: " + e.getMessage());
+        }
+    }
+
+    /** Bảng đóng góp sát thương của chu kỳ HIỆN TẠI (không phải lịch sử — chu kỳ cũ mất khỏi bảng khi chu kỳ mới bắt đầu). */
+    public List<GuildBossLeaderboardEntry> leaderboard(int guildId) {
+        try {
+            GuildBossCycleDao.Cycle cycle = getOrResetCycle(guildId);
+            List<GuildBossContributionDao.Contribution> contributions = contributionDao.listByCycle(guildId, cycle.cycleStartedAt());
+            List<GuildBossLeaderboardEntry> entries = new ArrayList<>();
+            int rank = 1;
+            for (GuildBossContributionDao.Contribution c : contributions) {
+                entries.add(new GuildBossLeaderboardEntry(rank++, c.userId(), c.totalDamage()));
+            }
+            return entries;
+        } catch (SQLException e) {
+            throw new GuildException(500, "Lỗi lấy bảng đóng góp: " + e.getMessage());
         }
     }
 

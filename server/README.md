@@ -403,6 +403,17 @@ cũ.
       đánh tới khi trận kết thúc rồi report đúng tổng sát thương + trừ
       đúng HP chung + phát thưởng đúng); `GuildBossHttpFlowTest` (nối dây
       HTTP).
+- [x] **Giai đoạn 18 — bảng đóng góp trùm guild**: dữ liệu đã có sẵn từ
+      Giai đoạn 17 (`guild_boss_contributions`), chỉ thêm endpoint đọc —
+      `GET /api/guild/boss/leaderboard?guildId=` trả về đóng góp sát thương
+      từng thành viên trong CHU KỲ HIỆN TẠI, xếp giảm dần kèm hạng
+      (`GuildBossService.leaderboard`). Chu kỳ cũ không hiện trong bảng khi
+      chu kỳ mới đã bắt đầu (khớp cách `guild_boss_attempts` "reset" theo
+      mốc chu kỳ ở Giai đoạn 17, không phải xoá dữ liệu — lịch sử chu kỳ cũ
+      vẫn còn trong DB, chỉ không hiển thị qua endpoint này).
+      Test: 3 test mới trong `GuildBossServiceTest` (bảng trống lúc guild
+      chưa ai đánh; xếp hạng đúng thứ tự giảm dần theo sát thương; report
+      xong thì xuất hiện đúng trong bảng).
 
 ## Chạy thử
 

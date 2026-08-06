@@ -75,6 +75,7 @@ import vn.dreamtech.game.server.guild.boss.AttackHandler;
 import vn.dreamtech.game.server.guild.boss.AttackStatusHandler;
 import vn.dreamtech.game.server.guild.boss.BossStatusHandler;
 import vn.dreamtech.game.server.guild.boss.GuildBossService;
+import vn.dreamtech.game.server.guild.boss.LeaderboardHandler;
 import vn.dreamtech.game.server.guild.boss.ReportBossResultHandler;
 import vn.dreamtech.game.server.level.AddExpHandler;
 import vn.dreamtech.game.server.level.GetLevelHandler;
@@ -215,6 +216,7 @@ public final class Main {
         server.createContext("/api/guild/boss/report", new ReportBossResultHandler(guildBossService));
         server.createContext("/api/guild/boss/status", new BossStatusHandler(guildBossService));
         server.createContext("/api/guild/boss/attack-status", new AttackStatusHandler(guildBossService));
+        server.createContext("/api/guild/boss/leaderboard", new LeaderboardHandler(guildBossService));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);
