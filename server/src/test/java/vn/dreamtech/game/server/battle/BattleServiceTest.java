@@ -54,6 +54,42 @@ class BattleServiceTest {
     }
 
     @Test
+    void startAdventureReturnsFreshOngoingState() {
+        BattleStateView view = battleService.startAdventure(1, 1);
+        assertEquals(BattleStatus.ONGOING, view.status());
+        assertEquals(BattleMode.ADVENTURE, view.mode());
+        assertEquals(180, view.enemyHp());
+        assertEquals(1, view.levelId());
+    }
+
+    @Test
+    void unknownAdventureLevelRejected() {
+        BattleException e = assertThrows(BattleException.class, () -> battleService.startAdventure(1, 999));
+        assertEquals(404, e.status());
+    }
+
+    @Test
+    void startEventPuzzleWithinActiveWindowSucceeds() {
+        // Sự kiện "Lễ hội mùa hè" id=1 chủ động đặt lịch chủ động chạy suốt tháng 8/2026 trong catalog.
+        BattleStateView view = battleService.startEventPuzzle(1, 1);
+        assertEquals(BattleStatus.ONGOING, view.status());
+        assertEquals(BattleMode.EVENT_PUZZLE, view.mode());
+    }
+
+    @Test
+    void startEventPuzzleOutsideWindowRejected() {
+        // id=2 "Lễ hội Trung Thu" lịch tháng 9/2026, chưa tới lúc test này chạy (test cố định theo catalog).
+        BattleException e = assertThrows(BattleException.class, () -> battleService.startEventPuzzle(1, 2));
+        assertEquals(409, e.status());
+    }
+
+    @Test
+    void unknownEventPuzzleRejected() {
+        BattleException e = assertThrows(BattleException.class, () -> battleService.startEventPuzzle(1, 999));
+        assertEquals(404, e.status());
+    }
+
+    @Test
     void unknownBattleIdRejected() {
         BattleException e = assertThrows(BattleException.class, () -> battleService.swap("nope", 0, 0, 0, 1));
         assertEquals(404, e.status());

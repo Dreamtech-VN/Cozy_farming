@@ -20,10 +20,14 @@ import vn.dreamtech.game.server.battle.StartStoryHandler;
 import vn.dreamtech.game.server.battle.StoryLevelsHandler;
 import vn.dreamtech.game.server.battle.SwapHandler;
 import vn.dreamtech.game.server.battle.UltimateHandler;
+import vn.dreamtech.game.server.battle.adventure.AdventureLevelsHandler;
+import vn.dreamtech.game.server.battle.adventure.StartAdventureHandler;
 import vn.dreamtech.game.server.battle.challenge.ChallengeStatusHandler;
 import vn.dreamtech.game.server.battle.challenge.StartChallengeHandler;
 import vn.dreamtech.game.server.battle.dungeon.DungeonListHandler;
 import vn.dreamtech.game.server.battle.dungeon.StartDungeonHandler;
+import vn.dreamtech.game.server.battle.eventpuzzle.EventPuzzleListHandler;
+import vn.dreamtech.game.server.battle.eventpuzzle.StartEventPuzzleHandler;
 import vn.dreamtech.game.server.battle.tower.StartTowerHandler;
 import vn.dreamtech.game.server.battle.tower.TowerListHandler;
 import vn.dreamtech.game.server.account.DeleteAccountHandler;
@@ -52,9 +56,14 @@ import vn.dreamtech.game.server.dao.GuildBossContributionDao;
 import vn.dreamtech.game.server.dao.GuildBossCycleDao;
 import vn.dreamtech.game.server.dao.GuildDao;
 import vn.dreamtech.game.server.dao.GuildMemberDao;
+import vn.dreamtech.game.server.dao.GuildWarAttemptDao;
+import vn.dreamtech.game.server.dao.GuildWarDao;
 import vn.dreamtech.game.server.dao.LevelDao;
+import vn.dreamtech.game.server.dao.MarriageActivityDao;
 import vn.dreamtech.game.server.dao.MarriageDao;
 import vn.dreamtech.game.server.dao.MarriageProposalDao;
+import vn.dreamtech.game.server.dao.PvpMatchHistoryDao;
+import vn.dreamtech.game.server.dao.PvpRankDao;
 import vn.dreamtech.game.server.dao.SupportTicketDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.UserSettingsDao;
@@ -78,9 +87,22 @@ import vn.dreamtech.game.server.guild.boss.AttackHandler;
 import vn.dreamtech.game.server.guild.boss.AttackStatusHandler;
 import vn.dreamtech.game.server.guild.boss.BossStatusHandler;
 import vn.dreamtech.game.server.guild.boss.GuildBossService;
+import vn.dreamtech.game.server.guild.war.DeclareWarHandler;
+import vn.dreamtech.game.server.guild.war.GuildWarService;
+import vn.dreamtech.game.server.guild.war.MyWarHandler;
+import vn.dreamtech.game.server.guild.war.ReportWarResultHandler;
 import vn.dreamtech.game.server.guild.boss.LeaderboardHandler;
 import vn.dreamtech.game.server.guild.boss.ReportBossResultHandler;
 import vn.dreamtech.game.server.level.AddExpHandler;
+import vn.dreamtech.game.server.pvp.JoinQueueHandler;
+import vn.dreamtech.game.server.pvp.LeaveQueueHandler;
+import vn.dreamtech.game.server.pvp.MatchStatusHandler;
+import vn.dreamtech.game.server.pvp.MyMatchHandler;
+import vn.dreamtech.game.server.pvp.PvpService;
+import vn.dreamtech.game.server.pvp.RankHandler;
+import vn.dreamtech.game.server.pvp.RankingListHandler;
+import vn.dreamtech.game.server.pvp.ReportScoreHandler;
+import vn.dreamtech.game.server.pvp.StartMatchHandler;
 import vn.dreamtech.game.server.level.GetLevelHandler;
 import vn.dreamtech.game.server.lobby.HeartbeatHandler;
 import vn.dreamtech.game.server.lobby.LeaveLobbyHandler;
@@ -93,10 +115,15 @@ import vn.dreamtech.game.server.social.friend.RemoveFriendHandler;
 import vn.dreamtech.game.server.social.friend.RespondFriendRequestHandler;
 import vn.dreamtech.game.server.social.friend.SendFriendRequestHandler;
 import vn.dreamtech.game.server.social.gift.SendGiftHandler;
+import vn.dreamtech.game.server.social.marriage.ClaimDuoQuestHandler;
 import vn.dreamtech.game.server.social.marriage.DivorceHandler;
+import vn.dreamtech.game.server.social.marriage.MarriageActivityService;
 import vn.dreamtech.game.server.social.marriage.MarriageStatusHandler;
+import vn.dreamtech.game.server.social.marriage.OnlineTickHandler;
 import vn.dreamtech.game.server.social.marriage.ProposeHandler;
+import vn.dreamtech.game.server.social.marriage.ReportCoopBattleHandler;
 import vn.dreamtech.game.server.social.marriage.RespondProposalHandler;
+import vn.dreamtech.game.server.social.marriage.StartCoopBattleHandler;
 import vn.dreamtech.game.server.support.MyTicketsHandler;
 import vn.dreamtech.game.server.support.ReportHandler;
 import vn.dreamtech.game.server.wallet.AddCurrencyHandler;
@@ -110,10 +137,10 @@ import java.net.InetSocketAddress;
 /**
  * Điểm khởi động server. Giai đoạn 1: khung HTTP tối thiểu (/health) + DB.
  * Giai đoạn 2: tài khoản — đăng ký/đăng nhập/quên mật khẩu/khách, liên kết
- * khách->thường, đăng nhập/liên kết Google/Apple (khung xác thực dựng sẵn,
- * Apple chưa xong thật — xem {@code AppleTokenVerifier}). Giai đoạn 3 (hiện
- * tại): tạo nhân vật (giới tính/tên/trang phục cơ bản). Sảnh, chat, cài đặt
- * thêm dần ở các giai đoạn sau.
+ * khách->thường, đăng nhập/liên kết Google/Apple thật (xem
+ * {@code GoogleTokenVerifier}/{@code AppleTokenVerifier}, giai đoạn 26).
+ * Giai đoạn 3: tạo nhân vật (giới tính/tên/trang phục cơ bản). Sảnh, chat,
+ * cài đặt thêm dần ở các giai đoạn sau.
  */
 public final class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
@@ -132,6 +159,7 @@ public final class Main {
         FriendshipDao friendshipDao = new FriendshipDao(dataSource);
         MarriageProposalDao marriageProposalDao = new MarriageProposalDao(dataSource);
         MarriageDao marriageDao = new MarriageDao(dataSource);
+        MarriageActivityDao marriageActivityDao = new MarriageActivityDao(dataSource);
         LevelDao levelDao = new LevelDao(dataSource);
         WalletDao walletDao = new WalletDao(dataSource);
         DivorceCooldownDao divorceCooldownDao = new DivorceCooldownDao(dataSource);
@@ -143,17 +171,24 @@ public final class Main {
         GuildBossCycleDao guildBossCycleDao = new GuildBossCycleDao(dataSource);
         GuildBossAttemptDao guildBossAttemptDao = new GuildBossAttemptDao(dataSource);
         GuildBossContributionDao guildBossContributionDao = new GuildBossContributionDao(dataSource);
+        GuildWarDao guildWarDao = new GuildWarDao(dataSource);
+        GuildWarAttemptDao guildWarAttemptDao = new GuildWarAttemptDao(dataSource);
         WorldBossCycleDao worldBossCycleDao = new WorldBossCycleDao(dataSource);
         WorldBossAttemptDao worldBossAttemptDao = new WorldBossAttemptDao(dataSource);
         WorldBossContributionDao worldBossContributionDao = new WorldBossContributionDao(dataSource);
+        PvpRankDao pvpRankDao = new PvpRankDao(dataSource);
+        PvpMatchHistoryDao pvpMatchHistoryDao = new PvpMatchHistoryDao(dataSource);
         BattleService battleService = new BattleService(levelDao, walletDao, challengeAttemptDao);
         GuildService guildService = new GuildService(guildDao, guildMemberDao, characterDao, walletDao);
         GuildBossService guildBossService = new GuildBossService(guildMemberDao, guildBossCycleDao, guildBossAttemptDao,
                 guildBossContributionDao, battleService, levelDao, walletDao);
         WorldBossService worldBossService = new WorldBossService(characterDao, worldBossCycleDao, worldBossAttemptDao,
                 worldBossContributionDao, battleService, levelDao, walletDao);
+        GuildWarService guildWarService = new GuildWarService(guildDao, guildMemberDao, guildWarDao, guildWarAttemptDao, battleService);
+        MarriageActivityService marriageActivityService = new MarriageActivityService(marriageDao, marriageActivityDao, friendshipDao, presenceDao, battleService);
+        PvpService pvpService = new PvpService(characterDao, battleService, pvpRankDao, pvpMatchHistoryDao);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
-        var appleVerifier = new AppleTokenVerifier();
+        var appleVerifier = new AppleTokenVerifier(System.getenv("APPLE_CLIENT_ID"));
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/health", new HealthCheckHandler());
@@ -192,6 +227,10 @@ public final class Main {
         server.createContext("/api/marriage/respond", new RespondProposalHandler(marriageProposalDao, marriageDao));
         server.createContext("/api/marriage/status", new MarriageStatusHandler(marriageDao));
         server.createContext("/api/marriage/divorce", new DivorceHandler(marriageDao, divorceCooldownDao));
+        server.createContext("/api/marriage/online-tick", new OnlineTickHandler(marriageActivityService));
+        server.createContext("/api/marriage/duo-quest/claim", new ClaimDuoQuestHandler(marriageActivityService));
+        server.createContext("/api/marriage/battle/start", new StartCoopBattleHandler(marriageActivityService));
+        server.createContext("/api/marriage/battle/report", new ReportCoopBattleHandler(marriageActivityService));
         server.createContext("/api/level", new GetLevelHandler(levelDao));
         server.createContext("/api/level/add-exp", new AddExpHandler(levelDao));
         server.createContext("/api/wallet", new GetWalletHandler(walletDao));
@@ -203,6 +242,10 @@ public final class Main {
         server.createContext("/api/character/appearance", new GetAppearanceHandler(characterAppearanceDao));
         server.createContext("/api/battle/story/levels", new StoryLevelsHandler());
         server.createContext("/api/battle/story/start", new StartStoryHandler(battleService));
+        server.createContext("/api/battle/adventure/levels", new AdventureLevelsHandler());
+        server.createContext("/api/battle/adventure/start", new StartAdventureHandler(battleService));
+        server.createContext("/api/battle/event-puzzle/list", new EventPuzzleListHandler());
+        server.createContext("/api/battle/event-puzzle/start", new StartEventPuzzleHandler(battleService));
         server.createContext("/api/battle/swap", new SwapHandler(battleService));
         server.createContext("/api/battle/ultimate", new UltimateHandler(battleService));
         server.createContext("/api/battle/state", new BattleStateHandler(battleService));
@@ -227,11 +270,24 @@ public final class Main {
         server.createContext("/api/guild/boss/status", new BossStatusHandler(guildBossService));
         server.createContext("/api/guild/boss/attack-status", new AttackStatusHandler(guildBossService));
         server.createContext("/api/guild/boss/leaderboard", new LeaderboardHandler(guildBossService));
+        server.createContext("/api/guild/war/declare", new DeclareWarHandler(guildWarService));
+        server.createContext("/api/guild/war/attack", new vn.dreamtech.game.server.guild.war.AttackHandler(guildWarService));
+        server.createContext("/api/guild/war/report", new ReportWarResultHandler(guildWarService));
+        server.createContext("/api/guild/war/status", new vn.dreamtech.game.server.guild.war.WarStatusHandler(guildWarService));
+        server.createContext("/api/guild/war/my", new MyWarHandler(guildWarService));
         server.createContext("/api/world-boss/attack", new vn.dreamtech.game.server.worldboss.AttackHandler(worldBossService));
         server.createContext("/api/world-boss/report", new vn.dreamtech.game.server.worldboss.ReportBossResultHandler(worldBossService));
         server.createContext("/api/world-boss/status", new StatusHandler(worldBossService));
         server.createContext("/api/world-boss/attack-status", new vn.dreamtech.game.server.worldboss.AttackStatusHandler(worldBossService));
         server.createContext("/api/world-boss/leaderboard", new vn.dreamtech.game.server.worldboss.LeaderboardHandler(worldBossService));
+        server.createContext("/api/pvp/queue/join", new JoinQueueHandler(pvpService));
+        server.createContext("/api/pvp/queue/leave", new LeaveQueueHandler(pvpService));
+        server.createContext("/api/pvp/match/start", new StartMatchHandler(pvpService));
+        server.createContext("/api/pvp/match/report", new ReportScoreHandler(pvpService));
+        server.createContext("/api/pvp/match/status", new MatchStatusHandler(pvpService));
+        server.createContext("/api/pvp/match/my", new MyMatchHandler(pvpService));
+        server.createContext("/api/pvp/rank", new RankHandler(pvpService));
+        server.createContext("/api/pvp/leaderboard", new RankingListHandler(pvpService));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);

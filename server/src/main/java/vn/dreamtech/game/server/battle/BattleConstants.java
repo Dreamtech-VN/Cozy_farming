@@ -27,6 +27,8 @@ public final class BattleConstants {
     public static final int ENEMY_DEBUFF_DURATION_SWAPS = 2;   // phản đòn -> debuff MANA_DOWN cho 2 lượt kế tiếp
     public static final double ENEMY_DEBUFF_MANA_MULT = 0.5;
 
+    public static final int PVP_MOVE_LIMIT = 20; // PvP không đấu tới khi 1 bên hết máu — hết lượt là dừng, so tổng sát thương
+
     private BattleConstants() {
     }
 }

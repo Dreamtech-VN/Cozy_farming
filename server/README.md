@@ -4,6 +4,9 @@ Server Java cho game mới (client Unity/C#). Bắt đầu lại từ đầu sau
 dự án nông trại cũ (Cozy Farming) — xem lịch sử git nếu cần tham khảo code
 cũ.
 
+- Mới setup máy lần đầu? Đọc **[SETUP.md](SETUP.md)**.
+- Đang làm client Unity? Đọc **[UNITY_INTEGRATION.md](UNITY_INTEGRATION.md)**.
+
 ## Quy trình: từng giai đoạn, xong mới sang giai đoạn kế
 
 - [x] **Giai đoạn 1 — khung project**: Maven project biên dịch + chạy được,
@@ -37,11 +40,8 @@ cũ.
         thực THẬT qua endpoint `tokeninfo` chính chủ Google (không phải
         placeholder) — cần biến môi trường `GOOGLE_CLIENT_ID` (OAuth client
         ID thật từ Google Cloud Console) để so khớp `aud`. `AppleTokenVerifier`
-        CHƯA xong thật (Apple ID token cần verify chữ ký JWT qua JWKS, chưa
-        thêm thư viện JWT) — chủ động báo lỗi 401 thay vì tin token gửi lên
-        (không chấp nhận kiểu "placeholder tin tưởng luôn" vì đó là lỗ hổng
-        bảo mật thật), TODO thêm thư viện JWT (vd. nimbus-jose-jwt) khi làm
-        thật.
+        (khi ra đời ở giai đoạn này) CHƯA xong thật — chủ động báo lỗi 401
+        thay vì tin token gửi lên, xem Giai đoạn 26 để biết bản THẬT sau này.
       Test: `PasswordHasherTest`, `UserDaoTest` (đơn vị); `AuthFlowTest`
       (luồng HTTP thật: đăng ký→đăng nhập→quên mật khẩu→đặt lại→đăng nhập
       lại; khách tạo mới rồi vào lại đúng tài khoản bằng token cũ; nâng cấp
@@ -444,6 +444,159 @@ cũ.
       chung giữa nhiều người chơi khác nhau, đánh tới khi trận kết thúc rồi
       report đúng + phát thưởng + lên bảng xếp hạng); `WorldBossHttpFlowTest`
       (nối dây HTTP).
+- [x] **Giai đoạn 20 — PvP Ranked**: server CHỈ có REST polling, KHÔNG có
+      WebSocket (xem Giai đoạn 4) — nên 2 người chơi KHÔNG thể thao tác
+      chung 1 bàn cờ theo thời gian thực. Giải pháp: PvP dạng "đấu song
+      song không chung bàn cờ" (async score-attack) — ghép cặp xong, mỗi
+      bên tự chơi ĐỘC LẬP trong giới hạn `BattleConstants.PVP_MOVE_LIMIT`
+      (20 lượt, địch gần như bất tử — `PvpFightDef`, HP 999999, không đấu
+      tới khi hết máu địch), ai TỔNG SÁT THƯƠNG cao hơn thắng.
+      - Thêm `BattleMode.PVP` + `BattleService.startPvp` (sinh đôi với
+        `startGuildBoss`/`startWorldBoss`). `resolveOutcome` thêm nhánh:
+        PVP mà đủ `PVP_MOVE_LIMIT` lượt thì dừng trận (dùng lại
+        `BattleStatus.LOST` làm "đã kết thúc", KHÔNG mang nghĩa "thua thật"
+        — `PvpService` chỉ đọc `totalDamageDealt`, không quan tâm status).
+      - Ghép cặp: CHỈ 1 vị trí chờ (MVP, chưa phải hàng đợi thật nhiều
+        người/theo rating — TODO nâng cấp sau). Người thứ 2 vào hàng chờ
+        được ghép NGAY, người thứ 1 phải tự poll `match/my` để biết đã
+        được ghép (không có cách "đẩy" thông báo qua REST polling thuần).
+      - Mỗi bên tự `match/start` trận cá nhân riêng, tự `swap`/`ultimate`
+        (dùng CHUNG endpoint), rồi `match/report` nộp điểm SAU khi trận cá
+        nhân kết thúc. Trận CHỈ resolve khi CẢ HAI đã report — chống báo
+        cáo trùng bằng tập `battleId` đã báo cáo (in-memory, giống Guild/
+        World Boss).
+      - Elo-lite đơn giản (`pvp_ranks`): thắng +20, thua -10, hoà +5 mỗi
+        bên (không phải Elo thật có tính theo chênh lệch rating đối thủ —
+        TODO khi cần cân bằng công bằng hơn), rating tối thiểu 0.
+        `pvp_match_history` chỉ ghi kết quả cuối lúc resolve, không lưu
+        từng lượt (giống triết lý "chỉ lưu kết quả cuối" của
+        `BattleSession`).
+      - `POST /api/pvp/queue/join` {userId} (ghép ngay thì trả `matchId`
+        luôn), `POST /api/pvp/queue/leave` {userId},
+        `POST /api/pvp/match/start` {userId, matchId},
+        `POST /api/pvp/match/report` {userId, matchId, battleId},
+        `GET /api/pvp/match/status?matchId=`, `GET /api/pvp/match/my?userId=`
+        (kể cả trận đã xong, để xem kết quả), `GET /api/pvp/rank?userId=`,
+        `GET /api/pvp/leaderboard`.
+      Test: `PvpRankDaoTest`, `PvpMatchHistoryDaoTest` (đơn vị);
+      `PvpServiceTest` (qua service trực tiếp — chặn ghép khi chưa có nhân
+      vật/đã trong hàng chờ/đã có trận chưa xong, chặn report khi trận cá
+      nhân chưa xong/report trùng, đấu tới hết lượt cả 2 bên rồi report
+      đúng điểm + resolve đúng thắng-thua-hoà + cập nhật rating, sau khi
+      resolve vào hàng chờ lại được); `PvpHttpFlowTest` (nối dây HTTP).
+- [x] **Giai đoạn 21 — hàng chờ PvP thật (nhiều người cùng chờ)**: nâng cấp
+      hàng chờ 1-vị-trí ở Giai đoạn 20 lên `Set<Integer> waitingUserIds`
+      thật — nhưng CHỈ ghép khi chênh rating trong ngưỡng
+      `PvpConstants.MAX_MATCH_RATING_DIFF` (300), nếu không ai đủ gần thì
+      TIẾP TỤC chờ thay vì ghép bừa. Đây là điểm mấu chốt: không có ngưỡng
+      thì hàng chờ KHÔNG BAO GIỜ giữ được >1 người (ai vào cũng ghép ngay
+      với người đang chờ) — có ngưỡng mới thật sự mô phỏng được nhiều người
+      cùng chờ đồng thời. TODO: nới ngưỡng dần theo thời gian chờ.
+      Test: `PvpServiceTest` thêm 2 test — nhiều người chờ cùng lúc, ghép
+      đúng người gần rating nhất (không phải cứ vào trước là ghép trước);
+      rời hàng chờ chỉ ảnh hưởng đúng người đó.
+- [x] **Giai đoạn 22 — thêm nội dung Story/Adventure/Event Puzzle**: Story
+      mở rộng từ 3 lên 6 màn. Thêm 2 chế độ MỚI dùng lại nguyên lõi
+      `EnemyDef`/`BattleService` (không sửa engine): **Adventure**
+      (`AdventureLevelCatalog`, 4 màn, không giới hạn lượt chơi lại — khác
+      Story chỉ ở chỗ tách catalog/endpoint riêng để dễ mở rộng nội dung
+      song song) và **Event Puzzle** (`EventPuzzleCatalog`, sự kiện có
+      `startAt`/`endAt` theo mốc thời gian THẬT — chỉ chơi được trong
+      khung thời gian, tự kiểm tra lúc `start`, KHÔNG cần cron; hiện có 2
+      sự kiện mẫu hardcode theo lịch, TODO công cụ admin thêm sự kiện mới
+      mà không cần sửa code).
+      - `BattleMode` thêm `ADVENTURE`, `EVENT_PUZZLE`; đổi tên field
+        `BattleSession.storyLevelId` → `catalogLevelId` (dùng chung cho cả
+        3 chế độ catalog-based: Story/Adventure/Event Puzzle).
+      - `GET /api/battle/adventure/levels`, `POST /api/battle/adventure/start`
+        {userId, levelId}; `GET /api/battle/event-puzzle/list`,
+        `POST /api/battle/event-puzzle/start` {userId, eventId}.
+      Test: `BattleServiceTest` thêm test cho cả 2 chế độ mới (bắt đầu
+      đúng, từ chối id không tồn tại, Event Puzzle từ chối ngoài khung thời
+      gian).
+- [x] **Giai đoạn 23 — thêm nội dung Dungeon/Tower**: Dungeon mở rộng từ 2
+      lên 4 hầm ngục, Tower mở rộng từ 1 lên 2 tháp — chỉ thêm dữ liệu vào
+      catalog có sẵn (`DungeonCatalog`/`TowerCatalog`), không đổi cơ chế.
+- [x] **Giai đoạn 24 — Guild War**: PvP giữa 2 GUILD (điều còn thiếu đã ghi
+      chú ở Giai đoạn 17) — cùng triết lý "bản sao cá nhân + report" như
+      Guild Boss/World Boss/PvP: hội trưởng/phó tuyên chiến guild khác
+      (`POST /api/guild/war/declare`), mỗi thành viên đánh 1 lần
+      MỘT-LẦN-DUY-NHẤT cho CUỘC CHIẾN đó (không phải theo chu kỳ như Guild
+      Boss — Guild War là sự kiện 1 LẦN, `guild_war_attempts` khoá theo
+      `war_id` chứ không phải mốc chu kỳ), tổng sát thương cộng dồn vào
+      điểm CHUNG của guild mình (`guild_wars.score_a`/`score_b`).
+      - Thời hạn 24h (`GuildWarConstants.WAR_DURATION_MS`) — hết hạn thì
+        guild điểm cao hơn thắng, tự resolve LAZY khi có request tiếp theo
+        (giống chu kỳ Guild/World Boss, KHÔNG dùng cron). Guild đang chiến
+        tranh chưa xong thì không tuyên chiến tiếp được (cả 2 phía).
+      - `GuildWarDao`/`GuildWarAttemptDao` (bảng `guild_wars`,
+        `guild_war_attempts`); `GuildWarService`
+        (declare/attack/report/status/myWar); `BattleMode.GUILD_WAR` +
+        `BattleService.startGuildWar` (sinh đôi với `startPvp`/
+        `startGuildBoss`).
+      - `POST /api/guild/war/declare` {userId, targetGuildId},
+        `POST /api/guild/war/attack` {userId},
+        `POST /api/guild/war/report` {userId, battleId},
+        `GET /api/guild/war/status?guildId=`, `GET /api/guild/war/my?userId=`.
+      - Trùng tên class `AttackHandler` với `guild.boss`/`worldboss` —
+        `Main.java` dùng tên đầy đủ (fully-qualified) tại nơi gọi, đúng
+        pattern đã dùng ở Giai đoạn 19.
+      Test: `GuildWarDaoTest`, `GuildWarAttemptDaoTest` (đơn vị);
+      `GuildWarServiceTest` (qua service trực tiếp — chặn tuyên chiến khi
+      chưa vào guild/không phải hội trưởng-phó/tuyên chiến chính mình/đang
+      chiến tranh khác, chặn đánh khi không trong cuộc chiến/đã đánh rồi,
+      chặn report khi trận chưa xong, đánh tới khi trận kết thúc rồi report
+      đúng cộng vào điểm ĐÚNG BÊN guild mình).
+- [x] **Giai đoạn 25 — nguồn điểm thân mật sau khi cưới**: trước đây chỉ có
+      quà tặng (`SendGiftHandler`, giai đoạn 9) làm nguồn thân mật. Thêm 3
+      nguồn MỚI, riêng cho VỢ CHỒNG đã cưới (`MarriageActivityService`,
+      vẫn cộng điểm vào ĐÚNG bảng `friendships` — vợ chồng vẫn là bạn bè):
+      1. **Online cùng nhau**: `POST /api/marriage/online-tick` {userId} —
+         cộng điểm nếu CẢ HAI đang online (dùng lại `PresenceDao`, cửa sổ
+         `ONLINE_WINDOW_MS` có sẵn từ giai đoạn Lobby), chặn spam bằng
+         cooldown 5 phút/cặp (không phải theo ngày).
+      2. **Nhiệm vụ đôi hàng ngày**: `POST /api/marriage/duo-quest/claim`
+         {userId} — cần cả 2 đang online, 1 lần/24h/cặp, thưởng lớn hơn
+         tick thường.
+      3. **Trận đánh hợp tác**: `POST /api/marriage/battle/start` {userId}
+         bắt đầu 1 "bản sao" cá nhân (`MarriageCoopFightDef`, giống Guild
+         War/Guild Boss về ý tưởng), `POST /api/marriage/battle/report`
+         {userId, battleId} sau khi xong — nếu VỢ/CHỒNG cũng đã hoàn thành
+         lượt của họ trong vòng `COOP_BATTLE_WINDOW_MS` (24h) tính từ lượt
+         này, CẢ HAI nhận thêm điểm thưởng chung; chống thưởng trùng bằng
+         so sánh mốc `coop_last_awarded_at` với mốc hoàn thành của người
+         kia (chỉ thưởng nếu chưa thưởng cho VÒNG đánh hiện tại).
+      - `BattleMode` thêm `MARRIAGE_COOP` +
+        `BattleService.startMarriageCoop` (sinh đôi với `startGuildWar`).
+      - `MarriageActivityDao` (bảng `marriage_activity`, khoá theo cặp
+        `userIdA < userIdB` giống `MarriageDao`/`FriendshipDao`) lưu mốc
+        thời gian cho cả 3 nguồn trên trong 1 bảng duy nhất.
+      Test: `MarriageActivityDaoTest` (đơn vị); `MarriageActivityServiceTest`
+      (qua service trực tiếp — chặn khi chưa cưới, chặn tick/nhiệm vụ đôi
+      khi vợ/chồng chưa online, cooldown tick/nhiệm vụ đôi hoạt động đúng,
+      trận hợp tác chỉ thưởng khi CẢ HAI cùng hoàn thành trong khung thời
+      gian chứ không phải 1 người đánh 2 lần).
+- [x] **Giai đoạn 26 — xác thực Apple THẬT**: hoàn thành TODO ghi ở Giai
+      đoạn 2 — `AppleTokenVerifier` trước đây CHỦ ĐỘNG báo lỗi thay vì tin
+      token gửi lên (đúng nguyên tắc an toàn, nhưng chưa dùng được thật).
+      Giờ verify chữ ký JWT THẬT bằng JWKS chính chủ Apple
+      (`https://appleid.apple.com/auth/keys`) qua thư viện `nimbus-jose-jwt`
+      (dependency MỚI, đã thêm `pom.xml`) — không tự chế lại logic JWT/JWK.
+      - Tải JWKS 1 lần rồi cache (`volatile JWKSet`, double-checked locking)
+        — mỗi request KHÔNG gọi Apple lại; nếu gặp `kid` lạ (Apple xoay khoá
+        định kỳ) thì tự tải lại JWKS 1 lần trước khi báo lỗi hẳn.
+      - Kiểm ĐỦ những gì 1 verifier JWT thật cần: chữ ký (`RSASSAVerifier`
+        theo đúng khoá công khai khớp `kid`), `iss` phải là
+        `https://appleid.apple.com`, `aud` phải khớp biến môi trường
+        `APPLE_CLIENT_ID` (Services ID thật đăng ký với Apple — thêm mới,
+        sinh đôi với `GOOGLE_CLIENT_ID`), `exp` chưa hết hạn.
+      - Test KHÔNG gọi Apple thật: `AppleTokenVerifierTest` tự sinh cặp khoá
+        RSA + tự ký JWT cục bộ (`nimbus-jose-jwt` cũng dùng để ký trong
+        test), tiêm JWKS giả qua constructor package-private thay vì
+        constructor công khai (constructor công khai vẫn luôn gọi Apple
+        thật, không đổi hành vi production) — kiểm đủ: verify đúng token
+        hợp lệ, từ chối sai `aud`/sai `iss`/hết hạn/ký bằng khoá sai/`kid`
+        lạ/thiếu cấu hình `APPLE_CLIENT_ID`/token sai định dạng.
 
 ## Chạy thử
 
@@ -454,3 +607,17 @@ mvn test
 mvn -Dserver.port=8080 exec:java
 # hoặc: mvn package && java -jar target/game-server-0.1.0-SNAPSHOT.jar
 ```
+
+### Chạy nhanh bằng file build (bấm 1 phát)
+
+`pom.xml` đã cấu hình `maven-shade-plugin` — `mvn package` ra 1 file
+`.jar` gộp sẵn hết thư viện (`target/game-server-0.1.0-SNAPSHOT.jar`),
+chạy được bằng `java -jar` mà không cần Maven/IDE nữa. Để tiện hơn nữa,
+dùng script tự build (nếu chưa có `.jar`) + tự chạy:
+
+- Windows: bấm đúp `start.bat` (hoặc chạy trong Command Prompt).
+- Mac/Linux: `./start.sh`.
+
+Mặc định nối `jdbc:mysql://localhost:3306/game` (user `root`, không mật
+khẩu) ở cổng `8080` — đổi bằng biến môi trường trước khi chạy nếu cần:
+`DB_URL`, `DB_USER`, `DB_PASSWORD`, `DB_POOL_SIZE`, `SERVER_PORT`.

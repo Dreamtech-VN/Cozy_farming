@@ -1,5 +1,7 @@
 package vn.dreamtech.game.server.battle;
 
+import vn.dreamtech.game.server.battle.adventure.AdventureLevelCatalog;
+import vn.dreamtech.game.server.battle.adventure.AdventureLevelDef;
 import vn.dreamtech.game.server.battle.challenge.ChallengeCatalog;
 import vn.dreamtech.game.server.battle.challenge.ChallengeDef;
 import vn.dreamtech.game.server.battle.challenge.ChallengeType;
@@ -11,6 +13,8 @@ import vn.dreamtech.game.server.battle.engine.MatchFinder;
 import vn.dreamtech.game.server.battle.engine.TileBoard;
 import vn.dreamtech.game.server.battle.dungeon.DungeonCatalog;
 import vn.dreamtech.game.server.battle.dungeon.DungeonDef;
+import vn.dreamtech.game.server.battle.eventpuzzle.EventPuzzleCatalog;
+import vn.dreamtech.game.server.battle.eventpuzzle.EventPuzzleDef;
 import vn.dreamtech.game.server.battle.tower.TowerCatalog;
 import vn.dreamtech.game.server.battle.tower.TowerDef;
 import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
@@ -52,6 +56,23 @@ public final class BattleService {
         return toView(session, false, false, 0, 0, 0, false, false);
     }
 
+    public BattleStateView startAdventure(int userId, int levelId) {
+        AdventureLevelDef level = AdventureLevelCatalog.find(levelId)
+                .orElseThrow(() -> new BattleException(404, "Không tìm thấy màn Adventure"));
+        BattleSession session = createSession(userId, level, BattleMode.ADVENTURE, levelId, null, null);
+        return toView(session, false, false, 0, 0, 0, false, false);
+    }
+
+    public BattleStateView startEventPuzzle(int userId, int eventId) {
+        EventPuzzleDef event = EventPuzzleCatalog.find(eventId)
+                .orElseThrow(() -> new BattleException(404, "Không tìm thấy sự kiện"));
+        if (!event.isActiveAt(System.currentTimeMillis())) {
+            throw new BattleException(409, "Sự kiện chưa bắt đầu hoặc đã kết thúc");
+        }
+        BattleSession session = createSession(userId, event, BattleMode.EVENT_PUZZLE, eventId, null, null);
+        return toView(session, false, false, 0, 0, 0, false, false);
+    }
+
     public BattleStateView startDungeon(int userId, int dungeonId) {
         DungeonDef dungeon = DungeonCatalog.find(dungeonId)
                 .orElseThrow(() -> new BattleException(404, "Không tìm thấy dungeon"));
@@ -76,6 +97,21 @@ public final class BattleService {
         return toView(session, false, false, 0, 0, 0, false, false);
     }
 
+    public BattleStateView startPvp(int userId, EnemyDef fight) {
+        BattleSession session = createSession(userId, fight, BattleMode.PVP, null, null, null);
+        return toView(session, false, false, 0, 0, 0, false, false);
+    }
+
+    public BattleStateView startGuildWar(int userId, EnemyDef fight) {
+        BattleSession session = createSession(userId, fight, BattleMode.GUILD_WAR, null, null, null);
+        return toView(session, false, false, 0, 0, 0, false, false);
+    }
+
+    public BattleStateView startMarriageCoop(int userId, EnemyDef fight) {
+        BattleSession session = createSession(userId, fight, BattleMode.MARRIAGE_COOP, null, null, null);
+        return toView(session, false, false, 0, 0, 0, false, false);
+    }
+
     public BattleStateView startChallenge(int userId, ChallengeType type) {
         ChallengeDef def = ChallengeCatalog.find(type);
         try {
@@ -94,12 +130,12 @@ public final class BattleService {
         return toView(session, false, false, 0, 0, 0, false, false);
     }
 
-    private BattleSession createSession(int userId, EnemyDef level, BattleMode mode, Integer storyLevelId,
+    private BattleSession createSession(int userId, EnemyDef level, BattleMode mode, Integer catalogLevelId,
                                          ChallengeType challengeType, FloorSource floorSource) {
         Random random = new Random();
         TileBoard board = BoardGenerator.generate(BOARD_ROWS, BOARD_COLS, COLOR_COUNT, random);
         String id = UUID.randomUUID().toString();
-        BattleSession session = new BattleSession(id, userId, level, mode, storyLevelId, challengeType, floorSource, board, random);
+        BattleSession session = new BattleSession(id, userId, level, mode, catalogLevelId, challengeType, floorSource, board, random);
         sessions.put(id, session);
         return session;
     }
@@ -226,6 +262,10 @@ public final class BattleService {
             grantRewardOnce(session);
         } else if (session.playerHp <= 0) {
             session.status = BattleStatus.LOST;
+        } else if (session.mode == BattleMode.PVP && session.swapCount >= PVP_MOVE_LIMIT) {
+            // PvP không đấu tới khi 1 bên hết máu (địch HP gần như vô hạn) — hết lượt là dừng,
+            // PvpService chỉ đọc totalDamageDealt để so điểm, KHÔNG coi LOST là "thua" thật.
+            session.status = BattleStatus.LOST;
         }
         return false;
     }
@@ -272,7 +312,7 @@ public final class BattleService {
         Integer floorIndex = s.floorSource == null ? null : s.floorIndex + 1;
         Integer totalFloors = s.floorSource == null ? null : s.totalFloors();
         return new BattleStateView(
-                s.id, s.userId, s.mode, s.storyLevelId, s.status, s.board.toArray(),
+                s.id, s.userId, s.mode, s.catalogLevelId, s.status, s.board.toArray(),
                 s.playerHp, PLAYER_HP_MAX, s.enemyHp, s.level.enemyHp(),
                 s.mana, MANA_MAX, s.comboCount, activeEffects,
                 matched, critical, chainLevels, damageDealt, manaGained,

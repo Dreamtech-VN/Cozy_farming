@@ -3,7 +3,7 @@ package vn.dreamtech.game.server.battle.dungeon;
 import java.util.List;
 import java.util.Optional;
 
-/** Danh mục dungeon (tĩnh, giống {@code StoryLevelCatalog}) — MVP 2 dungeon, mỗi cái 3 tầng. */
+/** Danh mục dungeon (tĩnh, giống {@code StoryLevelCatalog}) — 4 dungeon, mỗi cái 3 tầng. */
 public final class DungeonCatalog {
     private static final List<DungeonDef> DUNGEONS = List.of(
             new DungeonDef(1, "Hầm ngục đá cổ", List.of(
@@ -15,7 +15,17 @@ public final class DungeonCatalog {
                     new FloorDef(200, 12),
                     new FloorDef(260, 16),
                     new FloorDef(340, 20)
-            ), 130, 350)
+            ), 130, 350),
+            new DungeonDef(3, "Hầm ngục dung nham", List.of(
+                    new FloorDef(300, 16),
+                    new FloorDef(380, 20),
+                    new FloorDef(470, 25)
+            ), 180, 500),
+            new DungeonDef(4, "Hầm ngục bóng tối", List.of(
+                    new FloorDef(420, 20),
+                    new FloorDef(520, 25),
+                    new FloorDef(640, 30)
+            ), 240, 650)
     );
 
     public static List<DungeonDef> all() {
