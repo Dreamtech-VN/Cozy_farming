@@ -59,6 +59,9 @@ import vn.dreamtech.game.server.dao.SupportTicketDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.UserSettingsDao;
 import vn.dreamtech.game.server.dao.WalletDao;
+import vn.dreamtech.game.server.dao.WorldBossAttemptDao;
+import vn.dreamtech.game.server.dao.WorldBossContributionDao;
+import vn.dreamtech.game.server.dao.WorldBossCycleDao;
 import vn.dreamtech.game.server.db.DataSourceProvider;
 import vn.dreamtech.game.server.guild.ChangeRoleHandler;
 import vn.dreamtech.game.server.guild.CreateGuildHandler;
@@ -98,6 +101,8 @@ import vn.dreamtech.game.server.support.MyTicketsHandler;
 import vn.dreamtech.game.server.support.ReportHandler;
 import vn.dreamtech.game.server.wallet.AddCurrencyHandler;
 import vn.dreamtech.game.server.wallet.GetWalletHandler;
+import vn.dreamtech.game.server.worldboss.StatusHandler;
+import vn.dreamtech.game.server.worldboss.WorldBossService;
 
 import javax.sql.DataSource;
 import java.net.InetSocketAddress;
@@ -138,10 +143,15 @@ public final class Main {
         GuildBossCycleDao guildBossCycleDao = new GuildBossCycleDao(dataSource);
         GuildBossAttemptDao guildBossAttemptDao = new GuildBossAttemptDao(dataSource);
         GuildBossContributionDao guildBossContributionDao = new GuildBossContributionDao(dataSource);
+        WorldBossCycleDao worldBossCycleDao = new WorldBossCycleDao(dataSource);
+        WorldBossAttemptDao worldBossAttemptDao = new WorldBossAttemptDao(dataSource);
+        WorldBossContributionDao worldBossContributionDao = new WorldBossContributionDao(dataSource);
         BattleService battleService = new BattleService(levelDao, walletDao, challengeAttemptDao);
         GuildService guildService = new GuildService(guildDao, guildMemberDao, characterDao, walletDao);
         GuildBossService guildBossService = new GuildBossService(guildMemberDao, guildBossCycleDao, guildBossAttemptDao,
                 guildBossContributionDao, battleService, levelDao, walletDao);
+        WorldBossService worldBossService = new WorldBossService(characterDao, worldBossCycleDao, worldBossAttemptDao,
+                worldBossContributionDao, battleService, levelDao, walletDao);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
         var appleVerifier = new AppleTokenVerifier();
 
@@ -217,6 +227,11 @@ public final class Main {
         server.createContext("/api/guild/boss/status", new BossStatusHandler(guildBossService));
         server.createContext("/api/guild/boss/attack-status", new AttackStatusHandler(guildBossService));
         server.createContext("/api/guild/boss/leaderboard", new LeaderboardHandler(guildBossService));
+        server.createContext("/api/world-boss/attack", new vn.dreamtech.game.server.worldboss.AttackHandler(worldBossService));
+        server.createContext("/api/world-boss/report", new vn.dreamtech.game.server.worldboss.ReportBossResultHandler(worldBossService));
+        server.createContext("/api/world-boss/status", new StatusHandler(worldBossService));
+        server.createContext("/api/world-boss/attack-status", new vn.dreamtech.game.server.worldboss.AttackStatusHandler(worldBossService));
+        server.createContext("/api/world-boss/leaderboard", new vn.dreamtech.game.server.worldboss.LeaderboardHandler(worldBossService));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);

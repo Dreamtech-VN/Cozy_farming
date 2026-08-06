@@ -414,6 +414,36 @@ cũ.
       Test: 3 test mới trong `GuildBossServiceTest` (bảng trống lúc guild
       chưa ai đánh; xếp hạng đúng thứ tự giảm dần theo sát thương; report
       xong thì xuất hiện đúng trong bảng).
+- [x] **Giai đoạn 19 — World Boss**: gần như COPY nguyên cơ chế Guild Boss
+      (Giai đoạn 17-18) nhưng HP CHUNG dùng cho TOÀN SERVER (bảng
+      `world_boss_cycle` CHỈ 1 DÒNG DUY NHẤT, không theo guild) và KHÔNG
+      yêu cầu ở guild nào — chỉ cần đã tạo nhân vật. Thêm
+      `BattleMode.WORLD_BOSS` riêng (KHÔNG dùng chung `GUILD_BOSS`, dù cùng
+      cơ chế "bản sao cá nhân + report" — tách mode để response API không
+      gây hiểu nhầm trận Guild Boss/World Boss) qua
+      `BattleService.startWorldBoss(userId, EnemyDef)` (sinh đôi với
+      `startGuildBoss` đã có).
+      - Dùng LẠI `GuildBossReportView`/`GuildBossLeaderboardEntry`/
+        `AttackStatusView` từ package `guild.boss` cho World Boss (hình
+        dạng dữ liệu giống hệt, không tạo record trùng lặp).
+      - HP pool lớn hơn (50.000, so với 5.000 của Guild Boss) và địch mạnh
+        hơn (HP cá nhân 400, phản đòn 15) — phản ánh đây là nội dung
+        server-wide, thưởng cũng cao hơn (30 exp/60 vàng so với 20/40).
+      - `POST /api/world-boss/attack` {userId},
+        `POST /api/world-boss/report` {userId, battleId},
+        `GET /api/world-boss/status`, `GET /api/world-boss/attack-status?userId=`,
+        `GET /api/world-boss/leaderboard`. `swap`/`ultimate`/`state` dùng
+        CHUNG endpoint với Story/Challenge/Dungeon/Tower/Guild Boss.
+      - Trùng tên class với `guild.boss` (`AttackHandler`,
+        `ReportBossResultHandler`, `AttackStatusHandler`,
+        `LeaderboardHandler`) — `Main.java` dùng tên đầy đủ
+        (fully-qualified) tại nơi gọi thay vì import, tránh xung đột.
+      Test: `WorldBossCycleDaoTest`, `WorldBossAttemptDaoTest`,
+      `WorldBossContributionDaoTest` (đơn vị); `WorldBossServiceTest` (qua
+      service trực tiếp — không cần guild vẫn đánh được, HP pool dùng
+      chung giữa nhiều người chơi khác nhau, đánh tới khi trận kết thúc rồi
+      report đúng + phát thưởng + lên bảng xếp hạng); `WorldBossHttpFlowTest`
+      (nối dây HTTP).
 
 ## Chạy thử
 
