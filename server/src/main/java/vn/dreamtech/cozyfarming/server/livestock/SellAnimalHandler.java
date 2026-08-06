@@ -3,6 +3,7 @@ package vn.dreamtech.cozyfarming.server.livestock;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import vn.dreamtech.cozyfarming.server.dao.AnimalDao;
+import vn.dreamtech.cozyfarming.server.dao.WalletDao;
 import vn.dreamtech.cozyfarming.server.http.JsonHttp;
 import vn.dreamtech.cozyfarming.server.model.Animal;
 
@@ -10,16 +11,14 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 
-/**
- * POST /api/livestock/sell {userId, id} — khớp {@code sellAnimal()} client:
- * hoàn 50% giá mua. ⚠️ CHƯA cộng thẳng vào ví server (hệ ví chưa lên
- * server) — trả số xu hoàn trong response.
- */
+/** POST /api/livestock/sell {userId, id} — khớp {@code sellAnimal()} client: hoàn 50% giá mua, cộng thẳng vào ví thật. */
 public final class SellAnimalHandler implements HttpHandler {
     private final AnimalDao animalDao;
+    private final WalletDao walletDao;
 
-    public SellAnimalHandler(AnimalDao animalDao) {
+    public SellAnimalHandler(AnimalDao animalDao, WalletDao walletDao) {
         this.animalDao = animalDao;
+        this.walletDao = walletDao;
     }
 
     record Req(int userId, String id) {
@@ -43,8 +42,10 @@ public final class SellAnimalHandler implements HttpHandler {
             }
             AnimalDef def = AnimalCatalog.find(found.get().type())
                     .orElseThrow(() -> new IllegalStateException("type không có trong catalog"));
+            int refund = def.price() / 2;
             animalDao.delete(req.userId(), req.id());
-            JsonHttp.write(exchange, 200, new Res(def.price() / 2));
+            walletDao.addCoins(req.userId(), refund);
+            JsonHttp.write(exchange, 200, new Res(refund));
         } catch (SQLException e) {
             JsonHttp.writeError(exchange, 500, "Lỗi bán vật nuôi: " + e.getMessage());
         }

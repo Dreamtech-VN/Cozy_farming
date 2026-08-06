@@ -9,6 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import vn.dreamtech.cozyfarming.server.dao.AnimalDao;
+import vn.dreamtech.cozyfarming.server.dao.WalletDao;
 
 import javax.sql.DataSource;
 import java.net.InetSocketAddress;
@@ -43,15 +44,18 @@ class LivestockFlowTest {
                   health DOUBLE DEFAULT 100, sick TINYINT DEFAULT 0, health_at TIMESTAMP
                 )
                 """);
+            st.execute("CREATE TABLE wallets (user_id INT NOT NULL PRIMARY KEY, coins BIGINT NOT NULL DEFAULT 500, gems BIGINT NOT NULL DEFAULT 0)");
         }
         AnimalDao animalDao = new AnimalDao(dataSource);
+        WalletDao walletDao = new WalletDao(dataSource);
 
         server = HttpServer.create(new InetSocketAddress(0), 0);
         server.createContext("/api/livestock", new AnimalsHandler(animalDao));
-        server.createContext("/api/livestock/buy", new BuyAnimalHandler(animalDao));
+        server.createContext("/api/livestock/buy", new BuyAnimalHandler(animalDao, walletDao));
         server.createContext("/api/livestock/feed", new FeedAnimalHandler(animalDao));
         server.createContext("/api/livestock/collect", new CollectAnimalHandler(animalDao));
-        server.createContext("/api/livestock/sell", new SellAnimalHandler(animalDao));
+        server.createContext("/api/livestock/sell", new SellAnimalHandler(animalDao, walletDao));
+        server.createContext("/api/wallet", new vn.dreamtech.cozyfarming.server.wallet.WalletHandler(walletDao));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -79,14 +83,25 @@ class LivestockFlowTest {
     void buyInvalidTypeRejected() throws Exception {
         var res = post("/api/livestock/buy", new BuyAnimalHandler.Req(1, "dragon"));
         assertEquals(400, res.statusCode());
+        // loại không hợp lệ -> không được trừ xu
+        var wallet = get("/api/wallet?userId=1");
+        assertEquals(500, gson.fromJson(wallet.body(), JsonObject.class).get("coins").getAsLong());
     }
 
     @Test
     void fullCycle_buyFeedListSell() throws Exception {
+        // ví mặc định 500 xu (STARTING_COINS), gà giá 300 -> mua xong còn 200
+        var walletBefore = get("/api/wallet?userId=1");
+        assertEquals(200, walletBefore.statusCode());
+        assertEquals(500, gson.fromJson(walletBefore.body(), JsonObject.class).get("coins").getAsLong());
+
         var buy = post("/api/livestock/buy", new BuyAnimalHandler.Req(1, "chicken"));
         assertEquals(201, buy.statusCode());
         JsonObject bought = gson.fromJson(buy.body(), JsonObject.class);
         String id = bought.get("id").getAsString();
+
+        var walletAfterBuy = get("/api/wallet?userId=1");
+        assertEquals(200, gson.fromJson(walletAfterBuy.body(), JsonObject.class).get("coins").getAsLong());
 
         // vừa mua xong (fedAt=0, khớp buyAnimal() client) -> đã đói ngay, phải cho ăn được luôn
         var feedFirst = post("/api/livestock/feed", new FeedAnimalHandler.Req(1, id));
@@ -113,6 +128,10 @@ class LivestockFlowTest {
         assertEquals(200, sell.statusCode());
         JsonObject sellBody = gson.fromJson(sell.body(), JsonObject.class);
         assertEquals(150, sellBody.get("refund").getAsInt());
+
+        // sau bán: 200 (còn lại sau mua) + 150 (hoàn) = 350
+        var walletAfterSell = get("/api/wallet?userId=1");
+        assertEquals(350, gson.fromJson(walletAfterSell.body(), JsonObject.class).get("coins").getAsLong());
 
         var listAfterSell = get("/api/livestock?userId=1");
         assertTrue(gson.fromJson(listAfterSell.body(), JsonArray.class).isEmpty());
