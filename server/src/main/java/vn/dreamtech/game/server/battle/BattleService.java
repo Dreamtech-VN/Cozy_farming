@@ -9,6 +9,8 @@ import vn.dreamtech.game.server.battle.engine.CascadeResult;
 import vn.dreamtech.game.server.battle.engine.ChainStep;
 import vn.dreamtech.game.server.battle.engine.MatchFinder;
 import vn.dreamtech.game.server.battle.engine.TileBoard;
+import vn.dreamtech.game.server.battle.dungeon.DungeonCatalog;
+import vn.dreamtech.game.server.battle.dungeon.DungeonDef;
 import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
 import vn.dreamtech.game.server.dao.LevelDao;
 import vn.dreamtech.game.server.dao.WalletDao;
@@ -44,8 +46,15 @@ public final class BattleService {
     public BattleStateView startStory(int userId, int levelId) {
         StoryLevelDef level = StoryLevelCatalog.find(levelId)
                 .orElseThrow(() -> new BattleException(404, "Không tìm thấy màn chơi"));
-        BattleSession session = createSession(userId, level, BattleMode.STORY, levelId, null);
-        return toView(session, false, false, 0, 0, 0, false);
+        BattleSession session = createSession(userId, level, BattleMode.STORY, levelId, null, null);
+        return toView(session, false, false, 0, 0, 0, false, false);
+    }
+
+    public BattleStateView startDungeon(int userId, int dungeonId) {
+        DungeonDef dungeon = DungeonCatalog.find(dungeonId)
+                .orElseThrow(() -> new BattleException(404, "Không tìm thấy dungeon"));
+        BattleSession session = createSession(userId, dungeon.floorEnemy(0), BattleMode.DUNGEON, null, null, dungeon);
+        return toView(session, false, false, 0, 0, 0, false, false);
     }
 
     public BattleStateView startChallenge(int userId, ChallengeType type) {
@@ -62,15 +71,16 @@ public final class BattleService {
         } catch (SQLException e) {
             throw new BattleException(500, "Lỗi kiểm tra thời gian chờ: " + e.getMessage());
         }
-        BattleSession session = createSession(userId, def, type == ChallengeType.DAILY ? BattleMode.DAILY : BattleMode.WEEKLY, null, type);
-        return toView(session, false, false, 0, 0, 0, false);
+        BattleSession session = createSession(userId, def, type == ChallengeType.DAILY ? BattleMode.DAILY : BattleMode.WEEKLY, null, type, null);
+        return toView(session, false, false, 0, 0, 0, false, false);
     }
 
-    private BattleSession createSession(int userId, EnemyDef level, BattleMode mode, Integer storyLevelId, ChallengeType challengeType) {
+    private BattleSession createSession(int userId, EnemyDef level, BattleMode mode, Integer storyLevelId,
+                                         ChallengeType challengeType, DungeonDef dungeonDef) {
         Random random = new Random();
         TileBoard board = BoardGenerator.generate(BOARD_ROWS, BOARD_COLS, COLOR_COUNT, random);
         String id = UUID.randomUUID().toString();
-        BattleSession session = new BattleSession(id, userId, level, mode, storyLevelId, challengeType, board, random);
+        BattleSession session = new BattleSession(id, userId, level, mode, storyLevelId, challengeType, dungeonDef, board, random);
         sessions.put(id, session);
         return session;
     }
@@ -90,7 +100,7 @@ public final class BattleService {
     }
 
     public BattleStateView getState(String battleId) {
-        return toView(find(battleId), false, false, 0, 0, 0, false);
+        return toView(find(battleId), false, false, 0, 0, 0, false, false);
     }
 
     public BattleStateView swap(String battleId, int r1, int c1, int r2, int c2) {
@@ -164,8 +174,8 @@ public final class BattleService {
             session.refreshEffect(BuffType.PLAYER_MANA_DOWN, ENEMY_DEBUFF_DURATION_SWAPS);
         }
 
-        resolveOutcome(session);
-        return toView(session, matched, critical, chainLevels, damageDealt, manaGained, enemyCountered);
+        boolean floorCleared = resolveOutcome(session);
+        return toView(session, matched, critical, chainLevels, damageDealt, manaGained, enemyCountered, floorCleared);
     }
 
     public BattleStateView useUltimate(String battleId) {
@@ -176,18 +186,25 @@ public final class BattleService {
         }
         session.mana = 0;
         session.enemyHp = Math.max(0, session.enemyHp - ULTIMATE_DAMAGE);
-        resolveOutcome(session);
-        return toView(session, false, false, 0, ULTIMATE_DAMAGE, 0, false);
+        boolean floorCleared = resolveOutcome(session);
+        return toView(session, false, false, 0, ULTIMATE_DAMAGE, 0, false, floorCleared);
     }
 
-    private void resolveOutcome(BattleSession session) {
-        if (session.status != BattleStatus.ONGOING) return;
+    /** @return true nếu vừa qua 1 tầng dungeon (còn tầng tiếp theo, trận vẫn ONGOING). */
+    private boolean resolveOutcome(BattleSession session) {
+        if (session.status != BattleStatus.ONGOING) return false;
         if (session.enemyHp <= 0) {
+            if (session.hasNextFloor()) {
+                TileBoard nextBoard = BoardGenerator.generate(BOARD_ROWS, BOARD_COLS, COLOR_COUNT, session.random);
+                session.advanceFloor(nextBoard);
+                return true;
+            }
             session.status = BattleStatus.WON;
             grantRewardOnce(session);
         } else if (session.playerHp <= 0) {
             session.status = BattleStatus.LOST;
         }
+        return false;
     }
 
     private void grantRewardOnce(BattleSession session) {
@@ -218,15 +235,18 @@ public final class BattleService {
     }
 
     private BattleStateView toView(BattleSession s, boolean matched, boolean critical, int chainLevels,
-                                    int damageDealt, int manaGained, boolean enemyCountered) {
+                                    int damageDealt, int manaGained, boolean enemyCountered, boolean floorCleared) {
         List<BuffType> activeEffects = s.effects.stream().map(ActiveEffect::type).toList();
+        Integer floorIndex = s.dungeonDef == null ? null : s.floorIndex + 1;
+        Integer totalFloors = s.dungeonDef == null ? null : s.totalFloors();
         return new BattleStateView(
                 s.id, s.mode, s.storyLevelId, s.status, s.board.toArray(),
                 s.playerHp, PLAYER_HP_MAX, s.enemyHp, s.level.enemyHp(),
                 s.mana, MANA_MAX, s.comboCount, activeEffects,
                 matched, critical, chainLevels, damageDealt, manaGained,
                 enemyCountered, s.level.enemyCounterDamage(),
-                s.rewardGranted && s.status == BattleStatus.WON, s.level.rewardExp(), s.level.rewardGold()
+                s.rewardGranted && s.status == BattleStatus.WON, s.level.rewardExp(), s.level.rewardGold(),
+                floorIndex, totalFloors, floorCleared
         );
     }
 }

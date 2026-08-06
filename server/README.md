@@ -299,6 +299,26 @@ cũ.
       Test: `ChallengeFlowTest` (luồng HTTP thật: mặc định làm được ngay,
       chặn loại thử thách sai, chặn làm lại khi còn cooldown, làm lại được
       khi cooldown đã hết).
+- [x] **Giai đoạn 14 — Dungeon (nhiều tầng)**: dùng lại lõi match-3 lần thứ
+      3 (`EnemyDef`). Khác Story/Challenge (1 địch/trận), Dungeon là 1 trận
+      NHIỀU tầng đấu liên tiếp trong CÙNG 1 `battleId` — thắng 1 tầng không
+      kết thúc trận, tự động sinh bàn cờ mới và chuyển sang địch tầng kế
+      (`BattleSession#advanceFloor`). Máu người chơi/hiệu ứng buff/debuff
+      KHÔNG hồi lại giữa các tầng (khó dần); mana/combo/số lượt reset về 0
+      mỗi tầng mới. Thưởng (exp/vàng) chỉ phát khi qua tầng CUỐI — bỏ giữa
+      chừng (thua) không mất gì thêm ngoài lượt chơi.
+      - `DungeonCatalog` (tĩnh, MVP 2 dungeon x 3 tầng).
+      - `POST /api/battle/dungeon/start` {userId, dungeonId},
+        `GET /api/battle/dungeon/list`.
+      - `swap`/`ultimate`/`state` dùng CHUNG endpoint với Story/Challenge.
+        Response `BattleStateView` thêm `floorIndex`/`totalFloors` (chỉ có
+        giá trị khi mode DUNGEON) và `floorCleared` (true đúng 1 lần ở
+        swap/ultimate vừa hạ gục tầng hiện tại, còn tầng sau nên KHÔNG
+        chuyển sang WON).
+      Test: `DungeonFlowTest` (qua `BattleService` trực tiếp — dò nước đi
+      khớp thật để đẩy trận qua nhiều tầng, kiểm tầng mới hồi đầy máu địch
+      MỚI chứ không cộng dồn máu tầng cũ, mana/combo reset về 0, thắng đủ
+      tầng cuối mới phát thưởng); `DungeonHttpFlowTest` (nối dây HTTP).
 
 ## Chạy thử
 
