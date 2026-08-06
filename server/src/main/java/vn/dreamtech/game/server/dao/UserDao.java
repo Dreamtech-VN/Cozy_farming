@@ -138,6 +138,14 @@ public final class UserDao {
         }
     }
 
+    public void delete(int userId) throws SQLException {
+        String sql = "DELETE FROM users WHERE id = ?";
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        }
+    }
+
     private static User map(ResultSet rs) throws SQLException {
         return new User(
                 rs.getInt("id"),

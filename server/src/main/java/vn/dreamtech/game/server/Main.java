@@ -13,6 +13,8 @@ import vn.dreamtech.game.server.auth.SocialLoginHandler;
 import vn.dreamtech.game.server.auth.UpgradeGuestHandler;
 import vn.dreamtech.game.server.auth.oauth.AppleTokenVerifier;
 import vn.dreamtech.game.server.auth.oauth.GoogleTokenVerifier;
+import vn.dreamtech.game.server.account.ChangePasswordHandler;
+import vn.dreamtech.game.server.account.DeleteAccountHandler;
 import vn.dreamtech.game.server.character.CharacterHandler;
 import vn.dreamtech.game.server.character.CreateCharacterHandler;
 import vn.dreamtech.game.server.character.UpdateOutfitHandler;
@@ -22,11 +24,17 @@ import vn.dreamtech.game.server.dao.CharacterDao;
 import vn.dreamtech.game.server.dao.ChatMessageDao;
 import vn.dreamtech.game.server.dao.PasswordResetDao;
 import vn.dreamtech.game.server.dao.PresenceDao;
+import vn.dreamtech.game.server.dao.SupportTicketDao;
 import vn.dreamtech.game.server.dao.UserDao;
+import vn.dreamtech.game.server.dao.UserSettingsDao;
 import vn.dreamtech.game.server.db.DataSourceProvider;
 import vn.dreamtech.game.server.lobby.HeartbeatHandler;
 import vn.dreamtech.game.server.lobby.LeaveLobbyHandler;
 import vn.dreamtech.game.server.lobby.LobbyPlayersHandler;
+import vn.dreamtech.game.server.settings.GetSettingsHandler;
+import vn.dreamtech.game.server.settings.UpdateSettingsHandler;
+import vn.dreamtech.game.server.support.MyTicketsHandler;
+import vn.dreamtech.game.server.support.ReportHandler;
 
 import javax.sql.DataSource;
 import java.net.InetSocketAddress;
@@ -50,6 +58,8 @@ public final class Main {
         CharacterDao characterDao = new CharacterDao(dataSource);
         PresenceDao presenceDao = new PresenceDao(dataSource);
         ChatMessageDao chatMessageDao = new ChatMessageDao(dataSource);
+        UserSettingsDao settingsDao = new UserSettingsDao(dataSource);
+        SupportTicketDao supportTicketDao = new SupportTicketDao(dataSource);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
         var appleVerifier = new AppleTokenVerifier();
 
@@ -73,6 +83,12 @@ public final class Main {
         server.createContext("/api/lobby/players", new LobbyPlayersHandler(presenceDao, characterDao));
         server.createContext("/api/chat/send", new SendMessageHandler(characterDao, chatMessageDao));
         server.createContext("/api/chat/recent", new RecentMessagesHandler(chatMessageDao));
+        server.createContext("/api/settings", new GetSettingsHandler(settingsDao));
+        server.createContext("/api/settings/update", new UpdateSettingsHandler(settingsDao));
+        server.createContext("/api/account/change-password", new ChangePasswordHandler(userDao));
+        server.createContext("/api/account/delete", new DeleteAccountHandler(userDao));
+        server.createContext("/api/support/report", new ReportHandler(supportTicketDao));
+        server.createContext("/api/support/tickets", new MyTicketsHandler(supportTicketDao));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);
