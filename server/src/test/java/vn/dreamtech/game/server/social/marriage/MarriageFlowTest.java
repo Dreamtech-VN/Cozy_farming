@@ -7,9 +7,14 @@ import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import vn.dreamtech.game.server.dao.DivorceCooldownDao;
 import vn.dreamtech.game.server.dao.FriendshipDao;
+import vn.dreamtech.game.server.dao.LevelDao;
 import vn.dreamtech.game.server.dao.MarriageDao;
 import vn.dreamtech.game.server.dao.MarriageProposalDao;
+import vn.dreamtech.game.server.dao.PresenceDao;
+import vn.dreamtech.game.server.dao.WalletDao;
+import vn.dreamtech.game.server.model.LevelInfo;
 
 import javax.sql.DataSource;
 import java.net.InetSocketAddress;
@@ -24,12 +29,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** Test trọn luồng cầu hôn/kết hôn qua HTTP thật, DB H2 nhúng. */
+/** Test trọn luồng cầu hôn/kết hôn/ly hôn qua HTTP thật, DB H2 nhúng. */
 class MarriageFlowTest {
     private HttpServer server;
     private int port;
     private FriendshipDao friendshipDao;
     private MarriageDao marriageDao;
+    private LevelDao levelDao;
+    private PresenceDao presenceDao;
+    private WalletDao walletDao;
+    private DivorceCooldownDao divorceCooldownDao;
     private final Gson gson = new Gson();
     private final HttpClient http = HttpClient.newHttpClient();
 
@@ -52,15 +61,25 @@ class MarriageFlowTest {
                 )
                 """);
             st.execute("CREATE TABLE marriages (user_id_a INT NOT NULL, user_id_b INT NOT NULL, married_at TIMESTAMP NOT NULL, PRIMARY KEY (user_id_a, user_id_b))");
+            st.execute("CREATE TABLE character_levels (user_id INT NOT NULL PRIMARY KEY, level INT NOT NULL DEFAULT 1, exp INT NOT NULL DEFAULT 0)");
+            st.execute("CREATE TABLE lobby_presence (user_id INT NOT NULL PRIMARY KEY, x INT NOT NULL, y INT NOT NULL, last_seen TIMESTAMP NOT NULL)");
+            st.execute("CREATE TABLE wallets (user_id INT NOT NULL PRIMARY KEY, gold BIGINT NOT NULL DEFAULT 0, diamond BIGINT NOT NULL DEFAULT 0)");
+            st.execute("CREATE TABLE divorce_cooldowns (user_id INT NOT NULL PRIMARY KEY, cooldown_until TIMESTAMP NOT NULL)");
         }
         friendshipDao = new FriendshipDao(dataSource);
         MarriageProposalDao proposalDao = new MarriageProposalDao(dataSource);
         marriageDao = new MarriageDao(dataSource);
+        levelDao = new LevelDao(dataSource);
+        presenceDao = new PresenceDao(dataSource);
+        walletDao = new WalletDao(dataSource);
+        divorceCooldownDao = new DivorceCooldownDao(dataSource);
 
         server = HttpServer.create(new InetSocketAddress(0), 0);
-        server.createContext("/api/marriage/propose", new ProposeHandler(friendshipDao, marriageDao, proposalDao));
+        server.createContext("/api/marriage/propose", new ProposeHandler(friendshipDao, marriageDao, proposalDao,
+                levelDao, presenceDao, walletDao, divorceCooldownDao));
         server.createContext("/api/marriage/respond", new RespondProposalHandler(proposalDao, marriageDao));
         server.createContext("/api/marriage/status", new MarriageStatusHandler(marriageDao));
+        server.createContext("/api/marriage/divorce", new DivorceHandler(marriageDao, divorceCooldownDao));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -84,46 +103,103 @@ class MarriageFlowTest {
         return http.send(req, HttpResponse.BodyHandlers.ofString());
     }
 
+    /** Thiết lập đủ điều kiện cầu hôn CHO CẢ HAI ngoại trừ điều kiện đang test — giữ test tập trung vào 1 nhánh. */
+    private void makeEligible(int userA, int userB) throws Exception {
+        friendshipDao.create(userA, userB, System.currentTimeMillis() - MarriageConstants.MIN_FRIENDSHIP_DURATION_MS - 60_000);
+        friendshipDao.addIntimacy(userA, userB, MarriageConstants.PROPOSAL_THRESHOLD, System.currentTimeMillis());
+        levelDao.save(new LevelInfo(userA, MarriageConstants.MIN_LEVEL, 0));
+        levelDao.save(new LevelInfo(userB, MarriageConstants.MIN_LEVEL, 0));
+        presenceDao.heartbeat(userA, 0, 0, System.currentTimeMillis());
+        presenceDao.heartbeat(userB, 0, 0, System.currentTimeMillis());
+        walletDao.addGold(userA, MarriageConstants.RING_COST_GOLD);
+    }
+
     @Test
     void cannotProposeSelf() throws Exception {
-        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 1));
+        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 1, "gold"));
+        assertEquals(400, res.statusCode());
+    }
+
+    @Test
+    void invalidCurrencyRejected() throws Exception {
+        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 2, "bitcoin"));
         assertEquals(400, res.statusCode());
     }
 
     @Test
     void proposeToNonFriendRejected() throws Exception {
-        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 2));
+        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 2, "gold"));
         assertEquals(404, res.statusCode());
     }
 
     @Test
-    void proposeWithoutEnoughIntimacyRejected() throws Exception {
-        friendshipDao.create(1, 2, System.currentTimeMillis());
-        friendshipDao.addIntimacy(1, 2, 500, System.currentTimeMillis());
-        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 2));
+    void proposeBelowMinLevelRejected() throws Exception {
+        makeEligible(1, 2);
+        levelDao.save(new LevelInfo(1, MarriageConstants.MIN_LEVEL - 1, 0));
+        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 2, "gold"));
         assertEquals(409, res.statusCode());
     }
 
     @Test
-    void respondByWrongUserRejected() throws Exception {
+    void proposeTooSoonAfterFriendingRejected() throws Exception {
+        // kết bạn VỪA XONG (created_at = hiện tại) thay vì đủ 7 ngày như makeEligible()
         friendshipDao.create(1, 2, System.currentTimeMillis());
-        friendshipDao.addIntimacy(1, 2, 1000, System.currentTimeMillis());
-        var propose = post("/api/marriage/propose", new ProposeHandler.Req(1, 2));
+        friendshipDao.addIntimacy(1, 2, MarriageConstants.PROPOSAL_THRESHOLD, System.currentTimeMillis());
+        levelDao.save(new LevelInfo(1, MarriageConstants.MIN_LEVEL, 0));
+        levelDao.save(new LevelInfo(2, MarriageConstants.MIN_LEVEL, 0));
+        presenceDao.heartbeat(1, 0, 0, System.currentTimeMillis());
+        presenceDao.heartbeat(2, 0, 0, System.currentTimeMillis());
+        walletDao.addGold(1, MarriageConstants.RING_COST_GOLD);
+
+        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 2, "gold"));
+        assertEquals(409, res.statusCode());
+    }
+
+    @Test
+    void proposeWithoutEnoughIntimacyRejected() throws Exception {
+        friendshipDao.create(1, 2, System.currentTimeMillis() - MarriageConstants.MIN_FRIENDSHIP_DURATION_MS - 60_000);
+        friendshipDao.addIntimacy(1, 2, 500, System.currentTimeMillis());
+        levelDao.save(new LevelInfo(1, MarriageConstants.MIN_LEVEL, 0));
+        levelDao.save(new LevelInfo(2, MarriageConstants.MIN_LEVEL, 0));
+        presenceDao.heartbeat(1, 0, 0, System.currentTimeMillis());
+        presenceDao.heartbeat(2, 0, 0, System.currentTimeMillis());
+        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 2, "gold"));
+        assertEquals(409, res.statusCode());
+    }
+
+    @Test
+    void proposeWhilePartnerOfflineRejected() throws Exception {
+        makeEligible(1, 2);
+        presenceDao.remove(2);
+        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 2, "gold"));
+        assertEquals(409, res.statusCode());
+    }
+
+    @Test
+    void proposeWithoutEnoughGoldRejected() throws Exception {
+        makeEligible(1, 2);
+        // makeEligible chỉ cấp đúng đủ gold, thử tiêu hết trước rồi cầu hôn lại
+        walletDao.spendGold(1, MarriageConstants.RING_COST_GOLD);
+        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 2, "gold"));
+        assertEquals(402, res.statusCode());
+    }
+
+    @Test
+    void respondByWrongUserRejected() throws Exception {
+        makeEligible(1, 2);
+        var propose = post("/api/marriage/propose", new ProposeHandler.Req(1, 2, "gold"));
         long proposalId = gson.fromJson(propose.body(), JsonObject.class).get("id").getAsLong();
-        // người cầu hôn không được tự chấp nhận lời cầu hôn của chính mình
         var res = post("/api/marriage/respond", new RespondProposalHandler.Req(proposalId, 1, true));
         assertEquals(403, res.statusCode());
     }
 
     @Test
-    void fullCycle_proposeSpendsRingCostThenAcceptCreatesMarriage() throws Exception {
-        friendshipDao.create(1, 2, System.currentTimeMillis());
-        friendshipDao.addIntimacy(1, 2, 1000, System.currentTimeMillis());
+    void fullCycle_proposeSpendsGoldThenAcceptCreatesMarriageThenDivorce() throws Exception {
+        makeEligible(1, 2);
 
-        var propose = post("/api/marriage/propose", new ProposeHandler.Req(1, 2));
+        var propose = post("/api/marriage/propose", new ProposeHandler.Req(1, 2, "gold"));
         assertEquals(201, propose.statusCode());
-        // mua nhẫn trừ 200 điểm -> còn 800
-        assertEquals(1000 - MarriageConstants.RING_COST, friendshipDao.find(1, 2).orElseThrow().intimacyPoints());
+        assertEquals(0, walletDao.find(1).gold());
         long proposalId = gson.fromJson(propose.body(), JsonObject.class).get("id").getAsLong();
 
         var statusBefore = get("/api/marriage/status?userId=1");
@@ -136,31 +212,44 @@ class MarriageFlowTest {
         JsonObject afterBody = gson.fromJson(statusAfter.body(), JsonObject.class);
         assertTrue(afterBody.get("married").getAsBoolean());
         assertEquals(2, afterBody.get("spouseUserId").getAsInt());
-        assertTrue(marriageDao.isMarried(2));
+
+        // ly hôn -> hết hôn nhân, cả hai vào cooldown, không cưới lại được ngay
+        var divorce = post("/api/marriage/divorce", new DivorceHandler.Req(1));
+        assertEquals(200, divorce.statusCode());
+        assertFalse(marriageDao.isMarried(1));
+        assertTrue(divorceCooldownDao.isInCooldown(1, System.currentTimeMillis()));
+        assertTrue(divorceCooldownDao.isInCooldown(2, System.currentTimeMillis()));
+
+        walletDao.addGold(1, MarriageConstants.RING_COST_GOLD);
+        var reproposeTooSoon = post("/api/marriage/propose", new ProposeHandler.Req(1, 2, "gold"));
+        assertEquals(409, reproposeTooSoon.statusCode());
     }
 
     @Test
     void cannotProposeWhenAlreadyMarried() throws Exception {
-        friendshipDao.create(1, 2, System.currentTimeMillis());
-        friendshipDao.addIntimacy(1, 2, 1000, System.currentTimeMillis());
+        makeEligible(1, 2);
         marriageDao.create(1, 2, System.currentTimeMillis());
 
-        friendshipDao.create(1, 3, System.currentTimeMillis());
-        friendshipDao.addIntimacy(1, 3, 1000, System.currentTimeMillis());
-        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 3));
+        makeEligible(1, 3);
+        var res = post("/api/marriage/propose", new ProposeHandler.Req(1, 3, "gold"));
         assertEquals(409, res.statusCode());
     }
 
     @Test
-    void rejectDeletesProposalWithoutMarriageAndRingCostNotRefunded() throws Exception {
-        friendshipDao.create(1, 2, System.currentTimeMillis());
-        friendshipDao.addIntimacy(1, 2, 1000, System.currentTimeMillis());
-        var propose = post("/api/marriage/propose", new ProposeHandler.Req(1, 2));
+    void divorceWithoutMarriageRejected() throws Exception {
+        var res = post("/api/marriage/divorce", new DivorceHandler.Req(1));
+        assertEquals(404, res.statusCode());
+    }
+
+    @Test
+    void rejectDeletesProposalWithoutMarriageAndGoldNotRefunded() throws Exception {
+        makeEligible(1, 2);
+        var propose = post("/api/marriage/propose", new ProposeHandler.Req(1, 2, "gold"));
         long proposalId = gson.fromJson(propose.body(), JsonObject.class).get("id").getAsLong();
 
         var reject = post("/api/marriage/respond", new RespondProposalHandler.Req(proposalId, 2, false));
         assertEquals(200, reject.statusCode());
         assertFalse(marriageDao.isMarried(1));
-        assertEquals(1000 - MarriageConstants.RING_COST, friendshipDao.find(1, 2).orElseThrow().intimacyPoints());
+        assertEquals(0, walletDao.find(1).gold());
     }
 }

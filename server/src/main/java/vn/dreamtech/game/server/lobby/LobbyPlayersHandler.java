@@ -12,12 +12,11 @@ import java.sql.SQLException;
 
 /**
  * GET /api/lobby/players — danh sách người chơi ĐANG hoạt động trong sảnh
- * (heartbeat trong {@value #ACTIVE_WINDOW_MS} ms gần nhất), kèm thông tin
- * nhân vật để client vẽ được (tên/giới tính/trang phục) + vị trí hiện tại.
+ * (heartbeat trong {@value PresenceDao#ONLINE_WINDOW_MS} ms gần nhất), kèm
+ * thông tin nhân vật để client vẽ được (tên/giới tính/trang phục) + vị trí
+ * hiện tại.
  */
 public final class LobbyPlayersHandler implements HttpHandler {
-    static final long ACTIVE_WINDOW_MS = 15_000;
-
     private final PresenceDao presenceDao;
     private final CharacterDao characterDao;
 
@@ -36,7 +35,7 @@ public final class LobbyPlayersHandler implements HttpHandler {
             return;
         }
         try {
-            var active = presenceDao.listActive(System.currentTimeMillis(), ACTIVE_WINDOW_MS);
+            var active = presenceDao.listActive(System.currentTimeMillis(), PresenceDao.ONLINE_WINDOW_MS);
             var views = active.stream()
                     .map(this::toView)
                     .filter(v -> v != null)

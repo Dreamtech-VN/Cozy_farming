@@ -6,5 +6,5 @@ package vn.dreamtech.game.server.model;
  * intimacyPoints}) gắn liền với tình bạn — chỉ bạn bè mới tích được thân
  * mật, mất bạn thì mất luôn điểm.
  */
-public record Friendship(int userIdA, int userIdB, int intimacyPoints, Long lastGiftAt) {
+public record Friendship(int userIdA, int userIdB, int intimacyPoints, Long lastGiftAt, long createdAt) {
 }
