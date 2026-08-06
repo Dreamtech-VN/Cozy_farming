@@ -27,6 +27,7 @@ import vn.dreamtech.cozyfarming.server.farm.HarvestHandler;
 import vn.dreamtech.cozyfarming.server.farm.PlantHandler;
 import vn.dreamtech.cozyfarming.server.farm.TillHandler;
 import vn.dreamtech.cozyfarming.server.farm.WaterHandler;
+import vn.dreamtech.cozyfarming.server.fishing.CastHandler;
 import vn.dreamtech.cozyfarming.server.fishpond.FeedFishHandler;
 import vn.dreamtech.cozyfarming.server.fishpond.NetFishHandler;
 import vn.dreamtech.cozyfarming.server.fishpond.PondHandler;
@@ -100,6 +101,7 @@ public final class Main {
         server.createContext("/api/cooking/start", new StartCookHandler(cookingStateDao, farmStoreDao));
         server.createContext("/api/cooking/collect", new CollectCookHandler(cookingStateDao, farmStoreDao));
         server.createContext("/api/cooking/cancel", new CancelCookHandler(cookingStateDao, farmStoreDao));
+        server.createContext("/api/fishing/cast", new CastHandler(bagDao, walletDao));
         server.setExecutor(null);
         server.start();
         log.info("Cozy Farming server đang chạy ở cổng {}", port);
