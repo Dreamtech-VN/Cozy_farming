@@ -48,9 +48,25 @@ cũ.
       khách giữ nguyên user id rồi đăng nhập được bằng mật khẩu; đăng nhập
       mạng xã hội tạo mới rồi vào lại đúng tài khoản; liên kết mạng xã hội
       vào tài khoản thường rồi bị chặn khi gắn trùng cho tài khoản khác).
-- [ ] Các giai đoạn sau: tạo nhân vật (giới tính/tên/trang phục), sảnh, chat,
-      cài đặt trong game (graphics/audio/controls/gameplay/notifications/
-      language/privacy & social/account/support/about).
+- [x] **Giai đoạn 3 — tạo nhân vật**: 1 user 1 nhân vật (bảng `characters`,
+      PK trên `user_id`). Trang phục chỉ 3 ô cơ bản (tóc/áo/quần) — CHƯA có
+      bảng vật phẩm thật cho game mới này, id trang phục tạm là số nguyên tự
+      do, TODO ràng buộc theo catalog thật khi có hệ vật phẩm.
+      - `POST /api/character/create` {userId, name, gender, hairId, topId,
+        bottomId} — tên 2-20 ký tự, giới tính 0/1, chặn nếu user đã có nhân
+        vật (409) hoặc tên trùng người khác (409, kiểm tra toàn server chứ
+        không riêng theo user), 404 nếu user không tồn tại.
+      - `GET /api/character?userId=` — 404 nếu chưa tạo (client dựa vào đó
+        để biết đưa sang màn tạo nhân vật hay vào thẳng sảnh).
+      - `POST /api/character/outfit` {userId, hairId, topId, bottomId} — đổi
+        trang phục sau khi đã tạo, 404 nếu chưa có nhân vật.
+      Test: `CharacterDaoTest` (đơn vị); `CharacterFlowTest` (luồng HTTP
+      thật: chưa tạo trả 404, user không tồn tại bị chặn, tên/giới tính
+      không hợp lệ bị chặn, tạo 2 lần bị chặn, tên trùng người khác bị chặn,
+      đổi trang phục sau khi tạo).
+- [ ] Các giai đoạn sau: sảnh, chat, cài đặt trong game
+      (graphics/audio/controls/gameplay/notifications/language/privacy &
+      social/account/support/about).
 
 ## Chạy thử
 
