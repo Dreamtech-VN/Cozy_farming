@@ -47,6 +47,9 @@ import vn.dreamtech.game.server.dao.PlayerCosmeticDao;
 import vn.dreamtech.game.server.dao.PresenceDao;
 import vn.dreamtech.game.server.dao.FriendRequestDao;
 import vn.dreamtech.game.server.dao.FriendshipDao;
+import vn.dreamtech.game.server.dao.GuildBossAttemptDao;
+import vn.dreamtech.game.server.dao.GuildBossContributionDao;
+import vn.dreamtech.game.server.dao.GuildBossCycleDao;
 import vn.dreamtech.game.server.dao.GuildDao;
 import vn.dreamtech.game.server.dao.GuildMemberDao;
 import vn.dreamtech.game.server.dao.LevelDao;
@@ -68,6 +71,11 @@ import vn.dreamtech.game.server.guild.KickMemberHandler;
 import vn.dreamtech.game.server.guild.LeaveGuildHandler;
 import vn.dreamtech.game.server.guild.MyGuildHandler;
 import vn.dreamtech.game.server.guild.TransferLeaderHandler;
+import vn.dreamtech.game.server.guild.boss.AttackHandler;
+import vn.dreamtech.game.server.guild.boss.AttackStatusHandler;
+import vn.dreamtech.game.server.guild.boss.BossStatusHandler;
+import vn.dreamtech.game.server.guild.boss.GuildBossService;
+import vn.dreamtech.game.server.guild.boss.ReportBossResultHandler;
 import vn.dreamtech.game.server.level.AddExpHandler;
 import vn.dreamtech.game.server.level.GetLevelHandler;
 import vn.dreamtech.game.server.lobby.HeartbeatHandler;
@@ -126,8 +134,13 @@ public final class Main {
         ChallengeAttemptDao challengeAttemptDao = new ChallengeAttemptDao(dataSource);
         GuildDao guildDao = new GuildDao(dataSource);
         GuildMemberDao guildMemberDao = new GuildMemberDao(dataSource);
+        GuildBossCycleDao guildBossCycleDao = new GuildBossCycleDao(dataSource);
+        GuildBossAttemptDao guildBossAttemptDao = new GuildBossAttemptDao(dataSource);
+        GuildBossContributionDao guildBossContributionDao = new GuildBossContributionDao(dataSource);
         BattleService battleService = new BattleService(levelDao, walletDao, challengeAttemptDao);
         GuildService guildService = new GuildService(guildDao, guildMemberDao, characterDao, walletDao);
+        GuildBossService guildBossService = new GuildBossService(guildMemberDao, guildBossCycleDao, guildBossAttemptDao,
+                guildBossContributionDao, battleService, levelDao, walletDao);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
         var appleVerifier = new AppleTokenVerifier();
 
@@ -198,6 +211,10 @@ public final class Main {
         server.createContext("/api/guild/list", new GuildListHandler(guildService));
         server.createContext("/api/guild/info", new GuildInfoHandler(guildService));
         server.createContext("/api/guild/my", new MyGuildHandler(guildService));
+        server.createContext("/api/guild/boss/attack", new AttackHandler(guildBossService));
+        server.createContext("/api/guild/boss/report", new ReportBossResultHandler(guildBossService));
+        server.createContext("/api/guild/boss/status", new BossStatusHandler(guildBossService));
+        server.createContext("/api/guild/boss/attack-status", new AttackStatusHandler(guildBossService));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);

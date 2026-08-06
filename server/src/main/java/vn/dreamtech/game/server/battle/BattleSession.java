@@ -31,6 +31,7 @@ public final class BattleSession {
     int mana = 0;
     int comboCount = 0;
     int swapCount = 0;
+    int totalDamageDealt = 0; // cộng dồn suốt trận — Guild Boss dùng để đồng bộ về HP chung của guild
     BattleStatus status = BattleStatus.ONGOING;
     boolean rewardGranted = false;
     List<ActiveEffect> effects = new ArrayList<>();
