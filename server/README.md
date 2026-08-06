@@ -83,7 +83,23 @@ cũ.
       khỏi danh sách); `LobbyFlowTest` (luồng HTTP thật: chưa có nhân vật bị
       chặn, sảnh trống mặc định, heartbeat hiện đúng tên+vị trí, thoát gỡ
       khỏi danh sách ngay).
-- [ ] Các giai đoạn sau: chat, cài đặt trong game
+- [x] **Giai đoạn 5 — chat**: 1 kênh chat sảnh chung (`chat_messages`, mọi
+      người thấy chung), poll bằng REST giống cơ chế sảnh giai đoạn 4 — client
+      giữ `id` tin nhắn cuối đã thấy, gọi lại `sinceId` đó để lấy tin mới,
+      KHÔNG dùng mốc thời gian (tránh lệch giờ máy giữa client/server).
+      - `POST /api/chat/send` {userId, text} — bắt buộc đã tạo nhân vật (404
+        nếu chưa), tên hiện trong chat lấy từ TÊN NHÂN VẬT chứ không phải
+        username tài khoản. Chặn nội dung rỗng/quá 500 ký tự.
+      - `GET /api/chat/recent?sinceId=&limit=` — tin nhắn có `id > sinceId`,
+        cũ nhất trước, mặc định 50 tin/lần, tối đa 200.
+      - `sender_name` lưu tại thời điểm gửi (denormalize) — lịch sử chat hiện
+        đúng tên lúc gửi, không đổi ngược nếu người chơi đổi tên nhân vật
+        sau này.
+      Test: `ChatMessageDaoTest` (đơn vị, gửi/lọc theo sinceId/giới hạn số
+      lượng); `ChatFlowTest` (luồng HTTP thật: chưa có nhân vật bị chặn, nội
+      dung rỗng bị chặn, chat trống mặc định, gửi rồi poll tăng dần không lặp
+      lại tin đã thấy).
+- [ ] Các giai đoạn sau: cài đặt trong game
       (graphics/audio/controls/gameplay/notifications/language/privacy &
       social/account/support/about).
 

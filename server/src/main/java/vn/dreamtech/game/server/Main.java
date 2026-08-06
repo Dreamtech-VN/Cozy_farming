@@ -16,7 +16,10 @@ import vn.dreamtech.game.server.auth.oauth.GoogleTokenVerifier;
 import vn.dreamtech.game.server.character.CharacterHandler;
 import vn.dreamtech.game.server.character.CreateCharacterHandler;
 import vn.dreamtech.game.server.character.UpdateOutfitHandler;
+import vn.dreamtech.game.server.chat.RecentMessagesHandler;
+import vn.dreamtech.game.server.chat.SendMessageHandler;
 import vn.dreamtech.game.server.dao.CharacterDao;
+import vn.dreamtech.game.server.dao.ChatMessageDao;
 import vn.dreamtech.game.server.dao.PasswordResetDao;
 import vn.dreamtech.game.server.dao.PresenceDao;
 import vn.dreamtech.game.server.dao.UserDao;
@@ -46,6 +49,7 @@ public final class Main {
         PasswordResetDao resetDao = new PasswordResetDao(dataSource);
         CharacterDao characterDao = new CharacterDao(dataSource);
         PresenceDao presenceDao = new PresenceDao(dataSource);
+        ChatMessageDao chatMessageDao = new ChatMessageDao(dataSource);
         var googleVerifier = new GoogleTokenVerifier(System.getenv("GOOGLE_CLIENT_ID"));
         var appleVerifier = new AppleTokenVerifier();
 
@@ -67,6 +71,8 @@ public final class Main {
         server.createContext("/api/lobby/heartbeat", new HeartbeatHandler(characterDao, presenceDao));
         server.createContext("/api/lobby/leave", new LeaveLobbyHandler(presenceDao));
         server.createContext("/api/lobby/players", new LobbyPlayersHandler(presenceDao, characterDao));
+        server.createContext("/api/chat/send", new SendMessageHandler(characterDao, chatMessageDao));
+        server.createContext("/api/chat/recent", new RecentMessagesHandler(chatMessageDao));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);
