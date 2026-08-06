@@ -107,8 +107,31 @@ Gson thay json-simple, mysql-connector-j thay bản cũ).
       `BagHandlerTest` (đơn vị); `FarmFlowTest`/`LivestockFlowTest` cập nhật
       xác nhận đúng số hạt giống bị trừ lúc trồng và số thức ăn bị trừ lúc
       cho ăn.
-- [ ] Các giai đoạn sau: ao cá, chat, đơn hàng, tiệm/mua bằng ví... — mỗi
-      module server khớp đúng 1 hệ thống client đã có.
+- [x] **Giai đoạn 9 — ao cá**: `GET /api/fishpond?userId=`,
+      `POST /api/fishpond/{stock,feed,net}` — `FishPondService` chép ĐÚNG
+      công thức trong `src/systems/fishfarm.ts`: cá đói giống hệt ngưỡng vật
+      nuôi trên cạn (chưa từng cho ăn hoặc quá 4 giờ), và "lớn" (`isGrown`)
+      chỉ đúng khi VỪA đủ tuổi VỪA không đói — đủ tuổi mà đói vẫn không vớt
+      được (test riêng `oldEnoughButHungryIsNotGrown` xác nhận đúng nhánh
+      này). `FryCatalog` 3 loại cá giống (`ca_ro`/`ca_chep`/`ca_tram`) chép
+      nguyên từ `FRIES` client — Pack5 không có bảng cá thật (`FishFarm` kế
+      thừa `AnimalDan` trong Lttt gốc, dùng chung pipeline với vật nuôi, không
+      có dữ liệu loài cá riêng), nên giữ nguyên catalog client tự đặt, chỉ
+      port công thức. Bảng MỚI `pond_fish`. Nối thật:
+      - `StockFryHandler` kiểm tra sức chứa ao (`POND_CAP` = 6) rồi trừ xu
+        thật qua `WalletDao`.
+      - `FeedFishHandler` dùng CHUNG item `feed` trong túi đồ với vật nuôi
+        trên cạn (không bịa thức ăn cá riêng, khớp comment gốc trong
+        `fishfarm.ts`).
+      - `NetFishHandler` cộng cá thu được vào CHUNG ngăn `produce` của kho
+        nông trại với id `fish_<loại>` (khớp `addTo('produce', 'fish_'+id, qty)`).
+      Kho nông trại (`farm_store`) và túi đồ (`bag_items`) tiếp tục tách biệt
+      hoàn toàn như giai đoạn 8 — không gộp 2 hệ này lại.
+      Test: `PondFishDaoTest`, `FishPondServiceTest` (đơn vị, có ca đủ tuổi
+      nhưng đói để xác nhận không vớt được), `FishPondFlowTest` (luồng HTTP
+      thật: thả cá trừ xu đúng, cho ăn trừ đúng 1 feed, ao đầy bị chặn).
+- [ ] Các giai đoạn sau: chat, đơn hàng, tiệm/mua bằng ví... — mỗi module
+      server khớp đúng 1 hệ thống client đã có.
 
 ## Chạy thử
 

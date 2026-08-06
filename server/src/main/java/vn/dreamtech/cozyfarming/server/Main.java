@@ -13,6 +13,7 @@ import vn.dreamtech.cozyfarming.server.dao.FarmPlotDao;
 import vn.dreamtech.cozyfarming.server.dao.FarmStoreDao;
 import vn.dreamtech.cozyfarming.server.dao.ItemDao;
 import vn.dreamtech.cozyfarming.server.dao.PasswordResetDao;
+import vn.dreamtech.cozyfarming.server.dao.PondFishDao;
 import vn.dreamtech.cozyfarming.server.dao.UserDao;
 import vn.dreamtech.cozyfarming.server.dao.WalletDao;
 import vn.dreamtech.cozyfarming.server.db.DataSourceProvider;
@@ -21,6 +22,10 @@ import vn.dreamtech.cozyfarming.server.farm.HarvestHandler;
 import vn.dreamtech.cozyfarming.server.farm.PlantHandler;
 import vn.dreamtech.cozyfarming.server.farm.TillHandler;
 import vn.dreamtech.cozyfarming.server.farm.WaterHandler;
+import vn.dreamtech.cozyfarming.server.fishpond.FeedFishHandler;
+import vn.dreamtech.cozyfarming.server.fishpond.NetFishHandler;
+import vn.dreamtech.cozyfarming.server.fishpond.PondHandler;
+import vn.dreamtech.cozyfarming.server.fishpond.StockFryHandler;
 import vn.dreamtech.cozyfarming.server.inventory.BagHandler;
 import vn.dreamtech.cozyfarming.server.inventory.FarmStoreHandler;
 import vn.dreamtech.cozyfarming.server.livestock.AnimalsHandler;
@@ -55,6 +60,7 @@ public final class Main {
         WalletDao walletDao = new WalletDao(dataSource);
         FarmStoreDao farmStoreDao = new FarmStoreDao(dataSource);
         BagDao bagDao = new BagDao(dataSource);
+        PondFishDao pondFishDao = new PondFishDao(dataSource);
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/health", new HealthCheckHandler());
@@ -76,6 +82,10 @@ public final class Main {
         server.createContext("/api/livestock/feed", new FeedAnimalHandler(animalDao, bagDao));
         server.createContext("/api/livestock/collect", new CollectAnimalHandler(animalDao, farmStoreDao));
         server.createContext("/api/livestock/sell", new SellAnimalHandler(animalDao, walletDao));
+        server.createContext("/api/fishpond", new PondHandler(pondFishDao));
+        server.createContext("/api/fishpond/stock", new StockFryHandler(pondFishDao, walletDao));
+        server.createContext("/api/fishpond/feed", new FeedFishHandler(pondFishDao, bagDao));
+        server.createContext("/api/fishpond/net", new NetFishHandler(pondFishDao, farmStoreDao));
         server.setExecutor(null);
         server.start();
         log.info("Cozy Farming server đang chạy ở cổng {}", port);
