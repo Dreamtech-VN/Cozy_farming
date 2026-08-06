@@ -71,6 +71,11 @@ public final class BattleService {
         return toView(session, false, false, 0, 0, 0, false, false);
     }
 
+    public BattleStateView startWorldBoss(int userId, EnemyDef bossFight) {
+        BattleSession session = createSession(userId, bossFight, BattleMode.WORLD_BOSS, null, null, null);
+        return toView(session, false, false, 0, 0, 0, false, false);
+    }
+
     public BattleStateView startChallenge(int userId, ChallengeType type) {
         ChallengeDef def = ChallengeCatalog.find(type);
         try {
