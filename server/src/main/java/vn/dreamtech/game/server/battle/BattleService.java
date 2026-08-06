@@ -1,11 +1,15 @@
 package vn.dreamtech.game.server.battle;
 
+import vn.dreamtech.game.server.battle.challenge.ChallengeCatalog;
+import vn.dreamtech.game.server.battle.challenge.ChallengeDef;
+import vn.dreamtech.game.server.battle.challenge.ChallengeType;
 import vn.dreamtech.game.server.battle.engine.BoardGenerator;
 import vn.dreamtech.game.server.battle.engine.CascadeResolver;
 import vn.dreamtech.game.server.battle.engine.CascadeResult;
 import vn.dreamtech.game.server.battle.engine.ChainStep;
 import vn.dreamtech.game.server.battle.engine.MatchFinder;
 import vn.dreamtech.game.server.battle.engine.TileBoard;
+import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
 import vn.dreamtech.game.server.dao.LevelDao;
 import vn.dreamtech.game.server.dao.WalletDao;
 import vn.dreamtech.game.server.level.LevelService;
@@ -13,6 +17,7 @@ import vn.dreamtech.game.server.level.LevelService;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,21 +33,60 @@ public final class BattleService {
     private final Map<String, BattleSession> sessions = new ConcurrentHashMap<>();
     private final LevelDao levelDao;
     private final WalletDao walletDao;
+    private final ChallengeAttemptDao challengeAttemptDao;
 
-    public BattleService(LevelDao levelDao, WalletDao walletDao) {
+    public BattleService(LevelDao levelDao, WalletDao walletDao, ChallengeAttemptDao challengeAttemptDao) {
         this.levelDao = levelDao;
         this.walletDao = walletDao;
+        this.challengeAttemptDao = challengeAttemptDao;
     }
 
     public BattleStateView startStory(int userId, int levelId) {
         StoryLevelDef level = StoryLevelCatalog.find(levelId)
                 .orElseThrow(() -> new BattleException(404, "Không tìm thấy màn chơi"));
+        BattleSession session = createSession(userId, level, BattleMode.STORY, levelId, null);
+        return toView(session, false, false, 0, 0, 0, false);
+    }
+
+    public BattleStateView startChallenge(int userId, ChallengeType type) {
+        ChallengeDef def = ChallengeCatalog.find(type);
+        try {
+            Optional<Long> lastCompleted = challengeAttemptDao.findLastCompletedAt(userId, type);
+            if (lastCompleted.isPresent()) {
+                long elapsed = System.currentTimeMillis() - lastCompleted.get();
+                if (elapsed < type.cooldownMs) {
+                    long remaining = type.cooldownMs - elapsed;
+                    throw new BattleException(429, "Chưa hết thời gian chờ, còn " + remaining + " ms");
+                }
+            }
+        } catch (SQLException e) {
+            throw new BattleException(500, "Lỗi kiểm tra thời gian chờ: " + e.getMessage());
+        }
+        BattleSession session = createSession(userId, def, type == ChallengeType.DAILY ? BattleMode.DAILY : BattleMode.WEEKLY, null, type);
+        return toView(session, false, false, 0, 0, 0, false);
+    }
+
+    private BattleSession createSession(int userId, EnemyDef level, BattleMode mode, Integer storyLevelId, ChallengeType challengeType) {
         Random random = new Random();
         TileBoard board = BoardGenerator.generate(BOARD_ROWS, BOARD_COLS, COLOR_COUNT, random);
         String id = UUID.randomUUID().toString();
-        BattleSession session = new BattleSession(id, userId, level, board, random);
+        BattleSession session = new BattleSession(id, userId, level, mode, storyLevelId, challengeType, board, random);
         sessions.put(id, session);
-        return toView(session, false, false, 0, 0, 0, false);
+        return session;
+    }
+
+    public ChallengeStatusView challengeStatus(int userId, ChallengeType type) {
+        try {
+            Optional<Long> lastCompleted = challengeAttemptDao.findLastCompletedAt(userId, type);
+            if (lastCompleted.isEmpty()) {
+                return new ChallengeStatusView(type, true, 0);
+            }
+            long elapsed = System.currentTimeMillis() - lastCompleted.get();
+            long remaining = Math.max(0, type.cooldownMs - elapsed);
+            return new ChallengeStatusView(type, remaining == 0, remaining);
+        } catch (SQLException e) {
+            throw new BattleException(500, "Lỗi kiểm tra thời gian chờ: " + e.getMessage());
+        }
     }
 
     public BattleStateView getState(String battleId) {
@@ -153,6 +197,9 @@ public final class BattleService {
             var levelInfo = levelDao.find(session.userId);
             levelDao.save(LevelService.addExp(levelInfo, session.level.rewardExp()));
             walletDao.addGold(session.userId, session.level.rewardGold());
+            if (session.challengeType != null) {
+                challengeAttemptDao.recordCompletion(session.userId, session.challengeType, System.currentTimeMillis());
+            }
         } catch (SQLException e) {
             throw new BattleException(500, "Lỗi phát thưởng: " + e.getMessage());
         }
@@ -174,7 +221,7 @@ public final class BattleService {
                                     int damageDealt, int manaGained, boolean enemyCountered) {
         List<BuffType> activeEffects = s.effects.stream().map(ActiveEffect::type).toList();
         return new BattleStateView(
-                s.id, s.level.id(), s.status, s.board.toArray(),
+                s.id, s.mode, s.storyLevelId, s.status, s.board.toArray(),
                 s.playerHp, PLAYER_HP_MAX, s.enemyHp, s.level.enemyHp(),
                 s.mana, MANA_MAX, s.comboCount, activeEffects,
                 matched, critical, chainLevels, damageDealt, manaGained,
