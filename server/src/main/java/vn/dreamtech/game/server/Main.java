@@ -22,6 +22,8 @@ import vn.dreamtech.game.server.battle.SwapHandler;
 import vn.dreamtech.game.server.battle.UltimateHandler;
 import vn.dreamtech.game.server.battle.challenge.ChallengeStatusHandler;
 import vn.dreamtech.game.server.battle.challenge.StartChallengeHandler;
+import vn.dreamtech.game.server.battle.dungeon.DungeonListHandler;
+import vn.dreamtech.game.server.battle.dungeon.StartDungeonHandler;
 import vn.dreamtech.game.server.account.DeleteAccountHandler;
 import vn.dreamtech.game.server.character.CharacterHandler;
 import vn.dreamtech.game.server.character.CosmeticCatalogHandler;
@@ -164,6 +166,8 @@ public final class Main {
         server.createContext("/api/battle/state", new BattleStateHandler(battleService));
         server.createContext("/api/battle/challenge/start", new StartChallengeHandler(battleService));
         server.createContext("/api/battle/challenge/status", new ChallengeStatusHandler(battleService));
+        server.createContext("/api/battle/dungeon/list", new DungeonListHandler());
+        server.createContext("/api/battle/dungeon/start", new StartDungeonHandler(battleService));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);

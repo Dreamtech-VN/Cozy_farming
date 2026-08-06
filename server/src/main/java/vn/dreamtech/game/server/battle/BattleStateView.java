@@ -25,6 +25,9 @@ public record BattleStateView(
         int enemyCounterDamage,
         boolean rewardGranted,
         int rewardExp,
-        int rewardGold
+        int rewardGold,
+        Integer floorIndex,
+        Integer totalFloors,
+        boolean floorCleared
 ) {
 }
