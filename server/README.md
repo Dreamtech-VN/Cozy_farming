@@ -178,6 +178,34 @@ cũ.
       trừ đúng tiền nhẫn rồi chấp nhận tạo hôn nhân, đã kết hôn rồi không cầu
       hôn người khác được, từ chối không tạo hôn nhân và không hoàn tiền
       nhẫn).
+- [x] **Giai đoạn 9 — level/exp + ví vàng/kim cương (nền tảng)**: Người dùng
+      đưa ra bản thiết kế chi tiết cho hệ kết hôn (yêu cầu level 20-30+, chi
+      phí bằng vàng/kim cương, ly hôn + cooldown...) — nhưng game chưa có hệ
+      level hay ví tiền nào cả, nên làm 2 hệ NỀN này trước khi nâng cấp hệ
+      kết hôn (giai đoạn 10).
+      - `character_levels` (bảng RIÊNG với `characters`, không đụng bảng cũ)
+        — `GET /api/level?userId=`, `POST /api/level/add-exp` {userId, amount}.
+        Đường cong exp tự đặt (`level * 100` exp lên level kế) — game mới
+        không có gốc thật để đối chiếu. ⚠️ CHƯA có hệ chiến đấu/nhiệm vụ thật
+        để cộng exp — `add-exp` là HOOK sẵn cho các hệ đó gọi vào sau.
+      - `wallets` (vàng/kim cương) — `GET /api/wallet?userId=`,
+        `POST /api/wallet/add` {userId, gold?, diamond?}. Người chơi mới
+        KHÔNG được cấp sẵn tiền (khác dự án nông trại cũ có `STARTING_COINS`)
+        vì chưa có nguồn kiếm tiền nào để cân bằng số khởi điểm hợp lý.
+        ⚠️ CHƯA có shop/hệ kiếm tiền thật — `add` là HOOK tương tự.
+      Test: `LevelServiceTest` (đơn vị, công thức lên level kể cả lên nhiều
+      level 1 lần cộng exp), `LevelDaoTest`, `WalletDaoTest` (đơn vị);
+      `LevelFlowTest`, `WalletFlowTest` (luồng HTTP thật).
+- [ ] **Giai đoạn 10 (tiếp theo) — nâng cấp hệ kết hôn theo bản thiết kế**:
+      thêm điều kiện level (≥25) + cả hai đang online (dùng `lobby_presence`
+      sẵn có) vào `ProposeHandler`; đổi chi phí cầu hôn từ trừ điểm thân mật
+      sang trừ vàng/kim cương thật (100.000 Gold HOẶC 500 Kim cương — chưa có
+      hệ vật phẩm nên KHÔNG có "nhẫn cưới" dạng item, chỉ trừ tiền); thêm ly
+      hôn + thời gian chờ trước khi cưới lại. Các phần còn lại của bản thiết
+      kế (chơi trận/nhiệm vụ đôi/thắng trận/sự kiện cặp đôi tăng thân mật,
+      online cùng +1đ/10 phút, couple house/buff tổ đội/bảng xếp hạng/nhiệm
+      vụ hằng ngày cặp đôi) cần hệ chiến đấu/nhiệm vụ/nhà ở/đội nhóm/leaderboard
+      CHƯA XÂY — để giai đoạn sau khi có hệ gốc, không bịa tạm.
 
 ## Chạy thử
 
