@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SupportFlowTest {
     private HttpServer server;
     private int port;
+    private SupportTicketDao dao;
     private final Gson gson = new Gson();
     private final HttpClient http = HttpClient.newHttpClient();
 
@@ -35,15 +36,17 @@ class SupportFlowTest {
             st.execute("""
                 CREATE TABLE support_tickets (
                   id BIGINT AUTO_INCREMENT PRIMARY KEY, user_id INT NOT NULL, category VARCHAR(20) NOT NULL,
-                  message VARCHAR(1000) NOT NULL, created_at TIMESTAMP NOT NULL
+                  message VARCHAR(1000) NOT NULL, created_at TIMESTAMP NOT NULL, resolved BOOLEAN NOT NULL DEFAULT FALSE
                 )
                 """);
         }
-        SupportTicketDao dao = new SupportTicketDao(dataSource);
+        dao = new SupportTicketDao(dataSource);
 
         server = HttpServer.create(new InetSocketAddress(0), 0);
         server.createContext("/api/support/report", new ReportHandler(dao));
         server.createContext("/api/support/tickets", new MyTicketsHandler(dao));
+        server.createContext("/api/admin/support/tickets", new AdminListTicketsHandler(dao));
+        server.createContext("/api/admin/support/resolve", new AdminResolveTicketHandler(dao));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -90,5 +93,43 @@ class SupportFlowTest {
         JsonArray arr = gson.fromJson(mine.body(), JsonArray.class);
         assertEquals(1, arr.size());
         assertEquals("bug", arr.get(0).getAsJsonObject().get("category").getAsString());
+    }
+
+    @Test
+    void newTicketStartsUnresolved() throws Exception {
+        post("/api/support/report", new ReportHandler.Req(1, "bug", "cây không lớn"));
+        var ticket = dao.findByUser(1).get(0);
+        assertEquals(false, ticket.resolved());
+    }
+
+    @Test
+    void resolveMarksResolved() throws Exception {
+        var ticket = dao.create(1, "bug", "cây không lớn", System.currentTimeMillis());
+        assertEquals(true, dao.resolve(ticket.id()));
+        assertEquals(true, dao.findByUser(1).get(0).resolved());
+    }
+
+    @Test
+    void resolveUnknownTicketReturnsFalse() throws Exception {
+        assertEquals(false, dao.resolve(999));
+    }
+
+    @Test
+    void findAllUnresolvedOnlyExcludesResolved() throws Exception {
+        var t1 = dao.create(1, "bug", "a", System.currentTimeMillis());
+        dao.create(2, "contact", "b", System.currentTimeMillis());
+        dao.resolve(t1.id());
+
+        assertEquals(1, dao.findAll(true).size());
+        assertEquals(2, dao.findAll(false).size());
+    }
+
+    @Test
+    void adminEndpointsRequireAdminToken() throws Exception {
+        var list = get("/api/admin/support/tickets");
+        assertEquals(503, list.statusCode());
+
+        var resolve = post("/api/admin/support/resolve", new AdminResolveTicketHandler.Req(1));
+        assertEquals(503, resolve.statusCode());
     }
 }

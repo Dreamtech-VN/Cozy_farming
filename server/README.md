@@ -709,6 +709,21 @@ cũ.
       là hội trưởng + từ chối guild không tồn tại; `adminKick` đuổi được cả
       hội trưởng + từ chối đuổi sai guild; endpoint HTTP đòi hỏi
       `ADMIN_TOKEN` giống các endpoint admin khác).
+- [x] **Giai đoạn 30 — admin xử lý ticket hỗ trợ**: `SupportTicketDao`
+      trước đây có ghi rõ trong Javadoc "chưa có màn admin, xem trực tiếp
+      DB" (giai đoạn 4) — giờ có màn quản trị thật.
+      - Thêm cột MỚI `resolved` (mặc định FALSE lúc tạo) vào bảng
+        `support_tickets` — `SupportTicket` record thêm field
+        `resolved`.
+      - `GET /api/admin/support/tickets?unresolvedOnly=true` — xem TOÀN BỘ
+        ticket (khác `/api/support/tickets` chỉ xem ticket của chính
+        mình), lọc bớt ticket đã xử lý nếu muốn. `POST
+        /api/admin/support/resolve` {ticketId} — đánh dấu đã xử lý,
+        404 nếu ticket không tồn tại.
+      Test: `SupportFlowTest` thêm 5 test (ticket mới mặc định chưa xử lý,
+      resolve đánh dấu đúng, resolve ticket không tồn tại trả về false,
+      `findAll` lọc đúng theo `unresolvedOnly`, endpoint admin đòi hỏi
+      `ADMIN_TOKEN`).
 
 ## Chạy thử
 
