@@ -88,6 +88,7 @@ class GuildWarHttpFlowTest {
         server.createContext("/api/guild/war/report", new ReportWarResultHandler(guildWarService));
         server.createContext("/api/guild/war/status", new WarStatusHandler(guildWarService));
         server.createContext("/api/guild/war/my", new MyWarHandler(guildWarService));
+        server.createContext("/api/admin/guild/war/force-end", new AdminForceEndHandler(guildWarService));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -162,5 +163,18 @@ class GuildWarHttpFlowTest {
 
         var my = get("/api/guild/war/my?userId=" + leader);
         assertEquals(200, my.statusCode());
+    }
+
+    @Test
+    void adminForceEndRequiresAdminToken() throws Exception {
+        int leader = newPlayer("Leader2", 20_000);
+        var guild = guildService.create(leader, "Sói Đêm", "SD", null);
+        int targetLeader = newPlayer("TargetLeader2", 20_000);
+        var targetGuild = guildService.create(targetLeader, "Địch2", "DC2", null);
+        var declare = post("/api/guild/war/declare", new DeclareWarHandler.Req(leader, targetGuild.id()));
+        JsonObject war = gson.fromJson(declare.body(), JsonObject.class);
+
+        var res = post("/api/admin/guild/war/force-end", new AdminForceEndHandler.Req(war.get("warId").getAsString()));
+        assertEquals(503, res.statusCode());
     }
 }

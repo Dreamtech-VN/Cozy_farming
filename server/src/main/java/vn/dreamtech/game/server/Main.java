@@ -133,6 +133,7 @@ import vn.dreamtech.game.server.guild.boss.AttackHandler;
 import vn.dreamtech.game.server.guild.boss.AttackStatusHandler;
 import vn.dreamtech.game.server.guild.boss.BossStatusHandler;
 import vn.dreamtech.game.server.guild.boss.GuildBossService;
+import vn.dreamtech.game.server.guild.war.AdminForceEndHandler;
 import vn.dreamtech.game.server.guild.war.DeclareWarHandler;
 import vn.dreamtech.game.server.guild.war.GuildWarService;
 import vn.dreamtech.game.server.guild.war.MyWarHandler;
@@ -345,6 +346,7 @@ public final class Main {
         server.createContext("/api/guild/war/report", new ReportWarResultHandler(guildWarService));
         server.createContext("/api/guild/war/status", new vn.dreamtech.game.server.guild.war.WarStatusHandler(guildWarService));
         server.createContext("/api/guild/war/my", new MyWarHandler(guildWarService));
+        server.createContext("/api/admin/guild/war/force-end", new AdminForceEndHandler(guildWarService));
         server.createContext("/api/world-boss/attack", new vn.dreamtech.game.server.worldboss.AttackHandler(worldBossService));
         server.createContext("/api/world-boss/report", new vn.dreamtech.game.server.worldboss.ReportBossResultHandler(worldBossService));
         server.createContext("/api/world-boss/status", new StatusHandler(worldBossService));
