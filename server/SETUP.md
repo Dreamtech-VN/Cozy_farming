@@ -96,6 +96,7 @@ trong code, để tránh lộ mật khẩu khi đưa code lên GitHub):
 | `SERVER_PORT` | `8080` | Cổng HTTP server lắng nghe |
 | `GOOGLE_CLIENT_ID` | (rỗng — đăng nhập Google báo lỗi) | OAuth client ID thật từ Google Cloud Console, cần cho `/api/auth/social/google` và `/api/auth/link/google` |
 | `APPLE_CLIENT_ID` | (rỗng — đăng nhập Apple báo lỗi) | Services ID thật đăng ký với Apple, cần cho `/api/auth/social/apple` và `/api/auth/link/apple` |
+| `ADMIN_TOKEN` | (rỗng — mọi endpoint `/api/admin/*` trả 503) | Token bí mật để gọi các endpoint quản trị (`/api/admin/*`) — gửi kèm header `X-Admin-Token`. Tự đặt 1 chuỗi ngẫu nhiên đủ dài, không dùng chung với mật khẩu khác |
 
 Nếu MySQL cài local với user `root` không mật khẩu ở cổng mặc định
 3306, KHÔNG CẦN đặt gì thêm — cứ chạy thẳng theo bước 5. Nếu khác (mật

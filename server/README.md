@@ -597,6 +597,72 @@ cũ.
         thật, không đổi hành vi production) — kiểm đủ: verify đúng token
         hợp lệ, từ chối sai `aud`/sai `iss`/hết hạn/ký bằng khoá sai/`kid`
         lạ/thiếu cấu hình `APPLE_CLIENT_ID`/token sai định dạng.
+- [x] **Giai đoạn 27 — giftcode, hộp thư, bảng sự kiện, admin quản trị**:
+      4 tính năng gắn liền nhau, xây quanh 1 "kho item" DÙNG CHUNG duy nhất
+      (`items`, admin quản lý) — mọi nguồn phần thưởng (giftcode/thư/sự
+      kiện) chỉ khai báo `{itemId, quantity}` trỏ vào kho này thay vì định
+      nghĩa lại phần thưởng ở từng nơi, và CHỈ CÓ 1 chỗ thật sự cấp phát
+      (`RewardGrantService`) — tránh lặp logic cấp thưởng ở nhiều nơi.
+      - **Kho item** (`item/`, DAO `ItemDao`): mỗi item có `category`
+        (GOLD/DIAMOND/EXP/COSMETIC/MATERIAL) quyết định cách cấp khi claim —
+        GOLD/DIAMOND/EXP cấp thẳng vào ví/exp (dùng lại `WalletDao`/
+        `LevelDao`/`LevelService` có sẵn), COSMETIC cấp qua `refId` (trỏ
+        vào `CosmeticCatalog` có sẵn từ giai đoạn 3), MATERIAL cấp vào kho
+        đồ chung MỚI `player_items` (chưa có công dụng cụ thể — dành cho
+        chế tạo/nhiệm vụ sau này). `GET /api/items/catalog` (public, để
+        client hiện tên/loại phần thưởng); admin CRUD qua
+        `/api/admin/items/{create,update,delete}`.
+      - **Hộp thư** (`mail/`, DAO `MailDao`/`MailTemplateDao`/
+        `MailBroadcastReceiptDao`): NGUỒN DUY NHẤT để nhận thưởng — giftcode
+        và admin gửi thư chỉ TẠO thư (`MailService#sendToUser`), còn cấp
+        phát thật chỉ xảy ra khi user bấm nhận (`POST /api/mail/claim`,
+        gọi `RewardGrantService`, chặn nhận 2 lần/thư + thư hết hạn). Mail
+        admin gửi TOÀN SERVER (`broadcast`) KHÔNG tạo 1 dòng cho từng user
+        ngay lúc gửi (không biết hết ai sẽ chơi sau này) — chỉ tạo
+        `mail_templates`, rồi "vật chất hoá" LAZY thành thư riêng cho từng
+        user ở lần đầu họ mở hộp thư (`MailService#list`, giống cách chu kỳ
+        Guild Boss tự resolve lazy, KHÔNG dùng cron), đánh dấu đã nhận qua
+        `mail_broadcast_receipts` để không tạo trùng. `GET /api/mail/list?userId=`,
+        `POST /api/mail/read` (đọc không nhận thưởng), `POST /api/mail/claim`.
+      - **Giftcode** (`giftcode/`, DAO `GiftcodeDao`/`GiftcodeRedemptionDao`):
+        đổi code KHÔNG cấp thưởng ngay mà tạo 1 thư (khớp yêu cầu "tất cả
+        đều xem thư") — `POST /api/giftcode/redeem` {userId, code}. 2 giới
+        hạn ĐỘC LẬP nhau: `maxUses` tổng của cả server (null = không giới
+        hạn) và mỗi user chỉ đổi 1 LẦN/code (`giftcode_redemptions`, PK
+        (user_id, code)). Admin CRUD qua `/api/admin/giftcode/
+        {create,update,delete,list}` (list KHÔNG public — lộ danh sách code
+        thật thì ai cũng đổi được).
+      - **Bảng sự kiện** (`event/`, DAO `EventBoardDao`): CHỈ hiển thị
+        thông tin (tên/mô tả/thời gian) qua `GET /api/events/board`
+        (public, chỉ trả sự kiện active và chưa kết thúc) — KHÔNG tự cấp
+        thưởng (tách bạch "thông báo" khỏi "phát thưởng"; muốn phát thưởng
+        sự kiện thì admin gửi thư quảng bá riêng qua
+        `POST /api/admin/mail/broadcast`, 1 sự kiện có thể có nhiều đợt
+        phát thưởng khác nhau). Admin CRUD qua
+        `/api/admin/events/{create,update,delete,list}`.
+      - **Admin** (`admin/`): MVP xác thực bằng 1 shared-secret qua header
+        `X-Admin-Token`, so khớp với biến môi trường `ADMIN_TOKEN` (so sánh
+        thời gian hằng số tránh timing attack dò token) — CHƯA có hệ tài
+        khoản admin/phân quyền thật (RBAC), TODO khi cần nhiều admin với
+        quyền khác nhau. CHƯA đặt `ADMIN_TOKEN` thì MỌI request admin bị từ
+        chối (503, an toàn theo mặc định — không phải "mở hết nếu quên cấu
+        hình"). Phạm vi admin ở giai đoạn này CHỈ quản lý 4 hệ thống MỚI
+        vừa xây (kho item, giftcode, thư quảng bá, sự kiện) — TODO mở rộng
+        CRUD admin sang các catalog khác đã có sẵn (Story/Dungeon/Tower,
+        guild,...) khi cần.
+      Test: `ItemDaoTest`, `PlayerItemDaoTest`, `MailDaoTest`,
+      `MailTemplateDaoTest`, `MailBroadcastReceiptDaoTest`, `GiftcodeDaoTest`,
+      `GiftcodeRedemptionDaoTest`, `EventBoardDaoTest` (đơn vị);
+      `RewardGrantServiceTest` (cấp đúng theo từng category, từ chối item
+      không tồn tại/số lượng ≤0); `MailServiceTest` (claim cấp đúng thưởng +
+      chặn claim trùng/claim hộ người khác/claim thư hết hạn, mail quảng bá
+      vật chất hoá đúng 1 lần/user); `GiftcodeServiceTest` (đổi code tạo thư
+      chứ không cấp thẳng, chặn đổi trùng/hết lượt/hết hạn/code tắt/code đã
+      xoá); `EventBoardServiceTest`; `AdminAuthTest` (nối dây HTTP thật —
+      thiếu header/sai token/chưa cấu hình `ADMIN_TOKEN`/token đúng);
+      `GiftcodeMailHttpFlowTest` (nối dây HTTP thật — đổi giftcode xong vào
+      thư nhận thưởng đúng, đổi trùng code bị chặn, catalog/bảng sự kiện
+      public đọc được).
 
 ## Chạy thử
 
