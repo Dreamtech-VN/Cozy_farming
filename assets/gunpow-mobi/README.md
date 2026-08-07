@@ -41,24 +41,26 @@ client/              nguyên trạng như trong gói update
     resources/       dat
     resources_vn/    dat/
 client-png/          768 ảnh PNG bung ra từ .pkm (xem bên dưới)
+client-lua/          2 010 file mã nguồn Lua đã giải mã (xem bên dưới)
 MANIFEST.tsv         danh sách đầy đủ: đường dẫn, kích thước, SHA-256
 ```
 
 `client/` giữ nguyên cây thư mục gốc — đây là đường dẫn game dùng để load asset
-lúc chạy, đổi đi thì file mất ngữ cảnh. `client-png/` soi gương đúng cấu trúc
-đó, chỉ khác phần mở rộng.
+lúc chạy, đổi đi thì file mất ngữ cảnh. `client-png/` và `client-lua/` soi
+gương đúng cấu trúc đó, chỉ khác phần mở rộng.
 
-Tổng cộng **5 258 file / 126.0 MB**, file lớn nhất 5.25 MB.
+Tổng cộng **7 268 file / 175.6 MB**, file lớn nhất 5.25 MB.
 
 | Loại | Số file | Dung lượng | |
 |---|---:|---:|---|
-| `.dat` (data client iOS) | 2 003 | 39.34 MB | `client/` |
+| `.dat` (Lua mã hoá, iOS) | 2 003 | 39.34 MB | `client/` |
 | `.pkm` (texture ETC1) | 1 536 | 36.33 MB | `client/` |
-| `.xml` | 904 | 8.99 MB | `client/` |
-| `.lua` (logic + bảng số liệu) | 6 | 10.29 MB | `client/` |
+| `.xml` (bố cục giao diện) | 904 | 8.99 MB | `client/` |
+| `.lua` (mã hoá, Android) | 6 | 10.29 MB | `client/` |
 | `.json` (armature/Spine) | 18 | 0.88 MB | `client/` |
 | `.atlas`, `.plist`, còn lại | 23 | 0.05 MB | `client/` |
 | `.png` (bung từ `.pkm`) | 768 | 30.15 MB | `client-png/` |
+| `.lua` + `.xml` (đã giải mã) | 2 010 | 49.60 MB | `client-lua/` |
 
 ## Ảnh: `.pkm` và bản PNG
 
@@ -92,6 +94,40 @@ img.save('x.png')
 Lưu ý PNG ở đây **không** phải bản gốc trước khi nén — ETC1 nén mất dữ liệu, nên
 đây là ảnh đã qua nén rồi giải nén. Dùng để xem và tham khảo, không dùng để
 chỉnh sửa rồi nén lại.
+
+## Mã Lua: cách giải mã
+
+Toàn bộ mã nguồn Lua đều bị mã hoá — cả `.dat` phía iOS lẫn `.lua` phía Android
+(file `.lua` trong `client/` mở ra là dữ liệu nhị phân, không phải mã nguồn).
+
+Cách mã hoá là **XOR với khoá lặp 10 byte**, cộng thêm **13 byte đuôi** gắn sau
+khi mã hoá — 12 byte cuối là dấu hiệu cố định `7b5b59440b0c0b5759445d7d`, giống
+nhau ở mọi file. Không phải một khoá dùng chung: có **29 khoá khác nhau**, mỗi
+khoá dùng cho một nhóm file.
+
+Khoá được khôi phục bằng phân tích tần suất — độ dài khoá suy từ index of
+coincidence (đỉnh rõ ở 10), rồi từng byte khoá chọn theo mô hình tần suất byte
+dựng từ các file đã giải đúng. Mỗi kết quả được xác minh bằng `luac5.1 -p`:
+
+```python
+TRAILER = bytes.fromhex('7b5b59440b0c0b5759445d7d')
+body = raw[:-13] if raw.endswith(TRAILER) else raw
+plain = bytes(c ^ key[i % 10] for i, c in enumerate(body))
+```
+
+Danh sách 29 khoá nằm trong `keys.json`.
+
+Kết quả: **2 009 file Lua qua được `luac5.1 -p` (0 lỗi)** và 1 file XML
+(`ddd_bw.xml` — cấu hình vũ khí) parse được bằng trình đọc XML.
+
+Vài điểm khi đọc:
+
+- Chú thích trong mã là **tiếng Trung**; 2 006 file dùng UTF-8, riêng 3 file
+  (`utils`, `DownloadManager`, `WndKidServantData`) dùng **GBK**.
+- Chuỗi hiển thị đã bản địa hoá tiếng Việt — xem `LocalStrings.lua`.
+- Bảng số liệu game nằm ở `LocalData*.lua` (kỹ năng, phụ bản, trang bị…), được
+  xuất ra từ file Excel, đường dẫn gốc còn nguyên ở dòng đầu mỗi file.
+- Bản Android và iOS là **cùng một mã nguồn**, chỉ khác khoá mã hoá.
 
 ## Không đưa vào repo
 
