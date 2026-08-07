@@ -808,6 +808,19 @@ cũ.
         cách `WalletDao.adjustGold`/`adjustDiamond` đã làm); `resetStats`
         = true thì đưa wins/losses/draws về 0. Cần header `X-Admin-Token`.
       Test: `PvpHttpFlowTest` thêm 1 test (endpoint đòi hỏi `ADMIN_TOKEN`).
+- [x] **Giai đoạn 35 — admin force-reset trùm thế giới**: chu kỳ World
+      Boss chỉ tự phát hiện hết hạn khi có request tiếp theo (không cron,
+      khớp thiết kế `GuildBossCycleDao`), nên nếu chu kỳ bị kẹt (VD: lỗi
+      khiến HP không về đúng trạng thái) thì không có cách nào GM can
+      thiệp trước khi hết hạn tự nhiên (24h).
+      - `WorldBossService.adminForceReset()` (method MỚI) — dùng lại đúng
+        logic tạo chu kỳ mới của `getOrResetCycle` (POOL_HP đầy, mốc thời
+        gian mới) rồi `save` ngay, không đợi hết hạn.
+      - `POST /api/admin/worldboss/reset` — không cần body. Cần header
+        `X-Admin-Token`.
+      Test: `WorldBossServiceTest` thêm 1 test (reset giữa chừng đưa HP về
+      đầy, cho phép người vừa đánh xong đánh lại ngay); `WorldBossHttpFlowTest`
+      thêm 1 test (endpoint đòi hỏi `ADMIN_TOKEN`).
 
 ## Chạy thử
 

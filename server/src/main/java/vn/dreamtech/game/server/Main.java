@@ -343,6 +343,7 @@ public final class Main {
         server.createContext("/api/world-boss/status", new StatusHandler(worldBossService));
         server.createContext("/api/world-boss/attack-status", new vn.dreamtech.game.server.worldboss.AttackStatusHandler(worldBossService));
         server.createContext("/api/world-boss/leaderboard", new vn.dreamtech.game.server.worldboss.LeaderboardHandler(worldBossService));
+        server.createContext("/api/admin/worldboss/reset", new vn.dreamtech.game.server.worldboss.AdminForceResetHandler(worldBossService));
         server.createContext("/api/pvp/queue/join", new JoinQueueHandler(pvpService));
         server.createContext("/api/pvp/queue/leave", new LeaveQueueHandler(pvpService));
         server.createContext("/api/pvp/match/start", new StartMatchHandler(pvpService));

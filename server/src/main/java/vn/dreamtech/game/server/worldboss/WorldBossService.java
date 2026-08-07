@@ -153,6 +153,18 @@ public final class WorldBossService {
         }
     }
 
+    /** GM buộc kết thúc chu kỳ hiện tại và bắt đầu chu kỳ mới ngay lập tức (VD: chu kỳ bị kẹt do lỗi). */
+    public WorldBossStatusView adminForceReset() {
+        try {
+            long now = System.currentTimeMillis();
+            WorldBossCycleDao.Cycle fresh = new WorldBossCycleDao.Cycle(POOL_HP, now, now + CYCLE_MS);
+            cycleDao.save(fresh);
+            return new WorldBossStatusView(fresh.remainingHp(), POOL_HP, fresh.cycleStartedAt(), fresh.cycleEndsAt());
+        } catch (SQLException e) {
+            throw new WorldBossException(500, "Lỗi reset chu kỳ trùm thế giới: " + e.getMessage());
+        }
+    }
+
     private WorldBossCycleDao.Cycle getOrResetCycle() throws SQLException {
         Optional<WorldBossCycleDao.Cycle> existing = cycleDao.find();
         long now = System.currentTimeMillis();
