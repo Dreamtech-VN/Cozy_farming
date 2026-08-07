@@ -86,6 +86,7 @@ import vn.dreamtech.game.server.dao.WorldBossContributionDao;
 import vn.dreamtech.game.server.dao.WorldBossCycleDao;
 import vn.dreamtech.game.server.db.DataSourceProvider;
 import vn.dreamtech.game.server.admin.AdminAdjustPvpRankHandler;
+import vn.dreamtech.game.server.admin.AdminResetTowerRecordHandler;
 import vn.dreamtech.game.server.admin.AdminAnnulMarriageHandler;
 import vn.dreamtech.game.server.admin.AdminCancelMarriageProposalHandler;
 import vn.dreamtech.game.server.admin.AdminPvpMatchHistoryHandler;
@@ -387,6 +388,7 @@ public final class Main {
         server.createContext("/api/admin/users/lookup", new AdminLookupUserHandler(userDao, characterDao, walletDao, levelDao, bannedUserDao));
         server.createContext("/api/admin/guild/disband", new AdminDisbandGuildHandler(guildService));
         server.createContext("/api/admin/guild/kick", new AdminKickMemberHandler(guildService));
+        server.createContext("/api/admin/tower/record/reset", new AdminResetTowerRecordHandler(userDao, towerRecordDao));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);

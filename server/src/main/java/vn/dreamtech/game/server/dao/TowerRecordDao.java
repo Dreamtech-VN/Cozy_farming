@@ -51,6 +51,16 @@ public final class TowerRecordDao {
         }
     }
 
+    /** GM reset kỷ lục của 1 user trong 1 tháp về 0 (VD: phát hiện leo tháp gian lận). */
+    public void resetRecord(int userId, int towerId) throws SQLException {
+        String mergeSql = "MERGE INTO tower_records (user_id, tower_id, best_floor) KEY (user_id, tower_id) VALUES (?, ?, 0)";
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(mergeSql)) {
+            ps.setInt(1, userId);
+            ps.setInt(2, towerId);
+            ps.executeUpdate();
+        }
+    }
+
     public List<Record> listByTower(int towerId) throws SQLException {
         String sql = "SELECT user_id, tower_id, best_floor FROM tower_records WHERE tower_id = ? ORDER BY best_floor DESC";
         try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
