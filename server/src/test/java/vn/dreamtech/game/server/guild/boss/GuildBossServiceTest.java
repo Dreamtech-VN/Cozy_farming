@@ -247,6 +247,34 @@ class GuildBossServiceTest {
         }
     }
 
+    @Test
+    void adminForceResetStartsFreshCycleWithFullHp() throws SQLException {
+        int leader = newPlayer("Leader", 20_000);
+        var guild = guildService.create(leader, "Rồng Lửa", "RL", null);
+        BattleStateView view = guildBossService.attack(leader);
+        String battleId = view.battleId();
+
+        int guard = 0;
+        while (guard++ < 2000) {
+            BattleStateView state = battleService.getState(battleId);
+            if (state.status() != BattleStatus.ONGOING) break;
+            int[] swap = findAnyMatchingSwap(state.board());
+            if (swap == null) break;
+            battleService.swap(battleId, swap[0], swap[1], swap[2], swap[3]);
+        }
+        var report = guildBossService.report(leader, battleId);
+        if (report.damageApplied() > 0) {
+            assertEquals(GuildBossConstants.POOL_HP - report.damageApplied(), guildBossService.status(guild.id()).remainingHp());
+        }
+
+        var reset = guildBossService.adminForceReset(guild.id());
+        assertEquals(GuildBossConstants.POOL_HP, reset.remainingHp());
+
+        // chu kỳ mới -> người vừa đánh xong được đánh lại ngay
+        BattleStateView again = guildBossService.attack(leader);
+        assertEquals(BattleStatus.ONGOING, again.status());
+    }
+
     private static int[] findAnyMatchingSwap(int[][] grid) {
         int rows = grid.length, cols = grid[0].length;
         for (int r = 0; r < rows; r++) {

@@ -125,6 +125,7 @@ import vn.dreamtech.game.server.guild.KickMemberHandler;
 import vn.dreamtech.game.server.guild.LeaveGuildHandler;
 import vn.dreamtech.game.server.guild.MyGuildHandler;
 import vn.dreamtech.game.server.guild.TransferLeaderHandler;
+import vn.dreamtech.game.server.guild.boss.AdminForceResetHandler;
 import vn.dreamtech.game.server.guild.boss.AttackHandler;
 import vn.dreamtech.game.server.guild.boss.AttackStatusHandler;
 import vn.dreamtech.game.server.guild.boss.BossStatusHandler;
@@ -333,6 +334,7 @@ public final class Main {
         server.createContext("/api/guild/boss/status", new BossStatusHandler(guildBossService));
         server.createContext("/api/guild/boss/attack-status", new AttackStatusHandler(guildBossService));
         server.createContext("/api/guild/boss/leaderboard", new LeaderboardHandler(guildBossService));
+        server.createContext("/api/admin/guild/boss/reset", new AdminForceResetHandler(guildBossService));
         server.createContext("/api/guild/war/declare", new DeclareWarHandler(guildWarService));
         server.createContext("/api/guild/war/attack", new vn.dreamtech.game.server.guild.war.AttackHandler(guildWarService));
         server.createContext("/api/guild/war/report", new ReportWarResultHandler(guildWarService));

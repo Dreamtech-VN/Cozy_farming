@@ -821,6 +821,16 @@ cũ.
       Test: `WorldBossServiceTest` thêm 1 test (reset giữa chừng đưa HP về
       đầy, cho phép người vừa đánh xong đánh lại ngay); `WorldBossHttpFlowTest`
       thêm 1 test (endpoint đòi hỏi `ADMIN_TOKEN`).
+- [x] **Giai đoạn 36 — admin force-reset trùm guild**: cùng lỗ hổng như
+      trùm thế giới (giai đoạn 35) nhưng cho `GuildBossCycleDao` — mỗi
+      guild có 1 chu kỳ riêng, không cách nào GM can thiệp nếu bị kẹt.
+      - `GuildBossService.adminForceReset(guildId)` (method MỚI) — cùng
+        khuôn với `WorldBossService.adminForceReset`.
+      - `POST /api/admin/guild/boss/reset` {guildId}. Cần header
+        `X-Admin-Token`.
+      Test: `GuildBossServiceTest` thêm 1 test (reset giữa chừng đưa HP về
+      đầy, cho phép đánh lại ngay); `GuildBossHttpFlowTest` thêm 1 test
+      (endpoint đòi hỏi `ADMIN_TOKEN`).
 
 ## Chạy thử
 
