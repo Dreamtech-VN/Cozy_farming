@@ -1,0 +1,42 @@
+<skeleton name="boss_bullet_0133" frameRate="60" version="2.2">
+  <armatures>
+    <armature name="boss_bullet_0133">
+      <b name="图层 3" x="-2" y="4" kX="0" kY="180" cX="1" cY="1" pX="124" pY="64" z="0">
+        <d name="FX_01" pX="0" pY="0"/>
+        <d name="FX_02" pX="0" pY="0"/>
+        <d name="FX_03" pX="0" pY="0"/>
+        <d name="FX_04" pX="0" pY="0"/>
+        <d name="FX_05" pX="0" pY="0"/>
+        <d name="FX_06" pX="0" pY="0"/>
+        <d name="FX_07" pX="0" pY="0"/>
+        <d name="FX_08" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="boss_bullet_0133">
+      <mov name="0" dr="15" to="0" drTW="15" lp="0" twE="NaN">
+        <b name="图层 3" sc="1" dl="0">
+          <f x="-2" y="4" cocos2d_x="122" cocos2d_y="-60" kX="0" kY="180" cX="1" cY="1" pX="124" pY="64" z="0" dI="0" dr="2"/>
+          <f x="-2" y="4" cocos2d_x="122" cocos2d_y="-60" kX="0" kY="180" cX="1" cY="1" pX="124" pY="64" z="0" dI="1" dr="2"/>
+          <f x="-2" y="4" cocos2d_x="122" cocos2d_y="-60" kX="0" kY="180" cX="1" cY="1" pX="124" pY="64" z="0" dI="2" dr="2"/>
+          <f x="-2" y="4" cocos2d_x="122" cocos2d_y="-60" kX="0" kY="180" cX="1" cY="1" pX="124" pY="64" z="0" dI="3" dr="2"/>
+          <f x="-2" y="4" cocos2d_x="122" cocos2d_y="-60" kX="0" kY="180" cX="1" cY="1" pX="124" pY="64" z="0" dI="4" dr="2"/>
+          <f x="-2" y="4" cocos2d_x="122" cocos2d_y="-60" kX="0" kY="180" cX="1" cY="1" pX="124" pY="64" z="0" dI="5" dr="2"/>
+          <f x="-2" y="4" cocos2d_x="122" cocos2d_y="-60" kX="0" kY="180" cX="1" cY="1" pX="124" pY="64" z="0" dI="6" dr="2"/>
+          <f x="-2" y="4" cocos2d_x="122" cocos2d_y="-60" kX="0" kY="180" cX="1" cY="1" pX="124" pY="64" z="0" dI="7" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="boss_bullet_0133" width="512" height="1024">
+    <SubTexture name="FX_08" width="248" height="128" cocos2d_pX="0" cocos2d_pY="0" x="250" y="0"/>
+    <SubTexture name="FX_07" width="248" height="128" cocos2d_pX="0" cocos2d_pY="0" x="0" y="390"/>
+    <SubTexture name="FX_06" width="248" height="128" cocos2d_pX="0" cocos2d_pY="0" x="250" y="130"/>
+    <SubTexture name="FX_05" width="248" height="128" cocos2d_pX="0" cocos2d_pY="0" x="250" y="390"/>
+    <SubTexture name="FX_04" width="248" height="128" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+    <SubTexture name="FX_03" width="248" height="128" cocos2d_pX="0" cocos2d_pY="0" x="0" y="130"/>
+    <SubTexture name="FX_02" width="248" height="128" cocos2d_pX="0" cocos2d_pY="0" x="0" y="260"/>
+    <SubTexture name="FX_01" width="248" height="128" cocos2d_pX="0" cocos2d_pY="0" x="250" y="260"/>
+  </TextureAtlas>
+</skeleton>

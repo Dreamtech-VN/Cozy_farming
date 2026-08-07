@@ -1,0 +1,27 @@
+<skeleton name="bullet_22" frameRate="60" version="2.2">
+  <armatures>
+    <armature name="bullet_22">
+      <b name="bullet_22" x="0" y="0" kX="0" kY="0" cX="1" cY="1" pX="60" pY="60" z="0">
+        <d name="bullet_parts-bullet_22_1" pX="0" pY="0"/>
+        <d name="bullet_parts-bullet_22_2" pX="21.9" pY="21.85"/>
+        <d name="bullet_parts-bullet_22_3" pX="16.2" pY="16.2"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="bullet_22">
+      <mov name="0" dr="6" to="0" drTW="6" lp="1" twE="NaN">
+        <b name="bullet_22" sc="1" dl="0">
+          <f x="0" y="0" cocos2d_x="-60" cocos2d_y="-60" kX="0" kY="0" cX="1" cY="1" pX="60" pY="60" z="0" dI="0" dr="2"/>
+          <f x="0" y="0" cocos2d_x="-59.95" cocos2d_y="-60" kX="0" kY="0" cX="1" cY="1" pX="59.95" pY="60" z="0" dI="1" dr="2"/>
+          <f x="0" y="0" cocos2d_x="-60" cocos2d_y="-59.95" kX="0" kY="0" cX="1" cY="1" pX="60" pY="59.95" z="0" dI="2" dr="2"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="bullet_22" width="256" height="512">
+    <SubTexture name="bullet_parts-bullet_22_3" width="153" height="153" cocos2d_pX="16.2" cocos2d_pY="16.2" x="0" y="166"/>
+    <SubTexture name="bullet_parts-bullet_22_2" width="164" height="164" cocos2d_pX="21.9" cocos2d_pY="21.85" x="0" y="0"/>
+    <SubTexture name="bullet_parts-bullet_22_1" width="120" height="120" cocos2d_pX="0" cocos2d_pY="0" x="0" y="321"/>
+  </TextureAtlas>
+</skeleton>

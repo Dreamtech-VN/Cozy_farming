@@ -1,0 +1,64 @@
+{
+"skeleton": { "hash": "atwlNMYN8PHndbuNJuT4oRDK+qk", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "FX_140attack", "parent": "root" }
+],
+"slots": [
+	{ "name": "FX_140attack", "bone": "FX_140attack" }
+],
+"skins": {
+	"default": {
+		"FX_140attack": {
+			"shouji/00016": { "width": 232, "height": 245 },
+			"shouji/00017": { "width": 232, "height": 245 },
+			"shouji/00018": { "width": 232, "height": 245 },
+			"shouji/00019": { "width": 232, "height": 245 },
+			"shouji/00020": { "width": 232, "height": 245 }
+		}
+	}
+},
+"animations": {
+	"shoot_1": {
+		"slots": {
+			"FX_140attack": {
+				"attachment": [
+					{ "time": 0, "name": "shouji/00016" },
+					{ "time": 0.0666, "name": "shouji/00017" },
+					{ "time": 0.1333, "name": "shouji/00018" },
+					{ "time": 0.2, "name": "shouji/00019" },
+					{ "time": 0.2666, "name": "shouji/00020" },
+					{ "time": 0.3333, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"root": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.2, "angle": 0, "curve": "stepped" },
+					{ "time": 0.4, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.4, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.2, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.4, "x": 1, "y": 1 }
+				]
+			},
+			"FX_140attack": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 41.54 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.3, "y": 1.3 }
+				]
+			}
+		}
+	}
+}
+}

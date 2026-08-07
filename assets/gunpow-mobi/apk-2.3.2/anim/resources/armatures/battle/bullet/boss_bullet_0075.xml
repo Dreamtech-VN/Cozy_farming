@@ -1,0 +1,33 @@
+<skeleton name="boss_bullet_0075" frameRate="60" version="2.2">
+  <armatures>
+    <armature name="boss_bullet_0075">
+      <b name="boss_bullet_0075" x="-11.5" y="-4" kX="0" kY="180" cX="1.1" cY="1.1" pX="53.5" pY="16" z="0">
+        <d name="bullet_parts-boss_bullet_0075_s1" pX="0" pY="0"/>
+        <d name="bullet_parts-boss_bullet_0075_s2" pX="0" pY="0"/>
+        <d name="bullet_parts-boss_bullet_0075_s3" pX="0" pY="0"/>
+        <d name="bullet_parts-boss_bullet_0075_s4" pX="0" pY="0"/>
+        <d name="bullet_parts-boss_bullet_0075_s5" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="boss_bullet_0075">
+      <mov name="0" dr="10" to="0" drTW="10" lp="0" twE="NaN">
+        <b name="boss_bullet_0075" sc="1" dl="0">
+          <f x="-11.5" y="-4" cocos2d_x="47.35" cocos2d_y="-21.6" kX="0" kY="180" cX="1.1" cY="1.1" pX="53.5" pY="16" z="0" dI="0" dr="2"/>
+          <f x="-11.5" y="-4" cocos2d_x="47.35" cocos2d_y="-21.6" kX="0" kY="180" cX="1.1" cY="1.1" pX="53.5" pY="16" z="0" dI="1" dr="2"/>
+          <f x="-11.5" y="-4" cocos2d_x="47.35" cocos2d_y="-21.6" kX="0" kY="180" cX="1.1" cY="1.1" pX="53.5" pY="16" z="0" dI="2" dr="2"/>
+          <f x="-11.5" y="-4" cocos2d_x="47.35" cocos2d_y="-21.6" kX="0" kY="180" cX="1.1" cY="1.1" pX="53.5" pY="16" z="0" dI="3" dr="2"/>
+          <f x="-11.5" y="-4" cocos2d_x="47.35" cocos2d_y="-21.6" kX="0" kY="180" cX="1.1" cY="1.1" pX="53.5" pY="16" z="0" dI="4" dr="2"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="boss_bullet_0075" width="256" height="128">
+    <SubTexture name="bullet_parts-boss_bullet_0075_s5" width="107" height="32" cocos2d_pX="0" cocos2d_pY="0" x="0" y="68"/>
+    <SubTexture name="bullet_parts-boss_bullet_0075_s4" width="107" height="32" cocos2d_pX="0" cocos2d_pY="0" x="109" y="34"/>
+    <SubTexture name="bullet_parts-boss_bullet_0075_s3" width="107" height="32" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+    <SubTexture name="bullet_parts-boss_bullet_0075_s2" width="107" height="32" cocos2d_pX="0" cocos2d_pY="0" x="109" y="0"/>
+    <SubTexture name="bullet_parts-boss_bullet_0075_s1" width="107" height="32" cocos2d_pX="0" cocos2d_pY="0" x="0" y="34"/>
+  </TextureAtlas>
+</skeleton>

@@ -1,0 +1,36 @@
+<skeleton name="bullet_32" frameRate="24" version="2.2">
+  <armatures>
+    <armature name="bullet_32">
+      <b name="bullet_32" x="0" y="0" kX="45" kY="45" cX="1" cY="1" pX="45.5" pY="45.5" z="0">
+        <d name="bullet_32_00" pX="0" pY="0"/>
+      </b>
+      <b name="bullet_faguang" x="33.2" y="0.35" kX="45" kY="45" cX="1" cY="1" pX="22.55" pY="22.95" z="1">
+        <d name="bullet_32_faguang_00" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="bullet_32">
+      <mov name="0" dr="9" to="6" drTW="9" lp="1" twE="NaN">
+        <b name="bullet_32" sc="1" dl="0">
+          <f x="0" y="0" cocos2d_x="0" cocos2d_y="-64.35" kX="45" kY="45" cX="1" cY="1" pX="45.5" pY="45.5" z="0" dI="0" dr="9"/>
+        </b>
+        <b name="bullet_faguang" sc="1" dl="0">
+          <f x="33.2" y="0.35" cocos2d_x="33.55" cocos2d_y="-31.8" kX="45" kY="45" cX="1" cY="1" pX="22.55" pY="22.95" z="1" dI="0" twE="0" dr="2"/>
+          <f x="33.15" y="0.35" cocos2d_x="33.5" cocos2d_y="-31.8" kX="45" kY="45" cX="1" cY="1" pX="22.5" pY="23" z="1" dI="0" twE="0" dr="2">
+            <colorTransform a="0" r="0" g="0" b="0" aM="50" rM="100" gM="100" bM="100"/>
+          </f>
+          <f x="33.2" y="0.35" cocos2d_x="33.55" cocos2d_y="-31.8" kX="45" kY="45" cX="1" cY="1" pX="22.55" pY="22.95" z="1" dI="0" twE="0" dr="2"/>
+          <f x="33.15" y="0.35" cocos2d_x="33.5" cocos2d_y="-31.8" kX="45" kY="45" cX="1" cY="1" pX="22.5" pY="23" z="1" dI="0" twE="0" dr="2">
+            <colorTransform a="0" r="0" g="0" b="0" aM="50" rM="100" gM="100" bM="100"/>
+          </f>
+          <f x="33.2" y="0.35" cocos2d_x="33.55" cocos2d_y="-31.8" kX="45" kY="45" cX="1" cY="1" pX="22.55" pY="22.95" z="1" dI="0" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="bullet_32" width="128" height="256">
+    <SubTexture name="bullet_32_faguang_00" width="45" height="46" cocos2d_pX="0" cocos2d_pY="0" x="0" y="93"/>
+    <SubTexture name="bullet_32_00" width="91" height="91" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+  </TextureAtlas>
+</skeleton>

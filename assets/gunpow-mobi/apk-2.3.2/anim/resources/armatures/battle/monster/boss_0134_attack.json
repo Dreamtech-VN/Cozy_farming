@@ -1,0 +1,60 @@
+{
+"skeleton": { "hash": "gRi2M5yJAkFYFo53AWbYzilaG8w", "spine": "2.1.27", "width": 387, "height": 375, "images": "" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "FX", "parent": "root", "scaleX": 3, "scaleY": 3 }
+],
+"slots": [
+	{ "name": "fx1", "bone": "FX", "attachment": "images/boss_0134a_00038" }
+],
+"skins": {
+	"default": {
+		"fx1": {
+			"images/boss_0134a_00022": { "width": 129, "height": 125 },
+			"images/boss_0134a_00023": { "width": 129, "height": 125 },
+			"images/boss_0134a_00024": { "width": 129, "height": 125 },
+			"images/boss_0134a_00025": { "width": 129, "height": 125 },
+			"images/boss_0134a_00026": { "width": 129, "height": 125 },
+			"images/boss_0134a_00027": { "width": 129, "height": 125 },
+			"images/boss_0134a_00028": { "width": 129, "height": 125 },
+			"images/boss_0134a_00029": { "width": 129, "height": 125 },
+			"images/boss_0134a_00030": { "width": 129, "height": 125 },
+			"images/boss_0134a_00031": { "width": 129, "height": 125 },
+			"images/boss_0134a_00032": { "width": 129, "height": 125 },
+			"images/boss_0134a_00033": { "width": 129, "height": 125 },
+			"images/boss_0134a_00034": { "width": 129, "height": 125 },
+			"images/boss_0134a_00035": { "width": 129, "height": 125 },
+			"images/boss_0134a_00036": { "width": 129, "height": 125 },
+			"images/boss_0134a_00037": { "width": 129, "height": 125 },
+			"images/boss_0134a_00038": { "width": 129, "height": 125 }
+		}
+	}
+},
+"animations": {
+	"wait": {
+		"slots": {
+			"fx1": {
+				"attachment": [
+					{ "time": 0, "name": "images/boss_0134a_00022" },
+					{ "time": 0.0333, "name": "images/boss_0134a_00023" },
+					{ "time": 0.0666, "name": "images/boss_0134a_00024" },
+					{ "time": 0.1, "name": "images/boss_0134a_00025" },
+					{ "time": 0.1333, "name": "images/boss_0134a_00026" },
+					{ "time": 0.1666, "name": "images/boss_0134a_00027" },
+					{ "time": 0.2, "name": "images/boss_0134a_00028" },
+					{ "time": 0.2333, "name": "images/boss_0134a_00029" },
+					{ "time": 0.2666, "name": "images/boss_0134a_00030" },
+					{ "time": 0.3, "name": "images/boss_0134a_00031" },
+					{ "time": 0.3333, "name": "images/boss_0134a_00032" },
+					{ "time": 0.3666, "name": "images/boss_0134a_00033" },
+					{ "time": 0.4, "name": "images/boss_0134a_00034" },
+					{ "time": 0.4333, "name": "images/boss_0134a_00035" },
+					{ "time": 0.4666, "name": "images/boss_0134a_00036" },
+					{ "time": 0.5, "name": "images/boss_0134a_00037" },
+					{ "time": 0.5333, "name": "images/boss_0134a_00038" }
+				]
+			}
+		}
+	}
+}
+}

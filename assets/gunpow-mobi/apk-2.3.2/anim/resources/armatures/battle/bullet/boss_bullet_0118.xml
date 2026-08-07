@@ -1,0 +1,33 @@
+<skeleton name="boss_bullet_0118" frameRate="60" version="2.2">
+  <armatures>
+    <armature name="boss_bullet_0118">
+      <b name="jj" x="68" y="68.5" kX="0" kY="0" cX="1" cY="1" pX="68" pY="68.5" z="0">
+        <d name="boss_bullet_0118_o1" pX="0" pY="0"/>
+        <d name="boss_bullet_0118_o2" pX="0" pY="0"/>
+        <d name="boss_bullet_0118_o3" pX="0" pY="0"/>
+        <d name="boss_bullet_0118_o4" pX="0" pY="0"/>
+        <d name="boss_bullet_0118_o5" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="boss_bullet_0118">
+      <mov name="0" dr="9" to="0" drTW="9" lp="0" twE="NaN">
+        <b name="jj" sc="1" dl="0">
+          <f x="68" y="68.5" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="68" pY="68.5" z="0" dI="0" dr="1"/>
+          <f x="68" y="68.5" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="68" pY="68.5" z="0" dI="1" dr="2"/>
+          <f x="68" y="68.5" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="68" pY="68.5" z="0" dI="2" dr="2"/>
+          <f x="68" y="68.5" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="68" pY="68.5" z="0" dI="3" dr="2"/>
+          <f x="68" y="68.5" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="68" pY="68.5" z="0" dI="4" dr="2"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="boss_bullet_0118" width="512" height="512">
+    <SubTexture name="boss_bullet_0118_o5" width="136" height="137" cocos2d_pX="0" cocos2d_pY="0" x="138" y="139"/>
+    <SubTexture name="boss_bullet_0118_o4" width="136" height="137" cocos2d_pX="0" cocos2d_pY="0" x="0" y="139"/>
+    <SubTexture name="boss_bullet_0118_o3" width="136" height="137" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+    <SubTexture name="boss_bullet_0118_o2" width="136" height="137" cocos2d_pX="0" cocos2d_pY="0" x="138" y="0"/>
+    <SubTexture name="boss_bullet_0118_o1" width="136" height="137" cocos2d_pX="0" cocos2d_pY="0" x="276" y="0"/>
+  </TextureAtlas>
+</skeleton>

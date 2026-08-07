@@ -1,0 +1,66 @@
+{
+"skeleton": { "hash": "q77vVEtwhBK55itMJGdGjukqTN8", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "FX_02", "parent": "root" }
+],
+"slots": [
+	{ "name": "FX_02", "bone": "FX_02", "blend": "screen" }
+],
+"skins": {
+	"default": {
+		"FX_02": {
+			"2/00023": { "width": 294, "height": 286 },
+			"2/00024": { "width": 294, "height": 286 },
+			"2/00025": { "width": 294, "height": 286 },
+			"2/00026": { "width": 294, "height": 286 },
+			"2/00027": { "width": 294, "height": 286 },
+			"2/00028": { "width": 294, "height": 286 },
+			"2/00029": { "width": 294, "height": 286 }
+		}
+	}
+},
+"animations": {
+	"die": {},
+	"fly": {},
+	"run": {},
+	"shoot": {
+		"drawOrder": [
+			{ "time": 0.7666 },
+			{ "time": 1.2666 },
+			{ "time": 1.4 }
+		]
+	},
+	"shoot_1": {
+		"slots": {
+			"FX_02": {
+				"attachment": [
+					{ "time": 0, "name": "2/00023" },
+					{ "time": 0.0666, "name": "2/00024" },
+					{ "time": 0.1333, "name": "2/00025" },
+					{ "time": 0.2, "name": "2/00026" },
+					{ "time": 0.2666, "name": "2/00027" },
+					{ "time": 0.3333, "name": "2/00028" },
+					{ "time": 0.4, "name": "2/00029" },
+					{ "time": 0.4666, "name": null }
+				]
+			}
+		}
+	},
+	"shoot_2": {
+		"drawOrder": [
+			{ "time": 0.0333 },
+			{ "time": 0.4333 }
+		]
+	},
+	"shoot_3": {
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 0.1 },
+			{ "time": 0.2333 }
+		]
+	},
+	"wait": {},
+	"wound": {}
+}
+}

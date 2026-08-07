@@ -1,0 +1,42 @@
+<skeleton name="boss_bullet_1007" frameRate="24" version="2.2">
+  <armatures>
+    <armature name="boss_bullet_1007">
+      <b name="boss_bullet_1007" x="0" y="0" kX="0" kY="0" cX="1" cY="1" pX="77" pY="40" z="0">
+        <d name="boss_bullet_1007_01" pX="0" pY="0"/>
+        <d name="boss_bullet_1007_02" pX="0" pY="0"/>
+        <d name="boss_bullet_1007_03" pX="0" pY="0"/>
+        <d name="boss_bullet_1007_04" pX="0" pY="0"/>
+        <d name="boss_bullet_1007_05" pX="0" pY="0"/>
+        <d name="boss_bullet_1007_06" pX="0" pY="0"/>
+        <d name="boss_bullet_1007_07" pX="0" pY="0"/>
+        <d name="boss_bullet_1007_08" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="boss_bullet_1007">
+      <mov name="0" dr="16" to="0" drTW="16" lp="1" twE="NaN">
+        <b name="boss_bullet_1007" sc="1" dl="0">
+          <f x="0" y="0" cocos2d_x="-77" cocos2d_y="-40" kX="0" kY="0" cX="1" cY="1" pX="77" pY="40" z="0" dI="0" dr="2"/>
+          <f x="0" y="0" cocos2d_x="-77" cocos2d_y="-40" kX="0" kY="0" cX="1" cY="1" pX="77" pY="40" z="0" dI="1" dr="2"/>
+          <f x="0" y="0" cocos2d_x="-77" cocos2d_y="-40" kX="0" kY="0" cX="1" cY="1" pX="77" pY="40" z="0" dI="2" dr="2"/>
+          <f x="0" y="0" cocos2d_x="-77" cocos2d_y="-40" kX="0" kY="0" cX="1" cY="1" pX="77" pY="40" z="0" dI="3" dr="2"/>
+          <f x="0" y="0" cocos2d_x="-77" cocos2d_y="-40" kX="0" kY="0" cX="1" cY="1" pX="77" pY="40" z="0" dI="4" dr="2"/>
+          <f x="0" y="0" cocos2d_x="-77" cocos2d_y="-40" kX="0" kY="0" cX="1" cY="1" pX="77" pY="40" z="0" dI="5" dr="2"/>
+          <f x="0" y="0" cocos2d_x="-77" cocos2d_y="-40" kX="0" kY="0" cX="1" cY="1" pX="77" pY="40" z="0" dI="6" dr="2"/>
+          <f x="0" y="0" cocos2d_x="-77" cocos2d_y="-40" kX="0" kY="0" cX="1" cY="1" pX="77" pY="40" z="0" dI="7" dr="2"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="boss_bullet_1007" width="512" height="256">
+    <SubTexture name="boss_bullet_1007_08" width="154" height="80" cocos2d_pX="0" cocos2d_pY="0" x="156" y="0"/>
+    <SubTexture name="boss_bullet_1007_07" width="154" height="80" cocos2d_pX="0" cocos2d_pY="0" x="0" y="164"/>
+    <SubTexture name="boss_bullet_1007_06" width="154" height="80" cocos2d_pX="0" cocos2d_pY="0" x="0" y="82"/>
+    <SubTexture name="boss_bullet_1007_05" width="154" height="80" cocos2d_pX="0" cocos2d_pY="0" x="156" y="164"/>
+    <SubTexture name="boss_bullet_1007_04" width="154" height="80" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+    <SubTexture name="boss_bullet_1007_03" width="154" height="80" cocos2d_pX="0" cocos2d_pY="0" x="312" y="0"/>
+    <SubTexture name="boss_bullet_1007_02" width="154" height="80" cocos2d_pX="0" cocos2d_pY="0" x="156" y="82"/>
+    <SubTexture name="boss_bullet_1007_01" width="154" height="80" cocos2d_pX="0" cocos2d_pY="0" x="312" y="82"/>
+  </TextureAtlas>
+</skeleton>

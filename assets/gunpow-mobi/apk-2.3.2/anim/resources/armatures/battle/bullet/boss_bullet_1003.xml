@@ -1,0 +1,24 @@
+<skeleton name="boss_bullet_1003" frameRate="24" version="2.2">
+  <armatures>
+    <armature name="boss_bullet_1003">
+      <b name="boss_bullet_1003" x="36" y="-63.8" kX="0" kY="0" cX="1.25" cY="1.25" pX="80" pY="75" z="0">
+        <d name="boss_bullet_1003_00" pX="0" pY="0"/>
+        <d name="boss_bullet_1003_01" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="boss_bullet_1003">
+      <mov name="idle0" dr="2" to="0" drTW="10" lp="0" twE="2">
+        <b name="boss_bullet_1003" sc="1" dl="0">
+          <f x="36" y="-63.8" cocos2d_x="-64" cocos2d_y="-157.55" kX="0" kY="0" cX="1.25" cY="1.25" pX="80" pY="75" z="0" dI="0" dr="1"/>
+          <f x="36" y="-63.8" cocos2d_x="-64" cocos2d_y="-157.55" kX="0" kY="0" cX="1.25" cY="1.25" pX="80" pY="75" z="0" dI="1" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="boss_bullet_1003" width="256" height="128">
+    <SubTexture name="boss_bullet_1003_01" width="120" height="120" cocos2d_pX="0" cocos2d_pY="0" x="122" y="0"/>
+    <SubTexture name="boss_bullet_1003_00" width="120" height="120" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+  </TextureAtlas>
+</skeleton>

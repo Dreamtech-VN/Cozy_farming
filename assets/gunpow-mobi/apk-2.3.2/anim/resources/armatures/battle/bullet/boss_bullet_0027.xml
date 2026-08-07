@@ -1,0 +1,22 @@
+<skeleton name="boss_bullet_0027" frameRate="24" version="2.2">
+  <armatures>
+    <armature name="boss_bullet_0027">
+      <b name="boss_bullet_0026" x="6.55" y="15.15" kX="-3.72" kY="-3.72" cX="1" cY="1" pX="5.55" pY="15.5" z="0">
+        <d name="boss_bullet_0027-0000" pX="51.1" pY="22.45"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="boss_bullet_0027">
+      <mov name="0" dr="2" to="6" drTW="10" lp="1" twE="2">
+        <b name="boss_bullet_0026" sc="1" dl="0">
+          <f x="6.55" y="15.15" cocos2d_x="0" cocos2d_y="0" kX="-3.72" kY="-3.72" cX="1" cY="1" pX="5.55" pY="15.5" z="0" dI="0" dr="1"/>
+          <f x="6.55" y="15.15" cocos2d_x="0" cocos2d_y="0" kX="-3.72" kY="-3.72" cX="1" cY="1" pX="5.55" pY="15.5" z="0" dI="0" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="boss_bullet_0027" width="128" height="64">
+    <SubTexture name="boss_bullet_0027-0000" width="103" height="45" cocos2d_pX="51.1" cocos2d_pY="22.45" x="0" y="0"/>
+  </TextureAtlas>
+</skeleton>

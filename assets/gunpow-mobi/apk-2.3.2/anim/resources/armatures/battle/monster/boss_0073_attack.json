@@ -1,0 +1,96 @@
+{
+"skeleton": { "hash": "fN9+mM82QbEebKQfGOq6ocX7ryw", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "FX_attack", "parent": "root" },
+	{ "name": "attack1", "parent": "FX_attack", "scaleX": 1.35, "scaleY": 1.35 }
+],
+"slots": [
+	{ "name": "attack1", "bone": "attack1" }
+],
+"skins": {
+	"default": {
+		"attack1": {
+			"effect/js4_1": { "width": 188, "height": 188 },
+			"effect/js4_2": { "width": 188, "height": 188 },
+			"effect/js4_3": { "width": 188, "height": 188 },
+			"effect/js4_4": { "width": 188, "height": 188 },
+			"effect/js4_5": { "width": 188, "height": 188 },
+			"effect/js4_6": { "width": 188, "height": 188 },
+			"effect/js4_7": { "width": 188, "height": 188 },
+			"effect/js4_8": { "width": 188, "height": 188 },
+			"effect/js4_9": { "width": 188, "height": 188 },
+			"effect/js4_10": { "width": 188, "height": 188 },
+			"effect/js4_11": { "width": 188, "height": 188 },
+			"effect/js4_12": { "width": 188, "height": 188 },
+			"effect/js4_13": { "width": 188, "height": 188 },
+			"effect/js4_14": { "width": 188, "height": 188 },
+			"effect/js4_15": { "width": 188, "height": 188 },
+			"effect/js4_16": { "width": 188, "height": 188 }
+		}
+	}
+},
+"animations": {
+	"attack": {
+		"slots": {
+			"attack1": {
+				"attachment": [
+					{ "time": 0, "name": "effect/js4_1" },
+					{ "time": 0.0666, "name": "effect/js4_1" },
+					{ "time": 0.1333, "name": "effect/js4_2" },
+					{ "time": 0.2, "name": "effect/js4_3" },
+					{ "time": 0.2666, "name": "effect/js4_4" },
+					{ "time": 0.3333, "name": "effect/js4_5" },
+					{ "time": 0.4, "name": "effect/js4_6" },
+					{ "time": 0.4666, "name": "effect/js4_7" },
+					{ "time": 0.5333, "name": "effect/js4_8" },
+					{ "time": 0.6, "name": "effect/js4_9" },
+					{ "time": 0.6666, "name": "effect/js4_10" },
+					{ "time": 0.7333, "name": "effect/js4_11" },
+					{ "time": 0.8, "name": "effect/js4_12" },
+					{ "time": 0.8666, "name": "effect/js4_13" },
+					{ "time": 0.9333, "name": "effect/js4_14" },
+					{ "time": 1, "name": "effect/js4_15" },
+					{ "time": 1.0666, "name": "effect/js4_16" },
+					{ "time": 1.1333, "name": "effect/js4_16" }
+				],
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.0666, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.1, "color": "ffffffff" },
+					{ "time": 1.1666, "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"root": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"attack1": {
+				"scale": [
+					{ "time": 0, "x": 1.851, "y": 1.851 }
+				]
+			},
+			"FX_attack": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			}
+		}
+	}
+}
+}

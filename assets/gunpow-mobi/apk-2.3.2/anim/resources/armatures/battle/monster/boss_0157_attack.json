@@ -1,0 +1,55 @@
+{
+"skeleton": { "hash": "lIKN5LA8IER6zTrb7jGqv1nfpDs", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "FX157", "parent": "root" }
+],
+"slots": [
+	{ "name": "FX157", "bone": "FX157" }
+],
+"skins": {
+	"default": {
+		"FX157": {
+			"shouji/00030": { "width": 305, "height": 288 },
+			"shouji/00031": { "width": 305, "height": 288 },
+			"shouji/00032": { "width": 305, "height": 288 },
+			"shouji/00033": { "width": 305, "height": 288 },
+			"shouji/00034": { "width": 305, "height": 288 },
+			"shouji/00035": { "width": 305, "height": 288 },
+			"shouji/00036": { "width": 305, "height": 288 },
+			"shouji/00037": { "width": 305, "height": 288 },
+			"shouji/00038": { "width": 305, "height": 288 },
+			"shouji/00039": { "width": 305, "height": 288 }
+		}
+	}
+},
+"animations": {
+	"die": {},
+	"fly": {},
+	"run": {},
+	"shoot": {},
+	"shoot_1": {},
+	"shoot_2": {},
+	"shoot_3": {},
+	"wait": {
+		"slots": {
+			"FX157": {
+				"attachment": [
+					{ "time": 0, "name": "shouji/00030" },
+					{ "time": 0.0333, "name": "shouji/00031" },
+					{ "time": 0.0666, "name": "shouji/00032" },
+					{ "time": 0.1, "name": "shouji/00033" },
+					{ "time": 0.1333, "name": "shouji/00034" },
+					{ "time": 0.1666, "name": "shouji/00035" },
+					{ "time": 0.2, "name": "shouji/00036" },
+					{ "time": 0.2333, "name": "shouji/00037" },
+					{ "time": 0.2666, "name": "shouji/00038" },
+					{ "time": 0.3, "name": "shouji/00039" },
+					{ "time": 0.3333, "name": null }
+				]
+			}
+		}
+	},
+	"wound": {}
+}
+}

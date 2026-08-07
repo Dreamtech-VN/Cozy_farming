@@ -1,0 +1,47 @@
+{
+"skeleton": { "hash": "2Uw1oj4VVacipmBlR2NXh0Xe7WA", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "boss_0149_attack", "parent": "root" }
+],
+"slots": [
+	{ "name": "boss_0149_attack", "bone": "boss_0149_attack", "blend": "additive" }
+],
+"skins": {
+	"default": {
+		"boss_0149_attack": {
+			"shouji/00000": { "width": 338, "height": 304 },
+			"shouji/00001": { "width": 338, "height": 304 },
+			"shouji/00002": { "width": 338, "height": 304 },
+			"shouji/00003": { "width": 338, "height": 304 },
+			"shouji/00004": { "width": 338, "height": 304 },
+			"shouji/00005": { "width": 338, "height": 304 },
+			"shouji/00006": { "width": 338, "height": 304 },
+			"shouji/00007": { "width": 338, "height": 304 },
+			"shouji/00008": { "width": 338, "height": 304 },
+			"shouji/00009": { "width": 338, "height": 304 }
+		}
+	}
+},
+"animations": {
+	"shoot_3": {
+		"slots": {
+			"boss_0149_attack": {
+				"attachment": [
+					{ "time": 0, "name": "shouji/00000" },
+					{ "time": 0.0333, "name": "shouji/00001" },
+					{ "time": 0.0666, "name": "shouji/00002" },
+					{ "time": 0.1, "name": "shouji/00003" },
+					{ "time": 0.1333, "name": "shouji/00004" },
+					{ "time": 0.1666, "name": "shouji/00005" },
+					{ "time": 0.2, "name": "shouji/00006" },
+					{ "time": 0.2333, "name": "shouji/00007" },
+					{ "time": 0.2666, "name": "shouji/00008" },
+					{ "time": 0.3, "name": "shouji/00009" },
+					{ "time": 0.3333, "name": null }
+				]
+			}
+		}
+	}
+}
+}

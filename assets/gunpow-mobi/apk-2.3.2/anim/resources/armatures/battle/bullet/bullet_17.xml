@@ -1,0 +1,45 @@
+<skeleton name="bullet_17" frameRate="24" version="2.2">
+ <armatures>
+  <armature name="bullet_17">
+   <b name="bullet_17" x="0" y="0" kX="0" kY="0" cX="1" cY="1" pX="70" pY="50" z="0">
+    <d name="bullet_parts-bullet_17_00" pX="0" pY="0"/>
+    <d name="bullet_parts-bullet_17_01" pX="0" pY="0"/>
+    <d name="bullet_parts-bullet_17_02" pX="0" pY="0"/>
+    <d name="bullet_parts-bullet_17_03" pX="0" pY="0"/>
+    <d name="bullet_parts-bullet_17_04" pX="0" pY="0"/>
+    <d name="bullet_parts-bullet_17_05" pX="0" pY="0"/>
+    <d name="bullet_parts-bullet_17_06" pX="0" pY="0"/>
+    <d name="bullet_parts-bullet_17_07" pX="0" pY="0"/>
+    <d name="bullet_parts-bullet_17_08" pX="0" pY="0"/>
+   </b>
+  </armature>
+ </armatures>
+ <animations>
+  <animation name="bullet_17">
+   <mov name="1" dr="18" to="0" drTW="18" lp="1" twE="NaN">
+    <b name="bullet_17" sc="1" dl="0">
+     <f x="0" y="0" cocos2d_x="-70" cocos2d_y="-50" kX="0" kY="0" cX="1" cY="1" pX="70" pY="50" z="0" dI="0" dr="2"/>
+     <f x="0" y="0" cocos2d_x="-70" cocos2d_y="-50" kX="0" kY="0" cX="1" cY="1" pX="70" pY="50" z="0" dI="1" dr="2"/>
+     <f x="0" y="0" cocos2d_x="-70" cocos2d_y="-50" kX="0" kY="0" cX="1" cY="1" pX="70" pY="50" z="0" dI="2" dr="2"/>
+     <f x="0" y="0" cocos2d_x="-70" cocos2d_y="-50" kX="0" kY="0" cX="1" cY="1" pX="70" pY="50" z="0" dI="3" dr="2"/>
+     <f x="0" y="0" cocos2d_x="-70" cocos2d_y="-50" kX="0" kY="0" cX="1" cY="1" pX="70" pY="50" z="0" dI="4" dr="2"/>
+     <f x="0" y="0" cocos2d_x="-70" cocos2d_y="-50" kX="0" kY="0" cX="1" cY="1" pX="70" pY="50" z="0" dI="5" dr="2"/>
+     <f x="0" y="0" cocos2d_x="-70" cocos2d_y="-50" kX="0" kY="0" cX="1" cY="1" pX="70" pY="50" z="0" dI="6" dr="2"/>
+     <f x="0" y="0" cocos2d_x="-70" cocos2d_y="-50" kX="0" kY="0" cX="1" cY="1" pX="70" pY="50" z="0" dI="7" dr="2"/>
+     <f x="0" y="0" cocos2d_x="-70" cocos2d_y="-50" kX="0" kY="0" cX="1" cY="1" pX="70" pY="50" z="0" dI="8" dr="2"/>
+    </b>
+   </mov>
+  </animation>
+ </animations>
+ <TextureAtlas name="bullet_17" width="512" height="512">
+  <SubTexture name="bullet_parts-bullet_17_08" width="140" height="100" cocos2d_pX="0" cocos2d_pY="0" x="284" y="204"/>
+  <SubTexture name="bullet_parts-bullet_17_07" width="140" height="100" cocos2d_pX="0" cocos2d_pY="0" x="284" y="0"/>
+  <SubTexture name="bullet_parts-bullet_17_06" width="140" height="100" cocos2d_pX="0" cocos2d_pY="0" x="142" y="204"/>
+  <SubTexture name="bullet_parts-bullet_17_05" width="140" height="100" cocos2d_pX="0" cocos2d_pY="0" x="142" y="102"/>
+  <SubTexture name="bullet_parts-bullet_17_04" width="140" height="100" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+  <SubTexture name="bullet_parts-bullet_17_03" width="140" height="100" cocos2d_pX="0" cocos2d_pY="0" x="142" y="0"/>
+  <SubTexture name="bullet_parts-bullet_17_02" width="140" height="100" cocos2d_pX="0" cocos2d_pY="0" x="0" y="102"/>
+  <SubTexture name="bullet_parts-bullet_17_01" width="140" height="100" cocos2d_pX="0" cocos2d_pY="0" x="284" y="102"/>
+  <SubTexture name="bullet_parts-bullet_17_00" width="140" height="100" cocos2d_pX="0" cocos2d_pY="0" x="0" y="204"/>
+ </TextureAtlas>
+</skeleton>

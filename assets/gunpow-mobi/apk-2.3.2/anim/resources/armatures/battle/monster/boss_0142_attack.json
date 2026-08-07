@@ -1,0 +1,97 @@
+{
+"skeleton": { "hash": "HQ2n/ng5/KC2cv2IEgFVbG9LiKE", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "boss_0142_attack", "parent": "root" }
+],
+"slots": [
+	{ "name": "boss_0142_attack", "bone": "boss_0142_attack" }
+],
+"skins": {
+	"default": {
+		"boss_0142_attack": {
+			"souji/00000": { "width": 314, "height": 278 },
+			"souji/00001": { "width": 314, "height": 278 },
+			"souji/00002": { "width": 314, "height": 278 },
+			"souji/00003": { "width": 314, "height": 278 },
+			"souji/00004": { "width": 314, "height": 278 },
+			"souji/00005": { "width": 314, "height": 278 },
+			"souji/00006": { "width": 314, "height": 278 },
+			"souji/00007": { "width": 314, "height": 278 },
+			"souji/00008": { "width": 314, "height": 278 }
+		}
+	}
+},
+"animations": {
+	"die": {
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 0.3666 }
+		]
+	},
+	"fly": {},
+	"run": {},
+	"shoot": {
+		"bones": {
+			"root": {
+				"rotate": [
+					{ "time": 0.4, "angle": 0, "curve": "stepped" },
+					{ "time": 0.8333, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0.4, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.8333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0.4, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.8333, "x": 1, "y": 1 }
+				]
+			}
+		},
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 0.1666 },
+			{ "time": 2 }
+		]
+	},
+	"shoot_1": {
+		"slots": {
+			"boss_0142_attack": {
+				"attachment": [
+					{ "time": 0, "name": "souji/00000" },
+					{ "time": 0.0333, "name": "souji/00001" },
+					{ "time": 0.0666, "name": "souji/00002" },
+					{ "time": 0.1, "name": "souji/00003" },
+					{ "time": 0.1333, "name": "souji/00004" },
+					{ "time": 0.1666, "name": "souji/00005" },
+					{ "time": 0.2, "name": "souji/00006" },
+					{ "time": 0.2333, "name": "souji/00007" },
+					{ "time": 0.2666, "name": "souji/00008" },
+					{ "time": 0.3, "name": null }
+				]
+			}
+		}
+	},
+	"shoot_2": {
+		"bones": {
+			"root": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			}
+		},
+		"drawOrder": [
+			{ "time": 0 }
+		]
+	},
+	"shoot_3": {},
+	"wait": {},
+	"wound": {}
+}
+}

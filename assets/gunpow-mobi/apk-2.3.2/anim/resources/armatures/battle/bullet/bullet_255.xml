@@ -1,0 +1,21 @@
+<skeleton name="bullet_255" frameRate="24" version="2.2">
+  <armatures>
+    <armature name="bullet_255">
+      <b name="bullet_31" x="79.95" y="42.45" kX="0" kY="0" cX="1" cY="1" pX="80" pY="42.5" z="0">
+        <d name="combatboy_parts-combatboy_bomb_244" pX="66.8" pY="66.8"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="bullet_255">
+      <mov name="0" dr="2" to="6" drTW="10" lp="1" twE="2">
+        <b name="bullet_31" sc="1" dl="0">
+          <f x="79.95" y="42.45" cocos2d_x="-0.05" cocos2d_y="-0.05" kX="0" kY="0" cX="1" cY="1" pX="80" pY="42.5" z="0" dI="0" dr="2"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="bullet_255" width="256" height="256">
+    <SubTexture name="combatboy_parts-combatboy_bomb_244" width="134" height="134" cocos2d_pX="66.8" cocos2d_pY="66.8" x="0" y="0"/>
+  </TextureAtlas>
+</skeleton>

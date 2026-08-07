@@ -1,0 +1,120 @@
+{
+"skeleton": { "hash": "Ale3qdMKPRbChRvOw4n+AboLr4E", "spine": "2.1.27", "width": 199.98, "height": 199.98, "images": "./../贴图输出 高/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "jianbian01", "parent": "root", "length": 138.5, "x": -0.27, "y": -3.02, "rotation": 79.29 },
+	{ "name": "skill_gwsw_01", "parent": "root", "length": 109.01, "rotation": 90 }
+],
+"slots": [
+	{ "name": "bg", "bone": "root" },
+	{ "name": "skill_gwsw_01_00", "bone": "skill_gwsw_01" },
+	{ "name": "skill_gwsw_01_0", "bone": "skill_gwsw_01", "blend": "additive" },
+	{ "name": "jianbian01", "bone": "jianbian01", "color": "97c4ffff", "attachment": "gwsw_gy_hd", "blend": "additive" }
+],
+"skins": {
+	"default": {
+		"jianbian01": {
+			"gwsw_gy_hd": { "x": 6.9, "y": -5.34, "rotation": -79.29, "width": 200, "height": 200 }
+		},
+		"skill_gwsw_01_0": {
+			"skill_gwsw_hd_00": { "x": 73.89, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_01": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_02": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_03": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_04": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_05": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_06": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_07": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_08": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_09": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_10": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_11": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_12": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 }
+		},
+		"skill_gwsw_01_00": {
+			"skill_gwsw_hd_00": { "x": 73.89, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_01": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_02": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_03": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_04": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_05": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_06": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_07": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_08": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_09": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_10": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_11": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 },
+			"skill_gwsw_hd_12": { "x": 76.86, "y": -0.78, "rotation": -90, "width": 170, "height": 230 }
+		}
+	}
+},
+"animations": {
+	"hit": {
+		"slots": {
+			"jianbian01": {
+				"color": [
+					{ "time": 0, "color": "9fc1ffaf" },
+					{ "time": 0.2333, "color": "97c4ffbe", "curve": "stepped" },
+					{ "time": 0.5, "color": "97c4ffbe" },
+					{ "time": 1, "color": "97c4ff00" }
+				]
+			},
+			"skill_gwsw_01_00": {
+				"attachment": [
+					{ "time": 0, "name": "skill_gwsw_hd_00" },
+					{ "time": 0.0666, "name": "skill_gwsw_hd_01" },
+					{ "time": 0.1333, "name": "skill_gwsw_hd_02" },
+					{ "time": 0.2, "name": "skill_gwsw_hd_03" },
+					{ "time": 0.2666, "name": "skill_gwsw_hd_04" },
+					{ "time": 0.3333, "name": "skill_gwsw_hd_05" },
+					{ "time": 0.4, "name": "skill_gwsw_hd_06" },
+					{ "time": 0.4666, "name": "skill_gwsw_hd_07" },
+					{ "time": 0.5333, "name": "skill_gwsw_hd_08" },
+					{ "time": 0.6, "name": "skill_gwsw_hd_09" },
+					{ "time": 0.6666, "name": "skill_gwsw_hd_10" },
+					{ "time": 0.7333, "name": "skill_gwsw_hd_11" },
+					{ "time": 0.8, "name": "skill_gwsw_hd_12" },
+					{ "time": 0.8666, "name": null }
+				]
+			},
+			"skill_gwsw_01_0": {
+				"attachment": [
+					{ "time": 0, "name": "skill_gwsw_hd_00" },
+					{ "time": 0.0666, "name": "skill_gwsw_hd_01" },
+					{ "time": 0.1333, "name": "skill_gwsw_hd_02" },
+					{ "time": 0.2, "name": "skill_gwsw_hd_03" },
+					{ "time": 0.2666, "name": "skill_gwsw_hd_04" },
+					{ "time": 0.3333, "name": "skill_gwsw_hd_05" },
+					{ "time": 0.4, "name": "skill_gwsw_hd_06" },
+					{ "time": 0.4666, "name": "skill_gwsw_hd_07" },
+					{ "time": 0.5333, "name": "skill_gwsw_hd_08" },
+					{ "time": 0.6, "name": "skill_gwsw_hd_09" },
+					{ "time": 0.6666, "name": "skill_gwsw_hd_10" },
+					{ "time": 0.7333, "name": "skill_gwsw_hd_11" },
+					{ "time": 0.8, "name": "skill_gwsw_hd_12" },
+					{ "time": 0.8666, "name": null }
+				],
+				"color": [
+					{ "time": 0, "color": "77a8ff3a" }
+				]
+			}
+		},
+		"bones": {
+			"jianbian01": {
+				"rotate": [
+					{ "time": 0, "angle": 10.7 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": -10.41 },
+					{ "time": 0.9333, "x": 0, "y": 28.22 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.285, "y": 1.076 },
+					{ "time": 0.2333, "x": 1.475, "y": 1.235 },
+					{ "time": 0.9666, "x": 1.506, "y": 1.262 }
+				]
+			}
+		}
+	}
+}
+}

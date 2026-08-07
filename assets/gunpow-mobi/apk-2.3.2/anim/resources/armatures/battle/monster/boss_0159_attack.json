@@ -1,0 +1,103 @@
+{
+"skeleton": { "hash": "cR1LLgGMRasgx1zeRIGF5rnTeGc", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "boss_0159_attack", "parent": "root" }
+],
+"slots": [
+	{ "name": "FX_shouji", "bone": "boss_0159_attack", "blend": "additive" }
+],
+"skins": {
+	"default": {
+		"FX_shouji": {
+			"shouji/00000": { "width": 302, "height": 270 },
+			"shouji/00001": { "width": 302, "height": 270 },
+			"shouji/00002": { "width": 302, "height": 270 },
+			"shouji/00003": { "width": 302, "height": 270 },
+			"shouji/00004": { "width": 302, "height": 270 },
+			"shouji/00005": { "width": 302, "height": 270 },
+			"shouji/00006": { "width": 302, "height": 270 },
+			"shouji/00007": { "width": 302, "height": 270 },
+			"shouji/00008": { "width": 302, "height": 270 },
+			"shouji/00009": { "width": 302, "height": 270 }
+		}
+	}
+},
+"animations": {
+	"die": {
+		"drawOrder": [
+			{ "time": 0 }
+		]
+	},
+	"fly": {
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 0.5 }
+		]
+	},
+	"run": {},
+	"shoot": {
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 0.1 },
+			{ "time": 0.3333 },
+			{ "time": 0.5666 },
+			{ "time": 0.7333 },
+			{ "time": 1 },
+			{ "time": 1.0666 },
+			{ "time": 1.1666 },
+			{ "time": 1.6666 },
+			{ "time": 1.7666 },
+			{ "time": 1.9333 },
+			{ "time": 2.1666 }
+		]
+	},
+	"shoot_1": {
+		"slots": {
+			"FX_shouji": {
+				"attachment": [
+					{ "time": 0, "name": "shouji/00000" },
+					{ "time": 0.0333, "name": "shouji/00001" },
+					{ "time": 0.0666, "name": "shouji/00002" },
+					{ "time": 0.1, "name": "shouji/00003" },
+					{ "time": 0.1333, "name": "shouji/00004" },
+					{ "time": 0.1666, "name": "shouji/00005" },
+					{ "time": 0.2, "name": "shouji/00006" },
+					{ "time": 0.2333, "name": "shouji/00007" },
+					{ "time": 0.2666, "name": "shouji/00008" },
+					{ "time": 0.3, "name": "shouji/00009" },
+					{ "time": 0.3333, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"boss_0159_attack": {
+				"scale": [
+					{ "time": 0, "x": 1.5, "y": 1.5 }
+				]
+			}
+		},
+		"drawOrder": [
+			{ "time": 0 }
+		]
+	},
+	"shoot_2": {
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 0.0666 },
+			{ "time": 0.1666 },
+			{ "time": 0.6666 }
+		]
+	},
+	"shoot_3": {
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 0.1 },
+			{ "time": 0.2666 },
+			{ "time": 0.5 }
+		]
+	},
+	"wait": {},
+	"wound": {}
+}
+}

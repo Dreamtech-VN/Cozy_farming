@@ -1,0 +1,35 @@
+<skeleton name="bullet_25" frameRate="24" version="2.2">
+  <armatures>
+    <armature name="bullet_25">
+      <b name="bullet_huo" x="-19.15" y="6.1" kX="0" kY="0" cX="0.83" cY="1.54" pX="164.5" pY="67" z="0">
+        <d name="bullet_parts-bulletfx" pX="-99.9" pY="-37.8"/>
+      </b>
+      <b name="bullet_25" x="169.45" y="112.4" kX="0" kY="0" cX="1.54" cY="1.54" pX="99.55" pY="73" z="1">
+        <d name="bullet_parts-bullet1" pX="39.8" pY="29.2"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="bullet_25">
+      <mov name="0" dr="8" to="6" drTW="8" lp="0" twE="NaN">
+        <b name="bullet_huo" sc="1" dl="0">
+          <f x="-19.15" y="6.1" cocos2d_x="-155.5" cocos2d_y="-97.1" kX="0" kY="0" cX="0.83" cY="1.54" pX="164.5" pY="67" z="0" dI="0" dr="1"/>
+          <f x="-19.15" y="6.1" cocos2d_x="-320.3" cocos2d_y="-97.1" kX="0" kY="0" cX="1.83" cY="1.54" pX="164.5" pY="67" z="0" dI="0" dr="1"/>
+          <f x="-19.15" y="6.1" cocos2d_x="-152.5" cocos2d_y="-97.1" kX="0" kY="0" cX="0.81" cY="1.54" pX="164.5" pY="67" z="0" dI="0" dr="1"/>
+          <f x="-19.15" y="6.1" cocos2d_x="-286.4" cocos2d_y="-97.1" kX="0" kY="0" cX="1.63" cY="1.54" pX="164.45" pY="67" z="0" dI="0" dr="1"/>
+          <f x="-19.15" y="6.1" cocos2d_x="-160.2" cocos2d_y="-97.1" kX="0" kY="0" cX="0.86" cY="1.54" pX="164.45" pY="67" z="0" dI="0" dr="1"/>
+          <f x="-19.2" y="6.1" cocos2d_x="-317.3" cocos2d_y="-97.1" kX="0" kY="0" cX="1.81" cY="1.54" pX="164.45" pY="67" z="0" dI="0" dr="2"/>
+          <f x="-19.15" y="6.1" cocos2d_x="-155.5" cocos2d_y="-97.1" kX="0" kY="0" cX="0.83" cY="1.54" pX="164.5" pY="67" z="0" dI="0" dr="1"/>
+        </b>
+        <b name="bullet_25" sc="1" dl="0">
+          <f x="169.45" y="112.4" cocos2d_x="16.2" cocos2d_y="0" kX="0" kY="0" cX="1.54" cY="1.54" pX="99.55" pY="73" z="1" dI="0" dr="7"/>
+          <f x="169.45" y="112.4" cocos2d_x="16.2" cocos2d_y="0" kX="0" kY="0" cX="1.54" cY="1.54" pX="99.55" pY="73" z="1" dI="0" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="bullet_25" width="128" height="128">
+    <SubTexture name="bullet_parts-bullet1" width="80" height="59" cocos2d_pX="39.8" cocos2d_pY="29.2" x="0" y="0"/>
+    <SubTexture name="bullet_parts-bulletfx" width="69" height="51" cocos2d_pX="-99.9" cocos2d_pY="-37.8" x="0" y="61"/>
+  </TextureAtlas>
+</skeleton>

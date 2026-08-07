@@ -1,0 +1,90 @@
+{
+"skeleton": { "hash": "uOzf4n11Qk5mgb6To0htJFPFS8g", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "bz", "parent": "root" }
+],
+"slots": [
+	{ "name": "bz", "bone": "bz" }
+],
+"skins": {
+	"default": {
+		"bz": {
+			"exbz/exbz_00000": { "width": 250, "height": 250 },
+			"exbz/exbz_00001": { "width": 250, "height": 250 },
+			"exbz/exbz_00002": { "width": 250, "height": 250 },
+			"exbz/exbz_00003": { "width": 250, "height": 250 },
+			"exbz/exbz_00004": { "width": 250, "height": 250 },
+			"exbz/exbz_00005": { "width": 250, "height": 250 },
+			"exbz/exbz_00006": { "width": 250, "height": 250 },
+			"exbz/exbz_00007": { "width": 250, "height": 250 },
+			"exbz/exbz_00008": { "width": 250, "height": 250 },
+			"exbz/exbz_00009": { "width": 250, "height": 250 }
+		}
+	}
+},
+"animations": {
+	"die": {
+		"drawOrder": [
+			{ "time": 0 }
+		]
+	},
+	"fly": {
+		"drawOrder": [
+			{ "time": 0 }
+		]
+	},
+	"run": {
+		"drawOrder": [
+			{ "time": 0 }
+		]
+	},
+	"shoot": {
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 1.3666 }
+		]
+	},
+	"shoot_1": {
+		"slots": {
+			"bz": {
+				"attachment": [
+					{ "time": 0, "name": "exbz/exbz_00000" },
+					{ "time": 0.0333, "name": "exbz/exbz_00001" },
+					{ "time": 0.0666, "name": "exbz/exbz_00002" },
+					{ "time": 0.1, "name": "exbz/exbz_00003" },
+					{ "time": 0.1333, "name": "exbz/exbz_00004" },
+					{ "time": 0.1666, "name": "exbz/exbz_00005" },
+					{ "time": 0.2, "name": "exbz/exbz_00006" },
+					{ "time": 0.2333, "name": "exbz/exbz_00007" },
+					{ "time": 0.2666, "name": "exbz/exbz_00008" },
+					{ "time": 0.3, "name": "exbz/exbz_00009" }
+				]
+			}
+		},
+		"drawOrder": [
+			{ "time": 0 }
+		]
+	},
+	"shoot_2": {
+		"drawOrder": [
+			{ "time": 0 }
+		]
+	},
+	"shoot_3": {
+		"drawOrder": [
+			{ "time": 0 }
+		]
+	},
+	"wait": {
+		"drawOrder": [
+			{ "time": 0 }
+		]
+	},
+	"wound": {
+		"drawOrder": [
+			{ "time": 0 }
+		]
+	}
+}
+}

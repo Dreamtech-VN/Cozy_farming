@@ -1,0 +1,100 @@
+{
+"skeleton": { "hash": "buJ8f2OCrskLSr1SpjBql811Ukg", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "FX_shouji", "parent": "root" }
+],
+"slots": [
+	{ "name": "FX_shouji", "bone": "FX_shouji" }
+],
+"skins": {
+	"default": {
+		"FX_shouji": {
+			"shouji/00040": { "width": 417, "height": 340 },
+			"shouji/00042": { "width": 417, "height": 340 },
+			"shouji/00044": { "width": 417, "height": 340 },
+			"shouji/00046": { "width": 417, "height": 340 },
+			"shouji/00048": { "width": 417, "height": 340 },
+			"shouji/00050": { "width": 417, "height": 340 }
+		}
+	}
+},
+"animations": {
+	"die": {
+		"drawOrder": [
+			{ "time": 0.9333 }
+		]
+	},
+	"fly": {
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 2 }
+		]
+	},
+	"run": {
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 2 }
+		]
+	},
+	"shoot": {
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 0.0666 },
+			{ "time": 0.5333 },
+			{ "time": 1.0333 }
+		]
+	},
+	"shoot_1": {
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 0.0666 },
+			{ "time": 0.5333 }
+		]
+	},
+	"shoot_2": {
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 0.0333 }
+		]
+	},
+	"shoot_3": {
+		"slots": {
+			"FX_shouji": {
+				"attachment": [
+					{ "time": 0, "name": "shouji/00040" },
+					{ "time": 0.0666, "name": "shouji/00042" },
+					{ "time": 0.1333, "name": "shouji/00044" },
+					{ "time": 0.2, "name": "shouji/00046" },
+					{ "time": 0.2666, "name": "shouji/00048" },
+					{ "time": 0.3333, "name": "shouji/00050" },
+					{ "time": 0.4, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"FX_shouji": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 41.72 }
+				],
+				"scale": [
+					{ "time": 0, "x": 2, "y": 2 }
+				]
+			}
+		},
+		"drawOrder": [
+			{ "time": 0 }
+		]
+	},
+	"wait": {
+		"bones": {
+			"root": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 143.3 }
+				]
+			}
+		}
+	},
+	"wound": {}
+}
+}

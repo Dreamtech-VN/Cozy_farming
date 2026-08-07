@@ -1,0 +1,63 @@
+{
+"skeleton": { "hash": "gtP10AKUfxBv7ir1Wnl68DaL6Hw", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "FX_0145_attack", "parent": "root" }
+],
+"slots": [
+	{ "name": "FX_0145_attack", "bone": "FX_0145_attack", "blend": "screen" }
+],
+"skins": {
+	"default": {
+		"FX_0145_attack": {
+			"shouji/00048": { "width": 338, "height": 313 },
+			"shouji/00049": { "width": 338, "height": 313 },
+			"shouji/00050": { "width": 338, "height": 313 },
+			"shouji/00051": { "width": 338, "height": 313 },
+			"shouji/00052": { "width": 338, "height": 313 },
+			"shouji/00053": { "width": 338, "height": 313 },
+			"shouji/00054": { "width": 338, "height": 313 },
+			"shouji/00055": { "width": 338, "height": 313 },
+			"shouji/00056": { "width": 338, "height": 313 },
+			"shouji/00057": { "width": 338, "height": 313 },
+			"shouji/00058": { "width": 338, "height": 313 },
+			"shouji/00059": { "width": 338, "height": 313 },
+			"shouji/00060": { "width": 338, "height": 313 },
+			"shouji/00061": { "width": 338, "height": 313 }
+		}
+	}
+},
+"animations": {
+	"die": {},
+	"fly": {},
+	"run": {},
+	"shoot": {},
+	"shoot_1": {
+		"slots": {
+			"FX_0145_attack": {
+				"attachment": [
+					{ "time": 0, "name": "shouji/00048" },
+					{ "time": 0.0333, "name": "shouji/00049" },
+					{ "time": 0.0666, "name": "shouji/00050" },
+					{ "time": 0.1, "name": "shouji/00051" },
+					{ "time": 0.1333, "name": "shouji/00052" },
+					{ "time": 0.1666, "name": "shouji/00053" },
+					{ "time": 0.2, "name": "shouji/00054" },
+					{ "time": 0.2333, "name": "shouji/00055" },
+					{ "time": 0.2666, "name": "shouji/00056" },
+					{ "time": 0.3, "name": "shouji/00057" },
+					{ "time": 0.3333, "name": "shouji/00058" },
+					{ "time": 0.3666, "name": "shouji/00059" },
+					{ "time": 0.4, "name": "shouji/00060" },
+					{ "time": 0.4333, "name": "shouji/00061" },
+					{ "time": 0.4666, "name": null }
+				]
+			}
+		}
+	},
+	"shoot_2": {},
+	"shoot_3": {},
+	"wait": {},
+	"wound": {}
+}
+}

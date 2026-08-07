@@ -1,0 +1,69 @@
+{
+"skeleton": { "hash": "qdWFskOoVww6aLTfhPBob4HNfg4", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "EX", "parent": "root" }
+],
+"slots": [
+	{ "name": "ZD", "bone": "EX" }
+],
+"skins": {
+	"default": {
+		"ZD": {
+			"zidan/zidan_00000": { "width": 300, "height": 75 },
+			"zidan/zidan_00001": { "width": 300, "height": 75 },
+			"zidan/zidan_00002": { "width": 300, "height": 75 },
+			"zidan/zidan_00003": { "width": 300, "height": 75 },
+			"zidan/zidan_00004": { "width": 300, "height": 75 },
+			"zidan/zidan_00005": { "width": 300, "height": 75 },
+			"zidan/zidan_00006": { "width": 300, "height": 75 },
+			"zidan/zidan_00007": { "width": 300, "height": 75 },
+			"zidan/zidan_00008": { "width": 300, "height": 75 },
+			"zidan/zidan_00009": { "width": 300, "height": 75 },
+			"zidan/zidan_00010": { "width": 300, "height": 75 },
+			"zidan/zidan_00011": { "width": 300, "height": 75 },
+			"zidan/zidan_00012": { "width": 300, "height": 75 },
+			"zidan/zidan_00013": { "width": 300, "height": 75 },
+			"zidan/zidan_00014": { "width": 300, "height": 75 }
+		}
+	}
+},
+"animations": {
+	"attack_zidan": {
+		"slots": {
+			"ZD": {
+				"attachment": [
+					{ "time": 0, "name": "zidan/zidan_00000" },
+					{ "time": 0.0333, "name": "zidan/zidan_00001" },
+					{ "time": 0.0666, "name": "zidan/zidan_00002" },
+					{ "time": 0.1, "name": "zidan/zidan_00003" },
+					{ "time": 0.1333, "name": "zidan/zidan_00004" },
+					{ "time": 0.1666, "name": "zidan/zidan_00005" },
+					{ "time": 0.2, "name": "zidan/zidan_00006" },
+					{ "time": 0.2333, "name": "zidan/zidan_00007" },
+					{ "time": 0.2666, "name": "zidan/zidan_00008" },
+					{ "time": 0.3, "name": "zidan/zidan_00009" },
+					{ "time": 0.3333, "name": "zidan/zidan_00010" },
+					{ "time": 0.3666, "name": "zidan/zidan_00011" },
+					{ "time": 0.4, "name": "zidan/zidan_00012" },
+					{ "time": 0.4333, "name": "zidan/zidan_00013" },
+					{ "time": 0.4666, "name": "zidan/zidan_00014" }
+				]
+			}
+		},
+		"bones": {
+			"root": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			}
+		}
+	}
+}
+}

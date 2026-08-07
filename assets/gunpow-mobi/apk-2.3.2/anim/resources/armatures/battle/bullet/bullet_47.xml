@@ -1,0 +1,37 @@
+<skeleton name="bullet_47" frameRate="60" version="2.2">
+  <armatures>
+    <armature name="bullet_47">
+      <b name="bullet_47" x="0" y="-0.05" kX="0" kY="0" cX="1.5" cY="1.5" pX="47" pY="39" z="0">
+        <d name="bullet_parts-bullet_47a" pX="-25" pY="-23.4"/>
+      </b>
+      <b name="effect" x="-17" y="-1" kX="0" kY="0" cX="1.5" cY="1.5" pX="34" pY="18" z="1">
+        <d name="bullet_parts-bullet_47_effect_s1" pX="0" pY="0"/>
+        <d name="bullet_parts-bullet_47_effect_s2" pX="0" pY="0"/>
+        <d name="bullet_parts-bullet_47_effect_s3" pX="0" pY="0"/>
+        <d name="bullet_parts-bullet_47_effect_s4" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="bullet_47">
+      <mov name="0" dr="12" to="0" drTW="12" lp="0" twE="NaN">
+        <b name="bullet_47" sc="1" dl="0">
+          <f x="0" y="-0.05" cocos2d_x="-70.5" cocos2d_y="-58.55" kX="0" kY="0" cX="1.5" cY="1.5" pX="47" pY="39" z="0" dI="0" dr="12"/>
+        </b>
+        <b name="effect" sc="1" dl="0">
+          <f x="-17" y="-1" cocos2d_x="-68" cocos2d_y="-28" kX="0" kY="0" cX="1.5" cY="1.5" pX="34" pY="18" z="1" dI="0" dr="3"/>
+          <f x="-17" y="-1" cocos2d_x="-68" cocos2d_y="-28" kX="0" kY="0" cX="1.5" cY="1.5" pX="34" pY="18" z="1" dI="1" dr="3"/>
+          <f x="-17" y="-1" cocos2d_x="-68" cocos2d_y="-28" kX="0" kY="0" cX="1.5" cY="1.5" pX="34" pY="18" z="1" dI="2" dr="3"/>
+          <f x="-17" y="-1" cocos2d_x="-68" cocos2d_y="-28" kX="0" kY="0" cX="1.5" cY="1.5" pX="34" pY="18" z="1" dI="3" dr="3"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="bullet_47" width="128" height="256">
+    <SubTexture name="bullet_parts-bullet_47_effect_s4" width="68" height="36" cocos2d_pX="0" cocos2d_pY="0" x="0" y="114"/>
+    <SubTexture name="bullet_parts-bullet_47_effect_s3" width="68" height="36" cocos2d_pX="0" cocos2d_pY="0" x="0" y="76"/>
+    <SubTexture name="bullet_parts-bullet_47_effect_s2" width="68" height="36" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+    <SubTexture name="bullet_parts-bullet_47_effect_s1" width="68" height="36" cocos2d_pX="0" cocos2d_pY="0" x="0" y="38"/>
+    <SubTexture name="bullet_parts-bullet_47a" width="48" height="32" cocos2d_pX="-25" cocos2d_pY="-23.4" x="70" y="0"/>
+  </TextureAtlas>
+</skeleton>

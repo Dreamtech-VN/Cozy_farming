@@ -1,0 +1,126 @@
+{
+"skeleton": { "hash": "/rmOFueA3J4X3/m6N5wXS+Yr2hA", "spine": "2.1.27", "width": 0, "height": 0, "images": "" },
+"bones": [
+	{ "name": "root", "rotation": 0.37 },
+	{ "name": "FX2", "parent": "root", "x": 107.8, "scaleX": 3, "scaleY": 3 },
+	{ "name": "FX3", "parent": "root", "x": 107.8, "scaleX": 3, "scaleY": 3 }
+],
+"slots": [
+	{ "name": "fx3", "bone": "FX2" },
+	{ "name": "fx4", "bone": "FX3" }
+],
+"skins": {
+	"default": {
+		"fx3": {
+			"images/speciac effects/bomm_00110": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00111": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00112": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00113": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00114": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00115": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00116": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00117": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00118": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00119": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00120": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00121": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00122": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00123": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00124": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 }
+		},
+		"fx4": {
+			"images/speciac effects/bomm_00110": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00111": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00112": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00113": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00114": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00115": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00116": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00117": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00118": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00119": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00120": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00121": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00122": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00123": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 },
+			"images/speciac effects/bomm_00124": { "scaleX": 0.333, "scaleY": 0.333, "width": 130, "height": 245 }
+		}
+	}
+},
+"animations": {
+	"wait": {
+		"slots": {
+			"fx3": {
+				"attachment": [
+					{ "time": 0, "name": "images/speciac effects/bomm_00110" },
+					{ "time": 0.0333, "name": "images/speciac effects/bomm_00111" },
+					{ "time": 0.0666, "name": "images/speciac effects/bomm_00112" },
+					{ "time": 0.1, "name": "images/speciac effects/bomm_00113" },
+					{ "time": 0.1333, "name": "images/speciac effects/bomm_00114" },
+					{ "time": 0.1666, "name": "images/speciac effects/bomm_00115" },
+					{ "time": 0.2, "name": "images/speciac effects/bomm_00116" },
+					{ "time": 0.2333, "name": "images/speciac effects/bomm_00117" },
+					{ "time": 0.2666, "name": "images/speciac effects/bomm_00118" },
+					{ "time": 0.3, "name": "images/speciac effects/bomm_00119" },
+					{ "time": 0.3333, "name": "images/speciac effects/bomm_00120" },
+					{ "time": 0.3666, "name": "images/speciac effects/bomm_00121" },
+					{ "time": 0.4, "name": "images/speciac effects/bomm_00122" },
+					{ "time": 0.4333, "name": "images/speciac effects/bomm_00123" },
+					{ "time": 0.4666, "name": "images/speciac effects/bomm_00124" }
+				],
+				"color": [
+					{ "time": 0.4333, "color": "ffffffff" },
+					{ "time": 0.5, "color": "ffffff00" }
+				]
+			},
+			"fx4": {
+				"attachment": [
+					{ "time": 0, "name": "images/speciac effects/bomm_00110" },
+					{ "time": 0.0333, "name": "images/speciac effects/bomm_00111" },
+					{ "time": 0.0666, "name": "images/speciac effects/bomm_00112" },
+					{ "time": 0.1, "name": "images/speciac effects/bomm_00113" },
+					{ "time": 0.1333, "name": "images/speciac effects/bomm_00114" },
+					{ "time": 0.1666, "name": "images/speciac effects/bomm_00115" },
+					{ "time": 0.2, "name": "images/speciac effects/bomm_00116" },
+					{ "time": 0.2333, "name": "images/speciac effects/bomm_00117" },
+					{ "time": 0.2666, "name": "images/speciac effects/bomm_00118" },
+					{ "time": 0.3, "name": "images/speciac effects/bomm_00119" },
+					{ "time": 0.3333, "name": "images/speciac effects/bomm_00120" },
+					{ "time": 0.3666, "name": "images/speciac effects/bomm_00121" },
+					{ "time": 0.4, "name": "images/speciac effects/bomm_00122" },
+					{ "time": 0.4333, "name": "images/speciac effects/bomm_00123" },
+					{ "time": 0.4666, "name": "images/speciac effects/bomm_00124" },
+					{ "time": 0.5, "name": null }
+				],
+				"color": [
+					{ "time": 0.4333, "color": "ffffffff" },
+					{ "time": 0.5, "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"FX2": {
+				"translate": [
+					{ "time": 0, "x": -229.36, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 2, "y": 2 }
+				]
+			},
+			"root": {
+				"scale": [
+					{ "time": 0, "x": 2, "y": 2 }
+				]
+			},
+			"FX3": {
+				"translate": [
+					{ "time": 0, "x": 3.49, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": -2, "y": 2 }
+				]
+			}
+		}
+	}
+}
+}

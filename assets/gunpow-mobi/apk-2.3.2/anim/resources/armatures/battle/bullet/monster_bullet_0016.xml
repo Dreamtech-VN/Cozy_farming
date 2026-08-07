@@ -1,0 +1,22 @@
+<skeleton name="monster_bullet_0016" frameRate="60" version="2.2">
+  <armatures>
+    <armature name="monster_bullet_0016">
+      <b name="monster_bullet_0016" x="1" y="-30.5" kX="0" kY="0" cX="1" cY="1" pX="29" pY="35.5" z="0">
+        <d name="bullet_parts-monster_bullet_0016" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="monster_bullet_0016">
+      <mov name="0" dr="2" to="0" drTW="2" lp="0" twE="NaN">
+        <b name="monster_bullet_0016" sc="1" dl="0">
+          <f x="1" y="-30.5" cocos2d_x="-28" cocos2d_y="-66" kX="0" kY="0" cX="1" cY="1" pX="29" pY="35.5" z="0" dI="0" twE="0" dr="1"/>
+          <f x="1" y="-30.5" cocos2d_x="-28" cocos2d_y="-66" kX="0" kY="0" cX="1" cY="1" pX="29" pY="35.5" z="0" dI="0" dr="1" twR="-2"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="monster_bullet_0016" width="64" height="128">
+    <SubTexture name="bullet_parts-monster_bullet_0016" width="58" height="71" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+  </TextureAtlas>
+</skeleton>

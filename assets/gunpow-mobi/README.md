@@ -71,7 +71,10 @@ MANIFEST.tsv         danh sách đầy đủ: đường dẫn, kích thước, S
 lúc chạy, đổi đi thì file mất ngữ cảnh. `client-png/` và `client-lua/` soi
 gương đúng cấu trúc đó, chỉ khác phần mở rộng.
 
-Tổng cộng **27 746 file / 668.0 MB**, file lớn nhất 7.34 MB.
+Tổng cộng **31 813 file / 1 474.6 MB**, file lớn nhất 7.34 MB.
+
+> Repo vượt mức 1 GB mà GitHub khuyến nghị, nên `git clone` sẽ chậm. Dùng
+> `git clone --filter=blob:none` hoặc `--depth 1` nếu chỉ cần bản làm việc.
 
 | Loại | Số file | Dung lượng | |
 |---|---:|---:|---|
@@ -83,9 +86,9 @@ Tổng cộng **27 746 file / 668.0 MB**, file lớn nhất 7.34 MB.
 | `.atlas`, `.plist`, còn lại | 23 | 0.05 MB | `client/` |
 | `.png` (bung từ `.pkm`) | 768 | 30.15 MB | `client-png/` |
 | `.lua` + `.xml` (đã giải mã) | 2 010 | 49.60 MB | `client-lua/` |
-| `.png` (bung từ `.pkm`) | 16 692 | 403.7 MB | `apk-2.3.2/png/` |
+| `.png` (bung từ `.pkm`) | 18 481 | 999.8 MB | `apk-2.3.2/png/` |
 | `.lua` (đã giải mã) | 2 890 | 64.6 MB | `apk-2.3.2/lua/` |
-| `.json`/`.atlas`/`.plist`/`.xml` | 896 | 24.0 MB | `apk-2.3.2/anim/` |
+| `.json`/`.atlas`/`.plist`/`.xml` | 3 174 | 231.1 MB | `apk-2.3.2/anim/` |
 
 ## Ảnh: `.pkm` và bản PNG
 
@@ -171,18 +174,17 @@ Package `com.wyd.gunpow`, version 2.3.2 (code 210).
 
 ```
 apk-2.3.2/
-  png/     16 692 ảnh, bung từ .pkm (cùng cách với client-png/)
-  anim/       896 file .json/.atlas/.plist/.xml — dữ liệu xương và sprite sheet
+  png/     18 481 ảnh, bung từ .pkm (cùng cách với client-png/)
+  anim/     3 174 file .json/.atlas/.plist/.xml — Spine 2.1.27
   lua/      2 890 file mã nguồn Lua đã giải mã
 ```
 
-Tổng **20 478 file / 492.3 MB**.
+Tổng **24 545 file / 1 295.5 MB** — toàn bộ nội dung của OBB trừ âm thanh.
 
 ### Ảnh
 
 OBB có 18 481 ảnh (36 962 file `.pkm` gồm cả `_alpha`, ghép cặp đủ 18 481/18 481).
-Đã bung 16 692 ảnh — **bỏ `armatures/battle`** vì riêng nhóm đó đã 1.2 GB hoạt ảnh
-chiêu thức, đưa vào sẽ làm repo vượt 1.5 GB.
+**Đã bung hết 18 481, không lỗi.**
 
 Các nhóm art nhân vật, thứ bản vá 1.1.x thiếu hoàn toàn:
 
@@ -195,11 +197,29 @@ Các nhóm art nhân vật, thứ bản vá 1.1.x thiếu hoàn toàn:
 | `battle/head` | 256 | chân dung nhân vật, quái, boss |
 | `battleitems` | 379 | vật phẩm trong trận |
 | `armatures/baby`, `pet`, `pastor` | — | thú cưng, em bé, NPC |
+| `armatures/battle/monster` | 905 | quái và boss |
+| `armatures/battle/bullet` | 389 | đạn |
+| `armatures/battle/particle` | 358 | hiệu ứng hạt |
+| `armatures/battle/skill` | 90 | chiêu thức |
 
 Một ngoại lệ: `resources/image/map/map97_bg` có ảnh alpha lệch kích thước với ảnh
 màu (302×191 so với 404×172) — nhiều khả năng là lỗi trong khâu đóng gói của
 chính game. Tôi đã co ảnh alpha về đúng kích thước; riêng file này độ trong suốt
 có thể không chính xác.
+
+### Hoạt ảnh
+
+`anim/` là **Spine 2.1.27** — `.json` chứa `bones`/`slots`/`animations`, `.atlas`
+chứa toạ độ cắt sprite trong texture. Cả 841 file json đều parse được và đúng
+phiên bản.
+
+Kiểm tra chéo: **840/841 file `.atlas` trỏ tới ảnh có mặt trong `png/`**. Trường
+hợp còn lại là `boss_0169_ attack01.atlas` (tên có dấu cách) trỏ tới một texture
+không tồn tại trong OBB gốc — atlas mồ côi sẵn có trong gói game, không phải do
+quá trình bung.
+
+Ghép ảnh với xương theo đường dẫn: `anim/<x>/<tên>.atlas` ứng với
+`png/<x>/<tên>.png`, hai cây thư mục giống hệt nhau.
 
 ### Mã Lua
 

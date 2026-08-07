@@ -1,0 +1,83 @@
+{
+"skeleton": { "hash": "Ydu0DCmic/hMCIYdHTEwRrcfqgs", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "DZ_03", "parent": "root" }
+],
+"slots": [
+	{ "name": "DZ_03", "bone": "DZ_03" }
+],
+"skins": {
+	"default": {
+		"DZ_03": {
+			"boss_0121-attack02/00000": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00002": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00004": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00006": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00008": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00010": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00012": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00014": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00016": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00018": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00020": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00022": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00024": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00026": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00028": { "width": 396, "height": 323 },
+			"boss_0121-attack02/00030": { "width": 396, "height": 323 }
+		}
+	}
+},
+"animations": {
+	"attack2": {
+		"slots": {
+			"DZ_03": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.0666, "name": "boss_0121-attack02/00000" },
+					{ "time": 0.1333, "name": "boss_0121-attack02/00002" },
+					{ "time": 0.2, "name": "boss_0121-attack02/00004" },
+					{ "time": 0.2666, "name": "boss_0121-attack02/00006" },
+					{ "time": 0.3333, "name": "boss_0121-attack02/00008" },
+					{ "time": 0.4, "name": "boss_0121-attack02/00010" },
+					{ "time": 0.4666, "name": "boss_0121-attack02/00012" },
+					{ "time": 0.5333, "name": "boss_0121-attack02/00014" },
+					{ "time": 0.6, "name": "boss_0121-attack02/00016" },
+					{ "time": 0.6666, "name": "boss_0121-attack02/00018" },
+					{ "time": 0.7333, "name": "boss_0121-attack02/00020" },
+					{ "time": 0.8333, "name": "boss_0121-attack02/00022" },
+					{ "time": 0.9, "name": "boss_0121-attack02/00024" },
+					{ "time": 0.9666, "name": "boss_0121-attack02/00026" },
+					{ "time": 1.0333, "name": "boss_0121-attack02/00028" },
+					{ "time": 1.1, "name": "boss_0121-attack02/00030" },
+					{ "time": 1.1666, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"root": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"DZ_03": {
+				"translate": [
+					{ "time": 0, "x": 20, "y": 117.69, "curve": "stepped" },
+					{ "time": 0.0666, "x": 20, "y": 117.69 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.5, "y": 1.5, "curve": "stepped" },
+					{ "time": 0.0666, "x": 1.5, "y": 1.5 }
+				]
+			}
+		}
+	}
+}
+}

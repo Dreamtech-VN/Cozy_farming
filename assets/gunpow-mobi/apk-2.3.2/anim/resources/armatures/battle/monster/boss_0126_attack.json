@@ -1,0 +1,148 @@
+{
+"skeleton": { "hash": "0znn/I3co4LkMfJNXo/agj8/sHg", "spine": "2.1.27", "width": 500.5, "height": 563.5, "images": "" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "FX", "parent": "root", "scaleX": 1.6, "scaleY": 1.6 },
+	{ "name": "FX4", "parent": "root", "scaleX": 3.5, "scaleY": 3.5 }
+],
+"slots": [
+	{ "name": "fx1", "bone": "FX", "attachment": "images/l1_00049" },
+	{ "name": "fx4", "bone": "FX4", "attachment": "images/r2_00061" }
+],
+"skins": {
+	"default": {
+		"fx1": {
+			"images/l1_00026": { "width": 172, "height": 174 },
+			"images/l1_00027": { "width": 172, "height": 174 },
+			"images/l1_00028": { "width": 172, "height": 174 },
+			"images/l1_00029": { "width": 172, "height": 174 },
+			"images/l1_00030": { "width": 172, "height": 174 },
+			"images/l1_00031": { "width": 172, "height": 174 },
+			"images/l1_00032": { "width": 172, "height": 174 },
+			"images/l1_00033": { "width": 172, "height": 174 },
+			"images/l1_00034": { "width": 172, "height": 174 },
+			"images/l1_00035": { "width": 172, "height": 174 },
+			"images/l1_00036": { "width": 172, "height": 174 },
+			"images/l1_00037": { "width": 172, "height": 174 },
+			"images/l1_00038": { "width": 172, "height": 174 },
+			"images/l1_00039": { "width": 172, "height": 174 },
+			"images/l1_00040": { "width": 172, "height": 174 },
+			"images/l1_00041": { "width": 172, "height": 174 },
+			"images/l1_00042": { "width": 172, "height": 174 },
+			"images/l1_00043": { "width": 172, "height": 174 },
+			"images/l1_00044": { "width": 172, "height": 174 },
+			"images/l1_00045": { "width": 172, "height": 174 },
+			"images/l1_00046": { "width": 172, "height": 174 },
+			"images/l1_00047": { "width": 172, "height": 174 },
+			"images/l1_00048": { "width": 172, "height": 174 },
+			"images/l1_00049": { "width": 172, "height": 174 }
+		},
+		"fx4": {
+			"images/r2_00031": { "width": 143, "height": 161 },
+			"images/r2_00032": { "width": 143, "height": 161 },
+			"images/r2_00033": { "width": 143, "height": 161 },
+			"images/r2_00034": { "width": 143, "height": 161 },
+			"images/r2_00035": { "width": 143, "height": 161 },
+			"images/r2_00036": { "width": 143, "height": 161 },
+			"images/r2_00037": { "width": 143, "height": 161 },
+			"images/r2_00038": { "width": 143, "height": 161 },
+			"images/r2_00039": { "width": 143, "height": 161 },
+			"images/r2_00040": { "width": 143, "height": 161 },
+			"images/r2_00041": { "width": 143, "height": 161 },
+			"images/r2_00042": { "width": 143, "height": 161 },
+			"images/r2_00043": { "width": 143, "height": 161 },
+			"images/r2_00044": { "width": 143, "height": 161 },
+			"images/r2_00045": { "width": 143, "height": 161 },
+			"images/r2_00046": { "width": 143, "height": 161 },
+			"images/r2_00047": { "width": 143, "height": 161 },
+			"images/r2_00048": { "width": 143, "height": 161 },
+			"images/r2_00049": { "width": 143, "height": 161 },
+			"images/r2_00050": { "width": 143, "height": 161 },
+			"images/r2_00051": { "width": 143, "height": 161 },
+			"images/r2_00052": { "width": 143, "height": 161 },
+			"images/r2_00053": { "width": 143, "height": 161 },
+			"images/r2_00054": { "width": 143, "height": 161 },
+			"images/r2_00055": { "width": 143, "height": 161 },
+			"images/r2_00056": { "width": 143, "height": 161 },
+			"images/r2_00057": { "width": 143, "height": 161 },
+			"images/r2_00058": { "width": 143, "height": 161 },
+			"images/r2_00059": { "width": 143, "height": 161 },
+			"images/r2_00060": { "width": 143, "height": 161 },
+			"images/r2_00061": { "width": 143, "height": 161 }
+		}
+	}
+},
+"animations": {
+	"attack": {
+		"slots": {
+			"fx1": {
+				"attachment": [
+					{ "time": 0, "name": "images/l1_00026" },
+					{ "time": 0.0333, "name": "images/l1_00027" },
+					{ "time": 0.0666, "name": "images/l1_00028" },
+					{ "time": 0.1, "name": "images/l1_00029" },
+					{ "time": 0.1333, "name": "images/l1_00030" },
+					{ "time": 0.1666, "name": "images/l1_00031" },
+					{ "time": 0.2, "name": "images/l1_00032" },
+					{ "time": 0.2333, "name": "images/l1_00033" },
+					{ "time": 0.2666, "name": "images/l1_00034" },
+					{ "time": 0.3, "name": "images/l1_00035" },
+					{ "time": 0.3333, "name": "images/l1_00036" },
+					{ "time": 0.3666, "name": "images/l1_00037" },
+					{ "time": 0.4, "name": "images/l1_00038" },
+					{ "time": 0.4333, "name": "images/l1_00039" },
+					{ "time": 0.4666, "name": "images/l1_00040" },
+					{ "time": 0.5, "name": "images/l1_00041" },
+					{ "time": 0.5333, "name": "images/l1_00042" },
+					{ "time": 0.5666, "name": "images/l1_00043" },
+					{ "time": 0.6, "name": "images/l1_00044" },
+					{ "time": 0.6333, "name": "images/l1_00045" },
+					{ "time": 0.6666, "name": "images/l1_00046" },
+					{ "time": 0.7, "name": "images/l1_00047" },
+					{ "time": 0.7333, "name": "images/l1_00048" },
+					{ "time": 0.7666, "name": "images/l1_00049" }
+				]
+			}
+		}
+	},
+	"attack2": {
+		"slots": {
+			"fx4": {
+				"attachment": [
+					{ "time": 0, "name": "images/r2_00031" },
+					{ "time": 0.0333, "name": "images/r2_00032" },
+					{ "time": 0.0666, "name": "images/r2_00033" },
+					{ "time": 0.1, "name": "images/r2_00034" },
+					{ "time": 0.1333, "name": "images/r2_00035" },
+					{ "time": 0.1666, "name": "images/r2_00036" },
+					{ "time": 0.2, "name": "images/r2_00037" },
+					{ "time": 0.2333, "name": "images/r2_00038" },
+					{ "time": 0.2666, "name": "images/r2_00039" },
+					{ "time": 0.3, "name": "images/r2_00040" },
+					{ "time": 0.3333, "name": "images/r2_00041" },
+					{ "time": 0.3666, "name": "images/r2_00042" },
+					{ "time": 0.4, "name": "images/r2_00043" },
+					{ "time": 0.4333, "name": "images/r2_00044" },
+					{ "time": 0.4666, "name": "images/r2_00045" },
+					{ "time": 0.5, "name": "images/r2_00046" },
+					{ "time": 0.5333, "name": "images/r2_00047" },
+					{ "time": 0.5666, "name": "images/r2_00048" },
+					{ "time": 0.6, "name": "images/r2_00049" },
+					{ "time": 0.6333, "name": "images/r2_00050" },
+					{ "time": 0.6666, "name": "images/r2_00051" },
+					{ "time": 0.7, "name": "images/r2_00052" },
+					{ "time": 0.7333, "name": "images/r2_00053" },
+					{ "time": 0.7666, "name": "images/r2_00054" },
+					{ "time": 0.8, "name": "images/r2_00055" },
+					{ "time": 0.8333, "name": "images/r2_00056" },
+					{ "time": 0.8666, "name": "images/r2_00057" },
+					{ "time": 0.9, "name": "images/r2_00058" },
+					{ "time": 0.9333, "name": "images/r2_00059" },
+					{ "time": 0.9666, "name": "images/r2_00060" },
+					{ "time": 1, "name": "images/r2_00061" }
+				]
+			}
+		}
+	}
+}
+}

@@ -1,0 +1,22 @@
+<skeleton name="bullet_212" frameRate="60" version="2.2">
+  <armatures>
+    <armature name="bullet_212">
+      <b name="bullet_212" x="-10" y="-7.4" kX="34.74" kY="34.74" cX="1" cY="1" pX="29" pY="35.55" z="0">
+        <d name="bullet_parts-bullet_212" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="bullet_212">
+      <mov name="0" dr="2" to="0" drTW="2" lp="0" twE="NaN">
+        <b name="bullet_212" sc="1" dl="0">
+          <f x="-10" y="-7.4" cocos2d_x="-13.55" cocos2d_y="-53.1" kX="34.74" kY="34.74" cX="1" cY="1" pX="29" pY="35.55" z="0" dI="0" twE="0" dr="1"/>
+          <f x="-10" y="-7.4" cocos2d_x="-13.55" cocos2d_y="-53.1" kX="34.74" kY="34.74" cX="1" cY="1" pX="29" pY="35.55" z="0" dI="0" dr="1" twR="-2"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="bullet_212" width="128" height="128">
+    <SubTexture name="bullet_parts-bullet_212" width="86" height="73" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+  </TextureAtlas>
+</skeleton>

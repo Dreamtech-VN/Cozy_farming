@@ -1,0 +1,48 @@
+<skeleton name="boss_bullet_0036" frameRate="24" version="2.2">
+  <armatures>
+    <armature name="boss_bullet_0036">
+      <b name="图层 3" x="8.05" y="28" kX="0" kY="0" cX="1" cY="1" pX="164" pY="144.5" z="0">
+        <d name="boss_bullet_parts-1001" pX="-71.95" pY="-32"/>
+        <d name="boss_bullet_parts-1002" pX="-73.95" pY="-23"/>
+        <d name="boss_bullet_parts-1003" pX="-73.95" pY="-23"/>
+        <d name="boss_bullet_parts-1004" pX="-77.95" pY="-24"/>
+        <d name="boss_bullet_parts-1005" pX="-83.95" pY="-31"/>
+        <d name="boss_bullet_parts-1006" pX="-74.95" pY="-25"/>
+        <d name="boss_bullet_parts-1007" pX="-77.95" pY="-29"/>
+        <d name="boss_bullet_parts-1008" pX="-75.95" pY="-23"/>
+        <d name="boss_bullet_parts-1009" pX="-56.95" pY="-17"/>
+        <d name="boss_bullet_parts-1010" pX="-92.95" pY="-32"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="boss_bullet_0036">
+      <mov name="0" dr="10" to="6" drTW="10" lp="1" twE="NaN">
+        <b name="图层 3" sc="1" dl="0">
+          <f x="8.05" y="28" cocos2d_x="-155.95" cocos2d_y="-116.5" kX="0" kY="0" cX="1" cY="1" pX="164" pY="144.5" z="0" dI="0" dr="1"/>
+          <f x="7.55" y="28" cocos2d_x="-156.45" cocos2d_y="-116.5" kX="0" kY="0" cX="1" cY="1" pX="164" pY="144.5" z="0" dI="1" dr="1"/>
+          <f x="6.05" y="28" cocos2d_x="-157.95" cocos2d_y="-116.5" kX="0" kY="0" cX="1" cY="1" pX="164" pY="144.5" z="0" dI="2" dr="1"/>
+          <f x="4.55" y="28" cocos2d_x="-159.45" cocos2d_y="-116.5" kX="0" kY="0" cX="1" cY="1" pX="164" pY="144.5" z="0" dI="3" dr="1"/>
+          <f x="3.55" y="28" cocos2d_x="-160.45" cocos2d_y="-116.5" kX="0" kY="0" cX="1" cY="1" pX="164" pY="144.5" z="0" dI="4" dr="1"/>
+          <f x="4.55" y="28" cocos2d_x="-159.45" cocos2d_y="-116.5" kX="0" kY="0" cX="1" cY="1" pX="164" pY="144.5" z="0" dI="5" dr="1"/>
+          <f x="3.55" y="28" cocos2d_x="-160.45" cocos2d_y="-116.5" kX="0" kY="0" cX="1" cY="1" pX="164" pY="144.5" z="0" dI="6" dr="1"/>
+          <f x="4.55" y="28" cocos2d_x="-159.45" cocos2d_y="-116.5" kX="0" kY="0" cX="1" cY="1" pX="164" pY="144.5" z="0" dI="7" dr="1"/>
+          <f x="4.05" y="28" cocos2d_x="-159.95" cocos2d_y="-116.5" kX="0" kY="0" cX="1" cY="1" pX="164" pY="144.5" z="0" dI="8" dr="1"/>
+          <f x="4.55" y="28" cocos2d_x="-159.45" cocos2d_y="-116.5" kX="0" kY="0" cX="1" cY="1" pX="164" pY="144.5" z="0" dI="9" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="boss_bullet_0036" width="512" height="1024">
+    <SubTexture name="boss_bullet_parts-1010" width="127" height="148" cocos2d_pX="-92.95" cocos2d_pY="-32" x="354" y="153"/>
+    <SubTexture name="boss_bullet_parts-1009" width="182" height="172" cocos2d_pX="-56.95" cocos2d_pY="-17" x="0" y="0"/>
+    <SubTexture name="boss_bullet_parts-1008" width="163" height="164" cocos2d_pX="-75.95" cocos2d_pY="-23" x="0" y="174"/>
+    <SubTexture name="boss_bullet_parts-1007" width="165" height="158" cocos2d_pX="-77.95" cocos2d_pY="-29" x="0" y="502"/>
+    <SubTexture name="boss_bullet_parts-1006" width="161" height="162" cocos2d_pX="-74.95" cocos2d_pY="-25" x="349" y="303"/>
+    <SubTexture name="boss_bullet_parts-1005" width="153" height="151" cocos2d_pX="-83.95" cocos2d_pY="-31" x="354" y="0"/>
+    <SubTexture name="boss_bullet_parts-1004" width="163" height="165" cocos2d_pX="-77.95" cocos2d_pY="-24" x="184" y="172"/>
+    <SubTexture name="boss_bullet_parts-1003" width="168" height="170" cocos2d_pX="-73.95" cocos2d_pY="-23" x="184" y="0"/>
+    <SubTexture name="boss_bullet_parts-1002" width="165" height="161" cocos2d_pX="-73.95" cocos2d_pY="-23" x="165" y="339"/>
+    <SubTexture name="boss_bullet_parts-1001" width="168" height="155" cocos2d_pX="-71.95" cocos2d_pY="-32" x="332" y="467"/>
+  </TextureAtlas>
+</skeleton>

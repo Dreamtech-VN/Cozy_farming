@@ -1,0 +1,60 @@
+{
+"skeleton": { "hash": "TXcchz/y8827KFwU+O6KcEkj6ds", "spine": "2.1.27", "width": 349.2, "height": 303.4, "images": "" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "FX", "parent": "root", "scaleX": 1.8, "scaleY": 1.85 }
+],
+"slots": [
+	{ "name": "fx1", "bone": "FX", "attachment": "images/l3_00014" }
+],
+"skins": {
+	"default": {
+		"fx1": {
+			"images/l3_00000": { "width": 194, "height": 164 },
+			"images/l3_00001": { "width": 194, "height": 164 },
+			"images/l3_00002": { "width": 194, "height": 164 },
+			"images/l3_00003": { "width": 194, "height": 164 },
+			"images/l3_00004": { "width": 194, "height": 164 },
+			"images/l3_00005": { "width": 194, "height": 164 },
+			"images/l3_00006": { "width": 194, "height": 164 },
+			"images/l3_00007": { "width": 194, "height": 164 },
+			"images/l3_00008": { "width": 194, "height": 164 },
+			"images/l3_00009": { "width": 194, "height": 164 },
+			"images/l3_00010": { "width": 194, "height": 164 },
+			"images/l3_00011": { "width": 194, "height": 164 },
+			"images/l3_00012": { "width": 194, "height": 164 },
+			"images/l3_00013": { "width": 194, "height": 164 },
+			"images/l3_00014": { "width": 194, "height": 164 }
+		}
+	}
+},
+"animations": {
+	"wait": {
+		"slots": {
+			"fx1": {
+				"attachment": [
+					{ "time": 0, "name": "images/l3_00000" },
+					{ "time": 0.0333, "name": "images/l3_00001" },
+					{ "time": 0.0666, "name": "images/l3_00002" },
+					{ "time": 0.1, "name": "images/l3_00003" },
+					{ "time": 0.1333, "name": "images/l3_00004" },
+					{ "time": 0.1666, "name": "images/l3_00005" },
+					{ "time": 0.2, "name": "images/l3_00006" },
+					{ "time": 0.2333, "name": "images/l3_00007" },
+					{ "time": 0.2666, "name": "images/l3_00008" },
+					{ "time": 0.3, "name": "images/l3_00009" },
+					{ "time": 0.3333, "name": "images/l3_00010" },
+					{ "time": 0.3666, "name": "images/l3_00011" },
+					{ "time": 0.4, "name": "images/l3_00012" },
+					{ "time": 0.4333, "name": "images/l3_00013" },
+					{ "time": 0.4666, "name": "images/l3_00014" }
+				],
+				"color": [
+					{ "time": 0.4, "color": "ffffffff" },
+					{ "time": 0.4666, "color": "ffffff00" }
+				]
+			}
+		}
+	}
+}
+}

@@ -1,0 +1,135 @@
+{
+"skeleton": { "hash": "OJOIuAvrcw20WdbCjkUCF+w/jwA", "spine": "2.1.27", "width": 260, "height": 240, "images": "./贴图素材/" },
+"bones": [
+	{ "name": "root", "y": -21.44, "scaleX": 2, "scaleY": 2 },
+	{ "name": "baozha", "parent": "root", "length": 69.37, "x": 0.55, "y": -1.09, "rotation": 90 },
+	{ "name": "ricfb", "parent": "root", "length": 108.78, "x": -0.36, "y": -3.55, "rotation": 90 },
+	{ "name": "zd_gq_hd_4_00", "parent": "root", "length": 102.27, "x": 0.19, "y": -2.25, "rotation": 90 }
+],
+"slots": [
+	{ "name": "1", "bone": "root" },
+	{ "name": "ricfb", "bone": "ricfb" },
+	{ "name": "monsterskill_zuduiboss3_skill1_jz_01_1", "bone": "baozha", "attachment": "monsterskill_zuduiboss3_skill1_jz_01_07" },
+	{
+		"name": "monsterskill_zuduiboss3_skill1_jz_01_0",
+		"bone": "baozha",
+		"attachment": "monsterskill_zuduiboss3_skill1_jz_01_07",
+		"blend": "additive"
+	},
+	{ "name": "zd_gq_hd_4_1", "bone": "zd_gq_hd_4_00", "attachment": "zd_gq_hd_4_00", "blend": "screen" },
+	{ "name": "zd_gq_hd_4_0", "bone": "zd_gq_hd_4_00", "attachment": "zd_gq_hd_4_00", "blend": "screen" }
+],
+"skins": {
+	"default": {
+		"monsterskill_zuduiboss3_skill1_jz_01_0": {
+			"monsterskill_zuduiboss3_skill1_jz_01_00": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_01": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_02": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_03": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_04": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_05": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_06": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_07": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 }
+		},
+		"monsterskill_zuduiboss3_skill1_jz_01_1": {
+			"monsterskill_zuduiboss3_skill1_jz_01_00": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_01": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_02": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_03": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_04": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_05": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_06": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 },
+			"monsterskill_zuduiboss3_skill1_jz_01_07": { "x": 1.09, "y": 0.55, "rotation": -90, "width": 130, "height": 120 }
+		},
+		"zd_gq_hd_4_0": {
+			"zd_gq_hd_4_00": { "x": 2.25, "y": 0.19, "rotation": -90, "width": 110, "height": 110 }
+		},
+		"zd_gq_hd_4_1": {
+			"zd_gq_hd_4_00": { "x": 2.25, "y": 0.19, "rotation": -90, "width": 110, "height": 110 }
+		}
+	}
+},
+"animations": {
+	"hit": {
+		"slots": {
+			"monsterskill_zuduiboss3_skill1_jz_01_0": {
+				"attachment": [
+					{ "time": 0, "name": "monsterskill_zuduiboss3_skill1_jz_01_00" },
+					{ "time": 0.0666, "name": "monsterskill_zuduiboss3_skill1_jz_01_01" },
+					{ "time": 0.1333, "name": "monsterskill_zuduiboss3_skill1_jz_01_02" },
+					{ "time": 0.2, "name": "monsterskill_zuduiboss3_skill1_jz_01_03" },
+					{ "time": 0.2666, "name": "monsterskill_zuduiboss3_skill1_jz_01_04" },
+					{ "time": 0.3333, "name": "monsterskill_zuduiboss3_skill1_jz_01_05" },
+					{ "time": 0.4, "name": "monsterskill_zuduiboss3_skill1_jz_01_06" },
+					{ "time": 0.4666, "name": "monsterskill_zuduiboss3_skill1_jz_01_07" },
+					{ "time": 0.5333, "name": null }
+				],
+				"color": [
+					{ "time": 0, "color": "ffa2d238" }
+				]
+			},
+			"monsterskill_zuduiboss3_skill1_jz_01_1": {
+				"attachment": [
+					{ "time": 0, "name": "monsterskill_zuduiboss3_skill1_jz_01_00" },
+					{ "time": 0.0666, "name": "monsterskill_zuduiboss3_skill1_jz_01_01" },
+					{ "time": 0.1333, "name": "monsterskill_zuduiboss3_skill1_jz_01_02" },
+					{ "time": 0.2, "name": "monsterskill_zuduiboss3_skill1_jz_01_03" },
+					{ "time": 0.2666, "name": "monsterskill_zuduiboss3_skill1_jz_01_04" },
+					{ "time": 0.3333, "name": "monsterskill_zuduiboss3_skill1_jz_01_05" },
+					{ "time": 0.4, "name": "monsterskill_zuduiboss3_skill1_jz_01_06" },
+					{ "time": 0.4666, "name": "monsterskill_zuduiboss3_skill1_jz_01_07" },
+					{ "time": 0.5333, "name": null }
+				],
+				"color": [
+					{ "time": 0.4666, "color": "ffffff92" }
+				]
+			},
+			"zd_gq_hd_4_0": {
+				"color": [
+					{ "time": 0, "color": "ff6fe900" },
+					{ "time": 0.3333, "color": "ff6fe9ff", "curve": "stepped" },
+					{ "time": 0.6, "color": "ff6fe9ff" },
+					{ "time": 0.7666, "color": "ff6fe900" }
+				]
+			},
+			"zd_gq_hd_4_1": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.3333, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.6, "color": "ffffffff" },
+					{ "time": 0.7666, "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"baozha": {
+				"translate": [
+					{ "time": 0, "x": -0.55, "y": 1.09 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.25, "y": 1.25 }
+				]
+			},
+			"ricfb": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 134.12 }
+				]
+			},
+			"zd_gq_hd_4_00": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -15.58 }
+				],
+				"scale": [
+					{
+						"time": 0,
+						"x": 0.167,
+						"y": 0.931,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.7666, "x": 0.4, "y": 2.228 }
+				]
+			}
+		}
+	}
+}
+}

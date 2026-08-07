@@ -1,0 +1,36 @@
+<skeleton name="boss_bullet_0140" frameRate="60" version="2.2">
+  <armatures>
+    <armature name="boss_bullet_0140">
+      <b name="图层 2" x="15.5" y="-19.45" kX="0" kY="180" cX="1" cY="1" pX="159.5" pY="130.5" z="0">
+        <d name="bullet_parts-FX_140_01" pX="0" pY="0"/>
+        <d name="bullet_parts-FX_140_02" pX="0" pY="0"/>
+        <d name="bullet_parts-FX_140_03" pX="0" pY="0"/>
+        <d name="bullet_parts-FX_140_04" pX="0" pY="0"/>
+        <d name="bullet_parts-FX_140_05" pX="0" pY="0"/>
+        <d name="bullet_parts-FX_140_06" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="boss_bullet_0140">
+      <mov name="0" dr="15" to="0" drTW="15" lp="0" twE="NaN">
+        <b name="图层 2" sc="1" dl="0">
+          <f x="15.5" y="-19.45" cocos2d_x="175" cocos2d_y="-149.95" kX="0" kY="180" cX="1" cY="1" pX="159.5" pY="130.5" z="0" dI="0" dr="2"/>
+          <f x="15.5" y="-19.45" cocos2d_x="175" cocos2d_y="-149.95" kX="0" kY="180" cX="1" cY="1" pX="159.5" pY="130.5" z="0" dI="1" dr="3"/>
+          <f x="15.5" y="-19.45" cocos2d_x="175" cocos2d_y="-149.95" kX="0" kY="180" cX="1" cY="1" pX="159.5" pY="130.5" z="0" dI="2" dr="2"/>
+          <f x="15.5" y="-19.45" cocos2d_x="175" cocos2d_y="-149.95" kX="0" kY="180" cX="1" cY="1" pX="159.5" pY="130.5" z="0" dI="3" dr="3"/>
+          <f x="15.5" y="-19.45" cocos2d_x="175" cocos2d_y="-149.95" kX="0" kY="180" cX="1" cY="1" pX="159.5" pY="130.5" z="0" dI="4" dr="3"/>
+          <f x="15.5" y="-19.45" cocos2d_x="175" cocos2d_y="-149.95" kX="0" kY="180" cX="1" cY="1" pX="159.5" pY="130.5" z="0" dI="5" dr="2"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="boss_bullet_0140" width="1024" height="1024">
+    <SubTexture name="bullet_parts-FX_140_06" width="319" height="261" cocos2d_pX="0" cocos2d_pY="0" x="321" y="0"/>
+    <SubTexture name="bullet_parts-FX_140_05" width="319" height="261" cocos2d_pX="0" cocos2d_pY="0" x="642" y="263"/>
+    <SubTexture name="bullet_parts-FX_140_04" width="319" height="261" cocos2d_pX="0" cocos2d_pY="0" x="321" y="263"/>
+    <SubTexture name="bullet_parts-FX_140_03" width="319" height="261" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+    <SubTexture name="bullet_parts-FX_140_02" width="319" height="261" cocos2d_pX="0" cocos2d_pY="0" x="642" y="0"/>
+    <SubTexture name="bullet_parts-FX_140_01" width="319" height="261" cocos2d_pX="0" cocos2d_pY="0" x="0" y="263"/>
+  </TextureAtlas>
+</skeleton>

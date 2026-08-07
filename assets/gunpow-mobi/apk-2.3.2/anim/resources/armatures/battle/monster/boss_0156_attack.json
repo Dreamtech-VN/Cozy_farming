@@ -1,0 +1,142 @@
+{
+"skeleton": { "hash": "z9qcyV2zQPsYz2L2j3RhLLXWWLA", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root", "y": -180.78, "scaleX": 0.8, "scaleY": 0.8 },
+	{ "name": "FX_01", "parent": "root", "x": 1.04, "y": 221.76 }
+],
+"slots": [
+	{ "name": "FX_01", "bone": "FX_01" }
+],
+"skins": {
+	"default": {
+		"FX_01": {
+			"DANDAO/00012": { "x": -1.04, "y": 13.96, "width": 298, "height": 258 },
+			"DANDAO/00014": { "x": -1.04, "y": 13.96, "width": 298, "height": 258 },
+			"DANDAO/00016": { "x": -1.04, "y": 13.96, "width": 298, "height": 258 },
+			"DANDAO/00018": { "x": -1.04, "y": 13.96, "width": 298, "height": 258 },
+			"DANDAO/00020": { "x": -1.04, "y": 13.96, "width": 298, "height": 258 },
+			"DANDAO/00022": { "x": -1.04, "y": 13.96, "width": 298, "height": 258 },
+			"DANDAO/00024": { "x": -1.04, "y": 13.96, "width": 298, "height": 258 },
+			"DANDAO/00026": { "x": -1.04, "y": 13.96, "width": 298, "height": 258 },
+			"DANDAO/00028": { "x": -1.04, "y": 13.96, "width": 298, "height": 258 }
+		}
+	}
+},
+"animations": {
+	"die": {
+		"bones": {
+			"root": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.1, "angle": 0, "curve": "stepped" },
+					{ "time": 0.5, "angle": 0, "curve": "stepped" },
+					{ "time": 0.6666, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.1, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.5, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.6666, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.1, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.5, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.6666, "x": 1, "y": 1 }
+				]
+			}
+		}
+	},
+	"fly": {},
+	"run": {},
+	"shoot": {
+		"drawOrder": [
+			{ "time": 0.3333 },
+			{ "time": 0.5 },
+			{ "time": 0.6666 },
+			{ "time": 0.8 },
+			{ "time": 1.2333 }
+		]
+	},
+	"shoot_1": {
+		"slots": {
+			"FX_01": {
+				"attachment": [
+					{ "time": 0, "name": "DANDAO/00012" },
+					{ "time": 0.0666, "name": "DANDAO/00014" },
+					{ "time": 0.1333, "name": "DANDAO/00016" },
+					{ "time": 0.2, "name": "DANDAO/00018" },
+					{ "time": 0.2666, "name": "DANDAO/00020" },
+					{ "time": 0.3333, "name": "DANDAO/00022" },
+					{ "time": 0.4, "name": "DANDAO/00024" },
+					{ "time": 0.4666, "name": "DANDAO/00026" },
+					{ "time": 0.5666, "name": "DANDAO/00028" },
+					{ "time": 0.6333, "name": null }
+				]
+			}
+		}
+	},
+	"shoot_2": {
+		"bones": {
+			"root": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.5333, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.5333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.5333, "x": 1, "y": 1 }
+				]
+			}
+		},
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 0.1 }
+		]
+	},
+	"shoot_3": {
+		"bones": {
+			"root": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			}
+		}
+	},
+	"wait": {},
+	"wound": {
+		"bones": {
+			"root": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.1, "angle": 0, "curve": "stepped" },
+					{ "time": 0.6, "angle": 0, "curve": "stepped" },
+					{ "time": 1, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.1, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.6, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 1, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.1, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.6, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 1, "x": 1, "y": 1 }
+				]
+			}
+		}
+	}
+}
+}
