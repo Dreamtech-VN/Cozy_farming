@@ -8,9 +8,11 @@ import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import vn.dreamtech.game.server.admin.AdminRemoveFriendshipHandler;
 import vn.dreamtech.game.server.dao.CharacterDao;
 import vn.dreamtech.game.server.dao.FriendRequestDao;
 import vn.dreamtech.game.server.dao.FriendshipDao;
+import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.UserSettingsDao;
 import vn.dreamtech.game.server.model.Character;
 
@@ -31,6 +33,7 @@ class FriendFlowTest {
     private HttpServer server;
     private int port;
     private UserSettingsDao settingsDao;
+    private UserDao userDao;
     private final Gson gson = new Gson();
     private final HttpClient http = HttpClient.newHttpClient();
 
@@ -40,6 +43,13 @@ class FriendFlowTest {
         ds.setURL("jdbc:h2:mem:friend_flow_" + System.nanoTime() + ";DB_CLOSE_DELAY=-1;MODE=MySQL");
         DataSource dataSource = ds;
         try (Connection c = dataSource.getConnection(); Statement st = c.createStatement()) {
+            st.execute("""
+                CREATE TABLE users (
+                  id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(50) UNIQUE, password_hash VARCHAR(255),
+                  guest_token VARCHAR(64) UNIQUE, google_id VARCHAR(128) UNIQUE, apple_id VARCHAR(128) UNIQUE,
+                  display_name VARCHAR(50), created_at TIMESTAMP NOT NULL
+                )
+                """);
             st.execute("""
                 CREATE TABLE friend_requests (
                   id BIGINT AUTO_INCREMENT PRIMARY KEY, from_user_id INT NOT NULL, to_user_id INT NOT NULL,
@@ -69,6 +79,7 @@ class FriendFlowTest {
         FriendRequestDao friendRequestDao = new FriendRequestDao(dataSource);
         FriendshipDao friendshipDao = new FriendshipDao(dataSource);
         settingsDao = new UserSettingsDao(dataSource);
+        userDao = new UserDao(dataSource);
         CharacterDao characterDao = new CharacterDao(dataSource);
         characterDao.create(new Character(1, "Alice", 0, 1, 1, 1));
         characterDao.create(new Character(2, "Bob", 1, 1, 1, 1));
@@ -79,6 +90,7 @@ class FriendFlowTest {
         server.createContext("/api/friends/requests", new PendingRequestsHandler(friendRequestDao));
         server.createContext("/api/friends/remove", new RemoveFriendHandler(friendshipDao));
         server.createContext("/api/friends", new FriendsListHandler(friendshipDao, characterDao));
+        server.createContext("/api/admin/friend/remove", new AdminRemoveFriendshipHandler(userDao, friendshipDao));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -159,5 +171,11 @@ class FriendFlowTest {
         long requestId = gson.fromJson(req.body(), JsonObject.class).get("id").getAsLong();
         post("/api/friends/respond", new RespondFriendRequestHandler.Req(requestId, 2, false));
         assertTrue(gson.fromJson(get("/api/friends?userId=1").body(), JsonArray.class).isEmpty());
+    }
+
+    @Test
+    void adminRemoveFriendshipRequiresAdminToken() throws Exception {
+        var res = post("/api/admin/friend/remove", new AdminRemoveFriendshipHandler.Req(1, 2));
+        assertEquals(503, res.statusCode());
     }
 }
