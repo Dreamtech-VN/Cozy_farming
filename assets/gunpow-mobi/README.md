@@ -1,6 +1,6 @@
-# GunPow Mobi — asset trích xuất
+# GunPow Mobi — asset client
 
-Nội dung trong thư mục này được trích ra từ asset `Server.7z` của release
+Asset client game trích ra từ `Server.7z` của release
 [`Test`](https://github.com/Dreamtech-VN/Cozy_farming/releases/tag/Test).
 
 > **Lưu ý:** đây là asset của **GunPow Mobi** (game Cocos2d-x, bản địa hoá tiếng Việt),
@@ -17,14 +17,9 @@ máy ảo VMware:
 | `Server/GunPowM PGaming.vmx` | 3 082 B |
 
 VM chạy CentOS 7, đĩa dùng LVM (VG `centos`: `root` 35.6 G, `home` 17.4 G,
-`swap` 6 G), filesystem XFS. Asset nằm trong LV `home`, gồm hai phần:
-
-- `/home/ddd2/` — game server Java (channel, s1, redis cluster)
-- `/home/www/` — web portal PHP (đăng ký, nạp thẻ, giftcode, admin) kèm các gói
-  cập nhật client
-
-Các gói `/home/www/update/{android,ios}/*.zip` chính là **asset client game**;
-chúng đã được giải nén sẵn vào `client/` bên dưới.
+`swap` 6 G), filesystem XFS. Asset nằm trong LV `home`, ở các gói cập nhật
+client `/home/www/update/{android,ios}/*.zip` — bốn gói này đã được giải nén
+vào `client/` bên dưới.
 
 ### Cách trích xuất
 
@@ -38,58 +33,51 @@ qemu-img convert -O raw "GunPowM PGaming.vmdk" disk.raw
 ## Cấu trúc
 
 ```
-client/                 asset client game (đã giải nén từ các gói update)
-  android/              resources/, resources_vn/ — .pkm, .lua, .atlas, .json, .plist
-  ios/                  resources/, resources_vn/ — .dat
-server/                 config + script + jar của game server
-  channel/              channelserver, ipdmain
-  s1/                   battleManage, battleServer, chatServer, dispatchServer,
-                        friendServer, playerServer, roomServer, transactionServer,
-                        worldServer
-  serverLib/            cache.jar, empirenetprotocol.jar, netprotocol.jar, reloadserver.jar
-  redis/                file cấu hình cluster (gameredis 8091-9094, ipdredis 8071-9074)
-web/                    mã nguồn portal PHP + tài nguyên giao diện
-MANIFEST.tsv            danh sách đầy đủ: đường dẫn, kích thước, SHA-256
+client/
+  android/
+    resources/       lua
+    resources_vn/    armatures/, image/, lua/
+  ios/
+    resources/       dat
+    resources_vn/    dat/
+MANIFEST.tsv         danh sách đầy đủ: đường dẫn, kích thước, SHA-256
 ```
 
-Tổng cộng **4 796 file / 109.3 MB**.
+Cây thư mục giữ nguyên như trong gói update — đây là đường dẫn game dùng để
+load asset lúc chạy, đổi đi thì file mất ngữ cảnh.
+
+Tổng cộng **4 490 file / 95.9 MB**, file lớn nhất 5.25 MB.
 
 | Loại | Số file | Dung lượng |
 |---|---:|---:|
 | `.dat` (data client iOS) | 2 003 | 39.34 MB |
 | `.pkm` (texture ETC1) | 1 536 | 36.33 MB |
-| `.xml` | 921 | 10.63 MB |
-| `.jar` (server game) | 15 | 6.36 MB |
-| `.js` | 34 | 1.27 MB |
+| `.xml` | 904 | 8.99 MB |
+| `.lua` (logic + bảng số liệu) | 6 | 10.29 MB |
 | `.json` (armature/Spine) | 18 | 0.88 MB |
-| `.lua` (logic + bảng số liệu) | 6 | 10.19 MB |
-| còn lại | 263 | 4.30 MB |
+| `.atlas`, `.plist`, còn lại | 23 | 0.05 MB |
 
-## Đã lược bỏ
+Ảnh dùng định dạng ETC1 (`.pkm`), kênh alpha tách riêng thành file
+`*_alpha.pkm` đi kèm.
 
-Những phần sau **không** được đưa vào repo:
+## Không đưa vào repo
+
+Máy ảo còn nhiều thứ khác, nhưng chúng không phải asset nên bị bỏ:
 
 | Nội dung | Dung lượng | Lý do |
 |---|---:|---|
-| `ddd2/redis/*/data/*.aof`, `*.rdb` | ~72 MB | dữ liệu runtime, chứa dữ liệu người chơi |
-| `ddd2/lib/*.jar` | ~32 MB | thư viện Maven bên thứ ba (Spring, Hibernate, …) |
-| `redis-server`, `redis-cli` | ~21 MB | binary Redis chuẩn |
-| `*.log`, `*.pid` | ~1.5 MB | log và pid runtime |
+| `ddd2/` — game server Java | ~48 MB | mã và config server, không phải asset |
+| `www/` — portal PHP | ~5 MB | web đăng ký / nạp thẻ, kèm thư viện frontend bên thứ ba |
+| `redis/*/data/*.aof`, `*.rdb` | ~72 MB | dữ liệu runtime, chứa dữ liệu người chơi |
 | `www/update/*/*.zip` | ~33 MB | trùng nội dung — đã giải nén vào `client/` |
-| Phần còn lại của LV `root` | — | hệ điều hành CentOS 7, không phải asset |
+| LV `root` | — | hệ điều hành CentOS 7 |
 
-## Credentials đã che
+## ⚠️ Credentials trong file release
 
-Các file cấu hình gốc chứa mật khẩu ở dạng plaintext. **33 dòng** đã được thay
-bằng `__REDACTED__` trước khi commit, gồm:
+Các file cấu hình trong máy ảo chứa mật khẩu plaintext — mật khẩu MySQL `root`,
+Redis, `serverpassword` giữa các server, SMTP, thông tin cổng thanh toán
+GameBank, secret_key các kênh phát hành và mã GM portal.
 
-- mật khẩu MySQL `root`
-- mật khẩu Redis và `serverpassword` giữa các server
-- mật khẩu SMTP
-- `merchant_id` / `api_user` / `api_password` của cổng thanh toán GameBank
-- 8 `secret_key` của các kênh phát hành
-- mã GM của portal
-
-Xem `MANIFEST.tsv` để đối chiếu checksum. Bản gốc chưa che vẫn nằm trong file
-release — repo này là public, nên **cần đổi toàn bộ mật khẩu trên và cân nhắc
-gỡ release `Test`**.
+Những file đó **không** nằm trong repo này. Nhưng bản gốc vẫn tải công khai
+được từ release `Test`, nên cần đổi toàn bộ mật khẩu trên và cân nhắc gỡ
+release xuống.
