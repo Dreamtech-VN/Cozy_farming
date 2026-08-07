@@ -15,6 +15,7 @@ import vn.dreamtech.game.server.dao.LevelDao;
 import vn.dreamtech.game.server.dao.MarriageActivityDao;
 import vn.dreamtech.game.server.dao.MarriageDao;
 import vn.dreamtech.game.server.dao.PresenceDao;
+import vn.dreamtech.game.server.dao.TowerRecordDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.WalletDao;
 import vn.dreamtech.game.server.guild.GuildException;
@@ -82,7 +83,7 @@ class MarriageActivityServiceTest {
         friendshipDao = new FriendshipDao(dataSource);
         presenceDao = new PresenceDao(dataSource);
         MarriageActivityDao activityDao = new MarriageActivityDao(dataSource);
-        battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource));
+        battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource), new TowerRecordDao(dataSource));
         activityService = new MarriageActivityService(marriageDao, activityDao, friendshipDao, presenceDao, battleService);
     }
 

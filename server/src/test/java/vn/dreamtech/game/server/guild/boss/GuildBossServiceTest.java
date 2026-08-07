@@ -16,6 +16,7 @@ import vn.dreamtech.game.server.dao.GuildBossCycleDao;
 import vn.dreamtech.game.server.dao.GuildDao;
 import vn.dreamtech.game.server.dao.GuildMemberDao;
 import vn.dreamtech.game.server.dao.LevelDao;
+import vn.dreamtech.game.server.dao.TowerRecordDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.WalletDao;
 import vn.dreamtech.game.server.guild.GuildException;
@@ -78,7 +79,7 @@ class GuildBossServiceTest {
         GuildBossCycleDao cycleDao = new GuildBossCycleDao(dataSource);
         GuildBossAttemptDao attemptDao = new GuildBossAttemptDao(dataSource);
         contributionDao = new GuildBossContributionDao(dataSource);
-        battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource));
+        battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource), new TowerRecordDao(dataSource));
         guildService = new GuildService(guildDao, guildMemberDao, characterDao, walletDao);
         guildBossService = new GuildBossService(guildMemberDao, cycleDao, attemptDao, contributionDao, battleService, levelDao, walletDao);
     }

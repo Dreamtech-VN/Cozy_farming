@@ -15,6 +15,7 @@ import vn.dreamtech.game.server.dao.GuildMemberDao;
 import vn.dreamtech.game.server.dao.GuildWarAttemptDao;
 import vn.dreamtech.game.server.dao.GuildWarDao;
 import vn.dreamtech.game.server.dao.LevelDao;
+import vn.dreamtech.game.server.dao.TowerRecordDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.WalletDao;
 import vn.dreamtech.game.server.guild.GuildException;
@@ -74,7 +75,7 @@ class GuildWarServiceTest {
         GuildMemberDao guildMemberDao = new GuildMemberDao(dataSource);
         GuildWarDao warDao = new GuildWarDao(dataSource);
         GuildWarAttemptDao attemptDao = new GuildWarAttemptDao(dataSource);
-        battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource));
+        battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource), new TowerRecordDao(dataSource));
         guildService = new GuildService(guildDao, guildMemberDao, characterDao, walletDao);
         guildWarService = new GuildWarService(guildDao, guildMemberDao, warDao, attemptDao, battleService);
     }

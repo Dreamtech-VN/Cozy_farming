@@ -13,6 +13,7 @@ import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
 import vn.dreamtech.game.server.dao.LevelDao;
 import vn.dreamtech.game.server.dao.PvpMatchHistoryDao;
 import vn.dreamtech.game.server.dao.PvpRankDao;
+import vn.dreamtech.game.server.dao.TowerRecordDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.WalletDao;
 import vn.dreamtech.game.server.model.Character;
@@ -67,7 +68,7 @@ class PvpHttpFlowTest {
         characterDao = new CharacterDao(dataSource);
         WalletDao walletDao = new WalletDao(dataSource);
         LevelDao levelDao = new LevelDao(dataSource);
-        BattleService battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource));
+        BattleService battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource), new TowerRecordDao(dataSource));
         PvpService pvpService = new PvpService(characterDao, battleService, new PvpRankDao(dataSource), new PvpMatchHistoryDao(dataSource));
 
         server = HttpServer.create(new InetSocketAddress(0), 0);

@@ -29,6 +29,7 @@ import vn.dreamtech.game.server.battle.dungeon.StartDungeonHandler;
 import vn.dreamtech.game.server.battle.eventpuzzle.EventPuzzleListHandler;
 import vn.dreamtech.game.server.battle.eventpuzzle.StartEventPuzzleHandler;
 import vn.dreamtech.game.server.battle.tower.StartTowerHandler;
+import vn.dreamtech.game.server.battle.tower.TowerLeaderboardHandler;
 import vn.dreamtech.game.server.battle.tower.TowerListHandler;
 import vn.dreamtech.game.server.account.DeleteAccountHandler;
 import vn.dreamtech.game.server.character.CharacterHandler;
@@ -74,6 +75,7 @@ import vn.dreamtech.game.server.dao.MarriageProposalDao;
 import vn.dreamtech.game.server.dao.PvpMatchHistoryDao;
 import vn.dreamtech.game.server.dao.PvpRankDao;
 import vn.dreamtech.game.server.dao.SupportTicketDao;
+import vn.dreamtech.game.server.dao.TowerRecordDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.UserSettingsDao;
 import vn.dreamtech.game.server.dao.WalletDao;
@@ -226,7 +228,8 @@ public final class Main {
         GiftcodeDao giftcodeDao = new GiftcodeDao(dataSource);
         GiftcodeRedemptionDao giftcodeRedemptionDao = new GiftcodeRedemptionDao(dataSource);
         EventBoardDao eventBoardDao = new EventBoardDao(dataSource);
-        BattleService battleService = new BattleService(levelDao, walletDao, challengeAttemptDao);
+        TowerRecordDao towerRecordDao = new TowerRecordDao(dataSource);
+        BattleService battleService = new BattleService(levelDao, walletDao, challengeAttemptDao, towerRecordDao);
         GuildService guildService = new GuildService(guildDao, guildMemberDao, characterDao, walletDao);
         GuildBossService guildBossService = new GuildBossService(guildMemberDao, guildBossCycleDao, guildBossAttemptDao,
                 guildBossContributionDao, battleService, levelDao, walletDao);
@@ -309,6 +312,7 @@ public final class Main {
         server.createContext("/api/battle/dungeon/start", new StartDungeonHandler(battleService));
         server.createContext("/api/battle/tower/list", new TowerListHandler());
         server.createContext("/api/battle/tower/start", new StartTowerHandler(battleService));
+        server.createContext("/api/battle/tower/leaderboard", new TowerLeaderboardHandler(battleService));
         server.createContext("/api/guild/create", new CreateGuildHandler(guildService));
         server.createContext("/api/guild/join", new JoinGuildHandler(guildService));
         server.createContext("/api/guild/leave", new LeaveGuildHandler(guildService));

@@ -13,6 +13,7 @@ import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
 import vn.dreamtech.game.server.dao.LevelDao;
 import vn.dreamtech.game.server.dao.PvpMatchHistoryDao;
 import vn.dreamtech.game.server.dao.PvpRankDao;
+import vn.dreamtech.game.server.dao.TowerRecordDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.WalletDao;
 import vn.dreamtech.game.server.model.Character;
@@ -67,7 +68,7 @@ class PvpServiceTest {
         LevelDao levelDao = new LevelDao(dataSource);
         rankDao = new PvpRankDao(dataSource);
         PvpMatchHistoryDao historyDao = new PvpMatchHistoryDao(dataSource);
-        battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource));
+        battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource), new TowerRecordDao(dataSource));
         pvpService = new PvpService(characterDao, battleService, rankDao, historyDao);
     }
 

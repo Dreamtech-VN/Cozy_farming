@@ -11,6 +11,7 @@ import vn.dreamtech.game.server.battle.BattleService;
 import vn.dreamtech.game.server.dao.CharacterDao;
 import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
 import vn.dreamtech.game.server.dao.LevelDao;
+import vn.dreamtech.game.server.dao.TowerRecordDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.WalletDao;
 import vn.dreamtech.game.server.dao.WorldBossAttemptDao;
@@ -69,7 +70,7 @@ class WorldBossHttpFlowTest {
         characterDao = new CharacterDao(dataSource);
         WalletDao walletDao = new WalletDao(dataSource);
         LevelDao levelDao = new LevelDao(dataSource);
-        BattleService battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource));
+        BattleService battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource), new TowerRecordDao(dataSource));
         WorldBossService worldBossService = new WorldBossService(characterDao, new WorldBossCycleDao(dataSource),
                 new WorldBossAttemptDao(dataSource), new WorldBossContributionDao(dataSource), battleService, levelDao, walletDao);
 
