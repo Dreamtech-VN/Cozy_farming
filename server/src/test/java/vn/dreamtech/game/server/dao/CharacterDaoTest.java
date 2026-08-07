@@ -59,4 +59,18 @@ class CharacterDaoTest {
         assertEquals(7, found.bottomId());
         assertEquals("Alice", found.name());
     }
+
+    @Test
+    void renameChangesOnlyName() throws SQLException {
+        dao.create(new Character(1, "Alice", 0, 1, 1, 1));
+        assertTrue(dao.rename(1, "BadWord"));
+        var found = dao.findByUserId(1).orElseThrow();
+        assertEquals("BadWord", found.name());
+        assertEquals(0, found.gender());
+    }
+
+    @Test
+    void renameUnknownUserReturnsFalse() throws SQLException {
+        assertFalse(dao.rename(999, "Someone"));
+    }
 }

@@ -32,6 +32,7 @@ import vn.dreamtech.game.server.battle.tower.StartTowerHandler;
 import vn.dreamtech.game.server.battle.tower.TowerLeaderboardHandler;
 import vn.dreamtech.game.server.battle.tower.TowerListHandler;
 import vn.dreamtech.game.server.account.DeleteAccountHandler;
+import vn.dreamtech.game.server.character.AdminRenameCharacterHandler;
 import vn.dreamtech.game.server.character.CharacterHandler;
 import vn.dreamtech.game.server.character.CosmeticCatalogHandler;
 import vn.dreamtech.game.server.character.CreateCharacterHandler;
@@ -267,6 +268,7 @@ public final class Main {
         server.createContext("/api/chat/send", new SendMessageHandler(characterDao, chatMessageDao));
         server.createContext("/api/chat/recent", new RecentMessagesHandler(chatMessageDao));
         server.createContext("/api/admin/chat/delete", new AdminDeleteMessageHandler(chatMessageDao));
+        server.createContext("/api/admin/character/rename", new AdminRenameCharacterHandler(characterDao));
         server.createContext("/api/settings", new GetSettingsHandler(settingsDao));
         server.createContext("/api/settings/update", new UpdateSettingsHandler(settingsDao));
         server.createContext("/api/account/change-password", new ChangePasswordHandler(userDao));

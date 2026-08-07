@@ -58,6 +58,7 @@ class CharacterFlowTest {
         server.createContext("/api/character/create", new CreateCharacterHandler(userDao, characterDao));
         server.createContext("/api/character/outfit", new UpdateOutfitHandler(characterDao));
         server.createContext("/api/character", new CharacterHandler(characterDao));
+        server.createContext("/api/admin/character/rename", new AdminRenameCharacterHandler(characterDao));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -133,5 +134,12 @@ class CharacterFlowTest {
         int secondUserId = userDao.createGuest("tok-2").id();
         var res = post("/api/character/create", new CreateCharacterHandler.Req(secondUserId, "Alice", 0, 1, 1, 1));
         assertEquals(409, res.statusCode());
+    }
+
+    @Test
+    void adminRenameRequiresAdminToken() throws Exception {
+        post("/api/character/create", new CreateCharacterHandler.Req(userId, "Alice", 0, 1, 1, 1));
+        var res = post("/api/admin/character/rename", new AdminRenameCharacterHandler.Req(userId, "NewName"));
+        assertEquals(503, res.statusCode());
     }
 }

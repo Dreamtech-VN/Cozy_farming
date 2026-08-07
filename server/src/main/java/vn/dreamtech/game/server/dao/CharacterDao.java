@@ -61,6 +61,16 @@ public final class CharacterDao {
         }
     }
 
+    /** Admin đổi tên nhân vật (kiểm duyệt tên vi phạm) — trả về false nếu user không tồn tại/chưa tạo nhân vật. */
+    public boolean rename(int userId, String newName) throws SQLException {
+        String sql = "UPDATE characters SET name = ? WHERE user_id = ?";
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, newName);
+            ps.setInt(2, userId);
+            return ps.executeUpdate() > 0;
+        }
+    }
+
     public void updateOutfit(int userId, int hairId, int topId, int bottomId) throws SQLException {
         String sql = "UPDATE characters SET hair_id = ?, top_id = ?, bottom_id = ? WHERE user_id = ?";
         try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {

@@ -785,6 +785,19 @@ cũ.
       Test: `ChatMessageDaoTest` thêm 3 test (xoá thành công, xoá tin
       không tồn tại trả về false, xoá đúng 1 tin không ảnh hưởng tin khác);
       `ChatFlowTest` thêm 1 test (endpoint đòi hỏi `ADMIN_TOKEN`).
+- [x] **Giai đoạn 33 — admin đổi tên nhân vật**: mở rộng phạm vi admin
+      tiếp — trước đây KHÔNG có cách nào đổi tên nhân vật sau khi tạo (kể
+      cả người chơi tự đổi), nên tên vi phạm/phản cảm không có cách xử lý.
+      - `CharacterDao.rename` (method MỚI) — trả về `false` nếu user chưa
+        tạo nhân vật.
+      - `POST /api/admin/character/rename` {userId, newName} — validate độ
+        dài 2-20 ký tự (khớp `CreateCharacterHandler`), 409 nếu tên đã có
+        người khác dùng (đổi về CHÍNH tên cũ của mình thì không bị chặn —
+        so sánh với tên hiện tại trước khi kiểm tra trùng), 404 nếu chưa
+        có nhân vật. Cần header `X-Admin-Token`.
+      Test: `CharacterDaoTest` thêm 2 test (đổi tên chỉ đổi đúng field tên,
+      đổi tên user chưa có nhân vật trả về false); `CharacterFlowTest`
+      thêm 1 test (endpoint đòi hỏi `ADMIN_TOKEN`).
 
 ## Chạy thử
 
