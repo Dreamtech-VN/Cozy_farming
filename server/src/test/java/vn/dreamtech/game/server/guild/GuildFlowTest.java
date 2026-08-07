@@ -34,6 +34,7 @@ class GuildFlowTest {
     private UserDao userDao;
     private CharacterDao characterDao;
     private WalletDao walletDao;
+    private GuildService guildService;
     private final Gson gson = new Gson();
     private final HttpClient http = HttpClient.newHttpClient();
 
@@ -65,7 +66,7 @@ class GuildFlowTest {
         walletDao = new WalletDao(dataSource);
         GuildDao guildDao = new GuildDao(dataSource);
         GuildMemberDao guildMemberDao = new GuildMemberDao(dataSource);
-        GuildService guildService = new GuildService(guildDao, guildMemberDao, characterDao, walletDao);
+        guildService = new GuildService(guildDao, guildMemberDao, characterDao, walletDao);
 
         server = HttpServer.create(new InetSocketAddress(0), 0);
         server.createContext("/api/guild/create", new CreateGuildHandler(guildService));
@@ -78,6 +79,8 @@ class GuildFlowTest {
         server.createContext("/api/guild/list", new GuildListHandler(guildService));
         server.createContext("/api/guild/info", new GuildInfoHandler(guildService));
         server.createContext("/api/guild/my", new MyGuildHandler(guildService));
+        server.createContext("/api/admin/guild/disband", new AdminDisbandGuildHandler(guildService));
+        server.createContext("/api/admin/guild/kick", new AdminKickMemberHandler(guildService));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -235,5 +238,57 @@ class GuildFlowTest {
         assertEquals(200, list.statusCode());
         assertTrue(list.body().contains("Rồng Lửa"));
         assertTrue(list.body().contains("\"memberCount\":1"));
+    }
+
+    @Test
+    void adminDisbandRemovesGuildRegardlessOfLeader() throws Exception {
+        int leader = newPlayer("Leader", 20_000);
+        var guild = guildService.create(leader, "Rồng Lửa", "RL", null);
+
+        guildService.adminDisband(guild.id());
+        assertTrue(guildService.myGuild(leader).isEmpty());
+    }
+
+    @Test
+    void adminDisbandUnknownGuildRejected() {
+        var e = org.junit.jupiter.api.Assertions.assertThrows(GuildException.class, () -> guildService.adminDisband(999));
+        assertEquals(404, e.status());
+    }
+
+    @Test
+    void adminKickRemovesAnyMemberIncludingLeader() throws Exception {
+        int leader = newPlayer("Leader", 20_000);
+        var guild = guildService.create(leader, "Rồng Lửa", "RL", null);
+        int member = newPlayer("Member", 0);
+        guildService.join(member, guild.id());
+
+        // admin đuổi được cả hội trưởng — khác kick thường (chặn đuổi hội trưởng)
+        guildService.adminKick(guild.id(), leader);
+        assertTrue(guildService.myGuild(leader).isEmpty());
+        assertTrue(guildService.myGuild(member).isPresent());
+    }
+
+    @Test
+    void adminKickWrongGuildRejected() throws Exception {
+        int leaderA = newPlayer("LeaderA", 20_000);
+        var guildA = guildService.create(leaderA, "Rồng Lửa", "RL", null);
+        int leaderB = newPlayer("LeaderB", 20_000);
+        guildService.create(leaderB, "Băng Giá", "BG", null);
+
+        var e = org.junit.jupiter.api.Assertions.assertThrows(GuildException.class,
+                () -> guildService.adminKick(guildA.id(), leaderB));
+        assertEquals(400, e.status());
+    }
+
+    @Test
+    void adminEndpointsRequireAdminToken() throws Exception {
+        int leader = newPlayer("Leader", 20_000);
+        var guild = guildService.create(leader, "Rồng Lửa", "RL", null);
+
+        var disband = post("/api/admin/guild/disband", new AdminDisbandGuildHandler.Req(guild.id()));
+        assertEquals(503, disband.statusCode());
+
+        var kick = post("/api/admin/guild/kick", new AdminKickMemberHandler.Req(guild.id(), leader));
+        assertEquals(503, kick.statusCode());
     }
 }

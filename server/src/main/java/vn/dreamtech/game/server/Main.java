@@ -107,6 +107,8 @@ import vn.dreamtech.game.server.mail.MailClaimHandler;
 import vn.dreamtech.game.server.mail.MailListHandler;
 import vn.dreamtech.game.server.mail.MailReadHandler;
 import vn.dreamtech.game.server.mail.MailService;
+import vn.dreamtech.game.server.guild.AdminDisbandGuildHandler;
+import vn.dreamtech.game.server.guild.AdminKickMemberHandler;
 import vn.dreamtech.game.server.guild.ChangeRoleHandler;
 import vn.dreamtech.game.server.guild.CreateGuildHandler;
 import vn.dreamtech.game.server.guild.DisbandGuildHandler;
@@ -358,6 +360,8 @@ public final class Main {
         server.createContext("/api/admin/users/unban", new AdminUnbanUserHandler(bannedUserDao));
         server.createContext("/api/admin/users/wallet/adjust", new AdminAdjustWalletHandler(userDao, walletDao));
         server.createContext("/api/admin/users/lookup", new AdminLookupUserHandler(userDao, characterDao, walletDao, levelDao, bannedUserDao));
+        server.createContext("/api/admin/guild/disband", new AdminDisbandGuildHandler(guildService));
+        server.createContext("/api/admin/guild/kick", new AdminKickMemberHandler(guildService));
         server.setExecutor(null);
         server.start();
         log.info("Game server đang chạy ở cổng {}", port);
