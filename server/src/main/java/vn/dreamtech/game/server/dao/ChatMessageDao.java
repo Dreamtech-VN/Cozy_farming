@@ -47,6 +47,15 @@ public final class ChatMessageDao {
         }
     }
 
+    /** Admin xoá 1 tin nhắn (kiểm duyệt nội dung vi phạm) — trả về false nếu tin không tồn tại. */
+    public boolean delete(long messageId) throws SQLException {
+        String sql = "DELETE FROM chat_messages WHERE id = ?";
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setLong(1, messageId);
+            return ps.executeUpdate() > 0;
+        }
+    }
+
     /** Tin nhắn có id > {@code sinceId}, cũ nhất trước, tối đa {@code limit} tin. */
     public List<ChatMessage> findSince(long sinceId, int limit) throws SQLException {
         String sql = "SELECT id, user_id, sender_name, text, created_at FROM chat_messages WHERE id > ? ORDER BY id ASC LIMIT ?";
