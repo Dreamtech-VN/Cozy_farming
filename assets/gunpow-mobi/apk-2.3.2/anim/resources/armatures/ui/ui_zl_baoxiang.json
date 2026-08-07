@@ -1,0 +1,56 @@
+{
+"skeleton": { "hash": "RGZK4ZMGr6MuXBAAxEaLnf+P9Sg", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "ui_zl_baoxiang", "parent": "root" }
+],
+"slots": [
+	{ "name": "ui_zl_baoxiang", "bone": "ui_zl_baoxiang", "blend": "additive" }
+],
+"skins": {
+	"default": {
+		"ui_zl_baoxiang": {
+			"baoxiang/00000": { "width": 227, "height": 207 },
+			"baoxiang/00001": { "width": 227, "height": 207 },
+			"baoxiang/00002": { "width": 227, "height": 207 },
+			"baoxiang/00003": { "width": 227, "height": 207 },
+			"baoxiang/00004": { "width": 227, "height": 207 },
+			"baoxiang/00005": { "width": 227, "height": 207 },
+			"baoxiang/00006": { "width": 227, "height": 207 },
+			"baoxiang/00007": { "width": 227, "height": 207 },
+			"baoxiang/00008": { "width": 227, "height": 207 },
+			"baoxiang/00009": { "width": 227, "height": 207 },
+			"baoxiang/00010": { "width": 227, "height": 207 },
+			"baoxiang/00011": { "width": 227, "height": 207 },
+			"baoxiang/00012": { "width": 227, "height": 207 },
+			"baoxiang/00013": { "width": 227, "height": 207 },
+			"baoxiang/00014": { "width": 227, "height": 207 }
+		}
+	}
+},
+"animations": {
+	"wait1": {
+		"slots": {
+			"ui_zl_baoxiang": {
+				"attachment": [
+					{ "time": 0, "name": "baoxiang/00000" },
+					{ "time": 0.0333, "name": "baoxiang/00001" },
+					{ "time": 0.0666, "name": "baoxiang/00002" },
+					{ "time": 0.1, "name": "baoxiang/00003" },
+					{ "time": 0.1333, "name": "baoxiang/00004" },
+					{ "time": 0.1666, "name": "baoxiang/00005" },
+					{ "time": 0.2, "name": "baoxiang/00006" },
+					{ "time": 0.2333, "name": "baoxiang/00007" },
+					{ "time": 0.2666, "name": "baoxiang/00008" },
+					{ "time": 0.3, "name": "baoxiang/00009" },
+					{ "time": 0.3333, "name": "baoxiang/00010" },
+					{ "time": 0.3666, "name": "baoxiang/00011" },
+					{ "time": 0.4, "name": "baoxiang/00012" },
+					{ "time": 0.4333, "name": "baoxiang/00013" },
+					{ "time": 0.4666, "name": "baoxiang/00014" }
+				]
+			}
+		}
+	}
+}
+}

@@ -1,0 +1,74 @@
+{
+"skeleton": { "hash": "1O5kganGxINAE5VQLfABvTbGREQ", "spine": "2.1.27", "width": 184, "height": 140, "images": "./images/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "gfhf", "bone": "root" },
+	{ "name": "well_2_water01", "bone": "root" },
+	{ "name": "well_2_water02", "bone": "root" },
+	{ "name": "well_2_water03", "bone": "root" },
+	{ "name": "well_2_water04", "bone": "root", "attachment": "well_2_water04" }
+],
+"skins": {
+	"default": {
+		"well_2_water01": {
+			"well_2_water01": { "x": 14, "y": 67.52, "width": 37, "height": 20 }
+		},
+		"well_2_water02": {
+			"well_2_water02": { "y": 76.02, "width": 77, "height": 37 }
+		},
+		"well_2_water03": {
+			"well_2_water03": { "y": 82.02, "width": 79, "height": 51 }
+		},
+		"well_2_water04": {
+			"well_2_water04": { "y": 87.52, "width": 85, "height": 62 }
+		}
+	}
+},
+"animations": {
+	"well_2_water01": {
+		"slots": {
+			"well_2_water01": {
+				"attachment": [
+					{ "time": 0, "name": "well_2_water01" }
+				]
+			},
+			"well_2_water04": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		}
+	},
+	"well_2_water02": {
+		"slots": {
+			"well_2_water02": {
+				"attachment": [
+					{ "time": 0, "name": "well_2_water02" }
+				]
+			},
+			"well_2_water04": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		}
+	},
+	"well_2_water03": {
+		"slots": {
+			"well_2_water03": {
+				"attachment": [
+					{ "time": 0, "name": "well_2_water03" }
+				]
+			},
+			"well_2_water04": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		}
+	},
+	"well_2_water04": {}
+}
+}

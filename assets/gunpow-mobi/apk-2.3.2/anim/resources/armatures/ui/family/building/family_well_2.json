@@ -1,0 +1,41 @@
+{
+"skeleton": { "hash": "uSV9nbgTXICGZT3ExpMnKbchkzE", "spine": "2.1.27", "width": 184, "height": 187, "images": "./images/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "gfhf", "bone": "root" },
+	{ "name": "family_well_2_lvup04", "bone": "root", "attachment": "family_well_2_lvup04" },
+	{ "name": "family_well_2_lvup05", "bone": "root", "attachment": "family_well_2_lvup05" }
+],
+"skins": {
+	"default": {
+		"family_well_2_lvup04": {
+			"family_well_2_lvup04": { "x": 1, "y": 93.02, "width": 143, "height": 139 }
+		},
+		"family_well_2_lvup05": {
+			"family_well_2_lvup05": { "x": -2.99, "y": 105.52, "width": 159, "height": 168 }
+		}
+	}
+},
+"animations": {
+	"lvup04": {
+		"slots": {
+			"family_well_2_lvup05": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		}
+	},
+	"lvup05": {
+		"slots": {
+			"family_well_2_lvup05": {
+				"attachment": [
+					{ "time": 0, "name": "family_well_2_lvup05" }
+				]
+			}
+		}
+	}
+}
+}

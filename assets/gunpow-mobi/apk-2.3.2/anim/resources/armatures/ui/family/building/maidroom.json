@@ -1,0 +1,71 @@
+{
+"skeleton": { "hash": "0giUy5kVSB3nbarthFruFIn96Es", "spine": "2.1.27", "width": 85.03, "height": 104.03, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "family_maidroom", "parent": "root", "length": 31.14, "x": 0.65, "y": 54.14, "rotation": 91.8 },
+	{ "name": "maidroom", "parent": "root" },
+	{ "name": "family_maidroom_door", "parent": "family_maidroom", "length": 9.73, "x": 11.8, "y": 26.16, "rotation": -121.06 }
+],
+"slots": [
+	{ "name": "family_maidroom", "bone": "family_maidroom", "attachment": "family_maidroom" },
+	{ "name": "family_maidroom_door", "bone": "family_maidroom_door", "attachment": "family_maidroom_door" }
+],
+"skins": {
+	"default": {
+		"family_maidroom": {
+			"family_maidroom": { "x": 28.5, "y": 3.26, "rotation": -91.8, "width": 85, "height": 104 }
+		},
+		"family_maidroom_door": {
+			"family_maidroom_door": {
+				"type": "mesh",
+				"uvs": [ 0, 0.83935, 0.90831, 1, 0.93358, 0.18406, 0, 0 ],
+				"triangles": [ 0, 3, 2, 1, 0, 2 ],
+				"vertices": [ 5.34, -11.86, 16.79999, -11.89, 3.09, 13.16, -9.01, 13.76 ],
+				"hull": 4,
+				"edges": [ 0, 2, 2, 4, 4, 6, 0, 6 ],
+				"width": 11,
+				"height": 35
+			}
+		}
+	}
+},
+"animations": {
+	"open": {
+		"bones": {
+			"family_maidroom_door": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			}
+		},
+		"ffd": {
+			"default": {
+				"family_maidroom_door": {
+					"family_maidroom_door": [
+						{ "time": 0 },
+						{
+							"time": 0.3333,
+							"offset": 2,
+							"vertices": [ -19.74461, -8.89134, -19.74461, -8.89134 ],
+							"curve": "stepped"
+						},
+						{
+							"time": 1.1666,
+							"offset": 2,
+							"vertices": [ -19.74461, -8.89134, -19.74461, -8.89134 ]
+						},
+						{ "time": 1.5 }
+					]
+				}
+			}
+		}
+	},
+	"stand": {}
+}
+}

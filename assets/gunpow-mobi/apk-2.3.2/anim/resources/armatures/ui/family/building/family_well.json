@@ -1,0 +1,85 @@
+{
+"skeleton": { "hash": "MHKG6ad550TFFz/7mihymXiyjNU", "spine": "2.1.27", "width": 260, "height": 204 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "well_water01", "parent": "root", "x": 5.03, "y": 32.33 }
+],
+"slots": [
+	{ "name": "6", "bone": "root" },
+	{ "name": "family_well", "bone": "well_water01", "attachment": "family_well" },
+	{ "name": "family_well02", "bone": "well_water01", "attachment": "family_well02" },
+	{ "name": "family_well03", "bone": "well_water01" }
+],
+"skins": {
+	"default": {
+		"family_well": {
+			"family_well": { "x": 6.4, "y": 79.04, "width": 106, "height": 88 }
+		},
+		"family_well02": {
+			"family_well02": { "x": -4.19, "y": 79.79, "width": 110, "height": 107 }
+		},
+		"family_well03": {
+			"family_well03": { "x": -2.09, "y": 88.61, "width": 120, "height": 124 }
+		}
+	}
+},
+"animations": {
+	"lvup01": {
+		"slots": {
+			"6": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"family_well02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"family_well03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		}
+	},
+	"lvup02": {
+		"slots": {
+			"6": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"family_well02": {
+				"attachment": [
+					{ "time": 0, "name": "family_well02" }
+				]
+			},
+			"family_well03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		}
+	},
+	"lvup03": {
+		"slots": {
+			"6": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"family_well02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"family_well03": {
+				"attachment": [
+					{ "time": 0, "name": "family_well03" }
+				]
+			}
+		}
+	}
+}
+}

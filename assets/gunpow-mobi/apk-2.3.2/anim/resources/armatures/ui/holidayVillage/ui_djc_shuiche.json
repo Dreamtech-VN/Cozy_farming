@@ -1,0 +1,219 @@
+{
+"skeleton": { "hash": "roB0ATSVSnDRKNM10JC6bTGC8y0", "spine": "2.1.27", "width": 0, "height": 0, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "FX_hushui1", "parent": "root" },
+	{ "name": "FX_hushui2", "parent": "root", "x": -6.05 },
+	{ "name": "FX_shuiche", "parent": "root" },
+	{ "name": "bone", "parent": "root", "x": 8.05, "y": 79.9 }
+],
+"slots": [
+	{ "name": "black", "bone": "bone" },
+	{ "name": "black2", "bone": "bone" },
+	{ "name": "white", "bone": "bone" },
+	{ "name": "white2", "bone": "bone" },
+	{ "name": "white3", "bone": "bone" },
+	{ "name": "white1", "bone": "bone" },
+	{ "name": "FX_shuiche", "bone": "FX_shuiche", "blend": "screen" },
+	{ "name": "FX_hushui1", "bone": "FX_hushui1", "blend": "screen" },
+	{ "name": "FX_hushui2", "bone": "FX_hushui2", "blend": "additive" }
+],
+"skins": {
+	"default": {
+		"FX_hushui1": {
+			"hushui/00000": { "width": 320, "height": 104 },
+			"hushui/00002": { "width": 320, "height": 104 },
+			"hushui/00004": { "width": 320, "height": 104 },
+			"hushui/00006": { "width": 320, "height": 104 },
+			"hushui/00008": { "width": 320, "height": 104 },
+			"hushui/00010": { "width": 320, "height": 104 },
+			"hushui/00012": { "width": 320, "height": 104 },
+			"hushui/00014": { "width": 320, "height": 104 }
+		},
+		"FX_hushui2": {
+			"hushui2/00000": { "width": 301, "height": 109 },
+			"hushui2/00002": { "width": 301, "height": 109 },
+			"hushui2/00004": { "width": 301, "height": 109 },
+			"hushui2/00006": { "width": 301, "height": 109 },
+			"hushui2/00008": { "width": 301, "height": 109 },
+			"hushui2/00010": { "width": 301, "height": 109 },
+			"hushui2/00012": { "width": 301, "height": 109 },
+			"hushui2/00014": { "width": 301, "height": 109 }
+		},
+		"FX_shuiche": {
+			"shuiche/00000": { "width": 198, "height": 172 },
+			"shuiche/00001": { "width": 198, "height": 172 },
+			"shuiche/00002": { "width": 198, "height": 172 },
+			"shuiche/00003": { "width": 198, "height": 172 },
+			"shuiche/00004": { "width": 198, "height": 172 },
+			"shuiche/00005": { "width": 198, "height": 172 },
+			"shuiche/00006": { "width": 198, "height": 172 },
+			"shuiche/00007": { "width": 198, "height": 172 },
+			"shuiche/00008": { "width": 198, "height": 172 },
+			"shuiche/00009": { "width": 198, "height": 172 },
+			"shuiche/00010": { "width": 198, "height": 172 },
+			"shuiche/00011": { "width": 198, "height": 172 },
+			"shuiche/00012": { "width": 198, "height": 172 },
+			"shuiche/00013": { "width": 198, "height": 172 },
+			"shuiche/00014": { "width": 198, "height": 172 }
+		},
+		"black": {
+			"black": { "x": -26.14, "y": -1.47, "width": 164, "height": 179 }
+		},
+		"black2": {
+			"black2": { "x": -26.14, "y": -1.47, "width": 164, "height": 179 }
+		},
+		"white": {
+			"white": { "x": -26.14, "y": -1.47, "width": 164, "height": 179 }
+		},
+		"white1": {
+			"white1": { "x": -14.64, "y": -20.97, "width": 159, "height": 240 }
+		},
+		"white2": {
+			"white2": { "x": -26.14, "y": -1.47, "width": 164, "height": 179 }
+		},
+		"white3": {
+			"white3": { "x": -26.02, "y": -2.32, "width": 164, "height": 179 }
+		}
+	}
+},
+"animations": {
+	"wait": {
+		"slots": {
+			"FX_shuiche": {
+				"attachment": [
+					{ "time": 0, "name": "shuiche/00000" },
+					{ "time": 0.1, "name": "shuiche/00001" },
+					{ "time": 0.2, "name": "shuiche/00002" },
+					{ "time": 0.3333, "name": "shuiche/00003" },
+					{ "time": 0.4333, "name": "shuiche/00004" },
+					{ "time": 0.5333, "name": "shuiche/00005" },
+					{ "time": 0.6333, "name": "shuiche/00006" },
+					{ "time": 0.7333, "name": "shuiche/00007" },
+					{ "time": 0.8333, "name": "shuiche/00008" },
+					{ "time": 0.9666, "name": "shuiche/00009" },
+					{ "time": 1.0666, "name": "shuiche/00010" },
+					{ "time": 1.1666, "name": "shuiche/00011" },
+					{ "time": 1.2666, "name": "shuiche/00012" },
+					{ "time": 1.3666, "name": "shuiche/00013" },
+					{ "time": 1.5, "name": "shuiche/00014" }
+				]
+			},
+			"white": {
+				"attachment": [
+					{ "time": 0, "name": "white" },
+					{ "time": 0.5, "name": null },
+					{ "time": 1, "name": null },
+					{ "time": 1.5, "name": "white" }
+				]
+			},
+			"white1": {
+				"attachment": [
+					{ "time": 0, "name": "white1" },
+					{ "time": 1, "name": "white1" },
+					{ "time": 1.5, "name": "white1" }
+				]
+			},
+			"white2": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.5, "name": "white2" },
+					{ "time": 1, "name": null },
+					{ "time": 1.5, "name": null }
+				]
+			},
+			"white3": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 1, "name": "white3" },
+					{ "time": 1.5, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"FX_shuiche": {
+				"translate": [
+					{ "time": 0, "x": -46.91, "y": 111.04 }
+				]
+			}
+		}
+	},
+	"wait2": {
+		"slots": {
+			"FX_shuiche": {
+				"attachment": [
+					{ "time": 0, "name": "shuiche/00000" },
+					{ "time": 0.0666, "name": "shuiche/00001" },
+					{ "time": 0.1333, "name": "shuiche/00002" },
+					{ "time": 0.2, "name": "shuiche/00003" },
+					{ "time": 0.2666, "name": "shuiche/00004" },
+					{ "time": 0.3666, "name": "shuiche/00005" },
+					{ "time": 0.4333, "name": "shuiche/00006" },
+					{ "time": 0.5, "name": "shuiche/00007" },
+					{ "time": 0.5666, "name": "shuiche/00008" },
+					{ "time": 0.6333, "name": "shuiche/00009" },
+					{ "time": 0.7, "name": "shuiche/00010" },
+					{ "time": 0.7666, "name": "shuiche/00011" },
+					{ "time": 0.8333, "name": "shuiche/00012" },
+					{ "time": 0.9, "name": "shuiche/00013" },
+					{ "time": 1, "name": "shuiche/00014" }
+				]
+			},
+			"black": {
+				"attachment": [
+					{ "time": 0, "name": "black" },
+					{ "time": 0.5, "name": null },
+					{ "time": 1, "name": "black" }
+				]
+			},
+			"black2": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.5, "name": "black2" },
+					{ "time": 1, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"FX_shuiche": {
+				"translate": [
+					{ "time": 0, "x": -46.15, "y": 114.82 }
+				]
+			}
+		}
+	},
+	"wait3": {
+		"slots": {
+			"FX_hushui2": {
+				"attachment": [
+					{ "time": 0, "name": "hushui2/00000" },
+					{ "time": 0.1333, "name": "hushui2/00002" },
+					{ "time": 0.2666, "name": "hushui2/00004" },
+					{ "time": 0.4333, "name": "hushui2/00006" },
+					{ "time": 0.5666, "name": "hushui2/00008" },
+					{ "time": 0.7, "name": "hushui2/00010" },
+					{ "time": 0.8333, "name": "hushui2/00012" },
+					{ "time": 1, "name": "hushui2/00014" }
+				]
+			}
+		}
+	},
+	"wait4": {
+		"slots": {
+			"FX_hushui1": {
+				"attachment": [
+					{ "time": 0, "name": "hushui/00000" },
+					{ "time": 0.1333, "name": "hushui/00002" },
+					{ "time": 0.2666, "name": "hushui/00004" },
+					{ "time": 0.4, "name": "hushui/00006" },
+					{ "time": 0.5333, "name": "hushui/00008" },
+					{ "time": 0.7333, "name": "hushui/00010" },
+					{ "time": 0.8666, "name": "hushui/00012" },
+					{ "time": 1, "name": "hushui/00014" }
+				]
+			}
+		}
+	}
+}
+}

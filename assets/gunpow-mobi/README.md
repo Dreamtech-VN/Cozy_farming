@@ -7,7 +7,12 @@ Asset client game trích ra từ `Server.7z` của release
 > bản địa hoá tiếng Việt), không phải của Cozy Farming. Giữ ở đây làm tài liệu
 > tham khảo.
 
-> **Đây chỉ là bản vá, không phải game đầy đủ.** File manifest ghi
+> **Có hai nguồn trong thư mục này.** `client*/` lấy từ máy ảo server (bản vá
+> 1.1.x, 2020) và **thiếu 96% tài nguyên** — chi tiết ngay bên dưới.
+> `apk-2.3.2/` lấy từ file cài đặt đầy đủ (2026) và **có đủ art nhân vật**.
+> Hai bản cách nhau 6 năm nên một số ID có thể lệch.
+
+> **Bản vá 1.1.x không phải game đầy đủ.** File manifest ghi
 > `installversion = "1.0.0"` và hai gói `1.1.1`, `1.1.2` — tức những gì có ở đây
 > là bản vá, còn bản cài gốc 1.0.0 **không nằm trong máy ảo** (không có `.apk`,
 > `.ipa` hay `.obb` nào). Đối chiếu đường dẫn tài nguyên mà mã Lua gọi tới với
@@ -17,9 +22,9 @@ Asset client game trích ra từ `Server.7z` của release
 > `battle/map` (bản đồ trận). Ảnh trong `client-png/` chỉ là ảnh giao diện được
 > thay ở hai bản vá đó — tất cả đều nằm dưới `image/ui/`.
 >
-> Muốn có art nhân vật thì cần thêm file cài đặt gốc bản 1.0.0. Ngược lại, **bảng
-> số liệu game thì đầy đủ** trong `client-lua/` (`LocalData*.lua`): thông số kỹ
-> năng, phụ bản, trang bị, thú cưng kèm tên tiếng Việt.
+> Phần thiếu đó nay đã có trong `apk-2.3.2/`. Bảng số liệu game thì cả hai bản
+> đều đầy đủ (`LocalData*.lua`): thông số kỹ năng, phụ bản, trang bị, thú cưng
+> kèm tên tiếng Việt.
 
 ## Nguồn gốc
 
@@ -57,6 +62,8 @@ client/              nguyên trạng như trong gói update
     resources_vn/    dat/
 client-png/          768 ảnh PNG bung ra từ .pkm (xem bên dưới)
 client-lua/          2 010 file mã nguồn Lua đã giải mã (xem bên dưới)
+apk-2.3.2/           từ file cài đặt đầy đủ — ảnh, hoạt ảnh, mã Lua (xem bên dưới)
+keys.json            72 khoá XOR dùng để giải mã Lua
 MANIFEST.tsv         danh sách đầy đủ: đường dẫn, kích thước, SHA-256
 ```
 
@@ -64,7 +71,7 @@ MANIFEST.tsv         danh sách đầy đủ: đường dẫn, kích thước, S
 lúc chạy, đổi đi thì file mất ngữ cảnh. `client-png/` và `client-lua/` soi
 gương đúng cấu trúc đó, chỉ khác phần mở rộng.
 
-Tổng cộng **7 268 file / 175.6 MB**, file lớn nhất 5.25 MB.
+Tổng cộng **27 746 file / 668.0 MB**, file lớn nhất 7.34 MB.
 
 | Loại | Số file | Dung lượng | |
 |---|---:|---:|---|
@@ -76,6 +83,9 @@ Tổng cộng **7 268 file / 175.6 MB**, file lớn nhất 5.25 MB.
 | `.atlas`, `.plist`, còn lại | 23 | 0.05 MB | `client/` |
 | `.png` (bung từ `.pkm`) | 768 | 30.15 MB | `client-png/` |
 | `.lua` + `.xml` (đã giải mã) | 2 010 | 49.60 MB | `client-lua/` |
+| `.png` (bung từ `.pkm`) | 16 692 | 403.7 MB | `apk-2.3.2/png/` |
+| `.lua` (đã giải mã) | 2 890 | 64.6 MB | `apk-2.3.2/lua/` |
+| `.json`/`.atlas`/`.plist`/`.xml` | 896 | 24.0 MB | `apk-2.3.2/anim/` |
 
 ## Ảnh: `.pkm` và bản PNG
 
@@ -143,6 +153,61 @@ Vài điểm khi đọc:
 - Bảng số liệu game nằm ở `LocalData*.lua` (kỹ năng, phụ bản, trang bị…), được
   xuất ra từ file Excel, đường dẫn gốc còn nguyên ở dòng đầu mỗi file.
 - Bản Android và iOS là **cùng một mã nguồn**, chỉ khác khoá mã hoá.
+
+## `apk-2.3.2/` — từ file cài đặt đầy đủ
+
+Nguồn: asset `GunPow - Bắn Gà Teen PK_2.3.2_APKPure.xapk` (656 MB) của cùng
+release `Test`. Đây là bản cài đặt đầy đủ nên **có art nhân vật**, thứ mà bản vá
+1.1.x không có.
+
+XAPK là một file zip chứa:
+
+| Thành phần | Kích thước |
+|---|---:|
+| `com.wyd.gunpow.apk` | 100 MB — mã Lua và tài nguyên nhỏ |
+| `main.210.com.wyd.gunpow.obb` | 556 MB — kho asset (41 349 file, 1.98 GB sau giải nén) |
+
+Package `com.wyd.gunpow`, version 2.3.2 (code 210).
+
+```
+apk-2.3.2/
+  png/     16 692 ảnh, bung từ .pkm (cùng cách với client-png/)
+  anim/       896 file .json/.atlas/.plist/.xml — dữ liệu xương và sprite sheet
+  lua/      2 890 file mã nguồn Lua đã giải mã
+```
+
+Tổng **20 478 file / 492.3 MB**.
+
+### Ảnh
+
+OBB có 18 481 ảnh (36 962 file `.pkm` gồm cả `_alpha`, ghép cặp đủ 18 481/18 481).
+Đã bung 16 692 ảnh — **bỏ `armatures/battle`** vì riêng nhóm đó đã 1.2 GB hoạt ảnh
+chiêu thức, đưa vào sẽ làm repo vượt 1.5 GB.
+
+Các nhóm art nhân vật, thứ bản vá 1.1.x thiếu hoàn toàn:
+
+| Thư mục | Số ảnh | Nội dung |
+|---|---:|---|
+| `shopitems` | 8 724 | icon vật phẩm, trang bị |
+| `armatures/player` | — | nhân vật `boy` / `girl` / `mount`, tách theo bộ phận |
+| `battle/pet_card` | 542 | thẻ thú cưng |
+| `ui/card` | 342 | thẻ nhân vật, boss |
+| `battle/head` | 256 | chân dung nhân vật, quái, boss |
+| `battleitems` | 379 | vật phẩm trong trận |
+| `armatures/baby`, `pet`, `pastor` | — | thú cưng, em bé, NPC |
+
+Một ngoại lệ: `resources/image/map/map97_bg` có ảnh alpha lệch kích thước với ảnh
+màu (302×191 so với 404×172) — nhiều khả năng là lỗi trong khâu đóng gói của
+chính game. Tôi đã co ảnh alpha về đúng kích thước; riêng file này độ trong suốt
+có thể không chính xác.
+
+### Mã Lua
+
+Cùng cơ chế mã hoá với bản vá — XOR khoá lặp 10 byte, đuôi 13 byte y hệt. Nhưng
+**43 khoá mới**, nâng tổng số khoá trong `keys.json` lên **72**; 29 khoá của bản
+1.1.x vẫn dùng được cho một phần file.
+
+**2 890/2 890 file qua `luac5.1 -p`, không một lỗi nào.**
 
 ## Không đưa vào repo
 

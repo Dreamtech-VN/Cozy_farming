@@ -1,0 +1,169 @@
+<skeleton name="babyboy_head_001" frameRate="24" version="2.2">
+  <armatures>
+    <armature name="babyboy_head_001">
+      <b name="babyboy_head_3_001" x="0" y="-38.85" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-38.85" z="0">
+        <d name="babyboy_head_3_001" isArmature="1"/>
+      </b>
+      <b name="babyboy_head_2_001" x="0" y="-38.85" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-38.85" z="1">
+        <d name="babyboy_head_2_001" isArmature="1"/>
+      </b>
+      <b name="babyboy_face" x="5.9" y="-27.05" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-23" z="2">
+        <d name="babyboy_face" pX="0.6" pY="0.5"/>
+      </b>
+      <b name="babyboy_head_1_001" x="0" y="-38.85" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-38.85" z="3">
+        <d name="babyboy_head_1_001" isArmature="1"/>
+      </b>
+    </armature>
+    <armature name="babyboy_head_3_001">
+      <b name="图层 1" x="20.25" y="-63.8" kX="3.75" kY="3.75" cX="1" cY="1" pX="-0.3" pY="1.25" z="0">
+        <d name="babyboy_parts-baby_boy_hair6_001" pX="0" pY="0"/>
+      </b>
+    </armature>
+    <armature name="babyboy_head_2_001">
+      <b name="baby_boy_head_001" x="-0.1" y="-37.55" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-37.5" z="0">
+        <d name="babyboy_parts-baby_boy_head_001" pX="43.5" pY="75"/>
+      </b>
+    </armature>
+    <armature name="babyboy_head_1_001">
+      <b name="baby_boy_hair5_001" x="-14.1" y="-51.05" kX="0" kY="0" cX="1" cY="1" pX="28.5" pY="26" z="0">
+        <d name="babyboy_parts-baby_boy_hair5_001" pX="0" pY="0"/>
+      </b>
+      <b name="baby_boy_hair4_001" x="-24.95" y="-66" kX="0.79" kY="0.79" cX="1" cY="1" pX="0.55" pY="11.05" z="1">
+        <d name="babyboy_parts-baby_boy_hair4_001" pX="0" pY="0"/>
+      </b>
+      <b name="baby_boy_hair3_001" x="-16.85" y="-68.55" kX="1.26" kY="1.26" cX="1" cY="1" pX="1.7" pY="7.45" z="2">
+        <d name="babyboy_parts-baby_boy_hair3_001" pX="0" pY="0"/>
+      </b>
+      <b name="baby_boy_hair2_001" x="-20.85" y="-66.35" kX="0.28" kY="0.28" cX="1" cY="1" pX="2.75" pY="4.75" z="3">
+        <d name="babyboy_parts-baby_boy_hair2_001" pX="0" pY="0"/>
+      </b>
+      <b name="baby_boy_hair_001" x="-22.6" y="-63.35" kX="0" kY="0" cX="1" cY="1" pX="2" pY="2.7" z="4">
+        <d name="babyboy_parts-baby_boy_hair_001" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="babyboy_head_3_001">
+      <mov name="wait" dr="40" to="6" drTW="40" lp="0" twE="NaN">
+        <b name="图层 1" sc="1" dl="0">
+          <f x="20.25" y="-63.8" cocos2d_x="20.6" cocos2d_y="-65.05" kX="3.75" kY="3.75" cX="1" cY="1" pX="-0.3" pY="1.25" z="0" dI="0" twE="0" dr="14"/>
+          <f x="20.2" y="-63.75" cocos2d_x="20.4" cocos2d_y="-65.05" kX="0" kY="0" cX="1" cY="1" pX="-0.2" pY="1.3" z="0" dI="0" dr="1"/>
+          <f x="20.2" y="-63.75" cocos2d_x="20.4" cocos2d_y="-65.05" kX="0" kY="0" cX="1" cY="1" pX="-0.2" pY="1.3" z="0" dI="0" twE="0" dr="19"/>
+          <f x="20.2" y="-63.75" cocos2d_x="20.55" cocos2d_y="-65" kX="5.46" kY="5.46" cX="1" cY="1" pX="-0.2" pY="1.3" z="0" dI="0" twE="0" dr="5"/>
+          <f x="20.2" y="-63.8" cocos2d_x="20.55" cocos2d_y="-65.05" kX="4.02" kY="4.02" cX="1" cY="1" pX="-0.3" pY="1.3" z="0" dI="0" twE="0" dr="1"/>
+        </b>
+      </mov>
+      <mov name="avatar" dr="1" to="6">
+        <b name="图层 1" sc="1" dl="0">
+          <f x="20.25" y="-63.8" cocos2d_x="20.6" cocos2d_y="-65.05" kX="3.75" kY="3.75" cX="1" cY="1" pX="-0.3" pY="1.25" z="0" dI="0" twE="0" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+    <animation name="babyboy_head_2_001">
+      <mov name="wait" dr="40" to="6" drTW="40" lp="0" twE="NaN">
+        <b name="baby_boy_head_001" sc="1" dl="0">
+          <f x="-0.1" y="-37.55" cocos2d_x="-0.1" cocos2d_y="-0.05" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-37.5" z="0" dI="0" dr="40"/>
+        </b>
+      </mov>
+      <mov name="avatar" dr="1" to="6">
+        <b name="baby_boy_head_001" sc="1" dl="0">
+          <f x="-0.1" y="-37.55" cocos2d_x="-0.1" cocos2d_y="-0.05" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-37.5" z="0" dI="0" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+    <animation name="babyboy_head_1_001">
+      <mov name="wait" dr="40" to="6" drTW="40" lp="0" twE="NaN">
+        <b name="baby_boy_hair5_001" sc="1" dl="0">
+          <f x="-14.1" y="-51.05" cocos2d_x="-42.6" cocos2d_y="-77.05" kX="0" kY="0" cX="1" cY="1" pX="28.5" pY="26" z="0" dI="0" twE="0" dr="14"/>
+          <f x="-14.1" y="-51.05" cocos2d_x="-42.6" cocos2d_y="-77.05" kX="0" kY="0" cX="1" cY="1" pX="28.5" pY="26" z="0" dI="0" dr="1"/>
+          <f x="-14.1" y="-51.05" cocos2d_x="-42.6" cocos2d_y="-77.05" kX="0" kY="0" cX="1" cY="1" pX="28.5" pY="26" z="0" dI="0" twE="0" dr="19"/>
+          <f x="-14.1" y="-51.05" cocos2d_x="-42.6" cocos2d_y="-77.05" kX="0" kY="0" cX="1" cY="1" pX="28.5" pY="26" z="0" dI="0" twE="0" dr="5"/>
+          <f x="-14.1" y="-51.05" cocos2d_x="-42.6" cocos2d_y="-77.05" kX="0" kY="0" cX="1" cY="1" pX="28.5" pY="26" z="0" dI="0" twE="0" dr="1"/>
+        </b>
+        <b name="baby_boy_hair4_001" sc="1" dl="0">
+          <f x="-24.95" y="-66" cocos2d_x="-25.35" cocos2d_y="-77.05" kX="0.79" kY="0.79" cX="1" cY="1" pX="0.55" pY="11.05" z="1" dI="0" twE="0" dr="8"/>
+          <f x="-25" y="-66.05" cocos2d_x="-25.6" cocos2d_y="-77.05" kX="0" kY="0" cX="1" cY="1" pX="0.6" pY="11" z="1" dI="0" dr="1"/>
+          <f x="-25" y="-66.05" cocos2d_x="-25.6" cocos2d_y="-77.05" kX="0" kY="0" cX="1" cY="1" pX="0.6" pY="11" z="1" dI="0" twE="0" dr="19"/>
+          <f x="-25" y="-66.05" cocos2d_x="-25.1" cocos2d_y="-77.1" kX="2.45" kY="2.45" cX="1" cY="1" pX="0.6" pY="11.05" z="1" dI="0" twE="0" dr="11"/>
+          <f x="-25" y="-66" cocos2d_x="-25.35" cocos2d_y="-77.05" kX="1.03" kY="1.03" cX="1" cY="1" pX="0.55" pY="11.05" z="1" dI="0" twE="0" dr="1"/>
+        </b>
+        <b name="baby_boy_hair3_001" sc="1" dl="0">
+          <f x="-16.85" y="-68.55" cocos2d_x="-18.4" cocos2d_y="-76.05" kX="1.26" kY="1.26" cX="1" cY="1" pX="1.7" pY="7.45" z="2" dI="0" twE="0" dr="5"/>
+          <f x="-16.8" y="-68.55" cocos2d_x="-18.6" cocos2d_y="-76.05" kX="0" kY="0" cX="1" cY="1" pX="1.8" pY="7.5" z="2" dI="0" dr="1"/>
+          <f x="-16.8" y="-68.55" cocos2d_x="-18.6" cocos2d_y="-76.05" kX="0" kY="0" cX="1" cY="1" pX="1.8" pY="7.5" z="2" dI="0" twE="0" dr="19"/>
+          <f x="-16.8" y="-68.55" cocos2d_x="-17.85" cocos2d_y="-76.2" kX="5.49" kY="5.49" cX="1" cY="1" pX="1.8" pY="7.5" z="2" dI="0" twE="0" dr="14"/>
+          <f x="-16.85" y="-68.6" cocos2d_x="-18.4" cocos2d_y="-76.1" kX="1.54" kY="1.54" cX="1" cY="1" pX="1.75" pY="7.45" z="2" dI="0" twE="0" dr="1"/>
+        </b>
+        <b name="baby_boy_hair2_001" sc="1" dl="0">
+          <f x="-20.85" y="-66.35" cocos2d_x="-23.55" cocos2d_y="-71.1" kX="0.28" kY="0.28" cX="1" cY="1" pX="2.75" pY="4.75" z="3" dI="0" twE="0" dr="2"/>
+          <f x="-20.9" y="-66.35" cocos2d_x="-23.6" cocos2d_y="-71.05" kX="0" kY="0" cX="1" cY="1" pX="2.7" pY="4.7" z="3" dI="0" dr="1"/>
+          <f x="-20.9" y="-66.35" cocos2d_x="-23.6" cocos2d_y="-71.05" kX="0" kY="0" cX="1" cY="1" pX="2.7" pY="4.7" z="3" dI="0" twE="0" dr="19"/>
+          <f x="-20.9" y="-66.35" cocos2d_x="-23.2" cocos2d_y="-71.25" kX="4.47" kY="4.47" cX="1" cY="1" pX="2.7" pY="4.75" z="3" dI="0" twE="0" dr="17"/>
+          <f x="-20.9" y="-66.35" cocos2d_x="-23.55" cocos2d_y="-71.1" kX="0.54" kY="0.54" cX="1" cY="1" pX="2.65" pY="4.75" z="3" dI="0" twE="0" dr="1"/>
+        </b>
+        <b name="baby_boy_hair_001" sc="1" dl="0">
+          <f x="-22.6" y="-63.35" cocos2d_x="-24.6" cocos2d_y="-66.05" kX="0" kY="0" cX="1" cY="1" pX="2" pY="2.7" z="4" dI="0" twE="0" dr="19"/>
+          <f x="-22.6" y="-63.35" cocos2d_x="-24.3" cocos2d_y="-66.25" kX="6.45" kY="6.45" cX="1" cY="1" pX="2.05" pY="2.7" z="4" dI="0" twE="0" dr="20"/>
+          <f x="-22.6" y="-63.35" cocos2d_x="-24.6" cocos2d_y="-66.05" kX="0" kY="0" cX="1" cY="1" pX="2" pY="2.7" z="4" dI="0" dr="1"/>
+        </b>
+      </mov>
+      <mov name="avatar" dr="1" to="6">
+        <b name="baby_boy_hair5_001" sc="1" dl="0">
+          <f x="-14.1" y="-51.05" cocos2d_x="-42.6" cocos2d_y="-77.05" kX="0" kY="0" cX="1" cY="1" pX="28.5" pY="26" z="0" dI="0" twE="0" dr="1"/>
+        </b>
+        <b name="baby_boy_hair4_001" sc="1" dl="0">
+          <f x="-24.95" y="-66" cocos2d_x="-25.35" cocos2d_y="-77.05" kX="0.79" kY="0.79" cX="1" cY="1" pX="0.55" pY="11.05" z="1" dI="0" twE="0" dr="1"/>
+        </b>
+        <b name="baby_boy_hair3_001" sc="1" dl="0">
+          <f x="-16.85" y="-68.55" cocos2d_x="-18.4" cocos2d_y="-76.05" kX="1.26" kY="1.26" cX="1" cY="1" pX="1.7" pY="7.45" z="2" dI="0" twE="0" dr="1"/>
+        </b>
+        <b name="baby_boy_hair2_001" sc="1" dl="0">
+          <f x="-20.85" y="-66.35" cocos2d_x="-23.55" cocos2d_y="-71.1" kX="0.28" kY="0.28" cX="1" cY="1" pX="2.75" pY="4.75" z="3" dI="0" twE="0" dr="1"/>
+        </b>
+        <b name="baby_boy_hair_001" sc="1" dl="0">
+          <f x="-22.6" y="-63.35" cocos2d_x="-24.6" cocos2d_y="-66.05" kX="0" kY="0" cX="1" cY="1" pX="2" pY="2.7" z="4" dI="0" twE="0" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+    <animation name="babyboy_head_001">
+      <mov name="wait" dr="40" to="0" drTW="40" lp="0" twE="NaN">
+        <b name="babyboy_head_3_001" sc="1" dl="0">
+          <f x="0" y="-38.85" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-38.85" z="0" dI="0" dr="40"/>
+        </b>
+        <b name="babyboy_head_2_001" sc="1" dl="0">
+          <f x="0" y="-38.85" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-38.85" z="1" dI="0" dr="40"/>
+        </b>
+        <b name="babyboy_face" sc="1" dl="0">
+          <f x="5.9" y="-27.05" cocos2d_x="5.9" cocos2d_y="-4.05" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-23" z="2" dI="0" dr="40"/>
+        </b>
+        <b name="babyboy_head_1_001" sc="1" dl="0">
+          <f x="0" y="-38.85" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-38.85" z="3" dI="0" dr="40"/>
+        </b>
+      </mov>
+      <mov name="avatar" dr="1" to="0">
+        <b name="babyboy_head_3_001" sc="1" dl="0">
+          <f x="0" y="-38.85" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-38.85" z="0" dI="0" dr="1"/>
+        </b>
+        <b name="babyboy_head_2_001" sc="1" dl="0">
+          <f x="0" y="-38.85" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-38.85" z="1" dI="0" dr="1"/>
+        </b>
+        <b name="babyboy_face" sc="1" dl="0">
+          <f x="5.9" y="-27.05" cocos2d_x="5.9" cocos2d_y="-4.05" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-23" z="2" dI="0" dr="1"/>
+        </b>
+        <b name="babyboy_head_1_001" sc="1" dl="0">
+          <f x="0" y="-38.85" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-38.85" z="3" dI="0" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="babyboy_head_001" width="128" height="256">
+    <SubTexture name="babyboy_parts-baby_boy_hair_001" width="26" height="11" cocos2d_pX="0" cocos2d_pY="0" x="95" y="15"/>
+    <SubTexture name="babyboy_parts-baby_boy_hair2_001" width="43" height="13" cocos2d_pX="0" cocos2d_pY="0" x="79" y="0"/>
+    <SubTexture name="babyboy_parts-baby_boy_hair3_001" width="48" height="15" cocos2d_pX="0" cocos2d_pY="0" x="59" y="97"/>
+    <SubTexture name="babyboy_parts-baby_boy_hair4_001" width="60" height="18" cocos2d_pX="0" cocos2d_pY="0" x="59" y="77"/>
+    <SubTexture name="babyboy_parts-baby_boy_hair5_001" width="57" height="52" cocos2d_pX="0" cocos2d_pY="0" x="0" y="77"/>
+    <SubTexture name="babyboy_parts-baby_boy_head_001" width="77" height="75" cocos2d_pX="43.5" cocos2d_pY="75" x="0" y="0"/>
+    <SubTexture name="babyboy_parts-baby_boy_hair6_001" width="14" height="29" cocos2d_pX="0" cocos2d_pY="0" x="79" y="15"/>
+    <SubTexture name="babyboy_face" width="1" height="1" cocos2d_pX="0.6" cocos2d_pY="0.5" x="124" y="0"/>
+  </TextureAtlas>
+</skeleton>

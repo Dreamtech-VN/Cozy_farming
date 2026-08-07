@@ -1,0 +1,80 @@
+{
+"skeleton": { "hash": "x65r2jzHzArMSAThOm5+8Wf438s", "spine": "2.1.27", "width": 183, "height": 217.99, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "family_warehouse_niao_lvup04", "parent": "root", "length": 20.25, "x": -21.71, "y": 142.37, "rotation": 35.83 }
+],
+"slots": [
+	{ "name": "caodi", "bone": "root" },
+	{ "name": "family_warehouse_down_lvup04", "bone": "root", "attachment": "family_warehouse_down_lvup04" },
+	{ "name": "family_warehouse_muban_lvup04", "bone": "family_warehouse_niao_lvup04", "attachment": "family_warehouse_muban_lvup04" },
+	{ "name": "family_warehouse_niao_lvup04", "bone": "family_warehouse_niao_lvup04", "attachment": "family_warehouse_niao_lvup04" },
+	{ "name": "family_warehouse_up_lvup04", "bone": "root", "attachment": "family_warehouse_up_lvup04" },
+	{ "name": "family_warehouse_lvup05", "bone": "root", "attachment": "family_warehouse_lvup05" }
+],
+"skins": {
+	"default": {
+		"family_warehouse_down_lvup04": {
+			"family_warehouse_down_lvup04": { "x": 0.45, "y": 111.44, "width": 160, "height": 145 }
+		},
+		"family_warehouse_lvup05": {
+			"family_warehouse_lvup05": { "x": 16.45, "y": 128.44, "width": 148, "height": 181 }
+		},
+		"family_warehouse_muban_lvup04": {
+			"family_warehouse_muban_lvup04": { "x": 7.6, "y": -1.71, "rotation": -35.83, "width": 30, "height": 23 }
+		},
+		"family_warehouse_niao_lvup04": {
+			"family_warehouse_niao_lvup04": { "x": 8.68, "y": 4.9, "rotation": -35.83, "width": 22, "height": 21 }
+		},
+		"family_warehouse_up_lvup04": {
+			"family_warehouse_up_lvup04": { "x": 3.95, "y": 177.44, "width": 71, "height": 75 }
+		}
+	}
+},
+"animations": {
+	"lvup04": {
+		"slots": {
+			"family_warehouse_lvup05": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"family_warehouse_niao_lvup04": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3333, "x": 16.96, "y": 16.96 },
+					{ "time": 0.5, "x": 14.7, "y": 14.7, "curve": "stepped" },
+					{ "time": 0.9666, "x": 14.7, "y": 14.7 },
+					{ "time": 1.3, "x": -1.54, "y": -1.02 },
+					{ "time": 1.4666, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 1.9666, "x": 0, "y": 0 }
+				]
+			}
+		}
+	},
+	"lvup5": {
+		"slots": {
+			"family_warehouse_lvup05": {
+				"attachment": [
+					{ "time": 0, "name": "family_warehouse_lvup05" }
+				]
+			}
+		},
+		"bones": {
+			"family_warehouse_niao_lvup04": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3333, "x": 16.96, "y": 16.96 },
+					{ "time": 0.5, "x": 14.7, "y": 14.7, "curve": "stepped" },
+					{ "time": 0.9666, "x": 14.7, "y": 14.7 },
+					{ "time": 1.3, "x": -1.54, "y": -1.02 },
+					{ "time": 1.4666, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 1.9666, "x": 0, "y": 0 }
+				]
+			}
+		}
+	}
+}
+}

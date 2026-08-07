@@ -1,0 +1,153 @@
+{
+"skeleton": { "hash": "3VIYZBK2X2F+iU0R1lq0x3vuFBo", "spine": "2.1.27", "width": 0, "height": 0 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "family_chest", "parent": "root", "length": 112.76 },
+	{ "name": "guangyun", "parent": "root", "length": 60.59, "scaleX": 2.2, "scaleY": 2.2 },
+	{ "name": "lizi_cheng_00", "parent": "root", "length": 200.83 },
+	{ "name": "lizi_cheng_01", "parent": "root", "length": 200.83 },
+	{ "name": "lizi_cheng_02", "parent": "root", "length": 200.83 },
+	{ "name": "lizi_cheng_03", "parent": "root", "length": 200.83 }
+],
+"slots": [
+	{ "name": "family_chest", "bone": "family_chest" },
+	{ "name": "guangyun", "bone": "guangyun", "blend": "additive" },
+	{ "name": "lizi_cheng_00", "bone": "lizi_cheng_00", "blend": "additive" },
+	{ "name": "lizi_cheng_0", "bone": "lizi_cheng_01", "blend": "additive" },
+	{ "name": "lizi_cheng_1", "bone": "lizi_cheng_02", "blend": "additive" },
+	{ "name": "lizi_cheng_2", "bone": "lizi_cheng_03", "blend": "additive" }
+],
+"skins": {
+	"default": {
+		"family_chest": {
+			"family_chest": { "width": 82, "height": 81 }
+		},
+		"guangyun": {
+			"guangyun": { "width": 64, "height": 64 }
+		},
+		"lizi_cheng_0": {
+			"lizi_cheng_00": { "width": 64, "height": 64 }
+		},
+		"lizi_cheng_00": {
+			"lizi_cheng_00": { "width": 64, "height": 64 }
+		},
+		"lizi_cheng_1": {
+			"lizi_cheng_00": { "width": 64, "height": 64 }
+		},
+		"lizi_cheng_2": {
+			"lizi_cheng_00": { "width": 64, "height": 64 }
+		}
+	}
+},
+"animations": {
+	"open": {
+		"slots": {
+			"family_chest": {
+				"attachment": [
+					{ "time": 0, "name": "family_chest" }
+				],
+				"color": [
+					{ "time": 0, "color": "ffffffff" },
+					{ "time": 0.1666, "color": "ffffff00" }
+				]
+			},
+			"guangyun": {
+				"attachment": [
+					{ "time": 0, "name": "guangyun" }
+				],
+				"color": [
+					{ "time": 0, "color": "ffcf61ff", "curve": "stepped" },
+					{ "time": 0.1666, "color": "ffcf61ff" },
+					{ "time": 0.6666, "color": "ffcf6100" }
+				]
+			},
+			"lizi_cheng_00": {
+				"attachment": [
+					{ "time": 0.1, "name": "lizi_cheng_00" }
+				],
+				"color": [
+					{ "time": 0.1, "color": "ffffffff" },
+					{ "time": 1.1, "color": "ffffff00" }
+				]
+			},
+			"lizi_cheng_0": {
+				"attachment": [
+					{ "time": 0.0666, "name": "lizi_cheng_00" }
+				],
+				"color": [
+					{ "time": 0.0666, "color": "ffffffff" },
+					{ "time": 1.0666, "color": "ffffff00" }
+				]
+			},
+			"lizi_cheng_1": {
+				"attachment": [
+					{ "time": 0, "name": "lizi_cheng_00" }
+				]
+			},
+			"lizi_cheng_2": {
+				"attachment": [
+					{ "time": 0, "name": "lizi_cheng_00" }
+				]
+			}
+		},
+		"bones": {
+			"lizi_cheng_00": {
+				"translate": [
+					{ "time": 0.1, "x": -14.51, "y": 3.62 },
+					{ "time": 0.6, "x": -35.33, "y": 26.82 },
+					{ "time": 1.1, "x": -51.56, "y": 39.88 }
+				],
+				"scale": [
+					{ "time": 0.1, "x": 0.7, "y": 0.7 },
+					{ "time": 1.1, "x": 0, "y": 0 }
+				]
+			},
+			"lizi_cheng_01": {
+				"translate": [
+					{ "time": 0.0666, "x": 5.98, "y": 3.62 },
+					{ "time": 0.5666, "x": 26.98, "y": 21.24 },
+					{ "time": 1.0666, "x": 32.48, "y": 31.49 }
+				],
+				"scale": [
+					{ "time": 0.0666, "x": 0.6, "y": 0.6 },
+					{ "time": 1.0666, "x": 0, "y": 0 }
+				]
+			},
+			"lizi_cheng_02": {
+				"translate": [
+					{ "time": 0, "x": -1.27, "y": 13.4 },
+					{ "time": 0.2666, "x": -7.08, "y": 23.07 },
+					{ "time": 0.5, "x": -4.63, "y": 39.72 },
+					{ "time": 1, "x": 3.72, "y": 60.11 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.5, "y": 0.5 },
+					{ "time": 1, "x": 0, "y": 0 }
+				]
+			},
+			"lizi_cheng_03": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -13.63 },
+					{ "time": 0.3333, "x": -1.97, "y": 4.9 },
+					{ "time": 0.6666, "x": -14.04, "y": 23.44 },
+					{ "time": 0.9, "x": -14.22, "y": 36.42 },
+					{ "time": 1.1666, "x": -21.63, "y": 51.26 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.4, "y": 0.4 },
+					{ "time": 1.1666, "x": 0, "y": 0 }
+				]
+			}
+		}
+	},
+	"wait": {
+		"slots": {
+			"family_chest": {
+				"attachment": [
+					{ "time": 0, "name": "family_chest" }
+				]
+			}
+		}
+	}
+}
+}

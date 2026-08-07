@@ -1,0 +1,65 @@
+<skeleton name="zhiyin_dianji_anniu_01" frameRate="24" version="2.2">
+ <armatures>
+  <armature name="zhiyin_dianji_anniu_01">
+   <b name="zhiyin_dianji_anniu0" x="0" y="0" kX="0" kY="0" cX="0.89" cY="0.89" pX="0" pY="0" z="0">
+    <d name="zhiyin_dianji_anniu" pX="123" pY="123"/>
+   </b>
+   <b name="common_icon_xsyds" x="50" y="57" kX="0" kY="0" cX="1" cY="1" pX="50" pY="56" z="1">
+    <d name="common_icon_xsyds" pX="0" pY="0"/>
+   </b>
+   <b name="zhiyin_dianji_fangkuai" x="0" y="0" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="0">
+    <d name="zhiyin_dianji_fangkuai" pX="205" pY="62"/>
+   </b>
+   <b name="zhiyin_dianji_fangkuaixiao" x="0" y="0" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="0">
+    <d name="zhiyin_dianji_fangkuaixiao" pX="84.5" pY="48.5"/>
+   </b>
+   <b name="图层 2" x="0" y="0" kX="0" kY="0" cX="1" cY="1" pX="48" pY="46.5" z="0">
+    <d name="zhiyin_dianji_skill" pX="0" pY="0"/>
+   </b>
+  </armature>
+ </armatures>
+ <animations>
+  <animation name="zhiyin_dianji_anniu_01">
+   <mov name="0" dr="22" to="0" drTW="22" lp="1" twE="NaN">
+    <b name="zhiyin_dianji_anniu0" sc="1" dl="0">
+     <f x="0" y="0" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="0.89" cY="0.89" pX="0" pY="0" z="0" dI="0" twE="0" dr="11"/>
+     <f x="0" y="0" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1.15" cY="1.15" pX="0" pY="0" z="0" dI="0" twE="0" dr="10"/>
+     <f x="0" y="0" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="0.92" cY="0.92" pX="0" pY="0" z="0" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="common_icon_xsyds" sc="1" dl="0">
+     <f x="50" y="57" cocos2d_x="0" cocos2d_y="1" kX="0" kY="0" cX="1" cY="1" pX="50" pY="56" z="1" dI="0" twE="0" dr="11"/>
+     <f x="67" y="78" cocos2d_x="17" cocos2d_y="22" kX="0" kY="0" cX="1" cY="1" pX="50" pY="56" z="1" dI="0" twE="0" dr="10"/>
+     <f x="50" y="57" cocos2d_x="0" cocos2d_y="1" kX="0" kY="0" cX="1" cY="1" pX="50" pY="56" z="1" dI="0" twE="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="1" dr="22" to="0" drTW="22" lp="1" twE="NaN">
+    <b name="zhiyin_dianji_fangkuai" sc="1" dl="0">
+     <f x="0" y="0" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="0" dI="0" twE="0" dr="11"/>
+     <f x="0" y="0" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1.05" cY="1.05" pX="0" pY="0" z="0" dI="0" twE="0" dr="10"/>
+     <f x="0" y="0" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="0" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="2" dr="22" to="0" drTW="22" lp="1" twE="NaN">
+    <b name="zhiyin_dianji_fangkuaixiao" sc="1" dl="0">
+     <f x="0" y="0" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="0" dI="0" twE="0" dr="11"/>
+     <f x="0" y="0" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1.15" cY="1.15" pX="0" pY="0" z="0" dI="0" twE="0" dr="10"/>
+     <f x="0" y="0" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1.01" cY="1.01" pX="0" pY="0" z="0" dI="0" twE="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="3" dr="22" to="0" drTW="22" lp="1" twE="NaN">
+    <b name="图层 2" sc="1" dl="0">
+     <f x="0" y="0" cocos2d_x="-48" cocos2d_y="-46.5" kX="0" kY="0" cX="1" cY="1" pX="48" pY="46.5" z="0" dI="0" twE="0" dr="11"/>
+     <f x="0" y="0" cocos2d_x="-52.8" cocos2d_y="-51.15" kX="0" kY="0" cX="1.1" cY="1.1" pX="48" pY="46.5" z="0" dI="0" twE="0" dr="10"/>
+     <f x="0" y="0" cocos2d_x="-48" cocos2d_y="-46.5" kX="0" kY="0" cX="1" cY="1" pX="48" pY="46.5" z="0" dI="0" dr="1"/>
+    </b>
+   </mov>
+  </animation>
+ </animations>
+ <TextureAtlas name="zhiyin_dianji_anniu_01" width="512" height="512">
+  <SubTexture name="zhiyin_dianji_skill" width="96" height="93" cocos2d_pX="0" cocos2d_pY="0" x="412" y="0"/>
+  <SubTexture name="zhiyin_dianji_fangkuaixiao" width="169" height="97" cocos2d_pX="84.5" cocos2d_pY="48.5" x="248" y="126"/>
+  <SubTexture name="zhiyin_dianji_fangkuai" width="410" height="124" cocos2d_pX="205" cocos2d_pY="62" x="0" y="0"/>
+  <SubTexture name="common_icon_xsyds" width="100" height="112" cocos2d_pX="0" cocos2d_pY="0" x="248" y="225"/>
+  <SubTexture name="zhiyin_dianji_anniu" width="246" height="246" cocos2d_pX="123" cocos2d_pY="123" x="0" y="126"/>
+ </TextureAtlas>
+</skeleton>

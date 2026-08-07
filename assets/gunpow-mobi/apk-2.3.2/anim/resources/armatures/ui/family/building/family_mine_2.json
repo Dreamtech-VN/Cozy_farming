@@ -1,0 +1,72 @@
+{
+"skeleton": { "hash": "tRhev12MxPXmgcnnMDjtD4Wh9uk", "spine": "2.1.27", "width": 184, "height": 209, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "mine__shengzi", "parent": "root", "length": 38.03, "x": -35.91, "y": 133.35, "rotation": -87.74 }
+],
+"slots": [
+	{ "name": "caodi", "bone": "root" },
+	{ "name": "mine_down", "bone": "root", "attachment": "mine_down" },
+	{ "name": "mine_up", "bone": "root", "attachment": "mine_up" },
+	{ "name": "mine__shengzi", "bone": "mine__shengzi", "attachment": "mine__shengzi" },
+	{ "name": "mine_hualun", "bone": "root", "attachment": "mine_hualun" },
+	{ "name": "mine_uplv02", "bone": "root", "attachment": "mine_uplv02" }
+],
+"skins": {
+	"default": {
+		"mine__shengzi": {
+			"mine__shengzi": { "x": 27.48, "y": 2.84, "rotation": 87.74, "width": 30, "height": 80 }
+		},
+		"mine_down": {
+			"mine_down": { "x": 11, "y": 110, "width": 162, "height": 168 }
+		},
+		"mine_hualun": {
+			"mine_hualun": { "x": -38.49, "y": 134.5, "width": 21, "height": 23 }
+		},
+		"mine_up": {
+			"mine_up": { "x": -37.99, "y": 59, "width": 90, "height": 72 }
+		},
+		"mine_uplv02": {
+			"mine_uplv02": { "x": 13.5, "y": 130, "width": 121, "height": 160 }
+		}
+	}
+},
+"animations": {
+	"lvup04": {
+		"slots": {
+			"mine_uplv02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"mine__shengzi": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.6666, "x": 0, "y": -6 },
+					{ "time": 1.5, "x": 0, "y": 0 }
+				]
+			}
+		}
+	},
+	"lvup05": {
+		"slots": {
+			"mine_uplv02": {
+				"attachment": [
+					{ "time": 0, "name": "mine_uplv02" }
+				]
+			}
+		},
+		"bones": {
+			"mine__shengzi": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.6666, "x": 0, "y": -6 },
+					{ "time": 1.5, "x": 0, "y": 0 }
+				]
+			}
+		}
+	}
+}
+}

@@ -1,0 +1,74 @@
+<skeleton name="babymount_002" frameRate="24" version="2.2">
+  <armatures>
+    <armature name="babymount_002">
+      <b name="babymount_body_002" x="0.95" y="-56.65" kX="0" kY="0" cX="1" cY="1" pX="0.95" pY="-56.65" z="0">
+        <d name="babymount_body_002" isArmature="1"/>
+      </b>
+      <b name="babymount_head_002" x="33.15" y="-183.5" kX="0" kY="0" cX="1" cY="1" pX="0.95" pY="-56.65" z="1">
+        <d name="babymount_head_002" isArmature="1"/>
+      </b>
+    </armature>
+    <armature name="babymount_body_002">
+      <b name="babymount_down02_002" x="8.5" y="-40.4" kX="0" kY="0" cX="1" cY="1" pX="42.5" pY="22" z="0">
+        <d name="babyboy_parts-babymount_down02_002" pX="0" pY="0"/>
+      </b>
+      <b name="babymount_down01_002" x="10.5" y="-36.4" kX="0" kY="0" cX="1" cY="1" pX="13.5" pY="41" z="1">
+        <d name="babyboy_parts-babymount_down01_002" pX="0" pY="0"/>
+      </b>
+      <b name="babymount_up02_002" x="-1" y="-109.9" kX="0" kY="0" cX="1" cY="1" pX="60" pY="52.5" z="2">
+        <d name="babyboy_parts-babymount_up02_002" pX="0" pY="0"/>
+      </b>
+    </armature>
+    <armature name="babymount_head_002">
+      <b name="babymount_up01_002" x="16.5" y="6.1" kX="0" kY="0" cX="1" cY="1" pX="53.5" pY="53.5" z="0">
+        <d name="babyboy_parts-babymount_up01_002" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="babymount_body_002">
+      <mov name="ride" dr="32" to="6" drTW="32" lp="0" twE="NaN">
+        <b name="babymount_down02_002" sc="1" dl="0">
+          <f x="8.5" y="-40.4" cocos2d_x="-34" cocos2d_y="-62.4" kX="0" kY="0" cX="1" cY="1" pX="42.5" pY="22" z="0" dI="0" dr="15"/>
+          <f x="8.5" y="-40.4" cocos2d_x="-34" cocos2d_y="-62.4" kX="0" kY="0" cX="1" cY="1" pX="42.5" pY="22" z="0" dI="0" dr="16"/>
+          <f x="8.5" y="-40.4" cocos2d_x="-34" cocos2d_y="-62.4" kX="0" kY="0" cX="1" cY="1" pX="42.5" pY="22" z="0" dI="0" dr="1"/>
+        </b>
+        <b name="babymount_down01_002" sc="1" dl="0">
+          <f x="10.5" y="-36.4" cocos2d_x="-3" cocos2d_y="-77.4" kX="0" kY="0" cX="1" cY="1" pX="13.5" pY="41" z="1" dI="0" twE="0" dr="15"/>
+          <f x="10.5" y="-36.4" cocos2d_x="-3" cocos2d_y="-73.4" kX="0" kY="0" cX="1" cY="0.9" pX="13.5" pY="41" z="1" dI="0" twE="0" dr="16"/>
+          <f x="10.5" y="-36.4" cocos2d_x="-3" cocos2d_y="-77.4" kX="0" kY="0" cX="1" cY="1" pX="13.5" pY="41" z="1" dI="0" dr="1"/>
+        </b>
+        <b name="babymount_up02_002" sc="1" dl="0">
+          <f x="-1" y="-109.9" cocos2d_x="-61" cocos2d_y="-162.4" kX="0" kY="0" cX="1" cY="1" pX="60" pY="52.5" z="2" dI="0" twE="0" dr="15"/>
+          <f x="-1" y="-105.9" cocos2d_x="-61" cocos2d_y="-158.4" kX="0" kY="0" cX="1" cY="1" pX="60" pY="52.5" z="2" dI="0" twE="0" dr="16"/>
+          <f x="-1" y="-109.9" cocos2d_x="-61" cocos2d_y="-162.4" kX="0" kY="0" cX="1" cY="1" pX="60" pY="52.5" z="2" dI="0" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+    <animation name="babymount_head_002">
+      <mov name="ride" dr="32" to="6" drTW="32" lp="0" twE="NaN">
+        <b name="babymount_up01_002" sc="1" dl="0">
+          <f x="16.5" y="6.1" cocos2d_x="-37" cocos2d_y="-47.4" kX="0" kY="0" cX="1" cY="1" pX="53.5" pY="53.5" z="0" dI="0" twE="0" dr="15"/>
+          <f x="16.5" y="10.1" cocos2d_x="-39.5" cocos2d_y="-40.8" kX="-2.72" kY="-2.72" cX="1" cY="1" pX="53.5" pY="53.55" z="0" dI="0" twE="0" dr="16"/>
+          <f x="16.5" y="6.1" cocos2d_x="-37" cocos2d_y="-47.4" kX="0" kY="0" cX="1" cY="1" pX="53.5" pY="53.5" z="0" dI="0" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+    <animation name="babymount_002">
+      <mov name="ride" dr="32" to="6" drTW="32" lp="0" twE="NaN">
+        <b name="babymount_body_002" sc="1" dl="0">
+          <f x="0.95" y="-56.65" cocos2d_x="0" cocos2d_y="0" kX="0" kY="0" cX="1" cY="1" pX="0.95" pY="-56.65" z="0" dI="0" dr="32"/>
+        </b>
+        <b name="babymount_head_002" sc="1" dl="0">
+          <f x="33.15" y="-183.5" cocos2d_x="32.2" cocos2d_y="-126.85" kX="0" kY="0" cX="1" cY="1" pX="0.95" pY="-56.65" z="1" dI="0" dr="32"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="babymount_002" width="256" height="256">
+    <SubTexture name="babyboy_parts-babymount_up01_002" width="107" height="107" cocos2d_pX="0" cocos2d_pY="0" x="122" y="0"/>
+    <SubTexture name="babyboy_parts-babymount_up02_002" width="120" height="105" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+    <SubTexture name="babyboy_parts-babymount_down01_002" width="26" height="42" cocos2d_pX="0" cocos2d_pY="0" x="87" y="107"/>
+    <SubTexture name="babyboy_parts-babymount_down02_002" width="85" height="44" cocos2d_pX="0" cocos2d_pY="0" x="0" y="107"/>
+  </TextureAtlas>
+</skeleton>

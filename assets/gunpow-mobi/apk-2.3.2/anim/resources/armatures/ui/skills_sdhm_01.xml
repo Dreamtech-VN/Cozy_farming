@@ -1,0 +1,50 @@
+<skeleton name="skills_sdhm_01" frameRate="24" version="2.2">
+  <armatures>
+    <armature name="skills_sdhm_01">
+      <b name="skills_sdhm_01 " x="-1" y="-66" kX="0" kY="0" cX="1" cY="1" pX="128" pY="50" z="0">
+        <d name="skills_sdhm_01_00" pX="0" pY="0"/>
+        <d name="skills_sdhm_01_01" pX="0" pY="0"/>
+        <d name="skills_sdhm_01_02" pX="0" pY="0"/>
+        <d name="skills_sdhm_01_03" pX="0" pY="0"/>
+        <d name="skills_sdhm_01_04" pX="0" pY="0"/>
+        <d name="skills_sdhm_01_05" pX="0" pY="0"/>
+        <d name="skills_sdhm_01_06" pX="0" pY="0"/>
+        <d name="skills_sdhm_01_07" pX="0" pY="0"/>
+        <d name="skills_sdhm_01_08" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="skills_sdhm_01">
+      <mov name="idle" dr="26" to="0" drTW="26" lp="1" twE="NaN">
+        <b name="skills_sdhm_01 " sc="1" dl="0">
+          <f x="-1" y="-66" cocos2d_x="-129" cocos2d_y="-116" kX="0" kY="0" cX="1" cY="1" pX="128" pY="50" z="0" dI="0" dr="3"/>
+          <f x="-1" y="-66" cocos2d_x="-129" cocos2d_y="-116" kX="0" kY="0" cX="1" cY="1" pX="128" pY="50" z="0" dI="1" dr="3"/>
+          <f x="-1" y="-66" cocos2d_x="-129" cocos2d_y="-116" kX="0" kY="0" cX="1" cY="1" pX="128" pY="50" z="0" dI="2" dr="3"/>
+          <f x="-1" y="-66" cocos2d_x="-129" cocos2d_y="-116" kX="0" kY="0" cX="1" cY="1" pX="128" pY="50" z="0" dI="3" dr="3"/>
+          <f x="-1" y="-66" cocos2d_x="-129" cocos2d_y="-116" kX="0" kY="0" cX="1" cY="1" pX="128" pY="50" z="0" dI="4" dr="3"/>
+          <f x="-1" y="-66" cocos2d_x="-129" cocos2d_y="-116" kX="0" kY="0" cX="1" cY="1" pX="128" pY="50" z="0" dI="5" dr="3"/>
+          <f x="-1" y="-66" cocos2d_x="-129" cocos2d_y="-116" kX="0" kY="0" cX="1" cY="1" pX="128" pY="50" z="0" dI="6" dr="3"/>
+          <f x="-1" y="-66" cocos2d_x="-129" cocos2d_y="-116" kX="0" kY="0" cX="1" cY="1" pX="128" pY="50" z="0" dI="7" dr="3"/>
+          <f x="-1" y="-66" cocos2d_x="-129" cocos2d_y="-116" kX="0" kY="0" cX="1" cY="1" pX="128" pY="50" z="0" dI="8" dr="2"/>
+        </b>
+      </mov>
+      <mov name="idle0" dr="1" to="6">
+        <b name="skills_sdhm_01 " sc="1" dl="0">
+          <f x="-1" y="-66" cocos2d_x="-129" cocos2d_y="-116" kX="0" kY="0" cX="1" cY="1" pX="128" pY="50" z="0" dI="8" dr="1"/>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="skills_sdhm_01" width="512" height="512">
+    <SubTexture name="skills_sdhm_01_08" width="240" height="70" cocos2d_pX="0" cocos2d_pY="0" x="0" y="288"/>
+    <SubTexture name="skills_sdhm_01_07" width="240" height="70" cocos2d_pX="0" cocos2d_pY="0" x="0" y="72"/>
+    <SubTexture name="skills_sdhm_01_06" width="240" height="70" cocos2d_pX="0" cocos2d_pY="0" x="242" y="216"/>
+    <SubTexture name="skills_sdhm_01_05" width="240" height="70" cocos2d_pX="0" cocos2d_pY="0" x="0" y="144"/>
+    <SubTexture name="skills_sdhm_01_04" width="240" height="70" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+    <SubTexture name="skills_sdhm_01_03" width="240" height="70" cocos2d_pX="0" cocos2d_pY="0" x="242" y="0"/>
+    <SubTexture name="skills_sdhm_01_02" width="240" height="70" cocos2d_pX="0" cocos2d_pY="0" x="242" y="72"/>
+    <SubTexture name="skills_sdhm_01_01" width="240" height="70" cocos2d_pX="0" cocos2d_pY="0" x="242" y="144"/>
+    <SubTexture name="skills_sdhm_01_00" width="240" height="70" cocos2d_pX="0" cocos2d_pY="0" x="0" y="216"/>
+  </TextureAtlas>
+</skeleton>
