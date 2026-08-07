@@ -1,0 +1,166 @@
+--WBattleConfig.lua
+--@brief	战斗配置文件
+--@date		2014/1/7
+--@author	李光森
+--@note		
+
+--加载配置表
+function LoadBattleConfig()
+	LoadConfigByString(GuaiIDToTable)
+	LoadConfigByString(WeaponExplodeAnimation)
+    LoadConfigByString(WeaponExplodeTexture)
+end
+
+--副本BOSS表
+GuaiIDToTable = [[GuaiIDToTable = {
+	["boss"] = "WBoss1", 
+	["monster1"] = nil,
+	["monster2"] = nil,
+	["boss2-1"] = "WBoss2_1",
+	["boss2-2"] = nil,
+	["boss3-1"] = "WBoss3_1",
+	["boss3-2"] = "WBoss3_2",
+	["boss4"] = "WBoss4",
+	["tornado"] = nil,
+	["monster3"] = nil,
+	["boss5"] = "WBoss5",
+	["monster5"] = nil,
+	["boss6"] = "WBoss6",
+    ["worldboss"] = "WWorldBoss1",
+    ["boss7"] = "WBoss7",
+    ["boss8"] = "WBoss8",
+    ["boss9"] = "WBoss9",
+    ["boss10"] = "WBoss10",
+}]]
+
+GuaiIDToTable = [[GuaiIDToTable = {
+["boss3-1"] = "WBoss3_1",
+["boss3-2"] = "WBoss3_2",
+["boss10"] = "WBoss10",
+["monster1"] = "NO_MONSTER",
+["monster2"] = "NO_MONSTER",
+["boss2-2"] = "NO_MONSTER",
+["tornado"] = "NO_MONSTER",
+["monster3"] = "NO_MONSTER",
+["monster5"] = "NO_MONSTER",
+}]]
+
+--武器爆炸纹理配置表
+WeaponExplodeTexture = [[WeaponExplodeTexture={
+["weapon1a"] = 	"weapon1b",
+["weapon2a"] = 	"weapon2b",
+["weapon3a"] = 	"weapon3b",
+["weapon4a"] = 	"weapon4b",
+["weapon15a"] = 	"weapon15b",
+}]]
+
+--武器爆炸动画配置表
+WeaponExplodeAnimation = [[WeaponExplodeAnimation={
+	["weapon1a"] = 	"weaponboom0001",  
+	["weapon2a"] = 	"weaponboom0001",  
+	["weapon3a"] = 	"weaponboom0002",  
+	["weapon4a"] = 	"weaponboom0003",	
+	["weapon5a"] = 	"weaponboom0004", 
+	["weapon6a"] = 	"weaponboom0005", 
+	["weapon7a"] = 	"weaponboom0006",	
+	["weapon8a"] = 	"weaponboom0001",
+	["weapon9a"] = 	"weaponboom0001",
+	["weapon10a"] = "weaponboom0007",
+	["weapon11a"] = "weaponboom0008",
+	["weapon12a"] = "weaponboom0009",
+	["weapon13a"] = "weaponboom0001",
+	["weapon14a"] = "weaponboom0009",
+	["weapon15a"] = "weaponboom0001",
+	["weapon16a"] = "weaponboom0010",
+	["weapon17a"] = "weaponboom0011",
+	["weapon18a"] = "weaponboom0012",
+	["weapon19a"] = "weaponboom0013",
+	["weapon20a"] = "weaponboom0014",
+	["weapon21a"] = "weaponboom0015",
+	["weapon22a"] = "weaponboom0016",
+	["weapon23a"] = "weaponboom0017",
+	["weapon24a"] = "weaponboom0012",
+	["weapon25a"] = "weaponboom0010",
+	["weapon26a"] = "weaponboom0014",
+	["weapon27a"] = "weaponboom0018",
+	["weapon28a"] = "weaponboom0019",
+	["weapon29a"] = "weaponboom0020",
+	["weapon30a"] = "weaponboom0021",
+	["weapon31a"] = "weaponboom0021",
+	["weapon32a"] = "weaponboom0013",
+	["weapon33a"] = "weaponboom0001",
+	["weapon34a"] = "weaponboom0023",
+	["weapon35a"] = "weaponboom0024",
+	["weapon36a"] = "weaponboom0025",
+	["weapon37a"] = "weaponboom0009",
+	["weapon38a"] = "weaponboom0026",
+	["weapon39a"] = "weaponboom0027",
+	["weapon40a"] = "weaponboom0028",
+	["weapon41a"] = "weaponboom0029",
+	["weapon42a"] = "weaponboom0001",
+	["weapon43a"] = "weaponboom0030",
+	["weapon44a"] = "weaponboom0012",
+	["weapon45a"] = "weaponboom0029",
+	["weapon46a"] = "weaponboom0021",
+	["weapon47a"] = "weaponboom0033",
+	["weapon48a"] = "weaponboom0026",
+	["weapon49a"] = "weaponboom0012",
+	["weapon50a"] = "weaponboom0008",
+	["weapon51a"] = "weaponboom0012",
+	["weapon52a"] = "weaponboom0034",
+	["weapon53a"] = "weaponboom0008",
+	["weapon54a"] = "weaponboom0021",
+	["weapon55a"] = "weaponboom0015",
+	["weapon56a"] = "weaponboom0001",
+	["weapon57a"] = "weaponboom0029",
+	["weapon58a"] = "weaponboom0006",
+	["weapon59a"] = "weaponboom0021",
+	["weapon60a"] = "weaponboom0023",
+	["weapon61a"] = "weaponboom0035",
+	["weapon62a"] = "weaponboom0040",
+	["weapon63a"] = "weaponboom0021",
+	["weapon64a"] = "weaponboom0041",
+	["weapon65a"] = "weaponboom0041",
+	["weapon66a"] = "weaponboom0041",
+	["weapon67a"] = "weaponboom0042",
+	["weapon68a"] = "weaponboom0001",
+	["weapon69a"] = "weaponboom0029",
+	["weapon70a"] = "weaponboom0043",
+	["weapon71a"] = "weaponboom0034",
+	["weapon72a"] = "weaponboom0043",
+	["weapon73a"] = "weaponboom0006",
+	["weapon74a"] = "weaponboom0044",
+	["weapon75a"] = "weaponboom0026",
+	["weapon76a"] = "weaponboom0026",
+	["weapon77a"] = "weaponboom0030",
+	["weapon78a"] = "weaponboom0026",
+	["weapon79a"] = "weaponboom0045",
+	["weapon80a"] = "weaponboom0012",
+	["weapon81a"] = "weaponboom0001",
+	["weapon82a"] = "weaponboom0010",
+	["weapon83a"] = "weaponboom0046",
+	["weapon84a"] = "weaponboom0001",
+	["weapon85a"] = "weaponboom0047",
+	["weapon86a"] = "weaponboom0001",
+	["weapon87a"] = "weaponboom0043",
+	["weapon88a"] = "weaponboom0045",
+	["weapon89a"] = "weaponboom0046",
+    ["weapon90a"] = "weaponboom0026",
+    ["weapon91a"] = "weaponboom0001",
+    ["weapon92a"] = "weaponboom0015",
+    ["weapon93a"] = "weaponboom0015",
+    ["weapon94a"] = "weaponboom0012",
+    ["weapon95a"] = "weaponboom0006",
+    ["weapon96a"] = "weaponboom0021",
+    ["weapon97a"] = "weaponboom0040",
+    ["weapon98a"] = "weaponboom0001",
+    ["weapon99a"] = "weaponboom0001",
+}]]
+
+--[[
+
+	["weapon37a"] = "con_weaponboom0031",
+	["weapon38a"] = "con_weaponboom0032",
+	["weapon61a"] = "con_weaponboom0031",
+	
+]]
