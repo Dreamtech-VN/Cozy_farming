@@ -161,6 +161,8 @@ import vn.dreamtech.game.server.social.marriage.ProposeHandler;
 import vn.dreamtech.game.server.social.marriage.ReportCoopBattleHandler;
 import vn.dreamtech.game.server.social.marriage.RespondProposalHandler;
 import vn.dreamtech.game.server.social.marriage.StartCoopBattleHandler;
+import vn.dreamtech.game.server.support.AdminListTicketsHandler;
+import vn.dreamtech.game.server.support.AdminResolveTicketHandler;
 import vn.dreamtech.game.server.support.MyTicketsHandler;
 import vn.dreamtech.game.server.support.ReportHandler;
 import vn.dreamtech.game.server.wallet.AddCurrencyHandler;
@@ -266,6 +268,8 @@ public final class Main {
         server.createContext("/api/account/delete", new DeleteAccountHandler(userDao));
         server.createContext("/api/support/report", new ReportHandler(supportTicketDao));
         server.createContext("/api/support/tickets", new MyTicketsHandler(supportTicketDao));
+        server.createContext("/api/admin/support/tickets", new AdminListTicketsHandler(supportTicketDao));
+        server.createContext("/api/admin/support/resolve", new AdminResolveTicketHandler(supportTicketDao));
         server.createContext("/api/friends/request", new SendFriendRequestHandler(friendRequestDao, friendshipDao, settingsDao));
         server.createContext("/api/friends/respond", new RespondFriendRequestHandler(friendRequestDao, friendshipDao));
         server.createContext("/api/friends/requests", new PendingRequestsHandler(friendRequestDao));
