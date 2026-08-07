@@ -38,6 +38,16 @@ public final class PlayerCosmeticDao {
         }
     }
 
+    /** GM thu hồi vật phẩm làm đẹp có được do gian lận (exploit nhân bản item, lỗi mở khoá...). */
+    public void revoke(int userId, int itemId) throws SQLException {
+        String sql = "DELETE FROM player_cosmetics WHERE user_id = ? AND item_id = ?";
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setInt(2, itemId);
+            ps.executeUpdate();
+        }
+    }
+
     public boolean isOwned(int userId, int itemId) throws SQLException {
         String sql = "SELECT 1 FROM player_cosmetics WHERE user_id = ? AND item_id = ?";
         try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
