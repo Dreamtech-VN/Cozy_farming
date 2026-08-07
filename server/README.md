@@ -663,6 +663,33 @@ cũ.
       `GiftcodeMailHttpFlowTest` (nối dây HTTP thật — đổi giftcode xong vào
       thư nhận thưởng đúng, đổi trùng code bị chặn, catalog/bảng sự kiện
       public đọc được).
+- [x] **Giai đoạn 28 — GM tool quản lý tài khoản**: mở rộng phạm vi admin
+      (đã ghi TODO ở Giai đoạn 27) sang quản lý NGƯỜI CHƠI — cấm/gỡ cấm tài
+      khoản, chỉnh ví trực tiếp, tra cứu thông tin 1 user.
+      - **Cấm tài khoản** (`BannedUserDao`, bảng MỚI `banned_users`) — tách
+        RIÊNG khỏi bảng `users` thay vì thêm cột `banned` vào `User` record
+        (record đó dùng ở RẤT nhiều nơi: đăng ký/đăng nhập/liên kết mạng xã
+        hội/nâng cấp khách...), tránh phải sửa hàng loạt chỗ chỉ để thêm 1
+        cờ quản trị. `POST /api/admin/users/ban` {userId, reason},
+        `POST /api/admin/users/unban` {userId}. Chặn đăng nhập ở CẢ 3 lối
+        vào (`LoginHandler`/`GuestLoginHandler`/`SocialLoginHandler`) —
+        tài khoản bị cấm bị từ chối (403) dù đăng nhập bằng mật khẩu/khách/
+        mạng xã hội.
+      - **Chỉnh ví GM** (`WalletDao.adjustGold`/`adjustDiamond`, method
+        MỚI) — khác `addGold`/`spendGold` có sẵn (chỉ cộng, hoặc trừ có
+        kiểm tra đủ tiền), admin được TRỪ TUỲ Ý (delta âm), chỉ kẹp về 0
+        chứ không chặn thao tác. `POST /api/admin/users/wallet/adjust`
+        {userId, goldDelta, diamondDelta}.
+      - **Tra cứu user** (`AdminLookupUserHandler`) — gộp
+        `User`/`Character`/`Wallet`/`LevelInfo`/trạng thái cấm vào 1
+        response, phục vụ hỗ trợ/kiểm duyệt. `GET /api/admin/users/lookup?userId=`.
+      Test: `BannedUserDaoTest` (đơn vị); `WalletDaoTest` thêm test cho
+      `adjustGold`/`adjustDiamond` (áp dụng delta dương, kẹp về 0 khi delta
+      âm vượt quá số dư, không đụng tới trường còn lại); `AuthFlowTest`
+      thêm 3 test (tài khoản bị cấm không đăng nhập được qua CẢ 3 lối vào);
+      `AdminUserManagementHttpFlowTest` (nối dây HTTP thật cho cả 4
+      endpoint, kiểm nhánh 503 khi chưa cấu hình `ADMIN_TOKEN` — logic so
+      khớp token đã kiểm đủ ở `AdminAuthTest`).
 
 ## Chạy thử
 

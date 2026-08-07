@@ -56,4 +56,31 @@ class WalletDaoTest {
         assertEquals(100, w.gold());
         assertEquals(50, w.diamond());
     }
+
+    @Test
+    void adjustGoldAppliesPositiveDelta() throws SQLException {
+        var w = dao.adjustGold(1, 500);
+        assertEquals(500, w.gold());
+    }
+
+    @Test
+    void adjustGoldNegativeDeltaClampsAtZero() throws SQLException {
+        dao.addGold(1, 100);
+        var w = dao.adjustGold(1, -500);
+        assertEquals(0, w.gold());
+    }
+
+    @Test
+    void adjustDiamondNegativeDeltaClampsAtZero() throws SQLException {
+        dao.addDiamond(1, 20);
+        var w = dao.adjustDiamond(1, -100);
+        assertEquals(0, w.diamond());
+    }
+
+    @Test
+    void adjustGoldDoesNotTouchDiamond() throws SQLException {
+        dao.addDiamond(1, 30);
+        dao.adjustGold(1, 100);
+        assertEquals(30, dao.find(1).diamond());
+    }
 }

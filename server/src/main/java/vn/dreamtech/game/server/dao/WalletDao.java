@@ -71,4 +71,23 @@ public final class WalletDao {
         save(new Wallet(userId, w.gold(), w.diamond() - amount));
         return true;
     }
+
+    /**
+     * Admin cộng/trừ TUỲ Ý (delta âm = trừ) — khác {@code spendGold}/{@code
+     * spendDiamond} (chặn nếu không đủ), admin luôn được phép trừ, chỉ
+     * chặn xuống ÂM (kẹp về 0) chứ không chặn thao tác.
+     */
+    public Wallet adjustGold(int userId, long delta) throws SQLException {
+        Wallet w = find(userId);
+        Wallet updated = new Wallet(userId, Math.max(0, w.gold() + delta), w.diamond());
+        save(updated);
+        return updated;
+    }
+
+    public Wallet adjustDiamond(int userId, long delta) throws SQLException {
+        Wallet w = find(userId);
+        Wallet updated = new Wallet(userId, w.gold(), Math.max(0, w.diamond() + delta));
+        save(updated);
+        return updated;
+    }
 }
