@@ -12,6 +12,7 @@ import vn.dreamtech.game.server.battle.engine.TileBoard;
 import vn.dreamtech.game.server.dao.CharacterDao;
 import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
 import vn.dreamtech.game.server.dao.LevelDao;
+import vn.dreamtech.game.server.dao.TowerRecordDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.WalletDao;
 import vn.dreamtech.game.server.dao.WorldBossAttemptDao;
@@ -69,7 +70,7 @@ class WorldBossServiceTest {
         WorldBossCycleDao cycleDao = new WorldBossCycleDao(dataSource);
         WorldBossAttemptDao attemptDao = new WorldBossAttemptDao(dataSource);
         WorldBossContributionDao contributionDao = new WorldBossContributionDao(dataSource);
-        battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource));
+        battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource), new TowerRecordDao(dataSource));
         worldBossService = new WorldBossService(characterDao, cycleDao, attemptDao, contributionDao, battleService, levelDao, walletDao);
     }
 

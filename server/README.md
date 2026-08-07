@@ -689,7 +689,31 @@ cũ.
       thêm 3 test (tài khoản bị cấm không đăng nhập được qua CẢ 3 lối vào);
       `AdminUserManagementHttpFlowTest` (nối dây HTTP thật cho cả 4
       endpoint, kiểm nhánh 503 khi chưa cấu hình `ADMIN_TOKEN` — logic so
-      khớp token đã kiểm đủ ở `AdminAuthTest`).
+      khớp token đã kiểm đủ ở `AdminAuthTest`). hoàn thành TODO ghi ở Giai
+      đoạn 15 ("leaderboard theo tầng cao nhất khi có hệ leaderboard") —
+      tầng cao nhất mỗi người chơi từng đạt trong 1 tháp, KHÔNG lưu lịch sử
+      leo mà chỉ giữ 1 kỷ lục tốt nhất (`tower_records`, PK
+      `(user_id, tower_id)` — tách theo TỪNG tháp, khớp cách `TowerCatalog`
+      có nhiều tháp độc lập).
+      - `TowerRecordDao.updateBestFloorIfHigher` — chỉ ghi đè nếu tầng mới
+        CAO HƠN kỷ lục hiện có (đọc trước rồi `MERGE INTO` nếu cải thiện,
+        không phải cứ mỗi tầng qua là ghi, tránh ghi thừa khi người chơi
+        không phá kỷ lục cũ của chính mình).
+      - `BattleService` gọi hook này ở `resolveOutcome` cho mode `TOWER` —
+        cả khi qua 1 tầng giữa (`floorCleared`) lẫn khi hạ gục tầng CUỐI
+        (status chuyển `WON`), tính tầng vừa hạ gục là `floorIndex + 1`
+        (1-based) TRƯỚC khi `advanceFloor` tăng `floorIndex` lên tầng kế —
+        cần `instanceof TowerDef` để lấy `towerId` vì interface
+        `FloorSource` dùng chung với Dungeon không có `id()`.
+      - `GET /api/battle/tower/leaderboard?towerId=` — xếp giảm dần theo
+        tầng cao nhất, kèm hạng (`BattleService.towerLeaderboard`, cùng khuôn
+        mẫu `GuildBossService.leaderboard` ở Giai đoạn 18).
+      Test: `TowerRecordDaoTest` (đơn vị — tạo mới, ghi đè khi cao hơn,
+      GIỮ NGUYÊN khi thấp hơn, tách riêng theo từng tháp, xếp hạng giảm
+      dần); `TowerFlowTest` thêm 2 test (leo qua nhiều tầng ghi đúng kỷ lục
+      + bảng xếp hạng xếp đúng thứ tự nhiều người chơi, tháp chưa ai chơi
+      trả bảng rỗng); `TowerHttpFlowTest` thêm 2 test (thiếu `towerId` bị
+      chặn 400, bảng rỗng mặc định trả `200`).
 - [x] **Giai đoạn 29 — admin quản lý guild**: mở rộng phạm vi admin sang
       GUILD — admin giải tán BẤT KỲ guild nào, đuổi BẤT KỲ thành viên nào
       (kể cả hội trưởng), không cần hợp tác từ phía guild đó.
@@ -724,6 +748,31 @@ cũ.
       resolve đánh dấu đúng, resolve ticket không tồn tại trả về false,
       `findAll` lọc đúng theo `unresolvedOnly`, endpoint admin đòi hỏi
       `ADMIN_TOKEN`).
+- [x] **Giai đoạn 31 — bảng xếp hạng Tower**: hoàn thành TODO ghi ở Giai
+      đoạn 15 ("leaderboard theo tầng cao nhất khi có hệ leaderboard") —
+      tầng cao nhất mỗi người chơi từng đạt trong 1 tháp, KHÔNG lưu lịch sử
+      leo mà chỉ giữ 1 kỷ lục tốt nhất (`tower_records`, PK
+      `(user_id, tower_id)` — tách theo TỪNG tháp, khớp cách `TowerCatalog`
+      có nhiều tháp độc lập).
+      - `TowerRecordDao.updateBestFloorIfHigher` — chỉ ghi đè nếu tầng mới
+        CAO HƠN kỷ lục hiện có (đọc trước rồi `MERGE INTO` nếu cải thiện,
+        không phải cứ mỗi tầng qua là ghi, tránh ghi thừa khi người chơi
+        không phá kỷ lục cũ của chính mình).
+      - `BattleService` gọi hook này ở `resolveOutcome` cho mode `TOWER` —
+        cả khi qua 1 tầng giữa (`floorCleared`) lẫn khi hạ gục tầng CUỐI
+        (status chuyển `WON`), tính tầng vừa hạ gục là `floorIndex + 1`
+        (1-based) TRƯỚC khi `advanceFloor` tăng `floorIndex` lên tầng kế —
+        cần `instanceof TowerDef` để lấy `towerId` vì interface
+        `FloorSource` dùng chung với Dungeon không có `id()`.
+      - `GET /api/battle/tower/leaderboard?towerId=` — xếp giảm dần theo
+        tầng cao nhất, kèm hạng (`BattleService.towerLeaderboard`, cùng khuôn
+        mẫu `GuildBossService.leaderboard` ở Giai đoạn 18).
+      Test: `TowerRecordDaoTest` (đơn vị — tạo mới, ghi đè khi cao hơn,
+      GIỮ NGUYÊN khi thấp hơn, tách riêng theo từng tháp, xếp hạng giảm
+      dần); `TowerFlowTest` thêm 2 test (leo qua nhiều tầng ghi đúng kỷ lục
+      + bảng xếp hạng xếp đúng thứ tự nhiều người chơi, tháp chưa ai chơi
+      trả bảng rỗng); `TowerHttpFlowTest` thêm 2 test (thiếu `towerId` bị
+      chặn 400, bảng rỗng mặc định trả `200`).
 
 ## Chạy thử
 

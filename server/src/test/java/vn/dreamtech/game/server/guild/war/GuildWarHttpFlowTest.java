@@ -15,6 +15,7 @@ import vn.dreamtech.game.server.dao.GuildMemberDao;
 import vn.dreamtech.game.server.dao.GuildWarAttemptDao;
 import vn.dreamtech.game.server.dao.GuildWarDao;
 import vn.dreamtech.game.server.dao.LevelDao;
+import vn.dreamtech.game.server.dao.TowerRecordDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.dao.WalletDao;
 import vn.dreamtech.game.server.guild.GuildService;
@@ -76,7 +77,7 @@ class GuildWarHttpFlowTest {
         LevelDao levelDao = new LevelDao(dataSource);
         GuildDao guildDao = new GuildDao(dataSource);
         GuildMemberDao guildMemberDao = new GuildMemberDao(dataSource);
-        BattleService battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource));
+        BattleService battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource), new TowerRecordDao(dataSource));
         guildService = new GuildService(guildDao, guildMemberDao, characterDao, walletDao);
         GuildWarService guildWarService = new GuildWarService(guildDao, guildMemberDao, new GuildWarDao(dataSource),
                 new GuildWarAttemptDao(dataSource), battleService);

@@ -11,6 +11,7 @@ import vn.dreamtech.game.server.battle.BattleService;
 import vn.dreamtech.game.server.battle.BattleStateHandler;
 import vn.dreamtech.game.server.battle.SwapHandler;
 import vn.dreamtech.game.server.battle.UltimateHandler;
+import vn.dreamtech.game.server.dao.TowerRecordDao;
 import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
 import vn.dreamtech.game.server.dao.LevelDao;
 import vn.dreamtech.game.server.dao.WalletDao;
@@ -45,7 +46,7 @@ class ChallengeFlowTest {
             st.execute("CREATE TABLE challenge_attempts (user_id INT NOT NULL, challenge_type VARCHAR(10) NOT NULL, last_completed_at TIMESTAMP NOT NULL, PRIMARY KEY (user_id, challenge_type))");
         }
         challengeAttemptDao = new ChallengeAttemptDao(dataSource);
-        BattleService battleService = new BattleService(new LevelDao(dataSource), new WalletDao(dataSource), challengeAttemptDao);
+        BattleService battleService = new BattleService(new LevelDao(dataSource), new WalletDao(dataSource), challengeAttemptDao, new TowerRecordDao(dataSource));
 
         server = HttpServer.create(new InetSocketAddress(0), 0);
         server.createContext("/api/battle/challenge/start", new StartChallengeHandler(battleService));

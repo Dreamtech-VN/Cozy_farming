@@ -17,12 +17,15 @@ import vn.dreamtech.game.server.battle.eventpuzzle.EventPuzzleCatalog;
 import vn.dreamtech.game.server.battle.eventpuzzle.EventPuzzleDef;
 import vn.dreamtech.game.server.battle.tower.TowerCatalog;
 import vn.dreamtech.game.server.battle.tower.TowerDef;
+import vn.dreamtech.game.server.battle.tower.TowerLeaderboardEntry;
 import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
 import vn.dreamtech.game.server.dao.LevelDao;
+import vn.dreamtech.game.server.dao.TowerRecordDao;
 import vn.dreamtech.game.server.dao.WalletDao;
 import vn.dreamtech.game.server.level.LevelService;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -42,11 +45,14 @@ public final class BattleService {
     private final LevelDao levelDao;
     private final WalletDao walletDao;
     private final ChallengeAttemptDao challengeAttemptDao;
+    private final TowerRecordDao towerRecordDao;
 
-    public BattleService(LevelDao levelDao, WalletDao walletDao, ChallengeAttemptDao challengeAttemptDao) {
+    public BattleService(LevelDao levelDao, WalletDao walletDao, ChallengeAttemptDao challengeAttemptDao,
+                          TowerRecordDao towerRecordDao) {
         this.levelDao = levelDao;
         this.walletDao = walletDao;
         this.challengeAttemptDao = challengeAttemptDao;
+        this.towerRecordDao = towerRecordDao;
     }
 
     public BattleStateView startStory(int userId, int levelId) {
@@ -251,14 +257,17 @@ public final class BattleService {
     private boolean resolveOutcome(BattleSession session) {
         if (session.status != BattleStatus.ONGOING) return false;
         if (session.enemyHp <= 0) {
+            int floorCleared1Based = session.floorIndex + 1; // floor vừa hạ gục, trước khi advanceFloor tăng floorIndex
             if (session.hasNextFloor()) {
                 // Dungeon: thưởng tầng giữa là 0/0 (no-op). Tower: mỗi tầng đều có thưởng, phát ngay khi qua tầng.
                 grantFloorReward(session, session.level);
+                recordTowerBestFloor(session, floorCleared1Based);
                 TileBoard nextBoard = BoardGenerator.generate(BOARD_ROWS, BOARD_COLS, COLOR_COUNT, session.random);
                 session.advanceFloor(nextBoard);
                 return true;
             }
             session.status = BattleStatus.WON;
+            recordTowerBestFloor(session, floorCleared1Based);
             grantRewardOnce(session);
         } else if (session.playerHp <= 0) {
             session.status = BattleStatus.LOST;
@@ -268,6 +277,29 @@ public final class BattleService {
             session.status = BattleStatus.LOST;
         }
         return false;
+    }
+
+    private void recordTowerBestFloor(BattleSession session, int floorReached) {
+        if (session.mode != BattleMode.TOWER || !(session.floorSource instanceof TowerDef tower)) return;
+        try {
+            towerRecordDao.updateBestFloorIfHigher(session.userId, tower.id(), floorReached);
+        } catch (SQLException e) {
+            throw new BattleException(500, "Lỗi ghi nhận kỷ lục tháp: " + e.getMessage());
+        }
+    }
+
+    public List<TowerLeaderboardEntry> towerLeaderboard(int towerId) {
+        try {
+            List<TowerRecordDao.Record> records = towerRecordDao.listByTower(towerId);
+            List<TowerLeaderboardEntry> entries = new ArrayList<>();
+            int rank = 1;
+            for (TowerRecordDao.Record r : records) {
+                entries.add(new TowerLeaderboardEntry(rank++, r.userId(), r.bestFloor()));
+            }
+            return entries;
+        } catch (SQLException e) {
+            throw new BattleException(500, "Lỗi đọc bảng xếp hạng tháp: " + e.getMessage());
+        }
     }
 
     private void grantFloorReward(BattleSession session, EnemyDef floor) {
