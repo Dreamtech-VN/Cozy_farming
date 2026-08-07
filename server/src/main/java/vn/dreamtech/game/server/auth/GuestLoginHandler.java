@@ -2,6 +2,7 @@ package vn.dreamtech.game.server.auth;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import vn.dreamtech.game.server.dao.BannedUserDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.http.JsonHttp;
 
@@ -17,9 +18,11 @@ import java.util.UUID;
  */
 public final class GuestLoginHandler implements HttpHandler {
     private final UserDao userDao;
+    private final BannedUserDao bannedUserDao;
 
-    public GuestLoginHandler(UserDao userDao) {
+    public GuestLoginHandler(UserDao userDao, BannedUserDao bannedUserDao) {
         this.userDao = userDao;
+        this.bannedUserDao = bannedUserDao;
     }
 
     record Req(String guestToken) {
@@ -39,6 +42,10 @@ public final class GuestLoginHandler implements HttpHandler {
             if (req.guestToken() != null && !req.guestToken().isBlank()) {
                 var found = userDao.findByGuestToken(req.guestToken());
                 if (found.isPresent()) {
+                    if (bannedUserDao.isBanned(found.get().id())) {
+                        JsonHttp.writeError(exchange, 403, "Tài khoản đã bị cấm");
+                        return;
+                    }
                     JsonHttp.write(exchange, 200, new Res(found.get().id(), found.get().guestToken(), false));
                     return;
                 }

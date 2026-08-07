@@ -5,6 +5,7 @@ import com.sun.net.httpserver.HttpHandler;
 import vn.dreamtech.game.server.auth.oauth.OAuthVerificationException;
 import vn.dreamtech.game.server.auth.oauth.OAuthVerifier;
 import vn.dreamtech.game.server.auth.oauth.ProviderIdentity;
+import vn.dreamtech.game.server.dao.BannedUserDao;
 import vn.dreamtech.game.server.dao.UserDao;
 import vn.dreamtech.game.server.http.JsonHttp;
 import vn.dreamtech.game.server.model.User;
@@ -25,11 +26,13 @@ public final class SocialLoginHandler implements HttpHandler {
     public enum Provider { GOOGLE, APPLE }
 
     private final UserDao userDao;
+    private final BannedUserDao bannedUserDao;
     private final OAuthVerifier verifier;
     private final Provider provider;
 
-    public SocialLoginHandler(UserDao userDao, OAuthVerifier verifier, Provider provider) {
+    public SocialLoginHandler(UserDao userDao, BannedUserDao bannedUserDao, OAuthVerifier verifier, Provider provider) {
         this.userDao = userDao;
+        this.bannedUserDao = bannedUserDao;
         this.verifier = verifier;
         this.provider = provider;
     }
@@ -57,6 +60,10 @@ public final class SocialLoginHandler implements HttpHandler {
                     ? userDao.findByGoogleId(identity.providerUserId())
                     : userDao.findByAppleId(identity.providerUserId());
             if (found.isPresent()) {
+                if (bannedUserDao.isBanned(found.get().id())) {
+                    JsonHttp.writeError(exchange, 403, "Tài khoản đã bị cấm");
+                    return;
+                }
                 JsonHttp.write(exchange, 200, new Res(found.get().id(), false));
                 return;
             }

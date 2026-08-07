@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import vn.dreamtech.game.server.auth.oauth.ProviderIdentity;
+import vn.dreamtech.game.server.dao.BannedUserDao;
 import vn.dreamtech.game.server.dao.PasswordResetDao;
 import vn.dreamtech.game.server.dao.UserDao;
 
@@ -31,6 +32,7 @@ class AuthFlowTest {
     private int port;
     private final Gson gson = new Gson();
     private final HttpClient http = HttpClient.newHttpClient();
+    private BannedUserDao bannedUserDao;
 
     @BeforeEach
     void start() throws Exception {
@@ -46,20 +48,22 @@ class AuthFlowTest {
                 )
                 """);
             st.execute("CREATE TABLE password_resets (user_id INT NOT NULL PRIMARY KEY, code_hash VARCHAR(255) NOT NULL, expires_at TIMESTAMP NOT NULL)");
+            st.execute("CREATE TABLE banned_users (user_id INT NOT NULL PRIMARY KEY, reason VARCHAR(255), banned_at TIMESTAMP NOT NULL)");
         }
         UserDao userDao = new UserDao(dataSource);
         PasswordResetDao resetDao = new PasswordResetDao(dataSource);
+        bannedUserDao = new BannedUserDao(dataSource);
         var fakeGoogle = new FakeOAuthVerifier(Map.of("good-google-token", new ProviderIdentity("g-1", "a@x.com")));
         var fakeApple = new FakeOAuthVerifier(Map.of("good-apple-token", new ProviderIdentity("a-1", "b@x.com")));
 
         server = HttpServer.create(new InetSocketAddress(0), 0);
         server.createContext("/api/auth/register", new RegisterHandler(userDao));
-        server.createContext("/api/auth/login", new LoginHandler(userDao));
-        server.createContext("/api/auth/guest", new GuestLoginHandler(userDao));
+        server.createContext("/api/auth/login", new LoginHandler(userDao, bannedUserDao));
+        server.createContext("/api/auth/guest", new GuestLoginHandler(userDao, bannedUserDao));
         server.createContext("/api/auth/forgot/request", new ForgotPasswordRequestHandler(userDao, resetDao));
         server.createContext("/api/auth/forgot/reset", new ForgotPasswordResetHandler(userDao, resetDao));
         server.createContext("/api/auth/link/upgrade", new UpgradeGuestHandler(userDao));
-        server.createContext("/api/auth/social/google", new SocialLoginHandler(userDao, fakeGoogle, SocialLoginHandler.Provider.GOOGLE));
+        server.createContext("/api/auth/social/google", new SocialLoginHandler(userDao, bannedUserDao, fakeGoogle, SocialLoginHandler.Provider.GOOGLE));
         server.createContext("/api/auth/link/google", new LinkSocialHandler(userDao, fakeGoogle, SocialLoginHandler.Provider.GOOGLE));
         server.createContext("/api/auth/link/apple", new LinkSocialHandler(userDao, fakeApple, SocialLoginHandler.Provider.APPLE));
         server.setExecutor(null);
@@ -148,6 +152,38 @@ class AuthFlowTest {
         var login = post("/api/auth/login", new LoginHandler.Req("bob", "password1"));
         assertEquals(200, login.statusCode());
         assertEquals(guestId, gson.fromJson(login.body(), JsonObject.class).get("userId").getAsInt());
+    }
+
+    @Test
+    void bannedUserCannotLogin() throws Exception {
+        var register = post("/api/auth/register", new RegisterHandler.Req("carol", "s3cret1"));
+        int userId = gson.fromJson(register.body(), JsonObject.class).get("userId").getAsInt();
+
+        bannedUserDao.ban(userId, "vi phạm điều khoản");
+        var login = post("/api/auth/login", new LoginHandler.Req("carol", "s3cret1"));
+        assertEquals(403, login.statusCode());
+    }
+
+    @Test
+    void bannedGuestCannotResume() throws Exception {
+        var first = post("/api/auth/guest", new GuestLoginHandler.Req(null));
+        JsonObject firstBody = gson.fromJson(first.body(), JsonObject.class);
+        int userId = firstBody.get("userId").getAsInt();
+        String token = firstBody.get("guestToken").getAsString();
+
+        bannedUserDao.ban(userId, "spam");
+        var second = post("/api/auth/guest", new GuestLoginHandler.Req(token));
+        assertEquals(403, second.statusCode());
+    }
+
+    @Test
+    void bannedSocialUserCannotResume() throws Exception {
+        var first = post("/api/auth/social/google", new SocialLoginHandler.Req("good-google-token"));
+        int userId = gson.fromJson(first.body(), JsonObject.class).get("userId").getAsInt();
+
+        bannedUserDao.ban(userId, "gian lận");
+        var second = post("/api/auth/social/google", new SocialLoginHandler.Req("good-google-token"));
+        assertEquals(403, second.statusCode());
     }
 
     @Test
