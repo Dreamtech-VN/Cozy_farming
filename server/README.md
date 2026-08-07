@@ -690,6 +690,25 @@ cũ.
       `AdminUserManagementHttpFlowTest` (nối dây HTTP thật cho cả 4
       endpoint, kiểm nhánh 503 khi chưa cấu hình `ADMIN_TOKEN` — logic so
       khớp token đã kiểm đủ ở `AdminAuthTest`).
+- [x] **Giai đoạn 29 — admin quản lý guild**: mở rộng phạm vi admin sang
+      GUILD — admin giải tán BẤT KỲ guild nào, đuổi BẤT KỲ thành viên nào
+      (kể cả hội trưởng), không cần hợp tác từ phía guild đó.
+      - `GuildService.adminDisband`/`adminKick` (method MỚI) — khác
+        `disband`/`kick` sẵn có (chỉ hội trưởng tự giải tán guild mình,
+        hội trưởng/phó kick nhưng KHÔNG kick được hội trưởng), admin bỏ
+        qua hết các ràng buộc phân quyền đó, chỉ còn kiểm tra guild/thành
+        viên có tồn tại. `POST /api/admin/guild/disband` {guildId},
+        `POST /api/admin/guild/kick` {guildId, targetUserId}.
+      - Admin đuổi hội trưởng thì guild tạm thời KHÔNG có hội trưởng cho
+        tới khi thành viên còn lại tự chuyển quyền — TODO tự động thăng
+        cấp officer cũ nhất lên hội trưởng nếu cần sau này.
+      - Không cần "kho item" cho phần này — guild không phải nội dung có
+        thể "add bằng id" như item/giftcode/sự kiện, nên chỉ thêm 2 hành
+        động quản trị trực tiếp thay vì CRUD đầy đủ.
+      Test: `GuildFlowTest` thêm 5 test (`adminDisband` xoá guild bất kể ai
+      là hội trưởng + từ chối guild không tồn tại; `adminKick` đuổi được cả
+      hội trưởng + từ chối đuổi sai guild; endpoint HTTP đòi hỏi
+      `ADMIN_TOKEN` giống các endpoint admin khác).
 
 ## Chạy thử
 

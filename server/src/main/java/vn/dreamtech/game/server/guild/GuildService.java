@@ -183,6 +183,41 @@ public final class GuildService {
         }
     }
 
+    /**
+     * Admin giải tán BẤT KỲ guild nào — khác {@link #disband(int)} (chỉ
+     * hội trưởng tự giải tán guild của mình), dùng cho kiểm duyệt (vd. tên
+     * guild vi phạm) khi không có hội trưởng hợp tác.
+     */
+    public void adminDisband(int guildId) {
+        try {
+            guildDao.findById(guildId).orElseThrow(() -> new GuildException(404, "Không tìm thấy guild"));
+            guildMemberDao.leaveGuild(guildId);
+            guildDao.delete(guildId);
+        } catch (SQLException e) {
+            throw new GuildException(500, "Lỗi giải tán guild: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Admin đuổi BẤT KỲ thành viên nào khỏi guild — khác {@link #kick(int, int)}
+     * (chỉ hội trưởng/phó, không đuổi được hội trưởng), admin đuổi được cả
+     * hội trưởng (guild mất chủ, còn thành viên khác thì vẫn tồn tại không
+     * hội trưởng cho tới khi tự chuyển quyền — TODO tự động thăng cấp
+     * officer cũ nhất lên hội trưởng nếu cần).
+     */
+    public void adminKick(int guildId, int targetUserId) {
+        try {
+            GuildMembership target = guildMemberDao.findByUserId(targetUserId)
+                    .orElseThrow(() -> new GuildException(404, "Người này không trong guild nào"));
+            if (target.guildId() != guildId) {
+                throw new GuildException(400, "Người này không ở guild đó");
+            }
+            guildMemberDao.leave(targetUserId);
+        } catch (SQLException e) {
+            throw new GuildException(500, "Lỗi đuổi thành viên: " + e.getMessage());
+        }
+    }
+
     public List<GuildSummaryView> list() {
         try {
             List<Guild> guilds = guildDao.listAll();
