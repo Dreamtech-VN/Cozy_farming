@@ -40,6 +40,7 @@ import vn.dreamtech.game.server.character.GetAppearanceHandler;
 import vn.dreamtech.game.server.character.OwnedCosmeticsHandler;
 import vn.dreamtech.game.server.character.UnlockCosmeticHandler;
 import vn.dreamtech.game.server.character.UpdateOutfitHandler;
+import vn.dreamtech.game.server.chat.AdminDeleteMessageHandler;
 import vn.dreamtech.game.server.chat.RecentMessagesHandler;
 import vn.dreamtech.game.server.chat.SendMessageHandler;
 import vn.dreamtech.game.server.dao.BannedUserDao;
@@ -265,6 +266,7 @@ public final class Main {
         server.createContext("/api/lobby/players", new LobbyPlayersHandler(presenceDao, characterDao));
         server.createContext("/api/chat/send", new SendMessageHandler(characterDao, chatMessageDao));
         server.createContext("/api/chat/recent", new RecentMessagesHandler(chatMessageDao));
+        server.createContext("/api/admin/chat/delete", new AdminDeleteMessageHandler(chatMessageDao));
         server.createContext("/api/settings", new GetSettingsHandler(settingsDao));
         server.createContext("/api/settings/update", new UpdateSettingsHandler(settingsDao));
         server.createContext("/api/account/change-password", new ChangePasswordHandler(userDao));

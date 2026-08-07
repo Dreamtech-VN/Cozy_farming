@@ -56,4 +56,26 @@ class ChatMessageDaoTest {
         assertEquals(3, limited.size());
         assertTrue(limited.get(0).text().equals("msg0"));
     }
+
+    @Test
+    void deleteRemovesMessage() throws SQLException {
+        var msg = dao.send(1, "Alice", "spam", System.currentTimeMillis());
+        assertTrue(dao.delete(msg.id()));
+        assertEquals(0, dao.findSince(0, 50).size());
+    }
+
+    @Test
+    void deleteUnknownMessageReturnsFalse() throws SQLException {
+        assertEquals(false, dao.delete(999));
+    }
+
+    @Test
+    void deleteOnlyRemovesTargetedMessage() throws SQLException {
+        var first = dao.send(1, "Alice", "1", System.currentTimeMillis());
+        var second = dao.send(1, "Alice", "2", System.currentTimeMillis());
+        dao.delete(first.id());
+        var remaining = dao.findSince(0, 50);
+        assertEquals(1, remaining.size());
+        assertEquals(second.id(), remaining.get(0).id());
+    }
 }

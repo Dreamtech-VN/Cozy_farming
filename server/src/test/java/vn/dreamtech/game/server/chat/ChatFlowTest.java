@@ -68,6 +68,7 @@ class ChatFlowTest {
         server = HttpServer.create(new InetSocketAddress(0), 0);
         server.createContext("/api/chat/send", new SendMessageHandler(characterDao, chatMessageDao));
         server.createContext("/api/chat/recent", new RecentMessagesHandler(chatMessageDao));
+        server.createContext("/api/admin/chat/delete", new AdminDeleteMessageHandler(chatMessageDao));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -130,5 +131,14 @@ class ChatFlowTest {
         JsonArray onlyNew = gson.fromJson(recentSinceFirst.body(), JsonArray.class);
         assertEquals(1, onlyNew.size());
         assertEquals("có ai không", onlyNew.get(0).getAsJsonObject().get("text").getAsString());
+    }
+
+    @Test
+    void adminDeleteRequiresAdminToken() throws Exception {
+        var send = post("/api/chat/send", new SendMessageHandler.Req(userId, "spam"));
+        long id = gson.fromJson(send.body(), JsonObject.class).get("id").getAsLong();
+
+        var res = post("/api/admin/chat/delete", new AdminDeleteMessageHandler.Req(id));
+        assertEquals(503, res.statusCode());
     }
 }

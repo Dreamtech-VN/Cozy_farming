@@ -773,6 +773,18 @@ cũ.
       + bảng xếp hạng xếp đúng thứ tự nhiều người chơi, tháp chưa ai chơi
       trả bảng rỗng); `TowerHttpFlowTest` thêm 2 test (thiếu `towerId` bị
       chặn 400, bảng rỗng mặc định trả `200`).
+- [x] **Giai đoạn 32 — admin xoá tin nhắn chat**: mở rộng phạm vi admin
+      sang kiểm duyệt chat sảnh — trước đây `ChatMessageDao` không có cách
+      nào xoá 1 tin nhắn (gửi rồi tồn tại mãi, không có công cụ kiểm duyệt).
+      - `ChatMessageDao.delete` (method MỚI) — trả về `false` nếu tin
+        không tồn tại, khớp pattern `resolve`/`unban` đã dùng ở các admin
+        DAO khác (không throw, để service/handler tự quyết định 404 hay
+        không).
+      - `POST /api/admin/chat/delete` {messageId} — cần header
+        `X-Admin-Token`, 404 nếu tin không tồn tại.
+      Test: `ChatMessageDaoTest` thêm 3 test (xoá thành công, xoá tin
+      không tồn tại trả về false, xoá đúng 1 tin không ảnh hưởng tin khác);
+      `ChatFlowTest` thêm 1 test (endpoint đòi hỏi `ADMIN_TOKEN`).
 
 ## Chạy thử
 
