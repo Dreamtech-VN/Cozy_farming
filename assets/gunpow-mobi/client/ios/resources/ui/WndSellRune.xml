@@ -1,0 +1,162 @@
+﻿<WndSellRune GUID="{70a1d607-7d38-4bbc-bc59-c2ab8d0ca4a8}">
+    <WZUIWindow Type="WZUIWindow" GUID="{e284b206-346f-4cbb-a57f-dfac8dd8adf0}" LuaObjectName="WndSellRune" Name="WndSellRune" AbsContentSize="762,528" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{3605ff80-f558-4424-8c41-adb4d3732da9}" AbsContentSize="" UseAbsSize="False" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{c30ef2e9-0ff1-4a0d-8bbb-1b4c9d997b84}" File="ui/common/common_scale9_di19.png" CapInsets="80,80,1,1" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{f770c4fb-e862-4e1a-93b8-fbbe8861ea89}" AbsContentSize="760,55" UseAbsSize="True" RelativePosition="0.5,0.941052">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f6a1fefa-34cb-4c1d-8b2c-983759219f64}" TextKey="RUNEBOOK2" FontSize="26" LabelStyleKey="SMALL_WINDOW_TITLE" />
+            <Button Type="WZUIButton" GUID="{162d344b-2b1e-467d-a989-78db1708ee97}" AbsContentSize="55,50" UseAbsSize="True" RelativePosition="0.955263,0.5" LuaDoneFunctionName="onClose">
+                <NormalElement Type="WZUIContainer" GUID="{5f8a0dec-afdd-48e5-b2b8-802e39b24cef}">
+                    <WZUIImage Type="WZUIImage" GUID="{a7331c71-afba-4777-9d0f-a70d322a536a}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{1561b7d6-1770-4007-900a-e07b72a8a203}">
+                    <WZUIImage Type="WZUIImage" GUID="{076996b7-601a-41b8-bf2d-a7ac5082b185}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{19346f35-fd69-4662-b562-7d4f0574bafe}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{bcbc602e-7856-4eaa-ae77-589a06783c89}" AbsContentSize="760,310" UseAbsSize="True" RelativePosition="0.5,0.592946">
+            <WZUI9Image Type="WZUI9Image" GUID="{fadc185a-8258-483d-848e-764470776d73}" File="ui/common/common_scale9_di20.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{23339c5d-346f-40cd-8927-90cb330460ea}" AbsContentSize="140,278" UseAbsSize="True" RelativePosition="0.11,0.506452">
+                <WZUI9Image Type="WZUI9Image" GUID="{5d94ac0c-eea3-4f4c-b5a3-035dd41fa756}" File="ui/rune/common_scale9_di18_fuwenxuanzhong.png" UseOriginSize="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{3a7b6e61-fd41-429b-ab10-3e35a6c00690}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.5,0.69952">
+                    <WZUIImage Type="WZUIImage" GUID="{414477fb-eae7-45bc-ab54-2bceed08e057}" File="ui/rune/common_icon_fuwenzongdengji01.png" UseOriginSize="True" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{189b88f5-1127-4b68-8ac4-28213dde719f}" RelativePosition="0.5,0.426403" EnableStroke="True" FontSize="22" Color="225,236,193" StrokeSize="4" StrokeColor="127,70,26" AnchorPoint="0.5,0.5" Alignment="Left" Text="" TextKey="RUNEBOOK7" Name="txtRuneLv1_WndSellRune" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{db5f050b-b395-404b-abe0-4b7c1788c980}" RelativePosition="0.494382,0.198161" Name="txtTips1_WndSellRune" FontSize="18" Color="105,65,46" Text="请勾选" TextKey="RUNEBOOK5" />
+                <WZUI9Image Type="WZUI9Image" GUID="{1f22c245-e76c-4b3d-9a3f-a5b6692cbc33}" File="ui/common/common_scale9_beibaodi_sel.png" Name="imgSel1_WndSellRune" Visible="False" />
+                <Button Type="WZUIButton" GUID="{abe0b799-7826-4584-bda4-63ddfe803314}" LuaDoneFunctionName="onClick" Tag="1">
+                    <NormalElement Type="WZUIContainer" GUID="{968b1e5a-2480-42a2-821b-cfb80bf5b5c4}" />
+                    <SelectElement Type="WZUIContainer" GUID="{b5b8b668-609a-4500-9ca8-0d6abc82245b}" />
+                    <DisableElement Type="WZUIContainer" GUID="{cc2d1fc5-27d9-4316-8ba5-71d7d1ec45fb}" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{c51ba736-fa26-413f-b32f-1f8a31284d8a}" AbsContentSize="104,34" UseAbsSize="True" RelativePosition="0.494382,0.198161" LuaDoneFunctionName="onSellDes" Tag="1" Name="btnSellDes1_WndSellRune" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{2dab1a19-b1ba-410f-9701-93a7e65d0ab5}">
+                        <WZUIImage Type="WZUIImage" GUID="{d9d16fac-1594-42fb-b9b5-4d6fb85433c4}" File="ui/common/common_btn_anniu16.png" UseOriginSize="True" Scale="0.5" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{9ccf41ff-534d-4e6b-b472-a2bead864fd9}">
+                        <WZUIImage Type="WZUIImage" GUID="{4a7dc7af-bb5a-4804-8ed2-3a9f6c1bdafc}" File="ui/common/common_btn_anniu16_sel.png" UseOriginSize="True" Scale="0.5" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{465f6155-5d70-4cc8-8ebc-186c3d849868}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{62373422-888a-4945-876e-105a5e114989}" RelativePosition="0.5,0.5" EnableStroke="True" FontSize="18" Color="225,236,193" StrokeSize="4" StrokeColor="128,54,13" AnchorPoint="0.5,0.5" Alignment="Center" Text="" TextKey="RUNEBOOK4" Name="txtSellDes1_WndSellRune" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{bd274bf4-fa0c-4fec-9ec9-3bdf5c95c8a8}" AbsContentSize="140,278" UseAbsSize="True" RelativePosition="0.305,0.50595">
+                <WZUI9Image Type="WZUI9Image" GUID="{d9ee07c7-4d04-406a-b6cc-03cd6d3efa8c}" File="ui/rune/common_scale9_di18_fuwenxuanzhong.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{30566f0d-a9b0-4f4e-9c0a-3244b2bef780}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.5,0.69952">
+                    <WZUIImage Type="WZUIImage" GUID="{8229a841-4bf6-4408-bf1e-fa9d97eba239}" File="ui/rune/common_icon_fuwenzongdengji02.png" UseOriginSize="True" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9abe887c-9377-496a-a888-05ee28f00255}" RelativePosition="0.5,0.426403" EnableStroke="True" FontSize="22" Color="225,236,193" StrokeSize="4" StrokeColor="127,70,26" AnchorPoint="0.5,0.5" Alignment="Left" Text="" TextKey="RUNEBOOK13" Name="txtRuneLv2_WndSellRune" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{bb8c9f48-2379-4995-805d-d9459af88547}" RelativePosition="0.494382,0.198161" Name="txtTips2_WndSellRune" FontSize="18" Color="105,65,46" Text="请勾选" TextKey="RUNEBOOK5" />
+                <WZUI9Image Type="WZUI9Image" GUID="{87da6535-6e7c-4d97-a869-bf58104c79ad}" File="ui/common/common_scale9_beibaodi_sel.png" Name="imgSel2_WndSellRune" Visible="False" />
+                <Button Type="WZUIButton" GUID="{0341d537-352e-4ea2-9b66-7ec674e00fdc}" LuaDoneFunctionName="onClick" Tag="2">
+                    <NormalElement Type="WZUIContainer" GUID="{7511bdaf-df8c-48f5-8d0c-477f68b3ca0d}" />
+                    <SelectElement Type="WZUIContainer" GUID="{5562ccb6-ed35-45d6-865d-58ec6fa15e8d}" />
+                    <DisableElement Type="WZUIContainer" GUID="{b335bfef-f64f-41b4-bb67-57af0d11dea6}" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{f85acb28-ded0-429c-bd8c-656945a483a5}" AbsContentSize="104,34" UseAbsSize="True" RelativePosition="0.494382,0.198161" LuaDoneFunctionName="onSellDes" Tag="2" Name="btnSellDes2_WndSellRune" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{e8b325d9-8532-4712-a1d7-bfbcd16509d9}">
+                        <WZUIImage Type="WZUIImage" GUID="{da3189a8-bf3e-4576-8eee-327ac8056c8b}" File="ui/common/common_btn_anniu16.png" UseOriginSize="True" Scale="0.5" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{60b74df3-849a-4ec4-a94e-82542dfce5ef}">
+                        <WZUIImage Type="WZUIImage" GUID="{fb1f478b-b55b-442b-817d-17de8b0eac07}" File="ui/common/common_btn_anniu16_sel.png" UseOriginSize="True" Scale="0.5" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{f20a8cfc-0942-43f3-a8bf-776108e87ab7}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{901b3790-8abb-429d-871f-770f13ecc8a0}" RelativePosition="0.5,0.5" EnableStroke="True" FontSize="18" Color="225,236,193" StrokeSize="4" StrokeColor="128,54,13" AnchorPoint="0.5,0.5" Alignment="Center" Text="" TextKey="RUNEBOOK4" Name="txtSellDes2_WndSellRune" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{4d33fb8a-07b9-49ec-8164-0c7c9d6e08cf}" AbsContentSize="140,278" UseAbsSize="True" RelativePosition="0.5,0.506452">
+                <WZUI9Image Type="WZUI9Image" GUID="{b21e1967-13d4-4100-8f40-8143aa181e95}" File="ui/rune/common_scale9_di18_fuwenxuanzhong.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{f2395a31-c245-4cf0-94f6-45e351b83ead}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.5,0.69952">
+                    <WZUIImage Type="WZUIImage" GUID="{f5843bcd-5de6-4c7e-8d1f-16e5d39aad86}" File="ui/rune/common_icon_fuwenzongdengji03.png" UseOriginSize="True" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0c9ddc20-3358-4a5e-afbf-5de4fb394a1d}" RelativePosition="0.5,0.426403" EnableStroke="True" FontSize="22" Color="225,236,193" StrokeSize="4" StrokeColor="127,70,26" AnchorPoint="0.5,0.5" Alignment="Left" Text="" TextKey="RUNEBOOK14" Name="txtRuneLv3_WndSellRune" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d02b7cc3-1425-434d-ae88-389d4c4a7dcf}" RelativePosition="0.494382,0.198161" Name="txtTips3_WndSellRune" FontSize="18" Color="105,65,46" Text="请勾选" TextKey="RUNEBOOK5" />
+                <WZUI9Image Type="WZUI9Image" GUID="{652e3f74-a76a-4e31-aaa1-d49936b765dd}" File="ui/common/common_scale9_beibaodi_sel.png" Name="imgSel3_WndSellRune" Visible="False" />
+                <Button Type="WZUIButton" GUID="{4d854fde-b43e-4717-9991-f53685591f33}" LuaDoneFunctionName="onClick" Tag="3">
+                    <NormalElement Type="WZUIContainer" GUID="{f54f3edf-5351-43fc-a85f-5f594ee64049}" />
+                    <SelectElement Type="WZUIContainer" GUID="{e52571de-059b-4e7d-8134-b3b1afcd2996}" />
+                    <DisableElement Type="WZUIContainer" GUID="{0fda51ea-32f3-4a4f-add4-effcf8ce4560}" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{86677816-88d7-44fa-ab42-51bf3b9dd384}" AbsContentSize="104,34" UseAbsSize="True" RelativePosition="0.494382,0.198161" LuaDoneFunctionName="onSellDes" Tag="3" Name="btnSellDes3_WndSellRune" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{db3fad6e-a2e9-44fe-a25a-93a906c08672}">
+                        <WZUIImage Type="WZUIImage" GUID="{3b547bdc-8291-44a3-845b-946d3646c782}" File="ui/common/common_btn_anniu16.png" UseOriginSize="True" Scale="0.5" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{6190ad70-9198-4810-8b99-61fef62844ea}">
+                        <WZUIImage Type="WZUIImage" GUID="{b943d5ba-5621-471e-9d6e-7ed7894c26c0}" File="ui/common/common_btn_anniu16_sel.png" UseOriginSize="True" Scale="0.5" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{5d066b1a-9005-4942-952c-44edb90d9e6c}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1c25a505-840f-47b5-b4af-4ec7ec86da8f}" RelativePosition="0.5,0.5" EnableStroke="True" FontSize="18" Color="225,236,193" StrokeSize="4" StrokeColor="128,54,13" AnchorPoint="0.5,0.5" Alignment="Center" Text="" TextKey="RUNEBOOK4" Name="txtSellDes3_WndSellRune" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{8dd162d7-4634-4371-8864-c8c5d3d35fab}" AbsContentSize="140,278" UseAbsSize="True" RelativePosition="0.695,0.50595">
+                <WZUI9Image Type="WZUI9Image" GUID="{59caddad-9e69-43d6-aec0-21f7b2e0e6b6}" File="ui/rune/common_scale9_di18_fuwenxuanzhong.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{9ef9a839-3e88-4d93-9195-23a65c4ffc21}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.5,0.69952">
+                    <WZUIImage Type="WZUIImage" GUID="{c6c6ed29-1977-46f1-8cef-216f5be71d21}" File="ui/rune/common_icon_fuwenzongdengji04.png" UseOriginSize="True" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{f479d94d-2cfc-44c0-841c-47a6c6a469ea}" RelativePosition="0.5,0.426403" EnableStroke="True" FontSize="22" Color="225,236,193" StrokeSize="4" StrokeColor="127,70,26" AnchorPoint="0.5,0.5" Alignment="Left" Text="" TextKey="RUNEBOOK15" Name="txtRuneLv4_WndSellRune" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{69440884-12f9-442e-b327-f10092cc0862}" RelativePosition="0.494382,0.198161" Name="txtTips4_WndSellRune" FontSize="18" Color="105,65,46" Text="请勾选" TextKey="RUNEBOOK5" />
+                <WZUI9Image Type="WZUI9Image" GUID="{d63e725b-3f5a-4c08-b939-abadbaf58c5c}" File="ui/common/common_scale9_beibaodi_sel.png" Name="imgSel4_WndSellRune" Visible="False" />
+                <Button Type="WZUIButton" GUID="{cd0715ad-4910-4bea-a071-e659d114a775}" LuaDoneFunctionName="onClick" Tag="4">
+                    <NormalElement Type="WZUIContainer" GUID="{6e76dc42-4978-4f1f-998d-aa99505eb98e}" />
+                    <SelectElement Type="WZUIContainer" GUID="{2a215373-2c2b-4b51-a1f2-e56bed12e864}" />
+                    <DisableElement Type="WZUIContainer" GUID="{6453680a-213c-4392-bef8-f0a00fd6c6c7}" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{323e8ca3-83b3-4399-b328-5b2e24a4914e}" AbsContentSize="104,34" UseAbsSize="True" RelativePosition="0.494382,0.198161" LuaDoneFunctionName="onSellDes" Tag="4" Name="btnSellDes4_WndSellRune" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{26200d7e-c595-4d4e-a205-e41ca5c24335}">
+                        <WZUIImage Type="WZUIImage" GUID="{20754616-e592-42be-a58b-1ce19d490102}" File="ui/common/common_btn_anniu16.png" UseOriginSize="True" Scale="0.5" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{94fd2bdb-a3b7-4339-b5f5-d2fb606236e1}">
+                        <WZUIImage Type="WZUIImage" GUID="{b67b1254-999b-4cf9-97c7-5ee342944ecd}" File="ui/common/common_btn_anniu16_sel.png" UseOriginSize="True" Scale="0.5" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{25044420-20c3-4e6b-b3cb-ad2376f3a9cb}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{73959383-c7fd-414e-aff9-c31e1d337941}" RelativePosition="0.5,0.5" EnableStroke="True" FontSize="18" Color="225,236,193" StrokeSize="4" StrokeColor="128,54,13" AnchorPoint="0.5,0.5" Alignment="Center" Text="" TextKey="RUNEBOOK4" Name="txtSellDes4_WndSellRune" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{802fcce7-e838-4550-b0e5-f98f95a32c0c}" AbsContentSize="140,278" UseAbsSize="True" RelativePosition="0.89,0.50595">
+                <WZUI9Image Type="WZUI9Image" GUID="{ff33433c-0cbe-4789-bd3c-16104a6ad632}" File="ui/rune/common_scale9_di18_fuwenxuanzhong.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{c6be6ee5-36f5-4520-84f8-2470b10ae5fa}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.5,0.69952">
+                    <WZUIImage Type="WZUIImage" GUID="{718f08a6-a6d4-4173-b31d-0358d9fc3a4f}" File="ui/rune/common_icon_fuwenzongdengji05.png" UseOriginSize="True" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{979ce0f0-9420-4dcc-b423-02e50f24bf48}" RelativePosition="0.5,0.426403" EnableStroke="True" FontSize="22" Color="225,236,193" StrokeSize="4" StrokeColor="127,70,26" AnchorPoint="0.5,0.5" Alignment="Left" Text="" TextKey="RUNEBOOK19" Name="txtRuneLv5_WndSellRune" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{fb69a78c-00ac-4cc8-933c-63e53983f6ed}" RelativePosition="0.494382,0.198161" Name="txtTips5_WndSellRune" FontSize="18" Color="105,65,46" Text="请勾选" TextKey="RUNEBOOK5" />
+                <WZUI9Image Type="WZUI9Image" GUID="{ee3894e2-9a2c-4a38-b3ca-633ae30ac8f4}" File="ui/common/common_scale9_beibaodi_sel.png" Name="imgSel5_WndSellRune" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{5663c08b-9671-47a3-bca0-b0dd462c938b}" File="ui/common/common_icon_xiyou.png" UseOriginSize="True" RelativePosition="0.185714,0.892087" />
+                <Button Type="WZUIButton" GUID="{3ab88f0a-c7f4-402d-9057-264f3a3f072d}" LuaDoneFunctionName="onClick" Tag="5">
+                    <NormalElement Type="WZUIContainer" GUID="{e45d2d04-5ee4-4439-a555-dafd0216561e}" />
+                    <SelectElement Type="WZUIContainer" GUID="{92e7f6e9-a750-4ce2-af1d-babd99a174f9}" />
+                    <DisableElement Type="WZUIContainer" GUID="{fa73f548-46fd-465a-9807-096cbd89e224}" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{5094be40-ee9b-40af-ad61-b8c6d2611cbc}" AbsContentSize="104,34" UseAbsSize="True" RelativePosition="0.494382,0.198161" LuaDoneFunctionName="onSellDes" Tag="5" Name="btnSellDes5_WndSellRune" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{614b9014-0156-4881-babb-858d3c729e61}">
+                        <WZUIImage Type="WZUIImage" GUID="{6ee44593-2223-4f6e-b075-df1a0530bf3b}" File="ui/common/common_btn_anniu16.png" UseOriginSize="True" Scale="0.5" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{bae83536-eb1e-4e51-8728-152979022fc6}">
+                        <WZUIImage Type="WZUIImage" GUID="{5b0a3d70-b463-4132-ae3a-810c3e2c4c8e}" File="ui/common/common_btn_anniu16_sel.png" UseOriginSize="True" Scale="0.5" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{61891522-ab56-4aa8-82ed-45f21203a91c}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7e157151-45f8-47b3-bfb7-20526e62dbb6}" RelativePosition="0.5,0.5" EnableStroke="True" FontSize="18" Color="225,236,193" StrokeSize="4" StrokeColor="128,54,13" AnchorPoint="0.5,0.5" Alignment="Center" Text="" TextKey="RUNEBOOK4" Name="txtSellDes5_WndSellRune" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{91d095bc-6681-4409-8563-825ee285a7b7}" AbsContentSize="760,163" UseAbsCoordinate="False" UseAbsSize="True" RelativePosition="0.5,0.149999" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{3cb2b062-81d9-4e59-95c7-b95401596db1}" File="ui/common/common_scale9_heidi3.png" UseOriginSize="True" ScaleX="0.95" ScaleY="0.72" RelativePosition="0.499094,0.840286" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{11f508ae-85e3-4b51-a886-fa0936546b7f}" RelativePosition="0.388158,0.831595" AnchorPoint="0,0.5" Alignment="Left" EnableStroke="True" FontSize="20" Color="255,236,193" StrokeSize="4" StrokeColor="79,60,48" Text="" TextKey="SELLGET">
+                <WZUIImage Type="WZUIImage" GUID="{c5cab0aa-4244-4442-bd37-70c9e4744b06}" File="shopitems/common_icon_fuwensuipian.png" UseOriginSize="True" RelativePosition="1,0.5" AnchorPoint="0,0.5" Scale="0.78">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{dda305c0-578c-41ce-8500-a8c2d3620e9b}" FontSize="20" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" Color="255,227,116" RelativePosition="1,0.5" Text="" AnchorPoint="0,0.5" Alignment="Left" Name="txtPrice_WndSellRune" />
+                </WZUIImage>
+            </WZUILabelTTF>
+            <Button Type="WZUIButton" GUID="{58dee72a-0002-40fc-b763-f4231a40b23a}" AbsContentSize="135,60" UseAbsSize="True" RelativePosition="0.5,0.51227" LuaDoneFunctionName="onSell" Name="btnSell_WndSellRune">
+                <NormalElement Type="WZUIContainer" GUID="{f6ebab20-15f0-4675-b6d1-3fcfaee39c91}">
+                    <WZUIImage Type="WZUIImage" GUID="{7ebb575e-f328-405a-90fd-7faaa87150d8}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{9ae6067f-c57f-4563-b8c6-409187df669e}">
+                    <WZUIImage Type="WZUIImage" GUID="{f7c72fca-53e8-46e4-af81-111269cc59ca}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{8c2d46a4-5d1e-4415-92fd-4447d7b978bb}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b6077bc3-d504-4bec-a175-947b58bab3e5}" Color="255,236,193" EnableStroke="True" FontSize="24" StrokeColor="0,72,3" StrokeSize="4" Text="" Name="txtSell_WndSellRune" TextKey="SELL" ShadowBlur="0" />
+            </Button>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{86b1e8fa-d7fb-446e-98d4-9202ecd36412}" RelativePosition="0.497368,0.168711" Text="不会出售已装载的符文" FontSize="18" Color="105,65,46" TextKey="RUNEBOOK6" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSellRune>

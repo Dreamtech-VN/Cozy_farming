@@ -1,0 +1,82 @@
+﻿<WndCommunityBossEnd GUID="{14ebdd8a-e253-4e59-96a7-443333f47823}">
+    <WZUIWindow Type="WZUIWindow" GUID="{ad573d4b-a13d-4b6e-a245-29457d56b381}" NameCreate="True" Name="WndCommunityBossInspire" LuaObjectName="WndCommunityBossInspire" AbsContentSize="500,440" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{21a81639-2be6-420a-b58a-94b60d9623cb}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{0280a32f-6c7a-4f8e-81eb-429ffa93db3c}">
+                <WZUIContainer Type="WZUIContainer" GUID="{6cada2a3-e311-4a70-a02f-b75c3ff11039}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{362e09d4-dd43-4428-87f8-48da7e46e50e}" File="ui/common/common_scale9_di19.png" Opacity="255" RelativePosition="0.5,0.5" CapInsets="250,100,1,1" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{73489b4e-b52b-46fa-a158-988f222afb07}" RelativeSize="0.97,0.75" RelativePosition="0.5,0.495">
+                    <WZUI9Image Type="WZUI9Image" GUID="{21b4bb1a-beb8-4bb7-9b98-e729c163b958}" File="ui/common/common_scale9_di20.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{61481100-08f8-4182-a67d-41c96e92c8e8}" RelativeSize="1,0.15" AnchorPoint="0.5,1" RelativePosition="0.5,1" Visible="True">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4268c0cd-8656-4fbb-a32f-c6dac4726e64}" TextKey="GUILD_BOSS_INSPIRE_ALL" FontSize="26" Color="255,236,192" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" RelativePosition="0.5,0.5" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{a6f746a7-12ad-46cb-95c3-d915615e70a7}" Name="" Order="1">
+                    <WZUIButton AbsContentSize="120,56" GUID="{92ce8612-2d7b-47c6-8750-bd882d0acb9d}" LuaDoneFunctionName="OnCloseClick" Name="" RelativePosition="0.92,0.93" Type="WZUIButton" UseAbsSize="True">
+                        <NormalElement GUID="{aa4fe3f6-b04f-4bd8-b972-7fb7d38bc347}" TouchContainerEnable="True" Type="WZUIContainer">
+                            <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{f34e211f-752a-4898-9824-044c3cc28721}" Type="WZUIImage" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement GUID="{85019cc1-6815-47f7-8320-f2ac0da61174}" TouchContainerEnable="True" Type="WZUIContainer">
+                            <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{128fef4c-b7c4-4b58-b0b8-ea60a7149c5a}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                        </SelectElement>
+                    </WZUIButton>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{18a37468-9f9b-4f88-bee3-67f08c7404f4}" UseAbsSize="True" AbsContentSize="216,242" RelativePosition="0.270333,0.437068" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{a781e579-8f14-4c7e-9ae3-66a1dda81382}" File="ui/common/common_scale9_di7.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{20520413-497f-40a4-996d-0f777fe5f36a}" UseAbsSize="True" AbsContentSize="216,242" RelativePosition="0.730333,0.437068" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{d7b605e6-9e96-41e3-9a50-dcfeac6f076b}" File="ui/common/common_scale9_di7.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{6cd2b179-cdc5-4be3-b4f2-4f614c2dbae3}" UseAbsSize="True" AbsContentSize="216,100" RelativePosition="0.270333,0.487068" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{29796faa-2753-4ce3-a0ae-f3a5a977f7f1}" File="ui/common/common_scale9_di20.png" Opacity="153" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{b855836e-be41-4d39-94d1-f5e4da3b6a6c}" UseAbsSize="True" AbsContentSize="216,100" RelativePosition="0.730333,0.487068" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{82b3e0ac-f10f-4909-9175-89e7317ea5a3}" File="ui/common/common_scale9_di20.png" Opacity="153" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c36ad621-364f-4d00-b141-d8c9a72799b2}" UseAbsSize="True" AbsContentSize="480,40" RelativePosition="0.5,0.795879" Visible="True" RelativeSize="1,0.1">
+                    <WZUI9Image Type="WZUI9Image" GUID="{639d908f-ba8d-4a61-93e9-d91260c3aecb}" File="ui/common/common_scale9_heidi3.png" Opacity="153" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{58d4ba71-8c75-4bad-afa7-c4bdc6900d17}" LabelStyleKey="C18_F24_S4_C2" Text="伤害 +1%" RelativePosition="0.270333,0.651659" Name="labHurtOne_WndCommunityBossInspire" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{f4828fa4-855c-4c90-a3cc-e5e587410797}" LabelStyleKey="C18_F24_S4_C2" Text="伤害 +1%" RelativePosition="0.730333,0.651659" Name="labHurtNum_WndCommunityBossInspire" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ae9ce1e6-a905-4599-9e46-214147f8e3da}" LabelStyleKey="C13_F22" Text="伤害 +1%" RelativePosition="0.187537,0.534468" Name="txtGet_WndCommunityBossInspire" TextKey="GET" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{814f73ef-38e6-4e75-b4b8-d4848de5ee98}" LabelStyleKey="C13_F22" Text="伤害 +1%" RelativePosition="0.639547,0.534468" Name="txtGetNum_WndCommunityBossInspire" TextKey="GET" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9d8d69f3-e722-454f-a347-3d9038644672}" LabelStyleKey="C13_F22" Text="伤害 +1%" RelativePosition="0.187537,0.431064" Name="txtGetDia_WndCommunityBossEnd" TextKey="ATH_SHOP_COST" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6abed026-a6bc-4014-a694-e0a2b0f59e35}" LabelStyleKey="C13_F22" Text="伤害 +1%" RelativePosition="0.639537,0.431064" Name="txtGetDiaN_WndCommunityBossEnd" TextKey="ATH_SHOP_COST" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6d00b400-a6cf-47e1-a645-4c33e4477525}" LabelStyleKey="C13_F22" Text="1000" RelativePosition="0.819537,0.531064" Name="labGetNum_WndCommunityBossInspire" TextKey="" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b0e73b49-7d36-479f-a266-573eb2ef9007}" LabelStyleKey="C13_F22" Text="500" RelativePosition="0.821537,0.428791" Name="labCostNum_WndCommunityBossInspire" TextKey="" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7129caa5-4c59-4843-9e73-d1749516d72e}" LabelStyleKey="C13_F22" Text="100" RelativePosition="0.359537,0.531064" Name="labGet_WndCommunityBossInspire" TextKey="" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{85dd765b-03db-4725-9982-c647100dd5ab}" LabelStyleKey="C13_F22" Text="50" RelativePosition="0.361537,0.428791" Name="labCost_WndCommunityBossInspire" TextKey="" />
+                <WZUIImage Type="WZUIImage" GUID="{512b0abb-ab94-48bb-9a00-5ac2d4d9df2c}" File="" UseOriginSize="True" ScaleX="0.8" ScaleY="0.8" RelativePosition="0.290711,0.432238" Name="imgCostIcon1_WndCommunityBossEnd" />
+                <WZUIImage Type="WZUIImage" GUID="{82ca57ec-535f-4d30-9e13-285b80eb8d6d}" File="" UseOriginSize="True" ScaleX="0.8" ScaleY="0.8" RelativePosition="0.742654,0.432238" Name="imgCostIcon2_WndCommunityBossEnd" />
+                <WZUIImage Type="WZUIImage" GUID="{48d862c1-ef20-4e73-b52a-434c47a92ff0}" File="ui/community/common_icon_gonghui_pic.png" UseOriginSize="True" ScaleX="1" ScaleY="1" RelativePosition="0.287678,0.533369" Scale="1" />
+                <WZUIImage Type="WZUIImage" GUID="{65e46d52-b283-4761-aaf4-177d566fa084}" File="ui/community/common_icon_gonghui_pic.png" UseOriginSize="True" ScaleX="1" ScaleY="1" RelativePosition="0.740654,0.533369" Scale="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{858f3c3a-f0d1-4f9a-85e7-a07b270c27aa}" LabelStyleKey="C13_F20" Text="ps 鼓舞" RelativePosition="0.5,0.0610835" Name="txtNotice_WndCommunityBossEnd" TextKey="GUILD_BOSS_INSPIRE_DES" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5d2eec44-bf4b-4c46-b998-22e8a9599179}" RelativeSize="1,1" RelativePosition="0.269413,0.272295" Visible="True" AnchorPoint="0.5,0.5" UseAbsSize="True" AbsContentSize="130,60">
+                <WZUIButton Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.5,0.5" GUID="{c25dfcec-e215-4fff-b481-d14a40724714}" LuaDoneFunctionName="OnInspireClick">
+                    <NormalElement Type="WZUIContainer" GUID="{29712d44-31f5-4f24-89c4-75ea1af67e3f}">
+                        <WZUIImage Type="WZUIImage" GUID="{7c2b78d3-7b55-464c-bbeb-046ff9915218}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{b92d028d-4cf3-410e-b85b-9fbfdccef170}">
+                        <WZUIImage Type="WZUIImage" GUID="{dc22b736-3882-408e-8654-a33ae835e086}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{59b2a1d7-1e28-4a89-9467-bbc2546ae963}" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{52b2751b-2e90-4f4b-aa4c-febd62113c10}" TextKey="GUILD_BOSS_INSPIRE" Color="255,236,193" FontSize="26" StrokeColor="64,128,1" StrokeSize="4" EnableStroke="True" Text="CONFIRM" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5614b5af-684f-4bb5-a520-38fac5a2151f}" RelativeSize="1,1" RelativePosition="0.715413,0.272295" Visible="True" AnchorPoint="0.5,0.5" UseAbsSize="True" AbsContentSize="130,60">
+                <WZUIButton Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.5,0.5" GUID="{e049d134-3df7-48c9-8c00-5507010071cc}" LuaDoneFunctionName="OnInspireNumClick">
+                    <NormalElement Type="WZUIContainer" GUID="{9bd7fe5c-a7bb-4170-bf7a-3b29dcdb100b}">
+                        <WZUIImage Type="WZUIImage" GUID="{21dcf082-11c8-499c-a3d9-50df3fbdfa4b}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{ef48ecb2-8b44-4039-9eb6-1eea1e545024}">
+                        <WZUIImage Type="WZUIImage" GUID="{677784ee-0a49-459c-b149-6900d563dde4}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{080e024d-0684-42a4-9d6c-87f2c9f86fea}" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8198f2d8-b897-476b-9d52-546d8ae1cee7}" TextKey="" Color="255,236,193" FontSize="26" StrokeColor="64,128,1" StrokeSize="4" EnableStroke="True" Text="CONFIRM" Name="labBtnInspireNum_WndCommunityBossInspire" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{6bdfd3c8-e2c7-409f-a98f-13f3f2ea6434}" LabelStyleKey="C18_F24_S4_C2" Text="伤害 +1%" RelativePosition="0.5,0.794076" Name="labCurHurtPre_WndCommunityBossInspire" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCommunityBossEnd>

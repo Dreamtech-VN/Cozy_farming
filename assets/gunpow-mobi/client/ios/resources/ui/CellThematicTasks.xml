@@ -1,0 +1,51 @@
+﻿<CellThematicTasks GUID="{2968c8ba-8a22-4b8f-8c02-b93fddf94bb0}">
+    <WZUIWindow Type="WZUIWindow" GUID="{a70fd206-7f4a-4ebb-b01e-a1d37928d07f}" Name="CellThematicTasks" AbsContentSize="630,80" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{87fd3da4-4f03-4d0e-a866-9e128d888618}">
+            <WZUI9Image Type="WZUI9Image" GUID="{5f530d26-135e-4f30-89c2-bd9d13cb5ce1}" File="ui/gameActivity/christmas/merrychristmas_scale_di5.png" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{d1e0bbb5-7308-4882-a1c6-5451c10dd559}" RelativePosition="0.5,0.5">
+            <WZUIContainer Type="WZUIContainer" GUID="{60827783-b611-4b89-a9c8-c5d8a225454e}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.0777778,0.525">
+                <WZUIImage Type="WZUIImage" GUID="{d7403497-a54f-4080-87d7-11ecee25b8c3}" File="ui/gameActivity/christmas/merrychristmas_scale_di6.png" />
+                <WZUIImage Type="WZUIImage" GUID="{07994b39-b7da-49cc-af70-1136a5bd03fe}" Name="imgItem_CellThematicTasks" File="shopitems/wing_016.png" Scale="0.75" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{f89e6f6b-8255-4316-ba3e-7cc884435ce4}" UseAbsSize="True" AbsContentSize="440,80" RelativePosition="0.477778,0.5">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6568edfa-9a21-4f9d-85df-70d77005d37b}" Text="（类型）" FontSize="20" Color="96,38,172" RelativePosition="0.0,0.75" AnchorPoint="0,0.5" Name="txt1_CellThematicTasks">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{f259a7b1-63d9-470a-8afb-75e84444f82e}" RelativePosition="1,0.5" AnchorPoint="0,0.5" Text="与公会成员组队在任意竞技模式中战斗4次" Font="" FontSize="20" Color="47,39,161" Name="txt2_CellThematicTasks">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a71fc24d-3ef8-477b-93b6-9ac5aeaff25c}" Name="txt3_CellThematicTasks" Color="47,39,161" FontSize="20" TextKey="" Text="(%d/%d)" RelativePosition="1,0.5" AnchorPoint="0,0.5" />
+                    </WZUILabelTTF>
+                </WZUILabelTTF>
+                <WZUIImage Type="WZUIImage" GUID="{a334fc44-1cba-427e-9473-bd3ee4ee44a8}" File="shopitems/diamond.png" UseOriginSizeProportion="True" RelativePosition="0.07,0.3375" Scale="0.43" Visible="False" isValid="True" Name="imgReward1_CellThematicTasks" />
+                <WZUIImage Type="WZUIImage" GUID="{83f65818-66f2-44ee-8e23-a74d472d6827}" UseOriginSizeProportion="True" File="shopitems/gold.png" Scale="0.43" RelativePosition="0.32,0.3375" Visible="False" Name="imgReward2_CellThematicTasks" />
+                <WZUIImage Type="WZUIImage" GUID="{2b57237f-3ddc-4aae-a037-3317cc0eb0f7}" UseOriginSizeProportion="True" RelativePosition="0.57,0.3375" File="shopitems/lizuan.png" Scale="0.43" Name="imgReward3_CellThematicTasks" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{0e65b989-c957-4281-b069-cf394a829a1e}" File="shopitems/diamond.png" UseOriginSizeProportion="True" Scale="0.43" ScaleX="0.4" ScaleY="0.4" RelativePosition="0.82,0.3375" Name="imgReward4_CellThematicTasks" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{4d99b6fd-0f46-4c66-98cd-62edca6616ae}" FontSize="20" Color="47,39,161" Text="X555" RelativePosition="0.105,0.325" Visible="False" AnchorPoint="0,0.5" Name="txtReward1_CellThematicTasks" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8110881a-538a-4daa-b2ec-1668f626c678}" RelativePosition="0.355,0.325" Text="X555" Color="47,39,161" FontSize="20" AnchorPoint="0,0.5" Visible="False" Name="txtReward2_CellThematicTasks" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{226ebfaa-2de7-414d-b41e-ae43e5ca1fc8}" Color="47,39,161" FontSize="20" Text="X555" RelativePosition="0.605,0.325" AnchorPoint="0,0.5" Name="txtReward3_CellThematicTasks" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6d97c937-d263-407c-a299-abd3b121ed90}" Color="47,39,161" FontSize="20" RelativePosition="0.855,0.325" Text="X555" AnchorPoint="0,0.5" Name="txtReward4_CellThematicTasks" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{846f4f27-395e-497a-ac24-e20281cdc773}" AbsContentSize="100,80" UseAbsSize="True" RelativePosition="0.915,0.5">
+                <Button Type="WZUIButton" GUID="{4f6ff322-97a2-43c3-ad99-9e753e4d9baf}" RelativePosition="0.5,0.5" LuaDoneFunctionName="onGo" Name="btnOnGo_CellThematicTasks" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{b2a2cd70-da50-489e-98a6-ecf1c3abea4a}">
+                        <WZUIImage Type="WZUIImage" GUID="{0184f742-c4a8-493d-9536-5e3558e20bdb}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" Scale="0.8" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{530cf07b-3014-487a-8789-ccdd566e1e3d}">
+                        <WZUIImage Type="WZUIImage" GUID="{b569450e-4107-427f-a29b-ef60478c5c45}" File="ui/common/common_btn_anniu3_0_sel.png" Scale="0.8" UseOriginSizeProportion="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{a5c0039b-0284-42a3-8eef-74663f828d25}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7aa34bbc-9ebd-4a02-8fbc-7b2756af2c5c}" TextKey="ACTIVE_BTN_GO" Color="255,236,193" FontSize="24" LuaTouchEndedFunction="" LabelStyleKey="SMALL_ORANGE_BTN" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{446015d9-86b4-40e7-8f48-f04587ed745d}" RelativePosition="0.5,0.5" Visible="False" LuaDoneFunctionName="onGet" Name="btnOnGet_CellThematicTasks">
+                    <NormalElement Type="WZUIContainer" GUID="{1db09fc5-f631-4b6a-b715-b1b778d7cedc}">
+                        <WZUIImage Type="WZUIImage" GUID="{859b841e-ce9d-4f2e-b212-7ef99640038f}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" Scale="0.8" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{40e52329-4f14-420d-a643-66865298c6ab}">
+                        <WZUIImage Type="WZUIImage" GUID="{58ad7ba8-9548-4630-ae99-54d9f47e445e}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" Scale="0.8" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{40111068-d23f-49ac-afa1-893af4008e5f}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{56acc57a-21b1-48a8-bc49-d19ff7810598}" TextKey="ACTIVE_BTN_GET" Color="255,236,193" FontSize="24" LuaTouchEndedFunction="" LabelStyleKey="SMALL_GREEN_BTN" />
+                </Button>
+                <WZUIImage Type="WZUIImage" GUID="{5842ff1b-d60b-4036-8be9-a9eacd871620}" File="ui/common/commom_icon_ylq.png" RelativePosition="0.58,0.4875" Scale="1" UseOriginSizeProportion="False" UseOriginSize="True" Visible="False" Name="imgReceived_CellThematicTasks" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</CellThematicTasks>

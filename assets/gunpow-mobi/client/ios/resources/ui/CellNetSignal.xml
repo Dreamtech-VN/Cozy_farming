@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<CellNetSignal GUID="{76b0958e-36e4-4824-8e79-7000d357ca75}">
+	<WZUIContainer Type="WZUIContainer" GUID="{d90ddb8a-f052-464e-a9e9-fed7407c0901}" NameCreate="True" LuaObjectName="CellNetSignal" Name="CellNetSignal" AbsContentSize="40,40" UseAbsSize="True">
+		<WZUIContainer Type="WZUIContainer" GUID="{1c4f819f-6afb-4582-a3f7-defa39ed77c3}">
+			<WZUIImage Type="WZUIImage" GUID="{901c5dff-3db4-4fc5-a2a2-c635ac2bcc01}" UseOriginSize="True" Name="imgSignal_CellNetSignal" />
+		</WZUIContainer>
+		<Button Type="WZUIButton" AbsContentSize="40,40" UseAbsSize="True" LuaDoneFunctionName="onNet">
+			<NormalElement Type="WZUIContainer" TouchContainerEnable="True" />
+			<SelectElement Type="WZUIContainer" TouchContainerEnable="True" />
+			<DisableElement Type="WZUIContainer" TouchContainerEnable="True" />
+		</Button>
+	</WZUIContainer>
+</CellNetSignal>

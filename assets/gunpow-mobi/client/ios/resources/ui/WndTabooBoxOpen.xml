@@ -1,0 +1,117 @@
+﻿<WndTabooBoxOpen GUID="{07345040-0664-476c-9a6c-1ce8b0cb40cb}">
+    <WZUIWindow AbsContentSize="420,434" GUID="{04710600-3221-47cc-a052-3fae3691c0df}" LuaObjectName="WndTabooBoxOpen" Name="WndTabooBoxOpen" NameCreate="True" Type="WZUIWindow" UseAbsSize="False" RelativePosition="0.5,0.5" ShowAll="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{3e23ad20-e188-4ffd-8fb2-f2357e9d5d22}" ShowAll="False">
+            <WZUIImage Type="WZUIImage" GUID="{6d60645d-4bd6-4eb2-9bec-4436a710cd80}" File="ui/common/common_scale9_yaan3.png" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{cb971655-a5d5-46d2-81a6-afc99b75f31a}" AbsContentSize="420,434" UseAbsSize="True" ShowAll="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{bb6e0ea1-dd59-4abd-9564-a4e8bdff01b2}" AbsContentSize="420,434" UseAbsSize="True" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{e2649fa7-82f5-4a8f-9823-ec791c7c979d}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" RelativePosition="0.5,0.505" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{0b1ea1c2-4590-4148-acd8-ff1060a73124}" AbsContentSize="410,288" UseAbsSize="True" RelativePosition="0.5,0.538645">
+                    <WZUI9Image Type="WZUI9Image" GUID="{470dac87-7f77-46c8-ac96-83c5cb68a01b}" File="ui/common/common_scale9_di20.png" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{72933096-930e-4a67-b85b-347717fa741f}" UseOriginSize="True" File="ui/taboo/jinji_hezi3.png" RelativePosition="0.5,0.712546" Name="imgBox_WndTabooBoxOpen" Scale="0.7" />
+                <WZUIImage Type="WZUIImage" GUID="{38dce5c3-cb77-4ce7-8072-be2bfdefaa1b}" File="ui/common/common_icon_hongchouzi4.png" UseOriginSize="True" RelativePosition="0.5,0.511521" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{10c9584d-bb17-46ff-b736-a80fb7388864}" LabelStyleKey="C1_F20" Text="可能获得以下内容" RelativePosition="0.5,0.532258" Name="txtBox_WndTabooBoxOpen" />
+                <WZUIContainer Type="WZUIContainer" GUID="{926d778b-efe0-4235-8d89-ffc871610585}" UseAbsSize="True" AbsContentSize="300,68" RelativePosition="0.5,0.382021">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{0730c338-1ee2-44f4-81d5-d5265cd3ab13}" ColumnCount="1" EnableHorizontalScroll="True" EnableMoveVertical="False" VerticalAbsInterval="5" Name="conTabReward_WndTabooBoxOpen" AbsContentSize="460,80" UseAbsSize="False" IsVerticalMode="False" CellElementHeight="0.23" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="420,50" GUID="{94f9e1dc-6199-46ad-9119-b56c9b492980}" Name="conTop_WndTabooBoxOpen" RelativePosition="0.5,0.932188" RelativeSize="1,0.1434" Type="WZUIContainer" UseAbsSize="True">
+                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{277882bd-38ce-4f63-85ff-cb8d8663f954}" RelativePosition="0.5,0.42" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="132,66,29" StrokeOffset="0,0" StrokeSize="4" Text="解锁宝箱" Type="WZUILabelTTF" Visible="True" AbsPosition="235,22" Name="labTop_WndTabooBoxOpen" TextKey="" />
+            </WZUIContainer>
+            <WZUIButton AbsContentSize="115,55" GUID="{76a6fc5f-b0df-4b14-9173-5071af833da9}" LuaDoneFunctionName="onBtnCloseClick" Name="btnCloseWindow_WndTabooBoxOpen" RelativePosition="0.926905,0.932188" Type="WZUIButton" UseAbsSize="True" Visible="True" LuaActionName="Normal" AbsPosition="537.9,522">
+                <NormalElement GUID="{ca7b05c9-0825-435e-9dad-de34626ff18f}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="False">
+                    <WZUI9Image File="ui/common/common_icon_guanbi.png" GUID="{85b60c43-9edb-404f-ab49-132aa41edd74}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{17424467-0ed4-4310-a01b-1374a0e9658f}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{cc7f80c9-7140-4f30-9bdf-cb17b14fc8a5}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement GUID="{d396a4af-8543-4f38-8593-a257a3173aa1}" Type="WZUIContainer" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{34e687c8-1f8c-4b81-aa7b-14be3b2ca0e2}" Name="conBtnOpen_WndTabooBoxOpen" Visible="False">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{908e45ed-3dd6-4c3e-b190-a1520f574e87}" TextKey="WORLD_BOSS_OPEN_TIME_DOWN" LabelStyleKey="C13_F20" RelativePosition="0.33043,0.120253" AnchorPoint="1,0.5" Name="txtWorldBossOpenTimeDown_WndTabooBoxOpen" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5eaa0c2d-378a-415d-b7f7-7d2825f5dc4d}" LabelStyleKey="C14_F20" Text="00:00:00" RelativePosition="0.446062,0.120121" Name="labCountDown_WndTabooBoxOpen" />
+                <WZUIContainer Type="WZUIContainer" GUID="{9c9750f4-00dd-4590-bb79-06f0312d069f}" AbsContentSize="137,58" UseAbsSize="True" RelativePosition="0.763733,0.125198" Visible="False" Name="conBtnOpenStart_WndTabooBoxOpen">
+                    <Button Type="WZUIButton" GUID="{f5d0457b-2068-45b7-9ab6-fb9449d7ada4}" LuaDoneFunctionName="onBtnOpenStartClick">
+                        <NormalElement Type="WZUIContainer" GUID="{14a689a9-5bc6-4be2-9608-4a75461bcf49}">
+                            <WZUIImage Type="WZUIImage" GUID="{4a62893c-fb15-4cb8-98eb-b378deee1643}" File="ui/common/common_btn_anniu10_1.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c87ea776-7393-4dc0-9b9c-f4d756373d31}" Text="开始解锁" LabelStyleKey="C1_F24_S4_C4" TextKey="TABOO_BOX_OPEN_START" Name="txtBtnOpenStart1_WndTabooBoxOpen" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{44989a9b-ed08-43c2-bcce-e2cafd46c2bf}">
+                            <WZUIImage Type="WZUIImage" GUID="{22cd04c3-c024-4436-9c05-ba68d2df140e}" File="ui/common/common_btn_anniu10_1_sel.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{642897d3-9c4f-47a2-9ae5-8eb99534a3a1}" Text="开始解锁" LabelStyleKey="C1_F24_S4_C4" TextKey="TABOO_BOX_OPEN_START" Name="txtBtnOpenStart2_WndTabooBoxOpen" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{c2007f67-9648-4bab-973b-5b06c47fff1b}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{039ec4b8-ca7a-4a80-8d26-6f13d29af607}" AbsContentSize="137,58" UseAbsSize="True" Name="conBtnOpenCost_WndTabooBoxOpen" RelativePosition="0.763733,0.125198" Visible="True">
+                    <Button Type="WZUIButton" GUID="{15cf96da-af21-459a-b73a-fdd42876cf52}" LuaDoneFunctionName="onBtnOpenCostClick">
+                        <NormalElement Type="WZUIContainer" GUID="{aeead9da-964a-47bf-aa32-53264c7fd2a4}">
+                            <WZUIImage Type="WZUIImage" GUID="{665f089a-d328-4fdb-88fc-fe886502449b}" File="ui/common/common_btn_anniu10_1.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{3a1431f1-aef9-4a6e-8485-902620456fa4}">
+                            <WZUIImage Type="WZUIImage" GUID="{2bb4dfc0-f271-4249-9203-819ca648a7ca}" File="ui/common/common_btn_anniu10_1_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{1e64c708-9a92-4a98-b5e4-6fd9246cfa8d}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{0c426a91-d728-49d7-b9ee-defa4d9c7c69}" Text="60" LabelStyleKey="C1_F24_S4_C4" TextKey="" RelativePosition="0.30292,0.5" AnchorPoint="1,0.5" Name="labCost_WndTabooBoxOpen" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d0bd8399-c2a5-4a8f-94e9-e8b0e52a87a1}" Text="开始解锁" LabelStyleKey="C1_F24_S4_C4" TextKey="MAP_EVENT_ON" RelativePosition="0.718978,0.5" Name="labCost2_WndTabooBoxOpen" />
+                        <WZUIImage Type="WZUIImage" GUID="{fc70d436-5165-45f7-aaec-5f47fa1ad3f8}" File="shopitems/lizuan.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.416043,0.52328" Name="imgCostIcon1_WndTabooBoxOpen" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{cd2925e2-6333-45bc-880c-5cc94147a7db}" AbsContentSize="137,58" UseAbsSize="True" RelativePosition="0.5,0.125198" Visible="False" Name="conBtnOpenCom_WndTabooBoxOpen">
+                <Button Type="WZUIButton" GUID="{3572c064-0d84-4f65-9120-50480ce750fd}" LuaDoneFunctionName="onBtnOpenComClick">
+                    <NormalElement Type="WZUIContainer" GUID="{00b40ab4-23f7-431e-9e04-f29027672be8}">
+                        <WZUIImage Type="WZUIImage" GUID="{bd094283-01c7-4bba-b5d1-2723c21f7f2c}" File="ui/common/common_btn_anniu10_1.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{69b65c96-c861-450b-87fc-b555cd31f90e}" Text="开始解锁" LabelStyleKey="C1_F24_S4_C4" TextKey="MAP_EVENT_ON" Name="txtMapEventOn1_WndTabooBoxOpen" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{b74e2823-5a91-4513-b3ca-d6c2e4fab7dd}">
+                        <WZUIImage Type="WZUIImage" GUID="{423cc21e-2731-4adc-ae17-b7f4211bf2f6}" File="ui/common/common_btn_anniu10_1_sel.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1f88bec1-feca-450f-93bd-8b1e5464efcc}" Text="开始解锁" LabelStyleKey="C1_F24_S4_C4" TextKey="MAP_EVENT_ON" Name="txtMapEventOn2_WndTabooBoxOpen" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{9df223ac-52de-4f0a-b545-5269eea458cb}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{ec9a7ca5-923c-4d79-9f60-7b7861f59e2a}" Name="conBtnOpenCommon_WndTabooBoxOpen" Visible="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{4944439d-3ab3-4f02-b4fb-d6a8a80bc9b1}" AbsContentSize="137,58" UseAbsSize="True" Name="" RelativePosition="0.763733,0.125198">
+                    <Button Type="WZUIButton" GUID="{83dc395c-617b-4cb3-afaf-2f511f2d1cb7}" LuaDoneFunctionName="onBtnOpenCommonClick" Name="BtnOpenCommon1_WndTabooBoxOpen">
+                        <NormalElement Type="WZUIContainer" GUID="{d825ef9a-a34b-4f15-9fba-bc749f2e03fd}" Visible="True">
+                            <WZUIImage Type="WZUIImage" GUID="{6a6b2f68-79bf-46b3-bfe0-57b5bb3e2b63}" File="ui/common/common_btn_anniu10_1.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{b30e5ed6-ac45-43cb-ae89-8dbbed6ddf84}" Visible="True">
+                            <WZUIImage Type="WZUIImage" GUID="{d7adaebe-d49a-419c-8203-f1c7eaf3b899}" File="ui/common/common_btn_anniu10_1_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{e23535f7-e1c9-4b65-aa64-ae963b346599}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{bf277847-aab8-432d-8c11-d776e6043228}" Text="60" LabelStyleKey="C1_F24_S4_C4" TextKey="" RelativePosition="0.30292,0.5" AnchorPoint="1,0.5" Name="labCommonCost_WndTabooBoxOpen" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{9077a4f9-fd71-47ba-8a00-fcccfcd4310d}" Text="开始解锁" LabelStyleKey="C1_F24_S4_C4" TextKey="MAP_EVENT_ON" RelativePosition="0.718978,0.5" Name="labCommonCost2_WndTabooBoxOpen" />
+                        <WZUIImage Type="WZUIImage" GUID="{34452d96-db92-49f6-841d-f61d68270c75}" File="shopitems/lizuan.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.416043,0.52328" Name="imgCostIcon2_WndTabooBoxOpen" />
+                    </Button>
+                    <Button Type="WZUIButton" GUID="{45090d39-d7bf-4fae-935a-c49a96b31150}" LuaDoneFunctionName="onBtnOpenCommonClick" Name="BtnOpenCommon2_WndTabooBoxOpen" Visible="True">
+                        <NormalElement Type="WZUIContainer" GUID="{6de6cc9e-0bd0-43fd-80ac-bf43c8a0aefe}">
+                            <WZUIImage Type="WZUIImage" GUID="{4c48b7a9-af19-4054-81a6-5796b7b42723}" File="ui/common/common_btn_anniu10_1.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9fabba38-a821-4471-9e55-1c56ab44528b}" Text="开始解锁" LabelStyleKey="C1_F24_S4_C4" TextKey="MAP_EVENT_ON" Name="txtMapEventCommon1_WndTabooBoxOpen" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{1e5c1584-d17d-48a6-9a2e-64213a9c8284}">
+                            <WZUIImage Type="WZUIImage" GUID="{d439ab1a-d37a-40eb-9ffd-5d36878d153e}" File="ui/common/common_btn_anniu10_1_sel.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3ba45e78-d4d5-4cb1-9b5b-e23cd885b31c}" Text="开始解锁" LabelStyleKey="C1_F24_S4_C4" TextKey="MAP_EVENT_ON" Name="txtMapEventCommon2_WndTabooBoxOpen" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{afd4edf2-b778-4d0a-b3bd-6e123f85414c}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{2bde8a9f-e655-47fe-b0f6-ba9278effc91}" AbsContentSize="137,58" UseAbsSize="True" RelativePosition="0.24,0.125198" Visible="True" Name="">
+                    <Button Type="WZUIButton" GUID="{0fbd9633-f899-4b4e-95e0-fdc2f604d64c}" LuaDoneFunctionName="onBtnOpenCommonCancelClick">
+                        <NormalElement Type="WZUIContainer" GUID="{f19257c0-b2e3-43a2-8c7b-0232d7b2674a}">
+                            <WZUIImage Type="WZUIImage" GUID="{6acbdb62-1616-4bad-ad8e-16bb5f415c59}" File="ui/common/common_btn_anniu3.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{90478cc9-ad8a-4c17-aa1c-f8bd332a3677}">
+                            <WZUIImage Type="WZUIImage" GUID="{4dbfb0fd-9618-4d7e-914d-e34937104bc3}" File="ui/common/common_btn_anniu3_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{067bde64-fbaa-4724-957e-5757e9232606}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{39294e7b-4c68-416b-b815-d3fbde96b925}" Text="开始解锁" LabelStyleKey="C1_F22_S4_C3" TextKey="" Name="labBtnCommonCancle_WndTabooBoxOpen" />
+                    </Button>
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{fcf5fb6f-e94e-4812-84c1-d43c4462babe}" Text="恭喜你见到一个珍贵的宝箱" LabelStyleKey="C13_F18" Alignment="Left" RelativePosition="0.5,0.253456" TextKey="" Name="labCommonDes_WndTabooBoxOpen" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTabooBoxOpen>

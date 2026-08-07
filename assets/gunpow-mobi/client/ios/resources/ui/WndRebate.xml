@@ -1,0 +1,115 @@
+﻿<WndRebate GUID="{0c4647e9-40d3-4f6c-bbef-03bbefa222e4}">
+    <WZUIWindow Type="WZUIWindow" GUID="{f5a277c1-5343-4b0e-b378-743e21da8c4a}" NameCreate="True" Name="WndRebate" LuaObjectName="WndRebate" LuaTouchBeganFunction="onTouchBegin" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{8d8dfa69-0373-4fe2-aacc-121e5bd038f2}" AbsContentSize="842,600" UseAbsSize="True" RelativePosition="0.5,0.501562" ShowAll="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{fe865520-9762-4b5d-925b-18fdbdd566cc}" RelativePosition="0.5,0.5" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{5b76db93-513f-447c-bb3b-a492f7b56a80}" AbsContentSize="421,600" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{77acb8dd-91c1-42a3-aec4-85b8f18c25ba}" UseOriginSize="False" File="ui/common/common_scale9_di3.png" AnchorPoint="0,0.5" RelativePosition="0,0.5" CapInsets="98,120,1,1" Visible="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7997566f-db9d-40ea-9489-b3f962945e8c}" AbsContentSize="421,600" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{edb93749-95bf-4d79-a960-a0907a8c2935}" UseOriginSize="False" File="ui/common/common_scale9_di3.png" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" CapInsets="98,120,1,1" FlipX="False" ScaleX="-1" FlipY="False" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{8205fb8e-3ec8-463f-b008-9304c3fd045d}" RelativePosition="0.947349,0.952417" UseOriginSize="True" File="ui/common/common_icon_gb.png" ScaleY="1" Visible="True" AbsPosition="731.54,509.59" />
+                <WZUIImage Type="WZUIImage" GUID="{54dd0a82-1a0b-4935-86f3-2a73edec1a81}" File="ui/common/common_icon_hongchouzi2.png" UseOriginSize="True" RelativePosition="0.31515,0.96089" />
+                <WZUIImage Type="WZUIImage" GUID="{7375fa0e-1927-47e4-9eb7-dd70db426f9e}" File="ui/common/common_icon_hongchouzi2.png" UseOriginSize="True" RelativePosition="0.684867,0.96089" FlipX="True" />
+                <WZUIImage Type="WZUIImage" GUID="{3e9c3b37-3a5d-4074-a8b8-2a2553f56558}" File="ui/shop/common_icon_smnsr.png" UseOriginSize="True" RelativePosition="0.5,0.954749" />
+                <Button Type="WZUIButton" LuaDoneFunctionName="onClose" AbsContentSize="60,60" RelativePosition="0.954007,1.00084" UseAbsSize="True" AnchorPoint="0.5,1" Name="btnClose_WndRebate" GUID="{cfeb0f14-cfab-4eee-a545-44f9aae4af1c}" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{ad257537-62b8-45e2-8b23-2c6ab6299475}">
+                        <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{ea7e9038-7e0d-4d73-b04e-4b566925e8f2}" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{7a1102fc-f919-43c6-b2bb-2ba7831c64df}">
+                        <WZUIImage Type="WZUIImage" GUID="{a2229606-87dc-4bd6-b878-a978834642cc}" File="ui/common/common_icon_guanbi_sel.png" Scale="1" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{60f4bbed-fb56-4c3f-9291-7601fe5e2785}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{02067b64-a192-4f6c-ac11-c58c7df6a066}" AbsContentSize="576,408" UseAbsSize="True" RelativePosition="0.64,0.47" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{089f36e8-3161-4fe5-add4-783cbf835947}" File="ui/common/common_scale9_di12.png" RelativePosition="0.5,0.502469" />
+                <WZUITableContainer Type="WZUITableContainer" GUID="{a8f0beea-16a1-4e0b-ab67-bae5be72343f}" RelativeSize="0.98,0.96" Name="tbCon_WndRebate" NameCreate="False" CellElementHeight="0.5" EnableMoveHorizontal="False" EnableMoveoutContainer="True" RelativePosition="0.5,0.5" ColumnCount="3" Resistance="0.94999998807907104" RevertTime="0.30000001192092896" EnableMoveVertical="True" EnableVerticalScroll="True" AbsContentSize="558,388" UseAbsSize="True" NoBorder="False" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{ad937eaa-deb2-4623-a43e-0640a821c28b}" AbsContentSize="585,70" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.642656,0.015" Name="conButtom_WndRebate" Visible="True">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{261bbf08-a689-4fe7-b7ca-f1c963ef3ddc}" Name="tip1" Color="105,65,46" FontSize="16" Text="（每日%s点自动刷新）" RelativePosition="0,0.264" LabelStyleKey="" AnchorPoint="0,0.5" TextKey="" />
+                <WZUIContainer Type="WZUIContainer" GUID="{94d54f8e-fc44-4744-bd28-1641cd27435d}" AbsContentSize="100,50" UseAbsSize="True" RelativePosition="0.889,0.47" Name="conRefush_WndRebate" Visible="True">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{d7e77b6b-444c-449e-8788-0d2e72ffc290}" TextKey="CONSUME" LabelStyleKey="" RelativePosition="-0.945,0.44" Name="txtCost_WndRebate" AnchorPoint="1,0.5" Text="" Color="105,65,46" FontSize="18" />
+                    <WZUIImage Type="WZUIImage" GUID="{014f5d94-86e8-41d4-8e58-7888dd3cbc2a}" Name="imgCostType_WndRebate" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Scale="0.65" RelativePosition="-0.78,0.44" ScaleX="0.65" ScaleY="0.65" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7ce2a5cc-497a-414d-bb77-bb8e4ea375bd}" Name="txtCostCount_WndRebate" LabelStyleKey="" Text="0" RelativePosition="-0.6,0.44" Color="105,65,46" FontSize="18" Alignment="Left" AnchorPoint="0,0.5" />
+                    <Button Type="WZUIButton" GUID="{f6b86c2d-6eaf-4483-8ffe-63ffff9f84bc}" RelativePosition="0.5,0.5" LuaDoneFunctionName="onRefresh" AbsContentSize="90,50" UseAbsSize="True" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{58207714-0cf8-449c-9f96-f95dfef1507b}">
+                            <WZUIImage Type="WZUIImage" GUID="{6132b54c-54a8-4051-a180-8ee488183641}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{653597e7-74ed-4b59-a9f4-e3dd04b9408c}" TextKey="REFRESH" LabelStyleKey="C1_F24_S4_C3" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{00bec0f2-5974-4bdc-a29b-1ae453430358}">
+                            <WZUIImage Type="WZUIImage" GUID="{676edc81-d624-4429-8a77-7b7fba3e7ab8}" File="ui/common/common_btn_anniu3_0_sel.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ec3fa7b5-cd09-4e0f-83ac-a6e089a2b27b}" TextKey="REFRESH" LabelStyleKey="C1_F24_S4_C3" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{f7136b8e-f19d-4dc7-9b51-72a992e5c3bd}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{759d21f7-e1f1-4880-bed8-cf51d811f6fc}" TextKey="AUTO_REFRESH_COUNT_DOWN" LabelStyleKey="C13_F18" RelativePosition="0.12,0.61" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a4b65ff3-5c1d-417f-86e3-fc1fe78c5fa3}" LabelStyleKey="C14_F18" Text="00:00:00" RelativePosition="0.24,0.61" Alignment="Left" AnchorPoint="0,0.5" Name="txtCountDown" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{cc83edf0-2dd8-4419-a5cf-97eb37dc9011}" AbsContentSize="585,45" UseAbsSize="True" RelativePosition="0.988221,0.846807" AnchorPoint="1,0.5" Name="conTop_WndRebate">
+                <WZUIContainer AbsContentSize="120,30" GUID="{13aec99d-6eef-44d5-be70-df9b2b1db81a}" Name="conDiamond_WndRebate" RelativePosition="0.54,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" ShowAll="False" Scale="1" ScaleX="1" ScaleY="1" AnchorPoint="0,0.5" Visible="True">
+                    <WZUI9Image File="ui/common/common_scale9_di63.png" GUID="{f3fa63c2-36be-4099-a77e-82f48f8da2c0}" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False" Visible="True" CapInsets="0,0,0,0" Opacity="255" />
+                    <WZUILabelTTF ChineseLengthPolicy="0" Color="255,255,255" Dimensions="0" FontSize="22" GUID="{8dedb70a-2344-41f8-b379-d3df64aa02c7}" Name="txtDiamond_WndRebate" RelativePosition="0.18597,0.4625" Text="0" Type="WZUILabelTTF" BoldFont="True" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" Alignment="Right" AnchorPoint="0,0.5" LabelStyleKey="C1_F20" />
+                    <WZUIButton AbsContentSize="142,40" AnchorPoint="0.5,0.5" GUID="{a8926af6-fdb5-4349-a11c-fd7616b9b0f8}" LuaDoneFunctionName="onAddDiamond" RelativePosition="0.395522,0.542105" RelativeSize="0.9,1" Scale="1.1" Type="WZUIButton" UseAbsSize="True" Order="1" LuaActionName="">
+                        <NormalElement GUID="{97716d4a-72e1-4f22-9972-000ae3f47e7d}" Type="WZUIContainer" TouchContainerEnable="True">
+                            <WZUIImage File="ui/common/common_icon_jiahao.png" GUID="{5d4e604d-bdb1-4ac0-a0e2-f275b54d0f0e}" RelativePosition="0.236338,0.35" Type="WZUIImage" UseOriginSize="True" Scale="0.9" ScaleX="0.9" ScaleY="0.9" />
+                        </NormalElement>
+                        <SelectElement GUID="{f4a2cef1-924a-487d-a3b2-26c0907ed0e0}" Type="WZUIContainer" TouchContainerEnable="True">
+                            <WZUIImage File="ui/common/common_icon_jiahao.png" GUID="{1df6a5e2-726e-447d-844d-f11d23756747}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.236338,0.35" ScaleX="1" ScaleY="1" />
+                        </SelectElement>
+                        <DisableElement GUID="{7432d33a-e858-4503-973a-d69cc7924afd}" Type="WZUIContainer" />
+                    </WZUIButton>
+                    <WZUIImage Type="WZUIImage" GUID="{ec475a70-8e50-409d-afc1-724488334cc2}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" RelativePosition="0.00298508,0.466667" Scale="0.9" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="120,30" GUID="{0ab7df92-202f-4e61-8236-12567529ed7e}" Name="conTicket_WndRebate" RelativePosition="0.99,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" ShowAll="False" Scale="1" ScaleX="1" ScaleY="1" AnchorPoint="1,0.5" Visible="True">
+                    <WZUI9Image File="ui/common/common_scale9_di63.png" GUID="{2fa04a5d-720c-4459-a483-163e193b151a}" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False" Visible="True" CapInsets="0,0,0,0" Opacity="255" />
+                    <WZUILabelTTF ChineseLengthPolicy="0" Color="255,255,255" Dimensions="0" FontSize="22" GUID="{6f3b8726-2929-4eda-9d6a-eee076564f1e}" Name="txtTicket_WndRebate" RelativePosition="0.18597,0.4625" Text="0" Type="WZUILabelTTF" BoldFont="True" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" Alignment="Right" AnchorPoint="0,0.5" LabelStyleKey="C1_F20" />
+                    <WZUIButton AbsContentSize="132,40" AnchorPoint="0.5,0.5" GUID="{07d27b8d-4f9b-482c-aa0c-86c9ad199d85}" LuaDoneFunctionName="onClickTicket" RelativePosition="0.395522,0.542105" RelativeSize="0.9,1" Scale="1.1" Type="WZUIButton" UseAbsSize="True" Order="1" LuaActionName="">
+                        <NormalElement GUID="{e11b69bc-b40b-49bb-bf6b-c6e5c075327f}" Type="WZUIContainer" TouchContainerEnable="True" />
+                        <SelectElement GUID="{31ddd993-a164-4559-a692-28476d0bc86a}" Type="WZUIContainer" TouchContainerEnable="True" />
+                        <DisableElement GUID="{e9e7030e-0df9-4018-82fd-855acaa5d5c9}" Type="WZUIContainer" />
+                    </WZUIButton>
+                    <WZUIImage Type="WZUIImage" GUID="{594e3dfa-3b30-4109-ad1e-5e213be41074}" File="shopitems/lizuan.png" UseOriginSize="True" RelativePosition="0.00298508,0.466667" Scale="0.65" Name="imgTicketIcon_WndRebate" ScaleX="0.65" ScaleY="0.65" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e0d091e6-d479-4fd9-84c1-925c061843c7}" TextKey="REBATE3" LabelStyleKey="C13_F20" RelativePosition="0.118,0.4" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{36068d19-607d-4953-b08e-b353c3c03f7a}" LabelStyleKey="C14_F20" Text="9月18号" AnchorPoint="0,0.5" RelativePosition="0.245,0.4" Name="txtDate" Alignment="Left" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{86da050d-1deb-40af-bbfc-0678a94866ef}" Name="conLeft" UseAbsSize="True" AbsContentSize="245,540" RelativePosition="0.152,0.45">
+                <WZUIContainer Type="WZUIContainer" GUID="{c2985e26-51ef-49f6-8c90-51939f2462af}" UseAbsSize="True" AbsContentSize="240,535" RelativePosition="0.485369,0.508274">
+                    <WZUI9Image Type="WZUI9Image" GUID="{19eb6158-630f-486c-be7e-9b2602500703}" File="ui/shop/common_scale9_smnsrdi.png" RelativePosition="0.5,0.5" />
+                </WZUIContainer>
+                <Button Type="WZUIButton" GUID="{b6b83592-0aae-4822-bac2-5dcca536504c}" AbsContentSize="124,50" UseAbsSize="True" RelativePosition="0.5,0.076" LuaActionName="Normal" LuaDoneFunctionName="onRebate" Name="btnRebate" Scale="1" TouchEnable="True">
+                    <NormalElement Type="WZUIContainer" GUID="{3569c7af-fa26-44b9-b8e8-ab77031087ed}">
+                        <WZUIImage Type="WZUIImage" GUID="{6871f0e7-4b65-4632-aba7-ec9383108e8e}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="False" Scale="1.1" />
+                        <WZUIImage Type="WZUIImage" GUID="{077035cf-5a2d-43b0-9fba-e59a8433e06d}" File="shopitems/diamond.png" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0.31,0.5" Name="imgCost" Scale="0.4" ScaleX="0.4" ScaleY="0.4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{63085c79-29cf-4933-9eba-76cb600f66b1}" FontSize="18" Name="txtCostBtn" RelativePosition="0.0786225,0.48" Color="255,236,193" Text="200" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" AnchorPoint="0,0.5" LabelStyleKey="C1_F20_S4_C4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8b28f249-3b9e-4c63-9f31-91fda5d4bc78}" FontSize="18" Name="txtWordBtn" RelativePosition="0.93,0.5" Color="255,236,193" Text="" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" AnchorPoint="1,0.5" TextKey="REBATE2" LabelStyleKey="C1_F20_S4_C4" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{a238be17-54c3-4295-9c83-958be40a4b54}">
+                        <WZUIImage Type="WZUIImage" GUID="{8d720f9c-8e21-4641-b973-c28dd3d8315a}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="False" Scale="1.1" />
+                        <WZUIImage Type="WZUIImage" GUID="{a23d7a03-34d2-4d6c-b5be-430b01624127}" File="shopitems/diamond.png" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0.31,0.5" Name="imgCost1" Scale="0.4" ScaleX="0.4" ScaleY="0.4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{af193711-6178-4fbd-ac85-38dcd8878b6b}" FontSize="18" Name="txtCostBtn1" RelativePosition="0.0786225,0.48" Color="255,236,193" Text="200" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" AnchorPoint="0,0.5" LabelStyleKey="C1_F20_S4_C4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{29da9da8-4560-497b-86f4-79f44e4d806b}" FontSize="18" Name="txtWordBtn1" RelativePosition="0.93,0.5" Color="255,236,193" Text="" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" AnchorPoint="1,0.5" TextKey="REBATE2" LabelStyleKey="C1_F20_S4_C4" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{37de8c36-22e3-4956-bce6-61aa29948e79}">
+                        <WZUIImage Type="WZUIImage" GUID="{2a049a4f-345e-4aaf-91e8-b89214552a33}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="False" GrayRender="True" Scale="1.1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f4d5232d-c5ff-418f-b9b9-ebce01a185ad}" FontSize="18" Name="" RelativePosition="0.5,0.5" Color="255,236,193" Text="" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" AnchorPoint="0.5,0.5" TextKey="REBATE5" LabelStyleKey="NORMAL_GRAY_BTN" />
+                    </DisableElement>
+                </Button>
+                <WZUIImage Type="WZUIImage" GUID="{07459012-61c9-4b8e-a112-59678b0897b0}" File="ui/shop/common_pic_shenfu5.png" UseOriginSize="True" RelativePosition="0.479328,0.473111" Scale="0.85" />
+                <WZUIImage Type="WZUIImage" GUID="{60429d2d-a3bf-45a2-9a87-d01eb4339d7e}" File="ui/common/common_icon_duihuakuang.png" UseOriginSize="True" RelativePosition="0.472646,0.804052" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{559f56c5-e437-4f66-8df9-d8d2ba696286}" LabelStyleKey="C13_F20" Text="贿赂我，给你打折噢！" RelativePosition="0.135289,0.820599" Alignment="Left" AnchorPoint="0,0.5" Dimensions="170,0" Name="txtRebate" />
+            </WZUIContainer>
+            <WZUIButton Type="WZUIButton" AbsContentSize="50,50" UseAbsSize="True" LuaDoneFunctionName="onRuleClick" GUID="{d033f182-b6c9-4506-bd3c-08751189fb22}" RelativePosition="0.056,0.035" AnchorPoint="1,0.5" AbsPosition="797.973,21.0118" Order="15">
+                <NormalElement Type="WZUIContainer" GUID="{f4e5b6e4-ca9c-464c-a749-bf7bfc4eb754}">
+                    <WZUIImage Type="WZUIImage" GUID="{1fe7ef69-8e72-4c0f-89cb-fb7d2094ab1d}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{54e4857d-af84-491d-a8b8-b436578b5d99}">
+                    <WZUIImage Type="WZUIImage" GUID="{92e6c524-7cee-491f-9c39-a5d7d8fd457b}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{76e55bd7-b588-47ff-a9fb-f41665bf46fb}" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndRebate>

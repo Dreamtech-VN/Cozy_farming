@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<CellLevelSprintPanelItem GUID="{AC48BB3F-086C-4b42-AA13-C4F6AE1FC3D4}">
+    <WZUIContainer Type="WZUIContainer" GUID="{768B01FD-F83A-44e4-9E72-024EF08D05B2}" AbsContentSize="486,138" UseAbsSize="True" LuaObjectName="" Name="CellLevelSprintPanelItem" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{51BE016A-25CB-4639-89D5-03D828FCFD94}" Name="conListItem_CellLevelSprintPanelItem">
+            <WZUIContainer GUID="{AF090DF6-C63C-423f-AA69-948E71884A2B}" Type="WZUIContainer" AbsContentSize="486,138" UseAbsSize="True" RelativePosition="0.5,0.5">
+                <WZUI9Image File="ui/common/common_scale9_di18.png" GUID="{D2F3BD38-112D-4627-BA71-2B33884CD5C1}" Type="WZUI9Image" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="486,98" GUID="{84A423B0-9EF9-42fb-87D8-E60B821A175B}" RelativePosition="0.5,0" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0">
+                <WZUIContainer AbsContentSize="80,80" GUID="{4DCE2386-BB77-475b-90BB-BB769CD530ED}" Name="ConItem_1" RelativePosition="0.105,0.5" Type="WZUIContainer" UseAbsSize="True" />
+                <WZUIContainer AbsContentSize="80,80" GUID="{14A98B5E-0DC0-4360-BDE1-32ECB38F4CD7}" Name="ConItem_2" RelativePosition="0.286,0.5" Type="WZUIContainer" UseAbsSize="True" />
+                <WZUIContainer AbsContentSize="80,80" GUID="{55986199-13B0-43a3-BD35-123F46FEB3D8}" Name="ConItem_3" RelativePosition="0.467,0.5" Type="WZUIContainer" UseAbsSize="True" />
+                <WZUIContainer AbsContentSize="80,80" GUID="{DDC8EA23-4CFF-478c-8669-7C06277AB42B}" Name="ConItem_4" RelativePosition="0.648,0.5" Type="WZUIContainer" UseAbsSize="True" />
+                <WZUIContainer AbsContentSize="116,56" GUID="{0534A51A-B06C-41bd-820D-E66C61B21871}" RelativePosition="0.864,0.5" Type="WZUIContainer" UseAbsSize="True" Name="conBtn_CellLevelSprintPanelItem">
+                    <WZUIButton GUID="{552B07E2-A691-4fd5-9E6D-6AAD9CFDDE59}" LuaDoneFunctionName="event_getReward" Name="btnItemGetReward_CellLevelSprint" Type="WZUIButton" LuaActionName="Normal">
+                        <NormalElement GUID="{6AC7A25A-44EA-4482-9AD6-BF1FDB849279}" Type="WZUIContainer">
+                            <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{53A3863D-2CF2-4e8d-8400-9591265DB5DA}" Type="WZUI9Image" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement GUID="{481DB987-8206-4236-9481-614F4A3CE61C}" Type="WZUIContainer">
+                            <WZUI9Image File="ui/common/common_btn_anniu10_0_sel.png" GUID="{0C8BF45A-7844-4574-A943-1DD9B9C4DD93}" Type="WZUI9Image" Scale="1" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement GUID="{2046811F-B1B4-4d28-86DE-CDAF97A27B78}" Type="WZUIContainer">
+                            <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{8ED9C1C7-2562-4c59-A126-4781166E1901}" Type="WZUI9Image" GrayRender="True" />
+                        </DisableElement>
+                        <WZUILabelTTF Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{8DCF4D69-B7B2-4ae5-A93B-9C33239298C5}" Name="txtBtnItem_CellLevelSprintPanel" StrokeColor="0,72,3" StrokeSize="4" Text="" Type="WZUILabelTTF" LabelStyleKey="" />
+                    </WZUIButton>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{D08B9EBA-48DC-4eb0-9943-50007554556F}" AbsContentSize="480,40" UseAbsSize="True" RelativePosition="0.5,0.830971" Name="ItemNameContainer_Obj">
+                <WZUI9Image Type="WZUI9Image" GUID="{19AAF296-4B23-43c3-9F1C-7A43BC634C37}" File="" Opacity="76" AnchorPoint="0.5,0.5" />
+                <WZUILabelTTF Color="255,236,193" FontSize="22" GUID="{1039BDB9-D7BD-4586-957B-51D94DBC2F9F}" Name="txtLevelValue_CellLevelSprintPanelItem" RelativePosition="0.025,0.5" StrokeSize="4" Text="" Type="WZUILabelTTF" AnchorPoint="0,0.5" EnableStroke="True" StrokeColor="105,65,46" />
+                <WZUIImage Type="WZUIImage" GUID="{168F0A64-3C42-489b-95D8-F21A441991F6}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" Name="imgArrow_CellLevelSprintPanelItem" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellLevelSprintPanelItem>

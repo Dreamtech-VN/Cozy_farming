@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" ?>
+<WndTips GUID="{8C45C903-3CF2-496e-BBEA-CF7B24CD31D6}">
+    <WZUIWindow AbsContentSize="300,100" AbsPosition="0,0" AnchorPoint="1.02,0.1" GUID="{993f951f-710c-4d09-b1d9-eabb59b57a4a}" LuaObjectName="WndTips35" Name="WndTips35" NameCreate="True" RelativePosition="0.65,0.5" RelativeSize="1,1" ShowAll="False" TouchContainerEnable="True" TouchEnable="True" TouchSwallow="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="True" Visible="True" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{0cfbab00-d989-4902-80d4-8fbb88827def}" AbsContentSize="280,210" UseAbsSize="True" Name="conType35_WndTips" Visible="True" RelativeSize="1,1" RelativePosition="0.4914,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{3fb16ab6-94d4-4455-adde-a47b4adde90a}" File="ui/common/common_scale9_di24.png" Name="bgType35" ScaleY="1" AnchorPoint="0.5,1" RelativePosition="0.5,1" Visible="True" />
+            <WZUIImage Type="WZUIImage" GUID="{7b9527d0-c0b4-49bc-bc62-3134dac42b2e}" File="ui/rune/common_scale9_fuwendashenghendi01.png" UseOriginSize="True" RelativePosition="0.19,0.74" Name="imgType35_WndTips" Visible="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{15ea7b8b-9c20-41f5-870c-9cc9ed4f4225}" FontSize="20" Color="255,227,116" Text="X 1" RelativePosition="0.145,0.47" Name="txtNumType35_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C11_F20_S4_C5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{724523f5-9cdc-461f-a898-d8b543669882}" FontSize="22" Color="255,227,116" Text="" RelativePosition="0.445,0.8" Name="txtTitle_WndTips35" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7be8c5c4-bfb9-4647-a9c9-d86983f8c9a4}" FontSize="20" Color="255,227,116" Text="" RelativePosition="0.445,0.62" Name="txt1Type35_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C11_F20_S4_C5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b93d8491-89ff-4385-b078-974c180f6f3e}" FontSize="20" Color="255,227,116" Text="" RelativePosition="0.445,0.5" Name="txt2Type35_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C11_F20_S4_C5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{57a5d777-7d17-4a52-8abb-57300580a2dc}" FontSize="20" Color="255,227,116" Text="" RelativePosition="0.445,0.38" Name="txt3Type35_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C11_F20_S4_C5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ebb4bbd8-a9c0-47d4-bffa-811eeb1ddae6}" FontSize="20" Color="99,255,95" Text="" RelativePosition="0.72,0.62" Name="txt4Type35_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C15_F20_S4_C5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{6824e04f-7fe7-41ce-b0a3-bf7be2e19f90}" FontSize="20" Color="99,255,95" Text="" RelativePosition="0.72,0.5" Name="txt5Type35_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C15_F20_S4_C5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a1d38516-6ad0-432b-95b6-dda819fc6908}" FontSize="20" Color="99,255,95" Text="" RelativePosition="0.72,0.38" Name="txt6Type35_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C15_F20_S4_C5" />
+            <WZUIButton Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.18" GUID="{652fc55c-e3f5-4550-802b-f37b6f7774e2}" LuaDoneFunctionName="onClick35" Name="btnType35_WndTips" Visible="True" LuaActionName="Normal" AbsPosition="160,49.4">
+                <NormalElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{85869805-dbb8-4037-9f60-f9a7ffb1ba19}">
+                    <WZUIImage Type="WZUIImage" GUID="{5bb75a90-f6e5-4551-b924-18935342b4cb}" File="ui/common/common_btn_anniu4.png" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{9303b421-c371-466c-a796-f179174e7e6b}">
+                    <WZUIImage Type="WZUIImage" GUID="{cb5cdcca-1adc-41cc-a27f-19bbd3520cc6}" File="ui/common/common_btn_anniu4_sel.png" Scale="1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{272c03a2-86f9-4b60-a4ac-9030d77308f6}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a5384812-ab39-48c3-8353-2c01990c4b3f}" FontSize="22" Color="99,255,95" Text="" RelativePosition="0.5,0.5" Visible="True" Name="" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" LabelStyleKey="SMALL_TIP_BTN" TextKey="BUY" />
+            </WZUIButton>
+            <WZUIImage Type="WZUIImage" GUID="{48b46716-1828-441d-af9b-e3d550a4dfc8}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.375,0.675" ScaleX="0.6" Scale="0.6" ScaleY="1.2" Name="" AnchorPoint="0.5,1" Rotation="90" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTips>

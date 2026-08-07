@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" ?>
+<CellDesignationOne GUID="{D169134A-E15C-41de-89F5-30BBAAA9CA16}">
+    <WZUIContainer Type="WZUIContainer" GUID="{14C252A4-32F6-4a51-AC1B-8451006E047B}" AbsContentSize="190,72" UseAbsSize="True" Name="CellDesignationOne" LuaObjectName="" RelativePosition="0.498592,0.497783" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{C8A89209-3DB7-478f-A136-018A73D4AD56}" AbsContentSize="174,68" UseAbsSize="True" RelativePosition="0.5,0.5" Order="0">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{A7333B88-1AC0-465d-8AA2-DD47B33F663F}" Text="弹弹手新手" AbsPosition="" FontSize="24" Color="249,236,208" RelativePosition="0.5,0.625" BoldFont="False" EnableStroke="True" StrokeSize="4" Name="title_Label" TouchEnable="False" FlipY="False" ShadowColor="0,0,0" StrokeColor="128,54,13" AnchorPoint="0.5,0.5" Alignment="Center" Order="1" />
+            <WZUIButton Type="WZUIButton" GUID="{6D09BE23-E301-468f-9651-59A1E6A61850}" LuaDoneFunctionName="onClickCell" RelativePosition="0.5,0.5" UseAbsSize="True" AbsContentSize="174,68" Visible="True">
+                <NormalElement Type="WZUIContainer" GUID="{DE0ABC09-DE44-46ff-90BB-0E8E048F5F4C}" AbsContentSize="0,0" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{37645028-2621-4207-BBFD-F3887A354B2F}" File="ui/common/common_btn_anniu16.png" UseOriginSize="True" Scale="0.9" ScaleX="0.81" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{E52D7F19-52CE-4cc6-B4D2-3BBDF045D2E7}" AbsContentSize="" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{58726628-961C-4f9a-AB59-17C1FC6ABAE2}" File="ui/common/common_btn_anniu20.png" CapInsets="0,0,0,0" UseOriginSize="True" Scale="0.9" ScaleX="0.81" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{39ED82FB-12B6-4c60-97F4-D8C1A7FD4C38}" AbsContentSize="" UseAbsSize="True" />
+                <WZUI9Image Type="WZUI9Image" GUID="{f2bd46f4-a6fb-4961-be6e-e2e9fdca1ce5}" File="ui/common/common_btn_anniu20.png" CapInsets="30,30,30,40" Name="imgLightSel_CellDesignationOne" Visible="False" RelativePosition="0.495556,0.524069" UseOriginSize="True" UseOriginSizeProportion="False" Scale="0.9" ScaleX="0.81" />
+            </WZUIButton>
+            <WZUIImage Type="WZUIImage" GUID="{6F034AB1-69FF-49fd-B529-1DEFD83AEB68}" UseOriginSize="True" AbsPosition="" File="ui/common/common_icon_xiaodianzhui.png" RelativePosition="0.974862,0.882456" Name="aperture_Image" Visible="True" TouchEnable="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{40929392-C9C2-4513-A7E5-B5832FDBD59C}" RelativePosition="0.5,0.5" TouchSwallow="False" TouchEnable="False">
+                <WZUIImage Type="WZUIImage" GUID="{6BE36DE7-603F-424e-85FE-C612DBAD84A6}" File="ui/common/common_progress_chengjiu_bg.png" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" RelativePosition="0.5,0.25" Opacity="255" Name="imgProBk_CellDesignationOne" />
+                <WZUIProgress Type="WZUIProgress" GUID="{A48F2372-D611-4948-85C7-73818F06262B}" BgPicture="ui/common/common_progress_chengjiu_fore.png" Percentage="100" UseOriginSize="True" ScaleX="1" ScaleY="1" RelativePosition="0.5,0.255" Name="proMainProgress_CellDesignationOne" AbsPosition="107,18.08" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellDesignationOne>

@@ -1,0 +1,40 @@
+﻿<CellFootballGame GUID="{f02972be-3d23-470d-bff5-2d02d3ee6d00}">
+    <WZUIContainer Type="WZUIContainer" GUID="{ab070a82-c849-4f1d-9fd3-d653626452e2}" LuaObjectName="CellFootballGame" Name="CellFootballGame" AbsContentSize="800,400" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <WZUIImage Type="WZUIImage" GUID="{e514f363-9f3d-4471-9316-4be51a9bc168}" File="ui/football/football_bg_001.png" UseOriginSize="True" />
+        <WZUIImage Type="WZUIImage" GUID="{91d3580f-bd9c-4937-9974-0dddfc629036}" File="ui/football/door.png" UseOriginSize="True" Scale="1" RelativePosition="0.941736,0.486483" Rotation="0" ScaleX="0.7" ScaleY="0.8" />
+        <WZUIContainer Type="WZUIContainer" GUID="{eebb0a98-aefd-4a6e-b6d1-22abefafe269}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.245652,0.377627" Name="conPlayer_CellFootballGame">
+            <WZUIContainer Type="WZUIContainer" GUID="{78ddae7e-8f67-4dbb-a69e-2437363f41b3}" Name="conRole_CellFootballGame" Scale="0.5" ScaleX="0.5" ScaleY="0.5" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{161e453a-ecf8-46e1-88af-72485a2e8a8d}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.40375,0.4325" Name="conBall_CellFootballGame">
+            <WZUIImage Type="WZUIImage" GUID="{9678c0e0-e670-478b-809b-20122e4bf003}" UseOriginSize="False" File="shopitems/sport_football.png" LuaTouchBeganFunction="" LuaTouchEndedFunction="" LuaTouchMovedFunction="" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{20ca35e2-8283-4b68-b6f5-14da37afb173}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.83625,0.365" Name="conMonster_CellFootballGame">
+            <WZUISpine Type="WZUISpine" GUID="{3a51ec4b-520e-4a1d-9fc9-7d734d9957e9}" FileAtlas="battle/monster/boss_1003.atlas" FileJson="battle/monster/boss_1003.json" AnimationName="wait" Loop="True" ScaleAnimation="1" Scale="0.35" FlipX="False" FlipY="False" Name="spineMonster_CellFootballGame" RelativePosition="0.5,0.5" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{4f6242dc-49ff-48d9-8c13-1d26772fc2f2}" AbsContentSize="150,35" UseAbsSize="True" RelativePosition="0.5,0.078">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a34ed8bc-1d46-4c28-857f-7c6cba875a1b}" AnchorPoint="1,0" FontSize="0" LabelStyleKey="C1_F20_S4_C5" RelativePosition="0.4,0.1" Text="" Alignment="Left" TextKey="CONSUME" />
+            <WZUIImage Type="WZUIImage" GUID="{462e18e9-b175-4902-badf-d6ea4463831f}" RelativePosition="0.546667,0.5" UseOriginSize="True" File="shopitems/sport_football.png" Scale="0.4" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{44263526-a465-4c2b-abe7-6e1332cbf457}" RelativePosition="0.663333,0.785714" AnchorPoint="0,1" Alignment="Left" LabelStyleKey="C1_F20_S4_C5" Text="" Name="txtCost_CellFootballGame" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{a1b862d7-4c5e-4e9b-b7f7-4974f686e973}" AbsContentSize="180,100" UseAbsSize="True" RelativePosition="0.1425,0.85">
+            <WZUIImage Type="WZUIImage" GUID="{7736f4f3-676a-4286-a3b0-7c94359bcfcb}" File="ui/football/football_frame_002.png" UseOriginSize="True" RelativePosition="0.5,0.51" />
+            <WZUIImage Type="WZUIImage" GUID="{06d27574-3c51-4d3d-b4e7-de8a56532ee8}" File="ui/football/football_pattern_001.png" UseOriginSize="True" RelativePosition="0.4,0.23" Scale="1.1" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{1f7a792a-7e9f-4fa3-9503-42ef73521c5c}" Name="fxtRank1_CellFootballGame" AnchorPoint="0,1" MaxWidth="300" RelativePosition="0.00555556,0.98" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{28622746-372d-434f-a098-06372f486243}" Name="fxtRank2_CellFootballGame" AnchorPoint="0,1" RelativePosition="0.00555556,0.74" MaxWidth="300" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{eed6b6a2-7fd4-4a96-945b-4f6366bcdf2a}" Name="fxtRank3_CellFootballGame" AnchorPoint="0,1" RelativePosition="0.0005,0.5" MaxWidth="300" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{eba5cd3b-16b1-49bf-831b-60e1824328d5}" Name="fxtMyRank_CellFootballGame" AnchorPoint="0,1" MaxWidth="300" RelativePosition="-0.00555555,0.19" />
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{fc7def98-91ef-4626-944f-0785a2396d17}" UseOriginSize="False" File="ui/football/football.png" LuaTouchBeganFunction="onTouchBegan" LuaTouchEndedFunction="onTouchEnd" LuaTouchMovedFunction="onTouchMoved" Visible="True" Opacity="0" ScaleY="1.2" ScaleX="1.1" />
+        <WZUIContainer AnchorPoint="0,0" GUID="{00984f53-5d87-4421-b340-802e75f0b801}" Name="conFrontLayer" NoBorder="False" RelativePosition="0,0" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" Visible="True" TouchEnable="False" TouchSwallow="False" Order="1000" />
+        <Button Type="WZUIButton" GUID="{34abebd0-b629-4aa1-94fb-fbd82a53a4a5}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.31375,0.9" LuaDoneFunctionName="onClickRank">
+            <NormalElement Type="WZUIContainer" GUID="{46451e97-9469-4425-8586-be66c6408b7d}">
+                <WZUIImage Type="WZUIImage" GUID="{3afa5741-5f26-42a4-ab7b-f9717c0967ce}" File="ui/football/football_icon_001.png" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{56fc9c0e-6d8a-4e17-a7ef-e17c5c59340d}">
+                <WZUIImage Type="WZUIImage" GUID="{18179237-aa4f-466c-aaeb-4883d323dcc6}" File="ui/football/football_icon_001.png" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{6073ce14-99e8-4f8b-92b0-824a1663416b}" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f30d53ae-54b5-4788-b958-c79c74d81c01}" AnchorPoint="0.5,0" FontSize="0" LabelStyleKey="C18_F18_S4_C3" RelativePosition="0.5,-0.0666667" Text="" Alignment="Left" TextKey="RANK" />
+        </Button>
+    </WZUIContainer>
+</CellFootballGame>

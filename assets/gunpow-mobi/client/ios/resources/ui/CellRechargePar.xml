@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><CellRechargePar GUID="{4DF4629C-BB5C-4dbf-9819-40CAACFE2EA1}">
+    <WZUIContainer AbsContentSize="150,60" AbsPosition="0.5,0.5" AnchorPoint="0,0" GUID="{BBDB8438-8EAB-48c4-AF5E-8E7BDA03F7B3}" LuaObjectName="CellRechargePar" Name="CellRechargePar" NameCreate="True" RelativePosition="0.5,0.75" RelativeSize="1,1" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUICheckBox AbsContentSize="60,60" AnchorPoint="0,1" GUID="{C6CA1155-1EDE-4f9d-8DE8-662E917379DA}" LuaSelectedFunctionName="onCheckClick" Name="checkPar_CellRechargePar" RelativePosition="0,1" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True">
+            <CheckElement File="common/button/radiocheck_nor.png" GUID="{75575780-D535-4d76-8E3F-1131B104BCCF}" Type="WZUIImage" UseOriginSize="True"/>
+            <CheckElement File="common/button/radiocheck_sel.png" GUID="{2A3F495A-E059-448c-9FE6-1A064EE5854B}" Type="WZUIImage" UseOriginSize="True"/>
+        </WZUICheckBox>
+        <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" FontSize="24" GUID="{3A9A09DA-1F6D-4fdc-9F08-7B4EDD9CE5F1}" Name="txtPar_CellRechargePar" RelativePosition="0.38,0.5" Text="" TouchEnable="False" Type="WZUILabelTTF"/>
+    </WZUIContainer>
+</CellRechargePar>

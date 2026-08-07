@@ -1,0 +1,127 @@
+<?xml version="1.0" ?>
+<WndMarryFriend GUID="{8A79F829-4AA6-4091-B866-7BF18834C3C7}">
+    <WZUIWindow Type="WZUIWindow" GUID="{1B8C6FAB-FE94-4a41-A9C4-9AA9090E1AE7}" LuaObjectName="WndMarryFriend" Name="WndMarryFriend" AbsContentSize="500,503" UseAbsSize="True" NameCreate="True" LuaTouchBeganFunction="onBeginTouch" ShowAll="True" Tag="-1">
+        <WZUIContainer AbsContentSize="513,525" GUID="{933BE5E9-ABA0-4864-AF6E-A05806DE2690}" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="False" ShowAll="False" Tag="99991">
+            <WZUI9Image Type="WZUI9Image" GUID="{DEF18EC6-6A36-4d29-9958-8AB61EAB3727}" File="ui/common/common_scale9_di19.png" CapInsets="86,65,1,40" Visible="True" ShowRect="False" Tag="999992" />
+            <WZUIContainer AbsContentSize="500,80" AnchorPoint="0.5,1" GUID="{2EEBFB3D-DF92-4740-9464-2C2EBF7A741E}" Order="0" RelativePosition="0.5,1" RelativeSize="0.9,0.18" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{E3F39F1C-920A-41cc-8FFB-336D2DBD40E8}" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.59" RelativeSize="0.36,0.8" AbsContentSize="187,47" UseAbsSize="True">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6EAA755B-0563-46ce-B4A8-EEEA0FB3CBF2}" FontSize="24" Text="" Color="255,236,193" EnableStroke="True" StrokeColor="132,66,29" StrokeSize="4" Name="txtUITitle_WndMarryFriend" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{30F0AFDF-272E-4146-86FA-1277CFD82A57}" TouchContainerEnable="True" AbsContentSize="100,80" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1.03343,0.581618">
+                    <WZUIButton Type="WZUIButton" GUID="{ABE0B917-7889-4699-B4A3-284355CB879A}" AbsContentSize="49,51" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" LuaDoneFunctionName="onBackClick" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{B812343C-ABF3-456a-B59C-2029FD734663}">
+                            <WZUIImage Type="WZUIImage" GUID="{CF2109A2-CFDC-4cd4-8246-564F82BBAA11}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{8B5BEFBD-99DE-403f-A963-0CA74DAB669A}">
+                            <WZUIImage Type="WZUIImage" GUID="{EE9F20C9-F8D0-4d3d-8D03-16FC46998476}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{47413323-3507-4fe2-B80C-69703211272F}" />
+                    </WZUIButton>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{2227A971-F6FC-4ad1-BE1E-C23656882EE3}" AbsContentSize="462,334" UseAbsSize="True" RelativePosition="0.5,0.517893">
+                <WZUI9Image Type="WZUI9Image" GUID="{A17712FD-B740-4f70-B92F-049516AB5F54}" File="ui/common/common_scale9_di4.png" />
+                <WZUIFrameElement Type="WZUIFrameElement" GUID="{5EC8561C-0464-44ce-9F28-337621D6ACAF}" RelativeSize="1,0.99" CurrentIndex="0" Name="frameMain_WndMarryFriend">
+                    <FrameElement Type="WZUIContainer" GUID="{34A489CD-539C-4c87-8A50-5CF38E117B49}">
+                        <WZUIContainer AnchorPoint="0.5,0.5" GUID="{2FB186ED-30AB-4e59-BE4E-B17F201A7693}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer">
+                            <WZUIContainer AnchorPoint="0.5,0.5" GUID="{823B4CF6-0223-4b91-A4D9-B69720A586B1}" RelativePosition="0.5,0.5" RelativeSize="0.965,0.965" Type="WZUIContainer">
+                                <WZUITableContainer CellElementHeight="0.37" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{B7E63E90-FC9A-48aa-AC11-15D94DA8F555}" Name="tbconA_WndMarryFriend" ScissorWidth="1" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Type="WZUITableContainer" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{4CC1B219-822B-420f-9A24-006E720485CC}" RelativePosition="0.5,-0.214722" AnchorPoint="0.5,0" RelativeSize="0.96,0.17" TouchContainerEnable="True">
+                            <WZUIFrameElement Type="WZUIFrameElement" GUID="{2F26354C-B279-45bc-B345-911D0F3B8028}" CurrentIndex="1" Name="frameA_WndMarryFriend" RelativeSize="0.9,1">
+                                <FrameElement Type="WZUIContainer" GUID="{D7C25F2A-9AFE-4011-8926-22DBF24908FC}" UseAbsSize="True">
+                                    <WZUIButton Type="WZUIButton" GUID="{52E3E12F-AB12-4e77-B0BA-5C70C58A095F}" UseAbsSize="True" AbsContentSize="135,66" Tag="1" LuaDoneFunctionName="onSure" RelativePosition="0.5,0.5" LuaActionName="Normal">
+                                        <NormalElement Type="WZUIContainer" GUID="{BA4ABA2C-302C-4146-BFBC-BC8D5228B35F}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{CD031076-918A-48e2-825F-A970EAD7ACBB}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{CCB89349-CB15-4502-9309-FAB81EFEF237}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{9BE10BEA-A0F3-44cc-BC41-295875997DBD}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{2452B94C-EC73-4dd2-995D-BEE6A897723B}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{180B2D4A-3B5F-4bb6-AFB9-CE6E67109098}" File="ui/common/common_btn_anniu10_0_sel.png" GrayRender="True" UseOriginSize="True" />
+                                        </DisableElement>
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{C7AE7652-B21C-4893-9C91-5E3E2BAFA737}" Font="" Color="255,236,193" Alignment="Center" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Text="sdfdfdfdf" FontSize="24" TouchEnable="False" Name="btnOk1_WndMarryFriend" StrokeColor="3,111,8" StrokeSize="4" EnableStroke="True" BoldFont="True" LabelStyleKey="SMALL_GREEN_BTN" />
+                                    </WZUIButton>
+                                </FrameElement>
+                                <FrameElement Type="WZUIContainer" GUID="{E7FE42A0-98D9-43cf-BAF3-65F55E3638A6}">
+                                    <WZUIButton Type="WZUIButton" GUID="{33CA5348-72A8-4b2b-877B-B6C6C47E1CF5}" UseAbsSize="True" AbsContentSize="40,40" Tag="1" LuaDoneFunctionName="onAllClick" RelativePosition="0.672234,0.5" AnchorPoint="0,0.5" Visible="True">
+                                        <NormalElement Type="WZUIContainer" GUID="{5781B432-6E86-48e5-B105-4CCA506FD52B}" />
+                                        <SelectElement Type="WZUIContainer" GUID="{A6B4FA23-C725-4ea0-94F8-1343A2BC6C01}" />
+                                        <DisableElement Type="WZUIContainer" GUID="{5E8EAEB3-1422-4a78-8CF5-73516A926CD0}" />
+                                        <WZUI9Image Type="WZUI9Image" GUID="{B1885598-2E58-4ab6-BD4F-C0B484D934F1}" File="ui/common/common_scale9_di13.png" TouchEnable="False" TouchSwallow="False" />
+                                        <WZUI9Image Type="WZUI9Image" GUID="{56793B42-5FD5-45cf-B57D-25A4AE8C4A36}" File="ui/common/common_icon_gou.png" UseOriginSize="True" Name="imgSelected_WndMarryFriend" Visible="False" />
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{B6B02A3A-6269-4e0d-8E35-1A1119054294}" Font="" Color="79,60,48" Alignment="Center" AnchorPoint="0,0.5" RelativePosition="1,0.5" Text="全 选" FontSize="24" TouchEnable="False" Name="btnAll1_WndMarryFriend" StrokeColor="47,67,9" StrokeSize="3" EnableStroke="False" BoldFont="True" TextKey="" Visible="True" />
+                                    </WZUIButton>
+                                    <WZUIButton Type="WZUIButton" GUID="{FFA62A30-8263-466b-816D-A31A62789DC4}" UseAbsSize="True" AbsContentSize="135,66" Tag="1" LuaDoneFunctionName="onSure" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" LuaActionName="Normal">
+                                        <NormalElement Type="WZUIContainer" GUID="{91C4BEC5-2353-4e4c-9AAE-2869630CDA3B}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{4E8DA25B-F494-479e-8B6C-D10D917A3C33}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{1AA2028A-6B3C-41f6-B4F7-678BD9EA3A2B}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{01E825FF-6F61-431f-A61A-47B00647F1C7}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{A1942C41-29F8-4946-8FA1-3AA8327B5EAF}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{91E8EFDE-914A-4780-B440-2E33A718FC15}" File="ui/common/common_btn_anniu10_0_sel.png" GrayRender="True" UseOriginSize="True" />
+                                        </DisableElement>
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{F2876915-75D9-4578-A778-41E66C7163B9}" Font="" Color="255,236,193" Alignment="Center" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Text="" FontSize="24" TouchEnable="False" Name="btnOk2_WndMarryFriend" StrokeColor="0,72,3" StrokeSize="4" EnableStroke="True" BoldFont="True" LabelStyleKey="" />
+                                    </WZUIButton>
+                                </FrameElement>
+                            </WZUIFrameElement>
+                        </WZUIContainer>
+                    </FrameElement>
+                    <FrameElement Type="WZUIContainer" GUID="{1259ECF6-5B8E-4cb8-9898-DC44422324C4}" Visible="True">
+                        <WZUIContainer AnchorPoint="0.5,0.5" GUID="{E905E6C1-7B7F-4d46-A244-1FCFB6B8C0FE}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" Visible="True">
+                            <WZUIContainer AnchorPoint="0.5,0.5" GUID="{BD4FB453-B81C-4a75-9093-3B42E41E5907}" RelativePosition="0.5,0.5" RelativeSize="0.965,0.965" Type="WZUIContainer">
+                                <WZUITableContainer CellElementHeight="0.37" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{BEA32B98-7A50-4aee-AD1E-AD1914514839}" Name="tbconB_WndMarryFriend" ScissorWidth="1" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Type="WZUITableContainer" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{4AE0B473-B691-449d-A1FA-70DA2CCD8B89}" RelativePosition="0.5,-0.214722" AnchorPoint="0.5,0" RelativeSize="0.96,0.17" TouchContainerEnable="True">
+                            <WZUIFrameElement Type="WZUIFrameElement" GUID="{166D9356-08AF-4b27-BC84-0FE993EA1816}" CurrentIndex="1" Name="frameB_WndMarryFriend" RelativeSize="0.9,1">
+                                <FrameElement Type="WZUIContainer" GUID="{C084851B-D4C4-4cab-86C0-8793038CB505}">
+                                    <WZUIButton Type="WZUIButton" GUID="{A19475F4-B450-4e08-8030-7FE957B06D2E}" UseAbsSize="True" AbsContentSize="135,66" Tag="1" LuaDoneFunctionName="onAllClick" RelativePosition="0,0.5" AnchorPoint="0,0.5" LuaActionName="Normal">
+                                        <NormalElement Type="WZUIContainer" GUID="{BB70601B-9EA4-45e6-9D43-560E68B2197D}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{98788C4F-B4E4-4fb7-BDF9-69BCE27D9AC8}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{C99A9191-6202-42a0-BA13-EBF072E2F494}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{110BCA17-B5D4-4bc2-947E-AB5060F3FE7E}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{E02F62F2-DFC6-46cd-AEF8-E1ABE2CCC5B8}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{CBFA51D6-2EC0-412e-9580-4C8AC8EF87B9}" File="ui/common/common_btn_anniu10_0_sel.png" GrayRender="True" UseOriginSize="True" />
+                                        </DisableElement>
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{657B76B0-86C2-401e-ACB0-356641F25D29}" Font="" Color="255,236,193" Alignment="Center" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Text="sdfdfdfdf" FontSize="24" TouchEnable="False" Name="btnAll2_WndMarryFriend" StrokeColor="47,67,9" StrokeSize="3" EnableStroke="True" BoldFont="True" LabelStyleKey="SMALL_GREEN_BTN" />
+                                    </WZUIButton>
+                                    <WZUIButton Type="WZUIButton" GUID="{FE1F329B-A86E-4725-AD99-F2CC03CD3945}" UseAbsSize="True" AbsContentSize="135,66" Tag="1" LuaDoneFunctionName="onSure" RelativePosition="1,0.5" AnchorPoint="1,0.5" LuaActionName="Normal" Visible="True">
+                                        <NormalElement Type="WZUIContainer" GUID="{F03077AB-2C01-456e-9818-658DB486A4E3}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{8A8FFEA4-A3D8-4118-9629-86024A76F515}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{EAC4CE55-8FBC-49bf-8FD0-1391DCA68F11}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{F9EFF567-7365-42ef-B853-EEAC87DDDB3C}" File="ui/common/common_btn_anniu3_0_sel.png" UseOriginSize="True" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{3D3C7493-D1FF-4950-A61F-1DA6B739116E}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{55EAD917-3E20-4ab0-93A5-A49E3A44D057}" File="ui/common/common_btn_anniu3_0_sel.png" GrayRender="True" UseOriginSize="True" />
+                                        </DisableElement>
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{7AE1BB3C-AAFB-4c3e-B751-99D0F154D9BF}" Font="" Color="255,236,193" Alignment="Center" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Text="" FontSize="24" TouchEnable="False" Name="btnOk3_WndMarryFriend" StrokeColor="47,67,9" StrokeSize="3" EnableStroke="True" BoldFont="True" />
+                                    </WZUIButton>
+                                </FrameElement>
+                                <FrameElement Type="WZUIContainer" GUID="{D9320E16-F4BA-4ccd-A392-847E5AE975FC}">
+                                    <WZUIButton Type="WZUIButton" GUID="{06D3C9B6-D890-4eb3-BD0A-AD4111E13850}" UseAbsSize="True" AbsContentSize="135,66" Tag="1" LuaDoneFunctionName="onSure" RelativePosition="0.5,0.5" LuaActionName="Normal">
+                                        <NormalElement Type="WZUIContainer" GUID="{5B1F72DA-A9F2-4a29-96F3-69A4F8CF4AAB}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{42329DED-79BD-4f8f-BE72-D95057C31CCA}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{E082C2BF-3C8C-469d-8E4D-AF6AAFE30D60}" Scale="1">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{6A7B74A5-EE47-40a5-A85F-D521AFC14F98}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{B7B10A8C-899B-496b-815C-7DBB74B5F079}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{99EA1A4E-022F-43b6-A247-C4890FA05673}" File="ui/common/common_btn_anniu10_0_sel.png" GrayRender="True" />
+                                        </DisableElement>
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{24D5417A-B5E0-485b-9222-3AC4C2E10690}" Font="" Color="255,236,193" Alignment="Center" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Text="" FontSize="26" TouchEnable="False" Name="btnOk4_WndMarryFriend" StrokeColor="3,111,8" StrokeSize="4" EnableStroke="True" BoldFont="True" LabelStyleKey="NORMAL_GREEN_BTN" />
+                                    </WZUIButton>
+                                </FrameElement>
+                            </WZUIFrameElement>
+                        </WZUIContainer>
+                    </FrameElement>
+                </WZUIFrameElement>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndMarryFriend>

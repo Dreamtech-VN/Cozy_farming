@@ -1,0 +1,16 @@
+<CellCardBoxItem GUID="{59c489d7-0810-4b68-9285-de01cb84a9d5}">
+    <WZUIContainer Type="WZUIContainer" GUID="{249364ed-5812-4e80-b7a4-a2d13b01a6f8}" AbsContentSize="172,172" UseAbsSize="True" NameCreate="True" Name="CellCardBoxItem">
+        <WZUIContainer Type="WZUIContainer" GUID="{b1b2074e-871e-445d-ab1a-8d67f40b7fe5}">
+            <WZUI9Image Type="WZUI9Image" GUID="{204cca02-05e4-430a-9c90-af8b976f4b27}" File="ui/common/common_scale9_di64.png" />
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{10d5935c-3c74-4c55-bd56-80f09f9b6063}" File="ui/card/kapai_icon_book1.png" UseOriginSize="True" Name="imgIcon_CellCardBoxItem" RelativePosition="0.5,0.45" />
+        <WZUIImage Type="WZUIImage" GUID="{c13b78b9-b591-42f9-97fe-eeff58222950}" File="ui/card/kapai_icon_zj1.png" UseOriginSize="True" Name="imgSection_CellCardBoxItem" RelativePosition="0.5,0.45" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{769ead47-beab-46cc-bdcb-51c9d92a542e}" FontSize="24" Name="txtName_CellCardBoxItem" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" Text="人鱼普通卡套" RelativePosition="0.5,0.82" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c2b0ee6d-8d20-4e64-88cc-224b195c64f7}" FontSize="24" Name="txtNumber_CellCardBoxItem" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" Text="520" RelativePosition="0.7,0.14" Color="255,255,255" AnchorPoint="0,0.5" />
+        <Button Type="WZUIButton" GUID="{675d0816-54fc-443b-a963-2b20f2164716}" Name="btnCardBox_CellCardBoxItem" LuaDoneFunctionName="onClickCardBox">
+            <NormalElement Type="WZUIContainer" GUID="{7fc25c4c-e42e-4f49-9c68-9e03b6a3ee8a}" />
+            <SelectElement Type="WZUIContainer" GUID="{1d91ea17-6cd3-40c3-be9c-8c57b4a769a3}" />
+            <DisableElement Type="WZUIContainer" GUID="{0a5d608d-5836-4ba0-8390-bfde5b45a39d}" />
+        </Button>
+    </WZUIContainer>
+</CellCardBoxItem>

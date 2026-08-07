@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<WndGameShare GUID="{8E889781-83B8-4b77-BFAA-8736D81E6D5E}">
+    <WZUIWindow Type="WZUIWindow" GUID="{E1B9B4BA-DC1D-4927-A563-52C9DCAA4FAA}" Name="WndGameShare" NameCreate="True" LuaObjectName="WndGameShare" AbsContentSize="400,246" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{6D8779B5-DD0C-4e09-9512-B900533360E9}" AbsContentSize="400,240" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{DB4AD8B4-DF91-472a-9E86-946FCDEBCD34}" File="ui/common/common_scale9_di15.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{A4DBEBA8-339D-4535-B117-23C4B90C8403}" AbsContentSize="" UseAbsSize="False" Scale="1" RelativeSize="0.97,0.95">
+                <WZUI9Image Type="WZUI9Image" GUID="{0DA6C631-6EB5-4f8c-9327-E67EC3610175}" File="ui/common/common_scale9_di25.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{CEFA4020-69C7-4749-BE91-F512CB06EE45}" AbsContentSize="385,125" UseAbsSize="True" RelativePosition="0.5,0.621786">
+                <WZUI9Image Type="WZUI9Image" GUID="{5A66832D-10DF-43fe-8344-E9963B2C0E0E}" File="ui/common/common_scale9_di20.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{17CDF9E4-AB3D-4449-ACA8-E4C3E3B58EAF}" AbsContentSize="370,105" UseAbsSize="True" RelativePosition="0.5,0.504" Name="conShareList_WndGameShare">
+                    <WZUITableContainer AnchorPoint="0.5,0.5" CellElementHeight="0.85" ColumnCount="3" EnableMoveHorizontal="False" GUID="{D1EADCF7-D024-454b-914D-0AB11CFAF82C}" Name="tabShareList_WndGameShare" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUITableContainer" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" EnableVerticalScroll="True" AbsContentSize="0,0" UseAbsSize="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{AE4EF518-7B5D-4571-B326-8A0E1D94A5E1}" AbsContentSize="400,50" UseAbsSize="True" RelativePosition="0.5,0.156547">
+                <WZUIContainer Type="WZUIContainer" GUID="{4C221BD9-E140-4141-BFD8-B21F89F46054}" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.68">
+                    <WZUIButton Type="WZUIButton" GUID="{D99F81B1-FF06-4b2a-9FD3-5EF1BC8C0A42}" LuaDoneFunctionName="onBtnClose" Name="btnBack_WndGameShare" NameCreate="True" RelativePosition="0.5,0.5">
+                        <NormalElement Type="WZUIContainer" GUID="{56D5B997-945F-4c62-9A3D-DA6EE3A99FA0}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{D3847B84-AE0B-4ac0-B299-C3BAB379EB89}" File="ui/common/common_btn_anniu3.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{593B50C0-A985-452d-AFE2-60B44F1DB211}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{245C211D-4DA1-48ca-B00F-922E7C824855}" File="ui/common/common_btn_anniu3_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{B3533C9B-F1EB-4178-BDF9-0393D8ED5D75}" />
+                    </WZUIButton>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{FB714565-D8C3-402a-888A-E5F50FA173E7}" FontSize="26" Text="" Order="1" Name="txtBack_WndGameShare" NameCreate="True" BoldFont="False" EnableStroke="True" StrokeSize="4" Color="255,236,193" StrokeColor="128,54,13" RelativePosition="0.5,0.464286" TextKey="BACK" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+    <WZUIContainer Type="WZUIContainer" GUID="{CF6AD5C6-3519-48a2-A78D-2913F2D4FEB3}" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.5,0.5" TouchEnable="True" Name="conShare_CellGameShare">
+        <Button Type="WZUIButton" GUID="{4F98AD5A-67CB-4611-A10D-6F153AF3FD43}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.5,0.65" LuaDoneFunctionName="onBtnShare" LuaActionName="Normal">
+            <NormalElement Type="WZUIContainer" GUID="{95CA7EC7-15E5-4d80-9B14-CF721206A803}">
+                <WZUIImage Type="WZUIImage" GUID="{C474E130-5BAB-47ef-A8E1-86A560EA4763}" File="ui/bottomMenu/setting/sina_icon.png" Name="imgIcon1_CellGameShare" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{B3844BBC-F0F3-4438-A88B-957A4F81B373}">
+                <WZUIImage Type="WZUIImage" GUID="{CF1D1F5F-E03E-469a-8488-4AF35F4CB7F6}" File="ui/bottomMenu/setting/sina_icon_sel.png" Name="imgIcon2_CellGameShare" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{8A2816BB-C5E3-4343-A65D-D8B8C5A43E7F}" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{DBC4CCB4-B596-430a-858B-B0ED1BAEA1BC}" Name="txtName_CellGameShare" NameCreate="True" Text="新浪" FontSize="18" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.166667" Color="132,66,29" />
+        </Button>
+    </WZUIContainer>
+</WndGameShare>

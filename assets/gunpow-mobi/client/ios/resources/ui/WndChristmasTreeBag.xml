@@ -1,0 +1,60 @@
+﻿<WndChristmasTreeBag GUID="{a3e57408-52af-4241-94ba-f4b6b0e721db}">
+    <WZUIContainer AbsContentSize="480,450" AnchorPoint="0.5,0.5" GUID="{25071a51-166b-4f8b-854a-c4e40f2b5adb}" LuaObjectName="WndChristmasTreeBag" Name="WndChristmasTreeBag" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer AbsContentSize="420,528" AnchorPoint="0.5,0.5" GUID="{a36ffbf8-794f-433b-92f7-65c2f0bcee5e}" Name="conLeftBg_WndChristmasTreeBag" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True" Order="0">
+            <WZUIContainer AbsContentSize="210,530" GUID="{6a412bb7-0072-4479-86bc-e4c580f7497a}" RelativePosition="0.5,0.52" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="1,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{0addf00d-b122-4217-990f-c1e05a1e8372}" Visible="True" File="ui/common/common_scale9_di3.png" RelativePosition="0.5,0.482" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="210,530" GUID="{e878b4df-602c-4a5c-89c2-e15a12600d36}" RelativePosition="0.5,0.52" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{d65c47b0-5e98-41e2-9fb1-c398fb6d6b2b}" File="ui/common/common_scale9_di3.png" FlipX="False" ScaleX="-1" RelativePosition="0.5,0.482" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{38596456-070f-4196-8c20-84b341e54dfc}" BoldFont="True" EnableStroke="True" FontSize="28" Text="" RelativePosition="0.5,0.947576" Name="ttfBagTitle_WndChristmasTreeBag" Color="255,255,255" AbsPosition="210,501.32" StrokeColor="79,60,48" StrokeSize="4" TextKey="CHRISTMASTREE_TEXT6" />
+            <WZUIContainer Type="WZUIContainer" GUID="{5dc1f6f8-f926-401c-afc7-5e539b00767d}" AbsContentSize="392,377" Visible="True" UseAbsSize="True" RelativePosition="0.5,0.88" AnchorPoint="0.5,1">
+                <WZUI9Image Type="WZUI9Image" GUID="{ed186f3f-adcc-4e17-b84e-b9dff016f6b6}" File="ui/common/common_scale9_di4.png" Visible="True" Opacity="200" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{db897d26-071e-4b19-99e8-441526b770a0}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.3,0.945" AbsPosition="122.978,500.271" />
+            <WZUIImage Type="WZUIImage" GUID="{7dc2cf9d-b7ca-4a60-ae39-eee300d0286b}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.7,0.945" AbsPosition="290.131,499.122" ScaleX="-1" />
+            <WZUIImage Type="WZUIImage" GUID="{02800a68-a2cc-4650-b377-333e4937c02a}" File="ui/common/common_icon_gb.png" UseOriginSize="True" RelativePosition="0.895238,0.948864" />
+            <WZUIButton Type="WZUIButton" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.893476,0.950305" GUID="{be991cc6-ea5c-4749-ac4e-f078279db417}" LuaDoneFunctionName="onCloseClick" AbsPosition="728.7,51" LuaActionName="Normal">
+                <NormalElement Type="WZUIContainer" GUID="{9ab276d2-8a51-437e-b0e8-0d7bcf7259e9}">
+                    <WZUIImage Type="WZUIImage" GUID="{f25dd20d-18fc-4161-b259-6952aefc70b8}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" RelativePosition="0.55,0.5" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{94708f01-a6d5-4ab6-92f4-e0461e9db73b}">
+                    <WZUIImage Type="WZUIImage" GUID="{276a27ea-9ffa-4f81-bc3e-b19815a3da22}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" RelativePosition="0.55,0.5" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{6dbcbad5-c0cf-41eb-8ef7-ad747f8bceba}" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="375,450" AnchorPoint="0.5,0.5" GUID="{b54229eb-2870-439c-afd6-9b5545e0cf43}" RelativePosition="0.5,0.425" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIContainer AbsContentSize="380,450" AnchorPoint="0.5,1" GUID="{962b44ed-910e-41b2-9288-f84f8899d7b2}" Name="conGoods_WndChristmasTreeBag" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True">
+                <WZUITableContainer AnchorPoint="0.5,0.5" CellElementHeight="0.275" ColumnCount="4" EnableMoveHorizontal="False" GUID="{91258301-1cf1-4b5f-a0c7-5528cb38060a}" Name="tableConGoods_WndChristmasTreeBag" RelativePosition="0.495,0.625" RelativeSize="1,1" Type="WZUITableContainer" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" EnableVerticalScroll="True" AbsContentSize="380,345" UseAbsSize="True" AbsPosition="188.1,273.6" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0e90ba4c-a7da-456c-9e11-faa8a3d48dc8}" Text="10/100" Color="138,122,106" FontSize="18" RelativePosition="0.97,0.212" Name="itemNum_WndChristmasTreeBag" Visible="True" Alignment="Right" AbsPosition="368.6,93.1" AnchorPoint="1,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{cf5cff9d-d443-463b-8a40-ef1800ae4965}" AbsContentSize="375,80" UseAbsSize="True" RelativePosition="0.5,0.09">
+                <WZUIButton GUID="{21bdc679-8ee5-4f70-b3fe-80fdf455d87a}" LuaDoneFunctionName="onClickPickUp" Type="WZUIButton" RelativePosition="0.27,0.5" AbsContentSize="120,54" UseAbsSize="True" LuaActionName="Normal" Name="btnPickUp_WndChristmasTreeBag">
+                    <NormalElement GUID="{1a2a4ed8-4b85-4a8e-88a2-044f9179f214}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="0,0,0,0" File="ui/common/common_btn_anniu3_1.png" GUID="{b3020ab1-b310-4cc3-a8a1-20be6fb33b17}" Type="WZUI9Image" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="60,27" />
+                    </NormalElement>
+                    <SelectElement GUID="{896e0a4d-ca31-4b25-aeac-ee9c7414b4b3}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="0,0,0,0" File="ui/common/common_btn_anniu3_1_sel.png" GUID="{4338c377-7e71-4e50-b225-9da3b0f2054f}" Type="WZUI9Image" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="1" />
+                    </SelectElement>
+                    <DisableElement GUID="{512401df-ba0e-48a3-b1b4-aa4e15b62c23}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="0,0,0,0" File="ui/common/common_btn_anniu3_1.png" GUID="{929272ea-4ddc-4841-aa41-cd6f3d5b0956}" Type="WZUI9Image" UseOriginSize="True" GrayRender="False" RelativePosition="0.5,0.5" />
+                    </DisableElement>
+                    <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{1fe85201-35ef-4b92-8219-7a95e21959b6}" Name="txtSale_WndChristmasTreeBag" RelativePosition="0.5,0.496121" StrokeColor="132,66,29" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" TextKey="CHRISTMASTREE_TEXT11" LabelStyleKey="NORMAL_ORANGE_BTN" AbsPosition="60,26.7905" />
+                </WZUIButton>
+                <WZUIButton GUID="{2e8886c1-8414-4ff9-bb82-94563d77e50d}" LuaDoneFunctionName="onClickArrange" Type="WZUIButton" RelativePosition="0.73,0.5" AbsContentSize="120,54" UseAbsSize="True" LuaActionName="Normal" Name="btnArrange_WndChristmasTreeBag">
+                    <NormalElement GUID="{a4cf6a26-6b1e-45ef-b05c-28a422ffd991}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="0,0,0,0" File="ui/common/common_btn_anniu10_1.png" GUID="{1dd9e24b-327a-4b47-a767-0533f27bbeb6}" Type="WZUI9Image" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{29c28508-9e77-4649-bf51-b238dc1eb223}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="0,0,0,0" File="ui/common/common_btn_anniu10_1_sel.png" GUID="{98d5d639-1772-4bd4-8f54-b22f22eb6317}" Type="WZUI9Image" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="1" />
+                    </SelectElement>
+                    <DisableElement GUID="{47d8c8a3-c312-4f0e-86fb-b88ae7979fd3}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="0,0,0,0" File="ui/common/common_btn_anniu10_1.png" GUID="{24be416a-9566-4918-a1dc-d70a2b5c6c25}" Type="WZUI9Image" UseOriginSize="True" GrayRender="False" RelativePosition="0.5,0.5" />
+                    </DisableElement>
+                    <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{3b16112e-97ec-4b43-9d6d-e7ab3330dd70}" Name="txtSys_WndChristmasTreeBag" RelativePosition="0.5,0.496121" StrokeColor="64,128,1" StrokeSize="4" Text="出售" Type="WZUILabelTTF" Visible="True" TextKey="CHRISTMASTREE_TEXT12" LabelStyleKey="NORMAL_GREEN_BTN" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</WndChristmasTreeBag>

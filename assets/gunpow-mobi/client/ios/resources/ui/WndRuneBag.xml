@@ -1,0 +1,48 @@
+﻿<WndRuneBag GUID="{637a23e7-5402-4554-a550-e731bfeaa929}">
+    <WZUIWindow Type="WZUIWindow" GUID="{ec3b8c4d-9d93-4232-ac47-68b21171b38c}" Name="WndRuneBag" LuaObjectName="WndRuneBag" NameCreate="True" AbsContentSize="238,518" UseAbsSize="True" LuaTouchEndedFunction="">
+        <WZUI9Image Type="WZUI9Image" GUID="{f99807fb-d4ef-4d4c-a84d-ad01062719b8}" File="ui/rune/common_scale9_js3.png" CapInsets="35,35,,1,1" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e88a68df-cb42-4edc-9a36-29dc06ad68e1}" LabelStyleKey="C11_F24_S4_C3" TextKey="RUNE_BAG" RelativePosition="0.5,0.941492" Name="txtTitleName_WndRuneBag" />
+        <Button Type="WZUIButton" GUID="{bd1d62fc-3585-4a16-b0f8-92ade25df1d0}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.880621,1" AnchorPoint="0.5,1" LuaDoneFunctionName="onClickClose">
+            <NormalElement Type="WZUIContainer" GUID="{eb08906d-7547-4aa0-a0a1-97a102e8f891}">
+                <WZUIImage Type="WZUIImage" GUID="{4a28e624-526c-477a-8e16-cc63137c53e2}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" Scale="0.9" ScaleX="0.9" ScaleY="0.9" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{662bb699-a294-42fc-a534-7ee1571b18bf}">
+                <WZUIImage Type="WZUIImage" GUID="{5bf544c9-e6f2-466f-a9e4-8fc386118b3c}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" Scale="0.9" ScaleX="0.9" ScaleY="0.9" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{60e6e4c9-d529-4a94-b934-0424b0868aee}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{b310b005-f5c1-472e-9154-3c58ca39a7f4}" AbsContentSize="238,518" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" Name="conRuneBagList_WndRuneBag">
+            <WZUIContainer Type="WZUIContainer" GUID="{953716fd-e311-4b85-be57-08759a3b7bb7}" AbsContentSize="224,372" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.525097" Name="conRuneList_WndRuneBag">
+                <WZUI9Image Type="WZUI9Image" GUID="{d7b74ea5-125f-44e9-8e88-6bf676c7d236}" File="ui/rune/common_scale9_js4.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{a51d1239-1c26-4c05-92c2-931f20c29d5b}" AbsContentSize="224,362" UseAbsSize="True" RelativePosition="0.5,0.505376">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{b8eb1b49-f190-4fe7-974d-d1d8170acfae}" Name="tabRuneList_WndRuneBag" EnableVerticalScroll="True" EnableMoveHorizontal="False" CellElementHeight="0.27071" RelativePosition="0.5,0.5" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5269ac40-65cf-42ae-b3f2-d251efb71af2}" LabelStyleKey="C11_F20" Text="" Color="158,139,121" FontSize="22" EnableStroke="False" StrokeSize="2" StrokeColor="105,65,46" TextKey="RUNE_BAG_NULL_TIP" Visible="False" Name="txtNullTip_WndRuneBag" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{e786fe1d-561a-4e15-8444-d0eb1388bdc8}" AbsContentSize="118,58" UseAbsSize="True" RelativePosition="0.260567,0.0763744" Name="conRuneStore_WndRuneBag">
+                <Button Type="WZUIButton" GUID="{123fbad9-9069-4f55-91c7-6737c7cae344}" LuaDoneFunctionName="toSellRune">
+                    <NormalElement Type="WZUIContainer" GUID="{7cb37200-af39-4925-8c25-fb77abc85bfe}">
+                        <WZUIImage Type="WZUIImage" GUID="{a742e1d0-03ad-4ac5-97ed-36a76bb0356c}" File="ui/common/common_btn_anniu3_1.png" UseOriginSize="False" Scale="0.88" ScaleX="0.88" ScaleY="0.88" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{b8499343-c940-4576-98f0-127b87d462c6}">
+                        <WZUIImage Type="WZUIImage" GUID="{245f749c-3800-4c42-8e90-98d507d43b36}" File="ui/common/common_btn_anniu3_1_sel.png" UseOriginSize="False" Scale="0.88" ScaleX="0.88" ScaleY="0.88" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{2e906c72-1b89-43b5-9de3-cbe868c5d6fe}" />
+                </Button>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d1e97897-cd48-463a-96a2-e4ea0d8484d0}" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="RUNEBOOK2" RelativePosition="0.5,0.482143" Scale="0.85" ScaleX="0.85" ScaleY="0.85" ShadowBlur="" Name="txtSellAll_WndRuneBag" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{bec28f81-2dd2-47dd-9197-4986f5d59d4c}" AbsContentSize="118,58" UseAbsSize="True" RelativePosition="0.737352,0.0763744" Name="conRuneDraw_WndRuneBag">
+                <Button Type="WZUIButton" GUID="{b588e4c0-5a7b-456b-a36d-8893ed0d3687}" LuaDoneFunctionName="toDrawRune">
+                    <NormalElement Type="WZUIContainer" GUID="{3a1b3745-83d7-40a5-a408-11e2037d7397}">
+                        <WZUIImage Type="WZUIImage" GUID="{59b755f3-959b-4f89-b691-e7198d813383}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="False" Scale="0.88" ScaleX="0.88" ScaleY="0.88" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{fe062547-ccb6-4ddc-9bfd-2c40316d6177}">
+                        <WZUIImage Type="WZUIImage" GUID="{8d12634f-73c6-43dd-a2cf-a88ff2663f1d}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="False" Scale="0.88" ScaleX="0.88" ScaleY="0.88" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{ca0084db-396a-4708-af29-928c2b25aa24}" />
+                </Button>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{bd57176e-d7e0-4f27-ab1c-b7c728cf70e7}" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="RUNE_EXTRACT" RelativePosition="0.5,0.482143" Scale="0.85" ScaleX="0.85" ScaleY="0.85" Name="txtDraw_WndRuneBag" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndRuneBag>

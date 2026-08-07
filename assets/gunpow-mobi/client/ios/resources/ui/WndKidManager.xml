@@ -1,0 +1,99 @@
+﻿<WndKidManager GUID="{d479d342-0c6b-485d-88df-b716d568cc00}">
+    <WZUIWindow Type="WZUIWindow" GUID="{0be7e383-6a60-41f3-9ab7-6c338a5430b9}" LuaObjectName="WndKidManager" NameCreate="True" Name="WndKidManager" AbsContentSize="770,532" UseAbsSize="True" ShowAll="True" LuaTouchBeganFunction="onTouchBegin">
+        <WZUIContainer Type="WZUIContainer" GUID="{b56a3e25-07de-4b1a-bf26-30df13077858}" AbsContentSize="770,532" Order="1" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{24deec66-697d-443b-92e6-0810ba4a614f}" CapInsets="60,110,10,10" File="ui/common/common_scale9_di19.png" Visible="True" />
+        </WZUIContainer>
+        <WZUICheckBoxGroup Type="WZUICheckBoxGroup" GUID="{53f3edc3-2226-405b-a12a-2805702d4dcb}" AbsContentSize="105,450" RelativePosition="1.05,0.48" UseAbsSize="True" TouchContainerEnable="True" Name="checkGroup_WndKidManager" AnchorPoint="0.5,0.5">
+            <CheckBox Type="WZUICheckBox" GUID="{22423189-185b-4353-9aa0-d1870d747807}" AbsContentSize="100,60" AbsPosition="0,375.5" AnchorPoint="0,0.5" LuaSelectedFunctionName="" Name="checkInfo1_WndKidManager" RelativePosition="0,0.915" TouchContainerEnable="True" UseAbsSize="True" Tag="1" LuaCheckedFunctionName="onCheck">
+                <CheckElement Type="WZUIContainer" GUID="{c5407917-84bf-4917-99d8-87e69536b24c}" AbsContentSize="120,60" UseAbsSize="True" TouchContainerEnable="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{39c0cd9e-41fb-4084-aa15-7193589270b4}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{98da0c56-5a8c-4ff6-b206-81af9054137a}" AbsContentSize="100,60" AbsPosition="0,375.5" AnchorPoint="0,1" UseAbsSize="True" TouchContainerEnable="True" RelativePosition="0,1" />
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{43c643f3-b72c-49b0-94ca-07928e02a650}" AbsContentSize="100,60" AbsPosition="0,443" AnchorPoint="0,0.5" LuaSelectedFunctionName="" Name="checkInfo2_WndKidManager" RelativePosition="0,0.77" TouchContainerEnable="True" UseAbsSize="True" Tag="2" LuaCheckedFunctionName="onCheck">
+                <CheckElement Type="WZUIContainer" GUID="{09886ec2-eba4-4a0e-8247-76453f725c25}" AbsContentSize="120,60" UseAbsSize="True" TouchContainerEnable="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{53d09ed1-5dec-4576-8a1b-309d0e7fee00}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{79666c8a-0505-4ef2-a665-175a9ea57ae3}" AbsContentSize="100,60" AbsPosition="" AnchorPoint="0,1" UseAbsSize="True" TouchContainerEnable="True" RelativePosition="0,1" />
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{919ff6a2-3ba3-4a88-a56f-5f793429f33c}" AbsContentSize="100,60" AbsPosition="0,443" AnchorPoint="0,0.5" LuaSelectedFunctionName="" Name="checkInfo3_WndKidManager" RelativePosition="0,0.625" TouchContainerEnable="True" UseAbsSize="True" Tag="3" LuaCheckedFunctionName="onCheck">
+                <CheckElement Type="WZUIContainer" GUID="{673a939f-0848-483a-b125-3c9e06978d9f}" AbsContentSize="120,60" UseAbsSize="True" TouchContainerEnable="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{c5a07ddc-603a-4eac-943b-97782bea7608}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{7d3aea1c-160e-4b0b-9e4e-389cf589fdc0}" AbsContentSize="100,60" AbsPosition="" AnchorPoint="0,1" UseAbsSize="True" TouchContainerEnable="True" RelativePosition="0,1" />
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{1cc80796-81ac-4596-8580-b23387e51119}" AbsContentSize="100,60" AbsPosition="0,443" AnchorPoint="0,0.5" LuaSelectedFunctionName="" Name="checkInfo4_WndKidManager" RelativePosition="0,0.48" TouchContainerEnable="True" UseAbsSize="True" Tag="4" LuaCheckedFunctionName="onCheck">
+                <CheckElement Type="WZUIContainer" GUID="{023d00ea-256c-4455-a96a-58e703367778}" AbsContentSize="120,60" UseAbsSize="True" TouchContainerEnable="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{4ba7c9eb-4749-4787-81f6-c77091c03e3f}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{3055b8d2-6792-4563-905d-9b893122ff83}" AbsContentSize="100,60" AbsPosition="" AnchorPoint="0,1" UseAbsSize="True" TouchContainerEnable="True" RelativePosition="0,1" />
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{84165f70-f647-4f36-9195-b762477c3019}" AbsContentSize="100,60" AbsPosition="0,443" AnchorPoint="0,0.5" LuaSelectedFunctionName="" Name="checkInfo5_WndKidManager" RelativePosition="0,0.335" TouchContainerEnable="True" UseAbsSize="True" Tag="5" LuaCheckedFunctionName="onCheck">
+                <CheckElement Type="WZUIContainer" GUID="{b1750e45-3949-4848-b323-6fb862144f72}" AbsContentSize="120,60" UseAbsSize="True" TouchContainerEnable="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{e1ce1327-2e15-43c3-bc1e-d8d2eee6a16e}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{8622ee5c-6c90-4122-8830-6efd6b1b9278}" AbsContentSize="100,60" AbsPosition="" AnchorPoint="0,1" UseAbsSize="True" TouchContainerEnable="True" RelativePosition="0,1" />
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{f58937a9-7cba-4146-ab38-e9f05d0ba404}" AbsContentSize="100,60" AbsPosition="0,443" AnchorPoint="0,0.5" LuaSelectedFunctionName="" Name="checkInfo6_WndKidManager" RelativePosition="0,0.19" TouchContainerEnable="True" UseAbsSize="True" Tag="6" LuaCheckedFunctionName="onCheck">
+                <CheckElement Type="WZUIContainer" GUID="{10bcf6c7-958c-4196-a74b-9864d527138d}" AbsContentSize="120,60" UseAbsSize="True" TouchContainerEnable="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{3e709cdf-3228-4b50-a248-1aff8380bdea}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{b8969c20-cf0b-4c46-b930-8d0866dd2eec}" AbsContentSize="100,60" AbsPosition="" AnchorPoint="0,1" UseAbsSize="True" TouchContainerEnable="True" RelativePosition="0,1" />
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{05095e69-d161-4807-9469-052531526f5e}" AbsContentSize="100,60" AbsPosition="0,443" AnchorPoint="0,0.5" LuaSelectedFunctionName="" Name="checkInfo7_WndKidManager" RelativePosition="0,0.045" TouchContainerEnable="True" UseAbsSize="True" Tag="7" LuaCheckedFunctionName="onCheck">
+                <CheckElement Type="WZUIContainer" GUID="{f6635491-b168-4624-9a60-456b1bde75ad}" AbsContentSize="120,60" UseAbsSize="True" TouchContainerEnable="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{1e892b17-596f-4326-bec3-dd013e723b0c}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{3befa509-df0a-442d-9222-24530bbf5bc5}" AbsContentSize="100,60" AbsPosition="" AnchorPoint="0,1" UseAbsSize="True" TouchContainerEnable="True" RelativePosition="0,1" />
+            </CheckBox>
+        </WZUICheckBoxGroup>
+        <WZUIContainer Type="WZUIContainer" GUID="{7284d777-4bc3-4113-9e98-7cc6041be0e6}" AbsContentSize="105,450" AbsPosition="824.44,446.014" Order="2" UseAbsSize="True" RelativePosition="1.0707,0.48" AnchorPoint="0.5,0.5" TouchEnable="False" TouchContainerEnable="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{49a9207f-8290-4ae3-807a-b375937c8b26}" AbsContentSize="86,52" AnchorPoint="0,0.5" RelativePosition="-0.03,0.912778" UseAbsSize="True" TouchContainerEnable="True" Name="conTab1_WndKidManager">
+                <WZUI9Image Type="WZUI9Image" GUID="{344afb3b-701d-426f-af56-26d3ffb9aee3}" CapInsets="40,34,15,2" UseOriginSize="True" File="ui/common/common_btn_biaoqian_sel.png" Name="imgTab1_WndKidManager" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c68b9150-8e9a-4bf4-978c-66c6011a4c06}" Color="255,236,193" EnableStroke="True" LabelStyleKey="C1_F22_S4_C5" Name="txtTab1_WndKidManager" RelativePosition="0.51,0.5" StrokeSize="4" TextKey="" Text="出线赛" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ea2f8b75-afef-4266-a281-5cd0c3301a15}" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" LabelStyleKey="" Name="txtTab1Sel_WndKidManager" RelativePosition="0.51,0.5" Text="出线赛" TextKey="" StrokeSize="4" StrokeColor="128,54,13" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1156ae0d-ce74-46e8-8835-0564334eb185}" AbsContentSize="86,52" AnchorPoint="0,0.5" RelativePosition="-0.03,0.77" UseAbsSize="True" TouchContainerEnable="True" Name="conTab2_WndKidManager">
+                <WZUI9Image Type="WZUI9Image" GUID="{f5628bd2-7b29-4436-9300-2e58875d5415}" CapInsets="40,34,15,2" UseOriginSize="True" File="ui/common/common_btn_biaoqian_sel.png" Name="imgTab2_WndKidManager" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d2432a50-0cae-4e67-a06c-ba8f53476de4}" Color="255,236,193" EnableStroke="True" LabelStyleKey="C1_F22_S4_C5" Name="txtTab2_WndKidManager" RelativePosition="0.51,0.5" StrokeSize="4" TextKey="" Text="入围赛" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{42587f81-3fdf-44e3-9b21-9acc1b4723f2}" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" LabelStyleKey="" Name="txtTab2Sel_WndKidManager" RelativePosition="0.51,0.5" Text="入围赛" TextKey="" StrokeSize="4" StrokeColor="128,54,13" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{88b14791-0421-4642-be70-221132218417}" AbsContentSize="86,52" AnchorPoint="0,0.5" RelativePosition="-0.03,0.625" UseAbsSize="True" TouchContainerEnable="True" Name="conTab3_WndKidManager">
+                <WZUI9Image Type="WZUI9Image" GUID="{1f2cf43b-c1e4-43f5-8fe9-6e74206e91d2}" CapInsets="40,34,15,2" UseOriginSize="True" File="ui/common/common_btn_biaoqian_sel.png" Name="imgTab3_WndKidManager" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{68884f79-1775-4415-9a73-3082c30a48f4}" Color="255,236,193" EnableStroke="True" LabelStyleKey="C1_F22_S4_C5" Name="txtTab3_WndKidManager" RelativePosition="0.51,0.5" StrokeSize="4" TextKey="" Text="淘汰赛" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{eba077d1-6672-43b1-ae16-70456312712b}" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" LabelStyleKey="" Name="txtTab3Sel_WndKidManager" RelativePosition="0.51,0.5" Text="淘汰赛" TextKey="" StrokeSize="4" StrokeColor="128,54,13" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{39aaf05b-1599-4365-ba20-7264d969f855}" AbsContentSize="86,52" AnchorPoint="0,0.5" RelativePosition="-0.03,0.48" UseAbsSize="True" TouchContainerEnable="True" Name="conTab4_WndKidManager">
+                <WZUI9Image Type="WZUI9Image" GUID="{d2ee4aa7-ae24-4eec-add6-f68770f83a66}" CapInsets="40,34,15,2" UseOriginSize="True" File="ui/common/common_btn_biaoqian_sel.png" Name="imgTab4_WndKidManager" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{f76e4488-e277-4b26-9a33-064f44831a67}" Color="255,236,193" EnableStroke="True" LabelStyleKey="C1_F22_S4_C5" Name="txtTab4_WndKidManager" RelativePosition="0.51,0.5" StrokeSize="4" TextKey="" Text="淘汰赛" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{844f4427-b6e2-420d-94ac-d14a2e432736}" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" LabelStyleKey="" Name="txtTab4Sel_WndKidManager" RelativePosition="0.51,0.5" Text="淘汰赛" TextKey="" StrokeSize="4" StrokeColor="128,54,13" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{fe89abf3-1ea9-4e01-86b3-23105c8dc317}" AbsContentSize="86,52" AnchorPoint="0,0.5" RelativePosition="-0.03,0.335" UseAbsSize="True" TouchContainerEnable="True" Name="conTab5_WndKidManager">
+                <WZUI9Image Type="WZUI9Image" GUID="{b6d7fe17-2aaf-431d-a429-86a8fc87799b}" CapInsets="40,34,15,2" UseOriginSize="True" File="ui/common/common_btn_biaoqian_sel.png" Name="imgTab5_WndKidManager" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{2a3c7d82-9cd3-4913-a009-2f4039735d7c}" Color="255,236,193" EnableStroke="True" LabelStyleKey="C1_F22_S4_C5" Name="txtTab5_WndKidManager" RelativePosition="0.51,0.5" StrokeSize="4" TextKey="" Text="淘汰赛" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8172f0f3-2461-44bc-950b-d660f7937867}" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" LabelStyleKey="" Name="txtTab5Sel_WndKidManager" RelativePosition="0.51,0.5" Text="淘汰赛" TextKey="" StrokeSize="4" StrokeColor="128,54,13" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{9be3a360-190e-4644-8d38-90369cbb9483}" AbsContentSize="86,52" AnchorPoint="0,0.5" RelativePosition="-0.03,0.19" UseAbsSize="True" TouchContainerEnable="True" Name="conTab6_WndKidManager">
+                <WZUI9Image Type="WZUI9Image" GUID="{7f2e9160-f197-4edb-a606-f43e5ac53b7a}" CapInsets="40,34,15,2" UseOriginSize="True" File="ui/common/common_btn_biaoqian_sel.png" Name="imgTab6_WndKidManager" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6694f5c4-bbf9-4869-8a81-bc860b9fc3ba}" Color="255,236,193" EnableStroke="True" LabelStyleKey="C1_F22_S4_C5" Name="txtTab6_WndKidManager" RelativePosition="0.51,0.5" StrokeSize="4" TextKey="" Text="淘汰赛" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{325b5955-5d7d-4214-b8a3-4191a37e6f50}" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" LabelStyleKey="" Name="txtTab6Sel_WndKidManager" RelativePosition="0.51,0.5" Text="淘汰赛" TextKey="" StrokeSize="4" StrokeColor="128,54,13" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5ad9fd75-015c-4288-a3e8-0185ee481e75}" AbsContentSize="86,52" AnchorPoint="0,0.5" RelativePosition="-0.03,0.045" UseAbsSize="True" TouchContainerEnable="True" Name="conTab7_WndKidManager">
+                <WZUI9Image Type="WZUI9Image" GUID="{37c000b1-19b5-44ea-b08e-7d37104ddc79}" CapInsets="40,34,15,2" UseOriginSize="True" File="ui/common/common_btn_biaoqian_sel.png" Name="imgTab7_WndKidManager" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{01b37e60-b248-4926-8402-d5752c46212c}" Color="255,236,193" EnableStroke="True" LabelStyleKey="C1_F22_S4_C5" Name="txtTab7_WndKidManager" RelativePosition="0.51,0.5" StrokeSize="4" TextKey="" Text="淘汰赛" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8555ed60-d933-4c9a-89ff-da73dd8c6e18}" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" LabelStyleKey="" Name="txtTab7Sel_WndKidManager" RelativePosition="0.51,0.5" Text="淘汰赛" TextKey="" StrokeSize="4" StrokeColor="128,54,13" Visible="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{0aa3663a-f2bf-4cf8-ba9c-205458d53376}" Name="btnClose_WndKidManager" AbsContentSize="80,56" RelativePosition="0.95,0.94" UseAbsSize="True" Order="1" LuaDoneFunctionName="onClose" LuaActionName="Normal">
+            <NormalElement Type="WZUIContainer" GUID="{08512f96-e8c5-4590-ad87-58016503f88e}">
+                <WZUIImage Type="WZUIImage" GUID="{8ca3f3ba-e8ea-444e-8917-53f28acf1320}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{4c7587dd-bc0b-4675-a735-c60fc008add2}">
+                <WZUIImage Type="WZUIImage" GUID="{750f6925-a8bb-4f0a-a7be-971ec51332e9}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{6a600ed4-637f-4917-84cd-06374e7a8fd8}" />
+        </Button>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1c16c939-b384-4687-ab15-557e621433c1}" AbsPosition="375.375,38.304" EnableStroke="True" FontSize="26" RelativePosition="0.5,0.94" Order="1" StrokeColor="136,66,29" StrokeSize="4" Text="" Color="255,236,193" TextKey="" LabelStyleKey="C1_F26_S4_C13" Name="txtTitle_WndKidManager" />
+        <WZUIContainer Type="WZUIContainer" GUID="{6adb730e-804e-430f-8512-b29af2a74fba}" Name="conContent_WndKidManager" AnchorPoint="0.5,1" RelativePosition="0.5,0.89" RelativeSize="1,1" AbsContentSize="760,465" UseAbsSize="True" Order="2" />
+    </WZUIWindow>
+</WndKidManager>

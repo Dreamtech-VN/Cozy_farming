@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<WndWorldBossRule GUID="{6A4BDF00-75DC-4e42-A2E3-7ECAECB2E09C}">
+    <WZUIWindow AbsContentSize="450,500" AbsPosition="480,300" GUID="{22B5FF14-8202-4ab2-93E4-58F664DF5E13}" LuaObjectName="WndWorldBossRule" Name="WndWorldBossRule" NameCreate="True" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{50DBDD61-9A34-444e-97A4-799946B52170}">
+            <WZUI9Image Type="WZUI9Image" GUID="{B79B8959-6D76-49c5-A158-64CF7D090662}" File="ui/common/common_scale9_di32.png" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="" AnchorPoint="0.5,1" GUID="{A6FC1B1C-6CAE-4ffa-BEB9-24166A786A25}" RelativePosition="0.5,1" RelativeSize="1,0.12" Type="WZUIContainer" UseAbsSize="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{BAFF3192-D263-466d-8E63-62774A568A67}" File="ui/common/common_scale9_heidi2.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{BB9D44C7-0E56-42e0-BB1B-04455EEF37EE}" TextKey="WORLD_BOSS_TITLE" FontSize="26" Color="255,236,192" />
+            <WZUIButton GUID="{813B12D9-1102-4c4c-8CDB-8B9BE4DC5F2C}" LuaDoneFunctionName="onCloseClick" RelativePosition="1,0.5" Type="WZUIButton" AbsContentSize="100,80" UseAbsSize="True" AnchorPoint="1,0.5">
+                <NormalElement GUID="{2FA320A4-978E-4771-B3BD-71D78E65DBB2}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{62D51463-FC16-4e0e-83B9-89AEC684F73C}" Type="WZUIImage" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{14E6B2C3-CC99-45cb-BCF8-3ED279B2F2BA}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{64CA5B43-D97B-4335-8F13-087BB0DBB64C}" Type="WZUIImage" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{B1994DAF-2F81-418a-893B-A8250406D641}" Type="WZUIContainer" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer AnchorPoint="0.5,1" GUID="{6C9CB2BD-7C5E-4873-9F1D-FBA918E8C348}" RelativePosition="0.5,0.8" RelativeSize="0.9,0.75" Type="WZUIContainer">
+            <WZUIScrollContainer Type="WZUIScrollContainer" Name="scrollDesc_WndWorldBossRule" NameCreate="True" EnableMoveHorizontal="False" RelativeSize="1,1" GUID="{4466B22A-C48A-44d3-82F4-59EEF6EFADC1}">
+                <MoveElement Type="WZUIContainer" AnchorPoint="0.5,1" RelativePosition="0.5,1" GUID="{A6E8C4CE-B623-4353-9E00-BE270ED3E90D}" RelativeSize="1,1">
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{739BB2B7-46F0-4c2a-B4A6-A804D43CEC85}" Name="ftbDesc_WndWorldBossRule" NameCreate="True" MaxWidth="200" AnchorPoint="0,0.5" RelativePosition="0.1,0.5" />
+                </MoveElement>
+            </WZUIScrollContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndWorldBossRule>

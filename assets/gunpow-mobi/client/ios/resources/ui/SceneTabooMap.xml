@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" ?>
+<SceneTabooMap GUID="{9E7CD7D9-35ED-4993-8D2F-523EBC50D977}">
+    <WZUIFrame Type="WZUIFrame" GUID="{6533D1C7-EB4A-4a6c-A10B-1A18E66C5D01}" NameCreate="True" Name="SceneTabooMap" LuaObjectName="SceneTabooMap" UseAbsSize="False" AbsContentSize="" Scale="1" LuaTouchBeganFunction="onTouchBegan" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{bec6ffa7-82f6-44db-8f8e-f6836c39697c}" Name="conBg_SceneTabooMap">
+            <WZUIImage Type="WZUIImage" GUID="{2a191125-8d38-4822-bcf6-cbc489023563}" File="ui/taboo/taboo_bg_hai.png" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{8faaeb7f-a67a-46e8-86c7-bca04b483eb8}" ShowAll="False" Name="conView_SceneTabooMap" RelativePosition="0.5,0.46" Visible="True">
+            <WZUIMoveContainer Type="WZUIMoveContainer" GUID="{adc6c833-6e9d-470c-a652-817382ee0a61}" UseAbsSize="False" AbsContentSize="1136,640" EnableMoveVertical="False" RelativePosition="0,0" ShowAll="False" RelativeSize="1,0.96" AnchorPoint="0,0" Name="conMove_SceneTabooMap" EnableMoveoutContainer="False">
+                <MoveElement Type="WZUIContainer" GUID="{bd3d1928-cd46-45b0-a7de-59554e2e1e0a}" AbsContentSize="1843,640" UseAbsSize="True" Visible="True" RelativePosition="0.187589,0.484397" AnchorPoint="0.5,0.5">
+                    <WZUIContainer Type="WZUIContainer" GUID="{92376f3d-4886-4c7f-8f34-ed11091e15d7}" Name="conViewBg_SceneTabooMap" Visible="True" ShowAll="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{555dcf30-da7d-4b08-a3a9-d107e9cd87cc}" File="ui/taboo/taboo_bg_jijizhidi.png" UseOriginSizeProportion="False" UseOriginSize="True" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{0776767d-e367-4dd6-8cb1-a2d1506b378e}" Name="conBtn_SceneTabooMap" Visible="True" ShowAll="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{03510e39-5ca5-43b6-a80c-9a73d3e0b4aa}" AbsContentSize="280,250" UseAbsSize="True" RelativePosition="0.18,0.655085" Name="conBtnPos1_SceneTabooMap">
+                            <WZUIContainer Type="WZUIContainer" GUID="{b2ca891d-0c04-44c2-a67f-083653104052}" AbsContentSize="150,120" UseAbsSize="True" RelativePosition="0.640115,0.688591" Name="conBtnSecPos1_SceneTabooMap" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{01dfcae5-c307-4e58-a875-1a9caa59019d}" AbsContentSize="280,250" UseAbsSize="True" RelativePosition="0.14,0.354113" Name="conBtnPos2_SceneTabooMap">
+                            <WZUIContainer Type="WZUIContainer" GUID="{e1210bfd-9240-47d1-bfd3-9562df0d01db}" AbsContentSize="150,120" UseAbsSize="True" RelativePosition="0.397273,0.586802" Name="conBtnSecPos2_SceneTabooMap" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{816f5d70-8108-45eb-8d8c-30ac3715bb94}" AbsContentSize="280,250" UseAbsSize="True" RelativePosition="0.325,0.357794" Name="conBtnPos3_SceneTabooMap">
+                            <WZUIContainer Type="WZUIContainer" GUID="{d2eed5ae-8d88-42f7-8891-6fb1fbaba202}" AbsContentSize="150,120" UseAbsSize="True" RelativePosition="0.348112,0.776017" Name="conBtnSecPos3_SceneTabooMap" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{9040fa6b-24d5-42ef-802b-8141b733169c}" AbsContentSize="280,250" UseAbsSize="True" RelativePosition="0.345,0.726676" Name="conBtnPos4_SceneTabooMap">
+                            <WZUIContainer Type="WZUIContainer" GUID="{c05744a3-37c0-494b-b54a-23cf9c013333}" AbsContentSize="150,120" UseAbsSize="True" RelativePosition="0.540109,0.74131" Name="conBtnSecPos4_SceneTabooMap" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{a36cfe81-49cf-4eff-9a7f-dd2cf504a3f1}" AbsContentSize="280,250" UseAbsSize="True" RelativePosition="0.5,0.639689" Name="conBtnPos5_SceneTabooMap">
+                            <WZUIContainer Type="WZUIContainer" GUID="{a56b96e2-7ef8-4f87-9a3f-d4c419a5d66d}" AbsContentSize="150,120" UseAbsSize="True" RelativePosition="0.605774,0.806556" Name="conBtnSecPos5_SceneTabooMap" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{cddbd096-400c-46b6-9d1a-c39e46d06c86}" AbsContentSize="280,250" UseAbsSize="True" RelativePosition="0.49,0.307" Name="conBtnPos6_SceneTabooMap">
+                            <WZUIContainer Type="WZUIContainer" GUID="{60310f28-8c10-476b-9bff-c62000ee925e}" AbsContentSize="150,120" UseAbsSize="True" RelativePosition="0.17006,0.802556" Name="conBtnSecPos6_SceneTabooMap" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{104e306e-8bc6-4482-b9a4-9662f9a9c0b7}" AbsContentSize="280,250" UseAbsSize="True" RelativePosition="0.65,0.335882" Name="conBtnPos7_SceneTabooMap">
+                            <WZUIContainer Type="WZUIContainer" GUID="{8a15f229-ee43-4ffe-83ce-144ab23ada3d}" AbsContentSize="150,120" UseAbsSize="True" RelativePosition="0.783735,0.726036" Name="conBtnSecPos7_SceneTabooMap" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{1f3684c3-abc0-467c-9e06-ebb5b05f58c5}" AbsContentSize="280,250" UseAbsSize="True" RelativePosition="0.665,0.727465" Name="conBtnPos8_SceneTabooMap">
+                            <WZUIContainer Type="WZUIContainer" GUID="{44cf940e-01c5-42a5-aa46-9ea54be631b8}" AbsContentSize="150,120" UseAbsSize="True" RelativePosition="0.602769,0.704124" Name="conBtnSecPos8_SceneTabooMap" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{0ab1a56b-a581-4cbd-abee-d8632695e10c}" AbsContentSize="280,250" UseAbsSize="True" RelativePosition="0.863945,0.689509" Name="conBtnPos9_SceneTabooMap">
+                            <WZUIContainer Type="WZUIContainer" GUID="{8b9d9c3b-98f8-45aa-9ee2-89c34637f5c2}" AbsContentSize="150,120" UseAbsSize="True" RelativePosition="0.717054,0.849855" Name="conBtnSecPos9_SceneTabooMap" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{98bfb001-57e1-439a-bb69-9b679203d7f6}" AbsContentSize="280,250" UseAbsSize="True" RelativePosition="0.763439,0.279366" Name="conBtnPos_SceneTabooMap">
+                            <WZUIContainer Type="WZUIContainer" GUID="{58d82d9d-7e34-469f-986b-dd9cf08b50df}" AbsContentSize="150,120" UseAbsSize="True" RelativePosition="0.605774,0.806556" Name="conBtnSecPos_SceneTabooMap" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{dd2b37bc-0ccf-496e-8b05-de2fb31019ad}" Visible="False" ShowAll="True">
+                        <WZUIImage Type="WZUIImage" GUID="{52480e84-ddf2-4327-9441-e2ca1a093c0e}" File="ui/taboo/taboo_yun_01.png" UseOriginSize="True" RelativePosition="0.711066,0.834729" />
+                        <WZUIImage Type="WZUIImage" GUID="{e0734baa-4f0e-4b59-9b78-a988f61db105}" File="ui/taboo/taboo_yun_01.png" UseOriginSize="True" RelativePosition="0.745598,0.66557" />
+                        <WZUIImage Type="WZUIImage" GUID="{724247e1-db02-4e46-bce3-f02f9aba9767}" File="ui/taboo/taboo_yun_01.png" UseOriginSize="True" RelativePosition="0.794058,0.806391" />
+                    </WZUIContainer>
+                </MoveElement>
+            </WZUIMoveContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{71088a86-93a0-4155-8f7a-82235fde5ff7}" ShowAll="True" Visible="True">
+                <WZUIImage Type="WZUIImage" GUID="{7af98e71-97d7-4e06-bca4-20452676ac06}" File="ui/taboo/taboo_yun_01.png" UseOriginSize="True" RelativePosition="1.01872,0.0622311" />
+                <WZUIImage Type="WZUIImage" GUID="{ea08f135-1ab2-4699-b32c-58050062db55}" File="ui/taboo/taboo_yun_01.png" UseOriginSize="True" RelativePosition="1.02471,0.909363" />
+                <WZUIImage Type="WZUIImage" GUID="{26373f84-b06d-4ea0-a119-c2d8096c2a82}" File="ui/taboo/taboo_yun_01.png" UseOriginSize="True" RelativePosition="0.0803732,-0.00318246" />
+                <WZUIImage Type="WZUIImage" GUID="{555a6079-ef52-46ff-b8f4-0223bee839cb}" File="ui/taboo/taboo_yun_01.png" UseOriginSize="True" RelativePosition="0.0593207,0.903585" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{201d7f85-ad4a-420d-8207-c2eb3e673753}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.056963,0.116541" Name="conRedBtn_SceneTabooMap" ShowAll="True">
+                <Button Type="WZUIButton" GUID="{7aaa221f-e72e-42b3-80aa-de3517341442}" LuaActionName="Normal" LuaDoneFunctionName="onBtnClick">
+                    <NormalElement Type="WZUIContainer" GUID="{b493d740-c10e-456b-9d13-5e490536a707}">
+                        <WZUIImage Type="WZUIImage" GUID="{6eb373d9-fcf1-4cac-8cad-eed0a73683d8}" File="ui/taboo/jinji_hezi3.png" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{f0e3918e-2e6b-4c15-ae23-42a4b263fdbc}">
+                        <WZUIImage Type="WZUIImage" GUID="{7ceaf24f-4b0f-47e2-bd97-d703e53ba335}" File="ui/taboo/jinji_hezi3.png" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{268dd067-1f64-49c4-82e3-1b7cb46d8747}" />
+                </Button>
+                <WZUIImage Type="WZUIImage" GUID="{ff124c5a-772e-4dcd-bf1e-6a8dcabdf318}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.81579,0.785714" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{75b74d40-07fe-4f5f-961b-52494131099a}" Text="已解锁" LabelStyleKey="C18_F18_S4_C5" RelativePosition="0.5,0.175" TextKey="TABOO_BOX_OPEN_ALREADY" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{37fe87d7-fd58-4aae-92a7-1dfba9ac07a8}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.94,0.125" Name="conPhantomBox_SceneTabooMap" ShowAll="True">
+                <Button Type="WZUIButton" GUID="{b7190f85-5f63-41b1-93d5-a5ae5e3331ea}" LuaActionName="Normal" LuaDoneFunctionName="onBtnPhantomBox">
+                    <NormalElement Type="WZUIContainer" GUID="{3f6a6f2e-995c-4587-b53c-1472fab4fd00}">
+                        <WZUIImage Type="WZUIImage" GUID="{58a92f0d-01f2-4c52-9777-0aa795f9445e}" File="ui/common/common_icon_kunan.png" UseOriginSize="True" Scale="0.6" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{9fe2ce2c-5608-4d69-a0af-8abdd65f9222}">
+                        <WZUIImage Type="WZUIImage" GUID="{2e70f97f-54ad-4a25-b953-7f5c6c82103c}" File="ui/common/common_icon_kunan.png" UseOriginSize="True" Scale="0.6" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{71467044-6298-405b-b8d0-58db97ec4d95}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{052b9fc7-de8c-4ed6-84eb-f152fe03085f}" Text="已解锁" LabelStyleKey="C18_F18_S4_C5" RelativePosition="0.5,0.1" TextKey="PHANTOM2" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneTabooMap>

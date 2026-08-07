@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" ?>
+<CellSelPrice GUID="{0EBF7797-75A0-4224-BC02-1F720466DB12}">
+    <WZUIContainer AbsContentSize="690,140" GUID="{DF8F2E27-C178-4c60-8590-9227FA5E1540}" LuaObjectName="CellSelPrice" Name="CellSelPrice" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{F16D385D-A2FF-423e-A564-5FF0A410D92B}" RelativePosition="0.5,0.5" AbsPosition="343,52">
+            <WZUI9Image Type="WZUI9Image" GUID="{705F3EDE-72AF-4c98-9FC3-ADA42CE0CE9D}" File="ui/common/common_scale9_di18.png" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{954C1CA8-55A5-4e85-A5C7-EA9D2ADABDF0}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.0333333,0.478571" TouchContainerEnable="True" RelativeSize="0.15,0.8" AnchorPoint="0,0.5" AbsPosition="23,67">
+                <WZUIContainer Type="WZUIContainer" GUID="{01B56E7F-0EF1-4248-93C2-774E497AA292}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.5,1" Name="conItem_CellSelPrice" NameCreate="True" TouchEnable="False" AnchorPoint="0.5,1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{2D9E0438-9BF4-40bd-B2E0-39957FE7FB88}" Color="255,236,193" Text="123" FontSize="20" RelativePosition="0.5,0" Name="txtShopName_CellSelPrice" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" AnchorPoint="0.5,0" />
+                <Button Type="WZUIButton" LuaDoneFunctionName="OnCheckSel" GUID="{1c2cc881-2354-4369-b74a-d8373d1ae4d6}">
+                    <NormalElement Type="WZUIContainer" GUID="{d9ac4270-941d-46dd-870d-9ec3234ca639}" />
+                    <SelectElement Type="WZUIContainer" GUID="{281e2298-c176-4ab2-995e-dee6ef5884f1}" />
+                    <DisableElement Type="WZUIContainer" GUID="{cada6067-ff89-4575-a81f-d721bad4f438}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{EAF150BD-4117-4bea-9C9C-D62278D9B0D2}" AbsContentSize="540,120" UseAbsSize="True" RelativePosition="0.594586,0.5" RelativeSize="1,0.9" AbsPosition="410.264,70">
+                <WZUIContainer Type="WZUIContainer" GUID="{055EA604-5D8B-4f2c-B156-BAD8277D07A9}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{531ED20A-E883-4606-9B73-4D99C0BC8D03}" File="ui/common/common_scale9_di9.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{5DC89417-EACA-41d2-9208-93F06C144F4D}" RelativeSize="0.94,0.82">
+                    <WZUICheckBoxGroup GUID="{314041BF-61DB-44cd-BA92-E96AC1EC8714}" Name="checkGroup_CellSelPrice" TouchContainerEnable="True" TouchEnable="True" Type="WZUICheckBoxGroup" Scale="1" ScaleX="1" ScaleY="1" AbsContentSize="" UseAbsSize="False" NameCreate="True">
+                        <CheckBox Type="WZUICheckBox" GUID="{C590F034-734A-477f-91E9-5E3B09C196D0}" AbsContentSize="160,96" UseAbsSize="True" RelativePosition="0,0.5" LuaSelectedFunctionName="" Name="checkboxPrice1_CellSelPrice" Tag="1" NameCreate="True" Visible="True" SelectedIndex="0" AnchorPoint="0,0.5" LuaCheckedFunctionName="OnCheckType1">
+                            <CheckElement Type="WZUIContainer" GUID="{8C5F616D-6E86-4c53-BBBC-42B7C0290B67}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{C9308F67-50E6-4667-98FE-12DDC63DF9FE}" File="ui/common/common_scale9_di7.png" />
+                            </CheckElement>
+                            <CheckElement Type="WZUIContainer" GUID="{28EFF3D8-BBA9-4e80-ADCB-63D3856755CE}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{46395BA7-4581-462d-91ED-DD07E5BABEA8}" File="ui/common/common_scale9_di7.png" />
+                                <WZUI9Image Type="WZUI9Image" GUID="{92608D40-47E2-4d2d-8238-97D1FF35EEC5}" File="ui/common/common_scale9_beibaodi_sel.png" AbsPosition="" UseOriginSizeProportion="False" UseOriginSize="False" RelativePosition="0.5,0.48" />
+                                <WZUIImage Type="WZUIImage" GUID="{9F76E9CE-F942-4d49-8F39-0158D9E6D792}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.908536,0.175926" />
+                            </CheckElement>
+                        </CheckBox>
+                        <CheckBox Type="WZUICheckBox" GUID="{2C18AD78-25B2-4770-9022-35982A96A5F8}" AbsContentSize="160,96" UseAbsSize="True" RelativePosition="0.5,0.5" LuaSelectedFunctionName="" Tag="2" Name="checkboxPrice2_CellSelPrice" NameCreate="True" Visible="False" SelectedIndex="0" LuaCheckedFunctionName="OnCheckType2">
+                            <CheckElement Type="WZUIContainer" GUID="{E15FCCEA-AD2F-412c-9ECD-17E14C697465}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{D1D16D30-303C-4dc0-BE84-715FC01F448A}" File="ui/common/common_scale9_di7.png" />
+                            </CheckElement>
+                            <CheckElement Type="WZUIContainer" GUID="{EB36BC14-5F5E-4cba-8E62-12280E27DA95}" AbsContentSize="">
+                                <WZUI9Image Type="WZUI9Image" GUID="{104A84F0-33B3-4165-8CBB-D85936982D85}" File="ui/common/common_scale9_di7.png" />
+                                <WZUI9Image Type="WZUI9Image" GUID="{F153A489-EA19-4217-9A6A-5B118F4CFD36}" File="ui/common/common_scale9_beibaodi_sel.png" AbsPosition="" UseOriginSizeProportion="False" UseOriginSize="False" RelativePosition="0.5,0.48" />
+                                <WZUIImage Type="WZUIImage" GUID="{75A15C52-7E11-4309-809A-C0E4B1971778}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.908536,0.175926" />
+                            </CheckElement>
+                        </CheckBox>
+                        <CheckBox Type="WZUICheckBox" GUID="{7C39F2F6-5654-4dba-A5A6-3D99C909B66B}" AbsContentSize="160,96" UseAbsSize="True" RelativePosition="1,0.5" LuaSelectedFunctionName="" Tag="3" Name="checkboxPrice3_CellSelPrice" NameCreate="True" Visible="False" AnchorPoint="1,0.5" LuaCheckedFunctionName="OnCheckType3">
+                            <CheckElement Type="WZUIContainer" GUID="{56ACD9AF-5B39-4938-8024-BE03EAD449ED}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{BA6A8CCF-BA8F-44e9-9CE6-20F5792EFE3A}" File="ui/common/common_scale9_di7.png" />
+                            </CheckElement>
+                            <CheckElement Type="WZUIContainer" GUID="{806F2662-A3FA-47c6-88C8-894F1EA9195A}" AbsContentSize="">
+                                <WZUI9Image Type="WZUI9Image" GUID="{3B58E2B5-7DE4-4faf-B461-BBB05F53A9AD}" File="ui/common/common_scale9_di7.png" />
+                                <WZUI9Image Type="WZUI9Image" GUID="{66805F2B-F332-4507-B836-56EBA3297552}" File="ui/common/common_scale9_beibaodi_sel.png" AbsPosition="" UseOriginSizeProportion="False" UseOriginSize="False" RelativePosition="0.5,0.48" />
+                                <WZUIImage Type="WZUIImage" GUID="{AE860BD9-9B54-4679-BA8A-A16E6135C1D6}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.908536,0.175926" />
+                            </CheckElement>
+                        </CheckBox>
+                    </WZUICheckBoxGroup>
+                    <WZUIContainer Type="WZUIContainer" GUID="{9B1B4AB1-C840-4c9f-A08A-22400054B5C7}" RelativePosition="0.5,0.5" Visible="True" AbsPosition="253.8,48.2">
+                        <WZUIContainer Type="WZUIContainer" GUID="{6E467CB3-0820-40c6-B749-38E7E63B35F5}" AbsContentSize="160,96" UseAbsSize="True" RelativePosition="0,0.5" Name="conDesc1_CellSelPrice" NameCreate="True" Visible="True" TouchEnable="False" TouchSwallow="True" AnchorPoint="0,0.5">
+                            <WZUIContainer Type="WZUIContainer" GUID="{7D1A63D2-1BC0-4548-A017-699E3D8B39B7}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.7" RelativeSize="0.8,0.35" TouchSwallow="True" TouchEnable="True" Visible="True">
+                                <WZUI9Image Type="WZUI9Image" GUID="{3728CB58-093D-48d4-97C7-5585DCD087DC}" File="ui/common/common_scale9_di63.png" TouchEnable="True" TouchSwallow="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9CDFA7FB-B9E1-4405-97A2-27CFEBF4DD97}" Name="txtDay1_CellSelPrice" NameCreate="True" Text="80个" FontSize="24" Color="255,227,116" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" TouchEnable="False" TouchSwallow="True" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{19443A8B-6090-4c3e-9028-CEFBC17D7A97}" AbsContentSize="" RelativeSize="1,0.5" RelativePosition="0.5,0.27">
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7D7434EE-A5E2-4e32-980D-1CB67BC26244}" AnchorPoint="0,0.5" RelativeSize="1,1" Text="" FontSize="24" Color="64,128,1" RelativePosition="0.34,0.5" Name="txtPrice1_CellSelPrice" NameCreate="True" Alignment="Left" LabelStyleKey="C6_F24" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{C0C888D5-E545-4b48-B12F-88194A93D7A7}" AbsContentSize="28,28" UseAbsSize="True" RelativePosition="0.243903,0.5" AbsPosition="40,27">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{8A65CED4-88FA-4b25-872D-03E2B2069A35}" File="shopitems/diamond.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.5,0.5" Name="imgIcon1_CellSelPrice" NameCreate="True" UseOriginSizeProportion="False" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{58A4E20F-6A09-440f-A259-334158706808}" RelativeSize="0.3,0.6" RelativePosition="0.777507,0.318952" Name="conDiscount1_CellSelPrice" Visible="False" TouchSwallow="False" AbsContentSize="76,68" UseAbsSize="True" NameCreate="True">
+                                <WZUIImage Type="WZUIImage" GUID="{2D8CB8B3-1E96-43d5-988C-DA62AE1C00A2}" File="ui/common/common_icon_zhe.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{96810F49-BF4D-4a95-B451-FE16FA0611AB}" File="ui/common/common_num_shangcheng2.png" UseOriginSize="True" RelativePosition="0.856567,0.464855" Rotation="-45" />
+                                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{AA875F37-E8C3-4208-BE6A-2FCADF6CC370}" Name="labCnt1_CelllSelCount" CharMapFileName="ui/common_num/common_num_shangcheng.png" Height="22" Width="16" Text="08" RelativePosition="0.607643,0.222894" Alignment="Center" AnchorPoint="0.5,0.5" UseOriginSize="True" Visible="True" Rotation="-45" NameCreate="True" StartChar="48" />
+                                <WZUIImage Type="WZUIImage" GUID="{3CAFBAB3-82DA-4e75-807C-F31B6E13F639}" File="ui/common/common_num_shangchengdiandian.png" UseOriginSize="True" RelativePosition="0.696392,0.165777" Name="imgNumPoint1_CelllSelCount" NameCreate="True" Visible="False" isValid="True" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{63E31025-CCBC-46f7-BDD8-ABDD59934CF7}" AbsContentSize="160,96" UseAbsSize="True" Name="conDesc2_CellSelPrice" NameCreate="True" Visible="False" TouchSwallow="True" TouchEnable="False">
+                            <WZUIContainer Type="WZUIContainer" GUID="{73668C3B-751F-4f41-9473-0915FB8EDDA8}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.7" RelativeSize="0.8,0.35" TouchSwallow="True">
+                                <WZUI9Image Type="WZUI9Image" GUID="{B659B01C-C540-4565-942D-4B066DD66178}" File="ui/common/common_scale9_di63.png" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7B88A609-BD90-449e-AAD1-07B558E30B83}" Name="txtDay2_CellSelPrice" NameCreate="True" Text="80个" FontSize="24" Color="255,227,116" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" TouchEnable="False" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{819E9D38-BBDB-45e3-AA58-D58717814315}" AbsContentSize="" RelativeSize="1,0.5" RelativePosition="0.5,0.27" TouchSwallow="True">
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{CCF88BE5-42FD-4868-915D-74AC0D00C210}" AnchorPoint="0,0.5" RelativeSize="1,1" Text="" FontSize="24" Color="64,128,1" RelativePosition="0.34,0.5" Name="txtPrice2_CellSelPrice" NameCreate="True" Alignment="Left" LabelStyleKey="C6_F24" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{F25A92B2-28AF-4213-88C8-157036653B60}" AbsContentSize="28,28" UseAbsSize="True" RelativePosition="0.243903,0.5" AbsPosition="40,27">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{87FD36CB-10B9-4a3f-84CB-D24E7CEA5D2C}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.5,0.5" Name="imgIcon2_CellSelPrice" NameCreate="True" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{481AF3D8-7085-4061-B364-D306B6D70918}" RelativeSize="0.3,0.6" RelativePosition="0.777507,0.318952" Name="conDiscount2_CellSelPrice" Visible="False" TouchSwallow="False" AbsContentSize="76,68" UseAbsSize="True" NameCreate="True">
+                                <WZUIImage Type="WZUIImage" GUID="{441B3832-146B-40a5-9DA1-F75ACC9F3F48}" File="ui/common/common_icon_zhe.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{6EC536C9-D013-4ddf-B383-1A8EE3E62F9F}" File="ui/common/common_num_shangcheng2.png" UseOriginSize="True" RelativePosition="0.856567,0.464855" Rotation="-45" />
+                                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{64AE9442-1919-42f7-A1B0-B6E74F7FC636}" Name="labCnt2_CelllSelCount" CharMapFileName="ui/common_num/common_num_shangcheng.png" Height="22" Width="16" Text="08" RelativePosition="0.607643,0.222894" Alignment="Center" AnchorPoint="0.5,0.5" UseOriginSize="True" Visible="True" Rotation="-45" NameCreate="True" StartChar="48" />
+                                <WZUIImage Type="WZUIImage" GUID="{2D1BFABF-194F-42d4-B0FA-F22E7F7F6665}" File="ui/common/common_num_shangchengdiandian.png" UseOriginSize="True" RelativePosition="0.696392,0.165777" Name="imgNumPoint2_CelllSelCount" NameCreate="True" Visible="False" isValid="True" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{FBFD938C-F11F-4a96-BE16-911F0B00105C}" AbsContentSize="160,96" UseAbsSize="True" Name="conDesc3_CellSelPrice" NameCreate="True" Visible="False" RelativePosition="1,0.5" RelativeSize="1,1" TouchSwallow="True" TouchEnable="False" AnchorPoint="1,0.5">
+                            <WZUIContainer Type="WZUIContainer" GUID="{EAC591E2-DE2D-458e-8603-1B563D3BC047}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.7" RelativeSize="0.8,0.35" TouchSwallow="True">
+                                <WZUI9Image Type="WZUI9Image" GUID="{01DBE906-DBA6-4d30-9C4E-0AC01F92C36E}" File="ui/common/common_scale9_di63.png" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{EF19E47C-9274-4bce-B055-E6AD87BF38B2}" Name="txtDay3_CellSelPrice" NameCreate="True" Text="80个" FontSize="24" Color="255,227,116" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" TouchEnable="False" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{835F2A63-B6C8-4af9-AC7B-97ED1B2E0F48}" AbsContentSize="" RelativeSize="1,0.5" RelativePosition="0.5,0.27">
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{4336409A-22C0-43d0-8788-BA3774D01AEC}" AnchorPoint="0,0.5" RelativeSize="1,1" Text="" FontSize="24" Color="64,128,1" RelativePosition="0.34,0.5" Name="txtPrice3_CellSelPrice" NameCreate="True" Alignment="Left" LabelStyleKey="C6_F24" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{E982AD86-9DD5-4f1b-9DA8-AE6D345EA678}" AbsContentSize="28,28" UseAbsSize="True" RelativePosition="0.243903,0.5" AbsPosition="40,27">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{22EE93C4-8021-45e7-8CEC-57F1DCAF4A4F}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.5,0.5" Name="imgIcon3_CellSelPrice" NameCreate="True" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{0B2A49AF-AC67-459f-9A9D-7F644122A82C}" RelativeSize="0.3,0.6" RelativePosition="0.777507,0.318952" Name="conDiscount3_CellSelPrice" Visible="False" TouchSwallow="False" AbsContentSize="76,68" UseAbsSize="True" NameCreate="True">
+                                <WZUIImage Type="WZUIImage" GUID="{FD98E1B1-E46A-47e1-932D-012B391F4C65}" File="ui/common/common_icon_zhe.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{3F1DEBE4-1D51-4837-BCD9-084AE5D922C1}" File="ui/common/common_num_shangcheng2.png" UseOriginSize="True" RelativePosition="0.856567,0.464855" Rotation="-45" />
+                                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{32FD182E-15B3-43ec-B4AC-34E892ED6BCA}" Name="labCnt3_CelllSelCount" CharMapFileName="ui/common_num/common_num_shangcheng.png" Height="22" Width="16" Text="08" RelativePosition="0.607643,0.222894" Alignment="Center" AnchorPoint="0.5,0.5" UseOriginSize="True" Visible="True" Rotation="-45" NameCreate="True" StartChar="48" />
+                                <WZUIImage Type="WZUIImage" GUID="{6B184DFA-A708-4cd8-A42A-131528ED4E18}" File="ui/common/common_num_shangchengdiandian.png" UseOriginSize="True" RelativePosition="0.696392,0.165777" Name="imgNumPoint3_CelllSelCount" NameCreate="True" Visible="False" isValid="True" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUI9Image Type="WZUI9Image" GUID="{C94C9C1F-B87B-470f-97A3-06AB74B68F29}" File="ui/common/common11.png" Visible="False" Name="imgNoSel_CellSelPrice" TouchEnable="False" TouchSwallow="False" />
+            <WZUI9Image Type="WZUI9Image" GUID="{e707bbeb-75e2-4d9d-8e56-daf5250ebc6e}" File="ui/common/common11.png" Visible="False" Name="imgNoSel1_CellSelPrice" TouchEnable="True" TouchSwallow="True" Opacity="0" ScaleX="0.8" RelativePosition="0.6,0.5" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellSelPrice>

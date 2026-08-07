@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CellTaskNameAndDesc GUID="{BDE57303-6D82-4dd1-B37D-751F0B850B15}">
+    <WZUIContainer AbsContentSize="680,130" GUID="{FBE4C6F3-F9CA-43fe-80FB-42965EE56602}" LuaObjectName="CellTaskNameAndDesc" Name="CellTaskNameAndDesc" NameCreate="True" RelativePosition="0.5,0.56" TouchSwallow="False" Type="WZUIContainer" UseAbsSize="True">
+        <WZUILabelTTF AnchorPoint="0,1" Color="255,234,0" FontSize="26" GUID="{DA5B241E-4E70-4749-8333-AADA1FF0FF0F}" Name="txtTaskName_CellTaskNameAndDesc" RelativePosition="0.02,1.0" Text="" Type="WZUILabelTTF" />
+        <WZUIContainer AbsContentSize="650,34" GUID="{03104939-6A8B-4234-86AD-126A8B5C7148}" RelativePosition="0.475,0.65" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIContainer AbsContentSize="207,37" AnchorPoint="0,1" GUID="{926D2FEE-F7B9-4dd3-9D72-64DBD601B3CF}" RelativePosition="0,1" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="ui/bottomMenu/task/task_01.png" GUID="{34C67EA2-84DC-4b76-816B-E0BCCF86837B}" Type="WZUI9Image" />
+                <WZUILabelTTF Color="36,0,0" FontSize="24" GUID="{11C7386E-F298-44ab-8D89-5427BF85FCA8}" Name="txtTitle_CellTaskNameAndDesc" Text="任务目标" Type="WZUILabelTTF" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="700,50" GUID="{199583C1-10DE-4414-9F1B-D1AF8FF5306F}" Name="con_taskDesc" RelativePosition="0.53,0.25" RelativeSize="1,1" TouchContainerEnable="True" TouchSwallow="False" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+            <WZUILabelTTF Alignment="Left" AnchorPoint="0,0" Color="255,255,255" Dimensions="570,0" FontSize="24" GUID="{28701ED2-D2B7-484d-AB37-2898D8B7C155}" Name="txtDesc_CellTaskNameAndDesc" RelativePosition="0.02,0" Text="" Type="WZUILabelTTF" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTaskNameAndDesc>

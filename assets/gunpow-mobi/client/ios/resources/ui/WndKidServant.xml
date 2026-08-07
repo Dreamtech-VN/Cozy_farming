@@ -1,0 +1,56 @@
+﻿<WndKidServant GUID="{5310964e-01b9-454b-ac7e-02c0103bf067}">
+    <WZUIWindow Type="WZUIWindow" GUID="{9de918b2-2cac-447e-9136-c8628dc0293e}" AbsContentSize="760,468" UseAbsSize="True" Name="WndKidServant" LuaObjectName="WndKidServant" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{c2aabad9-1a3b-4371-8c92-cc400c2be6eb}" Name="conNoServant_WndKidServant" AbsContentSize="746,452" UseAbsSize="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{bad2185f-9ead-4fe7-b13a-15efcb00146d}" File="ui/bag/common_scale9_js4.png" Opacity="255" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{131918a2-38bf-4ecd-9bb6-1c4acd7f918f}" FontSize="30" Color="255,227,116" Name="txtTitle1_WndKidServant" RelativePosition="0.5,0.92" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" />
+            <WZUIContainer Type="WZUIContainer" GUID="{7d44f5db-8a94-4736-9e2c-68fc4c09a4a0}" Name="conForAni1_WndKidServant" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.5,0.55" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5539ab02-c3e1-4bf1-9f46-9e7d38deb7aa}" Name="txtDesc1_WndKidServant" Color="79,60,48" FontSize="22" Dimensions="750,0" RelativePosition="0.5,0.23" />
+            <Button Type="WZUIButton" GUID="{eb9530b4-9817-49c9-8be5-6eb290f23899}" AbsContentSize="142,65" UseAbsSize="True" LuaActionName="Normal" LuaDoneFunctionName="onClickServant" RelativePosition="0.5,0.1" Tag="1">
+                <NormalElement Type="WZUIContainer" GUID="{75038877-cdf8-41ac-ba44-4606c6853352}">
+                    <WZUIImage Type="WZUIImage" GUID="{6ce4ecb3-7294-4f43-8509-e9c1c7cb27e4}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{bdde0c1a-662a-4af0-9c93-0bb3e5458c01}">
+                    <WZUIImage Type="WZUIImage" GUID="{2ddeed6d-fe5d-4a3c-b44c-5e54b6128a27}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{d1b83f43-72b8-4b20-9764-3d8e3d1a7d9a}" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{3eb4821d-07b3-4684-85ef-fc1052ffb5e5}" Name="ftxtCost_WndKidServant" MaxWidth="140" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{a9831608-f3a5-44a4-8593-06b03c3e0f28}" Name="conHaveServant_WndKidServant" Visible="True" AbsContentSize="746,452" UseAbsSize="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{0f0b3802-f3c4-45e3-8a91-0ba083d6fb66}" Name="conLeft_WndKidServant" RelativeSize="0.5,1" RelativePosition="0.25,0.5" AbsContentSize="360,438" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{f017d50f-3ba1-4aca-a796-66bfd2625a48}" File="ui/family/other/common_scale9_family.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{08fd4dbc-3713-4a2d-9cf8-f787265722d4}" FontSize="30" Color="255,227,116" Name="txtTitle2_WndKidServant" RelativePosition="0.5,0.93" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" />
+                <WZUIContainer Type="WZUIContainer" GUID="{d0e22b06-d78c-4748-b8da-657be498f145}" Name="conForAni2_WndKidServant" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.5,0.57" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8793e076-bd7a-4042-9bfc-468a05dd312c}" Name="txtDesc2_WndKidServant" Color="79,60,48" FontSize="20" Dimensions="320,0" RelativePosition="0.08,0.23" AnchorPoint="0,0.5" Alignment="Left" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{d1551ee7-5c70-40a4-87c0-9918a86dfaad}" Name="ftxtLeftTime_WndKidServant" MaxWidth="380" RelativePosition="0.5,0.065" AnchorPoint="0.5,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{f4ab6427-d1c4-47cb-a74d-fe379cfa5ee4}" Name="conRight_WndKidServant" RelativeSize="0.5,1" RelativePosition="0.75,0.5" AbsContentSize="360,438" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{f763a09f-9aff-4b94-a40f-7b316bc34558}" File="ui/family/other/common_scale9_family.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a3325037-93cf-4e13-8489-e3b3dba01c8f}" FontSize="24" Color="255,227,116" Name="txtChooseAtt_WndKidServant" RelativePosition="0.03,0.94" AnchorPoint="0,0.5" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" />
+                <WZUIContainer Type="WZUIContainer" GUID="{df105ff8-093c-4ffd-b814-7052a2afd9c2}" AbsContentSize="360,316" UseAbsSize="True" RelativePosition="0.5,0.55" Name="conList_WndKidServant">
+                    <WZUIContainer Type="WZUIContainer" GUID="{651fd569-6b55-4a83-b4dd-ddcceb99fd09}" Name="conItem1_WndKidServant" AbsContentSize="340,42" UseAbsSize="True" RelativePosition="0.5,0.9" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{951bc08d-8543-4a6b-86f6-2d4c26bcd700}" Name="conItem2_WndKidServant" AbsContentSize="340,42" UseAbsSize="True" RelativePosition="0.5,0.7" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{ce207c37-6361-463e-b625-59f15618111d}" Name="conItem3_WndKidServant" AbsContentSize="340,42" UseAbsSize="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{7fa82d30-dcd6-478a-8bdb-3f66af71b3e8}" Name="conItem4_WndKidServant" AbsContentSize="340,42" UseAbsSize="True" RelativePosition="0.5,0.3" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{807857c6-bd04-4b30-9ad4-4d343369856b}" Name="conItem5_WndKidServant" AbsContentSize="340,42" UseAbsSize="True" RelativePosition="0.5,0.1" />
+                </WZUIContainer>
+                <Button Type="WZUIButton" GUID="{90d6e85f-949a-45ae-8f2e-752c499c0d05}" AbsContentSize="142,65" UseAbsSize="True" LuaActionName="Normal" LuaDoneFunctionName="onClickServant" RelativePosition="0.5,0.1" Tag="2">
+                    <NormalElement Type="WZUIContainer" GUID="{ab7fe1f1-9386-4c88-9471-d0ac5c1aaa03}">
+                        <WZUIImage Type="WZUIImage" GUID="{9942e8c5-a492-4131-ad59-5afbe8dec9e0}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{357b8ad6-9ee2-4ce3-9e46-b7a7c38912ff}">
+                        <WZUIImage Type="WZUIImage" GUID="{e3c9b5b1-cda7-48b7-89ec-5553cc5b169b}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{71d04e1a-9092-4217-a0f5-138765955017}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4ed585d7-f225-4343-8b11-26bfb352f608}" TextKey="KID_TEXT16" LabelStyleKey="NORMAL_GREEN_BTN" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{a4a2223a-bc49-403b-9116-fc30d154576a}" Name="btnRule_WndKidServant" LuaDoneFunctionName="onClickRule" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.0381901,0.941982" Visible="True" LuaActionName="Normal">
+            <NormalElement GUID="{537b8ebf-bbf9-44e4-a8b1-1a6e7908f9ce}" Type="WZUIContainer" />
+            <SelectElement GUID="{34d3c599-af3e-427e-bdb1-8a28003ea55b}" Type="WZUIContainer" />
+            <DisableElement Type="WZUIContainer" GUID="{31fa13f5-44fb-4e30-bd4c-0c77bbc300d2}" />
+            <WZUIImage Type="WZUIImage" GUID="{0defcaef-3ebe-4e2b-af29-db9e68a1f9b3}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+        </Button>
+    </WZUIWindow>
+</WndKidServant>

@@ -1,0 +1,42 @@
+<WndWelfare GUID="{7e5afd20-0b0b-4854-bce5-97eda5eadbac}">
+    <WZUIWindow Type="WZUIWindow" GUID="{7d3db8c6-f042-4d0d-91ae-59da1519335b}" AbsContentSize="775,535" LuaObjectName="WndWelfare" Name="WndWelfare" NameCreate="True" UseAbsSize="True" LuaTouchBeganFunction="onTouchBegan" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{68341ef3-6a04-4e97-9795-6ee266172143}" AbsContentSize="778,538" UseAbsSize="True" RelativePosition="0.5,0.5" ShowAll="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{37d995d3-a00b-4863-8a26-de65b75d2526}" Visible="True" Order="-2">
+                <WZUIContainer Type="WZUIContainer" GUID="{612ff85d-7746-4439-b0e1-9aa815356a76}" AnchorPoint="1,0.5" AbsContentSize="387.5,538" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{11cb94eb-85a3-4e3e-95e3-3e2fd5108abe}" File="ui/common/common_scale9_di3.png" CapInsets="92,80,1,1" ShowRect="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{94cba407-b470-4a9e-bfca-5341684a9b75}" AnchorPoint="0,0.5" AbsContentSize="387.5,538" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{71e50b4c-d695-47b8-9f38-4f57346cab58}" File="ui/common/common_scale9_di3.png" CapInsets="92,80,1,1" ShowRect="False" FlipX="False" ScaleX="-1" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{64fa01a1-bac6-4fb0-9c53-d4a8e32cd45b}" AbsContentSize="90,65" UseAbsSize="True" RelativePosition="0.941132,0.94254">
+                    <WZUIImage Type="WZUIImage" GUID="{aaa22d77-2a9f-4a9a-b420-c4d31d41631a}" File="ui/common/common_icon_gb.png" UseOriginSize="True" RelativePosition="0.5,0.53077" AbsPosition="45,34.5" />
+                    <Button Type="WZUIButton" RelativePosition="0.55,0.5" AbsContentSize="90,65" UseAbsSize="True" GUID="{054217ef-abce-41da-ac77-eb84ee35f44d}" LuaDoneFunctionName="onCloseClick" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{0b4ab4c7-b7ca-41d7-bb2e-0b401751be05}">
+                            <WZUIImage Type="WZUIImage" GUID="{a31b3f2e-7c8e-4d9f-ab3c-ac3c2a6bbab6}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{a0771c9d-1467-4cd9-933a-aef97d53dd92}">
+                            <WZUIImage Type="WZUIImage" GUID="{304f42fd-feb7-4da3-bc7b-d0dbdef12ff9}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{9692e92e-39a7-434c-b386-54383428c1b4}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{1aac2b0f-7d55-4dcd-9730-dc7827396c95}" AbsContentSize="640,40" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.953084">
+                    <WZUI9Image Type="WZUI9Image" GUID="{745e584e-b980-432c-a749-6b9ced28c119}" File="ui/common/common_icon_xhd.png" Opacity="153" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{48d58451-65af-41e2-a256-00fcc9d51292}" AbsContentSize="70,50" UseAbsSize="True" RelativePosition="0.5,0.969346">
+                    <WZUIImage Type="WZUIImage" GUID="{fd0389ab-e804-4cc2-ab46-61a390cd7e81}" File="ui/common/common_icon_hongchouzi2.png" UseOriginSize="True" AnchorPoint="1,0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{374bd10d-084b-4ae1-b18d-8cdb516d0c74}" File="ui/common/common_icon_hongchouzi2.png" UseOriginSize="True" AnchorPoint="1,0.5" ScaleX="-1" />
+                    <WZUIImage Type="WZUIImage" GUID="{9d08934f-a840-44d2-928b-5dc9dc9ea4e7}" File="" UseOriginSize="True" RelativePosition="0.5,0.36" Name="imgTitle_WndWelfare" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{a62579a0-f263-4841-8a1c-5764ce38eb32}" AbsContentSize="502,453" UseAbsSize="True" RelativePosition="0.651953,0.451564">
+                <WZUI9Image Type="WZUI9Image" GUID="{af6c759a-5b17-4989-8a46-7ccb08b19dc2}" File="ui/common/common_scale9_di12.png" Opacity="255" Name="img9GrayBg_WndWelfare" />
+                <WZUIContainer AbsContentSize="502,453" GUID="{97210c6c-f13e-4819-b223-95bd771d812e}" Name="conContext_WndWelfare" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{cf5aa199-7957-4e41-b219-d9d6554a9bc2}" AbsContentSize="231,453" UseAbsSize="True" RelativePosition="0.171772,0.450122" Order="-1">
+                <WZUI9Image Type="WZUI9Image" GUID="{ce0f5441-a671-4eca-9624-c5836939741b}" File="ui/common/common_scale9_di12.png" Opacity="255" RelativeSize="1,1" />
+                <WZUIFreeListContainer AbsContentSize="231,427" EnableMoveHorizontal="False" GUID="{5e0e2ffe-1b7e-480a-bd6c-23cd49dbcafa}" Name="flListItem_WndWelfare" RelativePosition="0.5,0.504415" Type="WZUIFreeListContainer" UseAbsSize="True" Visible="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndWelfare>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" ?>
+<CellCommunityList GUID="{36134919-B483-439b-BDC2-4B23A62D9569}">
+    <WZUIContainer AbsContentSize="875,75" GUID="{BC4807B7-A5B2-4856-8044-8849140867BF}" LuaObjectName="CellCommunityList" Name="CellCommunityList" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <Button AbsContentSize="875,75" GUID="{3f71558a-03fb-4766-a0f1-e82913e44872}" LuaDoneFunctionName="onBtnClickEvent" Name="btnClick_CellCommunityList" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIButton" UseAbsSize="True" Visible="True">
+            <NormalElement GUID="{d5046c7e-c173-405f-9b15-d2badf471c2b}" RelativePosition="0.5,0.5" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{268819ec-6f65-49f3-8a0d-a9e0f8a30ab6}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Name="imgBtn1_CellCommunityList" />
+            </NormalElement>
+            <SelectElement GUID="{db03784c-2f0c-44c2-856c-6194a2a96c58}" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{02d97fc3-cef5-4749-b85b-84c238d489f0}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Name="imgBtn2_CellCommunityList" />
+            </SelectElement>
+            <DisableElement GUID="{2c35d033-6c60-4cfe-9497-df97343260a1}" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{4c988ed0-556f-4305-9e11-f41767e2b654}" Name="imgBtn3_CellCommunityList" File="ui/common/common_scale9_di7.png" />
+            </DisableElement>
+        </Button>
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="158,0,0" FontSize="22" GUID="{06425e65-35d2-4ef3-a205-696179e752a3}" Name="txtRanking_CellCommunityList" RelativePosition="0.07,0.5" Text="100" Type="WZUILabelTTF" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="127,70,26" FontSize="20" GUID="{11d2396b-b0a1-4be6-a8ef-52117dde453b}" Name="txtCommunityId_CellCommunityList" RelativePosition="0.32,0.31" Text="ID:123456" Type="WZUILabelTTF" Alignment="Center" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" ChineseLengthPolicy="1" Color="229,105,22" Dimensions="0,0" FontSize="20" GUID="{41b7f688-f7e1-4dc1-9e35-9fb9de9a5824}" MaxLength="22" Name="txtCommunityName_CellCommunityList" RelativePosition="0.32,0.7" Text="LV12 公会名称名称" Type="WZUILabelTTF" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="127,70,26" FontSize="20" GUID="{e5fabff8-c09c-4991-bd88-b6635f5748e5}" Name="txtCommunityPrestige_CellCommunityList" RelativePosition="0.645,0.5" Text="公会威望" Type="WZUILabelTTF" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="127,70,26" FontSize="20" GUID="{1efb0240-560f-472f-9d6f-6d1ec8eca0fc}" Name="txtCommunityLimit_CellCommunityList" RelativePosition="0.88,0.5" Text="公会威望" Type="WZUILabelTTF" />
+        <WZUIImage Type="WZUIImage" GUID="{275a7126-756f-4b32-aa79-d4e62219f212}" File="ui/common/common_icon_1st.png" UseOriginSize="True" RelativePosition="0.07,0.53" Name="imgName_CellCommunityList" Visible="False" />
+        <Button Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.92,0.51" GUID="{4cd449a8-1a48-4c4c-9b8d-b3a6dbb99470}" LuaDoneFunctionName="onApply" Name="btnApply" Visible="False" TouchContainerEnable="False" TouchEnable="True" LuaActionName="Normal" AbsPosition="722.85,36.4142">
+            <NormalElement Type="WZUIContainer" GUID="{4d406518-2b83-47f0-8536-6f78bbf71219}">
+                <WZUI9Image Type="WZUI9Image" GUID="{22d2ff35-2649-4ed5-aa66-c4f2588ddd06}" File="ui/common/common_btn_anniu7.png" UseOriginSize="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8a1d1f7b-c2ee-4247-a576-8807c7df068f}" TextKey="APPLY" FontSize="24" Color="255,236,193" RelativePosition="0.5,0.5" EnableStroke="True" BoldFont="True" StrokeColor="105,65,46" StrokeSize="4" LabelStyleKey="" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{23eaaf4b-a27a-4a0d-9ade-8e4d40cbb25e}">
+                <WZUI9Image Type="WZUI9Image" GUID="{6b710768-de48-4971-95cb-918589b3919b}" File="ui/common/common_btn_anniu7_sel.png" UseOriginSize="False" Scale="1" RelativePosition="0.5,0.5" AbsPosition="58,28" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d2a4cdf9-2665-4a56-b7d5-ab04d5f3c0b0}" TextKey="APPLY" FontSize="24" Color="255,236,193" RelativePosition="0.5,0.5" EnableStroke="True" BoldFont="True" StrokeColor="105,65,46" StrokeSize="4" LabelStyleKey="" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{189ad234-fcae-436b-9213-5552d048fa5d}">
+                <WZUI9Image Type="WZUI9Image" GUID="{e0545041-ad49-4866-b77b-36e7bd897966}" File="ui/common/common_btn_anniu7.png" UseOriginSize="False" GrayRender="True" RelativePosition="0.5,0.5" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{dbf55a1c-4d07-453f-ad0e-6831ff69ad21}" Text="" FontSize="24" Color="158,139,121" TextKey="APPLY1" LabelStyleKey="" RelativePosition="0.5,0.5" BoldFont="True" />
+            </DisableElement>
+        </Button>
+    </WZUIContainer>
+</CellCommunityList>

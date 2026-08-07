@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WndSuggestion GUID="{4291B0FF-24A0-4df7-BAA6-65F57B66AC62}">
+    <WZUIWindow AbsContentSize="700,540" AbsPosition="480,320" GUID="{A447CCC6-1A15-4913-BF04-E1B6D35DFC0C}" LuaObjectName="WndSuggestion" LuaTouchBeganFunction="" LuaTouchEndedFunction="onTouchBegin" Name="WndSuggestion" NameCreate="True" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="700,580" AnchorPoint="0.5,1" GUID="{8F24542B-0197-481b-9C75-AF995F519C6A}" RelativePosition="0.5,0.95" RelativeSize="0.98,0.92" Type="WZUIContainer" UseAbsSize="False">
+            <WZUI9Image CapInsets="10,10,174,192" File="common/Jigsaw/3.png" GUID="{D81D879B-F673-4d67-BBF4-3DD9823015F2}" RelativeSize="1,1" Type="WZUI9Image" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="694,86" AnchorPoint="0.5,1" GUID="{23C4451D-A1E2-4cd7-9913-CB7CFA241778}" RelativePosition="0.504,1" RelativeSize="1,0.15" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image CapInsets="150,20,500,23" File="common/Jigsaw/5.png" GUID="{42084247-C37B-41d1-86FB-2975F41E64E0}" Type="WZUI9Image" />
+        </WZUIContainer>
+        <WZUIContainer AnchorPoint="0.5,1" GUID="{9DEEA0A7-2F33-46f5-8D6B-8EBDE1A5714A}" RelativePosition="0.5,1" RelativeSize="1,0.14" Type="WZUIContainer">
+            <WZUIContainer AbsContentSize="350,60" AnchorPoint="0.5,0.5" GUID="{E05D0522-1543-4bf6-B8F9-C18E5DAAA1C1}" RelativePosition="0.5,0.433862" RelativeSize="0.5,1" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage AnchorPoint="0.5,0.5" File="common/text/text_bug_title.png" GUID="{F13D6271-355C-4aeb-B9C1-FF9C8C636A56}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" />
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="1,1" GUID="{8BBC9F74-6B57-45ae-A9D9-6B9E0A95606C}" RelativePosition="1,0.96" RelativeSize="0.12,1" Type="WZUIContainer">
+                <Button GUID="{DF61D2F0-9E68-40f1-A515-9BF6D391F15C}" LuaDoneFunctionName="onCloseClick" Type="WZUIButton">
+                    <NormalElement GUID="{E2919022-85A0-4cb4-A4C1-927C44DCDE69}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="common/button/close.png" GUID="{A03C3D00-7555-4775-94D2-3772508D6C78}" Type="WZUIImage" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{1F871EA6-00BB-438c-BA67-10E590DC70C2}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="common/button/close_sel.png" GUID="{368C18CF-5593-4165-8B3C-7486D48CC434}" Type="WZUIImage" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{B625CC5F-8C2B-4494-BEE9-956F6AA63984}" Type="WZUIContainer">
+                        <WZUIImage File="common/button/close_not.png" GUID="{22FCEB61-0DDD-4d66-982C-D454E835E986}" Type="WZUIImage" UseOriginSize="True" />
+                    </DisableElement>
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{13F37F19-8C68-47ac-8C18-363EA6732774}" RelativePosition="0.5,0.398889" RelativeSize="0.82,0.6" Type="WZUIContainer" Visible="True">
+            <WZUIContainer AnchorPoint="0.5,1" GUID="{7FEEBD3D-7E50-45fe-B497-FB4C6FB0DD16}" RelativePosition="0.5,0.981481" RelativeSize="1,0.75" Type="WZUIContainer">
+                <WZUI9Image File="common/Jigsaw/property_okay_po.png" GUID="{958467FC-33CE-4e77-884B-1F931C6E0841}" Type="WZUI9Image" />
+                <WZUIContainer GUID="{98FF8376-E59D-411e-96B8-81611468CBB2}" RelativeSize="0.96,0.92" Type="WZUIContainer">
+                    <WZUIEditBox BgPicture="ui/common/transparent_bg.png" ChinesePlaceholderNum="2" Color="0" Dimensions="550,0" FontColor="255,255,255" FontSize="30" GUID="{ED17544F-FCA8-4dac-9C42-936F1B4DC5D1}" KeyBordReturnType="TypeDone" MaxLength="150" MultiLine="True" Name="editEnter_WndSuggestion" PlaceholderFontColor="128,128,128" Type="WZUIEditBox" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="500,66" AnchorPoint="0.5,1" GUID="{ECE381C3-398A-4454-85A3-B34EBA3EDABA}" RelativePosition="0.501742,0.187654" RelativeSize="0.88,0.2" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIContainer AbsContentSize="135,71" AnchorPoint="0.5,0.5" GUID="{C4F14F4E-D054-41b9-8D22-F79DB42EF122}" RelativePosition="0.5,0.5" RelativeSize="0.24,1" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUIButton GUID="{DA829EAE-18AE-4c7b-8D17-45235347A90A}" LuaDoneFunctionName="onSureClick" RelativePosition="0.5,0.5" Type="WZUIButton">
+                        <NormalElement GUID="{172A9107-E32A-4768-9B09-0FE16FEA53C1}" Type="WZUIContainer">
+                            <WZUI9Image CapInsets="0,0,0,0" File="common/button/button_2.png" GUID="{32B0BD04-D60B-499b-A470-EBF11A873CF3}" Type="WZUI9Image" />
+                        </NormalElement>
+                        <SelectElement GUID="{3D0D2D19-335F-4043-A6B5-008682CB4E4C}" Type="WZUIContainer">
+                            <WZUI9Image CapInsets="0,0,0,0" File="common/button/button_2_sel.png" GUID="{682EF631-AB92-4a6f-B768-7BB24386B95A}" Type="WZUI9Image" />
+                        </SelectElement>
+                        <DisableElement GUID="{3D061D68-9D02-4a9c-8B93-B8FC06DB7E00}" Type="WZUIContainer">
+                            <WZUI9Image CapInsets="0,0,0,0" File="common/button/button_4.png" GUID="{4C63C733-B476-46fb-9D79-E435259265DB}" Type="WZUI9Image" />
+                        </DisableElement>
+                    </WZUIButton>
+                    <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{71B1C76C-88B8-4dfa-896C-3225BEDD9DC5}" Name="txtSure_WndSuggestion" StrokeColor="38,47,0" StrokeOffset="0,0" StrokeSize="4" Text="确 定" Type="WZUILabelTTF" Visible="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="500,50" AnchorPoint="0.5,1" GUID="{5B72A6D3-2C90-4683-AA38-C858C5D8AAB1}" RelativePosition="0.454965,0.79908" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+            <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="81,39,3" FontSize="30" GUID="{A4B462E0-873F-4ccf-B34F-6B1CFCB6684F}" Name="txtMailType_WndSuggestion" RelativePosition="0.0153621,0.44" Text="" Type="WZUILabelTTF" UseOriginSize="True" />
+            <WZUIContainer AbsContentSize="200,50" AnchorPoint="0,0.5" GUID="{A15E6D74-59D2-456b-90F8-B75DA7E8DE5C}" Name="conSug_WndSuggestion" RelativePosition="0.413179,0.427644" Type="WZUIContainer" UseAbsSize="True" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="688,38" AnchorPoint="0.5,0" GUID="{3C641561-F182-43e0-9F3A-BCA0BEA033FB}" RelativePosition="0.5,0" RelativeSize="1,0.06" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image CapInsets="50,10,695,28" File="common/Jigsaw/60.png" GUID="{4472FEDF-7355-458f-9250-CF552CAB638A}" Type="WZUI9Image" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSuggestion>

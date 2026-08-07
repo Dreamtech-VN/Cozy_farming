@@ -1,0 +1,36 @@
+﻿<CellShopPromotion GUID="{913447d6-8cd4-4a93-a9f8-d160969f57a0}">
+    <WZUIContainer AbsContentSize="300,130" GUID="{6bb566b1-2891-4695-8d29-2dc42e36e256}" LuaObjectName="CellShopPromotion" Name="CellShopPromotion" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{64f3b777-87c6-40c0-b097-aa6b2c44fed7}" Name="" AbsContentSize="300,123" UseAbsSize="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{2378694f-336d-4fb7-952a-0962d0ddb2fd}" TouchSwallow="True" AbsContentSize="">
+                <WZUIContainer Type="WZUIContainer" GUID="{e74eb98b-60a7-4bcf-ab9e-078e609dbead}" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{3be80606-e6af-47f7-911f-45ae264a3de9}" File="ui/common/common_scale9_di7.png" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{268f2bf8-d51c-46a5-97cd-a6a2cf64af58}" RelativeSize="0.9,0.75" RelativePosition="0.21,0.5" UseAbsSize="True" AbsContentSize="104,104">
+                        <WZUI9Image Type="WZUI9Image" GUID="{4d26d628-e301-47aa-9fcf-aba1541b1edd}" File="ui/common/common_scale9_di58.png" RelativeSize="1,1" RelativePosition="0.5,0.5" Opacity="225" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{8eac9a2c-24cd-4328-b411-8f0c99bc4e54}" File="ui/shop/common_scale9_shop_di1.png" UseOriginSize="True" RelativePosition="0.69,0.78" />
+                <WZUIContainer AbsContentSize="80,80" GUID="{30ee1972-c2c3-49a3-ad20-45bee143fffc}" Name="conItem_CellShopPromotion" RelativePosition="0.21,0.5" Type="WZUIContainer" UseAbsSize="True" />
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Color="79,60,48" Dimensions="150,0" EnableStroke="True" FontSize="20" GUID="{ed22effd-c3c8-4f2b-a664-8a9d2d09a18a}" Name="txtDescript_CellShopPromotion" RelativePosition="0.71,0.78" StrokeColor="79,60,48" StrokeSize="4" Text="物品名字" TouchEnable="False" Type="WZUILabelTTF" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{3b5801ab-c19b-46da-9a14-8f8f7fb20939}" AbsContentSize="120,70" UseAbsSize="True" RelativePosition="0.71,0.37" TouchSwallow="False" RelativeSize="0.9,0.12" Name="con_CellShopPromotion">
+                    <WZUIContainer Type="WZUIContainer" GUID="{5a246440-dc8f-428a-b536-cd3d9ea7d0ea}" RelativePosition="0.5,0.5" Name="" Visible="True">
+                        <WZUIImage File="ui/common/common_icon_zuanshi.png" GUID="{b4ad4147-bb55-4140-a35e-352dd695b211}" Name="img1_CellShopPromotion" RelativePosition="0.14,0.75" RelativeSize="1,1" Scale="0.6" ScaleX="0.6" ScaleY="0.6" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="True" isValid="True" UseOriginSizeProportion="True" AbsPosition="" />
+                        <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" BoldFont="False" Color="64,128,1" EnableStroke="False" FontSize="22" GUID="{2012d07e-fbda-4270-991b-b31f1e00de40}" Name="txt1_CellShopPromotion" RelativePosition="0.4,0.75" StrokeColor="91,49,24" StrokeSize="0" Text="2000" Type="WZUILabelTTF" Visible="True" NameCreate="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{8c7e577c-905e-4a35-9eae-3e49c6546912}" File="ui/common/common_icon_xiexian2.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.491667,0.32" ScaleX="0.2" ScaleY="0.7" Name="imgLine" AnchorPoint="0,0.5" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{24972cce-edaf-41d3-9cf9-dbf43bfcc6c5}" ShowText='&lt;T C=&quot;158,0,0&quot; S=&quot;20&quot; P=&quot;1&quot;&gt;【原价&lt;/T&gt;' MaxWidth="600" RelativePosition="-0.00833333,0.31" AnchorPoint="0,0.5" Name="txt2" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{88f7c68c-eb85-4bd5-81ee-e286cac4e44f}" File="ui/shop/common_btn_shop_biaoqian.png" UseOriginSize="True" RelativePosition="0.142193,0.699776" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8efc9506-06eb-4608-be5a-f84f9051e5d8}" Text="" LabelStyleKey="C18_F22_S4_C2" RelativePosition="0.0904596,0.799663" Rotation="-41" Name="discount" />
+            </WZUIContainer>
+            <Button GUID="{e684678a-6681-4bcf-b940-e8cebe4c1319}" LuaDoneFunctionName="onBtnClickGoods" Name="" RelativeSize="1,1" Type="WZUIButton" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" TouchSwallow="True">
+                <NormalElement GUID="{76fd1cee-ac87-4768-ae88-4a400bd0cf89}" Type="WZUIContainer" />
+                <SelectElement GUID="{191dad87-9f5f-407a-91df-334f84cfab42}" Type="WZUIContainer" />
+                <DisableElement GUID="{bb561be6-9d3b-4f6c-b49b-02407eeab00f}" RelativePosition="0.5,0.507143" Type="WZUIContainer" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{c75e9721-4d22-4de5-a953-cf79bb71fe0b}" Name="conSellUp_CellShopPromotion" NameCreate="True" Visible="False" Order="1">
+                <WZUI9Image Type="WZUI9Image" GUID="{81ab9c9e-3e32-409b-b8a1-1ac030f5e334}" File="ui/common/common_shade_chushouheidi.png" />
+                <WZUIImage Type="WZUIImage" GUID="{e6ac0d20-62e1-415a-9109-e95fc63701e4}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellShopPromotion>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" ?>
+<CellVipCountryWay GUID="{4FB9BE54-696F-4391-A9DC-E17EC1597BE7}">
+    <WZUIContainer AbsContentSize="158,74" GUID="{0582DCEA-5ADF-4128-89CE-7353A1BB8574}" LuaObjectName="" Name="CellVipCountryWay" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="465,320" ShowAll="False">
+        <WZUIContainer GUID="{D3CFFE07-D4A5-441b-8410-A3CEC7227D25}" RelativePosition="0.5,0.5" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" AbsPosition="-14.2342,107.962" Visible="True">
+            <WZUIButton Type="WZUIButton" AbsContentSize="158,74" Visible="True" UseAbsSize="True" RelativePosition="0.5,0.5" GUID="{d368893a-d297-4675-9738-3bc46bd83e39}" LuaDoneFunctionName="onClick" LuaActionName="">
+                <NormalElement Type="WZUIContainer" GUID="{44cf7b3e-82eb-49bb-80d7-d3692ecb9c4f}">
+                    <WZUIImage Type="WZUIImage" GUID="{27395201-cbbf-4143-a18d-4feadba1dccb}" File="ui/vip/country/pay_01.png" UseOriginSize="True" Scale="1" Visible="True" ScaleX="1" Name="img1_CellVipCountryWay" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{050b0836-ee65-4d10-9060-7c3cf0503bb2}" Scale="1">
+                    <WZUIImage Type="WZUIImage" GUID="{df485f61-c858-43d1-a20b-4edc7ecfcdd6}" File="ui/vip/country/pay_01.png" UseOriginSize="True" Scale="1.05" ScaleX="1.05" Name="img2_CellVipCountryWay" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{29be49a4-e880-4528-9be7-ac0781ad31b2}" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{19907091-8315-4317-9c03-8cd00ecb28b5}" Name="conSel_CellVipCountryWay" Visible="False" Tag="10">
+                <WZUI9Image Type="WZUI9Image" GUID="{5b087518-7bcb-4bd1-ad2a-36a3475a789b}" File="ui/common/common_scale9_beibaodi_sel.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellVipCountryWay>

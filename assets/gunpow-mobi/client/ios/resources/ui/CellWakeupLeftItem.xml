@@ -1,0 +1,17 @@
+﻿<CellWakeupLeftItem GUID="{b04780b7-a463-4403-b252-c7a4a48eba44}">
+    <WZUIContainer Type="WZUIContainer" GUID="{39c957ad-f0b8-4011-bb4e-8e9a9e170cfd}" Name="CellWakeupLeftItem" NameCreate="True" AbsPosition="" UseAbsSize="True" AbsContentSize="184,76">
+        <WZUIContainer Type="WZUIContainer" GUID="{980ddadc-0459-40fa-8d2a-e988de2927c2}">
+            <Button Type="WZUIButton" GUID="{fee7bd1d-37c5-4b3e-9274-62945dd6bf4d}" LuaDoneFunctionName="onClick">
+                <NormalElement Type="WZUIContainer" GUID="{97cefdbb-c5e4-4604-b6e1-b176a4085b23}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{41816e15-f953-4f66-ab6e-effc7036c233}" File="ui/common/common_btn_anniu16.png" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{c730b215-c14f-4d4a-971c-691bf216ec39}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{6eeddb23-8d78-4e3f-81a5-c5dc44699fed}" File="ui/common/common_btn_anniu20.png" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{156c4b68-f9ed-487d-8ca6-61289ac3e28f}" />
+            </Button>
+            <WZUI9Image Type="WZUI9Image" GUID="{aad9305e-d884-4a2b-919e-ed62db72c48c}" File="ui/common/common_btn_anniu20.png" Name="img9Sel_CellWakeupLeftItem" Visible="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{58fe7eb9-2deb-4aa5-a440-cba2f2b596fe}" FontSize="26" EnableStroke="True" Color="255,236,193" StrokeColor="128,54,13" StrokeSize="4" Name="txtName_CellWakeupLeftItem" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellWakeupLeftItem>

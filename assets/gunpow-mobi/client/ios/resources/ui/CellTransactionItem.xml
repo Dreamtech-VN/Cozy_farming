@@ -1,0 +1,23 @@
+﻿<CellTransactionItem GUID="{bcc592fc-750b-4445-b7e4-656cc4b814ea}">
+    <WZUIContainer AbsContentSize="245,98" GUID="{3f5b0735-93f0-4fa8-b496-33bd323aeb96}" LuaObjectName="" Name="CellTransactionItem" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="465,320" ShowAll="False">
+        <WZUIContainer GUID="{a53d2752-81c9-4444-9dc6-4dd3baf584d4}" RelativePosition="0.5,0.5" Type="WZUIContainer" AbsContentSize="245,87" UseAbsSize="True" AbsPosition="-14.2342,107.962" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{00a63926-e6c6-40b2-9ad6-caf55b016d47}" File="ui/common/common_scale9_di18.png" Visible="True" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{84481973-8d91-4cce-8da6-529e1ce46a7f}" Name="txtName_CellTransactionItem" FontSize="18" Text="道具名称六字" RelativePosition="0.325,0.703708" AnchorPoint="0,0.5" Color="93,222,254" Alignment="Left" AbsPosition="122.5,60.64" EnableStroke="True" BoldFont="True" StrokeSize="4" StrokeColor="79,60,48" />
+        <WZUIContainer Type="WZUIContainer" GUID="{2d607ab8-d6ff-4cad-ad0a-b54da07675ed}" RelativeSize="0.23,0.9" RelativePosition="0.1755,0.488" Name="conIcon_CellTransactionItem" AnchorPoint="0.5,0.5" AbsPosition="58.5,46" UseAbsSize="True" AbsContentSize="66,66" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d18bfb9e-454b-4dbf-81e7-f5bc67b3d2b0}" Text="" LabelStyleKey="C2_F20" RelativePosition="0.415,0.466" Scale="0.9" Name="txt1_CellTransactionItem" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{0e174fa9-5e64-4e54-8988-58f9dc2adce8}" Text="" LabelStyleKey="C2_F20" RelativePosition="0.415,0.232" Scale="0.9" Name="txt2_CellTransactionItem" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1f3d00f1-06ce-4e90-b6a5-581027349899}" Text="999" LabelStyleKey="C2_F20" RelativePosition="0.55,0.466" Scale="0.9" Name="txt3_CellTransactionItem" Alignment="Left" AnchorPoint="0,0.5" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{839bd6b4-3078-4e36-9460-3bf13396d3b3}" Text="999" LabelStyleKey="C2_F20" RelativePosition="0.64,0.24" Scale="0.9" Name="txt4_CellTransactionItem" Alignment="Left" AnchorPoint="0,0.5" />
+        <Button Type="WZUIButton" GUID="{063089fa-62f1-4a43-b7ca-e30a7792d90f}" LuaDoneFunctionName="onClick" Order="5">
+            <NormalElement Type="WZUIContainer" GUID="{713a6463-9911-4884-93f6-6ea7066f7194}" />
+            <SelectElement Type="WZUIContainer" GUID="{f689d0a9-6ec1-4ca5-9d32-66b5583d4ba0}" />
+            <DisableElement Type="WZUIContainer" GUID="{8a5dc739-d536-4b17-8a48-438c260d357b}" />
+        </Button>
+        <WZUIImage Type="WZUIImage" GUID="{407fb4f2-e86c-4203-be6b-8a46028f7251}" File="ui/common/common_icon_kuangjing.png" UseOriginSize="True" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.571324,0.236047" Name="imgGem_CellTransactionItem" />
+        <WZUIContainer Type="WZUIContainer" GUID="{d97fcc17-9dc7-407e-8c68-d9768d68fd90}" Name="conSellUp_CellTransactionItem" NameCreate="True" Visible="False" Order="1" UseAbsSize="True" AbsContentSize="242,84">
+            <WZUI9Image Type="WZUI9Image" GUID="{9a165d63-0f72-44b9-913e-ae50a83240e5}" File="ui/common/common_shade_chushouheidi.png" />
+            <WZUIImage Type="WZUIImage" GUID="{9870b7d5-8260-464b-86da-6987aa5b83c8}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTransactionItem>

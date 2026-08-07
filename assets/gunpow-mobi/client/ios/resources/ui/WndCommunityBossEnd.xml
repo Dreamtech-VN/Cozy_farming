@@ -1,0 +1,30 @@
+﻿<WndCommunityBossEnd GUID="{14ebdd8a-e253-4e59-96a7-443333f47823}">
+    <WZUIWindow Type="WZUIWindow" GUID="{ad573d4b-a13d-4b6e-a245-29457d56b381}" NameCreate="True" Name="WndCommunityBossEnd" LuaObjectName="WndCommunityBossEnd" AbsContentSize="384,320" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{f1c041ad-650a-49f9-bac5-0913e963b2da}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{c4e7a44c-a6bc-47b2-b5e4-15d60ecf9af5}">
+                <WZUI9Image Type="WZUI9Image" GUID="{a121049c-40d7-4867-bc84-6743c705d0c1}" File="ui/common/common_scale9_di19.png" Opacity="255" RelativePosition="0.5,0.5" CapInsets="250,100,1,1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{fa60beb6-7e83-4ea6-9e38-702e0abad532}" RelativeSize="1,0.2" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d3726f9f-f6d7-4568-b480-06c511efa5ed}" TextKey="ANNOUNCE" FontSize="26" Color="255,236,192" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" RelativePosition="0.5,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{ba964621-8656-41d0-ad64-79b5f355eab5}" RelativeSize="0.96,0.52" RelativePosition="0.5,0.812739" Visible="True" AnchorPoint="0.5,1">
+                <WZUI9Image Type="WZUI9Image" GUID="{10c3e6f4-8c98-4c1b-b00e-f9e3bf191572}" File="ui/common/common_scale9_di6.png" RelativePosition="0.5,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{4580e4c1-99c0-42b3-9ba0-94b848e78630}" RelativeSize="1,0.6" RelativePosition="0.5,0.616364">
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{fcb3d569-8528-4aef-ad16-66e33d1df4fe}" Name="ftbWinDesc_WndCommunityBossEnd" MaxWidth="320" AnchorPoint="0,0.5" RelativePosition="0.08,0.5" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{2e51a8e9-e818-4c72-a0ef-ae18c8ab4669}" RelativeSize="0.4,0.3" RelativePosition="0.5,0" Visible="True" AnchorPoint="0.5,0">
+                <WZUIButton Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.5,0.5" GUID="{b56f508d-a14a-4376-94f3-e479accf134a}" LuaDoneFunctionName="OnSureClick">
+                    <NormalElement Type="WZUIContainer" GUID="{608037ce-5029-4dd0-9e71-7289e250b38d}">
+                        <WZUIImage Type="WZUIImage" GUID="{72cad5f5-f1c3-4a2b-8600-ead4d63188aa}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{0a87cda9-4022-49b0-b59b-7fa98c45e4b5}">
+                        <WZUIImage Type="WZUIImage" GUID="{841aa38b-74b2-4011-99a6-4cffdf7d0252}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{147c58cc-6ed6-4ac1-a96e-2f853b291093}" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{f3d8fafb-586d-4dc3-bd93-502ec6635699}" TextKey="CONFIRM" Color="255,236,193" FontSize="26" StrokeColor="64,128,1" StrokeSize="4" EnableStroke="True" Text="CONFIRM" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCommunityBossEnd>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WndActive GUID="{409BDF46-F0A9-4242-8597-8D88C9F7D421}">
+    <WZUIWindow AbsContentSize="960,640" AbsPosition="480,320" GUID="{3E50ADA7-ED78-4c7a-87BA-31445F1C533D}" LuaObjectName="WndActivities" Name="WndActivities" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True" ShowAll="False">
+        <WZUIContainer GUID="{5BADCC12-5278-47e6-86F0-2652C2236F1A}" Type="WZUIContainer" Visible="True" />
+        <WZUIContainer AbsContentSize="900,500" GUID="{06DD7175-B26F-460a-92A8-CCB0B36F92FF}" RelativePosition="0.5,0.5" RelativeSize="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIWebView AnchorPoint="1,1" CloseButtonImage="" CloseButtonSize="34,34" CloseCallBackFun="onCloseClick" FailedCallBackFun="onOpenUrlFail" FinishCallBackFun="onOpenUrlSuccess" GUID="{445E91E1-08BD-4725-95E4-0A33B3A46157}" IsWebFileName="False" Name="webviewUrl_WndActivities" RelativePosition="0,0" Type="WZUIWebView" URL="" UseOriginSize="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{2f768b7f-074f-4fd2-ba41-0cc8b618e330}" AbsContentSize="900,50" UseAbsSize="True" RelativePosition="0.5,0.930729" Name="conTitle_WndActivities" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{dafc529e-440e-4927-88b4-dd98dd150c7d}" File="ui/common/fb_bg.png" />
+            <Button Type="WZUIButton" GUID="{933eaae9-826e-4cbb-980d-039579543a6f}" AbsContentSize="80,60" UseAbsSize="True" RelativePosition="0.954018,0.488616" LuaDoneFunctionName="onCloseClick" ShowAll="True" Visible="True" Name="btnClose_WndActivities">
+                <NormalElement Type="WZUIContainer" GUID="{d6b97b7e-4903-4b97-90f1-5b549d1ce097}">
+                    <WZUIImage Type="WZUIImage" GUID="{2307d243-0131-42ef-a26c-676e8d102582}" File="ui/common/fb_close.png" UseOriginSize="True" ScaleX="" ScaleY="" Scale="1" RelativePosition="0.5,0.5" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{d3754639-95c5-435a-adbd-af849defa507}">
+                    <WZUIImage Type="WZUIImage" GUID="{e78504cc-646b-4bd3-9d37-b869d702a271}" File="ui/common/fb_close.png" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{9347632d-b31d-40d6-acb9-68651f0cec10}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndActive>

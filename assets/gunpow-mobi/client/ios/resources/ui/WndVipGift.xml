@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" ?>
+<WndVipGift GUID="{C4AEAB34-22AA-4a32-AF42-39A5D385C798}">
+    <WZUIWindow AbsContentSize="" AbsPosition="0,0" GUID="{EDF50896-0471-4479-8D32-D25FBC9145F6}" LuaObjectName="WndVipGift" LuaTouchBeganFunction="onTouchBegan" Name="WndVipGift" NameCreate="True" RelativePosition="0.5,0.5" ShowAll="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="False" Visible="True" Order="">
+        <WZUIContainer Type="WZUIContainer" GUID="{2678001d-a84a-46d8-85b3-6029a835e34a}" AbsContentSize="500,500" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{a5cfafb3-0277-4f81-912d-34894adb5b71}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{0e8d73ab-b6b1-4bc4-9a8a-69f495922560}" FontSize="24" Color="255,236,193" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.935" StrokeSize="4" StrokeColor="132,66,29" Text="" Name="" TextKey="GIFT_TITLE" AbsPosition="192.5,288" />
+            <Button Type="WZUIButton" GUID="{58dea2a5-b2db-4edc-a9cb-c19888610b36}" RelativePosition="0.923332,0.936954" LuaDoneFunctionName="onTempClose" LuaActionName="Normal" AbsContentSize="90,90" UseAbsSize="True">
+                <NormalElement Type="WZUIContainer" GUID="{244adc6a-045f-459a-b68a-fbc696bf02d2}">
+                    <WZUIImage Type="WZUIImage" GUID="{272e18dc-6ed4-48ee-b572-7898fcab9bdc}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{33667fe0-fbe6-410e-a66f-c3f63b4c5d5d}">
+                    <WZUIImage Type="WZUIImage" GUID="{7fdf705f-d416-4f87-89c7-a29e915b973f}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{a3843314-8774-4ef1-888a-3df67833c95f}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{0ff7f880-4a4c-4dfb-b703-0e91b5d5cc61}" AbsContentSize="780,540" UseAbsSize="False" RelativePosition="0.497917,0.492188" ShowAll="False" AbsPosition="478,315" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{7ef9ac45-7fa8-4a35-bd28-92ede2a0a425}" Visible="True" RelativePosition="0.502,0.528" AbsPosition="390,269" Name="conBg_WndVipGift" AbsContentSize="487,355" UseAbsSize="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{c4488b93-0e7e-45e0-b3d2-cf36fb7126aa}" AbsContentSize="487,340" UseAbsSize="True" RelativePosition="0.5,0.519718">
+                    <WZUI9Image Type="WZUI9Image" GUID="{574b35f5-040a-49f4-add7-d094a7c9b4e9}" File="ui/common/common_scale9_di20.png" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{f147d0ba-47fd-442b-b8a5-33e80c28c907}" RelativeSize="1,0.15" AnchorPoint="0.5,1" RelativePosition="0.502,0.80017" TouchSwallow="False" Visible="True" AbsPosition="390,474.412" Name="conUp_WndVipGift" UseAbsSize="True" AbsContentSize="500,130">
+                <WZUI9Image Type="WZUI9Image" GUID="{78ebf3f4-7460-4b39-b980-4fcebd67bed6}" File="ui/common/common_scale9_heidi3.png" UseOriginSize="True" ScaleX="2.06" ScaleY="0.7" RelativePosition="0.5,0.85" />
+                <WZUIContainer Type="WZUIContainer" GUID="{e3c3a31f-9a25-49d1-9baf-1d36a4766137}" AbsContentSize="74,74" UseAbsSize="True" RelativePosition="0.117333,0.37" Name="conItem" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a45d1745-2a40-43f6-a659-899c4f263ce8}" Name="txtName_WndVipGift" NoBorder="False" NameCreate="True" FontSize="24" Color="255,236,193" EnableStroke="True" StrokeColor="128,54,13" Text="" StrokeSize="4" LabelStyleKey="C11_F22_S4_C5" TextKey="" RelativePosition="0.503333,0.85" Scale="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{fd5f5164-4906-4840-9303-5848d3565a42}" Name="txtDesc_WndVipGift" NoBorder="False" NameCreate="True" FontSize="20" Color="127,70,26" EnableStroke="False" StrokeColor="128,54,13" Text="" StrokeSize="4" LabelStyleKey="" TextKey="" RelativePosition="0.205,0.48" Dimensions="375,0" Alignment="Left" AnchorPoint="0,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{16dfd24a-71b2-4df0-b069-5de6173f91d8}" RelativePosition="0.501761,0.44" RelativeSize="1,1" Visible="True" Name="conMid_WndVipGift" AbsContentSize="500,230" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{dcdbdfa4-f326-4389-9d89-41fd0d502615}" File="ui/common/common_scale9_heidi3.png" UseOriginSize="True" ScaleX="2.06" ScaleY="0.7" RelativePosition="0.5,0.875" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{fe7c1c1d-20aa-4939-b173-a98e9e820160}" Name="txtName2_WndVipGift" NoBorder="False" NameCreate="True" FontSize="24" Color="255,236,193" EnableStroke="True" StrokeColor="128,54,13" Text="" StrokeSize="4" LabelStyleKey="C11_F22_S4_C5" TextKey="" RelativePosition="0.515,0.875" />
+                <WZUIContainer Type="WZUIContainer" GUID="{dc3734d3-f391-459b-9660-848613b96743}" RelativeSize="1,1" RelativePosition="0.5,0.425435" Name="conRewardList_WndVipGift" Visible="True" AbsContentSize="500,170" UseAbsSize="True">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{cba318a5-98dc-4abe-a721-bbb2bdb3ee94}" RelativeSize="0.98,0.92" Name="tabReward_WndVipGift" NameCreate="True" ColumnCount="5" CellElementHeight="0.4838" EnableMoveHorizontal="False" RelativePosition="0.5,0.503602" UseAbsSize="True" AbsContentSize="450,170" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{62c19340-42b7-4e10-9875-e7ef7a88c21e}" RelativeSize="1,0.15" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.19" TouchSwallow="False" Visible="True" AbsPosition="390,474.412" Name="conBottom_WndVipGift" UseAbsSize="True" AbsContentSize="500,76">
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{345dce36-4ad5-4bea-8b42-3bbb2150fab1}" Name="ftxtPrice_WndVipGift" MaxWidth="500" RelativePosition="0.5,0.95" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{665ba5b6-cd56-42f8-bc43-65fc7f839fe4}" Name="txtOriginPrice_WndVipGift" LabelStyleKey="" Text="" Visible="False" RelativePosition="0.5,0.95" Color="255,236,193" FontSize="20" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" />
+                <WZUIImage Type="WZUIImage" GUID="{1209e062-c70e-4845-87c8-cc772e684170}" File="ui/gameActivity/activity_pic_yjkx.png" UseOriginSize="True" RelativePosition="0.5,0.95" Name="imgLine_WndVipGift" Visible="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{f3184a32-74d6-4ed7-bc77-c1de85aba4df}" AbsContentSize="108,54" UseAbsSize="True" RelativePosition="0.501768,0.4" Scale="1" AbsPosition="681.942,42.1891" Visible="True" Name="conBtn_WndVipGift">
+                    <WZUIButton Type="WZUIButton" AbsContentSize="108,54" Visible="True" UseAbsSize="True" RelativePosition="0.5,0.5" GUID="{2a56971b-8356-4354-95e9-6202cfd3850d}" LuaDoneFunctionName="onBuy" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{6270291f-277d-4f32-9027-cedfa2a6d434}">
+                            <WZUIImage Type="WZUIImage" GUID="{d81fd701-eb0a-4103-9b5f-beafcf245fa8}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" Scale="1" Visible="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{99f6b3ba-24f6-4eac-945a-97111a0eb554}" Scale="1">
+                            <WZUIImage Type="WZUIImage" GUID="{fb76f7cd-996e-43b0-988c-ce79d49db3af}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" Scale="1.05" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{11c762a1-930a-4a32-8c21-729a0949bdac}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{bb487f41-a52f-4bde-9e0b-5ec2dfc4eff1}" Name="txtBtn_WndVipGift" LabelStyleKey="SMALL_GREEN_BTN" Text="" Visible="False" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{26731dce-a32f-47fa-9fbf-401c913c3d97}" Name="ftxtCurPrice_WndVipGift" MaxWidth="500" RelativePosition="0.5,0.5" Visible="False" />
+                    </WZUIButton>
+                </WZUIContainer>
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{2d29cdaa-d4db-4ed8-9999-79938c6a773c}" Name="txtRemain_WndVipGift" MaxWidth="400" RelativePosition="0.945,0.368421" ShowText="" AnchorPoint="1,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{26477e0b-182e-4e1d-9fff-33ce0cd8b54a}" Visible="False" MaxWidth="500" Name="ftxtLeftTime_WndVipGift" RelativePosition="0.5,1.4" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{004529d4-a2a9-4f1d-bff0-aa3df999a594}" File="4.png" Order="-1" Visible="False" />
+    </WZUIWindow>
+</WndVipGift>

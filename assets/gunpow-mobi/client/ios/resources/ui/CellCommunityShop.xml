@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" ?>
+<CellCommunityShop GUID="{95BADD88-08C1-4f94-A324-53B1F9F26959}">
+    <WZUIContainer AbsContentSize="177,182" GUID="{52AFC9A6-7D8C-4a89-A2B6-40B92D2D3713}" LuaObjectName="CellCommunityShop" Name="CellCommunityShop" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUI9Image Type="WZUI9Image" GUID="{9C8D7E72-FFF7-4225-B5CE-F368AA5DDDCE}" File="ui/common/common_scale9_di7.png" />
+        <WZUIContainer Type="WZUIContainer" GUID="{CB45F9A5-AF08-4e1d-BE25-8DF4915881D3}" AbsContentSize="162,135" UseAbsSize="True" RelativePosition="0.5,0.55">
+            <WZUI9Image Type="WZUI9Image" GUID="{302703DA-816F-4364-9768-8D1D3023226E}" File="ui/common/common_scale9_di58.png" Opacity="210" />
+        </WZUIContainer>
+        <Button GUID="{32CFB759-C06F-4ccd-B6CC-5474CB2FDF87}" LuaDoneFunctionName="onClickBuy" Name="btnBg_CellGoodsList" RelativeSize="1.005,1.01" Type="WZUIButton" Visible="True" AbsContentSize="177,182" UseAbsSize="True">
+            <NormalElement GUID="{AA8C095D-CF99-4f25-AEBD-82B7D548DDFF}" Type="WZUIContainer" TouchContainerEnable="True" />
+            <SelectElement GUID="{FB59772E-145C-4c8d-A554-D0A1CC268581}" Type="WZUIContainer" TouchContainerEnable="True" />
+            <DisableElement GUID="{E0897E0C-485F-45be-A7BA-BDF88EC94705}" RelativePosition="0.5,0.507143" Type="WZUIContainer" TouchContainerEnable="True" />
+        </Button>
+        <WZUIContainer AbsContentSize="100,100" GUID="{BBB3078F-E260-4f4f-ABC7-58D674131404}" Name="conItemIcon" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" />
+        <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Color="187,118,234" Dimensions="0,0" EnableStroke="False" FontSize="18" GUID="{331571A4-7C32-4148-B53D-448BBC025993}" Name="txtName_CellGoodsList" RelativePosition="0.5,0.85" StrokeColor="60,19,12" StrokeSize="4" Text="" TouchEnable="False" Type="WZUILabelTTF" Visible="True" MaxLength="8" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{257dcebe-8a9e-482a-8899-ccd167b531fb}" LabelStyleKey="C13_F20" TextKey="UNIT_PRICE" RelativePosition="0.03,0.0907742" AnchorPoint="0,0.5">
+            <WZUIImage File="ui/community/common_icon_gonghui_pic.png" GUID="{7285b79f-ebee-4ad6-bc01-885c985b3169}" Name="imgMoney_CellGoodsList" RelativePosition="1.03,0.5" RelativeSize="0.2,0.6" Scale="0.7" ScaleX="0.7" ScaleY="0.7" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="True" AnchorPoint="0,0.5">
+                <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" BoldFont="False" Color="64,128,1" EnableStroke="False" FontSize="22" GUID="{79dcfb6c-998d-440d-ac8e-2bdbd3542c39}" Name="txtNum_CellGoodsList" RelativePosition="1,0.5" StrokeColor="91,49,24" StrokeSize="3" Text="" Type="WZUILabelTTF" />
+            </WZUIImage>
+        </WZUILabelTTF>
+        <WZUIContainer Type="WZUIContainer" GUID="{e4633920-4d23-4be5-bb98-3a2775af4aaa}" RelativeSize="0.5,0.5" RelativePosition="0.768759,0.34689" Name="conDiscount_CellCommunityShop" Visible="False" TouchSwallow="False">
+            <WZUIImage Type="WZUIImage" GUID="{24976dba-1b50-4c9c-93b8-83ce1646e6e0}" File="ui/common/common_icon_zhe.png" UseOriginSize="True" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{2037f08b-6e62-4be9-ab67-28a4b47014ee}" Name="labCnt_CelllCommunityShop" CharMapFileName="ui/common_num/common_num_shangcheng.png" Height="22" Width="16" Text="98" RelativePosition="0.583075,0.261368" Alignment="Center" AnchorPoint="0.5,0.5" UseOriginSize="True" Visible="True" Rotation="-45" NameCreate="True" StartChar="48" />
+            <WZUIImage Type="WZUIImage" GUID="{c430c380-2000-4fa8-b398-791e9e839871}" File="ui/common/common_num_shangcheng2.png" UseOriginSize="True" RelativePosition="0.816062,0.466589" Rotation="-45" Name="imgCnt_CellCommunityShop" />
+            <WZUIImage Type="WZUIImage" GUID="{ff71e9b7-ecc0-4a6e-a034-81b90f3221a6}" File="ui/common/common_num_shangchengdiandian.png" UseOriginSize="True" RelativePosition="0.673793,0.187755" Name="imgNumPoint_CellCommunityShop" NameCreate="True" Visible="False" isValid="True" />
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{1a5ed166-2204-4ba5-b0fa-1e2db2f1ef83}" File="ui/common/common_icon_dian.png" UseOriginSize="True" RelativePosition="0.5,0.995" />
+    </WZUIContainer>
+</CellCommunityShop>

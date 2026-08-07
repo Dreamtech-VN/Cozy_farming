@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<SceneTempServerList GUID="{5C6AAFF7-F187-4f9b-BE52-9E09A8E6367E}">
+    <WZUIFrame GUID="{90392709-E1D2-474c-B80B-ED11D3055700}" LuaObjectName="SceneTempServerList" LuaTouchBeganFunction="onTouchBegan" Name="SceneTempServerList" NameCreate="True" Type="WZUIFrame">
+        <WZUIImage File="common/Jigsaw/22.png" GUID="{D7A87C72-0C13-4441-9371-6E2C6FB2E13A}" Type="WZUIImage" />
+        <WZUITableContainer AbsContentSize="660,600" CellElementHeight="0.2" ColumnCount="2" EnableMoveHorizontal="False" GUID="{682CDD50-A075-467a-BE05-B3655A6A8778}" Name="contableServer_SceneTempServerList" Type="WZUITableContainer" UseAbsSize="True" />
+        <WZUIContainer AbsContentSize="80,80" AbsPosition="" AnchorPoint="1,0" GUID="{2EE93846-BA7F-4bec-A566-22177D9DA8F0}" RelativePosition="0.92,0" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIButton GUID="{519BA87B-A58D-49bb-B154-FB3E70F0A5F3}" LuaDoneFunctionName="onAddSever" Name="btnAdd_SceneTempServerList" Type="WZUIButton">
+                <NormalElement GUID="{7950BB5B-659D-4305-AB96-7C6F2A9958E9}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/add.png" GUID="{23D68DE6-5558-4dfd-BD78-C82B1A246D0B}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{9A99D76E-7208-46a2-A7E0-56DE377F16FD}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/add_sel.png" GUID="{B39E6BFF-BD05-4520-95AD-03C4F713266B}" Type="WZUI9Image" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{02053BB0-467F-4553-B788-BD09AB6B9756}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/close_not.png" GUID="{B226BD32-A4CE-4e19-B7CC-0AAA763BE5BA}" Type="WZUI9Image" UseOriginSize="True" />
+                </DisableElement>
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="80,80" AbsPosition="" AnchorPoint="1,0" GUID="{5D44FA80-0376-425e-ABCD-619536EB74E3}" RelativePosition="1,0" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIButton GUID="{12AF90F2-271A-4eba-85FD-767015255795}" LuaDoneFunctionName="onDelSever" Name="btnDel_SceneTempServerList" Type="WZUIButton">
+                <NormalElement GUID="{6546382F-C74D-46fe-AB97-F9A34488ECC1}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/minus.png" GUID="{97BF07F8-4843-4c48-9948-E47DA428F211}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{CDFF4D24-3A1E-494c-BE8F-F2E53DE0A028}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/minus_sel.png" GUID="{5E11BB4E-7A4F-4ea9-B3AE-743218A810D3}" Type="WZUI9Image" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{4D43A9D7-9232-4f06-BE65-BC8AC31A39EF}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/close_not.png" GUID="{0B00D475-14B4-42ce-8C2A-1A4F9F11F52F}" Type="WZUI9Image" UseOriginSize="True" />
+                </DisableElement>
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="270,50" AnchorPoint="1,0" GUID="{74C2DF21-15C4-4ad6-B7EF-B7367F0DB044}" Name="conEdit_SceneTempServerList" RelativePosition="0.835,0.018" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+            <WZUI9Image File="common/Jigsaw/combined_service_bg4.png" GUID="{5F97AC7F-BC04-4c0e-B449-B5B54DDD92E7}" Type="WZUI9Image" />
+            <WZUIEditBox BgPicture="ui/commmon/transparent_bg.png" FontColor="255,255,255" FontSize="24" GUID="{E910E10E-2829-407f-9B2F-B226CB8085B6}" LuaEditBoxEditingDidBegin="" LuaEditBoxEditingDidEnd="" LuaEditBoxReturn="onReturn" LuaEditBoxTextChanged="" Name="editServer_SceneTempServerList" RelativeSize="0.95,1" Type="WZUIEditBox" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="80,80" AbsPosition="" AnchorPoint="1,0" GUID="{82710471-3AB2-4d98-B5F5-6EEFE8C9EC90}" RelativePosition="0.0929417,0.0155652" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIButton GUID="{9B3494EF-A0DF-40ad-B06C-59B5995AE7F7}" LuaDoneFunctionName="onDelSeverFile" Name="btnDel_SceneTempServerList" Type="WZUIButton">
+                <NormalElement GUID="{7D480D6C-3418-444a-BB19-F1ACBBA0EDDD}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/transparent_bg.png" GUID="{8BA59FC9-52F7-4dcb-9225-24CCAE2A491E}" Type="WZUI9Image" UseOriginSize="False" />
+                </NormalElement>
+                <SelectElement GUID="{8F9348C8-BA57-4657-9DAD-C2C767DABF88}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/transparent_bg.png" GUID="{F1F382C7-2AFD-4b1c-AEBA-E051A8043BA3}" Type="WZUI9Image" UseOriginSize="False" />
+                </SelectElement>
+                <DisableElement GUID="{6700C766-7DA0-4674-9D89-9183C97908C1}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/close_not.png" GUID="{08F279E0-DD6F-436d-8D29-9D0CC09054B8}" Type="WZUI9Image" UseOriginSize="True" />
+                </DisableElement>
+            </WZUIButton>
+            <WZUILabelTTF Color="255,255,255" FontSize="22" GUID="{314097BE-5638-45cf-8BA4-68CBC21B0821}" Name="txtDel_SceneTempServerList" Text="删除选择服务器文件" TouchEnable="False" Type="WZUILabelTTF" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{40592AED-8545-4617-9FE3-1DA745D7C544}" NameCreate="True" Name="conTestFont" Visible="False">
+            <WZUIImage File="common/Jigsaw/22.png" GUID="{84D8ABEA-653A-40bb-9DF5-54531C0094FA}" Type="WZUIImage" />
+            <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{9495D4B6-E720-4780-A68E-DC5F1A53D34F}" AbsContentSize="400,600" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.267452,0.504117" Name="flFontList" EnableMoveHorizontal="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{796E462E-DB16-41ce-84EA-C9CE5AF60EDD}" Alignment="Left" AnchorPoint="0,0.5" NameCreate="True" Name="txtTestlabel" FontSize="35" Text="测试字体123ABC" Color="255,255,255" RelativePosition="0.637239,0.502111" />
+            <WZUIContainer AbsContentSize="58,56" AnchorPoint="1,1" GUID="{629D8A74-0563-497a-B356-2B312F111ABF}" Name="conClose_" RelativePosition="0.989891,0.986508" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage File="ui/common/btn_close_ng.png" GUID="{09533A8B-5803-4c40-85F7-23522B075599}" Type="WZUIImage" UseOriginSize="True" />
+                <WZUIButton AbsContentSize="150,100" AnchorPoint="0,1" GUID="{EBFFEB08-7BD3-405e-90C9-E744BB3FB701}" LuaDoneFunctionName="onCloseClick" Name="btnCloseWindow" Order="2" RelativePosition="-0.462003,1.1779" Scale="0.75" ShowAll="False" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{C7685908-44C5-46ff-A0B4-360E7DDD17FB}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{5B0BF0D2-F294-4836-A998-E26ABA84F250}" Type="WZUIImage" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{814D4D07-2232-4be8-82E3-F198A3CDD6B1}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{C76ED067-F75D-4602-A4D8-E184AE123B7F}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{3F9B9363-CF48-48d3-A4D5-D44541F10A76}" TouchContainerEnable="True" Type="WZUIContainer" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneTempServerList>

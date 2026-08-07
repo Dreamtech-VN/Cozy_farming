@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" ?>
+<WndCityBottomBar GUID="{AC240612-5270-4208-8BC1-118FAEE3AC17}">
+    <WZUIContainer AbsContentSize="960,640" AbsPosition="480,100" AnchorPoint="1,1" RelativePosition="1,1" GUID="{61043DA3-00A3-4e2b-8183-05642F4D11D6}" LuaObjectName="WndCityBottomBar" Name="WndCityBottomBar" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="960,640" GUID="{9D5FF700-CBFC-41bc-856A-352DD51B4BDA}" RelativePosition="1,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True" AnchorPoint="1,0.5" Name="conAll_WndBottomBar">
+            <WZUIContainer AbsContentSize="70,60" AnchorPoint="0,0" GUID="{F6DC2617-F034-4fb6-BF49-F189EB4EB707}" RelativePosition="0.013,0.015" RelativeSize="1,15" ShowAll="True" Type="WZUIContainer" UseAbsSize="True" Name="conLeft_WndBottomBar">
+                <WZUIButton AbsContentSize="96,96" AbsPosition="40,-20.8374" AnchorPoint="0.5,0.5" GUID="{D9F2A5D4-5001-4b7e-919B-815F96C552D5}" LuaDoneFunctionName="onClickChat" Name="btnChat_WndBottomBar" RelativePosition="0.5,0.5" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" Scale="1">
+                    <NormalElement GUID="{C7133DE3-D548-4b7c-9052-C0A883F07531}" Type="WZUIContainer" />
+                    <SelectElement GUID="{6DF6A170-5DCB-4b45-9471-53C518CD402C}" Type="WZUIContainer" />
+                    <WZUIImage File="ui/city/beta/main_icon_liaotian_2.png" GUID="{ca71f0d2-40bf-4a2f-a6a1-27514606c78b}" Type="WZUIImage" UseOriginSize="True" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{0089A89F-6044-49f6-9888-F08958A8037B}" Name="conRight_WndBottomBar" RelativePosition="1,1." AnchorPoint="1,1" ShowAll="True" Visible="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{DA12E298-C31E-4f53-B2F4-15AD8612F2D2}" AnchorPoint="1,1" RelativePosition="1,1" Name="conAllExtend_WndBottomBar" Visible="False">
+                    <WZUI9Image File="ui/common/common_scale9_di69.png" GUID="{01870F24-FE74-4a56-B00F-085638F8F616}" NoBorder="False" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False" CapInsets="12,12,40,12" Opacity="0" LuaTouchEndedFunction="hideExtend" TouchSwallow="False" />
+                    <WZUIScissorContainer Type="WZUIScissorContainer" GUID="{06D7E0A9-05B4-405c-93E3-C933F26A2F5C}" UseAbsSize="True" AbsContentSize="170,570" AnchorPoint="1,0" RelativePosition="0.923,0.0158482" AbsPosition="870.53,10.1428" Name="conSciExtend_WndBottomBar" TouchContainerEnable="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{853D2B24-9AB6-4b65-8972-A94250DF79B7}" AbsContentSize="340,570" UseAbsSize="False" Name="conExtend_WndBottomBar" Order="1">
+                            <WZUIContainer AbsContentSize="170,570" GUID="{69FAA29D-5347-406f-AA4B-F7BA1CD0CF1C}" Name="conBgExtend_WndBottomBar" Order="0" RelativePosition="0.999085,1.00061" RelativeSize="1,0.95" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True" AnchorPoint="1,1" AbsPosition="339.689,570.349">
+                                <WZUI9Image File="ui/common/common_scale9_di69.png" GUID="{323DFBB1-B17C-4495-8BE0-BBBFBA877D9C}" NoBorder="False" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False" CapInsets="12,12,40,12" />
+                            </WZUIContainer>
+                            <WZUIImage Type="WZUIImage" GUID="{3D97DFE2-EB93-4040-897D-DD3E0D0A2016}" UseOriginSize="True" File="ui/common/common_icon_fengexian2.png" RelativePosition="0.499681,0.187075" AbsPosition="169.891,106.633" ScaleX="0.5" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{F9504B48-55B8-43b9-A6AD-8D636134C3A0}" Name="conExtendUp_WndBottomBar">
+                                <WZUIButton AbsContentSize="96,96" AbsPosition="45.9592,565.246" AnchorPoint="0.5,1" GUID="{F9EB67AA-9A5C-42a5-B66E-C29A9700E58E}" LuaDoneFunctionName="onClickBless" Name="btnBless_ExtendUp_WndBottomBar" RelativePosition="0.26,0.99" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="0.9" Visible="True">
+                                    <NormalElement GUID="{1C12B245-674B-4a5b-BB3D-B848A9C5FEA0}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_qifu.png" GUID="{CE283DE4-44B7-482f-90A0-BCE261EA695B}" Type="WZUIImage" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement GUID="{C572BD34-ADD8-41ea-8900-A49FD38895CE}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_qifu.png" GUID="{D2213B7E-4509-47bf-B4BA-6C4D6F5FDF58}" Type="WZUIImage" UseOriginSize="True" Scale="1.1" />
+                                    </SelectElement>
+                                </WZUIButton>
+                                <WZUIButton AbsContentSize="96,96" AbsPosition="125.469,564.3" AnchorPoint="0.5,1" GUID="{64EC3984-FEE0-4087-B4FE-534C5CF01490}" LuaDoneFunctionName="onClickPractice" Name="btnPractice_ExtendUp_WndBottomBar" RelativePosition="0.72,0.99" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="0.9" Visible="True">
+                                    <NormalElement GUID="{455B35AE-E78C-4a0f-806D-1BF4B6C02FFC}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_xiulian.png" GUID="{E68C3011-BCF8-4353-BEAD-FF2D011C7996}" Type="WZUIImage" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement GUID="{F321A838-1987-4756-B715-5B0C714E9310}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_xiulian.png" GUID="{A7C1CB44-02F5-4ba8-AE7D-E9859586EA9F}" Type="WZUIImage" UseOriginSize="True" Scale="1.1" />
+                                    </SelectElement>
+                                </WZUIButton>
+                                <WZUIButton AbsContentSize="96,96" AbsPosition="45.9592,565.246" AnchorPoint="0.5,1" GUID="{09637965-E505-4319-B940-6CA24B74733F}" LuaDoneFunctionName="onClickCard" Name="btnCard_ExtendUp_WndBottomBar" RelativePosition="0.26,0.86" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="0.9" Visible="True">
+                                    <NormalElement GUID="{D368CA70-9B6E-4a4c-8DB7-9DCF1D96C85D}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_kapai.png" GUID="{C9FF2BAE-976A-4ff1-BE5B-5B463728DC1E}" Type="WZUIImage" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement GUID="{39305084-30B7-4832-A4A4-86491D7B12BC}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_kapai.png" GUID="{BC9B18BE-D4B2-43a6-8606-A8135DB6110A}" Type="WZUIImage" UseOriginSize="True" Scale="1.1" />
+                                    </SelectElement>
+                                </WZUIButton>
+                                <WZUIButton AbsContentSize="96,96" AbsPosition="45.9592,565.246" AnchorPoint="0.5,1" GUID="{EFB3F692-BBEA-4d6d-9C97-635B2677921A}" LuaDoneFunctionName="onClickLbs" Name="btnLbs_ExtendUp_WndBottomBar" RelativePosition="0.72,0.86" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="0.9" Visible="True">
+                                    <NormalElement GUID="{DC2A65C5-0E50-421a-B942-A25AD5ECF500}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_sousuo.png" GUID="{D7B01C21-02E1-4292-A82A-4AB6903B9697}" Type="WZUIImage" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement GUID="{A5D89DA0-D148-448a-B5FB-045417F9888D}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_sousuo.png" GUID="{37D10ED5-9E3D-4645-BEAC-BBC5EE7DB19C}" Type="WZUIImage" UseOriginSize="True" Scale="1.1" />
+                                    </SelectElement>
+                                </WZUIButton>
+                                <WZUIButton AbsContentSize="96,96" AbsPosition="45.9592,565.246" AnchorPoint="0.5,1" GUID="{AFA7DEF1-1120-41ab-8C8A-166ED098D6CC}" LuaDoneFunctionName="onClickCharm" Name="btnCharm_ExtendUp_WndBottomBar" RelativePosition="0.26,0.73" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="0.9" Visible="True">
+                                    <NormalElement GUID="{60EA2CC8-F2BA-43d2-A160-89538B63799C}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_meilikongjian.png" GUID="{A535BFD2-E418-47e6-8FF5-3EF033AE5F58}" Type="WZUIImage" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement GUID="{DF793750-8775-4050-9205-13A2D6A3AC7A}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_meilikongjian.png" GUID="{36CF3B77-81BE-4af0-BF47-13E2EAC5F2F7}" Type="WZUIImage" UseOriginSize="True" Scale="1.1" />
+                                    </SelectElement>
+                                </WZUIButton>
+                                <WZUIButton AbsContentSize="96,96" AbsPosition="45.9592,565.246" AnchorPoint="0.5,1" GUID="{4291BE5B-189B-4149-911B-6B9A05813F45}" LuaDoneFunctionName="onClickWardrobe" Name="btnWardrobe_ExtendUp_WndBottomBar" RelativePosition="0.72,0.73" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="0.9" Visible="True">
+                                    <NormalElement GUID="{B2228BAF-FFEC-49a6-B972-953C17FC652C}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_yichu.png" GUID="{834E64F3-B0C1-404a-9F30-E792FE8FEE5D}" Type="WZUIImage" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement GUID="{480325D5-C322-4b5a-BC74-18E9BB47D50F}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_yichu.png" GUID="{FB4E8702-579F-46c8-BADE-4AED5C3C4C68}" Type="WZUIImage" UseOriginSize="True" Scale="1.1" />
+                                    </SelectElement>
+                                </WZUIButton>
+                                <WZUIButton AbsContentSize="96,96" AbsPosition="45.9592,565.246" AnchorPoint="0.5,1" GUID="{0E7FA382-C196-4402-BDE1-21F61DC0BB55}" LuaDoneFunctionName="onClickAscending" Name="btnAscending_ExtendUp_WndBottomBar" RelativePosition="0.26,0.6" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="0.9" Visible="True">
+                                    <NormalElement GUID="{188D88B9-A4A4-498b-B3A1-B23FDA473A80}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_shenggxt.png" GUID="{CEA932ED-8662-4f29-8FDD-15301B8153E5}" Type="WZUIImage" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement GUID="{22744069-0981-444c-A767-3E95FB655385}" Type="WZUIContainer">
+                                        <WZUIImage File="ui/city/newUI/main_icon_shenggxt.png" GUID="{47324F25-F205-42b4-8684-5884E68F255A}" Type="WZUIImage" UseOriginSize="True" Scale="1.1" />
+                                    </SelectElement>
+                                </WZUIButton>
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{EDB11702-586D-488e-BF78-4185CEC9C662}" Name="conExtendDown_WndBottomBar">
+                                <WZUIContainer AbsContentSize="70,70" AnchorPoint="0.5,1" GUID="{BCE3684C-65F1-416e-B3F5-679C73E547F9}" Name="conBtnGuide_ExtendDown_WndBottomBar" RelativePosition="0.26,0.16" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                                    <WZUIButton AbsContentSize="70,70" AbsPosition="70,70" AnchorPoint="0.5,0.5" GUID="{C2605AB3-D042-4aa9-838D-7E8F0EAC31C6}" LuaDoneFunctionName="onClickGuide" Name="btnGuide_WndOwnCity" Order="1" RelativePosition="0.499845,0.509351" Scale="1" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True">
+                                        <NormalElement GUID="{64894AE1-5141-48f5-8E9D-B5ABFABEEF62}" Order="1" RelativePosition="0.5,0.5" Type="WZUIContainer">
+                                            <WZUIImage File="ui/city/newUI/main_icon_zhiyin.png" GUID="{62AF10AD-6EE4-4461-90E4-D7DCF30B77A9}" Order="0" RelativePosition="0.5,0.5" Scale="1" Type="WZUIImage" UseOriginSize="True" />
+                                        </NormalElement>
+                                        <SelectElement GUID="{434C036B-FD90-4e4a-AC04-9650624ABDBC}" Order="1" Type="WZUIContainer">
+                                            <WZUIImage File="ui/city/newUI/main_icon_zhiyin.png" GUID="{CE6B59A6-0FBE-4c5d-A733-C6D578138FE0}" Order="0" Scale="1.1" Type="WZUIImage" UseOriginSize="True" />
+                                        </SelectElement>
+                                    </WZUIButton>
+                                </WZUIContainer>
+                                <WZUIContainer AbsContentSize="70,70" AnchorPoint="0.5,1" GUID="{FCD634D9-DF3F-4412-B5CA-81197202A2B5}" Name="conBtnSet_ExtendDown_WndBottomBar" RelativePosition="0.72,0.16" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                                    <WZUIButton AbsContentSize="70,70" AbsPosition="70,70" AnchorPoint="0.5,0.5" GUID="{C8EFDCE1-E80F-429d-B318-2FF489D0C6AD}" LuaDoneFunctionName="onClickSet" Name="btnSet_WndOwnCity" Order="1" RelativePosition="0.499845,0.509351" Scale="1" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True">
+                                        <NormalElement GUID="{9E20D862-38F1-4672-821F-43A8409AD31D}" Order="1" RelativePosition="0.5,0.5" Type="WZUIContainer">
+                                            <WZUIImage File="ui/city/newUI/main_icon_shezhi.png" GUID="{484E0B2B-954F-43d9-AC21-EC088594512E}" Order="0" RelativePosition="0.5,0.5" Scale="1" Type="WZUIImage" UseOriginSize="True" />
+                                        </NormalElement>
+                                        <SelectElement GUID="{9AEA4AC0-B52B-4376-8A7D-D0795492058A}" Order="1" Type="WZUIContainer">
+                                            <WZUIImage File="ui/city/newUI/main_icon_shezhi.png" GUID="{B7D0936A-9C7D-44d1-B205-A2E0D3DE70FF}" Order="0" Scale="1.1" Type="WZUIImage" UseOriginSize="True" />
+                                        </SelectElement>
+                                    </WZUIButton>
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIScissorContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{A576609C-B5E0-43d4-B709-D1B4C551727D}" AnchorPoint="1,0" RelativePosition="1,0" AbsContentSize="96,630" UseAbsSize="True" />
+                <WZUIContainer AbsContentSize="98,58" AnchorPoint="1,1" GUID="{90C940ED-D3B8-4438-9AB1-F95AF712C495}" Order="1" RelativePosition="1,1.00613" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" Visible="True" Name="conSwitch_WndBottomBar" ScaleX="1" Scale="1">
+                    <WZUIContainer Type="WZUIContainer" GUID="{3DFAA3CB-7664-48cc-878A-444B3A741B9D}" Name="conNetSignal_WndBottomBar" AnchorPoint="1,0.5" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.0,0.5" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{b6f32ff9-e7c8-4274-978c-8e6c65c524fc}" Name="conBottom_WndBottomBar" AbsContentSize="960,100" UseAbsSize="True" RelativePosition="1,0" AnchorPoint="1,0" ShowAll="True">
+                <WZUIScissorContainer Type="WZUIScissorContainer" GUID="{22329fbe-f62e-4fed-8812-9e4844243e02}" AbsContentSize="885,100" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+                    <WZUIContainer Type="WZUIContainer" GUID="{b35099e7-a022-4d27-a32a-825cff0a9156}" Name="conVertical_WndBottomBar" AnchorPoint="0,0.5" RelativePosition="0.0,0.5">
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{257021c6-6000-4c44-969e-a0643728156f}" LuaDoneFunctionName="onClickHuishou" Name="btnHuishou_WndBottomBar" RelativePosition="0.881156,0.2" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{8838ab2b-6b6d-447b-9704-61ed7ee11a2a}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{ec2219da-3d5e-4751-ac01-eaf6052420c8}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.4" />
+                                <WZUIImage Type="WZUIImage" GUID="{d98e0672-8b8d-4050-9fc7-258cea2149e4}" File="ui/city/beta/main_icon_huishou_2.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{813ef420-bfdb-4007-ae7a-f4ae307654ce}" File="ui/city/beta/commom_icon_wz_huishou_2.png" UseOriginSize="True" RelativePosition="0.5,-0.25" AnchorPoint="0.5,0" />
+                            </NormalElement>
+                            <SelectElement GUID="{5aada3d3-d0ad-45be-a91e-a751914ffa7a}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{4fd23cd1-0c71-46cf-b0a6-6fdd438f6376}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.4" />
+                                <WZUIImage Type="WZUIImage" GUID="{0ec10c72-dbe3-44c4-bfdc-4a4f2b81046a}" File="ui/city/beta/main_icon_huishou_2.png" Scale="1.05" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{3389db88-a0b8-4337-bf89-2c3aa64db7c5}" File="ui/city/beta/commom_icon_wz_huishou_2.png" UseOriginSize="True" RelativePosition="0.5,-0.25" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{3167c06d-9984-4fd3-80ca-ce50dce14fac}" LuaDoneFunctionName="onClickShengguang" Name="btnShengGuang_WndBottomBar" RelativePosition="0.501,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{38271e27-58cc-4095-9176-96e71e662daf}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{68c1f6e4-24ab-4692-adad-f04a59cccef6}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{2f33b97d-50ed-469f-a134-6076708eb9af}" File="ui/city/beta/main_icon_shengguang_2.png" UseOriginSize="True" RelativePosition="0.5,0.6" />
+                                <WZUIImage Type="WZUIImage" GUID="{cc2107c3-95ba-4c3e-a559-b07650776e4d}" File="ui/city/beta/commom_icon_wz_shengguang_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </NormalElement>
+                            <SelectElement GUID="{e7defc2c-4f73-4af5-9911-cee8a91af150}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{55d411a0-1d6c-4535-8e28-5e183efada35}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{f4ce41cd-cb25-4c65-9965-927172213090}" File="ui/city/beta/main_icon_shengguang_2.png" Scale="1.05" UseOriginSize="True" RelativePosition="0.5,0.6" />
+                                <WZUIImage Type="WZUIImage" GUID="{29e78d78-35a6-4846-8157-21be4bb8f6b0}" File="ui/city/beta/commom_icon_wz_shengguang_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{bdb52ef4-168e-43f3-b76a-a29b4eebe4fd}" LuaDoneFunctionName="onClickZhaohuan" Name="btnZhaohuan_WndBottomBar" RelativePosition="0.416089,0.0664136" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{13ab641d-2c62-432f-bd6a-6d4f4e5e8137}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{664760c7-0ef3-485f-be19-17739a5eab94}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.4" />
+                                <WZUIImage Type="WZUIImage" GUID="{0eae8ba3-049d-4472-8619-eaad17077c3f}" File="ui/city/beta/main_icon_zhaohuan_2.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{49ebf65c-2729-4ddb-b9d4-9ddd438cb8c1}" File="ui/city/beta/commom_icon_wz_zhaohuan_2.png" UseOriginSize="True" RelativePosition="0.5,-0.25" AnchorPoint="0.5,0" />
+                            </NormalElement>
+                            <SelectElement GUID="{5bb3448e-63ef-4ffc-a234-32076bd4a839}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{9ab910b7-9d85-454c-830e-52c9fb2c9e0b}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.4" />
+                                <WZUIImage Type="WZUIImage" GUID="{6ac2e576-6762-4d73-b9a3-033f5e9cc871}" File="ui/city/beta/main_icon_zhaohuan_2.png" Scale="1.05" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{ab9a5976-3d96-479b-8537-5837d6bb5888}" File="ui/city/beta/commom_icon_wz_zhaohuan_2.png" UseOriginSize="True" RelativePosition="0.5,-0.25" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{be511822-d5bd-45f8-9e24-a590653f2459}" LuaDoneFunctionName="onClickKapai" Name="btnKapai_WndBottomBar" RelativePosition="0.578,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{17ad9578-d75f-41a7-a6ff-d119908ebe7a}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{bede25cd-31b5-4052-b05b-6f1d6ebcfc12}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{cfdf17f8-e9fe-4ec9-b0ba-a7c135cbce26}" File="ui/city/beta/main_icon_kapai_2.png" UseOriginSize="True" RelativePosition="0.5,0.6" />
+                                <WZUIImage Type="WZUIImage" GUID="{05ce234a-a04b-4c07-9f3e-6ce94d03949c}" File="ui/city/beta/commom_icon_wz_kapai_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </NormalElement>
+                            <SelectElement GUID="{6402028c-b524-4017-8a23-7e013f1563a4}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{6198d6c5-5928-43bd-8d89-cd24b99ba7aa}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{d78c285e-f654-4dd5-98f9-102a3490b30a}" File="ui/city/beta/main_icon_kapai_2.png" Scale="1.05" UseOriginSize="True" RelativePosition="0.5,0.6" />
+                                <WZUIImage Type="WZUIImage" GUID="{a76f180d-a580-4318-bbf9-961ff8e94543}" File="ui/city/beta/commom_icon_wz_kapai_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{f0fd4c05-2df0-4ab2-998e-b0ba8649b1ba}" LuaDoneFunctionName="onClickPet" Name="btnPet_WndBottomBar" RelativePosition="0.809,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{c192c28c-e48f-4dd1-8b4c-9b163c0c3806}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{ea8d11a7-5b8b-4180-9483-fcfb50c7b5f8}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{1780f28a-609d-4475-8e46-70b9b0d109b5}" File="ui/city/beta/main_icon_chongwu_2.png" UseOriginSize="True" RelativePosition="0.5,0.6" />
+                                <WZUIImage Type="WZUIImage" GUID="{84d5bd5e-517d-48b5-871a-fa87f66a8679}" File="ui/city/beta/commom_icon_wz_chongwu_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </NormalElement>
+                            <SelectElement GUID="{4d35050c-e314-49b5-9054-62d541898f45}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{e658d340-17ee-4413-817c-48d34b32e29d}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{d3b1c080-afcd-4b47-babb-dca717dc7089}" File="ui/city/beta/main_icon_chongwu_2.png" Scale="1.05" UseOriginSize="True" RelativePosition="0.5,0.6" />
+                                <WZUIImage Type="WZUIImage" GUID="{e513480a-75c2-48c8-93b5-2b0285173382}" File="ui/city/beta/commom_icon_wz_chongwu_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{681c308e-36dc-4997-8c72-217405e0e646}" LuaDoneFunctionName="onClickMount" Name="btnMount_WndBottomBar" RelativePosition="0.732,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{9f0fb025-530d-4354-bc38-85d754b9aec2}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{b337ab11-b1c8-45f2-b6bc-066347cd7da8}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{15e01472-cace-47c3-9444-5338c1460c75}" File="ui/city/beta/main_icon_zuoqi_2.png" UseOriginSize="True" RelativePosition="0.5,0.65" />
+                                <WZUIImage Type="WZUIImage" GUID="{d2aa841e-bb25-4ccc-ab42-e3e70ae0934a}" File="ui/city/beta/commom_icon_wz_zuoqi_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </NormalElement>
+                            <SelectElement GUID="{69b39fee-e9c2-46f5-b525-0a2f3f56dbfb}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{1c290e16-238e-4823-9cee-274820786f95}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{bb3bb7ce-218b-4f9e-8e5e-25b0c9ec20fd}" File="ui/city/beta/main_icon_zuoqi_2.png" Scale="1.05" UseOriginSize="True" RelativePosition="0.5,0.65" />
+                                <WZUIImage Type="WZUIImage" GUID="{bc6bb08d-1db6-4eb4-b40c-cc735d32d048}" File="ui/city/beta/commom_icon_wz_zuoqi_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{02bfade9-2150-4e39-a6c6-5104a6cd7376}" LuaDoneFunctionName="onClickItem" Name="btnItem_WndBottomBar" RelativePosition="0.963,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{aa116895-19ab-4d4b-86ff-2c5fb6393feb}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{76dedc66-b446-490e-a767-df8016582eeb}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{5282bbd9-e394-4e99-ad3f-5569d5d7969d}" File="ui/city/beta/main_icon_jineng_2.png" UseOriginSize="True" RelativePosition="0.5,0.65" />
+                                <WZUIImage Type="WZUIImage" GUID="{f3f0368f-61d5-4294-b3dd-307c7466393e}" File="ui/city/beta/commom_icon_wz_jineng_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </NormalElement>
+                            <SelectElement GUID="{5a7ab46a-1994-4e76-819f-1333170aa3ef}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{de667daa-1ddf-43fb-bf59-03d096b3c90b}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{dac76f86-8551-41c3-a9f3-f5984c11ccb9}" File="ui/city/beta/main_icon_jineng_2.png" Scale="1.05" UseOriginSize="True" RelativePosition="0.5,0.65" />
+                                <WZUIImage Type="WZUIImage" GUID="{a726c24e-b60e-4e9f-a4b6-584cdefbf7cf}" File="ui/city/beta/commom_icon_wz_jineng_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{210d6124-6a41-4306-ad21-f4ccebedc106}" LuaDoneFunctionName="onClickStrong" Name="btnStrong_WndBottomBar" RelativePosition="0.886,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{f963661f-b5d5-424b-93b2-87c6c19e35e8}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{b74cb726-dd57-4623-b6b9-b8e774e138b4}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{62ef108e-fcb5-4cd6-8803-db328a4d6cbe}" File="ui/city/beta/main_icon_duanzao_2.png" UseOriginSize="True" RelativePosition="0.5,0.6" />
+                                <WZUIImage Type="WZUIImage" GUID="{bdb3f976-b502-4b61-8b7e-e531646fb920}" File="ui/city/beta/commom_icon_wz_duanzao_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </NormalElement>
+                            <SelectElement GUID="{8cb1c2ec-b15b-49f9-b8c8-71d96c66e2d9}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{8fdcb566-474a-4509-b3d6-6b28881e21dd}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{964774b5-6ede-4015-8476-b5965abfa134}" File="ui/city/beta/main_icon_duanzao_2.png" Scale="1.05" UseOriginSize="True" RelativePosition="0.5,0.6" />
+                                <WZUIImage Type="WZUIImage" GUID="{1e5e4967-2825-432a-8825-ee52b92d3b2c}" File="ui/city/beta/commom_icon_wz_duanzao_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{15a75d12-fb79-4607-be2b-6d2f765f8b87}" LuaDoneFunctionName="onClickPractice" Name="btnPractice_WndBottomBar" RelativePosition="0.655,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{d0357a31-bff9-4a97-bd7e-c6eb29bd9e86}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{9612e1e5-c38e-49f6-ba25-41b8577fb8f3}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{6efad309-94a6-4d30-9221-fd1d073a130b}" File="ui/city/beta/main_icon_xiulian_2.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{fdb897e1-3eb7-42bd-98e3-9625b2e4c036}" File="ui/city/beta/commom_icon_wz_xiulian_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </NormalElement>
+                            <SelectElement GUID="{fd1aac25-9cac-4d9a-bd3a-7fbdcdbc1b96}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{ff776a29-f333-4cc3-9ae5-af969e06f445}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{2630b988-9229-478b-b4ce-6594d31feeb3}" File="ui/city/beta/main_icon_xiulian_2.png" Scale="1.05" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{60d61ea6-ae7b-4cb3-a01d-24b6617c2970}" File="ui/city/beta/commom_icon_wz_xiulian_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{ada4ae0c-d74b-483c-9e64-48834270a610}" LuaDoneFunctionName="onClickRune" Name="btnRune_WndBottomBar" RelativePosition="0.655,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{7f1e5ba4-eca4-480c-9973-080f4dca85a3}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{e3133cd5-d9c0-4440-8013-481b096a7d3c}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{01c6f996-dc9c-438d-9b04-9a15163d715e}" File="ui/city/beta/main_icon_fuwen_2.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{5624bea5-2d65-40f8-ad4c-a21aaa11d918}" File="ui/city/beta/commom_icon_wz_fuwen_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </NormalElement>
+                            <SelectElement GUID="{5e5bb439-9704-44c5-92bf-61dc15eba334}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{825fc061-735c-433d-86b0-866dc9b0be65}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{08cfc7ee-2b7c-4391-87b5-931d411ed7da}" File="ui/city/beta/main_icon_fuwen_2.png" Scale="1.05" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{78a04945-690d-48c6-bc95-c75e3fd0589e}" File="ui/city/beta/commom_icon_wz_fuwen_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{135891b1-36b0-4471-9e41-7e11857ba26c}" LuaDoneFunctionName="onClickPhantom" Name="btnPhantom_WndBottomBar" RelativePosition="0.655,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{f088a5da-c046-49a8-9aec-cc99bbac2bd8}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{0ce69a79-872a-4d0b-a6f9-f468e8b79304}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{49ac2c57-2845-4ffd-b736-43114d578302}" File="ui/city/beta/main_icon_huanhua_2.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{d9f6e184-f93a-4c34-b106-b9e72af408cd}" File="ui/city/beta/commom_icon_wz_huanhua_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </NormalElement>
+                            <SelectElement GUID="{b4428286-4f68-44a2-a550-f4f8df5e003e}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{63af8286-538d-47cc-8657-62ad6175d02d}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{50715a5f-24ba-4d2f-80e7-e3e7116b6069}" File="ui/city/beta/main_icon_huanhua_2.png" Scale="1.05" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{6da6bb6c-a0d3-4c0b-8735-bc8128fc1f3d}" File="ui/city/beta/commom_icon_wz_huanhua_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{c0dd3b4e-ef14-4da3-951d-403c8e8fb464}" LuaDoneFunctionName="onClickBag" Name="btnBag_WndBottomBar" RelativePosition="0.65273,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{5f13a108-5fe8-434e-9167-28bde53d7b1a}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{c96e465c-343a-4813-bc1f-271eceaf1408}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{ebe35023-cb00-46bc-af20-a44bc2bd7f1c}" File="ui/city/beta/main_icon_beibao_2.png" UseOriginSize="True" RelativePosition="0.5,0.6" />
+                                <WZUIImage Type="WZUIImage" GUID="{a8251e4d-aea8-4cf5-8ab9-d033627f678f}" File="ui/city/beta/commom_icon_wz_beibao_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </NormalElement>
+                            <SelectElement GUID="{f525077c-9f62-4e48-b7bc-963e055f9a8b}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{6779e2c6-caea-434a-b05d-de9d3d9611ab}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{6fb68eec-fc75-4367-884a-fb599cd1bb98}" File="ui/city/beta/main_icon_beibao_2.png" Scale="1.05" UseOriginSize="True" RelativePosition="0.5,0.6" />
+                                <WZUIImage Type="WZUIImage" GUID="{856ac57f-c972-4644-891e-c7974b577004}" File="ui/city/beta/commom_icon_wz_beibao_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{538b243e-9761-48b7-9700-a5c815df1702}" LuaDoneFunctionName="onClickCharm" Name="btnMeili_WndBottomBar" RelativePosition="0.619962,0.341" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{4a141fec-1a50-43af-9ec4-4f672665c586}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{43b04040-8a58-4162-ae0c-10a2d41836a8}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{e1703e57-d46f-4791-a783-1690aa3880db}" File="ui/city/beta/main_icon_meilikongjian_2.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{7b15bc00-1cf3-4f71-8a45-8722633cd19e}" File="ui/city/beta/commom_icon_wz_meilikongjian_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </NormalElement>
+                            <SelectElement GUID="{2da895ca-844e-4d78-8fa6-8bf09caafb9f}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{d3f805b9-74f0-47b6-81de-932f96f37c5d}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{79207409-b1a3-4f47-993d-acc1b7292041}" File="ui/city/beta/main_icon_meilikongjian_2.png" UseOriginSize="True" Scale="1.05" />
+                                <WZUIImage Type="WZUIImage" GUID="{a325e30e-6fa8-4a29-95e4-72b345bdfb44}" File="ui/city/beta/commom_icon_wz_meilikongjian_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{4c7bea80-a525-4b18-95f6-e776f1f8c289}" LuaDoneFunctionName="onClickAwaken" Name="btnAwaken_WndBottomBar" RelativePosition="0.34382,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{100dc056-c8cb-4a7c-9eea-1e0c65170b19}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{1fd634b5-4029-450a-928d-79f3bcf1c5b9}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{43b6c3f0-c74a-4b08-9284-20b14cd30807}" File="ui/city/beta/main_icon_juexing.png" UseOriginSize="True" RelativePosition="0.5,0.65" />
+                                <WZUIImage Type="WZUIImage" GUID="{6760dcc9-ddbb-4af6-b14d-b479a7cf5dd7}" File="ui/city/beta/commom_icon_jx.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </NormalElement>
+                            <SelectElement GUID="{3db6dec8-1783-46fd-b38f-878ea1993125}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{52055690-5772-4048-a729-f7a0c9aa68c8}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{de058d5f-a1e4-4e88-a517-26cbe857e3e4}" File="ui/city/beta/main_icon_juexing.png" UseOriginSize="True" Scale="1.05" RelativePosition="0.5,0.65" />
+                                <WZUIImage Type="WZUIImage" GUID="{9c4270d6-8ad7-46a3-a152-88b821c4f9be}" File="ui/city/beta/commom_icon_jx.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{b1cf5ef0-8c43-4415-a2e7-8b32c43f6425}" LuaDoneFunctionName="onClickShare" Name="btnShare_WndBottomBar" RelativePosition="0.619962,0.027" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{1dfebcf5-a0e5-444e-a402-1d723093737d}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{89706253-3010-4271-976b-31caa9bba18c}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{354ab8b9-ca32-4b51-8a9b-9e8fed53ca69}" File="ui/city/beta/commom_icon_wz_tuijian.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{351bb440-96ba-4592-a1a6-798b6277bed4}" File="ui/city/beta/commom_icon_wz_tuijian_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </NormalElement>
+                            <SelectElement GUID="{2b88b0d6-6599-4ad2-8197-d8da2ee377ea}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{c0d5c0e3-e850-4caf-99f9-9960160e2629}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{e0e4e527-8aaa-470b-9195-428c63539f57}" File="ui/city/beta/commom_icon_wz_tuijian.png" UseOriginSize="True" ScaleX="1.05" ScaleY="1.05" />
+                                <WZUIImage Type="WZUIImage" GUID="{db13d095-2909-47c4-ab02-6d654f26480f}" File="ui/city/beta/commom_icon_wz_tuijian_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{2184480f-d82f-430d-b82e-1cbce5870a83}" LuaDoneFunctionName="onClickPlayer" Name="btnPlayer_WndBottomBar" RelativePosition="0.421741,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{6af0c1ab-fc93-4ed5-a41a-106a561dca79}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{74664bed-8231-4129-8763-83a8349f04f8}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{a85f2077-0140-47f4-9895-10e9506d0081}" File="ui/city/beta/main_icon_juese.png" UseOriginSize="True" RelativePosition="0.5,0.65" />
+                                <WZUIImage Type="WZUIImage" GUID="{6f760ca8-2cb5-4971-bfa8-68ec555f4d68}" File="ui/city/beta/commom_icon_juese_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </NormalElement>
+                            <SelectElement GUID="{4362b6b5-896c-4f5d-bb91-61235ef77afe}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{cbd3e5c0-4703-4ddf-98ea-be93bf8cef54}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{5dc596d1-143d-4d53-95bb-85bd57f6af8b}" File="ui/city/beta/main_icon_juese.png" Scale="1.05" UseOriginSize="True" RelativePosition="0.5,0.65" />
+                                <WZUIImage Type="WZUIImage" GUID="{0fa7cfe8-9c87-465c-8708-e29e406dfa05}" File="ui/city/beta/commom_icon_juese_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{339835ec-d0a7-4639-90fc-602ec4534e65}" LuaDoneFunctionName="onClickFootMark" Name="btnFootMark_WndBottomBar" RelativePosition="0.421741,0.066" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{5b58a0b2-d118-474b-ae89-ae5a0dcfabfc}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{e0e94666-6f56-40ef-8298-f42a2ea20f34}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{a8e95b44-ff93-4237-bfa3-eaa7f413198c}" File="ui/city/beta/main_icon_zuji_2.png" UseOriginSize="True" RelativePosition="0.5,0.65" />
+                                <WZUIImage Type="WZUIImage" GUID="{2ca71146-2346-4aa0-9f1a-a3878e51711e}" File="ui/city/beta/main_icon_zuji.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </NormalElement>
+                            <SelectElement GUID="{d8516152-71cc-445f-a4e9-c4be1c896013}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{b50c8d9f-0087-4c3d-9493-f9d8dc966698}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{beee889a-cfad-40b7-ae42-535791b5a274}" File="ui/city/beta/main_icon_zuji_2.png" Scale="1.05" UseOriginSize="True" RelativePosition="0.5,0.65" />
+                                <WZUIImage Type="WZUIImage" GUID="{462bcbf6-5a45-41ef-b14e-ea64350df3a7}" File="ui/city/beta/main_icon_zuji.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                    </WZUIContainer>
+                </WZUIScissorContainer>
+                <WZUIScissorContainer Type="WZUIScissorContainer" GUID="{e69c4516-6fec-4b2d-a375-ff69cfee78a9}" UseAbsSize="True" AbsContentSize="100,330" AnchorPoint="1,0" RelativePosition="1,0.627875">
+                    <WZUIContainer Type="WZUIContainer" GUID="{207c4405-afbe-4dd2-b01d-057cbada1277}" Name="conVertical2_WndBottomBar" RelativePosition="0.5,0.5" Visible="True">
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{9ed9ecf9-9218-4524-96ef-4137239016b9}" LuaDoneFunctionName="onClickHelper" Name="btnHelper_WndBottomBar" RelativePosition="0.5,0.597905" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="True">
+                            <NormalElement GUID="{ccd27eea-00db-4898-bbf1-1a01198934ae}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{3692b1ee-95db-4f31-b9ab-2054e7f5415d}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{27983edc-f59e-444c-bd30-6442eddb05e2}" File="ui/city/beta/main_icon_shequ.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{6353abd1-75e8-4aaf-a545-21ff621c2df6}" File="ui/city/beta/main_icon_shequ_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </NormalElement>
+                            <SelectElement GUID="{7cddcae4-0f6d-439b-b45c-9368a9399d17}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{e13f2cc4-d059-4d66-93ba-93353f3b7816}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{6c8cc9a5-3c19-44e7-8585-37f5752338c1}" File="ui/city/beta/main_icon_shequ.png" Scale="1.05" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{17aa1498-fc40-4f40-a509-5f3a9ec94ac2}" File="ui/city/beta/main_icon_shequ_2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{ca763f05-afc7-47cc-a053-7c7305db1b75}" LuaDoneFunctionName="onClickFriend" Name="btnFriend_WndBottomBar" RelativePosition="0.5,0.396418" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="True">
+                            <NormalElement GUID="{e1a4bb94-3cb0-442d-b88f-4de5c8fc63c4}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{15e6561e-0a68-4a3b-a7c3-9304ef2510b4}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{6850fd40-dd51-40ab-8c72-9fe67ae34944}" File="ui/city/beta/main_icon_friend.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{abe4d7c9-01b2-4b59-a9f0-98b2e78b6eca}" File="ui/city/beta/main_icon_friend_02.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </NormalElement>
+                            <SelectElement GUID="{a30f407e-bca8-4a8a-a30d-24d4eb5f6848}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{3ac0cdc8-7758-4364-87da-bc634a2269af}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{fae62210-8212-46e2-8d45-39080ebaaa9b}" File="ui/city/beta/main_icon_friend.png" Scale="1.05" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{cbbeccd2-7f0d-44fa-92ca-59b5832ed9fb}" File="ui/city/beta/main_icon_friend_02.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{b786d20e-052d-4742-b499-56710eb10d9c}" LuaDoneFunctionName="onClickSet" Name="btnSet_WndBottomBar" RelativePosition="0.5,0.000959369" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="True">
+                            <NormalElement GUID="{593db8b8-7aaf-4b7f-a1ae-33f634d2a84e}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{3365824b-c9ed-4632-95cb-aec0a76a06f4}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" Visible="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{3de868d6-0e54-4c0b-822d-4f56731310e1}" File="ui/city/beta/main_icon_shezhi.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{3ed5c44f-678c-45c0-ac61-ffdd746d6642}" File="ui/city/beta/main_icon_shezhi_02.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </NormalElement>
+                            <SelectElement GUID="{98f2af91-7bec-4917-a1e7-8b9cb2931fd6}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{d227013a-351a-4dff-afea-4dd8bedf2d2d}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{3059e094-db27-454a-9fb2-be1033a735b4}" File="ui/city/beta/main_icon_shezhi.png" Scale="1.05" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{4e8f2989-9199-4c85-b6aa-a18dde674cbe}" File="ui/city/beta/main_icon_shezhi_02.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{8e83418d-d603-4d9d-9fba-27af17c4f902}" LuaDoneFunctionName="onClickMail" Name="btnMail_WndBottomBar" RelativePosition="0.5,0.199972" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="True">
+                            <NormalElement GUID="{3c35758e-9ede-4a46-9207-d23f001d09e4}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{8eda223a-5036-4d66-94de-f8c1aec487c7}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" Visible="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{9648a99b-359c-49cb-a3d1-790838b8af64}" File="ui/city/beta/main_icon_youjian.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{8e58e07f-aab4-4894-80b4-2c0b0ad9e561}" File="ui/city/beta/main_icon_youjian_02.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </NormalElement>
+                            <SelectElement GUID="{8200f102-8410-4d68-a972-cd0430962173}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{1e2b0b5a-cdbb-4cba-ad70-51b0d11b8486}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{409b5df4-f7d4-4d7f-bf29-2a1fd6501c4d}" File="ui/city/beta/main_icon_youjian.png" Scale="1.05" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{755a668c-9083-4c98-9884-64a3c9ba5b2a}" File="ui/city/beta/main_icon_youjian_02.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{8da5ece9-5182-434f-a607-062dcd349814}" LuaDoneFunctionName="onClickBBS" Name="btnBBS_WndBottomBar" RelativePosition="0.5,0.796957" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="True">
+                            <NormalElement GUID="{0a8dd82d-455f-4929-bcae-0dcb6973e3c7}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{6af35cb9-acbb-4408-8b93-adf76719261b}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" Visible="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{917f53c7-e379-4666-8eab-60258c911289}" File="ui/city/beta/main_icon_luntn_2.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{78171351-53f8-42f9-97bd-64825bde1489}" File="ui/city/beta/main_icon_luntan.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </NormalElement>
+                            <SelectElement GUID="{fa8c676c-7ba5-4135-b8f9-6d6016328feb}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{67bfdbde-7dca-4a5a-b0e4-d00b5f098e20}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{4e0ce320-caf3-4f4b-8898-5d309aa7860b}" File="ui/city/beta/main_icon_luntn_2.png" Scale="1.05" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{9a428259-0752-4c66-b918-4825b7f3f996}" File="ui/city/beta/main_icon_luntan.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                        <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{ae1fb301-f812-4158-b365-b64fd812e353}" LuaDoneFunctionName="onClickGuide" Name="btnLibrary_WndBottomBar" RelativePosition="0.5,0.597905" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                            <NormalElement GUID="{3d2399a0-abe2-4738-9eeb-c75a531254d4}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{f17ac9ef-3ead-44dd-8cc7-03b66bd59511}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" Visible="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{3a6fd9b5-9424-4f87-88e6-e7935cc53e75}" File="ui/city/beta/main_icon_tj.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{e920b0f4-fdc4-4773-a677-11a55599f72b}" File="ui/city/beta/main_icon_tj2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" Visible="True" />
+                            </NormalElement>
+                            <SelectElement GUID="{0f5d4100-9d72-4688-be0a-b271ff1cbb10}" Type="WZUIContainer">
+                                <WZUIImage File="ui/city/beta/main_icon_di02_2.png" GUID="{79775245-d30e-4e56-ba11-6e236dd68379}" Type="WZUIImage" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{178fdc12-3c0e-4c1a-9fdd-ae3f1ec02de5}" File="ui/city/beta/main_icon_tj.png" Scale="1.05" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{a6b9adb8-2b11-40e1-b529-33116dc0503e}" File="ui/city/beta/main_icon_tj2.png" UseOriginSize="True" RelativePosition="0.5,-0.05" AnchorPoint="0.5,0" />
+                            </SelectElement>
+                        </WZUIButton>
+                    </WZUIContainer>
+                </WZUIScissorContainer>
+                <WZUIScissorContainer Type="WZUIScissorContainer" GUID="{445ac023-03d6-4a88-8d1e-56dc046b3cd9}" AbsContentSize="885,100" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+                    <WZUIContainer Type="WZUIContainer" GUID="{192815a7-6da9-49e0-903c-2ef63d76d8be}" Name="conVertical3_WndBottomBar" AnchorPoint="1,0.5" RelativePosition="1.3,0.5" Visible="False" />
+                </WZUIScissorContainer>
+                <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0.5" GUID="{0e2dbf26-644f-44d3-866e-cf3e05944b17}" LuaDoneFunctionName="onClickSwitch" Name="btnSwitch_WndBottomBar" RelativePosition="0.959547,0.358558" Scale="1" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                    <NormalElement GUID="{23baf514-ec3d-4d44-810e-b008af4b2842}" Type="WZUIContainer" Visible="True">
+                        <WZUIImage File="ui/city/beta/main_icon_di09_2.png" GUID="{ba259829-7bd1-44ee-8cda-5b724879e60f}" RelativePosition="0.5,0.5" Scale="1" Type="WZUIImage" UseOriginSize="True" Name="imgSwitch_WndBottomBar" ScaleY="1" ScaleX="1" />
+                    </NormalElement>
+                    <SelectElement GUID="{fb5fb60e-6b0c-41a1-b8b5-e347578980e0}" Type="WZUIContainer" Visible="True">
+                        <WZUIImage File="ui/city/beta/main_icon_di10_2.png" GUID="{64754caa-0029-4813-b74d-b54688f51441}" RelativePosition="0.5,0.5" Scale="1" Type="WZUIImage" UseOriginSize="True" Name="imgSwitch2_WndBottomBar" ScaleX="1" ScaleY="1" />
+                    </SelectElement>
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="70,60" AnchorPoint="0,1" GUID="{6e0167f2-475e-4eed-9590-c1cff7aab1d1}" RelativePosition="0,0.98" RelativeSize="1,1" ShowAll="True" Type="WZUIContainer" UseAbsSize="False" Name="conLeftUp_WndBottomBar" AbsPosition="0,1" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{d551afd6-17cb-4617-a7a5-6f08240f968d}" AbsContentSize="146,30" UseAbsSize="True" RelativePosition="0.0886444,0.816215" Visible="True" Name="conBgTask_WndBottomBar" TouchEnable="False" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9dae5405-dcba-498f-9c30-81efeb9572e5}" Color="255,236,193" FontSize="18" BoldFont="False" Text="" Name="txtTask_WndBottomBar" RelativePosition="0.42,0.5" />
+                </WZUIContainer>
+                <WZUIButton AbsContentSize="136,30" AbsPosition="70,45" AnchorPoint="0,1" GUID="{4f3776c5-b86e-4394-ab78-923b406df250}" LuaDoneFunctionName="onClickTask" Name="btnTask_WndBottomBar" RelativePosition="0.00379507,0.894632" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="True">
+                    <NormalElement GUID="{46dae97a-da88-4bb4-a7f9-8c84028c315d}" Type="WZUIContainer">
+                        <WZUIContainer Type="WZUIContainer" GUID="{78e08c7d-1dfc-4c48-92cd-7dcabcafa349}" AbsContentSize="60,24" UseAbsSize="True" RelativePosition="0.415966,0.309524">
+                            <WZUIImage Type="WZUIImage" GUID="{c57fd2df-527f-47ef-a52e-1041edf29362}" File="ui/city/beta/main_icon_jinbishuliangdi_2.png" Scale="1" RelativePosition="0,1" UseOriginSize="False" AnchorPoint="0,1" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{606f3011-71f8-463b-ac08-c7a62ad01f10}" AbsContentSize="144,35" UseAbsSize="True" RelativePosition="0.606092,-0.719043">
+                            <WZUIImage Type="WZUIImage" GUID="{b92e1503-a66f-49ef-bb61-b55410eee74a}" File="ui/city/beta/main_jiyandutiao_bg_2.png" Scale="1" RelativePosition="0,1" UseOriginSize="False" AnchorPoint="0,1" />
+                        </WZUIContainer>
+                        <WZUIImage Type="WZUIImage" GUID="{cfd74c37-bddc-43be-bf90-d8688b702ba0}" File="ui/city/beta/common_icon_renwu02.png" UseOriginSize="True" RelativePosition="0.144549,-0.32688" AnchorPoint="0.5,0" Order="10" />
+                    </NormalElement>
+                    <SelectElement GUID="{eaf861b8-b86d-461f-92af-a3bb2000bcd8}" Type="WZUIContainer">
+                        <WZUIContainer Type="WZUIContainer" GUID="{c9cbeec9-278b-4b00-895c-29eda537d305}" AbsContentSize="60,24" UseAbsSize="True" RelativePosition="0.415966,0.309524">
+                            <WZUIImage Type="WZUIImage" GUID="{88b3b253-3b50-4839-951f-0f248016a45e}" File="ui/city/beta/main_icon_jinbishuliangdi_2.png" Scale="1" RelativePosition="0,1" UseOriginSize="False" AnchorPoint="0,1" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{d1a69554-4a39-4bb5-86cd-a6b294591daa}" AbsContentSize="144,35" UseAbsSize="True" RelativePosition="0.606092,-0.719043">
+                            <WZUIImage Type="WZUIImage" GUID="{6689cf50-289b-482e-a536-826a7862ee13}" File="ui/city/beta/main_jiyandutiao_bg_2.png" Scale="1" RelativePosition="0,1" UseOriginSize="False" AnchorPoint="0,1" />
+                        </WZUIContainer>
+                        <WZUIImage Type="WZUIImage" GUID="{0d97ecdb-cf6b-4567-9aa5-42c566299ca2}" File="ui/city/beta/common_icon_renwu02.png" UseOriginSize="True" RelativePosition="0.144549,-0.32688" AnchorPoint="0.5,0" Order="10" />
+                    </SelectElement>
+                    <WZUIImage Type="WZUIImage" GUID="{5ac673a3-58b0-4a09-a034-a187310f856d}" File="ui/city/beta/commom_icon_wz_renwu_2.png" UseOriginSize="True" RelativePosition="0.417658,-0.131641" AnchorPoint="0.5,0" />
+                </WZUIButton>
+                <WZUIButton AbsContentSize="146,25" AbsPosition="70,45" AnchorPoint="0,1" GUID="{982273b2-4201-4f43-9b1a-37996f9600b9}" LuaDoneFunctionName="onClickTask" Name="btnTask2_WndBottomBar" RelativePosition="0.00587843,0.835255" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1">
+                    <NormalElement GUID="{6b67ffa1-bdca-4562-915c-598b508e768b}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{2bc42cab-fee5-448c-b436-6e60c947c6c0}" File="" Scale="0.9" RelativePosition="0.5,0.5" />
+                    </NormalElement>
+                    <SelectElement GUID="{7bc546c6-7e6f-4f26-a4cc-c2a4274feb00}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{525ea074-850a-477f-8187-9f02bc2386fd}" File="" Scale="0.93" RelativePosition="0.5,0.5" />
+                    </SelectElement>
+                </WZUIButton>
+                <WZUIButton AbsContentSize="156,70" AbsPosition="70,45" AnchorPoint="0,1" GUID="{c43fc9cd-fc0c-4b26-9d30-c90f09237547}" LuaDoneFunctionName="onClickTask" Name="btnTask3_WndBottomBar" RelativePosition="0,0.899987" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1">
+                    <NormalElement GUID="{6306d11f-55d5-42b5-a2fa-385c7b910060}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{6353c5ef-d847-435c-9c9e-eaae4a9697ca}" File="" Scale="0.9" RelativePosition="0.5,0.5" />
+                    </NormalElement>
+                    <SelectElement GUID="{2481f29b-9158-48c9-82a5-26128aa32936}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{7afd77df-edc3-4b40-b41c-6b66ad183550}" File="" Scale="0.93" RelativePosition="0.5,0.5" />
+                    </SelectElement>
+                </WZUIButton>
+                <WZUIButton AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" GUID="{ac9e6f58-a01d-4426-8a1f-71333f057991}" LuaDoneFunctionName="onClickFb" Name="btnFb_WndBottomBar" RelativePosition="0.047343,0.644857" ShowAll="False" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True" RelativeSize="1,1" Scale="1" Visible="False">
+                    <NormalElement GUID="{246650a1-18c5-497b-bbb3-37555ae6c0ef}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{5b7137cd-d256-466e-85f6-fa19426ee11a}" File="ui/city/beta/main_icon_facebook.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{6a72a6b5-472e-4fe4-9a6a-361b3291767c}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{f726f158-7f8e-4135-843e-00945074b4d4}" File="ui/city/beta/main_icon_facebook.png" Scale="1.05" UseOriginSize="True" />
+                    </SelectElement>
+                </WZUIButton>
+                <Button Type="WZUIButton" GUID="{1ac033b0-46e2-47dc-a871-087835297405}" Name="btnGroup_WndBottomBar" AbsContentSize="60,60" AbsPosition="70,45" AnchorPoint="0.5,0" LuaDoneFunctionName="onClickGroup" RelativePosition="0.047343,0.524544" UseAbsSize="True" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{2468cef5-21c3-42ac-a84c-1fb1c1275226}">
+                        <WZUIImage Type="WZUIImage" GUID="{e422ce30-c01f-49f7-b456-8474d897f1e8}" File="ui/city/beta/main_icon_group.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{f07fe456-2285-4626-91df-b9f81f0a4160}">
+                        <WZUIImage Type="WZUIImage" GUID="{59c8d80b-8393-44cb-a45a-87f9f3e575a7}" File="ui/city/beta/main_icon_group.png" Scale="1.0499999523162842" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{cd7b58e3-c562-42f4-8414-b9384813fff9}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{47d597ea-de5f-424a-ab9d-6fb78b2798f8}" Name="conTrailer_WndBottomBar" AbsContentSize="200,200" UseAbsSize="True" AbsPosition="480,400" UseAbsCoordinate="True" Visible="False" Order="3" ShowAll="True">
+                <WZUIImage File="ui/city/newUI/main_icon_daoju.png" GUID="{bae12985-4424-4923-9eb6-8c0636faf2f9}" RelativePosition="0.5,0.5" Scale="1" Type="WZUIImage" UseOriginSize="True" Name="imgTrailer_WndBottomBar" Rotation="0" FlipY="False" Opacity="255" />
+                <WZArmature Type="WZArmature" GUID="{b55e3072-cbe5-45cf-bef3-dba19fb71d60}" ArmatureName="zhiyin_dianji_anniu_01" UseOriginSize="False" RelativePosition="0.5,0.5" Visible="False" RelativeSize="1,1" TouchEnable="False" TouchSwallow="False" UseAbsCoordinate="False" AbsPosition="0,0" GrayRender="False" ArmatureFile="teach/zhiyin_dianji_anniu_01.xml" Name="animTrailer_WndBottomBar" AnchorPoint="0.5,0.5" ShowAll="False" UseOriginSizeProportion="True">
+                    <Action Type="WZUIArmatureAnimationById" GUID="{3d98b4cc-25a8-458a-bef3-d4759acc6548}" Bone="" AnimationId="0" Loop="-1" IsLoop="False" RunTimes="1" />
+                </WZArmature>
+                <WZUISpine Type="WZUISpine" GUID="{f7c0f151-b4f9-45fe-b461-aec5d392e95d}" FileAtlas="ui/icon_chongwu.atlas" FileJson="ui/icon_chongwu.json" Loop="True" AnimationName="icon_chongwu_2" RelativePosition="0.49853,0.784554" ScaleX="1" ScaleY="1" Visible="True" Name="animTrailer1_WndBottomBar" Scale="1" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</WndCityBottomBar>

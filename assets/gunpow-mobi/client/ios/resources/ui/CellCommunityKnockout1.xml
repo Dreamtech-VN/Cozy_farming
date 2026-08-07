@@ -1,0 +1,40 @@
+﻿<CellCommunityKnockout1 GUID="{27fbc321-6465-4433-b802-6c335d1d3667}">
+    <WZUIContainer Type="WZUIContainer" GUID="{7d28b2ab-9bbc-4da1-a66c-3ecef8e25703}" NameCreate="True" Name="CellCommunityKnockout1" AbsContentSize="194,86" UseAbsSize="True" LuaObjectName="">
+        <WZUIContainer Type="WZUIContainer" GUID="{b3457a7c-a7e6-4c78-9b18-e9743b5fbb60}">
+            <WZUI9Image Type="WZUI9Image" GUID="{b8f63fa0-632d-4637-bf09-eb0e0918df6f}" File="ui/common/common_scale9_di7.png" Name="imgBK_CellCommunityKnockout1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4218aaa6-01ef-46e4-a444-c80836e05ef6}" FontSize="20" Color="127,70,26" Name="txtLevel_CellCommunityKnockout1" RelativePosition="0.325,0.79" Text="" AnchorPoint="0,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{eaa0aad9-d9b0-4d8e-b50a-29a94f22d54b}" Color="127,70,26" FontSize="20" Name="txtName_CellCommunityKnockout1" RelativePosition="0.325,0.52" Text="" AnchorPoint="0,0.5" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{de2173be-363d-4d56-9c04-bbb50d9412b0}" CharMapFileName="ui/common_num/common_num_zhandouli.png" Height="26" Width="16" Text="" Scale="0.8" Name="txtFighting_CellCommunityKnockout1" AnchorPoint="0,0.5" RelativePosition="0.447938,0.226744" UseOriginSize="True" UseOriginSizeProportion="False" />
+            <WZUIImage Type="WZUIImage" GUID="{92d3e825-15a7-412b-b9b6-5592d5da0146}" File="ui/common/common_icon_zhanlih.png" UseOriginSize="True" RelativePosition="0.325,0.290698" AnchorPoint="0,0.5" Name="imgFighting_CellCommunityKnockout1" />
+            <Button Type="WZUIButton" GUID="{3c5cc5b6-7356-4984-a04a-244736e8482c}" LuaDoneFunctionName="onCheck">
+                <NormalElement Type="WZUIContainer" GUID="{f07e59fa-15f8-46d4-a911-14140ac7886d}" />
+                <SelectElement Type="WZUIContainer" GUID="{34f07188-61af-4a93-9e35-512aadfd4045}" />
+                <DisableElement Type="WZUIContainer" GUID="{2447cdc9-5832-4b8b-a619-3d91000153e4}" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{268a8cc6-2d0f-4f24-ae1d-4b9899ac6fad}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.17,0.5" TouchEnable="False" TouchSwallow="False">
+                <WZUIImage Type="WZUIImage" GUID="{a753ff0a-6c92-486d-a3f1-75ee2f823bb7}" File="ui/common/common_icon_tx.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{bebf8b38-b131-427c-98db-f201896c93f4}" Name="conHead_CellCommunityKnockout1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{84a8fff3-fe66-48a2-83e4-1cc8a2444a75}" Name="conPresident_CellCommunityKnockout1" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{3f8e06a5-5d42-405a-874c-caabbf4dc478}" File="ui/space/common_icon_renxiang.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.17,0.511628" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c47848f8-a06f-4d28-8017-0860b27ed2b4}" TextKey="COMMUNITY_COMPETE_TEXT31" AnchorPoint="0,0.5" FontSize="20" RelativePosition="0.325,0.5" Color="229,105,22" Name="txtPresident_CellCommunityKnockout1" />
+                <WZUIImage Type="WZUIImage" GUID="{615bd2a0-382a-40ed-9129-0fb5ed732d2b}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" RelativePosition="0.17,0.5" Scale="0.45" />
+                <Button Type="WZUIButton" GUID="{fe7de6e4-8aa8-42f3-b8e4-cbcf7abe0049}" LuaActionName="Normal" LuaDoneFunctionName="onClickCell">
+                    <NormalElement Type="WZUIContainer" GUID="{f875f355-32a0-4b41-b5cb-964b33bdbcc1}" />
+                    <SelectElement Type="WZUIContainer" GUID="{6a0fa2e2-6910-43ce-8b3b-435d0255bc19}" />
+                    <DisableElement Type="WZUIContainer" GUID="{d7ab5921-c908-47fd-8419-b06d3546cfe5}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{92806754-e56d-4f02-86fa-6b8cdd1b6ffc}" Name="conMember_CellCommunityKnockout1" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{4a47eadb-b854-4788-bbf1-1c1d60365175}" File="ui/space/common_icon_renxiang.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.17,0.511628" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ea69fedc-8f97-4b79-8ebb-647974d67b64}" TextKey="COMMYNITY_COMPETE_TEXT33" AnchorPoint="0,0.5" FontSize="20" RelativePosition="0.325,0.5" Color="138,122,106" />
+                <WZUIImage Type="WZUIImage" GUID="{a5e6c83c-30a9-43bd-b740-bdaef160b5e7}" File="ui/common/common_icon_wenhao.png" UseOriginSize="True" RelativePosition="0.17,0.5" Scale="0.35" />
+                <Button Type="WZUIButton" GUID="{cb80d46a-1a72-43bc-87e0-fd9a8be16da9}" LuaActionName="Normal" LuaDoneFunctionName="onTip">
+                    <NormalElement Type="WZUIContainer" GUID="{c972387d-8cd0-4e30-b60f-e410c1517f1f}" />
+                    <SelectElement Type="WZUIContainer" GUID="{c93bbf0d-f0fa-4bda-8b1e-aca04bf64afe}" />
+                    <DisableElement Type="WZUIContainer" GUID="{efd83fcb-998b-411f-b82b-651f20031cdb}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCommunityKnockout1>

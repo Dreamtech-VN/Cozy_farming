@@ -1,0 +1,15 @@
+﻿<CellSingleCopySectionItem GUID="{1d2da696-44c8-40e0-a2a5-88eee0d7505a}">
+    <WZUIContainer Type="WZUIContainer" GUID="{125fc393-e510-474d-9753-71b791ad250c}" Name="CellSingleCopySectionItem" NameCreate="True" AbsContentSize="160,35" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{725e41b9-528d-4f16-b59f-226bcc5d8165}">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9e25affe-c501-45db-a96d-02778c356388}" Name="txtSectionName_CellSingleCopySectionItem" Color="255,236,193" FontSize="16" />
+            <WZUIImage Type="WZUIImage" GUID="{00264e59-ea07-4884-940d-097a457dba48}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="0.8" RelativePosition="0.5,0" />
+            <Button Type="WZUIButton" GUID="{54b9e096-f868-45f7-987d-3d80eef8a9b8}" LuaDoneFunctionName="onClickSection">
+                <NormalElement Type="WZUIContainer" GUID="{deb10ffd-8817-4be0-b6f4-f4d6c38767a8}" />
+                <SelectElement Type="WZUIContainer" GUID="{10d31ae5-f43a-49fe-b5c3-533798b0d8c7}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{c74e28cf-500c-4321-9e79-efdfdf5a798a}" File="ui/common/common_scale9_wbbsxz.png" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{e803bb5f-379d-4ffd-bb7b-b10db6bc31d3}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellSingleCopySectionItem>

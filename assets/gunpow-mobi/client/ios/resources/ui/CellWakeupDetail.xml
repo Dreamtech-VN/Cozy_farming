@@ -1,0 +1,206 @@
+﻿<CellWakeupDetail GUID="{7c5fd535-290d-42dd-be12-7af213a654f2}">
+    <WZUIContainer Type="WZUIContainer" GUID="{388b542c-d2c9-4d91-9e64-6fa918c0627c}" LuaObjectName="CellWakeupDetail" Name="CellWakeupDetail" NameCreate="True" AbsContentSize="737,560" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{ef383e8f-2e93-4259-b63e-216cf144d9b6}" RelativeSize="1,1" AnchorPoint="0.5,1" RelativePosition="0.5,1" Name="conSoul_CellWakeupDetail" Visible="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{cace00b6-e643-4d86-bfa7-1837628400cf}" Name="conSoulLeft_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.00142857,0.498214" RelativeSize="0.6,1" Visible="True">
+                <Button Type="WZUIButton" GUID="{b84d9b37-e4c1-40ce-9887-38d657a7e5eb}" AbsContentSize="96,96" UseAbsSize="True" LuaActionName="Normal" LuaDoneFunctionName="onClickPro" Name="btnSoulPro_CellWakeupDetail" RelativePosition="0.174874,0.104198">
+                    <NormalElement Type="WZUIContainer" GUID="{6e549a11-dfd5-4828-b04e-a257b30de676}">
+                        <WZUIImage Type="WZUIImage" GUID="{a0a7807f-c1b2-41fa-95bf-8412f684bd85}" File="ui/common/common_btn_anniu21.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{b1533054-6d54-440b-8988-39a2baf9f9de}">
+                        <WZUIImage Type="WZUIImage" GUID="{6b1eb139-f993-44c1-b2e3-d6668d413aff}" File="ui/common/common_btn_anniu21_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{f8eb8816-5af1-423b-b707-fac63db583c7}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{90d0244a-4c32-4c4e-8244-62e8e094e4f3}" FontSize="22" Color="255,236,193" Name="txtNewMount_CellWakeupDetail" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Text="" TextKey="NEW_MOUNT2" LabelStyleKey="" EnableStroke="True" StrokeColor="0,72,3" StrokeSize="4" />
+                </Button>
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{2cff92c9-74dc-47c6-9bea-fe557c2641cc}" AnchorPoint="0,0.5" Name="ftxtSoulLevel_CellWakeupDetail" RelativePosition="0.285,0.13" MaxWidth="500" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{ce6a4e58-4838-41b4-a0c8-1645a2c87bf3}" AnchorPoint="0,0.5" Name="ftxtInbornValue_CellWakeupDetail" RelativePosition="0.285,0.075" MaxWidth="500" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{2e716703-1b2d-4af5-af47-72f675ff1cdd}" AnchorPoint="0,0.5" Name="ftxtSoulExp_CellWakeupDetail" RelativePosition="0.43,0.13" MaxWidth="500" />
+                <WZUIContainer Type="WZUIContainer" GUID="{4543976d-9574-4e81-934e-57d49a540f90}" AnchorPoint="0.5,1" RelativePosition="0.5,1" RelativeSize="1,0.8">
+                    <WZUISpine Type="WZUISpine" GUID="{bdd47c5b-21de-4baa-82b8-849849b6fe93}" FileAtlas="ui/ui_juexingzhihun_glow.atlas" FileJson="ui/ui_juexingzhihun_glow.json" AnimationName="ui_juexingzhihun_glow" Loop="True" Visible="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{334be4b8-83d2-4ff2-bbc4-7bf80e728c13}" File="ui/extraction/ui_juexingzhihun_anbu.png" UseOriginSize="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{524bef61-6fb7-4953-93a0-c38d0a3e6866}" File="ui/extraction/ui_juexingzhihun_boli.png" UseOriginSize="True" Scale="1" />
+                    <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{9c3a82d2-be17-41b1-9461-d521910a7e56}" Name="conClipping_CellWakeupDetail" Scale="1">
+                        <Stencil Type="WZUIImage" GUID="{18e29e10-7e68-489e-b499-b8e2db2d8ffd}" File="ui/city/newUI/common_shade_touxiang.png" UseOriginSize="True" RelativePosition="0.497739,0.506696" Scale="2.51" Name="imgZheZhao_CellHead" Visible="True" />
+                        <WZUIProgress Type="WZUIProgress" GUID="{a8245b83-1bcc-4d4a-832b-2d63296e0dc1}" BgPicture="ui/extraction/ui_juexingzhihun_bg.png" UseOriginSize="True" Percentage="0" IsBarType="True" IsOpacityModifyRGB="False" BarChangeRate="0,1" Scale="1" Name="prgSoulExp_CellWakeupDetail" RelativePosition="0.495477,0.53125" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{ec7bca41-dcaa-42fa-a576-1770b3e91974}" AbsContentSize="198,221" UseAbsSize="True" RelativePosition="0.5,0.53125">
+                            <WZUISpine Type="WZUISpine" GUID="{87899e00-55c2-4688-89ee-f0c65923a08e}" FileJson="ui/ui_juexingzhihun_jindutiao.json" FileAtlas="ui/ui_juexingzhihun_jindutiao.atlas" AnimationName="ui_juexingzhihun_jindutiao" Loop="True" Scale="1" Name="spineCrimp_CellWakeupDetail" RelativePosition="0.515152,0.127149" Visible="True" />
+                            <WZUISpine Type="WZUISpine" GUID="{1a954433-ae14-45d1-8655-94155c4c0e00}" FileAtlas="ui/ui_juexingzhihun_shuipao.atlas" FileJson="ui/ui_juexingzhihun_shuipao.json" AnimationName="ui_juexingzhihun_shuipao" Loop="True" Name="spineBubble_CellWakeupDetail" RelativePosition="0.5,0.5" />
+                        </WZUIContainer>
+                    </WZUIClippingContainer>
+                    <WZUIImage Type="WZUIImage" GUID="{b7d0851a-882a-487b-94ad-8c9d9c658f7c}" File="ui/extraction/ui_juexingzhihun_ditu.png" UseOriginSize="True" RelativePosition="0.506784,0.506696" Visible="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{30b70181-5c4d-4394-a3ea-8d236c432c88}" File="ui/extraction/ui_juexingzhihun_kuang.png" UseOriginSize="True" RelativePosition="0.502261,0.470982" />
+                    <WZUISpine Type="WZUISpine" GUID="{0b7af184-fd3d-4d20-83c0-9f152031e4a5}" AnimationName="ui_juexingzhihun_baoji" FileAtlas="ui/ui_juexingzhihun_baoji.atlas" FileJson="ui/ui_juexingzhihun_baoji.json" Loop="False" Visible="False" Name="spineBig_CellWakeupDetail" TouchEnable="False" RelativePosition="0.5,0.475446" />
+                    <WZUISpine Type="WZUISpine" GUID="{d601c108-00d2-4447-989d-a444937312a9}" AnimationName="ui_juexingzhihun_xiaobaoji" FileAtlas="ui/ui_juexingzhihun_xiaobaoji.atlas" FileJson="ui/ui_juexingzhihun_xiaobaoji.json" Loop="False" Visible="False" Name="spineSmall_CellWakeupDetail" TouchEnable="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{192a1b02-567c-4556-a1ee-f234d60722de}" AbsContentSize="304,960" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1.01628,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{b7ad4eb8-d2ce-4088-8627-e28075c7b238}" File="ui/common/common_scale9_heidi9.png" Opacity="180" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{9ddda9e3-fe2d-4cc9-a02e-9146d2563bbf}" Name="conSoulRight_CellWakeupDetail" AnchorPoint="1,0.5" RelativePosition="1.01628,0.558929" RelativeSize="0.3,1" AbsContentSize="304,960" UseAbsSize="True">
+                <Button Type="WZUIButton" GUID="{9c40f195-fc4f-42fb-a75c-e958c03ee6f8}" AbsContentSize="136,58" UseAbsSize="True" LuaActionName="Normal" Tag="0" RelativePosition="0.5,0.748958" LuaDoneFunctionName="onClickPath" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{1d6f2988-ed28-4dd1-926b-3d1cfbb9d8fc}" />
+                    <SelectElement Type="WZUIContainer" GUID="{8db174b7-b20b-49c0-b6f7-09891b61c981}" />
+                    <DisableElement Type="WZUIContainer" GUID="{a359f88b-3d03-4676-aeaa-0724966949c2}" />
+                    <WZUIImage Type="WZUIImage" GUID="{2f1990ef-97cf-47b6-bf46-066a0fd5f31d}" UseOriginSize="True" File="ui/common/common_icon_jxzj.png" RelativePosition="0.5,0.35" />
+                </Button>
+                <WZUIContainer Type="WZUIContainer" GUID="{beebafa4-0659-4741-85b0-a40d7d2534b2}" RelativeSize="1,1" AbsContentSize="304,396" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.66">
+                    <WZUIImage Type="WZUIImage" GUID="{67aeecf2-0b4d-4e9a-8548-16961f9c5277}" File="ui/common/common_scale9_fengexian2.png" UseOriginSize="True" ScaleX="0.45" RelativePosition="0.5,0.75" />
+                    <WZUIImage Type="WZUIImage" GUID="{bac5c538-5599-4f46-a76d-1f9df2c88760}" File="ui/common/common_scale9_fengexian2.png" UseOriginSize="True" ScaleX="0.45" />
+                    <WZUIImage Type="WZUIImage" GUID="{fc25542a-e218-47dd-92f0-7e13f99819f5}" File="ui/common/common_scale9_fengexian2.png" ScaleX="0.45" UseOriginSize="True" RelativePosition="0.5,0.25" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{291cbf8e-f7e9-47fb-9f4f-38f4fe86a4e5}" AbsContentSize="300,95" Name="conForCoin1_CellWakeupDetail" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{cbf699e3-4191-49df-b3b5-b9a72b3ab107}" AbsContentSize="300,95" Name="conForCoin2_CellWakeupDetail" UseAbsSize="True" RelativePosition="0.5,0.625" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{12b6ba12-847d-40ff-b03c-e7622001a955}" AbsContentSize="300,95" Name="conForCoin3_CellWakeupDetail" UseAbsSize="True" RelativePosition="0.5,0.375" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{925d28d8-3baa-489c-b525-ae71f9011fb3}" AbsContentSize="300,95" Name="conForCoin4_CellWakeupDetail" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{406c2143-6233-459b-bb58-30eff35bdc80}" AbsContentSize="300,47" UseAbsSize="True" RelativePosition="0.5,0.689583">
+                    <WZUI9Image Type="WZUI9Image" GUID="{7cd7d91a-ac77-4451-b051-fd4fdab3c5a7}" File="ui/common/common_scale9_heidi6.png" UseOriginSize="True" Scale="0.83" ScaleX="0.5" Opacity="150" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{401291fc-42a5-49de-a0c4-cb53bf8973cc}" FontSize="26" Color="255,227,116" TextKey="BAG10" />
+                    <WZUIImage Type="WZUIImage" GUID="{a083156d-75d1-404b-9136-4b36dfba3eaf}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.256667,0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{fbfe64a5-cf4c-4dcf-8c1a-c15d220daee1}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" FlipY="False" FlipX="True" RelativePosition="0.776666,0.5" />
+                </WZUIContainer>
+                <Button Type="WZUIButton" GUID="{cc65f475-2dae-44a7-815f-bc930411943d}" AbsContentSize="110,56" UseAbsSize="True" RelativePosition="0.28,0.212" LuaDoneFunctionName="use5" LuaActionName="Normal" Order="1" Visible="True" LocalInterval="300">
+                    <NormalElement Type="WZUIContainer" GUID="{d5c8a1d5-698c-4145-be2a-e1bb743b6888}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{e5ef82ad-b48b-45f7-b5a1-2a0ad43a1473}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{e239b55f-4901-4b2c-acbf-9daac6ad10a7}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{124e6390-9c07-49a4-99d0-774c5b089529}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{2a071123-3fc9-437e-9b4e-7e1b9e553e84}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6a63e60a-842b-4757-8f3b-4baa80d451ec}" TextKey="WAKEUP2" LabelStyleKey="SMALL_GREEN_BTN" Name="txtWakeup2_CellWakeupDetail" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{4a02b125-d53e-4c83-be15-71cf9606de4f}" AbsContentSize="110,56" UseAbsSize="True" RelativePosition="0.72,0.212" LuaDoneFunctionName="use1" LuaActionName="Normal" LocalInterval="300">
+                    <NormalElement Type="WZUIContainer" GUID="{f50b51aa-759e-4334-951f-995d2f185d07}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{88d5206b-712e-460a-b2b8-e3739a5512cd}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{98a30efc-706e-4d22-838b-78d2c2918e83}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{9e711c43-8360-4ac9-af70-4467dace191d}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{06f6610e-fd6e-44d4-acb1-0753d91acce7}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7dc54bea-8a8f-413e-9494-7898d27c1826}" TextKey="USE" LabelStyleKey="SMALL_GREEN_BTN" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{c5ff7894-b9de-4ac6-ae9b-ce71f46810a1}" AbsContentSize="594,214" UseAbsSize="True" Name="conLog_CellWakeupDetail" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{e882e01f-2bf0-46a7-8d1b-610b96d69c8b}" File="ui/common/common_scale9_di24.png" RelativePosition="0.5,0.5" AbsPosition="313,107" Opacity="255" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{382f8ad9-cb01-4304-ab7a-e3237810a14b}" TextKey="WAKEUP1" LabelStyleKey="C8_F22" RelativePosition="0.104377,0.878504" AbsPosition="61.9999,188" Name="txtWakeupLog_CellWakeupDetail" />
+                <WZUIContainer Type="WZUIContainer" GUID="{61872c30-61a5-4902-be51-a9c4a0d17d1f}" AbsContentSize="570,2" UseAbsSize="True" RelativePosition="0.5,0.775701" AbsPosition="297,166">
+                    <WZUIImage Type="WZUIImage" GUID="{643990f6-d8e0-495d-ad70-f9e53eff1993}" File="ui/common/common_scale9_fengexian.png" />
+                </WZUIContainer>
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{220ff8ea-ce63-450e-9bb1-cfb4f1b990d1}" Name="tfbLog1_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.04,0.7" MaxWidth="600" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{348576f7-8b01-4293-b6b1-f9d13b104ee9}" Name="tfbLog2_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.04,0.6" MaxWidth="600" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{84a7054c-5bd5-4589-9fc0-06da9d2a2108}" Name="tfbLog3_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.04,0.5" MaxWidth="600" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{41e48f37-83d9-48f6-b3c1-5f3921a040ae}" Name="tfbLog4_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.04,0.4" MaxWidth="600" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{651c9145-8226-406e-8bf6-298ef08fae0b}" Name="tfbLog5_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.04,0.3" MaxWidth="600" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{7fd54208-5709-4b29-9efd-6e1a85e68bf3}" Name="tfbLog6_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.04,0.13" MaxWidth="600" />
+                <Button Type="WZUIButton" GUID="{127c9516-1952-46c7-9299-51b14e6264c9}" UseAbsSize="True" AbsContentSize="2000,900" LuaDoneFunctionName="closeLog">
+                    <NormalElement Type="WZUIContainer" GUID="{b62eb983-9b66-4b72-8624-70706b9d4276}" />
+                    <SelectElement Type="WZUIContainer" GUID="{26f73f33-6730-4a72-ad49-b112f838feb8}" />
+                    <DisableElement Type="WZUIContainer" GUID="{22e801a6-2171-462d-8157-0f46875c4ea1}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{8bb42840-0888-4330-adb8-6bbddf88eb5b}" RelativeSize="1,1" AnchorPoint="0.5,1" RelativePosition="0.5,1" Name="conBody_CellWakeupDetail" Visible="False">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{bdd3e649-a236-4db0-a894-be73b64d50cc}" FontSize="22" Color="93,222,254" Name="txtBodyClotheName_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.45,0.87" TextKey="" Text="" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a03a8c93-ab4a-4626-812c-061feb432e44}" FontSize="20" Color="255,227,116" Name="txtBodyProValue_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.45,0.81" TextKey="" Text="" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{0a7a1b35-94dd-48b9-b3fb-16dc4b9c599e}" FontSize="20" Color="255,227,116" Name="txtBodyRecAtt_CellWakeupDetail" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.17" TextKey="" Text="" />
+            <Button Type="WZUIButton" GUID="{6288d516-d80b-4d3a-bec6-96584f9ead4c}" AbsContentSize="142,66" UseAbsSize="True" LuaActionName="Normal" Tag="-1" RelativePosition="0.5,0.08" LuaDoneFunctionName="onClickRec" Name="btnBodyGoto_CellWakeupDetail">
+                <NormalElement Type="WZUIContainer" GUID="{f29091c5-8833-4dec-ad52-8b16c4a27f48}">
+                    <WZUIImage Type="WZUIImage" GUID="{7d5f42cf-bfa8-4841-8b03-ab8558855793}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{27925c6a-1713-4e9a-ab12-b693f6dcb782}">
+                    <WZUIImage Type="WZUIImage" GUID="{a1083549-e976-4132-9bc5-0229ad36bbb8}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{6bdeb9cb-4cfa-4966-9581-e119b1cebe77}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5aa7e604-4855-4f36-9fc2-e8ded4ecb152}" FontSize="24" Color="255,236,193" Name="txtBodyBtn_CellWakeupDetail" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" TextKey="" Text="" LabelStyleKey="NORMAL_GREEN_BTN" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{e3f51b53-4ab6-4e0a-9a19-0c42c3f650d3}" Name="conSkillTip_CellWakeupDetail" AbsContentSize="66,66" UseAbsSize="True" RelativePosition="0.4,0.84">
+                <WZUI9Image Type="WZUI9Image" GUID="{656d7951-c9a7-4f7e-bfdd-0652d8d8b390}" File="ui/common/common_icon_jinengkuang.png" />
+                <WZUIImage Type="WZUIImage" GUID="{1a1b02fb-e927-48e2-9884-a57a2994624e}" File="ui/combat/common_icon_kdi.png" UseOriginSize="True" ScaleY="1" RelativePosition="0.5,0.512821" Name="" AbsPosition="39,40" Visible="True" Scale="0.8" />
+                <WZUIImage Type="WZUIImage" GUID="{6e55c26f-5b3c-420c-b85f-b8722417d92e}" Name="imgSkillIcon_CellWakeupDetail" />
+                <Button Type="WZUIButton" GUID="{4cc7b1a7-e8eb-4507-8205-fec4ad433498}" LuaDoneFunctionName="onClickSkill">
+                    <NormalElement Type="WZUIContainer" GUID="{6ce9ebd0-ed4b-475b-bfff-7177b2d34b16}" />
+                    <SelectElement Type="WZUIContainer" GUID="{e239c29d-bb3c-4037-a1c9-42760e27e1b9}" />
+                    <DisableElement Type="WZUIContainer" GUID="{65bf5289-7af6-45c1-b840-6e629e9106f7}" />
+                </Button>
+            </WZUIContainer>
+            <WZUISpine Type="WZUISpine" GUID="{dad7440a-4491-426f-b3d1-7043bb1dde5d}" AnimationName="ui_juexingzhihun_lingqu" FileAtlas="ui/ui_juexingzhihun_lingqu.atlas" FileJson="ui/ui_juexingzhihun_lingqu.json" Loop="False" Visible="False" Name="spineReceive_CellWakeupDetail" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{2eb15773-1637-4c8d-beb7-4cf3d4a2069b}" RelativeSize="1,1" AnchorPoint="0.5,1" RelativePosition="0.5,1" Name="conPower_CellWakeupDetail" Visible="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{cd9f7f77-aec8-4098-995d-8e364727e058}" Name="conLeft_ConPower" AnchorPoint="0,0.5" RelativePosition="0,0.5" RelativeSize="0.5,1">
+                <WZUIContainer Type="WZUIContainer" GUID="{b78ed605-9bd1-4d96-9f22-e3178f2364e9}" RelativeSize="1,0.08" RelativePosition="0.5,1" AnchorPoint="0.5,1">
+                    <WZUI9Image Type="WZUI9Image" GUID="{09a103b0-f09a-4d4a-8ed5-971f78130bfe}" File="ui/common/common_scale9_heidi4.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{23b3006d-5548-4b17-8531-8be3e13600ba}" FontSize="24" Color="255,227,116" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" TextKey="WAKEUP_TEXT36" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{79459b49-9f50-4c59-8247-aab4a5adbd0f}" RelativeSize="0.85,0.87" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{4ff16ed2-3512-4520-a2c8-4614b4e82bb2}" CellElementHeight="0.22" ColumnCount="2" Name="tableProperty_CellWakeupDetail" RelativeSize="0.9,1" EnableMoveHorizontal="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{c368d0cb-cc05-4b18-a357-d86afe0e43a3}" File="ui/common/common_scale9_fengexian2.png" UseOriginSize="True" ScaleY="1" FlipY="False" FlipX="False" Rotation="90" ScaleX="0.8" />
+            <WZUIContainer Type="WZUIContainer" GUID="{fec4f7e6-8f3f-4140-9c2a-968cb1f73b9f}" Name="conRight_ConPower" AnchorPoint="1,0.5" RelativePosition="1,0.5" RelativeSize="0.5,1">
+                <WZUIContainer Type="WZUIContainer" GUID="{19b29381-2142-4355-8104-65cf466c2184}" RelativeSize="1,0.08" RelativePosition="0.5,1" AnchorPoint="0.5,1">
+                    <WZUI9Image Type="WZUI9Image" GUID="{a2e7cc2e-f50a-4119-a4d3-53e939ee9a0a}" File="ui/common/common_scale9_heidi4.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{327e02f6-df93-4a92-933f-a6d97e6475b2}" FontSize="24" Color="255,227,116" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" TextKey="WAKEUP_TEXT37" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{a02add22-e730-4477-8e17-92d5ac75edcd}" RelativeSize="0.85,0.87" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{b7b07e02-0902-4c58-ba34-71434cb79546}" CellElementHeight="0.22" ColumnCount="2" Name="tableWealth_CellWakeupDetail" RelativeSize="0.9,1" EnableMoveHorizontal="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{4f82f4b8-dea2-45f7-ac02-9c927e959f5e}" RelativeSize="1,1" AnchorPoint="0.5,1" RelativePosition="0.5,1" Name="conSkill_CellWakeupDetail" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{9cfaf86f-1590-4c64-8250-e27b83c9dda5}" RelativeSize="1,0.53" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{890df27b-0353-45bd-9b06-884f6bf83a43}" FontSize="22" Color="255,227,116" Name="txtSkillLevel_CellWakeupDetail" RelativePosition="0.5,0.867857" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" />
+                <WZUISpine Type="WZUISpine" GUID="{9292ba9d-e4ce-4474-ae0e-6be085c240a8}" FileAtlas="ui/ui_skill_juexing.atlas" FileJson="ui/ui_skill_juexing.json" AnimationName="ui_skill_juexing" Loop="True" TouchEnable="False" RelativePosition="0.479647,0.8" Name="spineSkillIcon_CellWakeupDetail" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{cf04c63d-f3f4-47da-90d4-8ae14d984432}" FontSize="18" Color="255,227,116" Name="txtSkillTips_CellWakeupDetail" RelativePosition="0.5,0.0490567" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{c2b118f2-4e2d-4a6e-9d0a-d4bdea2af755}" AnchorPoint="0.5,0" RelativePosition="0.5,0.267" RelativeSize="1,0.5" AbsContentSize="550,110" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{73168d4f-eeb4-413e-a243-c8888b36f0f0}" File="ui/extraction/common_scale9_jxdik.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{149655d7-c495-4ea6-b72e-631a84199820}" AbsContentSize="150,110" UseAbsSize="True" RelativePosition="0.33,0.5" Name="conCurLevel_CellWakeupDetail">
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{b8c2ae3c-e10d-4126-89a0-0c3f09ce8758}" Name="txtSkillTopValue1_1_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.05,0.78" MaxWidth="200" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{c7c0575b-feef-4e34-bf40-85ae9e7a24b2}" Name="txtSkillTopValue1_2_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" MaxWidth="200" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{f803698e-8093-4c9d-bc50-269baddeab74}" Name="txtSkillTopValue1_3_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.05,0.25" MaxWidth="200" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{1750ca45-16c7-4f6d-9047-b4c3a95675ad}" AbsContentSize="150,110" UseAbsSize="True" RelativePosition="0.73,0.5" Name="conNextLevel_CellWakeupDetail">
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{1ee13219-1b07-4d6d-a6ed-b54b5e6b7b31}" Name="txtSkillTopValue2_1_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.05,0.78" MaxWidth="200" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{f1c58130-4d4e-4c45-a27b-8309bc385ff6}" Name="txtSkillTopValue2_2_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" MaxWidth="200" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{8b311c1c-d647-4776-8383-be9240e9d67e}" Name="txtSkillTopValue2_3_CellWakeupDetail" AnchorPoint="0,0.5" RelativePosition="0.05,0.25" MaxWidth="200" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{d54e16ab-303c-45f6-85b9-06be53804c56}" UseOriginSize="True" File="ui/extraction/common_jx_jiantou.png" RelativePosition="0.5,0.5" Name="imgSkillArrow_CellWakeupDetail" />
+            </WZUIContainer>
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{621b1a5a-18fa-457f-a92a-1c59b4a7ed70}" Name="ftxtCost_CellWakeupDetail" RelativePosition="0.5,0.22" MaxWidth="500" />
+            <Button Type="WZUIButton" GUID="{d3b9addb-af96-4263-96cb-ca2ef8baece9}" AbsContentSize="136,62" UseAbsSize="True" Name="btnSkillUpgrade_CellWakeupDetail" LuaActionName="Normal" LocalInterval="300" Scale="1" RelativePosition="0.5,0.133929" Tag="2" LuaDoneFunctionName="onClickSkillUpgrade">
+                <NormalElement Type="WZUIContainer" GUID="{acb5f8be-6223-4780-a54e-3c191d1d00ed}">
+                    <WZUIImage Type="WZUIImage" GUID="{c96cd287-c830-4ef1-9c28-bc00d20b0880}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{fe541387-6f28-4e06-8483-60ded9bfcdb8}">
+                    <WZUIImage Type="WZUIImage" GUID="{054a4cd6-3da7-4639-a74c-a680a79439bd}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{67721b55-656f-43d0-b363-719c6519adfb}">
+                    <WZUIImage Type="WZUIImage" GUID="{abfaf4dc-58bd-4c95-84bf-f1d0550a9046}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                </DisableElement>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{505aa838-c4f7-4c81-a200-bdb58da8ccca}" FontSize="20" Color="255,236,193" Name="txtSkillBtn2_CellWakeupDetail" RelativePosition="0.5,0.5" TextKey="STAR_SOUL_BUTTON_UPDATE" LabelStyleKey="NORMAL_GREEN_BTN" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{7ae06684-cefe-471b-87d7-236b20f30346}" Name="conEvolve_CellWakeupDetail">
+            <WZUITableContainer Type="WZUITableContainer" GUID="{389cebb4-2b23-4123-bcb9-74389eaa5503}" EnableMoveVertical="False" Name="tableEvolveList_CellWakeupDetail" CellElementHeight="0.32" IsVerticalMode="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{b709f4a8-24ee-47d6-af51-9eaedc90238b}" Name="CellEvolveItem_CellWakeupDetail" AbsContentSize="222,544" UseAbsSize="True" NameCreate="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{c197788e-fbd7-48d0-8af5-dc1a805b002e}" File="ui/common/common_shade_chushouheidi1.png" Opacity="180" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{fb089492-51c7-40bc-8bf3-a71ad6266293}" LabelStyleKey="C11_F22_S4_C5" Name="txtEvolveName_CellEvolveItem" Text="进化名字" RelativePosition="0.5,0.95" />
+            <WZUIImage Type="WZUIImage" GUID="{37f8c683-ce02-485e-91e4-09d31df3a1d1}" File="ui/extraction/evolve_icon_gray1.png" UseOriginSize="True" RelativePosition="0.5,0.84" Name="imgEvolveIcon_CellEvolveItem" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{05f8d951-785e-4941-9c06-80f2277ccb25}" Name="txtEvolveDesc_CellEvolveItem" LabelStyleKey="C1_F18" Text="家大垃圾地方拉空房间的阿拉丁房价阿斯浪费空间大厦打死浪费空间的阿斯；浪费空间大厦的；啊了罚款单价阿斯；复刻打算" Dimensions="190,0" AnchorPoint="0,1" RelativePosition="0.08,0.75" Alignment="Left" />
+            <WZUIContainer Type="WZUIContainer" GUID="{2d591c26-287f-4051-8b10-bf5eebebf72d}" AbsContentSize="222,150" UseAbsSize="True" RelativePosition="0.5,0.41" Name="conProperty_CellEvolveItem" />
+            <WZUIImage Type="WZUIImage" GUID="{fdd99bfe-2f57-442e-9a78-46ad3b6dd173}" Name="imgCostIcon_CellEvolveItem" File="shopitems/activity_002.png" UseOriginSize="True" Scale="0.5" AnchorPoint="1,0.5" RelativePosition="0.48,0.185" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8ba08390-8882-42ba-8f31-b5f7a9a67b86}" LabelStyleKey="C11_F20" Name="txtCostValue_CellEvolveItem" Text="123456" RelativePosition="0.48,0.185" AnchorPoint="0,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5d2820f7-196c-481f-8852-e2cbca39451f}" Name="txtEvolveState_CellEvolveItem" RelativePosition="0.5,0.1" Visible="False" LabelStyleKey="C8_F22" />
+            <Button Type="WZUIButton" GUID="{a7b7873a-8d18-4079-9cef-466462c6f4f3}" LuaActionName="Normal" Name="btnEvolve_CellEvolveItem" RelativePosition="0.5,0.1" AbsContentSize="116,58" UseAbsSize="True" LuaDoneFunctionName="onClickEvolve">
+                <NormalElement Type="WZUIContainer" GUID="{bbca7471-5c21-415d-b0bd-6e12c1608b48}">
+                    <WZUIImage Type="WZUIImage" GUID="{d9fdee23-e0fc-40d1-9622-3cb4d0d87dff}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{e37e5e88-9302-469c-aa22-ef8f6861e82d}">
+                    <WZUIImage Type="WZUIImage" GUID="{5db5c831-b2bd-4462-8eaa-a9d29c89b89d}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{afe57efb-3504-47e0-bcf3-542cbc3ed558}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{22e0422c-8b80-4485-8c4c-5cca18f30833}" LabelStyleKey="SMALL_GREEN_BTN" TextKey="WAKEUP_TEXT49" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellWakeupDetail>

@@ -1,0 +1,71 @@
+﻿<WndFriendInviteCode GUID="{ded31bc7-e48c-472a-b3a1-a67eb5e1f3ae}">
+    <WZUIWindow Type="WZUIWindow" GUID="{4b04fbea-c2ed-4c75-b11b-502f258f5357}" AbsContentSize="432,394" UseAbsSize="True" Name="WndFriendInviteCode" NameCreate="True" LuaObjectName="WndFriendInviteCode" LuaTouchBeganFunction="onTouchBegin" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{f9af16db-1691-4ed2-b5b8-814220b27f7c}" ShowAll="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{16428cb1-16e4-48a4-ae65-7df5da74dfa1}" File="ui/common/common_scale9_di19.png" CapInsets="86,89,1,1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{0dcdd71c-ade9-4a79-8126-182b255c53f3}" AbsContentSize="432,62" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{f7bccdb9-7cfe-4b27-93dc-1e1a6a947790}" FontSize="24" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" TextKey="WRITE_INVIDE_CODE" />
+                <Button Type="WZUIButton" GUID="{3b9b8dc7-36e5-406a-bac9-f6a653d63d44}" LuaActionName="Normal" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.9,0.5" LuaDoneFunctionName="onCloseClick">
+                    <NormalElement Type="WZUIContainer" GUID="{771f4a03-0e00-4748-bf24-34be52ddc4f3}">
+                        <WZUIImage Type="WZUIImage" GUID="{296c8ea5-e92b-4765-907e-c3d824dbc830}" File="ui/common/common_icon_guanbi.png" UseOriginSizeProportion="False" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{d7ed0afb-ee73-4c82-a6be-2968b9469a8e}">
+                        <WZUIImage Type="WZUIImage" GUID="{3eca5f04-c4ae-45ac-9b46-c4d7b6c70ef4}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{1118e478-28be-4953-b997-30553aa51b58}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1fb4506f-d229-4a67-9418-941bb46eed8c}" Name="conSubmit_WndFriendInviteCode" AbsContentSize="432,332" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{6c8f13d0-33e5-46f9-ac9c-c4063d8fa94f}">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b3f09ac7-77ef-4d54-8eb8-90d708a03015}" TextKey="WRITE_INVITE_CODE_ATT" FontSize="22" Color="138,122,106" RelativePosition="0.5,0.89" Name="txtInvTip_WndFriendInviteCode" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{66be3dfd-3d18-4935-b6cd-4d9701fb123f}" AbsContentSize="210,36" UseAbsSize="True" RelativePosition="0.5,0.75">
+                        <WZUIEditBox Type="WZUIEditBox" GUID="{b93808fe-6136-45cd-b98b-e7d363de96b2}" FontSize="22" TextFieldPadding="0" Text="1122" PlaceHolder="" BgHidden="False" InputMode="ModeAny" BgPicture="ui/common/common_scale9_di8.png" Name="editInput_WndFriends" MaxLength="10" Color="79,60,48" PlaceHolderAlignment="0" FontColor="255,236,193" PlaceholderFontColor="195,171,148" Alignment="0" ChinesePlaceholderNum="2" RelativeSize="1,1" AnchorPoint="1,0.5" RelativePosition="1,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{5c9366d0-af00-4140-a4bc-48bcbf3b53a3}" AbsContentSize="380,90" UseAbsSize="True" Name="conRewardB_WndFriendInviteCode">
+                    <WZUI9Image Type="WZUI9Image" GUID="{3917d1d5-90fe-4036-bfb3-e831a6083b05}" File="ui/common/common_scale9_di4.png" />
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{914a9af8-7529-4793-b717-c402d7975bf6}" Name="tbconRewardsB_WndFriendInviteCode" ColumnCount="1" IsVerticalMode="False" CellElementHeight="0.24" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableBounceBack="False" EnableHideUnvisible="False" EnableMoveoutContainer="False" TouchContainerEnable="False" />
+                </WZUIContainer>
+                <Button Type="WZUIButton" GUID="{49aef86b-8ed1-4304-939e-4901049f6227}" LuaActionName="Normal" AbsContentSize="136,62" UseAbsSize="True" RelativePosition="0.5,0.15" LuaDoneFunctionName="onClickSubmit">
+                    <NormalElement Type="WZUIContainer" GUID="{27815255-10a5-4eb8-a912-c5df890c1207}">
+                        <WZUIImage Type="WZUIImage" GUID="{f09aa5cb-28a3-443f-a73e-e8bf6fd5c4b0}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{68ea9260-92f7-4923-a392-5de4b9ee9d68}">
+                        <WZUIImage Type="WZUIImage" GUID="{d6bfa797-8c4d-4075-8071-8a1225325b07}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{02660208-e393-43e7-8b7d-d8044b7e409a}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9154f5b4-efe3-4049-9470-cba59c6c5f3d}" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="INVITE_SUBMIT" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1c805078-bbff-45c1-9f84-715c3b1fce51}" Name="conCheck_WndFriendInviteCode" AbsContentSize="432,332" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" Visible="False">
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{89190c07-a66b-4938-a0bb-a796744e6dc8}" MaxWidth="380" Name="txtFreeCode_WndFriendInviteCode" AnchorPoint="0,0.5" RelativePosition="0.07,0.94" />
+                <WZUIContainer Type="WZUIContainer" GUID="{3a8a0b9f-7807-43de-be5a-1c4bfaa05033}" AbsContentSize="380,270" UseAbsSize="True" RelativePosition="0.5,0.47">
+                    <WZUI9Image Type="WZUI9Image" GUID="{aa54065e-5e8a-4b76-9da6-ca1a62545bf2}" File="ui/common/common_scale9_di12.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{a6fd580f-8420-42ae-b634-c8bc881dd6a0}" AbsContentSize="360,106" UseAbsSize="True" RelativePosition="0.5,0.61">
+                    <WZUIContainer GUID="{12c00630-0c26-4534-99bc-929ba5a3bce0}" RelativePosition="0.5,0.5" Type="WZUIContainer" AbsContentSize="360,106" UseAbsSize="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{2559e8f6-930f-4769-91eb-d3155bd61387}" File="ui/common/common_scale9_di18.png" Opacity="255" />
+                    </WZUIContainer>
+                    <WZUIContainer GUID="{0b4d461a-9815-4c70-8d4e-1b9e495c9f5b}" RelativePosition="0.58,0.5" Type="WZUIContainer" AnchorPoint="0.5,0.5" RelativeSize="1,0.5" TouchEnable="False" AbsContentSize="220,106" UseAbsSize="True">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{35c2a07b-9b86-4558-b022-5c25a611c632}" FontSize="22" Text="asdfasf" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.05,0.75" Name="txtName_WndFriendInviteCode" Color="79,60,48" BoldFont="False" EnableStroke="False" StrokeColor="62,34,8" StrokeSize="1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e029dc24-c48c-49cb-a293-bd503984fb81}" FontSize="22" Color="127,70,26" Text="Lv 25" AnchorPoint="0,0.5" Name="txtLevel_WndFriendInviteCode" RelativePosition="0.05,0.5" EnableStroke="False" StrokeColor="105,65,46" StrokeSize="1" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{aac947bd-3903-44f0-9015-a8e55856ceac}" Name="txtServerName_WndFriendInviteCode" MaxWidth="200" AnchorPoint="0,0.5" RelativePosition="0.05,0.25" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{2e99107a-5fb5-4c17-b2cc-df4e9f8bca80}" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.15,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{7ad54fa6-f8de-484b-9ad6-2dac45469fd7}" File="ui/common/common_icon_tx.png" UseOriginSize="False" Visible="True" />
+                        <WZUIContainer AnchorPoint="0.5,0.5" GUID="{3dbb6194-425c-4b06-b429-dc847ddc03ee}" RelativePosition="0.5,0.5" RelativeSize="1,1" TouchEnable="True" Type="WZUIContainer" Name="conHead_WndFriendInviteCode" />
+                    </WZUIContainer>
+                    <Button Type="WZUIButton" GUID="{e4ccd672-777b-4ccf-b38d-458e5fbf5f73}" LuaDoneFunctionName="onCheckOther">
+                        <NormalElement Type="WZUIContainer" GUID="{be87e0a2-e04a-412a-9b9a-9ccfef378a1f}" />
+                        <SelectElement Type="WZUIContainer" GUID="{0a53f26f-f094-4851-a462-8c8193ffd5d8}" />
+                        <DisableElement Type="WZUIContainer" GUID="{1de5bd88-6200-4492-84ac-0f1805e0449b}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7f1b5d1b-fbc2-4454-87b1-972e193002c6}" AbsContentSize="360,85" UseAbsSize="True" RelativePosition="0.5,0.22" Name="conRewardA_WndFriendInviteCode">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{6816bf33-8738-4f93-95a2-bef7dff83f92}" Name="tbconRewardsA_WndFriendInviteCode" CellElementHeight="0.24" IsVerticalMode="False" EnableMoveVertical="False" EnableMoveoutContainer="False" EnableBounceBack="False" EnableMoveHorizontal="False" EnableHideUnvisible="False" TouchContainerEnable="False" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{44a81fb7-9d8f-4baf-9007-05c32f80d324}" TextKey="INVITE_CODE_ATT2" Color="138,122,106" AnchorPoint="0,0.5" RelativePosition="0.12,0.82" FontSize="22" Name="txtFriendInviteCode_WndFriendInviteCode" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{52a2ec29-88a4-45e9-8869-6a93b02d5ea2}" TextKey="INVITE_CODE_ATT3" FontSize="22" Color="138,122,106" RelativePosition="0.12,0.4" AnchorPoint="0,0.5" Name="txtFriendInviteReward_WndFriendInviteCode" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndFriendInviteCode>

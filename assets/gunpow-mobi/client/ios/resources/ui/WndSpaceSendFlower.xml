@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" ?>
+<WndSpaceSendFlower GUID="{D11AC7E2-C585-4bef-93D8-8F16A99EEC6D}">
+    <WZUIWindow AbsContentSize="630,445" GUID="{54A38F89-AA1E-4621-82EE-16306FCEC8FC}" LuaObjectName="WndSpaceSendFlower" Name="WndSpaceSendFlower" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True" RelativePosition="0.5,0.5" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{A073BCF7-C8FE-4419-96A5-9AA94E79A16C}" AbsContentSize="630,445" UseAbsSize="True" RelativePosition="0.5,0.505" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{38208640-E6E3-4a09-856A-9954FB9278D0}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" Visible="True" />
+            <WZUI9Label Type="WZUI9Label" GUID="{5457EB1E-17BC-448f-9580-579E2E6FCC09}" FontSize="24" BoldFont="True" RelativePosition="0.5,0.925" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" Color="255,236,193" Text="" Visible="True" TextKey="SPACE70" LabelStyleKey="SMALL_WINDOW_TITLE" Name="title_WndSpaceRecord" />
+            <WZUIContainer Type="WZUIContainer" GUID="{B65C206E-EB64-4cb4-B0D8-AD42C2D4C390}" AbsContentSize="618,332" UseAbsSize="True" RelativePosition="0.5,0.495">
+                <WZUI9Image Type="WZUI9Image" GUID="{A13DFC6A-2354-4780-95D4-D321C7FE10D1}" File="ui/common/common_scale9_di20.png" Visible="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIButton AbsContentSize="115,54" GUID="{9AC126E3-37DA-4d68-8AF8-B087D0E0AFE0}" LuaDoneFunctionName="onClose" Name="" RelativePosition="0.916,0.935638" Type="WZUIButton" UseAbsSize="True" Visible="True" AbsPosition="531.28,439.75">
+            <NormalElement GUID="{390F45BE-6C95-459a-95E4-4AC9D9D0ECC0}" TouchContainerEnable="True" Type="WZUIContainer">
+                <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{8F3285EF-ECF8-4e00-B1F2-0F09529567A1}" Type="WZUIImage" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement GUID="{464DC338-C905-4945-9213-57A15B40F7CA}" TouchContainerEnable="True" Type="WZUIContainer">
+                <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{D389DD92-737F-41cf-8925-5D89D3BB0399}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+            </SelectElement>
+        </WZUIButton>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{29012018-C8B7-4250-96FB-1B19C1240FB3}" Text="" LabelStyleKey="" RelativePosition="0.46,0.07" AbsPosition="62.8498,25.8218" Visible="True" Name="ttf1_WndSpaceRecord" Color="62,34,8" FontSize="20" TextKey="SPACE71" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{20AD66CD-35D7-48af-992F-792B346CAB67}" Text="0/99" LabelStyleKey="FONT_LABEL_2" RelativePosition="0.57,0.07" AbsPosition="125.553,25.85" Visible="True" Name="ttf2_WndSpaceRecord" Alignment="Left" AnchorPoint="0,0.5" Scale="0.9" />
+        <WZUITableContainer Type="WZUITableContainer" GUID="{31D5BBFC-E661-4baf-8EDC-673DC8B2D531}" AbsContentSize="600,320" UseAbsSize="True" RelativePosition="0.5,0.5" ColumnCount="1" CellElementHeight="0.33" Name="tbCon_WndSpaceSendFlower" EnableMoveHorizontal="False" EnableMoveVertical="True" EnableMoveoutContainer="True" EnableBounceBack="True" AbsPosition="290,227.95" EnableHideUnvisible="True" EnableTopElement="False" EnableVerticalScroll="True" />
+    </WZUIWindow>
+</WndSpaceSendFlower>

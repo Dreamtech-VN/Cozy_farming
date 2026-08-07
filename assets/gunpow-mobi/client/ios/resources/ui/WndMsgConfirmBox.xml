@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" ?>
+<WndMsgConfirmBox GUID="{25CA8C1A-CB76-4650-AD42-9B08C1649CD1}">
+    <WZUIWindow AbsContentSize="586,366" GUID="{79B4F5F1-A04B-4549-994C-8EB381EFEE8E}" LuaObjectName="WndMsgConfirmBox" Name="WndMsgConfirmBox" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{39999B96-2D5E-4142-B995-B388BA66D123}" RelativePosition="0.5,0.5" AbsContentSize="400,245" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{4BC226B5-504D-4887-85B9-E345116563B5}" File="ui/common/common_scale9_di15.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{B6C8DAC6-A2BB-4778-BC73-5FD8CE69B382}" AbsContentSize="388,233" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{42122621-1E4A-4eaf-B256-1B395B96E043}" File="ui/common/common_scale9_di25.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{18FE0FE4-F580-4b19-8E29-894D359985FD}" Text="" FontSize="22" RelativePosition="0.5,0.671085" Name="txtSellConfirm_WndMsgConfirmBox" Color="127,70,26" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="False" Dimensions="350,0" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{F7A3FFD4-AF46-4dc4-A823-2DF21033D871}" AbsContentSize="385,133" UseAbsSize="True" UseAbsCoordinate="False" RelativePosition="0.498155,0.571994">
+            <WZUI9Image Type="WZUI9Image" GUID="{EA9728E5-3D71-4f1a-BA69-A04A82532690}" File="ui/common/common_scale9_di20.png" UseOriginSize="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{06828845-7599-4f03-BC13-7B2E5AF1411F}" RelativePosition="0.459046,0.484863" AbsContentSize="370,60">
+            <WZUIContainer Type="WZUIContainer" GUID="{BB0B3724-3B55-4c33-972B-6390E4A0BFB9}" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.68,0.3">
+                <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsContentSize="116,56" Name="btnOK_WndMsgConfirmBox" GUID="{1DCADF18-7258-4c17-9F0E-F0B46BB0D408}" LuaDoneFunctionName="onConfirm" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" AbsContentSize="116,56" RelativePosition="0.5,0.5" GUID="{1D203D1E-0A8C-4fc4-909A-A01382D6A776}">
+                        <WZUIImage Type="WZUIImage" GUID="{31D3CD16-20AD-4220-B286-D95769329D4C}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" AbsContentSize="116,56" RelativePosition="0.5,0.5" GUID="{3AAE2396-EB85-4edf-AA08-AE9A8735DFFB}">
+                        <WZUIImage Type="WZUIImage" GUID="{74EC78DD-05A0-4513-A00B-FE85FF0F9A9A}" File="ui/common/common_btn_anniu10_0_sel.png" RelativePosition="0.5,0.5" Scale="1" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{E6FC6DF1-1C45-455a-AE86-EA43CC82E600}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7A593B28-CF11-4a60-8C36-1105B562E5E1}" RelativePosition="0.5,0.5" Text="" Color="255,236,193" UseOriginSize="True" FontSize="24" Name="txtConfirm_WndMsgConfirmBox" EnableStroke="True" StrokeSize="4" StrokeColor="3,111,8" LabelStyleKey="SMALL_GREEN_BTN" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{034C29E0-FAFC-4863-9A58-9D29EE0E2996}" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.4,0.3">
+                <Button Type="WZUIButton" Name="btnCancel_WndMsgConfirmBox" RelativePosition="0.5,0.5" GUID="{DFAE0F8B-75A6-4a09-BF83-811A99E74C0A}" LuaDoneFunctionName="onCancel" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" RelativePosition="0.5,0.5" GUID="{4FEA21F5-D0E4-4b09-9D2A-C1F6825E9B1E}">
+                        <WZUIImage Type="WZUIImage" GUID="{4B63D800-6AF1-453b-894F-6DADEF52FA70}" File="ui/common/common_btn_anniu3_0.png" RelativePosition="0.5,0.5" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{51740BD6-1FAE-4e23-A30F-1F3FB545608D}">
+                        <WZUIImage Type="WZUIImage" GUID="{580E369C-EA18-4761-A4AA-76489B059448}" File="ui/common/common_btn_anniu3_0_sel.png" RelativePosition="0.5,0.5" Scale="1" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{A9C94BAB-B262-4ac7-9D65-9D7817B0267A}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{894D2020-17E7-421b-8FC4-658052C5FE31}" RelativePosition="0.5,0.5" Text="" Color="255,236,193" FontSize="24" Name="txtCancel_WndMsgConfirmBox" StrokeSize="4" StrokeColor="128,54,13" EnableStroke="True" LabelStyleKey="SMALL_ORANGE_BTN" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{AD10558C-1974-4920-BF90-52B04B370EDC}" Visible="True" AbsContentSize="586,50" UseAbsSize="True" RelativePosition="0.5,0.461749" AbsPosition="293,169">
+            <WZUICheckBox Type="WZUICheckBox" GUID="{DA0E934C-B066-4e1b-9CFD-CB73ECA0DC81}" AbsContentSize="400,60" UseAbsSize="True" RelativePosition="0.5,0.5" LuaCheckedFunctionName="" LuaSelectedFunctionName="" SelectedIndex="0" TouchContainerEnable="True" Name="checkboxAtt_WndMsgConfirmBox">
+                <CheckElement Type="WZUIContainer" GUID="{90F56A22-A89B-44d8-B298-D2F68160475F}" TouchContainerEnable="True">
+                    <WZUIImage Type="WZUIImage" GUID="{CE75BB34-6B27-429a-9959-4B28C0F170B7}" File="ui/common/common_scale9_di13.png" RelativePosition="0.26,0.5" UseOriginSize="True" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{993C422A-18A3-491e-A771-14E2609427EC}" RelativePosition="0.5,0.5" TouchContainerEnable="True">
+                    <WZUIImage Type="WZUIImage" GUID="{B0525EC7-7577-48a7-98E2-D3B009E99084}" File="ui/common/common_scale9_di13.png" RelativePosition="0.26,0.5" UseOriginSize="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{0EE53FB1-B89E-400f-A0E6-82F0B9AC6402}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.45" RelativePosition="0.26,0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{81AF0E15-D394-4220-97A5-17813ADD8958}" File="ui/common/common_icon_gou.png" RelativePosition="0.26,0.5" UseOriginSize="True" AbsPosition="17.6,19.8" Scale="0.9" />
+                </CheckElement>
+            </WZUICheckBox>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7AE77B80-6144-4162-B1EE-8AF643EA8008}" Text="" RelativePosition="0.385,0.5" FontSize="22" Name="txtNotAtt_WndMsgConfirmBox" Color="158,139,121" Visible="True" TextKey="NOT_ATTENTION_THISTIME" AbsPosition="302.594,162.934" Alignment="Left" AnchorPoint="0,0.5" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndMsgConfirmBox>

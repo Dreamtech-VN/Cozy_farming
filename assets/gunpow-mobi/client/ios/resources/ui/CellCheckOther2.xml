@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" ?>
+<CellCheckOther2 GUID="{C29FC553-C8DF-49d5-BB59-5C054DD42D20}">
+    <WZUIContainer Type="WZUIContainer" GUID="{414B6B99-8126-4d75-8B86-5E56D5CB3E0D}" AbsContentSize="450,128" UseAbsSize="True" Name="CellCheckOther2" LuaObjectName="CellCheckOther2" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{7299890B-3C09-446d-AFB1-932167EB499C}" Name="" AbsContentSize="450,125" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.53">
+            <WZUIContainer Type="WZUIContainer" GUID="{32FA61D9-CF5D-412d-95E9-2D4BB140636A}" AbsContentSize="450,35" UseAbsSize="True" RelativePosition="0.5,0.82" Name="conTitle">
+                <WZUI9Image Type="WZUI9Image" GUID="{54216EE5-AC4C-4d62-8353-EC52C7CA6D57}" File="ui/common/common_scale9_di10.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{43464730-34A4-4e20-BDED-2572B2799773}" AbsContentSize="112,34" UseAbsSize="True" RelativePosition="0,0.49" AnchorPoint="0,0.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{C9C71FC2-D35A-40d3-844A-8073207BED10}" File="ui/common/common_scale9_di11.png" />
+                </WZUIContainer>
+                <WZUILabelTTF Alignment="Left" AnchorPoint="0,1" BoldFont="True" Color="255,227,116" FontSize="22" GUID="{4B101658-518E-42ce-8570-9318DC627B53}" Name="txtTitle_CellCheckOther2" RelativePosition="0.03,0.875" Text="卡牌" Type="WZUILabelTTF" EnableStroke="True" StrokeSize="3" StrokeColor="87,47,21" Order="0" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="460,100" AnchorPoint="0.5,0" GUID="{0b06c850-668f-4576-b096-5b43d15ba52c}" RelativePosition="0.5,0.2" Type="WZUIContainer" UseAbsSize="True" Name="conSave" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{916942e4-2cc1-4f97-aa2c-7bab3d73a064}" AbsContentSize="450,35" UseAbsSize="True" RelativePosition="0.5,0.95" AnchorPoint="0.5,1">
+                <WZUIButton AbsContentSize="53,32" AnchorPoint="1,0.5" GUID="{3da135c2-513e-457a-b745-711bbbaf5944}" LuaDoneFunctionName="onSaveClick" Name="btnSave_CellCheckOther2" RelativePosition="0.986,0.65" Scale="1" TouchEnable="True" Type="WZUIButton" UseAbsSize="True" Visible="True" ScaleX="1" ScaleY="1" AbsPosition="454.7,17.85">
+                    <NormalElement GUID="{d3126542-99ac-4a4d-b32a-981bb81ddb62}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="0,0,0,0" File="ui/bag/common_icon_xf.png" GUID="{9cd30d46-60dc-460e-9379-e2a8e5edd934}" Type="WZUI9Image" UseOriginSize="True" RelativePosition="0.5,0.5" Name="imgSave1_CellCheckOther2" />
+                    </NormalElement>
+                    <SelectElement GUID="{e249b2c3-54db-4017-a3a4-02385e5f07cf}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="0,0,0,0" File="ui/bag/common_icon_xf.png" GUID="{b146f60b-4b69-4f08-97d2-9477f5b03331}" Type="WZUI9Image" Name="imgSave2_CellCheckOther2" />
+                    </SelectElement>
+                    <DisableElement GUID="{8fd12290-e326-41ba-bf3a-3a9eec2d08b3}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="0,0,0,0" File="ui/bag/common_icon_xf.png" GUID="{faa8d5b9-76ca-4aab-ae78-969dc0326d5b}" Type="WZUI9Image" Name="imgSave3_CellCheckOther2" />
+                    </DisableElement>
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIEditBox AnchorPoint="0.5,1" BgPicture="ui/common/transparent_bg.png" ChinesePlaceholderNum="0" Color="62,34,8" Dimensions="80,0" FontColor="62,34,8" FontSize="20" GUID="{b8ce1829-edbf-4894-a2b5-6743bdac7a3a}" KeyBordReturnType="TypeDone" LuaEditBoxEditingDidEnd="onReturn" LuaEditBoxReturn="" LuaEditBoxTextChanged="onChangeSignature" MaxLength="60" MultiLine="True" Name="editSign_CellCheckOther2" PlaceholderFontColor="62,34,8" RelativePosition="0.51,0.550541" RelativeSize="0.95,0.7" Text="123" TouchEnable="False" Type="WZUIEditBox" AbsPosition="239.7,55.0541" PlaceHolder="" PlaceHolderAlignment="0" VerticalAlignment="0" VerticalPlaceHolderAlignment="0" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCheckOther2>

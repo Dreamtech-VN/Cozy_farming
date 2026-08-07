@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<WndVipChoose GUID="{C56B2436-B3AC-477c-A094-EAC615570E56}">
+    <WZUIWindow AbsContentSize="960,640" GUID="{F5653B7F-6940-4a95-A0FA-E5D7450CA2D3}" LuaObjectName="WndVipChoose" Name="WndVipChoose" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIWindow" UseAbsSize="False" ShowAll="False" LuaTouchEndedFunction="onOkClick">
+        <WZUIContainer Type="WZUIContainer" GUID="{1E6C9C3F-7320-4696-A35A-C68AD7ACC47C}" ShowAll="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{7F3EB02D-B1AD-45d1-BDE5-D3A808377945}" AbsContentSize="786,440" UseAbsSize="True" RelativePosition="0.5,0.509374" Name="conBg_WndVipChoose" AbsPosition="480,326" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{63A69149-CE50-4541-AC34-84B2A8822229}" File="ui/vip/common_btn_topupbtn.png" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{D807D949-17CE-4ae3-906C-90B1DD377CA8}" File="ui/vip/common_btn_topuptitle.png" UseOriginSize="True" RelativePosition="0.491087,0.777298" AbsPosition="471.443,497.471" Scale="1.2" />
+            <Button Type="WZUIButton" Name="btn1__WndVipChoose" GUID="{5045E6A3-840D-464e-BCAE-3E1EDC2202BC}" AbsContentSize="290,70" UseAbsSize="True" RelativePosition="0.315499,0.558582" AbsPosition="287.879,348.493" LuaDoneFunctionName="click" Tag="1" Scale="1.17" Visible="True">
+                <NormalElement Type="WZUIContainer" GUID="{9959A788-6B70-4792-AA71-BA749DF40A35}">
+                    <WZUIImage Type="WZUIImage" GUID="{5E1E82E9-DB92-4315-8C73-D7F450A0D9F4}" File="ui/vip/common_btn_topupboletoxz.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" Scale="1" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{313740F6-8717-496a-AF84-46677D303F2D}">
+                    <WZUIImage Type="WZUIImage" GUID="{8D1088B3-391D-4206-8E28-F16791BF6D9B}" File="ui/vip/common_btn_topupboletoxz.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" Scale="1.05" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{B4ED7E2E-A000-4a9e-ABEC-D44566295B65}" />
+            </Button>
+            <WZUIButton Type="WZUIButton" Name="btn2__WndVipChoose" GUID="{353D0B0D-80B4-46ef-8BFF-0B73BB4745EC}" AbsContentSize="290,70" UseAbsSize="True" RelativePosition="0.686225,0.546627" AbsPosition="658.776,349.841" LuaDoneFunctionName="click" Tag="2" Scale="1.17" Visible="True">
+                <NormalElement Type="WZUIContainer" GUID="{4C4C5B0E-CE8B-47cb-815E-862B721040D7}">
+                    <WZUIImage Type="WZUIImage" GUID="{9B1C8080-CBC7-46c2-B877-18140FB25E68}" File="ui/vip/common_btn_topupgoogle.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{CD6B0139-C395-4e1b-A617-3401C006BCBB}">
+                    <WZUIImage Type="WZUIImage" GUID="{E51DAB66-45F6-4906-9DFB-FCC5E4DC5FB4}" File="ui/vip/common_btn_topupgoogle.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" Scale="1.05" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{F2DC00EC-55E2-488b-A951-9B836F265014}" />
+            </WZUIButton>
+            <WZUIButton Type="WZUIButton" Name="btn3__WndVipChoose" GUID="{0E907CCE-EC3C-4af1-9C5F-024CF6CADC7E}" AbsContentSize="290,70" UseAbsSize="True" RelativePosition="0.316225,0.365704" AbsPosition="290.575,226.051" LuaDoneFunctionName="click" Tag="3" Scale="1.17">
+                <NormalElement Type="WZUIContainer" GUID="{63D813C2-8575-4393-A648-4919288FB4D1}">
+                    <WZUIImage Type="WZUIImage" GUID="{88FAB580-A064-4847-8562-6208EB1DEBA2}" File="ui/vip/common_btn_topupBancoxz.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{EE167351-175F-49f3-86CD-7938635E4BC4}">
+                    <WZUIImage Type="WZUIImage" GUID="{21092AA9-8A58-4f77-AE84-EDB49EE1A3F2}" File="ui/vip/common_btn_topupBancoxz.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" Scale="1.05" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{5D91BA1F-7D94-4f05-B498-4E0E2122B5FA}" />
+            </WZUIButton>
+            <WZUIButton Type="WZUIButton" Name="btn4__WndVipChoose" GUID="{EB0B2B09-2EE8-4911-892C-52BDAEBDA3D4}" AbsContentSize="290,70" UseAbsSize="True" RelativePosition="0.697004,0.365704" AbsPosition="660.124,226.051" LuaDoneFunctionName="click" Tag="4" Scale="1.17">
+                <NormalElement Type="WZUIContainer" GUID="{E45E8B51-BB34-410f-8380-D3B00D2F825C}">
+                    <WZUIImage Type="WZUIImage" GUID="{F2ADC006-53CC-479f-A748-FCC751945EAD}" File="ui/vip/common_btn_topupoulxz.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{D6A6C531-C977-45ae-87B4-66DA67D254EC}">
+                    <WZUIImage Type="WZUIImage" GUID="{ACF4438F-CBA5-4da0-8226-E88F83FACB86}" File="ui/vip/common_btn_topupoulxz.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" Scale="1.05" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{5D7ED457-6473-4bda-8218-AF409792B251}" />
+            </WZUIButton>
+            <WZUIButton Type="WZUIButton" Name="btnClose__WndVipChoose" GUID="{F88640D9-C8F1-4c4b-97CB-47B887FDE5A9}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.141166,0.77946" AbsPosition="135.52,498.854" LuaDoneFunctionName="clickClose" Scale="1.2">
+                <NormalElement Type="WZUIContainer" GUID="{E9CDDBB2-C908-47d0-BDB7-1BF0ADF30773}">
+                    <WZUIImage Type="WZUIImage" GUID="{642064B1-62BF-4d54-899B-28B0F0327FCD}" File="ui/vip/common_btn_topupback.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{7B1A66A8-758A-47dc-A8D6-7B8A7E31F06B}">
+                    <WZUIImage Type="WZUIImage" GUID="{CA3F76F6-8FBA-4e5e-B0FB-90C80293D897}" File="ui/vip/common_btn_topupback.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" Scale="1.05" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{A5A327D4-9B76-4508-A7F6-C5D5A6CDDE7C}" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndVipChoose>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WndMailInfo GUID="{40F5A221-AC37-48a1-AA00-D709E38DDB1A}">
+    <WZUIWindow AbsContentSize="782,620" AbsPosition="480,325" GUID="{543CA2E1-B995-4d43-B713-CE485FB99A11}" LuaObjectName="WndMailInfo" Name="WndMailInfo" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="782,628" AnchorPoint="0.5,1" GUID="{543DF11A-504C-4a1c-A35A-AD498C972D3B}" RelativePosition="0.5,0.965" RelativeSize="1,0.95" Type="WZUIContainer" UseAbsSize="False">
+            <WZUI9Image AnchorPoint="0.5,0.5" CapInsets="10,10,174,192" File="common/Jigsaw/3.png" GUID="{1AAE856A-30A9-475d-AAF8-F2A499C90E19}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="790,85" AnchorPoint="0.5,1" GUID="{4EB657EE-7B2B-4a22-A383-1ABFD7C8AC00}" RelativePosition="0.505,1" RelativeSize="1,0.14" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image CapInsets="80,20,365,23" File="common/Jigsaw/5.png" GUID="{B884E91D-3EC3-430d-A295-18083430E376}" Type="WZUI9Image" />
+        </WZUIContainer>
+        <WZUIContainer AnchorPoint="0.5,1" GUID="{44847BDC-D0FC-47c3-8894-A72059D24F30}" RelativePosition="0.5,1" RelativeSize="1,0.135" Type="WZUIContainer">
+            <WZUIContainer AbsContentSize="500,71" AnchorPoint="0.5,1" GUID="{92D22E8A-9FED-4465-8F32-3BCF12DFC461}" Name="conMailInfoThemeImg_WndMailInfo" RelativePosition="0.5,1" RelativeSize="0.5,0.6" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage File="common/text/mail_inbox_title.png" GUID="{C79E0C0C-9957-4b2a-91C2-8EE986B9CF35}" Name="imgThemeMailInfo_WndMailInfo" RelativePosition="0.5,0.316902" Type="WZUIImage" UseOriginSize="True" UseOriginSizeProportion="True" />
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="1,1" GUID="{C5259874-AD07-40a1-9905-B066E9D74378}" Name="conCloseBtn_WndMailInfo" RelativePosition="1.00901,1.0118" RelativeSize="0.1,1" Type="WZUIContainer">
+                <Button GUID="{3BFE2122-9378-4a48-B9CF-CDF2BB0576EC}" LuaDoneFunctionName="onCloseClick" Type="WZUIButton">
+                    <NormalElement GUID="{64D92FBB-5438-4c26-A4F4-6196F2F4EA72}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="common/button/close.png" GUID="{62B79AEC-2E72-45db-B594-31B1D932F8C7}" Type="WZUIImage" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{19F44DB6-B0E2-411b-B0E3-0E36F0B39564}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="common/button/close_sel.png" GUID="{78882E14-A7E1-4dd5-8EBD-D67A80745CB6}" Type="WZUIImage" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{4367B40C-3641-4b86-8B3A-E276D9957E67}" Type="WZUIContainer">
+                        <WZUIImage File="common/button/close_not.png" GUID="{66A6EE52-D6EE-45dd-8A50-993BC1FAAAEC}" Type="WZUIImage" UseOriginSize="True" />
+                    </DisableElement>
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="700,350" AnchorPoint="0.5,0.5" GUID="{CC737EA5-41D6-4d42-B2C2-1B8A60946FF6}" Name="conRecvMailDetail_WndMailInfo" RelativePosition="0.5,0.49" RelativeSize="0.88,0.58" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUIContainer GUID="{DB1D9EB4-8DE2-45df-82FE-0101E6F55FFF}" Type="WZUIContainer">
+                <WZUI9Image File="common/Jigsaw/property_okay_po.png" GUID="{7DD16EC8-12DA-4b05-B3E4-B4FBEA876E3B}" Type="WZUI9Image" />
+            </WZUIContainer>
+            <WZUIScrollContainer AbsContentSize="704,340" AnchorPoint="0.5,1" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{00AF73B8-0F9B-4055-88F3-C3E2A4CBA612}" Name="rollconMainInfo_WndMainInfo" RelativePosition="0.5,0.974253" RelativeSize="0.98,0.95" ScrollPictureDown="common/Jigsaw/rolling_03.png" ScrollPictureMid="common/Jigsaw/rolling_01.png" ScrollPictureTop="common/Jigsaw/rolling_02.png" Type="WZUIScrollContainer" UseAbsSize="False">
+                <MoveElement GUID="{48E418DD-6D2D-4ac0-9F59-0377172B45C4}" Type="WZUIContainer">
+                    <WZUIContainer AbsContentSize="648,115" AnchorPoint="0,0" GUID="{3DB33B91-8539-41ef-B34C-A7767F6DE43D}" Name="conMainTheme_WndMainInfo" RelativePosition="0.04,0" RelativeSize="1,0.3" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUIContainer GUID="{33B3B941-17BC-489c-BADC-9206F944B44F}" RelativePosition="0.5,0.498771" RelativeSize="0.9,1" Type="WZUIContainer">
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" FontSize="28" GUID="{4F74DC81-0BE4-40bd-8360-5547FDCCE22A}" Name="txtOpenMailSender_WndMailInfo" RelativePosition="0.01,0.83" Text="" Type="WZUILabelTTF" />
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" FontSize="28" GUID="{82BE68BE-5B59-496a-9B5E-F3C7A172020F}" Name="txtOpenMailTime_WndMailInfo" RelativePosition="0.01,0.53" Text="" Type="WZUILabelTTF" />
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" FontSize="28" GUID="{406C4927-EF2B-4cce-BF18-FFAD4586A7D6}" Name="txtOpenMailTheme_WndMailInfo" RelativePosition="0.01,0.23" Text="" Type="WZUILabelTTF" />
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" FontSize="28" GUID="{A29E459D-4B7A-4fd2-83CE-4F28C6646727}" Name="txtSenderMailFreecon_WndMailInfo" RelativePosition="0.165,0.83" Text="" Type="WZUILabelTTF" />
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" FontSize="28" GUID="{EA142CDE-BE22-45c5-8275-7FEDDBCD8FFB}" Name="txtTimeMailFreecon_WndMailInfo" RelativePosition="0.125,0.53" Text="" Type="WZUILabelTTF" />
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" FontSize="28" GUID="{CFA286B0-4468-4a5b-B935-CF4FA567FEB2}" Name="txtThemeMailFreecon_WndMailInfo" RelativePosition="0.125,0.23" Text="" Type="WZUILabelTTF" />
+                        </WZUIContainer>
+                        <WZUIContainer AbsContentSize="720,300" GUID="{D630D695-F9E3-4267-920A-3884541E6B50}" Name="conMailInfoLineImg_WndMailInfo" RelativePosition="0.49,0.0230957" RelativeSize="0.98,0.1" Type="WZUIContainer" UseAbsSize="False">
+                            <WZUI9Image File="common/Jigsaw/4.png" GUID="{DB7E0A4D-B49E-4ac2-81D6-4644B89D1790}" RelativeSize="1,0.35" Type="WZUI9Image" UseOriginSize="False" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUILabelTTF Alignment="Left" AnchorPoint="0,0" ChineseLengthPolicy="150" Color="255,255,255" Dimensions="580,0" FontSize="28" GUID="{250E4C35-9B82-418a-A714-81CBFFDCB85D}" Name="txtRecvMailContent_WndMailInfo" RelativePosition="0.09,0.27" Text="" Type="WZUILabelTTF" />
+                </MoveElement>
+            </WZUIScrollContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="720,68" AnchorPoint="0.5,0.5" GUID="{71E4C38E-3780-4609-B09C-8EBEA58A0DDD}" Name="conMailInfoDeleteBtn_WndMailInfo" RelativePosition="0.5,0.136612" RelativeSize="0.9,0.15" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <Button GUID="{1437EC33-0EA2-4fce-9150-7AE401F13F68}" LuaDoneFunctionName="onDelReadMail" Name="btnDelMailInfo_WndMailInfo" RelativePosition="0.115,0.5" RelativeSize="0.2,1" Type="WZUIButton">
+                <NormalElement GUID="{2C8EC3B8-7014-4f24-8D8A-0FC9FB1E251C}" RelativeSize="1,1" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_1.png" GUID="{6CA1F54B-6001-465d-AB44-30C0315C310D}" Type="WZUI9Image" />
+                </NormalElement>
+                <SelectElement GUID="{02A7CDF0-F8DC-4ea6-B3B8-D2C09D5252BD}" RelativeSize="1,1" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_1_sel.png" GUID="{FC500DDF-F490-4fc7-BC54-25C46DCD9323}" Type="WZUI9Image" />
+                </SelectElement>
+                <DisableElement GUID="{1D8F4503-F170-4d44-885D-D6C84F9A3F57}" RelativeSize="1,1" Type="WZUIContainer" />
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{B0C86267-7388-4546-88FC-F60663EF6E6B}" Name="txtBtnDelete_WndMailInfo" StrokeColor="0,24,47" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" />
+            </Button>
+            <Button AnchorPoint="1,0.5" GUID="{BCDB524F-5BD0-4de3-BA88-816EB6A96E70}" LuaDoneFunctionName="onRecoverMail" Name="tbnRecoverMainInfo_WndMailInfo" RelativePosition="1,0.5" RelativeSize="0.2,1" Type="WZUIButton">
+                <NormalElement GUID="{BDE4962B-D278-426d-8E82-523257777578}" RelativeSize="1,1" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_2.png" GUID="{D56BF091-9C60-4c5b-BB23-C223F0AA0BA5}" Type="WZUI9Image" />
+                </NormalElement>
+                <SelectElement GUID="{DF1EADCE-418B-4220-B0B7-36ABCEBCAD8D}" RelativeSize="1,1" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_2_sel.png" GUID="{D92F7181-A881-469a-A336-ABA3457D035E}" Type="WZUI9Image" />
+                </SelectElement>
+                <DisableElement GUID="{568C39E3-80D8-481a-AA76-63246506DCD4}" RelativeSize="1,1" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_4.png" GUID="{8BD7592F-6071-4c38-ACEE-9B4A840B9FDD}" Type="WZUI9Image" />
+                </DisableElement>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{99C8E3B7-92EE-403d-BECC-41E44F779892}" Name="txtBtnReply_WndMailInfo" StrokeColor="38,47,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="720,68" AnchorPoint="0.5,0.5" GUID="{DB535C92-78BD-4fc7-86E3-82F9ED4F44BC}" Name="conOnlyDelMainInfo_WndMainInfo" RelativePosition="0.5,0.136612" RelativeSize="0.9,0.15" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+            <WZUIButton AnchorPoint="1,0.5" GUID="{E3C983BA-0733-44ab-8E2F-9A1B465F6E98}" LuaDoneFunctionName="onDelReadMail" Name="btnDelMailInfoTrue_WndMailInfo" RelativePosition="1,0.5" RelativeSize="0.2,1" Type="WZUIButton">
+                <NormalElement GUID="{EB0B1066-0616-4493-A82B-EE28CC1F4823}" RelativeSize="1,1" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_1.png" GUID="{0EA9F0B3-6246-408f-A349-D73589C14F7A}" Type="WZUI9Image" />
+                </NormalElement>
+                <SelectElement GUID="{1750090A-975E-47f6-8F6A-178B763EDB91}" RelativeSize="1,1" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_1_sel.png" GUID="{BEFF4626-18E2-4b15-9CDB-CFEE4264BAAD}" Type="WZUI9Image" />
+                </SelectElement>
+                <DisableElement GUID="{C0C8D770-A10D-4f81-B0D4-05BD7D30C21D}" RelativeSize="1,1" Type="WZUIContainer" />
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{D36DC24D-0399-4809-A0E9-5790C9055891}" Name="txtBtnDeleteMail_WndMailInfo" StrokeColor="0,24,47" StrokeSize="4" Text="" Type="WZUILabelTTF" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="784,38" AnchorPoint="0.5,0" GUID="{9B7CA255-06C2-4390-BCEE-974CD5F1AECF}" RelativePosition="0.5,0" RelativeSize="1,0.06" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image CapInsets="50,10,695,28" File="common/Jigsaw/60.png" GUID="{767691FE-31BE-4852-9676-82FC440C6E34}" Type="WZUI9Image" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndMailInfo>

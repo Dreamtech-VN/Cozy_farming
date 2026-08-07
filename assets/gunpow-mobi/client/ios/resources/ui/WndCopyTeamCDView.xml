@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<WndCopyTeamCDView GUID="{63FB4289-4290-4706-B8B5-C505736913AC}">
+    <WZUIWindow Type="WZUIWindow" GUID="{62124B86-2128-4834-BA04-AA7E7129F828}" AbsContentSize="310,100" UseAbsSize="True" NameCreate="True" LuaObjectName="WndCopyTeamCDView" Name="WndCopyTeamCDView" ShowAll="True" AnchorPoint="1,1" RelativePosition="1,1">
+        <WZUIContainer Type="WZUIContainer" GUID="{8F8742DF-9F01-43fd-B28D-2D847D794358}" AbsContentSize="220,90" UseAbsSize="True" RelativePosition="0,0.5" AnchorPoint="0,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{25388642-1239-48ce-9129-4C6EE62A74BB}" File="ui/common/common_scale9_di8.png" Opacity="180" RelativePosition="0.5,0.5" RelativeSize="1,1" ShowAll="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{B0B2237D-8E8F-46b8-B01D-8419AE724E45}" Text="" FontSize="25" RelativePosition="0.5,0.7" AnchorPoint="0.5,0.5" Name="txt_WndCopyTeamCDView" Color="255,227,116" TextKey="TEAM_COPY_COUNTDOWN" Alignment="Center" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{10E3DD76-6461-415d-B147-9D51B0075C87}" FontSize="25" Color="255,89,74" Text="00:00:00" RelativePosition="0.5,0.3" Name="countDown_WndCopyTeamCDView" AnchorPoint="0.5,0.5" Alignment="Center" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCopyTeamCDView>

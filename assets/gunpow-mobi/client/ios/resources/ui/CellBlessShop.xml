@@ -1,0 +1,44 @@
+﻿<CellBlessShop GUID="{bd3bc6bf-33d9-4d29-9a92-d5d970750236}">
+    <WZUIContainer AbsContentSize="175,183" GUID="{f2d379ef-6d58-4ace-b2bb-56e281a4c6d2}" LuaObjectName="" Name="CellBlessShop" NameCreate="False" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{877bc675-054d-4e8c-9354-fe0f45a3d79e}" TouchSwallow="True" AbsContentSize="">
+            <WZUIContainer Type="WZUIContainer" GUID="{c0426931-e3a6-4c7f-92b0-c9850b0c201f}">
+                <WZUIContainer Type="WZUIContainer" GUID="{e606683a-7a64-49d4-85b4-94032ca79f8d}" AbsContentSize="186,190" UseAbsSize="True" RelativePosition="0.5,1" AbsPosition="87.5,84.5001" AnchorPoint="0.5,1">
+                    <WZUIContainer Type="WZUIContainer" GUID="{339f8c3f-0ff0-461b-bffd-e362996e8bbc}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.25,0.5" RelativeSize="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{cd1b878e-0644-4f41-a53d-0d5fbb0e7d8d}" File="ui/common/common_scale9_yy.png" CapInsets="20,20,10,10" RelativePosition="0.5,0.5" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{5586f1d1-ecd9-42a7-80e1-91c219e773c8}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.75,0.5" RelativeSize="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{ed21ac9b-04c5-49a0-be71-f5f08f1223a1}" File="ui/common/common_scale9_yy.png" CapInsets="20,20,10,10" RelativePosition="0.5,0.5" FlipX="False" FlipY="False" ScaleX="-1" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUI9Image Type="WZUI9Image" GUID="{7df2525f-e48e-4ec3-a8dd-7008f61dc742}" File="ui/common/common_scale9_di7.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{d5eb0c09-2a53-47aa-985d-1df979963b7c}" RelativeSize="0.9,0.75" RelativePosition="0.5,0.557322">
+                    <WZUI9Image Type="WZUI9Image" GUID="{552bbd59-1d48-48f5-8fcc-c0b08cb4477e}" File="ui/common/common_scale9_di58.png" RelativeSize="1,1" RelativePosition="0.5,0.5" Opacity="225" />
+                    <WZUIImage Type="WZUIImage" GUID="{c74ca61c-5f77-42e8-812d-c35c3f04d340}" Name="imgQuality_CellBlessShop" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{e3c48f5a-15b8-4602-8e09-4851add7590f}" FontSize="22" EnableStroke="True" Color="255,255,255" Name="txtBuyNum_CellBlessShop" StrokeSize="4" StrokeColor="105,65,46" RelativePosition="0.8,0.2" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{c4af77b7-7d7b-426f-947a-834dc041b882}" File="ui/common/common_icon_dian.png" UseOriginSize="True" RelativePosition="0.5,1" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="80,80" GUID="{18a1700e-2439-4cde-9ce3-b3076d6da162}" Name="conProp_CellBlessShop" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" NameCreate="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{23406907-0b1d-4148-ab47-072964fe7102}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.849727" TouchSwallow="False" RelativeSize="0.8,0.15">
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Color="255,255,255" Dimensions="0,0" EnableStroke="False" FontSize="24" GUID="{0aefb002-4393-4bfb-b861-450f6fca3d78}" Name="txtPropName_CellBlessShop" RelativePosition="0.5,0.5" StrokeColor="60,19,12" StrokeSize="4" Text="" TouchEnable="False" Type="WZUILabelTTF" Visible="True" NameCreate="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{8190b5c5-6852-4faf-87f0-f1d04ef3603e}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.0949101" TouchSwallow="False" RelativeSize="0.8,0.12">
+                <WZUIContainer Type="WZUIContainer" GUID="{af1c309f-a6cc-4394-ac52-58eefa6f4346}" RelativePosition="0.5,0.5" Name="conNotLimitTxt_CellBlessShop" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{b02d5f37-d854-4c8e-9f24-9fa4f80b955c}" AbsContentSize="30,30" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.215714,0.5">
+                        <WZUIImage File="ui/common/common_icon_suipian.png" GUID="{da5a9bbf-d092-48c2-bbf7-ecee9959152b}" Name="imgMoney_CellBlessShop" RelativePosition="0.5,0.5" RelativeSize="1,1" Scale="0.5" ScaleX="1" ScaleY="1" TouchEnable="False" Type="WZUIImage" UseOriginSize="False" Visible="True" isValid="True" UseOriginSizeProportion="True" AbsPosition="" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" BoldFont="False" Color="64,128,1" EnableStroke="False" FontSize="24" GUID="{626ec529-99c5-459c-bf7d-b890df006a6b}" Name="txtPrice_CellBlessShop" RelativePosition="0.45,0.5" StrokeColor="91,49,24" StrokeSize="0" Text="12345" Type="WZUILabelTTF" Visible="True" NameCreate="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIButton GUID="{1903bb29-72ae-4fb6-adfa-63f24c2c2b64}" LuaDoneFunctionName="OnBtnBuy" Name="" RelativeSize="1,1" Type="WZUIButton" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" TouchSwallow="True">
+            <NormalElement GUID="{d7a88da2-320c-418f-ada1-826c29b05ae0}" Type="WZUIContainer" />
+            <SelectElement GUID="{4d046d68-5535-4e29-9089-a694b3407631}" Type="WZUIContainer" />
+            <DisableElement GUID="{101f220d-674b-42f8-922d-d4c307cbb0e6}" RelativePosition="0.5,0.507143" Type="WZUIContainer" />
+        </WZUIButton>
+        <WZUIContainer Type="WZUIContainer" GUID="{3165c406-abff-4a36-83b8-fd904efd6a40}" Name="conSell_CellBlessShop" NameCreate="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{78fb8fb3-d90f-4bcd-bf58-36e052dff688}" File="ui/common/common_shade_chushouheidi.png" />
+            <WZUIImage Type="WZUIImage" GUID="{b5785a3f-a2f3-4f50-9431-bfe3965b8c5b}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellBlessShop>

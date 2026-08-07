@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WndLotteryReward GUID="{7B97B96D-D441-4e29-B6F1-1FEA00A872F9}">
+    <WZUIWindow AbsContentSize="586,366" GUID="{22EA3F5B-9EA9-491b-BAC9-EA1A86D9B541}" LuaObjectName="WndLotteryReward" Name="WndLotteryReward" NameCreate="True" Type="WZUIWindow" UseAbsSize="True">
+        <WZUI9Image File="common/Jigsaw/3.png" GUID="{CD7ADEAB-672C-4eba-8033-FBB68F6D0F43}" RelativePosition="0.5,0.45" RelativeSize="0.983,0.9" Type="WZUI9Image" />
+        <WZUI9Image File="common/Jigsaw/n_04.png" GUID="{D3BD8A73-C28A-4434-A09A-07991F5738CE}" RelativePosition="0.501808,0.511475" RelativeSize="0.96,0.48" Type="WZUI9Image" />
+        <WZUIContainer GUID="{DDC4EB52-41D8-4775-94DC-D3A398EE97DF}" RelativePosition="0.5,0.456285" RelativeSize="0.9,0.7" Type="WZUIContainer">
+            <WZUIContainer AbsContentSize="135,71" GUID="{6008B498-43A5-43a7-8B6B-2346938772E9}" Name="btnOK_WndMsgConfirmBox" RelativePosition="0.5,0.0907104" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIButton AbsContentSize="135,71" GUID="{E48F813E-11DE-4a98-B9D7-9A7D674A3262}" LuaDoneFunctionName="getReward" LuaPushFunctionName="" Name="btngetReward_Wnd" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{1FCF495B-65D1-49a1-92F9-154EC0FAF35A}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_5.png" GUID="{273945BE-A942-4d02-92C8-7C6E5341F3E1}" Type="WZUI9Image" />
+                    </NormalElement>
+                    <SelectElement GUID="{C10B8358-4215-4359-8A48-D87CD1DD6107}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_5_sel.png" GUID="{9CDBBFC9-FFA1-43cb-8C6B-3F32981A1C6E}" Type="WZUI9Image" />
+                    </SelectElement>
+                    <DisableElement GUID="{FEEF3C0C-2A72-4e0c-ABB2-7DE276C81BCD}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_5_not.png" GUID="{522DCDAE-D57D-4e4b-9083-2DC1C106E79A}" Type="WZUI9Image" />
+                    </DisableElement>
+                    <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="28" GUID="{448F81D6-1D11-4667-9620-01457E190A5C}" Name="txtBtnName" RelativePosition="0.5,0.5" StrokeColor="78,38,5" StrokeSize="4" Text="领取" Type="WZUILabelTTF" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUITableContainer ColumnCount="4" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableMoveoutContainer="False" GUID="{16E948B8-06E3-4cb3-BF40-4F932A954C0E}" Name="tbconReward_Wnd" RelativePosition="0.5,0.62" RelativeSize="1,0.62" Type="WZUITableContainer" />
+        </WZUIContainer>
+        <WZUIContainer GUID="{DE8428D4-EA06-4ed6-8285-E5A368A224B1}" RelativePosition="0.493174,0.8825" RelativeSize="1,0.21" Type="WZUIContainer">
+            <WZUI9Image CapInsets="100,20,600,50" File="common/Jigsaw/5.png" GUID="{B0104631-1676-4226-9DDD-8F5DBDC6AE27}" RelativePosition="0.508861,0.5" Type="WZUI9Image" />
+            <WZUIImage File="common/text/eros_wish_title.png" GUID="{6F105798-9D15-4780-9253-A3A83E207469}" Name="imgTitle_WndLotteryReward" RelativePosition="0.5,0.52" Type="WZUIImage" UseOriginSize="True" />
+            <Button GUID="{1F2416E9-BC3C-42cd-8157-3F9C44766B7B}" LuaDoneFunctionName="onClose" RelativePosition="0.94,0.5" Type="WZUIButton">
+                <NormalElement GUID="{34CAC6DB-EF14-42c7-AC40-16FD72A260E6}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close.png" GUID="{A002050D-794A-4de9-9147-149FCD3B1F1D}" Type="WZUIImage" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{D8F2CBD6-E28B-4a8c-A71D-1409D389999B}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close_sel.png" GUID="{FDBD9D81-AAC4-4705-8072-C1EC7853336B}" Type="WZUIImage" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{2B859A56-22D1-4037-AE08-8552F34E6DB2}" Type="WZUIContainer" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="578,38" GUID="{8585FE37-8863-4ba1-AAC4-232FF7AE2FA9}" RelativePosition="0.5,0.035519" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image File="common/Jigsaw/60.png" GUID="{9CEFF5EC-329A-487d-83E4-489094051778}" Type="WZUI9Image" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndLotteryReward>

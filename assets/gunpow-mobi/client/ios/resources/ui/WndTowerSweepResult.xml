@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<WndTowerSweepResult GUID="{5245A41D-20F2-40a1-BE24-919E5C19258B}">
+    <WZUIFrame Type="WZUIFrame" GUID="{64596CBF-3362-45e0-BC36-7BDC070EE727}">
+        <WZUIWindow Type="WZUIWindow" GUID="{56EFD147-6CD3-4652-82DC-67B7669F5AFA}" Name="WndTowerSweepResult" LuaObjectName="WndTowerSweepResult" Order="0" NameCreate="True" LuaTouchBeganFunction="onTouchBegan" Scale="1" ShowAll="True">
+            <WZUIContainer AbsContentSize="506,506" GUID="{AA3F620F-A51F-4024-B8A1-014A7628DB0B}" Name="conBg_WndTowerSweepResult" RelativePosition="0.5,0.5" Scale="1" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <WZUI9Image CapInsets="178,75,1,1" File="ui/common/common_scale9_di19.png" GUID="{B3B96384-753D-42f1-83D5-92D70099950E}" Type="WZUI9Image" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{68EFD1EF-D22F-4770-A92C-0F169749FFF8}" FontSize="24" RelativePosition="0.5,0.934092" TextKey="SWEEP_ENDIND2" EnableStroke="True" StrokeSize="4" Color="255,236,193" StrokeColor="132,66,29" Text="" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3867BE26-2524-4848-845E-6ABD17831D4F}" RelativePosition="0.5,0.835551" Color="79,60,48" Text="" FontSize="22" Name="txtTips_WndTowerSweepResult" />
+                <WZUIContainer Type="WZUIContainer" GUID="{B942FC08-8955-481d-836B-CB42557F661D}" AbsContentSize="463,310" UseAbsSize="True" RelativePosition="0.5,0.481173">
+                    <WZUI9Image Type="WZUI9Image" GUID="{89888B79-A45F-4035-938B-B48E311B53F9}" File="ui/common/common_scale9_di4.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{AFBDEF86-0C86-45ee-9D0D-BBF3CE354FC3}" Text="" FontSize="24" Color="127£¬70£¬26" AnchorPoint="0,0.5" Name="txtExp_WndTowerSweepResult" RelativePosition="0.18229,0.914102" EnableStroke="False" StrokeColor="79£¬60£¬48" StrokeSize="2" />
+                    <WZUIImage Type="WZUIImage" GUID="{8F29A51A-6BEA-42bf-A48E-074CDC8689A8}" File="ui/common/common_icon_exp.png" UseOriginSize="True" RelativePosition="0.125552,0.914102" />
+                    <WZUIImage Type="WZUIImage" GUID="{9CCCC3DD-2DA6-415d-8FCF-107AD6837C75}" File="ui/common/common_icon_jinbi.png" UseOriginSize="True" RelativePosition="0.61499,0.914102" Scale="0.9" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{93B98B77-C9FE-4220-9A78-D7F42D6D0009}" Text="" FontSize="24" Color="127,70,26" AnchorPoint="0,0.5" Name="txtGold_WndTowerSweepResult" RelativePosition="0.672762,0.914102" StrokeColor="79,60,48" EnableStroke="False" StrokeSize="2" />
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{F52785D1-E796-4a19-A36B-40F737A37932}" UseAbsSize="True" AbsContentSize="440,245" RelativePosition="0.5,0.0496666" AnchorPoint="0.5,0" Name="tbconList_WndTowerSweepResult" EnableMoveHorizontal="False" CellElementHeight="0.408" EnableHideUnvisible="True" ScissorHeight="1.01" ColumnCount="5" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{FBD615EF-B3A4-408c-B8A7-55BBEC02C004}" UseAbsSize="True" AbsContentSize="130,66" RelativePosition="0.5,0.0905613">
+                    <Button Type="WZUIButton" GUID="{774AB19B-68B5-4861-85B6-B4904195D6CB}" LuaDoneFunctionName="onClose" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{693B5058-2C77-456b-8EDA-8DC052B6B87F}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{81FB6F91-E1C9-4703-ADC5-CB21DF81A68F}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{76624384-F36D-4caf-B695-C1EA274B3FD8}" Text="" TextKey="CONFIRM" FontSize="26" EnableStroke="True" Color="255,239,193" StrokeSize="4" StrokeColor="0,72,3" Name="" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{4AB60032-B579-44fd-8B72-2855371ADA4D}" Scale="1">
+                            <WZUI9Image Type="WZUI9Image" GUID="{4D37F748-7074-4863-92E4-F3DB74EA3FEE}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9EDB5192-54A5-4f62-97E3-F07BF78BC3DD}" Text="" TextKey="CONFIRM" FontSize="26" EnableStroke="True" Color="255,239,193" StrokeSize="4" StrokeColor="0,72,3" Name="" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{17F73008-55BE-4a08-BB6F-BD155AD0381D}" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIWindow>
+    </WZUIFrame>
+</WndTowerSweepResult>

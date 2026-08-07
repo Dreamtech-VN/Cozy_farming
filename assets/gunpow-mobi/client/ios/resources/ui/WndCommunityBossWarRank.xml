@@ -1,0 +1,38 @@
+﻿<WndCommunityBossWarRank GUID="{c3223026-4bcb-4b99-9291-89d45ca6956d}">
+    <WZUIWindow AbsContentSize="500,510" GUID="{6694f96b-76aa-4898-a5f8-05e869ada732}" LuaObjectName="WndCommunityBossWarRank" Name="WndCommunityBossWarRank" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True" RelativePosition="0.45,0.47" LuaTouchBeganFunction="">
+        <WZUIImage Type="WZUIImage" GUID="{790bc064-a24a-4c8f-a73d-901cc5423c87}" File="rank.png" UseOriginSize="True" isValid="True" />
+        <WZUIContainer Type="WZUIContainer" GUID="{a5e41b15-19ff-4415-9d1a-e5a4db21551f}" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{80cee05f-c3fa-4eea-b578-bdc466cd6418}" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{da86cd2d-3d7f-4716-b241-0f5a40ebc7b6}" File="ui/common/common_scale9_di19.png" Opacity="255" RelativePosition="0.5,0.5" CapInsets="250,100,1,1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{d8609c46-b81c-4994-820d-534a6a158320}" RelativeSize="0.97,0.825" RelativePosition="0.5,0.46951">
+                <WZUI9Image Type="WZUI9Image" GUID="{c53e02fb-bf5a-4a11-830a-a1caec3dec40}" File="ui/common/common_scale9_di20.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{ba209d49-db81-4d72-9f8a-bc60932f5c9d}" RelativeSize="1,0.13" AnchorPoint="0.5,1" RelativePosition="0.5,1" Visible="True">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e54f2afc-1f39-43dc-9f75-bb1946045e7c}" TextKey="" FontSize="26" Color="255,236,192" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" RelativePosition="0.5,0.5" Name="labTitle_WndCommunityBossWarRank" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{9e3e3f75-4410-4e99-ab67-a352898d7e2b}" Name="" Order="1">
+                <WZUIButton AbsContentSize="120,56" GUID="{f48ef590-c293-4f48-b44e-e17e47859dc7}" LuaDoneFunctionName="OnCloseClick" Name="" RelativePosition="0.925,0.935" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{5dfa859f-f441-45aa-b5ae-1e6823ac1eb3}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{c79a27fb-b99a-4d5a-92d9-e7db2e76d4a3}" Type="WZUIImage" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{91fe00e4-704e-4f30-ade9-3623276c657e}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{5c121356-5745-489d-ba71-1395929d1912}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                    </SelectElement>
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1f286b8a-ffd3-45f1-91ec-ff7a638ec54e}" RelativeSize="1,0.06" RelativePosition="0.5,0.838036">
+                <WZUIImage Type="WZUIImage" GUID="{e61db62a-dedf-46d2-9768-f58c14fedcc9}" File="ui/common/common_scale9_heidi3.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{8afb7996-0406-4a7b-b38a-766aec20b54e}" RelativeSize="1,0.06" RelativePosition="0.5,0.608624">
+                <WZUIImage Type="WZUIImage" GUID="{bde33aea-66ec-4a69-b322-968ba4b5f308}" File="ui/common/common_scale9_heidi3.png" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{68c16106-d9f1-4741-aefc-009384c57b9e}" Text="全服首次通关" LabelStyleKey="C11_F20_S4_C5" RelativePosition="0.5,0.837255" TextKey="GUILD_BOSS_RAND_FIRST" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{886456ac-e0c9-4a05-9a35-3e4a9e700c61}" Text="全服最快通关" LabelStyleKey="C11_F20_S4_C5" RelativePosition="0.5,0.607843" TextKey="GUILD_BOSS_RAND_FAST" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{074b840a-2ac5-41bb-81a7-d7ed25f5e7ef}" AbsContentSize="500,260" UseAbsSize="True" RelativePosition="0.5,0.317836" Order="11" Name="conForTab_WndCommunityBossWarRank">
+            <WZUITableContainer Type="WZUITableContainer" GUID="{281c4e00-d773-450a-8d19-f392d8ec77c1}" Name="conTab_WndCommunityBossWarRank" AbsContentSize="500,260" UseAbsSize="True" RelativePosition="0.5,0.5" CellElementHeight="0.3" EnableMoveHorizontal="False" EnableVerticalScroll="True" ScissorHeight="1" ColumnCount="1" VerticalInterval="0" HorizontalInterval="0" VerticalAbsInterval="5" HorizontalAbsInterval="0" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{252baceb-7cc5-4730-90e1-e951e73e2536}" UseAbsSize="True" AbsContentSize="500,80" Name="conFirstPass_WndCommunityBossWarRank" RelativePosition="0.5,0.721569" />
+    </WZUIWindow>
+</WndCommunityBossWarRank>

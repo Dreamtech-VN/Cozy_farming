@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<WndMarryLetter GUID="{22FA6E19-8379-4807-9F12-8F3F2C16715A}">
+    <WZUIWindow AbsContentSize="558,552" GUID="{5CDEC7B9-83D8-439e-953F-575C76C594B2}" LuaObjectName="WndMarryLetter" Name="WndMarryLetter" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer GUID="{2A645D04-2CA2-4c22-94C0-40F478E955BB}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer">
+            <WZUIContainer Type="WZUIContainer" GUID="{21218BDA-795C-48ef-AFD6-4B8FBBE5EC27}" Name="conbg1_WndMarryLetter" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{C4770855-AB0B-423b-8DB6-9CF2E13E43AA}" File="ui/marrige/common_icon_fdk.png" UseOriginSize="True" Name="" />
+                <WZUIParticle Type="WZUIParticle" GUID="{F32F29A0-37A6-4254-A8AE-6853DDF52444}" PlistFile="particle/skills_qh_hua_01.plist" AnchorPoint="0.5,0" RelativePosition="0.505085,0.0341731" Name="" />
+                <WZUIParticle Type="WZUIParticle" GUID="{61FC09CD-61F9-4a61-BF21-974AF2356E1B}" PlistFile="particle/skills_qh_hua_02.plist" AnchorPoint="0,0.5" RelativePosition="0.0874216,0.483353" Name="" />
+                <WZUIParticle Type="WZUIParticle" GUID="{89F05E7D-C0AB-40ce-B478-A6D7CD46DCC1}" PlistFile="particle/skills_qh_hua_03.plist" AnchorPoint="1,0.5" RelativePosition="0.931467,0.473807" Name="" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{DF4526E1-E373-4816-99A5-15F6B37801DE}" Name="conbg2_WndMarryLetter" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{B3C4C69C-59F5-403e-9F92-1E309B24DDD7}" File="ui/marrige/common_icon_zdk.png" UseOriginSize="True" Name="" />
+                <WZUIParticle Type="WZUIParticle" GUID="{510A62F3-C5B8-4248-8EF9-1621C63363C1}" PlistFile="particle/skills_sjx_01.plist" AnchorPoint="0.5,0" RelativePosition="0.505085,0.0341731" Name="" />
+                <WZUIParticle Type="WZUIParticle" GUID="{A7EB21E1-9835-4cd0-A308-AB07619F8DDE}" PlistFile="particle/skills_sjx_02.plist" AnchorPoint="0,0.5" RelativePosition="0.0874216,0.483353" Name="" />
+                <WZUIParticle Type="WZUIParticle" GUID="{BD3FB6F7-787F-4dc5-A8A5-A5557964F98A}" PlistFile="particle/skills_sjx_03.plist" AnchorPoint="1,0.5" RelativePosition="0.931467,0.473807" Name="" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{CEB9E1F7-39F9-4397-8F8F-F464459DE8D3}" Name="conbg3_WndMarryLetter" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{BD6EDB8F-19D1-48c4-86C1-00D146B5FC92}" File="ui/marrige/common_icon_hdk.png" UseOriginSize="True" Name="" />
+                <WZUIParticle Type="WZUIParticle" GUID="{7E36C266-A091-48a1-B218-B12B34A6D6AC}" PlistFile="particle/skills_qu_pg_01.plist" AnchorPoint="0.5,0" RelativePosition="0.505085,0.0341731" Name="" />
+                <WZUIParticle Type="WZUIParticle" GUID="{0A7EA8D2-83BC-4017-B377-C754D6F58430}" PlistFile="particle/skills_qu_pg_02.plist" AnchorPoint="0,0.5" RelativePosition="0.0874216,0.483353" Name="" />
+                <WZUIParticle Type="WZUIParticle" GUID="{29F51F6F-E890-4007-B481-8A20C3E2958A}" PlistFile="particle/skills_qu_pg_03.plist" AnchorPoint="1,0.5" RelativePosition="0.931467,0.473807" Name="" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{B74A17A3-5B05-4568-859C-DEE4226AD63E}" Name="conbg4_WndMarryLetter" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{EE050884-44B8-4bf9-9F8E-8D02191E81FB}" File="ui/marrige/common_icon_ndk.png" UseOriginSize="True" Name="" />
+                <WZUIParticle Type="WZUIParticle" GUID="{18B5E85C-167A-410c-A3AD-8D09099B4121}" PlistFile="particle/skills_qh_jz_01.plist" AnchorPoint="0.5,0" RelativePosition="0.505085,0.0341731" Name="" />
+                <WZUIParticle Type="WZUIParticle" GUID="{B0013B31-F6BC-4c0c-A25E-24F8B5E8E2B8}" PlistFile="particle/skills_qh_jz_02.plist" AnchorPoint="0,0.5" RelativePosition="0.0874216,0.483353" Name="" />
+                <WZUIParticle Type="WZUIParticle" GUID="{122901D7-3F6F-4309-9375-6D347F56B8D6}" PlistFile="particle/skills_qh_jz_03.plist" AnchorPoint="1,0.5" RelativePosition="0.931467,0.473807" Name="" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="250,60" GUID="{91FED501-443E-42c1-9EB5-DE8BB1F180A0}" Name="conName_WndMarryLetter" RelativePosition="0.550014,0.705511" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{42EDDE84-E348-4bf2-BF2D-026CBF172DD1}" FontSize="24" TextKey="My_Love" RelativePosition="0.17299,0.457209" Color="255��89��74" Name="txtNameDesc_WndMarryLetter" />
+            <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="79,60,48" Dimensions="0��0" FontSize="20" GUID="{9FE4222A-AB1B-4320-84FA-4498B8CFFA1F}" MaxLength="7" Name="txtCoupleName_WndMarryLetter" RelativePosition="0.352324,0.415545" Text="" Type="WZUILabelTTF" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="160,96" GUID="{58118F84-5193-4930-9E2B-C77705D69D10}" RelativePosition="0.746067,0.744528" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIImage Type="WZUIImage" GUID="{3CB85363-B0EF-4e42-AF71-1BA852E6FCFA}" File="" UseOriginSize="True" Name="imgProGift_WndMarryLetter" />
+            <WZUIImage File="" GUID="{B69BA20E-8441-4ea6-87A6-D0FACAE8EF61}" Name="imgIcon_WndMarryLetter" RelativePosition="0.690948,0.510492" Type="WZUIImage" UseOriginSize="True" Scale="0.6" Visible="True" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="420,130" GUID="{24CC8DC3-F7EB-4c06-8238-A6E60FD7A511}" Name="conLetter_WndMarryLetter" RelativePosition="0.511382,0.521504" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUILabelTTF AbsPosition="0,0" Alignment="Left" Color="79,60,48" Dimensions="400,0" FontSize="22" GUID="{1EB1D60E-10E3-43f2-AD21-2333EBBC60F2}" Name="txtContent_WndMarryLetter" RelativePosition="0.5,0.5" Text="" Type="WZUILabelTTF" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="480,190" GUID="{E58999E4-8C7C-44c0-B3B1-5675425BA217}" Name="conBottom_WndMarryLetter" RelativePosition="0.5,0.173769" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUIContainer AbsContentSize="230,60" GUID="{0A037BE3-F81E-43ce-9005-E0462557752C}" RelativePosition="0.753724,1.09507" Type="WZUIContainer" UseAbsSize="True">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{09957127-1F89-4712-9352-02105372BD2E}" FontSize="24" TextKey="Love" RelativePosition="0.33386,0.423876" Color="255��89��74" AnchorPoint="1,0.5" />
+                <WZUILabelTTF Alignment="Center" Color="79,60,48" Dimensions="0,0" FontSize="20" GUID="{E7252CF2-2E13-44dc-A193-27ECB1AF1C52}" MaxLength="7" Name="txtYourName_WndMarryLetter" RelativePosition="0.35487,0.416671" Text="兔兔图图兔兔" Type="WZUILabelTTF" AnchorPoint="0,0.5" TouchEnable="False" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="126,62" GUID="{333E2FCC-B30D-4f47-AF44-AD28F2CB1902}" Name="conSendBtn_WndMarryLetter" RelativePosition="0.5,0.388719" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button GUID="{3327674B-68C3-4ecc-A7CB-83C511C2A610}" LuaDoneFunctionName="onSendClick" Type="WZUIButton" Visible="True" Name="btnSend_WndMarryLetter" LuaActionName="Normal">
+                    <NormalElement GUID="{EE15E3A0-57E9-427a-99AA-990BEC5D5E6C}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_marryl.png" GUID="{A23A8029-0913-4a94-B7C1-0FAFEF9BB5BA}" Type="WZUI9Image" TouchEnable="False" Name="" UseOriginSize="True" Tag="1" />
+                    </NormalElement>
+                    <SelectElement GUID="{A7EB1EC2-568E-4b72-9E83-88BD7350FB41}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_marryl.png" GUID="{E916649A-EE78-480b-8E5E-EB2A7AFD4B52}" Type="WZUI9Image" TouchEnable="False" Name="" UseOriginSize="True" Tag="1" />
+                    </SelectElement>
+                    <DisableElement GUID="{DC123865-9DF2-4f62-8C95-1E53B08691A7}" Type="WZUIContainer" />
+                    <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{96E0D53D-AEE8-47a5-BEBF-69191075A0D7}" Name="txtBtnSend_WndMarryLetter" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="128,54,13" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" TextKey="SEND" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="126,62" GUID="{24CA30DE-D063-4fa8-B237-B8347427039F}" Name="conAgreeBtn_WndMarryLetter" RelativePosition="0.62427,0.388719" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                <Button GUID="{9D2C805C-BFDD-4588-BDA6-2DACF3217DFB}" LuaDoneFunctionName="onAgreeClick" Type="WZUIButton" Name="btnAgree_WndMarryLetter" LuaActionName="Normal">
+                    <NormalElement GUID="{99E98CA0-78FD-4f5b-B3BE-14F55DCF6035}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_marryl.png" GUID="{D0AEDEBF-85D3-4ba3-9D28-9AB30B9CCB8E}" Type="WZUI9Image" Name="" UseOriginSize="True" TouchEnable="False" Tag="1" />
+                    </NormalElement>
+                    <SelectElement GUID="{D775652F-E9B4-46c4-98FD-1DAE18EC2151}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_marryl.png" GUID="{58255813-FE2C-4991-B3B1-137018BBF9D9}" Type="WZUI9Image" Name="" UseOriginSize="True" TouchEnable="False" Tag="1" />
+                    </SelectElement>
+                    <DisableElement GUID="{F559E75D-E46F-47d7-9EA0-A9A101931FD1}" Type="WZUIContainer" />
+                    <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{AB0DB0D8-4C07-40f1-B0E3-0F1A6EAC3B8E}" Name="txtBtnAgree_WndMarryLetter" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="128,54,13" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" TextKey="AGREE" TouchEnable="False" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="126,62" GUID="{61654AB7-F63A-4063-9E3F-0B245C7103B6}" Name="conRejectBtn_WndMarryLetter" RelativePosition="0.280422,0.388719" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                <Button GUID="{6637084A-933B-4ebc-98DF-733A4A941B05}" LuaDoneFunctionName="onRejectClick" Type="WZUIButton" Name="btnReject_WndMarryLetter" LuaActionName="Normal">
+                    <NormalElement GUID="{D0381CFB-7472-49e6-AD9B-246FE685E8A8}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_marryl.png" GUID="{81B6B3CC-C828-4173-A65D-86F372355B9F}" Type="WZUI9Image" Name="" UseOriginSize="True" TouchEnable="False" Tag="1" />
+                    </NormalElement>
+                    <SelectElement GUID="{82549486-FEE0-4110-8CA8-8AA6663FF1E8}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_marryl.png" GUID="{2556CC12-B6C6-437c-92AC-3B2F038F7CC0}" Type="WZUI9Image" Name="" UseOriginSize="True" TouchEnable="False" Tag="1" />
+                    </SelectElement>
+                    <DisableElement GUID="{174CAB01-7C20-47ec-BB1F-4CF063B921C4}" Type="WZUIContainer" />
+                    <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{F5ADD73C-C2AC-4bf7-AA71-B22BE602CC0D}" Name="txtBtnReject_WndMarryLetter" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="128,54,13" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" TextKey="REJECT" TouchEnable="False" />
+                </Button>
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{53AE195F-F538-4176-A891-01B2F1183D96}" Name="txtProp_WndMarryLetter" Color="255,255,255" FontSize="20" BoldFont="False" EnableStroke="True" StrokeSize="4" RelativePosition="0.50563,0.831077" AnchorPoint="0.5,0.5" Text="你是否愿意接受我的心意，让我执子之手?" StrokeColor="60��19��12" TextKey="PROPOSE_TIPS2" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{90853D22-FADA-421a-85CE-3B19827E7F1E}" Name="txtProposeTips_WndMarryLetter" Color="158,139,121" FontSize="18" BoldFont="False" EnableStroke="False" StrokeSize="3" RelativePosition="0.5,0.674969" AnchorPoint="0.5,0.5" Text="不管求婚成功与否，都将消耗求婚道具" StrokeColor="60��19��12" TextKey="PROPOSE_TIPS" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{D7BE0FF4-3BDD-4c9d-B634-83922C85EE21}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.228817,0.760137" Name="conLovingFace_WndMarryLetter" Visible="True" TouchContainerEnable="True">
+            <WZUIImage Type="WZUIImage" GUID="{4DD0F9DF-71B9-4ed1-8CD7-69EC335C0875}" File="ui/marrige/common_icon_huahuak.png" UseOriginSize="True" RelativePosition="0.5,0.385141" TouchEnable="False" />
+            <WZUIImage Type="WZUIImage" GUID="{6AEAC845-C3F4-45da-B690-58CD29FD9BBE}" File="ui/common/common_icon_tx.png" UseOriginSize="True" TouchEnable="False" Visible="True" />
+            <WZUIImage Type="WZUIImage" GUID="{74CB7D68-A839-4e71-BDC3-E42E78F31714}" File="ui/common/common_icon_wenhao.png" UseOriginSize="True" Scale="0.5" TouchEnable="False" Visible="True" />
+            <WZUIButton AbsContentSize="0,0" GUID="{C9155F37-DF20-4e62-B842-6437B892E6F0}" LuaDoneFunctionName="onFriendListClick" RelativePosition="0.5,0.5" TouchEnable="True" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="False" Name="btnSelectF_WndMarryLetter">
+                <NormalElement AbsContentSize="0,0" GUID="{3FB23C61-0F66-4678-BC71-0D7EC11F4235}" Type="WZUIContainer" UseAbsSize="False" />
+                <SelectElement AbsContentSize="0,0" GUID="{35B89890-4048-4387-8252-4A312ED77334}" Type="WZUIContainer" UseAbsSize="False" />
+                <DisableElement AbsContentSize="150,55" GUID="{D1D990CD-D81E-4f7d-804D-6DB96333481A}" Type="WZUIContainer" UseAbsSize="True" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{5F4ACBBE-4D0D-4e87-836A-379D8BD0D44F}" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.871965,0.916155" Name="conClose_WndMarryLetter">
+            <Button Type="WZUIButton" LuaDoneFunctionName="onCloseClick" GUID="{252467C1-9DB6-4c7e-98B1-BE2BE4FB6331}" LuaActionName="Normal">
+                <NormalElement Type="WZUIContainer" GUID="{0B175C1D-67D7-447b-958B-C03B66EB3809}">
+                    <WZUIImage Type="WZUIImage" GUID="{214BDEC6-6FA0-4152-87D7-C18D20D35B0D}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" Scale="1" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{B91FC20F-A5B4-4612-A6DF-662B2B42ED07}">
+                    <WZUIImage Type="WZUIImage" GUID="{35D55CB6-AC5E-44cd-9686-8DF683D69B37}" File="ui/common/common_icon_guanbi_sel.png" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{C1AD7885-DEF3-41ea-B33F-D54F6A2593D0}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndMarryLetter>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" ?>
+<CellFund GUID="{30C05490-11E4-45d4-A5B6-210B88AD4ED4}">
+    <WZUIContainer AbsContentSize="470,113" GUID="{CBC3B63B-5E93-49ef-AF47-AFE63159E6A2}" LuaObjectName="CellFund" Name="CellFund" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{F62A60C9-6988-479e-9F1C-B8BC7581A863}" AbsContentSize="470,105" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True">
+            <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{E896C06A-167F-4842-A18A-A080D3987EFE}" RelativePosition="0.5,0.487515" RelativeSize="1,1" Type="WZUI9Image" Visible="True" TouchEnable="False" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="470,105" AnchorPoint="0.5,0.5" GUID="{366D60C3-9D48-4c49-9E59-583B376CD64A}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIButton AbsContentSize="116,56" GUID="{F7D18AB5-0831-4c93-9914-D776BAA4EE72}" LuaDoneFunctionName="onGet" Name="btnGet" RelativePosition="0.85,0.5" Scale="1" ScaleX="1" ScaleY="1" Type="WZUIButton" UseAbsSize="True" Visible="True" LuaActionName="Normal">
+                <NormalElement GUID="{F2592C2A-FCFB-4a41-9A50-57DA1D47B012}" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{FD71279D-FE4C-46bf-904F-9FD80074E123}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                    <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" Dimensions="0,0" EnableStroke="False" FontSize="20" GUID="{7A34DDA1-B71A-40fa-AD3D-0F919EEE60E8}" Name="txtBuy1_CellFund" RelativePosition="0.5,0.5" StrokeColor="91,49,24" StrokeSize="4" Text="穿上" TouchEnable="False" Type="WZUILabelTTF" TextKey="ACTIVE_BTN_GET" LabelStyleKey="NORMAL_GREEN_BTN" />
+                </NormalElement>
+                <SelectElement GUID="{569DE703-502D-4f4d-99C7-E2D26E4F17AA}" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{FE202EDC-7D6B-4489-98A4-B327A5B45A4F}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                    <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" Dimensions="0,0" EnableStroke="False" FontSize="20" GUID="{9ABD8127-B1C0-4c01-96B4-BDC70D7E40BC}" Name="txtBuy2_CellFund" RelativePosition="0.5,0.5" StrokeColor="91,49,24" StrokeSize="4" Text="穿上" TouchEnable="False" Type="WZUILabelTTF" TextKey="ACTIVE_BTN_GET" LabelStyleKey="NORMAL_GREEN_BTN" />
+                </SelectElement>
+                <DisableElement GUID="{D80D7750-92D8-4192-976B-3482BAABD5FE}" Type="WZUIContainer" Visible="True" RelativePosition="0.5,0.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{9E683B6F-F846-4dca-9E94-7C6AC480881C}" File="ui/common/common_btn_anniu10_0.png" GrayRender="True" RelativePosition="0.5,0.5" UseOriginSize="True" />
+                    <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" Dimensions="0,0" EnableStroke="False" FontSize="20" GUID="{790F036F-272A-4976-A690-0E121626B460}" Name="txtBuy3_CellFund" RelativePosition="0.5,0.5" StrokeColor="91,49,24" StrokeSize="4" Text="" TouchEnable="False" Type="WZUILabelTTF" TextKey="" LabelStyleKey="SMALL_GRAY_BTN" />
+                </DisableElement>
+            </WZUIButton>
+            <WZUIImage Type="WZUIImage" GUID="{B6957497-5868-4176-9B2B-24E70804DC32}" Name="" File="ui/common/common_num_ghdj2.png" UseOriginSize="True" RelativePosition="0.18,0.49" Scale="1" AbsPosition="177.03,48.6362" />
+            <WZUIContainer Type="WZUIContainer" GUID="{53BC7A70-94F0-4280-A2A7-18BEBC1E5702}" Name="conGold" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.35,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{46077C5B-9F6D-4d9b-876D-BCF9074EF3AF}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" />
+                <WZUIImage Type="WZUIImage" GUID="{B5FC8F4A-7784-4a9c-8D9E-D800F92934BA}" Name="imgFundIcon_CellFund" File="" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="1" />
+                <WZUILabelTTF Alignment="Right" AnchorPoint="1,0.5" BoldFont="True" Color="255,255,255" FontSize="22" GUID="{A302F27F-8E38-4372-BA58-2D971FDF7C95}" MaxLength="10" Name="ttf2_CellFund" Order="1" RelativePosition="0.9,0.235486" Text="100" Type="WZUILabelTTF" TouchEnable="False" AbsPosition="240.228,24.726" EnableStroke="True" StrokeSize="2" StrokeColor="79,60,48" />
+                <WZUIImage Type="WZUIImage" GUID="{7AF66A3F-2B7A-49ed-BAAC-051BD249014C}" File="ui/common/common_scale9_zi.png" UseOriginSize="True" Name="imgQuality_CellFund" />
+            </WZUIContainer>
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{BF2C532A-002C-43c3-B1C7-F723BC3FA10A}" CharMapFileName="ui/common_num/common_num_ghdj.png" Text="12" Height="24" UseOriginSize="True" Name="ttf1_CellFund" NameCreate="True" RelativePosition="0.11627,0.5" Width="16" AbsPosition="54.6471,52.2915" Visible="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7900A282-8FA9-440d-A4A1-073AFD3F2671}" TextKey="ACTIVE_GET" LabelStyleKey="C8_F24" RelativePosition="0.852128,0.5" AbsPosition="400.5,52.5" Name="finish" Visible="False" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellFund>

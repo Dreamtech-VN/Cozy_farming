@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<WndBuyGoods GUID="{DE40E542-6A02-4543-87E2-0ADB385E1657}">
+    <WZUIContainer AbsContentSize="784,498" GUID="{24D6DCC9-F533-4337-829C-D9F88507AD85}" LuaObjectName="WndBuyGoods" Name="WndBuyGoods" NameCreate="True" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="False">
+        <WZUIContainer GUID="{6E00EC80-BC99-4679-86CF-76E1A18B2117}" Name="conBG_WndBuyGoods" Type="WZUIContainer" AbsContentSize="400,250" UseAbsSize="True">
+            <WZUI9Image File="ui/common/common_scale9_di15.png" GUID="{D1BC86B2-4B5D-479d-B746-26B79D281C5F}" Type="WZUI9Image" UseOriginSizeProportion="False" CapInsets="0,0,0,0" />
+            <WZUI9Image Type="WZUI9Image" GUID="{4A15CE88-0A83-4209-9FCB-232CE77D479A}" File="ui/common/common_scale9_di25.png" Scale="0.97" ScaleY="0.95" />
+            <WZUIContainer Type="WZUIContainer" GUID="{E4F8E126-A913-4997-805F-3A5BD6D67EB0}" AbsContentSize="388,90" UseAbsSize="True" RelativePosition="0.5,0.568105">
+                <WZUI9Image Type="WZUI9Image" GUID="{DA535AFD-C996-47f0-8EE0-725B1039121C}" File="ui/common/common_scale9_di20.png" Opacity="255" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{560692A9-01DA-4a3d-A346-214A9EE5654F}" FontSize="22" Color="79,60,48" Text="是否花费" RelativePosition="0.198749,0.5" TextKey="YES_OR_NO_SPEND" Name="txtCostDesc_WndBuyGoods" />
+                <WZUIImage Type="WZUIImage" GUID="{F81E685D-80A9-4917-B7D8-5EEF48BBC5DA}" Name="imgCostType_WndBuyGoods" File="" UseOriginSize="True" RelativePosition="0.5097,0.5" Scale="0.8" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{613F5C65-E640-45ff-844C-C7B834456334}" Color="79,60,48" AnchorPoint="1,0.5" Text="" FontSize="22" RelativePosition="0.459253,0.5" Name="txtCostCount_WndBuyGoods" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{98AD0D40-6F1E-4837-B5FA-D2603BBB42CD}" Color="79,60,48" AnchorPoint="0,0.5" Text="" FontSize="22" RelativePosition="0.561295,0.5" Name="txtCostCountTips_WndBuyGoods" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{394236A3-A6E1-47ef-9CE0-A127D88C3EDE}">
+                <Button Type="WZUIButton" LuaDoneFunctionName="onSureBtn" AbsContentSize="126,62" UseAbsSize="True" RelativePosition="0.716881,0.195151" GUID="{C6E01CEA-6595-4169-9718-4740B65F03AA}">
+                    <NormalElement Type="WZUIContainer" GUID="{F7603BD7-5C86-4058-A091-1C59121C3F6D}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{3A39D916-6A52-427b-B2B4-2FE2F43243E2}" File="ui/common/common_btn_anniu10.png" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{4025E16D-39B4-4a07-B952-4961BB271F86}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{C6E74E35-F5BD-4a16-B937-B323E902914C}" File="ui/common/common_btn_anniu10_sel.png" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{6D864011-E1F4-48fc-A083-6D7BD4D334CF}" />
+                </Button>
+                <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClose" AbsContentSize="126,62" UseAbsSize="True" RelativePosition="0.293254,0.195151" GUID="{4BE6B97E-0CA9-4793-A486-9DDCD8917018}">
+                    <NormalElement Type="WZUIContainer" GUID="{52810BAE-BD76-4725-A262-086C9F616CC9}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{FA48E95C-83B4-4431-A312-1F922D5BCCE7}" File="ui/common/common_btn_anniu3.png" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{B9CDF209-CAA7-4b7c-BAC5-C88AF26D1C80}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{6060E78B-4681-4c34-8833-79F01A19210A}" File="ui/common/common_btn_anniu3_sel.png" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{19183D94-6832-487d-A915-682EDF7AE2A4}" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{E6F32482-9326-49a5-8A68-08DD56DB4743}" BoldFont="False" EnableStroke="True" Color="255,236,193" FontSize="26" StrokeColor="3,111,8" Text="确认" RelativePosition="0.720192,0.193324" Name="txtBuy_WndBuyGoods" AnchorPoint="0.5,0.5" Dimensions="0,0" Alignment="Center" TextKey="CONFIRM" StrokeSize="4" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{B281C6E1-4D75-41ac-B44F-0C895754E9B4}" BoldFont="False" EnableStroke="True" Color="255,236,193" FontSize="26" StrokeColor="128,54,13" Text="确认" RelativePosition="0.293188,0.193324" Name="" AnchorPoint="0.5,0.5" Dimensions="0,0" Alignment="Center" TextKey="BACK" StrokeSize="4" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</WndBuyGoods>

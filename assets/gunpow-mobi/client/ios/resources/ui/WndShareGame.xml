@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<WndShareGame GUID="{C269A044-8C12-470e-84F0-A89DAF25366D}">
+    <WZUIContainer Type="WZUIContainer" GUID="{6EAC77A6-77DB-45f7-84E5-1F299CFCAD2D}" AbsContentSize="800,600" UseAbsSize="True" Name="WndShareGame">
+        <WZUI9Image Type="WZUI9Image" GUID="{B38F116B-7E89-4f8e-9178-0E75A1800F91}" File="ui/common/common_scale9_di5.png" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{CCAD3FC0-FB9E-4894-A95F-E5AF7AAD3456}" LabelStyleKey="C1_F26_S4_C2" TextKey="SHARE_GAME" RelativePosition="0.5,0.898333" AbsPosition="400,539" Text="" />
+        <Button Type="WZUIButton" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.936249,0.898333" AbsPosition="748.999,539" Name="btnClose_WndShareGame" LuaDoneFunctionName="btnClose" GUID="{99B3877F-970B-418a-97A2-0E6986B0E4A1}">
+            <NormalElement Type="WZUIContainer" GUID="{454FA96E-FE1E-410d-AC1E-EE4A5E163C65}">
+                <WZUIImage Type="WZUIImage" GUID="{4BF834F5-0DA0-4d35-9E4C-67101CF69957}" File="ui/common/common_icon_guanbi.png" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{1F1EA286-2505-4cad-85D6-05E835C50357}">
+                <WZUIImage Type="WZUIImage" GUID="{E26CE618-2C24-414f-A053-FD55245E83B0}" File="ui/common/common_icon_guanbi_sel.png" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{8171ED43-C57F-446b-84DF-C7CA8389CF8A}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{D3C7ED94-CDB1-4987-A64A-FFA40DA8CA1B}" RelativeSize="0.98,0.5" RelativePosition="0.5,0.565803" AbsPosition="399,339.482">
+            <WZUIImage Type="WZUIImage" GUID="{7CE88F3C-3EF8-40c6-AC00-B7F9335152EF}" RelativePosition="0.5,0.5" AbsPosition="392,155" Name="img_WndShareGame" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{0E3136DF-A791-47fe-83EA-DC349ECFA0EF}" RelativeSize="0.98,0.16" RelativePosition="0.5,0.236666" AbsPosition="400,142">
+            <WZUIEditBox Type="WZUIEditBox" GUID="{6cefdab4-cf9f-4839-b74d-7b12ee0a98e0}" Name="edit_WndShareGame" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" Name="btn1_WndShareGame" LuaObjectName="btnShareFriend" AbsContentSize="170,70" GUID="{A18E9111-929F-4ce4-AA3F-6E3DB87C6BF8}" UseAbsSize="True" RelativePosition="0.3175,0.106667" AbsPosition="254,64.0002">
+            <NormalElement Type="WZUIContainer" GUID="{ED53FB9A-C14A-4d80-AAA0-CE1D2B738683}">
+                <WZUIImage Type="WZUIImage" GUID="{2E28150E-9B46-4750-9F2E-950EEC36A4EB}" File="ui/common/common_btn_anniu10_1.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{C8308C92-6E5A-4dc9-9581-3652E0EFFEFB}" LabelStyleKey="C1_F26_S4_C4" TextKey="SHARE_FRIEND" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{CB883414-B496-4a1e-A018-E5E1066FC569}">
+                <WZUIImage Type="WZUIImage" GUID="{661E6131-ECA0-432a-B502-DEF28708E88D}" File="ui/common/common_btn_anniu10_1_sel.png" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{5C63AD19-BD96-4858-84A6-1D2711A15957}" />
+        </Button>
+        <Button Type="WZUIButton" Name="btn2_WndShareGame" LuaDoneFunctionName="btnShareMoments" GUID="{734CB961-3CF8-4210-8EDB-38E21A742CF0}" AbsContentSize="170,70" UseAbsSize="True" RelativePosition="0.661249,0.106667" AbsPosition="529,64.0002">
+            <NormalElement Type="WZUIContainer" GUID="{46E0CB51-D699-44b9-BFFD-CBA218F0BBEC}">
+                <WZUIImage Type="WZUIImage" GUID="{CA2DFB3A-C55F-4d2a-9A55-88D249C00624}" File="ui/common/common_btn_anniu10_1.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8E397BF3-A750-4dcf-9C80-6F7974901EAE}" LabelStyleKey="C1_F26_S4_C4" TextKey="SHARE_MOMENTS" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{A8CD923D-B2E7-48bc-8BE2-875E4BAAF82F}">
+                <WZUIImage Type="WZUIImage" GUID="{21362269-5C00-4665-B1E2-1A624C134F8B}" File="ui/common/common_btn_anniu10_1_sel.png" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{E23729C5-4095-44f1-B747-93C3AE451E95}" />
+        </Button>
+    </WZUIContainer>
+</WndShareGame>

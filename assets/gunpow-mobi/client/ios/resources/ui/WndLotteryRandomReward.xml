@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WndLotteryRandomReward GUID="{007E5B3D-9C10-4d1d-9FBB-2D822E93820E}" Name="WndLotteryRandomReward">
+    <WZUIWindow AbsContentSize="586,366" GUID="{F398371E-DBBB-4c51-B923-40C371E8F4A2}" LuaObjectName="WndLotteryRandomReward" Name="WndLotteryRandomReward" NameCreate="True" Type="WZUIWindow" UseAbsSize="True">
+        <WZUI9Image File="common/Jigsaw/3.png" GUID="{BF3FBDED-3BE5-4bc6-A9FB-31127AF64DD6}" RelativePosition="0.5,0.45" RelativeSize="0.983,0.9" Type="WZUI9Image" />
+        <WZUI9Image File="common/Jigsaw/n_04.png" GUID="{AE3ADBA1-8453-40f2-94D8-C1C09F7768BC}" RelativePosition="0.501808,0.511475" RelativeSize="0.96,0.48" Type="WZUI9Image" />
+        <WZUIContainer GUID="{E2F89BA2-165A-48e8-9EB6-5898A5D13F59}" RelativePosition="0.5,0.456285" RelativeSize="0.9,0.7" Type="WZUIContainer">
+            <WZUIContainer AbsContentSize="135,71" GUID="{53212396-7458-4ada-9271-687449AC48DB}" Name="btnOK_WndMsgConfirmBox" RelativePosition="0.5,0.0907104" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIButton AbsContentSize="135,71" GUID="{CA812210-E48D-486c-92A8-C0CD3A6408AB}" LuaDoneFunctionName="onClose" LuaPushFunctionName="" Name="btnClose_Wnd" RelativePosition="0.459578,0.474383" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{298A60A1-D47A-4a7c-827C-A64FB3F1CF45}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_5.png" GUID="{40BE3195-ED14-4944-9C89-B574AC41F06C}" Type="WZUI9Image" />
+                    </NormalElement>
+                    <SelectElement GUID="{BA40F688-88CB-4892-88DA-8636585143B9}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_5_sel.png" GUID="{404881FC-BE9B-45f6-AB4D-DAA61149A37A}" Type="WZUI9Image" />
+                    </SelectElement>
+                    <DisableElement GUID="{877BF716-03E1-49e6-AAAF-02CC6319CC9E}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_5_not.png" GUID="{569F39A3-0D76-4420-BA70-256A7D2F250A}" Type="WZUI9Image" />
+                    </DisableElement>
+                    <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="28" GUID="{DEFB2042-327E-4067-9FCF-CC6E409FE15A}" Name="btnText" RelativePosition="0.5,0.5" StrokeColor="78,38,5" StrokeSize="4" Text="" TextKey="CONFIRM" Type="WZUILabelTTF" />
+                </WZUIButton>
+                <WZUIButton AbsContentSize="200,71" GUID="{14C723DE-7BD0-4246-948D-DC4E7D1639BA}" LuaDoneFunctionName="onAni" LuaPushFunctionName="" Name="btnAni_Wnd" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{0F3CF4FC-0520-4dc6-9406-782715454888}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_5.png" GUID="{C36A119A-50C5-46a7-AC3C-04BA1A759D9F}" Type="WZUI9Image" />
+                    </NormalElement>
+                    <SelectElement GUID="{A158D141-32E7-4c3d-A8C6-1F466D9A0DC0}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_5_sel.png" GUID="{73A65C39-5365-4154-935F-3D596555161E}" Type="WZUI9Image" />
+                    </SelectElement>
+                    <DisableElement GUID="{179D2CB7-F7C7-4e42-9E62-A0E330AD87D0}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_5_not.png" GUID="{FA762983-3D4A-4867-8797-F593A571388C}" Type="WZUI9Image" />
+                    </DisableElement>
+                    <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="28" GUID="{55825F40-E6C6-471e-8A6A-0E7E409D2201}" Name="label1_Wnd" RelativePosition="0.5,0.5" StrokeColor="78,38,5" StrokeSize="4" Text="开启神秘格子" Type="WZUILabelTTF" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="40,94" AbsPosition="260,150" GUID="{A4C666E6-C0BC-4747-B81C-9F288E27EF50}" Name="conProAni_WndActive" Order="10" RelativePosition="0.18197,0.5" Type="WZUIContainer" UseAbsCoordinate="True" UseAbsSize="True" Visible="True">
+                <WZArmature AnchorPoint="0.5,0.5" ArmatureName="kp_guangxiao" GUID="{D567EA30-3AC6-42c0-B164-3290EB993C85}" Name="armaturePro_Wnd1" Order="10" RelativePosition="0.51,0.49" Type="WZArmature" UseOriginSize="True" Visible="True">
+                    <Action AnimationId="0" AnimationScale="1" GUID="{8DBF173D-B787-4494-A4CA-684F93330CD6}" Type="WZUIArmatureAnimationById" />
+                </WZArmature>
+                <WZUIContainer GUID="{069C6390-B07D-4833-B719-B4ACAF3874B5}" Name="imgRight_WndActive" Order="1" Type="WZUIContainer">
+                    <WZUIImage File="ui/leftMenu/lottery/item_cube.png" GUID="{16AC63D3-598C-47d9-8264-F4770E4909B8}" Name="Reward1" Order="20" RelativePosition="0.5,0.5" Scale="0.8" ScaleX="0.8" ScaleY="0.8" Type="WZUIImage" UseOriginSize="True" />
+                    <WZUIImage File="common/Jigsaw/n_items01.png" GUID="{73613457-AEEA-41d9-81D1-3A6DB452E943}" Order="0" Type="WZUIImage" UseOriginSize="True" />
+                </WZUIContainer>
+                <WZArmature AnchorPoint="0.5,0.5" ArmatureName="kp_xianshi" GUID="{80D50BFA-89C9-4982-AA55-A02814C8993F}" Name="armaturePro_Wnd" Order="10" RelativePosition="0.51,0.24" Type="WZArmature" UseOriginSize="True" Visible="True">
+                    <Action AnimationId="0" AnimationScale="1" GUID="{D7B327EA-E671-422e-858B-E7F3B49CF3DD}" Type="WZUIArmatureAnimationById" />
+                </WZArmature>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" Font="" FontSize="22" GUID="{990A8BB1-9328-445c-BF7F-4C5396389425}" Name="txtRewardName" RelativePosition="0.5,-0.2" Text="???" Type="WZUILabelTTF" />
+            </WZUIContainer>
+            <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{CD267384-E271-4fc8-8236-CBE657364DCC}" Name="labelTips" RelativePosition="0.5,0.1" StrokeColor="36,0,0" StrokeSize="4" Text="正在开奖中......" Type="WZUILabelTTF" />
+            <WZUIContainer GUID="{F1A0532D-F6F2-4cc8-B032-A204846E3A31}" Name="conResultShow" RelativePosition="0.49,0.59" Type="WZUIContainer">
+                <WZUIImage GUID="{163ECD94-C956-4f75-84D0-1C2637CD4DE1}" Name="Reward" RelativePosition="0.5,0.6" Scale="0.8" ScaleX="0.8" ScaleY="0.8" Type="WZUIImage" UseOriginSize="True" />
+                <WZUILabelTTF Color="255,255,255" FontSize="22" GUID="{6C121E7D-92D1-412c-B150-AF1445D33E11}" Name="txtNum_CellLotteryList" RelativePosition="0.55863,0.457403" Type="WZUILabelTTF" />
+            </WZUIContainer>
+            <WZArmature AnchorPoint="0.5,0.5" ArmatureName="kp_baokai" GUID="{16CF2556-AC1F-47ab-9E9B-E9EABE43CBEC}" Name="armaturePro_WndActive" RelativePosition="0.497951,0.585916" Type="WZArmature" UseOriginSize="True" Visible="True">
+                <Action AnimationId="0" AnimationScale="0.8" GUID="{4E701E73-A563-4e80-9AA2-06D2FE4D55BD}" Type="WZUIArmatureAnimationById" />
+            </WZArmature>
+        </WZUIContainer>
+        <WZUIContainer GUID="{8415F96F-323E-4f80-8C97-663A20DBE53B}" RelativePosition="0.493174,0.8825" RelativeSize="1,0.21" Type="WZUIContainer">
+            <WZUI9Image CapInsets="30,4,442,70" File="common/Jigsaw/n_new.png" GUID="{E3033975-DF0D-45ae-9F76-BB4E29077AC9}" RelativePosition="0.508861,0.5" Type="WZUI9Image" />
+            <WZUIImage File="common/text/strange_lattice_title.png" GUID="{53566934-F233-487a-9A20-AF3D316E9A90}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="578,38" GUID="{F31CF1CA-AD4B-49a9-A442-9877693E017B}" RelativePosition="0.5,0.035519" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image File="common/Jigsaw/60.png" GUID="{00845764-87D7-462e-905F-06F06BB540F4}" Type="WZUI9Image" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndLotteryRandomReward>

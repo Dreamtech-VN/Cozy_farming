@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<CellPvpRankSegment GUID="{82C8CE90-6EC9-4b72-BB4F-2187B27EFD32}">
+    <WZUIContainer AbsContentSize="720,100" GUID="{0C10A984-C76E-4e7e-B9B0-6F8C25974F07}" LuaObjectName="" Name="CellPvpRankSegment" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <WZUIContainer GUID="{A4ED3326-8E15-43dd-8395-AE2EE689E604}" Type="WZUIContainer" ShowAll="False" RelativePosition="0.5,0.5" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{977F4D45-E33D-43b4-ADAC-DF90A77750C8}" File="ui/common/common_scale9_di18.png" Opacity="255" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{3E3BEAD0-6952-465c-80D6-25F1A0E07736}" RelativeSize="0.2,1" RelativePosition="0.012605,0.5" AnchorPoint="0,0.5">
+            <WZUIContainer Type="WZUIContainer" GUID="{14A1AD72-B9CB-49ce-94C2-694C15141672}" RelativeSize="1,0.3" AnchorPoint="0.5,0" RelativePosition="0.5,0.6">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5E57F1FA-DC49-418c-B36F-A3B00EEB24CE}" AbsPosition="" UseOriginSizeProportion="False" FontSize="18" Text="" Color="79,60,48" RelativePosition="0.5,0.5" Name="txtLevelName_CellPvpRankSegment" NameCreate="True" BoldFont="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{BAF6B6EC-4D89-41d8-AE6B-38F6C430F903}" AbsContentSize="100,100" UseAbsSize="True" Scale="0.8" RelativePosition="0.5,0.373333" AbsPosition="72,37.3333">
+                <WZUIImage Type="WZUIImage" GUID="{5E2BD670-98F7-4e73-B30E-39789876C77B}" File="ui/common/common_icon_pws2.png" Visible="True" UseOriginSize="False" Name="imgLvDi_CellPvpRankSegment" Scale="1" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{E933935B-0A05-416a-9C6F-964CA19D46DE}" Name="lafLv_CellPvpRankSegment" CharMapFileName="ui/common_num/common_num_ghdj.png" Height="24" Width="16" Text="6" RelativePosition="0.41,0.486667" Alignment="Left" AnchorPoint="0,0.5" UseOriginSize="True" Visible="True" Scale="1.2" UseOriginSizeProportion="True" AbsPosition="41,48.6667" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="" GUID="{9616DBCA-D34C-4868-A73B-4D6F572B2398}" RelativePosition="0.222969,0.5" Type="WZUIContainer" UseAbsSize="False" RelativeSize="0.76,1" AnchorPoint="0,0.5">
+            <WZUIContainer AbsContentSize="80,80" GUID="{511A4FB4-3C09-4fdd-AEBA-134C16CC2F14}" Name="conItem1_CellPvpRankSegment" RelativePosition="0,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+            <WZUIContainer AbsContentSize="80,80" GUID="{5DE224C1-ADF3-4346-ABD7-8DAE91EE3649}" Name="conItem2_CellPvpRankSegment" RelativePosition="0.16,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+            <WZUIContainer AbsContentSize="80,80" GUID="{0967D82A-992D-4579-9B3A-1DB6ACB334C9}" Name="conItem3_CellPvpRankSegment" RelativePosition="0.32,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+            <WZUIContainer AbsContentSize="80,80" GUID="{F28A2A73-69FF-4452-A826-9BB13A36E7E9}" Name="conItem4_CellPvpRankSegment" RelativePosition="0.48,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+            <WZUIContainer AbsContentSize="80,80" GUID="{0047EEE4-7F57-4342-947C-2D5137D4DD78}" Name="conItem5_CellPvpRankSegment" RelativePosition="0.64,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+            <WZUIContainer AbsContentSize="80,80" GUID="{0FAB5E18-1A38-4506-AE2A-53D0EDE49A4F}" Name="conItem6_CellPvpRankSegment" RelativePosition="0.8,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellPvpRankSegment>

@@ -1,0 +1,315 @@
+﻿<WndLuckyGift GUID="{65a75fc5-e4fe-4f89-b616-773a8a844d36}">
+    <WZUIContainer Type="WZUIContainer" GUID="{152ad25a-c95b-439f-8df8-5c0ab9ecbe40}" Name="WndLuckyGift" AbsContentSize="848,480" UseAbsSize="True" RelativePosition="0.5,0.5" LuaObjectName="WndLuckyGift">
+        <WZUIContainer Type="WZUIContainer" GUID="{e8e84a7e-8de0-4b5f-bf3a-6b955b535b81}" AbsContentSize="848,480" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True" Order="1">
+            <WZUIContainer Type="WZUIContainer" GUID="{b6728010-eea6-47d5-8c9c-57770386b054}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.1,0.865" Name="conSel1_WndLuckyGift" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{adfb82aa-3766-416f-b285-6c088bea63da}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{d4c504f8-a986-42a8-9bca-60d5abda19c1}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.507143,0.841868" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1e85b253-c633-43b0-b5f5-71f596078a00}" LabelStyleKey="C13_F20" Name="txtGift1_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{a825e144-b8ac-476a-9200-57cafc3e4e9a}" Name="txtNum1" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{5c2724ed-3645-491f-8f95-58582267b2e8}" Name="conGift1_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.505953,0.385813" Scale="1" />
+                <WZUIImage Type="WZUIImage" GUID="{acbb278d-d10a-478d-86ca-eee026ceb4cc}" Name="img1_WndLuckyGift" File="ui/common/common_icon_zhenpin.png" UseOriginSize="True" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{85e645c1-2100-43b4-bdd9-497834939220}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.1,0.865" Name="con1_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{55172b08-4861-4dcb-ba8e-e6845a9a0dfb}" File="ui/common/common_scale9_di18.png" UseOriginSize="False" />
+                <WZUIImage Type="WZUIImage" GUID="{43c323b4-b1bd-40e8-9f99-eb4de087010a}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" Visible="True" />
+                <Button Type="WZUIButton" GUID="{dbe8f779-cfed-4537-9420-5002348b2228}" LuaDoneFunctionName="onFunctionClick" Tag="1" Name="btn1_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{0d4ce665-9d65-4e58-93b1-83622d328d03}" />
+                    <SelectElement Type="WZUIContainer" GUID="{aadd8709-0086-4bb8-b1fd-03010def4888}" />
+                    <DisableElement Type="WZUIContainer" GUID="{fe28f3e1-ca52-4a1e-99b4-ecf00244e6a8}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{3ab5c1ed-d846-41e8-98c4-824795589cde}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.3,0.865" Name="conSel2_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{90fc0f8e-3b52-437e-a9da-bf9a7724e29a}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{dab82590-579e-48dd-9436-17759ffe42ea}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.841869" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{0850e916-5120-40cf-83cd-8ec5770120c7}" LabelStyleKey="C13_F20" Name="txtGift2_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1b5ca1e8-1c12-4b38-809b-7d36bccad3b1}" Name="txtNum2" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{f196e88f-1e88-48ac-9cb7-74c0e0894375}" Name="conGift2_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.5,0.385813" />
+                <WZUIImage Type="WZUIImage" GUID="{ce8827e2-2b99-439a-8467-505b82459d24}" Name="img2_WndLuckyGift" File="ui/common/common_icon_zhenpin.png" UseOriginSize="True" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{042a1ce1-6e04-49e7-866d-c7efeea697a3}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.3,0.865" Name="con2_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{656dcd37-0f9e-4b9f-8cf5-b6b4233b9d28}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{b9f033f7-0d85-49cb-beb3-deaaa54d2f4f}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{91862c83-5fb2-4df3-ad31-44be90f06b48}" LuaDoneFunctionName="onFunctionClick" Tag="2" Name="btn2_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{96945aa3-98c2-45bb-a922-c896fd3b9166}" />
+                    <SelectElement Type="WZUIContainer" GUID="{997b0a05-b456-46b1-a926-4349a57f3147}" />
+                    <DisableElement Type="WZUIContainer" GUID="{713f4fca-871f-4772-a9e2-2df114f10075}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{3802f4be-0d57-4f6c-b6bf-de60fa0509cc}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.5,0.865" Name="conSel3_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{b7dfcb52-c106-4a6e-b834-4319f00d27d3}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{6ee8e87c-ad17-4072-b2d1-3b9c7087f46d}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.841869" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{a6cb17fe-2a6b-48f5-a531-05eafb6bb214}" LabelStyleKey="C13_F20" Name="txtGift3_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6b89bfac-7dab-4d50-a3a8-24b1ea56a4f9}" Name="txtNum3" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{23a5ca1b-589b-44af-a6db-fc575bf7ab79}" Name="conGift3_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.491667,0.385813" />
+                <WZUIImage Type="WZUIImage" GUID="{523fea33-0651-4dc5-b516-c0ca1d50bcfd}" Name="img3_WndLuckyGift" UseOriginSize="True" File="ui/common/common_icon_zhenpin.png" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{372321af-5c1e-40f7-a187-057cc5d4009a}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.5,0.865" Name="con3_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{ddc2c2f0-5f52-483f-94cd-bf7abf721563}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{81e29a54-cf2c-4bbf-a0fc-0a0b736ce432}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{32221b8d-45f1-4594-b2d4-4a6767f3f526}" LuaDoneFunctionName="onFunctionClick" Tag="3" Name="btn3_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{8324d1c4-ac58-40c0-88a7-18596f8d4fd2}" />
+                    <SelectElement Type="WZUIContainer" GUID="{58c17f40-1c71-4ae0-ba0a-629ae48c159e}" />
+                    <DisableElement Type="WZUIContainer" GUID="{8f31d5e2-e915-48bb-b4bc-6bbfc4b30f1c}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{549fc9c7-8ffd-44c8-91de-e9efd3773637}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.7,0.865" Name="conSel4_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{d4b3d098-bf92-4497-b989-15c1b31905ba}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{b35ff824-9e75-4991-a8d2-659ce4105602}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.841869" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{779a4642-efbf-4305-a460-e46192aa7ef3}" LabelStyleKey="C13_F20" Name="txtGift4_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{238c4b45-f27d-4451-bde9-b9f1840ce8d8}" Name="txtNum4" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{b33e7c83-4e3d-4e4e-9d92-c17d321ee059}" Name="conGift4_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.5,0.385813" />
+                <WZUIImage Type="WZUIImage" GUID="{50e65e74-1dcc-44d8-8c9d-f52569c7d136}" Name="img4_WndLuckyGift" Visible="False" UseOriginSize="True" File="ui/common/common_icon_zhenpin.png" RelativePosition="0.86,0.8" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{64048d05-a1e0-4130-8e6a-1e1f3869ab12}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.7,0.865" Name="con4_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{20d54020-5d54-49d5-97a8-9bdffe54a8c1}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{ba50b598-1556-4a07-ade9-efd84b99fd7b}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{18606416-2867-4708-a4a8-2cde5c1c67ad}" LuaDoneFunctionName="onFunctionClick" Tag="4" Name="btn4_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{7d52bd9e-38a2-4084-8cf0-9fdda5d571a2}" />
+                    <SelectElement Type="WZUIContainer" GUID="{64ee5cfc-4c28-498d-af41-34d9e1281309}" />
+                    <DisableElement Type="WZUIContainer" GUID="{94865571-3a6f-44e2-804c-53033c26642d}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{fdbe9b06-effd-4fc6-b256-fd77902a4002}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.9,0.865" Name="conSel5_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{72ed1640-2a33-43b1-8425-ea0c6ffecbb7}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{bf66e03b-d428-48e5-bc65-ff931b4caf60}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.841869" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ebb1300f-b97d-43b1-b71e-eea55cd87429}" LabelStyleKey="C13_F20" Name="txtGift5_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{38cc174d-53d9-4261-be1e-4f550df81acb}" Name="txtNum5" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{0f972792-ae09-4609-986d-ed02b74903e7}" Name="conGift5_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.508333,0.385813" />
+                <WZUIImage Type="WZUIImage" GUID="{9263eefb-f8e3-414d-b00c-451097858a0e}" Name="img5_WndLuckyGift" UseOriginSize="True" File="ui/common/common_icon_zhenpin.png" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{0a5c44d9-6366-4230-a87c-d6aa2f310088}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.9,0.865" Name="con5_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{6f5e3696-e26d-47e9-abfe-c3900ad6ab9b}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{1b776991-65a7-42fb-9de3-5cf1b95c0360}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{4fe261f4-3f0e-41b5-a200-3bd46c5ba7eb}" LuaDoneFunctionName="onFunctionClick" Tag="5" Name="btn5_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{be1357c9-bde2-4db2-8aa5-28eeb2ffe23e}" />
+                    <SelectElement Type="WZUIContainer" GUID="{71d2634e-cc0e-49f3-8ffb-54a15aa202c0}" />
+                    <DisableElement Type="WZUIContainer" GUID="{827988d9-5fe1-4686-b1ab-a456d648b3b8}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{d2d5f690-b41c-4d80-a64d-f092709b6f28}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.1,0.62" Name="conSel6_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{40680c5e-6215-4fb1-8eef-4681f5aaf193}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{3a352051-6251-4c51-9dd3-fa906a64ccda}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.841869" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b63fbe31-1f0c-41da-ba9f-756b94516a71}" LabelStyleKey="C13_F20" Name="txtGift6_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ebc8586a-d09e-4968-a2c5-905a1a0e9d31}" Name="txtNum6" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{081a7ca7-654a-4f3b-9a56-33e8762c3a57}" Name="conGift6_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.5,0.385813" />
+                <WZUIImage Type="WZUIImage" GUID="{408bed79-d734-4c89-82fd-91107852946a}" Name="img6_WndLuckyGift" UseOriginSize="True" File="ui/common/common_icon_zhenpin.png" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{e177437b-1d41-49b7-a795-820c75fa4df3}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.1,0.62" Name="con6_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{019b629e-913d-44ce-967c-9758b2c24592}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{918acf92-e593-4eaf-8600-db305a7d3223}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{673051e1-bf30-4837-a835-3442087f7e45}" LuaDoneFunctionName="onFunctionClick" Tag="6" Name="btn6_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{4f908942-0485-4b2d-837e-dc14d2d98e6b}" />
+                    <SelectElement Type="WZUIContainer" GUID="{f264bb70-cc50-4216-af3a-dc63b9c83bba}" />
+                    <DisableElement Type="WZUIContainer" GUID="{193bf773-0b92-46bd-b693-96375e112c5a}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{c9cc0802-73e3-4f90-b8e3-0b24689c21ec}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.9,0.62" Name="conSel7_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{4694d729-61b9-4523-bf22-6c4d9afc75f1}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{16ed0d4f-4604-4b96-849a-6ef62958a03e}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.833218" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{e068bb3a-dc4e-4378-895f-9384d182b416}" LabelStyleKey="C13_F20" Name="txtGift7_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c0ce29ab-1925-4702-a36a-5b292bb58b0c}" Name="txtNum7" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c3cc4e5b-389b-430a-ac4d-738c18abf657}" Name="conGift7_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.5,0.385813" />
+                <WZUIImage Type="WZUIImage" GUID="{ec73825d-a12e-4c36-aa72-c12ec0219ee5}" Name="img7_WndLuckyGift" UseOriginSize="True" File="ui/common/common_icon_zhenpin.png" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{bd08147f-e7a6-41ef-9f4e-dcc53538f2e4}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.9,0.62" Name="con7_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{3e6f6a4b-2fdc-4d9c-991f-5fd418abef84}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{d781876c-4a8a-4dcb-8716-5a5b4871b056}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{e70abf76-929f-4f3e-979b-f596c1ea15a4}" LuaDoneFunctionName="onFunctionClick" Tag="7" Name="btn7_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{89dc545b-b726-4533-bb30-2826a42d02fb}" />
+                    <SelectElement Type="WZUIContainer" GUID="{d2774817-59b0-43cf-82e0-4ed34724bc9a}" />
+                    <DisableElement Type="WZUIContainer" GUID="{c3b5d22f-592b-4482-a458-ead0423c6ac9}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{141e9b93-6bb6-4be3-823a-298ea06a9052}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.1,0.3766" Name="conSel8_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{2653efd2-a28a-451b-96c3-d076bdc13c63}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{423d89fe-cd73-4542-a47c-1974bf180ef7}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.841869" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{5d9e21d4-2afd-4004-b692-ebd56299c1a8}" LabelStyleKey="C13_F20" Name="txtGift8_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{eb9e3563-7d6c-407b-aed5-7dd6b7bbf5f0}" Name="txtNum8" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{1cff6056-42fa-4c87-b7eb-e9f41ab6a3ae}" Name="conGift8_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.5,0.385813" />
+                <WZUIImage Type="WZUIImage" GUID="{56f40d46-046b-4f91-9dab-f27f8bda8e8b}" Name="img8_WndLuckyGift" UseOriginSize="True" File="ui/common/common_icon_zhenpin.png" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1356c0b2-f2f9-45d7-8334-4fbed1d973cd}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.1,0.3766" Name="con8_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{bc962190-f0a5-4cb1-a2a0-467930d3e3a5}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{4f3e4717-263b-4946-b276-2077fe81e9f2}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{f896ecda-5d01-48ea-b10a-c5642fda7284}" LuaDoneFunctionName="onFunctionClick" Tag="8" Name="btn8_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{572f0244-e19e-432b-8058-1e5ebd058049}" />
+                    <SelectElement Type="WZUIContainer" GUID="{e06cd2d8-506f-4b09-a5b8-e585acac13e3}" />
+                    <DisableElement Type="WZUIContainer" GUID="{305bc977-aa18-43e1-9a4d-881b45b81fd6}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{9c38666c-4efa-478f-a5c7-dcfaf45e7158}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.9,0.3766" Name="conSel9_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{7051a9b3-3ac3-4ae3-861c-f9fe5df3f35d}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{dffcfb9d-21e3-4010-9996-012ff0f2018a}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.85917" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c2c87b9a-cebf-4aa8-8324-6a1e6180eb04}" LabelStyleKey="C13_F20" Name="txtGift9_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{2abc203f-1e99-4d99-a65d-25de4ca6fa03}" Name="txtNum9" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{e1fe2c6e-f5a2-4c61-a512-05fbf0c3314c}" Name="conGift9_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.508333,0.394463" />
+                <WZUIImage Type="WZUIImage" GUID="{d497bb51-6190-4959-93e8-34b77bde8db6}" Name="img9_WndLuckyGift" File="ui/common/common_icon_zhenpin.png" UseOriginSize="True" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{a19f0467-a218-4972-bd4f-5a50946d9381}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.9,0.3766" Name="con9_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{a0d237d8-fbbd-41db-b362-1e8f7cb0f04d}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{7dd9659c-f033-436f-9f34-20eed54bc71c}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{c4c35b71-2611-4e44-9b59-a02f66a771b5}" LuaDoneFunctionName="onFunctionClick" Tag="9" Name="btn9_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{359deb60-a5f6-4239-9407-d616f38dcd5b}" />
+                    <SelectElement Type="WZUIContainer" GUID="{111d4b7c-0b20-4adb-9b89-164ea3f7629c}" />
+                    <DisableElement Type="WZUIContainer" GUID="{047c605c-858a-4de4-9496-6b3cb736a9f4}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{fcc65772-7419-4002-a2ab-d5ae04cc3f42}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.1,0.13" Name="conSel10_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{296cc62a-34f2-47a3-b58a-645867bc2bfa}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{8d025e59-6a5c-48c8-8399-afce5c456e32}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.841869" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ceb837e8-d6a3-4093-bc9d-aadb62ad8df8}" LabelStyleKey="C13_F20" Name="txtGift10_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{cc15e194-4d7f-4f3f-9e3e-f752c4fc0582}" Name="txtNum10" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{46b9ae3c-1818-4262-8b2f-f2dfc3d860ec}" Name="conGift10_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.5,0.385813" Action="hit" />
+                <WZUIImage Type="WZUIImage" GUID="{c4bd33f2-cd98-4c64-9181-fc922023fd55}" Name="img10_WndLuckyGift" File="ui/common/common_icon_zhenpin.png" UseOriginSize="True" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{dd381b66-0f00-4f23-a8e3-e9101cda1b77}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.1,0.13" Name="con10_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{5e6ad1ca-af20-4d90-b2fe-3305dfd24d0a}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{8af65e0c-3e16-41a6-9c32-89d0ad60866f}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{502804b6-8afb-49a0-8f25-0f1a4dcededb}" LuaDoneFunctionName="onFunctionClick" Tag="10" Name="btn10_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{be3e53e8-6333-4f1f-8ae9-266edf7a0ce2}" />
+                    <SelectElement Type="WZUIContainer" GUID="{efa92daa-7ab4-4656-b2f1-32ee1e6af52a}" />
+                    <DisableElement Type="WZUIContainer" GUID="{4948a0b1-5c4e-41c0-a7d3-8d5c2e0630b8}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{074f3526-3287-4d69-8096-159709abbf33}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.3,0.13" Name="conSel11_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{c3137fe1-c87e-40f7-bd98-2db5e08add8c}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{4bef26fa-d9ae-4279-8bcb-aa76d927a806}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.841869" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{590905e6-65f0-4270-9ea8-65f0f4041003}" LabelStyleKey="C13_F20" Name="txtGift11_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{de619491-7bb9-47bb-822d-928032ae1539}" Name="txtNum11" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{056d5a07-1009-4d9e-8016-88d91a2af89d}" Name="conGift11_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.5,0.385813" />
+                <WZUIImage Type="WZUIImage" GUID="{f96a9dd4-db31-43fa-bf61-8a864ff78608}" Name="img11_WndLuckyGift" File="ui/common/common_icon_zhenpin.png" UseOriginSize="True" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{ddd6882b-0b20-4a51-be49-7e41ca831f58}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.3,0.13" Name="con11_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{1756b549-7075-49d5-b012-1e4ccda708fa}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{2397d535-516a-4d79-84b6-43abc2e84fbe}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{3a5c8708-672e-478b-a0ad-0de099490c5e}" LuaDoneFunctionName="onFunctionClick" Tag="11" Name="btn11_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{b0374b86-23e5-4d59-9b38-a104f9f38b94}" />
+                    <SelectElement Type="WZUIContainer" GUID="{8d5b9b7d-54e4-46d4-99ca-e54bbf7909bf}" />
+                    <DisableElement Type="WZUIContainer" GUID="{34247f8f-d5b3-474a-88c9-7f98e9ac85ac}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{3ed32a3c-727c-4a51-b791-5aaafbfa774d}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.5,0.13" Name="conSel12_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{57dc8d45-b0c5-4d82-8695-aeb0a4152452}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{d96c5aa1-f551-476f-8904-698e0dc3abe8}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.841869" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{aa10cb68-6421-4970-a772-a84ef775b023}" LabelStyleKey="C13_F20" Name="txtGift12_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{263b216d-d87d-495a-896e-c7b8f7de6913}" Name="txtNum12" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7588deea-9c41-49e0-8552-889cf74bfddf}" Name="conGift12_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.491667,0.385813" />
+                <WZUIImage Type="WZUIImage" GUID="{9b577af5-9947-4e32-a657-aa60a089490e}" Name="img12_WndLuckyGift" File="ui/common/common_icon_zhenpin.png" UseOriginSize="True" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{46be9fc0-777d-4195-9712-2b11ac2c5431}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.5,0.13" Name="con12_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{a8e45a1f-5f8f-4068-9a00-f756429cbcc0}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{7e975d98-7bf6-4898-87ad-2b8bda898cbe}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{dd2a20b1-56f0-45ae-bbc2-b05cd40617e2}" LuaDoneFunctionName="onFunctionClick" Tag="12" Name="btn12_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{ad286c21-f21f-4fbf-a674-19db427a69f7}" />
+                    <SelectElement Type="WZUIContainer" GUID="{25cafa7e-2888-4306-abb2-0395edae265e}" />
+                    <DisableElement Type="WZUIContainer" GUID="{8027b3e0-dca5-461d-8cf8-2161094049db}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{067b4d85-50dc-4d6d-921c-54e8889b7b70}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.7,0.13" Name="conSel13_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{4da66dcc-94b6-4b22-9ce0-ba0b9003a79d}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{86e9fc5a-661f-4216-ba85-46a2b7b4729e}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.841869" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{29ea1e28-aaa3-47f5-b39d-678098252fe8}" LabelStyleKey="C13_F20" Name="txtGift13_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7b5678fb-e558-4921-92f4-b7d41df0cc78}" Name="txtNum13" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{27f811fc-4c27-44f9-aa50-ce215c5409e0}" Name="conGift13_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.491667,0.385813" />
+                <WZUIImage Type="WZUIImage" GUID="{5bdec6ed-257f-4fe8-a157-db14c3f47d61}" Name="img13_WndLuckyGift" File="ui/common/common_icon_zhenpin.png" UseOriginSize="True" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1c81a978-59e9-426b-8307-f9d752cab093}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.7,0.13" Name="con13_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{556d27ef-3a20-4b12-bce2-323c535e0cbf}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{b99366c8-45dd-46c7-9cee-eafdf7086222}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{b54362c1-5361-473b-818a-504750c2527c}" LuaDoneFunctionName="onFunctionClick" Tag="13" Name="btn13_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{a2e50012-bb36-4df1-9056-a8da5c44c2f8}" />
+                    <SelectElement Type="WZUIContainer" GUID="{93176b29-ea94-4852-8463-50af66070077}" />
+                    <DisableElement Type="WZUIContainer" GUID="{bab70140-142d-4504-91fc-579cc52be184}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{b89e302d-a118-4d8d-bf3a-6165f5552046}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.9,0.13" Name="conSel14_WndLuckyGift">
+                <WZUI9Image Type="WZUI9Image" GUID="{d3a9b9ec-5367-4ee0-ada4-ae31d702afd5}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{0e688ecf-c83c-4cb4-93ad-629e6efe9fa7}" AbsContentSize="115,33" UseAbsSize="True" RelativePosition="0.5,0.841869" Order="1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{54ae7b6a-63de-4b2d-91b7-49b980692724}" LabelStyleKey="C13_F20" Name="txtGift14_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1e4f1a30-8ff8-41be-949e-4650fe7edc0c}" Name="txtNum14" Text="" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.796001,-1.61106" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{63bc4252-aef6-4f9a-b5d5-b4f3b07ab7f5}" Name="conGift14_WndLuckyGift" AbsContentSize="70,68" UseAbsSize="True" RelativePosition="0.491667,0.385813" />
+                <WZUIImage Type="WZUIImage" GUID="{22545063-2a3f-4f28-9d5e-7045841eab6b}" Name="img14_WndLuckyGift" File="ui/common/common_icon_zhenpin.png" UseOriginSize="True" RelativePosition="0.86,0.8" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{81cf70b4-99f3-4dc7-a4b7-16d2650787ad}" AbsContentSize="160,112" UseAbsSize="True" RelativePosition="0.9,0.13" Name="con14_WndLuckyGift" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{0f55f158-4546-4399-81a1-c9b605f6ef3b}" File="ui/common/common_scale9_di18.png" />
+                <WZUIImage Type="WZUIImage" GUID="{e51bfd4e-12f5-4090-b8d1-c6b2957ef813}" File="ui/common/common_icon_xylh.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{acc8a7ee-80c8-4a95-8d79-0a48f73f50f2}" LuaDoneFunctionName="onFunctionClick" Tag="14" Name="btn14_WndLuckyGift">
+                    <NormalElement Type="WZUIContainer" GUID="{4f1413f8-a0f3-4b05-b935-250f502de4f5}" />
+                    <SelectElement Type="WZUIContainer" GUID="{7c4712a8-68ae-4a25-b7c5-ed1a92e21615}" />
+                    <DisableElement Type="WZUIContainer" GUID="{6c235f93-07ee-4367-8e63-10e6a1920a4e}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{33134dd0-2dfa-40da-b993-775c29ab0647}" AbsContentSize="502,80" UseAbsSize="True" RelativePosition="0.51335,0.478477" Visible="True">
+            <WZUIImage Type="WZUIImage" GUID="{a7631b08-9e18-4677-8911-f99d9837cb8d}" File="ui/shop/common_scale9_shop_di7.png" UseOriginSize="True" RelativePosition="0.5,0.75" ScaleX="1.1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4e000aff-6c0e-4a08-b1be-ef728d8292c3}" TextKey="NEWSHOP21" Text="" LabelStyleKey="C11_F20" RelativePosition="0.5,0.75" Name="txtLucky1" />
+            <Button Type="WZUIButton" GUID="{92735697-26a1-4333-a7fc-c0e0dd20bf04}" AbsContentSize="200,66" UseAbsSize="True" RelativePosition="0.5,-0.08" LuaDoneFunctionName="doClick" Visible="True" Name="btn_WndLuckyGift">
+                <NormalElement Type="WZUIContainer" GUID="{1e690816-5c29-4a5f-816a-c4dc286852bd}">
+                    <WZUIImage Type="WZUIImage" GUID="{2713b640-b9b5-4999-b49a-bd89de291048}" File="ui/shop/common_btn_shop2.png" Scale="1" UseOriginSize="True" ScaleX="1" ScaleY="1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9a4331f9-343d-40ca-89b6-462efbc47b65}" LabelStyleKey="NORMAL_ORANGE_BTN" Text="" TextKey="LUCKYGIFT_STARTDRAW" Name="txtBtn1_WndLuckyGift" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{4c5f7118-695c-4d97-9c8c-c5066f9f5f02}">
+                    <WZUIImage Type="WZUIImage" GUID="{241ec212-8ac6-42c7-8434-921d504418a7}" File="ui/shop/common_btn_shop2.png" Scale="1" UseOriginSize="True" ScaleX="1" ScaleY="1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{f9d8a8d5-847a-43fa-9bb9-bc78b47c1a8f}" LabelStyleKey="NORMAL_ORANGE_BTN" Text="" TextKey="LUCKYGIFT_STARTDRAW" Name="txtBtn2_WndLuckyGift" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{39094540-5257-4711-a030-8733bcf2f08c}">
+                    <WZUIImage Type="WZUIImage" GUID="{4417b1bb-de4f-4e55-b737-860d178b83b2}" File="ui/shop/common_btn_shop2.png" Scale="1" GrayRender="True" ScaleX="1" ScaleY="1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{e4948268-f6a7-446f-9419-1712717279e0}" LabelStyleKey="NORMAL_GRAY_BTN" Text="" TextKey="LUCKYGIFT_STARTDRAW" Name="txtBtn3_WndLuckyGift" Color="127,70,26" FontSize="24" />
+                </DisableElement>
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{126d3d1a-f07e-42e1-b86d-fa9d0e555ae1}" AbsContentSize="120,78" UseAbsSize="True" RelativePosition="0.478289,0.752146" Visible="True" Name="conDrawCost_WndLuckyGift">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{166d92e5-d8e9-4833-937e-5f26714bb3c2}" RelativePosition="0.525,1.03701" Text="" FontSize="20" LabelStyleKey="C11_F20" Name="txtHasDrawNum_WndLuckyGift" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{29c98370-863a-4ca6-a8fa-9224028b21d9}" RelativePosition="-0.465388,0.49026" Text="下次翻牌消耗：" FontSize="20" LabelStyleKey="C11_F20" AnchorPoint="0,0.5" Alignment="Left" TextKey="NEWSHOP20" Name="txtNextDraw_WndLuckyGift">
+                    <WZUIImage Type="WZUIImage" GUID="{3dde2b68-09eb-47ce-820e-7e0922850b83}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Scale="0.7" RelativePosition="1.15,0.55" Name="imgDim_WndLuckyGift" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{2e9ecbcf-69c1-4313-8b28-4f11c8f79fc8}" FontSize="20" Text="" AnchorPoint="0.5,0.5" RelativePosition="1.4,0.5" Name="txtDimNum_WndLuckyGift" LabelStyleKey="C15_F20" Visible="True">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{36d15a59-8035-4737-8da2-275569ea6353}" FontSize="20" Text="" AnchorPoint="0,0.5" RelativePosition="1.13333,0.5" Name="txtNum_WndLuckyGift" LabelStyleKey="C14_F20" Visible="True" Alignment="Left" />
+                    </WZUILabelTTF>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{249aa2e5-0acc-40ba-a550-3b1caf38e390}" AnchorPoint="0,0.5" RelativePosition="1.05,0.5" FontSize="20" Text="24:00" LabelStyleKey="C11_F20" Name="txtFree_WndLuckyGift" TextKey="PETFREE2" Visible="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{bee137d8-bf3c-4441-98c5-89991c8c1f79}" File="ui/common/common_icon_xiexian2.png" UseOriginSize="True" Scale="" RelativePosition="1.4,0.55" Name="imgLine_WndLuckyGift" ScaleX="0.25" ScaleY="0.65" Rotation="0" Visible="False" />
+                </WZUILabelTTF>
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{dc36e18e-7028-4857-b327-f8baf58cb28b}" RelativePosition="0.0424686,1.69777" AbsContentSize="47,50" UseAbsSize="True" LuaDoneFunctionName="onDesc">
+                <NormalElement Type="WZUIContainer" GUID="{2e0a0a76-9d16-4ab4-8587-3dffdb6d598a}">
+                    <WZUIImage Type="WZUIImage" GUID="{7b4a8a64-71af-4ec4-9524-cd1d939e6029}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{a378bd71-2a62-496d-a325-aa3db4f766f8}">
+                    <WZUIImage Type="WZUIImage" GUID="{3cf2a8f1-81d3-4914-823a-3dc16434c9c2}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{2f917743-400c-4d7f-889f-150dbb0b7642}" />
+            </Button>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{be032134-37ec-47a0-94d4-78f52e62650b}" RelativePosition="0.478729,0.742625" Text="" FontSize="20" TextKey="LUCKYGIFT_FINISH" Visible="False" LabelStyleKey="C1_F20" Name="txtFinish_WndLuckyGift" />
+            <Button Type="WZUIButton" GUID="{e954c6a5-b356-417d-87c8-c1655bed9040}" AbsContentSize="133,60" UseAbsSize="True" RelativePosition="0.116567,1.60297" LuaDoneFunctionName="onStore" Visible="False">
+                <NormalElement Type="WZUIContainer" GUID="{c53562eb-1dce-49bc-8480-d6a3c9f4352b}">
+                    <WZUIImage Type="WZUIImage" GUID="{49b127f4-5772-4bca-9076-9516e315bc60}" File="ui/common/common_btn_anniu3_1.png" UseOriginSize="True" Scale="1" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{ab78b895-a73c-48ee-b360-534d53f05fbc}">
+                    <WZUIImage Type="WZUIImage" GUID="{d36d967f-ca44-4079-b866-33cd9049bbdf}" File="ui/common/common_btn_anniu3_1_sel.png" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{49834f18-a8fc-45fb-a034-de08b3421baa}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0ab1e443-0b27-4234-b3c3-e3cc145b3c88}" TextKey="LUCKYGIFT1" LabelStyleKey="C1_F24_S4_C2" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{99b4e28d-6f7b-40c3-8131-499c57cc38b2}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.209269,1.3506" Name="conSale_WndLuckyGift" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{74db046e-e164-4246-8295-338c467da41f}" File="ui/shop/common_btn_shop_biaoqian3.png" UseOriginSize="True" RelativePosition="0.5,0.5" Name="" Order="1" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{6f4118d0-27a4-4cca-8920-d7ac8b40795b}" CharMapFileName="ui/common_num/common_num_shangcheng.png" UseOriginSize="True" Visible="True" UseOriginSizeProportion="False" RelativePosition="0.334197,0.356252" Rotation="-20" Text="" Width="16" Height="22" Name="labCnt_WndLuckyGift" Order="1" />
+                <WZUIImage Type="WZUIImage" GUID="{50344d4b-5c20-4589-acfa-ae8fefd8b27c}" File="ui/common/common_num_shangcheng2.png" UseOriginSize="True" RelativePosition="0.688016,0.483545" Rotation="-20" Name="imgSale_WndLuckyGift" Visible="False" Order="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{363bfcf6-c2d4-4974-9e9f-2ce7fb6fd0ee}" RelativePosition="0.334197,0.356252" Rotation="-20" Name="txtSale_WndLuckyGift" FontSize="22" StrokeSize="4" StrokeColor="179,91,13" EnableStroke="True" Text="" Color="255,255,255" AnchorPoint="0.5,0.5" Alignment="Center" Order="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{fdd6aedf-21d7-47ad-bf73-2e24238581ad}" Text="5折" Name="txt1_WndLuckyGift" LabelStyleKey="C18_F22_S4_C2" RelativePosition="0.533333,0.483333" Rotation="-20" Order="0" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8129d85e-3680-4085-8cfd-6a3577b4d7af}" RelativePosition="0.516666,0.0233333" Rotation="-20" Name="txtOP_WndLuckyGift" FontSize="18" StrokeSize="4" StrokeColor="179,91,13" EnableStroke="True" Text="" Color="255,255,255" AnchorPoint="0,0.5" Alignment="Left" Visible="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</WndLuckyGift>

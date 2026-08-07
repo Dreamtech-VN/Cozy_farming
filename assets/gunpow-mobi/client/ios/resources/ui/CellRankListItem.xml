@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<CellRankListItem GUID="{122F75ED-787B-4ae0-9711-1782465C38AC}">
+    <WZUIContainer Type="WZUIContainer" GUID="{17DC9B12-2B04-497c-A342-DBDFC130A9B9}" AbsContentSize="184,76" UseAbsSize="True" LuaObjectName="" NameCreate="True" Name="CellRankListItem" ScaleX="1" Scale="1" ShowAll="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{A056866A-864C-43ca-954F-A3B8BF30EDF5}">
+            <WZUIButton Type="WZUIButton" GUID="{999EFF97-C814-4a00-82E9-C6D3DC707050}" LuaDoneFunctionName="onCellClickedCallback" Name="btn_cellClick" AbsContentSize="184,68" UseAbsSize="True">
+                <NormalElement Type="WZUIContainer" GUID="{B418FDD2-816D-4538-B9FD-D7BBDB727DAF}" AbsContentSize="0,0" UseAbsSize="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{601457C4-8FF6-4850-ACB7-72530E9642A9}" File="ui/common/common_btn_anniu16.png" RelativePosition="0.5,0.5" RelativeSize="1,1" Name="img_nspr" Visible="True" UseOriginSize="False" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{9CAB6B44-0F74-47a4-8252-A487B01EAD4D}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{8B8AF24F-2906-4980-B876-E7C5DC3D73BF}" File="ui/common/common_btn_anniu20.png" RelativePosition="0.5,0.5" RelativeSize="1,1" Name="img_sspr" Visible="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{F7F5718A-CD82-4a1c-A84C-EC36A74DFCEE}" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{A53F5310-D72A-4c18-B558-104484B711FB}" AbsContentSize="184,68" UseAbsSize="True" Visible="False" Name="conSelSign_CellRankListItem" TouchEnable="False" TouchSwallow="False" RelativePosition="0.494565,0.5" AbsPosition="92,36">
+                <WZUI9Image Type="WZUI9Image" GUID="{F40A1BC0-F169-49b3-B427-073E73D813CF}" File="ui/common/common_btn_anniu20.png" Visible="True" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5678B719-47FF-48cc-88CF-9918A0D8DF2C}" Text="label" FontSize="26" Color="255,236,193" Name="label_item" StrokeColor="128,54,33" StrokeSize="4" Tag="2" EnableStroke="True" RelativePosition="0.5,0.473684" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellRankListItem>

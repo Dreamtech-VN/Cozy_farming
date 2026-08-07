@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" ?>
+<CellCommunityMemberList GUID="{7D56997B-397D-4e21-854A-9E44CC37A6B1}">
+    <WZUIContainer AbsContentSize="530,90" GUID="{50B8A94F-E444-4a6e-B410-F2CD78A7ABF8}" LuaObjectName="CellCommunityMemberList" Name="CellCommunityMemberList" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <Button GUID="{1A077188-CECB-4834-938A-FCF628E5BDB2}" LuaDoneFunctionName="onClickCellBtn" Name="btnClickCell_CellCommunityMemberList" RelativePosition="0.5,0.38" Type="WZUIButton" Visible="True" AbsContentSize="520,75" UseAbsSize="True">
+            <NormalElement GUID="{221AF96C-6E71-4efe-B67A-383166F3C1E3}" Type="WZUIContainer">
+                <WZUI9Image Type="WZUI9Image" GUID="{935890EF-228D-450c-BB2E-B7423477C0FE}" File="ui/common/common_scale9_di7.png" Name="imgBtn1_CellCommunityMemberList" />
+            </NormalElement>
+            <SelectElement GUID="{A213150E-B73C-44cd-BBED-D4000F1C548B}" Type="WZUIContainer">
+                <WZUI9Image Type="WZUI9Image" GUID="{E0CD9AA5-7328-48c0-B25B-C3AD39108D21}" File="ui/common/common_scale9_di7.png" Name="imgBtn2_CellCommunityMemberList" />
+            </SelectElement>
+            <DisableElement GUID="{E9DC3702-1AED-427b-8B9E-E9BBB065EC5F}" RelativePosition="0.5,0.5" ScaleY="1" Type="WZUIContainer" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{DC8B7865-969C-4b08-9263-B56303A78AFC}" Name="conText" Visible="True" RelativePosition="0.5,0.38">
+            <WZUILabelTTF Color="255,236,193" FontSize="20" GUID="{3B75091C-4DB1-486b-BDFB-6B9B5FC409E8}" Name="txtRanking_CellCommunityMemberList" RelativePosition="0.05,0.5" Text="2" TouchEnable="False" Type="WZUILabelTTF" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{aa40c6c5-54e2-4ee7-8243-a156da367fd9}" Name="txtLevel_CellCommunityMemberList" Text="lv2" RelativePosition="0.19,0.64" FontSize="20" Color="62,34,8" BoldFont="True" LabelStyleKey="C13_F20" />
+            <WZUILabelTTF ChineseLengthPolicy="2" Color="62,34,8" Dimensions="250,0" FontSize="20" GUID="{39a73632-2fe4-4278-86cb-989734f1a4ed}" MaxLength="14" Name="txtPlayerName_CellCommunityMemberList" RelativePosition="0.49,0.64" Text="name" TouchEnable="False" Type="WZUILabelTTF" UseOriginSize="True" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" LabelStyleKey="C13_F20" />
+            <WZUILabelTTF Color="62,34,8" Dimensions="155,0" FontSize="20" GUID="{3c48035e-c325-4a4d-95ed-4a54e250b0f4}" Name="txtJob_CellCommunityMemberList" RelativePosition="0.315,0.35" Text="精英" TouchEnable="False" Type="WZUILabelTTF" BoldFont="True" LabelStyleKey="C13_F20" Alignment="Left" />
+            <WZUILabelTTF Color="62,34,8" Dimensions="180,0" FontSize="20" GUID="{55cf85a0-8247-4b4c-bce9-2307a948878d}" Name="txtContribution_CellCommunityMemberList" RelativePosition="0.56,0.5" Text="0" TouchEnable="False" Type="WZUILabelTTF" BoldFont="True" LabelStyleKey="C13_F20" />
+            <WZUILabelTTF Color="62,34,8" Dimensions="350,0" FontSize="20" GUID="{a2ccb1ce-6cc0-4f63-8589-74623436eec8}" Name="txtState_CellCommunityMemberList" RelativePosition="0.82,0.5" Text="在线" TouchEnable="False" Type="WZUILabelTTF" BoldFont="True" LabelStyleKey="C13_F20" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{C4044829-7D06-45f9-BF49-7DD0A4253242}" Name="conHead_Cell" AbsContentSize="80,80" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="-0.017,0.38">
+            <WZUIImage Type="WZUIImage" GUID="{161C0585-962A-433c-8D83-A22E17C987A5}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="1.23" RelativePosition="0.505,0.5" />
+        </WZUIContainer>
+        <Button GUID="{c6a499fb-5bf1-4cb3-90b1-83a89e951964}" LuaDoneFunctionName="onCheck" Name="" RelativePosition="0,0.38" Type="WZUIButton" Visible="True" AbsContentSize="250,75" UseAbsSize="True" AnchorPoint="0,0.5">
+            <NormalElement GUID="{17d47b01-75cf-47ef-82c5-c543f68bc237}" Type="WZUIContainer" />
+            <SelectElement GUID="{e4d16e68-f518-4386-a29b-f5715d5cd401}" Type="WZUIContainer" />
+            <DisableElement GUID="{4c99adbf-45e6-498d-adc5-a828180a3bbe}" RelativePosition="0.5,0.5" ScaleY="1" Type="WZUIContainer" />
+        </Button>
+    </WZUIContainer>
+</CellCommunityMemberList>

@@ -1,0 +1,21 @@
+﻿<WndPhantomUse GUID="{aedfa4f7-4722-42e1-ab39-3aa42c1edae2}">
+    <WZUIWindow AbsContentSize="505,300" GUID="{b8fd440e-805c-4aff-a11c-0ba548fd34bf}" LuaObjectName="WndPhantomUse" Name="WndPhantomUse" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" RelativePosition="0.5,0.525" ShowAll="True">
+        <Button Type="WZUIButton" GUID="{055c22cc-c6b7-4ced-a274-eee019baa044}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.921722,0.893174" Name="btnClose_WndPhantomUse" LuaDoneFunctionName="onClose" Visible="True" LuaActionName="Normal" Order="1">
+            <NormalElement Type="WZUIContainer" GUID="{f6600ba1-c35a-4cab-a49d-51e9c12a1e01}">
+                <WZUIImage Type="WZUIImage" GUID="{b3bcab3c-c6c7-40a9-9999-16d2d7b3cfe3}" File="ui/common/common_icon_guanbi.png" Scale="1" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{88179fdb-4fa2-4465-8b1c-3506b1aef2e1}">
+                <WZUIImage Type="WZUIImage" GUID="{2e28f4bc-86f7-471d-b155-0477c13d70c2}" File="ui/common/common_icon_guanbi_sel.png" Scale="1" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{8d4b8630-e808-4dfa-abd2-8a8ca786b6da}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{03fb82b2-6562-480c-9a18-56f0a7ccbf96}" AbsContentSize="505,300" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{a653dcb9-d436-4b2a-a95e-d779665831fc}" File="ui/common/common_scale9_di5.png" CapInsets="60,110,10,10" />
+            <WZUIContainer Type="WZUIContainer" GUID="{f07b4436-69c9-4ec9-9298-10c65f478819}" AbsContentSize="490,200" UseAbsSize="True" RelativePosition="0.5,0.42">
+                <WZUI9Image Type="WZUI9Image" GUID="{e13ce712-da28-4c71-bdbe-915f64877dc9}" File="ui/common/common_scale9_di6.png" />
+            </WZUIContainer>
+            <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{ffb0f6d2-303c-4ae4-894d-3ba4a56f954b}" Name="txtReturn_WndRecruit" ShadowColor="0,255,0" StrokeColor="132,66,29" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" RelativePosition="0.5,0.9" TextKey="PHANTOM9" />
+        </WZUIContainer>
+        <WZUITableContainer AbsContentSize="480,190" CellElementHeight="1" EnableMoveHorizontal="False" GUID="{74299cbd-8bcd-4be4-ab13-d572c6e4a24c}" MinPosition="0.5,0.5" Name="tbcon_WndPhantomUse" RelativePosition="0.5,0.42" RelativeSize="1,1" Type="WZUITableContainer" UseAbsSize="True" VerticalInterval="0.018" ColumnCount="3" />
+    </WZUIWindow>
+</WndPhantomUse>

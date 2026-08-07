@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?><WndLeftBox GUID="{D47579C7-554A-48ea-BC37-5BBCAA2ABFD6}">
+    <WZUIWindow AbsContentSize="510,120" AbsPosition="140,310" AnchorPoint="0,0.5" GUID="{2D5D8410-D9AF-4c35-A715-0E7325189E0D}" LuaObjectName="WndLeftBox" Name="WndLeftBox" NameCreate="True" Order="0" RelativePosition="0.14,0.52" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True" Visible="True">
+        <WZUIContainer AbsContentSize="480,140" AnchorPoint="0,0.5" GUID="{D0922C11-B651-4c82-9177-05C9000244B2}" Name="conWndLeftBox_WndLeftBox" Order="0" RelativePosition="0,0.52" Scale="0.98" ScaleX="0.98" ShowAll="False" Type="WZUIContainer" UseAbsSize="False" Visible="True">
+            <WZUI9Image File="ui/island/island_00.png" FlipX="False" FlipY="False" GUID="{FB73D874-C130-4f4c-88B4-1D18CB15F85D}" Name="imgBack_WndLeftBox" Order="-2" RelativeSize="1,0.98" Rotation="180" ScaleX="1" Type="WZUI9Image"/>
+            <WZUITableContainer AbsContentSize="0,0" AnchorPoint="0.5,0.5" CellElementHeight="1" ColumnCount="4" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableMoveoutContainer="False" EnableVerticalScroll="False" GUID="{59466DCD-2E3E-4658-9F04-75987B5A8049}" HorizontalInterval="1.05" IsVerticalMode="True" Name="tbconLeftBox_WndLeftBox" Order="0" RelativePosition="0.512417,0.5" RelativeSize="0.95,0.92" ShowAll="False" TouchContainerEnable="False" Type="WZUITableContainer" UseAbsSize="False" Visible="True"/>
+            <WZUIContainer AbsContentSize="108,106" AnchorPoint="0,0.5" GUID="{3C2EA8A2-8179-4956-918B-30E41564E635}" Name="conBtn_WndLeftBox" Order="0" RelativePosition="0.5,0.5" ShowAll="False" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                <Button AbsContentSize="108,106" AnchorPoint="0,0.5" GUID="{320BBAE5-D2D5-46be-A82B-15770067A202}" LuaDoneFunctionName="onClick" Name="btnLeft_WndLeftBox" RelativePosition="0,0.5" ShowAll="False" Type="WZUIButton" UseAbsSize="False">
+                    <NormalElement GUID="{1BCAE835-164E-4093-B924-14243053CF93}" Type="WZUIContainer">
+                        <WZUIImage File="ui/island/icon_achievement.png" GUID="{380955D8-596C-4f3b-B4B9-7B9A29F06CB1}" Name="imgBtnNormal_WndLeftBox" Type="WZUIImage" UseOriginSize="False"/>
+                        <WZUIImage File="" GUID="{8A746BC0-B29C-40eb-A917-3EC5D36F0371}" Name="imgBtnTextNormal_WndLeftBox" RelativePosition="0.48,0.2" Type="WZUIImage" UseOriginSize="True" UseOriginSizeProportion="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{1FE67A78-2417-476a-9DF3-8208A58A0386}" Name="btnSel_WndLeftBox" Scale="1.05" ScaleX="1.05" ScaleY="1.05" Type="WZUIContainer">
+                        <WZUIImage File="common/animation/7_an.png" GUID="{D8ED5C55-24FB-465e-BF05-30D11240FCF6}" Name="imgBtnHight_WndLeftBox" Scale="1.2" Type="WZUIImage" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True"/>
+                        <WZUIImage GUID="{94CB4C4C-134F-48e0-9557-F0BF0CB82860}" Name="imgBtnSel_WndLeftBox" Type="WZUIImage" UseOriginSize="True"/>
+                        <WZUIImage GUID="{B6E050E6-1251-4d3b-8103-B4B1CDE795AE}" Name="imgBtnTextSel_WndLeftBox" RelativePosition="0.48,0.2" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{FB62BCF3-DDD9-4623-B798-45AB154640CB}" Type="WZUIContainer">
+                        <WZUIImage GUID="{46BF7A02-C8C5-4d17-ABD1-2ED615380436}" Type="WZUIImage"/>
+                        <WZUIImage GUID="{A592AAD2-3D46-4145-931A-A5291228A21A}" Type="WZUIImage"/>
+                    </DisableElement>
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer GUID="{B7C86592-2139-4b4f-B871-1B321E64E548}" Name="conAnimation" Type="WZUIContainer" Visible="False">
+                <WZUIImage File="common/animation/icon_world_boss_light.png" GUID="{1D0E6491-2DDD-4749-B03D-4DAE18CC6EDB}" Name="imgCircleAni" Scale="0.68" TouchEnable="False" Type="WZUIImage" UseOriginSize="True">
+                    <Action Angle="-360" Duration="1" GUID="{9AD5120D-26B0-446f-B197-53AAB629C85A}" IsLoop="True" Type="WZUIActionRotateBy"/>
+                </WZUIImage>
+                <WZUIImage File="common/animation/icon_achievement_an.png" GUID="{A1210AF7-8A54-43ef-B20C-4A8FD4E13B36}" Name="imgHighlightAni" Opacity="50" Scale="0.85" Type="WZUIImage" UseOriginSize="True">
+                    <Action GUID="{55E2EE96-391A-4917-AD01-B43FAA4BD05B}" IsLoop="True" Type="WZUIActionSequence">
+                        <ChildAction Duration="0.4" GUID="{3D10CE2D-A369-4a4e-B318-EDAEAD9CE56E}" Type="WZUIActionFadeTo"/>
+                        <ChildAction Duration="0.4" GUID="{BF6B76A9-A9ED-451b-A735-E66306A1D3F9}" Opacity="50" Type="WZUIActionFadeTo"/>
+                    </Action>
+                </WZUIImage>
+            </WZUIContainer>
+            <Action Duration="0.1" GUID="{71CF2E96-AD2A-4712-B774-24B00FAC6828}" MoveX="0" MoveY="0.52" Type="WZUIActionMoveTo"/>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="480,140" GUID="{93AE519A-9AD7-412b-BD12-DCD4369BD17D}" Name="conBg_WndLeftBox" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True"/>
+    </WZUIWindow>
+</WndLeftBox>

@@ -1,0 +1,18 @@
+# Asset nhị phân của client — không diff, không đổi line-ending
+*.pkm   binary
+*.dat   binary
+*.data  binary
+*.jar   binary
+*.plist binary
+*.png   binary
+*.jpg   binary
+*.gif   binary
+*.ico   binary
+*.ttf   binary
+*.eot   binary
+*.woff  binary
+*.woff2 binary
+
+# Bảng số liệu game: rất lớn, không hiển thị diff trong PR
+*.lua      -diff
+LocalData* -diff

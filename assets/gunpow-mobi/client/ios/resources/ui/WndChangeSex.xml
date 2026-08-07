@@ -1,0 +1,41 @@
+﻿<WndChangeSex GUID="{819f2c35-7895-455b-b1fc-a229a8d008e5}">
+    <WZUIWindow AbsContentSize="402,247" GUID="{bf2eeaf2-463e-492f-afc4-bffbc6396e6b}" LuaObjectName="WndChangeSex" Name="WndChangeSex" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" Visible="True" ShowAll="True" RelativePosition="0.5,0.5" Order="30000">
+        <WZUIContainer Type="WZUIContainer" GUID="{58541626-b9ee-4d2f-86d7-0f40b29f72d8}" AbsContentSize="402,247" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image File="ui/common/common_scale9_di15.png" GUID="{eb6d8c95-7000-42cd-b333-48de202ab85a}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Visible="True" CapInsets="0,0,0,0" />
+            <WZUIContainer Type="WZUIContainer" GUID="{51a3846e-0681-4694-aead-f29dc3005a72}" AbsContentSize="390,235" UseAbsSize="True" RelativePosition="0.5,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{bcaa4491-7a3d-428a-92e1-b6e580b8d84f}" File="ui/common/common_scale9_di25.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{001534e8-6af6-4db5-ad12-c0c6837b9562}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" AbsContentSize="402,247" UseAbsSize="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{7d8259f9-7731-478f-9a08-0f6b784fc811}" AbsContentSize="390,110" UseAbsSize="True" RelativePosition="0.501178,0.65" AbsPosition="201.474,160.716">
+                <WZUI9Image Type="WZUI9Image" GUID="{f4f712ad-372b-4ab9-9fb8-f56bc6c3dde0}" File="ui/common/common_scale9_di20.png" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{77af7205-750c-425a-8c5d-e78edc52d4c4}" Name="txtFreeBox_WndChangeSex" MaxWidth="330" ShowText="" RelativePosition="0.5,0.56" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{33eea85f-3776-4b3a-a498-00014b7647f0}" TextKey="CHANGESEX5" LabelStyleKey="C16_F20" RelativePosition="0.01,0.21" AnchorPoint="0,1" Text="แน่ใจไหมว่าจะแปลงเพศ?" Name="txtChange_WndChangeSex" />
+            </WZUIContainer>
+            <WZUIButton AbsContentSize="116,56" GUID="{cc9f7f79-5946-4692-bbf3-e276a6f747d4}" LuaDoneFunctionName="onCancel" LuaPushFunctionName="" RelativePosition="0.3,0.22" Type="WZUIButton" UseAbsSize="True" Name="" LuaActionName="Normal" Tag="1">
+                <NormalElement GUID="{cc22321e-4f53-4a77-8f17-fe88c374a11e}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{d6b3f92c-5414-45fd-995b-9a2b998fe620}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{acb9057a-ca8e-4b41-9672-a970cc2b7295}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{e02b0c78-b694-405f-9aca-647c59b09106}" File="ui/common/common_btn_anniu3_0_sel.png" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{7106f148-e9e7-4fc5-ab70-09ae6a4d6d9d}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{7e9496c6-3268-48e9-88e6-8a298a6ab3f1}" File="ui/common/common_btn_anniu3_0.png" GrayRender="True" RelativePosition="0.5,0.5" UseOriginSize="True" />
+                </DisableElement>
+                <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{9cf36d22-caa7-4c00-a322-8a2be34e77bb}" Name="" RelativePosition="0.5,0.5" ShadowColor="0,255,0" StrokeColor="128,54,13" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" TextKey="CANCEL" LabelStyleKey="SMALL_ORANGE_BTN" />
+            </WZUIButton>
+            <WZUIButton AbsContentSize="116,56" GUID="{20e304ff-1248-4a61-bf2a-62f6245af98a}" LuaDoneFunctionName="onConfirm" LuaPushFunctionName="" RelativePosition="0.7,0.22" Type="WZUIButton" UseAbsSize="True" TouchEnable="True" Name="" LuaActionName="Normal" Tag="2">
+                <NormalElement GUID="{a1e32bfa-45d5-4fcf-932c-795846f2c8bc}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{3bcbc1cd-2dd7-45a0-8959-e408bd38ac60}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{567e7df9-9255-49f7-9aed-6f428cf6a606}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0_sel.png" GUID="{8aa1ef10-cd49-4a05-8401-dada16f61c98}" Type="WZUI9Image" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{fb90bdd1-b4cb-4317-a431-e445dce45a02}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{24aceea1-91d3-428f-aadb-509187afe537}" Type="WZUI9Image" GrayRender="True" RelativePosition="0.5,0.5" UseOriginSize="True" />
+                </DisableElement>
+                <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{56c17177-7180-45d2-89f0-2c75793ac870}" Name="" RelativePosition="0.5,0.5" ShadowColor="0,255,0" StrokeColor="3,111,8" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" TextKey="CONFIRM" LabelStyleKey="SMALL_GREEN_BTN" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndChangeSex>

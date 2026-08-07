@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<WndActive GUID="{21BAC097-91C8-4bfb-AB69-4162D57488E5}">
+	<WZUIWindow AbsContentSize="774,536" GUID="{C1A3D53E-2E43-4c93-BD46-C067B90D71C7}" LuaObjectName="WndActive" Name="WndActive" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" Visible="True" RelativePosition="0.5,0.5" ShowAll="False" LuaTouchBeganFunction="onTouchBegan">
+		<WZUIContainer Type="WZUIContainer" GUID="{12B52E66-46EF-4dc5-AD5E-02179924541F}" AbsContentSize="" Visible="True" UseAbsSize="False" RelativePosition="0.5,0.5" ShowAll="True">
+			<WZUIContainer Type="WZUIContainer" GUID="{6433394B-47FF-48be-AC7D-2F99647A386D}" AnchorPoint="0.5,0.5" Visible="True" UseAbsSize="False" Name="conLeftBg_WndMail">
+				<WZUI9Image Type="WZUI9Image" GUID="{FCC48130-DAA7-43c6-ACE3-D9ED4FFE929A}" File="ui/common/common_scale9_di3.png" CapInsets="92,80,1,1" RelativeSize="0.5,1" AnchorPoint="1,0.5" />
+				<WZUIContainer Type="WZUIContainer" GUID="{77DACEF8-E380-4236-8803-CEC53FC3028B}" AbsContentSize="280,380" UseAbsSize="True" RelativePosition="0.5,0.537314" AnchorPoint="1,0.5" Visible="False">
+					<WZUIImage Type="WZUIImage" GUID="{C66B8890-098C-4df7-890C-62711AA7F3BD}" File="ui/common/common_pic_diwen.png" />
+				</WZUIContainer>
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{44A5C43E-B37A-4062-8EB2-3286E54C2A39}" Visible="True" Name="conRightBg_WndMail">
+				<WZUI9Image Type="WZUI9Image" GUID="{972B78AA-CB9E-40e4-9328-65BF9672C52E}" File="ui/common/common_scale9_di3.png" CapInsets="92,80,1,1" RelativeSize="0.5,1" AnchorPoint="1,0.5" ScaleX="-1" />
+				<WZUIContainer Type="WZUIContainer" GUID="{D48DCAC5-3AFB-4e8f-A075-1E0636CC8DF9}" AbsContentSize="280,380" UseAbsSize="True" RelativePosition="0.5,0.537314" AnchorPoint="0,0.5" RelativeSize="0,1" Visible="False">
+					<WZUIImage Type="WZUIImage" GUID="{3F64D9E7-9113-43a0-A0FE-9824FFB0353F}" File="ui/common/common_pic_diwen.png" ScaleX="-1" />
+				</WZUIContainer>
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{4DD28D7D-BEF2-4858-B7DB-C4680989268E}" RelativePosition="0.5,1" Visible="True" AbsContentSize="776,60" UseAbsSize="True" AnchorPoint="0.5,1">
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{B9695437-A59D-42b0-AE85-EDABC090FC2E}" FontSize="28" Text="游戏活动" Name="txtModelTitle_WndActive" NameCreate="True" Color="255,255,255" EnableShadow="False" EnableStroke="True" TextKey="ACTIVITY" RelativePosition="0.5,0.5" AbsPosition="388,32" StrokeSize="4" StrokeColor="105,65,46" />
+				<WZUIContainer Type="WZUIContainer" GUID="{D5E1C470-89B8-4eed-B675-3C2D0ABEF9BB}" AbsContentSize="75,50" UseAbsSize="True" RelativePosition="0.941708,0.516667" AbsPosition="730.766,31">
+					<WZUI9Image Type="WZUI9Image" GUID="{1ACCA3C2-0317-4dba-ADAE-934805655152}" File="ui/common/common_icon_gb.png" Visible="True" UseOriginSize="True" />
+				</WZUIContainer>
+				<Button Type="WZUIButton" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.948221,0.466218" GUID="{19497726-20B5-478f-B0E9-5095916D0058}" LuaDoneFunctionName="onClickCloseWndActive" Name="btnCloseWndActive_WndActive" LuaActionName="Normal">
+					<NormalElement Type="WZUIContainer" GUID="{D9990D43-2BC9-4975-9060-DFF9494C827D}">
+						<WZUIImage Type="WZUIImage" GUID="{F689B3C7-5D1F-4a92-874D-4ADBE3493AD1}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+					</NormalElement>
+					<SelectElement Type="WZUIContainer" GUID="{2D7ACFC6-C40D-4535-8FC0-AA6E47A0B48F}">
+						<WZUIImage Type="WZUIImage" GUID="{C64E42D7-BAD1-4e46-924C-BEFE9C848FB9}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+					</SelectElement>
+					<DisableElement Type="WZUIContainer" GUID="{FE5D73EF-ACFB-44e1-B49B-B2889D83AB67}" />
+				</Button>
+			</WZUIContainer>
+		</WZUIContainer>
+		<WZUIContainer AbsContentSize="0,0" GUID="{50247BEC-A47A-49c7-930B-5D128BC2FF7E}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="False" ShowAll="True">
+			<WZUIContainer Type="WZUIContainer" GUID="{EC221E31-38BC-42c8-9199-41DC6BAD1F51}" AbsContentSize="720,140" UseAbsSize="True" RelativePosition="0.509044,0.137178">
+				<WZUIContainer Type="WZUIContainer" GUID="{367D97A8-F81E-4c69-90D1-53386BD18499}" AbsContentSize="620,47" UseAbsSize="True" RelativePosition="0.50259,0.618237" Visible="True">
+					<WZUI9Image Type="WZUI9Image" GUID="{A773FC6D-F9FF-4e4e-ADF9-CCA05CBB8185}" File="ui/common/common_progress_huoyuedu.png" ScaleX="1" Name="imgProBg_WndActive" UseOriginSize="False" CapInsets="80,23,1,1" RelativePosition="0.475084,0.420929" Scale="1" />
+					<WZUIContainer Type="WZUIContainer" GUID="{D9F57EF3-1317-40f7-BD91-21EC4CD96A93}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.486528,0.416922" RelativeSize="0.93,0.25">
+						<WZUIProgress Type="WZUIProgress" GUID="{005C2341-E5FE-48c0-AAEC-9829899A7A92}" Name="pro_WndActive" BgPicture="ui/common/common_progress_huoyuedu2.png" RelativePosition="0.517056,0.356744" UseOriginSize="False" ScaleX="1" Percentage="0" Scale="1" RelativeSize="1,1" />
+					</WZUIContainer>
+				</WZUIContainer>
+				<WZUIContainer Type="WZUIContainer" GUID="{0CF59D62-1512-4bab-9A5B-FD49A92E372D}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0,0.5" AnchorPoint="0.,0.5">
+					<WZUIImage Type="WZUIImage" GUID="{B3688196-AD48-44fa-9963-4D16C190EB03}" File="ui/common/common_icon_dianquan.png" RelativePosition="0.177927,0.632472" Name="" UseOriginSize="True" />
+					<WZUIContainer Type="WZUIContainer" GUID="{F6A61D8F-8EAF-488c-BC83-DF958D9DBCB9}" AbsContentSize="90,30" UseAbsSize="True" RelativePosition="0.270256,0.227827">
+						<WZUILabelTTF Type="WZUILabelTTF" GUID="{3DA52379-64DC-4dfc-B6E6-3DF76D15C049}" Color="105,65,46" BoldFont="False" EnableStroke="False" StrokeSize="3" StrokeColor="60,19,12" Text="" FontSize="22" RelativePosition="0.6,0.366667" AnchorPoint="0,0.5" Name="" TextKey="CHAT_CURRENT" />
+						<WZUILabelTTF Type="WZUILabelTTF" GUID="{6AF12911-C647-472d-906C-5A46B77804DB}" FontSize="24" Text="" RelativePosition="0.866945,1.81972" Color="255,236,193" Name="txtCurActivity_WndActive" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" />
+					</WZUIContainer>
+					<WZUIButton Type="WZUIButton" RelativePosition="0.5,0.5" LuaDoneFunctionName="onClickGetAward" Tag="1" GUID="{AD6D56F8-9D58-48b6-89A1-FA2D6095A7E9}" Visible="False">
+						<NormalElement Type="WZUIContainer" GUID="{FA150A8B-62CA-4a7c-9A89-9A4C7E788A0B}" />
+						<SelectElement Type="WZUIContainer" GUID="{98ECF437-345E-420e-A0FF-B5006B89AD42}" />
+						<DisableElement Type="WZUIContainer" GUID="{E0F0068E-709D-44e7-B4E4-9345FB4E3A4F}" />
+					</WZUIButton>
+				</WZUIContainer>
+				<WZUIContainer Type="WZUIContainer" GUID="{EF29BCD1-1810-4ce0-92D6-BB736371D627}" AbsContentSize="580,80" UseAbsSize="True" RelativePosition="0.474361,0.628571">
+					<WZUIContainer Type="WZUIContainer" GUID="{95AF910D-6B8D-4e29-89CA-B54FF1B771B9}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="0.5,0.5" Visible="False">
+						<WZUIImage Type="WZUIImage" GUID="{8FBC7228-785C-4903-9310-93552718294A}" File="ui/common/common_icon_zi1.png" RelativePosition="0.5,0.5" Name="imgReward5_WndActive" UseOriginSize="True" Scale="1.2" />
+						<WZUIContainer Type="WZUIContainer" GUID="{16DC9C6B-B44C-4100-8B46-D1D56E0ABC0A}" AbsContentSize="90,30" UseAbsSize="True" RelativePosition="0.5,0.025">
+							<WZUILabelTTF Type="WZUILabelTTF" GUID="{D92D96AD-4BC5-4626-BCF8-F7FA7FDB6C65}" Color="105,65,46" BoldFont="False" EnableStroke="False" StrokeSize="3" StrokeColor="60,19,12" Text="" FontSize="22" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Name="txtReward5Count_WndActive" />
+						</WZUIContainer>
+						<WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickGetAward" Tag="5" GUID="{810816DA-BC2C-484b-8C31-4367FC04AF85}">
+							<NormalElement Type="WZUIContainer" GUID="{AC3D5D6F-2394-441a-B7C2-4CA6FA131AD4}" />
+							<SelectElement Type="WZUIContainer" GUID="{186535CB-1867-4153-8CFC-89A4406C7E27}" />
+							<DisableElement Type="WZUIContainer" GUID="{FC74F352-BA0E-4221-8561-B3C358782BD8}" />
+						</WZUIButton>
+					</WZUIContainer>
+					<WZUIContainer Type="WZUIContainer" GUID="{09418B41-9D3D-482c-9941-BB1C2BACD541}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="1,0.5">
+						<WZArmature Type="WZArmature" GUID="{0037A3FD-D54E-4132-82EE-6A77A5A8B667}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" RelativePosition="0.5,-0.05" Name="arm4_WndActive" Visible="False">
+							<Action Type="WZUIArmatureAnimationById" GUID="{BD7F0268-AC2E-4195-BA2F-9CA1703D2027}" AnimationId="0" />
+						</WZArmature>
+						<WZUIImage Type="WZUIImage" GUID="{26C973D9-FCCD-4ee3-B619-2FECEDB292BE}" File="" RelativePosition="0.5,0.6" Name="imgReward4_WndActive" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+						<WZUIContainer Type="WZUIContainer" GUID="{5BA5D092-B28C-4388-914F-1AC022BC8E6C}" AbsContentSize="90,30" UseAbsSize="True" RelativePosition="0.5,-0.005">
+							<WZUILabelTTF Type="WZUILabelTTF" GUID="{F177F43A-923A-468c-894A-B242415DBDE0}" Color="105,65,46" BoldFont="False" EnableStroke="False" StrokeSize="3" StrokeColor="60,19,12" Text="" FontSize="22" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Name="txtReward4Count_WndActive" />
+						</WZUIContainer>
+						<WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickGetAward" Tag="4" GUID="{2A33AB9C-5769-4cb9-8B64-B16402A73812}">
+							<NormalElement Type="WZUIContainer" GUID="{039F3204-C337-4645-8027-DF1D66835D40}" />
+							<SelectElement Type="WZUIContainer" GUID="{5063DD08-1972-4207-A43B-BBC67D91941D}" />
+							<DisableElement Type="WZUIContainer" GUID="{D8ED899A-61D4-4205-BAB0-B045153979A5}" />
+						</WZUIButton>
+					</WZUIContainer>
+					<WZUIContainer Type="WZUIContainer" GUID="{94C07D9C-EBEF-4785-BDCE-D6C93116B79E}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.75,0.5">
+						<WZArmature Type="WZArmature" GUID="{FA3D85F1-F2B3-4bef-8569-047D4BE40BB0}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" RelativePosition="0.5,-0.05" Name="arm3_WndActive" Visible="False">
+							<Action Type="WZUIArmatureAnimationById" GUID="{36A6425A-7C8D-4459-B8F1-1F054EC53A40}" AnimationId="0" />
+						</WZArmature>
+						<WZUIImage Type="WZUIImage" GUID="{7746177E-C258-437d-AA4B-D4D1700270B1}" File="" RelativePosition="0.5,0.6" Name="imgReward3_WndActive" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+						<WZUIContainer Type="WZUIContainer" GUID="{E4BDE3DD-A641-4169-B541-0DCFB0C8E261}" AbsContentSize="90,30" UseAbsSize="True" RelativePosition="0.5,-0.005">
+							<WZUILabelTTF Type="WZUILabelTTF" GUID="{CED9053A-969A-4e5c-947F-BEB70CE86190}" Color="105,65,46" BoldFont="False" EnableStroke="False" StrokeSize="3" StrokeColor="60,19,12" Text="" FontSize="22" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Name="txtReward3Count_WndActive" />
+						</WZUIContainer>
+						<WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickGetAward" Tag="3" GUID="{0D847AA7-9D31-4ed8-A35C-15E764DBDF31}">
+							<NormalElement Type="WZUIContainer" GUID="{00382166-8C4B-4732-B440-6364ADDE05EA}" />
+							<SelectElement Type="WZUIContainer" GUID="{1E77B234-31BC-4cbe-B435-CCB20C7F62C6}" />
+							<DisableElement Type="WZUIContainer" GUID="{1AD0EF96-9919-4b94-B5AE-E733B711B844}" />
+						</WZUIButton>
+					</WZUIContainer>
+					<WZUIContainer Type="WZUIContainer" GUID="{D20B7870-866B-43b1-9BB4-7A09F7572411}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.5,0.5">
+						<WZArmature Type="WZArmature" GUID="{4DC93C63-F74F-4756-887D-608471B0F65F}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" RelativePosition="0.5,-0.05" Name="arm2_WndActive" Visible="False">
+							<Action Type="WZUIArmatureAnimationById" GUID="{C26AA8E6-5FF4-43f3-A053-0000697F3952}" AnimationId="0" />
+						</WZArmature>
+						<WZUIImage Type="WZUIImage" GUID="{99109A5D-D034-4b92-ADE5-763AE70CCFA9}" File="" RelativePosition="0.5,0.6" Name="imgReward2_WndActive" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+						<WZUIContainer Type="WZUIContainer" GUID="{526D32EC-EA79-4b57-B314-C7D7BBE4DED8}" AbsContentSize="90,30" UseAbsSize="True" RelativePosition="0.5,-0.005">
+							<WZUILabelTTF Type="WZUILabelTTF" GUID="{851EB487-EE96-4aac-A6C2-9FA276F89FE1}" Color="105,65,46" BoldFont="False" EnableStroke="False" StrokeSize="3" StrokeColor="60,19,12" Text="" FontSize="22" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Name="txtReward2Count_WndActive" />
+						</WZUIContainer>
+						<WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickGetAward" Tag="2" GUID="{D5D877CE-7470-4500-BF07-4A5A1C865E25}">
+							<NormalElement Type="WZUIContainer" GUID="{9BAF6280-C00E-4e19-9F06-EC1F13E4D920}" />
+							<SelectElement Type="WZUIContainer" GUID="{7333CBB9-A5F6-4bd9-9024-3247C4437837}" />
+							<DisableElement Type="WZUIContainer" GUID="{160859AA-1605-436f-A919-3DEB33A78CCD}" />
+						</WZUIButton>
+					</WZUIContainer>
+					<WZUIContainer Type="WZUIContainer" GUID="{56E5E28F-85F5-40b5-B0AD-9D79C7DCBAA6}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.25,0.5" Name="conBox1_WndActive">
+						<WZArmature Type="WZArmature" GUID="{64649379-3AB3-4e04-9703-3B760C5E1797}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" RelativePosition="0.5,-0.05" Name="arm1_WndActive" Visible="False" ScaleX="1" ScaleY="1" Scale="1">
+							<Action Type="WZUIArmatureAnimationById" GUID="{EE198590-C437-4292-AED2-30F18B01FEBA}" AnimationId="0" />
+						</WZArmature>
+						<WZUIImage Type="WZUIImage" GUID="{90744A36-8780-4a37-A2AD-3BB0273FB2CE}" File="" RelativePosition="0.5,0.6" Name="imgReward1_WndActive" UseOriginSize="True" Scale="1" isValid="True" />
+						<WZUIContainer Type="WZUIContainer" GUID="{769341A3-E0FA-48ee-8490-EBDE02A0A55B}" AbsContentSize="90,30" UseAbsSize="True" RelativePosition="0.5,-0.005">
+							<WZUILabelTTF Type="WZUILabelTTF" GUID="{C84BA7A7-3FCC-428d-850E-C6CCC0C4CD7D}" Color="105,65,46" BoldFont="False" EnableStroke="False" StrokeSize="3" StrokeColor="60,19,12" Text="" FontSize="22" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Name="txtReward1Count_WndActive" />
+						</WZUIContainer>
+						<WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickGetAward" Tag="1" GUID="{1A1F412B-10C8-4221-BBA3-1DED34A9626E}">
+							<NormalElement Type="WZUIContainer" GUID="{BB08017E-EFC0-410f-9998-AB493CFB915E}" />
+							<SelectElement Type="WZUIContainer" GUID="{0E413A60-0180-4f10-9B7B-A579CFF5B2CF}" />
+							<DisableElement Type="WZUIContainer" GUID="{B8B310BF-AECA-4cf4-B6BD-3E2EA862DBB9}" />
+						</WZUIButton>
+					</WZUIContainer>
+				</WZUIContainer>
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{82F3DD31-875D-498c-8337-07B3A04A9D00}" AbsContentSize="738,320" UseAbsSize="True" RelativePosition="0.499546,0.563523">
+				<WZUI9Image Type="WZUI9Image" GUID="{3D404FC6-AACE-4303-86CD-B9C289E87BAC}" File="ui/common/common_scale9_di29.png" RelativePosition="0.5,0.5" Opacity="150" />
+				<WZUITableContainer Type="WZUITableContainer" GUID="{AF7BA7BA-E740-43b8-85E9-4F4E25076B09}" Name="tabActiveList_WndActive" EnableMoveVertical="True" EnableHorizontalScroll="True" ColumnCount="1" EnableVerticalScroll="False" EnableMoveoutContainer="False" IsVerticalMode="False" HorizontalInterval="0" EnableMoveHorizontal="True" CellElementHeight="0.28" RelativePosition="0.5,0.5" VerticalInterval="20" RelativeSize="0.96,0.96" AbsContentSize="0,0" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{ED064BEE-EE82-49c8-A031-5A25FCCA2FF5}" AbsContentSize="260,50" UseAbsSize="True" RelativePosition="0.739142,0.930331" Visible="False">
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{41ACE34F-18C4-470f-964A-B2E126B78E77}" Name="txtServerTime_WndActive" FontSize="26" Color="220,231,185" Text="服务器时间:" AnchorPoint="0,0.5" RelativePosition="0,0.5" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{201E0C60-6E16-4a3b-AB5D-B36EC619369E}" Name="txtCurTime_WndActive" FontSize="26" Color="220,231,185" Text="18:23" AnchorPoint="0,0.5" RelativePosition="0.560261,0.5" />
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIWindow>
+	<WZUIContainer Type="WZUIContainer" GUID="{40EA3E70-C130-4062-B781-29DA16BD3662}" AbsContentSize="180,280" UseAbsSize="True" RelativePosition="0.161928,0.570942" Name="cellActiveInfo_WndActive" Visible="True" LuaObjectName="">
+		<WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickShowMoreInfo" GUID="{8DA1A96D-2A16-4f56-9CC4-FA2E86004849}" Name="btnFlop_WndActive">
+			<NormalElement Type="WZUIContainer" GUID="{02FE4696-0988-40a5-9C75-7F06F0F7D51C}" />
+			<SelectElement Type="WZUIContainer" GUID="{5BD50E25-2226-498f-8E37-EEAB34D03F3F}" />
+			<DisableElement Type="WZUIContainer" GUID="{516322DC-C046-4f21-A477-7883C2E06CED}" />
+		</WZUIButton>
+		<WZUIContainer Type="WZUIContainer" GUID="{DCADAAD5-65D7-4e76-BA24-61F4F3DAB6A8}" Name="conFront_WndActive" Visible="True">
+			<WZUI9Image Type="WZUI9Image" GUID="{32B5887F-C697-49a6-BBAA-565B878782E8}" File="ui/common/common_scale9_di18.png" TouchEnable="False" />
+			<WZUI9Image Type="WZUI9Image" GUID="{F982FD39-AB6A-45af-94A6-77FF2765D3AF}" File="ui/common/common_scale9_kapaibian.png" TouchEnable="False" />
+			<WZUIImage Type="WZUIImage" GUID="{1CF17944-CD21-4975-80EB-446848B1622F}" File="ui/common/common_icon_huoyuebiaotou.png" UseOriginSize="True" RelativePosition="0.5,0.931527" TouchEnable="False" Scale="1.05" />
+			<WZUIContainer Type="WZUIContainer" GUID="{BACD5A60-22C0-4094-847C-2F53252537BB}" TouchEnable="False">
+				<WZUI9Image Type="WZUI9Image" GUID="{4D8CDA11-8859-467a-B110-AF7D73033AF6}" />
+			</WZUIContainer>
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{D65FF7A9-90DE-47f8-8678-520964F9ACBB}" Name="txtActiveTitle_WndActive" Color="255,227,116" BoldFont="False" EnableStroke="True" FontSize="22" StrokeColor="60,19,12" StrokeSize="0" Text="弹王挑战" RelativePosition="0.499155,0.934349" TouchEnable="False" />
+			<WZUIContainer Type="WZUIContainer" GUID="{6F639B12-8499-405b-8904-8797225AA892}" AbsContentSize="140,130" UseAbsSize="True" RelativePosition="0.5,0.6" Name="conAward_WndActive" Visible="True" TouchEnable="False">
+				<Button Type="WZUIButton" LuaDoneFunctionName="onShowItem" Name="btnAward_WndActive" GUID="{208D056D-9209-47cb-A2BA-047F9CCB47CD}">
+					<NormalElement Type="WZUIContainer" GUID="{F3D04EBD-2537-49e1-9089-3228F872AC5E}">
+						<WZUIImage Type="WZUIImage" GUID="{03A07DFD-17B2-4110-BAF0-4ED1A16B6E51}" File="ui/common/items_bg.png" />
+					</NormalElement>
+					<SelectElement Type="WZUIContainer" GUID="{56271F3A-7E16-425e-8450-E5A1785ED864}">
+						<WZUIImage Type="WZUIImage" GUID="{3351D49A-4D78-4bd5-BAA9-3B603EED4BBC}" File="ui/common/items_bg.png" />
+					</SelectElement>
+					<DisableElement Type="WZUIContainer" GUID="{F84B5518-3CAF-4e99-98A0-8203E2CC84AE}" />
+				</Button>
+				<WZUIImage Type="WZUIImage" GUID="{DD49530D-F101-418a-83DB-3B64BB3083CB}" File="ui/common/common_scale9_beibaodi2.png" TouchEnable="False" />
+				<WZUIImage Type="WZUIImage" GUID="{A6BE3CCD-F9E0-4621-9638-B20CD85FD873}" Name="imgReward_WndActive" File="ui/common/common_icon_pws1.png" TouchEnable="False" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{790B5135-B4B9-4693-9501-0D605EAE93A9}" AbsContentSize="150,110" UseAbsSize="True" RelativePosition="0.5,0.22252" Name="conBottom_WndActive" Visible="True">
+				<WZUIContainer Type="WZUIContainer" GUID="{E2796DBF-618A-4807-B24F-91FDD153CC24}" AbsContentSize="150,32" UseAbsSize="True" RelativePosition="0.5,0.654545" TouchEnable="False">
+					<WZUI9Image Type="WZUI9Image" GUID="{9BB34572-31DA-4a1a-8F0E-E0E163309043}" File="ui/common/common_scale9_di4.png" UseOriginSize="False" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{3756E1BD-4ACD-4df1-AB96-D21CD8DAA337}" Name="txtProgress_WndActive" Color="105,65,46" BoldFont="False" EnableStroke="False" FontSize="26" Text="1/5" RelativePosition="0.081098,0.5" AnchorPoint="0,0.5" />
+					<WZUIImage Type="WZUIImage" GUID="{873CE3C7-F4C2-4481-B92B-E0E13A29A410}" Name="imgKey_WndActive" File="ui/common/common_icon_dianquan.png" UseOriginSize="True" Scale="1" RelativePosition="0.586125,0.5" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{58421768-9317-4f4c-BC7B-42523C49C8C5}" Name="txtKeyCount_WndActive" Color="105,65,46" BoldFont="False" EnableStroke="False" FontSize="26" Text="1/5" RelativePosition="0.726113,0.455661" AnchorPoint="0,0.5" />
+				</WZUIContainer>
+				<WZUIContainer Type="WZUIContainer" GUID="{3A6A931A-ED03-4433-A6CC-001DFBDE5555}" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.224585" Name="conActivieyStats_WndActive" AbsPosition="75,24.7044">
+					<Button Type="WZUIButton" Name="btnGoFire_WndActive" GUID="{60354EA0-F2E2-41f3-B459-85B090F2E92F}" LuaDoneFunctionName="onGoFire" LuaActionName="Normal">
+						<NormalElement Type="WZUIContainer" GUID="{59250ACA-28D1-4301-96FE-101ED8729F6A}">
+							<WZUI9Image Type="WZUI9Image" GUID="{88DFA8AA-3165-4ba6-BE62-7CF29C5C4C7D}" File="ui/common/common_btn_anniu10.png" />
+						</NormalElement>
+						<SelectElement Type="WZUIContainer" GUID="{BF516F3A-F304-4dcf-9B1B-444FB201B522}" Scale="1.12">
+							<WZUI9Image Type="WZUI9Image" GUID="{BAFBF0EF-5D91-435c-A2AE-C462FD170A1E}" File="ui/common/common_btn_anniu10_sel.png" Scale="1" />
+						</SelectElement>
+						<DisableElement Type="WZUIContainer" GUID="{F5E5A8C9-F2D6-4c88-9630-3A491E608879}">
+							<WZUI9Image Type="WZUI9Image" GUID="{9D7634CD-117F-4051-A257-A5AA6E1A3CA9}" File="ui/common/common_btn_anniu10.png" GrayRender="True" />
+						</DisableElement>
+						<WZUILabelTTF Type="WZUILabelTTF" GUID="{A5E92597-B207-4258-BADB-4C49F60A997B}" Name="txtActivieyStats_WndActive" Color="255,255,255" BoldFont="False" EnableStroke="True" FontSize="24" Text="前往" RelativePosition="0.5,0.5" StrokeColor="0,72,3" StrokeSize="4" TouchEnable="False" />
+					</Button>
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{DFC0FE6A-5D9F-4fbd-B7BE-10F8EE6AF256}" Name="txtActivieyStats2_WndActive" Color="158,139,121" BoldFont="False" EnableStroke="False" FontSize="24" Text="" RelativePosition="0.5,0.5" StrokeColor="" StrokeSize="4" TouchEnable="False" Visible="False" />
+				</WZUIContainer>
+			</WZUIContainer>
+		</WZUIContainer>
+		<WZUIContainer Type="WZUIContainer" GUID="{43422B17-1468-47f5-8A67-277B4B19D6ED}" Name="conBack_WndActive" Visible="False" TouchEnable="False">
+			<WZUI9Image Type="WZUI9Image" GUID="{07AA6D2C-5349-4b21-A7C9-C0503A17272A}" File="ui/common/common_scale9_di18.png" Scale="1" />
+			<WZUI9Image Type="WZUI9Image" GUID="{A33A9E1C-0BFC-41f1-9282-8E7E66E7EB59}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="1.02" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{8A461570-2450-4a4e-9EB3-825E41D8F8E8}" Name="txtActiveTitle2_WndActive" Color="62,34,8" BoldFont="True" EnableStroke="False" FontSize="24" StrokeColor="60,19,12" StrokeSize="0" Text="" RelativePosition="0.499155,0.916368" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{CE174F6B-4B23-448b-813E-21CB0279744B}" Name="txtActiveTime_WndActive" Dimensions="0,0" Text="" FontSize="20" Color="136,66,29" Alignment="Left" RelativePosition="0.514357,0.755819" Visible="True" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{B9CCDF47-84B0-4897-8D3B-D842315F72DE}" Name="txtActiveTime2_WndActive" Dimensions="0,0" Text="" FontSize="22" Color="158,0,0" Alignment="Left" RelativePosition="0.514357,0.654957" Visible="True" />
+			<WZUIContainer Type="WZUIContainer" GUID="{1A81B0B5-C208-4071-82EC-02B026420203}" AbsContentSize="154,154" UseAbsSize="True" RelativePosition="0.5,0.3">
+				<WZUIContainer Type="WZUIContainer" GUID="{1B216650-2CD0-4f34-A45C-3FDB51889E71}" RelativeSize="1,0.2" RelativePosition="0.5,0.898364">
+					<WZUIImage Type="WZUIImage" GUID="{CB11DF2F-2BAE-4a9f-B3FD-A26DA8F905AC}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.8,0.5" />
+					<WZUIImage Type="WZUIImage" GUID="{EE588FEF-AB9E-4140-8271-503464D3695B}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" FlipX="True" RelativePosition="0.2,0.5" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{5D365F60-008D-4179-B71E-FAFDF491D2B8}" Text="奖励" Color="136,66,29" FontSize="20" TextKey="ATH_REWARD_CHECK" />
+				</WZUIContainer>
+				<WZUI9Image Type="WZUI9Image" GUID="{E0D0EAA9-7F54-48ed-AA4E-0E11B1ECFC3F}" File="ui/common/common_scale9_di33.png" Opacity="180" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{C679D3E9-6A1C-455f-B42F-D8C1390CA0E3}" Name="txtActiveExplain_WndActive" Dimensions="140,120" Text="" FontSize="20" Color="62,34,8" Alignment="Left" RelativePosition="0.474322,0.818332" Visible="True" AnchorPoint="0.5,1" AbsPosition="73.0456,126.023" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{F5C7F9E4-B7FE-4217-AB09-3C3A02CA2994}" AbsContentSize="160,2" UseAbsSize="True" RelativePosition="0.492493,0.835816">
+				<WZUIImage Type="WZUIImage" GUID="{92A25259-4468-495b-8842-5501846FFB4A}" Visible="True" File="ui/common/line.png" />
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIContainer>
+</WndActive>

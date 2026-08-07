@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<WndMaster GUID="{F1F02123-B1AD-4ba2-8888-427AAD39278E}">
+    <WZUIWindow Type="WZUIWindow" GUID="{093C885B-68A1-49f9-BF23-55BF7CB44190}" Name="WndMaster" LuaObjectName="WndMaster" ShowAll="False" LuaTouchBeganFunction="onTouchBegan" NameCreate="True" RelativePosition="0.5,0.5" TouchContainerEnable="True" LuaTouchEndedFunction="onTouchEnd">
+        <WZUIContainer AbsContentSize="960,640" GUID="{0D4D5C5B-F333-471c-A122-7CC1DCD7655D}" Type="WZUIContainer" UseAbsSize="True" Visible="True" TouchSwallow="False" RelativePosition="0.5,0.5" Name="">
+            <WZUI9Image Type="WZUI9Image" GUID="{A95697A4-D6A3-4d44-A285-BFA526AFA59E}" File="ui/master/master_pic_bg.png" Visible="True" Name="" UseOriginSize="True" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{5DA00334-6E05-4c76-8CEC-34EA46BE2164}" AbsContentSize="1000,436" UseAbsSize="True" RelativePosition="0.5,0.392" Name="conBlackBg_WndMaster" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{8D79E6CA-DA6B-44a9-AEB0-887ABC22780A}" File="ui/master/master_scale9_di36.png" Visible="True" CapInsets="0,15,960,50" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="822,53" AnchorPoint="0.5,0.5" GUID="{8B4C0BF1-17A3-4bd8-A468-A4A2FC5305A7}" RelativePosition="0.5,0.8" RelativeSize="1,1" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True" Name="conCheckBox" TouchContainerEnable="True" ShowAll="True" Order="0">
+            <WZUI9Image Type="WZUI9Image" GUID="{25E858BC-5D05-4058-93C5-2C2AF41B4B8A}" File="ui/common/common_scale9_heidi8.png" UseOriginSize="True" TouchEnable="False" RelativePosition="0.5,0.5" ScaleX="1.2" Scale="1.1" />
+            <WZUICheckBoxGroup AbsContentSize="0,0" AnchorPoint="0.5,0.5" GUID="{E831E37D-2FB6-4c4b-ABB4-24C99B759813}" RelativePosition="0.5,0.5" RelativeSize="1,1" ScaleY="1" TouchContainerEnable="True" Type="WZUICheckBoxGroup" UseAbsSize="False" Name="checkGroup_WndMaster">
+                <CheckBox AbsContentSize="120,50" AnchorPoint="0.5,0.5" GUID="{B2777318-7DF0-4aef-B666-FF99EC656A52}" LuaSelectedFunctionName="onCheck1" Name="checkInfo1_WndEquip" RelativePosition="0.14,0.5" SelectedIndex="1" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True">
+                    <CheckElement AbsContentSize="120,50" AnchorPoint="0.5,0.5" GUID="{81D3FA43-767C-4098-A23F-DC817233BBBC}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="163,140,122" EnableShadow="False" EnableStroke="True" FontSize="26" GUID="{1AE7360A-AD0D-48cf-8C43-F393C4987FD4}" Name="txtHall_WndMaster" RelativePosition="0.5,0.5" StrokeColor="117,63,41" StrokeSize="4" Text="师徒大厅" Type="WZUILabelTTF" UseOriginSize="True" TextKey="HALL" />
+                    </CheckElement>
+                    <CheckElement AbsContentSize="120,50" AnchorPoint="0.5,0.5" GUID="{7B2296F2-813D-49eb-B8AE-84604E7DC52C}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" EnableShadow="False" EnableStroke="True" FontSize="26" GUID="{A4DE99C6-3326-4073-9F2E-34866D06C200}" Name="txtHall1_WndMaster" RelativePosition="0.5,0.5" StrokeColor="117,63,41" StrokeSize="4" Text="师徒大厅" Type="WZUILabelTTF" UseOriginSize="True" TextKey="HALL" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox AbsContentSize="120,50" AnchorPoint="0.5,0.5" GUID="{D9E9470F-944F-488b-89C7-00D2A1B51654}" LuaSelectedFunctionName="onCheck2" Name="checkInfo2_WndEquip" RelativePosition="0.32,0.5" RelativeSize="0.9,1" ScaleX="1" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" Scale="1">
+                    <CheckElement AbsContentSize="120,50" GUID="{34CAF95F-986C-417f-A447-4FE85DF5972C}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="163,140,122" EnableStroke="True" FontSize="26" GUID="{760B9090-A49D-48fa-94A8-2DCE58DF5B1C}" Name="txtMember_WndMaster" RelativePosition="0.5,0.5" StrokeColor="117,63,41" StrokeSize="4" Text="我的师徒" Type="WZUILabelTTF" TextKey="MASTER_APPRENTICE" />
+                    </CheckElement>
+                    <CheckElement AbsContentSize="120,50" GUID="{3664352E-0117-471c-B611-8475BBBC5D43}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{00470560-448C-4169-AA49-D81B3D2F1E9A}" Name="txtMember1_WndMaster" RelativePosition="0.5,0.5" StrokeColor="117,63,41" StrokeSize="4" Text="我的师徒" Type="WZUILabelTTF" TextKey="MASTER_APPRENTICE" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox AbsContentSize="120,50" AnchorPoint="0.5,0.5" GUID="{6A72F03F-5AD4-48d0-862D-C37600E5DECB}" LuaSelectedFunctionName="onCheck3" Name="checkInfo3_WndEquip" RelativePosition="0.5,0.5" RelativeSize="0.9,1" ScaleX="1" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" Scale="1">
+                    <CheckElement AbsContentSize="120,50" GUID="{3AEF733E-B9F8-474a-A6C1-7777997F57D2}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="163,140,122" EnableStroke="True" FontSize="26" GUID="{A7B6503E-386F-4a9d-8693-B1F40608B3EB}" Name="txtReward_WndMaster" RelativePosition="0.5,0.5" StrokeColor="117,63,41" StrokeSize="4" Text="师徒奖励" Type="WZUILabelTTF" TextKey="ATH_REWARD_CHECK" />
+                    </CheckElement>
+                    <CheckElement AbsContentSize="120,50" GUID="{B0398117-A57C-47cd-829C-2E540A49370A}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{93861785-9C38-4543-952F-D8A196C4B973}" Name="txtReward1_WndMaster" RelativePosition="0.5,0.5" StrokeColor="117,63,41" StrokeSize="4" Text="师徒奖励" Type="WZUILabelTTF" TextKey="ATH_REWARD_CHECK" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox AbsContentSize="120,50" AnchorPoint="0.5,0.5" GUID="{BB8743D3-D964-4a7c-9A9B-A1ECF9A9BFC7}" LuaSelectedFunctionName="onCheck4" Name="checkInfo4_WndEquip" RelativePosition="0.86,0.5" RelativeSize="0.9,1" ScaleX="1" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" Scale="1">
+                    <CheckElement AbsContentSize="120,50" GUID="{C7BC31B1-47E7-4dc9-AF54-ED3F3DCC710E}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="163,140,122" EnableStroke="True" FontSize="26" GUID="{7F7C5C7D-CE7F-4fa0-9FF0-AD21AE2BB06C}" Name="txtLog_WndMaster" RelativePosition="0.5,0.5" StrokeColor="117,63,41" StrokeSize="4" Text="消息列表" Type="WZUILabelTTF" TextKey="MASTERINFO24" />
+                    </CheckElement>
+                    <CheckElement AbsContentSize="120,50" GUID="{D080FAAC-644F-4079-B475-D5A5FAAA63FD}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{52C538FF-67CA-4d59-80CB-F2A7FDFC9215}" Name="txtLog1_WndMaster" RelativePosition="0.5,0.5" StrokeColor="117,63,41" StrokeSize="4" Text="消息列表" Type="WZUILabelTTF" TextKey="MASTERINFO24" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox AbsContentSize="120,50" AnchorPoint="0.5,0.5" GUID="{780a5a98-75ab-4050-9b6a-75e4bb51c8d3}" LuaSelectedFunctionName="onCheck5" Name="checkInfo5_WndEquip" RelativePosition="0.68,0.5" RelativeSize="0.9,1" ScaleX="1" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" Scale="1">
+                    <CheckElement AbsContentSize="120,50" GUID="{b9db0309-e77e-4b5a-95ac-de14895ca28d}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="163,140,122" EnableStroke="True" FontSize="26" GUID="{4ab0cd55-d498-4f85-9480-036e4964545c}" Name="txtLog_WndMaster" RelativePosition="0.5,0.5" StrokeColor="117,63,41" StrokeSize="4" Text="消息列表" Type="WZUILabelTTF" TextKey="COMMUNITY_TARGET" />
+                    </CheckElement>
+                    <CheckElement AbsContentSize="120,50" GUID="{1c29651e-f88c-4283-ae6c-0399811b4444}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{76d0b398-8962-4461-aa0f-499e3938bbc6}" Name="txtLog1_WndMaster" RelativePosition="0.5,0.5" StrokeColor="117,63,41" StrokeSize="4" Text="消息列表" Type="WZUILabelTTF" TextKey="COMMUNITY_TARGET" />
+                    </CheckElement>
+                </CheckBox>
+            </WZUICheckBoxGroup>
+            <WZUIImage Type="WZUIImage" GUID="{5e4ed7e9-86c0-40db-81e5-5990f2ad0c5d}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Color="255,255,255" RelativePosition="0.35,0.779478" Name="hasHonor_WndMaster" Visible="False" />
+            <WZUIImage Type="WZUIImage" GUID="{894ea390-04d6-4b14-8f93-94fa02f1eb5e}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Color="255,255,255" RelativePosition="0.71,0.779478" Name="hasTarget_WndMaster" Visible="False" />
+            <WZUIImage Type="WZUIImage" GUID="{79cfd9fe-a0c3-48d4-8146-bf8cc98aa4a4}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Color="255,255,255" RelativePosition="0.890529,0.779478" Name="hasMessage_WndMaster" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{F6D309D7-7BC9-4f34-9739-6F6D67EFCB66}" Name="conMain" RelativePosition="0.5,0.5" TouchContainerEnable="False" ShowAll="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{0ea78af7-886e-47c4-b14f-f5017e112c35}" Name="conTips" Order="5" TouchEnable="False" TouchSwallow="False" ShowAll="True" />
+    </WZUIWindow>
+</WndMaster>

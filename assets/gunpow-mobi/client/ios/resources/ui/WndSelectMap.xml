@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<WndSelectMap GUID="{E2D01189-F849-470b-97EE-D159ECEC2634}">
+    <WZUIWindow GUID="{6E89D926-19FE-4d9c-AC29-0E4B67303DCE}" LuaObjectName="WndSelectMap" Name="WndSelectMap" NameCreate="True" Type="WZUIWindow">
+        <WZUIContainer AbsContentSize="782,580" GUID="{3ED07E81-4BC2-4986-A6B6-27B26405C17F}" RelativePosition="0.5,0.52" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image CapInsets="86,89,1,1" File="" GUID="{C3A06B67-9EFA-4753-8929-5697EC9189CB}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" />
+            <WZUIContainer AbsContentSize="692,526" GUID="{919525E1-A3D3-409a-98EC-317ECC3135C3}" RelativePosition="0.499999,0.468296" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image CapInsets="0,0,0,0" File="ui/common/bg_12.png" GUID="{AD0A3272-1804-4ce3-B2E8-D4C83B8C208E}" RelativeSize="1,0.85" Type="WZUI9Image" UseOriginSize="False" />
+            </WZUIContainer>
+            <WZUIButton AbsContentSize="90,90" GUID="{83AAEF7A-652C-444c-A16C-992528820962}" LuaDoneFunctionName="onCloseClick" RelativePosition="0.952641,0.943311" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{B76657F0-1383-4fa6-B330-73542A5582DF}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage AnchorPoint="0.5,0.5" File="common/button/close.png" GUID="{1B6FBABF-8E71-49eb-A620-F846D790D4F8}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIImage" UseOriginSize="True" Scale="0.8" />
+                </NormalElement>
+                <SelectElement GUID="{CE2F0BD8-0D73-4a22-AE66-93DBB8D3E93B}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close_sel.png" GUID="{A7C86248-5BE9-4459-BEB6-CD9AA739018C}" Type="WZUIImage" UseOriginSize="True" Scale="0.8" />
+                </SelectElement>
+                <DisableElement GUID="{AEB2FF2C-9668-4cef-98D1-BF002B903D87}" Type="WZUIContainer" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="672,430" GUID="{A180F66F-D46E-46db-8BC7-C40060D0528A}" RelativePosition="0.5,0.491" Type="WZUIContainer" UseAbsSize="True">
+            <WZUITableContainer AbsContentSize="675,430" CellElementHeight="0.3" EnableMoveHorizontal="False" GUID="{A6915670-338C-4cda-B8D3-D907CC43D93C}" Name="tbconMapList_WndSelectMap" RelativePosition="0.5,0.5" Type="WZUITableContainer" UseAbsSize="True" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="672,123" GUID="{E31B3C98-A167-4439-AF01-EBD7DB0E1615}" Name="CellMapList_WndSelectMap" RelativePosition="0.5,0.52" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+            <WZUIContainer AbsContentSize="260,125" GUID="{F3E49C0D-6B41-4e82-B368-38681B912F80}" RelativePosition="0.207429,0.5" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage File="map/map0_bg.png" GUID="{E966C385-3EDB-4935-B43E-7A4E76329FF3}" Name="imgMap_WndSelectMap" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" />
+                <WZUIImage File="common/text/map0.png" GUID="{EF27117D-1112-445b-A8F2-E447561F05C5}" Name="imgMapTitle_WndSelectMap" RelativePosition="0.512669,0.679149" Type="WZUIImage" UseOriginSize="True" />
+                <WZUIContainer GUID="{700B0E74-9FD5-4a04-BD4B-F2B9FA0E695B}" Name="conMapNot_WndSelectMap" Type="WZUIContainer" Visible="False">
+                    <WZUIImage File="ui/hall/room/selectMap/map_not_bg.png" GUID="{08A2262A-9CDF-480d-8029-42F50ECD15BA}" Opacity="200" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" />
+                    <WZUIImage File="ui/main/bossMap/bossmap_map/lock_bg.png" GUID="{762096A6-9924-4b5f-AA51-CBD871A1A186}" RelativePosition="0.51079,0.333735" Scale="0.5" ScaleX="0.5" ScaleY="0.5" Type="WZUIImage" UseOriginSize="True" UseOriginSizeProportion="True" Visible="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="375,123" GUID="{094637B7-0D5B-48cf-A217-F2E570D726E4}" RelativePosition="0.7014,0.5" Scale="1" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage File="common/Jigsaw/item_text_bg.png" GUID="{207AC475-697C-4659-9CB4-31435FF03E13}" Scale="1" Type="WZUIImage" UseOriginSize="False" />
+                <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="0,0,0" Dimensions="310,0" FontSize="24" GUID="{AB8C83F3-398E-4cdc-8CA4-B1FD6D7396C1}" Name="txtMapDesc_WndSelectMap" RelativePosition="0.0597828,0.515568" Text="随机地图,选择后能随机使用当前频道的所有地图." Type="WZUILabelTTF" />
+            </WZUIContainer>
+            <Button AbsContentSize="672,123" GUID="{A52C6E1A-F419-41a9-9F5E-C26F9A313305}" LuaDoneFunctionName="onMapCellClick" Name="btnCell_WndSelectMap" Type="WZUIButton" UseAbsSize="True" Visible="True">
+                <NormalElement GUID="{6B98844B-5307-4eb8-863D-29A23AD33A04}" TouchContainerEnable="True" Type="WZUIContainer" />
+                <SelectElement GUID="{0701CE94-2810-4b18-81B9-18DC1D9C1980}" TouchContainerEnable="True" Type="WZUIContainer" />
+                <DisableElement GUID="{A7755060-3E01-4d47-B4A7-E819B1D65B21}" TouchContainerEnable="True" Type="WZUIContainer" />
+            </Button>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSelectMap>

@@ -1,0 +1,54 @@
+﻿<WndFinalistQualifying GUID="{5192e492-7e77-4107-b8d9-53fee44f618b}">
+    <WZUIWindow Type="WZUIWindow" GUID="{18cd7b76-77f9-4a24-a8a5-e5c0c1e54410}" Name="WndFinalistQualifying" LuaObjectName="WndFinalistQualifying" NameCreate="False" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{a6ec33dd-bc92-4303-b043-67d7ef2eec49}" AbsContentSize="768,530" UseAbsSize="True">
+            <WZUICheckBoxGroup Type="WZUICheckBoxGroup" GUID="{8db58567-668d-4730-b661-b0d664ceff58}" AbsContentSize="102,130" UseAbsSize="True" RelativePosition="1.05052,0.701339" Name="checkboxg_WndFinalistQualifying">
+                <CheckBox Type="WZUICheckBox" GUID="{07480b83-ee0e-4e94-af1f-2732174ea73f}" AbsContentSize="98,65" UseAbsSize="True" RelativePosition="0.5,0.769231" SelectedIndex="1" LuaCheckedFunctionName="onCheck1">
+                    <CheckElement Type="WZUIContainer" GUID="{9cebd7c6-3ea2-4f7c-a2d5-1658a6adb919}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{e8cf6c42-4ae0-434a-9688-a2bcefe5a613}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{019da446-f863-46d3-b267-93bbc48a38d7}" LabelStyleKey="C1_F20_S4_C5" Text="全服排名" Name="txtCheckbox1Nor_WndFinalistQualifying" RelativePosition="0.530612,0.5" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{9737c993-dd6a-4dac-8d11-46052f29e59d}" RelativePosition="0.540816,0.5">
+                        <WZUI9Image Type="WZUI9Image" GUID="{e26204d3-2576-4728-bb67-a1bd76b48c63}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{108a00ff-610d-49e7-9f4c-46b344aae6ba}" LabelStyleKey="C1_F20_S4_C13" Text="全服排名" Name="txtCheckbox1Sel_WndFinalistQualifying" RelativePosition="0.489796,0.5" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{5be500ea-6dda-4303-9e09-3d77658c615b}" AbsContentSize="98,65" UseAbsSize="True" RelativePosition="0.5,0.284615" SelectedIndex="0" LuaCheckedFunctionName="onCheck2">
+                    <CheckElement Type="WZUIContainer" GUID="{bbf8c93f-7d38-40cb-ab02-427f8ed9e878}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{82d88f3e-ceb4-421e-8639-ee8e1341eb00}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{5e90fa67-b4e0-4b8a-991c-288b11a6f0c2}" LabelStyleKey="C1_F20_S4_C5" Text="本服排名" Name="txtCheckbox2Nor_WndFinalistQualifying" RelativePosition="0.540816,0.5" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{8ef3dfdd-c1d5-4a7d-b2b5-b5256713337a}" RelativePosition="0.540816,0.5">
+                        <WZUI9Image Type="WZUI9Image" GUID="{a3e7ca7a-d54d-4fc8-86d5-add3177d1cb4}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6e46f188-84ba-474a-b934-2482efaefe93}" LabelStyleKey="C1_F20_S4_C13" Text="本服排名" Name="txtCheckbox2Sel_WndFinalistQualifying" RelativePosition="0.479592,0.5" />
+                    </CheckElement>
+                </CheckBox>
+            </WZUICheckBoxGroup>
+            <WZUI9Image Type="WZUI9Image" GUID="{5851d00c-5e44-454b-986f-c6dd533f3871}" File="ui/common/common_scale9_di5.png" CapInsets="135,75,1,1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{6815d834-58eb-421a-af80-933881bf9b29}" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.958629,0.940611" Visible="True" Name="conClose_WndFinalistQualifying">
+                <Button Type="WZUIButton" LuaDoneFunctionName="onClose" RelativePosition="0.5,0.5" GUID="{e994143f-bfc0-4c31-822d-ac05247a1257}" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{ba0d052b-8a3b-4f93-bbbf-e48374deb26b}">
+                        <WZUIImage Type="WZUIImage" GUID="{8af2b432-3f40-49f4-b3d2-26ab1932703c}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" Scale="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{c6200c1c-0c3e-4117-8751-1be83c779146}">
+                        <WZUIImage Type="WZUIImage" GUID="{0b5c3f1c-d3ee-4d8b-8f6b-30888f466374}" File="ui/common/common_icon_guanbi.png" Scale="1" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{78f44f51-de2c-4189-8c41-aad7b4b80fe3}" />
+                </Button>
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{969a474c-9f82-4fa4-8147-41c5e2d62f79}" TextKey="COMMUNITYWAR_TEXT6" LabelStyleKey="C1_F26_S4_C13" RelativePosition="0.5,0.936016" Name="txtTitle_WndFinalistQualifying" />
+            <WZUIContainer Type="WZUIContainer" GUID="{b3e44fb2-a701-434d-91cc-2b32cdc327f6}" AbsContentSize="756,435" UseAbsSize="True" RelativePosition="0.5,0.481133">
+                <WZUI9Image Type="WZUI9Image" GUID="{9d578f49-da98-4807-b75b-19a0010304a5}" File="ui/common/common_scale9_di6.png" Opacity="102" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b98817dd-8e6e-411b-8085-488c00b7f7b0}" LabelStyleKey="C7_F18" Text="" RelativePosition="0.5,-0.0360282" Name="txtButtom_WndFinalistQualifying" />
+                <WZUIContainer Type="WZUIContainer" GUID="{48497fbb-1360-4bb7-8ee9-6a0337a46b4d}" AbsContentSize="755,374" UseAbsSize="True" RelativePosition="0.5,0.46092" Name="conTable_WndFinalistQualifying">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{36fd0926-2db3-42f3-91ad-00a4d5cf6cd9}" Name="tabList_WndFinalistQualifying" EnableVerticalScroll="True" EnableMoveHorizontal="False" CellElementHeight="0.3" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{a56118ca-4795-40c2-b90b-7b5ee134e6c5}" AbsContentSize="750,50" UseAbsSize="True" RelativePosition="0.5,0.835889">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e54f0f6d-3216-4ff6-97e9-370132ea9904}" LabelStyleKey="C11_F20" TextKey="RANK" RelativePosition="0.082279,0.59078" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{2ebc04c0-5d7f-4192-8bd6-8bb713b136f5}" LabelStyleKey="C11_F20" TextKey="" RelativePosition="0.328946,0.59078" Name="txtT_WndFinalistQualifying" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6cb677d0-b11e-4992-b335-e24acedc4d45}" LabelStyleKey="C11_F20" TextKey="INTEGRATION" RelativePosition="0.572945,0.59078" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0910c53e-97d5-40c3-951d-291a1de5c152}" LabelStyleKey="C11_F20" TextKey="WIN_RATE" RelativePosition="0.811611,0.59078" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndFinalistQualifying>

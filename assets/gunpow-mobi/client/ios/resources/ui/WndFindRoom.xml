@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<WndFindRoom GUID="{AC9B609C-F052-4f5d-A075-9DA4DF56D1D8}">
+    <WZUIWindow AbsContentSize="" GUID="{1B189513-601C-4a46-96A6-39FC9A7A222F}" LuaObjectName="WndFindRoom" Name="WndFindRoom" NameCreate="True" Type="WZUIWindow" UseAbsSize="False" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{7BC68A9A-6572-4b29-B6A6-C1A0061CCD5F}" AbsContentSize="384,319" UseAbsSize="True" RelativePosition="0.492708,0.53125">
+            <WZUI9Image Type="WZUI9Image" GUID="{1B66176F-19EF-4bca-A3A1-3EDA5EE0D249}" File="ui/common/common_scale9_di19.png" Opacity="255" CapInsets="100,70,1,1" RelativePosition="0.5,0.5" />
+            <WZUI9Image Type="WZUI9Image" GUID="{9CB45CCE-382E-44de-B388-554736C1D18B}" File="ui/common/common_scale9_di20.png" RelativeSize="0.98,0.51" AbsPosition="" UseOriginSize="False" RelativePosition="0.5,0.556425" />
+            <WZUIContainer Type="WZUIContainer" GUID="{294903C5-92D0-48c6-A36A-4FA79AB23BCA}" RelativeSize="1,0.1" RelativePosition="0.5,0.882912">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{427227BD-CDDD-47c4-9D02-22DAED4C5B76}" Name="" NameCreate="True" FontSize="24" BoldFont="True" Text="" RelativePosition="0.507813,0.5" Color="255,236,193" StrokeColor="132,66,29" StrokeSize="4" EnableStroke="True" LabelStyleKey="SMALL_WINDOW_TITLE" TextKey="FIND_ROOM" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{4F0DBE79-A3AB-43af-8F32-3A37C2204144}" RelativeSize="1,0.4" RelativePosition="0.5,0.54114">
+                <WZUIContainer Type="WZUIContainer" GUID="{A9B3A009-90A7-4115-B3C3-A2F520C958B1}" RelativeSize="1,0.5" RelativePosition="0.5,0.75">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{2CAC954A-821D-471c-9370-A7322CED442A}" Alignment="Right" AnchorPoint="1,0.5" FontSize="22" Color="62,34,8" Text="" RelativePosition="0.342106,0.5" Name="txtRoomId_WndFindRoom" NameCreate="True" BoldFont="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{9E8AB0DB-009E-4a34-A48D-9253EEE7FCDE}" AbsContentSize="197,34" UseAbsSize="True" RelativePosition="0.617187,0.5">
+                        <WZUI9Image Type="WZUI9Image" GUID="{65277557-FF38-43cb-90F5-47D09CDD38A9}" File="ui/common/common_scale9_di10.png" />
+                        <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Color="0,0,0" FontColor="255,255,255" FontSize="20" GUID="{98310692-E731-465f-8916-FE465C058EF6}" InputMode="ModeSingleLine" KeyBordReturnType="TypeDone" LuaEditBoxTextChanged="onChangeEdit" MaxLength="16" Name="editRoomId_WndFindRoom" Order="0" PlaceHolder="" PlaceholderFontColor="195,171,148" RelativePosition="0.5,0.5" RelativeSize="0.9,1" Text="" Type="WZUIEditBox" UseOriginSize="False" TextFieldPadding="" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" Dimensions="100,25" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{CB1858E3-9A9C-47cb-A81F-164ED7FBD57C}" RelativeSize="1,0.5" RelativePosition="0.5,0.25">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{59041650-321A-48e4-AED7-81A3DCBFB5D7}" Alignment="Right" AnchorPoint="1,0.5" FontSize="22" Color="62,34,8" Text="" RelativePosition="0.342106,0.5" Name="txtRoomPass_WndFindRoom" NameCreate="True" BoldFont="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{86293987-7692-43b4-ACAD-99AA8656D4D0}" AbsContentSize="197,34" UseAbsSize="True" RelativePosition="0.617187,0.5">
+                        <WZUI9Image Type="WZUI9Image" GUID="{8D18A18F-2553-43e5-BFE8-1084E59C07F0}" File="ui/common/common_scale9_di10.png" />
+                        <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Color="100,76,58" FontColor="100,76,58" FontSize="20" GUID="{FF45735D-989E-41c0-A1E0-99C55AAAC485}" InputMode="ModeSingleLine" KeyBordReturnType="TypeDone" LuaEditBoxTextChanged="onChangePasswordEdit" MaxLength="16" Name="editPassword_WndFindRoom" Order="0" PlaceHolder="" PlaceholderFontColor="195,171,148" RelativePosition="0.5,0.481132" RelativeSize="0.9,1" Text="大家来玩吧！" Type="WZUIEditBox" UseOriginSize="False" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{AF9C5BEB-63DC-439c-8C2C-05D0B1547C32}" RelativeSize="1,0.3" RelativePosition="0.5,0.155172">
+                <Button Type="WZUIButton" RelativeSize="0.33,1" RelativePosition="0.25,0.5" LuaDoneFunctionName="onCloseWindowBtn" GUID="{1F3623EB-6328-4561-BDDB-360C9E99F050}" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{764FDF77-2786-4655-8D54-5452B2604A09}">
+                        <WZUIImage Type="WZUIImage" GUID="{E821196E-77E4-4830-B30B-21C0B6978F5F}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{89865FD2-0FAA-49c6-BB47-08BEE8DAA6E3}">
+                        <WZUIImage Type="WZUIImage" GUID="{7CB4B90C-F264-43e6-8F9F-6A4A6A1A9385}" File="ui/common/common_btn_anniu3_0_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{492CD44A-2E73-4aa0-9614-A494E97DDFCD}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{3B278F7A-4DFC-45f4-9E76-E5D8F05888A4}" Name="" NameCreate="True" BoldFont="True" Color="255,236,193" FontSize="26" StrokeColor="132,66,29" EnableStroke="True" StrokeSize="4" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="CANCEL" />
+                </Button>
+                <WZUIButton Type="WZUIButton" RelativeSize="0.33,1" RelativePosition="0.75,0.5" GUID="{7F2A9DE8-447A-4b47-83E7-B175C8B01562}" LuaDoneFunctionName="onFindRoomBtn" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{CF800A5D-EA58-4fa6-9F25-5DCAA735271E}">
+                        <WZUIImage Type="WZUIImage" GUID="{BFFD249F-08F0-4f5c-9B3D-A30C536A3C71}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{0D102A49-3984-4899-86FF-0FB89C5B5B40}">
+                        <WZUIImage Type="WZUIImage" GUID="{F9709092-D798-4ae1-9882-CDDE29452F6C}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{DE431A2E-490C-4114-807B-6D83932965C6}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{CCFEF88C-146A-4b18-8B75-CCDE9FF7C8D2}" Name="txtConfirm_WndFindRoom" NameCreate="True" BoldFont="True" Color="255,236,193" FontSize="26" EnableStroke="True" StrokeColor="0,72,3" StrokeSize="4" LabelStyleKey="" TextKey="CONFIRM" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndFindRoom>

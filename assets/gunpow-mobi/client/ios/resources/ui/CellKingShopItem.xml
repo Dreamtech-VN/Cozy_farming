@@ -1,0 +1,22 @@
+<CellKingShopItem GUID="{771d35f2-d610-48ef-a099-4eccee91da1f}">
+    <WZUIFrame Type="WZUIFrame" GUID="{2b73521e-eee9-4871-97cc-c58fab4e0a59}">
+        <CellElement Type="WZUIContainer" UseAbsSize="True" AbsContentSize="190,185" Tag="0" Name="CellKingShopItem" NameCreate="True" GUID="{8638d5cb-769c-4cf3-ad85-fa2aa9aec9e6}">
+            <WZUI9Image Type="WZUI9Image" File="ui/kingBattle/332.png" GUID="{7fb513a2-5578-484d-84ef-242c7bcf3aae}" />
+            <WZUIContainer Type="WZUIContainer" AbsContentSize="82,82" UseAbsSize="True" RelativePosition="0.5,0.65" Name="conItem_CellKingShopItem" GUID="{51fc4e49-9de7-4954-bc35-66f608fbc9cf}" />
+            <WZUIContainer Type="WZUIContainer" UseAbsSize="True" AbsContentSize="160,33" RelativePosition="0.5,0.2" AnchorPoint="0.5,0.5" GUID="{8aa34cdf-644f-4430-8c80-d58b8d689664}">
+                <WZUIImage Type="WZUIImage" File="ui/kingBattle/333.png" Name="" GUID="{d78df458-0965-42dd-be52-5a824858eb8a}" />
+                <WZUIImage Type="WZUIImage" File="" UseOriginSize="True" UseOriginSizeProportion="False" RelativePosition="0.04,0.5" Name="imgCurrency_CellKingShopItem" GUID="{0c743432-1ca7-4ed3-949d-693e2c258c9e}" TouchEnable="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{f80e60a5-543d-4d1e-ba37-a61c8b9496ac}" Text="" FontSize="20" Color="255,238,144" AnchorPoint="0,0.5" RelativePosition="0.26,0.5" Name="txtCurrency_CellKingShopItem" TouchEnable="False" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{7b320c35-edce-4c34-bd76-44edb08b0b77}" LuaDoneFunctionName="onClickCell">
+                <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{8dd79f98-ad77-464a-b1a7-f65c22cef165}" />
+                <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{3d0e1e67-aade-4457-919a-de9e2a31c7c9}" />
+                <DisableElement Type="WZUIContainer" GUID="{d7ab4ec0-fd36-4f62-86ab-0a41d6c75153}" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{010e3be6-5a2c-40ae-bd05-1d093cda5b0d}" Name="conSoldOut_CellKingShopItem" Visible="False">
+                <WZUIImage Type="WZUIImage" File="ui/common/common_black_bg.png" Opacity="100" GUID="{19316a18-bad3-468c-a548-3ceb881959ef}" />
+                <WZUIImage Type="WZUIImage" File="ui/kingBattle/331.png" UseOriginSize="True" RelativePosition="0.5,0.62" GUID="{2a3ab5de-f24d-48a1-b4cd-cfea7ddd62fe}" Rotation="0" Scale="1" />
+            </WZUIContainer>
+        </CellElement>
+    </WZUIFrame>
+</CellKingShopItem>

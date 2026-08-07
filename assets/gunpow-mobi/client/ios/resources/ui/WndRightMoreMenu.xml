@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?><WndRightMoreMenu GUID="{11E066E5-E8F9-4838-B273-9A5DDAA11798}">
+    <WZUIWindow AbsContentSize="450,210" AbsPosition="580,320" GUID="{9D5EA4F4-0CAC-4585-AAE0-8CD0C889BA07}" LuaObjectName="WndRightMoreMenu" Name="WndRightMoreMenu" NameCreate="True" RelativePosition="0.65,0.40" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True">
+        <WZUIContainer GUID="{B5BF533C-46A1-447a-BE0F-9326A95F2FDB}" Name="conWndRightMenu_WndRightMoreMenu" RelativePosition="1,0.5" Type="WZUIContainer">
+            <WZUIContainer AbsContentSize="400,220" GUID="{9FD7915D-32DB-4867-B81A-BB03ABE9CC16}" Type="WZUIContainer" UseAbsSize="False">
+                <WZUI9Image CapInsets="40,20,60,20" File="ui/island/island_00.png" FlipX="False" FlipY="False" GUID="{1F282A8F-E251-4155-AAF8-B8331ADC1AA3}" Name="imgBack_WndRightMoreMenu" Rotation="0" ScaleY="1" Type="WZUI9Image" UseOriginSize="False"/>
+            </WZUIContainer>
+            <WZUITableContainer AbsPosition="0.5,0.5" AnchorPoint="0,0.5" CellElementHeight="0.47" ColumnCount="4" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableMoveoutContainer="False" EnableVerticalScroll="False" GUID="{1D88C0C5-0730-4afd-9626-2CAD39029C9E}" HorizontalInterval="0" IsVerticalMode="True" Name="tbconBtn_WndRightMoreMenu" RelativePosition="0.02,0.5" RelativeSize="0.93,0.95" TouchContainerEnable="False" Type="WZUITableContainer" UseAbsCoordinate="False" VerticalInterval="0.01"/>
+            <WZUIContainer AbsContentSize="108,106" GUID="{31845C13-F9C4-4662-89AF-D515350CCE7B}" Name="conBtn_WndRightMoreMenu" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                <WZUIButton AbsContentSize="108,106" GUID="{4E980860-6EEF-440b-BA04-32C611F1AE06}" LuaDoneFunctionName="" Name="btnBtn_WndRightMoreMenu" Type="WZUIButton" UseAbsSize="True" Visible="True">
+                    <NormalElement GUID="{35AB802B-B6E1-4ec8-A3DE-682E5743B7AE}" Type="WZUIContainer">
+                        <WZUIImage File="ui/island/icon_packs.png" GUID="{8AF1F2A3-E231-4b6e-83DB-9FFD0827185C}" Name="imgIconNormal_WndRightMoreMenu" Type="WZUIImage" UseOriginSize="True"/>
+                        <WZUIImage File="common/text/icon_redemption1.png" GUID="{BD1B2789-9A4D-44dc-82EB-1635740CF4C0}" Name="imgTextNormal_WndRightMoreMenu" RelativePosition="0.5,0.2" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{79705542-8D6C-4946-B8FF-C4C9EB272498}" Name="btnSel_WndRightMoreMenu" Scale="1.05" Type="WZUIContainer">
+                        <WZUIImage File="ui/island/island_shine.png" GUID="{C73AF9A7-CE88-428a-B744-24B420E7920E}" Name="imgBtnHight_WndRightMoreMenu" Scale="1.2" Type="WZUIImage" UseOriginSize="False" Visible="True"/>
+                        <WZUIImage File="" GUID="{D0F7E610-F8D3-4249-BEB7-BB744CBF5BE4}" Name="imgIconSel_WndRightMoreMenu" Type="WZUIImage" UseOriginSize="True"/>
+                        <WZUIImage File="" GUID="{D4F0CBB2-77D5-4a51-8794-874B1A74927A}" Name="imgTextSel_WndRightMoreMenu" RelativePosition="0.5,0.22" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{AB3CDB89-61D1-41d1-A6B9-6462F33F43BD}" Type="WZUIContainer">
+                        <WZUIImage GUID="{09D0EF11-332F-4233-84AD-F6A827AA5100}" Type="WZUIImage"/>
+                        <WZUIImage GUID="{C9FA5E4F-0393-4f7c-805E-E2CA643321B6}" Type="WZUIImage"/>
+                    </DisableElement>
+                </WZUIButton>
+            </WZUIContainer>
+            <Action Duration="0.1" GUID="{2962545D-F2A3-4e95-BFF0-CEA5DC176F5E}" MoveX="0.51" MoveY="0.5" Type="WZUIActionMoveTo"/>
+        </WZUIContainer>
+        <WZUIContainer GUID="{EAE211FE-9877-45de-9D7C-F4087B1AE5BB}" Name="conAnimation" Type="WZUIContainer" Visible="False">
+            <WZUIImage File="common/animation/icon_world_boss_light.png" GUID="{3B5EB2B9-0745-4b11-A10B-1B97CEA172AB}" Name="imgCircleAni" TouchEnable="False" Type="WZUIImage" UseOriginSize="True">
+                <Action Angle="-360" Duration="1" GUID="{67FE65F5-F201-460e-93CF-6A59068AFA5D}" IsLoop="True" Type="WZUIActionRotateBy"/>
+            </WZUIImage>
+            <WZUIImage File="common/animation/icon_achievement_an.png" GUID="{46115DEB-5739-4dfa-BC78-06BB9AC47EBE}" Name="imgHighlightAni" Opacity="50" Type="WZUIImage" UseOriginSize="True">
+                <Action GUID="{F6AA7169-4AE3-4d2e-AFDB-E664928C94E9}" IsLoop="True" Type="WZUIActionSequence">
+                    <ChildAction Duration="0.4" GUID="{08BD4A85-409D-486b-9C6A-74E6439BCE67}" Type="WZUIActionFadeTo"/>
+                    <ChildAction Duration="0.4" GUID="{6F3C756A-273F-46a7-9202-F3DF7624ED24}" Opacity="50" Type="WZUIActionFadeTo"/>
+                </Action>
+            </WZUIImage>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="430,210" GUID="{87506932-EB3D-44b0-AC77-52332A13C054}" Name="conBg_WndRightMoreMenu" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True"/>
+    </WZUIWindow>
+</WndRightMoreMenu>

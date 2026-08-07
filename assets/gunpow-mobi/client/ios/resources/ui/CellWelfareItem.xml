@@ -1,0 +1,20 @@
+<CellWelfareItem GUID="{209a25d2-6844-4591-b40d-a3356cbd8027}">
+    <WZUIContainer AbsContentSize="222,80" GUID="{ca4f1ef6-bd16-4f6a-8627-dcbc717868f9}" LuaObjectName="" Name="CellWelfareItem" NameCreate="True" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True" ShowAll="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{bdfdd716-52b4-41ac-8077-da8bb2645aa7}" Name="conTop_CellWelfareItem">
+            <Button AbsContentSize="212,70" GUID="{c4f2ac2f-b690-43b0-8d47-5cf234c62eeb}" LuaDoneFunctionName="onClickCellItem" Type="WZUIButton" UseAbsSize="True" Name="btnLeft_CellWelfareItem">
+                <NormalElement GUID="{28a3984f-8b64-4675-b634-569966ed9612}" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_btn_anniu16.png" GUID="{256f9c09-d588-48bd-b918-3bc3ba3c573d}" Type="WZUIImage" />
+                </NormalElement>
+                <SelectElement GUID="{7bee327e-b0b9-477c-9bbc-c378047f7cef}" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_btn_anniu20.png" GUID="{2943f1da-c67a-4519-9012-851f9471f04d}" Type="WZUIImage" />
+                </SelectElement>
+                <DisableElement GUID="{55337e3f-22e5-4365-a8ce-4192e8db2ef2}" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_btn_anniu16.png" GUID="{13dd01bd-0eb2-4639-8776-433fdb09d331}" Type="WZUIImage" />
+                </DisableElement>
+                <WZUIImage File="ui/common/common_btn_anniu20.png" GUID="{81894d82-ec83-4165-a8d4-04a251c044fe}" Name="img_itemState" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="False" AbsPosition="180.575,40.7994" Scale="1" ScaleX="1" ScaleY="1" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a6acdd22-4fae-4232-8782-883048fe2b4f}" Text="label" FontSize="26" Color="255,236,193" Name="txtItemName_CellWelfareItem" StrokeColor="128,54,33" StrokeSize="4" Tag="2" EnableStroke="True" RelativePosition="0.5,0.485714" />
+                <WZUIImage File="ui/common/common_icon_xiaodianzhui.png" GUID="{f8328b34-acbb-4494-9fd6-d6d25e7eef46}" Name="imgRedDot_CellWelfareItem" RelativePosition="0.95,0.9" Type="WZUIImage" UseOriginSize="True" AbsPosition="180.575,40.7994" Scale="1" ScaleX="1" ScaleY="1" Visible="False" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellWelfareItem>

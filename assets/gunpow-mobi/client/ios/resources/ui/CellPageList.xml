@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CelPageList GUID="{611AE987-0598-43fa-865D-30DEB9FA5ECF}">
+    <WZUIContainer AbsContentSize="700,100" GUID="{07E29469-8C96-42f1-B378-466F51306777}" LuaObjectName="CellPageList" Name="CellPageList" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <Button AbsContentSize="" GUID="{76D52A59-1932-48e4-A94A-190B6AB19B4A}" LuaDoneFunctionName="onClickBtnPageList" Name="btnClickPageList_CellPageList" Type="WZUIButton" UseAbsSize="False">
+            <NormalElement GUID="{A505C2FE-B01B-4485-AA56-844D6F7B1A2F}" Type="WZUIContainer" UseAbsSize="False">
+                <WZUIImage File="ui/bottomMenu/friend/friend_item_online.png" GUID="{2AFD42D2-1C45-4f12-A1A4-D462789C8CE6}" Type="WZUIImage" UseOriginSize="False" />
+            </NormalElement>
+            <SelectElement GUID="{47CE1822-DE6C-4487-8BB9-204BC42F7F61}" Type="WZUIContainer">
+                <WZUIImage File="ui/bottomMenu/friend/friend_item_online.png" GUID="{F404FE8E-B3D8-4c5a-99C4-2A1C043B9A54}" Type="WZUIImage" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement GUID="{5BA8075F-064D-4471-97D2-14FFCC2E322D}" Type="WZUIContainer" />
+        </Button>
+        <WZUILabelTTF Color="85,34,0" FontSize="30" GUID="{C2D15ED8-7A94-437d-B74A-DCEF6F20F976}" Name="txtFrontOrNextPage_CellPageList" Text="上一页" Type="WZUILabelTTF" />
+    </WZUIContainer>
+</CelPageList>

@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<WndMarryTimeSelect GUID="{2A70ED8F-1CFD-44df-865A-7832AC70AA0D}">
+    <WZUIWindow Type="WZUIWindow" GUID="{A7A5E161-D418-432f-A454-20477D71E78F}" AbsContentSize="530,500" UseAbsSize="True" NameCreate="True" Name="WndMarryTimeSelect" LuaObjectName="WndMarryTimeSelect" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{6F395F6F-90B8-4953-9F30-FA30B66CE3F7}" TouchSwallow="False">
+            <WZUI9Image File="ui/common/common_scale9_di19.png" GUID="{F0B7A937-3466-403f-AE39-0B47D7DC8527}" Type="WZUI9Image" CapInsets="86,89,1,1" />
+            <WZUIButton AbsContentSize="90,80" AnchorPoint="0.5,1" GUID="{28C36144-9DD7-4517-AC10-12E1F8A56CC3}" LuaDoneFunctionName="onCloseClick" Name="btnClose_WndMarryTimeSelect" RelativePosition="0.92957,1.01525" Type="WZUIButton" UseAbsSize="True" TouchEnable="True" LuaActionName="Normal">
+                <NormalElement GUID="{865C9CF7-30B0-41d0-B5BF-6E6F53C8F65D}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{0268550A-A8A6-434d-B2E8-6CF7E9D6C757}" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </NormalElement>
+                <SelectElement GUID="{1BF075A9-7A2A-48b6-8564-15B8F1BCF12E}" TouchContainerEnable="True" Type="WZUIContainer" Scale="1.3">
+                    <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{84817C19-1CDB-4a96-B3F3-3590CABAF71C}" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement GUID="{F19BECA2-11BB-48b3-9320-7D69F54AA571}" Type="WZUIContainer" Scale="1" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{8D700F44-E8CB-4bad-9DA2-72D1876E902B}" AbsContentSize="160,48" UseAbsSize="True" RelativePosition="0.5,0.931619">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{C79CA226-36A1-4c12-901A-CA536727E18F}" FontSize="26" Color="255,236,193" Text="举办婚礼" BoldFont="False" EnableShadow="False" EnableStroke="True" StrokeColor="128,54,13" Name="txtTitle_WndMarryTimeSelect" RelativePosition="0.5,0.5" StrokeSize="4" TextKey="WEDDING" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="130,66" GUID="{65F34317-841F-46a7-83B0-F1D328913CF5}" Name="" RelativePosition="0.5,0.098763" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button GUID="{64598C56-2381-49f0-AAAA-9193BC94E955}" LuaDoneFunctionName="onSureClick" Type="WZUIButton" Visible="True" LuaActionName="Normal">
+                    <NormalElement GUID="{DBA1DD29-12C2-4b95-B9F2-2188EBF8695D}" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{405AA177-68B3-4b2d-BBBA-C83A6F146932}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{B2E57E74-39C2-4167-A249-509B2B6541EE}" Type="WZUIContainer" Scale="1">
+                        <WZUI9Image File="ui/common/common_btn_anniu10_0_sel.png" GUID="{2B37FDB9-11A4-4c89-8AF5-60298588E491}" Type="WZUI9Image" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{7F53EA53-51F3-4a6d-9CE9-8EDC9D5B19D8}" Type="WZUIContainer" />
+                    <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{7A3451FC-AB49-49b4-824A-BC822E792C04}" Name="txtBtnSure_WndMarryTimeSelect" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,72,3" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" TextKey="CONFIRM" RelativePosition="0.5,0.483871" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{09CF67D9-E42D-45cc-AF20-047B5F74412D}" AbsContentSize="516,348" UseAbsSize="True" RelativePosition="0.5,0.534481">
+                <WZUI9Image Type="WZUI9Image" GUID="{D5307247-08C6-48eb-B55B-FF895D66E449}" File="ui/common/common_scale9_di20.png" RelativePosition="0.5,0.5" />
+                <WZUICheckBoxGroup Type="WZUICheckBoxGroup" GUID="{8687B319-67F0-43ba-8575-6B96CA56874C}">
+                    <CheckBox Type="WZUICheckBox" GUID="{57E16EA6-5E5E-4d1c-9EDE-D79288285DF9}" SelectedIndex="1" RelativeSize="0.92,0.22" RelativePosition="0.5,0.753843" Name="checkTime1_WndMarryTimeSelect" LuaSelectedFunctionName="checkTime1">
+                        <CheckElement Type="WZUIContainer" GUID="{4BDEAEF8-6974-41a1-B0E9-3B738DEE649C}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{1A169D97-3A52-4bf7-8207-381495C39A89}" File="ui/common/common_scale9_di7.png" Visible="True" CapInsets="0,0,0,0" />
+                            <WZUIImage Type="WZUIImage" GUID="{63D2C275-CE6B-402e-B61D-AEAA4F166B3F}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" RelativePosition="0.899484,0.5" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{4C0EE1CB-D9DD-427d-A166-0687E09DD803}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{599E10F3-A123-45da-890D-E0304067CE66}" File="ui/common/common_scale9_di7.png" CapInsets="0,0,0,0" />
+                            <WZUIImage Type="WZUIImage" GUID="{4974C0CC-F606-4e4f-879B-F696434D01DB}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" RelativePosition="0.899484,0.5" Scale="1.2" />
+                            <WZUIImage Type="WZUIImage" GUID="{3636AE6C-F1D2-4f6a-A48A-881D9C29DE61}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.899484,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{DD30C809-4E8C-43e3-B6B1-906A354823A6}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.903282,0.5" Scale="1.1" />
+                        </CheckElement>
+                    </CheckBox>
+                    <CheckBox Type="WZUICheckBox" GUID="{BB11DC80-5F6E-4bda-9BBB-5810398A40C2}" Name="checkTime2_WndMarryTimeSelect" LuaSelectedFunctionName="checkTime2" RelativeSize="0.92,0.22" RelativePosition="0.5,0.503652" SelectedIndex="0">
+                        <CheckElement Type="WZUIContainer" GUID="{A3423239-8F65-48aa-9D73-7FB8B66E9F7A}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{43A7C52B-ED67-4e9c-832D-6C821AF46794}" File="ui/common/common_scale9_di7.png" />
+                            <WZUIImage Type="WZUIImage" GUID="{700EA87D-A076-44ac-95E7-CD1FB30318C5}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" RelativePosition="0.899484,0.5" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{D7B13906-A1C9-4a0f-A540-3919AFD2A35C}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{4763508B-937C-4235-AA3A-2FA67BC0D60E}" File="ui/common/common_scale9_di7.png" CapInsets="28,28,1,1" />
+                            <WZUIImage Type="WZUIImage" GUID="{E61E922B-6523-436c-847C-9BB658114CE7}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" RelativePosition="0.899484,0.5" Scale="1.2" />
+                            <WZUIImage Type="WZUIImage" GUID="{B5130337-149B-499b-929A-063963F3BCBB}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.899484,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{E4E58C4E-59E9-40c3-8D7B-6BE3DF88DDDA}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.903282,0.5" Scale="1.1" />
+                        </CheckElement>
+                    </CheckBox>
+                    <CheckBox Type="WZUICheckBox" GUID="{C71CE4EC-CD7D-4a28-BCF9-66CFA1EE1FA4}" Name="checkTime3_WndMarryTimeSelect" LuaSelectedFunctionName="checkTime3" RelativeSize="0.92,0.22" RelativePosition="0.5,0.250845" SelectedIndex="0">
+                        <CheckElement Type="WZUIContainer" GUID="{3D57BF50-42DA-4579-BD15-39EDA0836498}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{4ED7B356-942C-4b76-8C00-360794195045}" File="ui/common/common_scale9_di7.png" />
+                            <WZUIImage Type="WZUIImage" GUID="{2C059510-91A0-4136-880B-237B14343711}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" RelativePosition="0.899484,0.5" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{1305AE31-EB41-400b-8672-75F6FEBD75E7}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{4B3494B9-F7BC-402e-AD79-37C97D1B61A2}" File="ui/common/common_scale9_di7.png" CapInsets="28,28,1,1" />
+                            <WZUIImage Type="WZUIImage" GUID="{2A4473DB-B33E-45fb-AB1E-8EF24F9370EA}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" RelativePosition="0.899484,0.5" Scale="1.2" />
+                            <WZUIImage Type="WZUIImage" GUID="{B832CC88-FAF7-4ee9-BB38-8B503A9D4278}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.899484,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{217BF59F-105D-4816-BD42-F450CEFDE05D}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.903282,0.5" Scale="1.1" />
+                        </CheckElement>
+                    </CheckBox>
+                </WZUICheckBoxGroup>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8014EC3C-C51A-47b7-A39C-C2474B1AA95D}" FontSize="28" Color="62,34,8" Text="18:00-19:00" BoldFont="False" EnableShadow="False" EnableStroke="False" StrokeColor="60,19,12" Name="txtWeddingTime1_WndMarryWedding" RelativePosition="0.342688,0.746878" AnchorPoint="0,0.5" LabelStyleKey="C13_F26" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{C3F65330-365A-4ae5-87AB-1E45CB6DAD46}" FontSize="28" Color="62,34,8" Text="19:00-20:00" BoldFont="True" EnableShadow="False" EnableStroke="True" StrokeColor="60,19,12" Name="txtWeddingTime2_WndMarryWedding" RelativePosition="0.342688,0.492094" AnchorPoint="0,0.5" LabelStyleKey="C13_F26" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ACCACA90-F53D-4a5c-A8FC-E8AD196DFD22}" FontSize="28" Color="62,34,8" Text="20:00-21:00" BoldFont="False" EnableShadow="False" EnableStroke="False" StrokeColor="60,19,12" Name="txtWeddingTime3_WndMarryWedding" RelativePosition="0.342688,0.245" AnchorPoint="0,0.5" LabelStyleKey="C13_F26" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{D6DC69E2-80F8-41dc-984B-E443ED686252}" FontSize="24" Color="127,70,26" Text="请选择你想举办的婚礼时间:" BoldFont="False" EnableShadow="False" EnableStroke="False" StrokeColor="0,0,0" Name="txtWeddingExplain_WndMarryWedding" RelativePosition="0.5,0.930509" AnchorPoint="0.50.5" TextKey="WEDDING_HOLD_TIME" LabelStyleKey="" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3EA07D84-A651-45bf-BF53-23D989C8C561}" FontSize="18" Color="138,122,106" Text="" BoldFont="True" EnableShadow="False" EnableStroke="True" StrokeColor="60,19,12" Name="txtWeddingExplain2_WndMarryWedding" RelativePosition="0.501049,0.0716249" AnchorPoint="0.5,0.5" TextKey="WEDDING_HOLE_TIPS" LabelStyleKey="" Dimensions="500,0" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndMarryTimeSelect>

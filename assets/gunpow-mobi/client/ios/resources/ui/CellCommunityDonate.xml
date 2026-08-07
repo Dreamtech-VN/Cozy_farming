@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<CellCommunityDonate GUID="{07FCBE31-6835-489d-98A4-401AE72A515D}">
+	<WZUIContainer AbsContentSize="465,62" GUID="{85E8A265-8363-42d4-9EDE-5C3E0F53D7B4}" LuaObjectName="" Name="CellCommunityDonate" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.498437" AbsPosition="480,319">
+		<WZUIContainer Type="WZUIContainer" GUID="{258FDA5D-4111-4617-896B-B65AFEF48CC2}" AbsContentSize="465,62">
+			<WZUI9Image Type="WZUI9Image" GUID="{5E968482-F843-4f42-ABB1-67A048C352F6}" File="ui/common/common_scale9_di7.png" />
+		</WZUIContainer>
+		<WZUICheckBox AbsContentSize="" AnchorPoint="0,0.5" GUID="{2C5DC7AA-B2B6-4f52-A058-2742CFDF4218}" LuaSelectedFunctionName="onSelCheckBox" RelativePosition="0,0.5" SelectedIndex="0" Tag="1" Type="WZUICheckBox" UseAbsSize="False" RelativeSize="1,1" Name="checkBoxSel_CellCommunityDonate">
+			<CheckElement GUID="{EC912B27-B6C4-40bc-A89F-2C229811CA41}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+				<WZUI9Image Type="WZUI9Image" GUID="{86702920-4C6D-4c8d-9E54-5D97856E8662}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="0.7" RelativePosition="0.1,0.5" />
+			</CheckElement>
+			<CheckElement GUID="{F8E746F7-08EC-4895-90B8-C3C874A58302}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+				<WZUI9Image Type="WZUI9Image" GUID="{F66A8045-6ECA-4300-9256-2DDD6D54D099}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="0.7" RelativePosition="0.1,0.5" />
+				<WZUI9Image Type="WZUI9Image" GUID="{C05C5964-0103-4323-9996-E5BF526797F0}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.3" RelativePosition="0.1,0.5" />
+				<WZUIImage Type="WZUIImage" GUID="{8AFF9C26-8E37-41f6-AC40-828669E85E85}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.1,0.55" AbsPosition="47.4518,33.542" />
+			</CheckElement>
+		</WZUICheckBox>
+		<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{0A6F8EC8-790B-4bd0-8F2A-9C0C82E0C74B}" Name="txtName_CellCommunityDonate" AnchorPoint="0,0.5" RelativePosition="0.19,0.5" MaxWidth="400" />
+	</WZUIContainer>
+</CellCommunityDonate>

@@ -1,0 +1,94 @@
+<WndChoosePet GUID="{5dda8eda-612b-4c72-8b38-1b3df30593b9}">
+    <WZUIWindow AbsContentSize="495,560" GUID="{99eab2f7-3278-45eb-86e6-e4495d3ccaa5}" LuaObjectName="WndChoosePet" Name="WndChoosePet" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{8ae1b65d-fe21-4f20-a2ad-50720b0dbf0d}">
+            <WZUI9Image Type="WZUI9Image" GUID="{026c423c-9a95-401b-bb9c-d30ae1d9f903}" File="ui/common/common_scale9_di19.png" Visible="True" CapInsets="60,110,10,10" />
+            <WZUIContainer Type="WZUIContainer" GUID="{dfea6a06-3cdd-499e-9e28-4959c2e38dcc}" AbsContentSize="482,315" UseAbsSize="True" RelativePosition="0.5,0.615">
+                <WZUI9Image Type="WZUI9Image" GUID="{53b155af-a852-4267-b29e-926918e3fe98}" File="ui/common/common_scale9_di20.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{f41d8148-2e75-4d91-a566-a62b1839e609}" Name="conTop_WndChoosePet" RelativePosition="0.5,0.94" RelativeSize="0.975,0.1" Type="WZUIContainer" Visible="True">
+            <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{4e9359d9-6b90-48e2-9e1b-08b36854d37a}" RelativePosition="0.5,0.5" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="132,66,29" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" Name="ttfTitle_WndChoosePet" TextKey="ASCENDING30" />
+            <WZUIButton AbsContentSize="116,56" GUID="{5bc70d62-3cf7-4004-9274-911001c24d81}" LuaDoneFunctionName="onClose" Name="btnCancel_WndChoosePet" RelativePosition="0.93215,0.55234" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal">
+                <NormalElement GUID="{d33e520a-c80f-4a23-94d5-66c90aeb6caa}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_icon_guanbi.png" GUID="{1a9d42bd-5ec6-4011-900e-2fb1e3944552}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{4be9c1e3-e190-4916-9851-808dfcb9e35b}" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{18702967-59fa-403b-8c40-6144782ddf86}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement GUID="{8424b07e-d6fd-435b-a9d0-16a443457391}" Type="WZUIContainer" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer GUID="{8df5c066-2800-4f30-ae1f-e975615fe5ad}" Name="conMidContent_WndChoosePet" RelativePosition="0.5,0.62" RelativeSize="1,1" Type="WZUIContainer" Visible="True" AbsContentSize="470,290" UseAbsSize="True">
+            <WZUIFreeListContainer EnableHorizontalScroll="False" EnableMoveHorizontal="False" GUID="{6ab71408-e52f-40c3-86d0-5e97d2940773}" Name="freecon_WndChoosePet" RelativeSize="1,0.92" Type="WZUIFreeListContainer" AbsContentSize="470,290" UseAbsSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{77d48759-c9c4-4a05-a535-c161cb7b64e1}" Name="conNoPet_WndChoosePet" RelativePosition="0.5,0.5" AbsContentSize="100,100" UseAbsSize="True" Visible="False">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{4adf5ca7-a885-4acf-ac43-2105dcb2788c}" TextKey="EXTRACTING_PETS" FontSize="26" RelativePosition="0.5,-0.13" AbsPosition="50,-13" BoldFont="True" Color="255,236,193" />
+                <Button Type="WZUIButton" AbsContentSize="0,0" UseAbsSize="False" LuaDoneFunctionName="onGetPet" GUID="{a3beab1a-8914-4325-be59-dc49921077c6}">
+                    <NormalElement Type="WZUIContainer" GUID="{b0b3e735-0bb4-4e55-96a6-3653cff3986c}">
+                        <WZUIImage Type="WZUIImage" GUID="{fc8b925f-57a7-43e3-b6ce-eb55a4083205}" File="ui/common/common_icon_cwj.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{127d6111-9be0-4905-88a5-1e028d08e0cf}">
+                        <WZUIImage Type="WZUIImage" GUID="{7cf76605-ad8e-4982-9e86-0df1631c9fb2}" File="ui/common/common_icon_cwj.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{d7070bd0-3010-4237-aaa3-4f838e0a569b}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{c3ed96dc-5139-406b-8e4f-c34fc73213eb}" AbsContentSize="452,93" UseAbsSize="True" RelativePosition="0.5,0.24">
+            <WZUI9Image Type="WZUI9Image" GUID="{9072a7c1-a4b0-4b4a-8e5a-1a6bb375f148}" File="ui/common/common_scale9_di9.png" Opacity="128" RelativePosition="0.5,0.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{945e853d-22a0-4d23-abcd-27e4bdda8aab}" Name="conM1" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.15,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{545778d2-ba62-480f-9d99-50361f4f8f96}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" GrayRender="True" Name="petBg1" />
+                <WZUIImage Type="WZUIImage" GUID="{a02c9008-f86e-4ba8-97f9-5dc71b827d2e}" File="ui/common/frame_violet.png" GrayRender="True" UseOriginSize="True" Name="petGrid1" />
+                <WZUIImage Type="WZUIImage" GUID="{c6784e9d-fd2f-4e0f-8133-bc91832db81b}" File="battle/pet_card/pet_icon_0001.png" UseOriginSize="True" GrayRender="True" Name="pet1" />
+                <WZUIImage Type="WZUIImage" GUID="{b76c8361-feb6-43fd-ab65-feed26e41a65}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.7" Name="imgAdd1" />
+                <Button Type="WZUIButton" GUID="{f4bcccb3-9ac6-42d5-8140-a6e8bcdabaf5}" LuaDoneFunctionName="onGrid" Tag="1">
+                    <NormalElement Type="WZUIContainer" GUID="{e8de6b45-7148-453d-8a15-3877df1441dc}" />
+                    <SelectElement Type="WZUIContainer" GUID="{87319fa2-7bbc-4445-b8a2-518efaaad1f6}" />
+                    <DisableElement Type="WZUIContainer" GUID="{062a0d33-0a07-4126-90ba-20c71eef4c2e}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{f1079a6c-0a2e-413c-bb0d-f4e0debe4a72}" Name="conM2" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.383,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{df5646fd-6e8f-425c-ad21-5816eb8a9b33}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" GrayRender="True" Name="petBg2" />
+                <WZUIImage Type="WZUIImage" GUID="{ab0792d9-6878-4763-bb83-2e1c63a227dd}" File="ui/common/frame_violet.png" GrayRender="True" UseOriginSize="True" Name="petGrid2" />
+                <WZUIImage Type="WZUIImage" GUID="{6c5c89e2-ccef-427a-8928-5e3e6903b2d6}" File="battle/pet_card/pet_icon_0001.png" UseOriginSize="True" GrayRender="True" Name="pet2" />
+                <WZUIImage Type="WZUIImage" GUID="{0ca31e2c-7613-4893-bf1b-78c54685ec9f}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.7" Name="imgAdd2" />
+                <Button Type="WZUIButton" GUID="{d7fe5d13-b93a-4d39-b8d4-87f45e8fb279}" LuaDoneFunctionName="onGrid" Tag="2">
+                    <NormalElement Type="WZUIContainer" GUID="{129c8137-7bea-474a-8742-4acd86c32c01}" />
+                    <SelectElement Type="WZUIContainer" GUID="{2d5f1617-94e4-4c8d-8d2d-5cd83c163bd0}" />
+                    <DisableElement Type="WZUIContainer" GUID="{7528b00a-a579-4bdd-a18b-1d0481a26cb4}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{f77e9e02-5717-4ee8-b4f5-ff1cf57a74c7}" Name="conM3" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.616,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{06c9b28c-9b53-4c23-9f4c-ae1a65822d46}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" GrayRender="True" Name="petBg3" />
+                <WZUIImage Type="WZUIImage" GUID="{84ed428a-3f2e-41a3-a6dc-2f247b6444eb}" File="ui/common/frame_violet.png" GrayRender="True" UseOriginSize="True" Name="petGrid3" />
+                <WZUIImage Type="WZUIImage" GUID="{5214f38e-3cf4-4bb7-abc0-21a646001c6a}" File="battle/pet_card/pet_icon_0001.png" UseOriginSize="True" GrayRender="True" Name="pet3" />
+                <WZUIImage Type="WZUIImage" GUID="{e0d36080-206b-4701-a53c-30524bc18400}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.7" Name="imgAdd3" />
+                <Button Type="WZUIButton" GUID="{13c9ec4a-35fb-4cc0-a25c-6985e13bed23}" LuaDoneFunctionName="onGrid" Tag="3">
+                    <NormalElement Type="WZUIContainer" GUID="{a06bfaa3-4518-4d37-8fc9-d80a905829d8}" />
+                    <SelectElement Type="WZUIContainer" GUID="{14e334ef-4178-46f2-ab80-2d4aa80e4037}" />
+                    <DisableElement Type="WZUIContainer" GUID="{651f5617-4068-4ee1-bc24-dc4bec4f6485}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{e90d0e4f-27d8-49fb-86a7-e730b3c7cad3}" Name="conM4" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.85,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{08567c22-7950-4ac0-a7a4-f9e3eb2e2858}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" GrayRender="True" Name="petBg4" />
+                <WZUIImage Type="WZUIImage" GUID="{9c1d0bf3-c3e5-4ea6-b6e7-3db7bb870e70}" File="ui/common/frame_violet.png" GrayRender="True" UseOriginSize="True" Name="petGrid4" />
+                <WZUIImage Type="WZUIImage" GUID="{6e843cfd-50f9-4b6a-96cb-d42621e6cdca}" File="battle/pet_card/pet_icon_0001.png" UseOriginSize="True" GrayRender="True" Name="pet4" />
+                <WZUIImage Type="WZUIImage" GUID="{da188f53-30b1-4665-b1c0-c13292e7ccbc}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.7" Name="imgAdd4" />
+                <Button Type="WZUIButton" GUID="{15c8e351-d3e5-4ef2-99e9-c3c8f34d8f00}" LuaDoneFunctionName="onGrid" Tag="4">
+                    <NormalElement Type="WZUIContainer" GUID="{28073df2-6fe7-4343-8726-5f6d255b8ed2}" />
+                    <SelectElement Type="WZUIContainer" GUID="{adf6e157-b456-4e9e-8c8e-b11054fa14e4}" />
+                    <DisableElement Type="WZUIContainer" GUID="{b9bd5475-52e5-496d-aac6-30739af90501}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <Button AbsContentSize="116,56" GUID="{1a65191f-a4db-4388-8099-5cb9666e10a9}" LuaDoneFunctionName="onClickSureBtn" Name="btnSure_WndChoosePet" RelativePosition="0.5,0.085" Type="WZUIButton" UseAbsSize="True" Visible="True" LuaActionName="Normal">
+            <NormalElement GUID="{eaf1e3c9-ad19-4642-9bc7-7f50f7e43543}" Type="WZUIContainer">
+                <WZUI9Image File="ui/common/common_btn_anniu10_1.png" GUID="{24db3e43-e1bd-4d0d-8834-d07f74b78297}" Type="WZUI9Image" UseOriginSize="True" RelativePosition="0.508157,0.5" AbsPosition="58.9462,28" />
+            </NormalElement>
+            <SelectElement GUID="{875e9a36-04fa-4461-885a-0527f9377540}" Type="WZUIContainer">
+                <WZUI9Image File="ui/common/common_btn_anniu10_1_sel.png" GUID="{7a16ed8d-2587-4eb5-a71d-c2fde08eb3be}" Type="WZUI9Image" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+            </SelectElement>
+            <DisableElement GUID="{35b392a5-aeae-42aa-ab12-c68f704429db}" Type="WZUIContainer" />
+            <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{5a029c3d-866d-4725-8424-c144c68d1ce4}" Name="txtSure_WndCommunityPopContent" ShadowColor="0,255,0" StrokeColor="64,128,1" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" RelativePosition="0.5,0.5" LabelStyleKey="SMALL_GREEN_BTN" TextKey="CONFIRM" />
+        </Button>
+    </WZUIWindow>
+</WndChoosePet>

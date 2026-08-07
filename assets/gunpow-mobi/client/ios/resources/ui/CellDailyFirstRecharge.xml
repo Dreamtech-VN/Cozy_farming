@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<CellDailyFirstRecharge GUID="{07559539-8CB9-450e-A402-1F8D5B19D913}">
+    <WZUIContainer AbsContentSize="502,453" GUID="{E837C456-4073-4677-A740-FED83E8D48FF}" LuaObjectName="CellDailyFirstRecharge" Name="CellDailyFirstRecharge" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="502,300" GUID="{3F6E7272-7C38-4c13-87DD-D5E8F9A96EC7}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,1">
+            <WZUIImage Type="WZUIImage" GUID="{EC6B50A8-0309-4e35-8518-A2A4880AFF3C}" File="ui/gameActivity/activity_pic_mryxb.png" UseOriginSize="True" AnchorPoint="0.5,1" RelativePosition="0.504,1" ScaleX="1" Scale="1" ScaleY="1" />
+            <WZUIContainer AbsContentSize="500,40" GUID="{853901b3-05c0-4026-b6a2-ad7d3ca160e9}" RelativePosition="0,1" Type="WZUIContainer" UseAbsSize="True" AbsPosition="246,395.25" Name="" AnchorPoint="0,1">
+                <WZUI9Image Type="WZUI9Image" GUID="{3dc185ef-6306-46d0-85ce-c53eefa32958}" File="ui/common/common_scale9_heidi7.png" />
+                <WZUILabelTTF AnchorPoint="0,0.5" Color="255,227,116" FontSize="22" GUID="{a9a8b10b-a358-4490-977f-f2d96837163f}" Name="txtTimeWord_CellDailyFirstRecharge" RelativePosition="0.05,0.5" Text="活动剩余" Type="WZUILabelTTF" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" />
+                <WZUILabelTTF AnchorPoint="0,0.5" Color="255,89,74" FontSize="22" GUID="{0acf69cf-9cf2-46b2-961d-eb1f4892169c}" Name="txtTime_CellDailyFirstRecharge" RelativePosition="0.28,0.5" Text="9天" Type="WZUILabelTTF" StrokeColor="158,0,0" StrokeSize="4" EnableStroke="True" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="130,65" GUID="{ef151398-a26b-41cd-a07a-3df483d1c0de}" RelativePosition="0.347458,0.254141" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIButton GUID="{9a67e33b-754c-4994-90e6-43cfa4680347}" LuaDoneFunctionName="onRechargeEvent" Name="btn_getReward_event" Type="WZUIButton">
+                    <NormalElement GUID="{2979661f-543f-44ea-984b-5184e43d5d66}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1.png" GUID="{43dd296d-3b71-475a-ac83-0bf03208ee93}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{1fe81136-952a-4f31-8d98-d6f22d082faf}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1_sel.png" GUID="{c183caec-ecb9-4f57-a392-d1cf641fa324}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{5e625ba1-3af6-47c4-ace6-e7f454f23e48}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1.png" GUID="{c37a73cf-a226-4da5-a2f3-114bc62d02b9}" RelativePosition="0.5,0.5" RelativeSize="1.1,1" Type="WZUI9Image" GrayRender="True" UseOriginSize="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{57595cff-ea68-4f45-b693-2263bae9bea9}" Name="txt_gotoButton" RelativePosition="0.5,0.5" StrokeColor="128,54,13" StrokeSize="4" Text="" Type="WZUILabelTTF" LabelStyleKey="" EnableStroke="True" />
+                    <WZUISpine Type="WZUISpine" GUID="{cd2b7d1c-4152-4397-9f94-85a253c74959}" FileAtlas="ui/ui_main_likechongzhi.atlas" FileJson="ui/ui_main_likechongzhi.json" Loop="True" AnimationName="animation" RelativePosition="0.5,1.12308" Name="spineLight_CellDailyFirstRecharge" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="500,170" GUID="{0074A370-14F3-43d7-A268-18D46B4BE80F}" RelativePosition="0.5,0" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0">
+            <WZUIContainer GUID="{8D2F6112-039A-44ab-9634-2C4CF98BDAD2}" Type="WZUIContainer" AbsContentSize="486,105" UseAbsSize="True" RelativePosition="0.5,0.1" AnchorPoint="0.5,0">
+                <WZUI9Image File="ui/common/common_scale9_di18.png" GUID="{5786AEB9-4EFB-4a13-A81D-27B9C7D38789}" Type="WZUI9Image" />
+                <WZUIContainer AbsContentSize="460,90" GUID="{91A8838A-51CD-4049-9872-E1F829D864B9}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUITableContainer AbsContentSize="460,90" AnchorPoint="0.5,0.5" CellElementHeight="1" ColumnCount="5" EnableMoveHorizontal="True" EnableMoveVertical="False" GUID="{6430739F-08D2-4143-9920-FB4BE30DBC52}" Name="tbCon_activty_forRecharge" RelativePosition="0.5,0.485" RelativeSize="1,1" ShowAll="False" Type="WZUITableContainer" UseAbsSize="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{3ACDA401-BBAE-4db0-BDE6-A113AA2523D2}" AbsContentSize="480,40" UseAbsSize="True" RelativePosition="0.5,0.83">
+                <WZUILabelTTF Color="255,236,193" FontSize="22" GUID="{9933CDE2-B821-4ffa-93A3-02273BC0C9BB}" Name="txt_grade_value" RelativePosition="0.025,0.5" StrokeSize="4" Text="" Type="WZUILabelTTF" AnchorPoint="0,0.5" EnableStroke="True" StrokeColor="105,65,46" TextKey="RECHARGE_TODAY" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{65A83C24-B3B1-4895-9875-4E069B51C614}" Color="99,255,95" EnableStroke="True" FontSize="24" StrokeColor="0,72,3" StrokeSize="4" Name="txtMoneyValue_CellDailyFirstRecharge" RelativePosition="0.22,0.5" AnchorPoint="0,0.5">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{92A2F04F-3699-4235-A6DD-B9EEF609E1A6}" Color="233,166,62" EnableStroke="True" FontSize="22" StrokeColor="128,54,13" StrokeSize="4" TextKey="GET_BIG_GIFT" AnchorPoint="0,0.5" RelativePosition="1,0.5" Name="txtGiftWords_CellDailyFirstRecharge" />
+                </WZUILabelTTF>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellDailyFirstRecharge>

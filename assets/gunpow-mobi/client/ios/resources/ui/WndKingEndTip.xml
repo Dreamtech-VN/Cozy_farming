@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<WndKingEndTip GUID="{E0CB1832-2AC6-4601-9775-B72C783F87A7}">
+	<WZUIFrame Type="WZUIFrame" GUID="{36f8b1de-98db-4af2-bb73-c2690a23f635}">
+		<WZUIWindow LuaObjectName="WndKingEndTip" Name="WndKingEndTip" NameCreate="True" ShowAll="True" Type="WZUIWindow" GUID="{121a9ae9-40ce-4b9b-883f-707888c8c5c5}" AbsContentSize="410,345" UseAbsSize="True">
+			<WZUIContainer AbsContentSize="0,0" AbsPosition="" AnchorPoint="0.5,0.5" GUID="{a48c198a-163a-4108-b3b0-e1796c346e63}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="False">
+				<WZUI9Image File="" GUID="{b9ec3d14-1be3-4dff-9325-64aafa667653}" Type="WZUI9Image" />
+				<WZUI9Image Type="WZUI9Image" GUID="{39b9a9b5-5e78-4dcb-bfbf-033d03b2ca94}" File="" UseOriginSizeProportion="True" RelativePosition="0.5,1" AnchorPoint="0.5,1" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{b4203c9a-9f5d-41be-b99d-48da691563ed}">
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{274837a9-1cc3-4daa-9770-e1e9b8f11b40}" FontSize="30" Color="255,255,255" RelativePosition="0.5,0.945" Name="txtTitle_WndKingEndTip" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{93cf53b5-5199-4391-b576-2b2d0663dd15}" FontSize="22" Color="255,255,0" RelativePosition="0.05,0.82" Name="txtSubTitle_WndKingEndTip" AnchorPoint="0,0.5" />
+				<WZUIContainer Name="conDetail_WndKingEndTip" Visible="False" Type="WZUIContainer" GUID="{2db80cd0-91a6-4423-bda7-4de3ca571f46}" RelativeSize="0.9,0.5">
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{e181a897-1305-4c2a-a9e0-1d998722fcf9}" FontSize="22" Color="0,176,240" RelativePosition="0,0.9" Name="txtResult_WndKingEndTip" Text="您的战绩为" AnchorPoint="0,0.5" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{064e2088-304c-48c0-892d-be20977aa3d1}" FontSize="22" Color="0,176,240" RelativePosition="0,0.7" Name="txtMaxWinningStreak_WndKingEndTip" Text="最高连胜次数为" AnchorPoint="0,0.5" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{e6328025-c8c1-4572-89b4-d52138e2d162}" FontSize="22" Color="0,176,240" RelativePosition="0,0.5" Name="txtTodayScore_WndKingEndTip" Text="今日累计弹王积分" AnchorPoint="0,0.5" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{e465069b-e39f-4268-a85d-248ba4bc4508}" FontSize="22" Color="0,176,240" RelativePosition="0,0.3" Name="txtTodayMoney_WndKingEndTip" Text="今日累计弹王令" AnchorPoint="0,0.5" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{edcbcdae-6183-4b0c-a2f1-8f3006f9ae33}" FontSize="22" Color="0,176,240" RelativePosition="0,0.1" Name="txtKingRank_WndKingEndTip" Text="当前排名" AnchorPoint="0,0.5" />
+					<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{e9db605f-d8af-49dd-9aaf-3bf95cc124a7}" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0.5,0.9" Name="txtResultC_WndKingEndTip" />
+					<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{93b3a07f-a3a3-4706-a14a-e0cf5bba1a52}" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0.5,0.7" Name="txtMaxWinningStreakC_WndKingEndTip" />
+					<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{2388898c-c703-4480-979c-53a1ddda65df}" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0.5,0.5" Name="txtTodayScoreC_WndKingEndTip" />
+					<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{05262d02-34f2-4b6e-b49e-55892efe0307}" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0.5,0.3" Name="txtTodayMoneyC_WndKingEndTip" />
+					<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{b76d598b-ccaa-4c54-9f16-54156190e4c3}" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0.5,0.1" Name="txtKingRankC_WndKingEndTip" />
+				</WZUIContainer>
+				<WZUIContainer Type="WZUIContainer" GUID="{6fc8e81e-958f-4ec9-bed6-ee0b2935a034}" AbsContentSize="160,70" RelativePosition="0.5,0.13" UseAbsSize="True" Name="conSure_WndKingEndTip">
+					<Button Type="WZUIButton" GUID="{e9e5a564-869d-4411-b4d8-f83911ef7c9f}" LuaDoneFunctionName="onSure" AbsContentSize="0,0" UseAbsSize="False" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" ShowAll="False">
+						<NormalElement Type="WZUIContainer" GUID="{c3cac6ef-0c00-43ef-827c-bd99ffb8dd7d}">
+							<WZUI9Image Type="WZUI9Image" GUID="{bf82ad4e-805a-40c9-8b51-6baf8b6bc0ef}" File="" />
+						</NormalElement>
+						<SelectElement Type="WZUIContainer" GUID="{40726cd3-4c4d-4284-9dac-f4d478a0b31e}">
+							<WZUI9Image Type="WZUI9Image" GUID="{1d16eb65-96d3-4d1a-b591-6fd5280a87db}" File="" />
+						</SelectElement>
+						<DisableElement Type="WZUIContainer" GUID="{85342ae3-927e-4a6a-b9d0-c44b5ab99732}" />
+					</Button>
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{a8ee83fa-079c-497a-9c24-2f30c48c4df5}" FontSize="24" Color="0,0,0" RelativePosition="0.5,0.5" Name="txtSure_WndKingEndTip" TouchEnable="False" />
+				</WZUIContainer>
+			</WZUIContainer>
+		</WZUIWindow>
+	</WZUIFrame>
+</WndKingEndTip>

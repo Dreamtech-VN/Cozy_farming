@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?><SceneBossMap GUID="{F9EBF09B-CDE4-434c-B0EC-B7C6EF831EAA}">
+    <WZUIFrame AbsContentSize="960,640" AbsPosition="0,0" GUID="{DE56AA4B-9D7D-46af-AC82-7A04D40D54A0}" LuaObjectName="SceneBossMap" Name="SceneBossMap" NameCreate="True" RelativePosition="0.5,0.5" Scale="1" ScaleX="1" ScaleY="1" ShowAll="False" Type="WZUIFrame" UseAbsCoordinate="False" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="960,640" GUID="{48CC0501-19A6-4e6e-874A-0F08D17AED46}" Name="conBg_SceneBossMap" ShowAll="True" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUIContainer AbsContentSize="1136,720" GUID="{B322D128-9899-45c6-B66C-53876E3A0B28}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/Jigsaw/51.png" GUID="{AA0B8D45-79DD-4869-8376-4CBE5053BC45}" Name="imgBg_SceneBossMap" Type="WZUI9Image" UseOriginSize="False" Visible="True"/>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="960,405" GUID="{217F9EE1-ADDF-40fe-A3F7-3C2BF8F95E68}" Name="conFlipcon_SceneBossMap" RelativePosition="0.5,0.5" RelativeSize="1,1" ShowAll="True" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+            <WZUIContainer AbsContentSize="1136,405" GUID="{9F3302B7-B448-4990-A589-DB10995CEFA6}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIPageContainer AbsContentSize="1136,405" GUID="{12E7670E-2201-493c-97C8-B0741B04FDA9}" GetCurrentIndexFunction="onMoveCurrentIndexFunction" Name="flipconSelCheckPoint_SceneBossMap" PageWidth="0.45" Tag="" TurningSpeedThreshold="10" Type="WZUIPageContainer" UseAbsSize="False"/>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="960,640" GUID="{20911C76-1C46-41f5-9CF6-73C0C60EDD08}" Order="1" RelativePosition="0.5,0.5" ShowAll="False" Tag="0" TouchEnable="False" TouchSwallow="False" Type="WZUIContainer" UseAbsSize="False">
+            <WZUI9Image AnchorPoint="0,0.55" File="common/Jigsaw/shadow.png" GUID="{2754109C-9D09-497e-93A0-B0230CFBB939}" RelativePosition="-0.0159583,0.5" RelativeSize="0.25,1.06" ShowAll="True" Type="WZUI9Image" UseOriginSize="False"/>
+            <WZUI9Image AnchorPoint="0,0.45" File="common/Jigsaw/shadow.png" FlipX="False" GUID="{0FF27973-E660-4b57-8C17-21D36E8FE282}" RelativePosition="1.00521,0.5" RelativeSize="0.25,1.06" Rotation="180" Scale="1" ScaleX="1" ShowAll="True" Type="WZUI9Image" UseOriginSize="False"/>
+        </WZUIContainer>
+        <WZUIContainer GUID="{27D56B22-D32E-4f96-B687-4A069FB13E33}" Name="conBtn_SceneBossMap" Order="1" RelativePosition="0.5,0.1" RelativeSize="1,0.12" ShowAll="True" Type="WZUIContainer" Visible="False">
+            <Button AbsContentSize="210,66" GUID="{FC34AAE0-A979-4a1f-A1FA-EEC54D650D5B}" LuaDoneFunctionName="onChallengeCheckPointBtn" Name="btnChallengeCheckPoint_SceneBossMap" RelativePosition="0.38125,0.5" RelativeSize="0.15,1" Type="WZUIButton" UseAbsSize="True" Visible="False">
+                <NormalElement GUID="{BE1C8C07-B1E3-4978-81FA-BE657F07D483}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_1.png" GUID="{6A6F026D-7C86-4393-B64C-93C6EAB1F56D}" Name="imgChallengeCheckPoint1_SceneBossMap" Type="WZUI9Image"/>
+                    <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" Font="Arial" FontSize="32" GUID="{FB1FECC8-FA54-4501-A145-72439A49D971}" Name="txtChallengeCheckPoint1_SceneBossMap" StrokeColor="0,91,122" StrokeOffset="0" StrokeSize="4" Text="" Type="WZUILabelTTF"/>
+                </NormalElement>
+                <SelectElement GUID="{C596AF70-E1BD-48ec-9DC7-527B3BF668EC}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_1_sel.png" GUID="{99CA632B-6BE2-4e78-A802-DC10051ED011}" Name="imgChallengeCheckPoint2_SceneBossMap" Type="WZUI9Image"/>
+                    <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" Font="Arial" FontSize="32" GUID="{1D43ABAC-9E64-474e-8F79-A2B0AB876285}" Name="txtChallengeCheckPoint2_SceneBossMap" StrokeColor="0,91,122" StrokeOffset="0" StrokeSize="4" Text="" Type="WZUILabelTTF"/>
+                </SelectElement>
+                <DisableElement GUID="{55BF554C-4661-4d2b-A473-B3252ED11650}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_4.png" GUID="{4464E3C0-4AF5-49a5-9365-D272F400DBC8}" Name="imgChallengeCheckPoint3_SceneBossMap" Type="WZUI9Image"/>
+                    <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" Font="Arial" FontSize="32" GUID="{2F34EBE1-9DC4-4133-80DA-46564C1077F2}" Name="txtChallengeCheckPoint3_SceneBossMap" StrokeColor="128,128,128" StrokeOffset="0" StrokeSize="4" Text="" Type="WZUILabelTTF"/>
+                </DisableElement>
+                <WZUIImage File="common/button_text/button_blue_25.png" GUID="{3467405C-DF13-427a-A879-D262728BA807}" TouchEnable="False" TouchSwallow="False" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+            </Button>
+            <WZUIButton AbsContentSize="210,66" GUID="{DA8043CA-1C1A-40a3-9BF7-BAE9367447F8}" LuaDoneFunctionName="onCopyHallBtn" Name="btnCopyHall_SceneBossMap" RelativePosition="0.620833,0.5" RelativeSize="0.15,1" Type="WZUIButton" UseAbsSize="True" Visible="False">
+                <NormalElement GUID="{85F9B377-D1B4-4f2d-BA2E-6F34511AED24}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_1.png" GUID="{EA82440C-38FC-47ef-A9E3-729BC81DC3CB}" Name="imgCopyHall1_SceneBossMap" Type="WZUI9Image"/>
+                </NormalElement>
+                <SelectElement GUID="{1730AC2B-5A8B-4d7a-9836-463C87B03A38}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_1_sel.png" GUID="{5D4C67D7-BEF4-47fb-801A-6E6572268395}" Name="imgCopyHall2_SceneBossMap" Type="WZUI9Image"/>
+                </SelectElement>
+                <DisableElement GUID="{6257786A-6012-4712-AB37-0F9B2C20DC3D}" Type="WZUIContainer"/>
+                <WZUIImage File="common/button_text/button_blue_16.png" GUID="{1D833648-8F15-4c5f-8BDA-7ED97BDB85B0}" TouchEnable="False" TouchSwallow="False" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="32" GUID="{A01D93B0-A626-4854-9580-C1790E39D3F3}" Name="txtCopyHall_SceneBossMap" StrokeColor="0,91,122" StrokeOffset="0" StrokeSize="4" Text="" Type="WZUILabelTTF"/>
+            </WZUIButton>
+            <WZUIButton AbsContentSize="210,66" GUID="{51F66C0F-F889-46e5-A4DB-23B169294CE6}" LuaDoneFunctionName="onQuickenBtn" Name="btnQuicken_SceneBossMap" RelativePosition="0.382291,0.5" RelativeSize="0.1,1" Type="WZUIButton" UseAbsSize="True" Visible="False">
+                <NormalElement GUID="{D75CDC87-7DE6-4ad6-A5E6-6BB82CF7C64C}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_1.png" GUID="{D1BAD5D1-B95D-43e7-ADD3-A45EBE8CE96A}" Type="WZUI9Image"/>
+                </NormalElement>
+                <SelectElement GUID="{EF12F625-A4D2-42ca-ADEF-F40B1FABBD33}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_1_sel.png" GUID="{7B791C30-8F96-4481-8ECB-730D1B171221}" Type="WZUI9Image"/>
+                </SelectElement>
+                <DisableElement GUID="{16764F0B-7FF8-4826-B340-59451920100F}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_4.png" GUID="{C0722618-5BC4-4892-94F4-6273A632AA92}" Type="WZUI9Image"/>
+                </DisableElement>
+                <WZUIImage File="common/button_text/button_blue_26.png" GUID="{A107DCB6-574D-4e8d-8D1A-78D5772EBE27}" TouchEnable="False" TouchSwallow="False" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="32" GUID="{50C87D54-6ECA-4d81-A628-DBA4FE203E6B}" Name="txtQuicken_SceneBossMap" StrokeColor="0,91,122" StrokeOffset="0" StrokeSize="4" Text="" Type="WZUILabelTTF"/>
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="960,85" AnchorPoint="0.5,1" GUID="{E3311576-9FBA-486f-9B73-2CD8330D13F2}" Order="2" RelativePosition="0.5,0.99" ShowAll="True" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIContainer AbsContentSize="1136,70" GUID="{BB37F4EA-ECE7-47d8-9665-D3333770E8F4}" Order="0" RelativePosition="0.5,0.5" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage AbsPosition="-88,35" AnchorPoint="0,0.5" File="common/Jigsaw/23.png" GUID="{7F664DC9-6257-45ef-BF18-FF50B68CE75C}" RelativePosition="0,0.5" RelativeSize="1,1" Type="WZUIImage" UseAbsCoordinate="False" UseOriginSize="True"/>
+                <WZUIImage AbsPosition="1044,35" AnchorPoint="1,0.5" File="common/Jigsaw/24.png" GUID="{8CBB3CE0-41E7-4b50-9065-66FA18CC4EC7}" RelativePosition="1,0.55" ShowAll="False" Type="WZUIImage" UseAbsCoordinate="False" UseOriginSize="True" Visible="True"/>
+                <WZUIImage File="common/text/challenge_the_barriers_title.png" GUID="{1281C26D-C301-4240-816A-6CB9D253F4AF}" Name="imgTitle_SceneBossMap" RelativePosition="0.5,0.490739" Type="WZUIImage" UseOriginSize="True"/>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="90,85" AbsPosition="884,46" AnchorPoint="1,0.5" GUID="{15BF1780-57E7-451d-973D-BE855260815E}" Name="conClose_SceneBossMap" RelativePosition="0.885563,0.529412" ShowAll="False" TouchContainerEnable="True" Type="WZUIContainer" UseAbsCoordinate="True" UseAbsSize="True">
+                <WZUIImage File="common/Jigsaw/24_1.png" GUID="{67295884-39EC-4375-8FD3-63E210A39FC5}" Type="WZUIImage" UseOriginSize="True"/>
+                <WZUIButton AnchorPoint="0.5,0.5" GUID="{BEDFE366-D9FA-41b5-B00F-A075594EB23E}" LuaDoneFunctionName="onCloseWindowBtn" Name="btnCloseWindow_SceneBossMap" RelativePosition="0.5,0.53" RelativeSize="1,1" ShowAll="False" Type="WZUIButton">
+                    <NormalElement GUID="{04711BBF-E252-45d4-84D6-8CEB1275EABF}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="common/button/close.png" GUID="{3C176034-443D-4156-80FB-2B67BF57E3D5}" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{8434B5A2-9624-4303-A438-061B9E734C5E}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="common/button/close_sel.png" GUID="{2069A474-2726-490f-A190-7121BD87973C}" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{8FA698D3-4ABB-42b7-9F9C-3F9AE359D63E}" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUIImage File="common/button/close_not.png" GUID="{C13DBF53-A871-4164-A29A-7E3D3C6525AD}" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneBossMap>

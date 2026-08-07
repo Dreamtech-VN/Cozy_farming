@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<CellLeaguePlayer GUID="{E7B93D7B-D8FB-425a-8F22-B9164378D78D}">
+	<WZUIContainer AbsContentSize="338,164" GUID="{2A1B5541-C83E-491e-8AA9-F1E193817121}" LuaObjectName="" Name="CellLeaguePlayer" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" Visible="True" RelativePosition="0.5,0.498437" AbsPosition="480,319">
+		<WZUIContainer Type="WZUIContainer" GUID="{0C45595A-A0AE-4f54-BAD6-3FB1FE59C60E}" AbsContentSize="338,164" UseAbsSize="True">
+			<WZUIContainer Type="WZUIContainer" GUID="{5602B4CE-BE6A-46d5-8F06-5951F41A84C3}" AbsContentSize="338,164" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True">
+				<WZUIImage Type="WZUIImage" GUID="{3870BD1C-4617-4e41-9137-C42DE9BFC063}" File="ui/copy/copy_iicon_yxzddt.png" UseOriginSize="True" ScaleX="-1" Scale="1" Name="imgDi_CellLeaguePlayer" />
+				<WZUIContainer Type="WZUIContainer" GUID="{1C2D26F3-D2B6-4ad2-94F0-A2432CEAA8F8}" AbsContentSize="326,156" UseAbsSize="True">
+					<WZUI9Image Type="WZUI9Image" GUID="{43452CA8-848F-40f4-90FD-EDD0C21FB51B}" File="ui/common/common_shade_chushouheidi.png" Name="imgHeiDi_CellLeaguePlayer" ScaleX="1" Scale="1" />
+				</WZUIContainer>
+				<WZUI9Image Type="WZUI9Image" GUID="{FD12BC68-33E1-4724-B448-8527A47345EE}" File="ui/common/common_scale9_kuang.png" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{AC0B3ED5-3012-45f9-B82E-8B1D3EA34E96}" Name="conHave_CellLeaguePlayer" NameCreate="True" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5" Visible="False">
+				<WZUIContainer Type="WZUIContainer" GUID="{FE5FA074-6773-451d-94B9-577456D87891}" RelativeSize="0.94,0.2" RelativePosition="0.488165,0.859755">
+					<WZUI9Image Type="WZUI9Image" GUID="{ECE73EA8-413E-442d-8248-06698F7AF76E}" File="ui/common/common_scale9_heidi7.png" Visible="True" Opacity="150" />
+					<WZUIContainer Type="WZUIContainer" GUID="{CE4DC671-526E-43a4-8F82-62AC9ED57C8E}" Name="conNameLv_CellLeaguePlayer">
+						<WZUILabelTTF BoldFont="True" Color="255,227,116" EnableStroke="True" Font="" FontSize="22" GUID="{B56820D2-B7BB-4fbf-A8B1-804EFD1A07CD}" Name="txtPlayerLevel_CellLeaguePlayer" RelativePosition="0.031772,0.5" ShadowColor="0,0,0" StrokeColor="60,19,12" StrokeSize="3" Text="" Type="WZUILabelTTF" AnchorPoint="0,0.5" Alignment="Left" />
+						<WZUILabelTTF BoldFont="True" Color="220,231,185" EnableStroke="True" Font="" FontSize="22" GUID="{0C00ED7E-7926-4877-8EE4-E2BD643D4B29}" Name="txtPlayerName_CellLeaguePlayer" RelativePosition="0.211175,0.5" ShadowColor="0,0,0" StrokeColor="60,19,12" StrokeSize="3" Text="" Type="WZUILabelTTF" AnchorPoint="0,0.5" Alignment="Left" />
+						<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{B8BF99C4-FC5C-45ef-9F06-65DD26AFAB4D}" Name="ftbName_CellLeaguePlayer" RelativePosition="0.211175,0.5" MaxWidth="500" AnchorPoint="0,0.5" />
+					</WZUIContainer>
+				</WZUIContainer>
+				<WZUIContainer Type="WZUIContainer" GUID="{DCE71634-F254-4442-A6B1-DB4D246F8196}" RelativeSize="0.94,0.2" AnchorPoint="0.5,0" RelativePosition="0.5,0.0426829" Visible="True">
+					<WZUI9Image Type="WZUI9Image" GUID="{D810C3FA-9EE3-4069-94F9-F741C953A891}" File="ui/common/common_scale9_heidi1.png" FlipY="False" FlipX="False" />
+					<WZUIContainer Type="WZUIContainer" GUID="{6F83F1C8-B3AB-4571-A3BE-97109F3BC6A6}" Name="conFight_CellLeaguePlayer">
+						<WZUIImage File="ui/common/common_icon_zhandouli.png" GUID="{6E0B159E-1B55-4754-9484-7B806D646347}" Name="" RelativePosition="0.00426287,0.5" Type="WZUIImage" UseOriginSize="True" AnchorPoint="0,0.5" />
+						<WZUIContainer Type="WZUIContainer" GUID="{C9FAFBDF-F7A2-46a9-8BBA-BCA480961AA2}" RelativePosition="0.774322,0.5">
+							<WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{A0CF8450-7222-493d-BAAE-BDEBC156E5DA}" Name="labFireCnt_CellLeaguePlayer" CharMapFileName="ui/common_num/common_num_zhandouli.png" Height="26" Width="16" Text="123" RelativePosition="0,0.46142" Alignment="Center" AnchorPoint="0,0.5" UseOriginSize="True" Visible="True" Scale="0.8" />
+						</WZUIContainer>
+					</WZUIContainer>
+				</WZUIContainer>
+				<WZUIContainer AbsContentSize="" GUID="{99AF2AF0-2076-47c6-A823-A5F567A03BE5}" Name="conPlayer_CellLeaguePlayer" RelativePosition="1,0.55" ShowAll="False" Type="WZUIContainer" UseAbsSize="False" Visible="True" Scale="1" RelativeSize="0.4,1" AnchorPoint="1,0.5" TouchEnable="False" TouchSwallow="False" />
+				<WZUIContainer AbsContentSize="80,80" GUID="{AE9242BE-162F-43b1-BA39-687755FE48F8}" Name="conPet_CellLeaguePlayer" RelativePosition="0.53,0.645122" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" Visible="True" Scale="1" AnchorPoint="0.5,0.5" AbsPosition="179.14,105.8" TouchEnable="False" TouchSwallow="False" />
+				<WZUIButton GUID="{FD3CFEC7-2D87-49b7-A515-B0767D81E58C}" LuaDoneFunctionName="onPet" Name="btnPet_CellLeaguePlayer" TouchEnable="True" Type="WZUIButton" Visible="True" AbsContentSize="80,80" UseAbsSize="True" RelativeSize="0.4,1" AnchorPoint="0.5,0.5" RelativePosition="0.53,0.7">
+					<NormalElement GUID="{8313070C-7785-4809-8005-7D33AD5BD3A7}" Type="WZUIContainer" />
+					<SelectElement GUID="{26230016-43BA-4103-B687-8D75C68B355F}" Type="WZUIContainer" />
+					<DisableElement GUID="{3249907C-01A9-43c9-84B8-14C1BFBF1540}" Type="WZUIContainer" />
+				</WZUIButton>
+				<WZUIContainer Type="WZUIContainer" GUID="{B52F968E-C94D-4130-9194-756D3818F145}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.562129,0.22561" AbsPosition="190,37" Name="conEquip_CellLeaguePlayer" Order="1">
+					<WZUISpine Type="WZUISpine" GUID="{D3C3CABE-2CB3-47f8-8A22-E99A5AF58FEB}" FileAtlas="ui/ui_jjc_weapon.atlas" FileJson="ui/ui_jjc_weapon.json" Loop="True" AnimationName="8" TouchEnable="False" TouchSwallow="False" UseOriginSizeProportion="False" RelativePosition="0.466666,1.53333" AbsPosition="28,91.9998" UseOriginSize="True" ScaleAnimation="1" Name="spineEquip_CellLeaguePlayer" Visible="True" />
+					<WZUIImage Type="WZUIImage" GUID="{0026A363-5834-4d95-9F02-0B76BB4000D5}" Name="imgEquip_CellLeaguePlayer" TouchEnable="False" TouchSwallow="False" />
+					<Button Type="WZUIButton" LuaDoneFunctionName="onEquip" GUID="{81835F9A-FE70-4d76-9CEF-AD3DE597BFF2}">
+						<NormalElement Type="WZUIContainer" GUID="{212344D8-6BC3-4f03-A344-1C2EF0F8ECD4}" />
+						<SelectElement Type="WZUIContainer" GUID="{6119DA09-ECA8-46ab-B788-3043914B446A}" />
+						<DisableElement Type="WZUIContainer" GUID="{1264AD79-AC71-4a5a-AFA3-674110B0F474}" />
+					</Button>
+				</WZUIContainer>
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{99254DC9-A387-4d0b-9CED-D723B8931C3A}" Name="conNot_CellLeaguePlayer" Visible="False">
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{F1260A48-BB9F-4942-8ACE-399DB62E7D79}" LabelStyleKey="" TextKey="LEAGUE_WAIT_PLAYER" Color="255,236,193" FontSize="24" EnableStroke="True" StrokeSize="4" StrokeColor="127,70,26" />
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIContainer>
+</CellLeaguePlayer>

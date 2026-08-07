@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WndChallengeLevel GUID="{0439EDE3-BFDA-46a6-8AB8-57E433AA58FD}">
+    <WZUIWindow AbsContentSize="820,600" GUID="{BAC417FF-64FE-4021-9517-86B31A02B0FD}" LuaObjectName="WndChallengeLevel" LuaTouchBeganFunction="onCloseTips" Name="WndChallengeLevel" NameCreate="True" Type="WZUIWindow" UseAbsSize="True">
+        <WZUI9Image File="common/Jigsaw/3.png" GUID="{A4A0341A-F36E-485b-8B5D-0C0A22B99D42}" Name="img9Bg_WndChallengeLevel" RelativePosition="0.496425,0.504224" RelativeSize="0.96,0.94" Type="WZUI9Image" />
+        <WZUI9Image File="common/Jigsaw/43.png" GUID="{30861ECB-9FA6-4cfa-8B21-CEF6DB6D4043}" RelativeSize="0.88,0.84" Type="WZUI9Image" Visible="False" />
+        <WZUIContainer GUID="{29881BBD-2C4F-45a8-B7B6-5D1A573000DE}" Name="conTop_WndChallengeLevel" RelativePosition="0.5,0.923333" RelativeSize="0.97,0.14" Type="WZUIContainer" UseAbsSize="False">
+            <WZUIContainer AbsContentSize="820,86" GUID="{C9855066-2F54-44a2-90AE-EF7C6209674C}" Type="WZUIContainer" UseAbsSize="False">
+                <WZUI9Image File="common/Jigsaw/5.png" GUID="{86F4BE35-DDFA-4242-8073-955AB43C162F}" Type="WZUI9Image" />
+            </WZUIContainer>
+            <WZUI9Image File="common/Jigsaw/42.png" GUID="{F5DD0F4D-C5A8-4b02-B065-CD6B9A94333D}" RelativePosition="0.5,0.622222" Type="WZUI9Image" UseOriginSize="True" Visible="False" />
+            <WZUIImage File="" GUID="{52079FAA-98C4-4abb-8968-9F635D78C672}" Name="imgRoomName_WndChallengeLevel" RelativePosition="0.5,0.461111" Type="WZUIImage" UseOriginSize="True" />
+            <Button AbsContentSize="90,85" GUID="{E1A5DFEE-0CCF-4ff3-8DA0-7A9A7E5CB55F}" LuaDoneFunctionName="onCloseWindowBtn" Name="btnCloseWindow_WndChallengeLevel" RelativePosition="0.950502,0.527778" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{F4F5B67E-54C0-4197-A688-EF6D9E933DE4}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close.png" GUID="{F78816CB-7138-4194-A602-EA3E59645249}" Type="WZUIImage" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{C86B4E23-5B8E-4347-9A05-A27E70DBF85F}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close_sel.png" GUID="{CDA21D9C-B872-4788-9E6F-4F133A362A17}" Type="WZUIImage" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{9FEB2B58-A1E8-4fb4-B554-BF06D9ACBA79}" Type="WZUIContainer" />
+            </Button>
+        </WZUIContainer>
+        <WZUICheckBoxGroup CheckBox="" GUID="{3FEC0FD2-9F6A-4ff1-A53C-935AA3D48DDC}" Name="checkBoxGroup_WndChallengeLevel" RelativePosition="0.54,0.67" RelativeSize="0.8,0.35" Type="WZUICheckBoxGroup">
+            <CheckBox GUID="{A0F0FD94-5BAC-4971-8C7A-DCCBCA892492}" LuaObjectName="" LuaSelectedFunctionName="onSelSimpleModelCheckBox" Name="checkBoxSimple_WndChallengeLevel" RelativePosition="0.1,0.5" RelativeSize="0.3,1" SelectedIndex="1" Type="WZUICheckBox" UseAbsSize="False">
+                <CheckElement GUID="{7390674B-A76A-4ade-8BB3-3BD93FBABF2F}" Type="WZUIContainer" UseAbsSize="False">
+                    <WZUIImage File="ui/createRoomtitle/model_easy.png" GUID="{C6ACA446-58D7-4fdb-AA61-75B25027340E}" RelativePosition="0.523033,0.6" Scale="1" Type="WZUIImage" UseOriginSize="True" Visible="True" />
+                    <WZUIImage File="common/text/model_easy1.png" GUID="{46CC9F84-765E-43d6-82FD-A3643FB96433}" Name="imgSimpleTitle_WndChallengeLevel" RelativePosition="0.55,0.23" Type="WZUIImage" UseOriginSize="True" Visible="True" />
+                </CheckElement>
+                <CheckElement GUID="{BD5C8274-BC3A-4093-A52E-1CD19F0F660D}" Type="WZUIContainer" UseAbsSize="False">
+                    <WZUIImage File="ui/createRoomtitle/model_easy_sel.png" GUID="{8269BDB3-2608-4d40-8A34-434D7C056C98}" RelativePosition="0.523033,0.6" Scale="1" Type="WZUIImage" UseOriginSize="True" Visible="True" />
+                    <WZUIImage File="common/text/model_easy1.png" GUID="{B548609E-3D41-447a-B682-DA3D1A6F0752}" Name="imgSimpleSelTitle_WndChallengeLevel" RelativePosition="0.55,0.23" Type="WZUIImage" UseOriginSize="True" Visible="True" />
+                </CheckElement>
+            </CheckBox>
+            <CheckBox GUID="{9ABA277C-C34B-4291-B9D5-D7158D9E937A}" LuaObjectName="" LuaSelectedFunctionName="onSelDifficultyModelCheckBox" Name="checkBoxDifficulty_WndChallengeLevel" RelativePosition="0.413719,0.5" RelativeSize="0.3,1" Type="WZUICheckBox" UseAbsSize="False">
+                <CheckElement GUID="{A03D0144-2B1F-48a6-B92B-9A0AD2F1DAB0}" Type="WZUIContainer" UseAbsSize="False">
+                    <WZUIImage File="ui/createRoomtitle/model_hard.png" GUID="{CC9215C0-5076-423f-B5E2-D673C055837B}" RelativePosition="0.523033,0.5925" Scale="1" Type="WZUIImage" UseOriginSize="True" />
+                    <WZUIImage File="common/text/model_hard1.png" GUID="{57086D06-58CA-4939-A8BC-24744EF3282B}" Name="imgDifficultyTitle_WndChallengeLevel" RelativePosition="0.55,0.23" Type="WZUIImage" UseOriginSize="True" Visible="True" />
+                </CheckElement>
+                <CheckElement GUID="{3864BF74-9A15-4123-B9DC-1DA7DF5944E9}" Type="WZUIContainer" UseAbsSize="False">
+                    <WZUIImage File="ui/createRoomtitle/model_hard_sel.png" GUID="{3F6E8617-7D37-4baf-9532-4DDBF66CE0EF}" RelativePosition="0.523033,0.5925" Scale="1" Type="WZUIImage" UseOriginSize="True" />
+                    <WZUIImage File="common/text/model_hard1.png" GUID="{99BDDF5F-2B61-44e8-8FBF-E1BD15AB41CD}" Name="imgDifficultySelTitle_WndChallengeLevel" RelativePosition="0.55,0.23" Type="WZUIImage" UseOriginSize="True" Visible="True" />
+                </CheckElement>
+            </CheckBox>
+            <CheckBox GUID="{8B819F76-B739-4f91-A0F9-4FAC193EE3BE}" LuaObjectName="" LuaSelectedFunctionName="onSelHellModelCheckBox" Name="checkBoxHell_WndChallengeLevel" RelativePosition="0.73,0.5" RelativeSize="0.2,1" Type="WZUICheckBox" UseAbsSize="False">
+                <CheckElement GUID="{A38D91E1-B580-4375-B91A-0CAD52C01B8F}" Type="WZUIContainer" UseAbsSize="False">
+                    <WZUIImage File="ui/createRoomtitle/model_hell.png" GUID="{4B0A4C0F-1740-4551-8BAC-27D069216012}" RelativePosition="0.523033,0.6" Scale="1" Type="WZUIImage" UseOriginSize="True" />
+                    <WZUIImage File="common/text/model_hell1.png" GUID="{07B75BC9-9A1F-4f36-992D-14FCE0CD5402}" Name="imgHellTitle_WndChallengeLevel" RelativePosition="0.6,0.23" Type="WZUIImage" UseOriginSize="True" Visible="True" />
+                </CheckElement>
+                <CheckElement GUID="{1C810FA7-FA48-4899-9272-BBD488E46DBA}" Type="WZUIContainer" UseAbsSize="False">
+                    <WZUIImage File="ui/createRoomtitle/model_hell_sel.png" GUID="{65F86FF8-69C8-4cc2-BC46-90F9C2800843}" RelativePosition="0.523033,0.6" Scale="1" Type="WZUIImage" UseOriginSize="True" />
+                    <WZUIImage File="common/text/model_hell1.png" GUID="{6A79620F-4778-4fd2-B127-51E57FBBC39E}" Name="imgHellTitleSel_WndChallengeLevel" RelativePosition="0.6,0.23" Type="WZUIImage" UseOriginSize="True" Visible="True" />
+                </CheckElement>
+            </CheckBox>
+        </WZUICheckBoxGroup>
+        <WZUILabelTTF Color="112,34,8" FontSize="30" GUID="{50F07674-3735-48b2-8540-F4E63557D809}" Name="txtModelExplain_WndChallengeLevel" RelativePosition="0.5,0.5" Text="难度有所提高，对应的奖励也有所增强。" Type="WZUILabelTTF" />
+        <WZUIContainer AbsContentSize="135,66" GUID="{02898263-C609-4b39-8F36-BA655BD3469D}" RelativePosition="0.8,0.169391" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIButton AbsContentSize="135,66" GUID="{99D66CFB-3FCA-4edd-BE26-248AE389059C}" LuaDoneFunctionName="onSureBtn" Name="btnSure_WndChallengeLevel" RelativePosition="0.5,0.5" ScaleX="1" TouchEnable="True" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{2F11E1BB-A6F1-4c75-9ACD-1ABC103E4686}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_2.png" GUID="{073C55F2-9064-4ac6-B446-D5290B36F979}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{B19215D3-54B4-4732-AB9D-041EBCFE2DB3}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_2_sel.png" GUID="{0C940D6E-2107-4b84-B5BC-36601E2D9A83}" Type="WZUI9Image" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{C3F666FB-4D13-4d7a-B535-42C938B1B236}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_4.png" GUID="{1E4F8580-CB7B-41b9-B5C0-CC772308235F}" Type="WZUI9Image" UseOriginSize="True" />
+                </DisableElement>
+                <WZUIShadowTTF FontSize="35" GUID="{13D8FC94-CF6A-473b-B0DC-F0DB2085F06C}" Name="txtSure_WndChallengeLevel" ShadowColor="38,47,0" Type="WZUIShadowTTF" Visible="False" />
+                <WZUIImage File="common/button_text/button_green_2.png" GUID="{35928A88-0A2A-496c-B8EE-8C241ABEB87D}" Type="WZUIImage" UseOriginSize="True" Visible="False" />
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="32" GUID="{EAE17EA7-5B3A-4adc-9084-27F841E2CAB5}" Name="txtOk_WndChallengeLevel" StrokeColor="38,47,0" StrokeSize="4" Type="WZUILabelTTF" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="790,38" GUID="{04C47409-982D-4e45-8A40-6FB448D75947}" RelativePosition="0.497561,0.02" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image File="common/Jigsaw/60.png" GUID="{99585CD2-7FCF-4870-8AC5-F17F73C3C6CF}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="540,100" GUID="{CBB53095-6208-40b4-8377-4550C29B68A8}" Name="conRewardList_WndChallengeLevel" RelativePosition="0.51,0.34" RelativeSize="0.9,0.3" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIContainer AbsContentSize="540,100" GUID="{E52095FE-4377-48eb-A631-2BA695EC8866}" Name="ContainerAward" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True">
+                <WZUITableContainer AbsContentSize="640,100" ColumnCount="5" EnableBounceBack="False" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableMoveoutContainer="False" GUID="{8D880D8A-44A4-4145-A8FB-B0D4348E0918}" Name="tabconReward_WndChallengeLevel" RelativePosition="0.5,0.5" RevertTime="0.4" Type="WZUITableContainer" UseAbsSize="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndChallengeLevel>

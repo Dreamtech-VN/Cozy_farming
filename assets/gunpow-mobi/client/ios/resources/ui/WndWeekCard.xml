@@ -1,0 +1,33 @@
+﻿<WndWeekCard GUID="{53e285b1-8743-4077-9435-52b53779af28}">
+    <WZUIContainer AbsContentSize="502,453" GUID="{7a63ca5a-c436-4fba-8617-bbff2e0a32c1}" LuaObjectName="WndWeekCard" Name="WndWeekCard" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="502,453" GUID="{1b63dae6-ef83-44cd-8885-894efe354504}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,1">
+            <WZUIImage Type="WZUIImage" GUID="{995858d9-16a7-4c8c-84a1-18a48e392401}" File="ui/gameActivity/activity_pic_zk.png" UseOriginSize="False" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" ScaleX="1" Scale="1" ScaleY="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{a6f52d8c-fa13-45d3-80f5-44a808878473}" AbsContentSize="502,40" UseAbsSize="True" RelativePosition="0,1" AnchorPoint="0,1" Name="conLeftTime_WndWeekCard">
+                <WZUI9Image Type="WZUI9Image" GUID="{0864e702-fcd3-4fbf-845c-65b3c02a54e5}" File="ui/common/common_scale9_heidi7.png" AnchorPoint="0,1" RelativePosition="0,1" />
+                <WZUILabelTTF Color="255,227,116" FontSize="22" GUID="{ca6480ed-357c-4168-b445-5edd958fae4a}" Name="txtTimeWord_WndWeekCard" RelativePosition="0.025,0.5" StrokeSize="4" Text="" Type="WZUILabelTTF" AnchorPoint="0,0.5" EnableStroke="True" StrokeColor="128,54,13" TextKey="WEEK_DAY" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{bd8a0f13-4834-460c-9c93-983107d5fd60}" Color="255,89,74" EnableStroke="True" FontSize="24" StrokeColor="158,0,0" StrokeSize="4" Name="txtTimeValue_WndWeekCard" RelativePosition="0.32,0.5" AnchorPoint="0,0.5" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="130,65" GUID="{8ffcac4d-a67d-441b-9873-d9f18e90162f}" RelativePosition="0.805625,0.163633" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIButton GUID="{6ab09827-d30f-430b-a995-da9c4d96f95f}" LuaDoneFunctionName="onRecharge" Name="btn_WndWeekCard" Type="WZUIButton" RelativePosition="0.5,0.330769" LuaActionName="Normal">
+                    <NormalElement GUID="{c0013ae8-9845-47da-b928-7358857bdd41}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1.png" GUID="{1996cf58-a04f-40d5-b9d1-1ae1d416c029}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{621dab17-0a7e-4830-9559-b32aa4e24480}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1_sel.png" GUID="{981edff1-ef71-4876-8232-388155988aab}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{c1910e83-50e6-49d3-bd5d-09d91f8910aa}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1.png" GUID="{d8c9b194-07d7-4cc4-a07e-b06d8b936ff3}" RelativePosition="0.5,0.5" RelativeSize="1.1,1" Type="WZUI9Image" GrayRender="True" UseOriginSize="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{64b3ae05-09ee-4187-9524-0b25c882f934}" Name="txtBuy_WndWeekCard" RelativePosition="0.5,0.5" StrokeColor="128,54,13" StrokeSize="4" Text="" Type="WZUILabelTTF" LabelStyleKey="" EnableStroke="True" TextKey="BUY_NOW" />
+                    <WZUISpine Type="WZUISpine" GUID="{444bc51f-bf58-4b5a-a6bc-8f7af867c79a}" FileAtlas="ui/ui_main_likechongzhi.atlas" FileJson="ui/ui_main_likechongzhi.json" Loop="True" AnimationName="animation" RelativePosition="0.5,1.12308" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{aee25741-5ea3-4feb-be0c-98230a91edb2}" FontSize="22" Color="255,227,116" AnchorPoint="0.5,0" RelativePosition="0.5,0.8" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" Name="txtCost_WndWeekCard" LabelStyleKey="" Visible="True" Text="" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="500,100" GUID="{a7677c71-9264-46d9-b5c5-34fc328376e1}" RelativePosition="0.5,0.163" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0.5">
+                <WZUIContainer GUID="{098f3423-8260-4674-9abf-f297b86baec1}" Type="WZUIContainer" AbsContentSize="300,105" UseAbsSize="True" RelativePosition="0.34,0.5" AnchorPoint="0.5,0.5">
+                    <WZUITableContainer AbsContentSize="300,90" AnchorPoint="0.5,0.5" CellElementHeight="0.33" ColumnCount="1" EnableMoveHorizontal="True" EnableMoveVertical="False" GUID="{7cb6b9d8-02be-46ae-a264-8b345c161479}" Name="tab_WndWeekCard" RelativePosition="0.5,0.485" RelativeSize="1,1" ShowAll="False" Type="WZUITableContainer" UseAbsSize="True" IsVerticalMode="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</WndWeekCard>

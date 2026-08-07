@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<CellMultiCopySettlement GUID="{9477b47c-be43-4f19-8efd-d64e25a497e0}">
+	<WZUIContainer Type="WZUIContainer" GUID="{91172182-6D7C-443f-9E54-E955CF448F45}" AbsContentSize="346,146" UseAbsSize="True" RelativePosition="0.5,0.498437" TouchEnable="False" Name="CellMultiCopySettlement" NameCreate="True" AbsPosition="480,319">
+		<WZUIContainer Type="WZUIContainer" GUID="{B0E809D8-068E-4998-BB9B-CC7A15DE7494}" Visible="False">
+			<WZUI9Image Type="WZUI9Image" GUID="{0F1B02F4-933D-43eb-8D2E-BE048C0C45B7}" File="ui/common/common_scale9_di39.png" />
+		</WZUIContainer>
+		<WZUIContainer Type="WZUIContainer" GUID="{21C977AF-DE7C-426c-95DF-B445F9880D23}" Name="conSettlement_CellMultiCopySettlement" RelativePosition="0.5,0.5" TouchEnable="False" Visible="False" AbsPosition="173,72">
+			<WZUIContainer Type="WZUIContainer" GUID="{D3F4D04C-3580-4380-9D29-C07318C5E05C}" UseAbsSize="False" AbsContentSize="" RelativePosition="0.5,0.475278" RelativeSize="1,0.14" Scale="0" Name="conPro_CellMultiCopySettlement" AbsPosition="195.8,69.3906">
+				<WZUIContainer Type="WZUIContainer" GUID="{8997BFD1-04D9-4875-B138-98E62A97FF45}" AbsContentSize="220,16" UseAbsSize="True" RelativePosition="0.534682,0.5" AbsPosition="185,10.22">
+					<WZUI9Image Type="WZUI9Image" GUID="{EA8DDF38-6290-4414-84A1-A914FA424E02}" File="ui/common/common_scale9_heidi1.png" />
+					<WZUIContainer Type="WZUIContainer" GUID="{E46067D2-0D12-47e0-82BF-AD012FEB11A5}" UseAbsSize="False" AbsContentSize="0,0" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Visible="True">
+						<WZUIImage Type="WZUIImage" GUID="{5D154330-9E4E-481b-8F02-2EB20C12B66C}" File="ui/common/common_progress_exp2_bg.png" UseOriginSize="True" Opacity="150" />
+						<WZUIProgress Type="WZUIProgress" GUID="{AA26B77F-740B-4d5e-A940-30D2CDB94F6D}" BgPicture="ui/common/common_progress_exp2_fore.png" UseOriginSizeProportion="False" UseOriginSize="True" RelativeSize="1,1" Percentage="0" Name="prgExp_CellMultiCopySettlement" RelativePosition="0.497326,0.5" />
+						<WZUILabelTTF Type="WZUILabelTTF" GUID="{7C0EB0A8-2B08-4699-8315-9F9A412DB249}" Name="prgTxt_CellMultiCopySettlement" Color="255,255,255" FontSize="20" Text="" />
+					</WZUIContainer>
+				</WZUIContainer>
+				<WZUIImage Type="WZUIImage" GUID="{102C9B72-2DA2-4383-8A24-0A919CE576FE}" File="ui/common/common_icon_shengjila.png" UseOriginSizeProportion="False" RelativePosition="0.849492,0.526598" Name="imgUpgrade_CellMultiCopySettlement" RelativeSize="1,0.8" Visible="False" UseOriginSize="True" AbsPosition="293.924,10.7637" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{6C5FF1ED-BF03-475a-8F82-7F80E3AE4B72}" Name="txtPlayerLv_CellMultiCopySettlement" Text="LV99" Color="255,236,193" FontSize="22" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" AbsPosition="-53.0173,12.9315" Alignment="Left" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{022A6FAA-D1FC-4855-8ED1-FAAE6B368F67}" UseAbsSize="True" AbsContentSize="346,44" RelativePosition="0.5,0.145205" RelativeSize="1,0.2" AnchorPoint="0.5,0.5" Scale="0" AbsPosition="173,21.2" Name="conPro1_CellMultiCopySettlement">
+				<WZUI9Image Type="WZUI9Image" GUID="{7FC36FA5-97A1-4cff-B747-B31F4925A67A}" File="ui/common/common_scale9_di37.png" />
+				<WZUIContainer Type="WZUIContainer" GUID="{A4FEE525-F1DB-46f9-B9C6-38071985BB74}">
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{5D224657-D195-4460-8C8E-4F2F39D8ED6D}" Name="txtGold_CellMultiCopySettlement" Color="255,255,255" AnchorPoint="0,0.5" FontSize="20" Text="" RelativePosition="0.202759,0.515188" MaxLength="8" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{9DDDE63C-F038-416b-AB5F-0B5EF7327584}" Name="txtExp_CellMultiCopySettlement" Color="255,255,255" AnchorPoint="0,0.5" FontSize="20" Text="" RelativePosition="0.692435,0.515188" MaxLength="8" />
+					<WZUIImage Type="WZUIImage" GUID="{16F454F8-EB5F-47dd-986B-BF53DA0F0AB1}" File="ui/common/common_icon_jinbi.png" UseOriginSizeProportion="True" RelativePosition="0.132556,0.506598" UseOriginSize="True" Scale="0.8" />
+					<WZUIImage Type="WZUIImage" GUID="{17E38180-13B0-41a7-868C-F907F5BC5068}" File="ui/common/common_icon_exp.png" UseOriginSize="True" RelativePosition="0.605654,0.529325" />
+				</WZUIContainer>
+			</WZUIContainer>
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{F2057A6B-FF40-400c-A107-5EB79EA76860}" Name="txtPlayerName_CellMultiCopySettlement" Text="" Color="255,236,193" FontSize="22" AnchorPoint="0,0.5" RelativePosition="0.0953757,0.808218" />
+			<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{A05A1AC5-747D-4fe6-80EB-92A5E053B983}" Name="ftbHurt_CellMultiCopySettlement" RelativePosition="0.51156,0.808218" AnchorPoint="0,0.5" MaxWidth="300" />
+			<WZUIImage Type="WZUIImage" GUID="{F51CDB6A-17DE-4cb1-A2B5-EE073DB4E0E4}" UseOriginSize="True" File="ui/common/common_icon_mvp.png" RelativePosition="0.889451,0.835876" AbsPosition="307.75,122.038" Name="imgMvp_CellMultiCopySettlement" Visible="False" />
+		</WZUIContainer>
+		<WZUIContainer Type="WZUIContainer" GUID="{98B63BB2-CB22-43d4-990C-B78BAC2AE6AB}" AbsContentSize="280,1" UseAbsSize="True" RelativePosition="0.5,0.684165">
+			<WZUIImage Type="WZUIImage" GUID="{3754DA4D-0934-4b3d-A3AF-10770E8A60BC}" File="ui/common/y_line.png" />
+		</WZUIContainer>
+		<WZUIContainer Type="WZUIContainer" GUID="{CEC11E07-D77A-4633-A929-B7083CBC1A04}" AbsContentSize="280,1" UseAbsSize="True" RelativePosition="0.5,0.307454">
+			<WZUIImage Type="WZUIImage" GUID="{E9C49546-31A3-445e-8313-78CC6EB55E5D}" File="ui/common/y_line.png" />
+		</WZUIContainer>
+	</WZUIContainer>
+</CellMultiCopySettlement>

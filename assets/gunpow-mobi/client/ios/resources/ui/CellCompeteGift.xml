@@ -1,0 +1,24 @@
+﻿<CellCompeteGift GUID="{c4d87f1a-1bb9-4369-a355-713fa05e8053}">
+    <WZUIContainer Type="WZUIContainer" GUID="{53d14c19-685c-405a-9236-b6063f85c9b8}" AbsContentSize="732,110" UseAbsSize="True" LuaObjectName="" Name="CellCompeteGift" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{5dc5f6d8-935c-4199-a7c8-178541f5bcf0}" AbsContentSize="732,100" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{74f89f6b-46ae-4004-9820-cb96287fa031}" AbsContentSize="732,100" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{94a88c77-175b-4d77-801c-7270465a277e}" File="ui/common/common_scale9_di7.png" UseOriginSize="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{8a931022-4430-4183-b1bd-a1e0c7b59710}" AbsContentSize="732,100" UseAbsSize="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{f3403dc0-a2b0-48c8-907b-2e6c1c2dd873}" Name="conItem1_Cell" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.27,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{338b762a-f38e-4cde-9f3b-c99041de4ce5}" Name="conItem2_Cell" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.40,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{4dbcbd2b-48f2-44f4-93e0-cc6e16868731}" Name="conItem3_Cell" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.53,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{2bd0f91f-eacd-42e8-962e-809579a24818}" Name="conItem4_Cell" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.66,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{02d5682b-f4bf-49ba-8d25-b06565530743}" Name="conItem5_Cell" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.79,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{568625c3-ccf0-4f46-9a23-ab795bf831c2}" UseAbsSize="True" AbsContentSize="100,80" RelativePosition="0.1,0.5" Visible="False" Name="conRankLabel">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{30887233-b55e-418f-aa83-de8fbe00a15d}" Name="labelRank" LabelStyleKey="C13_F22" Text="%d强" TextKey="" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{8136cb80-3084-4391-a0f2-af568f4d7914}" UseAbsSize="True" AbsContentSize="100,80" RelativePosition="0.1,0.5" Name="conRankPic" Visible="True">
+                <WZUIImage Type="WZUIImage" GUID="{6e9682b3-187d-4513-a872-bef982948f24}" File="ui/hero/hero_icon_guanjun.png" UseOriginSize="True" Name="imgNum1" />
+                <WZUIImage Type="WZUIImage" GUID="{24e15c15-33c9-43fc-bee5-2185b8e77890}" File="ui/hero/hero_icon_yajun.png" UseOriginSize="True" Visible="False" Name="imgNum2" />
+                <WZUIImage Type="WZUIImage" GUID="{e2446da3-93c0-435c-b238-93556e8f3f6b}" File="ui/hero/hero_icon_jijun.png" UseOriginSize="True" isValid="True" Visible="False" Name="imgNum3" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCompeteGift>

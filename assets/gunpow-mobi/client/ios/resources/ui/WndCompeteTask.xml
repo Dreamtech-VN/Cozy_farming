@@ -1,0 +1,22 @@
+﻿<WndCompeteTask GUID="{ec788444-98e4-4008-85ae-4f8cb99d69f7}">
+    <WZUIWindow Type="WZUIWindow" GUID="{6669211c-ec4f-4590-9cd9-643bb3e9062a}" AbsContentSize="770,532" UseAbsSize="True" NameCreate="True" Name="WndCompeteTask" LuaObjectName="WndCompeteTask" LuaTouchBeganFunction="onTouchBegin" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{0c994f5b-57fc-44c5-a99b-e4cdbc201496}">
+            <WZUI9Image Type="WZUI9Image" GUID="{4cc9d300-df7e-4540-ae44-b5757ee97ec5}" CapInsets="60,110,10,10" File="ui/common/common_scale9_di5.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{4bf47bb1-1457-47d8-ae02-91d4ddeba625}" AbsContentSize="756,435" RelativePosition="0.5,0.48" UseAbsSize="True" Name="conForList_WndCompeteTask">
+                <WZUI9Image Type="WZUI9Image" GUID="{4eb4f062-1abc-49fb-88dc-34f59debf6d6}" File="ui/common/common_scale9_di6.png" Opacity="102" />
+                <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{04cc8b73-314f-4fa5-8a4a-3efaec054fa2}" AbsContentSize="750,435" UseAbsSize="True" RelativePosition="0.5,0.5" Name="freelist_Task" EnableMoveHorizontal="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{65cdfb3f-c20f-44ea-8821-80e8a89c2d6d}" AbsContentSize="120,56" UseAbsSize="True" RelativePosition="0.95,0.94" Name="btnClose_Wnd" LuaDoneFunctionName="onClose" LuaActionName="Normal">
+            <NormalElement Type="WZUIContainer" GUID="{7fcf5602-3487-4b6a-b19a-c74b1c355333}">
+                <WZUIImage Type="WZUIImage" GUID="{b9051679-52ce-430d-a930-5fcb3d643628}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" BlendFuncDst="771" Visible="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{f906f221-213f-4e71-ae2b-59215fe015c2}">
+                <WZUIImage Type="WZUIImage" GUID="{93a12e3c-5029-4cad-acb8-188cf9a489ce}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" BlendFuncDst="771" Visible="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{9d9089e4-33fe-4e43-ad73-591d676cac4c}" />
+        </Button>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{fb1fb76d-6c1a-4d6e-b38a-058ad44fe2e8}" AbsPosition="375.375,38.304" UseAbsCoordinate="False" UseOriginSize="True" TextKey="COMMUNITYWARTASK_TEXT1" Text="目标" LabelStyleKey="C1_F26_S4_C13" RelativePosition="0.5,0.94" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f1790fd3-792f-469d-970a-4564a7b2e75c}" AbsPosition="375.375,20" LabelStyleKey="C7_F18" RelativePosition="0.5,0.94" TextKey="COMMUNITYWARTASK_TEXT3" Text="决赛结束后，目标记录重置，未领取的奖励将通过邮件发放" UseOriginSizeProportion="False" UseAbsCoordinate="True" Name="txtNotice_WndCompeteTask" />
+    </WZUIWindow>
+</WndCompeteTask>

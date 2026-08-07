@@ -1,0 +1,49 @@
+﻿<WndSeckill GUID="{b67733c8-36bb-44e7-82ad-28aadf627bd7}">
+    <WZUIWindow Type="WZUIWindow" GUID="{2c15a07e-aec2-446c-a19b-5fbc7b1e8fa1}" LuaObjectName="WndSeckill" Name="WndSeckill">
+        <WZUIContainer AbsContentSize="720,420" GUID="{3d4b66a4-2edb-470c-b229-d5082adc623d}" Name="" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUIImage Type="WZUIImage" GUID="{3063df48-14cb-4985-a16f-7bf292e9e430}" File="ui/gameActivity/christmas/merrychristmas_scale_di11.png" UseOriginSize="True" RelativePosition="0.5,0.0" Scale="1.04" AnchorPoint="0.5,0" Visible="True" Opacity="255" ScaleX="1.04" ScaleY="1.04" />
+            <WZUIContainer Type="WZUIContainer" GUID="{3a9a60aa-fb21-4357-bd24-671a2b29d379}" UseAbsSize="True" AbsContentSize="635,320" AnchorPoint="0.5,0" RelativePosition="0.5,0.01" Order="1" Name="conText" Visible="False">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{33094c66-9e6b-4b4c-9764-e085a3c8cf5a}" LabelStyleKey="" TextKey="" RelativePosition="0.435,1.25" Text="活动时间:" Color="255,255,255" BoldFont="True" FontSize="18" EnableStroke="True" StrokeColor="47,39,161." StrokeSize="4" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{917338d4-d13a-4ad1-98e4-e341bbf70a5c}" LabelStyleKey="" TextKey="" RelativePosition="0.592,1.25" Color="255,255,255" FontSize="18" Text="" BoldFont="True" EnableStroke="True" StrokeColor="47,39,161" StrokeSize="4" Name="time1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{90382311-1a76-47ed-9764-dfdd349019d1}" LabelStyleKey="" TextKey="" RelativePosition="0.52,1.185" Alignment="Center" AnchorPoint="0.5,0.5" Dimensions="450,0" Text="" Color="255,255,255" FontSize="18" BoldFont="True" StrokeColor="47,39,161" StrokeSize="4" EnableStroke="True" Name="time2" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5f7077c9-cc0d-41f6-aafa-62c6d775faa3}" LabelStyleKey="" TextKey="SECKILL2" RelativePosition="0.06,0.885" Color="255,255,255" FontSize="18" BoldFont="True" EnableStroke="True" StrokeColor="47,39,161" StrokeSize="4" Alignment="Left" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{49db710f-c13b-4257-b5c9-ab16c24d8b9f}" LabelStyleKey="" TextKey="" RelativePosition="0.06,0.83" Alignment="Left" AnchorPoint="0,1" Dimensions="300,0" Color="255,255,255" FontSize="18" BoldFont="True" EnableStroke="True" StrokeColor="47,39,161" StrokeSize="4" Text="" AlignmentVertical="0" MaxLength="0" Name="txtDesc" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{42112671-085e-423f-a832-6bd9dcf5b4df}" LabelStyleKey="" TextKey="" RelativePosition="0.742003,0.777243" Text="" Alignment="Center" AnchorPoint="0.5,0.5" Color="255,255,255" BoldFont="True" EnableStroke="True" FontSize="18" StrokeColor="96,38,172" StrokeSize="4" Name="txt1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{169c0888-ca5a-4c38-9ae8-3e110f27d90e}" AbsContentSize="200,275" UseAbsSize="True" RelativePosition="0.715,0.45" Name="conMain" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{a75e5111-b20c-4f65-b621-4933c19182d5}" File="ui/gameActivity/christmas/merrychristmas_scale_di12.png" UseOriginSize="True" RelativePosition="0.495,0.463636" />
+                <WZUIImage Type="WZUIImage" GUID="{6059c9af-e09a-4eac-9d61-7b2f87e4022b}" File="ui/gameActivity/christmas/merrychristmas_scale_di13.png" UseOriginSize="True" RelativePosition="0.5,0.863636" Name="imgTitleBg" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{84b6e590-524d-4b6a-a597-48586bc80bbf}" File="ui/gameActivity/christmas/merrychristmas_icon_daojishi.png" UseOriginSize="True" RelativePosition="0.5,0.898636" Name="imgTitle" Visible="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{e22b0ed2-2e23-41a2-b5c0-762fbac322ce}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.5,0.46" Name="conItemInfo_WndSeckill" Order="1" />
+                <WZUIContainer Type="WZUIContainer" GUID="{f2ee60b1-f98f-4920-bd4c-3f86180c7f36}" UseAbsSize="True" AbsContentSize="160,40" RelativePosition="0.5,0.155" TouchEnable="False" TouchSwallow="False">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{d1173d67-a41f-45b8-b2c9-848648b0867e}" LabelStyleKey="" TextKey="NEWSHOP15" RelativePosition="0.285,0.415" Text="" Alignment="Center" AnchorPoint="0.5,0.5" Color="255,255,255" BoldFont="True" EnableStroke="True" FontSize="18" StrokeColor="96,38,172" StrokeSize="4" />
+                    <WZUIImage Type="WZUIImage" GUID="{b5a53132-556e-47ae-b49d-1b1ec862bb5a}" File="shopitems/diamond.png" UseOriginSize="True" Scale="0.45" ScaleX="0.45" ScaleY="0.45" RelativePosition="0.53,0.475" Name="imgPrice1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{23529bfc-9a28-48a2-b48f-e45bc3f44878}" LabelStyleKey="" TextKey="" RelativePosition="0.63,0.415" Text="" Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" BoldFont="True" EnableStroke="True" FontSize="18" StrokeColor="96,38,172" StrokeSize="4" Name="price1" />
+                    <WZUIImage Type="WZUIImage" GUID="{0d8fd9af-8761-4130-961b-b9283d10fe2c}" File="ui/common/common_icon_xiexian2.png" UseOriginSize="True" Rotation="1.5" Visible="True" RelativePosition="0.5,0.41" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{2008ac35-c1c0-43b7-967d-ffba4708524c}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,-0.085" UseAbsSize="True" Name="conBtn_WndSeckill" Visible="True">
+                    <Button Type="WZUIButton" GUID="{64d51599-ce2c-4768-a870-d1fdd908df10}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" LuaActionName="Normal" LuaDoneFunctionName="onClickBuy" Tag="1" Scale="0.8" ScaleX="0.8" ScaleY="0.8" Name="btnBuy" TouchEnable="False">
+                        <NormalElement Type="WZUIContainer" GUID="{f1aeeeb2-a459-4679-9867-572e56a5ee04}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{b038fffc-c7ad-4ad1-9e5d-94dff14eb32e}" File="ui/common/common_btn_anniu3_0.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{d54f7393-5d07-4fa6-8adb-858e7f64ce5e}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{694761a8-957d-4de1-914b-29d9aabfa928}" File="ui/common/common_btn_anniu3_0_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{5309f606-f6a0-4aed-bfe1-e002f8f7f912}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{c08f27d6-8032-4817-829a-cbc73e225065}" File="ui/common/common_btn_anniu3_0.png" GrayRender="True" />
+                        </DisableElement>
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{71b1a654-b184-46f2-8d9a-7c7a402a24ab}" Name="price2" LabelStyleKey="SMALL_ORANGE_BTN" Text="" RelativePosition="0.43,0.5" Alignment="Left" AnchorPoint="0,0.5" TouchEnable="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{2dc646a6-9b5d-4985-99a6-9be00dabc503}" File="shopitems/diamond.png" UseOriginSize="True" Scale="0.45" ScaleX="0.45" ScaleY="0.45" RelativePosition="0.32,0.5" Name="imgPrice2" TouchEnable="False" TouchSwallow="False" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{385b0416-d037-4f82-8473-b286db2851d6}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" Name="imgSoldOut_WndSeckill" RelativePosition="0.5,0.465" Visible="False" TouchEnable="False" TouchSwallow="False" Order="5" />
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,1" BoldFont="True" Color="255,255,255" Dimensions="150,0" EnableStroke="False" FontSize="22" GUID="{9fb1ecfe-fbed-454c-a193-28d131b5de15}" Name="txtName_WndSeckill" RelativePosition="0.5,0.68" StrokeColor="60,19,12" StrokeSize="4" Text="" TouchEnable="False" Type="WZUILabelTTF" Visible="True" />
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,1" BoldFont="True" Color="255,255,255" Dimensions="0,0" EnableStroke="False" FontSize="22" GUID="{e63baaa2-9a2f-4866-8c83-f4ff93135cbc}" Name="txtNum_WndSeckill" RelativePosition="0.3,0.42" StrokeColor="60,19,12" StrokeSize="4" Text="" TouchEnable="False" Type="WZUILabelTTF" Visible="True" />
+                <WZUIImage Type="WZUIImage" GUID="{48886510-5bc8-41bf-935a-1d4b7c8f3b2d}" File="ui/gameActivity/christmas/merrychristmas_icon_6zhe.png" UseOriginSize="True" RelativePosition="0.694351,0.388588" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9eb63ee5-b83e-4f5e-ae97-353bf6cc1e3d}" Text="" LabelStyleKey="C18_F22_S4_C2" RelativePosition="0.753107,0.342755" Rotation="-41" Name="discount" Scale="0.9" ScaleX="0.9" ScaleY="0.9" />
+                <WZUIImage Type="WZUIImage" GUID="{56d5df0d-899a-4929-8561-a3dd883922c6}" File="ui/gameActivity/christmas/merrychristmas_icon_xianliang.png" UseOriginSize="True" RelativePosition="0.30565,0.589101" Name="imgKill" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{cf190f70-bada-4242-a4a2-8beb229970b6}" Text="" LabelStyleKey="C14_F20" RelativePosition="0.5,0.23" Name="leftNum" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSeckill>

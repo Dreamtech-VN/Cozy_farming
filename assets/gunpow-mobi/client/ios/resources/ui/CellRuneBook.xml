@@ -1,0 +1,29 @@
+﻿<CellRuneBook GUID="{98eb889a-5805-4d4d-bbd6-8b3f44340ca9}">
+    <WZUIContainer Type="WZUIContainer" GUID="{f1c4293b-d96e-4be4-9a8a-8e75f8638f87}" AbsContentSize="305,128" UseAbsSize="True" Name="CellRuneBook" ShowAll="False" NoBorder="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{d9153353-15e7-4c13-945c-d0b4a9d4bffc}" AbsContentSize="305,128" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{13834b50-cb6e-490b-9c44-8f47a6945076}" File="ui/common/common_scale9_di18.png" />
+            <WZUIImage Type="WZUIImage" GUID="{a1325557-6c26-4498-9d0b-f7d4d05e5efd}" File="ui/common/common_shade_chushouheidi.png" UseOriginSize="False" Name="img_CellRuneBook" Visible="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{e8ebdeb6-2ec9-49c8-bddd-df0ba33327da}" AbsContentSize="113,128" UseAbsSize="True" RelativePosition="0.198828,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{1bbf0488-d2ea-4c0a-8d19-0faec1820005}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" Rotation="90" RelativePosition="1.014,0.5" ScaleY="1" RelativeSize="1,1" ScaleX="0.55" />
+            <WZUIContainer Type="WZUIContainer" GUID="{45ae59bd-90cd-4f00-9e81-1bd770056436}" AbsContentSize="70,75" UseAbsSize="True" RelativePosition="0.517699,0.609375" Name="">
+                <WZUIImage Type="WZUIImage" GUID="{bf5d1c4b-c5b8-47c9-92e0-65b016bb06b9}" Name="imgRune_CellRuneBook" UseOriginSize="False" File="" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7225a5c0-655d-4b2f-bb39-f71628da639a}" RelativePosition="0.5,0.179688" FontSize="20" EnableStroke="True" Color="255,227,116" StrokeSize="4" StrokeColor="79,60,48" Name="txtNum_CellRuneBook" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{feb46113-5950-458a-a733-5a29b93816e9}" AbsContentSize="186,128" UseAbsSize="True" RelativePosition="0.687252,0.5">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{333b6300-be6f-42ed-aa10-567679e06b8f}" Name="txtName_CellRuneBook" Color="99,255,95" EnableStroke="True" FontSize="20" StrokeColor="79,60,48" StrokeSize="4" RelativePosition="0.1,0.833333" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" UseOriginSize="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{450f3304-954c-4719-9b59-5b09d22581bd}" Alignment="Left" AnchorPoint="0,0.5" Color="255,227,116" EnableStroke="True" FontSize="18" StrokeColor="79,60,48" StrokeSize="4" RelativePosition="0.1,0.601563" Name="txtPro1_CellRuneBook" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{eb9802de-57d2-4b44-b0ee-0eed3ff3f0d0}" Alignment="Left" AnchorPoint="0,0.5" Color="255,227,116" EnableStroke="True" FontSize="18" StrokeColor="79,60,48" StrokeSize="4" RelativePosition="0.1,0.390625" Name="txtPro2_CellRuneBook" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a82cadbe-221d-4f62-93e3-05f5ca275651}" Alignment="Left" AnchorPoint="0,0.5" Color="255,227,116" EnableStroke="True" FontSize="18" StrokeColor="79,60,48" StrokeSize="4" RelativePosition="0.1,0.179688" Name="txtPro3_CellRuneBook" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{6d1b8f62-96f1-47f8-84ee-267b813688c6}" Alignment="Left" AnchorPoint="0,0.5" Color="99,255,95" FontSize="18" EnableStroke="True" StrokeColor="0,72,3" StrokeSize="4" Name="txtValue1_CellRuneBook" RelativePosition="0.521505,0.59375" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{1ff6afbd-a722-422a-a289-d41af439db2e}" Alignment="Left" AnchorPoint="0,0.5" Color="99,255,95" FontSize="18" EnableStroke="True" StrokeColor="0,72,3" StrokeSize="4" Name="txtValue2_CellRuneBook" RelativePosition="0.521505,0.390625" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c9905b89-0f07-4ba9-a601-d4f6cabc778c}" Alignment="Left" AnchorPoint="0,0.5" Color="99,255,95" FontSize="18" EnableStroke="True" StrokeColor="0,72,3" StrokeSize="4" Name="txtValue3_CellRuneBook" RelativePosition="0.521505,0.179688" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{11d46be9-de68-4ca8-a492-165385d3bfef}" LuaDoneFunctionName="onClick">
+            <NormalElement Type="WZUIContainer" GUID="{8b795b7f-8f63-4919-b0c9-2e56931984d4}" />
+            <SelectElement Type="WZUIContainer" GUID="{af003485-fb72-4850-99d6-259bcf98af70}" />
+            <DisableElement Type="WZUIContainer" GUID="{6bf87333-f76c-4b76-a51d-80137bc184ad}" />
+        </Button>
+    </WZUIContainer>
+</CellRuneBook>

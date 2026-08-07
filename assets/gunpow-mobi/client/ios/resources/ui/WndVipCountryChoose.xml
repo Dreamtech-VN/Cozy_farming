@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" ?>
+<WndVipCountryChoose GUID="{C4AEAB34-22AA-4a32-AF42-39A5D385C798}">
+    <WZUIWindow AbsContentSize="0,0" AbsPosition="0,0" GUID="{EDF50896-0471-4479-8D32-D25FBC9145F6}" LuaObjectName="WndVipCountryChoose" LuaTouchBeganFunction="onTouchBegan" Name="WndVipCountryChoose" NameCreate="True" RelativePosition="0.5,0.5" ShowAll="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="False" Visible="True" Order="">
+        <WZUIContainer Type="WZUIContainer" GUID="{2678001d-a84a-46d8-85b3-6029a835e34a}" AbsContentSize="285,280" UseAbsSize="True" RelativePosition="0.665774,0.562945" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{a5cfafb3-0277-4f81-912d-34894adb5b71}" File="ui/common/common_scale9_di24.png" CapInsets="0,0,0,0" Opacity="200" />
+            <Button Type="WZUIButton" GUID="{58dea2a5-b2db-4edc-a9cb-c19888610b36}" RelativePosition="0.926867,0.929131" LuaDoneFunctionName="onTempClose" LuaActionName="Normal" AbsContentSize="45,45" UseAbsSize="True" Scale="0.6" Visible="True">
+                <NormalElement Type="WZUIContainer" GUID="{244adc6a-045f-459a-b68a-fbc696bf02d2}">
+                    <WZUIImage Type="WZUIImage" GUID="{272e18dc-6ed4-48ee-b572-7898fcab9bdc}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{33667fe0-fbe6-410e-a66f-c3f63b4c5d5d}">
+                    <WZUIImage Type="WZUIImage" GUID="{7fdf705f-d416-4f87-89c7-a29e915b973f}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{a3843314-8774-4ef1-888a-3df67833c95f}" />
+            </Button>
+            <WZUITableContainer Type="WZUITableContainer" GUID="{163d4795-2d49-4353-9dc7-080e29edb091}" RelativeSize="0.98,0.97" Name="tabWay_WndVipCountryChoose" NameCreate="True" ColumnCount="5" CellElementHeight="0.2" EnableMoveHorizontal="False" RelativePosition="0.50009,0.444321" AbsContentSize="270,240" UseAbsSize="True" />
+            <WZUIImage Type="WZUIImage" GUID="{5f2b3f6c-bf36-4298-b66b-34a998794d94}" File="ui/common/common_scale9_heidi6.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.5,0.930612" ScaleY="0.5" ScaleX="0.4" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b5f54dcc-2baf-4eb1-a7a4-eb65f3e77954}" FontSize="20" Color="255,227,116" BoldFont="False" EnableStroke="False" RelativePosition="0.5,0.931738" StrokeSize="4" StrokeColor="132,66,29" Text="" Name="" TextKey="VIP_COUNTRY_LIST" AbsPosition="192.5,288" />
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{004529d4-a2a9-4f1d-bff0-aa3df999a594}" File="3.png" Order="-1" Visible="False" />
+    </WZUIWindow>
+</WndVipCountryChoose>

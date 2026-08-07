@@ -1,0 +1,58 @@
+﻿<WndComment GUID="{ad1283a9-ee64-4e12-bfe9-9ae9376746ee}">
+    <WZUIWindow AbsContentSize="420,340" GUID="{e5249d90-edae-4563-8222-ab50f3e3d61f}" LuaObjectName="WndComment" Name="WndComment" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{627c6101-7402-476c-a5dd-f6fbe5b37af6}" UseAbsSize="True" UseAbsCoordinate="False" AbsContentSize="420,440" Name="conAll_WndComment" RelativeSize="1,1" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{9301f7d0-e6cd-4163-b86d-b90009ba22a4}" Name="con1_WndComment" AbsContentSize="420,440" UseAbsSize="True" Visible="True" Scale="1" UseAbsCoordinate="False" RelativePosition="0.5,0.606818">
+                <WZUI9Image Type="WZUI9Image" GUID="{209a4167-5ce2-407a-be21-df715eac670a}" File="ui/common/common_scale9_di46app.png" Visible="True" CapInsets="0,0,0,0" />
+                <WZUIContainer Type="WZUIContainer" GUID="{6d1807b7-c6df-4669-a3b7-a31ecfda57e4}" AbsContentSize="400,100" UseAbsSize="True" RelativePosition="0.5,0.690513" Name="conTab_WndComment">
+                    <WZUITableContainer AnchorPoint="0.5,0.5" CellElementHeight="1" ColumnCount="4" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableVerticalScroll="False" GUID="{2c220994-c2ab-4553-9375-651bedb23624}" Name="tabReward_WndComment" RelativePosition="0.755513,0.378604" RelativeSize="1,1" Type="WZUITableContainer" EnableMoveoutContainer="False" UseAbsSize="False" AbsContentSize="200,100" Visible="True" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{26d5c193-a10b-45d0-b75f-fbcd117b46f4}" Color="0,0,0" FontSize="24" Text="亲，觉得我们游戏好玩吗？现在给5星评价可以获得钻石奖励哦！" Dimensions="300,80" RelativePosition="0.5,0.889973" Alignment="Left" TextKey="COMMENT1" AlignmentVertical="1" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{529283a9-6a72-4a75-b7c8-1c28a2dd553f}" Name="con2_WndComment" Visible="False" AbsContentSize="420,340" UseAbsSize="True" RelativePosition="0.5,0.480643">
+                <WZUI9Image Type="WZUI9Image" GUID="{b01d3a38-2b21-4df5-bf9e-d6db6672d5ed}" File="ui/common/common_scale9_di46app.png" Visible="True" CapInsets="0,0,0,0" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{489142ec-6d01-413b-88a9-475aadb7de75}" Color="0,0,0" FontSize="24" Text="亲，觉得我们游戏好玩吗？现在给5星评价可以获得钻石奖励哦！" Dimensions="300,80" RelativePosition="0.5,0.842246" Alignment="Left" TextKey="COMMENT1" AlignmentVertical="1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{c9f017d6-8b3f-409c-91e7-9e706dae6ec1}" AbsContentSize="420,340" UseAbsSize="True" RelativePosition="0.5,0.115909" AnchorPoint="0.5,0" Visible="True">
+                <Button Type="WZUIButton" GUID="{e6140297-0612-4aa5-ab05-a089a0809398}" AbsContentSize="420,75" UseAbsSize="True" LuaDoneFunctionName="onClick" Tag="1" RelativePosition="0.5,0.581765">
+                    <NormalElement Type="WZUIContainer" GUID="{43a43f77-0e0d-469d-a7a3-e88ed7f2485e}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{0510d539-fbf1-40d5-8f2e-321cc372c883}" File="ui/common/common_scale9_di47app.png" Visible="True" CapInsets="0,0,0,0" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{c3cc18e4-ada0-4d94-b5a4-deaeca205580}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{75decb4b-8c9e-4d0c-a70d-e154a14ba2c9}" File="ui/common/common_scale9_di48app.png" Visible="True" CapInsets="0,0,0,0" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{4cdbe6dc-f721-4d73-a6ea-1ad5523005ef}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{47c0f551-b7e7-4232-9a59-2d40a1a65758}" Color="0,153,255" FontSize="24" Text="yhyg" TextKey="COMMENT2" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{dfe685ee-a2f5-421b-8ff3-2070c05105ee}" AbsContentSize="420,75" UseAbsSize="True" LuaDoneFunctionName="onClick" Tag="2" RelativePosition="0.5,0.358823">
+                    <NormalElement Type="WZUIContainer" GUID="{56f8952c-e480-47a3-9634-c904f015158b}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{b2ce826b-38b1-4a8d-bfc5-ff305dc420b8}" File="ui/common/common_scale9_di47app.png" Visible="True" CapInsets="0,0,0,0" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{4aabf833-6cea-421d-bc15-f6f1e707b5bc}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{4f35389f-15f2-4d44-83a7-35ea91480d04}" File="ui/common/common_scale9_di48app.png" Visible="True" CapInsets="0,0,0,0" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{a3706fd7-088e-4233-b8bf-8feb3b773c1c}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{dd3f3808-444d-41b6-886b-43e6cdb56fb2}" Color="0,153,255" FontSize="24" Text="yhyg" TextKey="COMMENT3" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{e103eb6a-52c5-436d-a8da-b3e6731b7cd8}" AbsContentSize="420,75" UseAbsSize="True" LuaDoneFunctionName="onClick" Tag="3" RelativePosition="0.5,0.132941">
+                    <NormalElement Type="WZUIContainer" GUID="{37dccc29-50d4-4bb5-8046-9f7e47e9aaad}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{fb9aebad-dc68-4eb7-b580-c6bb20db828a}" File="ui/common/common_scale9_di47app.png" Visible="True" CapInsets="0,0,0,0" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{f9e3e44e-1d9c-4ae6-adb1-080751cefff5}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{a901926b-01c5-475e-a830-cf479a958301}" File="ui/common/common_scale9_di48app.png" Visible="True" CapInsets="0,0,0,0" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{7e325d24-d32d-470a-b8b9-b982cdc8784f}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1060a92c-e790-450a-8597-5b4855fa345b}" Color="0,153,255" FontSize="24" Text="yhyg" TextKey="COMMENT4" />
+                </Button>
+                <WZUIContainer Type="WZUIContainer" GUID="{62216b2d-d391-40fc-b8c2-b9c3aa25adaa}" AbsContentSize="420,2" UseAbsSize="True" RelativePosition="0.5,0.467647">
+                    <WZUI9Image Type="WZUI9Image" GUID="{f46a34d2-4713-4015-8254-ec8bcdadaacb}" File="ui/common/common_scale9_di49app.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{54f3a0cb-db77-403a-aac8-0aca2c981473}" AbsContentSize="420,2" UseAbsSize="True" RelativePosition="0.5,0.244117">
+                    <WZUI9Image Type="WZUI9Image" GUID="{3bcbb86f-9bc3-4a21-8fc8-ad2925fae50d}" File="ui/common/common_scale9_di49app.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{cfd92808-2d73-4577-9b03-c49dee69d804}" AbsContentSize="420,2" UseAbsSize="True" RelativePosition="0.5,0.691173">
+                    <WZUI9Image Type="WZUI9Image" GUID="{c0423b8d-4817-416d-8262-d6e9e0601d70}" File="ui/common/common_scale9_di49app.png" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndComment>

@@ -1,0 +1,25 @@
+<CellFriendInvite GUID="{383e8f59-4c8b-4a2e-98f4-b615fef8c609}">
+    <WZUIContainer AbsContentSize="300,106" GUID="{5455ca37-5663-4aa5-a55b-152043b5b79e}" LuaObjectName="" Name="CellFriendInvite" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" Visible="True" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{a51bae71-216a-411a-b592-5bcba6683a98}" AbsContentSize="300,106" UseAbsSize="True">
+            <WZUIContainer GUID="{27c6812d-53ba-4ff8-9f4d-ade1ce3d1dcc}" RelativePosition="0.5,0.5" Type="WZUIContainer" AbsContentSize="300,106" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{943bffa9-7a19-4520-a9d4-b185f325b5ba}" File="ui/common/common_scale9_di18.png" Opacity="255" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="660,61" GUID="{77dc081c-bc39-4728-ade1-59fc61f1f72f}" Type="WZUIContainer" TouchEnable="True" RelativePosition="0.5,0.5">
+                <WZUIContainer GUID="{5993ffaa-cd48-438b-a476-12ea7b95bf45}" RelativePosition="0.65,0.5" Type="WZUIContainer" AnchorPoint="0.5,0.5" RelativeSize="1,0.5" TouchEnable="False" AbsContentSize="220,106" UseAbsSize="True">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{78cb2079-0df5-4565-b8f0-d656461990e9}" FontSize="22" Text="asdfasf" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.05,0.75" Name="txtName_CellFriendInvite" Color="79,60,48" BoldFont="False" EnableStroke="False" StrokeColor="62,34,8" StrokeSize="1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{798263ed-836f-43d0-85b2-e0c615dd8bfa}" FontSize="22" Color="127,70,26" Text="lv 25" AnchorPoint="0,0.5" Name="txtLevel_CellFriendInvite" RelativePosition="0.05,0.5" EnableStroke="False" StrokeColor="105,65,46" StrokeSize="1" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{a607fa09-ab0b-4cea-9df2-723d59eafe98}" Name="txtServerName_CellFriendInvite" MaxWidth="200" AnchorPoint="0,0.5" RelativePosition="0.05,0.25" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{2f2d1247-94a2-4b3f-9d5a-97260d201289}" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.165,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{8ee9e577-ac45-45c0-992a-285d3b613477}" File="ui/common/common_icon_tx.png" UseOriginSize="False" Visible="True" />
+                <WZUIContainer AnchorPoint="0.5,0.5" GUID="{44912a46-61a6-4309-868d-e98811fd07cf}" RelativePosition="0.5,0.5" RelativeSize="1,1" TouchEnable="True" Type="WZUIContainer" Name="conHead_CellFriendInvite" />
+            </WZUIContainer>
+            <Button GUID="{dcdb255d-f865-418b-af57-7596a940ac91}" LuaDoneFunctionName="onCheckInfo" Type="WZUIButton" AbsContentSize="300,106" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+                <NormalElement GUID="{55f44c30-bf79-4589-b12b-6e23807fab3b}" Type="WZUIContainer" />
+                <SelectElement GUID="{c94b8eb7-3027-4909-9192-7fa991cea29a}" Type="WZUIContainer" />
+                <DisableElement GUID="{aae830d7-0127-41c2-a77e-4c81beb85783}" Type="WZUIContainer" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellFriendInvite>

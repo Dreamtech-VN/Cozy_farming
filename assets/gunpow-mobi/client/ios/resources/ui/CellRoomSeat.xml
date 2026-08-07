@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" ?>
+<CellRoomSeat GUID="{719D4773-6A0B-4f44-8E74-E3508F597EF7}">
+    <WZUIWindow AbsContentSize="306,386" GUID="{fe6339a7-08d5-48e1-a7d1-66dc6187ef0d}" LuaObjectName="" Name="CellRoomSeat" NameCreate="True" RelativePosition="0.5,0.5" ShowAll="False" Type="WZUIWindow" UseAbsSize="True" ScaleX="1" ScaleY="1">
+        <WZUIContainer AbsContentSize="306,386" GUID="{bd7c4ec1-8692-4b24-af14-79870c34b859}" Name="conBg_CellRoomSeat" Order="0" RelativePosition="0.5,0.5" ShowAll="False" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+            <WZUIImage Type="WZUIImage" GUID="{88dfec11-7f65-4a91-82fe-ce7abbee2fde}" File="ui/hall/battle_scale9_jndj02.png" UseOriginSize="False" Name="imgBg_CellRoomSeat" Visible="True" />
+            <WZUIImage Type="WZUIImage" GUID="{35968f1f-e8f5-4187-843c-3c6dc977d20e}" File="ui/common/common_pic_diwen2.png" UseOriginSize="True" Scale="0.6" RelativePosition="0.5,0.508163" AbsPosition="100,124.5" TouchEnable="False" Opacity="51" Visible="True" ScaleX="0.6" ScaleY="0.6" Name="imgBgCenterIcon_CellRoomSeat" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{9ee46409-c96d-427c-853f-13e22d822703}" Name="conInfo_CellRoomSeat" AbsContentSize="0,0" UseAbsSize="False" Visible="False" RelativePosition="0.5,0.5">
+            <WZUIImage Type="WZUIImage" GUID="{1caf4abd-f4b5-4e31-9a8b-3bf58189b6f0}" File="ui/hall/battle_fazhen.png" UseOriginSize="True" RelativePosition="0.5,0.18" AbsPosition="101,58.3142" Scale="1" ScaleY="1" TouchEnable="False" ScaleX="1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b0160960-5c78-4204-9f0b-72ecb6f8c862}" Name="txtPlayerLv_CellRoomSeat" RelativePosition="0.425676,0.742424" AnchorPoint="1,0.5" Color="255,227,116" FontSize="18" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" Text="" Visible="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4105c3e5-b618-4120-96f1-8451bb027b4c}" Name="txtPlayerName_CellRoomSeat" RelativePosition="0.425676,0.742424" AnchorPoint="0,0.5" Color="255,255,255" EnableStroke="True" FontSize="18" StrokeSize="4" Text="" StrokeColor="79,60,48" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{066ee28c-1bb9-4c12-bcb6-e365f39cfd01}" AbsContentSize="40,250" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.914038,0.100331" TouchEnable="True">
+                <Button Type="WZUIButton" GUID="{ede5aa2a-ae59-4bb4-ac8d-835303860976}" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.5,0.62" Name="btnLove_CellRoomSeat" LuaDoneFunctionName="onTouchLove" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{207d1b9e-11cb-4076-b6af-bcd365b67415}">
+                        <WZUIImage Type="WZUIImage" GUID="{3bb10738-9f19-4b51-af69-5e052b6744ad}" File="ui/common/common_icon_hydfq3.png" UseOriginSize="True" Name="imgLove_CellRoomSeat" Scale="1" ScaleX="1" ScaleY="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{5faa21b1-0ac9-4dbf-af0a-8dd9e94d0636}">
+                        <WZUIImage Type="WZUIImage" GUID="{2c130df0-c29f-4182-bc95-8b224727e506}" File="ui/common/common_icon_hydfq3.png" Name="imgLove2_CellRoomSeat" Scale="1" ScaleX="1" ScaleY="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{3f4399d0-bae1-4b83-855a-cce12998d686}" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{4bdd0013-2535-4e94-8da5-8ee820b998bc}" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.5,0.48" Name="btnFriend_CellRoomSeat" LuaDoneFunctionName="onTouchFriend" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{7d7e72fb-092c-4444-b99e-bb8cca6433ce}">
+                        <WZUIImage Type="WZUIImage" GUID="{9def4587-3ce9-4e29-806a-2de606b30476}" File="ui/common/common_icon_hydmy1.png" Name="imgFriend_CellRoomSeat" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{cb036778-c668-46cf-a208-86b478a08f85}">
+                        <WZUIImage Type="WZUIImage" GUID="{f565ce2a-b2d0-4782-bf7f-1b84c4dc37de}" File="ui/common/common_icon_hydmy1.png" UseOriginSize="True" Name="imgFriend2_CellRoomSeat" Scale="1" ScaleX="1" ScaleY="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{341e4fc3-bbcb-4357-b88e-04aa440a47e6}" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{b45e7e4f-dab0-4e85-881d-16fa197849e2}" Name="btnMaster_CellRoomSeat" LuaDoneFunctionName="onClickMaster" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.5,0.32" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{b9d339c9-0460-4252-880e-dd98beed2918}">
+                        <WZUIImage Type="WZUIImage" GUID="{3d4bb1bf-7ade-46d3-8152-9ef8afb52094}" File="ui/common/common_icon_hydsf1.png" UseOriginSize="True" Name="imgMaster_CellRoomSeat" Scale="1" ScaleX="1" ScaleY="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{ac7a31fd-760c-4548-bb1c-7f392980df10}">
+                        <WZUIImage Type="WZUIImage" GUID="{fb11e1b7-ee87-4ee3-afa9-b95f475583f8}" File="ui/common/common_icon_hydsf1.png" UseOriginSize="True" Name="imgMaster2_CellRoomSeat" Scale="1" ScaleX="1" ScaleY="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{32262bb4-9eba-4b3a-a4a6-c73f0090463c}" />
+                </Button>
+                <WZUIImage Type="WZUIImage" GUID="{08a35365-94bf-49da-8dac-dd9c70bc6ebb}" TouchEnable="False" File="ui/chat/chat_common_icon_kuafu.png" Visible="False" UseOriginSize="True" RelativePosition="0.481423,0.929227" Name="imgCrossService_CellRoomSeat" />
+                <WZUIContainer Type="WZUIContainer" GUID="{0ca824a1-33f9-4e1e-b1fb-5b37fd9205a5}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.325,0.7" Name="conAthleticLevel_CellRoomSeat" AbsPosition="168.672,180.869" Visible="True" AnchorPoint="0.5,0">
+                    <WZUIButton Type="WZUIButton" GUID="{18a1ebdd-72e9-456f-8926-703fd1f1d3d5}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.5,0.5" Name="btnAthleticLevel_CellRoomSeat" Visible="True" LuaDoneFunctionName="onEventSection" TouchEnable="True" Tag="1">
+                        <NormalElement Type="WZUIContainer" GUID="{3f501b68-001b-42fa-92c8-44791425b1c5}" />
+                        <SelectElement Type="WZUIContainer" GUID="{43289782-c2ce-46ae-a5e0-1681ef47e568}" />
+                        <DisableElement Type="WZUIContainer" GUID="{668c43f3-921d-4777-ad17-4e3f9e6829a0}" />
+                    </WZUIButton>
+                    <WZUIImage Type="WZUIImage" GUID="{6be7a06e-ed33-47db-85e9-9de7a63e7c5b}" Name="imgPKLevel_CellRoomSeat" Scale="0.7" File="" UseOriginSize="True" TouchEnable="False" ScaleX="0.7" ScaleY="0.7" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{658a4c94-b512-41a4-8fb1-0e651d7fb61d}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.325,0.7" Name="conQualifyLevel_CellRoomSeat" AbsPosition="168.672,180.869" Visible="False" AnchorPoint="0.5,0">
+                    <WZUIButton Type="WZUIButton" GUID="{c2bd67bc-8360-47f3-a7d6-025f4ceeb286}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.5,0.5" Name="btnQualifyLevel_CellRoomSeat" Visible="True" LuaDoneFunctionName="onClickQualifyBtn" TouchEnable="True" Tag="1">
+                        <NormalElement Type="WZUIContainer" GUID="{e17bb362-a687-4f8c-9596-4af12e2a2a50}" />
+                        <SelectElement Type="WZUIContainer" GUID="{dee5fe9f-0a21-46ed-8e47-865f8f5ff3a4}" />
+                        <DisableElement Type="WZUIContainer" GUID="{9c089dc0-4f6c-4056-abd2-e9d4fac756ab}" />
+                    </WZUIButton>
+                    <WZUIImage Type="WZUIImage" GUID="{df0864cc-22f4-4532-9703-5485f3aa2dd8}" Name="imgQualifyLevel_CellRoomSeat" Scale="0.3" File="ui/common/common_icon_pws1.png" UseOriginSize="True" TouchEnable="False" ScaleX="0.3" ScaleY="0.3" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{fca9e8fd-2ad5-4b93-a056-aca3b5392ebb}" AbsContentSize="30,30" UseAbsSize="True" RelativePosition="0.924837,0.936781" Name="conKickedOut_CellRoomSeat" Visible="False">
+                <Button Type="WZUIButton" GUID="{67cc643b-a2ca-48b0-90d8-095a85109f8d}" LuaDoneFunctionName="onClickKickedOut">
+                    <NormalElement Type="WZUIContainer" GUID="{4776b1bd-b111-4c4d-b439-b05200eaa8ef}">
+                        <WZUIImage Type="WZUIImage" GUID="{05039277-a344-4159-b716-3413fc143400}" File="ui/hall/battle_icon_guanbi.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{4fb7d0f3-6cc5-40e7-84d6-fecf57d8f9d9}">
+                        <WZUIImage Type="WZUIImage" GUID="{f2641a80-45d1-4511-9762-a41e18a08b72}" File="ui/hall/battle_icon_guanbi.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{6b6e2ecb-2998-4d74-9333-58f417c2101a}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{bbe5bc38-5663-4df9-b947-5649d62b5d33}" Name="imgAssetFight_CellRoomSeat" File="ui/common/common_btn_zdfb_zz.png" UseOriginSize="True" RelativePosition="0.143791,0.897161" TouchEnable="False" Visible="False" Rotation="0" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{75522f78-b259-4a77-a0ac-11dbc2986228}" Name="conSeatWait_CellRoomSeat" AbsContentSize="0,0" UseAbsSize="False" RelativePosition="0.5,0.5" Visible="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{e3987e57-7a70-499e-b3f2-ce65b748481f}" AbsContentSize="190,120" UseAbsSize="True">
+                <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickChangSeat" GUID="{bba48788-1b92-48ce-83a5-b3b36c05ce3d}" AbsContentSize="0,0" UseAbsSize="False" RelativePosition="0.5,0.5">
+                    <NormalElement Type="WZUIContainer" GUID="{f7303821-7cbf-4d02-8fbb-f008a8eaf3d2}">
+                        <WZUIImage Type="WZUIImage" GUID="{674bd9ce-9b56-4184-83ce-46a579bd34f1}" File="ui/common/common_icon_quan.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{3a4a5ec0-75c3-453f-a8f4-e4e6251ffb55}">
+                        <WZUIImage Type="WZUIImage" GUID="{670f9ad7-ae1d-4253-b8b0-34d7462f3702}" File="ui/common/common_icon_quan.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{73d5e26d-c672-464a-8c46-2c177e07c01e}" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{4b6dab4d-a8b1-4bbf-ad3e-714374eb384f}" FontSize="24" Color="255,236,193" Text="" Name="txtWaitSeat_CellRoomSeat" TextKey="WAITING" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1f932ec2-b048-4c40-8cad-4cc6b72cb04a}" AbsContentSize="190,55" UseAbsSize="True" RelativePosition="0.5,0.0122449" Name="conCloseSeat" AnchorPoint="0.5,0" AbsPosition="100,3">
+                <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickCloseSeat" GUID="{502cdbaa-e9ae-4964-b091-bd5149724800}">
+                    <NormalElement Type="WZUIContainer" GUID="{e24a42a6-db2a-4344-b5eb-c2761430e463}" />
+                    <SelectElement Type="WZUIContainer" GUID="{4c3e408d-26d6-46ad-8155-5d1099b60150}" />
+                    <DisableElement Type="WZUIContainer" GUID="{1c5b0ef1-daa3-464a-ad15-ab004eb0fc4b}" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{901c8e97-36fb-4bb4-a1f4-f3cc0841dfac}" FontSize="24" Color="255,236,193" Text="点击关闭" Name="txtCloseSeat_CellRoomSeat" TextKey="CLICK_CLOSE" RelativePosition="0.5,0.5" AbsPosition="95,32.3334" Visible="True" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="2" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{f2c5fe99-594a-45a5-9bba-ec132a2db120}" Name="conSeatLock_CellRoomSeat" Visible="False" RelativePosition="0.5,0.5" UseAbsSize="False">
+            <WZUIImage Type="WZUIImage" GUID="{cb4201ba-65bb-405b-8576-07ff9794a453}" File="ui/common/common_icon_suo.png" UseOriginSize="True" RelativePosition="0.5,0.509164" AbsPosition="100,103.745" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{b15af665-aa65-4406-9414-c19173ec9c7e}" Name="conSeatClose_CellRoomSeat" Visible="False">
+            <WZUIImage Type="WZUIImage" GUID="{cbf61189-eea9-4c61-874b-70fc4390e556}" File="ui/common/common_icon_suo.png" UseOriginSize="True" RelativePosition="0.5,0.509164" AbsPosition="100,124.745" />
+            <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickOpenSeat" GUID="{0fc70471-0bd9-4d02-abd6-9649827527d7}" RelativeSize="0.95,0.8" RelativePosition="0.5,0.426531">
+                <NormalElement Type="WZUIContainer" GUID="{3e743342-d190-4fa1-b737-079e2ad9a097}" />
+                <SelectElement Type="WZUIContainer" GUID="{7edb81a6-9a2e-4f26-bb93-50f561a1e21b}" />
+                <DisableElement Type="WZUIContainer" GUID="{ae8e5623-02de-4283-bbcd-0257a8b95e0d}" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{b8b4ddc7-76e7-4e1f-a77c-dfab0fd14368}" AbsContentSize="190,58" UseAbsSize="True" RelativePosition="0.5,0.140867" TouchEnable="False">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e8cb7a36-1689-44c1-8cba-2e397aa30828}" FontSize="24" Color="255,236,193" Text="" Name="txtOpenSeat_CellRoomSeat" TextKey="CLICK_OPEN" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="2" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{cdf95cc3-5a94-4a2c-ac7d-aa87ab4020cf}" Name="conSeatProhibit_CellRoomSeat" Visible="False">
+            <WZUIImage Type="WZUIImage" GUID="{5ad0a69a-dfe2-4f5b-882c-487e2bb42b92}" File="ui/common/common_pic_fazheng4.png" UseOriginSize="True" RelativePosition="0.5,0.281426" AbsPosition="100,68.9495" Scale="0.8" ScaleY="0.6" />
+            <WZUIImage Type="WZUIImage" GUID="{2988182a-7cec-4683-9d05-5fe035071dac}" File="ui/common/common_icon_wenhao.png" UseOriginSize="True" RelativePosition="0.512162,0.521539" />
+            <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="False" Font="" FontSize="24" GUID="{10c8e389-2ac1-4365-8ab1-6af57adc542b}" Name="txtSeatStats_CellRoomSeat" RelativePosition="0.5,0.454767" ShadowColor="0,0,0" StrokeColor="60,19,12" StrokeSize="3" Text="" Type="WZUILabelTTF" AnchorPoint="0.5,0.5" TextKey="WAITING_MATCHES" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{53dd6c6c-6679-4748-8f33-dfbd3eea63cc}" Name="conSeatGuest_CellRoomSeat" Visible="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{f5481c95-3bd4-4dfa-a852-702d44110c21}" AbsContentSize="190,120" UseAbsSize="True" RelativePosition="0.5,0.512245" AbsPosition="100,125.5">
+                <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickChangSeat" GUID="{8d0cf63c-5c46-4130-b358-1e873a33bd77}" AbsContentSize="0,0" UseAbsSize="False" RelativePosition="0.5,0.5">
+                    <NormalElement Type="WZUIContainer" GUID="{83fc3f2a-4189-4fdf-9b47-4bea35ae948b}">
+                        <WZUIImage Type="WZUIImage" GUID="{c4889f35-b824-441d-88e1-74f1b2244559}" File="ui/common/common_icon_quan.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{e0427d44-be55-412a-b2c5-27f047b31f42}">
+                        <WZUIImage Type="WZUIImage" GUID="{92dc1ae5-2d63-4796-a6a0-c76fb6e8cfb5}" File="ui/common/common_icon_quan.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{7622e0fa-6579-4d0f-971e-de2dc71909dd}" />
+                    <WZUIImage Type="WZUIImage" GUID="{280f524e-53c7-4955-9f52-42ec80829dd0}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Name="imgAddIcon_CellRoomSeat" Visible="False" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{f5bf46b7-4c40-4072-b8a7-a73c7b36edea}" FontSize="24" Color="255,236,193" Text="" Name="txtWaitSeatGuest_CellRoomSeat" TextKey="WAITING" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</CellRoomSeat>

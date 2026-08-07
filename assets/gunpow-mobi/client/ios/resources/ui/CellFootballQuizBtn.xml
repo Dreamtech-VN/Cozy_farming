@@ -1,0 +1,23 @@
+﻿<CellFootballQuizBtn GUID="{02960d45-1c53-4d13-a20f-8752b65c84c8}">
+    <WZUIContainer Type="WZUIContainer" GUID="{1dabb92c-2bab-4e74-a887-24c0f01ed26e}" Name="CellFootballQuizBtn" AbsContentSize="150,68" UseAbsSize="True">
+        <Button Type="WZUIButton" GUID="{b0df005e-71e2-4400-9eeb-0828382013cc}" LuaDoneFunctionName="onClickBack">
+            <NormalElement Type="WZUIContainer" GUID="{e84e3e42-e9cc-41b1-b906-48d0684d8244}">
+                <WZUIImage Type="WZUIImage" GUID="{85ae9cbe-a510-40a2-98a9-44eb1beeec3f}" File="ui/football/football_frame_003.png" UseOriginSize="True" Visible="True" Name="imgBtn1_CellFootballQuizBtn" />
+                <WZUIImage Type="WZUIImage" GUID="{e8775396-a4bb-436e-9e61-6bbb4d942e24}" File="ui/football/football_frame_003_sel.png" UseOriginSize="True" Visible="False" Name="imgBtn2_CellFootballQuizBtn" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{2a5079b7-9239-4312-864e-e246a0b0d09a}">
+                <WZUIImage Type="WZUIImage" GUID="{46ac99a9-6ae7-415b-94af-1ed2e5ffe4c8}" File="ui/football/football_frame_003_sel.png" UseOriginSize="True" Visible="True" />
+            </SelectElement>
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{614eda22-de97-457a-97e7-6f24a273ad0b}" AbsContentSize="150,68" UseAbsSize="True" TouchSwallow="False">
+            <WZUIImage Type="WZUIImage" GUID="{1963ae76-1285-468c-a77f-579ec9f6285d}" File="ui/football/football_frame_003.png" Visible="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d577a9d5-67be-4478-9db5-8d9cfc0a4f18}" FontSize="18" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="38,96,174" Text="超级" RelativePosition="0.5,0.8" Name="txtTeam1_CellFootballQuizBtn" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{0299fe59-3505-4890-b310-5d5f93c839c1}" FontSize="18" TextKey="" Text="VS" Color="255,89,74" StrokeSize="4" EnableStroke="True" StrokeColor="38,96,174" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{50baa263-7d43-44d9-9de9-70ce41d2eab0}" FontSize="18" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="38,96,174" Text="超级" RelativePosition="0.5,0.2" Name="txtTeam2_CellFootballQuizBtn" />
+            <WZUIContainer Type="WZUIContainer" GUID="{77892f8b-2f0d-4bb8-8337-1a39e57619d9}" AbsContentSize="46,53" UseAbsSize="True" RelativePosition="1,0" AnchorPoint="1,0" Name="conState_CellFootballQuizBtn" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{0af9abd2-15ea-4cc0-a15d-5731b198c47c}" File="ui/football/football_horn_001.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{027e06c1-adfd-4987-8b67-aaa83687ab14}" FontSize="16" EnableStroke="True" StrokeSize="2" Color="255,255,255" StrokeColor="229,105,22" Text="结束" Rotation="-45" RelativePosition="0.67,0.33" Name="txtState_CellFootballQuizBtn" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellFootballQuizBtn>

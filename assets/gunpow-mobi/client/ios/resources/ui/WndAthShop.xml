@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<WndAthShop GUID="{5FC8BBE3-C72D-4c9f-8D59-CF607C27D40F}">
+	<WZUIWindow Type="WZUIWindow" GUID="{8AA78B40-6544-4de5-8579-6B8C774232D9}" Name="WndAthShop" NameCreate="True" LuaObjectName="WndAthShop" AbsContentSize="" ShowAll="True" LuaTouchBeganFunction="onTouchBtn">
+		<WZUIContainer Type="WZUIContainer" GUID="{829E8A40-0F7A-48cb-A107-07C0AE894ED5}" AbsContentSize="770,534" UseAbsSize="True" RelativePosition="0.497917,0.470313">
+			<WZUIContainer Type="WZUIContainer" GUID="{327E6284-FB71-410c-851B-A1BF620E6638}" RelativePosition="0.5,0.5" Visible="True">
+				<WZUI9Image Type="WZUI9Image" GUID="{5CF6B956-9D99-47ee-82B6-1AEE99FC9B8E}" File="ui/common/common_scale9_di34.png" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{525373A2-BA11-4d44-BC1D-1DD7AEA9009F}" AbsContentSize="744,407" UseAbsSize="True" RelativePosition="0.5,0.507448">
+				<WZUI9Image Type="WZUI9Image" GUID="{43B95959-47AF-446c-89F1-7C4A26D3F7FC}" File="ui/common/common_scale9_di9.png" Opacity="200" />
+				<WZUITableContainer Type="WZUITableContainer" GUID="{A778F52F-7641-481a-89C7-211571B90027}" RelativeSize="0.98,0.96" Name="tabProp_WndAthShop" NameCreate="True" CellElementHeight="0.5" EnableMoveHorizontal="False" EnableMoveoutContainer="False" RelativePosition="0.5,0.497422" ColumnCount="4" Resistance="" RevertTime="" EnableMoveVertical="False" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{7FDC5CE8-7D03-40f8-9604-7C764C2F5306}" RelativeSize="1,0.1" RelativePosition="0.5,0.0671081" AbsPosition="385,35.8357">
+				<WZUIContainer Type="WZUIContainer" GUID="{6B6A26C6-0EA1-4bce-B98D-2734C1BEF1C2}" AbsContentSize="200,40" UseAbsSize="True" RelativePosition="0.184279,0.44403">
+					<WZUI9Image Type="WZUI9Image" GUID="{5E811F0C-AAED-4b9a-A62A-E44CD08F8D8F}" File="ui/common/common_scale9_heidi3.png" Opacity="255" Visible="False" />
+					<WZUIImage Type="WZUIImage" GUID="{D93E5F76-6EB3-4195-A65C-CED18EAFE1E0}" File="ui/common/common_icon_jingjibi.png" UseOriginSize="True" RelativePosition="0.145,0.5" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{6FC57A73-A3F2-41c7-A3A0-75025D3A9FAC}" Name="txtShopMoney_WndAthShop" NameCreate="True" FontSize="25" BoldFont="True" EnableStroke="True" Color="255,227,116" StrokeColor="79,60,48" StrokeSize="1" Text="" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.315,0.45" />
+				</WZUIContainer>
+				<WZUIButton Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.865555,0.5" LuaDoneFunctionName="OnBtnRefresh" GUID="{1B5BA6BE-A5B1-4807-ACC2-1136186717F5}" LuaActionName="Normal">
+					<NormalElement Type="WZUIContainer" GUID="{438E4385-5193-4bf8-B5B3-8A9E7D44450F}">
+						<WZUIImage Type="WZUIImage" GUID="{2E1BE7C3-4AAB-4d4e-B045-B7DCC951C64E}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+					</NormalElement>
+					<SelectElement Type="WZUIContainer" GUID="{0CA685F2-1D5F-4231-9762-AB52DE4844C5}" Scale="1">
+						<WZUIImage Type="WZUIImage" GUID="{CD39CA20-5E4B-47d5-8473-BF51B624E361}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+					</SelectElement>
+					<DisableElement Type="WZUIContainer" GUID="{54E273EC-A81E-4b69-90AB-879F13E9F047}">
+						<WZUIImage Type="WZUIImage" GUID="{163CDD22-9152-4984-82FE-932E4DE91EA0}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" GrayRender="True" />
+					</DisableElement>
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{810EECB5-99B6-47fd-8934-0F6756BBF14E}" Name="" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeColor="64,128,1" StrokeSize="4" TextKey="REFRESH" LabelStyleKey="SMALL_GREEN_BTN" />
+				</WZUIButton>
+				<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{490D27DB-9924-433f-A48F-B3F3CB9FFC29}" Name="txtRemind_WndAthShop" NameCreate="True" MaxWidth="500" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{0F113374-0C93-49b9-BC69-DD46F75FB665}" RelativePosition="0.5,0.990637" RelativeSize="1,0.1" AnchorPoint="0.5,1">
+				<WZUIContainer Type="WZUIContainer" GUID="{F3E852EA-F480-4436-85C9-9462E45A79C2}" RelativePosition="0.5,0.291667" Visible="True" RelativeSize="0.982,1">
+					<WZUIContainer Type="WZUIContainer" GUID="{42FDE4FF-FEB4-49da-807C-83E2192F456F}" AbsContentSize="" UseAbsSize="False" AnchorPoint="0,0.5" RelativePosition="0,0.443182" Visible="True" RelativeSize="0.5,1.5" AbsPosition="-8.99999,23.6659">
+						<WZUI9Image Type="WZUI9Image" GUID="{90D884D7-A6F5-476c-A6A3-84A44D0B5A65}" File="ui/common/common_scale9_di31.png" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Visible="True" Opacity="150" />
+					</WZUIContainer>
+					<WZUIContainer Type="WZUIContainer" GUID="{AB57B957-96E0-4a93-95DE-3A6376F35FFD}" AbsContentSize="" UseAbsSize="False" AnchorPoint="1,0.5" RelativePosition="1,0.443182" Visible="True" RelativeSize="0.5,1.5" AbsPosition="748.808,23.6659">
+						<WZUI9Image Type="WZUI9Image" GUID="{BCC750B4-3AF7-4653-9C07-B1B9ECC2955E}" File="ui/common/common_scale9_di31.png" Scale="1" FlipX="False" ScaleX="-1" Opacity="150" />
+					</WZUIContainer>
+				</WZUIContainer>
+				<WZUIContainer Type="WZUIContainer" GUID="{46C5CBBE-9440-4c80-A4F3-94EAF60EABEF}" AnchorPoint="0.5,1" RelativePosition="0.5,1" TouchEnable="False">
+					<WZUIImage Type="WZUIImage" GUID="{13B14B7F-B805-41ef-9641-7B758BB0FBD4}" File="ui/common/common_icon_scdi2.png" UseOriginSize="True" AnchorPoint="0,1" RelativePosition="0.01,1" FlipX="True" Visible="True" />
+					<WZUIImage Type="WZUIImage" GUID="{852D5974-3C40-4cb9-918B-5FDF94081F47}" File="ui/common/common_icon_deng.png" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.337079" FlipX="True" />
+					<WZUIContainer Type="WZUIContainer" GUID="{DEFC00D7-FDD2-4575-BE31-6C9860724B08}" Scale="1" RelativePosition="0.377923,0.743445" RelativeSize="0.5,1">
+						<WZArmature Type="WZArmature" GUID="{641FA043-A5C2-4c37-BD82-E840CEC27ABB}" ArmatureFile="ui/ui_shop_lighting_01.xml" ArmatureName="ui_shop_lighting_01" UseOriginSize="True" Scale="1." RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5">
+							<Action Type="WZUIArmatureAnimationById" GUID="{A5B025EF-1D23-4457-B82A-234D83F7B751}" AnimationId="0" Loop="1" />
+						</WZArmature>
+					</WZUIContainer>
+					<WZUIImage Type="WZUIImage" GUID="{F73FC622-8D16-472c-9FDB-A062452FEF20}" File="ui/common/common_icon_scdi2.png" UseOriginSize="True" AnchorPoint="1,1" RelativePosition="0.985714,1" />
+				</WZUIContainer>
+				<WZUIContainer Type="WZUIContainer" GUID="{A189B686-CD9C-48b6-BD69-0F68BD608E37}" RelativePosition="0.5,0.746212" RelativeSize="1,1">
+					<WZUIImage Type="WZUIImage" GUID="{F482124B-BA9D-4da7-9F14-70BDD36115E6}" File="ui/common/common_icon_btd.png" UseOriginSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+					<WZUIImage Type="WZUIImage" GUID="{184603ED-9C3C-4ba0-8CC3-F23DAAE5FE4B}" File="ui/common/commom_icon_jjsd.png" UseOriginSize="True" />
+				</WZUIContainer>
+				<WZUIButton Type="WZUIButton" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.963,0.610907" GUID="{6C79C0F7-F08F-409c-B018-8B2D39921467}" LuaDoneFunctionName="onBtnReturn" RelativeSize="1,1" Visible="True" AbsPosition="740.481,32.6224">
+					<NormalElement Type="WZUIContainer" GUID="{CDC9A417-FE7B-4bfa-B4FC-C56DD379BE7F}">
+						<WZUIImage Type="WZUIImage" GUID="{60960160-1CFB-4408-A22A-C1DD98FEBA25}" File="ui/common/common_icon_yqsgb.png" UseOriginSize="True" />
+					</NormalElement>
+					<SelectElement Type="WZUIContainer" GUID="{0CD7E903-E3BC-47d6-B778-7965AD921F34}">
+						<WZUIImage Type="WZUIImage" GUID="{43A919FB-1A64-4709-B53F-A016E841C6DD}" File="ui/common/common_icon_yqsgb_sel.png" UseOriginSize="True" />
+					</SelectElement>
+					<DisableElement Type="WZUIContainer" GUID="{79BE11E6-5622-4eb6-BA0D-6EDD9487772C}" />
+				</WZUIButton>
+				<WZUIContainer Type="WZUIContainer" GUID="{2A4FD448-9F74-4b14-9565-E3C792D000B4}" AbsContentSize="40,40" Visible="True" UseAbsSize="True" RelativePosition="0.98961,-0.166023">
+					<WZUIImage Type="WZUIImage" GUID="{3D9CB44D-D86D-4a78-BB8E-35E0FED8D88B}" File="ui/common/common_icon_yqshz.png" UseOriginSize="True" />
+				</WZUIContainer>
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIWindow>
+</WndAthShop>

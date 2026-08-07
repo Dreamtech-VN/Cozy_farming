@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WndTeachOpenModule GUID="{C96B0636-B3AF-477c-B094-EAC618570E56}">
+    <WZUIWindow AbsContentSize="1500,800" GUID="{F5951B7F-6940-4a95-A0FA-E5D7450CA2D3}" LuaObjectName="WndTeachOpenModule" LuaTouchBeganFunction="onTouchBegan" LuaTouchEndedFunction="onTouchEnd" Name="WndTeachOpenModule" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIWindow" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="960,640" GUID="{3F4D76EE-E921-4a1f-AB6D-9A72825AF39C}" Name="conTouch_WndTeachOpenModule" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+            <WZUI9Image File="common/teach/teach_05.png" GUID="{B8A88A5F-BCDA-43fb-AA4D-5BA77789C998}" Name="imgTouch_WndTeachOpenModule" NoBorder="False" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="560,220" GUID="{D2183483-C8DB-45ca-AE1D-1C9887F318A7}" Name="conDialog_WndTeachOpenModule" RelativePosition="0.5,0.5" RelativeSize="1,0.95" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+            <WZUI9Image File="common/teach/teach_05.png" GUID="{9F49BD4B-71EB-4340-8CDB-E46BF361BB68}" NoBorder="False" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False" />
+            <WZUIContainer AbsContentSize="330,60" GUID="{2F8C9873-C1AD-4b0f-B513-C122ECDEFCF7}" Name="conOpen_WndTeachOpenModule" RelativePosition="0.5,0.84" RelativeSize="1,0.95" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                <WZUI9Image File="common/teach/teach_03.png" GUID="{A416731C-2742-4e13-A010-9C33E8D0399A}" Name="imgOpen_WndTeachOpenModule" NoBorder="False" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="True" />
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{8BD63AF6-D553-40c4-9780-B44E907B2FD1}" Name="txtOpen_WndTeachOpenModule" RelativePosition="0.5,0.5" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="4" Type="WZUILabelTTF" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="330,60" GUID="{A5275667-2752-4c11-8633-ACABEECDB12D}" Name="conName_WndTeachOpenModule" RelativePosition="0.5,0.57" RelativeSize="1,0.95" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                <WZUI9Image File="common/teach/teach_06.png" GUID="{8E7BA4CA-540A-48f3-BF88-C6738E2A2A73}" Name="imgName_WndTeachOpenModule" NoBorder="False" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="True" />
+                <WZUILabelTTF BoldFont="True" Color="0,246,34" EnableStroke="True" FontSize="30" GUID="{2FE1FFF8-1399-4ab2-B760-FABF9E6CE190}" Name="txtName_WndTeachOpenModule" RelativePosition="0.5,0.58" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="4" Type="WZUILabelTTF" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="290,90" AnchorPoint="0.5,1" GUID="{D0043C55-74F4-4bbe-835F-7F367EA46EF8}" Name="conButton_WndTeachOpenModule" RelativePosition="0.5,0.38" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <WZUI9Image File="common/teach/teach_04.png" GUID="{D9375DC6-9BB5-4c6d-B547-4FC9A0DF1AFB}" Name="imgButton_WndTeachOpenModule" RelativePosition="0.5,0.48" Scale="1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True" />
+                <Button AbsContentSize="180,61" GUID="{3B8215D1-9015-4ba9-B3A7-98D82C9F4CA3}" LuaDoneFunctionName="onOkClick" Name="btnOk_WndTeachOpenModule" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{A3C88F77-D554-4339-9D23-E5E5A152584E}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="common/teach/teach_02.png" GUID="{FE7530E7-38A1-46dd-B894-82A8B4957D63}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{73338689-203E-4246-8795-5CEC8DAC54AF}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="common/teach/teach_02_sel.png" GUID="{FA55F6D2-3977-4bf3-B7DF-9432D2460E4E}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{DC015BAF-AD57-4e9a-BADA-BBA0530AEC2D}" Type="WZUIContainer">
+                        <WZUIImage File="common/teach/teach_02.png" GUID="{6C905987-BC82-4147-9261-D239A975FDAE}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" />
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{FDF24F3A-69CC-4dc3-B6F7-8AEF66E13299}" Name="txtOk_WndTeachOpenModule" RelativePosition="0.5,0.53" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="4" Type="WZUILabelTTF" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTeachOpenModule>

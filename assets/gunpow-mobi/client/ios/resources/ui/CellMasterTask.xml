@@ -1,0 +1,33 @@
+<CellMasterTask GUID="{defa055f-45c1-4de1-9ceb-528362733f82}">
+    <WZUIContainer AbsContentSize="868,108" GUID="{1a448d7b-5ac0-45f2-a56b-26c80a2c3291}" LuaObjectName="" Name="CellMasterTask" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{9dd4f537-368c-4d8f-8541-91295bc4c26e}" AbsContentSize="868,100" UseAbsSize="True" RelativePosition="0.5,1" TouchEnable="False" AnchorPoint="0.5,1">
+            <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{f14ec9c4-3b07-46a2-9acb-b6282e8972bb}" RelativePosition="0.5,0.487515" RelativeSize="1,1" Type="WZUI9Image" Visible="True" TouchEnable="False" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="400,40" GUID="{331c61d6-6cdb-4ff6-97e8-45c88887c91d}" Name="con1" RelativePosition="0.41,0.359501" Type="WZUIContainer" UseAbsSize="True" Visible="True" TouchEnable="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{ae3a0798-d53b-4305-9495-2d79d2b27b4b}" File="ui/common/common_scale9_di8.png" />
+            <WZUIImage Type="WZUIImage" GUID="{f960a04c-4d7b-4168-8c01-1d523cd8e32a}" File="ui/common/common_icon_exp.png" UseOriginSize="True" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.1,0.5" Name="imgReward1" />
+            <WZUIImage Type="WZUIImage" GUID="{1999201c-e779-4d3d-a8b2-17a9cdf0ae53}" File="ui/common/common_icon_jinbi.png" UseOriginSize="True" Scale="0.6" AnchorPoint="0.5,0.5" RelativePosition="0.4,0.5" Name="imgReward2" ScaleX="0.6" ScaleY="0.6" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c46f3281-31df-4495-9ad7-3eba33e9de75}" Name="txtReward1" Color="255,255,255" FontSize="20" Text="3000" RelativePosition="0.18,0.5" Alignment="Left" AnchorPoint="0,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{830fcd4e-518a-4be2-9daf-53de1231927d}" Name="txtReward2" Color="255,255,255" FontSize="20" Text="1500" RelativePosition="0.46,0.5" Alignment="Left" AnchorPoint="0,0.5" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d134f625-ad7b-4b0b-853e-3bb4309be21c}" Text="" FontSize="24" Color="158,139,121" TextKey="ACTIVE_FINISH" LabelStyleKey="" RelativePosition="0.9,0.5" BoldFont="True" Name="txtFinish" Visible="False" />
+        <Button Type="WZUIButton" GUID="{962eb5ea-6832-4a43-acbd-ee90733731d8}" Name="btnFinish_CellMasterTask" Visible="True" LuaDoneFunctionName="onFinish" Tag="1" AbsContentSize="120,60" UseAbsSize="True" LuaActionName="Normal" RelativePosition="0.9,0.5">
+            <NormalElement Type="WZUIContainer" GUID="{793b72be-7f2f-44a3-95f1-88ae1a5828b8}">
+                <WZUI9Image Type="WZUI9Image" GUID="{87d81aad-71ec-48e1-abc9-e20e4c69c20c}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{cc475023-7c73-41bd-bdee-d4cb3bd75f5c}" Color="255,236,193" FontSize="24" NameCreate="True" Text="" Name="txtFinish1_CellMasterTask" EnableStroke="True" StrokeColor="0,72,3" StrokeSize="4" Font="" LabelStyleKey="" TextKey="MASTERINFO65" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{28000bca-a82b-4c74-9cf9-3783e560fca3}">
+                <WZUI9Image Type="WZUI9Image" GUID="{d2128953-dbfc-4115-9094-51c3ca65d1b4}" File="ui/common/common_btn_anniu10_0_sel.png" Scale="1" UseOriginSize="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1a2885b0-af8a-452b-8cfa-45304e49c5de}" Color="255,236,193" FontSize="24" NameCreate="True" Text="" Name="txtFinish2_CellMasterTask" Font="" EnableStroke="True" StrokeColor="0,72,3" StrokeSize="4" LabelStyleKey="" TextKey="MASTERINFO65" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{7ab90151-1b39-4f3a-8dbc-aa39f83433e3}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{c6bdd9fb-b04e-49c4-80d3-89f44f9ba41c}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.088,0.52" NameCreate="True" Name="conItemIcon_CellMasterTask">
+            <WZUIImage Type="WZUIImage" GUID="{f6bd7794-e5fc-4763-a725-bf3083cda610}" UseOriginSize="True" File="ui/common/common_scale9_beibaodi2.png" />
+            <WZUI9Image Type="WZUI9Image" GUID="{23ab3434-94e1-4231-9f76-84c1579b3a60}" File="ui/common/common_scale9_beibaodi1.png" RelativePosition="0.5,0.5" UseOriginSize="True" />
+            <WZUIImage Type="WZUIImage" GUID="{042b749f-e03a-47e1-aa1b-7fbbaf5d19bd}" File="ui/task/common_icon_renwu1.png" UseOriginSize="True" NameCreate="False" Name="imgIcon_CellMasterTask" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e93252f6-41cc-4033-b9c9-ebdb28844d7b}" Name="txtTarget" LabelStyleKey="C14_F22" Text="" RelativePosition="0.9,0.5" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{9b82e97b-2ad5-42c0-8df9-e0e40983f9bf}" Color="127,70,26" Font="" Text="(每日)师徒组队副本2次" FontSize="22" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.181,0.7" Name="txtDesc" />
+    </WZUIContainer>
+</CellMasterTask>

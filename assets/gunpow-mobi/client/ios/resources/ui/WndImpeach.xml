@@ -1,0 +1,40 @@
+﻿<WndImpeach GUID="{32a59ef9-87d7-4a80-bf4a-579d74fb1070}">
+    <WZUIWindow AbsContentSize="385,315" GUID="{dbe2ac71-e38e-40ef-812b-75fb50ac6b4e}" LuaObjectName="WndImpeach" Name="WndImpeach" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" RelativePosition="0.5,0.525" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{946e5ae4-8ab6-4842-801e-3e22a649d62d}" AbsContentSize="385,315" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{16ce0e76-353a-487b-946d-e58543d878bf}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" />
+            <WZUIContainer Type="WZUIContainer" GUID="{25bfa7b6-9d38-47da-beea-adbd42a8abc4}" AbsContentSize="370,170" UseAbsSize="True" RelativePosition="0.5,0.54">
+                <WZUI9Image Type="WZUI9Image" GUID="{683dde9a-d35c-4471-bdc2-7eca1f2fdf8a}" File="ui/common/common_scale9_di20.png" />
+            </WZUIContainer>
+            <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{a4603c1e-e47b-4f17-8c15-985ab701763d}" Name="txtReturn_WndRecruit" ShadowColor="0,255,0" StrokeColor="132,66,29" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" RelativePosition="0.5,0.895" TextKey="COMMUNITYINFO146" />
+        </WZUIContainer>
+        <WZUIContainer GUID="{a6210552-1e48-4088-bc9b-c2e59e65fe82}" Name="" RelativePosition="0.5,0.12" RelativeSize="1,0.2" Type="WZUIContainer">
+            <Button AbsContentSize="116,56" GUID="{fbd7dbb7-ca7a-46e2-8316-93649c5d8ed3}" LuaDoneFunctionName="onConfirm" Name="" RelativePosition="0.5,0.61" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal" AbsPosition="335,43">
+                <NormalElement GUID="{3f334f83-d499-4133-b852-f4d75d7b39c4}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{82d40896-9775-4842-8e2c-2d4ee6b3d487}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{a3516e68-d1a9-49c7-afd0-10b96ec09e83}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0_sel.png" GUID="{46b1a8ea-b095-4469-b98b-25892b88df33}" Type="WZUI9Image" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="24" GUID="{4743b323-bca4-421e-a2c3-906b94ad3bd6}" Name="txtBtn_WndImpeach" ShadowColor="0,255,0" StrokeColor="64,128,1" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" RelativePosition="0.5,0.5" ShowAll="False" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="CONFIRM" />
+            </Button>
+            <WZUIButton AbsContentSize="112,52" GUID="{44f5362d-4815-4488-997c-e7566fe7cab1}" LuaDoneFunctionName="onClose" Name="btnCloseWindow_WndRecruit" RelativePosition="0.905689,4.40745" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal" AbsPosition="466.061,456.898">
+                <NormalElement GUID="{79f687f9-1139-4d0b-8a11-bdba43c33077}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{8f97232f-1bed-43e2-8ca0-8b3def1239ea}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{0da78602-347d-45ce-91ca-1495d7b1e046}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{19603e22-ce3b-4369-875e-797bf527010c}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement GUID="{2ba53e56-7c20-46cf-9437-1df8710e730c}" Type="WZUIContainer" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{62e753d2-de30-4563-b4e1-8efba3ceae1c}" Name="con1" Visible="False">
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{78d59e26-6aae-41f3-961e-617a13e51d43}" Name="txt1_WndImpeach" MaxWidth="330" AnchorPoint="0,0.5" RelativePosition="0.075,0.69" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{47ef95e4-8e9b-4b43-98b9-25156f2aaf80}" Color="79,60,48" FontSize="22" TextKey="COMMUNITYINFO149" RelativePosition="0.41,0.335" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{56463766-27b8-4000-bd7e-ca7290076d25}" Color="2,72,4" FontSize="22" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.56,0.335" Text="10/99" Name="txt2_WndImpeach" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{e07cea0b-d80c-47cb-b9b8-671652c1edda}" Name="con2">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{95c7a8ed-eead-4741-b34d-5c23a0705dd2}" Color="79,60,48" FontSize="22" TextKey="COMMUNITYINFO147" RelativePosition="0.5,0.57" Name="txt4_WndImpeach" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{73494467-23a5-4092-a6ac-f867d87234ba}" Color="158,0,0" FontSize="22" Alignment="Center" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.48" Text="00:00:00" Name="txt3_WndImpeach" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndImpeach>

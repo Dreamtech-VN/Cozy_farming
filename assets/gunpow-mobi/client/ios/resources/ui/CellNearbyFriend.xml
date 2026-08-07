@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?><CellNearbyFriend GUID="{5D7EEC95-D7FE-4e4e-897E-F0EA0BB19532}">
+    <WZUIContainer AbsContentSize="888,120" GUID="{087C3F7E-D88F-497f-9053-FA6A1A0CE9D5}" LuaObjectName="CellNearbyFriend" Name="CellNearbyFriend" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer GUID="{475A13FC-2E5B-4f3e-BCF7-7B60F6F500A9}" RelativeSize="1,1.05" Type="WZUIContainer">
+            <WZUIButton GUID="{7BA63BB3-1CC8-4481-9096-EC631F0C2D6B}" LuaDoneFunctionName="onBackClick" Name="checkBk_CellNearbyFriend" Type="WZUIButton">
+                <NormalElement GUID="{EAA5BDAD-F7F1-4661-A7FB-0B999A0D3E70}" Type="WZUIContainer">
+                    <WZUIImage File="common/Jigsaw/item_informatio_bg.png" GUID="{CE2CCEB7-603B-4139-9BD6-F1E77FECA716}" Name="imgNorBack_CellNearbyFriend" Opacity="255" Type="WZUIImage"/>
+                </NormalElement>
+                <SelectElement GUID="{249D4007-F80E-42f2-AE94-B735584DBC2C}" Type="WZUIContainer">
+                    <WZUIImage File="common/Jigsaw/item_informatio_bg_sel.png" GUID="{63EDD2F4-0C5E-4507-A14B-5AFEF6090C17}" Type="WZUIImage"/>
+                </SelectElement>
+                <DisableElement GUID="{BB40D6B3-1C5D-46d5-9128-789F9D9A4D60}" Type="WZUIContainer"/>
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="660,61" GUID="{26E940C2-80BE-416e-B328-8D8963F9FD4A}" TouchContainerEnable="False" TouchEnable="True" Type="WZUIContainer">
+            <WZUIContainer AbsContentSize="100,100" AnchorPoint="0,0.5" GUID="{623B2CE0-49CA-4733-92DE-F3ABFB4AD2C4}" RelativePosition="0.037,0.512121" RelativeSize="0.18,1" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <WZUIContainer AbsContentSize="110,110" GUID="{7C7B503A-7C7D-4359-854F-894185D16ACB}" RelativePosition="0.5,0.51" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="False">
+                    <WZUIImage GUID="{65E891C6-FAA5-4cfc-8551-2B0FAAE053BC}" Name="imgPhoto_CellNearbyFriend" Type="WZUIImage"/>
+                    <WZUIContainer AbsContentSize="100,100" AnchorPoint="0.5,0.5" GUID="{1EBA5570-F5B1-4ffa-864E-3E80F71D93B9}" Name="conPlayerPhoto_CellNearbyFriend" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="False">
+                        <WZUIImage File="ui/gps/gps_bg.png" GUID="{53CEBC3F-9795-4dfb-9380-D886526B447D}" Type="WZUIImage"/>
+                        <WZUIImage File="ui/gps/gps_boy.png" GUID="{ADE0EA26-4FCC-40ad-A3CB-C80D1387C6E2}" Name="imgDefBPhoto_WndRole" RelativePosition="0.5,0.5" Scale="1" ScaleX="1" ScaleY="1" Type="WZUIImage" UseOriginSize="False" UseOriginSizeProportion="False" Visible="False"/>
+                        <WZUIImage File="ui/gps/gps_girl.png" GUID="{FCADEF4C-37C4-4fde-9736-9E574CFA4F03}" Name="imgDefGPhoto_WndRole" RelativePosition="0.5,0.527778" Scale="1" ScaleX="1" ScaleY="1" Type="WZUIImage" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True"/>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="50,6" AnchorPoint="0.5,0.5" GUID="{CDF485D6-B34A-4a72-9129-C20388B26449}" RelativePosition="1,0.5" RelativeSize="1,1" Rotation="270" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUI9Image File="common/Jigsaw/4.png" GUID="{0CAC16DC-BEF2-46e0-A618-7CA42FDBA6C7}" Type="WZUI9Image"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="0,0.5" GUID="{D496AA0E-91F8-4f23-A37F-7B4DAD36B1FB}" RelativePosition="0.18,0.5" RelativeSize="0.13,1" TouchEnable="False" Type="WZUIContainer">
+                <WZUIContainer GUID="{6055220E-F7E6-445f-9C90-9C21BEDC28DC}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer">
+                    <WZUIImage File="" GUID="{8FF44498-BC78-479b-BA7C-FD5952A62382}" Name="imgSex_CellNearbyFriend" Type="WZUIImage" UseOriginSize="True"/>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="50,6" AnchorPoint="0.5,0.5" GUID="{82BAB6A4-5EB5-4292-A580-8160781C8660}" RelativePosition="1,0.5" RelativeSize="0.06,0.8" Rotation="270" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUI9Image File="common/Jigsaw/4.png" GUID="{17AE7D8B-7279-420f-AC4D-A5A349F0EB3C}" Type="WZUI9Image"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="0,0.5" GUID="{36A5CBF3-681C-4e6b-88C6-B7EAD2FF1609}" RelativePosition="0.31,0.5" RelativeSize="0.265,1" TouchEnable="False" Type="WZUIContainer">
+                <WZUIContainer GUID="{034C8909-16BF-4831-A440-8FEA8A16FA72}" RelativePosition="0.5,0.5" Type="WZUIContainer">
+                    <WZUILabelTTF ChineseLengthPolicy="1" Color="94,40,5" FontSize="24" GUID="{BCAF4CA6-A592-4552-A820-678237BC00FD}" MaxLength="16" Name="txtName_CellNearbyFriend" Text="" Type="WZUILabelTTF"/>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="50,6" AnchorPoint="0.5,0.5" GUID="{A4423599-55DB-40af-B66E-8A4AE8096E23}" RelativePosition="1,0.5" RelativeSize="0.03,0.8" Rotation="270" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUI9Image File="common/Jigsaw/4.png" GUID="{FE736D0C-8B8A-4cf7-9031-BEDBF1B4D600}" Type="WZUI9Image"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="0,0.5" GUID="{993FAD88-8B7C-48ba-836E-0B21D62F8B71}" RelativePosition="0.575,0.5" RelativeSize="0.16,1" TouchEnable="False" Type="WZUIContainer">
+                <WZUIContainer GUID="{B944CED9-DB2D-4fac-B59B-DE11E996B128}" RelativePosition="0.5,0.5" Type="WZUIContainer">
+                    <WZUILabelTTF Color="94,40,5" FontSize="24" GUID="{038EE5B2-85C3-4172-AA9F-2C2FF03B1818}" Name="txtFire_CellNearbyFriend" Text="" Type="WZUILabelTTF"/>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="50,6" AnchorPoint="0.5,0.5" GUID="{A75589D7-9582-4c42-96F5-5BEF679C657D}" RelativePosition="1,0.5" RelativeSize="0.03,0.8" Rotation="270" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUI9Image File="common/Jigsaw/4.png" GUID="{549457BF-DA17-487a-B900-3D7BE595C99C}" Type="WZUI9Image"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="0,0.5" GUID="{0C75623F-1A3E-4861-B894-2570F29750DD}" RelativePosition="0.735,0.5" RelativeSize="0.265,1" Tag="-1" TouchContainerEnable="False" TouchEnable="True" Type="WZUIContainer">
+                <WZUIContainer AnchorPoint="0,0.5" GUID="{A0629645-8E2C-4569-98C3-B6BBFB960837}" RelativePosition="0,0.5" RelativeSize="0.55,1" TouchContainerEnable="False" TouchEnable="False" Type="WZUIContainer">
+                    <WZUILabelTTF Alignment="Right" AnchorPoint="1,0.5" Color="94,40,5" FontSize="24" GUID="{8D09981F-4E41-4a85-B9A7-A4556E10BDA4}" Name="txtDistance_CellNearbyFriend" RelativePosition="1,0.5" Text="" Type="WZUILabelTTF"/>
+                </WZUIContainer>
+                <WZUIContainer AnchorPoint="1,0.5" GUID="{C1A7FB76-D7C3-49c4-BA37-B54349B575FE}" RelativePosition="1,0.5" RelativeSize="0.48,1.1" Tag="-1" TouchContainerEnable="True" TouchEnable="True" TouchSwallow="True" Type="WZUIContainer">
+                    <WZUIContainer AbsContentSize="104,90" AnchorPoint="0,0.5" GUID="{0FEF5794-37F8-49b4-A535-9D85EAF176FD}" RelativePosition="0,0.5" RelativeSize="1.24,1" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                        <WZUIButton AnchorPoint="0.5,0.5" GUID="{F1F87CF8-F363-4b3c-8F2D-49B33F7659BD}" LuaDoneFunctionName="onMailBackClick" RelativePosition="0.5,0.5" RelativeSize="1,1" TouchSwallow="True" Type="WZUIButton">
+                            <NormalElement AbsContentSize="60,40" GUID="{FCC75A57-EE61-4bda-83BB-05A53A5F616B}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="False">
+                                <WZUI9Image File="ui/bottomMenu/mail/mail_not.png" GUID="{42C15B58-1886-44c3-A9B9-39B42CC5232F}" Scale="1.5" Type="WZUI9Image" UseOriginSize="True"/>
+                            </NormalElement>
+                            <SelectElement GUID="{0078E4E1-2CA2-4526-99CE-CD47AD75C814}" TouchContainerEnable="True" Type="WZUIContainer">
+                                <WZUI9Image File="ui/bottomMenu/mail/mail_not.png" GUID="{E89523E3-4E64-4a2a-8336-F564BFA61EFB}" Scale="1.5" Type="WZUI9Image" UseOriginSize="True"/>
+                            </SelectElement>
+                        </WZUIButton>
+                    </WZUIContainer>
+                    <WZUIContainer AbsContentSize="40,48" GUID="{C3064E60-5E1C-4710-827B-67B3935506E4}" Name="conMailCount_CellNearbyFriend" RelativePosition="0.68,0.66" RelativeSize="0.2,1" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                        <WZUIImage AnchorPoint="0,0.5" File="ui/island/island_num_bg1.png" GUID="{9712EA73-B419-4046-9059-3C24A46D55AE}" RelativePosition="0,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                        <WZUIImage AnchorPoint="1,0.5" File="ui/island/island_num_bg3.png" GUID="{30D34ECE-9A6F-4a51-B4F6-15B9CE5A8458}" RelativePosition="1,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                        <WZUILabelTTF Color="255,255,255" FontSize="24" GUID="{289181C7-54E0-40ca-BA85-3A13A49508AA}" Name="txtMail_CellNearbyFriend" RelativePosition="0.5,0.57" Text="" Type="WZUILabelTTF"/>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellNearbyFriend>

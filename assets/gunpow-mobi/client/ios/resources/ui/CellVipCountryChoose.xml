@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" ?>
+<CellVipCountryChoose GUID="{4FB9BE54-696F-4391-A9DC-E17EC1597BE7}">
+    <WZUIContainer AbsContentSize="44,48" GUID="{0582DCEA-5ADF-4128-89CE-7353A1BB8574}" LuaObjectName="" Name="CellVipCountryChoose" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="465,320" ShowAll="False">
+        <WZUIContainer GUID="{D3CFFE07-D4A5-441b-8410-A3CEC7227D25}" RelativePosition="0.5,0.5" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" AbsPosition="-14.2342,107.962" Visible="True">
+            <WZUIButton Type="WZUIButton" AbsContentSize="70,74" Visible="True" UseAbsSize="True" RelativePosition="0.5,0.5" GUID="{d368893a-d297-4675-9738-3bc46bd83e39}" LuaDoneFunctionName="onClick" LuaActionName="">
+                <NormalElement Type="WZUIContainer" GUID="{44cf7b3e-82eb-49bb-80d7-d3692ecb9c4f}">
+                    <WZUIImage Type="WZUIImage" GUID="{27395201-cbbf-4143-a18d-4feadba1dccb}" File="ui/vip/country/02.png" UseOriginSize="True" Scale="0.6" Visible="True" ScaleX="0.6" Name="img1_CellVipCountryChoose" RelativePosition="0.5,0.6" ScaleY="0.6" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{050b0836-ee65-4d10-9060-7c3cf0503bb2}" Scale="1">
+                    <WZUIImage Type="WZUIImage" GUID="{df485f61-c858-43d1-a20b-4edc7ecfcdd6}" File="ui/vip/country/02.png" UseOriginSize="True" Scale="1.05" ScaleX="0.6" Name="img2_CellVipCountryChoose" RelativePosition="0.5,0.6" ScaleY="0.6" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{29be49a4-e880-4528-9be7-ac0781ad31b2}" />
+            </WZUIButton>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{36641207-60e0-4879-b309-19ce70667973}" Name="txtName_CellVipCountry" NoBorder="False" NameCreate="True" FontSize="12" Color="195,171,148" EnableStroke="False" StrokeColor="128,54,13" Text="奥地利" StrokeSize="4" LabelStyleKey="" TextKey="" RelativePosition="0.5,0.183042" AnchorPoint="0.5,0.5" Alignment="Center" TouchEnable="False" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellVipCountryChoose>

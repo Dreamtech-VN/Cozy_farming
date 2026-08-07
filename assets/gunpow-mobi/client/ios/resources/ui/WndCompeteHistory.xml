@@ -1,0 +1,83 @@
+﻿<WndCompeteHistory GUID="{ec6c8c10-0d85-4dfe-b081-6fe98bd51f5d}">
+    <WZUIWindow Type="WZUIWindow" GUID="{53e6090c-1c09-4f97-938c-9f068e0d989c}" NameCreate="True" Name="WndCompeteHistory" AbsContentSize="770,530" UseAbsSize="True" ShowAll="True" LuaObjectName="WndCompeteHistory">
+        <WZUIContainer Type="WZUIContainer" GUID="{aa607800-b839-4de4-b69f-66e8fb80ff4d}" AbsContentSize="770,530" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{9f362d3d-f44a-4e12-9231-c5189bb31d7c}" CapInsets="60,110,10,10" File="ui/common/common_scale9_di5.png" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{d98ecce7-af3c-4328-94ff-5604146ef10a}" AbsContentSize="756,414" UseAbsSize="True" RelativePosition="0.5,0.498">
+            <WZUIImage Type="WZUIImage" GUID="{58e101d3-fd61-4152-8c4b-7c73cbc235ed}" File="ui/community/common_pic_ghzljdt.png" />
+            <WZUIImage Type="WZUIImage" GUID="{7229ac94-c2b0-4e5e-8039-169d6dd82c32}" File="ui/community/common_pic_ghzjijun.png" UseOriginSize="True" RelativePosition="0.71,0.387" Name="sprite_num3" isValid="True" Visible="True" />
+            <Button Type="WZUIButton" GUID="{b3351225-c372-4a2d-87bb-019ffb1b8c3e}" RelativePosition="0.3,0.465" UseAbsSize="True" UseAbsCoordinate="False" AbsContentSize="152,164" Name="btn_num2" LuaDoneFunctionName="onClickNum2">
+                <NormalElement Type="WZUIContainer" GUID="{a11d3c54-cdd1-449e-adc3-ce982d935e4d}">
+                    <WZUIImage Type="WZUIImage" GUID="{fa8f7d9f-9c40-4162-82e8-341ab6e7e225}" File="ui/community/common_pic_ghzyajun.png" UseOriginSize="True" RelativePosition="0.5,0.5" Name="sprite_num2" Visible="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{c9a7563a-2318-43a2-a0c7-93a10995e302}">
+                    <WZUIImage Type="WZUIImage" GUID="{5b17520e-cfd6-4cf4-a87d-855bb2330964}" File="ui/community/common_pic_ghzyajun.png" UseOriginSize="True" RelativePosition="0.5,0.5" Name="sprite_num2" Visible="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{52864fb5-ca3d-4146-aae6-0634a9713745}" />
+            </Button>
+            <Button Type="WZUIButton" GUID="{531037a2-cc50-4dd7-81fa-7247b98c6d75}" RelativePosition="0.5,0.575" UseAbsSize="True" UseAbsCoordinate="False" AbsContentSize="152,164" Name="btn_num1" LuaDoneFunctionName="onClickNum1">
+                <NormalElement Type="WZUIContainer" GUID="{c7c33bfc-ea34-4d8b-8626-956f887ac516}">
+                    <WZUIImage Type="WZUIImage" GUID="{e2c755e5-e275-4262-991e-0ad013e7bdd1}" File="ui/community/common_pic_ghzguanjun.png" UseOriginSize="True" RelativePosition="0.5,0.5" Name="sprite_num1" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{acab847d-d5a3-4ca9-a5d3-7d2b5c8ecfd9}">
+                    <WZUIImage Type="WZUIImage" GUID="{f69571b6-4807-49a9-84a9-2723db0b6b00}" File="ui/community/common_pic_ghzguanjun.png" UseOriginSize="True" RelativePosition="0.5,0.5" Name="sprite_num1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{921cf6e5-aca4-4838-8a9f-546570d5a44d}" />
+            </Button>
+            <Button Type="WZUIButton" GUID="{c4f8ae72-e7e9-4a68-8efd-6f2786967f71}" RelativePosition="0.71,0.387" UseAbsSize="True" UseAbsCoordinate="False" AbsContentSize="152,164" Name="btn_num3" LuaDoneFunctionName="onClickNum3">
+                <NormalElement Type="WZUIContainer" GUID="{2c1da99c-4d0e-4177-8fcf-35caa173b5ff}">
+                    <WZUIImage Type="WZUIImage" GUID="{4f205e78-8735-460f-93cd-01b9183e0ce6}" File="ui/community/common_pic_ghzjijun.png" UseOriginSize="True" RelativePosition="0.5,0.5" Name="sprite_num3" isValid="True" Visible="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{2a8a6308-08c7-4c3e-b262-5580ef850984}">
+                    <WZUIImage Type="WZUIImage" GUID="{4af1f665-d161-4fcd-b05a-748f6a0343a2}" File="ui/community/common_pic_ghzjijun.png" UseOriginSize="True" RelativePosition="0.5,0.5" Name="sprite_num3" isValid="True" Visible="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{f79297bb-400c-45bd-aacf-5ce0c29d9850}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{21a60487-6e2b-4d13-8b9b-fc62f8d56372}" AbsContentSize="756,414" RelativePosition="0.5,0.498" UseAbsSize="True">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{07da3ec2-7586-40c4-897d-b882ec3ac3fe}" Text="空之王国" LabelStyleKey="C11_F20_S4_C5" RelativePosition="0.3,0.75" Name="label_community_2" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d6d593af-45df-4dab-ab69-c8489f79b010}" Text="Lv9 我就是树莓呀" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.3,0.69" Name="label_name_2" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{aece8289-695c-4e40-a070-127d13b3bf81}" Text="Lv9 我就是树莓呀" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.5,0.79" Name="label_name_1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{99d1170d-0f4d-452c-942c-400bfb5d0d7a}" Text="空之王国" LabelStyleKey="C11_F20_S4_C5" RelativePosition="0.5,0.85" Name="label_community_1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{dc41d72e-b5df-4f16-88b2-dbda16a56953}" Text="Lv9 我就是树莓呀" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.71,0.59" Name="label_name_3" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{acf3f54e-694a-49f6-8790-bc1eafc73bd6}" Text="空之王国" LabelStyleKey="C11_F20_S4_C5" RelativePosition="0.71,0.65" Name="label_community_3" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{1e872859-6623-4f6e-b0b0-42b658ce6e35}" TextKey="COMMUNITY_COMPETE_TEXT15" Text="未产生" LabelStyleKey="FONT_LABEL_5" RelativePosition="0.5,0.82" Name="label_default1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{1e5cefc4-43bd-4b1f-b592-68fef2126336}" TextKey="COMMUNITY_COMPETE_TEXT15" Text="未产生" LabelStyleKey="FONT_LABEL_5" RelativePosition="0.3,0.72" Name="label_default2" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8b55530f-fbb9-486c-b543-997bfc39ccbb}" TextKey="COMMUNITY_COMPETE_TEXT15" Text="未产生" LabelStyleKey="FONT_LABEL_5" RelativePosition="0.71,0.62" Name="label_default3" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{7543f4f0-0e1f-4f39-a85a-a13243fdce81}" AbsContentSize="770,55" UseAbsSize="True" RelativePosition="0.5,0.055">
+            <WZUIContainer Type="WZUIContainer" GUID="{228b9530-8e9e-4392-b34a-fb73296cec5e}" AbsContentSize="110,40" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{714b51be-8ccb-464c-94af-019aa2ccd7af}" File="ui/common/common_scale9_di58.png" Opacity="153" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9de197b3-ce66-4def-9114-1c3abb38cff9}" TextKey="" Text="第%s届" LabelStyleKey="C11_F26_S4_C5" Name="label_page" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{9a37fe8b-7702-4b7e-a5d6-76fe12840194}" UseAbsSize="True" AbsContentSize="60,50" Name="btn_left" ScaleX="-1" RelativePosition="0.40,0.5" LuaDoneFunctionName="onPageLeft">
+                <NormalElement Type="WZUIContainer" GUID="{656be3c1-b952-488b-8558-a4aacde85aea}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{a007acf4-ebb0-42fe-8512-96feaff2a309}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="False" FlipY="False" Scale="0.6" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{94a6e3ae-eed5-4137-b114-1b713708e751}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{dd236ee7-9a1b-42b4-95d5-5b692ddaf64b}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="False" FlipY="False" Scale="0.6" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{e97c9dc0-11b7-47a7-a73a-28c5c09a0add}" />
+            </Button>
+            <Button Type="WZUIButton" GUID="{710ff355-79e9-4f60-adcf-50e2f1bf6983}" UseAbsSize="True" AbsContentSize="60,50" Name="btn_right" ScaleX="-1" RelativePosition="0.6,0.5" Scale="1" LuaDoneFunctionName="onPageRight">
+                <NormalElement Type="WZUIContainer" GUID="{26641494-f51a-44cf-9ae6-c6437b69826f}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{047ba701-781f-42ae-8050-60ec18769255}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="False" FlipY="False" Scale="0.6" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{c1761a4d-1b80-485e-bcef-a56200160db1}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{2d924e85-290d-49dc-aecf-4a0e25e42d88}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="False" FlipY="False" Scale="0.6" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{5d484218-121e-4f82-986f-1ee96319516e}" />
+            </Button>
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{45af7bad-75b2-48c9-a8f8-17b6d25c8752}" LabelStyleKey="C1_F26_S4_C13" Text="历届" TextKey="COMMUNITYWARHISTORY_TEXT2" RelativePosition="0.5,0.94" />
+        <Button Type="WZUIButton" GUID="{5c343967-54fa-4140-986b-7376fb3bb661}" Name="btn_close" UseAbsSize="True" AbsContentSize="50,50" RelativePosition="0.95,0.94" LuaDoneFunctionName="onClose" LuaActionName="Normal">
+            <NormalElement Type="WZUIContainer" GUID="{e3f42ba7-4b6c-4b69-af2b-ab55fb5de0bf}">
+                <WZUIImage Type="WZUIImage" GUID="{4ca0eaf4-ac7f-4dd4-910e-22dfae236f73}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{6d808980-d1d6-4cd4-a741-34f61e34bede}">
+                <WZUIImage Type="WZUIImage" GUID="{4a453fa4-1e82-440d-a49a-4073bcccdacf}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{43eb9f96-34ce-4bb8-9966-38436532906a}" />
+        </Button>
+    </WZUIWindow>
+</WndCompeteHistory>

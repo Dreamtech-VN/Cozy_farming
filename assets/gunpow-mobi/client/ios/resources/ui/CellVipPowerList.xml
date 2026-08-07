@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" ?>
+<CellVipPowerList GUID="{4FB9BE54-696F-4391-A9DC-E17EC1597BE7}">
+    <WZUIContainer AbsContentSize="168,205" GUID="{0582DCEA-5ADF-4128-89CE-7353A1BB8574}" LuaObjectName="" Name="CellVipPowerList" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="465,320" ShowAll="False">
+        <WZUIContainer GUID="{D3CFFE07-D4A5-441b-8410-A3CEC7227D25}" RelativePosition="0.5,0.5" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" AbsPosition="-14.2342,107.962" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{1A10E7D4-6BAC-4ddf-9602-B82B5EA12E9E}" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{9F163594-5058-42b5-A79E-9B43DA7B8D2C}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,1" AnchorPoint="0.5,1" RelativeSize="1.08,1.05">
+                    <WZUIContainer Type="WZUIContainer" GUID="{101E55A2-F380-47f4-9C8D-0EFE16EB1548}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.25,0.5" RelativeSize="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{31235EA3-074A-4e1d-9CDC-2F7B89C0406F}" File="ui/common/common_scale9_yy.png" CapInsets="20,20,10,10" RelativePosition="0.5,0.5" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{DBD3DDB2-C9C0-435d-B36B-5456E8DA4F10}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.75,0.5" RelativeSize="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{8D597F7A-CBF6-4ebf-BA66-6A2442033B90}" File="ui/common/common_scale9_yy.png" CapInsets="20,20,10,10" RelativePosition="0.5,0.5" FlipX="False" FlipY="False" ScaleX="-1" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUI9Image Type="WZUI9Image" GUID="{454D3368-2BCC-4702-B42C-F08E30A2BF4A}" File="ui/common/common_scale9_di7.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5D23337D-7BA6-412d-B69A-389509327409}" RelativeSize="1,0.19" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{587A9B89-8C21-438c-B180-D11182C31429}" Font="" FontSize="22" Color="127,70,26" EnableStroke="False" StrokeSize="" StrokeColor="0,0,0" Alignment="Center" AnchorPoint="0.5,0.5" Text="" RelativePosition="0.5,0.5" Name="txtName_CellVipPowerList" LabelStyleKey="" />
+            </WZUIContainer>
+            <WZUIContainer GUID="{2BA57FC4-AEB2-48f3-A8E4-F55EC9BD4902}" Type="WZUIContainer" AbsContentSize="152,138" UseAbsSize="True" RelativePosition="0.5,0.490291" Visible="True" AbsPosition="84,101">
+                <WZUIImage Type="WZUIImage" GUID="{9CF6FE4E-9335-4b90-8BEB-C852D2073AC3}" File="ui/common/payment_bg.png" Name="imgBg_CellVipPowerList" Scale="1" RelativePosition="0.502,0.502" UseOriginSize="True" />
+                <WZUIImage GUID="{5A875CEB-366D-4dd2-9DCA-A9BE6990AF14}" Name="imgDiamond_CellVipPowerList" RelativePosition="0.5,0.5" Scale="1" Type="WZUIImage" UseOriginSize="True" File="" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{B4CB6C8B-F69D-4df7-9215-FAC6C56B6AD1}" RelativeSize="0.96,0.32" RelativePosition="0.5,0" AnchorPoint="0.5,0" AbsPosition="123.88,0" Name="conOnly_CellVipPowerList">
+                    <WZUI9Image Type="WZUI9Image" GUID="{B6BE8E5A-4DB7-402b-A748-80771F3EDF89}" File="ui/common/common_scale9_di59.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{55E8BB7C-3AD8-49a2-B45E-7B772C0B0250}" Name="txtRemark_CellVipPowerList" NameCreate="True" Alignment="Center" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Text="" FontSize="18" Color="255,255,255" Dimensions="150,0" AbsPosition="2,24.08" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{A45F1436-E708-494b-9FC8-9EFE310EDBB9}" Name="txtRemark1_CellVipPowerList" NameCreate="True" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="-0.0139801,0.5" Text="" FontSize="18" Color="255,255,255" Dimensions="150,0" AbsPosition="-2.03998,18.08" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{BC527D3C-F799-466b-B1A6-A1585950BD0B}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.914473,0.898551" AbsPosition="139,124" Name="conGiven_CellVip">
+                    <WZUIImage Type="WZUIImage" GUID="{F5423814-00B4-4b8f-B8D3-A39C97018D07}" File="ui/common/common_icon_hbiaoqian.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9BB3ECEA-74F0-43bf-8E10-699267DB34FF}" Color="255,255,255" FontSize="18" Text="11" StrokeColor="79,60,48" StrokeSize="2" EnableStroke="True" RelativePosition="0.1666,0.65" AbsPosition="-2.00004,39" Alignment="Left" AnchorPoint="0,0.5" TextKey="VIP_DESC3" Name="txtGiven22_CellVipPowerList" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1059547E-C258-403e-93FD-475EE9F9E8E7}" Color="255,255,255" FontSize="18" Text="1888" StrokeColor="79,60,48" StrokeSize="2" EnableStroke="True" RelativePosition="0.5,0.316667" AbsPosition="9.99996,19" Alignment="Center" AnchorPoint="0.5,0.5" Name="txtGiven_CellVipPowerList" />
+                    <WZUIImage Type="WZUIImage" GUID="{BD723280-68B1-4d7c-94AB-23DD0B1499C7}" File="ui/common/common_icon_zuanshi.png" ScaleX="" Scale="0.46" UseOriginSize="True" RelativePosition="0.65,0.666667" AbsPosition="39,40" Name="imgGiven_CellVipPowerList" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{D5117166-209A-4863-8C5C-59C2C426E049}" RelativeSize="1,0.15" AnchorPoint="0.5,0" RelativePosition="0.5,0.0145631" AbsPosition="84,3">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{34133634-8AAB-46aa-94F6-689A8D974135}" Text="" Name="txtRmb_CellVipPowerList" NameCreate="True" FontSize="22" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Color="64,128,1" LabelStyleKey="C4_F22" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6dd5bd93-9285-4406-8732-6bd6de9a02f1}" Text="" Name="txtRemain_WndVip" NameCreate="True" FontSize="22" RelativePosition="0.826923,0.467638" AnchorPoint="0.5,0.5" Color="64,128,1" LabelStyleKey="C14_F20" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{E6FB0689-0D69-48a1-B2C9-89EACCCDFDBF}" AbsContentSize="76,68" UseAbsSize="True" RelativePosition="1.0119,-0.00970874" AnchorPoint="1,0" Visible="True" AbsPosition="170,-2">
+                <WZUIImage Type="WZUIImage" GUID="{F486DF00-7BD1-4041-B495-3E0444E5EBF6}" File="ui/common/common_icon_zijb.png" UseOriginSize="True" Name="imgIconDescDi_CellVipPowerList" Visible="True" Rotation="0" />
+                <WZUIImage Type="WZUIImage" GUID="{C0752781-BD72-48d2-AD28-0E122FB4E391}" Name="imgIconDesc_CellVipPowerList" File="ui/common/common_icon_shuangbeiz.png" Visible="True" UseOriginSize="True" Rotation="-40" RelativePosition="0.723684,0.294118" AbsPosition="55,20" />
+            </WZUIContainer>
+            <Button AbsContentSize="" GUID="{B1B52DB7-E302-48cb-9564-4B9934990E81}" LuaDoneFunctionName="onRechage" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="False" Visible="True">
+                <NormalElement GUID="{87A5D158-8B83-493c-8319-B8AFC19C988D}" Type="WZUIContainer" />
+                <SelectElement GUID="{6DD29496-6029-4c73-9CF1-C7D315AEE8B1}" Type="WZUIContainer" />
+                <DisableElement GUID="{CC66AE69-2770-4db0-AE16-5343B48C44A8}" Type="WZUIContainer" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{af99e231-a73e-42b5-bf59-0394e69ec74b}">
+                <WZUIImage Type="WZUIImage" GUID="{507d207b-64f6-4b29-a28e-74fc28acff7b}" File="ui/common/common_icon_xuyuanjiacheng.png" UseOriginSize="True" RelativePosition="0.22,0.80" Name="imgIconPromiseBuffer" isValid="True" Visible="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellVipPowerList>

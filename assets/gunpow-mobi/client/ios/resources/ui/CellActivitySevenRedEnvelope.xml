@@ -1,0 +1,92 @@
+﻿<CellActivitySevenRedEnvelope GUID="{1e6d45ae-1892-4d08-a03c-f40e55e6092d}">
+    <WZUIContainer Type="WZUIContainer" GUID="{bdbef8bf-cb5f-41f6-be46-d5ba0216f645}" LuaObjectName="CellActivitySevenRedEnvelope" Name="CellActivitySevenRedEnvelope" AbsContentSize="502,450" UseAbsSize="True">
+        <WZUIImage Type="WZUIImage" GUID="{1bd46f5a-546d-4ac7-8657-3ea928d1894d}" File="ui/gameActivity/activity_pic_qirihongbao.png" TouchEnable="False" TouchSwallow="False" UseOriginSize="True" Visible="True" />
+        <WZUIContainer AbsContentSize="500,40" GUID="{8f1b5451-7c60-4a69-a3c8-6ab46909d40d}" RelativePosition="0,1" Type="WZUIContainer" UseAbsSize="True" AbsPosition="246,395.25" Name="" AnchorPoint="0,1">
+            <WZUI9Image Type="WZUI9Image" GUID="{304285c9-6a01-40d2-91c7-c0f29c418d0a}" File="ui/common/common_scale9_heidi7.png" Opacity="150" />
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="255,227,116" FontSize="24" GUID="{fdf7ffd7-d1ee-4565-83ee-bf842bdf6728}" Name="txtTimeWord_CellActivitySevenRedEnvelope" RelativePosition="0.05,0.5" Text="" Type="WZUILabelTTF" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" TextKey="COUNTDOWN" />
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="255,89,74" FontSize="24" GUID="{f1f3ace6-8163-430d-9d08-470fa64485b2}" Name="txtTime_CellActivitySevenRedEnvelope" RelativePosition="0.33,0.5" Text="9天" Type="WZUILabelTTF" StrokeColor="158,0,0" StrokeSize="4" EnableStroke="True" Alignment="Left" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{c6f38095-75a3-40d8-9fd4-3739ea3c105f}">
+            <WZUIContainer Type="WZUIContainer" GUID="{126b8b0b-9a2c-41c4-8218-8c9fc2d56cb1}" AbsContentSize="102,121" UseAbsSize="True" RelativePosition="0.385,0.61">
+                <WZUIImage Type="WZUIImage" GUID="{1f02e63f-e6c3-4b5c-a413-bebb7a518c77}" File="ui/gameActivity/common_icon_qirihongbaodi.png" UseOriginSize="True" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{2e429f89-a321-4766-b36e-4155b2145166}" Name="conZuan1_CellActivitySevenRedEnvelope" UseAbsSize="True" AbsContentSize="70,70" RelativePosition="0.5,0.355" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5f62c42c-d27a-484f-b39d-1fb2bb416f32}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.82" TextKey="DAY1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{33c3139b-5538-4ffe-9d5f-eedac198c097}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="1" StrokeColor="79,50,48" RelativePosition="0.532122,0.170125" Name="ttf1" TextKey="NOSAVE" />
+                <WZUI9Image Type="WZUI9Image" GUID="{c132262e-2ea1-4b21-8c50-d0bc0e3034cd}" File="ui/common/common_shade_chushouheidi.png" Name="cover1" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{8848158c-49c9-492c-8376-149543346f37}" File="ui/gameActivity/commom_icon_yfq.png" UseOriginSize="True" Scale="0.8" RelativePosition="0.628488,0.238245" Name="release1" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{e1a678d8-850a-4027-a4ac-6441c0ac8967}" AbsContentSize="102,121" UseAbsSize="True" RelativePosition="0.61,0.61">
+                <WZUIImage Type="WZUIImage" GUID="{9411f08c-9ebe-4d82-91d0-79acacc1a8e9}" File="ui/gameActivity/common_icon_qirihongbaodi.png" UseOriginSize="True" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{85bdaaa0-32ca-462b-a5c3-7d36a0728610}" Name="conZuan2_CellActivitySevenRedEnvelope" UseAbsSize="True" AbsContentSize="70,70" RelativePosition="0.5,0.355" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{bd764261-8d06-46aa-bcb2-eb44545e210c}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.82" TextKey="DAY2" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c4a36cb0-6dc6-4046-a038-fec568550eb9}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="1" StrokeColor="79,50,48" RelativePosition="0.532122,0.170125" Name="ttf2" TextKey="NOSAVE" />
+                <WZUI9Image Type="WZUI9Image" GUID="{f520d2d5-342d-4387-88eb-b99258d0c61a}" File="ui/common/common_shade_chushouheidi.png" Name="cover2" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{e2a62fd3-d76a-4382-bcdc-ee0b5237e014}" File="ui/gameActivity/commom_icon_yfq.png" UseOriginSize="True" Scale="0.8" RelativePosition="0.628488,0.238245" Name="release2" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5071e406-b2d2-43b4-8cdd-3345e0877a10}" AbsContentSize="102,121" UseAbsSize="True" RelativePosition="0.835,0.61">
+                <WZUIImage Type="WZUIImage" GUID="{e0acc11b-a603-4b76-b666-bd70f9b6e02e}" File="ui/gameActivity/common_icon_qirihongbaodi.png" UseOriginSize="True" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{d84d06bf-da6a-4cec-b473-894106bd4839}" Name="conZuan3_CellActivitySevenRedEnvelope" UseAbsSize="True" AbsContentSize="70,70" RelativePosition="0.5,0.355" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9e0a4018-f489-41fd-9dde-9a278dfdd156}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.82" TextKey="DAY3" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e7676992-9249-4243-b622-be40a7cf29b8}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="1" StrokeColor="79,50,48" RelativePosition="0.532122,0.170125" Name="ttf3" TextKey="NOSAVE" />
+                <WZUI9Image Type="WZUI9Image" GUID="{572693de-fbe7-48e7-a4fb-ae64c21504ab}" File="ui/common/common_shade_chushouheidi.png" Name="cover3" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{46b3852e-8af1-47f9-b068-80771ffeecaa}" File="ui/gameActivity/commom_icon_yfq.png" UseOriginSize="True" Scale="0.8" RelativePosition="0.628488,0.238245" Name="release3" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{0d578f77-c653-4d1f-90b8-4503cbc6f7aa}" AbsContentSize="102,121" UseAbsSize="True" RelativePosition="0.16,0.31">
+                <WZUIImage Type="WZUIImage" GUID="{59ce1437-5516-4fcd-a73f-7ede8ede8a44}" File="ui/gameActivity/common_icon_qirihongbaodi.png" UseOriginSize="True" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{1bb5dea7-3353-4e37-baff-b4a471f73094}" Name="conZuan4_CellActivitySevenRedEnvelope" UseAbsSize="True" AbsContentSize="70,70" RelativePosition="0.5,0.355" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a365d7df-e6c0-4fb5-87e0-a3df54c82da8}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.82" TextKey="DAY4" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{fa3256a5-8ffa-4a6a-a125-298ee0130d17}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="1" StrokeColor="79,50,48" RelativePosition="0.532122,0.170125" Name="ttf4" TextKey="NOSAVE" />
+                <WZUI9Image Type="WZUI9Image" GUID="{52c93970-ca28-4fca-9a40-9b4c13c4d2c1}" File="ui/common/common_shade_chushouheidi.png" Name="cover4" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{922c5fac-cee4-4f1b-b535-f4dbcf7a5b73}" File="ui/gameActivity/commom_icon_yfq.png" UseOriginSize="True" Scale="0.8" RelativePosition="0.628488,0.238245" Name="release4" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{528bb6f4-09d3-4b58-b114-ee307fa5f386}" AbsContentSize="102,121" UseAbsSize="True" RelativePosition="0.385,0.31">
+                <WZUIImage Type="WZUIImage" GUID="{52e2a11e-7bf9-4a4e-a9f5-6182c1b50d05}" File="ui/gameActivity/common_icon_qirihongbaodi.png" UseOriginSize="True" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{ae229f7c-7dc4-4e2e-a05a-01610921acc4}" Name="conZuan5_CellActivitySevenRedEnvelope" UseAbsSize="True" AbsContentSize="70,70" RelativePosition="0.5,0.355" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{43c7ccbc-4b8c-4bd5-8288-448c48e7ff3c}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.82" TextKey="DAY5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d8281055-61b1-4238-a0eb-48cafef0a459}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="1" StrokeColor="79,50,48" RelativePosition="0.532122,0.170125" Name="ttf5" TextKey="NOSAVE" />
+                <WZUI9Image Type="WZUI9Image" GUID="{fc023757-6824-4386-8822-329f6f359031}" File="ui/common/common_shade_chushouheidi.png" Name="cover5" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{ecfb584d-c87a-4b30-bbda-93d1219a664d}" File="ui/gameActivity/commom_icon_yfq.png" UseOriginSize="True" Scale="0.8" RelativePosition="0.628488,0.238245" Name="release5" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{2074f946-86a7-48ef-9e54-b4f238cfbf61}" AbsContentSize="102,121" UseAbsSize="True" RelativePosition="0.61,0.31">
+                <WZUIImage Type="WZUIImage" GUID="{8071c53d-1be6-430b-9fdd-50448424a780}" File="ui/gameActivity/common_icon_qirihongbaodi.png" UseOriginSize="True" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{c26f2a12-3651-4b0d-9908-1136e19cacb7}" Name="conZuan6_CellActivitySevenRedEnvelope" UseAbsSize="True" AbsContentSize="70,70" RelativePosition="0.5,0.355" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{cb0f532c-a34b-4cae-841c-b6447af1bcf4}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.82" TextKey="DAY6" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{4b82a594-cbed-4638-9aef-3c0def60f23e}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="1" StrokeColor="79,50,48" RelativePosition="0.532122,0.170125" Name="ttf6" TextKey="NOSAVE" />
+                <WZUI9Image Type="WZUI9Image" GUID="{798deca6-0983-4610-b558-4e5deb6a7c02}" File="ui/common/common_shade_chushouheidi.png" Name="cover6" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{6f9c7af3-f46e-4d02-84fc-1a23c20b7c01}" File="ui/gameActivity/commom_icon_yfq.png" UseOriginSize="True" Scale="0.8" RelativePosition="0.628488,0.238245" Name="release6" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{0725ddb4-56ca-4d5f-bd61-9db7af317e0b}" AbsContentSize="102,121" UseAbsSize="True" RelativePosition="0.835,0.31">
+                <WZUIImage Type="WZUIImage" GUID="{d5e42a66-9d90-4f5e-9c72-98445a754764}" File="ui/gameActivity/common_icon_qirihongbaodi.png" UseOriginSize="True" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{07c82854-f3fe-48fd-994e-d0ed47053c3f}" Name="conZuan7_CellActivitySevenRedEnvelope" UseAbsSize="True" AbsContentSize="70,70" RelativePosition="0.5,0.355" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{715ac879-0bc2-4e62-a221-a08047778e1b}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.82" TextKey="DAY7" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{937b7bba-da22-40e9-94c8-6323f774ecc0}" Text="" Color="255,236,193" FontSize="18" EnableStroke="True" BoldFont="True" StrokeSize="1" StrokeColor="79,50,48" RelativePosition="0.532122,0.170125" Name="ttf7" TextKey="NOSAVE" />
+                <WZUI9Image Type="WZUI9Image" GUID="{de1d7c93-dbf2-48aa-a15c-0dd93e801227}" File="ui/common/common_shade_chushouheidi.png" Name="cover7" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{2d60b9e7-7762-4db0-8931-4027248c44f5}" File="ui/gameActivity/commom_icon_yfq.png" UseOriginSize="True" Scale="0.8" RelativePosition="0.628488,0.238245" Name="release7" Visible="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{f755d3c0-3316-442d-9ac5-c203f57d667d}" AbsContentSize="460,75" UseAbsSize="True" RelativePosition="0.5,0.085" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{9168d269-215b-4e48-92f2-290370a7442d}" File="ui/common/common_scale9_heidi4.png" UseOriginSize="True" ScaleX="1.32" ScaleY="1.2" RelativePosition="0.5,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5c52cba3-5bea-48c5-96e9-ed7f44ba2b85}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.115,0.63" TextKey="SEVEN1" Name="txtCost1_CellActivitySevenRedEnvelope" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{00f5647c-8a09-49f1-b21a-e61174d4995b}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.645,0.63" TextKey="SEVEN3" Name="txtCost2_CellActivitySevenRedEnvelope" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d73a3a03-9d7a-4186-9a70-c094e67578e3}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.115,0.24" TextKey="SEVEN2" Name="txtCost3_CellActivitySevenRedEnvelope" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7c41a835-a7be-4a47-96ae-5d3294165996}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.67,0.24" TextKey="SEVEN4" Name="txtCost4_CellActivitySevenRedEnvelope" />
+            <WZUIImage Type="WZUIImage" GUID="{6ec1b78b-803f-4fb5-a099-35954c5b9c57}" File="" UseOriginSize="True" Scale="0.7" RelativePosition="0.243582,0.675" Name="imgCostIcon1_CellActivitySevenRedEnvelope" />
+            <WZUIImage Type="WZUIImage" GUID="{7e1d0667-9ca3-4216-9c83-2b9a21c7246d}" File="" UseOriginSize="True" Scale="0.7" RelativePosition="0.85851,0.675" Name="imgCostIcon2_CellActivitySevenRedEnvelope" />
+            <WZUIImage Type="WZUIImage" GUID="{b96f6a9e-6fb1-4b20-8341-22267c1b90f7}" File="" UseOriginSize="True" Scale="0.7" RelativePosition="0.245956,0.266" Name="imgCostIcon3_CellActivitySevenRedEnvelope" />
+            <WZUIImage Type="WZUIImage" GUID="{420151cd-0413-4c37-8f3f-9f9a654e6b2b}" File="" UseOriginSize="True" Scale="0.7" RelativePosition="0.85851,0.266" Name="imgCostIcon4_CellActivitySevenRedEnvelope" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{83fb0520-6c3a-4bb4-a8ff-a79d795d15ab}" LabelStyleKey="C1_F20_S4_C2" Text="1000" RelativePosition="0.285,0.63" Name="get1" Alignment="Left" AnchorPoint="0,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{583055e6-66e6-48e7-802f-f952da704541}" LabelStyleKey="C1_F20_S4_C2" Text="1000" RelativePosition="0.89,0.63" Name="get2" Alignment="Left" AnchorPoint="0,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{729225c7-b18c-4e35-a4e8-d9091eba8f59}" LabelStyleKey="C1_F20_S4_C2" Text="1000" RelativePosition="0.285,0.24" Name="get3" Alignment="Left" AnchorPoint="0,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f74bc5b6-01d3-4629-9dff-46653d1ef631}" LabelStyleKey="C1_F20_S4_C2" Text="1000" RelativePosition="0.89,0.24" Name="get4" Alignment="Left" AnchorPoint="0,0.5" />
+        </WZUIContainer>
+        <WZUIButton Type="WZUIButton" AbsContentSize="90,90" UseAbsSize="True" LuaDoneFunctionName="onRuleClick" GUID="{020ce53a-ad09-47a3-a318-c02b58f3eba7}" RelativePosition="1.03853,0.956317" AnchorPoint="1,0.5" AbsPosition="797.973,21.0118" Scale="0.8">
+            <NormalElement Type="WZUIContainer" GUID="{52cd235a-fae6-4ce6-8d54-ec347ffdcb2a}">
+                <WZUIImage Type="WZUIImage" GUID="{304262ef-07e1-408b-a007-1d38f7554f39}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{3759bc12-9954-46c2-ad9b-80c9c1c42146}">
+                <WZUIImage Type="WZUIImage" GUID="{7f55a1cb-d5bb-4431-a1ef-2de57f7936f7}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{89bfca05-5277-4750-b3de-5bcdad31f232}" />
+        </WZUIButton>
+    </WZUIContainer>
+</CellActivitySevenRedEnvelope>

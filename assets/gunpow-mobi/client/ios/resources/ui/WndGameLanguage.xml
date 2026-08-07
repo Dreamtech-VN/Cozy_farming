@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" ?>
+<WndGameLanguage GUID="{567A6043-504E-479c-BD8E-4F78F3707E25}">
+    <WZUIWindow Type="WZUIWindow" GUID="{E3C97A62-EB33-4ba3-8163-071351C2452F}" Name="WndGameLanguage" NameCreate="True" LuaObjectName="WndGameLanguage" RelativePosition="0.5,0.5" AbsContentSize="470,336" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{831048A0-6DB7-40a0-9685-BDC341A55EC2}" AbsContentSize="500,500" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{55C441B6-8198-4a86-A0CC-929D56FA2BC6}" File="ui/common/common_scale9_di19.png" CapInsets="170,70,1,1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{E8590DFC-91C5-48e4-8485-00E6BEE5EF60}" AbsContentSize="500,55" UseAbsSize="True" RelativePosition="0.503992,0.927448" AbsPosition="251.996,463.724">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{BB91E722-EEA2-4af3-8BB2-D1C0ED2BF3F3}" Name="" Color="250,235,194" BoldFont="True" StrokeColor="132,66,29" FontSize="28" Text="" RelativePosition="0.5,0.5" EnableStroke="True" AnchorPoint="0.5,0.5" TextKey="LANGUAGE_CHANGE2" StrokeSize="4" />
+                <WZUIContainer Type="WZUIContainer" GUID="{A998A30A-FD9C-4233-B637-8C8EC2A4B347}" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.906567,0.543607" AbsPosition="453.284,29.8984">
+                    <Button Type="WZUIButton" GUID="{3336F6E1-9F47-4a1e-AA52-B783E3C2559B}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.5,0.5" Name="" LuaDoneFunctionName="onBtnClose" Visible="True" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{427BB309-5C78-4a39-BA82-BBEBD0C732CD}">
+                            <WZUIImage Type="WZUIImage" GUID="{FA54D408-0466-4dbc-9D6E-4795C2270259}" File="ui/common/common_icon_guanbi.png" Scale="1" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{535699AA-22F4-45c5-A6B0-2298B04E5B04}">
+                            <WZUIImage Type="WZUIImage" GUID="{18B09315-D691-49ab-9D06-2F9D663A34D6}" File="ui/common/common_icon_guanbi_sel.png" Scale="1" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{2E896C2D-1CF7-4e9b-938D-D8E4969CE163}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{15F31E23-35F6-4d4a-8D46-71EA37F4D046}" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{3BFD8FBE-46A3-40ad-ADE0-ECA0F7107A8E}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.68,0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{6260371C-2C6F-4ab6-8ABD-9FEEDD2A987F}" File="ui/common/common_pic_jiantou4.png" RelativePosition="0.32,0.5" UseOriginSize="True" FlipX="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{54930459-E2A3-42e8-8D41-EAE1DD6B652E}" AbsContentSize="">
+                <WZUIContainer Type="WZUIContainer" GUID="{793EED1D-190A-4946-962F-0AECF7949DF1}" AbsContentSize="210,70" UseAbsSize="True" RelativePosition="0.25,0.596" AbsPosition="131.5,384" AnchorPoint="0.5,0.5" Visible="False" Name="conZh_WndGameLanguage">
+                    <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsPosition="0.826386,163.214" LuaDoneFunctionName="onChoiceLan" GUID="{93E19A81-23E2-410f-9FF2-E5AB9C833EFB}" Tag="1">
+                        <NormalElement Type="WZUIContainer" GUID="{049AA1F8-4A32-4be2-AB5A-7A286F92CD0B}" />
+                        <SelectElement Type="WZUIContainer" GUID="{74EBB32D-F7F3-4a49-A071-DEA5EAC56CD3}" />
+                        <DisableElement Type="WZUIContainer" GUID="{EFCE01EF-D1E0-4189-BF64-7E49EAB39A79}" />
+                        <WZUIImage Type="WZUIImage" GUID="{C42624B1-DEB5-4b92-81CB-F2061BA802F2}" File="ui/common/common_btn_anniu20.png" />
+                        <WZUIImage Type="WZUIImage" GUID="{996E5C07-1BE1-4205-BEEB-101A9E42D3C5}" File="ui/setting/commom_icon_cn.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="53,35" Scale="1" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{4BB8CCA7-E86F-40b6-967D-501866735F66}" AbsContentSize="210,70" UseAbsSize="True" RelativePosition="0.75,0.764" AbsPosition="364.5,382" AnchorPoint="0.5,0.5" Name="conEn_WndGameLanguage" Visible="False">
+                    <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsPosition="0.826386,163.214" LuaDoneFunctionName="onChoiceLan" GUID="{46F9C07F-5C43-4317-B4B1-9C8095585315}" Tag="2">
+                        <NormalElement Type="WZUIContainer" GUID="{E38FD6AD-B1A6-46f4-BFDB-974F03899486}" />
+                        <SelectElement Type="WZUIContainer" GUID="{8F8B84BA-3D42-46c5-B0DC-1FF4B656ABE5}" />
+                        <DisableElement Type="WZUIContainer" GUID="{9CC04A7A-6003-46c1-B4CF-FC1AB8C502CB}" />
+                        <WZUIImage Type="WZUIImage" GUID="{E6AC55A3-1708-4ed0-A51A-474F40ACFF74}" File="ui/common/common_btn_anniu20.png" />
+                        <WZUIImage Type="WZUIImage" GUID="{F75AFFA7-9AD1-4cee-BE0E-A47506439A3A}" File="ui/setting/commom_icon_en.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="53,35" Scale="1" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{57C99173-6E8A-42c3-B594-ACC69B6CD05A}" AbsContentSize="210,70" UseAbsSize="True" RelativePosition="0.25,0.764" AbsPosition="125,297" AnchorPoint="0.5,0.5" Name="conTh_WndGameLanguage" Visible="False">
+                    <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsPosition="0.826386,163.214" LuaDoneFunctionName="onChoiceLan" GUID="{491DDCD6-85CA-4ef2-A26F-5B4456814123}" Tag="3">
+                        <NormalElement Type="WZUIContainer" GUID="{C8B26DB0-AA1A-41a8-8381-CBFB0B8AB1CE}" />
+                        <SelectElement Type="WZUIContainer" GUID="{5647577F-DE8F-40d9-B14E-7BBD42C48F3F}" />
+                        <DisableElement Type="WZUIContainer" GUID="{A51DE0D1-04F2-4f19-83A2-15E8CD4950B0}" />
+                        <WZUIImage Type="WZUIImage" GUID="{18DBF10B-54F7-4ecb-BF7A-4828367F04C4}" File="ui/common/common_btn_anniu20.png" />
+                        <WZUIImage Type="WZUIImage" GUID="{3C879571-951E-4a1b-AF6D-3DF579DBA89A}" File="ui/setting/commom_icon_th.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="53,35" Scale="1" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{52ce1149-82d6-4490-8cfb-12f52e330ca3}" AbsContentSize="210,70" UseAbsSize="True" RelativePosition="0.25,0.596" AbsPosition="131.5,384" AnchorPoint="0.5,0.5" Visible="False" Name="conPt_WndGameLanguage">
+                    <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsPosition="0.826386,163.214" LuaDoneFunctionName="onChoiceLan" GUID="{8d4b6e3b-8b6c-405b-bf64-3b6626fadf89}" Tag="4">
+                        <NormalElement Type="WZUIContainer" GUID="{ae1f86d4-5c7b-4f3a-96c5-b713710ddad2}" />
+                        <SelectElement Type="WZUIContainer" GUID="{f024b9c3-b94b-4784-9678-fe916458fe22}" />
+                        <DisableElement Type="WZUIContainer" GUID="{a76d9545-4c97-4c1c-b972-7878da38acce}" />
+                        <WZUIImage Type="WZUIImage" GUID="{5bb56cda-c63f-482e-89b0-53c0392e7f9d}" File="ui/common/common_btn_anniu20.png" />
+                        <WZUIImage Type="WZUIImage" GUID="{c9874021-987d-417d-8c9d-84fcf4c9e585}" File="ui/setting/commom_icon_pt.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="53,35" Scale="1" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{2c0d6ced-011a-4586-bfb0-1ca2d3c86a4e}" AbsContentSize="210,70" UseAbsSize="True" RelativePosition="0.25,0.596" AbsPosition="131.5,384" AnchorPoint="0.5,0.5" Visible="False" Name="conTr_WndGameLanguage">
+                    <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsPosition="0.826386,163.214" LuaDoneFunctionName="onChoiceLan" GUID="{9d3a4322-26d8-4712-9b6a-f00117ecfd84}" Tag="5">
+                        <NormalElement Type="WZUIContainer" GUID="{5f2a9a2c-e2a6-4d5a-b5d2-166dc194c4c5}" />
+                        <SelectElement Type="WZUIContainer" GUID="{dd311d5f-5b03-4fa3-bd8f-c80e518736a6}" />
+                        <DisableElement Type="WZUIContainer" GUID="{24d30415-55b6-415e-b83e-1011252dd311}" />
+                        <WZUIImage Type="WZUIImage" GUID="{c9a7dc78-f336-4f8f-97f9-c24d6572aae9}" File="ui/common/common_btn_anniu20.png" />
+                        <WZUIImage Type="WZUIImage" GUID="{249570f9-90b4-4ded-8585-401a1dbb3ef7}" File="ui/setting/commom_icon_tr.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="53,35" Scale="1" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{a2c1fc73-df4b-4434-a0ec-850b19553edb}" AbsContentSize="210,70" UseAbsSize="True" RelativePosition="0.25,0.596" AbsPosition="131.5,384" AnchorPoint="0.5,0.5" Visible="False" Name="conEs_WndGameLanguage">
+                    <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsPosition="0.826386,163.214" LuaDoneFunctionName="onChoiceLan" GUID="{2f0a8317-1771-4cd6-b4c5-f8f2fea2f2f5}" Tag="6">
+                        <NormalElement Type="WZUIContainer" GUID="{52f4497d-520c-47fb-a2c0-a8b4fac2b3a6}" />
+                        <SelectElement Type="WZUIContainer" GUID="{2c42d588-ac62-404d-b36f-501caa24cf25}" />
+                        <DisableElement Type="WZUIContainer" GUID="{a27fe91d-94a6-4b60-90a5-305588e1e969}" />
+                        <WZUIImage Type="WZUIImage" GUID="{d942cf3b-0483-4e93-8ad7-1d11bc4370e1}" File="ui/common/common_btn_anniu20.png" />
+                        <WZUIImage Type="WZUIImage" GUID="{7a6d9fd4-cb82-4082-8493-3078829a2f66}" File="ui/setting/commom_icon_es.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="53,35" Scale="1" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{aa7c2753-eb22-463c-a368-912b9c873f1d}" AbsContentSize="210,70" UseAbsSize="True" RelativePosition="0.25,0.596" AbsPosition="131.5,384" AnchorPoint="0.5,0.5" Visible="False" Name="conHk_WndGameLanguage">
+                    <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsPosition="0.826386,163.214" LuaDoneFunctionName="onChoiceLan" GUID="{5cda7a49-36fe-49e5-801d-299c6df51c11}" Tag="7">
+                        <NormalElement Type="WZUIContainer" GUID="{01ed6cd7-3aa3-4404-a51e-897e14c1e717}" />
+                        <SelectElement Type="WZUIContainer" GUID="{eddfe74c-793f-471c-afe2-eee009ccc7a0}" />
+                        <DisableElement Type="WZUIContainer" GUID="{c7e09684-8d98-49c2-9ac7-f91eabb0e710}" />
+                        <WZUIImage Type="WZUIImage" GUID="{93c9e0e0-dda0-4d3d-8029-4b240e04700b}" File="ui/common/common_btn_anniu20.png" />
+                        <WZUIImage Type="WZUIImage" GUID="{e01f97ea-9f5a-4525-b1e9-2b16431bdc73}" File="ui/setting/commom_icon_hk.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="53,35" Scale="1" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{73F69F15-CFD7-4747-BB90-D17676CFF010}" AbsContentSize="380,300" UseAbsSize="True" RelativePosition="0.5,0.5" Name="conChange_WndGameLanguage" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{1BE66E9D-6792-4405-A3EA-95F9887F968E}" File="ui/common/common_scale9_di19.png" CapInsets="170,70,1,1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{681E6DCF-6A46-437d-87EA-4CB909B922D6}" AbsContentSize="380,55" UseAbsSize="True" RelativePosition="0.503992,0.894115" AbsPosition="191.517,268.234">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{AD13E23B-C42D-4b79-A224-A40A09067D0C}" Name="" Color="250,235,194" BoldFont="True" StrokeColor="132,66,29" FontSize="28" Text="" RelativePosition="0.5,0.5" EnableStroke="True" AnchorPoint="0.5,0.5" TextKey="LANGUAGE_CHANGE2" StrokeSize="4" />
+                <WZUIContainer Type="WZUIContainer" GUID="{AFED89A7-57B0-4554-8A76-83D221800EA3}" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.906567,0.543607" AbsPosition="453.284,29.8984">
+                    <Button Type="WZUIButton" GUID="{68DBA9EB-B3A6-40a0-8D03-0E6DC9D316F7}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.5,0.5" Name="" LuaDoneFunctionName="onBtnBack" Visible="True" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{1FE1233F-5052-4f41-9AFE-8464885F859C}">
+                            <WZUIImage Type="WZUIImage" GUID="{4FE4A134-2237-48b0-92F9-F397CA96096D}" File="ui/common/common_icon_guanbi.png" Scale="1" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{BD1B5969-B718-417b-B905-13B4DFA76CAF}">
+                            <WZUIImage Type="WZUIImage" GUID="{9D230FE6-A625-4063-9027-51EFCA6E25BA}" File="ui/common/common_icon_guanbi_sel.png" Scale="1" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{464882D6-976A-421d-A60B-6CB8DE60BE8F}" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{D1A774D6-73AF-4c50-9E44-277752B953CD}" AbsContentSize="380," UseAbsSize="False" RelativePosition="0.5,0.5" AbsPosition="281.255,137.475">
+                <WZUIContainer Type="WZUIContainer" GUID="{0CA9C24F-80D1-4184-9A4D-641496044336}" AbsContentSize="309,50" UseAbsSize="True" RelativePosition="0.5,0.536667" AnchorPoint="0.5,1" Name="" File="ui/setting/common_icon_xgmm.png" TouchEnable="False" AbsPosition="190,161">
+                    <WZUI9Image Type="WZUI9Image" GUID="{9341EB14-55A7-41a0-945C-0535F043852B}" File="ui/common/common_scale9_di9.png" RelativePosition="0.5,0.5" />
+                    <Button Type="WZUIButton" GUID="{40620491-F4C8-4b63-8D93-0E0679979649}" Name="" NameCreate="True" LuaDoneFunctionName="onBtnLanClick" AbsContentSize="309,50" UseAbsSize="True" RelativePosition="0.5,0.531079">
+                        <NormalElement Type="WZUIContainer" GUID="{9C539E57-CEBE-4550-B792-99EEA51EE1E1}" />
+                        <SelectElement Type="WZUIContainer" GUID="{D7C77B65-1623-479a-8AD7-D4DB7F05A94C}" />
+                        <DisableElement Type="WZUIContainer" GUID="{55E27BBE-255A-4874-A823-AF8988E22FAB}" />
+                        <WZUIImage Type="WZUIImage" GUID="{B2D615E5-653C-4f96-A618-421B13D7CCC3}" File="" UseOriginSize="True" RelativePosition="0.78,0.5" Name="imgLan_WndGameLanguage" />
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{D82BFF1F-CC65-464f-AB19-F16BC0117022}" Name="" NameCreate="True" Color="105,65,46" StrokeColor="36,0,0" Text="" FontSize="22" AnchorPoint="1,0.5" RelativePosition="0.49,0.5" StrokeSize="3" BoldFont="False" EnableShadow="False" EnableStroke="False" TextKey="LANGUAGE_CHANGE" LuaDoneFunctionName="ssss" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{20252B2C-3866-48e3-A994-2B43919C0B6D}" Text="" LabelStyleKey="C13_F22" RelativePosition="0.5,0.663333" AbsPosition="190,199" TextKey="LANGUAGE_CHANGE3" Name="txtChange_WndGameLanguage" Dimensions="0,0" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5FB02221-8931-4f4f-A35E-938439BFB80E}" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.196667" AbsPosition="190,59.0001">
+                <WZUIButton Type="WZUIButton" GUID="{766A7EE3-92E8-436e-B8F5-050670D7A630}" LuaDoneFunctionName="onBtnConfirm" Name="" NameCreate="True" RelativePosition="0.5,0.5" LuaActionName="Normal" UseAbsSize="False">
+                    <NormalElement Type="WZUIContainer" GUID="{306A6907-4CF2-42aa-A434-D1E797DEE74E}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{E153DBBF-2248-4d28-8E23-956C31286F80}" File="ui/common/common_btn_anniu10.png" UseOriginSize="False" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{E1E499B3-7B6D-48ac-8496-F10CCC4101DF}" ScaleX="1" Scale="1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{8FC4CD49-3914-4ae5-B4BF-1BC3664B9191}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="False" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{857C4700-FC8C-42f2-BA23-B750C077C4D3}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{BCB7013F-41AC-46bc-9D15-7CDB29297EC9}" FontSize="24" Text="" Order="1" Name="" NameCreate="True" BoldFont="False" EnableStroke="True" StrokeSize="4" Color="255,236,193" StrokeColor="3,111,8" RelativePosition="0.5,0.464286" TextKey="CONFIRM" LabelStyleKey="SMALL_GREEN_BTN" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndGameLanguage>

@@ -1,0 +1,140 @@
+﻿<CellDayRewardContain GUID="{7f9acf8b-1340-49d3-82f6-ec3d798d1a97}">
+    <WZUIContainer Type="WZUIContainer" GUID="{3d6d29ee-c0ba-4eb8-a46b-97bbccf95884}" Name="CellDayRewardContain" UseAbsSize="True" AbsContentSize="551,248" AnchorPoint="0,0.5" RelativePosition="0,0.5" LuaObjectName="CellDayRewardContain">
+        <WZUIContainer Type="WZUIContainer" GUID="{594ebb9c-4c82-4461-92fa-c296a7e05f02}" AbsContentSize="116,112" UseAbsSize="True" RelativePosition="0.136519,0.742608" Name="conDay1_CellDayRewardContain">
+            <WZUIImage Type="WZUIImage" GUID="{bcecb65b-6fb4-41da-b589-e2fbee15d3a1}" File="ui/anniversary/znq_di02.png" UseOriginSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{fdc6db6a-4b82-4711-97d2-4f45b7e87593}" AbsContentSize="116,35" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUIImage Type="WZUIImage" GUID="{08258ffe-6941-4d9c-b05e-aa8625c5063a}" File="ui/anniversary/znq_fengexian01.png" UseOriginSize="True" Scale="0.5" ScaleY="0.9" RelativePosition="0.5,0.0666667" ScaleX="0.3" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1cc248b1-d6e1-4d24-a988-5ba55d63e223}" LabelStyleKey="C18_F20" Text="" Name="txtDay_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUISpine Type="WZUISpine" GUID="{155d31a2-db83-40e4-bc65-49e79965e8e5}" FileAtlas="ui/common_scale9_jinji_5.atlas" FileJson="ui/common_scale9_jinji_5.json" AnimationName="common_scale9_jinji_5" Loop="True" Scale="1" TouchEnable="False" Name="sp_CellDayRewardContain" Visible="False" RelativePosition="0.603448,0.535713" ScaleX="1" ScaleY="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{22693de0-ab60-4820-addc-877b4beb2119}" AbsContentSize="116,75" UseAbsSize="True" RelativePosition="0.5,0.357142">
+                <WZUIImage Type="WZUIImage" GUID="{95fb05c7-e4a4-440a-931b-6fcf30dd2de1}" File="" UseOriginSize="True" Name="imgItem_CellDayRewardContain" RelativePosition="0.5,0.553334" />
+                <WZUIImage Type="WZUIImage" GUID="{ebd53658-b9e9-49ce-a369-c58937449d20}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.841736,0.182575" Name="imgGet_CellDayRewardContain" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b94cad9f-b224-42ee-a5cc-06aab7a58c02}" LabelStyleKey="C18_F18" Text="" RelativePosition="0.948276,0.113333" AnchorPoint="1,0.5" Name="txtNum_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUI9Image Type="WZUI9Image" GUID="{9e45a7dc-0965-4cd7-9450-76585887c58e}" File="ui/common/common_shade_chushouheidi1.png" Opacity="125" Name="imgBlack_CellDayRewardContain" Visible="False" UseOriginSize="False" TouchEnable="False" />
+            <Button Type="WZUIButton" GUID="{a2d2a0c3-3870-4390-b5ab-5b24dede2b0e}" LuaDoneFunctionName="onClickGet" Tag="1">
+                <NormalElement Type="WZUIContainer" GUID="{35b3a98e-2e94-4336-a8c9-83ad4c864180}" />
+                <SelectElement Type="WZUIContainer" GUID="{2427e841-6046-4f2e-a735-e76c4d60a0e6}" />
+                <DisableElement Type="WZUIContainer" GUID="{11c30735-4003-4b0c-84c8-1f509e099e1e}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{6c746cc2-945e-4396-83d1-3e629c38bc8d}" AbsContentSize="116,112" UseAbsSize="True" RelativePosition="0.379713,0.742608" Name="conDay2_CellDayRewardContain">
+            <WZUIImage Type="WZUIImage" GUID="{d1d253ff-a666-4c9b-ac59-6a910a75369f}" File="ui/anniversary/znq_di02.png" UseOriginSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{1d01cc13-8f29-420a-8515-b7f0eb248ea9}" AbsContentSize="116,35" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUIImage Type="WZUIImage" GUID="{8a80ffc6-fdf3-4ced-9a29-6fbbddeddec4}" File="ui/anniversary/znq_fengexian01.png" UseOriginSize="True" Scale="0.5" ScaleY="0.9" RelativePosition="0.5,0.0666667" ScaleX="0.3" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{eebc34f6-e8aa-4b30-864d-48733644a4dd}" LabelStyleKey="C18_F20" Text="" Name="txtDay_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUISpine Type="WZUISpine" GUID="{be7be1a4-8805-4ec4-9aee-f7c1cbe5fc9e}" FileAtlas="ui/common_scale9_jinji_5.atlas" FileJson="ui/common_scale9_jinji_5.json" AnimationName="common_scale9_jinji_5" Loop="True" Scale="1" TouchEnable="False" Name="sp_CellDayRewardContain" Visible="False" RelativePosition="0.603448,0.535713" ScaleX="1" ScaleY="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{f25eb877-581a-4a80-b023-ce26155da48b}" AbsContentSize="116,75" UseAbsSize="True" RelativePosition="0.5,0.357142">
+                <WZUIImage Type="WZUIImage" GUID="{c072807c-f14c-428f-be8b-288693d7f4b7}" File="" UseOriginSize="True" Name="imgItem_CellDayRewardContain" RelativePosition="0.5,0.553334" />
+                <WZUIImage Type="WZUIImage" GUID="{c67a06eb-99f0-4c30-a927-debc4147e1e4}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.841736,0.182575" Name="imgGet_CellDayRewardContain" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{535252b5-a267-41ef-9c2d-396d2af5e0ab}" LabelStyleKey="C18_F18" Text="" RelativePosition="0.948276,0.113333" AnchorPoint="1,0.5" Name="txtNum_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUI9Image Type="WZUI9Image" GUID="{1889126d-11d0-4e6e-88e5-1eaf6136f378}" File="ui/common/common_shade_chushouheidi1.png" Opacity="125" Name="imgBlack_CellDayRewardContain" Visible="False" UseOriginSize="False" TouchEnable="False" />
+            <Button Type="WZUIButton" GUID="{616e075a-00f9-4506-b782-02e5381c5dc4}" LuaDoneFunctionName="onClickGet" Tag="2">
+                <NormalElement Type="WZUIContainer" GUID="{f3358406-dba3-4688-aabc-0b271147e4dd}" />
+                <SelectElement Type="WZUIContainer" GUID="{a85ef47e-06dd-41dd-9b70-198ebaa2f42e}" />
+                <DisableElement Type="WZUIContainer" GUID="{f79af32d-1cc7-4f31-ae69-267ca5489e6d}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{3100a67d-c51a-4434-a38b-807eb2d9d348}" AbsContentSize="116,112" UseAbsSize="True" RelativePosition="0.621093,0.742608" Name="conDay3_CellDayRewardContain">
+            <WZUIImage Type="WZUIImage" GUID="{9dcba25e-e767-419d-904a-e5e4aeadf12c}" File="ui/anniversary/znq_di02.png" UseOriginSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{992ea109-02c5-4c5e-befc-2d1aab9a5955}" AbsContentSize="116,35" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUIImage Type="WZUIImage" GUID="{2c2e8990-c766-42f8-9a2a-59c351ded4ad}" File="ui/anniversary/znq_fengexian01.png" UseOriginSize="True" Scale="0.5" ScaleY="0.9" RelativePosition="0.5,0.0666667" ScaleX="0.3" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7d07d4bf-38ed-4f7c-abc1-fc77e00f8648}" LabelStyleKey="C18_F20" Text="" Name="txtDay_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUISpine Type="WZUISpine" GUID="{33712927-f8f6-4081-9304-b5c973fec717}" FileAtlas="ui/common_scale9_jinji_5.atlas" FileJson="ui/common_scale9_jinji_5.json" AnimationName="common_scale9_jinji_5" Loop="True" Scale="1" TouchEnable="False" Name="sp_CellDayRewardContain" Visible="False" RelativePosition="0.603448,0.535713" ScaleX="1" ScaleY="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{005667bf-3bc7-4512-8305-b47516b68567}" AbsContentSize="116,75" UseAbsSize="True" RelativePosition="0.5,0.357142">
+                <WZUIImage Type="WZUIImage" GUID="{df4fc365-d5f9-44ef-a407-fd1bbfbedf8e}" File="" UseOriginSize="True" Name="imgItem_CellDayRewardContain" RelativePosition="0.5,0.553334" />
+                <WZUIImage Type="WZUIImage" GUID="{2ffdbd42-7077-43fe-8aba-9c142bb188e4}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.841736,0.182575" Name="imgGet_CellDayRewardContain" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1c01cd4a-34b6-4153-bf99-5c1fe35173d8}" LabelStyleKey="C18_F18" Text="" RelativePosition="0.948276,0.113333" AnchorPoint="1,0.5" Name="txtNum_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUI9Image Type="WZUI9Image" GUID="{65724cea-dc94-48f9-bdc9-45bd3a2e9a97}" File="ui/common/common_shade_chushouheidi1.png" Opacity="125" Name="imgBlack_CellDayRewardContain" Visible="False" UseOriginSize="False" TouchEnable="False" />
+            <Button Type="WZUIButton" GUID="{26cb8d69-ead5-41b8-8073-4a3d910f3159}" LuaDoneFunctionName="onClickGet" Tag="3">
+                <NormalElement Type="WZUIContainer" GUID="{187ad33c-b7cb-459f-bda2-e73d02518bc1}" />
+                <SelectElement Type="WZUIContainer" GUID="{63101ae4-ddbb-462e-ba09-cf8b57647553}" />
+                <DisableElement Type="WZUIContainer" GUID="{e2ca7ac0-65d6-4a0a-9bad-cd0e3f00ecb9}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{0af26702-6898-41f8-8619-75f44317bf17}" AbsContentSize="116,112" UseAbsSize="True" RelativePosition="0.860657,0.742608" Name="conDay4_CellDayRewardContain">
+            <WZUIImage Type="WZUIImage" GUID="{ad5e9668-e106-481f-b57d-fdebb4a1ffa2}" File="ui/anniversary/znq_di02.png" UseOriginSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{5817dfa1-0191-43fb-9c2b-0311b4cf440e}" AbsContentSize="116,35" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUIImage Type="WZUIImage" GUID="{fa04e6f4-96f1-4e23-816d-5a36d387f556}" File="ui/anniversary/znq_fengexian01.png" UseOriginSize="True" Scale="0.5" ScaleY="0.9" RelativePosition="0.5,0.0666667" ScaleX="0.3" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b0d3d907-f4fa-4e3e-91f9-95e71c5996ba}" LabelStyleKey="C18_F20" Text="" Name="txtDay_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUISpine Type="WZUISpine" GUID="{55f76a70-7159-4d31-ac2c-9bbcee44b762}" FileAtlas="ui/common_scale9_jinji_5.atlas" FileJson="ui/common_scale9_jinji_5.json" AnimationName="common_scale9_jinji_5" Loop="True" Scale="1" TouchEnable="False" Name="sp_CellDayRewardContain" Visible="False" RelativePosition="0.603448,0.535713" ScaleX="1" ScaleY="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{93868eb1-fbd1-48ed-aaa9-7b3ddba2799b}" AbsContentSize="116,75" UseAbsSize="True" RelativePosition="0.5,0.357142">
+                <WZUIImage Type="WZUIImage" GUID="{9591eb98-57af-4c7f-a083-8bce6562ab4a}" File="" UseOriginSize="True" Name="imgItem_CellDayRewardContain" RelativePosition="0.5,0.553334" />
+                <WZUIImage Type="WZUIImage" GUID="{98ef44ef-a849-438e-a7d8-46f141ca7712}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.841736,0.182575" Name="imgGet_CellDayRewardContain" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3b9cf75e-ba36-4b87-9e89-46c0b55bc982}" LabelStyleKey="C18_F18" Text="" RelativePosition="0.948276,0.113333" AnchorPoint="1,0.5" Name="txtNum_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUI9Image Type="WZUI9Image" GUID="{152cd815-1e30-48ad-a0c9-27109b8c021a}" File="ui/common/common_shade_chushouheidi1.png" Opacity="125" Name="imgBlack_CellDayRewardContain" Visible="False" UseOriginSize="False" TouchEnable="False" />
+            <Button Type="WZUIButton" GUID="{c176612e-611f-452c-b3df-b683228ad074}" LuaDoneFunctionName="onClickGet" Tag="4">
+                <NormalElement Type="WZUIContainer" GUID="{22d59ad6-1a9a-493c-8877-7fbfe6820e53}" />
+                <SelectElement Type="WZUIContainer" GUID="{53986d88-4236-45fc-b0a4-606fa07df0a3}" />
+                <DisableElement Type="WZUIContainer" GUID="{cc59765c-f0a5-419f-8e8d-ded7ed1891a8}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{46d3aed5-4f90-4f84-83a3-1b7d3c365c43}" AbsContentSize="116,112" UseAbsSize="True" RelativePosition="0.136519,0.258376" Name="conDay5_CellDayRewardContain">
+            <WZUIImage Type="WZUIImage" GUID="{e128642b-3994-4515-96dc-c5d0570bdd90}" File="ui/anniversary/znq_di02.png" UseOriginSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{210ab199-b72b-47ad-bfbb-945f852e34d1}" AbsContentSize="116,35" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUIImage Type="WZUIImage" GUID="{f1ce9d41-21d4-47d5-b7f6-92bcb52955fe}" File="ui/anniversary/znq_fengexian01.png" UseOriginSize="True" Scale="0.5" ScaleY="0.9" RelativePosition="0.5,0.0666667" ScaleX="0.3" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{156b4111-b1fd-43a4-9645-f882bf1fe9fa}" LabelStyleKey="C18_F20" Text="" Name="txtDay_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUISpine Type="WZUISpine" GUID="{06abf266-fc20-4331-a9ea-ea629b9f81b8}" FileAtlas="ui/common_scale9_jinji_5.atlas" FileJson="ui/common_scale9_jinji_5.json" AnimationName="common_scale9_jinji_5" Loop="True" Scale="1" TouchEnable="False" Name="sp_CellDayRewardContain" Visible="False" RelativePosition="0.603448,0.535713" ScaleX="1" ScaleY="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{6efebc5e-acb8-4e9a-a03d-314aac48d632}" AbsContentSize="116,75" UseAbsSize="True" RelativePosition="0.5,0.357142">
+                <WZUIImage Type="WZUIImage" GUID="{e059fc35-0a90-4248-b60c-233ae9d1bc47}" File="" UseOriginSize="True" Name="imgItem_CellDayRewardContain" RelativePosition="0.5,0.553334" />
+                <WZUIImage Type="WZUIImage" GUID="{a69d66c1-d209-4bd7-9826-d48eddfe54eb}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.841736,0.182575" Name="imgGet_CellDayRewardContain" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5bc80442-06ac-4996-bcb0-8d7641ebffc1}" LabelStyleKey="C18_F18" Text="" RelativePosition="0.948276,0.113333" AnchorPoint="1,0.5" Name="txtNum_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUI9Image Type="WZUI9Image" GUID="{95a7d5f0-34aa-426a-b13a-4ea59e11cc8f}" File="ui/common/common_shade_chushouheidi1.png" Opacity="125" Name="imgBlack_CellDayRewardContain" Visible="False" UseOriginSize="False" TouchEnable="False" />
+            <Button Type="WZUIButton" GUID="{6cb838cc-5a7a-4860-8e30-dc4555a8a7d9}" LuaDoneFunctionName="onClickGet" Tag="5">
+                <NormalElement Type="WZUIContainer" GUID="{407fe748-0832-467d-84d3-c6b9775688ff}" />
+                <SelectElement Type="WZUIContainer" GUID="{900295fd-2f21-4e24-b022-de50aaa7f61e}" />
+                <DisableElement Type="WZUIContainer" GUID="{7740cd07-e1cc-4b92-9cca-7b93c95321a1}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{ddc421cb-d7cd-4468-a2fb-4bf4110aa249}" AbsContentSize="116,112" UseAbsSize="True" RelativePosition="0.379713,0.258376" Name="conDay6_CellDayRewardContain">
+            <WZUIImage Type="WZUIImage" GUID="{f03ac502-5c12-48c1-a2ec-92f6db069c4c}" File="ui/anniversary/znq_di02.png" UseOriginSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{fa4a86a6-e06a-4b86-921e-fb0979dd6b4b}" AbsContentSize="116,35" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUIImage Type="WZUIImage" GUID="{03350283-aecd-4616-9b3f-29879ae28a0d}" File="ui/anniversary/znq_fengexian01.png" UseOriginSize="True" Scale="0.5" ScaleY="0.9" RelativePosition="0.5,0.0666667" ScaleX="0.3" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8e0652eb-ad43-41b6-9e09-d1b4bc77c1d0}" LabelStyleKey="C18_F20" Text="" Name="txtDay_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUISpine Type="WZUISpine" GUID="{d25ad1b1-9a0b-428c-a9c0-222dff59e1ab}" FileAtlas="ui/common_scale9_jinji_5.atlas" FileJson="ui/common_scale9_jinji_5.json" AnimationName="common_scale9_jinji_5" Loop="True" Scale="1" TouchEnable="False" Name="sp_CellDayRewardContain" Visible="False" RelativePosition="0.603448,0.535713" ScaleX="1" ScaleY="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{601e6989-021f-4e4f-b36a-e8f396eee288}" AbsContentSize="116,75" UseAbsSize="True" RelativePosition="0.5,0.357142">
+                <WZUIImage Type="WZUIImage" GUID="{119e065c-c5da-43d0-9065-c57702ad602e}" File="" UseOriginSize="True" Name="imgItem_CellDayRewardContain" RelativePosition="0.5,0.553334" />
+                <WZUIImage Type="WZUIImage" GUID="{daab4939-e5c9-40b1-949d-120d48c2da5f}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.841736,0.182575" Name="imgGet_CellDayRewardContain" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c9f8a6ee-982d-4a0a-b953-02528af521c7}" LabelStyleKey="C18_F18" Text="" RelativePosition="0.948276,0.113333" AnchorPoint="1,0.5" Name="txtNum_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUI9Image Type="WZUI9Image" GUID="{f07ec68f-e0eb-4dd0-bf4b-25e9de29b17b}" File="ui/common/common_shade_chushouheidi1.png" Opacity="125" Name="imgBlack_CellDayRewardContain" Visible="False" UseOriginSize="False" TouchEnable="False" />
+            <Button Type="WZUIButton" GUID="{83f75d9e-21eb-44f3-be23-fb0d9c49e988}" LuaDoneFunctionName="onClickGet" Tag="6">
+                <NormalElement Type="WZUIContainer" GUID="{0ecdfbf2-8d8e-4d94-965b-9f41094a9455}" />
+                <SelectElement Type="WZUIContainer" GUID="{3c160964-d514-4e09-a3d9-f6be327bf992}" />
+                <DisableElement Type="WZUIContainer" GUID="{d8038733-adee-41ca-af69-dba607de16ec}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{72eb7594-efbc-41f3-954f-3a5070cfe4ca}" AbsContentSize="246,112" UseAbsSize="True" RelativePosition="0.739059,0.258376" Name="conDay7_CellDayRewardContain">
+            <WZUI9Image Type="WZUI9Image" GUID="{3ba140f2-f6b6-4a7c-96c5-21dc5653e8bb}" File="ui/anniversary/znq_di02.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{4aea8a9f-46a5-4b15-9fd7-a3685bf1eecd}" AbsContentSize="206,35" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUIImage Type="WZUIImage" GUID="{bd8c33db-77e1-4525-a6f4-43cb56ed2444}" File="ui/anniversary/znq_fengexian01.png" UseOriginSize="True" Scale="0.5" ScaleY="0.9" RelativePosition="0.5,0.0666667" ScaleX="0.6" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ad731fa8-0906-4e9a-aada-258c6b5d31fd}" LabelStyleKey="C18_F20" Text="" Name="txtDay_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUISpine Type="WZUISpine" GUID="{267456ad-e172-4771-8d13-11d4ea143fbc}" FileAtlas="" FileJson="" AnimationName="" Loop="True" Scale="0.95" TouchEnable="False" Name="sp_CellDayRewardContain" Visible="True" RelativePosition="0.512195,0.705357" ScaleX="0.93" ScaleY="0.96" />
+            <WZUIContainer Type="WZUIContainer" GUID="{b9dbb3c4-f7b9-4373-91c3-15ac16a0d174}" AbsContentSize="116,75" UseAbsSize="True" RelativePosition="0.5,0.357142">
+                <WZUIImage Type="WZUIImage" GUID="{f659db61-3914-4d1d-9bff-98017e1e36a9}" File="" UseOriginSize="True" Name="imgItem_CellDayRewardContain" RelativePosition="0.5,0.553334" />
+                <WZUIImage Type="WZUIImage" GUID="{7b7c97d1-d886-4a3a-809e-5b23babdbe84}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="1.38484,0.182575" Name="imgGet_CellDayRewardContain" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a9039e3c-3153-4842-ab8a-01635481fdb6}" LabelStyleKey="C18_F18" Text="" RelativePosition="1.50862,0.113333" AnchorPoint="1,0.5" Name="txtNum_CellDayRewardContain" />
+            </WZUIContainer>
+            <WZUI9Image Type="WZUI9Image" GUID="{f503d6a2-67ad-4673-8691-b6bf7b07bef2}" File="ui/common/common_shade_chushouheidi1.png" Opacity="125" Name="imgBlack_CellDayRewardContain" Visible="False" UseOriginSize="False" TouchEnable="False" />
+            <Button Type="WZUIButton" GUID="{73bd4723-db4f-4f02-b114-d740a79a0138}" LuaDoneFunctionName="onClickGet" Tag="7">
+                <NormalElement Type="WZUIContainer" GUID="{4c6c3cc0-c425-4987-afed-90488b9a9167}" />
+                <SelectElement Type="WZUIContainer" GUID="{fb3edf8e-d96f-42a2-9dd4-24d7340ab362}" />
+                <DisableElement Type="WZUIContainer" GUID="{049b1964-31e5-4c19-9914-c476f74ede32}" />
+            </Button>
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{fdfa7532-d4d7-4f07-a406-245c3690692f}" LabelStyleKey="C1_F18" Text="实打实的" RelativePosition="0.0287508,-0.0778267" AnchorPoint="0,0.5" TextKey="ACTIVE_TIME" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a426e951-bcfc-423b-bbe7-d3cbde57a849}" LabelStyleKey="C1_F18" Text="" RelativePosition="0.168497,-0.0778267" AnchorPoint="0,0.5" TextKey="" Name="txtTime_CellDayRewardContain" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4d86b456-8645-458a-a3cf-a79083009ac7}" LabelStyleKey="C1_F18" Text="实打实的" RelativePosition="0.0287508,-0.162504" AnchorPoint="0,0.5" TextKey="LOGIN_COUNT_SEVEN_TIP" />
+    </WZUIContainer>
+</CellDayRewardContain>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" ?>
+<WndPvpRankList GUID="{751e4181-a9e1-4be3-abf4-d8cb2f43fee0}">
+    <WZUIWindow Type="WZUIWindow" GUID="{6836BF14-D501-42c9-B1BB-722D8DFEBCBF}" NameCreate="True" Name="WndPvpRankList" LuaObjectName="WndPvpRankList" UseAbsSize="False" AbsContentSize="" ShowAll="True" LuaTouchBeganFunction="OnTouchBegin">
+        <WZUIContainer Type="WZUIContainer" GUID="{CF2E0844-609D-4c1b-81B3-1560C0BBB9B3}" ShowAll="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{03C6CA7F-631A-4299-95AF-6B077AD90008}" AbsContentSize="772,534" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True" ShowAll="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{C5594704-C77D-41b3-9D1F-041E3B46FCC0}" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{127F112A-9D3F-42d3-BB67-77FC91296530}" File="ui/common/common_scale9_di19.png" Opacity="255" RelativePosition="0.5,0.5" CapInsets="250,100,1,1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9347E1E6-5229-4d73-813E-ECE6CD1DCD18}" TextKey="" FontSize="26" Color="255,236,192" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" RelativePosition="0.494289,0.935813" LabelStyleKey="SMALL_WINDOW_TITLE" Name="txtTitle_WndPvpRankList" Text="" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{1fc62796-ecd5-4372-a69e-3d2c03e3264b}" AbsContentSize="760,422" UseAbsSize="True" RelativePosition="0.5,0.494">
+                        <WZUI9Image Type="WZUI9Image" GUID="{dd41125b-5f14-4de6-b8ea-32c564ac0816}" File="ui/common/common_scale9_di20.png" />
+                    </WZUIContainer>
+                    <WZUIButton Type="WZUIButton" LuaDoneFunctionName="OnClose" GUID="{d6838be2-8ab0-4abd-8616-ceaa2b0b82aa}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.942247,0.938465" AbsPosition="727.414,501.14" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{903bbe0c-2396-4351-aabf-638a25f53772}">
+                            <WZUIImage Type="WZUIImage" GUID="{84c6cdc8-6ce3-438a-a44b-8b8e00d85c9f}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{c8299d04-d7e5-4bae-9dd4-b052eeeab926}">
+                            <WZUIImage Type="WZUIImage" GUID="{33f14102-adda-464c-92a0-89e7477d41be}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{23ef433f-37bb-4132-90bd-e343ef9129e0}" />
+                    </WZUIButton>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{20EC3F94-BDD3-4fd3-80C3-05075A1E2B95}" Name="con1_WndPvpRankList">
+                    <WZUIContainer Type="WZUIContainer" GUID="{A98A1689-F516-4958-92E0-9F26D428CD15}" AbsContentSize="740,360" UseAbsSize="True" RelativePosition="0.5,0.13" AnchorPoint="0.5,0" Name="conRank_WndPvpRankList">
+                        <WZUIContainer Type="WZUIContainer" GUID="{164a40eb-ba17-4ad8-ad17-41421a8b53f2}" RelativeSize="1,0.13" RelativePosition="0.5,1.06">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{599ea284-e04d-4569-9087-d1449299e438}" FontSize="22" Color="79,60,48" TextKey="RANK" RelativePosition="0.1,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{918176bc-56a7-4405-b76c-c4792c55b4eb}" FontSize="22" Color="79,60,48" TextKey="PLAYER" RelativePosition="0.3,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a7bde6b8-dd0d-4b8e-9495-2636d9b3a0c7}" FontSize="22" Color="79,60,48" TextKey="PVP_RANK_1" RelativePosition="0.63,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{bafc8d0d-8d1a-468c-a8df-77bd4ca4ce9f}" FontSize="22" Color="79,60,48" TextKey="BATTLE_RESULT" RelativePosition="0.88,0.5" />
+                        </WZUIContainer>
+                        <WZUITableContainer Type="WZUITableContainer" GUID="{eb70a712-4c4a-434d-956b-2259afc0dd38}" RelativeSize="1,1" RelativePosition="0.5,1" AnchorPoint="0.5,1" Name="tbRankList_WndPvpRankList" CellElementHeight="0.26" EnableMoveHorizontal="False" AbsPosition="370,378" VerticalAbsInterval="8" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{8EB07525-1D63-4311-A001-4B0703D606F9}" Name="con2_WndPvpRankList">
+                    <WZUIContainer Type="WZUIContainer" GUID="{11A3BA6C-549B-476a-95E8-4F3F38D8045F}" AbsContentSize="740,392" UseAbsSize="True" RelativePosition="0.5,0.495" AnchorPoint="0.5,0.5" Name="" Visible="True">
+                        <WZUITableContainer Type="WZUITableContainer" GUID="{947D0E26-98BF-4d4c-8DC7-08175EEE197F}" RelativeSize="1,1" RelativePosition="0.5,1" AnchorPoint="0.5,1" Name="tabReward_WndPvpRankList" CellElementHeight="0.25" EnableMoveHorizontal="False" AbsPosition="370,384" VerticalAbsInterval="8" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{14038AF7-A5D6-451b-BC0A-C41272EA4583}" RelativeSize="1,0.11" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{33bab3b4-7a38-41a3-940d-54574f6473cc}" FontSize="18" TextKey="PVP_RANK_TEXT1" Color="79,60,48" Visible="True" Name="txtMatchDesc_WndPvpRankList" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{fa868458-1e63-409f-b47f-af08ebe4658b}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0" AnchorPoint="0.5,0" RelativeSize="1,0.11">
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{62b21589-257e-4b90-a509-561a0042bf82}" MaxWidth="600" Name="ftxtMyRank_WndPvpRankList" AnchorPoint="0,0.5" RelativePosition="0.03,0.5" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{977d2c79-83e5-4e7e-88b3-d97e45bc42d8}" MaxWidth="600" Name="ftxtEndTime_WndPvpRankList" AnchorPoint="1,0.5" RelativePosition="0.97,0.5" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndPvpRankList>

@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<CellShopItem GUID="{17e907c3-83ff-40c0-a5b1-a95941cb4855}">
+    <WZUIFrame Type="WZUIFrame" GUID="{2b73521e-eee9-4871-97cc-c58fab4e0a59}">
+        <CellElement Type="WZUIContainer" GUID="{8db2532a-ae9b-4152-a6e5-0da1ece63b38}" UseAbsSize="True" AbsContentSize="216,160" Tag="0" Name="CellShopItem">
+            <WZUI9Image Type="WZUI9Image" GUID="{0af9c328-4f87-4a68-9cc9-14f461185868}" File="ui/common/al_bg.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5cb79be5-f2ba-48a3-958a-c9f5e1f947f5}" Text="" Color="60,19,12" FontSize="24" RelativePosition="0.5,0.87479" Name="txtName_CellShopItem" />
+            <WZUIContainer Type="WZUIContainer" GUID="{2ab7b265-5194-4c22-b00e-5d944223abb9}" AbsContentSize="72,72" UseAbsSize="True" RelativePosition="0.5,0.551183" Name="conItem_CellShopItem" />
+            <WZUIContainer Type="WZUIContainer" GUID="{8e299f14-402f-4efc-9dda-b0c56b394855}" UseAbsSize="True" AbsContentSize="136,32" RelativePosition="0.5,0.19375" AnchorPoint="0.5,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{cc592678-02fd-4116-8145-eb8967ff7d1b}" File="common/Jigsaw/surplus_bg.png" Name="imgBg_CellShopItem" />
+                <WZUIImage Type="WZUIImage" GUID="{c2f3539b-6242-4a86-92fa-fc589024141d}" File="" UseOriginSize="True" UseOriginSizeProportion="False" RelativePosition="0.274781,0.5" Name="imgCurrency_CellShopItem" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{be55d9d9-973d-471b-a245-0f14886c7fc7}" Text="" FontSize="24" Color="60,19,12" AnchorPoint="0,0.5" RelativePosition="0.428151,0.5" Name="txtCurrency_CellShopItem" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{8594dc91-21fa-401b-9e08-092d1cc250b7}" Name="conSoldOut_CellShopItem" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{5a1c6638-40c3-4b7e-a30f-690bcbbcc010}" File="ui/common/common_black_bg.png" Opacity="100" />
+                <WZUIImage Type="WZUIImage" GUID="{5acf82c4-43c3-46cc-88ce-48c05685accf}" File="common/text/purchased.png" UseOriginSize="True" RelativePosition="0.361744,0.508446" Name="imgThingsState_CellShopItem" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{112e55b2-bd16-47a6-a10a-931d9eb4707f}" LuaDoneFunctionName="onClickCell">
+                <NormalElement Type="WZUIContainer" GUID="{107f28ba-7b84-414f-ad02-7a7932ee5204}" TouchContainerEnable="True" />
+                <SelectElement Type="WZUIContainer" GUID="{a9229eae-ae4c-42f3-94b0-24f11fb82b60}" TouchContainerEnable="True" />
+                <DisableElement Type="WZUIContainer" GUID="{c4405e2a-7cde-4848-a94a-92986913f2f6}" />
+            </Button>
+        </CellElement>
+    </WZUIFrame>
+</CellShopItem>

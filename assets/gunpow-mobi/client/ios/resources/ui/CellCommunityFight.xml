@@ -1,0 +1,26 @@
+<CellCommunityFight GUID="{e475abe0-a80c-45c4-8807-b8ba72b86dcf}">
+    <WZUIContainer AbsContentSize="502,453" GUID="{47c7c233-ac4b-44bc-937f-16eed18fa3e0}" LuaObjectName="CellCommunityFight" Name="CellCommunityFight" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="502,453" GUID="{1cff935b-e372-442c-b771-0506d006dbfa}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,1">
+            <WZUIImage Type="WZUIImage" GUID="{a453e7d5-7f9b-4c34-ae3f-094d6acc3b1a}" File="ui/welfare/activity_pic_ghz.png" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5" ScaleX="1.006" ScaleY="1.015" />
+            <WZUIContainer AbsContentSize="210,75" GUID="{0b3b2624-8483-4c8b-9e56-e71eba494181}" RelativePosition="0.5,0.10376" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIButton GUID="{c1b07c8a-e017-4240-9556-fab802cdc300}" LuaDoneFunctionName="onGotoEvent" Name="btnGoto_CellCommunityFight" Type="WZUIButton" LuaActionName="Normal" RelativePosition="0.5,0.5">
+                    <NormalElement GUID="{eeb7a672-1fb7-4762-9f37-b846657c7c49}" Type="WZUIContainer" UseAbsSize="False">
+                        <WZUIImage Type="WZUIImage" GUID="{62fd1b06-7eb7-4534-b90f-82376139ce5c}" File="ui/common/common_btn_anniu8.png" UseOriginSize="False" />
+                    </NormalElement>
+                    <SelectElement GUID="{268eebaa-62ae-41d7-82ed-be793a677852}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{a016200b-138c-4487-ba9d-3b8a4302137b}" File="ui/common/common_btn_anniu8_sel.png" UseOriginSize="False" />
+                    </SelectElement>
+                    <DisableElement GUID="{39039592-284d-492b-8347-e30e199ff5e5}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{badc52dd-d41f-4664-81c5-154d85d413cc}" File="ui/common/common_btn_anniu8.png" UseOriginSize="False" />
+                    </DisableElement>
+                    <WZUIImage Type="WZUIImage" GUID="{d874b560-8c98-4ca9-91d9-e4860b1f2ca5}" File="ui/welfare/common_icon_jrgonghz.png" UseOriginSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.546154" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{78137905-0738-416a-b37a-36c46b091094}" AbsContentSize="300,70" UseAbsSize="True" RelativePosition="0.5,0.29" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{df8fd12a-7a47-4f79-808c-cecd853c13b7}" File="ui/common/common_scale9_heidi4.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e5d3981e-edf1-4170-8902-597a33f8aa25}" AnchorPoint="0.5,0" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeSize="4" StrokeColor="128,54,13" Name="txtTime_CellCommunityFight" RelativePosition="0.5,0.5" Text="" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{dd0d6870-fde7-41d6-9596-6f5f63b45075}" AnchorPoint="0.5,1" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeSize="4" StrokeColor="128,54,13" Name="txtWords_CellCommunityFight" TextKey="" Dimensions="400,0" EnableShadow="False" RelativePosition="0.5,0.542858" Text="" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCommunityFight>

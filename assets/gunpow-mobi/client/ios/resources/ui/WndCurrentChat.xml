@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" ?>
+<WndCurrentChat GUID="{51E7683B-C939-4b82-82FF-C211C96D9539}">
+    <WZUIWindow Type="WZUIWindow" GUID="{44A6F2AD-F3B9-40c8-89EC-956E8E72D15E}" LuaObjectName="WndCurrentChat" Name="WndCurrentChat" NameCreate="True" AnchorPoint="0,0" RelativePosition="0.0754167,0.001" AbsContentSize="490,70" UseAbsSize="True" TouchSwallow="False" TouchEnable="False" ShowAll="False" TouchContainerEnable="False" LuaTouchBeganFunction="onTouchBegan" LuaTouchEndedFunction="" Visible="True" UseAbsCoordinate="False" AbsPosition="5,0">
+        <WZUIContainer Type="WZUIContainer" GUID="{8059c737-0855-45b7-8276-6a50e8c9ced1}" Name="con_WndCurrentChat" RelativePosition="0.5,0.35" TouchEnable="False" TouchSwallow="True" TouchContainerEnable="False" Visible="False" AbsContentSize="490,70" UseAbsSize="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{88d6ef68-d79a-46c2-9011-852633405077}" File="ui/common/common_shade_chushouheidi.png" Opacity="255" TouchEnable="False" TouchSwallow="True" LuaTouchEndedFunction="" LuaObjectName="" RelativePosition="0.240816,0.585714" ScaleX="1" Visible="False" Scale="1" />
+            <WZUIFreeListContainer EnableBounceBack="True" EnableDagLoading="False" EnableMoveHorizontal="False" EnableMoveVertical="True" EnableMoveoutContainer="True" GUID="{68e2e4a2-a182-46af-a492-e0c094fc7de1}" Name="freeConChat_WndCurrentChat" RelativePosition="0.5,0.5" Type="WZUIFreeListContainer" EnableVerticalScroll="False" VisibleHeight="60" Visible="True" TouchContainerEnable="False" TouchSwallow="True" TouchEnable="False" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCurrentChat>

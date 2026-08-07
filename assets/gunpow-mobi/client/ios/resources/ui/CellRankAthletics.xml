@@ -1,0 +1,32 @@
+<CellRankAthletics GUID="{591a8231-eb3b-415d-8b7a-22886dee121b}">
+    <WZUIContainer Type="WZUIContainer" GUID="{1ec311a9-8e44-462a-b9c2-230c33024af6}" AbsContentSize="675,85" UseAbsSize="True" LuaObjectName="" BeforeDrawEnable="False" NameCreate="True" Name="CellRankAthletics" ShowAll="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{3825017a-adac-4725-a5f9-539188be11bf}">
+            <WZUIContainer Type="WZUIContainer" GUID="{a95bb5de-077b-4ba0-8eab-45aa3882947b}" Visible="True" Order="1" Name="conInfoLabel_n" LuaObjectName="conInfoLabel_n">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1a7d5b18-f4ce-4604-93ab-391318fa2dd8}" Text="" FontSize="22" RelativePosition="0.236851,0.5" Name="label_info_n_2" Color="105,65,46" StrokeSize="3" MaxLength="8" AnchorPoint="0,0" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a38bfb1c-bdfa-4562-8bbd-bfcb37a5dace}" Text="" FontSize="22" RelativePosition="0.553,0.5" Name="label_info_n_3" Color="105,65,46" StrokeSize="3" MaxLength="8" AnchorPoint="0,0" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a2c6b60d-ed1f-42f9-8ea8-abedb578a0c4}" Text="" FontSize="22" RelativePosition="0.85,0.5" Name="label_info_n_4" Color="62,34,8" StrokeSize="3" MaxLength="" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a42850ec-41fa-4522-8beb-8c7f581ed6d8}" FontSize="22" Name="txtValue2" AnchorPoint="0,1" RelativePosition="0.236851,0.5" Color="62,34,8" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{99a2437a-dc7b-4ac8-a265-25a2b4f1cba6}" Name="txtValue3" RelativePosition="0.553,0.5" AnchorPoint="0,1" FontSize="22" Color="62,34,8" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e52fc8ab-88a9-41fb-b383-22d54ef3d306}" AnchorPoint="0,1" RelativePosition="0.85,0.5" Name="txtValue4" FontSize="22" Color="62,34,8" />
+                <WZUIContainer Type="WZUIContainer" GUID="{5f4bafd8-8d9e-4be6-8ea7-e9395f3977c4}" AbsContentSize="84,76" UseAbsSize="True" RelativePosition="0.0688883,0.5" AbsPosition="46.4996,42.5">
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{71b4e302-d08d-41a2-933f-b1cc2c8865b8}" CharMapFileName="ui/common_num/common_num_pmsz.png" Height="30" Width="24" UseOriginSize="True" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Visible="True" Name="txtRankNum_CellRankAthletics" UseOriginSizeProportion="False" TouchSwallow="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIButton Type="WZUIButton" GUID="{88b613a7-80d5-41d9-9074-c95de8357ca1}" LuaDoneFunctionName="onCellClickedCallback" Name="btn_cellClick" AbsContentSize="670,75" UseAbsSize="True">
+                <NormalElement Type="WZUIContainer" GUID="{3cfeb6c8-ebaa-49b8-9d85-41d9e37d0ed3}" RelativeSize="1,1" />
+                <SelectElement Type="WZUIContainer" GUID="{9d4bfabf-f34c-4c71-b01b-78abf016c14f}" />
+                <DisableElement Type="WZUIContainer" GUID="{ebc2b7db-b2de-405d-a021-6c9b4e7de262}" />
+                <WZUI9Image Type="WZUI9Image" GUID="{e004298e-bcaa-4d1f-b0fb-cd2084cfde86}" File="ui/common/common_scale9_di7.png" RelativePosition="0.5,0.5" Name="imgBK_CellRankAthletics" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{768749d4-2e1c-4414-a3df-c93119341b29}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.182254,0.5" Name="conPlayerHead_CellRankAthletics" TouchSwallow="False">
+                <WZUIImage Type="WZUIImage" GUID="{52f9abd7-32e2-4779-b21f-151cc99ecc8e}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="1" Name="imgHead1BK_CellRankAthletics" />
+                <WZUIContainer AnchorPoint="0.5,0.5" GUID="{16acdc18-2307-4051-824b-862d9e9d1ff4}" RelativePosition="0.5,0.5" RelativeSize="1,1" TouchEnable="False" Type="WZUIContainer" Name="conHead1_CellRankAthletics" TouchSwallow="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{949fad21-9995-4684-88bc-9b35a613ab4b}" AbsContentSize="70,70" Visible="True" UseAbsSize="True" Name="conHead2_CellRankAthletics" TouchSwallow="False">
+                <WZUIImage Type="WZUIImage" GUID="{ddc46a95-7310-44df-8861-a0a3c1b24c22}" File="ui/common/common_icon_tx.png" Name="imgHead2BK_CellRankAthletics" UseOriginSize="True" TouchSwallow="False" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{e9509010-451f-4206-b809-8235c3902856}" CharMapFileName="ui/common_num/common_num_yxtbsz.png" Height="22" Name="txtAtlasLv2_CellRankAthletics" UseOriginSize="True" UseOriginSizeProportion="False" Width="16" TouchSwallow="False" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{4d64f2b2-c2d2-4249-9fb5-82b3090a8672}" Name="imgRankIcon_CellRankAthletics" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0.032,0.525" Visible="False" File="ui/common/common_icon_1st.png" TouchSwallow="False" AbsPosition="10.75,42.5" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellRankAthletics>

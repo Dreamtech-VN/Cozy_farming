@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" ?>
+<CellCheckOther01 GUID="{0B4932B6-364C-45ea-AF1B-03E53940C541}">
+    <WZUIContainer Type="WZUIContainer" GUID="{E5C5F2B6-3CBF-476e-BE8D-B6EA1520AF40}" AbsContentSize="460,80" UseAbsSize="True" Name="CellCheckOther01" LuaObjectName="CellCheckOther01" LuaTouchBeganFunction="onTouchBegan" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{07086747-9DD8-483c-9FB7-B36A78D0A5A6}" Name="con1" AbsContentSize="460,80" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+            <WZUIContainer Type="WZUIContainer" GUID="{1C176625-C3B2-4d48-B11F-837C9F104961}" AbsContentSize="460,80" UseAbsSize="True" RelativePosition="0.5,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{972b0ad3-eee6-4491-8502-ad0e79a5f114}" File="ui/common/common_btn_anniu21_sel.png" Visible="False" />
+                <Button Type="WZUIButton" AbsContentSize="76,76" RelativePosition="0.0934783,0.5" UseAbsSize="True" GUID="{cb0e6f0f-49dd-413e-a1db-8e720a2e6c0b}" Scale="0.91" LuaDoneFunctionName="onClickIcon" TouchContainerEnable="False" Name="btn1" TouchEnable="False" Tag="1.">
+                    <NormalElement Type="WZUIContainer" GUID="{4d02ac05-ede2-4248-b64d-8445ee674ff9}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{8dee4537-995c-493c-8e67-23923dfde8f7}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{705b9f4f-c5e1-422f-b6dc-802ab7265597}" File="ui/common/common_icon_hz3.png" UseOriginSize="True" Visible="True" Name="btn1img1" Scale="1" ScaleX="1" ScaleY="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{13890111-6832-4eec-b09b-4b5345d56721}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{11c3a0d8-90fc-4788-aed3-f4b079b11549}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" />
+                        <WZUI9Image Type="WZUI9Image" GUID="{bd59b078-c590-4b4f-9495-8a7f621fa2b7}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.9" />
+                        <WZUIImage Type="WZUIImage" GUID="{3f6a5fa0-5e4a-49fd-ab4e-7560b3c9918a}" File="ui/common/common_icon_hz3.png" UseOriginSize="True" Name="btn1img2" Scale="1" ScaleX="1" ScaleY="1" Visible="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{1888bf06-b7b9-4b8a-b111-b9d1011d4a0a}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{dd75c48a-d056-4795-8d88-d16b8ca3c28f}" File="ui/common/common_scale9_beibaodi.png" Visible="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ab196479-a411-4759-bde3-580c6e61755b}" Text="" StrokeColor="79,60,48" StrokeSize="4" Color="99,255,95" FontSize="20" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.16" Order="2" Name="numIcon1_CellCheckOther01" Visible="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{3565b516-5cf4-4d9d-b5f2-a056d6527e98}" File="ui/common/common_num_zhandouliwh.png" UseOriginSize="True" Name="imgAsk1_CellCheckOther01" Visible="False" TouchEnable="False" />
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{3e399f18-cf87-426b-afad-26926153a9d9}" Name="atlasNumIcon1_CellCheckOther01" CharMapFileName="ui/common_num/common_mnu_ry.png" Height="26" Width="13" UseOriginSize="True" UseOriginSizeProportion="False" Text="" RelativePosition="0.5,0.526316" TouchEnable="False" Visible="False" />
+                </Button>
+                <Button Type="WZUIButton" AbsContentSize="76,76" RelativePosition="0.252869,0.5" UseAbsSize="True" GUID="{9d6287e2-d42e-42d8-95d2-0db2c6cbcabe}" Scale="0.91" LuaDoneFunctionName="onClickIcon" TouchContainerEnable="False" Name="btn2" Visible="True" TouchEnable="False" Tag="2">
+                    <NormalElement Type="WZUIContainer" GUID="{844bf673-1f1b-4e7b-9307-2d0a7f3cd052}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{a20fccee-7bc5-411f-a497-6ea4c9323978}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{e0b2cb97-d5f7-43d7-98e2-7e52f760be0e}" File="ui/common/common_icon_gonghui.png" UseOriginSize="True" Scale="1" Name="btn2img1" RelativePosition="0.5,0.5" AbsPosition="36,36" ScaleX="1" ScaleY="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{28471112-aa26-43d1-a9ae-56619d8870a0}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{7d4b88d9-dedc-4751-8be0-b0362fd39b32}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" />
+                        <WZUI9Image Type="WZUI9Image" GUID="{b921189c-096d-42cc-a781-1936342b234c}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.9" />
+                        <WZUIImage Type="WZUIImage" GUID="{7b32ec38-4da4-42da-bf4b-0589b53913f8}" File="ui/common/common_icon_gonghui.png" UseOriginSize="True" Scale="1" Name="btn2img2" ScaleX="1" ScaleY="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{b50be6b9-f61a-4557-91dd-08aa062ce6d5}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{70ad0ebf-1c4e-444d-9c29-0c0d74d92060}" File="ui/common/common_scale9_beibaodi.png" />
+                    </DisableElement>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{92c240fa-4857-49a4-adbe-10835e5b3885}" Text="" StrokeColor="79,60,48" StrokeSize="4" Color="99,255,95" FontSize="20" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.16" Order="2" Name="numIcon2_CellCheckOther01" Visible="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{d42f8890-bef9-4306-878a-d5a69238a64e}" File="ui/common/common_num_zhandouliwh.png" UseOriginSize="True" Name="imgAsk2_CellCheckOther01" Visible="False" />
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{2320bb17-6d5a-43c0-885d-ea3d3a77b80e}" Name="atlasNumIcon2_CellCheckOther01" CharMapFileName="ui/common_num/common_mnu_ry.png" Height="26" Width="13" UseOriginSize="True" UseOriginSizeProportion="False" Text="" RelativePosition="0.5,0.526316" TouchEnable="False" Visible="False" />
+                </Button>
+                <Button Type="WZUIButton" AbsContentSize="76,76" RelativePosition="0.414435,0.5" UseAbsSize="True" GUID="{1c8f47e0-a21f-49d0-b019-0d3c6e43889c}" Scale="0.91" LuaDoneFunctionName="onClickIcon" TouchContainerEnable="False" Name="btn3" TouchEnable="False" Tag="3">
+                    <NormalElement Type="WZUIContainer" GUID="{519e03e9-5574-4c63-a45a-f2ece98dc193}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{4d89b472-7bc7-4f42-81dc-d0d51a98e0a1}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{9e75a037-7994-43e7-bfaa-a8b7eeb9b9bc}" File="ui/common/common_icon_gonghui.png" UseOriginSize="True" Scale="1" Name="btn3img1" RelativePosition="0.5,0.5" AbsPosition="36,36" ScaleX="1" ScaleY="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{1bea9b7d-83a8-4753-b75b-7fdf13e617ba}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{626f3a34-52d3-410f-bf19-f14e696ddbf5}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" />
+                        <WZUI9Image Type="WZUI9Image" GUID="{7fd03489-eb32-492d-b585-604abf81dddd}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.9" />
+                        <WZUIImage Type="WZUIImage" GUID="{edf276d1-6831-404a-a162-1274a00d1ba7}" File="ui/common/common_icon_gonghui.png" UseOriginSize="True" Scale="1" Name="btn3img2" ScaleX="1" ScaleY="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{46a4055f-a8c4-41f2-8e45-73e3a59ea1fc}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{cfea9498-aa10-41bf-a704-4bb5df1fa360}" File="ui/common/common_scale9_beibaodi.png" />
+                    </DisableElement>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{303d3d2b-8c1b-480b-aea9-1079baa112a2}" Text="" StrokeColor="79,60,48" StrokeSize="4" Color="99,255,95" FontSize="20" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.16" Order="2" Name="numIcon3_CellCheckOther01" Visible="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{ff1ee7d6-6887-41ee-b699-f34c9c542d11}" File="ui/common/common_num_zhandouliwh.png" UseOriginSize="True" Name="imgAsk3_CellCheckOther01" Visible="False" />
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{56229510-50f7-4140-85c5-79d5b1c08536}" Name="atlasNumIcon3_CellCheckOther01" CharMapFileName="ui/common_num/common_mnu_ry.png" Height="26" Width="13" UseOriginSize="True" UseOriginSizeProportion="False" Text="" RelativePosition="0.5,0.526316" TouchEnable="False" Visible="False" />
+                </Button>
+                <Button Type="WZUIButton" AbsContentSize="76,76" RelativePosition="0.578174,0.5" UseAbsSize="True" GUID="{c9f1ba1b-8100-412b-9186-9b08862c5a3b}" Scale="0.91" LuaDoneFunctionName="onClickIcon" TouchContainerEnable="False" Name="btn4" TouchEnable="False" AbsPosition="232.3,37" Tag="4">
+                    <NormalElement Type="WZUIContainer" GUID="{c95eb661-4333-4900-9c21-061f1a976d0b}" TouchEnable="True" TouchContainerEnable="True" Visible="True" RelativePosition="0.5,0.5" AbsPosition="36,36">
+                        <WZUI9Image Type="WZUI9Image" GUID="{500e6612-7d6d-4723-ba9d-93fe0d5b53ea}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{87cc92e0-bec1-426a-8599-1dbff0357202}" File="ui/common/common_icon_enai1.png" UseOriginSize="True" Scale="1" Visible="True" ScaleY="1" ScaleX="1" Name="btn4img1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{43ed9724-e2d8-4ca6-8627-2dc08a823b96}" TouchEnable="True" TouchContainerEnable="True" RelativePosition="0.5,0.5" AbsPosition="36,36" Visible="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{026fe89e-1f77-4388-8f9f-350ff4c24246}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" />
+                        <WZUI9Image Type="WZUI9Image" GUID="{a9781de1-2b88-47f4-9e5e-5cf557f42e80}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.9" Visible="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{e1296fcb-6d61-498d-99a4-07346baacca7}" File="" UseOriginSize="True" Scale="1" Visible="True" RelativePosition="0.5,0.5" AbsPosition="36,36" ScaleX="1" ScaleY="1" Name="btn4img2" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{9e73921e-e5eb-43dc-9c00-065c729c7206}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{9fc8d66e-91b6-48c1-86e4-59644efff483}" File="ui/common/common_scale9_beibaodi.png" Visible="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{f66a61d4-0139-4db2-a399-3f4064512fba}" Text="" StrokeColor="79,60,48" StrokeSize="4" Color="99,255,95" FontSize="20" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.16" Order="2" Name="numIcon4_CellCheckOther01" Visible="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{82b5c852-e7cd-49e2-83f1-8c769cc73176}" File="ui/common/common_num_zhandouliwh.png" UseOriginSize="True" Name="imgAsk4_CellCheckOther01" Visible="False" />
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{0e0ce230-95dc-476b-bf9b-a493561fb3f9}" Name="atlasNumIcon4_CellCheckOther01" CharMapFileName="ui/common_num/common_mnu_ry.png" Height="26" Width="13" UseOriginSize="True" UseOriginSizeProportion="False" Text="" RelativePosition="0.5,0.526316" TouchEnable="False" Visible="False" />
+                </Button>
+                <Button Type="WZUIButton" AbsContentSize="76,76" RelativePosition="0.741913,0.5" UseAbsSize="True" GUID="{f37e5f2e-76f1-4c98-afda-390870328281}" Scale="0.91" LuaDoneFunctionName="onClickIcon" TouchContainerEnable="False" Name="btn5" Visible="True" TouchEnable="False" Tag="5">
+                    <NormalElement Type="WZUIContainer" GUID="{4512bbbe-6425-4fcb-b1c8-5737cc297357}" TouchContainerEnable="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{9cd057aa-5dd5-4291-9840-1d05c9cc4cdf}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{7963108b-cc13-4423-9e18-076a7c23f73c}" File="ui/bag/bag_icon_shitu.png" UseOriginSize="True" Scale="1" Name="btn5img1" RelativePosition="0.5,0.5" ScaleX="1" ScaleY="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{29571fa2-ee0d-4dec-a4a6-0b6e795f58bf}" TouchContainerEnable="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{bdda6c04-7455-4d13-87d2-fcacffb7d8e2}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" />
+                        <WZUI9Image Type="WZUI9Image" GUID="{2a569141-1e2e-4ceb-837e-db8aa544addc}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.9" />
+                        <WZUIImage Type="WZUIImage" GUID="{2374a1be-0463-4aff-b59d-957bb7c03dc8}" File="ui/bag/bag_icon_shitu.png" UseOriginSize="True" Scale="1" Name="btn5img2" ScaleX="1" ScaleY="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{716cb7bb-b191-435d-8005-0b9a865d4c18}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{5a970eb1-7b1d-44e2-b8a9-661887f324a5}" File="ui/common/common_scale9_beibaodi.png" />
+                    </DisableElement>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{efea0397-1f34-482c-b323-748ae899f134}" Text="" StrokeColor="79,60,48" StrokeSize="4" Color="99,255,95" FontSize="20" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.16" Order="2" Name="numIcon5_CellCheckOther01" Visible="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{0a91ba12-8f33-45d9-a98d-ec2941422f7b}" File="ui/common/common_num_zhandouliwh.png" UseOriginSize="True" Name="imgAsk5_CellCheckOther01" Visible="False" />
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{033834e3-4544-41c3-8364-9c163deb0dcb}" Name="atlasNumIcon5_CellCheckOther01" CharMapFileName="ui/common_num/common_mnu_ry.png" Height="26" Width="13" UseOriginSize="True" UseOriginSizeProportion="False" Text="" RelativePosition="0.5,0.526316" TouchEnable="False" Visible="False" />
+                </Button>
+                <Button Type="WZUIButton" AbsContentSize="76,76" RelativePosition="0.904956,0.5" UseAbsSize="True" GUID="{055c599e-abe0-4666-8e02-e30e4c5ea47b}" Scale="0.91" LuaDoneFunctionName="onClickIcon" TouchContainerEnable="False" Name="btn6" Visible="True" TouchEnable="False" Tag="6">
+                    <NormalElement Type="WZUIContainer" GUID="{9f794c46-6444-4218-979e-cd13a6a68cd1}" TouchContainerEnable="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{45462605-aa5b-4168-92be-43c6566cdbc2}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{722ab072-7401-4be9-9e27-cd6932d4d58e}" File="ui/bag/bag_icon_shitu.png" UseOriginSize="True" Scale="1" Name="btn6img1" RelativePosition="0.5,0.5" ScaleX="1" ScaleY="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{6a92c9c8-3de1-4956-8809-62d477218597}" TouchContainerEnable="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{e7fa859a-0043-42fa-83c9-62e46180e7cb}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" />
+                        <WZUI9Image Type="WZUI9Image" GUID="{aa6f82f0-ff01-428b-9301-b92b30d23153}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.9" />
+                        <WZUIImage Type="WZUIImage" GUID="{99648deb-cc25-484a-9fb5-32f286e19088}" File="ui/bag/bag_icon_shitu.png" UseOriginSize="True" Scale="1" Name="btn6img2" ScaleX="1" ScaleY="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{f2e0742b-aa87-4bbd-bfe4-cf98e3ba0c4b}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{81ca81b6-4c94-4b41-9981-394aaf27b92e}" File="ui/common/common_scale9_beibaodi.png" />
+                    </DisableElement>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1a423feb-6244-49b4-a019-d051276398a6}" Text="" StrokeColor="79,60,48" StrokeSize="4" Color="99,255,95" FontSize="20" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.16" Order="2" Name="numIcon6_CellCheckOther01" Visible="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{bf9fa4e0-fa3a-4539-8598-ed6a29eb4fac}" File="ui/common/common_num_zhandouliwh.png" UseOriginSize="True" Name="imgAsk6_CellCheckOther01" Visible="False" />
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{6de93dd0-f567-4d3f-af1c-eaf7fa293a00}" Name="atlasNumIcon6_CellCheckOther01" CharMapFileName="ui/common_num/common_mnu_ry.png" Height="26" Width="13" UseOriginSize="True" UseOriginSizeProportion="False" Text="" RelativePosition="0.5,0.526316" TouchEnable="False" Visible="False" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCheckOther01>

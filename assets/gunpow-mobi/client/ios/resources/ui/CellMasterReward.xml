@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<CellMasterReward GUID="{62AA4A51-41BA-4020-9E63-305BB9F96463}">
+    <WZUIContainer Type="WZUIContainer" GUID="{95A9D27F-1DAE-4864-A303-D30A54B05854}" Name="CellMasterReward" LuaObjectName="" NameCreate="True" AbsContentSize="500,400" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{86782103-4CD2-47b1-9ED1-641D8430638D}" Name="conInfo_CellMasterReward" RelativePosition="0.45,0.5">
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{6CFE9652-5C38-4e50-900C-3B5E0490E9D4}" Name="ttfInfo_CellMasterReward" MaxWidth="550" AnchorPoint="0,0.5" RelativePosition="0.18,0.76" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{511BEAFC-2074-436b-9B8D-F796B4089FA9}" AbsContentSize="362,97" UseAbsSize="True" RelativePosition="0.5,0.35">
+            <WZUI9Image Type="WZUI9Image" GUID="{5C73E7C5-0CCC-434e-92FE-08ED9C2940B3}" File="ui/common/common_scale9_di8.png" Opacity="168" />
+            <WZUIContainer Type="WZUIContainer" GUID="{8AC6A3EC-F5EA-490b-BE76-92E900996A01}" Name="conReward1_CellMasterReward" AbsContentSize="85,85" UseAbsSize="True" RelativePosition="0.16,0.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{1D062A28-7E65-4eb1-8106-87076122069C}" Name="conReward2_CellMasterReward" AbsContentSize="85,85" UseAbsSize="True" RelativePosition="0.39,0.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{891CFAA1-BC9B-4918-98C8-7161770F9EE7}" Name="conReward3_CellMasterReward" AbsContentSize="85,85" UseAbsSize="True" RelativePosition="0.62,0.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{F160F422-3153-49a6-A6B8-B1B9A58209DE}" Name="conReward4_CellMasterReward" AbsContentSize="85,85" UseAbsSize="True" RelativePosition="0.85,0.5" />
+            <WZUIImage Type="WZUIImage" GUID="{DC38FCE9-B6A9-46f5-8D2A-29E351B28C1A}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" RelativePosition="0.891573,0.366265" Name="ttfGet_CellMaster" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{C3FE2C30-0C62-483e-A9DB-CE811BD843E8}" RelativePosition="0.5,1.03" BoldFont="True" Text="师德二级福利预览" FontSize="26" Color="255,227,116" Name="ttfCurrent_CellMaster" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{F89AB8C9-E7DA-4c7f-BB49-E7A49DF39863}" RelativePosition="0.294,0.52" BoldFont="True" Text="当前等级奖励如下:" FontSize="18" Color="255,227,116" Name="ttfCurrent2_CellMaster" TextKey="MASTERINFO80" />
+    </WZUIContainer>
+</CellMasterReward>

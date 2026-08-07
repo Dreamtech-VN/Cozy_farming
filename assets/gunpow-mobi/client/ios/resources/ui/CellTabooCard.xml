@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" ?>
+<CellTabooCard GUID="{227DFB66-EBE9-4727-BFC4-73D0946DE8D2}">
+    <WZUIContainer Type="WZUIContainer" GUID="{AC85D96F-1A46-4599-A2F0-C2616A2F4D2B}" AbsContentSize="90,80" UseAbsSize="True" Name="CellTabooCard" NameCreate="True">
+        <WZUIContainer AbsContentSize="" GUID="{82665EBD-2DED-454a-83D0-5280D27D9BB8}" Name="" RelativePosition="0.5,0.5" Tag="-1" TouchEnable="True" Type="WZUIContainer" UseAbsSize="False" Visible="True" NameCreate="False" Scale="1" ScaleX="1" ScaleY="1">
+            <WZUIContainer GUID="{12355C83-A56E-4802-94F5-CC0DB475945B}" Name="conBack_CellTabooCard" RelativePosition="0.5,0.5" Tag="-1" TouchEnable="False" Type="WZUIContainer" Visible="False" UseAbsSize="False">
+                <WZUIImage File="" GUID="{4200788F-8B9E-4a3f-97BB-3BCC08FCF6EC}" Name="imgCardBackBg_CellTabooCard" Type="WZUIImage" Visible="True" isValid="True" UseOriginSizeProportion="False" UseOriginSize="True" FlipX="False" FlipY="False" />
+                <WZUIImage File="ui/taboo/jinji_qianjin.png" GUID="{3805b79b-a7ec-4b85-b4c9-59ef0e913c7e}" Name="imgCardBack_CellTabooCard" Type="WZUIImage" Visible="True" isValid="True" UseOriginSizeProportion="False" UseOriginSize="True" FlipX="False" FlipY="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{804820d0-bd45-4e39-9cdf-c35d386ea2c2}" Text="" LabelStyleKey="C1_F18" RelativePosition="0.5,0.225" Name="labDirBack_CellTabooCard" />
+                <WZUIImage Type="WZUIImage" GUID="{15e21bca-4192-450e-92bc-ae80b1d585e3}" Name="imgDirBack_CellTabooCard" File="ui/taboo/jinji_houtui1.png" UseAbsCoordinate="False" UseOriginSize="True" Rotation="90" RelativePosition="0.5,0.675" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5402e9c4-461a-45cd-aa70-85615ab090b7}" Text="999" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.955556,0.1875" Name="labNumBack_CellTabooCard" AnchorPoint="1,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{20E860E3-BCAE-4a48-875A-B5FE7DDD64AF}" Name="conFront_CellTabooCard" ScaleX="-1" Visible="False" Scale="-1" Tag="-1" ScaleY="1" TouchEnable="False">
+                <WZUIImage File="" FlipX="False" GUID="{BF1D1782-2DA4-468a-9270-2B01A9E1EE7E}" Name="imgCardFrontBg_CellTabooCard" Type="WZUIImage" UseOriginSize="True" Visible="True" UseOriginSizeProportion="False" />
+                <WZUIImage File="" FlipX="False" GUID="{c72e8bc9-3776-4a93-b171-617e866655b3}" Name="imgCardFront_CellTabooCard" Type="WZUIImage" UseOriginSize="True" Visible="True" UseOriginSizeProportion="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{44359f22-fab1-424a-a6c3-b22701a5f793}" Text="" LabelStyleKey="C1_F18" RelativePosition="0.5,0.225" Name="labDirFront_CellTabooCard" />
+                <WZUIImage Type="WZUIImage" GUID="{4264155c-8bca-47d9-bb39-dd113c583590}" Name="imgDirFront_CellTabooCard" UseOriginSize="True" RelativePosition="0.5,0.675" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3b89a7a6-5249-49fa-b9ae-6723837fcc62}" Text="999" LabelStyleKey="C18_F20_S4_C5" RelativePosition="0.955556,0.1875" Name="labNumFront_CellTabooCard" AnchorPoint="1,0.5" />
+            </WZUIContainer>
+            <WZUIContainer GUID="{09DC9DD6-A276-4bf7-8478-370B30E0837D}" Name="conCardBtn_CellTabooCard" RelativePosition="0.5,0.5" Tag="-1" Type="WZUIContainer" Visible="True" ScaleX="1" Scale="1" TouchSwallow="True">
+                <WZUIButton GUID="{4F4DED43-770B-4e88-ADBF-1565AC6748BB}" LuaDoneFunctionName="onClick" Name="btnCard_CellTabooCard" Tag="1" Type="WZUIButton">
+                    <NormalElement GUID="{6667E714-8699-4c4d-A173-15F472091B97}" Type="WZUIContainer" TouchContainerEnable="True" />
+                    <SelectElement GUID="{F7C5B839-5FA5-4fd8-BFB0-5E594030AA88}" Type="WZUIContainer" Scale="1" TouchContainerEnable="True" />
+                    <DisableElement GUID="{4F905444-A0C5-4601-803C-7C5D1904CEA7}" Type="WZUIContainer" TouchContainerEnable="True" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTabooCard>

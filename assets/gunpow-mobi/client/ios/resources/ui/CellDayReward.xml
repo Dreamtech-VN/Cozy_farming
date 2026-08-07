@@ -1,0 +1,16 @@
+﻿<CellDayReward GUID="{70ccbe5f-d74a-493d-be41-da067212afad}">
+    <WZUIContainer Type="WZUIContainer" GUID="{13a9896b-3988-4eda-b774-4c5ecd791d9f}" Name="CellDayReward" LuaObjectName="CellDayReward" AbsPosition="" UseAbsSize="True" AbsContentSize="100,100">
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b0e761cc-5fbb-4b7d-90d4-d2158696932a}" FontSize="22" LabelStyleKey="FONT_LABEL_4" Text="" Name="txtDay_CellDayReward" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+        <WZUIImage Type="WZUIImage" GUID="{68f7342c-4ab0-4980-91a5-bb49658e21d1}" UseOriginSize="True" Name="imgReward_CellDayReward" File="" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a6c80cd3-eb9f-43af-b879-4ad0d9c53326}" FontSize="22" LabelStyleKey="FONT_LABEL_4" Text="" Name="txtItemName_CellDayReward" AnchorPoint="0.5,0" RelativePosition="0.5,0" />
+        <Button Type="WZUIButton" GUID="{614444b9-1884-4dda-83b9-e6e3b647072d}" LuaDoneFunctionName="onClickGet">
+            <NormalElement Type="WZUIContainer" GUID="{8be3c359-b321-44b3-96b9-f0d0ceac6a25}" />
+            <SelectElement Type="WZUIContainer" GUID="{86f35aa4-99e9-447f-b37e-2ad57eeb031f}" />
+            <DisableElement Type="WZUIContainer" GUID="{b16f1fb7-dc2b-4bb4-a8f8-053fbb98628b}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{cb5d9457-6297-427c-9031-22b806f10084}" Name="conHeidi_CellDayReward" Visible="False" TouchEnable="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{f3e729dd-845f-46c9-bf20-142481ab7889}" Name="imgHeidi_CellDayReward" File="ui/common/common_scale9_di51.png" />
+            <WZUIImage Type="WZUIImage" GUID="{b6a9cf3e-3c38-482a-9a0e-5262949ee4f5}" File="ui/common/common_icon_gou.png" UseOriginSize="True" AnchorPoint="1,0" RelativePosition="1,0" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellDayReward>

@@ -1,0 +1,33 @@
+<CellCommunityTaskRelease GUID="{094a1646-b425-4e02-ad14-90ca85686eca}">
+    <WZUIContainer AbsContentSize="430,115" GUID="{9d7d93db-4f42-4680-9f8a-515f5d4944b1}" LuaObjectName="" Name="CellCommunityTaskRelease" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <Button AbsContentSize="430,108" GUID="{638424d7-612e-43e7-a605-6c83cfc5297e}" LuaDoneFunctionName="onClick" Name="btnClick_CellCommunityTaskRelease" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIButton" UseAbsSize="True" Visible="True">
+            <NormalElement GUID="{ce9738e5-8faa-4431-80ac-7dc2e517c2ec}" RelativePosition="0.5,0.5" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{a571cedb-fc98-49ee-993d-3cf95d4ae019}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Name="imgBtn1_CellCommunityList" />
+            </NormalElement>
+            <SelectElement GUID="{8c7a5bc6-c768-47c6-a12f-fa9b252c77a1}" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{135fc51c-388c-4186-b541-e5055937416a}" File="ui/common/common_scale9_beibaodi_sel.png" Name="" TouchEnable="False" RelativePosition="0.5,0.48" Visible="True" Scale="1" ScaleX="1.02" ScaleY="1.05" />
+                <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{be5b7fd1-d259-44b1-94a7-d2c67a5b8b94}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Name="imgBtn2_CellCommunityList" />
+            </SelectElement>
+            <DisableElement GUID="{8149a486-22e7-4ebc-8f82-22a0117cc49c}" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{5629f896-f3ff-4aea-ba30-38e93e5daaab}" Name="imgBtn3_CellCommunityList" File="ui/common/common_scale9_di7.png" />
+            </DisableElement>
+        </Button>
+        <WZUIContainer AbsContentSize="410,38" GUID="{7c908e18-e461-4018-9362-8eb390e88d8c}" Name="" RelativePosition="0.5,0.72" Type="WZUIContainer" UseAbsSize="True" Visible="True" TouchEnable="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{23c80897-2184-4a5a-a533-d624730fea25}" File="ui/common/common_scale9_di8.png" />
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{6024218c-2d55-4498-b9c1-70ac76e789e2}" Name="imgSuo_CellCommunityTaskRelease" File="ui/common/common_icon_suo3.png" UseOriginSize="True" RelativePosition="0.96,0.23" TouchEnable="False" Visible="False" />
+        <WZUILabelTTF AnchorPoint="0,0.5" Color="99,255,95" FontSize="20" GUID="{911995ec-dd10-48f3-98fd-588760bcec25}" Name="txtState_CellCommunityTaskRelease" RelativePosition="0.0339543,0.71" Text="【已完成】" Type="WZUILabelTTF" LabelStyleKey="" TouchEnable="False" />
+        <WZUILabelTTF AnchorPoint="0,0.5" ChineseLengthPolicy="1" Color="255,255,255" Dimensions="0,0" FontSize="22" GUID="{4a2c10dd-c09c-4333-a719-27e780ac4d6c}" MaxLength="20" Name="txtName_CellCommunityTaskRelease" RelativePosition="0.296837,0.71" Text="公会任务1" Type="WZUILabelTTF" TouchEnable="False" />
+        <WZUILabelTTF AnchorPoint="0,1" Color="62,34,8" FontSize="18" GUID="{14516dea-ecd6-4bfd-a142-f054d30b4f4d}" Name="txtDetail_CellCommunityTaskRelease" RelativePosition="0.0266797,0.52" Text="累计竞技场胜利2000次胜利2000次累计竞技场胜" Type="WZUILabelTTF" Alignment="Left" Dimensions="360,0" TouchEnable="False" />
+        <WZUILabelTTF AnchorPoint="1,0.5" Color="62,34,8" FontSize="18" GUID="{938c9ecb-c88d-40f8-9f79-2075c2fcf114}" Name="txtScore_CellCommunityTaskRelease" RelativePosition="0.905,0.436" Text="600/2000" Type="WZUILabelTTF" Alignment="Right" TouchEnable="False" Visible="False" />
+        <WZUIImage Type="WZUIImage" GUID="{829659db-41fe-46a0-af9c-2788c7e89c95}" File="ui/common/common_progress_chengjiu_bg.png" UseOriginSize="True" RelativePosition="0.777,0.26" TouchEnable="False" Visible="False" />
+        <WZUIProgress Type="WZUIProgress" GUID="{f8aa3005-7b75-46d9-b948-66e8624d7ddc}" BgPicture="ui/common/common_progress_chengjiu_fore.png" UseOriginSize="True" RelativePosition="0.777,0.26" Percentage="60" Name="progressBar" TouchEnable="False" Visible="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{41c8412d-e88a-45e8-b20d-a81ce24f09e6}" AbsContentSize="160,45" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.77,0.91" TouchEnable="False">
+            <WZUIImage Type="WZUIImage" GUID="{9f77a8eb-1ca4-47fc-ac27-adb9c3cf3515}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Rotation="30" RelativePosition="0.1,0.5" Name="star5" />
+            <WZUIImage Type="WZUIImage" GUID="{ee2001bb-5aa0-4538-8683-e135e30cc954}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Rotation="30" RelativePosition="0.3,0.5" Name="star4" />
+            <WZUIImage Type="WZUIImage" GUID="{b500afed-8406-42a9-be3d-06b55f11d36c}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Rotation="30" Name="star3" />
+            <WZUIImage Type="WZUIImage" GUID="{50ba7377-0b13-46a8-a2c0-3e89d4c4beb9}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Rotation="30" RelativePosition="0.7,0.5" Name="star2" />
+            <WZUIImage Type="WZUIImage" GUID="{bac78ab2-3389-46d9-93d1-ef4f4a4df9cc}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Rotation="30" RelativePosition="0.9,0.5" Name="star1" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCommunityTaskRelease>

@@ -1,0 +1,45 @@
+<WndLeagueRecruit GUID="{02f8f0da-e3dc-4d91-9f0d-302fdc76a5ff}">
+    <WZUIWindow AbsContentSize="495,500" GUID="{f09d6169-ad74-4f73-845b-48b166efa0ca}" LuaObjectName="WndLeagueRecruit" Name="WndLeagueRecruit" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" RelativePosition="0.5,0.525" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{f3a0e401-6255-4b9e-92a7-cc7514ddbb91}" AbsContentSize="495,500" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{076043e9-f5d9-4a20-afda-6591dfbe3163}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" />
+            <WZUIContainer Type="WZUIContainer" GUID="{439becc3-6044-461f-bde6-c278273dc239}" AbsContentSize="482,310" UseAbsSize="True" RelativePosition="0.5,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{fa6cdde4-5db4-4ade-879a-ea996002db3f}" File="ui/common/common_scale9_di20.png" />
+            </WZUIContainer>
+            <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{736adb30-178e-4f07-ba87-6d79e1bede1f}" Name="txtReturn_WndRecruit" ShadowColor="0,255,0" StrokeColor="132,66,29" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" RelativePosition="0.5,0.94" TextKey="LEAGUE99" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="485,300" GUID="{a25d7704-5ded-4240-a950-f752b63deaa4}" Name="conTextMemberList_WndRecruit" RelativePosition="0.5,0.5" RelativeSize="0.87,0.6" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{6f658259-d568-4a14-97c0-dd3156513bf3}" AbsContentSize="485,295" UseAbsSize="True" Name="freeCon_WndLeagueRecruit" EnableMoveHorizontal="False" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" />
+        </WZUIContainer>
+        <WZUIContainer GUID="{8c8a890f-c55a-45c0-803b-eb4ddd292233}" Name="conWndRecruitBtn_WndRecruit" RelativePosition="0.5,0.12" RelativeSize="1,0.2" Type="WZUIContainer">
+            <Button AbsContentSize="116,56" GUID="{714b7b5b-1024-4a68-a772-dad315468ba7}" LuaDoneFunctionName="onAgree" Name="btnAgree_WndRecruit" RelativePosition="0.71,0.43" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal" AbsPosition="335,43">
+                <NormalElement GUID="{4246fc33-5ad4-4faf-8acc-4e073dcc0151}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10.png" GUID="{5d366fdb-36a2-4b83-ba69-de8df13b4432}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{49079143-98f8-4c93-bc94-750110d97e56}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_sel.png" GUID="{52fea029-094d-4619-9b48-99099e76fc40}" Type="WZUI9Image" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="24" GUID="{53d08e44-eafc-48e5-b497-f1831c4f6147}" Name="txtAgree_WndRecruit" ShadowColor="0,255,0" StrokeColor="64,128,1" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" RelativePosition="0.5,0.5" ShowAll="False" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="AGREE" />
+            </Button>
+            <WZUIButton AbsContentSize="116,56" GUID="{bb164041-c0e0-431a-a994-0801434f0348}" LuaDoneFunctionName="onRefuse" Name="btnRefuse_WndRecruit" RelativePosition="0.29,0.43" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal" AbsPosition="165,43">
+                <NormalElement GUID="{d4faf30d-3558-41b7-8241-61f80270de92}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu3.png" GUID="{f4fd054d-2e2a-4929-86af-42431fe92eef}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{59c45dbb-30ad-4083-8b10-9af2ac9d49c6}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu3_sel.png" GUID="{a1536d66-108c-44a5-a8f5-721b11156344}" Type="WZUI9Image" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" AbsPosition="58,28" />
+                </SelectElement>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="24" GUID="{f75c31e3-75df-45a1-9b61-2ca04d71b70f}" Name="txtRefuse_WndRecruit" ShadowColor="0,255,0" StrokeColor="132,66,29" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" LabelStyleKey="NORMAL_ORANGE_BTN" RelativePosition="0.5,0.5" TextKey="REJECT" />
+            </WZUIButton>
+            <WZUIButton AbsContentSize="112,52" GUID="{8eb89001-952b-49c9-85ff-a3b871f41f46}" LuaDoneFunctionName="onClose" Name="btnCloseWindow_WndRecruit" RelativePosition="0.932122,4.56898" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal" AbsPosition="466.061,456.898">
+                <NormalElement GUID="{d9a0d415-2b7d-4dbd-832e-017be6c6b649}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{ee41c9bd-50f9-4793-a543-770df73c7f4a}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{1066cae0-cf47-4e9a-8e0e-77c4125b81e1}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{99ff5f0d-b488-4202-ac0f-a7f3ec0e8508}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement GUID="{3539db49-c51a-4db0-bed9-29825b2114a4}" Type="WZUIContainer" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{56aedfd0-dd72-4ceb-a2b6-5a722ae91653}" LabelStyleKey="C7_F22" TextKey="LEAGUE100" RelativePosition="0.12,0.843" AbsPosition="341.752,406.749" BoldFont="True" Text="" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d84ba805-688f-4813-8d8b-523467f1a4be}" LabelStyleKey="C13_F22" TextKey="" RelativePosition="0.175,0.843" AbsPosition="341.752,406.749" BoldFont="True" Text="" Name="ttfNumber" RelativeSize="1,1" Alignment="Left" AnchorPoint="0,0.5" />
+    </WZUIWindow>
+</WndLeagueRecruit>

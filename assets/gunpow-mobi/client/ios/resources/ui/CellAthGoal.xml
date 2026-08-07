@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<CellAthGoal GUID="{A8D63361-A3B3-49ee-9AA9-CB7A75A58F5F}">
+	<WZUIContainer AbsContentSize="720,100" GUID="{7DEE9422-E141-4ca6-9C2C-7EB1CB6828C6}" LuaObjectName="" Name="CellAthGoal" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+		<WZUIContainer GUID="{2B3A46F0-6F03-4851-B29B-C89C8362EE3B}" Type="WZUIContainer" Visible="True" RelativePosition="0.5,0.5">
+			<WZUI9Image File="ui/common/common_scale9_di18.png" GUID="{B2229FC0-0C75-4b77-99D0-F38912490106}" Type="WZUI9Image" />
+		</WZUIContainer>
+		<WZUIContainer AbsContentSize="" GUID="{280992F6-1EBA-4bca-A129-17842C163F18}" RelativePosition="0,0.5" Type="WZUIContainer" UseAbsSize="False" RelativeSize="0.24,1" AnchorPoint="0,0.5">
+			<WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" Color="62,34,8" EnableStroke="False" FontSize="20" GUID="{8DF4A31C-A0E5-4f42-8FB2-B84972DD3324}" Name="txtGoal_CellAthGoal" RelativePosition="0.5,0.5" Text="" Type="WZUILabelTTF" StrokeColor="60,19,12" StrokeSize="3" Dimensions="200,0" />
+		</WZUIContainer>
+		<WZUIContainer AbsContentSize="" GUID="{0F93C2C6-5B5B-4a7a-9874-E6510F491FFF}" RelativePosition="0.248777,0.5" Type="WZUIContainer" UseAbsSize="False" RelativeSize="0.6,1" AnchorPoint="0,0.5" AbsPosition="179.119,50">
+			<WZUIContainer AbsContentSize="50,50" GUID="{4A1F2C79-218B-4322-B333-CB16DDC55CB6}" Name="conItem1_CellAthGoal" RelativePosition="0,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+			<WZUIContainer AbsContentSize="50,50" GUID="{09710001-BC4A-4e10-B053-96B9BDBA0225}" Name="conItem2_CellAthGoal" RelativePosition="0.2,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+			<WZUIContainer AbsContentSize="50,50" GUID="{A06A3F60-E70E-4c93-BA38-20D1FA53EBFA}" Name="conItem3_CellAthGoal" RelativePosition="0.4,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+			<WZUIContainer AbsContentSize="50,50" GUID="{B3EB5438-24BC-4568-8439-5D1D94C1C72C}" Name="conItem4_CellAthGoal" RelativePosition="0.6,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+			<WZUIContainer AbsContentSize="50,50" GUID="{232AFA5C-0D55-4a84-8B52-04D16CD933E7}" Name="conItem5_CellAthGoal" RelativePosition="0.8,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+		</WZUIContainer>
+		<WZUIContainer Type="WZUIContainer" GUID="{6D986276-3AEF-4284-9002-811D291EBFBF}" RelativePosition="0.984723,0.5" AnchorPoint="1,0.5" RelativeSize="0.15,1" AbsPosition="709,50">
+			<WZUIContainer Type="WZUIContainer" GUID="{42AFB87B-EC1C-4007-B29D-09571DB62B7B}" Name="conNotGet_CellAthGoal">
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{E51C0BFE-66C5-4b6c-820A-1355F1D74A19}" Name="txtState_CellAthGoal" Text="" FontSize="20" Color="158,0,0" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{02C57499-FE8A-40f1-A81A-F106359C541E}" Name="conGet_CellAthGoal" Visible="False" RelativePosition="0.506944,0.5" AbsPosition="73,50">
+				<Button Type="WZUIButton" LuaDoneFunctionName="onGet" GUID="{FB03E14C-1519-4949-9957-8F7BD079535E}" LuaActionName="Normal">
+					<NormalElement Type="WZUIContainer" GUID="{D2AA1754-69CC-4139-8FC4-C363310525F4}">
+						<WZUIImage Type="WZUIImage" GUID="{ACED59C5-6271-4f2f-A0F3-77A469A85671}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+					</NormalElement>
+					<SelectElement Type="WZUIContainer" GUID="{88F9C650-E687-415f-882C-1A1C739C4277}">
+						<WZUIImage Type="WZUIImage" GUID="{15F7812A-1FC0-41cf-96EF-51CB98CC94A6}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+					</SelectElement>
+					<DisableElement Type="WZUIContainer" GUID="{0A2B7390-4AD0-4631-82B6-FAC227AD0AC8}" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{799600E9-526F-4e92-8367-A13CE252C3DA}" TextKey="ACTIVE_BTN_GET" LabelStyleKey="NORMAL_GREEN_BTN" />
+				</Button>
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIContainer>
+</CellAthGoal>

@@ -1,0 +1,226 @@
+﻿<WndSummerReward GUID="{db5c7a47-426e-40b7-9c4f-e83a28568aa4}">
+    <WZUIWindow Type="WZUIWindow" GUID="{ec232648-b464-4b9c-8c71-91b37af4557e}" LuaObjectName="WndSummerReward" Name="WndSummerReward" NameCreate="True" AbsContentSize="720,420" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{fb0f66d4-5997-4538-8a40-469161fcffab}" AbsContentSize="300,50" UseAbsSize="True" RelativePosition="0.491928,0.988335" Visible="True" Scale="1" ScaleX="1" ScaleY="1" AnchorPoint="0.5,1" Name="conActiveTime_WndSummerReward">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2184d7dc-1f35-427c-a41a-aa49cb8c635b}" Name="txtWord_WndSummerReward" FontSize="18" Color="255,255,255" TextKey="" RelativePosition="0.5,0.4" EnableStroke="True" StrokeSize="4" StrokeColor="158,0,0" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="592,388" GUID="{691c299c-ebc4-4861-a9f4-1dfb4eb45810}" Name="conActivity_WndSummerReward" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{99a34603-3bb5-4933-a88b-0def30a64ee6}" AbsContentSize="144,260" UseAbsSize="True" RelativePosition="0.127129,0.315" Name="conAct1_WndSummerReward">
+                <WZUI9Image Type="WZUI9Image" GUID="{b0ca724b-953f-49a7-8d56-afc1671e0e65}" File="ui/gameActivity/holiday_di2.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{5ab2487c-99cf-45f1-a6f5-2e41ccef761a}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True" Name="conBtn_WndSummerReward">
+                    <Button Type="WZUIButton" GUID="{bdfd5fb4-0078-4750-99ca-c67691c0cd0d}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickDo" Tag="1">
+                        <NormalElement Type="WZUIContainer" GUID="{4337c4b3-68ca-4311-91b1-248303ff89fa}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{78cd2fc2-9797-4c13-b8b9-786fad0cd569}" File="ui/common/common_btn_anniu10_0.png" Name="imgNormal_WndSummerReward" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{a5fd9016-83b7-4c3a-b858-19bc91208d81}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{752df0a4-a578-4860-9eef-3ed2459ebf9d}" File="ui/common/common_btn_anniu10_0_sel.png" Name="imgSel_WndSummerReward" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{f6cd8826-a583-4cf3-b401-b5cca763987e}" />
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{807ff2c6-e587-4283-89ba-2117885b82d6}" Name="txtStats_WndSummerReward" LabelStyleKey="NORMAL_GREEN_BTN" Text="前往" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{89134ea6-5a73-4d6b-90c6-19c844327d93}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" Name="imgPass_WndSummerReward" RelativePosition="0.5,0.15" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{81238d00-a020-46d5-ab95-fc7369e95bd0}" Name="txtKillCount_WndSummerReward" LabelStyleKey="C15_F16" Text="" RelativePosition="0.5,0.357693" Scale="1" ScaleX="1" ScaleY="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1f185196-9e01-41cb-9ced-3ae8f40fdb85}" Name="txtIntegral_WndSummerReward" LabelStyleKey="C7_F16" Text="" RelativePosition="0.465278,0.865231" Scale="1" ScaleX="1" ScaleY="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c5238bd4-edc1-45b4-99c0-82e8d33e9565}" LabelStyleKey="C18_F18" Name="txtMonsterName_WndSummerReward" Text="" RelativePosition="0.770833,0.938462" AnchorPoint="1,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{258b18cb-7458-422a-8bba-350c654adf7c}" File="" UseOriginSize="True" RelativePosition="0.101228,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward1_WndSummerReward" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5a5c86b1-5909-4b6a-afd6-bef8c151b420}" LabelStyleKey="C18_F16" Name="txtReward1Count_WndSummerReward" Text="" RelativePosition="0.180556,0.276923" AnchorPoint="0,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{da6817d4-62f8-4dc2-9436-2a3a7a77011e}" File="" UseOriginSize="True" RelativePosition="0.566506,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward2_WndSummerReward" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{59a83828-6a36-4b89-a5ac-75ecb51277a3}" LabelStyleKey="C18_F16" Name="txtReward2Count_WndSummerReward" Text="" RelativePosition="0.673612,0.276923" AnchorPoint="0,0.5" />
+                <Button Type="WZUIButton" GUID="{ca8ad486-c477-416e-b7a8-bbcf25a1f8c3}" AbsContentSize="30,30" UseAbsSize="True" RelativePosition="0.876863,0.928879" LuaDoneFunctionName="onClickLook" Name="btnMonsterInfo_WndSummerReward" Scale="0.9" ScaleX="0.9" ScaleY="0.9">
+                    <NormalElement Type="WZUIContainer" GUID="{48fbeebf-ecb1-4ab8-bd7a-a10628a8c953}">
+                        <WZUIImage Type="WZUIImage" GUID="{ead2d562-ad25-4de8-94dd-b8190914dfce}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{c61eef45-296b-4428-8ca8-853738b49513}">
+                        <WZUIImage Type="WZUIImage" GUID="{88dc2d5f-5a38-4fba-a23a-dd903c9e441a}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{e60119bc-87f7-4b57-90d8-42a2ef03e96e}" />
+                </Button>
+                <WZUIContainer Type="WZUIContainer" GUID="{7a08e1e4-3aac-4520-970e-886bf4ac0c5f}" AbsContentSize="90,110" UseAbsSize="True" RelativePosition="0.5,0.611539">
+                    <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{48e4e828-9cfc-49d7-a2be-8a80191c7fc3}" Name="conClipping_WndSummerReward" Scale="1" AbsContentSize="90,112" UseAbsSize="True" Inverted="False">
+                        <Stencil Type="WZUIImage" GUID="{ccdeed05-5eb0-4864-b1bf-7ca5e9c8772f}" File="ui/common/common_shade_chushouheidi1.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="1.16" Name="imgZheZhao_WndSummerReward" Visible="True" ScaleX="1.16" ScaleY="1.4" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{6369b5b7-3457-48ae-80d2-840e84d6a2e5}" Name="conCard_WndSummerReward" RelativePosition="0.5,0.5" AbsPosition="50,44">
+                            <WZUIImage Type="WZUIImage" GUID="{3aaf891e-72a1-4f7b-9bd2-5cac23682d46}" Visible="True" UseOriginSize="True" Name="imgMonster_WndSummerReward" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" File="" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                            <WZUIImage Type="WZUIImage" GUID="{4e4c2e1b-347d-4382-a63c-2cdd5a853783}" File="ui/common/huanhua_scale9_lan.png" UseOriginSize="True" Scale="0.8" ScaleY="0.8" ScaleX="0.8" Name="imgQuality_WndSummerReward" />
+                        </WZUIContainer>
+                    </WZUIClippingContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{115d4062-0983-4d62-912f-2f73f41dd7c8}" AbsContentSize="144,260" UseAbsSize="True" RelativePosition="0.375441,0.315" Name="conAct2_WndSummerReward">
+                <WZUI9Image Type="WZUI9Image" GUID="{51252434-7641-401b-ae86-bba555f1497c}" File="ui/gameActivity/holiday_di2.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{cac72989-d0e3-4e8e-95f3-c0b65d1bfa11}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True" Name="conBtn_WndSummerReward">
+                    <Button Type="WZUIButton" GUID="{2ea9697a-25e7-4f76-887e-12293ced1ae8}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickDo" Tag="2">
+                        <NormalElement Type="WZUIContainer" GUID="{d26516d2-46e4-4bdb-973a-2e6dc394ada0}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{2b181c1a-6601-4fd6-b1bb-b9ad6cb0393f}" File="ui/common/common_btn_anniu10_0.png" Name="imgNormal_WndSummerReward" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{259b7f79-ecb4-4a7f-875c-e0d673611a9f}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{950e8570-e50c-4608-b462-e1e463595fa9}" File="ui/common/common_btn_anniu10_0_sel.png" Name="imgSel_WndSummerReward" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{87f03ee3-e7f1-4979-b0aa-27d8d0f7dd90}" />
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{90fbc4f2-0a34-498e-9a70-43705db0c025}" Name="txtStats_WndSummerReward" LabelStyleKey="NORMAL_GREEN_BTN" Text="前往" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{0987abfd-3752-46d5-a306-4cbe4ccfa877}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" Name="imgPass_WndSummerReward" RelativePosition="0.5,0.15" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{48460815-96c3-4cae-8aeb-dcb62a1e102d}" Name="txtKillCount_WndSummerReward" LabelStyleKey="C15_F16" Text="" RelativePosition="0.5,0.357693" Scale="1" ScaleX="1" ScaleY="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ee08c3fd-cb8f-4d73-8efa-1c88f04fcc4c}" Name="txtIntegral_WndSummerReward" LabelStyleKey="C7_F16" Text="" RelativePosition="0.465278,0.865231" Scale="1" ScaleX="1" ScaleY="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9efd7f27-0543-4039-99bb-2999a9b2a220}" LabelStyleKey="C18_F18" Name="txtMonsterName_WndSummerReward" Text="" RelativePosition="0.770833,0.938462" AnchorPoint="1,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{291f6c60-3087-46e2-b2fa-50b16e7f41b9}" File="" UseOriginSize="True" RelativePosition="0.101228,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward1_WndSummerReward" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{876c13fd-b72e-47a9-b1fa-c672cdc369b1}" LabelStyleKey="C18_F16" Name="txtReward1Count_WndSummerReward" Text="" RelativePosition="0.180556,0.276923" AnchorPoint="0,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{6007b90e-3670-432b-96bb-add446b7f430}" File="" UseOriginSize="True" RelativePosition="0.566506,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward2_WndSummerReward" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6fbb0349-0b60-4acd-9899-7490987cb6a0}" LabelStyleKey="C18_F16" Name="txtReward2Count_WndSummerReward" Text="" RelativePosition="0.673612,0.276923" AnchorPoint="0,0.5" />
+                <Button Type="WZUIButton" GUID="{279d74cd-4bb3-4ddd-82f7-a1c03f4fab99}" AbsContentSize="30,30" UseAbsSize="True" RelativePosition="0.876863,0.928879" LuaDoneFunctionName="onClickLook" Tag="2" Name="btnMonsterInfo_WndSummerReward" Scale="0.9" ScaleX="0.9" ScaleY="0.9">
+                    <NormalElement Type="WZUIContainer" GUID="{f5f85e73-019a-4e14-9d64-8c1f18781d87}">
+                        <WZUIImage Type="WZUIImage" GUID="{7967bd73-0c66-4c1f-bda3-4c55759d1250}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{1d4c5430-e33a-4905-a8fc-4f8a97440123}">
+                        <WZUIImage Type="WZUIImage" GUID="{e0763d7c-f80b-4020-84ac-96d09f04e4aa}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{0e26f274-f963-42a1-84e4-761955640f48}" />
+                </Button>
+                <WZUIContainer Type="WZUIContainer" GUID="{d486c635-aa65-4946-95b4-d13e9215efd5}" AbsContentSize="90,110" UseAbsSize="True" RelativePosition="0.5,0.611539">
+                    <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{88508f59-b9f4-4895-b2fc-2c39c9a63b35}" Name="conClipping_WndSumVacAct" Scale="1" AbsContentSize="90,112" UseAbsSize="True" Inverted="False">
+                        <Stencil Type="WZUIImage" GUID="{784a6144-d1af-4876-b479-8a62fa1926fd}" File="ui/common/common_shade_chushouheidi1.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="1.16" Name="imgZheZhao_WndSummerReward" Visible="True" ScaleX="1.16" ScaleY="1.4" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{57aa6003-932b-44a5-b075-7918e2ef04c5}" Name="conCard_WndSummerReward" RelativePosition="0.5,0.5" AbsPosition="50,44">
+                            <WZUIImage Type="WZUIImage" GUID="{7a0d48b6-f488-4649-a722-d86e70c360d5}" Visible="True" UseOriginSize="True" Name="imgMonster_WndSummerReward" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" File="" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                            <WZUIImage Type="WZUIImage" GUID="{76993acd-5bac-4fd7-8810-82d0bfedebed}" File="ui/common/huanhua_scale9_lan.png" UseOriginSize="True" Scale="0.8" ScaleY="0.8" ScaleX="0.8" Name="imgQuality_WndSummerReward" />
+                        </WZUIContainer>
+                    </WZUIClippingContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{7b0f7ec2-2cd0-4b20-b502-9d8079826d02}" AbsContentSize="144,260" UseAbsSize="True" RelativePosition="0.625441,0.315" Name="conAct3_WndSummerReward">
+                <WZUI9Image Type="WZUI9Image" GUID="{fe10ced7-86a4-42db-860c-db29cf96b333}" File="ui/gameActivity/holiday_di2.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{f1e35d93-f094-4314-9dc8-529dbac0ac1f}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True" Name="conBtn_WndSummerReward">
+                    <Button Type="WZUIButton" GUID="{0644eea8-265e-461e-a9b3-e8d2f51005f5}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickDo" Tag="3">
+                        <NormalElement Type="WZUIContainer" GUID="{3ede121b-b7f7-4a7b-b5fa-c43c8f2b0abf}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{4a3b7b79-7c8a-48f1-ad68-cd6e5da4ca7f}" File="ui/common/common_btn_anniu10_0.png" Name="imgNormal_WndSummerReward" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{9ccbff74-0091-480a-920c-2ab34c45513f}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{66e0dda1-f111-4a0a-b591-86a8b43e3cb9}" File="ui/common/common_btn_anniu10_0_sel.png" Name="imgSel_WndSummerReward" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{4532a9da-de8b-4cfd-ab13-d20c0b8952f6}" />
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ebc0df5e-0452-4ebc-9bac-e1221c6cf0a1}" Name="txtStats_WndSummerReward" LabelStyleKey="NORMAL_GREEN_BTN" Text="前往" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{48af3650-4065-4cfe-9d20-86e265092cdc}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" Name="imgPass_WndSummerReward" RelativePosition="0.5,0.15" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{34b67d32-ce38-433a-88e8-fff8c38db23e}" Name="txtKillCount_WndSummerReward" LabelStyleKey="C15_F16" Text="" RelativePosition="0.5,0.357693" Scale="1" ScaleX="1" ScaleY="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b089e12a-5fe1-4553-a46d-b1905c055e3b}" Name="txtIntegral_WndSummerReward" LabelStyleKey="C7_F16" Text="" RelativePosition="0.465278,0.865231" Scale="1" ScaleX="1" ScaleY="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9f75a6e0-75e6-4886-a93a-591161873130}" LabelStyleKey="C18_F18" Name="txtMonsterName_WndSummerReward" Text="" RelativePosition="0.770833,0.938462" AnchorPoint="1,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{4c79e7f2-7836-45d5-ba25-65e616e728e1}" File="" UseOriginSize="True" RelativePosition="0.101228,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward1_WndSummerReward" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{70a66b76-92e8-4821-866b-740ab9ff07a1}" LabelStyleKey="C18_F16" Name="txtReward1Count_WndSummerReward" Text="" RelativePosition="0.180556,0.276923" AnchorPoint="0,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{f154d2fc-9dea-492c-b892-76aaffef4082}" File="" UseOriginSize="True" RelativePosition="0.566506,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward2_WndSummerReward" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{bb66906d-4eef-4f04-9411-6feba1e80560}" LabelStyleKey="C18_F16" Name="txtReward2Count_WndSummerReward" Text="" RelativePosition="0.673612,0.276923" AnchorPoint="0,0.5" />
+                <Button Type="WZUIButton" GUID="{1ae32c40-9a5b-4f6d-b9fd-9269f31f3574}" AbsContentSize="30,30" UseAbsSize="True" RelativePosition="0.876863,0.928879" LuaDoneFunctionName="onClickLook" Tag="3" Name="btnMonsterInfo_WndSummerReward" Scale="0.9" ScaleX="0.9" ScaleY="0.9">
+                    <NormalElement Type="WZUIContainer" GUID="{ab9b86dd-e251-41cc-bccc-9125213bf319}">
+                        <WZUIImage Type="WZUIImage" GUID="{9c330391-c520-49dc-82a3-fb3a28bfc42b}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{bd166164-f2a8-455d-8875-21e61a1a9a95}">
+                        <WZUIImage Type="WZUIImage" GUID="{b6dd9fe5-3066-4ce1-92c9-5de685d7542e}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{3e59bd33-cf9b-4027-ba4b-742c59950f0e}" />
+                </Button>
+                <WZUIContainer Type="WZUIContainer" GUID="{0bee3b05-efc5-4edf-95da-573e96cb26d3}" AbsContentSize="90,110" UseAbsSize="True" RelativePosition="0.5,0.611539">
+                    <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{b7c42633-2f76-403f-a5a7-8afc63126423}" Name="conClipping_WndSummerReward" Scale="1" AbsContentSize="90,112" UseAbsSize="True" Inverted="False">
+                        <Stencil Type="WZUIImage" GUID="{d448ee9f-0c7c-4fb7-a68b-f9e0dfa81734}" File="ui/common/common_shade_chushouheidi1.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="1.16" Name="imgZheZhao_WndSummerReward" Visible="True" ScaleX="1.16" ScaleY="1.4" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{08e20fd8-17b5-4f51-8e2d-5eab723380d0}" Name="conCard_WndSummerReward" RelativePosition="0.5,0.5" AbsPosition="50,44">
+                            <WZUIImage Type="WZUIImage" GUID="{fe27fb6a-9ff2-451b-9148-ddff29afc29c}" Visible="True" UseOriginSize="True" Name="imgMonster_WndSummerReward" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" File="" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                            <WZUIImage Type="WZUIImage" GUID="{593ed638-0e22-4938-a174-0b1d2915c614}" File="ui/common/huanhua_scale9_zi.png" UseOriginSize="True" Scale="0.8" ScaleY="0.8" ScaleX="0.8" Name="imgQuality_WndSummerReward" />
+                        </WZUIContainer>
+                    </WZUIClippingContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{3a741a9f-a3e2-4376-8394-eaaddfb2a54e}" AbsContentSize="144,260" UseAbsSize="True" RelativePosition="0.873753,0.315" Name="conAct4_WndSummerReward">
+                <WZUI9Image Type="WZUI9Image" GUID="{9706f7ad-82e1-4456-96e9-4f7766535580}" File="ui/gameActivity/holiday_di2.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{bbba5a98-84b6-400a-ac35-2be312ef41de}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True" Name="conBtn_WndSummerReward">
+                    <Button Type="WZUIButton" GUID="{74be71d0-8f6b-4658-b10b-eff523374bbe}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickDo" Tag="4">
+                        <NormalElement Type="WZUIContainer" GUID="{4130c8c3-c165-4bdb-8f96-26ba1f78b394}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{ead6ab70-58b9-4d24-ad9e-30a0c8c30cba}" File="ui/common/common_btn_anniu10_0.png" Name="imgNormal_WndSummerReward" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{998f8091-0eb8-4316-a2b7-b44f5490ce16}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{8d18d6b3-7510-4224-8fd4-78ebf55f2ab9}" File="ui/common/common_btn_anniu10_0_sel.png" Name="imgSel_WndSummerReward" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{361f8068-2c77-4556-ba1b-82dc9a65becf}" />
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{2af1083d-8903-4118-b1d5-34d57aa2d6ea}" Name="txtStats_WndSummerReward" LabelStyleKey="NORMAL_GREEN_BTN" Text="前往" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{411cc406-2212-4102-81e1-5ec10e530c1a}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" Name="imgPass_WndSummerReward" RelativePosition="0.5,0.15" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{f5e4cbe6-01c2-4d07-aaba-cd8caf85f206}" Name="txtKillCount_WndSummerReward" LabelStyleKey="C15_F16" Text="" RelativePosition="0.5,0.357693" Scale="1" ScaleX="1" ScaleY="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e7f5aba3-d140-408c-b3f0-fc3f15316013}" Name="txtIntegral_WndSummerReward" LabelStyleKey="C7_F16" Text="" RelativePosition="0.465278,0.865231" Scale="1" ScaleX="1" ScaleY="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c7679808-6014-493f-ab25-2f67383afc8a}" LabelStyleKey="C18_F18" Name="txtMonsterName_WndSummerReward" Text="" RelativePosition="0.770833,0.938462" AnchorPoint="1,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{948880b7-ba72-4cc4-b34d-5cb7b7c21186}" File="" UseOriginSize="True" RelativePosition="0.101228,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward1_WndSummerReward" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5522dd4b-ff44-4286-ab34-eed547f379ef}" LabelStyleKey="C18_F16" Name="txtReward1Count_WndSummerReward" Text="" RelativePosition="0.180556,0.276923" AnchorPoint="0,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{13b35ab8-ee82-4e79-b033-fc17c1149274}" File="" UseOriginSize="True" RelativePosition="0.566506,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward2_WndSummerReward" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b40e1312-3688-4570-a213-c89c2cf83cd7}" LabelStyleKey="C18_F16" Name="txtReward2Count_WndSummerReward" Text="" RelativePosition="0.673612,0.276923" AnchorPoint="0,0.5" />
+                <Button Type="WZUIButton" GUID="{0e9c21c5-0230-4064-8c56-708c03fabd14}" AbsContentSize="30,30" UseAbsSize="True" RelativePosition="0.876863,0.928879" LuaDoneFunctionName="onClickLook" Tag="4" Name="btnMonsterInfo_WndSummerReward" Scale="0.9" ScaleX="0.9" ScaleY="0.9">
+                    <NormalElement Type="WZUIContainer" GUID="{14b0126e-05dc-4ebd-a295-2fa40f55afa4}">
+                        <WZUIImage Type="WZUIImage" GUID="{1054410e-07fd-43df-a66e-eaf332d724bf}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{bd207f68-303a-49bd-92cd-20540312a572}">
+                        <WZUIImage Type="WZUIImage" GUID="{5279b3fd-4b40-4b31-9ae9-f0d59472d27d}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{d5c89712-c15a-45e6-a7ef-17005268f2cf}" />
+                </Button>
+                <WZUIContainer Type="WZUIContainer" GUID="{e676b950-7b28-4451-8a8c-c56cf790dda1}" AbsContentSize="90,110" UseAbsSize="True" RelativePosition="0.5,0.611539">
+                    <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{06be027e-909a-42bb-8d3f-0e1e5ba8c747}" Name="conClipping_WndSummerReward" Scale="1" AbsContentSize="90,112" UseAbsSize="True" Inverted="False">
+                        <Stencil Type="WZUIImage" GUID="{47459db1-fc33-4226-8d26-f0a266aa5db6}" File="ui/common/common_shade_chushouheidi1.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="1.16" Name="imgZheZhao_WndSummerReward" Visible="True" ScaleX="1.16" ScaleY="1.4" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{8b0eacdc-4b5c-43a4-9610-8018a7ad8068}" Name="conCard_WndSummerReward" RelativePosition="0.5,0.5" AbsPosition="50,44">
+                            <WZUIImage Type="WZUIImage" GUID="{37785553-e741-4918-8632-48d7af811412}" Visible="True" UseOriginSize="True" Name="imgMonster_WndSummerReward" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" File="" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                            <WZUIImage Type="WZUIImage" GUID="{667e17c7-9fa6-44ca-92f0-5751fb9c93bf}" File="ui/common/huanhua_scale9_zi.png" UseOriginSize="True" Scale="0.8" ScaleY="0.8" ScaleX="0.8" Name="imgQuality_WndSummerReward" />
+                        </WZUIContainer>
+                    </WZUIClippingContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{d82ce16d-2e01-40f4-a644-c66bb1ff8d67}" AbsContentSize="598,77" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.476351,0.827315">
+                <WZUIContainer Type="WZUIContainer" GUID="{48e69592-70ee-4a0a-b6c1-5701c82fb68e}" AbsContentSize="420,20" UseAbsSize="True" RelativePosition="0.595318,0.451698" AnchorPoint="0.5,0.5">
+                    <WZUIImage Type="WZUIImage" GUID="{ab6ccd3b-fe84-47bb-b9ae-da289e8ea1ea}" File="ui/gameActivity/holiday_jdt_di.png" UseOriginSize="True" RelativePosition="0.466667,0.5" />
+                    <WZUIProgress Type="WZUIProgress" GUID="{27c85b0b-1f0c-4605-9b2b-2f6a84d65440}" BgPicture="ui/gameActivity/holiday_jdt.png" Name="pgIntegral_WndSummerReward" Percentage="0" UseOriginSize="True" RelativePosition="0.498571,0.5" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{56950f15-3594-4fae-b49f-2b5cd570a81a}" AbsContentSize="60,60" UseAbsSize="True" Name="conReward1_WndSummerReward" RelativePosition="0.269763,-0.2" AnchorPoint="0.4,0.5" Scale="0.8" ScaleX="0.8" ScaleY="0.8">
+                        <WZArmature Type="WZArmature" GUID="{09fde60c-baf8-4444-9726-c955eb73e9dc}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" Visible="False" Scale="0.8" Name="armBox_WndSummerReward" RelativePosition="0.507448,0.210745" ScaleX="0.8" ScaleY="0.8" TouchEnable="False" AbsPosition="46.6703,-31.9145" UseOriginSizeProportion="False">
+                            <Action Type="WZUIArmatureAnimationById" GUID="{e3645733-0a32-41b1-a087-d5d699fd9055}" IsLoop="False" AnimationId="0" Loop="-1" />
+                        </WZArmature>
+                        <Button Type="WZUIButton" GUID="{a84dab5a-92c7-461d-ae76-d03278ede495}" LuaActionName="" RelativePosition="0.5,1.03333" Name="" Tag="1" LuaDoneFunctionName="onClickByIntegral">
+                            <NormalElement Type="WZUIContainer" GUID="{2562a156-6402-45bf-8ae7-e9411140d9cd}">
+                                <WZUIImage Type="WZUIImage" GUID="{66797fc4-23af-4a83-af9f-078740bdd515}" File="ui/common/common_icon_lan1.png" Name="imgBoxNor_WndSummerReward" UseOriginSize="True" Scale="0.8" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{32b1bbf9-d1ba-4b4c-84e7-b1b2ad91b317}">
+                                <WZUIImage Type="WZUIImage" GUID="{ba7cc9b5-4189-41d4-a0b2-4b183db872ab}" File="ui/common/common_icon_lan1.png" Name="imgBoxSel_WndSummerReward" UseOriginSize="True" Scale="0.8" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{345c6ff3-db1d-45eb-a566-78f274a34c4a}" />
+                        </Button>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{324a961a-6337-4948-aaf9-69dd1b44f6db}" LabelStyleKey="C11_F20" Text="" Name="txtIntegralTarget_WndSummerReward" RelativePosition="0.5,0.45" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{5b485785-675f-44e6-84e8-869216cca7cd}" AbsContentSize="60,60" UseAbsSize="True" Name="conReward2_WndSummerReward" RelativePosition="0.575477,-0.2" AnchorPoint="0.4,0.5" Scale="0.8" ScaleX="0.8" ScaleY="0.8">
+                        <WZArmature Type="WZArmature" GUID="{56272940-32cf-43e3-8ee7-ab4fb782fb3a}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" Visible="False" Scale="0.8" Name="armBox_WndSummerReward" RelativePosition="0.507448,0.194079" ScaleX="0.8" ScaleY="0.8" TouchEnable="False" AbsPosition="46.6703,-31.9145">
+                            <Action Type="WZUIArmatureAnimationById" GUID="{b064cd60-721b-403d-a5c7-02c42b515ec3}" IsLoop="False" AnimationId="0" Loop="-1" />
+                        </WZArmature>
+                        <Button Type="WZUIButton" GUID="{6d65e811-2ec8-4263-8f7e-76b5e5d117c7}" LuaActionName="" RelativePosition="0.5,1.03333" Name="" Tag="2" LuaDoneFunctionName="onClickByIntegral">
+                            <NormalElement Type="WZUIContainer" GUID="{e0155ebd-b646-40f8-a24f-353079557209}">
+                                <WZUIImage Type="WZUIImage" GUID="{f9cdbd4f-27e2-4a33-885e-457158b9bfeb}" File="ui/common/common_icon_zi1.png" Name="imgBoxNor_WndSummerReward" UseOriginSize="True" Scale="0.8" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{41e9c009-aaf3-424b-bce0-5ee197d65337}">
+                                <WZUIImage Type="WZUIImage" GUID="{93a41275-cf1b-4cd3-9dc0-275212cb69d1}" File="ui/common/common_icon_zi1.png" Name="imgBoxSel_WndSummerReward" UseOriginSize="True" Scale="0.8" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{720426ff-62de-4ebd-adb5-9e4e76b5094e}" />
+                        </Button>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8f1a929c-1796-4ae2-882b-98b77c892534}" LabelStyleKey="C11_F20" Text="" Name="txtIntegralTarget_WndSummerReward" RelativePosition="0.5,0.45" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{739d9e0b-0883-4aa6-a5b0-c403ed6e91ab}" AbsContentSize="60,60" UseAbsSize="True" Name="conReward3_WndSummerReward" RelativePosition="0.923571,-0.2" AnchorPoint="0.4,0.5" Scale="0.8" ScaleX="0.8" ScaleY="0.8">
+                        <WZArmature Type="WZArmature" GUID="{a531f269-7350-4f5b-9ba7-c72e23471de0}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" Visible="False" Scale="0.8" Name="armBox_WndSummerReward" RelativePosition="0.507448,0.194079" ScaleX="0.8" ScaleY="0.8" TouchEnable="False" AbsPosition="46.6703,-31.9145">
+                            <Action Type="WZUIArmatureAnimationById" GUID="{7f1ea839-d3b4-47e0-8aa9-4eaad15e579f}" IsLoop="False" AnimationId="0" Loop="-1" />
+                        </WZArmature>
+                        <Button Type="WZUIButton" GUID="{243c546d-3134-49bc-a34b-82193d2275e2}" LuaActionName="" RelativePosition="0.5,1.03333" Name="" Tag="3" LuaDoneFunctionName="onClickByIntegral">
+                            <NormalElement Type="WZUIContainer" GUID="{88f24432-3e67-4362-91c3-46a3baa8edef}">
+                                <WZUIImage Type="WZUIImage" GUID="{0904964a-89c6-4f63-a615-462c099074a8}" File="ui/common/common_icon_huang1.png" Name="imgBoxNor_WndSummerReward" UseOriginSize="True" Scale="0.8" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{b0daccdd-7ab9-4aa7-acf7-3c5e717021c1}">
+                                <WZUIImage Type="WZUIImage" GUID="{ca06e8e1-ec1d-446e-a743-e0695c891137}" File="ui/common/common_icon_huang1.png" Name="imgBoxSel_WndSummerReward" UseOriginSize="True" Scale="0.8" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{d6166ff9-d6a1-4dee-84da-da4c9539da0c}" />
+                        </Button>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e7962371-faa9-47b4-96e1-3179e07f0f6c}" LabelStyleKey="C11_F20" Text="" Name="txtIntegralTarget_WndSummerReward" RelativePosition="0.5,0.45" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a37e5b37-cbac-4ff9-9aee-e03aab2ce1f6}" LabelStyleKey="C11_F18" TextKey="FULL_SERVICE_SCORE" RelativePosition="0.107024,0.551948" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a1f7f9d6-dae1-4bda-881b-1460918ae590}" Name="txtTotalIntegral_WndSummerReward" LabelStyleKey="C15_F18" Text="" RelativePosition="0.103014,0.308604" Scale="1" ScaleX="1" ScaleY="1" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSummerReward>

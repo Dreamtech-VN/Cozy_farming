@@ -1,0 +1,356 @@
+﻿<SceneRuneLockDraw GUID="{f472e2dd-dd85-4a35-9734-b48df71c541d}">
+    <WZUIWindow Type="WZUIWindow" GUID="{0b72b088-0429-4bbd-b7d4-f76cb27adb4f}" LuaObjectName="SceneRuneLockDraw" Name="SceneRuneLockDraw" LuaTouchBeganFunction="onTouchBegin">
+        <WZUIContainer Type="WZUIContainer" GUID="{ffc8a9e6-1b98-4ba8-a684-dd1a045e0ed1}" Name="conBg_SceneRune" TouchEnable="False">
+            <WZUIImage Type="WZUIImage" GUID="{eba0d0a3-c239-44b7-b333-afa5d6c3bde6}" File="ui/rune/common_pic_cqfwditu.png" isValid="True" Visible="True" Scale="1" UseOriginSize="False" AnchorPoint="0.5,0" RelativePosition="0.5,0" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{d5f409ff-6880-440e-8f3e-61bedf5aaa00}" AbsContentSize="960,580" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" ShowAll="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{72e474e3-98f9-4b5e-a48b-168a150a2bf2}" Visible="True" ShowAll="True" Name="conDraw_SceneRuneLockDraw">
+                <WZUISpine Type="WZUISpine" GUID="{ce638e50-8efc-4ca5-9613-c75aaf472494}" FileAtlas="ui/fuwenchouqu.atlas" FileJson="ui/fuwenchouqu.json" RelativePosition="0.498659,0.658622" AnimationName="stand" Loop="False" Name="spDraw1_SceneRuneLockDraw" Action="" Visible="True" />
+                <WZUISpine Type="WZUISpine" GUID="{c0507ed5-5201-486c-9cfd-93c04380974d}" FileAtlas="ui/fuwenchouqu.atlas" FileJson="ui/fuwenchouqu.json" RelativePosition="0.498659,0.658622" AnimationName="" Loop="False" Name="spDraw2_SceneRuneLockDraw" Action="" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{9fe40e93-9d1d-4cc1-a271-9b9a7127a800}" Name="imgRuneDraw_SceneRuneLockDraw" UseOriginSize="True" File="" RelativePosition="0.499989,0.741379" Scale="0" ScaleX="0" ScaleY="0" TouchEnable="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{03f4dd06-8976-428a-af04-2e997a6198d0}" AbsContentSize="80,92" UseAbsSize="True" RelativePosition="0.20904,0.496305" Name="conDrawItem1_SceneRuneLockDraw" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{2ba15de0-8397-406c-bec9-cae6052c120a}" File="" UseOriginSize="True" Name="imgDraw_SceneRuneLockDraw" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{77ec2246-1e03-4092-bbd8-c0461e04a2c7}" AbsContentSize="80,92" UseAbsSize="True" RelativePosition="0.357143,0.496305" Name="conDrawItem2_SceneRuneLockDraw" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{027aca6b-40f8-4bd3-b737-33eb00ccef2d}" File="" UseOriginSize="True" Name="imgDraw_SceneRuneLockDraw" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7cfb3b97-f96d-4beb-84dd-42b6d0371f2f}" AbsContentSize="80,92" UseAbsSize="True" RelativePosition="0.50524.496305" Name="conDrawItem3_SceneRuneLockDraw" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{3b5cd2d5-ffc5-40b4-b11e-e53a53179832}" File="" UseOriginSize="True" Name="imgDraw_SceneRuneLockDraw" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c2f28ab1-4672-4aa2-bd27-55b5b06e2bee}" AbsContentSize="80,92" UseAbsSize="True" RelativePosition="0.65334,0.492611" Name="conDrawItem4_SceneRuneLockDraw" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{1c38d06a-7bb6-4f2c-8a15-66c243db4db3}" File="" UseOriginSize="True" Name="imgDraw_SceneRuneLockDraw" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{abff5655-1f23-4037-8209-35948843c8d3}" AbsContentSize="80,92" UseAbsSize="True" RelativePosition="0.80144,0.490764" Name="conDrawItem5_SceneRuneLockDraw" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{75644995-dcfd-4eba-9960-20169d7dae42}" File="" UseOriginSize="True" Name="imgDraw_SceneRuneLockDraw" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{db88187c-d2aa-4673-9854-160b67def7ec}" AbsContentSize="80,92" UseAbsSize="True" RelativePosition="0.20904,0.327688" Name="conDrawItem6_SceneRuneLockDraw" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{0ac103df-dd1b-4d77-b2f3-8a141e152087}" File="" UseOriginSize="True" Name="imgDraw_SceneRuneLockDraw" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{3fef72fb-b7a2-4811-acae-9896fec79b7c}" AbsContentSize="80,92" UseAbsSize="True" RelativePosition="0.357143,0.327688" Name="conDrawItem7_SceneRuneLockDraw" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{d3f8ade4-f7da-41a2-b73b-ea93d5b6ce85}" File="" UseOriginSize="True" Name="imgDraw_SceneRuneLockDraw" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{76f53f7e-d3ab-4469-be75-9b7136a6aac7}" AbsContentSize="80,92" UseAbsSize="True" RelativePosition="0.50524,0.327688" Name="conDrawItem8_SceneRuneLockDraw" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{7faa4e41-bde0-4582-a4a7-b24237dbc531}" File="" UseOriginSize="True" Name="imgDraw_SceneRuneLockDraw" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{28aa767f-85ca-418c-85da-05dfc16b3478}" AbsContentSize="80,92" UseAbsSize="True" RelativePosition="0.65334,0.327688" Name="conDrawItem9_SceneRuneLockDraw" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{ca8f0e59-0159-4642-9cd0-66682057dd3b}" File="" UseOriginSize="True" Name="imgDraw_SceneRuneLockDraw" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{58988c6c-24fe-437a-bd83-80699cb8e830}" AbsContentSize="80,92" UseAbsSize="True" RelativePosition="0.80144,0.327688" Name="conDrawItem10_SceneRuneLockDraw" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{8d9de9de-ee13-458b-a370-66267e6f1e1c}" File="" UseOriginSize="True" Name="imgDraw_SceneRuneLockDraw" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{15b6ec12-d6a4-4542-a74e-1cb28ac80dcd}" AbsContentSize="960,214" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" Visible="True" Name="conCenter_SceneRuneLockDraw">
+                <WZUIContainer Type="WZUIContainer" GUID="{a055e7d9-8f0f-41a8-968d-f870ddeee2f6}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{b53e8408-a418-4cda-8a46-e7af4ac991a4}" File="ui/common/common_scale9_di72.png" UseOriginSize="False" CapInsets="5,4,1,1" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{83652194-5765-4172-abb0-d8c9d473583b}" AbsContentSize="396,214" UseAbsSize="True" RelativePosition="0.280209,0.5" ShowAll="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{dd01cf30-c69a-409c-9455-ab2d7ad5d536}" AbsContentSize="468,166" UseAbsSize="True" RelativePosition="0.431818,0.420561">
+                        <WZUI9Image Type="WZUI9Image" GUID="{b93c2032-05b4-400c-831b-d570feafeb4d}" File="ui/common/common_scale9_di29.png" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{19dd141c-cec7-4259-9c73-bbc2bc423a3a}" AbsContentSize="134,102" UseAbsSize="True" RelativePosition="0.286432,0.548193">
+                            <Button Type="WZUIButton" GUID="{bf86db57-6043-48d4-94eb-7db123c1ba46}" AbsContentSize="220,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.395522,0" LuaDoneFunctionName="onClickDraw" Tag="1">
+                                <NormalElement Type="WZUIContainer" GUID="{159d1c97-91d4-497d-a402-f20fcf2deadc}">
+                                    <WZUIImage Type="WZUIImage" GUID="{eaeb5132-9cd9-45f9-b54c-69f3ff1799ad}" File="ui/common/common_btn_cwan.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{08ec7826-1102-4685-acb4-a4f9f997c545}" TextKey="LUCK_DRAW_ONE" LabelStyleKey="NORMAL_ORANGE_BTN" Name="txtOneG1_SceneRuneLockDraw" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{5f4ba02a-cf05-4c5a-8228-d6505ed9a312}">
+                                    <WZUIImage Type="WZUIImage" GUID="{de4e7e20-a1f3-4c78-bed0-d22152d9e14f}" File="ui/common/common_btn_cwan_sel.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{94322b1c-e43d-4956-b927-72a8525f83d9}" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="LUCK_DRAW_ONE" Name="txtOneG2_SceneRuneLockDraw" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{8784852c-2c2c-451c-846a-e9a28ba3ea0b}" />
+                            </Button>
+                            <WZUIImage Type="WZUIImage" GUID="{0813bceb-6d6f-44dd-b3b9-a0d405b67ac6}" File="shopitems/gold.png" UseOriginSize="True" Scale="0.8" ScaleX="0.8" ScaleY="0.8" RelativePosition="0.291044,0.872549" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3910a8b6-02ae-477b-919f-d4d4cc3a4403}" Name="txtTip1_SceneRuneLockDraw" LabelStyleKey="C1_F22" Text="" RelativePosition="0.514925,0.833333" AnchorPoint="0,0.5" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{fd1ed8d9-611d-413b-9597-d16cab13739a}" AbsContentSize="134,102" UseAbsSize="True" RelativePosition="0.744868,0.548193">
+                            <Button Type="WZUIButton" GUID="{f68ba79e-2747-49e3-8382-6d3271056c0a}" AbsContentSize="220,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaDoneFunctionName="onClickDraw" Tag="2">
+                                <NormalElement Type="WZUIContainer" GUID="{518f314d-629c-4e9e-8ad0-006367fd0a06}">
+                                    <WZUIImage Type="WZUIImage" GUID="{25348e2b-32de-4030-8893-6dc26984cfc9}" File="ui/common/common_btn_cwan.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{bcc7dc16-d6c0-4bb7-a085-c834b2e951b0}" TextKey="TEN_TAKE_OUT" LabelStyleKey="NORMAL_ORANGE_BTN" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{1ba97140-62cd-4faf-9454-6566647e2bff}">
+                                    <WZUIImage Type="WZUIImage" GUID="{1eb0c5a2-f089-499f-b79f-9054fa93ba34}" File="ui/common/common_btn_cwan_sel.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{538a6be2-db47-44f1-acb0-eef695c68ca2}" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="TEN_TAKE_OUT" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{0bb43569-42ff-4671-8a23-683a5a9da461}" />
+                            </Button>
+                            <WZUIImage Type="WZUIImage" GUID="{812acc7b-8cdd-49ed-a3c1-6a8198e6da23}" File="shopitems/gold.png" UseOriginSize="True" Scale="0.8" ScaleX="0.8" ScaleY="0.8" RelativePosition="0.291044,0.872549" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c11c52de-9d84-450e-b25d-8d79841255d1}" Name="txtTip2_SceneRuneLockDraw" LabelStyleKey="C1_F22" Text="99999" RelativePosition="0.514925,0.833333" AnchorPoint="0,0.5" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{00582e12-1341-41ad-b1f4-06160f07afb8}" LabelStyleKey="C17_F24" Text="" RelativePosition="0.5,0.897196" TextKey="" Name="txtDrawBuyGold_SceneRuneLockDraw" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{76426f79-14fd-43eb-b4fa-e5ce0ce7923b}" AbsContentSize="468,214" UseAbsSize="True" RelativePosition="0.747136,0.5" ShowAll="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{a80d0eb8-79e0-4807-9670-980e873f5dd1}" AbsContentSize="468,166" UseAbsSize="True" RelativePosition="0.5,0.420561">
+                        <WZUI9Image Type="WZUI9Image" GUID="{39996692-76a7-4234-b396-aa6c47098496}" File="ui/common/common_scale9_di29.png" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{3874d481-b858-41f7-bdd4-d02ba92ce3a5}" AbsContentSize="134,102" UseAbsSize="True" RelativePosition="0.256517,0.548193">
+                            <Button Type="WZUIButton" GUID="{4143b270-8176-4f11-9f0c-72df2afb915b}" AbsContentSize="220,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaDoneFunctionName="onClickDraw" Tag="3">
+                                <NormalElement Type="WZUIContainer" GUID="{a223fa2f-e581-4ca3-9a5c-9a810314fd50}">
+                                    <WZUIImage Type="WZUIImage" GUID="{2579e3bd-f455-4df0-b478-39e799d788ad}" File="ui/common/common_btn_cwan.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{74d7cf35-9280-4ceb-93cb-715361549441}" TextKey="EXTRACTION" LabelStyleKey="NORMAL_ORANGE_BTN" RelativePosition="0.847405,0.5" Name="txtBtn1_SceneRuneLockDraw" />
+                                    <WZUIImage Type="WZUIImage" GUID="{defa32a0-89f7-45b7-8833-0fb348c60ce0}" File="ui/common/common_scale9_fengexiao3.png" UseOriginSize="True" RelativePosition="0.695455,0.5" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{31d0e8b0-d174-43b4-88f5-2386368a6489}">
+                                    <WZUIImage Type="WZUIImage" GUID="{03d65d69-8fd7-43a7-9c09-40cafd485f2f}" File="ui/common/common_btn_cwan_sel.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{65c29138-8d3e-416f-bdae-e610f545729b}" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="EXTRACTION" RelativePosition="0.847,0.5" Name="txtBtn2_SceneRuneLockDraw" />
+                                    <WZUIImage Type="WZUIImage" GUID="{bd37e649-5010-4364-bc8d-2dbe1b514e36}" File="ui/common/common_scale9_fengexiao3.png" UseOriginSize="True" RelativePosition="0.695,0.5" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{cf1eab28-3c5f-4603-9f00-cc50ad74c044}" />
+                            </Button>
+                            <WZUIImage Type="WZUIImage" GUID="{e84d94af-2d14-428d-9b9d-32f5f95b3749}" UseOriginSize="True" Scale="0.55" ScaleX="0.55" ScaleY="0.55" RelativePosition="0.291044,0.970588" Name="imgCostIcon1_SceneRuneLockDraw" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3ef07b2c-ea55-4ff6-9411-915acba5593b}" Name="txtTip3_SceneRuneLockDraw" LabelStyleKey="C1_F22" Text="" RelativePosition="0.470149,0.960784" AnchorPoint="0,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{7088549e-6a39-4001-8731-c03460740204}" Name="imgRed1_SceneRuneLockDraw" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="1.25373,0.539216" Visible="False" TouchEnable="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{53b05f5c-daa5-4898-90e5-5dcdd477f5a8}" LabelStyleKey="C11_F20_S4_C2" Text="" RelativePosition="0.485075,0.284314" AnchorPoint="1,0.5" Name="txtDrawCountTip1_SceneRuneLockDraw" Color="255,227,116" FontSize="20" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" TouchEnable="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{ac52a87a-4748-4570-88db-cc6f5d17b620}" File="shopitems/gold.png" UseOriginSize="True" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.641791,0.313726" TouchEnable="False" Visible="True" />
+                            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{41ab03cb-5d86-4fd6-977d-5e75df6ee05e}" RelativePosition="0.5,0.72549" Name="freeTextDraw1_SceneRuneLockDraw" MaxWidth="200" TouchEnable="True" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{80bf797b-bf3c-4b0b-99ca-6bc989bc42fb}" AbsContentSize="134,102" UseAbsSize="True" RelativePosition="0.744868,0.548193">
+                            <Button Type="WZUIButton" GUID="{721d660d-8dba-420c-ad0f-993f6c92427f}" AbsContentSize="220,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaDoneFunctionName="onClickDraw" Tag="4">
+                                <NormalElement Type="WZUIContainer" GUID="{ef6edb00-7591-41c2-872e-a1db84748694}">
+                                    <WZUIImage Type="WZUIImage" GUID="{66fd665d-4592-427c-8a04-f462f92fda40}" File="ui/common/common_btn_cwan.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{0a219754-f0b9-49fa-a0a0-8befce1de265}" TextKey="EXTRACTION" LabelStyleKey="NORMAL_ORANGE_BTN" RelativePosition="0.847,0.5" TouchSwallow="True" Name="txtBtn3_SceneRuneLockDraw" />
+                                    <WZUIImage Type="WZUIImage" GUID="{b0785877-9c59-4d1d-8978-12271b8d959f}" File="ui/common/common_scale9_fengexiao3.png" UseOriginSize="True" RelativePosition="0.695,0.5" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{de1a0fdd-5a50-47c9-bc2f-24e1a9d0fb37}">
+                                    <WZUIImage Type="WZUIImage" GUID="{279ee98b-6be5-4b8a-b118-1cca170d5513}" File="ui/common/common_btn_cwan_sel.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ce96c367-194a-4aeb-91d4-c634464624db}" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="EXTRACTION" RelativePosition="0.847,0.5" TouchSwallow="True" Name="txtBtn4_SceneRuneLockDraw" />
+                                    <WZUIImage Type="WZUIImage" GUID="{ba2e713f-ab39-41ec-8497-9c752fbb3b0a}" File="ui/common/common_scale9_fengexiao3.png" UseOriginSize="True" RelativePosition="0.695,0.5" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{73bac8bd-1d1e-48d3-87c2-763f9a86daf0}" />
+                            </Button>
+                            <WZUIImage Type="WZUIImage" GUID="{00781346-37c8-45fa-a912-b65603579d96}" File="" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" RelativePosition="0.291044,0.970588" Name="imgCostIcon2_SceneRuneLockDraw" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ae170c26-9231-4653-97e8-32893277d4a8}" Name="txtTip4_SceneRuneLockDraw" LabelStyleKey="C1_F22" Text="" RelativePosition="0.485074,0.960784" AnchorPoint="0,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{732739ee-f7d2-4eb7-8769-1b03290247fb}" File="shopitems/gold.png" UseOriginSize="True" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.641791,0.313726" TouchEnable="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{082fcd59-4a4d-46a9-b881-b4869001b4e2}" LabelStyleKey="C11_F20_S4_C2" Text="" RelativePosition="0.485075,0.284314" AnchorPoint="1,0.5" Name="txtDrawCountTip2_SceneRuneLockDraw" Color="255,227,116" EnableStroke="True" FontSize="20" StrokeSize="4" StrokeColor="128,54,13" TouchEnable="False" />
+                            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{29f1c1e9-4c24-4499-ba86-19930aaa06ea}" RelativePosition="0.5,0.715686" Name="freeTextDraw2_SceneRuneLockDraw" MaxWidth="200" />
+                        </WZUIContainer>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{fab4fe8b-beae-4efd-808a-528120dcd67f}" Name="txtCountDown_SceneRuneLockDraw" LabelStyleKey="C16_F20" Text="" RelativePosition="0.288509,0.13722" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a1d652ab-9847-4668-8f29-61a1a9daa605}" LabelStyleKey="C1_F20" TextKey="PETTOFREE" RelativePosition="0.367928,0.13722" Name="txtCountDown2_SceneRuneLockDraw" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6e9e57c9-2b61-46d7-993c-68ea2033fae7}" LabelStyleKey="C12_F24" Text="" RelativePosition="0.5,0.897196" TextKey="" Name="txtDrawBuyDiamond_SceneRuneLockDraw" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5a824a82-bfaf-4da2-a28d-664ac9dac838}" AbsContentSize="130,60" UseAbsSize="True" RelativePosition="0.919689,0.918081" ShowAll="True" Name="conBtn_SceneRuneLockDraw">
+                <Button Type="WZUIButton" GUID="{e40dc08e-555c-407e-81da-bf0c2c3117f7}" LuaDoneFunctionName="onClickToSceneRune" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{92450df0-1fb7-400b-acf9-da19a38625c2}">
+                        <WZUIImage Type="WZUIImage" GUID="{2c54b16d-f6c3-40af-bc29-77d7091c46cb}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{9ee8f076-c6b3-41f8-a580-bd27aa6289ad}">
+                        <WZUIImage Type="WZUIImage" GUID="{4984f7aa-853b-475c-b74d-5c653b3de2b1}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{fa0f51eb-e90f-42ac-b0bf-98a16495e7b4}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{21ad4ed1-492a-4f24-9eca-4453d594d2d3}" TextKey="TO_RUNE_SYSTEM" LabelStyleKey="NORMAL_GREEN_BTN" RelativePosition="0.5,0.466667" Name="txtEquip_SceneRuneLockDraw" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{3dd89b57-98b2-46e3-8307-2276a9ce07e3}" Name="conDrawTip_SceneRuneLockDraw" Visible="False" Order="0" ShowAll="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{b88e4790-c170-41bc-9bb1-cefdb6240ae2}" File="ui/common/common_scale9_yaan3.png" Opacity="165" Scale="1.2" ScaleX="1.2" ScaleY="1.2" />
+                <WZUIContainer Type="WZUIContainer" GUID="{29804166-7f6b-48a8-a5b5-06fb34b91ed1}" AbsContentSize="960,274" UseAbsSize="True" ShowAll="True" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{2131457e-f412-4a10-9a04-a47cacddfc75}" File="ui/bless/common_scale9_heidi12.png" UseOriginSize="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{b1fe2d4f-fbb8-43f5-95e4-7b9e4a000bb4}" File="ui/rune/common_icon_fwgxhd.png" UseOriginSize="True" RelativePosition="0.5,1.07698" />
+                    <Button Type="WZUIButton" GUID="{55ec3e93-5d17-4f94-96f4-df17e046baa6}" AbsContentSize="120,60" UseAbsSize="True" RelativePosition="0.5,-0.173269" LuaDoneFunctionName="onClickNext">
+                        <NormalElement Type="WZUIContainer" GUID="{c2ed906f-0675-41f2-b295-093403346154}">
+                            <WZUIImage Type="WZUIImage" GUID="{7970c9bf-efd1-4daa-8b64-ccb8612a6fce}" File="ui/common/common_btn_anniu3_1.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{befef8e3-3c05-437f-a706-f3d99d4ce586}" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="CONFIRM" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{7abc9f84-ee17-4d0c-ad1d-f1a9a6697131}">
+                            <WZUIImage Type="WZUIImage" GUID="{2d344367-c011-40f1-882c-df78ea8214c7}" File="ui/common/common_btn_anniu3_1_sel.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{fad105f3-910a-41f4-bbe3-b0b9dc918fdd}" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="CONFIRM" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{275a9dfc-52f3-46ed-a9b2-65d5e4460dbb}" />
+                    </Button>
+                    <WZUIContainer Type="WZUIContainer" GUID="{79f5657d-f73c-48f5-9552-301d2c271f2c}" AbsContentSize="192,274" UseAbsSize="True" Name="conDrawItem_SceneRuneLockDraw" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{36e308ec-783b-4793-8271-9d745ebe7180}" UseOriginSize="True" Name="imgRune_SceneRuneLockDraw" File="" RelativePosition="0.494792,0.693431" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c2f555d3-308d-43d8-bbae-045c5abb31d6}" Name="txtRuneName_SceneRuneLockDraw" Text="" FontSize="18" RelativePosition="0.497917,0.467153" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" Color="233,166,62" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{0db74707-f9d2-43a9-9bef-13799fa7e730}" AbsContentSize="164,8" UseAbsSize="True" RelativePosition="0.5,0.39781">
+                            <WZUI9Image Type="WZUI9Image" GUID="{99ada7c0-53f5-42ad-9f0e-390112ec16ec}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{86a68e6a-d53e-4c02-a936-e0bf169bbb48}" AbsContentSize="150,90" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.497917,0.208029">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{96a2bfe3-bd79-41cd-9db0-006bf166af02}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.289474,0.822222" AnchorPoint="1,0.5" Name="txt1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9d9019b4-5733-4aeb-8978-fc5403f5a519}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.617192,0.822222" AnchorPoint="0,0.5" Name="txtV1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{6a64bdf3-d049-4549-a28e-731829c1e056}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.289474,0.533333" AnchorPoint="1,0.5" Name="txt2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{cbb5e085-8413-4c0c-a132-018fa94e428f}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.617192,0.577778" AnchorPoint="0,0.5" Name="txtV2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{44982e87-a4ec-4a99-a077-10e47ad13069}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.289474,0.244444" AnchorPoint="1,0.5" Name="txt3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b545ccf8-a50f-4bff-8a93-9acf46d0ae8c}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.617192,0.311111" AnchorPoint="0,0.5" Name="txtV3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{84e3e467-15f3-4f2f-ab4e-ee7a776cf83c}" Name="conDrawTip2_SceneRuneLockDraw" Visible="False" Order="1" ShowAll="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{d0ea94cf-2984-42dc-9d57-22e323832f8f}" File="ui/common/common_scale9_yaan3.png" Opacity="165" Scale="1.5" ScaleX="1.5" ScaleY="1.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{a1e68a8f-7f5b-430a-9ad8-2a7ec328c349}" ShowAll="True">
+                <WZUIImage Type="WZUIImage" GUID="{0429997c-87d3-4b83-9b13-21112ff78a35}" File="ui/rune/common_icon_fwgxhd.png" UseOriginSize="True" RelativePosition="0.5,0.920072" />
+                <Button Type="WZUIButton" GUID="{eee8b3db-4ffd-4f18-8753-60bc16b53d6b}" AbsContentSize="120,60" UseAbsSize="True" RelativePosition="0.5,0.0581731" LuaDoneFunctionName="onClickNext">
+                    <NormalElement Type="WZUIContainer" GUID="{999a80aa-00fd-4d7c-95b7-308d26336c02}">
+                        <WZUIImage Type="WZUIImage" GUID="{4c949aa5-bee5-4092-b4c6-d801e9167427}" File="ui/common/common_btn_anniu3_1.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1532d3b2-426f-41be-83b7-3879bb8263c8}" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="CONFIRM" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{0b89eda2-b552-4991-b751-2b7d8b821ef3}">
+                        <WZUIImage Type="WZUIImage" GUID="{a20b7385-dfcb-493c-8e3f-5e5e51a32322}" File="ui/common/common_btn_anniu3_1_sel.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{eb9d99ce-6f5e-4f1f-b99e-c722c0ddaa35}" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="CONFIRM" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{466ab27a-34d8-4be9-b0fd-21ad8c9ab6a5}" />
+                </Button>
+                <WZUIContainer Type="WZUIContainer" GUID="{8a9c3a01-d460-41de-9523-eacc2e0d2539}" AbsContentSize="166,218" UseAbsSize="True" Name="conDrawItem1_SceneRuneLockDraw" Visible="False" RelativePosition="0.108013,0.674398">
+                    <WZUI9Image Type="WZUI9Image" GUID="{818af64d-86f3-40e5-8aed-8346760d0564}" File="ui/rune/common_scale9_fuwenchouqudi_di.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{432c49fc-4b9c-455e-9b0b-58f324272b92}" UseOriginSize="True" Name="imgRune_SceneRuneLockDraw" File="" RelativePosition="0.494792,0.766826" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{49f655a6-96b7-42fe-ae3d-64c9714a5fe6}" Name="txtRuneName_SceneRuneLockDraw" Text="" FontSize="18" RelativePosition="0.497917,0.508437" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" Color="233,166,62" LabelStyleKey="" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{5aebcf84-16c6-4b87-8b86-147d24fd1648}" AbsContentSize="144,5" UseAbsSize="True" RelativePosition="0.5,0.425333">
+                        <WZUIImage Type="WZUIImage" GUID="{f17b4618-5688-4d6c-b054-1d9f6a8e2166}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="0.75" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{8347d0b7-1b3e-4254-a5bc-d9080012f578}" AbsContentSize="150,90" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.497917,0.208029">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{76cfabb4-8aa8-45e0-b49a-49754b68c6be}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.822222" AnchorPoint="1,0.5" Name="txt1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{49e0b282-3eb5-41d6-86ca-37e03142314e}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.822222" AnchorPoint="0,0.5" Name="txtV1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ac511709-293a-47ce-85d5-03263c187d19}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.533333" AnchorPoint="1,0.5" Name="txt2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{bc0f128c-96be-4124-97c2-09c1cf7cf02c}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.577778" AnchorPoint="0,0.5" Name="txtV2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{bada902a-c4ba-41bc-bc18-0649bbe63ffb}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.244444" AnchorPoint="1,0.5" Name="txt3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1f6cfbe6-3684-48d3-b2af-633303ed92ce}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.311111" AnchorPoint="0,0.5" Name="txtV3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c3601f2a-ff4a-4571-8c66-52cc80338315}" AbsContentSize="166,218" UseAbsSize="True" Name="conDrawItem2_SceneRuneLockDraw" Visible="False" RelativePosition="0.302484,0.674398">
+                    <WZUI9Image Type="WZUI9Image" GUID="{d2462c2b-d112-4a08-8fe5-d60697dbca31}" File="ui/rune/common_scale9_fuwenchouqudi_di.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{f2e66a10-264f-4135-913d-1554f1ebe3e4}" UseOriginSize="True" Name="imgRune_SceneRuneLockDraw" File="" RelativePosition="0.494792,0.766826" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{f282cd82-5d84-4456-bfef-c6812a0cd9f3}" Name="txtRuneName_SceneRuneLockDraw" Text="" FontSize="18" RelativePosition="0.497917,0.508437" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" Color="233,166,62" LabelStyleKey="" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{7193ae48-f49f-49d0-a2c0-f2efc73672fd}" AbsContentSize="144,5" UseAbsSize="True" RelativePosition="0.5,0.425333">
+                        <WZUIImage Type="WZUIImage" GUID="{b85394d7-8218-42ca-820a-6b1e1697d608}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="0.75" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{ed89bcee-79ae-4b30-88c7-7a2abee178dc}" AbsContentSize="150,90" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.497917,0.208029">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{3d5e66bd-13fb-478d-9323-5a6c45bc30f8}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.822222" AnchorPoint="1,0.5" Name="txt1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{9da08948-bcab-4654-8b07-2418be45e549}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.822222" AnchorPoint="0,0.5" Name="txtV1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{fb7a84ec-37a8-4171-965c-9a42ced633de}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.533333" AnchorPoint="1,0.5" Name="txt2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{2e8066f2-285a-486d-82c2-0ed5efcb1d23}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.577778" AnchorPoint="0,0.5" Name="txtV2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{7d0116ca-a746-4633-a563-8fc2b9c8119e}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.244444" AnchorPoint="1,0.5" Name="txt3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{84aba4ac-d896-430a-a654-38aa3f3eeed2}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.311111" AnchorPoint="0,0.5" Name="txtV3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c3223207-3ade-4120-8c25-162e0cd42ad8}" AbsContentSize="166,218" UseAbsSize="True" Name="conDrawItem3_SceneRuneLockDraw" Visible="False" RelativePosition="0.49695,0.674398">
+                    <WZUI9Image Type="WZUI9Image" GUID="{e7e700fb-6e36-40f1-8b75-62dd8910dfe0}" File="ui/rune/common_scale9_fuwenchouqudi_di.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{846b25f3-c6ab-4e18-8413-e9bc7b67edb1}" UseOriginSize="True" Name="imgRune_SceneRuneLockDraw" File="" RelativePosition="0.494792,0.766826" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{5fe396c0-41da-4703-9d6b-ec03a6d465d3}" Name="txtRuneName_SceneRuneLockDraw" Text="" FontSize="18" RelativePosition="0.497917,0.508437" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" Color="233,166,62" LabelStyleKey="" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{61b03d97-bb9c-48d1-be71-bf156f86d756}" AbsContentSize="144,5" UseAbsSize="True" RelativePosition="0.5,0.425333">
+                        <WZUIImage Type="WZUIImage" GUID="{68aeff6f-2d70-40a7-967c-85e9f45dfc3c}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="0.75" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{17e95063-859d-425d-b792-72e78b62e6d8}" AbsContentSize="150,90" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.497917,0.208029">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{3e491191-9ae6-4b10-a840-da1fde37baca}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.822222" AnchorPoint="1,0.5" Name="txt1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1fc22b29-7a9e-45e0-9732-2b557cc76ff9}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.822222" AnchorPoint="0,0.5" Name="txtV1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{fd6fd831-4ad4-46b1-bdb0-f16c5abc4d74}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.533333" AnchorPoint="1,0.5" Name="txt2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c1388d9c-0477-4d5e-a090-a4ace5c4a536}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.577778" AnchorPoint="0,0.5" Name="txtV2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{39a3c07b-6e83-43a5-a3c1-708b3de88c10}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.244444" AnchorPoint="1,0.5" Name="txt3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{cf532de2-8a77-4e54-834f-8e429f576661}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.311111" AnchorPoint="0,0.5" Name="txtV3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{6d3ed4ec-f548-482c-972b-97d8c53c341b}" AbsContentSize="166,218" UseAbsSize="True" Name="conDrawItem4_SceneRuneLockDraw" Visible="False" RelativePosition="0.691427,0.674398">
+                    <WZUI9Image Type="WZUI9Image" GUID="{e01d4aff-404a-4055-83b2-62b085f04f5d}" File="ui/rune/common_scale9_fuwenchouqudi_di.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{8f8b588b-6b5b-474c-97ab-ae985235983f}" UseOriginSize="True" Name="imgRune_SceneRuneLockDraw" File="" RelativePosition="0.494792,0.766826" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{12cfb8a8-de45-4803-8659-8427d5ff7187}" Name="txtRuneName_SceneRuneLockDraw" Text="" FontSize="18" RelativePosition="0.497917,0.508437" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" Color="233,166,62" LabelStyleKey="" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{2173b8fb-01f9-47b6-a762-9c4e3dcdcaab}" AbsContentSize="144,5" UseAbsSize="True" RelativePosition="0.5,0.425333">
+                        <WZUIImage Type="WZUIImage" GUID="{51ef4144-588b-4771-91cb-03cb386b4290}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="0.75" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{ca98f667-f7a9-40b8-b7ad-1ab376eb8415}" AbsContentSize="150,90" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.497917,0.208029">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{7132c4b9-374e-440c-bf0a-5eb7dada55a0}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.822222" AnchorPoint="1,0.5" Name="txt1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{fe803b64-d9dd-4b66-82f8-9dde73cddff9}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.822222" AnchorPoint="0,0.5" Name="txtV1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{183f88a2-fcfc-4ac5-aa58-0eb933a10b8a}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.533333" AnchorPoint="1,0.5" Name="txt2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{7003e40e-4cfc-406e-93bf-ff0976d82d9b}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.577778" AnchorPoint="0,0.5" Name="txtV2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{70d3c409-6c53-498d-93da-bd18c9fbdf8d}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.244444" AnchorPoint="1,0.5" Name="txt3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{03dc4651-d33b-4d45-8526-361bdaf40584}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.311111" AnchorPoint="0,0.5" Name="txtV3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{99e1804f-3c4b-4c31-9929-259f36278d49}" AbsContentSize="166,218" UseAbsSize="True" Name="conDrawItem5_SceneRuneLockDraw" Visible="False" RelativePosition="0.886932,0.674398">
+                    <WZUI9Image Type="WZUI9Image" GUID="{1999fe23-0f01-42c8-a0c7-9eac4f02ca8e}" File="ui/rune/common_scale9_fuwenchouqudi_di.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{07a86213-5021-4091-85cc-fbd4afa08adb}" UseOriginSize="True" Name="imgRune_SceneRuneLockDraw" File="" RelativePosition="0.494792,0.766826" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{88cd9699-eedf-4851-86c4-c8bbe20324c4}" Name="txtRuneName_SceneRuneLockDraw" Text="" FontSize="18" RelativePosition="0.497917,0.508437" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" Color="233,166,62" LabelStyleKey="" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{879d54ce-2da5-4446-bd09-bfc1ffd04b20}" AbsContentSize="144,5" UseAbsSize="True" RelativePosition="0.5,0.425333">
+                        <WZUIImage Type="WZUIImage" GUID="{567eeb06-cae6-42d5-b342-56cb7ccf1983}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="0.75" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{2034c9d6-b49f-450f-9cd3-c5b6038a8ee0}" AbsContentSize="150,90" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.497917,0.208029">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d7d3ba83-ecdb-4d32-bb91-02a830da1392}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.822222" AnchorPoint="1,0.5" Name="txt1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c3fe10a0-4bc9-4cf2-be07-3ee0600a12de}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.822222" AnchorPoint="0,0.5" Name="txtV1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{40e1fe74-5faf-4284-a49f-069e86593dbb}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.533333" AnchorPoint="1,0.5" Name="txt2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{16fb63b5-afeb-4d90-9705-c80ff48a94da}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.577778" AnchorPoint="0,0.5" Name="txtV2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{9206c50f-0d03-4099-9388-62db0868f893}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.244444" AnchorPoint="1,0.5" Name="txt3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{809647c1-0db9-43ca-b13d-f62f44bb4b98}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.311111" AnchorPoint="0,0.5" Name="txtV3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{bcb1fd05-535e-4f31-b388-37a37b3a7078}" AbsContentSize="166,218" UseAbsSize="True" Name="conDrawItem6_SceneRuneLockDraw" Visible="False" RelativePosition="0.108013,0.316417">
+                    <WZUI9Image Type="WZUI9Image" GUID="{bac5991e-6349-4b1a-aaaa-0a5c834960e3}" File="ui/rune/common_scale9_fuwenchouqudi_di.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{8dddf33a-1424-4e5a-913c-55ac9cfbe584}" UseOriginSize="True" Name="imgRune_SceneRuneLockDraw" File="" RelativePosition="0.494792,0.766826" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{04ea6bbf-0ad9-4f09-930f-68b7efe96178}" Name="txtRuneName_SceneRuneLockDraw" Text="" FontSize="18" RelativePosition="0.497917,0.508437" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" Color="233,166,62" LabelStyleKey="" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{3a26338e-3c8b-4869-b77e-9cdd6b352ba5}" AbsContentSize="144,5" UseAbsSize="True" RelativePosition="0.5,0.425333">
+                        <WZUIImage Type="WZUIImage" GUID="{d7d9fbbd-57bf-432c-a7be-026c4efc9ecd}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="0.75" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{1822a545-ceda-47c7-a571-9b89e67ae3af}" AbsContentSize="150,90" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.497917,0.208029">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{2bee7a2a-f116-44cc-8e4c-831906f9a08a}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.822222" AnchorPoint="1,0.5" Name="txt1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4e3baa0f-0683-4ec9-809c-9fb1cc93d292}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.822222" AnchorPoint="0,0.5" Name="txtV1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{788fd874-7018-41fd-952c-43294495e410}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.533333" AnchorPoint="1,0.5" Name="txt2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8560b261-cfe6-4961-899d-7fde675bc5de}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.577778" AnchorPoint="0,0.5" Name="txtV2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{81cd218c-35a4-4cd7-a60f-20c700875ce4}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.244444" AnchorPoint="1,0.5" Name="txt3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c1a5eb76-90c0-4143-9dbb-5e6b25de3c8b}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.311111" AnchorPoint="0,0.5" Name="txtV3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{8653f710-4326-4d7d-af2c-058525ca99ad}" AbsContentSize="166,218" UseAbsSize="True" Name="conDrawItem7_SceneRuneLockDraw" Visible="False" RelativePosition="0.302484,0.316417">
+                    <WZUI9Image Type="WZUI9Image" GUID="{1707fbc1-134b-4b3a-8acd-2fb29474a5cd}" File="ui/rune/common_scale9_fuwenchouqudi_di.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{87c3a367-a351-43ab-8578-1ee3efaa9327}" UseOriginSize="True" Name="imgRune_SceneRuneLockDraw" File="" RelativePosition="0.494792,0.766826" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{70b5dc8a-96ad-454f-aac7-2b4f898eaec4}" Name="txtRuneName_SceneRuneLockDraw" Text="" FontSize="18" RelativePosition="0.497917,0.508437" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" Color="233,166,62" LabelStyleKey="" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{b2abf5b7-658e-49da-947a-6a51361f32af}" AbsContentSize="144,5" UseAbsSize="True" RelativePosition="0.5,0.425333">
+                        <WZUIImage Type="WZUIImage" GUID="{642faa3f-3a78-4c8f-b95c-e4d396513877}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="0.75" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{f5779d6d-3ad0-4829-86f7-df00f5518505}" AbsContentSize="150,90" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.497917,0.208029">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{5d18d125-6470-4b70-bcd6-27a5f668549a}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.822222" AnchorPoint="1,0.5" Name="txt1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1ac61fbd-27ab-44dc-8706-d9c141db5cd4}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.822222" AnchorPoint="0,0.5" Name="txtV1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8e307df6-6dfe-4534-b262-f0235bf0f1fd}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.533333" AnchorPoint="1,0.5" Name="txt2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e867dc93-ff2c-4e65-8dae-5a2b3c95c069}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.577778" AnchorPoint="0,0.5" Name="txtV2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1f1e9edd-27ff-4362-b1de-79f037e2a927}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.244444" AnchorPoint="1,0.5" Name="txt3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a0d41d00-e893-44cc-b431-c20a8b918b21}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.311111" AnchorPoint="0,0.5" Name="txtV3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{ab66dfe8-0a5b-4b47-bc39-bf5b4b3b227b}" AbsContentSize="166,218" UseAbsSize="True" Name="conDrawItem8_SceneRuneLockDraw" Visible="False" RelativePosition="0.49695,0.316417">
+                    <WZUI9Image Type="WZUI9Image" GUID="{3641af82-f186-49df-acd0-5da7577d2408}" File="ui/rune/common_scale9_fuwenchouqudi_di.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{bf612cb7-beb7-4266-873a-8114923974d1}" UseOriginSize="True" Name="imgRune_SceneRuneLockDraw" File="" RelativePosition="0.494792,0.766826" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4be2a7ed-72c2-4d1b-9393-c3ba352ab9ca}" Name="txtRuneName_SceneRuneLockDraw" Text="" FontSize="18" RelativePosition="0.497917,0.508437" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" Color="233,166,62" LabelStyleKey="" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{cb3f1719-e61d-4b3d-a901-d1a13952609e}" AbsContentSize="144,5" UseAbsSize="True" RelativePosition="0.5,0.425333">
+                        <WZUIImage Type="WZUIImage" GUID="{404ec51b-5028-4012-9091-47ab0d13ee14}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="0.75" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{e951380b-ce89-453d-a496-9a7193818fa4}" AbsContentSize="150,90" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.497917,0.208029">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{952ceb3f-a773-4e3b-ae45-e35923c44af4}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.822222" AnchorPoint="1,0.5" Name="txt1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a24a7865-d807-4515-8399-c36ad6b0bcef}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.822222" AnchorPoint="0,0.5" Name="txtV1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{31b8cb31-6e4c-4988-b132-5aa4ca42a67d}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.533333" AnchorPoint="1,0.5" Name="txt2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ec8225cf-aa18-4741-a52d-68d75f8f809c}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.577778" AnchorPoint="0,0.5" Name="txtV2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{32a83f14-e25b-47bc-ae71-d68858bac962}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.244444" AnchorPoint="1,0.5" Name="txt3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{674cb5cb-95ca-4d23-9664-387851befe47}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.311111" AnchorPoint="0,0.5" Name="txtV3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{9bd1f678-ca65-4ae4-9035-b29f4eaccc57}" AbsContentSize="166,218" UseAbsSize="True" Name="conDrawItem9_SceneRuneLockDraw" Visible="False" RelativePosition="0.691427,0.316417">
+                    <WZUI9Image Type="WZUI9Image" GUID="{bd5b2a0a-92cf-47ec-afda-bb769f669edd}" File="ui/rune/common_scale9_fuwenchouqudi_di.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{2ada6b86-2f6b-45ed-8ffc-7239c33795e3}" UseOriginSize="True" Name="imgRune_SceneRuneLockDraw" File="" RelativePosition="0.494792,0.766826" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c7e77b24-fad2-45e3-8ba3-622a7701c4e4}" Name="txtRuneName_SceneRuneLockDraw" Text="" FontSize="18" RelativePosition="0.497917,0.508437" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" Color="233,166,62" LabelStyleKey="" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{06cf93b4-76c9-41b7-a759-b576df9cdf17}" AbsContentSize="144,5" UseAbsSize="True" RelativePosition="0.5,0.425333">
+                        <WZUIImage Type="WZUIImage" GUID="{96cb638d-1997-4d35-a13b-2d6c8f10b88b}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="0.75" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{29537750-fabc-4a16-b109-3f473ea66767}" AbsContentSize="150,90" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.497917,0.208029">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1bf5a726-52fc-4ee6-98fb-bb270bd36988}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.822222" AnchorPoint="1,0.5" Name="txt1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{767616c9-c365-4fe9-b2e9-5e78fecd9eda}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.822222" AnchorPoint="0,0.5" Name="txtV1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{dd831abf-21de-4b1c-83b5-a6c350ebe029}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.533333" AnchorPoint="1,0.5" Name="txt2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ecc7f242-8eea-4137-bacb-59fb2cdde2ba}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.577778" AnchorPoint="0,0.5" Name="txtV2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{170795a3-8aa1-4ad5-9604-0a3e191d7cbe}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.244444" AnchorPoint="1,0.5" Name="txt3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{81c45a9e-a2be-47d2-a6df-3cd16433e3d1}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.311111" AnchorPoint="0,0.5" Name="txtV3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7ee45fe0-ab86-4990-b9dd-5fec424f0c11}" AbsContentSize="166,218" UseAbsSize="True" Name="conDrawItem10_SceneRuneLockDraw" Visible="False" RelativePosition="0.886932,0.316417">
+                    <WZUI9Image Type="WZUI9Image" GUID="{74a406a3-c58d-4d88-99ac-cc03b85f59f9}" File="ui/rune/common_scale9_fuwenchouqudi_di.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{413a0fa1-5101-4a90-a971-7ea46ceb4837}" UseOriginSize="True" Name="imgRune_SceneRuneLockDraw" File="" RelativePosition="0.494792,0.766826" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{db7dfb4f-40f0-4acf-b6bc-a36b65d916ee}" Name="txtRuneName_SceneRuneLockDraw" Text="" FontSize="18" RelativePosition="0.497917,0.508437" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" Color="233,166,62" LabelStyleKey="" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{584022e6-69a3-4337-b337-8154bc55b35c}" AbsContentSize="144,5" UseAbsSize="True" RelativePosition="0.5,0.425333">
+                        <WZUIImage Type="WZUIImage" GUID="{e5420ab2-7629-4877-94a0-ef4989984161}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="0.75" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{eda60dea-0e7f-4d93-9375-80d1c4db2849}" AbsContentSize="150,90" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.497917,0.208029">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{451bd7a2-280c-4e66-8f41-efe050bae44e}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.822222" AnchorPoint="1,0.5" Name="txt1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{bb715a91-c500-410d-9c2c-0c7e0d51f968}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.822222" AnchorPoint="0,0.5" Name="txtV1_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{0bd64959-ad4a-4b64-8962-32e4f12d2cb5}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.533333" AnchorPoint="1,0.5" Name="txt2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d8d6c337-3c85-4e89-be9e-9a690e0c2d4b}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.577778" AnchorPoint="0,0.5" Name="txtV2_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{285ceb0a-fed6-478a-96b6-21ed5ba6d678}" Color="255,227,116" FontSize="18" Text="" RelativePosition="0.329474,0.244444" AnchorPoint="1,0.5" Name="txt3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b0885e22-2327-4f58-afae-2abe29220c5d}" Color="99,255,95" FontSize="18" Text="" RelativePosition="0.663859,0.311111" AnchorPoint="0,0.5" Name="txtV3_SceneRuneLockDraw" EnableStroke="True" StrokeColor="79,60,48&#x0A;" StrokeSize="4" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</SceneRuneLockDraw>

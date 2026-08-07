@@ -1,0 +1,38 @@
+﻿<WndWakeupcoinJump GUID="{db17275f-9dbf-464a-9dec-a4bfc8d4fd55}">
+    <WZUIWindow Type="WZUIWindow" GUID="{a74039ee-b0ac-4d64-90e5-9752f0cd0c72}" LuaObjectName="WndWakeupcoinJump" Name="WndWakeupcoinJump" NameCreate="True" AbsContentSize="766,532" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{0d38e28a-ca2e-425b-9eb6-283b49d019a5}">
+            <WZUI9Image Type="WZUI9Image" GUID="{e65b7394-748c-481f-80d7-94db0cc54eea}" File="ui/common/common_scale9_di19.png" CapInsets="92,80,1,1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5e47dd21-e949-401c-8940-a903854d5405}" FontSize="26" Color="255,236,193" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.94" TextKey="EXTRACTION_TEXT11" EnableStroke="True" />
+            <Button Type="WZUIButton" GUID="{888277dc-923c-4551-ac4b-620e4f488f9a}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.945,0.94" LuaActionName="Normal" LuaDoneFunctionName="onCloseClick" Visible="False">
+                <NormalElement Type="WZUIContainer" GUID="{eb3897d1-0a9f-4be9-91dd-62c94cfecbdc}" />
+                <SelectElement Type="WZUIContainer" GUID="{60d1d45e-1f14-48dd-986e-33fcf69b0f64}" />
+                <DisableElement Type="WZUIContainer" GUID="{7a2b2369-21e3-4a21-989a-8c3661b80bc7}" />
+                <WZUIImage Type="WZUIImage" GUID="{3a64bcee-e3f1-487d-a29a-2b17501ae4b1}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{e1786463-aebc-45d6-b52c-a0a5e396dc09}" RelativeSize="0.98,0.75" RelativePosition="0.5,0.524437" AbsContentSize="750,385" UseAbsSize="True" Name="">
+                <WZUI9Image Type="WZUI9Image" GUID="{1a3561db-0dac-47fe-9bf7-2302ccffb097}" File="ui/common/common_scale9_di20.png" RelativePosition="0.5,0.502168" />
+                <WZUIPageContainer Type="WZUIPageContainer" GUID="{c9a87bb3-f4eb-4284-bce6-82b80e4ff8e0}" EnableMoveoutContainer="False" Name="pgConForImg_WndWakeupcoinJump" GetCurrentIndexFunction="" TurningSpeedThreshold="80" PageTurningThreshold="0.3" EnableHideUnvisible="False" ScissorHeight="1" Order="0" RelativePosition="0.5,0.5" EnableBounceBack="False" TouchEnable="False" DropRefreshFunction="" TouchContainerEnable="True" TouchSwallow="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{43a34f3a-2518-4d89-b807-1f94c6ebf895}" Name="conForDot_WndWakeupcoinJump" RelativeSize="1,0.05" RelativePosition="0.5,0" AnchorPoint="0.5,0" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{e0fc7630-a5d8-4c6c-b21d-c07054037381}" AbsContentSize="766,80" UseAbsSize="True" RelativePosition="0.5,0.0864966">
+                <Button Type="WZUIButton" GUID="{ae4082fe-e66b-4a2c-ba04-40c294cf9b2a}" AbsContentSize="142,66" UseAbsSize="True" RelativePosition="0.5,0.5" LuaActionName="Normal" LuaDoneFunctionName="onCloseClick">
+                    <NormalElement Type="WZUIContainer" GUID="{5f21e810-3257-46c2-9f5d-a6873c58d84c}">
+                        <WZUIImage Type="WZUIImage" GUID="{95ed6e49-e128-4f78-89fa-9b8563c59b07}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{c244a1df-b2e6-4602-b8b8-16efe5658dc3}">
+                        <WZUIImage Type="WZUIImage" GUID="{24b3f50c-1074-4283-bcbc-65eb201eba76}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{1dda8f78-3fcb-466a-b74f-002f4aedcd06}">
+                        <WZUIImage Type="WZUIImage" GUID="{94a67103-5f99-40f0-ab5e-06387125e6cf}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" GrayRender="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{edfc4bab-8856-45c5-bfc3-7910963105b4}" FontSize="26" Color="255,236,193" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.5" TextKey="CONFIRM" EnableStroke="True" LabelStyleKey="NORMAL_GREEN_BTN" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+    <WZUIContainer Type="WZUIContainer" GUID="{07383805-3468-44fe-9527-fc98ed05f566}" Name="CellPerPageForImage" NameCreate="True" AbsContentSize="750,385" UseAbsSize="True" Visible="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{58cfc223-8a44-4c8e-88ed-bdba34c0ee80}">
+            <WZUIImage Type="WZUIImage" GUID="{970dee04-3805-4dbb-8aad-3b2b345e900a}" Name="imgShow_CellPerPageForImage" />
+        </WZUIContainer>
+    </WZUIContainer>
+</WndWakeupcoinJump>

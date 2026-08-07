@@ -1,0 +1,51 @@
+﻿<CellFamilyShop GUID="{c6846769-68e5-41a2-bc05-e5029ce92c0f}">
+    <WZUIContainer Type="WZUIContainer" GUID="{ec97bcd1-7b42-405a-b36c-ce55e18db47c}" Name="CellFamilyShop" LuaObjectName="CellFamilyShop" AbsContentSize="230,240" UseAbsSize="True">
+        <WZUI9Image Type="WZUI9Image" GUID="{9d89b70a-d854-4eec-ac54-cdccf9957b0d}" File="ui/common/common_scale9_di18.png" />
+        <WZUIContainer Type="WZUIContainer" GUID="{f6aa1a6b-f9ed-490c-b639-e89dea9ba7ff}" Name="conMain" Visible="True">
+            <Button Type="WZUIButton" GUID="{a128230d-7aa5-4811-a496-0d3d78e8aa0c}" LuaDoneFunctionName="onBuild" Name="btnBuild" Order="10">
+                <NormalElement Type="WZUIContainer" GUID="{fc120855-a228-4528-a3db-5faacf2fef74}" />
+                <SelectElement Type="WZUIContainer" GUID="{abe9aea1-4db1-40b8-8cff-b180c58b6c29}" />
+                <DisableElement Type="WZUIContainer" GUID="{623da5f6-a590-4112-b051-1c778b00e8db}" />
+            </Button>
+            <Button Type="WZUIButton" GUID="{a0e0b0d2-7aa4-4ae3-8405-861e89807645}" UseAbsSize="True" AbsContentSize="80,60" RelativePosition="0.88,0.878" LuaActionName="Normal" LuaDoneFunctionName="onDesc" Name="btnDesc" Order="11">
+                <NormalElement Type="WZUIContainer" GUID="{aed81d83-c845-4496-ac26-a16142615731}">
+                    <WZUIImage Type="WZUIImage" GUID="{8c563d5b-c868-4818-b13c-53e9bee29de9}" File="ui/family/other/common_icon_message.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{48e616e7-3ef0-4aea-bbd3-078afcfa0d87}">
+                    <WZUIImage Type="WZUIImage" GUID="{b2f2b10e-c4ed-46f2-b8b8-da7941f74bbe}" File="ui/family/other/common_icon_message.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{3006061e-7abb-45b7-aa82-b139c8fa59ae}" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{df8f9f4a-27c2-4d75-9bba-4517851f39ff}" Name="conTop">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{563683df-314a-4739-8fc4-6a79c78a5502}" Text="仓库" LabelStyleKey="C18_F22_S4_C5" RelativePosition="0.06,0.9" Name="buildName" Alignment="Left" AnchorPoint="0,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{d7009cdb-91be-401a-b87c-2f029b7b04fe}" AbsContentSize="160,120" UseAbsSize="True" RelativePosition="0.5,0.56">
+                <WZUI9Image Type="WZUI9Image" GUID="{94d11245-481f-43bc-ab48-3a05546d0cca}" File="ui/family/other/common_scale9_family4.png" UseOriginSize="True" />
+                <WZUISpine Type="WZUISpine" GUID="{44b8ee44-ffbd-48d0-b6b5-5579ff077160}" FileAtlas="ui/family/building/family_masterroom.atlas" FileJson="ui/family/building/family_masterroom.json" AnimationName="lvup01" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.4" AbsPosition="203,438.261" Name="spine_CellFamilyShop" LuaSpineEventFunc="" Visible="True" Scale="0.5" ScaleX="0.5" ScaleY="0.5" Loop="False" />
+                <WZUIImage Type="WZUIImage" GUID="{759123dc-24b4-452a-9072-f3715d202e6a}" File="" UseOriginSize="True" Name="imgBuild" Scale="0.6" ScaleX="0.6" ScaleY="0.6" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5fd4d844-558f-445b-b660-c84fb641421f}" AbsContentSize="220,80" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" Name="conBtm" Visible="True">
+                <WZUIImage Type="WZUIImage" GUID="{ff7b4649-2ed4-4194-898f-865fd0265f0b}" File="ui/family/other/common_icon_time.png" UseOriginSize="True" RelativePosition="0.11,0.71" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{be112fe1-ef66-4bff-a6dc-4568f1746191}" LabelStyleKey="C5_F20" Text="12小时" RelativePosition="0.2,0.7" Name="buildTime" Alignment="Left" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{119fcc24-2cec-4eda-a7fa-6eb1ebe86b95}" LabelStyleKey="C3_F20" Text="0/10" RelativePosition="0.97,0.7" Name="buildNum" Alignment="Right" AnchorPoint="1,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c078c876-39a7-4766-bc09-4fa589d64ad7}" Text="" TextKey="FAMILYSHOP10" LabelStyleKey="C9_F20_S4_C5" RelativePosition="0.89,1.032" Name="txtBuilded_CellFamilyShop" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4d475503-681c-4be9-8ea6-1512cc5692aa}" LabelStyleKey="C5_F20" Text="" RelativePosition="0.22,0.254167" Name="needLv" Alignment="Left" AnchorPoint="0,0.5" Scale="0.9" ScaleX="0.9" ScaleY="0.9" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{fcc7e509-4972-443f-962a-cd7e664dc796}" LabelStyleKey="C5_F20" Text="" RelativePosition="0.224348,0.183333" Name="needHouseLv" Alignment="Left" AnchorPoint="0,0.5" Scale="0.9" ScaleX="0.9" ScaleY="0.9" />
+            <WZUIContainer Type="WZUIContainer" GUID="{64dc9699-8025-49dd-878b-ed20fdd8ce1a}" UseAbsSize="True" AbsContentSize="215,30" RelativePosition="0.5,0.084" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{73fd20f5-281e-4db5-87c2-dee96dfcd34e}" File="ui/common/common_scale9_di40.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{c95be76a-e990-4337-920e-4e84e5009164}" File="ui/common/common_scale9_di40.png" />
+                <WZUIImage Type="WZUIImage" GUID="{bf273b89-e59b-45d1-ac5a-831f485f6280}" Name="imgCost_CellFamilyShop" RelativePosition="0.278969,0.5" UseOriginSize="True" File="shopitems/family_water.png" Scale="0.4" ScaleX="0.4" ScaleY="0.4" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{f4ab0613-22d4-4a3f-bc0e-d443dd6ea64c}" Name="txtCost_CellFamilyShop" Text="10" LabelStyleKey="C1_F20" AnchorPoint="0,0.5" RelativePosition="0.35,0.45" Alignment="Left" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{39e65057-2c3a-40ba-b944-3c9b68ee1188}" Name="conDesc_CellFamilyShop" NameCreate="True" Visible="False">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{de1e8fa8-cc7e-4847-90c5-fa328d39e31b}" Dimensions="160,180" Text="" LabelStyleKey="C5_F20" Alignment="Left" Name="txtDesc" />
+            <Button Type="WZUIButton" GUID="{d38ffcc2-5191-4012-b2ad-7a0216348bc3}" LuaDoneFunctionName="onMain">
+                <NormalElement Type="WZUIContainer" GUID="{078f4cbc-a1a6-47ea-9d80-7259f47677ce}" />
+                <SelectElement Type="WZUIContainer" GUID="{d5d50269-1515-4c62-8b2e-75c9f0a49b49}" />
+                <DisableElement Type="WZUIContainer" GUID="{caa76df6-2992-4196-b0b1-a33d91c3a8db}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellFamilyShop>

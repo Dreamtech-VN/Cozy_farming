@@ -1,0 +1,13 @@
+﻿<WndWorldTeamBossInfoView GUID="{3458da2a-b2d6-4b41-8767-e0ec74ffa811}">
+    <WZUIWindow Type="WZUIWindow" GUID="{32307a4e-00c0-4aa3-bf7a-31d2f2943ca4}" AbsContentSize="340,110" UseAbsSize="True" NameCreate="True" LuaObjectName="WndWorldTeamBossInfoView" Name="WndWorldTeamBossInfoView" ShowAll="True" AnchorPoint="1,1" RelativePosition="1,1">
+        <WZUIContainer Type="WZUIContainer" GUID="{36afe893-f4c8-4219-a86a-9736a7e1debf}" AbsContentSize="270,110" UseAbsSize="True" RelativePosition="0,0.5" AnchorPoint="0,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{833e3fdf-5932-4a08-89df-cb388e64d80f}" File="ui/common/common_scale9_di8.png" Opacity="180" RelativePosition="0.5,0.5" RelativeSize="1,1" ShowAll="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{fa3f6809-49fc-4cc2-bbe9-6c55f162b1ee}" Text="队伍伤害：" FontSize="20" RelativePosition="0.05,0.82" AnchorPoint="0,0.5" Name="txtTeam_WndWorldTeamBossInfoView" Color="255,227,116" TextKey="" Alignment="Center" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ece09ef8-32d0-4858-90d5-e70bf591cb98}" FontSize="18" Color="255,89,74" Text="" RelativePosition="0.4,0.82" Name="txtTeamHurt_WndWorldTeamBossInfoView" AnchorPoint="0,0.5" Alignment="Center" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{11b013dd-5ec5-4ce1-ae72-8fb66c75056f}" Text="" FontSize="20" RelativePosition="0.05,0.56" AnchorPoint="0,0.5" Name="txtMy_WndWorldTeamBossInfoView" Color="255,227,116" TextKey="" Alignment="Center" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{81d2a6a4-f808-4959-9ef8-4bd28d718267}" FontSize="18" Color="255,89,74" Text="" RelativePosition="0.4,0.56" Name="txtMyHurt_WndWorldTeamBossInfoView" AnchorPoint="0,0.5" Alignment="Center" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f09392ca-f4c6-4d16-bd24-7d7427799ebb}" Text="剩余回合数" FontSize="20" RelativePosition="0.05,0.3" AnchorPoint="0,0.5" Name="txtRoundWord_WndWorldTeamBossInfoView" Color="255,227,116" TextKey="" Alignment="Center" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d20bff82-c44c-4785-84c8-cc6e70f46e24}" FontSize="18" Color="255,89,74" Text="" RelativePosition="0.48,0.3" Name="txtRoundNum_WndWorldTeamBossInfoView" AnchorPoint="0,0.5" Alignment="Center" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndWorldTeamBossInfoView>

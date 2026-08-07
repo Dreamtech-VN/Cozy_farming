@@ -1,0 +1,26 @@
+<CellCardItem GUID="{fe30b22a-e7e1-4b09-9543-a0aee8402aae}">
+    <WZUIContainer Type="WZUIContainer" GUID="{1f36cf2a-ccd0-4253-9c3c-a5b911777c94}" NameCreate="True" Name="CellCardItem" AbsContentSize="114,170" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{eee94af1-af39-40d6-a7ae-b5cace68d71e}" Name="conCard_CellCardItem">
+            <WZUIContainer Type="WZUIContainer" GUID="{d819841f-36a7-42b6-a15e-19f0a35ea3df}" AnchorPoint="0.5,1" RelativePosition="0.5,1" AbsContentSize="112,138" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{dc9135dc-84d5-4e0f-a10c-f03dfba08fb8}" File="ui/common/common_scale9_beibaodi.png" />
+                <WZUIImage Type="WZUIImage" GUID="{2ad0697f-391e-453f-a468-64b143d43ca9}" File="ui/card/kapai_scale9_lv.png" UseOriginSize="True" Name="imgCardIcon_CellCardItem" />
+                <WZUIImage Type="WZUIImage" GUID="{479a6a7c-c472-45cb-a947-b1bc6c607346}" File="ui/card/kapai_scale9_lv.png" UseOriginSize="True" Name="imgQualityRect_CellCardItem" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8a09709f-e221-44f4-a08e-33188f2f2fd9}" RelativePosition="0.125,0.92" Text="99" FontSize="16" EnableStroke="True" Color="255,236,193" StrokeColor="79,60,48" StrokeSize="4" Name="txtLevel_CellCardItem" />
+                <WZUIContainer Type="WZUIContainer" GUID="{c0c128b8-e72e-45d3-9727-bdaa817b664d}" AbsContentSize="126,152" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.487246" Name="conHightLight_CellCardItem" Visible="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{233cf061-accc-4360-82dc-92978d236559}" File="ui/common/common_scale9_beibaodi_sel.png" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{4d1691dd-f995-4e83-8c38-42a1c58662ed}" Name="conExp_CellCardItem" AnchorPoint="0.5,0" RelativePosition="0.5,0.03" AbsContentSize="112,20" UseAbsSize="True">
+                <WZUIImage Type="WZUIImage" GUID="{032d0a29-1ca0-4991-a060-17b7af69740f}" File="ui/combat/battle_progress_jindutiao_bg.png" UseOriginSize="True" ScaleX="0.75" ScaleY="0.8" />
+                <WZUIProgress Type="WZUIProgress" GUID="{9037aa37-e195-4a28-9cf6-1c0ac97789cf}" Name="prgExp_CellCardItem" BgPicture="ui/combat/battle_progress_lv_fore.png" Percentage="50" UseOriginSize="True" ScaleX="0.75" ScaleY="0.8" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{bc90cfb3-47e1-4e9d-b9d9-398ac727d912}" FontSize="16" EnableStroke="True" Color="255,236,193" StrokeSize="4" StrokeColor="79,60,48" Name="txtExp_CellCardItem" Text="12348" />
+            </WZUIContainer>
+            <WZUISpine Type="WZUISpine" GUID="{fa9c7f2a-3f29-4e79-8329-2c45702e10dd}" FileAtlas="ui/ui_kapai.atlas" FileJson="ui/ui_kapai.json" AnimationName="up" Loop="True" Name="spineRightCorner_CellCardItem" RelativePosition="0.5,0.58" AnchorPoint="1,1" LuaSpineEventFunc="spineUpgradeEnd" />
+            <Button Type="WZUIButton" GUID="{253f01a8-6f8d-4467-9095-05f592c71526}" Name="btnCard_CellCardItem" LuaDoneFunctionName="onClickCard">
+                <NormalElement Type="WZUIContainer" GUID="{92679f5a-e43e-4f82-999e-648a6e4b0942}" />
+                <SelectElement Type="WZUIContainer" GUID="{79fdf9cb-17f1-4d9b-9696-f202afe76210}" />
+                <DisableElement Type="WZUIContainer" GUID="{2578f4c4-5e9d-42d5-ab1b-c61f9346b440}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCardItem>

@@ -1,0 +1,26 @@
+<CellCharmReward GUID="{64d3b495-d365-410f-af60-66c0e4835149}">
+    <WZUIContainer Type="WZUIContainer" GUID="{12070efa-33d5-4f9d-9dfe-8c0d170a2038}" UseAbsSize="True" Visible="True" AbsContentSize="850,80" RelativePosition="0.5,0.522608" Name="CellCharmReward">
+        <WZUI9Image Type="WZUI9Image" GUID="{4612ef78-44c0-41bb-bb09-9336df430cdd}" File="ui/common/common_scale9_di7.png" />
+        <WZUIContainer Type="WZUIContainer" GUID="{92d57c08-a7d4-49c7-bf0c-65592b7f4750}" AbsContentSize="60,75" UseAbsSize="True" RelativePosition="0.0878436,0.5">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d4beeac0-6f2e-443e-88aa-e93c45fc8268}" FontSize="22" Name="txtRank_CellCharmReward" Color="158,0,0" />
+            <WZUI9Image Type="WZUI9Image" GUID="{23b68bbd-557c-4a86-9621-1f3588cf7b6b}" Name="imgRank_CellCharmReward" File="" UseOriginSize="True" RelativePosition="0.5,0.613772" Scale="0.9" ScaleX="0.9" ScaleY="0.9" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{67a98ab6-c947-40b0-9c76-da7fbd577dca}" AnchorPoint="0,0.5" RelativePosition="0.178823,0.5" RelativeSize="0.6,1">
+            <WZUIContainer Type="WZUIContainer" GUID="{9501f898-5f7a-46b7-81bb-7e07a2559a9b}" AbsContentSize="65,65" UseAbsSize="True" RelativePosition="0,0.5" Name="con1_CellCharmReward" ShowAll="False" NoBorder="False" AnchorPoint="0,0.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{cd8f4e03-e072-49cb-aa24-deee7c1aec10}" AbsContentSize="65,65" UseAbsSize="True" RelativePosition="0.221569,0.5" Name="con2_CellCharmReward" ShowAll="False" AnchorPoint="0.5,0.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{21642386-b3c6-426a-b56f-d400cac97e00}" AbsContentSize="65,65" UseAbsSize="True" RelativePosition="0.37889,0.5" Name="con3_CellCharmReward" ShowAll="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{d83685f7-2401-4922-877f-52f2115d97ca}" AbsContentSize="65,65" UseAbsSize="True" RelativePosition="0.536717,0.5" Name="con4_CellCharmReward" ShowAll="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{aebc5a33-faa9-4fce-b577-e24f143050ed}" AbsContentSize="65,65" UseAbsSize="True" RelativePosition="0.691744,0.5" Name="con5_CellCharmReward" />
+            <WZUIContainer Type="WZUIContainer" GUID="{fecc4e95-0290-4cd0-aeff-4a6d1c2a3e6a}" AbsContentSize="65,65" UseAbsSize="True" RelativePosition="0.848718,0.5" Name="con6_CellCharmReward" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{509b833b-a957-410b-85da-9deeb386f929}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.840607,0.5" Name="con7_CellCharmReward" Visible="False">
+            <WZUIImage Type="WZUIImage" GUID="{973240e4-61d6-4ee3-8afd-720e590f573e}" File="ui/common/common_icon_kunan.png" UseOriginSize="True" Scale="0.55" RelativePosition="0.5,0.640131" Name="img1_CellCharmReward" ScaleY="0.55" ScaleX="0.55" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{eef78c5b-be60-49c2-98ff-8606052c941e}" FontSize="20" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" Text="公会奖励" RelativePosition="0.5,0.164474" Name="" TextKey="COMMUNITYINFO91" />
+            <Button Type="WZUIButton" GUID="{f1d830cd-1e36-4381-9e4f-f5f4b3de16a3}" LuaDoneFunctionName="onTips">
+                <NormalElement Type="WZUIContainer" GUID="{9e2f8a97-0a0e-40fa-94a1-59603cf9be3b}" />
+                <SelectElement Type="WZUIContainer" GUID="{06b17469-aecb-4fdc-a215-e1c6a0380b07}" />
+                <DisableElement Type="WZUIContainer" GUID="{1f85a4ff-60ad-4502-a418-03cc406d3ae2}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCharmReward>

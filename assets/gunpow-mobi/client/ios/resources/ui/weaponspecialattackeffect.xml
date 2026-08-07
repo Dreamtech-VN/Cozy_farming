@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?><weaponspecialattackeffect GUID="{10DC4949-6E57-4095-A18F-02E9BB84FE3D}">
+    <WZUIFrame GUID="{31FA19AF-D290-4764-BC58-654E30638425}" Type="WZUIFrame">
+        <WZUIContainer GUID="{72178BA1-6B8D-4122-A24D-C106C53F7BD5}" Name="con_specialattackeffect" Type="WZUIContainer" Visible="True">
+            <WZUIContainer GUID="{6551F4D9-2E09-442e-B8DD-340658EBAD43}" Type="WZUIContainer" Visible="True">
+                <WZUIImage File="battleeffects/ui/animation/killboor.png" GUID="{6F5E67C5-D4E6-49db-B271-DB140EB4E611}" Opacity="200" Scale="0.9" Type="WZUIImage" UseOriginSize="True">
+                    <Action GUID="{A9F1266D-AB46-43c2-B45C-E21E4F87514F}" IsLoop="True" RunTimes="1" Type="WZUIActionSequence">
+                        <ChildAction Duration="0.25" GUID="{E3342090-97FA-456c-9F09-23471F480A08}" IsChildAction="False" IsLoop="False" ScaleX="1.4" ScaleY="1.4" Type="WZUIActionScaleTo"/>
+                        <ChildAction Duration="0.25" GUID="{FBEC243C-9087-4991-BF33-AE6BC6799B70}" IsChildAction="False" IsLoop="False" ScaleX="1.3" ScaleY="1.3" Type="WZUIActionScaleTo"/>
+                    </Action>
+                </WZUIImage>
+                <WZUIImage File="battleeffects/ui/animation/killboor.png" GUID="{7627C2A2-144C-4e60-B656-160A6108AC15}" Opacity="0" Scale="1.3" ScaleX="1.3" ScaleY="1.3" Type="WZUIImage" UseOriginSize="True">
+                    <Action GUID="{18EEA607-DCD0-4f7e-BAF6-D0CD698066F3}" Type="WZUIActionSpawn">
+                        <ChildAction Duration="0" GUID="{414AB1BC-1D23-47c0-9C9B-7B1E30B0A69D}" Type="WZUIActionSequence">
+                            <ChildAction Duration="2.3" GUID="{E69A7BB7-3E12-4757-BFDE-2BD41DC41EFF}" Type="WZUIActionFadeTo"/>
+                        </ChildAction>
+                    </Action>
+                </WZUIImage>
+            </WZUIContainer>
+            <WZUIContainer GUID="{AADF652F-4DB9-4924-BC48-F1195CEC09A5}" Type="WZUIContainer" Visible="True">
+                <WZParticleSystemQuad Angle="90" AngleVar="600" Duration="1.7" EmissionRate="30" EmitterMode="1" EndColorVar="0,0.3,0.3,0.5" EndSize="63" GUID="{068F716C-7E5F-466c-AEEE-BAFAC6F85790}" IsBlendAdditive="False" Life="0.22" ModeAGravity="-10,-10" ModeARotationIsDir="False" ModeBEndRadius="20" ModeBEndRadiusVar="40" ModeBRotatePerSecond="20" ModeBRotatePerSecondVar="5" ModeBStartRadius="170" ModeBStartRadiusVar="0" OpacityModifyRGB="True" PositionType="Free" RelativePosition="0.5,0.5" Rotation="0" Scale="1" SourcePosition="0,0" StartColor="1,0.9,1,0.2" StartColorVar="0,0,0,0.5" StartSize="60" StartSizeVar="10" StartSpin="0" StartSpinVar="10" TextureFile="battleeffects/ui/animation/killboor.png" TotalParticles="8" Type="WZParticleSystemQuad" Visible="True"/>
+                <WZParticleSystemQuad Angle="45" AngleVar="700" Duration="1.7" EmissionRate="30" EmitterMode="1" EndColorVar="0,0.3,0.3,0.5" EndSize="53" GUID="{9DFA9F2C-8FB8-4781-B854-472C96F14783}" IsBlendAdditive="False" Life="0.25" ModeAGravity="-10,-10" ModeARotationIsDir="False" ModeBEndRadius="60" ModeBEndRadiusVar="40" ModeBRotatePerSecond="20" ModeBRotatePerSecondVar="5" ModeBStartRadius="170" ModeBStartRadiusVar="0" OpacityModifyRGB="False" PositionType="Free" RelativePosition="0.522916,0.55625" Rotation="0" SourcePosition="0,0" StartColor="1,0.9,1,0.7" StartColorVar="0,0,0,0.2" StartSize="60" StartSizeVar="10" StartSpin="150" StartSpinVar="10" TextureFile="battleeffects/ui/animation/killboor.png" TotalParticles="5" Type="WZParticleSystemQuad" Visible="True"/>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIFrame>
+</weaponspecialattackeffect>

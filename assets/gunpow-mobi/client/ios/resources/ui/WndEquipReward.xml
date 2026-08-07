@@ -1,0 +1,43 @@
+﻿<WndEquipReward GUID="{17cfdeb9-378f-4436-bb64-5203c9bbb8b1}">
+    <WZUIContainer Type="WZUIContainer" GUID="{9c6dc9a5-c4be-4459-905c-79db609d17dc}" Name="WndEquipReward" ShowAll="False" LuaObjectName="WndEquipReward">
+        <WZUIContainer Type="WZUIContainer" GUID="{01124bc5-9f1b-4cd1-9093-aa2b9df6cba9}" AbsContentSize="400,455" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{d99fd912-8de6-477f-81f2-85406882d023}" File="ui/common/common_scale9_di19.png" CapInsets="186,70,1,1" />
+            <WZUIButton Type="WZUIButton" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.910976,0.93074" GUID="{92e06a3b-0b25-4764-8620-1b961d2ba832}" LuaDoneFunctionName="onCloseClick" AbsPosition="728.7,51">
+                <NormalElement Type="WZUIContainer" GUID="{cc50746d-51f3-4216-9221-19eeed527cb1}">
+                    <WZUIImage Type="WZUIImage" GUID="{52a8abef-6d0b-4476-936d-e849c27e1ec3}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{ff68d9e4-702c-4cba-88c5-8cefd4a814bf}">
+                    <WZUIImage Type="WZUIImage" GUID="{e4beabea-47b7-4cfc-acca-9a85226e8d6e}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{00581743-8b2c-4d09-9da5-e8ddc88ab20d}" />
+            </WZUIButton>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5120ce43-79c4-4842-bb6c-4d9790aaeba9}" Color="255,236,193" TextKey="CALL_REWAR" LabelStyleKey="SMALL_ORANGE_BTN" RelativePosition="0.5,0.930434" />
+            <WZUIContainer Type="WZUIContainer" GUID="{6fe7edd8-48e8-4151-9fd0-90ccca0e59f4}" AbsContentSize="390,390" UseAbsSize="True" RelativePosition="0.4975,0.445652">
+                <WZUI9Image Type="WZUI9Image" GUID="{1da3b5ce-c52c-4948-bfe0-c1d5f16011f8}" File="ui/common/common_scale9_di33.png" RelativePosition="0.502577,0.497436" ScaleX="0.99" />
+                <WZUITableContainer Type="WZUITableContainer" GUID="{0f985809-3370-481e-8e04-5b6cae2b4ca2}" CellElementHeight="0.18" EnableMoveHorizontal="False" EnableVerticalScroll="True" Name="tabRewardList_WndEquipReward" ScaleY="0.96" ScaleX="0.98" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{088e249d-cdc6-4c40-8603-cd84c902886c}" Name="CellEquipRewardItem" AbsContentSize="370,60" UseAbsSize="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{f867fe72-8fdf-4c9e-82fa-e374d1c2dba4}" File="ui/common/common_scale9_di18.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{344603a0-affb-4a77-9fee-cd43460a472a}" AbsContentSize="80,45">
+                <WZUIImage Type="WZUIImage" GUID="{444257cb-70cb-45cb-9ae5-05139cfe0abc}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" Scale="0.75" ScaleX="0.75" ScaleY="0.75" RelativePosition="0.894595,0.5" Name="imgHasGive_CellEquipRewardItem" Visible="False" />
+                <Button Type="WZUIButton" GUID="{190d649a-2009-4303-beb1-754bbe4d5194}" AbsContentSize="80,45" UseAbsSize="True" RelativePosition="0.867568,0.5" LuaDoneFunctionName="onClickGet" TouchEnable="True" Name="btnGitReward_CellEquipRewardItem">
+                    <NormalElement Type="WZUIContainer" GUID="{b72d24b3-c296-4c80-9e25-7f9695ca11ca}">
+                        <WZUIImage Type="WZUIImage" GUID="{0cb72ee9-a0a1-4818-9a67-93f74c680ae6}" File="ui/common/common_btn_anniu10_0.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e8ce438d-8eea-4748-90c7-2d25a05624b8}" LabelStyleKey="NORMAL_GREEN_BTN" Text="领取" Scale="0.8" ScaleX="0.8" ScaleY="0.8" TextKey="INVITE_RECEIVE" Name="txtGitReward1_CellEquipRewardItem" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{334df488-1902-43f3-b164-bd3cf189a920}">
+                        <WZUIImage Type="WZUIImage" GUID="{82a50565-2d72-4d73-a573-7926006082af}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f29b4819-ecff-4bf9-aafc-9e7d0aee911b}" LabelStyleKey="NORMAL_GREEN_BTN" Text="领取" Scale="0.8" ScaleX="0.8" ScaleY="0.8" TextKey="INVITE_RECEIVE" Name="txtGitReward2_CellEquipRewardItem" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{ca81c44f-2155-4a4f-83db-1b5dce268852}">
+                        <WZUIImage Type="WZUIImage" GUID="{747dc34a-0511-4e52-a39b-8e6f1ebecd2d}" File="ui/common/common_btn_anniu10_0_sel.png" GrayRender="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c32261ce-550c-4bd4-8526-b14b60aa00d9}" LabelStyleKey="NORMAL_GRAY_BTN" Text="领取" Scale="0.8" ScaleX="0.8" ScaleY="0.8" TextKey="INVITE_RECEIVE" Name="txtGitReward3_CellEquipRewardItem" />
+                    </DisableElement>
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{93815418-9206-48e0-8a3b-ea300d4f7b90}" Name="conItem_CellEquipRewardItem" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.621622,0.5" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{28bc1df5-e078-4f90-8d0f-79df031158d8}" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0.0378369,0.5" Name="txtRewardCount_CellEquipRewardItem" />
+        </WZUIContainer>
+    </WZUIContainer>
+</WndEquipReward>

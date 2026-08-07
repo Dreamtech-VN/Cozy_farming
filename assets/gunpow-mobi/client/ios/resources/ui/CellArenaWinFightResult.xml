@@ -1,0 +1,43 @@
+﻿<CellArenaWinFightResult GUID="{cfc6b2c2-275e-423d-b98e-635f5760a2cd}">
+    <WZUIContainer Type="WZUIContainer" GUID="{79aefca8-607e-4205-83a0-1cda9830b8e9}" LuaObjectName="CellArenaWinFightResult" Name="CellArenaWinFightResult" ShowAll="False" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{9ea4cb30-408a-469c-af0d-b0fd8856f217}" AbsContentSize="480,50" UseAbsSize="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{6d5ae320-b654-4f81-87aa-dcb8b25cea9a}" UseAbsSize="True" AbsContentSize="480,50" RelativePosition="0.5,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{0d70125b-6757-4ed2-b6e0-681f93517a0a}" Name="imgBg_CellArenaWinFightResult" File="ui/hero/hero_scale9_zdhongdi.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1e5ca1d5-0593-42a3-ae39-ee171d76668e}" Name="conInfo_CellArenaWinFightResult" RelativePosition="0.5,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{7e0777cd-6eaf-4854-877b-f55401eb7393}" Name="imgServerFlag_CellArenaWinFightResult" File="ui/common/common_icon_kuafu.png" UseOriginSize="True" RelativePosition="0.0708333,0.68" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d8974654-92ec-4a09-a564-7fb0f9732aaa}" LabelStyleKey="C18_F18_S4_C5" Name="labName_CellArenaWinFightResult" Text="六个名字的人" RelativePosition="0.0986583,0.68" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{781e66b7-13d9-443c-b4c5-7902fd43c0cf}" LabelStyleKey="" Name="labId_CellArenaWinFightResult" Text="(id:1231456)" RelativePosition="0.0986583,0.26" AnchorPoint="0,0.5" FontSize="16" Color="255,255,255" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6581695d-33d7-45bb-bbba-9b2674e9d732}" LabelStyleKey="C18_F20_S4_C5" Name="labKill_CellArenaWinFightResult" Text="1" RelativePosition="0.431618,0.493339" AnchorPoint="0.5,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{14cd380b-0e52-4f4b-b799-4d9f7d44d4cb}" LabelStyleKey="C15_F20" Name="labHitRate_CellArenaWinFightResult" Text="80%" RelativePosition="0.544193,0.450569" AnchorPoint="0.5,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{66c49937-6240-4511-9f34-9cfdbb871870}" LabelStyleKey="C15_F20" Name="labHurt_CellArenaWinFightResult" Text="1235" RelativePosition="0.673751,0.472315" AnchorPoint="0.5,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{64a42d46-c1e8-4ba0-a0e5-ae655a4546d4}" File="ui/common/common_icon_shousha.png" UseOriginSize="True" RelativePosition="0.807946,0.509469" Name="imgKillIcon_CellArenaWinFightResult" />
+                <WZUIImage Type="WZUIImage" GUID="{1f27860d-4e09-41ab-b207-430db71214c8}" File="ui/common/common_icon_mvp.png" UseOriginSize="True" RelativePosition="0.927345,0.533279" Name="imgMvpIcon_CellArenaWinFightResult" ScaleX="0.8" ScaleY="0.8" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{696b1733-9bee-4c86-9459-7da4453717b2}" AbsContentSize="84,50" UseAbsSize="True" Name="conBtn_CellArenaWinFightResult" Rotation="0" Visible="False" RelativePosition="0.085,0.5">
+                <Button Type="WZUIButton" GUID="{3082b80c-0050-4d16-885d-8a1631b63621}" RelativePosition="0.25,0.5" AbsContentSize="42,42" UseAbsSize="True" Tag="1" LuaDoneFunctionName="onClickBtn" LocalInterval="300" Name="btnZan_CellArenaWinFightResult" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{93569d97-420c-44fa-a576-e09494d5c2e6}">
+                        <WZUIImage Type="WZUIImage" GUID="{f4a6f107-979f-4bbc-bfef-7f8a621380cf}" File="ui/common/common_icon_pvpdz.png" UseOriginSize="True" Name="" Scale="0.5" GrayRender="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{e6b77cfb-6ece-4a75-8053-1a90642993f7}">
+                        <WZUIImage Type="WZUIImage" GUID="{fca81010-3c2d-4f5d-88cd-1af824a81b22}" File="ui/common/common_icon_pvpdz.png" UseOriginSize="True" Name="" Scale="0.5" GrayRender="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{cbd5a538-e8ec-4523-8c09-3d8442979283}">
+                        <WZUIImage Type="WZUIImage" GUID="{cc838b27-cd5e-4b6e-adb7-53bd5bf5c4e0}" File="ui/common/common_icon_pvpdz.png" UseOriginSize="True" Name="" Scale="0.5" />
+                    </DisableElement>
+                </Button>
+                <Button Type="WZUIButton" GUID="{1c432f4c-4545-4224-ae44-1950ca47c604}" AbsContentSize="42,42" UseAbsSize="True" RelativePosition="0.75,0.5" Tag="2" LuaDoneFunctionName="onClickBtn" LocalInterval="300" Name="btnAdd_CellArenaWinFightResult" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{29838cd3-f182-43c9-a68e-60f22ed28069}">
+                        <WZUIImage Type="WZUIImage" GUID="{0a0fd500-ba73-4c5f-b430-366369907b17}" File="ui/common/common_icon_hytjtb.png" UseOriginSize="True" Name="" Scale="0.5" GrayRender="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{3bc465b2-d417-4432-8637-cd0335496d63}">
+                        <WZUIImage Type="WZUIImage" GUID="{c071ce60-9684-4a70-8323-64dc95df3332}" File="ui/common/common_icon_hytjtb.png" UseOriginSize="True" Name="" Scale="0.5" GrayRender="False" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{9a769770-da7f-4b2e-b685-b3ce6d4cd651}">
+                        <WZUIImage Type="WZUIImage" GUID="{cdb374f8-4eee-4c11-a1cd-c34fa15d5613}" File="ui/common/common_icon_hytjtb.png" UseOriginSize="True" Name="imgAdd_CellArenaWinFightResult" Scale="0.5" />
+                    </DisableElement>
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellArenaWinFightResult>

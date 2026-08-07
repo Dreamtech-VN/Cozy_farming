@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" ?>
+<SceneCreateActor GUID="{7B894FA8-40F5-4d32-A09D-7679B197AF12}">
+    <WZUIFrame AbsContentSize="960,640" GUID="{50EBEB3A-4651-4bff-A850-866BA5B5F4DF}" LuaObjectName="SceneCreateActor" Name="SceneCreateActor" NameCreate="True" RelativePosition="0.5,0.5" TouchEnable="True" Type="WZUIFrame" UseAbsSize="True" LuaTouchBeganFunction="" LuaTouchMovedFunction="" LuaTouchEndedFunction="">
+        <WZUIMultiTouchPanel Type="WZUIMultiTouchPanel" GUID="{B616BDF4-E024-460b-B976-F1598BE232E6}" LuaTouchBeganFunction="OnBegin" LuaTouchEndedFunction="OnEnd" LuaTouchMovedFunction="OnMove" />
+        <WZUIContainer Type="WZUIContainer" GUID="{EFBBF483-595D-4dbd-B88D-2B5B05D527D3}" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{BDCB66F0-323C-4ceb-9B56-EB4F20F107A5}" Visible="True" NoBorder="True" ShowAll="False">
+                <WZUISpine Type="WZUISpine" GUID="{91fa4055-b776-4afc-b543-89da2733bc3a}" FileAtlas="role/login_bg.atlas" FileJson="role/login_bg.json" AnchorPoint="0.5,0.5" RelativePosition="0.500059,1.12366" AbsPosition="480,721" Visible="True" UseOriginSizeProportion="False" UseOriginSize="True" AnimationName="login_bg" Loop="True" ScaleX="1" NoBorder="False" Scale="1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{30901465-BA0E-4c0e-A1FA-84B6265E123F}" RelativeSize="0.3,0.12" RelativePosition="0,1" ShowAll="True" AnchorPoint="0,1" AbsContentSize="220,76" UseAbsSize="True">
+                <WZUIImage Type="WZUIImage" GUID="{37A044A2-0E33-4244-B385-346948CDA536}" File="ui/common/common_icon_cjjs.png" UseOriginSize="True" RelativePosition="0.995914,0.5" AnchorPoint="1,0.5" Visible="False" />
+                <Button Type="WZUIButton" LuaDoneFunctionName="onBackToSelectLogin_SceneCreateActor" GUID="{3B32F336-F1F9-4e84-8CD8-78C51B9EF5EE}">
+                    <NormalElement Type="WZUIContainer" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" GUID="{B460AEB4-450D-4c74-AA28-3AA61710F243}">
+                        <WZUIImage Type="WZUIImage" GUID="{15D8EF21-65A1-46d7-BE5A-E6499A7F57E2}" File="ui/common/common_icon_fanhui.png" UseOriginSize="True" RelativePosition="0.22,0.5" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{F6F79064-DF82-41ae-A274-C60B5489005D}">
+                        <WZUIImage Type="WZUIImage" GUID="{5CF9D4DC-504E-4c47-9455-041E39F5F422}" File="ui/common/common_icon_fanhui_sel.png" UseOriginSize="True" RelativePosition="0.22,0.5" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{F72E21B0-997A-4508-A7B4-EBF2D6560BD7}">
+                        <WZUIImage Type="WZUIImage" GUID="{F6C92C43-7294-4783-83EE-F9D2597B888B}" File="ui/common/common_icon_fanhui.png" UseOriginSize="True" RelativePosition="0.22,0.5" />
+                    </DisableElement>
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{27DEA5D3-DD6A-43d8-9F64-17C968A4747A}" ShowAll="True" TouchEnable="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{504AFFCD-A0A2-4e11-9E13-84000DA26003}" AbsContentSize="400,400" UseAbsSize="True" Name="conGirlAni_SceneCreateActor" RelativePosition="0.4,0.545313" AbsPosition="383.8,281">
+                <WZUISpine Type="WZUISpine" GUID="{C8B36A63-7378-45e8-9FC3-76D6EF7CC92A}" FileAtlas="role/login_pic_girl.atlas" FileJson="role/login_pic_girl.json" Loop="True" UseOriginSize="True" AnimationName="animation" RelativePosition="0.5,0.6" AnchorPoint="0.5,0.5" Name="aniGirlAni_SceneCreateActor" Visible="True" TouchEnable="False" Opacity="255" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{A9329D95-8030-4863-B67F-C7E1F850F7D5}" AbsContentSize="400,400" UseAbsSize="True" Name="conBoyAni_SceneCreateActor" RelativePosition="0.8,0.5" Scale="0.3" Visible="True" RelativeSize="1,1">
+                <WZUISpine Type="WZUISpine" GUID="{0987D952-525D-43d4-9758-55884FD87B97}" FileAtlas="role/login_pic_boy.atlas" FileJson="role/login_pic_boy.json" Loop="True" UseOriginSize="True" AnimationName="animation" RelativePosition="0.3075,0.5575" AnchorPoint="0.5,0.5" Name="aniBoy_SceneCreateActor" Opacity="255" Visible="True" Scale="1" ScaleX="1" TouchEnable="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{d628cfa7-89f7-4286-8233-9ae76b70a73f}" Name="conEnterAni_SceneCreateActor" NoBorder="True">
+            <WZUISpine Type="WZUISpine" GUID="{8d6d39d1-908d-45ac-ba3f-8ca90ccff2ac}" FileAtlas="" FileJson="" AnimationName="" Loop="False" AnchorPoint="0.5,0" Name="spineEnter_SceneCreateActor" RelativePosition="0.415625,0.5" Visible="False" ScaleX="0.83" NoBorder="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{d214e737-067d-4328-af9c-bc465657ac4b}" ShowAll="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{62d65555-0239-4a8b-91e8-f66e10c2aacd}" Visible="True" AbsContentSize="340,601" UseAbsSize="True" RelativePosition="0.811458,0.492188" AbsPosition="779,315" ShowAll="False" AnchorPoint="0.5,0.5" Order="1">
+                <WZUIContainer Type="WZUIContainer" GUID="{10aa3b83-467d-4eca-bb71-9e3de24225e4}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{239f91f4-ea3c-4a18-93a4-583c90690451}" File="ui/common/common_scale9_di15.png" Opacity="150" />
+                    <WZUIImage Type="WZUIImage" GUID="{14e91c2e-2bfe-4b95-8ed7-146f5e00bc7b}" File="ui/common/common_icon_diandian.png" UseOriginSize="True" RelativePosition="0.0773082,0.96" AbsPosition="26.2848,577.791" />
+                    <WZUIImage Type="WZUIImage" GUID="{ace241b3-1e5d-4e1f-9132-aa11e2f21935}" File="ui/common/common_icon_diandian.png" UseOriginSize="True" RelativePosition="0.924848,0.96" AbsPosition="314.448,576.304" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{b9062c9d-4c28-4409-809f-442f3d37ea19}" AbsContentSize="334,2" UseAbsSize="True" RelativePosition="0.5,0.460067" AbsPosition="170,276.5">
+                        <WZUIImage Type="WZUIImage" GUID="{3ccb216f-72ce-4cb0-88e8-de50b6a4b256}" File="ui/common/common_scale9_fengexian.png" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{5e4c1077-7d85-4fc1-b046-142124555e40}" AbsContentSize="334,2" UseAbsSize="True" RelativePosition="0.5,0.275374" AbsPosition="170,165.5">
+                        <WZUIImage Type="WZUIImage" GUID="{add52c7b-8251-44dc-a5a7-888079ed0e91}" File="ui/common/common_scale9_fengexian.png" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUICheckBoxGroup Type="WZUICheckBoxGroup" GUID="{5895db16-04a2-4e43-9475-3e7f80562f28}" AbsContentSize="300,260" UseAbsSize="True" RelativePosition="0.508824,0.722962" AbsPosition="173,434.5">
+                    <CheckBox Type="WZUICheckBox" GUID="{66c38861-cfc1-4673-a134-0f6210767e43}" RelativeSize="1,0.5" AnchorPoint="0.5,1" RelativePosition="0.5,1" SelectedIndex="1" Name="checkSex1_SceneCreateActor" Tag="0" LuaCheckedFunctionName="" LuaSelectedFunctionName="onCheckSex">
+                        <CheckElement Type="WZUIContainer" GUID="{ecb3d94e-5d2d-41d6-889d-dbec01dd6eca}">
+                            <WZUISpine Type="WZUISpine" GUID="{8b77ea9e-1bd2-4bda-9a2b-70d8feb39b48}" FileAtlas="role/login_button.atlas" FileJson="role/login_button.json" AnimationName="nan_0" RelativePosition="0.5,1.02308" AbsPosition="150,134" TouchEnable="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{70e09797-e72d-4ca8-be8a-2a9b84b50de9}" File="ui/common/transparent_bg.png" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{a49cb154-75a7-40ff-9e83-9bfc3b1330cc}" RelativePosition="0.463333,0.5">
+                            <WZUISpine Type="WZUISpine" GUID="{0e73acc6-5c68-40ff-844e-4122d0bb1672}" FileAtlas="role/login_button.atlas" FileJson="role/login_button.json" AnimationName="nan_1" AnchorPoint="0.5,0.5" RelativePosition="0.5,1.02308" AbsPosition="150,133" TouchEnable="False" Loop="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{40d9eac9-9039-4a2d-877e-93a6fa1bce85}" File="ui/common/transparent_bg.png" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{18d9f6bb-d2b3-4990-b43d-6a573981d4c7}" />
+                    </CheckBox>
+                    <CheckBox Type="WZUICheckBox" GUID="{9757e4cc-7014-422e-a37d-18aba3195b34}" RelativeSize="1,0.5" AnchorPoint="0.5,0" RelativePosition="0.5,0" AbsPosition="139,0" Name="checkSex2_SceneCreateActor" Tag="1" LuaCheckedFunctionName="" LuaSelectedFunctionName="onCheckSex">
+                        <CheckElement Type="WZUIContainer" GUID="{d6090b71-af1e-400c-90b9-ee2dd1eb2d3d}">
+                            <WZUISpine Type="WZUISpine" GUID="{acf687ae-2839-4c8c-b8ae-9a1686e468bd}" FileAtlas="role/login_button.atlas" FileJson="role/login_button.json" AnimationName="nv_0" RelativePosition="0.5,1.02308" AbsPosition="150,133" TouchEnable="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{f4e4f1ca-bcf7-4894-831d-c47abd047ae7}" File="ui/common/transparent_bg.png" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{d19feed4-8570-42d6-83d3-d006c2687fc3}" RelativePosition="0.463333,0.5">
+                            <WZUISpine Type="WZUISpine" GUID="{780a4398-d370-460f-88d3-ad249e21df62}" FileAtlas="role/login_button.atlas" FileJson="role/login_button.json" AnimationName="nv_1" RelativePosition="0.5,1.02308" TouchEnable="False" Loop="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{d735b286-df05-496b-aca4-c25fbf187d95}" File="ui/common/transparent_bg.png" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{dbfef08f-a91b-4463-b1c3-0b219d973591}" />
+                    </CheckBox>
+                </WZUICheckBoxGroup>
+                <WZUIContainer Type="WZUIContainer" GUID="{8859a29d-37fc-4c9b-9fbf-9e48a8be076d}" AbsContentSize="280,58" UseAbsSize="True" RelativePosition="0.483671,0.365225" Visible="True" AbsPosition="164.448,219.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{223785af-cc8e-4c28-ada0-a721882e31d4}" File="ui/common/common_scale9_di57.png" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{1eeb3989-4029-4a29-ad03-7dd018f3c1b7}" AbsContentSize="200,44" Visible="True" UseAbsSize="True" RelativePosition="0.437037,0.5">
+                        <WZUIEditBox Type="WZUIEditBox" GUID="{a1a8cc95-b0a4-4596-ac3e-f93c5f0bb08a}" Name="editInputName_CreateActor" NameCreate="True" BgPicture="ui/common/transparent_bg.png" Visible="True" FontSize="24" Color="158,139,121" PlaceholderFontColor="158,139,121" Text="123456" PlaceHolder="" Order="1" MaxLength="12" LuaEditBoxEditingDidBegin="onEditNameBegin" LuaEditBoxEditingDidEnd="onEditNameEnd" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontColor="127,70,26" PlaceHolderAlignment="1" Alignment="1" />
+                    </WZUIContainer>
+                    <WZUIContainer AbsContentSize="80,80" GUID="{ff217668-4d90-49d5-ab93-e0dabdba1b73}" RelativePosition="0.930607,0.482759" Type="WZUIContainer" UseAbsSize="True" AbsPosition="260.57,28">
+                        <WZUIButton AbsContentSize="80,80" GUID="{6f858346-051e-4bae-8e42-85887ac96e97}" LuaDoneFunctionName="onBtnRandomNameClicked" Name="btnRandomName_CreateAc" Type="WZUIButton" UseAbsSize="True" RelativePosition="0.5,0.5">
+                            <SelectElement AbsContentSize="0" GUID="{66360f63-a20e-444e-b42c-1d0eba10e453}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="False">
+                                <WZUIImage Type="WZUIImage" GUID="{2ec874a8-0c51-439e-bb73-d1f176ac4822}" File="ui/login/login_icon_shaizi.png" Visible="True" UseOriginSize="True" />
+                            </SelectElement>
+                            <NormalElement AbsContentSize="0" GUID="{8566f0d5-79bd-4ec5-bddb-feb4015a31ac}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="False">
+                                <WZUIImage Type="WZUIImage" GUID="{ff18a6a2-1728-4a58-97ce-696727f7ed8c}" File="ui/login/login_icon_shaizi.png" Visible="True" UseOriginSize="True" />
+                            </NormalElement>
+                            <DisableElement AbsContentSize="130,60" GUID="{1b575662-18e5-4c4b-8151-6ecbaeb5c217}" Type="WZUIContainer" UseAbsSize="True" />
+                        </WZUIButton>
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ab49cf6f-69f9-44cd-b6af-134a92e34352}" TextKey="LOADING_NICKNAME" FontSize="26" Color="255,255,255" RelativePosition="0.286486,0.5" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" Visible="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{ee1a1b63-ffb2-4505-9f93-919674b0173e}" RelativeSize="0.35,0.4" RelativePosition="0.5,0.148382" AbsContentSize="280,90" UseAbsSize="True" AbsPosition="170,89.1774">
+                    <WZUIButton AbsContentSize="300,90" GUID="{0067d12c-b9f5-4cf5-ae17-746b6e7b0d2d}" LuaDoneFunctionName="onBtnEnterGameClicked" Name="btnStartGame_CreateActor" Type="WZUIButton" UseAbsSize="True" Visible="True">
+                        <NormalElement AbsContentSize="0" GUID="{d24e2629-f692-4fcb-9a66-b43d2490e1ab}" Type="WZUIContainer" UseAbsSize="False">
+                            <WZUIImage Type="WZUIImage" GUID="{5ae0d072-190e-4b0b-a504-3b509f4d910c}" File="ui/common/common_btn_anniu8.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement AbsContentSize="0" GUID="{421d8bc8-c592-4bbd-9a9c-d78b92a09d68}" Type="WZUIContainer" UseAbsSize="False">
+                            <WZUIImage Type="WZUIImage" GUID="{afde1d27-c911-4aed-b4b7-fbe6073176bb}" File="ui/common/common_btn_anniu8_sel.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement AbsContentSize="0" GUID="{453d127d-0889-4657-918c-d3c548e87bdb}" Type="WZUIContainer" UseAbsSize="False" />
+                    </WZUIButton>
+                    <WZUIContainer Type="WZUIContainer" GUID="{20726d15-3a72-4b05-9ba6-e09626e74168}" TouchEnable="False" Visible="True">
+                        <WZArmature Type="WZArmature" GUID="{db2103dd-fca0-4e40-8dc1-72f701e03376}" ArmatureFile="ui/ui_create_button_01.xml" ArmatureName="ui_create_button_01" UseOriginSize="True" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Name="" TouchEnable="False">
+                            <Action Type="WZUIArmatureAnimationById" GUID="{724fc8d6-c393-4a0b-ada4-8d3c2cd59469}" AnimationId="0" IsLoop="False" />
+                        </WZArmature>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneCreateActor>

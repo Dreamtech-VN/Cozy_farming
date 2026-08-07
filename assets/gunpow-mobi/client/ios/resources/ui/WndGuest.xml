@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<WndGuest GUID="{CAFB015D-8F48-4cbb-8847-C6F49AD88ADB}">
+    <WZUIWindow AbsContentSize="498,504" GUID="{46D91ADE-C109-4f35-ACCA-F084762BDC40}" LuaObjectName="WndGuest" LuaTouchBeganFunction="onTouchBegan" Name="WndGuest" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True">
+        <WZUI9Image File="ui/common/common_scale9_di19.png" GUID="{BA6D6F87-53D3-4d2e-AD06-35167B237A25}" Name="img9Bg_WndGuest" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" CapInsets="80,89,1,1" TouchEnable="False" />
+        <WZUIContainer AbsContentSize="498,86" GUID="{6D648D18-6C38-4b90-A041-7E72F48F6171}" Name="conTop_WndGuest" RelativePosition="0.505444,0.905657" RelativeSize="1,0.15" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+            <Button AbsContentSize="80,80" GUID="{351C6AC2-ABC1-42fd-AAFB-4CB9A80F97DA}" LuaDoneFunctionName="onClickCloseWindow" Name="btnClose_WndGuest" RelativePosition="0.919239,0.666756" Type="WZUIButton" UseAbsSize="True" TouchEnable="True" LuaActionName="">
+                <NormalElement GUID="{D3FDEC6E-E1D5-4744-B39C-7D8DD78AF13D}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{7FBEC60C-CFD3-4a59-9963-D0FAABA16552}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" UseOriginSizeProportion="False" Scale="1" />
+                </NormalElement>
+                <SelectElement GUID="{912F6BB9-CD5E-4588-BA6C-50A5BA895960}" TouchContainerEnable="True" Type="WZUIContainer" Scale="1">
+                    <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{09C0C2E7-FAFB-45cf-8E15-8730B73842CA}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" UseOriginSizeProportion="False" Scale="1" />
+                </SelectElement>
+                <DisableElement GUID="{A55A88D5-77A3-4177-AAC7-CF9556CA363E}" Type="WZUIContainer" Scale="1.3" />
+            </Button>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3E7A6ADD-311E-496e-A320-CDCEA5057A70}" FontSize="24" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" TextKey="MARRY_GUEST" RelativePosition="0.5,0.646127" TouchEnable="False" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="486,347" GUID="{FB13A5CE-3004-4e56-9040-D9117D551ED7}" Name="conTxtContent_WndGuest" RelativePosition="0.5,0.537111" RelativeSize="0.82,0.7" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image AbsPosition="0,0" CapInsets="0,0,0,0" File="ui/common/common_scale9_di20.png" GUID="{7382A22E-E261-426d-AFBB-14977F3B4D8A}" RelativePosition="0.5,0.51" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Scale="1" ScaleX="1" ScaleY="1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{AAC9D523-F78D-4d20-A083-00C0C13ACC6A}" FontSize="22" Color="255,236,193" Text="" RelativePosition="0.5,0.925735" TextKey="WEDDING_NO_GUEST" Name="txtTip_WndGuest" Visible="False" />
+            <WZUITableContainer CellElementHeight="0.27" EnableMoveHorizontal="False" GUID="{D0A16521-4A30-4e96-A1CD-EB443846637B}" Name="tbconContent_WndGuest" RelativePosition="0.499779,0.507181" RelativeSize="1,1" Scale="0.95" ScaleX="0.96" ScaleY="0.94" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Type="WZUITableContainer" VerticalInterval="0.008" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="498,80" GUID="{A4C3FE59-BED4-437a-BF54-043F98A0FF17}" Name="conBottom_WndGuest" RelativePosition="0.510333,0.0925877" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUICheckBox AbsContentSize="70,60" GUID="{BA9F1FD1-D4BA-45a2-BBCA-FD83ED005A39}" LuaCheckedFunctionName="" LuaSelectedFunctionName="onClickcheckPasspord" Name="checkSelPasspord_WndGuest" RelativePosition="0.884245,0.541043" Type="WZUICheckBox" UseAbsSize="True" SelectedIndex="0">
+                <CheckElement Type="WZUIContainer" GUID="{C1DBE931-3D13-4214-AA95-E3ACE177F190}" RelativePosition="0.5,0.5">
+                    <WZUIImage File="ui/common/common_scale9_di13.png" GUID="{9F54B070-C5CF-47de-933D-6EC2422B6185}" Type="WZUIImage" UseOriginSize="True" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{2D68B1A4-A029-4047-9994-E8AA771979EF}">
+                    <WZUIImage File="ui/common/common_scale9_di13.png" GUID="{90E741BE-A1C8-466a-97D6-3562C8977B63}" Type="WZUIImage" UseOriginSize="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{6A9D42D5-7FFB-409d-BC79-5FBF6D9FE198}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{2BA6FD80-9D3B-44b4-91C0-75B90F90D27C}" File="ui/common/common_icon_gou.png" UseOriginSize="True" />
+                </CheckElement>
+            </WZUICheckBox>
+            <WZUILabelTTF Alignment="Center" Color="79,60,48" Dimensions="0,0" FontSize="20" GUID="{7196BF09-FB93-4812-9CA6-A72CDA9F64EA}" Name="txtUsePasspord_WndGuest" RelativePosition="0.810584,0.531925" Text="Use Passpord" Type="WZUILabelTTF" TextKey="USEPASSWORD" AnchorPoint="1,0.5" />
+            <Button AbsContentSize="126,62" GUID="{5A65D7D0-9F28-4235-AA6C-AE56040A755E}" LuaDoneFunctionName="onSetPasspordBtn" Name="btnSetPasspordBtn_WndGuest" RelativePosition="0.5,0.548984" Type="WZUIButton" UseAbsSize="True" TouchEnable="True" LuaActionName="Normal">
+                <NormalElement GUID="{C43B007B-ABE0-467a-94B0-50564BDADA58}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu3.png" GUID="{1B9AD868-61DD-461d-9237-2BA4F4C116C5}" Type="WZUI9Image" UseOriginSize="False" />
+                    <WZUILabelTTF Alignment="Center" BoldFont="False" Color="255,255,255" Dimensions="0,0" EnableStroke="True" FontSize="22" GUID="{3C6F3DE5-FF49-43bf-A286-805ED1790ADC}" Name="txtSetPasspord1_WndGuest" RelativePosition="0.5,0.5" StrokeColor="132,66,29" Text="" TouchEnable="False" Type="WZUILabelTTF" StrokeSize="4" TextKey="SetPASSWORD" />
+                </NormalElement>
+                <SelectElement GUID="{318EEA8B-5B22-4800-A4DB-B4F1BA8F248A}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu3_sel.png" GUID="{E50EC8C2-C776-4378-9881-824E185D7720}" Type="WZUI9Image" UseOriginSize="False" />
+                    <WZUILabelTTF Alignment="Center" BoldFont="False" Color="255,255,255" Dimensions="0,0" EnableStroke="True" FontSize="22" GUID="{E441F994-3E46-4154-B4D7-EB4FE46D64A7}" Name="txtSetPasspord2_WndGuest" RelativePosition="0.5,0.5" StrokeColor="132,66,29" Text="" TouchEnable="False" Type="WZUILabelTTF" StrokeSize="4" TextKey="SetPASSWORD" />
+                </SelectElement>
+                <DisableElement GUID="{49D3E6B4-EC43-439d-92C7-625784C58C4A}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu3.png" GUID="{49884A49-61CC-4be4-8801-376521C00BF0}" GrayRender="True" Type="WZUI9Image" UseOriginSize="False" />
+                    <WZUILabelTTF Alignment="Center" BoldFont="False" Color="255,255,255" Dimensions="0,0" EnableStroke="True" FontSize="22" GUID="{88F9D084-F236-4b9a-AF2B-C22A19B643C4}" Name="txtSetPasspord3_WndGuest" RelativePosition="0.5,0.5" StrokeColor="132,66,29" Text="" TouchEnable="False" Type="WZUILabelTTF" StrokeSize="4" TextKey="SetPASSWORD" LabelStyleKey="SMALL_GRAY_BTN" />
+                </DisableElement>
+            </Button>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndGuest>

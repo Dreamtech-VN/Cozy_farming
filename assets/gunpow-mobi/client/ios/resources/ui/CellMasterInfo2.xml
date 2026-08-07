@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<CellMasterInfo2 GUID="{94E0EE14-4A95-4281-99CE-EFEFD5E1B05F}">
+    <WZUIContainer AbsContentSize="870,110" GUID="{9178D0E4-F233-462e-A26B-45D9D9B238C0}" LuaObjectName="" Name="CellMasterInfo2" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{7FC8DC5A-C49A-4029-91F0-896A1A721E00}" AbsContentSize="870,95" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{C9439D25-67BF-4aab-85BA-098AC8F9E60F}" Type="WZUI9Image" />
+            <WZUIImage Type="WZUIImage" GUID="{F838EE6F-367F-4993-B0C2-13C0FAE8ADC9}" File="ui/common/common_icon_tx.png" UseOriginSize="True" RelativePosition="0.072,0.5" Visible="False" />
+            <WZUIImage Type="WZUIImage" GUID="{CCD05EC0-C67F-41c9-BEE9-EE1FC61A66A7}" File="battle/head/npc_0001.png" RelativePosition="0.0702927,0.500578" UseOriginSize="True" Scale="0.75" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{2EF2F457-6E19-46c1-8A13-73D6193C3DDC}" UseAbsSize="True" AbsContentSize="100,100" RelativePosition="0.073,0.5" Name="conHead_CellMasterInfo2" Visible="True">
+                <WZUIImage Type="WZUIImage" GUID="{5D65893A-E0A3-4181-8255-D88F1024FA39}" TouchEnable="False" RelativePosition="0.5,0.5" File="ui/common/common_icon_tx.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" AbsContentSize="100,100" UseAbsSize="True" LuaDoneFunctionName="onCheck" GUID="{AC6A55E7-6D23-40a6-A9A0-8C28B003B891}">
+                    <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{9DA07A47-E9F5-4c0a-8A55-A93EB9609C8B}" />
+                    <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{5A545AFB-2AC8-4d0c-ACFD-8A654B179DC5}" />
+                    <DisableElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{A2F4AE3F-B983-42d2-9089-856CABEF89CF}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="650,60" AnchorPoint="1,1" GUID="{48ADEC43-FA97-46e2-B740-D07739CA17EC}" RelativePosition="0.79824,0.781338" Type="WZUIContainer" UseAbsSize="True">
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="62,34,0" FontSize="22" GUID="{08ACFF73-A72A-4c90-A75E-725004E10BB1}" Name="ttfLevel_CellMasterInfo2" Order="1" RelativePosition="0.11,0.5" Text="你的徒弟XXX升到了34级,你获得了23点师德值奖励" Type="WZUILabelTTF" Alignment="Left" MaxLength="32" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellMasterInfo2>

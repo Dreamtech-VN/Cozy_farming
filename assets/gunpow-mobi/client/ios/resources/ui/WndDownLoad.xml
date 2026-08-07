@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" ?>
+<WndDownLoad GUID="{C0AE001D-887D-44a3-BA71-364E854356E8}">
+    <WZUIWindow Type="WZUIWindow" GUID="{B14F06F6-AAF3-4f0c-9233-F48F416257CA}" AbsContentSize="" LuaObjectName="WndDownLoad" Name="WndDownLoad" UseAbsSize="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{A4613825-EA43-4840-80BF-EDFF51901DE7}" Visible="True" RelativePosition="0.5,0" AnchorPoint="0.5,0" RelativeSize="1,0.12">
+            <WZUIContainer Type="WZUIContainer" GUID="{77B1DD0F-B695-4cf2-A4DB-A8F0860E12DD}" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" RelativeSize="1.2,1" Name="conForBG_WndDownLoad" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{F11CC97A-9168-4213-B930-CC4292DC783C}" File="ui/common/common_scale9_heidi1.png" Opacity="150" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{8E3C5606-4DAD-4591-AA99-9703D43B21C7}" ShowAll="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+                <WZUIContainer Type="WZUIContainer" GUID="{EF369DD9-25FE-4bf6-AEA8-8BAAF368FA96}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5" Name="conProgress_WndDownLoad" NameCreate="True" Visible="False" ShowAll="False" AbsPosition="489.001,61.001" AnchorPoint="0.5,0.5" RelativeSize="1,1">
+                    <WZUIContainer Type="WZUIContainer" GUID="{5B03C2FA-83BB-4dac-95CC-92C1B7430A1F}" RelativeSize="1,1" RelativePosition="0.5,0.650862" AnchorPoint="0.5,0.5" Visible="True" AbsContentSize="804,20" UseAbsSize="True" AbsPosition="480,60.4">
+                        <WZUIImage Type="WZUIImage" GUID="{D163A063-D7DA-4959-A2CE-7041E93B3E32}" File="ui/loading/loading_progress_jdt_bg.png" Visible="True" UseOriginSize="True" RelativePosition="0.5,0.518" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{2F022042-3426-4b6b-9B69-F72F37C57E75}" AbsContentSize="798,13" UseAbsSize="True" Visible="True" RelativePosition="0.5,0.5189" UseAbsCoordinate="False" RelativeSize="1,0.8" AbsPosition="402,10.378">
+                            <WZUIProgress Type="WZUIProgress" GUID="{417C1174-A028-4a3b-8947-5DA9588F371A}" BgPicture="ui/loading/loading_progress_jdt_fore.png" Percentage="0" RelativePosition="0.5,0.5" Visible="True" FlipY="False" FlipX="False" Name="progBar_WndDownLoad" UseOriginSize="False" />
+                            <WZUIScissorContainer Type="WZUIScissorContainer" GUID="{604684AD-A16B-4d5c-B22A-6A893A3B8CB6}" RelativeSize="0,1" AnchorPoint="0,0.5" RelativePosition="0,0.5" Name="conScissor_WndDownLoad">
+                                <WZUIParticle Type="WZUIParticle" GUID="{ED1C00FA-BF9D-4793-A3AD-4A8C30336630}" PlistFile="particle/ui_loading_lizi.plist" AnchorPoint="0,0.5" RelativePosition="0,0.5" />
+                            </WZUIScissorContainer>
+                            <WZUIContainer AbsContentSize="1,1" GUID="{ED86C844-EC63-4eb3-932F-2B73D2D94798}" Name="conDutiao_WndDownLoad" RelativePosition="0,0.6" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True" AnchorPoint="0,0.5">
+                                <WZUISpine Type="WZUISpine" GUID="{5A4FE743-665D-4549-A996-24DD1156B307}" FileAtlas="role/loading_tx_01.atlas" FileJson="role/loading_tx_01.json" AnimationName="chixu" Loop="True" AnchorPoint="0.5,0" RelativePosition="-20.5,0.5" AbsPosition="-20.5,0.5" Name="armDutiao_WndDownLoad" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{C688DD1F-F872-4fa8-849D-CB51391C9105}" RelativeSize="1,0.5" AnchorPoint="0.5,0" RelativePosition="0.5,0" AbsPosition="480,14">
+                    <WZUIContainer Type="WZUIContainer" GUID="{6A210EBE-D51C-41d7-B3A2-7AA9466B6BD4}" RelativeSize="0.7,1" RelativePosition="0.0864583,0.5" Name="conDownTips_WndDownLoad" NameCreate="True" ShowAll="True" Visible="False" AbsPosition="83,16" AnchorPoint="0,0.5">
+                        <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" Dimensions="420,0" FontSize="22" GUID="{643ABBD5-18F0-4b21-9A79-EA325D7A5BE8}" MaxLength="100" Name="txtDownTips_WndDownLoad" RelativePosition="0,0.5" Text="" Type="WZUILabelTTF" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" LabelStyleKey="C18_F20_S4_C5" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{CBD0A434-187F-4c0a-A5BE-091715DC47A5}" Name="progDesTTF_WndDownLoad" FontSize="20" Color="99,255,95" Text="" RelativePosition="0.2,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" AbsPosition="860.251,31" LabelStyleKey="" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndDownLoad>

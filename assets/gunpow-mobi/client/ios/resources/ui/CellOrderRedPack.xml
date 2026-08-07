@@ -1,0 +1,28 @@
+﻿<CellOrderRedPack GUID="{fd166bf9-1945-4663-93b6-0f4b0441ffbd}">
+    <WZUIWindow Type="WZUIWindow" GUID="{3b215355-4a27-4627-865c-8b446b63c7ed}" LuaObjectName="CellOrderRedPack" Name="CellOrderRedPack" NameCreate="True" AbsContentSize="720,420" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{a9fbb1e0-c29c-4568-a4f3-6f5687e9534a}" Name="conRedboxAct_CellOrderRedPack" Visible="True" UseAbsSize="False" RelativePosition="0.5,0.471">
+            <WZUIImage Type="WZUIImage" GUID="{2ac6df96-f15c-428c-88b9-637c0660fe04}" File="ui/gameActivity/threeyear/anniversary_bg_006.png" UseOriginSize="True" RelativePosition="0.5,0.409524" ScaleY="1" AnchorPoint="0.5,0.5" Visible="True" />
+            <WZUIImage Type="WZUIImage" GUID="{271025ae-9db0-41ee-9c6d-8ca42021988d}" File="ui/gameActivity/threeyear/anniversary_text_008.png" UseOriginSize="True" RelativePosition="0.448611,0.638096" ScaleY="1" AnchorPoint="0.5,0.5" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{c89b9e15-ba1b-4324-bbb7-c9f2afb95efa}" AbsContentSize="220,40" UseAbsSize="True" RelativePosition="0.506527,0.316313" TouchContainerEnable="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{f72a38da-da5b-410e-addf-498ec6efd3a1}" File="ui/common/common_scale9_heidi4.png" UseOriginSize="True" Scale="0.7" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{cc3cb0b5-f43d-452a-9ad4-346ed2e92f2c}" Color="255,255,255" EnableStroke="False" StrokeSize="4" StrokeColor="158,0,0" TextKey="" FontSize="22" Name="txtOverTip_CellOrderRedPack" NameCreate="False" Visible="True" Text="" RelativePosition="0.504545,0.5" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{88486c50-4d45-4a93-b63b-3aef7371873c}" LabelStyleKey="" TextKey="REDPACK_ATT" RelativePosition="0.492776,0.203552" Alignment="Left" Color="255,255,255" EnableStroke="True" FontSize="18" StrokeColor="158,0,0" StrokeSize="4" />
+            <WZUIContainer Type="WZUIContainer" GUID="{33acd398-3b61-4bd9-884d-a59555c93c73}" AbsContentSize="116,58" UseAbsSize="True" RelativePosition="0.874426,0.116636" Visible="True" Name="conGoToChat_CellOrderRedPack">
+                <Button Type="WZUIButton" GUID="{d5ce2f11-f3fc-460d-962a-e2137693d7e1}" LuaDoneFunctionName="onClickGoTo" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{9bacc9a6-1acf-4c9e-809e-590be5af833a}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{4e4064e3-b9c6-4d17-af79-2b224585e6f4}" File="ui/common/common_btn_anniu10_0.png" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{ce6d54e0-f0b2-4266-80e1-76e7aa80e151}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{f81111d3-84cd-4795-a955-61720e6ebe1c}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{8a7e2245-6147-43ae-84f6-f6772ffd52bb}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{61a8a5d1-eabd-4be8-89c4-37c7a401aa80}" LabelStyleKey="SMALL_GREEN_BTN" TextKey="ACTIVE_BTN_GO" Name="txtStats_CellOrderRedPack" Text="已领完" />
+                </Button>
+            </WZUIContainer>
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{445712c8-6845-4335-9123-c5f7dc3f8f1a}" Name="ftbCountdown_CellOrderRedPack" ShowText="" MaxWidth="300" RelativePosition="0.504409,0.443883" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4d6b8ede-968a-4b52-9591-5cf52eadc7d4}" LabelStyleKey="" Text="" RelativePosition="0.222579,0.07" AnchorPoint="0,0.5" Name="txtRedboxTip_CellOrderRedPack" FontSize="18" Color="255,255,255" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f68b4b25-be7c-401a-8b27-c9d680d58efc}" LabelStyleKey="" Text="" RelativePosition="0.527795,0.07" AnchorPoint="0,0.5" Name="txtRedboxTime_CellOrderRedPack" Color="255,255,255" FontSize="18" />
+        </WZUIContainer>
+    </WZUIWindow>
+</CellOrderRedPack>

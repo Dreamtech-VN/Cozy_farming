@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<WndPvpRankLog GUID="{0935dcfd-820b-4acb-81c4-5f90ad7fe4e2}">
+	<WZUIWindow Type="WZUIWindow" GUID="{6B6950F8-5161-44ee-B6E8-146BEA038E66}" NameCreate="True" Name="WndPvpRankLog" LuaObjectName="WndPvpRankLog" UseAbsSize="False" AbsContentSize="">
+		<WZUIContainer Type="WZUIContainer" GUID="{0E6A650C-1797-426f-9A83-D34777EC71F6}" AbsContentSize="772,540" UseAbsSize="True" RelativePosition="0.497916,0.471875" Visible="True" ShowAll="True">
+			<WZUIContainer Type="WZUIContainer" GUID="{3329FC04-8ECD-4a91-98D4-392E75647348}" Visible="True">
+				<WZUI9Image Type="WZUI9Image" GUID="{0D0D0ACF-041C-4bd4-B59A-FC32FEB3BB51}" File="ui/common/common_scale9_di5.png" Opacity="255" RelativePosition="0.5,0.5" CapInsets="250,100,1,1" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{CE6B30C3-CEDC-419b-BD3A-84AEFC97ABBF}" TextKey="RANK_LOG" FontSize="26" Color="255,236,192" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" RelativePosition="0.494289,0.935813" LabelStyleKey="SMALL_WINDOW_TITLE" Name="" Text="" />
+				<WZUIContainer Type="WZUIContainer" GUID="{B5174E30-E9F4-4241-AFFC-E9EFFCE1C5D4}" AbsContentSize="760,416" UseAbsSize="True" RelativePosition="0.5,0.890741" AnchorPoint="0.5,1">
+					<WZUI9Image Type="WZUI9Image" GUID="{8DC72940-3548-48f2-BEAF-DAA11E7CE0E1}" File="ui/common/common_scale9_di6.png" />
+				</WZUIContainer>
+				<WZUIButton Type="WZUIButton" LuaDoneFunctionName="OnClose" GUID="{F41818A7-9CE1-40ed-B462-9427BEFA9A1C}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.947428,0.938465">
+					<NormalElement Type="WZUIContainer" GUID="{28DACAD1-EDEF-46ee-897E-E75B6F19F97D}">
+						<WZUIImage Type="WZUIImage" GUID="{56BBDED7-6CBD-4e23-8471-A1562E2550A0}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+					</NormalElement>
+					<SelectElement Type="WZUIContainer" GUID="{7EAB7EB6-A7E1-4b5e-B025-73808826179C}">
+						<WZUIImage Type="WZUIImage" GUID="{89E05750-FCB0-460d-9DC3-B6D54348C403}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+					</SelectElement>
+					<DisableElement Type="WZUIContainer" GUID="{EC060459-AD4A-4fcf-B93D-D15A5210B949}" />
+				</WZUIButton>
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{16E0330D-327E-41ab-A527-07A885FCEB51}" AbsContentSize="760,416" UseAbsSize="True" RelativePosition="0.5,0.890741" AnchorPoint="0.5,1" Name="">
+				<WZUIContainer Type="WZUIContainer" GUID="{C554EDB5-663B-459a-AEF9-8F8583F61F2C}" Name="conNoLog_WndPvpRankList" RelativePosition="0.5,0.497596">
+					<WZUIImage Type="WZUIImage" GUID="{B77DA2B7-30C2-4298-AC36-E276D771D0E5}" File="ui/common/common_pic_zanwu.png" UseOriginSize="True" Scale="0.7" />
+				</WZUIContainer>
+				<WZUITableContainer Type="WZUITableContainer" GUID="{14F50099-60D4-4e1e-9555-3FD1B7C61E02}" RelativeSize="0.96,0.9" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Name="tabLog_WndPvpRankList" CellElementHeight="0.18" EnableMoveHorizontal="False" />
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIWindow>
+</WndPvpRankLog>

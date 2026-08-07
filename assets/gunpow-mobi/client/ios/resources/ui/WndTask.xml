@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" ?>
+<WndTask GUID="{1CE40D05-3224-4246-829A-7E9CEF7DB012}">
+    <WZUIWindow GUID="{20FBAF38-118B-448e-A0B9-11AA2FB4E03D}" LuaObjectName="WndTask" LuaTouchBeganFunction="onTouchBegan" Name="WndTask" NameCreate="True" Type="WZUIWindow" ShowAll="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{3B396489-9CC2-4172-A914-84DC24087ADF}" AbsContentSize="775,535" UseAbsSize="True" RelativePosition="0.462,0.5" Visible="True" ShowAll="True" Name="conTop_WndTask">
+            <WZUIContainer Type="WZUIContainer" GUID="{5D1ACC3A-2FE9-4541-A8ED-4184EA12695F}" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{98FB40FD-69E1-42d5-8036-72B344F02274}" AnchorPoint="1,0.5" AbsContentSize="387.5,535" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{DEC2D4A5-4B87-4a6d-9663-164CDE549C90}" File="ui/common/common_scale9_di3.png" CapInsets="92,80,1,1" ShowRect="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{16E1D419-5235-4bfe-9423-457D898EADD3}" AnchorPoint="0,0.5" AbsContentSize="387.5,535" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{0E060BC3-CA01-42c1-BBE1-A88337EE7234}" File="ui/common/common_scale9_di3.png" CapInsets="92,80,1,1" ShowRect="False" FlipX="False" ScaleX="-1" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{DA1EF076-00EF-4465-B52D-7A949A27CCC3}" AbsContentSize="90,65" UseAbsSize="True" RelativePosition="0.942417,0.94254">
+                    <WZUIImage Type="WZUIImage" GUID="{2E13CC01-2DD6-4785-B3D5-B82AE0E325E9}" File="ui/common/common_icon_gb.png" UseOriginSize="True" RelativePosition="0.5,0.53077" AbsPosition="45,34.5" />
+                    <Button Type="WZUIButton" RelativePosition="0.55,0.5" AbsContentSize="90,65" UseAbsSize="True" GUID="{FB9D79DC-6B7F-4e98-9CD5-96DF48787CF9}" LuaDoneFunctionName="onClose" Name="btnClose_WndTask" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{2C5627DC-8458-4ab9-95C1-B6805B53FC8F}">
+                            <WZUIImage Type="WZUIImage" GUID="{68574A74-0614-428c-A860-63A0C7972F6D}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{0A4CAF53-BF7C-4a67-8DC3-6FC4F4FC18D7}">
+                            <WZUIImage Type="WZUIImage" GUID="{57A2F3B5-D6AF-4b6e-B99F-6A99624578E8}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{B0199C2C-6E13-43a9-A58D-0F4D414731FC}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{E143102C-A463-422e-A014-89E672996B65}" AbsContentSize="70,50" UseAbsSize="True" RelativePosition="0.5,0.943132" AbsPosition="387.5,504.576">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{3CE95144-FBEC-4996-91CA-99027CC711CA}" FontSize="28" Text="" Color="255,255,255" Name="txtWndTitleName_WndTask" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{24A73AE1-239D-4f66-B207-01BA7F03AEF7}" AbsContentSize="738,440" UseAbsSize="True" RelativePosition="0.5,0.456364">
+                    <WZUIContainer Type="WZUIContainer" GUID="{08813FA4-8652-4778-A168-13A7690CD58B}" AbsContentSize="738,440" UseAbsSize="True" RelativePosition="0.5,0.5">
+                        <WZUI9Image Type="WZUI9Image" GUID="{A0980C62-0A62-4b3d-917B-AFC8460878CD}" File="ui/common/common_scale9_di4.png" Opacity="255" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="725,440" GUID="{85F3632E-AD8A-4fdf-8E3E-FA09F6628240}" RelativePosition="0.5,0.456446" Type="WZUIContainer" UseAbsSize="True" Visible="True" Name="conTaskContent_WndTask">
+                <WZUIFreeListContainer AbsContentSize="725,320" EnableHideUnvisible="True" EnableMoveHorizontal="False" GUID="{5CBD7BEF-BA46-4a8b-9102-710E23052B94}" ListItemInterval="0" Name="flconDailyList_WndTask" Type="WZUIFreeListContainer" UseAbsSize="True" Visible="False" RelativePosition="0.5,0.386363" />
+                <WZUITableContainer Type="WZUITableContainer" GUID="{79699AD8-8523-4cbc-9F09-DE31189AA9C3}" Name="flconTaskList_WndTask" AbsContentSize="725,420" UseAbsSize="True" EnableMoveHorizontal="False" VerticalInterval="" CellElementHeight="0.295" />
+                <WZUIContainer Type="WZUIContainer" GUID="{5dfb49dd-3809-4e51-9cfd-3192da198ec7}" AnchorPoint="0.5,1" RelativePosition="0.5,1.00282" AbsContentSize="738,108" UseAbsSize="True" Name="conForActivity_WndTask" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{af1db1fb-ef9e-49c7-a586-b4d687978ed4}" File="ui/common_bg/task_activity_bg.png" UseOriginSize="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{562df232-116d-4cc9-836a-242c951ee6df}" RelativeSize="0.92,0.4" RelativePosition="0.497832,0.508103">
+                        <WZUIImage Type="WZUIImage" GUID="{f4b563cd-f850-48b2-ad5d-9e10270745f8}" File="ui/task/task_activity_progress_bg.png" UseOriginSize="True" ScaleX="1" Visible="True" RelativePosition="0.53,0.5" />
+                        <WZUIProgress Type="WZUIProgress" GUID="{d7223d75-a3c0-478a-a8dd-962c5f86171c}" BgPicture="ui/task/task_activity_progress.png" UseOriginSize="True" RelativePosition="0.53,0.51221" ScaleX="1" Name="prgActivity_WndTask" Percentage="0" />
+                        <WZUIImage Type="WZUIImage" GUID="{501cb499-8ee8-4ae7-870f-3b75c1e9bc12}" File="ui/task/task_pic_activity.png" UseOriginSize="True" RelativePosition="0.0486617,0.813872" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{cdd27429-0f18-425d-ba86-1c98bb61607f}" LabelStyleKey="C1_F18_S4_C15" Text="150" Name="txtCurActivityNum_WndTask" RelativePosition="0.0465897,0.59193" FontSize="28" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="127,70,26" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{230fbbaf-630f-4072-af18-5b679d033b3c}" LabelStyleKey="" Text="今日活跃度" Name="" RelativePosition="0.0465897,-0.262381" TextKey="PET_FETTER7" FontSize="18" Color="105,65,46" StrokeColor="255,255,255" StrokeSize="4" EnableStroke="True" />
+                        <Button Type="WZUIButton" GUID="{1d89b0d6-8815-4d2b-9193-8f071fdd5f04}" Tag="1" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.222093,0.723148" LuaDoneFunctionName="onClickBox">
+                            <NormalElement Type="WZUIContainer" GUID="{1294a7a6-9612-4ef1-a5c3-41bcc8fe1506}" />
+                            <SelectElement Type="WZUIContainer" GUID="{8cc93c64-d498-4bc5-a7cb-b1ba24855621}" />
+                            <DisableElement Type="WZUIContainer" GUID="{117b8c4b-16af-45da-abee-9f6a41bd4d7f}" />
+                            <WZUISpine Type="WZUISpine" GUID="{08fb4efb-d18a-4c0a-b7f8-47731da3eb85}" FileJson="city/ui_main_iconeffect.json" FileAtlas="city/ui_main_iconeffect.atlas" AnimationName="animation" Loop="True" Name="armBox1_WndTask" RelativePosition="0.5,0.98" Visible="False" TouchEnable="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{a34588e8-341f-4b99-92b4-3611cfa1b27f}" File="ui/task/task_activity_close1.png" UseOriginSize="True" Scale="1" Name="imgBox1_WndTask" AnchorPoint="0.5,0" RelativePosition="0.5,-0.0666667" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ffe1f9ae-5c84-48e5-911b-1e58181d085d}" LabelStyleKey="C1_F20_S4_C5" Name="txtTargetNum1_WndTask" Text="20" RelativePosition="0.45,-0.127" AnchorPoint="1,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{e677566b-abc1-4476-9b65-ff46f04c5979}" Name="imgActivityIcon1_WndTask" File="shopitems/family_star.png" Scale="0.5" AnchorPoint="0,0.5" RelativePosition="0.42,-0.100333" />
+                        </Button>
+                        <Button Type="WZUIButton" GUID="{10b529ea-e252-4cf0-8e5d-f0089c12861c}" Tag="2" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.4,0.7" LuaDoneFunctionName="onClickBox">
+                            <NormalElement Type="WZUIContainer" GUID="{c646819b-624f-4fc4-ae0e-ae48f0c61dc3}" />
+                            <SelectElement Type="WZUIContainer" GUID="{a1817984-2cd8-41e1-87c6-dd375095f3c2}" />
+                            <DisableElement Type="WZUIContainer" GUID="{e5dc9aa2-c212-420d-81f3-cde3a45a32ee}" />
+                            <WZUISpine Type="WZUISpine" GUID="{6d8516ee-f6fe-40fb-92d5-fa9af2c239cc}" FileJson="city/ui_main_iconeffect.json" FileAtlas="city/ui_main_iconeffect.atlas" AnimationName="animation" Loop="True" Name="armBox2_WndTask" RelativePosition="0.5,0.98" TouchEnable="False" Visible="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{3151f7b9-e6d2-4f2e-be84-aca2352196b4}" File="ui/task/task_activity_close2.png" UseOriginSize="True" Scale="1" Name="imgBox2_WndTask" AnchorPoint="0.5,0" RelativePosition="0.5,-0.0666667" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c7759726-89c2-46d0-9c2f-e208169d1593}" LabelStyleKey="C1_F20_S4_C5" Name="txtTargetNum2_WndTask" Text="20" RelativePosition="0.45,-0.127" AnchorPoint="1,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{5859ae12-1031-455a-8a45-30eb541fc7ba}" Name="imgActivityIcon2_WndTask" File="shopitems/family_star.png" Scale="0.5" AnchorPoint="0,0.5" RelativePosition="0.42,-0.100333" />
+                        </Button>
+                        <Button Type="WZUIButton" GUID="{92ec9c01-9841-4421-9a56-52ad3a52df1e}" Tag="3" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.6,0.7" LuaDoneFunctionName="onClickBox">
+                            <NormalElement Type="WZUIContainer" GUID="{1fa233a6-cfdd-4f91-81cd-9ef5bb878c19}" />
+                            <SelectElement Type="WZUIContainer" GUID="{d86efee4-2763-4035-994f-6652295943f1}" />
+                            <DisableElement Type="WZUIContainer" GUID="{63ff3407-3231-4890-ac2f-6b5215178fc1}" />
+                            <WZUISpine Type="WZUISpine" GUID="{2afe3999-18c1-46e0-8500-25c0162a0fcc}" FileJson="city/ui_main_iconeffect.json" FileAtlas="city/ui_main_iconeffect.atlas" AnimationName="animation" Loop="True" Name="armBox3_WndTask" RelativePosition="0.5,0.98" TouchEnable="False" Visible="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{e7ee7069-dda3-4ce1-87e2-4d556b24dc6b}" File="ui/task/task_activity_close3.png" UseOriginSize="True" Scale="1" Name="imgBox3_WndTask" AnchorPoint="0.5,0" RelativePosition="0.5,-0.0666667" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{16c42e01-c962-4f89-bfc1-c73df6abde81}" LabelStyleKey="C1_F20_S4_C5" Name="txtTargetNum3_WndTask" Text="20" RelativePosition="0.45,-0.127" AnchorPoint="1,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{d8898178-06c2-45d6-87a6-d6a30cc42875}" Name="imgActivityIcon3_WndTask" File="shopitems/family_star.png" Scale="0.5" AnchorPoint="0,0.5" RelativePosition="0.42,-0.100333" />
+                        </Button>
+                        <Button Type="WZUIButton" GUID="{5432a8dc-03d7-4b24-a38f-03b5609187ef}" Tag="4" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.8,0.7" LuaDoneFunctionName="onClickBox">
+                            <NormalElement Type="WZUIContainer" GUID="{8525720b-cbb4-401e-a04b-b076763bc35c}" />
+                            <SelectElement Type="WZUIContainer" GUID="{9a47be37-25ee-44db-a983-a9c142aa7368}" />
+                            <DisableElement Type="WZUIContainer" GUID="{4bf73207-9930-4153-b8e5-fb7bd9e2a02e}" />
+                            <WZUISpine Type="WZUISpine" GUID="{b94bf7dc-1254-4899-809e-ea3ebc0e5a41}" FileJson="city/ui_main_iconeffect.json" FileAtlas="city/ui_main_iconeffect.atlas" AnimationName="animation" Loop="True" Name="armBox4_WndTask" RelativePosition="0.5,0.98" TouchEnable="False" Visible="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{98658b40-5228-412c-8a92-a42d820f7199}" File="ui/task/task_activity_close4.png" UseOriginSize="True" Scale="1" Name="imgBox4_WndTask" AnchorPoint="0.5,0" RelativePosition="0.5,-0.0666667" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{04032efc-52e9-41f9-8fbf-8136a2d6efeb}" LabelStyleKey="C1_F20_S4_C5" Name="txtTargetNum4_WndTask" Text="20" RelativePosition="0.45,-0.127" AnchorPoint="1,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{10a2caf9-4f43-4fc2-9391-90609a65d51d}" Name="imgActivityIcon4_WndTask" File="shopitems/family_star.png" Scale="0.5" AnchorPoint="0,0.5" RelativePosition="0.42,-0.100333" />
+                        </Button>
+                        <Button Type="WZUIButton" GUID="{45c6155b-9d14-4f8b-9794-ebb59d106222}" Tag="5" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="1,0.7" LuaDoneFunctionName="onClickBox">
+                            <NormalElement Type="WZUIContainer" GUID="{27ca8d5e-2e63-4495-a71f-c1294b5e4b39}" />
+                            <SelectElement Type="WZUIContainer" GUID="{7610a250-f3ea-4787-83f3-908a11c08149}" />
+                            <DisableElement Type="WZUIContainer" GUID="{1ed52130-4922-4428-ab05-4cced38f2e56}" />
+                            <WZUISpine Type="WZUISpine" GUID="{51acc3cd-c4f3-4604-a0dc-04188a7ba7a5}" FileJson="city/ui_main_iconeffect.json" FileAtlas="city/ui_main_iconeffect.atlas" AnimationName="animation" Loop="True" Name="armBox5_WndTask" RelativePosition="0.5,0.98" Visible="False" TouchEnable="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{ca5352ba-5cdc-4649-b606-6aa1cfe2b0b6}" File="ui/task/task_activity_close5.png" UseOriginSize="True" Scale="1" Name="imgBox5_WndTask" AnchorPoint="0.5,0" RelativePosition="0.5,-0.0666667" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f05ea884-2e3a-4f25-8116-a9b1e6b31557}" LabelStyleKey="C1_F20_S4_C5" Name="txtTargetNum5_WndTask" Text="20" RelativePosition="0.45,-0.127" AnchorPoint="1,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{e059a447-fb59-410f-bee2-5aada34140ff}" Name="imgActivityIcon5_WndTask" File="shopitems/family_star.png" Scale="0.5" AnchorPoint="0,0.5" RelativePosition="0.42,-0.100333" />
+                        </Button>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="100,520" AnchorPoint="0,0.5" GUID="{E8C22D6A-8374-4dcf-BD20-8A5CAA25D20D}" RelativePosition="0.965547,0.380817" RelativeSize="0.07,1" Type="WZUIContainer" UseAbsSize="True" Name="conMidRight_WndFriends" Order="-1">
+                <WZUICheckBoxGroup GUID="{3E497B6E-93F2-4139-A27C-249BA684A627}" Type="WZUICheckBoxGroup" RelativePosition="0.58,1" RelativeSize="1,0.5" AnchorPoint="0.5,1" Name="type_selected_group" CheckBox="">
+                    <CheckBox AbsContentSize="82,66" AnchorPoint="0.5,0.5" GUID="{7BA20627-E37C-46e9-85EC-EFEBD245DE9A}" LuaSelectedFunctionName="onMainTaskSelected" Name="checkBoxMain_WndTask" RelativePosition="0.56,0.85" SelectedIndex="0" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" Tag="1" RelativeSize="1,1">
+                        <CheckElement GUID="{F6A913C3-DF59-4c4a-8874-37B3BB831840}" TouchContainerEnable="True" Type="WZUIContainer">
+                            <WZUI9Image Type="WZUI9Image" GUID="{1BB9DD8A-E986-4012-AF89-55C140DE0842}" File="ui/common/common_btn_biaoqian.png" RelativePosition="0.4875,0.5" />
+                            <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{FD374FF2-100C-4a20-B2D2-87240DBAFB9C}" Name="txtMainTask_WndTask" StrokeColor="105,65,46" StrokeSize="4" Type="WZUILabelTTF" Text="" TextKey="TASK_JUQING" />
+                        </CheckElement>
+                        <CheckElement GUID="{035ECEF3-3C63-4541-965F-6FAF94CC6ED9}" TouchContainerEnable="True" Type="WZUIContainer" />
+                    </CheckBox>
+                    <CheckBox AbsContentSize="82,66" AnchorPoint="0.5,0.5" GUID="{2421980C-CC05-4c05-8925-E9E79C65FD43}" LuaSelectedFunctionName="onBranchTaskSelected" Name="checkBoxBranch_WndTask" RelativePosition="0.56,0.56" SelectedIndex="0" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" Tag="2" RelativeSize="1,1">
+                        <CheckElement GUID="{BFEB7274-1CF7-48ba-A0CB-F8C4835E13F0}" TouchContainerEnable="True" Type="WZUIContainer">
+                            <WZUI9Image Type="WZUI9Image" GUID="{38F86F00-DEA9-460e-9479-B64D43FB33A1}" File="ui/common/common_btn_biaoqian.png" RelativePosition="0.4875,0.5" />
+                            <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{F512DAAB-CE91-4384-9D8A-B56C27F1B7B0}" Name="txtBranchTask_WndTask" StrokeColor="105,65,46" StrokeSize="4" Type="WZUILabelTTF" Text="" TextKey="TASK_BRANCH" />
+                        </CheckElement>
+                        <CheckElement GUID="{5633507A-D12E-4b37-9890-6217C1F94E83}" TouchContainerEnable="True" Type="WZUIContainer" />
+                    </CheckBox>
+                    <CheckBox AbsContentSize="82,66" AnchorPoint="0.5,0.5" GUID="{DA8FA630-D123-4a3c-88BF-A93CCF07C254}" LuaSelectedFunctionName="onDailyTaskSelected" Name="checkBoxDaily_WndTask" RelativePosition="0.56,0.27" SelectedIndex="0" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" Tag="3" RelativeSize="1,1">
+                        <CheckElement GUID="{D99CA80A-C3BB-4c6d-A24E-215879AC6F44}" TouchContainerEnable="True" Type="WZUIContainer">
+                            <WZUI9Image Type="WZUI9Image" GUID="{E5089AE8-1068-4e19-8999-6041D5BED8B0}" File="ui/common/common_btn_biaoqian.png" RelativePosition="0.4875,0.5" />
+                            <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{39032CDA-A86B-4493-A8A6-35717A8A16A3}" Name="txtDailyTask_WndTask" StrokeColor="105,65,46" StrokeSize="4" Type="WZUILabelTTF" Text="" TextKey="TASK_MEIRI" />
+                        </CheckElement>
+                        <CheckElement GUID="{F31AB88B-C850-4137-8D17-FE8E6FCBF7F8}" TouchContainerEnable="True" Type="WZUIContainer" />
+                    </CheckBox>
+                    <CheckBox AbsContentSize="82,66" AnchorPoint="0.5,0.5" GUID="{69bd92c8-081b-41d7-aefd-1d59ec898452}" LuaSelectedFunctionName="onAthleticsSelected" Name="checkBoxAthletics_WndTask" RelativePosition="0.56,-0.02" SelectedIndex="0" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" Tag="3" RelativeSize="1,1">
+                        <CheckElement GUID="{7c821416-eca0-4777-96d2-00c7de40e05e}" TouchContainerEnable="True" Type="WZUIContainer">
+                            <WZUI9Image Type="WZUI9Image" GUID="{b31bf183-3e6e-4a1d-a4ec-2b7bb0f56eea}" File="ui/common/common_btn_biaoqian.png" RelativePosition="0.4875,0.5" />
+                            <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{4e0d4208-02b9-4d41-9cba-e7da13fb35e6}" Name="txtAthleticsTask_WndTask" StrokeColor="105,65,46" StrokeSize="4" Type="WZUILabelTTF" Text="" TextKey="ATGHLETICS" />
+                        </CheckElement>
+                        <CheckElement GUID="{9db9b410-c23e-4c5f-a22b-e8a25daf6bd6}" TouchContainerEnable="True" Type="WZUIContainer" />
+                    </CheckBox>
+                </WZUICheckBoxGroup>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="100,520" AnchorPoint="0,0.5" GUID="{5D1A711B-43BE-4264-9D1B-9386287C4920}" RelativePosition="0.965547,0.380817" RelativeSize="0.07,1" Type="WZUIContainer" UseAbsSize="True" Name="" Order="0">
+                <WZUIContainer Type="WZUIContainer" GUID="{3274132E-C85F-49ee-84B5-F8AD0461485B}" AbsContentSize="100,520" RelativeSize="1,0.5" RelativePosition="0.585,1" AnchorPoint="0.5,1" Visible="True">
+                    <WZUIContainer GUID="{D6EDF6BC-2DE5-4efb-A6C9-7A8A05628039}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="80,66" UseAbsSize="True" RelativePosition="0.55,0.85" Name="conCheckBoxMainSel_WndTask" AbsPosition="55,221" Visible="False">
+                        <WZUI9Image Type="WZUI9Image" GUID="{01AA2478-B48F-4ed6-BA13-DAF981BD33CD}" File="ui/common/common_btn_biaoqian_sel.png" />
+                        <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{3E941DFC-3AFB-4a02-9AEC-D4EB4D7AE79F}" Name="txtMainTask_1_WndTask" StrokeColor="128,54,13" StrokeSize="4" Type="WZUILabelTTF" Text="" />
+                    </WZUIContainer>
+                    <WZUIContainer GUID="{8D9D2259-87BE-4f1a-9F34-7D47DF150C01}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="80,66" UseAbsSize="True" RelativePosition="0.55,0.56" Name="conCheckBoxBranchSel_WndTask" Visible="False" AbsPosition="55,145.6">
+                        <WZUI9Image Type="WZUI9Image" GUID="{9F7F85E0-8C51-43d0-916B-824928917F33}" File="ui/common/common_btn_biaoqian_sel.png" />
+                        <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{CAA50730-4B16-4af5-A1CE-42EF401EC968}" Name="txtBranchTask_1_WndTask" StrokeColor="128,54,13" StrokeSize="4" Type="WZUILabelTTF" Text="" />
+                    </WZUIContainer>
+                    <WZUIContainer GUID="{6C215EA6-2858-43fe-B435-FE2DF98C8996}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="80,66" UseAbsSize="True" RelativePosition="0.55,0.27" Name="conCheckBoxDailySel_WndTask" Visible="False" AbsPosition="55,70.2">
+                        <WZUI9Image Type="WZUI9Image" GUID="{94BD3D7B-1D83-44ff-ACB4-A5DF2B879E66}" File="ui/common/common_btn_biaoqian_sel.png" />
+                        <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{3CA02ED4-A2EF-4e53-A3D9-C901D8BAD0E3}" Name="txtDailyTask_1_WndTask" StrokeColor="128,54,13" StrokeSize="4" Type="WZUILabelTTF" Text="" />
+                    </WZUIContainer>
+                    <WZUIContainer GUID="{364f1612-53a6-4c48-bc99-cbfaeff4c833}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="80,66" UseAbsSize="True" RelativePosition="0.55,-0.02" Name="conCheckBoxAthleticsSel_WndTask" Visible="False" AbsPosition="55,70.2">
+                        <WZUI9Image Type="WZUI9Image" GUID="{818ab792-45ed-4428-856e-4d6e55378d55}" File="ui/common/common_btn_biaoqian_sel.png" />
+                        <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{f08d5496-9440-4c69-a633-1d9942883d49}" Name="txtAthleticsTask_1_WndTask" StrokeColor="128,54,13" StrokeSize="4" Type="WZUILabelTTF" Text="" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="44,48" GUID="{E6B6F6F3-439C-4337-9FE4-8BB564AF5625}" Name="con_MainTaskIconNum" RelativePosition="0.96,0.975769" Scale="1" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{8CA2B648-56C5-4226-9798-65799266DC11}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="44,48" GUID="{D4579D4D-39DC-4640-BC77-3E72886F501A}" Name="con_BranchTaskIconNum" RelativePosition="0.96,0.834231" Scale="1" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{C25140E7-FD00-45ae-B633-FDACA5260264}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="44,48" GUID="{05EC7273-BCC6-40c0-9B39-26C1A5C50927}" Name="con_DailyTaskIconNum" RelativePosition="0.96,0.689231" Scale="1" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{93A3390D-1BE1-4c81-A5D4-7C0E1D82D47F}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="44,48" GUID="{52c1349b-ff07-4210-a88f-4503caf3f8a5}" Name="con_AthleticsTaskIconNum" RelativePosition="0.96,0.54" Scale="1" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{a95bc0ba-2352-4ed2-87e8-8ab6d85719a2}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTask>

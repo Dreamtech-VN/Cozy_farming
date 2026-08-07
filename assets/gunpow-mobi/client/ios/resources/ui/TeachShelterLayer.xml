@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<TeachShelterLayer GUID="{6474936C-390F-4195-8B4D-3F50852F7B0E}">
+	<WZUIContainer GUID="{A14BD32F-B423-404b-B8E5-E44F783ED14C}" Name="TeachShelterLayer" NameCreate="True" Type="WZUIContainer">
+		<WZUIRenderTextureContainer AbsContentSize="0,0" ClearColor="0,0,0,0" GUID="{6CDD198D-C95B-473f-AB2F-26E84290CA8D}" Name="RenderCon_TeachShelterLayer" ShowAll="False" Type="WZUIRenderTextureContainer" UseAbsSize="False">
+			<WZUIImage File="ui/common/common_black_bg.png" GUID="{EC702C92-10BD-4a07-A680-A8C708431ECC}" Opacity="100" TouchEnable="False" Type="WZUIImage" Name="imgBlack_TeachShelterLayer" />
+			<WZUITouchClippingContainer GUID="{142F6DA8-6D37-4ab2-84F3-E7C427A1331F}" Name="clipCon_TeachShelterLayer" Type="WZUITouchClippingContainer" />
+			<WZUIContainer Type="WZUIContainer" GUID="{4DED170F-181F-4280-BA6F-6C4FB9B447E7}" ShowAll="True" Name="conShow_TeachShelterLayer" Visible="False">
+				<WZUILabelTTF BoldFont="True" Color="255,227,116" EnableStroke="True" FontSize="28" GUID="{CE7228B8-E6DC-49c0-AFA1-804F39886E38}" Name="txtDesc_TeachShelterLayer" RelativePosition="0.5,0.87" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="62,34,8" StrokeOffset="0,0" StrokeSize="4" Type="WZUILabelTTF" Text="" Alignment="Left" AnchorPoint="0.5,0" Visible="True" Order="1" Dimensions="700,0" />
+				<WZUIContainer Type="WZUIContainer" GUID="{5DFA170F-281F-4280-BA6F-6C4FB9B447E7}" ShowAll="False" Name="conTTF_TeachShelterLayer" Visible="False">
+					<WZUILabelTTF BoldFont="True" Color="255,227,116" EnableStroke="True" FontSize="28" GUID="{CD7228B8-E6DC-49c0-AFA1-804F31889E38}" Name="txtContinue_TeachShelterLayer" RelativePosition="0.5,0.05" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="62,34,8" StrokeOffset="0,0" StrokeSize="4" Type="WZUILabelTTF" Text="点击屏幕继续..." Alignment="Left" AnchorPoint="0.5,0" Visible="True" Order="1" />
+				</WZUIContainer>
+			</WZUIContainer>
+		</WZUIRenderTextureContainer>
+		<WZUIContainer Type="WZUIContainer" GUID="{95C04A55-7A5A-4b0b-9413-C68AD907B89C}" Name="conText_TeachShelterLayer" />
+	</WZUIContainer>
+	<WZUIImage BlendFuncSrc="0" File="ui/teach/65.png" GUID="{8B8F48C3-CE4C-4df3-881D-1399BB2DCC12}" Name="ImgTeachClip" NameCreate="True" ShowAll="True" TouchEnable="False" Type="WZUIImage" UseOriginSizeProportion="True" />
+	<WZArmature Type="WZArmature" GUID="{0FBF6A0F-9D17-422e-98B8-5BD6EB7247C7}" ArmatureName="zhiyin_dianji_anniu_01" UseOriginSize="False" RelativePosition="0.5,0.5" Visible="True" RelativeSize="1,1" TouchEnable="False" TouchSwallow="False" UseAbsCoordinate="False" AbsPosition="0,0" GrayRender="False" ArmatureFile="teach/zhiyin_dianji_anniu_01.xml" Name="armaBtn_TeachShelterLayer" AnchorPoint="0.5,0.5" ShowAll="True" UseOriginSizeProportion="True">
+		<Action Type="WZUIArmatureAnimationById" GUID="{EDD69E6E-4F57-4d43-9979-395F80B11DE6}" Bone="" AnimationId="0" Loop="-1" IsLoop="False" RunTimes="1" />
+	</WZArmature>
+	<WZArmature Type="WZArmature" GUID="{98EF8341-E232-4d2a-BB48-62FF1CC7D276}" ArmatureName="zhiyin_dianji_anniu_01" UseOriginSize="True" RelativePosition="0.5,0.5" Visible="True" RelativeSize="0.9,0.9" TouchEnable="False" TouchSwallow="False" UseAbsCoordinate="False" AbsPosition="0,0" GrayRender="False" ArmatureFile="teach/zhiyin_dianji_anniu_01.xml" Name="armaBuilding_TeachShelterLayer" AnchorPoint="0.5,0.5" ShowAll="True" UseOriginSizeProportion="True">
+		<Action Type="WZUIArmatureAnimationById" GUID="{582A53D3-B753-4672-8813-15CF01F381E6}" Bone="" AnimationId="3" Loop="-1" IsLoop="False" RunTimes="1" />
+	</WZArmature>
+	<WZArmature Type="WZArmature" GUID="{4F3CBBB1-432C-4043-B2F1-595FD3422776}" ArmatureName="zhiyin_dianji_anniu_01" UseOriginSize="False" RelativePosition="0.5,0.5" Visible="True" RelativeSize="1,1" TouchEnable="False" TouchSwallow="False" UseAbsCoordinate="False" AbsPosition="0,0" GrayRender="False" ArmatureFile="teach/zhiyin_dianji_anniu_01.xml" Name="armaArea_TeachShelterLayer" AnchorPoint="0.5,0.5" ShowAll="True" UseOriginSizeProportion="True">
+		<Action Type="WZUIArmatureAnimationById" GUID="{50D15D1D-20F6-41d9-925A-DFCAEF9BA49F}" Bone="" AnimationId="1" Loop="-1" IsLoop="False" RunTimes="1" />
+	</WZArmature>
+	<WZUIContainer Type="WZUIContainer" GUID="{8274AC1C-5BF3-452e-94C8-DEF60D5CA59E}" AbsContentSize="1136,158" UseAbsSize="False" RelativePosition="-0.424454,-0.605" AnchorPoint="1,0" Visible="True" Name="conImg9_TeachShelterLayer" TouchEnable="False">
+		<WZUI9Image Type="WZUI9Image" GUID="{90668E8C-CE0A-4c1f-91F6-EE73DCBF9EF4}" File="ui/teach/common_scale9_xinshouydk.png" UseOriginSize="False" Name="img9_TeachShelterLayer" TouchEnable="False" />
+	</WZUIContainer>
+	<WZUIWindow GUID="{1DF50B37-F021-4ca8-A013-8E1B610531AD}" Name="WndTeachTouch" NameCreate="True" ShowAll="True" TouchContainerEnable="True" Type="WZUIWindow" UseAbsSize="True">
+		<WZUIImage File="ui/common/transparent_bg.png" GUID="{2AD45308-8088-40b7-BD9B-5EF15DD2343B}" Name="imgTeachTouch" Type="WZUIImage" />
+	</WZUIWindow>
+	<WZArmature Type="WZArmature" GUID="{8A5AE5ED-53A0-46ed-B50A-14EE9B8A1995}" ArmatureName="zhiyin_dianji_anniu_01" UseOriginSize="True" RelativePosition="0.5,0.5" Visible="True" RelativeSize="0.9,0.9" TouchEnable="False" TouchSwallow="False" UseAbsCoordinate="False" AbsPosition="0,0" GrayRender="False" ArmatureFile="teach/zhiyin_dianji_anniu_01.xml" Name="armaBtnSqure_TeachShelterLayer" AnchorPoint="0.5,0.5" ShowAll="True" UseOriginSizeProportion="True">
+		<Action Type="WZUIArmatureAnimationById" GUID="{AE333165-A8B2-499d-86FF-927AF892567A}" Bone="" AnimationId="3" Loop="-1" IsLoop="False" RunTimes="1" />
+	</WZArmature>
+</TeachShelterLayer>

@@ -1,0 +1,18 @@
+ï»¿<CellSkinSkill GUID="{cbc23a26-0f93-48e9-a5e8-18a39cc7775b}">
+    <WZUIContainer Type="WZUIContainer" GUID="{6d51e2b5-ffb9-4d9f-a4aa-7341d097ec88}" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.5,0.5" Name="CellSkinSkill" Visible="True" TouchSwallow="False" TouchContainerEnable="True" TouchEnable="True" AbsPosition="351.614,246.684" LuaObjectName="CellSkinSkill">
+        <WZUIContainer Type="WZUIContainer" GUID="{86415a8c-7b19-498d-a473-9d342a44f622}" AbsContentSize="80£¬80" UseAbsSize="True" RelativePosition="0.5,0.488889" AnchorPoint="0.5,0.5" RelativeSize="1,1" AbsPosition="45,44">
+            <WZUIImage Type="WZUIImage" GUID="{2c6f3fe3-3807-4c39-9d99-c7cd1094d62a}" File="ui/common/common_icon_jinengkuang.png" UseOriginSize="False" GrayRender="False" Name="imgSkillBg_WndSkillProp" RelativePosition="0.5,0.5" AbsPosition="40,39" Visible="True" />
+            <WZUI9Image Type="WZUI9Image" GUID="{961b2c56-5300-4d33-bdc1-7bd0b9ed5ee7}" Name="imgSelectBg_WndSkillProp" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.4875" AbsPosition="40,39" ScaleY="0.9" Visible="False" ScaleX="0.95" />
+            <WZUIImage Type="WZUIImage" GUID="{83653b3b-23e8-40e9-ab59-cd51a8b318d4}" File="ui/combat/common_icon_kdi.png" UseOriginSize="True" ScaleY="0.95" RelativePosition="0.5,0.525641" Name="" Visible="True" />
+            <WZUIImage Type="WZUIImage" GUID="{fb40a17c-b8c9-4a27-b646-674825eb100f}" File="" UseOriginSize="True" RelativeSize="1,1" Name="imgSkill_WndSkillProp" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" GrayRender="False" Scale="1.2" ScaleX="1.2" ScaleY="1.2" />
+            <WZUIImage Type="WZUIImage" GUID="{29c548fa-0fad-4047-a49a-e87759e81731}" Name="imgSkillStats_WndSkillProp" File="ui/common/common_icon_zhuangbeizhong.png" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0.078721,0.939846" Scale="1" AbsPosition="6.29768,75.1877" Visible="False" />
+            <WZUIImage Type="WZUIImage" GUID="{7d318913-93a4-4922-ab2d-0fc6056305da}" Name="imgSkillLevel_WndSkillProp" File="" UseOriginSize="True" RelativePosition="0.75,0.2375" AbsPosition="60,19" Visible="False" />
+            <WZUIImage Type="WZUIImage" GUID="{7da31ccb-280c-44d2-92f6-e1e32a6647fe}" Name="imgRed_conSkillInfo" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="1.00961,0.947756" Visible="False" AbsPosition="80.7692,75.8205" />
+        </WZUIContainer>
+        <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickSkill" GUID="{10bc2906-8ff7-464f-a16d-c4a120b838d0}" Name="btnSkillInfo_WndSkillProp" AbsContentSize="0,0" UseAbsSize="False">
+            <NormalElement Type="WZUIContainer" GUID="{c6a39c35-740e-4dbc-be40-ea7bd4f01fd9}" />
+            <SelectElement Type="WZUIContainer" GUID="{b3b3c834-7326-4142-91ea-38f71b74e34b}" />
+            <DisableElement Type="WZUIContainer" GUID="{d92e5838-1a09-4141-8e08-5b4d3749cbc9}" />
+        </WZUIButton>
+    </WZUIContainer>
+</CellSkinSkill>

@@ -1,0 +1,34 @@
+﻿<CellCompeteTask GUID="{0b06f4ee-0fe5-4cfc-bb38-43378fd23c5b}">
+    <WZUIContainer Type="WZUIContainer" GUID="{037fe0a8-bbc8-43a7-8bb2-b12f4d79b936}" AbsContentSize="730,110" UseAbsSize="True" Name="CellCompeteTask" NameCreate="True" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{a485b357-b48c-4f6f-b85e-14d91384f616}" AbsContentSize="730,100" UseAbsSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+            <WZUIContainer Type="WZUIContainer" GUID="{4e73d2d4-c869-4e64-a363-32c1486a6734}" AbsContentSize="730,100" UseAbsSize="True" Order="2">
+                <WZUIContainer Type="WZUIContainer" GUID="{10b6d7d7-06fc-4560-bc1a-032398e31f5b}" AbsContentSize="150,80" UseAbsSize="True" RelativePosition="0.88,0.5" Name="conPlaying">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ef773fd3-9455-4692-a46f-b7c203e1d9d6}" TextKey="" Text="参赛" LabelStyleKey="C13_F22" AnchorPoint="0.5,0.5" AbsPosition="0,0.0" RelativePosition="0.5,0.65" Name="label_name" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{bcd994ef-54c9-43cb-aecd-068e691ee9c2}" Text="80/99" LabelStyleKey="C6_F22" RelativePosition="0.5,0.35" Name="label_param" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{a1a3ee06-d62f-4673-9923-614838cbf07e}" AbsContentSize="150,80" UseAbsSize="True" RelativePosition="0.88,0.5" Visible="False" Name="conFinish">
+                    <Button Type="WZUIButton" GUID="{296391cc-e0fc-4114-865f-bdb4c060e4c5}" Name="btn_get" LuaDoneFunctionName="onClick">
+                        <NormalElement Type="WZUIContainer" GUID="{46e44b10-c859-4ebd-9651-aa66c87ca218}">
+                            <WZUIImage Type="WZUIImage" GUID="{534b580c-aacb-414a-a841-c6e408ee37de}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{40e96b0d-c104-445f-b4b1-67d6adb8bd1c}">
+                            <WZUIImage Type="WZUIImage" GUID="{fd43fac1-e3cb-4a2f-af93-1a26c20ad7ab}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{a777f7fc-1a3b-446f-87c7-80c24bc3774b}" />
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8bd5d68b-af01-4c48-be57-e13cff556d76}" TextKey="COMMUNITYWARTASK_TEXT4" Text="领取" LabelStyleKey="C1_F24_S4_C4" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{602c72a6-4109-4920-9e30-ad894bc2f973}" AbsContentSize="730,100" UseAbsSize="True" Order="1">
+                <WZUIContainer Type="WZUIContainer" GUID="{c187f4a1-ae21-47db-9057-29ebc35912ba}" Name="conItem1_Cell" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.1,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{a45f57f8-f6e7-42b0-837d-47e7bc133bf9}" Name="conItem2_Cell" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.23,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{6587d776-9c77-4881-9a61-b2e8375e74cc}" Name="conItem3_Cell" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.36,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{250738be-6413-4bcb-9e8e-2bc2ed2fd798}" Name="conItem4_Cell" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.49,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{c31c2e4c-a759-495b-ae92-128961cd6d2d}" Name="conItem5_Cell" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.62,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{3395b454-ded0-41ca-8d2f-08cd2e7420e4}" AbsContentSize="730,100" UseAbsSize="True" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{e5b5be49-2b73-445d-80cc-df2e76cf9321}" File="ui/common/common_scale9_di7.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCompeteTask>

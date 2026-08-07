@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><levelUp GUID="{4C1562D8-202B-4341-BDA2-E8E709CC6B87}">
+    <WZUIContainer GUID="{29A96001-193F-471f-B830-6A2E771AAEB3}" Name="levelUp" NameCreate="True" Type="WZUIContainer">
+        <WZUIContainer GUID="{ED3D61BA-3A63-4e76-AEF4-33913FAF89C4}" Name="aniLevelUp" RelativePosition="0.50563,0.627536" Scale="0.5" Type="WZUIContainer" Visible="True">
+            <WZParticleSystemQuad AngleVar="110" BlendFuncSrc="" Duration="0.5" EmissionRate="250" EndSize="10" GUID="{D015DFF4-88C8-453c-A1B9-419783F5D8F2}" Life="1.2" ModeAGravity="0,-1000" ModeARadialAccel="0" ModeASpeed="500" ModeASpeedVar="100" ModeATangentialAccel="" ModeATangentialAccelVar="150" Name="baoKaiLiZi" RelativePosition="0.5,0.5" StartSize="30" StartSizeVar="20" TextureFile="battleeffects/ui/animation/fireFrame.png" TotalParticles="120" Type="WZParticleSystemQuad" Visible="False">
+                <Action Duration="0.5" FinishLuaFunction="" GUID="{F112348F-F17F-41d8-85D0-3A8320B222CC}" Type="WZUIActionSequence">
+                    <ChildAction Duration="0.5" GUID="{B621E486-8F83-4f8e-AFCC-1A527C21B78F}" Type="WZUIActionDelayTime"/>
+                    <ChildAction GUID="{70CCD771-C199-4272-A27C-C0A9ACC34A59}" Type="WZUIActionShow"/>
+                </Action>
+            </WZParticleSystemQuad>
+        </WZUIContainer>
+        <WZUIContainer GUID="{8558C1E5-F095-440e-8620-277CDA73BE09}" Name="aniLevelUp" RelativePosition="0.50563,0.627536" Scale="0.5" Type="WZUIContainer">
+            <WZParticleSystemQuad AngleVar="110" BlendFuncSrc="" Duration="0.5" EmissionRate="250" EndColor="" EndColorVar="0,0,0,0" EndSize="10" EndSpin="360" EndSpinVar="270" GUID="{6061F2F9-40B9-41ce-84C3-835A2CAD48ED}" Life="1.2" ModeAGravity="0,-1000" ModeARadialAccel="0" ModeASpeed="500" ModeASpeedVar="100" ModeATangentialAccel="" ModeATangentialAccelVar="150" Name="baoKaiLiZi" OpacityModifyRGB="True" RelativePosition="0.5,0.5" StartColor="1,1,1,1" StartColorVar="1,1,1,1" StartSize="30" StartSizeVar="25" TextureFile="battleeffects/ui/animation/fireFrame3.png" TotalParticles="10" Type="WZParticleSystemQuad" Visible="False">
+                <Action Duration="0.5" FinishLuaFunction="" GUID="{61C2EC02-E50B-4aed-9709-1914D7EBC0AA}" Type="WZUIActionSequence">
+                    <ChildAction Duration="0.5" GUID="{FA7606E2-3BC2-45da-95C0-0FA2D630EF42}" Type="WZUIActionDelayTime"/>
+                    <ChildAction GUID="{9527A94D-441E-4f8e-B824-9179F00460C0}" Type="WZUIActionShow"/>
+                </Action>
+            </WZParticleSystemQuad>
+        </WZUIContainer>
+        <WZUIContainer GUID="{4DE1586C-F1BB-4e5b-AC4B-B5F7BBDEC3E6}" Name="aniLevelUp" RelativePosition="0.50563,0.627536" Scale="0.5" Type="WZUIContainer">
+            <WZParticleSystemQuad AngleVar="220" BlendFuncDst="600" BlendFuncSrc="" Duration="0.5" EmissionRate="250" EndColor="" EndColorVar="0.1,0.3,0.5,0.7" EndSize="10" EndSpin="360" EndSpinVar="270" GUID="{C209C758-3DF0-41b3-99CC-95CE46798FFE}" Life="1.2" ModeAGravity="0,-1000" ModeARadialAccel="0" ModeASpeed="500" ModeASpeedVar="100" ModeATangentialAccel="" ModeATangentialAccelVar="150" Name="baoKaiLiZi" OpacityModifyRGB="True" RelativePosition="0.5,0.5" StartColor="1,1,1,1" StartColorVar="1,1,1,1" StartSize="30" StartSizeVar="25" TextureFile="battleeffects/ui/animation/fireFrame4.png" TotalParticles="50" Type="WZParticleSystemQuad" Visible="False">
+                <Action Duration="0.5" FinishLuaFunction="" GUID="{AF8AA68F-D746-4ccc-BDAD-37ACCDBBF5B9}" Type="WZUIActionSequence">
+                    <ChildAction Duration="0.5" GUID="{F1BA5613-5234-4f83-8FB4-50E84F16279C}" Type="WZUIActionDelayTime"/>
+                    <ChildAction GUID="{5383967D-7F05-4f10-B497-509B0136BD5F}" Type="WZUIActionShow"/>
+                </Action>
+            </WZParticleSystemQuad>
+        </WZUIContainer>
+        <WZUIContainer GUID="{13E21CC6-0746-44b9-9FEC-55C5FC0E7EC3}" Name="aniLevelUp" RelativePosition="0.50563,0.627536" Scale="0.5" Type="WZUIContainer">
+            <WZParticleSystemQuad AngleVar="220" BlendFuncDst="600" BlendFuncSrc="" Duration="0.5" EmissionRate="250" EndColor="" EndColorVar="0.1,0.3,0.5,0.7" EndSize="10" EndSpin="360" EndSpinVar="270" GUID="{9EE3252B-9346-451f-B83D-95EEDA9F230A}" Life="1.2" ModeAGravity="0,-1000" ModeARadialAccel="0" ModeASpeed="500" ModeASpeedVar="100" ModeATangentialAccel="" ModeATangentialAccelVar="150" Name="baoKaiLiZi" OpacityModifyRGB="True" RelativePosition="0.5,0.5" StartColor="1,1,1,1" StartColorVar="1,1,1,1" StartSize="30" StartSizeVar="25" TextureFile="battleeffects/ui/animation/fireFrame2.png" TotalParticles="30" Type="WZParticleSystemQuad" Visible="False">
+                <Action Duration="0.5" FinishLuaFunction="" GUID="{F76FF012-BC8D-4a32-A768-344A265917F5}" Type="WZUIActionSequence">
+                    <ChildAction Duration="0.5" GUID="{A7CC530C-A01E-4e9e-B76F-5A1088905BB3}" Type="WZUIActionDelayTime"/>
+                    <ChildAction GUID="{103C539C-A1BE-442c-AF30-67BFD7082273}" Type="WZUIActionShow"/>
+                </Action>
+            </WZParticleSystemQuad>
+        </WZUIContainer>
+        <Action Duration="4" FinishLuaFunction="_XmlActionFinishCallback" GUID="{6AF9CB75-BFE0-44ab-AC64-665F99F208FF}" Type="WZUIActionDelayTime"/>
+    </WZUIContainer>
+</levelUp>

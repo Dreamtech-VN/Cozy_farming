@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><ArmWing GUID="{65F2B2E9-7965-4233-B537-434A3077A6E1}">
+    <WZArmature ArmatureName="" GUID="{6BFD712F-E538-4108-AD4C-A23447FBE258}" Name="ArmWing" NameCreate="True" Order="-1" RelativePosition="0.5,-0.16" Type="WZArmature" UseOriginSize="True">
+        <Action AnimationId="0" GUID="{3C1325A4-49F8-4169-9E2E-4C391EFA6830}" Type="WZUIArmatureAnimationById"/>
+    </WZArmature>
+    <WZArmature ArmatureName="wing6" GUID="{A06EAAE3-8503-4583-AEE0-D0D625C6E1A6}" Name="ArmWing6" NameCreate="True" Order="-1" RelativePosition="0.5,-0.16" ShowAll="False" Type="WZArmature" UseOriginSize="True">
+        <Action GUID="{ED2D0A48-8E26-4085-A76E-D548D0B0ABCC}" Type="WZUIActionSpawn">
+            <ChildAction AnimationId="0" GUID="{7709242A-EAAA-49f9-9B6B-DE579CFE0EA7}" Type="WZUIArmatureAnimationById"/>
+            <ChildAction AnimationId="0" Bone="wing6_L09" GUID="{92B41296-00A6-456a-A928-301AB3759660}" Type="WZUIArmatureAnimationById"/>
+            <ChildAction AnimationId="0" Bone="wing6_L10" Duration="0" GUID="{DC85946A-616C-4825-988A-012596B0B0EF}" Type="WZUIArmatureAnimationById"/>
+            <ChildAction AnimationId="0" Bone="wing6_R09" GUID="{F5D10AD7-3BD9-4ab0-9F04-6AD1431047FA}" Type="WZUIArmatureAnimationById"/>
+            <ChildAction AnimationId="0" Bone="wing6_R10" GUID="{5F91EED4-A4EE-4cb3-983A-DCAD605CAED0}" Type="WZUIArmatureAnimationById"/>
+        </Action>
+    </WZArmature>
+</ArmWing>

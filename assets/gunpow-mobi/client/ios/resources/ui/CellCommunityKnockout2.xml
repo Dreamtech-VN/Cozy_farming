@@ -1,0 +1,31 @@
+﻿<CellCommunityKnockout2 GUID="{27fbc321-6465-4433-b802-6c335d1d3667}">
+    <WZUIContainer Type="WZUIContainer" GUID="{7d28b2ab-9bbc-4da1-a66c-3ecef8e25703}" NameCreate="True" Name="CellCommunityKnockout2" AbsContentSize="275,100" UseAbsSize="True" LuaObjectName="">
+        <WZUIContainer Type="WZUIContainer" GUID="{b3457a7c-a7e6-4c78-9b18-e9743b5fbb60}">
+            <WZUI9Image Type="WZUI9Image" GUID="{b8f63fa0-632d-4637-bf09-eb0e0918df6f}" File="ui/common/common_scale9_di7.png" Name="imgBK_CellCommunityKnockout2" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4218aaa6-01ef-46e4-a444-c80836e05ef6}" FontSize="20" Color="127,70,26" Name="txtLevel_CellCommunityKnockout2" RelativePosition="0.325,0.77" Text="Lv86" AnchorPoint="0,0.5" LabelStyleKey="C11_F20_S4_C5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{eaa0aad9-d9b0-4d8e-b50a-29a94f22d54b}" Color="127,70,26" FontSize="20" Name="txtName_CellCommunityKnockout2" RelativePosition="0.5,0.77" Text="六个名字的人" AnchorPoint="0,0.5" LabelStyleKey="C18_F20_S4_C5" Alignment="Left" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{73bfd754-7fde-4cba-a321-e9ce21aeface}" Name="txtState_CellCommunityKnockout2" Color="5,180,0" Alignment="Left" AnchorPoint="0,0.5" Text="在线" FontSize="20" RelativePosition="0.32,0.22" />
+            <WZUIImage Type="WZUIImage" GUID="{0bcd16a8-7058-447d-804f-59b7b8ceab07}" File="ui/common/common_icon_zhanlih.png" UseOriginSize="True" RelativePosition="0.325,0.55" AnchorPoint="0,0.5" Name="imgFighting_CellCommunityKnockout2" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{2c9a7bb9-8c51-4b9e-aa8f-4ddfdde04cc3}" CharMapFileName="ui/common_num/common_num_zhandouli.png" Height="26" Width="16" Text="" Scale="0.8" Name="txtFighting_CellCommunityKnockout2" AnchorPoint="0,0.5" RelativePosition="0.447938,0.5" UseOriginSize="True" UseOriginSizeProportion="False" />
+            <Button Type="WZUIButton" GUID="{12b4ae40-545e-4033-bb30-65802538987a}" LuaActionName="Normal" LuaDoneFunctionName="onCheck">
+                <NormalElement Type="WZUIContainer" GUID="{8aad9b0b-4afa-4b64-aa59-d9ee8c0d02d4}" />
+                <SelectElement Type="WZUIContainer" GUID="{87190971-5fbf-4a74-aa0e-ca54c130f82b}" />
+                <DisableElement Type="WZUIContainer" GUID="{59d9f83b-40bd-41f1-adce-d7adad6e11a7}" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{d148cfc3-1deb-4b00-9cf7-78a5465cd81b}" AbsContentSize="67,67" UseAbsSize="True" RelativePosition="0.17,0.5" TouchEnable="False" TouchSwallow="False">
+                <WZUIImage Type="WZUIImage" GUID="{61b1c013-a450-4d5b-9385-be14ac90659e}" File="ui/common/common_icon_tx.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{146ab9a4-74b3-4706-b3d8-7f60c5fe008f}" Name="conHead_CellCommunityKnockout2" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{cb112b8a-7f17-480d-baf6-dee2992921b9}" AbsContentSize="84,32" UseAbsSize="True" RelativePosition="0.825,0.22" LuaActionName="Normal" LuaDoneFunctionName="onInvite" Visible="True" Name="btnInvite" Order="2">
+                <NormalElement Type="WZUIContainer" GUID="{65569789-416b-4ec9-996c-ea27b8365e5c}">
+                    <WZUIImage Type="WZUIImage" GUID="{e0d5e773-edd9-465a-a24b-99f8a4d81435}" File="ui/common/common_btn_anniu5.png" UseOriginSize="False" ScaleX="1" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{e4b9255c-6e65-4385-bd86-d81fe97e60fd}">
+                    <WZUIImage Type="WZUIImage" GUID="{7017700a-b960-4c39-ad38-0d8e66b7e9d2}" File="ui/common/common_btn_anniu5_sel.png" UseOriginSize="False" ScaleX="1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{b835f0a6-78b0-446d-9930-621383188988}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{545d490c-debb-4df4-b72c-91a517330728}" AnchorPoint="0.5,0.5" FontSize="18" Color="255,236,193" Name="txtBtnCheck_SceneCommunityKnockout" RelativePosition="0.5,0.5" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" TextKey="INVITE" Text="" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCommunityKnockout2>

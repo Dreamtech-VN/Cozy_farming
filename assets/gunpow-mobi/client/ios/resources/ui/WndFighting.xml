@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<WndFighting GUID="{1B418E3C-8AE9-451f-860C-3FB5C40C42B5}">
+    <WZUIWindow AbsContentSize="0,0" GUID="{ACDCD008-A59B-4d38-BA40-1EF9A4435276}" LuaObjectName="WndFighting" Name="WndFighting" NameCreate="True" Type="WZUIWindow" UseAbsSize="False" Visible="True" ShowAll="True" RelativePosition="0.5,0.65" Order="92101">
+        <WZUIContainer Type="WZUIContainer" GUID="{BAF55339-EC12-4f2b-A1F1-9CCE23503101}" AbsContentSize="560,80" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{36D61C2E-CE70-475d-92C0-1E341245B62E}" File="ui/common/common_scale9_heidi4_sel.png" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{7A8945D5-8CC1-4622-A0D9-5E1BD75B7FD4}" AbsContentSize="30,50" UseAbsSize="True" RelativePosition="0.545,0.5" Name="con_WndFighting">
+            <WZUIImage Type="WZUIImage" GUID="{76723FEA-D1AE-482f-9218-74373A281A61}" File="ui/common/commom_icon_zdljia.png" UseOriginSize="True" RelativePosition="-4.72,0.5" AnchorPoint="0,0.5" Name="imgWord_WndFighting" AbsPosition="-141.477,23.9865" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{01CCADE7-4FDE-4745-BFE6-3242C66CD42C}" CharMapFileName="ui/common_num/commom_num_zdljian.png" Height="44" Width="32" Text="" Name="ttfNum_WndFighting" AnchorPoint="0,0.5" RelativePosition="1.23,0.45" Alignment="Left" AbsPosition="5.8649,22.0272" UseOriginSizeProportion="False" UseOriginSize="True" Visible="True" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{EE13419B-8505-4ad8-AF80-D74D156AE06F}" CharMapFileName="ui/common_num/commom_num_zdljia.png" Height="44" Width="30" Text="" Name="ttfNum1_WndFighting" AnchorPoint="0,0.5" RelativePosition="1.23,0.45" Alignment="Left" AbsPosition="36.9458,23.0406" UseOriginSizeProportion="False" UseOriginSize="True" Visible="True" Scale="1" />
+            <WZUIImage Type="WZUIImage" GUID="{B4820DEF-E9F3-4dc3-B20A-B4FA890CA9E1}" File="ui/common/commom_icon_zdljia2.png" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1.08972,0.5" Name="imgSymbol_WndFighting" AbsPosition="32.6915,25" Visible="True" />
+            <WZUIImage Type="WZUIImage" GUID="{F534691D-E78D-4025-8FF4-46952C2CA2EA}" File="ui/common/battle_icon_shangsheng.png" RelativePosition="7.43207,0.0498799" AbsPosition="222.962,2.494" Name="fightingUp" Scale="1.2" Visible="False">
+                <Action Type="WZUIActionMoveBy" GUID="{0DE65019-92AA-49b0-A46D-53EE49923F8E}" Duration="1.5" MoveY="61" FinishLuaFunction="onFinish" />
+            </WZUIImage>
+            <WZUIImage Type="WZUIImage" GUID="{61DEB0F3-7DD5-433e-AB2B-E12DAA365326}" File="ui/common/battle_icon_xiajiang.png" RelativePosition="7.43207,1.26988" AbsPosition="222.962,63.494" Name="fightingDown" Scale="1.2" Visible="False">
+                <Action Type="WZUIActionMoveBy" GUID="{88A0BC27-FD1A-43be-8CEE-DE71C172BF60}" Duration="1.5" MoveY="-60" FinishLuaFunction="onFinish" />
+            </WZUIImage>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndFighting>

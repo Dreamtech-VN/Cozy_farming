@@ -1,0 +1,29 @@
+﻿<CellManyCollectPanel GUID="{3e3802bf-3b2a-49ea-aef4-6333f792729c}">
+    <WZUIContainer AbsContentSize="502,453" GUID="{c739a707-c2d7-455c-b468-37d35e4e6858}" LuaObjectName="CellManyCollectPanel" Name="CellManyCollectPanel" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.504687">
+        <WZUIContainer Type="WZUIContainer" GUID="{554b8567-d75e-450a-9dd3-86b42b0d669c}" AbsContentSize="502,120" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.993378">
+            <WZUIContainer Type="WZUIContainer" GUID="{3316fbbd-7751-4d47-8526-19db9c53d02d}" AbsContentSize="502,120" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="-0.00109345,0.520001" Name="conTotalRecharge_CellManyCollectPanel" Visible="True" UseAbsCoordinate="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{6dd62b95-5c50-4e6a-ac89-6d1ccb3394c6}" File="ui/gameActivity/activity_pic_qmzcl.png" UseOriginSizeProportion="False" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                <WZUIButton GUID="{7b61ea79-d003-41d6-8e6a-4a2c4c5bf0ab}" LuaDoneFunctionName="onClickMember" Name="btnMember_CellManyCollectPanel" Type="WZUIButton" NameCreate="True" Visible="True" AbsContentSize="116,56" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1.0039,0.204167" LuaActionName="">
+                    <NormalElement GUID="{0fb7e720-fdba-42c1-b6f8-5a5b64e190ab}" Type="WZUIContainer" />
+                    <SelectElement GUID="{03314530-a6f4-47a3-b0e7-4f0ac60534b5}" Type="WZUIContainer" />
+                    <DisableElement GUID="{a9a12726-ae1e-4191-a4cc-b5cd72446809}" Type="WZUIContainer" />
+                    <WZUIImage Type="WZUIImage" GUID="{368f96c4-40d2-49be-8d57-7ae67e95450c}" File="ui/gameActivity/common_icon_hjmd.png" UseOriginSize="True" />
+                </WZUIButton>
+                <WZUIContainer Type="WZUIContainer" GUID="{99cef5ac-ad38-4d9f-a779-0e38df4de4c4}" AbsContentSize="500,42" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.975">
+                    <WZUI9Image Type="WZUI9Image" GUID="{cbc3a56c-0eca-4098-93f4-0e5795e712b1}" File="ui/common/common_scale9_heidi7.png" Opacity="150" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{a7a17d2b-8c0e-45cd-b013-48f71674c74e}" TextKey="" FontSize="22" Color="255,227,116" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" Text="ACTIVE_TIME" Name="txtActivityWord_CellManyCollectPanel" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ba72e0bc-c77f-4d49-8ae3-1478f52fb7fe}" FontSize="22" EnableStroke="True" Color="255,89,74" StrokeColor="158,0,0" StrokeSize="4" Text="" AnchorPoint="0,0.5" RelativePosition="0.27,0.5" Name="txtLastDay_CellManyCollectPanel" />
+                </WZUIContainer>
+                <WZUIButton GUID="{4994c697-ff54-4c10-bd0d-1305e4c6ff39}" LuaDoneFunctionName="onClickRule" Name="" Type="WZUIButton" NameCreate="True" Visible="True" AbsContentSize="60,60" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.959071,0.804415" LuaActionName="Normal">
+                    <NormalElement GUID="{46e8c4ce-9a79-4846-97fd-4a12992be121}" Type="WZUIContainer" />
+                    <SelectElement GUID="{cb70193c-e32e-4d59-b80f-68767357577c}" Type="WZUIContainer" />
+                    <DisableElement GUID="{75912fdb-9ec9-438d-880c-b490263760c0}" Type="WZUIContainer" />
+                    <WZUIImage Type="WZUIImage" GUID="{31409e00-10af-4ba5-b794-1ee35ade0175}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="500,300" GUID="{b169304f-9221-48fb-b9f3-a0b3563036f6}" RelativePosition="0.5,0.363784" Type="WZUIContainer" UseAbsSize="True" Name="conParent_CellManyCollectPanel" Order="1">
+            <WZUIFreeListContainer EnableMoveHorizontal="False" GUID="{5a0607a1-cecc-4075-925f-1b96a70d27f1}" Name="conflListview_CellManyCollectPanel" Type="WZUIFreeListContainer" Resistance="0.95" VisibleHeight="70" ListItemInterval="6" AbsContentSize="500,300" UseAbsSize="True" RelativePosition="0.5,0.5" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellManyCollectPanel>

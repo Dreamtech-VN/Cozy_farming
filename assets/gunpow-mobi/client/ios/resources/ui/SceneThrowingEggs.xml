@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?><SceneThrowingEggs GUID="{CA1803ED-A1A5-4b22-A2E5-87C422490402}">
+    <WZUIFrame GUID="{A2DD254A-8E49-42b9-AF9A-ADE8EDA2BA0D}" LuaObjectName="SceneThrowingEggs" Name="SceneThrowingEggs" NameCreate="True" Type="WZUIFrame">
+        <WZUIContainer AbsContentSize="960,640" GUID="{25D21FEC-9047-4164-8B71-D027D8DABC33}" Type="WZUIContainer">
+            <WZUIContainer AbsContentSize="1136,720" GUID="{B60DCB00-2E66-4085-A44C-96BE1BE03D0E}" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIContainer AbsContentSize="1136,720" GUID="{893987D1-07B9-412e-AE49-B2FF066F6598}" Name="conBG_SceneThrowingEggs" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUIContainer AbsContentSize="1136,720" GUID="{1F80579C-3CE4-44eb-8928-3D4927F335FA}" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUI9Image File="common/Jigsaw/51.png" GUID="{F66F6366-BCC3-4577-BCD4-A71A1B315791}" Type="WZUI9Image"/>
+                    </WZUIContainer>
+                    <WZUIContainer AbsContentSize="1136,231" GUID="{0844DE71-4CFD-48ec-AAEE-141D5172CA60}" RelativePosition="0.5,0.784202" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUIImage File="common/Jigsaw/21.png" GUID="{BA795272-3BE5-406e-9709-A521C5D1FA7E}" RelativePosition="0.290141,0.5" Scale="1" ScaleX="0.85" Type="WZUIImage" UseOriginSize="True"/>
+                        <WZUIImage File="common/Jigsaw/21.png" FlipX="True" GUID="{1E2A12D9-A2E9-4ac0-8C1A-92947AED77C4}" RelativePosition="0.709507,0.5" Scale="1" ScaleX="0.85" Type="WZUIImage" UseOriginSize="True"/>
+                    </WZUIContainer>
+                    <WZUIContainer GUID="{BC8628F1-F089-4127-9A0B-9BFC5511A2CB}" ShowAll="True" Type="WZUIContainer">
+                        <WZUIImage File="common/text/smashing_eggs_incentives_title.png" GUID="{1F056977-EE29-484c-8FE5-964C1524885C}" RelativePosition="0.5,0.828125" ShowAll="True" Type="WZUIImage" UseOriginSize="True"/>
+                        <WZUIImage File="common/Jigsaw/63.png" GUID="{633A62EF-1FEF-4f70-A42A-FFFB541A27EC}" RelativePosition="0.340669,0.702774" Type="WZUIImage" UseOriginSize="True"/>
+                        <WZUILabelTTF Color="255,255,255" FontSize="28" GUID="{7F0BE35B-088C-457b-AE43-797A0B83B1CF}" Name="txtF1_SceneThrowingEggs" RelativePosition="0.337148,0.702778" Text="" Type="WZUILabelTTF"/>
+                        <WZUILabelTTF Color="255,255,0" FontSize="28" GUID="{CABCDBC2-16E1-464d-AEAA-E386D0BB0C1F}" Name="txtF2_SceneThrowingEggs" RelativePosition="0.678697,0.702778" Text="" Type="WZUILabelTTF"/>
+                        <WZUILabelTTF Color="255,0,0" FontSize="28" GUID="{02364BE0-EA69-4510-BB1C-3F6340FEE4E9}" Name="txtZuan_SceneThrowingEggs" RelativePosition="0.385,0.701389" Text="" Type="WZUILabelTTF"/>
+                        <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" FontSize="28" GUID="{190E74C2-1C5B-4322-91E6-49F23AB60B57}" Name="txtTotalZuan_SceneThrowingEggs" RelativePosition="0.818661,0.702778" Text="" Type="WZUILabelTTF"/>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUITableContainer AbsContentSize="0,0" CellElementHeight="0.3333" ColumnCount="6" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableVerticalScroll="False" GUID="{58F437CA-5865-4b7e-A304-935C8BBDECFD}" Name="tbconEggs_SceneThrowingEggs" RelativePosition="0.5,0.363195" RelativeSize="0.8,0.6" ShowAll="True" Type="WZUITableContainer" UseAbsSize="False"/>
+                <WZUIContainer AbsContentSize="150,150" GUID="{2D4C98FB-3D3A-4cb1-8797-A8C5E873A946}" Name="conEggsCell_SceneThrowingEggs" RelativeSize="1,1" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="False">
+                    <WZUIContainer GUID="{6E1E1E89-D91F-49b3-99F4-F867A4D2E0D6}" Name="conEgg_conEggsCell" Type="WZUIContainer"/>
+                    <WZUIImage File="shopitems/bbody39.png" GUID="{0AB1EEDD-C379-4f63-A2B8-8FD01007227E}" Name="imgIcon_conEggsCell" TouchEnable="True" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                    <WZUILabelTTF Color="255,255,255" FontSize="30" GUID="{7D97856E-3A02-416d-9866-8FEB91D1ED18}" Name="txtNum_conEggsCell" RelativePosition="0.5,0.853333" Text="" Type="WZUILabelTTF"/>
+                    <WZUILabelTTF Color="255,255,0" FontSize="30" GUID="{7A832BA5-A3C3-4df9-B9AF-F8EA4577117E}" MaxLength="3" Name="txtName_conEggsCell" RelativePosition="0.5,0.34" Text="" Type="WZUILabelTTF"/>
+                    <Button GUID="{728F01F6-B80D-4911-9A20-CA2C6D296A21}" LuaDoneFunctionName="onClickEgg" Name="btnEgg_conEggsCell" RelativeSize="1,1" Type="WZUIButton" Visible="True">
+                        <NormalElement GUID="{11B253CF-529A-45fd-8889-F2A06D4A47F9}" Type="WZUIContainer">
+                            <WZUIImage File="ui/common/common_black_bg.png" GUID="{1580A5A2-D38B-458c-9457-AB8773A054D9}" Opacity="0" Type="WZUIImage"/>
+                        </NormalElement>
+                        <SelectElement GUID="{859801E2-EB44-48ab-91BF-1B9A0C7EAC46}" Type="WZUIContainer">
+                            <WZUIImage File="ui/common/common_black_bg.png" GUID="{ECE7408C-7C96-453d-85C7-250EB5BF6678}" Opacity="0" Type="WZUIImage"/>
+                        </SelectElement>
+                        <DisableElement GUID="{8DB2DB7D-BA66-4adf-A1BE-D3C3331A4790}" Type="WZUIContainer">
+                            <WZUIImage File="ui/common/common_black_bg.png" GUID="{7EB89629-2AB8-4ea5-BA09-4AC8DAF63C12}" Opacity="0" Type="WZUIImage"/>
+                        </DisableElement>
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneThrowingEggs>

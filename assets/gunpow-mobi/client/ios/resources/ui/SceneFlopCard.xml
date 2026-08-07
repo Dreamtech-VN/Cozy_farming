@@ -1,0 +1,22 @@
+﻿<SceneFlopCard GUID="{838a055a-8907-429c-a021-8c605a6b7bfc}">
+    <WZUIFrame Type="WZUIFrame" GUID="{14905f35-0649-41db-a55b-f9d25ba45e0c}" LuaObjectName="SceneFlopCard" Name="SceneFlopCard" NameCreate="True" ShowAll="False" LuaTouchEndedFunction="">
+        <WZUIContainer Type="WZUIContainer" GUID="{c3e65bd8-1db2-4a7e-8441-f2aa0d709e6f}" Visible="True" TouchEnable="True" TouchContainerEnable="True">
+            <WZUIImage Type="WZUIImage" GUID="{3290e53c-4df8-4c5c-a16a-9be8e9047008}" File="ui/copy_settlement/common_pic_sl.png" RelativeSize="1,1" AnchorPoint="0.5,0.5" Name="" UseOriginSize="True" isValid="True" Visible="True" />
+            <WZUIImage Type="WZUIImage" GUID="{38f480ff-4389-493b-9955-0e00d2f71a40}" File="ui/copy_settlement/common_pic_slbg.png" UseOriginSize="True" RelativePosition="0.5,0.370313" Name="" TouchEnable="False" TouchSwallow="True" />
+            <Button Type="WZUIButton" GUID="{b031a99a-0348-49d8-936f-fbf234e0c3ce}" LuaDoneFunctionName="onClickSkip">
+                <NormalElement Type="WZUIContainer" GUID="{7475ad77-886f-4dae-abee-4c8d821f3f87}" />
+                <SelectElement Type="WZUIContainer" GUID="{8fc9be96-a04d-4c28-9bf3-63592f8bfb9c}" />
+                <DisableElement Type="WZUIContainer" GUID="{ef163d96-63da-4574-8a75-9c74e9ceaad6}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{70eccc29-b305-4161-9bd7-18ddb4e88a56}" ShowAll="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{bcd20830-033e-48ef-9882-b5b6fb71b1b8}" Name="conTurnCard_SceneFlopCard" ShowAll="False" Visible="True">
+                <WZUITableContainer Type="WZUITableContainer" GUID="{481f5777-d618-4d70-8cae-37c111e3133d}" Name="tbconCard_SceneFlopCard" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableMoveoutContainer="False" CellElementHeight="0.333" ColumnCount="3" UseAbsSize="True" AbsContentSize="908,584" RelativePosition="0.502308,0.527778" ScissorHeight="1.05" ScissorWidth="1.06" />
+            </WZUIContainer>
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{1dbc2c4a-a961-4d1c-aff6-aec1e7c8be7f}" Name="txtCountdown_SceneFlopCard" ShowText="" MaxWidth="400" RelativePosition="0.97687,0.0253934" AnchorPoint="1,0" ShowAll="False" Visible="True" TouchEnable="False" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{987ee22f-7542-4d93-bc2a-8b5f34722a34}" Name="txtDiamond_SceneFlopCard" ShowText="" MaxWidth="300" AnchorPoint="0,0" RelativePosition="0.151889,0.0082059" Visible="False" ShowAll="False" TouchEnable="False" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{681d9921-d86d-4a21-9ada-f8a8c36c135d}" Name="txtTicket_SceneFlopCard" ShowText="" MaxWidth="300" AnchorPoint="0,0" RelativePosition="0.0362637,-0.0067941" Visible="False" ShowAll="False" TouchEnable="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9b131c6b-b523-4ad0-94ad-ca3e2ea26d09}" Name="txtConsumeAtt_SceneFlopCard" FontSize="22" Color="255,255,255" RelativePosition="0.5,0.0359375" Visible="False" ShowAll="False" StrokeSize="4" StrokeColor="127,70,26" EnableStroke="True" TouchEnable="False" />
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneFlopCard>

@@ -1,0 +1,20 @@
+<CellLeagueHonourItem GUID="{eb8e4b64-d084-41ff-9b0b-09c63ec78bd9}">
+    <WZUIContainer Type="WZUIContainer" GUID="{4d517210-61ac-410f-9550-135b7525bd47}" Name="CellLeagueHonourItem" LuaObjectName="" NameCreate="True" AbsContentSize="180,280" UseAbsSize="True">
+        <WZUIImage Type="WZUIImage" GUID="{4b60d225-3202-4c1a-837b-805947151c3d}" File="ui/common/common_pic_dizuo1.png" UseOriginSize="True" RelativePosition="0.5,0.125" Opacity="200" Scale="0.4" AnchorPoint="1,0.5" ScaleX="0.35" />
+        <WZUIImage Type="WZUIImage" GUID="{c66bd92f-127a-4fc4-aa48-f9c94378db32}" File="ui/common/common_pic_dizuo1.png" UseOriginSize="True" RelativePosition="0.5,0.125" Opacity="200" Scale="0.4" AnchorPoint="0,0.5" FlipX="True" ScaleX="0.35" />
+        <WZUIImage Type="WZUIImage" GUID="{df1072f8-3bae-4e46-b4e0-99bf2b805f0b}" File="ui/common/common_icon_yy.png" UseOriginSize="True" RelativePosition="0.51,0.184" Scale="0.8" />
+        <WZUIContainer Type="WZUIContainer" GUID="{49a7d53a-3d60-42f2-aafe-5e4d67eb0967}" Name="conRole" RelativePosition="0.5,0.62" AbsPosition="91,165" TouchEnable="False" TouchSwallow="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{2202050c-bef3-406d-9a72-82926569b7db}" Name="conInfo" RelativePosition="0.5,0.58">
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{70945315-6ac5-48c9-9693-179d655eb8e4}" RelativePosition="0.5,0.78" Name="playerName" MaxWidth="300" />
+            <WZUIContainer Type="WZUIContainer" GUID="{9a5b221b-6156-4f89-84e2-21ff2bb835fa}" UseAbsSize="True" RelativePosition="0.5,0.5" AbsContentSize="180,280" Scale="1" ScaleX="1" ScaleY="1" Name="conFight" Visible="True">
+                <WZUIImage Type="WZUIImage" GUID="{8abc13f4-1764-4ac7-98d4-74c20dc9a856}" File="ui/common/common_icon_mvp.png" UseOriginSize="True" RelativePosition="0.75,0.68" Name="imgMvp_CellLeagueHonourItem" AnchorPoint="0.5,0.5" isValid="True" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{b616effc-daa8-4c31-b385-2294992760c6}" File="ui/hero/hero_icon_duizhang.png" UseOriginSize="True" RelativePosition="0.5,0.06" Name="imgCaptain_CellLeagueHonourItem" AnchorPoint="0.5,0.5" Visible="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <Button Type="WZUIButton" Name="btnCheckInfo" AbsContentSize="180,280" UseAbsSize="True" LuaDoneFunctionName="onCheckRole" GUID="{71ac04b6-5f13-45df-b5a6-2e3ad321c3ea}" RelativePosition="0.5,0.58">
+            <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{cc2b0019-9a76-4747-bbd6-74ef78204862}" />
+            <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{5d728c50-6b6b-4943-b8da-70452035a362}" />
+            <DisableElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{be09b9dc-b8e3-412c-9b74-6fc87631bb41}" />
+        </Button>
+    </WZUIContainer>
+</CellLeagueHonourItem>

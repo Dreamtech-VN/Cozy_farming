@@ -1,0 +1,17 @@
+<WndCopyGuildInfoView GUID="{6462c45a-f587-42ff-995b-8203ac5ce404}">
+    <WZUIWindow Type="WZUIWindow" GUID="{322cae91-8946-45de-b166-27ce5d2bf4eb}" AbsContentSize="240,100" UseAbsSize="True" RelativePosition="1,1" AnchorPoint="1,1" LuaObjectName="WndCopyGuildInfoView" Name="WndCopyGuildInfoView" ShowAll="True" NameCreate="True">
+        <WZUI9Image Type="WZUI9Image" GUID="{ea51c1e2-e1ee-4501-ba57-fab284b964e4}" Name="imgView_WndCopyGuildInfoView" File="ui/common/common_scale9_di8.png" UseOriginSize="False" Opacity="180" />
+        <WZUIContainer Type="WZUIContainer" GUID="{dbd8cf21-8acf-47ad-bddc-520e9771b9ad}">
+            <WZUIContainer Type="WZUIContainer" GUID="{e25b37f1-23c3-40e6-97c5-6aea01a35700}" AnchorPoint="0.5,1" RelativePosition="0.5,1" RelativeSize="1,1" AbsContentSize="240,50" UseAbsSize="True">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7912861a-9641-4f8a-889c-5daae1d5d137}" Text="" Name="txt1_WndCopyGuildInfoView" FontSize="20" Color="255,227,116" AnchorPoint="0,0.5" RelativePosition="0.05,0.5">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{36101a44-8569-4216-990c-e42bdb92407b}" Name="txt2_WndCopyGuildInfoView" FontSize="20" Color="255,236,193" AnchorPoint="0,0.5" RelativePosition="1.1,0.5" />
+                </WZUILabelTTF>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{6892a5d0-2498-41f8-9b95-3013022cbd05}" AbsContentSize="240,50" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{45f1319a-9d95-4a25-b2b7-034b445d8d99}" Name="txt3_WndCopyGuildInfoView" FontSize="20" Color="255,227,116" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" Text="">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{d9533f78-0728-4740-93b6-65f08a9713db}" Name="txt4_WndCopyGuildInfoView" FontSize="20" Color="255,236,193" AnchorPoint="0,0.5" RelativePosition="1.1,0.5" />
+                </WZUILabelTTF>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCopyGuildInfoView>

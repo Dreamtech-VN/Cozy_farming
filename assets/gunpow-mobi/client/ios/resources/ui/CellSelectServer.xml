@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<CellSelectServer GUID="{1E1EE72C-208B-4bb0-BF83-2A5F78623152}">
+	<WZUIContainer AbsContentSize="194,72" GUID="{204847CD-3CD8-4e93-A6B6-38012FA18CE0}" LuaObjectName="" Name="CellSelectServer" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+		<WZUIContainer Type="WZUIContainer" GUID="{E98A7060-782B-4e14-83E6-4B1D3C6C7939}" AbsContentSize="210,3" UseAbsSize="True" RelativePosition="0.5,-0.1" AnchorPoint="0.5,0" Visible="False">
+			<WZUIImage Type="WZUIImage" GUID="{0F23773D-1D45-480b-B806-1909901F5E48}" File="ui/common/common_scale9_fengexian.png" />
+		</WZUIContainer>
+		<WZUICheckBox Type="WZUICheckBox" GUID="{404C5957-B4C7-418f-808C-AF17B1E5EAE4}" LuaCheckedFunctionName="onCheckSelect" Name="checkSelect_CellSelectServer" SelectedIndex="0" RelativePosition="0.5,0.5">
+			<CheckElement Type="WZUIContainer" GUID="{CD4FDD45-E2B3-4fce-831A-4E2E071964BE}">
+				<WZUIImage Type="WZUIImage" GUID="{0175AB0D-9446-4646-BF32-1C4ACEB8BB01}" File="ui/common/common_btn_huodong.png" UseOriginSize="True" RelativePosition="0,0.5" Scale="1" Visible="True" AnchorPoint="0,0.5" />
+				<WZUILabelTTF AnchorPoint="0.5,0.5" Color="255,236,193" FontSize="26" GUID="{BF52BBF5-2F80-429e-AC35-CAA622EEF369}" Name="txtServerName1_CellSelectServer" RelativePosition="0.46,0.5" Text="一区" Type="WZUILabelTTF" LabelStyleKey="" StrokeColor="105,65,46" EnableStroke="True" StrokeSize="4" />
+			</CheckElement>
+			<CheckElement Type="WZUIContainer" GUID="{6791DF8A-33A5-4a38-A22D-36BD4B545EEA}">
+				<WZUIImage Type="WZUIImage" GUID="{5735F358-FB7B-490d-8135-2B6480759116}" File="ui/common/common_btn_huodong_sel.png" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5" />
+				<WZUILabelTTF AnchorPoint="0.5,0.5" Color="255,255,255" FontSize="26" GUID="{336A57FC-5D6E-4d5f-A325-8537A9CD5B64}" Name="txtServerName2_CellSelectServer" RelativePosition="0.46,0.5" Text="23" Type="WZUILabelTTF" LabelStyleKey="" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" />
+			</CheckElement>
+		</WZUICheckBox>
+	</WZUIContainer>
+</CellSelectServer>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SceneTeachBattle GUID="{673AB949-C078-4a4c-941F-96C2C714D79C}">
+    <WZUIFrame AbsContentSize="960,640" GUID="{61C6F31B-48DC-4837-8921-20CF0C6BC0F9}" LuaObjectName="SceneTeachBattle" Name="SceneTeachBattle" NameCreate="True" ShowAll="False" TouchEnable="True" Type="WZUIFrame" UseAbsSize="True">
+        <WZUIContainer AnchorPoint="0.5,0.5" GUID="{5850E120-E541-4581-AFE3-59BB431F6E73}" NoBorder="True" Type="WZUIContainer">
+            <WZUIContainer AnchorPoint="0,0" GUID="{42DFED9C-020C-4717-A5B7-E7D129242E97}" Name="conBgLayer_SceneTeachBattle" RelativePosition="0,0" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AnchorPoint="0,0" GUID="{5BB8AF3B-E8B3-4961-82AD-A6060288B6F3}" Name="conMidLayer_SceneTeachBattle" RelativePosition="0,0" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" Visible="False" />
+            <WZUIContainer AnchorPoint="0,0" GUID="{8FFFD0D7-0E2A-4bd8-8B02-630BED8E715D}" Name="conFrontLayer_SceneTeachBattle" NoBorder="False" RelativePosition="0,0" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" />
+        </WZUIContainer>
+        <WZUIContainer GUID="{0331A90C-7C57-429d-A853-D3B530E6B560}" Name="conInfoLayer_SceneTeachBattle" ShowAll="True" TouchEnable="False" Type="WZUIContainer" />
+        <WZUIMultiTouchPanel AlwaysLuaTouchEnded="True" AlwaysLuaTouchMoved="True" GUID="{F936A9EC-9B30-4d0c-AF4A-848B8490D6FD}" LuaTouchBeganFunction="onTouchBegan" LuaTouchEndedFunction="onTouchEnd" LuaTouchMovedFunction="onTouchMoved" Name="multiTouchPanel_SceneTeachBattle" Type="WZUIMultiTouchPanel" />
+        <WZUIContainer GUID="{DE63CDED-2D97-4134-9705-B54B450376C7}" Name="conTopInfoLayer_SceneTeachBattle" ShowAll="True" TouchEnable="False" Type="WZUIContainer">
+            <WZUIContainer GUID="{C7F8AC35-1620-4213-9176-9317A003167A}" Name="conBigSkill_SceneTeachBattle" Order="0" Type="WZUIContainer" Visible="False" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="135,35" GUID="{5CEFBA5E-9F28-4a12-8F54-277D8B98D691}" Name="conSkip_SceneTeachBattle" Order="20" RelativePosition="0.165,0.925" ShowAll="True" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIImage File="ui/common/transparent_bg.png" GUID="{909216B6-8DB8-4c48-A338-A65A6D602517}" LuaTouchBeganFunction="" LuaTouchEndedFunction="onEndTeach" Type="WZUIImage" />
+            <WZArmature ArmatureName="teach" GUID="{3FD01079-75A3-4a1b-8BA2-FF2750FDD136}" TouchEnable="False" Type="WZArmature" Visible="False" />
+            <WZArmature ArmatureName="teach002" GUID="{B8AFF9F7-9DE4-44eb-8375-5554B09BE346}" RelativePosition="0.44,0" TouchEnable="False" Type="WZArmature" UseOriginSize="True">
+                <Action AnimationId="0" GUID="{485889A2-6314-4e5e-ABC4-0181C98DE2E4}" Type="WZUIArmatureAnimationById" />
+            </WZArmature>
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneTeachBattle>

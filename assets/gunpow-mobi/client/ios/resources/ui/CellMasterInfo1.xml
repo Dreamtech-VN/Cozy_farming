@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<CellMasterInfo1 GUID="{711549A0-903C-480f-8B88-48C3AECB0E9F}">
+    <WZUIContainer AbsContentSize="870,110" GUID="{57F1AFD6-D3CA-4fe9-B58C-B4316521C4D7}" LuaObjectName="" Name="CellMasterInfo1" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{600F9D11-C606-46e6-B685-0A1DCDD2C89C}" AbsContentSize="870,95" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{CD583982-6BEB-46c2-8D14-C3C9526CDB63}" Type="WZUI9Image" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="680,100" AnchorPoint="1,1" GUID="{C4841365-EB66-4901-9833-382E5012FB27}" RelativePosition="1,1" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{F3119F42-E75D-4d93-8514-91242E415392}" UseAbsSize="True" AbsContentSize="100,100" RelativePosition="-0.188,0.457021" Name="conHead_CellMasterInfo1">
+                <WZUIImage Type="WZUIImage" GUID="{1C362D9F-F250-4766-B900-28075A99263B}" TouchEnable="False" RelativePosition="0.5,0.5" File="ui/common/common_icon_tx.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" AbsContentSize="100,100" UseAbsSize="True" LuaDoneFunctionName="onCheck" GUID="{97128BAB-6FA1-454d-AAE5-950E6F04ABFD}">
+                    <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{7084D0F5-D050-4f15-8AF8-1B50605B1FE6}" />
+                    <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{33A2E73D-AB62-49aa-8CF7-2B715ADB6A10}" />
+                    <DisableElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{ABE348DC-0E3B-44b7-805C-B78D1D97EF5B}" />
+                </Button>
+            </WZUIContainer>
+            <Button Type="WZUIButton" AbsContentSize="96,46" UseAbsSize="True" RelativePosition="0.73,0.3" Name="btnRefuse" GUID="{B8FE56AF-3313-446b-85A3-2CFE4124C391}" LuaDoneFunctionName="onRefuse" LuaActionName="Normal" Scale="0.9">
+                <NormalElement Type="WZUIContainer" GUID="{470AB21D-710E-467e-B5DB-CBB637C9B6D7}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{BE65730D-F170-498d-ADC1-154ABBD5737D}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{D7ACFE47-5309-45c7-887B-56192A2D3DD6}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{FE341D97-C9E0-4937-AC94-74B1609BD251}" File="ui/common/common_btn_anniu3_0_sel.png" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{4743E008-F2D5-4ccb-92DD-D0FB84918E42}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{78B6125E-1775-495d-B136-10EDAAF85718}" BoldFont="True" Color="255,236,193" Text="残忍拒绝" RelativePosition="0.5,0.5" FontSize="24" TextKey="REJECT" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" LabelStyleKey="SMALL_ORANGE_BTN" />
+            </Button>
+            <Button Type="WZUIButton" AbsContentSize="96,46" UseAbsSize="True" RelativePosition="0.9,0.3" Name="btnAccepted" GUID="{62C6F2C2-20F4-4a8a-8497-1ADC7C5611AB}" LuaDoneFunctionName="onAccept" LuaActionName="Normal" Scale="0.9">
+                <NormalElement Type="WZUIContainer" GUID="{18F93F6D-CF52-45a7-BA1B-13BEF0FBBE37}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{830B8123-F9DD-4e4b-AFC8-DD2554054CBB}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{A15D16FD-DDE4-4fd1-9BFA-6450499E1DD8}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{D94E92BF-1B62-4020-A1FD-34E5B147E862}" File="ui/common/common_btn_anniu10_0_sel.png" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{09262E7E-EACF-4a31-9061-C276D4EBA774}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{C35B8D0A-7253-4f37-A8D1-AF41717A58EA}" BoldFont="True" Color="255,236,193" Text="开心接受" RelativePosition="0.5,0.5" FontSize="24" TextKey="AGREE" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" LabelStyleKey="SMALL_GREEN_BTN" />
+            </Button>
+        </WZUIContainer>
+        <WZUILabelTTF AnchorPoint="0,0.5" Color="151,64,19" FontSize="22" GUID="{9C62DF48-279B-4eea-985C-0832F8FEB0E4}" Name="ttfLevel_CellMasterInfo1" Order="1" RelativePosition="0.13,0.61" Text="Lv88" Type="WZUILabelTTF" Dimensions="500,0" Alignment="Left" />
+        <WZUILabelTTF AnchorPoint="0,0.5" Color="62,34,8" FontSize="22" GUID="{08583B50-4D36-4637-B160-D71D56BCF0AD}" Name="ttfName_CellMasterInfo1" Order="1" RelativePosition="0.189579,0.61" Text="路飞" Type="WZUILabelTTF" Dimensions="500,0" Alignment="Left" />
+        <WZUILabelTTF AnchorPoint="0,0.5" Color="117,63,41" FontSize="22" GUID="{02493BBA-F34F-4db9-BE89-726A547A38A4}" Name="ttfInfo_CellMasterInfo1" Order="1" RelativePosition="0.129781,0.36" Text="路飞向你拜师路飞向你拜师路飞向你拜师" Type="WZUILabelTTF" Dimensions="600,0" Alignment="Left" MaxLength="22" UseOriginSize="True" />
+        <WZUILabelTTF AnchorPoint="0,0.5" Color="158,139,121" FontSize="20" GUID="{8547D47C-9C9F-4b38-89A7-6B9DC5CAD9CA}" Name="ttfTime_CellMasterInfo1" Order="1" RelativePosition="0.84,0.72" Text="04-15  23:59" Type="WZUILabelTTF" Dimensions="150,0" Alignment="Left" />
+    </WZUIContainer>
+</CellMasterInfo1>

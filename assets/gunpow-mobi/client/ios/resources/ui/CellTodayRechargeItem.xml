@@ -1,0 +1,25 @@
+<CellTodayRechargeItem GUID="{2f1ee39d-7f59-48f4-9b7e-906e73bf9ea5}">
+    <WZUIContainer AbsContentSize="486,138" GUID="{b06b3490-49ea-47fa-819e-dbc39e475947}" LuaObjectName="" Name="CellTodayRechargeItem" NameCreate="False" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer GUID="{dbd8300c-9218-4e88-94a6-d23c67511348}" Type="WZUIContainer" AbsContentSize="486,138" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image File="ui/common/common_scale9_di18.png" GUID="{0f297dd3-dc82-44e4-88cc-d787a31d5ac4}" Type="WZUI9Image" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{b732008b-c0d9-4474-a6c8-02bf225c7fc3}" AbsContentSize="486,98" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True">
+            <WZUIContainer AbsContentSize="80,80" GUID="{398760e1-1e88-4377-9a48-f6c837691bd3}" Name="con1_CellTodayRechargeItem" RelativePosition="0.105,0.5" TouchContainerEnable="True" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="80,80" GUID="{0c981662-1413-4136-b6c3-e58a66a61eba}" Name="con2_CellTodayRechargeItem" RelativePosition="0.286,0.5" TouchContainerEnable="True" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="80,80" GUID="{c263fb08-03cd-4c3c-91c4-5c56f86613b9}" Name="con3_CellTodayRechargeItem" RelativePosition="0.467,0.5" TouchContainerEnable="True" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="80,80" GUID="{2aaea273-4ea3-47c4-95f4-05e0230cbd10}" Name="con4_CellTodayRechargeItem" RelativePosition="0.648,0.5" TouchContainerEnable="True" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="116,56" GUID="{a8f5102f-194a-4649-87fd-9c566e612a42}" RelativePosition="0.861942,0.391304" Scale="1" ScaleX="1" Type="WZUIContainer" UseAbsSize="True" ScaleY="1" Name="conBtn_CellTodayRechargeItem">
+            <WZUIImage Type="WZUIImage" GUID="{287e5a5b-432f-442e-baa4-7cbf3a0b216d}" File="ui/common/commom_icon_ylq.png" Name="imgGet_CellTodayRechargeItem" UseOriginSizeProportion="True" Visible="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8ac1d09b-860d-4795-b692-4920c76ea72c}" Name="txtGet_CellTodayRechargeItem" FontSize="26" Color="138,122,106" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{116db555-8953-47e3-8d28-d0e6668f8418}" Name="txt_CellTodayRechargeItem" FontSize="26" Color="255,89,74" EnableStroke="True" StrokeSize="4" StrokeColor="158,0,0" Text="" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="480,40" AnchorPoint="0.5,0.5" GUID="{9ce8e2f1-7b37-49fe-acb3-280efe0ec740}" RelativePosition="0.5,0.840008" Type="WZUIContainer" UseAbsSize="True" Name="conMsgInfo_CellTodayRechargeItem">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{1ae536b5-e03e-4c49-bff7-2d139f2b4fb2}" RelativePosition="0.05,0.425" TextKey="RECHARGE_TODAY" FontSize="22" Color="105,65,46" AnchorPoint="0,0.5">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7d92e805-4ed8-41df-bf61-0fbd1820010a}" RelativePosition="1.1,0.5" Name="txtNum_CellTodayRechargeItem" Font="" FontSize="22" Color="255,227,116" StrokeSize="2" StrokeColor="105,65,46" EnableStroke="True" AnchorPoint="0,0.5">
+                    <WZUIImage Type="WZUIImage" GUID="{13806da9-7a65-4f40-842c-d88e8db5dc75}" UseOriginSize="True" RelativePosition="1.35,0.5" File="ui/common/common_icon_zuanshi.png" Scale="0.650000001192092896" AnchorPoint="0,0.5" />
+                </WZUILabelTTF>
+            </WZUILabelTTF>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTodayRechargeItem>

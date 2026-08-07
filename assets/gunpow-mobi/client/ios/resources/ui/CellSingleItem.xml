@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CellSingleItem GUID="{E80990EC-F434-4bc8-A6DA-2F820F33CACA}">
+    <WZUIWindow AbsContentSize="255,117" GUID="{90E27BBA-478C-4b42-9473-7D6E973A9D9F}" LuaObjectName="CellSingleItem" Name="CellSingleItem" NameCreate="True" ShowAll="False" Type="WZUIWindow" UseAbsSize="True">
+        <WZUIButton GUID="{27AFFB59-64A9-4aeb-ADC1-6C61471A1940}" LuaDoneFunctionName="onCellClickCallback" Name="btnBg_CellSingleItem" RelativePosition="0.5,0.5" ShowAll="False" TouchEnable="True" Type="WZUIButton">
+            <NormalElement GUID="{50E8D009-4899-44ae-85FC-F321AF1C50CF}" Type="WZUIContainer">
+                <WZUIImage File="ui/main/bossMap/duplicate_bg01.png" GUID="{9FBBAEB0-E1C3-48dd-98F3-B69EBD8E9DD2}" Name="img_o_CellSingleItem" Type="WZUIImage" UseOriginSize="False" />
+            </NormalElement>
+            <SelectElement GUID="{CDFEA6B2-7495-4448-B26E-89A73DF5A62B}" Type="WZUIContainer">
+                <WZUIImage File="ui/main/bossMap/duplicate_bg01.png" GUID="{5BB849B6-F342-4018-86B3-A75EB816E92F}" Name="img_u_CellSingleItem" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="False" />
+            </SelectElement>
+            <DisableElement GUID="{A12F0DF6-1E4D-4b35-93AD-91583BFF0649}" Type="WZUIContainer">
+                <WZUIImage File="ui/main/bossMap/duplicate_bg01_not.png" GUID="{DD3F5708-D910-452f-B37E-2FB89FCF5C2E}" Name="img_d_CellSingleItem" RelativePosition="0.5,0.5" Type="WZUIImage" />
+            </DisableElement>
+        </WZUIButton>
+        <WZUIContainer AbsContentSize="0,0" AnchorPoint="0,0.5" GUID="{ED2DF978-D2CF-4bcf-BCC9-E8B765E94ED1}" RelativePosition="0.0390412,0.513196" ShowAll="False" TouchEnable="False" Type="WZUIContainer" UseAbsSize="False" Visible="True">
+            <WZUIImage File="ui/main/bossMap/copy_small.png" GUID="{E8A4844F-CD80-4d0b-A5ED-E4B6547D9BA5}" Name="highLight_CellSingleItem" RelativePosition="0.445098,0.517094" RelativeSize="0.905,0.82" Type="WZUIImage" />
+            <WZUIContainer AbsContentSize="0,0" GUID="{8786B747-FE71-4eb0-9666-589CDFDB5D4C}" RelativePosition="0.455384,0.536793" ShowAll="True" Type="WZUIContainer" UseAbsSize="False">
+                <WZUILabelTTF Alignment="Left" BoldFont="False" Color="255,234,0" EnableStroke="True" Font="" FontSize="30" GUID="{976AB97E-C729-4beb-835D-0F0A5D3D194B}" Name="txtTitle_CellSingleItem" RelativePosition="0.446638,0.642597" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Type="WZUILabelTTF" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="255,117" AnchorPoint="0.5,0.5" GUID="{C671D08E-7CB6-4602-A3D6-9341E8F283FA}" RelativePosition="0.5,0.5" ShowAll="False" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True">
+            <WZUILabelTTF Color="255,234,0" Font="" FontSize="25" GUID="{A0A1DB15-32ED-402a-BEEE-A77BCB454A9E}" MaxLength="24" Name="imgPass_CellSingleItem" RelativePosition="0.748062,0.328687" ShowAll="False" Text="" Type="WZUILabelTTF" />
+            <WZUIContainer AbsContentSize="110,40" GUID="{1E6C8A9B-E180-4cab-A03C-B138390D16CC}" RelativePosition="0.711545,0.334521" Type="WZUIContainer" UseAbsSize="True">
+                <WZUILabelTTF AnchorPoint="1,0.5" Color="255,234,0" Dimensions="20,0" Font="" FontSize="25" GUID="{C72D259F-3CA5-4c42-9252-7023B664CD42}" Name="txtCurNum_CellSingleItem" RelativePosition="0.548763,0.5" Text="" Type="WZUILabelTTF" />
+                <WZUILabelTTF Color="255,234,0" Font="" FontSize="25" GUID="{47B05201-9037-402f-9186-086A7E00F53B}" Name="txtXieGang_CellSingleItem" RelativePosition="0.589698,0.5" Text="/" Type="WZUILabelTTF" />
+                <WZUILabelTTF AnchorPoint="0,0.5" Color="255,234,0" Dimensions="40,0" Font="" FontSize="25" GUID="{6398A158-E2A3-4805-8BE4-9989A484042D}" Name="txtMaxNum_CellSingleItem" RelativePosition="0.603473,0.5" Text="" Type="WZUILabelTTF" />
+            </WZUIContainer>
+            <WZUIImage File="common/text/clearance.png" GUID="{A47D3504-F5D4-47ea-9C34-FE66A8CC25F0}" Name="imgShowPass_cellSingleItem" RelativePosition="0.722993,0.423824" Type="WZUIImage" UseOriginSize="True" Visible="False" />
+        </WZUIContainer>
+    </WZUIWindow>
+</CellSingleItem>

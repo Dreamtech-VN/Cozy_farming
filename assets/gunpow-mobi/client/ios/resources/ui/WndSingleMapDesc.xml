@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" ?>
+<WndSingleMapDesc GUID="{72F0C69C-9031-4a5a-8CA1-22ABD386D260}">
+    <WZUIWindow AbsContentSize="490,512" AbsPosition="480,300" GUID="{0C17F656-D51D-4369-9D36-822399B63236}" LuaObjectName="WndSingleMapDesc" Name="WndSingleMapDesc" NameCreate="True" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True" ShowAll="True" RelativePosition="0.5,0.46875" Order="90000">
+        <WZUIContainer Type="WZUIContainer" GUID="{562C046C-47A4-4f65-AFA9-77A528C5F000}">
+            <WZUI9Image Type="WZUI9Image" GUID="{26E785FD-DFB3-4d00-871C-4B4F0E2D03F8}" File="ui/common/common_scale9_di15.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{D5D020DF-CE95-4e6c-A246-86DE19ECB66E}" AbsContentSize="478,500" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{F16B716B-565E-493a-A3DA-98F36B3C48E7}" File="ui/common/common_scale9_di25.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AnchorPoint="0.5,1" GUID="{366E30A1-FF3A-4d97-995E-791EFC56F9A6}" RelativePosition="0.5,0.855" RelativeSize="0.9,0.67" Type="WZUIContainer" Name="conRuleDetail_WndSingleMapDesc">
+            <WZUIScrollContainer EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{C2488BF1-BFA0-488f-9E82-82DB74043E83}" Name="rollconExplanation_WndSingleMap" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Type="WZUIScrollContainer">
+                <MoveElement GUID="{A19E63D2-FB21-48a8-954D-EB7A58CC434E}" Type="WZUIContainer" Visible="True" RelativeSize="1,1" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+                    <WZUILabelTTF Alignment="Left" AnchorPoint="0,0" Color="62,34,8" Dimensions="385,0" FontSize="22" GUID="{FAFE0E54-CF0C-4132-A2F7-EBB0F002E31E}" Name="txtDesc" RelativePosition="0,0" Text="Test" Type="WZUILabelTTF" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{E2D7DF3D-65B0-43cf-94E0-B8FF3AFBDA55}" Name="txtDesc1" MaxWidth="430" AnchorPoint="0,1" RelativePosition="0.015,0" />
+                </MoveElement>
+            </WZUIScrollContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{0D63E0FB-0B55-4d42-A3E4-0F5B0280AA87}" AbsContentSize="400,42" UseAbsSize="True" RelativePosition="0.5,0.91">
+            <WZUI9Image Type="WZUI9Image" GUID="{FC75179A-362F-4f47-B103-C91E038D4700}" File="ui/common/common_scale9_heidi3.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{228CB980-3982-4590-8E08-55F0C9927A9F}" FontSize="26" BoldFont="True" RelativePosition="0.5,0.47619" Color="255,236,193" Text="说明" StrokeSize="4" StrokeColor="79,60,48" EnableStroke="True" TextKey="INTRODUCTION1" AbsPosition="200,20" />
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{C8793E35-F512-4c56-8FBC-51F78F81F494}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" Scale="2" ScaleY="1" RelativePosition="0.5,0.175" />
+        <WZUIImage Type="WZUIImage" GUID="{C625E864-F4FF-478e-A7F5-EE7252D2D4E1}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.67,0.908" Name="imgArrow2_WndSingleMapDesc" />
+        <WZUIImage Type="WZUIImage" GUID="{0CF38762-9766-488b-90DE-10B2D70D64D8}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.33,0.908" FlipX="True" Name="imgArrow1_WndSingleMapDesc" />
+        <WZUIContainer Type="WZUIContainer" GUID="{a60f4caf-01c1-4cb7-a24e-68ff8bba08e4}" RelativeSize="1,0.08" RelativePosition="0.5,0.22" Name="conBuyBtn_WndSingleMapDesc" Visible="False">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{fb41b1b5-abcb-49d0-91fa-c05f0e7b6837}" FontSize="20" Color="229,105,22" Text="限制任务中的纪念奖需购买纪念币开启" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" />
+            <Button Type="WZUIButton" GUID="{47015673-4f61-4b4d-8425-98f550b2bcc3}" AbsContentSize="116,58" UseAbsSize="True" Scale="0.7" RelativePosition="0.85,0.5" LuaActionName="Normal" LuaDoneFunctionName="onClickBuy" LocalInterval="500">
+                <NormalElement Type="WZUIContainer" GUID="{9a2888b0-fb76-4825-abef-89341a60dd8e}">
+                    <WZUIImage Type="WZUIImage" GUID="{7a92b9d0-5830-4a98-8eec-97f4fa701794}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{6237ffeb-8c3b-47eb-a07e-53a440fbe2d3}">
+                    <WZUIImage Type="WZUIImage" GUID="{9c0822e9-75f4-40ab-88d3-74474774722d}" File="ui/common/common_btn_anniu3_0_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{c1539508-47f3-481b-8f5c-ff1f46563133}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e061466b-8464-44c8-a210-3f7e13764a8f}" TextKey="THREE_YEAR_TEXT6" LabelStyleKey="SMALL_ORANGE_BTN" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{a5b85a2a-14cf-4288-aa3a-83c985c21a2e}" RelativeSize="1,0.15" AnchorPoint="0.5,0" RelativePosition="0.5,0.0195313">
+            <WZUIContainer Type="WZUIContainer" GUID="{eb282cc6-5b9f-4883-8fc4-b740fced7388}" Name="conSingleBtn_WndSingleMapDesc" Visible="False">
+                <WZUIButton GUID="{27b0db59-d4f1-45e1-b488-bdccacf4a20e}" LuaDoneFunctionName="onCloseClick" RelativePosition="0.5,0.5" Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" LuaActionName="Normal">
+                    <NormalElement GUID="{f879d354-f8e0-4c08-8bac-ac1468c975f3}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{e62933f5-9ee6-46a9-8096-6e7df7ed98ce}" File="ui/common/common_btn_anniu10.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{19677f68-fa26-4054-b0d7-6666436a598f}" Color="255,236,193" FontSize="24" BoldFont="False" RelativePosition="0.5,0.5" Text="" EnableStroke="True" StrokeColor="3,111,8" StrokeSize="4" TextKey="CONFIRM" LabelStyleKey="SMALL_GREEN_BTN" Name="txtConfirm1_WndSingleMapDesc" />
+                    </NormalElement>
+                    <SelectElement GUID="{48c6f215-7b9a-4898-8f2d-1165871b88ed}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{69afbe57-ab7b-4752-b3af-29f140d474fb}" File="ui/common/common_btn_anniu10_sel.png" Scale="1.12" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{bcc65ebd-fc17-4005-bb39-c8bb0f92769a}" Color="255,236,193" FontSize="24" BoldFont="False" RelativePosition="0.5,0.5" Text="" EnableStroke="True" StrokeColor="3,111,8" StrokeSize="4" TextKey="CONFIRM" LabelStyleKey="SMALL_GREEN_BTN" Name="txtConfirm2_WndSingleMapDesc" />
+                    </SelectElement>
+                    <DisableElement GUID="{7d58bcd0-4b8c-4da4-b98a-3155045468b4}" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{53f20b82-da18-437e-8391-b36d081699ec}" File="ui/common/common_btn_anniu10.png" GrayRender="True" RelativePosition="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{042bfdea-00e1-47b5-aae4-6149cd86066e}" Color="255,236,193" FontSize="24" BoldFont="False" RelativePosition="0.5,0.5" Text="" EnableStroke="True" StrokeColor="3,111,8" StrokeSize="4" TextKey="CONFIRM" LabelStyleKey="SMALL_GREEN_BTN" Name="txtConfirm3_WndSingleMapDesc" />
+                    </DisableElement>
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{970d9c2a-f615-4acb-9572-38331d22851e}" Name="conDoubleBtn_WndSingleMapDesc">
+                <WZUIButton GUID="{e385b827-a1cf-42e4-9ee5-e8283ec07f81}" LuaDoneFunctionName="OnLeftBtn" RelativePosition="0.35,0.5" Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" LuaActionName="Normal">
+                    <NormalElement GUID="{7018863b-1ddd-4dca-9bc5-7c526da8fd64}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{af7683b6-5d01-431c-8e26-18ffd459eb95}" File="ui/common/common_btn_anniu10.png" />
+                    </NormalElement>
+                    <SelectElement GUID="{f198c726-c5f8-422d-939e-bb44b08feb96}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{08d76714-2ef6-46ad-bacb-aff495876876}" File="ui/common/common_btn_anniu10_sel.png" Scale="1.12" />
+                    </SelectElement>
+                    <DisableElement GUID="{05f7beca-553e-4d88-af7d-1cbd6376ac4d}" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{b31e2731-5f18-4299-8888-cc9fd2d02220}" File="ui/common/common_btn_anniu10.png" GrayRender="True" RelativePosition="0.5,0.5" />
+                    </DisableElement>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{94e02149-b207-4897-8661-23c5d1fecdf7}" Color="255,236,193" FontSize="24" BoldFont="True" RelativePosition="0.5,0.5" Text="" EnableStroke="True" StrokeColor="3,111,8" StrokeSize="4" TextKey="" Name="txtBtn1_WndSingleMapDesc" />
+                </WZUIButton>
+                <WZUIButton GUID="{39dff7d0-f63a-4af8-b200-77a7dcbf25d4}" LuaDoneFunctionName="OnRightBtn" RelativePosition="0.65,0.5" Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" LuaActionName="Normal">
+                    <NormalElement GUID="{9881d31b-d85c-4cc8-bcd0-9224d1bf175a}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{1ae9ebd1-7aae-40a9-bf47-2f32b540fcd4}" File="ui/common/common_btn_anniu10.png" />
+                    </NormalElement>
+                    <SelectElement GUID="{2017baa8-cc8f-4052-9d14-08e3e110eea7}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{ab911178-c367-4e87-be9f-a23424745829}" File="ui/common/common_btn_anniu10.png" Scale="1.12" />
+                    </SelectElement>
+                    <DisableElement GUID="{46624738-9aa2-4b52-88cd-39fc218e7fae}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{96589379-2cb2-488f-92e9-f7403751c3c0}" File="ui/common/common_btn_anniu10.png" />
+                    </DisableElement>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{038ea91d-bd45-4ac2-a63e-72019f2a6e7e}" Color="255,236,193" FontSize="24" BoldFont="True" RelativePosition="0.5,0.5" Text="" EnableStroke="True" StrokeColor="3,111,8" StrokeSize="4" Name="txtBtn2_WndSingleMapDesc" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSingleMapDesc>

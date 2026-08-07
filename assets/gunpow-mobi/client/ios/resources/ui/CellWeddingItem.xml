@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<CellWeddingItem GUID="{D45F4860-A263-46dd-A755-8437C6691630}">
+    <WZUIWindow AbsContentSize="436,144" GUID="{7808B2A2-B722-410e-A969-11168311B061}" LuaObjectName="" Name="CellWeddingItem" NameCreate="True" Type="WZUIWindow" UseAbsSize="True">
+        <WZUICheckBox GUID="{890B96EF-9BEF-40b9-9488-91BEEE9FB9F9}" LuaObjectName="" LuaSelectedFunctionName="onCelBtn" Name="checkBg_CellWeddingItem" SelectedIndex="0" Type="WZUICheckBox" Visible="True">
+            <CheckElement Type="WZUIContainer" GUID="{CE3F0358-2091-4c11-BBA9-3F747FD0DEFB}">
+                <WZUI9Image Type="WZUI9Image" GUID="{461B72C5-B2DE-44fb-85B0-97B6F342C1EE}" File="ui/common/common_scale9_di18.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{374DC358-3C57-437b-B5FB-5186E1449A81}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="1" Visible="False" />
+            </CheckElement>
+            <CheckElement Type="WZUIContainer" GUID="{3EDE2A8C-9931-4b2d-B1C1-90C243414565}">
+                <WZUI9Image Type="WZUI9Image" GUID="{DCE484FB-0DD2-49f1-93F5-EC75E54FC56A}" File="ui/common/common_scale9_di18.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{3FB7169A-D600-4c1d-BC87-8DE9FC70DDA6}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="1" />
+            </CheckElement>
+        </WZUICheckBox>
+        <WZUIContainer AbsContentSize="125,133" AnchorPoint="0,0.5" GUID="{3A3FF735-C317-49e7-BB06-AE54C21F62D9}" RelativePosition="0.0241097,0.481117" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIImage Type="WZUIImage" GUID="{E156EAE0-0011-427d-BDF5-C892BB7D4E66}" File="ui/marrige/common_icon_lmhl.png" UseOriginSize="True" Scale="0.7" RelativePosition="0.5,0.455296" Name="imgWeddingType_CellWeddingItem" />
+            <WZUIContainer AbsContentSize="100,60" GUID="{6D4547B4-0922-4a89-8102-E15B2F37E449}" RelativePosition="0.514143,0.262699" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <WZUIImage File="" GUID="{E6F55B59-43B4-4690-8BE9-A36DC82CEE46}" Name="imgWeddingStates_CellWeddingItem" Type="WZUIImage" UseOriginSize="True" Scale="0.8" RelativePosition="0.5,0.277039" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{7EA9C991-CCFB-4a82-B10A-10E99544EA5C}" AbsContentSize="125,30,0" UseAbsSize="True" RelativePosition="0.5,0.858648">
+                <WZUI9Image Type="WZUI9Image" GUID="{A2F11BA2-FFC9-4b30-89AB-ADD6A3195308}" File="ui/common/common_icon_jia-di.png" UseOriginSize="True" ScaleX="0.55" ScaleY="0.75" />
+                <WZUILabelTTF AnchorPoint="0.5,0.5" Color="255,236,193" Dimensions="110,0" FontSize="20" GUID="{6C98B9B6-0D0C-4a2f-8AD3-9F14C54979CB}" Name="txtWedddingId_CellWeddingItem" RelativePosition="0.499869,0.522261" Text="" Type="WZUILabelTTF" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="285,123" AbsPosition="270,0" AnchorPoint="0.5,0.5" GUID="{0F748539-4F6D-435f-B029-E9AEDB287615}" RelativePosition="0.642816,0.490537" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{D02BC8E6-010B-45c6-918C-CCC999440A83}" File="ui/common/common_scale9_di8.png" />
+            <WZUILabelTTF Alignment="Center" ChineseLengthPolicy="1" Color="255,236,193" Dimensions="0,0" FontSize="20" GUID="{ED4DDE90-A350-4b96-83E4-8BE59CA0B6AF}" MaxLength="12" Name="txtBrigeGroomName_CellWeddingItem" RelativePosition="0.398615,0.838407" Text="" Type="WZUILabelTTF" AnchorPoint="0,0.5" />
+            <WZUILabelTTF Alignment="Center" ChineseLengthPolicy="1" Color="255,236,193" Dimensions="0,0" FontSize="20" GUID="{7C976AC2-1BE9-4169-BFF3-38A40ECD4588}" MaxLength="12" Name="txtBrigeName_CellWeddingItem" RelativePosition="0.353001,0.574618" Text="" Type="WZUILabelTTF" AnchorPoint="0,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{19F30E1F-C1BC-41c7-9995-2CF7A28A9687}" FontSize="20" Color="255,89,74" RelativePosition="0.260943,0.839468" TextKey="BRIGE_GROOM_NAME" />
+            <WZUIImage Type="WZUIImage" GUID="{F35AA805-EB24-43b5-B405-82C2B0A95181}" File="ui/common/common_icon_eadj.png" UseOriginSize="True" RelativePosition="0.0957726,0.839468" />
+            <WZUIImage Type="WZUIImage" GUID="{DF35BDA9-7E7B-4f3b-8FD9-0EB5DA052FCF}" File="ui/common/common_icon_eadj.png" UseOriginSize="True" RelativePosition="0.0957726,0.560423" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3E04BCDB-784B-4c86-A1B0-6ACE05C9A0D8}" FontSize="20" Color="255,89,74" RelativePosition="0.236381,0.560423" TextKey="BRIGE_NAME" Name="txtFemale_CellWeddingItem" />
+            <WZUIImage Type="WZUIImage" GUID="{2189ADB7-A161-46e8-908A-AC14A4F59DD4}" TouchEnable="False" File="ui/common/common_icon_suo.png" UseOriginSize="True" RelativePosition="0.913918,0.724664" Scale="0.5" Name="imgWeddingHallPass_CellWeddingItem" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{B1F04781-9E24-4f6e-81EE-872EA933A142}" AbsContentSize="264,45" UseAbsSize="True" RelativePosition="0.5,0.233589">
+                <WZUI9Image Type="WZUI9Image" GUID="{92BBD946-D715-4fd2-8265-66C03B3F2E24}" File="ui/common/common_scale9_di10.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3AB8C3DB-B9D7-4bfc-ADEA-5F990E35C710}" FontSize="20" Color="255,227,116" TextKey="START_TIME" RelativePosition="0.176305,0.5" Name="txtTimeName_CellWeddingItem" />
+                <WZUILabelTTF AnchorPoint="0,0.5" ChineseLengthPolicy="0" Color="255,89,74" Dimensions="0,0" FontSize="20" GUID="{D09B392B-278E-4e19-A3C6-2464341438A3}" Name="txtTime_CellWeddingItem" RelativePosition="0.330197,0.5" Text="" Type="WZUILabelTTF" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</CellWeddingItem>

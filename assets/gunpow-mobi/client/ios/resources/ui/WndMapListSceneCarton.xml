@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><WndMapListSceneCarton GUID="{ADF52D52-C719-4f64-9EED-155E8ACE3875}">
+    <WZUIWindow AbsContentSize="0,0" GUID="{7000C1B9-9DCD-4324-ACF5-0E2DE22E5A99}" LuaObjectName="WndMapListSceneCarton" Name="WndMapListSceneCarton" NameCreate="True" Type="WZUIWindow" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="292,442" GUID="{0FDA7B47-5F64-430b-9D32-439CC2EEFCB5}" Name="conMapList_SceneCapton" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image CapInsets="10,10,50,50" File="common/Jigsaw/n_05.png" GUID="{A0E94CE6-DEA9-4a6a-9F15-2A8044BA9D83}" Type="WZUI9Image"/>
+            <WZUITableContainer AbsContentSize="256,383" CellElementHeight="0.3" ColumnCount="1" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{A5D5B6D0-F2F6-4316-BF67-65753AE6742E}" Name="tbconMapList_SceneCarton" RelativePosition="0.506147,0.455325" Resistance="1" ScrollPictureDown="common/Jigsaw/rolling_03.png" ScrollPictureMid="common/Jigsaw/rolling_01.png" ScrollPictureTop="common/Jigsaw/rolling_02.png" Type="WZUITableContainer" UseAbsSize="True"/>
+            <WZUIContainer AbsContentSize="260,40" GUID="{603829E6-E062-4e8c-A123-671391D727B1}" RelativePosition="0.5,0.938664" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/Jigsaw/n_16.png" GUID="{67E0B553-F5D4-4636-BC0E-FD020A55E7E4}" Type="WZUI9Image"/>
+                <WZUILabelTTF Color="255,255,255" FontSize="30" GUID="{4944F633-88FA-4553-8040-EA6B3AD1B551}" Name="cartonTitle_WndSingleMap" RelativePosition="0.5,0.5" Type="WZUILabelTTF"/>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndMapListSceneCarton>

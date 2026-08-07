@@ -1,0 +1,27 @@
+﻿<CellBlessItem GUID="{2479f64b-2d5f-4555-9305-b331a0455c4d}">
+    <WZUIContainer Type="WZUIContainer" GUID="{87f15918-5db5-414e-bc4f-124a5946cbd7}" Name="CellBlessItem" NameCreate="True" LuaObjectName="CellBlessItem">
+        <WZUIContainer Type="WZUIContainer" GUID="{a38c8917-5cfb-482a-ba75-9ec5d4df165e}" AbsContentSize="80,80." UseAbsSize="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{d5a20ae2-cb8b-4ea9-b9aa-91c82fecd3de}">
+                <WZUIImage Type="WZUIImage" GUID="{9d7d1355-9f63-4881-bbe7-e89d53e08e1a}" File="ui/common/common_scale9_beibaodi.png" Name="imgBK_CellBlessItem" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{e2cb2e8a-a533-4ced-993e-6901f2658ed6}" Name="conInfo_CellBlessItem">
+                <WZUISpine Type="WZUISpine" GUID="{bfbdfbb3-9fb8-4159-b7f2-874b22719f74}" FileJson="ui/ui_qifu.json" FileAtlas="ui/ui_qifu.atlas" AnimationName="" Loop="True" Name="spineItem_CellBlessItem" ScaleAnimation="0.9" Visible="True" RelativePosition="0.5,0.47" />
+                <WZUIImage Type="WZUIImage" GUID="{145bf88d-92c3-45bb-814d-ee509f60e376}" Name="imgQuality_CellBlessItem" />
+                <WZUIContainer Type="WZUIContainer" GUID="{77faf67e-4e7a-4869-8586-73cd0b1cf575}">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9590481b-23ce-40a2-97c2-1cb2c122d1f5}" FontSize="20" Name="txtBlessName_CellBlessItem" Visible="True" AnchorPoint="0.5,0.2" RelativePosition="0.5,0" StrokeSize="4" StrokeColor="79,60,48" EnableStroke="True" />
+                </WZUIContainer>
+                <Button Type="WZUIButton" GUID="{7684c7c3-faf4-4885-9ee0-f44ee1cc58c2}" LuaDoneFunctionName="onClickEvent" Name="btnBlessItem_CellBlessItem" AbsContentSize="86,86" UseAbsSize="True">
+                    <NormalElement Type="WZUIContainer" GUID="{a9551cb5-7407-43a0-b9b9-6cbead2f4563}" />
+                    <SelectElement Type="WZUIContainer" GUID="{cbeb3be9-9534-42a7-a77f-fe80b93633f9}" />
+                    <DisableElement Type="WZUIContainer" GUID="{53311167-305e-4a9c-b4a5-6bd9266d5621}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{ce0dab94-9efd-4248-a517-38265f7a9f9f}" Name="conGrayBG_CellBlessItem" Visible="False" TouchSwallow="False" TouchEnable="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{c4cb020a-a6f1-4c9d-a382-c6bb9d731599}" File="ui/common/common_scale9_di51.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1a82fec5-521b-415f-a079-d1c480c981a1}" Name="conGou_CellBlessItem" Visible="False" TouchSwallow="False" TouchEnable="False">
+                <WZUIImage Type="WZUIImage" GUID="{eca5f540-c20f-4776-83f6-64ede9cd0a66}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.9,0.15" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellBlessItem>

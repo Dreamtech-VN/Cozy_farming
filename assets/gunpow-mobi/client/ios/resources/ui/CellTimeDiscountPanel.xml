@@ -1,0 +1,16 @@
+﻿<CellTimeDiscountPanel GUID="{1e6d45ae-1892-4d08-a03c-f40e55e6092d}">
+    <WZUIContainer Type="WZUIContainer" GUID="{bdbef8bf-cb5f-41f6-be46-d5ba0216f645}" LuaObjectName="CellTimeDiscountPanel" Name="CellTimeDiscountPanel" AbsContentSize="502,453" UseAbsSize="True">
+        <WZUIImage Type="WZUIImage" GUID="{5f35928c-5e65-424b-a06c-0e80b2f72bc3}" File="ui/gameActivity/activity_pic_dzhg.png" UseOriginSize="True" Name="imgBK_CellTimeDiscountPanel" AnchorPoint="0,1" RelativePosition="0,1" ScaleX="1.5" Scale="1.008" ScaleY="1.016" />
+        <WZUIContainer AbsContentSize="500,40" GUID="{3c8271f9-6660-4e91-9af0-f2e0316a7d08}" RelativePosition="0,1" Type="WZUIContainer" UseAbsSize="True" AbsPosition="246,395.25" Name="" AnchorPoint="0,1">
+            <WZUI9Image Type="WZUI9Image" GUID="{533f0ed2-bca8-49f1-8882-149567d1bbe0}" File="ui/common/common_scale9_heidi7.png" Opacity="150" />
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="255,227,116" FontSize="22" GUID="{20ba5a3d-b875-411f-8807-72c7ba847001}" Name="txtTimeWord_CellTimeDiscountPanel" RelativePosition="0.05,0.5" Text="活动剩余" Type="WZUILabelTTF" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" />
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="255,89,74" FontSize="22" GUID="{51cc9b7f-8832-4230-a1de-c87db73ad043}" Name="txtTime_CellTimeDiscountPanel" RelativePosition="0.28,0.5" Text="9天" Type="WZUILabelTTF" StrokeColor="158,0,0" StrokeSize="4" EnableStroke="True" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{2b691219-77ac-4489-ae01-60d9c17e3f16}" AbsContentSize="500,40" UseAbsSize="True" RelativePosition="0.5,0.709713" Name="conForLeftTime_CellTimeDiscountPanel" Visible="False">
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{0b01f462-fbbd-44ea-9221-f12e59edfd29}" Name="ftxtLeftSeconds_CellTimeDiscountPanel" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" MaxWidth="500" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{8438eb95-1705-4783-8bb4-cd5ab7f798f8}" AbsContentSize="502,298" UseAbsSize="True" RelativePosition="0.5,0" Name="conItem_CellTimeDiscountPanel" AnchorPoint="0.5,0" TouchEnable="True">
+            <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{e04d4e23-0a5e-4237-a258-9f62e4ed195b}" EnableMoveHorizontal="True" EnableMoveVertical="False" TouchContainerEnable="True" TouchEnable="True" ListOrient="Horizontal" ListItemInterval="4" Name="flconList_CellTimeDiscountPanel" EnableHorizontalScroll="False" TouchSwallow="True" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTimeDiscountPanel>

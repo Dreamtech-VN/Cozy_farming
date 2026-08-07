@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<CellTotalLoginPanel GUID="{74FA54F7-5807-4e30-8278-7E43964A6B3C}">
+    <WZUIContainer Type="WZUIContainer" GUID="{C8BE8018-8C6D-443b-B274-B80C39C57890}" AbsContentSize="500,446" UseAbsSize="True" LuaObjectName="CellTotalLoginPanel" Name="CellTotalLoginPanel" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{53BD6DB9-BC91-4dc3-85F5-AB540137AA49}" AbsContentSize="500,344" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.81">
+            <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{D64C4E72-0481-4d7e-BB7C-42F334683A23}" EnableMoveHorizontal="False" ListItemInterval="6" Name="conFreeList_CellTotalLoginPanel" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{61B6478A-17A9-4dfc-8C66-4BA55FC918FE}" AbsContentSize="480,30" UseAbsSize="True" RelativePosition="0.5,0.94">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{59244C73-8412-4ef9-8A6D-FBCD31486DF9}" FontSize="22" Color="255,227,116" EnableStroke="True" Text="" StrokeColor="128,54,13" StrokeSize="4" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.025,0.5" Name="txtActivityTime_CellTotalLoginPanel" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{C0BFB73F-2BDF-4a97-8617-3F3DCC4C883A}" FontSize="22" Color="255,89,74" Text="7" EnableStroke="True" StrokeColor="158,0,0" StrokeSize="4" Alignment="Center" AnchorPoint="0,0.5" RelativePosition="0.28,0.5" Name="txtTimeValue_CellTotalLoginPanel" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{da5a2b96-1c11-490b-8bf4-1bf7ee42ea1b}" AbsContentSize="480,30" UseAbsSize="True" RelativePosition="0.5,0.86">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{1f3f7d2d-e636-4637-8598-2d1a9f1db508}" FontSize="24" Color="255,227,116" EnableStroke="True" Text="与累计签到" StrokeColor="128,54,13" StrokeSize="4" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.025,0.5" Name="txtMsgInfo_1_CellTotalLoginPanel" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9366b905-604b-4ff2-8576-0197466b58e4}" FontSize="24" Color="255,89,74" Text="7" EnableStroke="True" StrokeColor="158,0,0" StrokeSize="4" Alignment="Center" AnchorPoint="0.5,0.5" RelativePosition="0.310417,0.5" Name="txtMsgInfo_num_CellTotalLoginPanel" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{1432c435-0593-4e89-98d7-4fb61701626c}" FontSize="24" Color="255,227,116" EnableStroke="True" Text="天" StrokeColor="128,54,13" StrokeSize="4" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.345833,0.5" Name="txtMsgInfo_2_CellTotalLoginPanel" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTotalLoginPanel>

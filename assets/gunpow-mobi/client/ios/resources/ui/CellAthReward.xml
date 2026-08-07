@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<CellAthReward GUID="{0EBF7797-75A0-4224-BC02-1F720466DB12}">
+	<WZUIContainer AbsContentSize="720,100" GUID="{DF8F2E27-C178-4c60-8590-9227FA5E1540}" LuaObjectName="" Name="CellAthReward" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+		<WZUIContainer Type="WZUIContainer" GUID="{8C8B0D21-27EF-427c-955B-22D8252CB31A}" AbsContentSize="720,100" UseAbsSize="True">
+			<WZUI9Image Type="WZUI9Image" GUID="{16FBC161-B28B-4009-BB22-756D1FBDE07B}" File="ui/common/common_scale9_di18.png" />
+			<WZUIContainer Type="WZUIContainer" GUID="{6FC27EBE-76EE-4f70-A5EF-2905E0CF59C5}" AbsContentSize="210,100" UseAbsSize="True" RelativePosition="0.00833333,0.5" AnchorPoint="0,0.5">
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{ACB4A45D-303A-46ad-99D4-ACD7DADC69E2}" AbsPosition="" UseOriginSizeProportion="False" FontSize="18" Text="" Color="79,60,48" RelativePosition="0.5,0.779722" Name="txtLevel_CellAthReward" NameCreate="True" BoldFont="True" />
+				<WZUIContainer Type="WZUIContainer" GUID="{5A7BECA7-DC04-4edc-A464-A801F03B136A}">
+					<WZUIImage Type="WZUIImage" GUID="{90F8AAE1-225B-49a7-BAEA-0A62B1DE35D6}" File="ui/common/common_icon_hz3.png" UseOriginSize="True" RelativePosition="0.5,0.36" Name="imgAthLv_CellAthReward" NameCreate="True" ScaleX="0.5" ScaleY="0.5" />
+					<WZUIContainer Type="WZUIContainer" GUID="{323A0A32-1A00-4819-AE11-E01F1E2299AE}" RelativeSize="0.2,0.4" RelativePosition="0.503,0.36">
+						<WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{AB5E5F43-DEAC-4511-851F-8568562F65A9}" CharMapFileName="ui/common_num/common_num_ghdj.png" Text="1" Height="24" UseOriginSize="True" Name="txtAthLv_CellAthReward" NameCreate="True" Width="16" />
+					</WZUIContainer>
+				</WZUIContainer>
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{0B78C520-9B18-4994-B62D-E967EC35C27A}" AbsContentSize="510,100" AnchorPoint="1,0.5" RelativePosition="1,0.5" UseAbsSize="True">
+				<WZUIContainer Type="WZUIContainer" GUID="{2D637F05-5C6C-45f2-B389-00E9CEB9705D}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.1,0.5" Name="conDescReward1_CellAthReward" NameCreate="True" AnchorPoint="0.5,0.5" />
+				<WZUIContainer Type="WZUIContainer" GUID="{832E9C9B-7D6D-4d09-872F-5C42693BDB32}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.29,0.5" Name="conDescReward2_CellAthReward" NameCreate="True" AnchorPoint="0.5,0.5" />
+				<WZUIContainer Type="WZUIContainer" GUID="{5CB54079-2129-4ab0-B11A-017E5E77AC0B}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.48,0.5" Name="conDescReward3_CellAthReward" NameCreate="True" AnchorPoint="0.5,0.5" />
+				<WZUIContainer Type="WZUIContainer" GUID="{C45B31BA-BADC-4d98-BB14-E3755121AAB5}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.67,0.5" Name="conDescReward4_CellAthReward" NameCreate="True" AnchorPoint="0.5,0.5" />
+				<WZUIContainer Type="WZUIContainer" GUID="{BFD9F3E7-FE8C-4f90-821E-5FFB4D1079E0}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.86,0.5" Name="conGet_CellAthReward" NameCreate="True" AnchorPoint="0.5,0.5" Visible="False">
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{D6A7A057-AA40-49f6-B7EC-6EAF6700DE45}" TextKey="ACTIVE_GET" FontSize="22" Color="158,0,0" />
+				</WZUIContainer>
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIContainer>
+</CellAthReward>

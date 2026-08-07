@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WndUpTaskRewards GUID="{8AD28806-0A19-414b-80DE-4925BFD5F6EA}">
+    <WZUIWindow AbsContentSize="560,366" GUID="{6D6D2CDA-A978-485f-9458-A78015B30C70}" LuaObjectName="WndUpTaskRewards" Name="WndUpTaskRewards" NameCreate="True" Type="WZUIWindow" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="560,366" GUID="{EA916E4B-6F38-4761-9F88-1A8DA742F01F}" Type="WZUIContainer">
+            <WZUIContainer AbsContentSize="566,340" GUID="{5BB428A3-015A-47f3-B127-DB09309E43E3}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/Jigsaw/3.png" GUID="{872F8879-E96A-42a7-80EE-CD1B38975F88}" Type="WZUI9Image" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="570,74" AnchorPoint="0.5,1" GUID="{03335E57-3FA2-4434-B47C-97960F5A5FE7}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/Jigsaw/n_new.png" GUID="{195C1FF1-E4FE-4360-A2F8-A2E3AB433615}" Type="WZUI9Image" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="568,38" AnchorPoint="0.5,0" GUID="{51D37A3B-5947-4bab-A204-AA06F0CA82F9}" RelativePosition="0.5,0" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/Jigsaw/60.png" GUID="{86500CB5-7FC8-4c38-A8C6-FE8CFA955477}" Type="WZUI9Image" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="544,164" GUID="{73B44F4B-822A-4df5-81F0-51FB3C50474A}" RelativePosition="0.5,0.56" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image File="common/Jigsaw/n_04.png" GUID="{CB835D0F-CEFB-448f-BA64-32D8C3FC65F7}" Type="WZUI9Image" />
+            <WZUIContainer AbsContentSize="500,60" GUID="{D443C5FF-98AE-42aa-B3EC-47693994C926}" RelativePosition="0.5,0.7" Type="WZUIContainer" UseAbsSize="True">
+                <WZUILabelTTF AnchorPoint="1,0.5" Color="255,255,255" FontSize="24" GUID="{E8877138-2B0E-4dad-A83D-34F204B93785}" Name="txtTip_WndUpTaskRewards" RelativePosition="0.65,0.5" Text="提升奖励需要" Type="WZUILabelTTF" />
+                <WZUIImage File="ui/main/pet/information_diamond.png" GUID="{8A9B3759-7C90-42af-88F2-55E7AB7C9484}" Name="imgDiamondIcon" RelativePosition="0.7,0.5" Type="WZUIImage" UseOriginSize="True" />
+                <WZUILabelTTF AnchorPoint="0,0.5" Color="255,234,0" FontSize="24" GUID="{9B57D188-931B-4822-9E52-F09A510082E7}" Name="txtCost_WndUpTaskRewards" RelativePosition="0.75,0.5" Text="20" Type="WZUILabelTTF" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="160,60" GUID="{C2D38649-C5A3-4f52-A6BE-41D72D5316C2}" Name="tipsContent" RelativePosition="0.5,0.3" Type="WZUIContainer" UseAbsSize="True">
+                <WZUICheckBox AbsContentSize="71,71" AnchorPoint="0,0.5" GUID="{90B73DA7-F1B9-4334-96ED-AFAA81C2A7C7}" LuaCheckedFunctionName="onDontTipAgain" LuaSelectedFunctionName="" Name="btnMsgCheckBox" RelativePosition="0,0.5" Type="WZUICheckBox" UseAbsSize="True">
+                    <CheckElement GUID="{58F2BAA1-C819-40e2-AA33-D20DA9441D23}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/checkbox_unsel.png" GUID="{E7519463-D357-4909-8C2F-E8E225CD4637}" Type="WZUI9Image" UseOriginSize="True" />
+                    </CheckElement>
+                    <CheckElement GUID="{702AEE99-F008-4f6b-84C5-262D9B519C63}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/checkbox_sel.png" GUID="{88C2EFCA-9BA5-4e70-B07F-7DBD45C3F976}" Type="WZUI9Image" UseOriginSize="True" />
+                    </CheckElement>
+                </WZUICheckBox>
+                <WZUILabelTTF AnchorPoint="0,0.5" Color="255,255,255" FontSize="24" GUID="{C0CF8AF3-D6D5-4ed7-817D-A2B29AA88F2D}" Name="txtNomoreTip_WndUpTaskRewards" RelativePosition="0.4,0.5" Text="不在提示" Type="WZUILabelTTF" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="400,71" GUID="{5A597910-D3F6-43ad-9719-2BC2089407E6}" RelativePosition="0.5,0.21" Type="WZUIContainer" UseAbsSize="True">
+            <Button AbsContentSize="135,71" AnchorPoint="0,0.5" GUID="{F30699D7-C9A3-4aac-AF33-7F700DAEF8D8}" LuaDoneFunctionName="onCancel" RelativePosition="0,0.5" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{5A3664BE-F3D8-44eb-A8B7-A530447DEA28}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_1.png" GUID="{F6DFACCA-6F53-47d0-8D76-32FEC072CD03}" Type="WZUI9Image" />
+                </NormalElement>
+                <SelectElement GUID="{9856B9E0-A085-42fa-BBD5-8EA99B03A2F3}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_1_sel.png" GUID="{9366DDBA-478D-44af-8399-95617686581F}" Type="WZUI9Image" />
+                </SelectElement>
+                <DisableElement GUID="{461B54F4-06C6-43d4-9FF3-890BBF8598F7}" Type="WZUIContainer" />
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="32" GUID="{87A28453-E674-4ed3-92AE-8A3D78281851}" Name="txtCancel_WndUpTaskRewards" StrokeColor="0,24,47" StrokeOffset="0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" />
+            </Button>
+            <Button AbsContentSize="135,71" AnchorPoint="1,0.5" GUID="{61BC92EB-5333-4467-A56D-ACFA4E417331}" LuaDoneFunctionName="onOK" RelativePosition="1,0.5" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{AE9C647A-8EAF-4712-BB9F-EC57DE1CF1BB}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_2.png" GUID="{7CBFD76D-A501-4019-BFDD-145560DB1E19}" Type="WZUI9Image" />
+                </NormalElement>
+                <SelectElement GUID="{0DBC1E4D-E8CD-421d-B451-065B651F7D75}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_2_sel.png" GUID="{2273B59B-32E9-49ba-BCCD-CBEB893E8E80}" Type="WZUI9Image" />
+                </SelectElement>
+                <DisableElement GUID="{6ED07DEC-CDC7-479e-A363-90D542B51D29}" Type="WZUIContainer" />
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="35" GUID="{44165195-525D-42f9-95B1-FF5C43391E29}" Name="txtOK_WndUpTaskRewards" StrokeColor="38,47,0" StrokeSize="4" Type="WZUILabelTTF" />
+            </Button>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndUpTaskRewards>

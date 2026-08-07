@@ -1,0 +1,129 @@
+﻿<WndSevenDayActivity GUID="{fdd03c4d-f536-42a8-9bef-f3367b1a1d98}">
+    <WZUIWindow Type="WZUIWindow" GUID="{90ee99be-1260-4795-9436-73ec72857fa0}" AbsContentSize="775,535" LuaObjectName="WndSevenDayActivity" Name="WndSevenDayActivity" NameCreate="True" UseAbsSize="True" LuaTouchBeganFunction="onTouchBegan" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{7a2611c7-c8f3-40df-b36c-517a7b89ea03}" AbsContentSize="778,538" UseAbsSize="True" RelativePosition="0.5,0.5" ShowAll="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{77ca6612-c40c-40b2-816c-2954c6ccee2a}" Visible="True" Order="-2">
+                <WZUIContainer Type="WZUIContainer" GUID="{335633ab-a785-4b84-8d10-47e12f930947}" AnchorPoint="1,0.5" AbsContentSize="387.5,538" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{220286df-8696-4ed1-a814-21d917359479}" File="ui/common/common_scale9_di3.png" CapInsets="92,80,1,1" ShowRect="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{ffede3e9-dae7-49bb-8bec-865a48d7ff2e}" AnchorPoint="0,0.5" AbsContentSize="387.5,538" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{37b9d544-5ca1-4220-b629-775c3e1f90c9}" File="ui/common/common_scale9_di3.png" CapInsets="92,80,1,1" ShowRect="False" FlipX="False" ScaleX="-1" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{9e9c272e-3b77-476b-b553-333afa34ac09}" AbsContentSize="90,65" UseAbsSize="True" RelativePosition="0.941132,0.94254">
+                    <WZUIImage Type="WZUIImage" GUID="{e5da6c57-5679-4ea7-8aa6-0c2ca77ea854}" File="ui/common/common_icon_gb.png" UseOriginSize="True" RelativePosition="0.5,0.53077" AbsPosition="45,34.5" />
+                    <Button Type="WZUIButton" RelativePosition="0.55,0.5" AbsContentSize="90,65" UseAbsSize="True" GUID="{238c016e-fb34-4c82-811a-95f054262c29}" LuaDoneFunctionName="onCloseClick" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{d3557615-9134-4f64-b909-9283cf76abd8}">
+                            <WZUIImage Type="WZUIImage" GUID="{264338aa-b56e-4fff-80f6-5d43ba327df4}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{5d80467e-9576-4aa2-94f9-c9ae1605d723}">
+                            <WZUIImage Type="WZUIImage" GUID="{e91985df-25bc-4a76-8f86-7d4e6404844d}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{7897e569-f32c-4c07-895a-d007dae0dd8b}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{71c36f80-aee7-477d-848f-8ddc33f6f7a8}" AbsContentSize="640,40" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.953084">
+                    <WZUI9Image Type="WZUI9Image" GUID="{37ef00d6-5cba-419b-b2eb-5858bb7f6c75}" File="ui/common/common_icon_xhd.png" Opacity="153" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{26a3641b-1716-4717-8ca9-b9b8f88318a7}" AbsContentSize="70,50" UseAbsSize="True" RelativePosition="0.5,0.969346">
+                    <WZUIImage Type="WZUIImage" GUID="{f782db0c-c4b4-4f9d-8749-9e3d7ace56ad}" File="ui/common/common_icon_hongchouzi2.png" UseOriginSize="True" AnchorPoint="1,0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{51c1d1c1-f813-45c5-a512-f01411943c9a}" File="ui/common/common_icon_hongchouzi2.png" UseOriginSize="True" AnchorPoint="1,0.5" ScaleX="-1" />
+                    <WZUIImage Type="WZUIImage" GUID="{27c8b933-c032-4ea8-9d3d-5d3e4bd9ea04}" File="ui/common/common_icon_qt.png" UseOriginSize="True" RelativePosition="0.5,0.42" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{342649b0-9fac-4401-beea-6b4c32387a67}" AbsContentSize="120,410" UseAbsSize="True" RelativePosition="0.0959368,0.425958" Order="-1">
+                <WZUITableContainer Type="WZUITableContainer" GUID="{e8539e42-b281-4e8f-bbdc-82aa743bfbe4}" Name="tbActivityItem_WndSevenDayActivity" CellElementHeight="0.142" EnableMoveHorizontal="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{7ede90c1-6721-46ee-bdfa-d4e7a895d3f3}" AbsContentSize="650,444" UseAbsSize="True" RelativePosition="0.577404,0.425542" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{68cbfafc-d696-4ca3-8703-f4923bfd33cd}" File="ui/common/common_scale9_qt01.png" Opacity="255" Name="img9GrayBg_WndSevenDayActivity" />
+                <WZUICheckBoxGroup Type="WZUICheckBoxGroup" GUID="{0d97bf3e-5a4e-4acb-bc07-ca7734f17cc8}" Name="checkBoxGroup_WndSevenDayActivity" AbsContentSize="502,52" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.407692,0.970721">
+                    <CheckBox Type="WZUICheckBox" GUID="{4fbdd8e6-57b4-4cf2-b405-c2a7a9d9ccfa}" Name="checkBox1_WndSevenDayActivity" AbsContentSize="116,52" UseAbsSize="True" Tag="1" RelativePosition="0.141435,0.5" SelectedIndex="1" LuaCheckedFunctionName="onClickTab" Visible="False">
+                        <CheckElement Type="WZUIContainer" GUID="{de6b00a4-1b84-487d-a13c-a2ea3e8469fd}">
+                            <WZUIImage Type="WZUIImage" GUID="{288ee04a-65f7-44b1-8359-5a18105750df}" File="ui/common/common_btn_biaoqian2.png" UseOriginSize="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ac9035a3-7eac-4fbd-a982-d1b076b8c23a}" Name="txtCheckBox1_WndSevenDayActivity" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="105,65,46" StrokeSize="4" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{5fcbe975-9486-4e3a-b1c7-12feff6332ca}">
+                            <WZUIImage Type="WZUIImage" GUID="{bbf0915c-23a9-433a-8863-fb30c0933914}" File="ui/common/common_btn_biaoqian2_sel.png" UseOriginSize="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b7de3c92-2fe0-458d-a837-2428d18f0aee}" Name="txtCheckBoxSel1_WndSevenDayActivity" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="128,54,13" StrokeSize="4" />
+                        </CheckElement>
+                    </CheckBox>
+                    <CheckBox Type="WZUICheckBox" GUID="{eeeefc6d-6245-4ab7-880e-97e22d1e0dac}" Name="checkBox2_WndSevenDayActivity" AbsContentSize="116,52" UseAbsSize="True" Tag="2" RelativePosition="0.378486,0.5" LuaCheckedFunctionName="onClickTab" Visible="False">
+                        <CheckElement Type="WZUIContainer" GUID="{f722e7fc-3343-4f08-980b-9d540c57d696}">
+                            <WZUIImage Type="WZUIImage" GUID="{26b2c4ac-3fc9-488a-a0b3-39b848b42909}" File="ui/common/common_btn_biaoqian2.png" UseOriginSize="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3cdd46ad-9ced-4bf0-a510-c2a97346875c}" Name="txtCheckBox2_WndSevenDayActivity" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="105,65,46" StrokeSize="4" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{e3feb580-8acd-4393-97ee-5d1bcc05cba6}">
+                            <WZUIImage Type="WZUIImage" GUID="{51445a30-102a-46a6-acb7-8402702994bf}" File="ui/common/common_btn_biaoqian2_sel.png" UseOriginSize="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{78b9e5fe-6ca8-4be5-82fb-a2ed995c3871}" Name="txtCheckBoxSel2_WndSevenDayActivity" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="128,54,13" StrokeSize="4" />
+                        </CheckElement>
+                    </CheckBox>
+                    <CheckBox Type="WZUICheckBox" GUID="{0a702bfa-1d06-49d5-8094-3dbf1982847f}" Name="checkBox3_WndSevenDayActivity" AbsContentSize="116,52" UseAbsSize="True" Tag="3" RelativePosition="0.615537,0.5" LuaCheckedFunctionName="onClickTab" Visible="False">
+                        <CheckElement Type="WZUIContainer" GUID="{729afd0d-fee0-40d4-bdee-a6901bf82657}">
+                            <WZUIImage Type="WZUIImage" GUID="{a1ca23eb-afd1-4f96-910f-618650683124}" File="ui/common/common_btn_biaoqian2.png" UseOriginSize="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{6238a07c-7a6a-4943-885d-f244395e1010}" Name="txtCheckBox3_WndSevenDayActivity" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="105,65,46" StrokeSize="4" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{b2e33df1-90db-45b1-a5c8-7bd12cc4cc7f}">
+                            <WZUIImage Type="WZUIImage" GUID="{20748dca-f674-45a9-8aad-64f4eef2852e}" File="ui/common/common_btn_biaoqian2_sel.png" UseOriginSize="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{52842339-9a05-4604-85c7-2980396b3cd6}" Name="txtCheckBoxSel3_WndSevenDayActivity" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="128,54,13" StrokeSize="4" />
+                        </CheckElement>
+                    </CheckBox>
+                    <CheckBox Type="WZUICheckBox" GUID="{3c1097f2-aab6-43bf-9be8-7093cd1465ce}" Name="checkBox4_WndSevenDayActivity" AbsContentSize="116,52" UseAbsSize="True" Tag="4" RelativePosition="0.854582,0.5" LuaCheckedFunctionName="onClickTab" Visible="False">
+                        <CheckElement Type="WZUIContainer" GUID="{6805fcc7-39a1-4d6b-b450-848a300ec0ea}">
+                            <WZUIImage Type="WZUIImage" GUID="{b996836e-1cb7-41ec-b260-ac9894035948}" File="ui/common/common_btn_biaoqian2.png" UseOriginSize="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{909f2dd0-e310-4e5b-89d4-be60391a4996}" Name="txtCheckBox4_WndSevenDayActivity" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="105,65,46" StrokeSize="4" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{929ab7e7-861b-4621-9bac-c1b23ac641da}">
+                            <WZUIImage Type="WZUIImage" GUID="{8072e39e-a01c-4664-b434-ead5b7863e24}" File="ui/common/common_btn_biaoqian2_sel.png" UseOriginSize="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b1145a89-a995-4dfc-94e7-860994484c08}" Name="txtCheckBoxSel4_WndSevenDayActivity" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="128,54,13" StrokeSize="4" />
+                        </CheckElement>
+                    </CheckBox>
+                </WZUICheckBoxGroup>
+                <WZUIContainer Type="WZUIContainer" GUID="{04f02a5a-443e-41c8-8eeb-2f07458080cd}" Name="conForRedDot_WndSevenDayActivity" AbsContentSize="502,52" AnchorPoint="0.5,1" RelativePosition="0.407692,0.970721" UseAbsSize="True">
+                    <CheckElement Type="WZUIImage" GUID="{f0236a6b-ca80-417a-8fc2-db787d57563c}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Scale="0.8" RelativePosition="0.236801,0.86" Name="imgRedDot1_WndSevenDayActivity" Visible="False" />
+                    <CheckElement Type="WZUIImage" GUID="{e178d36f-57f0-4530-860b-b994eebf7799}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Scale="0.8" RelativePosition="0.474707,0.86" Name="imgRedDot2_WndSevenDayActivity" Visible="False" />
+                    <CheckElement Type="WZUIImage" GUID="{256f2102-b509-48db-b17f-d6de1d3ddcf5}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Scale="0.8" RelativePosition="0.710167,0.86" Name="imgRedDot3_WndSevenDayActivity" Visible="False" />
+                    <CheckElement Type="WZUIImage" GUID="{015bab76-8f9e-4ce8-bc30-14a8355dda96}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Scale="0.8" RelativePosition="0.949883,0.86" Name="imgRedDot4_WndSevenDayActivity" Visible="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{60566eca-d230-48f8-8490-e9b96a40bd7c}" Name="conForBuyLimit_WndSevenDayActivity" Visible="False">
+                    <WZUIContainer Type="WZUIContainer" GUID="{f7901d98-ffd5-411c-95d4-222ec182537c}" AnchorPoint="0.5,0" RelativePosition="0.5,0.0247748" RelativeSize="0.97,0.852">
+                        <WZUIImage Type="WZUIImage" GUID="{d0eff2e7-c626-4a57-a734-842d4c3c5dcf}" Name="imgBK_WndSevenDayActivity" File="ui/gameActivity/common_scale9_qt03.png" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{4af820b8-60f2-4289-a22d-44a43e0db516}" Name="conForItem_WndSevenDayActivity" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.501586,0.637462">
+                            <WZUIImage Type="WZUIImage" GUID="{013987fd-0cd2-402a-a9f8-0fa9d3933f96}" File="ui/common/common_scale9_qt04.png" Scale="1.4" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{abecd4a1-8a4b-4878-adcb-290d0d278d6e}" AbsContentSize="210,50" UseAbsSize="True" RelativePosition="0.5,0.462991">
+                            <WZUI9Image Type="WZUI9Image" GUID="{cf1698d3-ff4c-475f-aaee-e92b770111b3}" File="ui/common/common_scale9_heidi4_sel.png" UseOriginSize="True" Scale="0.6" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{00a409af-6a3e-486b-86dc-5acd112cc76d}" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" FontSize="20" Name="txtItemName_WndSevenDayActivity" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{c2a771c1-9178-490c-894c-c4564ca2eecc}" AbsContentSize="380,112" UseAbsSize="True" RelativePosition="0.5,0.23896">
+                            <WZUI9Image Type="WZUI9Image" GUID="{6f6466ae-2547-46d5-b608-cb44bd995969}" File="ui/common/common_scale9_di29.png" />
+                            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{3faa9508-9f77-400a-88bd-6cdb9d64dfc7}" RelativePosition="0.228203,0.64721" Name="ftxtOriginPrice_WndSevenDayActivity" MaxWidth="500" />
+                            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{23dd2218-a373-4720-aa51-8462b29bcb79}" RelativePosition="0.565462,0.646887" Name="ftxtCurPrice_WndSevenDayActivity" MaxWidth="500" AnchorPoint="0,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{828c5c0f-7009-45de-9d1c-334c6abf5cb1}" File="ui/gameActivity/common_icon_xiexian3.png" UseOriginSize="True" RelativePosition="0.246336,0.639367" />
+                            <Button Type="WZUIButton" GUID="{8e4985f8-efae-45ad-bfcb-a42a7bc509a9}" AbsContentSize="116,58" UseAbsSize="True" Name="btnBuy_WndSevenDayActivity" RelativePosition="0.5,0.05" LuaActionName="Normal" LuaDoneFunctionName="onClickBuy">
+                                <NormalElement Type="WZUIContainer" GUID="{f05f0e6b-6945-4cd1-aab4-acd9a5504c1a}">
+                                    <WZUIImage Type="WZUIImage" GUID="{53c6dc08-a16e-46de-a45c-a750b4ea37aa}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{2245831d-95dc-4b24-8c88-1b7ee2a9921c}" TextKey="BUY" LabelStyleKey="SMALL_GREEN_BTN" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{4c87ae3d-7a3b-476f-9191-cb4447ca6d92}">
+                                    <WZUIImage Type="WZUIImage" GUID="{bfb4f290-0df0-48c3-9412-584bac665faf}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{2c49d25b-e60f-4453-87de-ea4e3fcbfdde}" TextKey="BUY" LabelStyleKey="SMALL_GREEN_BTN" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{d5336d28-675a-43c9-9ce9-549ebdda623b}">
+                                    <WZUIImage Type="WZUIImage" GUID="{a5809543-7f01-4a5c-a48e-c2a1939ab4c3}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" GrayRender="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c5e92981-1f90-4460-af24-417250cd1193}" TextKey="BOUGHT" LabelStyleKey="SMALL_GRAY_BTN" />
+                                </DisableElement>
+                            </Button>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{6ac8c873-2fc3-46e2-b6bc-ca98b9fb5f70}" RelativeSize="0.97,0.852" AnchorPoint="0.5,0" RelativePosition="0.5,0.0247748" Name="conForReward_WndSevenDayActivity" Visible="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{34cd9962-090d-4aff-b695-ebc5115ef979}" File="ui/common/common_scale9_qt02.png" />
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{71115606-6ca2-4d64-ab95-b5110c6d2664}" CellElementHeight="0.37" EnableMoveHorizontal="False" Name="tbForList_WndSevenDayActivity" RelativeSize="1,0.95" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{d7a7cffa-1eb0-445a-985b-5c8b3ad8d213}" AbsContentSize="770,31" UseAbsSize="True" RelativePosition="0.5,0.863836">
+                <WZUI9Image Type="WZUI9Image" GUID="{14452818-e80f-4005-a088-1faa3d91bd1f}" File="ui/common/common_scale9_heidi1.png" Opacity="255" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{ffb5ee60-b8be-4e41-a5ee-1bcd1fe64975}" AnchorPoint="0,0.5" RelativePosition="0.09,0.5" Name="ftxtActivityLeftTime_WndSevenDayActivity" MaxWidth="500" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{5b0bdff3-f0ff-4d27-b8d3-e1b4ca95e23f}" MaxWidth="500" Name="ftxtGetRewardTime_WndSevenDayActivity" AnchorPoint="0,0.5" RelativePosition="0.535,0.5" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSevenDayActivity>

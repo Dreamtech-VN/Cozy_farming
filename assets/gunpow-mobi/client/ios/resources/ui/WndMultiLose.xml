@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<WndMultiLose GUID="{e0fc019e-381d-4eec-aa87-6e9e06e2d332}">
+    <WZUIFrame Type="WZUIFrame" GUID="{83457ae4-e93e-4d8d-a9f5-af9c13275046}">
+        <WZUIWindow Type="WZUIWindow" GUID="{d12257af-151a-4c01-a535-4f2bc16a16d4}" LuaObjectName="WndMultiLose" Name="WndMultiLose" NameCreate="True" UseAbsSize="False" AbsContentSize="1136,720" ShowAll="False" Scale="1" LuaTouchBeganFunction="onTouchBegan" Visible="False">
+            <WZUIImage Type="WZUIImage" GUID="{1467507c-6cbe-4d89-98b6-f6c481068b80}" File="ui/copy_settlement/common_pic_sb.png" RelativeSize="1,1" AnchorPoint="0.5,0.5" Name="imgLeftBg_WndMultiLose" UseOriginSize="True" isValid="True" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{14290dac-9746-4c24-a512-8a706014fc9d}" Name="conLose_WndMultiLose" RelativeSize="1,1" Visible="True" UseAbsCoordinate="False" ShowAll="True" RelativePosition="0.5,0.5">
+                <WZUIContainer Type="WZUIContainer" GUID="{3257fba3-025a-41e4-b717-5133436c5640}" RelativePosition="0.5,0.730667" UseAbsSize="True" AbsContentSize="600,400" Visible="True">
+                    <WZUISpine Type="WZUISpine" GUID="{5b789259-52da-4798-a864-692d9ca60ab5}" FileAtlas="copy_settlement/fail.atlas" FileJson="copy_settlement/fail.json" RelativePosition="0.5,-0.66" AnimationName="fail" AnchorPoint="0.5,0" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{1c9c52b7-4e0c-4b0d-a7b6-bd4a6d3bee04}" Name="conPlayerFail_WndMultiLose" UseAbsSize="False" RelativeSize="1,0.45" RelativePosition="0.5,0.3" />
+                <WZUIContainer Type="WZUIContainer" GUID="{72b107f1-ab5c-45ec-ae3d-4b58e362216b}" UseAbsSize="True" AbsContentSize="780,60" RelativePosition="0.5,0.575" Scale="0" Visible="False">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7903e19d-5789-4287-8665-3891c5032339}" Color="255,236,193" Text="" FontSize="26" Order="1" Name="txtLoseTips_WndMultiLose" TextKey="LOSE_TIPS" />
+                    <WZUIImage Type="WZUIImage" GUID="{14249106-7992-4355-a973-f985799878dc}" File="ui/common/common_scale9_heidi2.png" />
+                    <Action Type="WZUIActionSequence" GUID="{abe7690b-a3cb-4cc6-af0b-9cd9485453cb}">
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{a8632eff-c26d-4564-95f6-ccf3570f0c9f}" Duration="1.2" />
+                        <ChildAction Type="WZUIActionScaleTo" GUID="{ca4f4879-ebd2-4893-89d4-582bbec4ad37}" Duration="0.2" />
+                    </Action>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{bb282366-b6ac-4c4b-afc6-39c45e2f46c7}" AbsContentSize="100,160" UseAbsSize="True" Name="conVideo_WndMultiLose" ShowAll="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" Visible="False">
+                <Button Type="WZUIButton" AbsContentSize="70,70" Visible="True" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1" LuaDoneFunctionName="onExitVideo" GUID="{c0459840-54a1-46dc-843f-0b58a04e31de}">
+                    <NormalElement Type="WZUIContainer" GUID="{de00a9b9-9143-4ccf-99b5-a1a2892f9189}">
+                        <WZUIImage Type="WZUIImage" GUID="{a9034c92-b4b5-45b0-8bb0-a08bab5d46a9}" File="ui/hero/battle_icon_gbsp.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{a73b702a-054c-4c11-a391-c0caad54aa82}">
+                        <WZUIImage Type="WZUIImage" GUID="{3c44e56b-f87f-4fb9-b54f-3f817c2d4fe7}" File="ui/hero/battle_icon_gbsp.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{31863d94-4a77-42f3-88e3-39854a404089}" />
+                </Button>
+                <WZUIButton Type="WZUIButton" AbsContentSize="70,70" Visible="True" UseAbsSize="True" GUID="{546880d6-6cd4-40e6-8514-da532b855931}" RelativePosition="0.5,0" AnchorPoint="0.5,0" LuaDoneFunctionName="onAgainVideo">
+                    <NormalElement Type="WZUIContainer" GUID="{92c06622-8cdb-43eb-b9fe-ee220c156b9d}">
+                        <WZUIImage Type="WZUIImage" GUID="{a2c4018c-543e-4a0f-a43b-54673a7ba90c}" File="ui/hero/battle_icon_congxbf.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{8eeab38c-58bc-41ba-a677-f40ef9ab0d7a}">
+                        <WZUIImage Type="WZUIImage" GUID="{7c1ea8d1-3df6-43d1-bde3-ac460655d12b}" File="ui/hero/battle_icon_congxbf.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{0c4022c2-2304-4e0f-a56b-8f72bf824fc2}" />
+                </WZUIButton>
+            </WZUIContainer>
+            <Action Type="WZUIActionSequence" GUID="{c2199a0a-fd36-42b9-b1a0-3c1761ad4266}">
+                <ChildAction Type="WZUIActionDelayTime" GUID="{843e771b-eeb7-4e8e-a7ce-723ca5ced980}" Duration="0.2" />
+                <ChildAction Type="WZUIActionShow" GUID="{409a551c-620e-4431-a92c-26db2778d0f6}" />
+                <ChildAction Type="WZUIActionContainerFadeFromTo" GUID="{5d8e2019-a996-4394-9493-16cedaec9934}" OpacityTo="255" Duration="1" RemoveTarget="False" />
+            </Action>
+        </WZUIWindow>
+        <WZUIContainer Type="WZUIContainer" GUID="{430BD49B-94B3-4d95-9900-9CD128E464C8}" UseAbsSize="True" AbsContentSize="180,250" Name="CellPlayer_WndMultiLose" RelativePosition="0,0.5" Visible="True" NameCreate="True" AnchorPoint="0,0.5">
+            <WZUIImage Type="WZUIImage" GUID="{0AB9EF02-932D-4ff7-93E8-BC85264C44CA}" File="ui/common/common_icon_yy.png" UseOriginSize="True" RelativePosition="0.45,0.14" Scale="1.3" AbsPosition="80,30.729" />
+            <WZArmature Type="WZArmature" GUID="{DA45F6A4-C957-4243-A88B-87AB2F940C7A}" ArmatureName="ui_jiesuan_renwudizuo_01" ArmatureFile="ui/ui_jiesuan_renwudizuo_01.xml" UseOriginSize="True" Scale="0.7" RelativePosition="0.493975,0.0659723" Name="armBase_WndMultiLose" Visible="False" Order="1">
+                <Action Type="WZUIArmatureAnimationById" GUID="{0B7167EB-DA08-436c-98AE-C35EFFA432EE}" AnimationId="0" />
+            </WZArmature>
+        </WZUIContainer>
+    </WZUIFrame>
+</WndMultiLose>

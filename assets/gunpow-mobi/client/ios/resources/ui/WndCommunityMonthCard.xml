@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<WndCommunityMonthCard GUID="{FE061344-1845-4891-A695-4EAEDDCA96BD}">
+    <WZUIWindow AbsContentSize="660,600" GUID="{1A8B6E88-820F-4e5c-A7BA-691F72D001A0}" LuaObjectName="WndCommunityMonthCard" Name="WndCommunityMonthCard" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" RelativePosition="0.5,0.52" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{71B76DA9-1934-4e20-85A3-775106133336}" AbsContentSize="496,500" UseAbsSize="True" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{134D1D98-2CD4-4db0-A512-67C4516CDD42}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" RelativePosition="0.5,0.505" />
+            <WZUIContainer Type="WZUIContainer" GUID="{1F66137F-8F11-4048-8824-8BE5594557A7}" AbsContentSize="485,332" UseAbsSize="True" RelativePosition="0.5,0.51">
+                <WZUI9Image Type="WZUI9Image" GUID="{1E72078D-0C30-49ab-BF23-3E692E39BA8E}" File="ui/common/common_scale9_di20.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="470,50" GUID="{B03C702B-34A9-450b-89CA-078C0CAEBD06}" Name="conTop_WndMonthCard" RelativePosition="0.5,0.87" RelativeSize="1,0.1434" Type="WZUIContainer" UseAbsSize="True">
+            <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{2B7800C3-A703-4164-8619-2456AC14EC1C}" RelativePosition="0.5,0.44" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="132,66,29" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" AbsPosition="235,22" Name="txtTop_WndCommunityMonthCard" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="470,312" GUID="{D53A4C6F-30EA-4a3b-BF19-36AD98D16EDC}" Name="" RelativePosition="0.5,0.55" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0.56">
+            <WZUITableContainer AbsContentSize="470,312" CellElementHeight="0.22" EnableMoveHorizontal="False" GUID="{20DE9FA0-873B-4463-B673-3DADA289EFBA}" MinPosition="0.5,0.5" Name="tbcon_WndMonthCard" RelativePosition="0.5,0.485" RelativeSize="1,0.92" Type="WZUITableContainer" UseAbsSize="True" VerticalInterval="0.018" />
+        </WZUIContainer>
+        <WZUIButton AbsContentSize="120,60" GUID="{65A68288-4772-42f1-A627-114F61E3289A}" LuaDoneFunctionName="onConfirm" Name="btnConfirm" RelativePosition="0.5,0.168035" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal">
+            <NormalElement GUID="{B818CD75-29C4-4970-A50A-19CFFAD3F07E}" Type="WZUIContainer">
+                <WZUI9Image File="ui/common/common_btn_anniu10_1.png" GUID="{369857B8-5398-4e0c-8B4D-CADCDAA1B08F}" Type="WZUI9Image" UseOriginSize="True" />
+                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{C9EEC9FA-32B3-4ec8-AFF5-3DEA2548CB8E}" Name="txtDonate" ShadowColor="0,255,0" StrokeColor="64,128,1" StrokeOffset="0,0" StrokeSize="4" Text="捐献" Type="WZUILabelTTF" Visible="True" RelativePosition="0.5,0.5" LabelStyleKey="SMALL_GREEN_BTN" TextKey="BUY_FIVE_AFFIRM" />
+            </NormalElement>
+            <SelectElement GUID="{9E4C5C69-7E14-4886-9701-EE079B13B195}" Type="WZUIContainer">
+                <WZUI9Image File="ui/common/common_btn_anniu10_1_sel.png" GUID="{667D1B12-6F50-4ade-A341-574FC2426A4B}" Type="WZUI9Image" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{EF5D53D1-C4D5-467d-BCF9-BDA23CB772FE}" Name="txtDonate1" ShadowColor="0,255,0" StrokeColor="64,128,1" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" RelativePosition="0.5,0.5" LabelStyleKey="SMALL_GREEN_BTN" TextKey="BUY_FIVE_AFFIRM" />
+            </SelectElement>
+        </WZUIButton>
+        <WZUIButton AbsContentSize="115,55" GUID="{0A1C5E28-587E-40c1-96BC-CA2E1A27D631}" LuaDoneFunctionName="onClose" Name="btnCloseWindow_WndRecruit" RelativePosition="0.815,0.87" Type="WZUIButton" UseAbsSize="True" Visible="True" LuaActionName="Normal" AbsPosition="537.9,522">
+            <NormalElement GUID="{DFA685D9-D2DC-4047-88D0-1C40771B7922}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="False">
+                <WZUI9Image File="ui/common/common_icon_guanbi.png" GUID="{10C2A2BC-4C7A-4af9-892D-5218ED87E008}" Type="WZUI9Image" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement GUID="{704C46BC-EA9F-4f11-A9C5-D091F072FEE2}" TouchContainerEnable="True" Type="WZUIContainer">
+                <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{C589446D-80F7-41a8-9049-8C648D328D86}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+            </SelectElement>
+            <DisableElement GUID="{B6B20BA7-BB87-46c6-8BE0-D71F82016BF1}" Type="WZUIContainer" />
+        </WZUIButton>
+    </WZUIWindow>
+</WndCommunityMonthCard>

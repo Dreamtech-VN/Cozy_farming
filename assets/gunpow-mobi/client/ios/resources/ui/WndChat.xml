@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" ?>
+<WndChat GUID="{1C9004BA-0F69-4de7-80D3-DD2E19A09AF2}">
+    <WZUIWindow Type="WZUIWindow" GUID="{332128DF-C59A-43c9-868C-F838502D3A4A}" LuaObjectName="WndChat" Name="WndChat" NameCreate="True" AbsContentSize="" LuaTouchBeganFunction="onTouchBegin" LuaTouchEndedFunction="onTouchEnd" LuaTouchCancelledFunction="" LuaTouchMovedFunction="onTouchMove">
+        <WZUIContainer GUID="{54C07D7A-E046-4f38-B9C3-66C990E2FEE7}" LuaObjectName="" Name="" NameCreate="False" Type="WZUIContainer" AnchorPoint="0,0" RelativePosition="0,0" AbsContentSize="960,640" UseAbsSize="True" ShowAll="False">
+            <WZUIContainer GUID="{E9C2A1A0-1B55-44b6-9E89-C7C19E2CDC4D}" Name="conchatimg_wndchat" Type="WZUIContainer" AnchorPoint="0,0" RelativePosition="0,0" AbsContentSize="0,0" UseAbsSize="False" Scale="1">
+                <WZUIImage Type="WZUIImage" GUID="{BC3431F1-A488-4fa9-8D20-0ECAE6C7DC0A}" File="ui/chat/chat_common_scale9_yaan3.png" AnchorPoint="0,0" RelativePosition="0,0" Name="imgWndChatBg_WndChat" Scale="1" Visible="True" Color="255,255,255" Opacity="180" isValid="True" />
+                <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickClose" GUID="{38D9B715-C92D-47f4-9148-2828BB86410B}" AbsContentSize="960,580" UseAbsSize="True" RelativePosition="0.267201,0.002" Name="btnCloseChat_WndChat" AnchorPoint="0,0">
+                    <NormalElement Type="WZUIContainer" GUID="{8675104E-482D-4f70-B721-98625CC9F742}" />
+                    <SelectElement Type="WZUIContainer" GUID="{13615E77-674A-40b2-9785-D92377DDE1EA}" />
+                    <DisableElement Type="WZUIContainer" GUID="{25584008-859B-47ae-8E40-B51BDE81989A}" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer GUID="{D2A10BFC-2AA4-412e-A35A-28F1FEBA60FC}" LuaObjectName="" Name="conchatcontext_wndchant" RelativePosition="0.002,0.002" Type="WZUIContainer" AbsContentSize="692,580" UseAbsSize="True" AnchorPoint="0,0" ShowAll="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{adb89da8-f438-4c31-b01b-559e1e9ff28a}" File="ui/chat/common_scale9_di94_lt.png" CapInsets="65,44,1,1" Opacity="255" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{1d4a9fb5-c7c3-4e01-b505-3aa3e1959e8c}" AbsContentSize="480,60" UseAbsSize="True" RelativePosition="0.433526,1.03403" Visible="True">
+                    <WZUICheckBoxGroup AbsContentSize="555,60" AnchorPoint="0.5,0" GUID="{fa31824a-df2d-42cb-94b2-877576c168cb}" RelativePosition="0.5,0.023648" RelativeSize="1,1" Type="WZUICheckBoxGroup" UseAbsSize="True" Name="checkBoxGroup_WndChat" Visible="True">
+                        <CheckBox AbsContentSize="105,60" AnchorPoint="0.5,0.5" GUID="{882c244b-9096-4d92-8f0f-214d8347226c}" LuaSelectedFunctionName="onclickTopSelect" Name="checkboxCur_WndChat" RelativePosition="0.109274,0.549971" RelativeSize="0.2,1" SelectedIndex="0" Tag="0" Type="WZUICheckBox" UseAbsSize="True">
+                            <CheckElement GUID="{ceda942b-10d5-4447-9ffd-d49d18c3fd47}" Type="WZUIContainer" RelativePosition="0.5,0.5">
+                                <WZUIImage Type="WZUIImage" GUID="{ef111cdd-d5f0-4aa5-a09b-88a4408ab197}" File="ui/chat/chat_common_btn_biaoqian2.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                                <WZUILabelTTF Color="255,236,193" FontSize="22" GUID="{f7f895d0-10f1-4687-bcf0-6be198d17491}" Name="txtCheckCur_WndChat" Type="WZUILabelTTF" BoldFont="False" EnableStroke="True" StrokeColor="79,60,48" Text="当前" RelativePosition="0.5,0.45" StrokeSize="4" TextKey="CHAT_CURRENT" />
+                            </CheckElement>
+                            <CheckElement GUID="{57285983-c311-40a8-ba98-8b29f8e60308}" Type="WZUIContainer" RelativePosition="0.5,0.5">
+                                <WZUIImage Type="WZUIImage" GUID="{ee494c64-40f9-4d2f-aa4a-be4948ef29d5}" UseOriginSize="True" File="ui/chat/chat_common_btn_biaoqian2_sel.png" RelativePosition="0.5,0.482604" Visible="True" Name="" />
+                                <WZUILabelTTF Color="79,60,48" FontSize="24" GUID="{808e96f9-4ddd-4970-acda-d6fa8a8a1615}" Name="txtCheckCurSel_WndChat" Type="WZUILabelTTF" BoldFont="False" EnableStroke="False" StrokeColor="105,65,46" Text="当前" RelativePosition="0.5,0.45" Visible="True" StrokeSize="4" TextKey="CHAT_CURRENT" />
+                            </CheckElement>
+                        </CheckBox>
+                        <CheckBox AbsContentSize="105,60" GUID="{18e5a800-c63d-48d6-a711-b2ac87d025be}" LuaSelectedFunctionName="onclickTopSelect" Name="checkboxWorld_WndChat" RelativePosition="0.305287,0.549971" RelativeSize="0.2,1" SelectedIndex="1" Tag="1" Type="WZUICheckBox" UseAbsSize="True" Visible="True">
+                            <CheckElement GUID="{f1466007-8f75-492f-af11-29ee553fc4f2}" Type="WZUIContainer" Visible="True">
+                                <WZUIImage Type="WZUIImage" GUID="{3877e316-94f4-469b-ba61-61a356761b2f}" File="ui/chat/chat_common_btn_biaoqian2.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                                <WZUILabelTTF Color="255,236,193" FontSize="22" GUID="{ee4359a0-c056-49dd-b9a7-45180a199fcf}" Name="" Type="WZUILabelTTF" BoldFont="False" EnableStroke="True" StrokeColor="79,60,48" Text="世界" RelativePosition="0.5,0.45" StrokeSize="4" TextKey="CHAT_WORLD" />
+                            </CheckElement>
+                            <CheckElement GUID="{102147a2-d10d-445f-9277-479bc6e80427}" Type="WZUIContainer">
+                                <WZUIImage Type="WZUIImage" GUID="{f8e15c99-2c79-45e4-92b9-df2f7bab3aa5}" UseOriginSize="True" File="ui/chat/chat_common_btn_biaoqian2_sel.png" RelativePosition="0.5,0.482604" Visible="True" Name="" />
+                                <WZUILabelTTF Color="79,60,48" FontSize="24" GUID="{5f8d634e-af67-4f67-a141-b22025f99ff0}" Name="" Type="WZUILabelTTF" BoldFont="False" EnableStroke="False" StrokeColor="105,65,46" Text="世界" RelativePosition="0.5,0.45" StrokeSize="4" Visible="True" TextKey="CHAT_WORLD" />
+                            </CheckElement>
+                        </CheckBox>
+                        <CheckBox AbsContentSize="105,60" AnchorPoint="0.5,0.5" GUID="{566bc283-ba5b-4f40-9650-3f8b730f0186}" LuaSelectedFunctionName="onclickTopSelect" Name="checkboxGong_WndChat" RelativePosition="0.696513,0.549971" RelativeSize="0.2,1" SelectedIndex="0" Tag="2" Type="WZUICheckBox" UseAbsSize="True" Visible="True">
+                            <CheckElement GUID="{4a065b17-c556-4139-9bfe-4a4c1015be25}" Type="WZUIContainer">
+                                <WZUIImage Type="WZUIImage" GUID="{2b91d525-513c-4bea-a5fe-9a69a247c15b}" File="ui/chat/chat_common_btn_biaoqian2.png" UseOriginSize="True" />
+                                <WZUILabelTTF Color="255,236,193" FontSize="22" GUID="{c758fdad-7747-4beb-aee8-63db126e69f7}" Name="" Type="WZUILabelTTF" BoldFont="False" EnableStroke="True" StrokeColor="79,60,48" Text="公会" RelativePosition="0.5,0.45" StrokeSize="4" TextKey="COMMUNITY" />
+                            </CheckElement>
+                            <CheckElement GUID="{d566772b-a206-43bc-b1ad-1f7404b2f567}" Type="WZUIContainer">
+                                <WZUIImage Type="WZUIImage" GUID="{268417d8-f3e3-40be-a0fc-7bb061a0087c}" UseOriginSize="True" File="ui/chat/chat_common_btn_biaoqian2_sel.png" RelativePosition="0.5,0.482604" Visible="True" Name="" />
+                                <WZUILabelTTF Color="79,60,48" FontSize="24" GUID="{28533426-2cff-42fb-ac02-132212c1aee4}" Name="" Type="WZUILabelTTF" BoldFont="False" EnableStroke="False" StrokeColor="105,65,46" Text="公会" RelativePosition="0.5,0.45" StrokeSize="4" Visible="True" TextKey="COMMUNITY" UseOriginSizeProportion="False" />
+                            </CheckElement>
+                        </CheckBox>
+                        <CheckBox AbsContentSize="105,60" GUID="{d87fac27-2bf2-455d-9be5-c4ca671dd531}" LuaSelectedFunctionName="onclickTopSelect" Name="checkboxPri_WndChat" RelativePosition="0.891901,0.549971" RelativeSize="0.2,1" SelectedIndex="0" Tag="3" Type="WZUICheckBox" UseAbsSize="True" Visible="True">
+                            <CheckElement GUID="{8bc2c742-4c18-4044-96aa-a0d99bd9d207}" Type="WZUIContainer">
+                                <WZUIImage Type="WZUIImage" GUID="{b4b67fb3-fcc5-495e-8429-7cd7588f3c7d}" File="ui/chat/chat_common_btn_biaoqian2.png" UseOriginSize="True" />
+                                <WZUILabelTTF Color="255,236,193" FontSize="22" GUID="{cef068f4-e74e-4d70-9866-c6367e33e579}" Name="txtBoxPri_WndChat" Type="WZUILabelTTF" BoldFont="False" EnableStroke="True" StrokeColor="79,60,48" Text="私聊" RelativePosition="0.5,0.45" StrokeSize="4" TouchEnable="True" TextKey="CHAT_PRIVATE" />
+                            </CheckElement>
+                            <CheckElement GUID="{7f822af2-8ef1-4a09-acd9-8c2227a94962}" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                <WZUIImage Type="WZUIImage" GUID="{e379d0c0-47db-493f-9218-ae06c1f9e92c}" UseOriginSize="True" File="ui/chat/chat_common_btn_biaoqian2_sel.png" RelativePosition="0.5,0.482604" Visible="True" Name="" />
+                                <WZUILabelTTF Color="79,60,48" FontSize="24" GUID="{71d600d7-ac7e-4c80-b17c-2b60192fccfe}" Name="txtBoxPriSel_WndChat" Type="WZUILabelTTF" BoldFont="False" EnableStroke="False" StrokeColor="105,65,46" Text="私聊" RelativePosition="0.5,0.45" StrokeSize="4" Visible="True" TextKey="CHAT_PRIVATE" />
+                            </CheckElement>
+                        </CheckBox>
+                        <CheckBox AbsContentSize="105,60" GUID="{0cdb3c49-fc14-40bb-89c1-dfe1fa2157a9}" LuaSelectedFunctionName="onclickTopSelect" Name="checkboxTeam_WndChat" RelativePosition="0.500909,0.549971" RelativeSize="0.2,1" SelectedIndex="0" Tag="4" Type="WZUICheckBox" UseAbsSize="True" Visible="True" TouchContainerEnable="False">
+                            <CheckElement GUID="{a7167079-2b05-4d14-8d92-434e842bab2e}" Type="WZUIContainer">
+                                <WZUIImage Type="WZUIImage" GUID="{c0fc5195-a4cd-4174-9316-5479fe8c1152}" File="ui/chat/chat_common_btn_biaoqian2.png" UseOriginSize="True" />
+                                <WZUILabelTTF Color="255,236,193" FontSize="22" GUID="{bdc7fcd3-602f-487d-a214-d98f2334bdb9}" Name="" Type="WZUILabelTTF" BoldFont="False" EnableStroke="True" StrokeColor="79,60,48" Text="" RelativePosition="0.5,0.45" StrokeSize="4" TouchEnable="True" TextKey="TEAM" />
+                            </CheckElement>
+                            <CheckElement GUID="{12a9ab8a-af35-441b-bcb2-5dab71ce3c8f}" Type="WZUIContainer" AbsContentSize="0,0" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                <WZUIImage Type="WZUIImage" GUID="{70d919a2-6c2b-4320-86e3-34fcf29d232b}" UseOriginSize="True" File="ui/chat/chat_common_btn_biaoqian2_sel.png" RelativePosition="0.5,0.482604" Visible="True" Name="" />
+                                <WZUILabelTTF Color="79,60,48" FontSize="24" GUID="{a1d67886-16b1-4d50-9001-a0e28a79cf0c}" Name="" Type="WZUILabelTTF" BoldFont="False" EnableStroke="False" StrokeColor="105,65,46" Text="" RelativePosition="0.5,0.45" StrokeSize="4" Visible="True" TextKey="TEAM" />
+                            </CheckElement>
+                        </CheckBox>
+                        <CheckBox AbsContentSize="105,60" GUID="{38dcc4b3-01e0-4906-9383-55854f551a43}" LuaSelectedFunctionName="onclickTopSelect" Name="checkboxCopy_WndChat" RelativePosition="1.0865,0.549971" RelativeSize="0.2,1" SelectedIndex="0" Tag="5" Type="WZUICheckBox" UseAbsSize="True" Visible="True" TouchContainerEnable="False">
+                            <CheckElement GUID="{ec04cd42-5dca-41dc-b20a-6fc4addba684}" Type="WZUIContainer">
+                                <WZUIImage Type="WZUIImage" GUID="{32785bbe-57da-485a-802a-5edae2535500}" File="ui/chat/chat_common_btn_biaoqian2.png" UseOriginSize="True" />
+                                <WZUILabelTTF Color="255,236,193" FontSize="22" GUID="{b893f00d-fb51-4eb6-8c1e-005fb43848f1}" Name="" Type="WZUILabelTTF" BoldFont="False" EnableStroke="True" StrokeColor="79,60,48" Text="" RelativePosition="0.5,0.45" StrokeSize="4" TouchEnable="True" TextKey="FIGHT_COPY" />
+                            </CheckElement>
+                            <CheckElement GUID="{71002b3f-72c3-4673-955b-9b5d49c707bb}" Type="WZUIContainer" AbsContentSize="0,0" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                <WZUIImage Type="WZUIImage" GUID="{73aecbcf-3797-4029-9fbd-ae704f089cd2}" UseOriginSize="True" File="ui/chat/chat_common_btn_biaoqian2_sel.png" RelativePosition="0.5,0.482604" Visible="True" Name="" />
+                                <WZUILabelTTF Color="79,60,48" FontSize="24" GUID="{ca20336d-d5b1-44ff-92e8-079a16aa5d36}" Name="" Type="WZUILabelTTF" BoldFont="False" EnableStroke="False" StrokeColor="105,65,46" Text="" RelativePosition="0.5,0.45" StrokeSize="4" Visible="True" TextKey="FIGHT_COPY" />
+                            </CheckElement>
+                        </CheckBox>
+                    </WZUICheckBoxGroup>
+                </WZUIContainer>
+                <WZUIFrameElement CurrentIndex="0" GUID="{d6c4c383-bd4c-4b1c-a9f0-77bac2400fbf}" Name="frameelement_WndChat" RelativePosition="0.5,0.560892" RelativeSize="0.96,0.761" TouchContainerEnable="True" TouchSwallow="False" Type="WZUIFrameElement" Visible="True">
+                    <FrameElement GUID="{73931c44-d7d2-41db-b1cb-538f87fce3cf}" Tag="0" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIFreeListContainer EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{612d8fa6-351b-45d2-9113-25eca388b975}" Name="freelistconCur_WndChat" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Tag="-5" Type="WZUIFreeListContainer" EnableMoveVertical="True" RelativePosition="0.5,0.495346" EnableHideUnvisible="True" UseAbsSize="False" AbsContentSize="666,445" ListItemInterval="-10" RelativeSize="1,1" EnableBounceBack="True" />
+                    </FrameElement>
+                    <FrameElement GUID="{73278b76-1c68-4111-bad8-4d1c24aacc18}" Tag="1" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIFreeListContainer EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{98b907b8-6600-4971-92b0-bba6f1ea29d9}" Name="freelistconWorld_WndChat" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Tag="-2" Type="WZUIFreeListContainer" RelativeSize="1,0.8" RelativePosition="0.5,0.388314" EnableHideUnvisible="True" AbsContentSize="666,340" UseAbsSize="False" ListItemInterval="10" EnableBounceBack="True" />
+                        <WZUIFreeListContainer EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{1ac5c199-1292-40e1-b4e7-6231302fed21}" Name="freelistconSystem_WndChat" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Tag="-2" Type="WZUIFreeListContainer" RelativeSize="1,0.20" RelativePosition="0.5,0.914167" Visible="True" EnableHideUnvisible="True" AbsContentSize="666,85" UseAbsSize="False" ListItemInterval="5" ListItemPadding="0,0,0,0" />
+                    </FrameElement>
+                    <FrameElement GUID="{37fe7c2e-6d5d-444b-a302-b06e8657337f}" Tag="2" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIFreeListContainer EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{2a221ae5-12cb-40af-b42b-27c7a86ffe65}" Name="freelistconGonghui_WndChat" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Tag="-5" Type="WZUIFreeListContainer" EnableMoveVertical="True" RelativePosition="0.5,0.495346" EnableHideUnvisible="True" UseAbsSize="False" AbsContentSize="666,445" ListItemInterval="-10" RelativeSize="1,1" EnableBounceBack="True" />
+                    </FrameElement>
+                    <FrameElement GUID="{0de1af5a-6425-4329-bb1b-bf5a79e93b41}" Tag="3" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIFreeListContainer EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{ce4a1da1-e38c-479b-9149-0764f5dfd3ca}" Name="freelistconPrivate_WndChat" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Tag="-4" Type="WZUIFreeListContainer" EnableHideUnvisible="True" AbsContentSize="536,445" UseAbsSize="False" ListItemInterval="-10" EnableBounceBack="True" RelativePosition="0.596403,0.497673" RelativeSize="0.8,1.01" />
+                    </FrameElement>
+                    <FrameElement GUID="{1ce56e4b-4b40-4ceb-83fd-e51dcb03a438}" Tag="4" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIFreeListContainer EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{b13e10ce-9e25-46ae-b165-681776458ee4}" Name="freelistconTeam_WndChat" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Tag="-4" Type="WZUIFreeListContainer" EnableHideUnvisible="True" AbsContentSize="666,445" UseAbsSize="False" ListItemInterval="-10" EnableBounceBack="True" RelativePosition="0.5,0.495346" />
+                    </FrameElement>
+                    <FrameElement GUID="{fe32d1b3-75c0-48d7-a330-a6bb7c1b248e}" Tag="5" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="666,505" UseAbsSize="True" RelativePosition="0.5,0.411641">
+                        <WZUIFreeListContainer EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{6c15cab9-69b6-45c3-91f6-7e3844f4ec14}" Name="freelistconCopy_WndChat" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Tag="9" Type="WZUIFreeListContainer" EnableHideUnvisible="True" AbsContentSize="666,445" UseAbsSize="False" ListItemInterval="-10" EnableBounceBack="True" RelativePosition="0.5,0.495346" />
+                    </FrameElement>
+                </WZUIFrameElement>
+                <WZUIContainer GUID="{264f540b-e152-4109-b4e6-4f490f6c0ced}" Name="conBottum_WndChat" RelativePosition="0.0149091,0.0222169" RelativeSize="1,1" Type="WZUIContainer" AbsContentSize="670,77" UseAbsSize="True" AnchorPoint="0,0" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{0e4324d5-31db-426c-bf82-bbaea4124a29}" File="ui/chat/common_scale9_di12.png" RelativePosition="0.5,0.525974" />
+                    <WZUIButton GUID="{53727ab5-6efa-4854-9f75-7e6b576791c6}" LuaDoneFunctionName="onclickSend" Name="btnSend_WndChat" RelativePosition="0.896422,0.435065" RelativeSize="1,1" ScaleY="1" Type="WZUIButton" Visible="True" AbsContentSize="100,52" UseAbsSize="True" LuaActionName="" AbsPosition="489.946,38.5">
+                        <NormalElement GUID="{ac04e8a5-5f0a-4b03-9c80-969a0ff0fbec}" RelativePosition="0.5,0.5" Type="WZUIContainer">
+                            <WZUI9Image File="ui/chat/chat_common_btn_anniu4.png" GUID="{6a5846bc-f866-465b-8ab0-b6b95ef38680}" Type="WZUI9Image" UseOriginSize="False" Scale="1" />
+                        </NormalElement>
+                        <SelectElement GUID="{3dc7a270-e6f2-4a2d-af86-a8e529e3af18}" Type="WZUIContainer" Scale="1.12">
+                            <WZUI9Image File="ui/chat/chat_common_btn_anniu4_sel.png" GUID="{421baae5-c2b4-4647-87cb-67c583622b55}" Type="WZUI9Image" UseOriginSize="False" Scale="1" />
+                        </SelectElement>
+                        <DisableElement GUID="{2cecdc56-0b9d-4ef0-9908-b17bd51001a7}" Type="WZUIContainer" />
+                        <WZUILabelTTF Color="255,236,193" FontSize="26" GUID="{22d076a1-1738-4f47-8893-eba1b5545ff6}" Name="txtSend_WndChat" Type="WZUILabelTTF" BoldFont="True" EnableStroke="True" StrokeColor="79,60,48" Text="" RelativePosition="0.5,0.519231" StrokeSize="4" AbsPosition="50,27" TextKey="SEND" />
+                    </WZUIButton>
+                    <WZUIContainer GUID="{1d5ff66d-bb5c-4b3e-8799-bb3648af5e05}" Name="conCur_WndChat" RelativePosition="0.404538,0.435065" ScaleY="1" Type="WZUIContainer" Visible="False" RelativeSize="0.75,1" AbsContentSize="340,50" UseAbsSize="True">
+                        <Button Type="WZUIButton" GUID="{b1c4d213-6a57-4a95-b2a7-71230a588a5c}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.0294118,0.5" LuaDoneFunctionName="onClickBubble">
+                            <NormalElement Type="WZUIContainer" GUID="{8e0d142c-341a-4520-b1bc-86ff7f23e181}">
+                                <WZUIImage Type="WZUIImage" GUID="{21a7639b-249a-4a42-a415-ffd21d9fa2ea}" File="ui/chat/chat_common_icon_yuanquandi.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{4d4e62bc-8764-4d68-886e-c31af0207470}" File="ui/chat/talk_qipao.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{cf26917e-008f-4f54-965d-fe26da209841}">
+                                <WZUIImage Type="WZUIImage" GUID="{6e0cfcf2-fa10-45aa-aab1-e1cad8df9c3c}" File="ui/chat/chat_common_icon_yuanquandi.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{29d001e7-2044-446f-a408-22c3501a995f}" File="ui/chat/talk_qipao.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{288cae7b-8a4f-4015-8e3f-9ed7b706b075}" />
+                        </Button>
+                        <Button Type="WZUIButton" GUID="{f128432b-b67d-43ae-a395-3a5311bfc3db}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.202942,0.5" LuaDoneFunctionName="onClickExpression">
+                            <NormalElement Type="WZUIContainer" GUID="{09485778-6e65-493f-ae70-07f94066fcbc}">
+                                <WZUIImage Type="WZUIImage" GUID="{1a7ad5af-daa0-422c-8f0d-4a793f755f01}" File="ui/chat/common_icon_liaotbq.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{843573e9-6b4d-446a-8295-3b1ee96b6117}" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{c2bbe17d-a7ee-46b8-b111-e1f3028bfe3c}">
+                                <WZUIImage Type="WZUIImage" GUID="{0f8cae82-be80-4bf1-81a2-c15c056d5821}" File="ui/chat/common_icon_liaotbq.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{3a757b35-eda3-4ff1-8373-d0e42a587934}" />
+                        </Button>
+                        <WZUIContainer Type="WZUIContainer" GUID="{08c95dad-354a-44f5-a47a-5dcfe0e02072}" AbsContentSize="330,50" UseAbsSize="True" RelativePosition="0.797058,0.5">
+                            <WZUI9Image Type="WZUI9Image" GUID="{0b84d0e1-d942-44dd-a8f6-07e33cc39050}" RelativeSize="1,1" RelativePosition="0.5,0.5" File="ui/chat/chat_common_scale9_di52.png" CapInsets="0,0,0,0" TouchEnable="False" />
+                            <WZUIEditBox BgPicture="ui/chat/chat_transparent_bg.png" Dimensions="0,0" FontColor="255,255,255" FontSize="22" GUID="{20706aad-41b2-480a-becb-7d4ff424770d}" KeyBordReturnType="TypeSend" LuaEditBoxEditingDidEnd="" LuaEditBoxReturn="onclickSend" MaxLength="24" MultiLine="False" Name="edtInputCur_WndChat" PlaceHolder="" PlaceholderFontColor="125,125,125" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIEditBox" Visible="True" Text="ff" VerticalAlignment="1" LuaEditBoxEditingDidBegin="" LuaTouchBeganFunction="onEditBoxTouchBegin" LuaEditBoxTextChanged="" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIButton GUID="{74869ec0-c6fa-4ab3-91c9-a68bd6162e02}" LuaDoneFunctionName="onClickVoice" Name="btnVoice_WndChat" RelativePosition="0.0774606,0.435065" RelativeSize="1,1" ScaleY="1" Type="WZUIButton" Visible="True" AbsContentSize="60,60" UseAbsSize="True">
+                        <NormalElement GUID="{84db0a9f-dd32-4374-86e6-8d4160b94ef9}" RelativePosition="0.5,0.5" Type="WZUIContainer">
+                            <WZUIImage Type="WZUIImage" GUID="{4f0d1f12-eb8e-4b9f-9c89-b2c87159d835}" File="ui/chat/chat_common_icon_yuying.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement GUID="{dcbb086f-c295-4481-9a27-2db03f60c7b7}" Type="WZUIContainer">
+                            <WZUIImage Type="WZUIImage" GUID="{eec80fc2-9493-4f21-a67e-4433525717a1}" File="ui/chat/chat_common_icon_yuying.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement GUID="{399bdc99-83cb-4f4d-991c-e4ff72449a18}" Type="WZUIContainer" />
+                    </WZUIButton>
+                    <WZUIButton GUID="{e0b8fed0-fd6f-46fa-a683-30aea788b632}" LuaDoneFunctionName="onClickKeyboard" Name="btnKeyboard_WndChat" RelativePosition="0.0774606,0.435065" RelativeSize="1,1" ScaleY="1" Type="WZUIButton" Visible="False" AbsContentSize="60,60" UseAbsSize="True">
+                        <NormalElement GUID="{9cd27f0a-f7f6-4f29-a251-c410629bec70}" RelativePosition="0.5,0.5" Type="WZUIContainer">
+                            <WZUIImage Type="WZUIImage" GUID="{dda181fb-8c29-4217-a52d-ecdae632793f}" File="ui/chat/chat_common_icon_jianpan.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement GUID="{f52b2595-eef1-41bd-9220-414da3e54f9f}" Type="WZUIContainer">
+                            <WZUIImage Type="WZUIImage" GUID="{4a0f926f-35bb-4947-ac22-e2b59069f023}" File="ui/chat/chat_common_icon_jianpan.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement GUID="{e0225945-c894-459f-bdd2-8ee0a3215ba2}" Type="WZUIContainer" />
+                    </WZUIButton>
+                    <WZUIContainer GUID="{bde11c5d-058b-4398-95fb-cca3092a2eef}" Name="conWorld_WndChat" ScaleY="1" Type="WZUIContainer" Visible="False" RelativePosition="0.428293,0.435065" RelativeSize="0.75,1" AbsContentSize="400,50" UseAbsSize="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{23ffe71a-90d3-4e1c-9714-1dae2ab456ea}" RelativeSize="0.66,1" RelativePosition="0.785624,0.5" File="ui/chat/chat_common_scale9_di52.png" CapInsets="0,0,0" />
+                        <WZUIEditBox BgPicture="ui/chat/chat_transparent_bg.png" Dimensions="0,0" FontColor="255,255,255" FontSize="22" GUID="{5cf9e5d3-9ce5-44cb-b966-03a9225238e9}" KeyBordReturnType="TypeSend" LuaEditBoxReturn="onclickSend" MaxLength="24" MultiLine="False" Name="edtInputWorld_WndChat" PlaceHolder="" PlaceholderFontColor="125,125,125" RelativePosition="0.785624,0.5" RelativeSize="0.63,1" Type="WZUIEditBox" Visible="True" VerticalAlignment="1" LuaTouchBeganFunction="onEditBoxTouchBegin" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{82c73873-d90f-41de-8ebf-7c7e540d134f}" AbsContentSize="53,53" UseAbsSize="True" RelativePosition="0.209509,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{62a30827-76da-41e9-86db-831db9a02d9d}" File="ui/chat/chat_common_icon_yuanquandi.png" UseOriginSize="True" TouchEnable="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{5628b761-b398-4d22-b78f-34c854a74d9f}" Name="imgWorldType_WndChat" File="ui/chat/chat_common_icon_laba3.png" UseOriginSize="True" RelativePosition="0.5,0.537736" TouchEnable="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{24660c7d-ebcb-4bd3-a0bd-9bbe26c89e9b}" Text="" Name="txtChatPropsCount_WndChat" FontSize="20" Color="255,255,255" AnchorPoint="0.5,0.5" RelativePosition="0.44797,0.266786" />
+                            <WZUIButton Type="WZUIButton" GUID="{5a31880d-1570-4abc-85e0-aef7569eb6b0}" LuaDoneFunctionName="onclickType" Name="btnChoseType_WndChat">
+                                <NormalElement Type="WZUIContainer" GUID="{8ed23424-c7b3-4962-a224-f8e448bd33e6}" />
+                                <SelectElement Type="WZUIContainer" GUID="{22fd4b16-3bcc-423a-94bf-b7c664ae89be}" />
+                                <DisableElement Type="WZUIContainer" GUID="{eee1dd5b-51c3-41a8-9a4d-608b55af437f}" />
+                            </WZUIButton>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{cd74a436-fb10-4dfd-a178-ee2946508ba2}" AbsContentSize="53,53" UseAbsSize="True" RelativePosition="0.362009,0.5">
+                            <WZUIButton Type="WZUIButton" GUID="{9639f8ad-d694-4f5c-aff9-68556dc87353}" LuaDoneFunctionName="onClickExpression" Name="">
+                                <NormalElement Type="WZUIContainer" GUID="{1d76cd40-4d19-48a6-8845-892ebf8e8efd}">
+                                    <WZUIImage Type="WZUIImage" GUID="{9cc15f09-fe7b-4c26-be9c-1f9f8034c775}" File="ui/chat/common_icon_liaotbq.png" UseOriginSize="True" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{a6ef9871-fd6f-4beb-810b-0f7f1717b421}">
+                                    <WZUIImage Type="WZUIImage" GUID="{9c5e8e10-75f2-4a49-969d-f82b26b70cca}" File="ui/chat/common_icon_liaotbq.png" UseOriginSize="True" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{7eee3cbc-3697-4325-ac09-e994e5941b7e}" />
+                            </WZUIButton>
+                        </WZUIContainer>
+                        <Button Type="WZUIButton" GUID="{f225eb02-f6a4-4be1-88f4-afe2c9e381b7}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.0594118,0.5" LuaDoneFunctionName="onClickBubble">
+                            <NormalElement Type="WZUIContainer" GUID="{d36366c0-d9ec-43b0-a3b9-4c64bd3e9bbb}">
+                                <WZUIImage Type="WZUIImage" GUID="{0888c4a6-1824-48d2-aa7a-5a3adc2dadd3}" File="ui/chat/chat_common_icon_yuanquandi.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{0a403932-b2db-42b6-be3e-910aae795160}" File="ui/chat/talk_qipao.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{867e3732-881e-4dda-ba8e-7b4db86d39ac}">
+                                <WZUIImage Type="WZUIImage" GUID="{cf8a1f03-7ec9-4e78-99e9-ec8cce0fbdb0}" File="ui/chat/chat_common_icon_yuanquandi.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{9d421445-fc60-4ca1-b1eb-e752bf855be8}" File="ui/chat/talk_qipao.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{d6fb9650-b696-40c8-8bb7-6279f54f694b}" />
+                        </Button>
+                    </WZUIContainer>
+                    <WZUIContainer GUID="{42f8d46b-e0d7-4fa0-914d-f608c8615202}" Name="conPri_WndChat" RelativePosition="0.456447,0.435065" RelativeSize="0.75,1" ScaleY="1" Type="WZUIContainer" Visible="False" UseAbsSize="True" AbsContentSize="250,50">
+                        <WZUI9Image Type="WZUI9Image" GUID="{d0a52e23-47da-4203-bbc5-5f91ecab5b94}" RelativeSize="1.07,1" RelativePosition="0.884,0.5" File="ui/chat/chat_common_scale9_di52.png" CapInsets="0,0,0,0" TouchEnable="False" />
+                        <WZUIEditBox BgPicture="ui/chat/chat_transparent_bg.png" Dimensions="0,0" FontColor="255,255,255" FontSize="22" GUID="{b0692c2c-aac8-4930-9713-bc5a2bbd75f6}" KeyBordReturnType="TypeSend" LuaEditBoxReturn="onclickSend" MaxLength="24" MultiLine="False" Name="edtPriInput_WndChat" PlaceHolder="" PlaceholderFontColor="125,125,125" RelativePosition="0.884,0.5" RelativeSize="1.03,1" Type="WZUIEditBox" Visible="True" Alignment="0" VerticalAlignment="1" TextFieldPadding="1.7109913486024197e-010" LuaTouchBeganFunction="onEditBoxTouchBegin" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{d70f48f8-462a-45ca-aa13-d93ddf91970d}" RelativeSize="0.3,1" RelativePosition="-0.042185,0.48" AbsContentSize="53,53" UseAbsSize="True">
+                            <WZUIButton GUID="{9f91f8ec-5cdc-4cc9-a33f-bb2c68910d05}" LuaDoneFunctionName="onclickFriendList" Name="btnFriendList_WndChat" NoBorder="False" RelativePosition="0.5,0.5" RelativeSize="1,1" ShowAll="False" Type="WZUIButton" UseAbsSize="False" Visible="True" Tag="10">
+                                <NormalElement GUID="{950a1ab2-35ab-441c-b00e-de6f84b67821}" RelativeSize="1,1" Type="WZUIContainer" Visible="True">
+                                    <WZUIImage Type="WZUIImage" GUID="{f2a856e8-7e39-4101-a3cc-9093b5f20132}" File="ui/chat/chat_common_icon_haoyou2.png" UseOriginSize="True" />
+                                </NormalElement>
+                                <SelectElement GUID="{0228e096-639d-4456-8ad4-4237d1457484}" RelativeSize="1,1" Type="WZUIContainer">
+                                    <WZUIImage Type="WZUIImage" GUID="{f0e696f8-f474-4129-ae0d-d9dab79aaf3f}" File="ui/chat/chat_common_icon_haoyou2.png" UseOriginSize="True" />
+                                </SelectElement>
+                                <DisableElement GUID="{f7ce62a8-bfc9-4078-958b-507ba63866e5}" RelativeSize="1,1" Type="WZUIContainer" />
+                            </WZUIButton>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{c19c4bc3-c54f-49d6-82ad-e29c2fbf07bc}" RelativeSize="0.3,1" RelativePosition="0.197815,0.48" AbsContentSize="53,53" UseAbsSize="True" Name="conExpression_WndChat">
+                            <Button Type="WZUIButton" GUID="{f9fb7c1e-97bc-4690-894a-ef47e90bf211}" RelativePosition="0.5,0.5" LuaDoneFunctionName="onClickExpression">
+                                <NormalElement Type="WZUIContainer" GUID="{a4bcf4cb-1c1d-4de1-94b7-4490d07ab4e6}">
+                                    <WZUIImage Type="WZUIImage" GUID="{934fec00-395d-4936-9aa8-2b01c99d9b6b}" File="ui/chat/common_icon_liaotbq.png" UseOriginSize="True" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{ca8d98c2-d308-4a96-a036-33144a1f94ea}">
+                                    <WZUIImage Type="WZUIImage" GUID="{828939d8-9563-41f4-b714-0d3ac46c6320}" File="ui/chat/common_icon_liaotbq.png" UseOriginSize="True" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{9961d27b-6320-4aba-94d8-166f7918d0e2}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{d247eda0-715f-41ab-b35b-1c42756dafd9}" AbsContentSize="450,55" UseAbsSize="True" Name="conPriRecord_WndChat" Visible="False" RelativePosition="0.987282,0.48">
+                            <Button Type="WZUIButton" LuaDoneFunctionName="onClickVoiceChat" GUID="{1e4c0bf4-5b85-4f36-beb9-23f853ef6262}">
+                                <NormalElement Type="WZUIContainer" GUID="{d07ac68b-46ac-4fbe-9008-8bcded873872}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{27ada0a4-db05-44b4-8b23-b8e86af79d84}" File="ui/chat/chat_common_scale9_di42.png" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{f54325dc-dc44-41df-a413-c5a1f4ba39d9}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{af95b2d2-799c-4954-a1b7-fdc9ffdda94d}" File="ui/chat/chat_common_scale9_di42_sel.png" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{ec2e2052-9845-482a-b26c-9b9baae6ab6c}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9b70c3fa-6989-43ad-b961-375242848b8e}" FontSize="22" Color="62��34��8" Text="按住    说话" TouchEnable="False" TextKey="VOICE_CHAT" Name="txtVoiceControl2_WndChat" />
+                        </WZUIContainer>
+                        <Button Type="WZUIButton" GUID="{56e88ebd-93d7-490b-8d5c-4af35e258ce8}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="-0.276588,0.5" LuaDoneFunctionName="onClickBubble">
+                            <NormalElement Type="WZUIContainer" GUID="{f2d44ee8-2478-4e09-a70a-90ff4065ef81}">
+                                <WZUIImage Type="WZUIImage" GUID="{1de9acd2-0d39-466d-a3a7-20f50eca2547}" File="ui/chat/chat_common_icon_yuanquandi.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{11d5cd8d-0e34-4d08-9569-280184862b91}" File="ui/chat/talk_qipao.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{4e0c9674-9810-421d-869b-df4e430f5b15}">
+                                <WZUIImage Type="WZUIImage" GUID="{cba65738-2c6a-49d7-8162-df54fa6355f2}" File="ui/chat/chat_common_icon_yuanquandi.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{56cc2dd4-24a3-4980-968a-2a29c028d70f}" File="ui/chat/talk_qipao.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{2e6c7d8c-073c-4e4f-ad4c-366d6ef891d7}" />
+                        </Button>
+                        <WZUIContainer Type="WZUIContainer" GUID="{4e546c63-2b97-42f0-8804-97339ca00848}" AbsContentSize="92,33" UseAbsSize="True" TouchEnable="False" RelativePosition="-0.001543,1.20699" Name="conFriendN_WndChat" Visible="False">
+                            <WZUI9Image Type="WZUI9Image" GUID="{c48b4f84-2508-421c-af31-1fd629e53aac}" File="ui/chat/chat_common_scale9_di43.png" Visible="True" />
+                            <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" ChineseLengthPolicy="1" Color="62,34,8" FontSize="18" GUID="{a53cfe52-f04e-4b1c-88ef-ef8bea297fed}" MaxLength="6" Name="txtFriendName_WndChat" RelativePosition="0.478692,0.5" RelativeSize="1,1" Scale="1" ScaleX="1" ScaleY="1" Text="" Type="WZUILabelTTF" LabelStyleKey="" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{6c2ce566-bd25-49e7-b0d1-63ee7d08a2ef}" AbsContentSize="506,52" UseAbsSize="True" RelativePosition="0.215457,0.435065" Name="conVoiceChat_WndChat" Visible="False" AnchorPoint="0,0.5">
+                        <Button Type="WZUIButton" LuaDoneFunctionName="onClickVoiceChat" GUID="{880aa422-7d2f-4209-8ef3-925fffdd751a}">
+                            <NormalElement Type="WZUIContainer" GUID="{b809b92c-3262-4bbd-926f-6f62b6af1f9e}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{3686778c-af4b-4704-8d75-6c1a6e6d4309}" File="ui/chat/chat_common_scale9_di42.png" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{1ac96b94-6399-4cd8-92ff-8dc243a62710}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{91602858-579c-4f6c-9b7a-ba9d29067c4b}" File="ui/chat/chat_common_scale9_di42_sel.png" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{721ea511-470a-47c0-887d-a7a7a240c506}" />
+                        </Button>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{bb98bdf3-d6e7-4edd-9a7b-bb12ba70135a}" FontSize="22" Color="62��34��8" Text="按住    说话" TouchEnable="False" TextKey="VOICE_CHAT" Name="txtVoiceControl_WndChat" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{dc092b4f-5c8a-4588-b55d-cf693f80839c}" Name="conWorldVoice_WndChat" RelativeSize="1,1" RelativePosition="0.603265,0.435065" Visible="False" AbsContentSize="520,52" UseAbsSize="True">
+                        <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickVoiceChat" GUID="{7295ed87-5568-4092-b3c0-b612862f07f6}">
+                            <NormalElement Type="WZUIContainer" GUID="{5b5b953a-39fc-40b4-b1f9-e76afe816bc0}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{3da569ea-e549-4af4-8a85-b8ab4113b649}" File="ui/chat/chat_common_scale9_di42.png" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{4e838fc3-4621-44c1-afb8-65d251efaa92}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{8a0e3fc6-1de5-41fd-a071-a09cfa642c7f}" File="ui/chat/chat_common_scale9_di42_sel.png" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{261b5da0-0ef7-42f7-b964-12126377c9f5}" />
+                        </WZUIButton>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{dfdc5057-07d4-4173-abbb-59d013db7ae8}" FontSize="22" Color="62��34��8" Text="按住    说话" TouchEnable="False" TextKey="VOICE_CHAT" Name="txtVoiceControl3_WndChat" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{9c85a691-6b3b-49b6-b0c4-fdfc65f693e7}" AbsContentSize="30,30" UseAbsSize="True" RelativePosition="0.5,0.915585" Scale="0.9" Name="conFastSendChat_WndChat" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{3bd2e824-ae13-4f9e-a9c1-e4698b57f6a6}" File="ui/common/common_icon_zdltksjt.png" UseOriginSize="True" Name="imgArrow_WndChat" />
+                        <Button Type="WZUIButton" GUID="{8f050cd6-5c75-4c08-91ba-95e77b46572f}" LuaDoneFunctionName="onClickOpenFastChat">
+                            <NormalElement Type="WZUIContainer" GUID="{39c7f3be-618d-4075-8fcb-94d01da79567}" />
+                            <SelectElement Type="WZUIContainer" GUID="{700ea17e-a7d5-4b2f-84e7-c86fdbc4bdc8}" />
+                            <DisableElement Type="WZUIContainer" GUID="{5a127f41-52fd-4fbc-af91-07b06d998b2b}" />
+                        </Button>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{29cd54c9-7170-4e49-a834-766b0f7d5c97}" AbsContentSize="288,370" UseAbsSize="True" RelativePosition="0.5,3.25323" Name="conFastChatList_WndChat" Visible="False">
+                        <WZUI9Image Type="WZUI9Image" GUID="{bf9777df-cc50-440c-b732-540974dafc84}" File="ui/common/common_shade_chushouheidi1.png" />
+                        <Button Type="WZUIButton" GUID="{41b1675b-335b-435e-a84e-6dea215a39fe}" AbsContentSize="60,30" UseAbsSize="True" RelativePosition="0.5,0.923469" LuaDoneFunctionName="onClickCloseFastChat">
+                            <NormalElement Type="WZUIContainer" GUID="{46e766dc-5ac5-4b30-a8be-f61caec2d7b8}">
+                                <WZUIImage Type="WZUIImage" GUID="{0089fc9d-03ea-441b-bd48-1c5ae92c354f}" File="ui/common/common_icon_zdltksjt.png" UseOriginSize="True" FlipY="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{c81d8e83-6db7-48d7-bfdf-3010c165618d}">
+                                <WZUIImage Type="WZUIImage" GUID="{54d4fb9f-5498-4723-92d5-0b553df57b47}" File="ui/common/common_icon_zdltksjt.png" UseOriginSize="True" FlipY="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{6f6e704f-e7ab-4c08-a2ce-1c71f8222b4e}" />
+                        </Button>
+                        <WZUITableContainer Type="WZUITableContainer" GUID="{f4712b52-8690-454d-a262-092506b4514c}" Name="tabFastChatList_WndChat" RelativeSize="0.96,0.86" CellElementHeight="0.125" EnableMoveHorizontal="False" EnableVerticalScroll="True" RelativePosition="0.5,0.446884" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{696de76d-4905-424f-a53b-cdfd8035c087}" File="ui/chat/chat_common_icon_xiaodianzhui.png" UseOriginSize="True" Name="img4_WndChat" RelativePosition="0.810902,1.06437" TouchEnable="False" Visible="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{32d23156-74ba-45cc-827f-c2e34de7d567}" Name="conRecordingArm_WndChat" AbsContentSize="246,197" UseAbsSize="True" RelativePosition="0.5,0.572414" TouchEnable="False" Visible="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{3fd30c6a-1109-43ff-9398-330c11d43eed}" File="ui/chat/chat_common_shade_chushouheidi.png" Opacity="180" TouchEnable="False" />
+                    <WZArmature Type="WZArmature" GUID="{91c39554-4305-4ef7-944e-e921a769625f}" ArmatureFile="ui/common_icon_yidx.xml" ArmatureName="common_icon_yidx" UseOriginSize="True" RelativePosition="0.644796,0.492676" AnchorPoint="0.5,0.5">
+                        <Action Type="WZUIArmatureAnimationById" GUID="{2d98aace-1f8c-4e07-94b4-7598d9cd8b7e}" AnimationId="0" Loop="1" />
+                    </WZArmature>
+                    <WZUIImage Type="WZUIImage" GUID="{80d03ce9-abdc-4095-97bc-b3fe0453d5fe}" File="ui/chat/chat_common_icon_ltht.png" UseOriginSize="True" RelativePosition="0.377828,0.668834" TouchEnable="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{d245b014-56b4-480d-9e7d-40a20e22b92e}" FontSize="22" Color="255,255,255" Text="手指上滑,取消发送" RelativePosition="0.5,0.220814" TextKey="NOT_RECORD_VOICE" Dimensions="220,0" Name="txtRecordTip_WndChat" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{5ee5408f-8a6c-4136-ac31-c677e578d170}" FontSize="22" Name="txtRecordLength_WndChat" Text="" Color="255,227,116" RelativePosition="0.5,0.0939089" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7b24f1f0-405a-4eaa-b5a9-6f70c02ea575}" Name="conRecordingCancel_WndChat" AbsContentSize="226,197" UseAbsSize="True" RelativePosition="0.5,0.572414" TouchEnable="False" Visible="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{f367cc1c-1f61-4380-b700-f90a7295cacf}" File="ui/chat/chat_common_shade_chushouheidi.png" Opacity="180" TouchEnable="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{20b264d2-fa64-4aa9-b6f7-55f2a5c670bf}" File="ui/chat/chat_common_icon_ltfh.png" UseOriginSize="True" RelativePosition="0.5,0.648529" TouchEnable="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{aadccb52-f6af-4785-850a-7cc078d09e83}" FontSize="22" Color="255,255,255" Text="手指上滑,取消发送" RelativePosition="0.5,0.291879" TextKey="LOOSEN_YOUR_FINGER_CANCEL" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{470423a8-9f46-4037-afe8-cce0a100b7df}" Name="conDivision_WndChat" AbsContentSize="670,2" UseAbsSize="True" RelativePosition="0.5,0.784484" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{85ad2c78-979b-465d-9584-0945f7c17353}" File="ui/chat/chat_common_scale9_fengexian.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{bb98389c-8f72-4681-96cf-cb1e6358a0f7}" AbsContentSize="130,475" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.00722543,0.581035" Name="conPrii_WndChat" Visible="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{c38a3509-2c5f-48e4-b1a2-d3652d3f824f}" File="ui/chat/common_scale9_di12.png" Opacity="51" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{2bd4e231-eec1-4da4-9fe2-5efa0d2f4fd6}" LabelStyleKey="C11_F20_S4_C5" Text="斯蒂芬森的" RelativePosition="0.490219,0.955071" TextKey="CHAT_LATELY_PEOPLE" Name="txtPrii_WndChat" />
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{cde47ff1-8232-4f2c-9e4b-46d26851267d}" Name="tabFriendList_WndChat" AbsContentSize="130,435" UseAbsSize="True" RelativePosition="0.5,0.466316" CellElementHeight="0.27" EnableVerticalScroll="True" EnableMoveHorizontal="False" />
+                </WZUIContainer>
+                <WZUIContainer AnchorPoint="0,0" Name="conFaceBox_WndChat" RelativePosition="0.239326,0.193103" Scale="1" TouchSwallow="True" Type="WZUIContainer" Visible="False" GUID="{791a3fc2-2291-4763-a671-a379063a5b48}" AbsContentSize="500,380" UseAbsSize="True" ScaleX="1" ScaleY="1" TouchContainerEnable="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{56e7a5a1-b526-4815-b24b-d4eae1333962}" File="ui/common/common_scale9_di15.png" CapInsets="30,20,74,48" />
+                    <WZUIImage Type="WZUIImage" GUID="{68d1fdea-db97-428b-a5b1-854a8e5b3bae}" File="ui/common/common_scale9_di16.png" UseOriginSize="True" RelativePosition="0.18,-0.021" TouchEnable="True" Visible="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{4cf27d90-5399-469c-b220-cfb16ac56dc9}" Scale="3" ScaleX="3" ScaleY="3" Visible="True">
+                        <Button Type="WZUIButton" GUID="{919a198b-84ca-4050-bcb2-36262679bbce}" LuaDoneFunctionName="onClickCloseFaceBox">
+                            <NormalElement Type="WZUIContainer" GUID="{f50f2d6d-c499-429c-a9d1-99938a59f508}" />
+                            <SelectElement Type="WZUIContainer" GUID="{0eb3aed1-e06a-4c2c-9fb6-9498b48b3fcc}" />
+                            <DisableElement Type="WZUIContainer" GUID="{ef5a9926-6824-470f-99f3-7c3646b4f666}" />
+                        </Button>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{fe34e26c-17db-4e49-9cb9-13b5a8d79343}" Name="conFaceBox2_WndChat" TouchContainerEnable="True" />
+                </WZUIContainer>
+                <WZUIContainer AnchorPoint="0,0" Name="conBubbleBox_WndChat" RelativePosition="0.133834,0.182758" Scale="1" TouchSwallow="True" Type="WZUIContainer" Visible="False" GUID="{fb0cf87b-e18f-48af-b25d-15ef7c97d3b7}" AbsContentSize="488,264" UseAbsSize="True" ScaleX="1" ScaleY="1" TouchContainerEnable="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{91f99523-1f80-4bca-89ed-27ca6e34951a}" File="ui/common/common_scale9_di15.png" CapInsets="30,20,74,48" />
+                    <WZUIImage Type="WZUIImage" GUID="{b4f908f7-6970-41f0-97b1-80f2845d76e3}" File="ui/common/common_scale9_di16.png" UseOriginSize="True" RelativePosition="0.18,-0.021" TouchEnable="True" Visible="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{af7bdf27-422c-4302-9f0f-fe638db13dde}" Scale="3" ScaleX="3" ScaleY="3" Visible="True">
+                        <Button Type="WZUIButton" GUID="{9d4190e1-7a37-47b5-b546-1475471c1e3b}" LuaDoneFunctionName="onClickCloseBubble">
+                            <NormalElement Type="WZUIContainer" GUID="{6fcb7828-46fb-49cd-945e-bcbdc710fe53}" />
+                            <SelectElement Type="WZUIContainer" GUID="{dad1ccac-71da-4862-a28a-1ebdb467a880}" />
+                            <DisableElement Type="WZUIContainer" GUID="{31a827b0-e253-4d4c-9e77-5916fd5dc945}" />
+                        </Button>
+                    </WZUIContainer>
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{3fec8cd6-29d9-413e-ad83-cbb9624741de}" CellElementHeight="0.28" ColumnCount="3" EnableMoveHorizontal="False" EnableVerticalScroll="True" Name="tableBubbleList_WndChat" ScaleY="0.85" ScaleX="0.95" RelativePosition="0.5,0.484848" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{09e3f7b3-f070-4735-b5ee-d69c48858916}" Visible="False" AbsContentSize="400,45" UseAbsSize="True">
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{3a1fbb20-591e-416a-8f95-86729fb44e05}" Name="freeTextTemp3_WndChat" MaxWidth="500" Visible="True" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{9f0b93dd-aa7c-4717-ae2d-11c584ad8bf1}" Name="freeTextTemp4_WndChat" MaxWidth="400" Visible="True" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{2a039a53-a342-4261-a7cf-adb7fb91441a}" Name="freeTextTemp_WndChat" MaxWidth="490" Visible="True" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{2943de6f-823f-48ed-a0d4-675a159414ee}" Name="freeTextTempPri_WndChat" MaxWidth="390" Visible="True" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ca6b6da1-237b-42f0-b3ec-50e50ae3d2d2}" Name="txtTempP_WndChat" FontSize="20" MaxLength="25" Color="255,255,255" Text="" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+    <WZUIContainer Type="WZUIContainer" GUID="{0b0aa2fc-c9d5-4d6c-a970-28d9f87c4950}" Name="conMsgLeft_WndChat" AbsContentSize="536,110" UseAbsSize="True" RelativePosition="0,0.5" Visible="False" AnchorPoint="0,0.5" UseAbsCoordinate="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{8cb0bdd3-c3d6-4244-862b-d4cfc46bc3d2}" AbsContentSize="66,68" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.02,0.5" Name="conPlayerFigureS_WndChat" Tag="111">
+            <WZUIImage Type="WZUIImage" GUID="{377e02d8-3dbd-411c-a8e0-06326cf50043}" File="ui/chat/chat_common_icon_tx.png" UseOriginSize="True" TouchEnable="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{a97078fa-3a41-487e-94a4-d2633f1185b7}" AnchorPoint="0.5,0.5" Name="conVip_WndChat" TouchEnable="False" RelativePosition="0.5,-0.02" AbsContentSize="60,25" UseAbsSize="True" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{24521d7d-97cf-4fb1-b7a9-c70631268f8d}" File="ui/chat/caht_commom_icon_v.png" UseOriginSize="True" RelativePosition="0,0.5" Name="" isValid="True" Visible="True" AnchorPoint="0,0.5" Scale="0.45" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{f00b4177-5f90-4068-aa86-03ef8cd77a76}" CharMapFileName="ui/common_num/common_num_vip.png" Height="40" Width="22" Text="" RelativePosition="0.701796,0.5" Scale="0.55" Name="txtVip_WndChat" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" LuaDoneFunctionName="onClickLookPlayerInfo" GUID="{ef824e9b-a088-4b61-9a29-31997476afea}" Scale="1.2">
+                <NormalElement Type="WZUIContainer" GUID="{11f65900-a71c-4b32-bbc3-a779b6bf6b40}" />
+                <SelectElement Type="WZUIContainer" GUID="{e395a2db-066e-4e62-b594-d53c7b50264a}" />
+                <DisableElement Type="WZUIContainer" GUID="{65aa95cb-f7e2-4d87-90d3-27d545702c13}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{2a31b738-2855-4798-9044-985fe0ac8ca6}" AbsContentSize="400,110" UseAbsSize="True" RelativePosition="0.915507,0.5" AnchorPoint="0,1" Tag="-1" Name="conMsgInfo_WndChat" Visible="True" UseAbsCoordinate="True" AbsPosition="80,110">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{918e1fd9-e309-40ea-a1da-87929e2543bd}" FontSize="22" Color="255,227,116" Text="" RelativePosition="0.135073,0.723567" AnchorPoint="0,0.5" Name="txtSendMsgNameS_WndChat" Visible="True" Tag="115">
+                <WZUIContainer Type="WZUIContainer" GUID="{9506d905-7166-44ee-be56-c1f97e57a42f}" Name="conTitle_WndChat" UseAbsSize="True" AbsContentSize="5,26" AnchorPoint="0,0.5" RelativePosition="1,0.5" TouchEnable="False">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b24e9ff3-6e5f-4a5d-81b2-1b1dab81a852}" FontSize="22" Color="99,255,95" Text="撒大声地" RelativePosition="1.01,0.5" Name="txtWhisperS_WndChat" Visible="False" AnchorPoint="0,0.5">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e5634610-0c4f-41a7-b707-2095a6b6dd36}" FontSize="20" Color="158,139,121" Text="" RelativePosition="2,0.5" AnchorPoint="0,0.5" Name="txtSendTSAdd_WndChat" />
+                    </WZUILabelTTF>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{5d53e386-63d4-4473-8ab5-48b20ed37c69}" FontSize="20" Color="158,139,121" Text="" RelativePosition="1.5,0.5" AnchorPoint="0,0.5" Name="txtSendTS_WndChat" />
+                </WZUIContainer>
+            </WZUILabelTTF>
+            <WZUIContainer Type="WZUIContainer" GUID="{56a285d3-62e6-4824-be5b-71206ed5be9a}" Name="conCrossService_WndChat" AbsContentSize="25,25" UseAbsSize="True" TouchEnable="False" RelativePosition="0.0650001,0.718182" AnchorPoint="0,0.5" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{fc567a59-66fc-411a-bdec-cb361787eb5d}" File="ui/chat/chat_common_icon_kuafu.png" UseOriginSize="True" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{0970de46-e565-4998-b7e0-493dbf8bf922}" UseOriginSize="True" File="ui/common/common_icon_pws6.png" Name="imgPvpIcon_WndChat" Scale="0.2" AnchorPoint="0,0.5" RelativePosition="0.03,0.718" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{0e6ff167-6775-4b38-aa0b-c33de383f8af}" TouchEnable="True" Name="conMsg_WndChat" AbsContentSize="200,66" UseAbsSize="True" AnchorPoint="0,1" RelativePosition="0.00250009,0.672727">
+                <WZUI9Image Type="WZUI9Image" GUID="{557fc426-acb7-4a31-9eae-f5098166a886}" File="ui/chat/chat_common_icon_siliao.png" CapInsets="60,50,2,2" UseOriginSize="False" Name="imgMsgBg_WndChat" TouchEnable="False" RelativePosition="0.5,0.5" FlipX="False" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{a2c681f3-530e-4b90-9a3e-24d2269b48dc}" Name="txtSendMsgS_WndChat" AnchorPoint="0,0.5" MaxWidth="490" UseAbsCoordinate="False" AbsPosition="20,23" RelativePosition="0.5,0.409091" />
+                <WZUIImage Type="WZUIImage" GUID="{365901b0-3383-4bd7-a946-2e02eed56112}" File="ui/common/common_icon_kuafuliaotian1.png" UseOriginSize="True" RelativePosition="0.03,-0.0151515" AnchorPoint="0,0" Name="imgCrossService_WndChat" Visible="False" TouchEnable="False" Scale="0.7" ScaleX="0.7" ScaleY="0.7" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{4c8c2ab5-395b-4c4d-95c1-373ef3a4d5fa}" Visible="False" Name="txtTemp_WndChat" FontSize="22" Text="" Dimensions="0,0" RelativePosition="0.5,0.414286" />
+                <Button Type="WZUIButton" LuaDoneFunctionName="_copy" GUID="{4fe8d605-6602-469f-a550-25959d783aa1}" Name="btnA_WndChat" AbsContentSize="" UseAbsSize="False">
+                    <NormalElement Type="WZUIContainer" GUID="{f307ecb6-7393-4aad-ae5d-d6b1a98d7f40}" />
+                    <SelectElement Type="WZUIContainer" GUID="{e6d8e8d7-555f-4aa1-9f3f-a40cca8ee6f5}" />
+                    <DisableElement Type="WZUIContainer" GUID="{e3d5c763-8629-4551-9c72-b038e8648d69}" />
+                </Button>
+                <WZUIContainer Type="WZUIContainer" GUID="{8779d794-6e8c-4483-9a22-a5191e7b5b83}" AbsContentSize="40,40" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="1,0.5" Name="conTranslate_WndChat" Visible="False">
+                    <Button Type="WZUIButton" GUID="{18e655fb-2100-498e-8476-ece744d06f7f}" LuaDoneFunctionName="onClickTranslate" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{4fce8d0a-0cc7-4159-a672-64550161bcdf}">
+                            <WZUIImage Type="WZUIImage" GUID="{b7140081-477c-46a7-872b-6c03920f8c73}" File="ui/chat/chat_translate.png" Scale="0.9" ScaleX="0.9" ScaleY="0.9" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{881a2dd8-1ff1-429e-a15f-790d058669fb}">
+                            <WZUIImage Type="WZUIImage" GUID="{4aad0c85-339a-489c-b469-3eb478536b06}" File="ui/chat/chat_translate.png" Scale="0.9" ScaleX="0.9" ScaleY="0.9" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{a486c662-6382-4f7a-8046-702403858e79}" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{95aff886-eaf0-4928-86a4-f1c644cb0b78}" Name="conMsgRight_WndChat" AbsContentSize="536,110" UseAbsSize="True" RelativePosition="1,0.5" Visible="False" ScaleX="1" AnchorPoint="1,0.5" AbsPosition="0,1">
+        <WZUIContainer Type="WZUIContainer" GUID="{b2302ff9-3bb2-4e51-8302-8c7e37532cdd}" AbsContentSize="66,68" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="0.98,0.5" Name="conPlayerFigureRS_WndChat" Tag="111">
+            <WZUIImage Type="WZUIImage" GUID="{6d480675-d076-4700-93e3-b413c664043b}" File="ui/chat/chat_common_icon_tx.png" UseOriginSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{5a8ffbee-73aa-44a0-94ad-084e454dd773}" AnchorPoint="0.5,0.5" Name="conVip_WndChat" TouchEnable="False" RelativePosition="0.5,-0.02" AbsContentSize="60,25" UseAbsSize="True" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{38d93a13-5e28-4a2c-9279-fc112dcb82cd}" File="ui/chat/caht_commom_icon_v.png" UseOriginSize="True" RelativePosition="0,0.5" Name="" isValid="True" Visible="True" AnchorPoint="0,0.5" Scale="0.45" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{5b74489c-a9ca-44ab-9f22-876bf82a18c0}" CharMapFileName="ui/common_num/common_num_vip.png" Height="40" Width="22" Text="10" RelativePosition="0.701796,0.5" Scale="0.55" Name="txtVip_WndChat" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" LuaDoneFunctionName="onClickLookPlayerInfo" GUID="{04f02680-30f3-49c1-9c94-6e535abc2098}" Scale="1.2">
+                <NormalElement Type="WZUIContainer" GUID="{19ac78ea-24f4-43cc-b92d-0cf42efdc033}" />
+                <SelectElement Type="WZUIContainer" GUID="{4f02e25f-12bd-4581-89c9-e3a55e119d76}" />
+                <DisableElement Type="WZUIContainer" GUID="{6fdadbee-2cee-424e-873d-7ab2e65cee91}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{a09c7da3-0d7d-4eec-84ca-bb94be20bdc8}" AbsContentSize="400,110" UseAbsSize="True" RelativePosition="0.0900895,0.5" AnchorPoint="1,1" Tag="-1" Name="conMsgInfo_WndChat" Visible="True" UseAbsCoordinate="True" AbsPosition="460,110">
+            <WZUIContainer Type="WZUIContainer" GUID="{17556588-8045-45bc-a900-3649d73b63b5}" Name="conTitle_WndChat" UseAbsSize="True" AbsContentSize="5,26" AnchorPoint="1,0.5" RelativePosition="0.88,0.718" TouchEnable="False">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e58d9f12-dcd9-4905-84d1-91afcd5e95a8}" FontSize="22" Color="255,227,116" Text="" RelativePosition="-0.05,0.5" AnchorPoint="1,0.5" Name="txtSendMsgNameRS_WndChat" Tag="115">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1d3b8076-ad14-4c2b-8946-842e2889bdd8}" FontSize="22" Color="99,255,95" Text="" RelativePosition="-0.1,0.5" Name="txtWhisperRS_WndChat" Visible="False" AnchorPoint="1,0.5">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{5f6fd276-cd52-412b-ac6b-5dcdb9cb7bc6}" FontSize="20" Color="158,139,121" Text="" RelativePosition="-0.5,0.5" AnchorPoint="1,0.5" Name="txtSendTRSAdd_WndChat" />
+                    </WZUILabelTTF>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ac381614-34ac-4417-b7a0-07b101880bfe}" FontSize="20" Color="158,139,121" Text="" RelativePosition="-0.5,0.5" AnchorPoint="1,0.5" Name="txtSendTRS_WndChat" />
+                </WZUILabelTTF>
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{18fb4145-5ce0-432d-a04a-604b69e731e8}" UseOriginSize="True" File="ui/common/common_icon_pws6.png" Name="imgPvpIcon_WndChat" Scale="0.2" AnchorPoint="0,0.5" RelativePosition="0.89,0.718" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{4c60d532-edae-4302-872b-ae58757948d6}" TouchEnable="True" Name="conMsg_WndChat" AbsContentSize="200,66" UseAbsSize="True" AnchorPoint="1,1" RelativePosition="0.995,0.672727">
+                <WZUI9Image Type="WZUI9Image" GUID="{530b6f76-8606-463c-9ebd-c782f49c5013}" File="ui/chat/chat_common_icon_siliao2.png" CapInsets="60,50,2,2" UseOriginSize="False" FlipX="False" ScaleX="-1" Name="imgMsgBg_WndChat" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{bfb2d31e-2fe8-4794-9b19-9a0757cb9194}" Name="txtSendMsgRS_WndChat" AnchorPoint="0,0.5" MaxWidth="490" UseAbsCoordinate="False" RelativePosition="0.5,0.409091" />
+                <WZUIImage Type="WZUIImage" GUID="{838996e3-3a62-4650-baf7-daab35046043}" File="ui/common/common_icon_kuafuliaotian2.png" UseOriginSize="True" RelativePosition="0.954328,0" AnchorPoint="1,0" Name="imgCrossService_WndChat" FlipX="False" Visible="False" TouchEnable="False" AbsPosition="-3.2,52" UseOriginSizeProportion="False" UseAbsCoordinate="False" Scale="0.7" ScaleX="0.7" ScaleY="0.7" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1202c551-3f08-4279-9a9c-46c4ca90fda9}" Visible="False" Name="txtTemp_WndChat" FontSize="20" Text="" RelativePosition="0.5,0.409091" Dimensions="0,0" />
+                <WZUIButton Type="WZUIButton" LuaDoneFunctionName="_copy" GUID="{234abeb2-e2c3-4abf-ab81-1997e6258a9d}" Name="btnC_WndChat">
+                    <NormalElement Type="WZUIContainer" GUID="{4cf583c9-7204-4f3f-9c7b-7d055624febe}" />
+                    <SelectElement Type="WZUIContainer" GUID="{e33b4375-4183-424a-b63a-051f64728261}" />
+                    <DisableElement Type="WZUIContainer" GUID="{3dac50fc-c4dd-4ae2-8a3d-a3a389b6e3fd}" />
+                </WZUIButton>
+                <WZUIContainer Type="WZUIContainer" GUID="{47764819-66cf-472f-9e6a-310f2b95989d}" AbsContentSize="40,40" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="1,0.5" Name="conTranslate_WndChat" Visible="False">
+                    <Button Type="WZUIButton" GUID="{4e46a23d-be8c-47d3-821b-53c2ce449879}" LuaDoneFunctionName="onClickTranslate" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{1d8ce267-aaf6-4883-919f-adfe72546f3f}">
+                            <WZUIImage Type="WZUIImage" GUID="{3e512929-4858-4d88-ab44-671431d3f147}" File="ui/chat/chat_translate.png" Scale="0.9" ScaleX="0.9" ScaleY="0.9" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{ec74a648-73a0-4a8a-98ff-20d1d3634a1c}">
+                            <WZUIImage Type="WZUIImage" GUID="{8d7b64f2-27cb-4940-b887-c14b7f1f7e52}" File="ui/chat/chat_translate.png" Scale="0.9" ScaleX="0.9" ScaleY="0.9" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{a203352e-45a9-418c-8ee3-000cca66c4f9}" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{2a8d3eb3-65e2-40ce-a234-11f0d5154e91}" Name="conRecordLeftSma_WndChat" AbsContentSize="536,110" UseAbsSize="True" RelativePosition="0,0.5" Visible="False" AnchorPoint="0,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{28ccd44c-7681-4559-aade-a63271e89129}" AbsContentSize="66,68" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.02,0.5" Name="conPlayerFigureS_WndChat" Tag="111">
+            <WZUIImage Type="WZUIImage" GUID="{d8d0c096-eabe-4e54-80c1-6d5caa166eca}" File="ui/chat/chat_common_icon_tx.png" UseOriginSize="True" TouchEnable="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{559324b1-2778-4d6d-b94e-ed26bc9bf71c}" AnchorPoint="0.5,0.5" Name="conVip_WndChat" TouchEnable="False" RelativePosition="0.5,-0.02" AbsContentSize="60,25" UseAbsSize="True" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{903df366-e971-43db-b9c1-aa43879e7fbf}" File="ui/chat/caht_commom_icon_v.png" UseOriginSize="True" RelativePosition="0,0.5" Name="" isValid="True" Visible="True" AnchorPoint="0,0.5" Scale="0.45" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{4dd2b463-e4ce-4b19-9c91-7c9b187cbdca}" CharMapFileName="ui/common_num/common_num_vip.png" Height="40" Width="22" Text="10" RelativePosition="0.701796,0.5" Scale="0.55" Name="txtVip_WndChat" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" LuaDoneFunctionName="onClickLookPlayerInfo" GUID="{485cd365-7e02-4d91-9786-d819f15a70a5}" Scale="1.2">
+                <NormalElement Type="WZUIContainer" GUID="{413cf068-fe9d-474a-a633-cdb07663ebc0}" />
+                <SelectElement Type="WZUIContainer" GUID="{00869f8a-4eea-421b-b692-e747fbd26bac}" />
+                <DisableElement Type="WZUIContainer" GUID="{dbd136ae-2308-4352-8a37-ef0f8aecb8ab}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{8a274e2b-b4d4-4ac3-bd44-e2d5bdfdb434}" AbsContentSize="424,110" UseAbsSize="True" RelativePosition="0.156104,1" AnchorPoint="0,1" Tag="-1" Name="conMsgInfo_WndChat" Visible="True" UseAbsCoordinate="False" AbsPosition="85.8,61.8">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3dfd158d-7ea7-4af1-9f00-fee97a35b312}" Visible="False" Name="txtMsgId_WndChat" RelativePosition="0.5,0.672727" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9c3ad69b-19ba-4311-932c-0127534dbba6}" FontSize="22" Color="255,227,116" Text="" RelativePosition="0.135073,0.707467" AnchorPoint="0,0.5" Name="txtSendMsgNameS_WndChat" Visible="True" Tag="115">
+                <WZUIContainer Type="WZUIContainer" GUID="{f2911062-8a08-4a10-a306-1efbf3a6c91d}" Name="conTitle_WndChat" UseAbsSize="True" AbsContentSize="5,26" AnchorPoint="0,0.5" RelativePosition="1,0.5" TouchEnable="False">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{fcef635f-ecbd-4169-866b-34917af66eb8}" FontSize="22" Color="99,255,95" Text="撒大声地" RelativePosition="1.01,0.5" Name="txtWhisperS_WndChat" Visible="False" AnchorPoint="0,0.5">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{93f95a9a-75f7-4f20-86e3-df10dc7631c8}" FontSize="20" Color="158,139,121" Text="" RelativePosition="2,0.5" AnchorPoint="0,0.5" Name="txtSendTSAdd_WndChat" />
+                    </WZUILabelTTF>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1f3b29ec-d61a-40bd-aca3-e2763eedda60}" FontSize="20" Color="158,139,121" Text="" RelativePosition="1.5,0.5" AnchorPoint="0,0.5" Name="txtSendTS_WndChat" />
+                </WZUIContainer>
+            </WZUILabelTTF>
+            <WZUIContainer Type="WZUIContainer" GUID="{e3ef0d05-4568-48a7-b0b5-c7f26779e93f}" Name="conCrossService_WndChat" AbsContentSize="25,25" UseAbsSize="True" TouchEnable="False" RelativePosition="0.0650001,0.716558" AnchorPoint="0,0.5" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{d47fe817-4e86-480e-a65e-ac8c19835c6d}" File="ui/chat/chat_common_icon_kuafu.png" UseOriginSize="True" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{61913980-3580-4fc5-956a-8a10a6810849}" UseOriginSize="True" File="ui/common/common_icon_pws6.png" Name="imgPvpIcon_WndChat" Scale="0.2" AnchorPoint="0,0.5" RelativePosition="0.03,0.718" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{9854b0eb-1593-4572-9155-66fd3530d6c7}" TouchEnable="True" Name="conMsg_WndChat" AbsContentSize="200,76" UseAbsSize="True" AnchorPoint="0,1" RelativePosition="0.00250009,0.690909" TouchContainerEnable="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{315cf8fb-9e9d-4b06-9c94-ba4357de7421}" File="ui/chat/chat_common_icon_siliao.png" CapInsets="60,50,2,2" UseOriginSize="False" TouchEnable="False" Name="imgMsgBg_WndChat" />
+                <WZUIImage Type="WZUIImage" GUID="{f485d272-55ad-4ae4-a90a-37c1a1db17d7}" File="ui/common/common_icon_kuafuliaotian1.png" UseOriginSize="True" RelativePosition="0.06,-0.0151515" AnchorPoint="0,0" Name="imgCrossService_WndChat" Visible="False" TouchEnable="False" Scale="0.7" ScaleX="0.7" ScaleY="0.7" />
+                <WZUIContainer Type="WZUIContainer" GUID="{e522ac9a-8d94-4a6c-8a6e-5aa422a3a703}" Name="conRecord_WndChat" AbsContentSize="65,35" UseAbsSize="True" RelativePosition="0.094645,0.803795" UseAbsCoordinate="False" AbsPosition="115.2,90.624" AnchorPoint="0,1">
+                    <WZUI9Image Type="WZUI9Image" GUID="{515449e1-72eb-4a24-8a9e-28148043b348}" File="ui/chat/common_icon_shishiyuliaodi.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{a36649a4-7847-4684-8814-bca73ea5aaab}" TouchEnable="False" File="ui/chat/common_icon_shishiyuliao01.png" UseOriginSize="True" RelativePosition="0.137822,0.5" Name="imgVoice_WndChat" Visible="True" AbsPosition="10,18" UseAbsCoordinate="True" AnchorPoint="0,0.5" />
+                    <WZUISpine Type="WZUISpine" GUID="{ce2057f4-fe6b-46b6-9296-863ea6ebc584}" FileAtlas="ui/icon_shishiyuliao01.atlas" FileJson="ui/icon_shishiyuliao01.json" AnimationName="icon_shishiyuliao01" Name="armPlayRecord_WndChat" RelativePosition="0.0762835,0.557143" Loop="True" Visible="False" AnchorPoint="0,0.5" UseAbsCoordinate="True" AbsPosition="8,19" TouchEnable="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{5ac1b607-8e3c-4fcd-9aa1-f60c66f0ba6f}" TouchEnable="False" Name="conPlayRecordS_WndChat" AbsContentSize="60,50" UseAbsSize="True" RelativePosition="0.995132,0.515476" AnchorPoint="0,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{f4a28ba9-4fc1-4d19-9009-0f1ef4c22576}" Name="imgPlayRecordT_WndChat" File="ui/teach/common_icon_xsyd2.png" UseOriginSize="True" RelativePosition="0.1975,0.657778" Scale="0.8" Visible="True" ScaleX="0.8" ScaleY="0.8" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ebc49408-cf16-4f9d-a6db-31f6f8b998c6}" TouchEnable="False" Text="" FontSize="20" Color="255,236,193" RelativePosition="0.206184,0.503175" Name="txtRecordSecond_WndChat" AnchorPoint="0,0.5" LabelStyleKey="C1_F22" UseAbsCoordinate="True" AbsPosition="30.72,16.896" />
+                </WZUIContainer>
+                <WZUIButton Type="WZUIButton" Name="btnPlayRecord_WndChat" LuaDoneFunctionName="onClickPlayRecord" GUID="{48ebf58c-d5d6-40c9-8bb7-0affc1e42036}">
+                    <NormalElement Type="WZUIContainer" GUID="{f0e1973b-e258-4fdd-955f-279222c80f44}" />
+                    <SelectElement Type="WZUIContainer" GUID="{1a2e1907-20bd-4d53-9386-0895328535a2}" />
+                    <DisableElement Type="WZUIContainer" GUID="{fbe45f0d-0aac-4eaa-b37d-37e010492e19}" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a680ab7d-3663-4c38-bd83-56c6b05b714c}" Name="txtSendMsg_WndChat" AnchorPoint="0.5,0" RelativePosition="0.49,0.0323684" Color="62,34,8" FontSize="20" LabelStyleKey="" Text="" Dimensions="0,0" MaxLength="24" UseAbsCoordinate="False" AbsPosition="73.1765,30" Alignment="Left" EnableShadow="False" EnableStroke="False" ChineseLengthPolicy="0" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{fb677237-f71e-4c38-9b4e-389e1f296eef}" Name="conRecordRightSma_WndChat" AbsContentSize="536,110" UseAbsSize="True" RelativePosition="1,0.5" Visible="False" ScaleX="1" AnchorPoint="1,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{c06387f6-0be4-4c11-b037-30e7c32a6e34}" AbsContentSize="66,68" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="0.98,0.5" Name="conPlayerFigureRS_WndChat" Tag="111">
+            <WZUIImage Type="WZUIImage" GUID="{1eea903d-d69c-479d-af0c-dbefe82739e8}" File="ui/chat/chat_common_icon_tx.png" UseOriginSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{5f36a592-8c8a-47bf-969c-8a080c9b68c7}" AnchorPoint="0.5,0.5" Name="conVip_WndChat" TouchEnable="False" RelativePosition="0.5,-0.02" AbsContentSize="60,25" UseAbsSize="True" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{42be7bd3-947e-4488-b115-626eaed569eb}" File="ui/chat/caht_commom_icon_v.png" UseOriginSize="True" RelativePosition="0,0.5" Name="" isValid="True" Visible="True" AnchorPoint="0,0.5" Scale="0.45" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{d2fc1f30-40fe-42d5-90ff-17b7fe61d1c6}" CharMapFileName="ui/common_num/common_num_vip.png" Height="40" Width="22" Text="10" RelativePosition="0.701796,0.5" Scale="0.55" Name="txtVip_WndChat" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" LuaDoneFunctionName="onClickLookPlayerInfo" GUID="{faabd7d7-616b-43ca-ae4c-6ae7bbb00478}" Scale="1.2">
+                <NormalElement Type="WZUIContainer" GUID="{259b592f-c750-4592-85fd-0703c7345354}" />
+                <SelectElement Type="WZUIContainer" GUID="{67771eeb-fdb0-4735-a888-4f66d10c44a6}" />
+                <DisableElement Type="WZUIContainer" GUID="{9be53c0d-9e8a-4368-8f74-212fdb176c14}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{b1b1ae74-e0bf-4a17-8bb5-c640c8d11e28}" AbsContentSize="400,110" UseAbsSize="True" RelativePosition="0.0994179,1" AnchorPoint="0,1" Tag="-1" Name="conMsgInfo_WndChat" Visible="True">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{df1b2548-a26f-458d-9e71-246c62273fb8}" Visible="False" Name="txtMsgId_WndChat" />
+            <WZUIContainer Type="WZUIContainer" GUID="{19717c76-164f-4e91-be90-ce8d5f0e8969}" Name="conTitle_WndChat" UseAbsSize="True" AbsContentSize="5,26" AnchorPoint="1,0.5" RelativePosition="0.88,0.718" TouchEnable="False">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7ab774ae-25cc-4684-a2ef-abfdc538acbd}" FontSize="22" Color="255,227,116" Text="" RelativePosition="-0.05,0.5" AnchorPoint="1,0.5" Name="txtSendMsgNameRS_WndChat" Tag="115">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{00c45b5e-9a5b-4950-b7e4-d674537766f6}" FontSize="22" Color="99,255,95" Text="" RelativePosition="-0.1,0.5" Name="txtWhisperRS_WndChat" Visible="False" AnchorPoint="1,0.5">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8e4bac47-857a-427e-abff-135b1249d021}" FontSize="20" Color="158,139,121" Text="" RelativePosition="-0.5,0.5" AnchorPoint="1,0.5" Name="txtSendTRSAdd_WndChat" />
+                    </WZUILabelTTF>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{143d518d-35bf-47aa-8494-ea91a689bb64}" FontSize="20" Color="158,139,121" Text="" RelativePosition="-0.5,0.5" AnchorPoint="1,0.5" Name="txtSendTRS_WndChat" />
+                </WZUILabelTTF>
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{2f0c84c6-4b31-43b0-ab29-839ff76780ef}" UseOriginSize="True" File="ui/common/common_icon_pws6.png" Name="imgPvpIcon_WndChat" Scale="0.2" AnchorPoint="0,0.5" RelativePosition="0.93,0.718" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{70e4d95b-9fd4-4bdd-99fb-bdd843c180ac}" TouchEnable="True" Name="conMsg_WndChat" AbsContentSize="150,76" UseAbsSize="True" AnchorPoint="1,1" RelativePosition="0.995,0.690909" TouchContainerEnable="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{2903bfd8-4736-4441-850d-35b1603c6732}" File="ui/chat/chat_common_icon_siliao2.png" CapInsets="60,50,2,2" UseOriginSize="False" FlipX="False" ScaleX="-1" TouchEnable="False" Name="imgMsgBg_WndChat" />
+                <WZUIImage Type="WZUIImage" GUID="{54f0c922-b889-4597-93ed-8367492728f2}" File="ui/common/common_icon_kuafuliaotian2.png" UseOriginSize="True" RelativePosition="0.929328,0" AnchorPoint="1,0" Name="imgCrossService_WndChat" FlipX="False" Visible="False" TouchEnable="False" AbsPosition="-3.2,52" UseOriginSizeProportion="False" UseAbsCoordinate="False" Scale="0.7" ScaleX="0.7" ScaleY="0.7" />
+                <WZUIContainer Type="WZUIContainer" GUID="{de0893d6-0b1d-41ef-a19c-aa16f8cbfeb2}" Name="conRecord_WndChat" AbsContentSize="65,35" UseAbsSize="True" RelativePosition="0.873327,0.795124" UseAbsCoordinate="False" AbsPosition="115.2,90.624" AnchorPoint="1,1">
+                    <WZUI9Image Type="WZUI9Image" GUID="{4250f7f9-a735-4834-b71f-ae6dfa5511ef}" File="ui/chat/common_icon_shishiyuliaodi.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{acf744e9-fb27-410c-b80f-12264d1a3cfc}" TouchEnable="False" File="ui/chat/common_icon_shishiyuliao02.png" UseOriginSize="True" RelativePosition="0.959443,0.5" Name="imgVoice_WndChat" Visible="True" AbsPosition="121.568,16.7027" UseAbsCoordinate="False" AnchorPoint="1,0.5" FlipX="False" />
+                    <WZUISpine Type="WZUISpine" GUID="{6fe76288-c4fc-4994-8c6a-9c4c574146ac}" FileJson="ui/icon_shishiyuliao02.json" FileAtlas="ui/icon_shishiyuliao02.atlas" AnimationName="icon_shishiyuliao02" Loop="True" RelativePosition="0.959443,0.5" Name="armPlayRecord_WndChat" Visible="False" AnchorPoint="1,0.5" TouchEnable="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{681fb4b5-85cd-4be0-9851-098621f76177}" TouchEnable="False" Name="conPlayRecordS_WndChat" AbsContentSize="60,50" UseAbsSize="True" RelativePosition="-0.43504,0.416445" AnchorPoint="0,0.5" UseAbsCoordinate="True" AbsPosition="-64.8649,11.6757" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{b0668958-ce45-4e7b-8276-ff9110df04de}" Name="imgPlayRecordT_WndChat" File="ui/teach/common_icon_xsyd2.png" UseOriginSize="True" RelativePosition="0.780833,0.717778" Scale="0.8" Visible="True" ScaleX="0.8" ScaleY="0.8" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{606b0ba2-4dfb-4a4e-937f-d8b337c9f60a}" TouchEnable="False" Text="" FontSize="20" Color="255,236,193" RelativePosition="0.613842,0.471429" Name="txtRecordSecond_WndChat" AnchorPoint="1,0.5" LabelStyleKey="C15_F20" UseAbsCoordinate="False" AbsPosition="117.342,16.3014" />
+                </WZUIContainer>
+                <Button Type="WZUIButton" Name="btnPlayRecord_WndChat" LuaDoneFunctionName="onClickPlayRecord" GUID="{395665fa-d610-4aa3-a7fb-6b59261b41b2}">
+                    <NormalElement Type="WZUIContainer" GUID="{3be05a8c-27c1-4792-aed0-f54cb8af379c}" />
+                    <SelectElement Type="WZUIContainer" GUID="{593906cb-eebb-45e4-b534-8b27f7ee6c9c}" />
+                    <DisableElement Type="WZUIContainer" GUID="{768378e9-d625-4afb-8bfe-a4bbe188f842}" />
+                </Button>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1ba0e95b-aea1-410b-8ec9-8a82296d7a1a}" Name="txtSendMsg_WndChat" AnchorPoint="0.5,0" RelativePosition="0.5,0.0323684" Color="62,34,8" FontSize="20" LabelStyleKey="" Text="" Dimensions="0,0" MaxLength="24" UseAbsCoordinate="False" AbsPosition="402.743,30" Alignment="Left" EnableShadow="False" EnableStroke="False" ChineseLengthPolicy="0" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{d6a34dbc-26d2-46a1-b490-9befd1863876}" AbsContentSize="280,40" UseAbsSize="True" Name="conFastChat_WndChat" Visible="False" RelativePosition="0.5,0.5">
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{50557d16-f182-4122-a3f7-4a3e040f23ac}" Color="255,255,255" FontSize="18" Name="txtFastChat_WndChat" Text="" />
+        <Button Type="WZUIButton" GUID="{6c00db2e-10d6-496c-9683-2ad2282813bf}" LuaDoneFunctionName="onClickFastSend">
+            <NormalElement Type="WZUIContainer" GUID="{9155f6ed-65e1-487d-83a5-5c732ac9c236}" />
+            <SelectElement Type="WZUIContainer" GUID="{d135a40d-409c-452d-9dbc-7d4ee867be76}" />
+            <DisableElement Type="WZUIContainer" GUID="{67789652-2c99-465c-9cd2-8bbf501c39e7}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{58905882-3174-4f5e-a2fa-1dd7abc7fff6}" RelativeSize="1,0.18" AnchorPoint="0.5,0" RelativePosition="0.5,0" Name="conLine_WndChat">
+            <WZUI9Image Type="WZUI9Image" GUID="{2c4d5f0a-bab3-4028-afe7-39cb2838c448}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="1.3" AnchorPoint="0.5,0" RelativePosition="0.5,0" />
+        </WZUIContainer>
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{9e0f44e9-e19e-47a4-998e-ecbb65d38a37}" AbsContentSize="148,63" UseAbsSize="True" Name="CellBubble_WndChat" Visible="False">
+        <WZUIImage Type="WZUIImage" GUID="{e4b91500-06b3-4700-8cbc-f64643d78c52}" File="" UseOriginSize="True" FlipY="False" FlipX="False" Name="imgBg_CellBubble" TouchEnable="False" />
+        <WZUIImage Type="WZUIImage" GUID="{1bce6de4-82f8-48ee-8611-16dd99e4144f}" File="ui/chat/talk_xz.png" RelativePosition="0.5,0.484127" ScaleY="1.2" ScaleX="0.95" Name="imgSel_CellBubble" TouchEnable="False" Visible="False" />
+        <WZUIImage Type="WZUIImage" GUID="{68f97409-b40a-4a23-a1e9-6ff9e96880b3}" File="" UseOriginSize="True" RelativePosition="0.229729,0.626984" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgOpenType_CellBubble" Visible="False" />
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{555a2c29-c02d-4dde-a8b9-39c17f936c03}" Name="ftxtCost_CellBubble" MaxWidth="150" RelativePosition="0.5,0.2" />
+        <Button Type="WZUIButton" GUID="{27732334-3b9d-4da0-82da-60cd75fa7887}" LuaDoneFunctionName="onClickBubbleCell" Name="btnBubble_CellBubble">
+            <NormalElement Type="WZUIContainer" GUID="{0c043556-a26b-408d-bf67-0a7d8beb5703}" />
+            <SelectElement Type="WZUIContainer" GUID="{3f8644c4-7620-4932-8bbd-6b3f1e3c825c}" />
+            <DisableElement Type="WZUIContainer" GUID="{d37d5f73-94c8-459f-bdb5-5669b5aad05c}" />
+        </Button>
+    </WZUIContainer>
+</WndChat>

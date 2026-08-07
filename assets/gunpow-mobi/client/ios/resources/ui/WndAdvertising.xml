@@ -1,0 +1,48 @@
+<WndAdvertising GUID="{ac9454ce-cc43-4997-a99b-661309ff0ae4}">
+    <WZUIWindow Type="WZUIWindow" GUID="{d40ae156-2e2d-40a7-870f-d97611c7510f}" LuaObjectName="WndAdvertising" Name="WndAdvertising" NameCreate="True" AbsContentSize="522,545" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{e45a1e76-4a7a-461b-94d9-b27c1ab7344f}" AbsContentSize="522,545" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{85ea872e-8ee5-421b-85a5-c444446b07e5}" File="ui/common/common_scale9_di34.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{97eb2816-cb16-4d70-9555-8e7824ca0c07}" UseAbsSize="True" AbsContentSize="499,446" RelativePosition="0.5,0.57">
+                <WZUI9Image Type="WZUI9Image" GUID="{8f0e688d-1252-4c93-b701-14e63425e7dd}" File="ui/common/common_scale9_di4.png" />
+                <Button Type="WZUIButton" GUID="{567d7275-33b1-4ce2-b5d2-671dfc96743d}" LuaDoneFunctionName="onJump">
+                    <NormalElement Type="WZUIContainer" GUID="{5bbac90d-67d1-44de-819e-346685571ad2}" />
+                    <SelectElement Type="WZUIContainer" GUID="{81ce850d-110b-40ca-8c2f-147ab187e2cf}" />
+                    <DisableElement Type="WZUIContainer" GUID="{e4468af5-17e7-4205-947c-28aea2e3a5f6}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{86e8450f-7448-4b2c-8497-73575fcc2ccf}" RelativePosition="0.498698,0.5" Type="WZUIContainer" AbsPosition="383,271" Visible="True" Name="conInfo">
+            <WZUIContainer AbsContentSize="220,64" AnchorPoint="0.5,1" GUID="{94ca3286-7eea-4aa6-9cd5-4f794daca440}" Name="conClose_WndAnnouncement" RelativePosition="0.5,0.145" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" AbsPosition="390,91.7406">
+                <WZUIButton AbsContentSize="" AnchorPoint="0.5,0.5" GUID="{394dc2a7-bc75-4760-bb3c-c760c6390662}" LuaDoneFunctionName="onClose" Name="onCloseClick_WndAnnouncement" Order="2" RelativePosition="0.5,0.5" Scale="1" ShowAll="False" Type="WZUIButton" UseAbsSize="False" NameCreate="True" LuaActionName="Normal">
+                    <NormalElement GUID="{b39de80c-7f16-4c7b-b454-69e9f10f5730}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{0933ae94-ef17-488a-b7af-6cf9678b0f2b}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{f976ad6e-3e06-4e57-8bc5-2e9bc6698efe}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{91152389-9921-4824-b9c9-f52b73e1edb3}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{4e08f986-1a71-421b-b63d-b7bccaffd6a8}" TouchContainerEnable="True" Type="WZUIContainer" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ee5ca6c3-f033-4e71-a2ba-f1f2ec537218}" FontSize="26" EnableStroke="True" TextKey="IKNOW" Color="255,236,193" UseOriginSize="True" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.465074" AbsPosition="110,33.7647" LabelStyleKey="SMALL_GREEN_BTN" />
+                </WZUIButton>
+            </WZUIContainer>
+            <CheckBox AbsContentSize="90,60" AnchorPoint="0,1" GUID="{626eef08-9a36-479c-94a4-b9201e6571e9}" LuaSelectedFunctionName="setAd" Name="setAd" RelativePosition="0.01,0.125" SelectedIndex="0" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" Scale="0.75">
+                <CheckElement AbsContentSize="120,60" AnchorPoint="0.5,0.5" GUID="{8ff8271d-2d4b-4eb6-94d2-9f92ed4eb476}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUIImage Type="WZUIImage" GUID="{a9d85045-4356-4c3e-a00b-7b40703f54e5}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" />
+                </CheckElement>
+                <CheckElement AbsContentSize="120,60" AnchorPoint="0.5,0.5" GUID="{33cebf6f-5532-4857-8da6-2b959e20da5a}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUIImage Type="WZUIImage" GUID="{bdbe4d23-e0f7-472f-bc0e-c000e15e4b64}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{6f28b533-fd63-46a6-86eb-89a65fba1559}" File="ui/common/common_icon_gou.png" UseOriginSize="True" Visible="True" />
+                </CheckElement>
+            </CheckBox>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{dd9ee873-392c-4a68-aca7-afbecdd95c26}" LabelStyleKey="C1_F20_S4_C3" TextKey="NOT_ATTENTION_TODAY" RelativePosition="0.235,0.082" Name="txtAd" />
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{1b2fd626-1154-4c03-88ef-c0cd9da64568}" UseOriginSize="True" Name="img_WndAdvertising" File="" Scale="1" RelativePosition="0.5,0.57" TouchEnable="False" TouchSwallow="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{23ab66a1-c394-4a7a-9bea-82978a4a632d}" Name="conCover" TouchEnable="False" TouchSwallow="False">
+            <Button Type="WZUIButton" GUID="{ee0df7e4-0c55-4ae9-ad3a-0c3255894f57}">
+                <NormalElement Type="WZUIContainer" GUID="{a7b0b8b3-cb63-4d01-988b-d4d5cb4e2f51}" />
+                <SelectElement Type="WZUIContainer" GUID="{fd2f0503-2e45-473d-bc33-a137ff5dd3e3}" />
+                <DisableElement Type="WZUIContainer" GUID="{34704504-4750-46cf-968a-47df1dc61b89}" />
+            </Button>
+            <WZUISpine Type="WZUISpine" GUID="{4748e1f7-8b59-47e4-b2f5-501f373f8833}" FileAtlas="ui/guanggaojiazai.atlas" FileJson="ui/guanggaojiazai.json" AnimationName="animation" Loop="True" RelativePosition="0.5,0.5" GrayRender="False" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndAdvertising>

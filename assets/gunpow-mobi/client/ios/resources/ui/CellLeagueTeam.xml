@@ -1,0 +1,49 @@
+<CellLeagueTeam GUID="{5aaccdc3-3ba0-45e2-9cc7-b674325b2297}">
+    <WZUIContainer AbsContentSize="882,90" GUID="{5ad56de2-dce2-4d5c-8f58-cb88eeacc3f8}" LuaObjectName="" Name="CellLeagueTeam" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <Button AbsContentSize="882,80" GUID="{bb5babf1-4288-4a06-80c2-e4cd59840b25}" LuaDoneFunctionName="" Name="btnClick_CellCommunityList" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIButton" UseAbsSize="True" Visible="True">
+            <NormalElement GUID="{8ecebe27-8ef8-4704-8297-ce8da4231af8}" RelativePosition="0.5,0.5" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{6f5b37b9-28b2-4488-9d99-b432a014eb3b}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Name="imgBtn1_CellCommunityList" />
+            </NormalElement>
+            <SelectElement GUID="{c2c65d99-28be-4fc8-89a6-f90bd4b0be38}" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{0be7cbfb-dc9f-4d65-bd3c-47eaadc6bd06}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Name="imgBtn2_CellCommunityList" />
+            </SelectElement>
+            <DisableElement GUID="{06e347ed-55ff-44f7-94d8-58a53fbb17a2}" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{277f18f6-25f3-4534-b7c8-5769ce95da43}" Name="imgBtn3_CellCommunityList" File="ui/common/common_scale9_di7.png" />
+            </DisableElement>
+        </Button>
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="62,34,8" FontSize="22" GUID="{5866227f-db43-40ff-9ed3-bcdd53267dab}" Name="txtId_CellLeagueTeam" RelativePosition="0.25,0.5" Text="ID:99999" Type="WZUILabelTTF" LabelStyleKey="C13_F22" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" ChineseLengthPolicy="1" Color="158,0,0" Dimensions="0,0" FontSize="22" GUID="{c831f003-5b4e-469d-88d8-7d36a8397488}" MaxLength="20" Name="txtName_CellLeagueTeam" RelativePosition="0.45,0.5" Text="" Type="WZUILabelTTF" LabelStyleKey="C13_F22" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="62,34,8" FontSize="22" GUID="{05932932-7db4-4362-8087-5b0ecf64a1aa}" Name="txt_CellLeagueTeam" RelativePosition="0.65,0.5" Text="" Type="WZUILabelTTF" LabelStyleKey="C13_F22" TextKey="PEOPLE_NUM" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="62,34,8" FontSize="22" GUID="{bfc87319-76dc-417c-bf90-3b0db0cb8304}" Name="txtNumber_CellLeagueTeam" RelativePosition="0.71,0.5" Text="2/3" Type="WZUILabelTTF" LabelStyleKey="C6_F22" />
+        <Button Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.915,0.485522" GUID="{1cc31079-348f-43a4-b21c-0cf78b267722}" LuaDoneFunctionName="onApply" Name="btnApply" Visible="True" TouchContainerEnable="False" TouchEnable="True" LuaActionName="Normal" AbsPosition="722.85,36.4142" Order="1">
+            <NormalElement Type="WZUIContainer" GUID="{3e1ca3a1-05b5-4746-bc91-be1da74ab32a}">
+                <WZUI9Image Type="WZUI9Image" GUID="{e13b12a8-cc5e-4737-a689-60aa2e6932b2}" File="ui/common/common_btn_anniu7.png" UseOriginSize="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{80570ca9-700d-4d7e-88ee-ad01c34b3498}" TextKey="APPLY" FontSize="24" Color="255,236,193" RelativePosition="0.5,0.5" EnableStroke="True" BoldFont="True" StrokeColor="105,65,46" StrokeSize="4" LabelStyleKey="" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{d42cf7b2-ab60-427e-9975-fc5f0c85b5d0}">
+                <WZUI9Image Type="WZUI9Image" GUID="{a5c12fdb-4c14-4e7c-b085-8981c2127b72}" File="ui/common/common_btn_anniu7_sel.png" UseOriginSize="False" Scale="1" RelativePosition="0.5,0.5" AbsPosition="58,28" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{689f6ab7-1cc0-4866-ae47-86c965addecb}" TextKey="APPLY" FontSize="24" Color="255,236,193" RelativePosition="0.5,0.5" EnableStroke="True" BoldFont="True" StrokeColor="105,65,46" StrokeSize="4" LabelStyleKey="" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{2bb03a20-28a5-41da-bf8d-ab1f30757f32}">
+                <WZUI9Image Type="WZUI9Image" GUID="{d91cd576-3ca8-41fc-aa4e-84176e9813a9}" File="ui/common/common_btn_anniu7.png" UseOriginSize="False" GrayRender="True" RelativePosition="0.5,0.5" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{046483a1-e87a-4207-8251-169a41af066c}" Text="" FontSize="24" Color="158,139,121" TextKey="APPLY1" LabelStyleKey="" RelativePosition="0.5,0.5" BoldFont="True" />
+            </DisableElement>
+        </Button>
+        <Button Type="WZUIButton" GUID="{2f079dd3-d6e1-444e-a4d1-f46209b20f5f}" UseAbsSize="True" AbsContentSize="64,64" RelativePosition="0.1,0.5" LuaDoneFunctionName="onCheck" LuaActionName="" Order="1">
+            <WZUI9Image Type="WZUI9Image" GUID="{d666b8ff-8729-4c34-8626-e08f53c2b585}" File="ui/common/common_scale9_beibaodi.png" Visible="True" />
+            <WZUI9Image Type="WZUI9Image" GUID="{9f5d4f0d-2621-4867-8bd8-27d27147723f}" File="ui/common/common_scale9_wuse.png" UseOriginSize="False" Visible="True" />
+            <NormalElement Type="WZUIContainer" GUID="{8b300841-7ea2-4a2d-991c-df6427c842a3}">
+                <WZUI9Image Type="WZUI9Image" GUID="{6d9057e6-26f7-4fcb-8e75-91dc1910b4b1}" File="ui/hero/hero_icon_yxlsdb.png" UseOriginSize="True" Scale="0.6" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{cefe8d6d-cef6-47d2-9ca7-0e349bd1b74d}">
+                <WZUI9Image Type="WZUI9Image" GUID="{9db16da5-e6cf-43ea-a6de-483b983dff45}" File="ui/hero/hero_icon_yxlsdb.png" UseOriginSize="True" Scale="0.6" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{274853f4-e0ec-4f2f-947a-78643a97f7b7}" />
+        </Button>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{10aebaf8-edcb-4f66-b5a5-85efa01691c3}" Text="" FontSize="24" Color="158,139,121" TextKey="APPLY1" LabelStyleKey="" RelativePosition="0.915,0.5" BoldFont="True" />
+        <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{9aef3cde-256f-4880-a900-5ba52d78234f}" TouchEnable="False" RelativePosition="0.1,0.5" AnchorPoint="0.5,0.5" Visible="True" AbsContentSize="60,60" UseAbsSize="True" Order="1">
+            <Stencil Type="WZUIImage" GUID="{bf12185a-b34b-4b92-96c7-fddbbd8ceb89}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" Scale="0.9" RelativePosition="0.5,0.5" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{3c34fd53-31bf-4ba3-9121-a0c22362d8a7}" Name="conHead" />
+        </WZUIClippingContainer>
+    </WZUIContainer>
+</CellLeagueTeam>

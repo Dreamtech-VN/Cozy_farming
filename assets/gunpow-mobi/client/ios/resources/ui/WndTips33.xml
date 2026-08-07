@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" ?>
+<WndTips GUID="{8C45C903-3CF2-496e-BBEA-CF7B24CD31D6}">
+    <WZUIWindow AbsContentSize="300,100" AbsPosition="0,0" AnchorPoint="1.02,0.1" GUID="{C24457FE-D70C-46b1-A798-149F747905D4}" LuaObjectName="WndTips33" Name="WndTips33" NameCreate="True" RelativePosition="0.65,0.5" RelativeSize="1,1" ShowAll="True" TouchContainerEnable="True" TouchEnable="True" TouchSwallow="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="True" Visible="True" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{fc60ca59-a5bc-4211-943a-de2e3cee7614}" AbsContentSize="277,372" UseAbsSize="True" Name="conType33_WndTips" Visible="True" RelativeSize="1,1" RelativePosition="0.4914,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{530291b4-8d8e-4ab5-a3b6-d4c45e043260}" File="ui/common/common_scale9_di24.png" Name="bgType33" ScaleY="1" AnchorPoint="0.5,1" RelativePosition="0.5,1" Visible="True" />
+            <WZUIImage Type="WZUIImage" GUID="{8bef685f-27df-4930-ab2d-2f37ee700e0b}" File="ui/rune/common_scale9_fuwendashenghendi01.png" UseOriginSize="True" RelativePosition="0.5,0.857" Name="imgType33_WndTips" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{05ac26ff-3ab9-4ae7-b4a6-c8dd99d41322}" AbsContentSize="265,40" UseAbsSize="True" RelativePosition="0.5,0.69">
+                <WZUI9Image Type="WZUI9Image" GUID="{8762fd91-6f32-4b3b-bcd4-6865cebc7af1}" File="ui/rune/common_scale9_fuwenmingchngdi.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e7a3e026-d399-4f24-a699-1fed8c30d794}" FontSize="22" Color="255,227,116" Text="圣痕 Lv4" RelativePosition="0.5,0.5" Name="txtTitle_WndTips33" Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{b562f1b4-3a82-48b7-8e62-db9b5846fac3}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.375" ScaleX="1.25" Scale="1.25" ScaleY="1.2" Name="imgThirdLine_conType33" AnchorPoint="0.5,1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{18dab1e6-7499-4beb-8133-9efbe6e5f872}" FontSize="20" Color="255,227,116" Text="幸运" RelativePosition="0.21,0.589" Name="txt1Type33_WndTips" Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{bea1fe81-34d2-4bac-accf-eee04090f81b}" FontSize="20" Color="255,227,116" Text="幸运" RelativePosition="0.21,0.51" Name="txt2Type33_WndTips" Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d191c675-4b4c-44e0-9774-5466e9c0b66b}" FontSize="20" Color="255,227,116" Text="幸运" RelativePosition="0.21,0.43" Name="txt3Type33_WndTips" Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d671cd98-2397-475f-93a1-340b1a9aa2ca}" FontSize="20" Color="255,227,116" Text="幸运" RelativePosition="0.21,0.24" Name="txt4Type33_WndTips" Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c5629082-c616-4e8a-b19d-b77a648c58b2}" FontSize="20" Color="255,227,116" Text="幸运" RelativePosition="0.21,0.16" Name="txt5Type33_WndTips" Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a0a0d0b2-d1de-4e32-b986-434f061e61c6}" FontSize="20" Color="255,227,116" Text="幸运" RelativePosition="0.21,0.082" Name="txt6Type33_WndTips" Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4597c7e8-1752-4abb-bf6d-7b761624e7c2}" Color="138,122,106" FontSize="19" Text="(绿色符文总LV100升级)" RelativePosition="0.5,0.315" Name="txt_WndTips33" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{090d0fa8-3124-4e86-9ee4-c545e2df218c}" FontSize="20" Color="99,255,95" Text="+999" RelativePosition="0.64,0.589" Name="txt7Type33_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{dafc2158-b2ff-4886-bd79-de0fea5f8ade}" FontSize="20" Color="99,255,95" Text="+999" RelativePosition="0.64,0.51" Name="txt8Type33_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{afb81232-74ae-4671-9d5f-bd097ffbb933}" FontSize="20" Color="99,255,95" Text="+999" RelativePosition="0.64,0.43" Name="txt9Type33_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{e12ec023-8e3f-49bb-98c8-7b916a789813}" FontSize="20" Color="99,255,95" Text="+999" RelativePosition="0.64,0.24" Name="txt10Type33_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{12dd4081-98b1-4f48-87f0-8bb525f883fa}" FontSize="20" Color="99,255,95" Text="+999" RelativePosition="0.64,0.16" Name="txt11Type33_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7e9aaf82-1cb8-4094-9918-8b62be81122d}" FontSize="20" Color="99,255,95" Text="+999" RelativePosition="0.64,0.082" Name="txt12Type33_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTips>

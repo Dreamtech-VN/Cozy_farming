@@ -1,0 +1,32 @@
+﻿<WndFastJump GUID="{ab89b0c9-01f9-4c71-a842-a89b7f74af54}">
+    <WZUIWindow Type="WZUIWindow" GUID="{bd118f0a-5f4e-44b2-9de1-07079dd74950}" Name="WndFastJump" NameCreate="False" LuaObjectName="WndFastJump" AbsContentSize="380,236" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{2b98cc42-fd34-4908-8cdb-ac0bb31947a6}">
+            <WZUI9Image Type="WZUI9Image" GUID="{dafa8558-0011-4427-a1e5-c5dbf54ea3fa}" File="ui/common/common_scale9_di19.png" CapInsets="140,80,2,2" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f73abc30-ecc5-4b61-ba60-98be67632346}" LabelStyleKey="C5_F22" Name="txtDes_WndFastJump" RelativePosition="0.5,0.631356" Text="" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{e3fe7e32-ab8d-483e-b41f-4b3809f942f9}" LabelStyleKey="NORMAL_ORANGE_BTN" Name="txtTitle_WndFastJump" RelativePosition="0.5,0.864407" Text="" />
+            <Button Type="WZUIButton" GUID="{5763d4e1-ebad-4cdc-bae4-5b882cf1262d}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.910525,0.864406" LuaDoneFunctionName="onClickClose">
+                <NormalElement Type="WZUIContainer" GUID="{bfa60552-28a3-4d5a-a248-b929435ba3a9}">
+                    <WZUIImage Type="WZUIImage" GUID="{5c410d5c-5ee4-4dec-a07e-d69dd2df430b}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{9a55450e-ce34-482d-948f-35e1c8e39ff7}">
+                    <WZUIImage Type="WZUIImage" GUID="{18f865ed-5097-4ece-baef-4e2911e4cef2}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{c86181e6-9588-4818-b286-204670152b0b}" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{9882153a-8ed9-425d-b4c6-75c18094a943}" AbsContentSize="290,105" UseAbsSize="True" RelativePosition="0.5,0.283899">
+                <WZUITableContainer Type="WZUITableContainer" GUID="{abcb5106-9a75-4ef4-a276-7b5be8eb0ba4}" Name="tabList_WndFastJump" EnableMoveVertical="False" EnableHorizontalScroll="True" CellElementHeight="0.3333" ColumnCount="1" IsVerticalMode="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{841cba4f-14dc-4e12-8dea-f3bec3e0d2d3}" Name="CellJumpItem_WndFastJump" AbsContentSize="70,68" UseAbsSize="True" Visible="True">
+                <Button Type="WZUIButton" GUID="{0c766da4-b2bc-48e8-8379-47222ea8fe5c}" LuaDoneFunctionName="onClickJump" Name="btnJump_WndFastJump">
+                    <NormalElement Type="WZUIContainer" GUID="{579270cb-e32b-4a16-be23-a4e13b241f18}">
+                        <WZUIImage Type="WZUIImage" GUID="{2eb34e68-1d96-479c-af6c-50cb8488a720}" File="" UseOriginSize="True" Scale="0.8" ScaleX="0.8" ScaleY="0.8" Name="imgFunNor_WndFastJump" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{0eab7912-f236-4334-bd1f-f0d88d2732b5}">
+                        <WZUIImage Type="WZUIImage" GUID="{ff399747-d746-4732-9926-77ab02b0bed6}" File="" UseOriginSize="True" Name="imgFunSel_WndFastJump" Scale="0.8" ScaleY="0.8" ScaleX="0.8" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{4a6c44ab-a421-4bce-9e21-1b10a4ddc52a}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndFastJump>

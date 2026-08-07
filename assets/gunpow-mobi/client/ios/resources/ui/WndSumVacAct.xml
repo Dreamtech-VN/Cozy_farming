@@ -1,0 +1,566 @@
+﻿<WndSumVacAct GUID="{d3f78267-1471-42ad-8de9-43d2cf40483d}">
+    <WZUIWindow Type="WZUIWindow" GUID="{90aafbfe-2843-4c1d-9a56-60ce4e2e7f90}" AbsContentSize="960,517" LuaObjectName="WndSumVacAct" Name="WndSumVacAct" NameCreate="True" UseAbsSize="True" LuaTouchBeganFunction="onTouchBegan" ShowAll="True" Visible="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{215cc28f-2c78-45b7-8ad8-b7f3a06a0f5c}" AbsContentSize="960,517" UseAbsSize="True" RelativePosition="0.5,0.5" ShowAll="False">
+            <WZUIImage Type="WZUIImage" GUID="{a55f60f1-9e73-4960-913d-df9602a2067e}" File="ui/gameActivity/holiday_dikuang.png" UseOriginSize="True" RelativePosition="0.5,0.5" ScaleX="1" Scale="1" Order="-1" Name="imgBg_WndSumVacAct" />
+            <WZUIImage Type="WZUIImage" GUID="{eab3138b-b3b8-4980-8021-41bb35980bbe}" File="ui/gameActivity/holiday_top_1.png" UseOriginSize="True" RelativePosition="0.494792,0.948742" Visible="True" Name="imgTitleBg_WndSumVacAct" />
+            <WZUIImage Type="WZUIImage" GUID="{dc3fa679-01e2-4ff8-95a2-68d7a63161fd}" File="ui/gameActivity/common_icon_horse2.png" UseOriginSize="True" RelativePosition="0.5,0.898451" Scale="0.8" ScaleX="0.8" ScaleY="0.8" Name="imgTitle_WndSumVacAct" />
+            <WZUIContainer Type="WZUIContainer" GUID="{2b049790-51fc-4ed6-95fe-aaea9da18af7}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.848423,0.874841">
+                <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsContentSize="70,70" UseAbsSize="True" GUID="{29da7506-511c-443e-bd95-77384b09ebd3}" LuaDoneFunctionName="onCloseClick" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{a41d2117-63da-4f26-bf69-d87fcc802059}">
+                        <WZUIImage Type="WZUIImage" GUID="{fa4817c6-e856-4f4f-843e-06e4ce27dc8d}" File="ui/gameActivity/holiday_guanbi.png" UseOriginSize="True" Name="imgBtnClose1_WndSumVacAct" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{0aefcfe7-7e6b-416f-a359-69d5bd6b79e6}">
+                        <WZUIImage Type="WZUIImage" GUID="{f1350a4a-f7be-49d7-8976-e9abcb24327d}" File="ui/gameActivity/holiday_guanbi.png" UseOriginSize="True" Name="imgBtnClose2_WndSumVacAct" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{d75f1b42-b438-4aa5-9327-fd69145c0af7}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{da8a6de8-fb09-4dda-8458-5f03dfa08f4d}" AbsContentSize="150,388" UseAbsSize="True" RelativePosition="0.17921,0.432748" Order="0" Name="conLeft_WndSumVacAct" Visible="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{eafeff24-6ce2-4c03-a903-59ed57a8457b}" AbsContentSize="150,66" UseAbsSize="True" RelativePosition="0.493333,0.915464" Name="conActivity1_WndSumVacAct" Visible="False">
+                    <Button Type="WZUIButton" GUID="{2e0a3546-f741-46de-8052-db2eee8bfcc4}" Name="btn_WndSumVacAct" LuaDoneFunctionName="onClickActivity" Tag="1" TouchEnable="True" Visible="True">
+                        <NormalElement Type="WZUIContainer" GUID="{f9138817-e9f4-450b-a905-f1c577fe58fe}">
+                            <WZUIImage Type="WZUIImage" GUID="{55a5fea8-bf01-4aa2-9325-a7b0d22b94b8}" File="ui/gameActivity/holiday_anniu2.png" UseOriginSize="True" Name="imgAct1Btn1_WndSumVacAct" />
+                            <WZUIImage Type="WZUIImage" GUID="{6d6d036e-f2cb-4a64-95a6-f541ddd260f2}" File="" UseOriginSize="True" Name="imgNormalTitle_WndSumVacAct" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{12698dba-62b2-4e81-b7c9-4dc1571119e9}">
+                            <WZUIImage Type="WZUIImage" GUID="{1c5efb3b-9bf8-44d8-8127-726d51eae215}" UseOriginSize="True" File="ui/gameActivity/holiday_anniu1.png" Name="imgAct1Btn2_WndSumVacAct" />
+                            <WZUIImage Type="WZUIImage" GUID="{9bed86f4-6696-4910-a45c-a2ee34614d1a}" File="" UseOriginSize="True" Name="imgSelTitle_WndSumVacAct" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{d011b3f3-8b7c-45a6-95c8-22faa91e9ca0}">
+                            <WZUIImage Type="WZUIImage" GUID="{c9b65896-2ae0-4ee6-bb89-178e08f6ab09}" UseOriginSize="True" File="ui/gameActivity/holiday_anniu1.png" Name="imgAct1Btn3_WndSumVacAct" />
+                            <WZUIImage Type="WZUIImage" GUID="{85836803-d0e5-4d5c-a503-4baaa057841c}" File="" UseOriginSize="True" Name="imgNotEnableTitle_WndSumVacAct" />
+                        </DisableElement>
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{27648533-d8f0-41d4-a6e1-fe714bf4c51e}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.928236,0.894949" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndSumVacAct" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{0138f288-f73f-4778-ab22-25bab9c72fa4}" AbsContentSize="150,66" UseAbsSize="True" RelativePosition="0.493333,0.567525" Name="conActivity3_WndSumVacAct" Visible="False">
+                    <Button Type="WZUIButton" GUID="{d670c720-33c8-4f1b-ac39-d31798719d60}" LuaDoneFunctionName="onClickActivity" Tag="3" Name="btn_WndSumVacAct" TouchEnable="True">
+                        <NormalElement Type="WZUIContainer" GUID="{1f0d06ce-f7b2-4706-9a4b-2444ecc18798}">
+                            <WZUIImage Type="WZUIImage" GUID="{eb7db778-fdf8-420f-87c3-8ef8751d7227}" File="ui/gameActivity/holiday_anniu2.png" UseOriginSize="True" Name="imgAct3Btn1_WndSumVacAct" />
+                            <WZUIImage Type="WZUIImage" GUID="{fa2c8afa-c6cc-4128-bf23-90a775447bc6}" File="" UseOriginSize="True" Name="imgNormalTitle_WndSumVacAct" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{a0e66f50-688f-4aaa-b840-cac3cfd58e81}">
+                            <WZUIImage Type="WZUIImage" GUID="{8b8f0952-50d3-4b0e-932e-f13652174ade}" UseOriginSize="True" File="ui/gameActivity/holiday_anniu1.png" Name="imgAct3Btn2_WndSumVacAct" />
+                            <WZUIImage Type="WZUIImage" GUID="{b9331b81-fec7-40f3-b00a-95bb2c6d06e7}" File="" UseOriginSize="True" Name="imgSelTitle_WndSumVacAct" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{27389293-97e3-4e03-a482-5e4c6183c8da}">
+                            <WZUIImage Type="WZUIImage" GUID="{fbf29a28-f634-4fe4-b376-9c275cb854b2}" UseOriginSize="True" File="ui/gameActivity/holiday_anniu1.png" Name="imgAct3Btn3_WndSumVacAct" />
+                            <WZUIImage Type="WZUIImage" GUID="{af7b79b1-272e-4e2b-81d8-91a2c68dbfb6}" File="" UseOriginSize="True" Name="imgNotEnableTitle_WndSumVacAct" />
+                        </DisableElement>
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{ca95f1d1-519d-44e6-8ea9-33c2722a0166}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.928236,0.894949" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndSumVacAct" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7a127a8e-26ff-4f63-834b-2b0974c8924c}" AbsContentSize="150,66" UseAbsSize="True" RelativePosition="0.493333,0.742783" Name="conActivity2_WndSumVacAct" Visible="False">
+                    <Button Type="WZUIButton" GUID="{14a920a7-3b93-42e0-831c-abc3d8c06cbe}" LuaDoneFunctionName="onClickActivity" Tag="2" Name="btn_WndSumVacAct" TouchEnable="True">
+                        <NormalElement Type="WZUIContainer" GUID="{db47a45f-2afb-49e0-a4d6-2fc096c88a83}">
+                            <WZUIImage Type="WZUIImage" GUID="{49df8675-7c8f-4569-9a23-5b7db9231895}" File="ui/gameActivity/holiday_anniu2.png" UseOriginSize="True" Name="imgAct2Btn1_WndSumVacAct" />
+                            <WZUIImage Type="WZUIImage" GUID="{e15e3ae2-4e8f-4f93-a3da-2b195394eed0}" File="" UseOriginSize="True" Name="imgNormalTitle_WndSumVacAct" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{3269e61d-32cd-41b0-9f36-a03479815d86}">
+                            <WZUIImage Type="WZUIImage" GUID="{3de1b6f4-d738-45ef-a26c-20aec1913728}" UseOriginSize="True" File="ui/gameActivity/holiday_anniu1.png" Name="imgAct2Btn2_WndSumVacAct" />
+                            <WZUIImage Type="WZUIImage" GUID="{698b6fb0-4dba-4f07-a0ff-ac0c28f7888c}" File="" UseOriginSize="True" Name="imgSelTitle_WndSumVacAct" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{e93841f3-77d4-459d-a847-9f0303b1fad7}">
+                            <WZUIImage Type="WZUIImage" GUID="{bd7f9e07-600e-41f5-86f6-84cdde1e7062}" UseOriginSize="True" File="ui/gameActivity/holiday_anniu1.png" Name="imgAct2Btn3_WndSumVacAct" />
+                            <WZUIImage Type="WZUIImage" GUID="{b66bc571-cc5c-443c-b107-656b9f931aa3}" File="" UseOriginSize="True" Name="imgNotEnableTitle_WndSumVacAct" />
+                        </DisableElement>
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{78077b71-c754-4c50-ac7d-0e7de63646d7}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.928236,0.894949" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndSumVacAct" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{962933fd-4aca-4c2f-ade3-c9e32e7b5341}" AbsContentSize="150,66" UseAbsSize="True" RelativePosition="0.493333,0.392268" Name="conActivity4_WndSumVacAct" Visible="False">
+                    <Button Type="WZUIButton" GUID="{cf3da5a0-06ab-4907-a0ed-03944607e300}" LuaDoneFunctionName="onClickActivity" Tag="4" Name="btn_WndSumVacAct" TouchEnable="True">
+                        <NormalElement Type="WZUIContainer" GUID="{1b461832-3225-4059-b987-fb33e060d53e}">
+                            <WZUIImage Type="WZUIImage" GUID="{d3b67423-71e3-431e-8f2f-7519e3416686}" File="ui/gameActivity/holiday_anniu2.png" UseOriginSize="True" Name="imgAct4Btn1_WndSumVacAct" />
+                            <WZUIImage Type="WZUIImage" GUID="{ccf7fa78-a9ae-4622-b509-0d1c674ce85a}" File="" UseOriginSize="True" Name="imgNormalTitle_WndSumVacAct" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{e9106a50-12bd-491e-afe2-f57885584883}">
+                            <WZUIImage Type="WZUIImage" GUID="{7295a093-5d7d-4c20-9a91-2529e1ec6833}" UseOriginSize="True" File="ui/gameActivity/holiday_anniu1.png" Name="imgAct4Btn2_WndSumVacAct" />
+                            <WZUIImage Type="WZUIImage" GUID="{44899c0e-9d0f-454b-8a08-d9d85ba20a21}" File="" UseOriginSize="True" Name="imgSelTitle_WndSumVacAct" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{92d2d977-b4d4-48c0-b9a3-af252cd976da}">
+                            <WZUIImage Type="WZUIImage" GUID="{8ba498fe-a64c-421b-a0f4-15a633a4391b}" UseOriginSize="True" File="ui/gameActivity/holiday_anniu1.png" Name="imgAct4Btn3_WndSumVacAct" />
+                            <WZUIImage Type="WZUIImage" GUID="{8b9b6c3c-6a46-4718-975e-22a7d47b8a60}" File="" UseOriginSize="True" Name="imgNotEnableTitle_WndSumVacAct" />
+                        </DisableElement>
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{000bb9ac-5771-4d1e-84d0-507ddac1e0db}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.928236,0.894949" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndSumVacAct" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{e6f93f31-f4a3-4722-9095-f2122aa3ab7a}" AbsContentSize="592,388" UseAbsSize="True" RelativePosition="0.565068,0.431391" Order="0" Visible="True" Name="conActivityC_WndSumVacAct">
+                <WZUIContainer AbsContentSize="592,388" GUID="{c0c7673b-b6bf-4366-8446-e4aa4a90e8d2}" Name="conActivityContext1_WndSumVacAct" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{562e35f9-99de-47ea-ad40-fd25913bcc68}" File="ui/gameActivity/activity_pic_xsqg.png" UseOriginSize="True" RelativePosition="0.380067,0.502578" Scale="1" ScaleX="1" ScaleY="1" Visible="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{4462081d-a98d-45c9-bd7e-6288fa052320}" AbsContentSize="536,218" UseAbsSize="True" RelativePosition="0.430743,0.278351">
+                        <WZUI9Image Type="WZUI9Image" GUID="{5f1fb0d6-9c18-4b19-b9b2-e07cdd07dfac}" File="ui/gameActivity/holiday_di4.png" Visible="False" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{291a9974-397b-4322-804a-f75dc3bac66b}" Name="conActivityTime1_WndSumVacAct" AbsContentSize="290,30" UseAbsSize="True" RelativePosition="0.503774,1" AnchorPoint="0.5,1">
+                            <WZUIImage Type="WZUIImage" GUID="{8f3added-3c10-404b-a8e4-e004f801db0e}" File="ui/common/common_scale9_heidi2.png" UseOriginSize="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{493e1e2a-09aa-48ea-a9f0-171ab73f8564}" LabelStyleKey="C18_F20" Name="txtActivitySkillT_WndSumVacAct" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{dd0ad399-8a42-44fe-b3d5-21f85bbeaec7}" AbsContentSize="120,60" UseAbsSize="True" RelativePosition="0.5,0.142133" Name="conBtnBuy_WndSumVacAct">
+                            <Button Type="WZUIButton" GUID="{5ca7c31a-a13b-4d90-8775-8a2fc0dcf05a}" LuaDoneFunctionName="onClickRecharge2">
+                                <NormalElement Type="WZUIContainer" GUID="{4dbd944c-00ae-49da-bd94-4c059be7d0b4}">
+                                    <WZUIImage Type="WZUIImage" GUID="{62540d05-009a-4d5a-94e4-ef53fc29fdeb}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{0563e6a3-4e48-4da2-9e91-f2f82c058a0f}">
+                                    <WZUIImage Type="WZUIImage" GUID="{3a960d26-ad06-48cc-8359-79e5d2a5f680}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{3b551f74-416e-45fd-8a2f-fa7f50fb36bc}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4b28fab3-6b51-4c64-a8e5-1a88fa973eac}" LabelStyleKey="NORMAL_GREEN_BTN" Text="" Scale="1" Name="txtPrice_WndSumVacAct" ScaleX="1" ScaleY="1" />
+                        </WZUIContainer>
+                        <WZUIImage Type="WZUIImage" GUID="{ff699a81-d0ab-439e-817d-585f8a72d863}" File="ui/common/commom_icon_ygm.png" UseOriginSize="True" RelativePosition="0.5,0.181949" Name="imgSoldOut_WndSumVacAct" Visible="False" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{dea4719d-ded5-429b-b708-1ca58cd52b5a}" AbsContentSize="120,104" UseAbsSize="True" RelativePosition="0.128126,0.61832" Name="conItem1_WndSumVacAct">
+                            <WZUIImage Type="WZUIImage" GUID="{4dfd50d6-3a74-40e4-ad78-9e63e8d128ae}" File="ui/gameActivity/holiday_di5.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{bba87e66-5d2c-4c6b-ac28-b5feee95c406}" LabelStyleKey="C1_F18" Text="" RelativePosition="0.5,0.0288461" Name="txtItemName_WndSumVacAct" AnchorPoint="0.5,0" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{1f55fab3-f6a8-4497-9209-28e85d28c90d}" Name="conItem_WndSumVacAct" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.5,0.586539" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{94a31728-da8b-46ec-b211-c969002a081a}" AbsContentSize="120,104" UseAbsSize="True" RelativePosition="0.35947,0.61832" Name="conItem2_WndSumVacAct">
+                            <WZUIImage Type="WZUIImage" GUID="{61d77ba1-4618-4015-8945-30e3be01c6ec}" File="ui/gameActivity/holiday_di5.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ac720674-86b0-400e-a4cd-14f92bb7eeb8}" LabelStyleKey="C1_F18" Text="" RelativePosition="0.5,0.0288461" Name="txtItemName_WndSumVacAct" AnchorPoint="0.5,0" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{3281cb89-9d04-41ff-b7e3-89a0f36f8474}" Name="conItem_WndSumVacAct" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.5,0.586539" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{c9550345-075b-4be7-9b7f-19ba7ba34429}" AbsContentSize="120,104" UseAbsSize="True" RelativePosition="0.590812,0.61832" Name="conItem3_WndSumVacAct">
+                            <WZUIImage Type="WZUIImage" GUID="{bb68fa87-39be-4840-96af-d7db5af14ff1}" File="ui/gameActivity/holiday_di5.png" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{c3a062ab-aa17-439c-aaf2-6525d11c9eff}" Name="conItem_WndSumVacAct" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.5,0.586539" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{0c0eef22-1441-4dd5-803b-3b1405433255}" LabelStyleKey="C1_F18" Text="" RelativePosition="0.5,0.0288461" Name="txtItemName_WndSumVacAct" AnchorPoint="0.5,0" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{c309af4c-8cf8-4f7b-b77c-54cd4123e9ad}" AbsContentSize="120,104" UseAbsSize="True" RelativePosition="0.822155,0.61832" Name="conItem4_WndSumVacAct">
+                            <WZUIImage Type="WZUIImage" GUID="{b90aff39-4e5e-40ea-a47c-cfe7528e375c}" File="ui/gameActivity/holiday_di5.png" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{f2f6561f-5ff6-4b04-b932-c66c78f01b43}" Name="conItem_WndSumVacAct" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.5,0.586539" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{73c9a777-7f25-41eb-9c46-6af9d61126a4}" LabelStyleKey="C1_F18" Text="" RelativePosition="0.5,0.0288461" Name="txtItemName_WndSumVacAct" AnchorPoint="0.5,0" />
+                        </WZUIContainer>
+                        <WZUIImage Type="WZUIImage" GUID="{838d489d-be7b-48ee-9105-c0728d839619}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" RelativePosition="0.5,0.633028" Visible="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d45bddb0-84a5-4b4b-9fbf-bbc932cc6c24}" TextKey="SUMMER_BUY_FASHION_TIP" LabelStyleKey="C11_F18" Text="" RelativePosition="0.5,0.316513" Visible="False" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="592,388" GUID="{17ffde58-bd22-4467-a060-3c0d757b140a}" Name="conActivityContext3_WndSumVacAct" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUIContainer Type="WZUIContainer" GUID="{da638232-2dbc-4629-97b3-b255ba9ea7f0}" AbsContentSize="144,260" UseAbsSize="True" RelativePosition="0.127129,0.335052" Name="conAct1_WndSumVacAct">
+                        <WZUI9Image Type="WZUI9Image" GUID="{c32800da-9aff-42bf-a9fc-c982b6cbe7c2}" File="ui/gameActivity/holiday_di2.png" Name="imgActivity3Reward1_WndSumVacAct" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{1948e12e-fa06-4e79-9681-a0b7bf34121e}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True" Name="conBtn_WndSumVacAct">
+                            <Button Type="WZUIButton" GUID="{c4d94aab-6010-45d5-ac9f-75a36fd1e4e6}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickDo" Tag="1">
+                                <NormalElement Type="WZUIContainer" GUID="{c719f752-b7c2-4d5e-84a5-77de7d6787d5}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{eb8daa89-7cd1-45c7-8204-2348942fc474}" File="ui/common/common_btn_anniu10_0.png" Name="imgNormal_WndSumVacAct" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{33d97f2e-dd0f-4322-8ed7-2de1107d057a}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{16af4a35-634f-49e4-b9ec-47673132a09b}" File="ui/common/common_btn_anniu10_0_sel.png" Name="imgSel_WndSumVactAct" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{bccd43b1-c734-4032-8226-f2a0973eed4b}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a936f8f2-03c2-4acd-936a-6c735128e0c4}" Name="txtStats_WndSumVacAct" LabelStyleKey="NORMAL_GREEN_BTN" Text="前往" />
+                        </WZUIContainer>
+                        <WZUIImage Type="WZUIImage" GUID="{30039700-f307-4de7-9243-af5d0d4ab915}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" Name="imgPass_WndSumVacAct" RelativePosition="0.5,0.15" Visible="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{75979a8e-0091-4d5f-a8e5-e011e44d8d8e}" Name="txtKillCount_WndSumVacAct" LabelStyleKey="C15_F16" Text="" RelativePosition="0.5,0.357693" Scale="1" ScaleX="1" ScaleY="1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{bb48ac21-b055-4b1a-bc74-4220ba46f4d6}" Name="txtIntegral_WndSumVacAct" LabelStyleKey="C7_F16" Text="" RelativePosition="0.465278,0.865231" Scale="1" ScaleX="1" ScaleY="1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{42ed86d7-7e02-4abe-8953-281efbf14f18}" LabelStyleKey="C18_F18" Name="txtMonsterName_WndSumVacAct" Text="" RelativePosition="0.770833,0.938462" AnchorPoint="1,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{5e1c1707-ed7c-416b-a459-73c9aa30a2f1}" File="" UseOriginSize="True" RelativePosition="0.101228,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward1_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8725b32f-b736-44bd-b255-b3ebe0d22726}" LabelStyleKey="C18_F16" Name="txtReward1Count_WndSumVacAct" Text="" RelativePosition="0.180556,0.276923" AnchorPoint="0,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{a67479e5-d3bf-4632-8e19-783ae52b7d65}" File="" UseOriginSize="True" RelativePosition="0.566506,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward2_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{af139f0c-c3d7-47bf-9bf8-6afe16f6b3db}" LabelStyleKey="C18_F16" Name="txtReward2Count_WndSumVacAct" Text="" RelativePosition="0.673612,0.276923" AnchorPoint="0,0.5" />
+                        <Button Type="WZUIButton" GUID="{8d071b72-9ce1-4c50-a5f3-ca95cc08b002}" AbsContentSize="30,30" UseAbsSize="True" RelativePosition="0.876863,0.928879" LuaDoneFunctionName="onClickLook" Name="btnMonsterInfo_WndSumVacAct" Scale="0.9" ScaleX="0.9" ScaleY="0.9">
+                            <NormalElement Type="WZUIContainer" GUID="{b3f66caf-052d-4d79-b120-a83604c26d3c}">
+                                <WZUIImage Type="WZUIImage" GUID="{7db0ead1-e69f-4270-8a0e-2838eccbe57e}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{c25b6df4-0fb2-4f0c-99bd-8abfacb25d63}">
+                                <WZUIImage Type="WZUIImage" GUID="{5fa73324-f188-4dc3-9714-26ad52f8758d}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{5f2e9b50-f7a1-44b1-a62f-d308a128dfd0}" />
+                        </Button>
+                        <WZUIContainer Type="WZUIContainer" GUID="{a09d29e3-b170-4db0-a508-ec26128f5b36}" AbsContentSize="90,110" UseAbsSize="True" RelativePosition="0.5,0.611539">
+                            <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{e8100094-cc11-4e5e-921b-fdbe0df4ee03}" Name="conClipping_WndSumVacAct" Scale="1" AbsContentSize="90,112" UseAbsSize="True" Inverted="False">
+                                <Stencil Type="WZUIImage" GUID="{b2a4b078-7939-453b-a163-12bed76dcb18}" File="ui/common/common_shade_chushouheidi1.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="1.16" Name="imgZheZhao_WndSumVacAct" Visible="True" ScaleX="1.16" ScaleY="1.4" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{0d612a9a-319b-4a27-88c0-c17ee4a03d93}" Name="conCard_WndSumVacAct" RelativePosition="0.5,0.5" AbsPosition="50,44">
+                                    <WZUIImage Type="WZUIImage" GUID="{0601ee8f-5787-480a-ac96-996079359480}" Visible="True" UseOriginSize="True" Name="imgMonster_WndSumVacAct" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" File="" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                                    <WZUIImage Type="WZUIImage" GUID="{ec6bc882-f136-4092-9543-b4d33d42a492}" File="ui/common/huanhua_scale9_lan.png" UseOriginSize="True" Scale="0.8" ScaleY="0.8" ScaleX="0.8" Name="imgQuality_WndSumVacAct" />
+                                </WZUIContainer>
+                            </WZUIClippingContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{6627e4c2-82fb-4207-bacc-0c325dd31d02}" AbsContentSize="144,260" UseAbsSize="True" RelativePosition="0.375441,0.335052" Name="conAct2_WndSumVacAct">
+                        <WZUI9Image Type="WZUI9Image" GUID="{418a39be-78a4-4363-968d-767eb31b0148}" File="ui/gameActivity/holiday_di2.png" Name="imgActivity3Reward2_WndSumVacAct" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{e0c7aab5-6b84-42ea-944d-a8118144e825}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True" Name="conBtn_WndSumVacAct">
+                            <Button Type="WZUIButton" GUID="{0ec075b3-a0fc-4afc-a304-08ecdc96d482}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickDo" Tag="2">
+                                <NormalElement Type="WZUIContainer" GUID="{bbcde572-d0c5-4e7e-87a8-4777b4e976a9}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{17064e94-0807-4bdb-9c56-c9a47a4a9cf1}" File="ui/common/common_btn_anniu10_0.png" Name="imgNormal_WndSumVacAct" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{dd9988d6-635c-4750-a1bb-f598375f21b5}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{514ae390-1e1b-4d65-95fd-2edabe429ce6}" File="ui/common/common_btn_anniu10_0_sel.png" Name="imgSel_WndSumVactAct" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{e409769a-6060-4118-901d-4103b717cbdd}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a01a080f-2ebd-4512-981c-bfc70a9dff43}" Name="txtStats_WndSumVacAct" LabelStyleKey="NORMAL_GREEN_BTN" Text="前往" />
+                        </WZUIContainer>
+                        <WZUIImage Type="WZUIImage" GUID="{8b3cfdef-50e1-4d83-bf92-853de81d24b3}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" Name="imgPass_WndSumVacAct" RelativePosition="0.5,0.15" Visible="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{96d41580-0062-40c9-8945-7f37465e610a}" Name="txtKillCount_WndSumVacAct" LabelStyleKey="C15_F16" Text="" RelativePosition="0.5,0.357693" Scale="1" ScaleX="1" ScaleY="1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{949ecb50-f052-41cf-a5c9-2a1901a4269b}" Name="txtIntegral_WndSumVacAct" LabelStyleKey="C7_F16" Text="" RelativePosition="0.465278,0.865231" Scale="1" ScaleX="1" ScaleY="1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{7fdd5997-870f-4c5f-b0d2-7ec793e41825}" LabelStyleKey="C18_F18" Name="txtMonsterName_WndSumVacAct" Text="" RelativePosition="0.770833,0.938462" AnchorPoint="1,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{51237c46-43aa-4fbc-89c2-04a416910986}" File="" UseOriginSize="True" RelativePosition="0.101228,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward1_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e1f132ff-bbeb-41a4-bb12-6c96e1469bd5}" LabelStyleKey="C18_F16" Name="txtReward1Count_WndSumVacAct" Text="" RelativePosition="0.180556,0.276923" AnchorPoint="0,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{91524536-121d-4bfe-a803-633a6ff61a57}" File="" UseOriginSize="True" RelativePosition="0.566506,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward2_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b99bc043-2f36-4a4d-8bf8-6d8b4f4ca1f8}" LabelStyleKey="C18_F16" Name="txtReward2Count_WndSumVacAct" Text="" RelativePosition="0.673612,0.276923" AnchorPoint="0,0.5" />
+                        <Button Type="WZUIButton" GUID="{716cf694-8429-4afa-a250-98761d7d2ea0}" AbsContentSize="30,30" UseAbsSize="True" RelativePosition="0.876863,0.928879" LuaDoneFunctionName="onClickLook" Tag="2" Name="btnMonsterInfo_WndSumVacAct" Scale="0.9" ScaleX="0.9" ScaleY="0.9">
+                            <NormalElement Type="WZUIContainer" GUID="{0d750e8a-99b3-478c-9499-c594fcfbbce6}">
+                                <WZUIImage Type="WZUIImage" GUID="{2f199ed0-3153-4700-aa81-c397584668dd}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{9065bd5d-c038-4569-bd2a-1e4b8ec06d23}">
+                                <WZUIImage Type="WZUIImage" GUID="{72a271ed-f991-4e17-a8c0-72c8a8ecdcd9}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{7a929d18-ae12-4c5d-b72f-b78bb6be71c8}" />
+                        </Button>
+                        <WZUIContainer Type="WZUIContainer" GUID="{c616d1e4-4b69-40e7-a103-46f9ae0a4359}" AbsContentSize="90,110" UseAbsSize="True" RelativePosition="0.5,0.611539">
+                            <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{d8eac990-7911-4fda-87af-c7e125a2f625}" Name="conClipping_WndSumVacAct" Scale="1" AbsContentSize="90,112" UseAbsSize="True" Inverted="False">
+                                <Stencil Type="WZUIImage" GUID="{88d4d64a-c0fa-4194-9d12-2e4c1ed8abe4}" File="ui/common/common_shade_chushouheidi1.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="1.16" Name="imgZheZhao_WndSumVacAct" Visible="True" ScaleX="1.16" ScaleY="1.4" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{19878b40-a3d1-4ccb-8a18-ddcccd2aab6e}" Name="conCard_WndSumVacAct" RelativePosition="0.5,0.5" AbsPosition="50,44">
+                                    <WZUIImage Type="WZUIImage" GUID="{cefdfe4b-92d7-4182-92e0-86aa261db67c}" Visible="True" UseOriginSize="True" Name="imgMonster_WndSumVacAct" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" File="" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                                    <WZUIImage Type="WZUIImage" GUID="{33478789-b48b-4120-827c-d11cea5b0bf6}" File="ui/common/huanhua_scale9_lan.png" UseOriginSize="True" Scale="0.8" ScaleY="0.8" ScaleX="0.8" Name="imgQuality_WndSumVacAct" />
+                                </WZUIContainer>
+                            </WZUIClippingContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{4fe564c8-b3b3-4d08-beb6-d9e5b468a72e}" AbsContentSize="144,260" UseAbsSize="True" RelativePosition="0.625441,0.335052" Name="conAct3_WndSumVacAct">
+                        <WZUI9Image Type="WZUI9Image" GUID="{c5a0a09d-0a84-4ada-830e-328105a1cfed}" File="ui/gameActivity/holiday_di2.png" Name="imgActivity3Reward3_WndSumVacAct" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{a30a4bb8-fa1b-4d5e-b395-d85a877b0aa0}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True" Name="conBtn_WndSumVacAct">
+                            <Button Type="WZUIButton" GUID="{ca53ff74-1e8d-4fd4-af78-7c926fd1cf98}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickDo" Tag="3">
+                                <NormalElement Type="WZUIContainer" GUID="{dcd3cf3e-1895-4e8b-a346-cf1362fd4757}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{be42ae15-0758-4bda-aefb-ea5f1edf87d9}" File="ui/common/common_btn_anniu10_0.png" Name="imgNormal_WndSumVacAct" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{4ae63864-368b-4ea7-972a-893ab8dc682b}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{c04bbbd8-fb28-4382-a808-4b79c1a2c731}" File="ui/common/common_btn_anniu10_0_sel.png" Name="imgSel_WndSumVactAct" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{f251c7ab-135c-4f9b-bd3e-3bfc947c7a3c}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{64093cf4-3317-498f-aa42-2550dd6680f5}" Name="txtStats_WndSumVacAct" LabelStyleKey="NORMAL_GREEN_BTN" Text="前往" />
+                        </WZUIContainer>
+                        <WZUIImage Type="WZUIImage" GUID="{fc37565b-c1e3-44bf-b72e-6c3cd12a9330}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" Name="imgPass_WndSumVacAct" RelativePosition="0.5,0.15" Visible="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{768b3437-63c3-4fdc-86b6-c9beab5a44b5}" Name="txtKillCount_WndSumVacAct" LabelStyleKey="C15_F16" Text="" RelativePosition="0.5,0.357693" Scale="1" ScaleX="1" ScaleY="1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d10324bc-5828-418b-a5d3-7e3250441b79}" Name="txtIntegral_WndSumVacAct" LabelStyleKey="C7_F16" Text="" RelativePosition="0.465278,0.865231" Scale="1" ScaleX="1" ScaleY="1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6fb5f649-d0a0-4359-83a3-3cac18915559}" LabelStyleKey="C18_F18" Name="txtMonsterName_WndSumVacAct" Text="" RelativePosition="0.770833,0.938462" AnchorPoint="1,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{2e9f92db-0ea5-423a-972b-a81423a5af83}" File="" UseOriginSize="True" RelativePosition="0.101228,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward1_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f33b5a10-4ba1-4308-9006-76e1d94523f5}" LabelStyleKey="C18_F16" Name="txtReward1Count_WndSumVacAct" Text="" RelativePosition="0.180556,0.276923" AnchorPoint="0,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{86a0fe9c-f327-4bdb-a240-5376a6968d89}" File="" UseOriginSize="True" RelativePosition="0.566506,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward2_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{48625a28-fe65-484d-b8b3-68076f8c0a52}" LabelStyleKey="C18_F16" Name="txtReward2Count_WndSumVacAct" Text="" RelativePosition="0.673612,0.276923" AnchorPoint="0,0.5" />
+                        <Button Type="WZUIButton" GUID="{1aa6af0a-fb75-484d-9615-05c5b3e539cb}" AbsContentSize="30,30" UseAbsSize="True" RelativePosition="0.876863,0.928879" LuaDoneFunctionName="onClickLook" Tag="3" Name="btnMonsterInfo_WndSumVacAct" Scale="0.9" ScaleX="0.9" ScaleY="0.9">
+                            <NormalElement Type="WZUIContainer" GUID="{5b1e0491-a335-4831-aa9a-21727a709fcb}">
+                                <WZUIImage Type="WZUIImage" GUID="{eec95b2b-1e05-48b5-976b-9abed453b2d1}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{3b06d5f4-e8f2-4257-b044-c3ed01918b0d}">
+                                <WZUIImage Type="WZUIImage" GUID="{d8694913-9022-452e-928e-221e1c622457}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{0636a81a-66e7-40b4-972b-e2b72700b4a4}" />
+                        </Button>
+                        <WZUIContainer Type="WZUIContainer" GUID="{17ae3c21-bc8d-467e-89a4-97acbe0b2217}" AbsContentSize="90,110" UseAbsSize="True" RelativePosition="0.5,0.611539">
+                            <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{fe3973e0-4fff-421a-8a0d-22c0b5136879}" Name="conClipping_WndSumVacAct" Scale="1" AbsContentSize="90,112" UseAbsSize="True" Inverted="False">
+                                <Stencil Type="WZUIImage" GUID="{3710e078-ff1e-4ac2-aace-0dcbfe2e092b}" File="ui/common/common_shade_chushouheidi1.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="1.16" Name="imgZheZhao_WndSumVacAct" Visible="True" ScaleX="1.16" ScaleY="1.4" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{3786dd45-e0ca-418c-b862-85e1d7c74bf6}" Name="conCard_WndSumVacAct" RelativePosition="0.5,0.5" AbsPosition="50,44">
+                                    <WZUIImage Type="WZUIImage" GUID="{b57f3057-5078-471b-8ddf-e2ec15bff27f}" Visible="True" UseOriginSize="True" Name="imgMonster_WndSumVacAct" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" File="" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                                    <WZUIImage Type="WZUIImage" GUID="{fecf33a9-7851-4319-95f5-a5ee6cadc4ca}" File="ui/common/huanhua_scale9_zi.png" UseOriginSize="True" Scale="0.8" ScaleY="0.8" ScaleX="0.8" Name="imgQuality_WndSumVacAct" />
+                                </WZUIContainer>
+                            </WZUIClippingContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{a2b7a76f-1dd3-4196-b698-c3202ca64067}" AbsContentSize="144,260" UseAbsSize="True" RelativePosition="0.873753,0.335052" Name="conAct4_WndSumVacAct">
+                        <WZUI9Image Type="WZUI9Image" GUID="{d692edc3-5c08-48f9-b2ee-c7a8d9d547e8}" File="ui/gameActivity/holiday_di2.png" Name="imgActivity3Reward4_WndSumVacAct" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{dcf45ca7-804d-4a8d-93d9-ad8f8eef512a}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True" Name="conBtn_WndSumVacAct">
+                            <Button Type="WZUIButton" GUID="{555e6454-371b-46b9-90dd-87fd494bbd7f}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickDo" Tag="4">
+                                <NormalElement Type="WZUIContainer" GUID="{7aebc7be-5f8f-4f88-b50f-00db0a531448}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{6a9f75e3-cea4-4ddb-8665-1615570fd49d}" File="ui/common/common_btn_anniu10_0.png" Name="imgNormal_WndSumVacAct" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{b31819c0-cfe9-40d8-8016-9af5ade7f4c5}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{4582edb3-d9a0-40f6-938f-526e360ab0cd}" File="ui/common/common_btn_anniu10_0_sel.png" Name="imgSel_WndSumVactAct" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{16b1158f-8f8b-43dc-b097-ef7d47f8f254}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b2e037f9-9421-4c93-8ca3-e796ac9dfd13}" Name="txtStats_WndSumVacAct" LabelStyleKey="NORMAL_GREEN_BTN" Text="前往" />
+                        </WZUIContainer>
+                        <WZUIImage Type="WZUIImage" GUID="{81abcc57-22d9-4fd9-81c0-041492a36e55}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" Name="imgPass_WndSumVacAct" RelativePosition="0.5,0.15" Visible="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a2b7ede5-cfbe-4b64-84bd-bacee2653561}" Name="txtKillCount_WndSumVacAct" LabelStyleKey="C15_F16" Text="" RelativePosition="0.5,0.357693" Scale="1" ScaleX="1" ScaleY="1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8f54bcf4-6384-4511-ae32-fb96c146c20b}" Name="txtIntegral_WndSumVacAct" LabelStyleKey="C7_F16" Text="" RelativePosition="0.465278,0.865231" Scale="1" ScaleX="1" ScaleY="1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{25d13884-b9f0-4b2e-9031-4eb5a2aad1ec}" LabelStyleKey="C18_F18" Name="txtMonsterName_WndSumVacAct" Text="" RelativePosition="0.770833,0.938462" AnchorPoint="1,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{3fd91f7a-7d01-4d64-9def-a5b4d9b5658f}" File="" UseOriginSize="True" RelativePosition="0.101228,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward1_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6b7831c2-f492-4398-b9f7-58c2087ad1d6}" LabelStyleKey="C18_F16" Name="txtReward1Count_WndSumVacAct" Text="" RelativePosition="0.180556,0.276923" AnchorPoint="0,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{e507b7e1-a6c1-4470-bc4b-5fd16119a2d9}" File="" UseOriginSize="True" RelativePosition="0.566506,0.275402" Scale="0.4" ScaleX="0.4" ScaleY="0.4" Name="imgReward2_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f5b969e8-ba71-4f99-9581-e7a3c2ddad2f}" LabelStyleKey="C18_F16" Name="txtReward2Count_WndSumVacAct" Text="" RelativePosition="0.673612,0.276923" AnchorPoint="0,0.5" />
+                        <Button Type="WZUIButton" GUID="{be9c0a8a-9767-40ce-8d4e-65f40c376927}" AbsContentSize="30,30" UseAbsSize="True" RelativePosition="0.876863,0.928879" LuaDoneFunctionName="onClickLook" Tag="4" Name="btnMonsterInfo_WndSumVacAct" Scale="0.9" ScaleX="0.9" ScaleY="0.9">
+                            <NormalElement Type="WZUIContainer" GUID="{b2148e75-f176-47c2-8760-a81085a6e90b}">
+                                <WZUIImage Type="WZUIImage" GUID="{fb944c95-1423-4157-9899-3309122783cf}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{bc5b8964-573e-432e-9002-5afa152fb77e}">
+                                <WZUIImage Type="WZUIImage" GUID="{3932bfa8-9566-4625-a811-12deb11138af}" File="ui/gameActivity/holiday_sousuo.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{d076c019-a8de-46c8-9083-60d2bacb3ae2}" />
+                        </Button>
+                        <WZUIContainer Type="WZUIContainer" GUID="{8d0aa944-fb7d-48e1-8ef5-526e29420020}" AbsContentSize="90,110" UseAbsSize="True" RelativePosition="0.5,0.611539">
+                            <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{46107ca4-a4d2-4e35-b62e-9fb411c6f6fa}" Name="conClipping_WndSumVacAct" Scale="1" AbsContentSize="90,112" UseAbsSize="True" Inverted="False">
+                                <Stencil Type="WZUIImage" GUID="{c433a01a-dd7d-4707-b640-f10fa291a560}" File="ui/common/common_shade_chushouheidi1.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="1.16" Name="imgZheZhao_WndSumVacAct" Visible="True" ScaleX="1.16" ScaleY="1.4" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{478cb3b9-8315-4b8f-8526-59fda470c0f7}" Name="conCard_WndSumVacAct" RelativePosition="0.5,0.5" AbsPosition="50,44">
+                                    <WZUIImage Type="WZUIImage" GUID="{03521a1f-8042-4f67-9d0d-93e1722308e9}" Visible="True" UseOriginSize="True" Name="imgMonster_WndSumVacAct" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" File="" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                                    <WZUIImage Type="WZUIImage" GUID="{6c557920-4693-472d-b278-40840ff61c05}" File="ui/common/huanhua_scale9_zi.png" UseOriginSize="True" Scale="0.8" ScaleY="0.8" ScaleX="0.8" Name="imgQuality_WndSumVacAct" />
+                                </WZUIContainer>
+                            </WZUIClippingContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{57706d3e-c4ab-4ad1-909d-6701b0a05fd5}" AbsContentSize="598,77" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1.00515">
+                        <WZUIContainer Type="WZUIContainer" GUID="{ab6e6d4f-13a5-4b1b-89a6-b334b817181e}" AbsContentSize="420,20" UseAbsSize="True" RelativePosition="0.595318,0.451698" AnchorPoint="0.5,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{66fac788-2fd2-461d-b705-a98bbf55ec9f}" File="ui/gameActivity/holiday_jdt_di.png" UseOriginSize="True" RelativePosition="0.466667,0.5" />
+                            <WZUIProgress Type="WZUIProgress" GUID="{65b50d80-4e85-41dd-9749-d71d7361af6c}" BgPicture="ui/gameActivity/holiday_jdt.png" Name="pgIntegral_WndSumVacAct" Percentage="0" UseOriginSize="True" RelativePosition="0.498571,0.5" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{036a528d-04f8-4eec-9b2f-520d5accbc50}" AbsContentSize="60,60" UseAbsSize="True" Name="conReward1_WndSumVacAct" RelativePosition="0.269763,-0.2" AnchorPoint="0.4,0.5" Scale="0.8" ScaleX="0.8" ScaleY="0.8">
+                                <WZArmature Type="WZArmature" GUID="{c39467e0-7278-4331-b0a1-e628e79c8b4d}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" Visible="False" Scale="1" Name="armBox_WndSumVacAct" RelativePosition="0.507448,-0.0392546" ScaleX="1" ScaleY="1" TouchEnable="False" AbsPosition="46.6703,-31.9145">
+                                    <Action Type="WZUIArmatureAnimationById" GUID="{f4ebce2b-2f38-4d7c-be7a-9a888600f951}" IsLoop="False" AnimationId="0" Loop="-1" />
+                                </WZArmature>
+                                <Button Type="WZUIButton" GUID="{82430390-1a09-4980-ab8b-7cac5f5948be}" LuaActionName="" RelativePosition="0.5,1.03333" Name="" Tag="1" LuaDoneFunctionName="onClickByIntegral">
+                                    <NormalElement Type="WZUIContainer" GUID="{aa4f6991-a855-436c-8bd3-d5500ce769f5}">
+                                        <WZUIImage Type="WZUIImage" GUID="{29dfeebf-c89a-4c08-b29b-1f72c1c0bad7}" File="ui/common/common_icon_lan1.png" Name="imgBoxNor_WndSumVacAct" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement Type="WZUIContainer" GUID="{f5eb3547-fee4-4128-8d3c-bf9c76e71faf}">
+                                        <WZUIImage Type="WZUIImage" GUID="{7fd3fff3-b81c-49ba-b30c-298569a4cb71}" File="ui/common/common_icon_lan1.png" Name="imgBoxSel_WndSumVacAct" UseOriginSize="True" />
+                                    </SelectElement>
+                                    <DisableElement Type="WZUIContainer" GUID="{b3a780f0-3d61-4bca-a77f-94565eb27c0e}" />
+                                </Button>
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5a2227ad-185e-4eb5-8f9a-b235f7be6e3b}" LabelStyleKey="C11_F20" Text="" Name="txtIntegralTarget_WndSumVacAct" RelativePosition="0.5,0.233333" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{63d1480e-9fc2-4bd7-bac2-ba88cfdc8f98}" AbsContentSize="60,60" UseAbsSize="True" Name="conReward2_WndSumVacAct" RelativePosition="0.575477,-0.2" AnchorPoint="0.4,0.5" Scale="0.8" ScaleX="0.8" ScaleY="0.8">
+                                <WZArmature Type="WZArmature" GUID="{ca15f588-b468-45c2-a69e-c783759a5e2d}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" Visible="False" Scale="1" Name="armBox_WndSumVacAct" RelativePosition="0.507448,-0.0392546" ScaleX="1" ScaleY="1" TouchEnable="False" AbsPosition="46.6703,-31.9145">
+                                    <Action Type="WZUIArmatureAnimationById" GUID="{dc8c8e2b-f831-4fdd-a018-8699f039f3db}" IsLoop="False" AnimationId="0" Loop="-1" />
+                                </WZArmature>
+                                <Button Type="WZUIButton" GUID="{873d6da5-b538-4828-bcda-ce2126d5383c}" LuaActionName="" RelativePosition="0.5,1.03333" Name="" Tag="2" LuaDoneFunctionName="onClickByIntegral">
+                                    <NormalElement Type="WZUIContainer" GUID="{ca5ea34b-efbd-405f-8eb5-ca32223ee62d}">
+                                        <WZUIImage Type="WZUIImage" GUID="{f4ffb3dc-1841-485c-82a0-02bd8869bbaa}" File="ui/common/common_icon_zi1.png" Name="imgBoxNor_WndSumVacAct" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement Type="WZUIContainer" GUID="{02e610cb-198f-4765-85b7-a8b5b7858580}">
+                                        <WZUIImage Type="WZUIImage" GUID="{be90db3e-b64e-4f45-ae5a-10e5ac65da94}" File="ui/common/common_icon_zi1.png" Name="imgBoxSel_WndSumVacAct" UseOriginSize="True" />
+                                    </SelectElement>
+                                    <DisableElement Type="WZUIContainer" GUID="{dd81af25-55bb-4c02-add5-9217d4442338}" />
+                                </Button>
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{2bae2043-f1a2-407c-be17-5e3fd4a3cc42}" LabelStyleKey="C11_F20" Text="" Name="txtIntegralTarget_WndSumVacAct" RelativePosition="0.5,0.233333" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{ed86c63c-5362-4df4-90aa-bde025b11e99}" AbsContentSize="60,60" UseAbsSize="True" Name="conReward3_WndSumVacAct" RelativePosition="0.923571,-0.2" AnchorPoint="0.4,0.5" Scale="0.8" ScaleX="0.8" ScaleY="0.8">
+                                <WZArmature Type="WZArmature" GUID="{fc376024-7a52-4862-937a-456115ad99c6}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" Visible="False" Scale="1" Name="armBox_WndSumVacAct" RelativePosition="0.507448,-0.0392546" ScaleX="1" ScaleY="1" TouchEnable="False" AbsPosition="46.6703,-31.9145">
+                                    <Action Type="WZUIArmatureAnimationById" GUID="{1f8882e8-85a7-44b2-be61-f7f5bb462d61}" IsLoop="False" AnimationId="0" Loop="-1" />
+                                </WZArmature>
+                                <Button Type="WZUIButton" GUID="{4c639168-a8f5-4ce3-9d30-0dba99cf5333}" LuaActionName="" RelativePosition="0.5,1.03333" Name="" Tag="3" LuaDoneFunctionName="onClickByIntegral">
+                                    <NormalElement Type="WZUIContainer" GUID="{a47ab573-140d-45fd-8e54-5039513a8391}">
+                                        <WZUIImage Type="WZUIImage" GUID="{8d7afa5a-4ac8-4a7f-9a07-939aa4f3e129}" File="ui/common/common_icon_huang1.png" Name="imgBoxNor_WndSumVacAct" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement Type="WZUIContainer" GUID="{f5126536-3326-47b4-bcfc-32c10535d674}">
+                                        <WZUIImage Type="WZUIImage" GUID="{ceb01ab6-2137-4068-96fd-1fe9538ba8a4}" File="ui/common/common_icon_huang1.png" Name="imgBoxSel_WndSumVacAct" UseOriginSize="True" />
+                                    </SelectElement>
+                                    <DisableElement Type="WZUIContainer" GUID="{07eb26e0-f3a7-4163-9a2f-28832632a5cc}" />
+                                </Button>
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9538430d-fe52-4984-a408-e00c2db48fa6}" LabelStyleKey="C11_F20" Text="" Name="txtIntegralTarget_WndSumVacAct" RelativePosition="0.5,0.233333" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8f886906-2421-47df-96d8-9aa4ee8dec09}" LabelStyleKey="C11_F18" TextKey="FULL_SERVICE_SCORE" RelativePosition="0.107024,0.551948" Name="txtCrossServerBounty_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4d4b0776-c0fe-4f77-b576-29995a9c1007}" Name="txtTotalIntegral_WndSumVacAct" LabelStyleKey="C15_F18" Text="" RelativePosition="0.103014,0.308604" Scale="1" ScaleX="1" ScaleY="1" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{d6fdd161-a057-4260-8edd-8b9418ad1015}" AbsContentSize="592,48" UseAbsSize="True" RelativePosition="0.5,0.737113">
+                        <WZUI9Image Type="WZUI9Image" GUID="{a4aef11d-cd39-4bcf-8ffa-a89644c33db1}" File="ui/gameActivity/holiday_di3.png" UseOriginSize="False" Name="imgActivity3di_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{15878f80-64d3-4ad7-9bc1-572f979bbfd6}" LabelStyleKey="C18_F22" TextKey="THE_WANTED" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="592,388" GUID="{f867879d-1d2e-4d0a-940f-4364ce00e2e4}" Name="conActivityContext2_WndSumVacAct" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUIContainer Type="WZUIContainer" GUID="{07497ee8-6550-4733-9f8e-5b2a712dd306}" AbsContentSize="592,154" UseAbsSize="True" RelativePosition="0.498311,0.804123">
+                        <WZUIImage Type="WZUIImage" GUID="{07102b5a-2e44-4c4b-a0aa-84b145a0eb69}" File="ui/gameActivity/activity_pic_sxyglb.png" UseOriginSize="True" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{5433fb9f-e13b-4c2d-8a59-5b4e1f60d8cd}" AbsContentSize="290,30" UseAbsSize="True" RelativePosition="0.245328,0.90927">
+                            <WZUIImage Type="WZUIImage" GUID="{f3f8d5f0-3780-44de-9124-d83bcff59e00}" File="ui/common/common_scale9_heidi2.png" UseOriginSize="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f66deb55-aef2-4c2a-9a8c-451d42dedf6f}" LabelStyleKey="C18_F20" Name="txtActivitySkillT_WndSumVacAct" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{389c6022-18c0-4e9f-ba23-889a1403f57f}" AbsContentSize="186,232" UseAbsSize="True" RelativePosition="0.160913,0.29897" Name="conA1_WndSumVacAct">
+                        <WZUI9Image Type="WZUI9Image" GUID="{39c7f51c-f84c-40ba-8acb-657e1fa25c83}" File="ui/gameActivity/holiday_di2.png" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{eb8e4911-779a-4f12-82ad-cd4e6eeb7a96}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0.0215517" UseAbsSize="True" Name="conBtn_WndSumVacAct">
+                            <Button Type="WZUIButton" GUID="{13d26379-759c-4545-af91-49db731ce07d}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickBuy" Tag="1">
+                                <NormalElement Type="WZUIContainer" GUID="{0ff54c0b-a061-4f40-b34b-da34293818c1}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{87523e47-eba5-47ec-be3c-a5446ed0085f}" File="ui/common/common_btn_anniu10_0.png" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{d7345982-fb51-42ba-9911-c39e877d0c39}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{f9239d2b-f3c8-45a3-833d-0cb8e0cca36f}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{8953b584-a658-44f2-82a4-1626ebb069de}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{0d49d70e-0902-471e-bd5d-e0985e53c0a7}" Name="txtPrice_WndSumVacAct" LabelStyleKey="NORMAL_GREEN_BTN" Text="" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{3928c557-8da3-4e9e-bb76-23143b9c04de}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.5,0.581896" Name="conItemInfo_WndSumVacAct" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{6919e76d-a12d-44c1-a49a-f8b04f4aac62}" AbsContentSize="186,48" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.99569">
+                            <WZUIImage Type="WZUIImage" GUID="{6d9942a5-da9f-41ba-a801-0087dc2891bb}" File="ui/gameActivity/holiday_di1.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f2d2f5d2-9d16-43a2-a06e-20e4e73bc343}" Name="txtPacksName_WndSumVacAct" LabelStyleKey="C18_F20" />
+                        </WZUIContainer>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6c9981c4-c6b8-47b6-b978-027dd8b09ee9}" LabelStyleKey="C18_F16" Text="" TextKey="" RelativePosition="0.5,0.340517" Name="txtLimitBuyTip_WndSumVacAct" />
+                        <WZUIImage Type="WZUIImage" GUID="{abb5c08e-9823-423b-a1f7-28c5ade49f6e}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" Name="imgSoldOut_WndSumVacAct" RelativePosition="0.5,0.176724" Visible="False" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{8ae65d83-92bc-4743-95a7-8b40d8590595}" AbsContentSize="186,232" UseAbsSize="True" RelativePosition="0.503378,0.29897" Name="conA2_WndSumVacAct">
+                        <WZUI9Image Type="WZUI9Image" GUID="{3e3c782f-29c8-4ff7-9b4f-478fd635a4b4}" File="ui/gameActivity/holiday_di2.png" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{071b486d-551e-4777-8bc2-ea842e7644d0}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0.0215517" UseAbsSize="True" Name="conBtn_WndSumVacAct">
+                            <Button Type="WZUIButton" GUID="{71807d2d-d175-494a-ba05-c4530c3c64ec}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickBuy" Tag="2">
+                                <NormalElement Type="WZUIContainer" GUID="{8c7c70d7-3c9b-461c-aa9b-ea1b5a08ce98}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{67e7826a-1d0d-446b-8311-72cd2aed89f5}" File="ui/common/common_btn_anniu10_0.png" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{e0e45cda-e85b-458a-a3f1-4f3f2b85edea}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{d56dd94c-fe52-4638-ae70-d1effaecdf65}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{701dd08c-7af8-46c5-b203-767e590560b7}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{df4f3ff2-fab1-4b73-8b81-9a364efad475}" Name="txtPrice_WndSumVacAct" LabelStyleKey="NORMAL_GREEN_BTN" Text="" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{bbf9439c-095e-4e6b-9bc0-30a39a576a21}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.5,0.581896" Name="conItemInfo_WndSumVacAct" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{163af641-52b1-4cb0-a486-7e5c8a33f36d}" AbsContentSize="186,48" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.99569">
+                            <WZUIImage Type="WZUIImage" GUID="{230ce8af-1d90-449a-bea2-8f2f81d20a2c}" File="ui/gameActivity/holiday_di1.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{cd259c19-deb1-4abd-9448-32e7d4e03096}" Name="txtPacksName_WndSumVacAct" LabelStyleKey="C18_F20" />
+                        </WZUIContainer>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{15868a95-fd7f-455a-bf1b-ea32acb1a19e}" LabelStyleKey="C18_F16" Text="" TextKey="" RelativePosition="0.5,0.340517" Name="txtLimitBuyTip_WndSumVacAct" />
+                        <WZUIImage Type="WZUIImage" GUID="{6ec38754-b823-4441-b2ae-e51da0ac0945}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" Name="imgSoldOut_WndSumVacAct" RelativePosition="0.5,0.176724" Visible="False" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{5c730019-ef26-4f9e-a78a-fdb48fab4b3c}" AbsContentSize="186,232" UseAbsSize="True" RelativePosition="0.841658,0.29897" Name="conA3_WndSumVacAct">
+                        <WZUI9Image Type="WZUI9Image" GUID="{450282fd-8ed3-483a-80ac-74af7ede15bc}" File="ui/gameActivity/holiday_di2.png" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{91dbf0e9-e373-48d1-8cc5-eb67bf0cf162}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0.0215517" UseAbsSize="True" Name="conBtn_WndSumVacAct">
+                            <Button Type="WZUIButton" GUID="{e7f4d2d8-e4ea-4d52-885f-b9082983ee62}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickBuy" Tag="3">
+                                <NormalElement Type="WZUIContainer" GUID="{3647d35a-1914-4eca-bd7d-3907ddadd230}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{3a915930-bc44-452b-bacb-0dd607c28189}" File="ui/common/common_btn_anniu10_0.png" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{b232a5ff-7edc-4c65-9d0b-911436707692}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{07422650-25e7-458f-a262-735a07057898}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{8dfafd57-4761-4f2d-b165-b8ca139d48f5}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{0bb3bdc6-990b-4a6a-9ddc-5d04e177cfc6}" Name="txtPrice_WndSumVacAct" LabelStyleKey="NORMAL_GREEN_BTN" Text="" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{68aefe67-f784-478c-abfa-aeabca71c60e}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.5,0.581896" Name="conItemInfo_WndSumVacAct" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{d61ef049-f045-4542-9252-475483a43177}" AbsContentSize="186,48" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.99569">
+                            <WZUIImage Type="WZUIImage" GUID="{2f381001-6009-445b-8421-76642e83bc47}" File="ui/gameActivity/holiday_di1.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{90f6d962-2ad2-44eb-82de-ad21f07ebfd1}" Name="txtPacksName_WndSumVacAct" LabelStyleKey="C18_F20" />
+                        </WZUIContainer>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{49661de7-4c03-4f46-ad55-8269dea84fdc}" LabelStyleKey="C18_F16" Text="" TextKey="" RelativePosition="0.5,0.340517" Name="txtLimitBuyTip_WndSumVacAct" />
+                        <WZUIImage Type="WZUIImage" GUID="{2aa96cb6-1846-4bb9-9111-f67f89c64d4e}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" Name="imgSoldOut_WndSumVacAct" RelativePosition="0.5,0.176724" Visible="False" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="592,388" GUID="{52e1dc34-be5d-4680-b738-16e3060b21dc}" Name="conActivityContext4_WndSumVacAct" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUIContainer Type="WZUIContainer" GUID="{828a25d9-090b-4a6f-80b7-0c41827456f8}" AbsContentSize="592,154" UseAbsSize="True" RelativePosition="0.498311,0.804123">
+                        <WZUIImage Type="WZUIImage" GUID="{b4e59f85-2185-42f9-b3d5-db5336aecf72}" File="ui/gameActivity/holiday_picture2.png" UseOriginSize="True" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{f035e0ab-56c7-4e12-8a9d-0927ebfd9e66}" AbsContentSize="290,30" UseAbsSize="True" RelativePosition="0.245328,0.90927">
+                            <WZUIImage Type="WZUIImage" GUID="{451254f2-653b-4d65-a642-c2ea28f2bcee}" File="ui/common/common_scale9_heidi2.png" UseOriginSize="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8aeb710f-0239-4867-9f15-c244d9291d12}" LabelStyleKey="C18_F20" Name="txtActivitySkillT_WndSumVacAct" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{b3ee8774-4c52-4b0a-ab61-e71558f9a680}" AbsContentSize="142,232" UseAbsSize="True" RelativePosition="0.123751,0.29897" Name="conItem1_WndSumVacAct">
+                        <WZUI9Image Type="WZUI9Image" GUID="{84cefe56-0431-4c0a-b5ca-ba261302e6ad}" File="ui/gameActivity/holiday_di2.png" UseOriginSize="False" Name="imgActivity4Reward1_WndSumVacAct" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{8b959c54-b204-40e4-94b1-ca4086164dcf}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0.00862069" UseAbsSize="True" Name="conBuy_WndSumVacAct">
+                            <Button Type="WZUIButton" GUID="{5479f2d5-31d6-460b-928a-437967730ffa}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickBuyItem" Tag="1">
+                                <NormalElement Type="WZUIContainer" GUID="{f211b681-97a9-48cf-908b-16efd676e4da}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{fb73e20d-5d2b-4601-b15a-77e3c6637a11}" File="ui/common/common_btn_anniu10_0.png" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{82f11640-5e2e-4b0f-b25d-2a1f7a9644f5}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{e83a4d3d-8df6-4450-b69b-35df3594bffc}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{2837304d-9951-4597-ae04-f4402cc397d8}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2b970f23-c4eb-4aa1-bee2-f662f761459d}" Name="txtBuy_WndSumVacAct" LabelStyleKey="NORMAL_GREEN_BTN" Text="" TextKey="BUY" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{940b90f5-f447-49ea-9a02-a67f6a32288a}" AbsContentSize="88,88" UseAbsSize="True" RelativePosition="0.5,0.813726" Name="conItemInfo_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{abc95318-912a-493b-94b9-adeedd96775a}" Name="txtItemName_WndSumVacAct" LabelStyleKey="C18_F18" RelativePosition="0.5,0.594828" Text="" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{9400aedc-9999-427a-8576-3c9adedbdfc9}" Name="txtOriginPrice_WndSumVacAct" Text="" LabelStyleKey="C18_F18" RelativePosition="0.725352,0.422095" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{39f8c579-dec9-437d-b3ca-6968610dccd8}" Name="txtDiscountPrice_WndSumVacAct" Text="" LabelStyleKey="C11_F18" RelativePosition="0.725352,0.318646" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{13a61b6e-95b2-458b-a5e2-a0d3c8632e9c}" Name="txtRemainingCount_WndSumVacAct" Text="" LabelStyleKey="C7_F16" RelativePosition="0.5,0.514203" />
+                        <WZUIImage Type="WZUIImage" GUID="{0e916ef2-6837-4452-b198-2e9f79ccee37}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Name="imgGiftdrill_WndSumVacAct" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.852113,0.435345" />
+                        <WZUIImage Type="WZUIImage" GUID="{48e96219-b9e8-415f-b293-78fe3afd1b02}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Name="imgGiftdrill_WndSumVacAct" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.852113,0.318965" />
+                        <WZUIImage Type="WZUIImage" GUID="{bc5a6b0f-80fb-4225-8151-0f94dff7490d}" File="ui/gameActivity/common_icon_xiexian3.png" UseOriginSize="True" RelativePosition="0.5,0.431035" />
+                        <WZUIImage Type="WZUIImage" GUID="{a973a77c-741b-483b-be5d-fbcb03e6d671}" Name="imgSoldOut_WndSumVacAct" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" RelativePosition="0.5,0.181035" Visible="False" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{be550961-b506-4076-83af-710faa97cdf1}" AbsContentSize="142,232" UseAbsSize="True" RelativePosition="0.375441,0.29897" Name="conItem2_WndSumVacAct">
+                        <WZUI9Image Type="WZUI9Image" GUID="{4d19ee46-3fc6-443b-98df-1dc6a327b6b3}" File="ui/gameActivity/holiday_di2.png" UseOriginSize="False" Name="imgActivity4Reward2_WndSumVacAct" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{ea7d5c78-0395-44a6-b652-b3988d09995b}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0.00862069" UseAbsSize="True" Name="conBuy_WndSumVacAct">
+                            <Button Type="WZUIButton" GUID="{a2ed27c6-f734-43f9-8d39-33c599dac1d6}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickBuyItem" Tag="2">
+                                <NormalElement Type="WZUIContainer" GUID="{14e1c8c4-cbc7-4e98-9394-5bf6fecf2095}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{3c6748fa-557d-4a98-9956-c75587972991}" File="ui/common/common_btn_anniu10_0.png" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{1fd393d0-409c-4078-a3c8-235ad94bb9a7}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{55616a98-0145-478c-a8ba-f8c0561e653b}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{a18ec7eb-da33-4953-ae35-e0f13a0c77fe}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2c063824-5d65-4ae3-a376-57e4c880dc6a}" Name="txtBuy_WndSumVacAct" LabelStyleKey="NORMAL_GREEN_BTN" Text="" TextKey="BUY" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{9834085d-b140-4406-bac7-6a5277620c6d}" AbsContentSize="88,88" UseAbsSize="True" RelativePosition="0.5,0.813726" Name="conItemInfo_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f071ee32-da66-4d9b-b4a5-56312de4d446}" Name="txtItemName_WndSumVacAct" LabelStyleKey="C18_F18" RelativePosition="0.5,0.594828" Text="" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{152f9c9c-27bf-431a-abf1-92cce436291e}" Name="txtOriginPrice_WndSumVacAct" Text="" LabelStyleKey="C18_F18" RelativePosition="0.725352,0.422095" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4038904a-d530-48ff-a336-015a8f2efda8}" Name="txtDiscountPrice_WndSumVacAct" Text="" LabelStyleKey="C11_F18" RelativePosition="0.725352,0.318646" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4ab7f4fa-671e-4088-91eb-8acb57057fc9}" Name="txtRemainingCount_WndSumVacAct" Text="" LabelStyleKey="C7_F16" RelativePosition="0.5,0.514203" />
+                        <WZUIImage Type="WZUIImage" GUID="{c91378ca-c7a8-4dad-bd54-1d77bb680a4c}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Name="imgGiftdrill_WndSumVacAct" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.852113,0.435345" />
+                        <WZUIImage Type="WZUIImage" GUID="{41ff52da-391e-4ad0-a5d1-b71ab00e0393}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Name="imgGiftdrill_WndSumVacAct" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.852113,0.318965" />
+                        <WZUIImage Type="WZUIImage" GUID="{2501c8b8-b524-4516-9b1e-c08b1a75d155}" File="ui/gameActivity/common_icon_xiexian3.png" UseOriginSize="True" RelativePosition="0.5,0.431035" />
+                        <WZUIImage Type="WZUIImage" GUID="{6ddddc5e-dc73-43da-bf58-2b440b9755ce}" Name="imgSoldOut_WndSumVacAct" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" RelativePosition="0.5,0.181035" Visible="False" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{099f1c4c-7509-4521-b3fb-7b3fb4299ba0}" AbsContentSize="142,232" UseAbsSize="True" RelativePosition="0.627131,0.29897" Name="conItem3_WndSumVacAct">
+                        <WZUI9Image Type="WZUI9Image" GUID="{986d6d85-e012-49c3-96c2-ce2b01a0b67d}" File="ui/gameActivity/holiday_di2.png" UseOriginSize="False" Name="imgActivity4Reward3_WndSumVacAct" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{ff7155c2-b11e-44e5-b8a0-7a95071e1619}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0.00862069" UseAbsSize="True" Name="conBuy_WndSumVacAct">
+                            <Button Type="WZUIButton" GUID="{d185c797-bc10-4170-8711-6cfa3feab2c7}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickBuyItem" Tag="3">
+                                <NormalElement Type="WZUIContainer" GUID="{7ae4b2cb-baf6-4f09-acf5-f3b95b9e466b}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{54fb2b44-2437-4c0f-bf02-df74cc285aaf}" File="ui/common/common_btn_anniu10_0.png" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{8ed38537-9fc4-4a49-bb1d-c0d3ec11e430}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{ab4bfb04-a5be-4208-8bb3-fdeddb159a38}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{81bc7ff4-b18e-4a7f-a1fe-a08fb54897d7}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8d5271e8-f9ab-4ab3-963e-7b8d3e5b0647}" Name="txtBuy_WndSumVacAct" LabelStyleKey="NORMAL_GREEN_BTN" Text="" TextKey="BUY" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{8f34c7a8-66aa-4188-b548-80fe329e3487}" AbsContentSize="88,88" UseAbsSize="True" RelativePosition="0.5,0.813726" Name="conItemInfo_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e87a0443-6fde-45c3-97d9-8099d3a84086}" Name="txtItemName_WndSumVacAct" LabelStyleKey="C18_F18" RelativePosition="0.5,0.594828" Text="" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6953d777-d24b-420d-abf5-3a7a408f2f64}" Name="txtOriginPrice_WndSumVacAct" Text="" LabelStyleKey="C18_F18" RelativePosition="0.725352,0.422095" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6b802dac-0b13-40d0-9db1-295eea850467}" Name="txtDiscountPrice_WndSumVacAct" Text="" LabelStyleKey="C11_F18" RelativePosition="0.725352,0.318646" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{80083112-1d32-44bb-b422-0e8702afa596}" Name="txtRemainingCount_WndSumVacAct" Text="" LabelStyleKey="C7_F16" RelativePosition="0.5,0.514203" />
+                        <WZUIImage Type="WZUIImage" GUID="{a006379b-1285-4bf1-b8e9-3f34c4fe09a0}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Name="imgGiftdrill_WndSumVacAct" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.852113,0.435345" />
+                        <WZUIImage Type="WZUIImage" GUID="{596963c6-5acc-4652-a186-645069d3be35}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Name="imgGiftdrill_WndSumVacAct" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.852113,0.318965" />
+                        <WZUIImage Type="WZUIImage" GUID="{0d0bb716-1f40-4eaa-b331-72966d6fe30a}" File="ui/gameActivity/common_icon_xiexian3.png" UseOriginSize="True" RelativePosition="0.5,0.431035" />
+                        <WZUIImage Type="WZUIImage" GUID="{cdcdab2e-93ea-4d95-9fe0-f01608685c6f}" Name="imgSoldOut_WndSumVacAct" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" RelativePosition="0.5,0.181035" Visible="False" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{cdee4383-3ea3-4af8-a2be-a60079c77bef}" AbsContentSize="142,232" UseAbsSize="True" RelativePosition="0.878821,0.29897" Name="conItem4_WndSumVacAct">
+                        <WZUI9Image Type="WZUI9Image" GUID="{42a3c9b6-f7b1-40a6-8207-f119241eb647}" File="ui/gameActivity/holiday_di2.png" UseOriginSize="False" Name="imgActivity4Reward4_WndSumVacAct" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{6128ae6e-7421-4d9e-980b-b08f97071680}" AbsContentSize="120,60" AnchorPoint="0.5,0" RelativePosition="0.5,0.00862069" UseAbsSize="True" Name="conBuy_WndSumVacAct">
+                            <Button Type="WZUIButton" GUID="{23e84dfb-fcad-4152-9ae6-e1e3bde32b5e}" AbsContentSize="120,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" LuaActionName="" LuaDoneFunctionName="onClickBuyItem" Tag="4">
+                                <NormalElement Type="WZUIContainer" GUID="{83a12f63-f0d3-44c8-b1c4-17a6f9262174}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{3d72f772-f4f3-4b22-b2bc-ae63cd2d3c7b}" File="ui/common/common_btn_anniu10_0.png" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{75d30004-05b2-40c2-ae1a-974217794c58}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{a3830a14-51b5-408d-9b6e-301eecc2eec5}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{752bc581-1f8d-4475-a9b1-08677745ac84}" />
+                            </Button>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{973f30e9-52ae-4c3b-b95e-f2ffb1dd4601}" Name="txtBuy_WndSumVacAct" LabelStyleKey="NORMAL_GREEN_BTN" Text="" TextKey="BUY" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{193f8b96-cce2-4df3-a752-b17665b7c658}" AbsContentSize="88,88" UseAbsSize="True" RelativePosition="0.5,0.813726" Name="conItemInfo_WndSumVacAct" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e3820c07-d665-4153-8d1f-3921c720c87e}" Name="txtItemName_WndSumVacAct" LabelStyleKey="C18_F18" RelativePosition="0.5,0.594828" Text="" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f5d1ae9b-15b4-49f2-a32f-fdfe1eb83d84}" Name="txtOriginPrice_WndSumVacAct" Text="" LabelStyleKey="C18_F18" RelativePosition="0.725352,0.422095" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f6d05246-0c08-40cd-a52e-e9f51f588f55}" Name="txtDiscountPrice_WndSumVacAct" Text="" LabelStyleKey="C11_F18" RelativePosition="0.725352,0.318646" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{50913095-c7c3-4c7e-84f5-28776360d346}" Name="txtRemainingCount_WndSumVacAct" Text="" LabelStyleKey="C7_F16" RelativePosition="0.5,0.514203" />
+                        <WZUIImage Type="WZUIImage" GUID="{e2d0e222-4717-4b6e-b600-995ca95e7420}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Name="imgGiftdrill_WndSumVacAct" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.852113,0.435345" />
+                        <WZUIImage Type="WZUIImage" GUID="{ad3551b2-cdda-4aba-aa21-3e9deea7d99d}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Name="imgGiftdrill_WndSumVacAct" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.852113,0.318965" />
+                        <WZUIImage Type="WZUIImage" GUID="{a4348f20-05ab-4265-affd-ccbe220a80bd}" File="ui/gameActivity/common_icon_xiexian3.png" UseOriginSize="True" RelativePosition="0.5,0.431035" />
+                        <WZUIImage Type="WZUIImage" GUID="{5eff2c85-af66-4044-96fe-f71935cc4edf}" Name="imgSoldOut_WndSumVacAct" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" RelativePosition="0.5,0.181035" Visible="False" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{47aace11-0bcb-44df-a171-8c3172b42dde}" Name="conActivityEnd_WndSumVacAct" Visible="False" AbsContentSize="731,391" UseAbsSize="True" RelativePosition="0.380067,0.5" UseAbsCoordinate="False" AbsPosition="224.416,193.775">
+                    <WZUIImage Type="WZUIImage" GUID="{bfc8bd53-6cbf-427c-9c63-8b484b1b007b}" File="ui/gameActivity/holiday_picture3.png" ScaleX="1.018" ScaleY="1.01" RelativePosition="0.498632,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c6b55652-ad95-486c-922b-d1e928826016}" LabelStyleKey="C18_F24" TextKey="SUMMER_VACTION_1" RelativePosition="0.157736,0.5813" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8a84cd80-db52-4184-ade2-b8c74ec145cf}" LabelStyleKey="C7_F16" TextKey="SUMMER_VACTION_DES_1" RelativePosition="0.154787,0.521069" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7ff74722-d88b-4f2b-b2f5-2402e113d862}" LabelStyleKey="C18_F24" TextKey="SUMMER_VACTION_2" RelativePosition="0.370509,0.275037" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{85f6584c-a17c-4fad-b86c-80df064ad0e6}" LabelStyleKey="C7_F16" TextKey="SUMMER_VACTION_DES_2" RelativePosition="0.369455,0.214806" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{405edc70-8eb2-4b80-adf6-22ddeba8143b}" LabelStyleKey="C18_F24" TextKey="SUMMER_VACTION_3" RelativePosition="0.638978,0.275037" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{fa3a80d7-cbaa-4c97-9778-4bb6a3c705b6}" LabelStyleKey="C7_F16" TextKey="SUMMER_VACTION_DES_3" RelativePosition="0.636029,0.214806" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{2893dad3-b190-4bd5-8524-403bb9c75508}" LabelStyleKey="C18_F24" TextKey="SUMMER_VACTION_4" RelativePosition="0.852278,0.5813" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{f7a9d7ab-0d29-4d12-9416-e354f693ac48}" LabelStyleKey="C7_F16" TextKey="SUMMER_VACTION_DES_4" RelativePosition="0.845012,0.521069" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{2328ded3-3ecd-4402-b3ae-0b08da8e676c}" Name="txtActivityTime_WndSumVacAct" RelativePosition="0.5,0.945013" LabelStyleKey="C18_F24" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5229cc55-0f5f-4bd8-88de-4abedc111a57}" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.131121,0.097359" Order="0" Name="conExplain_WndSumVacAct" Visible="True">
+                <Button Type="WZUIButton" GUID="{55804986-40c1-48e3-bd3e-128f1d719962}" LuaDoneFunctionName="onClickDetail" LuaActionName="Normal" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{e2b49bf8-56e2-4989-abcb-144e699ba0fb}">
+                        <WZUIImage Type="WZUIImage" GUID="{38bc0efd-9bfd-4246-97d2-9df956278405}" File="ui/gameActivity/holiday_gth.png" UseOriginSize="True" Scale="0.9" ScaleX="0.9" ScaleY="0.9" Name="imgExplain1_WndSumVacAct" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{90f7c863-cad3-4045-88c2-8c491e3ff708}">
+                        <WZUIImage Type="WZUIImage" GUID="{d11ecae5-62c7-47b2-a9b4-2874e10a7689}" File="ui/gameActivity/holiday_gth.png" UseOriginSize="True" Scale="0.9" ScaleX="0.9" ScaleY="0.9" Name="imgExplain2_WndSumVacAct" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{f065d18f-e9d3-4dab-bb27-418b815cfd45}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{bb80c809-c09f-4329-8926-9068696c29fb}" Name="conGiftBox_WndSumVacAct" AbsContentSize="120,120" RelativePosition="0.867137,0.09795" TouchEnable="False" TouchSwallow="False" UseAbsSize="True" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{597eb4e4-3c04-44b2-802d-b8a89ab332ef}" File="ui/gameActivity/qr_di6.png" UseOriginSizeProportion="True" UseOriginSize="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSumVacAct>

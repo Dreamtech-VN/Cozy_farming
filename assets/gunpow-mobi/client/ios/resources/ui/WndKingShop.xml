@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<WndKingShop GUID="{957589c8-c439-4a0e-800f-86d2572a43c7}">
+	<WZUIFrame Type="WZUIFrame" GUID="{62cca8f4-fcbd-4b16-8892-f7e74b0a797b}">
+		<WZUIWindow LuaObjectName="WndKingShop" Name="WndKingShop" NameCreate="True" ShowAll="True" Type="WZUIWindow" GUID="{4aa35033-219b-4da0-9286-a82ac429b592}" AbsContentSize="635,525" UseAbsSize="True" LuaTouchBeganFunction="onTouchBegan">
+			<WZUIContainer AbsContentSize="0,0" AbsPosition="" AnchorPoint="0.5,0.5" GUID="{e0e54955-2a40-4464-adbc-2765b9d89b8e}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="False">
+				<WZUI9Image File="" GUID="{fafa317e-46fa-4b34-9f83-0596fea13510}" Type="WZUI9Image" />
+				<WZUI9Image Type="WZUI9Image" GUID="{2ed1349d-0733-4355-96bb-bbee705dc10a}" File="" UseOriginSizeProportion="False" RelativePosition="0.5,1" AnchorPoint="0.5,1" RelativeSize="1.01,0.12" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{7da5399e-386d-437c-9bc8-cbdbb49b80f6}">
+				<Button Type="WZUIButton" GUID="{b09136f4-06be-485d-91be-06865aa828fd}" LuaDoneFunctionName="onClose" AbsContentSize="66,71" UseAbsSize="True" RelativePosition="1.03,0.95" AnchorPoint="1,0.5">
+					<NormalElement Type="WZUIContainer" GUID="{57ddff15-2130-4ced-b790-bd249a4a7c7e}">
+						<WZUIImage Type="WZUIImage" GUID="{3db40c5a-d878-4397-bb8d-6571f3392adc}" File="" />
+					</NormalElement>
+					<SelectElement Type="WZUIContainer" GUID="{b8c7af5a-d706-43a7-9307-ef43d132fa23}">
+						<WZUIImage Type="WZUIImage" GUID="{3f5a449e-a0dc-4150-ba9a-13875f781013}" File="" Scale="1.1" />
+					</SelectElement>
+					<DisableElement Type="WZUIContainer" GUID="{24a32982-98f4-4102-8921-3e08ac8dc35c}" />
+				</Button>
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{67debc48-9be6-44f1-aacf-d95013c3b377}" Name="txtTitle_WndKingShop" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.95" FontSize="30" Color="255,246,201" EnableStroke="True" StrokeSize="4" StrokeColor="109,81,42" BoldFont="True" />
+				<WZUITableContainer Type="WZUITableContainer" GUID="{cf9a7690-a14f-40e7-8a6f-33dd3ae6bbca}" AbsContentSize="600,380" UseAbsSize="True" RelativePosition="0.5,0.5" CellElementHeight="0.49" VerticalInterval="0.02" EnableMoveHorizontal="False" Name="tabShop_WndKingShop" ColumnCount="3" HorizontalInterval="0.02" />
+				<WZUIContainer Type="WZUIContainer" GUID="{94185adb-f494-49cf-9098-625245a34b8d}" AbsContentSize="631,50" UseAbsSize="True" RelativePosition="0.5,0.07">
+					<WZUI9Image Type="WZUI9Image" GUID="{039b31eb-6211-426c-9dde-07582d8daa3f}" File="" />
+					<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{8b002fec-8015-4d85-b8b9-6d3e39f35861}" Name="txtKingMoney_WndKingShop" MaxWidth="800" />
+				</WZUIContainer>
+			</WZUIContainer>
+		</WZUIWindow>
+	</WZUIFrame>
+</WndKingShop>

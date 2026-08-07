@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<WndTipBox GUID="{C553A9AB-8B5F-4449-A5C5-458669633C87}">
+	<WZUIWindow AbsContentSize="" GUID="{CB7101B5-6121-484b-AAA7-16DB0A24590D}" LuaObjectName="WndTipBox" Name="WndTipBox" NameCreate="True" TouchEnable="False" TouchSwallow="False" Type="WZUIWindow" UseAbsSize="False" ShowAll="False" RelativePosition="0.5,0.5" AbsPosition="">
+		<WZUIContainer Name="conTop_WndTipBox" Type="WZUIContainer" GUID="{62491AF1-4873-4107-9B23-491EB720D87C}" ShowAll="True" AbsContentSize="475,56" UseAbsSize="True">
+			<WZUIContainer Name="conBg_WndTipBox" Type="WZUIContainer" GUID="{311B4422-3860-4dc1-9F6B-D45568432FEF}" UseAbsSize="False" AbsContentSize="">
+				<WZUI9Image File="ui/common/common_scale9_di49.png" GUID="{F73858B7-0A35-462c-8688-FC1421105116}" Opacity="255" Type="WZUI9Image" ScaleY="1" UseOriginSize="False" Name="imgBg_WndTipBox" Opacity="150" />
+			</WZUIContainer>
+			<WZUILabelTTF AbsPosition="475,23.9865" ChineseLengthPolicy="1" Color="255,255,255" Dimensions="0,0" FontSize="30" GUID="{C85A6CD9-0F27-493c-954B-8A4F9F01CF39}" MaxLength="150" Name="txtTip_WndTipBox" Text="123" Type="WZUILabelTTF" ShowAll="False" Opacity="255" RelativePosition="0.5,0.479731" Visible="True" />
+			<Action Type="WZUIActionSequence" GUID="{3FDE0740-8A52-47b1-BE4E-F05B1691D38E}" FinishLuaFunction="onFadeActionFinish">
+				<ChildAction Type="WZUIActionDelayTime" GUID="{409E876C-CF7C-41d2-AA1F-7D3F65A69D1C}" Duration="1" />
+				<ChildAction Type="WZUIActionSpawn" GUID="{C78BB471-67A8-4a69-AECB-6516FBE7193A}">
+					<ChildAction Type="WZUIActionMoveBy" GUID="{F0FB6C55-4143-4af7-9E6F-C04FADF961D8}" Duration="0.45" MoveY="180" FinishLuaFunction="" />
+					<ChildAction Type="WZUIActionContainerFadeFromTo" GUID="{DA6511AF-0D84-4bb2-BFEE-631BF53D30D7}" Duration="0.45" OpacityFrom="150" FinishLuaFunction="onFadeActionFinish" />
+				</ChildAction>
+			</Action>
+		</WZUIContainer>
+	</WZUIWindow>
+</WndTipBox>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CellChallengeHall GUID="{BA32264D-3A10-497d-806B-724BB6B80C7E}">
+    <WZUIContainer AbsContentSize="640,64" GUID="{BB720690-911C-42a8-A6B2-256657F9D1F8}" LuaObjectName="CellChallengeHall" Name="CellChallengeHall" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer GUID="{4080592A-64C1-4370-B41C-3300B3F6C38F}" RelativeSize="1,1" Type="WZUIContainer" />
+        <WZUIContainer GUID="{150CBB4F-67C5-41a4-A26A-1EC0656F69B4}" Type="WZUIContainer">
+            <WZUIContainer AnchorPoint="1,0" GUID="{9162EDDF-0214-4afa-AD7C-4264B9B8A4F8}" RelativePosition="0.25,0.09" RelativeSize="0.08,0.08" Rotation="90" Type="WZUIContainer">
+                <WZUI9Image File="common/Jigsaw/11.png" GUID="{BC0386C4-7D5B-42b5-B6EB-9A47AACBAC4C}" Rotation="0" Type="WZUI9Image" />
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="1,0" GUID="{8B369703-7740-4919-9AA9-3ADA8A81A599}" RelativePosition="0.628,0.09" RelativeSize="0.08,0.08" Rotation="90" Type="WZUIContainer">
+                <WZUI9Image File="common/Jigsaw/11.png" GUID="{F33F07A5-4910-4982-8219-30A9F53EF155}" Rotation="0" Type="WZUI9Image" />
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="0.5,0" GUID="{4530EF82-6FA9-468b-89D4-F053575F750D}" RelativePosition="0.5,0" RelativeSize="0.97,0.08" Type="WZUIContainer">
+                <WZUI9Image File="common/Jigsaw/11.png" GUID="{CCDA5B1B-F61A-4dd0-BF19-D1AD1E2673A2}" Type="WZUI9Image" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{1E9C6533-7A73-4575-A6FF-573845D43ED7}" Type="WZUIContainer">
+            <WZUIContainer AnchorPoint="0,0.5" GUID="{DA96F3FA-0CCC-48d5-962C-97E6A4326AEA}" RelativePosition="0.05,0.5" RelativeSize="0.2,1" Type="WZUIContainer">
+                <WZUILabelTTF Color="255,255,255" Dimensions="140,0" FontSize="24" GUID="{65408D07-6732-4014-91CD-F67A6C0C8619}" Name="txtRanks_CellChallengeHall" RelativePosition="0.389688,0.5" Text="" Type="WZUILabelTTF" />
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="0,0.5" GUID="{9B854848-3D87-47e4-9ED5-4B349153D5E8}" RelativePosition="0.26,0.5" RelativeSize="0.368,1" Type="WZUIContainer">
+                <WZUILabelTTF Color="255,255,255" Dimensions="230,0" FontSize="24" GUID="{8450B283-5092-4955-9D53-B7A085AE21F5}" Name="txtPlayerName_CellChallengeHall" Text="" Type="WZUILabelTTF" />
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="1,0.5" GUID="{C04EA42F-29CE-473c-86EF-CE24EBFDF3D0}" RelativePosition="1,0.5" RelativeSize="0.362,1" Type="WZUIContainer">
+                <WZUILabelTTF Color="255,255,255" Dimensions="215,0" FontSize="24" GUID="{B18407F4-5AA7-429f-AAE0-ECB786B125FE}" Name="txtPlayerHurt_CellChallengeHall" RelativePosition="0.472836,0.5" Text="" Type="WZUILabelTTF" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellChallengeHall>

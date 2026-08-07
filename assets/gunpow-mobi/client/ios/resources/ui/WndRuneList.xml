@@ -1,0 +1,18 @@
+﻿<WndRuneList GUID="{d99be4d5-2016-45f7-8472-349f48f145b1}">
+    <WZUIWindow Type="WZUIWindow" GUID="{2bfda328-2326-40c7-a154-fe68a6d380c0}" Name="WndRuneList" LuaObjectName="WndRuneList" NameCreate="True" AbsContentSize="280,565" UseAbsSize="True">
+        <WZUI9Image Type="WZUI9Image" GUID="{7e41076a-a419-41d0-be5e-e908183e131f}" File="ui/common/common_scale9_di29.png" CapInsets="35,35,,1,1" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{09f0003b-e2df-4f90-b3b7-3433c8bce7eb}" LabelStyleKey="C11_F24" TextKey="RUNE_LOAD" RelativePosition="0.5,0.951145" />
+        <Button Type="WZUIButton" GUID="{e69be431-d938-4132-8cda-c4438df435d5}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.893226,1" AnchorPoint="0.5,1" LuaDoneFunctionName="onClickClose">
+            <NormalElement Type="WZUIContainer" GUID="{8ee1f60a-9770-4ab1-ac09-2dca709728b9}">
+                <WZUIImage Type="WZUIImage" GUID="{e4197e89-6713-4be8-b864-09f95a2ab3dc}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{d9e9be12-0284-4eb7-b3ea-14b7075341e4}">
+                <WZUIImage Type="WZUIImage" GUID="{df8cd83a-1c93-4cf4-9e1c-91c72fad76a8}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{8da0b346-60cf-4fa6-aec7-814444933613}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{e2471c87-0242-4c8c-9251-4ec8985f5e0a}" AbsContentSize="280,490" UseAbsSize="True" RelativePosition="0.5,0" Name="conRuneAttri_WndRuneInfo" AnchorPoint="0.5,0">
+            <WZUITableContainer Type="WZUITableContainer" GUID="{6e3ba8c3-88d8-48a1-a890-d7d72231164a}" Name="tabRuneList_WndRuneInfo" EnableVerticalScroll="True" EnableMoveHorizontal="False" CellElementHeight="0.25" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndRuneList>

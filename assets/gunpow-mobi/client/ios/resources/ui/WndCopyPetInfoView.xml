@@ -1,0 +1,19 @@
+<WndCopyPetInfoView GUID="{c96b7d69-bf33-431e-8219-06de3160114e}">
+    <WZUIWindow Type="WZUIWindow" GUID="{2aa39aaf-779c-4f51-af96-f24e7b1201f4}" AbsContentSize="310,149" UseAbsSize="True" NameCreate="True" LuaObjectName="WndCopyPetInfoView" Name="WndCopyPetInfoView" ShowAll="True" AnchorPoint="1,1" RelativePosition="1,1">
+        <WZUIContainer Type="WZUIContainer" GUID="{dffa76d7-9344-4f1e-b6dd-0eba946a64a6}" AbsContentSize="220,120" UseAbsSize="True" RelativePosition="0,0.5" AnchorPoint="0,0.5" Name="con_WndCopyPetInfoView">
+            <WZUI9Image Type="WZUI9Image" GUID="{1f1b71b6-5d5f-4603-b87c-bfe0158f1907}" File="ui/common/common_scale9_di13.png" Opacity="180" RelativePosition="0.5,0.5" RelativeSize="1,1" ShowAll="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{60b73a5f-bad3-423c-a9e0-7ccf18842219}" Text="击蛋分：" FontSize="20" RelativePosition="0.03,0.15" AnchorPoint="0,0.5" Name="eggScoreTitle_WndCopyPetInfoView" Color="255,227,116" TextKey="" Alignment="Left" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ad7752c4-4964-4090-8e06-c0685b1948e3}" Text="出手次数：" FontSize="20" RelativePosition="0.03,0.5" AnchorPoint="0,0.5" Name="attRoundTitle_WndCopyPetInfoView" Color="255,227,116" TextKey="" Alignment="Left" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{195a4efa-fad4-44d3-a15b-a9b19761b4ea}" FontSize="20" Color="255,236,193" Text="99" RelativePosition="0.367273,0.15" Name="eggScore_WndCopyPetInfoView" AnchorPoint="0,0.5" Alignment="Left" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ed7a63d0-5956-42d6-b2a5-6e2d72cd598b}" FontSize="20" Color="255,236,193" Text="9" RelativePosition="0.453637,0.5" Name="attRound_WndCopyPetInfoView" AnchorPoint="0,0.5" Alignment="Left" />
+            <WZUIContainer Type="WZUIContainer" GUID="{5c55ebcb-19e4-45ec-a144-64462a24da63}" AbsContentSize="220,1" UseAbsSize="True" RelativePosition="0.5,0.3">
+                <WZUIImage Type="WZUIImage" GUID="{32437b42-6397-48d0-a11d-4c663946028f}" File="ui/common/common_scale9_fengexian.png" UseAbsCoordinate="False" UseOriginSize="False" UseOriginSizeProportion="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{535ba2e7-8603-4674-8f14-7d8ba670f8cd}" AbsContentSize="220,1" UseAbsSize="True" RelativePosition="0.5,0.7">
+                <WZUIImage Type="WZUIImage" GUID="{3b233f75-045e-4085-860e-7564bb538eee}" File="ui/common/common_scale9_fengexian.png" UseAbsCoordinate="False" UseOriginSize="False" UseOriginSizeProportion="False" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d6d1d629-a252-430b-a110-9f2a0738de35}" Text="伤害目标血量:" FontSize="20" RelativePosition="0.03,0.85" AnchorPoint="0,0.5" Name="targetHurtTitle_WndCopyPetInfoView" Color="255,227,116" TextKey="" Alignment="Left" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{bca9d1eb-a301-42e8-9fa8-6e817fb38dce}" FontSize="20" Color="255,236,193" Text="9" RelativePosition="0.630909,0.85" Name="targetHurt_WndCopyPetInfoView" AnchorPoint="0,0.5" Alignment="Left" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCopyPetInfoView>

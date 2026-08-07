@@ -1,0 +1,18 @@
+<CellCommunityTask GUID="{e5615167-c8b9-4b1c-b396-fd7c730ec75f}">
+    <WZUIContainer AbsContentSize="700,110" GUID="{6f4baf18-f8de-4623-a5a7-7d4b074a99cc}" LuaObjectName="" Name="CellCommunityTask" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{e0f85a70-115a-4960-af64-07cf10fda317}" Name="conHead_Cell" AbsContentSize="70,70" UseAbsSize="True" AnchorPoint="0,1" RelativePosition="0.01,0.87">
+            <WZUIImage Type="WZUIImage" GUID="{ede87485-996c-425f-9f1f-cc47157e5797}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="1.05" RelativePosition="0.505,0.5" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{3392bc6d-d31f-4d58-a53f-45ecdc7514cc}" AbsContentSize="605,72" UseAbsSize="True" RelativePosition="0.562,0.34" Name="conDouble" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{05eb15e3-c23b-4cbc-98ff-caac2d035690}" File="ui/chat/chat_common_icon_siliao.png" CapInsets="50,12,1,1" ScaleY="-1" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{6da6c210-b8cf-4511-a1f2-8261bdfa8cdc}" AbsContentSize="605,46" UseAbsSize="True" RelativePosition="0.562,0.27" Name="conSingle" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{14be9169-b01c-4b50-8af2-f6399f1c21d6}" File="ui/chat/chat_common_icon_siliao.png" CapInsets="50,12,1,1" ScaleY="-1" />
+        </WZUIContainer>
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{d2d90534-c1fd-40aa-86a3-b570e056ee18}" Name="txtName1" AnchorPoint="0,0.5" RelativePosition="0.25,0.83" MaxWidth="360" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{77cfc85d-591d-4bd0-b5a7-79dff050f4b8}" Text="00:00" BoldFont="True" LabelStyleKey="C8_F22" RelativePosition="0.98,0.83" Alignment="Left" AnchorPoint="1,0.5" Name="txtTime" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{3469ea58-f765-43ef-87bf-80297cf1fdb5}" Text="肚子饿了!你们要吃东西么?吃什么呢肚子饿了!你们要吃东西么?吃什么呢？" BoldFont="True" LabelStyleKey="" RelativePosition="0.17,0.53" Alignment="Left" AnchorPoint="0,1" Color="62,34,8" FontSize="22" Dimensions="575,0" Name="txtMessage" />
+        <WZUIImage Type="WZUIImage" GUID="{5b545592-58b4-4be3-a0c8-598a30d43944}" File="ui/common/common_icon_ghdj.png" UseOriginSize="True" RelativePosition="0.175,0.83" AbsPosition="178.382,75.8963" />
+        <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{cc360997-0f97-4a0a-8569-dc912166e8e8}" CharMapFileName="ui/common_num/common_num_ghdj.png" Text="12" Height="24" UseOriginSize="True" Name="txtLv" NameCreate="True" RelativePosition="0.195,0.83" Width="16" AbsPosition="193.242,75.8963" Visible="True" Alignment="Left" AnchorPoint="0,0.5" />
+    </WZUIContainer>
+</CellCommunityTask>

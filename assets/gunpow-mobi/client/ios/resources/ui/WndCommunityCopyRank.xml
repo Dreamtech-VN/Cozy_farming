@@ -1,0 +1,48 @@
+﻿<WndCommunityCopyRank GUID="{c0400362-1c81-4b85-b11c-7298a1d3d302}">
+    <WZUIWindow Type="WZUIWindow" GUID="{42e6b8de-b970-4d94-8a19-266a7964e618}" LuaObjectName="WndCommunityCopyRank" Name="WndCommunityCopyRank" AbsContentSize="675,500" UseAbsSize="True" NameCreate="True" LuaTouchBeganFunction="onBeginTouch" ShowAll="True" RelativePosition="0.5,0.49">
+        <WZUIContainer Type="WZUIContainer" GUID="{3c7287d1-a0a0-4b9c-86dd-42a33758a477}" AbsContentSize="675,500" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{a161485c-f3b0-4e8d-a642-dd71905070e1}" File="ui/common/common_scale9_di19.png" CapInsets="60,60,110,60" />
+            <WZUIContainer Type="WZUIContainer" GUID="{edaf68e3-302c-4c3f-b087-8f520bb40dfb}" AbsContentSize="662,45" UseAbsSize="True" RelativePosition="0.500143,0.882768" AnchorPoint="0.5,1">
+                <WZUI9Image Type="WZUI9Image" GUID="{7261efd1-6c98-47db-a278-7b38d70fc7dc}" File="ui/common/commom_scale9_bossdi.png" RelativePosition="0.5,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{79444f80-29e0-46a9-929c-51522473e727}" TextKey="RANK" LabelStyleKey="C11_F24" RelativePosition="0.12,0.5" Name="txtTitle1_WndCommunityCopyRank" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{55eb8c75-3da4-4eb0-9c08-bc6ea09a4302}" TextKey="PLAYER" LabelStyleKey="C11_F24" RelativePosition="0.35,0.5" Name="txtTitle2_WndCommunityCopyRank" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{eddf320c-af45-4472-90e8-a32d0e847a7f}" TextKey="CRANK1" LabelStyleKey="C11_F24" RelativePosition="0.63,0.5" Name="txtTitle3_WndCommunityCopyRank" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{dcfbeda7-856f-4932-8198-28e509785cb9}" TextKey="CRANK3" LabelStyleKey="C11_F24" RelativePosition="0.88,0.5" Name="txtTitle4_WndCommunityCopyRank" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{0366960d-9e62-41d2-a561-a608a1211ba5}" AbsContentSize="662,370" UseAbsSize="True" RelativePosition="0.5,0.425">
+                <WZUI9Image Type="WZUI9Image" GUID="{828b4610-5586-4549-a870-45ef062563f3}" File="ui/common/common_scale9_di20.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{fc6887dd-bc2b-4f8e-ae42-7e2ecaf1d088}" RelativeSize="0.95,0.1" RelativePosition="0.5,0.988" AnchorPoint="0.5,1">
+                <Button Type="WZUIButton" RelativeSize="0.15,1" RelativePosition="0.937416,0.5" LuaDoneFunctionName="onClose" GUID="{1400096d-21c6-458d-8ee2-5eb725ee2bef}" Visible="True" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" RelativePosition="0.5,0.5" GUID="{0adde85a-9d24-4731-a46b-e22347ceb9ab}">
+                        <WZUIImage Type="WZUIImage" GUID="{804bc70e-357e-4760-89d7-222a34a44517}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{8cca05eb-7f93-4fcc-8155-616f8d2a0a1c}">
+                        <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{b9928805-7dd0-43cc-8ae2-6448537c26af}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{fd3b3760-5c7b-4550-a574-50f8811f3a56}" />
+                </Button>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b6040069-2c45-426b-be55-d499093eb528}" FontSize="24" Text="" Name="txtTipsName_WndSelectTipsStrengthen" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.5" Color="255,236,193" StrokeSize="4" StrokeColor="132,66,29" TextKey="" />
+            </WZUIContainer>
+            <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{72b38282-6c13-4d8d-a428-495dae3694e7}" Name="conFree_WndCommunityCopyRank" UseAbsSize="True" AbsContentSize="660,355" RelativePosition="0.5,0.425" EnableMoveHorizontal="False" AnchorPoint="0.5,0.5" />
+            <Button Type="WZUIButton" GUID="{cd0d39c4-5d75-4ab0-8e29-52f200f20420}" AbsContentSize="60,100" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="0,0.5" Name="btnLastBoss_WndCommunityCopyRank" LuaDoneFunctionName="onClickLast" Visible="False">
+                <NormalElement Type="WZUIContainer" GUID="{79632df3-d659-4b9b-a0b1-c0c2677997f2}">
+                    <WZUIImage Type="WZUIImage" GUID="{a6890187-e2e7-42f6-b550-60a520d70d41}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{8587d3b2-4007-44e2-a271-2b7af9cb99da}">
+                    <WZUIImage Type="WZUIImage" GUID="{a5ccd6aa-a659-4af6-93f6-b35e63aff77d}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="True" RelativePosition="0.45,0.5" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{b5011f1a-6ef6-49c2-b57b-99f7efc01df7}" />
+            </Button>
+            <Button Type="WZUIButton" GUID="{ad4e25e2-32ec-4833-8231-6814566b291c}" AbsContentSize="60,100" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="1,0.5" Name="btnNextBoss_WndCommunityCopyRank" LuaDoneFunctionName="onClickNext" Visible="False">
+                <NormalElement Type="WZUIContainer" GUID="{80759479-8194-4f84-aee2-43a255c97d93}">
+                    <WZUIImage Type="WZUIImage" GUID="{6b00c586-303e-4e2a-b9c0-f7d622aff283}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="False" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{8b0589f2-0762-422f-9598-35b1f087d07b}">
+                    <WZUIImage Type="WZUIImage" GUID="{aec345f7-f03b-4a68-87e6-d3a936c72929}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="False" RelativePosition="0.55,0.5" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{51a2e7e5-cc04-4b7c-b782-dc1e8478b720}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCommunityCopyRank>

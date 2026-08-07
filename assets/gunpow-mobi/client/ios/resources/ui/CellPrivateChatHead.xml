@@ -1,0 +1,28 @@
+﻿<CellPrivateChatHead GUID="{b7245304-fc95-4b9a-a644-a2a96ea364c3}">
+    <WZUIContainer Type="WZUIContainer" GUID="{13839a08-b886-4dd6-aefa-5090199f40ba}" AbsContentSize="122,115" UseAbsSize="True" RelativePosition="0.5,0.5" Name="CellPrivateChatHead" Visible="True" LuaObjectName="CellPrivateChatHead" NameCreate="False">
+        <WZUI9Image Type="WZUI9Image" GUID="{2bdc8a3d-70fb-457e-8da7-a2ae041c5916}" File="ui/common/common_scale9_di18.png" Visible="True" Name="img9Bg_CellPrivateChatHead" />
+        <WZUIContainer Type="WZUIContainer" GUID="{6b5c9b3c-cfb3-4f4c-a55e-0e2d4dc671cc}" Name="conPlayerHead_CellPrivateChatHead" AbsContentSize="67,67" UseAbsSize="True" RelativePosition="0.5,0.64824" Scale="1">
+            <WZUIImage Type="WZUIImage" GUID="{dd112366-140c-4dab-9f6b-b631d4bbebf9}" File="ui/common/common_icon_tx.png" UseOriginSize="True" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f34acbba-4c2c-4253-9363-6d281920a88c}" LabelStyleKey="C13_F18" Text="" RelativePosition="0.5,0.154658" Name="txtPlayerName_CellPrivateChatHead" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{95a326e4-a280-44c2-b348-bc134da2db73}" LabelStyleKey="C1_F18_S1_C13" Text="" RelativePosition="0.5,0.353831" Name="txtPlayerLevel_CellPrivateChatHead" />
+        <WZUI9Image Type="WZUI9Image" GUID="{49377ca8-b3a9-4258-91ab-b53169474fb7}" Name="imgHeightLight_CellPrivateChatHead" File="ui/common/common_scale9_beibaodi_sel.png" Visible="False" TouchEnable="False" Scale="1.04" RelativePosition="0.5,0.482609" />
+        <WZUIImage Type="WZUIImage" GUID="{07094ca3-a7c7-4a24-8923-c9f95fbb1f26}" Name="imgRedPoint_CellPrivateChatHead" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.104082,0.888067" Visible="False" />
+        <Button Type="WZUIButton" GUID="{a03248c5-828d-4b76-8b49-f6ab5ffa2d0d}" LuaDoneFunctionName="onClickFastPriChat">
+            <NormalElement Type="WZUIContainer" GUID="{b6b8d808-dbea-49ab-aa3b-c323adf307b4}" />
+            <SelectElement Type="WZUIContainer" GUID="{3ab8a5e4-7c83-4644-89f3-4f4e4f621772}" />
+            <DisableElement Type="WZUIContainer" GUID="{6509cd75-fa50-4c1e-a1a3-7c029ba3a989}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{fb1d7a97-b6ba-40a2-95c8-aec01e8f952f}" AbsContentSize="30,30" UseAbsSize="True" RelativePosition="0.861278,0.849723" Name="conRemove_CellPrivateChatHead" Visible="False">
+            <Button Type="WZUIButton" GUID="{f5f4745b-b153-4acc-a076-04600841491c}" LuaDoneFunctionName="onClickRemove">
+                <NormalElement Type="WZUIContainer" GUID="{9b6f879a-ebb1-426f-b056-1a48d4baff54}">
+                    <WZUIImage Type="WZUIImage" GUID="{0f699334-3f05-4815-9ca2-42f573e8b1ad}" File="ui/chat/common_icon_siliaoguanbi.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{7f7a657f-d527-4260-b46a-452d8cb21554}">
+                    <WZUIImage Type="WZUIImage" GUID="{ee66875b-0d9c-4c23-8af4-64e52d4d6d1c}" File="ui/chat/common_icon_siliaoguanbi_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{50e77e65-d4f2-4246-ada4-2960a1d0cf59}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellPrivateChatHead>

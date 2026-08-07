@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<CellLotteryList GUID="{F3ADA1F6-DD44-4000-886E-DB9C5C5F0614}">
+    <WZUIContainer AbsContentSize="125,115" AnchorPoint="0.5,0.5" GUID="{DA09C05F-4BFE-4136-9452-954AEE7262EE}" LuaObjectName="" Name="CellLotteryList" NameCreate="True" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <WZUIImage File="ui/common/wuping_frame.png" GUID="{9FE7E598-823C-42f1-891E-C2BE7371D9EE}" Name="imgCellNomallBG_CellLotteryList" Scale="1" Type="WZUIImage" UseOriginSize="False" Visible="True" />
+        <WZUIImage File="shopitems/birthstone_2.png" GUID="{08E6133C-D948-4b5b-AFEB-9AA614757F3B}" Name="imgCellGift_CellLotteryList" RelativePosition="0.500496,0.525771" Type="WZUIImage" UseOriginSize="False" Visible="False" isValid="True" Scale="0.8" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="255,255,255" FontSize="22" GUID="{812B3641-2DE5-4ee6-B184-1616B2EDD364}" MaxLength="9" Name="txtName_CellLotteryList" Order="5" RelativePosition="0.5,0.853125" Text="" Type="WZUILabelTTF" />
+        <WZUILabelAtlasFont CharMapFileName="common/num/weapon_level_number.png" GUID="{113E9652-CB0D-4ad8-ACC6-0D9D99D879FF}" Height="31" Name="txtLevel_CellLotteryList" RelativePosition="0.659603,0.646317" Scale="1" Text="" TouchEnable="False" Type="WZUILabelAtlasFont" UseOriginSize="True" UseOriginSizeProportion="False" Visible="False" Width="24" />
+        <WZUILabelTTF AnchorPoint="1,0.5" Color="255,255,255" FontSize="22" GUID="{4111257D-8FA1-42f7-B5B4-D424263038A4}" Name="txtNum_CellLotteryList" Order="2" RelativePosition="0.886986,0.249161" Text="" Type="WZUILabelTTF" TextKey="" />
+        <WZUI9Image Type="WZUI9Image" GUID="{40457466-45AC-4213-9091-E14E142B9290}" Name="imgCellKuang_CellLotteryList" File="ui/lottery/selected.png" CapInsets="30,35,1,1" Scale="1.1" RelativePosition="0.5,0.523954" Visible="False" />
+        <WZUIButton GUID="{E38FFEA1-0265-452e-9B17-75C744D1F51E}" LuaDoneFunctionName="onClick" RelativePosition="0.5,0.5" Type="WZUIButton">
+            <NormalElement GUID="{9036533A-4823-42df-81D4-DBA0198A6658}" Type="WZUIContainer">
+                <WZUIImage GUID="{D2A9812C-1A56-4aca-BEBF-FBDC5DD769D7}" Name="imgCellGift_CellLotteryList1" Type="WZUIImage" />
+            </NormalElement>
+            <SelectElement GUID="{16D86403-9D81-40c2-A9F3-78553B07C0A5}" Type="WZUIContainer">
+                <WZUIImage GUID="{572E889D-A4C1-4c21-988A-C183E3BAC414}" Name="imgCellGift_CellLotteryList2" Type="WZUIImage" />
+            </SelectElement>
+            <DisableElement GUID="{7741E7CC-6611-4e88-BA25-B34B441AFBB5}" Type="WZUIContainer" />
+        </WZUIButton>
+    </WZUIContainer>
+</CellLotteryList>

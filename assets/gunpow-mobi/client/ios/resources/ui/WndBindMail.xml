@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" ?>
+<WndBindMail GUID="{8E889781-83B8-4b77-BFAA-8736D81E6D5E}">
+    <WZUIWindow Type="WZUIWindow" GUID="{FCD5D1A9-B0BA-40aa-A8F2-0AA2930106BB}" Name="WndBindMail" NameCreate="True" LuaObjectName="WndBindMail" AbsContentSize="" UseAbsSize="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{B1140B82-84C8-4dda-8C70-7006E0EB736B}" AbsContentSize="500,500" UseAbsSize="True" RelativePosition="0.495833,0.509375" ShowAll="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{293B6C84-486C-4142-AE99-B2FD6CB10BFE}" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{A05CE43E-337C-4af2-B63F-3E871F9AD54B}" File="ui/common/common_scale9_di19.png" CapInsets="100,80,1,1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{EB5F8CF8-E43C-4ade-8C87-BDCC551B0780}" AbsContentSize="500,60" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.996">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{67FE13AA-A8E6-42b8-A6CB-04182574D9AB}" LabelStyleKey="SMALL_WINDOW_TITLE" TextKey="SETTING_BIND_MAIL1" />
+                <Button Type="WZUIButton" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.919437,0.476353" GUID="{AC42856C-185B-4ceb-9044-A3D19EF79137}" LuaDoneFunctionName="onClose" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{5D9AD54C-A530-461d-947F-C477D72C4F43}">
+                        <WZUIImage Type="WZUIImage" GUID="{04CE6972-2FFF-45da-A9B7-B9D1DF039884}" File="ui/common/common_icon_guanbi.png" Visible="True" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{F7144716-30F5-4ca0-82B4-CCFA63202074}">
+                        <WZUIImage Type="WZUIImage" GUID="{CDF0F5C8-82CE-46d7-8250-9E5A981970C8}" File="ui/common/common_icon_guanbi_sel.png" Visible="True" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{3C84A4A9-F273-43bd-8357-E42F87F68E40}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{4BDABD0C-D294-45e9-8D44-78CD4CA980C4}" AbsContentSize="490,315" UseAbsSize="True" RelativePosition="0.5,0.512">
+                <WZUIContainer Type="WZUIContainer" GUID="{EDF1A7D6-BFED-44e9-BD90-8AFAF82D198A}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{A8029F77-7E22-4055-9DEB-1B28E7D95F08}" File="ui/common/common_scale9_di20.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{FDEA28A0-B2F1-4185-BB91-1BF9D5DC686C}" RelativeSize="1,0.5" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8A229ED3-8A76-446b-A32F-4B2338FA13E0}" TextKey="SETTING_INPUT_PASS" FontSize="24" RelativePosition="0.269676,0.77712" Color="128,54,13" Name="txt1_WndBindMail" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{7AA469A5-ED7E-47bc-A286-0DB7C4948F80}" RelativeSize="1,0.33" AnchorPoint="0.5,1" RelativePosition="0.5,0.590159" AbsContentSize="340,80" UseAbsSize="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{1D30D302-3A8A-4779-907E-EA697DB5E1BF}" AbsContentSize="300,50" UseAbsSize="True" RelativePosition="0,1" AnchorPoint="0,1">
+                            <WZUI9Image Type="WZUI9Image" GUID="{FB65628F-3BAF-4e14-B9F2-DF81E7096CD2}" File="ui/common/common_scale9_di8.png" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{E1E2A0F7-C651-4e19-B1E4-6442EAE2C23C}" RelativeSize="0.94,1">
+                                <WZUIEditBox Type="WZUIEditBox" GUID="{BC406150-9038-470a-A4EC-DE0AF0343DEC}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editPass_WndBindMail" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="24" FontColor="255,255,255" InputFlag="FlagPassword" MaxLength="20" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{37DAA5EB-B92C-4afe-A2FA-866E40A72229}" RelativeSize="0.7,0.3" AnchorPoint="0,0" RelativePosition="0,0.02">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{E97A9439-C8AB-49a7-B270-AE0BAE31516B}" Color="84,57,44" FontSize="20" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0,0.5" TextKey="LOGIN_TIPS_PASSWORD" Name="txtPassword_WndBindMail" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7954FAE6-2EFD-400e-A066-FCE746AB0C4B}" RelativeSize="1,0.5" AnchorPoint="0.5,0" RelativePosition="0.5,0.0285714">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{F389F4D8-8BB1-466f-9CD6-DFF817B0D645}" TextKey="SETTING_INPUT_MAIL" FontSize="24" RelativePosition="0.269676,0.77712" Color="128,54,13" Name="txtName2_WndBindMail" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{DDD2BBDB-E05D-4fab-B6C6-C6CD26CD4607}" RelativeSize="1,0.33" AnchorPoint="0.5,1" RelativePosition="0.5,0.590159" AbsContentSize="340,80" UseAbsSize="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{EC897EA0-9D57-4552-8D69-6083F659C8F7}" AbsContentSize="300,50" UseAbsSize="True" RelativePosition="0,1" AnchorPoint="0,1">
+                            <WZUI9Image Type="WZUI9Image" GUID="{94CFA43E-A554-409e-B382-7DB745E029AB}" File="ui/common/common_scale9_di8.png" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{33B9F28D-C58C-406b-84F2-11C86F7A7E2A}" RelativeSize="0.94,1">
+                                <WZUIEditBox Type="WZUIEditBox" GUID="{5876555E-6451-460d-B423-D973C9D8DE36}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editMail_WndBindMail" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="24" FontColor="255,255,255" InputFlag="FlagSensitive" MaxLength="40" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{8043FEAD-13E7-4ebf-832C-4F9E7108DBA6}" RelativeSize="0.7,0.3" AnchorPoint="0,0" RelativePosition="0,0.02">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3E03CC46-10F6-497f-A7A1-DAC552B1665E}" Color="84,57,44" FontSize="20" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0,0.5" TextKey="SETTING_MAIL_DESC" Name="txtEmail_WndBindMail" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{C36AAE8E-106F-4d16-811A-3975E70F7DF9}" AbsContentSize="500,100" UseAbsSize="True" RelativePosition="0.5,0.10202">
+                <WZUIButton Type="WZUIButton" RelativeSize="0.25,0.7" RelativePosition="0.5,0.5" GUID="{9E15F5C7-F8D4-41b4-9546-DC4846CDDDD1}" LuaDoneFunctionName="onBind" Name="btnBind_WndBindMail" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{51D2D50E-706D-448b-86D0-67EBC4DA8538}">
+                        <WZUIImage Type="WZUIImage" GUID="{E2441C9D-BC81-4f9e-9C16-C7A204430006}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{6DFBE8E4-88FF-45b6-ADCC-EA91F62738E3}">
+                        <WZUIImage Type="WZUIImage" GUID="{98E135BB-E468-43ec-AA91-F0B0102567BF}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{285CE1C0-4593-4c19-8DAC-982547D31E73}">
+                        <WZUIImage Type="WZUIImage" GUID="{1708DCC0-E172-44ac-9121-07A114DBEE5B}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" GrayRender="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6340DDC9-B991-42b6-9396-D163E7E52515}" FontSize="22" LabelStyleKey="SMALL_GREEN_BTN" TextKey="ACCOUNT_BD1" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndBindMail>

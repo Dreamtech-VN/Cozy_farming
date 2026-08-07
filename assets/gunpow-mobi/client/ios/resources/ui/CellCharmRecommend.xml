@@ -1,0 +1,30 @@
+<CellCharmRecommend GUID="{22b9f6b7-cf68-4343-ad4b-b6bd51ba1baa}">
+    <WZUIContainer Type="WZUIContainer" GUID="{cd9c3667-57fe-4120-aeb2-87fa74127e68}" Visible="True" AbsContentSize="198,170" UseAbsSize="True" RelativePosition="0.5,0.5" UseAbsCoordinate="False" Name="CellCharmRecommend">
+        <WZUI9Image Type="WZUI9Image" GUID="{3a9478ba-15e7-457f-bdcc-0fd428494d15}" File="ui/common/common_scale9_di7.png" TouchEnable="False" />
+        <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{58329eb2-bf25-45ac-a9c2-6bde0e522923}" TouchEnable="False" RelativePosition="0.5,0.57" AnchorPoint="0.5,0.5" Visible="True" AbsContentSize="116,116" UseAbsSize="True">
+            <Stencil Type="WZUIImage" GUID="{c9a34f54-329c-4306-8587-181561c63eeb}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" Scale="1.88" RelativePosition="0.5,0.5" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{5aba0c16-ee4e-4e98-86bc-6f11ac673035}" AbsContentSize="116,116" UseAbsSize="True" RelativePosition="0.5,0.5" TouchEnable="False" Name="con_CellCharmRecommend" />
+        </WZUIClippingContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{aff2276a-6962-4753-bc0b-fc33e541d965}" AbsContentSize="116,116" UseAbsSize="True" RelativePosition="0.5,0.570588" TouchEnable="False" Name="">
+            <WZUIImage Type="WZUIImage" GUID="{1bb6cb5d-87b0-411a-9e19-ef69f233922f}" Name="imgHead_CellCharmRecommend" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{d157294f-4088-4e3c-a6c3-3f49e210d24a}" AbsContentSize="130,130" UseAbsSize="True" RelativePosition="0.5,0.570588" TouchEnable="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{2dde9258-0551-4e48-9421-4f02d47a1de4}" File="ui/common/common_scale9_kuang.png" />
+            <WZUI9Image Type="WZUI9Image" GUID="{70e1c518-7e40-45c2-8eef-2e1b1916ab77}" File="ui/common/common_icon_hanzi2.png" UseOriginSize="True" RelativePosition="0.148549,0.151194" Name="imgBoy_CellCharmRecommend" Visible="False" Scale="0.7" ScaleX="0.7" ScaleY="0.7" />
+            <WZUI9Image Type="WZUI9Image" GUID="{5bc50a25-8eac-4f86-a687-74415209a59f}" File="ui/common/common_icon_meizhi2.png" UseOriginSize="True" RelativePosition="0.140857,0.166579" Name="imgGirl_CellCharmRecommend" Visible="False" Scale="0.7" ScaleX="0.7" ScaleY="0.7" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2fffe89e-0c5e-4c7d-8d99-df5957338d68}" Color="127,70,26" FontSize="18" AnchorPoint="0,0.5" RelativePosition="0.038907,-0.105542" Name="txtLevel1_CellCharmRecommend" Text="" Alignment="Left">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{46c30727-bb5e-4a36-a0eb-f8784d44fa68}" AnchorPoint="0,0.5" Color="127,70,26" FontSize="18" Name="txtName1_CellCharmRecommend" RelativePosition="1.1,0.5" Text="" />
+            </WZUILabelTTF>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{531232f2-2dc4-4a3d-a674-e146624e66f0}" Color="127,70,26" FontSize="18" AnchorPoint="0,0.5" RelativePosition="-0.143821,-0.0978504" Name="txtLevel2_CellCharmRecommend" Text="" Alignment="Left">
+                <WZUIImage Type="WZUIImage" GUID="{eff3bbd0-7d4f-40be-b863-6d29528dbd3e}" File="ui/common/common_icon_kuafu.png" AnchorPoint="0,0.5" UseOriginSize="True" RelativePosition="1.1,0.5" Name="img_CellCharmRecommend" isValid="True">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6269f628-fddd-4a4f-8522-1317f503a862}" AnchorPoint="0,0.5" Color="127,70,26" FontSize="18" Name="txtName2_CellCharmRecommend" RelativePosition="1.1,0.5" Text="" />
+                </WZUIImage>
+            </WZUILabelTTF>
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{0ae75ec1-09d4-4a13-876b-87917f233940}" LuaDoneFunctionName="onEnterSpace1" AbsContentSize="198,170" UseAbsSize="True" AfterDrawEnable="False" RelativePosition="0.5,0.5">
+            <NormalElement Type="WZUIContainer" GUID="{1e68bc24-1301-4116-bfec-0f0ae78a3149}" />
+            <SelectElement Type="WZUIContainer" GUID="{4408642f-d687-4d3a-af1a-c76d9ffa8d08}" />
+            <DisableElement Type="WZUIContainer" GUID="{c4fa02f0-96cf-452e-8f4c-3aba4aaaab38}" />
+        </Button>
+    </WZUIContainer>
+</CellCharmRecommend>

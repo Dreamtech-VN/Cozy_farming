@@ -1,0 +1,17 @@
+﻿<CellRuneType GUID="{097a64ee-e487-46a6-b37b-31d6b8736734}">
+    <WZUIContainer Type="WZUIContainer" GUID="{7e49d8a2-1f3d-4975-94b4-3e4d803abdcf}" AbsContentSize="103,53" UseAbsSize="True" Name="CellRuneType" ShowAll="False" NoBorder="False">
+        <CheckElement Type="WZUIContainer" GUID="{a679373b-20d6-4819-b1c0-7e6c7797c97f}" Name="con_CellRuneType">
+            <WZUIImage Type="WZUIImage" GUID="{73a44343-09ae-4442-9095-8345f913007a}" File="ui/common/common_btn_biaoqian2.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2cd36d1b-0847-4552-9d1e-63bceb8df349}" FontSize="24" EnableStroke="True" Color="255,236,193" StrokeSize="4" StrokeColor="79,60,48" Name="txt_CellRuneType" />
+        </CheckElement>
+        <CheckElement Type="WZUIContainer" GUID="{11fa9957-e030-487f-b89d-7694c6014492}" Name="conSel_CellRuneType" Visible="False">
+            <WZUIImage Type="WZUIImage" GUID="{aee75d1b-baea-4b6e-aafa-964c607ac72f}" File="ui/common/common_btn_biaoqian2_sel.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{374db172-5e54-4450-bae1-f4f807039eca}" FontSize="24" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="127,70,26" Name="txtSel_CellRuneType" />
+        </CheckElement>
+        <Button Type="WZUIButton" GUID="{2cd38cf1-758a-4b54-bab3-11d3bbb1559a}" LuaDoneFunctionName="onSelectType" Visible="True">
+            <NormalElement Type="WZUIContainer" GUID="{9f3944da-5b19-4699-a547-781e3839f983}" />
+            <SelectElement Type="WZUIContainer" GUID="{e87b34af-527d-441e-9d56-9eafea95e28f}" />
+            <DisableElement Type="WZUIContainer" GUID="{4bef1a84-8640-478f-b803-2321a1f3536b}" />
+        </Button>
+    </WZUIContainer>
+</CellRuneType>

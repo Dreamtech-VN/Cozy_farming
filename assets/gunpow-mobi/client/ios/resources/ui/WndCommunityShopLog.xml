@@ -1,0 +1,48 @@
+﻿<WndCommunityShopLog GUID="{b841c08c-a355-413b-ac4a-2aec995afd4e}">
+    <WZUIWindow AbsContentSize="770,532" GUID="{a9cfc9f0-66bf-45ba-9bfd-3012abf5eb4d}" LuaObjectName="WndCommunityShopLog" Name="WndCommunityShopLog" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{ceca8b44-b58b-4811-94c0-c7904caabb69}" AbsContentSize="770,532" UseAbsSize="True" RelativePosition="0.5,0.5" Order="1">
+            <WZUI9Image Type="WZUI9Image" GUID="{b20c5afa-4c93-4667-8351-b6db4872e392}" File="ui/common/common_scale9_di5.png" CapInsets="60,110,10,10" RelativePosition="0.5,0.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{6e72e18e-558b-48d8-8eb8-30e3a2ce1f77}" AbsContentSize="756,405" UseAbsSize="True" RelativePosition="0.5,0.45">
+                <WZUI9Image Type="WZUI9Image" GUID="{d15a5f5f-d5c3-47d9-a3c5-8084e873f4d9}" File="ui/common/common_scale9_di6.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{1d3cb36d-d8da-4e91-85dd-29638ced7978}" Name="conTop" RelativePosition="0.5,0.94" RelativeSize="0.975,0.144" Type="WZUIContainer" Order="1">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{842822ff-55a7-4a78-89d9-b99b27d134e8}" Color="255,236,193" BoldFont="True" FontSize="26" Text="" StrokeSize="4" EnableStroke="True" RelativePosition="0.5,0.5" ShadowColor="136,66,29" StrokeColor="136,66,29" TextKey="" AbsPosition="375.375,38.304" Name="txtTitle_WndCommunityShopLog" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{a4c9634f-bb9f-438b-9d69-3340d91c483d}" AbsContentSize="750,360" UseAbsSize="True" RelativePosition="0.5,0.45" Order="1" Name="conForLog_WndCommunityShopLog">
+            <WZUIFreeListContainer EnableMoveHorizontal="False" GUID="{cd3ace34-717b-417f-b72f-6b4d0a06588f}" Name="freeconText_WndCommunityShopLog" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIFreeListContainer" AbsContentSize="750,360" UseAbsSize="True" Resistance="1" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{47e1905f-4dc5-43e6-870d-372c740f4122}" Name="conBtn_WndCommunityShopLog" Order="1">
+            <WZUIButton AbsContentSize="120,56" GUID="{b97fa83f-0fee-4c7c-83ff-c9af59c3f552}" LuaDoneFunctionName="onClose" Name="btnClose_WndCommunityShopLog" RelativePosition="0.95,0.94" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal">
+                <NormalElement GUID="{f06d6817-02f0-47ba-9757-9ee52eda3792}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{c7cea07b-548a-4971-a7f2-c938dcc0ed8b}" Type="WZUIImage" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{dcdbccb3-756a-4a72-bcc8-01e6ddc20d68}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{1aacea32-01ea-4017-807e-b8a0e5c4ca83}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUICheckBoxGroup AbsContentSize="105,180" AnchorPoint="0.5,0.5" GUID="{2cbca8fe-4df4-4abc-ae47-77cb3769bbc4}" RelativePosition="1.05,0.712426" RelativeSize="1,1" ScaleY="1" TouchContainerEnable="True" Type="WZUICheckBoxGroup" UseAbsSize="True" Order="0" Name="checkGroup_WndCommunityShopLog">
+            <CheckBox Type="WZUICheckBox" GUID="{0bfac618-27e9-44ca-b895-3a0130fa6c0a}" AbsContentSize="100,66" UseAbsSize="True" RelativePosition="0.528571,0.760001" SelectedIndex="1" Tag="0" LuaCheckedFunctionName="onCheckBack">
+                <CheckElement Type="WZUIContainer" GUID="{0643093c-4bd9-4dab-9295-d9271c786fb5}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{1105e4fa-d93d-406a-9464-d8d703c37050}" File="ui/common/common_btn_biaoqian.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8c1964ea-53a9-400f-9169-90a1c00fc5a7}" LabelStyleKey="C1_F20_S4_C3" Text="存储日志" RelativePosition="0.520408,0.5" TextKey="STORAGE_LOG" Name="txtCheck1_WndCommunityShopLog" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{00d82a2e-3ae7-4bac-95b9-7853f501bf60}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{732edef2-2730-4fb3-b8de-4f650dfc3803}" File="ui/common/common_btn_biaoqian_sel.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ac263f48-4620-4cc0-be62-20a083af9718}" LabelStyleKey="C1_F20_S4_C3" Text="存储日志" RelativePosition="0.520408,0.5" TextKey="STORAGE_LOG" Name="txtCheckSel1_WndCommunityShopLog" />
+                </CheckElement>
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{7468e09d-d862-44b6-befd-b5007196e183}" AbsContentSize="100,66" UseAbsSize="True" RelativePosition="0.528571,0.371111" Tag="1" LuaCheckedFunctionName="onCheckBack">
+                <CheckElement Type="WZUIContainer" GUID="{89eabefe-6afa-4cb0-b6b6-859bc31ed402}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{ea726163-c471-47f2-bb73-85a9306a3e5c}" File="ui/common/common_btn_biaoqian.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{e62a2b5d-6585-411f-ad10-2494baff4a21}" LabelStyleKey="C1_F20_S4_C3" Text="购买日志" RelativePosition="0.520408,0.5" TextKey="COMMUNITY_SHOP_LOG" Name="txtCheck2_WndCommunityShopLog" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{98154b23-92b7-4071-beb0-7af4404a67cc}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{d209db99-9a83-422f-9da4-059bc03ca3e7}" File="ui/common/common_btn_biaoqian_sel.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{824d7e6a-7421-4531-9fcf-9f8463b886db}" LabelStyleKey="C1_F20_S4_C3" Text="购买日志" RelativePosition="0.520408,0.5" TextKey="COMMUNITY_SHOP_LOG" Name="txtCheckSel2_WndCommunityShopLog" />
+                </CheckElement>
+            </CheckBox>
+        </WZUICheckBoxGroup>
+    </WZUIWindow>
+</WndCommunityShopLog>

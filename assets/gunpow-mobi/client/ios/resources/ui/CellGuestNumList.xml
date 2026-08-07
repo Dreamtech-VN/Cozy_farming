@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<CellGuestNumList GUID="{A20595BF-C439-4ffb-A273-E932144B8DD2}">
+    <WZUIContainer AbsContentSize="440,75" GUID="{4861C23D-68EC-418b-9C06-9223004AB484}" LuaObjectName="" Name="CellGuestNumList" NameCreate="True" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{B13BE9ED-E3DD-4ac7-8CA9-57FC0989B482}" AbsContentSize="415,75" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{3F88FEFC-C01D-40e4-A0DC-17BAA025C4E8}" Name="imgOnLine_CellGuestNumList" File="ui/common/common_scale9_di18.png" RelativeSize="1,1" />
+        </WZUIContainer>
+        <WZUILabelTTF Color="62,34,8" FontSize="24" GUID="{F0507EC4-6B01-4b2e-BCB8-F48816BE2987}" Name="txtName_CellGuestNumList" RelativePosition="0.467388,0.5" Text="孤独求败" Type="WZUILabelTTF" AnchorPoint="0,0.5" LabelStyleKey="C13_F24" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{13A6BED5-93CA-4f5d-B2EB-E35ECCEBC102}" FontSize="24" Name="txtLevel_CellGuestNumList" Color="132,66,29" Text="Lv.30" RelativePosition="0.453938,0.5" AnchorPoint="1,0.5" LabelStyleKey="" />
+        <WZUIContainer GUID="{5FA55BE5-BA7C-4013-8B1D-B6EDBDF2FF3F}" Name="conLevel_CellGuestNumList" RelativePosition="0.0827799,0.5" RelativeSize="1,1" TouchEnable="False" TouchSwallow="False" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" AbsContentSize="85,85">
+            <WZUIImage Type="WZUIImage" GUID="{092D6C03-982D-4f4a-BB7C-9CADE14B0EED}" File="ui/common/common_icon_tx.png" UseOriginSize="False" RelativePosition="0.5,0.5" />
+        </WZUIContainer>
+        <WZUIButton GUID="{8CD26EAD-2A7E-4062-A1BF-72991A5BC9D5}" LuaDoneFunctionName="onClickButtonCell" RelativePosition="0.5,0.5" Type="WZUIButton">
+            <NormalElement GUID="{DB3E912C-9EC9-4405-8570-E09794D1AD5B}" Type="WZUIContainer" />
+            <SelectElement GUID="{A5BF4D5B-3E21-4dba-9EEB-EF1BAFC95E9A}" Type="WZUIContainer" />
+            <DisableElement GUID="{8D15C709-280C-4611-9796-131817A6A3DF}" Type="WZUIContainer" />
+        </WZUIButton>
+    </WZUIContainer>
+</CellGuestNumList>

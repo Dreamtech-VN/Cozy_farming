@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><WndRightMenu GUID="{EE941118-C2F5-4868-AE9D-31CD74A38838}">
+    <WZUIWindow AbsContentSize="960,560" AbsPosition="960,360" AnchorPoint="1,0.5" GUID="{CC0019DF-052E-4366-A548-5E258607C25C}" LuaObjectName="WndRightMenu" Name="WndRightMenu" NameCreate="True" ShowAll="False" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="148,106" GUID="{A7725168-CEB6-4920-A5BC-2A0C20363A1C}" Name="conBtn_WndRightMenu" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+            <WZUIButton AbsContentSize="108,106" GUID="{2E411723-F115-4a5a-9DC7-94199AEB7413}" LuaDoneFunctionName="" Name="btn_WndRightMenu" Type="WZUIButton" UseAbsSize="True" Visible="True">
+                <NormalElement GUID="{54F9094C-5241-4097-992D-C5357FF79280}" Type="WZUIContainer">
+                    <WZUIImage File="" GUID="{909451BE-B60A-4c96-B31E-7268E7562D52}" Name="imgIconNormal_WndRightMenu" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="" GUID="{0512EDA4-4AD0-479f-858A-D9686438D445}" Name="imgTextNormal_WndRightMenu" RelativePosition="0.5,0.22" Type="WZUIImage" UseOriginSize="True"/>
+                </NormalElement>
+                <SelectElement GUID="{4DE072EF-15FA-4c96-BB29-6AB78A7147AB}" Name="btnSel_WndRightMenu" Scale="1.05" Type="WZUIContainer">
+                    <WZUIImage File="ui/island/island_shine.png" GUID="{318FDDB3-E376-44be-9D98-09A315EBEF95}" Name="imgBtnHight_WndRightMenu" Scale="1.2" Type="WZUIImage" UseOriginSize="False" Visible="True"/>
+                    <WZUIImage File="" GUID="{540D5812-FE9F-4b5c-B37A-CEFAB7850388}" Name="imgIconSel_WndRightMenu" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="" GUID="{BEADC99F-326F-4c8f-B955-A9C1EBBDC0E8}" Name="imgTextSel_WndRightMenu" RelativePosition="0.5,0.22" Type="WZUIImage" UseOriginSize="True"/>
+                </SelectElement>
+                <DisableElement GUID="{54C72AF7-3627-470f-8D1F-462F2F980941}" Type="WZUIContainer">
+                    <WZUIImage GUID="{5734BAB5-B616-41ea-A624-2E48C573590A}" Type="WZUIImage"/>
+                    <WZUIImage GUID="{18014B1D-0BDB-41db-9682-666A0B074617}" Type="WZUIImage"/>
+                </DisableElement>
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="960,560" GUID="{1363E6AD-673F-4db3-B897-BF597226E2C9}" Name="conBg_WndRightMenu" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+            <WZUITableContainer CellElementHeight="0.2" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableMoveoutContainer="False" EnableVerticalScroll="False" GUID="{3C2A4A6D-4F9C-40f5-BC2D-A83123036253}" Name="tbcon_WndRightMenu" RelativePosition="0.925,0.46" RelativeSize="0.15417,0.96" ScrollPictureDown="common/Jigsaw/rolling_03.png" ScrollPictureMid="common/Jigsaw/rolling_01.png" ScrollPictureTop="common/Jigsaw/rolling_02.png" Type="WZUITableContainer" VerticalInterval="0.025"/>
+        </WZUIContainer>
+    </WZUIWindow>
+    <WZUIContainer GUID="{859FCD48-C805-4a33-BCCD-43B6ABDD45FA}" Name="conAnimation" NameCreate="True" Type="WZUIContainer">
+        <WZUIImage File="common/animation/icon_world_boss_light.png" GUID="{B42F25E9-377A-4969-9034-E15BE1B8B150}" Name="imgCircleAni" TouchEnable="False" Type="WZUIImage" UseOriginSize="True">
+            <Action Angle="-360" Duration="1" GUID="{980784D9-351E-47ac-8FB7-BD946569E05E}" IsLoop="True" Type="WZUIActionRotateBy"/>
+        </WZUIImage>
+        <WZUIImage File="common/animation/icon_achievement_an.png" GUID="{3F51ACAC-1E10-4d91-A730-A456EC586F47}" Name="imgHighlightAni" Opacity="50" Type="WZUIImage" UseOriginSize="True">
+            <Action GUID="{B7D19BA8-EB2C-4fe5-BA26-7FC3A948104D}" IsLoop="True" Type="WZUIActionSequence">
+                <ChildAction Duration="0.4" GUID="{6D2682F3-24F2-4f2d-AF06-A8E4826F535A}" Type="WZUIActionFadeTo"/>
+                <ChildAction Duration="0.4" GUID="{367EC717-A628-4cd9-9D28-BFF650A935B5}" Opacity="50" Type="WZUIActionFadeTo"/>
+            </Action>
+        </WZUIImage>
+    </WZUIContainer>
+</WndRightMenu>

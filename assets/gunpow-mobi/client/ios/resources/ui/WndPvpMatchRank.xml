@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" ?>
+<WndPvpMatchRank GUID="{751e4181-a9e1-4be3-abf4-d8cb2f43fee0}">
+    <WZUIWindow Type="WZUIWindow" GUID="{6836BF14-D501-42c9-B1BB-722D8DFEBCBF}" NameCreate="True" Name="WndPvpMatchRank" LuaObjectName="WndPvpMatchRank" UseAbsSize="False" AbsContentSize="" ShowAll="True" LuaTouchBeganFunction="OnTouchBegin">
+        <WZUIContainer Type="WZUIContainer" GUID="{CF2E0844-609D-4c1b-81B3-1560C0BBB9B3}" ShowAll="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{8A5BED64-C6C2-49cf-B365-A882CB656A14}" AbsContentSize="100,210" UseAbsSize="True" RelativePosition="0.891042,0.77" AnchorPoint="0,1">
+                <WZUICheckBoxGroup Type="WZUICheckBoxGroup" GUID="{D244DA06-99D7-4f5e-BEF3-3A18EC06B0DF}" RelativePosition="0.5,0.5">
+                    <CheckBox Type="WZUICheckBox" GUID="{4CB8D915-E0CB-42f0-B034-4484BC6CA980}" AbsContentSize="100,70" UseAbsSize="True" RelativePosition="0.49,0.833333" SelectedIndex="0" Name="checkBox1_WndPvpMatchRank" LuaCheckedFunctionName="onRank1">
+                        <CheckElement Type="WZUIContainer" GUID="{69711EBD-9697-4ecf-9260-8D8AC9A09218}">
+                            <WZUIImage Type="WZUIImage" GUID="{A36545E0-4E41-4310-AB4B-DCFD6ED763EA}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{485DC91F-6242-4ee7-96F2-7DF3280DBB4A}" LabelStyleKey="LABEL_NORMAL" TextKey="RANK_SEGMENT_REWARD" Scale="0.8" RelativePosition="0.51,0.5" Name="txtCheck1_WndPvpMatchRank" Dimensions="0,0" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{6FD5B35F-56C6-41fa-B4AE-448622983000}" />
+                    </CheckBox>
+                    <CheckBox Type="WZUICheckBox" GUID="{4E90A3DC-71E6-479d-99F6-4A48010F0BB8}" AbsContentSize="100,70" UseAbsSize="True" RelativePosition="0.49,0.485714" SelectedIndex="0" Name="checkBox2_WndPvpMatchRank" LuaCheckedFunctionName="onRank2">
+                        <CheckElement Type="WZUIContainer" GUID="{F35A33BF-9825-4572-A9C1-8DFDC48AACD8}">
+                            <WZUIImage Type="WZUIImage" GUID="{EEE7EE29-7A8C-4b33-93A0-6291EB87E29B}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4C83AA9C-1E42-489c-80DC-704F9B607DEC}" LabelStyleKey="LABEL_NORMAL" TextKey="ATH_DESC_10" Scale="0.8" RelativePosition="0.51,0.5" Name="txtCheck2_WndPvpMatchRank" />
+                        </CheckElement>
+                        <CheckElement Type="WZUIContainer" GUID="{00A6B6DE-9AF4-4bb9-BC3E-C9CD55650E5C}" />
+                    </CheckBox>
+                </WZUICheckBoxGroup>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{03C6CA7F-631A-4299-95AF-6B077AD90008}" AbsContentSize="772,534" UseAbsSize="True" RelativePosition="0.497916,0.5" Visible="True" ShowAll="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{C5594704-C77D-41b3-9D1F-041E3B46FCC0}" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{b24e4b19-3093-436d-9b7f-d6dc57be9dda}" File="ui/common/common_scale9_di19.png" Opacity="255" RelativePosition="0.5,0.5" CapInsets="250,100,1,1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1b05015d-9b77-46f4-99a2-2f86991d7ed9}" TextKey="" FontSize="26" Color="255,236,192" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" RelativePosition="0.494289,0.935813" LabelStyleKey="SMALL_WINDOW_TITLE" Name="txtTitle_WndPvpMatchRank" Text="" />
+                    <WZUIButton Type="WZUIButton" LuaDoneFunctionName="OnClose" GUID="{da642654-24a2-421b-ac85-0c712612f563}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.942247,0.938465" AbsPosition="727.414,501.14" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{fd2af318-884f-461b-bedd-886506a48b2a}">
+                            <WZUIImage Type="WZUIImage" GUID="{dc4906c4-2eaf-4df8-93cd-e046b97fc989}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{fe285983-f096-47d0-9963-4b3ab23671aa}">
+                            <WZUIImage Type="WZUIImage" GUID="{1e2c9885-810d-4156-922b-610bfd55360a}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{ae464e93-f49c-4d44-a5e8-3daf5e49df8a}" />
+                    </WZUIButton>
+                    <WZUIContainer Type="WZUIContainer" GUID="{930492fd-4e1e-429e-a25e-55850b673d53}" AbsContentSize="760,422" UseAbsSize="True" RelativePosition="0.5,0.494">
+                        <WZUI9Image Type="WZUI9Image" GUID="{7037a1ff-d528-441a-9829-5a3a16126757}" File="ui/common/common_scale9_di20.png" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{d7259aa7-2b32-422b-b4b6-e79666156e7a}" AbsContentSize="740,392" UseAbsSize="True" RelativePosition="0.5,0.495" AnchorPoint="0.5,0.5" Name="" Visible="True">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{c7b821ce-d904-480e-95e6-119a739929a7}" RelativeSize="1,1" RelativePosition="0.5,1" AnchorPoint="0.5,1" Name="tabReward_WndPvpMatchRank" CellElementHeight="0.25" EnableMoveHorizontal="False" AbsPosition="370,384" VerticalAbsInterval="8" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{f182482f-0249-49c5-861e-2fbce8e4aba2}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0" AnchorPoint="0.5,0" RelativeSize="1,0.11">
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{f001dbcd-4a7b-4757-af39-3d4df3d2046f}" MaxWidth="600" Name="ftxtMyRank_WndPvpMatchRank" AnchorPoint="0,0.5" RelativePosition="0.03,0.5" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{28776099-1a6e-4c0d-8350-3eec22261ed9}" MaxWidth="600" Name="ftxtEndTime_WndPvpMatchRank" AnchorPoint="1,0.5" RelativePosition="0.97,0.5" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{f1853123-03ac-4f63-acfa-0072d5a292ec}" AbsContentSize="100,210" UseAbsSize="True" RelativePosition="0.891042,0.77" AnchorPoint="0,1">
+                <WZUIContainer Type="WZUIContainer" GUID="{ff8e2fb0-4ffc-4dbe-be21-103c2bf33496}" AbsContentSize="100,70" UseAbsSize="True" RelativePosition="0.49,0.833333" Name="conCheck1_WndPvpMatchRank" Visible="True">
+                    <WZUIImage Type="WZUIImage" GUID="{dba3e1a4-dfa3-4c24-9482-b629d2481d2d}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{11ba5e39-94b7-4a19-8626-d614ccac1892}" LabelStyleKey="LABEL_SEL" TextKey="RANK_SEGMENT_REWARD" Scale="0.8" RelativePosition="0.51,0.5" Name="txtCheck3_WndPvpMatchRank" Dimensions="0,0" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{a46579bf-2af9-40c7-965d-68e0178766ed}" RelativePosition="0.49,0.485714" AbsContentSize="100,70" UseAbsSize="True" Name="conCheck2_WndPvpMatchRank" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{945c88b7-0fed-43a7-903f-73188c1dd7ac}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{bda7f7bf-948e-430a-9532-d8511c0fb31f}" LabelStyleKey="LABEL_SEL" TextKey="ATH_DESC_10" Scale="0.8" RelativePosition="0.51,0.5" Name="txtCheck4_WndPvpMatchRank" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndPvpMatchRank>

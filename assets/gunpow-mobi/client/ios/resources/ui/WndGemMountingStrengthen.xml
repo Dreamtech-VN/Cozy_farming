@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" ?>
+<WndGemMountingStrengthen GUID="{00F0F245-EAEA-4931-BA42-7199698C996E}">
+    <WZUIWindow AbsContentSize="366,432" GUID="{E0C4EF5E-5D24-4a40-950D-6BAEE18F80BC}" LuaObjectName="WndGemMountingStrengthen" Name="WndGemMountingStrengthen" NameCreate="True" Scale="1" ShowAll="False" Type="WZUIWindow" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <WZUIContainer AbsContentSize="600,300" AnchorPoint="0.5,1" GUID="{5F1200F6-1ECD-4bb1-914B-A7AA8E03F846}" Name="conTop_WndGemMountingStrengthen" Order="1" RelativePosition="0.5,0.62" ShowAll="False" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="False" Visible="True" RelativeSize="1,0.6">
+            <WZUIImage Type="WZUIImage" GUID="{2fefee7c-8142-400d-b03e-685c9245fbbb}" File="ui/strengthen/common_scale9_dz1.png" UseOriginSize="True" RelativePosition="0.5,0.77" ScaleX="2" AnchorPoint="1,0.5" />
+            <WZUIImage Type="WZUIImage" GUID="{556f423b-0954-4369-a63f-a06211a3c528}" File="ui/strengthen/common_scale9_dz1.png" UseOriginSize="True" RelativePosition="0.5,0.77" ScaleX="2" AnchorPoint="0,0.5" />
+            <WZUIImage Type="WZUIImage" GUID="{9198965f-42a1-4a32-94f6-6ce1939fee52}" File="ui/strengthen/common_scale9_dz1.png" UseOriginSize="True" RelativePosition="0.5,0.542593" ScaleX="2" Rotation="90" />
+            <WZUIContainer AbsContentSize="100,100" AbsPosition="0,0" AnchorPoint="0.5,1" GUID="{bdca5d68-4318-43e2-996e-eea88c8e306b}" Name="conAttackAttr_WndGemmountingStrengthen" RelativePosition="0.1,0.94" Type="WZUIContainer" UseAbsSize="True" RelativeSize="1,1" Visible="True" Scale="0.9" ScaleX="0.9" ScaleY="0.9">
+                <WZUIContainer AbsContentSize="100,100" GUID="{6550c384-8841-41a0-aa40-b6e79a369c7a}" Type="WZUIContainer" UseAbsSize="False" Name="conCellBg1_WndGemMountingStrengthen" Visible="True">
+                    <WZUI9Image File="ui/strengthen/common_scale9duzaodi.png" GUID="{06d6fe06-0a8a-4d79-8379-3b3b051bcff1}" Name="img9AttackBg_WndGemMountingStrengthen" Type="WZUI9Image" Visible="True" UseOriginSize="True" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="60,60" AnchorPoint="0.5,0.5" GUID="{d1fbcf82-cd51-4b35-8b6f-7860b06c6253}" Name="conAttackStone_WndGemMountingStrengthen" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Order="5" Visible="True">
+                    <WZUIImage AnchorPoint="0.5,0.5" File="ui/common/common_icon_cwjh.png" GUID="{43c5d5aa-636f-406f-b5cf-d6c4e5dc1cd2}" Name="imgAddAttack_WndGemmountingStrengthen" Order="1" RelativePosition="0.5,0.5" Scale="0.7" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" AbsPosition="30,30" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{d39cf9c9-97b9-4403-abd8-449d47d15ea4}" Name="conAttackStoneNode__WndGemMountingStrengthen" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="186,70" AnchorPoint="0.5,1" GUID="{ffe61a50-81ca-4817-8e0f-ad73fdcf1cd9}" RelativePosition="0.5,0" Type="WZUIContainer" UseAbsSize="True" RelativeSize="0.4,1" TouchEnable="True" Name="conStoneInfo1_WndGemMountingStrengthen" Order="5" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{26ff842c-4be2-49e3-bffb-edec4dc15983}">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{bb5b5197-49d4-4005-a367-aefb2c170ff1}" FontSize="20" Name="txtTypeName1_WndGemMountingStrengthen" Text="攻击宝石" Color="255,236,193" RelativePosition="0.5,0.45" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1a890cce-98bd-451b-8aa1-b2125d53156b}" FontSize="20" Name="txtNoSetting1_WndGemMountingStrengthen" Text="未镶嵌" Color="255,89,74" RelativePosition="0.5,0.770259" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{65199610-8293-4503-9f0d-1526196a50d9}" FontSize="20" Name="txtAttackName_WndGemMountingStrengthen" Text="攻击宝石" Color="0,0,255" RelativePosition="0.5,0.68" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8e16b441-4f01-40ea-b4c4-daebcd21dfda}" FontSize="20" Name="txtAttackAdd_WndGemMountingStrengthen" Text="攻击+0" Color="255,255,255" RelativePosition="0.5,0.36" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{26edcfee-2cc7-4c8a-a611-25f7d71367b6}" Name="txtAttackTips_WndGemMountingStrengthen" FontSize="20" Text="点击添加" RelativePosition="0.5,0.5" Visible="False" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{694fcd12-603f-4f5a-9e0b-6c2a4641b30c}" RelativePosition="0.5,1.12" Name="conAttack">
+                            <WZUIImage Type="WZUIImage" GUID="{79061de4-41a8-456f-a99c-b23aa0b07d12}" File="ui/common/common_icon_biaochou.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{fc799ccf-a655-4d10-b34e-a8e5f8c710c5}" File="ui/combat/common_icon_zhandoubuff.png" UseOriginSize="True" RelativePosition="0.5,0.45" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ecd17f4b-e927-4ecd-a7ac-913295b79cde}" Name="txtAttackLevel_WndGemMountingStrengthen" Text="10" Color="255,236,193" FontSize="20" RelativePosition="0.5,0.45" BoldFont="True" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <Button Type="WZUIButton" Tag="-2" LuaDoneFunctionName="onAttackStoneCellClick" GUID="{99cd39e3-b7a6-4104-9bf8-e0d91739f107}" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{9a2c7616-e2c3-4904-8b10-c4a21567f324}">
+                        <WZUI9Image File="" GUID="{fa762534-a2c9-4ad9-8ec5-9088aa94e160}" Name="img9AttackBg_WndGemMountingStrengthen" Type="WZUI9Image" Visible="True" Order="-1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{da71b6f0-faca-4e22-adfa-3d713b1d2835}">
+                        <WZUI9Image File="" GUID="{cb3c31c7-c8d8-4364-857c-d4f986edfa72}" Name="img9AttackBg_WndGemMountingStrengthen" Type="WZUI9Image" Visible="True" Scale="0.95" Order="-1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{3a5a018c-2e0e-4269-8522-e53522596e52}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="100,100" AnchorPoint="0.5,1" GUID="{459ade5a-71fe-4282-a132-7315b6ee47de}" Name="conDefenseAttr_WndGemmountingStrengthen" RelativePosition="0.9,0.94" Type="WZUIContainer" UseAbsSize="True" RelativeSize="1,1" Scale="0.9">
+                <WZUIContainer AbsContentSize="297,110" GUID="{6c2670d4-276a-4ae3-9431-4c2b4f183be2}" Type="WZUIContainer" UseAbsSize="False" Name="conCellBg2_WndGemMountingStrengthen" Visible="True">
+                    <WZUI9Image File="ui/strengthen/common_scale9duzaodi.png" GUID="{3b539f55-0aa6-4e68-a5c0-1b25a4698769}" Name="img9DefenseBg_WndGemMountingStrengthen" Type="WZUI9Image" UseOriginSize="True" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="60,60" AnchorPoint="0.5,0.5" GUID="{12f8c9c2-621f-471f-bec5-a2523314d744}" Name="conDefenseStone_WndGemMountingStrengthen" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Order="5" Visible="True">
+                    <WZUIImage AnchorPoint="0.5,0.5" File="ui/common/common_icon_cwjh.png" GUID="{2739def5-287d-422b-b903-65cf31f69db8}" Name="imgAddDefense_WndGemmountingStrengthen" Order="1" RelativePosition="0.5,0.5" Scale="0.7" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{204db8cc-4e03-43bf-8275-a1190346b651}" Name="conDefenseStoneNode__WndGemMountingStrengthen" Order="5" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="186,70" AnchorPoint="0.5,1" GUID="{a508b60b-5678-4007-b3c8-2bcf03f6f6c7}" RelativePosition="0.5,0" Type="WZUIContainer" UseAbsSize="True" Name="conStoneInfo2_WndGemMountingStrengthen" Order="5">
+                    <WZUIContainer Type="WZUIContainer" GUID="{fb5c0ff4-a46d-4ab7-8e05-946bed977a25}">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{0bef4acc-ba23-477c-8156-d37bb9182b43}" FontSize="20" Name="txtTypeName2_WndGemMountingStrengthen" Text="防御宝石" Color="255,236,193" RelativePosition="0.5,0.45" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f202d94a-abe4-459f-be53-029e84f52d16}" FontSize="20" Name="txtNoSetting2_WndGemMountingStrengthen" Text="未镶嵌" Color="255,89,74" RelativePosition="0.5,0.770259" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{dcf2451a-6b99-4936-8539-2eb47d8fe5b4}" FontSize="20" Name="txtDefenseName_WndGemMountingStrengthen" Text="10级防御宝石" Color="0,0,255" RelativePosition="0.5,0.68" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a932ba29-9de1-4dfc-85af-1d28ab3074cd}" FontSize="20" Name="txtDefenseAdd_WndGemMountingStrengthen" Text="防御+0" Color="255,255,255" RelativePosition="0.5,0.36" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6bdfdfbb-3038-42c9-aca0-c5934d967a66}" Name="txtDefenseTips_WndGemMountingStrengthen" FontSize="20" Text="点击添加" RelativePosition="0.5,0.5" Visible="False" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{393ea223-0af9-4fab-b55f-e49ea24dbb35}" RelativePosition="0.5,1.12" Name="conDefense">
+                            <WZUIImage Type="WZUIImage" GUID="{74de5be8-3604-4a82-933f-0f0f354f7d3f}" File="ui/common/common_icon_biaochou.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{e616e7b0-731d-4e6e-9c43-06dded0aef48}" File="ui/combat/common_icon_zhandoubuff.png" UseOriginSize="True" RelativePosition="0.5,0.45" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3bda7ae2-40c5-42ef-8301-29be5c5926cc}" Name="txtDefenseLevel_WndGemMountingStrengthen" Text="10" Color="255,236,193" FontSize="20" RelativePosition="0.5,0.45" BoldFont="True" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <Button Type="WZUIButton" Tag="-2" LuaDoneFunctionName="onDefenseStoneCellClick" GUID="{3c32aca8-dff0-4d9f-af63-6e4ed717e0e6}" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{d54c7b55-e749-4d4a-b1c5-c4f2156ea5bb}">
+                        <WZUI9Image File="" GUID="{98480140-1db1-4b0a-8a82-8c24b98f6b74}" Name="img9AttackBg_WndGemMountingStrengthen" Type="WZUI9Image" Visible="True" Order="-1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{70fb66fc-e4a2-45e4-8cc0-171f52d3b1ce}">
+                        <WZUI9Image File="" GUID="{40f1c26c-f781-40a9-a0f6-fb908fcbdcf0}" Name="img9AttackBg_WndGemMountingStrengthen" Type="WZUI9Image" Visible="True" Scale="0.95" Order="-1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{6ae14f0d-861e-45aa-9947-9c382bc786c7}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="100,100" AnchorPoint="0.5,0" GUID="{b3655db7-5a82-40fb-9c43-db11249a8221}" Name="conSpecialAttr_WndGemmountingStrengthen" RelativePosition="0.5,0.065" Type="WZUIContainer" UseAbsSize="True" RelativeSize="1,0.33" Scale="0.9">
+                <WZUIContainer AbsContentSize="297,110" GUID="{9381258c-6a21-495a-b825-f8257635ed7e}" Type="WZUIContainer" UseAbsSize="False" Name="conCellBg2_WndGemMountingStrengthen" Visible="True">
+                    <WZUI9Image File="ui/strengthen/common_scale9duzaodi.png" GUID="{067be085-ea00-472b-93e9-3b8d847c8b45}" Name="img9SpecialBg_WndGemMountingStrengthen" Type="WZUI9Image" UseOriginSize="True" Visible="True" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="60,60" AnchorPoint="0.5,0.5" GUID="{aac812f4-6900-4d39-ab4d-29af5eb9c5b7}" Name="conSpecialStone_WndGemmountingStrengthen" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True" Order="5">
+                    <WZUIImage AnchorPoint="0.5,0.5" File="ui/common/common_icon_cwjh.png" GUID="{da4df15b-0570-49f6-a506-554c0237347e}" Name="imgAddSpecial_WndGemmountingStrengthen" Order="1" RelativePosition="0.5,0.5" Scale="0.7" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{016bf7ea-e2cc-4aff-8e3b-0c43494b3297}" Name="conSpecialStoneNode__WndGemMountingStrengthen" Order="5" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="186,70" AnchorPoint="0.5,1" GUID="{e07da478-571f-4ad8-b4c0-a3464bb1955c}" RelativePosition="0.5,0" Type="WZUIContainer" UseAbsSize="True" Order="5">
+                    <WZUIContainer Type="WZUIContainer" GUID="{05ba230b-ba6c-4abd-bd25-c4a85d56215c}">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4b1489c1-e08b-4736-824a-34726ff00ea1}" FontSize="20" Name="txtTypeName3_WndGemMountingStrengthen" Text="HP_Stone" Color="255,236,193" RelativePosition="0.5,0.45" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{15d8ddf1-811b-42a9-aabe-0d37be1db4a4}" FontSize="20" Name="txtNoSetting3_WndGemMountingStrengthen" Text="NoSetting" Color="255,89,74" RelativePosition="0.5,0.770259" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{9dbfafd4-84d8-4ca1-b058-f410101ef7c9}" FontSize="20" Name="txtLifeName_WndGemMountingStrengthen" Text="HP_Stone" Color="0,0,255" RelativePosition="0.5,0.68" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f4ff007e-98a3-4fc5-8b1f-325851cf43b2}" FontSize="20" Name="txtLifeAdd_WndGemMountingStrengthen" Text="HP+0" Color="255,255,255" RelativePosition="0.5,0.36" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c9208a32-33f7-4d77-9dad-49ec2a7634f0}" Name="txtLifeTips_WndGemMountingStrengthen" FontSize="20" Text="点击添加" RelativePosition="0.5,0.5" Visible="False" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{78022f8b-fbf3-4a97-b2e5-ea59575c6ba4}" RelativePosition="0.5,1.12" Name="conLift">
+                            <WZUIImage Type="WZUIImage" GUID="{34281490-7024-46fe-9262-6dc4ac025400}" File="ui/common/common_icon_biaochou.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{3d5c98a2-1480-422d-b14c-3959a93e3665}" File="ui/combat/common_icon_zhandoubuff.png" UseOriginSize="True" RelativePosition="0.5,0.45" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2d8f80ae-d764-41ff-9793-bb1a758ae0e1}" Name="txtLiftLevel_WndGemMountingStrengthen" Text="10" Color="255,236,193" FontSize="20" RelativePosition="0.5,0.45" BoldFont="True" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <Button Type="WZUIButton" Tag="-2" LuaDoneFunctionName="onLifeStoneCellClick" GUID="{916e2dfa-61df-442e-9ff8-bef919bc728a}" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{ad3be9f9-a5db-401f-86dc-25a93aa68ebd}">
+                        <WZUI9Image File="" GUID="{da53d281-7576-44fa-ae7a-3a120916b1c8}" Name="img9AttackBg_WndGemMountingStrengthen" Type="WZUI9Image" Visible="True" Order="-1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{8fd14675-32ac-43f1-a5bb-278ac5ae4980}">
+                        <WZUI9Image File="" GUID="{62a0a1e3-b494-4218-b903-5a6b67de40d5}" Name="img9AttackBg_WndGemMountingStrengthen" Type="WZUI9Image" Visible="True" Scale="0.95" Order="-1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{5ea04375-019b-4d12-b6b8-e2212bc3f459}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="100,100" AbsPosition="0,0" AnchorPoint="0.5,1" GUID="{b8a5a01f-981b-4257-b8bf-2998078e5801}" Name="conMainAttr_WndGemmountingStrengthen" RelativePosition="0.5,0.94" Type="WZUIContainer" UseAbsSize="True" RelativeSize="1,1" Visible="True" Scale="0.9" ScaleX="0.9" ScaleY="0.9">
+                <WZUIContainer AbsContentSize="100,100" GUID="{b8bfac16-3d12-44e0-8153-017e8aa3c8af}" Type="WZUIContainer" UseAbsSize="False" Name="" Visible="True">
+                    <WZUI9Image File="ui/strengthen/common_scale9duzaodi.png" GUID="{775d305b-e121-490f-beca-294a5c1ec038}" Name="img9EBg_WndGemMountingStrengthen" Type="WZUI9Image" Visible="True" UseOriginSize="True" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="60,60" AnchorPoint="0.5,0.5" GUID="{7db98954-19d7-4efc-a74f-a71eda285526}" Name="conExtremeStone_WndGemmountingStrengthen" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Order="5" Visible="True">
+                    <WZUIImage AnchorPoint="0.5,0.5" File="ui/common/common_icon_cwjh.png" GUID="{123aabd2-4d0c-4904-8764-546877516ae3}" Name="imgAddExtreme_WndGemmountingStrengthen" Order="1" RelativePosition="0.5,0.5" Scale="0.7" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" AbsPosition="30,30" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="186,70" AnchorPoint="0.5,1" GUID="{2814ffe6-6beb-4ae3-bbcf-2d37e57526ef}" RelativePosition="0.5,0" Type="WZUIContainer" UseAbsSize="True" RelativeSize="0.4,1" TouchEnable="True" Name="" Order="5" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{3daa9204-51a9-4bdf-b500-4823c098202c}">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{25c4ff6c-b6c8-457a-9059-1ff824e8db86}" FontSize="20" Name="txtTypeName4_WndGemMountingStrengthen" Text="攻击宝石" Color="255,236,193" RelativePosition="0.5,0.45" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8993647b-0540-43c3-bb3a-3ba03721be25}" FontSize="20" Name="txtNoSetting4_WndGemMountingStrengthen" Text="未镶嵌" Color="255,89,74" RelativePosition="0.5,0.770259" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{173191de-4837-445f-8f1f-fad1440525cc}" FontSize="20" Name="txtExtremeName_WndGemMountingStrengthen" Text="攻击宝石" Color="0,0,255" RelativePosition="0.5,0.68" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{45d6f85c-4e65-4041-837b-561f0e1082ea}" FontSize="20" Name="txtExtremeAdd_WndGemMountingStrengthen" Text="攻击+0" Color="255,255,255" RelativePosition="0.5,0.36" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b05256b9-e7bb-4517-87cb-55f8f3b25215}" Name="txtExtremeTips_WndGemMountingStrengthen" FontSize="20" Text="点击添加" RelativePosition="0.5,0.5" Visible="False" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{7af78c45-f30e-4b17-812b-65c63b28610c}" RelativePosition="0.5,1.12" Name="conExtreme" Visible="True">
+                            <WZUIImage Type="WZUIImage" GUID="{8ea88b68-8580-4f14-83e7-1d5da6ae6e46}" File="ui/common/common_icon_biaochou.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{bb29b58b-8310-4e91-a59b-e1d0439c7b94}" File="ui/combat/common_icon_zhandoubuff.png" UseOriginSize="True" RelativePosition="0.5,0.45" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{e80199bc-1b65-46d4-93be-cfcd02492bf6}" Name="txtExtremeLevel_WndGemMountingStrengthen" Text="10" Color="255,236,193" FontSize="20" RelativePosition="0.5,0.45" BoldFont="True" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <Button Type="WZUIButton" Tag="-2" LuaDoneFunctionName="onAttackStoneCellClick" GUID="{00cc03bd-13cd-4bd3-beb3-050ad63b2e43}" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{3ec61de2-a3c3-4a82-a63b-fd93a94779ff}">
+                        <WZUI9Image File="" GUID="{ce84f1b8-da55-450b-8bd9-ebf68a1347db}" Name="" Type="WZUI9Image" Visible="True" Order="-1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{5c1b2841-fe92-43a1-8e77-0e77c7d31b97}">
+                        <WZUI9Image File="" GUID="{5762eed6-a983-41df-9301-846851964566}" Name="" Type="WZUI9Image" Visible="True" Scale="0.95" Order="-1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{588b387c-2487-428a-a51e-884b3a5e6713}" />
+                </Button>
+            </WZUIContainer>
+            <WZUISpine Type="WZUISpine" GUID="{28ac0d9a-ad4d-4be5-8d36-3394eb37406d}" FileAtlas="ui/UI_gongming.atlas" FileJson="ui/UI_gongming.json" AnimationName="gongming" Loop="True" RelativePosition="0.5,0.768536" Name="gongming1" Visible="False" />
+            <WZUISpine Type="WZUISpine" GUID="{7c9b05d7-7060-49c4-99a2-9a17b1843ee0}" FileAtlas="ui/UI_gongming_chuanshu.atlas" FileJson="ui/UI_gongming_chuanshu.json" AnimationName="chuanshu" Loop="True" RelativePosition="0.492591,0.566263" Name="chuanshu0" Visible="False" Rotation="90" />
+            <WZUISpine Type="WZUISpine" GUID="{66c984b0-e861-4273-9199-d3fcb58b5135}" FileAtlas="ui/UI_gongming_chuanshu.atlas" FileJson="ui/UI_gongming_chuanshu.json" AnimationName="chuanshu" Loop="True" RelativePosition="0.33,0.77" Name="chuanshu1" Visible="False" Rotation="180" />
+            <WZUISpine Type="WZUISpine" GUID="{3f36d6e0-af01-4920-8564-7e11bed825e2}" FileAtlas="ui/UI_gongming_chuanshu.atlas" FileJson="ui/UI_gongming_chuanshu.json" AnimationName="chuanshu" Loop="True" RelativePosition="0.67,0.77" Name="chuanshu2" Visible="False" />
+        </WZUIContainer>
+        <WZArmature AnchorPoint="0.5,0.5" ArmatureName="skills_dz_xq_01" GUID="{3EC29FC5-DAA3-45f3-A763-71D7AC705A8C}" Name="armature_WndIntensifyStrengthen" RelativePosition="0.505,0.79" Scale="0.9" Type="WZArmature" UseOriginSize="True" Visible="True" ArmatureFile="ui/skills_dz_xq_01.xml" TouchEnable="False">
+            <Action AnimationId="0" AnimationScale="1" GUID="{83617C16-CC99-459b-A683-860E94F22FE5}" IsLoop="False" Type="WZUIArmatureAnimationById" />
+        </WZArmature>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6B1F788F-8B65-4585-BE12-909AEEB2A705}" Color="255,227,116" FontSize="26" BoldFont="True" RelativePosition="0.3,0.93" TextKey="FIGHTADD" Text="" Name="fireTitle" Visible="True" />
+        <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{CB04DD86-DAD2-4136-AF62-4CFA08912213}" Name="fire_WndGem" CharMapFileName="ui/common_num/common_num_zhandouli.png" Height="26" Width="16" Text="0" RelativePosition="0.51,0.93" Alignment="Left" AnchorPoint="0,0.5" UseOriginSize="True" Visible="True" />
+    </WZUIWindow>
+</WndGemMountingStrengthen>

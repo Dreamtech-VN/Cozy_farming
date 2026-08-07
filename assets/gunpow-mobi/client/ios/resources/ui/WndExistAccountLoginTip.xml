@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?><WndExistAccountLoginTip GUID="{7388746C-6D9C-442a-B857-4C785B0729D3}">
+    <WZUIWindow GUID="{6D5DE6ED-51CC-4c93-A4AF-B85B99DC4AB1}" LuaObjectName="WndExistAccountLoginTip" Name="WndExistAccountLoginTip" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIWindow">
+        <WZUIContainer AbsContentSize="540,360" GUID="{EC187895-32FD-46da-9B2C-C97317B7C3A9}" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIContainer AbsContentSize="510,300" GUID="{DF00D494-C002-4e1c-B17A-9BBFDF4C32AB}" RelativePosition="0.500173,0.448659" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/Jigsaw/3.png" GUID="{CDF5270C-A382-4ed6-9A7B-A063F56B9AED}" Name="imgBg1_WndAccountInfo" RelativePosition="0.5,0.5" Scale="2.6" ScaleX="1" ScaleY="1" Type="WZUI9Image" UseOriginSize="False"/>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="520,85" GUID="{D4C3E981-D231-4d40-9368-2D765AEA9791}" RelativePosition="0.505377,0.921373" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image CapInsets="100,30,600,15" File="common/Jigsaw/5.png" GUID="{9EB95F79-58E9-4ba3-894B-36DB4977138A}" Name="imgBg2_WndAccountInfo" RelativePosition="0.5,0.5" Scale="1" ScaleX="0.7" Type="WZUI9Image" UseAbsCoordinate="False" UseOriginSize="False" UseOriginSizeProportion="False"/>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="510,43" GUID="{3E768679-B2AF-4cad-85FD-6904C5E03913}" RelativePosition="0.5,0.00671616" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image AbsPosition="" File="common/Jigsaw/60.png" GUID="{DC0B4CA9-3A57-4356-AB97-17EC03EA6E82}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image"/>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIButton AbsContentSize="140,50" GUID="{D6D468D4-8F66-4a91-94AA-A2585CBDFB2C}" LuaDoneFunctionName="onRegisterAgain" RelativePosition="0.383863,0.333957" RelativeSize="1,1" Type="WZUIButton" UseAbsSize="True">
+            <NormalElement AbsContentSize="140,50" GUID="{35F01B4D-D959-4c36-8418-0DB35FE10411}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/button/button_1.png" GUID="{D5FF4F05-5456-4014-8754-3AAADACE7334}" Type="WZUI9Image" UseOriginSize="False"/>
+            </NormalElement>
+            <SelectElement AbsContentSize="140,50" GUID="{3125AA2D-1037-4409-A6F6-82503365059D}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/button/button_1_sel.png" GUID="{EA22428B-CBF3-408b-BB57-064FFEFE7935}" Type="WZUI9Image" UseOriginSize="False"/>
+            </SelectElement>
+            <DisableElement AbsContentSize="140,50" GUID="{154A8977-0337-4fdb-8735-2864F4144317}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/button/button_4.png" GUID="{0570399B-2965-4961-8F95-F0DAE0DF6EE2}" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False"/>
+            </DisableElement>
+        </WZUIButton>
+        <WZUIButton AbsContentSize="140,50" GUID="{AD55ED72-6F13-4537-9BB7-D31807200E66}" LuaDoneFunctionName="onLoginAgain" RelativePosition="0.616226,0.333957" Type="WZUIButton" UseAbsSize="True">
+            <NormalElement AbsContentSize="140,50" GUID="{628A3596-950E-4c14-85B8-D8894FD079AA}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/button/button_1.png" GUID="{E80A4E5D-4A63-4f8d-894D-59D1989F2266}" Type="WZUI9Image" UseOriginSize="False"/>
+            </NormalElement>
+            <SelectElement AbsContentSize="140,50" GUID="{35CD4B13-70C1-4800-85FE-CC396321D29E}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/button/button_1_sel.png" GUID="{1593DA95-71BC-41e5-8A66-ACAC9ED9B04C}" Type="WZUI9Image" UseOriginSize="False"/>
+            </SelectElement>
+            <DisableElement AbsContentSize="140,50" GUID="{9A7A678E-659A-434f-9A46-4C9A77D135B5}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/button/button_4.png" GUID="{A9FBC3FD-0376-447a-8EFB-D6FF5048580F}" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False"/>
+            </DisableElement>
+        </WZUIButton>
+        <WZUILabelTTF Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{7A57576D-CBAF-434b-A8D9-2232CDF09749}" Name="txtRegisterAgain_WndExistAccountLoginTip" RelativePosition="0.383863,0.333957" StrokeColor="0,24,47" StrokeSize="4" Text="" Type="WZUILabelTTF"/>
+        <WZUILabelTTF Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{03D8B85E-A496-4477-B0B5-A2761FAA0291}" Name="txtLoginAgain_WndExistAccountLoginTip" RelativePosition="0.616226,0.333957" StrokeColor="0,24,47" StrokeSize="4" Type="WZUILabelTTF"/>
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="0,0,0" Dimensions="400,0" FontSize="32" GUID="{BD1DCAE5-8DDD-4257-A3E9-CE1D1D15E934}" Name="txtTip_WndExistAccountLoginTip" RelativePosition="0.5,0.54" Text="" Type="WZUILabelTTF"/>
+    </WZUIWindow>
+</WndExistAccountLoginTip>

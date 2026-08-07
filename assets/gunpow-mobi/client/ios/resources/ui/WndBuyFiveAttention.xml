@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" ?>
+<WndBuyFiveAttention GUID="{F0FCBFA8-E73E-4bbb-A483-1AC1A344A829}">
+    <WZUIWindow AbsContentSize="420,320" GUID="{588258BF-58E7-42bd-B48E-739B771E1EB2}" LuaObjectName="WndBuyFiveAttention" Name="WndBuyFiveAttention" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" Visible="True" ShowAll="True" RelativePosition="0.5,0.52" AbsPosition="480,320">
+        <WZUIContainer Type="WZUIContainer" GUID="{855BB6EB-9255-4835-94FE-455A8234C5F8}" AbsContentSize="420,320" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image File="ui/common/common_scale9_di28.png" GUID="{BC86564B-493D-4b0f-8910-9EB62880A84D}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Visible="True" CapInsets="0,0,0,0" Opacity="255" />
+            <WZUIContainer Type="WZUIContainer" GUID="{D3CE5CFB-A028-4236-9C9D-B01BDEE29F66}" AbsContentSize="300,135" UseAbsSize="True" RelativePosition="0.5,0.56">
+                <WZUI9Image Type="WZUI9Image" GUID="{C1517339-E23E-41d5-804E-E916EBCFE2B7}" File="ui/common/common_scale9_di29.png" RelativePosition="0.5,0.5" Opacity="255" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{AD08E5B0-64A9-404b-8234-3582BB12960A}" Name="txtTitle_WndBuyFiveAttention" RelativePosition="0.5,0.85122" FontSize="24" Color="255,227,116" />
+            <WZUIContainer Type="WZUIContainer" GUID="{88761BE1-2F23-4eb9-A7C3-4D06A2910E08}" AbsContentSize="300,130" UseAbsSize="True" RelativePosition="0.5,0.56" Name="conInfo_WndBuyFiveAttention">
+                <WZUIFreeTextBox GUID="{054DB92F-45DA-46f5-B2D6-981DC5BC1F23}" MaxWidth="290" Name="freetxtContent_WndBuyFiveAttention" RelativePosition="0.1,0.73" Type="WZUIFreeTextBox" Visible="True" AnchorPoint="0,0.5" />
+                <WZUILabelTTF ChineseLengthPolicy="1" Color="255,236,193" Dimensions="0,0" FontSize="20" GUID="{B1072981-3971-456d-8A4C-A70F4330CFFB}" MaxLength="" Name="txtCostWord_WndBuyFiveAttention" RelativePosition="0.1,0.5" Text="" Type="WZUILabelTTF" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{F352517E-2DC9-419f-9546-69C7C96FC072}" RelativePosition="0.65,0.5" Name="txtCostNum_WndBuyFiveAttention" FontSize="20" Color="255,236,193" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{A44D0F33-6ACB-4202-88C7-18F026761A59}" RelativePosition="0.1,0.27" Name="txtGetWord_WndBuyFiveAttention" FontSize="20" Color="255,236,193" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1F753700-0175-4aa3-87FD-EA2BA45F76E8}" RelativePosition="0.65,0.27" Name="txtGetNum_WndBuyFiveAttention" FontSize="20" Color="255,236,193" AnchorPoint="0,0.5" Text="" />
+                <WZUIImage Type="WZUIImage" GUID="{A722A934-CE6D-42f8-90E6-06FF8046D481}" File="" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="0.8" Name="imgCostIcon_WndBuyFiveAttention" />
+                <WZUIImage Type="WZUIImage" GUID="{DC2CA798-E4E3-4cfb-848A-9B54394C5774}" UseOriginSize="True" File="ui/common/common_icon_jinbi.png" RelativePosition="0.5,0.27" Scale="0.8" Name="imgGaainIcon_WndBuyFiveAttention" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{e40cb28d-94e6-425e-85d8-68cd88d9f2e1}" AbsContentSize="300,40" UseAbsSize="True" RelativePosition="0.5,0.416" Name="conForAtt_WndBuyFiveAttention" Visible="False">
+                <WZUICheckBox Type="WZUICheckBox" GUID="{6e8a4322-6b3f-4af3-aa43-12616b0c7ccd}" AbsContentSize="40,40" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.09,0.5" SelectedIndex="0" LuaCheckedFunctionName="onCheckBox" Name="checkBox_WndBuyFiveAttention">
+                    <CheckElement Type="WZUIContainer" GUID="{6281e6cf-6972-45fa-a11c-c3d9f317f419}" AbsContentSize="35,35" UseAbsSize="True">
+                        <WZUIImage Type="WZUIImage" GUID="{597eb352-1b88-4256-a518-566864da1429}" File="ui/common/common_scale9_di18.png" Opacity="100" />
+                        <WZUIImage Type="WZUIImage" GUID="{1d037885-0fb0-45be-a010-7558dfeefcb2}" File="ui/common/common_scale9_wbbsxz.png" UseOriginSize="True" GrayRender="True" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{81de40cd-4b44-4bb0-afe9-d7935e973f80}" AbsContentSize="35,35" UseAbsSize="True">
+                        <WZUIImage Type="WZUIImage" GUID="{7323d00a-8c85-463b-8680-4da40a343a76}" File="ui/common/common_scale9_di18.png" Opacity="100" />
+                        <WZUIImage Type="WZUIImage" GUID="{d722c36d-59d7-456a-b2fd-902996c3210d}" File="ui/common/common_scale9_wbbsxz.png" UseOriginSize="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{4fe1ddca-ff0a-4083-95a1-710a1263184b}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.614286,0.5" />
+                    </CheckElement>
+                </WZUICheckBox>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b7ca8dd0-a6df-443a-8c22-1ddde13a0a2b}" FontSize="20" Color="138,122,106" Text="" AnchorPoint="0,0.5" RelativePosition="0.23,0.5" TextKey="NOT_ATTENTION_THISTIME" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{b9d729d1-0a11-4111-a6ac-a86730754b7a}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.66,0.85" Name="imgArrow2_WndBuyFiveAttention" />
+            <WZUIImage Type="WZUIImage" GUID="{abf949ce-e555-4f7d-92e7-8aff288c4407}" File="ui/common/common_pic_jiantou4.png" FlipY="False" FlipX="True" UseOriginSize="True" RelativePosition="0.33,0.85" Name="imgArrow1_WndBuyFiveAttention" />
+        </WZUIContainer>
+        <WZUIContainer GUID="{D7B7FC88-7288-424e-BD4D-76C9C84E8854}" RelativePosition="0.5,0.198125" RelativeSize="1,1" Type="WZUIContainer" AbsContentSize="370,52" UseAbsSize="True" AbsPosition="225,63.4">
+            <WZUIButton AbsContentSize="116,56" GUID="{96263191-89C1-4240-A735-841BDDCF6677}" LuaDoneFunctionName="onClickCancel" LuaPushFunctionName="" RelativePosition="0.28,0.5" Type="WZUIButton" UseAbsSize="True" Name="btnCancel_WndBuyFiveAttention" LuaActionName="Normal">
+                <NormalElement GUID="{161F598F-3C09-4e0e-9F5B-A7DD5382DE96}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{7C999B30-4D09-4513-AF71-172BA1BA0976}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{03FF016F-E48F-42b1-83C2-86499151E779}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{A173D080-B725-47c4-8B6E-D8DE09AC437D}" File="ui/common/common_btn_anniu3_0_sel.png" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{87E4A3D3-9BC3-4b95-9E9B-049A1A6F15CE}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{CCE549D8-7F5B-4232-85B4-79B30ECA769D}" File="ui/common/common_btn_anniu3_0.png" GrayRender="True" RelativePosition="0.5,0.5" UseOriginSize="True" />
+                </DisableElement>
+                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{FE371D6F-B804-4aec-BD13-88EC5C136DBF}" Name="txtCancel_WndBuyFiveAttention" RelativePosition="0.5,0.5" ShadowColor="0,255,0" StrokeColor="128,54,13" StrokeOffset="0,0" StrokeSize="4" Text="返回" Type="WZUILabelTTF" Visible="True" TextKey="BACK" LabelStyleKey="SMALL_ORANGE_BTN" />
+            </WZUIButton>
+            <WZUIButton AbsContentSize="116,56" GUID="{B46925A6-51BA-4bea-9C18-C0CE787982F0}" LuaDoneFunctionName="onClickConfirm" LuaPushFunctionName="" RelativePosition="0.72,0.5" Type="WZUIButton" UseAbsSize="True" TouchEnable="True" Name="btnConfirm_WndBuyFiveAttention" LuaActionName="Normal">
+                <NormalElement GUID="{9E9AB8A1-8070-494e-AB52-8BE9C3AB66C9}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{AE8FCED9-F2E1-4ef4-B533-93D4BF61EBEA}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{DCA3C2B2-004B-44da-B2F7-3A330055A499}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0_sel.png" GUID="{12B05B8D-2FC1-4d8b-A4FF-AE7F8E00581E}" Type="WZUI9Image" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{E6BCC892-210F-410f-A620-3A5661C6E654}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{74BB2AD0-B986-4508-8208-BDCA5C230247}" Type="WZUI9Image" GrayRender="True" RelativePosition="0.5,0.5" UseOriginSize="True" />
+                </DisableElement>
+                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{861FDA48-DE82-446a-862D-D55F353D08E2}" Name="txtConfirm_WndBuyFiveAttention" RelativePosition="0.5,0.5" ShadowColor="0,255,0" StrokeColor="3,111,8" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" TextKey="CONFIRM" LabelStyleKey="SMALL_GREEN_BTN" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndBuyFiveAttention>

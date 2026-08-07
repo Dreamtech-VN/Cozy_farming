@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<CellShopSel GUID="{0EBF7797-75A0-4224-BC02-1F720466DB12}">
+    <WZUIContainer AbsContentSize="106,56" GUID="{DF8F2E27-C178-4c60-8590-9227FA5E1540}" LuaObjectName="CellShopSel" Name="CellShopSel" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUICheckBox Type="WZUICheckBox" GUID="{20CFD3DF-3A5F-4bbb-800D-5E6C22E5464F}" NameCreate="True" Name="checkSel_CellShopSel" LuaSelectedFunctionName="" LuaCheckedFunctionName="OnCheckSel">
+            <CheckElement Type="WZUIContainer" GUID="{A2C44082-3BFB-40b1-9BA0-7B259B8D4D9A}">
+                <WZUIImage Type="WZUIImage" GUID="{B46F2091-E42E-4861-8FCB-52DDB5ADC347}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" />
+            </CheckElement>
+            <CheckElement Type="WZUIContainer" GUID="{B8A6A540-01C7-4a25-8C5B-4928D70AFA9E}">
+                <WZUIImage Type="WZUIImage" GUID="{FF9CE329-B11A-49b3-B9CC-B8D3DB24D888}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" />
+            </CheckElement>
+        </WZUICheckBox>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{F2F04576-6548-4161-97D9-F0E1E575CB5B}" NameCreate="True" Name="txtSel_CellShopSel" FontSize="25" Color="255,255,255" />
+    </WZUIContainer>
+</CellShopSel>

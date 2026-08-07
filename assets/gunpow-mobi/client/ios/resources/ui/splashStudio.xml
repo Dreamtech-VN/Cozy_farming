@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<splashStudio GUID="{5C6AAFF7-F187-4f9b-BE52-9E09A8E6367E}">
+    <WZUIFrame GUID="{90392709-E1D2-474c-B80B-ED11D3055700}" LuaObjectName="splashStudio" LuaTouchBeganFunction="onTouchBegan" Name="splashStudio" NameCreate="True" Type="WZUIFrame" Visible="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{556BF4D3-82BA-4b6a-B9C8-F4CA358CB3E4}">
+            <WZUIImage Type="WZUIImage" GUID="{D049AB37-0CD8-45df-B9B8-DA1351CF2F2A}" File="ui/login/login_pic_bg1.png" NoBorder="True" Name="imgSplashStudio_splashStudio" />
+            <Action Type="WZUIActionDelayTime" GUID="{332D4EBF-D8D0-4975-9F4A-9D6BA935A339}" Duration="1" FinishLuaFunction="onFinish" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{03E0E820-7011-4738-A503-6D91E93AD43E}" Name="conAni_splashStudio" Visible="True" NoBorder="False" ShowAll="True" FinishLuaFunction="" />
+    </WZUIFrame>
+</splashStudio>

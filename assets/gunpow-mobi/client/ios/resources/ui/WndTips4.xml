@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" ?>
+<WndTips GUID="{8C45C903-3CF2-496e-BBEA-CF7B24CD31D6}">
+    <WZUIWindow AbsContentSize="300,100" AbsPosition="0,0" AnchorPoint="1.02,0.1" GUID="{C24457FE-D70C-46b1-A798-149F747905D4}" LuaObjectName="WndTips4" Name="WndTips4" NameCreate="True" RelativePosition="0.65,0.5" RelativeSize="1,1" ShowAll="False" TouchContainerEnable="True" TouchEnable="True" TouchSwallow="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="True" Visible="True" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{94D9A16B-52EB-4311-ADD9-BF1CAED22182}" AbsContentSize="262,312" UseAbsSize="True" Name="conType4_WndTips" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{255458F7-52FA-479d-8EC8-95E74A58DCC1}" File="ui/common/common_scale9_di24.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{0CE73354-8B3D-47d1-9A36-09D07B0A40A4}">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{54BEE92A-9A7E-4caf-A076-81A5158883F9}" FontSize="20" Color="233,166,62" Text="青铜1段" BoldFont="True" RelativePosition="0.4,0.88" Name="ttf1Type4_WndTips" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="96.8,274.952" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{187E4DB2-4447-482b-A8C2-F3356471C1C4}" FontSize="20" Color="255,89,78" Text="1000战1000胜" RelativePosition="0.35,0.64" Name="ttf2Type4_WndTips" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="69.4674,201.589" />
+                <WZUIImage Type="WZUIImage" GUID="{85FA197B-AC20-47f8-BFAF-266642938596}" File="ui/common/common_icon_hz3.png" UseOriginSize="True" RelativePosition="0.176,0.846" Scale="1" Name="imgHeadType4_WndTips" ScaleX="1" ScaleY="1" AbsPosition="42.592,263.892" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{63260874-62DC-40c6-BFD6-6C2A9A447BB2}" CharMapFileName="ui/common_num/common_num_ghdj.png" Text="1" Height="24" UseOriginSize="True" Name="lvType4_WndTips" NameCreate="True" RelativePosition="0.175,0.846" Width="16" AbsPosition="44.044,261.952" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{A0E4E190-D25A-45d8-81C3-EF04D3F22897}" FontSize="20" Color="255,227,116" Text="" BoldFont="True" RelativePosition="0.11,0.64" Name="ttf3Type4_WndTips" AbsPosition="40.4274,201.089" TextKey="RANK_KING_DESC5" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{2B2FBAC1-8516-4a34-9071-CB52E2039933}" FontSize="20" Color="255,227,116" Text="" BoldFont="True" RelativePosition="0.11,0.55" Name="ttf4Type4_WndTips" AbsPosition="51.3729,177.104" TextKey="RANK_KING_DESC3" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7910498C-3DA9-4c4c-9E16-37A2B0253767}" FontSize="20" Color="255,89,78" Text="1000战1000胜" RelativePosition="0.35,0.55" Name="ttf5Type4_WndTips" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="82.4396,176.657" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{A74C1235-1911-4c1a-B08F-0F7D0B81A825}" FontSize="20" Color="233,166,62" Text="积分:6666" BoldFont="True" RelativePosition="0.4,0.805" Name="ttf6Type4_WndTips" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="96.8,250.952" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{38FFD716-07F7-4a85-AB50-7F5E25087786}">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{DC357EEC-B384-4bc1-9B53-F10A02F12014}" FontSize="20" Color="233,166,62" Text="" BoldFont="True" RelativePosition="0.1,0.39" Name="label0Type4_WndTips" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="23.1552,124.432" TextKey="RANK_KING_DESC6">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{31bf1017-6000-4ec8-9e0c-5de1c16a326d}" FontSize="20" Color="255,89,74" Text="" BoldFont="False" RelativePosition="1,0.5" Name="txtFighting_WndTips4" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="23.1552,124.432" TextKey="" Visible="False" />
+                </WZUILabelTTF>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{20E20317-9BF4-44b0-A91B-32EF0217A428}" FontSize="20" Color="255,227,116" Text="攻击" BoldFont="True" RelativePosition="0.2,0.29" Name="label1Type4_WndTips" AbsPosition="48.3999,89.4736" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{D308B32D-C94C-4fdf-B3F4-67E24E802BCE}" FontSize="20" Color="99,255,95" Text="+500" RelativePosition="0.355,0.29" Name="label2Type4_WndTips" BoldFont="True" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="85.9038,87.4468" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{A599F82C-3C37-43cc-A0EA-1EC2A79CD38D}" FontSize="20" Color="255,227,116" Text="防御" BoldFont="True" RelativePosition="0.2,0.2" Name="label3Type4_WndTips" AbsPosition="48.4917,60.3513" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0FF32D07-EDBF-4ba8-B96F-C84DBB1EE07E}" FontSize="20" Color="99,255,95" Text="+500" RelativePosition="0.355,0.2" Name="label4Type4_WndTips" BoldFont="True" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="89.0118,59.3378" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{600241B0-EFFC-415e-8F4A-19F6F1DAFAA0}" FontSize="20" Color="255,227,116" Text="血量" BoldFont="True" RelativePosition="0.2,0.11" Name="label5Type4_WndTips" AbsPosition="49.3459,33.2558" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{D60E70B3-FCC5-4fff-9ED9-C5E2AA4AC8C5}" FontSize="20" Color="99,255,95" Text="+10000" RelativePosition="0.355,0.11" Name="label6Type4_WndTips" BoldFont="True" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="90.0928,34.2693" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{6CF1E983-AC4D-4f7d-966D-11EFF7F99C39}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.72" ScaleX="1.5" Scale="1.1" AbsPosition="121,222.4" ScaleY="1" />
+            <WZUIImage Type="WZUIImage" GUID="{0DF96BBA-7328-499d-B8F3-5ABC75159FD3}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.47" ScaleX="1.5" Scale="1.1" AbsPosition="121,222.4" ScaleY="1" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTips>

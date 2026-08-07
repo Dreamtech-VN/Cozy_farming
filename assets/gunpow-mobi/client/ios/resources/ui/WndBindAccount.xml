@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<WndBindAccount GUID="{8E889781-83B8-4b77-BFAA-8736D81E6D5E}">
+    <WZUIWindow Type="WZUIWindow" GUID="{3E1186CB-F577-43c0-925D-4339A163BBEC}" Name="WndBindAccount" NameCreate="True" LuaObjectName="WndBindAccount" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.501562" ShowAll="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{5354DA7A-5004-4419-BB3D-0268560A487A}" AbsContentSize="530,580" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True" ShowAll="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{0404211B-7DEF-4908-BC3A-454E983493B8}" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{76ACCD8D-24E8-436a-B801-8D2DD6077DB9}" File="ui/common/common_scale9_di19.png" CapInsets="100,80,1,1" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{7BFA3B1F-3FCA-4c2d-9BE4-3892C8495307}" RelativeSize="0.98,0.59" RelativePosition="0.5,0.451724">
+                    <WZUI9Image Type="WZUI9Image" GUID="{12E12C4D-53C7-4a55-8EC5-17FF9843C31E}" File="ui/common/common_scale9_di20.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{3CA2A12E-E5B6-4ecd-9F5C-9E383A32BA5A}" RelativeSize="1,0.1" AnchorPoint="0.5,1" RelativePosition="0.5,0.993103">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{F9F12B64-C141-4659-BEF7-81FC23AAB2B1}" LabelStyleKey="SMALL_WINDOW_TITLE" TextKey="ACCOUNT_BD" />
+                    <Button Type="WZUIButton" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.926415,0.5" LuaDoneFunctionName="OnReturn" GUID="{77C0C79D-EA09-483f-974E-E1FB5ED111EA}">
+                        <NormalElement Type="WZUIContainer" GUID="{F77E116B-CBB7-4f11-875F-1FC5D612FAFB}">
+                            <WZUIImage Type="WZUIImage" GUID="{A82093B6-AEA8-409c-B6E0-9C0D8A25FD77}" File="ui/common/common_icon_guanbi.png" Visible="True" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{D40E1128-3775-4722-A146-84CC7728803C}">
+                            <WZUIImage Type="WZUIImage" GUID="{F41493DB-BA3B-4b8a-9918-CB8061E11D48}" File="ui/common/common_icon_guanbi_sel.png" Visible="True" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{36A104E4-3048-4e12-97E5-6F196C18D1ED}" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{3A333AAF-FB6E-4fbf-806C-7EF6ABAF415D}" RelativeSize="0.86,0.1" RelativePosition="0.5,0.818966">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{AB73B481-3FC2-4996-9883-4F967321F5E5}" AnchorPoint="0,0.5" Alignment="Left" Color="79,60,48" RelativePosition="0,0.5" TextKey="ACCOUNT_BD_DESC" FontSize="22" Dimensions="460,0" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{FD3A64E6-DCA4-4070-A58E-0DBBD2B7BBF7}" RelativeSize="0.98,0.59" RelativePosition="0.490566,0.744696" Visible="True" Name="" NameCreate="True" AbsContentSize="" UseAbsSize="False" ShowAll="False" AnchorPoint="0.5,1">
+                <WZUIContainer Type="WZUIContainer" GUID="{9CD5CCC3-BFEA-44cc-8324-21CB079D41EF}" RelativeSize="1,0.33" AnchorPoint="0.5,1" RelativePosition="0.46,0.96" AbsContentSize="380,75" UseAbsSize="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{6025CCB3-F16F-44ac-905F-8A3DE68F53AE}" RelativeSize="1,0.7" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{90177731-8FEE-4bfe-8E6D-1B6B9B9B2EEF}" TextKey="WND_EXISTACCOUNT_ACCOUNT" FontSize="26" Color="128,54,13" RelativePosition="0.25,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="False" StrokeColor="128,54,13" StrokeSize="4" Name="txt4_WndBindAccount" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{21F09242-5850-4e0f-9564-5980DB5322BB}" AbsContentSize="260,50" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                            <WZUI9Image Type="WZUI9Image" GUID="{5BC4984E-0338-4ce8-B01C-205A14B79576}" File="ui/common/common_scale9_di8.png" Opacity="200" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{0D081D54-5766-4a0d-8936-69A1D539441D}" RelativeSize="0.94,1">
+                                <WZUIEditBox Type="WZUIEditBox" GUID="{A5F94A92-0D7B-4f22-8381-A270CEE09A6B}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editRegistAccount_WndBindAccount" FontSize="24" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontColor="255,255,255" MaxLength="16" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{61A29C63-80DA-416c-A0D3-0A9FA6889CB6}" RelativeSize="0.7,0.3" AnchorPoint="1,0" RelativePosition="1,0">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{E65C610F-D681-4157-8B50-2257DB59DACD}" Color="79,60,48" FontSize="18" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0,0.5" TextKey="LOGIN_TIPS_ACCOUNT" Name="txt1_WndBindAccount" Dimensions="0,0" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{0A28FAE3-B6D0-4945-B906-F15E85752602}" RelativeSize="1,0.33" AnchorPoint="0.5,1" RelativePosition="0.46,0.72" AbsContentSize="380,75" UseAbsSize="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{6FAB2C13-AB70-4ad5-B267-B0C1573B2186}" RelativeSize="1,0.7" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{F9FBF540-DA75-4f9d-9052-75E3E86A3EDD}" TextKey="ROOM_PASSWORD" FontSize="26" Color="128,54,13" RelativePosition="0.25,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="False" StrokeColor="128,54,13" StrokeSize="4" Name="txt3_WndBindAccount" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{36492660-796A-408e-A035-C12328CF54AA}" AbsContentSize="260,50" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                            <WZUI9Image Type="WZUI9Image" GUID="{B2AFB9E5-EB40-42f3-A54B-03AF4C983C28}" File="ui/common/common_scale9_di8.png" Opacity="200" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{1A0A0E81-8734-411b-8679-4F6979861C52}" RelativeSize="0.94,1">
+                                <WZUIEditBox Type="WZUIEditBox" GUID="{4263F49E-40BD-435f-A7C4-D176C10D993E}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editRegistPass_WndBindAccount" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="24" FontColor="255,255,255" InputFlag="FlagPassword" MaxLength="12" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{1971CDFA-3DAD-49b2-A238-561B5941558D}" RelativeSize="0.7,0.3" AnchorPoint="1,0" RelativePosition="1,0">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{DB620143-F181-4086-A8AB-D0D97A095E11}" Color="79,60,48" FontSize="18" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0,0.5" TextKey="LOGIN_TIPS_PASSWORD" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{05B2C3BF-6D2B-4e92-A750-C6FE45CF0A30}" RelativeSize="1,0.33" AnchorPoint="0.5,1" RelativePosition="0.46,0.48" AbsContentSize="380,75" UseAbsSize="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{153688F4-11DF-4478-913F-9E9EE3F451AB}" RelativeSize="1,0.7" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{BF27FCA4-26D0-4d5a-9558-1B70B8E8D794}" TextKey="LOGIN_PASSWORD_SURE" FontSize="26" Color="128,54,13" RelativePosition="0.25,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="False" StrokeColor="128,54,13" StrokeSize="4" Name="txt2_WndBindAccount" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{DCEECFAD-AC52-4b1b-ADC8-9E9C4FE0D47A}" AbsContentSize="260,50" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                            <WZUI9Image Type="WZUI9Image" GUID="{0833032F-EC39-44db-8610-143ED9E6E39E}" File="ui/common/common_scale9_di8.png" Opacity="200" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{95AB8305-30F8-4e11-ACE7-3A5B8E88C0B0}" RelativeSize="0.94,1">
+                                <WZUIEditBox Type="WZUIEditBox" GUID="{248353B4-3CD7-4e2a-82EF-07B4E1555020}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editRegistPassSure_WndBindAccount" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="24" FontColor="255,255,255" InputFlag="FlagPassword" MaxLength="12" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{947F59EF-E088-4f01-AC38-3428D620A7CB}" RelativeSize="0.7,0.3" AnchorPoint="1,0" RelativePosition="1,0">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{A3377892-54AC-4732-A817-45E51CD8ADBC}" Color="79,60,48" FontSize="18" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0,0.5" TextKey="LOGIN_TIPS_PASSWORD1" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{CA28662B-A526-4fea-9FC3-1454F1BDC2C4}" RelativeSize="1,0.25" AnchorPoint="0.5,0" RelativePosition="0.46,0.036353" Visible="True" AbsContentSize="380,75" UseAbsSize="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{D4DADA44-0FB8-405e-B830-8791D2A2547C}" RelativePosition="0.5,1" AnchorPoint="0.5,1" RelativeSize="1,0.7">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{F0A98930-B262-4ca3-9E76-A4F04616B3E2}" TextKey="LOGIN_MAIL" FontSize="26" Color="128,54,13" RelativePosition="0.25,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="False" StrokeColor="128,54,13" StrokeSize="4" Name="txt6_WndBindAccount" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{57B85BCF-B140-41fd-9314-EF97C20F5C37}" AbsContentSize="260,50" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                            <WZUI9Image Type="WZUI9Image" GUID="{E609D981-451C-4c52-A4C8-AA02B943262A}" File="ui/common/common_scale9_di8.png" Opacity="200" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{E8798B05-61C5-454d-B4E3-A6E163B75D44}" RelativeSize="0.94,1">
+                                <WZUIEditBox Type="WZUIEditBox" GUID="{944276B3-8BA2-4945-BB8E-AA59BE8B5EEA}" BgPicture="ui/common/transparent_bg.png" Text="1" Name="editRegistMail_WndBindAccount" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="24" FontColor="255,255,255" MaxLength="22" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{5A77E334-C1CB-4c17-BF94-A621A5A8E4E9}" RelativeSize="0.7,0.3" AnchorPoint="1,0" RelativePosition="1,0">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{D5813CF3-9EBA-4f05-A606-9002C3A18073}" Color="79,60,48" FontSize="18" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0,0.5" TextKey="TIP_INPUT_MAIL" Name="txt7_WndBindAccount" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{3C6C7D23-28AB-47bc-AEB0-F188AE90E225}" RelativeSize="0.7,0.15" RelativePosition="0.5,0.00862069" AnchorPoint="0.5,0">
+                <WZUIButton Type="WZUIButton" RelativeSize="0.36,0.7" RelativePosition="0.5,0.5" GUID="{0146A25F-0827-45d2-83C6-AC6C362248CD}" LuaDoneFunctionName="OnBD">
+                    <NormalElement Type="WZUIContainer" GUID="{09BE74A5-5000-4225-A3D4-094552B45A4B}">
+                        <WZUIImage Type="WZUIImage" GUID="{1D4841F1-9B14-49ba-927A-8EC9F1A87F1E}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{2405BEF4-A553-421d-B136-B1CD1DE44718}">
+                        <WZUIImage Type="WZUIImage" GUID="{66CC7776-35BF-4b4c-A130-C7FB72293E34}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{050756C7-1606-44cf-A993-8E79C3203500}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{C3233100-48F3-49ec-A342-7A7CC85E72B2}" FontSize="22" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="ACCOUNT_BD1" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndBindAccount>

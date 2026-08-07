@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CellGradePanel GUID="{53ABF03C-0491-4765-A865-E8DA692D6200}">
+    <WZUIContainer AbsContentSize="620,520" GUID="{25AE4D90-0CDD-45d7-9631-7C2DAB22E396}" LuaObjectName="CellGradePanel" Name="CellGradePanel" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="569,230" GUID="{18E0CCB5-F9D0-42d9-A389-42D2E20CE285}" RelativePosition="0.5,0.77" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIImage File="ui/event/event_wenzi03.png" GUID="{0D1B6568-3290-47f3-BBDB-D4A3A9AEDA8C}" Type="WZUIImage" UseOriginSize="True" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="580,230" GUID="{473D8D43-A147-4b92-B9D5-525D1C1AC93D}" Name="con_forPosition_GradePanel" RelativePosition="0.5,0.24" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIContainer GUID="{CB9D0D7A-B072-4bcc-931D-C7640C5BCC1F}" Type="WZUIContainer">
+                <WZUI9Image File="common/Jigsaw/n_04.png" GUID="{7077CDC2-E923-491f-AA72-A311A694BF57}" Type="WZUI9Image" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="580,230" GUID="{CA22577D-439D-4718-A925-DDBA4070A5ED}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIFreeListContainer AbsContentSize="560,210" EnableMoveVertical="False" GUID="{55FEB294-A249-4cc1-A974-14F9DAACF7CF}" ListOrient="Horizontal" Name="confl_listview_gradepanel" Type="WZUIFreeListContainer" UseAbsSize="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{A7CD7F88-5097-456c-B0A8-6F1C28CF7A33}" Type="WZUIContainer">
+            <WZUILabelTTF AnchorPoint="1,0.5" Color="0,255,0" FontSize="30" GUID="{9439EE8E-C018-4b9b-8037-29184F250C28}" Name="txt_time_key" RelativePosition="0.285,0.5" Text="" Type="WZUILabelTTF" />
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="0,255,0" FontSize="30" GUID="{CE8C74FA-6511-4929-B252-7B9EA3533C2C}" Name="txt_time_value" RelativePosition="0.3,0.5" Text="" Type="WZUILabelTTF" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="400,130" GUID="{6F424AA8-FB00-4db1-8FBC-52CEE5210133}" RelativePosition="0.35,0.66" RelativeSize="1,1" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+            <WZUIScrollContainer AbsContentSize="400,130" AbsPosition="0.5,0" EnableMoveHorizontal="False" EnableMoveoutContainer="True" EnableVerticalScroll="True" GUID="{0F37D511-61B4-4f62-A9DD-0D4FEF38684E}" Name="rollcon_CellGradePanel" RelativePosition="0.5,0.5" ScrollPictureDown="common/Jigsaw/rolling_03.png" ScrollPictureMid="common/Jigsaw/rolling_01.png" ScrollPictureTop="common/Jigsaw/rolling_02.png" Type="WZUIScrollContainer" UseAbsSize="True">
+                <MoveElement GUID="{E0938224-02A1-4183-BA7F-2E1DA2CFDCA2}" Type="WZUIContainer">
+                    <WZUIFreeTextBox AnchorPoint="0,0" GUID="{252989CA-6F81-4233-BEDC-F2F496E92DE4}" MaxWidth="400" Name="txtcontext_CellGradePanel" RelativePosition="0,0" Type="WZUIFreeTextBox" />
+                </MoveElement>
+            </WZUIScrollContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellGradePanel>

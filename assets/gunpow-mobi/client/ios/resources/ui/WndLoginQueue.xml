@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<WndLoginQueue GUID="{855EDBC3-6955-4f4f-B860-33490784CD29}">
+	<WZUIWindow AbsContentSize="402,300" GUID="{0859103B-FA29-4d77-8058-E9385528734C}" LuaObjectName="WndLoginQueue" Name="WndLoginQueue" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" Visible="True" ShowAll="True" RelativePosition="0.537314,0.621012" Order="30000" AbsPosition="481,320">
+		<WZUIContainer Type="WZUIContainer" GUID="{6DE542A0-CA81-4870-8E67-7EEAC47DE1EA}" RelativePosition="0.5,0.5" AbsPosition="216,186.304">
+			<WZUI9Image File="ui/common/common_scale9_di19.png" GUID="{01F0F73E-05F6-456e-B676-BF55334C1DFC}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Visible="True" CapInsets="50,80,1,1" />
+			<WZUIContainer Type="WZUIContainer" GUID="{4E748211-CFF8-4f13-91E4-3EA1692950AC}" RelativeSize="1,0.2" RelativePosition="0.5,0.99" AbsPosition="201,297" AnchorPoint="0.5,1">
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{ED3681C6-98BA-4e4e-9BE7-2E86059FCC18}" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeColor="62,34,8" StrokeSize="4" TextKey="LOGIN_QUEUE" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{60A631BE-AF9E-46b7-B167-391BF8A7DE87}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.546667" AbsPosition="201,164" RelativeSize="1,0.5">
+				<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{AAD951F2-0857-41a3-A942-D3B42F076B53}" Name="ftb1_WndLoginQueue" MaxWidth="400" ShowText="" RelativePosition="0.12,0.8" AbsPosition="201,120" AnchorPoint="0,0.5" />
+				<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{BA46E18E-A8C0-40ec-860A-57A29F0B2D9C}" Name="ftb2_WndLoginQueue" MaxWidth="400" ShowText="" AnchorPoint="0,0.5" RelativePosition="0.12,0.5" />
+				<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{D4B2397A-85F0-4b70-879C-038EAD638198}" Name="ftb3_WndLoginQueue" MaxWidth="400" ShowText="" RelativePosition="0.12,0.2" AbsPosition="201,30" AnchorPoint="0,0.5" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{ADA05A0F-ABF3-414d-848B-4955DAB6FB15}" RelativeSize="1,1" AbsContentSize="350,2" UseAbsSize="True" RelativePosition="0.5,0.32" AbsPosition="201,96">
+				<WZUIImage Type="WZUIImage" GUID="{B29F7C94-1613-4a49-B373-3718EA7E5634}" File="ui/common/common_scale9_fengexian.png" />
+			</WZUIContainer>
+			<WZUIButton AbsContentSize="130,66" GUID="{32198FCB-8891-4b53-B3FB-3B188A8C77D3}" LuaDoneFunctionName="onExitQueue" LuaPushFunctionName="" RelativePosition="0.5,0.17" Type="WZUIButton" UseAbsSize="True" Name="" LuaActionName="Normal" AbsPosition="201,51">
+				<NormalElement GUID="{12859F26-2D65-467d-B7C8-96E910D56CE7}" TouchContainerEnable="True" Type="WZUIContainer">
+					<WZUI9Image Type="WZUI9Image" GUID="{AD990AE1-291A-40af-933D-931829C4C56E}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+				</NormalElement>
+				<SelectElement GUID="{B94E5F1E-AE0C-453b-9D12-FD1A7A8A1E2C}" TouchContainerEnable="True" Type="WZUIContainer">
+					<WZUI9Image Type="WZUI9Image" GUID="{EF99BA78-E4B2-48df-B608-6CFBBDDD11F8}" File="ui/common/common_btn_anniu10_sel.png" Scale="1" UseOriginSize="True" />
+				</SelectElement>
+				<DisableElement GUID="{47521CE6-E062-4cf5-BFFF-8FE617A775C9}" TouchContainerEnable="True" Type="WZUIContainer">
+					<WZUI9Image Type="WZUI9Image" GUID="{93A00D2F-529A-4db9-9A60-58B93997F34F}" File="ui/common/common_btn_anniu10.png" GrayRender="True" RelativePosition="0.5,0.5" UseOriginSize="True" />
+				</DisableElement>
+				<WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{4103FE1D-A625-45a9-8D3F-66319D952F84}" Name="" RelativePosition="0.5,0.5" ShadowColor="0,255,0" StrokeColor="128,54,13" StrokeOffset="0,0" StrokeSize="4" Text="返回" Type="WZUILabelTTF" Visible="True" TextKey="LOGIN_EXIT_QUEUE" LabelStyleKey="SMALL_GREEN_BTN" />
+			</WZUIButton>
+		</WZUIContainer>
+	</WZUIWindow>
+</WndLoginQueue>

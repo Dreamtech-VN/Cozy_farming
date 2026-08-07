@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<CellLoginServer GUID="{1E1EE72C-208B-4bb0-BF83-2A5F78623152}">
+    <WZUIContainer AbsContentSize="260,58" GUID="{204847CD-3CD8-4e93-A6B6-38012FA18CE0}" LuaObjectName="" Name="CellLoginServer" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <WZUIContainer AnchorPoint="0.5,0.5" GUID="{D0E1A5B8-E7C4-4ec4-AD85-6073704343CB}" RelativePosition="0.5,0.5" Type="WZUIContainer" TouchEnable="False" AbsPosition="448.039,221.314">
+            <WZUI9Image Type="WZUI9Image" GUID="{F2519B4F-824F-4c18-8374-2CCE4E68BA22}" File="ui/common/common_scale9_di56.png" RelativePosition="0.5,0.5" AbsPosition="" UseOriginSize="False" Visible="True" Name="" />
+            <WZUI9Image Type="WZUI9Image" GUID="{88B8D86F-4F3B-4171-8FA2-5615EB469028}" Name="imgSel_CellLoginServer" File="ui/common/common_scale9_di56_sel.png" Visible="False" ScaleX="1.02" Scale="1.02" />
+            <WZUIImage Type="WZUIImage" GUID="{F01A8C78-A7BF-46b1-9171-9161259148E1}" Name="imgState_CellLoginServer" File="ui/common/common_icon_xfhb.png" UseOriginSize="True" RelativePosition="0.108183,0.5" AbsPosition="27.5867,27" />
+            <WZUILabelTTF AnchorPoint="1,0.5" Color="255,255,255" FontSize="24" GUID="{CA3CE742-F53A-4c92-8FEF-44C0BEED0011}" Name="txtId_CellLoginServer" RelativePosition="0.299586,0.5" Text="222" Type="WZUILabelTTF" NameCreate="True" Alignment="Right" EnableStroke="False" StrokeColor="62,34,8" StrokeSize="4" AbsPosition="76.3945,27" Visible="False" />
+            <WZUILabelTTF AnchorPoint="1,0.5" Color="255,255,255" FontSize="24" GUID="{661B2659-E217-4824-9533-596F3A575874}" Name="" RelativePosition="0.410073,0.5" Text="111区" Type="WZUILabelTTF" NameCreate="True" Alignment="Right" EnableStroke="False" StrokeColor="62,34,8" StrokeSize="4" AbsPosition="104.569,27" TextKey="SETTING_SERVER_AREA" Visible="False" />
+            <WZUILabelTTF AnchorPoint="0.5,0.5" Color="255,255,255" FontSize="24" GUID="{2CCC1934-8420-40fd-B3E2-D20F4F63EA1E}" Name="txtName_CellLoginServer" RelativePosition="0.5,0.5" Text="最多五个" Type="WZUILabelTTF" NameCreate="True" Alignment="Center" StrokeColor="62,34,8" StrokeSize="4" EnableStroke="False" AbsPosition="109.619,27" />
+            <WZUILabelTTF AnchorPoint="1,0.5" Color="62,34,8" FontSize="24" GUID="{15D3EEA6-D6BB-47fd-ACB7-75408F559F09}" Name="txtState_CellLoginServer" RelativePosition="0.936739,0.488636" Text="满人" Type="WZUILabelTTF" NameCreate="True" Alignment="Right" StrokeColor="62,34,8" StrokeSize="4" EnableStroke="False" AbsPosition="301.63,43" Visible="False" />
+            <WZUIImage Type="WZUIImage" GUID="{C55C9BAF-28C4-4410-BA72-F00199B90734}" Name="imgTips_CellLoginServer" File="ui/common/common_icon_hot2.png" UseOriginSize="True" RelativePosition="0.918627,0.5" AbsPosition="234.25,27" />
+        </WZUIContainer>
+        <WZUIButton GUID="{7F0CB0E3-C797-4cbf-884D-E55BF647F303}" LuaDoneFunctionName="onBtnSelectEnter" Type="WZUIButton">
+            <NormalElement GUID="{A55AACFE-B1E0-436a-B9DD-55F4E2FEB8C9}" Type="WZUIContainer" />
+            <SelectElement GUID="{999ACCDC-D343-46ac-9196-5A0F13F1F332}" Type="WZUIContainer" />
+            <DisableElement GUID="{359785E9-BD9B-4fc0-B689-699D24F0DAF5}" Type="WZUIContainer" />
+        </WZUIButton>
+    </WZUIContainer>
+</CellLoginServer>

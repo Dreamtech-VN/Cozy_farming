@@ -1,0 +1,23 @@
+<CellLeagueRewardItem GUID="{581bec7d-18ac-488f-b03f-b4bd2238f405}">
+    <WZUIContainer AbsContentSize="673,98" GUID="{3510dd27-f992-49f0-921f-84d0c48cb9f7}" LuaObjectName="" Name="CellLeagueRewardItem" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <WZUIContainer GUID="{034ba74f-cc13-463c-8bbf-1e8b4cc6fe73}" Type="WZUIContainer" Visible="True" RelativePosition="0.5,0.5">
+            <WZUI9Image File="ui/common/common_scale9_di18.png" GUID="{4c1d8cc0-8c14-4ad9-8fe6-62fb90a42d04}" Type="WZUI9Image" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="" GUID="{29e074b8-c5d8-4cb8-851b-cde132cc948b}" RelativePosition="0,0.5" Type="WZUIContainer" UseAbsSize="False" RelativeSize="0.22,1" AnchorPoint="0,0.5">
+            <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" Color="127,70,26" EnableStroke="False" FontSize="20" GUID="{a8ebfdc3-bd1f-407c-a142-879fd17ad34b}" Name="txtGoal_CellLeagueRewardItem" RelativePosition="0.5,0.5" Text="" Type="WZUILabelTTF" StrokeColor="60,19,12" StrokeSize="3" Dimensions="140,0" LabelStyleKey="C13_F22" />
+            <WZUIImage Type="WZUIImage" GUID="{f090ac6f-5535-4cf6-9ab3-714e41215632}" Name="imgRank_CellLeagueRewardItem" File="ui/common/common_icon_3rd.png" UseOriginSize="True" AnchorPoint="0.5,1" RelativePosition="0.48,1" Visible="False" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="450,100" GUID="{2cc39fcf-c4f0-4bbb-854d-fdce35957504}" RelativePosition="0.2,0.5" Type="WZUIContainer" UseAbsSize="True" RelativeSize="1,1" AnchorPoint="0,0.5">
+            <WZUIContainer AbsContentSize="50,50" GUID="{a2d2fe67-abeb-4e65-8b50-44a727a634c0}" Name="conItem1_CellLeagueRewardItem" RelativePosition="0.12,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0.5" />
+            <WZUIContainer AbsContentSize="50,50" GUID="{56503cda-15c0-4be8-9086-c17af9672971}" Name="conItem2_CellLeagueRewardItem" RelativePosition="0.31,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0.5" />
+            <WZUIContainer AbsContentSize="50,50" GUID="{6f486768-8fda-4acb-9200-4587f863c3db}" Name="conItem3_CellLeagueRewardItem" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0.5" />
+            <WZUIContainer AbsContentSize="50,50" GUID="{9ad1be48-a4c1-4a3c-ab05-e580c455b744}" Name="conItem4_CellLeagueRewardItem" RelativePosition="0.69,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0.5" />
+            <WZUIContainer AbsContentSize="50,50" GUID="{37be91a9-9bec-4e81-9d39-23c248fb6a66}" Name="conItem5_CellLeagueRewardItem" RelativePosition="0.88,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0.5" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{6b48a4eb-d8d8-4ff3-9610-88bdf05feae0}" RelativePosition="1,0.5" AnchorPoint="1,0.5" RelativeSize="0.17,1">
+            <WZUIContainer Type="WZUIContainer" GUID="{e39f0d75-6f45-45a7-9a5d-d6e8a9ee8186}" Name="conNotGet_CellLeagueRewardItem">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{bbcbbb32-30c0-4ce2-8d7b-50393f25fa1f}" Name="txtState_CellLeagueRewardItem" Text="" FontSize="22" Color="0,72,3" LabelStyleKey="" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellLeagueRewardItem>

@@ -1,0 +1,57 @@
+<WndTips25 GUID="{67928812-b615-4699-b925-c2813cb4bb5b}">
+    <WZUIWindow AbsContentSize="372,282" AbsPosition="0,0" AnchorPoint="0.5,0.5" GUID="{0af3c292-d9d7-47f7-97ea-4212855c00de}" LuaObjectName="WndTips25" Name="WndTips25" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" ShowAll="False" TouchContainerEnable="True" TouchEnable="True" TouchSwallow="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="True" Visible="True" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{92dd108b-686e-416c-9838-2713d8e020c4}" AbsContentSize="372,282" UseAbsSize="True" Name="conType25_WndTips" Visible="True" RelativeSize="1,1">
+            <WZUI9Image Type="WZUI9Image" GUID="{1142bb63-9501-481b-8c5c-f6256e078fa2}" File="ui/common/common_scale9_di24.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{f24f2817-2ab8-4b04-bbea-9bf53c7a5591}" AbsContentSize="370,90" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.982">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7e9fa0ca-778d-40bb-a7d4-827d6a5e18c3}" FontSize="22" Color="255,227,116" Text="服务器:" RelativePosition="0.28,0.69" Name="label1Type25_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C11_F20" TextKey="SETTING_SERVE_NAME" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{544b1b6d-5d13-445d-9ac6-5ecc4f198f2b}" FontSize="22" Color="255,227,116" Text="战队ID:" RelativePosition="0.28,0.41" Name="label2Type25_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C11_F20" TextKey="LEAGUE_REPLAY_TEXT1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5b53931f-9a04-4814-b8b1-9ad2b4ffe3ed}" FontSize="22" Color="255,227,116" Text="隔壁老王" RelativePosition="0.5,0.13" Name="label3Type25_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C1_F20" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{83db51d3-7382-40c4-b41f-5ea62e91d2d8}" FontSize="22" Color="255,227,116" Text="阳光海岸" RelativePosition="0.5,0.69" Name="label4Type25_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C1_F20" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{dd111837-ce95-4528-a9dd-f107dacd5111}" FontSize="22" Color="255,227,116" Text="666" RelativePosition="0.5,0.41" Name="label5Type25_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C1_F20" />
+                <WZUIContainer Type="WZUIContainer" GUID="{8907c08f-8ce9-4687-8bf3-e0b8579479d3}" AbsContentSize="64,64" UseAbsSize="True" RelativePosition="0.14,0.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{92e5860f-b42f-4c59-974a-b077ff0f4016}" File="ui/common/common_scale9_beibaodi.png" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{6b543e16-6b09-4889-a003-94f8508f46e3}" File="ui/common/common_scale9_wuse.png" UseOriginSize="False" Order="0" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{15f46fbe-5509-4e51-90a3-e8ac292eb85c}" File="ui/hero/hero_icon_yxlsdb.png" UseOriginSize="True" Scale="0.65" Name="img11_Right4" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5f3cebb4-f460-4e89-8bc8-bed057e4514c}" FontSize="22" Color="255,227,116" Text="战队:" RelativePosition="0.28,0.13" Name="" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C11_F20" TextKey="LEAGUE115" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{41ffdd43-49d6-4d8d-9b7f-a4ef8490e28a}" Name="" AbsContentSize="370,105" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+                <Button Type="WZUIButton" GUID="{19184a61-85b1-41e4-a226-b269cec6e0cd}" AbsContentSize="66,66" UseAbsSize="True" RelativePosition="0.15,0.5" Name="btnHead1Type25_WndTips" Visible="False" LuaDoneFunctionName="onCheckType26" Tag="1">
+                    <WZUIImage Type="WZUIImage" GUID="{b9e1b603-0ba4-472a-afe1-6581ac55d14a}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="1.05" RelativePosition="0.505,0.5" />
+                    <NormalElement Type="WZUIContainer" GUID="{d703a560-6246-47a0-822d-3f574c5edbb9}" TouchContainerEnable="True" />
+                    <SelectElement Type="WZUIContainer" GUID="{20582602-8fcd-4a75-a310-c709330aeef9}" TouchContainerEnable="True" />
+                    <DisableElement Type="WZUIContainer" GUID="{019a6828-4e65-4142-a3f1-3a4e7379dd47}" TouchContainerEnable="True" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{b4555459-1ef8-49a6-a110-5d3cd17638e6}" AbsContentSize="66,66" UseAbsSize="True" RelativePosition="0.38,0.5" Name="btnHead2Type25_WndTips" Visible="False" Tag="2" LuaDoneFunctionName="onCheckType26">
+                    <WZUIImage Type="WZUIImage" GUID="{b30a69a8-aba1-497e-bdad-23fddd053632}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="1.05" RelativePosition="0.505,0.5" />
+                    <NormalElement Type="WZUIContainer" GUID="{f0d3f3c8-370e-4132-9727-09ccc6758316}" TouchContainerEnable="True" />
+                    <SelectElement Type="WZUIContainer" GUID="{95a3781f-c890-4334-9d72-4db2a8a0707f}" TouchContainerEnable="True" />
+                    <DisableElement Type="WZUIContainer" GUID="{7db3bd0e-a897-4a14-bda8-4c006aa752cb}" TouchContainerEnable="True" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{12c0811b-ff97-45f3-bd38-fae082890bda}" AbsContentSize="66,66" UseAbsSize="True" RelativePosition="0.61,0.5" Name="btnHead3Type25_WndTips" Visible="False" Tag="3" LuaDoneFunctionName="onCheckType26">
+                    <WZUIImage Type="WZUIImage" GUID="{481b428d-d1fd-40bf-b082-54a492c81da1}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="1.05" RelativePosition="0.505,0.5" />
+                    <NormalElement Type="WZUIContainer" GUID="{4d25b41d-559c-4629-a4b8-b5f680bdc6b9}" TouchContainerEnable="True" />
+                    <SelectElement Type="WZUIContainer" GUID="{121fcd04-9a59-45b2-858f-a8c5a6d9ab32}" TouchContainerEnable="True" />
+                    <DisableElement Type="WZUIContainer" GUID="{776ccfcd-812f-4af5-a855-e4130cbcac77}" TouchContainerEnable="True" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{1ffe880c-9f42-4f63-bcdf-7a17842899df}" AbsContentSize="66,66" UseAbsSize="True" RelativePosition="0.85,0.5" Name="btnHead4Type25_WndTips" Visible="False" Tag="4" LuaDoneFunctionName="onCheckType26">
+                    <WZUIImage Type="WZUIImage" GUID="{39c6087d-6a8a-4b83-8454-879190411eb0}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="1.05" RelativePosition="0.505,0.5" />
+                    <NormalElement Type="WZUIContainer" GUID="{ad0513e2-a049-46dc-8b15-0e06be9bf025}" TouchContainerEnable="True" />
+                    <SelectElement Type="WZUIContainer" GUID="{5328ae13-0c5b-423a-be59-56a3c478a5ed}" TouchContainerEnable="True" />
+                    <DisableElement Type="WZUIContainer" GUID="{258364ff-64c7-404e-8786-3598785c898d}" TouchContainerEnable="True" />
+                </Button>
+                <WZUIContainer Type="WZUIContainer" GUID="{eefe0454-1da4-4102-b17f-1316b3fe6c94}" Name="conHead1Type25_WndTips" UseAbsSize="True" AbsContentSize="66,66" RelativePosition="0.15,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{b87b49cb-ae74-4129-8d07-57e6dec356e0}" Name="conHead2Type25_WndTips" UseAbsSize="True" AbsContentSize="66,66" RelativePosition="0.38,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{5aecd553-ee4b-4f81-89e6-adf06a9d3c72}" Name="conHead3Type25_WndTips" UseAbsSize="True" AbsContentSize="66,66" RelativePosition="0.61,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{e27a2f1f-233a-47b5-a735-1254123f3ea7}" Name="conHead4Type25_WndTips" UseAbsSize="True" AbsContentSize="66,66" RelativePosition="0.85,0.5" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3f6dcc44-bcb9-4824-b482-79c1e153d691}" Text="一二三四五六七八九十一二三四五六七八九十" LabelStyleKey="C1_F20" Dimensions="340,0" Alignment="Left" AnchorPoint="0,1" RelativePosition="0.055,0.53" Name="label6Type25_WndTips" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{91ea2184-7abd-42d0-a757-fb5641962f38}" FontSize="22" Color="255,227,116" Text="战队宣言:" RelativePosition="0.0556,0.59" Name="" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C11_F20" TextKey="LEAGUE37" />
+            <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{f81c34d9-5520-4001-af4d-0b377328edd9}" TouchEnable="False" RelativePosition="0.142076,0.821924" AnchorPoint="0.5,0.5" Visible="True" AbsContentSize="60,60" UseAbsSize="True" Order="1">
+                <Stencil Type="WZUIImage" GUID="{d31d8813-8fe6-4723-8c89-5fbd0ee936ac}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" Scale="0.9" RelativePosition="0.5,0.5" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{4704dccf-e6c3-4163-b414-b0a1da2da33c}" AbsContentSize="56,56" UseAbsSize="True" RelativePosition="0.5,0.5" Name="conHeadType25" />
+            </WZUIClippingContainer>
+            <WZUIImage Type="WZUIImage" GUID="{02a7f8bc-9c5a-4fc0-928b-0c669010e42f}" File="ui/common/common_icon_mvp.png" UseOriginSize="True" RelativePosition="0.22,0.26" Name="imgMvpType25" TouchEnable="False" TouchSwallow="False" Visible="False" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTips25>

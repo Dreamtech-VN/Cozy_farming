@@ -1,0 +1,88 @@
+﻿<WndPhantomChest GUID="{5be47a42-b9ec-433e-a989-cca3c0dc785c}">
+    <WZUIWindow Type="WZUIWindow" GUID="{efcec4dd-4b6e-482a-8813-2748f8cf8bbe}" LuaObjectName="WndPhantomChest" Name="WndPhantomChest" LuaTouchBeganFunction="onTouchBegan" TouchContainerEnable="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{c4212946-55bd-4225-aa00-c3820fd97a68}" Name="conTop_WndPhantomChest" Tag="118" Visible="True">
+            <WZUIImage Type="WZUIImage" GUID="{681787af-d6f8-44bf-88ce-59fe78c89426}" File="ui/bless/common_pic_qfbj.png" TouchEnable="False" Visible="True" isValid="True" />
+            <WZUI9Image Type="WZUI9Image" GUID="{e4c6ab9d-c507-4976-93b8-ba0f28498b98}" File="ui/common/common_scale9_zhezhao1.png" Opacity="153" TouchEnable="False" Visible="True" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{affc4786-2361-4540-8dc2-4b54b5783062}" AbsContentSize="" UseAbsSize="False" Name="conMiddle_WndPhantomChest" Visible="True" RelativePosition="0.5,0.489062" ShowAll="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{c1b931aa-ddf8-49bb-b593-f35c34d30d71}" AbsContentSize="960,474" UseAbsSize="True" RelativePosition="0.5,0.472" ShowAll="True" Visible="True" Name="conChest">
+                <WZUIContainer Type="WZUIContainer" GUID="{d27afd45-2574-4f33-919a-3a8701f584fe}" AbsContentSize="234,474" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.07,0.5" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{7eee93bd-6efe-457c-a131-15fde944bbd8}" File="ui/common/common_scale9_di23.png" Opacity="204" TouchEnable="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{7e015331-da02-4479-9d0b-ad9063dfd943}" File="ui/common/common_icon_fengexian3.png" UseOriginSize="True" Scale="0.9" RelativePosition="0.5,0.85" />
+                    <WZUIImage Type="WZUIImage" GUID="{4d3a52bb-9671-433e-bb9f-5964929f20cc}" File="ui/common/common_icon_fengexian3.png" UseOriginSize="True" Scale="0.9" RelativePosition="0.5,0.3" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{00a83495-8a2e-47b7-a7cc-9c540d8a0318}" AbsContentSize="265,80" UseAbsSize="True" RelativePosition="0.5,0.859061" TouchEnable="False">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{fd1c5624-f567-4a31-aada-8455a1d72232}" Text="有机率获得" LabelStyleKey="" RelativePosition="0.5,0.78" TextKey="PHANTOM21" Color="99,255,95" FontSize="24" EnableStroke="True" BoldFont="True" StrokeColor="79,60,48" StrokeSize="4" />
+                    </WZUIContainer>
+                    <Button Type="WZUIButton" GUID="{8371d98f-b132-487c-a847-fcc1bbdc307a}" AbsContentSize="140,60" UseAbsSize="True" RelativePosition="0.5,0.12" LuaDoneFunctionName="onChest1" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{e9cfd8c3-85f8-4eef-b915-2c59bb2c7b89}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{f82c0650-95d3-48be-9df7-a7db82a0e541}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{bb85c85e-dd18-4465-b305-237e9ff3776c}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{b42b4a5d-23f6-4f92-8335-763795416654}" File="ui/common/common_btn_anniu10_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{e626d5cd-3ff5-432b-a4e6-2651c97f4c04}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d73afe78-0cf2-4338-b1bd-cd9d9329930b}" Text="有机率获得" LabelStyleKey="NORMAL_GREEN_BTN" RelativePosition="0.5,0.5" TextKey="PHANTOM20" Name="txtBtn1_WndPhantomChest" />
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{ac5e6835-464f-402b-ac73-7f676364acd3}" File="ui/phantom/huanhua_box1.png" UseOriginSize="True" RelativePosition="0.5,0.6" />
+                    <WZUIImage Type="WZUIImage" GUID="{b7d55695-5d50-4c4f-8e8a-3b4b639a933b}" File="shopitems/common_icon_huanlisuipian.png" UseOriginSize="True" Scale="1" RelativePosition="0.43,0.245" ScaleX="1" ScaleY="1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ab54bb68-7dd5-486a-80fb-35dba0891c43}" Text="20" LabelStyleKey="C11_F22_S4_C5" RelativePosition="0.545,0.238" Alignment="Left" AnchorPoint="0,0.5" Name="cost1" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{8262bd86-64e4-473e-a95c-218b0c8e927b}" Name="desc1" AnchorPoint="0,0.5" RelativePosition="0.09,0.35" MaxWidth="300" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{b6d08e98-9db2-4dd3-b43d-4f09185ebff8}" AbsContentSize="234,474" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{ece183bf-b068-4d52-b803-57faaa5245c2}" File="ui/common/common_scale9_di23.png" Opacity="204" />
+                    <WZUIImage Type="WZUIImage" GUID="{925d8a6d-b3cb-4429-8d90-b21cd1a3604a}" File="ui/common/common_icon_fengexian3.png" UseOriginSize="True" Scale="0.9" RelativePosition="0.5,0.85" />
+                    <WZUIImage Type="WZUIImage" GUID="{e5e70678-384d-44dd-bbc1-20382104aeb7}" File="ui/common/common_icon_fengexian3.png" UseOriginSize="True" Scale="0.9" RelativePosition="0.5,0.3" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{58ca4c50-ed12-43ad-860b-abe2a00e8f54}" AbsContentSize="265,80" UseAbsSize="True" RelativePosition="0.5,0.859061">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c3ff0b5f-b30a-431c-b645-48c8fbbf17b6}" Text="有机率获得" LabelStyleKey="" RelativePosition="0.5,0.78" TextKey="PHANTOM22" Color="93,222,254" FontSize="24" EnableStroke="True" BoldFont="True" StrokeColor="79,60,48" StrokeSize="4" />
+                    </WZUIContainer>
+                    <Button Type="WZUIButton" GUID="{37a2d43a-301a-407c-8c84-aad6727755ba}" AbsContentSize="140,60" UseAbsSize="True" RelativePosition="0.5,0.12" LuaDoneFunctionName="onChest2" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{90208075-5c80-49d5-ab2e-f4e6c6793d3a}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{04d9b381-da7b-4614-b224-de32aa2b3881}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{1ac06751-7199-41ed-bfdb-299dff565c2d}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{0bdbf844-627b-4faf-aff7-678c688f86ed}" File="ui/common/common_btn_anniu10_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{155d4992-a379-4284-9e3a-205d4773911e}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e8a79004-5ea6-4d71-b209-1e4f024f2e3c}" Text="有机率获得" LabelStyleKey="NORMAL_GREEN_BTN" RelativePosition="0.5,0.5" TextKey="PHANTOM20" Name="txtBtn2_WndPhantomChest" />
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{1057c901-de3f-4a30-b00f-efd84be4f5bf}" File="ui/phantom/huanhua_box2.png" UseOriginSize="True" RelativePosition="0.5,0.6" />
+                    <WZUIImage Type="WZUIImage" GUID="{72256940-a733-4aa0-8a2f-03d190263ac5}" File="shopitems/common_icon_huanlisuipian.png" UseOriginSize="True" Scale="1" RelativePosition="0.43,0.245" ScaleX="1" ScaleY="1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{56133ee9-9fb5-4652-affa-cf002248f072}" Text="80" LabelStyleKey="C11_F22_S4_C5" RelativePosition="0.545,0.238" Alignment="Left" AnchorPoint="0,0.5" Name="cost2" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{bc11f346-a48b-4bd4-a272-2f1993293242}" Name="desc2" AnchorPoint="0,0.5" RelativePosition="0.09,0.35" MaxWidth="300" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{f63e6602-870b-4a25-af88-f22b2da79c46}" AbsContentSize="234,474" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="0.93,0.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{bc51bc93-414f-4625-adff-8dace27eae2d}" File="ui/common/common_scale9_di23.png" Opacity="204" />
+                    <WZUIImage Type="WZUIImage" GUID="{a66bf175-197a-4dc9-ab81-82215b55576e}" File="ui/common/common_icon_fengexian3.png" UseOriginSize="True" Scale="0.9" RelativePosition="0.5,0.85" />
+                    <WZUIImage Type="WZUIImage" GUID="{1b02206a-d501-4ebb-810b-e026423a70b3}" File="ui/common/common_icon_fengexian3.png" UseOriginSize="True" Scale="0.9" RelativePosition="0.5,0.3" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{e4102e9b-b37f-41d4-a963-db1fe31be482}" AbsContentSize="265,80" UseAbsSize="True" RelativePosition="0.5,0.859061">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{54415ec2-78d9-4a7a-ba85-30d512b1514c}" Text="有机率获得" LabelStyleKey="" RelativePosition="0.5,0.78" TextKey="PHANTOM23" Color="198,130,255" FontSize="24" EnableStroke="True" BoldFont="True" StrokeColor="79,60,48" StrokeSize="4" />
+                    </WZUIContainer>
+                    <Button Type="WZUIButton" GUID="{e80b94db-e2a3-47ba-9ea3-9cdf551d475f}" AbsContentSize="140,60" UseAbsSize="True" RelativePosition="0.5,0.12" LuaDoneFunctionName="onChest3" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{3fe6212a-1bdd-4319-a9fb-dbf52764ca76}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{30919d9c-26f5-4851-b3ce-c6b57f2b84c6}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{382dc124-2fd9-4f0b-bbff-ab2644113a5a}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{f19798e0-5e20-4a78-8e46-1b3566147ee9}" File="ui/common/common_btn_anniu10_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{e33684de-ce51-4ed2-b7e7-a73e22e28aa7}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{0ee6ce10-0e3f-45e6-8141-36d3cb0884f7}" Text="有机率获得" LabelStyleKey="NORMAL_GREEN_BTN" RelativePosition="0.5,0.5" TextKey="PHANTOM20" Name="txtBtn3_WndPhantomChest" />
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{458b5cc0-24b1-4774-923e-2dc5ee4bf5c9}" File="ui/phantom/huanhua_box3.png" UseOriginSize="True" RelativePosition="0.5,0.61" />
+                    <WZUIImage Type="WZUIImage" GUID="{7a49697b-c1ea-47bb-aa56-32ca306f165a}" File="shopitems/common_icon_huanlisuipian.png" UseOriginSize="True" Scale="1" RelativePosition="0.42,0.245" ScaleX="1" ScaleY="1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{17641ce9-f81a-4e81-91f4-c50491920c42}" Text="150" LabelStyleKey="C11_F22_S4_C5" RelativePosition="0.52,0.238" Alignment="Left" AnchorPoint="0,0.5" Name="cost3" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{861e17f1-76a0-4f31-994d-d6fd0989a4f0}" Name="desc3" AnchorPoint="0,0.5" RelativePosition="0.09,0.35" MaxWidth="300" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUISpine Type="WZUISpine" GUID="{c9d18d56-8af7-41b0-b343-ef140708924e}" FileAtlas="ui/ui_hhbx.atlas" FileJson="ui/ui_hhbx.json" AnimationName="box1_open" Name="spine" Loop="False" RelativePosition="0.5,0.5" Visible="False" ShowAll="True" />
+        </WZUIContainer>
+        <WZUIButton Type="WZUIButton" AbsContentSize="90,90" UseAbsSize="True" LuaDoneFunctionName="onRule" GUID="{5a721116-d842-49fc-ae50-214f7be992c3}" RelativePosition="1.015,0.05" AnchorPoint="1,0.5" AbsPosition="797.973,21.0118" ShowAll="True">
+            <NormalElement Type="WZUIContainer" GUID="{da4e59be-769a-419c-9fa9-f4725dfd9790}">
+                <WZUIImage Type="WZUIImage" GUID="{ffaa5797-6d80-4aab-b7dd-ce04d35f5b2f}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{9ad91540-a4a2-4dde-abce-c18bb1353ace}">
+                <WZUIImage Type="WZUIImage" GUID="{e8f9cd4e-ffcd-408d-ac06-fa0300a0b9b1}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{20fddc29-26e5-4765-9e7a-81eafaa2d8c4}" />
+        </WZUIButton>
+    </WZUIWindow>
+</WndPhantomChest>

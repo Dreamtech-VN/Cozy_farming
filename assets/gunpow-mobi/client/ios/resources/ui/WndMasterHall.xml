@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" ?>
+<WndMasterHall GUID="{91780D47-139F-4cfd-980E-AFE78256BB22}">
+    <WZUIWindow Type="WZUIWindow" GUID="{2D2F4D33-7992-413c-8192-4DA5F70600EB}" Name="WndMasterHall" LuaObjectName="WndMasterHall" ShowAll="False" LuaTouchBeganFunction="onTouchBegan" NameCreate="True" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{73a7a047-4a99-4acd-b961-647ad4292cfc}" AbsContentSize="960,116" UseAbsCoordinate="False" UseAbsSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0" Visible="True" ScaleY="0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{26b710dd-3759-4df9-9184-57498fe4c317}" File="ui/common/common_scale9_di6.png" Opacity="150" />
+            <WZUIContainer GUID="{7381e65a-364f-477b-9b01-476765ed4778}" Name="conFindId_WndMasterHall" RelativePosition="0.208,0.5" RelativeSize="1,1" Type="WZUIContainer" AbsContentSize="210,80" UseAbsSize="True" Visible="True" ScaleY="1" ShowAll="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{89090146-8c7d-4c16-9ae2-a8124172489d}" File="ui/common/common_scale9_di58.png" Visible="True" TouchEnable="False" />
+                <WZUIEditBox BgPicture="ui/common/transparent_bg.png" FontColor="255,255,255" FontSize="20" GUID="{dcf79053-43f7-4479-bcec-f2aed497607e}" InputMode="ModeNumeric" KeyBordReturnType="TypeDone" MaxLength="17" Name="editInputId_WndMasterHall" PlaceholderFontColor="255,236,193" Type="WZUIEditBox" Alignment="0" PlaceHolderAlignment="1" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" RelativePosition="0.45,0.5" RelativeSize="0.9,1" ScaleY="2" />
+                <WZUIButton AbsContentSize="77,77" GUID="{03469c0e-c518-4652-b9c6-cb8b3eb6b73c}" LuaDoneFunctionName="onClickFind" Name="btnFind_WndMasterHall" RelativePosition="0.902,0.5" Type="WZUIButton" UseAbsSize="True" Visible="True" AbsPosition="189.6,20">
+                    <NormalElement GUID="{eb8be5e4-9970-4a7a-a65e-480378f2ef11}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/common/common_icon_sousuo.png" GUID="{06835766-dfd3-46ae-b53e-14314bfa55dd}" Type="WZUIImage" UseOriginSize="True" ScaleY="2" />
+                    </NormalElement>
+                    <SelectElement GUID="{012be6c7-4580-41a5-a02c-53d22f011159}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/common/common_icon_sousuo.png" GUID="{e9cae610-07cc-403a-8a5f-644a5220eb60}" Scale="1" ScaleX="1" ScaleY="2" Type="WZUIImage" UseOriginSize="True" />
+                    </SelectElement>
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{9c9897ee-1be0-40f9-960f-43d31a1cab2b}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" ScaleX="5" ScaleY="1" RelativePosition="0.5,1" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" AbsContentSize="120,58" UseAbsSize="True" RelativePosition="0.06,0.045" GUID="{f21a8c44-362d-46d9-8a4b-8d82a5f7cdec}" LuaDoneFunctionName="onInfo" AnchorPoint="0.5,0.5" ScaleY="1" ShowAll="True">
+            <NormalElement Type="WZUIContainer" GUID="{0812360a-7d0d-48b5-987a-c336182f510a}">
+                <WZUI9Image Type="WZUI9Image" GUID="{64f8ceb0-ef8e-46c4-ba93-100f02de8716}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{9bcbb211-cd71-4660-9027-f997604b3e41}">
+                <WZUI9Image Type="WZUI9Image" GUID="{e74deabc-826b-4ad0-8c01-dc59d9d85cc2}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{59dc20d0-9c64-4043-ad47-173cff063866}">
+                <WZUI9Image Type="WZUI9Image" GUID="{369ba941-d103-4033-add4-b1ccab7beaff}" File="ui/common/common_icon_gth.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+            </DisableElement>
+        </Button>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{eac233b1-b2bc-4c12-8543-e9473aefb148}" FontSize="22" BoldFont="True" Name="info_WndMasterHall" Text="" Color="255,236,193" RelativePosition="0.91,0.048" LabelStyleKey="C7_F22" ShowAll="True" />
+        <WZUIContainer Type="WZUIContainer" GUID="{591563c1-842e-4d52-b34b-f46377039b89}" Name="conMain_WndMasterHall" RelativePosition="0.5,0.5" ShowAll="True" Order="5">
+            <Button Type="WZUIButton" AbsContentSize="126,62" UseAbsSize="True" RelativePosition="0.5,0.178" GUID="{92ed3c82-e1a5-4f77-a4ca-89b525a0fca4}" LuaDoneFunctionName="onRefresh" Name="btnRefresh_WndMasterHall" LuaActionName="Normal">
+                <NormalElement Type="WZUIContainer" GUID="{c0d584f9-0bc3-4601-8526-845d1198f1ac}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{9256e59f-e228-4587-adea-afd61aedf056}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c53951f5-2e5c-4da2-a599-50d48c343347}" BoldFont="True" Color="255,236,193" FontSize="24" Text="刷新列表" Name="btnRefresh1_WndMasterHall" TextKey="MASTERINFO25" StrokeColor="64,128,1" StrokeSize="4" EnableStroke="True" LabelStyleKey="SMALL_GREEN_BTN" RelativePosition="0.5,0.5" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{f828950f-67cb-4c73-9ee3-7ed08619590a}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{3cdffb4a-eb4b-4b0d-8c66-3b6e716d4d98}" File="ui/common/common_btn_anniu10_sel.png" Scale="1" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6e3b7dc0-524c-46db-8d7a-97fdceb9f854}" BoldFont="True" Color="255,236,193" FontSize="24" Text="刷新列表" Name="btnRefresh2_WndMasterHall" TextKey="MASTERINFO25" StrokeColor="64,128,1" StrokeSize="4" EnableStroke="True" RelativePosition="0.5,0.5" LabelStyleKey="SMALL_GREEN_BTN" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{d7d0fee5-49ff-4ddf-bf92-cd126f39fcbc}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{6cec2488-67d3-4ee9-aff5-b2138e916a62}" File="ui/common/common_btn_anniu10.png" GrayRender="True" RelativePosition="0.5,0.5" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{622c3254-37e8-44a1-ad3c-6068e6ae3043}" BoldFont="True" Color="255,255,255" FontSize="24" Text="" Name="btnRefresh3_WndMasterHall" RelativePosition="0.492493,0.483654" TextKey="" StrokeSize="4" StrokeColor="168,168,168" EnableStroke="False" LabelStyleKey="SMALL_GRAY_BTN" />
+                </DisableElement>
+            </Button>
+        </WZUIContainer>
+        <WZUITableContainer Type="WZUITableContainer" GUID="{600e640d-d9f6-404a-a5be-6dfad840ffbf}" Name="tbConRole_WndMasterHall" AbsContentSize="940,375" UseAbsSize="True" RelativePosition="0.5,0.435" ColumnCount="5" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableMoveVertical="False" ShowAll="True" />
+    </WZUIWindow>
+</WndMasterHall>

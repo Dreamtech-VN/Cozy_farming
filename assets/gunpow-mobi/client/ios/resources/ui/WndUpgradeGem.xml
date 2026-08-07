@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" ?>
+<WndUpgradeGem GUID="{FDE8F4BA-CA37-4d41-B0D5-81369EA692C8}">
+    <WZUIWindow AbsContentSize="395,351" GUID="{50F173F3-7129-4684-865F-8576F675761E}" LuaObjectName="WndUpgradeGem" Name="WndUpgradeGem" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True" RelativePosition="0.5,0.5" LuaTouchEndedFunction="onTouchEnd" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{0D921B0E-1329-412a-B495-9C980151C37A}" AbsContentSize="395,351" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{295BA61D-B8F3-4db3-B3F1-C991B2372485}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" />
+            <WZUIContainer Type="WZUIContainer" GUID="{528937F4-819C-452b-A559-012C56D3DB2E}" AbsContentSize="382,200" UseAbsSize="True" RelativePosition="0.5,0.55">
+                <WZUI9Image Type="WZUI9Image" GUID="{6505C2A8-31D1-431c-9C15-5BD046CBA136}" File="ui/common/common_scale9_di20.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{ea319de1-5e09-4acd-8368-2e022667aa18}" AbsContentSize="365,110" UseAbsSize="True" RelativePosition="0.5,0.55">
+                <WZUI9Image Type="WZUI9Image" GUID="{2be7c940-afcf-4fd3-a86c-c038c5dc20a8}" File="ui/common/common_scale9_di4.png" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{949de238-0211-4d54-a302-0e660dcbed78}" FontSize="24" Color="255,236,193" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.9" StrokeSize="4" StrokeColor="132,66,29" Text="" Name="" TextKey="STAR_SOUL_BUTTON_UPDATE" AbsPosition="192.5,288" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="0,0" GUID="{DE29E0E1-6C25-4f15-A37B-355C55FE0E12}" Name="" RelativePosition="0.5,0.14375" RelativeSize="1,0.24" Type="WZUIContainer" UseAbsSize="False" Visible="True" AbsPosition="192.5,46">
+            <Button AbsContentSize="116,56" GUID="{C08D89C5-E825-47f1-974B-81DDE92F4FBD}" LuaDoneFunctionName="onSure" Name="" RelativePosition="0.76,0.49" Type="WZUIButton" UseAbsSize="True" Visible="True" LuaActionName="Normal">
+                <NormalElement GUID="{C6A1FA26-4810-4fdf-80F7-CE66B77FAD80}" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{346BFCE3-76D5-417f-8AF8-BC74E81B0B9C}" File="ui/common/common_btn_anniu10.png" />
+                </NormalElement>
+                <SelectElement GUID="{00D477B1-1376-4af3-BD02-E1F705A77632}" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{252F70B5-8271-4fa2-863E-33AD35CC09AA}" File="ui/common/common_btn_anniu10_sel.png" Scale="1" ScaleX="1" ScaleY="1" />
+                </SelectElement>
+                <WZUIImage File="common/button_text/button_green_2.png" GUID="{99DE906A-FF05-464a-A16B-ADD1CE45B85B}" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="False" />
+                <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{4245BF13-2D6F-42e5-BC5F-95ADDE9FB774}" Name="txtUpgrade_WndUpgradeGem" RelativePosition="0.5,0.5" Scale="1" ScaleX="1" ScaleY="1" StrokeColor="3,111,8" StrokeSize="4" Text="" Type="WZUILabelTTF" BoldFont="True" EnableStroke="True" LabelStyleKey="SMALL_GREEN_BTN" TextKey="STAR_SOUL_BUTTON_UPDATE" />
+            </Button>
+            <WZUIButton AbsContentSize="116,56" GUID="{E51F49CF-7DB2-4b48-AA35-573538F4D9BB}" LuaDoneFunctionName="onCancel" Name="" RelativePosition="0.24,0.49" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal" AbsPosition="109.777,38.4">
+                <NormalElement GUID="{DD6DA3FA-91EB-4714-A384-E3BA92700435}" RelativePosition="0.488356,0.5" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{0096D983-0ADE-4250-8A6F-9667BBD2DD5A}" File="ui/common/common_btn_anniu3.png" />
+                </NormalElement>
+                <SelectElement GUID="{6ED4A234-AAA3-4a15-9D56-0A5D871CDFE4}" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{A2589051-E127-40b4-BBE7-802FFFA8B401}" File="ui/common/common_btn_anniu3_sel.png" Scale="1" ScaleX="1" ScaleY="1" />
+                </SelectElement>
+                <DisableElement GUID="{7CF704D3-A2F3-4f0d-BFF7-35E3892EE59F}" Type="WZUIContainer" />
+                <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{A1B4F0DF-508D-4fcf-BFAA-BCA98DF00B2E}" Name="txtCancel_WndUpgradeGem" RelativePosition="0.5,0.5" Scale="1" ScaleX="1" ScaleY="1" StrokeColor="136,66,29" Text="" Type="WZUILabelTTF" StrokeSize="4" EnableStroke="True" BoldFont="True" LabelStyleKey="SMALL_ORANGE_BTN" TextKey="CANCEL" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{ab19637e-978d-4b9d-959d-fabf46a9cc83}" Name="conGrid" AbsContentSize="390,110" UseAbsSize="True" RelativePosition="0.5,0.55">
+            <WZUIContainer Type="WZUIContainer" GUID="{ff584074-c3ae-4658-9931-530fd307ee98}" Name="conGrid1" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.21,0.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{26c664ab-906d-4ef7-a17a-a6d37372fd60}" Name="conGrid2" AbsContentSize="90,90" UseAbsSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{c132db3f-dd68-414f-84ba-8e8e817bdba9}" Name="conGrid3" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.79,0.5" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{9b549cc2-dc5c-4fe2-9a42-5aa2a14ab3ac}" TextKey="STRENGTENTIP7" LabelStyleKey="C5_F20" RelativePosition="0.24,0.765" Name="txtTip1_WndUpgradeGem" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{7745d8d6-33db-46df-8cf7-518ed5188a4a}" TextKey="STRENGTENTIP8" LabelStyleKey="C13_F20" RelativePosition="0.2,0.33" Name="txtTip_WndUpgradeGem" />
+        <WZUIImage Type="WZUIImage" GUID="{493380f0-bba5-40a7-a820-0cf9091f248e}" File="ui/common/common_icon_jinbi.png" UseOriginSize="True" Scale="0.8" RelativePosition="0.372532,0.33" Name="imgGold_WndUpgradeGem" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c6df5e48-5aa8-4225-a82e-609714a545b7}" TextKey="" LabelStyleKey="C13_F20" RelativePosition="0.43,0.33" Alignment="Left" AnchorPoint="0,0.5" Text="0" Name="txtCost" />
+    </WZUIWindow>
+</WndUpgradeGem>

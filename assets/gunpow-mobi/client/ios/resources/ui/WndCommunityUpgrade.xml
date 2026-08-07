@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" ?>
+<WndCommunityUpgrade GUID="{4AAA41CD-F6E7-4f16-9F8C-5ABB260E1413}">
+    <WZUIWindow AbsContentSize="385,320" GUID="{788E661D-0111-492f-9651-EA795BE4214D}" LuaObjectName="WndCommunityUpgrade" Name="WndCommunityUpgrade" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" RelativePosition="0.5,0.5" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{99667FE1-4492-4138-851D-764C8AB7EE92}" AbsContentSize="385,320" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{315672A0-4D6D-4e5d-AFC3-9603CF729062}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" RelativeSize="1,1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{1634B556-8C3E-4d88-B074-254CFD80A9B6}" AbsContentSize="373,135" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="192.5,160" RelativeSize="1.05,1">
+                <WZUI9Image Type="WZUI9Image" GUID="{15091EB5-CE06-4633-9AA3-8916882BBE31}" File="ui/common/common_scale9_di20.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="560,86" GUID="{3DC37B1E-5745-4afc-A66F-A11E832D4653}" RelativePosition="0.5,0.872768" Type="WZUIContainer" UseAbsSize="True">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8C11F21F-D1E6-4c56-86AF-D1AA41EE5F50}" Color="255,236,193" BoldFont="True" FontSize="24" Text="公会升级" Name="title" EnableStroke="True" RelativePosition="0.5,0.6" StrokeSize="4" StrokeColor="136,66,29" />
+        </WZUIContainer>
+        <Button AbsContentSize="50,50" GUID="{E65FBFBD-E741-4413-9ADD-FAD25FA53DD6}" LuaDoneFunctionName="onClose" Name="btnCloseWindow_WndDismissCommunity" RelativePosition="0.919138,0.902216" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal">
+            <NormalElement GUID="{7A131BDB-A779-4a67-8BAA-875E027E276F}" TouchContainerEnable="True" Type="WZUIContainer">
+                <WZUI9Image Type="WZUI9Image" GUID="{D2CC495F-F092-42a1-B10E-7B3D3CCF184D}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement GUID="{3A1CF079-7AE4-4ffa-9FDF-CAB5B8D0DF1F}" TouchContainerEnable="True" Type="WZUIContainer">
+                <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{9B6A8C38-25A8-47a1-80D8-80E502F960C9}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+            </SelectElement>
+            <DisableElement GUID="{3D57CC12-1A4A-4dbc-B35B-71CBE86FE87B}" Type="WZUIContainer" />
+        </Button>
+        <WZUIButton GUID="{BCE442DC-8180-4808-AA31-08E2679D716A}" LuaDoneFunctionName="onUpGrade" Name="btnUpGradeBtn_WndDismissCommunity" RelativePosition="0.5,0.155" Type="WZUIButton" UseAbsSize="True" Visible="True" AbsContentSize="116,56" LuaActionName="Normal">
+            <NormalElement GUID="{ABB469E7-AA7E-42da-A44F-7947A1172236}" Type="WZUIContainer">
+                <WZUI9Image File="ui/common/common_btn_anniu10_1.png" GUID="{4167D054-77D8-4788-A8AC-94B1072187DD}" Type="WZUI9Image" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement GUID="{8BC68C2A-5D3F-466c-9ABF-66FDD83046ED}" Type="WZUIContainer">
+                <WZUI9Image File="ui/common/common_btn_anniu10_1_sel.png" GUID="{D01F86BA-78D5-4bad-AE37-6058B525E3C5}" Type="WZUI9Image" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+            </SelectElement>
+            <DisableElement GUID="{1CBCB87E-72F8-4803-A774-DA349B9397CC}" Type="WZUIContainer" />
+            <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{405AB18A-311B-4db8-9320-48B03F69267C}" Name="txtOK_WndDismissCommunity" RelativePosition="0.5,0.5" ScaleX="1" StrokeColor="3,111,8" StrokeSize="4" Text="" Type="WZUILabelTTF" BoldFont="True" EnableStroke="True" LabelStyleKey="SMALL_GREEN_BTN" TextKey="STAR_SOUL_BUTTON_UPDATE" />
+        </WZUIButton>
+        <WZUIContainer Type="WZUIContainer" GUID="{77226CB9-039D-4a71-82D3-B531330B0296}" AbsContentSize="400,100" UseAbsSize="True" Name="conCommunity" Visible="True" RelativePosition="0.5,0.5">
+            <WZUIContainer Type="WZUIContainer" GUID="{43F4D5D7-331B-4713-B3AC-1E9EC7675BE6}" AbsContentSize="400,50" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{35998D95-3AA3-457e-8581-F4139A0CF7B8}" FontSize="24" BoldFont="True" AnchorPoint="0,0.5" Color="62,34,8" Alignment="Left" RelativePosition="0.26,0.5" Text="Lv2" Name="community2" StrokeSize="4" StrokeColor="132,66,29" EnableStroke="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{37531B55-1D0E-4482-9F31-28A9C92C60D7}" FontSize="24" BoldFont="True" AnchorPoint="0,0.5" Color="0,255,0" Alignment="Left" RelativePosition="0.64,0.5" Text="Lv3" Name="community4" StrokeSize="4" StrokeColor="64,128,1" EnableStroke="True" />
+                <WZUIImage Type="WZUIImage" GUID="{6AFF75B1-062C-46c3-806A-849F8467ACAC}" File="ui/common/common_icon_jiantou3.png" UseOriginSize="True" Scale="0.7" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{DB01C2E2-5930-485f-B40D-BF106405139D}" AbsContentSize="450,72" AnchorPoint="0.5,0" RelativePosition="0.5,-0.2" UseAbsSize="True" Name="conCost1" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{B52249C5-5B7E-46f2-AB93-070878F409D1}" File="ui/common/common_scale9_heidi1.png" Scale="0.5" Opacity="145" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{BE709B15-3DAA-4ab3-B54B-C1D0F6C4BCC9}" FontSize="24" BoldFont="True" AnchorPoint="0,0.5" Color="255,227,116" Alignment="Left" RelativePosition="0.34,0.5" Text="" Name="community5" StrokeSize="3" StrokeColor="79,60,48" EnableStroke="True" TextKey="PETUSE" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0002643E-2438-4031-886D-084E373FFAC7}" FontSize="24" BoldFont="True" AnchorPoint="0,0.5" Color="255,227,116" Alignment="Left" RelativePosition="0.56,0.5" Text="1000" Name="community6" StrokeColor="79,60,48" StrokeSize="4" EnableStroke="True" />
+                <WZUIImage Type="WZUIImage" GUID="{B0CADB3F-12A0-4c47-9F36-0B95DDDE42C3}" File="ui/common/common_icon_gzww.png" UseOriginSize="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{0913FFB5-B239-4e5b-B88C-31EC21F7E4F1}" AbsContentSize="700,72" AnchorPoint="0.5,0" RelativePosition="0.5,-0.2" UseAbsSize="True" Name="conCost2" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{C8C24B3B-4403-4694-AD40-AB58D9F1BE2D}" File="ui/common/common_scale9_heidi1.png" Scale="0.5" Opacity="145" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{D40911FE-D042-4aae-AC77-D979DB9C0539}" FontSize="24" BoldFont="True" AnchorPoint="0,0.5" Color="255,227,116" Alignment="Left" RelativePosition="0.3,0.5" Text="" Name="txtCost_WndCommunityUpgrade" StrokeSize="3" StrokeColor="79,60,48" EnableStroke="True" TextKey="PETUSE" />
+                <WZUIImage Type="WZUIImage" GUID="{9C5A4020-B356-4f4b-9DB7-E6D7C2355B8E}" File="" UseOriginSize="True" RelativePosition="0.42,0.5" Scale="0.8" Name="imgCostIcon1_WndCommunityUpgrade" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0CFCFC58-9859-4ddf-AA70-AAB402D0D93C}" FontSize="24" BoldFont="True" AnchorPoint="0,0.5" Color="255,227,116" Alignment="Left" RelativePosition="0.45,0.5" Text="1000" Name="community7" StrokeColor="79,60,48" StrokeSize="4" EnableStroke="True" />
+                <WZUIImage Type="WZUIImage" GUID="{15B1A15C-26BD-4eef-A550-22516B278D1D}" File="ui/common/common_icon_gzww.png" UseOriginSize="True" RelativePosition="0.55,0.5" Name="imgCostIcon2_WndCommunityUpgrade" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{EEA68DC9-F783-4eb6-B7A8-FF283903EDD6}" FontSize="24" BoldFont="True" AnchorPoint="0,0.5" Color="255,227,116" Alignment="Left" RelativePosition="0.58,0.5" Text="1000" Name="community8" StrokeColor="79,60,48" StrokeSize="4" EnableStroke="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCommunityUpgrade>

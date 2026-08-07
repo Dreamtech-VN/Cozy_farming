@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<WndMarryTips GUID="{03E3A920-13CC-481c-AF90-FDD6590155FF}">
+    <WZUIWindow AbsContentSize="660£¬540" GUID="{E9D0B1A4-982E-4223-8814-0E347C82F20E}" LuaObjectName="WndMarryTips" Name="WndMarryTips" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer AbsContentSize="800,390" AnchorPoint="0.5,0" GUID="{FDEA939B-DE7B-4bc7-BA37-23168ED396DE}" RelativePosition="0.5,0" RelativeSize="1,0.83" Type="WZUIContainer" UseAbsSize="False">
+            <WZUIImage File="ui/marrige/marry_scale9_sbdk.png" GUID="{49FA3552-8185-4fa4-AE00-6539626DB11D}" Name="imgWndBG_WndMarryTip" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="False" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{CC995C51-8604-453c-8052-21341856427E}" Name="con2Particale_WndMarryTips" Visible="False">
+                <WZUIParticle Type="WZUIParticle" GUID="{C95633E0-1F25-4e9c-B43B-A572074D8543}" PlistFile="particle/skills_jhcg_01.plist" RelativePosition="0.522316,0.476333" />
+                <WZUIParticle Type="WZUIParticle" GUID="{29E65661-63EF-47c9-9256-42F9130C7DEA}" PlistFile="particle/skills_jhcg_ax_01.plist" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="700,150" GUID="{654015D3-0BF9-4dcb-902E-74F14D2BF6F3}" Name="conText_WndMarryTips" RelativePosition="0.5,0.462963" Type="WZUIContainer" UseAbsSize="True">
+            <WZUILabelTTF Alignment="Center" Color="255,255,255" Dimensions="280,150" FontSize="26" GUID="{216B70C1-BE66-43d1-87B6-308605219939}" Name="txtTips_WndMarryTips" RelativePosition="0.54324,0.409018" Text="" Type="WZUILabelTTF" AbsPosition="380.268,61.3527" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="130,66" GUID="{85B9C934-57BA-46a0-B187-6682324458F0}" Name="conSure_WndMarryTips" RelativePosition="0.522931,0.20233" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUIButton GUID="{0EC0DC78-9545-4c0c-A5AC-C347570FE332}" LuaDoneFunctionName="onSureClick" Type="WZUIButton" Visible="True" RelativePosition="0.5,0.46872" Name="btnMarry_WndMarryTips" LuaActionName="Normal">
+                <NormalElement GUID="{C7BA9A58-C859-49cb-9D21-65E6B766F342}" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{94094581-46B2-4657-86DA-F6A833D8D036}" File="ui/common/common_btn_marryan.png" Name="" TouchEnable="False" Tag="1" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{E3FA90F4-82D9-4d57-91DC-86109E06A1BF}" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{53FA1F3C-49F1-4c13-A10C-380B78D1EB66}" File="ui/common/common_btn_marryan_sel.png" Name="" TouchEnable="False" Tag="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{EF3FF672-C9AF-4afd-BC92-7BE6704EEFC6}" Type="WZUIContainer" />
+                <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{F51B2F99-8BA3-479a-9183-BB7C4D501E4F}" Name="txtBtnSure_WndMarryTip" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="26,52,182" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" TextKey="CONFIRM" TouchEnable="False" RelativePosition="0.5,0.5" AbsPosition="65,33" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndMarryTips>

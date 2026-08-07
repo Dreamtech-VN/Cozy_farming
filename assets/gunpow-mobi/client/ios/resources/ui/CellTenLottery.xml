@@ -1,0 +1,38 @@
+<CellTenLottery GUID="{00236f68-df29-43d3-bcb5-74603d62186f}">
+    <WZUIContainer AbsContentSize="502,453" GUID="{35d3c1dc-3e53-4e14-ae63-c40fc2598a5c}" LuaObjectName="CellTenLottery" Name="CellTenLottery" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="500,170" GUID="{a04a39af-2645-44ae-b1a2-a23513b0ee43}" RelativePosition="0.5,0" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0" Order="2">
+            <WZUIContainer AbsContentSize="480,130" GUID="{0c40da1c-2339-4021-a214-e13267de0235}" RelativePosition="0.5,0.48" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIButton GUID="{20136925-bce6-4900-b510-88ee1e41747a}" LuaDoneFunctionName="onClickGoTo" Name="btnGoto_CellCutePetPanel" Type="WZUIButton" LuaActionName="Normal" RelativePosition="0.873061,0.23389" AbsContentSize="136,65" UseAbsSize="True" Visible="False">
+                    <NormalElement GUID="{95a67e59-e054-4248-bdf6-dfcb4d1b3ea1}" Type="WZUIContainer" UseAbsSize="False">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu10_1.png" GUID="{ebc9c9cd-e9bc-4aa6-8726-c3e3a72e64cc}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSizeProportion="False" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{161d72b4-ef60-4f5d-8c83-664d276682c5}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu10_1_sel.png" GUID="{16658ad5-a176-4721-9e34-39d001abf7c8}" RelativeSize="1.1,1" Type="WZUI9Image" Scale="1" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{38ccfb05-ee17-4a49-a154-007e002ed470}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu10_1_sel.png" GUID="{36d4efba-af4e-43ca-b1ab-33dca14cbb8d}" RelativePosition="0.5,0.5" RelativeSize="1.1,1" Type="WZUI9Image" GrayRender="True" UseOriginSize="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Color="255,236,193" FontSize="26" GUID="{645c3a5a-72e7-4f76-87b6-37ae895bdd39}" Name="txtgotoWord_CellCutePetPanel" RelativePosition="0.5,0.5" StrokeColor="128,54,13" StrokeSize="4" Text="" Type="WZUILabelTTF" LabelStyleKey="NORMAL_GREEN_BTN" EnableStroke="True" Scale="1" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="502,300" GUID="{ef55e3be-37f2-4263-93fe-cf6de815ef6d}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,1">
+            <WZUIImage Type="WZUIImage" GUID="{b321152e-63f3-4e3a-aa89-5ffc24dd96c5}" File="ui/gameActivity/activity_pic_zbslc.png" UseOriginSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1.00667" ScaleX="1.002" Name="imgBK_CellCutePetPanel" ScaleY="1" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="480,30" GUID="{a4d5578e-b291-478a-9894-a74c6aa33f69}" RelativePosition="0.5,0.952214" RelativeSize="1,1" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" AnchorPoint="0.5,0.5" Order="0" Name="conTime_CellTocalRechargetPanel">
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="255,227,116" FontSize="22" GUID="{9f252a01-6c83-4b76-b3f3-8388c60715c6}" Name="CellTotal_Time_Key" RelativePosition="0.025,0.5" Text="活动时间" Type="WZUILabelTTF" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" AbsPosition="25,31" TextKey="ACTIVE_TIME" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a25bcbb1-cc83-4efb-ae6a-426ccf988fc8}" Alignment="Left" AnchorPoint="0,0.5" FontSize="22" Color="255,89,74" Text="10天" Name="CellTotal_day_value" RelativePosition="0.26,0.5" NameCreate="True" StrokeColor="158,0,0" StrokeSize="4" EnableStroke="True" Order="0" />
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="255,89,74" FontSize="24" GUID="{23e9bd10-50b7-42a2-b18a-39ca494d6440}" Name="CellTotal_Time_Value" RelativePosition="0.42,0.5" Text="15:00:00" Type="WZUILabelTTF" EnableStroke="True" StrokeColor="158,0,0" StrokeSize="4" Visible="False" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{8d4ba9a5-23a0-4892-941d-fc3c5650ddb4}" UseAbsSize="True" AbsContentSize="120,60" RelativePosition="0.860821,0.0934858" LuaDoneFunctionName="jumpTo" LuaActionName="Normal">
+            <NormalElement Type="WZUIContainer" GUID="{7848ea01-b4d5-411c-87dc-6f75fd570706}">
+                <WZUIImage Type="WZUIImage" GUID="{2aeaf569-4cc8-4df1-be50-f023fa4b03c9}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{545cc69e-97fa-4e71-9f70-c95995b9f989}">
+                <WZUIImage Type="WZUIImage" GUID="{e1defd10-dc58-4ab3-8396-d967f5670580}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{3f51dd34-49b7-4d90-9c9c-c9043ef00b4f}" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{00b2b970-0874-4098-bc53-4e70eb903dce}" TextKey="GOTO_CALL" LabelStyleKey="NORMAL_GREEN_BTN" Scale="1" Dimensions="0,0" Name="txtSummon_CellTenLottery" />
+        </Button>
+    </WZUIContainer>
+</CellTenLottery>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<CellShopFriend GUID="{13A9A252-775A-4e77-B6A8-9E888BBB7B90}">
+	<WZUIContainer AbsContentSize="344,94" GUID="{4C9E7329-D3E3-4292-9C15-1A8F6573DD3E}" LuaObjectName="" Name="CellShopFriend" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+		<WZUIContainer Type="WZUIContainer" GUID="{D6FAB47B-ECD5-4cd5-B267-E277DA517522}" RelativePosition="0.5,0.5" AbsPosition="-22,62">
+			<WZUIContainer Type="WZUIContainer" GUID="{CBCA519D-D5EB-428f-B73C-CED22DDD948C}" Visible="True">
+				<WZUI9Image Type="WZUI9Image" GUID="{A4253CB2-CBF9-4b90-B8B9-CCAFBDD9E040}" File="ui/common/common_scale9_di7.png" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{5A1B529F-E882-4966-B4C6-67B1D7864779}" AbsContentSize="64,64" UseAbsSize="True" RelativePosition="0.119186,0.5" AbsPosition="41,47" Name="conHead_CellShopFriend" />
+			<WZUIContainer Type="WZUIContainer" GUID="{E423873B-B37C-4c1a-A9B0-341AF8ED532D}" AbsContentSize="198,30" UseAbsSize="True" RelativePosition="0.520349,0.755319" AbsPosition="179,70.9999">
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{9493A46A-DEA9-42d4-96AF-694327DDE4B4}" Alignment="Left" AnchorPoint="0.0.5" RelativePosition="0.0454545,0.5" Text="" LabelStyleKey="C14_F22" AbsPosition="9,15" Name="txtFriendLv_CellShopFriend" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{DBD5AF98-FB16-4a86-A51B-215C65D4E8AF}" Alignment="Left" AnchorPoint="0.0.5" RelativePosition="0.313131,0.5" Text="" LabelStyleKey="C5_F22" AbsPosition="62,15" Name="txtFriendName_CellShopFriend" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{E8325E8B-5BD3-44f5-AB7E-E9272330B654}" AbsContentSize="198,37" UseAbsSize="True" RelativePosition="0.520349,0.37234" AbsPosition="179,35">
+				<WZUI9Image Type="WZUI9Image" GUID="{F1E1CB03-A41F-45b8-B218-D388E245A9D4}" File="ui/common/common_scale9_di8.png" />
+				<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{418302A9-13DD-4ab3-9CE0-93D24561D0AD}" Name="ftbFriendPoint_CellShopFriend" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0.08,0.5" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{7F1F1A50-21E1-425d-8477-854649249ED7}" AbsContentSize="36,36" UseAbsCoordinate="False" UseAbsSize="True" RelativePosition="0.901163,0.5" AbsPosition="310,47">
+				<WZUI9Image Type="WZUI9Image" GUID="{F808B957-495E-4dc4-9DB2-50E95A3A52A4}" File="ui/common/common_scale9_di13.png" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{F94A8E7A-6AD5-40f8-B205-71FD50F77E0D}" Scale="1.1" ScaleY="1.07" ScaleX="1.02" Name="conSel_CellShopFriend" Visible="False" RelativePosition="0.5,0.489362" AbsPosition="172,46">
+				<WZUI9Image Type="WZUI9Image" GUID="{F49C8463-F1CF-4f52-9A19-6A5ED7EF4EA9}" File="ui/common/common_scale9_beibaodi_sel.png" />
+				<WZUIImage Type="WZUIImage" GUID="{D73E3FFF-9E9D-4e28-9DE8-25EB58C906C3}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.892442,0.5" AbsPosition="307,47" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{2E4A7BCA-747C-4e17-A670-83DD65F3C8D0}">
+				<Button Type="WZUIButton" LuaDoneFunctionName="onSelect" GUID="{CB3C45A0-A979-4733-9C9A-6FCB0E50999D}">
+					<NormalElement Type="WZUIContainer" GUID="{E6D60BE7-331B-418f-B1E9-2BF36DA593ED}" />
+					<SelectElement Type="WZUIContainer" GUID="{6C5EB7A1-1478-47c9-B4A3-AA9C103CBA47}" />
+					<DisableElement Type="WZUIContainer" GUID="{56EEE73E-88B8-47bd-A338-6F85CE763290}" />
+				</Button>
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIContainer>
+</CellShopFriend>

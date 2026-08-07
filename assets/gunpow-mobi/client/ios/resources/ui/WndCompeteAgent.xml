@@ -1,0 +1,33 @@
+﻿<WndCompeteAgent GUID="{de26b0c5-74db-4185-b663-48b498c45d61}">
+    <WZUIWindow Type="WZUIWindow" GUID="{0b3b233d-e9aa-4e42-8744-24bf244f115c}" AbsContentSize="770,532" UseAbsSize="True" NameCreate="True" Name="WndCompeteAgent" LuaObjectName="WndCompeteAgent" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{19f92692-7bbb-42b6-87dc-cb2fa6441d6e}">
+            <WZUI9Image Type="WZUI9Image" GUID="{077a3af2-1b46-4f3d-b2a9-14ffdb9cf143}" File="ui/common/common_scale9_di5.png" CapInsets="60,110,10,10" />
+            <WZUIContainer Type="WZUIContainer" GUID="{8edf5439-c1ea-4600-8980-90f55bb09e23}" AbsContentSize="756,400" RelativePosition="0.5,0.51" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{6012e860-cd7a-4fc7-96a8-412cfa9d171b}" File="ui/common/common_scale9_di6.png" Opacity="102" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{cccb79b6-d74a-4990-bc1c-4c00b20ebf31}" Name="btn_close" LuaDoneFunctionName="onClose" AbsContentSize="120,56" UseAbsSize="True" RelativePosition="0.95,0.94" LuaActionName="Normal">
+            <NormalElement Type="WZUIContainer" GUID="{4ba21770-1665-465a-a921-1afa94f88feb}">
+                <WZUIImage Type="WZUIImage" GUID="{dce351f8-856b-4a80-98c1-8d1a0c3f4c91}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{5e040ab0-4db9-4b6c-9fd2-5b7955096224}">
+                <WZUIImage Type="WZUIImage" GUID="{17ea79ab-818e-4aff-b832-a114f596ccf5}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{fb49d373-5307-4ae6-885b-d587f72de2b0}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{c7c4932e-b598-4635-88bc-0006d55f9c6e}" AbsContentSize="770,75" RelativePosition="0.5,0.07" UseAbsSize="True">
+            <Button Type="WZUIButton" GUID="{e7e3c16f-d005-40e6-8127-3e504e4b9522}" AbsContentSize="170,60" UseAbsSize="True" RelativePosition="0.5,0.5" LuaDoneFunctionName="onSetAgent">
+                <NormalElement Type="WZUIContainer" GUID="{54732065-52b9-40bc-8529-1f8357368bf1}">
+                    <WZUIImage Type="WZUIImage" GUID="{11c6e8a0-67e3-47d8-91c9-255e97042ef2}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{34adabdf-c4a2-4d3b-b938-f33e2f024e70}">
+                    <WZUIImage Type="WZUIImage" GUID="{b2b60fbb-cd8f-4f77-9cbf-7695ef553a54}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{f0231435-f24c-48a1-96b9-8689665fddf4}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8fa08a7d-9f45-4629-a976-6fa1272cd25b}" TextKey="" Text="确认" LabelStyleKey="C1_F24_S4_C4" Name="txtBtnText_WndCompeteAgent" />
+            </Button>
+        </WZUIContainer>
+        <WZUITableContainer Type="WZUITableContainer" GUID="{61cb2236-60ed-4a74-9b97-cc700199ef41}" Name="tbconMemberList" AbsContentSize="750,380" RelativePosition="0.5,0.51" UseAbsSize="True" CellElementHeight="0.285" EnableMoveHorizontal="False" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{7e268c26-07c4-45b9-a73b-6c586c81faee}" AbsPosition="375.375,38.304" TextKey="COMMUNITYWARAGENT_TEXT1" Text="设置代理人" LabelStyleKey="C1_F26_S4_C13" RelativePosition="0.5,0.94" />
+    </WZUIWindow>
+</WndCompeteAgent>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" ?>
+<CellDress GUID="{81015240-6C7B-4e2d-93B1-7ADDB32AA5BC}">
+    <WZUIContainer AbsContentSize="115,140" GUID="{DD92269E-450C-40db-88F7-C9020736C2FF}" LuaObjectName="CellDress" Name="CellDress" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{360CB781-8808-43d9-A2C3-2CA19A1E71B3}" AbsContentSize="115,140" UseAbsSize="True" RelativePosition="0.499,0.49413" TouchEnable="False" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{867135FE-C950-4d3a-BB94-1464D5BE0B6F}" File="ui/common/common_scale9_beibaodi_sel.png" Name="imgHighlight_CellDress" TouchEnable="False" RelativePosition="0.5,0.5" Visible="False" />
+        </WZUIContainer>
+        <WZUI9Image File="ui/common/common_scale9_di75.png" GUID="{1F079744-2A49-4423-B689-ABAC064EA78C}" RelativePosition="0.5,0.487515" RelativeSize="1,1" Type="WZUI9Image" Visible="True" TouchEnable="False" UseOriginSize="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{6963fcab-adba-459e-b2c2-6407b8d4d7fd}" UseAbsSize="True" AbsContentSize="90,96" RelativePosition="0.5,0.55">
+            <WZUIImage Type="WZUIImage" GUID="{990c2095-f178-48e0-bc0d-a0cf29b95dc9}" File="ui/common/common_scale9_beibaodi.png" />
+        </WZUIContainer>
+        <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onCheck" GUID="{9cdbeef5-d01b-4ff2-b01d-9dc37b24357e}">
+            <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{6d03038a-8f9b-412d-bce3-87d402f06a59}" />
+            <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{6287ab7b-f182-4291-b540-a812329c585a}" />
+            <DisableElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{c1e6577b-f43a-429e-aab7-eff10d337fa0}" />
+        </WZUIButton>
+        <WZUIContainer AbsContentSize="115,140" AnchorPoint="1,1" GUID="{44babf7e-9a63-47c3-84dc-5560320169c9}" RelativePosition="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUIContainer AbsContentSize="100,100" GUID="{e0f5e1a1-7675-4f29-ab9c-0a9d6c20e298}" Name="conLabel_CellDress" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" TouchEnable="False" Visible="True" Order="5">
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="False" Color="79,60,48" FontSize="22" GUID="{dde65e11-5a30-45d9-a959-9c8c0c9454e0}" MaxLength="10" Name="ttfName_CellDress" Order="1" RelativePosition="0.5,-0.0407717" Text="名称" Type="WZUILabelTTF" TouchEnable="False" AbsPosition="114,67" Visible="True" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="2" />
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Color="255,255,255" FontSize="16" GUID="{0ba91075-1fc0-4bcc-b8bb-c7eb52bb5c68}" MaxLength="15" Name="ttfDeadTime_CellDress" Order="1" RelativePosition="0.500208,0.259958" Text="剩余时间" Type="WZUILabelTTF" TouchEnable="False" Visible="False" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="2" LabelStyleKey="" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="85,85" GUID="{96c625d4-d1fb-49a9-b524-03285f249e26}" Name="conItem" RelativePosition="0.5,0.55" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIImage Type="WZUIImage" GUID="{9fbc596b-9b6a-44c6-8779-6d50c769abbc}" Name="imgEquiped_CellDress" File="ui/common/commom_icon_yzb.png" UseOriginSize="True" RelativePosition="0.76,0.79" TouchEnable="False" TouchSwallow="False" />
+            <WZUIImage Type="WZUIImage" GUID="{19207cba-43ba-4d99-ba1f-f323ae2a22dc}" Name="imgFight_CellDress" File="ui/common/common_icon_zhanlih.png" UseOriginSize="True" RelativePosition="0.76,0.346681" Visible="False" TouchEnable="False" TouchSwallow="False" />
+            <WZUIImage Type="WZUIImage" GUID="{92c6f3cd-9e29-4eba-8b96-e24626b4a2a6}" Name="imgPlayerMark_CellDress" File="ui/kid/kidicon/couple_scale9_008.png" UseOriginSize="True" RelativePosition="0.764348,0.310967" Visible="False" TouchEnable="False" TouchSwallow="False">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9b6f0131-5385-46df-8086-590225ddee8d}" FontSize="16" Color="255,255,255" Name="txtSexMark_CellDress" Text="" Order="1" />
+            </WZUIImage>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellDress>

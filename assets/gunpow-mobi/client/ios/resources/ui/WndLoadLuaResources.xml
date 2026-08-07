@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<WndLoadLuaResources GUID="{55319422-7039-4eba-9775-6F0DD11002FD}">
+    <WZUIWindow Type="WZUIWindow" GUID="{6268278A-A24E-4e57-A459-D3F97FC6718F}" LuaObjectName="WndLoadLuaResources" Name="WndLoadLuaResources">
+        <WZUIContainer Type="WZUIContainer" GUID="{F312F021-4935-45b7-AB86-4D08B3A2A63B}" Visible="True" ShowAll="False" AnchorPoint="0.5,0" RelativePosition="0.5,0" RelativeSize="1,0.12">
+            <WZUIContainer Type="WZUIContainer" GUID="{57F9FA12-70F4-4107-8A93-DA5B5BBC2AB0}" RelativeSize="1.5,1" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{422B643B-5490-40fb-8ACA-0B730418ECEA}" File="ui/common/common_scale9_heidi1.png" Opacity="150" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{44865A83-DAC0-4311-97CB-0B6821FD4387}" ShowAll="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{E1E24CFC-FC3F-49ac-8F60-052E44330767}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5" Name="conProgress_WndLoadLuaResources" NameCreate="True" Visible="True" ShowAll="False" AbsPosition="489.001,73.0006" RelativeSize="1,1" AnchorPoint="0.5,0.5">
+                    <WZUIContainer Type="WZUIContainer" GUID="{847877B3-CE98-45b9-B79B-6B2462970FA0}" RelativeSize="1,0.22" RelativePosition="0.5,0.68319" AnchorPoint="0.5,0.5" AbsPosition="480,63.4">
+                        <WZUIImage Type="WZUIImage" GUID="{323DED9B-7F07-439e-B477-64395743370E}" File="ui/loading/loading_progress_jdt_bg.png" Visible="True" UseOriginSize="True" RelativePosition="0.5,0.518" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{DF8B8781-8D5A-4a2c-8DA7-0D993F071304}" AbsContentSize="798,13" UseAbsSize="True" Visible="True" RelativePosition="0.5,0.5189" UseAbsCoordinate="False" RelativeSize="1,0.8">
+                            <WZUIProgress Type="WZUIProgress" GUID="{DFCB84E5-47E6-4997-AF18-E1D3CCD6F4DD}" BgPicture="ui/loading/loading_progress_jdt_fore.png" Percentage="0" RelativePosition="0.5,0.5" Visible="True" FlipY="False" FlipX="False" Name="progBar_WndLoadLuaResources" UseOriginSize="False" />
+                            <WZUIScissorContainer Type="WZUIScissorContainer" GUID="{30113FA2-3927-4200-8107-DBB5A98FE172}" RelativeSize="0,1" AnchorPoint="0,0.5" RelativePosition="0,0.5" Name="conScissor_WndLoadLuaResources">
+                                <WZUIParticle Type="WZUIParticle" GUID="{B0FBED6F-EE35-4637-A8E1-65CA53B64E62}" PlistFile="particle/ui_loading_lizi.plist" AnchorPoint="0,0.5" RelativePosition="0,0.5" />
+                            </WZUIScissorContainer>
+                            <WZUIContainer AbsContentSize="1,1" GUID="{D2BDCE48-11CE-4ed8-93F9-9D87EFB9C2CD}" Name="conDutiao_WndLoadLuaResources" RelativePosition="0,0.65" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True" AnchorPoint="0,0.5">
+                                <WZUISpine Type="WZUISpine" GUID="{6B69EF1E-CE38-4e0c-8CF5-5A12DA354B33}" FileAtlas="role/loading_tx_01.atlas" FileJson="role/loading_tx_01.json" AnimationName="chixu" Loop="True" AnchorPoint="0.5,0" RelativePosition="-20.5,0.5" AbsPosition="-20.5,0.5" Name="armDutiao_SceneDownLoad" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{C8398603-769E-41c9-9508-14A0DD9F61D0}" RelativeSize="1,0.5" AnchorPoint="0.5,0" RelativePosition="0.5,0" AbsPosition="480,32">
+                    <WZUIContainer Type="WZUIContainer" GUID="{8DABA76E-C047-4eb2-B821-BFAF99AE1F24}" RelativeSize="0.7,1" RelativePosition="0.0885416,0.5" Name="conTips_WndLoadLuaResources" NameCreate="True" ShowAll="False" AbsPosition="85,16" AnchorPoint="0,0.5">
+                        <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" Dimensions="620,0" FontSize="22" GUID="{00CCD59B-7425-46a5-8DBA-56DA03979544}" MaxLength="100" Name="txtTipCnt_WndLoadLuaResources" RelativePosition="0,0.5" Text="" Type="WZUILabelTTF" StrokeColor="79,60,48" StrokeSize="4" EnableStroke="True" LabelStyleKey="C18_F20_S4_C5" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{55D6F915-FA99-4159-A6E8-A0AE5A12A5ED}" Name="txtProTip_WndLoadLuaResources" FontSize="22" Color="99,255,95" Text="" RelativePosition="0.915,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="True" StrokeColor="79,60,48" LabelStyleKey="" AbsPosition="856.648,16" StrokeSize="4" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{574eb44f-5541-49fb-b940-c96e48ac6ff6}" Name="txt_WndLoadLuaResources" FontSize="22" Color="255,255,255" Text="" RelativePosition="0.5,1.2" Alignment="Right" AnchorPoint="0.5,0.5" EnableStroke="True" StrokeColor="79,60,48" LabelStyleKey="C18_F20_S4_C5" AbsPosition="856.648,16" StrokeSize="4" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndLoadLuaResources>

@@ -1,0 +1,35 @@
+<WndActivityRankList GUID="{310b4d37-de00-4e1a-ab9c-148182ff17c3}">
+    <WZUIWindow Type="WZUIWindow" GUID="{50e22143-d5ea-4563-b040-6f2c2e689262}" Name="WndActivityRankList" LuaObjectName="WndActivityRankList" Order="0" NameCreate="True" LuaTouchBeganFunction="" Scale="1" AbsContentSize="776,534" UseAbsSize="True" TouchContainerEnable="True" ShowAll="True">
+        <WZUIContainer AbsContentSize="0,0" GUID="{674c56e8-2b6d-43a5-a0a1-4c3944cd7862}" Name="conBg_WndActivityRankList" RelativePosition="0.5,0.5" Scale="1" ShowAll="False" Type="WZUIContainer" UseAbsSize="False" Visible="True">
+            <WZUI9Image CapInsets="178,75,1,1" File="ui/common/common_scale9_di5.png" GUID="{87612262-54c8-4283-aafd-847625ef07f9}" Type="WZUI9Image" Visible="True" />
+            <WZUIButton AbsContentSize="80,80" AnchorPoint="0.5,0.5" GUID="{ab07e389-96a7-43af-9729-05ea4a304593}" LuaDoneFunctionName="onClose" Name="btnClose_WndActivityRankList" Order="2" RelativePosition="0.953618,0.937864" Scale="1" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal" AbsPosition="740.008,500.819">
+                <NormalElement GUID="{02227ff4-1ff2-4330-9c4d-4a28d4a3e629}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{3dbf24ab-7b15-4c87-b94d-f0ba2a301235}" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </NormalElement>
+                <SelectElement GUID="{30a8dbcc-a4eb-498a-856c-1e9d6c70c620}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{dcc132f8-b227-4a20-b85c-8a579e0b3a55}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement GUID="{b0ca7df4-44cd-44d2-8032-7a9471f79a44}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="False" AbsContentSize="0,0" />
+            </WZUIButton>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3e775277-9f9d-417b-aff1-31db073a8026}" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.937" TextKey="RANKLIST_TITLE" AbsPosition="388,498.848" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{d378537f-7cd6-416b-8419-4741bbd904ee}" ShowAll="False" AbsContentSize="760,470" UseAbsSize="True" RelativePosition="0.5,0.458617">
+            <WZUIContainer Type="WZUIContainer" GUID="{b78f5b81-31d3-4390-aa79-1587ee6aa63d}" UseAbsSize="True" AbsContentSize="766,390" RelativePosition="0.5,0.578" Name="conCenter_WndActivityRankList">
+                <WZUI9Image Type="WZUI9Image" GUID="{ff55c054-b0d2-4f77-8aa6-aa994b6ec7d6}" File="ui/common/common_scale9_di6.png" RelativeSize="0.995,1" RelativePosition="0.498695,0.496246" AbsPosition="382,193.536" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{61aca0de-663b-4b5b-9029-e7e2a23e247e}" FontSize="22" Color="255,227,116" Text="排名" RelativePosition="0.09,0.926881" TextKey="" Name="txtLabel1_WndActivityRankList" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{57b904d9-0372-4c49-91f7-cf3b1e11c62d}" FontSize="22" Color="255,227,116" Text="排名" RelativePosition="0.27,0.926881" TextKey="" Name="txtLabel2_WndActivityRankList" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{aff90905-2d41-48c4-b193-538481210882}" FontSize="22" Color="255,227,116" Text="排名" RelativePosition="0.58,0.926881" TextKey="" Name="txtLabel3_WndActivityRankList" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{fc08e292-85bb-4355-aa93-bc14f8244ab9}" FontSize="22" Color="255,227,116" Text="排名" RelativePosition="0.86579,0.926881" TextKey="" Name="txtLabel4_WndActivityRankList" />
+                <WZUITableContainer Type="WZUITableContainer" GUID="{84621ff6-6f4c-4f17-a119-a3192bcea681}" UseAbsSize="True" AbsContentSize="750,335" RelativePosition="0.5,0.0279487" AnchorPoint="0.5,0" Name="tbconList_WndActivityRankList" EnableMoveHorizontal="False" CellElementHeight="0.3" EnableHideUnvisible="True" ScissorHeight="1.0" VisibleHeight="70" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{dc786856-a7c5-4d99-a9a8-9d59083503ab}" AbsContentSize="760,75" UseAbsSize="True" RelativePosition="0.5,0.0777969">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5aec17b5-aeed-4c42-98b4-48998f26025a}" Text="25" AnchorPoint="1,0.5" Color="255,236,193" StrokeColor="63,24,10" StrokeSize="4" EnableStroke="False" FontSize="26" RelativePosition="0.96,0.486667" Name="txtWinNum_WndActivityRankList">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8a38cb19-a3cc-4e0a-8e6f-69c4d3946f33}" FontSize="26" TextKey="" Color="255,227,116" RelativePosition="-0.05,0.5" AnchorPoint="1,0.5" Name="txtWinwords_WndActivityRankList" />
+                </WZUILabelTTF>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{00fca6b9-7d23-4e21-8fea-3e450f991aeb}" FontSize="26" Color="255,227,116" TextKey="PLAYER_RANK_SCENEWORLDBOSS" RelativePosition="0.05,0.5" AnchorPoint="0,0.5">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{e2d7ac6c-40a3-4170-a2ad-f28f1f47963b}" Text="25" AnchorPoint="0,0.5" Color="255,236,193" StrokeColor="63,24,10" StrokeSize="3" EnableStroke="False" FontSize="26" RelativePosition="1.05,0.486667" Name="txtRank_WndActivityRankList" />
+                </WZUILabelTTF>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndActivityRankList>

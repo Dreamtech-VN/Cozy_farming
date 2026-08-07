@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?><SceneChat GUID="{1C9004BA-0F69-4de7-80D3-DD2E19A09AF2}">
+    <WZUIFrame GUID="{3316669A-F711-493c-978C-1826AAE2FF23}" LuaObjectName="SceneChat" Name="SceneChat" NameCreate="True" Type="WZUIFrame">
+        <WZUIContainer GUID="{FC96B35B-9A96-46b1-9473-0B3645BEE1ED}" Name="conBG_SceneChat" Type="WZUIContainer">
+            <WZUIImage File="ui/chat/chat_bg.png" GUID="{151224ED-6845-43cc-BA06-947554B88869}" Type="WZUIImage" UseOriginSize="True"/>
+            <Button GUID="{41F37E95-F0E6-4367-8C35-AA8FEEEF7F2C}" LuaDoneFunctionName="clickClose_SceneChat" RelativePosition="0.948958,0.920312" RelativeSize="0.05,0.08" Type="WZUIButton">
+                <NormalElement GUID="{833DF0EF-495E-44af-8F91-9ED82E37F130}" Type="WZUIContainer">
+                    <WZUIImage File="temp/wrong.png" GUID="{E6DF88EE-6145-4a14-96A6-A69F113505E3}" Type="WZUIImage" UseOriginSize="True"/>
+                </NormalElement>
+                <SelectElement GUID="{284B28C4-8BC2-49bc-A14B-564717DD43A8}" RelativeSize="1.1,1.1" Type="WZUIContainer">
+                    <WZUIImage File="temp/wrong.png" GUID="{67AA0A5C-2B08-4bb4-A90A-8E4663F1AB29}" Type="WZUIImage" UseOriginSize="True"/>
+                </SelectElement>
+                <DisableElement GUID="{7EF4B365-E9B0-48d2-996E-D6090628F8F3}" Type="WZUIContainer"/>
+            </Button>
+            <WZUIImage File="ui/chat/chat_top_line.png" GUID="{8AA49FB4-E0E1-4eaf-A1C9-1EF84929B419}" RelativePosition="0.5,0.855" RelativeSize="1,0.05" Type="WZUIImage" UseOriginSize="True"/>
+        </WZUIContainer>
+        <WZUICheckBoxGroup GUID="{40CD8FE8-34DE-4494-929A-1C4325CC8DC6}" RelativePosition="0.317709,0.921875" RelativeSize="0.6,0.1" Type="WZUICheckBoxGroup">
+            <CheckBox GUID="{87966405-7F01-4021-8E7D-6B4BCF99A945}" LuaSelectedFunctionName="clickTopSelect_SceneChat" RelativePosition="0.119792,0.5" RelativeSize="0.2,1" SelectedIndex="1" Tag="0" Type="WZUICheckBox">
+                <CheckElement GUID="{D00D30B0-F944-444a-B89A-149FA00D7214}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/button_8_sel.png" GUID="{C14857E1-9C5A-4b78-850F-67310647EB3F}" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUILabelTTF Color="255,255,255" FontSize="28" GUID="{78FC3AC6-574F-4f46-AD40-F153C83C6B37}" Text="全部" TouchEnable="False" Type="WZUILabelTTF"/>
+                </CheckElement>
+                <CheckElement GUID="{C25CBCB7-3EAB-4b8a-A821-1A3DC4C69693}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/button_7_sel.png" GUID="{E4FBA6BF-0FB3-468e-B828-5D8CAB0FB0A4}" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUILabelTTF Color="255,255,255" FontSize="28" GUID="{D1B9EA45-7F73-40c7-A5F3-1BFC6A4023F9}" Text="全部" TouchEnable="False" Type="WZUILabelTTF"/>
+                </CheckElement>
+            </CheckBox>
+            <CheckBox GUID="{FE2347D8-E4A9-4ce7-BD92-4DA6F64DBE5B}" LuaSelectedFunctionName="clickTopSelect_SceneChat" RelativePosition="0.331598,0.5" RelativeSize="0.2,1" SelectedIndex="0" Tag="1" Type="WZUICheckBox">
+                <CheckElement GUID="{7B103D40-B0D2-489e-9766-C9F73250F54A}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/button_8_sel.png" GUID="{D6B8BFFD-B707-4644-92D4-2F2603D559B3}" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUILabelTTF Color="255,255,255" FontSize="28" GUID="{C6FEF2AD-783D-4990-B37F-CB86826A36B5}" Text="私聊" TouchEnable="False" Type="WZUILabelTTF"/>
+                </CheckElement>
+                <CheckElement GUID="{B492EAE8-01AE-4f83-A28A-21DC50649591}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/button_7_sel.png" GUID="{9DF3AA2E-EC66-439e-B075-772CE122F2B3}" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUILabelTTF Color="255,255,255" FontSize="28" GUID="{E1DA9B61-B08A-47f2-ADA5-4E525BFC9E9D}" Text="私聊" TouchEnable="False" Type="WZUILabelTTF"/>
+                </CheckElement>
+            </CheckBox>
+            <CheckBox GUID="{39F18101-5E73-4faf-A902-F5C8CB637F43}" LuaSelectedFunctionName="clickTopSelect_SceneChat" RelativePosition="0.546876,0.5" RelativeSize="0.2,1" SelectedIndex="0" Tag="2" Type="WZUICheckBox">
+                <CheckElement GUID="{93F17B18-4E04-465d-BD12-2E70B1FC19A9}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/button_8_sel.png" GUID="{30B71A2D-53A0-45c1-867B-102CB9733992}" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUILabelTTF Color="255,255,255" FontSize="28" GUID="{8B57FB78-8867-46f5-A9BB-A064AEF8CD3E}" Text="公会" TouchEnable="False" Type="WZUILabelTTF"/>
+                </CheckElement>
+                <CheckElement GUID="{EC663761-A4E3-4a73-9383-61908A3AB5F8}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/button_7_sel.png" GUID="{749A1860-96E7-4004-9971-5A598ED886F4}" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUILabelTTF Color="255,255,255" FontSize="28" GUID="{043B7264-F8D7-4af2-A260-2E2286EBCB4C}" Text="公会" TouchEnable="False" Type="WZUILabelTTF"/>
+                </CheckElement>
+            </CheckBox>
+        </WZUICheckBoxGroup>
+        <WZUIContainer GUID="{AC248AB9-D5EF-464e-9674-A19E477ABA76}" Name="conBottum_SceneChat" RelativePosition="0.5,0.0765625" RelativeSize="0.95,0.1" Type="WZUIContainer">
+            <WZUIImage File="common/Jigsaw/2.png" GUID="{1B055035-B24B-48d2-BC7B-7FC85E14D989}" Type="WZUIImage"/>
+            <Button GUID="{087FE3A6-FF3A-4eb5-A954-2F5A469EB398}" LuaDoneFunctionName="clickType_SceneChat" RelativePosition="0.1,0.5" RelativeSize="0.15,1" Type="WZUIButton">
+                <NormalElement GUID="{5BD8E7FC-42D3-44b5-BE5F-541D4C89AF14}" Type="WZUIContainer">
+                    <WZUIImage File="ui/chat/list_button.png" GUID="{44858518-06DE-46c1-9CF2-B5DD25A0A484}" Type="WZUIImage" UseOriginSize="True"/>
+                </NormalElement>
+                <SelectElement GUID="{0A575A59-A1B0-4a39-B5D1-979F89E6A067}" Type="WZUIContainer">
+                    <WZUIImage File="ui/chat/list_button_sel.png" GUID="{C1EA6D38-9539-445b-9274-48FB52EE3CEB}" Type="WZUIImage" UseOriginSize="True"/>
+                </SelectElement>
+                <DisableElement GUID="{7F8FC91B-F707-40cb-89EA-41A3C89CC241}" Type="WZUIContainer"/>
+            </Button>
+            <WZUILabelTTF Color="255,255,255" FontSize="30" GUID="{805E5AFB-3324-470e-8A21-A37C081C273C}" Name="txtType_SceneChat" RelativePosition="0.0802632,0.5" Text="当前" Type="WZUILabelTTF"/>
+            <WZUIEditBox BgPicture="ui/createActor/input_actornamebg.png" FontSize="22" GUID="{52B55ECA-BE24-4b58-9038-3636AD48C07D}" Name="edtInput_SceneChat" PlaceHolder="请输入聊天内容" PlaceholderFontColor="255,255,255" RelativePosition="0.510965,0.5" RelativeSize="0.65,1" Type="WZUIEditBox" Visible="True"/>
+            <WZUIButton GUID="{1A71AC87-CA64-4c16-8AB4-97B45CBBC2D5}" Name="btnFriend_SceneChat" RelativePosition="0.760526,0.5" RelativeSize="0.15,1" Type="WZUIButton" Visible="False">
+                <NormalElement GUID="{F0B781C8-A6B1-4d20-A253-EF0A075F3D02}" Type="WZUIContainer">
+                    <WZUIImage File="ui/chat/list_button.png" GUID="{4BE344C0-C7F9-46fb-806D-7984F2A4DA61}" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUILabelTTF Color="255,255,255" FontSize="30" GUID="{D2AA125F-BB97-4004-BF37-53243EB80892}" RelativePosition="0.412281,0.5" Text="好友" Type="WZUILabelTTF"/>
+                </NormalElement>
+                <SelectElement GUID="{5AF1788A-F21A-4b06-A72D-4EF1BACA35D5}" Type="WZUIContainer">
+                    <WZUIImage File="ui/chat/list_button_sel.png" GUID="{969CFA58-D116-448e-BD70-22DCE21FEAD4}" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUILabelTTF Color="255,255,255" FontSize="30" GUID="{C97DA4DF-17EC-4cb4-9CAB-2884CF041AD3}" RelativePosition="0.412281,0.5" Text="好友" Type="WZUILabelTTF"/>
+                </SelectElement>
+                <DisableElement GUID="{569AC631-E021-42fe-BC06-92B1117FA57D}" Type="WZUIContainer"/>
+            </WZUIButton>
+            <WZUIButton GUID="{1BEB76D9-8A9A-4071-A8C7-D53E0E61B126}" Name="btnSend_SceneChat" RelativePosition="0.921711,0.5" RelativeSize="0.15,1" Type="WZUIButton">
+                <NormalElement GUID="{064EFA4F-1937-4c06-B595-FF656752DC36}" Type="WZUIContainer">
+                    <WZUIImage File="ui/chat/list_button.png" GUID="{4954AF04-BD7C-47c4-801E-85AC0B68EBB1}" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUILabelTTF Color="255,255,255" FontSize="30" GUID="{CA633B81-2F61-4439-8405-4162DCEF00BE}" RelativePosition="0.412281,0.5" Text="发送" Type="WZUILabelTTF"/>
+                </NormalElement>
+                <SelectElement GUID="{DD3F2532-6F1D-4917-B267-FB3BEF566684}" Type="WZUIContainer">
+                    <WZUIImage File="ui/chat/list_button_sel.png" GUID="{B01AA0F0-2271-4f2c-86A1-39AC876855D9}" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUILabelTTF Color="255,255,255" FontSize="30" GUID="{F882ACAE-D78F-455d-BFBF-1E72099E3905}" RelativePosition="0.412281,0.5" Text="发送" Type="WZUILabelTTF"/>
+                </SelectElement>
+                <DisableElement GUID="{0A7DA2B0-8F49-4c24-AF12-812F80B48441}" Type="WZUIContainer"/>
+            </WZUIButton>
+            <WZUIContainer GUID="{8F34500D-2272-48b2-A3AE-724670998220}" Name="conPri_SceneChat" RelativePosition="0.507675,0.5" RelativeSize="0.65,1" Type="WZUIContainer" Visible="False">
+                <WZUIEditBox BgPicture="ui/createActor/input_actornamebg.png" FontSize="22" GUID="{F90FA709-E652-4b25-B104-A2BB150ABFB5}" Name="edtFriendID_SceneChat" PlaceHolder="请输入私聊ID" PlaceholderFontColor="255,255,255" RelativePosition="0.132524,0.5" RelativeSize="0.25,1" Type="WZUIEditBox" Visible="True"/>
+                <WZUIImage File="ui/chat/send_line.png" GUID="{75B16FAB-2C80-41c7-A40C-3E2B797632AE}" RelativePosition="0.273194,0.5" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                <WZUIEditBox BgPicture="ui/createActor/input_actornamebg.png" FontSize="22" GUID="{D511CAA1-81C9-4e5d-B620-FCB00376FBB3}" Name="edtPriInput_SceneChat" PlaceHolder="请输入聊天内容" RelativePosition="0.510965,0.5" RelativeSize="0.44,1" Type="WZUIEditBox" Visible="True"/>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIFrameElement GUID="{872F4738-7B1E-4193-873C-AC0BA84E7EFA}" Name="frameelement_SceneChat" RelativePosition="0.5,0.4875" RelativeSize="0.95,0.7" Type="WZUIFrameElement">
+            <FrameElement GUID="{ED3A6130-6130-47c5-943B-6D321E394AF9}" Tag="0" Type="WZUIContainer">
+                <WZUIFreeListContainer GUID="{03EC1AAE-26DA-4f2c-83F6-C74A0AD40A1D}" Name="freelistconAll_SceneChat" Type="WZUIFreeListContainer"/>
+            </FrameElement>
+            <FrameElement GUID="{52DA5355-0F21-4e09-A913-443F0738EDAC}" Tag="1" Type="WZUIContainer">
+                <WZUIFreeListContainer GUID="{3DA537D2-39A1-4a88-ABB2-C36C06EC22A7}" Name="freelistconPrivate_SceneChat" Type="WZUIFreeListContainer"/>
+            </FrameElement>
+            <FrameElement GUID="{9387126F-A06E-42e3-8AAB-7130E972DA3E}" Tag="2" Type="WZUIContainer">
+                <WZUIFreeListContainer GUID="{503E556E-A960-4c28-8B20-7A4137124E4E}" Name="freelistconGonghui_SceneChat" Type="WZUIFreeListContainer"/>
+            </FrameElement>
+        </WZUIFrameElement>
+        <WZUIContainer GUID="{9093A930-8AB5-473a-AF65-7180200CE9FB}" Name="conIn_SceneChat" RelativePosition="0.120417,0.326562" RelativeSize="0.2,0.4" Type="WZUIContainer" Visible="False">
+            <WZUIImage File="common/Jigsaw/22.png" GUID="{9D57EB41-AFCB-4e83-A6D4-3EE77D5C65DE}" Type="WZUIImage" UseOriginSize="False"/>
+            <WZUITableContainer CellElementHeight="0.15" EnableDagLoading="False" EnableHorizontalScroll="False" EnableMoveHorizontal="False" GUID="{9260C3DD-25E0-424f-8731-D4D19FBF56EB}" Name="tbType_SceneChat" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUITableContainer"/>
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneChat>

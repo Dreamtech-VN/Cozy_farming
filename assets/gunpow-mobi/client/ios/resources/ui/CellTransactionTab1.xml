@@ -1,0 +1,15 @@
+﻿<CellTransactionTab1 GUID="{bab1a711-9d6d-41e9-adc6-30098c53bd7b}">
+    <WZUIContainer Type="WZUIContainer" GUID="{604475db-7162-4024-8fd6-24e133a0c44b}" Name="CellTransactionTab1" LuaObjectName="CellTransactionTab1" NameCreate="True" UseAbsSize="True" AbsContentSize="190,66">
+        <Button AbsContentSize="180,62" GUID="{03979a5a-fd08-472a-a58f-761fd704fcf0}" LuaDoneFunctionName="onClickCellItem" Type="WZUIButton" UseAbsSize="True" Name="">
+            <NormalElement GUID="{ce0e77aa-2b2a-48c3-b122-34db864d6e6e}" Type="WZUIContainer">
+                <WZUIImage File="ui/common/common_btn_anniu16.png" GUID="{f0ef94d9-1814-4eea-a27f-d1574282d138}" Type="WZUIImage" UseOriginSize="False" />
+            </NormalElement>
+            <SelectElement GUID="{1c65ce51-ada7-4492-95b5-a8201c4d4287}" Type="WZUIContainer">
+                <WZUIImage File="ui/common/common_btn_anniu20.png" GUID="{ef0d5819-c379-4849-977c-86db8118821e}" Type="WZUIImage" />
+            </SelectElement>
+            <DisableElement GUID="{f5f7f91c-3672-48a7-86ec-48737413e522}" Type="WZUIContainer" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{faa1ed1d-8539-467a-97b8-8d18e2ebe8c2}" Name="txt_subItemName" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.6,0.485714" Text="绿宝石" TextKey="" />
+        </Button>
+        <WZUIImage Type="WZUIImage" GUID="{b3dacdb7-d43f-4edb-9711-e59d35b476bf}" File="ui/common/common_icon_zhujiemian.png" UseOriginSize="True" RelativePosition="0.22,0.5" Name="imgArrow" TouchEnable="False" TouchSwallow="False" />
+    </WZUIContainer>
+</CellTransactionTab1>

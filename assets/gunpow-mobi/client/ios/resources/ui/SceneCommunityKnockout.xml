@@ -1,0 +1,107 @@
+﻿<SceneCommunityKnockout GUID="{ef30352d-2ff5-4818-aa1f-c05ec1bc87a6}">
+    <WZUIFrame AbsContentSize="0,0" GUID="{0ab7d326-ea7e-4c62-ba80-d71d6606e11f}" LuaObjectName="SceneCommunityKnockout" LuaTouchBeganFunction="onTouchBegan" Name="SceneCommunityKnockout" NameCreate="True" RelativePosition="0.5,0.5" Scale="1" ShowAll="False" Type="WZUIFrame" UseAbsSize="False">
+        <WZUIContainer AbsContentSize="960,640" GUID="{7e1f09d3-ae01-4f2e-8762-fd25fb7095f1}" Type="WZUIContainer" UseAbsSize="True" Visible="True" TouchSwallow="False" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{7b0c966c-76ce-42e1-b049-7e31686800da}" File="ui/community/common_pic_ghzbj.png" Visible="True" Name="" UseOriginSize="True" Scale="2" ScaleX="2.465" />
+        </WZUIContainer>
+        <WZUIParticle Type="WZUIParticle" GUID="{dea82e97-24a3-4dfe-90ad-3e3f4a1aa550}" PlistFile="particle/particle_tongyonglizi.plist" RelativePosition="0.5,0.1" />
+        <WZUIContainer Type="WZUIContainer" GUID="{333bddd9-5669-4082-b470-978a8744c925}" AbsContentSize="1136,640" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.8">
+            <WZUI9Image Type="WZUI9Image" GUID="{b2645af6-24da-4b7c-81c2-5ba7d7574f74}" File="ui/common/common_scale9_di71.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{91018ee9-8db2-492f-889c-139587e9ac9f}" AbsContentSize="1136,2" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUI9Image Type="WZUI9Image" GUID="{0e4e05c6-d442-4520-af41-52c06feedd97}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="False" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" ScaleX="6" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{5a53fe9f-4286-4ea8-b005-96b1f3087294}" File="公会战_淘汰赛房间.png" Visible="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{4e7868ff-c335-4cbc-93b1-9c21607aedb3}" AbsContentSize="625,380" UseAbsSize="True" RelativePosition="0.335,0.417" Name="conRoom_SceneCommunityKnockout" Visible="True" ShowAll="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{3d0543ff-9047-4c5d-b641-a9226330b3dc}" AbsContentSize="200,380" UseAbsSize="True" RelativePosition="0,0.5" Name="conTeam1_SceneCommunityKnockout" Visible="True" AnchorPoint="0,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{ef724c2f-2e81-43f7-b090-3abed04008c6}" File="ui/common/common_scale9_di51.png" />
+                <WZUIImage Type="WZUIImage" GUID="{cc15827d-ad35-4227-8843-80d396e2dc57}" File="ui/hero/common_scale9_herodk.png" UseOriginSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{003f08a2-64b4-439b-b63e-a4fda431abd9}" FontSize="22" Color="255,227,116" Name="txtTeamMark1_SceneCommunityKnockout" Text="" RelativePosition="0.5,0.96" TextKey="KNOCKOUT1" />
+                <WZUIContainer Type="WZUIContainer" GUID="{a542b7f4-7ffc-45fa-b93a-987abcd3e5fc}" AnchorPoint="0.5,1" RelativePosition="0.5,0.91" RelativeSize="1,0.7">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{8d3f2857-b79c-4a48-bc32-b27cce27ebb2}" Name="tbconTeam1_SceneCommunityKnockout" CellElementHeight="0.34" EnableMoveHorizontal="False" TouchContainerEnable="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{296aafa7-7c12-4800-8c8a-7364ee15f88a}" RelativeSize="1,0.21" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{10ab83b0-cded-40fd-b8e8-de1eb8f07bab}" FontSize="20" Color="255,236,193" AnchorPoint="0,0.5" RelativePosition="0.12,0.65" Name="txtFighting1_SceneCommunityKnockout" Text="" Alignment="Left" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b368d437-11e9-4441-8918-4081428cd219}" FontSize="20" Color="99,255,95" Name="txtNumber1_SceneCommunityKnockout" RelativePosition="0.5,0.3" Text="" />
+                    <WZUIImage Type="WZUIImage" GUID="{5f813e5c-b52c-4ae1-bb44-dd4c2c3d3550}" File="ui/common/common_icon_shengli.png" UseOriginSize="True" Name="imgResult1_SceneCommunityKnockout" RelativePosition="0.5,0.3" Visible="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{90d13ce4-713a-406e-a7ed-ab99d8611756}" AbsContentSize="200,380" UseAbsSize="True" RelativePosition="0.5,0.5" Name="conTeam2_SceneCommunityKnockout">
+                <WZUI9Image Type="WZUI9Image" GUID="{f6c51277-0bfe-49dd-bd75-167b263284ce}" File="ui/common/common_scale9_di51.png" />
+                <WZUIImage Type="WZUIImage" GUID="{d5fd08d3-ac44-48c3-b931-efbf73ac604e}" File="ui/hero/common_scale9_herodk.png" UseOriginSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5a19ffd8-33ab-4772-af9a-19ad7ded303a}" FontSize="22" Color="255,227,116" Name="txtTeamMark2_SceneCommunityKnockout" Text="" RelativePosition="0.5,0.96" TextKey="KNOCKOUT2" />
+                <WZUIContainer Type="WZUIContainer" GUID="{34ec23be-344c-4c59-9a9f-4f31cbdfffbe}" AnchorPoint="0.5,1" RelativePosition="0.5,0.91" RelativeSize="1,0.7">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{ef2b3888-daf1-4339-a2a8-47f9af61e647}" Name="tbconTeam2_SceneCommunityKnockout" CellElementHeight="0.34" EnableMoveHorizontal="False" TouchContainerEnable="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{efd260e6-01fe-4ee2-97aa-5aaed837ed40}" RelativeSize="1,0.21" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c7606180-0ee5-4276-a549-7765dd71fa60}" FontSize="20" Color="255,236,193" AnchorPoint="0,0.5" RelativePosition="0.12,0.65" Name="txtFighting2_SceneCommunityKnockout" Text="" Alignment="Left" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6c552c67-0262-46f8-b29f-e2f09c2391d8}" FontSize="20" Color="99,255,95" Name="txtNumber2_SceneCommunityKnockout" RelativePosition="0.5,0.3" Text="" />
+                    <WZUIImage Type="WZUIImage" GUID="{532dd186-cef4-4078-9214-5276cc7674d2}" File="ui/common/common_icon_shengli.png" UseOriginSize="True" Name="imgResult2_SceneCommunityKnockout" RelativePosition="0.5,0.3" Visible="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1ec2b571-6f3c-4e12-a7e5-e0966d36aa2a}" AbsContentSize="200,380" UseAbsSize="True" RelativePosition="1,0.5" Name="conTeam3_SceneCommunityKnockout" AnchorPoint="1,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{4bb90bee-2733-457a-a68b-e0398354781d}" File="ui/common/common_scale9_di51.png" />
+                <WZUIImage Type="WZUIImage" GUID="{1272fc4f-358b-41ba-bb62-7778b9e406c8}" File="ui/hero/common_scale9_herodk.png" UseOriginSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{981e1720-6645-45bf-83bc-5658a1bb7dbc}" FontSize="22" Color="255,227,116" Name="txtTeamMark3_SceneCommunityKnockout" Text="" RelativePosition="0.5,0.96" TextKey="KNOCKOUT3" />
+                <WZUIContainer Type="WZUIContainer" GUID="{f6d41697-8453-4126-a3c5-c26760566dc7}" AnchorPoint="0.5,1" RelativePosition="0.5,0.91" RelativeSize="1,0.7">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{a2dc75c1-775d-49b0-b314-42e95712d239}" Name="tbconTeam3_SceneCommunityKnockout" CellElementHeight="0.34" EnableMoveHorizontal="False" TouchContainerEnable="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{b43074e8-584c-4ccf-8f96-0b8455601d34}" RelativeSize="1,0.21" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{35045974-feb1-45c3-a778-722045758f33}" FontSize="20" Color="255,236,193" AnchorPoint="0,0.5" RelativePosition="0.12,0.65" Name="txtFighting3_SceneCommunityKnockout" Text="" Alignment="Left" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{a7655408-6d18-4677-b8e1-65713437facd}" FontSize="20" Color="99,255,95" Name="txtNumber3_SceneCommunityKnockout" RelativePosition="0.5,0.3" Text="" />
+                    <WZUIImage Type="WZUIImage" GUID="{ca060c0b-4c1e-4428-a9db-4069c9100b93}" File="ui/common/common_icon_shengli.png" UseOriginSize="True" Name="imgResult3_SceneCommunityKnockout" RelativePosition="0.5,0.3" Visible="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{8c25f6b2-3f45-40e5-a54b-c7f4d4e800a7}" AbsContentSize="300,380" UseAbsSize="True" RelativePosition="1.257,0.5" Name="conRoomRight_SceneCommunityKnockout">
+                <WZUICheckBoxGroup AbsContentSize="178,38" AnchorPoint="0.5,1" GUID="{6415368a-e311-4581-8afb-e69d24b48d17}" Name="checkGroup_SceneCommunityKnockout" Order="2" RelativePosition="0.356,1.101" Type="WZUICheckBoxGroup" UseAbsSize="True">
+                    <CheckBox AbsContentSize="88,40" AnchorPoint="0,0" GUID="{afcfa4f0-e5a4-4fa9-b0e0-f91c8f0c01f1}" LuaCheckedFunctionName="onTab" Name="checkbox1_WndStrengthen" RelativePosition="0,0" SelectedIndex="1" Type="WZUICheckBox" UseAbsSize="True" AbsPosition="51.7495,14.3" Tag="1">
+                        <CheckElement GUID="{734ac9f6-7b64-4927-9602-206964798be6}" RelativePosition="0.5,0.5" Type="WZUIContainer">
+                            <WZUI9Image File="ui/common/common_btn_biaoqian2.png" GUID="{6516335d-c18d-4d80-94d8-d681e66114ea}" Type="WZUI9Image" UseOriginSize="False" Scale="1" ScaleX="1" ScaleY="1" Color="255,255,255" />
+                            <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" GUID="{e00b80fb-7bc7-4290-8d3f-4c92c48bd348}" Name="txtIntensify1_SceneCommunityKnockout" RelativePosition="0.5,0.43" StrokeColor="79,60,48" StrokeSize="4" Type="WZUILabelTTF" Text="" TextKey="KNOCKOUT8" />
+                        </CheckElement>
+                        <CheckElement GUID="{3a201c3c-f73e-4e7d-9392-e24d3f021e3e}" RelativePosition="0.5,0.5" Type="WZUIContainer" AbsPosition="43,22.034">
+                            <WZUI9Image File="ui/common/common_btn_biaoqian2_sel.png" GUID="{470bd455-ee38-4d62-85a4-6f3086d63e18}" Type="WZUI9Image" Scale="1" ScaleX="1" ScaleY="1" UseOriginSize="False" RelativePosition="0.5,0.5" AbsPosition="43,20" Visible="True" />
+                            <WZUILabelTTF BoldFont="True" Color="79,60,48" EnableStroke="False" FontSize="24" GUID="{bbdfcdd7-d67a-4a71-954e-191f82716fc9}" Name="txtIntensify2_SceneCommunityKnockout" RelativePosition="0.5,0.45" StrokeColor="60,19,12" StrokeSize="1" Type="WZUILabelTTF" Text="" TextKey="KNOCKOUT8" />
+                        </CheckElement>
+                    </CheckBox>
+                    <CheckBox AbsContentSize="88,40" GUID="{e04af6dc-019c-4926-9410-5be25fd5ebde}" LuaCheckedFunctionName="onTab" Name="checkbox2_WndStrengthen" RelativePosition="1,0" SelectedIndex="0" Type="WZUICheckBox" UseAbsSize="True" AbsPosition="320.906,15.3" AnchorPoint="1,0" Tag="2">
+                        <CheckElement GUID="{db39d49f-6853-402e-b8ad-3b49bc73b5fa}" Type="WZUIContainer" RelativePosition="0.5,0.5">
+                            <WZUI9Image File="ui/common/common_btn_biaoqian2.png" GUID="{ff085191-4196-437e-bf6a-cd5dde1eee76}" Type="WZUI9Image" UseOriginSize="False" Scale="1" ScaleX="1" ScaleY="1" Color="255,255,255" />
+                            <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" GUID="{ab3225ff-57a7-4baf-8b9b-6b88ad143773}" Name="txtImprove1_SceneCommunityKnockout" RelativePosition="0.5,0.43" StrokeColor="79,60,48" StrokeSize="4" Type="WZUILabelTTF" Text="" TextKey="ROOM1" />
+                        </CheckElement>
+                        <CheckElement GUID="{66d6bfb6-5c24-4c8a-9009-9e4ed3fd6c5b}" Type="WZUIContainer" RelativePosition="0.5,0.5" AbsPosition="43,21.008">
+                            <WZUI9Image File="ui/common/common_btn_biaoqian2_sel.png" GUID="{9779b36c-9233-43ac-97f0-0e5f72b2c1b9}" Type="WZUI9Image" Scale="1" ScaleX="1" ScaleY="1" UseOriginSize="False" RelativePosition="0.5,0.5" AbsPosition="43,21" />
+                            <WZUILabelTTF BoldFont="True" Color="79,60,48" EnableStroke="False" FontSize="24" GUID="{d90eef43-f8ce-41bb-9e8f-f3c3af294162}" Name="txtImprove2_SceneCommunityKnockout" RelativePosition="0.5,0.45" StrokeColor="60,19,12" StrokeSize="1" Type="WZUILabelTTF" Text="" TextKey="ROOM1" />
+                        </CheckElement>
+                    </CheckBox>
+                </WZUICheckBoxGroup>
+                <WZUI9Image Type="WZUI9Image" GUID="{399ad404-0b40-4ee3-be8d-a79797610184}" File="ui/common/common_scale9_di51.png" />
+                <WZUIFreeListContainer EnableMoveHorizontal="False" GUID="{313090fd-ebc4-4f1d-92ce-516f1b452747}" Name="freecon_SceneCommunityKnockout" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIFreeListContainer" AbsContentSize="290,360" UseAbsSize="True" Resistance="1" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{45ba6504-1779-421a-bd29-17c69bcc638b}" AbsContentSize="84,32" UseAbsSize="True" RelativePosition="0.7704,1.06" LuaActionName="Normal" LuaDoneFunctionName="onClickRoomCell" Visible="True">
+                <NormalElement Type="WZUIContainer" GUID="{ae34d569-55ce-4de0-9a6e-2ecc934ec0f7}">
+                    <WZUIImage Type="WZUIImage" GUID="{91a4b98e-4511-4ebf-944e-e47e675e9d88}" File="ui/common/common_btn_anniu5.png" UseOriginSize="False" ScaleX="1" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{63395697-5bba-4091-9612-2d9af610435e}">
+                    <WZUIImage Type="WZUIImage" GUID="{93dd02c5-722f-4afa-97a0-628fca52ac10}" File="ui/common/common_btn_anniu5_sel.png" UseOriginSize="False" ScaleX="1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{156fd30b-f570-4a94-abe2-e185d4db7b4c}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{138b2a8d-d92a-4045-8580-4d8bd0c85e5d}" AnchorPoint="0.5,0.5" FontSize="18" Color="255,236,193" Name="txtBtnCheck_SceneCommunityKnockout" RelativePosition="0.5,0.5" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" TextKey="SETTING_TITLE" Text="" />
+            </Button>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5615c5db-b8ad-49a1-baea-5940e2752fa2}" AnchorPoint="1,0.5" FontSize="22" Color="255,227,116" Name="txtRoomMemberNum_SceneCommunityKnockout" RelativePosition="0.69,1.06" TextKey="" Alignment="Right" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{28164c0b-45f1-4464-8ca6-547ff1aab79c}" TextKey="KNOCKOUT5" LabelStyleKey="" RelativePosition="0.323663,0.836177" Scale="1" ShowAll="True" Color="255,227,116" FontSize="30" BoldFont="True" EnableStroke="True" StrokeSize="4" StrokeColor="127,70,26" ScaleX="1" ScaleY="1" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{85a44490-bf94-4bf6-9d9c-cc5b2fb097c4}" TextKey="KNOCKOUT6" LabelStyleKey="C1_F18_S1_C13" RelativePosition="0.933,0.828" Scale="1" ScaleX="1" ScaleY="1" ShowAll="True" Name="txtRule_SceneCommunityKnockout" Dimensions="0,0" />
+        <WZUIButton Type="WZUIButton" GUID="{ecc3b329-0f10-433b-8d22-5b0d6be8ae1f}" AbsContentSize="110,50" UseAbsSize="True" RelativePosition="0.871,0.83" Name="btnInfo" LuaDoneFunctionName="onInfo" LuaActionName="Normal" Scale="1" ScaleX="1" ScaleY="1" ShowAll="True">
+            <NormalElement Type="WZUIContainer" GUID="{0caab017-0b56-495b-a8b5-664fe6666af5}">
+                <WZUIImage Type="WZUIImage" GUID="{7826f467-5331-4a3b-9bb1-65f0a14c59da}" File="ui/common/common_icon_gth1.png" UseOriginSize="True" Scale="0.75" ScaleX="0.75" ScaleY="0.75" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{2ec2ab48-1993-46ab-bf42-21f53b3eb353}">
+                <WZUIImage Type="WZUIImage" GUID="{1c5f6478-c2ec-451f-b5fa-62f6bf6019aa}" File="ui/common/common_icon_gth1.png" UseOriginSize="True" Scale="0.75" ScaleX="0.75" ScaleY="0.75" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{736f63bc-15c4-4903-b57c-49ff8343dbdc}" />
+        </WZUIButton>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{77eae956-7bd1-435d-8bc1-c6ab6b467386}" TextKey="SHOP_GOODSSHEGN" LabelStyleKey="C7_F20" RelativePosition="0.783,0.053" Scale="1" ScaleX="1" ScaleY="1" ShowAll="True" Name="txtLeave_SceneCommunityKnockout" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{18dc3880-7a58-4409-a932-b83d5da4abf9}" TextKey="" LabelStyleKey="C16_F20" RelativePosition="0.807,0.053" Scale="1" ScaleX="1" ScaleY="1" Text="00:00:00" Alignment="Left" AnchorPoint="0,0.5" Name="leftTime_SceneCommunityKnockout" ShowAll="True" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c54e047e-fe1b-412a-9577-7cf9e4b0584e}" TextKey="KNOCKOUT7" LabelStyleKey="C1_F20_S4_C13" RelativePosition="0.935,0.053" Scale="1" ScaleX="1" ScaleY="1" ShowAll="True" Name="txtStartAuto_SceneCommunityKnockout" />
+    </WZUIFrame>
+</SceneCommunityKnockout>

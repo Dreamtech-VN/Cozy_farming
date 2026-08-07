@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<CellTreasureBox GUID="{C36619DE-3C68-40da-8215-3A88F38E9B29}">
+    <WZUIContainer Type="WZUIContainer" GUID="{2B884357-4079-4f1c-87BD-7895CBA5EEDE}" LuaObjectName="CellTreasureBox" Name="CellTreasureBox" NameCreate="True" AbsContentSize="682,95" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0.0167411">
+        <WZUIContainer Type="WZUIContainer" GUID="{9D36C7C3-4A09-4b61-A593-01DD83765A01}" RelativeSize="1,0.2" UseAbsSize="True" AbsContentSize="682,20" RelativePosition="0.528369,0.379093">
+            <WZUIImage Type="WZUIImage" GUID="{97C477C1-4FCF-4475-BF7D-3DC2B2332347}" File="ui/common/common_progress_huoyuedu.png" RelativePosition="0.46473,0.79744" UseOriginSize="True" Opacity="255" />
+            <WZUIProgress Type="WZUIProgress" GUID="{C419DD19-EF8D-431f-B810-D96DCB1FD680}" BgPicture="ui/common/common_progress_huoyuedu2.png" Name="imgPrg_CellTreasureBox" Percentage="0" RelativePosition="0.481067,0.74121" RelativeSize="0.87,0.75" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{747126EF-BCE4-4b23-B9C3-E1DDBF9808A5}" UseAbsSize="True" AbsContentSize="90,70" RelativePosition="0.336091,0.577127" Name="conReward1_CellTreasureBox" Visible="True">
+            <WZArmature Type="WZArmature" GUID="{AAC916C6-5239-4dab-9857-23B8A0757098}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" Visible="False" Scale="1" Name="armBox1_CellTreasureBox" RelativePosition="0.518559,-0.455921" ScaleX="1" ScaleY="1" TouchEnable="False" AbsPosition="46.6703,-31.9145">
+                <Action Type="WZUIArmatureAnimationById" GUID="{4BFE74E0-4D84-444b-8AF4-86E31DF1CD6A}" IsLoop="False" AnimationId="0" Loop="-1" />
+            </WZArmature>
+            <WZUIImage Type="WZUIImage" GUID="{33AA2A18-CFD1-493e-840A-C2AAF5EBA323}" Name="imgLight1_CellTreasureBox" File="ui/common/common_icon_lan1.png" RelativeSize="1,1" RelativePosition="0.5,0.5" Visible="True" UseOriginSize="True" Color="255,255,255" TouchEnable="False" />
+            <WZUIImage Type="WZUIImage" GUID="{E0085236-7EEA-456f-BDB3-1D8139733F99}" File="ui/common/common_icon_lan3.png" UseOriginSizeProportion="False" UseOriginSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.452632" Name="imgReward1_CellTreasureBox" Visible="False" Color="255,255,255" TouchEnable="False" />
+            <WZUIImage Type="WZUIImage" GUID="{29979DA5-D17F-49a2-990A-0A3B014244D9}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Scale="0.6" RelativePosition="0.566976,-0.03368" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{23D495ED-4A75-4401-BDA9-905D4B586AA6}" AnchorPoint="1,0.5" Color="255,236,193" Name="txtRewardStar1_CellTreasureBox" Text="" FontSize="22" RelativePosition="0.404473,-0.0797178" BoldFont="False" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" />
+            <WZUIImage Type="WZUIImage" GUID="{ecad6a0f-4280-40fd-a0fe-46fbefbdaee3}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.8,-0.0142857" Scale="0.8" Name="imgRedTip1_CellTreasureBox" Visible="False" TouchEnable="False" />
+            <WZUIButton Type="WZUIButton" GUID="{19b09a31-b2f2-45bb-b8e4-271fbc461406}" LuaPushFunctionName="" LuaDoneFunctionName="onClickReward" Tag="1" AbsContentSize="100,70" UseAbsSize="True" Name="btnReward1_CellTreasureBox">
+                <NormalElement Type="WZUIContainer" GUID="{8c9e7f00-287e-4580-8312-4f1529e2de01}" TouchContainerEnable="True" />
+                <SelectElement Type="WZUIContainer" GUID="{91874eef-7cbd-4080-b6b1-29da19b08c61}" TouchContainerEnable="True" />
+                <DisableElement Type="WZUIContainer" GUID="{ae1f15c8-aca8-4bff-a5c4-af61e2e6f4a8}" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{351EC3CE-0E98-4688-B535-0E35E75B7F2C}" UseAbsSize="True" AbsContentSize="90,70" RelativePosition="0.629043,0.577127" Name="conReward2_CellTreasureBox">
+            <WZArmature Type="WZArmature" GUID="{181186E5-6987-49c1-9FAD-847ACEA3F109}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" Visible="False" Scale="1.2" Name="armBox2_CellTreasureBox" RelativePosition="0.496337,-0.427349" ScaleY="1" ScaleX="1" TouchEnable="False">
+                <Action Type="WZUIArmatureAnimationById" GUID="{9D00A708-24F4-4bb9-819D-9F7E32223C69}" IsLoop="False" AnimationId="0" Loop="-1" />
+            </WZArmature>
+            <WZUIImage Type="WZUIImage" GUID="{A474CFD6-9AB1-42bf-BC35-C945931E1C14}" Name="imgLight2_CellTreasureBox" File="ui/common/common_icon_zi1.png" RelativeSize="1,1" RelativePosition="0.5,0.5" Visible="True" UseOriginSize="True" TouchEnable="False" />
+            <WZUIImage Type="WZUIImage" GUID="{86A8CC8C-0D7F-433c-A20E-629E0B3E389E}" File="ui/common/common_icon_zi3.png" UseOriginSizeProportion="False" UseOriginSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" Name="imgReward2_CellTreasureBox" Visible="False" TouchEnable="False" />
+            <WZUIImage Type="WZUIImage" GUID="{95AC2257-4ABD-4f58-A0F0-3760D151372D}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Scale="0.6" RelativePosition="0.576276,-0.03368" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{58F4F577-EEFE-42c2-9A8F-4F93480EF44F}" AnchorPoint="1,0.5" Color="255,236,193" Name="txtRewardStar2_CellTreasureBox" Text="" FontSize="22" RelativePosition="0.431197,-0.0797178" BoldFont="False" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" />
+            <WZUIImage Type="WZUIImage" GUID="{de21972d-086a-4469-85ed-8967226ae40e}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.8,-0.0142857" Scale="0.8" Name="imgRedTip2_CellTreasureBox" Visible="False" />
+            <Button Type="WZUIButton" GUID="{da148a0d-56ca-4785-bd75-fbce68ca7ec7}" LuaPushFunctionName="" LuaDoneFunctionName="onClickReward" Tag="2" AbsContentSize="100,70" UseAbsSize="True">
+                <NormalElement Type="WZUIContainer" GUID="{83d741f5-c8c3-4e97-a6ce-5ebd1d24e0d3}" TouchContainerEnable="True" />
+                <SelectElement Type="WZUIContainer" GUID="{ab93b8bf-27e2-4711-b09d-6aa075ca5c95}" TouchContainerEnable="True" />
+                <DisableElement Type="WZUIContainer" GUID="{58de45e7-997e-4507-8e37-14568d331f9f}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{3DD93265-254F-4375-A1E5-93E81D5913ED}" UseAbsSize="True" AbsContentSize="90,70" RelativePosition="0.928282,0.577127" Name="conReward3_CellTreasureBox">
+            <WZArmature Type="WZArmature" GUID="{ACE0691A-1553-4817-A05D-E8D612A09B22}" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" Visible="False" Scale="1.5" Name="armBox3_CellTreasureBox" ScaleY="1" ScaleX="1" RelativePosition="0.507448,-0.413064" TouchEnable="False" AbsPosition="45.6703,-28.9145">
+                <Action Type="WZUIArmatureAnimationById" GUID="{C2DF5095-DC0F-4d6d-AD9D-94283C979EEE}" IsLoop="False" AnimationId="0" Loop="-1" />
+            </WZArmature>
+            <WZUIImage Type="WZUIImage" GUID="{ED7C0177-8279-4609-A778-A31270B3A2D3}" Name="imgLight3_CellTreasureBox" File="ui/common/common_icon_huang1.png" RelativeSize="1.2,1.23" RelativePosition="0.5,0.5" Visible="True" UseOriginSize="True" TouchEnable="False" />
+            <WZUIImage Type="WZUIImage" GUID="{47B69EA9-F684-4982-92A7-EFC9937B2C33}" File="ui/common/common_icon_huang3.png" UseOriginSizeProportion="False" UseOriginSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" Name="imgReward3_CellTreasureBox" Visible="False" TouchEnable="False" />
+            <WZUIImage Type="WZUIImage" GUID="{C3244CC3-8D4B-464b-8CD9-2E75903F90BB}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Scale="0.6" RelativePosition="0.598808,-0.03368" TouchEnable="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8E4FC147-B876-4a8f-BCDE-36D5C7E2D15B}" AnchorPoint="1,0.5" Color="255,236,193" Name="txtRewardStar3_CellTreasureBox" Text="0" FontSize="22" RelativePosition="0.456111,-0.0797178" BoldFont="False" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" AbsPosition="0,0" UseOriginSize="True" />
+            <WZUIImage Type="WZUIImage" GUID="{ace764ea-ea28-4c6f-92bb-e041e824c39c}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.833333,-0.0142857" Scale="0.8" Name="imgRedTip3_CellTreasureBox" Visible="False" />
+            <Button Type="WZUIButton" GUID="{4e4e2543-d333-41ab-9f61-102a14dbd13d}" LuaPushFunctionName="" LuaDoneFunctionName="onClickReward" Tag="3" AbsContentSize="100,70" UseAbsSize="True">
+                <NormalElement Type="WZUIContainer" GUID="{29494e65-67c9-4381-b42f-8bd00e0f667a}" TouchContainerEnable="True" />
+                <SelectElement Type="WZUIContainer" GUID="{36370d94-f120-4dfb-b7f9-114d6ed745af}" TouchContainerEnable="True" />
+                <DisableElement Type="WZUIContainer" GUID="{34bdb23b-b552-46d0-80e6-b903379a10ff}" />
+            </Button>
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4038198F-504F-4f36-B16B-96BAEED26CB6}" FontSize="22" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" TextKey="CHAT_CURRENT" RelativePosition="0.0553046,0.092278" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{5FB0E5F6-CA03-487c-82BC-902CF4C8DD1C}" FontSize="24" EnableStroke="True" Color="255,255,255" StrokeColor="79,60,48" StrokeSize="4" Name="txtStartCount_CellTreasureBox" Text="" RelativePosition="0.0536804,0.42321" AnchorPoint="0.5,0.5" />
+    </WZUIContainer>
+</CellTreasureBox>

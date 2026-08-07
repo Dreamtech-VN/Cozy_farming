@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<WndKingShowAward GUID="{8c0351d4-a11e-46ee-903e-32cabe5dd281}">
+	<WZUIFrame Type="WZUIFrame" GUID="{1012a5d7-2fdd-4e72-9ee0-817508a64726}">
+		<WZUIWindow LuaObjectName="WndKingShowAward" Name="WndKingShowAward" NameCreate="True" ShowAll="True" Type="WZUIWindow" GUID="{8d1757fa-9187-4b1e-a31e-06aed3c576b6}" AbsContentSize="490,450" UseAbsSize="True" LuaTouchBeganFunction="onTouchBegan">
+			<WZUIContainer AbsContentSize="0,0" AbsPosition="" AnchorPoint="0.5,0.5" GUID="{fc6048a0-6e44-4168-a2ad-ff9205cf67bb}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="False">
+				<WZUI9Image File="" GUID="{f1623663-5ed6-4eca-8336-77785ed14731}" Type="WZUI9Image" />
+				<WZUI9Image Type="WZUI9Image" GUID="{6f0e9f5a-ad2f-4338-ba58-9af5e17dd9a1}" File="" UseOriginSizeProportion="False" RelativePosition="0.5,1" AnchorPoint="0.5,1" RelativeSize="1.01,0.133" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{d7bed59e-52f5-41ef-b4c5-cd4fe85584a7}">
+				<Button Type="WZUIButton" GUID="{fb518da6-e72b-4c03-9052-1f0eafbe0ca8}" LuaDoneFunctionName="onClose" AbsContentSize="66,71" UseAbsSize="True" RelativePosition="1.03,0.94" AnchorPoint="1,0.5">
+					<NormalElement Type="WZUIContainer" GUID="{e19089cc-7213-43f4-af24-7fc25318ae55}">
+						<WZUIImage Type="WZUIImage" GUID="{84a95841-bfec-4154-8088-c1597a14177e}" File="" />
+					</NormalElement>
+					<SelectElement Type="WZUIContainer" GUID="{824f2458-4a67-49b1-8d21-8ee0b1bfef01}">
+						<WZUIImage Type="WZUIImage" GUID="{c70ba4ae-75b9-4446-9643-b4cbd6c54111}" File="" Scale="1.1" />
+					</SelectElement>
+					<DisableElement Type="WZUIContainer" GUID="{8ffd0a4b-9eaa-4dfa-a0af-fb4cc83b32ff}" />
+				</Button>
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{3b06cdfc-74e2-487a-bcae-fba89cde1e58}" Name="txtTitle_WndKingShowAward" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.94" FontSize="30" Color="255,246,201" EnableStroke="True" StrokeColor="109,81,42" StrokeSize="4" BoldFont="True" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{87fb842b-d1d4-4b88-a6cc-1f2cfed14ace}" Name="txtSubTitle_WndKingShowAward" AnchorPoint="0,0.5" RelativePosition="0.08,0.82" FontSize="20" Color="255,238,144" />
+				<WZUITableContainer Type="WZUITableContainer" GUID="{be1172f3-4830-494e-a043-102fa03c0ff3}" AbsContentSize="475,336" UseAbsSize="True" RelativePosition="0.5,0.405" CellElementHeight="0.32" VerticalInterval="0.022" EnableMoveHorizontal="False" Name="tabAward_WndKingShowAward" />
+			</WZUIContainer>
+		</WZUIWindow>
+		<WZUIContainer Type="WZUIContainer" GUID="{d4913217-846f-44ee-a534-e9618a3cc049}" AbsContentSize="475,105" UseAbsSize="True" NameCreate="True" Name="CellKingShowAward">
+			<WZUI9Image Type="WZUI9Image" GUID="{9eee82fc-f413-4407-87f6-abea54e7a709}" File="" Visible="True" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{a432b3f5-367b-4970-945e-808bf03d8b76}" Color="57,36,17" FontSize="20" AnchorPoint="0,0.5" RelativePosition="0.03,0.5" Name="txtRange_CellKingShowAward" />
+			<WZUIContainer Type="WZUIContainer" GUID="{42922670-2ebd-47a0-a461-7f0f38f4192c}" RelativePosition="0.62,0.5" RelativeSize="0.7,0.8">
+				<WZUI9Image Type="WZUI9Image" GUID="{ad3b893f-9526-432d-8f4b-0de475692a7d}" File="" RelativeSize="1,1" RelativePosition="0.5,0.5" Visible="False" />
+				<WZUIContainer Type="WZUIContainer" GUID="{f106517d-d3a4-47c6-9e2b-c86f0131a939}" RelativeSize="0.23,0.88" RelativePosition="0.125,0.5" Name="conItem1_CellKingShowAward" Visible="False" />
+				<WZUIContainer Type="WZUIContainer" GUID="{8fa60415-7ae4-466c-bcd8-0b3632d33163}" RelativeSize="0.23,0.88" RelativePosition="0.375,0.5" Name="conItem2_CellKingShowAward" Visible="False" />
+				<WZUIContainer Type="WZUIContainer" GUID="{bdb98685-5811-464c-b57d-522047a517ae}" RelativeSize="0.23,0.88" RelativePosition="0.625,0.5" Name="conItem3_CellKingShowAward" Visible="False" />
+				<WZUIContainer Type="WZUIContainer" GUID="{9c13c149-7133-43b8-8262-9585347c4410}" RelativeSize="0.23,0.88" RelativePosition="0.875,0.5" Name="conItem4_CellKingShowAward" Visible="False" />
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIFrame>
+</WndKingShowAward>

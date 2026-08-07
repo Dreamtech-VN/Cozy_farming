@@ -1,0 +1,76 @@
+﻿<WndChallengeEntrance GUID="{63ce23ea-8887-49a2-abcf-5637cdb6d6af}">
+    <WZUIWindow Type="WZUIWindow" GUID="{f9ebcc84-466e-4e51-ba4e-a665d0f363e9}" Name="WndChallengeEntrance" LuaObjectName="WndChallengeEntrance" AbsContentSize="960,640" UseAbsSize="True" ShowAll="False" LuaTouchBeganFunction="onTouchBegan" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{61e6e10d-1b60-4bf5-9b81-49a9235b59a1}" Name="conSceneBg_WndChallengeEntrance" AbsContentSize="1136,720" UseAbsSize="False" Order="-1" ShowAll="False">
+            <WZUIImage Type="WZUIImage" GUID="{329d07c2-5ade-4e6a-babf-88e8db42acbe}" File="ui/common_bg/common_scale9_di2.png" UseOriginSize="True" Scale="2" />
+        </WZUIContainer>
+        <WZUIParticle Type="WZUIParticle" GUID="{2404da4e-e4cb-4aad-b9c1-5d28fcf604f3}" PlistFile="particle/particle_tongyonglizi.plist" RelativePosition="0.5,0.1" />
+        <WZUIContainer Type="WZUIContainer" GUID="{08b084d5-4d73-4b9e-8ddb-2257a09801c1}" ShowAll="True" NoBorder="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{5fbed1c6-cc8c-4038-af6f-274e2f27ec2b}" AbsContentSize="960,480" UseAbsSize="True" RelativePosition="0.5,0.456" Name="conList_WndChallengeEntrance">
+                <WZUIContainer Type="WZUIContainer" GUID="{76786fbb-17b1-429a-a587-2ab6ea1b8f24}" AbsContentSize="212,462" UseAbsSize="True" RelativePosition="0.155,0.5" Name="conTower_WndChallengeEntrance" Visible="True">
+                    <WZUIImage Type="WZUIImage" GUID="{cf506e35-a311-4df3-ad68-44994d0662e7}" File="ui/world_boss/common_pic_jjct7.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{0fa7df07-6d34-421f-86f0-e4a3d0aa095e}" FontSize="28" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="127,70,26" RelativePosition="0.5,0.08" TextKey="CHALLENGEENTRANCE_TEXT1" Name="txtTower_WndChallengeEntrance" />
+                    <Button Type="WZUIButton" GUID="{fc8398e4-42f3-4a28-99e6-2a744520e180}" LuaDoneFunctionName="onClickEvent" Tag="0" Name="btn1_WndChallengeEntrance" TouchEnable="True">
+                        <NormalElement Type="WZUIContainer" GUID="{f76bb171-af6f-44ef-b978-991522c87dc5}" />
+                        <SelectElement Type="WZUIContainer" GUID="{969f12f2-36b0-4020-b058-c14d7f4dd2a6}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{4b99ac28-7050-4f4e-9a7d-4e1cc926dda7}" File="ui/common/common_shade_chushouheidi.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{8a80d248-5a1c-4104-a6bc-854c498fcd13}" />
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{b0379909-047d-4f3f-ad1f-ae67d82adcd2}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Name="imgClimbRedDot_WndChallengeEntrance" AnchorPoint="1,1" RelativePosition="1,1" Visible="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{8ccadc53-5444-478f-80b8-ada55f87888b}" TouchEnable="False" Name="con1_WndChallengeEntrance" Visible="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{e81e6140-8760-4077-b5a6-964100ca91ab}" File="ui/common/common_shade_chushouheidi.png" />
+                        <WZUIImage Type="WZUIImage" GUID="{e57b249c-6a7d-413e-b349-d6015523b618}" File="ui/common/common_icon_suo.png" UseOriginSize="True" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{5f0e10f3-68d1-46b1-87c5-2ca042e8e0ff}" AbsContentSize="212,462" UseAbsSize="True" RelativePosition="0.385,0.5" Name="conWorld_WndChallengeEntrance">
+                    <WZUIImage Type="WZUIImage" GUID="{33231724-0c2a-465d-9272-4c59894fb4e5}" File="ui/world_boss/common_pic_jjct8.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1d5b5fe3-84ac-406d-a7d7-ec8fed8cb9a6}" FontSize="28" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="127,70,26" RelativePosition="0.5,0.08" TextKey="CHALLENGEENTRANCE_TEXT2" Name="txtWorld_WndChallengeEntrance" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{5c08afda-6fc9-4a01-8fa1-5a26d6b9c67d}" Name="ftxtOpenTime_WndChallengeEntrance" MaxWidth="400" RelativePosition="0.5,0.19" />
+                    <Button Type="WZUIButton" GUID="{8200b6d5-ee24-4a11-837f-b46a5a18b658}" LuaDoneFunctionName="onClickEvent" Tag="1" Name="btn2_WndChallengeEntrance" TouchEnable="True">
+                        <NormalElement Type="WZUIContainer" GUID="{d7762169-11ec-4fd6-8800-a4db9075d09f}" />
+                        <SelectElement Type="WZUIContainer" GUID="{be5057d5-5786-489f-855a-ca4633480a45}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{9980ee8b-c4d0-405d-9242-b16ce7a9ddb8}" File="ui/common/common_shade_chushouheidi.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{7957f3f4-41b8-4f9e-8da5-9355ccf85cbe}" />
+                    </Button>
+                    <WZUIContainer Type="WZUIContainer" GUID="{5aaea9a1-a4ab-4d7e-b3cb-e19c0d4d307e}" TouchEnable="False" Name="con2_WndChallengeEntrance" Visible="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{ebce8f1d-fa82-42bc-9f07-4ca6467dafa1}" File="ui/common/common_shade_chushouheidi.png" />
+                        <WZUIImage Type="WZUIImage" GUID="{460c9b6e-df84-4c43-a955-6fed3c4f9768}" File="ui/common/common_icon_suo.png" UseOriginSize="True" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c16c5b86-aaf7-4fd8-a0e3-43e2e0eaea96}" AbsContentSize="212,462" UseAbsSize="True" RelativePosition="0.615,0.5" Name="conTeamWorldBoss_WndChallengeEntrance">
+                    <WZUIImage Type="WZUIImage" GUID="{662db301-cd25-413b-82ea-8cc0d4d3ae1f}" File="ui/world_boss/common_pic_jjct13.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{72bab00a-3287-48ec-a7d7-303f58b6ea84}" FontSize="28" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="127,70,26" RelativePosition="0.5,0.08" TextKey="TEAMBOSS_TEXT1" Name="txtTeamWorldBoss_WndChallengeEntrance" />
+                    <Button Type="WZUIButton" GUID="{9120d5fd-a5d7-482b-8537-ada36f6f87b4}" LuaDoneFunctionName="onClickEvent" Tag="3" Name="btn4_WndChallengeEntrance">
+                        <NormalElement Type="WZUIContainer" GUID="{4a9f8a69-a47c-48dd-b067-20f700a73b8c}" />
+                        <SelectElement Type="WZUIContainer" GUID="{4553f33e-c918-4e26-96ec-d585bce5a00a}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{d2c85f2e-55c3-48ba-aa58-0845b047c5b3}" File="ui/common/common_shade_chushouheidi.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{e4e4df2c-1f0c-46e6-9620-3c5157e8df79}" />
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{d7c8761c-0e87-44a3-8e1c-d85e6758a60d}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Name="imgTeamWorldBossRedDot_WndChallengeEntrance" AnchorPoint="1,1" RelativePosition="1,1" Visible="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{b1e628c3-cfd0-40bd-97f8-007047a88c2a}" TouchEnable="False" Name="con4_WndChallengeEntrance" Visible="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{dec95331-6736-46df-9bc9-00b3ce045f09}" File="ui/common/common_shade_chushouheidi.png" />
+                        <WZUIImage Type="WZUIImage" GUID="{96596d66-cfee-4e2c-89e6-177ebd7a05d3}" File="ui/common/common_icon_suo.png" UseOriginSize="True" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{e3daff35-cf9b-4fc1-a998-eabb84d66f2a}" AbsContentSize="212,462" UseAbsSize="True" RelativePosition="0.845,0.5" Name="conTaboo_WndChallengeEntrance">
+                    <WZUIImage Type="WZUIImage" GUID="{6d19551e-51a1-4153-93f9-698a46e1452d}" File="ui/world_boss/common_pic_jjct12.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{fa077a2d-7b78-41a8-a161-74548a304375}" FontSize="28" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="127,70,26" RelativePosition="0.5,0.08" TextKey="CHALLENGEENTRANCE_TEXT3" Name="txtTaboo_WndChallengeEntrance" />
+                    <Button Type="WZUIButton" GUID="{bfeb0238-001f-4dab-b166-6fafcff3eaf4}" LuaDoneFunctionName="onClickEvent" Tag="2" Name="btn3_WndChallengeEntrance">
+                        <NormalElement Type="WZUIContainer" GUID="{59233d64-d826-441b-8999-8978d045dd41}" />
+                        <SelectElement Type="WZUIContainer" GUID="{21f2d63a-836d-4330-bbbc-6d52c8744308}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{1e4e5823-4cb6-445f-a867-4b7d6d35eadb}" File="ui/common/common_shade_chushouheidi.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{c120a0cb-cb43-4582-8f7b-7529d91733f8}" />
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{7622e765-10dc-466a-8ea2-b91f4e807e69}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Name="imgTabooRedDot_WndChallengeEntrance" AnchorPoint="1,1" RelativePosition="1,1" Visible="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{4104492f-9fae-45e0-9fb8-f75996ef51d4}" TouchEnable="False" Name="con3_WndChallengeEntrance" Visible="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{7b2bcc4f-025d-4073-8f26-1810856621f6}" File="ui/common/common_shade_chushouheidi.png" />
+                        <WZUIImage Type="WZUIImage" GUID="{e9c7da2f-5625-468a-abbf-5d513ba216b2}" File="ui/common/common_icon_suo.png" UseOriginSize="True" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndChallengeEntrance>

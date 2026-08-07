@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" ?>
+<WndBuy GUID="{5F001C7A-E952-46fc-BBDD-ABE8ABEAB27B}">
+    <WZUIWindow AbsContentSize="" GUID="{45A9E56C-1159-4d1a-BB8E-1A04F100010B}" LuaObjectName="WndBuy" Name="WndBuy" NameCreate="True" Type="WZUIWindow" UseAbsSize="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{8ab4ed99-17bb-41a5-b0be-b5b499ace6b7}" AbsContentSize="730,536" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="470,307">
+            <WZUIContainer Type="WZUIContainer" GUID="{6cd3ab8b-9771-4dff-a21a-2ac76ae6d40c}" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{d5a01d31-2d2b-4818-b8df-2024357ac24c}" File="ui/common/common_scale9_di5.png" Opacity="255" RelativePosition="0.5,0.5" CapInsets="250,100,1,1" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{84ef9858-3a0f-4d0c-bcf1-72fa7ffaeab5}" TextKey="SHOP_SAVE_IMG" FontSize="24" Color="255,236,192" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" RelativePosition="0.494289,0.935813" LabelStyleKey="SMALL_WINDOW_TITLE" />
+                <WZUIButton Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.942055,0.941553" GUID="{6ee53214-8182-4883-824f-36f701257bbd}" LuaDoneFunctionName="onclickClose" LuaActionName="Normal" AbsContentSize="60,60" UseAbsSize="True" AbsPosition="731.035,504.672">
+                    <NormalElement Type="WZUIContainer" GUID="{630dc404-abf7-4f1d-b562-55d62ad2262a}">
+                        <WZUIImage Type="WZUIImage" GUID="{12c748d2-8fd3-4a91-b627-90742ac13fce}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{6e5cb54a-da10-483a-9ae4-3aeda1aef06d}">
+                        <WZUIImage Type="WZUIImage" GUID="{aab6970d-35a1-43ee-8a95-446d6d252187}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{24f31510-24df-42a6-bdc7-0be2edc38b84}" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{a880388e-088c-4d8c-abc6-b829ad9f954c}" RelativeSize="0.984,0.72" RelativePosition="0.5,0.53" Visible="True" AbsPosition="388,284">
+                <WZUI9Image Type="WZUI9Image" GUID="{44b30791-8cdc-47d5-a155-165557e7bf1a}" File="ui/common/common_scale9_di6.png" RelativePosition="0.5,0.5" Opacity="255" />
+                <WZUITableContainer AnchorPoint="0.5,0" CellElementHeight="0.4" ColumnCount="1" EnableMoveHorizontal="False" EnableMoveVertical="True" GUID="{fa69a6fc-0bcb-48c9-a0bd-2e5601296f47}" Name="tbcItemWndBuy" RelativePosition="0.5,0.0290505" RelativeSize="0.96,0.95" Type="WZUITableContainer" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{3c02fe75-16e7-4f1e-a5ad-824b15dd92fa}" RelativeSize="1,0.162" RelativePosition="0.5,0.0895521" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{8f9f27d9-46c8-4aca-be2a-85e12592609f}" RelativeSize="0.15,0.7" RelativePosition="0.713446,0.5" Visible="True" AbsContentSize="380,56" UseAbsSize="True" AbsPosition="553.634,41.808">
+                    <WZUIContainer Type="WZUIContainer" GUID="{062b78c5-f2f9-4ac4-873e-01439f10cb09}" Name="conSave_WndBuy" Visible="False">
+                        <WZUIContainer Type="WZUIContainer" GUID="{edcf367e-c229-45e3-b918-512c406b2d3c}" RelativeSize="0.15,0.7" RelativePosition="0.5,0.5" Visible="True" AbsContentSize="380,56" UseAbsSize="True" AbsPosition="553.634,41.808" Name="conHide_WndBuy" Order="1">
+                            <WZUIButton Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.848056,0.5" GUID="{a6eca928-5662-4494-9a9e-8cd903697e24}" LuaDoneFunctionName="onGived" LuaActionName="Normal" AbsPosition="191.069,28" Visible="True" UseAbsSize="True" AbsContentSize="116,56" Name="" Order="2">
+                                <NormalElement Type="WZUIContainer" GUID="{c010d8ca-573b-4547-81ec-160d8b7a36c4}">
+                                    <WZUIImage Type="WZUIImage" GUID="{ee420c5b-a830-47bf-ac17-6e67a34739d0}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{57cd7cd7-3fb8-496c-a35d-9db8d2e5bb59}">
+                                    <WZUIImage Type="WZUIImage" GUID="{cc5cc291-5f7c-4945-bf6a-5d7c463396aa}" File="ui/common/common_btn_anniu3_0_sel.png" UseOriginSize="True" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{0788bf12-1dd4-4908-860a-d4a5a0bc218a}" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{267df891-35fd-4d82-b71e-ec292fc3c3b0}" TextKey="SHOP_BUY_DESC1" Color="255,236,193" FontSize="26" EnableStroke="True" StrokeColor="64,128,1" StrokeSize="4" LabelStyleKey="SMALL_ORANGE_BTN" />
+                            </WZUIButton>
+                        </WZUIContainer>
+                        <WZUIButton Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.848056,0.5" GUID="{011c2efe-ebe3-4655-957f-2dbaf8d8a265}" LuaDoneFunctionName="onClickbuyBtn" LuaActionName="Normal" AbsPosition="322.261,28" Visible="True" UseAbsSize="True" AbsContentSize="116,56">
+                            <NormalElement Type="WZUIContainer" GUID="{e7ee0a70-6173-4ade-9355-d9423ef53731}">
+                                <WZUIImage Type="WZUIImage" GUID="{8418f66e-5bc6-490f-b5b0-b9f4e9b11b65}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{fcf52f69-5de2-471c-ba65-d1a699e45ecf}">
+                                <WZUIImage Type="WZUIImage" GUID="{e35d282e-7f96-4733-a9ac-898f479ee6aa}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{d76e2e68-4434-4abc-8837-f31e5e98c8c1}" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c1622627-aacb-49a2-9ba9-717a29a4cd9c}" TextKey="SAVE" Color="255,236,193" FontSize="26" EnableStroke="True" StrokeColor="64,128,1" StrokeSize="4" LabelStyleKey="SMALL_GREEN_BTN" />
+                        </WZUIButton>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{700ea420-fcf6-4981-84fc-27e397a33860}" Name="conGive_WndBuy" Visible="False">
+                        <WZUIButton Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.848056,0.5" GUID="{df7acd55-843c-4109-be2d-3e02bc0ca7a6}" LuaDoneFunctionName="onGive" LuaActionName="Normal" AbsPosition="191.069,28" Visible="True" UseAbsSize="True" AbsContentSize="116,56" Name="">
+                            <NormalElement Type="WZUIContainer" GUID="{763eacfb-c915-459b-878c-73dae3ef374f}">
+                                <WZUIImage Type="WZUIImage" GUID="{4a0cbe26-4880-4af1-bad5-261cc1886d4e}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{344626ed-a08a-438f-8ecf-69753fb2ffed}">
+                                <WZUIImage Type="WZUIImage" GUID="{490f1e5b-d7ad-4d7b-8d66-83d8512d1861}" File="ui/common/common_btn_anniu3_0_sel.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{00ee0339-cc0f-4c86-9cbc-deb101c06e30}" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{51f576fa-ddf1-403a-9093-fe7378ec979c}" TextKey="GIVE" Color="255,236,193" FontSize="26" EnableStroke="True" StrokeColor="64,128,1" StrokeSize="4" LabelStyleKey="SMALL_ORANGE_BTN" />
+                        </WZUIButton>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{794b06c9-e977-4098-b494-de467f1881cc}" RelativeSize="0.4,0.4" RelativePosition="0,0.5" AbsPosition="35.9994,43.416" AnchorPoint="0,0.5" UseAbsSize="True" AbsContentSize="600,80">
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{8ad52a4d-ad78-41ae-90d9-533a631a13d7}" Name="ftbBuyDesc_WndBuy" MaxWidth="500" AnchorPoint="0,0.5" RelativePosition="0,0.5" AbsPosition="21.8,16.7232" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{202a6888-645f-4676-8fd6-e72c6634c5e9}" Name="conCost1" UseAbsSize="True" AbsContentSize="600,36" AnchorPoint="0.5,1" RelativePosition="0.46,0.95">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e63978c2-930f-49f7-a480-6a920d579aad}" Text="购物车共%s件%s商品,需支付" LabelStyleKey="C11_F20_S4_C5" RelativePosition="0.05,0.5" Alignment="Left" AnchorPoint="0,0.5" Name="costText1" />
+                        <CheckElement AbsContentSize="90,26" AnchorPoint="1,0.5" GUID="{f5fa1699-a5c4-4f76-b6b9-30e516a0dcee}" RelativePosition="0.64,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                            <WZUI9Image AbsPosition="0,0" CapInsets="0,0,0,0" File="ui/common/common_scale9_buydi.png" GUID="{2c7acae9-d2fe-4a3c-b702-63ef8e4bae29}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{641412fb-1650-41eb-935d-2a54eac86162}" AbsContentSize="180,58" UseAbsSize="True" TouchEnable="False" TouchSwallow="False" RelativePosition="0.5,0.48">
+                                <WZUI9Image Type="WZUI9Image" GUID="{1eafffc9-8ecb-4c9a-8ace-97396a3465cd}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="0.5" ScaleX="0.5" ScaleY="0.5" />
+                                <WZUIImage Type="WZUIImage" GUID="{c57b6ed8-87a9-4b5b-a5ce-bda691e16144}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.71,0.4" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                            </WZUIContainer>
+                            <WZUIImage Type="WZUIImage" GUID="{662b3492-0a71-4847-85e8-0f3868525167}" File="shopitems/diamond.png" UseOriginSize="True" Scale="0.4" ScaleY="0.4" ScaleX="0.4" RelativePosition="0.15,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f79bd344-e4b2-4fa6-ab4a-6ae6350f1c5d}" LabelStyleKey="C15_F20" Text="0" Name="costShow3" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.35,0.45" />
+                        </CheckElement>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{b3aa4821-ddd1-4658-ac8f-f9cd70fe5eec}" Name="conCost2" UseAbsSize="True" AbsContentSize="600,36" AnchorPoint="0.5,1" RelativePosition="0.46,0.52">
+                        <WZUICheckBoxGroup AbsContentSize="250,36" AnchorPoint="1,0.5" GUID="{4af95d98-4628-4280-b34c-1f011282a6be}" RelativePosition="0.905,0.5" RelativeSize="1,1" ScaleY="1" TouchContainerEnable="True" Type="WZUICheckBoxGroup" UseAbsSize="True" Order="0" Name="checkGroup_WndBuy">
+                            <CheckBox AbsContentSize="90,26" AnchorPoint="0,0.5" GUID="{418610fe-0a63-4850-88fe-dbeadbc76ac3}" LuaSelectedFunctionName="onCheck1" Name="checkInfo0_WndEquip" RelativePosition="0,0.5" SelectedIndex="1" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" Visible="True" AbsPosition="0,375.5">
+                                <CheckElement AbsContentSize="90,26" AnchorPoint="0.5,0.5" GUID="{7582b474-331f-42c4-9b1c-4e7a0ea1736e}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                                    <WZUI9Image AbsPosition="0,0" CapInsets="0,0,0,0" File="ui/common/common_scale9_buydi.png" GUID="{d5e15d0c-cdac-4e72-9453-c38ed354a65e}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True" />
+                                </CheckElement>
+                                <CheckElement AbsContentSize="90,26" AnchorPoint="0.5,0.5" GUID="{5bf3c77c-7bda-40f7-a8df-0def65ad39b3}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                                    <WZUI9Image AbsPosition="0,0" CapInsets="0,0,0,0" File="ui/common/common_scale9_buydi.png" GUID="{4918de8b-44e9-44e2-91e1-c0587a3bf98a}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{bcdb3d4d-2732-49d4-85b0-32f060c78963}" AbsContentSize="180,58" UseAbsSize="True" TouchEnable="False" TouchSwallow="False" RelativePosition="0.5,0.48">
+                                        <WZUI9Image Type="WZUI9Image" GUID="{2403114a-0d61-46c4-a967-fe9150ad4584}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="0.5" ScaleX="0.5" ScaleY="0.5" />
+                                        <WZUIImage Type="WZUIImage" GUID="{06d3f896-e3c3-4358-b99d-3395e12d8a60}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.71,0.4" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                                    </WZUIContainer>
+                                </CheckElement>
+                                <WZUIImage Type="WZUIImage" GUID="{0a19ca83-b8da-4e99-b01f-2907ce3fec60}" File="shopitems/lizuan.png" UseOriginSize="True" Scale="0.4" ScaleY="0.4" ScaleX="0.4" RelativePosition="0.15,0.5" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{994ad178-1b7b-44f4-8357-6ea4ee9cdece}" LabelStyleKey="C15_F20" Text="0" Name="costShow1" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.35,0.45" />
+                            </CheckBox>
+                            <CheckBox AbsContentSize="90,26" AnchorPoint="0,0.5" GUID="{1661240d-9d23-4027-a87f-ba147c79cad7}" LuaSelectedFunctionName="onCheck2" Name="checkInfo1_WndEquip" RelativePosition="0.42,0.5" SelectedIndex="0" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" AbsPosition="0,443">
+                                <CheckElement AbsContentSize="90,26" AnchorPoint="0.5,0.5" GUID="{d200ba5d-e69f-4594-9aba-ead7b92c826b}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                                    <WZUI9Image AbsPosition="0,0" CapInsets="0,0,0,0" File="ui/common/common_scale9_buydi.png" GUID="{48a8324e-48c6-4e7e-b666-0484712c2109}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True" />
+                                </CheckElement>
+                                <CheckElement AbsContentSize="90,26" AnchorPoint="0.5,0.5" GUID="{71564148-cc4d-47a2-acdd-56b11e36196d}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                                    <WZUI9Image AbsPosition="0,0" CapInsets="0,0,0,0" File="ui/common/common_scale9_buydi.png" GUID="{8155bae3-c6b4-4257-ab6a-1f4e89f90873}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{017fc70d-d205-4a6a-b677-f6c838ca8640}" AbsContentSize="180,58" UseAbsSize="True" TouchEnable="False" TouchSwallow="False" RelativePosition="0.5,0.48">
+                                        <WZUI9Image Type="WZUI9Image" GUID="{65804375-1f93-4a0b-b520-c405c0d5c58c}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="0.5" ScaleX="0.5" ScaleY="0.5" />
+                                        <WZUIImage Type="WZUIImage" GUID="{1a2ef40a-a7f2-4ebb-8041-d57731acb54d}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.71,0.4" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                                    </WZUIContainer>
+                                </CheckElement>
+                                <WZUIImage Type="WZUIImage" GUID="{5655660c-8f8e-4839-84ad-7f38701dcf84}" File="shopitems/diamond.png" UseOriginSize="True" Scale="0.4" ScaleY="0.4" ScaleX="0.4" RelativePosition="0.15,0.5" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{39164743-0be6-451f-a314-379cb7126d5e}" LabelStyleKey="C15_F20" Text="0" Name="costShow2" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.35,0.45" />
+                            </CheckBox>
+                        </WZUICheckBoxGroup>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{66705865-55fd-44b6-aa79-66fddffa216a}" Text="购物车共%s件%s商品,需支付" LabelStyleKey="C11_F20_S4_C5" RelativePosition="0.05,0.5" Alignment="Left" AnchorPoint="0,0.5" Name="costText2" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndBuy>

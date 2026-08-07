@@ -1,0 +1,14 @@
+﻿<CellActivityRedEnvelope GUID="{1e6d45ae-1892-4d08-a03c-f40e55e6092d}">
+    <WZUIContainer Type="WZUIContainer" GUID="{bdbef8bf-cb5f-41f6-be46-d5ba0216f645}" LuaObjectName="CellActivityRedEnvelope" Name="CellActivityRedEnvelope" AbsContentSize="502,453" UseAbsSize="True">
+        <WZUIImage Type="WZUIImage" GUID="{88edf85f-d197-4c19-a2f8-f8f4391c5aef}" File="ui/gameActivity/activity_pic_dhb.png" TouchEnable="False" TouchSwallow="False" UseOriginSize="True" />
+        <WZUIContainer AbsContentSize="500,40" GUID="{e6cbf0f2-5f3b-4ede-be60-1a63c26642a2}" RelativePosition="0,1" Type="WZUIContainer" UseAbsSize="True" AbsPosition="246,395.25" Name="" AnchorPoint="0,1">
+            <WZUI9Image Type="WZUI9Image" GUID="{9fe12701-9388-4725-b75c-6c1cf73b9370}" File="ui/common/common_scale9_heidi7.png" Opacity="150" />
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="255,227,116" FontSize="22" GUID="{933c5813-780f-43e3-a145-1c42ed0a35e6}" Name="txtTimeWord_CellActivityRedEnvelope" RelativePosition="0.05,0.5" Text="活动剩余" Type="WZUILabelTTF" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" TextKey="ACTIVITY_TIME_KEY" />
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="255,89,74" FontSize="22" GUID="{f577b6cc-bf26-4e53-ab42-fbe267f69641}" Name="txtTime_CellActivityRedEnvelope" RelativePosition="0.28,0.5" Text="9天" Type="WZUILabelTTF" StrokeColor="158,0,0" StrokeSize="4" EnableStroke="True" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{90cd6622-fc8b-4b9d-800a-c226c9df1639}" AbsContentSize="502,98" UseAbsSize="True" RelativePosition="0.5,0" Name="conItem_CellActivityRedEnvelope" AnchorPoint="0.5,0" TouchEnable="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{4c122512-7775-4681-8afd-7395a0c70ea9}" File="ui/common/common_shade_chushouheidi.png" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{1cfaa071-5aba-466e-8aa2-3a2449ccd54c}" Name="text_CellActivityRedEnvelope" MaxWidth="470" AnchorPoint="0,1" RelativePosition="0.03,0.85" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellActivityRedEnvelope>

@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<WndGameRoleSound GUID="{124DBFE0-0B2F-42ad-B04C-F76D96BA794D}">
+    <WZUIWindow Type="WZUIWindow" GUID="{FAF24F11-6707-4914-94F9-36E8553CD9AE}" Name="WndGameRoleSound" NameCreate="True" LuaObjectName="WndGameRoleSound" RelativePosition="0.5,0.5" AbsContentSize="500,500" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{8D7909FD-8753-483d-81F9-B9B949546ADE}" AbsContentSize="500,500" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{55A1AE4A-CDCD-4ef6-93AE-D6D629861449}" File="ui/common/common_scale9_di19.png" CapInsets="170,70,1,1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{DD224596-9FEE-47f3-93F0-75C587F95048}" AbsContentSize="500,55" UseAbsSize="True" RelativePosition="0.503992,0.927448" AbsPosition="251.996,463.724">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{FA3B2171-4213-412d-8ADF-74D0935B3DCC}" Name="" Color="250,235,194" BoldFont="True" StrokeColor="132,66,29" FontSize="28" Text="" RelativePosition="0.5,0.5" EnableStroke="True" AnchorPoint="0.5,0.5" TextKey="ROLESOUND" StrokeSize="4" />
+                <WZUIContainer Type="WZUIContainer" GUID="{8DB5B91C-AB9A-4ae4-85CD-6F47537854A8}" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.906567,0.543607" AbsPosition="453.284,29.8984">
+                    <Button Type="WZUIButton" GUID="{55D49D6D-552C-44fd-BD09-60C82303CE00}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.5,0.5" Name="" LuaDoneFunctionName="onBtnClose" Visible="True" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{F614C656-6CA5-4083-8B56-574B6D53663C}">
+                            <WZUIImage Type="WZUIImage" GUID="{B3788222-BD3C-4e05-B639-CD1D9A7ECD70}" File="ui/common/common_icon_guanbi.png" Scale="1" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{77DFE7B7-3170-4203-ACD3-A72B700A81AE}">
+                            <WZUIImage Type="WZUIImage" GUID="{9A367DC4-8196-4e16-8D6C-DA3701C7AB86}" File="ui/common/common_icon_guanbi_sel.png" Scale="1" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{56F3C672-8B60-457a-A3BE-4B7A11C97A87}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{4A41E3B7-8FC3-43e6-BD16-37415A4E26E1}" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{133913FA-2B77-46d5-A177-E93550BB3D0F}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.68,0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{FC14BEE8-05E9-4a42-BA59-97FC030C011B}" File="ui/common/common_pic_jiantou4.png" RelativePosition="0.32,0.5" UseOriginSize="True" FlipX="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{95C28F9E-EB4E-41cb-9818-3D14DDC49CDE}" AbsContentSize="">
+                <WZUIContainer Type="WZUIContainer" GUID="{C9C43089-689C-4dcc-9628-3363ED9F6142}" AbsContentSize="210,70" UseAbsSize="True" RelativePosition="0.06,0.768" AbsPosition="131.5,384" AnchorPoint="0,0.5">
+                    <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsPosition="0.826386,163.214" LuaDoneFunctionName="onChoiceSound" GUID="{9F75C72C-9ABA-4f5f-B6BE-C7BBA433686D}" Tag="1">
+                        <NormalElement Type="WZUIContainer" GUID="{EC980EC2-E9F1-45b2-8C99-0058BEA50649}" />
+                        <SelectElement Type="WZUIContainer" GUID="{5DB02B12-3345-4054-B5B1-9736AD89B3C9}" />
+                        <DisableElement Type="WZUIContainer" GUID="{6F7D289C-3D54-45f4-AEB7-06B94DBCCD96}" />
+                        <WZUIImage Type="WZUIImage" GUID="{207EFAD9-304B-40d9-A135-87A4D287BBA5}" File="ui/common/common_btn_anniu20.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{83a8b5fe-3416-4268-88d3-ba35ca0774c8}" LabelStyleKey="C1_F24_S4_C2" TextKey="ROLESOUND_1" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{246E73FF-AC8C-4b01-ADDE-0722A59646D5}" AbsContentSize="210,70" UseAbsSize="True" RelativePosition="0.94,0.764" AbsPosition="364.5,382" AnchorPoint="1,0.5" Visible="False">
+                    <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsPosition="0.826386,163.214" LuaDoneFunctionName="onChoiceSound" GUID="{DA81C825-2CFB-4f5a-B5C6-4ECF8918814E}" Tag="2">
+                        <NormalElement Type="WZUIContainer" GUID="{5B7B7E96-07D4-4ce5-9310-4825089F34F6}" />
+                        <SelectElement Type="WZUIContainer" GUID="{D07DB77A-603D-432b-93FA-E97696ACC756}" />
+                        <DisableElement Type="WZUIContainer" GUID="{5F83D62B-00A8-4cc9-AEDA-1EE128C680F9}" />
+                        <WZUIImage Type="WZUIImage" GUID="{73907EAA-0F6B-4f45-A14A-238F44EA6377}" File="ui/common/common_btn_anniu20.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d3ac891f-0966-4ed7-9d5b-6c5dd00ae194}" LabelStyleKey="C1_F24_S4_C2" TextKey="ROLESOUND_2" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7CA22E01-05C0-4e9a-A917-9B9B36F43CA0}" AbsContentSize="210,70" UseAbsSize="True" RelativePosition="0.06,0.594" AbsPosition="125,297" AnchorPoint="0.,0.5" Visible="False">
+                    <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsPosition="0.826386,163.214" LuaDoneFunctionName="onChoiceSound" GUID="{59723E84-2DF5-4ef3-8BE8-2266C6D2F776}" Tag="3">
+                        <NormalElement Type="WZUIContainer" GUID="{DA22F513-D4A3-4fd4-AE55-3F2CCB415DB3}" />
+                        <SelectElement Type="WZUIContainer" GUID="{65938338-4E08-462b-BA51-C110A36E9030}" />
+                        <DisableElement Type="WZUIContainer" GUID="{7DF77EA4-B41A-4e94-96C5-CB1FC409D6B6}" />
+                        <WZUIImage Type="WZUIImage" GUID="{BF4E52D9-274B-4038-A419-3E619A4B0E0A}" File="ui/common/common_btn_anniu20.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{362ff062-f16a-4c9f-beb0-348a85fbd732}" LabelStyleKey="C1_F24_S4_C2" TextKey="ROLESOUND_3" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndGameRoleSound>

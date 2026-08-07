@@ -1,0 +1,45 @@
+﻿<WndAscendingTip GUID="{d5151fa2-2eef-4c23-8c30-11463593252b}">
+    <WZUIWindow AbsContentSize="400,247" GUID="{48356689-c7e7-44d5-ba74-6163f3d9f6cf}" LuaObjectName="WndAscendingTip" Name="WndAscendingTip" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" Visible="True" ShowAll="True" RelativePosition="0.5,0.5" Order="0">
+        <WZUIContainer Type="WZUIContainer" GUID="{8d6f8301-59b3-4b2d-b6a7-eeeac826e7bf}" AbsContentSize="400,247" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image File="ui/common/common_scale9_di15.png" GUID="{fa170a5d-dde4-412d-a3a8-1e36967669e2}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Visible="True" CapInsets="0,0,0,0" />
+            <WZUIContainer Type="WZUIContainer" GUID="{8f2292fa-dc42-4ac0-a23d-56e94c9e0d25}" AbsContentSize="390,235" UseAbsSize="True" RelativePosition="0.5,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{54d14f22-4e49-44a0-b91a-ba6c723c3e4a}" File="ui/common/common_scale9_di25.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{92188b89-37c5-478c-b736-d36a23300a3a}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" AbsContentSize="400,247" UseAbsSize="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{b70960e2-436f-450a-ab21-adfe3fca22e9}" AbsContentSize="390,110" UseAbsSize="True" RelativePosition="0.501178,0.65" AbsPosition="201.474,160.716">
+                <WZUI9Image Type="WZUI9Image" GUID="{b03cbffd-2fcf-427f-afb8-509c5f9af51c}" File="ui/common/common_scale9_di20.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5536afa1-e71f-4bf1-bbc7-bb30518f1865}" Name="txtContent_WndAscendingTip" Color="127,70,26" FontSize="22" Text="" MaxLength="" Dimensions="330,0" Alignment="Left" TextKey="ASCENDING16" />
+            </WZUIContainer>
+            <WZUIButton AbsContentSize="116,56" GUID="{42b21614-56e5-48d5-bf89-ba0b6cee0e10}" LuaDoneFunctionName="onCancel" LuaPushFunctionName="" RelativePosition="0.26,0.18" Type="WZUIButton" UseAbsSize="True" Name="btnCancel_WndConfirmBox" LuaActionName="Normal" Tag="1">
+                <NormalElement GUID="{8e0a8d4d-dbb1-4065-a1ab-c53c05527f49}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{832550bb-511f-4019-90be-29a7a6995665}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{3ec81723-99d5-4c5e-9ea6-5390301123d1}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{4af55b28-1b8c-4059-90e4-b3cc680c056f}" File="ui/common/common_btn_anniu3_0_sel.png" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{099aaec2-4872-403f-95c2-9d0c16ab6017}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{5c4a82c6-23f2-481a-ba97-11410c13abf3}" File="ui/common/common_btn_anniu3_0.png" GrayRender="True" RelativePosition="0.5,0.5" UseOriginSize="True" />
+                </DisableElement>
+                <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{0fd56883-d9e6-42ce-b1ad-5ceb690bc1b7}" Name="txtCancel_WndConfirmBox" RelativePosition="0.5,0.5" ShadowColor="0,255,0" StrokeColor="128,54,13" StrokeOffset="0,0" StrokeSize="4" Text="返回" Type="WZUILabelTTF" Visible="True" TextKey="ASCENDING14" LabelStyleKey="SMALL_ORANGE_BTN" />
+            </WZUIButton>
+            <WZUIButton AbsContentSize="116,56" GUID="{840c2b26-ee73-4086-9674-f8e6ae46f191}" LuaDoneFunctionName="onConfirm" LuaPushFunctionName="" RelativePosition="0.74,0.18" Type="WZUIButton" UseAbsSize="True" TouchEnable="True" Name="btnConfirm_WndConfirmBox" LuaActionName="Normal" Tag="2">
+                <NormalElement GUID="{008a1f93-22d5-4870-809b-425b2e1170ae}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{1dfb3e00-8947-442a-9bc7-5780c4acc3c2}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{a7ecb4af-1f9f-4a34-90af-081b42968459}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0_sel.png" GUID="{6a445840-39a6-4146-b2b5-43071e2f476f}" Type="WZUI9Image" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{fb5d2642-5f56-40a8-8d1b-f546ae0eff2b}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{32042ec2-b350-41af-aa5d-b620e963c126}" Type="WZUI9Image" GrayRender="True" RelativePosition="0.5,0.5" UseOriginSize="True" />
+                </DisableElement>
+                <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{6b691054-d889-42fc-9bf9-0a408a4bfaaa}" Name="txtConfirm_WndConfirmBox" RelativePosition="0.5,0.5" ShadowColor="0,255,0" StrokeColor="3,111,8" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" TextKey="ASCENDING15" LabelStyleKey="SMALL_GREEN_BTN" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{1e0dd58f-4343-4f20-9bc3-657ae252533d}" UseAbsSize="True" AbsContentSize="390,30" AnchorPoint="0.5,0.5" RelativePosition="0.84,0.355">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{327aa766-2423-4b2e-966f-b16021c27c6b}" FontSize="16" Text="" Color="79,60,48" RelativePosition="0.226,0.5" TextKey="CONSUME" Alignment="Left" AnchorPoint="0,0.5" LabelStyleKey="C11_F20_S4_C5" Scale="0.9" Name="txtCost_WndAscendingTip" />
+                <WZUIImage Type="WZUIImage" GUID="{132eadc9-9869-4b43-8588-0448a7784c86}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Scale="0.7" RelativePosition="0.405,0.5" Name="imgCostIcon_WndAscenddingTip" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e5fdc460-b7fc-4412-be2f-8ee9c82b82b7}" FontSize="22" Text="0" Color="255,227,116" RelativePosition="0.46,0.5" TextKey="" Alignment="Left" AnchorPoint="0,0.5" LabelStyleKey="C11_F20_S4_C5" Name="cost" BoldFont="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndAscendingTip>

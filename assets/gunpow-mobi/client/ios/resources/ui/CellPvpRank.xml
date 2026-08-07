@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<CellPvpRank GUID="{5bd30577-f812-44a9-ad51-8451227d63a3}">
+	<WZUIContainer AbsContentSize="354,88" GUID="{E3AD270E-281C-4734-9906-710B39D32926}" LuaObjectName="" Name="CellPvpRank" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="479,320">
+		<WZUIContainer Type="WZUIContainer" GUID="{995672A8-AA89-4846-8CA6-A78E0159C3F0}" RelativeSize="0.2,1" RelativePosition="0,0.5" AnchorPoint="0,0.5">
+			<WZUIImage Type="WZUIImage" GUID="{8E37DF3C-A369-477b-825A-F1ABE40F4359}" File="" UseOriginSize="True" Name="imgRank_CellPvpRank" RelativePosition="0.5,0.5" Visible="True" />
+			<WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" Color="255,89,74" EnableStroke="False" FontSize="20" GUID="{FA517FD2-E037-4022-AA9E-05D59B061691}" Name="txtRank_CellPvpRank" RelativePosition="0.5,0.5" Text="" Type="WZUILabelTTF" StrokeColor="60,19,12" StrokeSize="3" Dimensions="200,0" />
+		</WZUIContainer>
+		<WZUIContainer Type="WZUIContainer" GUID="{2DAAAC45-ACF0-4d70-BA4A-062E22FD739B}" RelativeSize="0.8,1" AnchorPoint="1,0.5" RelativePosition="1,0.5">
+			<WZUIContainer Type="WZUIContainer" GUID="{A6BC33BB-B311-411e-8E5C-CF25370B2F10}" Name="conHead_CellPvpRank" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.17161,0.5" AbsPosition="48.5999,40">
+				<WZUIImage Type="WZUIImage" GUID="{DD0E5C82-E0D3-4120-BD67-932AA8431BFA}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Visible="True" Order="-1" />
+			</WZUIContainer>
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{38FA7A7C-21DD-433d-BC3E-889DD7E9AF26}" FontSize="20" Alignment="Left" AnchorPoint="0,0.5" Color="255,89,74" RelativePosition="0.326,0.688335" Text="Lv1" Name="txtLv_CellPvpRank" AbsPosition="92.3232,55.0668" />
+			<WZUIImage Type="WZUIImage" GUID="{9636716F-2D18-4b76-810A-5152EA389DAC}" File="ui/chat/chat_common_icon_kuafu.png" Visible="True" isValid="True" UseOriginSize="True" RelativePosition="0.514407,0.688335" AbsPosition="145.68,60.5735" Name="imgKF_CellPvpRank" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{A67A0F98-F6A1-40a1-9CAA-525089E497B9}" FontSize="20" Alignment="Left" AnchorPoint="0,0.5" Color="255,236,193" RelativePosition="0.542655,0.688335" Text="" NameCreate="False" Name="txtName_CellPvpRank" AbsPosition="153.68,60.5735" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{2721266A-98CF-4944-BB81-2C38CA86F76C}" FontSize="20" Alignment="Left" AnchorPoint="0,0.5" Color="255,227,116" RelativePosition="0.326,0.31" Text="Lv20" Name="" AbsPosition="92.3232,25.0668" TextKey="PVP_RANK_5" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{B94D4E2B-4498-4b1e-984C-7FC0D95ED5A6}" FontSize="20" Alignment="Left" AnchorPoint="0,0.5" Color="255,236,193" RelativePosition="0.525,0.31" Text="" NameCreate="False" Name="txtScore_CellPvpRank" AbsPosition="145.75,27.0668" />
+		</WZUIContainer>
+		<WZUIContainer Type="WZUIContainer" GUID="{F9CBCDF4-6D2A-4409-BEFF-627A1A6D1039}">
+			<Button Type="WZUIButton" LuaDoneFunctionName="onCheckInfo" GUID="{8E2377BC-DB31-4c5a-BE4E-5CCFA2352257}">
+				<NormalElement Type="WZUIContainer" GUID="{6F30C163-8F64-4b3b-9D59-840CD1931DF9}" />
+				<SelectElement Type="WZUIContainer" GUID="{1C637B03-E73E-490a-8AC4-E8EEECB538B6}" />
+				<DisableElement Type="WZUIContainer" GUID="{4CC010AC-FCB9-42fc-B7FD-BA1FEE794D9C}" />
+			</Button>
+		</WZUIContainer>
+	</WZUIContainer>
+</CellPvpRank>

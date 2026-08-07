@@ -1,0 +1,246 @@
+<?xml version="1.0" ?>
+<WndBattleSetting GUID="{447EF467-FAD1-4781-87C0-5B89945DBF82}">
+    <WZUIWindow AbsContentSize="570,400" AbsPosition="480,320" AnchorPoint="0.5,0.5" GUID="{15AC0B9A-F193-457c-9D75-15924250AB07}" LuaObjectName="WndBattleSetting" Name="WndBattleSetting" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="384,400" AbsPosition="" AnchorPoint="0.5,1" GUID="{6891dd5d-4633-4ba8-a905-346a1f93af58}" RelativePosition="0.482055,0.945452" RelativeSize="0.77,0.7" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+            <WZUI9Image File="ui/common/common_scale9_di19.png" GUID="{fa3ec211-143b-4ba5-bcc4-8ab679b4fe7b}" Type="WZUI9Image" CapInsets="100,100,100,10" Visible="True" RelativePosition="0.502604,0.503125" />
+            <WZUI9Image File="common/Jigsaw/60.png" GUID="{9c71d4ba-5839-4c1b-a346-122aa7d8e5a6}" Name="imgUmder_WndBattleSetting" RelativePosition="0.500359,0.0432965" RelativeSize="1.013,0.098" Type="WZUI9Image" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{6a5eb80c-58fc-42fa-bd3f-c49ee6f36770}" AbsContentSize="370,240" UseAbsSize="True" RelativePosition="0.505208,0.554375" Visible="True">
+                <WZUIImage Type="WZUIImage" GUID="{48b6de25-d0ee-4ed4-a523-d93c3545c0b1}" File="ui/common/common_scale9_di20.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="481,370" AnchorPoint="0.5,1" GUID="{a0bd0961-82ef-4662-8d59-fb517d490ab8}" RelativePosition="0.5,0.98" RelativeSize="0.7,0.7" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+            <WZUI9Image File="common/Jigsaw/3.png" GUID="{154dd23f-b927-4692-833b-50380e24239c}" Type="WZUI9Image" Visible="True" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="564,86" AnchorPoint="0.5,1" GUID="{cee3d0a9-d399-4d50-9660-6e25fb16ea90}" RelativePosition="0.5,1" RelativeSize="0.6,0.15" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+            <WZUI9Image CapInsets="50,30,640,30" File="common/Jigsaw/5.png" GUID="{5b50f769-43c9-4f94-b7f7-df0c3f845a6c}" NoBorder="False" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True" />
+        </WZUIContainer>
+        <WZUIContainer AnchorPoint="0.5,1" GUID="{7171b6a2-566b-43a8-82d3-4d093fbe2251}" RelativePosition="0.5,1" RelativeSize="1,0.24" Type="WZUIContainer" Visible="False">
+            <WZUIContainer AbsContentSize="382,71" AnchorPoint="0.5,1" GUID="{5646aae8-3120-499c-8687-8f78735fe305}" RelativePosition="0.5,0.978355" RelativeSize="0.5,1" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <WZUI9Image File="common/Jigsaw/42.png" GUID="{acdfc41e-60b6-446e-875b-263abe5ed14a}" Type="WZUI9Image" Visible="False" />
+                <WZUIImage AnchorPoint="0.5,1" File="common/text/texe_setting_title.png" GUID="{0ba9b1f4-9d8e-44e3-a31d-ccdd50aeb2f3}" RelativePosition="0.463351,0.763239" Type="WZUIImage" UseOriginSize="True" />
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="1,0.5" GUID="{1781b9c5-da57-400d-af10-8ab122e78967}" RelativePosition="0.810074,0.490043" RelativeSize="0.115,1" Type="WZUIContainer">
+                <Button GUID="{2d4b00bd-072c-41d7-9977-73e5bed24e2c}" LuaDoneFunctionName="onContinueGame" RelativePosition="0.5,0.604167" RelativeSize="1,1" Type="WZUIButton">
+                    <NormalElement GUID="{936de7bc-5c91-4c60-bb7d-6717289a52b8}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="common/button/close.png" GUID="{9af37d56-16d4-458b-93b6-482d38124c5d}" Type="WZUIImage" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{a6e15bb3-086a-4a59-a20e-5ed1edd28a3a}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="common/button/close_sel.png" GUID="{c25c25dc-bc59-404a-bfe3-712b2b079cf4}" Type="WZUIImage" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{d8c47d9b-66ab-483b-88cf-8e59032aab75}" Type="WZUIContainer">
+                        <WZUIImage File="common/button/close_not.png" GUID="{e8ffe020-3cc5-4ab6-8a15-a22ba0404281}" Type="WZUIImage" UseOriginSize="True" />
+                    </DisableElement>
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AnchorPoint="0.5,0.5" GUID="{bd7f0e78-239f-4dd8-9ef0-8648e49ffb00}" RelativePosition="0.5,0.504091" RelativeSize="0.8,0.35" Type="WZUIContainer" Visible="False">
+            <WZUIContainer AnchorPoint="0,0" GUID="{d77be677-8da2-4774-8476-ecd9c3120d88}" Name="item1_WndBattleSetting" RelativePosition="0,0.5" RelativeSize="0.5,0.5" Type="WZUIContainer" Visible="True">
+                <WZUICheckBox AnchorPoint="0,0" GUID="{0e12d865-8c2e-4849-94f6-eb8d29a9115a}" LuaSelectedFunctionName="onSetSounds" Name="selGameMusic_WndBattleSetting" RelativePosition="0,0" RelativeSize="0.25,1" SelectedIndex="0" Type="WZUICheckBox">
+                    <CheckElement GUID="{75eca8f9-3f44-4e9f-b72a-8e25cbb40aa8}" Type="WZUIContainer">
+                        <WZUIImage File="common/button/checkbox_unsel.png" GUID="{019bbef5-7560-4e01-bddf-7ce1372b1f17}" Type="WZUIImage" UseOriginSize="True" />
+                    </CheckElement>
+                    <CheckElement GUID="{4fb0c037-4632-42f0-9066-71b95858981b}" Type="WZUIContainer">
+                        <WZUIImage File="common/button/checkbox_sel.png" GUID="{71f764bc-38a2-477a-b534-0d212aa5f031}" Type="WZUIImage" UseOriginSize="True" />
+                    </CheckElement>
+                </WZUICheckBox>
+                <WZUILabelTTF Alignment="Left" AnchorPoint="0,0" Color="0,0,0" FontSize="32" GUID="{7b32e4de-d797-4b1b-bc5d-218d408a44a9}" Name="txtGameMusic_WndBattleSetting" RelativePosition="0.25,0.20" Text="" Type="WZUILabelTTF" UseAbsCoordinate="False" />
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="1,0" GUID="{9381b765-d67c-4125-9a81-4c0a11514fd7}" Name="item3_WndBattleSetting" RelativePosition="0.5,0" RelativeSize="0.5,0.5" Type="WZUIContainer">
+                <WZUICheckBox AnchorPoint="0,0" GUID="{6615fee0-4a5f-4d75-9b49-ce9c16102d1d}" LuaSelectedFunctionName="onSetVoiceChat" Name="selVoiceChat_WndBattleSetting" RelativePosition="0,0" RelativeSize="0.25,1" SelectedIndex="0" Type="WZUICheckBox">
+                    <CheckElement GUID="{dcbc3811-c413-47e5-8307-ed20b2fa9350}" Type="WZUIContainer">
+                        <WZUIImage File="common/button/checkbox_unsel.png" GUID="{c43cfc05-9c1b-415a-b04b-c61328443d0e}" Type="WZUIImage" UseOriginSize="True" />
+                    </CheckElement>
+                    <CheckElement GUID="{3d2b9ea4-5409-4f2e-8331-4aeabe0e8945}" Type="WZUIContainer">
+                        <WZUIImage File="common/button/checkbox_sel.png" GUID="{2f8b4247-970a-4897-9a7d-d44cd1921cf2}" Type="WZUIImage" UseOriginSize="True" />
+                    </CheckElement>
+                </WZUICheckBox>
+                <WZUILabelTTF Alignment="Left" AnchorPoint="0,0" Color="0,0,0" FontSize="32" GUID="{02bd7824-0796-49b3-ba11-2c9f2c89701d}" Name="txtVoiceChat_WndBattleSetting" RelativePosition="0.25,0.2" Text="" Type="WZUILabelTTF" UseAbsCoordinate="False" />
+            </WZUIContainer>
+            <WZUIContainer AnchorPoint="0,0" GUID="{3b40fbbc-45a3-47c8-8af1-31d3d3dc3acc}" Name="item2_WndBattleSetting" RelativePosition="0.52,0.5" RelativeSize="0.5,0.5" Type="WZUIContainer" Visible="True">
+                <WZUICheckBox AnchorPoint="0,0" GUID="{0401284b-f933-456d-b6e6-2ac0d231ea99}" LuaSelectedFunctionName="onSetMusic" Name="selBackMusic_WndBattleSetting" RelativePosition="0,0" RelativeSize="0.25,1" SelectedIndex="0" Type="WZUICheckBox">
+                    <CheckElement GUID="{61167350-1eec-4a11-b828-cca8ec26314c}" Type="WZUIContainer">
+                        <WZUIImage File="common/button/checkbox_unsel.png" GUID="{48d008b4-3065-444a-bc99-c4a0a71ac0ed}" Type="WZUIImage" UseOriginSize="True" />
+                    </CheckElement>
+                    <CheckElement GUID="{1a155403-4ff3-4897-943d-cddcf935c19c}" Type="WZUIContainer">
+                        <WZUIImage File="common/button/checkbox_sel.png" GUID="{0915ba73-21c1-4723-83ff-1a904faf1d3c}" Type="WZUIImage" UseOriginSize="True" />
+                    </CheckElement>
+                </WZUICheckBox>
+                <WZUILabelTTF Alignment="Left" AnchorPoint="0,0" Color="0,0,0" FontSize="32" GUID="{59db093a-4295-4730-8d9c-07fb7fd7f35e}" Name="txtBackMusic_WndBattleSetting" RelativePosition="0.25,0.20" Text="" Type="WZUILabelTTF" UseAbsCoordinate="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="114,55" GUID="{c3433c4b-855d-4fc2-b52d-dcda7b8277f0}" RelativePosition="0.326316,0.0905001" Scale="1" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <Button GUID="{d877631e-bcd7-4a50-aae2-fdd4d27e9538}" LuaDoneFunctionName="onExitGame" Name="btnExitGame_WndBattleSetting" Type="WZUIButton" LuaActionName="Normal">
+                <NormalElement GUID="{444ee315-ca4b-4157-a4c3-1920369703e4}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu3.png" GUID="{6c90b44c-0925-48ef-a54a-a8d9e8136c96}" Name="imgExitGame1_WndBattleSetting" Type="WZUI9Image" />
+                    <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{65dd53c1-6efb-483f-8946-61773a296916}" Name="txtExitGame1_WndBattleSetting" RelativePosition="0.5,0.5" StrokeColor="128,54,13" StrokeOffset="0,0" StrokeSize="4" Text="退出战斗" Type="WZUILabelTTF" />
+                </NormalElement>
+                <SelectElement GUID="{d154c4e0-6ce7-4cd0-8ca0-c381066842a7}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu3_sel.png" GUID="{03f12b21-740a-4c5e-a4a4-d8a8af7db007}" Name="imgExitGame2_WndBattleSetting" Type="WZUI9Image" Scale="1" ScaleX="1" ScaleY="1" />
+                    <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{b91fae02-5aa3-42c9-b097-5eebaf8eda5c}" Name="txtExitGame2_WndBattleSetting" RelativePosition="0.5,0.5" StrokeColor="128,54,13" StrokeOffset="0,0" StrokeSize="4" Text="退出战斗" Type="WZUILabelTTF" />
+                </SelectElement>
+                <DisableElement GUID="{f0a97963-bce7-46ef-8587-1865799f0831}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu3.png" GUID="{f9796cea-318a-4415-9687-970aeec32a7d}" Name="imgExitGame3_WndBattleSetting" Type="WZUI9Image" GrayRender="True" />
+                    <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="False" FontSize="24" GUID="{6500aaa1-295f-445f-b9b7-646bdd87fa2d}" Name="txtExitGame3_WndBattleSetting" RelativePosition="0.5,0.5" StrokeColor="132,66,29" StrokeOffset="0,0" StrokeSize="4" Text="退出战斗" Type="WZUILabelTTF" />
+                </DisableElement>
+            </Button>
+            <WZUIShadowTTF GUID="{95cf6ba4-fbf7-4689-bfb8-38468868d4c5}" Name="txtTc_WndBattleSetting" ShadowColor="128,54,13" ShadowPoint="0,0" Type="WZUIShadowTTF" Visible="False" Color="255,239,193" TouchSwallow="False" />
+            <WZUIImage File="common/button_text/button_blue_32.png" GUID="{e2ee55f7-865a-4c90-95ad-d418824caa91}" Name="imgExitGame_WndBattleSetting" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="False" Color="255,255,255" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="114,55" GUID="{b3b5d9fa-b5cd-462f-8e1a-a2cdc57f02a7}" RelativePosition="0.642105,0.0880001" Scale="1" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <Button GUID="{c34c8d2c-12e2-42fd-a408-0c6f9bdce451}" LuaDoneFunctionName="onContinueGame" Type="WZUIButton" LuaActionName="Normal">
+                <NormalElement GUID="{2978953d-c6a1-46de-8978-6be77d6bad21}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10.png" GUID="{f439e381-6baa-4907-b6de-750636e651c8}" Type="WZUI9Image" RelativePosition="0.5,0.5" />
+                    <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{7f9c4e6f-08fd-4e46-b11e-d52245554009}" Name="txtLabel1_WndBattleSetting" RelativePosition="0.5,0.5" StrokeColor="0,72,3" StrokeOffset="0,0" StrokeSize="4" Text="继续游戏" Type="WZUILabelTTF" />
+                </NormalElement>
+                <SelectElement GUID="{7ea8772b-f475-492b-91aa-3ef76259029f}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_sel.png" GUID="{21a9ed02-0707-40a4-b3d2-2e9a5f105211}" Type="WZUI9Image" Scale="1" ScaleX="1" ScaleY="1" />
+                    <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{3c20186c-304f-403a-9064-96f5cd32d447}" Name="txtLabel2_WndBattleSetting" RelativePosition="0.5,0.5" StrokeColor="0,72,3" StrokeOffset="0,0" StrokeSize="4" Text="继续游戏" Type="WZUILabelTTF" />
+                </SelectElement>
+                <DisableElement GUID="{e4662f20-3a07-4fba-95fd-6b2290e50132}" Type="WZUIContainer">
+                    <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="False" FontSize="24" GUID="{384fa3e2-0cdd-42e3-a5ed-d7c425a373a8}" Name="txtLabel3_WndBattleSetting" RelativePosition="0.5,0.5" StrokeColor="0,72,3" StrokeOffset="0,0" StrokeSize="4" Text="继续游戏" Type="WZUILabelTTF" />
+                </DisableElement>
+            </Button>
+            <WZUIShadowTTF GUID="{06c70650-db25-43a4-ba28-ca711827c52b}" Name="txtJx_WndBattleSetting" ShadowColor="11,69,0" ShadowPoint="0,0" Type="WZUIShadowTTF" Visible="False" />
+            <WZUIImage File="common/button_text/button_green_83.png" GUID="{fae7d387-4613-4e7a-8f56-642e19d24dfe}" RelativePosition="0.5,0.485915" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="False" />
+        </WZUIContainer>
+        <WZUILabelTTF Color="79,60,48" Dimensions="300,60" FontSize="22" GUID="{e5d02aba-cd0d-4c7c-9e56-de110dd241ea}" GrayRender="False" Name="txtJg_WndBattleSetting" NoBorder="False" RelativePosition="0.485,0.4025" Text="Warning: It costs arena EXP to leave by force!" Type="WZUILabelTTF" Opacity="255" AbsPosition="369,161" Alignment="Left" AlignmentVertical="0" Visible="False" />
+        <WZUILabelTTF Color="255,236,193" Dimensions="460,60" FontSize="24" GUID="{139b135e-2637-4e92-9031-5511dcbdf014}" GrayRender="False" Name="txtTitle_WndBattleSetting" NoBorder="False" RelativePosition="0.478095,0.828291" Text="设置" Type="WZUILabelTTF" BoldFont="True" StrokeColor="132,66,29" StrokeSize="4" EnableStroke="True" AbsPosition="272.514,331.316" AlignmentVertical="0" />
+        <WZUIContainer Type="WZUIContainer" GUID="{256a0dbe-5e36-44bd-bd61-1a6ac587469a}" RelativePosition="0.5,0.5575" AbsPosition="285,223" Name="conMusic_WndBattleSetting">
+            <WZUIContainer Type="WZUIContainer" GUID="{9f885bdd-9990-4359-947a-66e6284a6482}" AbsContentSize="309,50" UseAbsSize="True" RelativePosition="0.482797,0.681735" AnchorPoint="0.5,1" AbsPosition="275.194,272.694">
+                <WZUI9Image Type="WZUI9Image" GUID="{2ce52776-3e05-4292-a505-a6711612701d}" File="ui/common/common_scale9_di9.png" RelativePosition="0.5,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{061312a3-240e-4232-aaeb-315f95c27bcc}" Name="" NameCreate="True" Color="105,65,46" StrokeColor="36,0,0" Text="声音" FontSize="22" AnchorPoint="1,0.5" RelativePosition="0.42,0.5" StrokeSize="3" BoldFont="False" EnableShadow="False" EnableStroke="False" TextKey="SETTING_MUSIC" />
+                <WZUIContainer Type="WZUIContainer" GUID="{adbe7d40-aacd-4b09-8502-a0ea683288c4}" AbsContentSize="180,50" UseAbsSize="True" RelativePosition="0.723301,0.5" AbsPosition="223.5,25">
+                    <Button Type="WZUIButton" AbsContentSize="36,36" UseAbsSize="True" LuaActionName="Normal" Tag="1" LuaDoneFunctionName="onSoundDone" LuaPushFunctionName="onSoundPush" RelativePosition="0.2,0.5" AbsPosition="29,25" GUID="{6f710e53-0146-4fb4-8b58-dafea25e6514}">
+                        <NormalElement Type="WZUIContainer" GUID="{363c71fc-efc0-41c4-8f86-790f263aeea8}">
+                            <WZUIImage Type="WZUIImage" GUID="{0356ad39-a9f4-4610-b18f-c6eed195f4f6}" File="ui/common/common_btn_js.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{b49a7b03-5835-4a2f-a176-3991f458c7a7}">
+                            <WZUIImage Type="WZUIImage" GUID="{27c759ae-813d-4cf6-9bc2-b77b05a0891d}" File="ui/common/common_btn_js_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{4f8ba96e-277f-408f-8947-4f85a85bc6d8}" />
+                    </Button>
+                    <WZUIButton Type="WZUIButton" AbsContentSize="36,36" UseAbsSize="True" LuaActionName="Normal" Tag="2" LuaDoneFunctionName="onSoundDone" LuaPushFunctionName="onSoundPush" GUID="{12653521-db97-4cb3-8ce7-71bc3e44479b}" File="ss" RelativePosition="0.8,0.5" AbsPosition="118,25">
+                        <NormalElement Type="WZUIContainer" GUID="{2038ba61-8bfb-40fa-a79c-32889350c5cf}">
+                            <WZUIImage Type="WZUIImage" GUID="{7dbf8fb9-e378-4448-acf6-01323f69651c}" File="ui/common/common_btn_zj.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{cb9e1d74-22d2-4f33-ab0b-aa9139cf1be8}">
+                            <WZUIImage Type="WZUIImage" GUID="{46d0e056-053f-4486-a029-71ec4aac808a}" File="ui/common/common_btn_zj_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{f72a8061-5ca5-465e-b333-074fb7d26492}" />
+                    </WZUIButton>
+                    <WZUIContainer Type="WZUIContainer" GUID="{523c3658-349c-4e0a-81aa-ecec1f73f32d}" AbsContentSize="50,35" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="75,25">
+                        <WZUI9Image Type="WZUI9Image" GUID="{4d17c565-ad5b-4813-86dc-bb1e4552296d}" File="ui/common/common_scale9_di63.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6c6b9e28-2432-4987-af85-088e9a6cf15a}" LabelStyleKey="C1_F24" Text="" Name="txtMusic_WndSetting" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{d36f277d-e958-4ee4-9f5c-5a942b481fff}" Visible="False" RelativePosition="0.5,0.4">
+                <WZUILabelTTF Color="79,60,48" Dimensions="460,60" FontSize="24" GUID="{09ec986d-b895-4d2c-b112-1cf730d90b25}" GrayRender="False" Name="txtMusic_WndBattleSetting" NoBorder="False" RelativePosition="0.330403,0.571581" Text="背景音乐" Type="WZUILabelTTF" BoldFont="True" StrokeColor="105,45,46" AbsPosition="188.33,228.632" AlignmentVertical="0" />
+                <WZUIImage Type="WZUIImage" GUID="{f8a062cb-92c1-4fae-b7b0-dc4f16744b61}" File="ui/common/common_icon_offon.png" UseOriginSize="True" RelativePosition="0.611658,0.615196" LuaTouchEndedFunction="onClickMusic" />
+                <WZUIImage Type="WZUIImage" GUID="{60edf1d1-dec3-48dc-bbee-f2cc644a8d18}" File="ui/common/common_icon_off_shang.png" UseOriginSize="True" RelativePosition="0.656,0.615196" Name="imgMusic_WndBattleSetting" TouchEnable="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{178fac4b-3b81-4290-8907-116c51c5097f}" RelativePosition="0.5,0.3825" AbsPosition="345.082,117.735" Name="conSound_WndBattleSetting" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{fb4e682e-37fb-4523-9223-ad714541d258}" AbsContentSize="309,50" UseAbsSize="True" RelativePosition="0.484264,0.678163" AnchorPoint="0.5,1" AbsPosition="276.031,271.265">
+                <WZUI9Image Type="WZUI9Image" GUID="{2fea4551-24ef-467b-a0fa-8edbc20ba201}" File="ui/common/common_scale9_di9.png" RelativePosition="0.5,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e40f4fe9-a8bf-4297-9b19-714d4f13eaf3}" Name="" NameCreate="True" Color="105,65,46" StrokeColor="36,0,0" Text="声音" FontSize="22" AnchorPoint="1,0.5" RelativePosition="0.42,0.5" StrokeSize="3" BoldFont="False" EnableShadow="False" EnableStroke="False" TextKey="SETTING_SOUND" />
+                <WZUIContainer Type="WZUIContainer" GUID="{08a06589-02ac-4d08-94e7-77ad530f976e}" AbsContentSize="180,50" UseAbsSize="True" RelativePosition="0.723301,0.5" AbsPosition="223.5,25">
+                    <Button Type="WZUIButton" AbsContentSize="36,36" UseAbsSize="True" LuaActionName="Normal" Tag="3" LuaDoneFunctionName="onSoundDone" LuaPushFunctionName="onSoundPush" RelativePosition="0.2,0.5" AbsPosition="29,25" GUID="{a33a92a6-b29b-4697-9a8d-4852336770ac}">
+                        <NormalElement Type="WZUIContainer" GUID="{bb1f5a2f-228f-4ad7-a58e-cf1a8b6d7138}">
+                            <WZUIImage Type="WZUIImage" GUID="{56bf58fc-ed55-4eeb-8ee5-6c4717064ddf}" File="ui/common/common_btn_js.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{8d4a70ad-ff05-4e9e-8d98-946299becb5c}">
+                            <WZUIImage Type="WZUIImage" GUID="{7bd0a7bf-cba0-4c1c-be8a-824e0a437d43}" File="ui/common/common_btn_js_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{0a5ff6be-e052-4800-b077-16a23fd88ae1}" />
+                    </Button>
+                    <WZUIButton Type="WZUIButton" AbsContentSize="36,36" UseAbsSize="True" LuaActionName="Normal" Tag="4" LuaDoneFunctionName="onSoundDone" LuaPushFunctionName="onSoundPush" GUID="{d5db4a6f-f07a-4d56-8ae7-8c4f9331b22a}" File="ss" RelativePosition="0.8,0.5" AbsPosition="118,25">
+                        <NormalElement Type="WZUIContainer" GUID="{289409ec-b31b-4de4-ab85-b4eab9bdc1a0}">
+                            <WZUIImage Type="WZUIImage" GUID="{87487b0f-850c-4516-94ac-0fd3010efc49}" File="ui/common/common_btn_zj.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{ed955909-2755-45b5-89df-96fa68b97eda}">
+                            <WZUIImage Type="WZUIImage" GUID="{36c64d0e-1097-431e-84a3-7120dd3bd955}" File="ui/common/common_btn_zj_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{229efab8-1cf3-47a7-be4d-e726d9855848}" />
+                    </WZUIButton>
+                    <WZUIContainer Type="WZUIContainer" GUID="{1a60bc44-bffe-40fe-989f-a1b77ca400ba}" AbsContentSize="50,35" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="75,25">
+                        <WZUI9Image Type="WZUI9Image" GUID="{2ef49204-c545-405c-ae15-c42182e65066}" File="ui/common/common_scale9_di63.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d02d606f-7e05-455e-8f9b-07cb1e6b283c}" LabelStyleKey="C1_F24" Text="" Name="txtSound_WndSetting" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{d35e24ef-4575-4d1e-a683-304a3e8143af}" Visible="False">
+                <WZUILabelTTF Color="79,60,48" Dimensions="460,60" FontSize="24" GUID="{a3de5881-c2b2-4791-956d-a359f98d4b06}" GrayRender="False" Name="txtEffectSound_WndBattleSetting" NoBorder="False" RelativePosition="0.330403,0.571581" Text="游戏音效" Type="WZUILabelTTF" BoldFont="True" StrokeColor="105,45,46" AbsPosition="188.33,228.632" AlignmentVertical="0" />
+                <WZUIImage Type="WZUIImage" GUID="{5c8ada59-167f-46f3-9405-eb9baa3c64b8}" File="ui/common/common_icon_offon.png" UseOriginSize="True" RelativePosition="0.611658,0.615196" LuaTouchEndedFunction="onClickEffectSound" />
+                <WZUIImage Type="WZUIImage" GUID="{b5ed9643-efd4-4708-a31a-54cc85abc30b}" File="ui/common/common_icon_off_shang.png" UseOriginSize="True" RelativePosition="0.656,0.615196" Name="imgEffectSound_WndBattleSetting" TouchEnable="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{65ba4b93-9916-4356-b537-6957e0f33ce0}" RelativePosition="0.5,0.195" AbsPosition="345.082,117.735" Name="conLine_WndBattleSetting">
+            <WZUIContainer Type="WZUIContainer" GUID="{ea494c6d-deaf-49a9-af10-81c428d61361}" AbsContentSize="309,50" UseAbsSize="True" RelativePosition="0.484264,0.678163" AnchorPoint="0.5,1" AbsPosition="276.031,271.265">
+                <WZUI9Image Type="WZUI9Image" GUID="{95a8b142-2269-4391-8ffb-844561edf3c1}" File="ui/common/common_scale9_di9.png" RelativePosition="0.5,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5ff41083-cc1a-4c71-ae0e-ee240faadbfb}" Name="" NameCreate="True" Color="105,65,46" StrokeColor="36,0,0" Text="声音" FontSize="22" AnchorPoint="1,0.5" RelativePosition="0.42,0.5" StrokeSize="3" BoldFont="False" EnableShadow="False" EnableStroke="False" TextKey="SETTING_LINE" />
+                <WZUIContainer Type="WZUIContainer" GUID="{63243c88-39fd-48d2-a873-f5d1cf8621a7}" AbsContentSize="180,50" UseAbsSize="True" RelativePosition="0.723301,0.5" AbsPosition="223.5,25">
+                    <WZUIButton Type="WZUIButton" AbsContentSize="36,36" UseAbsSize="True" LuaActionName="" Tag="4" LuaDoneFunctionName="onLineDone" LuaPushFunctionName="" GUID="{d8e3e647-97d1-4f9a-836e-16d711f26afa}" File="ss" RelativePosition="0.8,0.5" AbsPosition="118,25" ScaleY="1" Name="btnLine_WndBattleSetting">
+                        <NormalElement Type="WZUIContainer" GUID="{1c284796-ecaf-4831-bfec-e6368c82ef5f}">
+                            <WZUIImage Type="WZUIImage" GUID="{e6c9dc00-5b69-4e6d-a51b-b3ec4383ea20}" File="ui/common/common_icon_zhujiemian.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{1caec371-fe04-41d1-9cec-3f3a7ba04e50}">
+                            <WZUIImage Type="WZUIImage" GUID="{aaedc826-76d0-4c93-b0bf-a5f5f9950585}" File="ui/common/common_icon_zhujiemian.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{3d3cb39a-f0ac-4fcf-b7b2-6b3afb2fd0a2}" />
+                    </WZUIButton>
+                    <WZUIContainer Type="WZUIContainer" GUID="{7c078294-4e96-4786-a431-06f7d430e6c7}" AbsContentSize="50,35" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="75,25">
+                        <WZUIImage Type="WZUIImage" GUID="{ad5c7cb6-b9af-4ec6-ab21-73a40dab22cf}" File="ui/combat/lx_01.png" UseOriginSize="True" Name="imgCurLine_WndBattleSetting" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{0a1b4ae4-e1f6-4a03-a0a4-a1da8acd11f5}" Visible="False" Name="conLineSel_WndBattleSetting" UseAbsSize="True" AbsContentSize="100,140" RelativePosition="0.826855,0.543178">
+                <WZUI9Image Type="WZUI9Image" GUID="{b0f33f5c-8a99-4ad7-8eee-83430513170a}" File="ui/common/common_scale9_di24.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{7cfc4d60-7f64-45ff-b0d3-a23208904019}" AbsContentSize="68,20" UseAbsSize="True" RelativePosition="0.5,0.810673">
+                    <Button Type="WZUIButton" GUID="{44ac69c8-cf25-4273-9504-880f804ea5b7}" Tag="101" LuaDoneFunctionName="LineSelDone" AbsContentSize="68,20" UseAbsSize="False" RelativePosition="0.5,0.5">
+                        <NormalElement Type="WZUIContainer" GUID="{ed08779f-9e3d-4b33-8990-186e62d0f3fa}" Tag="-1">
+                            <WZUIImage Type="WZUIImage" GUID="{ba565727-72c7-435f-8080-a4e1274991a6}" File="ui/combat/lx_021.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{7c6c8c10-4b4e-4008-8f6e-31a6f4d51ccd}">
+                            <WZUIImage Type="WZUIImage" GUID="{9ccc18f6-5d9e-4cf1-87d1-a8be220a92ad}" File="ui/combat/lx_021.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{40c34ee2-78ba-4a28-887f-c850b46bed4e}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c02d3c3f-4bb0-45cd-89df-49155e7c711b}" RelativePosition="0.5,0.603128" AbsContentSize="68,20" UseAbsSize="True">
+                    <Button Type="WZUIButton" GUID="{a07793d6-63b6-442f-849c-e3cde3799d84}" Tag="102" LuaDoneFunctionName="LineSelDone" RelativePosition="0.5,0.5" UseAbsSize="False" AbsContentSize="68,20">
+                        <NormalElement Type="WZUIContainer" GUID="{51213dc3-63bc-460d-bf4e-44e3b3fe304a}" Tag="-1">
+                            <WZUIImage Type="WZUIImage" GUID="{6793a5a6-ff70-478f-8e5a-b77909ea5780}" File="ui/combat/lx_022.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{0701f49a-09fa-4fcd-a9a6-567e386ded0d}">
+                            <WZUIImage Type="WZUIImage" GUID="{4a87dc2b-5205-456a-81c9-a17978f3c38c}" File="ui/combat/lx_022.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{5776d860-f63c-446f-b7fb-6977bd0b8b56}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{cb6a0086-9784-4566-9523-19d426886b12}" AbsContentSize="68,20" UseAbsSize="True" RelativePosition="0.5,0.400909">
+                    <Button Type="WZUIButton" GUID="{dd01e705-b48f-4c99-986d-5ee427356fa0}" Tag="103" LuaDoneFunctionName="LineSelDone" AbsContentSize="68,20" UseAbsSize="False" RelativePosition="0.5,0.5">
+                        <NormalElement Type="WZUIContainer" GUID="{b91b883e-4290-486b-be39-0e18d4fa684e}" Tag="-1">
+                            <WZUIImage Type="WZUIImage" GUID="{c3a44827-6e58-45e4-bf57-6fb8e0610bfc}" File="ui/combat/lx_023.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{acfebd6f-023f-4a88-80cd-476fa80c823a}">
+                            <WZUIImage Type="WZUIImage" GUID="{26338470-d735-45b1-afa7-79e5b171c53f}" File="ui/combat/lx_023.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{a3750657-d55a-4b6e-97ef-cd8f9b6a033f}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c9113979-ea71-4b1a-a5b7-0449c7159e5c}" AbsContentSize="68,20" UseAbsSize="True" RelativePosition="0.5,0.190891">
+                    <Button Type="WZUIButton" GUID="{5653abe4-e458-4dfc-9220-dcb86c553db3}" Tag="104" LuaDoneFunctionName="LineSelDone" RelativePosition="0.5,0.5" AbsContentSize="68,20" UseAbsSize="False">
+                        <NormalElement Type="WZUIContainer" GUID="{a0a37e32-7e04-4f7c-b421-924289369e39}" Tag="-1">
+                            <WZUIImage Type="WZUIImage" GUID="{bffaa80e-ecaa-4cf0-b5e2-195b4bb8d2ce}" File="ui/combat/lx_024.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{a7300654-3552-4b1b-9583-0cb895cd8753}">
+                            <WZUIImage Type="WZUIImage" GUID="{87ed734d-dc2f-4dfa-b5d7-803e9ee8da4e}" File="ui/combat/lx_024.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{ccdd8f37-6e88-4707-b8a4-ace83080c7e2}" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndBattleSetting>

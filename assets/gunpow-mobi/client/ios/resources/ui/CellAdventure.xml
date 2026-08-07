@@ -1,0 +1,42 @@
+﻿<CellAdventure GUID="{c1040371-3f1f-459f-941f-c6697e0a2e39}">
+    <WZUIContainer AbsContentSize="175,183" GUID="{08d83f37-8a10-4677-9822-004596970ec6}" LuaObjectName="" Name="CellAdventure" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{31d498ef-0201-441a-a506-18955d92cda6}" TouchSwallow="True" AbsContentSize="">
+            <WZUIContainer Type="WZUIContainer" GUID="{c6114910-a54f-46aa-b183-7341c3ca62a4}">
+                <WZUIContainer Type="WZUIContainer" GUID="{058e329f-9b76-45b1-9ad8-429f1665841a}" AbsContentSize="186,190" UseAbsSize="True" RelativePosition="0.5,1" AbsPosition="87.5,84.5001" AnchorPoint="0.5,1">
+                    <WZUIContainer Type="WZUIContainer" GUID="{17b60988-9ea2-4b3e-abce-908b00d34c20}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.25,0.5" RelativeSize="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{7894c555-2a8a-4c03-b702-031c09736c01}" File="ui/common/common_scale9_yy.png" CapInsets="20,20,10,10" RelativePosition="0.5,0.5" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{ab404280-445e-4ffd-9eae-2bd375724f67}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.75,0.5" RelativeSize="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{17d65259-832c-4854-a634-d8a6a68239a0}" File="ui/common/common_scale9_yy.png" CapInsets="20,20,10,10" RelativePosition="0.5,0.5" FlipX="False" FlipY="False" ScaleX="-1" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUI9Image Type="WZUI9Image" GUID="{749a01f7-9d44-4b58-99d0-485293927eaf}" File="ui/common/common_scale9_di7.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{d1f7caa8-3f98-4bd7-9cc2-22a4f55527a8}" RelativeSize="0.9,0.75" RelativePosition="0.5,0.557322">
+                    <WZUI9Image Type="WZUI9Image" GUID="{baf5f07f-8c57-499e-8bf1-737b04339496}" File="ui/common/common_scale9_di58.png" RelativeSize="1,1" RelativePosition="0.5,0.5" Opacity="225" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{e11645a9-dc80-4447-9673-d28cf334c2fa}" File="ui/common/common_icon_dian.png" UseOriginSize="True" RelativePosition="0.5,1" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="80,80" GUID="{006ea073-6796-4582-bb5e-2adb4f57514c}" Name="conProp_CellAdventure" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" NameCreate="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{308df1a7-7a3a-44ee-a7a7-ceafb2053408}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.849727" TouchSwallow="False" RelativeSize="0.8,0.15">
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Color="255,255,255" Dimensions="0,0" EnableStroke="False" FontSize="24" GUID="{f41a9ecb-9a7a-4793-a169-b2c793707fe7}" Name="txtPropName_CellAdventure" RelativePosition="0.5,0.5" StrokeColor="60,19,12" StrokeSize="4" Text="" TouchEnable="False" Type="WZUILabelTTF" Visible="True" NameCreate="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1c6ba01b-ef05-49f0-9d1f-c17103f5ea62}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.0949101" TouchSwallow="False" RelativeSize="0.8,0.12">
+                <WZUIContainer Type="WZUIContainer" GUID="{641db8a3-d12e-4687-bfd7-0d70099aa569}" RelativePosition="0.5,0.5" Name="conNotLimitTxt_CellAdventure" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{fe652f1c-15dd-4a12-9432-7ffad1d1a48a}" AbsContentSize="30,30" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.215714,0.5">
+                        <WZUIImage File="ui/common/common_icon_jingjibi.png" GUID="{14011246-b9eb-462a-9427-cbdd0a4fe047}" Name="imgMoney_CellAdventure" RelativePosition="0.5,0.5" RelativeSize="1,1" Scale="0.5" ScaleX="1" ScaleY="1" TouchEnable="False" Type="WZUIImage" UseOriginSize="False" Visible="True" isValid="True" UseOriginSizeProportion="True" AbsPosition="" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" BoldFont="False" Color="64,128,1" EnableStroke="False" FontSize="24" GUID="{3ce0b850-f4b3-4ff9-8cc6-9eaadbaf0c35}" Name="txtPrice_CellAdventure" RelativePosition="0.45,0.5" StrokeColor="91,49,24" StrokeSize="0" Text="12345" Type="WZUILabelTTF" Visible="True" NameCreate="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIButton GUID="{931a2756-b2bf-442d-9412-1d14b519b7ed}" LuaDoneFunctionName="OnBtnBuy" Name="" RelativeSize="1,1" Type="WZUIButton" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" TouchSwallow="True">
+            <NormalElement GUID="{ece28c7e-96cd-45de-85e5-2cd644800a7b}" Type="WZUIContainer" />
+            <SelectElement GUID="{994b93bb-a9ba-4353-b78e-019eefab5e2b}" Type="WZUIContainer" />
+            <DisableElement GUID="{a3f7a583-b861-40b7-86ff-8b1e9ba73e87}" RelativePosition="0.5,0.507143" Type="WZUIContainer" />
+        </WZUIButton>
+        <WZUIContainer Type="WZUIContainer" GUID="{9c2a902b-42de-48a0-8826-7af3cd5b9bea}" Name="conSell_CellAdventure" NameCreate="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{307cf400-84b2-4f46-8c73-ec0686d17234}" File="ui/common/common_shade_chushouheidi.png" />
+            <WZUIImage Type="WZUIImage" GUID="{ee8bc565-e52c-4a92-8376-148c107444e6}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellAdventure>

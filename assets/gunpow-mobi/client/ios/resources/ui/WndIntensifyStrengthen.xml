@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" ?>
+<WndIntensifyStrengthen GUID="{1238A072-D711-41a8-9D0A-EEF1A0B8E00E}">
+    <WZUIWindow AbsContentSize="366,432" GUID="{0F2574B0-2516-4252-84E1-BA572D67F21D}" LuaObjectName="WndIntensifyStrengthen" Name="WndIntensifyStrengthen" NameCreate="True" RelativePosition="0.5,0.48" ShowAll="False" Type="WZUIWindow" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="435,75" AnchorPoint="0.5,0" GUID="{D86325D2-A7C1-4627-AA3D-C1AC0F930ED4}" Name="conMid_WndIntensifyStrengthen" RelativePosition="0.516245,0.265" Type="WZUIContainer" UseAbsSize="True" RelativeSize="1,0.15">
+            <WZUIContainer AbsContentSize="435,75" GUID="{1D0D8F7C-9536-4013-9F5D-1D1A2A6E858D}" Name="conIntensifyInfo_WndIntensifyStrengthen" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{DFCD12BC-B38B-46cf-82D2-BC31F8A57C12}" File="ui/common/common_scale9_heidi6.png" Scale="1.16" />
+                <WZUIContainer AbsContentSize="120,80" AnchorPoint="0,0.5" GUID="{EB91E6F2-C65C-40a0-AAA5-0BD2C4FEAC18}" RelativePosition="0,0.5" Type="WZUIContainer" UseAbsSize="False" RelativeSize="0.5,1" Name="conLeftAttr">
+                    <WZUILabelTTF AnchorPoint="0,0.5" Color="233,166,62" FontSize="22" GUID="{807AACE7-B509-4dde-BB73-31756A656A16}" Name="txtLevel_WndIntensifyStrengthen" RelativePosition="0.25,0.72" Text="Lv1" Type="WZUILabelTTF" BoldFont="True" EnableStroke="False" StrokeColor="60,19,12" StrokeSize="3" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{40C89F99-B494-4e0d-9055-5E5E84E1F194}" AnchorPoint="0,0.5" Name="txtHP_WndIntensifyStrengthen" RelativePosition="0.24,0.3" MaxWidth="300" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="65,49" GUID="{C7067E5E-578E-4b7a-A387-BECBB9BA6904}" RelativePosition="0.481362,0.487388" Type="WZUIContainer" UseAbsSize="False" RelativeSize="0.3,1" Visible="True">
+                    <WZUI9Image File="ui/common/common_icon_jiehunjiantou.png" GUID="{16E4395A-14E9-4566-A5B8-429173A70ECF}" Type="WZUI9Image" UseOriginSize="True" Visible="False" Name="imgArrow" RelativePosition="0.5,0.5" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="120,80" AnchorPoint="1,0.5" GUID="{6DC792AD-1885-4b65-AA51-44C76F3DF3A8}" RelativePosition="1,0.5" Type="WZUIContainer" UseAbsSize="False" RelativeSize="0.5,1" Name="conRightAttr">
+                    <WZUILabelTTF AnchorPoint="0,0.5" Color="233,166,62" FontSize="22" GUID="{55C5C1CF-7EDD-431d-82D8-9AB29893F36A}" Name="txtLevelUp_WndIntensifyStrengthen" RelativePosition="0.22,0.72" Text="Lv2" Type="WZUILabelTTF" BoldFont="True" EnableStroke="False" StrokeColor="60,19,12" StrokeSize="3" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{2A61B7A5-7D92-48c7-B177-F2320A99CC43}" AnchorPoint="0,0.5" Name="txtHPUp_WndIntensifyStrengthen" RelativePosition="0.22,0.3" MaxWidth="300" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{8AD8E905-7837-4739-8EE9-2F75E918D610}" Name="conCost" AbsContentSize="440,50" UseAbsSize="True" RelativePosition="0.5,0.2">
+            <WZUIContainer AbsContentSize="190,50" AnchorPoint="0.5,0.5" GUID="{F3437476-EF6B-4f68-910C-5EA63E80B281}" RelativePosition="0.6,0.4" Type="WZUIContainer" UseAbsSize="False" RelativeSize="0.6,1">
+                <WZUI9Image File="ui/common/common_icon_jinbi.png" GUID="{6A78662D-E266-4081-B7CC-7A74634AB2F8}" Type="WZUI9Image" UseOriginSize="True" Order="10" RelativePosition="0.28,0.5" Scale="0.8" />
+                <WZUILabelTTF AnchorPoint="0,0.5" Color="255,227,116" FontSize="22" GUID="{CEB989A3-D56E-43e5-8ACC-2E7CA85A853E}" Name="txtCost_WndIntensifyStrengthen" RelativePosition="0.38,0.5" Text="123456" Type="WZUILabelTTF" Order="10" BoldFont="True" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{A51BE183-F2FD-479a-9A33-FAA1B17C7A78}" FontSize="22" Color="255,227,116" Text="" TextKey="COST" RelativePosition="0.076,0.5" BoldFont="True" StrokeColor="79,60,48" StrokeSize="4" EnableStroke="True" Name="txtCost1_WndIntensifyStrengthen" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIButton AbsContentSize="120,60" GUID="{7D4472AF-805D-4889-9A29-A758009296AE}" LuaDoneFunctionName="onOneKeyIntensify" LuaPushFunctionName="" Name="btnIntensify_WndIntensifyStrengthen" RelativePosition="0.25,0.06" Scale="1" ScaleX="1" Type="WZUIButton" UseAbsSize="True" Order="2" LuaActionName="Normal">
+            <NormalElement GUID="{CCE9894C-BBF1-4946-AA12-7D1C8BB69496}" Type="WZUIContainer" UseAbsSize="False">
+                <WZUI9Image File="ui/common/common_btn_anniu3_1.png" GUID="{67D2AA39-ACF7-4abd-9AEB-DF31D8A078D4}" Type="WZUI9Image" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="60,30" />
+                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{DC614F79-3805-43d4-96D3-3D4107A0EA14}" Name="txtIntensify1_WndIntensifyStrengthen" RelativePosition="0.5,0.5" StrokeColor="3,111,8" StrokeSize="4" Type="WZUILabelTTF" Alignment="Right" Text="" AnchorPoint="0.5,0.5" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="STRENGTEN6" />
+            </NormalElement>
+            <SelectElement GUID="{EC43D04A-F20A-4261-864D-73FF27EE55E8}" Type="WZUIContainer" UseAbsSize="False">
+                <WZUI9Image File="ui/common/common_btn_anniu3_1_sel.png" GUID="{6B2127A4-1C55-4b21-A8A0-4A22E7C793D8}" Type="WZUI9Image" UseOriginSize="True" Scale="1" />
+                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{D6FB8296-EA41-4972-AEE4-F06A0FF2FA6C}" Name="txtIntensify2_WndIntensifyStrengthen" StrokeColor="3,111,8" StrokeSize="4" Type="WZUILabelTTF" Alignment="Right" Text="" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="STRENGTEN6" />
+            </SelectElement>
+            <DisableElement GUID="{4B6A600A-0988-443b-8D4D-8B0E3E5AD70A}" Type="WZUIContainer" UseAbsSize="False">
+                <WZUI9Image File="ui/common/common_btn_anniu3_1.png" GUID="{603C6AB7-2BFE-4b90-BDF7-AAFD8A249F0A}" Type="WZUI9Image" UseOriginSize="True" GrayRender="True" RelativePosition="0.5,0.5" />
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="False" FontSize="24" GUID="{6BEF5B11-937E-4987-8ADE-9DA3EB060651}" Name="txtIntensify3_WndIntensifyStrengthen" StrokeColor="128,128,128" StrokeSize="1" Type="WZUILabelTTF" Alignment="Right" Text="" AnchorPoint="0.5,0.5" RelativePosition="0.492117,0.516891" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="STRENGTEN6" />
+            </DisableElement>
+        </WZUIButton>
+        <WZUIButton AbsContentSize="120,60" GUID="{E150F9BC-8606-4c9d-890B-C47FB83A5435}" LuaDoneFunctionName="onIntensify" LuaPushFunctionName="" Name="btnOneKeyIntensify_WndIntensifyStrengthen" RelativePosition="0.75,0.06" Scale="1" ScaleX="1" Type="WZUIButton" UseAbsSize="True" Order="2" LuaActionName="Normal">
+            <NormalElement GUID="{9325B7E0-F2DD-4539-B833-1863CEE47F19}" Type="WZUIContainer" UseAbsSize="False">
+                <WZUI9Image File="ui/common/common_btn_anniu10_1.png" GUID="{4D50F7CC-4C52-46cd-B8B6-4C917A0BE640}" Type="WZUI9Image" UseOriginSize="True" />
+                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{3BCFDF72-8675-430d-9455-E53BF6B2BF1D}" Name="" RelativePosition="0.5,0.5" StrokeColor="3,111,8" StrokeSize="4" Type="WZUILabelTTF" Alignment="Right" Text="" AnchorPoint="0.5,0.5" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="STRENGTEN" />
+            </NormalElement>
+            <SelectElement GUID="{0E177284-AAA3-4ecf-AA09-440C1F2737CC}" Type="WZUIContainer" UseAbsSize="False">
+                <WZUI9Image File="ui/common/common_btn_anniu10_1_sel.png" GUID="{78B90B76-CD4D-4bd1-A6C2-B85D1401789F}" Type="WZUI9Image" UseOriginSize="True" Scale="1" />
+                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{9A798D38-4EE8-44fd-8EB5-31DE31D6E7C0}" Name="" StrokeColor="3,111,8" StrokeSize="4" Type="WZUILabelTTF" Alignment="Right" Text="" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="STRENGTEN" />
+            </SelectElement>
+            <DisableElement GUID="{F839884D-9923-4c63-A6D5-5654027ED936}" Type="WZUIContainer" UseAbsSize="False">
+                <WZUI9Image File="ui/common/common_btn_anniu10_1.png" GUID="{AB785D74-5C34-446b-AE96-09409350D769}" Type="WZUI9Image" UseOriginSize="True" GrayRender="True" RelativePosition="0.5,0.5" />
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="False" FontSize="24" GUID="{D9DF5D8C-623D-4b61-BAE2-8EEE207CA316}" Name="" StrokeColor="128,128,128" StrokeSize="1" Type="WZUILabelTTF" Alignment="Right" Text="" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="STRENGTEN" />
+            </DisableElement>
+        </WZUIButton>
+        <WZArmature Type="WZArmature" GUID="{6B18A07A-AD75-4633-B683-A68F906D4AA5}" ArmatureFile="ui/ui_duanzao_qianghua_01.xml" ArmatureName="ui_duanzao_qianghua_01" UseOriginSize="True" RelativePosition="0.525,0.68" Visible="False" Name="armature_WndIntensifyStrengthen" TouchEnable="False">
+            <Action Type="WZUIArmatureAnimationById" GUID="{DEDDA5DC-485E-4030-96BA-DCBFF0DB0A34}" AnimationId="5" RunTimes="1" AnimationScale="1" IsLoop="False" />
+        </WZArmature>
+    </WZUIWindow>
+</WndIntensifyStrengthen>

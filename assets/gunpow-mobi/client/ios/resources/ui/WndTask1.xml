@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?><WndTask GUID="{4BBED03B-EF0D-4a08-B2EE-92147B73E361}">
+    <WZUIWindow AbsContentSize="800,600" GUID="{86BAA3A9-467A-4d87-8861-91638535ADD5}" LuaObjectName="WndTask" Name="WndTask" NameCreate="True" Type="WZUIWindow" UseAbsSize="True">
+        <WZUI9Image File="common/Jigsaw/3.png" GUID="{30CDBF7F-9975-4b27-AE82-A5A7AB6F1747}" RelativePosition="0.5,0.45" RelativeSize="0.96,0.9" Type="WZUI9Image"/>
+        <WZUIContainer AbsContentSize="778,86" GUID="{B356BDE1-843C-4b11-AE65-BE2753D2EE73}" RelativePosition="0.505,0.928167" RelativeSize="1,0.137" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image File="common/Jigsaw/5.png" GUID="{B5B31A25-D864-4dbb-AD37-9FAF4743C1FB}" RelativePosition="0.5,0.5" Type="WZUI9Image"/>
+            <WZUIButton AbsContentSize="90,90" GUID="{62DF8900-E02E-4956-BD87-9A9815A327F8}" LuaDoneFunctionName="onClose" Name="btnClose_WndTask" RelativePosition="0.94797,0.523172" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{6CDE6C41-8EB3-4ca6-941F-A3F5A26F9145}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close.png" GUID="{77D00148-A73D-49a7-A32C-86E139BCCE73}" Type="WZUIImage" UseOriginSize="True"/>
+                </NormalElement>
+                <SelectElement GUID="{8CADA140-C226-4107-A356-93C5C02BC31D}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close_sel.png" GUID="{B6888979-1045-418c-A780-57219410851F}" Type="WZUIImage" UseOriginSize="True"/>
+                </SelectElement>
+                <DisableElement GUID="{C8E8CF38-4DC7-44ed-A5FD-0D4E4094017B}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close_not.png" GUID="{E58DC435-F778-4a02-8351-142A32FB97D2}" Type="WZUIImage" UseOriginSize="True"/>
+                </DisableElement>
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="600,56" AnchorPoint="0,0.5" GUID="{32738B25-CD21-4b10-BE44-A93051FC61A0}" RelativePosition="0.0525,0.796587" Type="WZUIContainer" UseAbsSize="True">
+            <WZUICheckBoxGroup AbsContentSize="600,56" GUID="{BF7F724E-DC40-40c3-BC90-019F024DC489}" Name="checkGroup_WndTask" RelativePosition="0.5,0.5" Type="WZUICheckBoxGroup" UseAbsSize="False">
+                <CheckBox AnchorPoint="0,0.5" GUID="{FE02E620-D7DE-4929-870B-FCD20FB052B1}" LuaSelectedFunctionName="onClick1" RelativePosition="0.01,0.5" RelativeSize="0.23,1" SelectedIndex="1" Type="WZUICheckBox">
+                    <CheckElement GUID="{C46E1B94-1885-409b-8106-21B89B875915}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_8.png" GUID="{5250CA1E-F3C2-40fb-8A7E-2D92EFB8C764}" Type="WZUI9Image"/>
+                        <WZUIShadowTTF Color="255,255,255" FontSize="30" GUID="{17E0D239-9206-480d-8723-70A1FCB8E3BA}" Name="txt1_WndTask" RelativePosition="0.487444,0.501505" ShadowColor="98,50,11" Text="" TextColor="233,180,119" Type="WZUIShadowTTF"/>
+                    </CheckElement>
+                    <CheckElement GUID="{EEDCDAF4-4ADD-4c56-AF5C-843C89358484}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_8_sel.png" GUID="{7BAC0AA0-7C1C-43d6-9C57-417E01478ABA}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIShadowTTF FontSize="30" GUID="{B0334357-BDE2-4a37-80BA-CD679265BB1A}" Name="txt1Sel_WndTask" RelativePosition="0.487444,0.501505" ShadowColor="98,50,11" Text="" TextColor="255,255,255" Type="WZUIShadowTTF"/>
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox AnchorPoint="0,0.5" GUID="{F4509AF9-D5BB-4d84-B19B-5DA4A02C5877}" LuaSelectedFunctionName="onClick2" RelativePosition="0.25,0.5" RelativeSize="0.23,1" SelectedIndex="0" Type="WZUICheckBox">
+                    <CheckElement GUID="{05BA300C-12CD-40b6-8C25-D8E61341AB55}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_8.png" GUID="{078790E2-00B0-47e0-B80E-541626856EDA}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIShadowTTF FontSize="30" GUID="{4DF3A29F-5391-457f-9960-9D2FDF5A8AD5}" Name="txt2_WndTask" RelativePosition="0.495435,0.5" ShadowColor="98,50,11" Text="" TextColor="233,180,119" Type="WZUIShadowTTF"/>
+                    </CheckElement>
+                    <CheckElement GUID="{B838ED5E-5CDF-4fdf-9C2C-D96AA1F41314}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_8_sel.png" GUID="{7450F0B6-B1B5-47c7-9ACD-BAB321064162}" Type="WZUI9Image"/>
+                        <WZUIShadowTTF FontSize="30" GUID="{19A2FD7A-D0A8-4ef5-93E5-EB14384D3118}" Name="txt2Sel_WndTask" RelativePosition="0.495435,0.5" ShadowColor="98,50,11" Text="" TextColor="255,255,255" Type="WZUIShadowTTF"/>
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox AnchorPoint="0,0.5" GUID="{637A39AB-97B9-4fd6-914B-D9D421E81ABB}" LuaSelectedFunctionName="onClick3" RelativePosition="0.49,0.5" RelativeSize="0.23,1" SelectedIndex="0" Type="WZUICheckBox">
+                    <CheckElement GUID="{B842F67B-7768-462b-8F18-7D979A70318D}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_8.png" GUID="{3CDA2095-FF8F-4cee-BD56-E630DA24DDC3}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIShadowTTF FontSize="30" GUID="{5948248F-ECAC-4c22-A7F7-5C65E39D1627}" Name="txt3_WndTask" RelativePosition="0.510797,0.5" ShadowColor="98,50,11" TextColor="233,180,119" Type="WZUIShadowTTF"/>
+                    </CheckElement>
+                    <CheckElement GUID="{3085AFC2-95CA-4b14-9711-73E5AADE6CB6}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_8_sel.png" GUID="{8C64BCF2-4EA2-47bf-B9EA-2D7ABA09E0E1}" Type="WZUI9Image"/>
+                        <WZUIShadowTTF FontSize="30" GUID="{6059533D-A81D-4ef9-9C1C-7F73783C4228}" Name="txt3Sel_WndTask" RelativePosition="0.510797,0.5" ShadowColor="98,50,11" TextColor="255,255,255" Type="WZUIShadowTTF"/>
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox AnchorPoint="0,0.5" GUID="{C058D290-1BCC-4c90-8670-D3C96C805228}" LuaSelectedFunctionName="onClick4" Name="checkTimelimited_WndTask" RelativePosition="0.73,0.5" RelativeSize="0.23,1" SelectedIndex="0" Type="WZUICheckBox" Visible="False">
+                    <CheckElement GUID="{6D6A5EA4-1634-4a4c-96D7-0DF40D3F9466}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_8.png" GUID="{4873910D-2FFB-4e0a-8B37-D58C342DEFC6}" Name="img9TimeLimit1_WndTask" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIShadowTTF FontSize="30" GUID="{D4EEF42E-4809-42fd-816D-03E345C81245}" Name="txt4_WndTask" RelativePosition="0.511667,0.5" ShadowColor="98,50,11" Text="" TextColor="233,180,119" Type="WZUIShadowTTF"/>
+                    </CheckElement>
+                    <CheckElement GUID="{05E25C6C-F04A-48d9-B168-F90BC28FC5D6}" Type="WZUIContainer">
+                        <WZUI9Image File="common/button/button_8_sel.png" GUID="{82EF576E-BB6A-4284-8308-AFCAE3A6895D}" Name="img9TimeLimit2_WndTask" Type="WZUI9Image"/>
+                        <WZUIShadowTTF FontSize="30" GUID="{11E8107D-12D7-4762-8F49-11B387559498}" Name="txt4Sel_WndTask" RelativePosition="0.511667,0.5" ShadowColor="98,50,11" Text="" TextColor="255,255,255" Type="WZUIShadowTTF"/>
+                    </CheckElement>
+                </CheckBox>
+            </WZUICheckBoxGroup>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="732,420" GUID="{D18A688E-B679-4f44-A41A-FFD2E65DFF84}" RelativePosition="0.5,0.400238" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image CapInsets="0,0,0,0" File="common/Jigsaw/item_icon_bg.png" GUID="{BBA62835-F9F3-4f27-BC5D-FF513F56DD29}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Visible="True"/>
+            <WZUI9Image CapInsets="1,1,1,1" File="common/Jigsaw/11.png" GUID="{E4DA98C0-3A3F-4aa2-A47A-77983142CE71}" Rect="0,0,0,0" RelativePosition="0.323919,0.495" RelativeSize="0.003,0.86" Type="WZUI9Image"/>
+            <WZUITableContainer AbsContentSize="250,400" CellElementHeight="0.2225" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{AF422995-7BCC-4b4f-A1E3-9B9376D6003D}" Name="tbconTaskList_WndTask" RelativePosition="0.160929,0.484317" ScrollPictureDown="common/Jigsaw/rolling_03.png" ScrollPictureMid="common/Jigsaw/rolling_01.png" ScrollPictureTop="common/Jigsaw/rolling_02.png" Type="WZUITableContainer" UseAbsSize="True" VerticalInterval="0"/>
+            <WZUIContainer AbsContentSize="490,400" GUID="{E3B9DBB3-9D99-4dff-8F53-D6F878FEFBD4}" Name="conTaskDetail_WndTask" RelativePosition="0.663831,0.481878" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True"/>
+            <WZUI9Image File="common/Jigsaw/65.png" GUID="{A22A73EF-85B5-4aec-8A08-920BD886E2FD}" RelativePosition="0.5,0.989784" RelativeSize="1,0.0524" Type="WZUI9Image"/>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="770.5,38" GUID="{0EA49E60-A42F-4f9f-A2A2-E5DE32F1A908}" RelativePosition="0.5,0.00500002" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image CapInsets="0" File="common/Jigsaw/60.png" GUID="{C335F477-95B1-46f2-9BAC-6CEC19ECB0A1}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False"/>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTask>

@@ -1,0 +1,8 @@
+﻿<CellChatBubble GUID="{b662ea8c-c951-402d-814c-8c0daa6d03af}">
+    <WZUIContainer Type="WZUIContainer" GUID="{9c08510a-ffdf-48e0-8fee-f8fa17f3893d}" Name="CellChatBubble" AbsContentSize="200,100" UseAbsSize="True" NameCreate="False" Visible="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0" LuaObjectName="CellChatBubble" UseAbsCoordinate="True" AbsPosition="480,320" ShowAll="False">
+        <WZUI9Image Type="WZUI9Image" GUID="{3a7f94e5-f282-41c4-85d9-3d7762370afe}" File="ui/chat/talk_11.png" CapInsets="70,42,2,2" Name="imgBg_CellChatBubble" RelativePosition="0.5,0.5" />
+        <WZUIImage Type="WZUIImage" GUID="{16e20e88-5b85-4ec4-9516-83b0c2acc4db}" File="ui/chat/talk_23.png" UseOriginSize="True" RelativePosition="0.5,0.05" Name="imgArrow_CellChatBubble" AnchorPoint="0.5,1" UseAbsCoordinate="True" AbsPosition="98.5,6.5" Visible="True" />
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{be12d9dc-33e9-405c-837f-f75edb09c861}" Name="txtMsg_CellChatBubble" MaxWidth="150" RelativePosition="0.5,0.4" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4c1b4e98-cc27-4890-9db6-820785dd4ecf}" FontSize="20" Name="txtTemp_CellChatBubble" Visible="False" Dimensions="0,0" Text="" />
+    </WZUIContainer>
+</CellChatBubble>

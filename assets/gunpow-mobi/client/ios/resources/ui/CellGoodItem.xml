@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<CellGoodItem GUID="{79FB4391-5181-4fa2-BA34-9E51DD4D1EF9}">
+    <WZUIContainer AbsContentSize="85,85" GUID="{86304A4D-C552-4173-BF9B-2A858F172E70}" LuaObjectName="CellGoodItem" Name="CellGoodItem" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <WZUI9Image File="ui/common/common_scale9_beibaodi.png" GUID="{45973597-92C0-4b38-A61C-809A217ECBF4}" Name="btnImg_CellGoodItem" Type="WZUI9Image" Visible="True" UseOriginSize="True" Scale="1" Order="1" RelativePosition="0.5,0.5" />
+        <WZUIButton GUID="{729A7D52-C091-4d1b-818D-E54C21C82444}" LuaDoneFunctionName="onBackClick" Name="btnClick_CellGoodItem" Order="1" Type="WZUIButton" Visible="True" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.5,0.5" LuaPushFunctionName="onEvent">
+            <NormalElement GUID="{6CB3AF29-B4FD-425e-A4BC-AB9E17DECC4C}" Type="WZUIContainer" Order="3" AbsContentSize="85,85" UseAbsSize="True" TouchContainerEnable="True">
+                <WZUI9Image File="ui/common/common_scale9_beibaodi.png" GUID="{731D1C13-736D-4af3-9BCC-FC020FABB7D3}" Name="btnImg1_CellGoodItem" Type="WZUI9Image" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" UseOriginSizeProportion="False" />
+            </NormalElement>
+            <SelectElement GUID="{0D77D860-B8B0-4491-AD25-123C18DB78BC}" Type="WZUIContainer" Order="3" UseAbsSize="True" AbsContentSize="95,95" TouchContainerEnable="True">
+                <WZUI9Image File="ui/common/common_scale9_beibaodi_sel.png" GUID="{35EA85E9-EBE7-4a14-B7FA-1AB3A4B18D8B}" Name="btnImg2_CellGoodItem" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" UseOriginSizeProportion="False" />
+            </SelectElement>
+            <DisableElement GUID="{E6854A6C-035F-4c1f-A9F8-0F893ABC768E}" Type="WZUIContainer" Order="3" TouchContainerEnable="True" />
+        </WZUIButton>
+        <WZUIContainer GUID="{32DA1D04-59EB-454d-B2D0-B9C27BAEA8F6}" Name="conItem_CellGoodItem" RelativePosition="0.5,0.5" TouchEnable="False" Type="WZUIContainer" Order="1" />
+    </WZUIContainer>
+</CellGoodItem>

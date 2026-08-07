@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<CellPvpRankResult GUID="{5bd30577-f812-44a9-ad51-8451227d63a3}">
+    <WZUIContainer AbsContentSize="380,550" GUID="{E3AD270E-281C-4734-9906-710B39D32926}" LuaObjectName="" Name="CellPvpRankResult" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{BF738043-37C0-4656-B095-70CCF6EF65DE}" RelativeSize="1.05,0.25" AnchorPoint="0.5,1" RelativePosition="0.5,1" Order="1">
+            <WZUIContainer Type="WZUIContainer" GUID="{B8DF38BC-8275-4818-8489-7E001CC8A11D}" RelativeSize="0.5,1" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{36DC6CE5-B073-4fab-AC83-A1758A9D3E3D}" File="ui/common/common_pic_chouzibg.png" Visible="True" Name="imgTitleDi1_CellPvpRankResult" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{523C6D79-143E-49b1-BA69-3F37A68BCD91}" RelativeSize="0.5,1" AnchorPoint="1,0.5" RelativePosition="1,0.5" Scale="1">
+                <WZUIImage Type="WZUIImage" GUID="{126D910D-58BD-4f79-AC48-A6CD123F3BEF}" File="ui/common/common_pic_chouzibg.png" Visible="True" Name="imgTitleDi2_CellPvpRankResult" Scale="1" ScaleX="-1" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{FBD3E769-67B5-4c8e-9F16-BDA300D22058}" Name="imgTitle_CellPvpRankResult" File="ui/common/common_icon_pswsl.png" UseOriginSize="True" RelativePosition="0.5,0.718182" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{9C47F715-6E7F-4121-9083-6DB08B7903C1}" AbsContentSize="320,480" UseAbsSize="True" RelativePosition="0.5,0.438182">
+            <WZUIContainer Type="WZUIContainer" GUID="{BFE8F85B-E5B1-450b-BB11-8A7721861B73}">
+                <WZUI9Image Type="WZUI9Image" GUID="{579F0FFF-F08C-42dc-887D-555995D5DA82}" File="ui/common/common_scale9_jiesuandi.png" Opacity="150" />
+                <WZUIImage Type="WZUIImage" GUID="{84C269A9-696A-4f68-8FED-722D183D8770}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" Scale="-1" RelativePosition="0.973963,0.0206046" />
+                <WZUIImage Type="WZUIImage" GUID="{39553680-FABE-4d44-AAAE-92CAB987E4DF}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" Scale="1" ScaleY="-1" RelativePosition="0.0370174,0.0175085" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{78FC59DC-679D-4998-A98F-EFAAEA590175}" RelativeSize="1,0.5" RelativePosition="0.5,0.541667" Name="conPlayer_CellPvpRankResult">
+                <WZArmature Type="WZArmature" GUID="{32DD6B43-D430-4858-A07E-A0C319AF4442}" ArmatureName="ui_jiesuan_renwudizuo_01" ArmatureFile="ui/ui_jiesuan_renwudizuo_01.xml" UseOriginSize="True" Scale="0.7" RelativePosition="0.493975,0" Name="armDi_CellPvpRankResult" Visible="False" Order="1">
+                    <Action Type="WZUIArmatureAnimationById" GUID="{C925931A-852B-4aa0-BB3A-28942903F0E7}" AnimationId="0" />
+                </WZArmature>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{B94F5250-C094-4bb4-B8E9-B4A11C1000A0}" AbsContentSize="260,60" UseAbsSize="True" RelativePosition="0.5,0.853641">
+                <WZUIContainer Type="WZUIContainer" GUID="{45C1C4C7-CA72-4c48-A318-5A4FBD925BEE}" RelativeSize="0.86,1" RelativePosition="0.542308,0.466667">
+                    <WZUIImage Type="WZUIImage" GUID="{2274B9EE-8733-4990-8A5E-C21DF26135EB}" File="ui/common/common_progress_exp2_bg.png" UseOriginSize="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{408781B8-F604-4748-866D-7F59C16AD6D2}" AbsContentSize="220,16" UseAbsSize="True" RelativePosition="0.504472,0.5">
+                        <WZUIProgress Type="WZUIProgress" GUID="{521DB99E-A45D-488e-86DC-919F485D7CA5}" BgPicture="ui/common/common_progress_exp2_fore.png" UseOriginSize="True" Name="proExp_CellPvpRankResult" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{13CA5FB1-D696-4984-BD4B-B1E3278B35EA}" FontSize="22" LabelStyleKey="NORMAL_EXP_PROGRESS" Text="" Name="txtExp_CellPvpRankResult" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{3C7B7D07-E606-4165-B1DF-8E723FE6DB23}" RelativeSize="1,1" RelativePosition="0.0115384,0.5" Scale="0.9" AbsContentSize="60,60" UseAbsSize="True" AnchorPoint="0,0.5">
+                    <WZUIImage Type="WZUIImage" GUID="{E3E734F5-B3C7-41c9-B5F0-4781382D4D7B}" File="ui/common/common_icon_pws1.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="0.9" Name="imgLvDi_CellPvpRankResult" />
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{06654C0F-FD0E-499e-A90C-0734B7021C17}" Name="lafLv_CellPvpRankResult" CharMapFileName="ui/common_num/common_num_ghdj.png" Height="24" Width="16" Text="6" RelativePosition="0.363666,0.516667" Alignment="Left" AnchorPoint="0,0.5" UseOriginSize="True" Visible="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{37B493D6-B939-4de1-A6F1-9F967798860C}" RelativeSize="1,0.26" RelativePosition="0.5,0.166667">
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{CD4EDD45-0FE1-488e-BD8C-C6CA1858A818}" Name="ftbNameLv_CellPvpRankResult" RelativePosition="0.5,0.89" MaxWidth="500" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{280ACA19-8D1C-4a3b-8C18-2A0E5984A2C2}" Name="txtDayName_CellPvpRankResult" Rotation="-1" Color="255,227,116" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" FontSize="22" TextKey="RANK_DAY_DATA" RelativePosition="0.307,0.650934" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{99052A76-F9CC-48b3-9857-3DC5ADAD8B19}" Name="txtWinName_CellPvpRankResult" Rotation="-1" Color="255,227,116" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" FontSize="22" TextKey="CURRENT_WIN_STREAK" RelativePosition="0.307,0.395833" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{DDCB3534-A2FB-44c9-BCDC-E13799FA8F1E}" Name="txtScoreName_CellPvpRankResult" Rotation="-1" Color="255,227,116" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" FontSize="22" TextKey="RANK_END_DESC4" RelativePosition="0.307,0.147436" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{E146903D-CC0C-4ffa-8C04-C318472A5487}" Color="255,236,193" EnableStroke="True" StrokeColor="70,60,48" FontSize="22" Text="" RelativePosition="0.484375,0.652244" Alignment="Left" AnchorPoint="0,0.5" Name="txtDay_CellPvpRankResult" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{B742C459-0BC2-4b21-B9C0-1D5AC6CA5875}" Color="255,236,193" EnableStroke="True" StrokeColor="70,60,48" FontSize="22" Text="" RelativePosition="0.484375,0.395834" Alignment="Left" AnchorPoint="0,0.5" Name="txtWin_CellPvpRankResult" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{45DE855E-7800-42c7-95FA-48781C78E571}" Color="255,236,193" EnableStroke="True" StrokeColor="70,60,48" FontSize="22" Text="" RelativePosition="0.60625,0.147436" Alignment="Left" AnchorPoint="0,0.5" Name="txtScore_CellPvpRankResult" />
+                <WZUIImage Type="WZUIImage" GUID="{7988750E-4204-4a84-9A92-FBE5C15623F9}" File="shopitems/qualifying_002.png" UseOriginSize="True" RelativePosition="0.515625,0.139423" Scale="0.6" Name="imgCoin_CellPvpRankResult" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{4A1CDA87-4055-4121-8BE6-D38C541661CE}" Color="233,166,62" FontSize="22" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" TextKey="RANK_NO_WIN" RelativePosition="0.753125,0.395833" Name="txtKillWin_CellPvpRankResult" Visible="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellPvpRankResult>

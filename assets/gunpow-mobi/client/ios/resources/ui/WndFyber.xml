@@ -1,0 +1,48 @@
+<WndFyber GUID="{49e3c42a-fb1a-4d6c-a266-f3d57ff77db4}">
+    <WZUIWindow Type="WZUIWindow" GUID="{e70d659f-70a7-4886-9587-96d54270b901}" AbsContentSize="492,390" ShowAll="True" UseAbsSize="True" LuaObjectName="WndFyber" Name="WndFyber" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{2aacce1a-c19f-4a01-b90f-e2da844d35b5}" AbsContentSize="492,390" UseAbsSize="False" RelativePosition="0.5,0.5" LuaObjectName="" Name="conFyber_WndFyber" Visible="True" ShowAll="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{05f18ecd-ca02-4542-bc16-8dd9efaab9ba}" File="ui/common/common_scale9_di19.png" RelativePosition="0.5,0.5" CapInsets="170,70,1,1" Visible="True" LuaTouchBeganFunction="" />
+            <WZUIContainer Type="WZUIContainer" GUID="{4253400a-bf52-4d61-ac6d-75c08156406a}" AbsContentSize="492,55" UseAbsSize="True" RelativePosition="0.505908,0.92138" AbsPosition="392.584,503.48">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{4364f157-6b4d-44c1-883f-ad69dd01f3f0}" Name="" Color="250,235,194" BoldFont="True" StrokeColor="132,66,29" FontSize="28" Text="" RelativePosition="0.5,0.5" EnableStroke="True" AnchorPoint="0.5,0.5" TextKey="ATH_REWARD_CHECK" StrokeSize="4" AbsPosition="310,23.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{220799ac-2038-4a28-94fb-05b34b39ce2e}" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.928526,0.5">
+                    <Button Type="WZUIButton" GUID="{8889e441-aa48-43eb-a5c1-72cd2701ba8f}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.5,0.5" Name="" LuaDoneFunctionName="onCloseShow" Visible="True" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{c08ced85-ccff-4878-8f3b-fc4a0552fe2f}">
+                            <WZUIImage Type="WZUIImage" GUID="{4eb728ab-938f-4770-9cc3-794f72b77816}" File="ui/common/common_icon_guanbi.png" Scale="1" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{a74547c3-3714-457b-b0cf-da9b9ca0b2ff}">
+                            <WZUIImage Type="WZUIImage" GUID="{4e390bd7-b6aa-4297-bfce-3496ff44dd23}" File="ui/common/common_icon_guanbi_sel.png" Scale="1" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{d85f5f3d-893a-424f-b249-060c5be5530a}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{b90caeae-460c-4218-8c73-594f2bcc4b5c}" TouchEnable="False" RelativePosition="0.5,0.5">
+                    <WZUIImage Type="WZUIImage" GUID="{fd9682f5-4af9-4d6d-96c9-e89d367a4c73}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.62,0.5" Name="img1_WndPetShow" />
+                    <WZUIImage Type="WZUIImage" GUID="{28e81d70-b624-4e1d-8db0-fc44ebedecc6}" File="ui/common/common_pic_jiantou4.png" RelativePosition="0.38,0.5" UseOriginSize="True" FlipX="True" Name="img2_WndPetShow" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{7c72a28b-3112-48ad-b6ee-45c1eb4f090e}">
+                <WZUIContainer Type="WZUIContainer" GUID="{a1f937d3-7b9c-4491-bf1e-bbfbe82a0c93}" AbsContentSize="492,150" UseAbsSize="True" RelativePosition="0.5,0.517949">
+                    <WZUI9Image Type="WZUI9Image" GUID="{79b94bb7-b680-4508-a76a-0219e56d6d15}" File="ui/common/common_scale9_di20.png" />
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{ab685e2c-d3de-4725-9cde-1d81b9b30639}" RelativePosition="0.5,0.5" Name="tableConReward_WndFyber" ColumnCount="1" EnableMoveHorizontal="True" NoBorder="False" EnableMoveVertical="False" IsVerticalMode="False" CellElementHeight="0.25" RelativeSize="1,1" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" EnableHorizontalScroll="True" EnableBounceBack="False" AnchorPoint="0.5,0.5" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{fa80425f-0ac0-49d9-b656-a6a621a2d861}" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.133846">
+                    <Button Type="WZUIButton" GUID="{5fce5939-84c1-473e-8c96-33d39959fada}" Name="btnFyber_WndFyber" LuaDoneFunctionName="onFunctionClick" Tag="5" LuaPushFunctionName="" LuaTouchMoveoutFunctionName="" LuaActionName="Normal" RelativePosition="0.5,0.5" AbsPosition="58,26">
+                        <NormalElement Type="WZUIContainer" GUID="{093a181a-a69b-4d12-acd2-62a7b5e4d03b}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{d9738c94-0c05-4319-9ff8-9a4658bcc209}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{d48bd0ab-d7be-476b-bd99-399130adb6ab}" Scale="1" ScaleX="1" ScaleY="1">
+                            <WZUI9Image Type="WZUI9Image" GUID="{14744e4b-af11-4be1-aa80-3c2f96420af5}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{5910f595-1e90-4fb0-a2e2-8674f7240121}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{b93864c0-384b-4f72-aefa-fcd72eb67d1d}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" GrayRender="True" />
+                        </DisableElement>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{5ad41cba-b50a-41c5-b10f-5570f70578df}" FontSize="22" Name="txtFyber_WndFyber" Color="255,236,193" BoldFont="False" StrokeColor="3,111,8" Text="" RelativePosition="0.692577,0.5" AnchorPoint="0.5,0.5" TouchEnable="False" EnableStroke="True" Dimensions="0£¬0" TextKey="" StrokeSize="4" LabelStyleKey="C1_F20_S4_C4" />
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{29abfb73-14df-45fe-9d05-eb329d4567be}" TouchEnable="False" File="ui/fyber/common_icon_jlbofangan.png" UseOriginSize="True" RelativePosition="0.146552,0.5" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{79cac840-e037-486f-9d67-74c420800ceb}" LabelStyleKey="C13_F22" Text="hahahh " RelativePosition="0.5,0.780256" TextKey="FYBER_TIP1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{297837e8-308e-4382-b412-7d73f1e708c7}" LabelStyleKey="C13_F20" Text="" RelativePosition="0.5,0.266026" Name="txtTimes_WndFyber" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndFyber>

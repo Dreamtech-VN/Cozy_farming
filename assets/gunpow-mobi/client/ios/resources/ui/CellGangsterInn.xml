@@ -1,0 +1,32 @@
+<CellGangsterInn GUID="{831d7ee5-f4f5-43ce-bc4c-c6a5f0ef12a8}">
+    <WZUIContainer AbsContentSize="175,183" GUID="{1529ccd2-9af1-46e8-afe7-9fb8412b9cc8}" LuaObjectName="" Name="CellGangsterInn" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{91c47ca2-ed31-4106-a02e-450f0b564460}" TouchSwallow="True" AbsContentSize="">
+            <WZUIContainer Type="WZUIContainer" GUID="{0594a315-de5f-4334-a0d6-3c50ea29bab5}" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{14a12fed-7341-43bd-9c7c-fd1fffe4d2e0}" File="ui/inn/common_slale9_heishisdd.png" Visible="True" UseOriginSize="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{bdcc13b4-7a8c-4876-89a5-d4ef34d61efb}" RelativeSize="0.9,0.75" RelativePosition="0.5,0.557322" Visible="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{996188d5-066a-4115-9ebc-dcd3fa1b9a99}" File="ui/common/common_scale9_di58.png" RelativeSize="1,1" RelativePosition="0.5,0.5" Opacity="225" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="80,80" GUID="{4b2db268-b377-4ddf-bbe0-b9d1d41e0f74}" Name="conItemIcon_CellGangsterInn" RelativePosition="0.5,0.55" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{e63fb461-72a9-42e5-a0c6-6acf458b1545}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.9" TouchSwallow="False" RelativeSize="0.8,0.15" AbsPosition="87.5,151.5">
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,1" BoldFont="True" Color="255,255,255" Dimensions="150,0" EnableStroke="False" FontSize="20" GUID="{9861cf57-c128-4ff8-8cee-1c7da9248e8e}" Name="txtDescript_CellGangsterInn" RelativePosition="0.5,0.9" StrokeColor="60,19,12" StrokeSize="4" Text="橙色武器制作书" TouchEnable="False" Type="WZUILabelTTF" Visible="True" />
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,1" BoldFont="True" Color="255,255,255" Dimensions="150,0" EnableStroke="True" FontSize="24" GUID="{95945a91-3622-49bc-9786-2d1bbf7b7241}" Name="txtCount_CellGangsterInn" RelativePosition="0.72,-2.4" StrokeColor="60,19,12" StrokeSize="1" Text="" TouchEnable="False" Type="WZUILabelTTF" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{180fc596-17a7-47d5-86de-f8e2bee04c8a}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.13" TouchSwallow="False" RelativeSize="0.9,0.12">
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{5a1df6cb-67be-45cc-b5d0-776d04c47945}" Name="txtCost" MaxWidth="500" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{2237b055-81f0-42d5-956c-470f8b748a05}" AbsContentSize="180,190" UseAbsSize="True" Name="conSel_CellGoodsList" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{4947ebcf-ca5e-4a54-98cd-b249bca89de5}" File="ui/common/common_scale9_beibaodi_sel.png" />
+        </WZUIContainer>
+        <Button GUID="{c39ca6e0-b727-438f-b39f-2dbfb5d67985}" LuaDoneFunctionName="onClick" Name="btnBg_CellGoodsList" RelativeSize="1,1" Type="WZUIButton" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" TouchSwallow="True">
+            <NormalElement GUID="{4bb969d3-1abd-4407-9230-45879779feb2}" Type="WZUIContainer" />
+            <SelectElement GUID="{e85c6e1f-387e-4ee4-bf8b-3bfca9089e71}" Type="WZUIContainer" />
+            <DisableElement GUID="{27616bcb-d4ee-483f-8b45-c1f17688da75}" RelativePosition="0.5,0.507143" Type="WZUIContainer" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{b32da9cf-c7d3-46d6-aa81-0b2e7baa2dae}" Name="conSellUp_CellGangsterInn" NameCreate="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{8c3845d0-eb44-497e-a541-964f0763dca8}" File="ui/common/common_shade_chushouheidi.png" />
+            <WZUIImage Type="WZUIImage" GUID="{06f53809-03c0-404c-be24-317eefc8a1e6}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellGangsterInn>

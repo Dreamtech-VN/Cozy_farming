@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?><WndRechargeAndroid GUID="{FE6F0263-3927-44ee-9FC7-A1CBD45876FE}">
+    <WZUIWindow AbsContentSize="782,600" AbsPosition="480,320" GUID="{E7F19631-4B00-468c-A944-4A7903C36929}" LuaObjectName="WndRechargeAndroid" Name="WndRechargeAndroid" NameCreate="True" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="782,628" AnchorPoint="0.5,1" GUID="{E6A2FC47-E56B-4511-A2FA-1FD118A52FCE}" RelativePosition="0.5,0.965" RelativeSize="1,0.95" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="False">
+            <WZUI9Image AbsPosition="" CapInsets="10,10,174,192" File="common/Jigsaw/3.png" GUID="{D800C093-1780-4b14-9E11-31D0516F645A}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False"/>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="790,85" AnchorPoint="0.5,1" GUID="{A48B5B75-724D-4412-906C-8CACA89CE18D}" RelativePosition="0.505,1" RelativeSize="1,0.14" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image CapInsets="80,20,365,23" File="common/Jigsaw/5.png" GUID="{ACF21288-F77E-4b49-A2E4-E270271411BE}" Type="WZUI9Image" UseOriginSize="False"/>
+            <WZUIImage File="common/text/Recharge_title.png" GUID="{1121B7FF-8FEA-4e5f-923A-6CCEC748046B}" Type="WZUIImage" UseOriginSize="True"/>
+            <WZUIButton AbsContentSize="84,84" AnchorPoint="1,1" GUID="{DAEA114E-C842-44e0-A8F5-6A7EABCF402F}" LuaDoneFunctionName="onCloseClick" RelativePosition="1.0012,1.015" RelativeSize="0.1,1" Scale="1" ScaleX="1" ScaleY="1" Type="WZUIButton" UseAbsSize="True" Visible="True">
+                <NormalElement GUID="{0144879B-FD34-4f93-A88E-3781AA077A38}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close.png" GUID="{7766150E-F538-4e17-933A-C0D0A49AAE62}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                </NormalElement>
+                <SelectElement GUID="{6ECB70E2-E363-4e61-8BA0-DFD4258237F0}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close_sel.png" GUID="{3FBF28E1-06A4-4772-911E-2F5467DC46C5}" Type="WZUIImage" UseOriginSize="True"/>
+                </SelectElement>
+                <DisableElement GUID="{7F222AA0-0B3F-4b5b-BEAD-F1F816D16B65}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close_not.png" GUID="{CC7E0F50-9B7B-4f51-BCA7-DD01A8B5279E}" Type="WZUIImage" UseOriginSize="True"/>
+                </DisableElement>
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="740,420" GUID="{E7E37E7F-5EAC-4037-8FC8-8DDBD60A9DC3}" RelativePosition="0.5,0.46" RelativeSize="0.95,0.78" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIContainer GUID="{FF91EA40-0818-4a9a-85F7-6044B20C6D6A}" Type="WZUIContainer">
+                <WZUIContainer AbsContentSize="744,22" AnchorPoint="0.5,1" GUID="{F6FD4202-AE1C-4204-BEBB-52B25995533A}" Order="1" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUI9Image File="common/Jigsaw/65.png" GUID="{25ED02A5-9777-4de6-B9E1-039525578BE4}" Type="WZUI9Image"/>
+                </WZUIContainer>
+                <WZUIContainer GUID="{59A84C99-631F-447a-8A75-6848EE3BA06C}" RelativePosition="0.5,0.48" Type="WZUIContainer">
+                    <WZUI9Image File="common/Jigsaw/6.png" GUID="{B3E39040-8E19-483f-AEB2-BBF04DE62B48}" Type="WZUI9Image"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="260,390" AnchorPoint="0,0.5" GUID="{B23C8434-1B13-43e9-8E2D-8A9A6EF0A2DD}" RelativePosition="0.00133333,0.47" RelativeSize="0.3,0.9" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIContainer AbsContentSize="380,6" AnchorPoint="0.5,0" GUID="{AA92C20E-8353-4dc4-8EAD-4936F4FA5AF6}" RelativePosition="1,0.5" Rotation="90" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUI9Image File="common/Jigsaw/4.png" GUID="{86E1C2E7-8EA5-4b09-A909-FF0CD85D48EE}" Rotation="0" Type="WZUI9Image"/>
+                </WZUIContainer>
+                <WZUILabelTTF AnchorPoint="0.5,1" FontSize="30" GUID="{F422259C-9F3A-4c71-9D76-F3F4105AD03A}" RelativePosition="0.5,1" Text="充值方式" Type="WZUILabelTTF"/>
+                <WZUITableContainer AbsContentSize="260,336" CellElementHeight="0.24" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{F74B0A4D-46CA-4cf5-AA60-3A7EB46079D6}" Name="tableLeftBtn_WndRechargeAndroid" RelativePosition="0.5,0.456" ScrollPictureDown="common/Jigsaw/rolling_03.png" ScrollPictureMid="common/Jigsaw/rolling_01.png" ScrollPictureTop="common/Jigsaw/rolling_02.png" Type="WZUITableContainer" UseAbsSize="True"/>
+            </WZUIContainer>
+            <WZUIMoveContainer AbsContentSize="460,374" AnchorPoint="1,0.5" EnableMoveHorizontal="False" GUID="{79789E43-003A-4123-A64A-0434D51315E6}" Name="rollcon_WndRechargeAndroid" RelativePosition="0.99,0.47" Type="WZUIMoveContainer" UseAbsSize="True">
+                <MoveElement GUID="{0C8C201F-ED83-40d6-97D7-E4286975B82B}" Type="WZUIContainer">
+                    <WZUIFrameElement AbsPosition="0.5,0.5" AnchorPoint="0,0" CurrentIndex="0" GUID="{D0D93CAB-2394-43c6-9F05-68DF60D7BF5E}" Name="frameRight_WndRechargeAndroid" RelativePosition="0,0" Type="WZUIFrameElement">
+                        <FrameElement AnchorPoint="0,0" GUID="{CD5561E8-11E4-4bc4-A2D2-B9270C326BC0}" RelativePosition="0.02,0" Type="WZUIContainer">
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,1" Color="238,223,10" Dimensions="420,0" FontSize="26" GUID="{1B6268AE-9D7F-40ab-AB4F-3A9258CB8AD5}" Name="txtDesc1_WndRechargeAndroid" RelativePosition="0,1" Text="" Type="WZUILabelTTF"/>
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,1" Color="255,255,255" Dimensions="420,0" FontSize="24" GUID="{757647FF-F4AD-4de0-819B-6524832536FF}" Name="txtDesc2_WndRechargeAndroid" RelativePosition="0,0.887701" Text="" Type="WZUILabelTTF"/>
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,1" Color="238,223,10" Dimensions="420,0" FontSize="24" GUID="{0F7F4C3B-91A7-4b01-A90E-33545EC69ADE}" Name="txtDesc3_WndRechargeAndroid" RelativePosition="0,0.76738" Text="" Type="WZUILabelTTF"/>
+                        </FrameElement>
+                        <FrameElement AnchorPoint="0,0" GUID="{F4D18F5A-DB24-4b5a-9866-8EF5F7E394F6}" RelativePosition="0,0" Type="WZUIContainer">
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,1" Color="238,223,10" Dimensions="420,0" FontSize="26" GUID="{5FD5B921-2442-4b4e-812C-6E8BB0D15EE5}" Name="txtPaypal1_WndRechargeAndroid" RelativePosition="0.02,1" Text="请选择你的冲值卡面值" Type="WZUILabelTTF"/>
+                            <WZUIContainer AbsContentSize="420,240" AnchorPoint="0.5,1" GUID="{33BE88A0-1817-4547-AE0A-7D1A47B18F81}" Name="conPar_WndRechargeAndroid" RelativePosition="0.5,0.898396" Type="WZUIContainer" UseAbsSize="True"/>
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,1" Color="0,255,0" Dimensions="420,0" FontSize="26" GUID="{3B76C834-3900-45d6-8970-D8DE0766443F}" Name="txtPaypal2_WndRechargeAndroid" RelativePosition="0.02,0.25" Text="5元人民币可兑换50钻石" Type="WZUILabelTTF"/>
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,1" Color="255,255,255" Dimensions="420,0" FontSize="24" GUID="{7711BC95-0680-4bfe-982C-6E4C0A34E739}" Name="txtPaypal3_WndRechargeAndroid" RelativePosition="0.02,0.15" Text="5元人民币可兑换50钻石" Type="WZUILabelTTF"/>
+                            <WZUIContainer AbsContentSize="460,50" AnchorPoint="0.5,1" GUID="{13BF9340-4284-46e1-9F3B-084A17D8B100}" Name="conName_WndRechargeAndroid" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                                <WZUILabelTTF AnchorPoint="0,0.5" Color="255,255,255" FontSize="25" GUID="{3F9F3964-7F8D-4b09-B40B-F8EFE038009C}" Name="txtCardNum_WndRechargeAndroid" RelativePosition="0,0.5" Text="卡号:" Type="WZUILabelTTF"/>
+                                <WZUI9Image AnchorPoint="0,0.5" File="common/Jigsaw/12.png" GUID="{25D4FD3E-6C5E-4791-AC7D-1FA46F367CCC}" RelativePosition="0.14,0.5" RelativeSize="0.86,1" Type="WZUI9Image"/>
+                                <WZUIEditBox AnchorPoint="0,0.5" BgPicture="ui/common/transparent_bg.png" FontColor="255,255,255" FontSize="22" GUID="{68255A40-9257-4d35-B40D-BB872B7D2529}" MaxLength="32" Name="editName_WndRechargeAndroid" RelativePosition="0.14,0.5" RelativeSize="0.86,1" Type="WZUIEditBox"/>
+                            </WZUIContainer>
+                            <WZUIContainer AbsContentSize="460,50" AnchorPoint="0.5,1" GUID="{9E48A584-75C8-47d8-9736-DDC90CB5087D}" Name="conPwd_WndRechargeAndroid" RelativePosition="0.5,0.823529" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                                <WZUILabelTTF AnchorPoint="0,0.5" Color="255,255,255" FontSize="24" GUID="{89FC880A-7B26-48da-A212-B330654A0D74}" Name="txtCardNum_WndRechargeAndroid" RelativePosition="0,0.5" Text="密码:" Type="WZUILabelTTF"/>
+                                <WZUI9Image AnchorPoint="0,0.5" File="common/Jigsaw/12.png" GUID="{08695CB1-9506-4639-889A-517F941452EA}" RelativePosition="0.14,0.5" RelativeSize="0.86,1" Type="WZUI9Image"/>
+                                <WZUIEditBox AnchorPoint="0,0.5" BgPicture="ui/common/transparent_bg.png" FontColor="255,255,255" FontSize="22" GUID="{8F850AA7-ABDF-4ee1-B15A-14B7DAAE5C54}" InputFlag="FlagPassword" InputMode="ModeSingleLine" MaxLength="32" Name="editPwd_WndRechargeAndroid" RelativePosition="0.14,0.5" RelativeSize="0.86,1" Type="WZUIEditBox"/>
+                            </WZUIContainer>
+                            <Button AbsContentSize="180,66" AnchorPoint="0.5,1" GUID="{22FC74EC-76C0-4e06-B665-A925648305EB}" LuaDoneFunctionName="onPayClick" Name="btnPay_WndRechargeAndroid" RelativePosition="0.5,0" Type="WZUIButton" UseAbsSize="True" Visible="True">
+                                <NormalElement GUID="{77CE010B-8BA0-4068-8758-2512B203437C}" Type="WZUIContainer">
+                                    <WZUI9Image CapInsets="0,0,0,0" File="common/button/button_2.png" GUID="{727C82B4-7FA6-4cf9-BC20-A4D12D21656C}" Type="WZUI9Image"/>
+                                </NormalElement>
+                                <SelectElement GUID="{9C0FE71A-605E-44a2-A5FD-240B055C21C3}" Type="WZUIContainer">
+                                    <WZUI9Image CapInsets="0,0,0,0" File="common/button/button_2_sel.png" GUID="{82891AD9-49FD-4f23-BA32-67CE8BD0CF82}" Type="WZUI9Image"/>
+                                </SelectElement>
+                                <DisableElement GUID="{D45E91F4-6F9D-4c3c-BCE6-949BEEE8E3DF}" Type="WZUIContainer">
+                                    <WZUI9Image CapInsets="0,0,0,0" File="common/button/button_4.png" GUID="{00643207-57E1-4a44-BE3A-4613D454BF78}" Type="WZUI9Image"/>
+                                </DisableElement>
+                                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{261AB3E9-F369-432a-A608-F7BB3821009D}" Name="txtPay_WndRechargeAndroid" StrokeColor="29,121,1" StrokeSize="4" Text="充值" Type="WZUILabelTTF"/>
+                            </Button>
+                        </FrameElement>
+                    </WZUIFrameElement>
+                </MoveElement>
+            </WZUIMoveContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="784,38" AnchorPoint="0.5,0" GUID="{A686D92D-F510-4a2e-9A3B-A78D7A5D4C81}" RelativePosition="0.5,0" RelativeSize="1,0" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image CapInsets="" File="common/Jigsaw/60.png" GUID="{9ADD7D4E-0A86-4d20-B307-00B3F4C7432D}" Type="WZUI9Image" Visible="True"/>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndRechargeAndroid>

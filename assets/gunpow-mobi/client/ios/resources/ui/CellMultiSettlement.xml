@@ -1,0 +1,31 @@
+<CellMultiSettlement GUID="{B6A3F54A-5507-40a0-8BB8-322D5A2194F4}">
+    <WZUIFrame Type="WZUIFrame" GUID="{F594DED2-150D-4718-B97A-122B490788F7}">
+        <WZUIContainer Type="WZUIContainer" GUID="{580C9151-A74B-4a2e-AE19-05F958A7A4B1}" Tag="0" RelativePosition="0.5,0.5" Name="CellMultiSettlement" UseAbsSize="True" AbsContentSize="438,182" NameCreate="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{264829BE-4084-41c2-BF04-D3FD990657B6}" File="ui/common/al_bg.png" />
+            <WZUI9Image Type="WZUI9Image" GUID="{35F2CB45-2FE6-4e09-999A-CBDED9D163A3}" File="ui/achievement/ar_bg04_sel.png" Scale="1.02" RelativePosition="0.5,0.51106" ScaleX="1.01" Name="imgLight_CellMultiSettlement" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{032FEDB8-21E8-4a34-86EF-4D2CC0DCD2CF}" Text="MVP" Rotation="-30" FontSize="28" RelativePosition="0.0683926,0.847682" Color="255,242,14" EnableStroke="True" Name="txtMVP_CellMultiSettlement" StrokeSize="3" StrokeColor="91,49,24" />
+            <WZUIContainer Type="WZUIContainer" GUID="{2DA6245E-5C2B-44c0-8F29-406683F3D89F}" Visible="True" UseAbsSize="True" AbsContentSize="110,110" RelativePosition="0.177172,0.51659" Order="1">
+                <WZUIImage Type="WZUIImage" GUID="{8952819F-A794-4196-B52F-3BD2967A401A}" File="ui/common/round_bg01.png" UseOriginSizeProportion="True" />
+                <WZUIImage Type="WZUIImage" GUID="{8F28FC3C-D32A-453f-8F69-1102609AD6ED}" File="" UseOriginSizeProportion="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{3CA818A8-EDDD-486f-8A56-AF25510CE2FA}" UseAbsSize="True" AbsContentSize="300,58" RelativePosition="0.639571,0.772585">
+                <WZUIImage Type="WZUIImage" GUID="{9C62B7A7-6E8B-4a00-B9B8-5757590B5776}" File="common/num/rank_back.png" UseOriginSize="True" RelativePosition="0.143334,0.5" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{CC21EFC6-0426-44a7-8C37-EDA11B3A8004}" Text="23" Name="txtLevel_CellMultiSettlement" CharMapFileName="common/num/rank_num.png" UseOriginSize="True" Width="23" Height="29" RelativePosition="0.143334,0.770536" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{DB044BD6-8147-4320-9B87-989041A97007}" Name="txtName_CellMultiSettlement" AnchorPoint="0,0.5" FontSize="25" Text="杰克泰勒乐乐拔拔" RelativePosition="0.3,0.5" EnableStroke="True" Color="246,225,225" StrokeSize="3" StrokeColor="91,49,24" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{97A52AE5-3C11-4939-927B-2AFFF75A751E}" AbsContentSize="320,42" UseAbsSize="True" RelativePosition="0.623287,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{E2813079-A858-4da7-A30B-616289DE0EDA}" File="ui/battle/bg_03.png" Color="255,255,255" Opacity="100" />
+                <WZUIImage Type="WZUIImage" GUID="{CBCC2DD9-DD9E-4aa9-B3DD-32C018622861}" File="shopitems/experience.png" UseOriginSizeProportion="True" RelativeSize="1,2" RelativePosition="0.19375,0.547619" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{B18E9C2A-A3CD-4a96-B270-60879965CA6C}" Text="+5000" Name="txtExp_CellMultiSettlement" Color="60,19,12" FontSize="24" RelativePosition="0.30625,0.47619" AnchorPoint="0,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{AE805683-B8F9-4240-9C13-9BD74B147C21}" File="shopitems/gold.png" UseOriginSizeProportion="True" RelativeSize="1,1.24" RelativePosition="0.60625,0.52381" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{C7E15CC7-B0D0-4c38-861B-EC2BEEF2DD9C}" Text="+5000" Name="txtGold_CellMultiSettlement" Color="60,19,12" FontSize="24" RelativePosition="0.69375,0.47619" AnchorPoint="0,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{4A880C2B-1DC0-48a6-8B9E-B42815B5807E}" AbsContentSize="300,44" UseAbsSize="True" RelativePosition="0.641552,0.240102">
+                <WZUIImage Type="WZUIImage" GUID="{B4AF6028-2FB1-4506-8452-900836F8E87A}" Name="imgStar1_CellMultiSettlement" File="ui/main/bossMap/copy_star.png" UseOriginSizeProportion="True" UseOriginSize="True" RelativePosition="0.124,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{95DCFE1D-435C-4e82-BDA4-431383C103CA}" Name="imgStar2_CellMultiSettlement" File="ui/main/bossMap/copy_star_not.png" UseOriginSizeProportion="True" UseOriginSize="True" RelativePosition="0.25,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{64B4DC97-49C0-4c7d-AE02-DCAEE6AE7D4C}" Name="imgStar3_CellMultiSettlement" File="ui/main/bossMap/copy_star_not.png" UseOriginSizeProportion="True" UseOriginSize="True" RelativePosition="0.377,0.5" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{87724225-9A97-4aea-ADBB-3C43456392C9}" File="ui/copy/upgrade.png" UseOriginSize="True" RelativePosition="0.897979,0.208434" Name="imgUpgrade_CellMultiSettlement" />
+        </WZUIContainer>
+    </WZUIFrame>
+</CellMultiSettlement>

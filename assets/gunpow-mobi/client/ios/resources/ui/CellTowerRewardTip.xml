@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" ?>
+<CellTowerRewardTip GUID="{0EBF7797-75A0-4224-BC02-1F720466DB12}">
+    <WZUIContainer AbsContentSize="355,118" GUID="{DF8F2E27-C178-4c60-8590-9227FA5E1540}" LuaObjectName="" Name="CellTowerRewardTip" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUI9Image Type="WZUI9Image" GUID="{FB7FEB45-B322-4a7a-998C-D4B607864ACC}" File="ui/common/common_scale9_di24.png" />
+        <WZUIContainer Type="WZUIContainer" GUID="{24a8959c-8d7b-4ce7-9b7a-3fe0193ecb61}" AbsContentSize="350,35" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.966102">
+            <WZUIImage Type="WZUIImage" GUID="{c37ec529-7b21-41d6-a596-aaf34dd35ef9}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" ScaleX="-1" RelativePosition="0.475385,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{617eb148-188a-4902-b460-07e1480df73c}" FontSize="22" Name="txtGet_CellTowerRewardTip" Text="" Color="255,227,116" AnchorPoint="0,0.5" RelativePosition="0.0434426,0.5" Order="" TextKey="" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{bab69dce-7b51-4d45-a5c8-5cb6cf1937fe}" AbsContentSize="345,74" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0.0338983" Name="conTab_CellTowerRewardTip">
+            <WZUITableContainer Type="WZUITableContainer" GUID="{7f2c77ec-3e46-4ec3-b4ce-0c6610fcb033}" Name="tabPrizeItemList_CellTowerRewardTip" ColumnCount="5" CellElementHeight="1" EnableMoveVertical="True" EnableHorizontalScroll="False" IsVerticalMode="True" VerticalInterval="0" EnableMoveHorizontal="False" EnableVerticalScroll="True" EnableMoveoutContainer="True" HorizontalInterval="0" AbsContentSize="" UseAbsSize="False" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTowerRewardTip>

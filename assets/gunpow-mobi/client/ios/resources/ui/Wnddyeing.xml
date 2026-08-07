@@ -1,0 +1,128 @@
+﻿<Wnddyeing GUID="{b2e43091-25dd-4874-9f71-26836fc9b327}">
+    <WZUIWindow AbsContentSize="800,515" GUID="{5d194d53-8eb3-47b7-9bf2-5ad5dab40540}" LuaObjectName="Wnddyeing" Name="Wnddyeing" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True" RelativePosition="0.5,0.5" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{87d209f6-1d02-4478-8da8-f712f1372717}" AbsContentSize="800,515" UseAbsSize="True" RelativePosition="0.5,0.505" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{bd907cc5-a459-458d-a01c-760686f5d138}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" Visible="True" />
+            <WZUI9Label Type="WZUI9Label" GUID="{7ed4941e-0d4a-45aa-b6f8-0459a33fdd4d}" FontSize="24" BoldFont="True" RelativePosition="0.5,0.938" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" Color="255,236,193" Text="" Visible="True" TextKey="BAGTIP23" LabelStyleKey="SMALL_WINDOW_TITLE" Name="title_WndSpaceRecord" />
+            <WZUIContainer Type="WZUIContainer" GUID="{bfc07a6f-7b46-4b8e-9ad9-2cd54612864a}" UseAbsSize="True" AbsContentSize="445,425" RelativePosition="0.7,0.448" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{bbdc0fbe-0c96-48d7-a124-6e9b210d4a98}" File="ui/common/common_scale9_di9.png" Opacity="200" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIButton AbsContentSize="115,54" GUID="{4c6fe6b2-f862-45fe-a3d5-e0a992dfe199}" LuaDoneFunctionName="onClose" Name="" RelativePosition="0.956042,0.943413" Type="WZUIButton" UseAbsSize="True" Visible="True" AbsPosition="531.28,439.75">
+            <NormalElement GUID="{c6c02249-ebdd-4d89-b232-47dd6a4ed4c8}" TouchContainerEnable="True" Type="WZUIContainer">
+                <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{67103da5-7ace-4e42-9523-235efe1fda53}" Type="WZUIImage" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement GUID="{435b3179-079b-498b-836f-6245c9ae9119}" TouchContainerEnable="True" Type="WZUIContainer">
+                <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{758c9a2c-ca17-4113-b755-e8b1c58c27f1}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+            </SelectElement>
+        </WZUIButton>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{2f23156c-d21c-4459-9e85-8eca9f631a42}" FontSize="20" Text="选择配色方案" Color="105,65,46" RelativePosition="0.215,0.78" TextKey="BAGTIP21" LabelStyleKey="" />
+        <WZUIImage Type="WZUIImage" GUID="{c0d07c65-f66a-4700-8d2d-e0f66012d16e}" File="ui/common/common_pic_diwen5.png" UseOriginSize="True" RelativePosition="0.215,0.434" Opacity="100" TouchEnable="False" />
+        <WZUIImage Type="WZUIImage" GUID="{5b0cdad4-de87-4930-acac-19c7e02cdecc}" File="ui/common/common_icon_yy.png" UseOriginSize="True" RelativePosition="0.215,0.232" Name="imgYY" Opacity="200" />
+        <WZUIContainer Type="WZUIContainer" GUID="{7f071cdb-a1c9-4116-9c0a-e57cf02344d4}" Name="conRole" UseAbsSize="True" AbsContentSize="250,360" RelativePosition="0.2,0.44">
+            <Button Type="WZUIButton" GUID="{cba6e20f-de72-4da3-9500-067432036c58}" UseAbsSize="True" AbsContentSize="300,300" LuaDoneFunctionName="onClickRole">
+                <NormalElement Type="WZUIContainer" GUID="{e0e5e301-e681-425a-abc8-89557503a351}" />
+                <SelectElement Type="WZUIContainer" GUID="{3a222d57-7542-4386-bfa0-6a4c872fce69}" />
+                <DisableElement Type="WZUIContainer" GUID="{6367b8f0-0fe9-4e06-9a9d-59fd3b81ec9f}" />
+            </Button>
+            <WZUISpine Type="WZUISpine" GUID="{d1e2feaa-7114-419c-851d-1e0156e38921}" FileAtlas="ui/ui_ranse.atlas" FileJson="ui/ui_ranse.json" AnimationName="1" Loop="False" RelativePosition="0.5,0.18" Name="ranseAni" TouchEnable="False" Order="50" Visible="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{72b6f66a-96b1-43bc-8c9e-5b18a7354ae2}" Name="con1" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{6f81da83-34c8-4e57-8b9d-6d19744f4da2}" UseAbsSize="True" AbsContentSize="425,260" RelativePosition="0.7,0.596">
+                <WZUI9Image Type="WZUI9Image" GUID="{c2fa59a2-8ba1-46db-8795-99121d3e7762}" File="ui/common/common_scale9_di7.png" RelativePosition="0.5,0.5" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a4a97ad7-6639-4f52-a029-47c6d501d682}" FontSize="22" Text="" Color="79,60,48" RelativePosition="0.681141,0.805" TextKey="BAGTIP16" LabelStyleKey="C5_F22" />
+            <WZUIContainer Type="WZUIContainer" GUID="{b9fa1fc3-bc7d-432a-a755-c3fd81cb86db}" Name="conOperationHead" UseAbsSize="True" AbsContentSize="390,96" RelativePosition="0.7,0.673">
+                <WZUI9Image Type="WZUI9Image" GUID="{6f729584-7c90-4bae-977d-d6019309f3de}" File="ui/common/common_scale9_di9.png" Opacity="200" />
+                <WZUIContainer Type="WZUIContainer" GUID="{b8bd2cca-2c53-4b01-9fb2-9a6721907a03}" AbsContentSize="150,40" UseAbsSize="True" RelativePosition="0.63,0.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{c411dac6-b122-4b34-8cb8-8308f9e2c752}" File="ui/common/common_scale9_di63.png" />
+                </WZUIContainer>
+                <Button Type="WZUIButton" Name="reduce_Wnddyeing" AbsContentSize="64,64" UseAbsSize="True" RelativePosition="0.35,0.5" GUID="{7dd1e91f-7d06-449c-891a-41c34f235e9f}" LuaDoneFunctionName="onReduceHead" ScaleX="-1">
+                    <NormalElement Type="WZUIContainer" GUID="{c6b94ada-4675-40ad-b488-b90076813f81}">
+                        <WZUIImage Type="WZUIImage" GUID="{18172689-5a5a-4ee6-b458-581cd68c1d3b}" File="ui/common/common_btn_jiantou.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{adb8f830-59f9-47cc-bc04-a1f6e4b7f39d}">
+                        <WZUIImage Type="WZUIImage" GUID="{4591f2a4-2ebe-4335-85e6-a3f9c9e6c648}" File="ui/common/common_btn_jiantou.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{95bca4d2-c644-4195-9d8a-19dd1f3ed592}">
+                        <WZUIImage Type="WZUIImage" GUID="{6a97d218-dccc-4834-933b-cd833db1edb8}" File="ui/common/common_btn_jiantou.png" UseOriginSize="True" />
+                    </DisableElement>
+                </Button>
+                <WZUIButton Type="WZUIButton" Name="add_Wnddyeing" AbsContentSize="64,64" UseAbsSize="True" GUID="{fb33cf9b-9509-4f64-a8bc-d00ed57e50e2}" RelativePosition="0.91,0.5" LuaDoneFunctionName="onAddHead">
+                    <NormalElement Type="WZUIContainer" GUID="{d201c2ed-18fc-46d4-b3a1-5c3dc6d6a5d2}">
+                        <WZUIImage Type="WZUIImage" GUID="{e373ca48-1191-463f-8614-d0a4c294a693}" File="ui/common/common_btn_jiantou.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{5f58b733-a310-4d3c-8adb-e5544692b8e4}">
+                        <WZUIImage Type="WZUIImage" GUID="{e3a82f23-cb7f-4521-8f3e-219a0340e945}" File="ui/common/common_btn_jiantou.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{28c2095e-e974-41e5-89e9-ffc090a68624}">
+                        <WZUIImage Type="WZUIImage" GUID="{0b098bd5-b985-476a-9bca-387c05a23f04}" File="ui/common/common_btn_jiantou.png" UseOriginSize="True" />
+                    </DisableElement>
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1aafee6d-42ca-4e0a-be12-64900010f6f1}" FontSize="20" Text="" Color="255,236,193" RelativePosition="0.63,0.5" Name="colorHead" />
+                <WZUIContainer Type="WZUIContainer" GUID="{53a6ab8a-dc6b-4867-b1c1-989e707172d7}" UseAbsSize="True" AbsContentSize="100,100" RelativePosition="0.13,0.5" Name="conHead">
+                    <WZUIImage Type="WZUIImage" GUID="{396afc03-3b72-4a1a-b71c-ec4068e62cd6}" File="ui/bag/common_icon_toubu.png" UseOriginSize="True" Order="5" Name="dressTxt1" Visible="False" TouchEnable="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{409405fc-5195-4ead-8936-c54248136eb2}" Name="conOperationBody" UseAbsSize="True" AbsContentSize="390,96" RelativePosition="0.7,0.465">
+                <WZUI9Image Type="WZUI9Image" GUID="{16b38059-2814-4a7b-bd14-c674e59a494c}" File="ui/common/common_scale9_di9.png" Opacity="200" />
+                <WZUIContainer Type="WZUIContainer" GUID="{dd8bd84b-58d2-4812-92a5-7903b8b0c0bb}" AbsContentSize="150,40" UseAbsSize="True" RelativePosition="0.63,0.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{e331c5d5-e0f1-4923-a4a1-d2c6394145c7}" File="ui/common/common_scale9_di63.png" />
+                </WZUIContainer>
+                <Button Type="WZUIButton" Name="reduce_Wnddyeing" AbsContentSize="64,64" UseAbsSize="True" RelativePosition="0.35,0.5" GUID="{ed843e5c-61b7-4943-ad46-801f0c42f818}" LuaDoneFunctionName="onReduceBody" ScaleX="-1">
+                    <NormalElement Type="WZUIContainer" GUID="{2b3611ff-8386-451e-a628-686e48a45356}">
+                        <WZUIImage Type="WZUIImage" GUID="{90ace790-43d2-4034-befb-4624eb866527}" File="ui/common/common_btn_jiantou.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{848e766c-b8b4-4b9b-b751-8e8fdcafa32b}">
+                        <WZUIImage Type="WZUIImage" GUID="{3e3250a5-7a53-4550-a652-6f4eb6bd2ee7}" File="ui/common/common_btn_jiantou.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{0abe9b9e-72f7-4eaa-9a4c-71e6cb4afe13}">
+                        <WZUIImage Type="WZUIImage" GUID="{0d69179a-3761-4060-baea-296eeac6b592}" File="ui/common/common_btn_jiantou.png" UseOriginSize="True" />
+                    </DisableElement>
+                </Button>
+                <WZUIButton Type="WZUIButton" Name="add_Wnddyeing" AbsContentSize="64,64" UseAbsSize="True" GUID="{14a61851-809a-4d28-b8bb-bd525ba90c70}" RelativePosition="0.91,0.5" LuaDoneFunctionName="onAddBody">
+                    <NormalElement Type="WZUIContainer" GUID="{e99e9400-3828-4a7b-8f0c-94e5b132e0e1}">
+                        <WZUIImage Type="WZUIImage" GUID="{7e34eb73-e126-40a3-a8db-78a0c51f9465}" File="ui/common/common_btn_jiantou.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{0b2872ba-9694-4dee-9671-32a9007f3ae5}">
+                        <WZUIImage Type="WZUIImage" GUID="{0fd492ec-6bf7-40e3-919c-d67028df5b9d}" File="ui/common/common_btn_jiantou.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{2155264a-32bb-4905-be2c-ef8ee0e7fec7}">
+                        <WZUIImage Type="WZUIImage" GUID="{74ac3862-fbe3-4682-849d-d3bb8875d33f}" File="ui/common/common_btn_jiantou.png" UseOriginSize="True" />
+                    </DisableElement>
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{fcaf4ef3-7d77-4432-8b1b-55951d8031a4}" FontSize="20" Text="" Color="255,236,193" RelativePosition="0.63,0.5" Name="colorBody" />
+                <WZUIContainer Type="WZUIContainer" GUID="{bac3f021-b015-4645-a6d6-3a0c3b6015a8}" UseAbsSize="True" AbsContentSize="100,100" RelativePosition="0.13,0.5" Name="conBody">
+                    <WZUIImage Type="WZUIImage" GUID="{fcdf3dc1-8117-4b4c-9526-a8ca276c7f4b}" File="ui/bag/common_icon_toubu.png" UseOriginSize="True" Order="5" Name="dressTxt2" Visible="False" TouchEnable="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{91f80441-2cf7-4698-8d22-95df07a32632}" UseAbsSize="True" AbsContentSize="390,150" AnchorPoint="0.5,0.5" RelativePosition="0.7,0.19">
+                <WZUIContainer Type="WZUIContainer" GUID="{1be7a1ef-f558-4629-81ed-e57ae56fc8b5}" UseAbsSize="True" AbsContentSize="350,42" RelativePosition="0.5,0.595">
+                    <WZUI9Image Type="WZUI9Image" GUID="{fc96a068-032d-4e0b-ab44-abba4b3fe3c2}" File="ui/common/common_scale9_heidi1.png" Opacity="130" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d2f8a187-3713-4fa6-bfbd-0a58d5b67a31}" FontSize="16" Text="" Color="79,60,48" RelativePosition="0.015,0.885" TextKey="DYEING" Alignment="Left" AnchorPoint="0,0.5" LabelStyleKey="C5_F20" Scale="0.9" Name="txtNotice_Wnddyeing" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{29f10581-47b7-4f4c-93fd-cd121208173b}" FontSize="16" Text="染色消耗" Color="79,60,48" RelativePosition="0.14,0.635" TextKey="BAGTIP17" Alignment="Left" AnchorPoint="0,0.5" LabelStyleKey="C11_F26_S4_C5" Name="txtCost_Wnddyeing" />
+                <WZUIImage Type="WZUIImage" GUID="{52c198cd-9ae4-46c1-bb7f-2c3ed3243b68}" File="shopitems/strengthen_002.png" UseOriginSize="True" Scale="0.45" RelativePosition="0.48,0.635" Name="imgCost" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c29f7e49-2f6b-420a-b6cc-9db20d70d26c}" FontSize="16" Text="0" Color="79,60,48" RelativePosition="0.53,0.635" TextKey="" Alignment="Left" AnchorPoint="0,0.5" LabelStyleKey="C1_F24_S4_C3" Name="cost" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{f17b0f40-4122-4e34-a66b-2b606b9562eb}" FontSize="16" Text="(拥有:0)" Color="79,60,48" RelativePosition="0.62,0.635" TextKey="" Alignment="Left" AnchorPoint="0,0.5" LabelStyleKey="C12_F20_S4_C5" Name="has" />
+                <Button Type="WZUIButton" GUID="{fb0cb2b9-6039-4638-9058-29469f742d6b}" UseAbsSize="True" AbsContentSize="120,50" RelativePosition="0.5,0.245" LuaDoneFunctionName="onSure" Name="btnSure" TouchEnable="True" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{74c06674-5635-4c71-8a51-f31830023d6a}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{680b55af-e27b-40a1-95ff-8356331dc8d5}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{88fc4af7-fff6-4461-8b81-47191059b51a}" FontSize="16" Text="开始染色" Color="79,60,48" RelativePosition="0.5,0.51" TextKey="BAGTIP20" Alignment="Center" AnchorPoint="0.5,0.5" LabelStyleKey="NORMAL_GREEN_BTN" Name="txtSure1_Wnddyeing" Scale="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{1c94d2a1-171e-4b8d-ad15-a1fc448e6bb8}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{912ab104-4377-4c41-b20f-c2421f16b572}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSizeProportion="False" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{68ccf20d-11ac-40c7-8e93-f930895f778b}" FontSize="16" Text="开始染色" Color="79,60,48" RelativePosition="0.5,0.51" TextKey="BAGTIP20" Alignment="Center" AnchorPoint="0.5,0.5" LabelStyleKey="NORMAL_GREEN_BTN" Name="txtSure2_Wnddyeing" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{01021b0a-d653-4daa-80b1-93aa9f700516}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{d436b1c1-5173-4d27-98a6-92b4c1d014f8}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" GrayRender="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{53d628b6-c78f-498d-a842-d4fe1651978a}" FontSize="16" Text="开始染色" Color="79,60,48" RelativePosition="0.5,0.51" TextKey="BAGTIP20" Alignment="Center" AnchorPoint="0.5,0.5" LabelStyleKey="NORMAL_GRAY_BTN" Name="txtSure3_Wnddyeing" />
+                    </DisableElement>
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{2d3c709b-f793-4fc2-9413-2ae9a7830441}" Name="con2" Order="1" Visible="False">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{e5d5bc64-669b-4d8b-ae15-2afb28f8fcbb}" FontSize="22" Text="选择配色方案" Color="79,60,48" RelativePosition="0.681141,0.825" TextKey="BAGTIP38" LabelStyleKey="C5_F22" />
+            <WZUITableContainer AnchorPoint="0.5,1" CellElementHeight="0.384" ColumnCount="3" EnableMoveHorizontal="False" GUID="{8d2466be-129c-488f-97fb-9e44fd68a398}" Name="tableCon_Wnddyeing" RelativePosition="0.7,0.792" RelativeSize="1,1" Type="WZUITableContainer" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" EnableVerticalScroll="True" AbsContentSize="435,375" UseAbsSize="True" />
+        </WZUIContainer>
+    </WZUIWindow>
+</Wnddyeing>
