@@ -831,6 +831,16 @@ cũ.
       Test: `GuildBossServiceTest` thêm 1 test (reset giữa chừng đưa HP về
       đầy, cho phép đánh lại ngay); `GuildBossHttpFlowTest` thêm 1 test
       (endpoint đòi hỏi `ADMIN_TOKEN`).
+- [x] **Giai đoạn 37 — admin tra cứu lịch sử đấu PvP**: `PvpMatchHistoryDao`
+      trước đây chỉ ghi (`record`), không có cách nào đọc lại — GM không
+      thể kiểm tra khi có report tố cáo gian lận/dispute kết quả trận đấu.
+      - `PvpMatchHistoryDao.listByUser(userId, limit)` (method MỚI) — trận
+        mà user là player_a HOẶC player_b, mới nhất trước.
+      - `GET /api/admin/pvp/match/history?userId=&limit=` — `limit` mặc
+        định 20, kẹp tối đa 100. Cần header `X-Admin-Token`.
+      Test: `PvpMatchHistoryDaoTest` thêm 3 test (lấy đúng trận theo 2 vai
+      trò, giới hạn limit, rỗng khi chưa đấu); `PvpHttpFlowTest` thêm 1
+      test (endpoint đòi hỏi `ADMIN_TOKEN`).
 
 ## Chạy thử
 

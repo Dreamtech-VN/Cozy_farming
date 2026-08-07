@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import vn.dreamtech.game.server.admin.AdminAdjustPvpRankHandler;
+import vn.dreamtech.game.server.admin.AdminPvpMatchHistoryHandler;
 import vn.dreamtech.game.server.battle.BattleService;
 import vn.dreamtech.game.server.dao.CharacterDao;
 import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
@@ -71,7 +72,8 @@ class PvpHttpFlowTest {
         LevelDao levelDao = new LevelDao(dataSource);
         BattleService battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource), new TowerRecordDao(dataSource));
         PvpRankDao pvpRankDao = new PvpRankDao(dataSource);
-        PvpService pvpService = new PvpService(characterDao, battleService, pvpRankDao, new PvpMatchHistoryDao(dataSource));
+        PvpMatchHistoryDao pvpMatchHistoryDao = new PvpMatchHistoryDao(dataSource);
+        PvpService pvpService = new PvpService(characterDao, battleService, pvpRankDao, pvpMatchHistoryDao);
 
         server = HttpServer.create(new InetSocketAddress(0), 0);
         server.createContext("/api/pvp/queue/join", new JoinQueueHandler(pvpService));
@@ -83,6 +85,7 @@ class PvpHttpFlowTest {
         server.createContext("/api/pvp/rank", new RankHandler(pvpService));
         server.createContext("/api/pvp/leaderboard", new RankingListHandler(pvpService));
         server.createContext("/api/admin/pvp/rank/adjust", new AdminAdjustPvpRankHandler(userDao, pvpRankDao));
+        server.createContext("/api/admin/pvp/match/history", new AdminPvpMatchHistoryHandler(pvpMatchHistoryDao));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -171,6 +174,13 @@ class PvpHttpFlowTest {
     void adminAdjustPvpRankRequiresAdminToken() throws Exception {
         int userId = newPlayer("Solo");
         var res = post("/api/admin/pvp/rank/adjust", new AdminAdjustPvpRankHandler.Req(userId, 100, false));
+        assertEquals(503, res.statusCode());
+    }
+
+    @Test
+    void adminPvpMatchHistoryRequiresAdminToken() throws Exception {
+        int userId = newPlayer("Solo");
+        var res = get("/api/admin/pvp/match/history?userId=" + userId);
         assertEquals(503, res.statusCode());
     }
 }

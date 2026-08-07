@@ -86,6 +86,7 @@ import vn.dreamtech.game.server.dao.WorldBossContributionDao;
 import vn.dreamtech.game.server.dao.WorldBossCycleDao;
 import vn.dreamtech.game.server.db.DataSourceProvider;
 import vn.dreamtech.game.server.admin.AdminAdjustPvpRankHandler;
+import vn.dreamtech.game.server.admin.AdminPvpMatchHistoryHandler;
 import vn.dreamtech.game.server.admin.AdminAdjustWalletHandler;
 import vn.dreamtech.game.server.admin.AdminBanUserHandler;
 import vn.dreamtech.game.server.admin.AdminLookupUserHandler;
@@ -376,6 +377,7 @@ public final class Main {
         server.createContext("/api/admin/users/unban", new AdminUnbanUserHandler(bannedUserDao));
         server.createContext("/api/admin/users/wallet/adjust", new AdminAdjustWalletHandler(userDao, walletDao));
         server.createContext("/api/admin/pvp/rank/adjust", new AdminAdjustPvpRankHandler(userDao, pvpRankDao));
+        server.createContext("/api/admin/pvp/match/history", new AdminPvpMatchHistoryHandler(pvpMatchHistoryDao));
         server.createContext("/api/admin/users/lookup", new AdminLookupUserHandler(userDao, characterDao, walletDao, levelDao, bannedUserDao));
         server.createContext("/api/admin/guild/disband", new AdminDisbandGuildHandler(guildService));
         server.createContext("/api/admin/guild/kick", new AdminKickMemberHandler(guildService));
