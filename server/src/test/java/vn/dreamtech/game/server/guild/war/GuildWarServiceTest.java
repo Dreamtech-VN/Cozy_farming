@@ -250,6 +250,57 @@ class GuildWarServiceTest {
         assertTrue("ONGOING".equals(war.status()));
     }
 
+    @Test
+    void adminForceEndResolvesOngoingWarByCurrentScore() throws SQLException {
+        int leader = newPlayer("Leader", 20_000);
+        var guild = guildService.create(leader, "Rồng Lửa", "RL", null);
+        int targetLeader = newPlayer("TargetLeader", 20_000);
+        var targetGuild = guildService.create(targetLeader, "Địch", "DC", null);
+        var declared = guildWarService.declare(leader, targetGuild.id());
+
+        var ended = guildWarService.adminForceEnd(declared.warId());
+        assertEquals("RESOLVED", ended.status());
+        assertEquals(null, ended.winnerGuildId());
+
+        var e = assertThrows(GuildException.class, () -> guildWarService.adminForceEnd(declared.warId()));
+        assertEquals(409, e.status());
+    }
+
+    @Test
+    void adminForceEndPicksHigherScoreAsWinner() throws SQLException {
+        int leader = newPlayer("Leader", 20_000);
+        var guild = guildService.create(leader, "Rồng Lửa", "RL", null);
+        int targetLeader = newPlayer("TargetLeader", 20_000);
+        var targetGuild = guildService.create(targetLeader, "Địch", "DC", null);
+        guildWarService.declare(leader, targetGuild.id());
+        BattleStateView view = guildWarService.attack(leader);
+        String battleId = view.battleId();
+
+        int guard = 0;
+        while (guard++ < 2000) {
+            BattleStateView state = battleService.getState(battleId);
+            if (state.status() != BattleStatus.ONGOING) break;
+            int[] swap = findAnyMatchingSwap(state.board());
+            if (swap == null) break;
+            battleService.swap(battleId, swap[0], swap[1], swap[2], swap[3]);
+        }
+        var reported = guildWarService.report(leader, battleId);
+
+        var ended = guildWarService.adminForceEnd(reported.warId());
+        assertEquals("RESOLVED", ended.status());
+        if (reported.scoreA() > reported.scoreB()) {
+            assertEquals(guild.id(), ended.winnerGuildId());
+        } else if (reported.scoreA() < reported.scoreB()) {
+            assertEquals(targetGuild.id(), ended.winnerGuildId());
+        }
+    }
+
+    @Test
+    void adminForceEndUnknownWarRejected() {
+        var e = assertThrows(GuildException.class, () -> guildWarService.adminForceEnd("no-such-war"));
+        assertEquals(404, e.status());
+    }
+
     private static int[] findAnyMatchingSwap(int[][] grid) {
         int rows = grid.length, cols = grid[0].length;
         for (int r = 0; r < rows; r++) {

@@ -135,6 +135,26 @@ public final class GuildWarService {
         }
     }
 
+    public GuildWarView adminForceEnd(String warId) {
+        try {
+            GuildWarDao.War war = warDao.find(warId)
+                    .orElseThrow(() -> new GuildException(404, "Không tìm thấy cuộc chiến"));
+            if (!"ONGOING".equals(war.status())) {
+                throw new GuildException(409, "Cuộc chiến đã kết thúc rồi");
+            }
+            Integer winner;
+            if (war.scoreA() > war.scoreB()) winner = war.guildA();
+            else if (war.scoreB() > war.scoreA()) winner = war.guildB();
+            else winner = null;
+            GuildWarDao.War resolved = new GuildWarDao.War(war.id(), war.guildA(), war.guildB(), war.scoreA(), war.scoreB(),
+                    "RESOLVED", war.startedAt(), war.endsAt(), winner);
+            warDao.save(resolved);
+            return toView(resolved);
+        } catch (SQLException e) {
+            throw new GuildException(500, "Lỗi buộc kết thúc Guild War: " + e.getMessage());
+        }
+    }
+
     private void requireNoActiveWar(int guildId) throws SQLException {
         if (warDao.findActiveByGuild(guildId).isPresent()) {
             throw new GuildException(409, "Guild đang trong 1 cuộc chiến khác chưa kết thúc");

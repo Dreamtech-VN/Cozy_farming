@@ -798,6 +798,63 @@ cũ.
       Test: `CharacterDaoTest` thêm 2 test (đổi tên chỉ đổi đúng field tên,
       đổi tên user chưa có nhân vật trả về false); `CharacterFlowTest`
       thêm 1 test (endpoint đòi hỏi `ADMIN_TOKEN`).
+- [x] **Giai đoạn 34 — admin chỉnh rank PvP**: trước đây admin chỉnh được
+      ví (`AdminAdjustWalletHandler`) nhưng không có cách nào sửa/reset
+      rating PvP khi phát hiện gian lận/exploit trong queue hoặc report
+      score.
+      - `POST /api/admin/pvp/rank/adjust` {userId, ratingDelta, resetStats}
+        — tái dùng `PvpRankDao.find`/`save` có sẵn (không thêm method DAO
+        mới); `ratingDelta` cộng dồn vào rating hiện tại, kẹp về 0 (khớp
+        cách `WalletDao.adjustGold`/`adjustDiamond` đã làm); `resetStats`
+        = true thì đưa wins/losses/draws về 0. Cần header `X-Admin-Token`.
+      Test: `PvpHttpFlowTest` thêm 1 test (endpoint đòi hỏi `ADMIN_TOKEN`).
+- [x] **Giai đoạn 35 — admin force-reset trùm thế giới**: chu kỳ World
+      Boss chỉ tự phát hiện hết hạn khi có request tiếp theo (không cron,
+      khớp thiết kế `GuildBossCycleDao`), nên nếu chu kỳ bị kẹt (VD: lỗi
+      khiến HP không về đúng trạng thái) thì không có cách nào GM can
+      thiệp trước khi hết hạn tự nhiên (24h).
+      - `WorldBossService.adminForceReset()` (method MỚI) — dùng lại đúng
+        logic tạo chu kỳ mới của `getOrResetCycle` (POOL_HP đầy, mốc thời
+        gian mới) rồi `save` ngay, không đợi hết hạn.
+      - `POST /api/admin/worldboss/reset` — không cần body. Cần header
+        `X-Admin-Token`.
+      Test: `WorldBossServiceTest` thêm 1 test (reset giữa chừng đưa HP về
+      đầy, cho phép người vừa đánh xong đánh lại ngay); `WorldBossHttpFlowTest`
+      thêm 1 test (endpoint đòi hỏi `ADMIN_TOKEN`).
+- [x] **Giai đoạn 36 — admin force-reset trùm guild**: cùng lỗ hổng như
+      trùm thế giới (giai đoạn 35) nhưng cho `GuildBossCycleDao` — mỗi
+      guild có 1 chu kỳ riêng, không cách nào GM can thiệp nếu bị kẹt.
+      - `GuildBossService.adminForceReset(guildId)` (method MỚI) — cùng
+        khuôn với `WorldBossService.adminForceReset`.
+      - `POST /api/admin/guild/boss/reset` {guildId}. Cần header
+        `X-Admin-Token`.
+      Test: `GuildBossServiceTest` thêm 1 test (reset giữa chừng đưa HP về
+      đầy, cho phép đánh lại ngay); `GuildBossHttpFlowTest` thêm 1 test
+      (endpoint đòi hỏi `ADMIN_TOKEN`).
+- [x] **Giai đoạn 37 — admin tra cứu lịch sử đấu PvP**: `PvpMatchHistoryDao`
+      trước đây chỉ ghi (`record`), không có cách nào đọc lại — GM không
+      thể kiểm tra khi có report tố cáo gian lận/dispute kết quả trận đấu.
+      - `PvpMatchHistoryDao.listByUser(userId, limit)` (method MỚI) — trận
+        mà user là player_a HOẶC player_b, mới nhất trước.
+      - `GET /api/admin/pvp/match/history?userId=&limit=` — `limit` mặc
+        định 20, kẹp tối đa 100. Cần header `X-Admin-Token`.
+      Test: `PvpMatchHistoryDaoTest` thêm 3 test (lấy đúng trận theo 2 vai
+      trò, giới hạn limit, rỗng khi chưa đấu); `PvpHttpFlowTest` thêm 1
+      test (endpoint đòi hỏi `ADMIN_TOKEN`).
+- [x] **Giai đoạn 38 — admin can thiệp hôn nhân**: `MarriageDao.deleteByUser`
+      và `MarriageProposalDao.delete` đã có sẵn (dùng cho ly hôn/từ chối tự
+      nguyện) nhưng chưa có đường admin nào dùng lại — GM không thể huỷ hôn
+      nhân gian lận (VD: farm tiền nhẫn qua cưới/ly hôn liên tục) hay huỷ 1
+      lời cầu hôn bị report spam/quấy rối mà không cần chính chủ thao tác.
+      - `POST /api/admin/marriage/annul` {userId} — dùng lại đúng logic
+        `DivorceHandler` (xoá hôn nhân + áp cooldown tái hôn cho cả hai),
+        chỉ khác ở chỗ không cần chính chủ gọi. 404 nếu chưa kết hôn.
+      - `POST /api/admin/marriage/proposal/cancel` {proposalId} — xoá lời
+        cầu hôn đang chờ. 404 nếu không tìm thấy.
+      - Cả hai không thêm method DAO mới, chỉ tái dùng `MarriageDao`/
+        `MarriageProposalDao` có sẵn. Cần header `X-Admin-Token`.
+      Test: `MarriageFlowTest` thêm 2 test (cả hai endpoint đòi hỏi
+      `ADMIN_TOKEN`).
 
 ## Chạy thử
 

@@ -50,4 +50,30 @@ class PvpMatchHistoryDaoTest {
             assertTrue(rs.wasNull());
         }
     }
+
+    @Test
+    void listByUserReturnsMatchesAsEitherPlayerNewestFirst() throws SQLException {
+        dao.record("m1", 1, 2, 100, 50, 1);
+        dao.record("m2", 3, 1, 80, 80, null);
+        dao.record("m3", 2, 3, 10, 20, 3);
+
+        var matches = dao.listByUser(1, 10);
+        assertEquals(2, matches.size());
+        assertEquals("m2", matches.get(0).matchId());
+        assertEquals("m1", matches.get(1).matchId());
+    }
+
+    @Test
+    void listByUserRespectsLimit() throws SQLException {
+        dao.record("m1", 1, 2, 100, 50, 1);
+        dao.record("m2", 1, 2, 80, 80, null);
+
+        var matches = dao.listByUser(1, 1);
+        assertEquals(1, matches.size());
+    }
+
+    @Test
+    void listByUserEmptyWhenNoMatches() throws SQLException {
+        assertTrue(dao.listByUser(999, 10).isEmpty());
+    }
 }

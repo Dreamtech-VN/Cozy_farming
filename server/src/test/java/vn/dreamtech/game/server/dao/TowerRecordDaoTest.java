@@ -65,6 +65,23 @@ class TowerRecordDaoTest {
     }
 
     @Test
+    void resetRecordSetsBestFloorToZero() throws SQLException {
+        dao.updateBestFloorIfHigher(1, 1, 8);
+        dao.resetRecord(1, 1);
+        var records = dao.listByTower(1);
+        assertEquals(1, records.size());
+        assertEquals(0, records.get(0).bestFloor());
+    }
+
+    @Test
+    void resetRecordOnUnknownUserIsNoop() throws SQLException {
+        dao.resetRecord(99, 1);
+        var records = dao.listByTower(1);
+        assertEquals(1, records.size());
+        assertEquals(0, records.get(0).bestFloor());
+    }
+
+    @Test
     void listByTowerOrdersDescendingByBestFloor() throws SQLException {
         dao.updateBestFloorIfHigher(1, 1, 3);
         dao.updateBestFloorIfHigher(2, 1, 10);

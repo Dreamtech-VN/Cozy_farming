@@ -7,6 +7,7 @@ import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import vn.dreamtech.game.server.admin.AdminRevokeCosmeticHandler;
 import vn.dreamtech.game.server.dao.CharacterAppearanceDao;
 import vn.dreamtech.game.server.dao.CharacterDao;
 import vn.dreamtech.game.server.dao.PlayerCosmeticDao;
@@ -80,6 +81,7 @@ class AppearanceFlowTest {
         server.createContext("/api/cosmetics/unlock", new UnlockCosmeticHandler(playerCosmeticDao));
         server.createContext("/api/character/appearance/equip", new EquipCosmeticHandler(characterDao, appearanceDao, playerCosmeticDao));
         server.createContext("/api/character/appearance", new GetAppearanceHandler(appearanceDao));
+        server.createContext("/api/admin/cosmetics/revoke", new AdminRevokeCosmeticHandler(userDao, playerCosmeticDao));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -156,5 +158,12 @@ class AppearanceFlowTest {
     void equipWithoutCharacterRejected() throws Exception {
         var res = post("/api/character/appearance/equip", new EquipCosmeticHandler.Req(99999, "HAT", 51));
         assertEquals(404, res.statusCode());
+    }
+
+    @Test
+    void adminRevokeCosmeticRequiresAdminToken() throws Exception {
+        post("/api/cosmetics/unlock", new UnlockCosmeticHandler.Req(userId, 51));
+        var res = post("/api/admin/cosmetics/revoke", new AdminRevokeCosmeticHandler.Req(userId, 51));
+        assertEquals(503, res.statusCode());
     }
 }

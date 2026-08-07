@@ -89,6 +89,7 @@ class GuildBossHttpFlowTest {
         server.createContext("/api/guild/boss/report", new ReportBossResultHandler(guildBossService));
         server.createContext("/api/guild/boss/status", new BossStatusHandler(guildBossService));
         server.createContext("/api/guild/boss/attack-status", new AttackStatusHandler(guildBossService));
+        server.createContext("/api/admin/guild/boss/reset", new AdminForceResetHandler(guildBossService));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -152,5 +153,13 @@ class GuildBossHttpFlowTest {
 
         var reportOngoing = post("/api/guild/boss/report", new ReportBossResultHandler.Req(leader, battle.get("battleId").getAsString()));
         assertEquals(409, reportOngoing.statusCode());
+    }
+
+    @Test
+    void adminForceResetRequiresAdminToken() throws Exception {
+        int leader = newPlayer("Leader2", 20_000);
+        var guild = guildService.create(leader, "Sói Đêm", "SD", null);
+        var res = post("/api/admin/guild/boss/reset", new AdminForceResetHandler.Req(guild.id()));
+        assertEquals(503, res.statusCode());
     }
 }

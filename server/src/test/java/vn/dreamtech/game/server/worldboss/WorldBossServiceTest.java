@@ -193,6 +193,33 @@ class WorldBossServiceTest {
         return null;
     }
 
+    @Test
+    void adminForceResetStartsFreshCycleWithFullHp() throws SQLException {
+        int userId = newPlayer("Solo");
+        BattleStateView view = worldBossService.attack(userId);
+        String battleId = view.battleId();
+
+        int guard = 0;
+        while (guard++ < 2000) {
+            BattleStateView state = battleService.getState(battleId);
+            if (state.status() != BattleStatus.ONGOING) break;
+            int[] swap = findAnyMatchingSwap(state.board());
+            if (swap == null) break;
+            battleService.swap(battleId, swap[0], swap[1], swap[2], swap[3]);
+        }
+        var report = worldBossService.report(userId, battleId);
+        if (report.damageApplied() > 0) {
+            assertEquals(WorldBossConstants.POOL_HP - report.damageApplied(), worldBossService.status().remainingHp());
+        }
+
+        var reset = worldBossService.adminForceReset();
+        assertEquals(WorldBossConstants.POOL_HP, reset.remainingHp());
+
+        // chu kỳ mới -> người vừa đánh xong được đánh lại ngay
+        BattleStateView again = worldBossService.attack(userId);
+        assertEquals(BattleStatus.ONGOING, again.status());
+    }
+
     private static boolean wouldMatch(int[][] grid, int r1, int c1, int r2, int c2) {
         TileBoard board = new TileBoard(grid.length, grid[0].length);
         for (int r = 0; r < grid.length; r++) for (int c = 0; c < grid[0].length; c++) board.set(r, c, grid[r][c]);

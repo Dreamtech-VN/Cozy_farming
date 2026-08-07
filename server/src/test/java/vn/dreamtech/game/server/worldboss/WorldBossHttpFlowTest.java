@@ -80,6 +80,7 @@ class WorldBossHttpFlowTest {
         server.createContext("/api/world-boss/status", new StatusHandler(worldBossService));
         server.createContext("/api/world-boss/attack-status", new AttackStatusHandler(worldBossService));
         server.createContext("/api/world-boss/leaderboard", new LeaderboardHandler(worldBossService));
+        server.createContext("/api/admin/worldboss/reset", new AdminForceResetHandler(worldBossService));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -136,5 +137,11 @@ class WorldBossHttpFlowTest {
 
         var leaderboard = get("/api/world-boss/leaderboard");
         assertEquals(200, leaderboard.statusCode());
+    }
+
+    @Test
+    void adminForceResetRequiresAdminToken() throws Exception {
+        var res = post("/api/admin/worldboss/reset", null);
+        assertEquals(503, res.statusCode());
     }
 }

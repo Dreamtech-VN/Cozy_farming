@@ -45,6 +45,19 @@ class PlayerCosmeticDaoTest {
         assertEqualsSize(1, dao.listOwned(1));
     }
 
+    @Test
+    void revokeRemovesOwnership() throws SQLException {
+        dao.unlock(1, 10);
+        dao.revoke(1, 10);
+        assertFalse(dao.isOwned(1, 10));
+    }
+
+    @Test
+    void revokeOnUnownedIsNoop() throws SQLException {
+        dao.revoke(1, 10);
+        assertFalse(dao.isOwned(1, 10));
+    }
+
     private static void assertEqualsSize(int expected, java.util.List<Integer> list) {
         org.junit.jupiter.api.Assertions.assertEquals(expected, list.size());
     }

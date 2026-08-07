@@ -155,6 +155,18 @@ public final class GuildBossService {
         }
     }
 
+    /** GM buộc kết thúc chu kỳ hiện tại của guild và bắt đầu chu kỳ mới ngay lập tức (VD: chu kỳ bị kẹt do lỗi). */
+    public GuildBossStatusView adminForceReset(int guildId) {
+        try {
+            long now = System.currentTimeMillis();
+            GuildBossCycleDao.Cycle fresh = new GuildBossCycleDao.Cycle(guildId, POOL_HP, now, now + CYCLE_MS);
+            cycleDao.save(fresh);
+            return new GuildBossStatusView(guildId, fresh.remainingHp(), POOL_HP, fresh.cycleStartedAt(), fresh.cycleEndsAt());
+        } catch (SQLException e) {
+            throw new GuildException(500, "Lỗi reset chu kỳ trùm guild: " + e.getMessage());
+        }
+    }
+
     private GuildBossCycleDao.Cycle getOrResetCycle(int guildId) throws SQLException {
         Optional<GuildBossCycleDao.Cycle> existing = cycleDao.find(guildId);
         long now = System.currentTimeMillis();
