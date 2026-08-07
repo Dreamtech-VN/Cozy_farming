@@ -10,12 +10,6 @@ import vn.dreamtech.game.server.item.ItemException;
 import java.io.IOException;
 import java.sql.SQLException;
 
-/**
- * POST /api/admin/cosmetics/revoke {userId, itemId} — GM thu hồi 1 vật
- * phẩm làm đẹp mà user đang sở hữu, dùng khi phát hiện gian lận (exploit
- * nhân bản item, lỗi mở khoá không qua thành tựu/shop thật). Cần header
- * X-Admin-Token.
- */
 public final class AdminRevokeCosmeticHandler implements HttpHandler {
     private final UserDao userDao;
     private final PlayerCosmeticDao playerCosmeticDao;

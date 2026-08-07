@@ -10,11 +10,6 @@ import vn.dreamtech.game.server.item.ItemException;
 import java.io.IOException;
 import java.sql.SQLException;
 
-/**
- * POST /api/admin/tower/record/reset {userId, towerId} — GM reset kỷ lục
- * (best_floor) của 1 user trong 1 tháp về 0, dùng khi phát hiện gian lận
- * leo tháp làm sai lệch bảng xếp hạng. Cần header X-Admin-Token.
- */
 public final class AdminResetTowerRecordHandler implements HttpHandler {
     private final UserDao userDao;
     private final TowerRecordDao towerRecordDao;

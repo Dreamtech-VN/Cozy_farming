@@ -9,11 +9,6 @@ import vn.dreamtech.game.server.item.ItemException;
 
 import java.io.IOException;
 
-/**
- * POST /api/admin/guild/war/force-end {warId} — GM buộc kết thúc ngay 1
- * cuộc Guild War đang diễn ra, phân thắng thua theo điểm hiện tại (dùng khi
- * report bị kẹt hoặc 1 bên bỏ cuộc). Cần header X-Admin-Token.
- */
 public final class AdminForceEndHandler implements HttpHandler {
     private final GuildWarService guildWarService;
 

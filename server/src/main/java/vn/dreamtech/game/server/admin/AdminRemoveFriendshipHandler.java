@@ -10,11 +10,6 @@ import vn.dreamtech.game.server.item.ItemException;
 import java.io.IOException;
 import java.sql.SQLException;
 
-/**
- * POST /api/admin/friend/remove {userIdA, userIdB} — GM buộc huỷ kết bạn
- * giữa 2 user, dùng khi xử lý report quấy rối/lạm dụng hệ bạn bè. Cần
- * header X-Admin-Token.
- */
 public final class AdminRemoveFriendshipHandler implements HttpHandler {
     private final UserDao userDao;
     private final FriendshipDao friendshipDao;

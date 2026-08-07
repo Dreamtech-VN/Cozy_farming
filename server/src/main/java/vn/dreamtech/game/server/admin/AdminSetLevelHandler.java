@@ -11,12 +11,6 @@ import vn.dreamtech.game.server.model.LevelInfo;
 import java.io.IOException;
 import java.sql.SQLException;
 
-/**
- * POST /api/admin/level/set {userId, level, exp} — GM tool đặt thẳng
- * level/exp của 1 user (kẹp level về tối thiểu 1, exp về tối thiểu 0), dùng
- * để sửa tài khoản bị lỗi cộng exp hoặc report gian lận lên level bất
- * thường. Cần header X-Admin-Token.
- */
 public final class AdminSetLevelHandler implements HttpHandler {
     private final UserDao userDao;
     private final LevelDao levelDao;

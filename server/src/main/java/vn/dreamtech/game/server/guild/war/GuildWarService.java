@@ -135,12 +135,6 @@ public final class GuildWarService {
         }
     }
 
-    /**
-     * GM buộc kết thúc ngay 1 cuộc chiến đang ONGOING (dùng khi cuộc chiến bị
-     * kẹt/report lỗi/1 bên bỏ cuộc), phân thắng thua theo điểm hiện tại
-     * (bằng điểm -> hoà, không có winner) — giống cách {@code resolveIfExpired}
-     * xử lý khi hết giờ tự nhiên, chỉ khác là bỏ qua mốc thời gian.
-     */
     public GuildWarView adminForceEnd(String warId) {
         try {
             GuildWarDao.War war = warDao.find(warId)

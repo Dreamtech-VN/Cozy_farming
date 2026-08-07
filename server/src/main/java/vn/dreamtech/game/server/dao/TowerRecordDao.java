@@ -51,7 +51,6 @@ public final class TowerRecordDao {
         }
     }
 
-    /** GM reset kỷ lục của 1 user trong 1 tháp về 0 (VD: phát hiện leo tháp gian lận). */
     public void resetRecord(int userId, int towerId) throws SQLException {
         String mergeSql = "MERGE INTO tower_records (user_id, tower_id, best_floor) KEY (user_id, tower_id) VALUES (?, ?, 0)";
         try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(mergeSql)) {
