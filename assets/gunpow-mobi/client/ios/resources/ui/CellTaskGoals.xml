@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CellTaskGoals GUID="{46DF9457-3A38-4134-B321-06716BD5626F}">
+    <WZUIContainer AbsContentSize="680,110" AnchorPoint="0,0" GUID="{70120096-C4A9-4c69-B201-59549F9F18D7}" LuaObjectName="CellTaskGoals" Name="CellTaskGoals" NameCreate="True" RelativePosition="0,0" TouchEnable="False" TouchSwallow="False" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="670,70" GUID="{0FD8FB82-6379-487b-A3F3-6116BAF4E0FF}" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIContainer GUID="{17052945-E2C0-400a-9B1E-3C98C5341AAF}" RelativePosition="0.49,0.5" Type="WZUIContainer">
+                <WZUIContainer AbsContentSize="207,37" AnchorPoint="0,1" GUID="{9A1F5C79-F9B2-48a1-965B-8F552E11356D}" RelativePosition="0,1" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUI9Image File="ui/bottomMenu/task/task_01.png" GUID="{904C1FA6-266D-45be-86C3-EC6D0E93D937}" Type="WZUI9Image" />
+                    <WZUILabelTTF Color="36,0,0" FontSize="24" GUID="{CE7925C5-2D8B-40cd-A286-10BBA1735B11}" Name="txtTitle_CellTaskGoals_name" Text="任务目标" Type="WZUILabelTTF" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIFreeTextBox AnchorPoint="0,0" GUID="{F60F7B4C-5C37-444d-8198-8BB3CB5334DE}" MaxWidth="540" Name="txtTitle_CellTaskGoals" RelativePosition="0.03,0" Type="WZUIFreeTextBox" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTaskGoals>

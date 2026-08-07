@@ -1,0 +1,24 @@
+﻿<WndTips49 GUID="{abf6de35-7258-4efb-b7d8-5e49af834529}">
+    <WZUIWindow AbsContentSize="300,100" AbsPosition="0,0" AnchorPoint="1.02,0.1" GUID="{553cd939-1237-4bc5-9814-527b10864140}" LuaObjectName="WndTips49" Name="WndTips49" NameCreate="True" RelativePosition="0.65,0.5" RelativeSize="1,1" ShowAll="False" TouchContainerEnable="True" TouchEnable="True" TouchSwallow="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="True" Visible="True" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{d7178ae2-6dbe-4d5a-9136-55020b55e9ff}" AbsContentSize="270,312" UseAbsSize="True" Name="conType49_WndTips" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{5bec5df1-48aa-46bc-875d-95222d73994f}" File="ui/common/common_scale9_di24.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{1685bce1-243f-487f-8861-589d04c700df}" AbsContentSize="270,100" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUIContainer Type="WZUIContainer" GUID="{2489c005-2244-4473-8378-a5ed92bcc161}" Name="conHead1_WndTips49" RelativeSize="0.5,0.8" AnchorPoint="0,0.5" RelativePosition="0,0.4" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{14194cec-2381-46ce-a158-94ab0b9c42ad}" File="ui/kid/kidicon/family_scale9_001.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="0.6" Name="" ScaleX="0.6" ScaleY="0.6" AbsPosition="42.592,263.892" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{cb4d6025-81a9-407e-a5a7-b10896432b5a}" FontSize="18" Color="255,236,193" Text="青铜1段" BoldFont="False" RelativePosition="0.5,1" Name="txtKidName1_WndTips49" Alignment="Left" AnchorPoint="0.5,0.5" AbsPosition="96.8,274.952" Visible="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{a3c43f65-3263-41d4-be35-f858202e0957}" Name="conHead2_WndTips49" RelativeSize="0.5,0.8" AnchorPoint="1,0.5" RelativePosition="1,0.4" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{227bf57a-fc4e-4905-b160-7f54aaaf6fa9}" File="ui/kid/kidicon/family_scale9_001.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="0.6" Name="" ScaleX="0.6" ScaleY="0.6" AbsPosition="42.592,263.892" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{d5a416c6-fd6e-4803-8744-29b15528c91b}" FontSize="18" Color="255,236,193" Text="青铜1段" BoldFont="False" RelativePosition="0.5,1" Name="txtKidName2_WndTips49" Alignment="Left" AnchorPoint="0.5,0.5" AbsPosition="96.8,274.952" Visible="True" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{1dd7452c-6737-494b-a5c0-37a4e7ba35ec}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0" ScaleX="1.5" Scale="1.1" AbsPosition="121,222.4" ScaleY="1" AnchorPoint="0.5,0" />
+                <WZUIContainer Type="WZUIContainer" GUID="{8c49ad6e-87c4-4789-9f46-133673497a81}" AbsContentSize="262,150" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0" Name="conProperty_WndTips49" Visible="True">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6330272f-b42b-4161-a018-ad1daf4a3802}" FontSize="22" Color="255,236,193" Text="" BoldFont="False" RelativePosition="0.1,0.836666" Name="txtTotalPro_WndTips49" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="23.1552,124.432" TextKey="CHECKOTHER_TEXT11">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c1d24165-b0e1-475c-a593-5dc9fdbc8d01}" FontSize="20" Color="255,89,74" Text="" BoldFont="False" RelativePosition="1,0.5" Name="txtFighting_WndTips49" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="23.1552,124.432" TextKey="" Visible="False" />
+                    </WZUILabelTTF>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c69f5e25-e18f-4228-a040-bbae2e97583b}" FontSize="20" Color="195,171,148" Text="" BoldFont="False" RelativePosition="0.1,0.66" Name="txtNotCare_WndTips49" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="23.1552,124.432" TextKey="CHECKOTHER_TEXT12" Visible="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTips49>

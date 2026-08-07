@@ -1,0 +1,36 @@
+﻿<CellPvpAmuseItem GUID="{d116f523-2f58-4004-875b-53d2cf04f4e5}">
+    <WZUIContainer Type="WZUIContainer" GUID="{bfda8cf5-04b4-4d2a-acec-c46c1d737f4b}" Name="CellPvpAmuseItem" LuaObjectName="CellPvpAmuseItem" NameCreate="True" AbsContentSize="168,416" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{94d2b9c3-0bae-4ae3-bbe9-25f0d2f1b566}" AbsContentSize="168,416" RelativePosition="0.5,0.5" UseAbsSize="True" Visible="True">
+            <Button Type="WZUIButton" GUID="{94623c1e-a963-4007-bbe1-42d95511242b}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5" Visible="True" LuaDoneFunctionName="onSelectMatch" Tag="" ScaleX="0.85" ScaleY="0.9" Scale="1">
+                <NormalElement Type="WZUIContainer" GUID="{44a3e8c9-9ddb-466b-8dfd-13ef5eb69922}">
+                    <WZUIImage Type="WZUIImage" GUID="{5219bc65-bf06-4cdd-b5bf-d76cf7461cae}" File="ui/pvp/common_pic_jjct8.png" UseOriginSize="True" Name="imgNor_CellPvpAmuseItem" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{a1c6d1a8-05a7-4dae-b85c-0f6409535752}">
+                    <WZUIImage Type="WZUIImage" GUID="{b03b38a1-f19a-4307-8eff-6c7de8292cd3}" File="ui/pvp/common_pic_jjct8.png" UseOriginSize="True" Name="imgSel_CellPvpAmuseItem" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{90f286c3-1abb-48fc-90eb-25ca3cef4eef}" AbsContentSize="168,416" UseAbsSize="True" ScaleX="0.97" ScaleY="0.98" RelativePosition="0.5,0.498885">
+                        <WZUI9Image Type="WZUI9Image" GUID="{0dce536f-c67b-4b2a-8c95-5638557bc472}" File="ui/common/common_shade_chushouheidi.png" Opacity="200" Scale="1" ScaleX="1" ScaleY="1" RelativePosition="0.5,0.5" />
+                    </WZUIContainer>
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{3aabf67a-507f-47d2-a812-073f86993f1e}" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{e5940ea9-8f98-4e21-a424-12dd6063cc4b}" AnchorPoint="0.5,0" RelativePosition="0.5,-0.00721154" RelativeSize="1,0.18">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9886ff91-0121-4d3c-b451-2e8aa42b9998}" LabelStyleKey="C1_F26_S4_C13" TextKey="" RelativePosition="0.5,0.737417" Name="txtGameName_CellPvpAmuseItem" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{038159f4-57d9-40cb-8139-3c4a25286030}" LabelStyleKey="C7_F18" TextKey="" RelativePosition="0.5,0.381292" Name="txtGame_CellPvpAmuseItem" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{a9ef3d20-c365-42aa-a323-5d0b3eb9eb47}" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{a9ce0873-72ae-4db4-9413-c4b9dd5ec9ae}" Scale="0.92" ScaleY="0.98" RelativePosition="0.5,0.500788" ScaleX="0.95" Visible="True" Name="conStateClose_CellPvpAmuseItem">
+                    <WZUI9Image Type="WZUI9Image" GUID="{b5c1e95b-d314-48e6-8853-8a18d5d4a85d}" File="ui/common/common_shade_chushouheidi.png" TouchEnable="False" TouchSwallow="False" Opacity="200" />
+                    <WZUIImage Type="WZUIImage" GUID="{6424d8fe-c7c5-4042-b217-6bd2e5e882d4}" File="ui/common/common_icon_suo.png" UseOriginSize="True" RelativePosition="0.5,0.619659" Scale="0.82" TouchEnable="False" TouchSwallow="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b3c4a142-eb74-4ea9-8830-741a19ffaf12}" LabelStyleKey="C1_F20" Name="ftbOpenTime_CellPvpAmuseItem" Text="" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.0185,0.832" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{74262cf0-32be-4afa-8000-def7eb02c265}" LabelStyleKey="C1_F20" Name="ftbOpenHour_CellPvpAmuseItem" Text="" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.0185,0.78" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7fe3cfa3-16e5-460f-b075-70da57c8df7d}" Name="conStateOpen_CellPvpAmuseItem" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{5e0a25d5-2cfc-44a3-924a-9972f6c5e966}" AbsContentSize="90,30" UseAbsSize="True" RelativePosition="0.28,0.9">
+                        <WZUIImage Type="WZUIImage" GUID="{6bb07dff-914f-4559-a008-21e1151e6876}" File="ui/pvp/common_icon_jjchdkq.png" UseOriginSize="True" RelativePosition="0.5,0.5" Name="imgEventTime_CellPvpAmuseItem" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1ded0979-d4a0-4cc1-882a-d2ce7ee93d6e}" LabelStyleKey="C18_F18_S4_C14" TextKey="PVP_HALL_24" Name="txtEventTime_CellPvpAmuseItem" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellPvpAmuseItem>

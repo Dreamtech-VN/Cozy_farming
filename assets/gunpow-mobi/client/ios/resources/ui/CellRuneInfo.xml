@@ -1,0 +1,22 @@
+﻿<CellRuneInfo GUID="{d9732b92-0559-4bfd-8e55-7a70aaeae1a0}">
+    <WZUIContainer Type="WZUIContainer" GUID="{fbe96f05-391d-48f0-bf49-d52040d4b282}" Name="CellRuneInfo" AbsContentSize="224,98" UseAbsSize="True" LuaObjectName="">
+        <WZUIContainer Type="WZUIContainer" GUID="{561b40a9-4378-40f4-a38d-f9136165550d}" AbsContentSize="240,25" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+            <WZUI9Image Type="WZUI9Image" GUID="{1d924bcc-3587-414f-884f-158aa63a35b1}" File="ui/rune/js_fengexian_01.png" Opacity="127" UseOriginSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" />
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{386a36a3-822f-4adc-99c8-1df9c499b184}" Name="imgRune_CellRuneInfo" UseOriginSize="True" File="" RelativePosition="0.189287,0.601851" Scale="0.85" ScaleX="0.85" ScaleY="0.85" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f420661d-1e75-489c-95d8-e6808ae41dcf}" Name="txtRuneNum_CellRuneInfo" LabelStyleKey="C11_F20" Text="" RelativePosition="0.191983,0.141808" />
+        <WZUIContainer Type="WZUIContainer" GUID="{47c8ecdf-f9c2-48c4-8f1a-d1c5fab71343}" AbsContentSize="170,90" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.497355">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2ecc7680-21df-41a4-897c-f422a20592d5}" Color="255,227,116" FontSize="20" Text="" RelativePosition="0.377709,0.822222" AnchorPoint="1,0.5" Name="txt1_CellRuneInfo" LabelStyleKey="C3_F20" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{cc64059a-b6a0-4465-bbf6-4343c5a02a5b}" Color="99,255,95" FontSize="20" Text="" RelativePosition="0.510526,0.822222" AnchorPoint="0,0.5" Name="txtV1_CellRuneInfo" LabelStyleKey="C15_F20" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c941a624-7ebf-416e-826c-827c03df7b7a}" Color="255,227,116" FontSize="20" Text="" RelativePosition="0.377709,0.533333" AnchorPoint="1,0.5" Name="txt2_CellRuneInfo" LabelStyleKey="C3_F20" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{81b6d2d3-9aa0-4b7a-b91c-7f57a193ed1c}" Color="99,255,95" FontSize="20" Text="" RelativePosition="0.510526,0.577778" AnchorPoint="0,0.5" Name="txtV2_CellRuneInfo" LabelStyleKey="C15_F20" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2e9cf0c9-87f7-430f-a1ff-604a3104e09f}" Color="255,227,116" FontSize="20" Text="" RelativePosition="0.377709,0.244444" AnchorPoint="1,0.5" Name="txt3_CellRuneInfo" LabelStyleKey="C3_F20" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{90cc08a0-19c1-49dd-89dd-e9fec1248529}" Color="99,255,95" FontSize="20" Text="" RelativePosition="0.510526,0.311111" AnchorPoint="0,0.5" Name="txtV3_CellRuneInfo" LabelStyleKey="C15_F20" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{4049608b-7b95-43da-b35f-af9050f0ff15}" LuaDoneFunctionName="onClickRuneCell">
+            <NormalElement Type="WZUIContainer" GUID="{a2179ee2-554d-4865-b901-ebd050bcbfc4}" />
+            <SelectElement Type="WZUIContainer" GUID="{6b8a9f0c-34af-4642-90d5-98f3c6fd47d5}" />
+            <DisableElement Type="WZUIContainer" GUID="{aa98312f-d25e-48fc-a37f-2baa76f7c29f}" />
+        </Button>
+    </WZUIContainer>
+</CellRuneInfo>

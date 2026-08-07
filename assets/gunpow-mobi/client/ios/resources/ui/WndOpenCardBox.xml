@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<WndOpenCardBox GUID="{6d457e52-3fcf-4a7b-abae-cbf9655cac18}">
+    <WZUIWindow Type="WZUIWindow" GUID="{c5bead72-e3eb-4cad-9eb2-afdf305e7324}" LuaObjectName="WndOpenCardBox" Name="WndOpenCardBox" AbsContentSize="585,530" UseAbsSize="True" NameCreate="True" LuaTouchBeganFunction="" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{a7954f41-d9a8-408b-bca9-e1013df7e8fb}" AbsContentSize="585,530" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{71271be9-f3b3-4a3a-9731-748c71700961}" AnchorPoint="0.5,0.5" AbsContentSize="585,530" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{8c148dee-2d29-45f7-8f9e-7205d0749b18}" File="ui/common/common_scale9_di5.png" CapInsets="92,80,1,1" ShowRect="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{76112be2-a957-49e2-81d3-119dcadc3fd1}" AbsContentSize="90,65" UseAbsSize="True" RelativePosition="0.93,0.94">
+                <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsContentSize="90,65" UseAbsSize="True" GUID="{165992ef-aa4e-467f-8b63-e2b5ce41df7a}" LuaDoneFunctionName="onCloseClick" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{86fd6b15-8181-4d3b-acb9-815264a368da}">
+                        <WZUIImage Type="WZUIImage" GUID="{977e973d-5228-4496-9eb3-fba440367eba}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{71bc6b80-90b9-4b16-b87c-29496cd12708}">
+                        <WZUIImage Type="WZUIImage" GUID="{09ab24bf-2137-4bfd-9161-095df7eeb7f6}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{927631e2-41ad-43f9-9406-14c158e12233}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{e626c8f4-e4dc-43f7-a149-5c2b58e84d93}" AbsContentSize="70,50" UseAbsSize="True" RelativePosition="0.5,0.939394">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8d7d053e-74f9-4ff8-b1a9-1ea5084591a4}" FontSize="26" Text="" Color="255,236,193" Name="txtTitle_WndOpenCardBox" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" TextKey="" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{319c0cc1-3705-48e9-8420-00dc57753b28}" AbsContentSize="573,382" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.89">
+                <WZUI9Image Type="WZUI9Image" GUID="{71c36cbb-4783-4c2a-af6d-27d8e5306d69}" File="ui/common/common_scale9_di6.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{e72a2ee4-a292-4de9-b05f-9d7e30baa928}" AbsContentSize="551,180" UseAbsSize="True" RelativePosition="0.5,1" AnchorPoint="0.5,1" Name="conTopInfo_WndOpenCardBox">
+                    <WZUIContainer Type="WZUIContainer" GUID="{ae9f9304-2c65-4cda-a555-9ec6d63f70e4}" Name="conCardBox_WndOpenCardBox" AbsContentSize="111,123" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="0.4,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{a2eb0981-2f28-4dcd-90ad-416db4c367d1}" File="" Name="imgCardBoxIcon_WndOpenCardBox" />
+                        <WZUIImage Type="WZUIImage" GUID="{c7d77a07-f3a2-4b1c-88c3-feef03c0c53d}" File="" Name="imgSection_WndOpenCardBox" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{7be7bbd0-91d1-4b00-8383-2a221c70588b}" AbsContentSize="140,30" UseAbsSize="True" Name="conCDTime_WndOpenCardBox">
+                            <WZUIImage Type="WZUIImage" GUID="{711f449c-0a36-4ee6-a1af-a52eb9a35ef0}" File="ui/common/common_scale9_heidi1.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{cafb4223-0790-4f3f-aed3-76b731254e8c}" Name="txtTime_WndOpenCardBox" FontSize="22" Color="255,89,74" StrokeSize="4" StrokeColor="158,0,0" Text="" EnableStroke="True" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{470304f0-0840-41d0-8919-eafadca11878}" AbsContentSize="300,180" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.45,0.5">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{60dfc9ec-2431-45bc-b42d-13ac3a18b81e}" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" Name="txtCardBoxName_WndOpenCardBox" AnchorPoint="0,0.5" RelativePosition="0,0.9" FontSize="22" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{5a032fd3-4e70-4432-9318-4ee255c88edb}" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0,0.75" Name="txtFreeText1_WndOpenCardBox" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{d56a8e2d-c0fa-4b6f-b748-e19f21524cce}" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0,0.6" Name="txtFreeText2_WndOpenCardBox" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{02298c50-f4e8-428e-bb7b-9643c703e104}" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0,0.45" Name="txtFreeText3_WndOpenCardBox" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{55543145-2244-4ace-9f24-3bad2e35c7fc}" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0,0.3" Name="txtFreeText4_WndOpenCardBox" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{94664dba-793a-48cf-8f97-88e7d1cd7609}" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0,0.15" Name="txtFreeText5_WndOpenCardBox" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{dd193ab1-2157-4f73-a11d-b5d56e2fa2b9}" AbsContentSize="551,200" UseAbsSize="True" RelativePosition="0.5,0.29">
+                    <WZUI9Image Type="WZUI9Image" GUID="{9f86a42c-f1a5-4144-86ee-24a5664cb539}" File="ui/common/common_scale9_di7.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{0a2f720a-54bc-463f-844f-2a55c9b4705d}" FontSize="22" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" TextKey="CARD_TEXT9" RelativePosition="0.5,0.89" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{dc3cc97a-7aea-424d-a825-17a60ff76f7c}" AnchorPoint="0.5,0" RelativePosition="0.5,0.04" RelativeSize="0.92,0.77" Name="conCardList_WndOpenCardBox" UseAbsSize="False" AbsContentSize="">
+                        <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{d2ff00c5-1cac-4698-9c81-bce089b637b7}" Name="flconCardList_WndOpenCardBox" EnableMoveVertical="False" ListOrient="Horizontal" ListItemInterval="15" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{c601fdda-e443-4c0f-a90e-f98926d01dbe}" AbsContentSize="575,80" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0.0150943">
+                <Button Type="WZUIButton" GUID="{ca884496-798b-4561-a686-565f95433f50}" LuaActionName="Normal" LuaDoneFunctionName="onClickOpen" AbsContentSize="142,65" UseAbsSize="True" Name="btnOpen_WndOpenCardBox">
+                    <NormalElement Type="WZUIContainer" GUID="{8969500c-5f41-4577-9858-b3f98628b597}">
+                        <WZUIImage Type="WZUIImage" GUID="{91484fb7-987d-4917-b900-cbfb7366bd3c}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{b3ddacd5-4e9f-47ce-aa21-02d5664010fe}">
+                        <WZUIImage Type="WZUIImage" GUID="{5f40586e-4594-41f8-9a7d-cb172dfae9a5}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{13b6f635-b568-456d-85ca-1d6898c1444b}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b4aae75c-111a-4463-8c67-35e9a54f3aae}" LabelStyleKey="" TextKey="" Name="txtBtnText_WndOpenCardBox" Color="255,236,193" FontSize="26" StrokeColor="0,72,3" StrokeSize="4" EnableStroke="True" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndOpenCardBox>

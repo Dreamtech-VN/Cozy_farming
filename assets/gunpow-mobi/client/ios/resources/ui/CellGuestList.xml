@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" ?>
+<CellGuestList GUID="{E589B967-FF43-4cbb-9D60-63FD0B30AB4E}">
+    <WZUIContainer AbsContentSize="100,100" GUID="{AF1C2556-43AB-49c0-85AC-34B781AE656B}" LuaObjectName="" Name="CellGuestList" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer GUID="{53E3AE7A-E202-435a-BE7B-B4FE1C096834}" Name="conShow_CellGuestList" Type="WZUIContainer" Visible="true">
+            <WZUIContainer Type="WZUIContainer" GUID="{C6ADE347-DB45-418f-8226-814DF2377645}" Name="conPlayer_CellGuestList" AbsContentSize="96,96" UseAbsSize="True" Visible="True" RelativePosition="0.5,0.0600001">
+                <WZUIImage Type="WZUIImage" GUID="{995048C1-D9D7-4a43-BB95-BEC4C71A9FA9}" File="ui/common/common_icon_yy.png" UseOriginSize="True" TouchEnable="False" RelativePosition="0.48,0.0799999" Visible="True" AbsPosition="65.28,16" />
+            </WZUIContainer>
+            <WZUILabelTTF Alignment="Right" AnchorPoint="0.5,0.5" Color="0,0,255" FlipX="False" FontSize="35" GUID="{7C7C2AC9-FB3C-4bc5-9AB8-B82773D33818}" Name="txtPlayerId_CellGuestList" RelativePosition="0.26,1.70516" Text="765" Type="WZUILabelTTF" Visible="False" />
+            <WZUILabelTTF Color="255,255,255" Dimensions="0,0" FontSize="20" GUID="{1B98CC65-3CD7-4a1e-B13D-89164EFDA654}" MaxLength="12" Name="txtPlayerName_CellGuestList" RelativePosition="0.5,1.43" Text="" Type="WZUILabelTTF" Visible="True" EnableStroke="True" StrokeSize="4" StrokeColor="62,34,8" AnchorPoint="0.5,1" AbsPosition="50,143" />
+            <WZUIContainer Type="WZUIContainer" GUID="{3851A0B5-6713-4070-B565-E89CCD82B9D2}" AbsContentSize="96,96" UseAbsSize="True" TouchEnable="False" RelativePosition="0.5,0.0800001" Visible="False">
+                <WZUISpine Type="WZUISpine" GUID="{ACFFDEC7-E87D-4a51-968C-10A41F6395FA}" Name="spineEnterOrExit_CellGuestList" FileJson="city/ui_main_teleport.json" FileAtlas="city/ui_main_teleport.atlas" AnimationName="2" Visible="True" UseOriginSize="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{4D9D3C3F-01AC-45c3-8E16-B63B1A5808A0}" AbsContentSize="176,94" UseAbsSize="True" RelativePosition="0.5,1.58849" Name="conBlessings_CellGuestList" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{FB88C978-6A95-4ffd-9686-E9C2C1454E7F}" File="ui/common/common_icon_duihuakuang.png" AbsPosition="0,0" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{B06AA0F2-8048-4b37-93B4-F35E621ABFD7}" Color="128,54,13" FontSize="20" Text="" RelativePosition="0.498931,0.829787" BoldFont="False" EnableStroke="False" StrokeColor="255,89,74" Name="txtBlessings_CellGuestList" Dimensions="150,60" Alignment="Center" MaxLength="14" StrokeSize="4" AnchorPoint="0.5,1" TextKey="" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellGuestList>

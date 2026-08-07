@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<WndSpaceView GUID="{A1B662E9-C8D9-4355-B15B-08F810955FFB}">
+    <WZUIWindow AbsContentSize="0,0" GUID="{75B4E77E-B4DF-4da2-945F-4CF3B1551307}" LuaObjectName="WndSpaceView" Name="WndSpaceView" NameCreate="True" RelativePosition="0.5,0.5" ShowAll="False" Type="WZUIWindow" UseAbsSize="False" Visible="True" AbsPosition="480,320" Order="0">
+        <WZUI9Image Type="WZUI9Image" GUID="{CEE23E34-C838-48db-A56B-6687FF812660}" File="ui/common/common_scale9_zhezhao1.png" ScaleX="1.5" />
+        <WZUIImage Type="WZUIImage" GUID="{AF8280A5-E3B7-47a6-89B1-9572729C6276}" Name="imgWndSpaceView" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="480,320" />
+        <Button Type="WZUIButton" LuaDoneFunctionName="onClose" GUID="{6739BB74-149F-447e-97AD-BB145F052175}">
+            <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{00D3CE47-4A65-4567-B579-A59F0F77E057}" />
+            <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{9AAD56CC-842E-43f9-9094-857A177A101B}" />
+            <DisableElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{32DE4A30-BAA6-43d7-9428-EA206A991409}" />
+        </Button>
+    </WZUIWindow>
+</WndSpaceView>

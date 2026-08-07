@@ -1,0 +1,26 @@
+﻿<CellPhantomUse GUID="{97ccb63d-41ee-43a3-81d6-f58d25accce4}">
+    <WZUIContainer AbsContentSize="140,180" GUID="{c1588409-d20c-4e38-bb3c-fad0d17d08db}" LuaObjectName="CellPhantomUse" Name="CellPhantomUse" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{8b02e414-42d1-4e93-b585-4e6b274b4508}" AbsContentSize="140,140" UseAbsSize="True" RelativePosition="0.5,0.47" TouchEnable="False" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{b9742e75-7d5b-4589-bf3b-3a3720210146}" File="ui/common/common_scale9_beibaodi_sel.png" Name="imgHighlight_CellPhantomUse" TouchEnable="False" RelativePosition="0.5,0.5" Visible="False" />
+        </WZUIContainer>
+        <WZUI9Image File="ui/common/common_scale9_di75.png" GUID="{e7733375-703a-49be-bc88-0c3e24912961}" RelativePosition="0.5,0.487515" RelativeSize="1,1" Type="WZUI9Image" Visible="True" TouchEnable="False" UseOriginSize="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{cce48596-221e-45b3-80b9-ac6fec85ce3c}" UseAbsSize="True" AbsContentSize="116,96" RelativePosition="0.5,0.55">
+            <WZUIImage Type="WZUIImage" GUID="{28c6fc98-1875-4da9-a88f-193591a6c47c}" File="ui/common/common_scale9_beibaodi.png" />
+            <WZUIImage Type="WZUIImage" GUID="{4a552a28-33f7-470c-ae64-42ab71b4b897}" Name="imgMonster" File="ui/card/monster_0016.png" UseOriginSize="True" Scale="0.7" RelativePosition="0.49,0.5" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="140,180" AnchorPoint="1,1" GUID="{7a909200-e50a-464f-8c77-d2e6225b9313}" RelativePosition="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True" TouchEnable="False" TouchSwallow="False">
+            <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Color="99,255,95" FontSize="22" GUID="{2c9fdc3b-ab5c-472c-a47b-dc93b195710a}" MaxLength="10" Name="ttfName_CellPhantomUse" Order="1" RelativePosition="0.5,0.88" Text="名称" Type="WZUILabelTTF" TouchEnable="False" AbsPosition="114,67" Visible="True" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="2" />
+            <WZUIContainer AbsContentSize="85,85" GUID="{475b00f8-1a69-4263-9642-53562f7ba9ff}" Name="conItem" RelativePosition="0.5,0.55" Type="WZUIContainer" UseAbsSize="True" />
+        </WZUIContainer>
+        <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onUse" GUID="{cf6a918b-8aec-4228-b3e4-c879c235ed42}" AbsContentSize="120,60" UseAbsSize="True" RelativePosition="0.5,0.15" Scale="0.8" LuaActionName="Normal">
+            <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{005c8a1a-0bf4-4ad0-8ca1-96d94063c04f}">
+                <WZUI9Image Type="WZUI9Image" GUID="{831a266e-ca2d-4901-bbbf-e9162eafa1f7}" File="ui/common/common_btn_anniu10_0.png" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{7cdf50d4-2c77-494d-b222-2c45e3b453d6}">
+                <WZUI9Image Type="WZUI9Image" GUID="{9db933f3-b9e8-4698-9aad-0934de0626e2}" File="ui/common/common_btn_anniu10_0_sel.png" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{f99332bd-d1a4-48df-806f-e00e692329c2}" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c04348b2-196b-4e53-834e-cecc1b032835}" TextKey="USE" LabelStyleKey="NORMAL_GREEN_BTN" />
+        </WZUIButton>
+    </WZUIContainer>
+</CellPhantomUse>

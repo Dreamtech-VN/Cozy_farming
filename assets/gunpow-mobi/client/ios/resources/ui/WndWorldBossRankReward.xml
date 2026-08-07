@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<WndWorldBossRankReward GUID="{95D4191A-611C-4e96-99F9-008CDFA7D2DF}">
+    <WZUIWindow AbsContentSize="700,600" GUID="{5A52C47C-B3FC-48f2-9EA4-F2160192C5B7}" LuaObjectName="WndWorldBossRankReward" Name="WndWorldBossRankReward" NameCreate="True" Type="WZUIWindow" UseAbsSize="True">
+        <WZUIContainer GUID="{6EEEA749-4610-4b5e-96AA-B210B7DFF7C9}" Type="WZUIContainer">
+            <WZUI9Image CapInsets="150,80,1,1" File="" GUID="{6AFBC3F1-1037-4f7b-96A8-74ABE53180EA}" Type="WZUI9Image" />
+            <WZUIContainer Type="WZUIContainer" GUID="{C53EA84A-32AC-42ed-9C37-167284482749}" AbsContentSize="680,520" UseAbsSize="True" RelativePosition="0.5,0.46">
+                <WZUI9Image Type="WZUI9Image" GUID="{54349C97-C4B3-4a2b-AA5D-06BF0FC21E7C}" File="" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{2ACA6FBD-1924-4720-BEBC-3EDB3BE237E5}" AbsContentSize="665,500" UseAbsSize="True" RelativePosition="0.5,0.454078">
+                <WZUI9Image Type="WZUI9Image" GUID="{517F0744-6530-4a23-8F6B-B39523B4B41B}" File="" ShowRect="False" CapInsets="10,10,470,500" RelativePosition="0.5,0.5" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="655,490" GUID="{211A095A-7004-49cb-9EDF-1027779D21D5}" RelativePosition="0.5,0.455" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <WZUI9Image File="" GUID="{CF4CB9CB-E1E9-4d16-BA4C-79F590B5F7F2}" Type="WZUI9Image" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="675,100" GUID="{38508C30-6685-4a41-A060-D7CEF9C8E673}" RelativePosition="0.5,0.816767" Type="WZUIContainer" UseAbsSize="True">
+                <WZUILabelTTF Color="246,225,225" EnableStroke="True" FontSize="24" GUID="{1D92A675-AEBB-4a4b-B888-C35451FDEEF5}" Name="txtTips_1_WndWorldBossRankReward" StrokeColor="60,19,12" StrokeSize="3" Text="" Type="WZUILabelTTF" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.031356,0.5" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{9B4B6060-85B9-4f9b-9718-92EAFE9F1B2D}" RelativePosition="0.5,0.496666" Type="WZUIContainer">
+            <WZUIImage File="" GUID="{24F0A7BF-0755-46e5-96EF-F49649D35EDC}" RelativePosition="0.147726,0.941869" Type="WZUIImage" UseOriginSize="True" />
+            <WZUIImage File="" GUID="{09521700-137F-46e6-A57C-403ABB39ABCA}" RelativePosition="0.150347,0.939504" Type="WZUIImage" UseOriginSize="True" />
+            <WZUIContainer AbsContentSize="58,56" AnchorPoint="1,1" GUID="{5CA70C39-00DC-49da-8EA1-42FA2A0A263F}" Name="conClose_WndWorldBossRankReward" RelativePosition="0.989891,0.988175" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage File="" GUID="{93F34911-FF59-4e0d-BD3A-CE763292618F}" Type="WZUIImage" UseOriginSize="True" />
+                <WZUIButton AbsContentSize="150,100" AnchorPoint="0,1" GUID="{B477D7F8-206B-4bca-9E4D-C22C371E9EB2}" LuaDoneFunctionName="onCloseClick" Name="onCloseClick_RankReward" Order="2" RelativePosition="-0.462003,1.1779" Scale="0.75" ShowAll="False" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{695819D5-CF3A-4cb1-A863-E20E47C4A49F}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{80AC1909-295B-4ebd-A94F-21B7B5D53BAB}" Type="WZUIImage" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{1ABC5B96-0FF3-4629-BE0B-32A1A2FD0E7A}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{52899133-67CC-4d7d-8B02-DA97ABA72A7B}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{272A740A-80FF-4cc8-9360-6EC5BD162F34}" TouchContainerEnable="True" Type="WZUIContainer" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="640,430" GUID="{0530D92E-D9A7-47b4-9941-6D9F774006B8}" RelativePosition="0.5,0.421666" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIContainer AbsContentSize="640,420" GUID="{67B1C15E-945F-451d-B685-05A36E083EF1}" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUIFreeListContainer AbsContentSize="640,420" EnableMoveHorizontal="False" GUID="{B8A31E50-86BF-4260-A21F-F7A1196C9199}" Name="flRankRewardList_WndRankReward" Type="WZUIFreeListContainer" UseAbsSize="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndWorldBossRankReward>

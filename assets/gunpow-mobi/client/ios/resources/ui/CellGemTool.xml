@@ -1,0 +1,25 @@
+﻿<CellGemTool GUID="{cef8594d-3c41-4c5b-b1eb-476309544e39}">
+    <WZUIContainer Type="WZUIContainer" GUID="{3a5e30c8-632a-4795-8c7a-3a4ea17c7b29}" Name="CellGemTool" NameCreate="True" AbsContentSize="734,130" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{89738386-663f-4c39-89a7-742565f908e7}">
+            <WZUI9Image Type="WZUI9Image" GUID="{efa79bd6-0d9c-4661-b07f-054fd2a447b8}" File="ui/common/common_scale9_di18.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{781b5934-e2b7-40ae-b643-d9edde907100}" RelativeSize="0.5,1">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d98deb6d-9c14-40de-993d-7f931d750ab0}" AnchorPoint="0,0.5" RelativePosition="0,0.8" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="127,70,26" StrokeSize="4" Name="txtToolName_CellGemTool" Text="木稿子" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c2862b74-5b93-4ef9-9a04-14faf6581ed5}" FontSize="20" Color="127,70,26" AnchorPoint="0,0.5" Name="txtTotalTime_CellGemTool" RelativePosition="0,0.58" Text="挖矿时间" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c7e00fee-4b9e-4b29-a14e-66a5530d5c5e}" FontSize="20" Color="127,70,26" AnchorPoint="0,0.5" Name="txtEfficiency_CellGemTool" RelativePosition="0,0.38" Text="挖矿时间" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{486a54e0-40ab-4dc7-8936-c4366e188b62}" FontSize="20" Color="127,70,26" AnchorPoint="0,0.5" Name="txtAddExp_CellGemTool" RelativePosition="0,0.18" Text="挖矿时间" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{459578d9-c111-4db2-8d75-8e14db29ae42}" AbsContentSize="116,56" UseAbsSize="True" LuaActionName="Normal" LuaDoneFunctionName="onClickBtn" RelativePosition="0.89,0.35">
+                <NormalElement Type="WZUIContainer" GUID="{51e2fcba-a99b-4e0c-af50-bfea0e1f32bf}">
+                    <WZUIImage Type="WZUIImage" GUID="{19fb9619-a2b5-40fa-a406-9537e43467ae}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{80fe54bd-288f-40db-9947-95fb8e367a33}">
+                    <WZUIImage Type="WZUIImage" GUID="{1cc5a842-cc80-4409-80d0-5fa8c2b409b9}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{7a617303-60c5-4507-9d64-ae5712eec7af}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{cba4b745-cee6-42a6-9f1f-d6e768bd46f3}" FontSize="24" Color="255,236,193" EnableStroke="True" LabelStyleKey="SMALL_GREEN_BTN" Name="txtBtnText_CellGemTool" />
+            </Button>
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{bf3df783-295e-41d1-a5eb-bee409db41cd}" Name="ftxtPrice_CellGemTool" RelativePosition="0.86,0.75" MaxWidth="300" />
+            <WZUIImage Type="WZUIImage" GUID="{e27c0a15-989c-49b3-ad9d-491be365a9cd}" File="ui/digGem/common_icon_jggz.png" UseOriginSize="True" RelativePosition="0.13,0.5" Name="imgIcon_CellGemTool" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellGemTool>

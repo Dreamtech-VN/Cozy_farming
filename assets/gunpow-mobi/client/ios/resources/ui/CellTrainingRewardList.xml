@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" ?>
+<CellTrainingRewardList GUID="{4FB9BE54-696F-4391-A9DC-E17EC1597BE7}">
+    <WZUIContainer AbsContentSize="587,130" GUID="{0582DCEA-5ADF-4128-89CE-7353A1BB8574}" LuaObjectName="" Name="CellTrainingRewardList" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="465,320" ShowAll="False">
+        <WZUIContainer GUID="{D3CFFE07-D4A5-441b-8410-A3CEC7227D25}" RelativePosition="0.5,0.5" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" AbsPosition="-14.2342,107.962" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{1A10E7D4-6BAC-4ddf-9602-B82B5EA12E9E}" Visible="True" Name="conBg_CellTrainingRewardList">
+                <WZUI9Image Type="WZUI9Image" GUID="{454D3368-2BCC-4702-B42C-F08E30A2BF4A}" File="ui/common/common_scale9_di18.png" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="116,56" GUID="{0330c7af-1967-4884-a1bb-fa061440d5ce}" RelativePosition="0.874114,0.355" Scale="1" ScaleX="1" Type="WZUIContainer" UseAbsSize="True" ScaleY="1" AnchorPoint="0.5,0.5" Name="conState_CellTrainingRewardList" Visible="True">
+                <WZUILabelTTF Color="255,255,255" FontSize="24" GUID="{be9fe31b-998f-4f44-ba73-cc1574b8fa45}" Name="txtReward_CellTrainingRewardList" Scale="1" ShadowColor="" StrokeColor="78,38,5" StrokeSize="1" Text="" Type="WZUILabelTTF" ScaleX="1" ScaleY="1" LabelStyleKey="C6_F22" TextKey="TRAINCAMP_DEC3" RelativePosition="0.489356,1.30248" Visible="True" />
+                <Button GUID="{87235f9a-28f9-423d-b1c9-6939e5e04866}" LuaDoneFunctionName="clickReward" Name="btnReward_CellVipGiftList" Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True" LuaActionName="Normal">
+                    <NormalElement GUID="{942991a7-6c5f-4883-9db6-f904a250e326}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{9eec1d73-0870-4ac7-8874-1e5e889f82be}" Type="WZUI9Image" UseOriginSize="True" />
+                        <WZUILabelTTF Color="255,255,255" FontSize="24" GUID="{6d40afcd-037d-486b-9d65-0d65d327d91b}" Name="txtChallenge1_CellTrainingRewardList" Scale="1" ShadowColor="" StrokeColor="78,38,5" StrokeSize="1" Text="" Type="WZUILabelTTF" ScaleX="1" ScaleY="1" LabelStyleKey="C1_F24_S4_C4" TextKey="CHALLENGEENTRANCE_TITLE" />
+                    </NormalElement>
+                    <SelectElement GUID="{4de90572-6d5c-4ddd-aa50-4056f4a5ba9c}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_anniu10_0_sel.png" GUID="{110faf6e-8884-4c94-890e-f52f8b58c35a}" Type="WZUI9Image" Scale="1" UseOriginSize="True" />
+                        <WZUILabelTTF Color="255,255,255" FontSize="24" GUID="{6ecd6104-3da0-4f50-bbd4-57c67cc18a98}" Name="txtChallenge2_CellTrainingRewardList" Scale="1" ShadowColor="" StrokeColor="78,38,5" StrokeSize="1" Text="" Type="WZUILabelTTF" ScaleX="1" ScaleY="1" LabelStyleKey="C1_F24_S4_C4" TextKey="CHALLENGEENTRANCE_TITLE" />
+                    </SelectElement>
+                    <DisableElement GUID="{a3894486-a630-4f8e-883b-18aa1d807985}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{8dcfb426-f04c-4102-ba37-5d61269e0aa3}" Type="WZUI9Image" UseOriginSize="True" GrayRender="True" />
+                        <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{07f77a90-436a-4eaa-8ff5-d0b301b8c93c}" Name="txtChallenge3_CellTrainingRewardList" Scale="1" ShadowColor="" StrokeColor="70,70,70" StrokeSize="4" Text="" Type="WZUILabelTTF" ScaleX="1" ScaleY="1" LabelStyleKey="" TextKey="CHALLENGEENTRANCE_TITLE" GrayRender="True" EnableStroke="True" />
+                    </DisableElement>
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5de8bb7d-51ee-418d-9ad6-5a5f3fdb2b40}" Name="conReward_CellTrainingRewardList" AbsContentSize="330,40" UseAbsSize="True" RelativePosition="0.467994,0.300526" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{42d5cf65-81ef-4ab7-9a77-c34e0c187940}" AbsContentSize="100,40" UseAbsSize="True" RelativePosition="0.148939,0.495" Name="conLeft1" />
+                <WZUIContainer Type="WZUIContainer" GUID="{b3863b28-bc52-4d9f-a3b5-7fb727145744}" AbsContentSize="100,40" UseAbsSize="True" RelativePosition="0.455,0.495" Name="conLeft2" />
+                <WZUIContainer Type="WZUIContainer" GUID="{99f64d13-f853-4de5-80c4-d75d3791ce30}" AbsContentSize="100,40" UseAbsSize="True" RelativePosition="0.75803,0.495" Name="conLeft3" />
+                <WZUI9Image Type="WZUI9Image" GUID="{212d721a-4dab-47d0-8ffa-5e1875b365d6}" File="ui/common/common_scale9_di8.png" Visible="True" Order="-1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{4deb5ecf-d63c-4eda-a9d7-6925d3bc61ae}" Name="conDec_CellTrainingRewardList">
+                <WZUIImage Type="WZUIImage" GUID="{4cf2e11d-da0d-49ad-bdb4-9af74a099c8a}" Name="imgLevelBg_CellTrainingRewardList" File="ui/common/common_scale9_beibaodi1.png" UseOriginSize="True" RelativePosition="0.0979105,0.524726" Visible="True" />
+                <WZUIImage Type="WZUIImage" GUID="{a32f3906-ef47-4159-b056-e72b03854a6a}" Name="imgLevel_CellTrainingRewardList" File="ui/common/common_icon_xunliany2.png" UseOriginSize="True" RelativePosition="0.0982,0.522" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{757a6c5f-b503-4782-b867-915716acc38c}" Font="" FontSize="22" Color="255,236,192" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" Alignment="Left" AnchorPoint="0,0.5" Text="中级飞行员" RelativePosition="0.188429,0.753389" Name="txtName_CellTrainingRewardList" LabelStyleKey="C5_F20" />
+                <WZUIContainer Type="WZUIContainer" GUID="{e136925e-90a7-4e83-b031-872c9627d48f}" Name="conTextDec_CellTrainingRewardList" Visible="True" AbsContentSize="330,25" UseAbsSize="True" RelativePosition="0.467632,0.56923">
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{2262c05d-a907-47b4-aecd-570346e6586e}" Name="txtDec_CellTrainingRewardList" MaxWidth="400" RelativePosition="0,0.5" ShowText="" AnchorPoint="0,0.5" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTrainingRewardList>

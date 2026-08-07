@@ -1,0 +1,500 @@
+﻿<WndAscending GUID="{715b7c2e-7950-46d5-939b-33b31228635b}">
+    <WZUIWindow AbsContentSize="0,0" GUID="{c5f1bf48-d58c-4a74-af5a-75ba10cfc88d}" LuaObjectName="WndAscending" LuaTouchBeganFunction="onTouchBegan" Name="WndAscending" NameCreate="True" ShowAll="False" Type="WZUIWindow" UseAbsSize="False" LuaTouchEndedFunction="onTouchEnd">
+        <WZUIContainer AbsContentSize="960,640" GUID="{a7f6a0f6-2ce3-47eb-a58e-75d6b6b5ef2e}" Type="WZUIContainer" UseAbsSize="True" Visible="True" TouchSwallow="False" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{632fe339-c33a-49b3-b8ef-a7e4e2e12fc6}" File="ui/common_bg/common_scale9_di2.png" Visible="True" Name="" UseOriginSize="True" Scale="2" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{195f7c3c-24f8-4165-bfec-1ad5b0e3861e}" Name="conMid" RelativeSize="1,0.8" AbsContentSize="0,0" UseAbsSize="False" AnchorPoint="0.5,0" RelativePosition="0.5,0" ShowAll="True" Order="999">
+            <WZUIContainer Type="WZUIContainer" GUID="{0fa46487-ab7e-4e9b-b3ed-7bf56088ca1f}" Name="conMidLeft_WndStrengthen" AbsContentSize="485,550" AnchorPoint="0,0.5" RelativePosition="0.004,0.566" UseAbsSize="True" Order="10" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{dbccbcdd-9e67-49ce-9c69-4b7e8b5b59ab}" AbsContentSize="480,483" UseAbsSize="True" RelativePosition="0.5,0.45">
+                    <WZUI9Image Type="WZUI9Image" GUID="{ddc91422-f8da-4f7f-b56e-e5b58c8c3e53}" File="ui/common/common_scale9_di15.png" RelativePosition="0.5,0.496" />
+                    <WZUIImage Type="WZUIImage" GUID="{a8ef204a-d568-4f58-842e-14eeb8a57131}" File="ui/common/common_icon_diandian.png" UseOriginSize="True" RelativePosition="0.036,0.96" />
+                    <WZUIImage Type="WZUIImage" GUID="{4400aa5b-3190-41dc-a380-bafe1c61ef13}" File="ui/common/common_icon_diandian.png" UseOriginSize="True" RelativePosition="0.96,0.96" AbsPosition="452.2,458.85" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{a978ffc5-dd73-4941-ab61-4984c8c75f0b}" Name="" RelativeSize="0.97,0.1" RelativePosition="0.5,0.949">
+                    <WZUICheckBoxGroup AbsContentSize="500,55" AnchorPoint="0.5,1" GUID="{444daaf6-f509-483f-a922-85af90f44171}" Name="checkGroup" Order="2" RelativePosition="0.5,0.988" Type="WZUICheckBoxGroup" UseAbsSize="False">
+                        <CheckBox AbsContentSize="86,42" AnchorPoint="0.5,0.5" GUID="{6039984a-0d8d-4b70-b3dc-145ea0e1817a}" LuaCheckedFunctionName="onTab1" Name="checkbox1_WndAscending" RelativePosition="0.118,0.278" SelectedIndex="1" Type="WZUICheckBox" UseAbsSize="True" AbsPosition="51.7495,14.3">
+                            <CheckElement GUID="{8ce28afe-05b7-4dd3-bd5c-122cc1f3e379}" RelativePosition="0.5,0.477273" Type="WZUIContainer">
+                                <WZUI9Image File="ui/common/common_btn_biaoqian2.png" GUID="{c0b23878-7c89-4db2-a54d-92c37cfc943f}" Type="WZUI9Image" UseOriginSize="True" Scale="0.82" ScaleX="0.82" ScaleY="0.82" Color="255,255,255" />
+                                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" GUID="{5caf6f58-683e-492c-a1a0-bf75416e4e63}" Name="txtIntensify1_WndStrengthen" RelativePosition="0.5,0.43" StrokeColor="79,60,48" StrokeSize="4" Type="WZUILabelTTF" Text="强化" TextKey="ASCENDING1" />
+                            </CheckElement>
+                            <CheckElement GUID="{92076925-d9e3-4384-950f-bbfe094bbf93}" RelativePosition="0.5,0.524" Type="WZUIContainer" AbsPosition="43,22.034">
+                                <WZUI9Image File="ui/common/common_btn_biaoqian2_sel.png" GUID="{1fe4fd6a-3ad6-4d4c-97a9-bb9815e1175b}" Type="WZUI9Image" Scale="0.95" ScaleX="0.84" ScaleY="0.85" UseOriginSize="True" RelativePosition="0.5,0.47" AbsPosition="43,20" />
+                                <WZUILabelTTF BoldFont="True" Color="79,60,48" EnableStroke="False" FontSize="24" GUID="{f88c323f-19ed-4519-bf8a-1e399347d8be}" Name="txtIntensify2_WndStrengthen" RelativePosition="0.5,0.45" StrokeColor="60,19,12" StrokeSize="1" Type="WZUILabelTTF" Text="强化" TextKey="ASCENDING1" />
+                            </CheckElement>
+                        </CheckBox>
+                        <CheckBox AbsContentSize="86,42" AnchorPoint="0.5,0.5" GUID="{2b72d0d7-4314-46c0-992c-64fe962675fa}" LuaCheckedFunctionName="onTab2" Name="checkbox2_WndAscending" RelativePosition="0.31,0.278" Type="WZUICheckBox" UseAbsSize="True" AbsPosition="142.487,15.3" SelectedIndex="0" Visible="False">
+                            <CheckElement GUID="{c34b9381-dbef-42a2-893b-784fb40c0b68}" Type="WZUIContainer" RelativePosition="0.5,0.477273">
+                                <WZUI9Image File="ui/common/common_btn_biaoqian2.png" GUID="{b110edc3-c266-4900-9da5-ea3b0244755d}" Type="WZUI9Image" UseOriginSize="True" Scale="0.9" ScaleX="0.82" ScaleY="0.82" />
+                                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" GUID="{aa2c7f10-0640-4474-ba07-8aa95a8fb8e4}" Name="txtTransfer1_WndStrengthen" RelativePosition="0.5,0.43" StrokeColor="79,60,48" StrokeSize="4" Type="WZUILabelTTF" Text="转移" TextKey="ASCENDING2" Dimensions="0,0" />
+                            </CheckElement>
+                            <CheckElement GUID="{1938440a-fa58-4c3a-ad2f-5d82ec36e80f}" Type="WZUIContainer" RelativePosition="0.5,0.524" AbsPosition="43,22.0455">
+                                <WZUI9Image File="ui/common/common_btn_biaoqian2_sel.png" GUID="{15cd77d1-a6b5-4890-a126-9d8fc3bbc190}" Type="WZUI9Image" Scale="0.95" ScaleX="0.84" ScaleY="0.85" UseOriginSize="True" RelativePosition="0.5,0.47" AbsPosition="43,20" />
+                                <WZUILabelTTF BoldFont="True" Color="79,60,48" EnableStroke="False" FontSize="24" GUID="{2348daf8-0ee2-4186-ad05-6f7a5f178573}" Name="txtTransfer2_WndStrengthen" RelativePosition="0.5,0.45" StrokeColor="60,19,12" StrokeSize="1" Type="WZUILabelTTF" Text="转移" TextKey="ASCENDING2" />
+                            </CheckElement>
+                        </CheckBox>
+                        <CheckBox AbsContentSize="86,42" AnchorPoint="0.5,0.5" GUID="{57a43879-c978-43e5-96b0-9a11398c6980}" LuaCheckedFunctionName="onTab3" Name="checkbox3_WndAscending" RelativePosition="0.31,0.278" Type="WZUICheckBox" UseAbsSize="True" AbsPosition="142.487,15.3" SelectedIndex="0" Visible="False">
+                            <CheckElement GUID="{27b4090f-b9a0-4dda-8510-3f925080c703}" Type="WZUIContainer" RelativePosition="0.5,0.477273">
+                                <WZUI9Image File="ui/common/common_btn_biaoqian2.png" GUID="{ef51fad3-4382-4cca-a7db-86b841262896}" Type="WZUI9Image" UseOriginSize="True" Scale="0.9" ScaleX="0.82" ScaleY="0.82" />
+                                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" GUID="{bd372608-c06d-46be-944b-c6450af8ae46}" Name="txtTopCheck3_WndAscending" RelativePosition="0.5,0.43" StrokeColor="79,60,48" StrokeSize="4" Type="WZUILabelTTF" Text="转移" TextKey="ASCENDING_FUSE1" />
+                            </CheckElement>
+                            <CheckElement GUID="{b2dbb38e-dc66-4d84-b38e-57eb91957edd}" Type="WZUIContainer" RelativePosition="0.5,0.524" AbsPosition="43,22.0455" />
+                        </CheckBox>
+                        <CheckBox AbsContentSize="86,42" AnchorPoint="0.5,0.5" GUID="{2e215fd2-5f4d-45e4-a73b-23d175e5c3ec}" LuaCheckedFunctionName="onTab4" Name="checkbox4_WndAscending" RelativePosition="0.5,0.278" Type="WZUICheckBox" UseAbsSize="True" AbsPosition="142.487,15.3" SelectedIndex="0" Visible="False">
+                            <CheckElement GUID="{6de243f3-6a9c-4f5b-94fa-21495a1ac5aa}" Type="WZUIContainer" RelativePosition="0.5,0.477273">
+                                <WZUI9Image File="ui/common/common_btn_biaoqian2.png" GUID="{a076e26b-6983-492c-84f6-ea1a13c6442c}" Type="WZUI9Image" UseOriginSize="True" Scale="0.9" ScaleX="0.82" ScaleY="0.82" />
+                                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" GUID="{0c8ef720-36f8-444e-a678-76c14c44a773}" Name="txtTopCheck4_WndAscending" RelativePosition="0.5,0.43" StrokeColor="79,60,48" StrokeSize="4" Type="WZUILabelTTF" Text="转移" TextKey="EVOLUTION" />
+                            </CheckElement>
+                            <CheckElement GUID="{35297c70-670d-42cc-86a5-abb2fe2fa898}" Type="WZUIContainer" RelativePosition="0.5,0.524" AbsPosition="43,22.0455">
+                                <WZUI9Image File="ui/common/common_btn_biaoqian2_sel.png" GUID="{0afecb17-593f-4d24-90fd-4c1c80b51592}" Type="WZUI9Image" Scale="0.95" ScaleX="0.84" ScaleY="0.85" UseOriginSize="True" RelativePosition="0.5,0.47" AbsPosition="43,20" />
+                                <WZUILabelTTF BoldFont="True" Color="79,60,48" EnableStroke="False" FontSize="24" GUID="{ce9a9fd5-c224-4231-954f-49c3ddc6f2e3}" Name="txtTopCheckSel4_WndAscending" RelativePosition="0.5,0.45" StrokeColor="60,19,12" StrokeSize="1" Type="WZUILabelTTF" Text="强化" TextKey="EVOLUTION" />
+                            </CheckElement>
+                        </CheckBox>
+                        <CheckBox AbsContentSize="86,42" AnchorPoint="0.5,0.5" GUID="{dee5c77e-268d-44f1-aa49-394c741cccbf}" LuaCheckedFunctionName="onTab5" Name="checkbox5_WndAscending" RelativePosition="0.691,0.278" Type="WZUICheckBox" UseAbsSize="True" AbsPosition="142.487,15.3" SelectedIndex="0" Visible="False">
+                            <CheckElement GUID="{792cb939-135a-43bc-906c-cf6689cd2fb6}" Type="WZUIContainer" RelativePosition="0.5,0.477273">
+                                <WZUI9Image File="ui/common/common_btn_biaoqian2.png" GUID="{b00f5d9f-e8fb-432b-9434-78adee71400d}" Type="WZUI9Image" UseOriginSize="True" Scale="0.9" ScaleX="0.82" ScaleY="0.82" />
+                                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="22" GUID="{a9bb911c-7108-41c1-a3c2-c211b489bd03}" Name="txtCheck5_WndAscending" RelativePosition="0.5,0.43" StrokeColor="79,60,48" StrokeSize="4" Type="WZUILabelTTF" Text="转移" TextKey="ASCENDING37" Dimensions="0,0" />
+                            </CheckElement>
+                            <CheckElement GUID="{df11a263-df09-4561-a830-9cb28acd1abd}" Type="WZUIContainer" RelativePosition="0.5,0.524" AbsPosition="43,22.0455">
+                                <WZUI9Image File="ui/common/common_btn_biaoqian2_sel.png" GUID="{abfbcf0c-2eb8-4efe-9121-d3131e066a42}" Type="WZUI9Image" Scale="0.95" ScaleX="0.84" ScaleY="0.85" UseOriginSize="True" RelativePosition="0.5,0.47" AbsPosition="43,20" />
+                                <WZUILabelTTF BoldFont="True" Color="79,60,48" EnableStroke="False" FontSize="24" GUID="{a6b0c6f0-5e22-4ffc-986a-fa53cf0689ad}" Name="txtCheckSel5_WndAscending" RelativePosition="0.5,0.45" StrokeColor="60,19,12" StrokeSize="1" Type="WZUILabelTTF" Text="强化" TextKey="ASCENDING37" Dimensions="0,0" />
+                            </CheckElement>
+                        </CheckBox>
+                    </WZUICheckBoxGroup>
+                    <WZUIContainer Type="WZUIContainer" GUID="{6ab89da9-3450-4a1d-ace3-386065c82acb}">
+                        <CheckElement GUID="{aaeaf466-c8b6-4de8-af85-10b4099c0089}" Type="WZUIContainer" RelativePosition="0.308,0.278" AbsPosition="43,22.0455" AbsContentSize="86,42" UseAbsSize="True" Name="conTopCheck3_Sel_WndAscending" Visible="False">
+                            <WZUI9Image File="ui/common/common_btn_biaoqian2_sel.png" GUID="{cc496b08-62d4-4976-8a26-88098e4e91ab}" Type="WZUI9Image" Scale="0.95" ScaleX="0.84" ScaleY="0.85" UseOriginSize="True" RelativePosition="0.5,0.47" AbsPosition="43,20" />
+                            <WZUILabelTTF BoldFont="True" Color="79,60,48" EnableStroke="False" FontSize="24" GUID="{fd39eaf2-a41f-4254-930e-6046decc73e1}" Name="txtTopCheckSel3_WndAscending" RelativePosition="0.5,0.45" StrokeColor="60,19,12" StrokeSize="1" Type="WZUILabelTTF" Text="转移" TextKey="ASCENDING_FUSE1" />
+                        </CheckElement>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{0c612699-b992-4802-b8c2-66fb72728015}" Name="conTab1" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{d74be26e-37dc-44b0-b9a8-60bdb8bc2656}" Name="conEquip1_WndAscending" AbsContentSize="200,200" RelativePosition="0.25,0.62" UseAbsSize="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{c5515632-4d63-4539-8f41-c9337f9e6a6e}" File="ui/common/common_scale9_di9.png" Opacity="128" RelativePosition="0.5,0.5" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{b2c59e78-29e0-42e1-9c6d-fec3964b3e6e}" Name="conEquipIcon1_WndAscending" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.3,0.69">
+                            <WZUIImage Type="WZUIImage" GUID="{5b9d819f-99c7-42ff-82f6-ee87837a2337}" File="ui/strengthen/common_scale9duzaodi2.png" UseOriginSize="True" RelativePosition="0.49,0.51" Order="-1" Visible="True" TouchEnable="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{018a10c8-031b-4bd7-9b2c-0dc3defa0f04}" File="ui/common/common_icon_cwjh.png" Scale="0.7" Order="0" TouchSwallow="False" Name="imgAddIcon1_WndAscending" UseOriginSize="True" RelativePosition="0.5,0.5" TouchEnable="False" Visible="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5469c61f-72c3-4ade-b352-44d3cae7ae32}" Text="" Font="" FontSize="22" Color="195,171,148" Order="2" Name="txtEquipWord1_WndAscending" TextKey="EQUIPMENT" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{a2933168-8e41-4772-8b9e-d2a411593156}" Name="conEquipCurInfo1_WndTransferStrengthen" AbsContentSize="190,90" UseAbsSize="True" RelativePosition="0.5,0.23" Visible="True" Order="2">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{511a367e-1244-4132-9fc5-09f3529d7478}" Color="233,166,62" FontSize="20" Name="txtLeftAttrTitle1" AnchorPoint="0,1" RelativePosition="0.07,0.9" Text="攻击" TextKey="" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4c478b5d-a11c-4aa9-acd2-1a40be9bd6ba}" Name="txtLeftAttr1" FontSize="20" Color="255,236,193" AnchorPoint="0,1" RelativePosition="0.37,0.9" Text="+3000" Alignment="Left" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2aa6dafd-de21-4198-90c5-073dddfbb937}" Color="233,166,62" FontSize="20" Name="txtLeftAttrTitle2" AnchorPoint="0,1" RelativePosition="0.07,0.6" Text="范围" TextKey="" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{fcf5dec1-7991-418c-a141-a494449b77df}" Name="txtLeftAttr2" FontSize="20" Color="255,236,193" AnchorPoint="0,1" RelativePosition="0.37,0.6" Text="100" Alignment="Left" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{975daaa9-db6c-43e0-8feb-934ec9f1c57c}" Color="233,166,62" FontSize="20" Name="txtLeftAttrTitle3" AnchorPoint="0,1" RelativePosition="0.07,0.3" Text="大招" TextKey="" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a06279e5-0f7f-4d42-9f38-b7dd28634a2d}" Name="txtLeftAttr3" FontSize="20" Color="255,236,193" AnchorPoint="0,1" RelativePosition="0.37,0.3" Text="双龙出海" Alignment="Left" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{d7f3fb4a-8299-4748-bab1-3a5dab2fef16}" AbsContentSize="135,34" UseAbsSize="True" RelativePosition="0.337,1.04" AbsPosition="70.1428,128.915">
+                            <WZUI9Image Type="WZUI9Image" GUID="{841f5683-8621-4816-b2e9-b6fb0786eecf}" File="ui/strengthen/common_scale9_di60.png" CapInsets="9,0,5,34" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d5621760-7347-44d4-bd7c-56c50a71987e}" TextKey="ASCENDING3" LabelStyleKey="C7_F20" Scale="0.9" RelativePosition="0.422,0.62" AbsPosition="57.3654,20.9863" />
+                        </WZUIContainer>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{35c16cdd-6714-4017-abff-dc8d0476a446}" Name="txtStrongLv1" FontSize="20" Text="Lv500" AnchorPoint="0,1" RelativePosition="0.58,0.89" Color="233,166,62" Alignment="Left" />
+                        <WZUIImage Type="WZUIImage" GUID="{0a660ee5-756e-4627-8bc0-c2695f24e154}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Scale="0.7" AnchorPoint="1,1" RelativePosition="0.85,0.77" Name="star1_WndAscending" Visible="True" Rotation="0" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ca700719-6b02-4484-a11f-55b0e8cb15fd}" Name="txtStarLv1" FontSize="20" Text="30" AnchorPoint="0,1" RelativePosition="0.58,0.76" Color="233,166,62" Alignment="Left" />
+                    </WZUIContainer>
+                    <WZUIImage Type="WZUIImage" GUID="{042db215-c0df-4365-b70d-d89adac568b0}" File="ui/common/common_icon_jiantou2.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.6" ScaleX="1" ScaleY="1" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{16b9d310-d576-4cc0-9423-c015de9a2315}" Name="conEquip2_WndAscending" AbsContentSize="200,200" RelativePosition="0.75,0.62" UseAbsSize="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{0668795a-5b41-460a-8f9a-6136782a0cbc}" File="ui/common/common_scale9_di9.png" Opacity="128" RelativePosition="0.5,0.5" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{16dea4f2-9045-4f20-919c-5396625817d5}" Name="conEquipIcon2_WndAscending" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.3,0.69">
+                            <WZUIImage Type="WZUIImage" GUID="{5958341f-63ed-41d0-af16-244b046bddd5}" File="ui/strengthen/common_scale9duzaodi2.png" UseOriginSize="True" RelativePosition="0.49,0.51" Order="-1" Visible="True" TouchEnable="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{6eed807c-9bd0-4500-b448-2b7812eca73c}" File="ui/common/common_icon_cwjh.png" Scale="0.7" Order="0" TouchSwallow="False" Name="imgAddIcon1_WndAscending" UseOriginSize="True" RelativePosition="0.5,0.5" TouchEnable="False" Visible="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{e0542d09-ab7e-49eb-95e5-9a4741c8b591}" Text="" Font="" FontSize="22" Color="195,171,148" Order="2" Name="txtEquipWord1_WndAscending" TextKey="EQUIPMENT" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{cc5506b1-2e8e-45af-8d12-a8913ae16ff7}" Name="conEquipCurInfo1_WndTransferStrengthen" AbsContentSize="190,90" UseAbsSize="True" RelativePosition="0.5,0.23" Visible="True" Order="2">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d9ff5524-6da1-419e-8f31-16cf4957bd85}" Color="233,166,62" FontSize="20" Name="txtRightAttrTitle1" AnchorPoint="0,1" RelativePosition="0.07,0.9" Text="攻击" TextKey="" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3bf3b780-9e0a-487d-aa64-54eb83823e6c}" Name="txtRightAttr1" FontSize="20" Color="255,236,193" AnchorPoint="0,1" RelativePosition="0.37,0.9" Text="+3000" Alignment="Left" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{75e47e6b-9af2-4a34-9246-6c7dbe0ab686}" Color="233,166,62" FontSize="20" Name="txtRightAttrTitle2" AnchorPoint="0,1" RelativePosition="0.07,0.6" Text="范围" TextKey="" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{72adb547-9fbd-4384-b432-ffce1f0defb8}" Name="txtRightAttr2" FontSize="20" Color="255,236,193" AnchorPoint="0,1" RelativePosition="0.37,0.6" Text="100" Alignment="Left" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{fd5bdfcf-83e4-4e8c-abf0-85101699071e}" Color="233,166,62" FontSize="20" Name="txtRightAttrTitle3" AnchorPoint="0,1" RelativePosition="0.07,0.3" Text="大招" TextKey="" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4c8df813-120c-4d64-a32b-1701aef52b50}" Name="txtRightAttr3" FontSize="20" Color="255,236,193" AnchorPoint="0,1" RelativePosition="0.37,0.3" Text="双龙出海" Alignment="Left" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{fbd7492f-4c04-4f5e-ba97-15d0079db56d}" AbsContentSize="135,34" UseAbsSize="True" RelativePosition="0.337,1.04" AbsPosition="70.1428,128.915">
+                            <WZUI9Image Type="WZUI9Image" GUID="{e9816276-5ad7-4c5e-a64e-965633af9db9}" File="ui/strengthen/common_scale9_di60.png" CapInsets="9,0,5,34" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{fabd79ea-6281-4404-9f61-cb4bbae8ef34}" TextKey="ASCENDING4" LabelStyleKey="C7_F20" Scale="0.9" RelativePosition="0.422,0.62" AbsPosition="57.3654,20.9863" Name="txtEquipDesc2_WndAscending" />
+                        </WZUIContainer>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c7c21fa6-1cb5-44eb-8191-3d23ca11a778}" Name="txtStrongLv2" FontSize="20" Text="Lv500" AnchorPoint="0,1" RelativePosition="0.58,0.89" Color="233,166,62" Alignment="Left" />
+                        <WZUIImage Type="WZUIImage" GUID="{f4b7e48a-a6e7-4605-9020-8436bdb0f6c8}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Scale="0.7" AnchorPoint="1,1" RelativePosition="0.85,0.77" Name="star2_WndAscending" Visible="True" Rotation="0" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d7f526a0-6594-470e-b633-b42b18a91cbf}" Name="txtStarLv2" FontSize="20" Text="30" AnchorPoint="0,1" RelativePosition="0.58,0.76" Color="233,166,62" Alignment="Left" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ce26ebf7-7440-4bcd-8f16-89fc057ad096}" Name="" FontSize="18" Color="255,236,193" AnchorPoint="0.5,1" RelativePosition="0.5,0.413" Text="" Alignment="Center" TextKey="ASCENDING5" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{171dc1d4-7ac4-4be2-90dc-e43aab14f708}" AbsContentSize="445,103" UseAbsSize="True" RelativePosition="0.5,0.285">
+                        <WZUI9Image Type="WZUI9Image" GUID="{f23c8170-ecb6-49d0-b2ca-4e9dfb196e97}" File="ui/common/common_scale9_di9.png" Opacity="128" RelativePosition="0.5,0.5" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{2e43f509-153c-4d1b-a515-f1b3e86d5b4a}" Name="conM1" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.18,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{067a1acc-17ae-492d-b56b-89a5dcb48551}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f550e09d-6e43-4afc-a887-83f9926aeeda}" LabelStyleKey="C7_F22" TextKey="ASCENDING8" Name="txtM1_WndAscending" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{ebf342a1-69b2-432e-9992-9218df98a1a9}" Name="conM2" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.393,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{f7fb77c4-d93a-4ec7-9c65-20e32ed6f940}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{6d4769e4-5c18-4a16-8f2d-03c1acbe648b}" LabelStyleKey="C7_F22" TextKey="ASCENDING9" Name="txtM2_WndAscending" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{2d334f44-b1f7-4bbb-b421-4ed89651e9c8}" Name="conM3" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.606,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{c70b8838-2aa8-44b7-a076-35cf9388d91f}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{68125be9-af77-4f52-8226-f7afe21cb7e0}" LabelStyleKey="C7_F22" TextKey="ASCENDING10" Name="txtM3_WndAscending" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{fead89ab-a86e-40ab-8d6d-e93539786a48}" Name="conM4" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.82,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{919b4d1e-354f-4bc0-bd3c-f5faf44fb9f1}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{790207a6-c1ab-4b97-922e-5db2c13c2ea1}" LabelStyleKey="C7_F22" TextKey="ASCENDING11" Name="txtM4_WndAscending" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{e3ba4545-49c7-4239-91f5-efc8d37c31f1}" Name="conRetention" Visible="True">
+                        <CheckBox AbsContentSize="90,60" AnchorPoint="0,1" GUID="{5e8c6b29-df3c-4a3b-998e-c23b7e239b40}" LuaSelectedFunctionName="retention" Name="retention" RelativePosition="0.07,0.205" SelectedIndex="0" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" Scale="1" ScaleX="1" ScaleY="1">
+                            <CheckElement AbsContentSize="120,60" AnchorPoint="0.5,0.5" GUID="{e88f506e-2360-4896-a556-ad63182e27d8}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                                <WZUIImage Type="WZUIImage" GUID="{f38c64f2-dda4-4dec-aa29-4b314b46ba96}" File="ui/common/common_scale9_zhujiemian.png" UseOriginSize="True" />
+                            </CheckElement>
+                            <CheckElement AbsContentSize="120,60" AnchorPoint="0.5,0.5" GUID="{7d9384db-2d16-442d-ba5d-9408b513b04b}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                                <WZUIImage Type="WZUIImage" GUID="{263d8f53-8ec4-48f5-8ed1-902891e0d035}" File="ui/common/common_scale9_zhujiemian.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{09d81c8b-07a4-447a-afa9-545965d07cdb}" File="ui/common/common_icon_gou.png" UseOriginSize="True" Visible="True" />
+                            </CheckElement>
+                        </CheckBox>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c93c959b-bd4d-4952-8505-d2aecba234bb}" TextKey="ASCENDING12" LabelStyleKey="C11_F20_S4_C5" RelativePosition="0.37551,0.152" Scale="0.9" Name="txtCost1_WndAscending" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{52eb0c1d-0942-40a0-9b67-1ac6f968f3f9}" TextKey="COST" LabelStyleKey="C11_F20_S4_C5" RelativePosition="0.63,0.152" Scale="0.9" Name="txtCost2_WndAscending" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ead34e9a-3201-4f72-a667-395a28b3d993}" TextKey="" LabelStyleKey="C11_F20_S4_C5" RelativePosition="0.74,0.152" Scale="0.9" Text="0" Alignment="Left" AnchorPoint="0,0.5" Name="txtCost" />
+                        <WZUIImage Type="WZUIImage" GUID="{11fb9cde-4677-4eee-80b4-f714aa6b2486}" File="" UseOriginSize="True" Scale="0.6" RelativePosition="0.705,0.155" Name="imgCostIcon1_WndAscending" />
+                    </WZUIContainer>
+                    <Button Type="WZUIButton" GUID="{6c85299c-0eed-470d-9b17-6c18a3840c3c}" AbsContentSize="115,57" UseAbsSize="True" RelativePosition="0.5,0.082" LuaDoneFunctionName="onAscend">
+                        <NormalElement Type="WZUIContainer" GUID="{f78e2546-4699-4489-b233-581400172096}">
+                            <WZUIImage Type="WZUIImage" GUID="{a3422906-390c-432e-89a9-6b4699453882}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{60b53e01-2571-43aa-98bb-35d16aeccf98}">
+                            <WZUIImage Type="WZUIImage" GUID="{02f79f0f-7b33-4d8e-8cf5-cc8599374f6e}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{7c2f48db-1792-45f9-8155-dcf9c4fb811b}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{fa30acf3-30eb-490f-a7ae-47147ce401d8}" TextKey="ASCENDING1" LabelStyleKey="SMALL_GREEN_BTN" RelativePosition="0.5,0.5" Scale="1" ScaleX="1" ScaleY="1" />
+                    </Button>
+                    <WZUISpine Type="WZUISpine" GUID="{6b749578-d6a2-4198-91b9-480ef7bc3950}" FileAtlas="ui/ui_shengguang.atlas" FileJson="ui/ui_shengguang.json" AnimationName="2" RelativePosition="0.5,0.525" Visible="False" Name="ani1" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{fbadd8ef-24b8-434a-b50b-ff2d2cc427f8}" Name="conTab2" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{701e64fd-6435-4af4-adcc-0dd53e06e6ff}" File="ui/strengthen/common_pic_sgxttp.png" UseOriginSize="True" RelativePosition="0.5,0.525" TouchEnable="False" TouchSwallow="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{1e3b332b-00b1-416f-bbbf-f28ec3988637}" File="ui/strengthen/common_icon_sgxtpzk.png" UseOriginSize="True" RelativePosition="0.485,0.74" TouchEnable="False" TouchSwallow="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{0082922d-299a-41ff-8f50-90c155bbf264}" Name="conEquipIcon3_WndAscending" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.485,0.525">
+                        <WZUIImage Type="WZUIImage" GUID="{c081d243-4308-4ee8-9fc3-20099ffc081a}" File="ui/strengthen/common_scale9duzaodi2.png" UseOriginSize="True" RelativePosition="0.49,0.51" Order="-1" Visible="True" TouchEnable="False" TouchSwallow="False" />
+                        <WZUIImage Type="WZUIImage" GUID="{d64e39c2-ffcd-41b5-94cb-95bebaadd124}" File="ui/common/common_icon_cwjh.png" Scale="0.7" Order="0" TouchSwallow="False" Name="imgAddIcon1_WndAscending" UseOriginSize="True" RelativePosition="0.5,0.5" TouchEnable="False" Visible="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{dfb4aa87-7578-4ec5-ae03-5d1f6b83d70a}" Text="装备" Font="" FontSize="22" Color="195,171,148" Order="2" Name="txtEquipWord1_WndAscending" TextKey="EQUIPMENT" />
+                    </WZUIContainer>
+                    <WZUIContainer AbsContentSize="85,85" AnchorPoint="0.5,0.5" GUID="{b701c8d5-6219-44b2-9d7f-c5e6574da15a}" Name="" RelativePosition="0.485,0.295" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUIImage Type="WZUIImage" GUID="{0c525dca-02ea-4d95-8ac7-c94e775d0df7}" File="ui/common/common_icon_kuangdi.png" GrayRender="False" UseOriginSize="True" Order="1" Name="" TouchEnable="False" RelativePosition="0.5,0.5" Visible="True" Scale="1.125" AbsPosition="42.5,43.2" />
+                        <WZUIImage Type="WZUIImage" GUID="{443db422-aa2f-486f-b5b2-535587f4eaa9}" File="ui/common/common_scale9_beibaodi2.png" GrayRender="False" UseOriginSize="True" Order="1" Name="imgAdd6_WndImproveStrengthen" TouchEnable="False" RelativePosition="0.5,0.5" Visible="True" Scale="1" AbsPosition="42.5,43.2" />
+                        <WZUIImage Type="WZUIImage" GUID="{dc3faae8-12a5-48c9-81c8-bdd650083653}" File="ui/common/common_scale9_wuse.png" UseOriginSize="True" GrayRender="False" RelativePosition="0.5,0.5" Scale="1" ScaleX="1" ScaleY="1" Order="1" TouchEnable="False" Name="imgAdd3_WndImproveStrengthen" Visible="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{057a29bb-a856-48fa-91f0-b5dc58ed26ad}" File="shopitems/shengguangyaoshui.png" GrayRender="False" UseOriginSize="False" Order="1" Name="imgAdd4" TouchEnable="False" RelativePosition="0.5,0.5" Visible="True" />
+                        <WZUILabelTTF Color="255,255,255" Dimensions="100,0" FontSize="18" GUID="{27836062-e99d-4cbd-9810-dc02e02701c6}" Name="txtHolyStoneNum" Order="10" RelativePosition="0.967,0.02" Text="0/0" Type="WZUILabelTTF" AbsPosition="10,10" UseOriginSize="True" Opacity="255" AnchorPoint="1,0" ShowAll="False" Alignment="Right" Visible="True" EnableStroke="True" StrokeSize="2" StrokeColor="79,60,48" />
+                        <Button Type="WZUIButton" GUID="{f1928f68-1d5b-495d-85d0-aa03b701510d}" LuaDoneFunctionName="onTip1">
+                            <NormalElement Type="WZUIContainer" GUID="{59f37629-1f7b-4c3a-86db-844e8ba60008}" />
+                            <SelectElement Type="WZUIContainer" GUID="{9f456949-94c3-44b7-94f1-6a819d399f63}" />
+                            <DisableElement Type="WZUIContainer" GUID="{0d619de5-38f6-46c3-b94e-1467ea9faf93}" />
+                        </Button>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{b168bd07-aa4a-4801-94e5-e40277016828}" UseAbsSize="True" AbsContentSize="390,100" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.12">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a5f930a5-2004-42bb-8943-587cc149f372}" FontSize="16" Text="" Color="79,60,48" RelativePosition="0.226,0.78" TextKey="CONSUME" Alignment="Left" AnchorPoint="0,0.5" LabelStyleKey="C11_F20_S4_C5" Scale="0.9" Name="txtCost_WndAscending" />
+                        <WZUIImage Type="WZUIImage" GUID="{4926153c-ef47-45b0-9895-2cefe71f6d4c}" File="shopitems/cszzs_wq.png" UseOriginSize="True" Scale="0.45" RelativePosition="0.405,0.78" Name="imgCost" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{cc4e2bd6-aba9-48cc-8110-07b1f1b05221}" FontSize="22" Text="0" Color="255,227,116" RelativePosition="0.49,0.78" TextKey="" Alignment="Left" AnchorPoint="0,0.5" LabelStyleKey="" Name="cost" BoldFont="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b91256c9-1d14-4dac-8ef0-9c93bdd1bf38}" FontSize="16" Text="(拥有:0)" Color="79,60,48" RelativePosition="0.56,0.78" TextKey="" Alignment="Left" AnchorPoint="0,0.5" LabelStyleKey="C7_F20" Name="has" />
+                        <Button Type="WZUIButton" GUID="{f50f2436-4942-4ae3-9874-01dcde76eaae}" UseAbsSize="True" AbsContentSize="120,50" RelativePosition="0.5,0.29" LuaDoneFunctionName="onSure" Name="btnSure" TouchEnable="True">
+                            <NormalElement Type="WZUIContainer" GUID="{fa1c6a23-b88e-47e3-aa09-355d9357aff3}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{1ebeb451-cb1b-4077-ab62-32477857c6cd}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0eedce1e-65af-4dd3-95ae-024f0007d4f7}" FontSize="16" Text="开始染色" Color="79,60,48" RelativePosition="0.5,0.5" TextKey="ASCENDING2" Alignment="Center" AnchorPoint="0.5,0.5" LabelStyleKey="SMALL_GREEN_BTN" Name="txtSure1_WndAscending" Dimensions="0,0" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{3d798646-dd88-4cf1-a225-b1f216ae0c6f}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{cf564e70-7817-40c2-a827-8ea0125ae85a}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSizeProportion="False" UseOriginSize="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{dad1b85e-6ea2-43ca-bb13-d4a204f8f965}" FontSize="16" Text="开始染色" Color="79,60,48" RelativePosition="0.5,0.5" TextKey="ASCENDING2" Alignment="Center" AnchorPoint="0.5,0.5" LabelStyleKey="SMALL_GREEN_BTN" Name="txtSure2_WndAscending" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{9f4e3bd3-ad32-41fe-a93f-fa547f19b90a}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{f3ad1695-3d12-4f25-aa17-e269282c2c1e}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" GrayRender="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7149fd16-d872-4258-9003-5c4ec549ded8}" FontSize="16" Text="开始染色" Color="79,60,48" RelativePosition="0.5,0.5" TextKey="ASCENDING2" Alignment="Center" AnchorPoint="0.5,0.5" LabelStyleKey="SMALL_GRAY_BTN" Name="txtSure3_WndAscending" />
+                            </DisableElement>
+                        </Button>
+                    </WZUIContainer>
+                    <WZUISpine Type="WZUISpine" GUID="{70c81175-d24a-4c0e-805b-3056005c6c30}" FileAtlas="ui/ui_shengguang.atlas" FileJson="ui/ui_shengguang.json" AnimationName="1" RelativePosition="0.485,0.535" Visible="False" Name="ani2" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{54e291ac-1ec7-4079-94f0-364d8a9458af}" Color="229,105,22" FontSize="20" BoldFont="True" Text="" RelativePosition="0.485,0.74" Name="txtGrade" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{355967b8-6067-4db3-9bfa-0dd2d83ad86f}" Name="conTab3" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{d20a6339-ab1d-4391-9f81-4a081cab36c4}" File="ui/strengthen/common_pic_sgxttp2.png" UseOriginSize="True" RelativePosition="0.5,0.525" TouchEnable="False" TouchSwallow="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{02b3a3ca-25ec-4519-b762-065fa727f230}" File="ui/common/common_pic_fazheng2.png" UseOriginSize="True" RelativePosition="0.5,0.42" TouchEnable="False" TouchSwallow="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{30f73e15-f669-4495-a48a-bbd8485c84ea}" UseAbsSize="True" AbsContentSize="470,100" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.532">
+                        <WZUIImage Type="WZUIImage" GUID="{16f4805e-83b0-47b7-a784-b8bdfca116a5}" File="ui/strengthen/common_icon_sgxtxk.png" UseOriginSize="True" RelativePosition="0.2,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{040ce133-30dc-4494-a242-f8449f60dd6b}" File="ui/strengthen/common_icon_sgxtxk.png" UseOriginSize="True" RelativePosition="0.77,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{f9cba356-67bc-4f85-a6ba-b046d0b59964}" File="ui/strengthen/common_scale9duzaodi3.png" UseOriginSize="True" RelativePosition="0.487,0.5" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{037d4b58-84b1-4c28-8dfc-4ba93cd71eca}" Name="conLeftBless_WndAscending" AbsContentSize="64,64" UseAbsSize="True" RelativePosition="0.2,0.5" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{5dd07493-f9ea-418e-a0c3-436f5d84229d}" Name="conRightBless_WndAscending" AbsContentSize="64,64" UseAbsSize="True" RelativePosition="0.77,0.5" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{26b79215-91d0-46e1-b942-6a8f2f553c25}" Name="conFuseBless_WndAscending" AbsContentSize="85,85" UseAbsSize="True" RelativePosition="0.487,0.5" />
+                        <WZUISpine Type="WZUISpine" GUID="{22cb51e8-14c7-4793-9937-33cd919b7792}" FileAtlas="ui/ui_shengguang.atlas" FileJson="ui/ui_shengguang.json" AnimationName="3" RelativePosition="0.485,0.515" Visible="False" Name="ani3" Order="0" Loop="False" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{5c9b3f1a-a255-4f0e-875d-df3fdb8cad84}" UseAbsSize="True" AbsContentSize="470,100" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.12">
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{f32ed27f-13d4-4c91-ae41-93daa0d21929}" MaxWidth="500" Name="ftxtCost_ConTab3" UseAbsSize="True" RelativePosition="0.5,0.73" AnchorPoint="0.5,0.5" />
+                        <Button Type="WZUIButton" GUID="{af415d89-0504-4862-896b-f8808ffeb614}" UseAbsSize="True" AbsContentSize="120,50" RelativePosition="0.5,0.29" LuaDoneFunctionName="onFuse" Name="btnFuse_WndAscending" TouchEnable="True" LuaActionName="Normal">
+                            <NormalElement Type="WZUIContainer" GUID="{7e2e1f66-7855-47f0-ba0d-e405af436579}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{590b858e-82b4-4e3c-84a1-6ef49ef86658}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{e3d0894e-e1bc-4e83-8f8c-dd487ce9083a}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{3a71ce6d-3e87-43fb-b3c5-3aae4ea021df}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSizeProportion="False" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{d8016b82-16b8-4d9d-851c-ab74f7c887d3}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{c3aa97d9-38b7-496b-b69c-02b0933e2c9d}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" GrayRender="True" />
+                            </DisableElement>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8183a2ee-bfb7-4699-aaca-55147a337c77}" FontSize="16" Text="" Color="79,60,48" RelativePosition="0.5,0.5" TextKey="ASCENDING_FUSE1" Alignment="Center" AnchorPoint="0.5,0.5" LabelStyleKey="SMALL_GREEN_BTN" />
+                        </Button>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{ab3e5caa-b2f4-46d0-8a08-60ad2f0b09d7}" Name="conTab4" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{357529c4-626b-4899-a28a-6f56b9f5e520}" File="ui/common/common_pic_diwen5.png" UseOriginSize="True" Opacity="50" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{52e463fa-6b24-4a00-88df-040db6ad2c01}" Name="conPet1_WndAscending" AbsContentSize="200,210" RelativePosition="0.26,0.63" UseAbsSize="True" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{e08759fe-6b5e-443e-88af-f1a7954b816c}" File="ui/common/common_pic_fazheng2.png" UseOriginSize="True" RelativePosition="0.5,0.35" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{121e9b59-f9bb-4bbc-92f3-59cfda857185}" Name="conPetLeft" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{7c0f71bf-50d8-4f49-b0cb-670fac58ec1c}" AnchorPoint="0,0.5" MaxWidth="300" Name="txtLeftPet" RelativePosition="0.2,0.92" />
+                        <WZUIImage Type="WZUIImage" GUID="{e969b60f-ed23-43da-9b89-2f3954208ebb}" File="ui/common/common_icon_zhandouli.png" UseOriginSize="True" RelativePosition="0.3,0" AnchorPoint="0.5,0" />
+                        <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{85203e57-0970-4735-9585-8ba2eacfbcf8}" CharMapFileName="ui/common_num/common_num_zhandouli.png" Text="0" Height="26" Width="16" UseOriginSize="True" AnchorPoint="0,0" RelativePosition="0.55,0" Alignment="Left" Scale="0.9" Name="leftPetFight" />
+                    </WZUIContainer>
+                    <WZUIImage Type="WZUIImage" GUID="{79c7e1b2-70cc-4379-8f26-185acbb43ca3}" File="ui/common/common_icon_jiantou3.png" UseOriginSize="True" Scale="0.7" RelativePosition="0.5,0.6" ScaleX="0.7" ScaleY="0.7" Name="arrowTab4" Visible="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{f7e248f3-5431-4f59-980e-0403e3d7084e}" Name="conPet2_WndAscending" AbsContentSize="200,210" RelativePosition="0.74,0.63" UseAbsSize="True" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{9b5932d2-f5dc-4e07-8ad0-d048c8f9e016}" File="ui/common/common_pic_fazheng2.png" UseOriginSize="True" RelativePosition="0.5,0.35" Scale="0.8" ScaleX="0.8" ScaleY="0.8" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{7bd6108e-bf0e-4402-874d-313676f230c5}" Name="conPetRight" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{11c24736-cd7d-44ef-88b8-a9170ecd4f54}" AnchorPoint="0,0.5" MaxWidth="300" Name="txtRightPet" RelativePosition="0.2,0.92" />
+                        <WZUIImage Type="WZUIImage" GUID="{ff5a63a4-97be-4662-82e8-166b2f432ffa}" File="ui/common/common_icon_zhandouli.png" UseOriginSize="True" RelativePosition="0.3,0" AnchorPoint="0.5,0" />
+                        <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{c327ddb1-d30a-45ac-ba8d-46f86f10c6b1}" CharMapFileName="ui/common_num/common_num_zhandouli.png" Text="0" Height="26" Width="16" UseOriginSize="True" AnchorPoint="0,0" RelativePosition="0.55,0" Alignment="Left" Scale="0.9" Name="rightPetFight" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{05fe036c-c4d7-468b-955e-66f570b597ce}" Name="conNoConfig" AbsContentSize="200,210" UseAbsSize="True" RelativePosition="0.74,0.63" Visible="False">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{645ee67f-f254-4a3f-bea7-d5a682e009f3}" LabelStyleKey="C10_F20" TextKey="ASCENDING32" RelativePosition="0.5,0.6" Name="txtNoConfig1_WndAscending" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b4151ea9-3d1f-4688-8723-266ce9ecc9fe}" LabelStyleKey="C10_F20" TextKey="ASCENDING33" RelativePosition="0.5,0.4" Name="txtNoConfig2_WndAscending" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{260f3969-7a1c-4896-a34a-886c8942540a}" AbsContentSize="445,103" UseAbsSize="True" RelativePosition="0.5,0.285">
+                        <WZUI9Image Type="WZUI9Image" GUID="{809830c4-ceca-482b-84a0-ea156b25c3eb}" File="ui/common/common_scale9_di9.png" Opacity="128" RelativePosition="0.5,0.5" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{27968c24-e426-4404-bcd1-be35d04ba99a}" Name="conM1" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.15,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{bed13708-7f61-4864-81c9-24f6fd586ca2}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" GrayRender="True" Name="petBg1" />
+                            <WZUIImage Type="WZUIImage" GUID="{8b127aeb-43e1-490d-8010-d65c8a1c76f7}" File="ui/common/frame_violet.png" GrayRender="True" UseOriginSize="True" Name="petGrid1" />
+                            <WZUIImage Type="WZUIImage" GUID="{34315523-3021-433c-9b34-3083e0b1c547}" UseOriginSize="True" Name="pet1" />
+                            <WZUIImage Type="WZUIImage" GUID="{f9349704-cb60-4fba-9987-1ac118faa5dd}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.7" Name="imgAddPet1" />
+                            <Button Type="WZUIButton" GUID="{9e8a4e5a-8742-48ee-b0e0-eb31f47cebbd}" LuaDoneFunctionName="onChoosePet">
+                                <NormalElement Type="WZUIContainer" GUID="{2ecea58b-b059-48b5-b9d9-0df095722cdf}" />
+                                <SelectElement Type="WZUIContainer" GUID="{864a9e8b-d6f1-4436-ac3f-bb6e15aba354}" />
+                                <DisableElement Type="WZUIContainer" GUID="{bd2a459e-f02f-46c2-ba6f-8e12fe0d8909}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{402e17e4-e0d4-4774-9078-4dcd97a416a9}" Name="conM2" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.3833,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{dd909775-4ad0-45d1-9c9a-f5ea55f007d4}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" GrayRender="True" Name="petBg2" />
+                            <WZUIImage Type="WZUIImage" GUID="{bb0e857a-d947-4630-ab68-a008cd1ab551}" File="ui/common/frame_violet.png" GrayRender="True" UseOriginSize="True" Name="petGrid2" />
+                            <WZUIImage Type="WZUIImage" GUID="{e1a5cffc-1dff-44bc-b450-09b586b52f01}" UseOriginSize="True" Name="pet2" />
+                            <WZUIImage Type="WZUIImage" GUID="{64f5d5e4-3522-4c1a-8629-bc239676cc31}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.7" Name="imgAddPet2" />
+                            <Button Type="WZUIButton" GUID="{2ef41294-ec72-49ff-9078-b38452b7c683}" LuaDoneFunctionName="onChoosePet">
+                                <NormalElement Type="WZUIContainer" GUID="{9d049045-d009-48a6-a526-69181960acd0}" />
+                                <SelectElement Type="WZUIContainer" GUID="{947cc61d-6a34-4ecb-9237-a42b34b15e15}" />
+                                <DisableElement Type="WZUIContainer" GUID="{51c54b8b-c2f7-460b-bfc6-50dfae97c91f}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{a21b32ba-d42e-4147-8bb4-a5e60d7945ba}" Name="conM3" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.6167,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{a00e93fd-5ae6-4452-bac1-78ad69e80182}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" GrayRender="True" Name="petBg3" />
+                            <WZUIImage Type="WZUIImage" GUID="{0ef1a192-fa29-4513-80fc-7306499aff8c}" File="ui/common/frame_violet.png" GrayRender="True" UseOriginSize="True" Name="petGrid3" />
+                            <WZUIImage Type="WZUIImage" GUID="{c676a1e9-c046-4dbf-9cfe-8e45ad8f4128}" UseOriginSize="True" Name="pet3" />
+                            <WZUIImage Type="WZUIImage" GUID="{c287b7de-d94f-459a-a30d-61a5a63668df}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.7" Name="imgAddPet3" />
+                            <Button Type="WZUIButton" GUID="{4099d646-6cdb-464d-97df-9b21a1156582}" LuaDoneFunctionName="onChoosePet">
+                                <NormalElement Type="WZUIContainer" GUID="{0444bf38-cad9-4d6d-9425-3f078aa9d2bd}" />
+                                <SelectElement Type="WZUIContainer" GUID="{5cb50f93-cf2d-4c8e-b9f0-d8cc2b6b73e4}" />
+                                <DisableElement Type="WZUIContainer" GUID="{cc071140-5ee6-42b2-935d-96d63cf66f49}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{324acb4d-50ac-4883-ba4a-31886511cc5a}" Name="conM4" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.85,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{3e58003d-e7c9-4881-a0db-c833be9384e8}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" GrayRender="True" Name="petBg4" />
+                            <WZUIImage Type="WZUIImage" GUID="{6e5c11b4-948e-4b71-b0cd-e2c0e7ec5da1}" File="ui/common/frame_violet.png" GrayRender="True" UseOriginSize="True" Name="petGrid4" />
+                            <WZUIImage Type="WZUIImage" GUID="{f4592ce1-e6c4-4d36-afbd-3c07945ee088}" UseOriginSize="True" Name="pet4" Order="0" />
+                            <WZUIImage Type="WZUIImage" GUID="{a6dfd7cd-2984-4543-a039-af9264f35440}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.7" Name="imgAddPet4" Order="0" Visible="True" />
+                            <Button Type="WZUIButton" GUID="{9e6f45ed-7252-4d2d-b9ea-90c101ca1cfc}" LuaDoneFunctionName="onChoosePet">
+                                <NormalElement Type="WZUIContainer" GUID="{60851246-12ca-48f2-82fd-0dd210989096}" />
+                                <SelectElement Type="WZUIContainer" GUID="{68a863f8-f19f-4229-aa49-857c53da71db}" />
+                                <DisableElement Type="WZUIContainer" GUID="{6c80be0b-d506-4254-8ed9-c9ebefeddd27}" />
+                            </Button>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{6e7392bc-503f-4cd6-b4c1-5d4e6a4d0be0}" RelativePosition="0.06,0.16" AnchorPoint="0,0.5" MaxWidth="500" Name="txtCostTab4" />
+                    <Button Type="WZUIButton" GUID="{b43344cf-dc0f-4c54-b262-87ae62460e31}" AbsContentSize="115,57" UseAbsSize="True" RelativePosition="0.5,0.082" LuaDoneFunctionName="onEvolution">
+                        <NormalElement Type="WZUIContainer" GUID="{34ae422e-efc1-4727-a40c-7295ce6a36b4}">
+                            <WZUIImage Type="WZUIImage" GUID="{8a380f8f-3175-4df7-8c80-7abcbb90c15f}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{804b4015-b503-40ec-b218-08be2f616fc5}">
+                            <WZUIImage Type="WZUIImage" GUID="{ae7dd514-c360-41c7-b3f1-685936daccff}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{717a2259-f619-47ec-9bc3-53cfe91fa26d}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{dda8e650-7ad6-4cb2-a98e-48a9b4cbc99a}" TextKey="EVOLUTION" LabelStyleKey="SMALL_GREEN_BTN" RelativePosition="0.5,0.5" Scale="1" ScaleX="1" ScaleY="1" Name="txtPet_WndAscending" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{80b23910-924e-4d65-9347-6c8ad7313fc4}" Name="conTab5" Visible="False">
+                    <WZUIContainer Type="WZUIContainer" GUID="{96da49cd-0211-4b49-b3a6-ac4a19def520}" Name="conEquip1_WndAscending" AbsContentSize="200,250" RelativePosition="0.25,0.8" UseAbsSize="True" AnchorPoint="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{ff19c494-c3f8-41cb-92a1-cc4bb6f5eeb4}" File="ui/common/common_scale9_di9.png" Opacity="128" RelativePosition="0.5,0.5" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{3746bfcc-0aee-4a17-8317-2cafbbb67e30}" Name="conMountIcon1_WndAscending" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.3,0.77">
+                            <WZUIImage Type="WZUIImage" GUID="{4d58a408-0511-4c55-baf7-8a0bea750e64}" File="ui/strengthen/common_scale9duzaodi2.png" UseOriginSize="True" RelativePosition="0.49,0.51" Order="-1" Visible="True" TouchEnable="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2fa2c586-8d7f-484a-b1cd-fef465cd4c2b}" Text="" Font="" FontSize="22" Color="195,171,148" Order="2" Name="txtEquipWord1_WndAscending" TextKey="ASCENDING45" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{de54829b-d592-4c8f-93e6-8c1c72ed913f}" Name="conEquipCurInfo1_WndTransferStrengthen" AbsContentSize="190,125" UseAbsSize="True" RelativePosition="0.49,0.29" Visible="True" Order="2">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2e63c65f-8b8a-4dd8-9d75-f4640b679878}" Color="233,166,62" FontSize="20" Name="txtLeftMountAttrTitle1" AnchorPoint="0,1" RelativePosition="0.07,1" Text="攻击" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{754adae9-4075-4e53-9c01-1b499271bdf6}" Name="txtLeftMountAttr1" FontSize="20" Color="255,236,193" AnchorPoint="0,1" RelativePosition="0.37,1" Text="+3000" Alignment="Left" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{34c562c7-ba7f-48f0-b369-67533865c6b1}" Color="233,166,62" FontSize="20" Name="txtLeftMountAttrTitle2" AnchorPoint="0,1" RelativePosition="0.07,0.79" Text="范围" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ef1255b9-1dcb-412d-a7c9-81db1690618f}" Name="txtLeftMountAttr2" FontSize="20" Color="255,236,193" AnchorPoint="0,1" RelativePosition="0.37,0.79" Text="100" Alignment="Left" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{913e1ad8-d02d-4b38-a063-7ebf122bf34c}" Color="233,166,62" FontSize="20" Name="txtLeftMountAttrTitle3" AnchorPoint="0,1" RelativePosition="0.07,0.58" Text="大招" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2acd924d-358e-4a0f-9e34-4bb7aab8d862}" Name="txtLeftMountAttr3" FontSize="20" Color="255,236,193" AnchorPoint="0,1" RelativePosition="0.37,0.58" Text="双龙出海" Alignment="Left" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{1839d984-ba89-4797-bd5a-75ee110390b4}" Color="233,166,62" FontSize="20" Name="txtLeftMountAttrTitle4" AnchorPoint="0,1" RelativePosition="0.07,0.37" Text="大招" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{6b870bc7-41fa-41a9-8bc3-796378a1ac28}" Name="txtLeftMountAttr4" FontSize="20" Color="255,236,193" AnchorPoint="0,1" RelativePosition="0.37,0.37" Text="双龙出海" Alignment="Left" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{49fc59ec-213c-474a-971d-78462a9b1442}" Color="233,166,62" FontSize="20" Name="txtLeftMountAttrTitle5" AnchorPoint="0,1" RelativePosition="0.07,0.16" Text="大招" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{22ab4ea5-6435-4ab5-9285-622ebbac29fd}" Name="txtLeftMountAttr5" FontSize="20" Color="255,236,193" AnchorPoint="0,1" RelativePosition="0.37,0.16" Text="双龙出海" Alignment="Left" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{cf9d5e25-4af3-4e9f-9bbb-8fdc9d7cadb7}" AbsContentSize="135,34" UseAbsSize="True" RelativePosition="0.337,1.03" AbsPosition="70.1428,128.915">
+                            <WZUI9Image Type="WZUI9Image" GUID="{d107f3e3-6c05-41fd-a7af-922edf651560}" File="ui/strengthen/common_scale9_di60.png" CapInsets="9,0,5,34" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d8912eee-c02a-409c-8608-add05ad0cd62}" TextKey="ASCENDING41" LabelStyleKey="C7_F20" Scale="0.9" RelativePosition="0.33,0.62" AbsPosition="57.3654,20.9863" Name="txtMountBefore_WndAscending" />
+                        </WZUIContainer>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{7f287759-ab89-45e4-b7d5-f99f2bd7735e}" Name="txtMountStrongLv1" FontSize="20" Text="Lv500" AnchorPoint="0,1" RelativePosition="0.58,0.935" Color="233,166,62" Alignment="Left" />
+                        <WZUIImage Type="WZUIImage" GUID="{d11eb27b-953e-4ed4-9577-04ba500f4816}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Scale="0.7" AnchorPoint="1,1" RelativePosition="0.85,0.84" Name="starMount1_WndAscending" Visible="True" Rotation="0" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{846a414a-8fec-49d2-bdfa-4393c0fcc00b}" Name="txtMountStarLv1" FontSize="20" Text="30" AnchorPoint="0,1" RelativePosition="0.58,0.83" Color="233,166,62" Alignment="Left" />
+                    </WZUIContainer>
+                    <WZUIImage Type="WZUIImage" GUID="{ce4e8754-33ad-4a17-9ace-688838f86547}" File="ui/common/common_icon_jiantou2.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.6" ScaleX="1" ScaleY="1" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{de5c3586-b1ec-4e05-8405-c2e48bf9c7c5}" Name="conEquip2_WndAscending" AbsContentSize="200,250" RelativePosition="0.75,0.8" UseAbsSize="True" AnchorPoint="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{f0998b44-bb2d-48db-a636-688a64c12e50}" File="ui/common/common_scale9_di9.png" Opacity="128" RelativePosition="0.5,0.5" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{93a31b38-d1ae-43e4-acc8-99d439dda8c3}" Name="conMountIcon2_WndAscending" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.3,0.77">
+                            <WZUIImage Type="WZUIImage" GUID="{c01d9941-8a44-4501-a9db-0871d791a4c8}" File="ui/strengthen/common_scale9duzaodi2.png" UseOriginSize="True" RelativePosition="0.49,0.51" Order="-1" Visible="True" TouchEnable="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f5a9026c-bc4d-4d46-844d-bb4601452767}" Text="装备" Font="" FontSize="22" Color="195,171,148" Order="2" Name="txtEquipWord1_WndAscending" TextKey="ASCENDING45" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{854df890-9632-495a-a654-17af0c164ede}" Name="conEquipCurInfo1_WndTransferStrengthen" AbsContentSize="190,125" UseAbsSize="True" RelativePosition="0.49,0.29" Visible="True" Order="2">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ef1acea7-c37b-45b8-a29b-cc9f73b75b02}" Color="233,166,62" FontSize="20" Name="txtRightMountAttrTitle1" AnchorPoint="0,1" RelativePosition="0.07,1" Text="攻击" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b781986e-b451-47fd-9b0c-d23ff6f42721}" Name="txtRightMountAttr1" FontSize="20" Color="99,255,95" AnchorPoint="0,1" RelativePosition="0.37,1" Text="+3000" Alignment="Left" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{0fc655b4-cbf8-45f3-a571-ce0f5f6b99c0}" Color="233,166,62" FontSize="20" Name="txtRightMountAttrTitle2" AnchorPoint="0,1" RelativePosition="0.07,0.79" Text="范围" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{1d7da9de-aa2a-4b21-a81b-a701fcbc64c6}" Name="txtRightMountAttr2" FontSize="20" Color="99,255,95" AnchorPoint="0,1" RelativePosition="0.37,0.79" Text="100" Alignment="Left" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c66da57d-c8cb-4b45-8d87-ec2207032a2e}" Color="233,166,62" FontSize="20" Name="txtRightMountAttrTitle3" AnchorPoint="0,1" RelativePosition="0.07,0.58" Text="大招" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{974dda66-3037-468c-bb0a-80a7455eea79}" Name="txtRightMountAttr3" FontSize="20" Color="99,255,95" AnchorPoint="0,1" RelativePosition="0.37,0.58" Text="双龙出海" Alignment="Left" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{876aa387-9f02-4f7d-88e7-655d02975108}" Color="233,166,62" FontSize="20" Name="txtRightMountAttrTitle4" AnchorPoint="0,1" RelativePosition="0.07,0.37" Text="大招" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{bdb8b1ee-31c8-4193-b4fb-bfc9b43985cb}" Name="txtRightMountAttr4" FontSize="20" Color="99,255,95" AnchorPoint="0,1" RelativePosition="0.37,0.37" Text="双龙出海" Alignment="Left" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d19ec460-2abc-486a-90db-5d215dd4d7f4}" Color="233,166,62" FontSize="20" Name="txtRightMountAttrTitle5" AnchorPoint="0,1" RelativePosition="0.07,0.16" Text="大招" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{e0b4ced2-85c6-47f3-95c0-ce25c0453a1b}" Name="txtRightMountAttr5" FontSize="20" Color="99,255,95" AnchorPoint="0,1" RelativePosition="0.37,0.16" Text="双龙出海" Alignment="Left" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{7d4e1309-2820-4cfa-9d41-5100048880a4}" AbsContentSize="135,34" UseAbsSize="True" RelativePosition="0.337,1.03" AbsPosition="70.1428,128.915">
+                            <WZUI9Image Type="WZUI9Image" GUID="{e6a02b30-7575-442b-9691-132d6cd68e0f}" File="ui/strengthen/common_scale9_di60.png" CapInsets="9,0,5,34" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f6d60628-0369-4a6b-9679-38a356ab241f}" TextKey="ASCENDING42" LabelStyleKey="C7_F20" Scale="0.9" RelativePosition="0.33,0.62" AbsPosition="57.3654,20.9863" Name="txtMountAfter_WndAscending" />
+                        </WZUIContainer>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{77bea66a-6325-4fbc-8a4e-2b022054e906}" Name="txtMountStrongLv2" FontSize="20" Text="Lv500" AnchorPoint="0,1" RelativePosition="0.58,0.935" Color="233,166,62" Alignment="Left" />
+                        <WZUIImage Type="WZUIImage" GUID="{c83278bb-9698-4bef-a979-4d579410320e}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Scale="0.7" AnchorPoint="1,1" RelativePosition="0.85,0.84" Name="starMount2_WndAscending" Visible="True" Rotation="0" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ee6ce531-cb53-4879-8e9f-283b854c1856}" Name="txtMountStarLv2" FontSize="20" Text="30" AnchorPoint="0,1" RelativePosition="0.58,0.83" Color="233,166,62" Alignment="Left" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{4f269f3b-9f38-451c-b053-b7cae09d9649}" AbsContentSize="445,103" UseAbsSize="True" RelativePosition="0.5,0.238">
+                        <WZUI9Image Type="WZUI9Image" GUID="{444614d2-3ac7-4cfa-9ab5-bbd0ceb4fb3f}" File="ui/common/common_scale9_di9.png" Opacity="128" RelativePosition="0.5,0.5" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{4fb1c353-f645-44b9-84d0-5ce0c629361d}" Name="conMountM1" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.13,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{fafe8379-4371-4a97-b2c0-5271f65c3c53}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{43e30e3e-8144-4bdb-b9fd-a16109ed9b55}" LabelStyleKey="C7_F22" TextKey="ASCENDING43" Name="txtMountM1_WndAscending" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{6d62c9b0-624f-45a1-9e76-1546e89e5f98}" Name="conMountM2" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.35,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{01054744-fdef-4144-ba38-11cc4c8aec93}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{73aff529-e909-4609-8202-6fd60a291bc4}" LabelStyleKey="C7_F22" TextKey="ASCENDING9" Name="txtMountM2_WndAscending" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{f9a7dd1a-d798-422c-84c4-2fdbeba59140}" Name="conMountM3" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.57,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{5969ada4-387a-4852-8caa-c3131c34605f}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{06dbfb77-702f-4eef-ba3b-27cf8f192cb2}" LabelStyleKey="C7_F22" TextKey="ASCENDING44" Name="txtMountM3_WndAscending" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <Button Type="WZUIButton" GUID="{01f4c2ed-cb17-4836-a60f-6e50fd7a1924}" AbsContentSize="115,57" UseAbsSize="True" RelativePosition="0.5,0.082" LuaDoneFunctionName="onMount">
+                        <NormalElement Type="WZUIContainer" GUID="{20845d5e-a307-4605-88d0-ed80c3c079a5}">
+                            <WZUIImage Type="WZUIImage" GUID="{15a7b71b-f35f-47ca-a907-f9d24086e903}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{398e6c4a-a5c6-4e47-bf62-23df88fea021}">
+                            <WZUIImage Type="WZUIImage" GUID="{9feedae2-5c92-4951-9705-7d554497f3e4}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{160f09f7-5f89-4a84-859b-f35876c729c0}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{bd79acab-a8a4-47aa-bc48-e891553f7b37}" TextKey="ASCENDING37" LabelStyleKey="SMALL_GREEN_BTN" RelativePosition="0.5,0.5" Scale="1" ScaleX="1" ScaleY="1" Name="txtMount_WndAscending" />
+                    </Button>
+                    <WZUISpine Type="WZUISpine" GUID="{cfa709f0-9223-4604-aad5-c5f694977d46}" FileAtlas="ui/ui_shengguang.atlas" FileJson="ui/ui_shengguang.json" AnimationName="4" RelativePosition="0.43472,0.677374" Visible="False" Name="ani5" Loop="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{b4a8663c-8709-438f-8812-f896f12bbbc0}" Name="conMidRight_WndAscending" AbsContentSize="360,528" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="0.894,0.55">
+                <WZUIContainer Type="WZUIContainer" GUID="{beff7a0b-b462-4cd6-9591-9d698da6db41}" Name="conCheckBox" AbsContentSize="90,450" UseAbsSize="True" RelativePosition="1.119,0.46" Visible="True">
+                    <WZUICheckBoxGroup Type="WZUICheckBoxGroup" GUID="{9fbfacfe-93b4-47a2-8961-cd909e4b8988}" Name="checkGruopEquipClassify_WndStrengthen" RelativePosition="0.5,0.5" AbsContentSize="90,450" UseAbsSize="True" Visible="True">
+                        <CheckBox Type="WZUICheckBox" GUID="{0a754e11-1a92-472d-9b51-4621d3a9fdc9}" Name="checkBody_WndStrengthen" LuaSelectedFunctionName="onSelectEquip" RelativeSize="1,0.14" RelativePosition="0.5,0.92" SelectedIndex="0" Order="0" Visible="True" Tag="1" TouchEnable="True">
+                            <CheckElement Type="WZUIContainer" GUID="{59c917c1-4297-41d2-845d-b8b4519a3833}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{ece1b103-6d14-4c53-a431-249af413fbca}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" Visible="True" RelativePosition="0.42,0.53" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{df650072-e3c6-4570-a818-8d4c5303185e}" ChineseLengthPolicy="20" Text="" Name="txtCheckBox1_WndAscending" Color="255,236,193" FontSize="26" BoldFont="True" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" TextKey="" LabelStyleKey="LABEL_NORMAL" RelativePosition="0.5,0.5" Visible="True" Opacity="255" />
+                            </CheckElement>
+                            <CheckElement Type="WZUIContainer" GUID="{5ac407b5-8f10-4bef-ae78-3f05570adcef}" RelativePosition="0.5,0.5" Visible="True" />
+                        </CheckBox>
+                        <CheckBox Type="WZUICheckBox" GUID="{7cdd3801-2a4a-4a3d-82f1-95c637988a3c}" Name="checkWeapon_WndStrengthen" LuaSelectedFunctionName="onSelectEquip" RelativeSize="1,0.14" RelativePosition="0.5,0.78" SelectedIndex="0" Tag="2" TouchEnable="True">
+                            <CheckElement Type="WZUIContainer" GUID="{c9ff2496-2b51-4c22-8b63-37ded201d947}" RelativePosition="0.5,0.5">
+                                <WZUI9Image Type="WZUI9Image" GUID="{07780a0c-209d-4729-900c-158ef141149b}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" RelativePosition="0.42,0.5" Visible="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{2322cb9f-e016-409c-9f0c-7380ff16f556}" ChineseLengthPolicy="20" Text="" Name="txtCheckBox2_WndAscending" Color="255,236,193" FontSize="26" BoldFont="True" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" TextKey="" LabelStyleKey="LABEL_NORMAL" RelativePosition="0.5,0.5" Opacity="255" />
+                            </CheckElement>
+                            <CheckElement Type="WZUIContainer" GUID="{cc9116af-75f2-4244-87c3-db95fa2a06b6}" RelativePosition="0.5,0.5" Visible="True" />
+                        </CheckBox>
+                        <CheckBox Type="WZUICheckBox" GUID="{ae78cb32-2f4e-41b6-ae6d-2de5304febc6}" Name="checkTreasure_WndStrengthen" LuaSelectedFunctionName="onSelectEquip" RelativeSize="1,0.14" RelativePosition="0.5,0.64" SelectedIndex="0" Tag="3" TouchEnable="True">
+                            <CheckElement Type="WZUIContainer" GUID="{75fcce4d-e332-420c-9cd0-800cea96cbbf}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{ad50f351-509f-4e4d-9277-bb2cedb8d387}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" RelativePosition="0.42,0.5" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{97e32f63-3152-4b64-8d25-4b4ef8288a3e}" ChineseLengthPolicy="20" Text="" Name="txtCheckBox3_WndAscending" Color="255,236,193" FontSize="26" BoldFont="True" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" LabelStyleKey="LABEL_NORMAL" TextKey="" />
+                            </CheckElement>
+                            <CheckElement Type="WZUIContainer" GUID="{79014f6c-b1d1-4a0e-ad73-1100ba3b79c0}" RelativePosition="0.5,0.5" />
+                        </CheckBox>
+                        <CheckBox Type="WZUICheckBox" GUID="{ca656e27-5e5d-4a15-aadd-94ff6764cfa5}" Name="check4_WndStrengthen" LuaSelectedFunctionName="onSelectEquip" RelativeSize="1,0.14" RelativePosition="0.5,0.5" SelectedIndex="0" Tag="4" TouchEnable="True" Visible="False">
+                            <CheckElement Type="WZUIContainer" GUID="{b9b1a1df-32f8-4e0f-b309-026849bfcf5f}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{c849f53e-20fd-4e14-b1a7-0292c2e2559e}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" RelativePosition="0.42,0.5" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8a2d1ef1-0b28-404a-9f46-e5e7d5c1fd08}" ChineseLengthPolicy="20" Text="" Name="txtCheckBox4_WndAscending" Color="255,236,193" FontSize="26" BoldFont="True" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" LabelStyleKey="LABEL_NORMAL" TextKey="" />
+                            </CheckElement>
+                            <CheckElement Type="WZUIContainer" GUID="{639bcdf7-856e-4e89-b7dd-f008e15e8d64}" RelativePosition="0.5,0.5" />
+                        </CheckBox>
+                    </WZUICheckBoxGroup>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{5373a672-57c2-4a79-ab46-c00b92dc4d88}" AbsContentSize="360,528" UseAbsSize="True" RelativePosition="0.5,0.5">
+                    <WZUIContainer Type="WZUIContainer" GUID="{6a3f849d-ed7b-4178-9df0-9abf75e1fe73}" AbsContentSize="180,528" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+                        <WZUI9Image Type="WZUI9Image" GUID="{970f5c8c-655e-40e6-bf60-b2a9e6e619bd}" File="ui/common/common_scale9_di3.png" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{8d2da08c-9b65-4fb1-9d66-ef69fccbe13a}" AbsContentSize="180,528" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5">
+                        <WZUI9Image Type="WZUI9Image" GUID="{bd727d0d-080f-430a-82a2-3fe11dbefd88}" File="ui/common/common_scale9_di3.png" FlipX="False" ScaleX="-1" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{bae3b7cc-decd-4e53-9f4d-47d1d1e307c6}" FontSize="28" Text="" Name="txtMyEquipWord_WndAscending" Color="255,255,255" RelativePosition="0.507883,0.947229" TextKey="" AbsPosition="182.838,500.137" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{cbf8a281-d822-49df-b203-2556deb62e82}" Name="conMyEquipList_WndStrengthen" AbsContentSize="330,450" UseAbsSize="True" RelativePosition="0.5,0.452">
+                    <WZUIContainer Type="WZUIContainer" GUID="{894d62e8-6749-43a1-b39b-22ac82e0db9c}" AbsContentSize="330,380" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{2b310109-886e-4870-a4ae-c7bd4a17df2d}" File="ui/common/common_scale9_di4.png" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+                    </WZUIContainer>
+                    <Button Type="WZUIButton" GUID="{44075d57-468b-45ea-be8f-da0699f16ca5}" AbsContentSize="115,57" UseAbsSize="True" RelativePosition="0.485,0.07" LuaDoneFunctionName="onJumpPet" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{283d3317-9322-4b6b-988e-859ffd04ca59}">
+                            <WZUIImage Type="WZUIImage" GUID="{4b3439ee-f905-4114-952d-1a52e2e54077}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{8065f331-8b02-4a18-aa3d-9abf0c4bbf44}">
+                            <WZUIImage Type="WZUIImage" GUID="{5158ce68-6031-4b71-b818-f9c7e1d27f5f}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{8e537f5a-fc16-4ac3-beb6-617463ed9c21}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{2f5557cd-417c-4656-8766-67e25ef2d3fd}" TextKey="" LabelStyleKey="SMALL_GREEN_BTN" RelativePosition="0.5,0.5" Scale="1" ScaleX="1" ScaleY="1" Name="txtFeed" />
+                    </Button>
+                    <WZUI9Image Type="WZUI9Image" GUID="{715b1b2a-3f47-4534-bc30-a01706be2514}" File="ui/common/common_scale9_di4.png" AnchorPoint="0.5,1" RelativePosition="0.5,1" Visible="True" Name="imgRightBg" />
+                    <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{b84e6566-7735-4de7-9d01-2367bfa9b90c}" Name="tbEquipList_WndAscending" EnableMoveHorizontal="False" AbsContentSize="320,440" UseAbsSize="True" ListItemInterval="0" AnchorPoint="0.5,1" RelativePosition="0.5,0.99" />
+                </WZUIContainer>
+                <WZUIContainer AnchorPoint="0.5,1" GUID="{891af52d-40d7-4ed7-9e8d-1a27328da0bf}" RelativePosition="1.13,0.886455" RelativeSize="1,1" TouchContainerEnable="True" TouchEnable="False" Type="WZUIContainer" AbsContentSize="90,450" UseAbsSize="True" Visible="True" Name="conCheckBox1">
+                    <WZUIContainer AbsContentSize="86,52" AnchorPoint="0,0.5" GUID="{c3c235fa-9431-4f51-9b8c-e6c640c51ed9}" RelativePosition="-0.03,0.92" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True" Visible="True" Name="conCheck1">
+                        <WZUI9Image CapInsets="40,34,15,2" File="ui/common/common_btn_biaoqian_sel.png" GUID="{fca5d9ec-eb2b-450f-9133-847ee1d6c77b}" RelativePosition="0.52,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="True" Visible="True" Name="" />
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" EnableShadow="False" EnableStroke="True" FontSize="26" GUID="{87515761-62fd-427d-9fb9-7d32122d4888}" Name="txtCheckBoxSel1_WndAscending" RelativePosition="0.5,0.5" StrokeColor="80,68,60" StrokeSize="4" Text="" Type="WZUILabelTTF" UseOriginSize="True" TextKey="" LabelStyleKey="LABEL_SEL" Visible="True" />
+                    </WZUIContainer>
+                    <WZUIContainer AbsContentSize="86,52" AnchorPoint="0,0.5" GUID="{1d0bb146-067e-452d-92e7-84f5e0a0eebe}" RelativePosition="-0.03,0.78" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True" Visible="False" Name="conCheck2">
+                        <WZUI9Image CapInsets="40,34,15,2" File="ui/common/common_btn_biaoqian_sel.png" GUID="{f7da2865-4465-412c-899c-ea6087bdff28}" RelativePosition="0.52,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="True" Visible="True" Name="" />
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" EnableShadow="False" EnableStroke="True" FontSize="26" GUID="{31f8fe97-9484-4bb0-a401-359916d5f51a}" Name="txtCheckBoxSel2_WndAscending" RelativePosition="0.5,0.5" StrokeColor="80,68,60" StrokeSize="4" Text="" Type="WZUILabelTTF" UseOriginSize="True" TextKey="" LabelStyleKey="LABEL_SEL" Visible="True" />
+                    </WZUIContainer>
+                    <WZUIContainer AbsContentSize="86,52" AnchorPoint="0,0.5" GUID="{05ba1cf1-fced-4a23-bd22-68dde0fe5adb}" RelativePosition="-0.03,0.64" Type="WZUIContainer" UseAbsSize="True" Visible="False" Name="conCheck3">
+                        <WZUI9Image CapInsets="40,34,15,2" File="ui/common/common_btn_biaoqian_sel.png" GUID="{f2bdf806-0dbb-4a7e-8809-813a0b528be1}" RelativePosition="0.52,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="True" Visible="True" Name="" />
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{41f91d78-6f15-46b2-b976-42899ab957cc}" Name="txtCheckBoxSel3_WndAscending" RelativePosition="0.5,0.5" StrokeColor="80,68,60" StrokeSize="4" Text="" Type="WZUILabelTTF" TextKey="" LabelStyleKey="LABEL_SEL" />
+                    </WZUIContainer>
+                    <WZUIContainer AbsContentSize="86,52" AnchorPoint="0,0.5" GUID="{a0c276cf-22b1-40a3-9644-dc1fd1f0c633}" RelativePosition="-0.03,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="False" Name="conCheck4">
+                        <WZUI9Image CapInsets="40,34,15,2" File="ui/common/common_btn_biaoqian_sel.png" GUID="{b08456a3-d3e8-4da5-af15-98d07be01a84}" RelativePosition="0.52,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="True" Visible="True" Name="" />
+                        <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="26" GUID="{4fe0b210-cc92-4100-9b38-921c09f31180}" Name="txtCheckBoxSel4_WndAscending" RelativePosition="0.5,0.5" StrokeColor="80,68,60" StrokeSize="4" Text="" Type="WZUILabelTTF" TextKey="" LabelStyleKey="LABEL_SEL" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{f66bb429-845b-4259-9f87-0cb65d5a88af}" Name="conNull" Visible="False">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6ee53ef8-2ee9-4d06-9d7f-45a0e52a2460}" TextKey="CHARM_RESULT" LabelStyleKey="C8_F22" RelativePosition="0.5,0.818" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{270e7bd3-91f9-4399-860b-9ef7d214adba}" TextKey="" LabelStyleKey="C8_F20" RelativePosition="0.5,0.735" Alignment="Left" Name="nullTip1" Dimensions="0,0" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{146c2c46-dafb-402a-b4ab-c34d65da9eff}" TextKey="" LabelStyleKey="C8_F20" RelativePosition="0.5,0.65" Alignment="Left" Name="nullTip2" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{b1bfc7f5-434b-4eb0-8c7b-f8540d4a05b2}" Name="conNull2" Visible="False">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{24086353-da73-43f6-8c30-f244482e8e12}" TextKey="CHARM_RESULT" LabelStyleKey="C8_F22" RelativePosition="0.5,0.818" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6f35686f-e6da-41c3-9893-d03501619abf}" TextKey="ASCENDING20" LabelStyleKey="C8_F20" RelativePosition="0.5,0.735" Alignment="Left" Name="txtNull2_WndAscending" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{a5e3e0bb-c445-4d5f-9673-c3434bfbeb4b}" Name="conNull4" Visible="False">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9dc4d33c-99e8-4461-a8ac-2ae74c36e15b}" TextKey="CHARM_RESULT" LabelStyleKey="C8_F22" RelativePosition="0.5,0.818" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7217f58c-7736-4dcd-975b-811f10ec0094}" TextKey="" LabelStyleKey="C8_F20" RelativePosition="0.5,0.735" Alignment="Left" Name="txtConNull4" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIButton Type="WZUIButton" GUID="{3d25e14b-7352-4892-954f-b4123d6099df}" AbsContentSize="110,50" UseAbsSize="True" RelativePosition="0.95,0.08" Name="btnInfo" LuaDoneFunctionName="onInfo" LuaActionName="Normal">
+                <NormalElement Type="WZUIContainer" GUID="{1b92263c-4606-49c2-b0e2-1b39e34b2d1e}">
+                    <WZUIImage Type="WZUIImage" GUID="{9d4b4462-4ed5-48c8-adf6-3be1b3c5bddc}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{0872b471-c4a3-4668-9faf-00b8fd6c40f0}">
+                    <WZUIImage Type="WZUIImage" GUID="{226a6a2b-27c2-4778-87d5-4f965c900edb}" File="ui/common/common_icon_gth.png" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{c936a49f-ae8d-4eea-b3d3-d5ba4d618057}" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndAscending>

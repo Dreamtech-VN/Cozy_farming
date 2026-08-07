@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CellVipGiftBagList GUID="{01E2A503-8258-43bc-8965-44DB96188DDB}">
+    <WZUIContainer AbsContentSize="880,146" GUID="{95151456-083A-406b-861C-44066323FCB8}" LuaObjectName="CellVipGiftBagList" Name="CellVipGiftBagList" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUI9Image File="common/Jigsaw/item_informatio_1_bg.png" GUID="{08A8718F-3FFB-43bf-B9AF-62962F82A6DC}" Type="WZUI9Image" Visible="True" />
+        <WZUIContainer AbsContentSize="90,120" AnchorPoint="0,0.5" GUID="{5FB01039-4EB7-43c5-92E4-2DB6F033F823}" RelativePosition="0.0171014,0.5" RelativeSize="0.18,0.83" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIImage AnchorPoint="0.5,0.5" File="ui/rightMenu/vip/vip1.png" GUID="{ED0F1963-0FEC-484b-8663-6D05284A3FBD}" Name="imgLevel_CellVipGiftBagList" RelativePosition="0.5,0.700127" RelativeSize="0.25,0.25" Scale="1.5" Type="WZUIImage" UseOriginSize="True" />
+            <WZUILabelTTF AnchorPoint="0.5,0.5" Color="0,0,0" FontSize="26" GUID="{1FC42A27-533F-4ffb-ABAA-1020E8D8C123}" Name="txtLevel_CellVipGiftBagList" RelativePosition="0.5,0.3" Text="等级 3" Type="WZUILabelTTF" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="630,130" AnchorPoint="0,0.5" GUID="{AEEA602B-8796-4591-99F0-E455FB29496E}" Name="conGiftList_CellVipGiftBagList" RelativePosition="0.116246,0.5" Type="WZUIContainer" UseAbsSize="True" />
+        <Button AbsContentSize="140,80" AnchorPoint="1,0.5" GUID="{E26EC230-D163-4ef8-9918-1300B6B3D38A}" LuaDoneFunctionName="onGetGiftClicked" Name="btnHasGet_CellVipGiftBagList" RelativePosition="0.986364,0.5" Type="WZUIButton" UseAbsSize="True">
+            <NormalElement GUID="{1420B695-BC67-445e-AEAF-FF05F20ABC5D}" RelativePosition="0.5,0.5" Type="WZUIContainer">
+                <WZUIImage File="common/button/button_5.png" GUID="{DDAB2DBD-8831-40ff-A8C3-E2B4540F7C0C}" Type="WZUIImage" UseOriginSize="True" />
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="28" GUID="{455DA9D5-2F16-4f26-A627-2D90BA8FC43E}" Name="txtBtnNor_CellVipGiftBagList" StrokeColor="78,38,5" StrokeSize="4" Type="WZUILabelTTF" />
+            </NormalElement>
+            <SelectElement GUID="{1CCA9039-9634-47d9-8088-EB32166FE9CD}" Type="WZUIContainer">
+                <WZUIImage File="common/button/button_5_sel.png" GUID="{6B70A715-FF92-4cc1-8D19-A26921D4ED0D}" Type="WZUIImage" UseOriginSize="True" />
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="28" GUID="{2F6C8871-5A36-4e84-B2CA-AC9E1EF3E872}" Name="txtBtnSel_CellVipGiftBagList" StrokeColor="78,38,5" StrokeSize="4" Type="WZUILabelTTF" />
+            </SelectElement>
+            <DisableElement GUID="{7538D791-45D6-4fda-8C80-8E7C7175C897}" Type="WZUIContainer">
+                <WZUIImage File="common/button/button_5_not.png" GUID="{257CF003-5DBA-471c-8900-DB6832A4C011}" Type="WZUIImage" UseOriginSize="True" />
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="28" GUID="{728AC174-3D2B-4bc7-B451-13A2495D30A0}" Name="txtBtnDis_CellVipGiftBagList" StrokeColor="128,128,128" StrokeSize="4" Type="WZUILabelTTF" />
+            </DisableElement>
+        </Button>
+    </WZUIContainer>
+</CellVipGiftBagList>

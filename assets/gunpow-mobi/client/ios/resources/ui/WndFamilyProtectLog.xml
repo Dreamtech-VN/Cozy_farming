@@ -1,0 +1,24 @@
+﻿<WndFamilyProtectLog GUID="{52bbea34-98b0-4380-bcab-3683de33866e}">
+    <WZUIWindow Type="WZUIWindow" GUID="{9814988d-43fe-4e14-a9ca-c9369ec09100}" LuaObjectName="WndFamilyProtectLog" Name="WndFamilyProtectLog" AbsContentSize="502,502" UseAbsSize="True" NameCreate="True" LuaTouchBeganFunction="onBeginTouch" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{98e60e7a-6943-4f0a-8971-29953754c405}" AbsContentSize="502,502" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{10b02c9f-2dec-4901-b8fb-7cd6071f8de0}" AnchorPoint="0.5,0.5" AbsContentSize="502,502" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{efa6cc8c-f1b7-4184-a5ec-525a3f88acb0}" File="ui/common/common_scale9_di5.png" CapInsets="92,80,1,1" ShowRect="False" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{be8c8136-1b7c-4fc4-85c1-2991ae5f1178}" FontSize="26" Text="" Color="255,236,193" Name="txtTitleName_WndFamilyProtectLog" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.942" />
+            <WZUIContainer Type="WZUIContainer" GUID="{fe1ce9d0-05ee-4a7d-9b04-f056027c1deb}" AbsContentSize="65,65" UseAbsSize="True" RelativePosition="0.917223,0.940425">
+                <Button Type="WZUIButton" RelativePosition="0.55,0.5" AbsContentSize="90,65" UseAbsSize="True" GUID="{425116c0-0a7b-47da-9ff4-eb47e45fc0fc}" LuaDoneFunctionName="onBackClick" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{30847b6d-2572-4ac8-af7f-52ba799e8520}">
+                        <WZUIImage Type="WZUIImage" GUID="{08bcd727-ab47-4e36-a84c-60635c197cee}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{53d77315-1f5f-40c9-aadf-d986f87902c3}">
+                        <WZUIImage Type="WZUIImage" GUID="{ffbde0f4-0a3d-4c31-b8ee-f40cd243a03c}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{3bb0f612-122d-40b6-afa6-338a3c8148bf}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{081ba8ce-e968-4980-9596-aa20807fa772}" AbsContentSize="500,420" UseAbsSize="True" RelativePosition="0.5,0.46008" Name="conInvitedMsg_WndFamilyProtectLog" AbsPosition="385,253" Visible="True">
+                <WZUITableContainer CellElementHeight="0.15" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{e140478c-7e53-412f-87e7-3e46d1f96732}" Name="tbconLog_WndFamilyProtectLog" ScissorWidth="1" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Type="WZUITableContainer" Resistance="0.95" RevertTime="0.3" AbsContentSize="480,410" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="377.5,225" RelativeSize="1,1" ColumnCount="1" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndFamilyProtectLog>

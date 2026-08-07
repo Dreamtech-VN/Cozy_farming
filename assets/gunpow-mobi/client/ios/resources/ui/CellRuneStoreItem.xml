@@ -1,0 +1,24 @@
+﻿<CellRuneStoreItem GUID="{966a4f3b-5b7a-42be-bb80-ee90d3f7c5eb}">
+    <WZUIContainer Type="WZUIContainer" GUID="{407d5bbc-d512-4d1f-ac24-4e6a7b694534}" Name="CellRuneStoreItem" LuaObjectName="CellRuneStoreItem" AbsContentSize="180,188" UseAbsSize="True">
+        <WZUI9Image Type="WZUI9Image" GUID="{7c1052c4-8df4-4c79-b384-7809df3e4c4c}" File="ui/common/common_scale9_di18.png" />
+        <WZUIContainer Type="WZUIContainer" GUID="{1bcf3f0f-e1f1-4a17-806d-1e068308cdc1}" AbsContentSize="160,140" UseAbsSize="True" RelativePosition="0.5,0.569149">
+            <WZUI9Image Type="WZUI9Image" GUID="{a5e0aace-cdf9-4b9f-ad87-93f83b401243}" File="ui/common/common_scale9_di58.png" />
+            <WZUIImage Type="WZUIImage" GUID="{9ae755f3-80d6-465c-80c9-71a9473d86c4}" Name="imgBg_CellRuneStoreItem" File="" UseOriginSize="True" Visible="True" />
+            <WZUIImage Type="WZUIImage" GUID="{310f1f9b-e2ac-486b-8fa4-93ffcb8b72af}" Name="imgRune_CellRuneStoreItem" UseOriginSize="True" />
+            <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Color="255,255,255" Dimensions="0,0" EnableStroke="False" FontSize="20" GUID="{f9210fe9-ba0b-4132-960d-da80661b040b}" Name="txtPropName_CellRuneStoreItem" RelativePosition="0.5,0.871428" StrokeColor="60,19,12" StrokeSize="4" Text="" TouchEnable="False" Type="WZUILabelTTF" Visible="True" NameCreate="True" />
+            <Button Type="WZUIButton" GUID="{e5539685-ee78-4416-ae42-fc8c2aec4e83}" LuaDoneFunctionName="onClickBuy">
+                <NormalElement Type="WZUIContainer" GUID="{5df910c0-59a2-4396-95df-c405537d057e}" />
+                <SelectElement Type="WZUIContainer" GUID="{756cdadf-1c54-4395-98b2-251ad722085e}" />
+                <DisableElement Type="WZUIContainer" GUID="{e23aad70-d0cb-4a86-8774-f148194cddc9}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{7e298f71-61d0-4003-9410-add8bc8a5b01}" AbsContentSize="180,35" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0.0106383">
+            <WZUIImage Type="WZUIImage" GUID="{98af6939-eb87-4ef7-9640-9b6bfc565b93}" Name="imgCost_CellRuneStoreItem" RelativePosition="0.272222,0.5" UseOriginSize="True" File="ui/common/common_icon_jinbi.png" Scale="0.5" ScaleX="0.5" ScaleY="0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{85afb910-1cbf-4606-aa79-18e19df6e12d}" Name="txtCost_CellRuneStoreItem" Text="" LabelStyleKey="C6_F20" AnchorPoint="0,0.5" RelativePosition="0.4,0.5" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{b0cc39da-8836-43b6-b01e-9c1947192fe9}" Name="conSell_CellRuneStoreItem" NameCreate="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{44e95bc8-7f38-4299-9da0-be306b6414eb}" File="ui/common/common_shade_chushouheidi.png" />
+            <WZUIImage Type="WZUIImage" GUID="{010dba09-d3b1-4fb3-8f6f-9fe9b06d228f}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellRuneStoreItem>

@@ -1,0 +1,29 @@
+<WndWelfareCard GUID="{a78d978e-dad0-48c1-91e4-22340c51ba4e}">
+    <WZUIContainer AbsContentSize="502,453" GUID="{cd7276a4-cb7f-40d2-b5da-6e86f235b668}" LuaObjectName="WndWelfareCard" Name="WndWelfareCard" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="502,453" GUID="{8331e95a-e991-4bcf-9541-e72d348edaa9}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,1">
+            <WZUIImage Type="WZUIImage" GUID="{bccb4344-7078-4957-a512-1feb1e331eb9}" File="ui/rightMenu/activity/activity_pic_yjk.png" UseOriginSize="False" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" ScaleX="1" Scale="1" ScaleY="1" />
+            <WZUIContainer AbsContentSize="130,65" GUID="{df77496a-46b4-42ba-9699-5cadf336e765}" RelativePosition="0.805625,0.163633" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIButton GUID="{d48b8f26-de1e-4c04-9269-6cb163649321}" LuaDoneFunctionName="onRecharge" Name="btn_WndWelfareCard" Type="WZUIButton" RelativePosition="0.5,0.330769" LuaActionName="Normal">
+                    <NormalElement GUID="{b56262ac-cab7-4aac-9924-7b25e816c916}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1.png" GUID="{7cd39ae3-c677-4e4d-951e-0f3f73f0cdb2}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{65db9bb9-c035-43f0-ad55-7a67d940cb25}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1_sel.png" GUID="{1f3923cc-8928-4330-a796-32a04a205d8d}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{671eeef7-f047-49eb-850f-88d3eae2fec3}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1.png" GUID="{2bab57d6-62db-4866-ad05-01712b00f33c}" RelativePosition="0.5,0.5" RelativeSize="1.1,1" Type="WZUI9Image" GrayRender="True" UseOriginSize="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{f8e0f0ee-2f71-4d35-a26b-22e8b6d39390}" Name="txtBuy_WndWelfareCard" RelativePosition="0.5,0.5" StrokeColor="128,54,13" StrokeSize="4" Text="" Type="WZUILabelTTF" LabelStyleKey="" EnableStroke="True" TextKey="BUY_NOW" />
+                    <WZUISpine Type="WZUISpine" GUID="{c0de7997-f453-4141-b4a4-c250f6e9256b}" FileAtlas="ui/ui_main_likechongzhi.atlas" FileJson="ui/ui_main_likechongzhi.json" Loop="True" AnimationName="animation" RelativePosition="0.5,1.12308" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{dfee5c35-bdc1-4f6a-8f6c-85ba5b625bcb}" FontSize="22" Color="255,227,116" AnchorPoint="0.5,0" RelativePosition="0.5,0.8" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" Name="txtCost_WndWelfareCard" LabelStyleKey="" Visible="True" Text="" />
+                <WZUIImage Type="WZUIImage" GUID="{1a2951d4-9e49-419e-a7fa-a4f17c26fbff}" File="ui/common/commom_icon_ygm.png" Visible="False" Name="imgGet_WndWelfareCard" UseOriginSizeProportion="True" isValid="True" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="500,100" GUID="{8bdc0eae-9096-479e-b5b3-5ddc5c925faa}" RelativePosition="0.5,0.163" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0.5">
+                <WZUIContainer GUID="{eb7f2a01-2b95-4635-b1c5-7fd031fa90d6}" Type="WZUIContainer" AbsContentSize="300,105" UseAbsSize="True" RelativePosition="0.34,0.5" AnchorPoint="0.5,0.5">
+                    <WZUITableContainer AbsContentSize="300,90" AnchorPoint="0.5,0.5" CellElementHeight="1" ColumnCount="3" EnableMoveHorizontal="True" EnableMoveVertical="False" GUID="{d03539e3-cb37-4c07-8d43-4be57ada6423}" Name="tab_WndWelfareCard" RelativePosition="0.5,0.485" RelativeSize="1,1" ShowAll="False" Type="WZUITableContainer" UseAbsSize="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</WndWelfareCard>

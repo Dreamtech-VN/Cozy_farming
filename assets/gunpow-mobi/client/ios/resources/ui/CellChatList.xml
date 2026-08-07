@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CellChatList GUID="{7661C479-A5B6-43da-99E5-64CF4C4E21EA}">
+    <WZUIContainer GUID="{66129778-75C1-4ce9-91F6-B5535A002129}" LuaObjectName="CellChatList" Name="CellChatList" NameCreate="True" RelativePosition="0.5,0.503125" RelativeSize="0.6,0.15" Type="WZUIContainer">
+        <Button GUID="{23463138-3423-4fed-9D74-6A97DC26DED3}" LuaDoneFunctionName="click_CellChatList" Name="btnCell_CellChatList" RelativePosition="0.5,0.5" Type="WZUIButton">
+            <NormalElement GUID="{61471C7C-74D5-4e11-AB7A-CAFDED4E7401}" Type="WZUIContainer">
+                <WZUIImage File="common/text/list_color_nor.png" GUID="{8C1D0C87-5F91-4208-A083-5D6377C0DA64}" LuaTouchBeganFunction="clickImg_CellChatList" Name="imgText_CellChatList" RelativePosition="0.461458,0.5" RelativeSize="1,1" Type="WZUIImage" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement GUID="{BFB23831-B75F-4cf5-902F-ABE85F27DA5C}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer">
+                <WZUIImage File="common/text/list_color_sel.png" GUID="{6B3A4261-EDBD-412a-8B26-DADBE472399A}" LuaTouchBeganFunction="clickImg_CellChatList" Name="imgTextSel_CellChatList" RelativePosition="0.461458,0.5" Type="WZUIImage" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement GUID="{9B574899-AE79-4deb-8855-0B471428FA73}" Type="WZUIContainer" />
+        </Button>
+    </WZUIContainer>
+</CellChatList>

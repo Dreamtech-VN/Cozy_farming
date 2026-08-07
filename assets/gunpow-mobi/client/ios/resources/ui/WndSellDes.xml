@@ -1,0 +1,25 @@
+﻿<WndSellDes GUID="{ce039238-5a6a-43c4-8cc8-31967988533d}">
+    <WZUIWindow Type="WZUIWindow" GUID="{f46e841b-6120-450c-88e3-0821b08126ca}" LuaObjectName="WndSellDes" Name="WndSellDes" ShowAll="True">
+        <WZUIImage Type="WZUIImage" GUID="{5c482e5b-f788-4af5-a5ef-3d40d57cf085}" File="ui/achievement/符文11-出售详情.png" Visible="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{e7bacfd6-b060-4d34-aa6c-5b39b3474ed8}" AbsContentSize="762,528" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{5e947d47-4dbb-4cc1-9083-701409d32741}" File="ui/common/common_scale9_di19.png" ShowAll="False" NoBorder="False" NameCreate="False" ShowRect="False" UseOriginSize="False" Scale="1" UseAbsCoordinate="False" UseOriginSizeProportion="False" CapInsets="80,80,1,1" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{1fd66de0-b380-4583-8cab-f00dc320bf86}" AbsContentSize="754,450" UseAbsSize="True" RelativePosition="0.496874,0.471875" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{3f0ddbe9-227d-473b-a72e-5e56eb046bb8}" File="ui/common/common_scale9_di20.png" />
+            <WZUITableContainer Type="WZUITableContainer" GUID="{04c6ac6f-36ec-4b8c-a740-c493d2e60da6}" ColumnCount="3" CellElementHeight="0.33" EnableMoveHorizontal="False" Name="tab_WndSellDes" AbsContentSize="735,440" UseAbsSize="True" RelativePosition="0.502653,0.491111" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4e69aef3-187e-4508-9330-daf12a67a07b}" Name="txtSale_WndSellDes" FontSize="24" TextKey="FRIENDS_SEND_TIP_3" Visible="False" LabelStyleKey="C8_F24" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{20f2b8f2-14a8-4a81-b727-0b0c692bee69}" AbsContentSize="756,55" UseAbsSize="True" RelativePosition="0.497917,0.866562">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{30b8112d-2e55-4487-8ae5-01a60b2684b0}" TextKey="RUNEBOOK4" FontSize="26" LabelStyleKey="SMALL_WINDOW_TITLE" RelativePosition="0.5,0.445455" />
+            <Button Type="WZUIButton" GUID="{6db25a2b-5920-466f-acd0-0f0f5dc946de}" AbsContentSize="60,50" UseAbsSize="True" RelativePosition="0.959994,0.481818" LuaDoneFunctionName="onClose">
+                <NormalElement Type="WZUIContainer" GUID="{8d9d9bf7-c475-4cc2-8511-512fd9f971c5}">
+                    <WZUIImage Type="WZUIImage" GUID="{afedfdf8-5814-44a1-bad6-4e540b3ae49b}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{c1fd850a-3c10-452a-91ad-156ab7f8a0ed}">
+                    <WZUIImage Type="WZUIImage" GUID="{d92e82cd-a58b-485a-97d4-5ce5b1302757}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSizeProportion="False" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{1916520d-9772-4213-a5f1-49349e3b0b67}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSellDes>

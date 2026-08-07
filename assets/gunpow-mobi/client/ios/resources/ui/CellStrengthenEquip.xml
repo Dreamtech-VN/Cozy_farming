@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<CellStrengthenEquip GUID="{8FD5D5C5-78B9-4251-AA53-DD76B3229340}">
+    <WZUIContainer Type="WZUIContainer" GUID="{00C7AB87-736A-45d1-9700-604F24DC9A6B}" AbsContentSize="311,101" UseAbsSize="True" LuaObjectName="" Name="CellStrengthenEquip" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{CB2EA9CB-3DBE-4b3f-AD19-024939F4B12D}" AbsContentSize="321,102" UseAbsSize="True" RelativePosition="0.499,0.5" TouchEnable="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{7B8C049E-30E5-43c4-B150-616B2C6B55DB}" File="ui/common/common_scale9_beibaodi_sel.png" Name="imgHighlight_CellStrengthenEquip" TouchEnable="False" RelativePosition="0.5,0.486" Visible="True" AbsPosition="160.5,49.164" Scale="0.99" ScaleX="0.995" Order="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{118E9459-DE01-4e6a-88CC-F9D677BC2059}" AbsContentSize="311,92" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{26319F42-0FFC-4af0-BBD3-6D29CD97C688}" File="ui/common/common_scale9_di7.png" CapInsets="0" Visible="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{2BB90ED6-7E9A-4b26-8116-B7790D20EACC}" AbsContentSize="190,38" UseAbsSize="True" RelativePosition="0.65,0.68" TouchEnable="False" AbsPosition="202.15,67.64">
+            <WZUI9Image Type="WZUI9Image" GUID="{E07AD5C9-89EE-4327-A59D-F2143186013F}" File="ui/common/common_scale9_di8.png" TouchEnable="False" RelativePosition="0.5,0.5" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{84693FCE-CE6A-4962-A5E0-B2A1FF93D409}" RelativeSize="0.3,1" RelativePosition="0.181,0.5" Name="conEquipIcon_CellStrengthenEquip" AnchorPoint="0.5,0.5" TouchEnable="False" AbsPosition="56.291,50.5" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{DF67FD68-3987-4202-AC1C-C1400CF093FD}" Name="txtEquipName_CellStrengthenEquip" FontSize="20" Text="装备名称" RelativePosition="0.367,0.68" AnchorPoint="0,0.5" Color="255,255,255" AbsPosition="114.137,68.68" TouchEnable="False" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a79daf33-23a9-4766-8130-70e81177dbf8}" Name="txtPin_CellStrengthenEquip" FontSize="20" Text="最下品" RelativePosition="0.7,0.68" AnchorPoint="0,0.5" Color="229,105,22" AbsPosition="114.137,68.68" TouchEnable="False" Alignment="Left" Visible="False" />
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{bb42748c-f8dc-4866-9da1-0a9b3ac71c3e}" Name="txtEquipAdd_CellStrengthenEquip" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0.36,0.26" AbsPosition="111.96,26.26" TouchEnable="False" />
+        <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onCellClicked" GUID="{add40ca8-ff50-4192-812c-6e1d01e955d4}" UseAbsSize="True" AbsContentSize="311,92" RelativeSize="1,1" RelativePosition="0.5,0.5" Order="2" Name="btn_CellStrengthenEquip">
+            <NormalElement Type="WZUIContainer" GUID="{c468af4e-802c-4de8-b7a3-af445f8c2a24}" />
+            <SelectElement Type="WZUIContainer" GUID="{13660758-52a3-4e52-bb02-6ef6aec82a32}" AbsContentSize="321,102" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{c6a1743f-62c8-4177-ac7e-1611d47b91b2}" File="ui/common/common_scale9_beibaodi_sel.png" Name="imgHighlight_CellStrengthenEquip" TouchEnable="False" RelativePosition="0.5,0.5" Visible="False" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{982fa3a8-44d1-4393-8b26-2a48b11944a7}" />
+        </WZUIButton>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{645eafb1-136b-4138-b12a-9e03d2c20aa0}" Name="txtEquipState_CellStrengthenEquip" FontSize="20" Text="" RelativePosition="0.722206,0.265" AnchorPoint="0,0.5" TextKey="" Color="0,72,3" TouchEnable="False" AbsPosition="224.606,26.765" />
+    </WZUIContainer>
+</CellStrengthenEquip>

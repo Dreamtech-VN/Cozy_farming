@@ -1,0 +1,24 @@
+﻿<CellKidItem GUID="{0f31a58d-cb44-487d-8e75-add77a9ad72c}">
+    <WZUIContainer Type="WZUIContainer" GUID="{a1aecd12-afef-4a5e-8917-13646a32da00}" LuaObjectName="CellKidItem" Name="CellKidItem" NameCreate="True" AbsContentSize="226,84" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{67eac18b-c39a-4417-8e44-ad2cf025c948}" Name="conInfo_CellKidItem" RelativePosition="0.52,0.5">
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{3571d02a-906b-460d-97cc-4128cfac61e3}" AnchorPoint="0,0.5" RelativePosition="0.37,0.75" MaxWidth="180" Name="ftxtAge_CellKidItem" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{743fe6f4-c697-43e1-a720-d72c6803ab53}" AnchorPoint="0,0.5" RelativePosition="0.37,0.5" MaxWidth="180" Name="ftxtHappiness_CellKidItem" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{897bb95d-a357-4fe5-b56b-44f11f7031ec}" AnchorPoint="0,0.5" RelativePosition="0.37,0.25" MaxWidth="180" Name="ftxtCareVale_CellKidItem" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{b41de9a9-a4d1-4c49-b538-58ecf8e004f2}" AnchorPoint="0,0.5" RelativePosition="0.37,0.25" MaxWidth="180" Name="ftxtCareVale2_CellKidItem" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{9fbb5586-347e-4dd9-bbf6-edc5923fcb9b}" Name="conHead_CellKidItem" AbsContentSize="70,70" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.04,0.5">
+            <WZUIImage Type="WZUIImage" GUID="{77c4360e-672e-44c2-85cf-c3b424cc0726}" File="ui/kid/kidicon/family_scale9_001.png" UseOriginSize="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{bbcdfc8a-cd89-49cc-b668-e3f74b376c11}" FontSize="18" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" Name="txtName_CellKidItem" RelativePosition="0.5,0.05" Order="1" Text="不是害人" />
+            <Button Type="WZUIButton" GUID="{9bf51f15-2eb9-4aef-be71-01a882c920ce}" LuaDoneFunctionName="onClickHead">
+                <NormalElement Type="WZUIContainer" GUID="{e4b99fcc-787b-4a89-b76e-f611a281156e}" />
+                <SelectElement Type="WZUIContainer" GUID="{5e09deea-a526-48be-a187-49453c3402ca}" />
+                <DisableElement Type="WZUIContainer" GUID="{a2dda3b2-70fc-4eae-8aac-f5495ebc8cf6}" />
+            </Button>
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{49769f69-f6a3-4a1e-898f-df5fd5bc2a52}" LuaDoneFunctionName="onClickHead" Name="btnHead_CellKidItem">
+            <NormalElement Type="WZUIContainer" GUID="{74e6790a-d3ac-4bd4-94d8-14eb1755a593}" />
+            <SelectElement Type="WZUIContainer" GUID="{2d85a1f1-47de-440f-9317-3a6c649c5013}" />
+            <DisableElement Type="WZUIContainer" GUID="{13640540-3b78-4c04-b480-4aedfe125d9f}" />
+        </Button>
+    </WZUIContainer>
+</CellKidItem>

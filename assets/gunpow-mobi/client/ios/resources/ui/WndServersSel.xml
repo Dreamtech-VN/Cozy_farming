@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<WndServersSel GUID="{8E889781-83B8-4b77-BFAA-8736D81E6D5E}">
+    <WZUIWindow Type="WZUIWindow" GUID="{93207589-EC17-4cd0-98B7-0D4F6375B2DE}" Name="WndServersSel" NameCreate="True" LuaObjectName="WndServersSel" RelativePosition="0.5,0.5" Order="0" Visible="True" AbsContentSize="" UseAbsSize="False" TouchSwallow="True" ShowAll="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{51AD022F-F212-4e2e-9776-965BEA338038}" Visible="True">
+            <WZUIImage Type="WZUIImage" GUID="{01C74C8A-BC9E-4462-80D2-EC62FA986525}" File="ui/login/login_pic_bg1.png" NoBorder="True" UseOriginSize="True" Visible="False" isValid="True" />
+            <WZUI9Image Type="WZUI9Image" GUID="{E096A476-0CB5-477e-AE8F-128BDC57AD99}" File="ui/common/common_scale9_yaan3.png" Opacity="125" />
+            <WZUIParticle Type="WZUIParticle" GUID="{3BFD114F-177A-418a-A367-A6EB6242EDFE}" PlistFile="particle/particle_loadinglizi_01.plist" RelativePosition="0.5,0" Visible="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{CA6C19D0-A824-4cc6-A5D7-74C451879D8F}" ShowAll="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{08EF65C5-8C71-4a85-8D7A-D04C506B9DA9}" AbsContentSize="776,540" UseAbsSize="True" RelativePosition="0.5,0.490625" AbsPosition="480,314">
+                <WZUIContainer Type="WZUIContainer" GUID="{B48E194F-3917-438b-BB7F-1F29162B0D76}" RelativePosition="0.5,0.5" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{68D09C6E-A05A-4073-8C56-F032FDCEC9FB}" RelativeSize="0.5,1" RelativePosition="0.25,0.5">
+                        <WZUI9Image Type="WZUI9Image" GUID="{3D43A061-5BE1-409d-A5FB-B044EFAB66B9}" File="ui/common/common_scale9_di3.png" Opacity="255" CapInsets="97,100,1,1" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{91014E76-D4CB-4be8-A6D4-532E2796FDD5}" RelativeSize="0.5,1" RelativePosition="0.75,0.5">
+                        <WZUI9Image Type="WZUI9Image" GUID="{FFCA5597-030E-4f54-B556-AAC77B7DDECE}" File="ui/common/common_scale9_di3.png" ScaleX="-1" Opacity="255" CapInsets="97,100,1,1" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{3A758363-222C-4980-8D86-2DC212B64D08}" Text="SETTING_SERVERS_LIST" FontSize="28" Color="255,255,255" Name="" RelativePosition="0.50.94169" BoldFont="True" Opacity="255" TextKey="SETTING_SERVERS_LIST" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" />
+                    <Button Type="WZUIButton" RelativePosition="0.941917,0.945493" AbsPosition="729.928,511.566" GUID="{AE799CFF-B314-4c61-90B9-BD27E404C620}" AbsContentSize="80,48" UseAbsSize="True" LuaDoneFunctionName="onClose" LuaActionName="">
+                        <NormalElement Type="WZUIContainer" GUID="{6258C580-5D0D-4da7-831C-25D059EE49B5}">
+                            <WZUIImage Type="WZUIImage" GUID="{AABF6C2B-22FB-4f7c-B778-05616A8322B7}" File="ui/common/common_icon_gb.png" Visible="True" UseOriginSize="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{7E9114AF-6E50-4067-BFCA-A15649079F57}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" RelativePosition="0.575,0.5" AbsPosition="46,24" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{10A7EBE8-9C16-4f15-9624-3EFDFF9CEB44}">
+                            <WZUIImage Type="WZUIImage" GUID="{E490DA1E-2998-425d-B396-09D0AE7D2B0A}" File="ui/common/common_icon_gb.png" Visible="True" UseOriginSize="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{AA5CC3E3-A3A8-4e3b-99AD-20CA959A0758}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" RelativePosition="0.575,0.5" AbsPosition="46,24" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{2D7552FA-8840-437c-9B7F-199E4D430D3F}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{F42E8E2B-CE8E-4ea2-90BB-FDF65DBCF32C}" AbsContentSize="550,460" UseAbsCoordinate="False" UseAbsSize="True" RelativePosition="0.631691,0.450741" AbsPosition="490.192,243.4">
+                    <WZUI9Image Type="WZUI9Image" GUID="{90B78266-465E-4869-AB60-5307FE775EE8}" File="ui/common/common_scale9_di4.png" Opacity="180" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{B0011961-AFAE-4e88-BF0F-E6CA98947962}" File="ui/login/login_pic_diwen6.png" UseOriginSize="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{FDE06C90-B2F2-40a3-A120-CC577C566F00}" RelativeSize="0.98,0.98" RelativePosition="0.5,0.5" AbsPosition="275,282">
+                        <WZUITableContainer Type="WZUITableContainer" GUID="{45F04CB3-3857-4617-9678-9F22EEC9CD72}" CellElementHeight="0.15" ColumnCount="2" Name="tabRightList_WndServersSel" EnableMoveVertical="True" EnableMoveHorizontal="False" EnableMoveoutContainer="True" RelativePosition="0.5,0.5" AbsPosition="269.5,224.8" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{8D45F1B8-BDA3-4003-A06F-354FAAE10B84}" AbsContentSize="210,450" UseAbsSize="True" RelativePosition="0.145356,0.440165" AbsPosition="112.796,237.689">
+                    <WZUIContainer Type="WZUIContainer" GUID="{7BD407EC-AB1F-4c19-B4DB-38575FD0BEB3}" RelativeSize="1,1" RelativePosition="0.0219072,0.6003" AnchorPoint="0,0.5" AbsContentSize="210,370" UseAbsSize="True" AbsPosition="4.60051,270.135">
+                        <WZUITableContainer Type="WZUITableContainer" GUID="{4AA411DA-8085-413e-BE3A-6C3A99299AA5}" CellElementHeight="0.22" ColumnCount="1" Name="tabLeftList_WndServersSel" EnableMoveHorizontal="False" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{6CAFA692-E72C-4bb4-B0F3-98706C408D5F}" AbsContentSize="190,2" UseAbsSize="True" RelativePosition="0.5,0.171111" AbsPosition="105,77">
+                        <WZUIImage Type="WZUIImage" GUID="{1B6C65D1-2301-46e0-936B-FFCC2AE5C7A8}" File="ui/common/common_scale9_fengexian3.png" />
+                    </WZUIContainer>
+                    <Button Type="WZUIButton" AbsContentSize="154,58" UseAbsSize="True" GUID="{31F61E0A-A710-4a69-AA93-CEF145D53A08}" RelativePosition="0.5,0.0733332" AbsPosition="105,33" Name="btnUpdate_WndServersSel" LuaDoneFunctionName="onUpdateList" LuaActionName="Normal" TouchEnable="True">
+                        <NormalElement Type="WZUIContainer" GUID="{0963EF8E-1D11-429c-BA83-05C1F8CDE4B6}">
+                            <WZUIImage Type="WZUIImage" GUID="{EADAEDBD-890A-485d-AF53-A09DD9FDB688}" File="ui/common/common_btn_anniu19.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5E3BF5D7-69A2-4242-9CEC-C604C3A2095D}" TextKey="REFRESH" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeColor="106,44,10" StrokeSize="4" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{8BD9CCA1-038F-48d3-83B1-2F51DF3BF7E1}">
+                            <WZUIImage Type="WZUIImage" GUID="{24F3E4EE-5CCC-464f-9A81-5C5FC4C91CDD}" File="ui/common/common_btn_anniu19_sel.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{1E05CFD2-B9BB-4556-AEA3-70DAABF9FB66}" TextKey="REFRESH" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeColor="106,44,10" StrokeSize="4" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{42D5E99A-9E5A-4024-8BA0-C45CE0F9453D}">
+                            <WZUIImage Type="WZUIImage" GUID="{1A483D53-B81C-422a-8562-92B9A3AAADD4}" File="ui/common/common_btn_anniu19.png" GrayRender="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{FEFF42AC-CB29-4229-B2A6-155F9783424D}" TextKey="REFRESH" FontSize="26" Color="100,100,100" EnableStroke="False" StrokeColor="106,44,10" StrokeSize="4" />
+                        </DisableElement>
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndServersSel>

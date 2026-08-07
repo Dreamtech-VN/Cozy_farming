@@ -1,0 +1,144 @@
+﻿<WndChristmasTree GUID="{03b1e982-691f-43d8-b36b-98f3a05b1213}">
+    <WZUIWindow Type="WZUIWindow" GUID="{68c8bd1c-8cb6-4987-ab59-aacdbe8b3f64}" LuaObjectName="WndChristmasTree" Name="WndChristmasTree" NameCreate="True" AbsContentSize="720,420" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{1d6c947f-0361-4fa2-b47f-b50783068b16}" AbsContentSize="720,420" UseAbsSize="True" RelativePosition="0.5,0.5" Order="0" Visible="True" Name="conTop_WndChristmasTree">
+            <WZUIContainer Type="WZUIContainer" GUID="{6fabff5e-4715-4653-b9ed-2337a137bbc1}" AbsContentSize="720,420" UseAbsSize="True" RelativePosition="0.5,0.5" ShowAll="False">
+                <WZUIImage Type="WZUIImage" GUID="{cac3c5d9-8eb3-45a8-af0d-6e9872e3285a}" File="ui/gameActivity/newyear/happynewyear_zs1.png" UseOriginSize="True" RelativePosition="0.5,0.65881" Visible="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{3fc8dc57-d816-4574-8480-b2de42e2f4f3}" AbsContentSize="300,50" UseAbsSize="True" RelativePosition="0.491928,0.988335" Visible="True" Scale="1" ScaleX="1" ScaleY="1" AnchorPoint="0.5,1" Name="conActiveTime_WndChristmasTree">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9b618bb8-dedd-41e2-94f2-582493b72809}" Name="txtWord_WndChristmasTree" FontSize="18" Color="255,255,255" TextKey="" RelativePosition="0.5,0.75" EnableStroke="True" StrokeSize="4" StrokeColor="158,0,0" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7d33fdc9-2cf8-4c75-aafe-c319944411f1}" Name="txtTime_WndChristmasTree" FontSize="18" Color="255,255,255" TextKey="" RelativePosition="0.5,0.36" StrokeColor="158,0,0" StrokeSize="4" EnableStroke="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{0debd1e8-c5f0-415d-9284-021a6331bf61}" AbsContentSize="290,240" UseAbsSize="True" RelativePosition="0.773055,0.480238" Visible="True" Scale="1" ScaleX="1" ScaleY="1" Name="conForRank_WndChristmasTree">
+                    <WZUI9Image Type="WZUI9Image" GUID="{81e8f11f-caef-434d-b79b-5f2a1764f421}" File="ui/gameActivity/newyear/happynewyear_zs9.png" UseOriginSize="True" RelativePosition="0.5,0.951118" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7b76f307-6386-4eaf-8116-31faaddb0074}" Name="txtRankTitle_WndChristmasTree" FontSize="20" Color="255,236,193" TextKey="CHRISTMASTREE_TEXT1" RelativePosition="0.5,0.95" />
+                    <Button Type="WZUIButton" GUID="{8874b6e6-820e-4ec6-b4ce-955d37740ec8}" Name="btnRewardCheck_WndChristmasTree" AbsContentSize="52,50" UseAbsSize="True" LuaDoneFunctionName="onCheckReward" LuaActionName="Normal" RelativePosition="0.824449,0.977438">
+                        <NormalElement Type="WZUIContainer" GUID="{f3003db3-ddca-4d91-9652-4c0628b896f5}" />
+                        <SelectElement Type="WZUIContainer" GUID="{0a21add3-b8b1-4ae2-a82a-b68e342ef589}" />
+                        <DisableElement Type="WZUIContainer" GUID="{202c3b87-04d7-4b51-8342-e5b56effacaf}" />
+                        <WZUIImage Type="WZUIImage" GUID="{0abc4dd4-7640-4b86-b618-f9d104d7d2ca}" File="ui/gameActivity/newyear/happynewyear_zs3.png" UseOriginSize="True" />
+                    </Button>
+                    <WZUIContainer Type="WZUIContainer" GUID="{371a82a4-4834-4ebe-8316-29c1df26d3ef}" AbsContentSize="300,25" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.870833">
+                        <WZUIImage Type="WZUIImage" GUID="{0c3254cb-2181-41e4-ba7d-cc8d0673b3f0}" File="ui/gameActivity/newyear/happynewyear_zs7.png" UseOriginSize="True" RelativePosition="0.5,1.04" AnchorPoint="0.5,0" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b494d71f-9bce-45ea-aa63-c6a3b065c586}" FontSize="20" Color="255,255,255" TextKey="RANK" RelativePosition="0.106667,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{5e260ced-73aa-4de1-86f6-cfa909e447a8}" FontSize="20" Color="255,255,255" TextKey="PLAYER_NAME" RelativePosition="0.37,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{34624a86-79bf-4b4b-a34e-058b245e31d9}" FontSize="20" Color="255,255,255" TextKey="INTEGRATION" RelativePosition="0.82,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{326a269d-e5f2-451d-b5f7-abab3dc9c20c}" File="ui/gameActivity/newyear/happynewyear_zs7.png" UseOriginSize="True" RelativePosition="0.5,0" />
+                    </WZUIContainer>
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{dec4be48-b3c5-495f-8af3-66724c7569ea}" RelativeSize="0.98,0.96" Name="tableRankList_WndChristmasTree" NameCreate="False" CellElementHeight="0.25" EnableMoveHorizontal="False" EnableMoveoutContainer="True" RelativePosition="0.5,0.145833" ColumnCount="1" Resistance="0.94999998807907104" RevertTime="0.30000001192092896" EnableMoveVertical="True" EnableVerticalScroll="True" AbsContentSize="290,148" UseAbsSize="True" NoBorder="False" Visible="True" AnchorPoint="0.5,0" MaxPosition="0.5,0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{697e188b-6e07-48ae-b269-5ca395e10d75}" File="ui/gameActivity/newyear/happynewyear_zs7.png" UseOriginSize="True" RelativePosition="0.5,0.144167" AnchorPoint="0.5,0" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{bcbe3687-1063-4b0c-bbaf-92cad59fd95f}" Name="ftxtMyRank_WndChristmasTree" MaxWidth="400" RelativePosition="0.5,0.0875" />
+                    <WZUIImage Type="WZUIImage" GUID="{c789891a-3075-459d-b269-ed90e38614e9}" File="ui/gameActivity/newyear/happynewyear_zs7.png" UseOriginSize="True" RelativePosition="0.5,0.0358333" AnchorPoint="0.5,0" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{ba23f0c6-94b7-4671-bf2d-bf142924c91c}" Name="conForTree_WndChristmasTree" AnchorPoint="0,0" RelativePosition="0.0458333,0" AbsContentSize="380,328" UseAbsSize="True">
+                    <WZUIImage Type="WZUIImage" GUID="{5497d09d-d373-40af-9660-55374e2396a5}" File="ui/gameActivity/newyear/happynewyear_zs13.png" UseOriginSize="True" RelativePosition="1,0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{a73c4a52-4f49-434c-8f91-ec73fb353310}" File="ui/gameActivity/christmas/merrychristmas_scale_di8.png" UseOriginSize="True" Visible="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{4f51746a-4b44-4a86-acb5-045240592aed}" Name="conForReward_WndChristmasTree" RelativeSize="1,0.75" AnchorPoint="0.5,1" RelativePosition="0.510526,0.996951" Scale="0.85">
+                        <WZUIContainer Type="WZUIContainer" GUID="{e05c9c2f-9519-49d1-82df-8d7f7a4b4395}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem1_WndChristmasTree" RelativePosition="0.5,0.88">
+                            <WZUIImage Type="WZUIImage" GUID="{824d7a86-dbd3-4498-a2a1-22c81bc1ce87}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{461d9b07-85e4-4169-b425-d1db52ed98e4}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem2_WndChristmasTree" RelativePosition="0.34,0.66">
+                            <WZUIImage Type="WZUIImage" GUID="{2d119eb3-9f42-4801-8e71-0dea0cd047ba}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{73cccfd7-35cb-4ccb-bf3b-332d996557a6}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem3_WndChristmasTree" RelativePosition="0.5,0.66">
+                            <WZUIImage Type="WZUIImage" GUID="{6af0e95c-8840-4cd1-a588-b8ce4dce718f}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{6a660a57-5f24-4028-a097-afb3393937b4}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem4_WndChristmasTree" RelativePosition="0.66,0.66">
+                            <WZUIImage Type="WZUIImage" GUID="{454b93f0-00fb-4f98-be2c-ef66732b9d52}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{3b6b92cd-097e-4746-8939-c70385039364}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem5_WndChristmasTree" RelativePosition="0.18,0.44">
+                            <WZUIImage Type="WZUIImage" GUID="{b0442fc8-751e-42ec-8836-bbb7eb91a265}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{7fe8e450-3106-4996-b119-684a3be338d2}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem6_WndChristmasTree" RelativePosition="0.34,0.44">
+                            <WZUIImage Type="WZUIImage" GUID="{3f465e68-31f6-4f30-b3b3-bb4719fc037c}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{17ec64db-09d2-451b-8717-6b305af972ed}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem7_WndChristmasTree" RelativePosition="0.5,0.44">
+                            <WZUIImage Type="WZUIImage" GUID="{6bc912d6-31b0-4091-bc6a-9f30186aaee3}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{a97bf46f-880c-4b41-b971-69fab2525723}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem8_WndChristmasTree" RelativePosition="0.66,0.44">
+                            <WZUIImage Type="WZUIImage" GUID="{6e839b5d-b047-4eb0-8da3-e3f406f0a85f}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{828726ab-a40c-4ba1-a20a-e7a446169602}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem9_WndChristmasTree" RelativePosition="0.82,0.44">
+                            <WZUIImage Type="WZUIImage" GUID="{47b9a802-c848-48f7-a20e-3832d0c8af06}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{2315cd69-8597-4baa-bbea-a0db501ff60f}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem10_WndChristmasTree" RelativePosition="0.1,0.22">
+                            <WZUIImage Type="WZUIImage" GUID="{22e4149f-2d42-4820-9ac8-b23c8cc5a969}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{af2e7cf2-bbab-4c52-a75b-58ddf99d5f7d}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem11_WndChristmasTree" RelativePosition="0.26,0.22">
+                            <WZUIImage Type="WZUIImage" GUID="{dc93b4e3-3973-4905-964a-2f5e32981567}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{ce1e3e27-ee5a-42b8-9a6d-3998cdf04d2c}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem12_WndChristmasTree" RelativePosition="0.42,0.22">
+                            <WZUIImage Type="WZUIImage" GUID="{744d495d-b956-4836-9893-b2a22bf1d152}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{16adbb58-5ef9-4846-82d7-0bc148ab8825}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem13_WndChristmasTree" RelativePosition="0.58,0.22">
+                            <WZUIImage Type="WZUIImage" GUID="{4daf6955-9b24-4ee5-86a2-1298fb6ec010}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{d1e0bac9-3e71-4186-8926-c99e12b9dae6}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem14_WndChristmasTree" RelativePosition="0.74,0.22">
+                            <WZUIImage Type="WZUIImage" GUID="{4751952a-88ba-4434-bd35-6f58d5d00099}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{9737cccb-912f-492e-b1a4-323afde34fa9}" AbsContentSize="50,50" UseAbsSize="True" Name="conItem15_WndChristmasTree" RelativePosition="0.9,0.22">
+                            <WZUIImage Type="WZUIImage" GUID="{110aa748-d230-4c20-a822-06e0ad50a902}" File="ui/gameActivity/newyear/happynewyear_zs5.png" />
+                        </WZUIContainer>
+                        <WZUISpine Type="WZUISpine" GUID="{b682a854-8ee4-4558-be69-e2c87ca19d5a}" FileAtlas="ui/ls_jijun.atlas" FileJson="ui/ls_jijun.json" AnimationName="wait" Scale="0.8" Name="spineLightRect_WndChristmasTree" Loop="True" Visible="False" TouchEnable="False" TouchSwallow="True" />
+                    </WZUIContainer>
+                    <WZUI9Image Type="WZUI9Image" GUID="{fc15c123-2b73-4b67-850a-9ec78af2f6da}" File="ui/gameActivity/newyear/happynewyear_zs6.png" UseOriginSize="True" RelativePosition="0.5,0.371951" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{2c4a70f6-ebba-4fd9-9754-ea3d8161bafc}" Name="ftxtFreeAtt_WndChristmasTree" MaxWidth="450" RelativePosition="0.5,0.367195" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{adc1c383-4bf4-46bc-990d-4d8e88bbe480}" AbsContentSize="380,80" UseAbsSize="True" RelativePosition="0.497368,0.0792683" AnchorPoint="0.5,0">
+                        <Button Type="WZUIButton" GUID="{44d6ee21-ab1c-4cae-9c33-473739deed5f}" Name="btnFree_WndChristmasTree" LuaDoneFunctionName="onClickFree" LuaActionName="Normal" LocalInterval="300" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.302632,0.26">
+                            <NormalElement Type="WZUIContainer" GUID="{69ca07df-b9a5-4aba-b154-75eff6c3a6c0}">
+                                <WZUIImage Type="WZUIImage" GUID="{a8b62003-436c-49a0-8a0f-e6fea8e028ac}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{ee0000f5-5bac-4d05-bf8b-a8f86a033d81}">
+                                <WZUIImage Type="WZUIImage" GUID="{48584fe8-d576-4e60-8ea4-33bd9d6ee734}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{c10fb554-7a7b-4bb8-92dd-5495ccbbc816}" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ba1ac2f8-b743-4656-9baf-3a1548c4cc60}" LabelStyleKey="SMALL_GREEN_BTN" Text="9月18号" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Name="txtFree_WndChristmasTree" Alignment="Left" TextKey="" />
+                            <WZUIImage Type="WZUIImage" GUID="{46448047-441c-4789-8e4c-6e08ab307578}" TouchEnable="False" Name="imgFreeRedDot_WndChristmasTree" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.94,0.94" Visible="False" Scale="0.8" />
+                        </Button>
+                        <Button Type="WZUIButton" GUID="{89599ecb-fbdf-4592-9fc5-d697031c5a70}" Name="btnDiamond_WndChristmasTree" LuaDoneFunctionName="onClickTen" LuaActionName="Normal" LocalInterval="300" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.723684,0.28">
+                            <NormalElement Type="WZUIContainer" GUID="{d624ebd7-bdc0-4571-80f0-9e234c96a23e}">
+                                <WZUIImage Type="WZUIImage" GUID="{bbf00b99-fef0-491a-9062-943ccce61431}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{eb785326-373a-4bbf-99b4-d0518cbcb164}">
+                                <WZUIImage Type="WZUIImage" GUID="{c200e56f-35fe-47d1-9173-50cec8991b0e}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{8232e589-aceb-4997-9374-5ae25196134d}" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ca044bce-dc39-464d-9dc1-59275ea12dde}" LabelStyleKey="SMALL_GREEN_BTN" Text="9月18号" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Name="" Alignment="Left" TextKey="CHRISTMASTREE_TEXT8" />
+                        </Button>
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{cad47afd-7ba6-4dc2-9fdf-897aa5a924e0}" Name="ftxtFreeBtn_WndChristmasTree" MaxWidth="200" RelativePosition="0.3,0.7875" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{39614bda-1e1b-4f7c-a2d3-b0fa75342052}" Name="ftxtTenBtn_WndChristmasTree" MaxWidth="200" RelativePosition="0.723,0.7875" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{364755bd-1fae-49e2-b545-fcf40e3f697c}" FontSize="16" Color="255,255,255" TextKey="PVP_RANK_5" AnchorPoint="0,0.5" RelativePosition="0.1,0.943902" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4d2dc721-6ff7-4fe5-a28c-064df5fa2eef}" FontSize="16" Color="255,236,193" TextKey="" AnchorPoint="0,0.5" RelativePosition="0.1,0.882926" Name="txtCurScore_WndChristmasTree" />
+                </WZUIContainer>
+                <Button Type="WZUIButton" GUID="{d9676fc0-b6fc-4cc8-9db1-226c426cc798}" Name="btnBox_WndChristmasTree" LuaDoneFunctionName="onClickBox" LuaActionName="Normal" LocalInterval="300" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.767831,0.118167">
+                    <NormalElement Type="WZUIContainer" GUID="{a65d34f3-8a50-43ef-9204-5d98d524d7ba}">
+                        <WZUIImage Type="WZUIImage" GUID="{fa10ad22-18fd-4688-a3f4-d098bde8534f}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{692e8198-3724-4695-a764-8810b23d3e03}">
+                        <WZUIImage Type="WZUIImage" GUID="{0c6f869a-4c1b-4da3-a6e4-e4434b123ac3}" File="ui/common/common_btn_anniu3_0_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{a20a3b20-8a90-4f21-ba17-73761e25cc6e}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9df4deab-65e4-45b9-bb38-edfe9443acb8}" LabelStyleKey="SMALL_ORANGE_BTN" Text="9月18号" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Name="" Alignment="Left" TextKey="CHRISTMASTREE_TEXT6" />
+                    <WZUIImage Type="WZUIImage" GUID="{4fe7c4ff-5465-4153-b60d-7cc1e17fa5e6}" TouchEnable="False" Name="imgBoxRedDot_WndChristmasTree" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.94,0.94" Visible="False" Scale="0.8" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+    <WZUIContainer Type="WZUIContainer" GUID="{779aa561-7ce7-4c78-9fb6-977d726e8d8b}" AbsContentSize="360,360" UseAbsSize="True" Name="conForRankReward_WndChristmasTree" Visible="False" NameCreate="True" ShowAll="False">
+        <WZUI9Image Type="WZUI9Image" GUID="{57f036dc-e0bb-4f62-8a1f-143d275f96e9}" File="ui/gameActivity/newyear/happynewyear_zs14.png" UseOriginSize="True" />
+        <WZUIContainer Type="WZUIContainer" GUID="{33ecf4f3-7987-43bd-8be6-23c2613ba469}" AbsContentSize="360,45" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.992">
+            <WZUIImage Type="WZUIImage" GUID="{d638166d-9b79-4781-9d1a-331ac2580f46}" File="ui/gameActivity/newyear/happynewyear_zs8.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+            <WZUIImage Type="WZUIImage" GUID="{d3d152c7-72fa-4d1e-8bd7-15c75c18d06a}" File="ui/gameActivity/newyear/happynewyear_zs7.png" UseOriginSize="True" RelativePosition="0.5,0.0222222" ScaleX="1.28" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{15203f86-c768-4e3a-a80f-c5f448dea9f1}" TextKey="CHRISTMASTREE_TEXT22" FontSize="24" Color="255,236,193" />
+        </WZUIContainer>
+        <WZUITableContainer Type="WZUITableContainer" GUID="{f1a124c3-f014-4c9c-8c14-4a06248dc52b}" CellElementHeight="0.26" Name="tableRewardList_WndChristmasTree" RelativeSize="1,0.83" RelativePosition="0.5,0.44" EnableMoveHorizontal="False" />
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{946dcce9-94f7-4a30-99df-956ab426d4ff}" AbsContentSize="350,80" UseAbsSize="True" Name="conRewardCell_WndChristmasTree" Visible="False" NameCreate="True">
+        <WZUIImage Type="WZUIImage" GUID="{683fef1e-96b9-4c05-ae6d-009cdd301de0}" File="ui/common/common_icon_1st.png" UseOriginSize="True" Scale="0.65" RelativePosition="0.08,0.5" Name="imgRankIndex_ConRewardCell" Visible="False" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6c2fc64c-89ee-4eaa-b1e8-eb4fa4782c83}" FontSize="22" Color="255,227,116" RelativePosition="0.08,0.5" Name="txtRankIndex_ConRewardCell" Visible="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{d398f8e2-e716-40ea-a73e-810185e0fab4}" AbsContentSize="60,60" UseAbsSize="True" Name="conReward1_WndChristMasTree" RelativePosition="0.28,0.5" Visible="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{044667c1-7b7b-4d20-a598-f6bc3cf4ce18}" AbsContentSize="60,60" UseAbsSize="True" Name="conReward2_WndChristMasTree" RelativePosition="0.48,0.5" Visible="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{693d3b67-db0c-46ad-a4ac-b2a126117d20}" AbsContentSize="60,60" UseAbsSize="True" Name="conReward3_WndChristMasTree" RelativePosition="0.68,0.5" Visible="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{2af765b5-8ad1-4e98-af7d-60358ebf6dbd}" AbsContentSize="60,60" UseAbsSize="True" Name="conReward4_WndChristMasTree" RelativePosition="0.88,0.5" Visible="False" />
+        <WZUIImage Type="WZUIImage" GUID="{6233d183-a6d3-4036-bbc2-1387ef282506}" File="ui/gameActivity/newyear/happynewyear_zs7.png" UseOriginSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" ScaleX="1.28" />
+    </WZUIContainer>
+</WndChristmasTree>

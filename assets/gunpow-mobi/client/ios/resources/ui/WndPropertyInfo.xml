@@ -1,0 +1,147 @@
+﻿<WndPropertyInfo GUID="{4cc0b40d-caa3-46f5-b48c-e36dc6ee3920}">
+    <WZUIWindow AbsContentSize="0,0" AbsPosition="0,0" GUID="{25c4e48d-f078-4890-b5c6-2549a8bab2de}" LuaObjectName="WndPropertyInfo" LuaTouchBeganFunction="onTouchBegan" Name="WndPropertyInfo" NameCreate="True" RelativePosition="0.5,0.5" ShowAll="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="False" Visible="True" Order="">
+        <Button Type="WZUIButton" GUID="{6c46ba7d-e1db-4966-bfdc-71fe5fcf37e1}" RelativePosition="0.5,0.5" LuaDoneFunctionName="onTempClose" LuaActionName="Normal" AbsContentSize="2000,2000" UseAbsSize="True">
+            <NormalElement Type="WZUIContainer" GUID="{1d529d49-abae-4469-978a-94d0a6cc8100}" />
+            <SelectElement Type="WZUIContainer" GUID="{828b3219-2a0d-4b37-92c6-e862090c02c7}" />
+            <DisableElement Type="WZUIContainer" GUID="{79304d7d-dd8e-4162-9487-9bc1d09eb9b7}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{2f3c4e28-b956-4982-8409-da3b2b6f99ce}" AbsContentSize="420,600" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{add09af9-f37f-4b66-952b-706b6c6c0e77}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a473fd07-c405-4ccd-aeb7-5aff5c390ada}" FontSize="24" Color="255,236,193" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.935" StrokeSize="4" StrokeColor="132,66,29" Text="" Name="" TextKey="PROPERTYINFO1" AbsPosition="192.5,288" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{eaafbbfe-4a54-430a-9c55-4c3c7ebcb70f}" Visible="True" RelativePosition="0.5,0.458" AbsPosition="390,269" Name="conMain" AbsContentSize="405,540" UseAbsSize="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{379c3ab1-f7e1-4b7b-ba77-570052a7d4c7}" AbsContentSize="405,535" UseAbsSize="True" RelativePosition="0.5,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{c85dde84-1214-424f-9500-676cad5c2ad2}" File="ui/common/common_scale9_di33.png" Opacity="150" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{d7e5f22b-b395-4df4-837a-f9dff455d41e}" AbsContentSize="400,35" UseAbsSize="True" RelativePosition="0.5,0.957">
+                <WZUI9Image Type="WZUI9Image" GUID="{fdfb4bd7-1038-4d83-b8b2-1e504ef1304b}" File="ui/common/common_scale9_di10.png" Opacity="200" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{3907ee5b-0a10-4d77-9e0b-7df579f6cdfd}" AbsContentSize="125,34" UseAbsSize="True" RelativePosition="0,0.52" AnchorPoint="0,0.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{e62bbd4f-226b-48b8-a2c1-fa3bbaaf2a4f}" File="ui/common/common_scale9_di11.png" Visible="True" RelativePosition="0.5,0.466667" />
+                    <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" Color="255,227,116" FontSize="22" GUID="{48b62870-9b29-4e02-9e86-3d6c133cf8c9}" Name="txtUser_WndPlayerInfo" RelativePosition="0.05,0.5" Text="" Type="WZUILabelTTF" EnableStroke="True" StrokeSize="3" StrokeColor="87,47,21" Order="0" TextKey="WNDPLAYERINFO3" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <MoveElement Type="WZUIContainer" AbsContentSize="400,140" UseAbsSize="True" RelativeSize="1,1" AnchorPoint="0.5,1" RelativePosition="0.46,0.9" GUID="{27441a7d-d979-4790-ad88-09f4544eddee}">
+                <WZUIContainer Type="WZUIContainer" GUID="{9db2f19d-3e50-4ff5-a595-590913627c6b}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.2,0.98">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ccf0608c-64eb-4ba9-9e3b-18fb8a66f478}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle1_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{45fc8a59-10f0-48de-b53b-2b4f6a2e8001}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr1_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{51086c70-6b0d-4e30-9ddb-448f80259275}" Name="conMyAtt1_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.45,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{eb017fd6-770c-43d8-ba9e-1155741b6947}" Name="imgState1_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{be5f849b-3023-4919-a8c2-8ea8dd5452e8}" Color="255,255,255" FontSize="20" Name="txtMyAtt1_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{5656d94e-6465-47d2-8721-a3705e28995d}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.2,0.78">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7269a425-5335-4e21-a6d9-dace50bb8a16}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle2_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7c39aa57-339f-432a-8cd1-e539f1f4e115}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr2_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{525dbd36-a9d3-400b-910f-f70d7071d1f1}" Name="conMyAtt2_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.45,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{154918d7-52d4-4c5a-b5d3-8469b7705246}" Name="imgState2_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{80bd99cf-ae72-45db-b357-f0e4515db44e}" Color="255,255,255" FontSize="20" Name="txtMyAtt2_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{995f7368-271f-48ae-a2e5-b85de324d7c3}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.2,0.58">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4b6d6739-e8da-4fc2-bae9-e2d3a76c25c0}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle3_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ff6e7d9e-63e2-411e-ab1d-37ea3b690e0d}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr3_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{3da100d5-514d-4b15-9a52-19e666670c96}" Name="conMyAtt3_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.45,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{cf969170-837c-415b-991e-26c0e193fce5}" Name="imgState3_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{fd2f5f94-8355-4152-a991-3ffb09f7a7c9}" Color="255,255,255" FontSize="20" Name="txtMyAtt3_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{e9a5d135-52af-421f-955c-7c810a7dc9b7}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.2,0.38">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c3c30478-3012-48a0-8e35-a6ad2f3200af}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle4_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7eddf139-53dd-4c86-adeb-b701aea4021f}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr4_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{6e3c10cb-131e-49c3-a73f-2e2709598cf8}" Name="conMyAtt4_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.45,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{42d07716-110a-4955-804f-8f78364b82b9}" Name="imgState4_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{406ab2cd-dd81-45d4-934c-fb324e31d1d6}" Color="255,255,255" FontSize="20" Name="txtMyAtt4_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{af8f2407-b530-4231-bad7-0b2a8baf0466}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.2,0.18">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ef355b5a-3a28-4d4d-b062-68270b0f50af}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle5_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{3fb546a3-5782-4b72-b361-e53e100589a1}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr5_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{085ff024-c82f-4823-a0be-5362ec3b6351}" Name="conMyAtt5_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.45,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{ab5fd08e-16b6-4e81-973f-5f1db0b9b18d}" Name="imgState5_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{7814641f-0772-41eb-bf80-a82aa36a7f06}" Color="255,255,255" FontSize="20" Name="txtMyAtt5_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7ead742b-39f7-40e9-bfef-0fdd6f8955a9}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.2,-0.02">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1d329e22-def6-4ab8-828d-4eadbfb564be}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle7_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{a0dba640-3c31-46e2-baa5-6f5e1c8d5575}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr7_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{8a6ba079-2b99-4bd4-b851-a032ab607fc9}" Name="conMyAtt7_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.45,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{4fb55b36-2162-40db-8aa7-1713eef55506}" Name="imgState7_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a1e73c0b-088f-4739-91c1-543f32fbd7c2}" Color="255,255,255" FontSize="20" Name="txtMyAtt7_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{ff3402fb-a5cb-42d0-b3a9-36e883eaa8f2}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.2,-0.22">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{0c656039-63bd-47fa-82b9-d16751192c0f}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle8_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{15511a1f-0409-4edd-8ba5-5c30e9301f4b}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr8_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{fc55ea18-04a6-4cef-b5ee-3a7808b35cdc}" Name="conMyAtt8_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.45,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{78a23bba-144c-48ea-b48b-10919d19a892}" Name="imgState8_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c6d54f25-239d-487b-9578-2913a1693344}" Color="255,255,255" FontSize="20" Name="txtMyAtt8_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c3e39720-0473-48af-b00f-adf46d4b50df}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.73,0.98">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{47076fc9-45cc-4667-8611-0a043d20eab1}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle9_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{5e107e8c-7240-4ee2-939f-0958983338b6}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr9_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{439bb405-99b6-4f45-ae6b-072b8a363d45}" Name="conMyAtt9_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.3,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{ec0b1dc6-a01a-49a3-8657-d945315c6f48}" Name="imgState9_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c8008a76-202a-449e-b823-2d4fbe657738}" Color="255,255,255" FontSize="20" Name="txtMyAtt9_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{2b540305-9c34-40b3-917f-1f8e7ae951af}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.73,0.78">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ec6be7e1-e3e0-415a-9785-0621a4a3b639}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle10_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{e3d880b7-d52b-4017-913b-c1a130c7c733}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr10_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{4ea02709-60dd-42fc-8572-742904cdcf65}" Name="conMyAtt10_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.3,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{a891b358-f0b2-49aa-8e48-ad5a245c67e4}" Name="imgState10_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c02d8fe0-eb9a-4c0e-a173-74962b9d3352}" Color="255,255,255" FontSize="20" Name="txtMyAtt10_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{b591de34-3591-4e4e-b832-c6748aa8faf0}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.73,0.58">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{059bdf40-8e8a-4119-a3ab-079259e7d119}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle11_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{16f0b6f4-910b-4918-8715-21b32d12170b}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr11_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{e383c165-c59b-4cab-a9dd-0d23b38d1e6f}" Name="conMyAtt11_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.3,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{0a99ad13-3053-48c5-a450-c2bf81f540ac}" Name="imgState11_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4300a0cb-a52c-4624-9e0c-c7eec0535259}" Color="255,255,255" FontSize="20" Name="txtMyAtt11_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{33e9e4de-c522-4b79-aa2d-5ec53fe4dd3a}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.73,0.38">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{a9db83af-cae3-46ae-851f-e131c2f79a01}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle12_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{834268ab-4708-4db4-9343-1d03891f3d3e}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr12_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{05fe1af6-1a22-48a3-ac8c-cdcc5545431a}" Name="conMyAtt12_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.3,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{d9658848-3903-468f-8620-e2a02e511099}" Name="imgState12_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{cdac954a-0428-480f-a21b-f3e4ad43e523}" Color="255,255,255" FontSize="20" Name="txtMyAtt12_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{a9bca2e0-daeb-49e0-82b9-a862a0b3ac3c}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.73,0.18">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8426f448-72a0-41a2-9ce5-4134d353c243}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle6_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{12cf93f8-33c8-45a4-9727-d392303096b9}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr6_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{99555792-4e0d-447b-b857-060673cc5231}" Name="conMyAtt6_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.3,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{ca6b398d-30af-469b-b063-1c22ad02da49}" Name="imgState6_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ecc7f615-c332-424f-8af3-14ff85b62a5c}" Color="255,255,255" FontSize="20" Name="txtMyAtt6_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{8d47e624-1542-4dfe-a5c2-9ea3ef218eb7}" AbsContentSize="150,30" UseAbsSize="True" RelativePosition="0.73,-0.02">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ff84396b-bbac-44d7-9a0d-25d9d79badc6}" FontSize="20" Color="128,54,13" BoldFont="True" RelativePosition="0.1,0.5" Text="" Alignment="Left" AnchorPoint="0,0.5" Name="attrTitle13_WndPlayerInfo" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{3825c1fa-dc8e-4594-91a1-ab2027410500}" FontSize="20" Color="255,255,255" Text="0" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" RelativePosition="0.43,0.5" Name="attr13_WndPlayerInfo" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{100b3fab-43ef-4e88-ba17-8108d5ee40ee}" Name="conMyAtt13_WndPropertyInfo" AnchorPoint="1,0.5" RelativePosition="1.3,0.5" Visible="False">
+                        <WZUIImage Type="WZUIImage" GUID="{42495c05-5736-4b48-8c82-981c9578cc35}" Name="imgState13_WndPropertyInfo" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" ScaleX="1" ScaleY="0.8" Scale="0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{bc80ec36-d69f-4395-ab31-5bfba0406540}" Color="255,255,255" FontSize="20" Name="txtMyAtt13_WndPropertyInfo" AnchorPoint="1,0.5" Text="" RelativePosition="0.9,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </MoveElement>
+            <WZUIContainer Type="WZUIContainer" GUID="{fc5163de-d3f7-4f71-ad9e-1a319df2fee5}" AbsContentSize="400,280" UseAbsSize="True" RelativePosition="0.5,0.28" Name="conPropertyInfo" Visible="True">
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{e75e6fd6-0f71-42dc-b59a-4004a26eca77}" RelativePosition="0.05,0.97" Name="attrInfo1" MaxWidth="500" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{0e1f6d42-ddfd-4aa1-b010-8262acca1859}" RelativePosition="0.05,0.89" Name="attrInfo2" MaxWidth="500" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{02005677-865e-4b43-a717-3785a5d71605}" RelativePosition="0.05,0.81" Name="attrInfo3" MaxWidth="500" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{ad967f4c-8f09-4cd2-afd4-10218b8c5ec7}" RelativePosition="0.05,0.73" Name="attrInfo4" MaxWidth="500" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{f0f382a2-964b-42ef-8623-52f51f5a1fe2}" RelativePosition="0.05,0.65" Name="attrInfo5" MaxWidth="500" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{83309bd9-24f2-4c39-99b1-5bcabb531cee}" RelativePosition="0.05,0.57" Name="attrInfo6" MaxWidth="500" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{9b44256d-bebf-4791-b854-07d312e0dc7d}" RelativePosition="0.05,0.49" Name="attrInfo7" MaxWidth="500" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{df654097-91a2-4913-92d2-09059b0cec84}" RelativePosition="0.05,0.41" Name="attrInfo8" MaxWidth="500" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{1c5d1861-a5f0-4fb2-9872-9fb82f8a7cf7}" RelativePosition="0.05,0.33" Name="attrInfo9" MaxWidth="500" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{dac6305a-8027-48a1-908b-6c5bed975f93}" RelativePosition="0.05,0.25" Name="attrInfo10" MaxWidth="500" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{cb8b2e8a-c415-4e1f-9e47-2a2254e88b93}" RelativePosition="0.05,0.17" Name="attrInfo11" MaxWidth="500" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{59e851d0-b20c-477f-9db0-57ba52916af9}" RelativePosition="0.05,0.09" Name="attrInfo12" MaxWidth="500" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{ebd27893-9174-4484-b131-64042ae15c54}" RelativePosition="0.05,0.01" Name="attrInfo13" MaxWidth="500" AnchorPoint="0,0.5" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{723b6dc7-c3e8-4855-a7ae-347fd3908f73}" File="ui/common/common_scale9_fengexian2.png" UseOriginSize="True" Color="159,130,106" ScaleX="0.62" Scale="0.62" ScaleY="1" RelativePosition="0.5,0.55" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndPropertyInfo>

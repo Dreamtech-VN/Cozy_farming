@@ -1,0 +1,210 @@
+<?xml version="1.0" ?>
+<WndMarry GUID="{24A05B93-2EB8-4e16-B90F-488C8EFF7101}">
+    <WZUIWindow AbsContentSize="776,535" GUID="{8654CF57-B5C6-4b1c-96B8-6723ACF9516C}" LuaObjectName="WndMarry" Name="WndMarry" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer GUID="{A46B5C28-9B1C-4afd-AC3E-0ABDE4760789}" RelativeSize="1,1" Type="WZUIContainer" AbsContentSize="126,60" UseAbsSize="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{C8371CB0-5C46-4ac8-A51E-201F5851CFDD}" AbsContentSize="388,535" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{F0BAC347-755C-4dd3-841C-88B7738FF5B6}" File="ui/common/common_scale9_di3.png" CapInsets="96,200,1,1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{EF6DEFE2-D668-4a52-93C6-BB5BA77E7E94}" AbsContentSize="388,535" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{ADA2EF09-799E-4492-B633-3FF36A628008}" File="ui/common/common_scale9_di3.png" CapInsets="96,200,1,1" ScaleX="-1" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="86,86" AnchorPoint="0.5,1" GUID="{A03C4226-D4F1-44b3-9E17-F4E4CD9D9E3C}" Name="conTop_WndMarry" RelativePosition="0.944088,1.02437" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIImage Type="WZUIImage" GUID="{F71A9977-3187-49d8-8576-9CE9C88E86C4}" File="ui/common/common_icon_gb.png" Scale="1" ScaleY="1" ScaleX="1" RelativePosition="0.465116,0.523256" AbsPosition="40,45" UseOriginSize="True" />
+            <Button AbsContentSize="90,90" GUID="{EEC99932-DB11-4a3f-9BD7-561B018A7DD6}" LuaDoneFunctionName="onCloseClick" Name="btnClose_WndMarry" RelativePosition="0.55028,0.5" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal">
+                <NormalElement GUID="{95E00D06-D58F-4424-A3C4-8F81D6730F1A}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{0407A385-22B3-48fd-8E52-4B3E8F049A17}" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </NormalElement>
+                <SelectElement GUID="{FB8E478F-5B6E-4061-B700-AB2018B3C4E9}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{785EBF25-98F3-41c4-AC92-D97709BB44DC}" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement GUID="{38C05738-21DE-4fee-BFD5-0BE706D2B4B7}" Type="WZUIContainer" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="776,390" GUID="{AD2B0E70-46DA-40d7-9267-DF3B58BE5194}" Name="conContent_WndMarry" RelativePosition="0.5,0.52991" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{2EAA9A36-39D0-4752-A4B0-76D854F90428}" AbsContentSize="254,380" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.175174,0.507449" TouchEnable="True" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{4660B2BA-59B6-4454-B1D3-D6F7616A2471}" File="ui/common/common_pic_diwen.png" UseOriginSize="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{C871CD53-E315-4f35-8C2F-710F34C1A6B8}" AbsContentSize="254,380" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.502377,0.507449" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{72EA6C9E-0F2A-434f-9BA4-8C894E71E1DE}" File="ui/common/common_pic_diwen.png" UseOriginSize="False" ScaleX="-1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{C0D14A08-288E-47ef-9C99-D1C39DB3F020}" AbsContentSize="760,334" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+                <WZUIImage Type="WZUIImage" GUID="{5901D001-0D30-4b02-9DFF-69583DC9EEC9}" File="ui/marrige/marry_pic_bg1.png" TouchEnable="False" Visible="True" />
+                <WZUI9Image Type="WZUI9Image" GUID="{E70B6C63-F513-47cc-8EB8-5BCD9A80F1F7}" File="ui/common/common_scale9_di20.png" />
+                <WZUIContainer AbsContentSize="175,238" AnchorPoint="0.5,0.5" GUID="{50645575-6846-491b-B46C-44EDCCA3AD93}" Name="conProp1_WndMarry" RelativePosition="0.136173,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{BBBE73DD-EE20-4c3a-86FF-BE967054561B}" File="ui/common/common_scale9_di21.png" TouchEnable="False" Visible="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{B2870218-441D-4692-B42C-B17A1041B6EF}" Color="255��236��193" FontSize="22" Text="心形花束" RelativePosition="0.5,0.888635" TextKey="Propose_Item1" />
+                    <WZUIImage Type="WZUIImage" GUID="{148C2A3E-CBF5-4def-A9DA-E38568C823B6}" File="ui/common/comom_pic_cjwdxg.png" Visible="True" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{BC350D59-EB15-4675-BE5C-ED5FB2B621EF}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="1.056" Name="imgCell1_WndMarry" Visible="True" />
+                    <Button AbsContentSize="175,150" AnchorPoint="0.5,0.5" GUID="{2EB5ECCA-E4FC-41c7-9860-458300DBF9B0}" LuaDoneFunctionName="onClickProposeCell" Name="btnDream_WndMarry" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="True" Tag="1">
+                        <NormalElement GUID="{BCCAECE1-9028-4028-BC02-45F8E69C0CAC}" Type="WZUIContainer">
+                            <WZUIImage File="ui/marrige/common_icon_xxhs.png" GUID="{184E5241-533E-4516-AA48-143D4C593489}" Type="WZUIImage" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement GUID="{44652068-8343-4890-9A0D-C51DEBF33D5E}" Type="WZUIContainer">
+                            <WZUIImage File="ui/marrige/common_icon_xxhs.png" GUID="{C041B9B7-73C0-4c84-AC2B-BDBD6882B93D}" Type="WZUIImage" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement GUID="{44AA0B3E-55C4-407f-979D-52F328E22562}" Type="WZUIContainer" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="175,238" GUID="{6E67308A-AF5B-412d-9F62-2CEAC23BAD88}" Name="conProp2_WndMarry" RelativePosition="0.378159,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{903F78FA-E2E9-43e0-8859-EFBBC0E6F25C}" File="ui/common/common_scale9_di21.png" TouchEnable="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6021D2C4-0040-4f3f-9B6F-1987825A7F4C}" Color="255,236,193" FontSize="22" Text="心形花束" RelativePosition="0.5,0.888635" TextKey="Propose_Item2" />
+                    <WZUIImage Type="WZUIImage" GUID="{CB7D0C5F-FFBF-4891-8060-28D2EBDAB937}" File="ui/common/comom_pic_cjwdxg.png" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{949D568A-FF5C-47dd-B1E4-7332FE1478C3}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="1.056" Name="imgCell2_WndMarry" Visible="False" />
+                    <Button AbsContentSize="175,150" GUID="{497B76B3-45F1-4736-9277-ED5696A687F2}" LuaDoneFunctionName="onClickProposeCell" Name="btnRoman_WndMarry" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="True" Tag="2">
+                        <NormalElement GUID="{BEC9A9A2-21FE-402b-AE27-E40C9EBFEB37}" Type="WZUIContainer">
+                            <WZUIImage File="ui/marrige/common_icon_sjx.png" GUID="{497A55B6-091B-4bf6-B66B-C8C407129804}" Type="WZUIImage" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement GUID="{C2796AEF-7E71-4a33-832D-94FE1A72B6A4}" Type="WZUIContainer">
+                            <WZUIImage File="ui/marrige/common_icon_sjx.png" GUID="{147EE00D-EEFE-43a8-9C2D-7DC876AE3854}" Type="WZUIImage" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement GUID="{7BC6D499-11E8-4836-8C18-D8D350ED30D8}" Type="WZUIContainer" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="175,238" GUID="{2CDA2EA0-F3BB-4a2a-A9B8-ADD104CEE056}" Name="conProp3_WndMarry" RelativePosition="0.619931,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{BFF04908-C53B-4f00-8F22-EED893D1FF8A}" File="ui/common/common_scale9_di21.png" TouchEnable="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{45648266-5B1D-46d4-9413-4014BCCCB6E5}" Color="255,236,193" FontSize="22" Text="心形花束" RelativePosition="0.5,0.888635" TextKey="Propose_Item3" />
+                    <WZUIImage Type="WZUIImage" GUID="{541ED1B3-E101-4c4d-AB72-1761A339A213}" File="ui/common/comom_pic_cjwdxg.png" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{DA14C1BE-FD6D-483e-B45E-8E781C58E4D0}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="1.056" Name="imgCell3_WndMarry" Visible="False" />
+                    <Button AbsContentSize="175,150" GUID="{5FEBAFA2-0226-46b4-945B-5FA9F3254CA8}" LuaDoneFunctionName="onClickProposeCell" Name="btnWarm_WndMarry" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="True" Tag="3">
+                        <NormalElement GUID="{3E55C0D2-1CD4-4972-8145-F93F90131CD2}" Type="WZUIContainer">
+                            <WZUIImage File="ui/marrige/common_icon_jpg.png" GUID="{60186B91-2921-46ee-A36F-5FEF15A66469}" Type="WZUIImage" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement GUID="{74A86DB9-6315-42b9-888D-87083160E855}" Type="WZUIContainer">
+                            <WZUIImage File="ui/marrige/common_icon_jpg.png" GUID="{5EF53971-DEFE-406a-870F-87E0B30EB8E1}" Type="WZUIImage" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement GUID="{697ED867-28AA-491b-81F1-7724D890922C}" Type="WZUIContainer" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="175,238" GUID="{72C9E0F7-D717-4cdd-9398-82C082C35EBF}" Name="conProp4_WndMarry" RelativePosition="0.862349,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{F9B30F9C-04C2-4cbc-8953-573D10979CC8}" File="ui/common/common_scale9_di21.png" TouchEnable="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{EC7A0801-01F0-49f3-9E0B-C2D040750E1D}" Color="255,236,193" FontSize="22" Text="心形花束" RelativePosition="0.5,0.888635" TextKey="Propose_Item4" />
+                    <WZUIImage Type="WZUIImage" GUID="{BF1C7094-2CC2-4293-8185-4491DCFC80C1}" File="ui/common/comom_pic_cjwdxg.png" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{561AF400-6FF4-41f2-91B9-3F224AAF51E5}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="1.056" Name="imgCell4_WndMarry" Visible="False" />
+                    <Button AbsContentSize="175,150" GUID="{DFDF65A5-8FCC-4884-8FB3-DBFDBBF05485}" LuaDoneFunctionName="onClickProposeCell" Name="btnSimple_WndMarry" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="True" Tag="4">
+                        <NormalElement GUID="{6A752A1F-097E-4607-BAEA-68AF490C59F5}" Type="WZUIContainer">
+                            <WZUIImage File="ui/marrige/common_icon_zsjz.png" GUID="{9E5E52C8-E4D4-4901-B840-8B7A9F379995}" Type="WZUIImage" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement GUID="{D503F547-4B1C-4c6a-A5E5-24AE4756498A}" Type="WZUIContainer">
+                            <WZUIImage File="ui/marrige/common_icon_zsjz.png" GUID="{59B6B022-F538-4244-AF85-55AE7F4B5EB7}" Type="WZUIImage" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement GUID="{AA39F4B6-8CE4-4990-A181-08B5FF155A10}" Type="WZUIContainer" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="175,238" AnchorPoint="0.5,0.5" GUID="{FE54F289-67BE-4351-8106-79F4E773C245}" Name="conGift1_WndMarry" RelativePosition="0.136173,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{418059DC-29D5-4e7f-9B8E-C118138C0CFF}" File="ui/common/common_scale9_di21.png" TouchEnable="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{0762E1B3-A756-45ed-ABB7-F439C03FA05C}" File="ui/common/common_pic_huabian.png" UseOriginSize="True" RelativePosition="0.492278,1.02916" Scale="1" ScaleX="0.7" TouchEnable="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{FC8605AA-B765-4d1a-82B3-CD9F49C2092C}" Color="255,89,74" FontSize="22" Text="" RelativePosition="0.5,0.888635" TextKey="" Name="txtGift1_WndMarry" />
+                    <WZUIImage Type="WZUIImage" GUID="{389B653A-147B-4bae-AC18-632C4B0140B1}" File="ui/common/comom_pic_cjwdxg.png" Visible="True" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{AA4507F3-563D-48be-9FC9-2103E87519A1}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="1.056" Name="imgGCell1_WndMarry" Visible="True" />
+                    <WZUIImage File="ui/marrige/common_icon_qlgz.png" GUID="{CFCA6421-E738-498c-8677-D6B3F67F0B31}" Type="WZUIImage" UseOriginSize="True" Scale="1" Name="imgGift1_WndMarry" TouchEnable="False" Visible="True" />
+                    <Button AbsContentSize="175,150" AnchorPoint="0.5,0.5" GUID="{22E5D04B-7D51-4814-869D-7840ED3E6652}" LuaDoneFunctionName="onClickGiftCell" Name="" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="True" Tag="5">
+                        <NormalElement GUID="{2588F3F2-C559-47a0-8B6A-60A042BCFEB7}" Type="WZUIContainer" />
+                        <SelectElement GUID="{C711B1CB-B537-4d50-80A6-8D507750A20E}" Type="WZUIContainer" />
+                        <DisableElement GUID="{6786EE17-070A-4b96-8890-5CAD709F4577}" Type="WZUIContainer" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="175,238" AnchorPoint="0.5,0.5" GUID="{C723934B-471C-43e0-B040-AC15DF6B72CF}" Name="conGift2_WndMarry" RelativePosition="0.378159,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{C1E6AD94-EC3F-48a4-A41F-FE2BD6FC72B7}" File="ui/common/common_scale9_di21.png" TouchEnable="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{32AA995B-BF47-4147-AD3A-41E14425C56F}" File="ui/common/common_pic_huabian.png" UseOriginSize="True" RelativePosition="0.492278,1.02916" Scale="1" ScaleX="0.7" TouchEnable="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8D706CE5-464F-4cc8-9BA7-FF154F4B4DB7}" Color="255,89,74" FontSize="22" Text="" RelativePosition="0.5,0.888635" TextKey="" Name="txtGift2_WndMarry" />
+                    <WZUIImage Type="WZUIImage" GUID="{2A23BF0A-2D68-4db9-8FCB-887C0DBC6415}" File="ui/common/comom_pic_cjwdxg.png" Visible="True" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{E8FEA298-6719-4334-B5CC-E8F644F4461C}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="1.056" Name="imgGCell2_WndMarry" Visible="False" />
+                    <WZUIImage File="" GUID="{F4D0A594-8086-41ae-AA06-7A7B55B6E044}" Type="WZUIImage" UseOriginSize="True" Scale="1" Name="imgGift2_WndMarry" TouchEnable="False" />
+                    <Button AbsContentSize="175,150" AnchorPoint="0.5,0.5" GUID="{577D95EA-61E9-42e3-9B0A-F18C382F5366}" LuaDoneFunctionName="onClickGiftCell" Name="" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="True" Tag="6">
+                        <NormalElement GUID="{31E736DA-11A9-461d-B296-FA0DE37719AB}" Type="WZUIContainer" />
+                        <SelectElement GUID="{E4120686-44C0-4013-9E5F-4840997A2E0C}" Type="WZUIContainer" />
+                        <DisableElement GUID="{B44075A2-6B21-480d-8DAE-61A8F31B984B}" Type="WZUIContainer" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="175,238" AnchorPoint="0.5,0.5" GUID="{DABDD148-204F-4f08-8C14-84B50C78B426}" Name="conGift3_WndMarry" RelativePosition="0.619931,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{FC6530D8-9A42-4408-B90B-8F2C9FA8BADC}" File="ui/common/common_scale9_di21.png" TouchEnable="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{2B8B1FFD-B0EC-46d0-9A58-F3B9BBC52BAE}" File="ui/common/common_pic_huabian.png" UseOriginSize="True" RelativePosition="0.492278,1.02916" Scale="1" ScaleX="0.7" TouchEnable="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{E34FA4DE-D651-4496-98CB-C0C17A007EE8}" Color="255,89,74" FontSize="22" Text="" RelativePosition="0.5,0.888635" TextKey="" Name="txtGift3_WndMarry" />
+                    <WZUIImage Type="WZUIImage" GUID="{DA932FB5-16F1-4872-9A96-F1F3BA164C33}" File="ui/common/comom_pic_cjwdxg.png" Visible="True" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{423B0A99-624D-4e16-AFD8-A8DD3970A619}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="1.056" Name="imgGCell3_WndMarry" Visible="False" />
+                    <WZUIImage File="" GUID="{1E43AA24-B699-4aa1-8236-1FBB14F65DCB}" Type="WZUIImage" UseOriginSize="True" Scale="1" Name="imgGift3_WndMarry" TouchEnable="False" />
+                    <Button AbsContentSize="175,150" AnchorPoint="0.5,0.5" GUID="{8E00DA07-BEA2-486f-ACB3-B06E541FF10E}" LuaDoneFunctionName="onClickGiftCell" Name="" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="True" Tag="7">
+                        <NormalElement GUID="{9EFBC197-5963-43cf-ADD1-87143AFCA822}" Type="WZUIContainer" />
+                        <SelectElement GUID="{1A60BA02-39AD-4266-9A29-4686CBD750B0}" Type="WZUIContainer" />
+                        <DisableElement GUID="{4E32DEF5-CBA8-421d-BF79-4384FA20A3E9}" Type="WZUIContainer" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="175,238" AnchorPoint="0.5,0.5" GUID="{F3B29397-9FD6-496c-B0C9-B2844958E99A}" Name="conGift4_WndMarry" RelativePosition="0.862349,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{BEB3C14D-6191-4e74-B7C6-A372B51190EC}" File="ui/common/common_scale9_di21.png" TouchEnable="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{F3FE063B-75BC-4e13-851C-4C8679AFCDC2}" File="ui/common/common_pic_huabian.png" UseOriginSize="True" RelativePosition="0.492278,1.02916" Scale="1" ScaleX="0.7" TouchEnable="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{7264E1D6-1D13-4268-A001-FD65EDB976BB}" File="ui/common/comom_pic_cjwdxg.png" Visible="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{90B84538-06A6-4fb1-BCF2-6F17AD42843E}" Color="255,89,74" FontSize="22" Text="" RelativePosition="0.5,0.888635" TextKey="" Name="txtGift4_WndMarry" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{70E68626-68DA-4609-AB75-9279D22AE947}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="1.056" Name="imgGCell4_WndMarry" Visible="False" />
+                    <WZUIImage File="" GUID="{6C770E30-4D3C-470a-84FF-AB62C1B14BF3}" Type="WZUIImage" UseOriginSize="True" Scale="1" Name="imgGift4_WndMarry" TouchEnable="False" />
+                    <Button AbsContentSize="175,150" AnchorPoint="0.5,0.5" GUID="{0796E784-188F-4a68-842E-4CA6022F97CA}" LuaDoneFunctionName="onClickGiftCell" Name="" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="True" Tag="8">
+                        <NormalElement GUID="{0686E064-7906-46e0-B5A2-42EFE9F7D40E}" Type="WZUIContainer" />
+                        <SelectElement GUID="{7ED42756-41E3-49f0-9CE7-72C3B8865631}" Type="WZUIContainer" />
+                        <DisableElement GUID="{29B9D181-4CFE-47b1-95A3-967BB9F2F462}" Type="WZUIContainer" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{2C0049CD-89DB-4605-9A2F-7EA977EDEB30}" AbsContentSize="164,40" UseAbsSize="True" RelativePosition="0.138,0.0753987">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{15141D49-771D-4f88-A761-2FC8693D82E8}" FontSize="30" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="255,89,74" AnchorPoint="0.5,0.5" Text="" RelativePosition="0.5,0.5" Name="txtProposeCost1_WndMarry" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7E58C97D-DA16-4f3b-A661-5F63B953854F}" AbsContentSize="164,40" UseAbsSize="True" RelativePosition="0.37714,0.0753987">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4BBBE080-A4D5-4ec3-9B58-48B12560586C}" FontSize="30" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="255,89,74" AnchorPoint="0.5,0.5" Text="" RelativePosition="0.5,0.5" Name="txtProposeCost2_WndMarry" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{DFE0306F-2235-4fcf-97B6-CEDA7638CC6B}" AbsContentSize="164,40" UseAbsSize="True" RelativePosition="0.626238,0.0753987">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9ADF2B45-49C5-4dff-8B7D-38E457517DC4}" FontSize="30" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="255,89,74" AnchorPoint="0.5,0.5" Text="" RelativePosition="0.5,0.5" Name="txtProposeCost3_WndMarry" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{4107AF4C-D4D8-4c30-ADD8-896561D1AD4F}" AbsContentSize="164,40" UseAbsSize="True" RelativePosition="0.865024,0.0715553">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{3FD2D891-1EC2-4616-B482-F49C6EE5FDAC}" FontSize="30" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="255,89,74" AnchorPoint="0.5,0.5" Text="" RelativePosition="0.5,0.5" Name="txtProposeCost4_WndMarry" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="79,60,48" FontSize="24" GUID="{58233213-94EC-48bf-AB75-2C76C64BED86}" Name="txtTitle_WndMarry" RelativePosition="0.0364818,0.924523" Text="" Type="WZUILabelTTF" TextKey="" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="66,66" GUID="{A08363A1-5A48-4473-8596-B41B8F2DAAD5}" Name="conExplain_WndMarry" RelativePosition="0.0274003,0.0439415" Type="WZUIContainer" UseAbsSize="True" ShowAll="False">
+            <Button GUID="{B4FAE358-F511-4b88-AFE0-D2B98158340F}" LuaDoneFunctionName="onIntroClick" Type="WZUIButton" Name="btnExplain_WndMarry">
+                <NormalElement GUID="{DA564A71-05F0-4e9e-B37F-82135458FDA9}" Type="WZUIContainer">
+                    <WZUIImage Type="WZUIImage" GUID="{547C6922-62A9-4b7d-92AF-372DF22B8258}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{C792F2FF-FA8B-48c7-980F-B22F7F530638}" Type="WZUIContainer">
+                    <WZUIImage Type="WZUIImage" GUID="{F9E35A2C-C258-452f-A1E4-F7F33B3BCD53}" UseOriginSize="True" File="ui/common/common_icon_gth.png" />
+                </SelectElement>
+                <DisableElement GUID="{0489E412-121C-4e11-B3DE-C23F1327844A}" Type="WZUIContainer" />
+            </Button>
+        </WZUIContainer>
+        <WZUIButton Type="WZUIButton" UseAbsSize="True" LuaDoneFunctionName="onClickPropose" RelativePosition="0.5,0.0867862" GUID="{9FEACE9F-DF15-4806-A678-32D20C641F72}" AbsContentSize="130,66" Name="btnPropose_WndMarry" Visible="True" LuaActionName="Normal">
+            <NormalElement Type="WZUIContainer" GUID="{4C6DC891-521F-4120-8BDD-64C66F982D9C}">
+                <WZUI9Image Type="WZUI9Image" GUID="{E0205742-59C5-4838-B97F-29A81DB558B0}" File="ui/common/common_btn_anniu3_1.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{FC7A174F-6642-48a8-B74F-08024B426984}" Scale="1.12">
+                <WZUI9Image Type="WZUI9Image" GUID="{CD53F65F-74D0-4774-B4C8-775CE3F9AEAE}" File="ui/common/common_btn_anniu3_1_sel.png" RelativePosition="0.5,0.483333" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{A4C6AB0C-61CB-46ca-8329-889B9747DD31}" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{BBBC6A13-9BD6-4bde-8864-754224B8FCB7}" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" TextKey="" RelativePosition="0.5,0.5" Name="txtBtnPropose_WndMarry" Visible="True" />
+        </WZUIButton>
+        <WZUIButton Type="WZUIButton" UseAbsSize="True" LuaDoneFunctionName="onClickSendGift" RelativePosition="0.5,0.0867862" GUID="{CA280F0B-7D6D-429c-9384-5BEF1DC76D77}" AbsContentSize="130,66" Name="btnSendGift_WndMarry" Visible="False" LuaActionName="Normal">
+            <NormalElement Type="WZUIContainer" GUID="{EA268C79-7347-4632-AD78-3B3F8F3E8F34}">
+                <WZUI9Image Type="WZUI9Image" GUID="{B1FECB7D-4267-412b-BA20-42B6250995DC}" File="ui/common/common_btn_anniu3_1.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{EB7E7E13-9282-47f8-8CC1-25E5FAA6A39C}" Scale="1.12">
+                <WZUI9Image Type="WZUI9Image" GUID="{96DCA3F4-8173-41cd-A216-3393F7FC5792}" File="ui/common/common_btn_anniu3_1_sel.png" RelativePosition="0.5,0.483333" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{40B41E8B-BC02-4a6d-B20C-79C3C0EE0EE1}" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{014100BB-48AF-4381-BA58-17BEDFBFAFF2}" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" TextKey="" RelativePosition="0.5,0.5" Name="txtBtnSendGift_WndMarry" Visible="True" />
+        </WZUIButton>
+        <WZUIContainer GUID="{878311D6-DCA0-4af8-8041-E38A27432CB6}" RelativeSize="1,1" Type="WZUIContainer" TouchEnable="False">
+            <WZUIImage Type="WZUIImage" GUID="{5AC07756-7F71-42f7-9D17-E07561B4514C}" File="ui/marrige/marry_icon_jhcz1.png" UseOriginSize="True" RelativePosition="0.0114496,0.628019" />
+            <WZUIImage Type="WZUIImage" GUID="{077CC943-9771-4202-A7E7-3BEFC225D8BC}" File="ui/marrige/common_pic_hd4.png" UseOriginSize="True" RelativePosition="-0.00840636,0.585624" />
+            <WZUIImage Type="WZUIImage" GUID="{476ED9F6-166A-4dcc-9CF3-480119B9D314}" File="ui/marrige/marry_icon_jhcz2.png" UseOriginSize="True" RelativePosition="0.160511,1.03003" AnchorPoint="0.5,1" />
+            <WZUIImage Type="WZUIImage" GUID="{BA08C9E4-A13B-4f8a-A387-7B66C2D32B9E}" File="ui/marrige/common_pic_1dhwly.png" UseOriginSize="True" RelativePosition="0.0259784,0.989701" Scale="1" />
+            <WZUIImage Type="WZUIImage" GUID="{F0512FD7-EEF0-4c65-8F8C-196499D197A6}" File="ui/marrige/marry_icon_jhcz2.png" UseOriginSize="True" RelativePosition="0.84973,1.03003" AnchorPoint="0.5,1" ScaleX="-1" />
+            <WZUIImage Type="WZUIImage" GUID="{7F363204-3738-412d-9C28-FEFD7E6D9159}" File="ui/marrige/marry_icon_jhcz4.png" UseOriginSize="True" RelativePosition="0.5,1.01664" AnchorPoint="0.5,1" />
+            <WZUIImage Type="WZUIImage" GUID="{F1D41625-B9A3-4240-969F-14728EE23E8A}" File="ui/marrige/common_pic_hd2.png" UseOriginSize="True" RelativePosition="0.304378,0.968911" Rotation="15" />
+            <WZUIImage Type="WZUIImage" GUID="{17945F3B-3009-490c-B2AD-BA337BC0C47E}" File="ui/marrige/common_pic_hd2.png" UseOriginSize="True" RelativePosition="0.700899,0.969342" ScaleX="-1" Rotation="-15" />
+            <WZUIImage Type="WZUIImage" GUID="{17C46FE8-D187-4ec8-8F73-C90FC76AACD1}" File="ui/marrige/marry_icon_jhcz1.png" UseOriginSize="True" ScaleX="-1" RelativePosition="0.990118,0.634586" />
+            <WZUIImage Type="WZUIImage" GUID="{93EABE28-0D4B-4f29-B9C5-86B0B7ABC4BE}" File="ui/marrige/common_pic_1dhwly.png" UseOriginSize="True" RelativePosition="0.977243,0.994747" Scale="0.7" />
+            <WZUIImage Type="WZUIImage" GUID="{1108F69B-FC8F-4a2f-92E6-82DCC99B3048}" File="ui/marrige/common_pic_hd4.png" UseOriginSize="True" RelativePosition="0.992532,0.743011" Scale="1.4" />
+            <WZUIImage Type="WZUIImage" GUID="{2B54A07E-208D-4e8b-959C-E75BE0ED05EB}" File="ui/marrige/common_pic_hd4.png" UseOriginSize="True" RelativePosition="0.995022,0.438722" />
+            <WZUIImage Type="WZUIImage" GUID="{96061346-3211-4d73-A1D3-8862AEE8E76E}" File="ui/marrige/common_pic_tx.png" UseOriginSize="True" RelativePosition="0.391864,0.957036" />
+            <WZUIImage Type="WZUIImage" GUID="{1CD4497D-AB95-4076-AD5E-7DC37ABBFF25}" File="ui/marrige/common_pic_tx.png" UseOriginSize="True" RelativePosition="0.59682,0.957036" />
+            <WZUIImage Type="WZUIImage" GUID="{0DF1D4A3-DD3F-4bb3-AD58-4489B6E6516F}" File="ui/common/commom_icon_qh.png" UseOriginSize="True" RelativePosition="0.492512,0.95653" Name="imgTitle_WndMarry" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndMarry>

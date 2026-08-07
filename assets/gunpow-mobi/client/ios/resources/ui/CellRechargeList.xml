@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?><CellRechargeList GUID="{3472450F-3BB4-40e5-BC08-49B0E4CFB85D}">
+    <WZUIContainer AbsContentSize="156,190" GUID="{68E3E11E-730C-4427-8837-89C20BCFFCAC}" LuaObjectName="CellRechargeList" Name="CellRechargeList" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer GUID="{0A52FE19-E352-47e2-989E-34E6501D4E8A}" Name="conTop_CellRechargeList" RelativePosition="0.5,0.598947" RelativeSize="0.96,0.74" Type="WZUIContainer">
+            <Button GUID="{93EA43C0-1070-492e-930D-FB1A6A6F4F59}" LuaDoneFunctionName="onClickCellBtn" Name="btnClickCellBtn_CellRechargeList" RelativePosition="0.490181,0.500001" Type="WZUIButton">
+                <NormalElement GUID="{CDB92DE9-475D-47dd-9B1A-4697B946B070}" Type="WZUIContainer">
+                    <WZUI9Image File="common/Jigsaw/n_items01.png" GUID="{54DD595E-BD82-42a4-B5E9-615ADB67D1D1}" Type="WZUI9Image" Visible="True"/>
+                </NormalElement>
+                <SelectElement GUID="{A84A8D3E-5F66-4773-8B8C-B93425689145}" Scale="1.02" Type="WZUIContainer">
+                    <WZUI9Image File="common/Jigsaw/n_items01_sel.png" GUID="{872FFB09-F23E-495f-BDD7-315DBFC05B42}" Type="WZUI9Image"/>
+                </SelectElement>
+                <DisableElement GUID="{2FC5D229-0E67-4de2-8575-BA7364B400AE}" RelativeSize="1,0.2" Type="WZUIContainer"/>
+            </Button>
+            <WZUIImage File="ui/bottomMenu/pay/payment_5.png" GUID="{85D7D2B8-439D-4a19-8195-AE42A278B9A1}" Name="imgProduct_CellRechargeList" RelativePosition="0.499999,0.519537" TouchEnable="False" TouchSwallow="False" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+            <WZUILabelTTF Alignment="Left" AnchorPoint="0.5,0.5" Color="0,0,0" FontSize="32" GUID="{A5623246-3AD9-4e45-B226-243F32AC17B4}" Name="txtPrice_CellRechargeList" RelativePosition="0.487428,-0.149864" Text="$0.99" TouchEnable="False" Type="WZUILabelTTF"/>
+            <WZUIContainer GUID="{875BBD1B-4DF4-474c-84B8-FE4C0CB823A9}" Name="conDiscountNum_CellRechargeList" RelativePosition="0.37719,0.853999" ScaleX="0.8" ScaleY="0.3" Type="WZUIContainer">
+                <WZUIImage File="ui/bottomMenu/pay/paymengt_bg.png" GUID="{5509D185-A29E-4e08-91F3-AEB3C42070E9}" Type="WZUIImage" UseAbsCoordinate="False" UseOriginSize="False" UseOriginSizeProportion="False"/>
+                <WZUILabelTTF Alignment="Left" AnchorPoint="0.5,0.5" Color="0,0,0" FontSize="40" GUID="{E15559BB-C53D-497b-B0B1-04657955E317}" Name="txtDiscountNum_CellRechargeList" RelativePosition="0.424545,0.540186" ScaleX="1" ScaleY="2" Text="100" TouchEnable="False" Type="WZUILabelTTF" Visible="True"/>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{BCD60EEB-9BE5-46d3-88FE-64F8BC344446}" Name="conBottom_CellRechargeList" RelativePosition="0.47586,0.33253" RelativeSize="0.6,0.15" TouchEnable="False" TouchSwallow="False" Type="WZUIContainer">
+            <WZArmature ArmatureName="ui" GUID="{46E1397B-42C8-407b-9868-CB688C829E8E}" TouchEnable="False" Type="WZArmature" UseOriginSize="True" Visible="False"/>
+            <WZArmature ArmatureName="diamond" GUID="{549F9E1E-320D-4a89-AFD0-4C631D9C3846}" RelativePosition="0.164624,-0.109787" Scale="0.3" ScaleX="0.3" ScaleY="0.3" Type="WZArmature" UseOriginSize="True">
+                <Action AnimationId="1" GUID="{63193E94-B743-4faa-B796-D5A34C41C18C}" Type="WZUIArmatureAnimationById"/>
+            </WZArmature>
+            <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" Dimensions="100,0" FontSize="28" GUID="{8305E34D-5503-4601-989D-5335A992C40F}" Name="txtDiamondNum_CellRechargeList" RelativePosition="0.369163,0.28" Text="" TouchEnable="False" Type="WZUILabelTTF"/>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellRechargeList>

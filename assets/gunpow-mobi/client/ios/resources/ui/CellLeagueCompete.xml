@@ -1,0 +1,26 @@
+<CellLeagueCompete GUID="{c769f9d2-eb35-4358-8483-7edbf2cd4d6b}">
+    <WZUIContainer AbsContentSize="502,453" GUID="{e22551ee-f77c-4f4f-9ebd-564373f1fdd4}" LuaObjectName="CellLeagueCompete" Name="CellLeagueCompete" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="502,453" GUID="{2a7e5a35-40e3-418b-92e9-dd96a87ce653}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,1">
+            <WZUIImage Type="WZUIImage" GUID="{c4537ba1-ed59-4e47-a2c4-374cfd28596e}" File="ui/welfare/common_pic_yxls.png" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5" ScaleX="1.006" ScaleY="1.015" />
+            <WZUIContainer AbsContentSize="210,75" GUID="{2e421606-b414-4386-bfc3-1d49c0011373}" RelativePosition="0.5,0.114798" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIButton GUID="{2854b1d2-f444-42ab-8dcc-6c31ed0b05ae}" LuaDoneFunctionName="onGotoEvent" Name="btnGoto_CellLeagueCompete" Type="WZUIButton" LuaActionName="Normal" RelativePosition="0.5,0.5">
+                    <NormalElement GUID="{d2a60912-0243-4b3f-af15-1f6dd7c06838}" Type="WZUIContainer" UseAbsSize="False">
+                        <WZUIImage Type="WZUIImage" GUID="{facf4b84-f110-4bd1-bcc2-f8201ace70ed}" File="ui/common/common_btn_anniu8.png" UseOriginSize="False" />
+                    </NormalElement>
+                    <SelectElement GUID="{206e7442-73ec-498b-8919-e3c01827e345}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{bd41acb7-16d5-41f7-8eba-f9214e845d52}" File="ui/common/common_btn_anniu8_sel.png" UseOriginSize="False" />
+                    </SelectElement>
+                    <DisableElement GUID="{46b50a5e-b0eb-4dea-ba26-772f6f63fe55}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{b22869e2-bacc-4e7f-ad66-5304072acb76}" File="ui/common/common_btn_anniu8.png" UseOriginSize="False" />
+                    </DisableElement>
+                    <WZUIImage Type="WZUIImage" GUID="{1eee0983-c25d-4fe1-8718-d7134914accc}" File="ui/welfare/hero_icon_canjbs.png" UseOriginSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.546154" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{dbc24a7c-dd57-4d2d-800e-33a1010a8c29}" AbsContentSize="300,70" UseAbsSize="True" RelativePosition="0.5,0.29">
+                <WZUI9Image Type="WZUI9Image" GUID="{9fe5aa2d-9874-4427-b1f6-1baabe89501e}" File="ui/common/common_scale9_heidi4.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a8791e86-4fd6-47c1-a28e-30120062baa0}" AnchorPoint="0.5,0" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeSize="4" StrokeColor="128,54,13" Name="txtTime_CellLeagueCompete" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0d513b0d-dab9-4ceb-afe9-8176038331a5}" AnchorPoint="0.5,1" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeSize="4" StrokeColor="128,54,13" Name="txtWords_CellLeagueCompete" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellLeagueCompete>

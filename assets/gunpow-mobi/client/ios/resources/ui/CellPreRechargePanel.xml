@@ -1,0 +1,60 @@
+﻿<CellPreRechargePanel GUID="{10ce5c35-b0b7-4aae-a562-d988ed15c458}">
+    <WZUIContainer AbsContentSize="502,453" GUID="{9e16cadd-5150-4f2c-8bbf-b089d49271eb}" LuaObjectName="CellPreRechargePanel" Name="CellPreRechargePanel" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="500,170" GUID="{992b8d7e-85e5-49c5-9c5e-18d4ad6d5a9c}" RelativePosition="0.5,0" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0" Order="2">
+            <WZUIContainer GUID="{ffe4dc87-a16d-434f-9c5b-fa451619a781}" Type="WZUIContainer" AbsContentSize="500,160" UseAbsSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0" Name="conTextBK_CellPreRechargePanel">
+                <WZUI9Image File="ui/common/common_scale9_di27.png" GUID="{2c6e5929-ca71-40e1-ac50-0c6fad88cd4f}" Type="WZUI9Image" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="480,130" GUID="{3e79d878-5cfe-47c9-8e25-01e10ab3a48a}" RelativePosition="0.5,0.48" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIScrollContainer EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{05d12db8-978f-4cf5-b457-f9ca90f90a7f}" Name="rollconExplanation_CellPreRechargePanel" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Type="WZUIScrollContainer" EnableBounceBack="True" RelativeSize="1,1" AnchorPoint="0,0" RelativePosition="0,0">
+                    <MoveElement GUID="{e4ef8eae-e941-426c-a9c4-7f2453d57c99}" Type="WZUIContainer" Visible="True" RelativeSize="1,1" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{e536aa7f-bfaa-4f42-8b86-9157f0441906}" Name="txtDesc1" MaxWidth="480" AnchorPoint="0,1" RelativePosition="0.02,0.95" />
+                    </MoveElement>
+                </WZUIScrollContainer>
+                <WZUIButton GUID="{b254ed5b-1836-4dde-8c69-35e4c48b10d1}" LuaDoneFunctionName="onClickGoTo" Name="btnGoto_CellPreRechargePanel" Type="WZUIButton" LuaActionName="Normal" RelativePosition="0.85,0.35" AbsContentSize="136,65" UseAbsSize="True">
+                    <NormalElement GUID="{1ff048a8-d1bb-4337-a4fb-68593e82d121}" Type="WZUIContainer" UseAbsSize="False">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu10_1.png" GUID="{faf2cf32-025c-4efc-837f-bf7f3562bc81}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSizeProportion="False" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{be8b4cf6-a042-4943-9315-ea0c6956eca6}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu10_1_sel.png" GUID="{bcd57d37-00eb-4667-8b95-a6dcb5a71b0c}" RelativeSize="1.1,1" Type="WZUI9Image" Scale="1" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{18ff90b2-4ced-48aa-a929-1d5e845e23f1}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu10_1_sel.png" GUID="{23f80a77-ba49-4000-9f25-a12d8209c923}" RelativePosition="0.5,0.5" RelativeSize="1.1,1" Type="WZUI9Image" GrayRender="True" UseOriginSize="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Color="255,236,193" FontSize="26" GUID="{9ae90915-fb19-455c-87bf-d6fe9f71ddb8}" Name="txtgotoWord_CellPreRechargePanel" RelativePosition="0.5,0.5" StrokeColor="0,72,3" StrokeSize="4" Text="" Type="WZUILabelTTF" LabelStyleKey="" EnableStroke="True" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="502,300" GUID="{8f3977d6-452e-4eb1-9f06-845d3018e116}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,1">
+            <WZUIImage Type="WZUIImage" GUID="{9fd1c9ed-ffd5-4836-9c18-161c23e3750d}" File="ui/gameActivity/activity_pic_jjlft.png" UseOriginSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1.00667" ScaleX="1.002" Name="imgBK_CellPreRechargePanel" ScaleY="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{9c842d91-c34d-4ae2-b1a6-f2e6c7ddaf00}" AbsContentSize="500,42" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1" Name="conTime_CellPreRechargePanel" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{b1c69de8-f174-4bb1-80e9-b50971c9be80}" File="ui/common/common_scale9_heidi7.png" Opacity="150" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{2de12438-6993-49e7-92a7-3c8ce1a650bf}" TextKey="" FontSize="22" Color="255,227,116" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" Text="ACTIVE_TIME" Name="txtActivityWord_CellPreRechargePanel" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{26e1f12d-5e09-4aff-9d1d-51eaedb16f5e}" FontSize="22" EnableStroke="True" Color="255,89,74" StrokeColor="158,0,0" StrokeSize="4" Text="" AnchorPoint="0,0.5" RelativePosition="0.27,0.5" Name="txtLastDay_CellPreRechargePanel" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="130,65" GUID="{c1e954dd-d6db-411b-81df-99df86cdef5c}" RelativePosition="0.53,0.2" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIButton GUID="{e041ea81-ae87-419e-a4ab-0e9c9f9f532a}" LuaDoneFunctionName="RechargeEvent" Name="btn_getReward_event" Type="WZUIButton" LuaActionName="Normal" RelativePosition="0.5,0.5">
+                    <NormalElement GUID="{1c5e5124-4c44-461f-a8a3-40c863103d23}" Type="WZUIContainer" UseAbsSize="False">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1.png" GUID="{9f970f5d-9bcb-4dca-8139-ca4e7b6e0ebb}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSizeProportion="False" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{cfeaf9c1-7f82-49e6-afa7-3b271e7fe458}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1_sel.png" GUID="{54b76288-2601-48ee-aafc-69adf4e6bdc3}" RelativeSize="1.1,1" Type="WZUI9Image" Scale="1" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{ced0c845-a7e4-4d53-96ab-3d14cac80bc6}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1.png" GUID="{6d3ad1ba-3114-4be2-96d5-9c7b568e35e7}" RelativePosition="0.5,0.5" RelativeSize="1.1,1" Type="WZUI9Image" GrayRender="True" UseOriginSize="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Color="255,236,193" FontSize="26" GUID="{3368d9fe-4d57-48c3-adda-a8815b3cc399}" Name="txt_gotoButton" RelativePosition="0.5,0.5" StrokeColor="128,54,13" StrokeSize="4" Text="" Type="WZUILabelTTF" LabelStyleKey="NORMAL_ORANGE_BTN" EnableStroke="True" />
+                    <WZUISpine Type="WZUISpine" GUID="{463b53d6-00f7-4673-a6cb-d6cf18793422}" FileAtlas="ui/ui_main_likechongzhi.atlas" FileJson="ui/ui_main_likechongzhi.json" Loop="True" AnimationName="animation" RelativePosition="0.5,1.12308" />
+                </WZUIButton>
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{64bb08c3-a820-4a68-9910-28cce5841c5e}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.966016,0.9057" LuaDoneFunctionName="onClickInfo" LuaActionName="Normal" Name="btnRuleInfo_CellPreRechargePanel" Visible="False">
+                <NormalElement Type="WZUIContainer" GUID="{81c38ecd-4304-4023-95d7-dd7bb5377b9b}" RelativePosition="0.4875,0.65">
+                    <WZUIImage Type="WZUIImage" GUID="{0a62959c-66f1-44fe-8a8e-24c628beb2cd}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{34659df1-d869-4898-adf1-224f24ba2577}" RelativePosition="0.4875,0.65">
+                    <WZUIImage Type="WZUIImage" GUID="{ddb0ec6b-23c2-4c3a-963a-8a513a2ae7aa}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{8bd07962-630c-442c-9e9c-93561ece0f47}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellPreRechargePanel>

@@ -1,0 +1,23 @@
+﻿<WndcopySingleInfoView2 GUID="{97ba287d-caf0-488b-b957-28bc6458f31d}">
+    <WZUIWindow Type="WZUIWindow" GUID="{cac2ed41-4ff2-4451-9593-f753ecb0ecad}" Name="WndCopySingleInfoView2" LuaObjectName="WndCopySingleInfoView2" NameCreate="True" AbsContentSize="330,60" UseAbsSize="True" AnchorPoint="1,1" ShowAll="True" RelativePosition="1,1">
+        <WZUIContainer Type="WZUIContainer" GUID="{d0c14c3a-afbb-4ad7-9313-a06aa628c420}" AbsContentSize="240,40" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{d9c68b9d-12fa-454c-bfa0-1f77ea8b1bd9}" File="ui/common/common_scale9_di13.png" AnchorPoint="0.5,0.5" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{f7d5c996-d660-4b3a-950f-480f10831fd1}" Name="conditionT_WndCopySingleInfoView" AbsContentSize="220,40" UseAbsSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+                <WZUIContainer Type="WZUIContainer" GUID="{32f08804-7cd6-4236-a7e2-50da23e417cb}" AbsContentSize="240,2" UseAbsSize="True" RelativePosition="0.5,0.975">
+                    <WZUI9Image Type="WZUI9Image" GUID="{c3abcb17-ba27-4998-a2c9-e2eb86ceac6d}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="False" RelativePosition="0.5,0.5" Visible="False" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{f04fc314-653f-4637-8e90-a96bb9995ce8}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Scale="0.9" AnchorPoint="0,0.5" RelativePosition="-0.0301212,0.5" Name="imgCT_WndCopySingleInfoView" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e8b50014-26f2-4fe4-8eea-ce6dc557e23b}" Color="255,227,116" FontSize="20" Name="txtDescribeT_WndCopySingleInfoView" Text="20%剩余量" RelativePosition="0.131818,0.5" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c7fa3225-4203-4db6-96f3-0c303f2d7bf1}" Name="txtResultT_WndCopySingleInfoView" FontSize="20" Color="255,255,255" AnchorPoint="0,0.5" Text="(60%)" RelativePosition="0.593031,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{7766f400-1e68-4fcf-918c-a190284af48c}" Name="conditionF_WndCopySingleInfoView" AbsContentSize="220,40" UseAbsSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+                <WZUIContainer Type="WZUIContainer" GUID="{a63155cf-503b-4f45-9d41-21ddd2f39abb}" AbsContentSize="240,2" UseAbsSize="True" RelativePosition="0.5,0.975">
+                    <WZUI9Image Type="WZUI9Image" GUID="{cffeb14f-3d37-479f-aa17-eae50a782f46}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="False" RelativePosition="0.5,0.5" Visible="False" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{72a5d268-e709-403d-80be-87a9c8f6889c}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Scale="0.9" AnchorPoint="0,0.5" RelativePosition="-0.0301212,0.5" Name="imgCF_WndCopySingleInfoView" GrayRender="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{08370a34-92b4-4b43-b790-59d6d30ab5cc}" Color="255,227,116" FontSize="20" Name="txtDescribeF_WndCopySingleInfoView" Text="6次出手" RelativePosition="0.131818,0.5" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{cec8e57d-7850-4671-ae37-9466144369b1}" Name="txtResultF_WndCopySingleInfoView" FontSize="20" Color="255,255,255" AnchorPoint="0,0.5" Text="(6)" RelativePosition="0.5,0.5" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndcopySingleInfoView2>

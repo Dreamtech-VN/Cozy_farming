@@ -1,0 +1,48 @@
+﻿<CellCommunityRemove GUID="{830a91b5-9d9a-489f-8560-1fe2ac7573ea}">
+    <WZUIContainer AbsContentSize="530,90" GUID="{f3b21b12-04a5-4c91-93cb-6e29779c651f}" LuaObjectName="CellCommunityRemove" Name="CellCommunityRemove" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <Button GUID="{44ae193b-9ff0-449e-80f5-e5ebb81e1dc1}" LuaDoneFunctionName="onClickCellBtn" Name="btnClickCell_CellCommunityRemove" RelativePosition="0.45,0.38" Type="WZUIButton" Visible="True" AbsContentSize="620,90" UseAbsSize="True">
+            <NormalElement GUID="{e0f7ab4b-0c96-4f78-a8d7-2f7723285ae4}" Type="WZUIContainer">
+                <WZUI9Image Type="WZUI9Image" GUID="{8b15b0e8-92e0-45ea-852a-7e7f76c22b38}" File="ui/common/common_scale9_di7.png" Name="imgBtn1_CellCommunityRemove" />
+            </NormalElement>
+            <SelectElement GUID="{095f01f3-ba22-47e1-8459-702123e99ac4}" Type="WZUIContainer">
+                <WZUI9Image Type="WZUI9Image" GUID="{ed2ebf6c-5a56-4e28-8631-feafecf7fe4b}" File="ui/common/common_scale9_di7.png" Name="imgBtn2_CellCommunityRemove" />
+            </SelectElement>
+            <DisableElement GUID="{016d28bf-52c1-46a2-8613-be4ae4317623}" RelativePosition="0.5,0.5" ScaleY="1" Type="WZUIContainer" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{908a71da-2bef-4212-91e6-bc59bd68958b}" Name="conText" Visible="True" RelativePosition="0.45,0.38">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7e0347bb-cd98-4434-8138-2dc07de6c273}" Name="txtLevel_CellCommunityRemove" Text="lv1" RelativePosition="0.115,0.77" FontSize="20" Color="62,34,8" BoldFont="True" LabelStyleKey="C18_F20_S4_C5" Alignment="Left" AnchorPoint="0,0.5" />
+            <WZUILabelTTF ChineseLengthPolicy="2" Color="62,34,8" Dimensions="250,0" FontSize="20" GUID="{84859739-1ad0-46d8-8f35-711fcf4da562}" MaxLength="14" Name="txtPlayerName_CellCommunityRemove" RelativePosition="0.45,0.77" Text="name" TouchEnable="False" Type="WZUILabelTTF" UseOriginSize="True" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" LabelStyleKey="C18_F20_S4_C5" />
+            <WZUILabelTTF Color="62,34,8" Dimensions="350,0" FontSize="20" GUID="{b3324102-ee33-4ed4-b22d-11854ebac63b}" Name="txtFight_CellCommunityRemove" RelativePosition="0.45,0.5" Text="" TouchEnable="False" Type="WZUILabelTTF" BoldFont="True" Alignment="Left" LabelStyleKey="C14_F20" />
+            <WZUILabelTTF Color="62,34,8" Dimensions="155,0" FontSize="20" GUID="{a0bff38c-2e5d-480a-a1e6-bc81ed896903}" Name="txtJob_CellCommunityRemove" RelativePosition="0.265,0.25" Text="精英" TouchEnable="False" Type="WZUILabelTTF" BoldFont="True" Alignment="Left" LabelStyleKey="C13_F20" />
+            <WZUILabelTTF Color="62,34,8" Dimensions="180,0" FontSize="20" GUID="{8fb5fb55-1025-430a-90f1-7850147ffb8e}" Name="txtContribution_CellCommunityRemove" RelativePosition="0.58,0.5" Text="0" TouchEnable="False" Type="WZUILabelTTF" BoldFont="True" LabelStyleKey="C13_F20" />
+            <WZUILabelTTF Color="62,34,8" Dimensions="350,0" FontSize="20" GUID="{d23ca973-896d-4908-aecf-1ce0e8216260}" Name="txtState_CellCommunityRemove" RelativePosition="0.9,0.5" Text="在线" TouchEnable="False" Type="WZUILabelTTF" BoldFont="True" LabelStyleKey="C13_F20" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{097ad61a-0c92-4bae-b3a4-950732428e8f}" Name="conHead_Cell" AbsContentSize="80,80" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="-0.1,0.38" Scale="0.95" ScaleX="0.95" ScaleY="0.95">
+            <WZUIImage Type="WZUIImage" GUID="{3fcc2648-1f64-4797-b09f-14697f6a1519}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="1.23" RelativePosition="0.505,0.5" />
+        </WZUIContainer>
+        <Button GUID="{a02bde64-5f5d-4098-84e6-43a9a940ef87}" LuaDoneFunctionName="onCheck" Name="" RelativePosition="0,0.38" Type="WZUIButton" Visible="True" AbsContentSize="250,75" UseAbsSize="True" AnchorPoint="0,0.5">
+            <NormalElement GUID="{1807b9da-85de-4512-a775-9446fa9608c0}" Type="WZUIContainer" />
+            <SelectElement GUID="{64f666d3-ef3e-42d4-a8a7-56978a50c3ec}" Type="WZUIContainer" />
+            <DisableElement GUID="{6a6a9543-8706-4f52-9b9c-7b2818a008b8}" RelativePosition="0.5,0.5" ScaleY="1" Type="WZUIContainer" />
+        </Button>
+        <CheckBox AbsContentSize="60,50" AnchorPoint="0,0.5" GUID="{d1b45c69-c912-4261-ad1c-2403488db0bd}" LuaSelectedFunctionName="onChecked" Name="checkBox" RelativePosition="-0.225,0.365" SelectedIndex="0" TouchContainerEnable="True" Type="WZUICheckBox" UseAbsSize="True" AbsPosition="0,443" Tag="10">
+            <CheckElement AbsContentSize="34,34" AnchorPoint="0.5,0.5" GUID="{e0c82ec2-bd89-441f-a07f-b480994005b9}" RelativePosition="0.3,0.52" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{57a10d18-f8d4-41b4-a6fe-a572f5fc0882}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" />
+            </CheckElement>
+            <CheckElement AbsContentSize="34,34" AnchorPoint="0.5,0.5" GUID="{be05496f-0608-4236-8d58-e4f3cb9f63c1}" RelativePosition="0.3,0.52" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{4263c1f2-a969-48fc-8d57-691c2d581f2b}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" />
+                <WZUIImage Type="WZUIImage" GUID="{3cdf7c5b-a254-4aa5-bc7a-fbecc34c41e3}" File="ui/common/common_icon_gou.png" UseOriginSize="True" />
+            </CheckElement>
+        </CheckBox>
+        <Button Type="WZUIButton" GUID="{0c410021-ea1e-41cb-b9f4-57815dc6adfd}" AbsContentSize="116,56" UseAbsSize="True" LuaActionName="Normal" LuaDoneFunctionName="onRemove" RelativePosition="1.145,0.39" Scale="0.8" ScaleX="0.8" ScaleY="0.8">
+            <NormalElement Type="WZUIContainer" GUID="{7168a819-5d93-444d-af48-b029c9be45da}">
+                <WZUIImage Type="WZUIImage" GUID="{569b932a-eab1-469f-9848-1905547ab1c5}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{2818694e-04be-45eb-8328-65b676a2ab09}">
+                <WZUIImage Type="WZUIImage" GUID="{3b742550-7728-470c-9a0e-dc5fac9dcc16}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{09325650-d9c1-4250-8db0-1e71eac51ffc}" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d6aaaf03-e613-47bf-be51-0fffbcfc7a77}" FontSize="24" Color="255,236,193" EnableStroke="True" LabelStyleKey="SMALL_GREEN_BTN" Name="" TextKey="NEWCOMMUNITY5" Scale="1.2" ScaleX="1.2" ScaleY="1.2" />
+        </Button>
+    </WZUIContainer>
+</CellCommunityRemove>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" ?>
+<WndCopyExpInfoView GUID="{CFDA536B-227F-41d7-8243-5B7B856D566D}">
+    <WZUIContainer Type="WZUIContainer" GUID="{1D59DFD1-9429-4cc4-88B9-79E2E5D06611}" Name="WndCopyExpInfoView" LuaObjectName="WndCopyExpInfoView" NameCreate="True" RelativePosition="1,1" ShowAll="True" AbsContentSize="330,170" UseAbsSize="True" AnchorPoint="1,1">
+        <WZUIContainer Type="WZUIContainer" GUID="{501082DA-DD1D-4ad9-B4AE-6174973154E6}" AbsContentSize="200,170" UseAbsSize="True" RelativePosition="0,0" AnchorPoint="0,0" RelativeSize="0.7,1">
+            <WZUI9Image Type="WZUI9Image" GUID="{8EDDC5C0-7454-4044-961C-B47A88AABB23}" File="ui/common/common_scale9_di13.png" Opacity="180" RelativePosition="0.5,0.5" RelativeSize="1,1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{E88494D6-8690-4dc4-A63D-46FD5641B7E1}" AbsContentSize="" UseAbsSize="False" RelativePosition="0,0.5" AnchorPoint="0,0.5">
+                <WZUIContainer Type="WZUIContainer" GUID="{CE9A5C0D-A837-4aa5-B341-CCBF400931AF}" RelativeSize="1,0.75" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4AAD2D92-9890-4044-9AD6-E8CBF0775D41}" Text="" FontSize="20" RelativePosition="0.05,0.8" AnchorPoint="0,0.5" Name="" Color="255,227,116" TextKey="DAILY_KILL_BOSS" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{A1582C28-43E8-4933-B620-CC6CA4CF139F}" Text="" FontSize="20" RelativePosition="0.05,0.6" AnchorPoint="0,0.5" Name="txtElite_WndCopyExpInfoView" Color="255,227,116" TextKey="DAILY_KILL_BIGM" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{344F1271-1345-465a-BFC9-53F06B5B8C17}" Text="" FontSize="20" RelativePosition="0.05,0.4" AnchorPoint="0,0.5" Name="txtCommon_WndCopyExpInfoView" Color="255,227,116" TextKey="DAILY_KILL_SMALLM" Scale="1" ScaleX="1" ScaleY="1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{58587E62-CD4A-4d95-A0DD-A94006B3370A}" Text="" FontSize="20" RelativePosition="0.05,0.2" AnchorPoint="0,0.5" Name="txtFail_WndCopyExpInfoView" Color="255,227,116" TextKey="DAILY_Fail_MONSTER" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{46D70C05-BC16-4aa1-8FFF-E28ECCF9470D}" FontSize="20" Color="255,236,193" Text="99" RelativePosition="0.743414,0.8" Name="bossNum_WndCopperInfoView" AnchorPoint="0,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{D0138CB1-F8D6-479e-A905-EBE6299C14EE}" FontSize="20" Color="255,236,193" Text="99" RelativePosition="0.743414,0.6" Name="eliteNum_WndCopperInfoView" AnchorPoint="0,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{B8E3C9FE-9578-480e-A025-F4037094A42E}" FontSize="20" Color="255,236,193" Text="99" RelativePosition="0.743414,0.4" Name="commonNum_WndCopperInfoView" AnchorPoint="0,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{B0777100-F134-463a-AC6C-DD291B7DB02B}" FontSize="20" Color="255,236,193" Text="99" RelativePosition="0.743414,0.2" Name="txtFailNum_WndCopperInfoView" AnchorPoint="0,0.5" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{3C2BAC06-DD9B-4f49-96A9-C436F3AFEEB8}" AbsContentSize="146,2" UseAbsSize="True" RelativePosition="0.5,0.25" AnchorPoint="0.5,0">
+                    <WZUIImage Type="WZUIImage" GUID="{E5BE5668-8C49-4a89-BD94-463D22D62AD4}" File="ui/common/common_scale9_fengexian.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{14C1CF67-DFB1-4ed4-A334-4C0EC7336BBB}" RelativeSize="1,0.25" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+                    <WZUIImage Type="WZUIImage" GUID="{61D39019-1486-42ff-8CBE-1105C7C42BDA}" File="ui/common/common_icon_exp.png" UseOriginSize="True" RelativePosition="0.05,0.5" AnchorPoint="0,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{BA9F9971-638A-494d-B893-0DAAF997F03D}" FontSize="20" Color="255,236,193" Text="99999999" RelativePosition="0.375282,0.5" Name="txtCurExp_WndCopperInfoView" AnchorPoint="0,0.5" Alignment="Left" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</WndCopyExpInfoView>

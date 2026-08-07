@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><CellTaskItem GUID="{49B4E777-054F-4d68-8210-4FBBE4A2A123}">
+    <WZUIContainer AbsContentSize="490,160" GUID="{59FB5FF7-781C-4a77-B7A1-1AF10870489D}" LuaObjectName="CellTaskItem" Name="CellTaskItem" NameCreate="True" RelativeSize="1,0.4" TouchEnable="False" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+        <WZUICheckBox AbsContentSize="417,159" AbsPosition="15,0" AnchorPoint="0,0" GUID="{0A0E6A48-E8D6-46fa-A91A-681C5EE44DFC}" LuaSelectedFunctionName="onSelect" Name="selItem_CellTaskItem" TouchEnable="True" Type="WZUICheckBox" UseAbsCoordinate="True" UseAbsSize="True">
+            <CheckElement File="ui/bottomMenu/task/award_nor.png" GUID="{2CF3B963-202A-4cf4-8531-C80732463182}" Type="WZUIImage" UseOriginSize="True"/>
+            <CheckElement File="ui/bottomMenu/task/award_sel.png" GUID="{BABE0947-4181-452b-8B8C-D5C2CAF7D99F}" Type="WZUIImage" UseOriginSize="True"/>
+        </WZUICheckBox>
+        <WZUIContainer AbsContentSize="135,128" GUID="{2FE9FEE9-E779-4ee7-AB84-EA2AA99CB263}" RelativePosition="0.214286,0.5" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image File="common/Jigsaw/skill_bg.png" GUID="{5719E4A5-89DB-4f7c-9FAC-94DA929AC4EC}" Type="WZUI9Image"/>
+            <WZUIImage GUID="{7EE7C2CB-126E-4183-8728-4EC534302BB5}" Name="imgItem_CellTaskItem" Type="WZUIImage" UseOriginSize="True"/>
+        </WZUIContainer>
+        <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="0,0,0" Dimensions="210,80" FontSize="30" GUID="{139B071F-A0A6-459b-88AE-D65799D64147}" Name="txtItem_CellTaskItem" RelativePosition="0.369834,0.5" Text="" TouchEnable="False" Type="WZUILabelTTF"/>
+    </WZUIContainer>
+</CellTaskItem>

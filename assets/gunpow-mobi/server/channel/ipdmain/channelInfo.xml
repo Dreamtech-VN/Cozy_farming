@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ 1）version 表示该渠道的客户端要求的版本号。如果客户端版本号对不上客户端会提示升级。可以支持多个版本如200,201
+ 2）review 游戏评论地址
+ 3）update 游戏下载、更新地址
+ 4）channel为true表示可以连接false表示不可连接 
+ 5）0表示默认渠道配置，没有配置的渠道都按0渠道配置执行
+ -->
+<channels>
+    <channel id="0" version="135,138,139,174,200,201,220,238,1380,1390,2200,8300,8360,8700" 
+        review="itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&amp;id=525216500"
+        update="itms-apps://itunes.apple.com/hk/app/id525216500">true</channel>
+</channels>

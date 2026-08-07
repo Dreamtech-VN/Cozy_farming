@@ -1,0 +1,19 @@
+﻿<CellBlessedMen GUID="{d4b15d45-5c9c-48da-a741-3e2bb17892b6}">
+    <WZUIContainer Type="WZUIContainer" GUID="{d8e07ec3-ddfc-494b-8993-86b4c698c11d}" Name="CellBlessedMen" AbsContentSize="110,140" UseAbsSize="True" LuaObjectName="CellBlessedMen">
+        <WZUIContainer Type="WZUIContainer" GUID="{4847898f-88e0-4c1e-84c0-5c9217984dd3}" AbsContentSize="110,110" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+            <WZUI9Image Type="WZUI9Image" GUID="{fc4ce4d2-9a11-4695-8cd8-6ea268063f33}" File="ui/common/common_scale9_beibaodi1.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{ca558ef2-bf61-4bc6-a55f-71f81e49ba6f}" AbsContentSize="110,110" UseAbsSize="True">
+                <WZUIImage Type="WZUIImage" GUID="{64596233-3695-40c0-8521-d88c4abbce2e}" Name="imgHead_CellBlessedMen" UseOriginSize="True" File="" RelativePosition="0.518182,0.5" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d6813328-599c-4c3d-bfad-29db9eae5559}" FontSize="22" Name="txtName_CellBlessedMen" AnchorPoint="0.5,0" RelativePosition="0.5,0.0909091" Visible="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{b690b4a4-14a2-47f2-96c4-7ec0262ac216}" AbsContentSize="130,25" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True">
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{14406212-ea76-47d4-be86-6e820fad179e}" MaxWidth="130" Name="txtCost_CellBlessedMen" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{653e7f05-03c4-4f9b-8189-3335e1b98a77}" LuaDoneFunctionName="onClickTouch">
+            <NormalElement Type="WZUIContainer" GUID="{ec50a008-0105-4bdb-ac54-65d5c0262e00}" />
+            <SelectElement Type="WZUIContainer" GUID="{9f6399a3-619f-4334-84a3-b020f808fe54}" />
+            <DisableElement Type="WZUIContainer" GUID="{c04914ef-7c61-4d9c-ba36-2b6d2a2a4494}" />
+        </Button>
+    </WZUIContainer>
+</CellBlessedMen>

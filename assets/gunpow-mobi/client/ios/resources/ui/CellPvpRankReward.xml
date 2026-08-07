@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" ?>
+<CellPvpRankReward GUID="{82C8CE90-6EC9-4b72-BB4F-2187B27EFD32}">
+    <WZUIContainer AbsContentSize="726,94" GUID="{0C10A984-C76E-4e7e-B9B0-6F8C25974F07}" LuaObjectName="CellPvpRankReward" Name="CellPvpRankReward" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <WZUIContainer GUID="{A4ED3326-8E15-43dd-8395-AE2EE689E604}" Type="WZUIContainer" ShowAll="False" RelativePosition="0.5,0.5" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{977F4D45-E33D-43b4-ADAC-DF90A77750C8}" File="ui/common/common_scale9_di7.png" Opacity="255" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{3E3BEAD0-6952-465c-80D6-25F1A0E07736}" RelativeSize="0.5,1" RelativePosition="0.012605,0.5" AnchorPoint="0,0.5">
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{9e7a7f0f-bfcb-443a-a8ad-05bcb11334cf}" Name="ftxtDesc_CellPvpRankReward" MaxWidth="600" AnchorPoint="0,0.5" RelativePosition="0.01,0.5" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="" GUID="{9616DBCA-D34C-4868-A73B-4D6F572B2398}" RelativePosition="0.99,0.5" Type="WZUIContainer" UseAbsSize="False" RelativeSize="0.52,1" AnchorPoint="1,0.5">
+            <WZUIContainer AbsContentSize="80,80" GUID="{511A4FB4-3C09-4fdd-AEBA-134C16CC2F14}" Name="conItem1_CellPvpRankReward" RelativePosition="0.58,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="1,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{22441759-b1ba-42be-b6ad-b4d804664868}" File="ui/common/common_icon_xianliang.png" UseOriginSize="True" RelativePosition="0.3,0.6875" Name="imgCornerIcon1_CellPvpRankReward" Visible="False" Order="2" TouchEnable="False" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="80,80" GUID="{5DE224C1-ADF3-4346-ABD7-8DAE91EE3649}" Name="conItem2_CellPvpRankReward" RelativePosition="0.785,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="1,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{66e2df19-d061-4def-b4df-297b82c02a61}" File="ui/common/common_icon_xianliang.png" UseOriginSize="True" RelativePosition="0.3,0.6875" Name="imgCornerIcon2_CellPvpRankReward" Visible="False" Order="2" TouchEnable="False" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="80,80" GUID="{0967D82A-992D-4579-9B3A-1DB6ACB334C9}" Name="conItem3_CellPvpRankReward" RelativePosition="0.99,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="1,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{0899cebd-780d-413e-9e4a-9ca34a539cc5}" File="ui/common/common_icon_xianliang.png" UseOriginSize="True" RelativePosition="0.3,0.6875" Name="imgCornerIcon3_CellPvpRankReward" Visible="False" Order="2" TouchEnable="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellPvpRankReward>

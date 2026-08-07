@@ -1,0 +1,14 @@
+﻿<WndKidShop GUID="{3f67960e-6a99-4c14-a91f-788de116bf44}">
+    <WZUIWindow Type="WZUIWindow" GUID="{af9b6e73-343c-45c9-803a-999fac17f488}" AbsContentSize="760,468" UseAbsSize="True" Name="WndKidShop" LuaObjectName="WndKidShop" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{be09c020-de01-43ad-8b1c-272f91d178f5}" Name="conShop_WndKidShop" Visible="True" AbsContentSize="750,456" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{7157d987-755b-4f53-b7ed-d4c8a67ed97c}" File="ui/bag/common_scale9_js4.png" />
+            <Button Type="WZUIButton" GUID="{b9732504-c6f6-4f61-b106-806fd4aed0df}" Name="btnRule_WndKidShop" LuaDoneFunctionName="onClickRule" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.00342758,1.00399" Visible="False" LuaActionName="Normal">
+                <NormalElement GUID="{6ea6c2ae-44ca-457e-87c6-a467b19065a9}" Type="WZUIContainer" />
+                <SelectElement GUID="{9498bd8c-6eba-433b-93f9-21632945268a}" Type="WZUIContainer" />
+                <DisableElement Type="WZUIContainer" GUID="{436415ad-ce78-4c09-b805-44b0996effb6}" />
+                <WZUIImage Type="WZUIImage" GUID="{96322373-f39a-4687-bad2-c458a139a4ee}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+            </Button>
+            <WZUITableContainer Type="WZUITableContainer" GUID="{f7696fc8-874c-4f3e-8c45-c9292826b183}" RelativeSize="0.98,0.95" Name="tableShop_WndKidShop" EnableMoveHorizontal="False" CellElementHeight="0.58" ColumnCount="3" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndKidShop>

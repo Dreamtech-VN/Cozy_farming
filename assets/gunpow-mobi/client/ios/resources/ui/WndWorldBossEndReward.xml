@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" ?>
+<WndWorldBossEndReward GUID="{CD7D13BB-5FC8-474e-852B-FDCD288E79A6}">
+    <WZUIWindow Type="WZUIWindow" GUID="{8EBD23D3-9314-4b90-A762-9CBD29925AE8}" LuaObjectName="WndWorldBossEndReward" Name="WndWorldBossEndReward" NameCreate="True" AbsContentSize="" UseAbsSize="False" LuaTouchBeganFunction="OnTouchBegin">
+        <WZUIContainer Type="WZUIContainer" GUID="{B1B7B654-3A6A-43e7-85A4-F8E9283DA11A}" Visible="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{0BCF344F-D4ED-4c7c-BB46-3D1FBC4E4CB4}" Name="conWin_WndWorldBossEndReward" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{92349DAC-700F-42c5-879A-B90B6AFFF943}" Name="" ShowAll="False" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{4A2588AE-94C2-49a6-A261-D69CF3DD3AE6}">
+                        <WZUIContainer Type="WZUIContainer" GUID="{3B87683D-1A4E-405e-9615-0275800B78FB}" Visible="True">
+                            <WZUIImage Type="WZUIImage" GUID="{7397be26-de43-40c5-b466-0f1c48c6e7e3}" File="ui/copy_settlement/common_pic_sl.png" FlipX="True" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{6b87d419-0646-4a5e-91ab-c931f25f485b}" Name="">
+                            <WZUIParticle Type="WZUIParticle" GUID="{b524f0f5-2d83-4cad-95f9-bb50a7346ec6}" PlistFile="particle/ui_jiesuan_stars_01.plist" AnchorPoint="0.5,0" RelativePosition="0.5,0" Visible="True" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{18df583d-203c-4e34-b8de-60354acead22}" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Visible="True">
+                                <WZUIImage Type="WZUIImage" GUID="{fbe26576-2991-4068-8272-089f34de0f1b}" File="ui/copy_settlement/common_pic_guangx.png" UseOriginSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0.5" ScaleX="30" Scale="3">
+                                    <Action Type="WZUIActionRotateBy" GUID="{25b906d1-643a-4ffd-8ef1-27d98c3383d8}" Angle="360" IsLoop="True" Duration="30" />
+                                </WZUIImage>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{53b94722-6045-48db-bd02-d1fbf1d8291a}" ShowAll="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{ed09bdcd-52aa-4e98-b6d2-6cb7af0d91b9}" Name="" RelativeSize="0.7,1" ShowAll="False">
+                            <Action Type="WZUIActionSequence" GUID="{1aa7460d-5399-485e-a0fc-4faeb11a21b2}">
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{e98ab2c0-7144-4f40-b11b-ca276a79a6b6}" Duration="2" FinishLuaFunction="OnPlayerParCallBack" />
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{ba22e2be-fffb-4bbb-b9ff-f434f5d99fc5}" Duration="3" />
+                                <ChildAction Type="WZUIActionMoveBy" GUID="{20d0fff0-a653-481b-8f64-ebed008463d6}" MoveX="-180" Duration="0.5" FinishLuaFunction="" />
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{b4b8d3ec-21a0-497f-98c9-2f7a449002b0}" Duration="3" FinishLuaFunction="OnAniFinishCallBack" />
+                            </Action>
+                            <WZUISpine Type="WZUISpine" GUID="{9b754330-8777-4fc3-ba2a-28782008813b}" FileAtlas="copy_settlement/win2.atlas" FileJson="copy_settlement/win2.json" AnimationName="win" UseOriginSize="True" Scale="1.1" RelativePosition="0.5,0.05" ScaleX="1" ScaleY="1" Visible="True" AnchorPoint="0.5,0" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{f5fd9eb7-c037-497d-afea-f5080d7e1ce8}" Name="conPlayer_WndWorldBossEndReward" AbsContentSize="200,300" UseAbsSize="True" RelativePosition="0.5,0.332812">
+                                <WZUIContainer Type="WZUIContainer" GUID="{cb2110ae-d1a5-48e1-8f97-a3aa30bb44a9}" RelativePosition="0.5,0.363333">
+                                    <WZUIImage Type="WZUIImage" GUID="{963ad206-9840-44fd-b3dd-44547f0f0b69}" File="ui/copy_settlement/common_pic_slbg.png" UseOriginSize="True" Scale="1" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{09a5bd63-c3bb-4ac8-a326-86b4c4a1a045}" RelativeSize="1,0.2" RelativePosition="0.525,0.0533341">
+                                    <WZUIImage Type="WZUIImage" GUID="{d516ce61-c8e0-4f81-b400-824036269191}" File="ui/common/common_icon_yy.png" UseOriginSize="True" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{0478fc1a-92b8-4c07-9c74-96b67a054a8e}" Name="conPar1_WndWorldBossEndReward" Visible="True" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{3c0a374d-51bd-4eb8-a929-91160c0a55e8}" Name="conPar2_WndWorldBossEndReward" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{372ab55e-8db7-4a9c-8f47-2dd3956bf5b2}" Name="" AbsContentSize="" UseAbsSize="False" UseAbsCoordinate="False" Visible="True" ShowAll="True" RelativePosition="0.5,0.504687">
+                    <WZUIContainer Type="WZUIContainer" GUID="{eb34a0ce-8fac-4a33-9821-8dc766f2c57e}" AbsContentSize="380,420" UseAbsSize="True" RelativePosition="0.774704,0.385482" Visible="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{9f4655c7-eaa9-40f7-a874-f9aff2ebfb8c}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{f1545b9b-9648-4951-ba25-b8e86f6f79b6}" RelativePosition="0.502632,0.5" File="ui/common/common_scale9_jiesuandi.png" Opacity="150" />
+                            <WZUIImage Type="WZUIImage" GUID="{ba784888-afad-44ed-a52a-838f3435d36a}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.967335,0.968295" FlipX="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{ee05f8aa-9773-461f-af87-b230b73ca294}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0329548,0.966868" />
+                            <WZUIImage Type="WZUIImage" GUID="{836e43c3-1eb2-4875-bbc6-7ceb1e15fad8}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0367578,0.0318981" FlipY="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{60e24447-c89a-4931-90db-29292de72b31}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.965837,0.0365477" FlipX="True" FlipY="True" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{d8bd2485-cac6-40ff-be12-94b1b4db3712}">
+                            <WZUIContainer Type="WZUIContainer" GUID="{1a46cf78-e7c1-4bea-92e2-ce69d23b89da}" RelativeSize="1,0.3" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{dddfbd17-49fa-4d72-968f-8868b3cd59cc}" TextKey="" FontSize="22" Color="255,236,193" RelativePosition="0.5,0.631905" Alignment="Center" AnchorPoint="0.5,0.5" Name="txtKiller_WndWorldBossEndReward" Text="123456789" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{8f547db8-d867-4fa9-891a-5aef4ebb5b21}" AbsContentSize="350,2" UseAbsSize="True" RelativePosition="0.5,0.413492">
+                                    <WZUIImage Type="WZUIImage" GUID="{10e3992d-67c7-46c1-928d-1b84b45ca78f}" File="ui/common/common_scale9_fengexian.png" />
+                                </WZUIContainer>
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{138A5B72-449A-4cb8-A74F-835C256A3D85}" TextKey="HURT_ALL_VALUE" Color="255,236,192" FontSize="22" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.0453773,0.193937" Text="123456789" Name="txtHurt_WndWorldBossEndReward" Scale="0.7" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7857B728-6A6E-4413-B464-850F56E64115}" TextKey="" Color="255,236,192" FontSize="24" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.355263,0.186" Text="123456789" Name="txtAllHurt_WndWorldBossEndReward" Scale="0.7" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5AE53AB9-BA80-4738-8909-233E4F17ED5A}" TextKey="HURT_RANK_INFO" Color="255,236,192" FontSize="22" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.58421,0.201873" Text="123456789" Name="txtRankDes_WndWorldBossEndReward" Scale="0.7" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{E7810C6E-6467-4488-B0D3-6A33D9ED9667}" TextKey="" Color="255,236,192" FontSize="22" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.892506,0.2" Text="Nada" Name="txtHurtRank_WndWorldBossEndReward" Scale="0.7" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{274af63d-6621-4a0f-b131-31749fcfc242}" RelativeSize="1,0.35" RelativePosition="0.5,0.35" AnchorPoint="0.5,0">
+                                <WZUIContainer Type="WZUIContainer" GUID="{c4f59c36-3607-4fa8-9c60-3d0848ca8d6d}" RelativeSize="0.9,0.2" RelativePosition="0.5,1" AnchorPoint="0.5,1">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{8672a268-3e9b-456a-87e5-d9aa4f2d0465}" File="ui/common/common_scale9_heidi1.png" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{a7b65ac8-dee8-4039-9b8b-bd1cfdd61b22}" TextKey="GET_RANK_REWARD" FontSize="20" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{66039893-29d6-4a78-b936-ebf23c3207a3}" RelativeSize="0.9,0.56" RelativePosition="0.5,0.397959">
+                                    <WZUIContainer Type="WZUIContainer" GUID="{c27f045b-7002-4f55-87ec-4e4ee130aebd}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.128656,0.5" Name="conRankR1_WndWorldBossEndReward" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{227b646e-d0b3-4781-b916-14bd1787b9bb}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.383042,0.5" Name="conRankR2_WndWorldBossEndReward" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{d00fbd80-e8f5-4190-a48d-874bbc616808}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.63187,0.5" Name="conRankR3_WndWorldBossEndReward" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{09b749e7-19fc-4f9c-92ff-de7e753da25e}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.872807,0.5" Name="conRankR4_WndWorldBossEndReward" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{999aa91c-3dc9-4155-a702-3f6fabf1f07e}" RelativeSize="1,0.35" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+                                <WZUIContainer Type="WZUIContainer" GUID="{8fd65dd5-a736-46a9-98ec-b3b7e3d31104}" RelativeSize="0.9,0.2" RelativePosition="0.5,1" AnchorPoint="0.5,1">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{3b1b65a5-21e2-452c-a1a9-fff03efd4d26}" File="ui/common/common_scale9_heidi1.png" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7affbbe4-4a6d-4937-bfae-a0a08aff945f}" TextKey="GET_KILL_REWARD" FontSize="20" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{48e9cd55-9cd3-4ec1-9a1a-75244d098b05}" RelativeSize="0.9,0.56" RelativePosition="0.5,0.411564" Name="conKillReward_WndWorldBossEndReward">
+                                    <WZUIContainer Type="WZUIContainer" GUID="{547422fb-6f5f-476b-8cd7-f4578ac99b19}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.128656,0.5" Name="conKillR1_WndWorldBossEndReward" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{1d4bc56e-ff1b-48cc-ab02-46b4ce84bdfd}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.383042,0.5" Name="conKillR2_WndWorldBossEndReward" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{c2f25f83-88c4-41ed-8952-5c9e15eb011f}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.63187,0.5" Name="conKillR3_WndWorldBossEndReward" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{5d678c5e-0f18-4f4f-afeb-d3da337b7246}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.872807,0.5" Name="conKillR4_WndWorldBossEndReward" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{626FCEC7-D267-43e3-887E-4E973A0147ED}" RelativeSize="0.9,0.56" RelativePosition="0.5,0.411564" Name="conNotKillReward_WndWorldBossEndReward">
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{D6F9A78C-E86C-4761-9115-7935BB3F700E}" Text="123456" FontSize="22" TextKey="WORLD_BOSS_NOTKILL" Color="255,236,193" Name="txtNotKill_WndWorldBossEndReward" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <Action Type="WZUIActionSequence" GUID="{8db96d8e-36e7-445c-9549-e030c84c7a02}">
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{2c296844-087a-4382-b065-0b70bc5ec23b}" MoveX="1000" Duration="0" />
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{484f32f0-b1dc-409e-8000-4b9455feac03}" Duration="5.5" />
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{d5e44570-1371-48ed-9d20-8f06736a96bb}" MoveX="-1000" FinishLuaFunction="" Duration="0.5" />
+                    </Action>
+                </WZUIContainer>
+                <WZUIButton Type="WZUIButton" AbsContentSize="115,60" UseAbsSize="True" LuaDoneFunctionName="onFBShare" GUID="{c0840aa5-73ef-416e-b034-467babfa15f4}" RelativePosition="0.0888666,0.0987795" Visible="False" Name="btnFBShare_WndWorldBossEndReward">
+                    <NormalElement Type="WZUIContainer" GUID="{c7d9e22a-0d9f-457d-9b47-a3032a0f618c}">
+                        <WZUIImage Type="WZUIImage" GUID="{717c0047-b0eb-4fe1-8945-56f9325793b4}" File="ui/common/common_btn_anniu10_0.png" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{53a1f20f-5cad-48c8-b641-ff31751f2fff}">
+                        <WZUIImage Type="WZUIImage" GUID="{540e21d7-0cfd-4e1f-879c-1708a3f13fd4}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{c3734037-c0f6-47b8-9b00-774a8593f42f}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{a6a84d85-863c-4381-afac-5db56d82b609}" LabelStyleKey="SMALL_GREEN_BTN" TextKey="SHARE" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{12F833B9-ECC0-47dc-A6D2-D59B2879F5C4}" Name="conLose_WndDailyCopySettlement" RelativeSize="1,1" Visible="False" UseAbsCoordinate="False" ShowAll="False" RelativePosition="0.498958,0.5">
+                <WZUIContainer Type="WZUIContainer" GUID="{44E126BF-735C-48e6-ACA4-69AFC1267104}" Visible="True">
+                    <WZUIImage Type="WZUIImage" GUID="{0b14bd29-3a16-4592-92e4-4dadc6c6eb88}" File="ui/copy_settlement/common_pic_sb.png" FlipX="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{5c38b952-df07-4e62-a2d9-2a92ab086143}" ShowAll="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{1e2babba-5df7-4ac1-b5b8-34efbcd95363}" RelativePosition="0.5,0.5" UseAbsSize="True" AbsContentSize="600,400" Visible="True" ShowAll="False">
+                        <WZUISpine Type="WZUISpine" GUID="{1fbe7e67-ab53-430c-ba2b-6d44a2f3a307}" FileAtlas="copy_settlement/fail.atlas" FileJson="copy_settlement/fail.json" RelativePosition="0.5,-0.3" AnimationName="fail" AnchorPoint="0.5,0" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{e71f6425-d584-4460-b76c-5938ce9c7d08}" Name="conPlayerFail_WndWorldBossEndReward" UseAbsSize="True" RelativeSize="1,0.8" RelativePosition="0.5,0.3" ShowAll="False" AbsContentSize="200,300" />
+                    <Action Type="WZUIActionSequence" GUID="{3c103589-7604-40d4-9e11-0cda096281e6}">
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{bbf6a3ae-07cb-4dd6-979c-c8d182bf1f31}" Duration="2" FinishLuaFunction="" />
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{7a80f2ab-2b06-4744-8e4d-8f78fe3f1c67}" Duration="3" />
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{5fb55dfd-be26-4798-9d95-f12c7ee1960e}" MoveX="-160" Duration="0.5" FinishLuaFunction="" />
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{b016ff68-e9a5-4b1c-93dc-7e3780cefe5b}" Duration="3" FinishLuaFunction="OnAniFinishCallBack" />
+                    </Action>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{38f3961d-54a1-4a60-b0e4-4e7c485da9ed}" Name="" AbsContentSize="" UseAbsSize="False" UseAbsCoordinate="False" Visible="True" ShowAll="True" RelativePosition="0.5,0.504687">
+                    <WZUIContainer Type="WZUIContainer" GUID="{63f8b23c-cc7c-4b94-a432-54e4c68dad74}" AbsContentSize="380,420" UseAbsSize="True" RelativePosition="0.774704,0.385482" Visible="True" ShowAll="False">
+                        <WZUIContainer Type="WZUIContainer" GUID="{039b437d-6632-4841-95d0-18556181b647}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{44abcdd5-2a3c-4b3e-9ef8-e6e386fa1519}" RelativePosition="0.502632,0.5" File="ui/common/common_scale9_jiesuandi.png" Opacity="150" />
+                            <WZUIImage Type="WZUIImage" GUID="{42edb26a-7dff-4995-8129-7a1590aa65c6}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.967335,0.968295" FlipX="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{c69eb572-d632-4b6c-9f91-99c1c16ca44a}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0329548,0.966868" />
+                            <WZUIImage Type="WZUIImage" GUID="{d909e974-0d5f-4565-a509-66f28a7b9b40}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0367578,0.0318981" FlipY="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{2115d882-7d6d-484c-b0f7-145dcec1e451}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.965837,0.0365477" FlipX="True" FlipY="True" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{c36d1b65-497f-4efd-acbc-76724cd25d24}">
+                            <WZUIContainer Type="WZUIContainer" GUID="{1c19b9e5-5751-4bd7-a7ff-912988dac431}" RelativeSize="1,0.5" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                                <WZUIContainer Type="WZUIContainer" GUID="{3c397359-90d6-4735-96af-738f7bb5d937}" RelativeSize="1,0.3" RelativePosition="0.5,0.595238">
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{49efb0d4-83ed-4f08-b96d-8259ad98a504}" TextKey="" FontSize="24" Color="255,236,193" RelativePosition="0.0857895,1" Alignment="Left" AnchorPoint="0,1" Name="txtFailTile_WndWorldBossEndReward" Text="123456789000000000000000000000000" MaxLength="0" Dimensions="330,0" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{a2cede9a-1c33-4f2d-bd37-c163996d6a93}" AbsContentSize="350,2" UseAbsSize="True" RelativePosition="0.5,0.242063">
+                                    <WZUIImage Type="WZUIImage" GUID="{a7f97353-588e-4fed-b025-4e6c435d10dd}" File="ui/common/common_scale9_fengexian.png" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{E2913556-88E9-44cb-9858-2341AD10CDFF}" RelativeSize="1,0.2" RelativePosition="0.5,0.057143">
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{AD616D6F-C130-4860-9AA9-5B99D845BDED}" TextKey="HURT_ALL_VALUE" Color="255,236,192" FontSize="22" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.0453773,0.5" Text="123456789" Name="txtFailHurt_WndWorldBossEndReward" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{E7513CD2-E591-4ecf-AC69-CC823E30C695}" TextKey="" Color="255,236,192" FontSize="24" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.3,0.5" Text="123456789" Name="txtFailAllHurt_WndWorldBossEndReward" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{3F6A140F-922C-4cc8-A4CB-65030F1BB819}" TextKey="HURT_RANK_INFO" Color="255,236,192" FontSize="22" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.626315,0.5" Text="123456789" Name="txtFailRank_WndWorldBossEndReward" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{F0A5C444-D5ED-4d16-A636-FD00E506F443}" TextKey="" Color="255,236,192" FontSize="22" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.889874,0.5" Text="12" Name="txtFailHurtRank_WndWorldBossEndReward" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{c35208f9-42a6-41e8-a0c2-60f8ac0591d9}" RelativeSize="1,0.5" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+                                <WZUIContainer Type="WZUIContainer" GUID="{28de36c7-a288-42fe-ad06-85c469d1aa5b}" RelativeSize="0.9,0.2" RelativePosition="0.5,0.909524" AnchorPoint="0.5,1">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{9561b96b-35b1-4f55-8172-6cbc50e21a30}" File="ui/common/common_scale9_heidi1.png" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1ee3884b-181f-4c61-82b6-3c5266c311a0}" TextKey="GET_RANK_REWARD" FontSize="20" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{b0378f59-eb2a-4446-bdbf-581dc8f40cb4}" RelativeSize="0.9,0.56" RelativePosition="0.5,0.397959">
+                                    <WZUIContainer Type="WZUIContainer" GUID="{b7a76035-251b-4ffb-ae02-2e52312196ca}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.128656,0.5" Name="conFailRankR1_WndWorldBossEndReward" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{c7f4eb84-3803-4c2a-b379-c53872ad01b4}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.383042,0.5" Name="conFailRankR2_WndWorldBossEndReward" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{016d1faa-dee6-4c98-baca-2d0cb73c1fdd}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.63187,0.5" Name="conFailRankR3_WndWorldBossEndReward" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{b74b6ece-a91d-47f9-9032-7bb010de63fa}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.872807,0.5" Name="conFailRankR4_WndWorldBossEndReward" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <Action Type="WZUIActionSequence" GUID="{d50d1d15-5a6c-4c48-9d6c-ae57ad26cf63}">
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{0d8f9583-de32-48ad-9064-0ccbc9a2e618}" MoveX="1000" Duration="0" />
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{f10ee8b7-237b-420e-a3a7-ab5d84b2b8e7}" Duration="5.5" />
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{77206369-2281-4686-bb2e-6685bbc2d7d3}" MoveX="-1000" FinishLuaFunction="" Duration="0.5" />
+                    </Action>
+                </WZUIContainer>
+                <Action Type="WZUIActionDelayTime" GUID="{54a11b09-8034-4077-80d3-bfb59eeeb519}" Duration="6" FinishLuaFunction="OnAniFinishCallBack1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{de23da0a-d42b-4a30-a2d3-d2489c3242aa}" AbsContentSize="380,420" UseAbsSize="True" RelativePosition="0.774704,0.385482" Visible="True" ShowAll="True" Name="conCilck_WndWorldBossEndReward" />
+            <WZUIContainer Type="WZUIContainer" GUID="{07261b79-69ad-4ac2-a7a1-702f4f65b9a2}" Name="conBtnContinue_WndWorldBossEndReward" NameCreate="True" Visible="False">
+                <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickContinue" GUID="{ebee48ce-d69d-4068-a544-60644c69338f}">
+                    <NormalElement Type="WZUIContainer" GUID="{f5e01679-7a52-42f0-ac57-227100f80cec}" />
+                    <SelectElement Type="WZUIContainer" GUID="{5afe96d5-07c1-480b-a8dc-12070a923414}" />
+                    <DisableElement Type="WZUIContainer" GUID="{d12d74e5-6731-414b-b48a-fc169e983b6f}" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6c0e4cd0-9ccb-4e9e-a0a9-ca1ac1d308f5}" Color="62,34,8" FontSize="22" TextKey="DAILY_COPY_CLICK_CONTINUE" RelativePosition="0.31875,0.053125" Name="txtClickContinue_WndWorldBossEndReward" NameCreate="True" Visible="True" ShowAll="True" />
+            </WZUIContainer>
+            <Action Type="WZUIActionSequence" GUID="{9d190865-ab91-4006-bf0d-4274f06ea986}">
+                <ChildAction Type="WZUIActionDelayTime" GUID="{9c8ad31b-7c08-4f6b-b668-0a51cce20b3c}" Duration="0.2" />
+                <ChildAction Type="WZUIActionShow" GUID="{e61fb2e6-0aa1-4423-bf80-42603b8930b0}" />
+                <ChildAction Type="WZUIActionContainerFadeFromTo" GUID="{0693395c-358d-45dd-9760-796cb43634ab}" OpacityTo="255" Duration="1" RemoveTarget="False" />
+            </Action>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndWorldBossEndReward>

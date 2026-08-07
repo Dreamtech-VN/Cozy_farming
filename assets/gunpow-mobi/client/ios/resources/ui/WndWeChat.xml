@@ -1,0 +1,46 @@
+ï»¿<WndWeChat GUID="{0a5ea999-70f1-4ac3-8053-97d7bce5b245}">
+    <WZUIWindow Type="WZUIWindow" GUID="{f4fb15d8-5b1c-426f-8565-0fce4f2208b4}" LuaObjectName="WndWeChat" Name="WndWeChat" LuaTouchBeganFunction="onTouchBegin" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{66a55c28-9815-4be5-b073-a39ac42d1716}" AbsContentSize="584,470" UseAbsSize="True" RelativePosition="0.5,0.5" LuaObjectName="" Name="" Visible="True" ShowAll="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{2d718b99-414d-42b4-8db5-fbd2d3372e09}" File="ui/common/common_scale9_di19.png" RelativePosition="0.5,0.5" CapInsets="170,70,1,1" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{2a550fc5-de5b-49cc-8dee-0165464f46b3}" AbsContentSize="570,320" UseAbsSize="True" AbsPosition="0,0" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.537481" Name="" UseAbsCoordinate="False" TouchEnable="False">
+                <WZUIImage Type="WZUIImage" GUID="{09d01a27-6d9c-46cc-9060-7ee15d8fbd12}" File="ui/common/common_pic_yaoqianshu.png" Name="imgBg_WndWeChat" UseOriginSizeProportion="False" UseOriginSize="False" UseAbsCoordinate="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{869af172-bf6b-4fe7-976e-10eed12ad3b4}" Name="" AbsContentSize="600,400" UseAbsSize="True" RelativePosition="0.5,0.426108" AbsPosition="552.831,252.6" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{1df5cd29-1c8d-4079-b0ba-cfbc88133093}" AbsContentSize="450,56" UseAbsSize="True" RelativePosition="0.5,0.114394">
+                    <Button Type="WZUIButton" GUID="{4bbb17e3-e44d-473b-a475-db62537af166}" Name="" LuaDoneFunctionName="onShare" Tag="6" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.8,0.5">
+                        <NormalElement Type="WZUIContainer" GUID="{3bb2a2d4-01e7-46c2-88b8-c87d60184ad5}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{b6d22f76-d778-411d-8089-ede802f4a08f}" File="ui/common/common_btn_anniu10.png" RelativePosition="0.5,0.5" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{e58a768d-a622-4ad6-bc43-63f4f5d518c9}" Scale="1" ScaleX="1" ScaleY="1">
+                            <WZUI9Image Type="WZUI9Image" GUID="{03b962fe-64fa-412c-b13d-d068f6611b15}" File="ui/common/common_btn_anniu10_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{117d62c8-5f73-459f-a981-0e595a0d7592}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{298dbbd7-4328-4da4-ae73-64bb8a9b2477}" FontSize="24" Name="" Color="255,236,193" BoldFont="True" StrokeColor="3,111,8" Text="" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" TouchEnable="False" EnableStroke="True" Dimensions="0£¬0" TextKey="SHARE" StrokeSize="4" LabelStyleKey="SMALL_GREEN_BTN" />
+                    </Button>
+                    <Button Type="WZUIButton" GUID="{733f4fa7-e852-4472-bbb7-795ad687c623}" Name="" LuaDoneFunctionName="onCancel" Tag="6" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.2,0.5">
+                        <NormalElement Type="WZUIContainer" GUID="{5dfdbbfb-fbfb-42c7-81de-c90ca26491d5}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{268e7f7a-d681-48c3-99da-9ca87024953f}" File="ui/common/common_btn_anniu3.png" RelativePosition="0.5,0.5" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{f48e148c-de3f-4f3c-8140-19ea8b2fd621}" Scale="1" ScaleX="1" ScaleY="1">
+                            <WZUI9Image Type="WZUI9Image" GUID="{3433bcc7-69cd-4e04-ad0e-149ec919d947}" File="ui/common/common_btn_anniu3_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{9ce1ea06-ee98-49b3-b497-7a1a5fce71cc}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4f228c5c-7305-4e90-9b11-32700a1e7e46}" FontSize="24" Name="" Color="255,236,193" BoldFont="True" StrokeColor="3,111,8" Text="CANCEL" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" TouchEnable="False" EnableStroke="True" Dimensions="0£¬0" TextKey="CANCEL" StrokeSize="4" LabelStyleKey="SMALL_ORANGE_BTN" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{510afbce-190c-4446-b3c9-907f5238b1df}" TextKey="SHARE" FontSize="26" LabelStyleKey="SMALL_WINDOW_TITLE" RelativePosition="0.5,0.816429" />
+        <WZUIContainer Type="WZUIContainer" GUID="{4d87bc3f-4f89-4b1c-a9bd-7394a09179af}" Name="conHasReward_WndWeChat" AbsContentSize="578,160" UseAbsSize="True" RelativePosition="0.501263,0.402273" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{b89bb64d-5301-48cf-be8a-b9d4cf89d0ea}" File="ui/weChat/common_scale9_heidi013.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{e4c2da33-cd13-4c04-ba00-b2b888440fdc}" LabelStyleKey="C1_F22" Text="hhhhhhhh" RelativePosition="0.5,0.1375" TextKey="WECHATTIPS1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{6cfdb516-18fe-43ea-91eb-3875b8eb68e0}" AbsContentSize="400,100" UseAbsSize="True" RelativePosition="0.5,0.595058">
+                <WZUITableContainer AnchorPoint="0.5,0.5" CellElementHeight="1" ColumnCount="5" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableVerticalScroll="False" GUID="{9b11da83-970f-4b2c-9e68-da47c6a7917e}" Name="tabReward_WndWeChat" RelativePosition="0.86,0.427273" RelativeSize="1,1" Type="WZUITableContainer" EnableMoveoutContainer="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{940edab1-efb7-42a0-b03b-d94ccda7b61f}" Name="conNoReward_WndWeChat" AbsContentSize="578,40" UseAbsSize="True" RelativePosition="0.5,0.307813" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{c88bf02b-47ab-41d3-be30-934c42f03be1}" File="ui/common/common_scale9_heidi1.png" RelativePosition="0.5,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{6ac0d5b5-6ad3-4b75-b8ef-f383029a6e0a}" LabelStyleKey="C1_F22" Text="hhhhhhhh" RelativePosition="0.5,0.6" TextKey="WECHATTIPS2" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndWeChat>

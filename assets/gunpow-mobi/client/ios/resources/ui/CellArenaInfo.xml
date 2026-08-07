@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<CellArenaInfo GUID="{387ab442-966c-4693-b9db-573cee0c9453}">
+	<WZUIContainer Type="WZUIContainer" GUID="{E4C27C85-F876-4d47-BCC3-470015F35675}" UseAbsSize="True" AbsContentSize="440,42" Name="CellArenaInfo" Visible="True" RelativePosition="0.5,0.5">
+		<WZUIContainer Type="WZUIContainer" GUID="{C87FEE33-334F-40af-A4D3-62194BC9B595}" UseAbsSize="True" AbsContentSize="440,42" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" AbsPosition="271.444,410.556">
+			<WZUIContainer Type="WZUIContainer" GUID="{B8B53A97-B651-407d-A38C-2C5345B2118C}">
+				<WZUI9Image Type="WZUI9Image" GUID="{54D1DC77-1415-4723-AA61-61BA385B9765}" Name="imgDi_CellArenaInfo" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{3E74C596-A7D9-4d9c-9201-40670F328E9D}" RelativeSize="0.05,1" RelativePosition="0.0549482,0.5" Visible="True" AbsPosition="22.6387,21">
+				<WZUIImage Type="WZUIImage" GUID="{6FC29584-4FA8-465c-90BB-80C98EE16296}" Name="imgAthLv_CellArenaInfo" File="" UseOriginSize="True" Scale="0.6" RelativePosition="0.5,0.5" />
+				<WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{FAA0C89F-E3E5-4c17-8CB0-0FF9E34E495A}" CharMapFileName="ui/common_num/common_num_ghdj.png" Text="1" Height="24" UseOriginSize="True" Name="lafAthLv_CellArenaInfo" NameCreate="True" RelativePosition="0.51389,0.48" Width="16" Scale="0.6" />
+			</WZUIContainer>
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{44E9946C-7D55-4afc-A7A3-243A8B1BAA53}" Name="txtLevel_CellArenaInfo" Text="Lv1" Color="255,227,116" FontSize="20" RelativePosition="0.115341,0.5" AnchorPoint="0,0.5" BoldFont="True" Alignment="Left" AbsPosition="47.5205,21" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{BF77D193-EA54-41a4-8FCB-DF928FCFF9C0}" Name="txtName_CellArenaInfo" Text="" AnchorPoint="0,0.5" Color="255,227,116" FontSize="24" RelativePosition="0.227864,0.47619" BoldFont="True" Alignment="Left" AbsPosition="98.4372,20" />
+			<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{76DCF204-4986-47a6-AA45-D1E594D8794B}" Name="ftbName_CellArenaInfo" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0.227864,0.5" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{8F831838-B705-49ac-AA17-AB76BDB3A729}" Name="txtKill_CellArenaInfo" Text="0" Color="255,227,116" FontSize="20" RelativePosition="0.607,0.5" BoldFont="True" AnchorPoint="0.5,0.5" TextKey="" Alignment="Center" AbsPosition="262.224,21" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{0A20575E-3BE2-427a-83DF-7886180223BB}" Name="txtHitRate_CellArenaInfo" Text="100%" Color="255,227,116" FontSize="20" RelativePosition="0.700185,0.5" Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Visible="True" AbsPosition="302.48,21" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{33A69F40-4B5C-4f23-8491-AB41CC423F18}" Text="+0" Name="txtScore_CellArenaInfo" Color="255,227,116" FontSize="20" RelativePosition="0.773304,0.5" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" AbsPosition="334.067,21" />
+			<WZUIImage Type="WZUIImage" GUID="{C6076B86-0E06-4a44-8E24-2D2F5B31697A}" Name="imgFirstBlood_CellArenaInfo" NameCreate="True" File="" UseOriginSize="True" RelativePosition="0.934481,0.5" Visible="True" AbsPosition="403.696,21" />
+		</WZUIContainer>
+	</WZUIContainer>
+</CellArenaInfo>

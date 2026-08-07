@@ -1,0 +1,42 @@
+﻿<WndMatchDeclare GUID="{410a3916-6649-4a5d-a4a2-1e95db95740d}">
+    <WZUIWindow AbsContentSize="396,272" GUID="{30947d48-7a1c-4c34-b705-5d0462051093}" LuaObjectName="WndMatchDeclare" Name="WndMatchDeclare" NameCreate="True" Type="WZUIWindow" UseAbsSize="False" ShowAll="False">
+        <Button Type="WZUIButton" GUID="{eca95b94-be42-49ba-a21b-e4003e9f155b}" LuaDoneFunctionName="onClickOther">
+            <NormalElement Type="WZUIContainer" GUID="{c66bd540-24ec-4163-9c67-9ce8161284b7}" />
+            <SelectElement Type="WZUIContainer" GUID="{50a2b97e-b249-4175-b1a9-ad55a267c636}" />
+            <DisableElement Type="WZUIContainer" GUID="{7e51c89c-4296-4eeb-9184-ed218b08e7f9}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{ca65857b-8fec-42a9-b15c-84a73fcbd49c}" AbsContentSize="396,272" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True" ShowAll="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{63a9a59f-294f-438e-a571-945dc014a154}" File="ui/common/common_scale9_di24.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{14ce6afe-82e1-432c-b708-b5bb6c2c9079}" Name="txtTitle_WndMatchDeclare" FontSize="20" Color="255,227,116" RelativePosition="0.05,0.9" TextKey="MATCHMAKE_TEXT11" AnchorPoint="0,0.5" Alignment="Left" />
+            <WZUIContainer Type="WZUIContainer" GUID="{2ad7fe4e-cff7-46bb-9af4-1df7abededdc}" RelativeSize="1,0.4" RelativePosition="0.5,0.629602" Visible="True" AbsContentSize="362,116" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{79d1f2c7-9ec2-4ffa-a443-11b6c9cb6c7f}" File="ui/common/common_scale9_di51.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{93c1e4c5-2c27-40a3-8db4-91fef3affb44}" RelativeSize="1,1" RelativePosition="0.5,0.5">
+                    <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Color="255,236,193" FontColor="255,236,193" FontSize="22" GUID="{0ed389be-b1a7-4af4-b489-7d61227d9a48}" InputMode="ModeSingleLine" KeyBordReturnType="TypeDone" LuaEditBoxTextChanged="" MaxLength="16" Name="editBox_WndMatchDeclare" Order="0" PlaceHolder="" PlaceholderFontColor="195,171,148" RelativePosition="0.5,0.5" RelativeSize="0.9,1" Text="123" Type="WZUIEditBox" UseOriginSize="False" TextFieldPadding="" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" LuaTouchBeganFunction="" LuaTouchEndedFunction="onChangeEdit" PlaceHolderAlignment="0" Dimensions="110,25" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{921d61f0-6849-4296-9dee-67005adea2df}" FontSize="18" Color="138,122,106" Name="txtTimeAtt_WndMatchDeclare" RelativePosition="0.5,0.33" />
+            <WZUIContainer Type="WZUIContainer" GUID="{45530be9-a980-4dac-b9e5-630f7ae059f0}" RelativeSize="1,0.25" RelativePosition="0.5,0.15">
+                <Button Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.25,0.5" LuaDoneFunctionName="onCancelClick" GUID="{4461d565-044d-49ef-9c84-9bf3d278e46e}" Name="btnCancel_WndMatchDeclare" AbsContentSize="116,56" UseAbsSize="True" LuaActionName="Normal" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{cccf5ea5-1ad0-44f1-bfdd-3247e9fe55b3}" UseAbsSize="False" AbsContentSize="0,0">
+                        <WZUIImage Type="WZUIImage" GUID="{88aee482-e43f-41ad-98bf-3cfeb959989f}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{2434cc2e-fadf-442a-82db-c1e48b3fea74}" AbsContentSize="0,0" UseAbsSize="False">
+                        <WZUIImage Type="WZUIImage" GUID="{cfd7a7ea-6c3e-437f-851c-08ecf770f5a6}" File="ui/common/common_btn_anniu3_0_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{03219d4f-9518-41e9-b6dd-2204f2199183}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7564097f-bdc6-49b5-b3dd-58d851822316}" Name="txtCancel_WndMatchDeclare" NameCreate="True" BoldFont="False" Color="255,236,193" FontSize="20" TextKey="" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" LabelStyleKey="" />
+                </Button>
+                <WZUIButton Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.75,0.5" GUID="{1764829e-7b08-4ab4-9676-482066a1c262}" LuaDoneFunctionName="onOkClick" Name="btnOk_WndMatchDeclare" NameCreate="False" AbsContentSize="116,56" UseAbsSize="True" LuaActionName="Normal" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{bad40a4f-4cd1-4b58-ab69-fa3c24ed7b97}" AbsContentSize="116,56" UseAbsSize="True">
+                        <WZUIImage Type="WZUIImage" GUID="{b052c0c4-e4be-494f-b705-21aad9483521}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" Color="255,255,255" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{bbed7243-7491-424c-8721-fd6ddb054d0f}" AbsContentSize="116,56" UseAbsSize="True">
+                        <WZUIImage Type="WZUIImage" GUID="{160fae88-f444-4c4b-8815-5d9d2321b9aa}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{cf60a497-2d41-4413-9bab-8346b6536fe5}" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{e28ab03b-0122-49b8-b838-398b2915393f}" Name="ftxtOk_WndMatchDeclare" MaxWidth="120" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndMatchDeclare>

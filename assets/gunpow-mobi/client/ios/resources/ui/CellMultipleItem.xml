@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CellMultipleItem GUID="{8DE3E41E-E1EA-4c4d-9A0C-CBDF89650AE4}">
+    <WZUIWindow AbsContentSize="290,143" GUID="{1A5A3381-8110-4c51-BF20-E79CAE237970}" LuaObjectName="CellMultipleItem" Name="CellMultipleItem" NameCreate="True" ShowAll="False" Type="WZUIWindow" UseAbsSize="True">
+        <WZUIContainer GUID="{6F2EE3A4-D3FA-41d6-A708-564A7C8A8F29}" Type="WZUIContainer">
+            <Button AbsContentSize="225,117" GUID="{9BC5CE7C-2065-410f-95F4-054B69C3789A}" LuaDoneFunctionName="onCellClickCallback" Name="btnBg_CellMultipleItem" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{EB327274-3164-4098-A511-4784552DF247}" Tag="-1" Type="WZUIContainer">
+                    <WZUIImage File="" GUID="{99DDA5B8-FF22-4ed7-B6E5-5DB47F1D930B}" Name="img_o_CellMultipleItem" Tag="-1" Type="WZUIImage" UseOriginSize="False" />
+                </NormalElement>
+                <SelectElement GUID="{919D95FF-D5BC-4a08-90F8-BD52FBA82B97}" Type="WZUIContainer">
+                    <WZUIImage File="" GUID="{80577261-074D-4199-B43B-AF297F52197A}" Name="img_u_CellMultipleItem" RelativePosition="0.5,0.5" Tag="-1" Type="WZUIImage" UseOriginSize="False" />
+                </SelectElement>
+                <DisableElement GUID="{2E27526E-23AD-4db6-AECF-FBE59259D67B}" Type="WZUIContainer">
+                    <WZUIImage File="" GUID="{073BD813-38FE-436e-AD60-1A191BD09F3C}" Name="img_d_CellMultipleItem" RelativePosition="0.5,0.5" Tag="1" Type="WZUIImage" UseOriginSize="False" />
+                </DisableElement>
+            </Button>
+            <WZUIImage File="ui/main/bossMap/copy_small.png" GUID="{5CA4CC22-E9F4-4b64-B1DD-689BF60BB853}" Name="highLight_CellMultipleItem" RelativePosition="0.489656,0.520979" RelativeSize="0.695,0.647" Type="WZUIImage" Visible="True" />
+        </WZUIContainer>
+        <WZUIContainer GUID="{D573763B-D5A0-47e0-A700-CF235B92733F}" Name="star_CellMultipleItem" Type="WZUIContainer">
+            <WZUIContainer AbsContentSize="35,35" GUID="{94AE4200-1E00-45bd-A712-126E70581B7C}" RelativePosition="0.54748,0.349704" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage File="ui/rightMenu/exploration/star_1.png" GUID="{15C640D9-352B-4742-B1D9-96495A7050A6}" Name="stars1_u_CellMultipleItem" Type="WZUIImage" UseOriginSizeProportion="True" />
+                <WZUIImage File="ui/rightMenu/exploration/star_3.png" GUID="{6B76F416-4AD4-4c23-9595-929073514206}" Name="stars1_o_CellMultipleItem" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSizeProportion="True" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="35,35" GUID="{64DC64E5-6CAF-4740-B93A-AE294D981E66}" RelativePosition="0.649319,0.349704" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage File="ui/rightMenu/exploration/star_1.png" GUID="{8BE88C32-FC86-4da7-B9E7-1DFB9D96F2F1}" Name="stars2_u_CellMultipleItem" Type="WZUIImage" UseOriginSizeProportion="True" />
+                <WZUIImage File="ui/rightMenu/exploration/star_3.png" GUID="{822870B1-65DC-4a7d-8F04-AE7F9EE86F1A}" Name="stars2_o_CellMultipleItem" Type="WZUIImage" UseOriginSizeProportion="True" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="35,35" GUID="{C48CCFC6-1F3F-48fc-9B03-B663FA374B4A}" RelativePosition="0.752276,0.349704" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage File="ui/rightMenu/exploration/star_1.png" GUID="{C681D750-C1D2-4972-A209-ACC154EFCE40}" Name="stars3_u_CellMultipleItem" Type="WZUIImage" UseOriginSizeProportion="True" />
+                <WZUIImage File="ui/rightMenu/exploration/star_3.png" GUID="{1F01553B-4EC6-41b1-970F-040968BA7CEB}" Name="stars3_o_CellMultipleItem" Type="WZUIImage" UseOriginSizeProportion="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="0,0" AnchorPoint="0.5,0.5" GUID="{F734D181-D19E-4a4f-9D23-F545FDDAB526}" RelativePosition="0.5,0.5" ShowAll="False" TouchEnable="False" Type="WZUIContainer" UseAbsSize="False">
+            <WZUILabelTTF Alignment="Left" BoldFont="False" Color="255,234,0" EnableStroke="True" Font="" FontSize="30" GUID="{6247F15F-742B-44bb-B2A3-C97CA4FE9742}" Name="txtTitle_CellMultipleItem" RelativePosition="0.5,0.606444" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Type="WZUILabelTTF" />
+        </WZUIContainer>
+    </WZUIWindow>
+</CellMultipleItem>

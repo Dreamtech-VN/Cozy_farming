@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<WndVipChooseMail GUID="{C56B2436-B3AC-477c-A094-EAC615570E56}">
+    <WZUIWindow AbsContentSize="960,640" GUID="{F5653B7F-6940-4a95-A0FA-E5D7450CA2D3}" LuaObjectName="WndVipChooseMail" Name="WndVipChooseMail" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIWindow" UseAbsSize="False" ShowAll="False" LuaTouchEndedFunction="onOkClick">
+        <WZUIContainer Type="WZUIContainer" GUID="{818cf48b-2a13-4fb8-b649-a218331da6d8}">
+            <WZUIImage Type="WZUIImage" GUID="{127a2aa6-7f27-4a34-8db9-781e10e6bb05}" File="common/Jigsaw/black_bg.png" Order="-1" Opacity="180" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{254b801c-bc69-4465-a371-421eb1f6ec82}" ShowAll="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{f785819d-f4d2-4524-b39e-5b3a74c58793}" AbsContentSize="560,206" UseAbsSize="True" RelativePosition="0.497917,0.51875" Name="conBg_WndVipChooseMail" AbsPosition="480,326" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{59ea2909-c1a8-43e7-94bb-7fdafe0adb11}" File="ui/vip/common_btn_emailbtn.png" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{92598c57-a868-40b7-b9e9-1ba1dc92e091}" File="ui/vip/common_btn_emailtitle.png" UseOriginSize="True" RelativePosition="0.520183,0.604622" AbsPosition="471.443,497.471" Scale="1.2" />
+            <Button Type="WZUIButton" Name="btn1__WndVipChooseMail" GUID="{3c42ad56-e98d-4b4d-abf3-1a603524a3af}" AbsContentSize="70,52" UseAbsSize="True" RelativePosition="0.699398,0.455336" AbsPosition="287.879,348.493" LuaDoneFunctionName="click" Tag="1" Scale="1.2" Visible="True">
+                <NormalElement Type="WZUIContainer" GUID="{3021de42-a5f3-40f9-981e-0b6a56b7a02c}">
+                    <WZUIImage Type="WZUIImage" GUID="{245b2cad-aba0-49aa-bf24-4b7363a29dc2}" File="ui/vip/common_btn_emailbtnbtn.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{ef3f1e5d-27a8-41dd-9b71-5f9fcdf6b86e}">
+                    <WZUIImage Type="WZUIImage" GUID="{a46e6c7d-9cc0-4c5e-856c-02ef7b8aca9b}" File="ui/vip/common_btn_emailbtnbtn.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" Scale="1.05" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{e2dfc853-d1aa-4aed-8361-0e422fbce96d}" />
+            </Button>
+            <WZUIButton Type="WZUIButton" Name="btnClose__WndVipChooseMail" GUID="{0fd8e427-ff5d-4c1e-acf2-13d90e2f982a}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.251223,0.614375" AbsPosition="135.52,498.854" LuaDoneFunctionName="clickClose" Scale="1.2">
+                <NormalElement Type="WZUIContainer" GUID="{02869f22-15a0-48a3-a2d4-867645820c6b}">
+                    <WZUIImage Type="WZUIImage" GUID="{d61de6cd-c891-489f-9e8f-bcb282e42f40}" File="ui/vip/common_btn_emailback.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{f7fecf0a-c4a4-49f3-9239-ddeeacc4ada5}">
+                    <WZUIImage Type="WZUIImage" GUID="{668eae5e-a1d5-4df7-8ab3-0085dda99413}" File="ui/vip/common_btn_emailback.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="100.764,398.663" Scale="1.05" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{3ee4a1f8-5226-4322-84a6-07abfc9e448f}" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{2fa69840-4704-462f-a2ff-fa781503e400}" RelativeSize="0.4,0.94" RelativePosition="0.640069,0.456021" AnchorPoint="1,0.5" AbsContentSize="332,70" UseAbsSize="True" Name="conFind_WndVip" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{402aad83-7400-4b53-b5e4-97b82a76b2b2}" File="ui/vip/common_btn_emailbtnbtnbtn.png" Visible="True" />
+                <WZUIEditBox Type="WZUIEditBox" GUID="{51b513b2-37ac-4dcd-85ea-cee9f928c2d1}" FontSize="30" TextFieldPadding="0" Text="" PlaceHolder="" BgHidden="False" InputMode="ModeEmailAddr" BgPicture="ui/common/transparent_bg.png" Name="editFind_WndVip" MaxLength="100" Color="79,60,48" PlaceHolderAlignment="0" FontColor="165,165,165" PlaceholderFontColor="195,171,148" Alignment="0" ChinesePlaceholderNum="2" RelativeSize="1,1" AnchorPoint="1,0.5" RelativePosition="1,0.5" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndVipChooseMail>

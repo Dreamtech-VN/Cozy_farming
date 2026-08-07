@@ -1,0 +1,42 @@
+﻿<CellDressGoodSeat GUID="{4e9bb8e1-b76a-4664-836b-dd8e598795a9}">
+    <WZUIContainer Type="WZUIContainer" GUID="{063702ee-b9e8-4543-86e6-6746c8258d39}" Name="CellDressGoodSeat" NameCreate="True" AbsContentSize="206,340" UseAbsSize="True" LuaObjectName="">
+        <WZUIContainer Type="WZUIContainer" GUID="{6673715b-7bdf-4228-b11d-bae70f5de01d}" Name="conRole_CellDressGoodSeat" RelativeSize="1,0.7" AnchorPoint="0.5,0" RelativePosition="0.5,0" />
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{4d74ffa5-bd0a-4713-a58d-c0bb2bddd768}" Name="ftxtGoodNum_CellDressGoodSeat" ShowText='&lt;T C=&quot;127,70,26&quot; S=&quot;18&quot; P=&quot;0&quot;&gt; 纪念币活动规则&lt;/T&gt;' MaxWidth="200" RelativePosition="0.5,0.955" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4d7cbb04-d2aa-4158-8f46-3fbea43a1e2e}" LabelStyleKey="C18_F20" Name="txtPlayerName_CellDressGoodSeat" Text="哈哈哈哈哈哈" RelativePosition="0.5,0.87" />
+        <WZUIContainer Type="WZUIContainer" GUID="{2f3d1fd1-024d-46fa-a8aa-456bcb09135c}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.196753,0.708059" Name="conRecommend_CellDressGoodSeat" Visible="False">
+            <WZUIImage Type="WZUIImage" GUID="{e3d6b3be-b0a6-4ba4-83a6-70bc86b7918f}" File="ui/common/common_icon_hbiaoqian.png" UseOriginSize="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{0b129cf3-1906-4ff9-9941-c0d0c48f0d0d}" TextKey="SHOP_RECOMMEND" LabelStyleKey="C18_F16_S4_C2" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{6b13bb73-0bfc-4261-88a4-6f2a9573ffda}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.196753,0.708059" Name="conPeriod_CellDressGoodSeat" Visible="False">
+            <WZUIImage Type="WZUIImage" GUID="{41c70449-874a-49ef-9320-944b0233919a}" File="ui/charmSpace/charmspace_dress_first.png" UseOriginSize="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{66940f28-bdc0-436e-83a4-b47ce1857890}" TextKey="FIRST_PLACE" LabelStyleKey="C18_F16_S4_C2" RelativePosition="0.5,0.2" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{a8adf2f0-8bb6-401d-91b9-6dd647950d5d}" LuaDoneFunctionName="onClickRole">
+            <NormalElement Type="WZUIContainer" GUID="{9d9ac67c-b8f5-4cfa-a928-28619b3a866f}" />
+            <SelectElement Type="WZUIContainer" GUID="{f64581dc-4abd-41c0-b9d3-514e6dafe201}" />
+            <DisableElement Type="WZUIContainer" GUID="{e1c023f3-1d9e-4f67-b3c1-87d2a5d6d746}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{1b58f578-e0f3-4a1d-92e0-d2acf6ba9cb8}" Name="conButton_CellDressGoodSeat" Visible="False">
+            <Button Type="WZUIButton" GUID="{0b848adb-e056-4f57-9bd3-581da738afee}" AbsContentSize="116,58" UseAbsSize="True" LuaActionName="Normal" LocalInterval="400" RelativePosition="0.5,0.26" Scale="0.75" LuaDoneFunctionName="onClickGood" Name="btnGiveGood_CellDressGoodSeat">
+                <NormalElement Type="WZUIContainer" GUID="{8f73158e-0cc3-4b7e-9eeb-7d56c81f17f6}">
+                    <WZUIImage Type="WZUIImage" GUID="{96d5820e-5f6f-41d0-acb7-5997a8874705}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{dc03057d-d4b9-4c1c-908c-36134ef6b443}">
+                    <WZUIImage Type="WZUIImage" GUID="{4ef42810-3517-46a7-9c08-1e920e3563ce}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{127cd44e-a18d-45fc-885a-639d9171ef2e}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{bba89962-e244-4f51-8a73-415372eb485b}" TextKey="CHARM_LIFT8" LabelStyleKey="SMALL_GREEN_BTN" />
+            </Button>
+            <Button Type="WZUIButton" GUID="{f45ec785-6ddb-4cf6-b3d4-2e493eb19f45}" AbsContentSize="116,58" UseAbsSize="True" LocalInterval="400" LuaActionName="Normal" RelativePosition="0.5,0.1" Scale="0.75" LuaDoneFunctionName="onClickCheck" Name="btnCheck_CellDressGoodSeat">
+                <NormalElement Type="WZUIContainer" GUID="{5798b001-6f7f-4cba-b829-b3ccd3d38d58}">
+                    <WZUIImage Type="WZUIImage" GUID="{a8d78e58-5104-4d7a-9bb3-7ef568d17e2f}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{0678914c-9d80-4a9b-be8e-3f8d835af79b}">
+                    <WZUIImage Type="WZUIImage" GUID="{2d7e9797-1e53-4e0b-a02e-b2e246c36c46}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{ee3588a7-f08b-4d63-9c12-0f477db8f145}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c4be8f49-234e-4c76-a1e0-79681fdbd6fd}" TextKey="PETLOOK" LabelStyleKey="SMALL_GREEN_BTN" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellDressGoodSeat>

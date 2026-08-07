@@ -1,0 +1,33 @@
+﻿<CellMonthCardPanel GUID="{2046ecb5-ceb3-4383-9757-352067486df5}">
+    <WZUIContainer AbsContentSize="502,453" GUID="{21d018bb-313b-4ed0-a8df-1ca8ff8a8a7c}" LuaObjectName="CellMonthCardPanel" Name="CellMonthCardPanel" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="502,453" GUID="{89d6aefb-c2aa-423f-9c2b-f37cde269af7}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,1">
+            <WZUIImage Type="WZUIImage" GUID="{f2d6d671-f8ae-419c-a9a8-d97ef0372f97}" File="ui/gameActivity/activity_pic_yk.png" UseOriginSize="False" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" ScaleX="1" Scale="1" ScaleY="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{5614784b-92cd-4e59-b9a1-838d1685b4c3}" AbsContentSize="502,40" UseAbsSize="True" RelativePosition="0,1" AnchorPoint="0,1" Name="conLeftTime_CellMonthCardPanel">
+                <WZUI9Image Type="WZUI9Image" GUID="{1e02ff72-3011-4f04-bb10-42c6672b59bc}" File="ui/common/common_scale9_heidi7.png" AnchorPoint="0,1" RelativePosition="0,1" />
+                <WZUILabelTTF Color="255,227,116" FontSize="22" GUID="{d133c9e9-fb27-426e-9b49-d553787becb5}" Name="txtTimeWord_CellMonthCardPanel" RelativePosition="0.025,0.5" StrokeSize="4" Text="" Type="WZUILabelTTF" AnchorPoint="0,0.5" EnableStroke="True" StrokeColor="128,54,13" TextKey="MONTHCARD_LEFTTIME" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{f01d027e-f02a-43d5-ada9-0b7deef34d50}" Color="255,89,74" EnableStroke="True" FontSize="24" StrokeColor="158,0,0" StrokeSize="4" Name="txtTimeValue_CellMonthCardPanel" RelativePosition="0.32,0.5" AnchorPoint="0,0.5" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="130,65" GUID="{a76e4e51-6d81-4011-921f-5a5adde4d6fe}" RelativePosition="0.805625,0.163633" Type="WZUIContainer" UseAbsSize="True" Name="conForBtn_CellMonthCardPanel">
+                <WZUIButton GUID="{b4b165d9-1ced-41da-a71f-8eab1d7aa212}" LuaDoneFunctionName="onRechargeEvent" Name="btn_getReward_event" Type="WZUIButton" RelativePosition="0.5,0.330769" LuaActionName="Normal">
+                    <NormalElement GUID="{25dfdacc-8b37-486c-9ed9-dda7a2c951ce}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1.png" GUID="{8c908c28-8ef2-4990-89c4-3ef604860a73}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{ff281997-67a8-49b2-b55b-1f837623204d}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1_sel.png" GUID="{dbfe152a-a5d9-403d-8e26-168d9bb29ecd}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{b026f69a-d755-4984-acbd-bec9ced0e6f1}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1.png" GUID="{94b3b31f-da15-4295-b63b-8bc437c5d555}" RelativePosition="0.5,0.5" RelativeSize="1.1,1" Type="WZUI9Image" GrayRender="True" UseOriginSize="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{5237832e-4ebe-4536-96e2-0920b71e38b3}" Name="txt_gotoButton" RelativePosition="0.5,0.5" StrokeColor="128,54,13" StrokeSize="4" Text="" Type="WZUILabelTTF" LabelStyleKey="" EnableStroke="True" TextKey="BUY_NOW" />
+                    <WZUISpine Type="WZUISpine" GUID="{1816da9a-6622-457f-b246-aa0456e8ba4b}" FileAtlas="ui/ui_main_likechongzhi.atlas" FileJson="ui/ui_main_likechongzhi.json" Loop="True" AnimationName="animation" RelativePosition="0.5,1.12308" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8ef6af4b-eda1-4b45-8097-acec5d62b974}" FontSize="22" Color="255,227,116" AnchorPoint="0.5,0" RelativePosition="0.5,0.8" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" Name="txtCost_CellMonthCardPanel" LabelStyleKey="" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="500,100" GUID="{757afc85-31a2-4052-8222-b2ea7b966123}" RelativePosition="0.5,0.163" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0.5">
+                <WZUIContainer GUID="{0549ecd4-cfac-4d19-89ce-05b89a88cb3c}" Type="WZUIContainer" AbsContentSize="300,105" UseAbsSize="True" RelativePosition="0.34,0.5" AnchorPoint="0.5,0.5">
+                    <WZUITableContainer AbsContentSize="300,90" AnchorPoint="0.5,0.5" CellElementHeight="0.33" ColumnCount="1" EnableMoveHorizontal="True" EnableMoveVertical="False" GUID="{c192c333-5bc2-45d1-bb2f-fff9a527ff65}" Name="tbConReward_CellMonthCardPanel" RelativePosition="0.5,0.485" RelativeSize="1,1" ShowAll="False" Type="WZUITableContainer" UseAbsSize="True" IsVerticalMode="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellMonthCardPanel>

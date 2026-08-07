@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" ?>
+<SceneCity GUID="{623BB950-C078-4a4c-941F-96C2C714D79C}">
+    <WZUIFrame AbsContentSize="960,640" AnchorPoint="0.5,0.5" GUID="{61C5F31B-48DC-4837-8921-20CF0C6BC0F9}" LuaObjectName="SceneCity" LuaTouchBeganFunction="onTouchBegan" LuaTouchEndedFunction="" LuaTouchMovedFunction="" Name="SceneCity" NameCreate="True" RelativePosition="0.5,0.5" ShowAll="False" TouchEnable="True" Type="WZUIFrame" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{e7d0b46f-d539-445c-bdb2-589148bb28dc}" Name="conAll_SceneCity" Visible="True" Order="0">
+            <WZUIContainer GUID="{80fa3c4b-bf74-4be3-9fae-27326ad68463}" NoBorder="False" ShowAll="False" Type="WZUIContainer" RelativePosition="0.498958,0.5" Name="conBuilding_SceneCity">
+                <WZUIScene AbsContentSize="960,640" GUID="{4500e88d-e828-4470-a667-f6785a978662}" Name="conBgLayer_SceneCity" RelativePosition="0.5,0.5" SceneFile="ui/city/newMainScene/newMainScene.scn" Type="WZUIScene" UseAbsSize="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{0d51a881-f77d-4820-8d0d-532c9959ca1e}" AbsContentSize="960,100" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,-0.0765625" UseAbsCoordinate="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{d2691286-f1b5-482e-980f-ad7808dadc61}" File="ui/city/beta/main_icon_dibujianbiandiejiadi_2.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{8932fa24-9b03-447e-9d21-fe32857c58fc}" Name="conTrailer_SceneCity" AbsContentSize="200,200" UseAbsSize="True" AbsPosition="480,400" UseAbsCoordinate="True" Visible="False" Order="3" ShowAll="True">
+                    <WZUIImage File="ui/city/newUI/main_icon_daoju.png" GUID="{48be1b86-8ae3-430b-9070-d1ca6f92bba6}" RelativePosition="0.5,0.5" Scale="1" Type="WZUIImage" UseOriginSize="True" Name="imgTrailer_SceneCity" Rotation="0" FlipY="False" Opacity="255" />
+                    <WZArmature Type="WZArmature" GUID="{2a5ac1f5-2b1f-40c2-a8e1-74b7d413a71a}" ArmatureName="zhiyin_dianji_anniu_01" UseOriginSize="False" RelativePosition="0.5,0.5" Visible="False" RelativeSize="1,1" TouchEnable="False" TouchSwallow="False" UseAbsCoordinate="False" AbsPosition="0,0" GrayRender="False" ArmatureFile="teach/zhiyin_dianji_anniu_01.xml" Name="animTrailer_SceneCity" AnchorPoint="0.5,0.5" ShowAll="False" UseOriginSizeProportion="True">
+                        <Action Type="WZUIArmatureAnimationById" GUID="{b2839bdc-7ad2-4923-b229-394bd9f904ae}" Bone="" AnimationId="0" Loop="-1" IsLoop="False" RunTimes="1" />
+                    </WZArmature>
+                    <WZUISpine Type="WZUISpine" GUID="{5bd1e0af-84bd-430a-83ae-bf1e2019ced2}" FileAtlas="ui/icon_chongwu.atlas" FileJson="ui/icon_chongwu.json" Loop="True" AnimationName="icon_chongwu_2" RelativePosition="0.49853,0.784554" ScaleX="1" ScaleY="1" Visible="True" Name="animTrailer1_SceneCity" Scale="1" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer GUID="{4e2af6f8-2387-4164-a3d9-396390d465aa}" Name="conBgAdornLayer_SceneCity" RelativePosition="0.498377,0.497565" ShowAll="True" TouchEnable="False" Type="WZUIContainer" Visible="False">
+                <WZUIContainer GUID="{897b6c24-8076-4b43-b427-189ed3dccf05}" Name="conMount_SceneCity" Type="WZUIContainer" Visible="False" />
+                <WZUIContainer GUID="{c8846f9b-1cbc-4863-85e2-da25ed7b56a2}" Name="conCloud_SceneCity" RelativePosition="0.370906,-0.424941" Type="WZUIContainer" />
+            </WZUIContainer>
+            <WZUIContainer GUID="{91a4ace9-ebf3-4bef-93bf-4a999928a792}" Name="conBuildAniLayer_SceneCity" RelativePosition="0.5,0.5" ShowAll="True" TouchEnable="True" Type="WZUIContainer" />
+            <WZUIContainer GUID="{f242e96e-13b8-4436-98c0-26a8de6e3f2f}" Name="conFigureLayer_SceneCity" RelativePosition="0.5,0.5" ShowAll="True" TouchEnable="True" Type="WZUIContainer" />
+            <WZUIContainer GUID="{12411eff-fe6b-4454-9ce4-d2b42ffd35a1}" Name="conTopInfoLayer_SceneCity" ShowAll="True" TouchEnable="True" Type="WZUIContainer">
+                <WZUIContainer GUID="{914821a5-09cb-406d-9b1c-05c5b2374576}" Name="conTopAni_SceneCity" Order="0" Type="WZUIContainer" Visible="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{85c3cd12-33ab-4c1c-9b93-225214ed0fb0}" File="ui/common/common_black_bg.png" Name="imgBlack_SceneCity" Order="1000" TouchEnable="False" TouchSwallow="False" />
+    </WZUIFrame>
+</SceneCity>

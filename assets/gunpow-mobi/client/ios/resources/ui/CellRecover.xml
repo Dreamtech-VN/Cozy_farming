@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<CellRecover GUID="{F4A7DA70-2B63-4328-964B-36AA5F6A38E0}">
+	<WZUIContainer Type="WZUIContainer" GUID="{E2F3BBBB-8A50-40ca-A840-9A5E969D2BBE}" Name="CellRecover" RelativePosition="0.5,0.5" LuaObjectName="CellRecover" AbsContentSize="350,92" UseAbsSize="True">
+		<WZUIContainer Type="WZUIContainer" GUID="{8832BD30-89C2-404a-A721-D1924B33F91B}" AbsContentSize="350,92" UseAbsSize="True" RelativePosition="0.5,0.5">
+			<WZUI9Image Type="WZUI9Image" GUID="{C786205B-D044-4ae6-AD12-49446CD384D5}" File="ui/common/common_scale9_di7.png" />
+			<WZUIContainer Type="WZUIContainer" GUID="{5B54FE90-E99C-45e4-A3EA-E7AE495486E9}" AbsContentSize="233,38" UseAbsSize="True" RelativePosition="0.625,0.7">
+				<WZUI9Image Type="WZUI9Image" GUID="{D41370DB-7B03-4abe-A75B-FC2470B2694E}" File="ui/common/common_scale9_di8.png" RelativePosition="0.5,0.5" />
+			</WZUIContainer>
+		</WZUIContainer>
+		<WZUIContainer Type="WZUIContainer" GUID="{F5A7369F-183F-41f3-950D-8E5ACCB4E13D}" Name="conGrid_CellRecover" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.155,0.5" />
+		<WZUIImage Type="WZUIImage" GUID="{EA4679AB-B8FF-44b7-83E4-C82F1A862879}" File="ui/common/common_icon_jinbi.png" UseOriginSize="True" RelativePosition="0.32,0.28" Scale="0.8" AnchorPoint="0,0.5" />
+		<WZUILabelTTF Type="WZUILabelTTF" GUID="{FD826C2E-10C0-4e65-AB33-128D93E2339D}" Name="name_CellRecover" FontSize="20" RelativePosition="0.32,0.71" Color="122,221,254" BoldFont="True" Text="name" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="112,65.24" />
+		<WZUILabelTTF Type="WZUILabelTTF" GUID="{AB9370D7-C091-4fbc-99DD-FDCF95DD05CD}" FontSize="24" Color="158,0,0" BoldFont="True" RelativePosition="0.43,0.28" Alignment="Left" AnchorPoint="0,0.5" Text="38000" Name="price_CellRecover" />
+		<Button Type="WZUIButton" LuaDoneFunctionName="onCancel" GUID="{D087DEC3-620E-41b3-A8F8-D7E63137E244}">
+			<NormalElement Type="WZUIContainer" RelativePosition="\o+98\xc 01b -*-zn " TouchContainerEnable="True" GUID="{893CD211-5753-4779-B616-324703CCD0DF}" />
+			<SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{101D0C39-D345-4eb8-808C-ED92E43102F0}" />
+			<DisableElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{D5E619AA-988E-4d22-BBB6-2A82A3E9368F}" />
+		</Button>
+	</WZUIContainer>
+</CellRecover>

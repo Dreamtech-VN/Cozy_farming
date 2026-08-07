@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<WndCopyWorldBossInfoView GUID="{B19C91CE-0603-48bc-9B27-9CBBA8230FC6}">
+    <WZUIWindow Type="WZUIWindow" GUID="{6BE9F73F-46B1-442d-ABC4-124323F7E267}" AbsContentSize="300,160" UseAbsSize="True" NameCreate="True" LuaObjectName="WndCopyWorldBossInfoView" Name="WndCopyWorldBossInfoView" ShowAll="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.998438" AbsPosition="480,660">
+        <WZUIContainer AbsContentSize="320,25" AnchorPoint="0.5,0" Name="" RelativePosition="0.5,0" ShowAll="False" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True" GUID="{515C8AE9-805D-494b-A5B3-B32927951E6A}" Visible="True" RelativeSize="1,1" UseAbsCoordinate="False">
+            <WZUI9Image Type="WZUI9Image" File="ui/common/common_progress_boss_bg.png" GUID="{FCEBFD47-1FDB-4ab9-A88A-FD677E4B6DFA}" UseOriginSize="True" RelativePosition="0.5,0.5" Visible="True" UseOriginSizeProportion="False" />
+            <WZUIProgress BgPicture="ui/common/common_progress_boss_fore.png" Name="proHP_WndCopyWorldBossInfoView" Percentage="100" Scale="1" Type="WZUIProgress" UseOriginSize="True" Visible="True" RelativePosition="0.5,0.5" GUID="{F94ADA27-7015-423f-92B6-62E3DF917AAF}" UseOriginSizeProportion="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{C955C7C1-7AF2-4e95-9B96-0224D14AA415}" Text="22.95%" Color="255,255,255" Font="" FontSize="25" BoldFont="True" TouchEnable="False" StrokeColor="62,34,8" StrokeSize="4" EnableStroke="True" Name="txtHP_WndCopyWorldBossInfoView" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCopyWorldBossInfoView>

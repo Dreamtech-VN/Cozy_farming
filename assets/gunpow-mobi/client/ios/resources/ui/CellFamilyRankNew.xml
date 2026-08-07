@@ -1,0 +1,27 @@
+﻿<CellFamilyRankNew GUID="{0a1eacdc-c864-4fc7-a503-9183e66068b6}">
+    <WZUIContainer AbsContentSize="320,70" GUID="{b81a3e36-901d-48c6-8691-8ea367f61112}" LuaObjectName="CellFamilyRankNew" Name="CellFamilyRankNew" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{dbca4ea6-a943-423b-98c3-02b233cab95d}" Name="txtRanking_CellFamilyRankNew" RelativePosition="0.09,0.5" UseOriginSize="True" CharMapFileName="ui/common_num/common_num_pmsz.png" Height="30" Width="24" Text="100" Scale="0.6" />
+        <WZUIImage Type="WZUIImage" GUID="{4140eb59-39b8-4376-b74a-76348dcfd3e2}" File="ui/common/common_icon_1st.png" UseOriginSize="True" RelativePosition="0.09,0.53" Name="imgName_CellFamilyRankNew" Visible="False" Scale="0.7" />
+        <WZUIContainer Type="WZUIContainer" GUID="{c66454a5-19ad-4f98-b9a2-dde32bcfe8b7}" Name="conHeadInfo_CellFamilyRankNew" RelativePosition="0.5,0.5">
+            <WZUILabelTTF AnchorPoint="0,0.5" ChineseLengthPolicy="1" Color="255,226,117" Dimensions="0,0" FontSize="18" GUID="{0a0b1db2-fbed-46ed-869b-75e655191987}" MaxLength="22" Name="txtCommunityName_CellFamilyRankNew" RelativePosition="0.34,0.68" Text="名称" Type="WZUILabelTTF" Alignment="Left" LabelStyleKey="">
+                <WZUIImage Type="WZUIImage" GUID="{86fc50ac-5469-4321-9c5d-364906f1f797}" Name="imgKua_CellFamilyRankNew" File="ui/common/common_icon_kuafu.png" UseOriginSize="True" RelativePosition="1,0.5" Visible="False" AnchorPoint="0,0.5" />
+            </WZUILabelTTF>
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="233,166,62" FontSize="18" GUID="{087f5dda-8192-4314-a30c-a399a18a7769}" Name="txtSheerLuxury_CellFamilyRankNew" RelativePosition="0.34,0.32" Text="Lv1" Type="WZUILabelTTF" Alignment="Left" Visible="True" LabelStyleKey="" />
+            <WZUIContainer Type="WZUIContainer" GUID="{dc3e5041-ea55-481c-a89c-19c03c0be51c}" Name="conHead_Cell" AbsContentSize="60,60" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.15,0.5" Scale="1" ScaleX="1" ScaleY="1">
+                <WZUIImage Type="WZUIImage" GUID="{4f45aaf5-3ea3-459c-aa64-7b4f02a9957f}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="0.78" RelativePosition="0.505,0.5" ScaleX="0.78" ScaleY="0.78" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{a0cc99ca-148d-4c64-a256-ca4d2fa8b675}" File="shopitems/gold_bag_003.png" UseOriginSize="True" RelativePosition="1,0.53" Name="imgGoldIcon_CellFamilyRankNew" Visible="False" Scale="0.8" AnchorPoint="1,0.5" />
+        <Button Type="WZUIButton" AbsContentSize="120,70" UseAbsSize="True" RelativePosition="0,0.5" GUID="{8bfb0e67-d763-48c3-9265-b46869845d4a}" LuaDoneFunctionName="onClickCheck" Name="" Visible="True" TouchContainerEnable="True" TouchEnable="True" LuaActionName="Normal" AbsPosition="722.85,36.4142" Order="11" AnchorPoint="0,0.5">
+            <NormalElement Type="WZUIContainer" GUID="{00c1a964-17be-4edf-81aa-b8db21abe5b3}" />
+            <SelectElement Type="WZUIContainer" GUID="{1f865c48-4fad-4af4-8ede-fd2b13a44654}" />
+            <DisableElement Type="WZUIContainer" GUID="{8fa02a73-68c5-496a-94f7-c4914307491c}" />
+        </Button>
+        <Button Type="WZUIButton" AbsContentSize="200,70" UseAbsSize="True" RelativePosition="1,0.5" GUID="{4d1b4946-1ba9-4adf-a48e-05455a37eff4}" LuaDoneFunctionName="onFamily" Name="" Visible="True" TouchContainerEnable="True" TouchEnable="True" LuaActionName="Normal" AbsPosition="722.85,36.4142" Order="11" AnchorPoint="1,0.5">
+            <NormalElement Type="WZUIContainer" GUID="{623954b1-641d-4ca0-b907-27e17d6450d6}" />
+            <SelectElement Type="WZUIContainer" GUID="{8d07a2f4-1a4b-482f-a001-97ebda616a19}" />
+            <DisableElement Type="WZUIContainer" GUID="{49369f2f-b45b-4873-9384-12b83f34b114}" />
+        </Button>
+        <WZUIImage Type="WZUIImage" GUID="{ff9c574b-c9dd-4854-a383-97c01d04c690}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" ScaleX="1.5" />
+    </WZUIContainer>
+</CellFamilyRankNew>

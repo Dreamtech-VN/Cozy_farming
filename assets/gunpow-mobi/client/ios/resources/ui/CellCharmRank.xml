@@ -1,0 +1,37 @@
+﻿<CellCharmRank GUID="{43811744-d76c-4e40-808e-1ccff3e4f4f5}">
+    <WZUIContainer Type="WZUIContainer" GUID="{b71e157d-5fa5-425b-b002-ec5d89078acf}" UseAbsSize="True" Visible="True" AbsContentSize="620,75" RelativePosition="0.5,0.5" Name="CellCharmRank">
+        <WZUI9Image Type="WZUI9Image" GUID="{f727f818-734f-4a5f-bdfc-44c21584ca0e}" File="ui/common/common_scale9_di7.png" Name="imgBackground_CellCharmRank" />
+        <WZUIContainer Type="WZUIContainer" GUID="{36138c30-c7c8-41c1-ade8-faef0cbb300a}" AbsContentSize="60,62" UseAbsSize="True" RelativePosition="0.0558988,0.5">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f5fa81d9-324b-41cd-aaac-2fb50207c0c1}" FontSize="22" Name="txtRank_CellCharmRank" Color="158,0,0" RelativePosition="0.5,0.5" />
+            <WZUI9Image Type="WZUI9Image" GUID="{c68f717c-1e2e-4fdc-a3dd-7fc67cdb953a}" Name="imgRank_CellCharmRank" File="" UseOriginSize="True" UseOriginSizeProportion="False" ScaleY="0.85" ScaleX="0.85" Scale="0.85" RelativePosition="0.5,0.629032" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{4ba74686-c41b-4cf2-bdb0-36032b125e91}" AbsContentSize="120,62" UseAbsSize="True" RelativePosition="0.227866,0.5" Name="con1_CellCharmRank">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{871ffdb3-1b9d-4a72-b6ae-ee3e04f15bf0}" Color="127,70,26" FontSize="20" Text="" RelativePosition="0.06,0.721774" Name="txtLevel_CellCharmRank" Alignment="Left" AnchorPoint="0,0.5" />
+            <WZUI9Image Type="WZUI9Image" GUID="{991c6e07-6679-4b06-9cbe-7bee915dd643}" File="ui/common/common_icon_kuafu.png" UseOriginSize="True" RelativePosition="0.06,0.341129" Name="imgKua_CellCharmRank" AnchorPoint="0,0.5">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d974e220-0069-4655-8699-bce6e44aee1d}" Color="127,70,26" FontSize="20" Text="" RelativePosition="1.1,0.341129" Name="txtName1_CellCharmRank" AnchorPoint="0,0.5" Alignment="Left" />
+            </WZUI9Image>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7bddecdf-8c80-48e7-8ec7-132928630163}" Color="127,70,26" FontSize="20" Text="" RelativePosition="0.0516667,0.341129" Name="txtName2_CellCharmRank" AnchorPoint="0,0.5" Alignment="Left" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{d0fbac6b-4660-4c0a-91c8-f1898fb98310}" AbsContentSize="80,62" UseAbsSize="True" RelativePosition="0.454009,0.5" Name="con2_CellCharmRank">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9c7194ca-b740-432e-8686-a9131d6ab979}" Color="127,70,26" FontSize="20" Text="" Name="txtID_CellCharmRank" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{c2be3b40-9aef-43bb-95d8-9cab3ee7bcc3}" AbsContentSize="80,62" UseAbsSize="True" RelativePosition="0.627168,0.5" Name="con3_CellCharmRank">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5d8b6223-641c-4276-af88-ed7be7d7e5c2}" Color="127,70,26" FontSize="20" Text="" Name="txtServer_CellCharmRank" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{5ffaf6ae-edc6-4eed-a0d9-49d7f36bff8b}" AbsContentSize="115,62" UseAbsSize="True" RelativePosition="0.776664,0.8875" Name="con4_CellCharmRank" AnchorPoint="0,1">
+            <WZUIImage Type="WZUIImage" GUID="{d632f3de-9dcf-45b1-aa96-7a06e6944bf7}" AnchorPoint="0,0.5" RelativePosition="0.01,0.516129" File="ui/space/common_icon_songh.png" UseOriginSize="True" Scale="0.8" ScaleX="0.8" ScaleY="0.8" Name="imgTypeIcon_CellCharmRank">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{bb7017c9-b13c-44ac-8185-b9b561b33076}" Color="127,70,26" FontSize="20" AnchorPoint="0,0.5" RelativePosition="1.1,0.5" Text="" Name="txtNum_CellCharmRank" />
+            </WZUIImage>
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{399a48cb-055e-4c30-8d9b-8365d60ef615}" LuaDoneFunctionName="onClick">
+            <NormalElement Type="WZUIContainer" GUID="{a28e9187-97e3-4d9b-b0ca-9b47e1072ce3}">
+                <WZUI9Image Type="WZUI9Image" GUID="{ff664d40-d98d-4c65-8cb2-c1e4f7867ca6}" File="" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{1c86d967-2035-462b-89de-90185be74238}">
+                <WZUI9Image Type="WZUI9Image" GUID="{d4138641-5876-41e1-8f1a-f6f426c2ba6d}" File="ui/common/common_scale9_beibaodi_sel.png" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{baee059f-901c-4318-b42c-67b6d5b7f6e6}" />
+        </Button>
+        <WZUI9Image Type="WZUI9Image" GUID="{1e4c44a9-1074-4fdc-a167-2ad7ab2d2a4e}" File="ui/common/common_scale9_beibaodi_sel.png" Name="img_CellCharmRank" Visible="False" />
+    </WZUIContainer>
+</CellCharmRank>

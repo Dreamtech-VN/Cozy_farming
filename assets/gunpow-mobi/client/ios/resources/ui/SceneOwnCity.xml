@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?><SceneOwnCity GUID="{673AB950-C078-4a4c-941F-96C2C714D79C}">
+    <WZUIFrame AbsContentSize="960,640" AnchorPoint="0.5,0.5" GUID="{61C5F31B-48DC-4837-8921-20CF0C6BC0F9}" LuaObjectName="SceneOwnCity" LuaTouchBeganFunction="" LuaTouchEndedFunction="" LuaTouchMovedFunction="" Name="SceneOwnCity" NameCreate="True" RelativePosition="0.5,0.5" ShowAll="False" TouchEnable="True" Type="WZUIFrame" UseAbsSize="True">
+        <WZUIMultiTouchPanel AlwaysLuaTouchBegan="False" AlwaysLuaTouchEnded="True" AlwaysLuaTouchMoved="True" GUID="{A1FD63A4-BCCC-4a3c-885D-9CCA0B0A3F2C}" LuaObjectName="" LuaTouchBeganFunction="onTouchBegan" LuaTouchEndedFunction="onTouchEnd" LuaTouchMovedFunction="onTouchMoved" Name="multiTouchPanel_SceneOwnCity" TouchEnable="True" Type="WZUIMultiTouchPanel"/>
+        <WZUIContainer GUID="{D4A14892-E513-4340-854E-39299AE12998}" Name="conBgLayer_SceneOwnCity" RelativePosition="0.5,0.5" ShowAll="True" TouchEnable="False" Type="WZUIContainer" Visible="True">
+            <WZUIImage AnchorPoint="0.5,0.5" File="ui/city/bg/BK_01.png" GUID="{C699DD63-9AF4-4072-861E-6B414B1D2658}" Name="imgBg1_SceneOwnCity" Order="4" RelativePosition="-0.145,0.5" Type="WZUIImage" UseOriginSize="True" UseOriginSizeProportion="True" Visible="True"/>
+            <WZUIImage File="ui/city/bg/BK_02.png" GUID="{DE77BAD3-4F82-4599-8EB6-09495CC93045}" Name="imgBg2_SceneOwnCity" Order="6" RelativePosition="0.915,0.5" Rotation="0" Type="WZUIImage" UseOriginSize="True" UseOriginSizeProportion="True" Visible="True"/>
+            <WZUIImage File="ui/city/bg/BK_03.png" GUID="{09BA08F2-E59B-4d41-B422-033E698B4A9C}" Name="imgBg3_SceneOwnCity" Order="7" RelativePosition="1.565,0.5" Type="WZUIImage" UseOriginSize="True" UseOriginSizeProportion="True" Visible="True"/>
+        </WZUIContainer>
+		<WZUIContainer GUID="{FAD81465-B67C-4800-B18C-207999D83DBD}" Name="conBgAdornLayer_SceneOwnCity" RelativePosition="0.498377,0.497565" ShowAll="True" TouchEnable="False" Type="WZUIContainer" Visible="False">
+            <!-- <WZUIContainer Type="WZUIContainer" GUID="{24D658A9-8185-4211-8546-5D2D59360092}" Name="conMount_SceneOwnCity" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{12A5A815-599B-4cb1-90BA-4E1CD4594A00}" File="ui/city/town_zj.png" UseOriginSize="True" UseOriginSizeProportion="True" RelativePosition="0.0427476,0.462209" />
+                <WZUIImage Type="WZUIImage" GUID="{DEB340C8-91A4-4998-9E88-41EDF387868E}" File="ui/city/town_zj.png" UseOriginSize="True" UseOriginSizeProportion="True" RelativePosition="0.860042,0.462209" />
+            </WZUIContainer> -->
+            <!-- <WZUIContainer Type="WZUIContainer" GUID="{DB2CB60E-CD83-420f-B46C-4D3C4D8AC81E}" Name="conCloud_SceneOwnCity" RelativePosition="0.370906,-0.424941">
+                <WZUIImage Type="WZUIImage" GUID="{53203D3A-1788-4f55-9E66-FBFD321DC7B8}" File="ui/city/town_yun1.png" UseOriginSize="True" UseOriginSizeProportion="True" RelativePosition="0.295868,1.76018" />
+                <WZUIImage Type="WZUIImage" GUID="{7BF98D16-C64E-40b6-91F7-88D3C05BB9F0}" File="ui/city/town_yun1.png" UseOriginSize="True" UseOriginSizeProportion="True" RelativePosition="0.980043,1.75659" />
+                <WZUIImage Type="WZUIImage" GUID="{14FC810A-FCD2-44f5-A416-1CB812CD9557}" File="ui/city/town_yun2.png" UseOriginSize="True" UseOriginSizeProportion="True" RelativePosition="0.594736,1.71615" />
+            </WZUIContainer> -->
+        </WZUIContainer>
+        <WZUIContainer GUID="{6064AE1B-0ECB-4c01-9929-A2BFD037DE7A}" Name="conBuildLayer_SceneOwnCity" RelativePosition="0.5,0.5" ShowAll="True" TouchEnable="True" Type="WZUIContainer" Visible="True">
+            <WZUIContainer AbsContentSize="121,80" AnchorPoint="0.5,0.5" GUID="{BA36RFE8-4F35-46ba-BC18-093C16C3B4FC}" Name="conButtonNotice_SceneOwnCity" Order="0" RelativePosition="-0.428187,0.826411" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="121,80" GUID="{475C28D3-CF32-4483-8F3B-400232FC6A60}" LuaDoneFunctionName="onBuildClickNotice" Name="btnBuildNotice_SceneOwnCity" RelativePosition="0.5,0.5" Tag="1" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{5E29F954-00BB-4f85-B8E2-AD98F0282FAD}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/city/building/4.png" GUID="{1949E55B-6D3F-4753-B772-820DD36F11F4}" RelativePosition="0.5,0.8" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{409BACD0-0A3A-494f-99CD-1882A5020262}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Color="230,230,230" File="ui/city/building/4.png" GUID="{85F87FA3-F040-4b43-9DB7-E6F93C63A647}" RelativePosition="0.5,0.8" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{DE9695A5-7B1B-4a1d-876D-50550216B16F}" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{6B5BC82E-DFFF-48cd-9D97-C9686F3187E8}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="27" GUID="{242955E1-B122-44d1-A44A-45E590BD5516}" Name="txtBuildNotice_SceneOwnCity" Order="1" RelativePosition="-0.333159,1.60036" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Text="公告" Type="WZUILabelTTF" Visible="False"/>
+                <WZUIContainer AbsContentSize="120,50" GUID="{07B876F5-5BC2-4d8e-9C65-69BBB5FDEA72}" RelativePosition="0.501178,-0.0602493" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                    <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{28FEFE6B-D3FB-4c78-B41D-AE7C4FF8B52A}" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="ui/main/bulletin_board_main.png" GUID="{7BA8A545-AB74-422d-85F1-D8B9CEAA7619}" Name="imgBuildOpenNotice_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="ui/main/bulletin_board_not_main.png" GUID="{67C30A91-B74E-4155-B60F-83444A1208B8}" Name="imgBuildUnOpenNotice_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="100,180" AnchorPoint="0.5,0.5" GUID="{AC19EDD7-B8FF-48c0-92B9-C9F5A2D5A34E}" Name="conButtonRanking_SceneOwnCity" Order="3" RelativePosition="-0.318131,0.612895" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="100,180" GUID="{3E0B3D45-4D0F-481a-8FC7-714CF0FE923F}" LuaDoneFunctionName="onBuildClickRanking" Name="btnBuildRanking_SceneOwnCity" RelativePosition="0.5,0.5" Tag="2" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{C2458592-F4E8-4d6d-B048-FA829A74EDD9}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/city/building/2.png" GUID="{7D968FB5-6E91-4226-96A7-A9FC759CF526}" RelativePosition="0.6,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{FBF5FE54-FAC2-40a1-95B7-F61473EFBAF0}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Color="230,230,230" File="ui/city/building/2.png" GUID="{45EE3C91-012F-4857-9EB8-A6828E0CDB43}" RelativePosition="0.6,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{3DE7E8F2-A20B-4d86-BFCC-C416C19F39BC}" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{09C2A05E-CBE4-4d91-9F95-4AF9B9304A2B}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="27" GUID="{99217A7A-F61E-43fb-86BF-A69783BBE83A}" Name="txtBuildRanking_SceneOwnCity" Order="1" RelativePosition="-0.29404,0.614431" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Text="排行榜" Type="WZUILabelTTF" Visible="False"/>
+                <WZUIContainer AbsContentSize="120,50" GUID="{0711CCF4-7961-4765-AC57-258B24A3ACAF}" RelativePosition="0.569108,0.292456" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                    <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{DD1E4304-0C9E-49f6-B026-294D9BA8FF2F}" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="ui/main/ranking_List_main.png" GUID="{4D0C6F24-F971-405a-BBFD-AFBE3BD7161D}" Name="imgBuildOpenRanking_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="ui/main/ranking_List_not_main.png" GUID="{33C26E17-94E1-4949-B96C-6FF9B0DB3FF5}" Name="imgBuildUnOpenRanking_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="180,330" AnchorPoint="0.5,0.5" GUID="{72733747-9350-413a-9907-923D560AFEE1}" Name="conButtonConquer_SceneOwnCity" Order="1" RelativePosition="-0.172321,0.837504" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="180,330" GUID="{400CA285-56DD-483d-B030-7707BA8DABEA}" LuaDoneFunctionName="onBuildClickConquer" Name="btnBuildConquer_SceneOwnCity" RelativePosition="0.5,0.5" Tag="3" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{B264D0FD-8988-4513-8349-5956CF858729}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/city/building/10.png" GUID="{A2C7A185-CB2B-497b-B794-7EADD6E712FB}" RelativePosition="0.25,0.55" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{A9AD83D6-3C31-4b79-9C8D-9937FFD6518E}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Color="230,230,230" File="ui/city/building/10.png" GUID="{E3E1DC51-D1EE-4db9-8014-2347F5C33AC4}" RelativePosition="0.25,0.55" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{7204D25C-E44A-4fa3-BC82-369D5358F86C}" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{47911EE3-6C6F-4535-AE30-FA9F62B4C932}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="27" GUID="{8238E47D-CE71-40e9-8C0C-0B5106A4DB7F}" Name="txtBuildConquer_SceneOwnCity" Order="1" RelativePosition="0.290668,0.425701" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Text="远征之塔" Type="WZUILabelTTF" Visible="False"/>
+                <WZUIContainer AbsContentSize="145,50" GUID="{FFAE3525-9671-4c84-A738-4A6D1D0439AC}" RelativePosition="0.50423,0.612237" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                    <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{557A8C9A-94CD-43f3-9507-F1E45E7C2A87}" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="ui/main/expedition_tower_main.png" GUID="{3CC6BC46-574C-430f-8261-17D9834F3C7D}" Name="imgBuildOpenConquer_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="ui/main/expedition_tower_not_main.png" GUID="{296CA19A-2B43-4bf2-896F-9ACA6A2CDC55}" Name="imgBuildUnOpenConquer_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="200,280" AnchorPoint="0.5,0.5" GUID="{7EF2F35B-53F9-4291-85C2-EF39B591466E}" Name="conButtonBossMap_SceneOwnCity" Order="2" RelativePosition="0.0685285,0.711531" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="200,280" GUID="{780DD6A1-42D2-41a8-BB40-E9C152A40190}" LuaDoneFunctionName="onBuildClickBossMap" Name="btnBuildBossMap_SceneOwnCity" RelativePosition="0.5,0.5" Tag="4" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{C6CF5C80-89B5-4943-8786-2F4DCD54D2A1}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/city/building/5.png" GUID="{3254F2E2-A4F3-44a7-80D0-A2BB5CB3F0CE}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{8A0589A8-A0CE-4021-AC5F-B3D9F989EB97}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Color="230,230,230" File="ui/city/building/5.png" GUID="{256F3BF7-5E24-49ab-A38D-3226C5A4529E}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{D082D8FF-6E97-4490-A3C9-D8933818FFC4}" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{E206124D-EEA4-4e43-8F80-DF30E117AC8C}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="27" GUID="{B4A96BFE-8302-4165-88D0-0482FD2E80A4}" Name="txtBuildBossMap_SceneOwnCity" Order="1" RelativePosition="0.2,0.7" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Text="副本冒险" Type="WZUILabelTTF" Visible="False"/>
+                <WZUIContainer AbsContentSize="145,50" GUID="{56972055-296A-46c1-B842-7547864DD6BA}" RelativePosition="0.525036,0.78031" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                    <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{59751AAB-5110-4d7f-8024-99089BEE46AA}" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="ui/main/copy_adventure_main.png" GUID="{4F3E7CCF-A361-4290-9BC0-C2F10850AD98}" Name="imgBuildOpenBossMap_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="ui/main/copy_adventure_not_main.png" GUID="{6454058A-5C6B-4c7b-B76E-869906027296}" Name="imgBuildUnOpenBossMap_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="330,350" AnchorPoint="0.5,0.5" GUID="{62F8D10E-BEB4-4f7a-B1F3-2D29E44FBA5E}" Name="conButtonHall_SceneOwnCity" Order="0" RelativePosition="0.404253,0.714339" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="330,350" GUID="{D44DFF90-DDB8-4f0d-B3EF-516C04AF4B45}" LuaDoneFunctionName="onBuildClickHall" Name="btnBuildHall_SceneOwnCity" RelativePosition="0.5,0.5" Tag="5" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{A18DD197-164D-4148-B32E-E8E0B1FF6975}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/city/building/9.png" GUID="{59719A56-F547-48bd-8F1C-E015EDF826E7}" RelativePosition="0.45,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{55BB63FC-13D2-4460-86C0-E8FCD332676D}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Color="230,230,230" File="ui/city/building/9.png" GUID="{B598FD76-62B5-484e-8F21-B97474F59567}" RelativePosition="0.45,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{04C3C39E-EF19-472e-A318-6DCD0FA91EBA}" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{5E2610F9-EC01-48ca-9E43-A16F2ADBD84C}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="27" GUID="{D44D0EF4-141F-49ee-8ACB-63E4D0C36C07}" Name="txtBuildHall_SceneOwnCity" Order="1" RelativePosition="0.57,0.593083" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Text="竞技大厅" Type="WZUILabelTTF" Visible="False"/>
+                <WZUIContainer AbsContentSize="120,50" GUID="{9B3F36E7-551F-48c8-ADBE-F3393796E262}" RelativePosition="0.716941,0.551653" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                    <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{CF07C89F-54C5-4175-9367-486D4C1FE4F5}" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="ui/main/arena_main.png" GUID="{763E90F6-2DC8-431f-9884-E52733CFB4C7}" Name="imgBuildOpenHall_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="ui/main/arena_not_main.png" GUID="{D22E7D27-EDFA-41de-BAFC-EC52617891EA}" Name="imgBuildUnOpenHall_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="200,260" AnchorPoint="0.5,0.5" GUID="{F936623F-6610-444c-AE6F-A5165FDFD98E}" Name="conButtonResearch_SceneOwnCity" Order="0" RelativePosition="0.715382,0.695352" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="200,260" GUID="{025E662B-B28C-4bfa-A68E-D9F56ECD0436}" LuaDoneFunctionName="onBuildClickResearch" Name="btnBuildResearch_SceneOwnCity" RelativePosition="0.5,0.5" Tag="6" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{4ABD252C-1BC1-40f1-AADE-81C18B70E5F4}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/city/building/12.png" GUID="{F839FF8E-C4B9-4919-9A4B-DD333124AFCD}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{D573A0C0-24B2-44ae-9682-16C6AB52301F}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Color="230,230,230" File="ui/city/building/12.png" GUID="{0C7DB52F-07D9-4434-A18B-50B28AA55C1B}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{09EFA27A-AF4F-44ed-B829-7CA0A4D087A2}" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{F409D9F8-AC0A-4141-80DA-3A078FED2260}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="27" GUID="{B45D32A2-C9D3-402a-B90C-F349AF740C14}" Name="txtBuildResearch_SceneOwnCity" Order="1" RelativePosition="0.1,0.85" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Text="装备研究院" Type="WZUILabelTTF" Visible="False"/>
+                <WZUIContainer AbsContentSize="175,50" GUID="{994FABA5-7C2D-4a8d-B6BC-A12450BA13B6}" RelativePosition="0.585613,0.48241" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                    <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{6A5413C9-759C-47a6-9599-B77DDD859AD3}" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="ui/main/zbyjy_main.png" GUID="{3CD519C2-DB3A-4947-A5AA-3E1814D24957}" Name="imgBuildOpenResearch_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="ui/main/zbyjy_not_main.png" GUID="{02085498-9719-4ac8-8D50-3CA3D86E0EE8}" Name="imgBuildUnOpenResearch_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="280,375" AnchorPoint="0.5,0.5" GUID="{EA7BD318-398D-440d-AD1D-82B1824F7290}" Name="conButtonShop_SceneOwnCity" Order="0" RelativePosition="0.966847,0.679417" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="280,375" GUID="{F290DEAE-3C5F-427b-AEDB-A4648E2CB025}" LuaDoneFunctionName="onBuildClickShop" Name="btnBuildShop_SceneOwnCity" RelativePosition="0.5,0.5" Tag="7" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{E5E8F133-B56D-4352-AF6B-196D40EBA213}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/city/building/3.png" GUID="{6A562F28-E917-4f5d-B05F-E3E8EAB0D76F}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{D6B5A15B-0D67-45ad-8777-4AF343DBE6F9}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Color="230,230,230" File="ui/city/building/3.png" GUID="{7A0C28FD-1F1E-4e70-8376-8D4970D97DBD}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{73DDB6A1-270A-4889-9623-C0CDB358361B}" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{B11C506E-C586-42e5-8B68-F48E27157EE1}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="27" GUID="{88BFD710-514C-4f1b-9284-BF974778DB85}" Name="txtBuildShop_SceneOwnCity" Order="1" RelativePosition="0.5,0.5" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Text="商城" Type="WZUILabelTTF" Visible="False"/>
+                <WZUIContainer AbsContentSize="145,50" GUID="{0F291D88-B23C-4221-8265-7627D4CB798A}" RelativePosition="0.528038,0.600116" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                    <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{CF49C134-2A66-4328-B231-0C7422422487}" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="ui/main/game_mall_main.png" GUID="{2E91EAE9-F9C7-47aa-8ABF-403600B25743}" Name="imgBuildOpenShop_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="ui/main/game_mall_not_main.png" GUID="{BF1D9EA4-6EC2-4f2c-92C0-5A840D35DFB7}" Name="imgBuildUnOpenShop_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="99,118" AnchorPoint="0.5,0.5" GUID="{4A84864C-60D6-4cda-88F5-0C760BC449D2}" Name="conButtonPet_SceneOwnCity" Order="1" RelativePosition="1.19408,0.446338" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="99,118" GUID="{0AC30172-2097-4301-A0FC-2C25C681E5D7}" LuaDoneFunctionName="onBuildClickPet" Name="btnBuildPet_SceneOwnCity" RelativePosition="0.5,0.5" Tag="8" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{3A23733E-09F2-4d68-B113-A1584B3B1D8D}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/city/building/11.png" GUID="{8FD10314-C9A2-4c9a-8CFA-E475321E558A}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{83F775FF-812E-4944-8B51-AC1C1488AB6C}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Color="230,230,230" File="ui/city/building/11.png" GUID="{2C7A2145-E919-47ce-B8BB-D73D041E4CAB}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{FD3AEEC7-F061-4c34-980C-3944AEB1C325}" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{47EBB3BF-AA7D-4f53-9F6E-2E98F445C309}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="27" GUID="{8E5C858B-148A-4abc-909A-09D924CE2257}" Name="txtBuildPet_SceneOwnCity" Order="1" RelativePosition="0.3,1.14033" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Text="宠物" Type="WZUILabelTTF" Visible="False"/>
+                <WZUIContainer AbsContentSize="120,50" GUID="{A5B7C0A2-EF86-43be-9F9A-8C90BEF7D689}" RelativePosition="0.501659,0.920141" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                    <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{C5FB6F44-DF47-4160-A4E7-93A1C5CB15C7}" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="ui/main/pet_nest_main.png" GUID="{598EF606-5974-4dd9-8EAC-FAD590F3D798}" Name="imgBuildOpenPet_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="ui/main/pet_nest_not_main.png" GUID="{B9CEF3C5-9BEB-4e1c-A5D7-241E47E0EE3B}" Name="imgBuildUnOpenPet_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="199,300" AnchorPoint="0.5,0.5" GUID="{E0BDDC49-E204-4254-9C8F-E259951AB269}" Name="conButtonGuild_SceneOwnCity" Order="0" RelativePosition="1.27201,0.781161" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="199,300" GUID="{CE5B8F9D-C9D2-47a0-AF78-E0FCF1202810}" LuaDoneFunctionName="onBuildClickGuild" Name="btnBuildGuild_SceneOwnCity" RelativePosition="0.5,0.5" Tag="9" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{D09109BE-277A-4478-8724-A7DE6BAAB813}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/city/building/8.png" GUID="{68C93416-2ECA-46e8-A558-84908A2B1C70}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{B7E1D528-BD6B-470c-94D1-DDE4730AAF34}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Color="230,230,230" File="ui/city/building/8.png" GUID="{37BA9650-1E1D-4b3d-8BF3-141F4757759A}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{1245F7E1-FC33-4267-BBF6-6978B570D227}" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{5D088E5A-AC10-43b0-8130-1BE9B34C5DF3}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="27" GUID="{780F440E-6E32-4371-84D3-4BCC18F7F59A}" Name="txtBuildGuild_SceneOwnCity" Order="1" RelativePosition="0.100666,0.74033" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Text="公会" Type="WZUILabelTTF" Visible="False"/>
+                <WZUIContainer AbsContentSize="145,50" GUID="{A38472BD-C2CC-44f8-B2C6-EF9C7FAB3479}" RelativePosition="0.578498,0.576287" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                    <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{D0E354E9-D23D-4e63-892C-F3CD33D379AE}" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="ui/main/guild_main.png" GUID="{475493BD-179D-4537-B179-5C903CFF02DB}" Name="imgBuildOpenGuild_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="ui/main/guild_not_main.png" GUID="{228B4326-B229-43b2-BE27-17D4F0A92D31}" Name="imgBuildUnOpenGuild_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="220,264" AnchorPoint="0.5,0.5" GUID="{AD38A2D9-96F6-4ce5-8E50-757777DD811D}" Name="conButtonMarry_SceneOwnCity" Order="0" RelativePosition="1.49999,0.671375" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="220,264" GUID="{3A421C89-EB09-4c88-B17C-8EB45AEAED0A}" LuaDoneFunctionName="onBuildClickMarry" Name="btnBuildMarry_SceneOwnCity" RelativePosition="0.5,0.5" Tag="10" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{241121D4-B16E-42da-9AA4-A7351BB59487}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/city/building/7.png" GUID="{2824462E-F394-406c-A916-DEE52D6F7C09}" RelativePosition="0.5,0.5" Scale="1" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{1747CE5B-2F19-423e-B4FA-C708E344D031}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Color="230,230,230" File="ui/city/building/7.png" GUID="{4A13E23B-BDD1-4eeb-BF40-83F8D45D2CC7}" RelativePosition="0.5,0.5" Scale="1" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{56EFF7DF-2F68-473b-A26F-B48786BD823B}" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{0AE67007-621C-444c-84BE-68DA08EFB104}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="27" GUID="{6C49F34B-3D97-45b1-9693-18CD07B264BD}" Name="txtBuildMarry_SceneOwnCity" Order="1" RelativePosition="0.100666,0.74033" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Text="礼堂" Type="WZUILabelTTF" Visible="False"/>
+                <WZUIContainer AbsContentSize="145,50" GUID="{E2093F07-A180-49b6-AB2A-E71B036D6406}" RelativePosition="0.298064,0.798747" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+                    <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{2CEB2856-48B3-45df-88EC-16FB0D1C8B98}" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="ui/main/wedding_hall_main.png" GUID="{533FF85E-A5D6-4024-8BAB-44B01DC02C51}" Name="imgBuildOpenMarry_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="ui/main/wedding_hall_not_main.png" GUID="{2BAA8BBF-EEA3-4efa-A53C-ADD2016F8A77}" Name="imgBuildUnOpenMarry_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="220,318" AnchorPoint="0.5,0.5" GUID="{BCBDE56E-DE0B-42a0-83FF-A5BA9F230D55}" Name="conButtonUnknown2_SceneOwnCity" Order="0" RelativePosition="1.62,0.72" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                <Button AbsContentSize="220,318" GUID="{82840CBF-ADD5-435e-83D4-E9550C2CD6FC}" LuaDoneFunctionName="onBuildClickUnknown2" Name="btnBuildUnknown2_SceneOwnCity" RelativePosition="0.5,0.5" Tag="11" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{E35A74AD-9DB5-4d0b-BC61-74CB53EADEE4}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/city/building/6.png" GUID="{701653D8-6DD6-4bfc-975A-EBF1C3184877}" RelativePosition="0.5,0.5" Scale="0.8" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{78AB2657-9F28-4fcc-984E-D9E8FA1B9AD5}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Color="230,230,230" File="ui/city/building/6.png" GUID="{079FCB53-12FA-4160-B52B-370D74C43CAF}" RelativePosition="0.5,0.5" Scale="0.8" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{C6BAF4E1-D0E9-4914-81BB-F8A597562D55}" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{D92F1CB7-B05E-43e4-B688-FA76A5B94BFE}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="27" GUID="{1E0506CE-7FF3-4fe0-9B41-C71C827040C7}" Name="txtBuildUnknown2_SceneOwnCity" Order="1" RelativePosition="0.300202,0.7" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Text="敬请期待" Type="WZUILabelTTF" Visible="False"/>
+                <WZUIContainer AbsContentSize="120,50" GUID="{3329B4D4-2FCB-4525-BC9F-84CD31D40E9C}" RelativePosition="0.57,0.593083" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="False">
+                    <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{52DE2397-DB9D-4c5d-B1F0-F049BEEE4336}" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="ui/main/arena_main.png" GUID="{36E36440-6B11-4b77-8E42-2AE4BBD2D86A}" Name="imgBuildOpenUnknown2_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="ui/main/arena_not_main.png" GUID="{EBCB190D-D971-42a7-A926-0E16DA0885FF}" Name="imgBuildUnOpenUnknown2_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="106,93" AnchorPoint="0.5,0.5" GUID="{BA38DFE8-4F35-46ba-BC18-093C16C3B4FC}" Name="conButtonUnknown1_SceneOwnCity" Order="0" RelativePosition="-0.60974,0.819448" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="106,93" GUID="{475C28D3-CF32-4483-8F3B-400232FC6A60}" LuaDoneFunctionName="onBuildClickUnknown1" Name="btnBuildUnknown1_SceneOwnCity" RelativePosition="0.5,0.5" Tag="12" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{5E29F954-00BB-4f85-B8E2-AD98F0282FAD}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/city/building/1.png" GUID="{1949E55B-6D3F-4753-B772-820DD36F11F4}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </NormalElement>
+                    <SelectElement GUID="{409BACD0-0A3A-494f-99CD-1882A5020262}" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage Color="230,230,230" File="ui/city/building/1.png" GUID="{85F87FA3-F040-4b43-9DB7-E6F93C63A647}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </SelectElement>
+                    <DisableElement GUID="{DE9695A5-7B1B-4a1d-876D-50550216B16F}" Type="WZUIContainer">
+                        <WZUIImage File="" GUID="{6B5BC82E-DFFF-48cd-9D97-C9686F3187E8}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="27" GUID="{242955E1-B122-44d1-A44A-45E590BD5516}" Name="txtBuildUnknown1_SceneOwnCity" Order="1" RelativePosition="0.5,1.14033" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Text="敬请期待" Type="WZUILabelTTF" Visible="False"/>
+                <WZUIContainer AbsContentSize="145,50" GUID="{9B269F02-80AB-4406-93B2-174AD887A0F0}" RelativePosition="0.657162,-0.00245273" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="False">
+                    <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{6659AD96-53D9-4c09-B793-B7C7E9B1CE2D}" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="ui/main/jqqd.png" GUID="{BCFF8857-D83B-4de2-91C5-2249795D4C24}" Name="imgBuildOpenBossMap_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="ui/main/jqqd.png" GUID="{61FD2DBB-8B32-4fd4-B18B-EE4DE1772CA1}" Name="imgBuildUnOpenBossMap_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{CC8D3582-5544-4334-A153-A1A505F8E590}" Name="conBuildAniLayer_SceneOwnCity" RelativePosition="0.5,0.5" ShowAll="True" TouchEnable="True" Type="WZUIContainer"/>
+        <WZUIContainer GUID="{89CC49CB-7FAC-4d96-B002-9BF3221AE84B}" Name="conFigureLayer_SceneOwnCity" RelativePosition="0.5,0.5" ShowAll="True" TouchEnable="True" Type="WZUIContainer">
+            <!--<WZArmature Type="WZArmature" GUID="{0D14541D-E019-4021-A304-9E38D3698D17}" ArmatureName="01npc" TouchEnable="False" UseOriginSize="True" RelativePosition="0.505847,0.481021" Tag="1" AnchorPoint="0.5,0.5" Order="10" Scale="2" >
+                <Action Type="WZUIArmatureAnimationById" GUID="{C198BDA2-332D-48b1-943C-972C24017CE0}" Bone="" AnimationId="1" IsLoop="False" />
+            </WZArmature>
+            <WZArmature Type="WZArmature" GUID="{40E2A6D8-BABB-4b38-B49D-2FB471B4C0AC}" ArmatureName="02npc" TouchEnable="False" UseOriginSize="True" RelativePosition="0.838962,0.42971" Tag="1" AnchorPoint="0.5,0.5" Order="10" Scale="2" >
+                <Action Type="WZUIArmatureAnimationById" GUID="{8A1F0BED-60C4-4c4d-85F4-0A3FCC5F1D54}" Bone="" AnimationId="1" IsLoop="False" />
+            </WZArmature>-->
+        </WZUIContainer>
+        <WZUIContainer GUID="{BB1B4F3D-B130-4699-BF4E-3B52BAF71824}" Name="conUILayer_SceneOwnCity" RelativePosition="0.5,0.5" ShowAll="True" TouchEnable="True" Type="WZUIContainer" Visible="False">
+            <WZUIContainer AbsContentSize="120,50" AnchorPoint="0.5,0.5" GUID="{D4FC0BF5-016D-42c6-B90F-16B8CC28D4DE}" Name="conButtonName_SceneOwnCity" Order="3" RelativePosition="-0.458732,0.754573" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="120,50" GUID="{3D89B4F9-D5C5-4c5f-B0E4-DA40553EB30A}" LuaDoneFunctionName="onBuildClickNotice" Name="btnBuildName_SceneOwnCity" RelativePosition="0.5,0.5" Tag="1" Type="WZUIButton" UseAbsSize="True">
+                    <WZUIContainer AbsContentSize="120,50" GUID="{E1EAB8B9-6A2C-4597-90CC-D1D26B0A550C}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+                        <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{73CB77E7-F489-442d-B8A6-BEDECA0F8570}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIImage File="ui/main/ranking_List_main.png" GUID="{6A327626-D9E6-4d35-8C01-F944A1EFB0A4}" Name="imgBuildOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                        <WZUIImage File="ui/main/bulletin_board_not_main.png" GUID="{40206C85-7C30-4649-A3BD-51D6D906E601}" Name="imgBuildUnOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                    </WZUIContainer>
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="120,50" AnchorPoint="0.5,0.5" GUID="{49FDBE6E-7E9A-4086-87AE-16697551B547}" Name="conButtonName_SceneOwnCity" Order="3" RelativePosition="-0.333084,0.752302" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="120,50" GUID="{593B33D0-5E6A-4d1e-98EA-6755F62897D5}" LuaDoneFunctionName="onBuildClickRanking" Name="btnBuildName_SceneOwnCity" RelativePosition="0.5,0.5" Tag="2" Type="WZUIButton" UseAbsSize="True">
+                    <WZUIContainer AbsContentSize="120,50" GUID="{72C20F5E-3BEE-43bb-9868-307F194733BA}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+                        <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{62B18A22-460D-440d-A153-75AC3F0A0A7F}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIImage File="ui/main/ranking_List_main.png" GUID="{C7C8ABD7-88D0-4e8d-8661-520AF3EE5B02}" Name="imgBuildOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                        <WZUIImage File="ui/main/ranking_List_not_main.png" GUID="{412606BB-42D5-48fa-BFB1-95C1034E57FF}" Name="imgBuildUnOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                    </WZUIContainer>
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="145,50" AnchorPoint="0.5,0.5" GUID="{521C2ED7-2268-4f39-8D75-CBF7D8B15258}" Name="conButtonName_SceneOwnCity" Order="3" RelativePosition="-0.213551,0.890027" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="145,50" GUID="{7F8BE2CF-EB53-462a-AA29-FF64E59B9153}" LuaDoneFunctionName="onBuildClickConquer" Name="btnBuildName_SceneOwnCity" RelativePosition="0.5,0.5" Tag="3" Type="WZUIButton" UseAbsSize="True">
+                    <WZUIContainer AbsContentSize="145,50" GUID="{E4C84AC4-13A0-4ca4-8735-D03DD9FA0B4E}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+                        <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{AED3C1EE-5762-40a3-BBA2-D9EC73B9841C}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIImage File="ui/main/ranking_List_main.png" GUID="{06A86316-F886-47fc-BA9C-A8DF4A6DCB92}" Name="imgBuildOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                        <WZUIImage File="ui/main/expedition_tower_not_main.png" GUID="{17C8E65C-0EE6-495c-BFEE-2D1270234655}" Name="imgBuildUnOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                    </WZUIContainer>
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="120,50" AnchorPoint="0.5,0.5" GUID="{A06546C1-F346-41d2-BA4D-BCDA68EE0035}" Name="conButtonName_SceneOwnCity" Order="3" RelativePosition="0.0635738,0.841896" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="145,50" GUID="{6C29508F-F712-4465-9267-D1D60E6A7595}" LuaDoneFunctionName="onBuildClickBossMap" Name="btnBuildName_SceneOwnCity" RelativePosition="0.5,0.5" Tag="4" Type="WZUIButton" UseAbsSize="True">
+                    <WZUIContainer AbsContentSize="145,50" GUID="{7A671FE1-579C-4e91-AD27-497A012047D9}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+                        <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{22A6CF83-6A3F-4731-AA20-0898CEA83932}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIImage File="ui/main/ranking_List_main.png" GUID="{D1C3AB37-5194-43b6-AFB3-32D96949CA28}" Name="imgBuildOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                        <WZUIImage File="ui/main/copy_adventure_not_main.png" GUID="{4BEE541E-204A-4a1c-9CEB-EA79557AF6AA}" Name="imgBuildUnOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                    </WZUIContainer>
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="120,50" AnchorPoint="0.5,0.5" GUID="{88096D32-C773-4be8-BF99-C152FF06D52C}" Name="conButtonName_SceneOwnCity" Order="3" RelativePosition="0.439636,0.758975" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="120,50" GUID="{B6363DF4-DA2A-4b0a-8B67-E503C5124676}" LuaDoneFunctionName="onBuildClickHall" Name="btnBuildName_SceneOwnCity" RelativePosition="0.5,0.5" Tag="5" Type="WZUIButton" UseAbsSize="True">
+                    <WZUIContainer AbsContentSize="120,50" GUID="{2CEBB740-C8B8-4f9c-81E9-C171577705DD}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+                        <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{A07034D7-B68C-4b43-89AB-042EA0B28CB3}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIImage File="ui/main/arena_main.png" GUID="{10A01C34-AB9C-4ec6-A602-F9D7A84A1241}" Name="imgBuildOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                        <WZUIImage File="ui/main/ranking_List_not_main.png" GUID="{E0F20F28-EA6E-46f7-8421-6F5396B49821}" Name="imgBuildUnOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                    </WZUIContainer>
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="175,50" AnchorPoint="0.5,0.5" GUID="{EB6DD0D5-0240-4210-A094-46D1D58D96CE}" Name="conButtonName_SceneOwnCity" Order="3" RelativePosition="0.711478,0.805908" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="175,50" GUID="{09127F43-7AEF-4f41-92C0-B9F9E4450AF7}" LuaDoneFunctionName="onBuildClickResearch" Name="btnBuildName_SceneOwnCity" RelativePosition="0.5,0.5" Tag="6" Type="WZUIButton" UseAbsSize="True">
+                    <WZUIContainer AbsContentSize="175,50" GUID="{103F7373-544E-4a69-B24A-36BCA205ECAC}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+                        <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{B90F1220-BD69-4fb7-947F-9935682DB8A6}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIImage File="ui/main/ranking_List_main.png" GUID="{E42A1E84-3CE6-42eb-B8BE-2BCEFD55D5B3}" Name="imgBuildOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                        <WZUIImage File="ui/main/zbyjy_not_main.png" GUID="{9EDA52F3-B3C7-47a6-9648-2AB52D076C1B}" Name="imgBuildUnOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                    </WZUIContainer>
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="145,50" AnchorPoint="0.5,0.5" GUID="{6C9815BD-1B85-408b-B194-E056BF96CBC0}" Name="conButtonName_SceneOwnCity" Order="3" RelativePosition="0.977639,0.749359" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="145,50" GUID="{B575F7E4-3151-4d74-AE7B-CE8F4B6347EB}" LuaDoneFunctionName="onBuildClickShop" Name="btnBuildName_SceneOwnCity" RelativePosition="0.5,0.5" Tag="7" Type="WZUIButton" UseAbsSize="True">
+                    <WZUIContainer AbsContentSize="145,50" GUID="{5A13CD42-F100-4081-BF80-E3110E6B7F96}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+                        <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{43D44B21-893D-4c3a-B1F5-86972EFEF9AD}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIImage File="ui/main/game_mall_main.png" GUID="{42436E76-0A85-4d67-8767-C5C3975EECC6}" Name="imgBuildOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                        <WZUIImage File="ui/main/ranking_List_not_main.png" GUID="{7ED041C9-C0BD-40b7-AEF1-22277E73939C}" Name="imgBuildUnOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                    </WZUIContainer>
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="120,50" AnchorPoint="0.5,0.5" GUID="{70FB926A-4EC9-415f-8A6B-8687D007CDB4}" Name="conButtonName_SceneOwnCity" Order="3" RelativePosition="1.19147,0.531317" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="120,50" GUID="{46E3AA11-FE91-44b9-9EE8-989248396278}" LuaDoneFunctionName="onBuildClickPet" Name="btnBuildName_SceneOwnCity" RelativePosition="0.5,0.5" Tag="8" Type="WZUIButton" UseAbsSize="True">
+                    <WZUIContainer AbsContentSize="120,50" GUID="{C583B209-805B-407f-84F1-1C5940F9B106}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+                        <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{6A9CB161-8307-4659-9761-F1BB3B23F5C1}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIImage File="ui/main/ranking_List_main.png" GUID="{4BEB7411-26FA-484f-9035-1A588408F795}" Name="imgBuildOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                        <WZUIImage File="ui/main/pet_nest_not_main.png" GUID="{C4060A3C-521E-49a7-A6EC-05C3D6B4E1B1}" Name="imgBuildUnOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                    </WZUIContainer>
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="145,50" AnchorPoint="0.5,0.5" GUID="{3D4F2F53-919A-46b7-96D3-1E1ABF32CF97}" Name="conButtonName_SceneOwnCity" Order="3" RelativePosition="1.28154,0.822111" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="145,50" GUID="{B87A3483-9169-410b-8D9E-A883863D79D3}" LuaDoneFunctionName="onBuildClickGuild" Name="btnBuildName_SceneOwnCity" RelativePosition="0.5,0.5" Tag="9" Type="WZUIButton" UseAbsSize="True">
+                    <WZUIContainer AbsContentSize="145,50" GUID="{2F76833B-ACED-45f7-A4B9-8449F754564B}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+                        <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{00B4E921-A6C0-4e57-A78E-5FBE7A8EAD0A}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIImage File="ui/main/ranking_List_main.png" GUID="{E3F73DED-4DC4-4abf-AF26-0D4F1F9C36FB}" Name="imgBuildOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                        <WZUIImage File="ui/main/guild_not_main.png" GUID="{897EC37F-59BC-4946-B8AD-3211CD0ECD39}" Name="imgBuildUnOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                    </WZUIContainer>
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="145,50" AnchorPoint="0.5,0.5" GUID="{33236E01-F3AA-46ce-843E-9FAEF55395C0}" Name="conButtonName_SceneOwnCity" Order="3" RelativePosition="1.44909,0.774096" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="145,50" GUID="{4F4E503A-9856-47f0-9D99-6A6C1B4F999F}" LuaDoneFunctionName="onBuildClickMarry" Name="btnBuildName_SceneOwnCity" RelativePosition="0.5,0.5" Tag="10" Type="WZUIButton" UseAbsSize="True">
+                    <WZUIContainer AbsContentSize="145,50" GUID="{9C732A60-BF0D-4e33-8236-F88041BF20D5}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+                        <WZUI9Image CapInsets="16,20,11,10" File="ui/city/building/zc_name_bg.png" GUID="{D52B496B-68A8-4c97-BFF9-CB97797F6401}" Type="WZUI9Image" UseOriginSize="False"/>
+                        <WZUIImage File="ui/main/ranking_List_main.png" GUID="{DBBA04FC-3455-4b90-B88A-9A86EFC6D4C4}" Name="imgBuildOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                        <WZUIImage File="ui/main/wedding_hall_not_main.png" GUID="{44270254-80A2-40a0-8622-825FB491DCBA}" Name="imgBuildUnOpen_SceneOwnCity" RelativePosition="0.5,0.49" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+                    </WZUIContainer>
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{CC7F770F-77EF-40df-9474-784FA6611511}" Name="conTopInfoLayer_SceneOwnCity" ShowAll="True" TouchEnable="True" Type="WZUIContainer">
+            <WZUIContainer GUID="{DC0A5EB6-0897-4f32-A672-335B312755D4}" Name="conTopAni_SceneOwnCity" Order="0" Type="WZUIContainer" Visible="False"/>
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneOwnCity>

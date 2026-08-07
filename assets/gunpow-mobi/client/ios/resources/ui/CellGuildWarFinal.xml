@@ -1,0 +1,162 @@
+﻿<CellGuildWarFinal GUID="{61ff4af1-7863-47d9-ba0d-75c19a1512c3}">
+    <WZUIContainer Type="WZUIContainer" GUID="{0679c4e1-4c48-43e5-99a0-598a1ef61e39}" AbsContentSize="556,405" UseAbsSize="True" Name="CellGuildWarFinal" LuaObjectName="CellGuildWarFinal" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{e4c486a1-7260-431e-9a7f-e64b7a38562e}" AbsContentSize="186,405" UseAbsSize="True" RelativePosition="0.175,0.5">
+            <WZUIContainer Type="WZUIContainer" GUID="{1bb591f5-a368-488a-af9e-fc24c1bb3e35}" AbsContentSize="186,37" UseAbsSize="True" Name="conGuild1_1_CellGuildWarFinal" RelativePosition="0.5,0.675062">
+                <WZUI9Image Type="WZUI9Image" GUID="{ddc29ef5-263a-462f-a8ad-09eebc52d882}" File="ui/common/common_scale9_di58.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{799b1a7b-199a-4591-97d8-9588b31514c1}" File="ui/common/common_scale9_di74.png" Name="img9WinBg1_1_CellGuildWarFinal" Visible="False" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{9ddebbee-76e7-4faa-914f-1115e7cae5ef}" Name="ftxtGuildName1_1_CellGuildWarFinal" MaxWidth="180" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" />
+                <Button Type="WZUIButton" GUID="{78281263-9916-441b-a475-acebdef43975}" LuaDoneFunctionName="onCheckGuildInfo" Tag="11">
+                    <NormalElement Type="WZUIContainer" GUID="{70f35106-bc8a-4ed6-9721-e155eccf9e75}" />
+                    <SelectElement Type="WZUIContainer" GUID="{19e1fc93-0943-43c1-9b54-36c546148878}" />
+                    <DisableElement Type="WZUIContainer" GUID="{14d7ad3e-ed58-4353-a745-0a5d1b850195}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{87db07d8-b940-4d35-952b-45f297f1231a}" AbsContentSize="186,37" UseAbsSize="True" Name="conGuild1_2_CellGuildWarFinal" RelativePosition="0.5,0.562469">
+                <WZUI9Image Type="WZUI9Image" GUID="{941ea595-cf1f-4a4f-8235-2a8062283688}" File="ui/common/common_scale9_di58.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{f0d8a241-622f-4a1c-ace5-21ce3ff6755a}" File="ui/common/common_scale9_di74.png" Name="img9WinBg1_2_CellGuildWarFinal" Visible="False" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{b75c9c8c-3792-4b65-b1a6-9fe13f319659}" Name="ftxtGuildName1_2_CellGuildWarFinal" MaxWidth="180" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" />
+                <Button Type="WZUIButton" GUID="{2a456197-d98b-4f85-8cfc-dd5ce50bf0e6}" LuaDoneFunctionName="onCheckGuildInfo" Tag="12">
+                    <NormalElement Type="WZUIContainer" GUID="{e4ac4928-201d-4fb6-b608-264da27c9830}" />
+                    <SelectElement Type="WZUIContainer" GUID="{64bd11f7-9932-4232-9121-4896ab45fa10}" />
+                    <DisableElement Type="WZUIContainer" GUID="{17497ba4-7f16-496f-b506-eed14a8ecc8b}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{40cdba28-4fbf-4c53-be59-c64d0f19c698}" AbsContentSize="186,37" UseAbsSize="True" Name="conGuild1_3_CellGuildWarFinal" RelativePosition="0.5,0.437531">
+                <WZUI9Image Type="WZUI9Image" GUID="{c3417928-2b61-4cad-9851-98756320e622}" File="ui/common/common_scale9_di58.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{580dac69-dde3-4275-85bd-b1d73152b47a}" File="ui/common/common_scale9_di74.png" Name="img9WinBg1_3_CellGuildWarFinal" Visible="False" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{5cd1c778-a9f8-4ea2-af24-2688e599a4fd}" Name="ftxtGuildName1_3_CellGuildWarFinal" MaxWidth="180" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" />
+                <Button Type="WZUIButton" GUID="{6b650c59-ee55-4314-b3fa-1a69d9fc0c76}" LuaDoneFunctionName="onCheckGuildInfo" Tag="13">
+                    <NormalElement Type="WZUIContainer" GUID="{3ac5ac4f-5bd1-4afc-95f3-cd34c6bc8f8b}" />
+                    <SelectElement Type="WZUIContainer" GUID="{0a903a4c-abaa-4eeb-ae2a-716875c74377}" />
+                    <DisableElement Type="WZUIContainer" GUID="{4ef8bb9a-1f96-4d7e-abb6-4ce753244aaa}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1cfe1b38-a723-41d7-937d-cc4699b77916}" AbsContentSize="186,37" UseAbsSize="True" Name="conGuild1_4_CellGuildWarFinal" RelativePosition="0.5,0.324938">
+                <WZUI9Image Type="WZUI9Image" GUID="{ace9e466-b8fb-441e-902d-d099358cf118}" File="ui/common/common_scale9_di58.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{cf8fcbc8-db7f-4f32-9e2e-417b572bfc11}" File="ui/common/common_scale9_di74.png" Name="img9WinBg1_4_CellGuildWarFinal" Visible="False" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{ccef3654-3c67-40b0-8f48-39f04f4669cf}" Name="ftxtGuildName1_4_CellGuildWarFinal" MaxWidth="180" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" />
+                <Button Type="WZUIButton" GUID="{c03c398b-b176-4866-a29f-3b6ec175ea00}" LuaDoneFunctionName="onCheckGuildInfo" Tag="14">
+                    <NormalElement Type="WZUIContainer" GUID="{eba5032d-d5e2-4de4-a1eb-a75d07640a04}" />
+                    <SelectElement Type="WZUIContainer" GUID="{cae195d3-2015-4661-b133-2c1c936ac6b4}" />
+                    <DisableElement Type="WZUIContainer" GUID="{2e87d24b-a96a-4262-b91f-67715202e81a}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{673094c3-6fe6-4ef1-95c0-a0b72f663403}" AbsContentSize="18,45" UseAbsSize="True" RelativePosition="1.04839,0.62">
+                <WZUIImage Type="WZUIImage" GUID="{5d990f88-4787-4089-9496-666b856da920}" File="ui/community/common_pic_xiank1.png" UseOriginSize="True" RelativePosition="0.5,0.99" AnchorPoint="0.5,1" Name="imgLine1_1_CellGuildWarFinal" />
+                <WZUIImage Type="WZUIImage" GUID="{bc228003-faaa-43cd-9074-a4939335bd4b}" File="ui/community/common_pic_xiank1.png" UseOriginSize="True" RelativePosition="0.444444,0.01" FlipX="True" AnchorPoint="0.5,0" Name="imgLine1_2_CellGuildWarFinal" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{147dee0a-8bab-4624-977d-1c6570812b88}" AbsContentSize="18,45" UseAbsSize="True" RelativePosition="1.04839,0.38">
+                <WZUIImage Type="WZUIImage" GUID="{b1b2e4f5-9ae6-4da8-981d-8024b365ccce}" File="ui/community/common_pic_xiank1.png" UseOriginSize="True" RelativePosition="0.5,0.99" AnchorPoint="0.5,1" Name="imgLine1_3_CellGuildWarFinal" />
+                <WZUIImage Type="WZUIImage" GUID="{8bff61d2-39dc-49fc-83bf-553eb08f517e}" File="ui/community/common_pic_xiank1.png" UseOriginSize="True" RelativePosition="0.444444,0.01" FlipX="True" AnchorPoint="0.5,0" Name="imgLine1_4_CellGuildWarFinal" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{b17d2df1-1fd4-472d-8951-9839a1f247e6}" AbsContentSize="53,405" UseAbsSize="True" RelativePosition="0.42,0.5">
+            <WZUIContainer Type="WZUIContainer" GUID="{37461c97-4a67-4e83-90d0-f47d732e17f7}" AbsContentSize="53,37" UseAbsSize="True" Name="conGuild2_1_CellGuildWarFinal" RelativePosition="0.5,0.62">
+                <WZUI9Image Type="WZUI9Image" GUID="{c2e6c50d-5207-4b10-92e9-47c44444316b}" File="ui/common/common_scale9_di58.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{340f3770-88dd-45e4-8af3-b10166caab3a}" File="ui/common/common_scale9_di74.png" Name="img9WinBg2_1_CellGuildWarFinal" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9b3971ce-2f19-4e79-ad86-f8380d593d96}" FontSize="18" Color="255,227,116" Name="txtGroupName2_1_CellGuildWarFinal" Text="" />
+                <Button Type="WZUIButton" GUID="{445386ff-3437-42d9-b3b3-497d65dd1b97}" LuaDoneFunctionName="onCheckGuildInfo" Tag="21">
+                    <NormalElement Type="WZUIContainer" GUID="{97419507-4e31-419c-a8cd-ad2ec7fdaa71}" />
+                    <SelectElement Type="WZUIContainer" GUID="{2f76c07a-d34c-4bdc-b511-a5d0a7537434}" />
+                    <DisableElement Type="WZUIContainer" GUID="{c5532c4c-75c9-49c4-91d7-c022c8556bd6}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{bd600a31-973f-4838-b34e-2cec3069768c}" AbsContentSize="53,37" UseAbsSize="True" Name="conGuild2_2_CellGuildWarFinal" RelativePosition="0.5,0.38">
+                <WZUI9Image Type="WZUI9Image" GUID="{561c4f8c-93a4-4230-8a91-e7575d0b5bd9}" File="ui/common/common_scale9_di58.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{140af880-4fe9-4e02-a304-d8be4994289a}" File="ui/common/common_scale9_di74.png" Name="img9WinBg2_2_CellGuildWarFinal" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e46e1b76-3dc3-4436-b0ca-1b6e826b64de}" FontSize="18" Color="255,227,116" Name="txtGroupName2_2_CellGuildWarFinal" />
+                <Button Type="WZUIButton" GUID="{8566214c-9686-49de-a1e9-cebdb989accc}" LuaDoneFunctionName="onCheckGuildInfo" Tag="22">
+                    <NormalElement Type="WZUIContainer" GUID="{1e83bbb1-af12-4074-9816-9aea733c3817}" />
+                    <SelectElement Type="WZUIContainer" GUID="{09b1ea58-8436-47b5-b548-739001560d37}" />
+                    <DisableElement Type="WZUIContainer" GUID="{7ed3fe45-fe0b-4515-84a7-5f6de6d74094}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{2c8b91c3-6826-4125-92b5-1c8ec9e43208}" AbsContentSize="18,107" UseAbsSize="True" RelativePosition="1.18047,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{d042a57d-1843-43b6-a5ff-373715d26400}" File="ui/community/common_pic_xiank2.png" UseOriginSize="True" RelativePosition="0.5,0.99" AnchorPoint="0.5,1" Name="imgLine2_1_CellGuildWarFinal" />
+                <WZUIImage Type="WZUIImage" GUID="{fe029ee4-e2f9-4285-8e3d-6ac0042d1292}" File="ui/community/common_pic_xiank2.png" UseOriginSize="True" RelativePosition="0.444444,0.01" FlipX="True" AnchorPoint="0.5,0" Name="imgLine2_2_CellGuildWarFinal" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{9208bfee-99c5-4939-a754-a2a1d3f3e08e}" AbsContentSize="53,100" UseAbsSize="True" RelativePosition="0.655396,0.318643">
+            <WZUIContainer Type="WZUIContainer" GUID="{e5cf30ef-7342-40ec-9d19-77d960641a4a}" AbsContentSize="53,37" UseAbsSize="True" Name="conGuild3_1_CellGuildWarFinal" RelativePosition="0.5,0.72">
+                <WZUI9Image Type="WZUI9Image" GUID="{5b986019-697b-4a99-af0c-3cc6b7c1b1dc}" File="ui/common/common_scale9_di58.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{0fceb91f-6f30-40fb-a926-8af33c60f763}" File="ui/common/common_scale9_di74.png" Name="img9WinBg3_1_CellGuildWarFinal" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{eccf58ad-0020-4df6-9c33-d86fdfd10da7}" FontSize="18" Color="255,227,116" Name="txtGroupName3_1_CellGuildWarFinal" />
+                <Button Type="WZUIButton" GUID="{923204f8-f899-4825-981d-43f9335a90ff}" LuaDoneFunctionName="onCheckGuildInfo" Tag="31">
+                    <NormalElement Type="WZUIContainer" GUID="{109bfd6d-1797-4831-bfb9-9160a1c934f4}" />
+                    <SelectElement Type="WZUIContainer" GUID="{b188cf0c-cb6a-4882-bef6-fdf3c51b5895}" />
+                    <DisableElement Type="WZUIContainer" GUID="{884f078a-094d-417e-bf9f-a1adc38176c5}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{842a0267-18d7-4f16-8c0f-68c96762d99f}" AbsContentSize="53,37" UseAbsSize="True" Name="conGuild3_2_CellGuildWarFinal" RelativePosition="0.5,0.27">
+                <WZUI9Image Type="WZUI9Image" GUID="{861b5e9e-5fca-42d6-a860-7262b20d462c}" File="ui/common/common_scale9_di58.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{6980f05c-6987-433d-bf85-6e05569a766b}" File="ui/common/common_scale9_di74.png" Name="img9WinBg3_2_CellGuildWarFinal" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{192d7dcf-527c-4e02-9841-fefba0f3fc04}" FontSize="18" Color="255,227,116" Name="txtGroupName3_2_CellGuildWarFinal" />
+                <Button Type="WZUIButton" GUID="{c1d34e19-76c8-4a6d-a7d1-2d346b250ffb}" LuaDoneFunctionName="onCheckGuildInfo" Tag="32">
+                    <NormalElement Type="WZUIContainer" GUID="{8005f286-c223-4332-b25b-18f761b77e02}" />
+                    <SelectElement Type="WZUIContainer" GUID="{7334d33a-85eb-4443-b862-c26e619332d8}" />
+                    <DisableElement Type="WZUIContainer" GUID="{74a9a741-fa53-4b24-af9e-a1e3af294da3}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{bd1b30fe-d3b1-446a-8955-7187f5b01b64}" AbsContentSize="53,37" UseAbsSize="True" Name="conGuild3_3_CellGuildWarFinal" RelativePosition="1.86954,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{67750e66-413e-4fc2-8b6e-7153e32b57c8}" File="ui/common/common_scale9_di58.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{35854601-05c7-43d6-bc28-947ef7a414b9}" File="ui/common/common_scale9_di74.png" Name="img9WinBg3_3_CellGuildWarFinal" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7e3efa51-adfa-4860-8146-a15feb7619e5}" FontSize="18" Color="255,227,116" Name="txtGroupName3_3_CellGuildWarFinal" />
+                <Button Type="WZUIButton" GUID="{3bf791aa-559e-4d56-a323-638ee37204d3}" LuaDoneFunctionName="onCheckGuildInfo" Tag="33">
+                    <NormalElement Type="WZUIContainer" GUID="{c8c71205-fd82-4528-ad8a-d92f0c6c5dd8}" />
+                    <SelectElement Type="WZUIContainer" GUID="{7e335b77-58e6-485d-b03d-b372907d0f08}" />
+                    <DisableElement Type="WZUIContainer" GUID="{c4775404-9c14-4e00-882c-dee5d90d4594}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{d9e32b15-69f9-4b43-a86a-f9864ea7c5e0}" AbsContentSize="18,45" UseAbsSize="True" RelativePosition="1.19933,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{17e26be2-acb1-4c76-b075-1e37d4a810e5}" File="ui/community/common_pic_xiank1.png" UseOriginSize="True" RelativePosition="0.5,0.99" AnchorPoint="0.5,1" Name="imgLine3_1_CellGuildWarFinal" />
+                <WZUIImage Type="WZUIImage" GUID="{47f47abb-d7d4-4956-bf56-49856b7551bb}" File="ui/community/common_pic_xiank1.png" UseOriginSize="True" RelativePosition="0.444444,0.01" FlipX="True" AnchorPoint="0.5,0" Name="imgLine3_2_CellGuildWarFinal" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{912a9d93-6a0d-42a3-8f09-0ed4250d94eb}" Color="255,227,116" FontSize="18" EnableStroke="True" RelativePosition="2.55,0.5" StrokeColor="79,60,48" StrokeSize="4" Name="txtGrouThird_CellGuildWarFinal" Visible="True" AnchorPoint="0,0.5" Text="季军决赛" TextKey="COMMONITY_DESC8" Dimensions="0,0" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{ebde1059-ef90-43ce-b6ac-4d4a585061ce}" AbsContentSize="186,40" UseAbsSize="True" RelativePosition="0.501583,0.5" AnchorPoint="0,0.5">
+            <WZUIContainer Type="WZUIContainer" GUID="{71f3d137-b995-48f9-b998-82a2c978a3f5}" AbsContentSize="186,37" UseAbsSize="True" Name="conGuild4_1_CellGuildWarFinal" RelativePosition="0.5,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{3152c77e-434b-4b2d-b231-e4837a423ebf}" File="ui/common/common_scale9_di58.png" />
+                <WZUI9Image Type="WZUI9Image" GUID="{efa89828-d635-4f86-b780-06230b48f22d}" File="ui/common/common_scale9_di74.png" Name="img9WinBg4_1_CellGuildWarFinal" Visible="False" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{3ec3979e-4173-462e-bc62-a67d11f91755}" Name="ftxtGuildName4_1_CellGuildWarFinal" MaxWidth="180" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" />
+                <Button Type="WZUIButton" GUID="{f9b60ea2-3958-4716-9035-f567c4d6e882}" LuaDoneFunctionName="onCheckGuildInfo" Tag="41">
+                    <NormalElement Type="WZUIContainer" GUID="{76bbe430-9a99-441b-8664-ca273b9cd52e}" />
+                    <SelectElement Type="WZUIContainer" GUID="{a3999cd4-6169-4ef1-8ed6-517ad63da85e}" />
+                    <DisableElement Type="WZUIContainer" GUID="{13bec8a0-0145-4865-bffa-4b89baf9d3de}" />
+                </Button>
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{efa11b57-69b1-49f9-b6b9-0a4dbecba2c3}" Color="255,227,116" FontSize="18" EnableStroke="True" RelativePosition="1.04,0.5" StrokeColor="79,60,48" StrokeSize="4" Name="txtGroupChampion_CellGuildWarFinal" Visible="True" AnchorPoint="0,0.5" Text="冠军决赛" TextKey="COMMONITY_DESC7" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{20464788-4f9a-4fc4-98fd-7cf4c7e0d418}">
+            <WZUIContainer Type="WZUIContainer" GUID="{40ea4e93-e608-4376-b420-bfc2d2e9bb06}" AbsContentSize="210,52" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="0.99,0.93" Name="conFirst_CellGuildWarFinal">
+                <WZUIImage Type="WZUIImage" GUID="{e2f936ec-c257-4092-9fa9-8d68c80b7efe}" File="ui/hero/hero_icon_guanjun.png" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="0,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{133925ba-8ca0-47d5-8810-a2f6009187fd}" File="ui/common/common_scale9_gonghzgjk.png" UseOriginSize="True" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{ef5ac15f-2563-44b6-9dfd-a3bdd2c4a4fe}" MaxWidth="250" Name="ftxtFirstName_CellGuildWarFinal" AnchorPoint="0,0.5" RelativePosition="0.1,0.5" />
+                <Button Type="WZUIButton" GUID="{090c1aaf-945d-48b1-8ff5-6b9759766f48}" LuaDoneFunctionName="onCheckGuildInfo" Tag="1">
+                    <NormalElement Type="WZUIContainer" GUID="{0ddac6aa-d060-45d6-9838-1b59ffb4345f}" />
+                    <SelectElement Type="WZUIContainer" GUID="{b2f1243a-2477-4a4e-8b11-cc1a31cf5547}" />
+                    <DisableElement Type="WZUIContainer" GUID="{d27fa4ea-1741-4eec-babc-06ff72ff4464}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{52fdf54f-14c1-46bc-878a-bf2335ed73fb}" AbsContentSize="210,52" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="0.99,0.81" Name="conSecond_CellGuildWarFinal">
+                <WZUIImage Type="WZUIImage" GUID="{49f1c49d-a009-4398-a789-70c52b85c6bb}" File="ui/hero/hero_icon_yajun.png" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="0,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{2d5d672e-4df6-4b0e-8553-d50e62a58cb7}" File="ui/common/common_scale9_gonghzyjk.png" UseOriginSize="True" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{5a32363d-4ff0-4399-91a7-4b829753b988}" MaxWidth="250" Name="ftxtSecondName_CellGuildWarFinal" AnchorPoint="0,0.5" RelativePosition="0.1,0.5" />
+                <Button Type="WZUIButton" GUID="{6f5fddd9-a839-4fc9-b0d0-c6394213d8d7}" LuaDoneFunctionName="onCheckGuildInfo" Tag="2">
+                    <NormalElement Type="WZUIContainer" GUID="{d3e1a3b4-80dd-4199-9670-55fee988a178}" />
+                    <SelectElement Type="WZUIContainer" GUID="{921837f8-3ac4-48c1-a5c1-6b304b53c29e}" />
+                    <DisableElement Type="WZUIContainer" GUID="{f4c7ac72-ad36-4176-a68e-16513cd1b4ba}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{a02a184f-5774-4d1c-a23e-d4ccc9c7f50c}" AbsContentSize="210,52" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="0.99,0.69" Name="conThird_CellGuildWarFinal">
+                <WZUIImage Type="WZUIImage" GUID="{2a5b3b74-f30b-4e2c-987f-061d2b067b80}" File="ui/hero/hero_icon_jijun.png" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="0,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{0c04433a-8d53-4677-9e9f-9d9b3856533c}" File="ui/common/common_scale9_gonghzjjk.png" UseOriginSize="True" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{37c21c58-aaf4-4f09-97ed-1f63c057dd56}" MaxWidth="250" Name="ftxtThirdName_CellGuildWarFinal" AnchorPoint="0,0.5" RelativePosition="0.1,0.5" />
+                <Button Type="WZUIButton" GUID="{cdf4feb2-a4ab-4aca-92f1-f34e6f9ab24c}" LuaDoneFunctionName="onCheckGuildInfo" Tag="3">
+                    <NormalElement Type="WZUIContainer" GUID="{b54faf2b-1be9-4c1f-9f3f-2b8e235205fc}" />
+                    <SelectElement Type="WZUIContainer" GUID="{f2fdd441-368f-4986-adbe-a8062b23fb13}" />
+                    <DisableElement Type="WZUIContainer" GUID="{adc9185a-35d1-43cc-b2c5-607ba417fe9e}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellGuildWarFinal>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<WndKingRank GUID="{8d976c94-d894-470f-b26d-633fc8ccdbc9}">
+	<WZUIFrame Type="WZUIFrame" GUID="{8250520d-1856-42d5-b75b-39ea1d8d8234}">
+		<WZUIWindow LuaObjectName="WndKingRank" Name="WndKingRank" NameCreate="True" ShowAll="True" Type="WZUIWindow" GUID="{fcbe37cb-7d7a-4e07-8e4c-225907b74c59}" AbsContentSize="662,520" UseAbsSize="True">
+			<WZUIContainer AbsContentSize="0,0" AbsPosition="" AnchorPoint="0.5,0.5" GUID="{be9975bf-3fb3-401c-a8c7-4b171f4b9975}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="False">
+				<WZUI9Image File="" GUID="{94dc84d2-fc97-4fd8-bfb1-2b92bf3aa6de}" Type="WZUI9Image" />
+				<WZUI9Image Type="WZUI9Image" GUID="{a6e6f9a6-7916-47db-ba77-8db0b16e9a7c}" File="" UseOriginSizeProportion="False" RelativePosition="0.5,1" AnchorPoint="0.5,1" RelativeSize="1.01,0.12" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{892a95d6-f1df-496d-9d78-89bc06adef1f}">
+				<Button Type="WZUIButton" GUID="{fc38df8d-9494-4069-9b45-1224bc87d873}" LuaDoneFunctionName="onClose" AbsContentSize="66,71" UseAbsSize="True" RelativePosition="1.03,0.95" AnchorPoint="1,0.5">
+					<NormalElement Type="WZUIContainer" GUID="{d1824209-c5ed-4de3-948e-28c835901b30}">
+						<WZUIImage Type="WZUIImage" GUID="{26e88645-8fb8-4b95-8610-c9b65ef9cab4}" File="" />
+					</NormalElement>
+					<SelectElement Type="WZUIContainer" GUID="{a9c42f56-b3d4-4c9a-bac1-a77399f9fa23}">
+						<WZUIImage Type="WZUIImage" GUID="{58bbbdf6-ffea-490b-b31a-ed89dbf4d454}" File="" Scale="1.1" />
+					</SelectElement>
+					<DisableElement Type="WZUIContainer" GUID="{8b2b989b-48c5-4869-ac2d-97224df33010}" />
+				</Button>
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{07dc9a08-9fd9-41c5-977f-21fbaed0b93a}" Name="txtTitle_WndKingRank" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.95" FontSize="30" Color="255,246,201" EnableStroke="True" StrokeSize="4" StrokeColor="109,81,42" BoldFont="True" />
+				<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{a0384115-8229-421b-a0fa-7d4cc4367aaa}" Name="txtSubTitle_WndKingRank" AnchorPoint="0,1" RelativePosition="0.07,0.85" MaxWidth="570" />
+				<WZUIContainer Type="WZUIContainer" GUID="{9c5b5c0e-d08d-4fcd-8273-ec72c63c70a2}" AbsContentSize="620,255" UseAbsSize="True" RelativePosition="0.5,0.387">
+					<WZUI9Image Type="WZUI9Image" GUID="{f6acaf22-5a7a-4f2b-977e-b86118a1fcd7}" File="" />
+				</WZUIContainer>
+				<WZUIContainer Type="WZUIContainer" GUID="{c1390b13-bfb6-46e5-a6c0-78fe3ee8ecf9}" AbsContentSize="635,52" UseAbsSize="True" RelativePosition="0.5,0.675">
+					<WZUI9Image Type="WZUI9Image" GUID="{eddf46ab-8be1-42f8-a79f-78f62939047a}" File="" />
+					<WZUILabelTTF Type="WZUILabelTTF" Color="255,246,201" EnableStroke="True" StrokeSize="4" StrokeColor="109,81,42" RelativePosition="0.05,0.5" FontSize="24" Name="txtTabTitle1_WndKingRank" GUID="{9ad52cb2-b68d-4086-ac22-1e9a97e4ad13}" />
+					<WZUILabelTTF Type="WZUILabelTTF" Color="255,246,201" EnableStroke="True" StrokeSize="4" StrokeColor="109,81,42" RelativePosition="0.25,0.5" FontSize="24" Name="txtTabTitle2_WndKingRank" GUID="{346e6d29-5747-47a3-8465-ea43ededae32}" />
+					<WZUILabelTTF Type="WZUILabelTTF" Color="255,246,201" EnableStroke="True" StrokeSize="4" StrokeColor="109,81,42" RelativePosition="0.50,0.5" FontSize="24" Name="txtTabTitle3_WndKingRank" GUID="{504375b9-d234-464a-a589-d17aff73e4a4}" />
+					<WZUILabelTTF Type="WZUILabelTTF" Color="255,246,201" EnableStroke="True" StrokeSize="4" StrokeColor="109,81,42" RelativePosition="0.69,0.5" FontSize="24" Name="txtTabTitle4_WndKingRank" GUID="{58af9436-e3a6-4dfc-b71a-07bacb7f2f26}" />
+					<WZUILabelTTF Type="WZUILabelTTF" Color="255,246,201" EnableStroke="True" StrokeSize="4" StrokeColor="109,81,42" RelativePosition="0.88,0.5" FontSize="24" Name="txtTabTitle5_WndKingRank" GUID="{10e1961f-fb47-468d-b3bb-0d4dd9545f9d}" />
+				</WZUIContainer>
+				<WZUITableContainer Type="WZUITableContainer" GUID="{d81a66f7-7a1e-444b-adcf-ca88059f986f}" AbsContentSize="635,246" UseAbsSize="True" RelativePosition="0.5,0.387" CellElementHeight="0.135" VerticalInterval="0.009" EnableMoveHorizontal="False" Name="tabRank_WndKingRank" Visible="False" />
+				<WZUIContainer Type="WZUIContainer" GUID="{61589456-f287-44e2-869d-3eef9b87bd3d}" RelativePosition="0.5,0.055" AnchorPoint="0.5,0" RelativeSize="1,1" AbsContentSize="625,50" UseAbsSize="True">
+					<WZUI9Image Type="WZUI9Image" GUID="{6d25112a-315b-44b9-9064-7f0c23772ace}" File="" />
+					<WZUILabelTTF Type="WZUILabelTTF" Color="83,56,29" RelativePosition="0.02,0.5" FontSize="20" Name="txtMyRank_WndKingRank" AnchorPoint="0,0.5" GUID="{09b41127-bd9d-419d-9825-0d1fa6133a72}" />
+					<WZUILabelTTF Type="WZUILabelTTF" Color="83,56,29" RelativePosition="0.54,0.5" FontSize="20" Name="txtMyScoreName_WndKingRank" GUID="{4ab99193-fab7-4186-b48c-39d03349086d}" />
+					<WZUILabelTTF Type="WZUILabelTTF" Color="83,56,29" RelativePosition="0.67,0.5" FontSize="20" Name="txtMyScore_WndKingRank" GUID="{2e59bb09-f37b-4b1a-a614-6403d6499d52}" />
+					<WZUILabelTTF Type="WZUILabelTTF" Color="83,56,29" RelativePosition="0.855,0.5" FontSize="20" Name="txtMyResult_WndKingRank" GUID="{fa2115ae-dc19-4d37-9f73-5bad0198219d}" />
+				</WZUIContainer>
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{1f4eb52f-eca1-43a3-bfaa-11a351499df5}" Name="txtEmpty_WndKingRank" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" FontSize="22" Color="255,255,255" Dimensions="540,0" Visible="False" TouchEnable="False" />
+			</WZUIContainer>
+		</WZUIWindow>
+		<WZUIContainer Type="WZUIContainer" GUID="{88369347-98f6-48f0-938c-77e71520473a}" Name="CellKingRank" NameCreate="True">
+			<WZUIImage Type="WZUIImage" GUID="{a7711bfb-a104-4d60-9586-dd2c31edc2fb}" RelativePosition="0.05,0.5" Name="imgBg1_CellKingRank" Visible="False" UseOriginSizeProportion="True" File="" />
+			<WZUILabelTTF Type="WZUILabelTTF" Color="83,56,29" RelativePosition="0.05,0.5" FontSize="20" Name="txtContent1_CellKingRank" GUID="{39040e2b-e51e-44b9-ab17-ffae7590e144}" />
+			<WZUILabelTTF Type="WZUILabelTTF" Color="83,56,29" RelativePosition="0.25,0.5" FontSize="20" Name="txtContent2_CellKingRank" GUID="{0418bb1d-4ffa-484d-a271-1c5fea6ec1f2}" />
+			<WZUILabelTTF Type="WZUILabelTTF" Color="83,56,29" RelativePosition="0.50,0.5" FontSize="20" Name="txtContent3_CellKingRank" GUID="{49463396-e169-455f-8137-06f05cd09fcc}" />
+			<WZUILabelTTF Type="WZUILabelTTF" Color="83,56,29" RelativePosition="0.69,0.5" FontSize="20" Name="txtContent4_CellKingRank" GUID="{d3d907b7-779c-4c3a-87fd-533bc9e46bae}" />
+			<WZUILabelTTF Type="WZUILabelTTF" Color="83,56,29" RelativePosition="0.88,0.5" FontSize="20" Name="txtContent5_CellKingRank" GUID="{9178eaa9-597c-45f9-bb1a-ba3d8f8732c1}" />
+		</WZUIContainer>
+	</WZUIFrame>
+</WndKingRank>

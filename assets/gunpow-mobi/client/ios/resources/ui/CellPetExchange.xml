@@ -1,0 +1,43 @@
+<CellPetExchange GUID="{3ddde36c-dd5c-48e7-8887-07cea80bc37f}">
+    <WZUIContainer AbsContentSize="175,183" GUID="{691fb08e-ee05-4ae8-b696-051100fe159c}" LuaObjectName="" Name="CellPetExchange" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{73837f38-7a4c-49dc-9037-46585c0c540b}" TouchSwallow="True" AbsContentSize="">
+            <WZUIContainer Type="WZUIContainer" GUID="{43e0c3b2-c4ed-481b-b309-5e1fd391a6d0}">
+                <WZUIContainer Type="WZUIContainer" GUID="{1101e683-a653-43c1-947d-e1c9a332b723}" AbsContentSize="186,190" UseAbsSize="True" RelativePosition="0.5,1" AbsPosition="87.5,84.5001" AnchorPoint="0.5,1">
+                    <WZUIContainer Type="WZUIContainer" GUID="{358e0034-ef51-448b-af03-dfd1623c5526}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.25,0.5" RelativeSize="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{a59e792b-aecb-4578-b8cf-98ba3f7807a3}" File="ui/common/common_scale9_yy.png" CapInsets="20,20,10,10" RelativePosition="0.5,0.5" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{45f274d4-0f61-4569-99a1-f1f02b4b1f80}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.75,0.5" RelativeSize="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{1146dd73-473e-4dd0-9dbf-c0becff6253b}" File="ui/common/common_scale9_yy.png" CapInsets="20,20,10,10" RelativePosition="0.5,0.5" FlipX="False" FlipY="False" ScaleX="-1" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUI9Image Type="WZUI9Image" GUID="{07c36823-7bce-41ba-b259-b671c9d1945c}" File="ui/common/common_scale9_di7.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{fca16176-bc1c-4ba9-9ada-291c1d787f5d}" RelativeSize="0.9,0.75" RelativePosition="0.5,0.557322">
+                    <WZUI9Image Type="WZUI9Image" GUID="{280de00d-41d9-4e74-9f35-e3255e197179}" File="ui/common/common_scale9_di58.png" RelativeSize="1,1" RelativePosition="0.5,0.5" Opacity="225" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{facca71b-cb05-4161-8177-e75a98325d1e}" File="ui/common/common_icon_dian.png" UseOriginSize="True" RelativePosition="0.5,1" />
+                <WZUIImage Type="WZUIImage" GUID="{f317fcb6-ed05-4c92-b8a1-a59a4f230a37}" File="" UseOriginSize="True" RelativePosition="0.5,0.5" Name="imgBg_CellPetExchange" Visible="False" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="80,80" GUID="{4be62c17-3a8f-4f8d-afdb-92f19cb971c6}" Name="conProp_CellPetExchange" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" NameCreate="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{a9fcc77d-559b-4cd3-bddb-88cd4bec921e}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.849727" TouchSwallow="False" RelativeSize="0.8,0.15">
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Color="255,255,255" Dimensions="0,0" EnableStroke="False" FontSize="20" GUID="{35b82cab-9ae8-4e6a-8508-77de3241366b}" Name="txtPropName_CellPetExchange" RelativePosition="0.5,0.5" StrokeColor="60,19,12" StrokeSize="4" Text="" TouchEnable="False" Type="WZUILabelTTF" Visible="True" NameCreate="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{89da090c-22e0-48c7-9b44-58e26c8163b2}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.0949101" TouchSwallow="False" RelativeSize="0.8,0.12">
+                <WZUIContainer Type="WZUIContainer" GUID="{88b2f3e1-5c21-473f-8a2c-b550f6426c8c}" RelativePosition="0.5,0.5" Name="conNotLimitTxt_CellPetExchange" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{024d0a8d-e885-4f1e-aab2-4d9a6ea2033c}" AbsContentSize="30,30" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.215714,0.5">
+                        <WZUIImage File="ui/common/common_icon_jingjibi.png" GUID="{ca9ca77d-3b08-4263-9a0c-60211665d6f8}" Name="imgMoney_CellPetExchange" RelativePosition="0.5,0.5" RelativeSize="1,1" Scale="0.5" ScaleX="1" ScaleY="1" TouchEnable="False" Type="WZUIImage" UseOriginSize="False" Visible="True" isValid="True" UseOriginSizeProportion="True" AbsPosition="" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" BoldFont="False" Color="64,128,1" EnableStroke="False" FontSize="24" GUID="{727557f6-f3e7-44c7-a916-192ad9878ab5}" Name="txtPrice_CellPetExchange" RelativePosition="0.45,0.5" StrokeColor="91,49,24" StrokeSize="0" Text="12345" Type="WZUILabelTTF" Visible="True" NameCreate="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIButton GUID="{71d66a66-cfc8-4018-a525-de930dfe19ff}" LuaDoneFunctionName="OnBtnBuy" Name="" RelativeSize="1,1" Type="WZUIButton" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" TouchSwallow="True">
+            <NormalElement GUID="{9f94df64-c01f-4530-bc2f-115057d41401}" Type="WZUIContainer" />
+            <SelectElement GUID="{3b33f9de-77aa-4480-8e54-34a415afab29}" Type="WZUIContainer" />
+            <DisableElement GUID="{4946565c-acf6-4982-9b0a-fd45c202cdb8}" RelativePosition="0.5,0.507143" Type="WZUIContainer" />
+        </WZUIButton>
+        <WZUIContainer Type="WZUIContainer" GUID="{65e9b3fd-5bef-4acf-90ed-e765b5f25f75}" Name="conSell_CellPetExchange" NameCreate="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{6efa1cbd-cbf4-45ac-b358-e21560bb83cb}" File="ui/common/common_shade_chushouheidi.png" />
+            <WZUIImage Type="WZUIImage" GUID="{d882ebac-3177-4458-bbb8-68b141d5c5b3}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellPetExchange>

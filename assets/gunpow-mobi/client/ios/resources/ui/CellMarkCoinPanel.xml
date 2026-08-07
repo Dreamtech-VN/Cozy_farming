@@ -1,0 +1,11 @@
+﻿<CellMarkCoinPanel GUID="{738d8ebc-d3ad-4579-a880-f049bff8f6fd}">
+    <WZUIWindow Type="WZUIWindow" GUID="{fad0ecac-8ccd-4b19-99ca-4b3eaf7d65c2}" LuaObjectName="CellMarkCoinPanel" Name="CellMarkCoinPanel" NameCreate="True" AbsContentSize="720,420" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{836eada5-99d4-4eb5-9f95-a3f1a709aa5d}" Name="conFirst_CellMarkCoinPanel" Visible="True" UseAbsSize="False">
+            <WZUITableContainer Type="WZUITableContainer" GUID="{7aecc582-7811-4ecb-8496-7fde8c21b948}" EnableMoveHorizontal="False" Name="tableTaskList_CellMarkCoinPanel" AnchorPoint="0.5,0" RelativePosition="0.52,0.126" RelativeSize="1,0.62" CellElementHeight="0.392" />
+            <WZUIContainer Type="WZUIContainer" GUID="{84ae5477-63a1-46ed-be38-5aac2fc349d7}" Name="conActiveTime_CellMarkCoinPanel" AbsContentSize="600,50" AnchorPoint="0.5,1" RelativePosition="0.491928,0.119287" UseAbsSize="True">
+                <WZUIImage Type="WZUIImage" GUID="{059c7c1c-ee4f-44d1-9ad2-8a9f56ad176b}" File="ui/gameActivity/threeyear/anniversary_frame_003_01.png" UseOriginSize="True" RelativePosition="0.5,0.5" ScaleY="1" AnchorPoint="0.5,0.5" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{13199904-38a6-4f1f-92ec-875f6bb00561}" Name="txtTime_CellMarkCoinPanel" Color="255,255,255" EnableStroke="False" FontSize="18" RelativePosition="0.05,0.7" StrokeColor="158,0,0" StrokeSize="4" Text="" AnchorPoint="0,0.5" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</CellMarkCoinPanel>

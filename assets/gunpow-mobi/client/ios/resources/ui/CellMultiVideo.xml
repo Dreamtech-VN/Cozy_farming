@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<CellMultiVideo GUID="{DAA07940-9D5B-4d51-B92F-D5A4AF5077EA}">
+    <WZUIContainer Type="WZUIContainer" GUID="{9F09FD28-73C8-4064-854A-E9F788C12157}" UseAbsSize="True" AbsContentSize="362,114" Tag="0" Name="CellMultiVideo" NameCreate="True" ShowAll="False" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{B81D3B67-9D9A-4310-80E8-70D202B61CA3}" RelativePosition="0.5,0.5" AbsPosition="397.823,110.373">
+            <WZUIContainer Type="WZUIContainer" GUID="{42365AE3-120D-4314-B3EC-8CA10489BC5F}" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{C57E4B15-657E-4e5f-AC3D-A3DD60630846}" File="ui/common/common_scale9_di7.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{4C99477C-1645-4362-99A0-6FA6625606AE}" AbsContentSize="360,37" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{52030009-4110-4232-8F41-5FCF89F57543}" File="ui/common/common_scale9_di27.png" ScaleY="-1" />
+                <WZUIContainer Type="WZUIContainer" GUID="{BE4B6E1B-9CEB-48cd-8919-69CE8FCD6C6F}" AbsContentSize="33,30" UseAbsSize="True" RelativePosition="0.0835165,0.5" AbsPosition="30.4,18">
+                    <WZUIImage Type="WZUIImage" GUID="{45378808-D40A-4054-8BE5-A86AD06AA61C}" Name="imgDif_CellMultiVideo" File="ui/copy/copy_icon_jd1.png" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6AD3B7C3-47C5-4740-96E8-3E2E96724FCE}" Name="txtDif_CellMultiVideo" LabelStyleKey="C11_F22" Text="" Alignment="Left" RelativePosition="0.135714,0.5" AnchorPoint="0,0.5" AbsPosition="49.4,18" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{650A9FBE-BB40-4907-9F63-25F2A473278A}" Alignment="Left" AnchorPoint="0,0.5" TextKey="TEAM_FIGHT" LabelStyleKey="" RelativePosition="0.510989,0.5" AbsPosition="186,18.5" Color="255,236,193" FontSize="22" Name="txt_CellMultiVideo" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{B0B5CB0A-15C0-4ac9-974C-474B320BADA3}" Alignment="Left" AnchorPoint="0,0.5" TextKey="" LabelStyleKey="C1_F22" RelativePosition="0.788461,0.5" AbsPosition="287,16.5" Name="txtFight_CellMultiVideo" Text="" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{29AF28D6-CD92-4318-AE60-F489D300B7A1}" RelativeSize="1,0.67" RelativePosition="0.5,0.026" AnchorPoint="0.5,0" AbsPosition="184,3">
+                <WZUIContainer Type="WZUIContainer" GUID="{6973838B-3084-4d82-B69B-C4F1895FA3CD}" RelativePosition="0,0.5" RelativeSize="0.62,1" AnchorPoint="0.,0.5">
+                    <WZUIContainer Type="WZUIContainer" GUID="{A69A58AC-0E07-41fe-B16B-E077CC369637}" AbsContentSize="64,64" UseAbsSize="True" RelativePosition="0.19,0.5" Name="conHead1_CellMultiVideo">
+                        <WZUIImage Type="WZUIImage" GUID="{FE6BFF80-0E79-4940-B4B3-E698FF1D5042}" File="ui/common/common_icon_tx.png" UseOriginSize="False" Visible="True" Order="0" />
+                        <Button Type="WZUIButton" Name="" LuaDoneFunctionName="onCheckInfo1" Order="1" GUID="{4439E833-6F17-4ba5-B8FB-45CEC563D635}">
+                            <NormalElement Type="WZUIContainer" GUID="{15B6831C-E7F3-426d-A4EB-43E7C667B510}" />
+                            <SelectElement Type="WZUIContainer" GUID="{D6652863-1AE2-4b7d-8C93-7DFAABDAF812}" />
+                            <DisableElement Type="WZUIContainer" GUID="{E67C22D5-AA83-4acd-AAFA-1BA9B41C44CD}" />
+                        </Button>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{EA89EA34-2CBE-4947-895C-864062948B6A}" AbsContentSize="64,64" UseAbsSize="True" RelativePosition="0.5,0.5" Name="conHead2_CellMultiVideo">
+                        <WZUIImage Type="WZUIImage" GUID="{1549F75C-0D3F-46f7-B965-E3943E723D4D}" File="ui/common/common_icon_tx.png" UseOriginSize="False" Visible="True" />
+                        <WZUIButton Type="WZUIButton" GUID="{B17A2427-D380-4ca3-8D98-761BE84EB384}" LuaDoneFunctionName="onCheckInfo2" Order="1">
+                            <NormalElement Type="WZUIContainer" GUID="{08FB963B-9557-4df8-B0A6-C1E33FFC2EBF}" />
+                            <SelectElement Type="WZUIContainer" GUID="{2BFD7D90-C7F8-4d80-9B84-ACAA60C89E1D}" />
+                            <DisableElement Type="WZUIContainer" GUID="{E0090FC6-A306-4fa1-8B92-EF657AB17EB8}" />
+                        </WZUIButton>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{25E7C5C2-EA53-4862-874F-AC9922D528F2}" AbsContentSize="64,64" UseAbsSize="True" RelativePosition="0.81,0.5" Name="conHead3_CellMultiVideo">
+                        <WZUIImage Type="WZUIImage" GUID="{98A7FF8B-A1DA-47c8-B7D2-B1E01C4D2BB9}" File="ui/common/common_icon_tx.png" UseOriginSize="False" Visible="True" />
+                        <WZUIButton Type="WZUIButton" GUID="{5E14D0FC-0A49-4964-BF93-EEDAC14E7127}" LuaDoneFunctionName="onCheckInfo3" Order="1">
+                            <NormalElement Type="WZUIContainer" GUID="{427CCD8C-97D8-4421-A294-CFC4BB051544}" />
+                            <SelectElement Type="WZUIContainer" GUID="{3895D9AB-C6D3-40d4-BDB6-4FAACEA07E73}" />
+                            <DisableElement Type="WZUIContainer" GUID="{F530894A-4730-4dcb-8EA1-9EDE54032BC5}" />
+                        </WZUIButton>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <Button Type="WZUIButton" AbsContentSize="100,48" UseAbsSize="True" RelativePosition="0.826087,0.473815" AbsPosition="297.391,36.19" LuaDoneFunctionName="onLook" GUID="{954D99D7-5A10-4a7b-9076-EC4190914AA9}" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{F383834F-BBDC-45ee-ACFD-2F67DCF8B14B}">
+                        <WZUIImage Type="WZUIImage" GUID="{8152540F-734F-426b-A62B-3468D32F8C90}" File="ui/common/common_btn_anniu10_0.png" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{C9B65A6E-4B2D-439b-8D4B-0E6EE3528840}">
+                        <WZUIImage Type="WZUIImage" GUID="{F748A0DD-F366-46e3-B9DF-2DF8B44C1FB4}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{E5BF5FD9-A43E-4e45-9A6B-D625F47514F4}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{001937EB-155C-4e68-92AF-A2501DAB286E}" LabelStyleKey="C1_F22_S4_C4" TextKey="LOOK_VIDEO" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellMultiVideo>

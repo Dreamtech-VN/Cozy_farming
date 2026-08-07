@@ -1,0 +1,106 @@
+﻿<WndBagMain GUID="{8456936a-3997-4163-93e3-556e988b51a4}">
+    <WZUIWindow AbsContentSize="0,0" GUID="{f054cab4-1e92-4215-8622-3fc6818d833c}" LuaObjectName="WndBagMain" LuaTouchBeganFunction="onTouchBegin" LuaTouchCancelledFunction="" LuaTouchEndedFunction="onTouchEnd" LuaTouchMovedFunction="onTouchMove" Name="WndBagMain" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIWindow" UseAbsSize="False" AnchorPoint="0.5,0.5">
+        <WZUIContainer AbsContentSize="960,640" GUID="{6a87afc1-b5e2-4661-ba1b-d4ba19125e33}" Type="WZUIContainer" UseAbsSize="True" Visible="True" TouchSwallow="False" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{487ffd1e-e209-4106-8a17-881e69169f88}" File="ui/common_bg/common_scale9_di2.png" Visible="True" Name="imgBg1_WndBagMain" UseOriginSize="True" Scale="2" />
+        </WZUIContainer>
+        <WZUIParticle Type="WZUIParticle" GUID="{8fc9f372-83fb-43b9-a05b-c27e82f2c857}" PlistFile="particle/particle_tongyonglizi.plist" RelativePosition="0.5,0.1" />
+        <WZUIContainer Type="WZUIContainer" GUID="{59d08803-ad03-41f6-93a5-21aca238d8dd}" Name="conSubWin" UseAbsSize="False" AbsContentSize="960,530" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Order="1" ShowAll="True" />
+        <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onTotalAttrTip" RelativePosition="0.197,0.951" GUID="{00a8a25e-f232-4409-af21-3be1740d46cf}" LuaActionName="Normal" AbsContentSize="60,60" UseAbsSize="True" AbsPosition="316.318,389.847" Name="btnTotalAttrTip_WndBagMain" Order="1" Scale="0.8" ScaleX="0.8" ScaleY="0.8" ShowAll="True">
+            <NormalElement Type="WZUIContainer" GUID="{e9f5b965-ee0e-4c7c-863a-ebecba3f21ad}">
+                <WZUIImage Type="WZUIImage" GUID="{332cc20a-c051-470a-8ebf-0619c3478fe5}" File="ui/common/common_icon_shuxingtb.png" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{26119559-f58f-4524-b6dc-6d0b23b369ed}">
+                <WZUIImage Type="WZUIImage" GUID="{cbef523b-5fe6-44d6-aba8-7e484f39a2a1}" File="ui/common/common_icon_shuxingtb.png" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{39362197-3254-48ea-a21a-25351c003f46}" />
+        </WZUIButton>
+        <WZUIContainer Type="WZUIContainer" GUID="{fe2a92a8-4ab2-4782-a289-a91f340eaaab}" AbsContentSize="858,520" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True" Name="conBg" ShowAll="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{4edc7acc-fe9e-4bf8-a11b-c2bb7e866903}" File="ui/bag/common_scale9_js1.png" Visible="True" RelativePosition="0.45,0.441" Opacity="255" />
+            <WZUIContainer Type="WZUIContainer" GUID="{540a3e20-cea9-4a8a-acdb-9770e917de88}" AbsContentSize="845,379" UseAbsSize="True" RelativePosition="0.443,0.48" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{e547eda2-7bad-46f9-b1df-82a91058456d}" File="ui/bag/common_scale9_js2.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1b938a74-7b1a-4d87-a458-94733d122ee2}" AbsContentSize="372,510" UseAbsSize="True" RelativePosition="0.727,0.44" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{557fc505-cc95-4a41-8ce8-094ac13077a7}" File="ui/bag/common_scale9_js3.png" Opacity="255" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{f6b53501-643a-471e-9ac1-a128a0264fa6}" AbsContentSize="360,378" UseAbsSize="True" RelativePosition="0.729,0.477" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{c2ce6438-836c-4ddf-b95e-61fe8f624a82}" File="ui/bag/common_scale9_js4.png" />
+            </WZUIContainer>
+            <WZUICheckBoxGroup Type="WZUICheckBoxGroup" GUID="{41b2165b-739c-4081-a090-e44320e8d21f}" AbsContentSize="" UseAbsSize="False" RelativePosition="1.425,0.465" Visible="True" Order="-1" Name="group_WndBagMain">
+                <CheckBox Type="WZUICheckBox" GUID="{3441bbbf-ea04-4058-b25b-2a55842d887f}" AbsContentSize="110,65" UseAbsSize="True" Name="checkbox1_WndBagMain" NameCreate="True" AnchorPoint="0,1" RelativePosition="0,0.902" SelectedIndex="1" Visible="True" LuaCheckedFunctionName="" Tag="1" LuaSelectedFunctionName="onSubWin" RelativeSize="1,1">
+                    <CheckElement Type="WZUIContainer" GUID="{97aa9f6b-bdd6-4a73-8887-229a9e7f5a5c}" RelativePosition="0.5,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{a3158ae4-068b-4638-9148-5620a4875b78}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" TouchEnable="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" GrayRender="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{878f9470-e8b9-4d2b-aaed-2018cf82f4a0}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtEquipment1_WndBagMain" NameCreate="True" TextKey="EQUIPMENT" RelativePosition="0.55,0.5" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{137a8683-1114-453d-99ff-8466aa80c808}">
+                        <WZUIImage Type="WZUIImage" GUID="{6e862067-f292-4c52-8d6c-a35671889aa3}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" TouchEnable="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{9c75ddb5-4306-4f7b-b34c-5d532575da0a}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtEquipment2_WndBagMain" NameCreate="True" TextKey="EQUIPMENT" RelativePosition="0.55,0.5" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{c6ef7222-df3b-409d-8606-0b9c1445a401}" AbsContentSize="110,65" UseAbsSize="True" Name="checkbox2_WndBagMain" NameCreate="True" RelativePosition="0,0.777" Visible="True" Tag="2" LuaCheckedFunctionName="" LuaSelectedFunctionName="onSubWin" SelectedIndex="0" AnchorPoint="0,1" RelativeSize="1,1">
+                    <CheckElement Type="WZUIContainer" GUID="{85db278c-66c8-457e-834a-a446cc75f3ce}" RelativePosition="0.5,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{ab95ce05-7f3d-42fb-88bd-f937269be8bf}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" TouchEnable="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" GrayRender="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{10f976d1-43c9-4ce5-9073-4ca5fdab9a1a}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtCloset1_WndBagMain" NameCreate="True" TextKey="NEWBAG1" RelativePosition="0.55,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{4c575341-019a-4fe5-9df4-98cb08d27978}" UseOriginSize="True" File="ui/common/common_icon_xiaodianzhui.png" RelativePosition="0.890909,0.761538" Name="red1_WndDressList" Visible="False" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{0c3238c9-a934-4d10-8749-7c7c5a8ea0aa}" RelativePosition="0.5,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{6c1e5766-451b-4e9b-a0d1-1cebfbef2ef3}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" TouchEnable="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b1b0317c-4eed-4ac7-b4e1-027a95178f26}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtCloset2_WndBagMain" NameCreate="True" TextKey="NEWBAG1" RelativePosition="0.55,0.5" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{25a248b5-2c8a-45ed-be9d-00eb3cc0c210}" AbsContentSize="110,65" UseAbsSize="True" Name="checkbox3_WndBagMain" NameCreate="True" RelativePosition="0,0.525077" Visible="False" Tag="3" LuaCheckedFunctionName="" LuaSelectedFunctionName="onSubWin" SelectedIndex="0" AnchorPoint="0,1" RelativeSize="1,1">
+                    <CheckElement Type="WZUIContainer" GUID="{d7848ee9-37c9-438e-8336-fcbcbbfd07e3}" RelativePosition="0.5,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{6b589b74-5ef9-43cc-9198-40e14ba88b5e}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" TouchEnable="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" GrayRender="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ee0cd5d7-74b1-438d-9fb5-20e31feccded}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtLLLusion1_WndBagMain" NameCreate="True" TextKey="PHANTOM1" RelativePosition="0.55,0.5" GrayRender="False" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{ef9dbe84-4cc9-4b74-aaee-52effac0bcbb}">
+                        <WZUIImage Type="WZUIImage" GUID="{8d7854a6-e31c-4c07-a3ab-c102b58dbeb9}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" TouchEnable="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" Name="" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{fe6d351a-e0a9-46bf-bba1-9933f55721dd}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtLLLusion2_WndBagMain" NameCreate="True" TextKey="PHANTOM1" RelativePosition="0.55,0.5" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{c3c92c8b-01e0-48b0-850e-68a7753367fa}" AbsContentSize="110,65" UseAbsSize="True" Name="checkbox4_WndBagMain" NameCreate="True" RelativePosition="0,0.400077" Visible="False" Tag="4" LuaCheckedFunctionName="" LuaSelectedFunctionName="onSubWin" SelectedIndex="0" AnchorPoint="0,1" RelativeSize="1,1">
+                    <CheckElement Type="WZUIContainer" GUID="{04a9c98e-ed1a-4899-ac51-fac7094eef60}" RelativePosition="0.5,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{a1e16288-e4c1-4ee2-81f6-bddc8c97fbd0}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" TouchEnable="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" GrayRender="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{e8e85111-1e3c-4de5-9649-105cf0483239}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtAscending1_WndBagMain" NameCreate="True" TextKey="BAG5" RelativePosition="0.55,0.5" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{cba87aa6-a0fc-479d-86f0-d1d8004a945c}">
+                        <WZUIImage Type="WZUIImage" GUID="{4e688e23-5550-4847-9a4c-4f64bf6ff44f}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" TouchEnable="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4481c836-3339-4726-8e56-e30874b4dd4a}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtAscending2_WndBagMain" NameCreate="True" TextKey="BAG5" RelativePosition="0.55,0.5" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{9d409c72-7242-4554-ab70-46e0f046c655}" AbsContentSize="110,65" UseAbsSize="True" Name="checkbox5_WndBagMain" NameCreate="True" RelativePosition="0,0.275077" Visible="False" Tag="5" LuaCheckedFunctionName="" LuaSelectedFunctionName="onSubWin" SelectedIndex="0" AnchorPoint="0,1" RelativeSize="1,1">
+                    <CheckElement Type="WZUIContainer" GUID="{27110dad-52b9-496a-9ea5-465e187ed41c}" RelativePosition="0.5,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{3772e258-4913-4375-ba33-3632466e23ed}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" TouchEnable="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" GrayRender="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4643132e-e7cb-407c-beed-0206f6158ed9}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtExtraction1_WndBagMain" NameCreate="True" TextKey="EXTRACTION_TEXT2" RelativePosition="0.55,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{55bb9e92-bb1d-4ee5-80ba-0c76fc089b55}" UseOriginSize="True" File="ui/common/common_icon_xiaodianzhui.png" RelativePosition="0.890909,0.761538" Name="red2_WndDressList" Visible="False" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{6ae02519-a470-4c2d-add3-5b1a92cd0296}">
+                        <WZUIImage Type="WZUIImage" GUID="{6eca3908-d226-4056-b5a9-ff5e38c2acb9}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" TouchEnable="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{3945523f-84a7-4df3-b0bd-d0440395e0ce}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtExtraction2_WndBagMain" NameCreate="True" TextKey="EXTRACTION_TEXT2" RelativePosition="0.55,0.5" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{7287dbac-2076-46bc-8db8-44df0c08bfc3}" AbsContentSize="110,65" UseAbsSize="True" Name="checkbox6_WndBagMain" NameCreate="True" RelativePosition="0,0.652" Visible="True" Tag="6" LuaCheckedFunctionName="" LuaSelectedFunctionName="onSubWin" SelectedIndex="0" AnchorPoint="0,1" RelativeSize="1,1">
+                    <CheckElement Type="WZUIContainer" GUID="{02f6c77d-f353-42bd-ab65-39c33724172f}" RelativePosition="0.5,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{29d577ad-e3bc-44b8-a6b4-14573f53f670}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" TouchEnable="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" GrayRender="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{703a45f7-4286-485f-b746-c53221961083}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtDesignation1_WndBagMain" NameCreate="True" TextKey="DESIGNATION" RelativePosition="0.55,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{bbdccf52-7c38-45cb-9196-1dbe248475a1}" UseOriginSize="True" File="ui/common/common_icon_xiaodianzhui.png" RelativePosition="0.890909,0.761538" Name="imgAchieRed_WndBagMain" Visible="False" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{40add25a-bfdb-436a-ba0a-638c2ee84403}">
+                        <WZUIImage Type="WZUIImage" GUID="{fa161e41-eed0-423f-9a44-de0d3dbadabc}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" TouchEnable="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{022e1344-c22c-4b81-a7f8-0e002428965c}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtDesignation2_WndBagMain" NameCreate="True" TextKey="DESIGNATION" RelativePosition="0.55,0.5" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{edf20b11-861d-4b38-af53-852946197df3}" AbsContentSize="110,65" UseAbsSize="True" Name="checkbox7_WndBagMain" NameCreate="True" RelativePosition="0,0.152" Visible="False" Tag="7" LuaCheckedFunctionName="" LuaSelectedFunctionName="onSubWin" SelectedIndex="0" AnchorPoint="0,1" RelativeSize="1,1">
+                    <CheckElement Type="WZUIContainer" GUID="{a0ddeff4-0a6d-436c-83f1-f652045b3063}" RelativePosition="0.5,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{d578efd7-3797-4a20-934b-1a9f9ccfa7e0}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" TouchEnable="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" GrayRender="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{79be3818-52af-4096-a0dd-3a2df4cef181}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtPractice1_WndBagMain" NameCreate="True" TextKey="PRACTICE" RelativePosition="0.55,0.5" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{d2990e00-38d5-4ac4-9dcf-dcabc4c842db}">
+                        <WZUIImage Type="WZUIImage" GUID="{fc780eff-0ca0-4ea9-9e86-ea7c5b35fb34}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" TouchEnable="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c761d826-3839-4f9c-9cc1-513d1504f2f1}" Color="255,236,193" EnableStroke="True" FontSize="26" StrokeColor="105,65,46" StrokeSize="4" Text="" Name="txtPractice2_WndBagMain" NameCreate="True" TextKey="PRACTICE" RelativePosition="0.55,0.5" />
+                    </CheckElement>
+                    <WZUIImage Type="WZUIImage" GUID="{6da3a8a2-f53c-4eb4-bcf4-72ea1382023c}" UseOriginSize="True" File="ui/common/common_icon_xiaodianzhui.png" RelativePosition="0.925933,0.820502" Name="imgXiulianRed_WndBagMain" Visible="False" />
+                </CheckBox>
+            </WZUICheckBoxGroup>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndBagMain>

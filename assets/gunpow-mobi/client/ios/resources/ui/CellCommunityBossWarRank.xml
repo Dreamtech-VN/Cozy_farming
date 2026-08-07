@@ -1,0 +1,25 @@
+﻿<CellCommunityBossWarRank GUID="{c261164b-43a9-40f8-a8d4-a7325a7e67a9}">
+    <WZUIContainer AbsContentSize="490,80" GUID="{e4d958a2-5847-4df5-9e84-9cf1614806e9}" LuaObjectName="CellCommunityBossWarRank" Name="CellCommunityBossWarRank" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{af295296-3395-4440-8292-de312593facf}">
+            <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{5a0d32ce-87d5-414e-8d36-20ea4addcdfd}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Name="imgBg_CellCommunityBossWarRank" Visible="True" />
+        </WZUIContainer>
+        <Button AbsContentSize="500,80" GUID="{ee8d9f89-1d8f-41ab-9761-08e7940fcf54}" LuaDoneFunctionName="" Name="btnClick_CellCommunityBossWarRank" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIButton" UseAbsSize="True" Visible="False">
+            <NormalElement GUID="{ff4b8139-afd6-483e-8485-bd328687b3ee}" RelativePosition="0.5,0.5" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{c0287752-8484-4be8-ba40-6e64994b51b8}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Name="imgBtn1_CellCommunityList" />
+            </NormalElement>
+            <SelectElement GUID="{dcae6a81-44e9-4c48-9745-b63db9516b1d}" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{ef9f28d7-0c80-4b74-a81c-b044b51a6f42}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Name="imgBtn2_CellCommunityList" />
+            </SelectElement>
+            <DisableElement GUID="{737d614f-f7ec-4a57-b0c2-89baaeacd22f}" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{80249ca6-b674-4df1-ae3a-d6440f394668}" Name="imgBtn3_CellCommunityList" File="ui/common/common_scale9_di7.png" />
+            </DisableElement>
+        </Button>
+        <WZUIImage Type="WZUIImage" GUID="{ea85f1cc-9efe-4aed-9c58-848bd9b1e108}" Name="imgRanking_CellCommunityBossWarRank" File="ui/common/common_icon_1st.png" UseOriginSize="True" RelativePosition="0.134,0.5" Visible="True" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" ChineseLengthPolicy="1" Color="62,34,8" Dimensions="0,0" FontSize="22" GUID="{16dad0cd-124f-4bfe-ac85-d7882b685791}" MaxLength="20" Name="labGuildName_CellCommunityBossWarRank" RelativePosition="0.35,0.4875" Text="天涯海角" Type="WZUILabelTTF" LabelStyleKey="C13_F20" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="62,34,8" FontSize="22" GUID="{f44a363b-4584-46de-a69b-ee2fb1ad4008}" Name="labGuildLv_CellCommunityBossWarRank" RelativePosition="0.566,0.4875" Text="Lv30" Type="WZUILabelTTF" LabelStyleKey="C13_F20" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="62,34,8" FontSize="22" GUID="{874ecda9-3ed1-4dfc-b444-2eb668ed942d}" Name="labKillTime_CellCommunityBossWarRank" RelativePosition="0.794848,0.326667" Text="2017年1月20日" Type="WZUILabelTTF" LabelStyleKey="C14_F20" />
+        <WZUIImage Type="WZUIImage" GUID="{3331dfdd-d1d0-4bc6-8094-f30ac13f9c77}" Name="imgFirstFlag_CellCommunityBossWarRank" File="ui/common/common_icon_sctg.png" UseOriginSize="True" RelativePosition="0.100958,0.517653" Visible="False" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{31c2a3cd-4576-40c4-93e9-0eefbe0cb6dd}" Text="100" LabelStyleKey="C13_F20" RelativePosition="0.792425,0.629495" TextKey="GUILD_BOSS_PASS_TIME_TITLE" />
+        <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{0113dd04-563e-4509-b7ec-b14e590bc0ad}" CharMapFileName="ui/common_num/common_num_pmsz.png" Name="atlasGuildIndex_CellCommunityBossWarRank" Text="5" Height="30" Width="24" RelativePosition="0.136,0.5" UseOriginSize="True" />
+    </WZUIContainer>
+</CellCommunityBossWarRank>

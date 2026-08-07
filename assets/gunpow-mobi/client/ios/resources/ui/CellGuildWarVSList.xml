@@ -1,0 +1,47 @@
+﻿<CellGuildWarVSList GUID="{76e54800-8b9f-4b8b-a345-676a8e1418e1}">
+    <WZUIContainer AbsContentSize="349,100" GUID="{6532443a-446c-4ba7-9d4f-8b69b0e62422}" LuaObjectName="" Name="CellGuildWarVSList" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <WZUIContainer GUID="{f334ad3a-0435-4349-a0d7-36fdb315593f}" Type="WZUIContainer" Visible="True" RelativePosition="0.5,0.5">
+            <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{ed61d46e-32d2-4aea-89ec-0542f74ca571}" Type="WZUI9Image" Name="imgBK_CellGuildWarVSList" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="175,96" GUID="{432d33fa-c5fa-4d7c-910b-3c12116f2cd3}" RelativePosition="0,0.97" Type="WZUIContainer" UseAbsSize="True" RelativeSize="1,1" AnchorPoint="0,1" Name="conLeftGroup">
+            <WZUIImage Type="WZUIImage" GUID="{34260730-cd94-4eac-b719-1dc7a3ad40bf}" File="ui/common/common_icon_xfhb.png" UseOriginSize="True" RelativePosition="0.13,0.81" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d44ea570-8514-4fdd-950d-bb7277ded6cb}" FontSize="18" Name="txtLeftGroupMark_CellGuildWarVSList" AnchorPoint="0.5,0.5" RelativePosition="0.26,0.81" LabelStyleKey="" Color="127,70,26" Text="A1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4af19de7-f05e-4100-b45a-3c31877a302c}" FontSize="18" Name="txtNameLeft_CellGuildWarVSList" AnchorPoint="0,0.5" RelativePosition="0.08,0.53" LabelStyleKey="" Color="127,70,26" Text="" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{1ca77030-f8a3-4835-b8be-fb3c6eaca866}" AbsContentSize="349,40" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+            <WZUI9Image Type="WZUI9Image" GUID="{c9965d88-8324-49c4-902d-e03cc54d0c1e}" File="ui/common/common_scale9_di27.png" Opacity="125" />
+            <Button Type="WZUIButton" GUID="{f944da22-ee28-4c56-91c1-d2c5057a3f2b}" AbsContentSize="116,56" LuaActionName="Normal" LuaDoneFunctionName="onClickCheck" UseAbsSize="True" RelativePosition="0.5,0.5" Name="btnCheck_CellGuildWarVSList">
+                <NormalElement Type="WZUIContainer" GUID="{b1298584-2a7c-41f4-81e0-00701f67fcc6}" AbsContentSize="82,36" UseAbsSize="True">
+                    <WZUIImage Type="WZUIImage" GUID="{394f9e68-b6e3-4d74-8ca2-140390eb96e6}" File="ui/common/common_btn_anniu10_0.png" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{54f3d7e3-a5bb-4d3e-8dcc-ec7aa804472e}" AbsPosition="" UseAbsSize="True" AbsContentSize="82,36">
+                    <WZUIImage Type="WZUIImage" GUID="{b01500d7-788e-4c5a-8b04-c46c1f09b773}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{76410d9a-6804-42e4-82c9-63455f6f1427}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{caddd6eb-3174-4c0b-9ca0-94b2b6755b28}" FontSize="20" Name="txtBtn_CellGuildWarVSList" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" LabelStyleKey="" TextKey="LOOK_VIDEO" Color="255,236,193" EnableStroke="True" StrokeColor="0,72,3" StrokeSize="4" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="100,96" GUID="{e1e0947c-0f2e-4464-9f1f-1c95e9bfc931}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" RelativeSize="1,1" AnchorPoint="0.5,0.5" Name="conCenter">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{694d2de9-662e-4614-a1f1-7b921a0398a8}" RelativePosition="0.5,0.21" FontSize="18" Name="txtState_CellGuildWarVSList" LabelStyleKey="" Visible="True" TextKey="" Color="138,122,106" Text="" />
+            <WZUIContainer Type="WZUIContainer" GUID="{ca33bc7f-b3b6-4eef-a786-48d849baf393}" AbsContentSize="100,30" UseAbsSize="True" RelativePosition="0.5,0.81">
+                <WZUIImage Type="WZUIImage" GUID="{5cd68de7-dd63-421c-aec5-52fd313d6872}" AnchorPoint="0.5,0.5" RelativePosition="-0.5,0.5" Name="imgLeftResult_CellGuildWarVSList" UseOriginSize="True" File="ui/hero/hero_icon_vssheng.png" />
+                <WZUIImage Type="WZUIImage" GUID="{87ecc2dc-17fc-47f8-9caf-fc935ca3b024}" Name="imgRightResult_CellGuildWarVSList" AnchorPoint="0.5,0.5" RelativePosition="1.46,0.5" UseOriginSize="True" File="ui/hero/hero_icon_vsfu.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="175,96" GUID="{0a08e4b3-4015-4311-bdf4-0b642374ffb7}" RelativePosition="1,0.97" Type="WZUIContainer" UseAbsSize="True" RelativeSize="1,1" AnchorPoint="1,1" Name="conGroupRight">
+            <WZUIImage Type="WZUIImage" GUID="{4826363d-b6f2-4df1-a43d-e54ae975af85}" File="ui/common/common_icon_xfhb2.png" UseOriginSize="True" RelativePosition="0.72,0.81" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ce880d6c-f53c-4f8b-8db2-a0ecbfccf50b}" FontSize="18" Name="txtRightGroupMark_CellGuildWarVSList" AnchorPoint="0.5,0.5" RelativePosition="0.85,0.81" LabelStyleKey="" Color="127,70,26" Text="A2" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d95ea358-0ae7-464c-bb5b-94b4c4e89063}" FontSize="18" AnchorPoint="1,0.5" RelativePosition="0.92,0.53" Name="txtNameRight_CellGuildWarVSList" LabelStyleKey="" Color="127,70,26" Text="" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{d40eed9a-0cd8-4199-a8eb-4d901c96f120}" LuaDoneFunctionName="onCheckGuildInfoLeft" RelativeSize="0.4,1" RelativePosition="0.2,0.5">
+            <NormalElement Type="WZUIContainer" GUID="{9b13b2af-26d5-4d6a-9c48-1603e5f6ca6e}" />
+            <SelectElement Type="WZUIContainer" GUID="{03567729-1509-4c1c-b4cd-21df6a8314e8}" />
+            <DisableElement Type="WZUIContainer" GUID="{5ab5c782-5ab7-4019-bc44-e72d400de6a9}" />
+        </Button>
+        <Button Type="WZUIButton" GUID="{4cb0250b-c095-4b6f-a279-0c5971978c6e}" LuaDoneFunctionName="onCheckGuildInfoRight" RelativeSize="0.4,1" RelativePosition="0.8,0.5">
+            <NormalElement Type="WZUIContainer" GUID="{1737f682-e0e3-461f-a8d2-cf4f0329f4a5}" />
+            <SelectElement Type="WZUIContainer" GUID="{1b9b15a1-36f0-42b5-b5fb-63da9562eb51}" />
+            <DisableElement Type="WZUIContainer" GUID="{bbf0d45c-4949-4dcf-9947-0253ab23fc19}" />
+        </Button>
+    </WZUIContainer>
+</CellGuildWarVSList>

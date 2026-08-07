@@ -1,0 +1,28 @@
+﻿<WndGemTool GUID="{6992a4a5-bcda-4ad3-85c5-1273f4b09629}">
+    <WZUIWindow Type="WZUIWindow" GUID="{e50db6aa-d429-42cc-942a-40511783a91f}" LuaObjectName="WndGemTool" Name="WndGemTool" NameCreate="True" AbsContentSize="766,532" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{e04451c5-0c5d-4a0b-8ccc-aa5b61e52ff0}">
+            <WZUI9Image Type="WZUI9Image" GUID="{f641e47b-232c-4eec-b248-68547ae89b81}" File="ui/common/common_scale9_di19.png" CapInsets="92,80,1,1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d28e4d43-c79c-493d-9b70-b4fb7b3610a1}" FontSize="26" Color="255,236,193" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.94" TextKey="DIGGEM_TEXT20" EnableStroke="True" />
+            <Button Type="WZUIButton" GUID="{317ede42-1cdc-48de-9f91-945c46829c04}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.945,0.94" LuaActionName="Normal" LuaDoneFunctionName="onCloseClick">
+                <NormalElement Type="WZUIContainer" GUID="{131ff12c-d6ee-4cc4-8805-df5040780a70}" />
+                <SelectElement Type="WZUIContainer" GUID="{43b4eb8a-e8ad-4712-877c-32a8434ed574}" />
+                <DisableElement Type="WZUIContainer" GUID="{256febbc-0153-4a54-975f-ae01a73d4113}" />
+                <WZUIImage Type="WZUIImage" GUID="{6ec99980-cd33-4bea-946c-9621d4754f77}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{fa5eafba-06e7-47ce-ac11-7b481a0d3d04}" AnchorPoint="0.5,1" RelativePosition="0.5,0.89" RelativeSize="0.982,0.785">
+                <WZUI9Image Type="WZUI9Image" GUID="{891fc691-835e-444c-a2f3-4f2a495d64cc}" File="ui/common/common_scale9_di20.png" />
+                <WZUITableContainer Type="WZUITableContainer" GUID="{025072f3-55d4-4476-9cb0-9d1a86a8d7fe}" CellElementHeight="0.335" EnableMoveHorizontal="False" Name="tableToolList_WndGemTool" RelativeSize="1,0.95" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{17097e78-c5a4-4090-9025-41d35b8495db}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.969831,0.0452047" LuaActionName="Normal" LuaDoneFunctionName="onClickRule">
+                <NormalElement Type="WZUIContainer" GUID="{709b0e8e-fe9b-48e9-a672-c9e6667475ae}" />
+                <SelectElement Type="WZUIContainer" GUID="{240f6fe9-685f-4970-b882-da109baa3345}" />
+                <DisableElement Type="WZUIContainer" GUID="{ac19b832-11ff-4b22-b397-041e84ebb2db}" />
+                <WZUIImage Type="WZUIImage" GUID="{dd446d27-67c0-43fe-988e-82ce747eaa1f}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{d09a998a-b090-4899-97ab-143e8fa1aecb}" AbsContentSize="132,38" UseAbsSize="True" RelativePosition="0.03,0.0598748" AnchorPoint="0,0.5" Name="conCoin_WndGemTool">
+                <WZUI9Image Type="WZUI9Image" GUID="{82e941ef-c0ea-40c5-ae28-b59fdfd87862}" File="ui/common/common_scale9_di63.png" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{d848c26a-fc3a-4a4f-bbc7-9b3d75a2b3d0}" Name="ftxtGemCoin_WndGemTool" MaxWidth="530" AnchorPoint="0,0.5" RelativePosition="0,0.5" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndGemTool>

@@ -1,0 +1,27 @@
+<WndCardRewardShow GUID="{c49b3e99-bbc2-4e60-9499-40617cc58e16}">
+    <WZUIWindow AbsContentSize="418,294" GUID="{56ee0ba6-8cec-4119-9224-eadf91e2a6f0}" LuaObjectName="WndCardRewardShow" Name="WndCardRewardShow" NameCreate="True" RelativePosition="0.5,0.48" Type="WZUIWindow" UseAbsSize="True" ShowAll="True" LuaTouchBeganFunction="onTouchBegan">
+        <WZUISpine Type="WZUISpine" GUID="{65e1bf8e-c2dd-4c79-a72a-b29a7ee79694}" FileAtlas="ui/ui_huodewupin.atlas" FileJson="ui/ui_huodewupin.json" AnimationName="effect" Loop="True" RelativePosition="0.5,1.685" AbsPosition="204,495.697" Opacity="190" Name="spine" />
+        <WZUIContainer GUID="{05e5e697-3a3f-42ca-97a6-938e81437213}" RelativePosition="0.502075,0.515674" RelativeSize="1,0.75" Type="WZUIContainer" Name="">
+            <WZUIContainer Type="WZUIContainer" GUID="{61477f70-51f9-4c08-83f7-c860341c112d}" AbsContentSize="550,255" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="209,110.25" TouchEnable="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{c6afbfd1-c284-477f-9460-73d4543f572c}" AbsContentSize="690,230" UseAbsSize="True" RelativePosition="0.521866,0.933008" AbsPosition="287.026,237.917" AnchorPoint="0.5,1">
+                    <WZUI9Image Type="WZUI9Image" GUID="{5ff7119b-a2db-4e48-b12f-95e3f170b6fd}" File="ui/common/common_scale9_heidi11.png" Opacity="255" Visible="True" Name="bg1" TouchEnable="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{15588d4d-38b1-405f-893c-3735fe2cdf1b}" AbsContentSize="690,140" UseAbsSize="True" RelativePosition="0.521866,0.933008" AbsPosition="287.026,237.917" AnchorPoint="0.5,1">
+                    <WZUI9Image Type="WZUI9Image" GUID="{870e353a-9016-42b5-ab13-8a87d7da44b0}" File="ui/common/common_scale9_heidi11.png" Opacity="255" Visible="False" Name="bg2" TouchEnable="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="1200,700" GUID="{7c525a1b-e0e3-40b8-9eac-4e6a22f76cc2}" Name="btnOK_WndCardRewardShow" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <WZUIButton AbsContentSize="0,0" GUID="{016e3c07-957d-4492-b561-5f8c023c3fdb}" LuaDoneFunctionName="onClose" LuaPushFunctionName="" Name="btnGetReward_WndCardRewardShow" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="False">
+                    <NormalElement GUID="{dbc2ac8e-b243-422f-9cb0-b913ae4ac14d}" Type="WZUIContainer" TouchContainerEnable="True" />
+                    <SelectElement GUID="{b6d1063a-9a1b-4db2-81c3-228e1a932c4f}" Type="WZUIContainer" TouchContainerEnable="True" />
+                    <DisableElement GUID="{3b033c41-5120-41f5-b593-25f89b5fdd10}" Type="WZUIContainer" TouchContainerEnable="True" RelativePosition="0.5,0.5" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{fae58531-c8f3-4ce4-ab31-416f42d9d1e4}" UseAbsSize="True" AbsContentSize="550,255" RelativePosition="0.5,0.5" Name="conList_WndCardRewardShow" TouchContainerEnable="False" AbsPosition="209,110.25">
+                <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{e75d7f2a-5d70-4d91-8d15-2049f10ef8ed}" Name="flconRewardList_WndCardRewardShow" UseAbsSize="False" RelativeSize="1,0.9" RelativePosition="0.5,0.53" ListItemInterval="10" ListOrient="Horizontal" EnableMoveVertical="False" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{bbf21eff-5062-4b11-83db-f0924cdf6db8}" Name="ttf2_WndCardRewardShow" Text="" Color="255,255,255" FontSize="22" AnchorPoint="0.5,0.5" RelativePosition="0.5,-0.2" Visible="True" BoldFont="True" EnableStroke="False" StrokeColor="132,66,29" TextKey="" StrokeSize="4" AbsPosition="209,-60.125" TouchEnable="False" />
+        </WZUIContainer>
+        <WZUIImage File="ui/common/common_icon_hdjl.png" GUID="{3b47631f-7c85-4f53-bc2d-7a931f2a93e6}" RelativePosition="0.5,0.953197" Type="WZUIImage" UseOriginSize="True" Name="imgTitle_WndCardRewardShow" Scale="1" isValid="True" Visible="True" AbsPosition="209,280.24" TouchEnable="False" />
+    </WZUIWindow>
+</WndCardRewardShow>

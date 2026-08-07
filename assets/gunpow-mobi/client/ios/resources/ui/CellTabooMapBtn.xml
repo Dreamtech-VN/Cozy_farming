@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" ?>
+<CellTabooMapBtn GUID="{227DFB66-EBE9-4727-BFC4-73D0946DE8D2}">
+    <WZUIContainer Type="WZUIContainer" GUID="{AC85D96F-1A46-4599-A2F0-C2616A2F4D2B}" AbsContentSize="280,250" UseAbsSize="True" Name="CellTabooMapBtn" NameCreate="True">
+        <WZUIContainer AbsContentSize="280,250" GUID="{82665EBD-2DED-454a-83D0-5280D27D9BB8}" Name="" RelativePosition="0.5,0.5" Tag="-1" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True" Visible="True" NameCreate="False" Scale="1" ScaleX="1" ScaleY="1">
+            <Button Type="WZUIButton" GUID="{39cea5cc-d75f-444a-81c0-956d6911d09a}" LuaActionName="Normal" LuaDoneFunctionName="onBtnClick" Name="btnBuild_CellTabooMapBtn" UseAbsSize="True" AbsContentSize="150,120" RelativePosition="0.5,0.5">
+                <NormalElement Type="WZUIContainer" GUID="{ac74ad5e-9852-4169-a578-f586bc3b83b1}">
+                    <WZUIImage Type="WZUIImage" GUID="{1961600c-289e-47b0-ae9d-4845590a8756}" Name="imgBtnBuildNor_CellTabooMapBtn" File="ui/taboo/taboo_jianzhu_01.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{5583a4d3-296c-4584-9d9c-550d88b0ecf2}">
+                    <WZUIImage Type="WZUIImage" GUID="{84b4e83d-b133-48c7-83da-8f3da072f532}" Name="imgBtnBuildSel_CellTabooMapBtn" File="ui/taboo/taboo_jianzhu_01.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{050566e3-b774-45a3-aa17-08b0d2b527b9}" />
+                <WZUIImage Type="WZUIImage" GUID="{8634df05-8ff1-426b-b5ab-23727e1d53d9}" File="ui/common/commom_icon_jinjihaian.png" UseOriginSize="True" RelativePosition="0.5,0.5" Name="imgName_CellTabooMapBtn" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{95ddd7a6-2b5f-4db8-8037-a51e58459fff}" Name="conCloud_CellTabooMapBtn" Visible="True">
+                <WZUIImage Type="WZUIImage" GUID="{ec544a3b-6fe1-4cfd-9778-76b6a12efe7a}" File="ui/taboo/taboo_yun_01.png" UseOriginSize="True" RelativePosition="0.740691,0.453621" />
+                <WZUIImage Type="WZUIImage" GUID="{d99bdbff-2970-44ad-a5db-f702db703f1f}" File="ui/taboo/taboo_yun_01.png" UseOriginSize="True" RelativePosition="0.570551,0.287575" />
+                <WZUIImage Type="WZUIImage" GUID="{f7fce504-4c04-4269-8ac5-1ba8dad9e92b}" File="ui/taboo/taboo_yun_01.png" UseOriginSize="True" RelativePosition="0.756158,0.707696" />
+                <WZUIImage Type="WZUIImage" GUID="{e686bef6-d0af-4744-bbed-d2b57f36987c}" File="ui/taboo/taboo_yun_01.png" UseOriginSize="True" RelativePosition="0.524149,0.690372" />
+                <WZUIImage Type="WZUIImage" GUID="{642c70be-45a0-4d93-bd9e-451558418e18}" File="ui/taboo/taboo_yun_02.png" UseOriginSize="True" RelativePosition="0.307316,0.407202" />
+                <WZUIImage Type="WZUIImage" GUID="{d848d938-0709-4031-8c97-9d261c704aaa}" File="ui/taboo/taboo_yun_02.png" UseOriginSize="True" RelativePosition="0.967322,0.198113" />
+                <WZUIImage Type="WZUIImage" GUID="{5e921452-c052-4389-b507-8ac64d9b5c20}" File="ui/taboo/taboo_yun_02.png" UseOriginSize="True" RelativePosition="0.302229,0.226986" />
+                <WZUIContainer Type="WZUIContainer" GUID="{4133d785-9c4f-4494-b0d9-ca28eac40e59}" Name="conOpenLv_CellTabooMapBtn">
+                    <WZUIImage Type="WZUIImage" GUID="{0a18936a-bc36-4c45-b68d-0722e6923ba0}" File="ui/common/common_scale9_heidi4.png" UseOriginSize="True" Opacity="178" ScaleX="0.4" ScaleY="0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b98e6dfc-3ee2-4c9b-91a7-e39183b3b69c}" Text="15级开放" LabelStyleKey="C1_F22" Name="labOpenLv_CellTabooMapBtn" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTabooMapBtn>

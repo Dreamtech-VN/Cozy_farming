@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" ?>
+<WndWeddingDetails GUID="{6B5446CF-104A-42a6-955C-95E3175F1F81}">
+    <WZUIWindow Type="WZUIWindow" GUID="{1AC350DD-328D-4894-B9F0-CEAC9816C9D4}" AbsContentSize="772,530" UseAbsSize="True" ShowAll="True" LuaObjectName="WndWeddingDetails" Name="WndWeddingDetails" LuaTouchBeganFunction="onTouchBegan" NameCreate="True">
+        <WZUIContainer GUID="{CF117A0E-C7D8-4b45-ACBA-75493A8DF07A}" RelativeSize="1,1" Type="WZUIContainer">
+            <WZUI9Image File="ui/common/common_scale9_di19.png" GUID="{3A700610-CB3B-4422-A736-218CD4C97377}" Type="WZUI9Image" UseOriginSize="False" CapInsets="86,89,1,1" Visible="True" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{DBA4326E-938B-4788-858E-3D183D097E67}" AbsContentSize="757,386" UseAbsSize="True" RelativePosition="0.5,0.528301" AbsPosition="386,273">
+            <WZUI9Image Type="WZUI9Image" GUID="{A1B7CC1C-F33C-4f6e-A1A4-6C774143D709}" File="ui/common/common_scale9_di20.png" Scale="1" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{17D6E25F-7ABB-4bf4-B182-DA6D384AA741}" AbsContentSize="762,385" UseAbsSize="True" RelativePosition="0.5,0.528301">
+            <WZUIImage Type="WZUIImage" GUID="{5E2B0BE5-B096-413b-9B62-F5C939FADF29}" File="ui/marrige/marry_pic_bg1.png" UseOriginSize="False" RelativePosition="0.5,0.5" AbsPosition="381,193.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{27F2FA43-139A-4fdd-A579-21065CDB3AC0}" AbsContentSize="385,336" UseAbsSize="True" RelativePosition="0.283464,0.5" AbsPosition="216,192.5">
+                <WZUIImage Type="WZUIImage" GUID="{BC73A63F-2E05-4198-9615-8380CEADB65B}" File="ui/marrige/marry_pic_bg2.png" UseOriginSize="False" RelativePosition="0.479221,0.449405" AbsPosition="184.5,151" />
+                <WZUIContainer Type="WZUIContainer" GUID="{6B2E9A8C-E2D5-4d94-8A3C-A5023A4EAD7B}" Name="conGirl_WndWeddingDetails" AbsContentSize="192.5,336" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.0233766,0.5" AbsPosition="9,168" />
+                <WZUIContainer Type="WZUIContainer" GUID="{8D0A1311-9B49-4c8c-B81B-9116ECDAB4D8}" Name="conMan_WndWeddingDetails" AbsContentSize="192.5,336" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="0.968831,0.5" AbsPosition="373,168" />
+                <WZUIImage Type="WZUIImage" GUID="{E6C8669E-88B2-4f8d-8F16-C9F9CFFBD582}" File="ui/common/common_icon_yy.png" UseOriginSize="True" RelativePosition="0.712987,0.0595244" AbsPosition="274.5,20.0002" Opacity="153" />
+                <WZUIImage Type="WZUIImage" GUID="{B75414F5-E97E-4f7f-A982-B54D21858977}" UseOriginSize="True" File="ui/common/common_icon_yy.png" RelativePosition="0.266234,0.0565482" AbsPosition="102.5,19.0002" Opacity="153" />
+                <WZUIContainer Type="WZUIContainer" GUID="{FB6C1742-0F2A-4777-8BB2-39ECC30924A6}" AbsContentSize="380,60" UseAbsSize="True" RelativePosition="0.448052,0.0148815" AbsPosition="172.5,5.00017" Name="conPrice_WndWeddingDetails">
+                    <WZUIImage Type="WZUIImage" GUID="{BD48A9AE-3066-41cb-B245-FE183CA96A57}" File="ui/common/common_scale9_heidi11.png" UseOriginSize="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9B40F080-1A8A-4ed2-81A6-7506E36DC683}" Color="255,255,255" FontSize="22" Text="" RelativePosition="0.318421,0.475" AbsPosition="93.9998,28.5" Name="txtWeddingType_WndWeddingDetails" LabelStyleKey="C1_F22_S4_C16" />
+                    <WZUIImage Type="WZUIImage" GUID="{0AE798E6-BE56-42cd-A8F0-B5C887CE8D6A}" File="" UseOriginSize="True" Scale="0.8" RelativePosition="0.5,0.475" AbsPosition="161,28.5" Name="imgCostIcon_WndWeddingDetails" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{EA979472-2D26-4fe4-AAA4-37270553E5CC}" Color="255,255,255" FontSize="22" Text="2013" RelativePosition="0.549999,0.475" AbsPosition="182,28.5" Name="txtWeddingCount_WndWeddingDetails" AnchorPoint="0,0.5" LabelStyleKey="C1_F22_S4_C16" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c4ea791e-985a-42cf-a86c-1b0723ed6304}" Color="138,122,106" FontSize="22" Text="" RelativePosition="0.68684,0.475" AbsPosition="182,28.5" Name="txtWeddingDiscount_WndWeddingDetails" AnchorPoint="0,0.5" LabelStyleKey="C2_F24" Visible="False" TextKey="" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4d2050a6-057f-4c4e-99bc-8ced15cda46c}" Color="158,0,0" FontSize="22" Text="/" RelativePosition="0.742103,0.575" AbsPosition="182,28.5" Name="txtWeddingLine_WndWeddingDetails" AnchorPoint="0,0.5" LabelStyleKey="" Rotation="80" ScaleY="2" Visible="False" ScaleX="1" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{E1B129D6-00D2-4aac-896D-AA59D8F0A61E}" AbsContentSize="338,354" UseAbsSize="True" RelativePosition="0.736221,0.497403" AbsPosition="561,191.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{755BE9F0-0D51-46a6-97B7-02C4DBCC03D1}" File="ui/common/common_shade_chushouheidi.png" Opacity="153" />
+                <WZUIImage Type="WZUIImage" GUID="{BB50A59C-011F-4aaa-ABFA-EE97E7BC6B6F}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.227345,0.918303" AbsPosition="76.8426,325.079" />
+                <WZUIImage Type="WZUIImage" GUID="{BA3B4AFC-DEA1-47da-A928-78DCB1A81BBC}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" FlipX="True" RelativePosition="0.760779,0.918303" AbsPosition="257.143,319.079" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{47AC6929-C347-4f00-B021-25853C8ECCB3}" TextKey="WEDDING_PRIVILEGE" LabelStyleKey="" RelativePosition="0.5,0.923953" AbsPosition="169,327.079" Name="txt1_WndWeddingDetails" FontSize="24" Color="255,227,116" />
+                <WZUIContainer Type="WZUIContainer" GUID="{400B3B5B-2EF7-4fb6-9357-DAE8362464FD}" AbsContentSize="324,3" UseAbsSize="True" RelativePosition="0.5,0.355933" AbsPosition="169,126">
+                    <WZUIImage Type="WZUIImage" GUID="{47A377AE-8E75-424f-A85E-27F5031664C4}" File="ui/common/common_scale9_fengexian2.png" Opacity="64" />
+                </WZUIContainer>
+                <WZUITableContainer Type="WZUITableContainer" GUID="{4BBA5F53-AFC3-46ad-A0F3-ACAF3609491D}" AbsContentSize="330,175" UseAbsSize="True" EnableMoveHorizontal="False" Name="conMoveing_WndWeddingDetails" RelativePosition="0.5,0.62147" AbsPosition="169,220" AnchorPoint="0.5,0.5">
+                    <CellElement Type="WZUIContainer" GUID="{DA521CA4-7A65-4b48-91C7-64716B6EF77A}" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" AbsPosition="165,0.5" AbsContentSize="330,175" UseAbsSize="True">
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{6EF24EDB-6981-4b6e-A675-A3CB8153DEA0}" Name="txtDressInfo_WndWeddingDetails" MaxWidth="325" AfterDrawEnable="False" TouchContainerEnable="False" AnchorPoint="0.5,1" RelativePosition="0.5,0.971429" Tag="0" />
+                    </CellElement>
+                </WZUITableContainer>
+                <WZUIImage Type="WZUIImage" GUID="{8886795C-1639-411e-A5D0-142B4EA9B9B9}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.227345,0.302593" AbsPosition="86.8421,107.118" TouchSwallow="True" TouchEnable="False" />
+                <WZUIImage Type="WZUIImage" GUID="{ED167450-7E29-4d4c-A2AB-5232BD7DD305}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" FlipX="True" RelativePosition="0.760779,0.305858" AbsPosition="243.429,108.274" TouchEnable="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{A0BD7189-2417-4fb0-BF58-4F919623A8B3}" TextKey="GET_DRESS" LabelStyleKey="" RelativePosition="0.496402,0.297117" AbsPosition="167.784,105.179" TouchEnable="False" Name="txt2_WndWeddingDetails" FontSize="24" Color="255,227,116" />
+                <WZUIContainer Type="WZUIContainer" GUID="{2017E3D5-FDE8-4976-80F0-935A14A16A9A}" AbsContentSize="300,78" UseAbsSize="True" RelativePosition="0.5,0.129963" AbsPosition="169,46.007">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{111869CD-EC5B-406f-BE26-96AD0B1BCACE}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5" AbsPosition="170.216,47.0069" ColumnCount="4" EnableMoveVertical="False" EnableMoveoutContainer="True" EnableBounceBack="True" IsVerticalMode="True" Name="conTableDress_WndWeddingDetails" EnableHorizontalScroll="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5361CB6D-B6F6-42e2-8673-22019570CF03}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.959058,1.06184" AbsPosition="730.802,408.807">
+                <Button Type="WZUIButton" LuaDoneFunctionName="onClickExit" GUID="{0EA001CE-0798-4e72-9ABF-B894A193E624}">
+                    <NormalElement Type="WZUIContainer" GUID="{0BAA1E59-E4D8-4fed-9CFA-AC997945721F}">
+                        <WZUIImage Type="WZUIImage" GUID="{2F8D0948-3EBB-4986-9D95-CE1444F435B4}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{7A4DD952-103B-4ac6-9DE1-30B6B9C5D6D6}">
+                        <WZUIImage Type="WZUIImage" GUID="{19D4B70A-D985-48c0-B05B-76BDCDFDE6C8}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{9F3C3BCE-D0BA-490a-AA7C-3C3CE8F20AA6}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{F2B57F66-A5C6-447e-BF72-8569A878E1BC}" AbsContentSize="761,85" UseAbsSize="True" RelativePosition="0.5,0.0849057" AbsPosition="386,45">
+            <Button Type="WZUIButton" AbsContentSize="132,64" UseAbsSize="True" RelativePosition="0.5,0.523529" AbsPosition="380.5,44.5" LuaDoneFunctionName="onClickWedding" GUID="{4917F58A-8A6B-4295-BD96-BF2CD9E91A85}">
+                <NormalElement Type="WZUIContainer" GUID="{26D8A8FC-5355-4cdb-BF1F-FCB8C4292AB7}">
+                    <WZUIImage Type="WZUIImage" GUID="{7CD860AB-11D0-4f7e-9164-192A3D934633}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{06ECF209-682A-49c3-81B4-8007674287A2}">
+                    <WZUIImage Type="WZUIImage" GUID="{E43FD74B-F773-41a9-B339-F1CBB6A956D5}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{592E6EA6-D6C4-4c30-B569-939D3BCAD788}" />
+            </Button>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{B0D8B559-E1B2-4f56-80E2-57939481F1CD}" TextKey="WEDDING" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="0,72,3" FontSize="24" RelativePosition="0.5,0.523529" AbsPosition="380.5,44.5" Name="txtWedding_WndWeddingDetails" />
+        </WZUIContainer>
+        <WZUIContainer GUID="{FCF4C449-F49E-4991-9144-5639859C0FA2}" RelativeSize="1,1" Type="WZUIContainer" TouchEnable="False" Visible="True" RelativePosition="0.5,0.498113" AbsPosition="386,264">
+            <WZUIImage Type="WZUIImage" GUID="{9D1C1EC1-948B-4a53-BDA1-8A62E0BAF40A}" File="ui/marrige/marry_icon_jhcz1.png" UseOriginSize="True" RelativePosition="0.00758362,0.628019" AbsPosition="5.88489,335.99" />
+            <WZUIImage Type="WZUIImage" GUID="{CE4CA4CD-EC12-418e-91C4-697D36FFFD96}" File="ui/marrige/common_pic_hd4.png" UseOriginSize="True" RelativePosition="-0.00840636,0.585624" />
+            <WZUIImage Type="WZUIImage" GUID="{07469728-C1EE-42e1-9521-6C10ED12AA3D}" File="ui/marrige/marry_icon_jhcz2.png" UseOriginSize="True" RelativePosition="0.160511,1.03003" AnchorPoint="0.5,1" />
+            <WZUIImage Type="WZUIImage" GUID="{2C278A00-7C26-4d41-A059-E23A340768D8}" File="ui/marrige/common_pic_1dhwly.png" UseOriginSize="True" RelativePosition="0.0259784,0.989701" Scale="1" />
+            <WZUIImage Type="WZUIImage" GUID="{74A70D4B-D17C-45bc-A734-94119180F33F}" File="ui/marrige/marry_icon_jhcz2.png" UseOriginSize="True" RelativePosition="0.84973,1.03003" AnchorPoint="0.5,1" ScaleX="-1" />
+            <WZUIImage Type="WZUIImage" GUID="{E3C3C160-9F6F-408e-BB96-055EBB801EFB}" File="ui/marrige/marry_icon_jhcz4.png" UseOriginSize="True" RelativePosition="0.5,1.01664" AnchorPoint="0.5,1" />
+            <WZUIImage Type="WZUIImage" GUID="{D9F647BB-62C7-4abf-BE02-5BB5B8E62BD9}" File="ui/marrige/common_pic_hd2.png" UseOriginSize="True" RelativePosition="0.304378,0.968911" Rotation="15" />
+            <WZUIImage Type="WZUIImage" GUID="{9EDA363E-8903-4ea2-A5FD-5E64E50FFA93}" File="ui/marrige/common_pic_hd2.png" UseOriginSize="True" RelativePosition="0.700899,0.969342" ScaleX="-1" Rotation="-15" />
+            <WZUIImage Type="WZUIImage" GUID="{263FD3CD-0CA9-489b-9719-8A93D1417809}" File="ui/marrige/marry_icon_jhcz1.png" UseOriginSize="True" ScaleX="-1" RelativePosition="0.992695,0.634586" AbsPosition="770.332,339.504" />
+            <WZUIImage Type="WZUIImage" GUID="{F0859900-BF6A-44ba-B53C-FA12ACF3B923}" File="ui/marrige/common_pic_1dhwly.png" UseOriginSize="True" RelativePosition="0.977243,0.994747" Scale="0.7" />
+            <WZUIImage Type="WZUIImage" GUID="{202D5D79-3B63-4c2f-A79C-E8BD0D39D846}" File="ui/marrige/common_pic_hd4.png" UseOriginSize="True" RelativePosition="0.992532,0.743011" Scale="1.4" />
+            <WZUIImage Type="WZUIImage" GUID="{94A32F8A-5C6D-4a4a-A62A-916271C0B571}" File="ui/marrige/common_pic_hd4.png" UseOriginSize="True" RelativePosition="0.995022,0.438722" />
+            <WZUIImage Type="WZUIImage" GUID="{DBDE0E71-2F12-4c12-A62B-52F670E12751}" File="ui/common/marry_icon_jhhhhl.png" UseOriginSize="True" RelativePosition="0.492512,0.95653" Name="imgTitle_WndWeddingDetails" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{E9E65B54-CF9C-40e7-BB47-120DA5D561A7}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.995495,0.528558" AbsPosition="768.522,280.136" Name="conRight_WndWeddingDetails" Visible="False">
+            <WZUIButton Type="WZUIButton" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="169,216.568" GUID="{F94B4BF2-C73B-47a9-9963-8CAE42E5F2A3}" LuaDoneFunctionName="onClickNextPage">
+                <NormalElement Type="WZUIContainer" GUID="{D0274777-94D6-4bbb-B91F-7418A4B74046}">
+                    <WZUIImage Type="WZUIImage" GUID="{3AA44BF3-401E-4c25-A4DB-D0C611A6BC23}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{823F6910-42AB-4b62-A231-DDD3AF3FB4DC}">
+                    <WZUIImage Type="WZUIImage" GUID="{B5AA8F2E-E9C8-4391-943A-35B07013EA50}" File="ui/common/common_icon_jtqh.png" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{0BFAC0AA-0538-4458-B8FF-14B9BD1F3B72}" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{24B945C5-2ABA-4b2c-A466-AE0E9BF473F1}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.00412096,0.528558" AbsPosition="3.18138,280.136" ScaleX="-1" Name="conLeft_WndWeddingDetails" Visible="False">
+            <WZUIButton Type="WZUIButton" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="-315.387,41.2837" GUID="{7BC53085-E417-4624-AB0D-587A5B7CDAA2}" LuaDoneFunctionName="onClickFrontPage">
+                <NormalElement Type="WZUIContainer" GUID="{DFEADE3A-4A89-485d-9D31-6159C56E1DF0}">
+                    <WZUIImage Type="WZUIImage" GUID="{5756B424-6724-4252-9666-4F15D217667E}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{3B64D6F7-8105-48fe-A808-55CFF8153795}">
+                    <WZUIImage Type="WZUIImage" GUID="{B82937A8-D201-4ab2-84B9-C5845878A7F4}" File="ui/common/common_icon_jtqh.png" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{A854E0EC-7207-48da-A723-0C98B66B4824}" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndWeddingDetails>

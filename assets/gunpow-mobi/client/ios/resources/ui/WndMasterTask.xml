@@ -1,0 +1,8 @@
+<WndMasterTask GUID="{84ca46dd-7d2d-4e3b-9413-ccc69773744a}">
+    <WZUIWindow Type="WZUIWindow" GUID="{36febc54-5fbc-4136-b065-1e7abfaf8ee2}" Name="WndMasterTask" LuaObjectName="WndMasterTask" ShowAll="False" LuaTouchBeganFunction="onTouchBegan" NameCreate="True" RelativePosition="0.5,0.38" AbsContentSize="900,385" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{e314ec46-2238-4bdf-a90d-27813874f62a}" Name="conMain_WndMasterTask" RelativePosition="0.5,0.5" AbsContentSize="900,385" UseAbsSize="True">
+            <WZUIFreeListContainer EnableMoveHorizontal="False" GUID="{d67d9ae1-9046-4b93-b257-2d99f7ad1597}" Name="freecon_WndMasterTask" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIFreeListContainer" AbsContentSize="900,385" UseAbsSize="True" Resistance="1" EnableVerticalScroll="True" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" ShowAll="True" />
+        </WZUIContainer>
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{0a44a477-7ba6-4dfd-af74-86e7de0a5981}" MaxWidth="500" RelativePosition="0.5,-0.086" Name="txtTime" ShowAll="True" />
+    </WZUIWindow>
+</WndMasterTask>

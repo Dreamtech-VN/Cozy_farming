@@ -1,0 +1,14 @@
+﻿<CellServantTime GUID="{413d7938-1f9f-449b-afcf-a11e65090df5}">
+    <WZUIContainer Type="WZUIContainer" GUID="{89eac979-f655-4dbe-92fa-d7a1be9a878d}" LuaObjectName="CellServantTime" Name="CellServantTime" NameCreate="True" AbsContentSize="340,42" UseAbsSize="True">
+        <WZUI9Image Type="WZUI9Image" GUID="{ffe25680-c808-4dfd-a2cd-f07ce72e3065}" File="ui/common/common_scale9_di40.png" />
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{d0e59a25-6726-4162-993e-883d8e58db79}" MaxWidth="320" Name="ftxtCost_CellServantTime" AnchorPoint="0,0.5" RelativePosition="0.07,0.5" />
+        <WZUIContainer Type="WZUIContainer" GUID="{55360d19-3e08-4d44-8a32-d33eeed93cfd}" RelativeSize="1.01,1.05" Name="conSel_CellServantTime" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{893e5b3d-52a8-44d3-88dc-3308f7a8282e}" File="ui/common/common_scale9_wbbsxz.png" UseOriginSize="False" Scale="1" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{f42f1274-81b2-430b-9815-5e5c23a7c1d3}" LuaDoneFunctionName="onClick">
+            <NormalElement Type="WZUIContainer" GUID="{468a4397-8396-4bb9-ba0a-771fa44a38ba}" />
+            <SelectElement Type="WZUIContainer" GUID="{7994fde4-dddd-46ee-bc4f-b9190a1aaaf3}" />
+            <DisableElement Type="WZUIContainer" GUID="{d8fac351-b3dd-4234-a597-edcea662f73a}" />
+        </Button>
+    </WZUIContainer>
+</CellServantTime>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><CellBossHallList GUID="{B59BE011-4854-4c3a-A765-A7B6819E7585}">
+    <WZUIContainer GUID="{1BBA6F85-72D4-40c6-8F9D-8587B812441A}" LuaObjectName="CellBossHallList" Name="CellBossHallList" NameCreate="True" RelativeSize="0.55,0.1" Type="WZUIContainer">
+        <Button GUID="{D8F01D5E-395C-4b35-A7A1-05DEF999CC5E}" LuaDoneFunctionName="onClickBg_CellBossHallList" RelativeSize="1,1" Type="WZUIButton">
+            <NormalElement GUID="{10B25A7F-8BEC-4d65-8E90-10DAC89598EE}" Type="WZUIContainer">
+                <WZUIImage File="temp/article_bg_nor.png" GUID="{E3872AAC-525D-4594-A260-E230D0687B32}" Type="WZUIImage" UseOriginSize="False"/>
+            </NormalElement>
+            <SelectElement GUID="{4A596B18-43EA-4c2b-A2E0-0DDBBBE5A3E6}" Type="WZUIContainer">
+                <WZUIImage File="temp/article_bg_sel.png" GUID="{0A8E7951-623F-4251-AB9E-5435D7D5F008}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="False"/>
+            </SelectElement>
+            <DisableElement GUID="{011C3EB6-D30A-4714-809E-D45107B0E03D}" Type="WZUIContainer"/>
+        </Button>
+        <WZUIImage File="temp/gold_s.png" GUID="{71C37413-A892-485b-BD69-B199C0640512}" Name="imgIsLock_CellBossHallList" RelativePosition="0.0777459,0.498437" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+        <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" FontSize="28" GUID="{5271D388-2BA0-4436-92A8-280FCD1FF411}" Name="txtRoomId_CellBossHallList" RelativePosition="0.119791,0.5" Text="" TouchEnable="False" Type="WZUILabelTTF"/>
+        <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="155,100,0" FontSize="28" GUID="{E78BDF60-51C5-4255-BB40-08D69F3585C1}" Name="txtRoomName_CellBossList" RelativePosition="0.280777,0.5" Text="" TouchEnable="False" Type="WZUILabelTTF"/>
+        <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" Color="255,255,255" FontSize="28" GUID="{4D4289B3-17B5-44b9-AB41-A4EB382E4EB3}" Name="txtPerNum_CellBossList" RelativePosition="0.661742,0.5" Text="" TouchEnable="False" Type="WZUILabelTTF"/>
+        <WZUIImage File="temp/roomlist_battle_zh-Hans.png" GUID="{9C4B3F53-EED2-4751-85B5-DD894882B529}" Name="imgRoomState_CellBossHallList" RelativePosition="0.888353,0.5" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+    </WZUIContainer>
+</CellBossHallList>

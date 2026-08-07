@@ -1,0 +1,99 @@
+﻿<WndRuneBook GUID="{037187c1-3118-445e-89c7-6428ba050c0d}">
+    <WZUIWindow Type="WZUIWindow" GUID="{d121ce5a-c21c-4124-b265-3c5efe14582d}" LuaObjectName="WndRuneBook" Name="WndRuneBook" AbsContentSize="960,640" UseAbsSize="True" ShowAll="False" LuaTouchBeganFunction="onTouchBegin">
+        <WZUIContainer Type="WZUIContainer" GUID="{c1ddb1b7-47e6-4fb1-9c3b-254478ebc900}" AbsContentSize="1136,640" UseAbsSize="True" Visible="True">
+            <WZUIImage Type="WZUIImage" GUID="{163a67c1-9117-4b79-a708-8ff19b10b160}" File="ui/bless/common_pic_qfbj.png" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{5e13d3cb-da67-4509-9aec-2e8dfb8fe69a}" Name="conTotal_WndRuneBook" AbsContentSize="960,640" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+            <WZUIContainer Type="WZUIContainer" GUID="{85888d3a-76f8-48e5-9252-633a30c46e31}" Name="" ShowAll="False" AbsContentSize="960,124" AnchorPoint="1,1" RelativePosition="1,1" UseAbsSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{3d69c670-b254-4e16-bf65-f48a042430e3}" Name="conTop_WndRuneBook" ShowAll="True" AbsContentSize="960,130" AnchorPoint="0.5,1" RelativePosition="0.5,1" UseAbsSize="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{b78ee59f-a8be-4db9-abb2-dcb087595d07}" AbsContentSize="933,55" UseAbsSize="False" RelativePosition="1,-0.027" Visible="True" ShowAll="False" Name="conType_WndRuneBook" AnchorPoint="1,0" NoBorder="False" RelativeSize="0.972,0.43" AbsPosition="32.0817,541.469" UseAbsCoordinate="False" Order="0" />
+                <WZUITableContainer Type="WZUITableContainer" GUID="{fb0187c9-473d-4b3a-8b0d-bd3f09fabb98}" EnableMoveVertical="False" ColumnCount="1" Name="tabType_WndRuneBook" CellElementHeight="0.113" CellElement="" EnableHorizontalScroll="True" IsVerticalMode="False" HideTopElement="False" HideBottomElement="False" EnableBounceBack="True" HorizontalInterval="0" HorizontalAbsInterval="0" ShowAll="False" VerticalInterval="0" VerticalAbsInterval="0" VisibleHeight="70" EnableVerticalScroll="False" EnableMoveoutContainer="False" EnableHideUnvisible="False" UseAbsSize="True" AbsContentSize="933,55" AnchorPoint="1,0" RelativePosition="1,-0.016129" />
+                <WZUIContainer Type="WZUIContainer" GUID="{6e9299f7-b241-4242-bdf5-cfc2814645ea}" Visible="True" AbsContentSize="960,509" UseAbsSize="True" RelativePosition="0.5,0" ShowAll="False" NoBorder="False" AnchorPoint="0.5,1" Name="conMiddle_WndRuneBook">
+                    <WZUIContainer Type="WZUIContainer" GUID="{471d8360-c4c2-4ef6-8b12-af2515a9c491}" Name="conMidBg_WndRuneBook" AbsContentSize="960,440" UseAbsSize="True" Order="0" RelativePosition="0.5,1" AnchorPoint="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{e0c00ac6-bdeb-402d-88fa-28c39aa9a35d}" File="ui/common/common_scale9_di72.png" ScaleX="1" NoBorder="False" />
+                    </WZUIContainer>
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{15fb6aee-a6d9-4691-a6bf-038474df4f82}" EnableMoveHorizontal="False" ColumnCount="3" CellElementHeight="0.32" Name="tab_WndRuneBook" EnableHideUnvisible="False" AbsContentSize="920,380" UseAbsSize="False" ShowAll="False" NoBorder="False" RelativePosition="0.5,0.137864" AnchorPoint="0.5,0" RelativeSize="0.98,0.82" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{f7337a9e-de47-4f14-9679-8f8d9db4ba51}" Visible="True" Name="txtIsRune_WndRuneBook" FontSize="24" Text="暂无改类型的符文" TextKey="RUNEBOOK16" ShowAll="True" LabelStyleKey="C7_F24" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{d3db16cb-56bc-4790-b295-ba3ff20fb2e6}" Visible="True" AbsContentSize="960,70" UseAbsSize="True" RelativePosition="0.5,0" ShowAll="False" AnchorPoint="0.5,0" Name="conBottom_WndRuneBook">
+                        <WZUIContainer Type="WZUIContainer" GUID="{103d2169-752a-49d3-a3fb-d7065dfac7a4}" Name="conBottomBG_WndRuneBook" AbsContentSize="960,70" UseAbsSize="True">
+                            <WZUI9Image Type="WZUI9Image" GUID="{60d1c678-18fb-4198-a8fd-65d7c6211764}" File="ui/common/common_scale9_di10.png" />
+                        </WZUIContainer>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d536fbd7-ea4d-4a91-921e-5965d95ca513}" FontSize="22" Text="等级筛选" RelativePosition="0.0703297,0.487936" EnableStroke="True" Color="255,236,193" StrokeSize="4" StrokeColor="128,54,13" TextKey="RUNEBOOK1" ShowAll="False" Font="" Name="txtTypeLv_WndRuneBook" />
+                        <WZUICheckBoxGroup Type="WZUICheckBoxGroup" GUID="{922c201f-c532-41e4-81ad-f9872242138d}" AbsContentSize="240,55" UseAbsSize="True" RelativePosition="0.248504,0.520318" Name="checkBox_WndRuneBook" ShowAll="False">
+                            <CheckBox Type="WZUICheckBox" GUID="{a950e91d-785c-4787-9b3e-49878525d63f}" LuaSelectedFunctionName="onCheckLevel" Name="checkLevel1_WndRuneBook" Tag="1" AbsContentSize="42,43" UseAbsSize="True" RelativePosition="0.104167,0.5">
+                                <CheckElement Type="WZUIContainer" GUID="{c9b25654-62bf-4099-96f4-983ae8b94bb7}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{a33d9729-6ce8-44e9-94ea-0632d6ce5719}" File="ui/common/common_scale9_di9.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7aec0f54-4dbe-498a-a941-d885462ae565}" FontSize="24" Color="9,60,48" Text="1" Visible="True" RelativePosition="0.47619,0.5" LabelStyleKey="C5_F24" />
+                                </CheckElement>
+                                <CheckElement Type="WZUIContainer" GUID="{d61d9c3c-0bb9-4608-864c-b0d9ca8c2370}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{b76c2d01-8154-4325-aadb-2c708c5b2f20}" File="ui/common/common_scale9_di76.png" UseOriginSize="True" />
+                                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{9e2945e1-676a-4d44-81db-a029d6aa1324}" CharMapFileName="ui/common_num/common_num_pata2.png" Text="1" Height="24" Width="16" UseOriginSizeProportion="False" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+                                </CheckElement>
+                            </CheckBox>
+                            <CheckBox Type="WZUICheckBox" GUID="{54dc9e79-eabc-4f41-a405-09237f4d0c10}" LuaSelectedFunctionName="onCheckLevel" Name="checkLevel2_WndRuneBook" Tag="2" AbsContentSize="42,43" UseAbsSize="True" RelativePosition="0.3,0.5">
+                                <CheckElement Type="WZUIContainer" GUID="{50363fef-1ee5-4fa5-900b-e57f7c80b7e2}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{cd9559ff-1903-47d8-87dd-17306b757d31}" File="ui/common/common_scale9_di9.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{5336e85c-fba0-4e33-b48e-caf967698eda}" FontSize="24" Color="9,60,48" Text="2" LabelStyleKey="C5_F24" />
+                                </CheckElement>
+                                <CheckElement Type="WZUIContainer" GUID="{cbd86fae-a584-466a-a0fd-12aacc4090d8}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{9cc19c03-a143-400e-a5af-067aa7c4748a}" File="ui/common/common_scale9_di76.png" UseOriginSize="True" />
+                                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{eaf021d1-6a54-485c-9db0-1dd470f942d4}" CharMapFileName="ui/common_num/common_num_pata2.png" Height="24" Width="16" Text="2" Scale="1.1" UseOriginSizeProportion="False" UseOriginSize="True" />
+                                </CheckElement>
+                            </CheckBox>
+                            <CheckBox Type="WZUICheckBox" GUID="{66a6d4fe-3876-4b92-8586-8d3ad7b29697}" LuaSelectedFunctionName="onCheckLevel" Name="checkLevel3_WndRuneBook" Tag="3" AbsContentSize="42,43" UseAbsSize="True">
+                                <CheckElement Type="WZUIContainer" GUID="{67f19fca-0545-44b3-a067-21eef1f9343e}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{5d319e77-b43d-45c6-990b-500ed7212dad}" File="ui/common/common_scale9_di9.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{f5ba25fa-2323-47bd-97fa-2dbf71b69792}" FontSize="24" Color="90,60,48" Text="3" />
+                                </CheckElement>
+                                <CheckElement Type="WZUIContainer" GUID="{1286686a-1164-4c3e-b219-aa49f8662aa3}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{bf31b540-d1b3-4d68-a8c0-5e1a97d369bc}" File="ui/common/common_scale9_di76.png" UseOriginSize="True" />
+                                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{64fc33c8-33ae-42dd-99e3-bf8a632ecdc4}" CharMapFileName="ui/common_num/common_num_pata2.png" Height="24" Scale="1.1" Text="3" Width="16" UseOriginSize="True" UseOriginSizeProportion="False" />
+                                </CheckElement>
+                            </CheckBox>
+                            <CheckBox Type="WZUICheckBox" GUID="{95de7797-f710-44c1-a438-95f60c0d9a9f}" LuaSelectedFunctionName="onCheckLevel" Name="checkLevel4_WndRuneBook" Tag="4" AbsContentSize="42,43" UseAbsSize="True" RelativePosition="0.695833,0.5">
+                                <CheckElement Type="WZUIContainer" GUID="{f7b70905-8dc2-45e2-8dcd-12ccb4fa5a8b}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{988be971-3037-4f54-bade-4d79805194a5}" File="ui/common/common_scale9_di9.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{64c3a998-a98e-4b8a-b99c-faa1efcdd324}" FontSize="24" Color="90,60,48" Text="4" />
+                                </CheckElement>
+                                <CheckElement Type="WZUIContainer" GUID="{32fb9abf-4adf-4cba-8d8d-0b7557c84d64}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{588389db-42f8-4fc2-8581-334af64dd5a5}" File="ui/common/common_scale9_di76.png" UseOriginSize="True" />
+                                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{b79e073c-30aa-4406-a739-a5cc7aa05539}" CharMapFileName="ui/common_num/common_num_pata2.png" Height="24" Scale="1.1" Text="4" UseOriginSize="True" UseOriginSizeProportion="False" Width="16" />
+                                </CheckElement>
+                            </CheckBox>
+                            <CheckBox Type="WZUICheckBox" GUID="{cd9e04df-04f9-4adc-8f9f-1836414d4231}" LuaSelectedFunctionName="onCheckLevel" Name="checkLevel5_WndRuneBook" Tag="5" AbsContentSize="42,43" UseAbsSize="True" RelativePosition="0.891667,0.5">
+                                <CheckElement Type="WZUIContainer" GUID="{eae4da16-47e4-490c-a98d-36d6c9f0aa06}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{79610995-d2a0-4b9a-a545-94809bd4e18d}" File="ui/common/common_scale9_di9.png" UseOriginSize="True" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{387824a9-e33d-4b28-9c35-8b353f844d4e}" FontSize="24" Color="90,60,48" Text="5" />
+                                </CheckElement>
+                                <CheckElement Type="WZUIContainer" GUID="{5f458356-5f24-4b08-864c-e4094983964e}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{cd3875d6-c0b3-4901-911a-b92e3b2ed6b7}" File="ui/common/common_scale9_di76.png" UseOriginSize="True" />
+                                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{9fdf8858-e5ff-4e64-8d5c-4f93564723bb}" CharMapFileName="ui/common_num/common_num_pata2.png" Height="24" Scale="1.1" Text="5" UseOriginSize="True" UseOriginSizeProportion="False" Width="16" />
+                                </CheckElement>
+                            </CheckBox>
+                        </WZUICheckBoxGroup>
+                        <Button Type="WZUIButton" GUID="{c0a6a654-c405-46d4-81db-692adba17000}" LuaDoneFunctionName="onSale" AbsContentSize="125,56" UseAbsSize="True" RelativePosition="0.766716,0.485714" ShowAll="False">
+                            <NormalElement Type="WZUIContainer" GUID="{3922488b-55fd-453d-86c4-bdaa4ffd1adc}">
+                                <WZUIImage Type="WZUIImage" GUID="{3cbf7ec5-417c-4661-9123-6c650d8251e4}" File="ui/common/common_btn_anniu3_1.png" UseOriginSize="True" Scale="0.95" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{909039bb-d56f-4261-ab80-8c836c4e86c5}">
+                                <WZUIImage Type="WZUIImage" GUID="{c8ed82b6-8b7c-4054-a60e-b234a10b0cb2}" File="ui/common/common_btn_anniu3_1_sel.png" UseOriginSize="True" Scale="0.95" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{a71fe5c4-d050-4a36-9027-e923afa223da}" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d7f04b51-3727-44b8-a9f1-3c6e17dad0a2}" Color="255,236,193" EnableStroke="True" FontSize="24" StrokeSize="4" StrokeColor="128,54,13" TextKey="RUNEBOOK2" Name="txtSell_WndRuneBook" />
+                        </Button>
+                        <Button Type="WZUIButton" GUID="{beab1aa0-5924-4e10-b51c-44c5de219ab7}" LuaDoneFunctionName="onGetRune" AbsContentSize="125,56" UseAbsSize="True" RelativePosition="0.90914,0.485714" NoBorder="False" ShowAll="False">
+                            <NormalElement Type="WZUIContainer" GUID="{93f33cdc-af69-4c8b-b99c-b4aa8b9e7e05}" RelativePosition="0.5,0.5">
+                                <WZUIImage Type="WZUIImage" GUID="{01fbc1ef-c855-42c3-ba47-f7f9acf4172a}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" Scale="0.95" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{34addd32-e56c-4dec-b42c-a7960baddb67}">
+                                <WZUIImage Type="WZUIImage" GUID="{6643c1bd-d6b1-4736-a1e7-a20f27b2bc3e}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" Scale="0.95" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{4ee7c63c-89a7-4696-9f0f-e9f0d188f5ab}" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c012b532-537b-480b-bd68-f6f2dbc2479b}" Color="255,236,193" EnableStroke="True" FontSize="24" StrokeColor="0,72,3" StrokeSize="4" TextKey="RUNEBOOK3" Name="txtChest_WndRuneBook" />
+                        </Button>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndRuneBook>

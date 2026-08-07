@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<WndTowerPreview GUID="{3F586A62-657B-425e-8872-EEF9EEA8A6E7}">
+    <WZUIWindow Type="WZUIWindow" GUID="{41E1B419-0962-4b5e-AB77-39DB47DA423C}" Name="WndTowerPreview" LuaObjectName="WndTowerPreview" Order="0" NameCreate="True" LuaTouchBeganFunction="onTouchBegan" Scale="1" AbsContentSize="776,534" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{20DDFDF6-593E-4815-9F5F-8135ACC6B574}" AbsContentSize="114,130" UseAbsSize="True" RelativePosition="1.07153,0.694087" AbsPosition="831.51,370.642">
+            <WZUIContainer AbsContentSize="86,56" AnchorPoint="0.5,0.5" GUID="{A3AAF20E-9756-428c-9575-291DD372F1F5}" RelativePosition="0.306261,0.859399" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True" AbsPosition="34.9138,111.722">
+                <WZUI9Image AbsPosition="0,0" CapInsets="40,34,15,2" File="ui/common/common_btn_biaoqian.png" GUID="{066EE0E8-7CC4-4974-9BD5-728FA01189B0}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1CC3C589-77D9-41f2-9CD1-543E2A482BD4}" FontSize="26" Color="255,236,193" Text="" RelativePosition="0.497101,0.5" StrokeColor="128,54,13" TextKey="RANKING" Name="txtArms2_WndTowerPreview" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" LuaDoneFunctionName="onTowerRankClick" AbsContentSize="86,56" UseAbsSize="True" RelativePosition="0.332577,0.853845" GUID="{2EB1E90C-FF5A-4817-947A-8FA6744B5626}" AbsPosition="37.9138,111">
+                <NormalElement Type="WZUIContainer" GUID="{3FF431D0-872E-49d7-BAF5-876C830CF983}" />
+                <SelectElement Type="WZUIContainer" GUID="{D563C554-D8A3-41ea-AB20-BA54722C4073}" />
+                <DisableElement Type="WZUIContainer" GUID="{9B51C4F8-A3E6-41fd-8151-D1341F497C5D}" />
+            </Button>
+            <Button Type="WZUIButton" AbsContentSize="86,56" UseAbsSize="True" LuaDoneFunctionName="onDailyReward" RelativePosition="-0.0358439,0.123077" AnchorPoint="0,0" GUID="{6906E921-9425-40ec-A5F1-CE9DE5B85DF6}" AbsPosition="-4.0862,16">
+                <NormalElement Type="WZUIContainer" GUID="{1CECC396-B6F6-4241-ADE0-7A298D3D8E9B}" />
+                <SelectElement Type="WZUIContainer" GUID="{B18EA924-D01E-43cc-BC6B-BB9E768B7844}" />
+                <DisableElement Type="WZUIContainer" GUID="{10FE4D2C-F32A-4895-AB31-E4DCE18ED72E}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="" GUID="{1D3DE800-0CFA-4418-BEAE-F1CFF1244463}" Name="conBg_WndTowerPreview" RelativePosition="0.5,0.5" Scale="1" ShowAll="False" Type="WZUIContainer" UseAbsSize="False" Visible="True">
+            <WZUI9Image CapInsets="178,75,1,1" File="ui/common/common_scale9_di5.png" GUID="{272B4171-5E41-4f99-AAC3-DF1EA95A23DB}" Type="WZUI9Image" />
+            <WZUIContainer AbsContentSize="80,80" AnchorPoint="0,1" GUID="{1492BA21-389C-41ca-8E3A-088B16DC1CFB}" RelativePosition="0.902072,1.01277" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <WZUIButton AbsContentSize="0,0" AnchorPoint="0.5,0.5" GUID="{BE2D492C-71AC-4a99-922F-AC37CBF8CDDB}" LuaDoneFunctionName="onClose" Name="btnClose_WndTowerPreview" Order="2" RelativePosition="0.5,0.5" Scale="1" Type="WZUIButton" UseAbsSize="False" LuaActionName="Normal">
+                    <NormalElement GUID="{2612AD09-F785-4cb8-887D-13982F40C8A3}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{C963C2C4-4BD9-48aa-8EF1-DEF0A07C700E}" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                    </NormalElement>
+                    <SelectElement GUID="{0CDD990C-D8F1-4bca-873B-5651586B8798}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{A049E881-8E8F-49d4-A135-B40C7BBCA5A3}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                    </SelectElement>
+                    <DisableElement GUID="{757996A1-E118-48ba-B0C8-B2AAF9F7180D}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="False" AbsContentSize="0,0" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="182,47" GUID="{F26E691D-423F-4153-A811-D3CD428230B8}" RelativePosition="0.5,0.940933" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{C3A58BE6-C45C-4181-A3BE-CC3ECB875E76}" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" TextKey="PVP_RANK_11" RelativePosition="0.5,0.457447" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{BE46603A-A9FA-49fd-A713-2DDCC6720DC3}" UseAbsSize="True" AbsContentSize="760,394" RelativePosition="0.5,0.520585">
+            <WZUI9Image Type="WZUI9Image" GUID="{D7947EEB-73A6-40e5-B9E0-973289E7BCF8}" File="ui/common/common_scale9_di6.png" />
+            <WZUITableContainer Type="WZUITableContainer" GUID="{019D9555-0451-4550-B28D-662EFA8C036D}" UseAbsSize="False" AbsContentSize="" RelativePosition="0.498222,0.505094" AnchorPoint="0.5,0.5" Name="tbconList_WndTowerPreview" EnableMoveHorizontal="False" CellElementHeight="0.3" EnableHideUnvisible="True" RelativeSize="0.95,0.92" ColumnCount="1" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{4D03EF97-183A-484b-8D5F-C8C50D4799A2}" AbsContentSize="480,70" UseAbsSize="True" RelativePosition="0.5,0.0183626" AnchorPoint="0.5,0">
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{547C285A-CAA8-44e3-96DC-ABC2BB52630B}" Name="txtAwardDesc_WndTowerPreview" ShowText="" MaxWidth="480" />
+        </WZUIContainer>
+        <WZUIContainer AnchorPoint="0.5,1" GUID="{C246E177-2264-4737-B862-E88583A1930B}" RelativePosition="1.0622,0.813245" RelativeSize="1,1" TouchContainerEnable="False" TouchEnable="False" Type="WZUIContainer" AbsContentSize="105,130" UseAbsSize="True" Visible="True" AbsPosition="824.267,434.273">
+            <WZUIContainer AbsContentSize="83,60" AnchorPoint="0,0" GUID="{66F2C19D-AA9F-4d47-9B85-5642A8E24E02}" RelativePosition="-0.0190476,0.130769" TouchContainerEnable="False" Type="WZUIContainer" UseAbsSize="True" Name="conGroup2_WndTowerRank" TouchEnable="False" Visible="True">
+                <WZUI9Image CapInsets="40,34,15,2" File="ui/common/common_btn_biaoqian_sel.png" GUID="{276C7B2D-1D26-4ad8-9D7C-08CE72864048}" RelativePosition="0.52,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False" Visible="True" Name="imgArms_WndTowerPreview" />
+                <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,236,193" EnableShadow="False" EnableStroke="True" FontSize="26" GUID="{6DF62793-EB40-4612-8396-4AA37884E725}" Name="txtArms_WndTowerPreview" RelativePosition="0.5,0.5" StrokeColor="128,54,13" StrokeSize="4" Text="奖励" Type="WZUILabelTTF" UseOriginSize="True" TextKey="ATH_REWARD_CHECK" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTowerPreview>

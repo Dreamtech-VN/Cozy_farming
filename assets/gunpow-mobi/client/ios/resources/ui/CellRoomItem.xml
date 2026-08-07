@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" ?>
+<CellRoomItem GUID="{D45F4860-A263-46dd-A755-8437C6808930}">
+    <WZUIContainer Type="WZUIContainer" GUID="{03D3BA44-8DAD-4e5d-934D-7E93C4E62208}" Name="CellRoomItem" AbsContentSize="275,107" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{3AC93A90-8492-4bb7-BBBB-042C796E36BD}" AbsContentSize="275,107" UseAbsSize="True">
+            <WZUI9Image File="ui/common/common_scale9_di18.png" GUID="{666A67B5-EC60-4d89-9BF6-B2232BC2551D}" Type="WZUI9Image" Visible="True" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{FF340E44-99D3-447c-96F4-DD01E440806C}" UseAbsSize="True" AbsContentSize="250,38" RelativePosition="0.5,0.71">
+            <WZUI9Image Type="WZUI9Image" GUID="{64FD2AB2-0E8E-46d8-B45A-F38D2398AE44}" File="ui/common/common_scale9_di8.png" RelativePosition="0.508827,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8841A6A6-3968-46b4-A70A-B4133B09F0D5}" Color="223,116,62" Alignment="Left" AnchorPoint="0,0.5" FontSize="20" Text="" RelativePosition="0.057789,0.5" Name="txtRoomName_CellRoomItem" NameCreate="True" BoldFont="True" MaxLength="16" ChineseLengthPolicy="1" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{34975A50-3A71-47c3-959A-19425CE15E5F}" AbsContentSize="130,55" UseAbsSize="True" RelativePosition="0,0.285653" TouchEnable="False" AbsPosition="67.7376,32" AnchorPoint="0,0.5">
+            <WZUIImage Type="WZUIImage" GUID="{A419E17E-32C3-46f1-B648-7F368FCE2C96}" Name="imgMode_CellRoomItem" NameCreate="True" File="ui/common/common_icon_ppms.png" Visible="False" UseOriginSize="True" Scale="0.5" RelativePosition="0.444982,0.475058" AnchorPoint="1,0.5" AbsPosition="107,29" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{665CFB2F-A06E-4ae6-9A5F-9D5C8E7ADDF0}" FontSize="20" Color="79,60,48" Alignment="Left" AnchorPoint="0,0.5" Text="1100" RelativePosition="0.4,0.66" Name="txtId_CellRoomItem" BoldFont="True" AbsPosition="3,30" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4c9bc359-99d9-42d7-83c6-8ba2d1c31986}" FontSize="20" Color="132,66,29" Alignment="Center" AnchorPoint="0.5,0.5" Text="3/6" RelativePosition="0.66,0.27" Name="txtPCnt_CellRoomItem" NameCreate="True" BoldFont="True" AbsPosition="139.453,39.9987" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4c541129-05a3-4b0e-bf9f-5ebd6a409e58}" LabelStyleKey="C5_F20" Text="ID:" RelativePosition="0.25,0.66" Name="txtIdT_CellRoomItem" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{80d3329f-1097-4593-b20f-66e6fae8cae6}" LabelStyleKey="C5_F20" Text="" RelativePosition="0.32,0.27" TextKey="PEOPLE_NUM" Name="txtPCntT_CellRoomItem" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{CB32EF35-526C-4c1c-88C4-524276C87737}" AbsContentSize="80,107" UseAbsSize="True" RelativePosition="1.01322,0.5" AbsPosition="460,32" AnchorPoint="1,0.5">
+            <WZUIImage Type="WZUIImage" GUID="{6F2AA456-015E-4b3c-BC01-38F2CACCC00A}" File="ui/common/common_icon_suo.png" UseOriginSize="True" RelativePosition="0.666385,0.271966" Name="imgLock_CellRoomItem" NameCreate="True" Visible="False" Scale="0.4" AbsPosition="22.7305,33.737" />
+            <WZUIContainer Type="WZUIContainer" GUID="{C635337D-CB9C-442e-AB23-1913905BA167}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.577303,0.729111" AbsPosition="44,33">
+                <WZUIImage Type="WZUIImage" GUID="{56F9E489-402F-4be5-895C-D99A5670160A}" File="ui/common/common_icon_dengjb.png" UseOriginSize="True" AnchorPoint="1,1" RelativePosition="0.9875,0.96875" AbsPosition="79,62" Name="imgState_CellRoomItem" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6D59649C-4487-41e9-A6B0-125BC71BA3E9}" FontSize="20" Color="255,236,193" Text="W" RelativePosition="0.75,0.72" Name="txtState_CellRoomItem" NameCreate="True" BoldFont="True" AbsPosition="63,48.6" EnableStroke="True" StrokeSize="2" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIButton AbsContentSize="" GUID="{D385DED9-ABC3-47fe-A796-59F4F2216E50}" LuaDoneFunctionName="onCellClickCallback" Name="btnBg_CellRoomItem" TouchEnable="True" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="False" Visible="True">
+            <NormalElement GUID="{F6231944-DB00-4b21-918A-B69A43AF4B5D}" Type="WZUIContainer" UseAbsSize="False" />
+            <SelectElement GUID="{7CF23F81-B2CD-4c04-9900-C0E0BDA31BBB}" Type="WZUIContainer" />
+            <DisableElement GUID="{50BC955E-D213-48d5-AB9A-DF931F5C7518}" Type="WZUIContainer" />
+        </WZUIButton>
+    </WZUIContainer>
+</CellRoomItem>

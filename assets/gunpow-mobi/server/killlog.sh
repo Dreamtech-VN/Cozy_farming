@@ -1,0 +1,1 @@
+find -name "*.log" -exec rm -rf {} \;

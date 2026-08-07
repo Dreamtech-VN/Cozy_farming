@@ -1,0 +1,33 @@
+﻿<CellTimeDiscountItem GUID="{404c178f-1933-4850-8a3b-f0e18fadd0d9}">
+    <WZUIContainer Type="WZUIContainer" GUID="{79eb2b14-6f06-4e9d-8d7a-328510c69649}" AbsContentSize="160,288" UseAbsSize="True" Name="CellTimeDiscountItem" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{262a2a4d-3d73-4603-8842-1219d4145653}">
+            <WZUI9Image Type="WZUI9Image" GUID="{e6e0a241-55a2-4094-97c8-cad567c4cba2}" File="ui/common/common_scale9_di18.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{7162e6f1-adce-4cb4-bd50-2898daa96120}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.5,0.8" Name="conItem_CellTimeDiscountItem" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8ddd70ae-7bbb-4a02-bf14-a82c2cd3565e}" RelativePosition="0.5,0.6" Name="txtName_CellTimeDiscountItem" FontSize="20" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9383d28f-a220-47c2-ae7f-c8d2b519c285}" RelativePosition="0.5,0.51" FontSize="18" Color="79,60,48" Name="txtLeftTime_CellTimeDiscountItem" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{7a795a88-1a7b-422d-bc3b-3e2c8c88fd4d}" Name="txtOriginPrice_CellTimeDiscountItem" MaxWidth="160" RelativePosition="0.5,0.41" />
+            <WZUIImage Type="WZUIImage" GUID="{a0bf27d4-8567-41e1-b78b-71d32b4a6da4}" File="ui/gameActivity/activity_pic_yjkx.png" UseOriginSize="True" RelativePosition="0.5,0.41" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{43af562a-c865-46c0-a4a1-0f399db07fd6}" Name="txtCurPrice_CellTimeDiscountItem" MaxWidth="160" RelativePosition="0.5,0.32" />
+            <WZUIContainer Type="WZUIContainer" GUID="{531da1ad-8cd6-4ca4-a169-403379afb1b8}" Name="conVip_CellTimeDiscountItem" AbsContentSize="60,66" UseAbsSize="True" AnchorPoint="1,1" RelativePosition="1.01875,1" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{71df70b7-5e8e-4d91-84fd-12f93555a1ad}" File="ui/gameActivity/common_icon_vip3n.png" UseOriginSize="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1c107f93-a12d-4fe6-9b7a-6d3c06def3d8}" Text="VIP15" FontSize="12" Color="255,255,255" EnableStroke="True" StrokeColor="158,0,0" StrokeSize="4" Rotation="45" RelativePosition="0.6,0.666667" Name="txtVip_CellTimeDiscountItem" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{ceb01e93-3287-4bb0-ba50-f3f5d6715745}" Name="btnBuy_CellTimeDiscountItem" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.14" LuaActionName="Normal" LuaDoneFunctionName="onClickBuy">
+                <NormalElement Type="WZUIContainer" GUID="{bc579846-bfdc-4e1a-ad01-b45ea4fc2b41}">
+                    <WZUIImage Type="WZUIImage" GUID="{cf44bd99-63e5-4196-84ab-c07e02559733}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{f6b4ec59-fe40-4a51-9d34-cc1627bbebde}">
+                    <WZUIImage Type="WZUIImage" GUID="{1b609d97-f34e-44cb-b79a-8a19c3fc9e3e}" File="ui/common/common_btn_anniu3_0_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{042a1085-6260-445e-be28-dbfaf4a021cc}">
+                    <WZUIImage Type="WZUIImage" GUID="{3c2d9446-afb7-4c4c-b374-317620eb8e89}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                </DisableElement>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{eee5c639-d1d5-4770-931d-27fa0c5cdc46}" Name="txtBuy_CellTimeDiscountItem" TextKey="BUY" FontSize="24" EnableStroke="True" Color="255,236,193" StrokeSize="4" StrokeColor="128,54,13" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{34dd7dbd-afe4-49d7-af5a-5ac575cc5a66}" Name="conSoldAll_CellTimeDiscountItem" Visible="False" RelativeSize="0.975,0.979">
+                <WZUI9Image Type="WZUI9Image" GUID="{4b8ce034-087b-4b98-a9a9-28e7026fe2aa}" File="ui/common/common_scale9_di51.png" />
+                <WZUIImage Type="WZUIImage" GUID="{457675ca-69fc-4e39-9d4d-acde35cb7c94}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" RelativePosition="0.5,0.8" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTimeDiscountItem>

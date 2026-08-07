@@ -1,0 +1,173 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+
+.navbar-inverse {
+    background-color: #0e90d2;
+}
+.navbar-inverse a{
+    color:#fff;
+}
+    .navbar-inverse .navbar-toggle {
+        border-color: #fff;
+    }
+
+.btn-default {
+    background-color: #0e90d2;
+    color: #ccc;
+    font-size:16px;
+}
+    .btn-default:hover {
+        background-color: #02a6fa;
+        color: #fff;
+    }
+.panel-default {
+    padding: 0 20px 10px 20px;
+}
+h1,h2,h3{
+    margin-top:10px !important;
+}
+.ava {
+    border: 1px solid #0e90d2;
+    border-radius: 40px;
+    width: 80px;
+    height: 80px;
+    padding:2px;
+}
+.ava2{
+    border-radius:15px;
+    width:30px;
+    height:30px;
+}
+.scode {
+    position: relative;
+    top: 5px;
+}
+.err {
+    color: #b94a48;
+    display:none;
+}
+.error {
+    color: #b94a48;
+}
+.succes{
+    color:#0094ff;
+}
+.balance {
+    font-size: 80%;
+    color: #fff;
+    margin-left: 20px;
+}
+.field-validation-error, .validation-summary-errors {
+    color: red;
+    padding-top: 5px;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #f1eeee;
+}
+.navbar-inverse .navbar-brand:hover {
+    color: #fff;
+}
+.navbar-inverse .navbar-nav > li > a{
+    color:#f1eeee;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: #fff;
+}
+.Scode {
+    position: relative;
+    top: 5px;
+}
+.fa-spin {
+    color: black;
+}
+.betbg {
+    padding: 5px;
+    border: 1px solid #d5d5d5;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.betbgdisable {
+    background-color: #ccc;
+}
+
+.pd10 {
+    padding: 10px;
+}
+
+.mgb10 {
+    margin-bottom: 10px;
+}
+
+.bet_rate {
+    padding: 15px 5px 5px 5px;
+    background-color: #d5d5d5;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+    .bet_rate:hover {
+        background-color: #c6c6c6;
+    }
+
+.rate_red {
+    font-weight: bold;
+    color: red;
+}
+
+.pdlf10 {
+    padding: 0 10px 0 10px;
+}
+
+.rate_orange {
+    font-weight: bold;
+    color: orange;
+}
+
+.bettime1 {
+    position: relative;
+    top: 25px;
+}
+
+.bettime2 {
+    top: 10px;
+    position: relative;
+}
+
+.g-recaptcha {
+    transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+}
+
+.list-group-item{
+    height:160px;
+    vertical-align:middle;
+    align-content:center;
+}
+.sms b{
+    color:red;
+}
+@media screen and (max-height: 575px) {
+    #rc-imageselect, .g-recaptcha {
+        transform: scale(0.9);
+        -webkit-transform: scale(0.9);
+        transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+    }
+}

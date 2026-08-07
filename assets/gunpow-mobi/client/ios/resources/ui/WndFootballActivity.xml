@@ -1,0 +1,146 @@
+﻿<WndFootballActivity GUID="{2a576cd6-fa37-4cb4-8127-4265362f4499}">
+    <WZUIWindow Type="WZUIWindow" GUID="{c91b496b-8697-41ca-9be0-2b363f952fa5}" AbsContentSize="960,517" LuaObjectName="WndFootballActivity" Name="WndFootballActivity" NameCreate="True" UseAbsSize="True" LuaTouchBeganFunction="onTouchBegan" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{16b7267f-9814-454c-9683-91569e472bb9}" AbsContentSize="960,517" UseAbsSize="True" RelativePosition="0.5,0.5" ShowAll="False">
+            <WZUIImage Type="WZUIImage" GUID="{6eceaf71-5e7b-4186-9581-e3b776ab0848}" File="ui/football/football_frame_001.png" UseOriginSize="True" RelativePosition="0.5,0.5" ScaleX="1" Scale="1" Order="-1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{542d3183-02d1-47fb-b954-ea954f300fba}" Visible="True" Order="1">
+                <WZUIContainer Type="WZUIContainer" GUID="{3d8bede7-3e1e-4ae2-acf8-2c377890557b}" AbsContentSize="90,65" UseAbsSize="True" RelativePosition="0.840625,0.86517">
+                    <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsContentSize="90,65" UseAbsSize="True" GUID="{48303d57-61c2-4521-bde2-301be46776f9}" LuaDoneFunctionName="onCloseClick" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{923da5e1-7931-499b-9245-1f3e7f8ef3cc}">
+                            <WZUIImage Type="WZUIImage" GUID="{aee520ce-0046-42a3-9504-4fbd73db1e75}" File="ui/football/football_button_001.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{1a95a500-62ff-4d98-9212-da678b0f883a}">
+                            <WZUIImage Type="WZUIImage" GUID="{3210f900-4dd0-4aa9-adf2-da9e637459c4}" File="ui/football/football_button_001.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{cc2a49a1-f287-4a32-9b4a-678b9c637326}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{356113ec-938f-42cc-8399-a8bfdd669df6}" File="ui/football/football_text_001.png" UseOriginSize="True" RelativePosition="0.5,0.910058" Scale="1" Visible="True" ScaleX="1" ScaleY="1" Name="imgTitle_WndFootballActivity" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5d74c25d-2659-435c-8b45-aba2f739f9f7}" FontSize="20" Color="255,255,255" AnchorPoint="0,0.5" RelativePosition="0.12,0.92" Name="txtTimeWord_WndFootballActivity" EnableStroke="True" StrokeSize="4" StrokeColor="38,96,174" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0c6a8da9-a820-4495-b87f-92f5870dd3d8}" FontSize="20" Color="255,255,255" AnchorPoint="0,0.5" RelativePosition="0.12,0.88" Name="txtTime_WndFootballActivity" EnableStroke="True" StrokeColor="38,96,174" StrokeSize="4" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{6f0f465d-22bb-4846-9a4a-705e9e51f25c}" AbsContentSize="750,50" UseAbsSize="True" RelativePosition="0.5,0.765437" Order="5">
+                <WZUIContainer Type="WZUIContainer" GUID="{b8c3258e-a4d9-46b6-8838-8b6a2c0e48fe}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.0742003,0.4" Name="conActivity1_WndFootballActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{dc53c55d-fe95-46f4-9dd8-bc988da0dfaf}" Name="btn_WndFootballActivity" LuaDoneFunctionName="onClickActivity" Tag="1">
+                        <NormalElement Type="WZUIContainer" GUID="{3ffd33d2-75e2-4482-a5f0-61b1032f853a}">
+                            <WZUIImage Type="WZUIImage" GUID="{7fea8a57-46e7-4b0a-89d8-f122d263b8d5}" File="ui/football/football_button_002.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{f16f73ac-1a15-4498-8294-cb22f8d8c207}">
+                            <WZUIImage Type="WZUIImage" GUID="{60ba9fef-9bb8-4bbb-851d-8ec2724823fc}" UseOriginSize="True" File="ui/football/football_button_002_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{4514ccbf-aa02-48e8-886f-5a109ce673ee}">
+                            <WZUIImage Type="WZUIImage" GUID="{1a9f7cbc-6447-4efd-86fb-e1251e427986}" UseOriginSize="True" File="ui/football/football_button_002.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{9da59e2c-7297-4097-b94e-58ef8fb267fb}" UseOriginSize="True" File="ui/football/football_button_002_sel.png" Name="imgSel1_WndFootballActivity" Visible="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c8b9d712-9355-4a70-a04b-d77dc98d4f18}" LabelStyleKey="" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndFootballActivity" FontSize="22" Color="255,255,255" EnableStroke="True" StrokeSize="4" StrokeColor="38,96,174" />
+                    <WZUIImage Type="WZUIImage" GUID="{9c609040-aa51-4ad2-b184-53b47a72d5ee}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndFootballActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c41752c1-4e17-44ad-be05-c446c701a18e}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.213333,0.4" Name="conActivity2_WndFootballActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{353d0c96-04b2-4bb6-9525-5d1dd9ad2ec4}" LuaDoneFunctionName="onClickActivity" Tag="2" Name="btn_WndFootballActivity">
+                        <NormalElement Type="WZUIContainer" GUID="{f4840a6a-c1ca-4594-83ba-d1af9b58ecf1}">
+                            <WZUIImage Type="WZUIImage" GUID="{88635823-a483-4d0d-888a-ea698921fbcf}" File="ui/football/football_button_002.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{316382e5-bdcc-41c0-b8d5-2912eaec01e0}">
+                            <WZUIImage Type="WZUIImage" GUID="{4d790661-ecc1-41de-9608-eca210478745}" UseOriginSize="True" File="ui/football/football_button_002_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{34a04b4a-f5fe-47ce-b232-2d682f09550c}">
+                            <WZUIImage Type="WZUIImage" GUID="{c55c6dad-069f-4a89-b026-0675c5b1eedc}" UseOriginSize="True" File="ui/football/football_button_002.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{6ea66802-4d94-4cc3-b51e-1b660587dbc7}" UseOriginSize="True" File="ui/football/football_button_002_sel.png" Name="imgSel2_WndFootballActivity" Visible="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1ab811ff-5069-46fa-b942-546948681164}" LabelStyleKey="" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndFootballActivity" Color="255,255,255" FontSize="22" EnableStroke="True" StrokeSize="4" StrokeColor="38,96,174" />
+                    <WZUIImage Type="WZUIImage" GUID="{55b50d93-99c8-4512-9267-f5b9fdf517a3}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndFootballActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{9badacfa-ccf0-4d4a-bf74-c9cba3abb389}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.351667,0.4" Name="conActivity3_WndFootballActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{7342caa4-1867-4585-8e81-e01844015870}" LuaDoneFunctionName="onClickActivity" Tag="3" Name="btn_WndFootballActivity">
+                        <NormalElement Type="WZUIContainer" GUID="{dc1d20fa-2921-4212-b6b6-69ade7517d6c}">
+                            <WZUIImage Type="WZUIImage" GUID="{4024ebdc-9b4f-4c60-8192-1362031f1f0a}" File="ui/football/football_button_002.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{d5a0d752-98cd-4b0d-a516-850a930025f0}">
+                            <WZUIImage Type="WZUIImage" GUID="{b4e4d85e-f4f9-4f72-a66c-af9c6d003c32}" UseOriginSize="True" File="ui/football/football_button_002.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{71729534-39f3-447c-a5e7-fec5d0619c4e}">
+                            <WZUIImage Type="WZUIImage" GUID="{7c86893f-1ae7-417a-a692-6afa468dfd04}" UseOriginSize="True" File="ui/football/football_button_002.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{5c9fb367-ffab-4c44-82e7-73821f9cadef}" UseOriginSize="True" File="ui/gameActivity/newyear/happynewyear_an_sel.png" Name="imgSel3_WndFootballActivity" Visible="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{369f15ec-1fab-4d06-a8cb-9e17d53aa4f5}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndFootballActivity" />
+                    <WZUIImage Type="WZUIImage" GUID="{6834056b-605f-460e-afc0-ce6bba9aaf1f}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndFootballActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{bf510323-bc6c-4135-b86f-57b3e97a7c81}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.49,0.4" Name="conActivity4_WndFootballActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{15d64025-0f5a-426a-9119-254a5510faee}" LuaDoneFunctionName="onClickActivity" Tag="4" Name="btn_WndFootballActivity">
+                        <NormalElement Type="WZUIContainer" GUID="{b12b9791-c49d-41ac-aaa3-a7ec8780161e}">
+                            <WZUIImage Type="WZUIImage" GUID="{22cd68d2-9143-4f2d-bebe-cc8277de960a}" File="ui/football/football_button_002.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{6b9fb7d8-01bb-4ea0-b300-179b05b64ee9}">
+                            <WZUIImage Type="WZUIImage" GUID="{cb7bb264-224a-4a64-a715-a3fd9a788f22}" UseOriginSize="True" File="ui/football/football_button_002.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{2b379af8-edfc-452f-8388-1e22df358ae8}">
+                            <WZUIImage Type="WZUIImage" GUID="{19ac64b6-0e89-4182-aa94-93380750d55e}" UseOriginSize="True" File="ui/football/football_button_002.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{40d0e842-8004-4def-b4e1-bae35c269ea7}" UseOriginSize="True" File="ui/gameActivity/newyear/happynewyear_an_sel.png" Name="imgSel4_WndFootballActivity" Visible="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b5ceae5e-2e38-4e03-bca6-28d17ea40449}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndFootballActivity" />
+                    <WZUIImage Type="WZUIImage" GUID="{9083c40f-8d70-4c0e-8af3-6315721aade9}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndFootballActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{9ed5d58e-4e80-42c5-926a-d149ce280842}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.628334,0.4" Name="conActivity5_WndFootballActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{bf5437e4-ddd6-4c6c-959d-8fd0c2390ed7}" LuaDoneFunctionName="onClickActivity" Tag="5" Name="btn_WndFootballActivity">
+                        <NormalElement Type="WZUIContainer" GUID="{41d8ea1e-ed3d-40dc-b4e4-b285713e7253}">
+                            <WZUIImage Type="WZUIImage" GUID="{55b9c47b-8585-4847-9b1c-c3549e187349}" File="ui/football/football_button_002.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{732e28fa-0c62-4cd9-9391-d5d09b8dad5f}">
+                            <WZUIImage Type="WZUIImage" GUID="{77cef60d-dc6e-4b19-b51f-d35d31e27012}" UseOriginSize="True" File="ui/football/football_button_002.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{540fac75-206d-429a-8fae-042e328183d0}">
+                            <WZUIImage Type="WZUIImage" GUID="{3c321efe-5beb-4568-964e-fa3eb34b75d8}" UseOriginSize="True" File="ui/football/football_button_002.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{05617c97-f76e-4250-ab7f-a9628c399398}" UseOriginSize="True" File="ui/gameActivity/newyear/happynewyear_an_sel.png" Name="imgSel5_WndFootballActivity" Visible="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{002bbdac-dfa1-4150-9b1b-186aa66e26db}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndFootballActivity" />
+                    <WZUIImage Type="WZUIImage" GUID="{71dc3602-1d2c-4128-b6e0-7ba2a3513550}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndFootballActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{8bbd63c8-6ee5-45c2-aeb7-20df88d47187}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.767999,0.4" Name="conActivity6_WndFootballActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{317a34bd-5395-4445-b93a-0da6167f4cc6}" LuaDoneFunctionName="onClickActivity" Tag="6" Name="btn_WndFootballActivity">
+                        <NormalElement Type="WZUIContainer" GUID="{d473bd32-f278-4310-83fc-fd406b1d6399}">
+                            <WZUIImage Type="WZUIImage" GUID="{e27ed749-d745-4425-ac5f-af522d24d011}" File="ui/football/football_button_002.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{2bc8a753-5012-4846-919b-18f5d105cb22}">
+                            <WZUIImage Type="WZUIImage" GUID="{312c91cb-b356-4dd3-8597-61555df08d8a}" UseOriginSize="True" File="ui/football/football_button_002.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{d0742680-f715-4b8a-8629-e9a3fdd9c516}">
+                            <WZUIImage Type="WZUIImage" GUID="{cfcc78da-f4c4-4015-8bae-07531ef02667}" UseOriginSize="True" File="ui/football/football_button_002.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{deb75aa4-2d69-4b5a-84ff-71c1ebba8b63}" UseOriginSize="True" File="ui/gameActivity/newyear/happynewyear_an_sel.png" Name="imgSel6_WndFootballActivity" Visible="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{01054a73-8625-4ca1-a406-cb68d707a4e5}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndFootballActivity" />
+                    <WZUIImage Type="WZUIImage" GUID="{ea8ac2f4-a823-49ce-89af-cfc4e7132afd}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndFootballActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{afa09ee0-9308-4625-8fed-7a5d23afb198}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.906,0.4" Name="conActivity7_WndFootballActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{3b2ef977-1704-4e97-a25c-afda3467baca}" LuaDoneFunctionName="onClickActivity" Tag="6" Name="btn_WndFootballActivity">
+                        <NormalElement Type="WZUIContainer" GUID="{f9a04373-e654-4403-88c9-8c7952d6a980}">
+                            <WZUIImage Type="WZUIImage" GUID="{1bf2712d-d772-4dab-ad01-f613b205108e}" File="ui/football/football_button_002.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{59dafceb-6de3-465e-8b80-0abbdd8394e6}">
+                            <WZUIImage Type="WZUIImage" GUID="{5890254a-4643-4146-b969-026663c78ed0}" UseOriginSize="True" File="ui/football/football_button_002.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{b8c975b4-c270-4089-b16e-b2caf6b5ab4d}">
+                            <WZUIImage Type="WZUIImage" GUID="{497879d7-51ed-4d5c-bb0b-08d6473a424c}" UseOriginSize="True" File="ui/football/football_button_002.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUIImage Type="WZUIImage" GUID="{07a702cc-d2f2-4154-ba82-9e5c7faa768f}" UseOriginSize="True" File="ui/gameActivity/newyear/happynewyear_an_sel.png" Name="imgSel7_WndFootballActivity" Visible="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{809c1fb6-6173-42e5-ae2a-75e6a61a3579}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndFootballActivity" />
+                    <WZUIImage Type="WZUIImage" GUID="{c4389588-413e-4706-aea7-47a7969882fe}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndFootballActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5a5afda8-d91b-416d-991b-26c3bc0b0bfa}" AbsContentSize="780,378" UseAbsSize="True" RelativePosition="0.5,0.343327" Order="2" Visible="True">
+                <WZUIContainer AbsContentSize="780,378" GUID="{3316af40-d0e6-4a6d-8ddd-95815de0a9fe}" Name="conActivityContext_WndGameActivity" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{018f2e70-78d3-4ed5-9db3-15cb137dddb8}" AbsContentSize="50,50" UseAbsSize="True" LuaActionName="Normal" LuaDoneFunctionName="onClickRule" RelativePosition="0.834069,0.767515" Order="3">
+                <NormalElement Type="WZUIContainer" GUID="{7eb73dd9-d91b-4f49-b41b-2d21c8103052}" />
+                <SelectElement Type="WZUIContainer" GUID="{d417513f-6e14-4cf0-a7f9-f3dff0100469}" />
+                <DisableElement Type="WZUIContainer" GUID="{a38c95b1-31cd-47e1-b093-ab3f2e875b6b}" />
+                <WZUIImage Type="WZUIImage" GUID="{d365d7be-b549-484d-9aa9-d772096ea321}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+            </Button>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndFootballActivity>

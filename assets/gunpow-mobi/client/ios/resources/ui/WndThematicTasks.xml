@@ -1,0 +1,16 @@
+﻿<WndThematicTasks GUID="{89d38b66-89e1-44fa-8369-5531fba438ee}">
+    <WZUIWindow Type="WZUIWindow" GUID="{dbeacea7-43bc-4fe9-9c42-51614c7fb65b}" Name="WndThematicTasks" AbsContentSize="720,420" LuaObjectName="WndThematicTasks" NameCreate="True" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{92a14c63-111c-4b9a-9850-4429c9efe0f7}" Name="conTop_WndThematicTasks" AbsContentSize="720,420" RelativePosition="0.52,0.47">
+            <WZUIContainer Type="WZUIContainer" GUID="{f48bec57-e600-4e3d-809b-f2650d7aaf47}" AbsContentSize="720,420" UseAbsSize="True">
+                <WZUIImage Type="WZUIImage" GUID="{d438d78d-104d-4d27-a0b5-dc02754c6a18}" File="ui/gameActivity/christmas/merrychristmas_scale_di1.png" UseOriginSize="True" RelativePosition="0.5,0.65881" Visible="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{7434b3ad-e000-459d-9f0d-2e836a3367d3}" Name="conActiveTime_WndThematicTasks" AbsContentSize="600,50" AnchorPoint="0.5,1" RelativePosition="0.491928,0.130952" UseAbsSize="True" Visible="False">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c9648cc4-f041-4713-8fc8-84705c22ada3}" Name="txtTime_WndThematicTasks" Color="255,255,255" EnableStroke="False" FontSize="18" RelativePosition="0.05,0.7" StrokeColor="158,0,0" StrokeSize="4" Text="" AnchorPoint="0,0.5" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{73cdb2f4-fe6c-42c2-b524-fbde050542a2}" AbsContentSize="630,260" UseAbsSize="True" RelativePosition="0.5,0.459524">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{3aaeacdd-9025-4c48-bb55-ff0daf3bf32c}" AbsContentSize="630,260" UseAbsSize="True" RelativePosition="0.5,0.5" Name="tableTasks_WndThematicTasks" EnableMoveHorizontal="False" EnableVerticalScroll="True" CellElementHeight="0.308" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{d3d39892-3c24-4282-bae8-bfa69ab2e897}" File="shopitems/chunjie_hongbao3.png" UseOriginSize="True" Visible="False" Scale="0.5" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndThematicTasks>

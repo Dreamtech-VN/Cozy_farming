@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<CellPvpRankLog GUID="{5bd30577-f812-44a9-ad51-8451227d63a3}">
+	<WZUIContainer AbsContentSize="714,60" GUID="{E3AD270E-281C-4734-9906-710B39D32926}" LuaObjectName="" Name="CellPvpRankLog" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+		<WZUIContainer Type="WZUIContainer" GUID="{3CB5D7D2-D27A-472b-A5A2-DB255633D50B}" Visible="False">
+			<WZUI9Image Type="WZUI9Image" GUID="{7B5041A7-F95B-4abd-9CCB-0062472C8117}" File="ui/common/common_scale9_di8.png" />
+		</WZUIContainer>
+		<WZUIContainer Type="WZUIContainer" GUID="{6DA5D066-F513-4023-9A5E-9993A74AAB52}" Name="con1_CellPvpRankLog">
+			<WZUIContainer Type="WZUIContainer" GUID="{5C7088BC-20B7-4262-BF25-1387D0229030}" RelativeSize="0.05,0.5" RelativePosition="0.0285714,0.5">
+				<WZUIImage Type="WZUIImage" GUID="{0F092A4A-D69C-434e-8E2C-D40E3F12AEB5}" File="" UseOriginSize="True" Name="imgFlag1_CellPvpRankLog" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{FB72F6B2-2922-453d-B96A-CBE57C803BF7}" AnchorPoint="0,0.5" RelativePosition="0.07,0.5" RelativeSize="0.28,1">
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{E58D70F7-7FBF-4a08-B02B-AFAF19B93F2C}" Name="txtDesc1_CellPvpRankLog" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0,0.5" FontSize="22" Color="254,167,48" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{C6C659B0-6B88-47a8-B38E-529FF4F5E590}" RelativeSize="0.1,1" RelativePosition="0.343137,0.5" AnchorPoint="0,0.5">
+				<WZUIImage Type="WZUIImage" GUID="{71911CC7-F724-4a2a-B32A-3BFF55FB8489}" File="" Visible="True" UseOriginSize="True" Name="imgLvDi1_CellPvpRankLog" Scale="0.6" />
+				<WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{0E2E37C6-C78C-4a61-AF65-BB2873334AAA}" Name="lafLv1_CellPvpRankLog" CharMapFileName="ui/common_num/common_num_ghdj.png" Height="24" Width="16" Text="" RelativePosition="0.434006,0.5" Alignment="Left" AnchorPoint="0,0.5" UseOriginSize="True" Visible="True" Scale="0.7" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{07932BC9-158E-478c-9409-A5BF06A27F98}" RelativeSize="0.55,1" AnchorPoint="1,0.5" RelativePosition="1,0.5">
+				<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{A5DE7E38-B95D-4e3d-B103-6919FFDAF138}" Name="ftbDesc1_CellPvpRankLog" AnchorPoint="0,0.5" RelativePosition="0,0.483333" MaxWidth="500" />
+			</WZUIContainer>
+		</WZUIContainer>
+		<WZUIContainer Type="WZUIContainer" GUID="{1BB5C1CD-4E5C-4232-A1FA-C898C0240135}" Name="con2_CellPvpRankLog">
+			<WZUIContainer Type="WZUIContainer" GUID="{208CA3E5-5373-4a47-95B9-DAC2F855A1B6}" RelativeSize="0.05,0.5" RelativePosition="0.0285714,0.5">
+				<WZUIImage Type="WZUIImage" GUID="{2FB20422-EADF-4102-8977-6D5ADC2EDA80}" File="" UseOriginSize="True" Name="imgFlag2_CellPvpRankLog" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{4B014056-3CF5-4d19-8F94-D464671C0B12}" AnchorPoint="0,0.5" RelativePosition="0.07,0.5" RelativeSize="0.35,1">
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{C5007E3C-00CD-46c8-A32D-10B5858BB7B1}" Name="txtDesc2_CellPvpRankLog" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0,0.5" FontSize="22" Color="255,236,193" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{2D1C6C83-419A-4ca3-9485-09E2A62F937B}" RelativeSize="0.1,1" RelativePosition="0.427171,0.5" AnchorPoint="0,0.5">
+				<WZUIImage Type="WZUIImage" GUID="{26A14787-DB57-49a3-93A9-4658E0B8B99F}" File="" Visible="True" UseOriginSize="True" Name="imgLvDi2_CellPvpRankLog" Scale="0.6" />
+				<WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{3697638E-39FC-4d4c-9697-58A6178B226F}" Name="lafLv2_CellPvpRankLog" CharMapFileName="ui/common_num/common_num_ghdj.png" Height="24" Width="16" Text="" RelativePosition="0.425994,0.5" Alignment="Left" AnchorPoint="0,0.5" UseOriginSize="True" Visible="True" Scale="0.7" />
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIContainer>
+</CellPvpRankLog>

@@ -1,0 +1,87 @@
+<WndTrainingCamp GUID="{47ce23ea-8887-49a2-abcf-5637cdb6d6af}">
+    <WZUIWindow Type="WZUIWindow" GUID="{f9ebcc84-466e-4e51-ba4e-a665d0f363e9}" Name="WndTrainingCamp" LuaObjectName="WndTrainingCamp" AbsContentSize="960,640" UseAbsSize="True" ShowAll="True" LuaTouchBeganFunction="onTouchBegan" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{0e2a9be7-a830-4b48-89a6-cb43b5665d0a}" AbsContentSize="896,576" UseAbsSize="True" Visible="True" RelativePosition="0.496875,0.503125">
+            <WZUI9Image Type="WZUI9Image" GUID="{3629aff8-5d6a-41f5-bf90-805077d8315e}" File="ui/common/common_scale9_di19.png" CapInsets="134,80,1,1" TouchEnable="False" Visible="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{05f4a16c-6118-45c7-87bc-f8741ddc78fd}" TextKey="TRAINCAMP_DEC4" LabelStyleKey="SMALL_WINDOW_TITLE" RelativePosition="0.5,0.940299" Text="" Name="ttfTitle_WndTrainingCamp" />
+            <WZUIContainer Type="WZUIContainer" GUID="{3834ba4f-c4f3-4308-abff-465bdb446957}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.959068,0.942035" Visible="True" Name="conClose_WndTrainingCamp">
+                <Button Type="WZUIButton" GUID="{7ce1b394-e50b-4f21-8e59-607be7fda963}" RelativePosition="0.5,0.5" LuaDoneFunctionName="onClickClose" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{95cc76ef-1a1a-4d9a-9b49-fe7b9bc6579e}">
+                        <WZUIImage Type="WZUIImage" GUID="{8845bf9a-2cd2-43f7-84ea-3bfb20a1d8d9}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{db6e504b-e892-4e4f-a7d7-28f4e5b98024}">
+                        <WZUIImage Type="WZUIImage" GUID="{3fef077e-599c-416b-8b42-75609c8c30bf}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{6c8db0de-b24c-40d0-98e9-9b3f80b3c8d6}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{076aa7b6-43ed-4034-a9a9-618ab319c13a}" AbsContentSize="880,482" UseAbsSize="True" RelativePosition="0.500629,0.477135" Name="conMid_WndTrainingCamp" Order="0">
+                <WZUI9Image Type="WZUI9Image" GUID="{0fd2d67a-f4d8-4db0-8a91-bc939f3c7a99}" File="ui/common/common_scale9_di20.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{f5ef76e9-47f9-4cca-b1cd-6b9972c6af07}" AbsContentSize="620,482" UseAbsSize="True" RelativePosition="1,0.5" Name="conBg_WndTrainingCamp" AnchorPoint="1,0.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{910cc267-6a84-43e2-ac16-8f1965febe97}" File="ui/common/common_scale9_di20.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{348923c5-9a94-48e9-8b8c-906f94dfb915}" RelativeSize="1,1" RelativePosition="1,1" Name="conRebateList_WndTrainingCamp" Visible="True" AbsContentSize="620,482" UseAbsSize="True" AbsPosition="1,1" AnchorPoint="1,1">
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{bc9d0f71-f9a5-40aa-a027-5a8250cef282}" RelativeSize="0.98,0.97" Name="tabRebate_WndTrainingCamp" NameCreate="True" ColumnCount="1" CellElementHeight="0.31" EnableMoveHorizontal="False" RelativePosition="0.503226,0.474754" VerticalInterval="0" EnableBounceBack="False" EnableMoveVertical="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{ae4f5138-2a5f-42ec-b1fc-7bf67e70a62e}" AbsContentSize="260,482" UseAbsSize="True" RelativePosition="0.15374,0.478157" Name="conList_WndGoodsFunll" Visible="True">
+                <Button Type="WZUIButton" GUID="{e3b774a0-d377-4edb-8304-28c4ee5dd104}" AbsContentSize="230,106" UseAbsSize="True" RelativePosition="0.496154,0.865146" Visible="True" Name="btn1_WndTrainingCamp" Tag="1" LuaDoneFunctionName="onClick" LuaActionName="">
+                    <NormalElement Type="WZUIContainer" GUID="{fff34a69-a1e3-4354-9700-1a0df9dffc5b}">
+                        <WZUIImage Type="WZUIImage" GUID="{d86484fb-776a-4d49-9368-3988d22edccf}" File="ui/combat/common_pic_xunlianyfx.png" isValid="True" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{dcc66035-e020-45ed-aaf8-8edd12671132}">
+                        <WZUIImage Type="WZUIImage" GUID="{ea9bd15c-66cf-4e79-8c9c-10d994e4afbf}" File="ui/combat/common_pic_xunlianyfx.png" isValid="True" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{880e9e3c-4b77-4c23-87e6-cdd9bbda1984}" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{4aa71afe-42d6-4f0c-ad69-a1fb1bb6b787}" Name="conSel1_WndTrainingCamp" AbsContentSize="236,112" UseAbsSize="True" RelativePosition="0.5,0.48" Visible="False">
+                        <WZUI9Image Type="WZUI9Image" GUID="{276e9f38-159f-4dba-b3ec-2f3c9f259154}" File="ui/common/common_scale9_beibaodi_sel.png" />
+                    </WZUIContainer>
+                </Button>
+                <Button Type="WZUIButton" GUID="{846b2a75-ea95-4035-81ac-c028bfaa2262}" AbsContentSize="230,106" UseAbsSize="True" RelativePosition="0.496154,0.628632" Visible="True" Name="btn2_WndTrainingCamp" Tag="2" LuaDoneFunctionName="onClick" LuaActionName="">
+                    <NormalElement Type="WZUIContainer" GUID="{f2b0fad4-19ba-4d3f-9814-c67c7060b096}">
+                        <WZUIImage Type="WZUIImage" GUID="{528fd0c2-feb5-40c8-a5a1-d0307fab99cc}" File="ui/combat/common_pic_xunlianyfl.png" isValid="True" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{736be264-803c-417c-9994-183c577734f8}">
+                        <WZUIImage Type="WZUIImage" GUID="{307d69b3-e67e-4946-a3ae-ba30e6cc413b}" File="ui/combat/common_pic_xunlianyfl.png" isValid="True" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{33321055-1450-418d-a25a-6d1114ca69fd}" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{b0a5c281-1749-4d2a-b822-b6129f2086c6}" Name="conSel2_WndTrainingCamp" Visible="False" AbsContentSize="236,112" RelativePosition="0.5,0.48" UseAbsSize="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{3d56e8d5-f1c7-41df-8f4a-7cf73443face}" File="ui/common/common_scale9_beibaodi_sel.png" />
+                    </WZUIContainer>
+                </Button>
+                <Button Type="WZUIButton" GUID="{96b8b310-b032-4ab1-be99-4b87770ff06f}" AbsContentSize="230,106" UseAbsSize="True" RelativePosition="0.496154,0.398341" Visible="True" Name="btn3_WndTrainingCamp" Tag="3" LuaDoneFunctionName="onClick" LuaActionName="">
+                    <NormalElement Type="WZUIContainer" GUID="{4ad7820c-f52f-4d7c-8747-1c28c10fde53}">
+                        <WZUIImage Type="WZUIImage" GUID="{5d6ccd51-41a7-43e4-8e6d-a86833be5902}" File="ui/combat/common_pic_xunlianywk.png" isValid="True" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{3b5f2073-e522-411f-9388-d99e123a9874}">
+                        <WZUIImage Type="WZUIImage" GUID="{f4b68026-230e-40d1-98ec-e7d03431e8c0}" File="ui/combat/common_pic_xunlianywk.png" isValid="True" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{06ac2f1e-0b39-4b0c-9437-05c5c6daaa14}" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{74303c0e-0d5a-427a-9333-895368a69750}" Name="conSel3_WndTrainingCamp" Visible="False" AbsContentSize="236,112" RelativePosition="0.5,0.48" UseAbsSize="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{6cd5125d-4911-45fb-b82e-4e2cdd95cfb4}" File="ui/common/common_scale9_beibaodi_sel.png" />
+                    </WZUIContainer>
+                </Button>
+                <Button Type="WZUIButton" GUID="{8038e806-ca0e-4aab-abe9-b705fa8ceb3f}" AbsContentSize="230,106" UseAbsSize="True" RelativePosition="0.496154,0.151453" Visible="True" Name="btn4_WndTrainingCamp" Tag="4" LuaDoneFunctionName="onClick" LuaActionName="">
+                    <NormalElement Type="WZUIContainer" GUID="{6d66a91f-411d-44fa-b137-c39d0f78dbcc}">
+                        <WZUIImage Type="WZUIImage" GUID="{42cdd845-2fe7-47c1-a714-3d5a48c8f5d5}" File="ui/combat/common_pic_xunlianygp.png" isValid="True" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{abb8869a-2c8b-40e5-bb49-7f7cd704a5d9}">
+                        <WZUIImage Type="WZUIImage" GUID="{29c2b7ee-6801-4bd5-af5f-29ef39cdc097}" File="ui/combat/common_pic_xunlianygp.png" isValid="True" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{9c93469f-02d1-4824-b696-de5399c1b21d}" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{5ff51085-a747-48f9-bc10-e7b74c65f4c3}" Name="conSel4_WndTrainingCamp" Visible="False" AbsContentSize="236,112" RelativePosition="0.5,0.48" UseAbsSize="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{78b0d291-998f-4e7e-a463-944099777378}" File="ui/common/common_scale9_beibaodi_sel.png" />
+                    </WZUIContainer>
+                </Button>
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{b11ece18-b018-4831-a2dc-186a1e4798cd}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.0310383,0.0488087" LuaDoneFunctionName="clickDec">
+                <NormalElement Type="WZUIContainer" GUID="{a2dbaff5-746b-46b6-8645-c34eb4dcdc82}">
+                    <WZUIImage Type="WZUIImage" GUID="{b35f76df-e24e-40f4-843d-53a0bf3cb157}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{5381674d-669d-4dd5-b92e-800f3778387a}">
+                    <WZUIImage Type="WZUIImage" GUID="{6d7f0eaf-3c52-4678-89f5-71fab9ae6aaa}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{1f931450-c107-49a0-92cf-7ca98ca5f54e}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTrainingCamp>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WndLeftMenu GUID="{CDBCCDA1-C5A8-49c6-85C9-E7D24EAFF0D0}">
+    <WZUIWindow AbsContentSize="130,432" AbsPosition="0,390" AnchorPoint="0,0.5" GUID="{3A348562-D16E-42a5-934F-AB1AEB439EFE}" LuaObjectName="WndLeftMenu" Name="WndLeftMenu" NameCreate="True" RelativePosition="0,0.65" ShowAll="False" TouchSwallow="False" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="130,432" GUID="{50EA327D-86E4-4e6a-BD16-11ED44498993}" Name="conBg_WndLeftMenu" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+            <WZUITableContainer CellElementHeight="0.25" EnableMoveHorizontal="False" EnableMoveVertical="False" GUID="{625FA7F4-0C39-47e2-8FAC-5B3119E8F5DE}" Name="tbcon_WndLeftMenu" Type="WZUITableContainer" VerticalInterval="0.025" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="148,106" GUID="{28BD40B2-427B-45f2-ACA4-656582FD31FD}" Name="conBtn_WndLeftMenu" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+            <WZUIButton AbsContentSize="108,106" GUID="{0E298C5F-CDA8-49ce-8576-B7F99B32889B}" LuaDoneFunctionName="" Name="btn_WndLeftMenu" Type="WZUIButton" UseAbsSize="True" Visible="True">
+                <NormalElement GUID="{2B3CC286-07E0-4b0d-B9E4-6E4B5F10198A}" Type="WZUIContainer">
+                    <WZUIImage File="ui/island/icon_reward.png" GUID="{18FAC8A0-C29F-4328-8AD4-3FDB3B6D3805}" Name="imgIconNormal_WndLeftMenu" Type="WZUIImage" UseOriginSize="True" />
+                    <WZUIImage File="" GUID="{94353559-CCBA-41e8-8DAE-E317FD78F649}" Name="imgTextNormal_WndLeftMenu" RelativePosition="0.5,0.22" Type="WZUIImage" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{BEDBE88D-3A75-4316-AB81-DF43683D1B4E}" Name="btnSel_WndLeftMenu" Scale="1.05" Type="WZUIContainer">
+                    <WZUIImage File="ui/island/island_shine.png" GUID="{9024774A-3CD5-4061-9997-5EBA4C0B2FEC}" Name="imgHightIcon_WndLeftMenu" Scale="1.2" Type="WZUIImage" UseOriginSize="False" Visible="True" />
+                    <WZUIImage File="" GUID="{ADE54E61-B8AC-429e-823D-A5735219555C}" Name="imgIconSel_WndLeftMenu" Type="WZUIImage" UseOriginSize="True" />
+                    <WZUIImage File="" GUID="{925E8C6E-300B-442d-8738-8A771951F958}" Name="imgTextSel_WndLeftMenu" RelativePosition="0.5,0.22" Type="WZUIImage" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{30DF356D-135C-43f2-9A1C-F9BE75AD1779}" Type="WZUIContainer">
+                    <WZUIImage GUID="{FB1B6212-6BFD-43d7-9C04-7FE26544D731}" Type="WZUIImage" />
+                    <WZUIImage GUID="{7C2487CC-46F8-4626-9963-2432E2B167BF}" Type="WZUIImage" />
+                </DisableElement>
+            </WZUIButton>
+            <WZUIContainer GUID="{ADD29511-BF81-4ed7-ABEB-CA8F2A8FE63A}" Name="conAnimation" Type="WZUIContainer" Visible="False">
+                <WZUIImage File="common/animation/icon_world_boss_light.png" GUID="{A540B626-F4AF-4b50-BA7F-C34D04805E2E}" Name="imgCircleAni" Scale="0.68" TouchEnable="False" Type="WZUIImage" UseOriginSize="True">
+                    <Action Angle="-360" Duration="1" GUID="{36269A76-4C88-4537-81D3-2DD9A1B8511F}" IsLoop="True" Type="WZUIActionRotateBy" />
+                </WZUIImage>
+                <WZUIImage File="common/animation/icon_achievement_an.png" GUID="{BA7FB103-ED3E-4fbc-9690-166994CE69EE}" Name="imgHighlightAni" Opacity="50" Scale="0.85" Type="WZUIImage" UseOriginSize="True">
+                    <Action GUID="{ADE8CB69-4EDF-4468-B81B-877619826C61}" IsLoop="True" Type="WZUIActionSequence">
+                        <ChildAction Duration="0.4" GUID="{173FD936-7F32-4494-A6D4-8DE815253201}" Type="WZUIActionFadeTo" />
+                        <ChildAction Duration="0.4" GUID="{79CCD3F9-A9F8-4e38-A388-1D9061F06215}" Opacity="50" Type="WZUIActionFadeTo" />
+                    </Action>
+                </WZUIImage>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="50,50" AnchorPoint="0.5,0.5" GUID="{67F6093E-DF2D-4ba6-B2F1-5CA98D54F213}" Name="conRewardCount_WndLeftMenu" RelativePosition="0.67,0.78" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+            <WZUIImage File="ui/island/island_num_bg1.png" GUID="{85A40F8C-1FAB-4f1a-AF76-61B9267BEAF6}" RelativePosition="0.28,0.44" Scale="1" Type="WZUIImage" UseOriginSize="True" />
+            <WZUIImage File="ui/island/island_num_bg3.png" GUID="{27E56DEC-2518-4c72-895A-B388D703B31E}" RelativePosition="0.68,0.44" Scale="1" Type="WZUIImage" UseOriginSize="True" />
+            <WZUILabelTTF Color="255,255,255" FontSize="28" GUID="{6DC1C38E-0F38-45cd-B5BD-00DEA1B78240}" Name="txtRewardCount_WndLeftMenu" RelativePosition="0.5,0.5" Text="" Type="WZUILabelTTF" Visible="True" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="50,50" AnchorPoint="0.5,0.5" GUID="{89D637D3-57AC-4287-BCDE-37CBAE238C5E}" Name="conVIPCount_WndLeftMenu" RelativePosition="0.67,0.78" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+            <WZUIImage File="ui/island/island_num_bg1.png" GUID="{EF5DECA8-4A85-49d8-8D52-241991140A9D}" RelativePosition="0.28,0.44" Scale="1" Type="WZUIImage" UseOriginSize="True" />
+            <WZUIImage File="ui/island/island_num_bg3.png" GUID="{2D3ACD94-EF56-4a23-8224-F28060D545EE}" RelativePosition="0.68,0.44" Scale="1" Type="WZUIImage" UseOriginSize="True" />
+            <WZUILabelTTF Color="255,255,255" FontSize="28" GUID="{B1E6DF91-95A8-4c33-9997-42739E508197}" Name="txtVIPCount_WndLeftMenu" RelativePosition="0.5,0.5" Text="" Type="WZUILabelTTF" Visible="True" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndLeftMenu>

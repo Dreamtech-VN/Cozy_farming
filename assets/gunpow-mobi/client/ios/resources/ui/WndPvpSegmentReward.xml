@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<WndPvpSegmentReward GUID="{751e4181-a9e1-4be3-abf4-d8cb2f43fee0}">
+	<WZUIWindow Type="WZUIWindow" GUID="{6836BF14-D501-42c9-B1BB-722D8DFEBCBF}" NameCreate="True" Name="WndPvpSegmentReward" LuaObjectName="WndPvpSegmentReward" UseAbsSize="False" AbsContentSize="" ShowAll="True" LuaTouchBeganFunction="OnTouchBegin">
+		<WZUIContainer Type="WZUIContainer" GUID="{63DDA882-0417-4dda-B01D-11CD8AED9317}" Visible="True" AbsContentSize="772,534" UseAbsSize="True">
+			<WZUI9Image Type="WZUI9Image" GUID="{3EAAAB6F-ED31-49d4-B3BC-01DB9F610A78}" File="ui/common/common_scale9_di19.png" Opacity="255" RelativePosition="0.5,0.5" CapInsets="250,100,1,1" Visible="True" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{AA7AE9A4-1205-4fbd-8093-310A6EC81156}" TextKey="RANK_SEGMENT_REWARD" FontSize="26" Color="255,236,192" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" RelativePosition="0.494289,0.935813" LabelStyleKey="SMALL_WINDOW_TITLE" Name="" Text="" />
+			<WZUIContainer Type="WZUIContainer" GUID="{E1CAA5B9-E05C-4837-85C1-A734565A7E3A}" AbsContentSize="740,388" UseAbsSize="True" RelativePosition="0.5,0.866487" AnchorPoint="0.5,1" AbsPosition="386,464.437" Visible="True">
+				<WZUI9Image Type="WZUI9Image" GUID="{82A5FD64-A7B1-42cf-B713-106F3C819BAD}" File="ui/common/common_scale9_di8.png" Opacity="200" />
+				<WZUITableContainer Type="WZUITableContainer" GUID="{1E2E852A-761F-4ba5-9362-C0644CD6CF1D}" RelativeSize="1,0.96" RelativePosition="0.5,0.989691" AnchorPoint="0.5,1" Name="tabSegment_WndPvpRankList" CellElementHeight="0.283" EnableMoveHorizontal="False" AbsPosition="370,384" />
+			</WZUIContainer>
+			<WZUIButton Type="WZUIButton" LuaDoneFunctionName="OnClose" GUID="{2AA60DD9-90B0-46a4-8EEA-52C188B23734}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.947428,0.940352" AbsPosition="731.414,502.148">
+				<NormalElement Type="WZUIContainer" GUID="{E8629DB0-532C-450d-AD53-05283DC9F34B}">
+					<WZUIImage Type="WZUIImage" GUID="{5647A1EA-8C45-45e7-BD0E-E084A686CC27}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+				</NormalElement>
+				<SelectElement Type="WZUIContainer" GUID="{3A07CA6F-6F31-44b4-BE6E-AAC0DC2F8F40}">
+					<WZUIImage Type="WZUIImage" GUID="{9F20D171-713B-44ce-9F63-736B07EE6E46}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+				</SelectElement>
+				<DisableElement Type="WZUIContainer" GUID="{0ABEC4A5-F461-4a1a-B839-DA888271B77B}" />
+			</WZUIButton>
+			<WZUIContainer Type="WZUIContainer" GUID="{6410E3CE-D42F-4f14-A6C1-77618DD0A3A5}" RelativeSize="1,0.16" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{E840792B-26D7-44a2-A1EA-3457C7942770}" FontSize="22" TextKey="PVPRANK_LIST_DESC3" Color="127,70,26" />
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIWindow>
+</WndPvpSegmentReward>

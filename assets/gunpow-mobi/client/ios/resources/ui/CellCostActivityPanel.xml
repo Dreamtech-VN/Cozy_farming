@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" ?>
+<CellCostActivityPanel GUID="{63E14EB4-CF7A-4481-A989-AE162637CFC0}">
+    <WZUIContainer AbsContentSize="502,453" GUID="{C2000FDC-30D8-49d1-995B-E7AB438768D6}" Name="CellCostActivityPanel" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="207,289" AnchorPoint="0.5,0.5" GUID="{DF656052-0096-4288-9434-17FF69139033}" RelativePosition="0.135,0.811" Type="WZUIContainer" UseAbsSize="True" Name="conRole_CellCostActivityPanel">
+            <WZUIImage Type="WZUIImage" GUID="{C3022F83-5D18-4001-B1AE-F90976814064}" File="ui/combat/common_pic_shuaige2.png" UseOriginSize="True" RelativeSize="1,1" Scale="0.65" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="500,60" GUID="{C7345CEB-672F-4ba4-B547-49D5F6F5F40D}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" AbsPosition="246,395.25" Name="conTime_CellCostActivityPanel" AnchorPoint="0.5,1">
+            <WZUIImage Type="WZUIImage" GUID="{30c34bbc-e6cb-4e46-8b5a-8a08473f1aec}" File="ui/gameActivity/activity_pic_jjdjkh.png" UseOriginSize="True" RelativeSize="1,1" Scale="1" AnchorPoint="0.5,1" RelativePosition="0.5,1" Name="imgBK_CellCostActivityPanel" Visible="True" />
+            <WZUIContainer AbsContentSize="500,40" GUID="{a6d2b71a-5324-4371-a856-e87600d64944}" RelativePosition="0,1" Type="WZUIContainer" UseAbsSize="True" AbsPosition="246,395.25" Name="con" AnchorPoint="0,1">
+                <WZUI9Image Type="WZUI9Image" GUID="{9a3e17d4-c3e4-46ae-b814-0c1a581e062f}" File="ui/common/common_scale9_heidi7.png" Opacity="150" />
+                <WZUILabelTTF AnchorPoint="0,0.5" Color="255,227,116" FontSize="22" GUID="{7a609ab1-82f0-4bd4-9f85-96ab71a837cc}" Name="txt_activity_day_key" RelativePosition="0.05,0.5" Text="活动剩余" Type="WZUILabelTTF" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" />
+                <WZUILabelTTF AnchorPoint="0,0.5" Color="255,89,74" FontSize="22" GUID="{8518575f-e697-480a-8268-f3de1b1bb0e9}" Name="txt_activity_day_value" RelativePosition="0.28,0.5" Text="9天" Type="WZUILabelTTF" StrokeColor="158,0,0" StrokeSize="4" EnableStroke="True" />
+            </WZUIContainer>
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="255,236,193" FontSize="22" GUID="{57b3c16c-f7df-407e-bbd5-dd311775ceb1}" Name="txt_tip_cost_reward" RelativePosition="0.31,0.3" Text="当前积分" Type="WZUILabelTTF" LabelStyleKey="" Alignment="Left" />
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="255,89,74" FontSize="24" GUID="{851c7385-e5d7-4328-955e-fc8f471ba84b}" Name="txt_activity_time_value" RelativePosition="0.618333,0.8" Text="" Type="WZUILabelTTF" StrokeColor="158,0,0" StrokeSize="4" EnableStroke="True" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="500,30" GUID="{65981d1b-be89-412a-a5a5-331e1085bb13}" RelativePosition="0.5,0.97" Type="WZUIContainer" UseAbsSize="True" AbsPosition="246,395.25" Name="conCurJifen_CellCostActivityPanel" AnchorPoint="0.5,1">
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{a678665d-7af4-460f-aac2-d1b01c37ca89}" Name="txtCurLevel_CellCostActivityPanel" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0.04,0.5" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="486,350" GUID="{dd43f8db-7cfe-4e01-9142-d26b6f7fd93a}" RelativePosition="0.5,0.418" Type="WZUIContainer" UseAbsSize="True" Name="conForList_CellCostActivityPanel">
+            <WZUIFreeListContainer AbsContentSize="486,390" EnableHideUnvisible="True" EnableMoveHorizontal="False" GUID="{5dddaa72-cb6a-415d-af9e-5f7c627ba5c9}" ListItemInterval="6" Name="flconCostRewardList" Type="WZUIFreeListContainer" UseAbsSize="True" Visible="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCostActivityPanel>

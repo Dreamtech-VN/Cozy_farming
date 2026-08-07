@@ -1,0 +1,66 @@
+﻿<CellFootballShootRank GUID="{fccf638c-278b-4887-b574-6ea31914f8de}">
+    <WZUIContainer Type="WZUIContainer" GUID="{c9b4b609-9fbf-4ab4-9860-ef7c3d0d042a}" AbsContentSize="780,384" UseAbsSize="True" Name="CellFootballShootRank" LuaObjectName="CellFootballShootRank" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.414064" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{f409fd9b-7cf1-49f2-bfda-8c8ea77a8e29}" Name="conAnn_CellFootballShootRank" RelativePosition="0.5,0.58">
+            <WZUIImage Type="WZUIImage" GUID="{3001c248-5cad-4b2a-bf22-85288bc6e229}" File="ui/football/football_bg_002.png" UseOriginSize="True" Name="imgBg_CellFootballShootRank" />
+            <WZUIContainer Type="WZUIContainer" GUID="{d9b60856-5a03-452a-a1a0-687ecf50ad6c}" AbsContentSize="425,40" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.297989,0.990581">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a5687091-8543-4f83-b5a1-727eb00f7c40}" LabelStyleKey="C1_F22" Text="排名" TextKey="RANK" RelativePosition="0.222063,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{fb1c2f0f-4889-4fa1-9780-d5ad70b19a7f}" LabelStyleKey="C1_F22" Text="排名" TextKey="PLAYER" RelativePosition="0.450792,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{77bd1a57-a4c6-42d7-b4c7-10216dfc8ee5}" LabelStyleKey="C1_F22" Text="排名" TextKey="INTEGRAL_VALUE" RelativePosition="0.821545,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{461beb85-5567-40b5-b890-d938c7b7ed25}" File="ui/football/football_pattern_001.png" UseOriginSize="True" FlipX="False" ScaleX="0.3" ScaleY="1" FlipY="False" Order="0" Rotation="90" RelativePosition="0.986853,0.498022" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{52794d2a-4963-4daf-bf37-8ac957c19961}" File="ui/football/football_pattern_002.png" UseOriginSize="True" FlipX="False" ScaleX="1.5" ScaleY="1" FlipY="False" Order="0" Rotation="0" RelativePosition="0.5,0.877419" />
+            <WZUIContainer Type="WZUIContainer" GUID="{628c1b9f-4300-4840-9aed-c78375125f06}" AbsContentSize="420,330" UseAbsSize="True" AnchorPoint="0,0" RelativePosition="0.0237981,0.012164" Name="conRankList_CellFootballShootRank">
+                <WZUITableContainer Type="WZUITableContainer" GUID="{0d341403-8ff7-4733-a64a-49d8c388bbf2}" Name="tabRankList_CellFootballShootRank" EnableVerticalScroll="True" EnableMoveVertical="True" EnableMoveHorizontal="False" CellElementHeight="0.22" RelativePosition="0.5,0.5" RelativeSize="1,0.98" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{20f411e6-ae41-4f5b-823f-2b743b9fdf0a}" AbsContentSize="340,338" UseAbsSize="True" RelativePosition="1.00092,-0.00322581" AnchorPoint="1,0">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{430e08b7-83c2-4470-89be-01ecfe85b791}" LabelStyleKey="C1_F22" Text="烟花榜奖励" RelativePosition="0.237006,1.05943" TextKey="ATH_DESC_10" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{fe8ffbea-bdd6-4a67-8698-3f1f4155b7e0}" LabelStyleKey="C15_F18" TextKey="" RelativePosition="0.095,0.95" Text="" Name="txtRankMySelf_CellFootballShootRank" AnchorPoint="0,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{3d06759e-15f5-43d3-a307-b889866986ce}" File="ui/football/football_pattern_002.png" UseOriginSize="True" FlipX="False" ScaleX="0.6" ScaleY="1" FlipY="False" Order="0" Rotation="0" RelativePosition="0.514706,0.898721" />
+                <WZUITableContainer Type="WZUITableContainer" GUID="{2f36d748-54fb-4191-beb0-adc9006fe45d}" EnableVerticalScroll="True" EnableMoveHorizontal="False" AbsContentSize="320,290" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0.0244703" Name="tabRewardList_CellFootballShootRank" CellElementHeight="0.25" />
+                <Button Type="WZUIButton" GUID="{a450e77f-4b71-45ba-b651-50fb509f2321}" AbsContentSize="100,40" UseAbsSize="True" RelativePosition="0.831986,1.07477" LuaDoneFunctionName="onClickBack" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{2c270cf5-de7f-4217-976d-8d60db387af1}" />
+                    <SelectElement Type="WZUIContainer" GUID="{3e008b67-398b-4b5f-bd62-abf4c4c6d6c3}" />
+                    <DisableElement Type="WZUIContainer" GUID="{d5f9e814-6576-4d09-8e32-d95c2c3ffe59}" />
+                    <WZUIImage Type="WZUIImage" GUID="{45f8eac8-1277-4fbb-9e23-366981d0a24f}" File="ui/football/football_common_001.png" UseOriginSize="True" RelativePosition="0.70667,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ae2129d7-a6ba-4c26-b705-3590f7468787}" LabelStyleKey="C1_F20" TextKey="BACK" RelativePosition="0.386667,0.5" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1a9d7d95-12a5-49ad-8b7d-a92ff83d550c}" AbsContentSize="3,300" UseAbsSize="True" RelativePosition="0.564464,0.454839">
+                <WZUIImage Type="WZUIImage" GUID="{6597c351-2630-4ffa-b2f8-51031aee8c0a}" File="ui/football/football_pattern_002.png" UseOriginSize="True" FlipX="False" ScaleX="0.56" ScaleY="1" FlipY="False" Order="180" Rotation="90" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{7daf4e94-81fa-4c4c-b5a4-2828a7b1489e}" File="ui/football/football_pattern_002.png" UseOriginSize="True" FlipX="False" ScaleX="1.5" ScaleY="1" FlipY="False" Order="0" Rotation="0" RelativePosition="0.5,0.00241899" />
+        </WZUIContainer>
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{bac90a2d-6b91-4264-8048-dce1eccece73}" AbsContentSize="420,65" UseAbsSize="True" RelativePosition="0.5,0.5" Name="conRankListItem_CellFootballShootRank" Visible="False" AnchorPoint="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{db413446-c762-4b61-828e-55fb3b4d7839}" AbsContentSize="60,60" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.05,0.528571" Name="conHead_CellFootballShootRank">
+            <WZUIImage Type="WZUIImage" GUID="{29967def-1811-41fc-9c36-653e351941d0}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="0.9" ScaleX="0.9" ScaleY="0.9" />
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{61c86b14-f583-476b-92db-6a4d5e1bf24b}" UseOriginSize="True" File="" Scale="0.8" Name="imgRank_CellFootballShootRank" RelativePosition="0.281879,0.5" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ffcbcb4e-1e2d-4e96-8ab3-28d1a0a60a70}" LabelStyleKey="C11_F20" Text="" RelativePosition="0.42,0.7" Name="txtPlayerLevel_CellFootballShootRank" AnchorPoint="0,0.5" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{32570cb1-87cb-42ad-8fa8-0bd575bd31d1}" LabelStyleKey="C18_F20" Text="" RelativePosition="0.42,0.325" Name="txtPlayerName_CellFootballShootRank" AnchorPoint="0,0.5" />
+        <WZUIImage Type="WZUIImage" GUID="{b1b96ece-ce87-4f0a-b6cf-b36f1e261f6a}" File="ui/common/common_icon_kuafu.png" UseOriginSize="True" RelativePosition="0.390636,0.325017" Name="imgTag_CellFootballShootRank" Visible="False" TouchSwallow="True" TouchEnable="False" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a48d1e16-fcf7-4119-a036-bac4d7d92c80}" LabelStyleKey="C11_F20" Text="" RelativePosition="0.89,0.5" Name="txtIntegralValue_CellFootballShootRank" />
+        <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{3187b1c2-32d5-4190-b540-617149a5e110}" CharMapFileName="ui/common_num/common_num_pmsz.png" Height="30" Width="24" Text="" Name="lafTxt_CellFootballShootRank" RelativePosition="0.295704,0.5" UseOriginSizeProportion="False" UseOriginSize="True" />
+        <Button Type="WZUIButton" GUID="{ec45aaee-d3e0-48f9-a1b0-67279d1b96a4}" LuaDoneFunctionName="onClickPlayer">
+            <NormalElement Type="WZUIContainer" GUID="{5b5d5339-5924-4498-96ef-6d0aaab1b67f}" />
+            <SelectElement Type="WZUIContainer" GUID="{90604b80-b40f-4002-88fc-f0a23dc0808d}" />
+            <DisableElement Type="WZUIContainer" GUID="{06ab8f27-0bf9-4dae-b1d0-c1302727db02}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{2965e57a-8235-4223-977b-00a1d0717140}" AbsContentSize="356,4" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0.0142857">
+            <WZUIImage Type="WZUIImage" GUID="{32b89496-0bb7-4a12-8b92-bc44f56008c2}" File="ui/football/football_pattern_002.png" UseOriginSize="True" ScaleX="0.7" ScaleY="1" />
+        </WZUIContainer>
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{ef4cc54f-c312-4fb1-bf40-4376cf1c7f5e}" AbsContentSize="360,70" UseAbsSize="True" RelativePosition="0.5,0.5" Name="conRankListReward_CellFootballShootRank" Visible="False">
+        <WZUIImage Type="WZUIImage" GUID="{5d7a6db6-45ed-470f-aac1-d3bd11b960ec}" File="" UseOriginSize="True" Scale="0.6" RelativePosition="0.106742,0.5" Name="imgRank_conRankListReward" />
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{aa1090be-d2ed-4e16-9ae4-6364021bea5e}" Name="fxtRank_conRankListReward" MaxWidth="200" AnchorPoint="0,0.5" RelativePosition="0.0644123,0.5" />
+        <WZUIContainer Type="WZUIContainer" GUID="{4f221373-d835-4203-825b-20c09d4f6665}" AbsContentSize="350,4" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True">
+            <WZUIImage Type="WZUIImage" GUID="{95781815-40e7-4dca-a419-dff173db2c0e}" File="ui/football/football_pattern_002.png" ScaleY="0.9" UseOriginSize="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{075cb7cf-2818-45f0-993f-36c9e02a7256}" AbsContentSize="280,65" UseAbsSize="True" RelativePosition="0.575,0.5">
+            <WZUIContainer Type="WZUIContainer" GUID="{ef5758ef-78e6-4479-99be-e1feb9ef9b24}" Name="con4_CellFootballShootRank" AbsContentSize="60,60" RelativePosition="0.135714,0.5" UseAbsSize="True" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{f3a5c401-78ba-443d-aaa1-324199d5242c}" Name="con3_CellFootballShootRank" AbsContentSize="60,60" RelativePosition="0.378571,0.5" UseAbsSize="True" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{ae330038-9ca6-4a9d-971d-e5c56dacd2d1}" Name="con2_CellFootballShootRank" AbsContentSize="60,60" RelativePosition="0.621428,0.5" UseAbsSize="True" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{28ff6f64-2671-4c6a-ac14-d5ec0367d8ec}" Name="con1_CellFootballShootRank" AbsContentSize="60,60" RelativePosition="0.864286,0.5" UseAbsSize="True" Visible="False" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellFootballShootRank>

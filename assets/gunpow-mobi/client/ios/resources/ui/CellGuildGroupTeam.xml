@@ -1,0 +1,84 @@
+<CellGuildGroupTeam GUID="{233873ac-cf21-4a96-be76-766eca50cfca}">
+    <WZUIContainer Type="WZUIContainer" GUID="{c139d9b4-76de-4e12-83d2-507e90455954}" Name="CellGuildGroupTeam" AbsContentSize="727,106" UseAbsSize="True" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{e52efe43-9166-485d-ae9b-7883e2e184d8}" AbsContentSize="727,98" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{5e6498f1-0a28-4b80-9e00-64cafa077d98}" File="ui/common/common_scale9_di7.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{5fab7d0a-848c-4b15-aabd-0028295762ae}" AbsContentSize="260,98" UseAbsSize="True" RelativePosition="0.18,0.5">
+                <WZUIContainer Type="WZUIContainer" GUID="{ca6e3d5e-4c28-4a02-a44b-96640de83c07}" Name="conLeftHead1_CellGuildGroupTeam" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.2,0.5" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{ac0b4b97-dbc1-444c-9595-06b433b07929}" File="ui/common/common_icon_tx.png" UseOriginSize="True" />
+                    <Button Type="WZUIButton" GUID="{d94c909b-5ebb-4fa7-8da6-0467fb593d25}" Order="2" LuaDoneFunctionName="onCheckInfo" Name="btnLHead1_CellGuildGroupTeam">
+                        <NormalElement Type="WZUIContainer" GUID="{24967a1f-a5a7-447e-9fe3-02b9dbae9958}" />
+                        <SelectElement Type="WZUIContainer" GUID="{f2ed5a28-cf05-4996-82d3-a20bf69958ae}" />
+                        <DisableElement Type="WZUIContainer" GUID="{59559418-42b9-49bb-a58a-67f845be3cfb}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{18ac60fa-254d-4113-b286-5b9c2334f905}" Name="conLeftHead2_CellGuildGroupTeam" AbsContentSize="70,70" UseAbsSize="True" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{ccd8be3b-58d4-4af6-87d6-43705eb636de}" File="ui/common/common_icon_tx.png" UseOriginSize="True" />
+                    <Button Type="WZUIButton" GUID="{dc877636-602b-4b89-941b-09a045262757}" Order="2" LuaDoneFunctionName="onCheckInfo" Name="btnLHead2_CellGuildGroupTeam">
+                        <NormalElement Type="WZUIContainer" GUID="{202eec4d-9427-4062-91c1-e484736ae206}" />
+                        <SelectElement Type="WZUIContainer" GUID="{b546b3bf-1c32-4ee0-9a29-11b5b0c023ec}" />
+                        <DisableElement Type="WZUIContainer" GUID="{dc9a0bb1-0609-491d-9266-1fa330f7acff}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{8c4027cc-4dbf-46d6-8988-7bfa52d7ec74}" Name="conLeftHead3_CellGuildGroupTeam" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.8,0.5" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{047bfdb8-083a-4cca-8927-8ff3d96827d5}" File="ui/common/common_icon_tx.png" UseOriginSize="True" />
+                    <Button Type="WZUIButton" GUID="{da776756-4520-4a4c-8d9f-1cfec9203c36}" Order="2" LuaDoneFunctionName="onCheckInfo" Name="btnLHead3_CellGuildGroupTeam">
+                        <NormalElement Type="WZUIContainer" GUID="{b91cd79c-5728-4e78-a4bf-ee855c84784d}" />
+                        <SelectElement Type="WZUIContainer" GUID="{3700e796-4893-4fb5-9e8c-ada2fd7ec53e}" />
+                        <DisableElement Type="WZUIContainer" GUID="{4304dae4-a665-48dc-85d1-a82fd7dfe8df}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{63c992c5-3e2d-4b07-9324-7a786c87273c}" FontSize="24" Color="138,122,106" Name="txtLeftNull_CellGuildGroupTeam" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{b4f21488-616a-48c3-aa79-f5bed1287ff1}" AbsContentSize="260,98" UseAbsSize="True" RelativePosition="0.82,0.5">
+                <WZUIContainer Type="WZUIContainer" GUID="{2174e5e5-4acb-47f2-92cf-af9ebc92344d}" Name="conRightHead3_CellGuildGroupTeam" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.2,0.5" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{4d52667a-32ee-406c-bdf1-654e63d3b775}" File="ui/common/common_icon_tx.png" UseOriginSize="True" />
+                    <Button Type="WZUIButton" GUID="{80b58be7-5b55-4e93-876e-deadd2f9d200}" Order="2" LuaDoneFunctionName="onCheckInfo" Name="btnRHead3_CellGuildGroupTeam">
+                        <NormalElement Type="WZUIContainer" GUID="{b40bffb5-cb2e-47c5-acd2-1dd66a9f2aa7}" />
+                        <SelectElement Type="WZUIContainer" GUID="{557fb97d-2fac-453e-accd-6dcdf4ca3de4}" />
+                        <DisableElement Type="WZUIContainer" GUID="{65c976fb-b552-47e8-8962-62870ebf5587}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{56cc926b-b86f-4f22-a1c3-3600b20afcfd}" Name="conRightHead2_CellGuildGroupTeam" AbsContentSize="70,70" UseAbsSize="True" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{d5f23b48-96fa-492e-8c36-26887641afbe}" File="ui/common/common_icon_tx.png" UseOriginSize="True" />
+                    <Button Type="WZUIButton" GUID="{788deb52-8144-42b6-b379-028af8b301a8}" Order="2" LuaDoneFunctionName="onCheckInfo" Name="btnRHead2_CellGuildGroupTeam">
+                        <NormalElement Type="WZUIContainer" GUID="{e5907033-485a-4d49-8ee6-b33594114ee7}" />
+                        <SelectElement Type="WZUIContainer" GUID="{798ff4c5-bb8f-4166-8a1e-476ec83c8986}" />
+                        <DisableElement Type="WZUIContainer" GUID="{d9398bcb-c248-4c3c-89e0-e025bb5d3105}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{774e3efe-ec48-4f4c-908b-84eded5353c6}" Name="conRightHead1_CellGuildGroupTeam" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.8,0.5" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{b2f237c7-1764-4244-973f-700cc20d233a}" File="ui/common/common_icon_tx.png" UseOriginSize="True" />
+                    <Button Type="WZUIButton" GUID="{c571700b-0c26-4b63-adc7-a7a7c3d2cde9}" Order="2" LuaDoneFunctionName="onCheckInfo" Name="btnRHead1_CellGuildGroupTeam">
+                        <NormalElement Type="WZUIContainer" GUID="{b347999c-571e-48ca-afd7-33aa0b217f00}" />
+                        <SelectElement Type="WZUIContainer" GUID="{055ffc41-cfc2-4b62-9678-5fabdb6b531b}" />
+                        <DisableElement Type="WZUIContainer" GUID="{9c5b9f00-599c-4a78-83df-f3b37febcb4d}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{728aa1a6-7437-4762-b465-14503874adf0}" FontSize="24" Color="138,122,106" Name="txtRightNull_CellGuildGroupTeam" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{e06aa0ab-0de5-4b75-a609-f8faa0d370d9}" AbsContentSize="190,98" UseAbsSize="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{af2040b4-3d27-4676-9332-3cb3c9a3fd7c}" Name="conRedIcon_CellGuildGroupTeam">
+                    <WZUIImage Type="WZUIImage" GUID="{f51c3e97-6801-4a03-be45-e5fcc977236c}" File="ui/community/common_icon_ghzhd.png" UseOriginSize="True" RelativePosition="0.1,0.76" />
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{3f4f7f31-031a-4ba5-8947-1ae975fdc94b}" CharMapFileName="ui/common_num/common_num_ghdj.png" Height="24" Width="16" Text="" UseOriginSize="True" UseOriginSizeProportion="False" RelativePosition="0.0947369,0.734694" Name="txtLeftTeamNum" />
+                    <WZUIImage Type="WZUIImage" GUID="{f2008cc0-7c0c-4ae4-942e-446d7dde5875}" UseOriginSize="True" File="" RelativePosition="0.0684211,0.244898" Name="imgLeftResult_CellGuildGroupTeam" Visible="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{6c243ace-73cf-4862-a588-53c0395367f4}" Name="conBlueIcon_CellGuildGroupTeam">
+                    <WZUIImage Type="WZUIImage" GUID="{1d90d1cc-1530-4747-8757-398be69cbacd}" File="ui/community/common_icon_ghzld.png" UseOriginSize="True" RelativePosition="0.9,0.76" />
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{ffc16eff-adaa-44f1-af9e-7a1b9c97f01c}" CharMapFileName="ui/common_num/common_num_ghdj.png" Height="24" Width="16" Text="" UseOriginSize="True" UseOriginSizeProportion="False" RelativePosition="0.894737,0.734694" Name="txtRightTeamNum" />
+                    <WZUIImage Type="WZUIImage" GUID="{3418fbb2-f0dc-466e-a7d6-5aa2bce48d63}" UseOriginSize="True" File="" RelativePosition="0.915789,0.244898" Name="imgRightResult_CellGuildGroupTeam" Visible="False" />
+                </WZUIContainer>
+                <Button Type="WZUIButton" GUID="{d894f2af-7386-40f3-8a61-2a50e6b679c1}" AbsContentSize="116,56" UseAbsSize="True" Name="btnCheck_CellGuildGroupTeam" Scale="0.7" RelativePosition="0.5,0.27" LuaActionName="Normal" LuaDoneFunctionName="onClickCheck" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{1bc60326-8c70-4837-a32e-02470a267d5c}">
+                        <WZUIImage Type="WZUIImage" GUID="{3f3aad91-9cf7-4266-82cb-9fb5d9a6ab53}" File="ui/common/common_btn_anniu10_0.png" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{f62cb76e-44a7-40ec-b9c2-b64403b7daf3}">
+                        <WZUIImage Type="WZUIImage" GUID="{15ed2bcb-0583-43c5-b31d-553bee3c64e2}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{288b6091-56aa-4fa4-8353-978ba69ec4a8}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8e5d2800-4d52-4b48-8fbd-229bf4cab850}" FontSize="24" EnableStroke="True" LabelStyleKey="SMALL_GREEN_BTN" TextKey="LOOK_VIDEO" />
+                </Button>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{96fa545b-1367-40fd-b70b-fb1e60236f76}" FontSize="22" Color="138,122,106" RelativePosition="0.5,0.27" TextKey="COMMONITY_DESC14" Name="txtNoEnemy_CellGuildGroupTeam" Visible="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellGuildGroupTeam>

@@ -1,0 +1,46 @@
+﻿<CellRebate GUID="{116031a4-9c10-4aca-95fc-d1f6e02dfc62}">
+    <WZUIContainer AbsContentSize="175,183" GUID="{0e931f08-730d-4de8-b760-8a0cb84c6671}" LuaObjectName="" Name="CellRebate" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{b1e4338d-d360-4d07-9d94-c8f2dbb6ed2e}" TouchSwallow="True" AbsContentSize="">
+            <WZUIContainer Type="WZUIContainer" GUID="{609481b7-dfb9-4a4c-9ffd-548dab9164fd}">
+                <WZUIContainer Type="WZUIContainer" GUID="{873e091f-c434-4327-a49c-e9b3a27daeb6}" AbsContentSize="186,190" UseAbsSize="True" RelativePosition="0.5,1" AbsPosition="87.5,84.5001" AnchorPoint="0.5,1">
+                    <WZUIContainer Type="WZUIContainer" GUID="{06b138ae-55e0-4201-952a-05c8c6b7e5ac}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.25,0.5" RelativeSize="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{2e3713f5-81af-4da8-8b74-d621811e17e7}" File="ui/common/common_scale9_yy.png" CapInsets="20,20,10,10" RelativePosition="0.5,0.5" Visible="True" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{d8d71331-522e-4508-aef3-9a2d9962fb96}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.75,0.5" RelativeSize="0.5,1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{2524483c-9474-4316-b3c0-b088bd40cabf}" File="ui/common/common_scale9_yy.png" CapInsets="20,20,10,10" RelativePosition="0.5,0.5" FlipX="False" FlipY="False" ScaleX="-1" Visible="True" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUI9Image Type="WZUI9Image" GUID="{dbf3101a-6e38-47fe-a9bf-79bbe70715cf}" File="ui/common/common_scale9_di7.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{067a8d2e-e0fd-46ed-b836-5b11776870be}" RelativeSize="0.9,0.75" RelativePosition="0.5,0.557322">
+                    <WZUI9Image Type="WZUI9Image" GUID="{fbc288a4-6eec-4e91-9d39-703ed07569f8}" File="ui/common/common_scale9_di58.png" RelativeSize="1,1" RelativePosition="0.5,0.5" Opacity="225" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{7fec4333-5285-41c6-b03f-1ea223dd7d36}" File="ui/common/common_icon_dian.png" UseOriginSize="True" RelativePosition="0.5,1" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="80,80" GUID="{ee752ca3-9989-4a40-bb14-901447c441a9}" Name="conProp_CellRebate" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" NameCreate="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{fb010e94-a3f7-40b1-afbb-b27cbf317cc6}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.838798" TouchSwallow="False" RelativeSize="0.8,0.15">
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Color="255,255,255" Dimensions="0,0" EnableStroke="False" FontSize="24" GUID="{68404a7b-0965-4a30-9134-d85aaac392fa}" Name="txtPropName_CellRebate" RelativePosition="0.5,0.5" StrokeColor="60,19,12" StrokeSize="4" Text="" TouchEnable="False" Type="WZUILabelTTF" Visible="True" NameCreate="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{6f1507bb-ed83-4816-b09d-0e8689812464}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.0949101" TouchSwallow="False" RelativeSize="0.8,0.12">
+                <WZUIContainer Type="WZUIContainer" GUID="{1e9d199b-70cf-42bc-bae9-ce5899e294b5}" RelativePosition="0.5,0.5" Name="conNotLimitTxt_CellRebate" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{78522a86-6ce1-4742-915c-b41cc82ee876}" AbsContentSize="30,30" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.215714,0.5">
+                        <WZUIImage File="ui/common/common_icon_jingjibi.png" GUID="{4d3e8a1e-bbe0-4808-ab23-beca993ecd18}" Name="imgMoney_CellRebate" RelativePosition="0.5,0.5" RelativeSize="1,1" Scale="0.5" ScaleX="1" ScaleY="1" TouchEnable="False" Type="WZUIImage" UseOriginSize="False" Visible="True" isValid="True" UseOriginSizeProportion="True" AbsPosition="" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" BoldFont="False" Color="64,128,1" EnableStroke="False" FontSize="24" GUID="{9f09925b-829c-4806-9496-c257632340a9}" Name="txtPrice_CellRebate" RelativePosition="0.45,0.5" StrokeColor="91,49,24" StrokeSize="0" Text="12345" Type="WZUILabelTTF" Visible="True" NameCreate="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{87fd0371-d2ac-4d1a-ad6b-ca3367f84d03}" RelativeSize="0.3,0.6" RelativePosition="0.21279,0.817378" Name="conDiscount" Visible="False" TouchSwallow="False" AbsContentSize="76,68" UseAbsSize="True" NameCreate="True">
+                <WZUIImage Type="WZUIImage" GUID="{ed76a28f-d62d-4597-be12-690fbb9c7c5b}" File="ui/common/common_icon_zhe.png" UseOriginSize="True" Rotation="180" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{f3dfba92-bcd7-49dd-831c-4ef51b9e0045}" Text="" LabelStyleKey="C18_F20_S4_C2" RelativePosition="0.281513,0.70111" Rotation="-41" Name="discount" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIButton GUID="{90b0baf1-7d1f-4481-b90f-c7786f8a3538}" LuaDoneFunctionName="OnBtnBuy" Name="" RelativeSize="1,1" Type="WZUIButton" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" TouchSwallow="True">
+            <NormalElement GUID="{39cc9750-5aa9-4295-b2b1-bb9905401218}" Type="WZUIContainer" />
+            <SelectElement GUID="{9f4ec6bf-5ee5-4ccf-ba52-be1e8193d9ca}" Type="WZUIContainer" />
+            <DisableElement GUID="{37648308-3ba3-4ddb-bbee-b6a3f36720da}" RelativePosition="0.5,0.507143" Type="WZUIContainer" />
+        </WZUIButton>
+        <WZUIContainer Type="WZUIContainer" GUID="{d50a8580-a2c9-4485-8458-5133444679d3}" Name="conSell_CellRebate" NameCreate="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{85c6cab6-218d-4e5d-980a-98f8c469953a}" File="ui/common/common_shade_chushouheidi.png" />
+            <WZUIImage Type="WZUIImage" GUID="{9552531d-9ad5-4a68-a5fd-510af00c6244}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellRebate>

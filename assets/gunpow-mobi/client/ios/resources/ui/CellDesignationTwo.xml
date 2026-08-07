@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" ?>
+<CellDesignationTwo GUID="{D7907D59-98E8-46d1-BC39-6CA2FB78E3EF}">
+    <WZUIContainer Type="WZUIContainer" GUID="{B186FE97-92F6-4314-B843-41A0DB4E4430}" AbsContentSize="633,103" UseAbsSize="True" LuaObjectName="" Name="CellDesignationTwo" NameCreate="True" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{082c95ef-640e-4e0b-b309-7723464bb075}" AbsContentSize="633,103" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{d5dbe107-c91f-46ce-a800-f723c8538e11}" File="ui/common/common_scale9_di18.png" Opacity="255" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{fb53dd36-d37f-43f2-834e-70718f6b1b30}" AbsContentSize="197,103" UseAbsSize="True" RelativePosition="0,0.5" AnchorPoint="0,0.5" Name="conTitle_CellDesignationTwo" TouchEnable="False">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{50846153-0026-4b50-8e60-e0256fc854d0}" Name="txtDesName_CellDesignationTwo" FontSize="20" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Color="128,54,13" Text="呵呵呵呵呵" Order="1" StrokeSize="4" StrokeColor="105,65,46" />
+            <WZUIImage Type="WZUIImage" GUID="{ce08dd84-7cce-4ab6-8797-6b1b657d228d}" File="ui/common/common_scale9_fengexiao3.png" UseOriginSize="True" ScaleY="2.2" RelativePosition="0.989848,0.5" Opacity="150" Order="-1" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{1b484724-c651-46df-9302-9daa4eedcb1f}" AbsContentSize="110,58" UseAbsSize="True" RelativePosition="0.91,0.5">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{63f38689-ffe6-4a9e-8241-aaa5c11ff89b}" FontSize="22" Color="79,60,48" Name="txtStateWord_CellDesignation" />
+            <Button Type="WZUIButton" GUID="{fa316839-2cc8-4a65-8809-c637cb856bcd}" Name="btnSetDesi_CellDesignationTwo" UseAbsSize="False" Visible="False" LuaDoneFunctionName="onClickCheckBox" RelativePosition="0.5,0.5">
+                <NormalElement Type="WZUIContainer" GUID="{e09500e7-7628-4bb5-b7b3-fc93bba090c8}" AbsContentSize="40,40" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{47e56954-57c3-43d0-8c83-bb76bdaa5f3a}" File="ui/common/common_scale9_di13.png" UseOriginSizeProportion="True" Scale="1" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{ba42945d-46e0-4de6-8fc7-8d816e844859}" AbsContentSize="40,40" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{9e6cd2c8-6a52-475f-9a5e-aed0d7f88a5d}" File="ui/common/common_scale9_di13.png" UseOriginSizeProportion="True" Scale="1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{821b088b-df2f-4e18-8ec8-2bb3e2fb8f06}" />
+                <WZUIImage Type="WZUIImage" GUID="{d17f86c9-fcbd-4504-ba0e-e62175ca5c89}" File="ui/common/common_scale9_wbbsxz.png" UseOriginSize="True" Name="imgYellowRect_CellDesignationTwo" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{91cd9062-8579-4d0e-9e9d-c7413852c9b3}" File="ui/common/common_icon_gou.png" UseOriginSize="True" Name="imgGou_CellDesignationTwo" RelativePosition="0.525862,0.5" Visible="False" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{f88ee592-7718-44c2-87a5-db73fe084916}" AbsContentSize="336,103" UseAbsSize="True" RelativePosition="0.569345,0.5">
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{733be819-c107-4585-afd2-102b0ccad689}" MaxWidth="320" Name="ftxtDesc_CellDesignationTwo" RelativePosition="0.045,0.67" AnchorPoint="0,0.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{b404df25-83cd-4dd0-8398-c3aa94e08f9c}" AbsContentSize="321,36" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.499251,0.414" Name="conForReward_CellDesignationTwo">
+                <WZUIContainer Type="WZUIContainer" GUID="{074ef687-ae27-4664-ba15-22f418f01048}" Name="conReward1_CellDesignationTwo" AbsContentSize="100,40" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.02,0.444444">
+                    <WZUIContainer Type="WZUIContainer" GUID="{b78e0b69-193d-4675-892b-895c6882bd2b}" AbsContentSize="40,40" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{5e304ffa-e434-48dc-b9a6-390c02d6a52a}" Name="imgIcon_Reward1" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{d32a88f3-b405-49c2-aab7-95e941b71eb7}" FontSize="22" Color="255,236,193" StrokeColor="105,65,46" StrokeSize="4" Name="txtNumber_Reward1" AnchorPoint="0,0.5" RelativePosition="0.4,0.5" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{f5a9e4f6-76ba-47be-8cd5-2371953f03e7}" Name="conReward2_CellDesignationTwo" AbsContentSize="100,40" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.350311,0.444444">
+                    <WZUIContainer Type="WZUIContainer" GUID="{f9b90b72-52a1-4d6b-97a3-bc629e18b418}" AbsContentSize="40,40" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{4cc22da9-57a1-4be6-a94e-840dcbf4d14b}" Name="imgIcon_Reward2" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6e9a073c-0335-477c-bf7c-c97f4f30ea7e}" FontSize="22" Color="255,236,193" StrokeColor="105,65,46" StrokeSize="4" Name="txtNumber_Reward2" AnchorPoint="0,0.5" RelativePosition="0.4,0.5" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{669d1894-693f-49df-a1e0-8259ef557e26}" Name="conReward3_CellDesignationTwo" AbsContentSize="100,40" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.692943,0.444444">
+                    <WZUIContainer Type="WZUIContainer" GUID="{c95ef2f3-1008-406c-a018-61e977ccfe2c}" AbsContentSize="40,40" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{443fb3b0-0b36-458b-b74d-5f01c62a70ac}" Name="imgIcon_Reward3" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b7e2767f-48e1-4e47-9b34-3e23575df2f0}" FontSize="22" Color="255,236,193" StrokeColor="105,65,46" StrokeSize="4" Name="txtNumber_Reward3" RelativePosition="0.4,0.5" AnchorPoint="0,0.5" />
+                </WZUIContainer>
+                <WZUI9Image Type="WZUI9Image" GUID="{aefc174e-22fc-4940-8b6d-8dfd3df2a476}" File="ui/common/common_scale9_di8.png" Order="-1" Opacity="204" RelativePosition="0.5,0.444444" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{65df1219-a642-4f46-8942-f8940f8f9ed9}" File="ui/common/common_scale9_fengexiao3.png" UseOriginSize="True" ScaleY="2.2" RelativePosition="0.994722,0.5" Opacity="150" />
+        </WZUIContainer>
+        <WZUIButton Type="WZUIButton" GUID="{decbe562-e1d5-495a-9fc6-d3b25768c0b7}" LuaDoneFunctionName="onClickCell" RelativePosition="0.91,0.5" UseAbsSize="True" AbsContentSize="116,56" Visible="False" RelativeSize="1,1" Name="btnAccept_CellDesignationTwo" Rotation="0" LuaActionName="Normal">
+            <NormalElement Type="WZUIContainer" GUID="{97279467-3c8b-4a6d-9113-18f83ec5698b}" AbsContentSize="116,56" UseAbsSize="True">
+                <WZUIImage Type="WZUIImage" GUID="{e38591a7-0154-419d-992b-faa847a987b9}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" Scale="0.7" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{a9f7b9f8-65d4-4a58-a2aa-27a3998e5a64}" AbsContentSize="116,56" UseAbsSize="True">
+                <WZUIImage Type="WZUIImage" GUID="{7c08e930-ec65-462b-8862-460b2fb2d5c9}" File="ui/common/common_btn_anniu10_0_sel.png" Scale="0.7" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{e96aadd6-e504-4b05-84c3-74cdb478a638}" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{02a7dc3f-4168-425f-b04b-2a11ea3e0616}" FontSize="24" Color="255,236,193" EnableStroke="True" TextKey="INVITE_RECEIVE" LabelStyleKey="SMALL_GREEN_BTN" Name="txtAccept_CellDesignationTwo" />
+        </WZUIButton>
+        <WZUIImage Type="WZUIImage" GUID="{cbf2132d-644e-4deb-ba48-1d43f6dac031}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Name="imgRedDot_CellDesignationTwo" RelativePosition="0.994606,0.906548" Visible="False" />
+    </WZUIContainer>
+</CellDesignationTwo>

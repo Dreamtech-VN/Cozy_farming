@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?><WndLottery GUID="{C9E5B847-3254-4f93-AD80-75C288DD983C}">
+    <WZUIContainer GUID="{BEFAE7FA-1F60-499b-9D04-3FD83F49A5BF}" LuaObjectName="WndLottery" Name="WndLottery" NameCreate="True" Type="WZUIContainer">
+        <WZUIContainer GUID="{BD596A97-7642-4128-8625-DCC59E1CE560}" Name="conBG_WndLottery" Type="WZUIContainer">
+            <WZUIContainer AbsContentSize="960,580" AbsPosition="0,0" AnchorPoint="0,0.5" GUID="{94272261-286B-4ce2-ABD7-A9B96097EBC3}" RelativePosition="0,0.642187" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image CapInsets="0,0,0,0" File="common/Jigsaw/27.png" GUID="{6D6DDE69-F6D4-49dd-B65C-AA0C75D77220}" Type="WZUI9Image" UseOriginSize="False"/>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="960,120" AnchorPoint="0.5,0.5" GUID="{6B16AA10-C7B2-47f5-B9C2-B9AE0A2E2423}" RelativePosition="0.5,0.0953125" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/Jigsaw/25.png" GUID="{BE0C3632-4C68-4550-9468-05BA48B2A8D5}" Type="WZUI9Image"/>
+            </WZUIContainer>
+            <WZUIImage File="temp/common_bg_01.png" GUID="{293B0C28-6FC8-4359-B2DC-9D4F336C6F4D}" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+            <WZUIImage File="common/text/lottery_title.png" GUID="{80A3EAC9-484D-4beb-BBC7-7187DC5DE3C1}" RelativePosition="0.115625,0.926562" Type="WZUIImage" UseOriginSize="True"/>
+            <WZUIImage File="common/text/lottery_tickets_get.png" GUID="{D97B9824-A061-48d0-925B-C97072563CE3}" RelativePosition="0.158333,0.0546875" Type="WZUIImage" UseOriginSize="True"/>
+            <Button GUID="{5E429AEF-C5F7-4dd8-8AEF-C0AFD23E0BDB}" LuaDoneFunctionName="onclickBack" Name="btnBack_WndLottery" RelativePosition="0.915625,0.06875" RelativeSize="0.135,0.11" Type="WZUIButton">
+                <NormalElement GUID="{727FB658-217A-4976-88C6-D53B3AED7153}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/button_3.png" GUID="{209111F5-F564-4e77-9403-817584B55188}" Type="WZUIImage" UseOriginSize="True"/>
+                </NormalElement>
+                <SelectElement GUID="{0FB848E9-0E21-4964-9467-2B9294E1A8EE}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/button_3_sel.png" GUID="{366B8B28-4158-42a9-A49D-DA99D6123DA2}" Type="WZUIImage" UseOriginSize="True"/>
+                </SelectElement>
+                <DisableElement GUID="{A5D5D644-FBB1-4908-BD77-E46AC0AEBB15}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/button_4.png" GUID="{27E57DC1-7406-4cf4-A6C2-1E8856F29F4D}" Type="WZUIImage" UseOriginSize="True"/>
+                </DisableElement>
+            </Button>
+            <WZUILabelTTF Color="255,255,255" FontSize="30" GUID="{DDAB68EE-7944-4964-846C-36189D890D1A}" Name="txtBack_WndLottery" RelativePosition="0.915625,0.06875" Text="" Type="WZUILabelTTF"/>
+            <WZUIContainer GUID="{5207822D-FEB7-4f2d-B28D-56A124DDF01D}" Type="WZUIContainer">
+                <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" FontSize="24" GUID="{391BC88E-B3C4-4894-A3A7-B86B574CB8F3}" Name="txtFeiHua1_WndLottery" RelativePosition="0.324,0.1375" Text="" Type="WZUILabelTTF"/>
+                <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" FontSize="24" GUID="{62F4B3A1-3F9F-41a1-BC42-A272F4F36AD6}" Name="txtFeiHua2_WndLottery" RelativePosition="0.324,0.092188" Text="" Type="WZUILabelTTF"/>
+                <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,255,255" FontSize="24" GUID="{DB65822F-1D17-4055-B5C6-50B4EC91B63F}" Name="txtFeiHua3_WndLottery" RelativePosition="0.324,0.0468755" Text="" Type="WZUILabelTTF"/>
+            </WZUIContainer>
+            <WZUIImage File="ui/bottomMenu/pay/information_tickets.png" GUID="{9DCF8E2A-A237-4ca9-9DB9-F6F3DD6BB1A8}" RelativePosition="0.104167,0.14375" Type="WZUIImage" UseAbsCoordinate="False" UseOriginSize="True"/>
+            <WZUILabelAtlasFont Alignment="Left" AnchorPoint="0,0.5" CharMapFileName="common/num/lottery_num.png" GUID="{1F060A69-ADE2-4560-B6F6-CF77CD1C0A6B}" Height="44" Name="txtTotalZuanNum_WndLottery" RelativePosition="0.133333,0.140624" Scale="1" ScaleX="1" ScaleY="1" StartChar="48" Text="" Type="WZUILabelAtlasFont" UseOriginSize="True" Width="28"/>
+            <WZUILabelAtlasFont Alignment="Left" AnchorPoint="0,0.5" CharMapFileName="common/num/lottery_num.png" GUID="{2AC11667-529A-4c7d-B742-0B8F185A3C44}" Height="44" Name="txtEveryZuanNum_WndLottery" RelativePosition="0.747916,0.090625" Scale="0.5" ScaleX="0.5" ScaleY="0.5" StartChar="48" Text="5" Type="WZUILabelAtlasFont" UseOriginSize="True" UseOriginSizeProportion="False" Width="28"/>
+        </WZUIContainer>
+        <WZUITableContainer AbsContentSize="864,448" CellElementHeight="0.333333" ColumnCount="6" EnableMoveHorizontal="False" EnableMoveVertical="False" GUID="{2D744A32-6112-4cd7-8E08-59556BA45618}" Name="tbLottery_WndLottery" RelativePosition="0.5,0.532812" RelativeSize="0.9,0.6" Type="WZUITableContainer" UseAbsSize="True" VerticalInterval="0"/>
+        <WZUIContainer GUID="{9A71492E-D7AE-4219-A14E-75EC80A19585}" Name="conLove_WndLottery" RelativePosition="0.870833,0.929688" RelativeSize="0.2,0.05" Type="WZUIContainer">
+            <WZUIImage File="ui/leftMenu/lottery/information_lottery.png" GUID="{4444A3D1-09D1-49e9-8E9F-D2467AE5F525}" RelativePosition="0.145833,0.5" Type="WZUIImage" UseOriginSize="True"/>
+            <WZUILabelTTF Color="255,255,255" FontSize="25" GUID="{7CC0EFF6-3784-4017-93FE-9D97B26A110F}" Name="txtLoveNum_WndChat" RelativePosition="0.5,0.40625" Text="" Type="WZUILabelTTF"/>
+            <Button GUID="{1DD3B908-9D7B-4e1b-89FC-7D5EA5A461BB}" LuaDoneFunctionName="onclickAddLove" RelativePosition="0.915625,0.4375" RelativeSize="0.18,0.95" Type="WZUIButton">
+                <NormalElement GUID="{176275D4-7353-4f19-9889-AA53AD9B8C53}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/add_button.png" GUID="{A019948A-1CFB-4f76-87CD-2522E18822EA}" Type="WZUIImage"/>
+                </NormalElement>
+                <SelectElement GUID="{45A22A4C-7C19-4d51-8716-E980C8A78DB2}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/add_button_sel.png" GUID="{B2D5DABF-FEA3-4825-A4E9-C56722FCBBBA}" Type="WZUIImage"/>
+                </SelectElement>
+                <DisableElement GUID="{F5B1A828-1A36-4dd2-A452-4A0791AC399D}" Type="WZUIContainer"/>
+            </Button>
+        </WZUIContainer>
+        <Button GUID="{4194C022-1218-4c65-BC0C-845EF0E0CC77}" LuaDoneFunctionName="onclickLottery" Name="btnLottery_WndLottery" RelativePosition="0.5,0.526" RelativeSize="0.3,0.2" TouchEnable="True" Type="WZUIButton">
+            <NormalElement GUID="{44D4DE05-5F19-42b4-B2F5-04AA6807FEF6}" Type="WZUIContainer">
+                <WZUIImage File="common/button/button_lottery_nor.png" GUID="{3E3F02A6-9408-418c-BCC8-7A254C439309}" Type="WZUIImage" UseOriginSize="True"/>
+                <WZUIImage File="temp/lottery/button_5_button_lottery_nor_zh-Hans.png" GUID="{ECA3BE9A-57FA-4bc2-84E6-49EFAE7D8712}" Type="WZUIImage" UseOriginSize="True"/>
+            </NormalElement>
+            <SelectElement GUID="{0B86FC8A-3B4A-418d-9644-9DB0D3615F3C}" Type="WZUIContainer">
+                <WZUIImage File="common/button/button_lottery_sel.png" GUID="{17B76232-3E8F-470c-95A0-E02C8DF2656F}" Type="WZUIImage" UseOriginSize="True"/>
+                <WZUIImage File="temp/lottery/button_5_button_lottery_nor_zh-Hans.png" GUID="{8A2A7429-CE00-49e2-B929-1F0C84D4883C}" Type="WZUIImage" UseOriginSize="True"/>
+            </SelectElement>
+            <DisableElement GUID="{D742F952-3B3B-48ce-8B8D-17B4807C0429}" Type="WZUIContainer">
+                <WZUIImage File="common/button/button_lottery_not.png" GUID="{54FC2F81-6E04-4523-88DE-46F564900398}" Type="WZUIImage" UseOriginSize="True"/>
+                <WZUIImage File="temp/lottery/button_5_button_lottery_nor_zh-Hans.png" GUID="{14F94C70-ED74-4d1e-972D-BCF5236A9E1D}" Type="WZUIImage" UseOriginSize="True"/>
+            </DisableElement>
+        </Button>
+    </WZUIContainer>
+</WndLottery>

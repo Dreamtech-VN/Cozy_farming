@@ -1,0 +1,95 @@
+﻿<WndTeamCopySweep GUID="{81068e72-940f-4c5d-9fa5-31d9c92f8627}">
+    <WZUIWindow Type="WZUIWindow" GUID="{c42a5d89-debf-4921-9e6f-0e3c8fb84110}" LuaObjectName="WndTeamCopySweep" Name="WndTeamCopySweep" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{a5e0bdfd-a240-4004-bd75-25fb5ba43c39}" AbsContentSize="498,390" UseAbsSize="True" ShowAll="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{f6b4bd08-33d5-49d5-b098-708b5d85bed7}" File="ui/common/common_scale9_di19.png" CapInsets="135,90,5,5" />
+            <WZUIButton Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.930007,0.918476" GUID="{20a0aa41-8c05-44b7-82e8-a8ed058847a3}" LuaDoneFunctionName="onclickClose" LuaActionName="Normal" AbsContentSize="60,60" UseAbsSize="True" AbsPosition="731.035,504.672">
+                <NormalElement Type="WZUIContainer" GUID="{48a7fe7b-04f5-4c73-930e-f63ad4f9fc65}">
+                    <WZUIImage Type="WZUIImage" GUID="{2e20f5c3-6dd3-4da8-aef0-b9bd168d94bd}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{c8528311-cc5f-44dc-993f-62b1b415abc9}">
+                    <WZUIImage Type="WZUIImage" GUID="{72423cb6-be4a-4b9a-bfb2-c5bcf3a6fb44}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{4ddc23bc-1b72-4ee8-8a3e-eeab01ba05d3}" />
+            </WZUIButton>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{e74437e1-7e3a-46ac-854d-6f0b2de6a9ff}" LabelStyleKey="C1_F24_S4_C2" Text="" RelativePosition="0.5,0.917454" Name="txtTeamCopTitle_WndTeamCopySweep" />
+            <WZUIContainer Type="WZUIContainer" GUID="{b34fb4d8-90d4-4642-b8f4-ba9066467635}" AbsContentSize="486,326" UseAbsSize="True" RelativePosition="0.5,0.433333">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3b0ef69b-2b6c-460d-a4fc-5fe840707471}" LabelStyleKey="C5_F20" Text="当前副本：" RelativePosition="0.0447616,0.913303" TextKey="CURRENT_COPY" AnchorPoint="0,0.5" Name="txtCopyNameT_WndTeamCopySweep" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{224ca2f8-37b6-4eba-a08f-1302def8b493}" LabelStyleKey="C5_F20" Text="" RelativePosition="0.229947,0.913303" TextKey="" AnchorPoint="0,0.5" Name="txtCopyName_WndTeamCopySweep" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{43d9fb23-cf57-4441-b531-6f2aa257a4b3}" LabelStyleKey="C5_F20" Text="请选择副本难度：" RelativePosition="0.0447616,0.833548" TextKey="SWEEP_TEAM_COPY_DIFF_TIP" AnchorPoint="0,0.5" Name="txtDifficulty_WndTeamCopySweep" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3d57b559-af12-4486-8577-29256c719566}" LabelStyleKey="C5_F20" TextKey="SWEEP_FUNCTION_LAST" RelativePosition="0.53,0.913" AnchorPoint="0,0.5" Text="扫荡功能剩余次数:" Name="txtSweep_WndTeamCopySweep" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1c5cbc7e-1ce1-4b5f-8298-589be99a52ee}" LabelStyleKey="C13_F20" Text="" RelativePosition="0.885,0.9133" Name="txtSweepC_WndTeamCopySweep" AnchorPoint="0,0.5" />
+                <WZUIContainer Type="WZUIContainer" GUID="{6176af03-c76e-404f-9beb-53342dcfafd3}" AbsContentSize="450,172" UseAbsSize="True" RelativePosition="0.5,0.509202">
+                    <WZUI9Image Type="WZUI9Image" GUID="{be13df0e-4915-479c-9df7-16380c92a220}" File="ui/common/common_scale9_di4.png" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{5d60e8f3-a107-4168-a4a0-34b5d10723e8}" AbsContentSize="110,120" UseAbsSize="True" RelativePosition="0.186667,0.604651">
+                        <WZUIImage Type="WZUIImage" GUID="{db6b406b-9580-41df-a795-7e7271971681}" File="ui/common/common_icon_nanduxuanze.png" UseOriginSize="True" Visible="False" Name="imgSelect1_WndTeamCopySweep" />
+                        <WZUIImage Type="WZUIImage" GUID="{e8a81726-701c-474a-82af-7899f6355ab6}" File="ui/copy/copy_icon_jd1.png" UseOriginSize="True" RelativePosition="0.5,0.558333" />
+                        <WZUIImage Type="WZUIImage" GUID="{d3f4d358-6c83-4b8b-b738-158d1b6048d2}" File="ui/common/common_icon_zdxingxing.png" UseOriginSize="True" RelativePosition="0.272728,0.158334" Scale="0.8" ScaleX="0.8" ScaleY="0.8" Name="imgPass1_WndTeamCopySweep" />
+                        <WZUIImage Type="WZUIImage" GUID="{914292ac-9456-4119-b3db-a1011f02dc73}" File="ui/common/common_icon_zdjd.png" UseOriginSize="True" RelativePosition="0.6357,0.147355" />
+                        <Button Type="WZUIButton" GUID="{15a430f2-099a-4790-989d-30a38563d60f}" LuaDoneFunctionName="onClickDifficulty" Tag="1">
+                            <NormalElement Type="WZUIContainer" GUID="{0699a095-3f3a-4c1b-b9ad-3e7d46ad263e}" />
+                            <SelectElement Type="WZUIContainer" GUID="{8e596e81-61c4-4288-9c73-4a23c69ec996}" />
+                            <DisableElement Type="WZUIContainer" GUID="{87e6fa52-6b8d-4548-87c8-ad432936d7f7}" />
+                        </Button>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{ef7a2096-d03d-4313-bc2d-62acddab24bd}" AbsContentSize="110,120" UseAbsSize="True" RelativePosition="0.5,0.604651">
+                        <WZUIImage Type="WZUIImage" GUID="{2e47068d-a136-4e5a-9c5d-2551bff86db5}" File="ui/common/common_icon_nanduxuanze.png" UseOriginSize="True" Name="imgSelect2_WndTeamCopySweep" Visible="False" />
+                        <WZUIImage Type="WZUIImage" GUID="{1de41543-510d-4d19-b5f4-ea112945fe17}" File="ui/copy/copy_icon_kn1.png" UseOriginSize="True" RelativePosition="0.5,0.558333" />
+                        <WZUIImage Type="WZUIImage" GUID="{fa646cc7-1a8b-45b8-b4ac-7b0eb902ffa0}" File="ui/common/common_icon_zdxingxing.png" UseOriginSize="True" RelativePosition="0.272728,0.158334" Scale="0.8" ScaleX="0.8" ScaleY="0.8" Name="imgPass2_WndTeamCopySweep" />
+                        <WZUIImage Type="WZUIImage" GUID="{0668931a-0ff0-4022-8f64-3dca9f4c764b}" File="ui/common/common_icon_zdkn.png" UseOriginSize="True" RelativePosition="0.6357,0.147355" />
+                        <Button Type="WZUIButton" GUID="{755b9570-a757-493b-bd88-c45faa28bbe1}" Tag="2" LuaDoneFunctionName="onClickDifficulty">
+                            <NormalElement Type="WZUIContainer" GUID="{4dec64be-8dad-41bb-9336-9fa0469fd00b}" />
+                            <SelectElement Type="WZUIContainer" GUID="{28dbb436-e0ba-4aef-bc83-2ab13a3ff174}" />
+                            <DisableElement Type="WZUIContainer" GUID="{f08e5a93-9252-468c-8394-bdf497535431}" />
+                        </Button>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{4d84bb1f-8b4b-4f9d-a8c2-f3f6e1f34e45}" AbsContentSize="110,120" UseAbsSize="True" RelativePosition="0.810009,0.604651">
+                        <WZUIImage Type="WZUIImage" GUID="{4c070710-486c-481f-9db2-c231692b81d4}" File="ui/common/common_icon_nanduxuanze.png" UseOriginSize="True" Name="imgSelect3_WndTeamCopySweep" Visible="False" />
+                        <WZUIImage Type="WZUIImage" GUID="{7a0429bd-4f61-41a9-ae99-7205ed3e87cc}" File="ui/copy/copy_icon_dy1.png" UseOriginSize="True" RelativePosition="0.5,0.558333" />
+                        <WZUIImage Type="WZUIImage" GUID="{cfecd0bb-ab6a-46a9-a0db-e216355c43b0}" File="ui/common/common_icon_zdxingxing.png" UseOriginSize="True" RelativePosition="0.272728,0.158334" Scale="0.8" ScaleX="0.8" ScaleY="0.8" Name="imgPass3_WndTeamCopySweep" />
+                        <WZUIImage Type="WZUIImage" GUID="{f7a444de-6253-43f3-b5ca-e0dec9ccb442}" File="ui/common/common_icon_zddy.png" UseOriginSize="True" RelativePosition="0.6357,0.147355" />
+                        <Button Type="WZUIButton" GUID="{adb3e0c7-5d6e-4cef-8850-5727bcecf285}" Tag="3" LuaDoneFunctionName="onClickDifficulty">
+                            <NormalElement Type="WZUIContainer" GUID="{7f3d941f-3e18-434e-8483-b0f7e0fdc3ef}" />
+                            <SelectElement Type="WZUIContainer" GUID="{560adb91-efba-4a4d-8682-310cd8d90da2}" />
+                            <DisableElement Type="WZUIContainer" GUID="{bae9767a-744a-4105-8986-a7bd9e6654de}" />
+                        </Button>
+                    </WZUIContainer>
+                    <WZUIImage Type="WZUIImage" GUID="{30b721cc-f178-42f8-930c-4ba0a5071924}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.246666,0.110465" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{842fa1d5-a67a-4ebb-b1ad-e677f7f13120}" Text="扫荡所需" LabelStyleKey="C5_F20" RelativePosition="0.301556,0.113379" AnchorPoint="0,0.5" TextKey="SWEEP_TEAM_COPY_FIGHTING" Name="txtCost_WndTeamCopySweep" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{29e956c3-4ed5-4921-b46a-b0853f4e88d9}" LabelStyleKey="C2_F20" TextKey="BATTLE" RelativePosition="0.528261,0.113379" Name="txtPower_WndTeamCopySweep" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{81b7fbce-2f7d-40d5-8405-7244d768f863}" LabelStyleKey="C14_F20" TextKey="" RelativePosition="0.579372,0.113379" AnchorPoint="0,0.5" Text="" Name="txtPlayerFight_WndTeamCopySweep" />
+                    <WZUIImage Type="WZUIImage" GUID="{450de330-d534-408f-a59b-7871895f335a}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.757777,0.110465" FlipX="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{96dd2db6-9a48-4b11-83b9-061df671a459}" AbsContentSize="486,83" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{a6a79b64-82c3-4d5f-a0b6-9042d0c4c409}" LabelStyleKey="C5_F20" TextKey="PETUSE" RelativePosition="0.0795628,0.602516" Name="txtCostDes_WndTeamCopySweep" />
+                    <WZUIImage Type="WZUIImage" GUID="{8287675c-676a-4a40-9741-2259aa05e309}" File="shopitems/sweep.png" UseOriginSize="True" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.160893,0.63165" Name="imgItem_WndTeamCopySweep" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1e8765de-f65b-43cc-8c59-73c970e6e319}" LabelStyleKey="C13_F20" Text="" RelativePosition="0.201501,0.605034" Name="txtSweepCount_WndTeamCopySweep" AnchorPoint="0,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{021fd040-8751-4c99-8a19-f1b51da601fb}" LabelStyleKey="C5_F20" TextKey="KING_REST_TIMES" RelativePosition="0.0363529,0.24107" AnchorPoint="0,0.5" Text="扫荡功能剩余次数:" Name="txtLeftWords_WndTeamCopySweep">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{972a2fad-b679-4364-8674-7fc5c090a67e}" LabelStyleKey="C13_F20" Text="" RelativePosition="1.05,0.5" Name="txtLeftTimes_WndTeamCopySweep" AnchorPoint="0,0.5" />
+                    </WZUILabelTTF>
+                    <WZUIContainer Type="WZUIContainer" GUID="{beff134c-966e-41fc-aaa4-cc334d5b6b7f}" AbsContentSize="116,58" UseAbsSize="True" RelativePosition="0.846233,0.461337">
+                        <Button Type="WZUIButton" GUID="{d33e43dc-dffd-4223-80cb-a066f76a0d95}" LuaDoneFunctionName="onClickSweep" LocalInterval="300" Tag="1">
+                            <NormalElement Type="WZUIContainer" GUID="{44f3ba45-6162-420b-b034-2bbaa8e66812}">
+                                <WZUIImage Type="WZUIImage" GUID="{44273b1d-956c-45ea-822c-bdcb686cfb83}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{d04d79eb-6882-4c24-8db7-c33e498530d2}">
+                                <WZUIImage Type="WZUIImage" GUID="{0f3fbf2c-f8b9-4b61-b1a7-3c2c587fbd8e}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{20213684-fd86-4305-a5ab-fe9be6b373d0}" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a4dc7221-8041-4ce6-ba4d-65775f67d61d}" LabelStyleKey="C1_F24_S4_C4" TextKey="WIPE_OUT" />
+                        </Button>
+                        <Button Type="WZUIButton" GUID="{eac60760-9dcd-49da-a583-3683dd919ab9}" LuaDoneFunctionName="onClickSweep" LocalInterval="300" RelativePosition="-0.6,0.5" Name="btnSweepAll_WndTeamCopySweep" Visible="False" Tag="2">
+                            <NormalElement Type="WZUIContainer" GUID="{63e797d5-9157-4701-9fd3-9fd0aba8c702}">
+                                <WZUIImage Type="WZUIImage" GUID="{8d72a7c5-970d-4cc3-8281-db95b2b0105d}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{40d8a357-9405-4c3f-8647-b0f70bbb6b80}">
+                                <WZUIImage Type="WZUIImage" GUID="{4e8d793c-810d-4f5f-89c3-44209ea1c0b3}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{365d835d-1602-43a5-bc65-29a1374b94f5}" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a1e72c9c-f568-4273-a258-39e83ad74b15}" LabelStyleKey="C1_F24_S4_C4" TextKey="MULTI_SWEEP" Name="txtSweepAll_WndTeamCopySweep" />
+                        </Button>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTeamCopySweep>

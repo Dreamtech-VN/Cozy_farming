@@ -1,0 +1,34 @@
+﻿<WndCreateFamily GUID="{2135186d-35a9-4ee5-87c6-5ab3e85f9a86}">
+    <WZUIWindow AbsContentSize="387,300" GUID="{2a954bdd-76ac-43e4-94a8-3a94299feb60}" LuaObjectName="WndCreateFamily" Name="WndCreateFamily" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{57e296e9-6770-4f42-894d-4c970b371533}" AbsContentSize="387,300" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{10c5dacd-77f1-4764-8b78-26672ddb5578}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" />
+        </WZUIContainer>
+        <WZUIContainer GUID="{31cba8be-a8ce-4f2f-b991-770c4821e7c2}" Name="conTop_WndCreateFamily" RelativePosition="0.5,0.9" RelativeSize="1,0.2" Type="WZUIContainer">
+            <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{435b4d10-e162-4b9d-9fb3-0886fb194c98}" RelativePosition="0.5,0.5" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="132,66,29" StrokeOffset="0,0" StrokeSize="4" Text="创建公会" Type="WZUILabelTTF" Visible="True" TextKey="FAMILY_TEXT1" />
+        </WZUIContainer>
+        <WZUIContainer GUID="{31f0f4f2-6450-431f-9775-219fa3ff0969}" Name="conMid_WndCreateFamily" RelativePosition="0.5,0.553333" RelativeSize="0.97,0.5" Type="WZUIContainer">
+            <WZUI9Image Type="WZUI9Image" GUID="{7f8e11be-b10e-45ca-ae4c-2cb204c1e404}" File="ui/common/common_scale9_di20.png" Opacity="150" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{fe1a2d8d-8e4d-4270-af3c-b0d67027594b}" MaxWidth="360" Name="ftxtCost_WndCreateFamily" />
+        </WZUIContainer>
+        <WZUIButton AbsContentSize="116,56" GUID="{78546aff-9864-408f-9699-cc4614f75638}" LuaDoneFunctionName="onCreate" Name="btnCreate_WndCreateFamily" RelativePosition="0.7,0.16" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal" AbsPosition="190,47.4">
+            <NormalElement GUID="{d8d965c5-7b51-4503-bee2-677154ddb1c4}" Type="WZUIContainer">
+                <WZUI9Image File="ui/common/common_btn_anniu10.png" GUID="{8726bacd-b6e1-49c1-a274-3e8358c2a3df}" Type="WZUI9Image" />
+            </NormalElement>
+            <SelectElement GUID="{f5d0cdac-e405-48ea-a58f-1cafcdcfb67a}" Type="WZUIContainer">
+                <WZUI9Image File="ui/common/common_btn_anniu10.png" GUID="{a3ec5b61-bacb-4b89-9794-2deb3ce03f25}" Type="WZUI9Image" Scale="1" ScaleX="1" ScaleY="1" />
+            </SelectElement>
+            <DisableElement GUID="{94fa26fc-c3bc-4efb-908f-242101865be7}" Type="WZUIContainer" />
+            <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{eeaf15da-462a-4fe7-b84e-ffe7b2313589}" Name="txtCreate_WndCreateFamily" ShadowColor="0,255,0" StrokeColor="64,128,1" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" RelativePosition="0.5,0.47" LabelStyleKey="SMALL_GREEN_BTN" TextKey="CONFIRM" />
+        </WZUIButton>
+        <WZUIButton AbsContentSize="116,56" GUID="{b413de71-2bb8-451b-8aae-ccccc04b866e}" LuaDoneFunctionName="onCancel" Name="btnClose_WndCreateFamily" RelativePosition="0.3,0.16" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal" AbsPosition="190,47.4">
+            <NormalElement GUID="{ae51264a-4b0c-47a2-8884-bfbcaf83d1b2}" Type="WZUIContainer">
+                <WZUI9Image File="ui/common/common_btn_anniu3.png" GUID="{ad38c4b3-08c8-41ef-bee5-d2d6e1ebcdb4}" Type="WZUI9Image" />
+            </NormalElement>
+            <SelectElement GUID="{437458d9-ccf7-4886-bc6c-650d71ac9e89}" Type="WZUIContainer">
+                <WZUI9Image File="ui/common/common_btn_anniu3_sel.png" GUID="{338ec7ae-04bb-4e70-9d30-8ba0e0819fbc}" Type="WZUI9Image" Scale="1" ScaleX="1" ScaleY="1" />
+            </SelectElement>
+            <DisableElement GUID="{17593d86-cf38-4c6b-9657-613b3da42229}" Type="WZUIContainer" />
+            <WZUILabelTTF BoldFont="False" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{033aa061-4fb6-4cfd-b343-b7dfc46427ee}" Name="txtCreate_WndCreateFamily" ShadowColor="0,255,0" StrokeColor="64,128,1" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" RelativePosition="0.5,0.47" LabelStyleKey="SMALL_ORANGE_BTN" TextKey="BACK" />
+        </WZUIButton>
+    </WZUIWindow>
+</WndCreateFamily>

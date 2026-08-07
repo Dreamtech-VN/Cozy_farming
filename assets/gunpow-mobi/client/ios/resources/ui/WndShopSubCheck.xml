@@ -1,0 +1,76 @@
+﻿<WndShopSubCheck GUID="{bc2027d9-9ac8-405c-b424-581145e5d36b}">
+    <WZUIContainer Type="WZUIContainer" GUID="{9c54379e-3e8c-4671-aba9-955cd09068be}" AbsContentSize="80,336" UseAbsSize="True" RelativePosition="0.936,0.565" Visible="True" AbsPosition="292,438" LuaObjectName="WndShopSubCheck" Name="WndShopSubCheck">
+        <WZUICheckBoxGroup Type="WZUICheckBoxGroup" GUID="{233362a5-56b1-4e60-bb7f-66384969db29}" RelativeSize="1,1" RelativePosition="0.41,0.5" Name="checkboxRight_WndShop" ScaleX="1" Scale="1">
+            <CheckBox Type="WZUICheckBox" GUID="{4bf0b420-f926-4255-acbc-abe734d65b5c}" AbsContentSize="106,40" UseAbsSize="True" AnchorPoint="0,1" RelativePosition="0,1" Name="tab1_WndShop" NameCreate="True" SelectedIndex="1" LuaCheckedFunctionName="" Tag="1" LuaSelectedFunctionName="onCheck">
+                <CheckElement Type="WZUIContainer" GUID="{325f07fd-8e52-4127-bb48-3c1f192c6297}">
+                    <WZUIImage Type="WZUIImage" GUID="{715222d9-69d9-4726-a1cf-259d2993aa7c}" File="ui/shop/common_btn_shop02.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{83205dc8-d292-46dd-91d2-364c24336f09}" Color="255,236,193" EnableStroke="True" FontSize="24" StrokeColor="79,60,48" StrokeSize="4" Text="" Name="txt1" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C1_F22" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{8d6d6de2-61cd-4038-8692-554a30c44764}">
+                    <WZUIImage Type="WZUIImage" GUID="{d17a68a9-49cf-401f-8bbd-966fd1de4e78}" File="ui/shop/common_btn_shop_sel2.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{118cd95d-9e8a-4d49-a121-15e48975832c}" Color="62,34,8" EnableStroke="False" FontSize="24" StrokeColor="132,66,29" StrokeSize="4" Text="" Name="txt1_sel" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C5_F22" />
+                </CheckElement>
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{cda41ff7-5f8f-4464-9d9a-6fe8cec9adb4}" AbsContentSize="106,40" UseAbsSize="True" RelativePosition="0,0.8333" Name="tab2_WndShop" NameCreate="True" Tag="2" LuaCheckedFunctionName="" LuaSelectedFunctionName="onCheck" AnchorPoint="0,1">
+                <CheckElement Type="WZUIContainer" GUID="{6876c164-ac4d-47bb-95de-0c1dcf833ab9}">
+                    <WZUIImage Type="WZUIImage" GUID="{bf3b4504-4654-4338-a67a-84a92a8ca03d}" File="ui/shop/common_btn_shop02.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{64c5a73a-8e8d-4c4f-8f8f-c55f280ab4cb}" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="79,60,48" StrokeSize="4" Text="" Name="txt2" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C1_F22" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{f4e6a84b-1803-42fc-8596-4a7f36c9e6df}">
+                    <WZUIImage Type="WZUIImage" GUID="{bec039d1-f0b2-4f85-a2d7-e29d9c663094}" File="ui/shop/common_btn_shop_sel2.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{acfe41d7-4485-4961-be9b-543d29e7ac27}" Color="62,34,8" EnableStroke="False" FontSize="24" StrokeColor="132,66,29" StrokeSize="4" Text="" Name="txt2_sel" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C5_F22" />
+                </CheckElement>
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{a0a00e85-ca5f-4204-b8fd-4b928b082729}" AbsContentSize="106,40" UseAbsSize="True" Name="tab3_WndShop" NameCreate="True" Tag="3" LuaCheckedFunctionName="" LuaSelectedFunctionName="onCheck" RelativePosition="0,0.667" AnchorPoint="0,1">
+                <CheckElement Type="WZUIContainer" GUID="{d4d6c439-18d9-47a7-b057-ca315f9643f0}">
+                    <WZUIImage Type="WZUIImage" GUID="{68dff034-d25d-4b11-8b34-2d64a8f76d93}" File="ui/shop/common_btn_shop02.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{dfa8e874-91ac-4266-a9ba-13d3fa3b91ca}" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="79,60,48" StrokeSize="4" Text="" Name="txt3" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C1_F22" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{efad3c4a-a740-4dcc-9137-101cf7e8261b}">
+                    <WZUIImage Type="WZUIImage" GUID="{58ab218c-0a06-4fff-8a0b-16286ef98f6a}" File="ui/shop/common_btn_shop_sel2.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{3a973179-b702-4a81-a1bb-264cdf476382}" Color="62,34,8" EnableStroke="False" FontSize="24" StrokeColor="132,66,29" StrokeSize="4" Text="" Name="txt3_sel" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C5_F22" />
+                </CheckElement>
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{98d58565-3cbe-4e00-9ad3-393bdb15bcee}" AbsContentSize="106,40" UseAbsSize="True" RelativePosition="0,0.5" Name="tab4_WndShop" NameCreate="True" Tag="4" LuaCheckedFunctionName="" LuaSelectedFunctionName="onCheck" AnchorPoint="0,1">
+                <CheckElement Type="WZUIContainer" GUID="{028dd24e-05d1-49e4-b8d5-be000b427bf9}">
+                    <WZUIImage Type="WZUIImage" GUID="{f9cdb234-7f48-43bb-b116-328fc2955df3}" File="ui/shop/common_btn_shop02.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{62ff95c4-a19c-4999-b287-90731430a41f}" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="79,60,48" StrokeSize="4" Text="" Name="txt4" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C1_F22" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{b6c920f0-cb83-4357-85ad-570531bc116a}">
+                    <WZUIImage Type="WZUIImage" GUID="{796db8c4-304c-4ef8-89d0-a6d4a88b5c4c}" File="ui/shop/common_btn_shop_sel2.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{5873299c-399b-4de0-b695-6571a7dd85e4}" Color="62,34,8" EnableStroke="False" FontSize="24" StrokeColor="132,66,29" StrokeSize="4" Text="" Name="txt4_sel" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C5_F22" />
+                </CheckElement>
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{4a235d57-8dc4-4ac4-a4d3-e5f82ded81b9}" AbsContentSize="106,40" UseAbsSize="True" RelativePosition="0,0.3333" Name="tab5_WndShop" NameCreate="True" Tag="5" LuaCheckedFunctionName="" LuaSelectedFunctionName="onCheck" Visible="True" AnchorPoint="0,1">
+                <CheckElement Type="WZUIContainer" GUID="{99e45e0c-fb82-4c6d-b26b-b5c5f95cdd05}">
+                    <WZUIImage Type="WZUIImage" GUID="{2e30841a-1200-4ce4-9f20-f3ac6cc2609f}" File="ui/shop/common_btn_shop02.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{423051a0-eda1-41d6-b208-c30a7f7c6719}" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="79,60,48" StrokeSize="4" Text="" Name="txt5" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C1_F22" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{d87e5c20-ec27-451f-adfc-4055f69fe135}">
+                    <WZUIImage Type="WZUIImage" GUID="{e7e47f1e-243b-4b3a-a339-5fe839a6e9f8}" File="ui/shop/common_btn_shop_sel2.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{19ab7bc7-32c8-4f72-a923-ed200766c4cc}" Color="62,34,8" EnableStroke="False" FontSize="24" StrokeColor="132,66,29" StrokeSize="4" Text="" Name="txt5_sel" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C5_F22" />
+                </CheckElement>
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{edfd18d1-7f1b-480d-8338-3f0552601980}" AbsContentSize="106,40" UseAbsSize="True" RelativePosition="0,0.16666" Name="tab6_WndShop" NameCreate="True" Tag="6" LuaCheckedFunctionName="" LuaSelectedFunctionName="onCheck" Visible="True" AnchorPoint="0,1">
+                <CheckElement Type="WZUIContainer" GUID="{030e59bc-2dfd-45a1-a746-e23d6c56c5ca}">
+                    <WZUIImage Type="WZUIImage" GUID="{4c885338-d0d4-4b3e-b897-63688a631952}" File="ui/shop/common_btn_shop02.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{3f23487b-0c29-4b1c-bc25-a0801d5165c6}" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="79,60,48" StrokeSize="4" Text="" Name="txt6" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C1_F22" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{bfb9a186-0d69-4eeb-81eb-d132f0b5555b}">
+                    <WZUIImage Type="WZUIImage" GUID="{4c9cf794-36d3-4a30-a206-c72674008288}" File="ui/shop/common_btn_shop_sel2.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8b64a9fd-2f52-437e-b8ea-1fd1469ce5fc}" Color="62,34,8" EnableStroke="False" FontSize="24" StrokeColor="132,66,29" StrokeSize="4" Text="" Name="txt6_sel" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C5_F22" />
+                </CheckElement>
+            </CheckBox>
+            <CheckBox Type="WZUICheckBox" GUID="{66cf9030-5d43-40de-97f0-979841cd16fb}" AbsContentSize="106,40" UseAbsSize="True" RelativePosition="0,0" Name="tab7_WndShop" NameCreate="True" Tag="7" LuaCheckedFunctionName="" LuaSelectedFunctionName="onCheck" Visible="True" AnchorPoint="0,1">
+                <CheckElement Type="WZUIContainer" GUID="{1ae936d1-3104-4817-a1ef-cdba37b09349}">
+                    <WZUIImage Type="WZUIImage" GUID="{c14a512f-7cd1-43a8-b04a-a9064802f9cd}" File="ui/shop/common_btn_shop02.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{77a13c1a-25ab-48a0-8c9d-11e93d6cbcbf}" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="79,60,48" StrokeSize="4" Text="" Name="txt7" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C1_F22" />
+                </CheckElement>
+                <CheckElement Type="WZUIContainer" GUID="{780f2143-4692-4806-992d-5f6a76bef1db}">
+                    <WZUIImage Type="WZUIImage" GUID="{e8ff193a-7941-49be-a2f7-3d7c2741f54c}" File="ui/shop/common_btn_shop_sel2.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{2c4f0478-913b-4307-b367-2ad9e57cf81e}" Color="62,34,8" EnableStroke="False" FontSize="24" StrokeColor="132,66,29" StrokeSize="4" Text="" Name="txt7_sel" NameCreate="True" TextKey="" RelativePosition="0.5,0.5" LabelStyleKey="C5_F22" />
+                </CheckElement>
+            </CheckBox>
+        </WZUICheckBoxGroup>
+    </WZUIContainer>
+</WndShopSubCheck>

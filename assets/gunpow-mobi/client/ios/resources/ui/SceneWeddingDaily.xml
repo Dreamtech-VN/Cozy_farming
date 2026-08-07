@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<SceneWeddingDaily GUID="{C5598C32-CC72-4c46-97D6-39221E8FG4E4}">
+    <WZUIFrame GUID="{483D8FFC-20CE-44f7-9B14-EC6005E567F5}" LuaObjectName="SceneWeddingDaily" Name="SceneWeddingDaily" NameCreate="True" RelativePosition="0.5,0.498437" ShowAll="False" Type="WZUIFrame" LuaTouchBeganFunction="onTouchBegin">
+        <WZUIContainer Type="WZUIContainer" GUID="{aa001fec-1a19-454e-a199-2609f07f37c9}">
+            <WZUIImage Type="WZUIImage" GUID="{a3e5808f-400e-4f56-8237-f4827b78d27f}" File="ui/common_bg/common_scale9_di2.png" UseOriginSize="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{4fbbbeea-f0b7-4c96-b825-9573735332f3}" ShowAll="True">
+            <WZUIContainer AbsContentSize="1136,720" GUID="{6a66a8e3-44cb-4895-b7f3-a6c1d74dfe79}" Name="conBg_SceneWeddingDaily" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIParticle Type="WZUIParticle" GUID="{20c96a5b-9003-46c7-87be-88d58e7f2c81}" PlistFile="particle/particle_tongyonglizi.plist" RelativePosition="0.5,0.1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{05f0289d-8dc0-49b1-99fa-4922c0d08e4f}" AbsContentSize="950,576" UseAbsSize="True" RelativePosition="0.5,0.920902" AnchorPoint="0.5,1" ShowAll="False">
+                <WZUIContainer AbsContentSize="440,576" GUID="{8b0f4d3b-d39e-48a9-bc86-4230f2178110}" Name="conRight_SceneWeddingDaily" RelativePosition="-0.0105263,0.49028" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" Visible="True" AnchorPoint="0,0.5">
+                    <WZUIContainer AbsContentSize="0,0" GUID="{6aa50d5a-e212-4d37-8257-10b56ab24f0e}" RelativePosition="0.5,0.5" Type="WZUIContainer">
+                        <WZUIContainer AbsContentSize="340,70" GUID="{4a7115fb-0286-437a-ba2e-67d40164aceb}" RelativePosition="0.5,0.878192" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0.5">
+                            <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0" ChineseLengthPolicy="0" Color="255,236,193" Dimensions="0,0" FontSize="22" GUID="{ca4e9c9d-a9e4-4a3a-982e-052f96401947}" MaxLength="30" Name="txtBridgeName_SceneWeddingDaily" RelativePosition="0.211292,-0.26736" Text="" Type="WZUILabelTTF" LabelStyleKey="C1_F22_S4_C5" />
+                            <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0" ChineseLengthPolicy="0" Color="255,236,193" Dimensions="0,0" FontSize="22" GUID="{aa94be18-0077-47d0-8079-be2cb8ba2036}" MaxLength="30" Name="txtBridgeGroomName_SceneWeddingDaily" RelativePosition="0.742664,-0.26736" Text="" TextKey="" Type="WZUILabelTTF" LabelStyleKey="C1_F22_S4_C5" />
+                            <WZUIImage Type="WZUIImage" GUID="{8e00526c-58fd-49f7-89ba-8e57da7f8cee}" File="ui/common/common_icon_xlz.png" UseOriginSize="True" RelativePosition="0.21328,0.406172" />
+                            <WZUIImage Type="WZUIImage" GUID="{cf0abda3-5396-4869-9f35-1f662af2985d}" File="ui/common/common_icon_xnz.png" UseOriginSize="True" RelativePosition="0.736702,0.406172" />
+                        </WZUIContainer>
+                        <WZUIContainer AbsContentSize="250,60" GUID="{7f7f9109-e124-4ac6-bddb-6036cf2dc548}" RelativePosition="0.530711,0.284942" Type="WZUIContainer" UseAbsSize="True">
+                            <WZUIImage Type="WZUIImage" GUID="{98f4f7e5-9aee-4bcf-bbf9-ff0dd8f40dd8}" File="ui/common/common_scale9_heidi4.png" UseOriginSize="True" RelativePosition="0.44,0.5" RelativeSize="1,1" ScaleY="0.8" TouchEnable="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a4a9ff39-718f-4d8a-b7a3-5f5f64cc500b}" FontSize="22" Color="255,227,116" TextKey="WEDDING_TIME" AnchorPoint="0,0.5" RelativePosition="-0.232,0.5" Name="txtTitle_SceneWeddingDaily" />
+                            <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="255,89,74" Dimensions="0��0" FontSize="22" GUID="{48fca7eb-f222-4075-926b-d01d0fa8b5e9}" Name="txtWeddingStartTime_SceneWeddingDaily" RelativePosition="0.584578,0.5" Text="00:00-00:00" Type="WZUILabelTTF" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer AbsContentSize="224,70" AnchorPoint="0.5,0" GUID="{d61fddac-7fb6-47ba-90f6-2540a4859642}" Name="conBtn_SceneWeddingDaily" RelativePosition="0.5,0.104902" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                        <Button AbsContentSize="0,0" AnchorPoint="0,0.5" GUID="{82c88ddb-4a1a-4e34-904e-d5ace893629e}" LuaDoneFunctionName="onJoinBtn" Name="btnJoin_SceneWeddingDaily" RelativePosition="0,0.5" TouchEnable="False" Type="WZUIButton" UseAbsSize="False">
+                            <NormalElement AbsContentSize="" GUID="{b58f62e7-f211-440b-8fdb-16d864ea93da}" Type="WZUIContainer" UseAbsSize="False">
+                                <WZUI9Image File="ui/common/common_btn_anniu8.png" GUID="{9e61baf1-9a3a-41ad-a54d-82f7e19940be}" Type="WZUI9Image" UseOriginSize="True" Scale="0.8" />
+                                <WZUIImage Type="WZUIImage" GUID="{4192c715-9f70-4521-8d2f-c41db4929ea1}" File="ui/common/marry_icon_cjhl.png" UseOriginSize="True" TouchEnable="False" Scale="1" />
+                            </NormalElement>
+                            <SelectElement AbsContentSize="" GUID="{06937bde-2b80-4315-817a-81af6c2dfe6a}" Type="WZUIContainer" UseAbsSize="False">
+                                <WZUI9Image File="ui/common/common_btn_anniu8_sel.png" GUID="{acc991b2-4883-4382-91e6-b2a3bed0b114}" Type="WZUI9Image" UseOriginSize="True" Scale="0.8" />
+                                <WZUIImage Type="WZUIImage" GUID="{7c19d52a-1098-4b02-85b1-70d0d22a2042}" File="ui/common/marry_icon_cjhl.png" UseOriginSize="True" TouchEnable="False" Scale="1" />
+                            </SelectElement>
+                            <DisableElement AbsContentSize="" GUID="{7ae1d64d-f770-40eb-9b24-b5f197407b15}" Type="WZUIContainer" UseAbsSize="False">
+                                <WZUI9Image File="ui/common/common_btn_anniu8_sel.png" GUID="{d911b434-6eb3-4a31-8fec-2691874a2abc}" Type="WZUI9Image" UseOriginSize="True" GrayRender="True" Scale="0.8" />
+                                <WZUIImage Type="WZUIImage" GUID="{f8fb98ff-b7eb-42d9-b406-6ef87fc03647}" File="ui/common/marry_icon_cjhl.png" UseOriginSize="True" TouchEnable="False" GrayRender="True" Scale="1" RelativePosition="0.5,0.542857" />
+                            </DisableElement>
+                        </Button>
+                    </WZUIContainer>
+                    <WZUIContainer AbsContentSize="328,300" GUID="{9d417927-a8ea-4d59-8e6c-d73daf9278bd}" Name="conBrigeAndBrigeGroomArm_SceneWeddingDaily" RelativePosition="0.492077,0.598013" RelativeSize="0.9,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True" AbsPosition="216.514,344.455">
+                        <WZUIImage Type="WZUIImage" GUID="{12dbd3f6-acc9-43e1-9c18-c10b710d540e}" TouchEnable="False" File="ui/common/common_icon_yy.png" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="-0.0609755,0.0700004" Scale="1" AbsPosition="-20,21.0001" />
+                        <WZUIImage Type="WZUIImage" GUID="{9ea689ed-e878-4926-b4d7-ab25c9871a6e}" TouchEnable="False" File="ui/common/common_icon_yy.png" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0.466462,0.0700004" Scale="1" AbsPosition="153,21.0001" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{fc5bc5d9-ebd3-405c-83ab-c8d4218c3929}" Name="WZUIContainer" AbsContentSize="164,300" AnchorPoint="0,0.5" UseAbsSize="True" RelativePosition="-0.0304878,0.5" AbsPosition="-10,150">
+                            <WZUIContainer Type="WZUIContainer" GUID="{bffe6241-8d84-496e-b29c-c4d141a7df37}" Name="leftCon_SceneWeddingDaily" />
+                            <Button Type="WZUIButton" GUID="{6f7439de-92d4-4bc1-9b32-3ca2f079904e}" LuaDoneFunctionName="onClickLeft">
+                                <NormalElement Type="WZUIContainer" GUID="{9c10788b-dceb-47b3-abe9-152aa553f213}" />
+                                <SelectElement Type="WZUIContainer" GUID="{af648a57-502e-44cd-8d52-6d6113d2564e}" />
+                                <DisableElement Type="WZUIContainer" GUID="{565f4b59-b701-432c-b53a-83b8b96ffd34}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{1b2814fb-1cfb-42d0-b020-553d216e2bb1}" Name="WZUIContainer" AbsContentSize="164,300" AnchorPoint="1,0.5" RelativePosition="1.0061,0.5" UseAbsSize="True" AbsPosition="330,150">
+                            <WZUIContainer Type="WZUIContainer" GUID="{8eed9d10-4659-4d0f-b2bc-5b7b6c9b84f3}" Name="rightCon_SceneWeddingDaily" />
+                            <Button Type="WZUIButton" GUID="{85a853c5-ee53-4f2e-bc11-57e8323bf536}" LuaDoneFunctionName="onClickRight">
+                                <NormalElement Type="WZUIContainer" GUID="{75c03f7f-938e-492b-bd4c-09e97252195b}" />
+                                <SelectElement Type="WZUIContainer" GUID="{9d0ffb5f-b6b1-4c53-bbd3-54892a624c7a}" />
+                                <DisableElement Type="WZUIContainer" GUID="{b7c0a5cb-b90c-4ec3-8968-1a0dbbc57a0e}" />
+                            </Button>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="505,530" GUID="{7943f9ae-944e-4197-90fc-e0c6bf92429d}" Name="conLeft_SceneWeddingDaily" RelativePosition="1,0.5" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="1,0.5" ScaleX="-1" Scale="1">
+                    <WZUIContainer Type="WZUIContainer" GUID="{31fdeda2-d3ca-404a-ac98-30f2fe0a7cb4}" RelativePosition="0.5,0.5" Visible="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{156b5795-b0a2-40de-a971-13b907ccc0b2}" RelativeSize="0.5,1" RelativePosition="0.25,0.5">
+                            <WZUI9Image Type="WZUI9Image" GUID="{b454d563-9f9f-444d-a8f6-7ad99b980d11}" File="ui/common/common_scale9_di3.png" Opacity="255" Visible="True" CapInsets="96,200,1,1" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{669c4074-8f5c-4113-8611-36216ab55a82}" RelativeSize="0.5,1" RelativePosition="0.75,0.5">
+                            <WZUI9Image Type="WZUI9Image" GUID="{e6ee53f6-178d-4405-8fd9-135529e2ee6b}" File="ui/common/common_scale9_di3.png" ScaleX="-1" Opacity="255" CapInsets="96,200,1,1" />
+                        </WZUIContainer>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{83565c58-1868-4013-8caa-4a965d829757}" Text="房间列表" FontSize="26" Color="255,255,255" Name="txtRoomTitle_SceneWeddingDaily" RelativePosition="0.500221,0.937101" BoldFont="False" Opacity="255" TextKey="WEDDING_LIST" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{a8329198-46db-45fc-a525-53e3485e8811}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.50388" RelativeSize="0.92,0.73" Visible="True">
+                        <WZUI9Image Type="WZUI9Image" GUID="{91fbe980-7cc7-415d-948c-ea04e08592e4}" File="ui/common/common_scale9_di4.png" Opacity="200" />
+                        <WZUITableContainer AbsContentSize="0,0" CellElementHeight="0.39" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{71a47a3f-8601-4a20-9e6a-a37a4f7c6326}" Name="tbconWeddingList_SceneWeddingDaily" RelativePosition="0.5,0.5" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" Type="WZUITableContainer" UseAbsSize="False" VerticalInterval="0.012" RelativeSize="0.96,0.96" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{040fb0a8-f69b-4db1-b361-7cb87c0d697a}" RelativeSize="0.4,0.94" RelativePosition="0.999505,-0.0918843" AnchorPoint="1,0.5" AbsContentSize="220,40" UseAbsSize="True" Name="conFind_SceneWeddingDaily" Visible="True">
+                            <WZUI9Image Type="WZUI9Image" GUID="{f4f2cbe9-20e0-4921-b09c-ebc2c8a658dd}" File="ui/common/common_scale9_di52.png" Visible="True" Opacity="205" />
+                            <WZUI9Image Type="WZUI9Image" GUID="{40937337-314d-498f-b54c-986e2aec8770}" File="ui/common/common_scale9_fengexiao3.png" UseOriginSize="True" RelativePosition="0.801818,0.5" ScaleY="0.9" />
+                            <WZUIEditBox Type="WZUIEditBox" GUID="{a8abe02e-0e4a-4593-b61e-e236b9f145e5}" FontSize="20" TextFieldPadding="0" Text="1122" PlaceHolder="" BgHidden="False" InputMode="ModePhoneNumber" BgPicture="ui/common/transparent_bg.png" Name="editFind_SceneWeddingDaily" MaxLength="11" Color="79,60,48" PlaceHolderAlignment="0" FontColor="255,255,255" PlaceholderFontColor="195,171,148" Alignment="0" ChinesePlaceholderNum="2" RelativeSize="0.95,1" AnchorPoint="1,0.5" RelativePosition="0.961538,0.5" LuaEditBoxEditingDidBegin="onBeginEdit" />
+                            <WZUIButton Type="WZUIButton" GUID="{0ff42ab4-5f4b-4887-bf30-e306cc089f1b}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="1.08995,0.5" AnchorPoint="1,0.5" LuaDoneFunctionName="onFind">
+                                <NormalElement Type="WZUIContainer" GUID="{665177fd-53fd-4a20-af7b-748bb4f6a8c6}">
+                                    <WZUIImage Type="WZUIImage" GUID="{5aa8f576-cef3-42dd-8600-648c58130201}" File="ui/common/common_icon_sousuo.png" UseOriginSize="True" Scale="0.5" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{5a90d36e-88c6-474a-8f2b-0d227ba06bdc}">
+                                    <WZUIImage Type="WZUIImage" GUID="{ba294a79-2ac6-49ed-b9c7-2b6f60dc3be3}" File="ui/common/common_icon_sousuo.png" UseOriginSize="True" Scale="0.5" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{89782d64-94d8-4441-ba3b-4316d59ca206}" />
+                            </WZUIButton>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneWeddingDaily>

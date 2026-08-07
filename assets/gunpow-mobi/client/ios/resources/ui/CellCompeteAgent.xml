@@ -1,0 +1,20 @@
+﻿<CellCompeteAgent GUID="{c6452f9c-4ec7-4b08-94bf-f381332d087f}">
+    <WZUIContainer Type="WZUIContainer" GUID="{5963f76a-0948-4d2a-baeb-ab3decc49d27}" AbsContentSize="736,102" UseAbsSize="True" LuaObjectName="" Name="CellCompeteAgent" NameCreate="True">
+        <WZUI9Image Type="WZUI9Image" GUID="{7a61a13f-18c6-4f7a-85c0-d8cdff5f9683}" File="ui/common/common_scale9_di7.png" Color="255,255,255" Name="img9BK_CellCompeteAgent" />
+        <Button Type="WZUIButton" GUID="{c07d26f9-c9bf-4826-b5d7-798103ede5a8}" Name="btnCell" LuaDoneFunctionName="onClick" AbsContentSize="736,102" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <NormalElement Type="WZUIContainer" GUID="{f9ef8ddc-7be1-4578-bee1-fa6f689b7548}">
+                <WZUI9Image Type="WZUI9Image" GUID="{99ec8c2c-dac9-4415-88a2-18d2ed3a8270}" File="ui/common/common_scale9_beibaodi_sel.png" Name="imgSel" Visible="False" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{737f2d4e-bb94-418a-b6c1-24a8f9b8512c}" />
+            <DisableElement Type="WZUIContainer" GUID="{fe1a01ec-1ead-4df5-829c-ba15d840dc19}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{157b45fa-f886-45bb-b306-7e26b5426587}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.02,0.5" AnchorPoint="0,0.5" Name="conHead_Cell">
+            <WZUIImage Type="WZUIImage" GUID="{e1461914-118c-44a3-b45a-d00e88693565}" File="ui/common/common_icon_tx.png" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{066f1f10-f4b5-4d1b-ac8f-af76285511cc}" AbsContentSize="700,90" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{652eae11-37be-43a1-8215-98c584cb5d6f}" LabelStyleKey="C6_F22" Text="长老" RelativePosition="0.8,0.5" Name="txtJob" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{751f6142-5106-4d6a-a0cb-2687a9d7e40e}" LabelStyleKey="C13_F22" Text="10086" RelativePosition="0.55,0.5" Name="txtContribution" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ada67dc6-ee19-44ea-844c-54ee989ec3c9}" LabelStyleKey="C13_F22" Text="Lv60 新玩家的名字" RelativePosition="0.3,0.5" Name="txtName" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCompeteAgent>

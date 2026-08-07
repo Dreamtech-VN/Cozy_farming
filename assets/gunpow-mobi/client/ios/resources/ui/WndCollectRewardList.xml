@@ -1,0 +1,18 @@
+﻿<WndCollectRewardList GUID="{b0403ad0-f579-4220-af5c-92bbfbbed583}">
+    <WZUIWindow Type="WZUIWindow" GUID="{b5aec12a-d9bf-4ff1-b5f8-4addddaa9111}" LuaObjectName="WndCollectRewardList" Name="WndCollectRewardList" NameCreate="True" AbsContentSize="766,532" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{a8f324a9-a5ae-46b3-9713-317b16a41b7b}">
+            <WZUI9Image Type="WZUI9Image" GUID="{55920f8d-b10c-45bc-a4fd-2631d3c45576}" File="ui/common/common_scale9_di19.png" CapInsets="92,80,1,1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{fb92fa6f-18e4-4897-b699-32edfa8955cc}" FontSize="26" Color="255,236,193" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.94" TextKey="MANYCOLLECT_TEXT2" EnableStroke="True" />
+            <Button Type="WZUIButton" GUID="{d1aabd67-45b9-4804-8c8e-1a1c79528f99}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.945,0.94" LuaActionName="Normal" LuaDoneFunctionName="onCloseClick">
+                <NormalElement Type="WZUIContainer" GUID="{11d75bc1-370e-4a35-85be-4793d620f242}" />
+                <SelectElement Type="WZUIContainer" GUID="{02ad01d9-c040-471e-b576-289ca1eb5da7}" />
+                <DisableElement Type="WZUIContainer" GUID="{7720dbdf-a6c3-4efb-b3bb-d08d0f2cb7ba}" />
+                <WZUIImage Type="WZUIImage" GUID="{f88f66b4-c1b7-4777-b39c-89a169afba92}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{b7fdd98d-f8fa-4178-9a5d-3e8d663d9ab0}" AnchorPoint="0.5,1" RelativePosition="0.5,0.89" RelativeSize="0.982,0.85" Name="conForList_WndCollectRewardList">
+                <WZUI9Image Type="WZUI9Image" GUID="{24a87e96-9320-4c8c-9636-ba0caa5ad0d2}" File="ui/common/common_scale9_di20.png" Visible="False" />
+                <WZUITableContainer Type="WZUITableContainer" GUID="{cb1287ae-b98f-48cf-bf0a-ecfd3e82a4da}" CellElementHeight="0.1" EnableMoveHorizontal="False" Name="tableLogList_WndCollectRewardList" RelativeSize="1,0.95" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCollectRewardList>

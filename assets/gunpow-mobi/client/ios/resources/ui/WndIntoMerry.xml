@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<WndIntoMerry GUID="{E3B0E7A5-2340-48c8-9B82-EF946F5F2325}">
+    <WZUIWindow AbsContentSize="400,245" GUID="{7F124794-B3C5-4fd1-B71F-36A48DB14306}" LuaObjectName="WndIntoMerry" Name="WndIntoMerry" Type="WZUIWindow" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer AbsContentSize="0,0" GUID="{5172C5ED-9371-49d8-B63C-91300E524880}" Type="WZUIContainer" UseAbsSize="False">
+            <WZUI9Image CapInsets="0,0,0,0" File="ui/common/common_scale9_di15.png" GUID="{E32B208A-F1D0-44a9-9150-FF981AE7FA56}" RelativePosition="0.500067,0.5" RelativeSize="1.035,1.053" Type="WZUI9Image" Visible="True" />
+            <WZUI9Image Type="WZUI9Image" GUID="{393B7A8D-1559-40d2-8A6D-BBBF9CAEC5E7}" File="ui/common/common_scale9_di25.png" RelativePosition="0.5,0.5" />
+            <WZUIContainer AbsContentSize="400,90" GUID="{3CD0A83B-C0A9-41fb-8A1E-184A8A1AEE98}" RelativePosition="0.5,0.215587" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIButton GUID="{7C2429E3-795B-4db8-A06E-243BE5577555}" LuaDoneFunctionName="onOkClick" RelativePosition="0.7316,0.532876" TouchEnable="True" Type="WZUIButton" AbsContentSize="116,54" UseAbsSize="True">
+                    <NormalElement GUID="{DB34B6BC-4571-41d1-8C31-4125E05765E9}" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{E8F60B11-A58D-495b-AC7C-6642A2A3A198}" File="ui/common/common_btn_anniu10.png" />
+                    </NormalElement>
+                    <SelectElement GUID="{E268119C-F4F9-4558-9F18-02EAE65E3C5E}" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{110FFEF4-7178-41bf-A885-4747F993659C}" File="ui/common/common_btn_anniu10_sel.png" />
+                    </SelectElement>
+                    <DisableElement GUID="{C984EA08-6A48-4e74-A636-B2F0B89DD98A}" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{6F62409F-46BE-42c5-BEC9-B9A3880A541D}" File="ui/common/common_btn_anniu10_sel.png" />
+                    </DisableElement>
+                    <WZUILabelTTF Color="255,255,255" FontSize="35" GUID="{6D56533B-0CE2-4e2d-A27C-C3342EA91FB9}" Name="txtConfirm_WndIntoMerry" RelativePosition="0.5,0.485915" Type="WZUILabelTTF" />
+                </WZUIButton>
+                <WZUIButton AbsContentSize="116,54" GUID="{7806C301-0930-4de0-83B9-FA4EEBFB6AC1}" LuaDoneFunctionName="onCloseClick" RelativePosition="0.308337,0.532876" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{EFF445CE-DABB-4e3c-877F-6D840BFFF182}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{6BC7E255-808F-4a59-A1D9-86702928C369}" File="ui/common/common_btn_anniu3.png" />
+                    </NormalElement>
+                    <SelectElement GUID="{70541C36-8587-4832-B13F-7297159D7A22}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{A3C24243-762C-4f2a-AB90-53A71850567C}" File="ui/common/common_btn_anniu3_sel.png" />
+                    </SelectElement>
+                    <DisableElement GUID="{91900A65-309A-42cc-B1C1-4090DF159339}" Type="WZUIContainer" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8C1757C8-04DC-47b1-A3A2-AE4AEECBC5E7}" FontSize="24" Color="255,236,193" EnableStroke="True" StrokeSize="4" TextKey="CANCEL" RelativePosition="0.303389,0.512762" StrokeColor="132,66,29" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{C3E6798E-A901-4645-8A80-AF4E3CBDBE70}" FontSize="24" Color="255,236,193" EnableStroke="True" StrokeSize="4" TextKey="CONFIRM" RelativePosition="0.733772,0.512011" StrokeColor="64,128,1" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="0,0" GUID="{14BB06D0-E2BD-4f65-8C90-E64031B4C56D}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="False">
+                <WZUILabelTTF Alignment="Left" AnchorPoint="1,0.5" Color="62,34,8" Dimensions="0,0" FontSize="22" GUID="{4350F986-A4A8-4f92-9DB3-43648EDDCDF6}" Name="txtPassWord_WndIntoMerry" RelativePosition="0.382968,0.627344" Text="礼堂密码：" Type="WZUILabelTTF" Visible="True" TextKey="WEDDING_HALL_PASS" />
+                <WZUIContainer AbsContentSize="222,40" GUID="{B3E41979-8F01-4bd4-9961-57CFC8DBFEB1}" Name="conInput_WndIntoMerry" RelativePosition="0.682026,0.623208" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUI9Image File="ui/common/common_scale9_di4.png" GUID="{76042014-482E-485d-AAD6-F88E465D4C54}" Name="conInput_WndIntoMerry" RelativePosition="0.5,0.5" Type="WZUI9Image" />
+                    <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Color="0,0,0" FontColor="255,255,255" FontSize="22" GUID="{7AFE525F-C607-4777-A6E1-05A63C1EFC43}" KeyBordReturnType="TypeDone" MaxLength="8" Name="editRoomPassword_WndIntoMerry" PlaceHolder="" PlaceholderFontColor="158,139,121" RelativePosition="0.5,0.5" RelativeSize="0.95,1" Type="WZUIEditBox" UseOriginSize="False" InputMode="ModePhoneNumber" Text="1111" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndIntoMerry>

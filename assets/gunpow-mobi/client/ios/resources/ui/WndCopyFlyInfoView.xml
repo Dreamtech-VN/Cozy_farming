@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<WndCopyFlyInfoView GUID="{F1FE70DD-E919-4437-8C8C-12A07F8C02FD}">
+    <WZUIWindow Type="WZUIWindow" GUID="{533DD75B-F1B3-416d-9F52-1F1638C8DE9C}" Name="WndCopyFlyInfoView" LuaObjectName="WndCopyFlyInfoView" NameCreate="True" AbsContentSize="340,143" UseAbsSize="True" AnchorPoint="1,1" ShowAll="True" RelativePosition="1,1">
+        <WZUIContainer Type="WZUIContainer" GUID="{EAB0F39D-2693-400a-8981-04D6AB28513F}" AbsContentSize="240,120" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{C4C20804-C43B-4405-B654-C2155045C862}" File="ui/common/common_scale9_di13.png" ScaleX="1.1" RelativePosition="0.525,0.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{0E949E61-ACAF-4634-9C2D-D368A2419BDD}" Name="conditionO_WndCopyFlyInfoView" AbsContentSize="220,40" UseAbsSize="True" RelativePosition="0.5,1" AnchorPoint="0.5,1">
+                <WZUIImage Type="WZUIImage" GUID="{5F96F424-84F2-46ee-8ED1-A3A17690BDC7}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="-0.0301212,0.5" Scale="0.9" Name="imgCO_WndCopyFlyInfoView" GrayRender="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9088D783-32A2-431f-B329-4E7937D07164}" Color="255,227,116" FontSize="20" Name="txtDescribeO_WndCopyFlyInfoView" Text="" RelativePosition="0.131818,0.5" AnchorPoint="0,0.5" TextKey="BATTLE_SINGLE_PASS" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{21FEE2CB-7BC5-4937-81E4-9E0DB5EE7C48}" Name="txtResultO_WndCopyFlyInfoView" FontSize="20" Color="255,255,255" AnchorPoint="0,0.5" Text="" RelativePosition="0.456667,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{C7E228A0-982E-4ee8-968B-A215888994AC}" Name="conditionF_WndCopyFlyInfoView" AbsContentSize="220,40" UseAbsSize="True" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5">
+                <WZUIContainer Type="WZUIContainer" GUID="{BD2A202C-0F4F-4a18-9351-5E21C1A9693A}" AbsContentSize="240,2" UseAbsSize="True" RelativePosition="0.5,0.975">
+                    <WZUI9Image Type="WZUI9Image" GUID="{CC177AAF-2AF7-477c-89B8-8F3654F83EA1}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="False" RelativePosition="0.5,0.5" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{842EFA9B-9209-4bfc-8191-DF39D284A60C}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Scale="0.9" AnchorPoint="0,0.5" RelativePosition="-0.0301212,0.5" Name="imgCF_WndCopyFlyInfoView" GrayRender="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0A27A7AE-A594-4383-8262-5627CDD543C6}" Color="255,227,116" FontSize="20" Name="txtDescribeF_WndCopyFlyInfoView" Text="6次出手" RelativePosition="0.131818,0.5" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{A3286762-7C20-452a-90E4-64BF8C0390EB}" Name="txtResultF_WndCopyFlyInfoView" FontSize="20" Color="255,255,255" AnchorPoint="0,0.5" Text="(6)" RelativePosition="0.5,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{985090C7-61CC-425b-AFB7-7A6390D3A040}" Name="conditionT_WndCopyFlyInfoView" AbsContentSize="220,40" UseAbsSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+                <WZUIContainer Type="WZUIContainer" GUID="{7EC6DED5-A6F9-4f63-AFC7-35351C824651}" AbsContentSize="240,2" UseAbsSize="True" RelativePosition="0.5,0.975">
+                    <WZUI9Image Type="WZUI9Image" GUID="{B2E0FF2A-F146-4a8e-84D7-747C242FF858}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="False" RelativePosition="0.5,0.5" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{12E154C5-6AC1-4448-88AE-282C3122DC63}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Scale="0.9" AnchorPoint="0,0.5" RelativePosition="-0.0301212,0.5" Name="imgCT_WndCopyFlyInfoView" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{298A15CC-FEBB-4ff4-9017-8CEA5178AB74}" Color="255,227,116" FontSize="20" Name="txtDescribeT_WndCopyFlyInfoView" Text="20%剩余量" RelativePosition="0.131818,0.5" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{DE87CC1B-99CF-4936-9E5F-E407DF2A8433}" Name="txtResultT_WndCopyFlyInfoView" FontSize="20" Color="255,255,255" AnchorPoint="0,0.5" Text="(60%)" RelativePosition="0.593031,0.5" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCopyFlyInfoView>

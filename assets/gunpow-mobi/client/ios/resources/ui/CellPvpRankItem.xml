@@ -1,0 +1,30 @@
+﻿<CellPvpRankItem GUID="{8f52e833-9b92-45a6-a020-9a66a35467d2}">
+    <WZUIContainer AbsContentSize="726,94" GUID="{2eb2c3e1-8a09-4850-9dfb-0d837c3b4110}" LuaObjectName="" Name="CellPvpRankItem" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <WZUIContainer GUID="{b470c89c-a5e2-41b6-8713-8010ed5f5c9c}" Type="WZUIContainer" ShowAll="False" RelativePosition="0.5,0.5" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{044339a9-5932-4d40-8818-183d2b17ddbe}" File="ui/common/common_scale9_di7.png" Opacity="255" Name="img9BK_CellPvpRankItem" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{137d6565-2923-4709-b73e-b65150328cb4}" RelativeSize="0.13,1" RelativePosition="0.03,0.5" AnchorPoint="0,0.5">
+            <WZUIImage Type="WZUIImage" GUID="{e801a999-b1c3-4f11-9dc4-d091900f7112}" File="ui/common/common_icon_1st.png" UseOriginSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1" Name="imgRankNum_CellPvpRankItem" Visible="False" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{c0d9ae3e-6559-4b40-bcb3-32bbca6d6a44}" CharMapFileName="ui/common_num/common_num_pmsz.png" Height="30" Width="24" Text="" Name="laftxtRankNum_CellPvpRankItem" UseOriginSizeProportion="False" UseOriginSize="True" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="" GUID="{016ea720-d4b5-4199-8124-a483195c1898}" RelativePosition="1,0.5" Type="WZUIContainer" UseAbsSize="False" RelativeSize="0.82,1" AnchorPoint="1,0.5">
+            <WZUIContainer Type="WZUIContainer" GUID="{890e959f-c012-4ab8-82d1-768fba9e8bb8}" AbsContentSize="82,82" UseAbsSize="True" RelativePosition="0,0.5" AnchorPoint="0,0.5" Name="conHead_CellPvpRankItem">
+                <WZUIImage Type="WZUIImage" GUID="{88e6c3cc-9152-4fe1-8bd3-663066c7ec06}" File="ui/common/common_icon_tx.png" UseOriginSize="True" />
+                <Button Type="WZUIButton" GUID="{3079abc8-54e7-4425-a683-b7f9d3d6218c}" LuaDoneFunctionName="onClickHead" Order="1">
+                    <NormalElement Type="WZUIContainer" GUID="{74becc20-564f-4527-8d62-99f972afa160}" />
+                    <SelectElement Type="WZUIContainer" GUID="{d10ffaf3-04e1-4462-aec8-bed0e38a421f}" />
+                    <DisableElement Type="WZUIContainer" GUID="{2f205e29-23ab-4099-ba81-f679d54edd7f}" />
+                </Button>
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{34aff9dc-e23e-4853-8f08-725f1bff7187}" Color="127,70,26" FontSize="22" Name="txtName_CellPvpRankItem" AnchorPoint="0,0.5" RelativePosition="0.13,0.65" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9360a87b-9072-40ce-98dd-5841be164553}" Color="127,70,26" FontSize="22" Name="txtServerName_CellPvpRankItem" AnchorPoint="0,0.5" RelativePosition="0.13,0.35" />
+            <WZUIContainer Type="WZUIContainer" GUID="{bfcc4108-fa5b-4446-a92d-bd937d5a6d2b}" Name="conSectionLevel_CellPvpRankItem" AbsContentSize="80,94" UseAbsSize="True" RelativePosition="0.45,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{e7d2c740-256c-4c11-a7ae-57205fa83db0}" Name="imgIcon_CellPvpRankItem" UseOriginSize="True" RelativePosition="0.55,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{00cdf491-eda1-4cdc-a79e-b86bdab961ab}" Name="ftxtStar_CellPvpRankItem" MaxWidth="200" AnchorPoint="0,0.5" RelativePosition="0.9,0.32" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{14d0a2c6-7277-4703-a7cb-1c21efa0243b}" Color="127,70,26" FontSize="20" Name="txtSectionName_CellPvpRankItem" RelativePosition="1,0.68" AnchorPoint="0,0.5" Visible="True" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{e4c412ac-561c-43ef-9887-462d43f0eb4e}" Color="158,0,0" FontSize="22" Name="txtBattleTimes_CellPvpRankItem" AnchorPoint="0.5,0.5" RelativePosition="0.85,0.65" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{f42babff-6dd8-4779-bb6a-e93ce415ce5d}" Name="ftxtResult_CellPvpRankItem" MaxWidth="200" RelativePosition="0.85,0.35" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellPvpRankItem>

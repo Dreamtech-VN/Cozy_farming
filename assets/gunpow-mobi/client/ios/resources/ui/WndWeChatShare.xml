@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<WndWeChatShare GUID="{9BBA1118-F0DB-47d3-A521-29AEA5E0E0C3}">
+    <WZUIContainer Type="WZUIContainer" GUID="{E37CB4AC-E511-4097-A661-11B4A7BF022A}" AbsContentSize="800,600" UseAbsSize="True" Name="WndWeChatShare">
+        <WZUI9Image Type="WZUI9Image" GUID="{86BB50A9-D70B-4d10-937A-55E2680EA1AA}" File="ui/common/common_scale9_di5.png" RelativePosition="0.5,0.498333" AbsPosition="400,299" />
+        <WZUIContainer Type="WZUIContainer" GUID="{699B0BBA-FDC4-4e40-B275-38FE606406A4}" RelativeSize="0.98,0.65" RelativePosition="0.5,0.49" AbsPosition="400,294">
+            <WZUIImage Type="WZUIImage" GUID="{5599EA5B-B13A-4a99-801F-552047F45CA9}" Name="img_WndWeChatShare" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{776EBE3F-B4FE-4b34-A8E7-23B2BE246106}" TextKey="SHARE" LabelStyleKey="C1_F26_S4_C2" RelativePosition="0.5,0.891666" AbsPosition="400,535" />
+        <Button Type="WZUIButton" GUID="{17CD5C79-78A3-4827-8F90-95E2B209EE9A}" UseAbsSize="True" AbsContentSize="50,50" RelativePosition="0.937499,0.896666" AbsPosition="749.999,538" Name="btnClose_WndWeChatShare" LuaDoneFunctionName="btnClose">
+            <NormalElement Type="WZUIContainer" GUID="{2CB146A5-04E7-42c7-B59D-EEBDF0227A8B}">
+                <WZUIImage Type="WZUIImage" GUID="{6BFB0A9F-7137-4c7f-9E46-0D4B738BF6C7}" File="ui/common/common_icon_guanbi.png" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{0547F949-AE46-48e3-A360-83A12C06864B}">
+                <WZUIImage Type="WZUIImage" GUID="{974FBDE4-152A-43dc-9F85-350DD80872BB}" File="ui/common/common_icon_guanbi_sel.png" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{E88793BA-EE87-46d3-9409-F4EC5085B7BB}" />
+        </Button>
+        <Button Type="WZUIButton" Name="btnShare&#x1F;_WndWeChatShare" AbsContentSize="170,70" UseAbsSize="True" RelativePosition="0.5,0.121667" AbsPosition="400,73.0002" GUID="{721D3827-F807-4458-952D-C83CD8FC3A5F}" LuaDoneFunctionName="btnShare">
+            <NormalElement Type="WZUIContainer" GUID="{4BE143B4-E1AC-4f59-B06E-40903E411ECF}">
+                <WZUIImage Type="WZUIImage" GUID="{9204EEA1-5D43-4ddd-A3E5-E450FB387263}" File="ui/common/common_btn_anniu10_1.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{BA13BA04-EB9F-4b30-9172-B7D6EBC99636}" TextKey="SHARE" LabelStyleKey="C1_F26_S4_C4" RelativePosition="0.5,0.44" AbsPosition="76,22" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{F78BEC34-D9EF-421e-BCF7-51E1228A338D}">
+                <WZUIImage Type="WZUIImage" GUID="{9B83B53A-9F3A-4022-A0B3-8C672AFFF531}" File="ui/common/common_btn_anniu10_1_sel.png" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{D1A46FB3-6004-483f-8CB2-442D9679E602}" />
+        </Button>
+    </WZUIContainer>
+</WndWeChatShare>

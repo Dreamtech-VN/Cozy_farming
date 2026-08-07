@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CellTaskRewards GUID="{F85A76CE-A0E0-4edb-836D-C27DF5A225A0}">
+    <WZUIContainer AbsContentSize="680,160" GUID="{431F220F-2370-45c5-8F06-A042D14B578E}" LuaObjectName="CellTaskRewards" Name="CellTaskRewards" NameCreate="True" RelativePosition="0.5,0.5" TouchSwallow="False" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="207,37" AnchorPoint="0,1" GUID="{B22CFD00-C0FF-461e-8187-FC5A09E75C2A}" RelativePosition="0.02,1" TouchSwallow="False" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image CapInsets="0,0,0,0" File="common/Jigsaw/n_line.png" GUID="{2F14BF06-F4BD-408a-B3FB-47A724E9324A}" RelativePosition="1.5,0.5" RelativeSize="1,1" ScaleX="0.8" Type="WZUI9Image" UseOriginSize="True" />
+            <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="204,125,36" FontSize="30" GUID="{F42EE61D-AD2A-43fc-A34E-E668DFA1C6BF}" Name="txtTitle_CellTaskRewards" RelativePosition="0,0.5" Text="" Type="WZUILabelTTF" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="680,120" AnchorPoint="0.5,0.5" GUID="{4EC7487A-8A69-4b51-A113-AA4B04384D8A}" RelativePosition="0.5,0.35" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image File="ui/bottomMenu/task/task_02.png" GUID="{23D39A88-96F8-469f-92C5-F413F7F2B265}" RelativePosition="0.52,0.5" Type="WZUI9Image" />
+            <WZUIContainer AbsContentSize="460,100" AnchorPoint="0,0.5" GUID="{777EA70A-EFE5-4c8b-A6F4-ABDD061CAC4A}" RelativePosition="0.04,0.5" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIContainer AbsContentSize="99,93" AnchorPoint="0,0.5" GUID="{957C9EA6-ECDA-4162-8B1B-36AD43730D57}" Name="conItem1_CellTaskRewards" RelativePosition="0,0.5" Type="WZUIContainer" UseAbsSize="True" />
+                <WZUIContainer AbsContentSize="99,93" GUID="{46CBC051-AAE2-44e8-8FC4-7EA9EA9FA825}" Name="conItem2_CellTaskRewards" RelativePosition="0.375,0.5" Type="WZUIContainer" UseAbsSize="True" />
+                <WZUIContainer AbsContentSize="99,93" GUID="{0E33B4B1-6D77-4a56-BF5C-88261B9C9D5A}" Name="conItem3_CellTaskRewards" RelativePosition="0.625,0.5" Type="WZUIContainer" UseAbsSize="True" />
+                <WZUIContainer AbsContentSize="99,93" AnchorPoint="1,0.5" GUID="{FA0B568E-CE3D-4aa2-9026-5FE57C8798F5}" Name="conItem4_CellTaskRewards" RelativePosition="1,0.5" Type="WZUIContainer" UseAbsSize="True" />
+            </WZUIContainer>
+            <WZUIButton AbsContentSize="135,71" AnchorPoint="1,0" GUID="{37CD56E5-3FCF-4a0b-9B40-D482FAD027B2}" LuaDoneFunctionName="onBtnClick" Name="btnTask_CellTaskRewards" RelativePosition="1,0.2" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{B1309232-A552-488b-BE9F-18C98B2D1E26}" Type="WZUIContainer">
+                    <WZUI9Image CapInsets="20,10,95,51" File="common/button/button_2.png" GUID="{1E64F0F1-7CB7-4ba8-80A5-9BF0BE3DA332}" Name="imgbtnTask_1_completed" Type="WZUI9Image" />
+                </NormalElement>
+                <SelectElement GUID="{5233325F-4F6F-4de5-BA6E-4CE7D9C57599}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_2_sel.png" GUID="{D86CF8E0-5F61-4c9f-AF54-51C958892ED7}" Name="imgbtnTask_2_completed" Type="WZUI9Image" Visible="True" />
+                </SelectElement>
+                <DisableElement GUID="{A9712B76-D09A-4aab-BC33-05505783DF62}" Type="WZUIContainer">
+                    <WZUI9Image CapInsets="20,10,95,51" File="common/button/button_4.png" GUID="{C32C5B4E-C3EA-4dfd-881A-07AE0824C5D3}" Name="imgbtnTask_3_completed" Type="WZUI9Image" />
+                </DisableElement>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="26" GUID="{E68D93D8-5355-411e-B7E6-E59FCD6C91F2}" Name="txtBtnText_CellTaskRewards" StrokeColor="38,47,0" StrokeSize="4" Type="WZUILabelTTF" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTaskRewards>

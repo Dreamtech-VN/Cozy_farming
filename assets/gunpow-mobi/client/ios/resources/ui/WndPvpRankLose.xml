@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" ?>
+<WndPvpRankLose GUID="{ac80cec4-da7e-4cb4-8d54-8cec8cf9a4b5}">
+    <WZUIWindow Type="WZUIWindow" GUID="{7CB4055D-5BF9-41aa-8795-72D3590CA0F4}" AbsContentSize="" UseAbsSize="False" LuaObjectName="WndPvpRankLose" Name="WndPvpRankLose" NameCreate="True" ShowAll="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{D9AFC061-89BA-4dae-B06B-0C35B37277FB}" Visible="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{25F82EAC-4AFD-4cbd-89C1-F72BB11FE70A}" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{359B35B4-6415-4dbc-B193-26148D0657B0}" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{40329D6D-EEE8-4281-9D2D-6262209C65C4}" RelativeSize="1,1" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{EFC35EEF-9358-4952-ABE1-AD0DECFFA160}" File="ui/copy_settlement/common_pic_sb.png" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{47D176F0-8FFA-4663-939B-730579610BBC}" Name="">
+                    <WZUIContainer Type="WZUIContainer" GUID="{E2F9E008-E573-4c52-8146-9D0555544D2B}" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{56921AD9-C33E-4a35-998F-4B0B9810A7BC}" File="ui/copy_settlement/common_pic_guangx.png" UseOriginSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0.5" ScaleX="30" Scale="3">
+                            <Action Type="WZUIActionRotateBy" GUID="{B2CBBCBB-D32D-479f-9C53-D86DEA156338}" Angle="360" IsLoop="True" Duration="30" />
+                        </WZUIImage>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{30885FEC-089A-489c-A7C7-F4FECDF984D0}" Visible="True" ShowAll="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{880E1C7F-C2C2-410e-9419-90238DA3460C}" Name="" RelativeSize="0.7,1" ShowAll="False">
+                    <WZUISpine Type="WZUISpine" GUID="{4199CB5F-3630-41b1-ABCF-4491394CFBB2}" FileAtlas="copy_settlement/fail.atlas" FileJson="copy_settlement/fail.json" Visible="True" AnimationName="fail" RelativePosition="0.511318,0.680553" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{379126EE-48A9-4623-B41D-20F47A84343A}" Name="conPlayer_WndPvpRankLose" AbsContentSize="200,300" UseAbsSize="True" RelativePosition="0.5,0.332812">
+                        <WZUIContainer Type="WZUIContainer" GUID="{15FDC7ED-5B1B-4028-BBAE-37C742CBDB09}" RelativePosition="0.5,0.363333">
+                            <WZUIImage Type="WZUIImage" GUID="{03FD4181-6452-4fb0-8E99-6213543A627E}" File="ui/copy_settlement/common_pic_slbg.png" UseOriginSize="True" Scale="1" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{2B92792F-BF7B-435d-AD47-E3405C75891B}" RelativeSize="1,0.2" RelativePosition="0.525,0.0533341">
+                            <WZUIImage Type="WZUIImage" GUID="{C0566FC1-BEAE-49f1-BDBC-9894D167A700}" File="ui/common/common_icon_yy.png" UseOriginSize="True" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <Action Type="WZUIActionSequence" GUID="{9029C7F2-8C6A-4f96-ADCD-1B6A84E40F57}">
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{7E526AF8-313A-4c5d-A79E-E640CFEBF77E}" Duration="2" FinishLuaFunction="" />
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{653FB376-4711-4e62-A766-9D6E12F3610E}" Duration="3" />
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{469DEF56-502B-4d40-AABF-EC7E9203B18B}" MoveX="-180" Duration="0.5" FinishLuaFunction="" />
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{821E5CF7-72C7-45a3-A94E-6C5606671C89}" Duration="3" FinishLuaFunction="aniFinishCallBack" />
+                    </Action>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{22AC5755-6482-469e-8699-A4E50D65BB42}" Name="conBtnContinue_WndPvpRankLose" NameCreate="True" Visible="False">
+                    <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onContinue" GUID="{8EDAFDC0-BB69-4a83-B6BE-02F967F0607D}">
+                        <NormalElement Type="WZUIContainer" GUID="{12D38981-B087-42ce-B07D-BF5E8375E278}" />
+                        <SelectElement Type="WZUIContainer" GUID="{B138CC94-1C4B-43a0-9A10-87B420E052F1}" />
+                        <DisableElement Type="WZUIContainer" GUID="{13C7BFF2-94D2-4ae7-90D5-F6A8948BC095}" />
+                    </WZUIButton>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{D959EB69-C6A6-4ff5-B401-B1AC2B5B429A}" Color="62,34,8" FontSize="22" TextKey="DAILY_COPY_CLICK_CONTINUE" RelativePosition="0.31875,0.0515625" Name="" NameCreate="True" Visible="True" ShowAll="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{31D44DD5-91DD-4fed-8C68-F32E14AC5393}" Name="conInfo_WndPvpRankLose" AbsContentSize="" UseAbsSize="False" UseAbsCoordinate="False" Visible="True" ShowAll="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{A455F16C-4E51-4404-A8B5-8026B088423F}" AbsContentSize="380,360" UseAbsSize="True" RelativePosition="0.774704,0.338607" Visible="True" ShowAll="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{1B4F2011-A15C-48eb-80B7-4FDC11E73CFC}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{5B11B92D-B260-471f-92FA-B34D58F57881}" RelativePosition="0.502632,0.5" File="ui/common/common_scale9_jiesuandi.png" Opacity="150" Visible="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{8AE7242E-46FC-4c0f-AB23-299D160D9D10}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.967335,0.968295" FlipX="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{F3A76D70-D681-4db4-9EC2-5AF39F7CC7E4}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0329548,0.966868" />
+                        <WZUIImage Type="WZUIImage" GUID="{3468D189-FD38-4181-9B95-F9989F394CE5}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0367578,0.0318981" FlipY="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{EE65D506-1A33-4771-BB94-3E04936C8F91}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.965837,0.0365477" FlipX="True" FlipY="True" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{A3771186-8AD9-4fd8-89FF-310A8EE3D2C3}">
+                            <WZUIContainer Type="WZUIContainer" GUID="{D378D095-3F18-488e-96CD-10FAE1EC166A}" AbsContentSize="300,2" UseAbsSize="True" RelativePosition="0.5,0.794445">
+                                <WZUIImage Type="WZUIImage" GUID="{5BF829E0-6142-43c4-9DF2-35F0E0361147}" File="ui/common/common_scale9_fengexian.png" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{B3EB00FA-DFF9-4c74-BF31-B2E3AFD257E2}" AbsContentSize="300,2" UseAbsSize="True" RelativePosition="0.5,0.619445">
+                                <WZUIImage Type="WZUIImage" GUID="{5F4FDF5D-3644-41c6-842D-B5E8A28B6210}" File="ui/common/common_scale9_fengexian.png" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{E401E3DD-4B9D-45cc-9330-593BC5EB4254}" AbsContentSize="300,2" UseAbsSize="True" RelativePosition="0.5,0.452778">
+                                <WZUIImage Type="WZUIImage" GUID="{62276C7E-2109-4377-8836-347A7A1F65C5}" File="ui/common/common_scale9_fengexian.png" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{BC5D02D9-2525-4ec0-A8B0-F6722A2229C0}">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{EED26FAE-3C52-459f-904D-690F1A977BDD}" TextKey="RANK_END_DESC1" FontSize="24" Color="255,236,193" RelativePosition="0.12,0.886667" Alignment="Left" AnchorPoint="0,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{28F77E51-B1BB-4299-A942-59D7019181D3}" TextKey="RANK_END_DESC2" FontSize="24" Color="255,236,193" RelativePosition="0.12,0.706111" Alignment="Left" AnchorPoint="0,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6DF4A348-95EE-4729-B985-3A0ABF2B978C}" TextKey="RANK_END_DESC3" FontSize="24" Color="255,236,193" RelativePosition="0.12,0.525" Alignment="Left" AnchorPoint="0,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{5A1FC8C5-52AE-4d3e-8390-4E49A5D8185D}" TextKey="" FontSize="24" Color="99,255,95" RelativePosition="0.63,0.886667" Alignment="Left" AnchorPoint="0,0.5" Name="txtDesc1_WndPvpRankLose" Text="123" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{20AF18B9-5198-4c2b-9D6C-F9015A26B4CC}" TextKey="" FontSize="24" Color="99,255,95" RelativePosition="0.63,0.707884" Alignment="Left" AnchorPoint="0,0.5" Name="txtDesc2_WndPvpRankLose" Text="X15" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{037A22BD-7E37-46e5-98C1-6E0479C00A07}" TextKey="" FontSize="24" Color="99,255,95" RelativePosition="0.63,0.528201" Alignment="Left" AnchorPoint="0,0.5" Name="txtDesc3_WndPvpRankLose" Text="45" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{8D12AB57-3D6D-45fe-BD16-7843F256CCC2}" RelativeSize="1,0.1" RelativePosition="0.5,0.35">
+                        <WZUIContainer Type="WZUIContainer" GUID="{C63C0DD1-629E-49fe-8FAA-48AA021E8731}">
+                            <WZUIImage Type="WZUIImage" GUID="{AD5A6FCB-1875-4a39-97B9-9FF46843CCC5}" File="ui/common/common_scale9_heidi4.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{133372BB-9D83-47af-A664-86559BEE4E0A}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.121053,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{8C157211-D632-40d8-B086-936242C4D843}" File="ui/common/common_icon_pws2.png" UseOriginSize="False" Scale="1" Name="imgRankLevel_WndPvpRankLose" NameCreate="True" RelativePosition="0.533333,0.5" />
+                            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{8C3B1694-616A-47aa-8702-154D6E3D0483}" CharMapFileName="ui/common_num/common_num_ghdj.png" Text="1" Height="24" UseOriginSize="True" Name="txtRankLv_WndPvpRankLose" NameCreate="True" RelativePosition="0.55,0.516667" Width="16" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{343D2EF0-9249-49af-B111-987BA409F433}" RelativeSize="0.74,0.4" RelativePosition="0.565789,0.499999">
+                            <WZUIImage Type="WZUIImage" GUID="{BC2228E9-88D2-43a8-ABE8-4982BE286284}" File="ui/common/common_progress_exp_bg.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                            <WZUIProgress Type="WZUIProgress" GUID="{52BB8824-4661-4b1d-B3A5-9C9EB33F41F1}" BgPicture="ui/common/common_progress_exp_fore.png" Opacity="255" Percentage="40" RelativePosition="0.503556,0.5" Name="proExp_WndPvpRankLose" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7D9FE2BB-8B9F-427e-AD4C-36120314244C}" Name="txtExp_WndPvpRankLose" LabelStyleKey="NORMAL_EXP_PROGRESS" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <Action Type="WZUIActionSequence" GUID="{931AB12A-D95C-418c-9C8A-A4D2EC9F48E0}">
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{A330D990-1F27-4cd8-9671-B310772AE535}" MoveX="1000" Duration="0" />
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{73127920-2C9C-40ed-A730-0412F10E7A72}" Duration="5.5" />
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{1C77180F-C711-4809-B019-477880A941F8}" MoveX="-1000" FinishLuaFunction="" Duration="0.5" />
+                    </Action>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{87AF97FF-FC3A-48dc-8302-0DFF0F031576}" Name="conBtnContinue_WndPvpRankLose" NameCreate="True" Visible="False">
+                <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onContinue" GUID="{BC4856A1-F204-4c95-8185-807FFCBC9677}">
+                    <NormalElement Type="WZUIContainer" GUID="{6C3A4235-922D-4243-9A4F-DE944D058FF7}" />
+                    <SelectElement Type="WZUIContainer" GUID="{6948DF45-502B-4802-A74F-CF52AC72C0DB}" />
+                    <DisableElement Type="WZUIContainer" GUID="{E040386F-B5D8-400f-88AE-3B57285D4B8C}" />
+                </WZUIButton>
+                <WZUIContainer Type="WZUIContainer" GUID="{8D45AA9D-3477-430d-B19D-AF6280FC0D9B}" ShowAll="True">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7946ED1F-90D3-4b8d-B5C9-1D01FA51AFBF}" Color="62,34,8" FontSize="22" TextKey="DAILY_COPY_CLICK_CONTINUE" RelativePosition="0.31875,0.0515625" Name="" NameCreate="True" Visible="True" ShowAll="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <Action Type="WZUIActionSequence" GUID="{0AB91A19-699B-4674-85A0-1DB8FC8F746D}">
+                <ChildAction Type="WZUIActionDelayTime" GUID="{D5A30ECA-AB60-400a-80BB-D99D5E6178A8}" Duration="0.2" />
+                <ChildAction Type="WZUIActionShow" GUID="{031689E5-B6E3-41d1-B500-B800DDA99F20}" />
+                <ChildAction Type="WZUIActionContainerFadeFromTo" GUID="{50081C6E-79A7-42ea-8566-973B4D77B84C}" OpacityTo="255" Duration="1" RemoveTarget="False" />
+            </Action>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndPvpRankLose>

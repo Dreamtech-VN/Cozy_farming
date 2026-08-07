@@ -1,0 +1,69 @@
+﻿<CellMarkCoinItem GUID="{af7cfd1a-41b3-4e2a-97a7-c1e11c567c5e}">
+    <WZUIContainer AbsContentSize="634,102" GUID="{49c59788-26f1-4c26-b267-7f20c17a0cac}" LuaObjectName="" Name="CellMarkCoinItem" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{2d9dba4b-b0c9-4e4f-a6ff-0c481d3a57a7}" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{46041035-286d-4378-875c-b605fa385d05}" File="ui/gameActivity/threeyear/anniversary_frame_007.png" />
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="105,65,46" FontSize="20" GUID="{d50f650a-ac93-4298-8c15-f911c697aef5}" Name="txtTaskName_CellMarkCoinItem" RelativePosition="0.04,0.85" Text="100" Type="WZUILabelTTF" LabelStyleKey="">
+                <WZUILabelTTF AnchorPoint="0,0.5" Color="99,255,95" FontSize="18" GUID="{8c2feae0-43ec-42ae-ba93-e5db3fd47388}" Name="txtProgress_CellMarkCoinItem" RelativePosition="1.1,0.5" Text="996" Type="WZUILabelTTF" LabelStyleKey="" EnableStroke="True" StrokeSize="4" StrokeColor="0,72,3" />
+            </WZUILabelTTF>
+            <WZUILabelTTF AnchorPoint="0,0.5" ChineseLengthPolicy="1" Color="128,54,13" Dimensions="0,0" FontSize="16" GUID="{886ec307-b7f1-47dc-91b0-53402156c2d6}" MaxLength="" Name="txtTaskDesc_CellMarkCoinItem" RelativePosition="0.04,0.65" Text="战队名字" Type="WZUILabelTTF" Alignment="Left" LabelStyleKey="" />
+            <WZUIContainer Type="WZUIContainer" GUID="{3bebf820-4575-46b8-bedf-78aeb054170f}" AbsContentSize="190,30" UseAbsSize="True" RelativePosition="0.04,0.28" TouchEnable="False" AnchorPoint="0,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{258bd38b-48a2-41bc-97ed-e1cfcb5f39dc}" File="ui/common/common_scale9_di40.png" Visible="True" TouchEnable="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{4d7e8e84-f708-41b9-8d61-6c788489c960}" Name="conReward1_CellMarkCoinItem" AnchorPoint="0,0.5" RelativePosition="0,0.5" RelativeSize="0.5,1">
+                    <WZUIImage Type="WZUIImage" GUID="{99bab85e-c05b-4649-b20c-1b27acdb7114}" File="shopitems/diamond.png" UseOriginSize="True" Scale="0.4" AnchorPoint="0,0.5" RelativePosition="0,0.5" Name="imgIcon1_CellMarkCoinItem" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4c0be8f8-c241-47ff-8e6c-bb17a4157c84}" FontSize="20" Color="255,255,255" AnchorPoint="0,0.5" RelativePosition="0.34,0.5" Name="txtNum1_CellMarkCoinItem" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{20c3c388-049d-44b5-b675-9517d97fcf54}" Name="conReward2_CellMarkCoinItem" AnchorPoint="0,0.5" RelativePosition="0.5,0.5" RelativeSize="0.5,1">
+                    <WZUIImage Type="WZUIImage" GUID="{ed9b443c-7cb4-4cc4-870f-e3f3a1939416}" File="shopitems/diamond.png" UseOriginSize="True" Scale="0.4" AnchorPoint="0,0.5" RelativePosition="0,0.5" Name="imgIcon2_CellMarkCoinItem" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6182755c-76a5-499b-a44f-6509a11d41bc}" FontSize="20" Color="255,255,255" AnchorPoint="0,0.5" RelativePosition="0.34,0.5" Name="txtNum2_CellMarkCoinItem" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{0fc03939-ebed-4471-bef7-36da33417f94}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" Name="imgHavedGet1_CellMarkCoinItem" Rotation="28" RelativePosition="0.427587,0.282597" Scale="0.9" Visible="False" TouchEnable="False" />
+            <Button Type="WZUIButton" GUID="{6f21b447-8680-4ce5-8161-00af6e3df2a2}" AbsContentSize="116,58" UseAbsSize="True" RelativePosition="0.43,0.278442" LuaDoneFunctionName="onClickGet" Name="btnReceive_CellMarkCoinItem" Scale="0.7" TouchEnable="True" LuaActionName="Normal" Tag="1">
+                <NormalElement Type="WZUIContainer" GUID="{40e3fd65-5e91-44bd-9e20-eb88c7cfcc34}">
+                    <WZUIImage Type="WZUIImage" GUID="{0db5df8f-f0e8-40e8-a838-4bdf446bb82c}" File="ui/common/common_btn_anniu10_0.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{abe110d9-554b-4bbf-9171-65ff55b880e0}" Text="点击前往" FontSize="18" Color="128,54,13" TextKey="ACTIVE_BTN_GET" LabelStyleKey="SMALL_GREEN_BTN" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{d828fa74-f51b-42b1-99cd-46dc61f1a41e}">
+                    <WZUIImage Type="WZUIImage" GUID="{80555e17-e0a4-4984-83ea-f37927c34bd1}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{f4e7a3f2-b38e-4162-ac32-3cac46bad435}" Text="点击前往" FontSize="18" Color="128,54,13" TextKey="ACTIVE_BTN_GET" LabelStyleKey="SMALL_GREEN_BTN" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{f0433dec-ade0-44a1-a3c8-c5fcba22873a}">
+                    <WZUIImage Type="WZUIImage" GUID="{3010fe45-3132-4458-b2ee-60bbaea8d468}" File="ui/common/common_btn_anniu10_0.png" GrayRender="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b28b3f58-0fe6-4494-b711-5ffd654ed2e7}" Text="点击前往" FontSize="18" Color="128,54,13" TextKey="ACTIVE_BTN_GET" LabelStyleKey="SMALL_GRAY_BTN" />
+                </DisableElement>
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{6b8ed997-f694-47f1-96b7-ed9abaaff307}" AbsContentSize="190,30" UseAbsSize="True" RelativePosition="0.52,0.28" TouchEnable="False" AnchorPoint="0,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{4041b7e2-0c2d-4ece-860d-de66cac9272a}" File="ui/common/common_scale9_di40.png" Visible="True" TouchEnable="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{7476273e-8b4d-44a6-a7cb-aa676a7cc9a9}" Name="conReward3_CellMarkCoinItem" AnchorPoint="0,0.5" RelativePosition="0,0.5" RelativeSize="0.5,1">
+                    <WZUIImage Type="WZUIImage" GUID="{bca79a9c-7afb-4d9b-b787-e63e49aa9d34}" File="shopitems/diamond.png" UseOriginSize="True" Scale="0.4" AnchorPoint="0,0.5" RelativePosition="0,0.5" Name="imgIcon3_CellMarkCoinItem" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{f7db9798-f23d-4651-a965-afc920ee1109}" FontSize="20" Color="255,255,255" AnchorPoint="0,0.5" RelativePosition="0.34,0.5" Name="txtNum3_CellMarkCoinItem" Text="99999" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{8974909b-9bcb-4670-872e-17b237a608b7}" Name="conReward4_CellMarkCoinItem" AnchorPoint="0,0.5" RelativePosition="0.5,0.5" RelativeSize="0.5,1">
+                    <WZUIImage Type="WZUIImage" GUID="{a443011b-2f20-4026-8cc8-38049eb2fd11}" File="shopitems/diamond.png" UseOriginSize="True" Scale="0.4" AnchorPoint="0,0.5" RelativePosition="0,0.5" Name="imgIcon4_CellMarkCoinItem" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{f3310115-55fc-4230-a3f2-015d23169ff5}" FontSize="20" Color="255,255,255" AnchorPoint="0,0.5" RelativePosition="0.34,0.5" Name="txtNum4_CellMarkCoinItem" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{ee3209d9-f570-4d75-865f-da85d87d5eb9}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" Name="imgHavedGet2_CellMarkCoinItem" Rotation="28" RelativePosition="0.907083,0.282597" Scale="0.9" Visible="False" TouchEnable="False" />
+            <Button Type="WZUIButton" GUID="{bb3768f1-45a8-45be-ae6d-5d2c7bfe8e0a}" AbsContentSize="116,58" UseAbsSize="True" RelativePosition="0.91,0.278442" LuaDoneFunctionName="onClickGet" Name="btnReceiveCoin_CellMarkCoinItem" Scale="0.7" TouchEnable="True" LuaActionName="Normal" Tag="2">
+                <NormalElement Type="WZUIContainer" GUID="{47d8c14e-04af-4f3b-b897-e0ea79413d95}">
+                    <WZUIImage Type="WZUIImage" GUID="{d70e8b6b-0a07-4d6e-a8e9-f2d116776293}" File="ui/common/common_btn_anniu10_0.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{fcb6c351-f720-4bc1-9a76-d5faa46359bf}" Text="点击前往" FontSize="18" Color="128,54,13" TextKey="THREE_YEAR_TEXT3" LabelStyleKey="SMALL_GREEN_BTN" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{b0fe2c5c-c4b6-42fa-a9d3-8ca25f2fe6a1}">
+                    <WZUIImage Type="WZUIImage" GUID="{afeb91c5-6316-4c40-a0d7-abd963ad2213}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{eb8acc6b-6531-43fd-b4a3-77a654aa8106}" Text="点击前往" FontSize="18" Color="128,54,13" TextKey="THREE_YEAR_TEXT3" LabelStyleKey="SMALL_GREEN_BTN" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{65e37e57-5360-483d-a886-0aff01a17549}">
+                    <WZUIImage Type="WZUIImage" GUID="{4811d16f-b765-4276-896d-a64216f8a06c}" File="ui/common/common_btn_anniu10_0.png" GrayRender="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{69213002-2c62-49c5-bf0b-a8fbf046152e}" Text="点击前往" FontSize="18" Color="128,54,13" TextKey="THREE_YEAR_TEXT3" LabelStyleKey="SMALL_GRAY_BTN" />
+                </DisableElement>
+            </Button>
+            <Button Type="WZUIButton" GUID="{4f879fcc-c01d-47c7-871e-35c2f5392bbb}" AbsContentSize="100,40" UseAbsSize="True" RelativePosition="0.92,0.78" LuaDoneFunctionName="onClickGet" Name="btnGoto_CellmarkCoinItem" Scale="1" TouchEnable="True" LuaActionName="Normal" Tag="3">
+                <NormalElement Type="WZUIContainer" GUID="{2891a9a0-2fff-4fdd-a5e7-05bec0bc16fd}" />
+                <SelectElement Type="WZUIContainer" GUID="{c2bbb6be-ad6d-4e01-844f-52148485c9b7}" />
+                <DisableElement Type="WZUIContainer" GUID="{d36efc00-fec2-4290-a3f8-81214d701ce0}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{05f2abb8-a7c2-4259-a76f-7bd9cfcaf48b}" Text="点击前往" FontSize="18" Color="128,54,13" TextKey="THREE_YEAR_TEXT2" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellMarkCoinItem>

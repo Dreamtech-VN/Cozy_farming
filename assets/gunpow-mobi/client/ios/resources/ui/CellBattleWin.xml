@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CellBattleWin GUID="{C96B0426-B3AF-477C-C094-EAC678570E56}">
+    <WZUIContainer AbsContentSize="960,640" GUID="{41A72BB6-E59F-41aa-B7D9-488E1D209C38}" Name="CellBattleWin" NameCreate="True" RelativePosition="0.5,0.57" RelativeSize="1,0.95" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="True">
+        <WZUILabelTTF Alignment="Left" BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="24" GUID="{DD563EEC-2DC6-4371-A476-FBD5B1F233D9}" Name="txtContent_CellTeachDialog" Order="1" RelativePosition="0.5,0.5" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="4" Type="WZUILabelTTF" Visible="False" />
+        <WZUILabelTTF Alignment="Left" BoldFont="True" Color="36,0,0" EnableStroke="False" FontSize="24" GUID="{C4237B4F-A7AD-4529-8301-454D6BC6DE0E}" Name="txtDesc_CellTeachDialog" Order="1" RelativePosition="0.5,0.5" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" />
+    </WZUIContainer>
+    <WZParticleSystemQuad AngleVar="60" EmissionRate="8" EndColor="0,0,0,0" EndColorVar="0.2,0.2,0.2,0.2" EndSize="93" EndSizeVar="10" EndSpinVar="360" GUID="{DDDCBF07-DBA8-4809-8301-CE3664D97826}" Life="3" ModeAGravity="0,-50" ModeASpeed="200" ModeASpeedVar="30" Name="psqStar_WndUpgrade" NameCreate="True" RelativePosition="0.5,0.92" SourcePosition="0,0" SourcePositionVar="75,0" StartSize="113" TextureFile="ui/rightMenu/exploration/star_1.png" TotalParticles="28" TouchEnable="False" Type="WZParticleSystemQuad" />
+</CellBattleWin>

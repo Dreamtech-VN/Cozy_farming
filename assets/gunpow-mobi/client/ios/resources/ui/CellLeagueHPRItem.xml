@@ -1,0 +1,19 @@
+<CellLeagueHPRItem GUID="{c6e476f4-3e32-480c-95a0-dd4dd4bff517}">
+    <WZUIContainer AbsContentSize="200,80" GUID="{2cc58c18-95ed-43a8-a573-87c622727543}" LuaObjectName="" Name="CellLeagueHPRItem" NameCreate="True" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True" ShowAll="False">
+        <Button AbsContentSize="200,80" GUID="{ab031182-3ffb-413f-a225-ac700d446b63}" LuaDoneFunctionName="onClickCellItem" Type="WZUIButton" UseAbsSize="True" Name="btnLeft_CellLeagueHPRItem" RelativePosition="0.485,0.5">
+            <NormalElement GUID="{c7e577dc-d16f-4dd4-8d8d-e7966a3c3480}" Type="WZUIContainer">
+                <WZUIImage File="ui/common/common_btn_huodong.png" GUID="{7b6d819b-0e3f-4e6c-8626-63d65e6ce8e5}" Type="WZUIImage" UseOriginSize="True" RelativePosition="0.5,0.5" />
+            </NormalElement>
+            <SelectElement GUID="{92aae094-fe89-4d0a-a330-15f0602dbd6f}" Type="WZUIContainer">
+                <WZUIImage File="ui/common/common_btn_huodong_sel.png" GUID="{f3d5ca05-26ff-4f22-adf5-fcb4f286a2e4}" Type="WZUIImage" UseOriginSize="True" RelativePosition="0.53,0.5" />
+            </SelectElement>
+            <DisableElement GUID="{d68fa5f2-7be2-46b2-aff0-319c6de8be71}" Type="WZUIContainer" />
+        </Button>
+        <WZUIContainer GUID="{dc413613-0269-4cd7-baa6-40ef0a070d49}" TouchContainerEnable="False" Type="WZUIContainer" AbsContentSize="200,80" UseAbsSize="True" TouchEnable="False" TouchSwallow="False">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9f083ddc-c2b7-40ff-b84b-b52e23392d12}" Name="txtName_CellLeagueHPRItem" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="127,70,26" RelativePosition="0.5,0.485714" Text="" />
+            <WZUIContainer Type="WZUIContainer" GUID="{b14a45a1-46a1-4a36-86cf-96a61ef97f4c}" Name="conForHonour_CellLeagueHPRItem" AbsContentSize="200,35" UseAbsSize="True" RelativePosition="0.5,0.71" Visible="False">
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{3178df71-851d-40f0-b3e8-30e69f916e6f}" MaxWidth="200" Name="txtRound_CellLeagueHPRItem" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellLeagueHPRItem>

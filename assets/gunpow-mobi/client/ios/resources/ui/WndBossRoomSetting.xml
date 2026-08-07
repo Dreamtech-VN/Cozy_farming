@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" ?>
+<WndBossRoomSetting GUID="{f7984cf2-703e-4a22-bce9-173917a71a65}">
+    <WZUIWindow Type="WZUIWindow" GUID="{0d4ff03c-56c6-4c7c-a7bf-30521a0d3eee}" LuaObjectName="WndBossRoomSetting" NameCreate="True" AbsContentSize="" UseAbsSize="False" Name="WndBossRoomSetting" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{244D11AF-C3D4-4cc6-A5BB-028000F3E351}" AbsContentSize="384,319" UseAbsSize="True" RelativePosition="0.492708,0.53125">
+            <WZUI9Image Type="WZUI9Image" GUID="{5A0B20E7-9EFF-4c84-BB98-CFA3B46B6E8F}" File="ui/common/common_scale9_di19.png" Opacity="255" CapInsets="100,70,1,1" RelativePosition="0.5,0.5" />
+            <WZUI9Image Type="WZUI9Image" GUID="{F7CCF7F9-E0CC-4268-8F4B-C93647F82498}" File="ui/common/common_scale9_di20.png" RelativeSize="0.98,0.51" AbsPosition="" UseOriginSize="False" RelativePosition="0.5,0.556425" />
+            <WZUIContainer Type="WZUIContainer" GUID="{E4B4A068-A97B-4259-B8AE-91D3CCFCC27D}" RelativeSize="1,0.1" RelativePosition="0.5,0.882912">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{02DA5ECE-7206-4c51-8032-89F7AD90984A}" Name="" NameCreate="True" FontSize="24" BoldFont="True" Text="" RelativePosition="0.5,0.5" Color="255,236,193" TextKey="ROOM_SETTING" EnableStroke="True" StrokeColor="132,66,29" StrokeSize="4" LabelStyleKey="SMALL_WINDOW_TITLE" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1BE10778-5F7A-415d-AD9A-91B55D340FE8}" RelativeSize="1,0.4" RelativePosition="0.5,0.54">
+                <WZUIContainer Type="WZUIContainer" GUID="{B6697639-67C8-44e8-A0A6-8427CF41EDE0}" RelativeSize="1,0.5" RelativePosition="0.5,0.75">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{B4C2A818-7C9F-487a-AE3D-E141B2A73B67}" Alignment="Right" AnchorPoint="1,0.5" FontSize="22" Color="62,34,8" Text="" RelativePosition="0.28,0.5" Name="txtName_WndBossRoomSetting" NameCreate="True" BoldFont="True" TextKey="ROOM_NAME" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{AA0B26CB-1FAF-4c66-A0D2-669F71C434B6}" AbsContentSize="230,34" UseAbsSize="True" RelativePosition="0.617187,0.5">
+                        <WZUI9Image Type="WZUI9Image" GUID="{160E81FB-BA29-4f9b-B80B-0EDCB742FC2C}" File="ui/common/common_scale9_di10.png" />
+                        <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Color="0,0,0" FontColor="255,255,255" FontSize="22" GUID="{486722FA-2C12-4340-B562-B84DCDC8CAC2}" InputMode="ModeSingleLine" KeyBordReturnType="TypeDone" LuaEditBoxTextChanged="" MaxLength="16" Name="editRoomName_WndBossRoomSetting" Order="0" PlaceHolder="" PlaceholderFontColor="155,131,122" RelativePosition="0.5,0.5" RelativeSize="0.9,1" Text="123456789" Type="WZUIEditBox" UseOriginSize="False" TextFieldPadding="" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{70CD87AC-2604-4b63-9135-95583854CA64}" RelativeSize="1,0.5" RelativePosition="0.5,0.25">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8F490A4C-B806-4dc4-A525-9A4EE3E70CB0}" Alignment="Right" AnchorPoint="1,0.5" FontSize="22" Color="62,34,8" Text="" RelativePosition="0.28,0.5" Name="txtPsw_WndBossRoomSetting" NameCreate="True" BoldFont="True" TextKey="ROOM_PASS" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{CF5FA6D7-323A-4c2d-84B4-48A06F97EB6E}" AbsContentSize="230,34" UseAbsSize="True" RelativePosition="0.617187,0.5">
+                        <WZUI9Image Type="WZUI9Image" GUID="{B0D9BDF2-8280-4103-A372-22A90727F661}" File="ui/common/common_scale9_di10.png" />
+                        <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Color="100,76,58" FontColor="100,76,58" FontSize="22" GUID="{9EF4403B-EE25-4f9b-8D62-F0111DC30B49}" InputMode="ModeSingleLine" KeyBordReturnType="TypeDefault" LuaEditBoxTextChanged="" MaxLength="6" Name="editRoomPass_WndBossRoomSetting" Order="0" PlaceHolder="" PlaceholderFontColor="79,64,48" RelativePosition="0.5,0.481132" RelativeSize="0.9,1" Text="大家来玩吧！" Type="WZUIEditBox" UseOriginSize="False" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{36B1E61D-A421-491f-9669-A1304FE0529C}" RelativeSize="1,0.3" RelativePosition="0.5,0.155172">
+                <Button Type="WZUIButton" RelativeSize="0.33,1" RelativePosition="0.25,0.5" LuaDoneFunctionName="onClose" GUID="{34A51E10-C4CD-4445-81B7-39659E1CE8E7}" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{0A074815-4422-42f9-A44C-20E013790193}">
+                        <WZUIImage Type="WZUIImage" GUID="{9BA31946-EFB7-4629-97EE-54AAB2421818}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{3F044D24-5D43-4af1-9148-1B4DF95E9AC8}" Name="" NameCreate="True" BoldFont="True" Color="255,236,193" FontSize="24" TextKey="CANCEL" StrokeColor="128,54,3" StrokeSize="4" EnableStroke="True" LabelStyleKey="SMALL_ORANGE_BTN" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{58600906-0765-4e2e-B10B-E240BBAF371C}">
+                        <WZUIImage Type="WZUIImage" GUID="{822F1E38-D019-40b0-BB85-38A06CA74815}" File="ui/common/common_btn_anniu3_sel.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{36915F2B-82D6-407e-A4AC-B20200C19CB6}" Name="" NameCreate="True" BoldFont="True" Color="255,236,193" FontSize="24" TextKey="CANCEL" StrokeColor="128,54,3" StrokeSize="4" EnableStroke="True" LabelStyleKey="SMALL_ORANGE_BTN" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{0BBCFF5D-609F-46f1-BB48-2E306C89F811}" />
+                </Button>
+                <WZUIButton Type="WZUIButton" RelativeSize="0.33,1" RelativePosition="0.75,0.5" GUID="{88D57E7C-CABE-4c56-85CA-EA3853A21DFC}" LuaDoneFunctionName="onClickSure" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{BF5B0711-64E8-48b5-9E34-91D7E31A1E67}">
+                        <WZUIImage Type="WZUIImage" GUID="{22F3A530-232D-4a42-8985-66DE5586C8EA}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{A86CB977-D853-472e-AD9A-2DA2BBAF5111}" Name="" NameCreate="True" BoldFont="True" Color="255,236,193" FontSize="24" TextKey="CONFIRM" StrokeColor="3,111,8" StrokeSize="4" EnableStroke="True" LabelStyleKey="SMALL_GREEN_BTN" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{0003B2B9-2F8C-4b42-9BFA-05C68B864A55}">
+                        <WZUIImage Type="WZUIImage" GUID="{4B051966-4699-41c1-B6DE-FC17B526105A}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{CC582C81-B4EE-4400-8349-98CDC0278F21}" Name="" NameCreate="True" BoldFont="True" Color="255,236,193" FontSize="24" TextKey="CONFIRM" StrokeColor="3,111,8" StrokeSize="4" EnableStroke="True" LabelStyleKey="SMALL_GREEN_BTN" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{43905A14-C8E1-4c10-AFE2-6CC78FB33E54}" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndBossRoomSetting>

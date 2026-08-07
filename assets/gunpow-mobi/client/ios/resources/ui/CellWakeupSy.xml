@@ -1,0 +1,23 @@
+﻿<CellWakeupSy GUID="{390a6435-6718-4a32-b7b6-efde6341cd1e}">
+    <WZUIContainer Type="WZUIContainer" GUID="{a0d587f2-6f2c-47d7-8cd0-d5c7429ca5b7}" Name="CellWakeupSy" NameCreate="True" LuaObjectName="CellWakeupSy" AbsContentSize="325,100" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{9850347f-1980-4df9-b296-abc01aa48310}" AbsContentSize="350,100" UseAbsSize="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{bf948eaf-1676-4fce-b100-61e56e280522}" AbsContentSize="340,92" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{0652787a-effa-4d56-b539-b94b0fcef4dc}" File="ui/common/common_scale9_di7.png" CapInsets="0" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{11ae9aae-5974-49bc-a894-732557b444c6}" UseAbsSize="True" AbsContentSize="350,101" RelativePosition="0.5,0.483" Visible="True" Name="conLight">
+                    <WZUI9Image File="ui/common/common_scale9_beibaodi_sel.png" GUID="{d93d78a3-33b1-4bd4-8524-8a124bb3a4cd}" Name="ImgLight" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False" Scale="1" ScaleX="1" ScaleY="1" UseOriginSizeProportion="False" Visible="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{327eb3b7-a4f4-43eb-b1bc-4455b620904c}" AbsContentSize="82,82" UseAbsSize="True" RelativePosition="0.16,0.5" Name="conIcon_CellWakeupSy" />
+            <WZUIContainer Type="WZUIContainer" GUID="{7e510563-f19b-4a81-b3ce-1025793d2381}" AbsContentSize="160,34" UseAbsSize="True" RelativePosition="0.3,0.7" AnchorPoint="0,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{a627dea7-fbfe-4ade-81cc-99fe7337cccb}" File="ui/common/common_scale9_di8.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{67a4f9bb-e2d8-42ae-bdaf-08b0e96f7a37}" FontSize="22" Name="txtName_CellWakeupSy" Text="" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.09,0.5" />
+            </WZUIContainer>
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{50c19c27-e465-403f-8823-be398c433dc0}" Name="ftxtExp_CellWakeupSy" MaxWidth="200" AnchorPoint="0,0.5" RelativePosition="0.34,0.3" />
+            <Button Type="WZUIButton" GUID="{eb099f75-292c-4572-a5fd-9db47545e1e9}" UseAbsSize="True" AbsContentSize="340,95" LuaDoneFunctionName="onClick">
+                <NormalElement Type="WZUIContainer" GUID="{b89d1cf6-0fe9-4a49-adcd-3b76c86eb113}" />
+                <SelectElement Type="WZUIContainer" GUID="{640ae876-98fa-4710-a550-5539b5f706da}" />
+                <DisableElement Type="WZUIContainer" GUID="{01634c8a-a9f4-4e5a-8964-0e48956116d3}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellWakeupSy>

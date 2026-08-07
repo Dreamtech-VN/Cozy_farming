@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" ?>
+<WndDesignationMain GUID="{AB06007E-C79F-496c-A719-9220FBF0F1BD}">
+    <WZUIWindow Type="WZUIWindow" GUID="{EE4D2134-FB20-4e79-98FF-0AED2D1053F2}" Name="WndDesignationMain" LuaObjectName="WndDesignationMain" LuaTouchBeganFunction="onTouchBegin" UseAbsSize="True" AbsContentSize="960,640" LuaTouchMovedFunction="onTouchMove" LuaTouchCancelledFunction="" LuaTouchEndedFunction="onTouchEnd" RelativePosition="0.5,0.5" RelativeSize="1,1" Scale="1" NameCreate="True" ShowAll="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{62B7A448-9DA8-4e63-9066-FB3BAE990184}" AbsContentSize="855,520" UseAbsSize="True" RelativePosition="0.455208,0.451562" ShowAll="False" Name="conListContent_WndDesignationMain" Visible="True" AbsPosition="480,289">
+            <WZUIContainer Type="WZUIContainer" GUID="{B021F7A2-79D2-47ae-8D82-AD81ADC41834}" AbsContentSize="857,521" UseAbsSize="True" RelativePosition="0.5,0.4997" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{EBC38251-3343-4f35-A793-A7ED746CFEC1}" File="ui/bag/common_scale9_js1.png" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{00d5a9ed-7e6b-466d-82c2-0cfa69c9ee7d}" AbsContentSize="854,424" UseAbsSize="True" RelativePosition="0.498837,0.587213">
+                    <WZUI9Image Type="WZUI9Image" GUID="{74bf33bc-15ab-468f-8f4b-30181ce46a2f}" File="ui/bag/common_scale9_js2.png" Opacity="153" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{298DB196-9715-4c0f-9B24-47C9661676DB}" AbsContentSize="855,420" UseAbsSize="True" RelativePosition="0.5,0.59" AnchorPoint="0.5,0.5" Name="chenjiuPanel_BackGround_WndDesignationMain" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{711da17b-9be1-4268-bd46-a93cc7271c8b}" AbsContentSize="190,412" UseAbsSize="True" RelativePosition="0.118525,0.5" Name="conLeftList_WndDesignationMain">
+                    <WZUI9Image Type="WZUI9Image" GUID="{88249599-5e75-4137-ad20-275a234c1dbf}" File="ui/bag/common_scale9_js4.png" Opacity="153" />
+                    <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{fe19aefe-42fa-4e9b-bce6-5dd61be41203}" AbsContentSize="196,390" UseAbsSize="True" RelativePosition="0.5,0.5" Name="chengjiu_FreeList_WndDesignationMain" EnableMoveHorizontal="False" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" EnableVerticalScroll="True" ListItemInterval="-1" Resistance="0.95" RelativeSize="1,1" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c4e14b80-75d7-460e-b8b9-dcfcf0e93f8e}" AbsContentSize="647,46" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.615978,0.993258" TouchEnable="False">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{5c0869f2-0aab-495d-a5a2-d6776037befe}" FontSize="22" Color="79,60,48" AnchorPoint="0,0.5" Name="txtMainTitle_WndDesignationMain" RelativePosition="-0.0219384,0.5" Text="【蛋蛋新手】成就点：" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{f14ef2f2-ad3b-4b4b-a79a-96df57d5356f}" Name="conForSubAchie_WndDesignationMain">
+                        <WZUIContainer Type="WZUIContainer" GUID="{1be8f394-9541-4f27-b626-ee4dfe2e14ca}" AbsContentSize="250,17" UseAbsSize="True" RelativePosition="0.574188,0.5">
+                            <WZUI9Image Type="WZUI9Image" GUID="{f095001e-240d-4e0a-9171-1fe2545c264c}" File="ui/common/common_progress_chengjiu_bg.png" Name="imgProBk_chengjiu" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{dc097254-980d-4a12-81c2-16c1864208cc}" AbsContentSize="250,15" UseAbsSize="True" RelativePosition="0.496,0.48">
+                                <WZUIProgress Type="WZUIProgress" GUID="{616fae3c-3334-433f-8c9c-50542007eb6f}" BgPicture="ui/common/common_progress_chengjiu_fore.png" UseOriginSize="False" Percentage="100" AnchorPoint="0,0.5" RelativePosition="0.00549702,0.495" Name="proAchiePoint_WndDesignationMain" AbsPosition="279.72,19.8" ScaleX="1" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ea7f1fe1-1761-4c92-9925-427d13a4e0a7}" FontSize="22" Color="255,236,193" AnchorPoint="1,0.5" RelativePosition="0.992093,0.5" Name="txtAchiePointNum_WndDesignationMain" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" Text="111111/999999" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{d8063bc1-39ec-458c-a83f-255dedfb7819}" AbsContentSize="40,40" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.306723,0.5" AbsPosition="231.48,20">
+                            <WZUIImage Type="WZUIImage" GUID="{b4c57a37-0919-43f2-ba33-08545c502fe0}" File="ui/achievement/common_icon_cjdtb.png" UseOriginSize="False" AnchorPoint="0.5,0.5" Name="imgGetAchiePointsIcon" Visible="True" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{bc8b2b41-2d9b-4f6c-af1f-d5238d98a04f}" AbsContentSize="647,367" UseAbsSize="True" RelativePosition="0.612864,0.445238" Name="rightBackGround_container_WndDesignationMain">
+                    <WZUI9Image Type="WZUI9Image" GUID="{d56a562f-da22-41ec-b6fb-0bd58b0b6672}" File="ui/bag/common_scale9_js4.png" Opacity="153" />
+                    <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{338209b9-d9d5-4ca0-87f5-ca64da808c8b}" AbsContentSize="647,350" UseAbsSize="True" RelativePosition="0.5,0.5" Name="subFreeList_WndDesignationMain" EnableMoveHorizontal="False" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" EnableVerticalScroll="True" ListItemInterval="5" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{65439C73-6863-40b7-AD74-68003558CFD0}" Name="badgePanel_BackGround_WndDesignationMain" Visible="False" RelativePosition="0.5,0.59" AbsContentSize="855,420" UseAbsSize="True">
+                <WZUIContainer AbsContentSize="840,420" GUID="{85678BD7-2827-4f81-8E7E-FB9026773DB3}" RelativePosition="0.497522,0.5" RelativeSize="0.9,0.72" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{DB7371FF-680D-4292-9467-08C93DF4BE2D}" RelativePosition="0.5,0.5" RelativeSize="1,1" Name="badge_FreeList_WndDesignationMain" UseAbsSize="True" AbsContentSize="828,420" EnableMoveHorizontal="False" EnableVerticalScroll="False" ScrollPictureDown="" ScrollPictureMid="" ScrollPictureTop="" EnableMoveVertical="False" EnableHorizontalScroll="False" ListOrient="Horizontal" EnableMoveoutContainer="False" ListItemInterval="12" EnableBounceBack="False" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="268,398" AnchorPoint="0.5,0.5" GUID="{2797CF85-4873-4e73-828D-42FA28DE6645}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="False" Name="CellBadgePanelItem" NameCreate="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{F35BC45B-6F5D-4ae8-B89A-9D78F6010EEC}" File="ui/common/common_scale9_di7.png" RelativePosition="0.5,0.5" AbsPosition="123,209" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{1178FBF5-1CBF-47ff-AAF9-2988DAFB836F}" AbsContentSize="240,226" UseAbsSize="True" RelativePosition="0.5,0.587177" AbsPosition="123,245.44">
+                        <WZUI9Image Type="WZUI9Image" GUID="{BEE91C77-B7DA-4804-8C36-470EB936835F}" File="ui/common/common_scale9_di29.png" Opacity="125" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{5D2590A6-E855-4bc5-A779-EF8A90DE3ED1}" UseAbsSize="False">
+                            <WZUIImage Type="WZUIImage" GUID="{2FCA6AD4-E7DF-438d-9AA7-E2ADFDB67F99}" File="ui/achievement/common_icon_cjgjhz.png" UseOriginSize="True" RelativePosition="0.5,0.598673" Name="imgIcon_CellBadgePanelItem" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{5B5FAF61-3E8A-4e46-8F22-E406DEDBA899}" AbsContentSize="240,60" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0.00404858" AbsPosition="112.5,1">
+                            <WZUI9Image Type="WZUI9Image" GUID="{059A5C10-71A4-4583-8A44-70D618B75C8D}" File="ui/common/common_scale9_di27.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{AA0FC60B-37D2-477f-8EF3-A161DD16193A}" Name="txtLevelWord_CellBadgePanelItem" TextKey="" Color="255,227,116" FontSize="22" AnchorPoint="0,0.5" RelativePosition="0.0875,0.71" Order="0" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{FBF4DE95-6A0A-496e-9250-B31B3F0EA15F}" Name="txtLevelNum_CellBadgePanelItem" TextKey="" Color="255,227,116" FontSize="22" AnchorPoint="0,0.5" RelativePosition="0.0875,0.27" Order="0" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{89FB025A-C938-41a8-AED7-51E8F3F4B308}" Name="txtPropertyWord_CellBadgePanelItem" TextKey="" Color="99,255,95" FontSize="22" AnchorPoint="1,0.5" RelativePosition="0.916667,0.71" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{BA63BE75-A2FF-4d06-A5EC-4DC22829AA2E}" Name="txtPropertyNum_CellBadgePanelItem" TextKey="" Color="99,255,95" FontSize="22" AnchorPoint="1,0.5" RelativePosition="0.916667,0.27" Text="" />
+                            <WZUIImage Type="WZUIImage" GUID="{15FF1DB7-5D7E-47d8-B294-5E1F41CBC43D}" File="ui/common/battle_icon_shangsheng.png" UseOriginSize="True" Rotation="90" Name="imgArrow_CellBadgePanelItem" RelativePosition="0.615531,0.5" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{A6F01996-AF19-4cdd-B628-CF8765219A63}">
+                        <WZUIButton Type="WZUIButton" GUID="{4411F4C1-9F07-48b1-84D5-0CA003A23F06}" RelativeSize="1,1" RelativePosition="0.5,0.109588" Name="btnUpgrade_CellBadgePanelItem" LuaDoneFunctionName="onUpgradeCallBack" AbsContentSize="116,56" UseAbsSize="True" AnchorPoint="0.5,0.5" Visible="True" AbsPosition="123,11.36" LuaActionName="Normal" LocalInterval="300">
+                            <NormalElement Type="WZUIContainer" GUID="{1150E811-5A08-4a51-9076-5CB54D7BEDEC}" AbsContentSize="116,56" UseAbsSize="True">
+                                <WZUIImage Type="WZUIImage" GUID="{F3CE931F-D10A-4eb2-B071-DDD07152E993}" File="ui/common/common_btn_anniu10_0.png" Name="" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{075667A6-A6E3-4ef4-8506-A8ECA230C086}" AbsContentSize="116,56" UseAbsSize="True">
+                                <WZUIImage Type="WZUIImage" GUID="{46DD32C3-18FF-4d91-81EC-DDCDB11B9092}" File="ui/common/common_btn_anniu10_0_sel.png" Scale="1" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{92FDCD29-F6CA-4a17-B359-36E6ECD5EDF4}" AbsContentSize="116,56" UseAbsSize="True">
+                                <WZUIImage Type="WZUIImage" GUID="{07991880-8CB2-4a74-B09D-ED7ADDDCC0F8}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" Name="" GrayRender="True" />
+                            </DisableElement>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2FEA85EF-0D10-4809-A01A-9243EBD5354E}" Text="" FontSize="24" BoldFont="False" Color="255,236,193" StrokeSize="4" StrokeColor="3,111,8" EnableStroke="True" Name="button_nor_Label" GrayRender="False" LabelStyleKey="SMALL_GREEN_BTN" TextKey="STAR_SOUL_BUTTON_UPDATE" />
+                        </WZUIButton>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6F452B58-C6BF-44a2-8B7F-4F6ED3FC0037}" FontSize="24" RelativePosition="0.525,0.138038" TextKey="BADGE_FULL_LEVEL" Color="255,121,31" Name="txtFullLevel_CellBadgePanelItem" Visible="False" AbsPosition="129.15,57.7" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{EC91D379-C8D2-4599-8F73-13A4F05F3A8A}" TouchSwallow="False" TouchEnable="False" Name="conNotMaxInfo_WndDesignationMain" RelativePosition="0.5,0.242613" AbsPosition="129,209" AbsContentSize="246,50" UseAbsSize="True">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{BFF009C8-8D81-4dc9-8801-15A7979BE2D9}" RelativePosition="0.35,0.5" AnchorPoint="1,0.5" TextKey="ATH_SHOP_COST" Color="255,227,116" EnableStroke="True" FontSize="22" StrokeColor="79,60,48" StrokeSize="4" AbsPosition="86.1,90.78" Name="txtCostWord_CellBadgePanelItem" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{F505DC85-A443-4637-BE1B-D61295A047F9}" StrokeSize="4" StrokeColor="79,60,48" Color="255,227,116" FontSize="22" EnableStroke="True" AnchorPoint="0,0.5" RelativePosition="0.52,0.5" Name="txtCostNum_CellBadgePanelItem" AbsPosition="127.92,90.78" Text="" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{A79D9D2A-DC82-4d9d-8DAB-DB4D889C64A5}" UseAbsSize="True" AbsContentSize="43,43" AnchorPoint="1,0.5" RelativePosition="0.52,0.5" AbsPosition="123,90.78" Name="conCoinsIcon_CellBadgePanelItem">
+                            <WZUIImage Type="WZUIImage" GUID="{CDEF13C9-E5A3-4772-A7FD-DC3EA5CAF5D2}" File="ui/achievement/common_icon_cjdtb.png" UseOriginSize="False" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Name="imgCostAchiePointsIcon" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{5CD0B80D-C893-4d96-93D4-FED15896A210}" Name="txtBadgeTitle_CellBadgePanelItem" RelativePosition="0.5,0.92" MaxWidth="240" />
+                    <WZUISpine Type="WZUISpine" GUID="{07341C0C-0849-4666-9382-CCDBE14AE206}" FileAtlas="ui/ui_chengjiu_huizhang.atlas" FileJson="ui/ui_chengjiu_huizhang.json" AnimationName="" RelativePosition="0.5,0.951564" AbsPosition="123,382" Visible="False" Name="spineUpgrade_CellBadgePanelItem" Loop="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{c6bd3db8-7013-4c8f-aecf-9ba7e714c4ad}" AbsContentSize="850,90" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.180609">
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{b018f9d2-4201-4124-abb2-3f9f40f5505b}" Name="ftxtTotalProgress_WndDesignationMain" MaxWidth="500" RelativePosition="0.68,0.680555" AnchorPoint="0,0.5" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{f9074d62-7ce6-4a70-9fca-c4ae6b2dda6f}" Name="ftxtLeftAchieNum_WndDesignationMain" MaxWidth="500" RelativePosition="0.68,0.347222" AnchorPoint="0,0.5" />
+                <Button Type="WZUIButton" GUID="{397c3ca0-4b9e-4b10-8389-074dd6f4fdb4}" AbsContentSize="136,62" UseAbsSize="True" LuaActionName="Normal" LuaDoneFunctionName="onClickChange" RelativePosition="0.111176,0.5">
+                    <NormalElement Type="WZUIContainer" GUID="{1c40b4f3-0e43-4b70-bec4-b19a7c73290f}">
+                        <WZUIImage Type="WZUIImage" GUID="{c961cb5f-0cfb-477c-b3a1-fc7260c49330}" File="ui/common/common_btn_anniu3_1.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{923f5850-f2b4-45c0-b54c-b3872d335223}">
+                        <WZUIImage Type="WZUIImage" GUID="{e203d8c6-daaa-41f2-be99-1fb7002ebcc3}" File="ui/common/common_btn_anniu3_1_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{5b935015-13f1-4211-929f-a12a5d133ac1}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{bf8e3448-29e7-4eff-86c7-eef3c44a2179}" LabelStyleKey="NORMAL_ORANGE_BTN" Name="txtBtnText_WndDesignationMain" />
+                    <WZUIImage Type="WZUIImage" GUID="{d684e003-ea40-406b-8aab-1153eee15fed}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.963235,0.854839" Name="imgRedDot_WndDesignationMain" Visible="False" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndDesignationMain>

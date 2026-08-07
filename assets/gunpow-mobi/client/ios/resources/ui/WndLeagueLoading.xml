@@ -1,0 +1,18 @@
+<WndLeagueLoading GUID="{113b387c-974c-41b3-bdfc-65ab60b6ef6f}">
+    <WZUIWindow Type="WZUIWindow" GUID="{fab122f6-247a-485a-9ff4-6249cfb95805}" LuaObjectName="WndLeagueLoading" NameCreate="True" Name="WndLeagueLoading">
+        <WZUIImage Type="WZUIImage" GUID="{39e8b98c-2e7b-45a2-bffd-5441e2d56704}" File="ui/battleLoading/common_pic_jjbg.png" UseOriginSize="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{3774cc74-b269-41bf-ae07-d5c488fe3022}" AbsContentSize="960,640" UseAbsSize="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{01e83b7a-97bf-4587-b45d-f8e2e00f70e1}" AbsContentSize="220,220" UseAbsSize="True" RelativePosition="0.146522,0.775" Name="conTeam1Seat1_WndLeagueLoading" />
+            <WZUIContainer Type="WZUIContainer" GUID="{262187d2-22a8-459c-a86e-aec484136d9b}" AbsContentSize="220,220" UseAbsSize="True" RelativePosition="0.147917,0.229687" Name="conTeam1Seat2_WndLeagueLoading" />
+            <WZUIContainer Type="WZUIContainer" GUID="{6f038171-cc09-41a0-86a7-6002cf01a1ee}" AbsContentSize="220,220" UseAbsSize="True" RelativePosition="0.4,0.503125" Name="conTeam1Seat3_WndLeagueLoading" />
+            <WZUIContainer Type="WZUIContainer" GUID="{36d1ac4f-a20e-4f82-bc15-c9e3f75c2e3b}" AbsContentSize="220,220" UseAbsSize="True" RelativePosition="0.851041,0.771875" Name="conTeam2Seat1_WndLeagueLoading" />
+            <WZUIContainer Type="WZUIContainer" GUID="{64d00b06-d1bf-4412-b64f-0a83341a3bc8}" AbsContentSize="220,220" UseAbsSize="True" RelativePosition="0.852083,0.229687" Name="conTeam2Seat2_WndLeagueLoading" />
+            <WZUIContainer Type="WZUIContainer" GUID="{53057e2e-1f40-4e14-b089-32e7c810c530}" AbsContentSize="220,220" UseAbsSize="True" RelativePosition="0.594648,0.502053" Name="conTeam2Seat3_WndLeagueLoading" />
+            <WZUIContainer Type="WZUIContainer" GUID="{7a9febc1-f1c2-4cf8-9d68-3216c38ae588}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.385513,0.868731" Name="conTeam1Icon_WndLeagueLoading" />
+            <WZUIContainer Type="WZUIContainer" GUID="{3d7692a2-224e-4dd6-a3eb-55ec47f94210}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.609597,0.864546" Name="conTeam2Icon_WndLeagueLoading" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{0b643145-192b-478e-a299-ef9b746f7cbf}" AbsContentSize="220,220" UseAbsSize="True">
+            <WZArmature Type="WZArmature" GUID="{1adab1b7-0e11-4aba-bdef-2f0985a4bf8d}" ArmatureFile="player/combatboy/ghost/combatboy_ghost.xml" ArmatureName="combatboy_ghost" UseOriginSize="True" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndLeagueLoading>

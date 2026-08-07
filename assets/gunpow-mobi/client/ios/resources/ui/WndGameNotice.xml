@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<WndGameNotice GUID="{8E889781-83B8-4b77-BFAA-8736D81E6D5E}">
+    <WZUIWindow AbsContentSize="490,512" AbsPosition="480,300" GUID="{25155952-238C-4730-BEBE-7C6EFBBA6217}" LuaObjectName="WndGameNotice" Name="WndGameNotice" NameCreate="True" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True" ShowAll="True" RelativePosition="0.5,0.46875">
+        <WZUIContainer Type="WZUIContainer" GUID="{A45A0D37-8F97-4c47-A667-EF48E15E20BE}">
+            <WZUI9Image Type="WZUI9Image" GUID="{BE638528-9623-4d83-B151-366DFAA6A188}" File="ui/common/common_scale9_di15.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{759589A3-C99F-4b83-A598-3D41E2B22156}" AbsContentSize="478,500" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{7E8157B0-5562-48b7-8C8F-470F8E8773C5}" File="ui/common/common_scale9_di25.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AnchorPoint="0.5,0.5" GUID="{784D50CF-CA43-4071-BEC2-17A01DA22FEE}" RelativePosition="0.5,0.5" RelativeSize="0.88,0.67" Type="WZUIContainer">
+            <WZUIScrollContainer EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{FB21BD0F-5701-4ee4-B445-EF7A9D811319}" Name="scrollNotice_WndGameNotice" ScrollPictureDown="common/Jigsaw/rolling_03.png" ScrollPictureMid="common/Jigsaw/rolling_01.png" ScrollPictureTop="common/Jigsaw/rolling_02.png" Type="WZUIScrollContainer" NameCreate="True" RelativePosition="0.5,0.517491">
+                <MoveElement GUID="{14C83E37-0770-4119-832F-2B030F20601C}" Type="WZUIContainer">
+                    <WZUILabelTTF Alignment="Left" AnchorPoint="0,0" Color="62,34,8" Dimensions="400,0" FontSize="22" GUID="{95593E37-3A02-406b-AF6D-DDDADCE8E916}" Name="txtNotice_WndGameNotice" RelativePosition="0,0" Text="" Type="WZUILabelTTF" />
+                </MoveElement>
+            </WZUIScrollContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{97E591D9-F9AD-4b24-A97D-3BA7F41D7ED3}" AbsContentSize="400,42" UseAbsSize="True" RelativePosition="0.5,0.91">
+            <WZUI9Image Type="WZUI9Image" GUID="{CAD78DA6-44C9-4da4-86FA-A223F88FD359}" File="ui/common/common_scale9_heidi3.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{C589E653-8CBE-4a83-8084-7961A6EBC245}" FontSize="26" BoldFont="True" RelativePosition="0.5,0.5" Color="255,236,193" Text="说明" StrokeSize="4" StrokeColor="79,60,48" EnableStroke="True" TextKey="ABOUT" />
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{111AC573-3AC2-473b-9DA7-DF786D596BAC}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" Scale="2" ScaleY="1" RelativePosition="0.5,0.175" />
+        <WZUIImage Type="WZUIImage" GUID="{941AAB76-5899-4154-BAA6-32CEB3AA7AF4}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.67,0.908" />
+        <WZUIImage Type="WZUIImage" GUID="{5E4A4AF3-F400-45d3-883E-404FB6165129}" File="ui/common/common_pic_jiantou4.png" UseOriginSize="True" RelativePosition="0.33,0.908" FlipX="True" />
+        <WZUIContainer Type="WZUIContainer" GUID="{8EA90CA4-2A00-4f82-A02C-694B61058ED6}" RelativeSize="1,0.15" AnchorPoint="0.5,0" RelativePosition="0.5,0.0195313">
+            <WZUIContainer Type="WZUIContainer" GUID="{F62EB4A0-938C-4a27-83B3-1B508924FC94}" Name="" Visible="True">
+                <WZUIButton GUID="{F96FE13D-ADA8-4bbb-9B91-43953FF629F3}" LuaDoneFunctionName="onBtnClose" RelativePosition="0.5,0.5" Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" LuaActionName="Normal">
+                    <NormalElement GUID="{3CABC675-46AB-455a-8FA4-C6298249F5BE}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{9B2F7858-1471-46c1-814D-10E394FF04E0}" File="ui/common/common_btn_anniu10.png" />
+                    </NormalElement>
+                    <SelectElement GUID="{BE334E24-1AD2-44fb-994D-FEF1008FE3E1}" TouchContainerEnable="True" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{81861595-8F8F-40fb-B954-DBD759997BB3}" File="ui/common/common_btn_anniu10_sel.png" />
+                    </SelectElement>
+                    <DisableElement GUID="{9D36CDBA-F168-42f5-ACDC-91D5B7AEFEC7}" Type="WZUIContainer">
+                        <WZUI9Image Type="WZUI9Image" GUID="{4BB9DD14-C683-48be-8CB2-8FE47C065F31}" File="ui/common/common_btn_anniu10.png" GrayRender="True" RelativePosition="0.5,0.5" />
+                    </DisableElement>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{FFD7ED3E-2EDB-4f93-B97F-02E1AF54E773}" Color="255,236,193" FontSize="24" BoldFont="True" RelativePosition="0.5,0.5" Text="" EnableStroke="True" StrokeColor="3,111,8" StrokeSize="4" TextKey="CONFIRM" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndGameNotice>

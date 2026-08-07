@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<WndMarryParty GUID="{24A05B93-2EB8-4e16-B90F-488C8EFF7101}">
+    <WZUIWindow AbsContentSize="858,480" GUID="{8654CF57-B5C6-4b1c-96B8-6723ACF9516C}" LuaObjectName="WndMarryParty" Name="WndMarryParty" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer GUID="{A46B5C28-9B1C-4afd-AC3E-0ABDE4760789}" RelativeSize="1,0.95" Type="WZUIContainer">
+            <WZUIImage Type="WZUIImage" GUID="{FE8336D1-1750-4dff-AC6A-E00AB51511A2}" File="ui/marrige/common_pic_ptqj.png" UseOriginSize="True" Name="imgWeddingIn_WndMarryParty" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="90,90" GUID="{A03C4226-D4F1-44b3-9E17-F4E4CD9D9E3C}" Name="conTop_WndMarry" RelativePosition="0.811101,0.84099" Type="WZUIContainer" UseAbsSize="True">
+            <Button AbsContentSize="0,0" GUID="{EEC99932-DB11-4a3f-9BD7-561B018A7DD6}" LuaDoneFunctionName="onCloseClick" Name="btnClose_WndMarry" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="False" LuaActionName="Normal">
+                <NormalElement GUID="{95E00D06-D58F-4424-A3C4-8F81D6730F1A}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi.png" GUID="{0407A385-22B3-48fd-8E52-4B3E8F049A17}" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </NormalElement>
+                <SelectElement GUID="{FB8E478F-5B6E-4061-B700-AB2018B3C4E9}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{785EBF25-98F3-41c4-AC92-D97709BB44DC}" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement GUID="{38C05738-21DE-4fee-BFD5-0BE706D2B4B7}" Type="WZUIContainer" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{85DBB113-8A6E-4e8c-BAD1-1035971382EA}" RelativeSize="0.96,0.79" RelativePosition="0.5,0.455711">
+            <WZUIContainer Type="WZUIContainer" GUID="{711545E1-AB55-40e1-BE87-6F9CDF99632C}" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.732393,0.103058" Name="conSendIn_WndMarryParty" Visible="True">
+                <Button Type="WZUIButton" LuaDoneFunctionName="onClickSendIn" RelativePosition="0.5,0.5" GUID="{A5B57F80-ED9C-4d0c-8B17-FF043664D588}" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{E82D03EC-16D3-47ac-A8A1-3C26AA86F70A}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{EC1203FC-B6EE-4f80-81C9-1F7C2946B3EC}" File="ui/common/common_btn_marryan.png" UseOriginSize="True" Visible="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{9EA8ABC0-6973-4d30-BE27-3C66BCED64BE}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{9257FB44-34AA-4c7a-9DF3-C59D169F6276}" File="ui/common/common_btn_marryan_sel.png" UseOriginSize="True" Visible="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{766CC181-FF41-4a13-8ED3-23A31834741E}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{40549C45-D3CE-400f-8C46-E8AFC63C2014}" FontSize="26" Color="255,236,193" Text="发送邀请" BoldFont="False" EnableShadow="False" EnableStroke="False" StrokeColor="128,54,13" Name="txtSendIn_WndMarryParty" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" TextKey="SEND" StrokeSize="4" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{4CA0BDF7-BCCC-412b-BEC8-84FB11FD3E4F}" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.467364,0.768287" Name="conChoiceFriend_WndMarryParty" Visible="True">
+                <Button Type="WZUIButton" LuaDoneFunctionName="onClickFriend" RelativePosition="0.5,0.5" GUID="{C10A35A6-1A3C-4d33-B344-F3FC0B63354E}" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{0C38FAC5-6C40-4814-9575-169D4455E73F}">
+                        <WZUIImage Type="WZUIImage" GUID="{9C7BDA14-035F-461e-9066-D00CD216601A}" File="ui/common/common_btn_anniu14.png" UseOriginSize="True" Scale="1.1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{6F146473-211D-4862-8A81-B0AB95BFF30A}">
+                        <WZUIImage Type="WZUIImage" GUID="{E93FFF2F-08A3-4cc8-905D-728E1B7D57E7}" UseOriginSize="True" Scale="1.1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{D39D175A-1607-4737-9D42-884CEFCE1680}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{3563A1F8-BC94-4839-900A-B7F67AA0F2A8}" FontSize="20" Color="255,255,255" Text="选择好友" BoldFont="False" EnableShadow="False" EnableStroke="False" StrokeColor="60,19,12" Name="txtSelectFriend_WndMarryParty" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" TextKey="INVITE" />
+                </Button>
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7E10E501-3CA6-4498-A876-27A46AD279C9}" FontSize="18" Color="255,88,72" Text="邀请" BoldFont="False" EnableShadow="False" EnableStroke="False" StrokeColor="60,19,12" Name="txtMarryPartyExplain_WndMarryParty" RelativePosition="0.378452,0.10683" AnchorPoint="0.5,0.5" TextKey="MARRY_INV_INFO" />
+            <WZUIImage Type="WZUIImage" GUID="{2D34F471-B1E7-4621-B6B0-000004622E30}" File="ui/marrige/common_pic_jhxc.png" UseOriginSize="True" RelativePosition="0.722129,0.5" TouchEnable="False" Visible="True" Name="imgWeddingDress_WndMarryParty" />
+            <WZUIImage Type="WZUIImage" GUID="{24AE3542-4900-42b1-80F4-19402D8263C7}" File="ui/common/common_pic_huawen2.png" UseOriginSize="True" RelativePosition="0.376303,0.203873" TouchEnable="False" Visible="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{F7E133A5-F942-4265-AA13-09822E79ACA1}" FontSize="22" Color="255,88,72" Text="邀请" BoldFont="False" EnableShadow="False" EnableStroke="False" StrokeColor="60,19,12" Name="" RelativePosition="0.383767,0.823806" AnchorPoint="0.5,0.5" TextKey="INVITATION_CARD" />
+            <WZUIImage Type="WZUIImage" GUID="{FB14C866-0EB9-46d1-A58F-D820559A896A}" File="ui/common/common_pic_huawen2.png" UseOriginSize="True" RelativePosition="0.384506,0.692964" TouchEnable="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{05CA95DC-6679-4ebd-8910-30F8638F2A97}" FontSize="22" Color="255,88,72" Text="沉浸在幸福中的我们于" BoldFont="False" EnableShadow="False" EnableStroke="False" StrokeColor="60,19,12" Name="txt_WndMarryParty" RelativePosition="0.390493,0.629418" AnchorPoint="0.5,0.5" TextKey="MARRY_TIPS" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{67C5D80D-8589-4c7b-95F3-1AD9CC9B5F26}" FontSize="22" Color="255,88,72" Text="2015年8月20日18:00" BoldFont="False" EnableShadow="False" EnableStroke="False" StrokeColor="60,19,12" Name="txtWeddingTime_WndMarryParty" RelativePosition="0.386228,0.556366" AnchorPoint="0.5,0.5" TextKey="" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{0A749392-B4EF-4d19-920C-8FA548F91400}" FontSize="22" Color="255,88,72" Text="举行婚礼" BoldFont="False" EnableShadow="False" EnableStroke="False" StrokeColor="60,19,12" Name="txtCardsExplain_WndMarryParty" RelativePosition="0.390493,0.483492" AnchorPoint="0.5,0.5" TextKey="" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{30471D94-0344-4873-A0D1-B5A6A1F3B4A0}" Color="207,91,82" FontSize="22" Text="新郎：祝英台" RelativePosition="0.251939,0.362043" Name="txtWoman_WndMarryParty" AnchorPoint="0,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{E9F6C924-C5C0-476a-BFFA-F2E7DFBA0E16}" Color="207,91,82" FontSize="22" Text="新郎：祝英台" RelativePosition="0.251939,0.281064" Name="txtMan_WndMarryParty" AnchorPoint="0,0.5" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndMarryParty>

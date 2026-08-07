@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" ?>
+<WndSellList GUID="{13DF084E-FCE5-432c-8C2A-EF293CD9B497}">
+    <WZUIWindow Type="WZUIWindow" GUID="{960A6792-8BEF-411b-8267-A00D7050E220}" Name="WndSellList" LuaObjectName="WndSellList">
+        <WZUIContainer AbsContentSize="390,530" AnchorPoint="0,0.5" GUID="{E23BBC96-930D-4308-A559-32A28B612CA7}" RelativePosition="0.05,0.52" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Name="con">
+            <WZUIContainer GUID="{8D214501-25DD-41d9-9F14-FFD8BD51DAD3}" RelativeSize="1,1" Type="WZUIContainer">
+                <WZUI9Image CapInsets="60,110,10,10" File="ui/common/common_scale9_di19.png" GUID="{E34E1BC9-0192-457e-B7FE-09E2B0AEB1B9}" Type="WZUI9Image" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="" AbsPosition="0,1" AnchorPoint="0.5,1" GUID="{ADB341C1-45F4-40a6-A74B-E695757D1C5F}" RelativePosition="0.5,0.99" RelativeSize="0.96,0.83" Type="WZUIContainer">
+                <WZUIContainer AbsContentSize="360,40" AnchorPoint="0.5,1" GUID="{AE947E37-F8D4-4be4-A5F7-AD23580D6378}" RelativePosition="0.5,0.98" RelativeSize="1,0.2" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{8F51590A-479F-4eba-ABAA-017CBBDD7C31}" Name="txtSaleTitie_WndRecover" RelativePosition="0.5,0.5" Type="WZUILabelTTF" Text="" EnableStroke="True" BoldFont="True" StrokeSize="4" StrokeColor="132,66,29" TextKey="BAGTIP3" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{84A16522-B5DC-4932-A7B0-A69F74775AC2}" AbsContentSize="377,390" UseAbsSize="True" RelativePosition="0.5,0.44" AbsPosition="187.2,219.95">
+                    <WZUI9Image Type="WZUI9Image" GUID="{23E3B7A6-4F95-4eef-9ACE-04041ED5641A}" File="ui/common/common_scale9_di20.png" RelativePosition="0.501,0.5" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{0F5CA811-5AD8-499d-B82F-AD1F781B8FD7}" Name="conSale" AbsContentSize="364,240" UseAbsSize="True" RelativePosition="0.5,0.66" Visible="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{DE896908-1F64-46d1-B7E6-FFDA8BECF5AE}" AbsContentSize="364,216" UseAbsSize="True" RelativePosition="0.5,0.95" AnchorPoint="0.5,1">
+                    <WZUI9Image Type="WZUI9Image" GUID="{89EB909C-DE6A-40b4-9445-660947DC4681}" File="ui/common/common_scale9_di4.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{49C170D7-428B-4170-8DB8-1DFBDFE95A52}" Name="conRow1" AbsContentSize="364,100" UseAbsSize="True" RelativePosition="0.5,0.68">
+                    <WZUI9Image Type="WZUI9Image" GUID="{B2692703-3202-4124-AF84-44B55B7FC8CE}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" RelativePosition="0.14,0.56" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{49FB6C24-7F5B-41be-B227-C841326FB8B8}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" RelativePosition="0.38,0.56" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{8026D218-CFF5-4e03-AA9E-B2F78D4B2873}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" RelativePosition="0.62,0.56" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{B4C51AFB-2DA3-47f9-8638-55F0E75C282A}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" RelativePosition="0.86,0.56" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{7F5C2543-4FC0-45f6-A15B-6735DBA4A284}" AbsContentSize="90,90" UseAbsSize="True" Name="conSaleItem1" RelativePosition="0.14,0.56" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{06961989-E544-435d-8578-59C1594DE6C8}" AbsContentSize="90,90" UseAbsSize="True" Name="conSaleItem2" RelativePosition="0.38,0.56" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{682DAD9A-822C-4375-AC33-5A9B1FA3C132}" AbsContentSize="90,90" UseAbsSize="True" Name="conSaleItem3" RelativePosition="0.62,0.56" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{07BE5E62-DB47-4365-8A60-1FBCD859AE57}" AbsContentSize="90,90" UseAbsSize="True" Name="conSaleItem4" RelativePosition="0.86,0.56" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{BA7EACBD-277A-43c7-AA08-364BD4188A01}" Name="conRow2" AbsContentSize="364,100" UseAbsSize="True" RelativePosition="0.5,0.275" AnchorPoint="0.5,0.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{FED5ED41-A477-49a9-A980-5172DAD0E2A2}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" RelativePosition="0.14,0.56" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{8600422D-B464-4068-9896-8FFC832D8414}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" RelativePosition="0.38,0.56" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{3F999DE4-A321-4aac-A5BD-836E7BE3FC24}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" RelativePosition="0.62,0.56" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{FFE945A8-1803-42eb-89D7-8DEE1ED6B63E}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" RelativePosition="0.86,0.56" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{1AF63C2A-183F-4cb8-88FF-ECC7B5F51ED5}" AbsContentSize="90,90" UseAbsSize="True" Name="conSaleItem5" RelativePosition="0.14,0.56" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{BCE19D9E-A3E9-4778-80F2-BE61DE1063AC}" AbsContentSize="90,90" UseAbsSize="True" Name="conSaleItem6" RelativePosition="0.38,0.56" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{475BE08F-0633-467c-A2F9-663A5C2D4132}" AbsContentSize="90,90" UseAbsSize="True" Name="conSaleItem7" RelativePosition="0.62,0.56" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{46FF7DFD-828F-40f9-9653-5C42A6950E3D}" AbsContentSize="90,90" UseAbsSize="True" Name="conSaleItem8" RelativePosition="0.86,0.56" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{F8DA1F6B-E697-4de8-8DCF-6FB14FDDB243}" Name="conGet" AbsContentSize="375,145" UseAbsSize="True" RelativePosition="0.5,0.305">
+                <WZUIContainer Type="WZUIContainer" GUID="{6822573A-F625-4338-8FFF-996D0525AEF6}" AbsContentSize="345,36" UseAbsSize="True" RelativePosition="0.5,1" AnchorPoint="0.5,1" Visible="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{734FED27-844F-4858-AA01-5580BF613EEA}" File="ui/common/common_scale9_di10.png" Opacity="200" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{D75C1942-91D0-4f66-BEEB-FFEFEEB3271D}" AbsContentSize="135,35" UseAbsSize="True" RelativePosition="0.002,0.499207" AnchorPoint="0,0.5" AbsPosition="0.69,17.9714">
+                        <WZUI9Image Type="WZUI9Image" GUID="{DF1FD71E-E660-4f1d-A99D-19E5E90C06E4}" File="ui/common/common_scale9_di11.png" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Alignment="Left" AnchorPoint="0,1" BoldFont="True" Color="255,227,116" FontSize="22" GUID="{AC97BC30-D117-4cfe-9CED-155E141F580B}" Name="txtT_WndSellList" RelativePosition="0.03,0.835714" Text="" Type="WZUILabelTTF" EnableStroke="True" StrokeSize="3" StrokeColor="87,47,21" TextKey="MOUNT_CAN_LOCK" />
+                </WZUIContainer>
+                <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{fca45571-71ee-4ef2-bb1a-5f7b1d0e73f5}" Name="conClipping1" Scale="1" AbsContentSize="375,108" UseAbsSize="True" RelativePosition="0.5,0.73" AnchorPoint="0.5,1">
+                    <Stencil Type="WZUIImage" GUID="{d81def5f-7546-481e-9595-166e2c5cf0e1}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" RelativePosition="0.5,1" Scale="0.65" ScaleY="1.8" ScaleX="7.5" AnchorPoint="0.5,1" />
+                    <WZUITableContainer AnchorPoint="0.5,1" CellElementHeight="0.8" ColumnCount="4" EnableMoveHorizontal="False" EnableMoveVertical="True" EnableVerticalScroll="True" GUID="{3fbcfbb8-958e-412c-89f7-7dea58fee737}" Name="tableConLeft_WndSellList1" RelativePosition="0.5,1" RelativeSize="1,1" Type="WZUITableContainer" UseAbsSize="True" AbsContentSize="352,110" />
+                </WZUIClippingContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="390,60" AnchorPoint="0.5,0.5" GUID="{AD2D6BB9-A98A-41d0-AE2D-18BD28418BD4}" Name="" RelativePosition="0.5,0.085" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIButton AbsContentSize="120,54" AnchorPoint="0.5,0.5" GUID="{3e9266ef-883a-47f4-aa01-6598a4c1dece}" LuaDoneFunctionName="onSale" Name="btnSale_WndSellList" RelativePosition="0.5,0.5" TouchEnable="True" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal">
+                    <NormalElement GUID="{a2f211ba-f42d-4d20-b77b-1d421e996150}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_anniu10_1.png" GUID="{78ba1f6d-7e78-44a4-90e6-b07815c5a021}" Name="imgBtn1_WndRecover" Type="WZUI9Image" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{94a6c3c5-3c81-4daf-b34a-e6cacb95810e}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_anniu10_1_sel.png" GUID="{8bb6fda1-b815-44db-8c30-99910d1186fd}" Name="imgBtn2_WndRecover" Type="WZUI9Image" Scale="1" ScaleX="1" ScaleY="1" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{28614d0c-87ce-46dc-bb36-17aa15291ef8}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_anniu10_1.png" GUID="{29fe70ee-0beb-4eb9-b994-ea34d98c8711}" Name="imgBtn3_WndRecover" Scale="1" ScaleX="1" Type="WZUI9Image" GrayRender="True" UseOriginSize="True" />
+                    </DisableElement>
+                    <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="24" GUID="{7f6910e6-69b0-49dc-b614-8affff3d293f}" Name="txtSale_WndRecover" StrokeColor="132,66,29" StrokeSize="4" Text="" Type="WZUILabelTTF" RelativePosition="0.5,0.5" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="RECYCLING" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="120,54" AnchorPoint="0.5,0.5" GUID="{F15CCC07-063A-4075-8BE1-CEFF0F553DD2}" RelativePosition="0.072,0.94" Type="WZUIContainer" UseAbsSize="True" Name="conReturn_WndRecover">
+                <Button GUID="{600C0163-26E4-47f3-9DAB-C73358B5F796}" LuaDoneFunctionName="onReturn" Type="WZUIButton" AbsContentSize="120,54" UseAbsSize="True" TouchEnable="True" LuaActionName="Normal" RelativePosition="0.5,0.5">
+                    <NormalElement GUID="{31365A5D-997A-48b1-890E-9093E3C43EF9}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="0,0,0,0" File="ui/bag/common_icon_zhujiemian2.png" GUID="{AD69A8F7-5ACE-474a-B8EA-F2D5D30A2E50}" Type="WZUI9Image" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{88827C3C-0438-47b0-8CDA-BE68409C4D38}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="0,0,0,0" File="ui/bag/common_icon_zhujiemian2.png" GUID="{F4066C29-DD4B-4a1c-B1B8-1C069BC5C587}" Type="WZUI9Image" Scale="1" ScaleX="1" ScaleY="1" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{AAC3314D-1CA1-4978-9998-21054D2A8D93}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="0,0,0,0" File="ui/bag/common_icon_zhujiemian2.png" GUID="{1B620FC1-537E-4c07-AC81-D163C4DA72D5}" Type="WZUI9Image" GrayRender="True" UseOriginSize="True" />
+                    </DisableElement>
+                    <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="24" GUID="{56B9AB80-4D2F-4f38-B685-33D71F012B2E}" Name="txtReturn_WndRecover" StrokeColor="132,66,29" StrokeSize="4" Text="" TouchEnable="False" Type="WZUILabelTTF" LabelStyleKey="NORMAL_ORANGE_BTN" RelativePosition="0.5,0.5" TextKey="BACK" Visible="False" />
+                </Button>
+            </WZUIContainer>
+            <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{8a59aee9-274a-40db-a4e0-d1739fd0efa9}" Name="conClipping" Scale="1" AbsContentSize="375,380" UseAbsSize="True" RelativePosition="0.5,0.88" AnchorPoint="0.5,1">
+                <Stencil Type="WZUIImage" GUID="{435d7365-37e7-4da3-82c2-86178f83c341}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" RelativePosition="0.5,1" Scale="8" ScaleY="6.33" ScaleX="8" AnchorPoint="0.5,1" />
+                <WZUITableContainer AnchorPoint="0.5,1" CellElementHeight="0.223" ColumnCount="4" EnableMoveHorizontal="False" EnableMoveVertical="True" EnableVerticalScroll="True" GUID="{401a4f63-c703-4b24-b4d1-013895938f07}" Name="tableConLeft_WndSellList" RelativePosition="0.5,1" RelativeSize="1,1" Type="WZUITableContainer" UseAbsSize="True" AbsContentSize="375,380" />
+            </WZUIClippingContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSellList>

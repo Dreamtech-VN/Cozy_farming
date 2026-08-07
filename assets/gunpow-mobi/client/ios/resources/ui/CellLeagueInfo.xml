@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" ?>
+<CellLeagueInfo GUID="{387ab442-966c-4693-b9db-573cee0c9453}">
+    <WZUIContainer Type="WZUIContainer" GUID="{E4C27C85-F876-4d47-BCC3-470015F35675}" UseAbsSize="True" AbsContentSize="384,42" Name="CellLeagueInfo" Visible="True" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{894E42A6-891B-4ee3-AA1F-0FD04E7CE094}" UseAbsSize="True" AbsContentSize="384,42" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" AbsPosition="0,0" Name="">
+            <WZUIContainer Type="WZUIContainer" GUID="{F4DCEDA6-B36A-4609-9166-D76B1CAC59EE}">
+                <WZUIImage Type="WZUIImage" GUID="{38A35B4A-77BD-4d69-9644-FBE47F8BC3EB}" File="ui/hero/hero_scale9_zdlandi.png" Name="imgDi_CellLeagueInfo" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{4A877E67-7518-4c26-8BAF-D801CE939CC4}" RelativeSize="1,1" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{81BFF330-8146-4988-86E6-BB6CCC2F477C}" Name="txtLevel_CellLeagueInfo" Text="Lv1" Color="255,227,116" FontSize="20" RelativePosition="0.0511559,0.5" AnchorPoint="0,0.5" BoldFont="True" Alignment="Left" AbsPosition="19.6439,21" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{CF46357D-6689-49e3-9887-E9C267F087C3}" Name="txtName_CellLeagueInfo" Text="" AnchorPoint="0,0.5" Color="255,227,116" FontSize="20" RelativePosition="0.17875,0.5" BoldFont="True" Alignment="Left" AbsPosition="68.64,21" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{1DEEBB5F-4F16-4e54-A622-A115277A038D}" Name="ftbName_CellLeagueInfo" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0.17875,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ADCC7943-1625-40ce-BF57-40F976E57932}" Name="txtKill_CellLeagueInfo" Text="0" Color="255,227,116" FontSize="20" RelativePosition="0.609552,0.5" BoldFont="True" AnchorPoint="0.5,0.5" TextKey="" Alignment="Center" AbsPosition="234.068,21" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5FB933B4-1426-4a06-8041-2D0B0D842B49}" Name="txtHitRate_CellLeagueInfo" Text="100%" Color="255,227,116" FontSize="20" RelativePosition="0.717068,0.5" Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" Visible="True" AbsPosition="275.354,21" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8A59198B-F4AF-4aa7-B55F-B74B9EFF4BA1}" Text="4000" Name="txtScore_CellLeagueInfo" Color="255,227,116" FontSize="20" RelativePosition="0.864824,0.5" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" AbsPosition="285.093,21" Visible="False" LabelStyleKey="" />
+                <WZUIImage Type="WZUIImage" GUID="{8F4AFD21-1AB8-4aab-BCB8-714C043E3210}" Name="imgFirstBlood_CellLeagueInfo" NameCreate="True" File="" UseOriginSize="True" RelativePosition="0.867396,0.5" Visible="True" AbsPosition="333.08,21" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellLeagueInfo>

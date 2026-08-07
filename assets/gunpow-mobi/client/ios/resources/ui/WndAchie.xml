@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" ?>
+<WndAchie GUID="{AF9E0CE3-D25A-4fca-8EEF-25DE28928397}">
+    <WZUIContainer Type="WZUIContainer" GUID="{CB8525FD-9FB4-486f-885C-B1C01045F71D}" UseAbsSize="True" AbsContentSize="380,230" NameCreate="True" Name="WndAchie" LuaObjectName="WndAchie" AbsPosition="200,200" AnchorPoint="0.5,0.5" UseAbsCoordinate="False" RelativeSize="0.5,0.5" RelativePosition="0.5,0.5" TouchEnable="False" TouchSwallow="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{ACA5F662-7FD6-433a-911A-ED9E7D4DBA9A}" ShowAll="False" Name="conForAchie_WndAchie" TouchEnable="False" TouchSwallow="False">
+            <WZUISpine Type="WZUISpine" GUID="{a060e1b8-ed8c-481e-ba98-ddf6450bafaa}" Name="spineGetAchie_WndAchie" FileJson="ui/ui_chengjiu_effect_01.json" FileAtlas="ui/ui_chengjiu_effect_01.atlas" AnimationName="chengjiu_chixu" Loop="False" RelativePosition="0.5,0.89" Visible="True" Order="-2" TouchEnable="False" TouchSwallow="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2642e0a8-e46e-42da-a000-8fa5b7bf3277}" Text="好好学习" Color="255,227,116" FontSize="30" Name="text_Label" RelativePosition="0.5,0.465652" StrokeColor="0,72,3" BoldFont="False" StrokeSize="4" EnableStroke="True" EnableShadow="True" StrokeOpacity="255" Visible="True" TouchEnable="False" />
+        </WZUIContainer>
+    </WZUIContainer>
+</WndAchie>

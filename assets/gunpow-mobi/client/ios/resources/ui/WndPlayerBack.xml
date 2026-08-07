@@ -1,0 +1,35 @@
+﻿<WndPlayerBack GUID="{3b6cb912-5d49-40db-b9cc-e332ad9a5c07}">
+    <WZUIWindow Type="WZUIWindow" GUID="{e529c8bf-db26-4bbd-9948-fbd04547601f}" LuaObjectName="WndPlayerBack" Name="WndPlayerBack" AbsContentSize="502,453" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{9945a7d3-9c6b-4f6a-b3bd-620a4cc19397}">
+            <WZUIContainer Type="WZUIContainer" GUID="{b4aa03d0-ae95-4072-ba82-da32c7625937}" AbsContentSize="501,315" UseAbsSize="True" RelativePosition="0.5,0.65257">
+                <WZUIImage Type="WZUIImage" GUID="{61606946-ed75-4141-a8cd-262259742f56}" File="ui/gameActivity/activity_pic_lwj.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{b3806645-5912-4e78-bbe4-c121734caa53}" AbsContentSize="500,40" UseAbsSize="True" RelativePosition="0.499157,0.937954">
+                    <WZUI9Image Type="WZUI9Image" GUID="{660586d5-03a9-443a-af1f-6d7c93d992e6}" File="ui/common/common_scale9_heidi7.png" UseOriginSize="False" Visible="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{aa50b01d-19da-4fe4-b80c-807b15563118}" LabelStyleKey="C11_F20_S4_C5" RelativePosition="0.110645,0.475" Text="" TextKey="" Name="txtActivity_WndPlayerBack">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{610f4888-c5a9-47e6-b4af-7dc06c5fd96d}" FontSize="18" Text="" RelativePosition="1.01,0.5" Color="255,89,74" EnableStroke="True" StrokeSize="4" StrokeColor="158,0,0" Name="txtTime_WndPlayerBack" Alignment="Left" AnchorPoint="0,0.5" />
+                    </WZUILabelTTF>
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{73768988-3a1f-406d-a896-4233ec22950a}" LabelStyleKey="C1_F20_S4_C5" Text="" RelativePosition="0.035988,0.15418" Dimensions="430,0" Alignment="Left" Name="txtDes_WndPlayerBack" AnchorPoint="0,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{0c0ae32b-febe-40c3-b00e-178fafcd7b2c}" AbsContentSize="475,108" UseAbsSize="True" RelativePosition="0.5,0.150636">
+                <WZUI9Image Type="WZUI9Image" GUID="{bf086ebf-1f88-4ce4-a094-fbc5c6e113e0}" File="ui/common/common_scale9_di18.png" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{13fcc669-266b-4848-acc0-bb83c3040399}" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.100889,0.49609" Name="con1_WndPlayerBack" />
+                <WZUIContainer Type="WZUIContainer" GUID="{217da549-62aa-4232-87ab-77521f284e8e}" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.276842,0.5" Name="con2_WndPlayerBack" />
+                <WZUIContainer Type="WZUIContainer" GUID="{d5b0b224-3698-4af7-99da-548780fd93bf}" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.451579,0.5" Name="con3_WndPlayerBack" />
+                <WZUIContainer Type="WZUIContainer" GUID="{f0ffe03d-13d4-4380-987c-1f8de804a5df}" AbsContentSize="75,75" UseAbsSize="True" RelativePosition="0.626316,0.5" Name="con4_WndPlayerBack" />
+                <Button Type="WZUIButton" GUID="{af0ccf5c-9f95-4d9f-b11a-b5f7ebd0b4f2}" AbsContentSize="115,55" UseAbsSize="True" RelativePosition="0.853964,0.501439" LuaDoneFunctionName="onClick" Name="btnReward_WndPlayerBack" Visible="True">
+                    <NormalElement Type="WZUIContainer" GUID="{b2186316-2126-4f0d-89ec-5ef6efa2f25e}">
+                        <WZUIImage Type="WZUIImage" GUID="{99704475-64ee-401f-8eba-df23dd141470}" File="ui/common/common_btn_anniu10_0.png" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{fb27ba34-64b6-4e95-b119-2e2a7827106f}">
+                        <WZUIImage Type="WZUIImage" GUID="{f71c3e99-d3e9-4c94-91f7-09039b739131}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{3604051c-7b6f-41c2-acbc-3f6610691c73}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1efdfae1-61cc-41a0-87b5-886e0c1b8bd3}" LabelStyleKey="C1_F26_S4_C4" Text="" TextKey="PLAYERBACK4" Name="txtBtnReward_WndPlayerBack" />
+                </Button>
+                <WZUIImage Type="WZUIImage" GUID="{1a5ac638-914a-40c3-9ac7-6fac2f5b333f}" Name="imgReward_WndPlayerBack" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" RelativePosition="0.857193,0.5" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3f226571-3676-432b-ba14-e19ab6b3ef68}" Name="txtNoReward_WndPlayerBack" Text="" FontSize="20" Alignment="Center" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Visible="False" LabelStyleKey="C8_F22" TextKey="PLAYERBACK5" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndPlayerBack>

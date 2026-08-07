@@ -1,0 +1,43 @@
+<WndTips29 GUID="{ca94d062-446b-4bbf-8366-b27f655ea6be}">
+    <WZUIWindow AbsContentSize="277,284" AbsPosition="0,0" AnchorPoint="0.5,0.5" GUID="{1059bd04-2c73-4861-9499-3f32f4ba9984}" LuaObjectName="WndTips29" Name="WndTips29" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" ShowAll="False" TouchContainerEnable="True" TouchEnable="True" TouchSwallow="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="True" Visible="True" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{f9c13676-edd4-4ef8-b693-002eb8c92962}" Name="conOuside_WndTips" AbsContentSize="277,284" UseAbsSize="True" ShowAll="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{50bd707b-9dda-4649-b70e-55c65d3bc21f}" AbsContentSize="277,284" UseAbsSize="True" Name="conType29_WndTips" Visible="True" RelativeSize="1,1" RelativePosition="0.4914,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{6d6f86c7-b389-4e18-ba84-54fbeae3bd5c}" File="ui/common/common_scale9_di24.png" Name="bgType29" ScaleY="1" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+                <WZUIContainer Type="WZUIContainer" GUID="{407fb619-ca5b-4556-ac65-0b6dbbe3e5f2}" AbsContentSize="260,100" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.51444,0.982">
+                    <WZUIContainer Type="WZUIContainer" GUID="{aff1b63d-aa68-4f6a-bba1-a78a230480a7}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.165,0.5">
+                        <WZUIImage Type="WZUIImage" GUID="{5fb98ccb-08f6-4790-af38-b96abaed4c68}" File="ui/common/common_icon_tx.png" AbsPosition="76,76" UseOriginSize="False" RelativePosition="0.5,0.5" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{41e64184-0780-48c0-93b1-9ac4f6362455}" Name="conHead_WndTips29" />
+                        <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{c85db188-a145-4b38-b765-3beaae285059}" CharMapFileName="ui/common_num/common_num_ghdj.png" Height="24" Width="16" Text="" RelativePosition="0.85,0.8" UseOriginSize="True" UseOriginSizeProportion="False" Name="txtTeamId_WndTips29" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{5022b6fa-e541-4e36-ada9-e62d19afab7b}" FontSize="22" Color="255,227,116" Text="Lv4 治疗包" RelativePosition="0.34,0.75" Name="txtLevel_WndTips29" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{af0c31d5-8dcc-4849-bd1a-3445cff264d3}" FontSize="22" Color="255,255,255" Text="已获得" RelativePosition="0.34,0.5" Name="txtName_WndTips29" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" Dimensions="175,0" />
+                    <WZUIImage Type="WZUIImage" GUID="{57306c69-04bc-4a23-9951-7a521b4f1d2b}" File="ui/common/common_icon_zhanlih.png" UseOriginSize="True" RelativePosition="0.34,0.25" ScaleX="1" Scale="1" ScaleY="1" AnchorPoint="0,0.5" Name="" />
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{f65e541a-edff-4e3e-925b-abc6579f23b6}" AnchorPoint="0,0.5" CharMapFileName="ui/common_num/common_num_zhandouli.png" Height="26" Width="16" Text="165165" RelativePosition="0.43,0.21" UseOriginSize="True" UseOriginSizeProportion="False" Name="txtFighting_WndTips29" Scale="0.8" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{3131c7bb-3bc8-4265-86a0-5f7cfe4290a8}" Name="conBottom_WndTips29" AbsContentSize="277,175" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+                    <WZUIButton Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.7" GUID="{9b29d5db-4b57-4ae6-a79c-631898cce8fd}" LuaDoneFunctionName="onClick30_Up" Name="btnOperate1_WndTips29" Visible="False" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{779856d4-c505-4d69-9fa9-182faa812ac4}">
+                            <WZUIImage Type="WZUIImage" GUID="{16a234be-8512-4d35-b7e5-e0df19743197}" File="ui/common/common_btn_anniu4.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{2fe73eb5-bef4-43db-adf9-b690e3af4747}">
+                            <WZUIImage Type="WZUIImage" GUID="{36ffb9c3-a30c-4ee1-a86d-471d268b9694}" File="ui/common/common_btn_anniu4_sel.png" Scale="1" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{c7bd8088-2368-48f6-bdb2-f1b2bd8c8537}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{485b8a64-59ac-4829-8e91-d18963bdc889}" FontSize="24" Color="99,255,95" Text="使用" RelativePosition="0.5,0.5" Visible="True" Name="txtOperate1Type29_WndTips" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" LabelStyleKey="SMALL_TIP_BTN" />
+                    </WZUIButton>
+                    <WZUIButton Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.3" GUID="{395fb745-846c-4e8f-adc2-bba89d390adb}" LuaDoneFunctionName="onClick30_Down" Name="btnOperate2_WndTips29" Visible="False" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{937909ac-0263-4c0c-89e5-7dd0f8bcfc58}">
+                            <WZUIImage Type="WZUIImage" GUID="{c2842553-b93d-446b-a72c-08436f0d12d1}" File="ui/common/common_btn_anniu4.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{ab01f9c1-ab2f-4df5-af34-83f7a4bd1884}">
+                            <WZUIImage Type="WZUIImage" GUID="{2a2d9cf1-ce9f-483d-aa80-51ef18dd7d05}" File="ui/common/common_btn_anniu4_sel.png" Scale="1" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{d45b417c-bb8b-4234-b0f9-5e9ed7c719a3}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ee273206-8332-481c-9dfe-93c86557d865}" FontSize="24" Color="99,255,95" Text="使用" RelativePosition="0.5,0.5" Visible="True" Name="txtOperate2Type29_WndTips" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" LabelStyleKey="SMALL_TIP_BTN" />
+                    </WZUIButton>
+                    <WZUIImage Type="WZUIImage" GUID="{6f0c30c0-2d12-4007-963d-b982c9af8040}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,1.00571" ScaleX="1.35" Scale="1.35" ScaleY="1" Name="imgThirdLine_conType29" AnchorPoint="0.5,1" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTips29>

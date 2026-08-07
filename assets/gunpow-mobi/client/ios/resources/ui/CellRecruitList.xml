@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<CellRecruitList GUID="{07FCBE31-6835-489d-98A4-401AE72A515D}">
+    <WZUIContainer AbsContentSize="470,102" GUID="{85E8A265-8363-42d4-9EDE-5C3E0F53D7B4}" LuaObjectName="CellRecruitList" Name="CellRecruitList" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{3C58DCE1-C431-480e-84E9-8D3626AC8C93}" AbsContentSize="470,102" UseAbsSize="True" Name="">
+            <WZUI9Image Type="WZUI9Image" GUID="{529C5EC3-02DB-420a-AB8B-2066193D2A59}" File="ui/common/common_scale9_di7.png" />
+            <WZUIContainer AbsContentSize="200,38" GUID="{855A31F9-70D3-4bce-82F5-C3E80808B7ED}" Name="" RelativePosition="0.49,0.34" Type="WZUIContainer" UseAbsSize="True" Visible="True" TouchEnable="False" AbsPosition="280.8,34.6018">
+                <WZUI9Image Type="WZUI9Image" GUID="{11F2A56D-B2E9-4eab-AD58-82FFC3B58053}" File="ui/common/common_scale9_di8.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUICheckBox AbsContentSize="" AnchorPoint="0,0.5" GUID="{2C5DC7AA-B2B6-4f52-A058-2742CFDF4218}" LuaSelectedFunctionName="onSelCheckBox" RelativePosition="0,0.5" SelectedIndex="0" Tag="1" Type="WZUICheckBox" UseAbsSize="False" RelativeSize="1,1" Name="checkBoxSel_CellRecruitList">
+            <CheckElement GUID="{EC912B27-B6C4-40bc-A89F-2C229811CA41}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{86702920-4C6D-4c8d-9E54-5D97856E8662}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="0.7" RelativePosition="0.86,0.5" AbsPosition="0,51" />
+            </CheckElement>
+            <CheckElement GUID="{F8E746F7-08EC-4895-90B8-C3C874A58302}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{F66A8045-6ECA-4300-9256-2DDD6D54D099}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="0.7" RelativePosition="0.86,0.5" />
+                <WZUI9Image Type="WZUI9Image" GUID="{C05C5964-0103-4323-9996-E5BF526797F0}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.3" RelativePosition="0.86,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{8AFF9C26-8E37-41f6-AC40-828669E85E85}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.86,0.55" AbsPosition="47.4518,33.542" />
+            </CheckElement>
+        </WZUICheckBox>
+        <WZUIContainer Type="WZUIContainer" GUID="{C42C8383-6D5D-4aa4-A6EA-DD7A68230327}" Name="conRecruit" RelativePosition="0.5,0.5" TouchEnable="True">
+            <WZUIButton Type="WZUIButton" AbsContentSize="350,100" UseAbsSize="True" RelativePosition="0.38,0.5" AbsPosition="458.271,51" GUID="{C96B3DCA-C75A-4404-89E6-CE0B179682AB}" LuaDoneFunctionName="onCheck">
+                <NormalElement Type="WZUIContainer" GUID="{AE3ACAC2-7612-42f3-8C1B-15EE48CA3483}" TouchContainerEnable="True" />
+                <SelectElement Type="WZUIContainer" GUID="{D56E976A-50C0-434f-B938-89FCC06FBD64}" TouchContainerEnable="True" />
+                <DisableElement Type="WZUIContainer" GUID="{0A470166-AB77-4009-83C8-921FC2F907F5}" TouchContainerEnable="True" />
+            </WZUIButton>
+            <WZUILabelTTF Color="62,34,8" FontSize="22" GUID="{A00F85DE-E276-4d5f-A8DD-8DFF2034432C}" Name="txtName_CellRecruitList" RelativePosition="0.56,0.72" Text="" Type="WZUILabelTTF" Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" AbsPosition="291.446,74.9004" LabelStyleKey="C13_F22" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{EB862630-0474-4a74-8C4B-0D93D24CCBD9}" Text="战斗力:" LabelStyleKey="C11_F22" RelativePosition="0.382,0.34" AbsPosition="208.257,35.0664" Name="fightTitle" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{F484B01F-AC22-446c-B096-341717235999}" Text="12345" LabelStyleKey="" RelativePosition="0.46,0.34" AbsPosition="253.071,35.0664" Color="255,255,255" Alignment="Left" AnchorPoint="0,0.5" FontSize="22" Name="ttfFighting" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{7CEB7119-5D33-4fc9-A003-6B0CD35384E8}" CharMapFileName="ui/common_num/common_num_ghdj.png" Text="12" Height="24" UseOriginSize="True" Name="txtLv_CellRecruitList" NameCreate="True" RelativePosition="0.343,0.74" Width="16" AbsPosition="193.242,75.8963" Visible="True" Alignment="Left" AnchorPoint="0,0.5" />
+            <WZUIImage Type="WZUIImage" GUID="{E065714E-F016-401a-92F4-384CD32ED7DC}" File="ui/common/common_icon_ghdj.png" UseOriginSize="True" RelativePosition="0.315,0.74" AbsPosition="178.382,75.8963" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{8EF44DB1-7B34-4832-9C2B-358A38DB54BD}" Name="conHead_Cell" AbsContentSize="80,80" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.06,0.5" AbsPosition="89.6266,57.7593" TouchEnable="False">
+            <WZUIImage Type="WZUIImage" GUID="{1572A673-82AF-4b70-957D-5B67BFE60640}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="1.23" RelativePosition="0.505,0.5" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellRecruitList>

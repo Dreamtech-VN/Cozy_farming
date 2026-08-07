@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:aop="http://www.springframework.org/schema/aop"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="  
+       http://www.springframework.org/schema/beans  
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+       http://www.springframework.org/schema/aop  
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+       http://www.springframework.org/schema/context  
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task-3.0.xsd"       
+       default-autowire="byName">
+    <!-- 注解说明 -->
+    <!-- 任务注解 -->
+    <task:annotation-driven/> 
+    <context:annotation-config/>
+    <!-- 配置注解注入 -->
+    <context:component-scan base-package="com.wyd"/>
+    <import resource="classpath:redis-config.xml"/>
+	<!-- JDBC参数配置 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" lazy-init="true">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 数据源配置 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<!-- 设置JDBC驱动名称 -->
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<!-- 设置JDBC连接URL -->
+		<property name="url" value="${jdbc.url}" />
+		<!-- 设置数据库用户名 -->
+		<property name="username" value="${jdbc.username}" />
+		<!-- 设置数据库密码 -->
+		<property name="password" value="${jdbc.password}" />
+		<!-- 设置连接池初始值 -->
+		<property name="initialSize" value="5" />
+		<!-- 设置连接池最大值 -->
+		<property name="maxActive" value="50" />
+		<!-- 设置连接池最小空闲值 -->
+		<property name="minIdle" value="5" />
+		<!-- 设置连接池最大空闲值 -->
+		<property name="maxIdle" value="10" />
+		
+		<!-- 打开检查,用异步线程evict进行定时检查连接是否有效 -->
+		<property name="testWhileIdle" value="true" />
+		<!-- 检测语句 -->
+		<property name="validationQuery" value="select 1" />		 
+	</bean>
+	
+	<!-- 缓存配置********************************** -->
+	<bean id="sessionFactory" class="com.wyd.cache.util.WydAnnotationSessionFactoryBean">
+		<!-- 配置Hibernate拦截器,自动填充数据的插入、更新时间 -->
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="com.wyd.empire.world.bean" />
+		<property name="hibernateProperties">
+			<value>
+				<!-- 设置数据库方言 -->
+				hibernate.dialect=${hibernate.dialect}
+				<!-- 设置自动创建|更新|验证数据库表结构 -->
+				hibernate.hbm2ddl.auto=${hibernate.hbm2ddl.auto}
+				<!-- 输出SQL语句到控制台 -->
+				hibernate.show_sql=${hibernate.show_sql}
+				<!-- 格式化输出到控制台的SQL语句 -->
+				hibernate.format_sql=${hibernate.format_sql}
+				<!-- 是否开启二级缓存 -->
+				hibernate.cache.use_second_level_cache=${hibernate.cache.use_second_level_cache}
+				<!-- 配置二级缓存产品 -->
+				hibernate.cache.provider_class=${hibernate.cache.provider_class}
+				<!-- 是否开启查询缓存 -->
+				hibernate.cache.use_query_cache=${hibernate.cache.use_query_cache}
+				<!-- 数据库批量查询数 -->
+				hibernate.jdbc.fetch_size=${hibernate.jdbc.fetch_size}
+				<!-- 数据库批量更新数 -->
+				hibernate.jdbc.batch_size=${hibernate.jdbc.batch_size}
+				<!-- 是否采用CGLIB动态代理对象 -->
+				hibernate.bytecode.use_reflection_optimizer=${hibernate.bytecode.use_reflection_optimizer}
+			</value>
+		</property>
+	</bean>
+</beans>

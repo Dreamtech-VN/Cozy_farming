@@ -1,0 +1,28 @@
+﻿<WndDressSuit GUID="{bde773e4-e917-4435-9f0a-b15ea8ff6f25}">
+    <WZUIContainer Type="WZUIContainer" GUID="{5fdadf7f-f15d-4edd-9e10-5f9a28357e62}" Name="WndDressSuit" LuaObjectName="WndDressSuit" NameCreate="True" AbsContentSize="122,34" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{a2dd6880-de0f-4aee-9a9f-e899c5d62ebe}" Name="conTop_WndDressSuit" AbsContentSize="122,34" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+            <Button Type="WZUIButton" GUID="{9206f32f-9cd2-40c7-9e99-128e36e4bdca}" AbsContentSize="122,34" LuaDoneFunctionName="onClickShow" AnchorPoint="0.5,1" RelativePosition="0.5,1" UseAbsSize="True" Order="1">
+                <NormalElement Type="WZUIContainer" GUID="{733caf6a-6cd6-48c9-9115-1393d58c7391}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{471a39ad-395f-447b-8ded-ef17af85fc12}" File="ui/common/common_btn_anniu5.png" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{51da125b-6318-4868-856a-f5212532a62c}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{d8c21ce0-dd5e-4e5e-9159-7f9b7c18ec0a}" File="ui/common/common_btn_anniu5_sel.png" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{e1f7d857-2bb2-4387-84c1-fd0ee43473fa}" />
+                <WZUIImage Type="WZUIImage" GUID="{f7e33cbc-7e8c-44b4-b9cb-8c9ababbcc85}" File="ui/common/common_icon_zhujiemian.png" UseOriginSize="True" RelativePosition="0.85,0.5" Name="imgArrow_WndDressSuit" FlipY="False" Scale="0.8" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b08daa30-7195-4be8-ad31-dd3dc32a6c60}" FontSize="18" EnableStroke="True" Color="255,236,193" Name="txtSelSuitName_WndDressSuit" StrokeSize="4" StrokeColor="127,70,26" RelativePosition="0.4,0.5" />
+            </Button>
+            <Button Type="WZUIButton" GUID="{31ce49a8-503a-4c0a-8e2a-ea0b76df26cc}" AbsContentSize="60,60" LuaDoneFunctionName="onClickRename" AnchorPoint="0.5,0.5" RelativePosition="1.15,0.6" UseAbsSize="True" LuaActionName="Normal" Scale="0.7" Name="btnRename_WndDressSuit" Visible="False">
+                <NormalElement Type="WZUIContainer" GUID="{d52268b9-4f98-46ad-87ce-00499efc98ff}" />
+                <SelectElement Type="WZUIContainer" GUID="{1756d55c-85e4-4755-a80a-ddb9867a9426}" />
+                <DisableElement Type="WZUIContainer" GUID="{6cf2dd3e-3588-40e1-ad3f-c3634bf3049c}" />
+                <WZUIImage Type="WZUIImage" GUID="{e1481eba-0880-4e6c-9aa7-06cafeb3f3cb}" File="ui/common/common_scale9_di97.png" UseOriginSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0.133333" Name="imgRename_WndDressSuit" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{05d0d189-5bd6-4646-b0f1-8d60587df8c5}" TextKey="WNDCHECKOTHER15" LabelStyleKey="C1_F20_S4_C3" Color="255,2366,193" RelativePosition="0.5,0.433333" Name="txtRename_WndDressSuit" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{a48032bd-3682-40f1-ac26-6998e75de8b0}" Name="conOther_WndDressSuit" AbsContentSize="120,150" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.176471" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{e4c88498-96a8-4811-bf39-f3005f2c5d7d}" File="ui/common/common_scale9_di24.png" AbsPosition="" Opacity="180" />
+                <WZUIContainer Type="WZUIContainer" GUID="{ec35f209-ad2a-4578-9328-927ced36e623}" Name="conSuitList_WndDressSuit" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</WndDressSuit>

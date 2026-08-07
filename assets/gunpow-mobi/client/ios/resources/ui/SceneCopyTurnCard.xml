@@ -1,0 +1,15 @@
+<SceneCopyTurnCard GUID="{4157ADE4-691D-4b0a-88C2-874EA81EE99F}">
+    <WZUIFrame Type="WZUIFrame" GUID="{36FE8DF3-3F1A-4039-9899-1AB61134AA96}" LuaObjectName="SceneCopyTurnCard" Name="SceneCopyTurnCard" NameCreate="True">
+        <WZUIImage File="ui/common/bg.png" GUID="{34622C8A-000E-416c-822F-67AA8A4484B2}" Type="WZUIImage" />
+        <WZUIImage File="ui/common/common_black_bg.png" GUID="{5EB1E345-767A-4bec-8179-B2356EFA4AC8}" Opacity="120" Type="WZUIImage" />
+        <WZUIImage Type="WZUIImage" GUID="{5E40B45B-6F5D-4468-8795-D08E9650C890}" File="ui/copy/flop_reward_titile.png" UseOriginSize="True" RelativePosition="0.5,0.942187" ShowAll="True" />
+        <WZUIContainer Type="WZUIContainer" GUID="{AB16D3EB-2676-495f-A855-CB300DBDBCB0}" UseAbsSize="True" AbsContentSize="872,550" RelativePosition="0.5,0.467187" ShowAll="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{8E9C3C90-795C-4831-8F8B-4E99899290D1}" UseAbsSize="True" AbsContentSize="868,30" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{2630B1AB-A420-4371-ACB5-C99A7A440AF4}" ShowText="" Name="txtCost_SceneCopyTurnCard" MaxWidth="480" AnchorPoint="0,0.5" RelativePosition="0.00459773,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{90D149A0-C935-4b05-93E3-6FEBD94B3E5C}" Name="txtWaiting_SceneCopyTurnCard" Text="" FontSize="26" Color="232,223,0" AnchorPoint="1,0.5" RelativePosition="0.966744,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{29826A9C-6901-4858-AB3A-A496ACAB0B7A}" Name="txtPeople_SceneCopyTurnCard" Text="" Color="220,211,185" FontSize="28" AnchorPoint="0,0.5" RelativePosition="0.973624,0.5" />
+            </WZUIContainer>
+            <WZUITableContainer Type="WZUITableContainer" GUID="{2C5D3B10-0EB9-48cb-8A8B-25D7F2081776}" Name="tbcon_SceneCopyTurnCard" UseAbsSize="True" AbsContentSize="876,520" AnchorPoint="0.5,0" RelativePosition="0.5,-0.00363636" CellElementHeight="0.33" ColumnCount="7" EnableMoveHorizontal="False" EnableMoveVertical="False" VerticalInterval="0.005" />
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneCopyTurnCard>

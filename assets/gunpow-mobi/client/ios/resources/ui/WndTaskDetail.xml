@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?><WndTaskDetail GUID="{A8D07057-A497-4c14-AABC-35C72BF43EA5}">
+    <WZUIWindow AbsContentSize="490,400" GUID="{01927891-CD0C-4ee8-92B2-670B8BF951DC}" LuaObjectName="WndTaskDetail" Name="WndTaskDetail" NameCreate="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="True">
+        <WZUIFreeListContainer AbsContentSize="0,0" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{E8CD7FAD-ED43-4844-B02A-E599F794D719}" ListItemInterval="0" ListItemPadding="0,0,0,0" Name="freeconContent_WndTaskDetail" RelativePosition="0.5,0.5" RelativeSize="1.05,1" ScrollPictureDown="common/Jigsaw/rolling_03.png" ScrollPictureMid="common/Jigsaw/rolling_01.png" ScrollPictureTop="common/Jigsaw/rolling_02.png" Type="WZUIFreeListContainer" UseAbsSize="False"/>
+        <WZUIContainer AbsContentSize="190,74" GUID="{09A8F7EA-408A-44b9-BB4F-F6FE6B654E57}" Name="conCompleteBtn_WndTaskDetail" RelativePosition="0.814286,0.12" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True" Visible="False">
+            <WZUIButton AbsContentSize="0,0" GUID="{AD7B2142-A17F-4a08-8A4F-63A4148A1DEC}" LuaDoneFunctionName="onClickComplete" Name="btnComplete_WndTaskDetail" RelativePosition="0.5,0.5" TouchEnable="True" Type="WZUIButton" UseAbsSize="False">
+                <NormalElement GUID="{72B3669D-4C51-4abc-A964-F7F2B5182632}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_2.png" GUID="{17345FD0-57F6-4490-A871-06A7A8720C77}" Name="img9Complete1_WndTaskDetail" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="common/button_text/button_green_35.png" GUID="{6A0448D8-E19C-45d6-B132-8F87D4E3C715}" Name="imgBtnText1_WndTaskDetail" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                    <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="35" GUID="{BB7EC654-CB7D-4689-904C-8DD24D8E9452}" Name="txtBtnText1_WndTaskDetail" StrokeColor="29,121,1" StrokeSize="4" Type="WZUILabelTTF"/>
+                </NormalElement>
+                <SelectElement GUID="{D316DDFB-4742-4e44-9B13-E972A1489801}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_2_sel.png" GUID="{FFAD6266-E6F2-42b9-838C-F55417911E40}" Name="img9Complete2_WndTaskDetail" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="common/button_text/button_green_35.png" GUID="{D75CDDAF-EE3C-4bf6-9B59-4BB9341AC9E3}" Name="imgBtnText2_WndTaskDetail" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                    <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="35" GUID="{70167B02-DBDA-471b-807D-279AF61B277C}" Name="txtBtnText2_WndTaskDetail" StrokeColor="29,121,1" StrokeSize="4" Type="WZUILabelTTF"/>
+                </SelectElement>
+                <DisableElement GUID="{23E123C8-1D6D-4b28-9EE1-BFBCD62ED11B}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/button_4.png" GUID="{780B0833-3076-47de-BC64-6204BFD8D1E8}" Name="img9Complete3_WndTaskDetail" Type="WZUI9Image" UseOriginSize="False"/>
+                    <WZUIImage File="common/button_text/button_green_35.png" GUID="{0DBB4B21-A6EA-43b0-A414-99FD0A2E3D76}" GrayRender="True" Name="imgBtnText3_WndTaskDetail" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+                    <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="35" GUID="{25456828-85F7-4848-97C7-5C2247B3B402}" Name="txtBtnText3_WndTaskDetail" StrokeColor="128,128,128" StrokeSize="4" Type="WZUILabelTTF"/>
+                </DisableElement>
+            </WZUIButton>
+            <WZUIShadowTTF GUID="{43ADA8BE-D35D-4636-B605-5897F1FEA987}" Name="txtCompleteBtnName_WndTaskDetail" ShadowColor="11,69,0" Type="WZUIShadowTTF" Visible="False"/>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTaskDetail>

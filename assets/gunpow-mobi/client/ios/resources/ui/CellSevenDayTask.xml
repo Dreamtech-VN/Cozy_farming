@@ -1,0 +1,31 @@
+﻿<CellSevenDayTask GUID="{2b21022f-9c42-4873-8ef3-7ba50e602b1a}">
+    <WZUIContainer AbsContentSize="610,130" GUID="{e0dcbab6-c62c-4683-b33f-df730ca598d6}" LuaObjectName="" Name="CellSevenDayTask" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer GUID="{917a9d1d-716c-4c97-ac74-3371adec2a7e}" Type="WZUIContainer" AbsContentSize="610,130" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image File="ui/common/common_scale9_di18.png" GUID="{e5ffd426-4ec4-49a8-aa1c-c1244f6364ad}" Type="WZUI9Image" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{c18cb583-df0c-46ee-b785-555f685ed67b}" AbsContentSize="610,98" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True">
+            <WZUIContainer AbsContentSize="80,80" GUID="{ea270134-4ad7-4435-a26c-fc782e80fed9}" Name="conItem1_CellSevenDayTask" RelativePosition="0.097,0.5" TouchContainerEnable="True" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="80,80" GUID="{c2deb286-6942-4222-954b-e4d753c07e2d}" Name="conItem2_CellSevenDayTask" RelativePosition="0.25,0.5" TouchContainerEnable="True" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="80,80" GUID="{19733c20-635c-4f26-bc0e-4bf8ef444004}" Name="conItem3_CellSevenDayTask" RelativePosition="0.403,0.5" TouchContainerEnable="True" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="80,80" GUID="{6efb889a-0801-4b6b-8d4f-239fb2c0a836}" Name="conItem4_CellSevenDayTask" RelativePosition="0.556,0.5" TouchContainerEnable="True" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="116,56" GUID="{8ea0aa41-963d-4009-bdef-81f2e62cade9}" RelativePosition="0.883672,0.653061" Scale="1" ScaleX="1" Type="WZUIContainer" UseAbsSize="True" ScaleY="1" Name="conBtn_CellSevenDayTask">
+                <Button GUID="{3af40e48-d7d3-4ba5-9f45-497f3568ce8e}" LuaDoneFunctionName="onClickGetReward" Name="btnGetReward_CellSevenDayTask" Type="WZUIButton" AbsContentSize="0,0" UseAbsSize="False" RelativePosition="0.5,0.5" Visible="True" LuaActionName="Normal">
+                    <NormalElement GUID="{048a008b-c4fa-4a8d-8c19-4c09109c62ee}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{0f400a35-1147-4af5-b962-3b8ad2f002f0}" Type="WZUI9Image" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{024bb786-dc4d-45f2-a53d-11a6e418d214}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_anniu10_0_sel.png" GUID="{79afb7ad-1255-47d5-90d0-853830ad067d}" Type="WZUI9Image" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{c2cdd29d-ab70-4404-a3ed-4d010793a496}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{4672f26b-835c-4c88-8707-f3ac6d599ca4}" Type="WZUI9Image" GrayRender="True" UseOriginSize="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{9b38b3e2-22c9-489e-9c41-8f29166b4a58}" Name="txtButton_CellSevenDayTask" Scale="1" ShadowColor="" StrokeColor="0,72,3" StrokeSize="4" Text="" Type="WZUILabelTTF" ScaleX="1" ScaleY="1" LabelStyleKey="" EnableStroke="True" TextKey="" />
+                </Button>
+                <WZUIImage Type="WZUIImage" GUID="{ec4f7944-388f-48d4-86bc-d1dc5211da27}" TouchEnable="False" Name="imgState_CellSevenDayTask" Visible="False" UseOriginSize="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="610,40" AnchorPoint="0.5,0.5" GUID="{7b7b9495-7ee7-40ad-a8c5-af7f3baf1d0f}" RelativePosition="0.5,0.824623" Type="WZUIContainer" UseAbsSize="True" Name="conMsgInfo_CellSevenDayTask">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{32493860-f7c2-469b-a20a-d26c0abc9bc9}" Name="txtDesc_CellSevenDayTask" FontSize="20" Color="255,236,193" AnchorPoint="0,0.5" Alignment="Left" RelativePosition="0.03,0.5" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellSevenDayTask>

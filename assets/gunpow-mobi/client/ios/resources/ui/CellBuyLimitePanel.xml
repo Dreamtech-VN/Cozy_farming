@@ -1,0 +1,41 @@
+﻿<CellBuyLimitePanel GUID="{07ee18cc-c5ff-4bf5-8b2e-360ed12926b6}">
+    <WZUIContainer Type="WZUIContainer" GUID="{dac15500-0cc2-448e-9081-363b36834a68}" LuaObjectName="CellBuyLimitePanel" Name="CellBuyLimitePanel" AbsContentSize="502,453" UseAbsSize="True">
+        <WZUIImage Type="WZUIImage" GUID="{8e2022f4-2cb1-4a6d-a717-9a74ce413b18}" File="ui/gameActivity/activity_pic_qxwq.png" UseOriginSize="True" AnchorPoint="0,1" RelativePosition="0,1" ScaleX="1.5" Scale="1.008" ScaleY="1.016" Name="imgBK_CellBuyLimitePanel" />
+        <WZUIContainer Type="WZUIContainer" GUID="{76094cb7-27bf-4698-b7e6-65858bd9d1e9}" AbsContentSize="490,45" UseAbsSize="True" RelativePosition="0.5,0.75">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{031928e4-7f83-4d25-9124-19c2de5c0877}" Text="1245-4512" Color="255,227,116" EnableStroke="True" FontSize="22" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.95,0.5" Alignment="Left" AnchorPoint="1,0.5" Name="txtActivityOpenTime_CellBuyLimitePanel" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{17fd8ee3-5766-4c23-8a5d-7e1687c46cd6}" AbsContentSize="180,40" UseAbsSize="True" RelativePosition="0.77,0.07" Name="conCount_CellBuyLimitePanel">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{71372666-2ef6-4a68-a5ad-b4ffeffc5652}" Text="礼包可购买" Color="138,122,106" EnableStroke="False" FontSize="22" StrokeSize="4" StrokeColor="105,65,46" RelativePosition="0.2,0.475" Alignment="Left" AnchorPoint="0,0.5" Name="txtBuyTimesTips_1_CellBuyLimitePanel" LabelStyleKey="" TextKey="LIMITE_BUY_ACTIVITY">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{4fc17133-83e7-4d24-88c5-55f112ead649}" Text="19" Color="138,121,106" EnableStroke="False" FontSize="22" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="1,0.5" Alignment="Left" AnchorPoint="0,0.5" Name="txtBuyTimesNum_CellBuyLimitePanel">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{e6fa930b-85df-44a5-9e22-6bd0694879bf}" Text="次" Color="138,122,106" EnableStroke="False" FontSize="22" StrokeSize="4" StrokeColor="105,65,46" RelativePosition="1,0.5" Alignment="Left" AnchorPoint="0,0.5" Name="txtBuyTimesTips_2_CellBuyLimitePanel" TextKey="SHOP_CISHU" />
+                </WZUILabelTTF>
+            </WZUILabelTTF>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{af60d3c3-c8cb-460e-bdde-856968d7c532}" AbsContentSize="160,80" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.257494,0.203113">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{16f7bcd2-07e4-44c4-a7b9-ee707f0fc510}" FontSize="18" Text="原价：8000" Color="255,227,116" EnableStroke="True" StrokeColor="127,70,26" StrokeSize="4" Name="txtCostValue_CellBuyLimitePanel" AnchorPoint="0,0.5" Alignment="Left" RelativePosition="0.41375,0.725">
+                <WZUIImage Type="WZUIImage" GUID="{4b82fb27-56e2-4101-9c3f-aaca050767c3}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" RelativePosition="1.05,0.5" Scale="0.8" AnchorPoint="0,0.5" Name="imgCostIcon1_CellBuyLimitePanel" />
+            </WZUILabelTTF>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c97e4929-6e92-46b3-85f6-4021caa745c0}" FontSize="40" Text="8000" Color="255,227,116" EnableStroke="True" StrokeColor="0,72,3" StrokeSize="4" Name="txtCostDiscount_CellBuyLimitePanel" AnchorPoint="0,0.5" Alignment="Left" RelativePosition="0.1,0.28">
+                <WZUIImage Type="WZUIImage" GUID="{9552dc4f-d5e1-49f6-b245-fd062eb2336f}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" RelativePosition="1.05,0.5" Scale="1.2" AnchorPoint="0,0.5" Name="imgCostIcon2_CellBuyLimitePanel" />
+            </WZUILabelTTF>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{6d308a86-1a59-4f6a-bd78-7a367228f23f}" AbsContentSize="126,65" UseAbsSize="True" RelativePosition="0.77,0.18">
+            <Button Type="WZUIButton" GUID="{08b0a172-a7a6-4e72-8fae-4f6d6300b063}" LuaDoneFunctionName="event_BuyTimes" UseAbsSize="False" Name="btnGetReward_CellBuyLimitePanel" LuaActionName="Normal">
+                <NormalElement Type="WZUIContainer" GUID="{c2cc1d6c-8018-4d7d-b2a5-84bf4d1e30db}">
+                    <WZUIImage Type="WZUIImage" GUID="{03d6778c-70ea-4cfd-bdff-9cfe2c06217c}" File="ui/common/common_btn_anniu3_1.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1d400bbd-f20b-4904-9cbe-daee1630d72e}" Color="255,236,193" EnableStroke="True" FontSize="24" Text="" RelativePosition="0.5,0.5" Name="txtBuylabel_1_CellBuyLimitePanel" RelativeSize="1,1" StrokeSize="2" StrokeColor="3,111,8" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="BUY_NOW" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{07bbb0e6-28a7-46b3-ad3c-5c81715e7bf3}">
+                    <WZUIImage Type="WZUIImage" GUID="{09e550e3-16e3-48c2-941b-6d6e6224b3ff}" File="ui/common/common_btn_anniu3_1_sel.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{36438a9e-9164-4c82-abfa-c84e832589f2}" Color="255,236,193" EnableStroke="True" FontSize="24" Text="" RelativePosition="0.5,0.5" Name="txtBuylabel_2_CellBuyLimitePanel" StrokeColor="3,111,8" StrokeSize="2" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="BUY_NOW" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{f503ebe1-009d-463d-9e99-dfd3a370c91e}">
+                    <WZUIImage Type="WZUIImage" GUID="{c61a0c1c-286d-4f4f-aee5-8bbd7e189ece}" File="ui/common/common_btn_anniu3_1.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" GrayRender="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{bfadcfd4-4dd8-454e-a5a3-23eee42690d1}" Color="255,236,193" EnableStroke="True" FontSize="24" Text="" RelativePosition="0.5,0.5" Name="txtBuylabel_3_CellBuyLimitePanel" StrokeColor="3,111,8" StrokeSize="2" LabelStyleKey="NORMAL_GRAY_BTN" TextKey="BUY_NOW" />
+                </DisableElement>
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{ff21e2f0-25b4-4f55-8504-9311ef1b2a29}" AbsContentSize="90,90" UseAbsSize="True" RelativePosition="0.77,0.39" Name="conItem_CellBuyLimitePanel" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{87432e3f-304e-42b4-a88a-e11bdf1e52d4}" Text="dahfdshfds" Color="255,227,116" EnableStroke="True" FontSize="22" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.77,0.505" Alignment="Left" AnchorPoint="0.5,0" Name="txtGiftName_CellBuyLimitePanel" />
+    </WZUIContainer>
+</CellBuyLimitePanel>

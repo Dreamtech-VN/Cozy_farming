@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" ?>
+<CellGoodsListBig GUID="{13A9A252-775A-4e77-B6A8-9E888BBB7B90}">
+    <WZUIContainer AbsContentSize="165,195" GUID="{4C9E7329-D3E3-4292-9C15-1A8F6573DD3E}" LuaObjectName="" Name="CellGoodsListBig" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{bbb52808-465c-435d-86fb-2bc9021333b2}" TouchSwallow="True" AbsContentSize="">
+            <WZUIContainer Type="WZUIContainer" GUID="{d62d28cd-e690-4f3c-8547-fd3154c40c58}" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{eb305254-76e1-44c1-811e-c74af3e7c61c}" AbsContentSize="186,192" UseAbsSize="False" RelativePosition="0.5,0.142076" AnchorPoint="0.5,1" Visible="True" Scale="1" ScaleY="1" RelativeSize="1,0.2" AbsPosition="87.5,26" ScaleX="1.05">
+                    <WZUI9Image Type="WZUI9Image" GUID="{925d680e-3246-442c-bd0b-fa0bc32c5cf0}" File="ui/common/common_icon_xhd.png" />
+                </WZUIContainer>
+                <WZUI9Image Type="WZUI9Image" GUID="{3a8acbed-64db-4772-90f9-e534cca456a0}" File="ui/common/common_scale9_di7.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{6890fb8a-f993-4857-8311-9d5ad50e2b1d}" RelativeSize="0.9,0.75" RelativePosition="0.5,0.557322" AbsContentSize="150,150" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{b7675c08-a9ce-4685-a024-f58931721907}" File="ui/common/common_scale9_di58.png" RelativeSize="1,1" RelativePosition="0.5,0.5" Opacity="225" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="80,80" GUID="{fa9592c8-11fd-40d1-afd9-9a61b6bdfabb}" Name="conItemIcon_CellGoodsList" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{e63b7be6-85e2-4036-bd42-fa31336359dd}" AbsContentSize="80,80" UseAbsSize="True" Name="conSelFlag_CellGoodsList" NameCreate="True" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{1e5158e5-549d-4732-9288-de802832f78f}" File="ui/common/common_icon_scz.png" UseOriginSize="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{465e7329-2228-4127-8bfd-217bb10eb065}" AbsContentSize="76,68" UseAbsSize="True" RelativePosition="0.74,0.333">
+                <WZUIContainer Type="WZUIContainer" GUID="{383cec56-fb1d-42f6-803d-9c30aad5c33d}" RelativeSize="0.3,0.6" RelativePosition="0.5,0.5" Name="conDiscount_CellGoodsList" Visible="False" TouchSwallow="False" AbsContentSize="76,68" UseAbsSize="True" NameCreate="True">
+                    <WZUIImage Type="WZUIImage" GUID="{79366a8f-8487-4f7b-b151-ac304ddf12d5}" File="ui/common/common_icon_zhe.png" UseOriginSize="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{c63147c1-3525-4dfb-973e-45fc4a57c179}" File="ui/common/common_num_shangcheng2.png" UseOriginSize="True" RelativePosition="0.856567,0.464855" Rotation="-45" Name="imgOff_CelllGoodsList" />
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{07148354-d84f-4a1c-934e-ee9aa7520c26}" Name="labCnt_CelllGoodsList" CharMapFileName="ui/common_num/common_num_shangcheng.png" Height="22" Width="16" Text="08" RelativePosition="0.607643,0.222894" Alignment="Center" AnchorPoint="0.5,0.5" UseOriginSize="True" Visible="True" Rotation="-45" NameCreate="True" StartChar="48" />
+                    <WZUIImage Type="WZUIImage" GUID="{17b73487-d7f9-470a-b91b-31046ae83168}" File="ui/common/common_num_shangchengdiandian.png" UseOriginSize="True" RelativePosition="0.696392,0.165777" Name="imgNumPoint_CellGoodsList" NameCreate="True" Visible="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{8dd25f61-316c-4446-9fdf-646449da4d4c}" TouchSwallow="False" AbsContentSize="76,68" UseAbsSize="True" Visible="False" Name="conNormal_CellGoodsList" NameCreate="True">
+                    <WZUIImage File="ui/common/common_icon_new.png" GUID="{e4d97ff2-838f-4a00-9fdf-0fa97794b9ef}" Name="imgTuijian_CellGoodsList" RelativePosition="0.5,0.5" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="True" isValid="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{e32666c5-ce13-420d-90ca-b8ccb9546b3e}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.827869" TouchSwallow="False" RelativeSize="0.8,0.15" AbsPosition="87.5,151.5">
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0.5,1" BoldFont="True" Color="255,255,255" Dimensions="150,0" EnableStroke="False" FontSize="24" GUID="{b28dc369-481a-4137-9807-eabdc6c784c7}" Name="txtDescript_CellGoodsList" RelativePosition="0.5,1" StrokeColor="60,19,12" StrokeSize="4" Text="紫龙头" TouchEnable="False" Type="WZUILabelTTF" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1d4ad11b-31a0-4183-9662-a647944f59ba}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.0949101" TouchSwallow="False" RelativeSize="0.9,0.12">
+                <WZUIContainer Type="WZUIContainer" GUID="{ecc51bc6-3db9-42bc-914b-00f524ac1b07}" RelativePosition="0.5,0.5" Name="conNotLimitTxt_CellGoodsList" Visible="False">
+                    <WZUIContainer Type="WZUIContainer" GUID="{cee3ef8e-d690-44e1-b5d5-8792f9de8dee}" AbsContentSize="24,24" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+                        <WZUIImage File="shopitems/diamond.png" GUID="{0e50857d-7a1b-47fb-b743-f54184ba2113}" Name="imgMoneyNotLimit_CellGoodsList" RelativePosition="0.5,0.5" RelativeSize="1,1" Scale="0.4" ScaleX="0.4" ScaleY="0.4" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="True" isValid="True" UseOriginSizeProportion="True" AbsPosition="" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" BoldFont="False" Color="64,128,1" EnableStroke="False" FontSize="24" GUID="{33689124-2f11-4b41-852e-401172361652}" Name="txtCostNotLimit_CellGoodsList" RelativePosition="0.2,0.5" StrokeColor="91,49,24" StrokeSize="0" Text="12345" Type="WZUILabelTTF" Visible="True" NameCreate="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{f1c5529e-f742-44e7-9094-0f52e046bc3f}" RelativePosition="0.5,0.5" Visible="False" Name="conLimitTxt_CellGoodsList" NoBorder="False" NameCreate="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{5d95a565-d3db-4221-beaa-1b3c2e78345e}" AbsContentSize="24,24" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.,0.5">
+                        <WZUIImage File="ui/common/common_icon_zuanshi.png" GUID="{f591d486-e885-4ee7-abce-17d92bd7779b}" Name="imgMoneyLimit_CellGoodsList" RelativePosition="0.5,0.5" RelativeSize="1,1" Scale="0.5" ScaleX="0.4" ScaleY="0.4" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="True" isValid="True" UseOriginSizeProportion="True" AbsPosition="" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" BoldFont="False" Color="64,128,1" EnableStroke="False" FontSize="24" GUID="{3dd8e389-44aa-4f8a-9c74-129aa260cc8e}" Name="txtCostLimit_CellGoodsList" RelativePosition="0.2,0.5" StrokeColor="91,49,24" StrokeSize="0" Text="1234" Type="WZUILabelTTF" Visible="True" />
+                    <WZUILabelTTF Alignment="Right" AnchorPoint="1,0.5" BoldFont="False" Color="158,0,0" Dimensions="0,0" EnableStroke="False" FontSize="20" GUID="{615d5876-ea4c-42ab-91e0-8f66423f9a0a}" Name="txtLimit_CellGoodsList" RelativePosition="1,0.5" StrokeColor="60,19,12" StrokeSize="4" Text="1234" TouchEnable="False" Type="WZUILabelTTF" Visible="True" Order="1" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{86b2530d-1726-44b9-a0c7-af893adbf255}" AbsContentSize="" UseAbsSize="False" Name="conSel_CellGoodsList" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{bff4eefb-5bf0-4336-9d27-1040adde318c}" File="ui/common/common_scale9_beibaodi_sel.png" />
+        </WZUIContainer>
+        <Button GUID="{72fecc94-6244-4b31-bb90-40d9c92e21f0}" LuaDoneFunctionName="onTips" Name="" RelativeSize="1,1" Type="WZUIButton" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" TouchSwallow="True" Visible="True">
+            <NormalElement GUID="{99e87735-7f02-4792-a901-963889102527}" Type="WZUIContainer" />
+            <SelectElement GUID="{3aa7db32-ef47-4959-b8fc-92f65c00b66a}" Type="WZUIContainer" />
+            <DisableElement GUID="{7a7b4c0d-56c3-47d4-938a-d49772e6ab62}" RelativePosition="0.5,0.507143" Type="WZUIContainer" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{4ef27a2d-9e15-4582-bc2d-d95ca531a00d}" RelativeSize="1,0.25" RelativePosition="0.495,0.0133929" AnchorPoint="0.5,0" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{4b05ddd8-8a14-43b6-b783-f349b6528456}" Name="conDressBuy_CellGoodsListBig" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{6b897536-f208-445d-a4ac-2522d094c91b}" Name="conDressGive_CellGoodsListBig" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{d188b3e7-44d0-4905-8b90-e3556e318632}" Name="conPropBuy_CellGoodsListBig" TouchEnable="True" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{466f4c47-3b50-4c76-843b-4323d25eb527}" Name="conPropGive_CellGoodsListBig" TouchEnable="True" Visible="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{6c6d8f55-f4f7-4279-9799-d314435d69f0}" Name="conSellUp_CellGoodsList" NameCreate="True" Visible="False" TouchEnable="True" TouchSwallow="True" Order="1">
+            <WZUI9Image Type="WZUI9Image" GUID="{7ef29966-ce94-4397-be44-6560d7f2476c}" File="ui/common/common_shade_chushouheidi.png" />
+            <WZUIImage Type="WZUIImage" GUID="{afb66324-5717-41a0-809d-2f9eb00796f0}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellGoodsListBig>

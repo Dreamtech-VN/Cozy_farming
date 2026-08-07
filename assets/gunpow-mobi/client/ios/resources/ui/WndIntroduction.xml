@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><WndIntroduction GUID="{23508926-AB6E-4cbd-B9EA-EC36CD093843}">
+    <WZUIWindow GUID="{715E6D6B-7C28-45d9-9DBA-5E60A5D5997F}" LuaObjectName="WndIntroduction" Name="WndIntroduction" NameCreate="True" Type="WZUIWindow">
+        <WZUIContainer GUID="{95E16A8A-E465-4fce-B6BD-4C38982FD812}" Order="1" Type="WZUIContainer">
+            <WZUIImage File="common/Jigsaw/3.png" GUID="{6CB92B30-C1A5-45df-A5D9-7908C7E93CBD}" Order="2" Type="WZUIImage"/>
+        </WZUIContainer>
+        <Button GUID="{4AA2EF93-8BDB-4c46-B999-43BB32ECEA07}" Type="WZUIButton">
+            <NormalElement GUID="{037C5BE8-4347-4271-8441-A46D36BDEED8}" Type="WZUIContainer">
+                <WZUIImage GUID="{40E4F8BC-D4D0-4d94-BFAA-313A2D2B9486}" Type="WZUIImage"/>
+            </NormalElement>
+            <SelectElement GUID="{57B8D954-BDF5-423c-B51F-1172BF2A18B8}" Type="WZUIContainer">
+                <WZUIImage GUID="{48688D0A-FA2B-46d7-B911-0B281CCF3C65}" Type="WZUIImage"/>
+            </SelectElement>
+            <DisableElement GUID="{01F79F2F-D5F2-4314-B2CD-D64055BA7370}" Type="WZUIContainer">
+                <WZUIImage GUID="{69B65B05-E0F9-40f6-BC5F-7BA8BFD92C89}" Type="WZUIImage"/>
+            </DisableElement>
+        </Button>
+        <WZUIImage File="common/Jigsaw/7.png" GUID="{C096F3DB-03FC-483b-9DCE-562D6E623CAB}" Type="WZUIImage"/>
+    </WZUIWindow>
+</WndIntroduction>

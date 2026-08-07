@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<WndAthUpgrade GUID="{25550115-288E-4b0f-A991-6A14BEDC69A3}">
+    <WZUIWindow AbsContentSize="0,0" GUID="{31749A39-EDB6-4c13-8CD4-84217EEE428A}" LuaObjectName="WndAthUpgrade" Name="WndAthUpgrade" NameCreate="True" Order="12100" RelativePosition="0.5,0.5" Scale="1" ScaleX="1" ScaleY="1" Type="WZUIWindow" UseAbsSize="False" Visible="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{21C8B1D9-7A76-4f5e-85FB-02229980BDB2}" AbsContentSize="400,360" UseAbsSize="True" Scale="1" Visible="True" RelativePosition="0.500929,0.476667" ShowAll="True">
+            <WZUIContainer GUID="{E079BB69-EC7D-4920-BBC7-28A75C4A913B}" RelativePosition="0.5,0.408333" RelativeSize="1,1" TouchEnable="False" Type="WZUIContainer" Visible="True" AbsContentSize="400,450" UseAbsSize="True" Scale="1" ScaleX="1" ScaleY="1">
+                <WZUI9Image AnchorPoint="0.5,0.5" CapInsets="0,0,0,0" File="ui/common/common_scale9_di28.png" GUID="{0E3F703E-3EC7-43de-AA2C-6FC484678ACE}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Visible="True" Scale="1" UseOriginSize="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{F6E61B74-7F57-4896-AF12-1EC48C00FEC0}" AbsContentSize="325,165" UseAbsSize="True" RelativePosition="0.5,0.518779">
+                    <WZUI9Image Type="WZUI9Image" GUID="{32C2D834-B781-404d-AF94-093A8829F875}" File="ui/common/common_scale9_di29.png" RelativePosition="0.5,0.5" Visible="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{F7D7B62C-8DE2-4da2-83C5-3E8758119D26}" AbsContentSize="288,1" UseAbsSize="True" RelativePosition="0.5,0.729565">
+                        <WZUIImage Type="WZUIImage" GUID="{F9E3E20A-2AD3-46f0-8EA0-758D1DCD75A0}" File="ui/common/y_line.png" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{5BD7A4B9-172C-42da-B656-90FA3A3CC90A}" AbsContentSize="288,1" UseAbsSize="True" RelativePosition="0.5,0.495004">
+                        <WZUIImage Type="WZUIImage" GUID="{DF8BE901-C580-44a9-A890-81EF0AD948CB}" File="ui/common/y_line.png" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{45BD15E0-957C-487c-A160-55DE5A714253}" AbsContentSize="288,1" UseAbsSize="True" RelativePosition="0.5,0.253843">
+                        <WZUIImage Type="WZUIImage" GUID="{7905125C-948A-4d4b-8486-0139CDF1DBE5}" File="ui/common/y_line.png" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{BD331696-930E-4928-82CC-70930C6CA53E}" Name="conValue0_WndAthUpgrade" Visible="False">
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{BF0DAA3D-EC8C-4bc4-8B71-56661F4A946D}" Name="textValue0_WndAthUpgrade" MaxWidth="600" RelativePosition="0.4,0.867847" ShowText="" AnchorPoint="0,0.5" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{185E8B9F-90A9-4494-BD81-428203A6AB66}" Name="conValue1_WndAthUpgrade" Visible="False">
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{0B59E221-556A-4195-89CE-F609B3C7DA61}" Name="textValue1_WndAthUpgrade" ShowText="" MaxWidth="600" RelativePosition="0.4,0.611391" AnchorPoint="0,0.5" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{E490968D-4A71-456c-A9FF-BBE2CC548CD0}" Name="conValue2_WndAthUpgrade" Visible="False">
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{5E6945F6-538C-4db5-96F7-B51AAA8FA37F}" Name="textValue2_WndAthUpgrade" MaxWidth="600" RelativePosition="0.4,0.370574" ShowText="" AnchorPoint="0,0.5" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{43DD267E-5811-4fac-9F1E-9993A6EFE9E7}" AbsContentSize="200,60" UseAbsSize="True" RelativePosition="0.5,0.186728" Name="conIcon_WndAthUpgrade">
+                    <WZUIImage Type="WZUIImage" GUID="{1FCA7DC7-F983-4a9d-9CE0-9761B18AC63A}" File="ui/common/common_icon_jiantou3.png" UseOriginSize="True" RelativePosition="0.5,0.524063" Scale="0.7" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{6A1F4311-65AE-47f5-B064-DE91D58747EF}" AbsContentSize="350,70" UseAbsSize="True" RelativePosition="0.5,0.56581">
+                        <WZUIImage Type="WZUIImage" GUID="{8D66D25F-E1E0-421f-87BC-D02BEC9D0131}" UseOriginSize="True" File="ui/common/common_pic_jiantou4.png" FlipX="True" RelativePosition="0.12,0.5" />
+                        <WZUIImage Type="WZUIImage" GUID="{659B7D76-4255-4df5-ACD8-CCD1706EF026}" UseOriginSize="True" File="ui/common/common_pic_jiantou4.png" FlipX="False" RelativePosition="0.8845,0.5" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{4CC3254D-E4B1-4230-9776-696CB5E4B2DB}" AbsContentSize="60£¬60" UseAbsSize="True" RelativePosition="0.3,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{9121EC8E-5863-40f7-8A21-628218C1BB13}" File="" UseOriginSize="True" RelativePosition="0.5,0.5" Name="imgLv1_WndAthUpgrade" />
+                            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{09223208-9A07-411b-9915-5E2F8C13A778}" FNTFile="" Text="" Height="24" Width="16" CharMapFileName="ui/common_num/common_num_ghdj.png" UseOriginSize="True" RelativePosition="0.5,0.5" Name="txtLv1_WndAthUpgrade" Visible="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{92B17BED-6E8E-4fa9-942C-088157547F66}" FontSize="20" Color="255,255,255" Text="" RelativePosition="0.5,-0.25" Name="txtLvDesc1_WndAthUpgrade" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{0B82665C-AAC0-4ba6-99A9-BF8226E8CC19}" AbsContentSize="60£¬60" UseAbsSize="True" RelativePosition="0.7,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{3F9D2C85-22AD-41e1-A823-3988CDD8356B}" File="" UseOriginSize="True" RelativePosition="0.5£¬0.5" Name="imgLv2_WndAthUpgrade" />
+                            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{2721E019-01CC-4d16-962B-DA2314F67034}" FNTFile="" Text="" Height="24" Width="16" CharMapFileName="ui/common_num/common_num_ghdj.png" UseOriginSize="True" RelativePosition="0.5,0.5" Name="txtLv2_WndAthUpgrade" Visible="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5E2E4B0F-D9C1-4f2e-AC7E-87347078B7A9}" FontSize="20" Color="255,255,255" Text="" RelativePosition="0.5,-0.25" Name="txtLvDesc2_WndAthUpgrade" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="False" FontSize="26" GUID="{6B4EBDCF-CA46-49e3-AB64-5CB1027FFD52}" Name="txtNext_WndAthUpgrade" StrokeColor="132.66.29" StrokeOffset="0,0" StrokeSize="0" Text="" TouchEnable="False" Type="WZUILabelTTF" TextKey="CLICKCONTINUE" RelativePosition="0.505405,-0.0275065" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{2C7F79F4-F941-497e-ABD7-669ABFD1873B}" AbsContentSize="500,300" UseAbsSize="False" RelativePosition="0.505067,0.519728" Name="" ScaleY="1" Visible="True">
+                <WZUISpine Type="WZUISpine" GUID="{199228F5-4441-487b-A2C9-EF48E80648BC}" FileAtlas="ui/ui_lvlup_effect_01.atlas" FileJson="ui/ui_lvlup_effect_01.json" AnimationName="" AnchorPoint="0.5,0" RelativePosition="0.5,0.920716" AbsPosition="203,438.261" Name="spine1_WndAthUpgrade" LuaSpineEventFunc="" Visible="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="1136,640" AnchorPoint="0.5,0.5" GUID="{056430D7-D520-4977-92E9-DEF947D34126}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <Button GUID="{8C430997-5DF2-4064-93B0-4A20D2011799}" LuaDoneFunctionName="onContinue" Type="WZUIButton" Name="btnConfirm_WndAthUpgrade">
+                <NormalElement GUID="{7C070B54-31D6-40ce-809C-E24D7F3DB7FE}" TouchContainerEnable="True" Type="WZUIContainer" />
+                <SelectElement GUID="{64293E17-54F5-4a17-A07A-3B3DEBE08097}" TouchContainerEnable="True" Type="WZUIContainer" />
+                <DisableElement GUID="{C1C079C6-0091-426a-8956-384724E35867}" TouchContainerEnable="True" Type="WZUIContainer" />
+            </Button>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndAthUpgrade>

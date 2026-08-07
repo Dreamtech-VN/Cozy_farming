@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<CellJJCBattleSettlement GUID="{387ab442-966c-4693-b9db-573cee0c9453}">
+	<WZUIFrame Type="WZUIFrame" GUID="{4bac2e9a-6c5f-453f-892b-3ed6ff34a0f9}">
+		<CellElement Type="WZUIContainer" GUID="{e0c832c4-35fc-43d6-840a-7cf61a1c1b7e}" UseAbsSize="True" AbsContentSize="720,34" Name="CellJJCBattleSettlement" Visible="True" RelativePosition="0.5,0.5">
+			<WZUIContainer Type="WZUIContainer" GUID="{5662b37b-27f8-4522-8e1c-17249a6c631c}" UseAbsSize="False" AbsContentSize="" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+				<WZUIImage Type="WZUIImage" GUID="{7709db30-6044-497e-a379-9524cacc805d}" AnchorPoint="0,0.5" RelativePosition="0,0.5" File="" UseOriginSize="True" UseOriginSizeProportion="True" Name="imgResult_CellJJCBattleSettlement" Scale="1" />
+				<WZUIContainer Type="WZUIContainer" GUID="{8D5635E8-178C-41ac-8A3B-7B1FF226D199}" RelativeSize="0.05,1" RelativePosition="0.118055,0.5" Visible="True">
+					<WZUIImage Type="WZUIImage" GUID="{9A62FCA1-0B50-434c-8392-C44749AFBCA3}" Name="imgAthLv_CellJJCBattleSettlement" File="" UseOriginSize="True" Scale="0.6" RelativePosition="0.5,0.5" />
+					<WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{99F3D053-F1ED-4466-B08E-E91D9D38D8E6}" CharMapFileName="ui/common_num/common_num_ghdj.png" Text="1" Height="24" UseOriginSize="True" Name="lafAthLv_CellJJCBattleSettlement" NameCreate="True" RelativePosition="0.51389,0.48" Width="16" Scale="0.6" />
+				</WZUIContainer>
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{273d1ead-c423-4699-8794-10b02ee2c05d}" Name="txtLevel_CellJJCBattleSettlement" Text="LV99" Color="255,227,116" FontSize="24" RelativePosition="0.156603,0.5" AnchorPoint="0,0.5" BoldFont="True" Alignment="Left" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{758e267d-255e-4dbd-bb77-96cc04f423f8}" Name="txtName_CellJJCBattleSettlement" Text="111111111" AnchorPoint="0,0.5" Color="255,227,116" FontSize="24" RelativePosition="0.24,0.5" BoldFont="True" Alignment="Left" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{dd4a67ad-7975-4df0-9280-43fa04582edc}" Name="txtKill_CellJJCBattleSettlement" Text="" Color="255,227,116" FontSize="24" RelativePosition="0.465144,0.5" BoldFont="True" AnchorPoint="0,0.5" TextKey="" Alignment="Left" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{4f97ef35-4c9f-415b-b9f6-75a4ec83719b}" Name="txtHitRate_CellJJCBattleSettlement" Text="" Color="255,227,116" FontSize="24" RelativePosition="0.586404,0.5" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" Visible="True" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{357ec6b4-64f6-4250-8414-b88bfd425ade}" Text="" Name="txtScore_CellJJCBattleSettlement" Color="255,227,116" FontSize="24" RelativePosition="0.805419,0.5" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+				<WZUIImage Type="WZUIImage" GUID="{5E9013EC-47D3-4b47-94EC-EBB6450B7356}" File="" UseOriginSize="True" RelativePosition="0.770102,0.5" Name="imgScore_CellJJCBattleSettlement" Visible="True" isValid="True" Scale="0.5" />
+				<WZUIImage Type="WZUIImage" GUID="{5407645F-8AD8-48e0-93CD-0022FADAE2C4}" Name="imgFirstBlood_CellJJCBattleSettlement" NameCreate="True" File="" UseOriginSize="True" RelativePosition="0.941987,0.5" Visible="True" />
+				<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{48A3F440-562A-4a10-9A32-ED8AA0571942}" Name="ftbName_CellJJCBattleSettlement" MaxWidth="300" AnchorPoint="0,0.5" RelativePosition="0.24,0.5" />
+			</WZUIContainer>
+		</CellElement>
+	</WZUIFrame>
+</CellJJCBattleSettlement>

@@ -1,0 +1,29 @@
+<WndEnjoyCard GUID="{d6a9943d-9f75-408a-9932-e6280203f68b}">
+    <WZUIContainer AbsContentSize="502,453" GUID="{0a462d50-41f1-4578-a6cb-9301c5e6ca0f}" LuaObjectName="WndEnjoyCard" Name="WndEnjoyCard" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="502,453" GUID="{45244c93-4b53-487f-a9dc-93bdebd5a7bb}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,1">
+            <WZUIImage Type="WZUIImage" GUID="{04b92b2f-ca38-4539-a6cc-477f6561adfd}" File="ui/gameActivity/activity_pic_zzk.png" UseOriginSize="False" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" ScaleX="1" Scale="1" ScaleY="1" />
+            <WZUIContainer AbsContentSize="130,65" GUID="{a14ba819-cff5-49d7-9563-c1ca78c29f6a}" RelativePosition="0.805625,0.163633" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIButton GUID="{e9e746c6-445e-41e2-a6c1-3c5447ee3bdf}" LuaDoneFunctionName="onRecharge" Name="btn_WndEnjoyCard" Type="WZUIButton" RelativePosition="0.5,0.330769" LuaActionName="Normal">
+                    <NormalElement GUID="{31c437d6-3377-45ec-a062-20df2d11b483}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1.png" GUID="{b13b026f-9a50-4709-b997-dce9e183e656}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{926cd5d5-a0ac-4e96-8de1-aaecf791a893}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1_sel.png" GUID="{3b7eede7-3782-4c6b-b0c4-027683055a95}" RelativeSize="1.1,1" Type="WZUI9Image" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{1d2142ab-3328-4ceb-ae5a-87b1a41a69fd}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="20,10,15,35" File="ui/common/common_btn_anniu3_1.png" GUID="{c99c24e7-2a8f-4e3e-a927-2dee24fe2377}" RelativePosition="0.5,0.5" RelativeSize="1.1,1" Type="WZUI9Image" GrayRender="True" UseOriginSize="True" />
+                    </DisableElement>
+                    <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{977647c0-9cbe-4eac-a459-c0f5e8aefcc5}" Name="txtBuy_WndEnjoyCard" RelativePosition="0.5,0.5" StrokeColor="128,54,13" StrokeSize="4" Text="" Type="WZUILabelTTF" LabelStyleKey="" EnableStroke="True" TextKey="BUY_NOW" />
+                    <WZUISpine Type="WZUISpine" GUID="{2a7fdb82-5b81-4db8-a1b7-d0fc16043c76}" FileAtlas="ui/ui_main_likechongzhi.atlas" FileJson="ui/ui_main_likechongzhi.json" Loop="True" AnimationName="animation" RelativePosition="0.5,1.12308" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{87cbc511-c18a-47c9-b133-202fd0417503}" FontSize="22" Color="255,227,116" AnchorPoint="0.5,0" RelativePosition="0.5,0.8" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" Name="txtCost_WndEnjoyCard" LabelStyleKey="" Visible="True" Text="" />
+                <WZUIImage Type="WZUIImage" GUID="{af375cd3-f1f8-492a-a97c-72e03c8dd8dd}" File="ui/common/commom_icon_ygm.png" Visible="False" Name="imgGet_WndEnjoyCard" UseOriginSizeProportion="True" isValid="True" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="500,100" GUID="{a6fab155-c4a3-4bc4-804d-f18e77946732}" RelativePosition="0.5,0.163" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0.5">
+                <WZUIContainer GUID="{5859b6bc-fbb2-4213-855a-c78c24576257}" Type="WZUIContainer" AbsContentSize="300,105" UseAbsSize="True" RelativePosition="0.34,0.5" AnchorPoint="0.5,0.5">
+                    <WZUITableContainer AbsContentSize="300,90" AnchorPoint="0.5,0.5" CellElementHeight="1" ColumnCount="3" EnableMoveHorizontal="True" EnableMoveVertical="False" GUID="{4f1e1696-13e1-4345-b1da-753442261274}" Name="tab_WndEnjoyCard" RelativePosition="0.5,0.485" RelativeSize="1,1" ShowAll="False" Type="WZUITableContainer" UseAbsSize="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</WndEnjoyCard>

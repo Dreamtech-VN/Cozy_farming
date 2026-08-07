@@ -1,0 +1,20 @@
+﻿<CellGuildRankList GUID="{51629599-5e7d-40f3-86fa-450728da2b45}">
+    <WZUIContainer Type="WZUIContainer" GUID="{11ead77b-1b49-44db-9698-f2f10a2ddd84}" Name="CellGuildRankList" NameCreate="True" AbsContentSize="639,83" UseAbsSize="True">
+        <WZUI9Image Type="WZUI9Image" GUID="{ac10125b-df13-47f7-84f8-908f8bbe9f79}" File="ui/common/common_scale9_di7.png" Name="imgBK_CellGuildRankList" />
+        <WZUIContainer Type="WZUIContainer" GUID="{97b20d1f-da17-4992-8376-f01fd1e02afa}" RelativeSize="0.12,1" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+            <WZUIImage Type="WZUIImage" GUID="{4b1faff3-436f-4d0b-a924-d8cbadb1978e}" File="ui/common/common_icon_1st.png" UseOriginSize="True" Name="imgRankNum_CellGuildRankList" AnchorPoint="0.5,1" RelativePosition="0.5,1" Visible="False" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{f7ba2d21-3308-4152-ac50-8f53e9bc9b4b}" Name="txtLafRankNum_CellGuildRankList" CharMapFileName="ui/common_num/common_num_pmsz.png" Height="30" Width="24" Text="" Visible="False" UseOriginSize="True" UseOriginSizeProportion="False" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c7d88328-f964-40a0-9631-a332152d76dc}" FontSize="18" Color="0,72,3" Name="txtGuildName_CellGuildRankList" Text="很牛逼的一个公会" RelativePosition="0.3,0.65" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{80cf0775-4d40-49df-98a6-a3023e5eae42}" FontSize="18" Color="127,70,26" Name="txtPresident_CellGuildRankList" Text="我不是会长啊" RelativePosition="0.3,0.35" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a7a370b6-787f-4218-8bff-9b830aeb6172}" FontSize="18" Color="127,70,26" Name="txtIntegral_CellGuildRankList" Text="123456789" RelativePosition="0.58,0.5" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{79682a29-090b-4646-85d2-717abb3924b7}" FontSize="18" Color="229,105,22" Name="txtWinNum_CellGuildRankList" Text="999999战999999胜" RelativePosition="0.84,0.65" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{61e5055c-63f4-412d-a59f-59a4363c0294}" FontSize="18" Color="229,105,22" Name="txtWinPercent_CellGuildRankList" RelativePosition="0.84,0.35" Text="（胜率100%）" />
+        <WZUIImage Type="WZUIImage" GUID="{b89bf0cd-98d3-4fde-9c22-e5a2cfeb4cc3}" File="ui/community/common_icon_chuxian.png" UseOriginSize="True" AnchorPoint="1,1" RelativePosition="1,1" Name="imgResultIcon_CellGuildRankList" Visible="False" />
+        <Button Type="WZUIButton" GUID="{8bf50f7d-865d-4b50-8e39-88de8164f169}" LuaDoneFunctionName="onCheckGuildInfo">
+            <NormalElement Type="WZUIContainer" GUID="{7895fa1c-98c6-4857-bb25-1646c78e75bc}" />
+            <SelectElement Type="WZUIContainer" GUID="{34f06c78-9182-4103-8850-b4021189e3f6}" />
+            <DisableElement Type="WZUIContainer" GUID="{2d6c5948-4eec-43a2-86a6-78842ab891db}" />
+        </Button>
+    </WZUIContainer>
+</CellGuildRankList>

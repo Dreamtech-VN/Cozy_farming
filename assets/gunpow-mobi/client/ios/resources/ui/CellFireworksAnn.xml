@@ -1,0 +1,81 @@
+﻿<CellFireworksAnn GUID="{60d81fa6-18ee-4dc7-baf4-ca59b239f086}">
+    <WZUIContainer Type="WZUIContainer" GUID="{ca71909f-d5bc-4400-b7ba-d6a37a9d1a6a}" AbsContentSize="640,310" UseAbsSize="True" Name="CellFireworksAnn" LuaObjectName="CellFireworksAnn" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.414064">
+        <WZUIContainer Type="WZUIContainer" GUID="{93770af6-f72d-4cca-983d-6fc220cf1f92}" Name="conAnn_CellFireworkAnn">
+            <WZUIImage Type="WZUIImage" GUID="{9f837dd0-db15-42ea-883c-0b1d52a8f103}" File="ui/gameActivity/twoyear/anniversary_bg_005.png" UseOriginSize="True" Name="imgBg_CellFireworksAnn" />
+            <WZUIContainer Type="WZUIContainer" GUID="{635dd42d-ce59-475c-94be-cc9f694bc9af}" AbsContentSize="378,40" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.365938,1.00881">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{bc1bb96a-1cf5-4304-99e2-bab4c99f399c}" LabelStyleKey="C1_F22" Text="排名" TextKey="RANK" RelativePosition="0.222063,0.5" Name="txtTitle1_CellFireworksAnn" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{71e713ae-6732-4ddc-8ddf-f832d7df59e2}" LabelStyleKey="C1_F22" Text="排名" TextKey="PLAYER" RelativePosition="0.408439,0.5" Name="txtTitle2_CellFireworksAnn" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c03408a7-7386-4dcb-87a9-05a9dc7735fe}" LabelStyleKey="C1_F22" Text="排名" TextKey="INTEGRAL_VALUE" RelativePosition="0.786251,0.5" Name="txtTitle3_CellFireworksAnn" />
+                <WZUIImage Type="WZUIImage" GUID="{cd19dda5-ae97-4c73-97c6-c647cb47ac84}" File="ui/gameActivity/twoyear/anniversary_pattern_003.png" UseOriginSize="True" FlipX="False" ScaleX="0.3" ScaleY="1.2" FlipY="False" Order="0" Rotation="90" RelativePosition="0.935088,0.498022" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{d95d80cb-d8c0-44d0-a685-ece5a5a5a8b0}" File="ui/gameActivity/twoyear/anniversary_pattern_003.png" UseOriginSize="True" FlipX="False" ScaleX="5.5" ScaleY="1" FlipY="False" Order="0" Rotation="0" RelativePosition="0.5,0.877419" />
+            <WZUIContainer Type="WZUIContainer" GUID="{c2404792-c4be-459d-9ae0-6d57af497e48}" AbsContentSize="356,250" UseAbsSize="True" AnchorPoint="0,0" RelativePosition="0.046875,0.0225807" Name="conRankList_CellFireworksAnn">
+                <WZUITableContainer Type="WZUITableContainer" GUID="{39714bc0-3610-4405-b8cf-a00600bba155}" Name="tabRankList_CellFireworksAnn" EnableVerticalScroll="True" EnableMoveVertical="True" EnableMoveHorizontal="False" CellElementHeight="0.3" RelativePosition="0.5,0.527559" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{570acdc0-60e0-4488-9f1d-c1edd492d32c}" AbsContentSize="234,310" UseAbsSize="True" RelativePosition="0.976563,-0.00322581" AnchorPoint="1,0">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{cbe9695a-4aa1-4be4-b026-28e230f2c419}" LabelStyleKey="C1_F22" Text="烟花榜奖励" RelativePosition="0.380342,0.944293" TextKey="FIREWORKS_LIST" Name="txtTitle4_CellFireworksAnn" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e689195c-b16a-459f-b669-c14d00d2a02e}" LabelStyleKey="C15_F18" TextKey="" RelativePosition="0.431624,0.816917" Text="" Name="txtRankMySelf_CellFireworksAnn" />
+                <WZUIImage Type="WZUIImage" GUID="{83203e21-b962-4814-83b8-5daf23b57341}" File="ui/gameActivity/twoyear/anniversary_pattern_003.png" UseOriginSize="True" FlipX="False" ScaleX="1.5" ScaleY="1" FlipY="False" Order="0" Rotation="0" RelativePosition="0.5,0.777419" />
+                <WZUITableContainer Type="WZUITableContainer" GUID="{0c43b6b3-2e82-47e5-9258-316f011a83ef}" EnableVerticalScroll="True" EnableMoveHorizontal="False" AbsContentSize="220,234" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0.00967744" Name="tabRewardList_CellFireworksAnn" CellElementHeight="0.3" />
+                <Button Type="WZUIButton" GUID="{663bc5c5-b225-48e2-9616-59ce7f16884e}" AbsContentSize="100,40" UseAbsSize="True" RelativePosition="0.962262,0.944144" LuaDoneFunctionName="onClickBack" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{33385911-751b-4908-a45b-65279f4fb034}" />
+                    <SelectElement Type="WZUIContainer" GUID="{719b0214-e738-4a06-98eb-fd2d7909205a}" />
+                    <DisableElement Type="WZUIContainer" GUID="{22d49196-3253-4452-a627-a1e918ec8acd}" />
+                    <WZUIImage Type="WZUIImage" GUID="{9264a1b4-c219-4296-b4d5-8821dd066c76}" File="ui/gameActivity/twoyear/anniversary_button_005.png" UseOriginSize="True" RelativePosition="0.70667,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1fa78ad3-b34f-4f32-a8aa-7e40a6d5a83e}" LabelStyleKey="C1_F20" TextKey="BACK" RelativePosition="0.386667,0.5" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{86765287-5f20-4f0c-ab18-3ce8b179fcfa}" AbsContentSize="3,300" UseAbsSize="True" RelativePosition="0.623438,0.454839">
+                <WZUIImage Type="WZUIImage" GUID="{781614e6-474a-44bd-b662-71a27c900379}" File="ui/gameActivity/twoyear/anniversary_pattern_003.png" UseOriginSize="True" FlipX="False" ScaleX="2.2" ScaleY="1.2" FlipY="False" Order="180" Rotation="90" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{530a5766-a87c-4419-80d3-f9d38d63af18}" AbsContentSize="350,70" UseAbsSize="True" RelativePosition="0.5,0.5" Name="conRankListItem_CellFireworksAnn" Visible="False" AnchorPoint="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{0bb1f773-978e-471e-aeee-c541dbf33e53}" AbsContentSize="60,60" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.05,0.528571" Name="conHead_CellFireworksAnn">
+            <WZUIImage Type="WZUIImage" GUID="{b4f18714-9d07-482b-9893-e41f4947fb27}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="0.9" ScaleX="0.9" ScaleY="0.9" />
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{5a03ea0d-b701-4e93-98da-fceba4e09d17}" UseOriginSize="True" File="" Scale="0.7" Name="imgRank_CellFireworksAnn" RelativePosition="0.281879,0.5" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{df5bdb88-e1d1-4736-bb1a-d723335628eb}" LabelStyleKey="C11_F18" Text="" RelativePosition="0.43968,0.637647" Name="txtPlayerLevel_CellFireworksAnn" AnchorPoint="0,0.5" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{c9db14fc-21d7-4e2b-8a3a-d373a4e83e60}" LabelStyleKey="C18_F18" Text="" RelativePosition="0.433966,0.325" Name="txtPlayerName_CellFireworksAnn" AnchorPoint="0,0.5" />
+        <WZUIImage Type="WZUIImage" GUID="{d1dd03c5-f0db-4ea0-b0b2-1f2e66cc10dd}" File="ui/common/common_icon_kuafu.png" UseOriginSize="True" RelativePosition="0.390636,0.325017" Name="imgTag_CellFireworksAnn" Visible="False" TouchSwallow="True" TouchEnable="False" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6f879363-1a3c-4742-9fd8-a708e564bd3e}" LabelStyleKey="C18_F18" Text="" RelativePosition="0.900723,0.5" Name="txtIntegralValue_CellFireworksAnn" />
+        <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{cb589f54-0052-4af9-8556-6a4dc89d7ab7}" CharMapFileName="ui/common_num/common_num_pmsz.png" Height="30" Width="24" Text="" Name="lafTxt_CellFireworksAnn" RelativePosition="0.295704,0.5" UseOriginSizeProportion="False" UseOriginSize="True" />
+        <Button Type="WZUIButton" GUID="{b1451491-527f-4cab-8067-bb5fc812967e}" LuaDoneFunctionName="onClickPlayer">
+            <NormalElement Type="WZUIContainer" GUID="{5288f592-1538-45a9-84ed-d0d19f98f071}" />
+            <SelectElement Type="WZUIContainer" GUID="{b72876e3-d2bf-4dae-b295-f209c6980fb5}" />
+            <DisableElement Type="WZUIContainer" GUID="{964e92b2-c3b3-4141-a6d8-3ac3d5485fb1}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{3648706d-482d-4c6a-a087-dc1829fdd25b}" AbsContentSize="356,4" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0.0142857">
+            <WZUIImage Type="WZUIImage" GUID="{7d4b6928-744a-42ee-86ce-5afba1d21f58}" File="ui/gameActivity/twoyear/anniversary_pattern_002.png" UseOriginSize="True" ScaleX="1.35" ScaleY="1" />
+        </WZUIContainer>
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{2fa1b2ce-3402-442c-b3e7-70534ef44648}" AbsContentSize="220,65" UseAbsSize="True" RelativePosition="0.5,0.5" Name="conRankListReward_CellFireworksAnn" Visible="False">
+        <WZUIImage Type="WZUIImage" GUID="{127d0114-ae42-45b8-a7b2-05f978a905da}" File="" UseOriginSize="True" Scale="0.6" RelativePosition="0.106742,0.5" Name="imgRank_conRankListReward" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{764a673d-ea2c-4f52-b2b9-e59595ee006a}" LabelStyleKey="C1_F24" Text="" RelativePosition="0.0644123,0.5" AnchorPoint="0,0.5" Name="txtRank_conRankListReward" />
+        <Button Type="WZUIButton" GUID="{d1045e1b-117b-470d-a6ff-f9c7a0f4c6bf}" LuaDoneFunctionName="onClickGet" Tag="1" RelativePosition="0.505618,0.5">
+            <NormalElement Type="WZUIContainer" GUID="{09359ac9-6057-43a8-8186-81785086d13e}">
+                <WZUIImage Type="WZUIImage" GUID="{9a4c7749-4133-4223-a0cf-6e95c22f3b60}" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" Scale="1" ScaleX="1" ScaleY="1" Name="imgBox_CellFireworksAnn" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{2181c43f-cb02-45b1-819b-69758728b4bf}">
+                <WZUIImage Type="WZUIImage" GUID="{a99dc1cd-211f-4628-bd9b-209296dcdda3}" File="" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" Scale="1" ScaleX="1" ScaleY="1" Name="imgBox1_CellFireworksAnn" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{a18b9d41-8dbb-4b67-9bca-3198f643d420}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{03820945-9ccd-4b6c-9bda-0ae402905bbc}" AbsContentSize="220,5" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True">
+            <WZUIImage Type="WZUIImage" GUID="{ed038667-f8f7-4bc4-a865-41f3008e3193}" File="ui/gameActivity/twoyear/anniversary_pattern_002.png" ScaleY="0.9" UseOriginSize="True" />
+        </WZUIContainer>
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{cb57d0d5-d784-4bd6-bf7a-94f1374220e7}" AbsContentSize="360,70" UseAbsSize="True" RelativePosition="0.5,0.5" Name="conFootballReward_CellFireworksAnn" Visible="False">
+        <WZUIImage Type="WZUIImage" GUID="{a2900afc-9fc8-47c3-acea-70b4542ce716}" File="" UseOriginSize="True" Scale="0.6" RelativePosition="0.106742,0.5" Name="imgRank_conRankListReward" />
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{87c4b4d6-a9ea-436f-96b1-23fd9b355b84}" Name="fxtRank_conRankListReward" MaxWidth="200" AnchorPoint="0,0.5" RelativePosition="0.0644123,0.5" />
+        <WZUIContainer Type="WZUIContainer" GUID="{6e06cee5-3c21-43cb-957a-923afaea2bb5}" AbsContentSize="220,5" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True">
+            <WZUIImage Type="WZUIImage" GUID="{eb28b331-5062-4ec6-bd3b-fc9354c0572e}" File="ui/football/football_pattern_002.png" ScaleY="1" UseOriginSize="True" Name="imgRewardLine_CellFireworksAnn" ScaleX="0.6" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{2d51daa2-d231-461c-a263-131a9c3553f3}" AbsContentSize="280,65" UseAbsSize="True" RelativePosition="0.575,0.5">
+            <WZUIContainer Type="WZUIContainer" GUID="{7dc65e38-e26d-42e8-b7ec-aabe8922c3cc}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.2,0.5" Name="con1_CellFireworksAnn" />
+            <WZUIContainer Type="WZUIContainer" GUID="{c8704b3c-f998-43ca-902b-a485adbca979}" UseAbsSize="True" AbsContentSize="60,60" RelativePosition="0.45,0.5" Name="con2_CellFireworksAnn" />
+            <WZUIContainer Type="WZUIContainer" GUID="{e3b01d1b-8681-49c3-9d67-3edbca5ca681}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.7,0.5" Name="con3_CellFireworksAnn" />
+            <WZUIContainer Type="WZUIContainer" GUID="{e48a6bae-686a-45a6-9ba4-32b5ca5b6624}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.95,0.5" Name="con4_CellFireworksAnn" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellFireworksAnn>

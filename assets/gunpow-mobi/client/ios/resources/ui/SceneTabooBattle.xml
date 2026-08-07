@@ -1,0 +1,81 @@
+﻿<SceneTabooBattle GUID="{1c4b5d41-4922-495e-86ae-1f73021650b5}">
+    <WZUIFrame GUID="{2de563b0-06a9-4b77-a916-6ff2d2ef039d}" LuaObjectName="SceneTabooBattle" LuaTouchBeganFunction="onTouchBegan" Name="SceneTabooBattle" NameCreate="True" RelativePosition="0.5,0.5" Scale="1" ShowAll="False" Type="WZUIFrame" AbsContentSize="960,640" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{39a94e7c-39b7-4e69-a330-d33f26b798bb}">
+            <WZUIImage Type="WZUIImage" GUID="{2dec6a79-683a-44f4-8dd8-cbc871d8de8a}" File="ui/taboo/taboo_bg_hai.png" Name="imgBg_SceneTabooBattle" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{43a3b7fd-00c3-4ba2-9beb-a14f6ef9e714}" ShowAll="True" Name="conShowAll_SceneTabooBattle" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{1b5ffcb2-0d36-4ecb-aca0-20f9b47bc454}" AbsContentSize="940,520" UseAbsSize="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{5cddfb26-6392-4189-a244-286c2e4a255c}" Name="conBg_SceneTabooBattle" AbsContentSize="940,520" UseAbsSize="False">
+                    <WZUIImage Type="WZUIImage" GUID="{8d94c83d-9493-4a3f-9393-13f129d7b750}" File="ui/taboo/jinji_start.png" UseOriginSize="True" RelativePosition="0.0497711,0.882383" Visible="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{79f6e05a-6df1-49bb-9d48-1aad0cb7fef9}" AbsContentSize="940,520" UseAbsSize="False" RelativePosition="0.502083,0.470313" ShowAll="False" Visible="True" Name="conCard_SceneTabooBattle">
+                    <WZUIImage Type="WZUIImage" GUID="{afb1888b-6f99-49b8-96dc-1fd595bfd96a}" Name="imgStepFlag_SceneTabooBattle" File="ui/taboo/jinji_girl.png" UseAbsCoordinate="True" UseOriginSize="True" ScaleX="1" ScaleY="1" RelativePosition="0.0447447,0.934385" AbsPosition="570,470" Visible="False" Scale="1" AnchorPoint="0.5,0.5" Order="999" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{07ae4883-e165-4e07-9580-dacf634c17d4}" Name="conStepFlag_SceneTabooBattle" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.0447447,0.934385" Order="999" UseAbsCoordinate="True" AbsPosition="41.8647,8.66161">
+                        <WZUIImage Type="WZUIImage" GUID="{6afb7d20-7fb0-4b2d-b9f2-3c7acd26b660}" File="ui/common/common_scale9_jinji.png" UseAbsCoordinate="False" UseOriginSize="True" Scale="1.2" />
+                        <WZUISpine Type="WZUISpine" GUID="{8acdf94f-b978-4d8a-8e1d-f53cd65292c4}" FileAtlas="ui/common_scale9_jinji_2.atlas" FileJson="ui/common_scale9_jinji_2.json" AnimationName="common_scale9_jinji_2" Loop="True" RelativePosition="0.5,0.5" Name="spineStepFlag_SceneTabooBattle" />
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{70faecfe-01f2-4e00-b667-bb8d7034732a}" AbsContentSize="102,102" UseAbsSize="True" RelativePosition="0.924442,0.128851" Name="conBtnTaboo_SceneTabooBattle">
+                <WZUIImage Type="WZUIImage" GUID="{cf7d2603-3a48-41d2-8ab4-ef9a9b716ca1}" File="ui/lottery/event_icon_zz2.png" UseOriginSize="False" RelativePosition="0.5,0.5" Scale="1" ScaleX="1" ScaleY="1" />
+                <Button Type="WZUIButton" GUID="{1d46b5e8-c2b3-4839-a83f-8b3c7c30be80}" LuaActionName="Normal" LuaDoneFunctionName="onTabooBtnClick" Name="btnTaboo_SceneTabooBattle">
+                    <NormalElement Type="WZUIContainer" GUID="{541fa981-3cec-4cc6-96e2-17af92e6801e}">
+                        <WZUIImage Type="WZUIImage" GUID="{59298e14-f104-4810-9527-15738c33f283}" File="ui/taboo/common_icon_shaizi01.png" UseAbsCoordinate="False" UseOriginSizeProportion="False" RelativeSize="0.7,0.7" LuaObjectName="" Name="btnTabooNor_SceneTabooBattle" RelativePosition="0.499999,0.45614" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{2739ea71-e823-4249-bc85-a870b2f36156}">
+                        <WZUIImage Type="WZUIImage" GUID="{ea3db3e5-efc6-411c-a4bc-ea47c8f2d4fb}" File="ui/taboo/common_icon_shaizi01.png" UseAbsCoordinate="False" UseOriginSizeProportion="False" RelativeSize="0.7,0.7" Name="btnTabooSel_SceneTabooBattle" RelativePosition="0.499999,0.45614" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{59b72ad5-7038-46b1-bca0-7455a9e5aac9}" />
+                </Button>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e53df172-8ee1-4834-bac8-e1f2d90a7b69}" Text="19/19" LabelStyleKey="" RelativePosition="0.5,0.117647" Color="255,236,193" FontSize="16" ShadowColor="79,60,48" StrokeSize="3" EnableStroke="True" StrokeColor="127,70,26" Name="labBtnTaboo_SceneTabooBattle" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{6f508469-ef67-4870-9322-e4faba26aef3}" UseAbsSize="True" AbsContentSize="140,30" RelativePosition="0.924442,0.0237539" Name="conDiceCountDown_SceneTabooBattle">
+                <WZUI9Image Type="WZUI9Image" GUID="{86a6f449-a282-4fe1-ab73-cd146d2bd520}" File="ui/common/common_scale9_di58.png" Opacity="125" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{894999d7-98ae-4557-b28d-38a916c4bebb}" Text="" LabelStyleKey="C7_F16" Name="labDiceCountDown_SceneTabooBattle" Color="195,171,148" FontSize="16" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{270499df-e96a-4b51-baea-974264b23eb2}" Name="conSpine_SceneTabooBattle" RelativePosition="0.5,0.528125">
+                <WZUISpine Type="WZUISpine" GUID="{78d375a8-13d1-4a1c-947d-ec32a8637e2f}" Name="spineTaboo_SceneTabooBattle" FileAtlas="ui/saizi.atlas" FileJson="ui/saizi.json" AnimationName="roll" Visible="False" UseOriginSizeProportion="False" />
+                <WZUIImage Type="WZUIImage" GUID="{d5e41bab-f2cc-44be-a535-86e5b24a85a9}" File="ui/taboo/common_icon_shaizi01.png" UseOriginSize="True" Name="imgSpineTaboo_SceneTabooBattle" Visible="False" RelativePosition="0.5,0.479688" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{7ea48ddb-d2b7-406c-8440-31a9cd423adf}" Name="conBox_SceneTabooBattle">
+                <WZUIContainer Type="WZUIContainer" GUID="{07ab0f86-d6f4-4b85-8e83-7b922c5b195e}" RelativePosition="0.54219,0.120399" UseAbsSize="True" Name="conBox1_SceneTabooBattle">
+                    <WZUIImage Type="WZUIImage" GUID="{4b93ba24-b30f-448c-874b-a940051c00f5}" UseAbsCoordinate="False" UseOriginSize="False" File="ui/taboo/jinji_kuang.png" RelativePosition="0.5,0.5" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{3ea4191f-a490-41d0-973f-6fe7d9811b01}" RelativePosition="0.654799,0.120399" UseAbsSize="True" Name="conBox2_SceneTabooBattle">
+                    <WZUIImage Type="WZUIImage" GUID="{ba68db81-e081-432b-ae05-1dd339512ca8}" UseAbsCoordinate="False" UseOriginSize="False" File="ui/taboo/jinji_kuang.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c8ff623c-60a8-4b8c-91cd-ecd7b6b293fa}" RelativePosition="0.766257,0.120399" UseAbsSize="True" Name="conBox3_SceneTabooBattle">
+                    <WZUIImage Type="WZUIImage" GUID="{dfb8a2d6-11ba-4901-8663-92931ff6d592}" UseAbsCoordinate="False" UseOriginSize="False" File="ui/taboo/jinji_kuang.png" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{8e16dce9-cbff-45d6-9b0a-85fd3db3f18e}" Name="conBoxReward_SceneTabooBattle" Visible="False" ShowAll="True">
+                <WZUIImage Type="WZUIImage" GUID="{949b4aac-0c65-437b-a116-52b242d38bba}" File="ui/common/common_scale9_di81.png" ShowAll="False" ScaleX="3" />
+                <WZUISpine Type="WZUISpine" GUID="{104c467d-44a8-44b9-98b5-4fd62c8f66a9}" FileAtlas="ui/ui_huodewupin.atlas" FileJson="ui/ui_huodewupin.json" AnimationName="effect" Loop="True" RelativePosition="0.5,0.964413" AbsPosition="204,495.697" Opacity="190" Name="spine" />
+                <WZUIImage Type="WZUIImage" GUID="{95d26aed-f122-4db4-a241-fcc899d5ede2}" File="ui/bless/common_scale9_heidi12.png" UseOriginSize="True" ScaleX="2" />
+                <WZUIImage Type="WZUIImage" GUID="{bec61130-73a9-4f69-b389-2ebe9d2b5512}" UseOriginSize="True" File="ui/common/common_icon_xyzhhdwp.png" RelativePosition="0.5,0.740625" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{bd297fb5-1e74-4135-a044-80eb79852d62}" Name="" Text="" Color="255,255,255" FontSize="22" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.229687" Visible="True" BoldFont="True" EnableStroke="False" StrokeColor="132,66,29" TextKey="CLICKCONTINUE" StrokeSize="4" AbsPosition="209,-60.125" TouchEnable="False" />
+                <WZUIContainer AbsContentSize="1200,700" GUID="{313f4341-f79c-47bc-8aad-a1c0e04b83b9}" Name="btnOK_SceneTabooBattle" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                    <WZUIButton AbsContentSize="0,0" GUID="{f424935f-8e0d-4467-8ca6-d9bd8189c592}" LuaDoneFunctionName="onBtnGetClick" LuaPushFunctionName="" Name="btnGetReward_WndRewardShow" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="False">
+                        <NormalElement GUID="{912bebbe-10a0-472c-92b4-9ef6faa24e1f}" Type="WZUIContainer" TouchContainerEnable="True" />
+                        <SelectElement GUID="{5b7db56a-60b5-4e5d-a268-8f5b41885ab3}" Type="WZUIContainer" TouchContainerEnable="True" />
+                        <DisableElement GUID="{69d7af30-4c7d-4a21-9b46-72de8d3f2c3e}" Type="WZUIContainer" TouchContainerEnable="True" RelativePosition="0.5,0.5" />
+                    </WZUIButton>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{ce8a4330-4804-4685-82bc-9ec339cb40b4}" Name="imgBoxReward_SceneTabooBattle" File="ui/taboo/jinji_hezi3.png" UseOriginSize="True" UseAbsCoordinate="True" AbsPosition="735,77" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{a89d470a-edf8-468a-b7f3-e696431e8ac9}" Name="conBoxSpine_SceneTabooBattle" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{de38567d-c5ff-4c36-9fe2-394da04d5f97}" File="ui/common/common_scale9_yaan3.png" ScaleX="3" />
+                <WZUISpine Type="WZUISpine" GUID="{b5983288-0535-41e3-ade1-52fb54de3723}" FileAtlas="ui/ui_hhbx.atlas" FileJson="ui/ui_hhbx.json" AnimationName="box1_open" Name="spineBox_SceneTabooBattle" Loop="False" RelativePosition="0.5,0.5" Visible="True" />
+            </WZUIContainer>
+            <WZUIButton Type="WZUIButton" AbsContentSize="90,90" UseAbsSize="True" LuaDoneFunctionName="onBtnRuleClick" GUID="{17ecef74-4328-4f0a-8b7e-e4258152a817}" RelativePosition="0.073579,0.0474661" AnchorPoint="1,0.5" AbsPosition="797.973,21.0118">
+                <NormalElement Type="WZUIContainer" GUID="{4e8f9b22-5637-4c16-8bed-4cae3a11d224}">
+                    <WZUIImage Type="WZUIImage" GUID="{c9ec5bc4-6c1e-46eb-b355-d76fe538c626}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{55ff8f99-edf3-40ed-95aa-439fae9a73ea}">
+                    <WZUIImage Type="WZUIImage" GUID="{7d5afa2e-ff9d-4e60-a5c4-5866a12f0ec3}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{664475e9-f35f-4e04-b208-088fa3bc5df1}" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneTabooBattle>

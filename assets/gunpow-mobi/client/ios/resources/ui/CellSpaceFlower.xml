@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" ?>
+<CellSpaceFlower GUID="{A4602EA7-3666-460b-B85F-D3B1D4987C9E}">
+    <WZUIContainer AbsContentSize="565,98" GUID="{836C8AF4-D63B-4368-A249-0A7DA5683521}" LuaObjectName="CellSpaceFlower" Name="CellSpaceFlower" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{057433FD-29CA-4dbd-8D9A-BD30D8CEC5A8}" AbsContentSize="565,98">
+            <WZUI9Image Type="WZUI9Image" GUID="{5BA35C0D-A86A-4c85-9223-D93785EEB1DA}" File="ui/common/common_scale9_di7.png" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{286035cd-4600-49a0-a503-fc2af256be8f}" Text="" FontSize="24" Color="158,139,121" TextKey="ISGIVE" LabelStyleKey="" RelativePosition="0.86,0.5" BoldFont="True" Name="txtGiven_CellSpaceFlower" />
+        <Button Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.854442,0.5" Name="btnSend" GUID="{c57ecb60-dee5-431f-aef7-59266ffa5469}" LuaDoneFunctionName="onSend" AbsPosition="482.76,37.6371" LuaActionName="Normal" Visible="True">
+            <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{51bd6673-38dd-42b5-92c0-8ed97d9fe6f6}">
+                <WZUI9Image Type="WZUI9Image" GUID="{8e1b3506-daa2-4009-af3d-4667f3df6642}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="58,28" Visible="True" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{b017d0d2-9eae-4e58-80ab-2cc6a88fd5c2}">
+                <WZUI9Image Type="WZUI9Image" GUID="{a2d8d791-506b-4668-8336-c1f52350ed78}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{01e47227-8d3e-4fd7-9e2b-ff048ebe3804}" />
+        </Button>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f6dd6c9c-6f1c-48d8-b113-456a69ea378c}" Text="10000" LabelStyleKey="C4_F24" RelativePosition="0.83,0.48" AbsPosition="491.55,76.44" Name="ttfCost" Color="158,0,0" FontSize="22" BoldFont="True" Alignment="Left" AnchorPoint="0,0.5" />
+        <WZUIImage Type="WZUIImage" GUID="{5dd416e6-10fe-4798-b890-5e716276c7c2}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" RelativePosition="0.8,0.5" AbsPosition="442.965,78.3485" Scale="0.7" Name="imgCost" />
+        <WZUIContainer Type="WZUIContainer" GUID="{9a51fd63-9369-4d35-9739-10fd1c6acf18}" AbsContentSize="82,82" UseAbsSize="True" RelativePosition="0.118,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{cad62bef-b22c-463f-82e3-4b08c8532d20}" File="ui/common/common_scale9_beibaodi2.png" Visible="True" UseOriginSize="True" />
+            <WZUI9Image Type="WZUI9Image" GUID="{230423ad-aa12-4782-b422-e6220fc58438}" File="ui/common/common_scale9_wuse.png" Visible="True" RelativePosition="0.5,0.5" AbsPosition="41,41" UseOriginSize="True" />
+            <WZUIImage Type="WZUIImage" GUID="{5f6747aa-7ae2-46fd-8dd9-3647ddf67289}" File="ui/marrige/common_icon_xxhs.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.5,0.5" AbsPosition="41,41" Name="imgItemIcon_CellSpaceFlower" />
+        </WZUIContainer>
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{92a34798-79aa-434a-a46d-ea866f3cdc50}" RelativePosition="0.21,0.7" AbsPosition="130.862,73.249" Name="text1_CellSpaceFlower" MaxWidth="300" AnchorPoint="0,0.5" />
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{ed50cda4-2072-48a3-bc22-8fddaf8fa3d5}" RelativePosition="0.21,0.36" AbsPosition="118.65,34.3" Name="text2_CellSpaceFlower" MaxWidth="300" AnchorPoint="0,0.5" />
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{696f42cb-96cc-487a-9bf6-8e7a8548ba50}" RelativePosition="0.44,0.36" AbsPosition="130.862,73.249" Name="text3_CellSpaceFlower" MaxWidth="300" AnchorPoint="0,0.5" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f769420a-50a0-412a-8a8b-96254874aae8}" Text="已赠送" FontSize="24" Color="158,139,121" TextKey="" LabelStyleKey="" RelativePosition="0.855,0.35" BoldFont="True" AbsPosition="484.516,34.0008" Name="text4_CellSpaceFlower" Visible="False" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8fbcdf19-c847-4626-8030-1bb7292b2fe3}" Name="txtFlowerList_CellSpaceFlower" AnchorPoint="0,0.5" RelativePosition="0.21,0.36" FontSize="18" Color="62,34,8" BoldFont="True" Text="Không có giới hạn về số hoạt động tặng hoa" TextKey="" Dimensions="" Visible="False" />
+    </WZUIContainer>
+</CellSpaceFlower>

@@ -1,0 +1,592 @@
+﻿<?xml version="1.0" ?>
+<WndLoginSelect GUID="{5C6AAFF7-F187-4f9b-BE52-9E09A8E6367E}">
+    <WZUIWindow Type="WZUIWindow" GUID="{0D1A0769-85D3-4c0f-A176-81D597290B04}" LuaObjectName="WndLoginSelect" Name="WndLoginSelect" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{8B7BAB5B-3DE0-43db-94D9-51BE5945D4B1}">
+            <WZUIContainer Type="WZUIContainer" GUID="{833F9060-E6AF-4e58-9EAE-C2E0BC5BCCDD}" Name="" RelativePosition="0.5,0.5" Visible="True" NoBorder="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{0DF62DD6-8816-4a03-9BB7-921328655DD2}" Name="conForgetPassword_WndLoginSelect" Visible="False" ShowAll="True" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                    <WZUIContainer Type="WZUIContainer" GUID="{413D68FB-2057-4e12-90A0-4DA9C7F22C87}" RelativeSize="1,1" AnchorPoint="0.5,0" RelativePosition="0.5,0.304" AbsContentSize="738,160" UseAbsSize="True" AbsPosition="480,192.56">
+                        <WZUI9Image Type="WZUI9Image" GUID="{42B109F6-E4C7-4864-9D9B-C59A4188645C}" File="ui/common/common_scale9_heidi5.png" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{5F91D642-1AD6-4a26-B894-66626F972648}" RelativeSize="0.7,0.3" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.69" AbsPosition="369,109.8">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{9366946A-F423-4218-9D91-A4A14BB48FF5}" TextKey="PASSWORD_FORGET_ACCOUNT" FontSize="26" Color="255,255,255" RelativePosition="0.14,0.5" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" Name="txtAccountInfo_WndLoginSelect" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{C2805B3C-CD7E-4f74-824D-D757E90F70A5}" AbsContentSize="276,46" UseAbsSize="True" RelativePosition="0.535,0.5">
+                                <WZUI9Image Type="WZUI9Image" GUID="{1A2DB46E-8F1D-464b-A6C5-9E5E66E4493F}" File="ui/common/common_scale9_di58.png" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{8EFEF30C-83AA-4a79-9F00-F369687717DD}" RelativeSize="0.94,1">
+                                    <WZUIEditBox Type="WZUIEditBox" GUID="{3308470E-01ED-4fa3-9FD1-93E1E8B13C85}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editForgetAccount_WndLoginSelect" FontSize="22" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontColor="255,255,255" MaxLength="16" PlaceholderFontColor="158,139,121" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{FE94C1C9-916B-425b-8298-49EBC6AE814E}" RelativeSize="0.7,0.3" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.31" AbsPosition="369,49.2976">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{F9A9D25E-B217-4506-9131-B1D21650E80A}" TextKey="MAIL_INFO" FontSize="26" Color="255,255,255" RelativePosition="0.14,0.5" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" Name="txtForget2_WndLoginSelect" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{EC4656B1-ACA4-41e7-A79D-60272CC1A791}" AbsContentSize="276,46" UseAbsSize="True" RelativePosition="0.535,0.5">
+                                <WZUI9Image Type="WZUI9Image" GUID="{7CF6A909-B3DA-4f70-84A1-533A8F35AD7C}" File="ui/common/common_scale9_di58.png" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{3F90124F-6A94-43fc-91B8-F1DEA004AE01}" RelativeSize="0.94,1">
+                                    <WZUIEditBox Type="WZUIEditBox" GUID="{3A2CAD1B-EEB0-4fa1-902A-67084084067D}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editForgetMail_WndLoginSelect" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="22" FontColor="255,255,255" InputFlag="FlagSensitive" MaxLength="40" PlaceholderFontColor="158,139,121" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{F6880FB5-BCF0-46e9-9A0D-EFEF19CD947D}" RelativeSize="0.7,0.3" AnchorPoint="1,0" RelativePosition="0.741206,0.000386116" AbsContentSize="300,30" UseAbsSize="True" AbsPosition="547.01,0.063323">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{D77057B6-676B-4d6b-9F6E-F08F58A26D18}" Color="105,65,46" FontSize="18" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0,0.5" TextKey="MAIL_ACCOUNT" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{C9480A88-33BA-48f5-A9D2-11D5B27E26E0}" RelativeSize="1,1" RelativePosition="0.5,0.216" Visible="True" AnchorPoint="0.5,0.5" AbsContentSize="480,80" UseAbsSize="True" AbsPosition="369,0">
+                        <WZUIButton Type="WZUIButton" RelativeSize="0.25,0.7" RelativePosition="0.25,0.5" GUID="{BB077711-0097-4c62-93BD-00C21FEA8D43}" LuaDoneFunctionName="onBackFindMM" LuaActionName="Normal">
+                            <NormalElement Type="WZUIContainer" GUID="{D6235535-1483-443b-BCE2-70B8D441D01D}">
+                                <WZUIImage Type="WZUIImage" GUID="{6F0E96E4-E0F6-4a13-9EE1-CB60D08B682C}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{A8222FEE-85E0-43ad-B4C8-7B92042F3214}" FontSize="22" LabelStyleKey="SMALL_ORANGE_BTN" TextKey="BACK" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{5A3F2125-1002-4580-A005-1CC8167864AF}">
+                                <WZUIImage Type="WZUIImage" GUID="{869A7CA0-6B54-44d4-B282-BE57F918F6F0}" File="ui/common/common_btn_anniu3_sel.png" UseOriginSize="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{910C4F65-F9D0-4913-A6CA-B851556553EB}" FontSize="22" LabelStyleKey="SMALL_ORANGE_BTN" TextKey="BACK" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{5A7C2E5C-3990-4a03-91E4-3410F40EBB59}" />
+                        </WZUIButton>
+                        <WZUIButton Type="WZUIButton" RelativeSize="0.25,0.7" RelativePosition="0.75,0.5" GUID="{9443D771-EFF4-4b1c-80AF-0D900C102233}" LuaDoneFunctionName="onConfirmFindMM" LuaActionName="Normal">
+                            <NormalElement Type="WZUIContainer" GUID="{EAA6E85C-71B6-4386-AC65-EA995DF335A7}">
+                                <WZUIImage Type="WZUIImage" GUID="{ECEB21EF-BF14-456c-82A4-3C30F8CE283A}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{B9CA62CD-7B43-4f4b-94FF-C2A761FC5EB8}" FontSize="22" LabelStyleKey="SMALL_GREEN_BTN" TextKey="CONFIRM" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{1F86C8AC-7962-4264-A016-A444D516388A}">
+                                <WZUIImage Type="WZUIImage" GUID="{FD7AE72C-6C43-426a-A1DB-ADB502415420}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{B401733D-F046-428b-B60A-F68A132C342F}" FontSize="22" LabelStyleKey="SMALL_GREEN_BTN" TextKey="CONFIRM" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{4AD4C019-0E95-412b-BB9C-C1F17FA9BD85}" />
+                        </WZUIButton>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{CE4D6260-97AE-451c-943B-721C8722FF7D}" Name="conModifyPassword_WndLoginSelect" Visible="False" ShowAll="True" AbsContentSize="738,414" UseAbsSize="True" RelativePosition="0.5,0.490625">
+                    <WZUIContainer Type="WZUIContainer" GUID="{B43F4E06-B5F9-42d1-B025-2A978E747267}" Visible="True" RelativeSize="1,0.75" RelativePosition="0.5,0.925121" AbsContentSize="738,300" UseAbsSize="True" AnchorPoint="0.5,1" AbsPosition="369,383">
+                        <WZUIContainer Type="WZUIContainer" GUID="{32BF0C80-8A3D-4ad1-94BA-C4E87831BC1C}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{4F84AC4B-005E-41ea-994A-1D0374C86703}" File="ui/common/common_scale9_heidi5.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{1EAC1CD6-C12A-45ea-BD99-D211A290B193}" RelativeSize="0.6,0.9" RelativePosition="0.5,0.5" Visible="True" Name="" NameCreate="True" AbsContentSize="" UseAbsSize="False" ShowAll="False" AnchorPoint="0.5,0.5">
+                            <WZUIContainer Type="WZUIContainer" GUID="{11CDF2B6-6432-48bd-AD17-63E908042BE5}" RelativeSize="1,0.25" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{FC39BE8A-9916-4252-90F2-AC4B04FEAABE}" TextKey="WND_EXISTACCOUNT_ACCOUNT" FontSize="26" Color="255,255,255" RelativePosition="0.25,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{5F166BD4-7B94-4405-AA42-1F1DC165474C}" AbsContentSize="310,50" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{5177585B-230C-4876-8666-7DFDF9CF7FAA}" File="ui/common/common_scale9_di58.png" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{26859E12-12DF-47b1-8012-CA8F95C93683}" RelativeSize="0.94,1">
+                                        <WZUIEditBox Type="WZUIEditBox" GUID="{98317DC6-D190-452f-8C4A-E62008745066}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editModifyAccount_WndLoginSelect" FontSize="24" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontColor="255,255,255" MaxLength="16" />
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{83986CFA-D90E-46b0-879C-2C003C6BFBF7}" RelativeSize="1,0.25" AnchorPoint="0.5,1" RelativePosition="0.5,0.75">
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{B9272E19-152C-4590-955E-F16556EFB246}" TextKey="ROOM_PASSWORD" FontSize="26" Color="255,255,255" RelativePosition="0.25,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{ED295559-D128-4eb8-9FA3-403A2B47C386}" AbsContentSize="310,50" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{C6199E1E-3D51-424c-8A9B-7284B05AAA2B}" File="ui/common/common_scale9_di58.png" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{00E1D76A-B561-47e3-85F1-835446D24EF6}" RelativeSize="0.94,1">
+                                        <WZUIEditBox Type="WZUIEditBox" GUID="{647F5A86-6D22-4c57-86E7-478FA4FD0959}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editModifyPass_WndLoginSelect" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="24" FontColor="255,255,255" InputFlag="FlagSensitive" MaxLength="12" />
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{1D2B72B3-961A-4ab5-BDC8-5155D439DA8D}" RelativeSize="1,0.25" AnchorPoint="0.5,1" RelativePosition="0.5,0.5">
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{EBAF71D3-D8B1-4c73-B04D-27E8D5F6AFE4}" TextKey="PASSWORD_NEW" FontSize="26" Color="255,255,255" RelativePosition="0.25,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{4E8C949C-95BB-481b-985C-B30E24AFC5CF}" AbsContentSize="310,50" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{A29E0A83-CA34-46a4-9CA5-072D424866E2}" File="ui/common/common_scale9_di58.png" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{45A7D4BE-6688-4e86-8787-E52A1E379252}" RelativeSize="0.94,1">
+                                        <WZUIEditBox Type="WZUIEditBox" GUID="{76D5D66A-6A31-4909-BCFA-F19F11466419}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editModifyNewPass_WndLoginSelect" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="24" FontColor="255,255,255" InputFlag="FlagPassword" MaxLength="12" />
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{E990AB20-20A5-4e45-BA07-9459A6344235}" RelativePosition="0.5,0.25" AnchorPoint="0.5,1" RelativeSize="1,0.25">
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{F9F0B8A9-A288-4b5f-83E2-23A1FFCC2793}" TextKey="LOGIN_PASSWORD_SURE" FontSize="26" Color="255,255,255" RelativePosition="0.25,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{F162C512-D921-4cf8-A5D4-FB9B7C2ECF92}" AbsContentSize="310,50" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{E04C3B00-2725-463e-A77F-180CED4DC8BF}" File="ui/common/common_scale9_di58.png" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{425B7342-3B3A-4c9f-AAE6-FD1123EC4F4A}" RelativeSize="0.94,1">
+                                        <WZUIEditBox Type="WZUIEditBox" GUID="{0E65BA4E-67ED-4a71-8EFE-8745519E8BD9}" BgPicture="ui/common/transparent_bg.png" Text="1" Name="editModifyNewPassSure_WndLoginSelect" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="24" FontColor="255,255,255" MaxLength="22" InputFlag="FlagPassword" />
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{8BA5C121-D95A-4a34-B502-16C2EBD2D0C7}" RelativeSize="1,1" RelativePosition="0.5,0" AnchorPoint="0.5,0" AbsContentSize="480,70" UseAbsSize="True">
+                        <WZUIButton Type="WZUIButton" RelativeSize="0.25,0.7" RelativePosition="0.25,0.5" GUID="{44C390C7-C8CF-4135-AF7F-34B2CAC93341}" LuaDoneFunctionName="onBackModifyMM" LuaActionName="Normal">
+                            <NormalElement Type="WZUIContainer" GUID="{A01381E9-2856-46fa-BBEE-FF10A0BD872F}">
+                                <WZUIImage Type="WZUIImage" GUID="{5FD88938-DBA8-481b-B4A4-505DEC70A824}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5FAC8747-5047-4c81-8DA3-762483100DB7}" FontSize="22" LabelStyleKey="SMALL_ORANGE_BTN" TextKey="BACK" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{E42C9D9A-52AE-4350-BB99-49B86D27652C}">
+                                <WZUIImage Type="WZUIImage" GUID="{665B1B72-A77C-4e33-B9DF-335C111D1CDC}" File="ui/common/common_btn_anniu3_sel.png" UseOriginSize="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{FC19047A-85EE-49da-A4C9-C0CF2A98CBCB}" FontSize="22" LabelStyleKey="SMALL_ORANGE_BTN" TextKey="BACK" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{9C2E5040-9680-43c4-905A-5C3BF94E9729}" />
+                        </WZUIButton>
+                        <WZUIButton Type="WZUIButton" RelativeSize="0.25,0.7" RelativePosition="0.75,0.5" GUID="{742D78CC-6806-4a03-9D7B-7553641CE6A7}" LuaDoneFunctionName="onConfirmModifyMM" LuaActionName="Normal">
+                            <NormalElement Type="WZUIContainer" GUID="{25D1629A-1AA7-4946-B46D-D915D4BBAA03}">
+                                <WZUIImage Type="WZUIImage" GUID="{60406543-6A98-4a1a-AFE3-A943FEC020FA}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{F450385E-6D29-4f10-AF32-288C8A7D4838}" FontSize="22" LabelStyleKey="SMALL_GREEN_BTN" TextKey="CONFIRM" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{195D042B-6957-43f4-857C-D274B0BB9154}">
+                                <WZUIImage Type="WZUIImage" GUID="{7B7B6B2E-C585-4297-B940-CA97B2D304E9}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{2487E6A0-55BB-4e9e-A96F-B1AD67941511}" FontSize="22" LabelStyleKey="SMALL_GREEN_BTN" TextKey="CONFIRM" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{FF9BE20C-E2E2-4fbc-8427-2A93FE03539C}" />
+                        </WZUIButton>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{D329D878-3333-47a3-BF8B-C9CA1C920A44}" Name="conLogin_WndLoginSelect" Visible="True" RelativePosition="0.5,0.5" AbsPosition="">
+                <WZUIContainer Type="WZUIContainer" GUID="{D1CF5128-37FA-42b9-AA6E-AFA7C65A0020}" Name="conServerDesc_WndLoginSelect" Visible="False">
+                    <WZUIContainer Type="WZUIContainer" GUID="{53335659-DC66-44cc-8C46-AA8D5682876F}" RelativeSize="1,1" RelativePosition="0.5,0.5" Name="conSelArea_WndLoginSelect" NameCreate="True" Visible="True" ShowAll="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{9172CDF8-3D0C-411d-ABD4-11D6455FF056}" RelativeSize="0.8,0.3" RelativePosition="0.5,0.345081" AbsContentSize="480,78" UseAbsSize="True" AbsPosition="480,220.852">
+                            <WZUI9Image Type="WZUI9Image" GUID="{FF4753A7-930E-414c-ABF2-D4B577C8F1BE}" File="ui/common/common_scale9_di44.png" Visible="True" CapInsets="" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{759468A9-9021-41ee-BC7F-78079A2453C5}" Color="99,255,95" FontSize="24" TextKey="CURSERVER" RelativePosition="0.0808511,0.5" AnchorPoint="0,0.5" Alignment="Left" Visible="False" AbsPosition="45.6,42" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{6FFAF589-9F68-4fb6-837E-D4CA90E164D1}" Color="99,255,95" FontSize="26" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.120022,0.5" Text="" Name="txtServerId_WndLoginSelect" AbsPosition="67.6924,42" Visible="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8F6E4C3D-BCF1-4de8-B36C-D26B20DF2E6E}" Color="99,255,95" FontSize="26" Alignment="Center" AnchorPoint="0.5,0.5" RelativePosition="0.286481,0.5" Text="" Name="txtServerName_WndLoginSelect" AbsPosition="137.511,42" />
+                            <Button Type="WZUIButton" RelativeSize="0.25,0.6" RelativePosition="0.871277,0.488095" LuaDoneFunctionName="OnBtnChangeArea" GUID="{11CF8E5A-2EB3-4eb7-B9BE-E2E11CE60334}" AbsContentSize="100,60" UseAbsSize="True" AnchorPoint="1,0.5" AbsPosition="491.4,41" LuaActionName="Normal">
+                                <NormalElement Type="WZUIContainer" GUID="{1B71C5A8-80A6-40a2-88A2-90812853986B}">
+                                    <WZUIImage Type="WZUIImage" GUID="{03ABB448-D0A7-40bc-AAAC-D8DFF17EAC6D}" File="ui/login/login_icon_huanqu.png" UseOriginSize="True" />
+                                </NormalElement>
+                                <SelectElement Type="WZUIContainer" GUID="{91F42806-C968-477b-9C56-73650775CE96}">
+                                    <WZUIImage Type="WZUIImage" GUID="{90A68ED2-77ED-457c-8DB4-C55D54CBFADC}" File="ui/login/login_icon_huanqu.png" UseOriginSize="True" />
+                                </SelectElement>
+                                <DisableElement Type="WZUIContainer" GUID="{19B8486D-8A8A-40c7-8F35-84012C08067C}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer AbsContentSize="250,90" AnchorPoint="0.5,0.5" GUID="{EF0BA139-6F98-4eb1-AD72-6750CC073DBB}" RelativePosition="0.5,0.147888" Scale="1" Type="WZUIContainer" UseAbsSize="True" Visible="True" AbsPosition="480,94.6484">
+                            <Button AbsContentSize="300,100" GUID="{8B989C74-38F6-46a8-98C8-BAB9437EBB81}" LuaDoneFunctionName="OnBtnEnterGame" Name="btnStartGame_CreateActor" Type="WZUIButton" UseAbsSize="True" Visible="True">
+                                <NormalElement AbsContentSize="0" GUID="{31FCBA67-6A02-4a0b-9EB6-9A4B8F72F52E}" Type="WZUIContainer" UseAbsSize="False">
+                                    <WZUIImage Type="WZUIImage" GUID="{6707F5B7-4CC8-4226-8A2B-3D0758D58D24}" File="ui/common/common_btn_anniu8.png" UseOriginSize="True" />
+                                </NormalElement>
+                                <SelectElement AbsContentSize="0" GUID="{1A8019E4-1555-49c2-9C05-995BAB51CB86}" Type="WZUIContainer" UseAbsSize="False">
+                                    <WZUIImage Type="WZUIImage" GUID="{5BD60C3A-4E8F-47e2-8145-CB61C4961E83}" UseOriginSize="True" File="ui/common/common_btn_anniu8_sel.png" />
+                                </SelectElement>
+                                <DisableElement AbsContentSize="0" GUID="{5DBAD203-6DCA-4d76-BF86-AED7A2B1F742}" Type="WZUIContainer" UseAbsSize="False" />
+                            </Button>
+                            <WZUIContainer Type="WZUIContainer" GUID="{DFBD09E3-3A98-4dc1-995B-717DEC7FDCE3}" TouchEnable="False" Visible="True" RelativePosition="0.5,0.522222" AbsPosition="125,47">
+                                <WZArmature Type="WZArmature" GUID="{DE9CEF01-4D49-45e5-B94F-8F45F8EAAA19}" ArmatureFile="ui/ui_create_button_01.xml" ArmatureName="ui_create_button_01" UseOriginSize="True" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Name="" TouchEnable="False">
+                                    <Action Type="WZUIArmatureAnimationById" GUID="{ED6802FA-9AFB-4286-B5BA-8560A0311794}" AnimationId="0" />
+                                </WZArmature>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIButton Type="WZUIButton" AbsContentSize="90,60" Visible="True" UseAbsSize="True" AbsPosition="1,639" RelativePosition="0.00104167,0.998438" GUID="{1A120811-AEF5-4473-BF9E-2B280D8AA72B}" AnchorPoint="0,1" LuaDoneFunctionName="OnReturnLoginSel" ShowAll="True" LuaActionName="Normal" Name="btnBack_WndLoginSelect">
+                        <NormalElement Type="WZUIContainer" GUID="{75CA0F07-22CB-483d-9FD8-CFCC86621B01}">
+                            <WZUIImage Type="WZUIImage" GUID="{F3BD69F4-CDE1-462e-B44B-42D245057D7F}" File="ui/common/common_icon_fanhui.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{4C4B8D65-0F37-4b7e-89AE-C493A645D580}">
+                            <WZUIImage Type="WZUIImage" GUID="{C54023A6-93F2-4f0b-BE01-64AB7FC67FC6}" File="ui/common/common_icon_fanhui_sel.png" UseOriginSize="True" Scale="1" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{57E86DF0-D49F-4d82-99E7-D2DE7D2B4E6A}" />
+                    </WZUIButton>
+                    <WZUIContainer Type="WZUIContainer" GUID="{1ef1fe84-abeb-4acc-b5c8-b20cdae9e971}" ShowAll="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" AbsContentSize="960,30" UseAbsSize="True" RelativeSize="1,0.1">
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{11afc681-9f06-4d72-96cb-1f39e1ee2e3d}" Name="ftbWarn1_WndLoginSelect" AnchorPoint="0.5,0.5" RelativePosition="0.5,1.25" MaxWidth="960" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{fcdb2b8e-e5fb-4bd0-8607-582ed7004cae}" Name="ftbWarn2_WndLoginSelect" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.75" MaxWidth="960" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{c229c19c-2ddc-4a95-85aa-8ac2a0da8348}" Name="ftbWarn3_WndLoginSelect" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.25" MaxWidth="960" />
+                    </WZUIContainer>
+                    <Button Type="WZUIButton" GUID="{1a7e5e95-8805-42c5-a214-0a9c910ff76b}" RelativePosition="0.809793,0.923729" Name="btnChangeAccount_WndLoginSelect" Visible="False" LuaDoneFunctionName="onChangeaccount">
+                        <NormalElement Type="WZUIContainer" GUID="{05fbed84-e842-4c6d-b2c1-5cb3ce714596}">
+                            <WZUIImage Type="WZUIImage" GUID="{18a8099f-042f-43c8-a02a-fffc65b3a531}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{06734901-fd74-4a0e-9eca-8b92c5334c05}">
+                            <WZUIImage Type="WZUIImage" GUID="{c50e7350-675a-4ca0-b64b-d49655bd1511}" File="ui/common/common_btn_anniu3_sel.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{6d6c6a5c-bf27-4dfb-b84b-abb477f83900}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6f0ac9a5-1e65-4fa9-bb80-0797cba6e2a7}" TextKey="" Text="切换账号" LabelStyleKey="C1_F24_S4_C3" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="" GUID="{79947268-8451-4d5d-881A-55A3093F3AFA}" NoBorder="False" ShowAll="True" Type="WZUIContainer" UseAbsSize="False" Visible="True" RelativePosition="0.5,0.5" AbsPosition="473,320">
+                    <WZUIContainer Type="WZUIContainer" GUID="{1A5D752D-2AE4-4940-9248-EE243C4A602D}" Name="conMyLogin_WndLoginSelect" Visible="True" ShowAll="False" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5" AbsPosition="478,319">
+                        <WZUIContainer Type="WZUIContainer" GUID="{964B4A0B-5816-4f7c-B1F6-C97036EEF419}" Name="conMyLogin0_WndLoginSelect" Visible="False">
+                            <WZUIContainer Type="WZUIContainer" GUID="{F6D165C0-12CB-48c6-A7AD-04F59E2E7BFC}" RelativeSize="1,0.68" AnchorPoint="0.5,0" RelativePosition="0.465625,0.304" AbsContentSize="738,160" UseAbsSize="True" AbsPosition="447,194.56">
+                                <WZUIContainer Type="WZUIContainer" GUID="{7EFEFB75-7E47-40d9-8ADD-0088A4FE1142}">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{5104B1AF-C1D7-41e0-8A34-8BFE4A395D55}" File="ui/common/common_scale9_heidi5.png" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{7CFA1805-24C2-4e49-BD75-740BAA03A505}" AbsContentSize="500,46" UseAbsSize="True" RelativePosition="0.575001,0.69">
+                                    <WZUIContainer Type="WZUIContainer" GUID="{F21FE4C4-B77F-425c-AF7E-83EEC54878FF}" RelativeSize="0.7,0.3" AnchorPoint="0,0.5" RelativePosition="0,0.5" AbsContentSize="350,46" UseAbsSize="True">
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{645B5AED-050D-451a-A0C2-FB33272D956C}" TextKey="WND_EXISTACCOUNT_ACCOUNT" FontSize="26" Color="255,255,255" RelativePosition="0.188571,0.5" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" Alignment="Right" AnchorPoint="1,0.5" Name="txt1_WndLoginSelect" />
+                                        <WZUIContainer Type="WZUIContainer" GUID="{A6A6D7B9-EE50-4b85-973A-2D5A40B43256}" AbsContentSize="276,46" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{D2867377-0DFE-4930-BD75-125374D3AFA9}" File="ui/common/common_scale9_di58.png" />
+                                            <WZUIContainer Type="WZUIContainer" GUID="{C6D9BCCA-5B9B-4d77-99B3-6360FD1335A3}" RelativeSize="0.94,1">
+                                                <WZUIEditBox Type="WZUIEditBox" GUID="{68B792CB-0570-4024-8E99-0A7738B5990A}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editAccount0_WndLoginSelect" FontSize="22" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontColor="255,255,255" LuaEditBoxEditingDidBegin="onEditAccountBegin" LuaEditBoxEditingDidEnd="onEditAccountEnd" PlaceHolder="" PlaceholderFontColor="158,139,121" />
+                                            </WZUIContainer>
+                                        </WZUIContainer>
+                                    </WZUIContainer>
+                                    <WZUIContainer Type="WZUIContainer" GUID="{4678BEE1-1273-48ad-92E9-AC1042842CD2}" AbsContentSize="135,50" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                        <WZUICheckBox Type="WZUICheckBox" GUID="{BD7093B4-4755-4c73-A51B-3CF490FB85AA}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.,0.5" SelectedIndex="0" Name="boxSave0_WndLoginSelect" LuaCheckedFunctionName="OnCheckSaveState" LuaSelectedFunctionName="" AnchorPoint="0,0.5">
+                                            <CheckElement Type="WZUIContainer" GUID="{C42FFD4F-4883-4308-B480-6E51E297B4A7}" AbsContentSize="" UseAbsSize="False">
+                                                <WZUI9Image Type="WZUI9Image" GUID="{40466B97-89CF-4a56-B82B-FDD8635E37B9}" File="ui/common/transparent_bg.png" />
+                                                <WZUIImage Type="WZUIImage" GUID="{68E45F47-0C08-4566-9D23-F9C3C5C88656}" File="ui/common/common_scale9_di58.png" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" Scale="1" />
+                                            </CheckElement>
+                                            <CheckElement Type="WZUIContainer" GUID="{21CFDC26-27B2-4c21-A1B4-A243FC975BE0}" AbsContentSize="" UseAbsSize="False">
+                                                <WZUI9Image Type="WZUI9Image" GUID="{67F73C0C-1AF8-4f34-B41A-326A1BD12514}" File="ui/common/transparent_bg.png" />
+                                                <WZUIImage Type="WZUIImage" GUID="{DA090B44-C17C-4994-BA9F-5C06FA063368}" File="ui/common/common_scale9_di58.png" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" Scale="1" />
+                                                <WZUIImage Type="WZUIImage" GUID="{DF9CA0C6-6B71-4dae-B6C5-1678F7CD7CA4}" File="ui/common/common_icon_gou.png" UseOriginSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" Scale="0.8" />
+                                            </CheckElement>
+                                        </WZUICheckBox>
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{98184377-699E-47fb-BC83-29738CE19971}" TextKey="LOGIN_SAVE_ACCOUNT" FontSize="22" RelativePosition="0,0.5" Color="255,255,255" Alignment="Left" AnchorPoint="0,0.5" StrokeColor="128,54,13" StrokeSize="4" EnableStroke="True" Visible="True" Name="txtSaveAccount0_WndLoginSelect" />
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{8528E22E-3D7C-4f74-B779-20C87F8CE2B4}" RelativeSize="1,0.3" RelativePosition="0.575001,0.31" AbsContentSize="500,46" UseAbsSize="True">
+                                    <WZUIContainer Type="WZUIContainer" GUID="{68B80205-C44B-4876-BA4A-FC1D7F356A35}" RelativeSize="1,1" AnchorPoint="0,0.5" RelativePosition="0,0.5" AbsContentSize="350,46" UseAbsSize="True">
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{49C652FB-5F73-4a59-A1CF-D082B665617C}" TextKey="ROOM_PASSWORD" FontSize="26" Color="255,255,255" RelativePosition="0.188571,0.5" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" Alignment="Right" AnchorPoint="1,0.5" Name="txt2_WndLoginSelect" />
+                                        <WZUIContainer Type="WZUIContainer" GUID="{16B132EC-FB27-4926-B2A1-8BFED26C143D}" AbsContentSize="276,46" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{DB071A66-42F5-4016-B59D-6AEE54104B4B}" File="ui/common/common_scale9_di58.png" />
+                                            <WZUIContainer Type="WZUIContainer" GUID="{E7A8B693-D67B-42db-B508-AB4E94C6B54F}" RelativeSize="0.94,1">
+                                                <WZUIEditBox Type="WZUIEditBox" GUID="{ED17ABEB-253C-477a-9D28-36239B82E83D}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editPassword0_WndLoginSelect" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="22" FontColor="255,255,255" InputFlag="FlagPassword" PlaceholderFontColor="158,139,121" Visible="True" RelativePosition="0.5,0.478261" AbsPosition="129.72,22" />
+                                            </WZUIContainer>
+                                        </WZUIContainer>
+                                    </WZUIContainer>
+                                    <WZUIContainer Type="WZUIContainer" GUID="{BF76AF4B-92C7-4c6b-830B-072029C7F83E}" AbsContentSize="135,50" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" Name="">
+                                        <Button Type="WZUIButton" Name="" LuaDoneFunctionName="onForgetPassword" GUID="{C5402EB6-FE98-4191-BEF1-7F59A4ADD679}">
+                                            <NormalElement Type="WZUIContainer" GUID="{3EF9D82A-9967-4ff9-88F0-1775E3F5EBB6}" />
+                                            <SelectElement Type="WZUIContainer" GUID="{313572F2-F6C4-4a35-B1BB-BF72B5E7045F}" />
+                                            <DisableElement Type="WZUIContainer" GUID="{AFE8E635-F3BA-41fa-BFAC-842E583F10A9}" />
+                                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{772D036C-D756-41ab-B4E3-9C2355E73F0D}" TextKey="PASSWORD_FORGET" FontSize="24" RelativePosition="0,0.5" Color="255,255,255" Alignment="Left" AnchorPoint="0,0.5" StrokeColor="128,54,13" StrokeSize="4" EnableStroke="True" Visible="False" />
+                                            <WZUIImage Type="WZUIImage" GUID="{B0B1EF95-7C99-4dde-A3E6-E04BFB7BEA81}" File="ui/common/common_icon_wjmm.png" UseOriginSize="True" RelativePosition="0.351852,0.5" />
+                                        </Button>
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{B17BFD54-2307-4b55-9090-BAC71EC803CA}" RelativeSize="1,1" RelativePosition="0.5,0.216" Visible="True" AnchorPoint="0.5,0.5" AbsContentSize="480,80" UseAbsSize="True">
+                                <WZUIButton Type="WZUIButton" RelativeSize="0.25,0.7" RelativePosition="0.15,0.5" GUID="{811C8555-A487-4d5b-BF3E-774EEEFFC8DA}" LuaDoneFunctionName="OnMyYK" LuaActionName="Normal">
+                                    <NormalElement Type="WZUIContainer" GUID="{A74DB6E0-3820-4481-974C-CA6EB52EAF66}">
+                                        <WZUIImage Type="WZUIImage" GUID="{675310A8-F53A-4c1f-8566-42FA1E607167}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement Type="WZUIContainer" GUID="{5C0C4729-FBEA-4639-8E21-6195B717CC6A}">
+                                        <WZUIImage Type="WZUIImage" GUID="{470F6F7C-CD4D-4800-BB33-9AB9B81329C1}" File="ui/common/common_btn_anniu3_sel.png" UseOriginSize="True" />
+                                    </SelectElement>
+                                    <DisableElement Type="WZUIContainer" GUID="{243F82EF-EFD0-4c20-AC21-0FB39BF0DCF9}" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{1D92A391-221B-4cb0-99EF-37F6216D2C90}" FontSize="22" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="LOGIN_YOUKE" Name="txtGuest_WndLoginSelect" />
+                                </WZUIButton>
+                                <WZUIButton Type="WZUIButton" RelativeSize="0.25,0.7" RelativePosition="0.5,0.5" GUID="{A74B3291-D504-4b55-ACD1-04EFC2BA15BC}" LuaDoneFunctionName="OnMyRegist" LuaActionName="Normal">
+                                    <NormalElement Type="WZUIContainer" GUID="{804ED894-92A0-454f-9533-5959956037E3}">
+                                        <WZUIImage Type="WZUIImage" GUID="{856E6FF5-493B-4d40-AF9D-EABAEA95420E}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement Type="WZUIContainer" GUID="{6E4C9EB3-5488-4532-BDEB-DC349F4C3C71}">
+                                        <WZUIImage Type="WZUIImage" GUID="{DEFA6B9C-FFDF-4e5e-AF38-713CFCADBF17}" File="ui/common/common_btn_anniu3_sel.png" UseOriginSize="True" />
+                                    </SelectElement>
+                                    <DisableElement Type="WZUIContainer" GUID="{1BAB971A-4CC5-491f-8521-C7E4FD29A901}" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4E90ECDA-026F-4340-A350-237D4D92E130}" FontSize="22" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="LOGIN_REGIST" Name="txtRegister_WndLoginSelect" />
+                                </WZUIButton>
+                                <WZUIButton Type="WZUIButton" RelativeSize="0.25,0.7" RelativePosition="0.85,0.5" GUID="{313751C4-FCF6-42da-8CE1-209AD107772C}" LuaDoneFunctionName="OnMyLogin" LuaActionName="Normal">
+                                    <NormalElement Type="WZUIContainer" GUID="{9A0E4784-E12B-444e-BF31-B0F5D97A923E}">
+                                        <WZUIImage Type="WZUIImage" GUID="{7ABC2FC2-F57C-4b88-8524-0CD255F1FF0C}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement Type="WZUIContainer" GUID="{B7C9178B-857F-4f98-8A97-7426E5550897}">
+                                        <WZUIImage Type="WZUIImage" GUID="{CA940B3F-46EB-4615-9495-8F1B84A9BC3D}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                                    </SelectElement>
+                                    <DisableElement Type="WZUIContainer" GUID="{70A11C6A-A8AD-4003-A4DE-4F1D57C5B286}" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8A5D696F-916B-4f33-8526-30097315F53E}" FontSize="22" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="REWARD_BTN_LOGIN" Name="txtLogin_WndLoginSelect" Dimensions="0,0" Scale="1" />
+                                </WZUIButton>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{7389BD8E-987D-4e5b-959A-673B6F99F437}" Name="conMyLogin1_WndLoginSelect" Visible="False">
+                            <WZUIContainer Type="WZUIContainer" GUID="{FAB8F243-A170-4e9e-A246-33AADE28BA3E}" AbsContentSize="500,460" UseAbsSize="True" RelativePosition="0.5,0.457812" AbsPosition="480,293" Visible="True" Name="conMyLogin11_WndLoginSelect">
+                                <WZUIContainer Type="WZUIContainer" GUID="{5BB44B4D-DC44-4fff-9B88-724696FB7698}" Visible="True">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{06E89273-0096-410c-96C4-E944DA26AEF6}" File="ui/login/common_btn_ditu.png" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{0C1256D1-BED0-4e04-AEE8-76DC53876C07}" AbsContentSize="386,46" UseAbsSize="True" RelativePosition="0.506738,0.882642" AbsPosition="202.695,406.015">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{262B4979-506E-4424-A885-3BD3AFC9CF9E}" File="ui/login/common_btn_dlk.png" Visible="True" />
+                                    <WZUIImage Type="WZUIImage" GUID="{D1742955-C6E3-4fe9-AD41-BF84F74E98E6}" File="ui/login/common_btn_accoumt.png" Visible="True" UseOriginSize="True" RelativePosition="0.076923,0.5" AbsPosition="22,23" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{25A8E47E-F021-4157-AD1E-999E5149DC3D}" AbsContentSize="340,46" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" AbsPosition="394,23">
+                                        <WZUI9Image Type="WZUI9Image" GUID="{29741DC2-20D4-40e5-8011-54DDA8DBE91D}" File="ui/common/transparent_bg.png" />
+                                        <WZUIContainer Type="WZUIContainer" GUID="{07905506-DAC2-4612-B03A-3962031F8DA0}" RelativeSize="0.94,1">
+                                            <WZUIEditBox Type="WZUIEditBox" GUID="{54238D8C-829A-4ebe-9396-FC28BBEE48F7}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editAccount1_WndLoginSelect" FontSize="22" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontColor="201,198,198" LuaEditBoxEditingDidBegin="onEditAccountBegin" LuaEditBoxEditingDidEnd="onEditAccountEnd" PlaceHolder="" PlaceholderFontColor="158,139,121" Color="0,0,0" />
+                                        </WZUIContainer>
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{27985B64-F827-4dd8-BF37-09CFD0EC4A52}" RelativeSize="1,1" RelativePosition="0.508016,0.741162" AbsContentSize="386,46" UseAbsSize="True" AbsPosition="203.206,340.935">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{7D9788C9-B494-4015-A18A-8B0E1D46D25F}" File="ui/login/common_btn_dlk.png" />
+                                    <WZUIImage Type="WZUIImage" GUID="{8D206A48-798E-4160-B07E-5FB2A2CB93D3}" File="ui/login/common_btn_password.png" Visible="True" UseOriginSize="True" RelativePosition="0.076923,0.5" AbsPosition="22,23" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{E22F4CDA-E5F6-44a5-8622-9ADE108C876D}" AbsContentSize="240,46" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                        <WZUI9Image Type="WZUI9Image" GUID="{A4001836-430C-492e-999E-B13B19F3D9ED}" File="ui/common/transparent_bg.png" />
+                                        <WZUIContainer Type="WZUIContainer" GUID="{A2B3C6D3-F9FE-4e83-BF5F-656BFC7EA3B8}" RelativeSize="0.94,1" AbsContentSize="340,46" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5">
+                                            <WZUIEditBox Type="WZUIEditBox" GUID="{2A24B7A4-2C5D-47cf-BEDA-65ACE11798D0}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editPassword1_WndLoginSelect" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="22" FontColor="201,198,198" InputFlag="FlagPassword" PlaceholderFontColor="158,139,121" Visible="True" Color="0,0,0" />
+                                        </WZUIContainer>
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{BC0A7400-AAF2-4ed6-9B2F-CE9208C97DFE}" RelativeSize="0.84,0.15" RelativePosition="0.486591,0.56587" AbsPosition="194.636,260.3">
+                                    <WZUICheckBox Type="WZUICheckBox" GUID="{E4B3225D-FAA8-449a-B71A-8B61984C9823}" AbsContentSize="50,50" UseAbsSize="True" RelativePosition="0.0454157,0.774595" SelectedIndex="0" Name="boxSave1_WndLoginSelect" LuaCheckedFunctionName="OnCheckSaveState" LuaSelectedFunctionName="" AnchorPoint="0,0.5" AbsPosition="20.1101,71.8824" Visible="True">
+                                        <CheckElement Type="WZUIContainer" GUID="{23717455-0CF8-4c3c-BE96-995EE474D0E5}" AbsContentSize="" UseAbsSize="False">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{C2016F44-F23F-4fd4-9306-44B5124E1948}" File="ui/common/transparent_bg.png" UseOriginSize="True" />
+                                            <WZUIImage Type="WZUIImage" GUID="{EF3EAB75-33A3-463c-8475-1031D8F6B0FB}" File="ui/common/common_scale9_di58.png" UseOriginSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Scale="1" />
+                                        </CheckElement>
+                                        <CheckElement Type="WZUIContainer" GUID="{0DD5294A-BE6C-4356-897C-099E4F8E061E}" AbsContentSize="" UseAbsSize="False">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{AB1DB88B-D74D-4288-B3A0-5AC7A9F1E833}" File="ui/common/transparent_bg.png" UseOriginSize="True" />
+                                            <WZUIImage Type="WZUIImage" GUID="{7ADDE064-E8DD-49ee-987F-9FB0658927F0}" File="ui/common/common_scale9_di58.png" UseOriginSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Scale="1" />
+                                            <WZUIImage Type="WZUIImage" GUID="{3E69F4B8-70C3-44b4-9B63-59538BE6029B}" File="ui/common/common_icon_gou.png" UseOriginSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Scale="0.8" />
+                                        </CheckElement>
+                                    </WZUICheckBox>
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{EE8055E8-2E02-44ec-A48B-186212300BAF}" TextKey="NEW_LOGIN3" FontSize="22" RelativePosition="0.210973,0.704741" Color="133,134,135" Alignment="Left" AnchorPoint="0,0.5" StrokeColor="128,54,13" StrokeSize="4" EnableStroke="False" Visible="True" Name="txtSaveAccount1_WndLoginSelect" AbsPosition="67.5114,48.6271" BoldFont="True" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{D4138EA3-2F75-4341-8B10-811C8801B526}" AbsContentSize="200,20" UseAbsSize="True" RelativePosition="0.548274,0.245619" AnchorPoint="1,0.5" Name="" AbsPosition="266.876,16.9477" Visible="True">
+                                        <Button Type="WZUIButton" Name="" LuaDoneFunctionName="onForgetPassword" GUID="{4C7E1095-9148-47eb-B1E5-E99F67783C62}">
+                                            <NormalElement Type="WZUIContainer" GUID="{12112978-DEEF-49b2-B02D-E5EEFA269ABE}" />
+                                            <SelectElement Type="WZUIContainer" GUID="{B4FFAC1C-50CB-4720-AFD4-34E81893B0B7}" />
+                                            <DisableElement Type="WZUIContainer" GUID="{A5C015D4-AE90-4768-A0B4-E61744A04BA8}" />
+                                            <WZUIImage Type="WZUIImage" GUID="{44EA0B36-1AA0-4a29-B12D-BB516F3EB51E}" File="ui/login/common_btn_lianjie.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                                        </Button>
+                                    </WZUIContainer>
+                                    <WZUIContainer Type="WZUIContainer" GUID="{ab49f0e8-af15-421b-b9f7-82d5d54d8ea8}" AbsContentSize="180,20" UseAbsSize="True" RelativePosition="0.993512,0.187648" AnchorPoint="1,0.5" Name="" AbsPosition="266.876,16.9477" Visible="True">
+                                        <Button Type="WZUIButton" Name="" LuaDoneFunctionName="onSingleInfo" GUID="{792c14fc-1c76-4231-896f-3fd3a01a62fe}">
+                                            <NormalElement Type="WZUIContainer" GUID="{35049ec1-fc12-4995-8921-87cc6f7c9f3f}" />
+                                            <SelectElement Type="WZUIContainer" GUID="{daa1cb3f-fb08-4da8-8e53-0ff483ee5bf0}" />
+                                            <DisableElement Type="WZUIContainer" GUID="{f6cf216d-bc8e-4185-9a7e-81d28c33e810}" />
+                                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{989dd66e-767d-4cb5-a765-518fe54e7e03}" TextKey="SINGLE_INFO" FontSize="18" RelativePosition="0.5,0.5" Color="133,134,135" Alignment="Right" AnchorPoint="0.5,0.5" StrokeColor="128,54,13" StrokeSize="4" EnableStroke="False" Visible="True" Name="" AbsPosition="67.5114,48.6271" BoldFont="True" />
+                                        </Button>
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{FA9DD60E-2465-4910-819F-7AF5B1ABD8DB}" RelativeSize="1,1" RelativePosition="0.509375,0" Visible="True" AnchorPoint="0.5,0" AbsContentSize="500,210" UseAbsSize="True" AbsPosition="489,214.24">
+                                    <WZUIContainer Type="WZUIContainer" GUID="{0A6FE822-FD22-47d1-8D21-3E48C2D3810C}" AbsContentSize="420,20" UseAbsSize="True" RelativePosition="0.5,0.357143" AbsPosition="200,75.0001">
+                                        <WZUIImage Type="WZUIImage" GUID="{FD31A54F-32DB-4047-9422-2D9848AB098A}" File="ui/login/common_btn_line.png" UseOriginSize="True" RelativePosition="0,0.5" AbsPosition="75,10" AnchorPoint="0,0.5" />
+                                        <WZUIImage Type="WZUIImage" GUID="{EA792473-F168-40a3-890D-91D2662B36D2}" File="ui/login/common_btn_line.png" UseOriginSize="True" RelativePosition="1,0.5" AbsPosition="266,10" AnchorPoint="1,0.5" />
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{079D7B77-4DCA-41c4-B86B-D4AD90C758A8}" TextKey="LOGIN_OR" Color="133,134,135" FontSize="22" />
+                                    </WZUIContainer>
+                                    <WZUIButton Type="WZUIButton" RelativeSize="0.25,1" RelativePosition="0.5,1.00952" GUID="{978ADC61-3E61-482a-9066-8A1EA7D9DC6B}" LuaDoneFunctionName="OnMyLogin" LuaActionName="Normal" AbsPosition="200,212" AbsContentSize="340,56" UseAbsSize="True" AnchorPoint="0.5,1">
+                                        <NormalElement Type="WZUIContainer" GUID="{CD3E5D32-D582-4a1f-9815-DD4BDBFF9C78}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{EAB7C254-9FED-4966-8F57-9203AA6B9973}" File="ui/login/common_btn_login.png" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{A316609F-7516-47f8-9050-02BD768176E0}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{0C56A9DF-80C5-450d-8895-93A9856413BD}" File="ui/login/common_btn_login.png" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{3C453FE1-59D0-4532-A527-C3250520DEDA}" />
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{5BEFF46A-292C-4045-9A7E-65D599113CA6}" FontSize="25" LabelStyleKey="" TextKey="REWARD_BTN_LOGIN" Color="255,255,255" BoldFont="True" />
+                                    </WZUIButton>
+                                    <WZUIContainer Type="WZUIContainer" GUID="{185D62B9-56CD-4021-871F-6A84584E2FBD}" AbsContentSize="340,56" UseAbsSize="True" RelativePosition="0.5,0.566667" AbsPosition="200,119">
+                                        <WZUIContainer Type="WZUIContainer" GUID="{6F354E78-088E-48de-9B58-8618D6F098AE}" RelativePosition="0.5,0.5" AbsPosition="116,25">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{F6ECC27A-2492-47c6-A8E7-22685611180E}" File="ui/login/common_btn_registerguest.png" />
+                                            <WZUIImage Type="WZUIImage" GUID="{DC455936-5E94-4320-86DB-8E34824AB0AC}" File="ui/login/common_btn_line.png" UseOriginSize="True" ScaleX="0.27" Rotation="90" RelativePosition="0.441667,0.5" AbsPosition="106,25" />
+                                        </WZUIContainer>
+                                        <WZUIButton Type="WZUIButton" RelativeSize="0.25,1" RelativePosition="0,0.5" GUID="{1843001E-9D4E-4ad7-8A33-0FE93CD4404E}" LuaDoneFunctionName="OnMyYK" LuaActionName="Normal" AbsPosition="149,2" AbsContentSize="150,50" UseAbsSize="True" AnchorPoint="0,0.5">
+                                            <NormalElement Type="WZUIContainer" GUID="{CFA4799D-29FF-4bb9-A51E-B67C1CB36BD5}" />
+                                            <SelectElement Type="WZUIContainer" GUID="{2DE356CF-99CF-4d63-BEBA-2504F4B2B832}" />
+                                            <DisableElement Type="WZUIContainer" GUID="{5529E5CE-D488-4a6c-BDC1-0D47ABE463D7}" />
+                                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{A7155CA2-AC09-436b-B34C-65123A250DAF}" FontSize="25" LabelStyleKey="" TextKey="LOGIN_YOUKE" EnableStroke="False" BoldFont="True" Color="255,255,255" />
+                                        </WZUIButton>
+                                        <WZUIButton Type="WZUIButton" RelativeSize="0.36,1" RelativePosition="1,0.5" GUID="{94ED1E46-F24C-4c33-88CB-E786F0D516DA}" LuaDoneFunctionName="OnMyRegist" LuaActionName="Normal" AbsContentSize="175,50" UseAbsSize="True" AbsPosition="179,25" AnchorPoint="1,0.5">
+                                            <NormalElement Type="WZUIContainer" GUID="{FA297750-05C7-4f32-B185-8050AC569CE4}" />
+                                            <SelectElement Type="WZUIContainer" GUID="{65B648A1-0DA2-4ba8-90C1-907F4D8CE06F}" />
+                                            <DisableElement Type="WZUIContainer" GUID="{D82DF4B9-3D6D-4e39-A479-8B2376585527}" />
+                                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{A719BFF1-5A22-4ba1-8FF5-3D7AE2E02106}" FontSize="25" LabelStyleKey="" TextKey="LOGIN_REGIST" BoldFont="True" Color="255,255,255" />
+                                        </WZUIButton>
+                                    </WZUIContainer>
+                                    <WZUIButton Type="WZUIButton" RelativeSize="0.45,1" RelativePosition="0.38,0.2" GUID="{DB82027D-461C-47e3-957D-78E52A2F109F}" LuaDoneFunctionName="onFacebook" LuaActionName="Normal" AbsPosition="185.197,-81.6634" Name="btnFacebook_WndLoginSelect" AbsContentSize="80,80" UseAbsSize="True">
+                                        <NormalElement Type="WZUIContainer" GUID="{A4BC6071-CCC6-45d1-8F3A-9B048654A93A}">
+                                            <WZUIImage Type="WZUIImage" GUID="{EBFD0BF3-2E06-4fe8-B17C-B912C09C0EB6}" File="ui/login/common_btn_facebook.png" UseOriginSize="True" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{6CC69934-E838-44c5-9DF6-571BAF5062A0}">
+                                            <WZUIImage Type="WZUIImage" GUID="{7DE16F0D-94A3-4f37-B2FC-EC3D6B473690}" File="ui/login/common_btn_facebook.png" UseOriginSize="True" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{EBC82BF6-D095-4f8f-9A56-CE58083FFB33}" />
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{5E2881BC-9456-4ce3-A7D3-A904D246314A}" FontSize="25" LabelStyleKey="" TextKey="NEW_LOGIN1" EnableStroke="False" Color="255,255,255" BoldFont="True" RelativePosition="0.583333,0.5" AbsPosition="126,33" Visible="False" />
+                                    </WZUIButton>
+                                    <WZUIButton Type="WZUIButton" RelativeSize="0.42,1" RelativePosition="0.62,0.2" GUID="{1FBA6148-175C-40b6-97CF-0024D8222B86}" LuaDoneFunctionName="onGoogle" LuaActionName="Normal" AbsPosition="281.799,-82.0069" Name="btnGoogle_WndLoginSelect" AbsContentSize="80,80" UseAbsSize="True">
+                                        <NormalElement Type="WZUIContainer" GUID="{6352FCED-4142-4999-8132-3639ECE24FA7}">
+                                            <WZUIImage Type="WZUIImage" GUID="{72D7619A-0FD2-4db3-A6AD-9F740291B6E4}" File="ui/login/common_btn_google.png" UseOriginSize="True" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{D13D9F56-616E-488d-9A55-D2CE5F1F8805}">
+                                            <WZUIImage Type="WZUIImage" GUID="{E4C99E7E-04AD-4b2a-A29F-A1DD96738207}" File="ui/login/common_btn_google.png" UseOriginSize="True" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{BE9C1C37-B0DB-43de-A0BD-E32AA87F8D0A}" />
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{CE33284B-E9BC-4956-A47C-A9398CDAF4EE}" FontSize="25" LabelStyleKey="" TextKey="NEW_LOGIN2" EnableStroke="False" Color="255,255,255" BoldFont="True" RelativePosition="0.599206,0.5" AbsPosition="120.8,33" Visible="False" />
+                                    </WZUIButton>
+                                </WZUIContainer>
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{33961c9e-2c39-4199-b65e-59f47d6a1436}" AbsContentSize="380,200" UseAbsSize="True" RelativePosition="0.5,0.457812" AbsPosition="480,293" Visible="False" Name="conMyLogin12_WndLoginSelect">
+                                <WZUIContainer Type="WZUIContainer" GUID="{399e810c-b068-4e68-97f3-324337351cc8}" Visible="True">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{19055435-6645-4785-83b5-ce0f7ffbaa8c}" File="ui/login/common_btn_ditu.png" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{63176cdd-3b95-4957-89ad-a1d82bbf7dfe}" RelativeSize="1,1" RelativePosition="0.509375,0" Visible="True" AnchorPoint="0.5,0" AbsContentSize="500,210" UseAbsSize="False" AbsPosition="489,214.24">
+                                    <WZUIContainer Type="WZUIContainer" GUID="{3f2122bc-cec5-4659-9fa8-c16f65daa3cc}" AbsContentSize="380,20" UseAbsSize="True" RelativePosition="0.5,0.437143" AbsPosition="200,75.0001">
+                                        <WZUIImage Type="WZUIImage" GUID="{5601c314-9d9b-4a0d-a60e-96d6938c6953}" File="ui/login/common_btn_line.png" UseOriginSize="True" RelativePosition="0,0.5" AbsPosition="75,10" AnchorPoint="0,0.5" />
+                                        <WZUIImage Type="WZUIImage" GUID="{d07947f4-dfbe-42e7-8c58-707f97caea8b}" File="ui/login/common_btn_line.png" UseOriginSize="True" RelativePosition="1,0.5" AbsPosition="266,10" AnchorPoint="1,0.5" />
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{cd521838-fadc-4529-acef-0c129913976a}" TextKey="LOGIN_OR" Color="133,134,135" FontSize="22" />
+                                    </WZUIContainer>
+                                    <WZUIButton Type="WZUIButton" RelativeSize="0.25,1" RelativePosition="0.5,0.89452" GUID="{e00d91c1-85ff-4afb-9c13-1df5a891b1c3}" LuaDoneFunctionName="OnMyYK" LuaActionName="Normal" AbsPosition="200,212" AbsContentSize="172,70" UseAbsSize="True" AnchorPoint="0.5,1">
+                                        <NormalElement Type="WZUIContainer" GUID="{9d1c9dc2-22e6-42a3-9e52-a8acb374390b}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{c6bc2834-ab01-4ac4-95db-8d324291fcc9}" File="ui/login/common_btn_login.png" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{c66bd0ce-eb6e-4fd1-8357-874ead555551}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{8fd127c7-64da-40f9-847f-9f71e973496d}" File="ui/login/common_btn_login.png" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{fcd401fd-8292-4ca3-b25b-1da5b20fd194}" />
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{df699147-c5ee-45d6-8ca8-15d98fac2358}" FontSize="25" LabelStyleKey="" TextKey="LOGIN_YOUKE" Color="255,255,255" BoldFont="True" />
+                                    </WZUIButton>
+                                    <WZUIButton Type="WZUIButton" RelativeSize="0.45,1" RelativePosition="0.38,0.2" GUID="{f7254d95-1a96-40ce-81d1-97e322d91e06}" LuaDoneFunctionName="onFacebook" LuaActionName="Normal" AbsPosition="185.197,-81.6634" Name="btnFacebook2_WndLoginSelect" AbsContentSize="80,80" UseAbsSize="True" Visible="False">
+                                        <NormalElement Type="WZUIContainer" GUID="{ca6f1552-9fe3-4313-a449-1307bdd068ca}">
+                                            <WZUIImage Type="WZUIImage" GUID="{9661358d-4750-43c7-ac9b-d7bf648186e9}" File="ui/login/common_btn_facebook.png" UseOriginSize="True" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{0dfd8260-a541-4596-bba4-089b1edc11e5}">
+                                            <WZUIImage Type="WZUIImage" GUID="{a345ca19-91ac-4746-a39b-0a17dafcd4af}" File="ui/login/common_btn_facebook.png" UseOriginSize="True" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{eec687ce-8c8d-4299-8776-e1bc43053307}" />
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{0d74889b-681c-464d-b121-09bf9937b767}" FontSize="25" LabelStyleKey="" TextKey="NEW_LOGIN1" EnableStroke="False" Color="255,255,255" BoldFont="True" RelativePosition="0.583333,0.5" AbsPosition="126,33" Visible="False" />
+                                    </WZUIButton>
+                                    <WZUIButton Type="WZUIButton" RelativeSize="0.42,1" RelativePosition="0.5,0.2" GUID="{5a52e6ad-9e03-41db-a522-01e15245ba9f}" LuaDoneFunctionName="onGoogle" LuaActionName="Normal" AbsPosition="281.799,-82.0069" Name="btnGoogle2_WndLoginSelect" AbsContentSize="80,80" UseAbsSize="True">
+                                        <NormalElement Type="WZUIContainer" GUID="{c0df8399-316a-407a-ad40-93fa0b4c4e9f}">
+                                            <WZUIImage Type="WZUIImage" GUID="{17eabaee-e775-4975-8545-7c607c8adf5f}" File="ui/login/common_btn_google.png" UseOriginSize="True" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{a7ec4ca1-79ab-412f-bc37-13af35b3125b}">
+                                            <WZUIImage Type="WZUIImage" GUID="{a1f4b295-5e26-454a-8ff9-cb4f94cea785}" File="ui/login/common_btn_google.png" UseOriginSize="True" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{a71ff4b0-7fcd-4c83-9794-419ee7bcad12}" />
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{24bc0549-eae6-40e0-a808-966768b8bb3f}" FontSize="25" LabelStyleKey="" TextKey="NEW_LOGIN2" EnableStroke="False" Color="255,255,255" BoldFont="True" RelativePosition="0.599206,0.5" AbsPosition="120.8,33" Visible="False" />
+                                    </WZUIButton>
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{471E94D0-6CBA-47c7-9BE6-026C91ECF13D}" Name="conMyRegist_WndLoginSelect" Visible="True" ShowAll="False" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5" AbsPosition="480,268">
+                        <WZUIContainer Type="WZUIContainer" GUID="{A853C548-A16A-4d1d-A44F-406A713C4CAC}" Name="conMyRegist0_WndLoginSelect" Visible="False" ShowAll="False" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5" AbsPosition="480,268">
+                            <WZUIContainer Type="WZUIContainer" GUID="{01DAE963-85C6-4dc4-8262-3D1D95BDFD5F}" AbsContentSize="700,230" UseAbsSize="True" RelativePosition="0.5,0.304" AbsPosition="480,194.92" AnchorPoint="0.5,0">
+                                <WZUIContainer Type="WZUIContainer" GUID="{23F7A3AE-E6D2-4fd2-8050-42AF18D8E9BF}" Visible="True" RelativeSize="1,1" RelativePosition="0.5,0.5" AbsPosition="369,196.714" AbsContentSize="" UseAbsSize="False">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{34CA420E-7887-45fc-9792-A95BB2D93586}" File="ui/common/common_scale9_heidi5.png" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{D7D01589-9532-477b-951C-947447BC538E}" RelativeSize="0.6,0.6" RelativePosition="0.464917,0.861341" Visible="True" Name="" NameCreate="True" AbsContentSize="430,190" UseAbsSize="True" ShowAll="False" AnchorPoint="0.5,1" AbsPosition="325.442,198.108">
+                                    <WZUIContainer Type="WZUIContainer" GUID="{95A93F9A-CF55-4821-92CC-511163FE9153}" RelativeSize="1,0.33" AnchorPoint="0.5,1" RelativePosition="0.476,0.97" AbsPosition="215,188.165" AbsContentSize="380,46" UseAbsSize="True">
+                                        <WZUIContainer Type="WZUIContainer" GUID="{43D02712-AD15-48a1-9947-1A2DC61BF95C}" RelativeSize="1,0.7" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{437362AA-B076-46dd-A125-584A9CF6E9DD}" TextKey="WND_EXISTACCOUNT_ACCOUNT" FontSize="26" Color="255,255,255" RelativePosition="0.25,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" />
+                                            <WZUIContainer Type="WZUIContainer" GUID="{EE27F04F-057A-4e64-91EC-0CB559BD88AA}" AbsContentSize="276,46" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                                <WZUI9Image Type="WZUI9Image" GUID="{145DDC7D-9C3B-45f2-A84A-E51E6D8ED340}" File="ui/common/common_scale9_di58.png" />
+                                                <WZUIContainer Type="WZUIContainer" GUID="{353E0A9A-01C1-4106-B5EF-B7A613FC656A}" RelativeSize="0.94,1">
+                                                    <WZUIEditBox Type="WZUIEditBox" GUID="{AD54C681-376E-482e-84F0-1F14663F27D1}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editRegistAccount0_WndLoginSelect" FontSize="22" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontColor="255,255,255" MaxLength="16" PlaceholderFontColor="158,139,121" />
+                                                </WZUIContainer>
+                                            </WZUIContainer>
+                                        </WZUIContainer>
+                                        <WZUIContainer Type="WZUIContainer" GUID="{BA05245F-50F3-4097-8DD2-735C19A750CE}" RelativeSize="0.7,0.3" AnchorPoint="1,0" RelativePosition="1,1.34982" Visible="True" AbsPosition="430,62.0917">
+                                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{24E20717-FADF-4822-8293-46883C87355B}" Color="105,65,46" FontSize="18" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0,0.5" TextKey="LOGIN_TIPS_ACCOUNT1" />
+                                        </WZUIContainer>
+                                    </WZUIContainer>
+                                    <WZUIContainer Type="WZUIContainer" GUID="{7E6B5F5E-CA55-46c2-A859-37978DE49B31}" RelativeSize="1,0.33" AnchorPoint="0.5,1" RelativePosition="0.476,0.64" AbsPosition="205,121.6" AbsContentSize="380,46" UseAbsSize="True">
+                                        <WZUIContainer Type="WZUIContainer" GUID="{DE7F3184-3D49-49f4-AAEA-9658FAA26915}" RelativeSize="1,0.7" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{68D16BD1-6CB2-4e02-A86C-5196A29FCF70}" TextKey="ROOM_PASSWORD" FontSize="26" Color="255,255,255" RelativePosition="0.25,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" />
+                                            <WZUIContainer Type="WZUIContainer" GUID="{5E3F9FC0-BC0F-4afa-BA19-3A55DDB6E50E}" AbsContentSize="276,46" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" AbsPosition="378,16.1">
+                                                <WZUI9Image Type="WZUI9Image" GUID="{1C00A6BE-3BE5-4772-8041-495D0AB242D4}" File="ui/common/common_scale9_di58.png" />
+                                                <WZUIContainer Type="WZUIContainer" GUID="{5A4DFF4D-52AD-468e-9994-65D380D943EF}" RelativeSize="0.94,1">
+                                                    <WZUIEditBox Type="WZUIEditBox" GUID="{414B416F-EBB0-48ea-95B1-63B766D79614}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editRegistPass0_WndLoginSelect" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="22" FontColor="255,255,255" InputFlag="FlagPassword" MaxLength="12" PlaceholderFontColor="158,139,121" />
+                                                </WZUIContainer>
+                                            </WZUIContainer>
+                                        </WZUIContainer>
+                                        <WZUIContainer Type="WZUIContainer" GUID="{4FD2F14C-41A7-4226-BD39-5CC704A61FFF}" RelativeSize="0.7,0.3" AnchorPoint="1,0" RelativePosition="1,0.02" Visible="False">
+                                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{07BDB196-DB07-4ef3-8076-2B43239B8F34}" Color="158,139,121" FontSize="18" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0,0.5" TextKey="LOGIN_TIPS_PASSWORD" />
+                                        </WZUIContainer>
+                                    </WZUIContainer>
+                                    <WZUIContainer Type="WZUIContainer" GUID="{4CB5A728-E900-45f7-8E2D-FA7ACB5FBE72}" RelativeSize="1,0.33" AnchorPoint="0.5,1" RelativePosition="0.476,0.3" AbsPosition="221.4,55.38" AbsContentSize="380,46" UseAbsSize="True">
+                                        <WZUIContainer Type="WZUIContainer" GUID="{F559095D-5A6B-484f-864F-65B93F1BD59D}" RelativeSize="1,0.7" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8A255AA8-6A10-48ec-900C-A3B5F17D4631}" TextKey="LOGIN_PASSWORD_SURE" FontSize="26" Color="255,255,255" RelativePosition="0.25,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" />
+                                            <WZUIContainer Type="WZUIContainer" GUID="{4B678FA0-C5FC-4b2d-8E93-84D85E332910}" AbsContentSize="276,46" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                                <WZUI9Image Type="WZUI9Image" GUID="{A0697728-A2B4-4a6f-B11C-E35B1390B685}" File="ui/common/common_scale9_di58.png" />
+                                                <WZUIContainer Type="WZUIContainer" GUID="{5F2FF5D2-73AA-44f7-AD18-0A42F90CE5E3}" RelativeSize="0.94,1">
+                                                    <WZUIEditBox Type="WZUIEditBox" GUID="{94595EA6-4BE8-423e-8103-AA0C8188BA0B}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editRegistPassSure0_WndLoginSelect" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="22" FontColor="255,255,255" InputFlag="FlagPassword" MaxLength="12" PlaceholderFontColor="158,139,121" />
+                                                </WZUIContainer>
+                                            </WZUIContainer>
+                                        </WZUIContainer>
+                                        <WZUIContainer Type="WZUIContainer" GUID="{798D70D9-9DA7-4752-A662-016F4D249072}" RelativeSize="0.7,0.3" AnchorPoint="1,0" RelativePosition="1,0.02" Visible="False">
+                                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{06E8F244-C69F-418d-BE40-4C4F04602366}" Color="158,139,121" FontSize="18" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0,0.5" TextKey="LOGIN_TIPS_PASSWORD1" />
+                                        </WZUIContainer>
+                                    </WZUIContainer>
+                                    <WZUIContainer Type="WZUIContainer" GUID="{2289B1C3-9893-4f93-89AE-8F83B7891FCF}" RelativeSize="1,0.25" AnchorPoint="0.5,0" RelativePosition="0.5,0" Visible="False" AbsContentSize="430,46" UseAbsSize="True">
+                                        <WZUIContainer Type="WZUIContainer" GUID="{B013C488-BDDD-42d8-A86D-B722E4685A19}" RelativePosition="0.5,1" AnchorPoint="0.5,1" RelativeSize="1,0.7">
+                                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2212DC25-EF42-4b59-A78E-3CDBE06A3A7E}" TextKey="LOGIN_MAIL" FontSize="26" Color="255,255,255" RelativePosition="0.25,0.5" Alignment="Right" AnchorPoint="1,0.5" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" />
+                                            <WZUIContainer Type="WZUIContainer" GUID="{640CF2D2-8D06-4f35-BD47-CE8C3283781D}" AbsContentSize="310,50" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                                <WZUI9Image Type="WZUI9Image" GUID="{883ED2BB-1721-47ea-815E-18E9A1F2D574}" File="ui/common/common_scale9_di45.png" />
+                                                <WZUIContainer Type="WZUIContainer" GUID="{4AB6E4D5-93D7-46bf-9615-9F64EFD26427}" RelativeSize="0.94,1">
+                                                    <WZUIEditBox Type="WZUIEditBox" GUID="{579E89B0-4930-43c0-8A73-82CB3DC7AA4C}" BgPicture="ui/common/transparent_bg.png" Text="1" Name="editRegistMail0_WndLoginSelect" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="24" FontColor="255,255,255" MaxLength="22" />
+                                                </WZUIContainer>
+                                            </WZUIContainer>
+                                        </WZUIContainer>
+                                        <WZUIContainer Type="WZUIContainer" GUID="{4F09E670-C0AC-47a3-AFF6-3E430F9FE85A}" RelativeSize="1,0.3" AnchorPoint="0.5,0" RelativePosition="0.5,0" />
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{E328D999-4F68-418d-B8CC-02BE43137916}" RelativeSize="0.7,0.2" RelativePosition="0.5,0.216" AnchorPoint="0.5,0.5" AbsContentSize="500,80" UseAbsSize="True" AbsPosition="480,138.4">
+                                <WZUIButton Type="WZUIButton" RelativeSize="0.25,0.7" RelativePosition="0.259974,0.5" GUID="{D08F2EAF-6DEC-480a-9B9F-C631A1ECF8FA}" LuaDoneFunctionName="OnMyRegistBack" LuaActionName="Normal" AbsPosition="134.303,27.9">
+                                    <NormalElement Type="WZUIContainer" GUID="{F6B9E578-7A10-449e-B531-51C9F054E18C}">
+                                        <WZUIImage Type="WZUIImage" GUID="{BCCAFAB0-C6AB-4dd1-A804-ACB2E59A0E30}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement Type="WZUIContainer" GUID="{395054D4-FCF3-464c-A20E-4C1C6ACD01A1}">
+                                        <WZUIImage Type="WZUIImage" GUID="{BB579219-A5A8-4b6f-A482-5E45D480ED6C}" File="ui/common/common_btn_anniu3_sel.png" UseOriginSize="True" />
+                                    </SelectElement>
+                                    <DisableElement Type="WZUIContainer" GUID="{87C05923-3561-4cb0-8334-0960AD10B9FC}" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{87B831DB-3DCB-41b6-9D27-CEC3A6DDA9DC}" FontSize="22" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="BACK" />
+                                </WZUIButton>
+                                <WZUIButton Type="WZUIButton" RelativeSize="0.25,0.7" RelativePosition="0.742404,0.5" GUID="{2BA56DA5-4E27-4f83-8CD0-F2647D3F7A37}" LuaDoneFunctionName="OnMyRegistRegist" LuaActionName="Normal" AbsPosition="383.526,27.9">
+                                    <NormalElement Type="WZUIContainer" GUID="{035DF5AA-A91A-42fd-ACF6-E27D499CA33C}">
+                                        <WZUIImage Type="WZUIImage" GUID="{6EF5B7A1-2DD4-4de6-B927-970C175D1962}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                                    </NormalElement>
+                                    <SelectElement Type="WZUIContainer" GUID="{21A29F03-6601-4966-8FE8-126DF3857D2E}">
+                                        <WZUIImage Type="WZUIImage" GUID="{7F8FCAFE-83E1-4004-9B3F-C5830D8B8915}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                                    </SelectElement>
+                                    <DisableElement Type="WZUIContainer" GUID="{8ACA0E65-0757-4e9a-B963-E4FA32110341}" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{305E45D8-F5F3-4727-A6ED-D44D3852C0BA}" FontSize="22" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="LOGIN_REGIST" />
+                                </WZUIButton>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{9AE3D507-E593-4609-B197-C4338F91AB37}" Name="conMyRegist1_WndLoginSelect" Visible="False" ShowAll="False" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5" AbsPosition="480,268">
+                            <WZUIContainer Type="WZUIContainer" GUID="{B1439A55-284E-4d90-BDD1-0A2AB2B07FFA}" AbsContentSize="500,460" UseAbsSize="True" RelativePosition="0.5,0.457812" AbsPosition="480,293">
+                                <WZUIContainer Type="WZUIContainer" GUID="{D5B55AD4-C4E3-4cd2-B578-633580866F79}" Visible="True">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{CF67B7FE-9E50-48b0-9E96-F0A91C0288BE}" File="ui/login/common_btn_ditu.png" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{4434D002-D454-4b20-A58F-0110B6C1336B}" AbsContentSize="386,46" UseAbsSize="True" RelativePosition="0.506738,0.882642" AbsPosition="202.695,406.015">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{BC31C6B9-AB88-46b2-98B8-3E0816027FB9}" File="ui/login/common_btn_dlk.png" Visible="True" />
+                                    <WZUIImage Type="WZUIImage" GUID="{6DA210F0-49F3-4bad-A6EC-4BEAF8110CDA}" File="ui/login/common_btn_accoumt.png" Visible="True" UseOriginSize="True" RelativePosition="0.076923,0.5" AbsPosition="22,23" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{FE79F514-0143-41ce-B96B-A3528AE47655}" AbsContentSize="340,46" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5" AbsPosition="394,23">
+                                        <WZUI9Image Type="WZUI9Image" GUID="{AA08B5BF-E204-4d21-B006-F13732BAA441}" File="ui/common/transparent_bg.png" />
+                                        <WZUIContainer Type="WZUIContainer" GUID="{392EC158-3B2C-4d5a-BEDA-EED9C1D809D5}" RelativeSize="1,1">
+                                            <WZUIEditBox Type="WZUIEditBox" GUID="{FD561669-8A7D-43b6-9582-BF77016C39AA}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editRegistAccount1_WndLoginSelect" FontSize="22" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontColor="201,198,198" LuaEditBoxEditingDidBegin="onEditAccountBegin" LuaEditBoxEditingDidEnd="onEditAccountEnd" PlaceHolder="" PlaceholderFontColor="158,139,121" Color="0,0,0" />
+                                        </WZUIContainer>
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{4ED87BAC-7B6B-4de5-8CE8-213C9B24DB6B}" RelativeSize="1,1" RelativePosition="0.508016,0.741162" AbsContentSize="386,46" UseAbsSize="True" AbsPosition="203.206,340.935">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{99495469-75F3-4e3b-8791-286D0334BB31}" File="ui/login/common_btn_dlk.png" />
+                                    <WZUIImage Type="WZUIImage" GUID="{1A672087-0EDF-4c11-952F-DEDE6948F99C}" File="ui/login/common_btn_password.png" Visible="True" UseOriginSize="True" RelativePosition="0.076923,0.5" AbsPosition="22,23" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{63201529-E060-4a9d-B8EF-88B18CA8ED91}" AbsContentSize="340,46" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                        <WZUI9Image Type="WZUI9Image" GUID="{5058B9EF-00AD-4e31-BFE6-B1EC23F5CD2E}" File="ui/common/transparent_bg.png" />
+                                        <WZUIContainer Type="WZUIContainer" GUID="{D216D7B8-68BC-4776-A16F-D12518587B6C}" RelativeSize="1,1" AbsContentSize="340,46" UseAbsSize="True">
+                                            <WZUIEditBox Type="WZUIEditBox" GUID="{690D453D-93EF-449f-B454-C292056FEFF6}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editRegistPass1_WndLoginSelect" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="22" FontColor="201,198,198" InputFlag="FlagPassword" PlaceholderFontColor="158,139,121" Visible="True" Color="0,0,0" />
+                                        </WZUIContainer>
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{819758F4-3A58-4963-9F99-75050B196A20}" RelativeSize="1,1" RelativePosition="0.508016,0.602031" AbsContentSize="386,46" UseAbsSize="True" AbsPosition="203.206,276.934">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{6AC7207F-64F1-42f3-A37C-27DBA56DC1FD}" File="ui/login/common_btn_dlk.png" />
+                                    <WZUIImage Type="WZUIImage" GUID="{A6D89B36-308A-4730-A0C2-1C17A3332906}" File="ui/login/common_btn_password.png" Visible="True" UseOriginSize="True" RelativePosition="0.076923,0.5" AbsPosition="22,23" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{3778E018-B404-4c3e-9171-C90EED541D4B}" AbsContentSize="340,46" UseAbsSize="True" RelativePosition="1,0.5" AnchorPoint="1,0.5">
+                                        <WZUI9Image Type="WZUI9Image" GUID="{DADAED7C-4DF6-432c-A811-AE82180BDBCC}" File="ui/common/transparent_bg.png" />
+                                        <WZUIContainer Type="WZUIContainer" GUID="{4EC8E3AF-61F4-4d72-957D-A68DF2947B70}" RelativeSize="0.94,1" AbsContentSize="340,46" UseAbsSize="True">
+                                            <WZUIEditBox Type="WZUIEditBox" GUID="{4AAAFEDF-91D0-4b37-9815-21985A52238A}" BgPicture="ui/common/transparent_bg.png" Text="12345678910" Name="editRegistPassSure1_WndLoginSelect" VerticalAlignment="1" VerticalPlaceHolderAlignment="1" FontSize="22" FontColor="201,198,198" InputFlag="FlagPassword" PlaceholderFontColor="158,139,121" Visible="True" Color="0,0,0" />
+                                        </WZUIContainer>
+                                    </WZUIContainer>
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{77EC76D4-739D-4b14-933B-64A955424957}" RelativeSize="1,1" RelativePosition="0.509375,0" Visible="True" AnchorPoint="0.5,0" AbsContentSize="400,210" UseAbsSize="True" AbsPosition="489,214.24">
+                                    <WZUIButton Type="WZUIButton" RelativeSize="0.25,1" RelativePosition="0.5,0.971425" GUID="{84E79391-E15D-4326-BC64-B199E6F095AB}" LuaDoneFunctionName="OnMyRegistRegist" LuaActionName="Normal" AbsPosition="200,203.999" AbsContentSize="340,56" UseAbsSize="True" AnchorPoint="0.5,1">
+                                        <NormalElement Type="WZUIContainer" GUID="{73C6BA82-2AC0-4b1e-9DA2-6DC56BAB2C45}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{15C8A654-A6B7-41a6-92AF-2484F47BBDFE}" File="ui/login/common_btn_login.png" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{162DCFB3-8C0F-4cd6-B97C-430BB3E5E244}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{D13F3E10-C3DA-4f58-B420-590118C0D70E}" File="ui/login/common_btn_login.png" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{5E995417-BAB2-4394-AEE6-B04802A67696}" />
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{5E590ABC-BB85-4376-B69C-5550D915DC67}" FontSize="25" LabelStyleKey="" TextKey="LOGIN_REGIST" Color="255,255,255" BoldFont="True" />
+                                    </WZUIButton>
+                                    <WZUIButton Type="WZUIButton" RelativeSize="0.25,1" RelativePosition="0.5,0.519044" GUID="{BA31B272-D3E2-42a7-ADEE-7BC541845044}" LuaDoneFunctionName="OnMyRegistBack" LuaActionName="Normal" AbsPosition="200,108.999" AbsContentSize="340,56" UseAbsSize="True" AnchorPoint="0.5,1">
+                                        <NormalElement Type="WZUIContainer" GUID="{45F306DE-0C49-4c2d-A140-012EC3DD3B24}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{044793D2-CE7A-4169-B146-4525A22018BC}" File="ui/login/common_btn_tip.png" />
+                                        </NormalElement>
+                                        <SelectElement Type="WZUIContainer" GUID="{FA1DED5B-04A9-400e-96C3-FEEE8AD023A5}">
+                                            <WZUI9Image Type="WZUI9Image" GUID="{0BFA8830-397B-4939-97A5-19D59883B558}" File="ui/login/common_btn_tip.png" />
+                                        </SelectElement>
+                                        <DisableElement Type="WZUIContainer" GUID="{850A6EE5-914E-4f60-A1EE-8DD6A770199A}" />
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{45AFBB60-A588-432d-8031-49CE60FA576C}" FontSize="25" LabelStyleKey="" TextKey="BACK" Color="255,255,255" BoldFont="True" />
+                                    </WZUIButton>
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{99DB9965-254D-4c76-8260-62D74019460C}" Name="conSdkLogin_WndLoginSelect" AbsContentSize="" RelativePosition="0.5,0.5" UseAbsSize="False" Visible="False" NameCreate="True" ShowAll="False" AbsPosition="480,274">
+                    <WZUIContainer Type="WZUIContainer" GUID="{A67342BD-F913-4ce7-9C88-9F0AC1A15D55}" ShowAll="True" RelativePosition="0.5,0.389062" AbsPosition="480,249">
+                        <WZUIImage Type="WZUIImage" GUID="{98B6F82F-1E9C-48b1-8F34-F401A94C6F92}" File="ui/common/common_icon_djjryxwz.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.217187" ShowAll="False">
+                            <Action Type="WZUIActionSequence" GUID="{3C0D10F7-B217-4854-8B03-B80451C932F2}" IsLoop="True" Duration="1">
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{2F16C2C0-44D6-4f4c-9A80-C04172B67F0A}" ScaleX="1.05" ScaleY="1.05" Duration="0.5" />
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{97D32E2A-A962-4529-94B3-9E54DF66963A}" ScaleX="0.95" ScaleY="0.95" Duration="0.5" />
+                            </Action>
+                        </WZUIImage>
+                    </WZUIContainer>
+                    <WZUIButton Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.5,0.5" GUID="{D18898BE-5575-42e1-B3AE-014D7A4DBC31}" LuaDoneFunctionName="OnBtnSDK" AbsPosition="480,320">
+                        <NormalElement Type="WZUIContainer" GUID="{82796F7C-0785-4fca-B4B3-4B8B3089EEFC}" />
+                        <SelectElement Type="WZUIContainer" GUID="{769D1AEE-685F-439e-B6E6-5360A9744520}" />
+                        <DisableElement Type="WZUIContainer" GUID="{C4181E92-7310-4932-8F6F-2CF8D306CC05}" />
+                    </WZUIButton>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndLoginSelect>

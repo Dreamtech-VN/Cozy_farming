@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><WndDownloadReward GUID="{2BECEDA2-82B2-4c55-9D9B-1546CBBF7B91}">
+    <WZUIWindow AbsContentSize="924,616" GUID="{2B6FB1BE-1138-4c51-B2DC-AB8C5C7A93A4}" LuaObjectName="WndDownloadReward" Name="WndDownloadReward" NameCreate="True" Order="2001" Type="WZUIWindow" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="800,500" GUID="{6046876D-2C46-468e-97A8-FB45B69C2C4C}" Name="conContent_WndDownloadReward" Type="WZUIContainer" UseAbsSize="True" Visible="true">
+            <WZUI9Image File="common/Jigsaw/bg.png" GUID="{2DA7B8CD-28AE-4dea-A47F-A67EF561558E}" RelativePosition="0.495,0.54" RelativeSize="1,1" Scale="1" Type="WZUI9Image" UseOriginSize="True" Visible="True"/>
+            <WZUILabelTTF AnchorPoint="0.5,0.5" Color="0,0,0" Dimensions="580,0" FontSize="32" GUID="{4728E4C7-AFC2-402b-AEC1-E9E2C5A42967}" Name="txtSpree_WndDownloadReward" RelativePosition="0.541924,0.669831" Text="" Type="WZUILabelTTF"/>
+            <WZUIScrollContainer AbsContentSize="570,276" EnableBounceBack="True" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableMoveoutContainer="True" EnableVerticalScroll="True" GUID="{EAADAE9A-5712-4caf-8759-99C4342CCD03}" Name="rollconSpree_WndDownloadReward" RelativePosition="0.5,0.392857" ScrollPictureDown="common/Jigsaw/rolling_03.png" ScrollPictureMid="common/Jigsaw/rolling_01.png" ScrollPictureTop="common/Jigsaw/rolling_02.png" Type="WZUIScrollContainer" UseAbsSize="True">
+                <MoveElement GUID="{F7371DDF-B288-4fc7-8AAF-455634F90FE0}" RelativePosition="0.5,0.5" Type="WZUIContainer"/>
+            </WZUIScrollContainer>
+            <WZUIButton AbsContentSize="90,90" GUID="{57BD57D4-0D33-4742-8B6B-D3176112E4F6}" LuaDoneFunctionName="onClose" RelativePosition="0.93703,0.918566" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{C9662F3D-5152-481c-B600-E92100BE142F}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close.png" GUID="{4344C4C0-9E73-48e2-AA91-8598487AE0AF}" Type="WZUIImage" UseOriginSize="True"/>
+                </NormalElement>
+                <SelectElement GUID="{7E394BD0-B47A-455e-BE48-23450BCCB7FF}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close_sel.png" GUID="{C1F1A3AE-84F2-445d-A603-31C1DBC9F754}" Type="WZUIImage" UseOriginSize="True"/>
+                </SelectElement>
+                <DisableElement GUID="{884DA49E-67C5-4369-B82A-7C5B2837CFC1}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close_not.png" GUID="{6CECD20A-A6FC-4f54-9CAE-1BAA2DA82212}" Type="WZUIImage" UseOriginSize="True"/>
+                </DisableElement>
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndDownloadReward>

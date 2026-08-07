@@ -1,0 +1,37 @@
+﻿<WndGemLibrary GUID="{a6d15998-e091-4a05-973c-08474e9eee88}">
+    <WZUIWindow Type="WZUIWindow" GUID="{78b86cb5-023e-48ec-b345-0b6fc3da9382}" LuaObjectName="WndGemLibrary" Name="WndGemLibrary" NameCreate="True" AbsContentSize="766,532" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{e3003b8a-5ff9-4ac8-9487-72d40954f5da}">
+            <WZUI9Image Type="WZUI9Image" GUID="{adbf41cb-e60b-4c85-846b-0b66631a0866}" File="ui/common/common_scale9_di19.png" CapInsets="92,80,1,1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{bd95f619-ffb3-47a6-a126-8105d7a1d98f}" FontSize="26" Color="255,236,193" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.94" TextKey="DIGGEM_TEXT22" EnableStroke="True" />
+            <Button Type="WZUIButton" GUID="{f9ee0fa0-4c6a-4ff6-9df6-c0d9c07f1fb8}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.945,0.94" LuaActionName="Normal" LuaDoneFunctionName="onCloseClick">
+                <NormalElement Type="WZUIContainer" GUID="{769cd377-3668-40f9-8474-aaa538addc03}" />
+                <SelectElement Type="WZUIContainer" GUID="{96cdb684-ffbf-4cb9-9839-54a52430f20e}" />
+                <DisableElement Type="WZUIContainer" GUID="{26c89426-64ca-4637-88ec-f7e788b0fbf6}" />
+                <WZUIImage Type="WZUIImage" GUID="{3e5180c4-2876-4442-be8b-d5b777a077dc}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{eaa7dd69-ff0c-4c77-812b-f95d2b49c96a}" AnchorPoint="0.5,1" RelativePosition="0.5,0.89" RelativeSize="0.982,0.785">
+                <WZUIContainer Type="WZUIContainer" GUID="{2c07d5c4-5f45-4705-84d0-a86de9acdbb2}" RelativePosition="0.827,0.438" RelativeSize="1,1" AbsContentSize="245,447" UseAbsSize="True" Name="conGemDetail_WndGemLibrary">
+                    <WZUI9Image Type="WZUI9Image" GUID="{041da04b-cd3f-4c5f-968b-995b21ce9fef}" File="ui/common/common_scale9_di52.png" CapInsets="0,0,0,0" Opacity="125" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{5a530d3f-8351-48e5-90ea-713738ef2951}" Name="conForDetail_WndGemLibrary">
+                        <WZUIContainer Type="WZUIContainer" GUID="{35f26811-ad39-4cc6-b1a0-be52c49d3ec6}" AbsContentSize="245,161" UseAbsSize="True" RelativePosition="0.5,0.777405">
+                            <WZUI9Image Type="WZUI9Image" GUID="{3e63a09c-5dd5-4180-aa71-e8fb3e9d1a31}" File="ui/common/common_scale9_di6.png" CapInsets="0,0,0,0" Opacity="200" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{24fabdc9-cc52-45d7-94e4-e3b9d71e9631}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.5,0.4">
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0b43ef26-8f8f-4105-9281-dc245f9ae309}" FontSize="20" Color="255,236,193" EnableStroke="True" Name="txtName_WndGemLibrary" AnchorPoint="0.5,0" RelativePosition="0.5,1.1" StrokeSize="4" Text="你的名字" StrokeColor="127,70,26" BoldFont="False" />
+                                <WZUIImage Type="WZUIImage" GUID="{fecbb347-4323-4b64-8118-ee8a1997cfca}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" />
+                                <WZUIImage Type="WZUIImage" GUID="{d83cf585-0424-42e7-bf6d-8bcf34d51c21}" File="ui/common/common_scale9_cheng.png" UseOriginSize="True" Name="imgQuality_WndGemLibrary" />
+                                <WZUIImage Type="WZUIImage" GUID="{7d79c9d3-62e3-430b-957a-0a6ab7111154}" File="" UseOriginSize="True" Name="imgIcon_WndGemLibrary" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{308d3a3a-1c66-43bc-bd54-35a4e138780f}" Name="ftxtDesc1_WndGemLibrary" AnchorPoint="0,1" MaxWidth="220" RelativePosition="0.05,0.55" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{ace4e70b-3e69-4109-be34-0e2bfad146a8}" Name="ftxtDesc2_WndGemLibrary" AnchorPoint="0,1" MaxWidth="220" RelativePosition="0.05,0.45" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{fe0c3ec6-8902-4401-ae4f-bb7a7bed571d}" Name="ftxtDesc3_WndGemLibrary" AnchorPoint="0,1" MaxWidth="220" RelativePosition="0.05,0.35" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{d09866d7-036d-4f85-95a0-dc1209a78002}" AbsContentSize="477,447" UseAbsSize="True" RelativePosition="0.328,0.438">
+                    <WZUI9Image Type="WZUI9Image" GUID="{a69c777e-54c2-48d5-826c-0957ebb29919}" File="ui/common/common_scale9_di52.png" Opacity="125" />
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{81203b59-11c3-4d79-823e-7998a335fbfd}" CellElementHeight="0.225" EnableMoveHorizontal="False" Name="tableItemList_WndGemLibrary" RelativeSize="0.98,0.95" RelativePosition="0.5,0.5" ColumnCount="5" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndGemLibrary>

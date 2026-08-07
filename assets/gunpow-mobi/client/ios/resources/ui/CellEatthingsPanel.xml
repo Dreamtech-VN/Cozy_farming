@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" ?>
+<CellEatthingsPanel GUID="{7EBE865D-C364-42fe-BD4D-FA148EC3B371}">
+    <WZUIContainer AbsContentSize="500,446" GUID="{1FE41D87-3890-4593-A3A3-1603A6238088}" LuaObjectName="CellEatthingsPanel" Name="CellEatthingsPanel" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="502,374" GUID="{32694069-BFCF-416a-89A7-53D32AB25AC7}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,1">
+            <WZUI9Image Type="WZUI9Image" GUID="{B79C3209-C9DE-4d48-A203-6EB1AE86994A}" File="ui/common/common_scale9_di8.png" />
+            <WZUIImage File="ui/gameActivity/activity_pic_bctl.png" GUID="{7EE9EDCB-3F5A-42b5-93C5-68A9550EE177}" Scale="1" Type="WZUIImage" UseOriginSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{3c7bdbc0-c4f1-41f5-8790-0a008d11151b}" Name="conArmature_CellEatthingsPanel" Visible="False">
+                <WZArmature Type="WZArmature" GUID="{da535aaf-8cc0-4fea-8dd0-2eb4db7dfe85}" Name="armatureFire_CellEatthingsPanel" RelativePosition="0.619361,0.123656" UseOriginSize="True" ArmatureFile="ui/ui_shuzhi_tili.xml" ArmatureName="ui_shuzhi_tili">
+                    <Action Type="WZUIArmatureAnimationById" GUID="{0dd3291d-270f-436b-a477-9e333c62e258}" AnimationId="0" />
+                </WZArmature>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{37140416-ba3f-43a4-9209-cbd5f569f093}" AbsContentSize="500,44" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0.00271693" Name="conActivityTime_CellEatthingsPanel" AbsPosition="251,1.01613">
+                <WZUI9Image Type="WZUI9Image" GUID="{b4084145-ffd4-47ea-a4be-d83f5dc02808}" File="ui/common/common_scale9_heidi4.png" ScaleX="1.25" Scale="1.25" ScaleY="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e37f2603-8520-4fc5-9dff-53e5d170e6d2}" FontSize="22" EnableStroke="True" Color="255,236,193" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" StrokeColor="105,65,46" StrokeSize="4" TextKey="EACH_DAY_TO_GET" Text="美味烤肉每日准点开餐，品尝可增加大量活力值~" Name="txtContent_CellEatthingsPanel" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{90dd4428-6977-4c15-aa57-0fab1ec4d607}" AbsContentSize="476,2" UseAbsSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0" AbsPosition="251,-0.994624">
+                <WZUI9Image Type="WZUI9Image" GUID="{a41eb26d-b1ed-45f7-9b48-944adc43929b}" File="ui/common/common_scale9_fengexian.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{805484ee-48c1-4fde-b61a-5bd9fa27bcab}" AbsContentSize="302,134" UseAbsSize="True" RelativePosition="0.72,0.78">
+                <WZUIImage Type="WZUIImage" GUID="{b1ace09c-ec42-4960-adf2-8ef8c41555fc}" File="ui/common/common_scale9_heidi5.png" UseOriginSize="False" RelativePosition="0.5,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{7b5f9ccd-dde6-44b5-879c-9c755bf4ace9}" File="ui/common/common_scale9_heidi5.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d74ccf7d-b5d3-4f2d-813b-b47c2b621c20}" Text="12:00-14:00" FontSize="24" Color="255,226,117" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.41,0.75" Name="txtEatTime0_CellEatthingsPanel" RelativeSize="1,1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b8bee37d-c6a0-43cc-b9b3-1878bad42fbc}" FontSize="24" Color="255,227,116" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" Text="18:00-20:00" Name="txtEatTime1_CellEatthingsPanel" RelativePosition="0.41,0.5" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8aa367e1-99c5-496d-99e5-0f6d12a9d05d}" StrokeColor="128,54,13" StrokeSize="4" EnableStroke="True" Color="255,227,116" FontSize="24" RelativePosition="0.41,0.25" Text="21:00-00:00" Name="txtEatTime2_CellEatthingsPanel" />
+                <WZUIImage Type="WZUIImage" GUID="{594c8464-9a75-4821-ac08-c016c5a948b6}" File="ui/common/common_icon_huoli.png" UseOriginSize="True" Scale="0.86" RelativePosition="0.7,0.75" Visible="True" />
+                <WZUIImage Type="WZUIImage" GUID="{435ab55a-0368-42d7-9000-a08d16bdbac6}" File="ui/common/common_icon_huoli.png" UseOriginSize="True" Scale="0.86" RelativePosition="0.7,0.5" Visible="True" />
+                <WZUIImage Type="WZUIImage" GUID="{c0ecdb71-58ee-4534-84b6-625d801a0c6a}" File="ui/common/common_icon_huoli.png" UseOriginSize="True" Scale="0.86" RelativePosition="0.7,0.25" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1d4b9abc-7ee8-4822-8a42-149418aee986}" AnchorPoint="0,0.5" FontSize="24" EnableStroke="True" Color="99,255,95" StrokeSize="4" StrokeColor="0,72,3" RelativePosition="0.76,0.75" Text="+120" Name="txtActivityValue1_CellEatthingsPanel" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{072a6f50-9f0a-4f71-8cb2-c6b620aafc77}" AnchorPoint="0,0.5" FontSize="24" EnableStroke="True" Color="99,255,95" StrokeSize="4" StrokeColor="0,72,3" RelativePosition="0.76,0.5" Text="120" Name="txtActivityValue2_CellEatthingsPanel" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{20b469d6-72a8-4dc2-8a24-d1e1cd477db3}" AnchorPoint="0,0.5" FontSize="24" EnableStroke="True" Color="99,255,95" StrokeSize="4" StrokeColor="0,72,3" RelativePosition="0.76,0.25" Text="120" Name="txtActivityValue3_CellEatthingsPanel" Visible="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="500,85" GUID="{E24A5B98-5A48-4723-8218-EF410E6D82B7}" RelativePosition="0.5,0.16" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,1">
+            <Button GUID="{F90511ED-3EFF-4c02-BEAB-11FE16B1F22D}" LuaDoneFunctionName="event_touchFunc" Name="btn_eat_oprator" Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" TouchEnable="True" Visible="False" LuaActionName="Normal">
+                <NormalElement GUID="{0137E489-CF26-4c32-B8F2-17E3029B330F}" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_btn_anniu10_1.png" GUID="{F6C9B239-F26C-4fb4-9718-A78C8BD2B4ED}" Type="WZUIImage" UseOriginSize="True" />
+                    <WZUILabelTTF Color="255,236,193" FontSize="26" GUID="{C607B9D0-9F3E-42d4-899E-F0C5D3116A03}" Name="txt_eatingAction_nor" StrokeColor="3,111,8" StrokeSize="4" Text="" Type="WZUILabelTTF" EnableStroke="True" TextKey="ACTIVITY_EATTING_TXT" LabelStyleKey="NORMAL_GREEN_BTN" />
+                </NormalElement>
+                <SelectElement GUID="{C9BB8AB3-1C1C-48ad-8814-33776025D35D}" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_btn_anniu10_1_sel.png" GUID="{304BFF2F-E891-41f4-AE46-8DAE5DE11CE7}" Type="WZUIImage" Scale="1" UseOriginSize="True" />
+                    <WZUILabelTTF Color="255,236,193" FontSize="26" GUID="{BE424C88-047D-461e-950B-44D6A860A771}" Name="txt_eatingAction_sel" StrokeColor="3,111,8" StrokeSize="4" Text="" Type="WZUILabelTTF" EnableStroke="True" TextKey="ACTIVITY_EATTING_TXT" LabelStyleKey="NORMAL_GREEN_BTN" />
+                </SelectElement>
+                <DisableElement GUID="{E4A6002E-C6B2-44a4-B607-FA83BF7DF4E6}" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_btn_anniu10_1.png" GUID="{CBF0F9D9-D971-4160-A6C8-9023FAC04B83}" Type="WZUIImage" GrayRender="True" UseOriginSize="True" />
+                    <WZUILabelTTF Color="255,255,255" FontSize="26" GUID="{4E0E5C12-92FE-46e1-B04A-8CE8B0FE6BE0}" Name="txt_eatingAction_dis" StrokeColor="78,60,48" StrokeSize="4" Text="" Type="WZUILabelTTF" EnableStroke="True" TextKey="ACTIVITY_EATTING_TXT" LabelStyleKey="NORMAL_GRAY_BTN" />
+                </DisableElement>
+            </Button>
+            <WZUIButton GUID="{83789391-E400-4cb8-8307-0BAC1BAE3144}" LuaDoneFunctionName="event_btnTooFull" Name="btn_too_full" Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" TouchEnable="True" Visible="False" LuaActionName="Normal">
+                <NormalElement GUID="{BCF15A92-1C9F-475d-8988-2C8D1EC55646}" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_btn_anniu3_1.png" GUID="{C3FF7389-5ECC-46a8-AF69-3EC2659E7DF3}" Type="WZUIImage" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{EBA8EB6D-2BD3-45f7-9973-5158F7A01798}" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_btn_anniu3_1_sel.png" GUID="{5173E97C-A1DE-4c62-8615-3DD967C99D8E}" Type="WZUIImage" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{FC44A7FE-D5F6-4f90-B55B-EAD3993D976D}" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_btn_anniu3_1.png" GUID="{C58351E9-9DE5-4f77-9486-ECC1DBE430AE}" Type="WZUIImage" GrayRender="True" UseOriginSize="True" />
+                </DisableElement>
+                <WZUILabelTTF Color="255,255,255" FontSize="26" GUID="{80FBE0D8-91A8-4a8a-AAEC-82A51728DE87}" Name="txt_toofull" StrokeColor="78,60,48" StrokeSize="4" Text="" Type="WZUILabelTTF" EnableStroke="True" TextKey="TOO_FULL" LabelStyleKey="NORMAL_ORANGE_BTN" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellEatthingsPanel>

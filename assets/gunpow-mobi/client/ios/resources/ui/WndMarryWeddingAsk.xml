@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<WndMarryWeddingAsk GUID="{DF9BDFBB-6573-49cc-B035-55023F9DF2CA}">
+    <WZUIWindow AbsContentSize="660,540" GUID="{5800785F-4D61-4b9c-9377-3FB81FF931DF}" LuaObjectName="WndMarryWeddingAsk" Name="WndMarryWeddingAsk" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer GUID="{DAE3C97C-FFBE-412c-9D01-191946FCC529}" RelativeSize="1,0.95" Type="WZUIContainer">
+            <WZUIImage Type="WZUIImage" GUID="{AD797FAC-9540-4d27-8F6F-26093A9021E4}" File="ui/marrige/marry_scale9_cgdk.png" UseOriginSize="True" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="600,80" GUID="{0CBEAE78-0D4B-42af-869A-78BF6484A7E7}" Name="conWedding_WndMarryWeddingAsk" RelativePosition="0.5,0.227579" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUIContainer AbsContentSize="130,66" GUID="{A91C090F-9200-47d6-BC8F-47E7720B17DF}" Name="conThinking_WndMarryWeddingAsk" RelativePosition="0.409202,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button AbsContentSize="" GUID="{482C6BC0-08A5-481d-B746-F2A834D78066}" LuaDoneFunctionName="onThinkingClick" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="False" Visible="True" LuaActionName="Normal">
+                    <NormalElement GUID="{70550396-C03C-48e4-B644-A7184401DADC}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_marryan.png" GUID="{B54695EF-6027-4a27-94DD-54F44455BE70}" Type="WZUI9Image" UseOriginSize="True" Name="imgLeft1_WndMarryWeddingAsk" />
+                    </NormalElement>
+                    <SelectElement GUID="{FBA775E4-BEA6-4705-9A76-C00A9177D3DD}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_marryan_sel.png" GUID="{30F20BAE-86EC-4d9b-9882-C03C58815F6D}" Type="WZUI9Image" UseOriginSize="True" Name="imgLeft2_WndMarryWeddingAsk" />
+                    </SelectElement>
+                    <DisableElement GUID="{DB89D604-7186-4e28-BBFD-6F834F4F5BE6}" Type="WZUIContainer" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{CEA87507-0C44-47c9-9DEC-B01CF890941E}" FontSize="24" Color="255,236,193" EnableStroke="False" StrokeColor="255,89,74" TextKey="THINK_ABOUT" StrokeSize="4" RelativePosition="0.492308,0.5" Name="txtLeft_WndMarryWeddingAsk" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="130,66" GUID="{C8F0E5BB-8756-4472-AA53-500C1775CFE3}" Name="conAgree_WndMarryWeddingAsk" RelativePosition="0.64634,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <Button GUID="{6D85575B-B6E1-49a0-927A-EBDFA3A4115F}" LuaDoneFunctionName="onAgreeClick" RelativePosition="0.5,0.5" Type="WZUIButton" Visible="True" LuaActionName="Normal">
+                    <NormalElement GUID="{8DA0BB0C-7427-480c-BBC2-DB3A01C8773B}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_marryan.png" GUID="{B9D4C1A4-7403-48e5-B852-8B6CC6BB7110}" Type="WZUI9Image" UseOriginSize="True" Name="imgRight1_WndMarryWeddingAsk" />
+                    </NormalElement>
+                    <SelectElement GUID="{10D9A98F-DAEC-4d4e-AD02-216DF9EFEF1F}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_marryan_sel.png" GUID="{C617F79F-43A5-4f81-84BB-B761197895E9}" Type="WZUI9Image" UseOriginSize="True" Name="imgRight2_WndMarryWeddingAsk" />
+                    </SelectElement>
+                    <DisableElement GUID="{5CDC3A0E-0BF6-466e-9E7A-46CF3BF5FD0F}" Type="WZUIContainer" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{213CA898-897A-460d-866D-65C699DCF3BA}" FontSize="24" Color="255,236,193" EnableStroke="False" StrokeColor="255,89,74" TextKey="WILLING" StrokeSize="4" Name="txtRight_WndMarryWeddingAsk" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{68236341-1707-4bb2-9225-042E86421B99}" FontSize="28" Color="255,255,255" Text="" Dimensions="330,120" Name="txtTips_WndMarryWeddingAsk" RelativePosition="0.525592,0.539713" AbsPosition="346.891,291.445" />
+    </WZUIWindow>
+</WndMarryWeddingAsk>

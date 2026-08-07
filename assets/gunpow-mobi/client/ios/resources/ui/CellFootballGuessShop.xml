@@ -1,0 +1,23 @@
+﻿<CellFootballGuessShop GUID="{5b0a35fa-9385-47b7-b0a6-df2266dc5fbf}">
+    <WZUIContainer Type="WZUIContainer" GUID="{b5151eb6-964d-4aeb-b937-a99906d2b7fd}" Name="CellFootballGuessShop" NameCreate="True" AbsContentSize="186,200" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{4d02a100-436e-44e1-a42c-a3ecfcf6563d}">
+            <WZUI9Image Type="WZUI9Image" GUID="{5d7751e0-8ec6-4498-8a72-bbe32c068659}" File="ui/football/football_frame_010.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{69afa3aa-9f24-4afe-b646-de2ad117ef0a}" Name="conHead_CellFootballGuessShop" AbsContentSize="160,148" UseAbsSize="True" RelativePosition="0.5,0.585634" AnchorPoint="0.5,0.5">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{652500ee-669d-4930-861c-c7c928e424f7}" FontSize="20" Color="255,255,255" AnchorPoint="0.5,0.5" Name="txtName_CellFootballGuessShop" RelativePosition="0.5,0.885135" Text="哈哈哈哈哈哈" StrokeColor="38,96,174" StrokeSize="4" EnableStroke="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{4cf78dc6-7247-436c-8aed-f7d9ab3e5019}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.5\,0.5" Name="conItem_CellFootballGuessShop" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{611482ac-71ae-40af-9b19-c0b41cb7ff79}" FontSize="18" Color="255,255,255" AnchorPoint="1,0.5" Name="txtNum_CellFootballGuessShop" RelativePosition="0.708064,0.345926" Text="123" StrokeColor="38,96,174" StrokeSize="4" EnableStroke="True" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{63aa2287-165c-4831-9307-b007129d0e06}" Name="ftxtCost_CellFootballGuessShop" MaxWidth="180" RelativePosition="0.5,0.13" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{54710282-fcc4-4e4b-9ee6-7ecdf5588314}" FontSize="18" Color="255,255,255" AnchorPoint="1,0.5" Name="txtBuyTimes_CellFootballGuessShop" RelativePosition="0.95,0.265926" Text="123" StrokeColor="38,96,174" StrokeSize="4" EnableStroke="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{d4ee9ab6-03bd-440b-95f6-a1fae56fa2db}" Name="conSellOut_CellFootBallGuessShop" Visible="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{f543e3a8-dcc8-402f-ae08-8028689d7ff3}" File="ui/common/common_shade_chushouheidi.png" />
+                <WZUIImage Type="WZUIImage" GUID="{55585af0-5d54-4fb5-a266-de011d438c6a}" File="ui/common/common_icon_shouxing.png" UseOriginSize="True" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{b7619510-5559-49b1-9741-e3e92bafcedc}" LuaDoneFunctionName="onClickItem">
+                <NormalElement Type="WZUIContainer" GUID="{2f1999e1-9dca-4ba4-9938-8ae0807c9408}" />
+                <SelectElement Type="WZUIContainer" GUID="{b445ba67-8f77-4718-b022-2fe4cfbb59b6}" />
+                <DisableElement Type="WZUIContainer" GUID="{fe3541e9-478a-4217-8dc4-b1f9fde84413}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellFootballGuessShop>

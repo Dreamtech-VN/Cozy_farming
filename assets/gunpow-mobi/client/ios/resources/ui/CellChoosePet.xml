@@ -1,0 +1,44 @@
+<CellChoosePet GUID="{5f318200-e27e-4aea-a47f-50b7fb0ba2a4}">
+    <WZUIContainer AbsContentSize="450,108" GUID="{884445ee-cd91-468a-a8ca-c29fd8adc9c5}" LuaObjectName="" Name="CellChoosePet" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{b19bedab-67bc-47eb-b131-82d0054c7ab7}" AbsContentSize="450,100" UseAbsSize="True" Name="conBg_CellPetChoiceList">
+            <WZUI9Image Type="WZUI9Image" GUID="{9f0c3309-e749-46ee-8a7a-7e70109b3097}" File="ui/common/common_scale9_di7.png" Visible="True" ScaleY="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{e5307d22-4658-43ba-85e1-0d6026123ac2}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.0297699,0.5" AnchorPoint="0,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{567e1652-80eb-4951-b5c5-2fbfabc09e67}" File="ui/common/common_scale9_beibaodi2.png" />
+                <WZUIImage File="" GUID="{4b74b4de-e2d0-4975-a80a-7874ebca075f}" Name="imgIconBg_CellPetChoiceList" RelativePosition="0.5,0.5" Scale="1" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="True" AbsPosition="40,40" />
+                <WZUIImage Type="WZUIImage" GUID="{e56ccb18-f322-4f14-af35-234a117664b1}" Name="imgIconBgQuality_CellPetChoiceList" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1386ef91-c1f7-4a1f-a3a7-37444578f92b}" AnchorPoint="0,0.5" RelativePosition="0,0.5" Name="conInfo_CellPetChoiceList">
+                <WZUIContainer Type="WZUIContainer" GUID="{c91de1fd-3fd5-4c09-bbf4-42336fe47bfa}" AbsContentSize="260,37" UseAbsSize="True" RelativePosition="0.23,0.69" AnchorPoint="0,0.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{7ebf0abf-c68f-46c8-bf91-87fb62a52954}" File="ui/common/common_scale9_di8.png" />
+                    <WZUILabelTTF AnchorPoint="0,0.5" Color="255,255,255" FontSize="24" GUID="{c6a079cb-db53-4677-bf5b-21f21ad4297f}" MaxLength="" Name="txtName_CellPetChoiceList" RelativePosition="0.037849,0.566537" Text="Name" TouchEnable="False" Type="WZUILabelTTF" Alignment="Left" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{42261509-46f2-43c0-8a3e-e1a94a7d70e1}" AbsContentSize="180,40" UseAbsSize="True" RelativePosition="0.23,0.25" TouchEnable="False" AnchorPoint="0,0.5">
+                    <WZUIImage Type="WZUIImage" GUID="{6fe03b0b-9a1c-44e5-ba45-0f04d74537c6}" Name="imgAptitude1_CellPetChoiceList" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" RelativePosition="0.0675906,0.5" Scale="0.68" />
+                    <WZUIImage Type="WZUIImage" GUID="{9094e463-c5b3-47cd-a5d6-117b3da66ac5}" Name="imgAptitude2_CellPetChoiceList" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" RelativePosition="0.224489,0.5" Scale="0.68" />
+                    <WZUIImage Type="WZUIImage" GUID="{3d506006-577e-46a9-b1ef-43c5c92fe5b4}" Name="imgAptitude3_CellPetChoiceList" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" RelativePosition="0.388895,0.5" Scale="0.68" />
+                    <WZUIImage Type="WZUIImage" GUID="{1517125a-b08f-4e90-b7f2-a6cf1c26f504}" Name="imgAptitude4_CellPetChoiceList" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" RelativePosition="0.539037,0.5" Scale="0.68" />
+                    <WZUIImage Type="WZUIImage" GUID="{4b642743-7979-462a-8ac9-458de59f0a72}" Name="imgAptitude5_CellPetChoiceList" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" RelativePosition="0.686927,0.5" Scale="0.68" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{26a76ad7-89a8-4db3-a958-79b66df3c155}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                <Button Type="WZUIButton" GUID="{12836b9a-106d-4e4d-a3ca-99d8299328ff}" LuaDoneFunctionName="onClick" AbsPosition="0,0" UseAbsSize="True" AbsContentSize="450,100">
+                    <NormalElement Type="WZUIContainer" GUID="{0dd6fa8c-d5ef-4194-beef-8852098172f2}">
+                        <WZUIImage Type="WZUIImage" GUID="{24e4e01d-dcbd-4df3-bfe0-a7b1676d8666}" File="ui/common/common_scale9_di13.png" Name="imgBtn1_CellPetChoiceList" UseOriginSize="True" RelativePosition="0.9,0.5" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{39315b9b-66be-4730-a510-19317f024019}">
+                        <WZUIImage Type="WZUIImage" GUID="{e7602454-88b2-494f-a1cf-558b76007a76}" File="ui/common/common_scale9_di13.png" Name="imgBtn2_CellPetChoiceList" UseOriginSize="True" RelativePosition="0.9,0.5" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{4f6f8006-dbb7-4e0a-9ba0-e45f92e59c6a}" />
+                </Button>
+                <WZUIContainer Type="WZUIContainer" GUID="{c8f421b2-de23-43af-b1a7-016b1e290c13}" Name="conGou_CellPetChoiceList" Visible="False" TouchEnable="False" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.9,0.5">
+                    <WZUIImage Type="WZUIImage" GUID="{3e4dea9d-5101-44eb-a7c8-b7067041ea4c}" File="ui/common/common_scale9_beibaodi_sel.png" />
+                    <WZUIImage Type="WZUIImage" GUID="{9dadd203-4a4b-49cc-9bce-cd031de584ad}" File="ui/common/common_icon_gou.png" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{367bdf95-bc26-477f-8bb9-2c169777228a}" AbsContentSize="160,30" UseAbsSize="True" RelativePosition="0.748632,0.328858" TouchEnable="False" Name="conWar_CellPetChoiceList" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{814e14a4-bc5b-457a-8bec-bbd71c43d4c3}" File="ui/common/common_icon_zhanlih.png" UseOriginSize="True" RelativePosition="0.0875,0.5" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{d57179ca-f52f-46df-ac42-0d1422a11b28}" Name="txtPetWarD_CellPetChoiceList" CharMapFileName="ui/common_num/common_num_zhandouli.png" Text="4444" UseOriginSize="True" RelativePosition="0.413013,0.366667" Height="26" Width="16" Scale="0.85" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellChoosePet>

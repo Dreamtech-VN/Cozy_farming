@@ -1,0 +1,179 @@
+<?xml version="1.0" ?>
+<WndStarSoul GUID="{C26B7C67-88D7-4496-B771-95E2E677342E}">
+    <WZUIFrame Type="WZUIFrame" GUID="{A15B8D88-6361-48b3-AA1A-7FCDDB754B1E}" ShowAll="False" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIWindow Type="WZUIWindow" GUID="{9ACA85B7-9FD8-408f-883E-CE52CCD1D618}" Name="WndStarSoul" LuaObjectName="WndStarSoul" UseAbsSize="False" AbsContentSize="0,0" NameCreate="True" LuaTouchEndedFunction="" LuaTouchBeganFunction="onTouchBegan" ShowAll="False" RelativePosition="0.5,0.5" Visible="True">
+            <WZUIImage Type="WZUIImage" GUID="{7A53482F-3EC8-421c-B3C4-D37B56016E40}" File="ui/common_bg/common_scale9_di2.png" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{A85656E3-ECB7-4ed9-BBDF-27449525DE89}" ShowAll="True" Name="conCnt_WndStarSoul" RelativePosition="0.5,0.459375" Visible="True" AbsContentSize="945,560" UseAbsSize="True" AnchorPoint="0.5,0.5">
+                <WZUIContainer Type="WZUIContainer" GUID="{9C6A4B02-61C7-49fc-A29A-5727293DADA0}" UseAbsSize="True" AbsContentSize="934,548" RelativePosition="0.5,0.5" Visible="True" AnchorPoint="0.5,0.5" ShowAll="False" Scale="1" Name="conPage_WndStarSoul">
+                    <WZUI9Image Type="WZUI9Image" GUID="{ABA8EFB0-89DD-4c04-B865-4203096FF053}" File="ui/common/common_scale9_di12.png" TouchEnable="False" Visible="True" />
+                    <WZUIPageContainer Type="WZUIPageContainer" GUID="{9DD1F657-9953-4e1c-8948-28457C187353}" EnableMoveoutContainer="False" Name="pgconStarSoul_WndStarSoul" GetCurrentIndexFunction="" TurningSpeedThreshold="80" PageTurningThreshold="0.3" EnableHideUnvisible="False" ScissorHeight="1" Order="0" RelativePosition="0.5,0.5" EnableBounceBack="False" TouchEnable="False" DropRefreshFunction="" TouchContainerEnable="True" TouchSwallow="True" />
+                </WZUIContainer>
+                <WZUI9Image Type="WZUI9Image" GUID="{C1AEA724-58FE-4aa9-AF5F-88E2BC9ECF33}" File="ui/common/common_scale9_kuang.png" Visible="True" TouchEnable="False" />
+                <WZUIButton Type="WZUIButton" GUID="{233E832E-B6D8-4a7e-B9E4-DCBA6E179E3C}" UseAbsSize="True" AbsContentSize="70,77" ScaleX="1" RelativePosition="0,0.5" LuaDoneFunctionName="onClickPrevious" LocalInterval="0.1" Name="btnPrevious_WndStarSoul" Scale="1" Visible="False" AnchorPoint="0,0.5">
+                    <NormalElement Type="WZUIContainer" GUID="{B01D90EC-91EF-4bde-A1C0-C0F67ED40B28}" TouchContainerEnable="True">
+                        <WZUIImage Type="WZUIImage" GUID="{516D65E1-8601-4dad-926C-ADC5B62ED1A4}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{5109C272-3BF3-4cd5-93F9-94E5D4633DE5}" TouchContainerEnable="True" Scale="0.9">
+                        <WZUIImage Type="WZUIImage" GUID="{0671FB13-89E5-4f3e-A5F2-8486113A9901}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{0835F844-C182-4fca-AB08-5C4C8A760C8E}" TouchContainerEnable="True">
+                        <WZUIImage Type="WZUIImage" GUID="{F0A58CD2-1FF0-48a4-B68B-EA27A1E398D0}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="True" />
+                    </DisableElement>
+                </WZUIButton>
+                <WZUIButton Type="WZUIButton" GUID="{7AB72409-BEEF-4188-B132-DBD1ADA5A12F}" UseAbsSize="True" AbsContentSize="70,77" RelativePosition="0.926597,0.498214" LuaDoneFunctionName="onClickNext" LocalInterval="0.1" Name="btnNext_WndStarSoul" ScaleX="-1" Visible="False" AnchorPoint="1,0.5">
+                    <NormalElement Type="WZUIContainer" GUID="{18D3A3A7-8E0B-442b-B90C-F4521AA46F96}" TouchContainerEnable="True">
+                        <WZUIImage Type="WZUIImage" GUID="{912D6D18-D825-4cb5-8770-24C61A377B7B}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipY="False" FlipX="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{A1D87168-BDA8-4328-9B81-FD9351F4F246}" TouchContainerEnable="True" Scale="0.9">
+                        <WZUIImage Type="WZUIImage" GUID="{F60BCD9F-F0DC-457e-A41D-602E17D9C8DB}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{0ACBC095-6F71-48a1-AA12-B889258DBFB0}" TouchContainerEnable="True">
+                        <WZUIImage Type="WZUIImage" GUID="{D2A87CC9-35C2-48d5-8DBD-DA5B6181A7C9}" File="ui/common/common_icon_jtqh.png" UseOriginSize="True" FlipX="True" />
+                    </DisableElement>
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1756514F-D8A4-42d6-B68F-EB0AE0590C19}" ShowAll="True" Order="0" Name="conInformation_WndStarSoul" Visible="True">
+                <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{B135612F-8200-4109-867D-F4F40057957D}" Name="conClipping" Scale="1" Order="20" RelativePosition="0.826869,0.797092" AbsPosition="793.794,510.139" TouchEnable="True" TouchSwallow="True" AbsContentSize="250,80" UseAbsSize="True">
+                    <Stencil Type="WZUIImage" GUID="{6548420F-82BA-4be6-843E-B6217F4C6060}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" RelativePosition="0.498733,0.516871" Scale="1" AbsPosition="124.683,41.3497" ScaleX="5" ScaleY="1.4" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{B7D5E32C-5F13-40d4-AC08-A8DE62723300}" Name="conHead_CellHead" AbsContentSize="250,80" UseAbsSize="True" RelativePosition="0.017004,0.485538" AbsPosition="4.25099,38.843">
+                        <WZUIContainer Type="WZUIContainer" GUID="{D9476E99-A962-4bf8-AE2E-8695E5E6876E}" UseAbsSize="True" AbsContentSize="250,80" RelativePosition="1.06155,0.535683" AbsPosition="212.311,26.7842">
+                            <WZUIImage Type="WZUIImage" GUID="{5CF27032-8CD8-4a80-8191-5BC4DADB9D12}" File="ui/common/common_scale9_heidi4.png" UseOriginSize="True" ScaleX="0.8" Visible="True" ScaleY="1.3" RelativePosition="0.584,0.5375" AbsPosition="146,43" />
+                            <WZUIImage Type="WZUIImage" GUID="{1E5BB971-E981-4028-B729-2C33DEA06BDF}" File="ui/common/common_scale9_heidi4.png" UseOriginSize="True" ScaleX="0.8" Visible="True" ScaleY="1.3" RelativePosition="0.584,0.525" AbsPosition="146,42" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{33F6F00D-B6C3-44b0-8048-40BFC3C34CE9}" AbsContentSize="40,40" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.73">
+                                <WZUIImage Type="WZUIImage" GUID="{4B9770AB-30AC-4b0c-AF33-C98DA2421EB5}" File="" Name="imgIcon1_WndStarSoul" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{F2AE6CB5-310F-477d-A656-47861AB51D3F}" AbsContentSize="40,40" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.27">
+                                <WZUIImage Type="WZUIImage" GUID="{3BFFB159-C10B-43fe-B96A-AD9C568C56AC}" File="" Name="imgIcon2_WndStarSoul" />
+                            </WZUIContainer>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{46520915-CB18-47da-A3B3-7BF3E7D7458B}" FontSize="24" RelativePosition="0.65,0.73" AnchorPoint="0,0.5" Name="txtSimStarNum_WndStarSoul" Color="255,236,193" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{96837978-002F-4c2d-B7D5-AC07CDF7F326}" FontSize="24" AnchorPoint="0,0.5" RelativePosition="0.65,0.27" Name="txtMulStarNum_WndStarSoul" Color="255,236,193" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5E0C3D93-188A-4f1e-8977-A51C5055E4C0}" TextKey="SEARCH_STAR_SOUL" AnchorPoint="1,0.5" RelativePosition="0.6,0.73" Color="233,166,62" EnableStroke="True" StrokeColor="105,65,46" StrokeSize="4" FontSize="24" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{FC19CD94-1B6B-40c3-A8C3-95FE792F8778}" TextKey="HONOUR_STAR_SOUL" AnchorPoint="1,0.5" RelativePosition="0.6,0.27" StrokeColor="105,65,46" StrokeSize="4" Color="233,166,62" EnableStroke="True" FontSize="24" />
+                            <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onShowTopTips" GUID="{CC6A7165-71BA-4d69-BE68-4583040E5851}" RelativePosition="0.5,0.4875" AbsPosition="125,39">
+                                <NormalElement Type="WZUIContainer" GUID="{7D7FD316-7E1C-4370-B3DF-7ED9ACF501A1}" />
+                                <SelectElement Type="WZUIContainer" GUID="{4BC91A11-1E94-4604-BA14-F9CDB4C5AAD7}" />
+                                <DisableElement Type="WZUIContainer" GUID="{5B9B4129-F5E0-4f3b-AFF3-FFD4C8758918}" />
+                            </WZUIButton>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIClippingContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{6446CF74-B6E6-44dd-8DB2-220CE9641807}" AbsContentSize="350,50" UseAbsSize="True" RelativePosition="0.22,0.0715625" AbsPosition="211.2,45.8">
+                    <WZUIImage Type="WZUIImage" GUID="{D3E4FD45-C967-4dc3-A3DF-44DB62763267}" File="ui/common/common_icon_gth.png" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{31CC9364-F393-4b3d-A0AC-4AEECC4F51BC}" File="ui/common/common_icon_zzljc.png" UseOriginSize="True" RelativePosition="0.403333,0.5" AbsPosition="121,25" />
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{470FF72F-D0EB-4340-B24F-C3114E1D0067}" CharMapFileName="ui/common_num/common_num_zhandouli.png" Height="26" Width="16" AnchorPoint="0,0.5" UseOriginSize="True" RelativePosition="0.65,0.5" Name="txtFightTotalAdd_WndStarSoul" />
+                    <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onShowTotalFightingTips" GUID="{0F84D0F7-F616-481c-90A1-36D47E861D9B}">
+                        <NormalElement Type="WZUIContainer" GUID="{C75C1FB3-1DCA-4616-BDFD-CC5013D8DB50}" />
+                        <SelectElement Type="WZUIContainer" GUID="{0BD70509-F2E9-4461-9BC2-C725DE9CCFFB}" />
+                        <DisableElement Type="WZUIContainer" GUID="{947E521B-DB5D-4f31-9492-09BB21DFC19E}" />
+                    </WZUIButton>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIWindow>
+        <WZUIContainer Type="WZUIContainer" GUID="{0ABDB488-DCE7-466d-9BB9-4A60BEE9583C}" AbsContentSize="300,85" UseAbsSize="True" Name="CellTopTips_WndStarSoul" Visible="False" NameCreate="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{CFCD5290-1656-42f2-9FBC-9114C3DEF7AE}" File="ui/common/common_scale9_di24.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3233782D-B66E-48aa-BE6E-A205B484F3C0}" FontSize="22" Name="txtCoinsTips_CellTopTips" Dimensions="260,0" Color="255,227,116" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{4ED33AB5-5CF0-4c7b-B470-2294D4F0DFA4}" Name="CellGalaxyTips_WndStarSoul" RelativePosition="0.5,0.5" AbsPosition="480,320" AbsContentSize="270,300" UseAbsSize="True" Visible="False" NameCreate="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{857361B9-455A-4a06-BE9A-2469000BFC22}" File="ui/common/common_scale9_di24.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{0005B829-90FE-4cc2-AAA2-1CE8292C9C96}" AbsContentSize="250,30" UseAbsSize="True" Name="conProperty1_CellGalaxyTips" RelativePosition="0.5,0.6">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0A1752CD-361F-427c-AB37-766CBA73D58E}" FontSize="22" Name="txtPropertyName1_CellGalaxyTips" Color="255,236,193" AnchorPoint="1,0.5" RelativePosition="0.28,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ADAC5337-B5F0-46ae-9F9E-0A3EFF78CFDC}" Name="txtPropertyValue1_CellGalaxyTips" Text="" FontSize="24" Color="99,255,95" AnchorPoint="0,0.5" RelativePosition="0.3,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{8354594C-05BB-404b-B3D0-943BB6FCFAFE}" AbsContentSize="250,30" UseAbsSize="True" Name="conProperty2_CellGalaxyTips" RelativePosition="0.5,0.5">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{73974805-17B7-400d-8EC2-A12FA17EAC64}" FontSize="22" Name="txtPropertyName2_CellGalaxyTips" Color="255,236,193" RelativePosition="0.28,0.5" AnchorPoint="1,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{1D5B7FEE-DB38-47b7-82E6-B991DAB83B8F}" Name="txtPropertyValue2_CellGalaxyTips" FontSize="24" Text="" Color="99,255,95" AnchorPoint="0,0.5" RelativePosition="0.3,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{7DC283EB-1934-4694-BE75-5C72BCA4EAA3}" AbsContentSize="250,30" UseAbsSize="True" Name="conProperty3_CellGalaxyTips" RelativePosition="0.5,0.4">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{55FDC851-B5C2-47b5-8D87-6DB14B987B03}" FontSize="22" Name="txtPropertyName3_CellGalaxyTips" Color="255,236,193" RelativePosition="0.28,0.5" AnchorPoint="1,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{F727C99C-1682-44d9-AF41-AE37EAAE6767}" Name="txtPropertyValue3_CellGalaxyTips" Text="" FontSize="24" Color="99,255,95" AnchorPoint="0,0.5" RelativePosition="0.3,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{7988089A-140E-4d12-963C-91654C730D5C}" AbsContentSize="250,30" UseAbsSize="True" Name="conProperty4_CellGalaxyTips" RelativePosition="0.5,0.3">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{96F12F46-F6A5-4afb-B9A3-9CF23845CD91}" FontSize="22" Name="txtPropertyName4_CellGalaxyTips" Color="255,236,193" AnchorPoint="1,0.5" RelativePosition="0.28,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{BE839056-2B40-40f2-B797-EE9E6DE345B7}" Name="txtPropertyValue4_CellGalaxyTips" FontSize="24" Text="" Color="99,255,95" AnchorPoint="0,0.5" RelativePosition="0.3,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{E2F2D2A5-0093-4504-B0AC-3981EF5E2B46}" AbsContentSize="250,30" UseAbsSize="True" Name="conProperty5_CellGalaxyTips" RelativePosition="0.5,0.2">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{975E4F44-3645-4e00-A9A7-758990A2A15E}" FontSize="22" Name="txtPropertyName5_CellGalaxyTips" Color="255,236,193" RelativePosition="0.28,0.5" AnchorPoint="1,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{E778B50B-3538-42f9-A7EB-C0D8E3FCCD47}" Name="txtPropertyValue5_CellGalaxyTips" Text="" FontSize="24" Color="99,255,95" AnchorPoint="0,0.5" RelativePosition="0.3,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{CE4BF9C8-DECC-4b77-9895-8C4B3B75F642}" Name="conIcon_CellGalaxyTips" AbsContentSize="250,70" UseAbsSize="True" RelativePosition="0.5,0.84" AbsPosition="135,252">
+                <WZUIContainer Type="WZUIContainer" GUID="{AF6EEA3D-E586-45a8-8BC2-838537D566A3}" AbsContentSize="60,60" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.044,0.457143" AbsPosition="11,32">
+                    <WZUISpine Type="WZUISpine" GUID="{46629ED0-37C5-4b14-B26F-0504BD34E7B4}" FileAtlas="ui/ui_xinghun.atlas" FileJson="ui/ui_xinghun.json" RelativePosition="0.5,1.73333" Name="spineStarIcon_CellGalaxyTips" Loop="True" AbsPosition="30,104" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{0F35494F-7D1D-4d41-85BF-44C39ACF91D7}" FontSize="22" Name="txtStarName_CellGalaxyTips" AnchorPoint="0,0.5" RelativePosition="0.32,0.5" Color="233,166,62" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{C6405A71-F77B-439c-B7D6-819C87C6B7E7}" AbsContentSize="180,100" UseAbsSize="True" Name="CellActivityTips_WndStarSoul" Visible="False" NameCreate="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{8F0B4EDC-F595-448f-A794-8C4E0F459FA2}" File="ui/common/common_scale9_di24.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{0A6B9868-0E9E-4d72-839A-753CA69589E5}" FontSize="22" Name="txtStarName_CellActivityTips" Dimensions="0,0" Color="233,166,62" AnchorPoint="0,0.5" RelativePosition="0.15,0.71" />
+            <WZUIImage Type="WZUIImage" GUID="{A68FA457-CAEF-4cad-ACF6-A34C019A3EC1}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.5" ScaleX="0.8" Scale="0.85" ScaleY="1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{95B43723-26B5-4ec3-A340-CF2472DC912A}" Name="txtStatus_CellActivityTips" AnchorPoint="0,0.5" RelativePosition="0.5,0.71" FontSize="22" Color="233,166,62" Visible="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{32E269BB-793D-4bdb-9391-E4B3CB6B8720}" Name="txtPropertyName_CellActivityTips" RelativePosition="0.15,0.28" AnchorPoint="0,0.5" Color="255,236,193" FontSize="22" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{70250197-F53B-4631-9147-15CAE427CB17}" Name="txtPropertyValue_CellActivityTips" RelativePosition="0.6,0.28" Color="99,255,95" FontSize="22" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{C45C606B-E46F-4ab5-BC77-A4E1B3816D36}" AbsContentSize="210,135" UseAbsSize="True" Name="CellUnActivityTips_WndStarSoul" Visible="False" NameCreate="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{5A071B7F-517E-40a6-B301-64FF050A9F6E}" File="ui/common/common_scale9_di24.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{A9221F97-8277-4048-B4BB-8BC09DC95FFB}" FontSize="24" Name="txtStarName_CellUnActivityTips" Dimensions="" Color="233,166,62" AnchorPoint="0,0.5" RelativePosition="0.1,0.8" />
+            <WZUIImage Type="WZUIImage" GUID="{ED686807-0324-4414-9010-D49E0611BB9B}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.66" ScaleX="1.2" Scale="1" ScaleY="1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{6B19AEDB-85DA-4f3e-A3EF-952CCB3ACA4B}" Name="txtStatus_CellUnActivityTips" AnchorPoint="0,0.5" RelativePosition="0.5,0.8" FontSize="22" Color="158,139,121" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{F9C6231C-21B6-4c9f-9234-F8FC2F77CEB8}" Name="txtPropertyName_CellUnActivityTips" RelativePosition="0.1,0.52" AnchorPoint="0,0.5" FontSize="24" Color="158,139,121" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{DD794DEF-DB0A-4281-818E-BCE60EAE954E}" Name="txtPropertyValue_CellUnActivityTips" RelativePosition="0.6,0.52" FontSize="24" Color="158,139,121" AnchorPoint="1,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3781B949-F2BF-4309-ADBC-CAE2E89B2F32}" Name="txtCostName_CellUnActivityTips" RelativePosition="0.1,0.27" AnchorPoint="0,0.5" FontSize="24" Color="233,166,62" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{62E5DE81-7705-4f91-9843-9EEB03AC48A4}" Name="txtCostValue_CellUnActivityTips" RelativePosition="0.6,0.27" AnchorPoint="1,0.5" Color="255,236,193" FontSize="24" />
+            <WZUIContainer Type="WZUIContainer" GUID="{CDEAC407-7FF8-40d7-896B-D59034CED24D}" AbsContentSize="40,40" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.58,0.29">
+                <WZUIImage Type="WZUIImage" GUID="{B4737374-0FC9-4b90-9DC4-EC4AAA4B183C}" Name="imgCoins_CellUnActivityTips" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{A5E6C080-349B-4181-9ACA-F082A5C96C3D}" Name="CellTotalFightingTips_WndStarSoul" RelativePosition="0.5,0.5" AbsPosition="480,320" AbsContentSize="180,250" UseAbsSize="True" Visible="False" NameCreate="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{96ECC0ED-0CFB-4b3d-9787-C3642F5D9023}" File="ui/common/common_scale9_di24.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{06691259-EA8E-4c80-BD34-BD280DACA6FC}" AbsContentSize="180,30" UseAbsSize="True" Name="conProperty1_CellTotalFightingTips" RelativePosition="0.5,0.7">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{B9ABEA78-9149-43e6-9461-2897DFF7AE27}" FontSize="22" Name="txtPropertyName1_CellTotalFightingTips" Color="255,236,193" AnchorPoint="1,0.5" RelativePosition="0.4,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{458AD695-2310-4006-B0EA-3B352E776938}" Name="txtPropertyValue1_CellTotalFightingTips" Text="" FontSize="24" Color="99,255,95" AnchorPoint="0,0.5" RelativePosition="0.5,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{9FF6099C-BD00-4561-A697-A67ACE2F1766}" AbsContentSize="180,30" UseAbsSize="True" Name="conProperty2_CellTotalFightingTips" RelativePosition="0.5,0.58">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{DB99D155-F656-41b2-B55A-181EF3EACD8F}" FontSize="22" Name="txtPropertyName2_CellTotalFightingTips" Color="255,236,193" RelativePosition="0.4,0.5" AnchorPoint="1,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{A5ED4601-3226-4a33-8599-BA449B04E6B1}" Name="txtPropertyValue2_CellTotalFightingTips" FontSize="24" Text="" Color="99,255,95" AnchorPoint="0,0.5" RelativePosition="0.5,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5DAAB19C-D3DC-4a93-86C8-27253CDB09E4}" AbsContentSize="180,30" UseAbsSize="True" Name="conProperty3_CellTotalFightingTips" RelativePosition="0.5,0.46">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6E6045F3-E77C-41bb-926B-8FCCFC7123E3}" FontSize="22" Name="txtPropertyName3_CellTotalFightingTips" Color="255,236,193" RelativePosition="0.4,0.5" AnchorPoint="1,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{DA94A3CE-D109-45a2-B576-7F71A163BF8B}" Name="txtPropertyValue3_CellTotalFightingTips" Text="" FontSize="24" Color="99,255,95" AnchorPoint="0,0.5" RelativePosition="0.5,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{B981E38E-2AFF-4b1b-8005-E8A71935730D}" AbsContentSize="180,30" UseAbsSize="True" Name="conProperty4_CellTotalFightingTips" RelativePosition="0.5,0.34">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{C7F902CA-19A0-472b-B611-F271B497C0DA}" FontSize="22" Name="txtPropertyName4_CellTotalFightingTips" Color="255,236,193" AnchorPoint="1,0.5" RelativePosition="0.4,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{941B148C-0D3D-4786-A907-46F5FAA1ECAE}" Name="txtPropertyValue4_CellTotalFightingTips" FontSize="24" Text="" Color="99,255,95" AnchorPoint="0,0.5" RelativePosition="0.5,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{9B980F6F-78F2-41c2-90CD-E2D2386931A5}" AbsContentSize="180,30" UseAbsSize="True" Name="conProperty5_CellTotalFightingTips" RelativePosition="0.5,0.22">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{BE22B93B-D5FC-43db-85B8-E3C325295D1E}" FontSize="22" Name="txtPropertyName5_CellTotalFightingTips" Color="255,236,193" RelativePosition="0.4,0.5" AnchorPoint="1,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{19622BF5-7679-4a82-B2C8-7C91A992A1E1}" Name="txtPropertyValue5_CellTotalFightingTips" Text="" FontSize="24" Color="99,255,95" AnchorPoint="0,0.5" RelativePosition="0.5,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{EAB6462D-10D1-469d-BA1E-D8F6E47E409B}" Name="conIcon_CellTotalFightingTips" AbsContentSize="200,50" UseAbsSize="True" RelativePosition="0.5,0.84" AbsPosition="135,252">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{09CEBD14-EEE5-47ed-8BD9-36F44271F482}" FontSize="22" Name="txtStarName_CellTotalFightingTips" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Color="233,166,62" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{78C9EFF3-3444-4213-A4A8-E6D28F44D68E}" NameCreate="True" Name="CellStarSoul_WndStarSoul" AbsContentSize="942,558" UseAbsSize="True" Visible="False" RelativeSize="" Scale="1">
+            <WZUIImage Type="WZUIImage" GUID="{36A8036B-AC29-48f5-BA91-5E11E3589C30}" File="ui/starsoul/common_pic_xcbg.png" UseOriginSize="True" Name="imgStarBk_CellStarSoul" />
+            <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{E434EEAA-01F0-469e-BC33-A606004B8FB3}" Name="" Scale="1" Order="0" RelativePosition="0.501492,0.488985" AbsPosition="468.393,267.964" TouchEnable="False" TouchSwallow="False" AbsContentSize="934,548" UseAbsSize="True" Visible="True">
+                <Stencil Type="WZUIImage" GUID="{C9A74005-83A5-41f7-AE1D-B3182E133454}" File="ui/common/common_scale9_zhezhao1.png" UseOriginSize="True" RelativePosition="0.498964,0.512261" Scale="15.5" AbsPosition="466.032,280.719" ScaleX="15.541" ScaleY="9.142" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{81103D1F-C39F-4024-9621-7B86E5CA0FC8}" Name="" AbsContentSize="934,548" UseAbsSize="True" RelativePosition="0.496896,0.516361" AbsPosition="464.101,282.966">
+                    <WZUIParticle Type="WZUIParticle" GUID="{EA926DAE-89EC-4ad4-BAC0-7D14A970C450}" PlistFile="particle/ui_xinghun_lizi.plist" RelativePosition="0.5,0.5" RelativeSize="1,1" Scale="1" ScaleY="1" ScaleX="1" Visible="True" />
+                </WZUIContainer>
+            </WZUIClippingContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{04027AE0-1CA8-4eff-A64F-A39A30FD5B45}" AbsContentSize="206,62" UseAbsSize="True" RelativePosition="0.138425,0.909307" AbsPosition="130.396,507.394" Name="conTopName_CellStarSoul">
+                <WZUIImage Type="WZUIImage" GUID="{E4ABAA8D-91B5-4bbb-9CE5-4D95235BC300}" File="ui/starsoul/common_icon_zihenfu.png" UseOriginSize="True" AnchorPoint="1,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{1ABCF6A5-BA9C-454b-B559-D9348CB7F63A}" File="ui/starsoul/common_icon_zihenfu.png" UseOriginSize="True" FlipY="False" FlipX="True" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{FDC063CE-B30B-4b05-AF9A-EB832B7B313F}" FontSize="26" Color="255,227,116" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" Name="txtStarTitle_CellStarSoul" RelativePosition="0.5,0.55" AnchorPoint="0.5,0.5" />
+                <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onShowGalaxyTips" GUID="{4594B62C-E0C8-48c4-A39A-E5266EFAC0BD}" LuaObjectName="">
+                    <NormalElement Type="WZUIContainer" GUID="{5260D189-21BD-49bd-82EF-9B3217AE39CB}" />
+                    <SelectElement Type="WZUIContainer" GUID="{AB3E3DDC-E923-4eac-8571-08575D61C733}" />
+                    <DisableElement Type="WZUIContainer" GUID="{0D290400-2502-4767-94BF-076A263EDA50}" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{3B8B2E9A-ED91-4cae-AD37-26FE3C99BC80}" File="ui/starsoul/common_pic_shuiping1.png" UseOriginSize="True" Name="imgStarIcon1_CellStarSoul" Opacity="200" />
+            <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{584F3976-D6D1-49b7-B8B9-881D64970087}" Name="conClipping" Scale="1" Order="20" RelativePosition="0.501492,0.488985" AbsPosition="468.393,267.964" TouchEnable="False" TouchSwallow="False" AbsContentSize="934,548" UseAbsSize="True" Visible="True">
+                <Stencil Type="WZUIImage" GUID="{6322B0EF-00B3-40d0-ADC2-529459DF4D8C}" File="ui/common/common_scale9_zhezhao1.png" UseOriginSize="True" RelativePosition="0.498964,0.512261" Scale="15.5" AbsPosition="466.032,280.719" ScaleX="15.541" ScaleY="9.142" Visible="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{412A2BD6-134E-4f42-84F5-1219FBE85478}" Name="" AbsContentSize="934,548" UseAbsSize="True" RelativePosition="0.496896,0.516361" AbsPosition="464.101,282.966">
+                    <WZUIParticle Type="WZUIParticle" GUID="{10AF34ED-CC9D-418e-A1F2-B85D39FBAAB7}" PlistFile="particle/ui_xinghun_complete.plist" RelativePosition="0.5,0.75" Name="particleAllActivity_WndStarSoul" Visible="False" />
+                </WZUIContainer>
+            </WZUIClippingContainer>
+        </WZUIContainer>
+    </WZUIFrame>
+</WndStarSoul>

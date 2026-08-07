@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<CellMailList GUID="{DFC7CD12-B9A1-4d03-A311-45E952FCEBB4}">
+	<WZUIContainer AbsContentSize="310,80" AbsPosition="0" GUID="{FA7EC33B-4664-48aa-809F-698DD8827760}" LuaObjectName="" Name="CellMailList" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" Scale="1" ScaleX="1" ScaleY="1" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+		<WZUIContainer GUID="{49BA3AE3-3494-48c4-BE5C-6190CD13376F}" Name="conMailListBtnImgBk_CellMailList" Type="WZUIContainer">
+			<WZUIContainer Type="WZUIContainer" GUID="{78458539-BD30-415e-9905-B66AF442D18A}" AbsContentSize="304,80" UseAbsSize="True">
+				<WZUI9Image File="ui/common/common_scale9_di18.png" GUID="{9F219D90-FA03-4d24-BFAA-F4B3D0F120A1}" Scale="" ScaleX="1" ScaleY="1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True" Tag="-2" Order="-2" Name="" TouchEnable="False" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{84360212-06D7-4f36-918D-D67183E085FC}" AbsContentSize="310,90" UseAbsSize="False" ScaleX="1" ScaleY="1" Scale="1">
+				<WZUI9Image File="ui/common/common_scale9_beibaodi_sel.png" GUID="{2864BFD8-7856-4af6-A6DF-6683E520B924}" Scale="1" ScaleX="1" ScaleY="1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True" Tag="-2" Order="1" Name="imgCellBg_CellMailList" RelativePosition="0.5,0.5" TouchEnable="False" />
+			</WZUIContainer>
+			<Button GUID="{54BF382D-CF0D-49dc-9FDF-26BD60D53855}" LuaDoneFunctionName="onClickCurCell" Name="btnMailListImgBk_CellMaiList" RelativeSize="1,1" Scale="1" ScaleX="1" ScaleY="1" Type="WZUIButton" Visible="True" Tag="2">
+				<NormalElement GUID="{C33C71A8-8982-45b6-81EE-C4983F2C65B6}" Type="WZUIContainer" />
+				<SelectElement GUID="{8AFE95EF-F506-49a2-8CEF-A38799D7FB50}" Type="WZUIContainer" />
+				<DisableElement GUID="{C2083066-161F-4e4a-8BD2-AF1C5BD745F1}" Type="WZUIContainer" Visible="False" />
+			</Button>
+		</WZUIContainer>
+		<WZUIContainer GUID="{CBAAA045-7A4B-414f-A8B5-A4B21153009F}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" Visible="True" Scale="1" TouchEnable="False">
+			<WZUIImage AbsPosition="50,50" AnchorPoint="0.5,0.5" File="" GUID="{FB9BE0EF-7390-4ca8-A5FA-27C2253D57C4}" LuaTouchBeganFunction="" Name="imgMailIcon_CellMaiList" RelativePosition="0.14,0.50.54771" Type="WZUIImage" UseAbsCoordinate="False" UseOriginSize="True" Visible="True" />
+			<WZUILabelTTF Alignment="Center" AnchorPoint="0,0.5" ChineseLengthPolicy="1" Color="79,60,48" Dimensions="0,0" FontSize="22" GUID="{4E5C6E35-B2DC-4fe6-BA42-0599EF7886B6}" MaxLength="16" Name="txtMailTheme_CellMailList" RelativePosition="0.275054,0.5" Text="" Type="WZUILabelTTF" BoldFont="False" AbsPosition="85.2667,27" />
+			<WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" ChineseLengthPolicy="1" Color="86,44,31" Dimensions="0,0" FontSize="22" GUID="{C4987300-97E0-48f8-995F-3908649834BA}" MaxLength="10" Name="txtMailSender_CellMaiList" RelativePosition="0.65703,0.5" Text="888888888888" Type="WZUILabelTTF" Visible="False" BoldFont="False" />
+			<WZUILabelTTF Alignment="Center" AnchorPoint="0,0.5" Color="158,139,121" Dimensions="0,0" FontSize="20" GUID="{7F97DC61-3054-4859-B961-7A010D95ACE0}" Name="txtMailData_CellMaiList" RelativePosition="0.744142,0.7" Text="" Type="WZUILabelTTF" UseOriginSize="True" BoldFont="False" AbsPosition="230.684,56" />
+			<WZUIImage Type="WZUIImage" GUID="{2DA76651-0984-4744-BA5D-60E1C42F66F8}" Name="imgIsNew_CellMailList" File="ui/common/common_icon_yjnew.png" UseOriginSize="True" RelativePosition="0.102994,0.789852" Visible="False" />
+			<WZUIContainer Type="WZUIContainer" GUID="{3A42A675-E71A-4f65-8347-2A7D19417B08}" Name="conHasGet_CellMaiList">
+				<WZUIImage AbsPosition="50,50" AnchorPoint="0.5,0.5" File="ui/common/commom_icon_ylq.png" GUID="{12D86C6F-FD52-4299-9E9D-4202D856C3E1}" LuaTouchBeganFunction="" Name="imgHasGet_CellMaiList" RelativePosition="0.14,0.50.54771" Type="WZUIImage" UseAbsCoordinate="False" UseOriginSize="True" Visible="False" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{60F67CF7-D459-49d6-B829-16B1B97B4271}" Name="conHead_CellMaiList" AbsContentSize="64,64" UseAbsSize="True" RelativePosition="0.14,0.5" TouchEnable="False" />
+			<WZUIImage Type="WZUIImage" GUID="{2C5F3C13-1E1F-46fa-BF01-8DA37090B7D5}" Name="imgType_CellMailList" File="ui/mail/common_icon_GMtb.png" UseOriginSize="True" RelativePosition="0.36129,0.725" AbsPosition="112,58" Visible="False" />
+		</WZUIContainer>
+		<WZUICheckBox GUID="{68E76831-CE19-4efb-9E3C-E9A1DFF78EDB}" LuaSelectedFunctionName="" Name="selMailCheckBox_CelMailList" RelativePosition="2.8766,0.458333" RelativeSize="1,1" SelectedIndex="0" Type="WZUICheckBox" LuaCheckedFunctionName="onSelBtnClick" Tag="2" Visible="True" AbsContentSize="300,80" UseAbsSize="True">
+			<CheckElement Type="WZUIContainer" GUID="{F529B5F7-1518-4c2a-A640-83556324152F}">
+				<WZUIImage File="ui/common/common_scale9_di13.png" GUID="{5454182F-C28E-48f3-B820-4A9A6AFB345A}" Type="WZUIImage" UseOriginSize="True" Visible="True" RelativePosition="0.146667,0.475" />
+				<WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{4071E691-B7AF-4a34-BD0F-AD7834B20036}" Scale="" ScaleX="1" ScaleY="1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True" Tag="-2" Order="-2" Name="" TouchEnable="True" Opacity="0" />
+			</CheckElement>
+			<CheckElement Type="WZUIContainer" GUID="{D038A39C-B5CC-4dc0-8913-17A233BB0D75}">
+				<WZUIImage File="ui/common/common_scale9_di13.png" GUID="{9A72318B-C88F-46e1-854C-A1C8A6AAACC9}" Type="WZUIImage" UseOriginSize="True" Visible="True" RelativePosition="0.146667,0.475" />
+				<WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{6E5CAD41-4BCD-4ead-83B6-2A8851EDFC11}" Scale="" ScaleX="1" ScaleY="1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True" Tag="-2" Order="-2" Name="" TouchEnable="True" Opacity="0" />
+			</CheckElement>
+		</WZUICheckBox>
+		<WZUIContainer GUID="{CA6E5FAE-1C9A-4f35-97E8-77FFA987A2A9}" Name="conCheckBoxMail_CellMaiList" RelativePosition="0.5,0.5" RelativeSize="0.15,0.6" Type="WZUIContainer" Visible="False" UseAbsSize="True" AbsContentSize="300,80">
+			<Button Type="WZUIButton" AbsContentSize="0,0" UseAbsSize="False" LuaDoneFunctionName="onSelBtnClick" GUID="{568EC65C-CE3A-4c9a-B9F5-9B4D974910DE}">
+				<NormalElement Type="WZUIContainer" GUID="{72401EE9-3077-4a2d-A25D-E34173BB27BF}" />
+				<SelectElement Type="WZUIContainer" GUID="{D63185AF-4AA5-4941-BA04-7BAD70A85778}" />
+				<DisableElement Type="WZUIContainer" GUID="{B3B5E8AE-7DF1-4399-964D-8E307548E296}" />
+			</Button>
+			<WZUIContainer Type="WZUIContainer" GUID="{39DDCE51-ED0C-4da9-8638-21D066D4C467}" TouchEnable="False" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.143334,0.5" AbsPosition="43.0001,40">
+				<WZUIImage Type="WZUIImage" GUID="{D6E25B66-4674-4ab2-939D-0E5BEE88EC54}" File="ui/common/common_scale9_di13.png" RelativePosition="0.5,0.5" AbsPosition="-99,20" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{2D0056D3-2C71-46c2-83F9-3E977908B0F6}" Name="conGou_CellMailList" TouchEnable="False" Visible="True" RelativePosition="0.149354,0.5" AbsPosition="44.8063,40" AbsContentSize="40,40" UseAbsSize="True">
+				<WZUIContainer Type="WZUIContainer" GUID="{29221484-FF1B-475a-B625-79AF6EEEB59F}" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.5,0.5" TouchEnable="False">
+					<WZUIImage Type="WZUIImage" GUID="{92DCFEE4-E482-4a4c-8E20-C5EC0622063C}" File="ui/common/common_scale9_beibaodi_sel.png" RelativePosition="0.5,0.479167" />
+				</WZUIContainer>
+				<WZUIContainer Type="WZUIContainer" GUID="{1DA334AF-5B77-478e-944D-BB255E3467F2}" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True" TouchEnable="False">
+					<WZUIImage Type="WZUIImage" GUID="{FE25C6AB-1966-437b-92B2-1BC16B24DE2D}" File="ui/common/common_icon_gou.png" RelativePosition="0.5,0.5" Visible="True" />
+				</WZUIContainer>
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIContainer>
+</CellMailList>

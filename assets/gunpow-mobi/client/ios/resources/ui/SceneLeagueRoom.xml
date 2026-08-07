@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<SceneLeagueRoom GUID="{5C6AAFF7-F187-4f9b-BE52-9E09A8E6367E}">
+    <WZUIFrame Type="WZUIFrame" GUID="{477D96DB-B361-4d93-B0D8-9AAE1C0E5CDA}" LuaTouchBeganFunction="onTouchBegin" LuaObjectName="SceneLeagueRoom" Name="SceneLeagueRoom">
+        <WZUIContainer Type="WZUIContainer" GUID="{AA225745-C22B-4ec5-AC58-594F91D32155}">
+            <WZUIImage Type="WZUIImage" GUID="{C724E470-BB62-4569-A68E-A4590A8FEA73}" File="ui/login/login_pic_bg1.png" Visible="True" />
+            <WZUI9Image Type="WZUI9Image" GUID="{8DAAFE58-554F-4da0-BE11-2D4D306F48E7}" File="ui/hero/common_scale9_heidi13.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{B065D48B-5665-4dab-BABF-886768C702FE}" RelativeSize="1,0.092" AnchorPoint="0.5,1" RelativePosition="0.5,0.998438" AbsPosition="480,639">
+                <WZUIContainer Type="WZUIContainer" GUID="{C3994406-F4E9-4b60-ABA1-40A279A4FA23}" RelativeSize="0.5,1" AnchorPoint="0,0.5" RelativePosition="0,0.5" AbsContentSize="" UseAbsSize="False" Name="">
+                    <WZUI9Image Type="WZUI9Image" GUID="{6A683675-B04E-4a0b-955F-4413523AF174}" File="ui/hero/hero_scale9_yxlan.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{06823590-3DF1-41c3-91C3-C5CE3EAC3E12}" RelativeSize="0.5,1" AnchorPoint="1,0.5" RelativePosition="1,0.5" AbsContentSize="" UseAbsSize="False" Name="" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{574F84AB-4D26-41b8-9C05-23318086DB73}" File="ui/hero/hero_scale9_yxhong.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{CA75D2A4-65C8-4e01-A6B3-FDAFD5BC9AF5}" RelativeSize="1,1" AnchorPoint="0.5,1" RelativePosition="0.5,1" AbsPosition="480,630" Visible="True" ShowAll="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{68313C70-36E9-4332-A488-15493B337C03}" RelativeSize="0.5,1" AnchorPoint="0,0.5" RelativePosition="0,0.5" AbsContentSize="" UseAbsSize="False" Name="">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1C414C61-9350-48b4-8EA0-4EB39B9B6197}" Name="txtName1_SceneLeagueRoom" Text="" LabelStyleKey="C1_F24" RelativePosition="0.710416,0.58" AbsPosition="341,34.048" AnchorPoint="1,0.5" Alignment="Right" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{A68AFA10-2798-4784-9AB8-7CDCE6950C37}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.798189,0.3" AbsPosition="383.131,17.8325" Name="" Visible="True">
+                            <WZUI9Image Type="WZUI9Image" GUID="{F7C547AB-15E1-4150-A0A3-E3E9480B9B5C}" File="ui/common/common_scale9_beibaodi.png" CapInsets="20,20,20,30" Visible="True" />
+                            <WZUI9Image Type="WZUI9Image" GUID="{9DCE6E0F-8C7C-4850-93C5-AFABD8C07ADD}" File="ui/common/common_scale9_wuse.png" CapInsets="20,20,20,30" Visible="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{70ED63F5-0A33-4cee-983F-81C60FFF9349}" File="ui/hero/hero_icon_yxlsdb.png" Scale="0.85" />
+                        </WZUIContainer>
+                        <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{E0BD2E76-2AB3-420d-9658-E2D6B0E9BB55}" TouchEnable="False" RelativePosition="0.798189,0.3" AnchorPoint="0.5,0.5" Visible="True" AbsContentSize="60,60" UseAbsSize="True" Scale="0.8">
+                            <Stencil Type="WZUIImage" GUID="{D2D5D614-5492-4313-AECD-A76A71CD77BC}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" Visible="True" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{ABB37EEF-C8DF-4e06-9434-58144E4A5176}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="383.131,17.8325" Name="conIcon1_SceneLeagueRoom" Visible="True" />
+                        </WZUIClippingContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{46AA1F69-C9BA-4243-A8F9-96F703514842}" RelativeSize="0.5,1" AnchorPoint="1,0.5" RelativePosition="1,0.5" AbsContentSize="" UseAbsSize="False" Name="" Visible="True">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{BBEC0CA1-7EE2-4203-81AE-510D37A3E093}" Name="txtName2_SceneLeagueRoom" Text="" LabelStyleKey="C11_F24" RelativePosition="0.275,0.58" AbsPosition="132,35.048" AnchorPoint="0,0.5" Alignment="Left" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{784BEB5B-2D5D-4a75-ADC2-B589F6C191A6}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.187501,0.3" AbsPosition="90.0003,17.664" Name="" Visible="True">
+                            <WZUI9Image Type="WZUI9Image" GUID="{D33371B4-5171-47c6-9F3D-638E1514E1C7}" File="ui/common/common_scale9_beibaodi.png" CapInsets="20,20,20,30" Visible="True" />
+                            <WZUI9Image Type="WZUI9Image" GUID="{29BC6F9F-8200-4c6a-848B-3F852BAE63E2}" File="ui/common/common_scale9_wuse.png" CapInsets="20,20,20,30" Visible="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{A533ED55-9B78-4805-BF19-EB802B6BDB9F}" File="ui/hero/hero_icon_yxlsdb.png" Scale="0.85" />
+                        </WZUIContainer>
+                        <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{5849F47F-84A9-44f0-8C82-A54370ECE8CA}" TouchEnable="False" RelativePosition="0.187501,0.3" AnchorPoint="0.5,0.5" Visible="True" AbsContentSize="60,60" UseAbsSize="True" Scale="0.8">
+                            <Stencil Type="WZUIImage" GUID="{2253BE1F-742E-4c24-A314-3D1AC3BA6BE9}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.5" Visible="True" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{B82956DF-539B-4aca-810F-9B61DE41FF76}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="90.0003,17.664" Name="conIcon2_SceneLeagueRoom" Visible="True" />
+                        </WZUIClippingContainer>
+                    </WZUIContainer>
+                    <WZUIImage Type="WZUIImage" GUID="{8F5D67E8-155C-4600-A83C-27EC61428745}" File="ui/hero/hero_pic_yxzjhw.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="480,30.44" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{C6C57659-7804-49d7-B7B4-833ABDE88245}" ShowAll="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{08721A57-2EBA-41dd-8152-69B8D121878F}" RelativeSize="0.4,1" RelativePosition="0.015625,0.485938" AnchorPoint="0,0.5" Name="" AbsContentSize="340,513" UseAbsSize="True" AbsPosition="15,311">
+                <WZUIContainer Type="WZUIContainer" GUID="{272C8E52-C2C0-4c67-AF44-A0D863966FE3}" AbsContentSize="338,164" UseAbsSize="True" RelativePosition="0.5,1" AbsPosition="296.714,352.143" Name="conPlayer1_SceneLeagueRoom" AnchorPoint="0.5,1" />
+                <WZUIContainer Type="WZUIContainer" GUID="{87DFC4EF-F737-4521-8B57-C4F69EB1C8C0}" AbsContentSize="338,164" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="117.888,462.286" Name="conPlayer2_SceneLeagueRoom" />
+                <WZUIContainer Type="WZUIContainer" GUID="{4D58C255-EAE1-4517-9B52-DAB14C88A1C2}" AbsContentSize="338,164" UseAbsSize="True" RelativePosition="0.5,0" AbsPosition="117.5,190.286" Name="conPlayer3_SceneLeagueRoom" AnchorPoint="0.5,0" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{D418D192-C8E2-48da-B188-BEEB8708B7AD}" RelativeSize="0.4,1" RelativePosition="0.630208,0.485938" AnchorPoint="0,0.5" Name="" AbsContentSize="340,513" UseAbsSize="True" AbsPosition="605,311">
+                <WZUIContainer Type="WZUIContainer" GUID="{C0E75C42-2486-4e27-991E-049AA17C007A}" AbsContentSize="338,164" UseAbsSize="True" RelativePosition="0.5,1" AbsPosition="296.714,352.143" Name="conPlayer4_SceneLeagueRoom" AnchorPoint="0.5,1" />
+                <WZUIContainer Type="WZUIContainer" GUID="{F95EF190-CEBA-4314-B55F-1428AEE2EE13}" AbsContentSize="338,164" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="117.888,462.286" Name="conPlayer5_SceneLeagueRoom" />
+                <WZUIContainer Type="WZUIContainer" GUID="{384356C2-57F0-4e8e-91E0-5B544AB976F6}" AbsContentSize="338,164" UseAbsSize="True" RelativePosition="0.5,0" AbsPosition="117.5,190.286" Name="conPlayer6_SceneLeagueRoom" AnchorPoint="0.5,0" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{E1C222AB-E3B6-4011-ABAD-26C2792982C6}" Name="" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{82542D15-0661-4fa1-B4CB-E2D2F9630E89}" AbsContentSize="250,110" UseAbsSize="True" RelativePosition="0.5,0.085" AnchorPoint="0.5,0" Visible="True" Name="" AbsPosition="480,54.4">
+                    <WZUIContainer Type="WZUIContainer" GUID="{BB630F58-9069-43d4-8B43-D8392CBB3374}" RelativeSize="1,0.5" AnchorPoint="0.5,1" RelativePosition="0.5,1" Name="con16_SceneLeagueRoom" Visible="False">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{82F82931-D3F9-4601-9716-8B3E22AEF9CB}" Name="txtRound_SceneLeagueRoom" RelativePosition="0.5,0.736364" AbsPosition="125,40.5" AnchorPoint="0.5,0.5" LabelStyleKey="C11_F24" Text="" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{302A8393-5B54-47e3-BEAC-5F2F583806E8}" Name="txtRate_SceneLeagueRoom" RelativePosition="0.5,0.381818" AbsPosition="125,21" AnchorPoint="0.5,1" LabelStyleKey="C11_F24" Text="" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{092BAD7D-6454-4633-851D-B7DAFF911BE1}" RelativeSize="1,0.5" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{56FF3188-0D79-4195-B417-A365CAC59074}" Name="txtTime_SceneLeagueRoom" LabelStyleKey="C11_F22_S4_C5" Text="" RelativePosition="0.5,0.627272" AbsPosition="125,34.5" AnchorPoint="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{A2CD178F-6623-4de8-BA79-C4922A13332C}" Name="txtTimeTip_SceneLeagueRoom" LabelStyleKey="C7_F22" Text="11111" RelativePosition="0.5,0" TextKey="LEAGUE_NO_JOIN" Visible="True" AnchorPoint="0.5,0" Scale="1" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{3B4D2EF9-03F4-4cd8-BB8A-48A4709F3D41}" UseAbsSize="False" AbsContentSize="" RelativePosition="0.5,0.5" Visible="True" TouchSwallow="False" TouchEnable="False" ShowAll="False" RelativeSize="0.3,0.3">
+                    <WZArmature Type="WZArmature" GUID="{171CA213-FBBA-428c-823D-FA2EF0BFDABB}" ArmatureName="ui_battleloading" UseOriginSize="True" RelativePosition="0.5,0.5" Visible="True" RelativeSize="1,1" TouchEnable="False" TouchSwallow="False" UseAbsCoordinate="False" AbsPosition="0,0" GrayRender="False" ArmatureFile="ui/ui_battleloading.xml" Name="armVs_SceneLeagueRoom" AnchorPoint="0.5,0.5" AnimationFinishLuaFunction="">
+                        <Action Type="WZUIArmatureAnimationById" GUID="{520F60B3-37AE-45a8-B7D7-A337DFF4892B}" Bone="" AnimationId="0" Loop="-1" IsLoop="False" RunTimes="1" />
+                    </WZArmature>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{12294F50-485D-44d2-8365-FE48B6E578A7}">
+            <WZUIContainer Type="WZUIContainer" GUID="{B15CE665-3064-482d-AE0D-48D00C885405}" AbsContentSize="86,64" UseAbsCoordinate="False" UseAbsSize="True" AnchorPoint="0,1" RelativePosition="0,1" Visible="True" ShowAll="True">
+                <Button Type="WZUIButton" LuaDoneFunctionName="onBack" GUID="{DEBAD849-A3D2-42ef-A9C4-8199422E1ABD}" Name="btnBack_SceneLeagueRoom">
+                    <NormalElement Type="WZUIContainer" GUID="{E085A730-FFE5-40b5-A2E2-580B1B04B6A8}">
+                        <WZUIImage Type="WZUIImage" GUID="{891EAC9F-82FF-455d-BA67-415EF7F4A48B}" File="ui/common/common_icon_fanhui.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{C22D2118-57F6-40b1-B699-1D3841246C9E}">
+                        <WZUIImage Type="WZUIImage" GUID="{43948101-431B-4387-B743-D55EB1C98402}" File="ui/common/common_icon_fanhui_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{8A572AFF-CFB0-4670-A7A9-1DF26804B5FD}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{E73D0DC1-897A-479d-9C39-A29D8BD8D1DC}" AbsContentSize="86,55" UseAbsCoordinate="False" UseAbsSize="True" AnchorPoint="0,0" RelativePosition="0,0" Visible="True" ShowAll="True">
+                <Button Type="WZUIButton" LuaDoneFunctionName="onChat" GUID="{BE642759-8708-421f-9703-6A20FAC94A00}" Name="">
+                    <NormalElement Type="WZUIContainer" GUID="{36336EB3-7A25-4acd-A27F-E3BE4C1710D6}">
+                        <WZUIImage Type="WZUIImage" GUID="{61149BB6-8027-4dcc-9821-0E5060626EEC}" File="ui/common/common_icon_liaotian.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{02FBA406-3781-438e-9BE8-76D7911D330B}">
+                        <WZUIImage Type="WZUIImage" GUID="{C421C240-386C-4068-AEE6-D7EDFDDC9D5C}" File="ui/common/common_icon_liaotian.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{F04C964F-FB5D-473b-92D3-323B6AD07101}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{AB27A61C-18D5-4dc2-9FBF-5DDCDA3AAAE2}" Name="conTips_SceneLeagueRoom" RelativePosition="0.5,0.498437" AbsPosition="480,319" ShowAll="True" />
+    </WZUIFrame>
+</SceneLeagueRoom>

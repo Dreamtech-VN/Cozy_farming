@@ -1,0 +1,55 @@
+﻿<WndTrain GUID="{d06b4f29-1699-4f43-948a-229ac82fa5f0}">
+    <WZUIWindow Type="WZUIWindow" GUID="{0084b3ff-164f-4078-9873-7fcb92ca0568}" LuaObjectName="WndTrain" Name="WndTrain" NameCreate="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{c6c15e17-8d95-48eb-9818-ee60eb5c2e1d}" AbsContentSize="900,535" UseAbsSize="True" Visible="True" RelativePosition="0.496875,0.503125">
+            <WZUI9Image Type="WZUI9Image" GUID="{c1502fa6-3a74-44d7-adc6-2ab082000d98}" File="ui/common/common_scale9_di19.png" CapInsets="134,80,1,1" TouchEnable="False" Visible="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{e0e28575-5279-46be-b723-baa9bd93806b}" TextKey="HALL_MATCH_2" LabelStyleKey="SMALL_WINDOW_TITLE" RelativePosition="0.5,0.940299" Text="" Name="" />
+            <WZUIContainer Type="WZUIContainer" GUID="{85b474e5-47b4-498c-bbe1-ca061288746c}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.959068,0.942035" Visible="True" Name="">
+                <Button Type="WZUIButton" GUID="{3290c525-c3ef-44ab-8548-5d48ddf58466}" RelativePosition="0.5,0.5" LuaDoneFunctionName="onClickClose" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{5b4d69a3-64f0-4ed4-987c-6ed57120bcb7}">
+                        <WZUIImage Type="WZUIImage" GUID="{1d833bd7-1f8e-4854-a902-4b03c90980ff}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{c61c4b41-0a2d-4ba6-bdec-11ce24672e0a}">
+                        <WZUIImage Type="WZUIImage" GUID="{1bc53a6c-8b94-4f7f-9794-8e8f0968e307}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{9ef880b7-99ae-45cb-9560-1b9600c16320}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{e97d8135-f85b-4c20-99a9-771a769ddc7b}" AbsContentSize="885,512" UseAbsSize="True" RelativePosition="0.500629,0.454566" Name="" Order="0">
+                <WZUIContainer Type="WZUIContainer" GUID="{82e1a19c-d8f8-45f1-bd7a-eef6159fde41}" AbsContentSize="582,450" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.00903955,0.496094">
+                    <WZUI9Image Type="WZUI9Image" GUID="{755da6aa-e5f4-46ce-b140-00761658cee6}" File="ui/common/common_scale9_di12.png" Opacity="178" />
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{3709a3bb-c88d-468f-be7f-46cc861d0543}" Name="tabRoomList_WndTrain" ColumnCount="2" CellElementHeight="0.25" EnableVerticalScroll="True" EnableMoveHorizontal="False" RelativeSize="0.97,0.97" RelativePosition="0.498282,0.5" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{72cf089b-46c3-4527-9200-46f82edabef5}" AbsContentSize="275,450" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="0.9887,0.496094">
+                    <WZUI9Image Type="WZUI9Image" GUID="{a7d3e34d-9939-4033-98e8-a65bf407b660}" File="ui/common/common_scale9_di12.png" Opacity="178" />
+                    <WZUIImage Type="WZUIImage" GUID="{84eb6795-2227-43ed-a70d-35dc914eef9f}" File="ui/common/common_icon_zdms.png" UseOriginSize="True" RelativePosition="0.5,0.881114" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{0d0693d3-7b59-4118-ba7c-a0c5df87408a}" AbsContentSize="270,175" UseAbsSize="True" RelativePosition="0.5,0.566667">
+                        <WZUI9Image Type="WZUI9Image" GUID="{950a2c05-e47e-4022-b8e2-463e79405e17}" File="ui/common/common_scale9_lxs.png" UseOriginSize="False" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{9aae0d77-1d6e-4bda-b72b-665cce4eb5e5}" LabelStyleKey="C13_F22" Text="" Dimensions="225,0" RelativePosition="0.5,0.925714" Alignment="Left" TextKey="ATH_SAFE_DESC2" Name="txtDescribe_WndTrain" AnchorPoint="0.5,1" />
+                    </WZUIContainer>
+                    <Button Type="WZUIButton" GUID="{4aacb8d1-4ffb-4648-806d-cb71470d8853}" AbsContentSize="120,62" UseAbsSize="True" LuaDoneFunctionName="onClickFindRoom" RelativePosition="0.5,0.262214">
+                        <NormalElement Type="WZUIContainer" GUID="{d9d6a7c4-f64e-4bd0-a319-101df7d4ac8d}">
+                            <WZUIImage Type="WZUIImage" GUID="{62ce4efc-6bf2-465a-bc65-42687d29e1ae}" File="ui/common/common_btn_anniu3_1.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{eff69811-cb91-4cc0-a606-1e2422574307}" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="FIND_ROOM" Name="txtBtn1_WndTrain" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{13ecdab4-5c25-4d61-9d8b-e2ec2094be67}">
+                            <WZUIImage Type="WZUIImage" GUID="{7f2272fb-dba9-495a-9b0f-537c29d96fa2}" File="ui/common/common_btn_anniu3_1_sel.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c8146f7b-d40b-4561-9bb3-6a6e15f7b0d0}" LabelStyleKey="NORMAL_ORANGE_BTN" TextKey="FIND_ROOM" Name="txtBtnSel1_WndTrain" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{86347735-1019-441f-9db9-2507f66512e7}" />
+                    </Button>
+                    <Button Type="WZUIButton" GUID="{76d1eb5b-1d70-41be-9785-2dc870417c40}" AbsContentSize="120,62" UseAbsSize="True" LuaDoneFunctionName="onClickCreateRoom" RelativePosition="0.5,0.0996271">
+                        <NormalElement Type="WZUIContainer" GUID="{63471d57-dc80-41d1-9219-71d79c020343}">
+                            <WZUIImage Type="WZUIImage" GUID="{6e6a15c2-3be8-428c-a1bb-ab3c7b8b81f9}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a6429998-3415-4aa7-b22a-c38da9d7e80d}" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="CREATE_ROOM" Name="txtBtn2_WndTrain" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{6daf97a1-8133-495c-9644-d097bc13ee45}">
+                            <WZUIImage Type="WZUIImage" GUID="{30e3aa14-f5e9-4099-9084-594265481b85}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{48164d52-f112-4499-891f-e03ed1a31d86}" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="CREATE_ROOM" Name="txtBtnSel2_WndTrain" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{8cac9aa4-8d9e-468d-aa62-181822bbfaa7}" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTrain>

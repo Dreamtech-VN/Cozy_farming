@@ -1,0 +1,14 @@
+<CellTeamMember GUID="{1c8826bb-1150-480d-875a-1f6975d286b6}">
+    <WZUIContainer Type="WZUIContainer" GUID="{5d8377c2-00f5-4395-8af7-b3e061d52605}" AbsContentSize="232,68" UseAbsSize="True" RelativePosition="0.5,0.5" Name="CellTeamMember" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{196073d4-92f2-428f-84be-74ae9ef8b177}" Name="conHead_CellTeamMember" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.2,0.5">
+            <WZUIImage Type="WZUIImage" GUID="{6707ac1d-649e-496a-a645-0812cef78b37}" File="ui/common/common_icon_tx.png" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{87b770c1-a48e-42ef-bf1e-2c73bb2e36d1}" LabelStyleKey="C1_F22" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeSize="4" StrokeColor="127,70,26" AnchorPoint="0,0.5" RelativePosition="0.4,0.5" Name="txtName_CellTeamMember" />
+        <WZUIImage Type="WZUIImage" GUID="{f90a9fe4-5411-4242-ac07-7f115ea08a3d}" File="ui/common/common_icon_mvp.png" UseOriginSize="True" RelativePosition="0.33,0.8" Name="imgMvp_CellTeamMember" Visible="False" />
+        <Button Type="WZUIButton" GUID="{ecf543d2-2b4e-4b35-b65f-cc6289a615ba}" LuaDoneFunctionName="onClickCheck">
+            <NormalElement Type="WZUIContainer" GUID="{773f4297-1ea8-4b8f-b084-8d6e16a3c857}" />
+            <SelectElement Type="WZUIContainer" GUID="{72e3a0f4-7ed5-4035-8d48-5cae95d333ce}" />
+            <DisableElement Type="WZUIContainer" GUID="{b6b5587f-d436-4ba8-b88e-a8632235bf7c}" />
+        </Button>
+    </WZUIContainer>
+</CellTeamMember>

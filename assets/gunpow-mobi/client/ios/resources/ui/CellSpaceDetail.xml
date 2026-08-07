@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" ?>
+<CellSpaceDetail GUID="{931EBF24-A52B-47ca-A1D1-6EFAD263453B}">
+    <WZUIContainer AbsContentSize="568,90" GUID="{61F858F6-3976-44f8-9AC6-0A8CC80DFE73}" LuaObjectName="CellSpaceDetail" Name="CellSpaceDetail" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{468E7274-A4D9-4fdb-AC15-2625699E9600}" AbsContentSize="568,90">
+            <WZUI9Image Type="WZUI9Image" GUID="{1CADB6DB-2EAD-4bcf-B250-72581C0186F1}" File="ui/common/common_scale9_di7.png" />
+        </WZUIContainer>
+        <WZUILabelTTF Color="62,34,8" FontSize="22" GUID="{65968857-81D2-4ae8-ACE6-DC8D28CB29CD}" Name="txtLv_CellSpaceDetail" RelativePosition="0.17,0.7" Text="Lv55" Type="WZUILabelTTF" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="FONT_LABEL_6" AbsPosition="102.6,58.5" />
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{578c6c86-3bca-40b9-8cc9-6f583397fdb7}" AnchorPoint="0,0.5" MaxWidth="300" Name="txtName_CellSpaceDetail" RelativePosition="0.28,0.7" />
+        <WZUILabelTTF Color="128,54,13" FontSize="20" GUID="{1e813a28-fe22-4b8c-8984-7b606e2f5f3d}" Name="txtMessage_CellSpaceDetail" RelativePosition="0.16,0.3" Text="空间主人和访客都可以留言空间主人和访客都来得快捡垃圾的法律萨菲的空间啊L发动机阿斯浪费的空间阿斯" Type="WZUILabelTTF" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" Scale="1" Dimensions="400,0" MaxLength="38" />
+        <WZUILabelTTF Color="158,139,121" FontSize="22" GUID="{6e42e370-8d2f-4b37-ba3b-ff489e54df6b}" Name="txtTime_CellSpaceDetail" RelativePosition="0.88,0.7" Text="2016-01-25" Type="WZUILabelTTF" Alignment="Center" AnchorPoint="0.5,0.5" BoldFont="True" LabelStyleKey="" AbsPosition="454.4,58.5" />
+        <Button Type="WZUIButton" AbsContentSize="100,80" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="0.98,0.54" Name="btnDelete_CellSpaceDetail" GUID="{73b05f3b-72e7-4980-80be-8233923892dc}" LuaDoneFunctionName="onDelete" AbsPosition="555.96,48.6">
+            <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{cacf5ca9-ac73-435e-9768-0014a06f98fa}">
+                <WZUIImage Type="WZUIImage" GUID="{e9495922-5cf5-4414-bec9-2586eaa759b7}" File="ui/space/common_icon_shanchu.png" UseOriginSize="True" RelativePosition="0.5,0.288176" Scale="1" AbsPosition="50,23.0541" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{8f583087-9af7-43bc-ba7f-48137c0dab31}">
+                <WZUIImage Type="WZUIImage" GUID="{096035da-5fe2-4212-93ac-f97d972c7d4c}" File="ui/space/common_icon_shanchu.png" UseOriginSize="True" RelativePosition="0.5,0.288176" Scale="1" AbsPosition="50,23.0541" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{409bdeae-a72c-413b-a757-039fc7572c40}" />
+        </Button>
+        <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{69783029-13f1-43ef-acd6-3b0487a24930}" TouchEnable="False" RelativePosition="0.085,0.5" AnchorPoint="0.5,0.5" Visible="True" AbsContentSize="60,60" UseAbsSize="True">
+            <Stencil Type="WZUIImage" GUID="{1720831b-74b8-42d0-82f3-80cf7259949c}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" Scale="1.05" RelativePosition="0.5,0.5" />
+            <WZUIImage Type="WZUIImage" GUID="{8c76dfff-6fd7-4159-85d4-8dd6dff6f8c6}" File="ui/space/common_icon_renxiangnan.png" UseOriginSize="True" Scale="0.36" RelativePosition="0.5,0.5" AbsPosition="51.8,45" Name="imgHead_CellSpaceDetail" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{8928f1f9-4cde-42f7-b0e6-acbc6cb14e00}" Name="conHeadImg" />
+        </WZUIClippingContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{de9ed7a2-532d-4ff4-8fb9-73a60c5142f5}" AbsContentSize="65,65" UseAbsSize="True" RelativePosition="0.085,0.5" AbsPosition="30,30">
+            <WZUI9Image Type="WZUI9Image" GUID="{6143ad84-f9d7-4a1c-827d-c324bbd72927}" File="ui/bag/common_scale9_txkd.png" Scale="1" UseOriginSize="False" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{c0c876cc-d69f-4532-811f-b199189cac69}" AbsContentSize="400,90" UseAbsSize="True" RelativePosition="0.36,0.5" LuaDoneFunctionName="onCheck">
+            <NormalElement Type="WZUIContainer" GUID="{743f023b-4410-4304-88d1-972c9cfbbe6d}" TouchContainerEnable="True" />
+            <SelectElement Type="WZUIContainer" GUID="{af0baf3b-4f9b-44b0-b3e0-e356bd5f0d8c}" TouchContainerEnable="True" />
+            <DisableElement Type="WZUIContainer" GUID="{726da2f7-0b5c-4daa-aa83-bbdc8e548d3f}" TouchContainerEnable="True" />
+        </Button>
+    </WZUIContainer>
+</CellSpaceDetail>

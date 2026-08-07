@@ -1,0 +1,15 @@
+﻿<CellCheckOtherBg GUID="{8d7dbdcd-e5ff-40e2-9fe8-ffc984efa941}">
+    <WZUIContainer Type="WZUIContainer" GUID="{e0335259-6f92-49a0-b76b-e5c16d562ee9}" AbsContentSize="142,72" UseAbsSize="True" Name="CellCheckOtherBg" NameCreate="True">
+        <WZUIImage Type="WZUIImage" GUID="{6611e9ea-0a82-441c-883c-e0918f00e8cd}" Name="imgBg_CellCheckOtherBg" File="ui/checkother/player_bg2_000.png" UseOriginSize="True" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{9128e612-082f-4ede-a529-97062688b957}" FontSize="20" Color="255,255,255" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" Name="txtDefault_CellCheckOtherBg" TextKey="DEFAULT" Visible="False" />
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{64fa5f46-6fa8-4120-a9be-0ac2bb875f07}" MaxWidth="150" Name="ftxtPrice_CellCheckOtherBg" RelativePosition="0.5,0.2" />
+        <WZUIContainer Type="WZUIContainer" GUID="{dc04af5f-3fb8-4a0d-97ae-8c1649f89292}" Name="conSel_CellCheckOtherBg" RelativeSize="1.05,1.11" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{089d64ff-ad9a-4ad8-8cda-8577d5e84c53}" File="ui/common/common_scale9_beibaodi_sel.png" Scale="1" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" GUID="{ce5901c0-f9d3-45b4-8490-8aa590be1d5b}" LuaDoneFunctionName="onClickCell">
+            <NormalElement Type="WZUIContainer" GUID="{5f68868d-d47f-417f-bc8c-63197674939f}" />
+            <SelectElement Type="WZUIContainer" GUID="{5264b268-be15-4719-b5de-0cb9a7111453}" />
+            <DisableElement Type="WZUIContainer" GUID="{004a3780-e9b7-4df2-8e36-ef167ed9899f}" />
+        </Button>
+    </WZUIContainer>
+</CellCheckOtherBg>

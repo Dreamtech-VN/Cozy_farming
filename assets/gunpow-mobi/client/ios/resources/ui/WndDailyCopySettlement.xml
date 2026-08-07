@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" ?>
+<WndDailyCopySettlement GUID="{b6047f35-dec5-4523-a8b0-94f07e1a479e}">
+    <WZUIWindow Type="WZUIWindow" GUID="{B9509F57-576A-4e90-9DAE-2677E387507D}" LuaObjectName="WndDailyCopySettlement" Name="WndDailyCopySettlement" NameCreate="True" UseAbsSize="False" AbsContentSize="" ShowAll="False" Scale="1" LuaTouchBeganFunction="" TouchSwallow="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{447F7A07-9439-4e54-8EB9-AE033570C176}" Visible="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{F0D5F4DF-62F8-4adf-9DDB-C2A183E48525}" Name="conWin_WndDailyCopySettlement" Visible="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{FC7093DD-9389-48dc-8770-3319B13BF03F}" Visible="True">
+                    <WZUIImage Type="WZUIImage" GUID="{41c9a351-16fd-410e-80f8-b1281e1e8338}" File="ui/copy_settlement/common_pic_sl.png" FlipX="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{54cb40c2-616c-4744-8b69-bfd5815ffe3f}" Name="conCom_WndDailyCopySettlement" ShowAll="True" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{6948ac4d-17c0-49b4-a705-35a1113a65f0}" Name="">
+                        <WZUIParticle Type="WZUIParticle" GUID="{7b822aaf-6de8-45ed-b561-9102e8d230d5}" PlistFile="particle/ui_jiesuan_stars_01.plist" AnchorPoint="0.5,0" RelativePosition="0.5,0" Visible="True" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{581eb26a-6e1d-4ca4-9f5c-f054c4a4ff74}" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+                            <WZUIImage Type="WZUIImage" GUID="{878866e5-dad1-4d69-a665-f1130074660b}" File="ui/copy_settlement/common_pic_guangx.png" UseOriginSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0.5" ScaleX="30" Scale="3">
+                                <Action Type="WZUIActionRotateBy" GUID="{af5d99dc-3075-4e85-afc3-74b04bf0d938}" Angle="360" IsLoop="True" Duration="30" />
+                            </WZUIImage>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{6452CD41-1832-4af2-8DE5-F254CAC328C3}" Name="conPar1_WndDailyCopySettlement" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{3D8F866B-3CBF-4878-B795-5F47B6F4C5D9}" Name="conSpineWin_WndDailyCopySettlement" RelativeSize="0.7,1" ShowAll="False">
+                        <Action Type="WZUIActionSequence" GUID="{36CE5F45-9102-4118-B798-63BCB8DB981A}">
+                            <ChildAction Type="WZUIActionDelayTime" GUID="{22955B25-31AE-4b59-AFE7-D5D327AAE2C0}" Duration="1" FinishLuaFunction="OnPlayerParCallBack" />
+                            <ChildAction Type="WZUIActionDelayTime" GUID="{684A2FA7-8D36-4e4c-AAC2-75AC2C9D33B3}" Duration="1" />
+                            <ChildAction Type="WZUIActionMoveBy" GUID="{C40C7ECF-321B-49ef-B822-BAAFB6A0DBCA}" MoveX="-180" Duration="0.5" FinishLuaFunction="" />
+                            <ChildAction Type="WZUIActionDelayTime" GUID="{75D6F387-232F-4aad-8F84-1C2D42389E68}" Duration="1" FinishLuaFunction="OnAniFinishCallBack" />
+                        </Action>
+                        <WZUISpine Type="WZUISpine" GUID="{B2EEC8CF-4BA2-4d8a-B499-E2AFC6B107ED}" FileAtlas="copy_settlement/win.atlas" FileJson="copy_settlement/win.json" AnimationName="" UseOriginSize="True" Scale="1.1" RelativePosition="0.5,0" ScaleX="1" ScaleY="1" Visible="True" AnchorPoint="0.5,0" Name="spineWin_WndDailyCopySettlement" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{A294741C-D62E-4e2d-8313-B6686051F8E8}" Name="conPlayer_WndDailyCopySettlement" AbsContentSize="200,300" UseAbsSize="True" RelativePosition="0.5,0.31">
+                            <WZUIContainer Type="WZUIContainer" GUID="{AA50EE88-8266-4942-83C4-3FB2D59A2DF5}" RelativePosition="0.5,0.5">
+                                <WZUIImage Type="WZUIImage" GUID="{E9BDE12E-53A8-4218-A42D-642AC44D86EE}" File="ui/copy_settlement/common_pic_slbg.png" UseOriginSize="True" Scale="1" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{333e6516-462d-4b38-8ebf-d0142ac2e5b1}" RelativeSize="1,0.2" RelativePosition="0.5,0.085">
+                                <WZUIImage Type="WZUIImage" GUID="{0732ce22-c5c6-4823-b5fb-9153601854c0}" File="ui/common/common_icon_yy.png" UseOriginSize="True" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{3ae7f59f-eb21-4659-b5a5-cfd6d31f11db}" Name="conPar2_WndDailyCopySettlement" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{6d9024b9-42d8-4002-81ce-c001ada73eed}" Name="conGold_WndDailyCopySettlement" AbsContentSize="" UseAbsSize="False" UseAbsCoordinate="False" Visible="False" ShowAll="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{0c434df4-e59d-4f5b-abdd-4ecfd4b5c534}" AbsContentSize="380,360" UseAbsSize="True" RelativePosition="0.774704,0.338607" Visible="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{8e92c7a5-82bb-4a54-a1e6-a36a3cc7a5af}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{3d35feb0-06b5-47d9-bc96-24c7e0096827}" RelativePosition="0.502632,0.5" File="ui/common/common_scale9_jiesuandi.png" Opacity="150" />
+                            <WZUIImage Type="WZUIImage" GUID="{4cc93119-1167-4552-a9c6-a48f89120e30}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.967335,0.968295" FlipX="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{44e3ecd6-4781-40bd-8ad5-6188877a7f34}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0329548,0.966868" />
+                            <WZUIImage Type="WZUIImage" GUID="{1c86e034-39db-46e7-a239-b3b1a9622aa2}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0367578,0.0318981" FlipY="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{89798b64-f17a-49a0-86d1-124a7e12614c}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.965837,0.0365477" FlipX="True" FlipY="True" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{7bc48e4c-a22b-41d3-8792-19ae90bd54ed}">
+                                <WZUIContainer Type="WZUIContainer" GUID="{ad9ac47d-08e5-4b83-b410-e9411d99752b}" AbsContentSize="300,2" UseAbsSize="True" RelativePosition="0.5,0.794445">
+                                    <WZUIImage Type="WZUIImage" GUID="{e6e0d08a-a85e-4c46-935e-fb24067fecbc}" File="ui/common/common_scale9_fengexian.png" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{22bce8f1-9497-4db6-8e62-4d591061b8a8}" AbsContentSize="300,2" UseAbsSize="True" RelativePosition="0.5,0.619445">
+                                    <WZUIImage Type="WZUIImage" GUID="{56783858-cd01-4c5b-8e11-5e54cd5d946b}" File="ui/common/common_scale9_fengexian.png" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{a343e70a-e088-43e2-ab40-3bbc4dcfacf8}" AbsContentSize="300,2" UseAbsSize="True" RelativePosition="0.5,0.452778">
+                                    <WZUIImage Type="WZUIImage" GUID="{4f25c0fe-8f9d-49b9-ba78-460dcbe56e72}" File="ui/common/common_scale9_fengexian.png" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{B7006100-E838-4f2e-9D77-9989EFA60370}">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{B17A04C0-83FB-42f5-AB0C-6F3185C66416}" TextKey="DAILY_COPY_GOLD_DESC1" FontSize="24" Color="255,236,193" RelativePosition="0.12,0.87" Alignment="Left" AnchorPoint="0,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{EC16DB5A-C49D-489d-8386-FE0136F00A64}" TextKey="DAILY_COPY_GOLD_DESC2" FontSize="24" Color="255,236,193" RelativePosition="0.116444,0.703333" Alignment="Left" AnchorPoint="0,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{FFECAF34-5A5E-4226-A38C-1DE6A597103D}" TextKey="DAILY_COPY_GOLD_DESC3" FontSize="24" Color="255,236,193" RelativePosition="0.12,0.5393" Alignment="Left" AnchorPoint="0,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{07A58C41-EFF9-4d41-8548-C63E6CD5A7F0}" TextKey="DAILY_COPY_GOLD_DESC4" FontSize="24" Color="255,236,193" RelativePosition="0.12,0.372154" Alignment="Left" AnchorPoint="0,0.5" Name="txtGold4_WndDailyCopySettlement" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ED169679-C0BF-40b0-BEAB-3AE3CD696731}" TextKey="" FontSize="24" Color="99,255,95" RelativePosition="0.631921,0.87" Alignment="Left" AnchorPoint="0,0.5" Name="txtGoldDesc1_WndDailyCopySettlement" Text="123" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{C36C1AB0-A65C-4da0-84E6-7E5192EFC4F0}" TextKey="" FontSize="24" Color="99,255,95" RelativePosition="0.634481,0.707884" Alignment="Left" AnchorPoint="0,0.5" Name="txtGoldDesc2_WndDailyCopySettlement" Text="X15" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7A701705-0AA5-470e-A40D-F8A579D31111}" TextKey="" FontSize="24" Color="99,255,95" RelativePosition="0.631779,0.539312" Alignment="Left" AnchorPoint="0,0.5" Name="txtGoldDesc3_WndDailyCopySettlement" Text="X45" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{12C8E9FF-3154-4e4c-830F-6FAF0A559238}" TextKey="SETTLMENT_KILL" FontSize="24" Color="255,227,116" RelativePosition="0.627086,0.37333" Alignment="Left" AnchorPoint="0,0.5" Name="txtGoldDesc5_WndDailyCopySettlement" />
+                            <WZUIImage Type="WZUIImage" GUID="{79298C8A-9B9E-4e56-BD36-E26B7FE7CF21}" File="ui/common/common_icon_dacheng.png" Visible="False" UseOriginSize="True" RelativePosition="0.86769,0.369189" Name="imgFinish_WndDialyCopySettlement" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{90e867ab-1b91-419e-95fe-c7aa677cfb28}" RelativeSize="1,0.17" RelativePosition="0.5,0.180555" Scale="0">
+                            <WZUI9Image Type="WZUI9Image" GUID="{4eadcd61-7bb0-412e-bb66-f67601f53bb0}" File="ui/common/common_scale9_di37.png" UseOriginSize="False" RelativePosition="0.5,0.5" Visible="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{39a87285-b955-40eb-909d-617c8a947413}" File="ui/common/common_icon_jinbi.png" UseOriginSize="True" RelativePosition="0.382794,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{76bfce4e-8b52-4ec7-ae0d-7f2d2f74928d}" Color="255,236,193" FontSize="24" Alignment="Left" AnchorPoint="0,0.5" Text="123" RelativePosition="0.463158,0.5" Name="txtGoldDesc4_WndDailyCopySettlement" NameCreate="True" />
+                            <Action Type="WZUIActionSequence" GUID="{79d6e026-51d1-498f-869e-329c52c00a1b}">
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{034c6215-704f-4720-a5d5-ca8ab4a4e47e}" Duration="3" />
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{89ea8bfd-cd23-4132-8230-6c9cdfdf8ad1}" Duration="0.2" RunTimes="1.2000000476837158" ScaleX="1.1" ScaleY="1.1" />
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{a76b8b21-230e-4346-9c46-f4ca55ce5a1d}" />
+                            </Action>
+                        </WZUIContainer>
+                        <Action Type="WZUIActionSequence" GUID="{d66aa36e-6240-4cbf-a950-2bce7dbf84a5}">
+                            <ChildAction Type="WZUIActionMoveBy" GUID="{a0fb0fa4-067d-4e38-b647-84b98ae59a53}" MoveX="1000" Duration="0" />
+                            <ChildAction Type="WZUIActionDelayTime" GUID="{41c2b62f-5943-45e1-9ce8-5e0a41c2a5a0}" Duration="2.5" />
+                            <ChildAction Type="WZUIActionMoveBy" GUID="{6c27ab64-1089-4b03-966b-745f5e1b6a74}" MoveX="-1000" FinishLuaFunction="" Duration="0.5" />
+                        </Action>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{2b04a7cf-20b7-448a-897d-6203c2fb6129}" Name="conExp_WndDailyCopySettlement" Visible="False" ShowAll="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{4d59433c-4b90-450e-8507-25fbd00073ea}" AbsContentSize="380,360" UseAbsSize="True" RelativePosition="0.774704,0.338607" Visible="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{a2deef3c-7207-4ade-bd97-c4cd4bada81f}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{7ebff88c-df22-4adf-ab6b-f9ef5943aa47}" RelativePosition="0.502632,0.5" File="ui/common/common_scale9_jiesuandi.png" Opacity="150" />
+                            <WZUIImage Type="WZUIImage" GUID="{61ce07b3-bbc2-4f37-8a5f-c2ed56b34a2c}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.967335,0.968295" FlipX="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{daf917f1-08ec-4c05-9a94-072d71e4f522}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0329548,0.966868" />
+                            <WZUIImage Type="WZUIImage" GUID="{3e5f4fd5-c184-41d4-ab71-e8b003d41b05}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0367578,0.0318981" FlipY="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{87d5f579-baa8-407d-8c7b-ff6d59423f80}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.965837,0.0365477" FlipX="True" FlipY="True" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{734b48d1-fdeb-4fe7-b70d-782fccc276c9}">
+                                <WZUIContainer Type="WZUIContainer" GUID="{68ae2aa0-ec43-484e-bb83-75270ce349b4}" AbsContentSize="300,2" UseAbsSize="True" RelativePosition="0.5,0.794445">
+                                    <WZUIImage Type="WZUIImage" GUID="{3af7d083-be4e-4820-9973-294c76c359db}" File="ui/common/common_scale9_fengexian.png" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{e0d41ad0-7088-4e93-ae2e-3b80933688a3}" AbsContentSize="300,2" UseAbsSize="True" RelativePosition="0.5,0.619445">
+                                    <WZUIImage Type="WZUIImage" GUID="{726aa398-9c02-4fcd-999b-a55b48f9b175}" File="ui/common/common_scale9_fengexian.png" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{0312bc45-3f12-4aad-b722-2b45ab8ae727}" AbsContentSize="300,2" UseAbsSize="True" RelativePosition="0.5,0.452778">
+                                    <WZUIImage Type="WZUIImage" GUID="{eedaabc6-7edc-4900-bece-2a156669908d}" File="ui/common/common_scale9_fengexian.png" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{EF1262BA-AB78-420d-95B6-60489D632261}">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3D1683C0-C937-4436-86DE-367455BE1454}" TextKey="DAILY_KILL_SMALLM" FontSize="24" Color="255,236,193" RelativePosition="0.143684,0.88" Alignment="Left" AnchorPoint="0,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{E94C2460-01BB-4a6b-A957-6433392F31EE}" TextKey="DAILY_KILL_BIGM" FontSize="24" Color="255,236,193" RelativePosition="0.14,0.7" Alignment="Left" AnchorPoint="0,0.5" Name="txtExp1_WndDailyCopySettlement" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{B95F8A04-4BBA-4bcb-BC5D-89B8E115803C}" TextKey="DAILY_KILL_BOSS" FontSize="24" Color="255,236,193" RelativePosition="0.14,0.53" Alignment="Left" AnchorPoint="0,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{FBBF1C98-46E4-469a-819A-ECB24E3E6B58}" TextKey="" FontSize="24" Color="255,227,116" RelativePosition="0.75,0.88" Alignment="Left" AnchorPoint="0,0.5" Name="txtExpDesc1_WndDailyCopySettlement" Text="123" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{AFD09CAA-197D-4037-ADF8-1A5D9425D721}" TextKey="" FontSize="24" Color="255,227,116" RelativePosition="0.75,0.7" Alignment="Left" AnchorPoint="0,0.5" Name="txtExpDesc2_WndDailyCopySettlement" Text="X15" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{6C80182F-96D7-4135-B0E0-3EC74A51D7E7}" TextKey="" FontSize="24" Color="255,227,116" RelativePosition="0.75,0.53" Alignment="Left" AnchorPoint="0,0.5" Name="txtExpDesc3_WndDailyCopySettlement" Text="X45" />
+                        </WZUIContainer>
+                        <Action Type="WZUIActionSequence" GUID="{d9ac9d6c-e083-4361-91c8-06311db67e80}">
+                            <ChildAction Type="WZUIActionMoveBy" GUID="{775d6100-e853-42e1-8751-39c21c409866}" MoveX="1000" />
+                            <ChildAction Type="WZUIActionDelayTime" GUID="{472bc1b7-530d-46b5-805c-5a4883567f5e}" Duration="2.5" />
+                            <ChildAction Type="WZUIActionMoveBy" GUID="{1b77323b-0d25-4dff-b896-c450cd155f0f}" MoveX="-1000" FinishLuaFunction="OnExpAni" Duration="0.5" />
+                        </Action>
+                        <WZUIContainer Type="WZUIContainer" GUID="{4bc5df77-a5f0-4032-a4fb-c72e4507d2ce}" RelativeSize="1,0.1" RelativePosition="0.5,0.35" Scale="0">
+                            <WZUIImage Type="WZUIImage" GUID="{415ed727-08ea-495e-9abc-5a8c861bfe1e}" File="ui/common/common_scale9_heidi1.png" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{1f9902a3-c88a-4499-8ee4-de76166c0aa2}">
+                                <WZUIImage Type="WZUIImage" GUID="{6589cfa2-e808-4676-9585-ab54e8c8bcba}" File="ui/common/common_progress_exp_bg.png" UseOriginSize="True" RelativePosition="0.563158,0.5" Opacity="150" />
+                                <WZUIProgress Type="WZUIProgress" GUID="{013704fb-4079-4a09-9a17-e058da968059}" BgPicture="ui/common/common_progress_exp_fore.png" UseOriginSize="True" RelativePosition="0.563158,0.5" Name="proLv_WndDailyCopySettlement" Percentage="0" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9d57d57a-8415-4a88-8e1a-3d50710075cf}" Text="" Color="255,255,255" FontSize="20" Name="txtExp_WndDailyCopySettlement" NameCreate="True" />
+                            </WZUIContainer>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f55d3d4e-2467-4130-84b1-d3bceb756dde}" TextKey="" FontSize="22" Color="255,255,255" RelativePosition="0.0645334,0.472222" Alignment="Left" AnchorPoint="0,0.5" Name="txtExpLv_WndDailyCopySettlement" Text="Lv67" />
+                            <WZUIImage Type="WZUIImage" GUID="{2f8a3d08-dba7-4197-928e-54c14e77f6ab}" File="ui/common/common_icon_shengjila.png" UseOriginSize="True" RelativePosition="0.839473,0.5" Name="imgUp_WndDailyCopySettlement" Visible="False" />
+                            <Action Type="WZUIActionSequence" GUID="{0b5aa693-d59b-4166-a27e-b72f77f90e2e}">
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{a04040f7-64ce-4e47-a7f7-385b6980a889}" Duration="3" />
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{88eeae20-1c6e-4cc3-8151-863df1fe3d06}" Duration="0.2" RunTimes="1.2000000476837158" ScaleX="1.1" ScaleY="1.1000000238418579" />
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{1a9ede3a-526e-4a1a-90b0-85d312d2afe7}" />
+                            </Action>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{166c091e-aee9-4983-a02f-663612f3e6df}" RelativeSize="1,0.17" RelativePosition="0.5,0.180555" Scale="0" Visible="True">
+                            <WZUI9Image Type="WZUI9Image" GUID="{0fcfb319-1518-43fc-96a1-f5156f71d60f}" File="ui/common/common_scale9_di37.png" UseOriginSize="False" RelativePosition="0.5,0.5" />
+                            <WZUIImage Type="WZUIImage" GUID="{76f6c851-b943-4856-8384-e3ebdcd5590e}" File="ui/common/common_icon_exp.png" UseOriginSize="True" RelativePosition="0.382794,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b91ca4fa-215f-438f-960d-99590ed7fb62}" Color="255,236,193" FontSize="24" Alignment="Left" AnchorPoint="0,0.5" Text="" RelativePosition="0.463158,0.481481" Name="txtExpDesc4_WndDailyCopySettlement" NameCreate="True" />
+                            <Action Type="WZUIActionSequence" GUID="{834f5cf5-83d4-46d3-ac69-ef02dd4eb3e6}">
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{091fddf2-1fc9-4e77-9ffc-f6a46fb8ce31}" Duration="3" />
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{40fe6c36-9a64-440f-a245-55c9a98499b6}" Duration="0.2" RunTimes="1.2000000476837158" ScaleX="1.1" ScaleY="1.1000000238418579" />
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{470c19ae-dd59-4205-a085-f9959c678710}" />
+                            </Action>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{69d85b80-ad5d-4967-adf0-321385b0b14b}" Name="conPet_WndDailyCopySettlement" Visible="False" ShowAll="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{d16f63ca-cde6-49ef-b839-1abd9b937dfe}" AbsContentSize="380,360" UseAbsSize="True" RelativePosition="0.774704,0.338607" Visible="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{f76e4a96-a044-4d75-9efb-e3794dd2379b}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{25ca2466-27a7-4894-bc75-09c26092fdd9}" RelativePosition="0.502632,0.5" File="ui/common/common_scale9_jiesuandi.png" Opacity="150" />
+                            <WZUIImage Type="WZUIImage" GUID="{d9c5ce82-1a6c-434b-99ef-1601f9c5266c}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.967335,0.968295" FlipX="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{1e91793f-b215-45c8-abd9-afa6024558a6}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0329548,0.966868" />
+                            <WZUIImage Type="WZUIImage" GUID="{0b910d06-0d9c-4fb6-96ea-368343cd4c44}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0367578,0.0318981" FlipY="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{572ba7fd-1b73-4271-9af4-ffe2ff3dae94}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.965837,0.0365477" FlipX="True" FlipY="True" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{468984ed-6c12-4c52-b123-c50cbd805fc8}">
+                                <WZUIContainer Type="WZUIContainer" GUID="{17b795fb-e334-4171-8210-ca57591bc59a}" AbsContentSize="300,2" UseAbsSize="True" RelativePosition="0.5,0.794445">
+                                    <WZUIImage Type="WZUIImage" GUID="{f2054030-2f45-40b8-957d-3d1cd1543457}" File="ui/common/common_scale9_fengexian.png" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{b865f3d4-f3d2-4d5d-ba06-8fa575e42388}" AbsContentSize="300,2" UseAbsSize="True" RelativePosition="0.5,0.619445">
+                                    <WZUIImage Type="WZUIImage" GUID="{97dcde2c-ff49-450f-8d20-260486fc0293}" File="ui/common/common_scale9_fengexian.png" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{86368b49-8446-459d-81f0-2daa415adf14}" AbsContentSize="300,2" UseAbsSize="True" RelativePosition="0.5,0.452778">
+                                    <WZUIImage Type="WZUIImage" GUID="{9bff7e96-e0b6-44c0-b845-48ce7717e4f0}" File="ui/common/common_scale9_fengexian.png" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{7adda82a-9077-4133-95c8-3067bee973a4}">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{22be369b-1457-4867-a153-64388cc21832}" TextKey="" FontSize="24" Color="255,236,193" RelativePosition="0.12,0.87" Alignment="Left" AnchorPoint="0,0.5" Text="" Name="txtAttachCount_WndDailyCopySettlement" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b3f91347-349f-4779-95df-e8defe97866e}" TextKey="ATT_ROUND" FontSize="24" Color="255,236,193" RelativePosition="0.116444,0.703333" Alignment="Left" AnchorPoint="0,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{06da1acc-1ddb-4f0a-98e4-7a3d3fb9c16c}" TextKey="ATTACH_EGG_SCORE" FontSize="24" Color="255,236,193" RelativePosition="0.12,0.5393" Alignment="Left" AnchorPoint="0,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{20136274-5a46-4a77-9421-8d230a8cc538}" TextKey="DAILY_KILL_BOSS" FontSize="24" Color="255,236,193" RelativePosition="0.12,0.372154" Alignment="Left" AnchorPoint="0,0.5" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{14516999-637b-4580-8df1-d63e96e6935d}" TextKey="" FontSize="24" Color="99,255,95" RelativePosition="0.631921,0.87" Alignment="Left" AnchorPoint="0,0.5" Name="txtGoldDesc1_WndDailyCopySettlement" Text="123" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ef44e971-e921-447e-8e4d-1600ce6fe215}" TextKey="" FontSize="24" Color="99,255,95" RelativePosition="0.634481,0.707884" Alignment="Left" AnchorPoint="0,0.5" Name="txtGoldDesc2_WndDailyCopySettlement" Text="X15" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{97c6d12d-3a96-4b27-a181-30d5b8f21534}" TextKey="" FontSize="24" Color="99,255,95" RelativePosition="0.631779,0.539312" Alignment="Left" AnchorPoint="0,0.5" Name="txtGoldDesc3_WndDailyCopySettlement" Text="X45" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{e8f8fc10-a857-4040-bd70-de6f97c2329b}" TextKey="SETTLMENT_KILL" FontSize="24" Color="255,227,116" RelativePosition="0.627086,0.37333" Alignment="Left" AnchorPoint="0,0.5" Name="txtGoldDesc4_WndDailyCopySettlement" />
+                            <WZUIImage Type="WZUIImage" GUID="{bbe26c90-c2b1-401e-8b2c-d71fffd13377}" File="ui/common/common_icon_dacheng.png" Visible="False" UseOriginSize="True" RelativePosition="0.86769,0.369189" Name="imgFinish_WndDialyCopySettlement" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{159e4be6-0248-40c0-a15c-ec71f48d24bb}" RelativeSize="1,0.17" RelativePosition="0.5,0.180555" Scale="0">
+                            <WZUI9Image Type="WZUI9Image" GUID="{e9208202-da31-4da9-9773-b17f842f4f03}" File="ui/common/common_scale9_di37.png" UseOriginSize="False" RelativePosition="0.5,0.5" Visible="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{ff332e52-500b-43bb-8d96-b6d6da148ff7}" File="ui/common/common_icon_jinbi.png" UseOriginSize="True" RelativePosition="0.245952,0.5" Name="imgReward1_WndDailyCopySettlement" Scale="0.8" Visible="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{4b6fd53c-663b-4dab-9d54-a0ca224ae533}" File="ui/common/common_icon_jinbi.png" UseOriginSize="True" RelativePosition="0.472268,0.5" Name="imgReward2_WndDailyCopySettlement" Scale="0.8" Visible="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{15773daf-2a76-4ec2-aafe-7cd80d272888}" File="ui/common/common_icon_jinbi.png" UseOriginSize="True" RelativePosition="0.703846,0.5" Name="imgReward3_WndDailyCopySettlement" Scale="0.8" Visible="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{cb764001-647f-4dab-a1cd-79d85a13909a}" Color="255,236,193" FontSize="24" Alignment="Left" AnchorPoint="0,0.5" Text="12" RelativePosition="0.305264,0.5" Name="txtGoldDesc4_WndDailyCopySettlement" NameCreate="True" Visible="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{29b11232-7ad0-43c0-8dfa-0338470ea180}" Color="255,236,193" FontSize="24" Alignment="Left" AnchorPoint="0,0.5" Text="30" RelativePosition="0.536842,0.5" Name="txtGoldDesc5_WndDailyCopySettlement" NameCreate="True" Visible="False" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{0ede7c16-9b80-44b0-b23b-08d0a418fa23}" Color="255,236,193" FontSize="24" Alignment="Left" AnchorPoint="0,0.5" Text="12" RelativePosition="0.76842,0.5" Name="txtGoldDesc6_WndDailyCopySettlement" NameCreate="True" Visible="False" />
+                            <Action Type="WZUIActionSequence" GUID="{a9d482b9-2e82-43f5-a731-9b8792ae81fc}">
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{ece5c6d0-9fef-4e0a-8bff-3b4d2d107110}" Duration="3" />
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{da91e341-0f69-43ee-8fc3-671db2292db1}" Duration="0.2" RunTimes="1.2000000476837158" ScaleX="1.1" ScaleY="1.1" />
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{d99947b7-7ad3-49c7-ace3-76b5d37c0fde}" />
+                            </Action>
+                        </WZUIContainer>
+                        <Action Type="WZUIActionSequence" GUID="{c439ad41-16a6-4e8b-b859-8750d2d0443b}">
+                            <ChildAction Type="WZUIActionMoveBy" GUID="{bb7dfba3-a5d2-4f19-b2cb-bde690ea3977}" MoveX="1000" Duration="0" />
+                            <ChildAction Type="WZUIActionDelayTime" GUID="{5ca5514d-ac54-458e-87fd-2b654674108b}" Duration="2.5" />
+                            <ChildAction Type="WZUIActionMoveBy" GUID="{1c52f1e8-9751-4cb2-b916-ca7b7209b40e}" MoveX="-1000" FinishLuaFunction="" Duration="0.5" />
+                        </Action>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{BDF1BB06-9853-428a-BC1E-13075F0C652E}" Name="conLose_WndDailyCopySettlement" RelativeSize="1,1" Visible="False" UseAbsCoordinate="False" ShowAll="False" RelativePosition="0.5,0.5">
+                <WZUIContainer Type="WZUIContainer" GUID="{2C707124-47D1-4455-8602-CFAF4FF6D09D}">
+                    <WZUIContainer Type="WZUIContainer" GUID="{A39D6ACB-A380-4c6c-BCFB-2F165E5CE858}" Visible="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{08C39CF4-C702-4bb0-A01C-A82FA98673E9}" RelativeSize="1,1" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Visible="True">
+                            <WZUIImage Type="WZUIImage" GUID="{0B5CFA88-9E62-4275-8B44-BC1A9AED7A10}" File="ui/copy_settlement/common_pic_sb.png" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{20615bd6-54ee-42e9-8d3c-61d10890b16b}" ShowAll="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{b8c28aa8-3d39-4784-9909-c1458988538a}" RelativePosition="0.5,0.730667" UseAbsSize="True" AbsContentSize="600,400" Visible="True" ShowAll="False">
+                        <WZUISpine Type="WZUISpine" GUID="{fcb27ca9-2889-4b1c-bb18-f685f1f5a207}" FileAtlas="copy_settlement/fail.atlas" FileJson="copy_settlement/fail.json" RelativePosition="0.5,-0.66" AnimationName="fail" AnchorPoint="0.5,0" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{f90abc27-d12c-4a49-a099-93597f19ec23}" Name="conPlayerFail_WndDailyCopySettlement" UseAbsSize="False" RelativeSize="0.2,0.45" RelativePosition="0.5,0.3" ShowAll="False">
+                        <WZUIImage Type="WZUIImage" GUID="{806256b2-f496-45e8-90c5-1e901aa2564c}" File="ui/common/common_icon_yy.png" UseOriginSize="True" RelativePosition="0.44,0.07" Scale="1.3" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{963F1B49-6885-44fb-BC05-FAB65F8DFEFF}" UseAbsSize="True" AbsContentSize="780,60" RelativePosition="0.5,0.575" Scale="1" ShowAll="False">
+                        <WZUIContainer Type="WZUIContainer" GUID="{9E374687-0451-4d76-87E4-EC8116B33C41}" Scale="0" Visible="False">
+                            <WZUIImage Type="WZUIImage" GUID="{71EAB034-0350-4a0a-A4E8-AF486A9E1B5E}" File="ui/common/common_scale9_heidi2.png" />
+                            <Action Type="WZUIActionSequence" GUID="{FD3B3871-D8A6-4d19-A1E9-C563A56EF212}">
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{041A8C53-DD31-48b3-916C-9A11CCD20041}" Duration="1.2" />
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{8B014B80-CC12-4b68-AA32-DB041EB96E92}" Duration="0.2" />
+                            </Action>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{5910ed38-e1d7-4f59-83cf-c0c6ff82975a}" Scale="0" Name="conFail1_WndDailyCopySettlement" Visible="False">
+                            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{ef20be34-5821-4317-8239-345e3691b006}" Name="txtLoseTips_WndDailyCopySettlement" MaxWidth="500" />
+                            <Action Type="WZUIActionSequence" GUID="{6e8915e5-aa2d-4ab2-9d65-8bd6b06b0a95}">
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{cbb84d7b-078d-427d-aff6-77af8fe1f317}" Duration="1.2" />
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{0844ab24-5358-481e-9a3e-0899de6d9ff2}" Duration="0.2" />
+                            </Action>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{52b6e4e9-8c47-448a-8a5d-2f5d8d0b110d}" Name="conFail2_WndDailyCopySettlement" Visible="False" Scale="0">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3ca7ac1c-fd56-4dcc-ae66-28b92f6b3ad6}" TextKey="LOSE_TIPS" FontSize="26" Color="255,223,116" />
+                            <Action Type="WZUIActionSequence" GUID="{f8f51cfd-7238-4bd3-8eee-d802cc035107}">
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{144ccf7b-f98b-4f83-9270-679882f5f474}" Duration="1.2" />
+                                <ChildAction Type="WZUIActionScaleTo" GUID="{d830731e-6455-41cb-83f7-6079e768083f}" Duration="0.2" />
+                            </Action>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <Action Type="WZUIActionSequence" GUID="{d467af9b-318c-48af-b3d5-29ec28ffb91a}">
+                    <ChildAction Type="WZUIActionDelayTime" GUID="{0a8882bc-d94f-40a3-9eb3-bdab4fd5f8da}" Duration="4" FinishLuaFunction="OnAniFinishCallBack1" />
+                </Action>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{30c03388-2dd3-409b-8768-58d2a8ae48e0}" ShowAll="True" Name="conLoseGoTo_WndDailyCopySettlement" Visible="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{ca67d4a9-1442-45a5-aa4a-ddb3c4626610}" AbsContentSize="680,290" UseAbsSize="True" RelativePosition="0.5,0.378056" Scale="0" AbsPosition="568,272.2" TouchEnable="True" Name="" Visible="True" ShowAll="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{95bbb8ec-65af-4bbb-8775-c78ef806f18a}" File="ui/common/common_scale9_jiesuandi.png" Opacity="255" RelativePosition="0.5,0.5" AbsPosition="340,38" TouchEnable="False" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{b1dcd079-e4ac-49d7-9da7-2b8b804a98c8}" File="ui/common/common_scale9_jiesuandi.png" Opacity="200" RelativePosition="0.5,0.5" AbsPosition="340,38" TouchEnable="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{3c3f6cce-f786-42ba-b89a-26e167629b44}" AbsContentSize="540,1" UseAbsSize="True" RelativePosition="0.5,0.744702" AbsPosition="340,215.964" TouchEnable="False">
+                        <WZUIImage Type="WZUIImage" GUID="{ea8ec9e6-3fd1-4c6c-abd1-2a27d5f0bff3}" File="ui/common/common_scale9_fengexian.png" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{5fd63a93-9dd1-403a-8fd8-7ddb56d15319}" TouchEnable="False">
+                        <WZUIImage Type="WZUIImage" GUID="{2d50d5e9-0dae-494a-951e-175516c1bb08}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" AnchorPoint="0,1" RelativeSize="1,1" RelativePosition="0,1" />
+                        <WZUIImage Type="WZUIImage" GUID="{fec38316-31fe-4b9d-b551-9ff1bd8534b0}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" AnchorPoint="1,1" RelativeSize="1,1" RelativePosition="1,1" FlipX="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{1934d5cf-7b74-456b-b635-01300d79b764}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" AnchorPoint="0,0" RelativeSize="1,1" RelativePosition="0,0" FlipY="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{578a219f-3e3f-409f-a072-49c1b2205612}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" AnchorPoint="1,0" RelativeSize="1,1" RelativePosition="1,0" FlipX="True" FlipY="True" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{441e4903-450a-4bc2-98cd-9833be927913}" Color="255,236,193" FontSize="26" TextKey="COPY_LIFT" RelativePosition="0.5,0.858621" AbsPosition="340,249" LabelStyleKey="C11_F24" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{daa968c1-719f-4b91-9b1e-4944096203df}" RelativeSize="1,0.7" RelativePosition="0.5,0.386207" AbsPosition="340,112">
+                        <WZUIContainer Type="WZUIContainer" GUID="{4a50fe26-422e-42f5-9613-e185550822e1}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.22,0.5" AbsPosition="340,115">
+                            <WZUIButton Type="WZUIButton" AbsContentSize="100,100" UseAbsSize="True" LuaDoneFunctionName="onFail" Tag="1" GUID="{a37f5b6b-2526-4290-872c-634a3f0b2921}">
+                                <NormalElement Type="WZUIContainer" GUID="{737fed01-5564-4259-a7fd-111d159ec0e0}" />
+                                <SelectElement Type="WZUIContainer" GUID="{c71bb4f0-5170-4a71-84d5-94bb319b2594}" />
+                                <DisableElement Type="WZUIContainer" GUID="{e9f135e5-8836-4f03-aae2-c682ca8d44a9}" />
+                                <WZUI9Image Type="WZUIImage" GUID="{4981f8b5-97c4-486d-85de-51d3c8392484}" File="ui/common/common_scale9_jiesuandi.png" Opacity="255" RelativePosition="0.5,0.5" AbsPosition="340,38" UseOriginSize="True" Name="imgBtnIcon1_WndDailyCopySettlement" />
+                            </WZUIButton>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{82bce0ea-a962-4045-b52a-0d7f47b61685}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="340,115">
+                            <WZUIButton Type="WZUIButton" AbsContentSize="0,0" UseAbsSize="True" LuaDoneFunctionName="onFail" Tag="2" GUID="{e12fd58f-a143-4a96-aefd-300656b2ece0}" AbsPosition="100,100">
+                                <NormalElement Type="WZUIContainer" GUID="{c5dbf6a9-814f-4e02-899b-b8e4c5d5fd6c}" />
+                                <SelectElement Type="WZUIContainer" GUID="{c875845a-f371-4586-9a3d-b51baa13fe2d}" />
+                                <DisableElement Type="WZUIContainer" GUID="{d8247276-7a44-4cc7-a72d-69810d24e0bb}" />
+                                <WZUI9Image Type="WZUIImage" GUID="{c6bf9326-6445-4ee6-b9f7-c4ef314af305}" File="ui/common/common_scale9_jiesuandi.png" Opacity="255" RelativePosition="0.5,0.5" AbsPosition="340,38" UseOriginSize="True" Name="imgBtnIcon2_WndDailyCopySettlement" />
+                            </WZUIButton>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{8d704511-c08d-4f19-a608-fc8bd363d46a}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.78,0.5" AbsPosition="340,115">
+                            <WZUIButton Type="WZUIButton" AbsContentSize="0,0" UseAbsSize="True" LuaDoneFunctionName="onFail" Tag="3" GUID="{5039be56-5f08-46b8-bc11-05fd659fc5af}" AbsPosition="100,100">
+                                <NormalElement Type="WZUIContainer" GUID="{93cb6418-5eb4-4f49-947d-6bb3f32cff85}" />
+                                <SelectElement Type="WZUIContainer" GUID="{cdd1bb6d-7ce2-4701-97be-544756620290}" />
+                                <DisableElement Type="WZUIContainer" GUID="{3ca8b032-b3cf-4379-8b37-27be0d5ad1a6}" />
+                                <WZUI9Image Type="WZUIImage" GUID="{a555a24f-e740-409d-a197-14627100a7c8}" File="ui/common/common_scale9_jiesuandi.png" Opacity="255" RelativePosition="0.5,0.5" AbsPosition="340,38" UseOriginSize="True" Name="imgBtnIcon3_WndDailyCopySettlement" />
+                            </WZUIButton>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <Action Type="WZUIActionSequence" GUID="{a336f3b5-7ad5-4558-918d-b4669bcf6b54}">
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{99d48c4b-04fe-40f9-b150-12eb3636baf5}" Duration="1" />
+                        <ChildAction Type="WZUIActionScaleTo" GUID="{cd53fb20-b734-4c34-9902-6b60dac8bbdd}" />
+                    </Action>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{3f04b961-1dfc-4988-afd0-072bb82f35b3}" Name="conBtnContinue_WndDailyCopySettlement" NameCreate="True" Visible="False">
+                <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickContinue" GUID="{6c257bc7-6eea-4184-be46-818acc1dd6ed}">
+                    <NormalElement Type="WZUIContainer" GUID="{bf9f57b2-06ce-4e00-b0f7-2d6769525f54}" />
+                    <SelectElement Type="WZUIContainer" GUID="{d2e29ff7-14dc-42fe-b62c-c6d19c06afd8}" />
+                    <DisableElement Type="WZUIContainer" GUID="{b04d9516-6de3-4d39-8a94-3def86e14709}" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d4c5abf8-f390-4152-b2fe-fc8bbd205a6e}" Color="62,34,8" FontSize="22" TextKey="DAILY_COPY_CLICK_CONTINUE" RelativePosition="0.31875,0.053125" Name="txtClickContinue_WndDailyCopySettlement" NameCreate="True" Visible="True" ShowAll="True" />
+                <Button Type="WZUIButton" GUID="{4a2f208d-3c81-465b-8f1f-dd77a3128eb3}" RelativePosition="0.0800273,0.547195" AbsContentSize="115,60" AnchorPoint="0.5,0.5" UseAbsCoordinate="False" UseAbsSize="True" Visible="False" LuaDoneFunctionName="onFBShare" Name="btnFBShare_WndDailyCopySettlement">
+                    <NormalElement Type="WZUIContainer" GUID="{8e23c803-0811-45b6-b625-c54a30db79ee}">
+                        <WZUIImage Type="WZUIImage" GUID="{69bafeeb-f0b3-4165-a029-777d92ed5b42}" File="ui/common/common_btn_anniu10_0.png" UseOriginSizeProportion="False" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{dd0363ff-41e1-4292-9c2a-ef886ff0370b}">
+                        <WZUIImage Type="WZUIImage" GUID="{3c6e080f-245f-45df-9171-fb132ff78833}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{82220dde-4fb3-410a-a6b5-1933645150f1}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{bec975e9-4f01-4f08-92db-f1a5154de9f4}" LabelStyleKey="SMALL_GREEN_BTN" TextKey="SHARE" />
+                </Button>
+            </WZUIContainer>
+            <Action Type="WZUIActionSequence" GUID="{8a7e4015-efb8-4e3a-8dc9-53b09d13a4e6}">
+                <ChildAction Type="WZUIActionDelayTime" GUID="{0d22bd2e-5b50-44a6-b143-82bcc939f38a}" Duration="0.2" />
+                <ChildAction Type="WZUIActionShow" GUID="{c1d59aea-bbc2-4f09-842f-f7be0c772c0c}" />
+                <ChildAction Type="WZUIActionContainerFadeFromTo" GUID="{1616474c-bca2-4779-a99b-34dadd48fcd9}" OpacityTo="255" Duration="1" RemoveTarget="False" />
+            </Action>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndDailyCopySettlement>

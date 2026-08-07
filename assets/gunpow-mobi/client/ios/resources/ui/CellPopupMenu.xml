@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<CellPopupMenu GUID="{EFAF82B1-F166-40bd-9EA2-BE21B1E5D37B}">
+    <WZUIContainer AbsContentSize="116,56" GUID="{41F5CD9A-30C3-4525-B6A4-9DBDE21E29D9}" LuaObjectName="CellPopupMenu" Name="CellPopupMenu" NameCreate="True" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True" ShowAll="False">
+        <Button AnchorPoint="0.5,0.5" GUID="{4DDF46AB-BEF2-4279-B548-EC3AE896DE0A}" LuaDoneFunctionName="onClick" RelativePosition="0.5,0.5" TouchContainerEnable="True" Type="WZUIButton" LuaActionName="Normal" Name="btn_CellPopupMenu">
+            <NormalElement GUID="{B3FA2772-66B3-4098-A69F-81EAC2689B64}" TouchContainerEnable="True" Type="WZUIContainer">
+                <WZUI9Image AnchorPoint="0.5,0.5" File="ui/common/common_btn_anniu4.png" GUID="{A13D2E33-1029-4652-BF1B-85CE476FB991}" Name="imgBk1_CellPopupMenu" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8FF8CC00-6988-49d3-A54D-1453B7FD9A47}" Name="txt_CellPopupMenu" FontSize="24" BoldFont="True" EnableStroke="True" RelativePosition="0.515,0.481818" StrokeColor="79,60,48" StrokeSize="4" Color="255,236,193" AnchorPoint="0.5,0.5" Alignment="Left" Text="" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement GUID="{6790183E-0641-40b6-9EA7-C82B4A7F9900}" TouchContainerEnable="True" Type="WZUIContainer">
+                <WZUI9Image AnchorPoint="0.5,0.5" File="ui/common/common_btn_anniu4_sel.png" GUID="{9A024947-02D4-43c7-8B41-2E8F9FBC8774}" LuaTouchMovedFunction="" LuaTouchMoveoutFunction="" Name="imgBk2_CellPopupMenu" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False" ScaleX="1" Scale="1" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{F456B489-CE03-41e7-BFED-D213350FF586}" Name="txtSel_CellPopupMenu" FontSize="24" BoldFont="True" EnableStroke="True" RelativePosition="0.515,0.5" StrokeColor="79,60,48" StrokeSize="4" Color="255,236,193" AnchorPoint="0.5,0.5" Alignment="Left" UseOriginSize="True" />
+            </SelectElement>
+            <DisableElement GUID="{E39122C1-5813-4583-9B4B-2F032A66F46F}" TouchContainerEnable="True" Type="WZUIContainer">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{184abe89-37c7-4735-897a-b04a43f48eb1}" Name="txtDisable_CellPopupMenu" FontSize="24" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.7" StrokeColor="79,60,48" StrokeSize="4" Color="255,236,193" AnchorPoint="0.5,0.5" Alignment="Left" Text="" UseOriginSize="True" />
+            </DisableElement>
+            <WZUIImage Type="WZUIImage" GUID="{1D038EEE-131E-433b-B6F6-CA9A0AFE8ADB}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.93,0.850001" Name="imgLight_CellPopupMenu" Visible="False" />
+        </Button>
+        <WZUIImage Type="WZUIImage" GUID="{d83d3823-4ba9-4c99-a6d8-9b2e38cc7374}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.2" ScaleX="1.5" Scale="0.7" AbsPosition="121,144.36" ScaleY="1" Name="imgLine" Visible="False" />
+    </WZUIContainer>
+</CellPopupMenu>

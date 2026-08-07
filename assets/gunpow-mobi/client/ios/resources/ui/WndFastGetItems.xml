@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" ?>
+<WndFastGetItems GUID="{F20BBF5B-6928-4f01-8BB2-A3C3007F2630}">
+    <WZUIWindow Type="WZUIWindow" GUID="{90704600-11FB-44e9-B3E2-156F1A32E3BF}" LuaObjectName="WndFastGetItems" Name="WndFastGetItems" NameCreate="True" LuaTouchBeganFunction="" AbsContentSize="392,540" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{50B02492-E1F5-4f32-8E47-30846AC19F90}">
+            <WZUI9Image Type="WZUI9Image" GUID="{C81147F2-5F87-47cd-AB86-81975E36BA8D}" File="ui/common/transparent_bg.png" Scale="5" LuaTouchEndedFunction="onClikClose" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{E2165204-599A-4f12-819D-9DF7F6C8963D}" AbsContentSize="0" UseAbsSize="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{7668C5C5-C524-433c-A3A8-02C144A06927}" File="ui/common/common_scale9_di5.png" CapInsets="178,75,1,1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{D7C81892-E534-401f-8824-C25FEDC10084}" Color="255,236,193" EnableStroke="True" StrokeSize="4" TextKey="GET_ACCESS" FontSize="26" StrokeColor="128,54,13" RelativePosition="0.5,0.935184" AbsPosition="196,505" />
+            <WZUIImage Type="WZUIImage" GUID="{D632FCC5-9414-4b28-97F8-771AE8B7B84E}" File="ui/common/common_icon_diandian.png" UseOriginSize="True" RelativePosition="0.0819303,0.940292" AbsPosition="32.1167,507.758" />
+            <WZUIImage Type="WZUIImage" GUID="{DDA0DC0B-372B-4235-840C-DC1FA4DE114E}" File="ui/common/common_icon_diandian.png" UseOriginSize="True" RelativePosition="0.917725,0.940292" AbsPosition="359.748,506.542" />
+            <WZUIContainer Type="WZUIContainer" GUID="{DFBBB587-B55F-464a-B1DE-333023F690A9}" AbsContentSize="378,120" UseAbsSize="True" RelativePosition="0.5,0.777777" AbsPosition="196,420">
+                <WZUIContainer Type="WZUIContainer" GUID="{5F309927-48CE-49fa-93E7-51F10FD36E26}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.190476,0.5" Name="" Visible="True" AbsPosition="72.0001,60">
+                    <WZUIImage Type="WZUIImage" GUID="{782B137D-3A7B-4f0e-863C-C7353B13FB53}" File="ui/common/common_icon_jinengkuang.png" UseOriginSize="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{B63D58B2-69BC-47a3-AF1E-1DB304C03FCF}" File="ui/combat/common_icon_kdi.png" UseOriginSize="True" ScaleY="0.95" RelativePosition="0.5,0.512821" Name="" AbsPosition="39,40" />
+                    <WZUIImage Type="WZUIImage" GUID="{5F341BAA-EFA0-4fbe-89D1-A9D0083F8789}" File="" UseOriginSize="True" Name="imgItemIcon_WndFastGetItems" RelativePosition="0.5,0.4875" AbsPosition="40,39" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7C6F479F-1EFF-4117-B82F-0EF33B204A7C}" FontSize="24" Color="255,227,116" Name="txtItemName_WndFastGetItems" Text="" RelativePosition="0.31746,0.633333" AbsPosition="120,76" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{AC4F4998-F42E-4e85-87D6-4C9B2CE638AF}" Color="255,227,116" FontSize="22" Text="" RelativePosition="0.306877,0.375" AbsPosition="145,45" TextKey="" Name="txtItemCountS_WndFastGetItems" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{B4E0C93C-9A09-4cdd-8B45-82087689FE79}" Color="255,236,193" FontSize="22" Text="" RelativePosition="0.462963,0.366667" AbsPosition="175,44" Name="txtItemCountN_WndFastGetItems" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{e41d7b89-a5f3-4541-9ed8-8544e644d4ba}" Color="255,236,193" FontSize="22" Text="" RelativePosition="0.32,0.366667" AbsPosition="175,44" Name="txtItem_WndFastGetItems" AnchorPoint="0,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5FC7BE4A-0E5A-46fa-9882-D201232DF29B}" AbsContentSize="378,298" UseAbsSize="True" RelativePosition="0.5,0.385185" AbsPosition="195,208">
+                <WZUI9Image Type="WZUI9Image" GUID="{65A0BCFD-5298-4c1f-9166-7D9F6833627C}" File="ui/common/common_scale9_di6.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{560804FA-61F6-46d9-B028-F26D6BDA6E88}" FontSize="24" Color="158,139,121" Text="" RelativePosition="0.5,0.926175" AbsPosition="189,276" Name="txtGetItemDescribe_WndFastGetItems" />
+                <WZUIImage Type="WZUIImage" GUID="{cb011ef7-f706-418f-a685-c3fe53cb4cc9}" File="ui/common/transparent_bg.png" Scale="1.5" ScaleX="1" ScaleY="1.4" />
+                <WZUIContainer Type="WZUIContainer" GUID="{f182835d-d89b-49df-b69b-f62a82a89eb0}" AbsContentSize="358,280" UseAbsSize="True" RelativePosition="0.5,0.503356" AbsPosition="189,150">
+                    <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{9a541348-d47d-47bb-ab51-051ae601bbb0}" Name="tableHurdlesList_WndFastGetItems" EnableMoveHorizontal="False" EnableVerticalScroll="False" LoadCountPerFrame="1" ListItemInterval="8" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{3F12D77C-F9C6-45f6-B427-169AC8BEA515}" Name="CellFastJump" AbsContentSize="334,90" UseAbsSize="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{B10EC262-3780-4e77-B108-4B103B497AF7}" File="ui/common/common_scale9_di7.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{FCCE5D76-541D-49ff-AEDA-273CBA3CCEC9}" FontSize="24" Color="158,0,0" Name="txtChaptersName_WndFastGetItems" Text="" RelativePosition="0.0718565,0.663043" AbsPosition="28,61" AnchorPoint="0,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{1A6D3C19-D06C-450b-9F83-74EF8874F13F}" FontSize="24" Color="62,34,8" Name="txtChaptersDesc_WndFastGetItems" Text="" RelativePosition="0.0718565,0.304347" AbsPosition="22,27.9999" AnchorPoint="0,0.5" MaxLength="11" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b508c5f5-58ae-42cd-b035-aa587304dfb0}" FontSize="26" Color="158,0,0" Name="txtInterfaceName_WndFastGetItems" Text="" RelativePosition="0.0718565,0.5" AbsPosition="28,61" AnchorPoint="0,0.5" LabelStyleKey="C13_F26" />
+            <WZUIImage Type="WZUIImage" GUID="{be512310-aedf-455d-be63-6b1943629034}" File="" UseOriginSize="True" RelativePosition="0.877245,0.5" Scale="0.8" ScaleX="0.8" ScaleY="0.8" Name="imgTag_WndFastGetItem" Visible="True" TouchEnable="False" />
+            <Button Type="WZUIButton" LuaDoneFunctionName="onClickJump" GUID="{291fe3eb-ccf0-4160-94c3-32d38b838209}">
+                <NormalElement Type="WZUIContainer" GUID="{c208975f-0d23-4b30-84eb-8e97702fce8c}" />
+                <SelectElement Type="WZUIContainer" GUID="{973af85b-2b20-42d6-b6f7-0529e29a3403}" />
+                <DisableElement Type="WZUIContainer" GUID="{d70855c7-ea62-4f43-b690-3f0efec4d356}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{71727206-93f5-48b4-8e24-d89583c417b6}" Name="CellFastJump2" AbsContentSize="334,90" UseAbsSize="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{0ae9ef6f-fcc4-49f7-9357-b29e8ff4de8c}" File="ui/common/common_scale9_di7.png" GrayRender="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4c178fb1-5428-463b-a502-ed04601817a7}" FontSize="26" Color="255,236,193" Name="txtInterfaceName_WndFastGetItems" Text="" RelativePosition="0.5,0.5" AbsPosition="28,61" AnchorPoint="0.5,0.5" LabelStyleKey="C8_F24" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndFastGetItems>

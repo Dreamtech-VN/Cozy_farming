@@ -1,0 +1,31 @@
+﻿<CellWakeupCoinUse GUID="{390a6435-6718-4a32-b7b6-efde6341cd1e}">
+    <WZUIContainer Type="WZUIContainer" GUID="{a0d587f2-6f2c-47d7-8cd0-d5c7429ca5b7}" Name="CellWakeupCoinUse" NameCreate="True" LuaObjectName="CellWakeupCoinUse" AbsContentSize="300,117" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{9850347f-1980-4df9-b296-abc01aa48310}" AbsContentSize="300,117" UseAbsSize="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{5e423978-2711-430c-9352-5e21e1da37e6}" AbsContentSize="82,82" UseAbsSize="True" RelativePosition="0.2,0.5" Name="conIcon_CellWakeupCoinUse" />
+            <WZUIContainer Type="WZUIContainer" GUID="{626f46ca-8c16-48b2-90d4-605dcc8d4457}" UseAbsSize="True" AbsContentSize="280,100" RelativePosition="0.5,0.483">
+                <WZUI9Image File="ui/common/common_scale9_beibaodi_sel.png" GUID="{d2050d43-fb27-4d74-a235-08fbfa54a9eb}" Name="ImgLight" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False" Scale="1" ScaleX="1" ScaleY="1" UseOriginSizeProportion="False" Visible="False" />
+            </WZUIContainer>
+            <WZUI9Image File="ui/common/common_scale9_beibaodi_sel.png" GUID="{9df89007-cf4a-4465-a621-3131c7b08d03}" Name="ImgLight1" RelativePosition="0.2,0.485" Type="WZUI9Image" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" UseOriginSizeProportion="False" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{b86c93c9-1b00-4152-ba2c-33312df29788}" AbsContentSize="160,34" UseAbsSize="True" RelativePosition="0.38,0.7" AnchorPoint="0,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{8b8fa05f-953b-4630-82f8-8ddb82c3c970}" File="ui/common/common_scale9_di111.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b316235a-27c4-4eb5-904a-216082892093}" FontSize="20" Name="txtName_CellWakeupCoinUse" />
+            </WZUIContainer>
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{b65e347a-57de-4ace-b5e2-670ec576a225}" Name="ftxtExp_CellWakeupCoinUse" MaxWidth="200" AnchorPoint="0,0.5" RelativePosition="0.38,0.3" />
+            <Button Type="WZUIButton" GUID="{454dc133-6f79-4bb1-8caf-06baef8ec4c4}" LuaActionName="Normal" AbsContentSize="100,65" UseAbsSize="True" RelativePosition="0.833333,0.277778" LuaDoneFunctionName="onClickUse" Visible="False">
+                <NormalElement Type="WZUIContainer" GUID="{f9de531a-9ee5-4686-9260-a3b399494c35}">
+                    <WZUIImage Type="WZUIImage" GUID="{8002dd0f-d020-499b-b35a-3ea6f0ba1ea0}" File="ui/common/common_btn_anniu5.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{51dcf56c-85b4-4cf1-81fb-4aa9938b914b}">
+                    <WZUIImage Type="WZUIImage" GUID="{4925f2cf-154d-44b1-8d47-f516d2a014ee}" File="ui/common/common_btn_anniu5_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{09d66687-6e85-47f0-8827-d78a64a3a43a}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c9dece36-464a-4bd4-b93d-a0aeade2dd08}" FontSize="20" TextKey="USE" Color="255,236,193" />
+            </Button>
+            <Button Type="WZUIButton" GUID="{ad96d0d9-839c-4138-a51d-fd303358fb7a}" UseAbsSize="True" AbsContentSize="290,95" LuaDoneFunctionName="onClick">
+                <NormalElement Type="WZUIContainer" GUID="{cec748d2-bfba-40aa-bf1b-771f8e97a810}" />
+                <SelectElement Type="WZUIContainer" GUID="{a2528c4f-d3e4-4701-b9a1-d3b7d13a366f}" />
+                <DisableElement Type="WZUIContainer" GUID="{421e2c1b-d427-44a5-a770-41a92c9884b6}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellWakeupCoinUse>

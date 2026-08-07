@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<WndTips GUID="{8C45C903-3CF2-496e-BBEA-CF7B24CD31D6}">
+    <WZUIWindow AbsContentSize="156,135" AbsPosition="0,0" AnchorPoint="1.02,0.1" GUID="{C24457FE-D70C-46b1-A798-149F747905D4}" LuaObjectName="WndTips18" Name="WndTips18" NameCreate="True" RelativePosition="0.65,0.5" RelativeSize="1,1" ShowAll="False" TouchContainerEnable="True" TouchEnable="True" TouchSwallow="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="True" Visible="True" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{68719D9C-2524-4059-81F8-640A78924219}" Name="conType18_WndTips" RelativePosition="0.5,0.5" AbsPosition="480,320" AbsContentSize="156,135" UseAbsSize="True" Visible="True" NameCreate="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{88378A6F-680A-4cad-A0A6-40213CE3C95B}" UseAbsSize="True" AbsContentSize="110,64" RelativePosition="0.5,1" AbsPosition="78,101.417" AnchorPoint="0.5,1" Name="con1Type18_WndTips" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{7E95BE60-2B03-4fb3-A5FB-C332AFB46D3F}" File="ui/common/common_scale9_di24.png" AnchorPoint="0.5,0.5" />
+            </WZUIContainer>
+            <WZUI9Image Type="WZUI9Image" GUID="{45304DB4-0B77-4b45-8565-89AE36CA0AE2}" File="ui/common/common_scale9_di24.png" Name="bgType18_WndTips" />
+            <WZUIButton Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.35" GUID="{A4BA13B2-EBEF-4987-8415-285006237BC1}" LuaDoneFunctionName="onVIP1" Name="btn1Type18_WndTips" Visible="True" LuaActionName="Normal" AbsPosition="81.2285,46.6227">
+                <NormalElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{768576B6-F418-437f-8B0D-EFD6D8E41FE0}">
+                    <WZUIImage Type="WZUIImage" GUID="{F8FD5859-CFE4-46a0-838B-348F914E0D28}" File="ui/common/common_btn_anniu4.png" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{C2FA30AA-8326-402c-A273-F13D6676EAED}">
+                    <WZUIImage Type="WZUIImage" GUID="{3B13DE11-589E-46a2-B9B5-566BAFCECF53}" File="ui/common/common_btn_anniu4_sel.png" Scale="1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{0E8BBE5C-F01D-4ec8-B52A-F185EAB9F7CD}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{48DB7363-66BC-463d-95B4-CE8D5238FA29}" FontSize="22" Color="99,255,95" Text="" RelativePosition="0.5,0.5" Visible="True" Name="ttf2Type18_WndTips" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" LabelStyleKey="SMALL_TIP_BTN" TextKey="VIPTIP1" ScaleX="1" />
+            </WZUIButton>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5779B770-F60E-4e40-BD8E-A8C65A27EA97}" FontSize="22" Color="255,227,116" Text="VIP5" RelativePosition="0.5,0.75" Name="label1Type18_WndTips" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" AbsPosition="71.8361,92.4311" />
+            <WZUIButton Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.35" GUID="{C31FCB41-00A3-4b80-ACA0-A8740A2B72B7}" LuaDoneFunctionName="onVIP2" Name="btn2Type18_WndTips" Visible="False" LuaActionName="Normal" AbsPosition="211.753,50.3375">
+                <NormalElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{FAA04C10-8CDE-4bc1-969F-C09E14C05273}">
+                    <WZUIImage Type="WZUIImage" GUID="{D6DD07CA-87B5-463c-B0F8-C2CF0154E79E}" File="ui/common/common_btn_anniu4.png" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{08BE4D68-46A4-4851-9472-6A4856992A65}">
+                    <WZUIImage Type="WZUIImage" GUID="{88082F0F-6E42-477f-9AC9-FF98F1EA1DD1}" File="ui/common/common_btn_anniu4_sel.png" Scale="1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{A49075D0-C593-45d5-B808-0B6358D45006}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{08C4309D-86B0-4e91-A974-FA3F04B07229}" FontSize="22" Color="99,255,95" Text="" RelativePosition="0.5,0.5" Visible="True" Name="ttf1Type18_WndTips" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" LabelStyleKey="SMALL_TIP_BTN" TextKey="VIPTIP2" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTips>

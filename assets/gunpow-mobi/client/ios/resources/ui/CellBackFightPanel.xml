@@ -1,0 +1,16 @@
+﻿<CellBackFightPanel GUID="{1e43018c-ab34-4b24-ab8e-7f9737701a2c}">
+    <WZUIContainer AbsContentSize="500,446" GUID="{689f0164-b598-428b-9fb7-b81ceecd62df}" Name="CellBackFightPanel" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" LuaObjectName="CellBackFightPanel">
+        <WZUIContainer AbsContentSize="500,374" GUID="{4628dffd-7e01-4bb7-bef8-f97ecf40ce8c}" RelativePosition="0.5,0.87" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,1">
+            <WZUIContainer Type="WZUIContainer" GUID="{f4792464-65d2-48bd-8f1a-754e88bbc6f3}" AbsContentSize="220,220" UseAbsSize="True" RelativePosition="0.86,0.92" Name="conLight_CellBackFightPanel" AbsPosition="402.965,65.9881" TouchEnable="False">
+                <WZUIImage Type="WZUIImage" GUID="{3fcc077c-5b97-4097-be41-d2b18a0bb52d}" File="ui/common/common_pic_guangx.png" />
+            </WZUIContainer>
+            <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{5beecea0-3a22-4a2f-91e2-c2d65041ea30}" AbsContentSize="500,380" UseAbsSize="True" EnableMoveVertical="True" ListOrient="Vertical" Name="flistView_CellBackFightPanel" RelativePosition="0.5,1" EnableMoveHorizontal="False" ListItemInterval="6" AnchorPoint="0.5,1" />
+            <WZUIImage Type="WZUIImage" GUID="{ae3400fb-63d4-4c64-926c-e2fdbb654f36}" File="ui/common/common_icon_sltb.png" UseOriginSize="True" RelativePosition="0.86,1.03" Scale="1.2" Name="imgGiftBox1_CellBackFightPanel" AbsPosition="429.245,114.312" TouchEnable="False" TouchSwallow="False" />
+            <WZUIImage Type="WZUIImage" GUID="{f77379fc-94fc-4037-b5c2-e9c72c18d54d}" File="ui/common/common_icon_sltb.png" UseOriginSize="True" RelativePosition="0.79,0.97" Name="imgGiftBox2_CellBackFightPanel" Scale="0.9" AbsPosition="393,93.88" TouchEnable="False" TouchSwallow="False" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="480,30" AnchorPoint="0.5,0.5" GUID="{0b4d8ed6-7f6a-4bd9-93f8-86d17f4200c6}" RelativePosition="0.5,0.93" Type="WZUIContainer" UseAbsSize="True">
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="255,227,116" FontSize="22" GUID="{4f2da696-b6b4-40cd-85df-0e7677baacf3}" Name="txtTime_CellBackFightPanel" RelativePosition="0.025,0.5" Text="活动时间" Type="WZUILabelTTF" LabelStyleKey="" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" />
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="255,89,74" FontSize="22" GUID="{1963adef-8e5c-4e91-8c77-5617c2517d41}" Name="txtTimeValue_CellBackFightPanel" RelativePosition="0.26,0.5" Text="2" Type="WZUILabelTTF" EnableStroke="True" StrokeSize="4" StrokeColor="158,0,0" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellBackFightPanel>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CellShopNew GUID="{1E1EE72C-208B-4bb0-BF83-2A5F78623152}">
+    <WZUIContainer AbsContentSize="198,248" GUID="{204847CD-3CD8-4e93-A6B6-38012FA18CE0}" LuaObjectName="" Name="CellShopNew" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.498437">
+        <WZUIContainer Type="WZUIContainer" GUID="{3a235277-e975-4a5b-8ea0-34d0b5d34ec1}">
+            <WZUIImage Type="WZUIImage" GUID="{a1a22f04-03dc-4508-bb25-d401d07d9405}" Name="imgDi_CellShopNew" UseOriginSize="True" />
+            <Button Type="WZUIButton" GUID="{8b58be97-35e6-4a68-837a-24fd4cf17f4d}" LuaDoneFunctionName="onBuy">
+                <NormalElement Type="WZUIContainer" GUID="{aef153c2-0dd3-4344-b498-2ffdced19eab}" />
+                <SelectElement Type="WZUIContainer" GUID="{6db5191a-627f-4d9b-a0b8-ad8339116c21}" />
+                <DisableElement Type="WZUIContainer" GUID="{c96f8181-ad9a-4f6f-b822-8905685e8e56}" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellShopNew>

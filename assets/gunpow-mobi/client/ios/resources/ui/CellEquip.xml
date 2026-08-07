@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?><CellEquip GUID="{4E6F911C-A4BE-4d56-9172-0CCA71A613D7}">
+    <WZUIContainer AbsContentSize="370,468" AnchorPoint="0.5,0.5" GUID="{57F13970-4563-4df0-861D-02301A2AA5AF}" LuaObjectName="CellEquip" Name="CellEquip" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="314,52" AnchorPoint="0,1" GUID="{3CAAC35E-10E9-4a6b-91BB-8BAF4A3573C7}" RelativePosition="0.02,1" RelativeSize="0.85,0.12" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True">
+            <WZUICheckBoxGroup AbsContentSize="314,0" AnchorPoint="0.5,1" GUID="{ACDC48E8-47F5-467a-9D4C-027493A3A3FE}" RelativePosition="0.5,1" RelativeSize="1,1" Type="WZUICheckBoxGroup">
+                <CheckBox AbsContentSize="100,52" AnchorPoint="0,1" GUID="{D9FCD044-7BE0-43b6-87B6-6ED3A9E02988}" LuaSelectedFunctionName="onArmsSelect" Name="checkInfo1_CellEquip" RelativePosition="0,1" SelectedIndex="1" Type="WZUICheckBox" UseAbsSize="True">
+                    <CheckElement GUID="{C9380E08-8555-4b02-B0D4-DC4BCA264101}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="15,18,80,30" File="common/button/button_8.png" GUID="{3B094474-FBF0-4b10-BA0C-93448B606FDF}" Type="WZUI9Image" UseOriginSize="False"/>
+                    </CheckElement>
+                    <CheckElement GUID="{83842977-30DE-49a5-ACE8-F8F668F0C96F}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="15,18,80,30" File="common/button/button_8_sel.png" GUID="{D7FC250E-784B-4bd4-BEBB-DBF822CDEB86}" Type="WZUI9Image" UseOriginSize="False"/>
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox AbsContentSize="100,52" AnchorPoint="0.5,1" GUID="{34F03074-57BF-4ddd-8B4D-508A7DF9A184}" LuaSelectedFunctionName="onDressSelect" Name="checkInfo2_CellEquip" RelativePosition="0.5,1" Type="WZUICheckBox" UseAbsSize="True">
+                    <CheckElement GUID="{B12527B6-3032-49cb-871C-0A558C811C56}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="15,18,80,30" File="common/button/button_8.png" GUID="{AADF9218-288A-4ca3-AFB2-194476A535CD}" Type="WZUI9Image" UseOriginSize="False"/>
+                    </CheckElement>
+                    <CheckElement GUID="{64F98610-8DF1-4f1d-87DB-EADB1F1D51A4}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="15,18,80,30" File="common/button/button_8_sel.png" GUID="{CFDDE1C9-A9FB-4f7e-A9E2-28CF79CA6FBB}" Type="WZUI9Image" UseOriginSize="False"/>
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox AbsContentSize="100,52" AnchorPoint="1,1" GUID="{140C4EFE-C5B1-4519-91A0-CAFDFE98101B}" LuaSelectedFunctionName="onOthersSelect" Name="checkInfo3_CellEquip" RelativePosition="1,1" Type="WZUICheckBox" UseAbsSize="True">
+                    <CheckElement GUID="{42487002-C239-4b60-881F-515A3EC3220F}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="15,18,80,30" File="common/button/button_8.png" GUID="{182526D1-0FA5-4c24-8FA3-3FE3B6A5FC65}" Type="WZUI9Image" UseOriginSize="False"/>
+                    </CheckElement>
+                    <CheckElement GUID="{D4CC6EC7-E40E-4134-BF4C-D14136AA81C8}" Type="WZUIContainer">
+                        <WZUI9Image CapInsets="15,18,80,30" File="common/button/button_8_sel.png" GUID="{934F893E-DB0A-45b3-BBE0-75EC1B8B53D3}" Type="WZUI9Image" UseOriginSize="False"/>
+                    </CheckElement>
+                </CheckBox>
+            </WZUICheckBoxGroup>
+            <WZUIContainer AnchorPoint="0.5,1" GUID="{9840C7AD-24BB-4f8c-ABC2-BDC34ECEA193}" RelativePosition="0.5,1" RelativeSize="1,1" TouchEnable="False" Type="WZUIContainer">
+                <WZUIContainer AbsContentSize="100,52" AnchorPoint="0,0.5" GUID="{B54D5B50-B5AA-4a95-A7A5-95490AA9EE2E}" RelativePosition="0,0.5" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="28" GUID="{F41A7CF4-AA3A-4768-A536-93CFB305F77E}" RelativePosition="0.5,0.56" StrokeColor="98,50,11" StrokeSize="4" Text="武器" Type="WZUILabelTTF"/>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="100,52" AnchorPoint="0.5,0.5" GUID="{08479DD7-638D-40fd-B266-5F936AB2B54F}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="28" GUID="{DDF8DFC7-07B5-4403-B253-66346D1ABC4F}" RelativePosition="0.5,0.56" StrokeColor="98,50,11" StrokeSize="4" Text="装扮" Type="WZUILabelTTF"/>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="100,52" AbsPosition="1,0" AnchorPoint="1,0.5" GUID="{102AAEB7-8B50-4d4e-96CA-9F206991A7A8}" RelativePosition="1,0.5" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUILabelTTF AnchorPoint="0.5,0.5" BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="28" GUID="{F7FFB3AD-1E1A-4770-A18B-9C9FB9EC198E}" RelativePosition="0.5,0.56" StrokeColor="98,50,11" StrokeSize="4" Text="其它" Type="WZUILabelTTF"/>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="370,420" AnchorPoint="0.5,0" GUID="{444F1DB8-85A3-4dbb-AE13-DAF274C12D72}" RelativePosition="0.5,0.015" RelativeSize="1,0.896" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image AnchorPoint="0.5,1" File="common/Jigsaw/n_10.png" GUID="{A68F83EF-09B8-4f50-B908-2CBD848A81F7}" RelativePosition="0.5,0.98" RelativeSize="1,1" Type="WZUI9Image"/>
+            <WZUIContainer AbsContentSize="376,29" AnchorPoint="0.5,1" GUID="{A8FAAA4F-2305-4e2f-9C19-FC69C4B3458D}" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/Jigsaw/n_03.png" GUID="{BC7F97A5-BA27-46fc-9B40-1D5917CA3DAE}" Type="WZUI9Image"/>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="345,318.689" AnchorPoint="0.5,1" GUID="{7D6D3BAB-F878-4da1-A587-55E9FA2B6168}" RelativePosition="0.5,0.935" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image AnchorPoint="0.5,1" File="common/Jigsaw/n_05.png" GUID="{85919047-84C3-4a71-8EBA-B03D293ED17D}" RelativePosition="0.5,1" RelativeSize="1,1.01" Type="WZUI9Image"/>
+                <WZUITableContainer AnchorPoint="0.5,1" CellElementHeight="0.336" ColumnCount="3" EnableMoveHorizontal="False" GUID="{5EB05C73-12CF-4994-8199-9FD5F79E1BEE}" Name="tableConGoods_CellEquip" RelativePosition="0.5,0.98" RelativeSize="0.96,0.96" Type="WZUITableContainer"/>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="320,66" AnchorPoint="0.5,0" GUID="{46BDAEDA-B791-429a-84BA-D806F14A1F22}" RelativePosition="0.5,0.009" RelativeSize="0.9,1" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIContainer AbsContentSize="150,66" AnchorPoint="1,0.5" GUID="{4C1A18E2-0C19-48cb-B5ED-C6D2F85A805F}" RelativePosition="1,0.5" Type="WZUIContainer" UseAbsSize="True">
+                    <Button GUID="{B8EB8891-1ECD-4b69-9094-838163B48F96}" LuaDoneFunctionName="onSaleClick" Type="WZUIButton">
+                        <NormalElement GUID="{139A67D4-3C49-4574-9910-3937F05C2C14}" Type="WZUIContainer">
+                            <WZUI9Image CapInsets="0,0,0,0" File="common/button/button_2.png" GUID="{EF864B22-4350-4ac4-B27B-515C11C585E5}" Type="WZUI9Image"/>
+                        </NormalElement>
+                        <SelectElement GUID="{D45D7540-3C7D-4429-B806-8789537D2828}" Type="WZUIContainer">
+                            <WZUI9Image CapInsets="0,0,0,0" File="common/button/button_2_sel.png" GUID="{E06AB9B0-7C70-4876-8E9A-CDA27312CF9E}" Type="WZUI9Image"/>
+                        </SelectElement>
+                        <DisableElement GUID="{45244432-61A4-4007-9940-65DB9E56BED4}" Type="WZUIContainer">
+                            <WZUI9Image CapInsets="0,0,0,0" File="common/button/button_4.png" GUID="{CF20150F-705D-4bf0-B23F-F1FF81D12A4B}" Type="WZUI9Image"/>
+                        </DisableElement>
+                        <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{E894230A-75C5-4a38-8BA0-A4D73550078E}" Name="txtSale_CellEquip" StrokeColor="29,121,1" StrokeSize="4" Text="出售" Type="WZUILabelTTF"/>
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellEquip>

@@ -1,0 +1,192 @@
+﻿<WndNewActivity GUID="{2a576cd6-fa37-4cb4-8127-4265362f4499}">
+    <WZUIWindow Type="WZUIWindow" GUID="{c91b496b-8697-41ca-9be0-2b363f952fa5}" AbsContentSize="960,517" LuaObjectName="WndNewActivity" Name="WndNewActivity" NameCreate="True" UseAbsSize="True" LuaTouchBeganFunction="onTouchBegan" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{16b7267f-9814-454c-9683-91569e472bb9}" AbsContentSize="960,517" UseAbsSize="True" RelativePosition="0.5,0.5" ShowAll="False">
+            <WZUIImage Type="WZUIImage" GUID="{6eceaf71-5e7b-4186-9581-e3b776ab0848}" File="ui/anniversary/znq_di01.png" UseOriginSize="True" RelativePosition="0.553125,0.5" ScaleX="1" Scale="1" Order="-1" />
+            <WZUIImage Type="WZUIImage" GUID="{af215e97-7713-4c82-a185-300b74cf58c6}" File="" UseOriginSize="True" RelativePosition="0.357291,0.406491" AnchorPoint="1,0.5" Name="imgPeople_WndNewActivity" Order="1" Scale="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{542d3183-02d1-47fb-b954-ea954f300fba}" Visible="True" Order="1">
+                <WZUIContainer Type="WZUIContainer" GUID="{3d8bede7-3e1e-4ae2-acf8-2c377890557b}" AbsContentSize="90,65" UseAbsSize="True" RelativePosition="0.885923,0.781998">
+                    <Button Type="WZUIButton" RelativePosition="0.5,0.5" AbsContentSize="90,65" UseAbsSize="True" GUID="{48303d57-61c2-4521-bde2-301be46776f9}" LuaDoneFunctionName="onCloseClick" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{923da5e1-7931-499b-9245-1f3e7f8ef3cc}" />
+                        <SelectElement Type="WZUIContainer" GUID="{1a95a500-62ff-4d98-9212-da678b0f883a}">
+                            <WZUIImage Type="WZUIImage" GUID="{3210f900-4dd0-4aa9-adf2-da9e637459c4}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{cc2a49a1-f287-4a32-9b4a-678b9c637326}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{356113ec-938f-42cc-8399-a8bfdd669df6}" File="ui/anniversary/znq_top.png" UseOriginSize="True" RelativePosition="0.534375,0.770793" Scale="0.6" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{6f0f465d-22bb-4846-9a4a-705e9e51f25c}" AbsContentSize="600,50" UseAbsSize="True" RelativePosition="0.582334,0.676462" Order="5">
+                <WZUIContainer Type="WZUIContainer" GUID="{b8c3258e-a4d9-46b6-8838-8b6a2c0e48fe}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.0742003,0.4" Name="conActivity1_WndNewActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{dc53c55d-fe95-46f4-9dd8-bc988da0dfaf}" Name="btn_WndNewActivity" LuaDoneFunctionName="onClickActivity" Tag="1">
+                        <NormalElement Type="WZUIContainer" GUID="{3ffd33d2-75e2-4482-a5f0-61b1032f853a}">
+                            <WZUIImage Type="WZUIImage" GUID="{7fea8a57-46e7-4b0a-89d8-f122d263b8d5}" File="ui/anniversary/znq_anniu02.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{f16f73ac-1a15-4498-8294-cb22f8d8c207}">
+                            <WZUIImage Type="WZUIImage" GUID="{60ba9fef-9bb8-4bbb-851d-8ec2724823fc}" UseOriginSize="True" File="ui/anniversary/znq_anniu01.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{4514ccbf-aa02-48e8-886f-5a109ce673ee}">
+                            <WZUIImage Type="WZUIImage" GUID="{1a9f7cbc-6447-4efd-86fb-e1251e427986}" UseOriginSize="True" File="ui/anniversary/znq_anniu01.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{fbd7791d-3908-428a-94b2-16b8870aa108}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndNewActivity" />
+                    <WZUIImage Type="WZUIImage" GUID="{f997c751-85e0-4df0-808f-7c8e0dfdc448}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndNewActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c41752c1-4e17-44ad-be05-c446c701a18e}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.24,0.4" Name="conActivity2_WndNewActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{353d0c96-04b2-4bb6-9525-5d1dd9ad2ec4}" LuaDoneFunctionName="onClickActivity" Tag="2" Name="btn_WndNewActivity">
+                        <NormalElement Type="WZUIContainer" GUID="{f4840a6a-c1ca-4594-83ba-d1af9b58ecf1}">
+                            <WZUIImage Type="WZUIImage" GUID="{88635823-a483-4d0d-888a-ea698921fbcf}" File="ui/anniversary/znq_anniu02.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{316382e5-bdcc-41c0-b8d5-2912eaec01e0}">
+                            <WZUIImage Type="WZUIImage" GUID="{4d790661-ecc1-41de-9608-eca210478745}" UseOriginSize="True" File="ui/anniversary/znq_anniu01.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{34a04b4a-f5fe-47ce-b232-2d682f09550c}">
+                            <WZUIImage Type="WZUIImage" GUID="{c55c6dad-069f-4a89-b026-0675c5b1eedc}" UseOriginSize="True" File="ui/anniversary/znq_anniu01.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b1792e7d-ec10-44ad-802b-a9b00c78373a}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndNewActivity" />
+                    <WZUIImage Type="WZUIImage" GUID="{5d55599e-a211-4600-93a5-fc00d588997d}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndNewActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{9badacfa-ccf0-4d4a-bf74-c9cba3abb389}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.405,0.4" Name="conActivity3_WndNewActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{7342caa4-1867-4585-8e81-e01844015870}" LuaDoneFunctionName="onClickActivity" Tag="3" Name="btn_WndNewActivity">
+                        <NormalElement Type="WZUIContainer" GUID="{dc1d20fa-2921-4212-b6b6-69ade7517d6c}">
+                            <WZUIImage Type="WZUIImage" GUID="{4024ebdc-9b4f-4c60-8192-1362031f1f0a}" File="ui/anniversary/znq_anniu02.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{d5a0d752-98cd-4b0d-a516-850a930025f0}">
+                            <WZUIImage Type="WZUIImage" GUID="{b4e4d85e-f4f9-4f72-a66c-af9c6d003c32}" UseOriginSize="True" File="ui/anniversary/znq_anniu01.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{71729534-39f3-447c-a5e7-fec5d0619c4e}">
+                            <WZUIImage Type="WZUIImage" GUID="{7c86893f-1ae7-417a-a692-6afa468dfd04}" UseOriginSize="True" File="ui/anniversary/znq_anniu01.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{a10915aa-27dd-444b-b922-baa10423420e}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndNewActivity" />
+                    <WZUIImage Type="WZUIImage" GUID="{96f81654-83af-4eb9-ba37-7e9dfadec35a}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndNewActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{bf510323-bc6c-4135-b86f-57b3e97a7c81}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.57,0.4" Name="conActivity4_WndNewActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{15d64025-0f5a-426a-9119-254a5510faee}" LuaDoneFunctionName="onClickActivity" Tag="4" Name="btn_WndNewActivity">
+                        <NormalElement Type="WZUIContainer" GUID="{b12b9791-c49d-41ac-aaa3-a7ec8780161e}">
+                            <WZUIImage Type="WZUIImage" GUID="{22cd68d2-9143-4f2d-bebe-cc8277de960a}" File="ui/anniversary/znq_anniu02.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{6b9fb7d8-01bb-4ea0-b300-179b05b64ee9}">
+                            <WZUIImage Type="WZUIImage" GUID="{cb7bb264-224a-4a64-a715-a3fd9a788f22}" UseOriginSize="True" File="ui/anniversary/znq_anniu01.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{2b379af8-edfc-452f-8388-1e22df358ae8}">
+                            <WZUIImage Type="WZUIImage" GUID="{19ac64b6-0e89-4182-aa94-93380750d55e}" UseOriginSize="True" File="ui/anniversary/znq_anniu01.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{fe0c79f8-98f3-41e2-9ca7-3b48dc97798e}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndNewActivity" />
+                    <WZUIImage Type="WZUIImage" GUID="{379129bb-b128-4b9b-bd44-e11d33a69c45}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndNewActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{9ed5d58e-4e80-42c5-926a-d149ce280842}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.735,0.4" Name="conActivity5_WndNewActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{bf5437e4-ddd6-4c6c-959d-8fd0c2390ed7}" LuaDoneFunctionName="onClickActivity" Tag="5" Name="btn_WndNewActivity">
+                        <NormalElement Type="WZUIContainer" GUID="{41d8ea1e-ed3d-40dc-b4e4-b285713e7253}">
+                            <WZUIImage Type="WZUIImage" GUID="{55b9c47b-8585-4847-9b1c-c3549e187349}" File="ui/anniversary/znq_anniu02.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{732e28fa-0c62-4cd9-9391-d5d09b8dad5f}">
+                            <WZUIImage Type="WZUIImage" GUID="{77cef60d-dc6e-4b19-b51f-d35d31e27012}" UseOriginSize="True" File="ui/anniversary/znq_anniu01.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{540fac75-206d-429a-8fae-042e328183d0}">
+                            <WZUIImage Type="WZUIImage" GUID="{3c321efe-5beb-4568-964e-fa3eb34b75d8}" UseOriginSize="True" File="ui/anniversary/znq_anniu01.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7030237c-56ee-44df-9d0e-699762565b6b}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndNewActivity" />
+                    <WZUIImage Type="WZUIImage" GUID="{76e60a19-c36f-48e6-8fca-2f045633bf96}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndNewActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{8bbd63c8-6ee5-45c2-aeb7-20df88d47187}" AbsContentSize="102,45" UseAbsSize="True" RelativePosition="0.899999,0.4" Name="conActivity6_WndNewActivity" Visible="False">
+                    <Button Type="WZUIButton" GUID="{317a34bd-5395-4445-b93a-0da6167f4cc6}" LuaDoneFunctionName="onClickActivity" Tag="6" Name="btn_WndNewActivity">
+                        <NormalElement Type="WZUIContainer" GUID="{d473bd32-f278-4310-83fc-fd406b1d6399}">
+                            <WZUIImage Type="WZUIImage" GUID="{e27ed749-d745-4425-ac5f-af522d24d011}" File="ui/anniversary/znq_anniu02.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{2bc8a753-5012-4846-919b-18f5d105cb22}">
+                            <WZUIImage Type="WZUIImage" GUID="{312c91cb-b356-4dd3-8597-61555df08d8a}" UseOriginSize="True" File="ui/anniversary/znq_anniu01.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{d0742680-f715-4b8a-8629-e9a3fdd9c516}">
+                            <WZUIImage Type="WZUIImage" GUID="{cfcc78da-f4c4-4015-8bae-07531ef02667}" UseOriginSize="True" File="ui/anniversary/znq_anniu01.png" />
+                        </DisableElement>
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b3d678ce-123f-4557-9320-1d6d04544cc7}" LabelStyleKey="C1_F20_S4_C2" Text="" RelativePosition="0.5,0.455556" Tag="1" Name="txtActivityName_WndNewActivity" />
+                    <WZUIImage Type="WZUIImage" GUID="{76470e25-1089-477e-a215-d09da3ed10e1}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.921569,0.788888" Scale="0.7" ScaleX="0.7" ScaleY="0.7" Name="imgActRed_WndNewActivity" Visible="False" TouchEnable="False" isValid="True" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5a5afda8-d91b-416d-991b-26c3bc0b0bfa}" AbsContentSize="622,260" UseAbsSize="True" RelativePosition="0.608818,0.383035" Order="2" Visible="True">
+                <WZUIContainer AbsContentSize="622,260" GUID="{3316af40-d0e6-4a6d-8ddd-95815de0a9fe}" Name="conActivityContext_WndGameActivity" RelativePosition="0.5,0.488462" Type="WZUIContainer" UseAbsSize="True" />
+                <WZUIContainer Type="WZUIContainer" GUID="{bea0eac3-08aa-4cba-8008-e7a7d3577292}" Name="conRechargeDouble_WndNewActivity" ScaleY="1" ShowAll="False" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{6bd9fd80-d881-4e78-ad46-2792d2ed9937}" File="ui/anniversary/znq_pic_01.png" UseOriginSize="True" RelativePosition="0.363344,0.411538" ScaleY="1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{d5ebd711-2bc0-4858-ac86-f7dc89c2f88b}" LabelStyleKey="C1_F20" TextKey="RECHARGE_DOUBLE_RULE" RelativePosition="0.422733,-0.13152" />
+                    <Button Type="WZUIButton" GUID="{8edd79cf-3ac3-48ab-a9c4-d4542166ce63}" AbsContentSize="140,60" UseAbsSize="True" RelativePosition="0.837119,-0.0583566" LuaDoneFunctionName="onClickToRecharge" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{b81794d2-ec47-46f4-bfa0-c3cb6f8fdcfc}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{7695f6d5-d8a7-4385-a643-a9f639acc8dd}" File="ui/common/common_btn_anniu10_0.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4fa82eca-5133-4ddc-b473-fcd8f6b4bcfa}" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="GOTO_RECHARGE" RelativePosition="0.5,0.483333" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{706be7db-f8f7-46ef-a456-47ba23e75fa9}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{c11cfee9-ac42-4a5e-9658-066a42a2ec98}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{cbaadc28-65c2-42ac-b8e3-3453d4bd254a}" LabelStyleKey="NORMAL_GREEN_BTN" RelativePosition="0.5,0.483333" TextKey="GOTO_RECHARGE" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{64762c8e-9fe7-43c5-be59-3c86fca2947d}" />
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{5a3e8516-9bf2-469e-a0ff-aedf3050eb07}" LabelStyleKey="C1_F20" Text="" RelativePosition="0.127961,-0.0378032" AnchorPoint="0,0.5" Name="txtRechargeDoubleTime_WndNewActivity" Visible="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7c6cab14-43ec-44a6-907c-710de77cee5d}" Name="conRedboxAct_WndNewActivity" Visible="False" UseAbsSize="False">
+                    <WZUIImage Type="WZUIImage" GUID="{8daf15c8-3ad8-4d12-b2dc-9321ac5f6b3c}" File="ui/anniversary/znq_pic_02.png" UseOriginSize="True" RelativePosition="0.382637,0.423077" ScaleY="1.03" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{1cb064de-a660-4e26-ac41-6beb1f9dc5b1}" AbsContentSize="220,40" UseAbsSize="True" RelativePosition="0.3899,0.259533" TouchContainerEnable="False">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{de53c507-cda0-4769-bb74-813e88829f10}" Color="255,255,255" EnableStroke="True" StrokeSize="4" StrokeColor="158,0,0" TextKey="" FontSize="20" Name="txtOverTip_WndNewActivity" NameCreate="False" Visible="True" Text="" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{d5216ffd-53c3-457b-a593-fa5a1be482e1}" LabelStyleKey="C11_F18" TextKey="REDPACK_ATT" RelativePosition="0.338609,0.0440288" Alignment="Left" Name="txtRedpack_WndNewActivity" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{b66f0cd0-a54f-4a92-a103-7a640178bcf8}" AbsContentSize="70,35" UseAbsSize="True" RelativePosition="0.530421,0.0402575" Visible="True" Name="conGoToChat_WndNewActivity">
+                        <Button Type="WZUIButton" GUID="{87267e46-4920-4025-bd8b-05f78bb42a4a}" LuaDoneFunctionName="onClickGoTo">
+                            <NormalElement Type="WZUIContainer" GUID="{9d7be9c1-f35b-4586-a6a3-af8db5be3a2d}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{dd258fbb-59c4-4e6b-bdd6-0b9cd8ff5f4f}" File="ui/common/common_btn_anniu5.png" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{ff2996a8-1d84-4096-9aa5-0779e1278249}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{c25b6585-e0f5-4ba3-871e-22a2912efb19}" File="ui/common/common_btn_anniu5.png" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{6f68be80-7c0c-4b92-b4bd-525f8e7a13e8}" />
+                        </Button>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8ba13a35-953e-4439-8ddf-327ba51f33bf}" LabelStyleKey="C1_F18_S4_C3" TextKey="ACTIVE_BTN_GO" Name="txtStats_WndNewActivity" Text="已领完" />
+                    </WZUIContainer>
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{69d11fa1-c247-4c2d-910c-cc5607b90af5}" Name="ftbCountdown_WndNewActivity" ShowText="" MaxWidth="300" RelativePosition="0.390159,0.263092" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{e75a287e-62a8-4d6d-bb69-0f1d1f19c0e9}" LabelStyleKey="C13_F18" Text="" RelativePosition="0.0711901,-0.157034" AnchorPoint="0,0.5" Name="txtRedboxTip_WndNewActivity" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{0912651b-6a3f-4135-99e2-fb342a1f8ac6}" LabelStyleKey="C13_F18" Text="" RelativePosition="0.443073,-0.157034" AnchorPoint="0,0.5" Name="txtRedboxTime_WndNewActivity" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{bfcda8f6-a41c-489a-abe1-af43e3cc02df}" Name="conWishingAct_WndNewActivity" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{adb7210b-3b63-44a8-abb1-329150e22f0f}" Name="imgNotOpen_WndNewActivity" UseOriginSize="True" File="ui/anniversary/znq_pic_03.png" RelativePosition="0.442122,0.411538" Visible="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{c16264d3-8981-48a0-a8be-72327cee3555}" UseOriginSize="True" Name="imgOpen_WndNewActivity" File="ui/anniversary/znq_pic_04.png" RelativePosition="0.430868,0.411538" Visible="False" isValid="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{fc759235-711c-4215-a426-7d6b11abd0d6}" Name="imgTime_WndNewActivity" File="" UseOriginSize="True" RelativePosition="0.339899,0.665676" Visible="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{2efa15a6-d2f9-414c-9bae-13344fbffc7e}" AbsContentSize="130,60" Name="conGoWishing_WndNewActivity" UseAbsSize="True" RelativePosition="0.854323,-0.0315775" Visible="False">
+                        <Button Type="WZUIButton" GUID="{2d88d300-9384-4aa6-887d-52c6e276f451}" LuaDoneFunctionName="onClickGoWishing" RelativePosition="0.5,0.433333" LuaActionName="Normal">
+                            <NormalElement Type="WZUIContainer" GUID="{0d3c9854-82d5-4dfd-bc54-a2a5094e5656}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{019b0ae7-a6fb-4978-aeb4-805f7b9c72b9}" File="ui/common/common_btn_anniu10_0.png" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5d25ad8f-78cf-4f1b-abbe-7828ae27b749}" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="GO_TO_WISHING" Name="txtGotoWishing1_WndNewActivity" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{4dc5e056-1c3b-48fe-8c34-068d9cd2b359}">
+                                <WZUI9Image Type="WZUI9Image" GUID="{c4564112-ec0a-4eba-a8ac-1161ca2cb045}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3b8deddf-5835-453d-b39c-ddeec854b890}" LabelStyleKey="NORMAL_GREEN_BTN" TextKey="GO_TO_WISHING" Name="txtGotoWishing2_WndNewActivity" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{93243bd7-8147-424a-b4aa-2a094742a8d8}" />
+                        </Button>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{40f23329-4519-4a5b-96a4-f5e475428ab1}" LabelStyleKey="C1_F22" Text="欢度一周年，许愿池再次降临" RelativePosition="-1.61173,0.0806393" TextKey="WISHING_ONE_YEAR_TIP" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{fe77411c-ced0-413c-865d-7226511d67a8}" Name="conTrailerActivity_WndNewActivity" Visible="False">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7096b0cb-c34f-4cfa-a96d-304e86a44006}" LabelStyleKey="C18_F24_S4_C2" TextKey="ACTIVITY_START_TITLE" RelativePosition="0.403537,1.06538" />
+                    <WZUIImage Type="WZUIImage" GUID="{1d3a5308-ea09-4586-bb03-b625cacb7bdf}" File="ui/anniversary/znq_pic_06.png" UseOriginSize="True" RelativePosition="0.348875,0.411538" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7a711f07-10e3-4699-81a2-11a9ceadb125}" Name="txtTitle1_WndNewActivity" LabelStyleKey="C18_F24_S4_C2" TextKey="ACTIVITY_START_TIP_1" RelativePosition="0.0980709,0.857999" AnchorPoint="0,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7415657c-a237-4f09-be88-ca3c20a0fa3a}" Name="txtTitle2_WndNewActivity" LabelStyleKey="C18_F24_S4_C2" TextKey="ACTIVITY_START_TIP_2" RelativePosition="0.0980709,0.700306" AnchorPoint="0,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{22ccbb52-f0b0-4521-87b7-3e1d1900fffc}" Name="txtTitle3_WndNewActivity" LabelStyleKey="C18_F24_S4_C2" TextKey="ACTIVITY_START_TIP_3" RelativePosition="0.0980709,0.531075" AnchorPoint="0,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8f3d28d0-b06f-477b-a72f-e5f8e411b4a6}" Name="txtTitle4_WndNewActivity" LabelStyleKey="C18_F24_S4_C2" TextKey="ACTIVITY_START_TIP_4" RelativePosition="0.0980709,0.365691" AnchorPoint="0,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{93e22a12-a902-48e6-9f6a-0dc771ccedeb}" Name="txtTitle5_WndNewActivity" LabelStyleKey="C18_F24_S4_C2" TextKey="ACTIVITY_START_TIP_5" RelativePosition="0.0980709,0.207999" AnchorPoint="0,0.5" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{027dbc75-e5e2-43be-8275-53833cde8030}" AbsContentSize="40,40" UseAbsSize="True" RelativePosition="0.24883,0.0857536" Order="5" Name="conExplain_WndNewActivity">
+                <Button Type="WZUIButton" GUID="{d24eadaa-3d89-411f-9d01-c7b6c7e1b30c}" LuaDoneFunctionName="onClickDetail" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{e97024c1-8e87-4eaa-8edb-f14acb51524b}">
+                        <WZUIImage Type="WZUIImage" GUID="{d975d0ed-f178-4e26-9b95-de244b5bc6fb}" File="ui/common/common_icon_gth.png" UseOriginSize="True" Scale="0.9" ScaleX="0.9" ScaleY="0.9" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{ed92f618-4152-40b1-b732-5f642f28c89d}">
+                        <WZUIImage Type="WZUIImage" GUID="{51ee2ea4-970d-470b-8b4e-7adc1373ddc7}" File="ui/common/common_icon_gth.png" UseOriginSize="True" Scale="0.9" ScaleX="0.9" ScaleY="0.9" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{b080a328-c03b-465c-bad5-a6d749aefb4e}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndNewActivity>

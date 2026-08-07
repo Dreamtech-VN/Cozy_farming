@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" ?>
+<WndMultiWin GUID="{e0fc019e-381d-4eec-aa87-6e9e06e2d332}">
+    <WZUIFrame Type="WZUIFrame" GUID="{83457ae4-e93e-4d8d-a9f5-af9c13275046}">
+        <WZUIWindow Type="WZUIWindow" GUID="{d12257af-151a-4c01-a535-4f2bc16a16d4}" LuaObjectName="WndMultiWin" Name="WndMultiWin" NameCreate="True" UseAbsSize="False" AbsContentSize="1136,720" ShowAll="False" Scale="1" LuaTouchBeganFunction="onTouchBegan" Visible="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{2AD37E55-06BC-4a84-91FB-3301E36B622E}" Visible="True" TouchEnable="False">
+                <WZUIImage Type="WZUIImage" GUID="{1CE33C53-7375-4ba4-86D8-B40ECC9200C5}" File="ui/copy_settlement/common_pic_sl.png" RelativeSize="0.5,1" AnchorPoint="0.5,0.5" Name="" UseOriginSize="True" isValid="True" Visible="True" />
+                <WZUIImage Type="WZUIImage" GUID="{E00B2DB5-6DEE-46dd-B8CE-3ECEEC0B5B98}" File="ui/copy_settlement/common_pic_slbg.png" UseOriginSize="True" RelativePosition="0.5,0.370313" Name="" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{DB0C63F3-DAF8-4759-A1A5-824C422FB4F4}" Name="conWin_WndMultiWin" NameCreate="True" Visible="True" ShowAll="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{B3A1AF3F-130D-45a9-9788-49DD846FF857}" RelativePosition="0.5,0.78" Visible="True" Name="conFashe_WndMultiWin" TouchEnable="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{46155D4D-A442-43ac-88D8-BF1632CBAE31}" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+                    <WZUIImage Type="WZUIImage" GUID="{4B91E276-0523-4be8-9F70-D55A973E6F23}" File="ui/copy_settlement/common_pic_guangx.png" UseOriginSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0.5" ScaleX="30" Scale="3">
+                        <Action Type="WZUIActionRotateBy" GUID="{F899BCFD-EF88-4224-9776-86F9C30ABC98}" Angle="360" IsLoop="True" Duration="30" />
+                    </WZUIImage>
+                </WZUIContainer>
+                <WZUIParticle Type="WZUIParticle" GUID="{75CB7C76-C6A7-479e-A2FD-1FA9F6306580}" PlistFile="particle/ui_jiesuan_stars_01.plist" AnchorPoint="0.5,0" RelativePosition="0.5,0" Visible="True" TouchEnable="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{2A0882CA-B8C5-4746-B3F0-50238FBBBE2A}" ShowAll="False" UseAbsSize="True" AnchorPoint="0.5,0.5" AbsContentSize="360,640" RelativePosition="0.802197,0.494463" Name="conWinRight_WndMultiWin" Scale="0" Visible="True" TouchEnable="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{C3385E6E-2406-43bb-BFC7-5C7F430308FC}" AbsContentSize="346,146" UseAbsSize="True" RelativePosition="0.5,0.678126" TouchEnable="False" Name="conSettlement1_WndMultiWin">
+                        <WZUI9Image Type="WZUI9Image" GUID="{76983CB1-DA06-42b2-A782-259DE8208A64}" File="ui/common/common_scale9_jiesuandi.png" Opacity="255" RelativePosition="0.502645,0.504032" Visible="True" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{D6FFCE76-EFE4-44f1-9A13-CF197BCD4CB7}" RelativePosition="0.5,0.5" Order="1">
+                            <WZUIImage Type="WZUIImage" GUID="{C3803897-4D90-4141-8C3A-EBF69DCB4026}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" AnchorPoint="0,1" RelativeSize="1,1" RelativePosition="0,1" />
+                            <WZUIImage Type="WZUIImage" GUID="{54648DA9-FFFB-41a0-8E59-DC5781B77C81}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" AnchorPoint="1,1" RelativeSize="1,1" RelativePosition="1,1" FlipX="True" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{DE8237F0-B60A-4951-B9E1-ACDFC4554D01}" AbsContentSize="346,146" UseAbsSize="True" RelativePosition="0.5,0.442188" TouchEnable="False" Name="conSettlement2_WndMultiWin">
+                        <WZUI9Image Type="WZUI9Image" GUID="{0D451AD6-D8A2-4bb9-8107-0E304B226528}" File="ui/common/common_scale9_jiesuandi.png" Opacity="255" RelativePosition="0.502645,0.504032" Visible="True" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{AD848811-3BC5-4891-B6C7-682E0B0712D8}" RelativePosition="0.5,0.5" Order="1">
+                            <WZUIImage Type="WZUIImage" GUID="{8B3CB8A3-2F0F-4a39-A170-AA7BB866C695}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" AnchorPoint="0,1" RelativeSize="1,1" RelativePosition="0,1" />
+                            <WZUIImage Type="WZUIImage" GUID="{2E0A8582-7DCB-41d6-B87E-74334C378BB8}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" AnchorPoint="1,1" RelativeSize="1,1" RelativePosition="1,1" FlipX="True" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{47651B2A-FE12-4653-AEB3-4A98913A20C6}" AbsContentSize="346,146" UseAbsSize="True" RelativePosition="0.5,0.206251" TouchEnable="False" Name="conSettlement3_WndMultiWin">
+                        <WZUI9Image Type="WZUI9Image" GUID="{603E3A79-235D-4ea7-9A51-C005BC7814E7}" File="ui/common/common_scale9_jiesuandi.png" Opacity="255" RelativePosition="0.502645,0.504032" Visible="True" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{556212A4-FFDB-4541-8DC6-640439890D2F}" RelativePosition="0.5,0.5" Order="1">
+                            <WZUIImage Type="WZUIImage" GUID="{B2D5AAE6-095A-417d-AA7B-B60B7674A08C}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" AnchorPoint="0,1" RelativeSize="1,1" RelativePosition="0,1" />
+                            <WZUIImage Type="WZUIImage" GUID="{7F9A87D4-B229-43df-A4F8-313F17FB0FB3}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" AnchorPoint="1,1" RelativeSize="1,1" RelativePosition="1,1" FlipX="True" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <Action Type="WZUIActionSequence" GUID="{4544B952-1B5A-4395-97C5-D1C573B57386}" FinishLuaFunction="">
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{321CCB81-BE8C-4497-A32D-A90958BD46FE}" MoveX="800" />
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{2438C545-BD65-419e-8C2F-792657F8B1FB}" Duration="2.5" />
+                        <ChildAction Type="WZUIActionScaleTo" GUID="{C1BE926C-D08E-449f-B8C7-A42BF6FEA94D}" />
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{C46EFD7E-347B-40a0-9533-E31883770479}" MoveX="-800" Duration="0.5" />
+                    </Action>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{F2D73E3B-5206-451f-8E30-94B681D56D9F}" UseAbsSize="True" AbsContentSize="500,640" RelativePosition="0.5,0.5" ShowAll="False" Name="conWinLeft_WndMultiWin" Visible="True" TouchEnable="False">
+                    <WZUIContainer Type="WZUIContainer" GUID="{B745FA14-0557-4a60-A726-A1FC6557EE45}" RelativePosition="0.5,0.409375" UseAbsSize="True" AbsContentSize="600,400" Visible="True">
+                        <WZUISpine Type="WZUISpine" GUID="{4EE202DF-6ED7-47ba-9643-535B3DB02437}" FileAtlas="copy_settlement/zudui.atlas" FileJson="copy_settlement/zudui.json" RelativePosition="0.5,0.35" AnimationName="" Name="winSpine_WndMultiWin" Visible="True" LuaSpineEventFunc="event" Loop="False" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{6A064DE9-3416-4bdb-9501-E77FF43B1252}" Name="conPlayer_WndMultiWin" UseAbsSize="False" RelativeSize="1,0.45" RelativePosition="0.5,0.28" AnchorPoint="0.5,0.5" Visible="True" />
+                    <Action Type="WZUIActionSequence" GUID="{E14982B5-2EE9-45d8-8B76-E11156DC207F}">
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{34FE937B-0216-443c-A9F2-A2DFA0C5986A}" Duration="2" />
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{29B36D28-EE1D-4ed6-BDAF-DB6A7AF85BA4}" MoveX="-180" Duration="0.5" />
+                    </Action>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{A0489C15-112C-4e0e-9B70-41D9E437D597}" Name="conXialuo_WndMultiWin" RelativePosition="0.5,1" TouchEnable="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{272453e3-ba31-4118-9d26-031d7e1fa175}" Name="conTurnCard_WndMultiWin" ShowAll="True" Visible="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{BB310880-08D1-45d8-8E8C-6FE9763FD1A6}" AnchorPoint="0.5,0.5" RelativeSize="1,1" RelativePosition="0.505282,0.0430555" TouchEnable="False" Visible="True" />
+                <WZUITableContainer Type="WZUITableContainer" GUID="{d9c9c0bc-f6b5-4629-adb2-cc4bfa9c4fd6}" Name="tbconCard_WndMultiWin" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableMoveoutContainer="False" CellElementHeight="0.333" ColumnCount="3" UseAbsSize="True" AbsContentSize="908,584" RelativePosition="0.502308,0.527778" ScissorHeight="1.05" ScissorWidth="1.06" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{52AB4239-A29E-49ed-B144-EB4536D97F34}" AbsContentSize="100,160" UseAbsSize="True" Name="conVideo_WndMultiWin" ShowAll="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" Visible="False">
+                <Button Type="WZUIButton" AbsContentSize="70,70" Visible="True" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1" LuaDoneFunctionName="onExitVideo" GUID="{02B2B67D-3ADE-46a7-8C6B-2E068274C6CB}">
+                    <NormalElement Type="WZUIContainer" GUID="{446CA750-B0EF-488b-8B01-A5B321D0EF8E}">
+                        <WZUIImage Type="WZUIImage" GUID="{779234F3-5103-43d8-9165-FE7379C219EC}" File="ui/hero/battle_icon_gbsp.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{C9C28B94-5EE2-4226-810E-28235D683FE0}">
+                        <WZUIImage Type="WZUIImage" GUID="{BACC6F70-FB7A-449a-B2A1-E89F4FF24EA0}" File="ui/hero/battle_icon_gbsp.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{BCFE726C-7D5A-44f4-9DEE-7C8BADE7502E}" />
+                </Button>
+                <WZUIButton Type="WZUIButton" AbsContentSize="70,70" Visible="True" UseAbsSize="True" GUID="{46603556-12FE-4aa0-BADC-8567A972F51D}" RelativePosition="0.5,0" AnchorPoint="0.5,0" LuaDoneFunctionName="onAgainVideo">
+                    <NormalElement Type="WZUIContainer" GUID="{664AEEEF-9D49-49f4-951A-85A8B4189544}">
+                        <WZUIImage Type="WZUIImage" GUID="{ABBDE11F-4C6D-4545-A4C6-1BDBB413D16D}" File="ui/hero/battle_icon_congxbf.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{7C52AAC8-106B-475d-8D5B-A3B25A060248}">
+                        <WZUIImage Type="WZUIImage" GUID="{20DE50A9-D473-4bf1-B5F3-53A8C4AE65C5}" File="ui/hero/battle_icon_congxbf.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{AB057256-BAA0-4c76-A147-ED6F681B6B03}" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{2929E55E-0B4D-40a3-8E26-441594C1F618}" Name="txtCountdown_WndMultiWin" ShowText="" MaxWidth="400" RelativePosition="0.97687,0.0253934" AnchorPoint="1,0" ShowAll="True" Visible="True" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{F840B671-F2D9-4ec6-9015-F7180E5B2DD3}" Name="txtDiamond_WndMultiWin" ShowText="" MaxWidth="300" AnchorPoint="0,0" RelativePosition="0.17,0.0097684" Visible="False" ShowAll="True" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{b882587f-c296-4d76-8a9e-abde98e12253}" Name="txtTicket_WndMultiWin" ShowText="" MaxWidth="300" AnchorPoint="0,0" RelativePosition="0.0362637,-0.0042941" Visible="False" ShowAll="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a45bf3fe-ef27-4bf4-8bba-5511f5b97c39}" Name="txtConsumeAtt_WndMultiWin" Visible="False" StrokeColor="127,70,26" Color="255,255,255" FontSize="22" RelativePosition="0.5,0.0359375" ShowAll="True" EnableStroke="True" Text="" StrokeSize="4" />
+            <WZUIButton Type="WZUIButton" AbsContentSize="115,60" UseAbsSize="True" LuaDoneFunctionName="onFBShare" GUID="{4a2aef41-16d0-4772-916c-14234ac63adf}" RelativePosition="0.111817,0.0290099" Visible="False" Name="btnFBShare_WndMultiWin" AnchorPoint="0.5,0">
+                <NormalElement Type="WZUIContainer" GUID="{29221137-28d8-41a0-9959-441439a15daf}">
+                    <WZUIImage Type="WZUIImage" GUID="{5cd183f8-671e-459b-97cf-caa729876a12}" File="ui/common/common_btn_anniu10_0.png" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{a266bb8a-ba09-49fe-9405-897175e6b74a}">
+                    <WZUIImage Type="WZUIImage" GUID="{a1be98c1-3881-464e-9bb9-35ac641fefab}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{adf7a141-7ac8-4d3a-bd77-06d6a247abfa}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ceecac3f-27a7-465b-9a27-d43788ca7e87}" LabelStyleKey="SMALL_GREEN_BTN" TextKey="SHARE" />
+            </WZUIButton>
+            <Action Type="WZUIActionSequence" GUID="{b1e910ba-8c54-4a90-8b8d-43cce57cf8bc}">
+                <ChildAction Type="WZUIActionDelayTime" GUID="{add91a81-b1be-449f-964b-2a627831998a}" Duration="0.2" />
+                <ChildAction Type="WZUIActionShow" GUID="{fee015e5-8bbd-4215-8a4f-e1f9ee4797fc}" />
+                <ChildAction Type="WZUIActionContainerFadeFromTo" GUID="{9931da2e-7396-4d22-b788-78e6fe7a70ae}" OpacityTo="255" Duration="1" RemoveTarget="False" />
+            </Action>
+        </WZUIWindow>
+        <WZUIContainer Type="WZUIContainer" GUID="{430BD49B-94B3-4d95-9900-9CD128E464C8}" UseAbsSize="True" AbsContentSize="180,250" Name="CellPlayer_WndMultiWin" RelativePosition="0,0.5" Visible="True" NameCreate="True" AnchorPoint="0,0.5">
+            <WZUIImage Type="WZUIImage" GUID="{0AB9EF02-932D-4ff7-93E8-BC85264C44CA}" File="ui/common/common_icon_yy.png" UseOriginSize="True" RelativePosition="0.5,0.122916" />
+            <WZArmature Type="WZArmature" GUID="{DA45F6A4-C957-4243-A88B-87AB2F940C7A}" ArmatureName="ui_jiesuan_renwudizuo_01" ArmatureFile="ui/ui_jiesuan_renwudizuo_01.xml" UseOriginSize="True" Scale="0.7" RelativePosition="0.493975,0.0659723" Name="armBase_WndMultiWin" Visible="False" Order="1">
+                <Action Type="WZUIArmatureAnimationById" GUID="{0B7167EB-DA08-436c-98AE-C35EFFA432EE}" AnimationId="0" />
+            </WZArmature>
+        </WZUIContainer>
+    </WZUIFrame>
+</WndMultiWin>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<WndCommunityDonate GUID="{195BB371-B9E9-4174-BED4-1F4B181B92FA}">
+	<WZUIWindow AbsContentSize="660,600" GUID="{37AE3FFD-4D9C-4b0e-AF81-8D190F9BB192}" LuaObjectName="WndCommunityDonate" Name="WndCommunityDonate" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" RelativePosition="0.5,0.52" ShowAll="True">
+		<WZUIContainer Type="WZUIContainer" GUID="{0F1D34A3-D859-42aa-9DD9-F3E26CA13E85}" AbsContentSize="496,500" UseAbsSize="True" Visible="True">
+			<WZUI9Image Type="WZUI9Image" GUID="{D3F76456-DDB5-4081-89EC-E4FD01DAFD57}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" RelativePosition="0.5,0.505" />
+			<WZUIContainer Type="WZUIContainer" GUID="{8B35F419-04A4-431d-9552-39180B545FB5}" AbsContentSize="485,332" UseAbsSize="True" RelativePosition="0.5,0.51">
+				<WZUI9Image Type="WZUI9Image" GUID="{D2F57D7C-2EFE-479d-AB34-A85D29405066}" File="ui/common/common_scale9_di20.png" />
+			</WZUIContainer>
+		</WZUIContainer>
+		<WZUIContainer AbsContentSize="470,50" GUID="{BF9FE03D-F32B-4a18-B1E0-360F96412D39}" Name="conTop_WndRecruit" RelativePosition="0.5,0.87" RelativeSize="1,0.1434" Type="WZUIContainer" UseAbsSize="True">
+			<WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{B26758BC-0C89-422f-A6A5-9ACAB2984143}" RelativePosition="0.5,0.48" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="132,66,29" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" TextKey="COMMUNITYINFO76" />
+		</WZUIContainer>
+		<WZUIContainer AbsContentSize="470,312" GUID="{643C5F06-E732-4264-BB97-DBE51FF6E027}" Name="" RelativePosition="0.5,0.55" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0.56">
+			<WZUITableContainer AbsContentSize="470,312" CellElementHeight="0.22" EnableMoveHorizontal="False" GUID="{5AE9017E-CF01-44e6-8B4D-B7045CF6A97B}" MinPosition="0.5,0.5" Name="tbcon_WndDonate" RelativePosition="0.5,0.485" RelativeSize="1,0.92" Type="WZUITableContainer" UseAbsSize="True" VerticalInterval="0.018" />
+		</WZUIContainer>
+		<WZUIButton AbsContentSize="115,55" GUID="{EF10CAEB-6364-474c-AAA3-633C807D0473}" LuaDoneFunctionName="onDonate" Name="btnDonate" RelativePosition="0.5,0.168035" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal">
+			<NormalElement GUID="{DDDC34E1-27C9-4b09-B57B-A377D23799FD}" Type="WZUIContainer">
+				<WZUI9Image File="ui/common/common_btn_anniu10_1.png" GUID="{B17D09ED-B4B7-483f-A850-10CE3D7427B2}" Type="WZUI9Image" UseOriginSize="True" />
+			</NormalElement>
+			<SelectElement GUID="{B6FDE335-B458-49a2-A1DC-8A7C90C02F38}" Type="WZUIContainer">
+				<WZUI9Image File="ui/common/common_btn_anniu10_1_sel.png" GUID="{D539498D-5AEA-4306-911C-2CFACFCD7093}" Type="WZUI9Image" UseOriginSize="True" Scale="1" ScaleX="1" ScaleY="1" />
+			</SelectElement>
+			<WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{2AE670D2-BD07-4baf-B677-B3EB9016F3D7}" Name="txtDonate" ShadowColor="0,255,0" StrokeColor="64,128,1" StrokeOffset="0,0" StrokeSize="4" Text="" Type="WZUILabelTTF" Visible="True" RelativePosition="0.5,0.5" LabelStyleKey="SMALL_GREEN_BTN" TextKey="COMMUNITYINFO79" />
+		</WZUIButton>
+		<WZUIButton AbsContentSize="115,55" GUID="{828611A0-735F-4cc2-8885-E1AF09E608EA}" LuaDoneFunctionName="onClose" Name="btnCloseWindow_WndRecruit" RelativePosition="0.815,0.87" Type="WZUIButton" UseAbsSize="True" Visible="True" LuaActionName="Normal">
+			<NormalElement GUID="{6FB920B1-A11B-41da-81D6-2B6A37F782D7}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="False">
+				<WZUI9Image File="ui/common/common_icon_guanbi.png" GUID="{5B42692B-65B8-4ca1-9BC4-CDC7AD8CE637}" Type="WZUI9Image" UseOriginSize="True" />
+			</NormalElement>
+			<SelectElement GUID="{5E4192D4-9FBD-4dfb-93FB-20A5CFD1F381}" TouchContainerEnable="True" Type="WZUIContainer">
+				<WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{3DF7E579-35CB-4663-BE86-D826053D53BF}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+			</SelectElement>
+			<DisableElement GUID="{9E5A92FF-9DEC-479b-BCFD-F3966B29596C}" Type="WZUIContainer" />
+		</WZUIButton>
+	</WZUIWindow>
+</WndCommunityDonate>

@@ -1,0 +1,41 @@
+﻿<CellLoveLotteryBox GUID="{10016f07-d2fa-478b-a701-595d601f20d9}">
+    <WZUIWindow Type="WZUIWindow" GUID="{d1dbb220-3cf6-47db-ac24-5ad41c110248}" Name="CellLoveLotteryBox" NameCreate="True" LuaObjectName="CellLoveLotteryBox" AbsContentSize="400,50" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{c27dc3c3-8c03-4e8a-8a35-ffe35106a3c2}">
+            <WZUIImage Type="WZUIImage" GUID="{03b193ea-28b0-4d06-9371-0d2e229b926d}" File="ui/common/common_progress_luck_bg.png" UseOriginSize="True" ScaleX="1" />
+            <WZUIProgress Type="WZUIProgress" GUID="{ebd21096-63dc-4d9a-8b97-7ef4c4bf43fc}" BgPicture="ui/common/common_progress_luck_fore.png" UseOriginSize="True" RelativePosition="0.521869,0.5" ScaleX="1" Name="prgTimes_CellLoveLotteryBox" Percentage="0" />
+            <WZUIImage Type="WZUIImage" GUID="{84f82409-115e-4e24-9c2d-eb83d000a199}" File="ui/common/common_icon_dw.png" UseOriginSize="True" Name="imgBox1_CellLoveLotteryBox" RelativePosition="0.37,0.3" Scale="0.8" Visible="False" />
+            <WZUIImage Type="WZUIImage" GUID="{feb3b6c7-4a55-4769-9603-12788fc29869}" File="ui/common/common_icon_dw.png" UseOriginSize="True" Name="imgBox2_CellLoveLotteryBox" RelativePosition="0.665,0.3" Scale="0.8" Visible="False" />
+            <WZUIImage Type="WZUIImage" GUID="{808dc13c-4e0b-47e3-a63c-96ddc245f618}" File="ui/common/common_icon_dw.png" UseOriginSize="True" Name="imgBox3_CellLoveLotteryBox" RelativePosition="0.97,0.3" Scale="0.8" Visible="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{a4fb3d2a-5578-4694-adbf-040ccd7eed77}" Name="conRewardBox1_CellLoveLottery" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.3675,0.66" Scale="0.7" ScaleX="0.7" ScaleY="0.7">
+                <Button Type="WZUIButton" GUID="{8ebeaf45-5830-4d6d-9dff-556efe8e123a}" RelativePosition="0.5,0.5" LuaDoneFunctionName="onClickRewardBox" Tag="1" Name="btnBox_CellLoveLottery">
+                    <NormalElement Type="WZUIContainer" GUID="{de9a0cac-6edd-4343-bd3a-9d0734c3a423}" />
+                    <SelectElement Type="WZUIContainer" GUID="{28720f97-89fb-497c-93a7-695fdcf5daaa}" />
+                    <DisableElement Type="WZUIContainer" GUID="{82291e14-cd85-4854-bdd9-867c601015c2}" />
+                </Button>
+                <WZUIImage Type="WZUIImage" GUID="{c457572e-4717-44c8-a548-42feddc042bf}" File="ui/common/common_icon_lan1.png" UseOriginSize="True" Name="imgNormal_CellLoveLottery" TouchEnable="False" />
+                <WZUIImage Type="WZUIImage" GUID="{7fb66d1c-60a8-4b36-ba0d-666020a6e61d}" File="ui/common/common_icon_lan3.png" UseOriginSize="True" Name="imgGet_CellLoveLottery" Visible="False" TouchEnable="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{63e53946-ab6c-402d-b670-f51289b3beee}" Name="conRewardBox2_CellLoveLottery" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.675,0.66" Scale="0.7" ScaleX="0.7" ScaleY="0.7">
+                <Button Type="WZUIButton" GUID="{ef6327f0-62f5-4dce-9247-0e98408821c5}" RelativePosition="0.5,0.5" LuaDoneFunctionName="onClickRewardBox" Tag="2" Name="btnBox_CellLoveLottery">
+                    <NormalElement Type="WZUIContainer" GUID="{174f36fa-88b2-4255-a234-27f8153952bd}" />
+                    <SelectElement Type="WZUIContainer" GUID="{2b8dc23e-6908-4a43-b2a4-66a188a84f03}" />
+                    <DisableElement Type="WZUIContainer" GUID="{2a3a1f7c-5ee3-4129-ab72-16ab7a77829b}" />
+                </Button>
+                <WZUIImage Type="WZUIImage" GUID="{abce8601-9816-4958-9e1a-cd5a266170b0}" File="ui/common/common_icon_zi1.png" UseOriginSize="True" Name="imgNormal_CellLoveLottery" TouchEnable="False" />
+                <WZUIImage Type="WZUIImage" GUID="{941d16a1-0932-484f-9b95-1f67799c385a}" File="ui/common/common_icon_zi3.png" UseOriginSize="True" Name="imgGet_CellLoveLottery" Visible="False" TouchEnable="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{40f7d546-6d70-49e7-8bc7-08899c071956}" Name="conRewardBox3_CellLoveLottery" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.94,0.66" Scale="0.7" ScaleX="0.7" ScaleY="0.7">
+                <Button Type="WZUIButton" GUID="{1c42d061-d3fc-4ce1-8f87-72921215e5e8}" RelativePosition="0.5,0.5" LuaDoneFunctionName="onClickRewardBox" Tag="3" Name="btnBox_CellLoveLottery">
+                    <NormalElement Type="WZUIContainer" GUID="{f10f09c3-ff6d-4c6b-8029-a002c296a511}" />
+                    <SelectElement Type="WZUIContainer" GUID="{c865a418-eef1-465b-9554-63a07a06f83a}" />
+                    <DisableElement Type="WZUIContainer" GUID="{feb8cf74-38f5-478d-900c-e7b3856b91ee}" />
+                </Button>
+                <WZUIImage Type="WZUIImage" GUID="{02b11fba-7fdf-4556-aef1-f231a147ca40}" File="ui/common/common_icon_huang1.png" UseOriginSize="True" Name="imgNormal_CellLoveLottery" TouchEnable="False" />
+                <WZUIImage Type="WZUIImage" GUID="{5dd742a5-a234-4bcf-b691-81f34faec428}" File="ui/common/common_icon_huang3.png" UseOriginSize="True" Name="imgGet_CellLoveLottery" Visible="False" TouchEnable="False" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{dfb0f0dc-0a3d-4a44-9f7d-1d8a278fc3bc}" LabelStyleKey="C1_F18_S4_C13" Text="" RelativePosition="0.34,0.36" Name="txtCount1_CellLoveLotteryBox" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{8cab12e4-6da6-4cc1-acd5-b25592b67091}" LabelStyleKey="C1_F18_S4_C13" Text="" RelativePosition="0.6475,0.36" Name="txtCount2_CellLoveLotteryBox" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5fc83844-53ba-4e67-a0fc-fa9a448313f6}" LabelStyleKey="C1_F18_S4_C13" Text="" RelativePosition="0.9275,0.36" Name="txtCount3_CellLoveLotteryBox" />
+        </WZUIContainer>
+    </WZUIWindow>
+</CellLoveLotteryBox>

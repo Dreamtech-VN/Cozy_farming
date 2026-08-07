@@ -1,0 +1,40 @@
+﻿<WndBuildingInfo GUID="{d7989fae-4cf2-4790-9255-c555087af1bf}">
+    <WZUIWindow Type="WZUIWindow" GUID="{af67e5db-583a-4013-b8a6-83e2e725a40c}" LuaObjectName="WndBuildingInfo" LuaTouchBeganFunction="" Name="WndBuildingInfo" AbsContentSize="480,400" UseAbsSize="True" RelativePosition="0.5,0.47" ShowAll="True" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{f6219b35-4de3-4882-8a7d-667d3d229fa4}" RelativePosition="0.5,0.5" UseAbsSize="False" AbsContentSize="">
+            <WZUI9Image Type="WZUI9Image" GUID="{3f42eeab-58f3-403b-970f-37aac803c25b}" File="ui/common/common_scale9_di19.png" CapInsets="250,100,1,1" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{9c9bd972-3872-47d8-9324-6ed79e9964be}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,1" ShowAll="False" AnchorPoint="0.5,1" Name="" NameCreate="True" Visible="True" RelativeSize="1,0.11">
+            <WZUIButton AbsContentSize="80,80" AnchorPoint="0.5,0.5" GUID="{4e67e9c6-3ffa-4b82-a5b6-503a68608e85}" LuaDoneFunctionName="onClickClose" Name="" Order="2" RelativePosition="0.915833,0.255455" Scale="1" Type="WZUIButton" UseAbsSize="True" ShowAll="False" LuaActionName="Normal">
+                <NormalElement GUID="{ef01aa9b-352a-47af-9ca4-0f9e39bc9a59}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage Type="WZUIImage" GUID="{cf8c9841-3f1b-419f-aa9a-b64acc8c8f00}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" RelativePosition="0.5,0.5" ShowAll="False" />
+                </NormalElement>
+                <SelectElement GUID="{bd0cc4b3-8b11-439c-9a17-67d217b72465}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{b01f12b3-d79c-4830-988d-55591a7a4b7b}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement GUID="{a2d39b55-d5bb-4d92-bbe5-309a46d9a01c}" TouchContainerEnable="True" Type="WZUIContainer" />
+            </WZUIButton>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{f7429df2-9137-4d45-ad75-52a8e3dc6006}" TextKey="" FontSize="26" Color="255,236,192" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" RelativePosition="0.5,0.255788" AbsPosition="385,24.37" Name="txtTitle_WndBuildingInfo" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{e54daf2a-3c30-4ea1-8436-13d886919b76}" RelativeSize="0.4,0.5" RelativePosition="0.0454167,0.585" AnchorPoint="0,0.5" Name="conForBuilding_WndBuildingInfo" AbsContentSize="190,172">
+            <WZUI9Image Type="WZUI9Image" GUID="{6832163f-3f6a-466b-91b7-7bcc8ea4e74d}" File="ui/family/other/common_scale9_family2.png" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{45f985a1-4718-473a-9c40-d0ebea2aa98c}" RelativeSize="0.5,0.5" RelativePosition="0.95875,0.5775" AnchorPoint="1,0.5" Name="conForInfo_WndBuildingInfo" Visible="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{6ec9b919-c4c2-48a4-8e08-b10e45e97d13}" RelativeSize="1,0.25" RelativePosition="0.5,0.875">
+                <WZUIImage Type="WZUIImage" GUID="{05189a21-4450-484c-a5e7-4b6e3cb78913}" File="ui/common/common_progress_chengjiu_bg.png" UseOriginSize="True" RelativePosition="0.555,0.4" ScaleX="1.8" />
+                <WZUIProgress Type="WZUIProgress" GUID="{eeca086d-b982-4d7a-a3ee-a0f73b6519c1}" BgPicture="ui/common/common_progress_chengjiu_fore.png" UseOriginSize="True" ScaleX="1.8" RelativePosition="0.555,0.4" Name="prgCurrent1_WndBuildingInfo" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{56f5d895-6d3d-4a14-a977-0cd0826466eb}" Name="ftxtSpeed_WndBuildingInfo" AnchorPoint="0,0.5" RelativePosition="0.171,0.72" MaxWidth="500" />
+                <WZUIImage Type="WZUIImage" GUID="{8a82fb5f-460b-487a-b688-49f3221ddd80}" Name="imgTypeIcon1_WndBuildingInfo" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{d1f7e00b-cc09-4978-9517-f8bc4ce0346e}" RelativeSize="1,0.25" RelativePosition="0.5,0.665">
+                <WZUIImage Type="WZUIImage" GUID="{ed07337b-3fb8-4637-b96e-6bebb0763668}" File="ui/common/common_progress_chengjiu_bg.png" UseOriginSize="True" RelativePosition="0.555,0.4" ScaleX="1.8" />
+                <WZUIProgress Type="WZUIProgress" GUID="{47ebf0d7-4f31-4925-993d-5afebe07a230}" BgPicture="ui/common/common_progress_chengjiu_fore.png" UseOriginSize="True" ScaleX="1.8" RelativePosition="0.555,0.4" Name="prgCurrent2_WndBuildingInfo" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{ac6c30d4-912c-4232-a10a-a4cc28b0a03c}" Name="ftxtMaxNum_WndBuildingInfo" AnchorPoint="0,0.5" RelativePosition="0.171,0.72" MaxWidth="500" />
+                <WZUIImage Type="WZUIImage" GUID="{69cf4883-38a2-41e1-a76f-750d03ef01b6}" Name="imgTypeIcon2_WndBuildingInfo" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{0e857771-dbcd-40ad-a3a3-12a36818008f}" RelativeSize="1,1" AnchorPoint="0.5,0" RelativePosition="0.5,0.02" AbsContentSize="440,135" UseAbsSize="True">
+            <WZUIImage Type="WZUIImage" GUID="{b01bb2be-7c08-4409-b190-4642027ab6f0}" File="ui/common/common_icon_fengexian3.png" UseOriginSize="True" RelativePosition="0.5,0.9" ScaleX="2.2" ScaleY="1.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{1a710c25-0808-40a2-8781-4569b455e447}" FontSize="18" Color="79,60,48" Name="txtDesc_WndBuildingInfo" AnchorPoint="0,1" RelativePosition="0.02,0.82" Dimensions="440,0" Alignment="Left" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndBuildingInfo>

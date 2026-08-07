@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<WndKingFamous GUID="{135965d7-39fa-4fa0-9537-ee2836b3d600}">
+	<WZUIFrame Type="WZUIFrame" GUID="{524673b0-d74d-4bf7-9c87-ad08dec461da}">
+		<WZUIWindow LuaObjectName="WndKingFamous" Name="WndKingFamous" NameCreate="True" ShowAll="True" Type="WZUIWindow" GUID="{733665d7-2d6c-4d24-a394-05785a17f2eb}" AbsContentSize="480,450" UseAbsSize="True">
+			<WZUIContainer AbsContentSize="0,0" AbsPosition="" AnchorPoint="0.5,0.5" GUID="{914406e7-38b5-4b8d-a75d-fdd6a0c2faf2}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="False">
+				<WZUI9Image File="" GUID="{b1846b92-04d8-409a-afd2-41d1977c3420}" Type="WZUI9Image" />
+				<WZUI9Image Type="WZUI9Image" GUID="{4d3f92a7-c0bd-44f3-8f9c-50d7d890d6c2}" File="" UseOriginSizeProportion="False" RelativePosition="0.5,1" AnchorPoint="0.5,1" RelativeSize="1.01,0.15" />
+			</WZUIContainer>
+			<WZUIContainer Type="WZUIContainer" GUID="{cb7776b4-3014-4d13-b099-6250072d24aa}">
+				<Button Type="WZUIButton" GUID="{1dcc1fa4-fe3a-49aa-b7cb-e14df6e929cb}" LuaDoneFunctionName="onClose" AbsContentSize="66,71" UseAbsSize="True" RelativePosition="1.03,0.94" AnchorPoint="1,0.5">
+					<NormalElement Type="WZUIContainer" GUID="{50b4f64b-f87f-4eb2-b9a2-a57c3909d88f}">
+						<WZUIImage Type="WZUIImage" GUID="{cf622973-8e28-4152-ad02-3bfa5b485288}" File="" />
+					</NormalElement>
+					<SelectElement Type="WZUIContainer" GUID="{9218bb86-c531-4731-a341-1a8a795c3ced}">
+						<WZUIImage Type="WZUIImage" GUID="{be4bb7a1-7e81-4c76-8fc3-2bb58e70b6cc}" File="" Scale="1.1" />
+					</SelectElement>
+					<DisableElement Type="WZUIContainer" GUID="{0785d9d0-b5f8-432a-82c3-166851dc2c40}" />
+				</Button>
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{4454cbc4-8336-4b28-99c5-7574b52a4ede}" Name="txtTitle_WndKingFamous" FontSize="30" Color="255,246,201" EnableStroke="True" StrokeSize="4" StrokeColor="109,81,42" BoldFont="True" RelativePosition="0.5,0.93" />
+				<WZUITableContainer Type="WZUITableContainer" GUID="{57a71707-70ee-43ef-acc8-068d06c6889b}" AbsContentSize="446,366" UseAbsSize="True" RelativePosition="0.5,0.435" CellElementHeight="0.478" VerticalInterval="0.043" EnableMoveHorizontal="False" Name="tabFamous_WndKingFamous" />
+			</WZUIContainer>
+		</WZUIWindow>
+		<WZUIContainer Type="WZUIContainer" GUID="{53d3e471-880a-44de-a4fa-d3e96c376183}" AbsContentSize="446,175" UseAbsSize="True" NameCreate="True" Name="CellKingFamous">
+			<WZUI9Image Type="WZUI9Image" GUID="{9698fdc3-9d84-4f16-aaf4-61f6538c5e95}" File="" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{4de53151-1f39-4360-88b5-0df8922e3d38}" Color="83,56,29" FontSize="20" AnchorPoint="0,0.5" RelativePosition="0.04,0.5" Name="txtSeason_CellKingShowAward" />
+			<WZUIContainer Type="WZUIContainer" GUID="{3f92d92a-bed0-4310-bea3-af65b6d83c8b}" RelativeSize="0.73,0.9" RelativePosition="0.59,0.5">
+				<WZUIContainer Type="WZUIContainer" GUID="{7adf3361-257e-4906-a2ef-053cf1e18928}" RelativeSize="1,0.3" RelativePosition="0.5,0.833">
+					<WZUI9Image Type="WZUI9Image" GUID="{d522739a-69b4-4406-bfe9-087ba2509693}" File="" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{137aad47-cfeb-4bce-9e33-9637eac49a7c}" Color="83,56,29" FontSize="20" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" Name="txtFirst_CellKingShowAward" />
+					<WZUIImage Type="WZUIImage" GUID="{c0e458d9-aaec-44b5-b396-cc767b49c20d}" UseOriginSizeProportion="True" UseOriginSize="False" File="" RelativePosition="0,0.5" />
+					<Button Type="WZUIButton" GUID="{393f4d3e-0379-47c0-a42b-42d209f83276}" AbsContentSize="31,31" UseAbsSize="True" RelativePosition="0.92,0.5" LuaDoneFunctionName="onFamousDetail" Name="btnFirst_CellKingShowAward">
+						<NormalElement Type="WZUIContainer" GUID="{84a25806-dda4-4cb5-a9c2-eb80b90edb9d}">
+							<WZUIImage Type="WZUIImage" GUID="{63d4e623-f190-4426-a0fc-e2fe3978f614}" File="" UseOriginSize="True" />
+						</NormalElement>
+						<SelectElement Type="WZUIContainer" GUID="{2fe87775-b570-47f0-8f1e-a67750051d91}">
+							<WZUIImage Type="WZUIImage" GUID="{4571a957-0c58-4cf6-9218-f0ae14ce58f2}" File="" Scale="1.1" UseOriginSize="True" />
+						</SelectElement>
+						<DisableElement Type="WZUIContainer" GUID="{5fcb3600-7613-46a2-8676-0ffe48a11eb0}" />
+					</Button>
+				</WZUIContainer>
+				<WZUIContainer Type="WZUIContainer" GUID="{2bf3f0d6-07d8-44f2-9b38-57de9b0b4a45}" RelativeSize="1,0.3">
+					<WZUI9Image Type="WZUI9Image" GUID="{7b2300f3-1fee-492d-8d22-f39d622a57dd}" File="" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{492836a9-9293-40d7-b5b8-2851e455f638}" Color="83,56,29" FontSize="20" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" Name="txtSecond_CellKingShowAward" />
+					<Button Type="WZUIButton" GUID="{6a7ebb8f-93ca-4825-941f-0daf6ff29322}" AbsContentSize="31,31" UseAbsSize="True" RelativePosition="0.92,0.5" LuaDoneFunctionName="onFamousDetail" Name="btnSecond_CellKingShowAward">
+						<NormalElement Type="WZUIContainer" GUID="{4a14f26c-4f00-4778-b33e-c2152d753b64}">
+							<WZUIImage Type="WZUIImage" GUID="{70cf6899-65d6-4910-b2f7-f52e3b469291}" File="" UseOriginSize="True" />
+						</NormalElement>
+						<SelectElement Type="WZUIContainer" GUID="{1816e7d6-3e83-40fb-9328-4972934a797f}">
+							<WZUIImage Type="WZUIImage" GUID="{2d1f76ff-931c-4e92-949f-b2b79038be1f}" File="" Scale="1.1" UseOriginSize="True" />
+						</SelectElement>
+						<DisableElement Type="WZUIContainer" GUID="{8e065b5b-fb2f-4fc1-abe7-934e96ea9d90}" />
+					</Button>
+				</WZUIContainer>
+				<WZUIContainer Type="WZUIContainer" GUID="{b66da7f5-2133-49f1-9059-9db50e69fd83}" RelativeSize="1,0.3" RelativePosition="0.5,0.166">
+					<WZUI9Image Type="WZUI9Image" GUID="{6c45605b-22ad-47ac-b131-a4243fc5f005}" File="" />
+					<WZUILabelTTF Type="WZUILabelTTF" GUID="{047138ad-90ce-455c-b77d-d9247069df70}" Color="83,56,29" FontSize="20" AnchorPoint="0,0.5" RelativePosition="0.05,0.5" Name="txtThird_CellKingShowAward" />
+					<Button Type="WZUIButton" GUID="{88e6810c-be71-4338-855d-549b7b47c3f7}" AbsContentSize="31,31" UseAbsSize="True" RelativePosition="0.92,0.5" LuaDoneFunctionName="onFamousDetail" Name="btnThird_CellKingShowAward">
+						<NormalElement Type="WZUIContainer" GUID="{db6e1ff0-1d81-4253-b57e-c21862cc57a5}">
+							<WZUIImage Type="WZUIImage" GUID="{1bbe8ec1-8b06-494f-aae4-3270bad5ef9e}" File="" UseOriginSize="True" />
+						</NormalElement>
+						<SelectElement Type="WZUIContainer" GUID="{1272445e-1f5f-4b7e-b3f8-00c464257b77}">
+							<WZUIImage Type="WZUIImage" GUID="{092240e3-838a-41c6-87f6-ac0d897cb4ad}" File="" Scale="1.1" UseOriginSize="True" />
+						</SelectElement>
+						<DisableElement Type="WZUIContainer" GUID="{a3a8bea6-33d7-4ecc-b41c-18ad2f4d47dd}" />
+					</Button>
+				</WZUIContainer>
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIFrame>
+</WndKingFamous>

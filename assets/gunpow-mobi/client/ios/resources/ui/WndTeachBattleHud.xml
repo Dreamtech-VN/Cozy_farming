@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?><WndTeachBattleHud GUID="{E0CB1832-2AC6-4601-9775-B72C783F87A7}">
+    <WZUIWindow GUID="{D45E1D80-47EC-439e-A84C-FBFAD35331A0}" LuaObjectName="WndTeachBattleHud" Name="WndTeachBattleHud" NameCreate="True" ShowAll="False" Type="WZUIWindow">
+        <WZUIButton AnchorPoint="1,1" GUID="{EBECEB67-B0D7-4280-99D0-436F0AEBBA77}" LuaDoneFunctionName="onAddScale" Name="btnAddScale_WndTeachBattleHud" Order="0" RelativePosition="1,0.44" RelativeSize="0.07,0.11" Type="WZUIButton" Visible="False">
+            <NormalElement GUID="{7C4EB21C-DA7C-47c8-8453-072B255E2A48}" Type="WZUIContainer">
+                <WZUIImage File="common/button/add.png" GUID="{1B3AABC7-0434-466b-A02F-48CE9D0DAD2A}" Type="WZUIImage" UseOriginSize="True"/>
+            </NormalElement>
+            <SelectElement GUID="{2A2861E9-26EF-4a7e-8242-35983371E77C}" Type="WZUIContainer">
+                <WZUIImage File="common/button/add_sel.png" GUID="{DD12CE3F-9FB9-4d87-B7EB-4DFCA30D7154}" Type="WZUIImage"/>
+            </SelectElement>
+            <DisableElement GUID="{851E7A41-D509-4a3a-8C96-E820A01949C4}" Type="WZUIContainer" UseAbsSize="True"/>
+        </WZUIButton>
+        <WZUIButton AnchorPoint="1,1" GUID="{0BA43463-F8F3-49c6-B298-74EA0544A405}" LuaDoneFunctionName="onMinusScale" Name="btnMinusScale_WndTeachBattleHud" Order="0" RelativePosition="1,0.56" RelativeSize="0.07,0.11" Type="WZUIButton" Visible="False">
+            <NormalElement GUID="{1477F2D6-BF7B-4337-AA40-FC65EBE23E51}" Type="WZUIContainer">
+                <WZUIImage File="common/button/minus.png" GUID="{E3F185C6-CF09-433e-968A-402AF39576DF}" Type="WZUIImage" UseOriginSize="True"/>
+            </NormalElement>
+            <SelectElement GUID="{6ABFBAAE-9D0D-4486-9047-8A10CB0DA745}" Type="WZUIContainer">
+                <WZUIImage File="common/button/minus_sel.png" GUID="{F7B40E43-38C5-48bf-A55A-F17FA1EF51D5}" Type="WZUIImage"/>
+            </SelectElement>
+            <DisableElement GUID="{DBD3385B-223D-4f3d-A81C-EEFAD13993BE}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage File="common/button/close_not.png" GUID="{8CE3CFB3-8154-431c-BDF8-6B207BBFA379}" Type="WZUIImage" UseOriginSize="True"/>
+            </DisableElement>
+        </WZUIButton>
+        <WZUIContainer AbsContentSize="86,67" AnchorPoint="0,1" GUID="{F2DD5725-725A-4d88-AC5B-CFDFCF5958FC}" Name="conWind_WndTeachBattleHud" RelativePosition="0.02,0.98" ShowAll="True" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+            <WZUIImage File="battle/hud/battle_hud_wind_arrow.png" FlipX="False" GUID="{AA9BE500-3F88-45e6-8137-D32EAAEC2702}" Name="imgWind_WndTeachBattleHud" Type="WZUIImage"/>
+            <WZUILabelAtlasFont CharMapFileName="common/num/prt_num2.png" GUID="{7F5A0255-EFD5-41c0-89CD-1790E9ED0D1E}" Height="24" Name="txtWind_WndTeachBattleHud" Text="" Type="WZUILabelAtlasFont" UseOriginSize="True" Width="18"/>
+        </WZUIContainer>
+        <WZUIContainer GUID="{2C8391F2-2E3D-4344-B663-044F3A57B709}" Name="conMyHud_WndTeachBattleHud" Type="WZUIContainer" Visible="True">
+            <WZUIContainer AbsContentSize="1136,129" AnchorPoint="0.5,0" GUID="{A46B2715-B7FD-4cac-B58E-15EA9E3E804F}" RelativePosition="0.5,0" ShowAll="True" TouchEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage AnchorPoint="0.5,0.5" File="battle/hud/battle_hud_background_01.png" GUID="{8C099417-24A1-48c2-AAB8-CCFC28A0F6A0}" RelativePosition="0.14,0.34" TouchEnable="False" Type="WZUIImage" UseOriginSize="True"/>
+                <WZUIImage AnchorPoint="0.5,0.5" File="battle/hud/battle_hud_background_03.png" GUID="{8C099417-24A4-48c5-AAB8-CCFC28A0F6A0}" RelativePosition="0.4562,0.5" TouchEnable="False" Type="WZUIImage" UseOriginSize="True"/>
+                <WZUIImage AnchorPoint="0.5,0.5" File="battle/hud/battle_hud_background_01.png" FlipX="True" GUID="{8C099417-24A2-48c8-AAB8-CCFC28A0F6A0}" RelativePosition="0.7725,0.34" TouchEnable="False" Type="WZUIImage" UseOriginSize="True"/>
+                <WZUIImage AnchorPoint="1,0.5" File="battle/hud/battle_hud_background_02.png" GUID="{F0753E59-A6B3-45a6-8170-8F12435D9AF1}" RelativePosition="1,0.5" TouchEnable="False" Type="WZUIImage" UseOriginSize="True"/>
+                <WZUIContainer AbsContentSize="286,60" GUID="{E50603FC-32AB-4bb6-A990-15901A8CCF04}" Name="conSkill_WndTeachBattleHud" RelativePosition="0.465,0.77" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUIImage File="" GUID="{2626ECF0-4E29-47fc-88E0-96CE335CE70B}" LuaTouchBeganFunction="onSkill" Name="imgSkill1_WndTeachBattleHud" RelativePosition="0.125,0.5" Tag="1" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="" GUID="{8C891E34-4115-4bef-94DB-03EC67151E6A}" LuaTouchBeganFunction="onSkill" Name="imgSkill2_WndTeachBattleHud" RelativePosition="0.375,0.5" Tag="2" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="" GUID="{B70ABC04-BC6A-4b24-9544-B27E16A02185}" LuaTouchBeganFunction="onSkill" Name="imgSkill3_WndTeachBattleHud" RelativePosition="0.625,0.5" Tag="3" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="" GUID="{40241557-3BF5-484c-87C7-101DB8F9782B}" LuaTouchBeganFunction="onSkill" Name="imgSkill4_WndTeachBattleHud" RelativePosition="0.875,0.5" Tag="4" Type="WZUIImage" UseOriginSize="True"/>
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="286,60" GUID="{54039727-90D9-48d9-8F39-1BFD25F7D6EE}" Name="conItem_WndTeachBattleHud" RelativePosition="0.465,0.27" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUIImage File="" GUID="{DF4A8FE9-1341-416c-BF60-C31763F1276D}" LuaTouchBeganFunction="onItem" Name="imgItem1_WndTeachBattleHud" RelativePosition="0.125,0.5" Tag="1" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="" GUID="{B9EFAC0C-6138-4519-BE82-2B0A82385BA3}" LuaTouchBeganFunction="onItem" Name="imgItem2_WndTeachBattleHud" RelativePosition="0.375,0.5" Tag="2" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="" GUID="{33AA7C3C-14EA-4b65-89A1-A23C9D467338}" LuaTouchBeganFunction="onItem" Name="imgItem3_WndTeachBattleHud" RelativePosition="0.625,0.5" Tag="3" Type="WZUIImage" UseOriginSize="True"/>
+                    <WZUIImage File="" GUID="{41D3C394-44CA-4da3-A4AE-E313FBAECF7D}" LuaTouchBeganFunction="onItem" Name="imgItem4_WndTeachBattleHud" RelativePosition="0.875,0.5" Tag="4" Type="WZUIImage" UseOriginSize="True"/>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIButton AbsContentSize="85,79" AnchorPoint="0.5,0" GUID="{07D5C019-86C6-41d4-943A-C1379DA22611}" LuaDoneFunctionName="" Name="btnFly_WndTeachBattleHud" Order="0" RelativePosition="0.77,0.11" ShowAll="True" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{C9316ADD-1439-4440-8EC4-4358A03843D7}" Type="WZUIContainer">
+                    <WZUIImage File="battle/hud/battle_hud_fly.png" GUID="{6319DD70-F3FD-4691-A75E-0BDC851AB0B0}" Type="WZUIImage" UseOriginSize="True"/>
+                </NormalElement>
+                <SelectElement GUID="{7011F83D-591A-407c-AE55-481C9E37D028}" Type="WZUIContainer">
+                    <WZUIImage File="battle/hud/battle_hud_fly_2.png" GUID="{5AD449B5-E2CA-4149-A125-9840E346E5EC}" Type="WZUIImage" UseOriginSize="True"/>
+                </SelectElement>
+                <DisableElement GUID="{F612DD45-DA7F-49d3-9C10-F0B5D5CC7E8D}" Type="WZUIContainer">
+                    <WZUIImage File="battle/hud/battle_hud_fly_not.png" GUID="{83FDACA6-902B-4e77-8B7E-B47410C1F4C6}" Type="WZUIImage"/>
+                </DisableElement>
+            </WZUIButton>
+            <WZUIContainer AbsContentSize="162,21" AnchorPoint="0.5,0" GUID="{E96DD07F-C3D7-461c-8F53-74D724014349}" Name="conMyHp_WndTeachBattleHud" RelativePosition="0.76,0.065" ShowAll="True" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage File="battle/hud/battle_hud_bloodbg.png" GUID="{F4F03920-E81B-43eb-B359-2744E793E808}" Scale="1" Type="WZUIImage" UseOriginSize="True"/>
+                <WZUIProgress BgPicture="battle/hud/battle_hud_blood_red.png" GUID="{1523520E-0C74-435e-B8D9-4254F110FD06}" Name="progMyHP_WndTeachBattleHud" Percentage="100" Scale="1" Type="WZUIProgress" UseOriginSize="True"/>
+                <WZUILabelTTF Color="255,255,255" FontSize="22" GUID="{57680C0A-D677-45b8-8944-5FA7C21821FA}" Name="txtMyHP_WndTeachBattleHud" Text="" Type="WZUILabelTTF"/>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="162,21" AnchorPoint="0.5,0" GUID="{D1D71B9A-4200-4aa1-9B4B-17B9A79D5680}" Name="conMyPF_WndTeachBattleHud" RelativePosition="0.76,0.01" ShowAll="True" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage File="battle/hud/battle_hud_bloodbg.png" GUID="{F0B171C6-E4DC-4784-877E-5ABA50803AF3}" Type="WZUIImage" UseOriginSize="True"/>
+                <WZUIProgress BgPicture="battle/hud/battle_hud_power.png" GUID="{CACA4D24-89D2-4ee0-A91B-C3CDF5451E2F}" Name="progMyPF_WndTeachBattleHud" Percentage="100" Type="WZUIProgress" UseOriginSize="True"/>
+                <WZUILabelTTF Color="255,255,255" FontSize="22" GUID="{4CEEEB13-72C3-419e-A0E8-DA0842F4E4C0}" Name="txtMyPF_WndTeachBattleHud" Text="" Type="WZUILabelTTF"/>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="121,122" AnchorPoint="0.5,0" GUID="{CF876B2B-8D04-4179-90CA-E802CA47D3AE}" Name="conBigSkill_WndTeachBattleHud" RelativePosition="0.94,0" ShowAll="True" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True">
+            <Button GUID="{E712E2BA-BE41-4c95-8C5F-77729C3F6F46}" LuaDoneFunctionName="onBigSkill" Name="btnBigSkill_WndTeachBattleHud" TouchEnable="True" Type="WZUIButton">
+                <NormalElement GUID="{9AF67515-D9C2-477d-AD9C-89068694A900}" Type="WZUIContainer">
+                    <WZUIImage File="battle/hud/battle_hud_angry1.png" GUID="{86087B30-E73A-4f37-B097-AB5C8CE990F3}" Type="WZUIImage" UseOriginSize="True"/>
+                </NormalElement>
+                <SelectElement GUID="{78B4E82D-8F21-42ac-BD0B-2CF531E33E83}" Type="WZUIContainer">
+                    <WZUIImage File="battle/hud/battle_hud_angry1.png" GUID="{08BE5AFB-5DB9-44cd-8222-34920697061C}" Type="WZUIImage" UseOriginSize="True"/>
+                </SelectElement>
+                <DisableElement GUID="{63CF01F5-6AA2-445c-89F8-6FCDA34CA220}" Type="WZUIContainer">
+                    <WZUIImage File="battle/hud/battle_hud_angry1.png" GUID="{3BD70317-54B8-417f-9A80-6C2ED6531391}" Type="WZUIImage" UseOriginSize="True"/>
+                </DisableElement>
+            </Button>
+            <WZUIProgress BgPicture="battle/hud/battle_hud_angry2.png" GUID="{95B9CFDB-CCA2-4abc-AAA4-63BA51D15F15}" IsBarType="False" MidPoint="0.5,0.5" Name="progBigSkill_WndTeachBattleHud" Percentage="0" Rotation="180" TouchEnable="False" Type="WZUIProgress"/>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="650,66" AnchorPoint="0.5,1" GUID="{05D344E5-5F1B-4647-BD4F-9A5A3A75CD47}" RelativePosition="0.52,0.97" ShowAll="True" TouchEnable="False" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIContainer AbsContentSize="66,66" AnchorPoint="1,0.5" GUID="{0353A445-3D39-4a58-9F21-569A1CEBD919}" Name="conBossHead_WndTeachBattleHud" RelativePosition="1,0.5" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage AnchorPoint="0.5,0.5" File="battle/hud/battle_hud_playericon_bgblue.png" GUID="{221220E4-591D-4796-A25F-B1442A3EF28C}" Name="imgBg_CellBattleTarget" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="566,25" AnchorPoint="0,0.5" GUID="{B5DFB2F0-B9A7-42ee-8E9D-1AA13E038150}" Name="conBossHp_WndTeachBattleHud" RelativePosition="0.03,0.19" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+                <WZUILabelTTF Alignment="Right" BoldFont="True" Color="206,26,26" EnableStroke="False" FontSize="30" GUID="{DF20C04E-3174-4939-96F4-513C796E2FEE}" Name="txtName_WndTeachBattleHud" RelativePosition="0.885,1.75" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="0,0,0" StrokeOffset="0,0" StrokeSize="3" Type="WZUILabelTTF"/>
+                <WZUIImage File="battle/hud/battle_hud_boss_up.png" GUID="{B86BCD1F-6920-453a-8868-8D43C20DA2C5}" Type="WZUIImage"/>
+                <WZUIProgress BgPicture="battle/hud/battle_hud_boss_upred.png" GUID="{955CFBBC-2268-43cc-82A1-83ACA286A71D}" MidPoint="1,0" Name="progBossHp_WndTeachBattleHud" Percentage="100" Type="WZUIProgress"/>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTeachBattleHud>

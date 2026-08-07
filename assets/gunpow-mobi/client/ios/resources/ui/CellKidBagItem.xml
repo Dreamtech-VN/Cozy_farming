@@ -1,0 +1,30 @@
+﻿<CellKidBagItem GUID="{dbbf45e1-6296-4431-957b-01521fda442d}">
+    <WZUIContainer Type="WZUIContainer" GUID="{695299ef-8590-4b5a-b301-e465c2e335ed}" AbsContentSize="230,240" UseAbsSize="True" Name="CellKidBagItem" LuaObjectName="" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{6f9ded28-3f63-4c89-a114-0761159a3f59}" Name="" LuaObjectName="" AbsContentSize="230,240" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{403d1292-4d79-45d2-b27b-87808e14175f}" File="ui/common/common_scale9_di18.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{eec9ea03-ba46-41cf-ad64-f091f7f77f7b}" Name="conMain_CellKidBagItem" Visible="True" NameCreate="False">
+                <Button Type="WZUIButton" GUID="{beea9ff3-c53e-4cc0-bba1-c43bc4808180}" LuaDoneFunctionName="onClickBuild" Name="btnBuild_CellKidBagItem" Order="10">
+                    <NormalElement Type="WZUIContainer" GUID="{b43c9526-2508-438c-9ffd-4f724d2a2fd9}" />
+                    <SelectElement Type="WZUIContainer" GUID="{ac2facb9-11f7-4406-a625-29ee3e83c65b}" />
+                    <DisableElement Type="WZUIContainer" GUID="{a8c22dab-f373-4b3f-8bec-e80a1aa4cfa7}" />
+                </Button>
+                <WZUIContainer Type="WZUIContainer" GUID="{d25987a9-4ed1-41ae-953e-1a11d4ba15b7}" Name="conTop_CellKidBagItem">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{7240980d-07b4-4c9d-ab65-5436c9e79ad1}" Text="仓库" LabelStyleKey="C3_F22" RelativePosition="0.06,0.9" Name="buildName_CellKidBagItem" Alignment="Left" AnchorPoint="0,0.5" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{36102961-bb8d-4459-bc10-f5da2a1d539a}" AbsContentSize="160,120" UseAbsSize="True" RelativePosition="0.5,0.56">
+                    <WZUI9Image Type="WZUI9Image" GUID="{d029df98-716f-4f9d-99f3-da7c905432ed}" File="ui/family/other/common_scale9_family4.png" UseOriginSize="True" Name="img9GoodBk_CellKidBagItem" />
+                    <WZUIImage Type="WZUIImage" GUID="{09c9a4e3-058b-443e-aab1-520f855337f0}" File="" UseOriginSize="True" Name="imgBuild_CellKidBagItem" Scale="1" ScaleX="1" ScaleY="1" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{19e46238-fa6f-49f8-a2d7-439cd65a02ee}" AbsContentSize="220,80" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" Name="conBtm_CellKidBagItem" Visible="True">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{0fb51d0c-4772-4117-bff9-a28052b720c8}" LabelStyleKey="C3_F20" Text="0/10" RelativePosition="0.97,0.7" Name="buildNum_CellKidBagItem" Alignment="Right" AnchorPoint="1,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4ba4e9f1-93e0-4476-bcc5-ed9dae1a805e}" Text="已建" TextKey="OWN" LabelStyleKey="C9_F20_S4_C5" RelativePosition="0.89,1.032" Name="txtOwn_CellKidBagItem" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{676f3d46-bc11-4b94-86bb-42c61a02325f}" UseAbsSize="True" AbsContentSize="215,30" RelativePosition="0.5,0.084" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{c32986a7-c331-44eb-93ce-0bceac82323a}" File="ui/common/common_scale9_di8.png" />
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{730552ce-b840-4bbe-843b-72b850751cd7}" Name="ftxtCost_CellKidBagItem" MaxWidth="220" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{353f3f0c-5598-4f0b-9e69-0ed3abe0337e}" FontSize="18" Color="105,65,46" Dimensions="210,0" Name="txtDesc_CellKidBagItem" TouchEnable="False" Alignment="Left" AnchorPoint="0,1" RelativePosition="0.05,0.32" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellKidBagItem>

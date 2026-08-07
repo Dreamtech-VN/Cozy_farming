@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" ?>
+<WndPlayer GUID="{4E6F911C-A4BE-4d56-9172-0CCA71A613D7}">
+    <WZUIContainer AbsContentSize="445,360" AnchorPoint="0.5,0.5" GUID="{57F13970-4563-4df0-861D-02301A2AA5AF}" LuaObjectName="WndPlayer" Name="WndPlayer" NameCreate="True" RelativePosition="0.526,0.47" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" ShowAll="False">
+        <WZUIContainer AbsContentSize="320,340" AbsPosition="0,1" AnchorPoint="0.5,0.5" GUID="{788bd50d-2038-43c5-aba1-0afa7e9da0e3}" Name="conRoleEquip_WndPlayer" RelativePosition="0.5,0.55" RelativeSize="1,1" TouchContainerEnable="False" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+            <WZUIContainer AbsContentSize="165,230" AnchorPoint="0.5,0.5" GUID="{a35b4bd1-4ac2-43e3-83c2-cbb08e03b335}" Name="conPlayerAni_WndPlayer" Order="2" RelativePosition="0.6,0.35" RelativeSize="1,1" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True">
+                <Button Type="WZUIButton" LuaDoneFunctionName="onClickRole" GUID="{dec75d4b-d168-41d1-a43e-7d8c55f8f13d}">
+                    <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{57fc5740-ae00-4b29-a186-c0bb07fd2f33}" />
+                    <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{70a59636-f3f1-4579-9c09-ae53a58c06b6}" />
+                    <DisableElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{008749e7-10da-4e48-99c0-5acf0672d01c}" />
+                </Button>
+                <WZUISpine Type="WZUISpine" GUID="{bb7f990f-48c6-4e1d-9cf1-3b907a0aeb59}" FileAtlas="city/ui_main_teleport.atlas" FileJson="city/ui_main_teleport.json" AnimationName="2" Loop="False" RelativePosition="0.294442,0.829007" Name="changeAni" TouchEnable="False" />
+                <WZUIImage Type="WZUIImage" GUID="{320e7b2d-b73d-4415-aec3-3bf68a9e75dd}" File="ui/common/common_icon_yy.png" UseOriginSize="True" RelativePosition="0.34,0.04" Name="imgYY" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="120,120" AnchorPoint="0,0" GUID="{2912bbf7-0197-457e-8708-24b0e7fe40dd}" Order="4" RelativePosition="0.05,0.5" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="True" Name="conPet1_WndPlayer">
+                <WZUIWindow AbsContentSize="90,100" AnchorPoint="0,0" GUID="{42ddb8e2-914d-45db-93f0-20378f680a8e}" LuaTouchBeganFunction="" LuaTouchEndedFunction="" LuaTouchMovedFunction="" Name="conPet_WndPlayer" Order="4" RelativePosition="0,0" TouchContainerEnable="True" TouchEnable="False" Type="WZUIWindow" UseAbsSize="True" />
+                <Button GUID="{45f77c71-39e7-4dc5-aa4f-10b8dc110b86}" LuaDoneFunctionName="onPetEnd" RelativePosition="0.45,0.5" Scale="1.2" Type="WZUIButton">
+                    <NormalElement GUID="{0ce1b1b4-743b-4b67-869d-e5ffc288bc9a}" TouchContainerEnable="True" Type="WZUIContainer" />
+                    <SelectElement GUID="{c912b326-39ce-4ebb-a260-105446a1ff13}" TouchContainerEnable="True" Type="WZUIContainer" />
+                    <DisableElement GUID="{8b3df037-f0a9-4108-ba65-d1e9e8328fb6}" Type="WZUIContainer" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="87,370" AnchorPoint="0,1" GUID="{2a67ef51-67f5-47e3-bb79-41c65ba45fd0}" RelativePosition="-0.02,0.92" Type="WZUIContainer" UseAbsSize="True" Name="con1_WndPlayer" Visible="True">
+            <WZUIContainer AbsContentSize="87,82" AnchorPoint="0.5,1" GUID="{ea08355b-2785-447d-a49e-0cda0f8935b4}" Name="conEquip1_WndPlayer" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="87,82" AnchorPoint="0.5,1" GUID="{12a7a6d5-d85c-4a07-a7b6-2a656c5b53a4}" Name="conEquip2_WndPlayer" RelativePosition="0.5,0.75" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="87,82" AnchorPoint="0.5,1" GUID="{f4877955-69ac-4e29-949e-420e144f8bab}" Name="conEquip3_WndPlayer" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="87,82" AnchorPoint="0.5,1" GUID="{7186eba2-a3ac-4f6b-b60a-a1d160858b7a}" Name="conEquip7_WndPlayer" RelativePosition="0.5,0.25" Type="WZUIContainer" UseAbsSize="True" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="87,370" AnchorPoint="1,1" GUID="{7335feca-220b-4b59-abfb-69b611f9cd7b}" RelativePosition="1.02,0.92" Type="WZUIContainer" UseAbsSize="True" Name="con2_WndPlayer">
+            <WZUIContainer AbsContentSize="87,82" AnchorPoint="0.5,1" GUID="{74e11b51-2275-4691-830e-ea4e561499b9}" Name="conEquip4_WndPlayer" RelativePosition="0.5,1" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="87,82" AnchorPoint="0.5,1" GUID="{9dbf8c9a-7364-4793-975a-7660b92abf1a}" Name="conEquip5_WndPlayer" RelativePosition="0.5,0.75" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="87,82" AnchorPoint="0.5,1" GUID="{66946237-fe0d-42d9-93a1-9fbb6bef0ae7}" Name="conEquip6_WndPlayer" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" />
+            <WZUIContainer AbsContentSize="87,82" AnchorPoint="0.5,1" GUID="{9fe3eb44-679c-4820-9132-3a908dbb465c}" Name="conEquip8_WndPlayer" RelativePosition="0.5,0.25" Type="WZUIContainer" UseAbsSize="True" />
+        </WZUIContainer>
+        <WZUIContainer GUID="{5cc588a6-271a-486b-8dfd-c42b56c53ad7}" Name="conLevelInfo" RelativePosition="0.5,0.95" Type="WZUIContainer" AbsContentSize="300,60" UseAbsSize="True" AnchorPoint="0.5,0.5" Visible="False">
+            <WZUILabelTTF Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" Color="247,137,24" FontSize="22" GUID="{3b736a77-a184-4ae9-8c67-2b1e604aae3f}" Name="title_WndPlayer" RelativePosition="0.5,0.81" Text="" Type="WZUILabelTTF" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" Order="1" AbsPosition="150,42" />
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="483,160" GUID="{0a8430df-0d31-473b-aed4-662195a2a78e}" Name="conPlayerFire_WndPlayer" RelativePosition="0.5,0.07" Type="WZUIContainer" UseAbsSize="True" Visible="True" Order="2" AnchorPoint="0.5,1">
+            <Button Type="WZUIButton" AbsContentSize="36,36" UseAbsSize="True" RelativePosition="0.422,0.818" GUID="{727b2d7a-4352-45c6-94c9-4a6d5b009189}" LuaDoneFunctionName="onTip1" Name="t1">
+                <NormalElement Type="WZUIContainer" GUID="{7caa0f18-29c7-4be1-8242-02f05042f8d1}">
+                    <WZUIImage Type="WZUIImage" GUID="{8f4205ad-ece9-4817-a67e-b14ca0bdf9b1}" File="ui/bag/buff_04.png" RelativePosition="0.5,0.5" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{26cbf383-7210-4442-a9b9-3960bdfb9fc9}">
+                    <WZUIImage Type="WZUIImage" GUID="{cf718248-c1ff-4fe7-8b8b-75ef98ec365f}" File="ui/bag/buff_04.png" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{a11052c1-ac40-48ce-98f8-1ea21142be92}" />
+            </Button>
+            <WZUIButton Type="WZUIButton" AbsContentSize="36,36" UseAbsSize="True" RelativePosition="0.5,0.81759" GUID="{2e0da237-6726-4997-9a6e-69fcdd6eadc5}" LuaDoneFunctionName="onTip2" Name="t2">
+                <NormalElement Type="WZUIContainer" GUID="{59d97b83-2d20-4864-98a5-d760dcc36b1e}">
+                    <WZUIImage Type="WZUIImage" GUID="{abae6915-5a16-4bc5-9528-eae7cc263e82}" File="ui/bag/buff_03.png" RelativePosition="0.5,0.5" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{0b6f2ad9-81d1-4355-934a-408d06c07753}">
+                    <WZUIImage Type="WZUIImage" GUID="{0d5dc143-ec0e-4c12-8179-28bbaafd6c14}" File="ui/bag/buff_03.png" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{9dcf4e8d-fc6f-4513-86c7-8609c228293a}" />
+            </WZUIButton>
+            <WZUIButton Type="WZUIButton" AbsContentSize="36,36" UseAbsSize="True" RelativePosition="0.58,0.818" GUID="{dfcf6c90-5d18-4eec-8818-50a848250371}" LuaDoneFunctionName="onTip3" Name="t3">
+                <NormalElement Type="WZUIContainer" GUID="{1ee8075b-38c2-43c3-8bbc-5417500d70fe}">
+                    <WZUIImage Type="WZUIImage" GUID="{4dad19b9-a545-459d-897a-0d3b643b0e3d}" File="ui/bag/buff_02.png" RelativePosition="0.5,0.5" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{9994c56c-e20a-462b-811c-74714c28ada8}">
+                    <WZUIImage Type="WZUIImage" GUID="{8fd8fc07-33cf-47ed-8346-99103dbe76f7}" File="ui/bag/buff_02.png" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{727419e9-2545-4158-9c22-a929d3c9b97b}" />
+            </WZUIButton>
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{9f28ec37-88c4-4a6b-9a5e-07228ee1addd}" Name="name_WndPlayer" RelativePosition="0.24,0.51" AnchorPoint="0,0.5" MaxWidth="500" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{c1d819a7-2b44-43b3-b25a-c97a029fefeb}" Name="lv_WndPlayer" FontSize="22" Color="255,227,116" Text="" Order="1" RelativePosition="0.24,0.36" BoldFont="True" StrokeColor="79,60,48" StrokeSize="4" EnableStroke="True" AbsPosition="90,18" Alignment="Left" AnchorPoint="0,0.5" LabelStyleKey="C11_F20_S4_C5" />
+            <WZUIContainer GUID="{8745ea60-6b62-4239-ba51-759a843993ce}" Name="conExp" RelativePosition="0.56,0.36" Type="WZUIContainer" AbsContentSize="300,30" UseAbsSize="True" AnchorPoint="0.5,0.5" Visible="True">
+                <WZUIImage File="ui/common/common_progress_huanhuaexp_bg.png" GUID="{5f8aabf7-1043-4e88-8709-d69a3804537e}" Name="progressBg_WndPlayer" RelativePosition="0.5,0.56" RelativeSize="1,1" Scale="1" Type="WZUIImage" UseOriginSize="True" Visible="True" ScaleX="1" ScaleY="1" Opacity="150" />
+                <WZUIProgress AbsPosition="0,0" BgPicture="ui/common/common_progress_huanhuaexp_fore.png" GUID="{092017bc-611b-4902-a42b-61a6c1a7639b}" Name="progrExpProgress_WndPlayer" Order="2" Percentage="0" RelativePosition="0.5,0.56" RelativeSize="1,1" Scale="1" Type="WZUIProgress" UseOriginSize="True" UseOriginSizeProportion="False" Visible="True" ScaleX="1" ScaleY="1" />
+                <WZUILabelTTF Color="255,255,255" FontSize="20" GUID="{e1127362-95b3-4b9a-ac2c-6d399631cb1e}" Name="expPer_WndPlayer" Order="5" RelativePosition="0.5,0.5" Text="" Type="WZUILabelTTF" Visible="True" BoldFont="True" EnableStroke="True" StrokeColor="105,65,46" LabelStyleKey="C18_F20_S4_C3" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{252cdec2-54d1-448e-866d-398ab19f05b8}" Name="fight_WndPlayer" FontSize="22" Color="255,227,116" Text="" Order="1" RelativePosition="0.24,0.21" BoldFont="True" StrokeColor="79,60,48" StrokeSize="4" EnableStroke="True" AbsPosition="90,18" Alignment="Left" AnchorPoint="0,0.5" LabelStyleKey="C1_F20_S4_C5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{bac0685c-81b5-40f3-87de-3db64d8db755}" Name="conVip" AbsContentSize="50,55" UseAbsSize="True" RelativePosition="0.97,0.37518" Visible="True" AbsPosition="33.5,38" AnchorPoint="1,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{651fadbd-a937-48ef-8db5-2b04ac97975a}" File="ui/bag/common_icon_vipdi.png" UseOriginSize="True" />
+                <WZUIImage Type="WZUIImage" GUID="{819571e2-ac0d-41da-be4e-e973fe27c6dd}" File="ui/common/common_icon_hgg.png" UseOriginSize="True" RelativePosition="0.5,0.572727" AbsPosition="32.5,31.5" />
+                <WZUIImage Type="WZUIImage" GUID="{30f4c71b-eacb-473b-95a5-64de324ecce5}" File="ui/common/commom_icon_v.png" UseOriginSize="True" RelativePosition="0.36,0.12" Name="imgVip_WndPlayer" AbsPosition="23.4,5.5" Scale="0.42" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{33718f30-3858-40f5-8396-c8d42b351eb6}" Name="labelVip_WndPlayer" CharMapFileName="ui/common_num/common_num_vip.png" Height="40" Width="22" Text="0" RelativePosition="0.611538,0.12" Alignment="Left" AnchorPoint="0,0.5" UseOriginSize="True" ScaleX="1" Scale="0.48" AbsPosition="39.75,3.5" />
+                <Button Type="WZUIButton" LuaDoneFunctionName="onVIP" GUID="{daa751a4-7049-4993-ab90-049de5d84c2b}">
+                    <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{2cbc5b14-b55d-4559-b91a-e570b5e5312c}" />
+                    <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{f87b667c-38b6-4532-ae13-24fb1c328f5a}" />
+                    <DisableElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{abcb9640-6a81-4296-8778-f22945520b9a}" />
+                </Button>
+            </WZUIContainer>
+            <Button Type="WZUIButton" RelativePosition="0.023,0.36759" AbsContentSize="60,100" UseAbsSize="True" GUID="{55989784-21ea-4ade-86b3-a1435ff5ebc0}" LuaDoneFunctionName="onEquipAttr" LuaActionName="Normal" Name="onEquipAttr" AnchorPoint="0,0.5">
+                <NormalElement Type="WZUIContainer" GUID="{5fc18f93-4ee2-4c28-88fb-76baf294c654}">
+                    <WZUIImage Type="WZUIImage" GUID="{d19ad0bc-c716-4cd4-82c4-8998ef765587}" File="ui/common/common_btn_anniu2.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{c1c1b312-9507-46ae-877f-64d2b2e5844d}">
+                    <WZUIImage Type="WZUIImage" GUID="{8a1002d0-70ab-4462-a0b1-e3a60857f76d}" File="ui/common/common_btn_anniu2_sel.png" UseOriginSize="True" Scale="1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{922e661c-c673-49f2-80a4-99bbf3614527}" />
+                <WZUIImage Type="WZUIImage" GUID="{d2689f6d-e72e-413a-b5b7-99b7e52f6110}" File="ui/bag/bag_btn_zbsx.png" UseOriginSize="True" Name="ttfBtnY_WndBag" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</WndPlayer>

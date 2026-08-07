@@ -1,0 +1,32 @@
+<CellRankFighting GUID="{3e8d7d2e-6e72-4540-880b-ac1b1e53c8c7}">
+    <WZUIContainer Type="WZUIContainer" GUID="{dc47187c-bf10-4e9d-8a18-aff7431c7a9e}" AbsContentSize="675,85" UseAbsSize="True" LuaObjectName="" BeforeDrawEnable="False" NameCreate="True" Name="CellRankFighting" ShowAll="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{50c26515-4172-498e-b488-b2a748148e64}">
+            <WZUIContainer Type="WZUIContainer" GUID="{a12667cd-e9d5-44b1-ab4d-82fb3ed9035a}" Visible="True" Order="1" Name="conInfoLabel_n" LuaObjectName="conInfoLabel_n">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{34a912e7-f141-441e-899b-4a7dfc49e05b}" Text="" FontSize="22" RelativePosition="0.236851,0.5" Name="label_info_n_2" Color="105,65,46" StrokeSize="3" MaxLength="8" AnchorPoint="0,0" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a168ce42-8b02-4492-b29c-07b946a2c44b}" Text="" FontSize="22" RelativePosition="0.85,0.5" Name="label_info_n_4" Color="62,34,8" StrokeSize="3" MaxLength="" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{bfea353b-6dd8-446d-81b3-32641834b49f}" FontSize="22" Name="txtValue2" AnchorPoint="0,1" RelativePosition="0.236851,0.5" Color="62,34,8" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ee4eea87-4405-4fc8-ad0e-16aec8b0878e}" AnchorPoint="0,1" RelativePosition="0.85,0.5" Name="txtValue4" FontSize="22" Color="62,34,8" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{d75c1dbd-8738-42e0-91f6-d9371687bcfe}" CharMapFileName="ui/common_num/common_num_zhandouli.png" Height="26" Width="16" UseOriginSize="True" UseOriginSizeProportion="False" Visible="False" Name="txtAtlasFighting2_CellRankFighting" RelativePosition="0.55,0.5" AnchorPoint="0.1,0.5" TouchSwallow="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{361ef632-f274-425a-8e97-1fd8567ed545}" AbsContentSize="84,76" UseAbsSize="True" RelativePosition="0.0688883,0.5" AbsPosition="46.4996,42.5">
+                    <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{d00a40d8-edd3-43a5-9d41-56bfb8ede7ae}" CharMapFileName="ui/common_num/common_num_pmsz.png" Height="30" Width="24" UseOriginSize="True" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Visible="True" Name="txtRankNum_CellRankFighting" UseOriginSizeProportion="False" TouchSwallow="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIButton Type="WZUIButton" GUID="{ee26f244-a3a6-4cd9-bd1f-b2f2a896ad1c}" LuaDoneFunctionName="onCellClickedCallback" Name="btn_cellClick" AbsContentSize="670,75" UseAbsSize="True">
+                <NormalElement Type="WZUIContainer" GUID="{a4579dba-eac0-442c-8a46-22ae96678b0f}" RelativeSize="1,1" />
+                <SelectElement Type="WZUIContainer" GUID="{2f0dc115-2761-446a-963f-78a72081ee23}" />
+                <DisableElement Type="WZUIContainer" GUID="{afe0c1b8-8b4c-4df8-ba4b-6cb08ee3ff69}" />
+                <WZUI9Image Type="WZUI9Image" GUID="{73b4b47e-f8c7-42b3-bde5-36a32e04288c}" File="ui/common/common_scale9_di7.png" RelativePosition="0.5,0.5" Name="imgBK_CellRankFighting" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{e4514e58-beae-488a-be48-0e088d7587fc}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.182254,0.5" Name="conPlayerHead_CellRankFighting" TouchSwallow="False">
+                <WZUIImage Type="WZUIImage" GUID="{c6256791-4030-45a5-95d5-2fe61807ff0b}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="True" Visible="False" Name="imgQuatityBK_CellRankFighting" Scale="0.8" />
+                <WZUIImage Type="WZUIImage" GUID="{40abe404-5ed8-4516-91c1-6822f30c5930}" Name="imgQuatityRect_CellRankFighting" UseOriginSize="True" File="ui/common/common_scale9_beibaodi.png" Scale="0.8" Visible="False" />
+                <WZUIImage Type="WZUIImage" GUID="{63315804-48ee-48f5-933c-55c47a05a78e}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="1" Name="imgHead1BK_CellRankFighting" />
+                <WZUIContainer AnchorPoint="0.5,0.5" GUID="{1f0fef58-dcc4-4336-a1d8-ba8aa62364f1}" RelativePosition="0.5,0.5" RelativeSize="1,1" TouchEnable="False" Type="WZUIContainer" Name="conHead1_CellRankFighting" TouchSwallow="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{054d0763-6933-45c2-b675-a65caecb69dc}" AbsContentSize="70,70" Visible="True" UseAbsSize="True" Name="conHead2_CellRankFighting" TouchSwallow="False">
+                <WZUIImage Type="WZUIImage" GUID="{f6b9d131-4539-4d05-8fee-db88f343ffcf}" File="ui/common/common_icon_tx.png" Name="imgHead2BK_CellRankFighting" UseOriginSize="True" TouchSwallow="False" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{c47d9fa5-e63e-406e-a68c-a9d6dc21e873}" Name="imgRankIcon_CellRankFighting" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0.032,0.525" Visible="False" File="ui/common/common_icon_1st.png" TouchSwallow="False" AbsPosition="10.75,42.5" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellRankFighting>

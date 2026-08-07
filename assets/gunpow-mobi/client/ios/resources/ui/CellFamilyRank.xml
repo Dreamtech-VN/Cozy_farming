@@ -1,0 +1,39 @@
+﻿<CellFamilyRank GUID="{6334c8a0-6aa9-4b69-ae93-6350cdbf92f6}">
+    <WZUIContainer AbsContentSize="875,75" GUID="{5db6465f-0b52-40dc-b653-9bda88b75bb7}" LuaObjectName="CellFamilyRank" Name="CellFamilyRank" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <Button AbsContentSize="875,75" GUID="{e232ee18-5617-4f5d-98b8-4acce3106291}" LuaDoneFunctionName="" Name="btnClick_CellCommunityList" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIButton" UseAbsSize="True" Visible="True" TouchContainerEnable="False" TouchEnable="False" TouchSwallow="False">
+            <NormalElement GUID="{9b0ebf71-69d6-486c-a7d6-02e331a165b2}" RelativePosition="0.5,0.5" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{7fbf8aa7-92f2-4d60-814b-4fb7c4cac516}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Name="imgBtn1_CellCommunityList" />
+            </NormalElement>
+            <SelectElement GUID="{b162b236-1ed2-4f9e-ae86-9533aa4418cf}" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image File="ui/common/common_scale9_di7.png" GUID="{46432998-5cf2-45a4-b22b-7a4afb20ff4f}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" Name="imgBtn2_CellCommunityList" />
+            </SelectElement>
+            <DisableElement GUID="{12d192fb-294a-416e-83e5-7a636b5e37ca}" Type="WZUIContainer" TouchContainerEnable="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{63d4a392-637c-446c-9cd6-31a740f42ae2}" Name="imgBtn3_CellCommunityList" File="ui/common/common_scale9_di7.png" />
+            </DisableElement>
+        </Button>
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="158,0,0" FontSize="22" GUID="{cb0f7ef2-9b7d-4e8a-a1fd-ac6fa719e2af}" Name="txtRanking_CellCommunityList" RelativePosition="0.07,0.5" Text="100" Type="WZUILabelTTF" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="127,70,26" FontSize="20" GUID="{1864db50-d9bb-4bf5-9120-1be37798f5e4}" Name="txtFamilyLv" RelativePosition="0.58,0.5" Text="lv1" Type="WZUILabelTTF" LabelStyleKey="C2_F22" />
+        <WZUILabelTTF AnchorPoint="0.5,0.5" Color="127,70,26" FontSize="20" GUID="{ba3b0bf8-3508-4981-adee-1318c1b740e6}" Name="txtSheerLuxury" RelativePosition="0.75,0.5" Text="公会威望" Type="WZUILabelTTF" LabelStyleKey="C2_F22" />
+        <WZUIImage Type="WZUIImage" GUID="{186d6cb1-8b63-4a0c-9d41-95a30d2a8771}" File="ui/common/common_icon_1st.png" UseOriginSize="True" RelativePosition="0.07,0.53" Name="imgName_CellCommunityList" Visible="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{363d54b2-abad-4e39-9c50-c17e7e454f6f}" Name="conHeadInfo" RelativePosition="0.31,0.5">
+            <WZUILabelTTF AnchorPoint="0,0.5" Color="127,70,26" FontSize="20" GUID="{9a6b3dea-44f2-47c1-817b-646f152e13b0}" Name="txtRoleLv" RelativePosition="0.29,0.7" Text="Lv1" Type="WZUILabelTTF" Alignment="Left" Visible="True" LabelStyleKey="C2_F22" />
+            <WZUILabelTTF AnchorPoint="0,0.5" ChineseLengthPolicy="1" Color="229,105,22" Dimensions="0,0" FontSize="20" GUID="{879ce4e2-aa6d-4513-9393-e4d3fdbb6270}" MaxLength="22" Name="txtCommunityName_CellCommunityList" RelativePosition="0.31,0.3" Text="名称" Type="WZUILabelTTF" Alignment="Left" LabelStyleKey="C5_F22" />
+            <WZUIContainer Type="WZUIContainer" GUID="{fa16d61d-55d4-4784-a7fd-789e4519e21a}" Name="conHead_Cell" AbsContentSize="80,80" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.195,0.5" Scale="1" ScaleX="1" ScaleY="1">
+                <WZUIImage Type="WZUIImage" GUID="{b9529d9e-da48-4271-bae9-e0aea6c14e76}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="1" RelativePosition="0.505,0.5" ScaleX="1" ScaleY="1" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{572ff8d1-6a70-4460-982f-21920dc6d6ea}" Name="imgKua" File="ui/common/common_icon_kuafu.png" UseOriginSize="True" RelativePosition="0.3,0.3" Visible="False" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" AbsContentSize="300,60" UseAbsSize="True" RelativePosition="0.2,0.5" GUID="{e8b74ed3-5e91-4b80-ade9-00c0452fc2a3}" LuaDoneFunctionName="onRole" Name="" Visible="True" TouchContainerEnable="True" TouchEnable="True" LuaActionName="Normal" AbsPosition="722.85,36.4142" Order="11">
+            <NormalElement Type="WZUIContainer" GUID="{4c1449e6-b538-4182-ad3a-a1c38202296d}" />
+            <SelectElement Type="WZUIContainer" GUID="{65b3c5ba-deff-489e-a98d-d3edb2e20e66}" />
+            <DisableElement Type="WZUIContainer" GUID="{a7e836a0-9151-4556-860f-b92eca87b712}" />
+        </Button>
+        <Button Type="WZUIButton" AbsContentSize="300,60" UseAbsSize="True" RelativePosition="0.8,0.5" GUID="{5b434a93-72cc-405a-b61d-9a28447eef4e}" LuaDoneFunctionName="onFamily" Name="" Visible="True" TouchContainerEnable="True" TouchEnable="True" LuaActionName="Normal" AbsPosition="722.85,36.4142" Order="11">
+            <NormalElement Type="WZUIContainer" GUID="{f5d24326-1576-4a9f-8d39-f5fb83127db4}" />
+            <SelectElement Type="WZUIContainer" GUID="{8ef9d9e6-d1c8-4a87-b05a-7782673086cb}" />
+            <DisableElement Type="WZUIContainer" GUID="{c6170c59-f710-4732-bf53-72defbe192d7}" />
+            <WZUIImage Type="WZUIImage" GUID="{fd147abb-0b67-434a-8aee-f040eb3b70d2}" File="ui/family/other/common_icon_chakan_2.png" UseOriginSize="True" RelativePosition="0.71,0.5" />
+            <WZUIImage Type="WZUIImage" GUID="{332bc2e4-fdf2-4063-80cb-93d151da919b}" File="ui/common/common_icon_chakan.png" UseOriginSize="True" RelativePosition="0.85,0.5" Name="imgCK_CellFamilyRank" />
+        </Button>
+    </WZUIContainer>
+</CellFamilyRank>

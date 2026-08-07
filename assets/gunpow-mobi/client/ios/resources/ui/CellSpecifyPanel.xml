@@ -1,0 +1,33 @@
+﻿<CellSpecifyPanel GUID="{0d4bf0d2-5c24-41d9-92ab-e106c141697b}">
+    <WZUIContainer Type="WZUIContainer" GUID="{6d494879-6c46-4484-8226-319fec052729}" LuaObjectName="CellSpecifyPanel" Name="CellSpecifyPanel" AbsContentSize="502,453" UseAbsSize="True" NameCreate="True">
+        <WZUIContainer AbsContentSize="500,340" GUID="{615261c1-f2ee-4e37-b4fe-5b5c71a059fc}" RelativePosition="0,1" Type="WZUIContainer" UseAbsSize="True" AbsPosition="246,395.25" Name="" AnchorPoint="0,1">
+            <WZUI9Image Type="WZUI9Image" GUID="{0f206530-ecf1-4f64-8d1f-ff33a3cd83b8}" File="ui/gameActivity/common_scale9_tjbox.png" Opacity="150" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{872e1fb4-e353-478b-9756-b497991132e4}" AbsContentSize="500,124" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+            <WZUIContainer Type="WZUIContainer" GUID="{f95207cc-7c1b-46e5-9f27-23c16f32049a}" Name="conIcon_CellSpecifyPanel" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.115,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3d0cd724-49ad-4793-b7df-f0e4c1dd4717}" Color="255,236,193" EnableStroke="True" FontSize="18" AnchorPoint="0,0" RelativePosition="0.23,0.4" StrokeColor="79,60,48" StrokeSize="4" TextKey="" Name="txtDesc_CellSpecifyPanel" Text="" Dimensions="380,0" Alignment="Left" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{1f64102b-d029-4149-a791-0adef644273d}" Name="ftxtLeftNum_CellSpecifyPanel" AnchorPoint="0,0.5" RelativePosition="0.23,0.3" MaxWidth="350" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{49ed7a74-048f-45ca-8db1-6f3bd9fb730a}" AbsContentSize="500,48" UseAbsSize="True" RelativePosition="0.5,0.681016">
+            <WZUI9Image Type="WZUI9Image" GUID="{b1d6aabd-027f-4c41-9238-0c75383bed06}" File="ui/common/common_scale9_heidi6.png" UseOriginSize="True" Scale="0.8" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2f5e59e2-f283-41d1-a8ff-934c2bae4ddc}" FontSize="22" Color="255,227,116" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" TextKey="NEWACTIVITY_TEXT2" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{1d2a4115-a513-4bca-9489-d216fad42d88}" AbsContentSize="470,90" UseAbsSize="True" RelativePosition="0.5,0.395143" Name="conItem_CellSpecifyPanel" AnchorPoint="0.5,0" TouchEnable="True">
+            <WZUITableContainer Type="WZUITableContainer" GUID="{887707df-8e0a-42b6-b901-d31637f7d33c}" Name="tableGoodList_CellSpecifyPanel" EnableMoveVertical="False" IsVerticalMode="False" CellElementHeight="0.2" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{7a91ffbf-7e14-4d0f-ae18-133a396fe3d5}" AbsContentSize="500,113" UseAbsSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{c945cdd8-2464-4c17-9dd5-11baaa8f2ebb}" Name="ftxtPrice_CellSpecifyPanel" MaxWidth="500" RelativePosition="0.5,0.8" />
+            <WZUIImage Type="WZUIImage" GUID="{a4e96037-3d99-4c2a-a1f4-32ab87e652d2}" File="ui/gameActivity/activity_pic_yjkx.png" UseOriginSize="True" RelativePosition="0.5,0.817257" Name="imgLine_CellSpecifyPanel" Visible="False" />
+            <Button Type="WZUIButton" GUID="{48baa772-e371-4c6c-9e46-a225c0b84dd0}" AbsContentSize="136,62" UseAbsSize="True" Name="btnBuy_CellSpecifyPanel" RelativePosition="0.5,0.4" LuaActionName="Normal" LuaDoneFunctionName="onClickBuy">
+                <NormalElement Type="WZUIContainer" GUID="{04decaf5-7e82-40fc-9e96-513fc7d2c25f}">
+                    <WZUIImage Type="WZUIImage" GUID="{58414378-32a3-4e32-85dd-b6cb43c31980}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{08c6e7c3-a5b4-4897-82cc-09d380d7df52}">
+                    <WZUIImage Type="WZUIImage" GUID="{ab99ccdd-434a-4444-bb66-782fb0ce00f8}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{b68cce4c-e179-474b-b66b-519e0dcd3a9f}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3eec3f11-4145-4be5-913b-c12170a8c1f7}" LabelStyleKey="NORMAL_GREEN_BTN" Name="txtBuy_CellSpecifyPanel" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellSpecifyPanel>

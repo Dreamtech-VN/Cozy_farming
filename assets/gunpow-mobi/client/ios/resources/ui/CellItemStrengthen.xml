@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><CellItemStrengthen GUID="{96E4A4FC-FBC5-4e71-9191-37D37CEDE7B9}">
+    <WZUIContainer AbsContentSize="99,93" GUID="{06C3D967-D2BF-436b-A6C0-98EFB3BBA059}" LuaObjectName="CellItemStrengthen" Name="CellItemStrengthen" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer GUID="{61A8B3D2-3475-493d-AC1A-26BD4BA35B1E}" Scale="1.05" Type="WZUIContainer">
+            <WZUI9Image File="common/Jigsaw/n_items01_sel.png" GUID="{C27BF83C-0065-43e2-B5EC-12AC24FC42E8}" Name="btnImg2_CellGoodItem" RelativePosition="0.5,0.5" Type="WZUI9Image" Visible="False"/>
+        </WZUIContainer>
+        <WZUIContainer GUID="{8FDD3B48-89EF-4f47-B10C-F109071FD486}" Scale="1.05" Type="WZUIContainer">
+            <WZUI9Image File="common/Jigsaw/n_items01.png" GUID="{1D103F88-D150-4697-8D37-386481646AF4}" Name="btnImg1_CellGoodItem" Type="WZUI9Image" Visible="False"/>
+        </WZUIContainer>
+        <WZUI9Image File="common/Jigsaw/n_items01.png" GUID="{307B34A9-C18F-4078-A2C3-189D4B73E957}" Name="imgItemBg_CellItemStrengthen" Type="WZUI9Image" Visible="True"/>
+        <WZUIImage File="" GUID="{3B48C473-CBBA-4454-B294-2382BF2C0BB9}" Name="imgItemBgReserved0_CellItemStrengthen" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="False"/>
+        <WZUIImage File="" GUID="{F762EEB4-BF2B-4fc5-BF9C-28A0280377CF}" Name="imgItemBgReserved1_CellItemStrengthen" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+        <WZUIImage File="" GUID="{68CAC0CA-FA02-4e75-A014-2CD438D5074B}" Name="imgItemBgReserved2_CellItemStrengthen" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True"/>
+        <WZUIContainer AbsContentSize="99,93" GUID="{78B768A2-1661-4b75-998C-360B6C4A28FF}" Name="conShaningBg_CellItemStrengthen" Type="WZUIContainer" UseAbsSize="True"/>
+        <WZUIContainer AbsContentSize="135,128" GUID="{2FECCA65-9469-402c-A2DD-A873DC7B9764}" Name="conhightLight" Order="0" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+            <WZUISpriteSheet CountCol="3" File="ui/main/strengthen/strengthenefficient.png" GUID="{C116669F-A9BC-4e99-9A50-104FCCFDEFF7}" Type="WZUISpriteSheet" UseOriginSize="True">
+                <Action GUID="{5F676C6D-1F4C-40c3-A90C-00A31C3E0E7E}" IndexEnd="2" Interval="0.3" IsLoop="True" Type="WZUIActionSpriteSheetAnimation"/>
+            </WZUISpriteSheet>
+        </WZUIContainer>
+        <WZUIImage GUID="{475FE4A9-A790-48df-AEFF-3BC502106CC2}" Name="imgItem_CellItemStrengthen" Type="WZUIImage" UseOriginSize="False"/>
+        <WZUIImage File="common/text/expired.png" GUID="{866F797D-4A3A-488a-80E1-29FB883F93A3}" Name="imgItemExpired_CellItemStrengthen" RelativeSize="0.729,0.2891" Type="WZUIImage" UseOriginSize="False" UseOriginSizeProportion="True" Visible="False"/>
+        <WZUIContainer GUID="{BCEB5316-686D-4f1d-9054-928DB59E817A}" RelativePosition="0.670809,0.770226" RelativeSize="0.5,0.25" Type="WZUIContainer" Visible="True">
+            <WZUILabelAtlasFont AnchorPoint="0,0.5" CharMapFileName="common/num/weapon_level_number.png" GUID="{DDFFA01E-0559-4048-B172-6917F4DBF7D3}" Height="31" Name="txtItemStrengthenLevel_CellItemStrengthen" RelativePosition="0,0.5" Scale="0.7" Text="" Type="WZUILabelAtlasFont" UseOriginSize="False" Width="24"/>
+            <WZUILabelAtlasFont AnchorPoint="0,0.5" CharMapFileName="common/num/weapon_level_number.png" GUID="{91A185EB-1E2D-4301-82A1-C59C7B959090}" Height="31" Name="txtFadeToLevel_CellItemStrengthen" RelativePosition="0,0.5" Scale="0.7" Text="" Type="WZUILabelAtlasFont" UseOriginSize="False" Visible="False" Width="24"/>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="38,38" GUID="{8977C712-5A9F-41bd-87AB-5324B2940FD4}" Name="conAttackStoneShaning_CellItemStrengthen" RelativePosition="0.167407,0.832187" Type="WZUIContainer" UseAbsSize="True" Visible="True"/>
+        <WZUIContainer AbsContentSize="35,35" GUID="{45A73D71-6EBC-47e2-8DFB-3E441037FDEC}" Name="conDefenseStoneShaning_CellItemStrengthen" RelativePosition="0.167407,0.662188" Type="WZUIContainer" UseAbsSize="True" Visible="True"/>
+        <WZUIContainer AbsContentSize="35,35" GUID="{D2B05BD1-F5D8-48ba-AC10-3FA66D6DE001}" Name="conSpecialStoneShaning_CellItemStrengthen" RelativePosition="0.167407,0.492188" Type="WZUIContainer" UseAbsSize="True" Visible="True"/>
+        <WZUIImage File="" GUID="{D2518E0D-6C02-46db-9424-6FAC3A570175}" Name="imgItemStone1_CellItemStrengthen" RelativePosition="0.16,0.84" RelativeSize="0.16,0.16" Type="WZUIImage" UseOriginSize="False" UseOriginSizeProportion="True" Visible="True"/>
+        <WZUIImage File="" GUID="{E7D487CC-DC30-4dd7-BEA1-F56C429B3EB3}" Name="imgItemStone2_CellItemStrengthen" RelativePosition="0.16,0.67" RelativeSize="0.16,0.16" Type="WZUIImage" UseOriginSize="False" UseOriginSizeProportion="True" Visible="True"/>
+        <WZUIImage File="" GUID="{22E382DD-CC85-4895-849E-66FB0FA10BC7}" Name="imgItemStone3_CellItemStrengthen" RelativePosition="0.16,0.5" RelativeSize="0.16,0.16" Type="WZUIImage" UseOriginSize="False" UseOriginSizeProportion="True" Visible="True"/>
+        <WZUIButton GUID="{D7F7B52B-98A2-416c-A25A-1211F6CE7AAF}" LuaDoneFunctionName="onItemClicked" Name="btnForClick_CellItemStrengthen" Order="1" TouchSwallow="True" Type="WZUIButton">
+            <NormalElement GUID="{20E851E8-7A02-4bbb-9AC8-15B1171C1D47}" Type="WZUIContainer">
+                <WZUIImage File="common/Jigsaw/skill_bg.png" GUID="{E4B97987-82BB-4eca-B237-2CAD14AB4826}" Opacity="0" Type="WZUIImage" UseOriginSize="False"/>
+            </NormalElement>
+            <SelectElement GUID="{9B678760-5D73-4fed-8F68-F171BFE822E0}" Type="WZUIContainer">
+                <WZUIImage File="common/Jigsaw/skill_bg.png" GUID="{A3FFD329-F66A-4441-A691-8E101B35A5A9}" Opacity="0" Type="WZUIImage" UseOriginSize="False"/>
+            </SelectElement>
+            <DisableElement GUID="{3E93DB8C-C5EC-4fd4-8375-8EACAE029B82}" Type="WZUIContainer">
+                <WZUIImage File="common/Jigsaw/skill_bg.png" GUID="{80A6FF55-8CC0-4375-BD61-C2D2949E4117}" Opacity="0" Type="WZUIImage" UseOriginSize="False"/>
+            </DisableElement>
+        </WZUIButton>
+        <WZUILabelTTF Color="128,60,34" FontSize="30" GUID="{EAB01236-BA81-4643-9667-8434609DD63D}" Name="txtDesc_CellItemStrengthen" Text="" Type="WZUILabelTTF" Visible="false"/>
+        <WZUIContainer GUID="{9C07813F-98F8-4c7a-814D-10ACEBEE017D}" Name="conStar_Cell" Type="WZUIContainer"/>
+    </WZUIContainer>
+    <WZUIContainer AbsContentSize="35,35" GUID="{3AA67DE9-E93A-4018-AD83-C01E40604473}" Name="conStoneShaning" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <WZUISpriteSheet CountCol="3" File="ui/bottomMenu/player/property_stone.png" GUID="{1370B9C8-E2CA-43ef-BCB1-C0FEEF0EBF4B}" RelativePosition="0.5,0.5" RelativeSize="1,1" Scale="1" Type="WZUISpriteSheet" UseOriginSize="False">
+            <Action GUID="{280A9BD9-5656-4f93-BBF2-9221368B53CD}" IndexBegin="0" IndexEnd="2" Interval="0.2" IsLoop="True" Type="WZUIActionSpriteSheetAnimation"/>
+        </WZUISpriteSheet>
+    </WZUIContainer>
+</CellItemStrengthen>

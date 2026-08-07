@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<WndGameGift GUID="{8E889781-83B8-4b77-BFAA-8736D81E6D5E}">
+    <WZUIWindow Type="WZUIWindow" GUID="{4CD8A804-C0AA-44ca-B5FF-D7EAA3295F4A}" Name="WndGameGift" NameCreate="True" LuaObjectName="WndGameGift" AbsContentSize="470,336" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{0CDD09AB-2FB7-4607-93ED-730D8752D397}" AbsContentSize="400,240" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{1F703BA7-199B-4d04-9759-E950FD77D91B}" File="ui/common/common_scale9_di15.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{9DE45DFA-C00B-4a6c-AB31-0F8DD8EB31FE}" AbsContentSize="" UseAbsSize="False" Scale="1" RelativeSize="0.97,0.95">
+                <WZUI9Image Type="WZUI9Image" GUID="{F3766C98-C582-49c4-AF82-DE747A505B47}" File="ui/common/common_scale9_di25.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{F88259D7-F175-49a1-8E10-8046D180B0F7}" AbsContentSize="385,125" UseAbsSize="True" RelativePosition="0.5,0.646786" AbsPosition="200,155.229">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{A112E120-987B-42c1-B275-EB39E207CD5A}" FontSize="22" NameCreate="True" Name="txtGift_WndGameGift" Text="" AnchorPoint="0,0.5" RelativePosition="0.11961,0.67" BoldFont="False" EnableStroke="False" StrokeSize="3" Color="127,70,26" ShadowColor="36,0,0" StrokeColor="36,0,0" TextKey="ExchangeGift" Alignment="Left" AbsPosition="46.05,83.75" />
+                <WZUIContainer Type="WZUIContainer" GUID="{B15F8058-97BE-45c3-8C95-7E6797529A51}" AbsContentSize="300,40" UseAbsSize="True" RelativePosition="0.5,0.36">
+                    <WZUI9Image Type="WZUI9Image" GUID="{D3B573B4-1EF8-4ad2-86D4-FD2E11EACFEA}" File="ui/common/common_scale9_di8.png" Opacity="180" />
+                    <WZUIEditBox Type="WZUIEditBox" GUID="{1D4A5DC4-7FE1-422e-8200-BCB560523BED}" AbsPosition="" Text="" BgPicture="ui/common/common_scale9_di8.png" FontSize="22" MaxLength="23" Name="editExchangeword_WndGameGift" NameCreate="True" LuaEditBoxEditingDidBegin="" LuaEditBoxEditingDidEnd="" LuaEditBoxTextChanged="" RelativePosition="0.505263,0.485714" FontColor="255,255,255" PlaceHolder="" PlaceholderFontColor="195,171,148" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{E0C37E86-1B21-4ee7-88B7-30AB223FDD5A}" AbsContentSize="400,50" UseAbsSize="True" RelativePosition="0.5,0.25" AbsPosition="200,49.5713">
+                <WZUIContainer Type="WZUIContainer" GUID="{EB9C1714-8FE9-4f86-AA1A-F11933BFD054}" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.3,0.5">
+                    <WZUIButton Type="WZUIButton" GUID="{D01E41FA-EFE5-4887-9424-C929EC5130AA}" LuaDoneFunctionName="onBtnClose" Name="btnBack_WndGameGift" NameCreate="True" RelativePosition="0.5,0.5" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{04907A0F-2E00-4c13-9A8B-E64F4D62E171}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{44739D23-0517-44dc-AB48-A316CAADF8BD}" File="ui/common/common_btn_anniu3.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{24A92C9B-38CF-40ec-881E-0FD366BAFB75}" Scale="1.12">
+                            <WZUI9Image Type="WZUI9Image" GUID="{5F80AB4D-C262-43f8-B2B9-60677A7CC0B8}" File="ui/common/common_btn_anniu3_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{ABB54B3C-94CD-4582-A3D7-45152CD19FAA}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{A4104E9D-F9B2-4df5-8F6E-8C6992781F24}" FontSize="26" Text="" Order="1" Name="txtBack_WndGameGift" NameCreate="True" BoldFont="False" EnableStroke="True" StrokeSize="4" Color="255,236,193" StrokeColor="128,54,13" RelativePosition="0.5,0.464286" TextKey="BACK" />
+                    </WZUIButton>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{A1EF1E79-CF94-4d38-8D7D-4E023FF25B9A}" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.71,0.5">
+                    <WZUIButton Type="WZUIButton" GUID="{C2F51B8D-CCE4-42cd-9816-3DCFE1D00CCF}" LuaDoneFunctionName="onBtnExchange" Name="btnExchange_WndGameGift" NameCreate="True" RelativePosition="0.5,0.5" LuaActionName="Normal">
+                        <NormalElement Type="WZUIContainer" GUID="{91859657-2470-46b7-A88C-191C6EFF4FA0}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{15063B10-21C6-4c5f-95A8-337C3E7DC786}" File="ui/common/common_btn_anniu10.png" UseOriginSize="False" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{D83C52B9-782C-4ff0-BB20-7B2FD50739F1}" Scale="1.12">
+                            <WZUI9Image Type="WZUI9Image" GUID="{CA0FDB9F-1D58-44f2-9953-43B180130D02}" File="ui/common/common_btn_anniu10_sel.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{D2DD4496-EFC6-4bae-92D7-D6D7921C1F02}" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{70F08F66-FAA0-4d4d-A7E4-E23A54A63596}" FontSize="26" Text="" Order="1" Name="txtExchange_WndGameGift" NameCreate="True" BoldFont="False" EnableStroke="True" StrokeSize="4" Color="255,236,193" StrokeColor="3,111,8" RelativePosition="0.5,0.464286" TextKey="duihuan" />
+                    </WZUIButton>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndGameGift>

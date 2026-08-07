@@ -1,0 +1,48 @@
+﻿<CellWorldTeamBossList GUID="{7fea8bc9-f7be-4f0e-8ace-46d3c25f0318}">
+    <WZUIContainer Type="WZUIContainer" GUID="{ba469727-2dbc-4037-8027-d92afecf411c}" LuaObjectName="" Name="CellWorldTeamBossList" NameCreate="True" AbsContentSize="488,80" UseAbsSize="True">
+        <WZUI9Image Type="WZUI9Image" GUID="{666c5c10-9c2a-4043-a2b4-7308e8e8d3fe}" File="ui/common/common_scale9_di18.png" ShowRect="False" CapInsets="0,0,0,0" Name="imgRankBg_CellWorldTeamBossList" />
+        <WZUIContainer AbsContentSize="350,35" AnchorPoint="0.5,0.5" GUID="{efe03670-d201-4535-b0e1-91db170ccf11}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="False">
+            <Button Type="WZUIButton" GUID="{923fbee6-bcbe-449d-9124-1ab56dd16aaa}" LuaDoneFunctionName="OnCheckEnterRoom">
+                <NormalElement Type="WZUIContainer" GUID="{85808d73-7ce1-47e7-a143-3ce41a17b6e2}" />
+                <SelectElement Type="WZUIContainer" GUID="{a8e800bf-28fa-4f99-b911-b076eca556e8}" />
+                <DisableElement Type="WZUIContainer" GUID="{44db4d44-b80d-4801-bb78-c03c0cd93d75}" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{67dfe555-bb55-4604-b39d-01f3eccc822b}" RelativeSize="0.17,1" AnchorPoint="0,0.5" RelativePosition="0,0.5" TouchEnable="False" Name="conRank_CellWorldTeamBossList">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{039e6101-e6c9-4bf7-998e-f6b67867d756}" FontSize="22" Color="158,0,0" EnableStroke="False" NameCreate="True" Name="txtRank_CellWorldTeamBossList" StrokeColor="60,19,12" StrokeSize="3" Text="" RelativePosition="0.5,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{10357d52-31da-4819-82c7-17dcd6e610b4}" File="ui/common/common_icon_1st.png" UseOriginSize="True" Name="imgRank_CellWorldTeamBossList" Visible="False" Scale="0.8" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{e026599e-09a6-4ca0-b7e0-f6bb3d7c63f4}" CharMapFileName="ui/common_num/common_num_pmsz.png" Height="30" Width="24" Name="atxtRank_CellWorldTeamBossList" Scale="0.8" UseOriginSize="True" UseOriginSizeProportion="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{8909e0be-3488-44db-8e63-c8dd66855dab}" Name="conHead_CellWorldTeamBossList" AbsContentSize="145,80" UseAbsSize="True" RelativePosition="0.32,0.5">
+                <WZUIContainer Type="WZUIContainer" GUID="{1e31e077-5cf7-4a55-8508-93bf1b82c9b9}" Name="conHead1_CellWorldTeamBossList" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.25,0.5" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{a638de55-e307-4802-9592-c7983f75f926}" File="ui/common/common_icon_tx.png" UseOriginSize="True" />
+                    <Button Type="WZUIButton" GUID="{c6c95023-9814-458b-8d07-3ef39f39ec65}" Tag="1" LuaDoneFunctionName="onClickHead">
+                        <NormalElement Type="WZUIContainer" GUID="{03a37348-caf1-490c-8899-e000f4c95150}" />
+                        <SelectElement Type="WZUIContainer" GUID="{56fab707-56d9-46ce-b063-1533068e0204}" />
+                        <DisableElement Type="WZUIContainer" GUID="{f5eec194-63c8-4c8d-ac79-db8efdfa13b1}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{2bb0455f-2892-4171-97ad-4425a0cbc47c}" Name="conHead2_CellWorldTeamBossList" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.75,0.5" Visible="False">
+                    <WZUIImage Type="WZUIImage" GUID="{b22a0f14-b394-49b1-9ef6-4a1b0c53ac10}" File="ui/common/common_icon_tx.png" UseOriginSize="True" />
+                    <Button Type="WZUIButton" GUID="{80a857b5-2b8b-4de6-8d33-6d8cb9fd5eea}" Tag="2" LuaDoneFunctionName="onClickHead">
+                        <NormalElement Type="WZUIContainer" GUID="{fe41420e-5bc4-4638-9692-532f91208cc5}" />
+                        <SelectElement Type="WZUIContainer" GUID="{3a66155c-a92b-4a2c-8727-065ad6979710}" />
+                        <DisableElement Type="WZUIContainer" GUID="{66829d4f-a2dd-40aa-ac0f-5e223f6b93c1}" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{aa155c40-bd50-4bca-8cf3-7682da75ec2b}" FontSize="18" Color="0,72,3" EnableStroke="False" NameCreate="False" Name="txtRoomState_CellWorldTeamBossList" StrokeColor="60,19,12" StrokeSize="3" Text="" RelativePosition="0.9,0.5" Alignment="Left" AnchorPoint="0.5,0.5" TouchEnable="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ba908df5-59fa-4430-8f9a-62db7073b8cd}" FontSize="18" Color="158,0,0" EnableStroke="False" NameCreate="False" Name="txtHurt_CellWorldTeamBossList" StrokeColor="60,19,12" StrokeSize="3" Text="" RelativePosition="0.85,0.5" Alignment="Left" AnchorPoint="0.5,0.5" TouchEnable="False" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{d23951f7-1d6b-4e45-8a26-8e235597f561}" Name="ftxtName_CellWorldTeamBossList" MaxWidth="170" RelativePosition="0.62,0.5" TouchEnable="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7089b1df-6687-4216-bffd-9d9ece2734b5}" Name="txtName_CellWorldTeamBossList" RelativePosition="0.62,0.5" Color="105,65,46" FontSize="18" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{959879f7-6d21-416c-bd13-14095340d344}" Name="ftxtRoomId_CellWorldTeamBossList" MaxWidth="156" RelativePosition="0.62,0.5" TouchEnable="False" AnchorPoint="0,0.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{8d2fcb4d-e2e4-4e45-afd8-50eb41cfffd0}" Name="conReward_CellWorldTeamBossList" AnchorPoint="1,0.5" RelativePosition="0.99,0.5" RelativeSize="0.8,1" Visible="False">
+                <WZUIContainer AbsContentSize="60,60" GUID="{cb980902-d727-4a34-9e3b-683b09144567}" Name="conItem1_CellWorldTeamBossList" RelativePosition="0,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+                <WZUIContainer AbsContentSize="60,60" GUID="{f13162b0-4a59-4d5d-9963-c5f5ad07196a}" Name="conItem2_CellWorldTeamBossList" RelativePosition="0.17,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+                <WZUIContainer AbsContentSize="60,60" GUID="{822444df-57ef-48fc-b720-38108bc2b45e}" Name="conItem3_CellWorldTeamBossList" RelativePosition="0.34,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+                <WZUIContainer AbsContentSize="60,60" GUID="{f76084f3-badc-4148-aa8d-264f86c8bdf7}" Name="conItem4_CellWorldTeamBossList" RelativePosition="0.51,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+                <WZUIContainer AbsContentSize="60,60" GUID="{9d97b334-4f60-4fb1-9fd9-7f58bd8ddfb8}" Name="conItem5_CellWorldTeamBossList" RelativePosition="0.68,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+                <WZUIContainer AbsContentSize="60,60" GUID="{70008168-9f40-4061-beba-9a17c1cc7b65}" Name="conItem6_CellWorldTeamBossList" RelativePosition="0.85,0.5" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0,0.5" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellWorldTeamBossList>

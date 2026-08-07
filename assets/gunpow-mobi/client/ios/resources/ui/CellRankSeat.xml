@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<CellRankSeat GUID="{EA6CA3FD-B8CC-492d-B59F-2CCBCCDD9C46}">
+    <WZUIContainer Type="WZUIContainer" GUID="{FE13B29F-FD9B-4c57-AB20-D465A536F521}" Name="CellRankSeat" LuaObjectName="" NameCreate="True" AbsContentSize="188,300" UseAbsSize="True">
+        <WZArmature AnchorPoint="0.5,0.5" ArmatureName="skills_stxt_01" FlipX="True" GUID="{FA789FED-9DD0-41e5-B34C-34EE77F37242}" Name="armature_CellRankSeat" RelativePosition="0.53,0.6" Scale="1" Type="WZArmature" UseOriginSize="True" Visible="False" ArmatureFile="ui/skills_stxt_01.xml" TouchEnable="False" ScaleY="1" ScaleX="1">
+            <Action AnimationId="0" AnimationScale="1" GUID="{5BDE330E-2C98-4e9e-9767-6F914FF1C376}" IsLoop="False" Type="WZUIArmatureAnimationById" />
+        </WZArmature>
+        <WZUIImage Type="WZUIImage" GUID="{8CC02B1E-23DE-4570-893F-710C397FA5EE}" File="ui/common/common_icon_yy.png" UseOriginSize="True" RelativePosition="0.51,0.14" />
+        <WZUIContainer Type="WZUIContainer" GUID="{671AF055-FE0C-428a-B900-10768900738F}" Name="conRole" RelativePosition="0.5,0.57" AbsPosition="91,165" TouchEnable="False" TouchSwallow="False" />
+        <WZUIImage Type="WZUIImage" GUID="{08E7FCA3-EA70-45f3-847C-F6DBA7F15DA6}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.926,0.105" AbsPosition="174.2,31.5" Name="imgRedDot_CellRankSeat" Visible="False" Order="3" />
+        <WZUIContainer Type="WZUIContainer" GUID="{8B48ADD4-5E26-4fe0-BED6-6E208CB56CDE}" Name="conInfo_CellRankSeat">
+            <WZUIImage Type="WZUIImage" GUID="{10932A05-3B05-4e5b-A44A-C19624B1FEDA}" File="ui/common/common_icon_lgz.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.95" ScaleX="1" ScaleY="1" Visible="False" Name="imgWifeHasband_CellRankSeat" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d4ceb111-aae2-4146-871e-6ee7003ca0e7}" Color="255,121,31" FontSize="22" Text="称号" Name="playerTitle" RelativePosition="0.5,0.95" BoldFont="False" MaxLength="0" StrokeColor="79,60,48" StrokeSize="4" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{17a682f3-a6b0-4761-895c-73571bbd6442}" Color="255,255,255" FontSize="22" Text="123" Name="playerLevel" RelativePosition="0.293617,0.85" BoldFont="False" Visible="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2bff639e-3f94-4561-b339-3f65c679d098}" Color="255,255,255" FontSize="22" Text="名字" Name="playerName" RelativePosition="0.5,0.85" BoldFont="False" AnchorPoint="0.5,0.5" Alignment="Left" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{05a2bd7f-51f9-443d-8fd6-74fb15920f89}" Text="离线99天" FontSize="20" RelativePosition="0.5,0.95" Color="255,255,255" Name="onlineState_CellRankSeat" Visible="False" BoldFont="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{90a3030f-b381-47cb-b313-876898cbe782}" UseAbsSize="True" RelativePosition="0.484187,0.0488979" AbsContentSize="350,64" Scale="1" ScaleX="1" ScaleY="1" Name="conFight">
+                <WZUI9Image Type="WZUI9Image" GUID="{91542656-2920-4930-88d0-85814d696258}" File="ui/common/common_scale9_heidi2.png" Scale="0.5" Name="imgValueBk_CellRankSeat" RelativePosition="0.56,0.5" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{73cfb323-bcae-4154-b448-d3f43ae12ca0}" Name="playerFight" CharMapFileName="ui/common_num/common_num_zhandouli.png" Text="12" Height="26" Width="16" Alignment="Left" AnchorPoint="0,0.5" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="0.75" Visible="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{621a5845-0d6a-46c8-b4c3-7dc2a57e2f8a}" FontSize="22" Name="txtShowProperty_CellRankList" RelativePosition="0.5,0.5" AnchorPoint="1,0.5" Color="255,236,193" StrokeSize="4" StrokeColor="255,89,74" EnableStroke="True" Visible="True" />
+                <WZUIImage Type="WZUIImage" GUID="{7dae6a05-232f-43c0-bc24-2b13fb674d80}" Name="imgHeart_CellRankSeat" UseOriginSize="True" File="ui/common/common_icon_eadj.png" RelativePosition="0.56,0.796875" Visible="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{18149172-7b36-4e74-9c4f-f4046b1a43c5}" AbsContentSize="50,50" UseAbsSize="True" AnchorPoint="0.5,0.5">
+                    <WZUIImage Type="WZUIImage" GUID="{5d8dc2b2-7ce0-4b86-bb27-e761a87303a8}" File="ui/common/common_icon_zhanlih.png" UseOriginSize="True" RelativePosition="0.5,0.59" Name="imgFightIcon_CellRankList" AnchorPoint="1,0.5" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7d03481a-ae70-4be9-aadc-4a1f4fb16e3a}" Visible="False" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" FontSize="22" Name="txtLabelValue_CellRankSeat" AnchorPoint="0,0.5" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{ca8a1b6c-267c-4696-9b50-b78b2e70cb54}" Name="imgIconLv_CellRankSeat" UseOriginSize="True" Visible="False" RelativePosition="0.0478722,0.0433341" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{33781196-c1b9-460d-810e-fadc19892d41}" Visible="False" Width="16" Height="24" CharMapFileName="ui/common_num/common_num_ghdj.png" Name="txtFamousIconLv_CellRankSeat" UseOriginSize="True" UseOriginSizeProportion="False" RelativePosition="0.0478722,0.0533341" />
+            <WZUIImage Type="WZUIImage" GUID="{b7698ae0-6310-480c-9b13-09d93b551166}" UseOriginSize="True" File="ui/common/common_icon_1st.png" RelativePosition="0.0957446,0.183334" Name="imgMedal_CellRankSeat" Visible="False" Scale="0.8" />
+            <WZUIImage Type="WZUIImage" GUID="{086e6da3-d996-4507-a95d-a44dfdaac44a}" UseOriginSize="True" File="ui/common/common_icon_1st.png" RelativePosition="-0.143617,0.06" Name="imgMedal2_CellRankSeat" Visible="False" Scale="0.8" />
+        </WZUIContainer>
+        <WZUIButton Type="WZUIButton" AbsContentSize="100,160" UseAbsSize="True" Name="btnPetInfoLeft_CellRankSeat" UseAbsCoordinate="False" GUID="{EF1BA9B5-4A85-4011-8C7E-961D754A22DA}" AnchorPoint="1,0" RelativePosition="0.18617,0.393333" TouchEnable="True" LuaDoneFunctionName="onCheckedPetInfo" AbsPosition="35,118">
+            <NormalElement Type="WZUIContainer" GUID="{B2182E98-1ECF-4625-A821-6E45977BEE2E}" UseAbsSize="True" AbsContentSize="100,100" />
+            <SelectElement Type="WZUIContainer" GUID="{8A664C12-9884-4e82-89AC-0ED8BF1B2041}" />
+            <DisableElement Type="WZUIContainer" GUID="{A6D4B404-243C-48e0-97B4-063CDA7CD604}" />
+        </WZUIButton>
+        <WZUIButton Type="WZUIButton" AbsContentSize="100,160" UseAbsSize="True" Name="btnPetInfoRight_CellRankSeat" UseAbsCoordinate="False" GUID="{5EAD3E50-BB49-4c15-B0CD-2AB86CCD7617}" AnchorPoint="0,0" RelativePosition="0.799224,0.393333" TouchEnable="True" LuaDoneFunctionName="onCheckedPetInfo" AbsPosition="150.254,118">
+            <NormalElement Type="WZUIContainer" GUID="{5F6F9A10-CB06-4248-8877-F9D3E0364AF3}" UseAbsSize="True" AbsContentSize="100,100" />
+            <SelectElement Type="WZUIContainer" GUID="{3DD44B46-CC3C-4d80-852A-516787152703}" />
+            <DisableElement Type="WZUIContainer" GUID="{E6024E55-DE5B-41cb-AB0F-8CD6ED12E989}" />
+        </WZUIButton>
+        <Button Type="WZUIButton" Name="btnCheckInfo" AbsContentSize="160,350" UseAbsSize="True" LuaDoneFunctionName="onCheckRole" GUID="{A1766908-B098-402d-BA70-D78582DC9833}" RelativePosition="0.5,0.5">
+            <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{33126B28-3D7C-4789-8086-3EDEACF3B978}" />
+            <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{26031D7A-4E80-4cdb-AF69-A7BFFDEA7A6C}" />
+            <DisableElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{E4FD4DF6-B82C-410d-897D-FEEFE9023A41}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{AD1299ED-01BA-435a-80AB-D22B1B79AC74}" Name="conCheck_CellRankSeat" Visible="False" RelativePosition="0.47,0.4" AbsContentSize="0,0">
+            <WZUIButton Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.19" GUID="{B5046C6C-C0D4-4252-83F7-F500971AAD63}" Name="btnCheckWife" Visible="True" LuaDoneFunctionName="onCheckWifeInfo" TouchEnable="True" LuaActionName="Normal">
+                <NormalElement Type="WZUIContainer" GUID="{7685F639-F0E2-4499-8E08-8B41143CD4C3}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{E82E41C4-DC20-4c0e-B701-F51AAD96064F}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{35E3BE78-527A-4201-8214-968BC2D05815}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{2A2B659E-D33A-4ded-96B9-FB023A6BAD0A}" File="ui/common/common_btn_anniu3_0_sel.png" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{D5E42357-CEDE-4f6c-873B-E3B001F65396}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{A5BEC138-0699-49ba-99E9-999BD8A0E324}" Color="255,236,193" FontSize="24" Text="" Name="txtCheck1" RelativePosition="0.5,0.5" BoldFont="True" TextKey="" EnableStroke="True" StrokeColor="128,54,13" StrokeSize="4" />
+            </WZUIButton>
+            <WZUIButton Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.38" GUID="{A43E420A-58D9-48fc-A820-B67109EE44C3}" Name="btnCheckHusband" Visible="True" LuaDoneFunctionName="onCheckHusbandInfo" TouchEnable="True" LuaActionName="Normal">
+                <NormalElement Type="WZUIContainer" GUID="{81A24C94-6A1F-4e11-8DEC-A7EE32E4D6AB}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{690EA9D0-B067-454c-9AE2-ECAAD319560D}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{5F599797-F303-4b9d-A4DE-5861C4B0588B}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{832AA3CB-B0B9-4f8f-A282-9079E3398E36}" File="ui/common/common_btn_anniu3_0_sel.png" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{52C3ED5E-6057-4e22-8E24-2FF3C987A8A8}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{491CAF3E-94BA-4cdd-87F9-BA24D549835B}" Color="255,236,193" FontSize="24" Text="" Name="txtCheck2" RelativePosition="0.510484,0.5" BoldFont="True" TextKey="" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" />
+            </WZUIButton>
+            <WZUIButton Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.57" GUID="{882C6E63-302D-4498-B3FC-C18BF2E9D967}" Name="btnWorship" Visible="True" LuaDoneFunctionName="onWorship" LuaActionName="Normal">
+                <NormalElement Type="WZUIContainer" GUID="{F1D02C74-D277-40c8-A1D5-CAE3083A8246}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{18911D62-2501-4ab5-B4AB-875742B3BD44}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{D5AFFF60-AC94-4ed6-B661-6CC22AF45597}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{DAC3AE5F-EBA2-41ee-AB40-72BB40781517}" File="ui/common/common_btn_anniu10_0_sel.png" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{D057FE0A-FD7B-4024-88D6-2B028F557413}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{47EFB8CE-44D1-4793-8E79-52A315D1B697}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" RelativePosition="0.5,0.5" GrayRender="True" />
+                </DisableElement>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{55E94B87-4C10-4196-97D9-61A70B11CFD2}" Color="255,236,193" FontSize="24" Text="我要拜师" Name="txtWorship" RelativePosition="0.5,0.5" BoldFont="True" TextKey="WORSHIP_WORD" StrokeColor="0,72,3" StrokeSize="4" EnableStroke="True" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{C5D1ED30-D4EC-4d91-A82E-4F4A8BC7CB55}" Name="txtBeWorshipTimes_CellRankSeat" MaxWidth="300" RelativePosition="0.5,-0.015" AnchorPoint="0.5,1" />
+    </WZUIContainer>
+</CellRankSeat>

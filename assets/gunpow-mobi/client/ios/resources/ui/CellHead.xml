@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<CellHead GUID="{87FBA7BC-56AF-4a51-8FF3-3FCF3407BA04}">
+    <WZUIContainer AbsContentSize="100,100" GUID="{D5162BEC-DAD5-4d83-9200-AE8287095275}" LuaObjectName="CellHead" Name="CellHead" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" TouchEnable="False">
+        <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{2C5BB598-960D-4874-A802-7789F777EE54}" Name="conClipping" Scale="1">
+            <Stencil Type="WZUIImage" GUID="{4410D882-ED5C-4855-A634-09F085272009}" File="ui/city/newUI/common_shade_touxiang.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="0.65" Name="imgZheZhao_CellHead" Visible="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{CBAFD913-FCAA-407b-957E-9216D482A55F}" Name="conHead_CellHead" RelativePosition="0.5,0.44" AbsPosition="50,44" />
+        </WZUIClippingContainer>
+        <WZUIImage Type="WZUIImage" GUID="{635EF846-254C-4e08-B8D5-5714E599789C}" File="ui/city/newUI/main_icon_head.png" Scale="0.69" RelativePosition="0.5,0.5" Order="1" UseOriginSize="True" Name="imgZheZhaoYuan_CellHead" Visible="True" />
+        <WZUIContainer Type="WZUIContainer" GUID="{B316EB09-DDBE-472c-AD32-19B6B714B4C3}" Name="conVip" AbsContentSize="65,55" UseAbsSize="True" RelativePosition="0.24,0.72" Visible="True" AbsPosition="13.5881,74.3284" Scale="0.65" Order="2">
+            <WZUIImage Type="WZUIImage" GUID="{1A8D102F-9FB0-41fc-9972-1C975EB2EF30}" File="ui/common/common_icon_hgg.png" UseOriginSize="True" RelativePosition="0.5,0.572727" AbsPosition="32.5,31.5" />
+            <WZUIImage Type="WZUIImage" GUID="{9B172FCD-DFA1-458b-87D5-1DE1C684116D}" File="ui/common/commom_icon_v.png" UseOriginSize="True" RelativePosition="0.36,0.28" Name="imgVip" AbsPosition="23.4,5.5" Scale="0.42" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{B87BB40B-0D5E-46d7-A69F-91AC1A11D2BF}" Name="labelVip" CharMapFileName="ui/common_num/common_num_vip.png" Height="40" Width="22" Text="0" RelativePosition="0.611538,0.27" Alignment="Left" AnchorPoint="0,0.5" UseOriginSize="True" ScaleX="1" Scale="0.48" AbsPosition="39.75,3.5" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellHead>

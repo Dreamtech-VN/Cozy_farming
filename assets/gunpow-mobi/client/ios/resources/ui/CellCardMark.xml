@@ -1,0 +1,19 @@
+<CellCardMark GUID="{a0097748-4492-4754-9e7b-5334d3d4d58e}">
+    <WZUIContainer Type="WZUIContainer" GUID="{47a600f4-37ea-44ac-8201-9fa818a3bffc}" NameCreate="True" Name="CellCardMark" AbsContentSize="630,50" UseAbsSize="True" LuaObjectName="CellCardMark">
+        <WZUIContainer Type="WZUIContainer" GUID="{12b7e53a-b224-4239-b8c5-27d33a1a648f}">
+            <WZUIContainer Type="WZUIContainer" GUID="{4af4bb0e-4d2f-4e78-948a-d627fac6ba65}" AbsContentSize="622,32" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{208c4137-b3b2-49b3-838a-3c59409559e7}" File="ui/common/common_scale9_di73.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{aa53016a-9dc7-4183-bec1-820b4683133d}" Name="txtTitle_CellCardMark" FontSize="22" Color="255,236,193" />
+                <Button Type="WZUIButton" GUID="{f652d114-80fe-47c3-97a6-f51bdc141369}" AbsContentSize="80,80" RelativePosition="0.025,0.5" UseAbsSize="True" LuaActionName="Normal" LuaDoneFunctionName="onClickHead" Name="btnHead_CellCardMark">
+                    <NormalElement Type="WZUIContainer" GUID="{4efc5901-ef9b-46ca-9cb4-51b33ef4675b}">
+                        <WZUIImage Type="WZUIImage" GUID="{02349dfb-0340-4359-ac77-da3352969686}" File="ui/common/common_icon_shuxingtb.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="0.85" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{4015c100-00af-48c8-80de-1dc4ee63eccb}">
+                        <WZUIImage Type="WZUIImage" GUID="{1de09b47-5ee4-47b7-bcfd-4d9ee01fb263}" File="ui/common/common_icon_shuxingtb.png" UseOriginSize="True" RelativePosition="0.5,0.5" Scale="0.85" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{59fab4db-17c6-4246-94b2-4188f84145ed}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCardMark>

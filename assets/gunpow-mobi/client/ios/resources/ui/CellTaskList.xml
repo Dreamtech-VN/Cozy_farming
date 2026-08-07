@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><CellTaskList GUID="{BF3D3A12-C1AD-467e-883F-7089A746C525}">
+    <WZUIContainer AbsContentSize="230,79" GUID="{387CB7B8-5432-4561-91F7-0B52B0808DE0}" LuaObjectName="CellTaskList" Name="CellTaskList" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <WZUICheckBox GUID="{A6D8A45B-80B0-4710-90AB-0D33F821D4C8}" LuaSelectedFunctionName="onSelect" Name="selTask_CellTaskList" RelativePosition="0.521739,0.5" RelativeSize="0.96,1" SelectedIndex="0" Type="WZUICheckBox">
+            <CheckElement CapInsets="" File="common/Jigsaw/item_background2.png" GUID="{0E08800C-FBD7-4f94-9494-7AE6F0B98293}" Type="WZUI9Image"/>
+            <CheckElement CapInsets="50,15,412,44" File="common/Jigsaw/item_background_sel2.png" GUID="{D7DDEECB-05EC-4049-811B-31BDB8D292C2}" Type="WZUI9Image"/>
+        </WZUICheckBox>
+        <WZUILabelTTF ChineseLengthPolicy="1" Color="80,38,3" Dimensions="190,36" FontSize="26" GUID="{3A8CF75D-4175-4bb7-9049-8CB7D99DACC2}" MaxLength="11" Name="txtTaskName_CellTaskList" RelativePosition="0.5,0.47" Text="" Type="WZUILabelTTF"/>
+        <WZUIImage File="common/text/task_new.png" GUID="{7DA5CA2B-61C2-47a9-A822-97D06C410E2A}" Name="imgTaskStatus_CellTaskList" RelativePosition="0.209802,0.883147" Type="WZUIImage" UseOriginSize="True" Visible="True"/>
+    </WZUIContainer>
+</CellTaskList>

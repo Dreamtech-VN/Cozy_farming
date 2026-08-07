@@ -1,0 +1,17 @@
+﻿<CellGVGRankList GUID="{261895c4-ad09-4792-aaad-4306cb400d5a}">
+    <WZUIContainer Type="WZUIContainer" GUID="{2ef7a5ea-23e3-43fd-bbe8-cae178bc815b}" AbsContentSize="734,102" UseAbsSize="True" Name="CellGVGRankList" LuaObjectName="CellGVGRankList" NameCreate="False">
+        <WZUI9Image Type="WZUI9Image" GUID="{7b2857e7-1c76-4ac6-86d1-ed5b88ccf5c3}" File="ui/common/common_scale9_di7.png" Name="imgBg_CellGVGRankList" />
+        <WZUIImage Type="WZUIImage" GUID="{95a2341a-722b-4102-8edb-1d2a713ac5eb}" File="ui/common/common_icon_1st.png" UseOriginSize="True" RelativePosition="0.0756444,0.659521" Name="imgRank_CellGVGRankList" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{0addf997-ae06-4d6e-8ded-7d479fc725ed}" LabelStyleKey="C14_F22" Text="" RelativePosition="0.0724776,0.5" Name="txtRank_CellGVGRankList" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b020c804-e4d4-40ea-85c4-8d611123b5f2}" LabelStyleKey="C4_F20" Text="" RelativePosition="0.325527,0.636733" Name="txtCommName_CellGVGRankList" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8ef5c812-4c81-42bd-9390-594a517ab72b}" LabelStyleKey="C13_F20" Text="" RelativePosition="0.325527,0.39745" Name="txtCommLong_CellGVGRankList" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b6cd9656-1942-4a59-afed-81a20926e1af}" LabelStyleKey="C13_F20" Text="" RelativePosition="0.568094,0.5" Name="txtIntegral_CellGVGRankList" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{a53ddb88-fbbe-4cb9-98f8-5a5698de1ed1}" LabelStyleKey="C12_F20" Text="" RelativePosition="0.807333,0.5" Name="txtWinningRate_CellGVGRankList" MaxLength="100" Dimensions="0,0" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{090c657e-99c8-440e-8e32-c7c53c8444d0}" Name="txtPlayerInfo_CellGVGRankList" LabelStyleKey="C13_F20" Text="" RelativePosition="0.322249,0.5" />
+        <Button Type="WZUIButton" GUID="{366ac24d-ad85-4d86-bd99-4a1374013c63}" LuaDoneFunctionName="onClickPlayer">
+            <NormalElement Type="WZUIContainer" GUID="{defeb0c3-32be-412d-87a9-bd9f7d23bbe9}" />
+            <SelectElement Type="WZUIContainer" GUID="{5850b4b5-b235-45fd-95d2-4be000892dd1}" />
+            <DisableElement Type="WZUIContainer" GUID="{fc2cc417-e3b9-4b3a-8df6-26f414fd7616}" />
+        </Button>
+    </WZUIContainer>
+</CellGVGRankList>

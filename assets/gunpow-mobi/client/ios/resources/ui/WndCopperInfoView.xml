@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<WndCopperInfoView GUID="{D8D78A2B-F0C7-45c9-BF66-EF6C9A766ACF}">
+    <WZUIWindow Type="WZUIWindow" GUID="{7059F23D-FC0C-4c7e-AAD7-A8793EB2A855}" AbsContentSize="330,100" LuaObjectName="WndCopperInfoView" Name="WndCopperInfoView" NameCreate="True" AnchorPoint="1,1" UseAbsSize="True" RelativePosition="1,1">
+        <WZUIContainer Type="WZUIContainer" GUID="{AAAAC039-EA74-4138-ACA4-5DFE6ECC374F}" Name="" LuaObjectName="" NameCreate="False" RelativePosition="0,0.5" AbsContentSize="260,84" AnchorPoint="0,0.5" ShowAll="True" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{AC618B46-25FA-4db5-8CDC-A8F7403BE26D}" File="ui/common/common_scale9_di13.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{522C046C-848E-4a3c-BE2B-8F8298E65B0C}" RelativeSize="1,0.5" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{E0FAA596-124F-485e-8959-3821CB96B028}" Name="ftbHurt_WndCopperInfoView" AnchorPoint="0,0.5" RelativePosition="0.03,0.5" MaxWidth="400" Scale="1" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{06294531-D343-45cf-AC70-0051A21C44FC}" AbsContentSize="240,2" UseAbsSize="True">
+                <WZUIImage Type="WZUIImage" GUID="{A392CD16-8D36-4ef6-8B93-A965E0D3547F}" File="ui/common/common_scale9_fengexian.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{E9C8E716-BBA3-4006-B93E-5B94BFDECA52}" AbsContentSize="" UseAbsSize="False" RelativePosition="0,0" AnchorPoint="0,0" RelativeSize="1,0.5">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{56EE04DE-1924-4c05-87A2-C63C3AFAE1E1}" Color="255,223,116" FontSize="20" TextKey="DAILY_LOSE_DESC3" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.03,0.5" Name="txtCopper_WndCopperInfoView" />
+                <WZUIImage Type="WZUIImage" GUID="{CDD8EDEC-EE90-42eb-AA46-6816E4ED9001}" File="ui/common/common_icon_jinbi.png" UseOriginSize="True" RelativePosition="0.461575,0.5" Scale="0.8" Name="imgCopperIcon_WndCopperInfoView" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{F6ACECDF-F2CB-47d2-A036-F77DDA4010D1}" FontSize="20" Color="255,236,193" Text="100000" RelativePosition="0.565692,0.5" Name="copperNum_WndCopperInfoView" AnchorPoint="0,0.5" Alignment="Left" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCopperInfoView>

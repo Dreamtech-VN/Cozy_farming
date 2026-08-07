@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" ?>
+<CellJumpButton GUID="{1262D2C7-DD67-4b91-B37E-8EC8125CCD5F}">
+    <WZUIContainer AbsContentSize="214,72" GUID="{453C6FFE-9421-425b-AD39-F14AEAC6F44B}" LuaObjectName="CellJumpButton" Name="CellJumpButton" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer GUID="{B99DD93B-4D39-434d-A771-C808161AA647}" Type="WZUIContainer" AbsContentSize="214,72" UseAbsSize="True" ShowAll="False" Name="conAll_CellJumpButton">
+            <WZUIButton AbsContentSize="214,72" GUID="{ECBCDBC3-1CBB-4cdb-85C7-194B6E1F017B}" LuaDoneFunctionName="OnClick" Name="btnsyn_CellJumpButton" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="False" LuaActionName="Normal">
+                <NormalElement GUID="{EA5F0C91-5E59-461a-902A-45D17244D1A4}" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_btn_anniu16.png" GUID="{A0A0C0BB-FA0B-4ba4-B5DE-8D92797AEB8F}" RelativePosition="0.5,0.5" Scale="1" Type="WZUIImage" OpenAsyncLoadCallBack="False" GrayRender="False" IsAsyncLoad="False" Opacity="255" />
+                </NormalElement>
+                <SelectElement GUID="{A7A50E89-FC7F-4560-B3F9-3C4C632BE9D2}" Type="WZUIContainer" Scale="1" ScaleX="1" ScaleY="1">
+                    <WZUIImage File="ui/common/common_btn_anniu16_sel.png" GUID="{2433C3EA-FDF7-407c-8978-D168E43B49DA}" Scale="1" Type="WZUIImage" />
+                </SelectElement>
+                <DisableElement GUID="{7FCCBE04-19A8-4f39-A5F5-6E518060EFA2}" Type="WZUIContainer">
+                    <WZUIImage File="ui/common/common_btn_anniu13.png" GUID="{8FD3DBA9-C31B-4c0c-97F7-2DAE1F3DE9C5}" Scale="1" Type="WZUIImage" UseOriginSize="False" />
+                </DisableElement>
+                <WZUILabelTTF BoldFont="True" Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{D34923DC-165B-42b2-B574-048F24957373}" Name="txtDesc_CellJumpButton" RelativePosition="0.5,0.5" ShadowColor="0,0,0" ShadowOffset="0,0" StrokeColor="132,66,29" StrokeOffset="0,0" StrokeSize="4" Type="WZUILabelTTF" Text="" Alignment="Center" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellJumpButton>

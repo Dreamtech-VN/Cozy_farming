@@ -1,0 +1,59 @@
+﻿<WndSingleSellRune GUID="{60195836-2981-4d6b-84bf-11a633f07c6d}">
+    <WZUIWindow Type="WZUIWindow" GUID="{a4cdac52-7f97-4a6b-9efe-24cc68d4ce10}" LuaObjectName="WndSingleSellRune" Name="WndSingleSellRune" AbsContentSize="332,322" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{f9fb7f68-0244-430f-b617-e74a04113ab4}" AbsContentSize="332,322" UseAbsSize="True" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{21f660bb-4884-4d5b-be34-2473e6b3aea8}" File="ui/common/common_scale9_di19.png" CapInsets="60,80,1,1" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{d3945690-2bbd-4c34-8219-3261618a623f}" AbsContentSize="332,56" UseAbsSize="True" RelativePosition="0.50088,0.904765" Visible="True">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{60caad4e-8f59-4831-827a-2277e5922c26}" TextKey="RUNEBOOK8" FontSize="26" LabelStyleKey="SMALL_WINDOW_TITLE" />
+            <Button Type="WZUIButton" GUID="{0f3ff2f6-7b8a-40d1-b0fe-91b3719d9318}" AbsContentSize="45,45" UseAbsSize="True" RelativePosition="0.900469,0.451985" LuaDoneFunctionName="onClose">
+                <NormalElement Type="WZUIContainer" GUID="{e8b186a1-8b73-4dc1-a4eb-76eb6954e6a2}">
+                    <WZUIImage Type="WZUIImage" GUID="{667af4fe-19ab-4ea4-a5f8-14c84bebfd9f}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{a1fc9bef-0e37-4a10-baab-fbab257647e3}">
+                    <WZUIImage Type="WZUIImage" GUID="{5afa17db-2ad5-48c9-bb2e-cb26e4a90dd1}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{3c45ba2c-7506-4d9f-ae20-3a681da2e3a5}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{c880af88-6544-4894-a2cf-3008fba08ebb}" AbsContentSize="317,150" UseAbsSize="True" RelativePosition="0.5,0.584142">
+            <WZUI9Image Type="WZUI9Image" GUID="{f9b9d57f-bb30-4e75-b462-c54217982a42}" File="ui/common/common_scale9_di20.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{b66b6e7b-5fc9-49f1-ae24-ecbfa1040f7f}" AbsContentSize="303,125" UseAbsSize="True" RelativePosition="0.5,0.493333">
+                <WZUI9Image Type="WZUI9Image" GUID="{495e54d3-91a4-44f2-9eb3-e332c5e3621d}" File="ui/common/common_scale9_di18.png" />
+                <WZUIContainer Type="WZUIContainer" GUID="{961f41eb-6f44-4239-acff-5237f1e3ae44}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.194903,0.628533">
+                    <WZUIImage Type="WZUIImage" GUID="{eee2e57a-7c48-4760-a688-01f808b4be8a}" Name="imgRune_WndSingleSellRune" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{edfc5045-df98-47c7-ac83-b12440e949ed}" RelativePosition="0.194903,0.1928" FontSize="18" Name="txtNum_WndSingleSellRune" Color="255,227,116" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" />
+                <WZUI9Image Type="WZUI9Image" GUID="{080d1d89-96da-4737-9e70-c7cdf74f34b7}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" Rotation="90" RelativePosition="0.367987,0.5" ScaleY="1" RelativeSize="1,1" ScaleX="0.55" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{166b21f1-8552-4b95-aadd-e18887e2452e}" RelativePosition="0.473158,0.818578" FontSize="18" Name="txtName_WndSingleSellRune" Alignment="Left" AnchorPoint="0,0.5" Color="99,255,95" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a766517a-9b34-4491-bfa7-9c2426f2650a}" RelativePosition="0.473158,0.586578" FontSize="18" Name="txtProperty1_WndSingleSellRune" Alignment="Left" AnchorPoint="0,0.5" Color="255,227,116" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{30dc3cfd-d361-481f-9dc7-e566b8b7de1e}" RelativePosition="0.467144,0.386222" FontSize="18" Name="txtProperty2_WndSingleSellRune" Alignment="Left" AnchorPoint="0,0.5" Color="255,227,116" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{17118c2e-6887-408d-a689-033c07841783}" RelativePosition="0.467144,0.1848" FontSize="18" Name="txtProperty3_WndSingleSellRune" Alignment="Left" AnchorPoint="0,0.5" Color="255,227,116" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{5331f15d-157b-4cb3-9dd0-cd8349a02b6f}" RelativePosition="0.707921,0.580177" FontSize="18" Name="txtPropertyVal1_WndSingleSellRune" Alignment="Left" AnchorPoint="0,0.5" Color="99,255,95" EnableStroke="True" StrokeSize="4" StrokeColor="0,72,3" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{84fed0f8-a6e4-409f-a860-348f283a6c7c}" RelativePosition="0.707921,0.380177" FontSize="18" Name="txtPropertyVal2_WndSingleSellRune" Alignment="Left" AnchorPoint="0,0.5" Color="99,255,95" EnableStroke="True" StrokeColor="0,72,3" StrokeSize="4" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{daec7981-73db-450c-9c00-175d82f799e5}" RelativePosition="0.707921,0.188177" FontSize="18" Name="txtPropertyVal3_WndSingleSellRune" Alignment="Left" AnchorPoint="0,0.5" Color="99,255,95" EnableStroke="True" StrokeColor="0,72,3" StrokeSize="4" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{1129bf00-2422-4dbc-a35d-7cc8eca45af7}" AbsContentSize="330,115" UseAbsSize="True" RelativePosition="0.5,0.17646" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{cafcd9dc-05b2-4565-abb7-9a9f29f4a745}" File="ui/common/common_scale9_heidi3.png" UseOriginSize="True" ScaleY="0.72" ScaleX="0.95" RelativePosition="0.5,0.830435" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{07d39e01-654b-42de-abfe-72dcaddba18b}" RelativePosition="0.245734,0.831595" AnchorPoint="0,0.5" Alignment="Left" EnableStroke="True" FontSize="20" Color="255,236,193" StrokeSize="4" StrokeColor="79,60,48" Text="" TextKey="SELLGET">
+                <WZUIImage Type="WZUIImage" GUID="{073af1df-0f71-4481-a1dc-9a613e517420}" AnchorPoint="0,0.5" RelativePosition="1,0.5" UseOriginSize="True" File="shopitems/common_icon_fuwensuipian.png" Scale="0.78">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b55bc0c2-a1ed-46f7-9a85-64b10bf7d98d}" FontSize="20" EnableStroke="True" StrokeSize="4" StrokeColor="79,60,48" Color="255,227,116" RelativePosition="1,0.5" Text="" AnchorPoint="0,0.5" Alignment="Left" Name="txtPrice_WndSingleSellRune" />
+                </WZUIImage>
+            </WZUILabelTTF>
+            <Button Type="WZUIButton" GUID="{1e0a585d-6164-4645-8f8e-94391abfdb29}" AbsContentSize="135,60" UseAbsSize="True" RelativePosition="0.5,0.37314" LuaDoneFunctionName="onSell" Name="btnSale_WndSingleSellRune">
+                <NormalElement Type="WZUIContainer" GUID="{bfb0144b-5d20-4f77-928e-0348123b24d0}">
+                    <WZUIImage Type="WZUIImage" GUID="{0d6ff9f2-de08-4a31-ad9f-9cd90bc94831}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{20207423-37dc-4a75-aa6b-f9bfa82d1dd9}" Color="255,236,193" EnableStroke="True" FontSize="24" StrokeColor="0,72,3" StrokeSize="4" Text="" Name="txtStatus_WndSingleSellRune" TextKey="SELL" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{a6eb4ed3-c6e4-4691-9ec8-8f4aeb90ee8f}">
+                    <WZUIImage Type="WZUIImage" GUID="{2dd350c9-4842-4779-be75-96f8003133c4}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" Scale="1" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9ea90720-0b23-4dad-8904-4ea42edcbe25}" Color="255,236,193" EnableStroke="True" FontSize="24" StrokeColor="0,72,3" StrokeSize="4" Text="" Name="txtStatus_WndSingleSellRune" TextKey="SELL" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{36c8d9b2-145d-4df2-a8a7-52875aa01e38}">
+                    <WZUIImage Type="WZUIImage" GUID="{706313fa-3857-48f9-bea9-d007b88e2b68}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" Scale="1" GrayRender="True" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4d452b9e-282a-4d96-93e1-398cc605d168}" Color="255,236,193" EnableStroke="True" FontSize="24" StrokeColor="79,60,48" StrokeSize="4" Text="" Name="" TextKey="SALE_SUCCESS" />
+                </DisableElement>
+            </Button>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSingleSellRune>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SceneKingEntrance GUID="{d25ff791-46d7-4ac7-b44a-0a9142da7680}">
+    <WZUIFrame LuaObjectName="SceneKingEntrance" Name="SceneKingEntrance" NameCreate="True" Type="WZUIFrame" GUID="{9c8f1ad6-8783-48da-a863-8e63c983ac42}">
+        <WZUIContainer Type="WZUIContainer" GUID="{14dc292d-0afc-4ca9-b352-5083f50499f9}">
+            <WZUIImage Type="WZUIImage" GUID="{bc7422ef-58fd-4d54-9775-c47a3a86dc00}" File="ui/kingBattle/300.png" Color="200,200,200" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{1a54d972-9d7f-4541-9dd9-967255dbea64}">
+            <Button Type="WZUIButton" GUID="{1dd700b2-ae62-43da-92b1-43f7cc418e58}" LuaDoneFunctionName="onClose" AbsContentSize="47,47" UseAbsSize="True" RelativePosition="0.005,0.995" AnchorPoint="0,1" ShowAll="True">
+                <NormalElement Type="WZUIContainer" GUID="{0fcef3da-36e5-4110-af51-3d5e81f82879}">
+                    <WZUIImage Type="WZUIImage" GUID="{1156bbc2-db63-45c2-95cd-3daaa8cda47e}" File="ui/common/back_003.png" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{6020f7da-386f-454b-89ba-9fc78e9fcc14}">
+                    <WZUIImage Type="WZUIImage" GUID="{840a864b-475d-4cb4-9fd0-19068ba93dcb}" File="ui/common/back_003.png" Scale="1.1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{20f573bd-0a0f-40c7-96a2-0d98a6d8f55f}" />
+            </Button>
+            <Button Type="WZUIButton" Name="btnAbout_SceneKingEntrance" GUID="{da350a16-de56-4142-accd-6764afea0661}" LuaDoneFunctionName="onAbout" AbsContentSize="47,47" UseAbsSize="True" RelativePosition="0.915,0.995" AnchorPoint="1,1" ShowAll="True">
+                <NormalElement Type="WZUIContainer" GUID="{c3ab020f-fdcf-4015-bae6-9ea424c01a1e}">
+                    <WZUIImage Type="WZUIImage" GUID="{3e199726-6aa4-4606-8659-059c5e74ff03}" File="ui/kingBattle/301.png" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{37dcd112-db01-4c38-97fd-0962d827018c}">
+                    <WZUIImage Type="WZUIImage" GUID="{164709be-1ec8-4b15-bd5d-08c3461f74dd}" File="ui/kingBattle/301.png" Scale="1.1" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{f75f68e4-ce80-4eef-b5d1-166b33d412de}" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{33398eab-311a-4dcf-8452-50dd059ed5d2}" ShowAll="True" AbsContentSize="0,0" UseAbsSize="False">
+                <WZUIImage Type="WZUIImage" GUID="{040b310b-7fe1-40c9-9548-186745aa35fb}" File="ui/kingBattle/303.png" UseOriginSize="True" RelativePosition="0.505,0.835" />
+                <WZUIImage Type="WZUIImage" GUID="{16804c52-1e9b-42a9-8467-e78d9b01729b}" File="ui/kingBattle/302.png" UseOriginSize="True" RelativePosition="0.51,0.735" />
+                <WZUIContainer Type="WZUIContainer" GUID="{347eb238-1b2f-432b-8f8a-5d3abb6f307c}" AbsContentSize="520,95" UseAbsSize="True" RelativePosition="0.5,0.525" Visible="True">
+                    <Button Type="WZUIButton" GUID="{d7fadbdc-8e04-4bdf-ae62-59eacf7cf620}" LuaDoneFunctionName="onFamousKing" AbsContentSize="116,93" UseAbsSize="True" RelativePosition="0.125,0.5" AnchorPoint="0.5,0.5" ShowAll="False">
+                        <NormalElement Type="WZUIContainer" GUID="{f118b394-eeb2-491c-89fa-76d97c8358a1}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{0a223a5f-8195-457a-9177-f4da49f87aa4}" File="ui/kingBattle/304.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{0cb43dad-8f88-409f-9d27-1446f2f43d61}" Scale="1.1">
+                            <WZUI9Image Type="WZUI9Image" GUID="{d384381a-6bc6-46dc-91a2-0bd689e79a98}" File="ui/kingBattle/304.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{5c7af203-0818-4c49-99f8-23a3c49433fa}" />
+                    </Button>
+                    <Button Type="WZUIButton" GUID="{b21643cb-e1ce-4ebf-8910-53d0625a3293}" LuaDoneFunctionName="onRank" AbsContentSize="116,93" UseAbsSize="True" RelativePosition="0.375,0.5" AnchorPoint="0.5,0.5" ShowAll="False">
+                        <NormalElement Type="WZUIContainer" GUID="{8cdf1422-4518-404f-80db-42873f289445}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{db5c99c5-4bef-44ce-b928-ea3a0cb62b34}" File="ui/kingBattle/304.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{325f2ab4-c0d5-4076-888b-72afc2e5d22a}" Scale="1.1">
+                            <WZUI9Image Type="WZUI9Image" GUID="{e57c065b-0273-45e5-bd75-8f81886f5d8c}" File="ui/kingBattle/304.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{889d4939-5574-4cee-a687-b834ea8a2885}" />
+                    </Button>
+                    <Button Type="WZUIButton" GUID="{061f6391-8065-4aee-bacb-f17c981a9a0a}" LuaDoneFunctionName="onShowAward" AbsContentSize="116,93" UseAbsSize="True" RelativePosition="0.625,0.5" AnchorPoint="0.5,0.5" ShowAll="False">
+                        <NormalElement Type="WZUIContainer" GUID="{9db7dc93-bd5a-43e3-bc2c-f0f43b2a42f5}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{099a9969-5530-4ef1-8c4f-3b3668508f21}" File="ui/kingBattle/304.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{a144be26-157a-4a37-817d-7cbd8a3fd059}" Scale="1.1">
+                            <WZUI9Image Type="WZUI9Image" GUID="{acb94c05-41e2-4d60-8422-7b7f36f356d3}" File="ui/kingBattle/304.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{8aecff9b-3b03-48c9-a901-998b0bf1cfe3}" />
+                    </Button>
+                    <Button Type="WZUIButton" GUID="{13d86d5f-f02e-4505-90f7-5935cfe4d28a}" LuaDoneFunctionName="onShop" AbsContentSize="116,93" UseAbsSize="True" RelativePosition="0.875,0.5" AnchorPoint="0.5,0.5" ShowAll="False">
+                        <NormalElement Type="WZUIContainer" GUID="{7d4ad69f-b1ee-47a2-94b8-1b980173c791}">
+                            <WZUI9Image Type="WZUI9Image" GUID="{4b5689d8-8a7f-441c-91e4-fc3f07197043}" File="ui/kingBattle/304.png" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{d13c1e60-e394-4786-bbc0-f894020efeea}" Scale="1.1">
+                            <WZUI9Image Type="WZUI9Image" GUID="{95cfb2df-6e20-4583-af0c-2bdd83db8195}" File="ui/kingBattle/304.png" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{1670e636-8d85-4101-8e1c-32fc60711c0c}" />
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" Name="txtFamousButton_SceneKingEntrance" GUID="{19c2c0f1-cffa-4cb4-9802-f9450642bec7}" RelativePosition="0.125,0.5" FontSize="30" Text="" Dimensions="70,0" Color="162,76,15" TouchEnable="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" Name="txtRankButton_SceneKingEntrance" GUID="{4b6d4898-1c75-408b-ba08-36ad54a125d6}" RelativePosition="0.375,0.5" FontSize="30" Text="" Dimensions="70,0" Color="162,76,15" TouchEnable="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" Name="txtAwardButton_SceneKingEntrance" GUID="{b23ff6fa-3792-4459-960a-40fbe5a5cccf}" RelativePosition="0.625,0.5" FontSize="30" Text="" Dimensions="70,0" Color="162,76,15" TouchEnable="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" Name="txtShopButton_SceneKingEntrance" GUID="{1da7d83c-4b87-42a4-8bf3-e447ae588c72}" RelativePosition="0.875,0.5" FontSize="30" Text="" Dimensions="70,0" Color="162,76,15" TouchEnable="False" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" RelativeSize="1,0.05" RelativePosition="0.5,0.365" GUID="{e63ae98d-249f-495e-b286-0228df848950}">
+                    <WZUILabelTTF Type="WZUILabelTTF" FontSize="20" Color="255,255,255" AnchorPoint="1,0.5" RelativePosition="0.49,0.5" Name="txtMoneyTitle_SceneKingEntrance" Visible="False" GUID="{c6eccb56-6b7b-4028-8fab-716c1fbb6018}" EnableStroke="True" StrokeSize="4" StrokeColor="98,24,11" />
+                    <WZUILabelTTF Type="WZUILabelTTF" AnchorPoint="0,0.5" Text="" FontSize="20" Color="241,214,137" RelativePosition="0.5,0.5" Name="txtMoney_SceneKingEntrance" Visible="False" GUID="{ab0f8c27-a40a-4c0a-a34f-bba6c6275f22}" EnableStroke="True" StrokeSize="4" StrokeColor="98,24,11" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" RelativeSize="1,0.05" RelativePosition="0.5,0.31" GUID="{f6bcb067-3933-48cb-814e-f54a225bf549}">
+                    <WZUILabelTTF Type="WZUILabelTTF" FontSize="20" Color="255,255,255" AnchorPoint="1,0.5" RelativePosition="0.49,0.5" Name="txtScoreTitle_SceneKingEntrance" Visible="False" GUID="{2cb9cd9e-b65f-403d-8abf-21cb93d52bb5}" EnableStroke="True" StrokeSize="4" StrokeColor="98,24,11" />
+                    <WZUILabelTTF Type="WZUILabelTTF" AnchorPoint="0,0.5" Text="" FontSize="20" Color="241,214,137" RelativePosition="0.5,0.5" Name="txtScore_SceneKingEntrance" Visible="False" GUID="{b24b9e77-b58d-4546-aef4-c99d1b4e3e5e}" EnableStroke="True" StrokeSize="4" StrokeColor="98,24,11" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" RelativeSize="1,0.05" RelativePosition="0.5,0.255" GUID="{50e73677-a268-4e92-9385-496aebad1a6a}">
+                    <WZUILabelTTF Type="WZUILabelTTF" FontSize="20" Color="255,255,255" AnchorPoint="1,0.5" RelativePosition="0.49,0.5" Name="txtRankTitle_SceneKingEntrance" Visible="False" GUID="{6615eae7-c37d-40a4-ac77-1603b4843da9}" EnableStroke="True" StrokeSize="4" StrokeColor="98,24,11" />
+                    <WZUILabelTTF Type="WZUILabelTTF" AnchorPoint="0,0.5" Text="" FontSize="20" Color="241,214,137" RelativePosition="0.5,0.5" Name="txtRank_SceneKingEntrance" Visible="False" GUID="{cbd6e215-7464-4713-af58-38a974cce2aa}" EnableStroke="True" StrokeSize="4" StrokeColor="98,24,11" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{2e017f19-1ede-409d-affc-5a62fe33cd35}" RelativeSize="1,0.08" RelativePosition="0.5,0.085">
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{c15e9802-b7eb-4247-bf0a-e6c17b058f8c}" FontSize="22" Color="255,255,255" AnchorPoint="1,0.5" RelativePosition="0.49,0.5" Name="txtRestTimeTitle_SceneKingEntrance" Visible="False" EnableStroke="True" StrokeSize="4" StrokeColor="98,24,11" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{0860aceb-571e-4343-92c8-41fdf7a94e63}" AnchorPoint="0,0.5" FontSize="24" Color="255,246,201" RelativePosition="0.5,0.5" Name="txtRestTime_SceneKingEntrance" Visible="False" EnableStroke="True" StrokeSize="4" StrokeColor="98,24,11" />
+                </WZUIContainer>
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{8b71e6c6-541a-4846-a244-d7d9012c3aab}" RelativePosition="0.5,0.18" Name="txtOpenTime_SceneKingEntrance" MaxWidth="960" Visible="False" />
+                <WZUIContainer Type="WZUIContainer" AbsContentSize="137,49" UseAbsSize="True" RelativePosition="0.48,0.18" Visible="False" GUID="{64bc4b58-ee05-45ea-a971-dd2a5ca6c5cd}" Name="conJoinBattle_SceneKingEntrance">
+                    <Button Type="WZUIButton" LuaDoneFunctionName="onJoinBattle" AbsContentSize="0,0" UseAbsSize="False" RelativePosition="0.5,0.5" GUID="{b0993b61-ee53-4b96-a427-0abc5c23b8e8}">
+                        <NormalElement Type="WZUIContainer" GUID="{fbbbe5c0-f939-41a6-812b-d5a3c14275b3}">
+                            <WZUI9Image Type="WZUI9Image" File="" GUID="{077e4ed1-80c0-4106-8803-5084ca6f048f}" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{6e1b2c35-30f0-4b7b-bdee-273286ec4794}" Scale="1.1">
+                            <WZUI9Image Type="WZUI9Image" File="" GUID="{63d9b78e-ad22-4e6a-8ebc-8082ee7df279}" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{b39b8c47-0ef1-4b20-a148-44faf3eb49ab}" />
+                    </Button>
+                    <WZUILabelTTF Type="WZUILabelTTF" Name="txtJoinBattle_SceneKingEntrance" GUID="{5a4df33d-460c-446a-ad82-9198be5c824a}" FontSize="24" Color="162,76,15" TouchEnable="False" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneKingEntrance>

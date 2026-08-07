@@ -1,0 +1,41 @@
+﻿<CellRechargePacks GUID="{e96d46c3-482e-4386-a13f-a975e0433b73}">
+    <WZUIContainer Type="WZUIContainer" GUID="{d2eb6d69-7ef8-4470-9584-f138c2ff2053}" Name="CellRechargePacks" NameCreate="True" LuaObjectName="CellRechargePacks" AbsContentSize="622,260" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Order="1">
+        <WZUIImage Type="WZUIImage" GUID="{7d9a2e59-5686-4878-8af9-410adb25894d}" File="ui/anniversary/zna_wenzi02.png" UseOriginSize="True" RelativePosition="0.372991,0.973088" AnchorPoint="0.5,1" />
+        <WZUIImage Type="WZUIImage" GUID="{14f8a604-210d-44cb-9a5e-6db2ba94286f}" File="ui/anniversary/znq_icon_lb.png" UseOriginSize="True" RelativePosition="0.787903,0.865396" />
+        <WZUIContainer Type="WZUIContainer" GUID="{24b318c1-fa11-4f42-9732-5739736a3b78}" AbsContentSize="622,5" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+            <WZUIImage Type="WZUIImage" GUID="{5e62ac32-48f6-4b05-9c46-be1d9825a028}" File="ui/anniversary/znq_fengexian01.png" UseOriginSize="True" ScaleX="2.2" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{164ed61e-5bc0-4825-9c43-ff4e0d2e6a6d}" AbsContentSize="622,260" RelativePosition="0.409968,0.5">
+            <WZUITableContainer Type="WZUITableContainer" GUID="{05b23abc-9546-49bb-96a4-f6bf2eadbc18}" EnableMoveVertical="False" EnableHorizontalScroll="True" ColumnCount="4" CellElementHeight="1" Name="tabRechargePacksList_CellRechargePacks" AbsContentSize="622,172" UseAbsSize="True" RelativePosition="0.522508,0.365385" IsVerticalMode="True" />
+            <WZUIImage Type="WZUIImage" GUID="{47a54fe9-3e63-49ce-a7cd-583cff2c16cc}" File="ui/anniversary/znq_guangdi.png" UseOriginSize="True" AnchorPoint="0.5,0" RelativePosition="0.59164,-0.207692" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{230f2ee9-b190-47d2-bfd1-37e4c64fbe93}" AbsContentSize="150,172" UseAbsSize="True" Name="conRechargePack_CellRechargePacks" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{9ccbbdc0-3515-4e11-a930-73f4be7f381f}" File="ui/anniversary/znq_di02.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{f776e399-df70-425b-8157-fadc47a7fe21}" AbsContentSize="150,5" UseAbsSize="True" RelativePosition="0.5,0.790698">
+                <WZUIImage Type="WZUIImage" GUID="{5f829c75-bf65-4425-a45b-5c707ab29887}" File="ui/anniversary/znq_fengexian01.png" UseOriginSize="True" ScaleX="0.55" ScaleY="0.9" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{281f1df2-c6ab-4b10-a45b-8bcd8729c3f1}" LabelStyleKey="C18_F20" Text="" RelativePosition="0.5,0.884924" Name="txtPackName_CellRechargePacks" />
+            <WZUIContainer Type="WZUIContainer" GUID="{5d4531e3-a826-44ed-9891-5d4ecccbd912}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.5,0.523256" Name="conItem_CellRechargePacks" />
+            <WZUIContainer Type="WZUIContainer" GUID="{6782c3d3-8e97-4840-9e36-505b54c9f707}" AbsContentSize="150,50" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" Name="conGet_CellRechargePacks">
+                <Button Type="WZUIButton" GUID="{c5148212-e8df-4f2e-8e9a-134984e6eb92}" LuaDoneFunctionName="onRechage" Name="btn_CellRechargePacks" TouchContainerEnable="True" TouchEnable="True">
+                    <NormalElement Type="WZUIContainer" GUID="{632211c3-1912-45bc-82ec-0df5329722fd}">
+                        <WZUIImage Type="WZUIImage" GUID="{ebcbf88c-7047-45b7-9c2e-db2dc3a7ce05}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" ScaleX="0.8" ScaleY="0.7" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{4fc043c8-75ba-4a84-b2a5-ae11852096df}">
+                        <WZUIImage Type="WZUIImage" GUID="{bec40a93-bfe3-4e58-8edd-9dba8ed2a865}" File="ui/common/common_btn_anniu10_0_sel.png" UseOriginSize="True" ScaleX="0.8" ScaleY="0.7" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{54dd1c1e-095d-4987-9a1f-db0cea9a3d1a}" />
+                </Button>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{fbc7bd15-2515-4b29-8ef5-06e17ba8f4d0}" LabelStyleKey="C1_F24_S4_C4" Text="" Name="txtMonenyCount_CellRechargePacks" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{35dd3773-0402-42ca-bde0-c4ec6b61689b}" File="ui/common/commom_icon_ylq.png" UseOriginSize="True" RelativePosition="0.491173,0.242341" Name="imgStats_CellRechargePacks" Visible="False" />
+            <Button Type="WZUIButton" GUID="{8ae6033f-9cbb-487b-8d14-645de68230da}" LuaDoneFunctionName="onRechage" Name="btnGet_CellRechargePacks">
+                <NormalElement Type="WZUIContainer" GUID="{ef7b8d5d-1bab-48d3-ba6c-78f677dfe042}" />
+                <SelectElement Type="WZUIContainer" GUID="{b1ffb126-53de-4021-a54c-02ad85ce54c8}" />
+                <DisableElement Type="WZUIContainer" GUID="{7866ff12-2945-4c82-8c17-601813ac71c6}" />
+            </Button>
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{0683839e-031d-47b4-8d64-040875d8a0ed}" LabelStyleKey="C1_F18" TextKey="RECHARGE_VALUE_TIP" Text="" RelativePosition="-0.01223,-0.131819" AnchorPoint="0,0.5" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{5708718e-1109-4657-a68f-498c917d17f2}" LabelStyleKey="C1_F18" TextKey="" Text="" RelativePosition="-0.01223,-0.0548966" AnchorPoint="0,0.5" Name="txtTime_CellRechargePacks" />
+    </WZUIContainer>
+</CellRechargePacks>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" ?>
+<CellActorInfo GUID="{13A9A252-775A-4e77-B6A8-9E888BBB7B90}">
+    <WZUIContainer AbsContentSize="308,108" GUID="{4C9E7329-D3E3-4292-9C15-1A8F6573DD3E}" LuaObjectName="" Name="CellActorInfo" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{1F3CE940-016C-4847-8D51-BCFD59B5092D}" Visible="True">
+            <WZUIImage Type="WZUIImage" GUID="{6A55E458-5F03-418f-8F47-524C4CC6F24B}" File="ui/login/common_icon_hefurwk.png" UseOriginSize="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{83045865-9214-41ee-B1A2-193A1F49B9DF}" Name="conPar_CellActorInfo" Visible="False">
+                <WZUISpine Type="WZUISpine" GUID="{57085917-2243-416f-9E23-8A87730871ED}" FileAtlas="role/ui_xzjs.atlas" FileJson="role/ui_xzjs.json" AnimationName="1" Loop="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{ADA99065-C887-483f-A022-1D7D5F740876}">
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{DA775076-7D5A-4d22-B3C3-02CDC56A556C}" Name="ftbNameLv_CellActorInfo" AnchorPoint="0,0.5" MaxWidth="300" RelativePosition="0.38,0.601852" AbsPosition="116,65" />
+            <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{C955E689-DF67-4dac-B04A-4776BB72739F}" Name="ftbFight_CellActorInfo" AnchorPoint="0,0.5" MaxWidth="300" RelativePosition="0.38,0.333333" AbsPosition="116,36" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{A23A9C59-171C-44e5-8EC6-4150A5E33C49}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.181818,0.490741" AbsPosition="55.9999,53" Name="conHead_CellActorInfo" />
+        <Button Type="WZUIButton" LuaDoneFunctionName="onSelectActor" GUID="{C63F9EC3-DBB1-400f-A702-07F9C82B0AFC}">
+            <NormalElement Type="WZUIContainer" GUID="{431F74E5-DBB5-48a2-9F4A-39C45064AD8F}" />
+            <SelectElement Type="WZUIContainer" GUID="{D4260AF3-4D25-4487-BF72-FBCFC9E538CA}" />
+            <DisableElement Type="WZUIContainer" GUID="{8ABB63A0-DB79-4705-A87D-8DEAFEE0A5CA}" />
+        </Button>
+    </WZUIContainer>
+</CellActorInfo>

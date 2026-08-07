@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" ?>
+<WndSelectTipsStrengthen GUID="{A68002F0-28A6-4a9f-85BB-DD62E9167409}">
+    <WZUIWindow Type="WZUIWindow" GUID="{30309521-DBAB-46ed-8371-3906D1A96029}" LuaObjectName="WndSelectTipsStrengthen" Name="WndSelectTipsStrengthen" AbsContentSize="390,535" UseAbsSize="True" NameCreate="True" LuaTouchBeganFunction="onBeginTouch" ShowAll="True" RelativePosition="0.5,0.49">
+        <WZUIContainer Type="WZUIContainer" GUID="{DCC6C0A5-3A89-416b-8B8D-8D1D22C6077E}" AbsContentSize="390,535" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{64973518-DE1D-4920-A564-4B717D2E629F}" File="ui/common/common_scale9_di5.png" CapInsets="60,60,110,60" />
+            <WZUIContainer Type="WZUIContainer" GUID="{1A3E6349-7F11-45c7-8740-3763E354A35B}" AbsContentSize="376,410" UseAbsSize="True" RelativePosition="0.5,0.508">
+                <WZUI9Image Type="WZUI9Image" GUID="{87135193-3762-4fd4-BAB5-B7AB11A6D888}" File="ui/common/common_scale9_di6.png" RelativePosition="0.5,0.5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{62C54CBC-79A6-4ed9-A141-BD1C094A4629}" RelativeSize="0.95,0.1" RelativePosition="0.5,0.988" AnchorPoint="0.5,1">
+                <Button Type="WZUIButton" RelativeSize="0.15,1" RelativePosition="0.937416,0.5" LuaDoneFunctionName="onCloseBtnClicked" GUID="{AE902B0C-0B6A-430a-BA65-55E396D77886}" Visible="True" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" RelativePosition="0.5,0.5" GUID="{6517608D-8D2E-4131-A234-86CA1A9B8201}">
+                        <WZUIImage Type="WZUIImage" GUID="{74A3A131-BA2F-405a-8A00-45AD4C3637F9}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{6C35F8FA-FAC7-45d1-A19D-81DF1AF334C6}">
+                        <WZUIImage File="ui/common/common_icon_guanbi_sel.png" GUID="{4B053E7F-7DD7-439e-B484-E3EB56E0A1D1}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" Scale="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{1D9642EF-D4FB-449e-B348-D0A5AF557E89}" />
+                </Button>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{42EA306A-D61B-405e-B826-E1F3A5E39708}" FontSize="24" Text="标题" Name="txtTipsName_WndSelectTipsStrengthen" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.5" Color="255,236,193" StrokeSize="4" StrokeColor="132,66,29" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{EE2880DD-DAA7-496d-9D7C-5EF2E24AE76E}" RelativeSize="0.95,0.75" RelativePosition="0.5,0.504054">
+                <WZUITableContainer Type="WZUITableContainer" GUID="{D817CC29-63B4-4308-BEA0-893B87150874}" Name="tbTipsCell_WndSelectTipsStrengthen" RelativeSize="0.95,0.95" EnableMoveHorizontal="False" CellElementHeight="0.26" AbsContentSize="380,400" UseAbsSize="True" />
+                <WZUIImage Type="WZUIImage" GUID="{4B2B8364-876F-43be-BA13-6766317B952E}" File="ui/common/common_icon_fanhui.png" UseOriginSize="True" RelativePosition="0.162166,0.864876" Scale="0.8" Name="imgTeach_WndSelectTipsStrengthen" Order="-1" Visible="False" AbsPosition="60.0826,347.032" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{54E3AC0A-1FA0-45bd-A0BD-2FA25C81EB7C}" Name="conComfirmBtn_WndSelectTipsStrengthen" Visible="False">
+                <Button Type="WZUIButton" RelativePosition="0.5,0.0699607" GUID="{CBB8E318-3B72-49fa-9FD4-09B9D78560CB}" AbsContentSize="116,56" UseAbsSize="True" LuaDoneFunctionName="onConfirmBtnClick" Name="btnComfirm_WndSelectTipsStrengthen" Visible="True" Order="2" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" RelativePosition="0.5,0.5" GUID="{36891C96-7774-4df2-A22C-15D562E2452B}">
+                        <WZUIImage Type="WZUIImage" GUID="{92F9EAC4-28A9-4f1a-8280-63AA9D4146A5}" File="ui/common/common_btn_anniu10.png" UseOriginSize="False" RelativePosition="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8AD460BF-A7A9-4aee-878D-0DC879E6E14D}" Text="" TextKey="CONFIRM" FontSize="20" Color="255,236,193" Visible="True" LuaObjectName="" Name="txtComfirmWord1_WndSelectTipsStrengthen" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.5" StrokeColor="64,128,1" StrokeSize="1" LabelStyleKey="SMALL_GREEN_BTN" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{AF21B0D7-7FB9-4ca2-B3A8-45E99A7C2FE1}">
+                        <WZUIImage Type="WZUIImage" GUID="{64B7621D-D6DD-4237-A60D-E087CC0C678F}" UseOriginSize="False" File="ui/common/common_btn_anniu10_sel.png" RelativePosition="0.5,0.5" Scale="1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{19CCE366-76E0-4460-B51A-36C9854DA673}" Text="" TextKey="CONFIRM" FontSize="20" Color="255,236,193" Visible="True" Name="txtComfirmWord2_WndSelectTipsStrengthen" EnableStroke="True" BoldFont="True" RelativePosition="0.5,0.5" StrokeSize="1" StrokeColor="64,128,1" LabelStyleKey="SMALL_GREEN_BTN" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{82ED83F6-46CC-4ffb-8F30-1425D0D8CCCA}">
+                        <WZUIImage Type="WZUIImage" GUID="{71FD7F03-290B-4149-8F41-D551411E6292}" UseOriginSize="False" File="ui/common/common_btn_anniu10.png" GrayRender="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4C796B33-0381-4416-B3D2-9DF13B32DE3A}" Text="" TextKey="CONFIRM" Visible="True" Name="txtComfirmWord3_WndSelectTipsStrengthen" FontSize="20" BoldFont="True" Color="180,180,180" StrokeColor="128,128,128" StrokeSize="1" LabelStyleKey="SMALL_GRAY_BTN" RelativePosition="0.5,0.5" />
+                    </DisableElement>
+                </Button>
+                <WZUIButton Type="WZUIButton" RelativePosition="0.5,0.0699607" GUID="{94203A72-DABC-49fa-8FF9-876790B2CED6}" AbsContentSize="116,56" UseAbsSize="True" LuaDoneFunctionName="onConfirmBtn3Click" Name="btnComfirm3_WndSelectTipsStrengthen" Visible="False" Order="2" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" RelativePosition="0.5,0.5" GUID="{D3A91B99-5300-4d95-8E69-06F5E5DA0331}">
+                        <WZUIImage Type="WZUIImage" GUID="{0DAE1859-0188-4208-84D3-6F96F1C9FE53}" File="ui/common/common_btn_anniu10.png" UseOriginSize="False" RelativePosition="0.5,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{11B70D46-5975-47fa-81E2-732FA5A8DB21}" Text="" TextKey="CONFIRM" FontSize="20" Color="255,236,193" Visible="True" LuaObjectName="" Name="txtComfirmWord1_WndSelectTipsStrengthen" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.5" StrokeColor="64,128,1" StrokeSize="1" LabelStyleKey="SMALL_GREEN_BTN" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{4B7CEE2D-5EA8-4463-9EBC-5C1E223359F0}">
+                        <WZUIImage Type="WZUIImage" GUID="{8F146F3E-D039-4a14-BECE-453A284E0933}" UseOriginSize="False" File="ui/common/common_btn_anniu10_sel.png" RelativePosition="0.5,0.5" Scale="1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{B0FC56E7-1B67-4df1-99F9-7B2CF66D8060}" Text="" TextKey="CONFIRM" FontSize="20" Color="255,236,193" Visible="True" Name="txtComfirmWord2_WndSelectTipsStrengthen" EnableStroke="True" BoldFont="True" RelativePosition="0.5,0.5" StrokeSize="1" StrokeColor="64,128,1" LabelStyleKey="SMALL_GREEN_BTN" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{E5F71E25-C015-46a8-9212-A480008FC0F6}">
+                        <WZUIImage Type="WZUIImage" GUID="{773BB9A5-5AAC-4c18-91D9-4470AEC13AD0}" UseOriginSize="False" File="ui/common/common_btn_anniu10.png" GrayRender="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{3527246B-5325-4e5c-BFA1-C90C1F72D80A}" Text="" TextKey="CONFIRM" Visible="True" Name="txtComfirmWord3_WndSelectTipsStrengthen" FontSize="20" BoldFont="True" Color="180,180,180" StrokeColor="128,128,128" StrokeSize="1" LabelStyleKey="SMALL_GRAY_BTN" RelativePosition="0.5,0.5" />
+                    </DisableElement>
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{8D2AFD73-6F5B-4ea1-8C07-134C5852880D}" Name="conInsetBtn_WndSelectTipsStrengthen" Visible="True">
+                <Button Type="WZUIButton" RelativePosition="0.78,0.07" GUID="{37F7213D-0571-4293-A88B-1F8F7B747C01}" AbsContentSize="116,56" UseAbsSize="True" LuaDoneFunctionName="onInsetBtnClick" Name="btnInset_WndSelectTipsStrengthen" Visible="True" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" RelativePosition="0.5,0.5" GUID="{8A59D853-BDAA-4877-AFBB-04F504D88986}" Visible="True">
+                        <WZUIImage Type="WZUIImage" GUID="{AAD8565C-6E9E-4bab-B74F-609D16EBB671}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" RelativePosition="0.508155,0.5" Visible="True" AbsPosition="58.9459,28" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4874AB2B-A9F6-4f33-BAB2-42C9D9FFC49B}" Text="镶嵌" FontSize="24" Color="255,236,193" Visible="True" Alignment="Right" AnchorPoint="0.5,0.5" RelativePosition="0.510484,0.5" Name="txtInsetWord1_WndSelectTipsStrengthen" BoldFont="True" EnableStroke="True" StrokeSize="4" StrokeColor="3,111,8" LabelStyleKey="SMALL_GREEN_BTN" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{886B872E-D1AF-43a6-BCC9-3F75DA9A61FC}" AnchorPoint="0.5,0.5" Visible="True">
+                        <WZUIImage Type="WZUIImage" GUID="{8FAAF64D-F82F-4cb3-9A9F-434CD19A8B27}" UseOriginSize="True" File="ui/common/common_btn_anniu10_1_sel.png" RelativePosition="0.5,0.5" Visible="True" Scale="1" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{BB9E6713-CB95-46a7-950D-F0CCD2A79BDA}" Text="镶嵌" FontSize="24" Color="255,236,193" Visible="True" Alignment="Right" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Name="txtInsetWord2_WndSelectTipsStrengthen" BoldFont="True" EnableStroke="True" StrokeColor="3,111,8" StrokeSize="4" LabelStyleKey="SMALL_GREEN_BTN" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{42F47A5C-695C-442d-8945-F4EC48A4178D}">
+                        <WZUIImage Type="WZUIImage" GUID="{7FAF6A49-F82B-4a1a-B78E-1DF84FA5356B}" UseOriginSize="True" File="ui/common/common_btn_anniu10_1.png" TouchEnable="False" Visible="True" Tag="1" GrayRender="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{F9E8840F-7A19-49d9-9AE9-2BB21EC14647}" Text="镶嵌" Visible="True" Alignment="Right" AnchorPoint="0.5,0.5" RelativePosition="0.490172,0.5" FontSize="24" Name="txtInsetWord3_WndSelectTipsStrengthen" Color="180,180,180" BoldFont="True" StrokeColor="128,128,128" StrokeSize="1" LabelStyleKey="SMALL_GRAY_BTN" />
+                    </DisableElement>
+                </Button>
+                <WZUIContainer AbsContentSize="190,50" AnchorPoint="0.5,0.5" GUID="{C493885C-D63B-420a-813B-7321B0DA70D4}" RelativePosition="0.3,0.0699607" Type="WZUIContainer" UseAbsSize="True" RelativeSize="0.6,1" Order="5" Visible="True">
+                    <WZUI9Image File="ui/common/common_icon_jinbi.png" GUID="{A2108936-2CBC-4737-9D9C-EA75E13B76EA}" Type="WZUI9Image" UseOriginSize="True" Order="10" RelativePosition="0.35,0.5" AnchorPoint="0,0.5" Scale="0.8" Name="imgGold_WndSelectTipsStrengthen" />
+                    <WZUILabelTTF AnchorPoint="0,0.5" Color="255,227,116" FontSize="20" GUID="{6BFF5DA9-225A-47d9-89D5-2D0922F900D4}" Name="txtCost_WndSelectTipsStrengthen" RelativePosition="0.6,0.5" Text="????" Type="WZUILabelTTF" Order="10" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{A324C8EC-7D57-41a3-8354-BDFF81D37CE4}" TextKey="COST" FontSize="20" Color="255,227,116" RelativePosition="0.2,0.5" Name="txtCost1_WndSelectTipsStrengthen" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <Button Type="WZUIButton" AbsContentSize="100,100" UseAbsSize="True" GUID="{9B51CAAC-A709-4533-88ED-E08B3B84D187}" RelativePosition="0.5,0.55" Name="btnGetGem" LuaDoneFunctionName="getGem" Visible="False">
+                <NormalElement Type="WZUIContainer" AbsContentSize="100,100" UseAbsSize="True" GUID="{C8FBC5EC-AB3C-41c3-B7F5-1164EB79263D}">
+                    <WZUIImage Type="WZUIImage" GUID="{7FDE35DD-1755-4804-ABF3-A730FB353146}" File="ui/common/common_icon_cwj.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" AbsContentSize="100,100" UseAbsSize="True" GUID="{5D8134F5-D1B2-4eae-B882-902E3777C1CE}">
+                    <WZUIImage Type="WZUIImage" GUID="{85D46F97-DAE6-4c9f-BA4D-325CC39D293D}" File="ui/common/common_icon_cwj2.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{4F5B12AA-F817-481f-80C0-36001C8B2D86}" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{2581AC1C-A762-4700-93C0-774FA7D5744E}" FontSize="22" Color="255,236,193" BoldFont="True" RelativePosition="0.5,0" Text="" AnchorPoint="0.5,1" Name="ttfGetGem" />
+            </Button>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSelectTipsStrengthen>

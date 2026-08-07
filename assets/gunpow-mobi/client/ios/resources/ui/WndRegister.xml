@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WndRegister GUID="{92DC3C94-A057-47ac-862C-1354FF144974}">
+    <WZUIWindow AbsContentSize="782,628" AbsPosition="480,320" GUID="{BACA1FDE-84AE-4d90-B604-D25442881DFC}" LuaObjectName="WndRegister" Name="WndRegister" NameCreate="True" RelativePosition="0.497791,0.539764" TouchContainerEnable="False" Type="WZUIWindow" UseAbsCoordinate="True" UseAbsSize="True">
+        <WZUIContainer AbsContentSize="700,580" GUID="{F90152A8-7284-4b96-9DEB-6284F56AECA8}" RelativePosition="0.5,0.568472" Type="WZUIContainer">
+            <WZUIContainer AbsContentSize="0,0" GUID="{5E601835-D5A1-428c-8E9F-FA7A4277AC3F}" RelativePosition="0.498321,0.43592" RelativeSize="0.978,0.96" Type="WZUIContainer" UseAbsSize="False">
+                <WZUI9Image CapInsets="10,10,174,192" File="common/Jigsaw/3.png" GUID="{D6CC83C2-C41B-43a3-92AA-F28BEAC81762}" Name="imgBg1_WndAccountInfo" RelativePosition="0.5,0.5" Scale="2.6" ScaleX="1" ScaleY="1" Type="WZUI9Image" UseOriginSize="False" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="0,0" GUID="{ACBC9E25-9FAB-4666-BF67-F5B8C51E938F}" RelativePosition="0.503062,0.879565" RelativeSize="1,0.13" Type="WZUIContainer" UseAbsSize="False">
+                <WZUI9Image File="common/Jigsaw/5.png" GUID="{AC39A50D-F147-42b5-8570-E463A32CBB46}" Name="imgBg2_WndAccountInfo" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="382,71" AnchorPoint="0.5,1" GUID="{14E67D25-C7B6-4a68-98F5-384E34038625}" RelativePosition="0.5,0.968966" Type="WZUIContainer" UseAbsSize="True" Visible="False">
+                <WZUIImage File="common/text/button_r_account_title.png" GUID="{BC06D58E-D0D8-4b7e-9320-8764A4CFBE12}" RelativePosition="0.5,0.55" Type="WZUIImage" UseOriginSize="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="0,0" AnchorPoint="0.5,1" GUID="{66884226-2DAA-4d55-911A-F8C6C4AE24C6}" RelativePosition="0.501279,1.02548" RelativeSize="1,0.14" Type="WZUIContainer" UseAbsSize="False">
+            <WZUIButton AbsContentSize="90,90" AnchorPoint="0.5,0.5" GUID="{06925333-3E7D-4db2-9F58-9BCF0AE039BE}" LuaDoneFunctionName="onBtnCloseClicked" Name="btnClose_Register" RelativePosition="0.946787,0.47537" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{E9B1E9CE-C7B5-4815-ABC0-E2C77F496C83}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/close.png" GUID="{88459956-9347-4ce4-950B-98729416FEA5}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{2D13CE5C-6577-472e-BB9F-E68D8A11E964}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/close_sel.png" GUID="{8CB767F1-C454-467c-BA04-8279C3E939ED}" Type="WZUI9Image" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{721C7191-9E2B-4d5a-BA85-50930BF54C98}" Type="WZUIContainer">
+                    <WZUI9Image File="common/button/close_not.png" GUID="{981361FE-0CAB-4466-B0CB-6EAF01A8E46F}" Type="WZUI9Image" UseOriginSize="True" />
+                </DisableElement>
+            </WZUIButton>
+        </WZUIContainer>
+        <Button AbsContentSize="0" GUID="{3CD1CD85-8877-4801-9580-561A01441634}" LuaDoneFunctionName="onBtnOKClicked" Name="btnOK_Register" RelativePosition="0.84,0.152759" Type="WZUIButton" UseAbsSize="True">
+            <NormalElement GUID="{E3A5D7FD-6573-498d-98EC-531C43F9BBDD}" Type="WZUIContainer">
+                <WZUI9Image File="common/button/button_2.png" GUID="{E2A6F720-8E45-4e78-99CD-F60B9447975A}" Type="WZUI9Image" UseOriginSize="True" />
+            </NormalElement>
+            <SelectElement GUID="{55093A80-1470-4a10-B8DC-EF73A2D0ABA9}" Type="WZUIContainer">
+                <WZUI9Image File="common/button/button_2_sel.png" GUID="{0B114E22-C2F9-4f80-A9B8-0E593E18314B}" Type="WZUI9Image" UseOriginSize="True" />
+            </SelectElement>
+            <WZUI9Image File="ui/register/register_bg.png" GUID="{872D4CB1-47F6-4f1e-ABEA-7E3AF579EB45}" RelativePosition="0.6,0.77" RelativeSize="0.52,0.1" Type="WZUI9Image" />
+            <DisableElement GUID="{2F2C4777-7D1D-4e93-A654-DCF300B641B6}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/button/button_4.png" GUID="{79F36F4D-50E2-444b-9380-88639018DFC0}" Type="WZUI9Image" UseOriginSize="True" />
+            </DisableElement>
+            <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{322EB0AF-F2F3-460d-B7AE-C734C9DA8EBF}" Name="txtBtnSure_WndRegister" StrokeColor="38,47,0" StrokeSize="4" Text="确 定" Type="WZUILabelTTF" />
+        </Button>
+        <WZUI9Image File="ui/register/register_bg.png" GUID="{EC0AF88F-3A05-4672-83A0-7B1A4B752997}" Name="editAccount_bg_Register" Order="1" RelativePosition="0.6,0.771592" RelativeSize="0.52,0.075" Type="WZUI9Image" />
+        <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Font="" FontColor="255,255,255" FontSize="25" GUID="{253E6D36-3DE8-410b-BFC6-E22E6B4AB6FA}" InputFlag="FlagSensitive" InputMode="ModeSingleLine" LuaEditBoxEditingDidBegin="onEditAccountBegin" LuaEditBoxEditingDidEnd="onEditAccountEnd" LuaEditBoxTextChanged="onEditAccountTextChanged" MaxLength="16" Name="editAccount_Register" Opacity="255" Order="1" RelativePosition="0.6,0.77" RelativeSize="0.5,0.1" Scale="1" ScaleX="1" ScaleY="1" Text="asfdsafsafd" Type="WZUIEditBox" UseOriginSize="False" Visible="True">
+            <WZUIContainer AbsContentSize="0,0" GUID="{709F6DC0-8063-44c3-B3DA-48BF96100055}" Order="2" RelativePosition="0.495614,0.5" RelativeSize="1.08,1" Scale="1" ScaleX="1.1" Type="WZUIContainer" UseAbsSize="False" Visible="True">
+                <WZArmature AbsPosition="0,0" AnchorPoint="0.5,0.5" ArmatureName="button_zhuce" GUID="{59868A5B-A384-4c2e-B456-3751C68813E4}" Name="accountHighligh_wndRegister" Order="1" RelativePosition="0.502876,0.500615" RelativeSize="1,1" Scale="1" ScaleX="1" ScaleY="1" TouchEnable="False" Type="WZArmature" UseAbsCoordinate="False" UseOriginSize="False" UseOriginSizeProportion="False" Visible="False">
+                    <Action AnimationId="0" GUID="{46E9E945-B174-490e-9456-8777DA67B281}" Loop="-1" Type="WZUIArmatureAnimationById" />
+                </WZArmature>
+            </WZUIContainer>
+        </WZUIEditBox>
+        <WZUI9Image File="ui/register/register_bg.png" GUID="{87585338-EF04-420e-A6AE-B5E4B17F4086}" Name="editPassword_bg_Register" Order="1" RelativePosition="0.6,0.652184" RelativeSize="0.52,0.075" Type="WZUI9Image" />
+        <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Font="" FontColor="255,255,255" FontSize="25" GUID="{5B56ED64-75DF-4475-9E25-12AD42E04DB3}" InputFlag="FlagPassword" LuaEditBoxEditingDidBegin="onEditPasswordBegin" LuaEditBoxEditingDidEnd="onEditPasswordEnd" LuaEditBoxTextChanged="onEditPasswordTextChanged" MaxLength="12" Name="editPassword_Register" Opacity="255" Order="1" RelativePosition="0.6,0.65" RelativeSize="0.5,0.1" Scale="1" ScaleX="1" ScaleY="1" Text="" Type="WZUIEditBox">
+            <WZUIContainer AbsContentSize="0,0" GUID="{FE9A6A64-0A73-4b67-BD25-945C28BFD986}" Order="2" RelativePosition="0.495614,0.5" RelativeSize="1.08,1" Scale="1" ScaleX="1.1" Type="WZUIContainer" UseAbsSize="False" Visible="True">
+                <WZArmature AbsPosition="0,0" AnchorPoint="0.5,0.5" ArmatureName="button_zhuce" GUID="{EF7BDB93-5320-4cb1-B00C-B51D0D911394}" Name="passwordHighligh_wndRegister" Order="1" RelativePosition="0.502876,0.500615" RelativeSize="1,1" Scale="1" ScaleX="1" ScaleY="1" TouchEnable="False" Type="WZArmature" UseAbsCoordinate="False" UseOriginSize="False" UseOriginSizeProportion="False" Visible="False">
+                    <Action AnimationId="0" GUID="{915BBAFC-3971-495c-B3CC-E4D26B0A668F}" Loop="-1" Type="WZUIArmatureAnimationById" />
+                </WZArmature>
+            </WZUIContainer>
+        </WZUIEditBox>
+        <WZUI9Image File="ui/register/register_bg.png" GUID="{36ED1AF3-14A3-4f24-A066-88ECE79BD10E}" Name="editPswConfirm_bg_Register" Order="1" RelativePosition="0.602036,0.533184" RelativeSize="0.52,0.075" Type="WZUI9Image" />
+        <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Font="" FontColor="255,255,255" FontSize="25" GUID="{3147A271-0552-4a9e-A8C2-9C403E621078}" InputFlag="FlagPassword" LuaEditBoxEditingDidBegin="onEditPswConfirmBegin" LuaEditBoxEditingDidEnd="onEditPswConfirmEnd" LuaEditBoxTextChanged="onEditPswConfirmTextChanged" MaxLength="12" Name="editPswConfirm_Register" Order="1" RelativePosition="0.6,0.53" RelativeSize="0.5,0.1" Scale="1" ScaleX="1" ScaleY="1" Type="WZUIEditBox">
+            <WZUIContainer AbsContentSize="0,0" GUID="{836F5E25-D151-459f-AEC3-7BF1639FAC8E}" Order="2" RelativePosition="0.495614,0.5" RelativeSize="1.08,1" Scale="1" ScaleX="1.1" Type="WZUIContainer" UseAbsSize="False" Visible="True">
+                <WZArmature AbsPosition="0,0" AnchorPoint="0.5,0.5" ArmatureName="button_zhuce" GUID="{D6AA94F7-1260-414d-ABA5-F467ED9BD277}" Name="passwordRetryHighligh_wndRegister" Order="1" RelativePosition="0.502876,0.500615" RelativeSize="1,1" Scale="0.8" ScaleX="1" ScaleY="1" TouchEnable="False" Type="WZArmature" UseAbsCoordinate="False" UseOriginSize="False" UseOriginSizeProportion="False" Visible="False">
+                    <Action AnimationId="0" GUID="{CC6D046D-BE76-4909-A43C-680F43E98DF0}" Loop="-1" Type="WZUIArmatureAnimationById" />
+                </WZArmature>
+            </WZUIContainer>
+        </WZUIEditBox>
+        <WZUI9Image File="ui/register/register_bg.png" GUID="{CBA1D697-4485-4b53-90F0-98F30733A4EA}" Name="editMail_bg_Register" Order="1" RelativePosition="0.6,0.413184" RelativeSize="0.52,0.075" Type="WZUI9Image" />
+        <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Font="" FontColor="255,255,255" FontSize="25" GUID="{7CA9A36A-387C-4928-A607-C01525D12099}" InputMode="ModeSingleLine" LuaEditBoxEditingDidBegin="onEditMailBegin" LuaEditBoxEditingDidEnd="onEditMailEnd" LuaEditBoxTextChanged="onEditMailTextChanged" Name="editMail_Register" Order="1" RelativePosition="0.6,0.41" RelativeSize="0.5,0.1" Scale="1" ScaleX="1" ScaleY="1" Text="" Type="WZUIEditBox" Visible="True">
+            <WZUIContainer AbsContentSize="0,0" GUID="{918BB073-340F-4bf2-86D1-320420E12EEA}" Order="2" RelativePosition="0.495614,0.5" RelativeSize="1.08,1" Scale="1" ScaleX="1.1" Type="WZUIContainer" UseAbsSize="False" Visible="True">
+                <WZArmature AbsPosition="0,0" AnchorPoint="0.5,0.5" ArmatureName="button_zhuce" GUID="{D30CB606-BE9A-4c3c-A4BF-09B18F334522}" Name="email_wndRegister" Order="1" RelativePosition="0.502876,0.500615" RelativeSize="1,1" Scale="0.8" ScaleX="1" ScaleY="1" TouchEnable="False" Type="WZArmature" UseAbsCoordinate="False" UseOriginSize="False" UseOriginSizeProportion="False" Visible="False">
+                    <Action AnimationId="0" GUID="{2BCC3EC7-30E9-42ab-B4E1-55BF704BEDEB}" Loop="-1" Type="WZUIArmatureAnimationById" />
+                </WZArmature>
+            </WZUIContainer>
+        </WZUIEditBox>
+        <WZUI9Image File="ui/register/register_bg.png" GUID="{8E96D212-BE3D-4cc4-A9CB-729AB905760F}" Name="editInviteCode_bg_Register" Order="1" RelativePosition="0.6,0.294777" RelativeSize="0.52,0.075" Type="WZUI9Image" />
+        <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Font="" FontColor="255,255,255" FontSize="25" GUID="{DEE3D85B-72AD-4d98-807D-8677108500AE}" LuaEditBoxEditingDidBegin="onEditInviteCodeBegin" LuaEditBoxEditingDidEnd="onEditInviteCodeEnd" LuaEditBoxTextChanged="onEditInviteCodeTextChanged" Name="editInviteCode_Register" Order="1" RelativePosition="0.6,0.29" RelativeSize="0.5,0.1" Scale="1" ScaleX="1" ScaleY="1" Type="WZUIEditBox">
+            <WZUIContainer AbsContentSize="0,0" GUID="{7A7566DD-3EA8-42a5-83A2-ED5420BC0935}" Name="invitCode_wndRegister" Order="2" RelativePosition="0.495614,0.5" RelativeSize="1.08,1" Scale="1" ScaleX="1.1" Type="WZUIContainer" UseAbsSize="False" Visible="True">
+                <WZArmature AbsPosition="0,0" AnchorPoint="0.5,0.5" ArmatureName="button_zhuce" GUID="{5126A9E1-E957-4cd6-9D42-61DAA464298A}" Order="1" RelativePosition="0.502876,0.500615" RelativeSize="1,1" Scale="0.8" ScaleX="1" ScaleY="1" TouchEnable="False" Type="WZArmature" UseAbsCoordinate="False" UseOriginSize="False" UseOriginSizeProportion="False" Visible="False">
+                    <Action AnimationId="0" GUID="{7F45C076-5C72-4c45-AF6C-9B135CB9E6AF}" Loop="-1" Type="WZUIArmatureAnimationById" />
+                </WZArmature>
+            </WZUIContainer>
+        </WZUIEditBox>
+        <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="155,131,122" FontSize="26" GUID="{04AD5166-65D7-4175-B505-67DF84633CB4}" Name="txtAccountDefaultText_Register" RelativePosition="0.348735,0.77" Text="" Type="WZUILabelTTF" />
+        <WZUILabelTTF AnchorPoint="0,0.5" Color="155,131,122" FontSize="26" GUID="{8E9D1A8D-68A6-4478-ADCD-12E4AC3096E7}" Name="txtPasswordDefaultText_Register" RelativePosition="0.348735,0.65" Text="" Type="WZUILabelTTF" />
+        <WZUILabelTTF AnchorPoint="0,0.5" Color="155,131,122" FontSize="26" GUID="{DF5D1D81-500E-4459-AD6B-B7F89B9D6456}" Name="txtPswConfirmDefaultText_Register" RelativePosition="0.348735,0.53" Type="WZUILabelTTF" />
+        <WZUILabelTTF AnchorPoint="0,0.5" Color="155,131,122" FontSize="26" GUID="{24534FE3-3487-452d-B450-5AC2AA947756}" Name="txtMailDefaultText_Register" RelativePosition="0.348735,0.41" Type="WZUILabelTTF" />
+        <WZUILabelTTF AnchorPoint="0,0.5" Color="155,131,122" FontSize="26" GUID="{7B85DA67-6E81-4bf1-AABB-943B7C026270}" Name="txtInviteCodeDefaultText_Register" RelativePosition="0.348735,0.29" Type="WZUILabelTTF" />
+        <WZUIContainer AbsContentSize="0,0" AnchorPoint="0.5,0" GUID="{C742CD92-44DD-4c5c-91BC-D76F7C8DD49B}" RelativePosition="0.498766,-0.00925347" RelativeSize="0.985,0.06" Type="WZUIContainer" UseAbsSize="False">
+            <WZUI9Image CapInsets="50,10,695,28" File="common/Jigsaw/60.png" GUID="{E22C946D-73BD-4403-9234-3861D1AE0606}" Type="WZUI9Image" />
+        </WZUIContainer>
+        <WZUIFreeTextBox AnchorPoint="1,0.5" GUID="{924493AF-AB89-46df-8660-2EBBB9EFD002}" MaxWidth="300" Name="txtAccount_Register" RelativePosition="0.334167,0.77" Type="WZUIFreeTextBox" />
+        <WZUIFreeTextBox AnchorPoint="1,0.5" GUID="{E605FBB0-379F-41f3-A2B9-D672FAC2001B}" MaxWidth="300" Name="txtPassword_Register" RelativePosition="0.334167,0.65" ShowText="" Type="WZUIFreeTextBox" />
+        <WZUIFreeTextBox AnchorPoint="1,0.5" GUID="{CAFB0D52-2E8F-4c30-9A55-FDA4CB2922C8}" MaxWidth="300" Name="txtPswConfirm_Register" RelativePosition="0.334167,0.53" Type="WZUIFreeTextBox" />
+        <WZUIFreeTextBox AnchorPoint="1,0.5" GUID="{679EF9CD-91C1-4a38-9B8C-62EBFF7ECE4D}" MaxWidth="300" Name="txtMail_Register" RelativePosition="0.334167,0.41" Type="WZUIFreeTextBox" />
+        <WZUIFreeTextBox AnchorPoint="1,0.5" GUID="{277CB0D4-F6E8-43d6-86E9-3B9AE73A81B7}" MaxWidth="300" Name="txtInviteCode_Register" RelativePosition="0.334167,0.29" Type="WZUIFreeTextBox" />
+        <WZUIFreeTextBox AnchorPoint="0.5,0.5" GUID="{153B415C-57BC-4791-9AEA-E76E94D5A1F9}" MaxWidth="400" Name="txtTip1_Register" RelativePosition="0.348611,0.19" Type="WZUIFreeTextBox" Visible="True" />
+        <WZUIFreeTextBox AnchorPoint="1,0.5" GUID="{2620A0FE-A1FC-40ff-B373-7060031FB7ED}" MaxWidth="300" Name="txtTip_Register" RelativePosition="0.332097,0.19" ShowText="66666" Type="WZUIFreeTextBox" />
+        <WZUILabelTTF AnchorPoint="0,0.5" ChineseLengthPolicy="100" Color="0,0,0" FontSize="20" GUID="{51630C26-F255-4be2-A5B6-D66036CEFFF4}" Name="txtAccountTip_WndRegister" Opacity="255" RelativePosition="0.351317,0.710707" RelativeSize="1.5,1.5" ShadowColor="0,0,0" ShadowOpacity="255" ShowAll="False" StrokeColor="0,0,0" StrokeOpacity="255" Text="" TouchEnable="False" Type="WZUILabelTTF" />
+        <WZUILabelTTF AnchorPoint="0,0.5" ChineseLengthPolicy="100" Color="0,0,0" FontSize="20" GUID="{DF89E4F7-E10E-46e2-9E7B-ED0846E22FE9}" Name="txtPasswordTip_WndRegister" Opacity="255" RelativePosition="0.35,0.589395" RelativeSize="1.5,1.5" StrokeColor="0,0,0" Text="" TouchEnable="False" Type="WZUILabelTTF" />
+        <WZUILabelTTF AnchorPoint="0,0.5" ChineseLengthPolicy="100" Color="0,0,0" FontSize="20" GUID="{DA435A5A-352B-491c-995C-4F4BF7EF6A13}" Name="txtPasswoerConfirmTip_WndRegister" Opacity="255" RelativePosition="0.35,0.468092" RelativeSize="1.5,1.5" StrokeColor="0,0,0" Text="" TouchEnable="False" Type="WZUILabelTTF" />
+        <WZUILabelTTF AnchorPoint="0,0.5" ChineseLengthPolicy="100" Color="0,0,0" FontSize="20" GUID="{FCDC5CE3-CD3E-4d1b-A32F-5CC160B75216}" Name="txtMailTip_WndRegister" Opacity="255" RelativePosition="0.35,0.35185" RelativeSize="1.5,1.5" StrokeColor="0,0,0" Text="" TouchEnable="False" Type="WZUILabelTTF" />
+        <WZUILabelTTF AnchorPoint="0,0.5" ChineseLengthPolicy="100" Color="0,0,0" FontSize="20" GUID="{8DDE0172-8FD2-453a-8BD7-EEA4D1DE8425}" Name="txtInviteCodeTip_WndRegister" Opacity="255" RelativePosition="0.35,0.23309" RelativeSize="1.5,1.5" StrokeColor="0,0,0" Text="" TouchEnable="False" Type="WZUILabelTTF" />
+        <WZUIButton AbsContentSize="180,40" AnchorPoint="0.5,0" GUID="{064EE3B4-AD24-4637-87B9-1113CAD22A05}" LuaDoneFunctionName="onGoToProtocol" Name="btnAgreement_WndRegister" RelativePosition="0.2,0.08" Type="WZUIButton" UseAbsSize="True" Visible="False">
+            <NormalElement GUID="{74E9BC61-FAE2-4a7c-AE1C-181DFB67562D}" Type="WZUIContainer">
+                <WZUIImage File="ui/common/transparent_bg.png" GUID="{52EFDDDF-C6A7-41f6-88F0-BAD58F814A16}" Type="WZUIImage" />
+                <WZUILabelTTF FontSize="20" GUID="{DF8A86DC-9676-4c18-A0E3-EF5D4D327DDC}" Name="txtGoTo1_WndRegister" Text="" Type="WZUILabelTTF" />
+                <WZUIImage File="common/Jigsaw/red_line.png" GUID="{A1E4C30C-E745-49b5-90BD-1B8D60BA06BD}" Name="imgLine1_WndRegister" Opacity="135" RelativePosition="0.48,0.15" RelativeSize="1,0.05" Type="WZUIImage" UseOriginSize="False" />
+            </NormalElement>
+            <SelectElement GUID="{2E99386E-DCD2-406c-8BDF-53D2C9FA9D42}" Type="WZUIContainer">
+                <WZUIImage File="ui/common/transparent_bg.png" GUID="{2AA57C85-9BB7-47c4-9252-38E976B71391}" Type="WZUIImage" />
+                <WZUILabelTTF FontSize="20" GUID="{CE0F30E2-F5A7-497a-8ECF-7DFEE2FDA3FE}" Name="txtGoTo2_WndRegister" Text="" Type="WZUILabelTTF" />
+                <WZUIImage File="common/Jigsaw/red_line.png" GUID="{8D106D0D-F28C-4bd4-A112-299C34389368}" Name="imgLine2_WndRegister" Opacity="135" RelativePosition="0.48,0.15" RelativeSize="1,0.05" Type="WZUIImage" />
+            </SelectElement>
+            <DisableElement GUID="{C8486EF6-47B0-446a-B326-C395CD4719F0}" Type="WZUIContainer" />
+        </WZUIButton>
+    </WZUIWindow>
+</WndRegister>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" ?>
+<WndRewardShow GUID="{E7A29604-BBF3-48c6-97AE-0F96859C9783}">
+    <WZUIWindow AbsContentSize="418,294" GUID="{15DDCD09-1222-41e7-8861-B36A12E29F47}" LuaObjectName="WndRewardShow" Name="WndRewardShow" NameCreate="True" RelativePosition="0.5,0.48" Type="WZUIWindow" UseAbsSize="True" ShowAll="True" LuaTouchBeganFunction="onTouchBegan" Order="60000">
+        <WZUISpine Type="WZUISpine" GUID="{DBC82298-FD66-471c-85B0-E072F6899901}" FileAtlas="ui/ui_huodewupin.atlas" FileJson="ui/ui_huodewupin.json" AnimationName="effect" Loop="True" RelativePosition="0.5,1.685" AbsPosition="204,495.697" Opacity="190" Name="spine" />
+        <WZUIContainer GUID="{BA631F7E-C78C-42c2-82B7-B8B490376B3D}" RelativePosition="0.502075,0.515674" RelativeSize="1,0.75" Type="WZUIContainer" Name="">
+            <WZUIContainer Type="WZUIContainer" GUID="{CC59D358-FCA3-4d73-912A-EAE89C457619}" AbsContentSize="550,255" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="209,110.25" TouchEnable="False" Name="conBg_WndRewardShow">
+                <WZUIContainer Type="WZUIContainer" GUID="{7AD0D1F3-47FD-4941-8AA6-AF77A8A029CB}" AbsContentSize="690,230" UseAbsSize="True" RelativePosition="0.521866,0.933008" AbsPosition="287.026,237.917" AnchorPoint="0.5,1">
+                    <WZUI9Image Type="WZUI9Image" GUID="{97A1D25E-6697-40ff-AF65-46BCA9DAA9B5}" File="ui/common/common_scale9_heidi11.png" Opacity="255" Visible="True" Name="bg1" TouchEnable="False" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{81C3CB6D-0385-491b-A46B-A2D3CE9AB36B}" AbsContentSize="690,140" UseAbsSize="True" RelativePosition="0.521866,0.933008" AbsPosition="287.026,237.917" AnchorPoint="0.5,1">
+                    <WZUI9Image Type="WZUI9Image" GUID="{656DFEAE-F656-4cd9-A3DD-C9659E1FCB64}" File="ui/common/common_scale9_heidi11.png" Opacity="255" Visible="False" Name="bg2" TouchEnable="False" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="1200,700" GUID="{264DF6E4-9513-444c-BFA9-4299F7ECF20B}" Name="btnOK_WndRewardShow" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True" Visible="True">
+                <WZUIButton AbsContentSize="0,0" GUID="{2E65C020-CF9B-43be-B5C1-FD42AD8B416B}" LuaDoneFunctionName="onClose" LuaPushFunctionName="" Name="btnGetReward_WndRewardShow" RelativePosition="0.5,0.5" Type="WZUIButton" UseAbsSize="False">
+                    <NormalElement GUID="{96BCDA94-E287-4f0e-9C1B-F67391DE774B}" Type="WZUIContainer" TouchContainerEnable="True" />
+                    <SelectElement GUID="{A434AFEE-F81A-41cc-B98D-C0F364F5DAF0}" Type="WZUIContainer" TouchContainerEnable="True" />
+                    <DisableElement GUID="{209EE346-3F03-4f7b-A8F4-DCEA6E1A9D13}" Type="WZUIContainer" TouchContainerEnable="True" RelativePosition="0.5,0.5" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{77C0AE1A-BEA4-4f17-A497-E99B6BF09BAF}" UseAbsSize="True" AbsContentSize="550,255" RelativePosition="0.5,0.5" Name="conList_WndRewardShow" TouchContainerEnable="False" AbsPosition="209,110.25">
+                <WZUITableContainer ColumnCount="5" EnableMoveHorizontal="False" EnableMoveVertical="False" EnableMoveoutContainer="False" GUID="{03C12D20-B118-406b-8B52-8CDFD9DB0B6D}" Name="tbconRewardList_WndRewardShow" RelativePosition="0.5,0.88" RelativeSize="0.912,0.94" Type="WZUITableContainer" ScissorHeight="1" ScissorWidth="1.01" AbsContentSize="540,200" UseAbsSize="True" EnableVerticalScroll="False" CellElementHeight="0.5" AbsPosition="275,134.85" AnchorPoint="0.5,1" TouchEnable="True" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2F6F6A64-2816-4e04-9350-83B00E6D5B7F}" Name="ttf2_WndRewardShow" Text="" Color="255,255,255" FontSize="22" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.15" Visible="True" BoldFont="True" EnableStroke="False" StrokeColor="132,66,29" TextKey="" StrokeSize="4" AbsPosition="209,-60.125" TouchEnable="False" />
+        </WZUIContainer>
+        <WZUIImage File="ui/common/common_icon_hdjl.png" GUID="{662FFCC0-6301-4025-B73C-623E581D6B7B}" RelativePosition="0.5,0.953197" Type="WZUIImage" UseOriginSize="True" Name="imgTitle_WndRewardShow" Scale="1" isValid="True" Visible="True" AbsPosition="209,280.24" TouchEnable="False" />
+    </WZUIWindow>
+</WndRewardShow>

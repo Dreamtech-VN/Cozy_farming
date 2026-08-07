@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<WndExplain GUID="{BDC44F2C-95D0-47e7-AD06-8D9954CEFD3B}">
+	<WZUIWindow AbsContentSize="600,340" GUID="{43DBA9D2-49F3-416e-ABF4-5D90A7A9C98B}" LuaObjectName="WndExplain" Name="WndExplain" NameCreate="True" ShowAll="True" TouchContainerEnable="False" Type="WZUIWindow" UseAbsSize="True">
+		<WZUIContainer Type="WZUIContainer" GUID="{7E65344C-9761-4437-BBFA-4C9449C39D8E}" AbsContentSize="600,400" UseAbsSize="True">
+			<WZUI9Image CapInsets="150,80,1,1" File="" GUID="{A619C600-9542-452b-92B3-FA08C6B820CB}" Type="WZUI9Image" />
+		</WZUIContainer>
+		<WZUIContainer GUID="{6949B409-7EE2-482e-B2A1-61BA4B309813}" RelativePosition="0.5,0.498333" Type="WZUIContainer">
+			<WZUIImage File="ui/common/title_bg.png" GUID="{33EB50D0-6555-4984-9E4B-9F4AD3CD807F}" RelativePosition="0.174033,0.984923" Type="WZUIImage" UseOriginSize="True" ScaleX="1" Scale="1" ScaleY="1" Name="imgWndNamebg_WndExplain" />
+			<WZUIImage File="common/text/rule_title.png" GUID="{E2A3CCD9-70AC-456b-9C3C-1B157C2F2ABE}" RelativePosition="0.164517,0.984383" Type="WZUIImage" UseOriginSize="True" NameCreate="True" Name="imgResultTitle_WndExplain" />
+			<WZUIContainer AbsContentSize="58,56" AnchorPoint="1,1" GUID="{4784902F-B3F8-4967-ACAA-EA9CC7AE70F2}" Name="" RelativePosition="0.985447,1.06925" ShowAll="False" Type="WZUIContainer" UseAbsSize="True">
+				<WZUIImage File="ui/common/btn_close_ng.png" GUID="{5FB62AF3-C2C9-44e9-9595-8E929A90DBA7}" Type="WZUIImage" UseOriginSize="True" />
+				<WZUIButton AbsContentSize="150,100" AnchorPoint="0,1" GUID="{8660E8C9-9C11-4706-A7C6-D54A0FB2267C}" LuaDoneFunctionName="onClose" Name="btn_closeExplain" Order="2" RelativePosition="-0.462003,1.1779" Scale="0.75" ShowAll="False" Type="WZUIButton" UseAbsSize="True" NameCreate="True">
+					<NormalElement GUID="{6CCE866D-E082-41a1-8572-4964000FC0B5}" TouchContainerEnable="True" Type="WZUIContainer">
+						<WZUIImage File="" GUID="{A8B1D34F-9735-40a1-A5D9-38A343FF8F97}" Type="WZUIImage" UseOriginSize="True" />
+					</NormalElement>
+					<SelectElement GUID="{1594ABA4-DD29-4b74-8BDD-36F939DA0F7C}" TouchContainerEnable="True" Type="WZUIContainer">
+						<WZUIImage File="" GUID="{83D4F76A-DDC0-4e02-9D3C-0045A5877DB1}" RelativePosition="0.5,0.5" Type="WZUIImage" UseOriginSize="True" />
+					</SelectElement>
+					<DisableElement GUID="{09E4F68F-A9FE-41ff-B485-E5726DA0E864}" TouchContainerEnable="True" Type="WZUIContainer" />
+				</WZUIButton>
+			</WZUIContainer>
+		</WZUIContainer>
+		<WZUIContainer AbsContentSize="550,300" GUID="{19BF578C-1B31-4845-960F-A690E6CA6FF6}" RelativePosition="0.5,0.419412" RelativeSize="1,1" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+			<WZUIScrollContainer AbsContentSize="550,300" AbsPosition="0.5,0" EnableMoveHorizontal="False" EnableMoveoutContainer="True" EnableVerticalScroll="True" GUID="{D29E8CF0-AEBD-4793-96CB-7A28D4CF227E}" Name="rollconExplanation_WndExplain" RelativePosition="0.5,0.5" ScrollPictureDown="common/Jigsaw/rolling_03.png" ScrollPictureMid="common/Jigsaw/rolling_01.png" ScrollPictureTop="common/Jigsaw/rolling_02.png" Type="WZUIScrollContainer" UseAbsSize="True">
+				<MoveElement GUID="{20473B05-0270-470f-8DA3-BA81FB560B22}" Type="WZUIContainer">
+					<WZUILabelTTF Alignment="Left" AnchorPoint="0,0" Color="82,36,6" Dimensions="540,0" FontSize="24" GUID="{8264EC68-A597-4001-B6B2-5283D47235A3}" Name="txtRewardExplain_WndExplain" RelativePosition="0,0" Text="" Type="WZUILabelTTF" />
+				</MoveElement>
+			</WZUIScrollContainer>
+		</WZUIContainer>
+		<WZUIContainer Type="WZUIContainer" GUID="{64BDFF16-D26F-4777-92FA-2D79FA929B85}" AbsContentSize="550,50" UseAbsSize="True" RelativePosition="0.5,0.6" Name="conMsgInfo_WndExplain" Visible="False">
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{D56121BE-5FD3-4c2f-8C4E-B7BE7C90A64E}" FontSize="30" Color="255,255,255" EnableStroke="True" StrokeColor="0,0,0" StrokeSize="4" Text="" RelativePosition="0.5,0.5" Dimensions="540,0" Name="txtMsgInfoLabel_WndExplain" Visible="True" />
+			<WZUIContainer Type="WZUIContainer" GUID="{B2F47D11-D794-461d-83E5-3F9FB8CEA261}" RelativePosition="0.5,-2">
+				<Button Type="WZUIButton" AbsContentSize="150,65" UseAbsSize="True" RelativePosition="0.25,0.2" GUID="{551D97E1-FAD0-4610-BCB1-1CD7EE1A6034}" LuaDoneFunctionName="OnTouchLeftEvent">
+					<NormalElement Type="WZUIContainer" GUID="{A9F7652E-6EEA-4c3e-A014-CA84D2B3511C}">
+						<WZUI9Image Type="WZUI9Image" GUID="{9C9FA552-3CE8-4512-A5AB-329CEFD0DF91}" File="ui/common/button_08.png" />
+						<WZUILabelTTF Type="WZUILabelTTF" GUID="{F8C71361-F88A-426d-BB57-32E139A8E820}" Color="255,255,255" EnableStroke="True" FontSize="28" StrokeColor="0,0,0" StrokeSize="4" Text="" Name="txtLeftBtnName_1_WndExplain" />
+					</NormalElement>
+					<SelectElement Type="WZUIContainer" GUID="{4F0D45C3-9C9E-4ccf-9D60-2D34461FB3CE}">
+						<WZUI9Image Type="WZUI9Image" GUID="{6564CFD1-8441-4865-A5B9-0CB1024EAE4E}" File="ui/common/button_08_sel.png" />
+						<WZUILabelTTF Type="WZUILabelTTF" GUID="{83787DF2-9A91-4a46-A584-4C0C761CF164}" Color="255,255,255" EnableStroke="True" FontSize="28" StrokeColor="0,0,0" StrokeSize="4" Text="" Name="txtLeftBtnName_2_WndExplain" />
+					</SelectElement>
+					<DisableElement Type="WZUIContainer" GUID="{2DEE68A5-B067-40f5-A9B4-490B889A4CAE}" />
+				</Button>
+				<Button Type="WZUIButton" AbsContentSize="150,65" UseAbsSize="True" RelativePosition="0.75,0.2" GUID="{45178B17-DA8D-4ebb-9E4C-F6BB5B15B570}" LuaDoneFunctionName="OnTouchRightEvent">
+					<NormalElement Type="WZUIContainer" GUID="{53F19EA9-36A7-4e75-95C1-9DCB9679A444}">
+						<WZUI9Image Type="WZUI9Image" GUID="{BCB3966D-1D86-466c-AF96-CE952C318CAE}" File="ui/common/button_05.png" />
+						<WZUILabelTTF Type="WZUILabelTTF" GUID="{52441D0C-ABA6-4ce5-9862-0AE900A66796}" Color="255,255,255" EnableStroke="True" FontSize="28" StrokeColor="0,0,0" StrokeSize="4" Text="" Name="txtRightBtnName_1_WndExplain" />
+					</NormalElement>
+					<SelectElement Type="WZUIContainer" GUID="{9DC0F009-FBD5-462a-B006-9FF6E7C73D60}">
+						<WZUI9Image Type="WZUI9Image" GUID="{A02BD379-C4C0-4891-A945-C3038F0F5E5F}" File="ui/common/button_05_sel.png" />
+						<WZUILabelTTF Type="WZUILabelTTF" GUID="{CB59A3E0-4A41-4d3f-91E2-DF6E7B95A88D}" Color="255,255,255" EnableStroke="True" FontSize="28" StrokeColor="0,0,0" StrokeSize="4" Text="" Name="txtRightBtnName_2_WndExplain" />
+					</SelectElement>
+					<DisableElement Type="WZUIContainer" GUID="{AA4E4313-3088-4caa-931E-6876BDB6D004}" />
+				</Button>
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIWindow>
+</WndExplain>

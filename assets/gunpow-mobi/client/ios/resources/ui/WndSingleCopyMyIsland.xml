@@ -1,0 +1,33 @@
+﻿<WndSingleCopyMyIsland GUID="{f3c41a51-3a0b-41c8-b86d-b577aca4e559}">
+    <WZUIWindow Type="WZUIWindow" GUID="{cf78d36f-5c6a-4f24-a715-8247262caa4e}" LuaObjectName="WndSingleCopyMyIsland" Name="WndSingleCopyMyIsland" NameCreate="True" LuaTouchBeganFunction="" AbsContentSize="392,540" UseAbsSize="True" ShowAll="True">
+        <Button Type="WZUIButton" GUID="{ba9f2bc5-8276-4589-8857-552e2e5b679b}" LuaDoneFunctionName="onCloseClick" RelativeSize="5,3">
+            <NormalElement Type="WZUIContainer" GUID="{d370a57c-53d7-4b7f-aadc-adf733c6d203}" />
+            <SelectElement Type="WZUIContainer" GUID="{93e599b7-66f3-4059-8d8b-e35345a3d6f5}" />
+            <DisableElement Type="WZUIContainer" GUID="{be3ec936-d3ac-4d3d-a173-fd6fe8561dba}" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{5b6694da-618a-481b-a214-9062d3f8a80d}" AbsContentSize="0" UseAbsSize="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{e79eb0be-010e-4494-968f-fe840dddb80a}" File="ui/common/common_scale9_di5.png" CapInsets="178,75,1,1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4dacd7d3-63bd-4bfd-9b12-f04c2edb9167}" Color="255,236,193" EnableStroke="True" StrokeSize="4" TextKey="SINGLECOPY_TEXT9" FontSize="26" StrokeColor="128,54,13" RelativePosition="0.5,0.935184" AbsPosition="196,505" />
+            <WZUIImage Type="WZUIImage" GUID="{88bf9a25-a6c7-4bb5-b15d-4dce52e1c6ff}" File="ui/common/common_icon_diandian.png" UseOriginSize="True" RelativePosition="0.0819303,0.940292" AbsPosition="32.1167,507.758" />
+            <WZUIImage Type="WZUIImage" GUID="{e5f678c0-cb4a-4c61-aa06-1a3c6c8d80e4}" File="ui/common/common_icon_diandian.png" UseOriginSize="True" RelativePosition="0.917725,0.940292" AbsPosition="359.748,506.542" />
+            <WZUIContainer Type="WZUIContainer" GUID="{b9feac49-ea87-4743-9f3d-20cc36057c81}" AbsContentSize="358,450" UseAbsSize="True" RelativePosition="0.5,0.45706" AbsPosition="189,150">
+                <WZUIFreeListContainer Type="WZUIFreeListContainer" GUID="{0bf7b668-40fa-4aa5-8212-9f2ce8515d1b}" Name="tableHurdlesList_WndFastGetItems" EnableMoveHorizontal="False" EnableVerticalScroll="False" LoadCountPerFrame="1" ListItemInterval="8" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{5bb305e2-b116-4134-98d6-b9352e7be5cd}" Name="CellFastJump_WndSingleCopyMyIsland" AbsContentSize="370,90" UseAbsSize="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{43669e97-69df-42e8-8b38-70f6a89608d1}" File="ui/common/common_scale9_di7.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{40a69be0-392d-4acf-afd2-e562d19c2d85}" FontSize="24" Color="158,0,0" Name="txtChaptersName_WndSingleCopyMyIsland" Text="" RelativePosition="0.03,0.7" AbsPosition="28,61" AnchorPoint="0,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b8b76366-304a-45be-9639-cf4591e90b4c}" FontSize="20" Color="62,34,8" Name="txtChaptersDesc_WndSingleCopyMyIsland" Text="" RelativePosition="0.03,0.5" AbsPosition="22,27.9999" AnchorPoint="0,1" MaxLength="" Dimensions="350,0" Alignment="Left" />
+            <WZUIImage Type="WZUIImage" GUID="{d58fb678-059a-4a05-9b6b-f054c668dcf9}" File="" UseOriginSize="True" RelativePosition="0.877245,0.5" Scale="0.8" ScaleX="0.8" ScaleY="0.8" Name="imgTag_WndSingleCopyMyIsland" Visible="True" TouchEnable="False" />
+            <Button Type="WZUIButton" LuaDoneFunctionName="onClickJump" GUID="{5f2317a8-7554-4441-ad79-02474a052874}" Name="btnJump_CellFastJump">
+                <NormalElement Type="WZUIContainer" GUID="{bf8cf4dd-777b-400a-9dc9-284a8072685d}" />
+                <SelectElement Type="WZUIContainer" GUID="{69798d56-7aa5-4002-8907-f72f7eef2ef1}" />
+                <DisableElement Type="WZUIContainer" GUID="{4965b813-43be-4219-8216-af4134e3a13f}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{a60c6b70-01cf-443d-9e76-5e5c6769c9e7}" Name="CellFastJump2_WndSingleCopyMyIsland" AbsContentSize="370,40" UseAbsSize="True" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{5304156d-b83e-45a1-a2b8-62490891e88d}" File="ui/common/common_scale9_di7.png" GrayRender="False" Name="img9Bk_WndSingleCopyMyIsland" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{ccaf0816-7dc2-4c85-a2e9-a92718ec3695}" FontSize="24" Color="138,122,106" Name="txtInterfaceName_WndSingleCopyMyIsland" Text="" RelativePosition="0.03,0.5" AbsPosition="28,61" AnchorPoint="0,0.5" LabelStyleKey="" Alignment="Left" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSingleCopyMyIsland>

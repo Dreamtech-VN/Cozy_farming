@@ -1,0 +1,24 @@
+﻿<CellOnlineRewardItem GUID="{2d36c65a-13a1-4e55-bdf4-bd8108dbb287}">
+    <WZUIContainer Type="WZUIContainer" GUID="{ae5f6d20-a14a-46cc-97fb-12b073d65a28}" Name="CellOnlineRewardItem">
+        <WZUIContainer Type="WZUIContainer" GUID="{ee7b46d8-145a-4e8e-a344-d998e7db064c}" AbsContentSize="468,105" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{ae02f443-d06c-41c4-8b28-13b3d22a3642}" File="ui/common/common_scale9_di18.png" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2f512bee-e9e3-4b9a-ac90-97193b68a545}" RelativePosition="0.03,0.5" LabelStyleKey="C1_F20_S4_C5" Name="txtTime_CellOnlineRewardItem" AnchorPoint="0,0.5" Alignment="Left" />
+            <WZUIContainer Type="WZUIContainer" GUID="{ed61d3e2-e35b-468e-af3f-2039a3691b4b}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.33,0.5" Name="con1_CellOnlineRewardItem" />
+            <WZUIContainer Type="WZUIContainer" GUID="{6a6e7812-7db1-40ac-ab8c-cf6ca6c62579}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.475,0.5" Name="con2_CellOnlineRewardItem" />
+            <WZUIContainer Type="WZUIContainer" GUID="{f1df0b2a-81f1-48d8-96ef-e658734ac334}" AbsContentSize="60,60" UseAbsSize="True" RelativePosition="0.62,0.5" Name="con3_CellOnlineRewardItem" />
+            <Button Type="WZUIButton" GUID="{94461b6b-c341-436f-9532-e867d1c2a692}" AbsContentSize="118,60" UseAbsSize="True" RelativePosition="0.854701,0.5" Name="btn_CellOnlineRewardItem" LuaDoneFunctionName="onFunctionClick" TouchEnable="True">
+                <NormalElement GUID="{8103b396-1b53-4981-af9e-a0137b43674c}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{46135499-3f6b-40a2-9318-5d4ca64c8859}" Type="WZUI9Image" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{9d968ac7-01f4-4365-b29d-bbea8341ffc9}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0_sel.png" GUID="{ca612d5a-f0d4-4728-ad22-0a15753ae711}" Type="WZUI9Image" Scale="1" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{58763308-b3e2-4375-a4f5-4f8bf113b650}" Type="WZUIContainer">
+                    <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{deb012c3-c46f-48cb-b54d-a8f82f63390a}" Type="WZUI9Image" UseOriginSize="True" GrayRender="True" />
+                </DisableElement>
+                <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{21cdd500-df4d-4cb8-aead-5a2697c0f4e8}" Name="txtIsReceive_CellOnlineRewardItem" Scale="1" ShadowColor="" StrokeColor="0,72,3" StrokeSize="4" Text="" Type="WZUILabelTTF" ScaleX="1" ScaleY="1" LabelStyleKey="" TextKey="INVITE_RECEIVE" EnableStroke="True" />
+            </Button>
+            <WZUIImage Type="WZUIImage" GUID="{12f98b47-18f0-4afd-a838-db9a57158077}" File="ui/common/commom_icon_ylq.png" Rotation="45" UseOriginSize="True" RelativePosition="0.854701,0.5" Order="0" Visible="False" Name="imgReceived_CellOnlineRewardItem" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellOnlineRewardItem>

@@ -1,0 +1,55 @@
+﻿<CellMatchMaking GUID="{ad293d8d-a3e7-424b-9ba8-4572d5a0de4f}">
+    <WZUIContainer Type="WZUIContainer" GUID="{0ebac2a1-c91f-477e-b1ec-faa9ad47014c}" Name="CellMatchMaking" LuaObjectName="CellMatchMaking" NameCreate="True" AbsContentSize="310,236" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{772e3b41-59fe-41e3-b124-603cff9929b1}" RelativePosition="0.5,0.485">
+            <WZUI9Image Type="WZUI9Image" GUID="{6cf3a0bf-41bd-45c7-a5b2-258fb49769f4}" File="ui/common/common_scale9_di82.png" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{62b958e5-ff15-4693-8ba6-9c3aa5d0056f}" AbsContentSize="310,172" AnchorPoint="0.5,1" RelativePosition="0.5,0.985" UseAbsSize="True">
+            <WZUIImage Type="WZUIImage" GUID="{e321a4cb-46b1-4eea-8696-9348c47eeb58}" File="ui/common/fengexian_cxs.png" UseOriginSize="True" ScaleX="0.8" RelativePosition="0.5,0" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{67866af5-0aee-4847-8b0c-7dcf9833ee71}" Color="105,65,46" FontSize="20" AnchorPoint="0,0.5" RelativePosition="0.35,0.82" Name="txtName_CellMatchMaking" Text="哈哈哈哈" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7570739c-fb22-43c9-8d2c-0806c40110c9}" Color="105,65,46" FontSize="20" AnchorPoint="0,0.5" RelativePosition="0.35,0.67" Name="txtCommunityName_CellMatchMaking" Text="公会工行" />
+            <WZUIImage Type="WZUIImage" GUID="{6a58309c-95e2-4e3f-bea7-6fa09bd5e9b8}" File="ui/common/common_icon_zhandouli.png" UseOriginSize="True" Scale="0.8" AnchorPoint="0,0.5" RelativePosition="0.35,0.52" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{7a727d25-85db-4ab8-a587-513dd5ff1521}" CharMapFileName="ui/common_num/common_num_zhandouli2.png" Height="20" Width="13" UseOriginSize="True" UseOriginSizeProportion="False" Text="" AnchorPoint="0,0.5" RelativePosition="0.56,0.52" Scale="0.9" Name="aftxtFighting_CellMatchMaking" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{d8568652-e9aa-4da1-959c-bc40c2391b2f}" Color="195,171,148" FontSize="18" Alignment="Left" AnchorPoint="0,1" RelativePosition="0.05,0.35" Text="部署哟大辣椒等法律撒娇发的拉斯科家发的拉斯科" Dimensions="280,0" Name="txtDeclare_CellMatchMaking" />
+            <Button Type="WZUIButton" GUID="{2ecd932e-f154-4f3f-a49a-b7f6b1eb8713}" LuaDoneFunctionName="onCheckPlayerInfo">
+                <NormalElement Type="WZUIContainer" GUID="{225f0095-34ac-4e27-b6ac-6eb9efe7b454}" />
+                <SelectElement Type="WZUIContainer" GUID="{a4e258d4-5f87-46b3-8cce-29f9af248639}" />
+                <DisableElement Type="WZUIContainer" GUID="{064034bc-f10f-448d-9335-502912b1ebd6}" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{2a6299de-7b5b-4779-9509-1438af755713}" Name="" Visible="True" AbsContentSize="135,135" UseAbsSize="True" RelativePosition="0.186129,0.674419" Scale="0.65">
+                <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{45239718-30ce-4799-9fef-ebbe68a5f027}" TouchEnable="False" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Visible="True">
+                    <Stencil Type="WZUIImage" GUID="{8e27c20d-d0e0-405b-a90c-1b007f67231a}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" Scale="2.08" RelativePosition="0.5,0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{d2ae6a81-3b44-4ba4-8103-3987610eb692}" File="ui/space/common_icon_renxiangnan.png" UseOriginSize="True" Name="headSpace_CellMatchMaking" RelativePosition="0.5,0.5" Scale="0.79" Visible="True" />
+                </WZUIClippingContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{f32416bd-3134-4af8-8ad7-fb6660c166f3}" AbsContentSize="135,135" UseAbsSize="True" RelativePosition="0.5,0.5" TouchEnable="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{ceb8db76-2af2-41a6-aba7-a29c31770d5c}" File="ui/bag/common_scale9_txkd.png" UseOriginSize="False" Visible="False" />
+                    <WZUI9Image Type="WZUI9Image" GUID="{d0cef8b9-5ea4-4863-85ac-a803b2a49f1e}" File="ui/common/common_scale9_kuang.png" Visible="True" />
+                </WZUIContainer>
+                <Button Type="WZUIButton" GUID="{8eb1e133-3afd-44a5-928a-a98df78c9499}" UseAbsSize="True" AbsContentSize="130,130" RelativePosition="0.5,0.5" LuaDoneFunctionName="onCheck">
+                    <NormalElement Type="WZUIContainer" GUID="{c6489eae-e300-459f-af3f-b41883eab3a6}" TouchContainerEnable="True" />
+                    <SelectElement Type="WZUIContainer" GUID="{f851d0fc-88fb-4f4c-8b1a-e197d91c9855}" TouchContainerEnable="True" />
+                    <DisableElement Type="WZUIContainer" GUID="{a73d4c16-82c5-4a68-b15c-61507d35bf4e}" TouchContainerEnable="True" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{c6133b74-41e4-4d21-b10c-0fe3e8b2883a}" TouchEnable="False" Name="conVipLevel_CellMatchMaking" Visible="False" RelativePosition="0.5,0.488372">
+                <WZUIImage Type="WZUIImage" GUID="{48a380d0-2ddb-4082-a67d-48aafc3df6a6}" File="ui/common/common_icon_hgg.png" UseOriginSize="True" RelativePosition="0.0561509,0.939002" />
+                <WZUIImage Type="WZUIImage" GUID="{40ce4f84-72b7-4d00-b3f1-03c250436137}" File="ui/common/commom_icon_v.png" UseOriginSize="True" RelativePosition="0.0335703,0.834351" Scale="0.38" />
+                <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{7d0ba3c2-df98-44c4-b0f9-638bae47bd2b}" UseOriginSizeProportion="False" UseOriginSize="True" AnchorPoint="0,0.5" RelativePosition="0.0735484,0.830814" CharMapFileName="ui/common_num/common_num_vip.png" Text="" Height="40" Width="22" Scale="0.4" Name="aftxtVipLevel_CellMatchMaking" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{df662154-42c5-4fc2-ad3a-6b163ec369bb}" File="ui/common/common_icon_tuijian2.png" UseOriginSize="True" Name="imgRecommendIcon_CellMatchMaking" RelativePosition="0.947384,0.923236" Visible="False" Scale="0.8" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{578dad27-78cf-4acc-941c-889b74bb7ac3}" AbsContentSize="310,60" AnchorPoint="0.5,0" RelativePosition="0.5,0" UseAbsSize="True">
+            <Button Type="WZUIButton" GUID="{1d6f9958-2399-4c3a-bae8-d1783a3ec70b}" AbsContentSize="56,56" UseAbsSize="True" LuaActionName="Normal" RelativePosition="0.15,0.5" LuaDoneFunctionName="onCheckSpace">
+                <NormalElement Type="WZUIContainer" GUID="{e8c672b4-aa13-4b2f-9ab8-166a0f3dd130}" />
+                <SelectElement Type="WZUIContainer" GUID="{84ed4496-1803-4423-9fe1-bc079e328e76}" />
+                <DisableElement Type="WZUIContainer" GUID="{c0227a1f-4d1a-4a46-9647-187361c5e8dd}" />
+                <WZUIImage Type="WZUIImage" GUID="{bbdd7665-680d-49ec-860e-ce53dce9b050}" File="ui/common/common_icon_hykjtb.png" UseOriginSize="True" Scale="0.7" />
+            </Button>
+            <Button Type="WZUIButton" GUID="{9cf6857e-1c02-4b69-ba4d-b55dde567fe8}" AbsContentSize="56,56" UseAbsSize="True" LuaActionName="Normal" LuaDoneFunctionName="onChat" RelativePosition="0.85,0.5">
+                <NormalElement Type="WZUIContainer" GUID="{a20a6a1a-edca-469b-87bc-e2f592c05220}" />
+                <SelectElement Type="WZUIContainer" GUID="{1d1f3d31-1f7c-4676-8d37-8d5f1f9d2532}" />
+                <DisableElement Type="WZUIContainer" GUID="{f36638ca-62bb-469e-9bc5-7bd96f1f47d5}" />
+                <WZUIImage Type="WZUIImage" GUID="{2d4a8699-28a5-4bc0-8e12-7ed8218a2acd}" File="ui/common/common_icon_hysltb.png" UseOriginSize="True" Scale="0.7" />
+            </Button>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellMatchMaking>

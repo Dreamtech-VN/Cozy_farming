@@ -1,0 +1,12 @@
+﻿<CellBreakEggsItem GUID="{518447ca-b18d-43d8-a0f4-00d435a73bd4}">
+    <WZUIContainer Type="WZUIContainer" GUID="{3de1247d-061f-42a0-8a06-a8d44ad291bd}" LuaObjectName="CellBreakEggsItem" Name="CellBreakEggsItem" NameCreate="True" AbsContentSize="89,101" UseAbsSize="True">
+        <WZUIImage Type="WZUIImage" GUID="{d0f609a5-47b8-4947-9f3d-be113f47b489}" Name="" File="ui/gameActivity/kf_egg_shadow.png" UseOriginSize="True" RelativePosition="0.5,0.0643565" TouchEnable="False" />
+        <WZUIImage Type="WZUIImage" GUID="{b4a7d22d-374a-40c7-ab6b-87e9d71066cd}" Name="imgEgg_CellBreakEggsItem" File="ui/gameActivity/kf_egg_gold.png" UseOriginSize="True" TouchEnable="False" />
+        <WZUISpine Type="WZUISpine" GUID="{5fec27a3-a2bf-46d5-8970-f4cd6c7fb512}" FileAtlas="" FileJson="" AnimationName="" Loop="False" RelativePosition="0.5,1.09406" Visible="False" Name="spineBreakEgg_CellBreakEggsItem" TouchEnable="False" />
+        <Button Type="WZUIButton" GUID="{0301e2de-2283-410e-9c40-884bdd4891b4}" LuaDoneFunctionName="onClickEgg" Name="btnEgg_CellBreakEggsItem">
+            <NormalElement Type="WZUIContainer" GUID="{a34669c9-82b6-402f-ac79-19463ae9170e}" />
+            <SelectElement Type="WZUIContainer" GUID="{d84bf562-0111-4e01-a42a-41e08f1bb182}" />
+            <DisableElement Type="WZUIContainer" GUID="{32e5c016-b456-4ca8-92cb-add47cd03c22}" />
+        </Button>
+    </WZUIContainer>
+</CellBreakEggsItem>

@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" ?>
+<SceneAthMelee GUID="{5FACBA6A-E6BC-4845-BAFD-A99DE90F6FD3}">
+    <WZUIFrame AbsContentSize="0,0" GUID="{147236B4-5BD5-4363-AE92-0304B203EF51}" LuaObjectName="SceneAthMelee" LuaTouchBeganFunction="onTouchBegan" Name="SceneAthMelee" NameCreate="True" RelativePosition="0.5,0.5" Scale="1" ShowAll="False" Type="WZUIFrame" UseAbsSize="False">
+        <WZUIContainer Type="WZUIContainer" GUID="{63F892BA-02C5-4878-8DE9-3A1E2B663A65}" Visible="True" UseAbsSize="False">
+            <WZUIImage Type="WZUIImage" GUID="{FB4A425D-DD58-44a6-B497-317161BF8967}" File="ui/copy/common_pic_pwsdt.png" />
+            <WZUIParticle Type="WZUIParticle" GUID="{681F8815-B075-4dbd-AC68-D963494067FC}" PlistFile="particle/particle_tongyonglizi.plist" RelativePosition="0.5,0.1" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{A18C1025-12CB-495e-B3FB-B1B17F9BA8DA}" ShowAll="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{7EFDDB31-5B08-4f3d-BE9D-E75101D92067}" RelativeSize="1,0.91" RelativePosition="0.498592,0" Visible="True" ShowAll="False" TouchSwallow="True" Name="conMain_SceneAthMelee" AnchorPoint="0.5,0">
+                <WZUIContainer AbsContentSize="400,510" GUID="{3C77B242-7E94-4d79-9EEA-8EE78B9F3603}" NoBorder="False" RelativePosition="0.272748,0.508719" ShowAll="False" Type="WZUIContainer" UseAbsSize="True" Visible="True" Name="conPlayerInfo_SceneAthMelee" NameCreate="True" AbsPosition="261.838,296.278">
+                    <WZUIContainer Type="WZUIContainer" GUID="{439B4BEF-C261-4b03-9A1F-A921DEE0188F}" RelativeSize="0.8,0.1" RelativePosition="0.54,0.949541" Name="conPvpLevel_SceneAthMelee" AbsPosition="216,484.266" Order="2" AbsContentSize="320,52" UseAbsSize="True">
+                        <WZUIContainer AnchorPoint="0.5,0.5" GUID="{270463FC-7C4B-4844-8015-0F461E1ACFCC}" RelativePosition="0.531666,0.5" RelativeSize="0.7,0.3" Type="WZUIContainer">
+                            <WZUIImage File="ui/common/common_progress_exp_bg.png" GUID="{755EEC57-845D-4ef4-A8DF-5E034CFA23C7}" RelativePosition="0.5,0.5" RelativeSize="1,1" ScaleX="1" Type="WZUIImage" UseOriginSize="True" Visible="True" Opacity="150" />
+                            <WZUIProgress BgPicture="ui/common/common_progress_exp_fore.png" GUID="{ACC0BF4A-F159-42c1-8EA8-B25D47CC3F5E}" GrayRender="False" Name="processLv_SceneAthMelee" Percentage="30" RelativePosition="0.5,0.5" Type="WZUIProgress" UseOriginSize="True" Visible="True" NameCreate="True" RelativeSize="1,1" Opacity="255" />
+                            <WZUILabelTTF Color="255,255,255" FontSize="20" GUID="{D5A2C041-3A1D-465c-8948-C346E7EF6166}" Name="txtExp_SceneAthMelee" Text="" Type="WZUILabelTTF" UseOriginSize="True" UseOriginSizeProportion="False" Visible="True" NameCreate="True" RelativePosition="0.5,0.5" LabelStyleKey="NORMAL_EXP_PROGRESS" />
+                        </WZUIContainer>
+                        <WZUIButton Type="WZUIButton" AbsContentSize="60,60" UseAbsSize="True" GUID="{36877C0F-3FBF-41d5-9088-CFD88E2ADFAA}" RelativePosition="0.093454,0.5" LuaDoneFunctionName="onCheckAthLv" Visible="True">
+                            <NormalElement Type="WZUIContainer" GUID="{447A3664-D090-4e71-A07F-2BB4370F8EB9}" />
+                            <SelectElement Type="WZUIContainer" GUID="{7B72058F-0768-4e78-AA59-8F4DF368455F}" />
+                            <DisableElement Type="WZUIContainer" GUID="{DFDE71D4-0FE9-4824-91C0-4512E8891A60}" />
+                            <WZUIImage Type="WZUIImage" GUID="{3D1689B5-63DF-4c8f-8432-A9BD3F3F3073}" File="ui/common/common_icon_hz1.png" UseOriginSize="True" Scale="0.8" ScaleX="0.8" ScaleY="0.8" Name="imgAthLevel_SceneAthMelee" NameCreate="True" />
+                            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{220F505F-8FE7-4722-9ECD-6AF623564733}" CharMapFileName="ui/common_num/common_num_ghdj.png" Text="1" Height="24" UseOriginSize="True" Name="txtAthLv_SceneAthMelee" NameCreate="True" RelativePosition="0.516667,0.5" Width="16" Scale="0.8" Visible="False" />
+                        </WZUIButton>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{257B2C56-65AA-4e75-BF38-6E4741AAC8E3}" RelativeSize="0.66,0.72" RelativePosition="0.5,0.896078" AnchorPoint="0.5,1" AbsPosition="200,457">
+                        <WZUIContainer Type="WZUIContainer" GUID="{FDFBFC46-E415-450a-BF68-1F08BE1050DC}" RelativeSize="1,0.3" RelativePosition="0.503788,-0.0337689" AbsPosition="133,-12.3999" AbsContentSize="392,168" UseAbsSize="True">
+                            <WZUIContainer Type="WZUIContainer" GUID="{09F63402-1A28-4c9f-9E66-FB24EE1E37EC}" RelativeSize="0.5,1" AnchorPoint="0,0.5" RelativePosition="0,0.5">
+                                <WZUIImage Type="WZUIImage" GUID="{2BFEEF71-E137-46d4-B9BE-A563870B9D77}" File="ui/common/common_pic_dizuo1.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{86C273E1-14C1-4a0f-999E-FA3688FB6839}" AnchorPoint="1,0.5" RelativePosition="1,0.5" RelativeSize="0.5,1">
+                                <WZUIImage Type="WZUIImage" GUID="{017BAD62-1C09-45b1-BD38-7F407BA9BBD0}" File="ui/common/common_pic_dizuo1.png" UseOriginSize="True" RelativePosition="0.5,0.5" ScaleX="-1" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{37B38584-5BAD-4946-BA1A-8A61E3309C9A}" TouchEnable="False" RelativePosition="0.541667,0.5" Visible="False" TouchSwallow="False">
+                            <WZArmature AnchorPoint="0.5,0.5" ArmatureName="skills_stxt_01" FlipX="True" GUID="{62EA9DAD-EDA2-4319-BBBB-E70CB4747A91}" Name="" RelativePosition="0.522727,0.5" Scale="1.3" Type="WZArmature" UseOriginSize="True" Visible="True" ArmatureFile="ui/skills_stxt_01.xml" TouchEnable="False" ScaleY="1" ScaleX="1.3">
+                                <Action AnimationId="0" AnimationScale="1" GUID="{7070E701-556C-4abe-BF2A-A3EB5F0CB056}" IsLoop="False" Type="WZUIArmatureAnimationById" />
+                            </WZArmature>
+                            <WZArmature AnchorPoint="0.5,0" ArmatureName="skills_zq_01" FlipX="False" GUID="{5323950F-C18B-4f0f-B1D7-077E2F0E135D}" Name="" RelativePosition="0.5,0" Scale="1" Type="WZArmature" UseOriginSize="True" Visible="False" ArmatureFile="ui/skills_zq_01.xml" TouchEnable="False" ScaleY="1" ScaleX="1">
+                                <Action AnimationId="0" AnimationScale="1" GUID="{017A071C-C8E2-40ab-9660-A433D178354F}" IsLoop="False" Type="WZUIArmatureAnimationById" />
+                            </WZArmature>
+                        </WZUIContainer>
+                        <WZUIContainer AbsContentSize="150,150" AnchorPoint="0.5,0" GUID="{813DDC6A-ABD4-4145-BBDF-AC417988D8B5}" Name="conPlayer_SceneAthMelee" RelativePosition="0.488636,0.0361892" Type="WZUIContainer" UseAbsSize="True" RelativeSize="0.8,0.56">
+                            <WZUIContainer Type="WZUIContainer" GUID="{81B48B8D-9606-46db-BF84-137C1EBB2580}" RelativePosition="0.5,0.606987" Visible="True">
+                                <WZUISpine Type="WZUISpine" GUID="{017DB356-C21D-40b9-B630-1F0A7B4E120D}" FileAtlas="" FileJson="" AnchorPoint="0.5,0" AnimationName="" Loop="True" RelativePosition="0.5,0.5" Name="spineBright_SceneAthMelee" Visible="False" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{4DCB6C8B-85FD-407c-869F-CBF4812FFFD8}">
+                            <Button Type="WZUIButton" LuaDoneFunctionName="onRole" GUID="{35CC710F-4768-4234-A4CC-E21832521BA5}">
+                                <NormalElement Type="WZUIContainer" GUID="{D0F51C61-6BEA-48a0-9669-BCAF247856C1}" />
+                                <SelectElement Type="WZUIContainer" GUID="{ED652063-4132-462d-BEB2-75DED7B158B1}" />
+                                <DisableElement Type="WZUIContainer" GUID="{40AD2164-73A6-4fe9-968B-BCDA07823CDA}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{838020A5-C716-45a7-B0E6-76EF947C6079}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.005,0.659484" Name="" AbsPosition="1.3592,242.163">
+                            <WZUIContainer Type="WZUIContainer" GUID="{096B5664-DB52-47fe-AE0E-B25A2D5F9C82}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.5,0.5" Name="conPet_SceneAthMelee" />
+                            <Button Type="WZUIButton" LuaDoneFunctionName="OnPet" GUID="{0940363E-607D-4e29-9C55-24BC132DD50A}">
+                                <NormalElement Type="WZUIContainer" GUID="{9AB14F03-2C51-47d3-BB71-2F42AD56185A}" />
+                                <SelectElement Type="WZUIContainer" GUID="{C247111D-7DE2-4bcc-926F-1A60DAE55E4A}" />
+                                <DisableElement Type="WZUIContainer" GUID="{16859870-7F7C-4d70-A336-40D91E19EB24}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{41EA5750-201D-429c-B622-EC47A3397100}" RelativeSize="1,1" TouchEnable="False" AbsContentSize="200,60" UseAbsSize="True" RelativePosition="0.5,0.883986" AbsPosition="132,324.599">
+                            <WZUIContainer Type="WZUIContainer" GUID="{20587160-1D06-4362-92DC-FE118EE16323}" RelativeSize="1,0.5" Name="conTitle_SceneAthMelee" NameCreate="True" Visible="True" RelativePosition="0.5,1" UseAbsSize="False" AnchorPoint="0.5,1">
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3bde3083-d006-4ef1-ac46-969e33a87a28}" Text="" FontSize="22" Name="txtPlayerTitle_SceneAthMelee" NameCreate="True" Color="255,121,31" TextKey="" EnableStroke="True" StrokeColor="79,60,48" StrokeSize="4" RelativePosition="0.5,0.53" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{38B404C6-0186-4e62-B6FE-AEB6EB0F3520}" RelativeSize="1,0.5" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+                                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{BFF771F9-4F9D-4cb3-9774-BCB3D54BC872}" Name="txtPlayerLevel_SceneAthMelee" MaxWidth="200" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{9985E807-22FA-492f-8281-C5EEE33F8AF9}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.005,0.240171" AbsPosition="1.03396,88.1908" Name="conWeapon_SceneAthMelee">
+                            <WZUISpine Type="WZUISpine" GUID="{3811676E-BD2C-4315-B89B-DB4D1869315A}" FileAtlas="ui/ui_jjc_weapon.atlas" FileJson="ui/ui_jjc_weapon.json" Loop="True" AnimationName="8" TouchEnable="False" TouchSwallow="False" UseOriginSizeProportion="False" RelativePosition="0.466666,1.11333" AbsPosition="46.6666,111.333" UseOriginSize="True" ScaleAnimation="1" Name="spineWeapon_SceneAthMelee" Visible="False" />
+                            <WZUIImage Type="WZUIImage" GUID="{0415A05F-B634-4075-8ED1-A855214F5809}" Name="imgWeapon_SceneAthMelee" Scale="1" UseOriginSize="True" />
+                            <Button Type="WZUIButton" LuaDoneFunctionName="onWeapon" GUID="{C0E51D01-6771-4bf8-8901-76C47C6E01C8}">
+                                <NormalElement Type="WZUIContainer" GUID="{49B0C4BB-151B-4ee2-B93B-CAA3B94CA5D5}" />
+                                <SelectElement Type="WZUIContainer" GUID="{96EF5656-C1B1-431b-8219-E15E5C4B5EF2}" />
+                                <DisableElement Type="WZUIContainer" GUID="{8AE9CDC2-AE34-4d08-86A2-55B55F8D6D5C}" />
+                            </Button>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{5669405F-AD22-4ae1-8F20-7281BCAFBB20}" RelativeSize="1,0.08" RelativePosition="0.5,0.0627386" AbsContentSize="370,78" UseAbsSize="True" Visible="True" AbsPosition="200,31.9967">
+                        <WZUIImage Type="WZUIImage" GUID="{4AFF8C0A-74C7-4968-94EC-915D7B8603D7}" File="ui/bag/common_icon_zhandoulidi.png" UseOriginSize="True" RelativePosition="0.5,0.5" />
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{13E671A0-C518-48c4-A0D4-816FC80675EC}" Name="ftbFight_SceneAthMelee" MaxWidth="500" Visible="True" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{01175592-F381-4bc4-BC81-8508594F3F5F}" RelativeSize="0.4,1" RelativePosition="0.722908,0.587229" AnchorPoint="0.5,0.5" Name="" AbsContentSize="402,420" UseAbsSize="True" AbsPosition="693.992,342.002">
+                    <WZUIContainer Type="WZUIContainer" GUID="{8D364DA8-3C62-4b45-AC57-EFA2AD230362}" TouchEnable="False">
+                        <WZUI9Image Type="WZUI9Image" GUID="{C31E9B5E-99B1-480d-AF76-4991AF64A07A}" File="ui/common/common_scale9_di51.png" CapInsets="" Visible="True" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{E7BDF323-A59F-42c1-B746-07AEA717B789}" AbsContentSize="290,128" UseAbsSize="True" RelativePosition="0.495893,0.800642" AbsPosition="199.349,336.27">
+                        <WZUIImage Type="WZUIImage" GUID="{D05B7856-7CD1-47f9-9D78-3464BFE7C8D2}" File="ui/copy/copy_icon_zdfb.png" ScaleX="0.95" ScaleY="0.84" Name="" NameCreate="True" Visible="True" Scale="0.95" />
+                        <WZUI9Image Type="WZUI9Image" GUID="{27B12F14-0C41-4f14-B8B1-73ACF531AFA8}" File="ui/common/common_scale9_kuang.png" Visible="True" />
+                        <WZUIImage Type="WZUIImage" GUID="{5950F0D1-B407-4528-A9F0-B059D682B98F}" File="ui/map/map0.png" UseOriginSize="True" RelativePosition="0.810345,0.828125" AbsPosition="235,106" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{63E04C58-E9D6-439a-B35F-7C2CD714840B}" Name="" Visible="True" AbsContentSize="380,230" UseAbsSize="True" RelativePosition="0.5,0.336888" AbsPosition="124,141.493">
+                        <WZUIContainer Type="WZUIContainer" GUID="{A8B54D03-9CB1-4412-B36B-9C709B523F61}" Visible="True">
+                            <WZUI9Image Type="WZUI9Image" GUID="{5F2E687F-8389-4c4b-B542-F30BF4B6D44F}" File="ui/common/common_scale9_di52.png" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{E3CC35E7-3B04-4918-AB92-34B64C924918}" RelativeSize="0.93,0.4" AnchorPoint="0.5,1" RelativePosition="0.5,0.913043" AbsPosition="190,210">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{3762FC6E-AF47-4fca-B1D1-3E61C877E895}" FontSize="22" Color="255,227,116" TextKey="PVP_RANK_2" RelativePosition="-0.0254669,0.850161" AbsPosition="12,78.2148" AnchorPoint="0,0.5" LabelStyleKey="C11_F22" />
+                            <WZUIMoveContainer Type="WZUIMoveContainer" GUID="{c7cdd98f-f24f-48d4-b0ca-3efb7532c91f}" AbsContentSize="370,175" UseAbsSize="True" RelativePosition="0.5,-0.26087" EnableMoveHorizontal="False" Name="conMove_SceneAthMelee">
+                                <MoveElement Type="WZUIContainer" GUID="{8b50e075-3c41-45ca-b362-5c8c189af9fd}" AbsContentSize="370,350" UseAbsSize="True" RelativePosition="0.5,-0.0257143">
+                                    <WZUIContainer Type="WZUIContainer" GUID="{b2a7bbf6-cf0c-4159-96bf-2173b5aa8b97}" AbsContentSize="370,350" UseAbsSize="True">
+                                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4dda39d8-e83d-4989-9658-5b39a206444d}" FontSize="22" Color="255,227,116" TextKey="" RelativePosition="0,0.975628" AbsPosition="0,58.2149" AnchorPoint="0,1" LabelStyleKey="C1_F22" Dimensions="360,0" Alignment="Left" Name="txtPlayTip_SceneAthMelee" Text="" />
+                                    </WZUIContainer>
+                                </MoveElement>
+                            </WZUIMoveContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{EC85AFDD-BC22-4aaf-8DD0-4F759A781044}" ShowAll="False" AbsContentSize="400,110" UseAbsSize="True" RelativePosition="0.728125,0.130839" AbsPosition="699,76.2004">
+                    <WZUIContainer Type="WZUIContainer" GUID="{725EF2C4-5247-4749-833D-D18091495CAB}" AbsContentSize="400,110" UseAbsSize="True" RelativePosition="0.5,0.5" ShowAll="False" AbsPosition="696.487,75.4186" Visible="True" Name="conMatch0_SceneAthMelee">
+                        <WZUIContainer Type="WZUIContainer" GUID="{B6E03E00-0CFA-435a-84B4-11974E84B9AB}" RelativeSize="1,1" RelativePosition="0.5,0.5" Name="conOpen_SceneAthMelee" Visible="True">
+                            <WZUIContainer Type="WZUIContainer" GUID="{13B36F29-E35D-4902-AA2F-CD3B87FC5DD5}" Name="" Visible="False" RelativeSize="1,0.3" AnchorPoint="0.5,1" RelativePosition="0.5,0.972727" AbsPosition="200,107">
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{650A74E6-8C48-4c35-AA84-A78FFAF2CA33}" Name="" Text="" FontSize="22" EnableStroke="True" Color="255,227,116" StrokeColor="79,60,48" StrokeSize="4" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.1975,0.5" TextKey="KING_REST_CLOSE_TIME" Visible="True" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3D81D8E3-2836-4a05-A61C-708CF4B80F6B}" Name="txtFightTime_SceneAthMelee" Text="" FontSize="22" EnableStroke="True" Color="255,89,74" StrokeColor="79,60,48" StrokeSize="4" Alignment="Left" AnchorPoint="0,0.5" RelativePosition="0.581061,0.5" TextKey="" Visible="True" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{4B5416F8-10ED-40ce-8336-4E4B6F49D6AE}" RelativeSize="1,1" AnchorPoint="0.5,0" RelativePosition="0.5,0" AbsContentSize="212,76" UseAbsSize="True">
+                                <Button Type="WZUIButton" Name="btnFight_SceneWorldBoss" LuaDoneFunctionName="OnFight" GUID="{8C3F353C-D1AA-4f61-9781-991ED6E824BB}" TouchEnable="True">
+                                    <NormalElement Type="WZUIContainer" GUID="{31F7791B-B14D-4a82-ADED-2F4A8363537B}">
+                                        <WZUIImage Type="WZUIImage" GUID="{48F182EF-0E2C-441f-9DCA-C93F35C724A7}" File="ui/common/common_btn_anniu8.png" UseOriginSize="False" />
+                                    </NormalElement>
+                                    <SelectElement Type="WZUIContainer" GUID="{95366D45-2700-4433-87F3-44ADE211A392}" Scale="1.05">
+                                        <WZUIImage Type="WZUIImage" GUID="{E19A51A5-20E5-41d7-AD8E-FB8B45666E0F}" File="ui/common/common_btn_anniu8_sel.png" />
+                                    </SelectElement>
+                                    <DisableElement Type="WZUIContainer" GUID="{D2AB6C00-01CC-4863-BD75-E6A4BAEF28AE}">
+                                        <WZUIImage Type="WZUIImage" GUID="{e1bf645e-a391-4dbd-bcc0-426fd1a2303a}" File="ui/common/common_btn_anniu8.png" GrayRender="True" UseOriginSize="False" />
+                                    </DisableElement>
+                                </Button>
+                                <WZArmature Type="WZArmature" GUID="{A1B03A68-5C1D-47e6-B8B0-F92ABB52E264}" ArmatureFile="ui/ui_tongyong_anniu.xml" ArmatureName="ui_tongyong_anniu" UseOriginSize="True" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Name="" TouchEnable="False" Visible="True">
+                                    <Action Type="WZUIArmatureAnimationById" GUID="{4831E203-7C2F-41b9-9186-00B8A3748817}" AnimationId="0" />
+                                </WZArmature>
+                                <WZUIImage Type="WZUIImage" GUID="{47D546EA-AA30-43e7-8BA6-89C7BB37025A}" File="ui/common/common_icon_tiaozhan.png" UseOriginSize="True" TouchEnable="False" Name="imgFightBtn_SceneAthMelee" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{929a4831-d496-4391-ba67-34f6e5fc321a}" Name="conStore_SceneAthMelee" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.073535,0.906884" Visible="False">
+                    <Button Type="WZUIButton" GUID="{fce35e81-d959-4496-8f76-d99d5a7b5151}" LuaActionName="Normal" LuaDoneFunctionName="onClickStore">
+                        <NormalElement Type="WZUIContainer" GUID="{b5906026-543e-4bff-85ff-1bf0f58bad84}">
+                            <WZUIImage Type="WZUIImage" GUID="{dbb9c9f9-6c02-4add-9d87-5d531e16634e}" File="ui/Hall/common_icon_adventure.png" UseOriginSize="True" Scale="0.95" ScaleX="0.95" ScaleY="0.95" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{0dafb14b-4172-4ff9-a8c0-7d34a11ea175}">
+                            <WZUIImage Type="WZUIImage" GUID="{4380355d-e4b1-42dd-8ab5-04d3c3cf7cce}" File="ui/Hall/common_icon_adventure.png" UseOriginSize="True" Scale="0.95" ScaleX="0.95" ScaleY="0.95" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{838027a9-a071-4c59-a275-8a435b80c847}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIButton Type="WZUIButton" AbsContentSize="60,60" UseAbsSize="True" LuaDoneFunctionName="onCheckInfo" GUID="{5f45eac0-4856-4de5-9279-35548264cbee}" RelativePosition="0.479793,0.906884" AnchorPoint="0.5,0.5" ShowAll="False" LuaActionName="Normal" Name="btnPro_SceneAthMelee" Visible="False">
+                    <NormalElement Type="WZUIContainer" GUID="{125fce12-5c75-4428-a38a-d2dbab1f9e21}" />
+                    <SelectElement Type="WZUIContainer" GUID="{6a71e61e-6e20-42a0-bfd1-dcbd7bbbfcdc}" />
+                    <DisableElement Type="WZUIContainer" GUID="{83f693db-90fe-4a89-83d9-b7b7154febc5}" />
+                    <WZUIImage Type="WZUIImage" GUID="{998a92c4-dbf9-47f4-8621-92aab26f767b}" File="ui/pvp/common_icon_tianpinxt.png" UseOriginSize="True" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{2123C6DC-91B7-41f3-89D5-B0A10321FDD5}" Name="conMark_SceneAthMelee" Visible="False" ShowAll="False" Order="10" RelativePosition="0.5,0.5">
+            <WZUIImage Type="WZUIImage" GUID="{4DEDE2E9-0B13-4872-94CF-3DC85BF91AEB}" File="ui/common/common_black_bg.png" Visible="True" Scale="3" Opacity="150" />
+            <WZUIContainer Type="WZUIContainer" GUID="{0D900DA7-514A-4d89-AB39-1C439065A8DE}" Name="" Order="600" Visible="True" TouchContainerEnable="True" AbsContentSize="355,405" UseAbsSize="True" RelativePosition="0.5,0.5" ShowAll="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{1CF612C0-A3BB-46fd-B30B-701A861BDA9A}" AbsContentSize="355,405" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{6A43372A-6EAC-4790-8308-B295566CA507}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{FDC85F03-472A-4e6d-9A63-0E15DF3640A0}" TextKey="HALL_DESC1" LabelStyleKey="C1_F24_S4_C3" RelativePosition="0.5,0.956543" AbsPosition="177.5,387.4" Dimensions="0,0" Alignment="Center" AnchorPoint="0.5,1" Text="" Name="" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{263D188A-5F0D-45de-BDDF-2BE27F0984CE}" Name="" Visible="True" ShowAll="False" Order="0" RelativePosition="0.5,0.5">
+                    <WZUILabelAtlasFont CharMapFileName="ui/common_num/battle_num_timeshuzi2.png" Color="255,255,255" GUID="{9B1A0BC4-021A-475d-89CD-3582A841E5B0}" Height="116" Name="lafTime_SceneAthMelee" Order="501" RelativePosition="0.5,0.639753" Text="1" Type="WZUILabelAtlasFont" UseOriginSize="True" Visible="True" Width="85.6" GrayRender="False" IsOpacityModifyRGB="False" Scale="1" StartChar="48" AbsPosition="177.5,259.1" ScaleX="1" ScaleY="1" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{20391DBB-A339-4049-9DD7-8915D51B8F76}" AbsContentSize="345,95" UseAbsSize="True" RelativePosition="0.5,0.32">
+                        <WZUI9Image Type="WZUI9Image" GUID="{1B8F58C4-299D-4728-9057-25B260264A4D}" File="ui/common/common_scale9_di20.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{421715DB-6D17-4ae9-ABAB-651F8189BC6C}" TextKey="" LabelStyleKey="C2_F22" RelativePosition="0.0393478,0.955789" AbsPosition="13.575,90.8" Dimensions="315,0" Alignment="Left" AnchorPoint="0,1" Text="" Name="txtTimeDownTip_SceneAthMelee" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <Button Type="WZUIButton" GUID="{98F33E2A-1C81-4bca-AC89-712454FE8C59}" RelativePosition="0.5,0.105864" LuaDoneFunctionName="onCancelMatch" Name="btnCancel" AbsContentSize="110,60" UseAbsSize="True" AbsPosition="177.5,42.8749">
+                    <NormalElement Type="WZUIContainer" GUID="{99F96FD4-C7EC-4fa9-A4B6-644D90A032D0}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{3F6A0952-F8C1-4ae3-ADCD-0FA0EF9AD293}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{5C5D2328-3A91-4a55-BE93-156DC71CCFDF}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{F507D991-B181-4b13-89A4-AAAF9F1C50D2}" File="ui/common/common_btn_anniu3_0_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{374D9B46-ABAB-48c0-9AEC-C6E844327F06}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{A5C7EE5B-DFCD-48b0-AFE9-58D67203E9D6}" TextKey="CANCEL" LabelStyleKey="SMALL_ORANGE_BTN" RelativePosition="0.5,0.5" AbsPosition="480,223" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{11AFF7A7-43C4-42ea-9C59-A8B787E1E533}" Name="conTips_SceneAthMelee" ShowAll="True" Order="3" />
+    </WZUIFrame>
+</SceneAthMelee>

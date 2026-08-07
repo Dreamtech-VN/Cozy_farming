@@ -1,0 +1,124 @@
+﻿<WndCommunityBossWin GUID="{5c0a76c8-95d8-4305-b181-58956668d4d3}">
+    <WZUIWindow Type="WZUIWindow" GUID="{d3c710e9-5099-400c-b8c4-9e74bcbbd8bf}" LuaObjectName="WndCommunityBossWin" NameCreate="True" Name="WndCommunityBossWin" LuaTouchBeganFunction="OnTouchBegin">
+        <WZUIContainer Type="WZUIContainer" GUID="{d450892c-8ea1-4ba0-853c-c082d3f368fa}" Visible="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{2c1d560e-efe4-416e-b4aa-5f1a32b661db}" Name="conWin_WndCommunityBossWin" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{9401f0e2-b6fe-41ef-8da5-05c44ba4a585}" Name="" ShowAll="False" Visible="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{cf2406b2-e65a-43ac-b7b3-665f745d9cce}">
+                        <WZUIContainer Type="WZUIContainer" GUID="{ccc934ca-7eff-4dfa-88ee-f55f996e0364}" Visible="True">
+                            <WZUIContainer Type="WZUIContainer" GUID="{dd58d538-9cc3-4c3c-a95c-a021035b27eb}" RelativeSize="1,1" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5">
+                                <WZUIImage Type="WZUIImage" GUID="{5d715828-f8de-4475-9408-1499a830fa34}" File="ui/copy_settlement/common_pic_sl.png" FlipX="True" />
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{02fb3ade-af78-4816-9b98-497f64faeca2}" Name="">
+                            <WZUIParticle Type="WZUIParticle" GUID="{eab542ac-ef48-4f4b-8719-2c2ba9e6c316}" PlistFile="particle/ui_jiesuan_stars_01.plist" AnchorPoint="0.5,0" RelativePosition="0.5,0" Visible="True" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{7e34987b-8d0c-4fda-b359-15cd11a38bf1}" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Visible="True">
+                                <WZUIImage Type="WZUIImage" GUID="{4f4ff3b5-1fe1-4b64-8606-8394f06bdfbc}" File="ui/copy_settlement/common_pic_guangx.png" UseOriginSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0.5" ScaleX="30" Scale="3">
+                                    <Action Type="WZUIActionRotateBy" GUID="{5566bf51-d985-4b49-b1b7-1031fb131e4d}" Angle="360" IsLoop="True" Duration="30" />
+                                </WZUIImage>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{d8744cf0-01cd-46a1-b0dc-6646fbb6c8dc}" ShowAll="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{05f8109c-d84d-4230-886a-3992c0502012}" Name="" RelativeSize="0.7,1" ShowAll="False">
+                            <Action Type="WZUIActionSequence" GUID="{b3289e65-3033-48ff-9f81-bbc38b7409f7}">
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{92b38c92-d436-498e-bf36-20df71ca2a0f}" Duration="2" FinishLuaFunction="OnPlayerParCallBack" />
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{b21f0ef5-427a-49aa-a442-b61e90e33527}" Duration="3" />
+                                <ChildAction Type="WZUIActionMoveBy" GUID="{1359c145-1dd8-413e-8a35-e9901f0c0de2}" MoveX="-180" Duration="0.5" FinishLuaFunction="" />
+                                <ChildAction Type="WZUIActionDelayTime" GUID="{bf11965f-6e67-430e-b0b8-dae22b1341b1}" Duration="3" FinishLuaFunction="OnAniFinishCallBack" />
+                            </Action>
+                            <WZUISpine Type="WZUISpine" GUID="{7e3c982f-a845-4b4c-832c-7e369d67f0f5}" FileAtlas="copy_settlement/win2.atlas" FileJson="copy_settlement/win2.json" AnimationName="win" UseOriginSize="True" Scale="1.1" RelativePosition="0.5,0.05" ScaleX="1" ScaleY="1" Visible="True" AnchorPoint="0.5,0" Name="spineWin_WndCommunityBossWin" />
+                            <WZUISpine Type="WZUISpine" GUID="{59c70930-8815-4211-8326-aac788175edc}" FileAtlas="copy_settlement/over.atlas" FileJson="copy_settlement/over.json" AnimationName="win" UseOriginSize="True" Scale="1.1" RelativePosition="0.5,0.05" ScaleX="1" ScaleY="1" Visible="True" AnchorPoint="0.5,0" Name="spineOver_WndCommunityBossWin" />
+                            <WZUIContainer Type="WZUIContainer" GUID="{5f1871e5-ea37-41f2-9af6-42eeb9e8e52c}" Name="conPlayer_WndCommunityBossWin" AbsContentSize="200,300" UseAbsSize="True" RelativePosition="0.5,0.332812">
+                                <WZUIContainer Type="WZUIContainer" GUID="{69f497e2-2c28-4cd4-9748-9875229a0576}" RelativePosition="0.5,0.363333">
+                                    <WZUIImage Type="WZUIImage" GUID="{573fc062-b767-4a23-9251-80a91c5c94a4}" File="ui/copy_settlement/common_pic_slbg.png" UseOriginSize="True" Scale="1" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{ced517d9-fcbc-482e-8556-c1d2562ccb02}" RelativeSize="1,0.2" RelativePosition="0.525,0.0533341">
+                                    <WZUIImage Type="WZUIImage" GUID="{58a20f45-3660-4f8f-a7d1-0b792743c220}" File="ui/common/common_icon_yy.png" UseOriginSize="True" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{d3152f19-068b-417b-8365-3538df7ed6da}" Name="conPar1_WndCommunityBossWin" Visible="True" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{ef338957-415d-4547-b33d-0a7cef3dfa53}" Name="conPar2_WndCommunityBossWin" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{f5d77159-7ffe-4365-a4d0-c283c236e434}" Name="conBtnContinue_WndCommunityBossWin" NameCreate="True" Visible="False">
+                    <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickContinue" GUID="{9feae594-810c-4ffe-86b8-3763b250a5e9}">
+                        <NormalElement Type="WZUIContainer" GUID="{d0958be4-a115-4fb3-ad5b-81ba300bb921}" />
+                        <SelectElement Type="WZUIContainer" GUID="{0f62c0e1-7018-45a0-9019-ddf6fd4e03dc}" />
+                        <DisableElement Type="WZUIContainer" GUID="{2fcda157-c176-4801-bcdf-5721dafa6c7c}" />
+                    </WZUIButton>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{8a7c1cee-4fd7-4f0a-ad23-1ea05099708e}" Color="62,34,8" FontSize="22" TextKey="DAILY_COPY_CLICK_CONTINUE" RelativePosition="0.31875,0.053125" Name="txtClickContinue_WndCommunityBossWin" NameCreate="True" Visible="True" ShowAll="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{b3c5be46-f168-4740-b96e-fb294b471f8c}" Name="" AbsContentSize="" UseAbsSize="False" UseAbsCoordinate="False" Visible="True" ShowAll="True" RelativePosition="0.5,0.504687">
+                    <WZUIContainer Type="WZUIContainer" GUID="{d426cd2d-e4a2-40c1-91b2-c01242cc1f75}" AbsContentSize="380,400" UseAbsSize="True" RelativePosition="0.771579,0.36" Visible="True">
+                        <WZUIContainer Type="WZUIContainer" GUID="{37b31c97-0dbc-43dc-a375-b77389f1a2ef}" TouchEnable="False">
+                            <WZUI9Image Type="WZUI9Image" GUID="{714ec1d8-0611-452d-998d-d8ff53dc4188}" RelativePosition="0.502632,0.5" File="ui/common/common_scale9_jiesuandi.png" Opacity="150" />
+                            <WZUIImage Type="WZUIImage" GUID="{32a69616-de55-4744-9c8c-5ad477126d88}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.967335,0.968295" FlipX="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{aeda54d4-fad7-4fa5-b806-4770e71f5ae7}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0329548,0.966868" />
+                            <WZUIImage Type="WZUIImage" GUID="{092763a6-9f7a-4eb4-9343-7c3acee4dc79}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.0367578,0.0318981" FlipY="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{ffeb9622-2203-464f-b5e1-baa0ec1f3785}" File="ui/common/common_pic_jiao.png" UseOriginSize="True" RelativePosition="0.965837,0.0365477" FlipX="True" FlipY="True" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{1d00f3a7-bf73-4314-9ffe-e9464e716bb3}">
+                            <WZUIContainer Type="WZUIContainer" GUID="{58eba435-4ff8-45e9-9aff-40dbb20e00d4}" RelativeSize="1,0.24" AnchorPoint="0.5,1" RelativePosition="0.5,1" TouchEnable="False">
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{629c2d21-809d-4c16-b934-4836e2513536}" TextKey="" FontSize="22" Color="255,236,193" RelativePosition="0.5,0.544021" Alignment="Center" AnchorPoint="0.5,0.5" Name="labTitle_WndCommunityBossWin" Text="恭喜！您给了BOSS最后一下\n击杀了BOSS！" LabelStyleKey="C1_F22" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{fbdce33e-c796-4126-8a01-63adfda90670}" RelativeSize="1,0.3" RelativePosition="0.5,0.48" AnchorPoint="0.5,0" TouchEnable="False">
+                                <WZUIContainer Type="WZUIContainer" GUID="{28bfbece-10a5-4bc0-8204-8fe219f59c15}" RelativeSize="0.9,0.25" RelativePosition="0.5,1" AnchorPoint="0.5,1">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{154f71e5-e242-476e-8f58-9914bfe4c09e}" File="ui/common/common_scale9_heidi1.png" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{4294a509-bbd9-4297-9f96-2acee6e7dae1}" TextKey="GUILD_BOSS_WIN_HURT_TITLE" FontSize="20" LabelStyleKey="C10_F20" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{969fbcca-fc56-4e56-95a5-0140e16e0634}" AbsContentSize="350,2" UseAbsSize="True" RelativePosition="0.5,0.373096">
+                                    <WZUIImage Type="WZUIImage" GUID="{18498e53-8d8f-4cac-a31f-77c2554c6a3a}" File="ui/common/common_scale9_fengexian.png" />
+                                </WZUIContainer>
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a028c420-86ad-4d26-8bca-fd78696a0d16}" LabelStyleKey="C1_F22" Text="造成伤害" AnchorPoint="0,0.5" RelativePosition="0.0789476,0.544312" TextKey="GUILD_BOSS_WIN_HURT" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ef5bc2af-145d-4b0c-a18f-d5e0b89bb49d}" LabelStyleKey="C1_F22" Text="BOSS剩余血量" AnchorPoint="0,0.5" RelativePosition="0.0789474,0.184004" TextKey="GUILD_BOSS_WIN_HP_PRE" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c6843625-7e60-4795-bca8-bb6551c63245}" LabelStyleKey="C15_F22" Text="789" AnchorPoint="1,0.5" RelativePosition="0.928946,0.544312" Name="labHurtPercent_WndCommunityBossWin">
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{b626e05e-80c4-4945-aaa7-a7402f0ea563}" LabelStyleKey="C15_F22" Text="789" AnchorPoint="1,0.5" RelativePosition="0,0.544312" Name="labHurtNum_WndCommunityBossWin" />
+                                </WZUILabelTTF>
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6a2ecaee-9f14-4366-a16d-d311f5f65e16}" LabelStyleKey="C15_F22" Text="789" AnchorPoint="1,0.5" RelativePosition="0.928946,0.184004" Name="labHpPre_WndCommunityBossWin" />
+                            </WZUIContainer>
+                            <WZUIContainer Type="WZUIContainer" GUID="{2a8ffd0d-1ad2-448a-9556-be4e3798cefd}" RelativeSize="1,0.4" AnchorPoint="0.5,0" RelativePosition="0.5,0.0847222">
+                                <WZUIContainer Type="WZUIContainer" GUID="{22fc01e6-4b5c-4bb1-8d02-3f224b764e40}" RelativeSize="0.9,0.2" RelativePosition="0.5,1" AnchorPoint="0.5,1" TouchEnable="False">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{0a071250-2126-4a79-a552-9415f880f86d}" File="ui/common/common_scale9_heidi1.png" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{6ec8df59-dbde-4e7a-9267-43131a7823ee}" TextKey="GET_AWARD" FontSize="20" LabelStyleKey="C10_F20" />
+                                </WZUIContainer>
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c6e0a2dd-51fd-4089-bcd6-e4343549ab73}" LabelStyleKey="C1_F22" Text="造成伤害" AnchorPoint="0,0.5" RelativePosition="0.0789476,0.657" TextKey="GUILD_BOSS_WIN_HURT_REWARD" Name="txtHurtReward_WndCommunityBossWin" TouchEnable="False" />
+                                <WZUILabelTTF Type="WZUILabelTTF" GUID="{b2bc9d15-7161-420c-9180-63b0011e484b}" LabelStyleKey="C15_F22" Text="789" AnchorPoint="1,0.5" RelativePosition="0.928946,0.657" Name="labHurtReward_WndCommunityBossWin" TouchEnable="False" />
+                                <WZUIImage Type="WZUIImage" GUID="{eaa96e70-5acc-42fc-ba2a-a58d64626173}" File="shopitems/common_icon_gonghui_pic.png" UseOriginSize="True" RelativePosition="0.786841,0.657" ScaleX="1" ScaleY="1" Scale="1" Name="imgHurtReward_WndCommunityBossWin" TouchEnable="False" />
+                                <WZUIContainer Type="WZUIContainer" GUID="{77755420-baa3-4f51-b133-f98d234eccf8}" Name="conKillInfo_WndCommunityBossWin" Visible="True" RelativeSize="1,0.25" AnchorPoint="0.5,0" RelativePosition="0.5,0.275" TouchEnable="False">
+                                    <WZUIContainer Type="WZUIContainer" GUID="{6e450425-0b97-4819-8d2b-e5ba8cd26d9e}" AbsContentSize="350,2" UseAbsSize="True" RelativePosition="0.5,0.98">
+                                        <WZUIImage Type="WZUIImage" GUID="{67f34008-f360-4d83-86d8-66bbfeaa04b2}" File="ui/common/common_scale9_fengexian.png" />
+                                    </WZUIContainer>
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{553ea10a-74f3-46a4-ba6e-0adfa4eae6e0}" LabelStyleKey="C1_F22" Text="BOSS剩余血量" AnchorPoint="0,0.5" RelativePosition="0.0789474,0.5" TextKey="GUILD_BOSS_WIN_KILL_REWARD" Name="txtKillReward_WndCommunityBossWin" />
+                                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{bb7b1d3f-1019-473e-9666-74fa9e898e80}" LabelStyleKey="C15_F22" Text="789" AnchorPoint="1,0.5" RelativePosition="0.928946,0.5" Name="labKillReward_WndCommunityBossWin" />
+                                    <WZUIImage Type="WZUIImage" GUID="{15ebb0c7-c881-4246-9246-f05debea0133}" File="ui/common/common_icon_jinbi.png" UseOriginSize="True" RelativePosition="0.781578,0.5" ScaleX="0.9" ScaleY="0.9" Scale="0.9" Name="imgKillReward_WndCommunityBossWin" />
+                                </WZUIContainer>
+                                <WZUIContainer Type="WZUIContainer" GUID="{61586106-95a2-4a7b-8daa-d34748758e4f}" Name="conExdReward_WndCommunityBossWin" RelativeSize="1,0.45" RelativePosition="0.5,0.05">
+                                    <WZUIContainer Type="WZUIContainer" GUID="{d5e08c68-c1ec-4640-a639-88d03d2b30f3}" AbsContentSize="350,2" UseAbsSize="True" RelativePosition="0.5,0.98">
+                                        <WZUIImage Type="WZUIImage" GUID="{1e1ee948-7e36-4868-9184-11434b997a80}" File="ui/common/common_scale9_fengexian.png" />
+                                    </WZUIContainer>
+                                    <WZUIContainer Type="WZUIContainer" GUID="{d98bfe7d-d938-4f27-93ce-7458ee5dbdda}" AbsContentSize="60,60" UseAbsSize="True" Name="conExdReward1_WndCommunityBossWin" RelativePosition="0.168,0.5" Visible="False" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{beb269e4-81f5-4608-8f16-6a7b21b2e3fd}" AbsContentSize="60,60" UseAbsSize="True" Name="conExdReward2_WndCommunityBossWin" RelativePosition="0.345,0.5" Visible="False" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{39d60cc5-dace-46ef-b6f6-a06229c4010f}" AbsContentSize="60,60" UseAbsSize="True" Name="conExdReward3_WndCommunityBossWin" RelativePosition="0.522,0.5" Visible="False" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{4bef011b-41ab-4880-a1c2-6e7a45cb03a6}" AbsContentSize="60,60" UseAbsSize="True" Name="conExdReward4_WndCommunityBossWin" RelativePosition="0.699,0.5" Visible="False" />
+                                    <WZUIContainer Type="WZUIContainer" GUID="{7fa3a1b5-ed53-4ebd-85db-dd5ef9cd1bba}" AbsContentSize="60,60" UseAbsSize="True" Name="conExdReward5_WndCommunityBossWin" RelativePosition="0.876,0.5" Visible="False" />
+                                </WZUIContainer>
+                            </WZUIContainer>
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <Action Type="WZUIActionSequence" GUID="{af87a347-9724-4d17-863d-93983e5dea8a}" RunTimes="1">
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{773d4cc3-99ae-4d6e-8a58-4a2b3d3e4b65}" MoveX="1000" Duration="0" />
+                        <ChildAction Type="WZUIActionDelayTime" GUID="{25cba2b0-ccc9-4c54-9256-f041516f855e}" Duration="5.5" />
+                        <ChildAction Type="WZUIActionMoveBy" GUID="{a8f836e3-ff4b-4e20-adad-6cce54247169}" MoveX="-1000" FinishLuaFunction="OnConFinishCallBack" Duration="0.5" />
+                    </Action>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{48e41db8-aeba-48d7-ac23-e6ac21071ca7}" AbsContentSize="380,420" UseAbsSize="True" RelativePosition="0.774704,0.385482" Visible="True" ShowAll="True" Name="conCilck_WndCommunityBossWin" TouchEnable="False" />
+            <Action Type="WZUIActionSequence" GUID="{3394b30e-e6ed-4588-98d2-81638f1f7ef0}" RunTimes="1">
+                <ChildAction Type="WZUIActionDelayTime" GUID="{ca7908ba-f544-47d4-b1c1-c33dbfd0dd69}" Duration="0.2" />
+                <ChildAction Type="WZUIActionShow" GUID="{ec7818b9-442f-4101-8cbb-bff04b81b3fc}" />
+                <ChildAction Type="WZUIActionContainerFadeFromTo" GUID="{177da2ef-ac7f-4da7-bf17-f6ae035e3b74}" OpacityTo="255" Duration="1" RemoveTarget="False" />
+            </Action>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCommunityBossWin>

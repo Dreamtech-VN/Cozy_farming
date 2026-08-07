@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<WndTips27 GUID="{67928812-b615-4699-b925-c2813cb4bb5b}">
+    <WZUIWindow AbsContentSize="320,160" AbsPosition="0,0" AnchorPoint="0.5,0.5" GUID="{0af3c292-d9d7-47f7-97ea-4212855c00de}" LuaObjectName="WndTips27" Name="WndTips27" NameCreate="True" RelativePosition="0.5,0.5" RelativeSize="1,1" ShowAll="False" TouchContainerEnable="True" TouchEnable="True" TouchSwallow="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="True" Visible="True" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{fd12389f-33e1-42e2-b50f-126faab53b4b}" AbsContentSize="320,160" UseAbsSize="True" RelativePosition="0.5,0.5" Name="conType27_WndTips" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{eb4b2b82-f300-48a9-a208-28067d6efd73}" AbsContentSize="320,160" UseAbsSize="True" Name="conTips27_WndTips" Visible="True" RelativeSize="1,1" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" TouchEnable="False">
+                <WZUI9Image Type="WZUI9Image" GUID="{fbf3f6b1-25d0-46a3-96fa-4a505b148d8f}" File="ui/common/common_scale9_di24.png" Name="" ScaleY="1" AnchorPoint="0.5,1" RelativePosition="0.5,1" />
+                <WZUIContainer Type="WZUIContainer" GUID="{58672778-9ab2-4307-8ad8-161f21fc3e8e}" AbsContentSize="300,95" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,0.923667">
+                    <WZUIContainer Type="WZUIContainer" GUID="{925fd975-3d57-44d2-9340-a758870adce2}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.165,0.331579">
+                        <WZUIImage Type="WZUIImage" GUID="{f6781456-1a5e-4bb3-b50c-ec213cc9c3b0}" File="ui/practice/xiulian_icon_fy_fore.png" AbsPosition="76,76" UseOriginSize="True" RelativePosition="0.5,0.65" Name="imgTips27Icon_WndTips" />
+                    </WZUIContainer>
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{9efc5583-3e1c-4196-9b8a-5977caae5cdc}" FontSize="22" Color="255,227,116" Text="Lv4 治疗包" RelativePosition="0.316667,0.665789" Name="txtTips27Lv_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{a203387e-3422-49d1-b7e2-df34409fffa0}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0" ScaleX="1.4" Scale="1.4" ScaleY="1" AnchorPoint="0.5,1" Name="" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{6eebfca3-3071-42bf-8e58-a32a4d6ed841}" RelativePosition="0.783333,0.269517" AbsContentSize="300,30" UseAbsSize="True" Name="" Visible="True" AbsPosition="235,25.6041">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1aff8f02-b9c9-4cbf-ab61-359a8fde5bbc}" FontSize="22" Color="255,227,116" Text="攻击" RelativePosition="0.0337918,0.5" Name="txtTips27Desc2_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" TextKey="" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{7f3b7209-bf8b-4158-8e2b-1b04887a1c82}" FontSize="22" Color="99,255,95" Text="30" RelativePosition="0.287931,0.5" Visible="True" Name="txtTips27Desc3_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{5bebdde6-5997-4d5b-b48d-bf3dfa36f11a}" AbsContentSize="300,35" UseAbsSize="True" RelativePosition="0.500592,0.179167" Name="" Visible="True" AbsPosition="160.189,28.6667">
+                    <WZUIImage Type="WZUIImage" GUID="{03fd997b-3a2c-4e5e-bb4d-ffb189419c0c}" File="ui/common/common_progress_exp2_bg.png" UseOriginSize="True" RelativePosition="0.58,0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{b86310db-e9b0-48a7-be4d-e6b59ed21021}" File="ui/common/common_icon_exp.png" UseOriginSize="True" Scale="0.9" ScaleX="0.9" ScaleY="0.9" RelativePosition="0.04,0.5" AnchorPoint="0,0.5" />
+                    <WZUIProgress Type="WZUIProgress" GUID="{818334a1-9efc-476e-87b8-8c48325a5cec}" BgPicture="ui/common/common_progress_exp2_fore.png" UseOriginSize="True" Percentage="50" Name="proTips27_WndTips" RelativePosition="0.58,0.5" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{547f2481-da6b-4340-a791-0405e89c9419}" AnchorPoint="0.5,0.5" Color="255,236,193" EnableStroke="True" FontSize="20" StrokeColor="79,60,48" StrokeSize="4" RelativePosition="0.58,0.5" Name="txtTips27Exp_WndTips" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTips27>

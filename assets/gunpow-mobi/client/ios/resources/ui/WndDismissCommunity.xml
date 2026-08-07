@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<WndDismissCommunity GUID="{FDE8F4BA-CA37-4d41-B0D5-81369EA692C8}">
+    <WZUIWindow AbsContentSize="385,320" GUID="{50F173F3-7129-4684-865F-8576F675761E}" LuaObjectName="WndDismissCommunity" Name="WndDismissCommunity" NameCreate="True" Type="WZUIWindow" UseAbsSize="True" ShowAll="True" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{0D921B0E-1329-412a-B495-9C980151C37A}" AbsContentSize="385,320" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{295BA61D-B8F3-4db3-B3F1-C991B2372485}" File="ui/common/common_scale9_di19.png" CapInsets="60,110,10,10" />
+            <WZUIContainer Type="WZUIContainer" GUID="{528937F4-819C-452b-A559-012C56D3DB2E}" AbsContentSize="370,175" UseAbsSize="True" RelativePosition="0.5,0.54">
+                <WZUI9Image Type="WZUI9Image" GUID="{6505C2A8-31D1-431c-9C15-5BD046CBA136}" File="ui/common/common_scale9_di20.png" />
+            </WZUIContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{050E95A0-DB17-4127-9908-28C3F7B7193E}" FontSize="24" Color="255,236,193" BoldFont="True" EnableStroke="True" RelativePosition="0.5,0.9" StrokeSize="4" StrokeColor="132,66,29" Text="退出公会" Name="txtTitle_WndDismiss" TextKey="" AbsPosition="192.5,288" />
+        </WZUIContainer>
+        <WZUILabelTTF Alignment="Center" Color="62,34,8" Dimensions="350,0" FontSize="24" GUID="{1C4164F8-B3F5-4313-B60C-92A9EC214E19}" Name="txtMidContent_WndDismissCommunity" RelativePosition="0.5,0.525714" Text="" Type="WZUILabelTTF" />
+        <WZUIContainer AbsContentSize="0,0" GUID="{DE29E0E1-6C25-4f15-A37B-355C55FE0E12}" Name="btnCon_WndDismissCommunity" RelativePosition="0.5,0.14375" RelativeSize="1,0.24" Type="WZUIContainer" UseAbsSize="False" Visible="True" AbsPosition="192.5,46">
+            <Button AbsContentSize="116,56" GUID="{C08D89C5-E825-47f1-974B-81DDE92F4FBD}" LuaDoneFunctionName="onSureBtn" Name="btnSure_WndDismissCommunity" RelativePosition="0.725045,0.487684" Type="WZUIButton" UseAbsSize="True" Visible="True" LuaActionName="Normal">
+                <NormalElement GUID="{C6A1FA26-4810-4fdf-80F7-CE66B77FAD80}" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{346BFCE3-76D5-417f-8AF8-BC74E81B0B9C}" File="ui/common/common_btn_anniu10.png" />
+                </NormalElement>
+                <SelectElement GUID="{00D477B1-1376-4af3-BD02-E1F705A77632}" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{252F70B5-8271-4fa2-863E-33AD35CC09AA}" File="ui/common/common_btn_anniu10_sel.png" Scale="1" ScaleX="1" ScaleY="1" />
+                </SelectElement>
+                <WZUIImage File="common/button_text/button_green_2.png" GUID="{99DE906A-FF05-464a-A16B-ADD1CE45B85B}" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="False" />
+                <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{4245BF13-2D6F-42e5-BC5F-95ADDE9FB774}" Name="txtSure_WndDismissCommunity" RelativePosition="0.5,0.511429" Scale="1" ScaleX="1" ScaleY="1" StrokeColor="3,111,8" StrokeSize="4" Text="" Type="WZUILabelTTF" BoldFont="True" EnableStroke="True" LabelStyleKey="SMALL_GREEN_BTN" />
+            </Button>
+            <WZUIButton AbsContentSize="116,56" GUID="{E51F49CF-7DB2-4b48-AA35-573538F4D9BB}" LuaDoneFunctionName="onCancelBtn" Name="btnCancel_WndDismissCommunity" RelativePosition="0.285134,0.5" Type="WZUIButton" UseAbsSize="True" LuaActionName="Normal" AbsPosition="109.777,38.4">
+                <NormalElement GUID="{DD6DA3FA-91EB-4714-A384-E3BA92700435}" RelativePosition="0.488356,0.5" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{0096D983-0ADE-4250-8A6F-9667BBD2DD5A}" File="ui/common/common_btn_anniu3.png" />
+                </NormalElement>
+                <SelectElement GUID="{6ED4A234-AAA3-4a15-9D56-0A5D871CDFE4}" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{A2589051-E127-40b4-BBE7-802FFFA8B401}" File="ui/common/common_btn_anniu3_sel.png" Scale="1" ScaleX="1" ScaleY="1" />
+                </SelectElement>
+                <DisableElement GUID="{7CF704D3-A2F3-4f0d-BFF7-35E3892EE59F}" Type="WZUIContainer" />
+                <WZUIImage File="common/button_text/button_blue_2.png" GUID="{2E9FD1DC-6C8A-4278-A23D-159896A46DB7}" RelativePosition="0.458333,0.5" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="False" />
+                <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{A1B4F0DF-508D-4fcf-BFAA-BCA98DF00B2E}" Name="txtCancel_WndDismissCommunity" RelativePosition="0.5,0.511429" Scale="1" ScaleX="1" ScaleY="1" StrokeColor="136,66,29" Text="" Type="WZUILabelTTF" StrokeSize="4" EnableStroke="True" BoldFont="True" LabelStyleKey="SMALL_ORANGE_BTN" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIButton GUID="{5891008D-009F-4a1d-9849-62B584401CA8}" LuaDoneFunctionName="onUpGradeBtnBtn" Name="btnUpGradeBtn_WndDismissCommunity" RelativePosition="0.72,0.140625" Type="WZUIButton" UseAbsSize="True" Visible="False" AbsContentSize="116,56" AbsPosition="277.2,45" LuaActionName="Normal">
+            <NormalElement GUID="{3684F4F3-0291-4c51-86F8-78E4B736EAB0}" Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.5">
+                <WZUI9Image File="ui/common/common_btn_anniu10.png" GUID="{304FFEC6-62A3-4d31-8C04-37CFA91D243B}" Type="WZUI9Image" UseOriginSize="False" />
+            </NormalElement>
+            <SelectElement GUID="{9700D047-B77A-435c-B034-812CFC0D0273}" Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True">
+                <WZUI9Image File="ui/common/common_btn_anniu10_sel.png" GUID="{A544C643-2E0C-4cb7-86CB-5FEA331E72D1}" Type="WZUI9Image" UseOriginSize="False" Scale="1" ScaleX="1" ScaleY="1" />
+            </SelectElement>
+            <DisableElement GUID="{F9F9B096-74C7-4d92-AC4B-27414B2BC413}" Type="WZUIContainer" />
+            <WZUILabelTTF Color="255,236,193" FontSize="24" GUID="{0106901B-D364-49e8-B4C3-D4F40D71128E}" Name="txtOK_WndDismissCommunity" RelativePosition="0.5,0.511429" ScaleX="1" StrokeColor="3,111,8" StrokeSize="4" Text="" Type="WZUILabelTTF" EnableStroke="True" LabelStyleKey="SMALL_GREEN_BTN" />
+        </WZUIButton>
+        <WZUIContainer GUID="{D9B1F871-4216-4f4c-838D-70571E962DD0}" Name="conPresidentGiveWay_WndDismissCommunity" Type="WZUIContainer" Visible="False">
+            <WZUILabelTTF Color="87,35,0" FontSize="24" GUID="{75D34C9D-1363-4876-BFB4-6F1C6BFD9267}" Name="txtPresdientGiveWayYesOrNo_WndDismissCommunity" RelativePosition="0.5,0.511429" Text="" Type="WZUILabelTTF" />
+            <Button GUID="{73708B72-4B22-4921-AB16-056C8BA10ED0}" LuaDoneFunctionName="onPresidentYesBtn" Name="btnYes_WndDismissCommunity " RelativePosition="0.72,0.140625" Type="WZUIButton" UseAbsSize="True" Visible="True" AbsContentSize="116,56" AbsPosition="277.2,45" LuaActionName="Normal">
+                <NormalElement GUID="{007BA1A2-9C7F-4272-B771-46B21A6B24C9}" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{2015D213-B785-4535-B11A-0B929CFCAA06}" File="ui/common/common_btn_anniu10.png" />
+                </NormalElement>
+                <SelectElement GUID="{36AA0506-099A-469b-8B3B-13AF6D9CF4BD}" Type="WZUIContainer">
+                    <WZUI9Image Type="WZUI9Image" GUID="{571D3272-198A-4b1c-AB78-F8E4D4E5007D}" File="ui/common/common_btn_anniu10_sel.png" Scale="1" ScaleX="1" ScaleY="1" />
+                </SelectElement>
+                <DisableElement GUID="{9C0859B1-48AA-437c-9984-3CD78CD537CB}" Type="WZUIContainer" />
+                <WZUILabelTTF Color="255,255,255" FontSize="24" GUID="{05255BE9-3EE8-48aa-A249-3DE15C419195}" Name="txtYes_WndDismissCommunity" RelativePosition="0.5,0.511429" Text="" Type="WZUILabelTTF" EnableStroke="True" BoldFont="True" StrokeSize="4" StrokeColor="162,66,29" LabelStyleKey="SMALL_GREEN_BTN" />
+            </Button>
+        </WZUIContainer>
+        <WZUILabelTTF Color="255,255,255" FontSize="24" GUID="{B8CD0EA9-48D0-4566-AE04-AD30946F1936}" Name="txtYesOrNo_WndDismissCommunity" RelativePosition="0.72,0.2" Text="" Type="WZUILabelTTF" />
+    </WZUIWindow>
+</WndDismissCommunity>

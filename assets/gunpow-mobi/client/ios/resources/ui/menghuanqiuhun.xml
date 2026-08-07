@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><menghuanqiuhun GUID="{C2A6D7EE-55DA-4883-ABB4-679187942579}">
+    <WZUIFrame GUID="{C386C7AA-3C53-4a3c-9E56-6ED2AF22C747}" Type="WZUIFrame">
+        <WZUIContainer GUID="{503C0035-56E9-47a5-BE4E-D1D3A9B53473}" Name="FaDaShuanXiaoYingDong" Type="WZUIContainer">
+            <WZUIImage File="ui/animation/etc/star.png" GUID="{646ACE27-ABFC-4161-ADA4-FD4FC642E38E}" RelativePosition="0.1,0.5" Scale="3" Type="WZUIImage" UseOriginSize="True">
+                <Action GUID="{E1F6C2B5-C5A3-4f87-85AA-12EEC74CDE79}" IsLoop="True" Type="WZUIActionSequence">
+                    <ChildAction GUID="{D71B6D89-5A11-47df-A655-50392645A926}" Type="WZUIActionSpawn">
+                        <ChildAction Duration="3" GUID="{9536A481-9FD4-4cf6-A612-845FCCBBDA20}" MoveX="0.8,0.5" MoveY="0.5" Type="WZUIActionMoveTo"/>
+                        <ChildAction Angle="360" Duration="3" GUID="{6BF4D538-4CEB-4b62-A295-4BED93E0F5EE}" Type="WZUIActionRotateBy"/>
+                        <ChildAction Duration="3" GUID="{2A3C65E9-1AAD-4da1-BF25-1D1456044532}" Type="WZUIActionScaleTo"/>
+                    </ChildAction>
+                    <ChildAction GUID="{B45E8BB9-5850-493a-B106-32BA99FEFAC1}" Type="WZUIActionSpawn">
+                        <ChildAction Duration="3" GUID="{E42A7E64-8EA1-4b13-8D8C-C6E801AAB44C}" MoveX="0.1" MoveY="0.5" Type="WZUIActionMoveTo"/>
+                        <ChildAction Angle="360" Duration="3" GUID="{63619E62-E645-4b76-B479-D5BE5797DADA}" Type="WZUIActionRotateBy"/>
+                        <ChildAction Duration="3" GUID="{0407835C-C2D1-4425-B39A-56860C990370}" ScaleX="3" ScaleY="3" Type="WZUIActionScaleTo"/>
+                    </ChildAction>
+                </Action>
+            </WZUIImage>
+        </WZUIContainer>
+        <WZUIContainer GUID="{0696BA7E-85D5-4607-B974-A3904E739B40}" Name="JianBian" Type="WZUIContainer">
+            <WZUIImage File="ui/animation/etc/01.png" GUID="{A158B6B8-E676-4122-8B5F-CFA5326183AB}" Type="WZUIImage" UseOriginSize="True">
+                <Action GUID="{40B3D7F8-94E4-4d0e-B323-6AA1CDDC2B92}" IsLoop="True" Type="WZUIActionSequence">
+                    <ChildAction Color="100,100,0" Duration="1" GUID="{AFFEA74C-86CD-4648-9431-BD7544B1F837}" Type="WZUIActionTintTo"/>
+                    <ChildAction Duration="1" GUID="{EAC90984-366C-4a76-8A4E-EB9A0B0B1CE8}" Type="WZUIActionTintTo"/>
+                </Action>
+            </WZUIImage>
+        </WZUIContainer>
+        <WZUIContainer GUID="{BDB4B4B4-2E53-456c-8567-74C77270EB52}" Name="ChuXianYingChang" Type="WZUIContainer">
+            <WZUIImage File="ui/animation/levelButton/greenButton.png" GUID="{CFF8B805-13A2-443d-ADE8-41C9E46214C3}" RelativePosition="0.607291,0.5" Type="WZUIImage" UseOriginSize="True">
+                <Action GUID="{A302A2E3-A333-40ca-A36E-E7337F79B16B}" IsLoop="True" Type="WZUIActionSequence">
+                    <ChildAction Duration="2" GUID="{C96835BB-D7AD-4135-BC8C-73206642D9B3}" Opacity="0" Type="WZUIActionFadeTo"/>
+                    <ChildAction Duration="2" GUID="{443449E3-C5EF-4165-86D3-711EF305B467}" Type="WZUIActionFadeTo"/>
+                </Action>
+            </WZUIImage>
+        </WZUIContainer>
+        <WZUIContainer GUID="{ABBD7A12-6404-4a80-80FD-5F429FF6B998}" Name="XingExpoldosion" Type="WZUIContainer">
+            <WZParticleSystemQuad AngleVar="110" BlendFuncSrc="" Duration="10" EmissionRate="250" EndSize="10" GUID="{6EAF0A68-2251-4116-B272-5440D4F9D6E8}" Life="1.2" ModeAGravity="0,-1000" ModeARadialAccel="0" ModeASpeed="500" ModeASpeedVar="100" ModeATangentialAccel="" ModeATangentialAccelVar="150" Name="baoKaiLiZi" RelativePosition="0.5,0.5" StartSize="30" StartSizeVar="20" TextureFile="ui/animation/fire/fireFlame.png" TotalParticles="120" Type="WZParticleSystemQuad" Visible="True"/>
+        </WZUIContainer>
+        <WZUIContainer GUID="{BC7F3154-712A-45b0-8415-30EE9DE9434F}" Name="RainSmall" Type="WZUIContainer" Visible="True">
+            <WZParticleSystemQuad AbsPosition="0,0" Angle="-90" AngleVar="0" BlendFuncDst="304" Duration="10" EmissionRate="100" EndSize="100" EndSizeVar="100" GUID="{46F4A978-8501-4a8f-B6FE-317D4FC0AE36}" Life="1" LifeVar="1" ModeAGravity="0,-300" ModeASpeed="400" ModeASpeedVar="0" Name="Far" OpacityModifyRGB="True" PositionType="Free" RelativePosition="0.5,1.2" Scale="0.5" ScaleX="0.5" ScaleY="0.5" SourcePositionVar="220,0" StartSize="100" StartSizeVar="100" TextureFile="ui/animation/weather/rain.png" TotalParticles="150" Type="WZParticleSystemQuad" UseAbsCoordinate="False" Visible="True"/>
+            <WZParticleSystemQuad AbsPosition="0,0" Angle="-90" AngleVar="0.5" BlendFuncDst="304" Duration="10" EmissionRate="200" EndSize="40" GUID="{1E0C72E9-B5FB-48ef-991D-8F836A587D82}" Life="1" LifeVar="1" ModeAGravity="0,-500" ModeASpeed="500" ModeASpeedVar="0" Name="Near" OpacityModifyRGB="True" PositionType="Free" RelativePosition="0.5,1.2" Scale="1" ScaleX="1" ScaleY="1" SourcePositionVar="220,0" StartSize="45" TextureFile="ui/animation/weather/rain.png" TotalParticles="150" Type="WZParticleSystemQuad" UseAbsCoordinate="False" Visible="True"/>
+        </WZUIContainer>
+        <WZUIContainer GUID="{B3B68060-92F1-4306-AA1B-BE594FC9BC74}" Name="SnowSmall" Type="WZUIContainer" Visible="True">
+            <WZParticleSystemQuad AbsPosition="0,0" Angle="-90" AngleVar="10" BlendFuncDst="304" Duration="10" EmissionRate="10" EndSize="30" EndSizeVar="5" GUID="{F01EF354-4E25-415b-A18C-0626E3D1A1A4}" Life="15" LifeVar="0.5" ModeAGravity="0,-1" ModeARotationIsDir="False" ModeASpeed="100" ModeASpeedVar="0" Name="Near" OpacityModifyRGB="False" PositionType="Free" RelativePosition="0.5,1.2" Rotation="0" Scale="1" ScaleX="1" ScaleY="1" SourcePositionVar="220,0" StartSize="10" StartSizeVar="5" StartSpin="0" TextureFile="ui/animation/weather/snow.png" TotalParticles="150" Type="WZParticleSystemQuad" UseAbsCoordinate="False" Visible="True"/>
+            <WZParticleSystemQuad AbsPosition="0,0" Angle="90" AngleVar="360" BlendFuncDst="304" Duration="10" EmissionRate="10" EndSize="20" EndSizeVar="0" EndSpin="60" EndSpinVar="60" GUID="{80684538-499A-40e6-A885-9C6AF2A5F3B5}" Life="15" LifeVar="2" ModeAGravity="0,-1" ModeARadialAccel="50" ModeARotationIsDir="False" ModeASpeed="30" ModeASpeedVar="0" Name="Far" OpacityModifyRGB="False" PositionType="Free" RelativePosition="0.5,1.2" Rotation="0" Scale="1" ScaleX="1" ScaleY="1" SourcePosition="0,0" SourcePositionVar="200,0" StartSize="30" StartSizeVar="10" StartSpin="30" StartSpinVar="60" TextureFile="ui/animation/weather/snow.png" TotalParticles="100" Type="WZParticleSystemQuad" UseAbsCoordinate="False" Visible="False"/>
+        </WZUIContainer>
+    </WZUIFrame>
+</menghuanqiuhun>

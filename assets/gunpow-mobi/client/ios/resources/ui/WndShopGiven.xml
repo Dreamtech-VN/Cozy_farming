@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<WndShopGiven GUID="{5F001C7A-E952-46fc-BBDD-ABE8ABEAB27B}">
+    <WZUIWindow AbsContentSize="" GUID="{45A9E56C-1159-4d1a-BB8E-1A04F100010B}" LuaObjectName="WndShopGiven" Name="WndShopGiven" NameCreate="True" Type="WZUIWindow" UseAbsSize="False" LuaTouchBeganFunction="onTouchBegin">
+        <WZUIContainer Type="WZUIContainer" GUID="{463C8EA2-4CD1-4d50-9487-FFD8B337BFFE}" AbsContentSize="776,536" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="470,307">
+            <WZUIContainer Type="WZUIContainer" GUID="{51F2C191-AF87-4e33-A472-A15D0B00B534}" Visible="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{B8983F4E-3673-4844-9ED4-0C2928B95EDC}" File="ui/common/common_scale9_di19.png" Opacity="255" RelativePosition="0.5,0.5" CapInsets="250,100,1,1" Visible="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{C0CC13D3-8CCB-4d15-A0EC-E80E32E3C90E}" TextKey="" FontSize="24" Color="255,236,192" EnableStroke="True" StrokeSize="4" StrokeColor="132,66,29" RelativePosition="0.494289,0.935813" LabelStyleKey="SMALL_WINDOW_TITLE" Name="txtGivenTitle_WndShopGiven" />
+                <WZUIButton Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.942055,0.941553" GUID="{3F327133-DB5E-4ab1-AA80-E10422CE1275}" LuaDoneFunctionName="onClose" LuaActionName="Normal" AbsContentSize="60,60" UseAbsSize="True" AbsPosition="731.035,504.672">
+                    <NormalElement Type="WZUIContainer" GUID="{00ADB0EF-FC64-48d9-B2D5-014F3ED8084D}">
+                        <WZUIImage Type="WZUIImage" GUID="{5E890C9B-4353-463a-BC3F-776ED0309BEC}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{0B04ED8C-9F17-47b1-B735-8BFF1F456796}">
+                        <WZUIImage Type="WZUIImage" GUID="{9AEADF2F-6101-405a-AA9D-C77AA82BA00F}" File="ui/common/common_icon_guanbi_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{4D475F2C-A1FF-4e78-BA26-5358587A7E6F}" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{848FA45E-A6FF-4c1a-B625-FDF49EBD63CD}" RelativeSize="0.984,0.72" RelativePosition="0.5,0.457239" Visible="True" AbsPosition="388,245.08" AbsContentSize="730,432" UseAbsSize="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{485CC030-2571-4f28-93EC-3EB052CA64EE}" AnchorPoint="0,0.5" RelativeSize="0.5,1" RelativePosition="0,0.5" AbsPosition="0,215" AbsContentSize="" UseAbsSize="False">
+                    <WZUI9Image Type="WZUI9Image" GUID="{2C61FE4A-E436-470e-9032-1978E6B3642C}" File="ui/common/common_scale9_di4.png" Visible="True" />
+                    <WZUITableContainer AnchorPoint="0.5,0.5" CellElementHeight="0.27" ColumnCount="1" EnableMoveHorizontal="False" EnableMoveVertical="True" GUID="{3535D471-8AB4-483a-A4D2-1E32A823AD93}" Name="tabFriend_WndShopGiven" RelativePosition="0.5,0.539352" RelativeSize="0.96,0.88" Type="WZUITableContainer" AbsPosition="182.5,233" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{AD4B9FE6-6717-4700-882C-FFC6B4D0CB93}" Name="txtEmpty1_WndShopGiven" TextKey="EMPTY_INFO" FontSize="24" Color="255,227,116" Visible="False" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{CEA93BE4-C462-4ac2-88ED-A5AC9134C093}" RelativeSize="1,0.1" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{3BD96580-4BF9-40b5-B069-DADFC17729B8}" Name="txtGivenDesc_WndShopGiven" Text="" FontSize="20" LabelStyleKey="" Color="79,60,48" Dimensions="0,0" Alignment="Left" />
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7641B67A-984E-4e7c-9F65-2D58019F632B}" AnchorPoint="1,0.5" RelativePosition="1,0.5" RelativeSize="0.48,1">
+                    <WZUI9Image Type="WZUI9Image" GUID="{0B7108DE-9859-4dc8-BF9B-1573B7B45A86}" File="ui/common/common_scale9_di4.png" Visible="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{633C7689-4FAD-4e3e-9A30-2D3A0136AA39}" AbsContentSize="330,206" UseAbsSize="True" RelativePosition="0.5,0.731481" AbsPosition="175.2,316">
+                        <WZUI9Image Type="WZUI9Image" GUID="{22A8EC38-B123-4a2e-9F16-A69EF73A771F}" File="ui/common/common_scale9_di52.png" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{6E6F55BC-DE28-452d-8B36-7FCEB88E97F7}" RelativeSize="0.94,0.15" RelativePosition="0.5,0.858" AbsPosition="165,176">
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{471BE283-3B43-4c64-A20A-E21EACFA6575}" TextKey="SHOP_DESC1" LabelStyleKey="C11_F24" AnchorPoint="0,0.5" RelativePosition="0,0.5" />
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{C279ECBA-4A6B-487f-A2B4-ED98A156AC22}" RelativeSize="0.94,0.72" RelativePosition="0.5,0.417475" AbsPosition="165,85.9998">
+                            <WZUIEditBox Type="WZUIEditBox" GUID="{0DB31C7A-4075-423e-9D4D-C29629D758E3}" FontSize="22" PlaceholderFontColor="195,171,148" Color="255,236,193" Name="editAsk_WndShopGiven" LuaEditBoxEditingDidEnd="onEditEnd" LuaEditBoxEditingDidBegin="onEditBegin" LuaEditBoxTextChanged="onEidtChange" PlaceHolder="" BgPicture="ui/common/transparent_bg.png" FontColor="255,236,193" AnchorPoint="0.5,0.5" CapInsets="0" Dimensions="100,25" VerticalAlignment="0" VerticalPlaceHolderAlignment="0" MultiLine="False" ChinesePlaceholderNum="2" MaxLength="70" TextFieldPadding="5" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{38FD4B41-0FDC-4641-A881-28573CEC6E59}" AbsContentSize="340,80" Visible="True" UseAbsSize="True" RelativePosition="0.5,0.358796" AbsPosition="175.2,155">
+                        <WZUIContainer Type="WZUIContainer" GUID="{26145C91-B233-4b50-996B-BBB8229AACA8}" AbsContentSize="80,80" UseAbsSize="True" Name="conItem1_WndShopGiven" RelativePosition="0.123529,0.5" AbsPosition="42,40" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{1CEF067F-0A53-4300-94AD-B2604145613C}" AbsContentSize="80,80" UseAbsSize="True" Name="conItem2_WndShopGiven" RelativePosition="0.370588,0.5" AbsPosition="126,40" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{2A04C330-EF02-4487-978B-1767516DF578}" AbsContentSize="80,80" UseAbsSize="True" Name="conItem3_WndShopGiven" RelativePosition="0.614706,0.5" AbsPosition="209,40" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{B642FC63-E384-45a6-8310-44617DA5B011}" AbsContentSize="80,80" UseAbsSize="True" Name="conItem4_WndShopGiven" RelativePosition="0.861763,0.5" AbsPosition="292.999,40" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{4A550FB9-11AB-461f-BF0F-0C4ADDC1C9A8}" RelativeSize="1,0.26" AnchorPoint="0.5,0" RelativePosition="0.5,0">
+                        <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{B0545C21-6E4A-461a-BCA1-B0BC8F3353A7}" Name="ftbBuyDesc_WndShopGiven" MaxWidth="600" RelativePosition="0.5,0.865029" AbsPosition="175.2,97.16" />
+                        <WZUIButton Type="WZUIButton" RelativeSize="1,1" RelativePosition="0.502813,0.402066" GUID="{FA73D568-61BF-48fd-B314-F58C906E08FC}" LuaDoneFunctionName="onGive" LuaActionName="Normal" AbsPosition="176.186,45.16" Visible="True" UseAbsSize="True" AbsContentSize="116,56">
+                            <NormalElement Type="WZUIContainer" GUID="{0F9A3542-22A5-494b-95EE-7DBCF48A3A8D}">
+                                <WZUIImage Type="WZUIImage" GUID="{C2BD8B96-4940-4284-BCDE-F5B16F64658B}" File="ui/common/common_btn_anniu3_0.png" UseOriginSize="True" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{5217DAD0-93F7-4b9d-859A-6AF7FA548F4F}">
+                                <WZUIImage Type="WZUIImage" GUID="{6F57BFD6-CD46-4075-B61A-F27622A2BC63}" File="ui/common/common_btn_anniu3_0_sel.png" UseOriginSize="True" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{66B4CACB-EECD-443c-91E5-AEB62D8EED49}" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{B01CE451-34B7-4841-A1D1-712D5CF4748B}" TextKey="" Color="255,236,193" FontSize="26" EnableStroke="True" StrokeColor="64,128,1" StrokeSize="4" LabelStyleKey="SMALL_ORANGE_BTN" Name="txtBtn_WndShopGiven" />
+                        </WZUIButton>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndShopGiven>

@@ -1,0 +1,27 @@
+﻿<CellTransactionOnSaleItem GUID="{83515ae3-a788-490f-9db5-6b5058b84f64}">
+    <WZUIContainer AbsContentSize="245,125" GUID="{fc295f10-2a2d-40ef-8189-f1d1b69d5e4a}" LuaObjectName="" Name="CellTransactionOnSaleItem" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="465,320" ShowAll="False">
+        <WZUIContainer GUID="{8cf3838c-9450-4418-af97-a468e78f4a6d}" RelativePosition="0.5,0.5" Type="WZUIContainer" AbsContentSize="245,113" UseAbsSize="True" AbsPosition="-14.2342,107.962" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{07a2b3bf-5b87-42f6-8972-c380704db548}" File="ui/common/common_scale9_di18.png" Visible="True" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{2f51c006-4d60-429e-ac0c-cd97a3dfb6de}" Name="txtName_CellTransactionItem" FontSize="18" Text="道具名称六字" RelativePosition="0.33,0.765" AnchorPoint="0,0.5" Color="93,222,254" Alignment="Left" AbsPosition="122.5,60.64" EnableStroke="True" BoldFont="True" StrokeSize="4" StrokeColor="79,60,48" />
+        <WZUIContainer Type="WZUIContainer" GUID="{4b68014f-d00a-47fb-a035-d47f563611c2}" RelativeSize="0.23,0.9" RelativePosition="0.179,0.595" Name="conIcon_CellTransactionItem" AnchorPoint="0.5,0.5" AbsPosition="58.5,46" UseAbsSize="True" AbsContentSize="66,66" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{7fe9d4ed-ae85-4397-af17-9d441ae958be}" Text="数量:" LabelStyleKey="C2_F20" RelativePosition="0.415,0.58" Scale="0.9" Name="txt1_CellTransactionItem" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{fc55ca0a-b8eb-4814-8609-34adf3414ad1}" Text="单价:" LabelStyleKey="C2_F20" RelativePosition="0.415,0.41" Scale="0.9" Name="txt2_CellTransactionItem" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{02fcbde3-cb23-4265-97fe-a123e4d0a4f4}" Text="999" LabelStyleKey="C2_F20" RelativePosition="0.55,0.575" Scale="0.9" Name="txt3_CellTransactionItem" Alignment="Left" AnchorPoint="0,0.5" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{fe6cced9-6dda-4764-87c7-2c230780a76c}" Text="999" LabelStyleKey="C2_F20" RelativePosition="0.64,0.4" Scale="0.9" Name="txt4_CellTransactionItem" Alignment="Left" AnchorPoint="0,0.5" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{5774657f-a48d-45af-a4c9-fd04b71b8d65}" Text="已出售20个" LabelStyleKey="C2_F20" RelativePosition="0.051,0.165" Scale="0.9" Name="txt5_CellTransactionItem" Alignment="Left" AnchorPoint="0,0.5" Visible="True" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{7f5c501f-a7a0-4c0f-a481-81687186db70}" Text="5分钟" LabelStyleKey="C2_F20" RelativePosition="0.9,0.165" Scale="0.9" Name="txt6_CellTransactionItem" Alignment="Right" AnchorPoint="1,0.5" Visible="True" />
+        <Button Type="WZUIButton" GUID="{0487e430-338d-45ee-9748-0c9993dba170}" LuaDoneFunctionName="onClick" Order="5">
+            <NormalElement Type="WZUIContainer" GUID="{98b503e6-4bcd-4fc8-9562-2e0de53002d7}" />
+            <SelectElement Type="WZUIContainer" GUID="{413054b3-7a95-4aa0-853b-0854c82cf7c5}" />
+            <DisableElement Type="WZUIContainer" GUID="{0f15d2f5-51f6-4353-9b41-0d9aa5473f84}" />
+        </Button>
+        <WZUIImage Type="WZUIImage" GUID="{a662cb9e-c2f3-4dfd-8312-1e4e98c87632}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" Scale="1.1" ScaleX="1.1" ScaleY="1" RelativePosition="0.5,0.29" />
+        <WZUIImage Type="WZUIImage" GUID="{6a6f171c-3194-4572-9631-e2fee78c08ac}" File="ui/common/common_icon_kuangjing.png" UseOriginSize="True" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.575406,0.401317" Name="imgGem_CellTransactionOnSaleItem" />
+        <WZUIContainer Type="WZUIContainer" GUID="{b929e42a-4fdc-4f37-9d63-ece70ce508a3}" Name="conRecycle" Visible="False">
+            <WZUIImage Type="WZUIImage" GUID="{8e0269cf-efb4-4c55-9ef5-e3d23739f38c}" File="ui/common/common_icon_kuangjing.png" UseOriginSize="True" Scale="0.6" ScaleX="0.6" ScaleY="0.6" RelativePosition="0.58878,0.191624" Name="imgGem2_CellTransactionOnSaleItem" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{26c0f00c-7396-4e75-be18-1bef3b48c84d}" Text="" LabelStyleKey="C2_F20" RelativePosition="0.18,0.18" Scale="0.9" Name="txt7_CellTransactionItem" Alignment="Left" AnchorPoint="0,0.5" Visible="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{5359a57d-f2c6-4049-973e-508cb9834c16}" Text="999" LabelStyleKey="C2_F20" RelativePosition="0.67,0.18" Scale="0.9" Name="txt8_CellTransactionItem" Alignment="Left" AnchorPoint="0,0.5" Visible="True" />
+        </WZUIContainer>
+    </WZUIContainer>
+</CellTransactionOnSaleItem>

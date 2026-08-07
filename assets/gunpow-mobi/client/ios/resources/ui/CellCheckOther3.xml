@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" ?>
+<CellCheckOther3 GUID="{C29FC553-C8DF-49d5-BB59-5C054DD42D20}">
+    <WZUIContainer Type="WZUIContainer" GUID="{414B6B99-8126-4d75-8B86-5E56D5CB3E0D}" AbsContentSize="460,155" UseAbsSize="True" Name="CellCheckOther3" LuaObjectName="CellCheckOther3" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{0B5B9DBF-CE80-4888-B715-A84B494B5EBD}" Name="" Visible="True" AbsContentSize="400,90" UseAbsSize="True" RelativePosition="0.47,0.5">
+            <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{BA4A9FBC-8D63-4427-A394-46ED65472F35}" TouchEnable="False" RelativePosition="0.16,0.51" AnchorPoint="0.5,0.5" Visible="True" Name="conTouxiang1_CellCheckOther3" AbsContentSize="155,155" UseAbsSize="True">
+                <Stencil Type="WZUIImage" GUID="{84A8C1AC-46A2-4842-AAA1-846E1D96CFC2}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" Scale="2.45" RelativePosition="0.5,0.5" ScaleY="2.45" ScaleX="2.45" />
+                <WZUIImage Type="WZUIImage" GUID="{C9AA5B52-D514-43d2-AC03-C8079E5A9C97}" File="ui/space/common_icon_renxiangnan.png" UseOriginSize="True" Name="headSpace" RelativePosition="0.5,0.5" Scale="0.8" />
+            </WZUIClippingContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{D30256F5-10F3-4117-BCBC-A6B39FB6B885}" AbsContentSize="155,155" UseAbsSize="True" RelativePosition="0.16,0.51" Name="conTouxiang2_CellCheckOther3">
+                <WZUI9Image Type="WZUI9Image" GUID="{9BB09859-0DC5-47b8-8923-269D4210C2D6}" File="ui/bag/common_scale9_txkd.png" UseOriginSize="False" Visible="False" />
+                <WZUI9Image Type="WZUI9Image" GUID="{48CFF208-4DB7-4db8-B1A4-860B4DF50768}" File="ui/common/common_scale9_kuang.png" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{67c3d3cb-5849-4dec-ab54-8c17d817d81c}" AbsContentSize="155,155" UseAbsSize="True" RelativePosition="0.16,0.51" Name="conTouxiang3_CellCheckOther3">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{c943e267-c032-4276-8e2c-31b26c8b2008}" Name="txtPhotoWord_CellCheckOther3" Text="" FontSize="18" Color="195,171,148" RelativePosition="0.55,0.1" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{2d8121c5-5aef-48cf-9c65-ecb98aa6ac98}" Name="imgSexSpace" File="ui/space/common_icon_meizhi2.png" UseOriginSize="True" RelativePosition="0.02,0.0675904" AbsPosition="7.71289,6.08314" Scale="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{ef8e502b-c8ac-481f-95f2-76ab2bc305ab}" Name="conInfo" RelativePosition="0.71,0.5" RelativeSize="0.90,1.2">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a1b244bc-dd79-4888-8ad3-6dd99f8d019e}" LabelStyleKey="C5_F20" Name="title1" Text="" RelativePosition="0.32,0.95" TextKey="BAGTIP10" FontSize="22" Color="62,34,8" Visible="True" AbsPosition="127.919,89.2174" Alignment="Left" AnchorPoint="0,0" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{34a31e00-53da-42e7-9084-b0186190690a}" LabelStyleKey="C5_F20" Name="title2" Text="" RelativePosition="0.32,0.67" TextKey="COMMUNITY_BATTLE" Color="62,34,8" FontSize="22" AbsPosition="71.0299,48.6855" Alignment="Left" AnchorPoint="0,0" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3732fad7-1b89-4ac6-b740-a38eb6c37344}" LabelStyleKey="C5_F20" Name="title3" Text="" RelativePosition="0.32,0.39" TextKey="RANK_KING_DESC8" Color="62,34,8" FontSize="22" AbsPosition="61.9764,20.7816" Alignment="Left" AnchorPoint="0,0" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{3b4339c5-faf4-4c0c-b9c5-06a7ced5972c}" LabelStyleKey="C5_F20" Name="title4" Text="师傅" RelativePosition="0.32,0.11" TextKey="" Color="62,34,8" FontSize="22" AbsPosition="58.8685,-3.20369" Alignment="Left" AnchorPoint="0,0" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{96f16326-9383-47ed-b444-3d74dedd3b18}" LabelStyleKey="C5_F20" Name="title5" Text="" RelativePosition="0.32,-0.17" TextKey="SETTING_SERVE_NAME" Color="62,34,8" FontSize="22" AbsPosition="58.8685,-3.20369" Alignment="Left" AnchorPoint="0,0" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{6e3fd66f-032e-4d34-947c-54ab2351c6b5}" LabelStyleKey="C3_F20" Name="ttfID" Text="" RelativePosition="0.55,0.95" Color="128,54,13" FontSize="22" AnchorPoint="0,0" Alignment="Left" AbsPosition="228.915,85.2987" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{911909bc-38cf-4480-a47a-21bd9ae56fed}" Name="ttfCommunity" LabelStyleKey="C3_F20" Text="" RelativePosition="0.47,0.67" Color="128,54,13" FontSize="22" Alignment="Left" AnchorPoint="0,0" AbsPosition="189.053,57.6715" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ce79454e-3d2b-45df-8dd0-4d541da3baa4}" Name="ttfBN" LabelStyleKey="C3_F20" Text="" RelativePosition="0.47,0.39" Color="128,54,13" FontSize="22" Alignment="Left" AnchorPoint="0,0" AbsPosition="160,29.7" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d94ad2f1-b6ac-4a0a-b783-3d95d3b19e6d}" Name="ttfMaster" LabelStyleKey="C3_F20" Text="" RelativePosition="0.47,0.11" Color="128,54,13" FontSize="22" Alignment="Left" AnchorPoint="0,0" AbsPosition="160,29.7" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7f6e0b24-a3f8-460d-ae9b-8569c0c19ceb}" Name="ttfServer" LabelStyleKey="C3_F20" Text="server" RelativePosition="0.53,-0.17" Color="128,54,13" FontSize="22" Alignment="Left" AnchorPoint="0,0" AbsPosition="160,29.7" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{94f3230b-beed-4bcd-aab8-02c300193440}" UseAbsSize="True" AbsContentSize="155,155" RelativePosition="0.15,0.51" LuaDoneFunctionName="onCheck" Name="btnTouxiang_CellCheckOther3">
+                <NormalElement Type="WZUIContainer" GUID="{65666dc1-ef20-4690-8b81-319b7b43894b}" TouchContainerEnable="True" />
+                <SelectElement Type="WZUIContainer" GUID="{0afaab17-b867-4465-a1e1-1c386a8f5bf7}" TouchContainerEnable="True" />
+                <DisableElement Type="WZUIContainer" GUID="{e3635b2e-9bfb-4a59-9548-577edc6ada06}" TouchContainerEnable="True" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{3d40dec7-89b2-45e8-b11c-4556a3e7786e}" AbsContentSize="80,160" UseAbsSize="True" Name="conHead_CellCheckOther3" RelativePosition="0.45,0.5">
+                <WZUIContainer Type="WZUIContainer" GUID="{d1bfad9e-b7ca-45a1-89a2-8cdec303f139}" Name="conMyHead_CellCheckOther3" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.5,0.75">
+                    <WZUIImage Type="WZUIImage" GUID="{2f2221ac-967a-449f-8c49-6330bd17b86e}" File="ui/common/common_scale9_beibaodi1.png" UseOriginSize="False" />
+                    <Button Type="WZUIButton" GUID="{05a982cb-d482-4a31-81d5-c0f81328079e}" LuaDoneFunctionName="onCheckSpace" Order="2" Tag="1">
+                        <NormalElement Type="WZUIContainer" GUID="{15792f28-e603-4de7-adfa-aff6b46431c3}" />
+                        <SelectElement Type="WZUIContainer" GUID="{5a747b1b-efbb-4830-b821-07041be0d903}" />
+                        <DisableElement Type="WZUIContainer" GUID="{dc2666cd-adeb-452b-8fdd-7c64d78b0b81}" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{768c85b2-3660-4ba1-9c2c-69b880a3a75c}" Name="conMateHead_CellCheckOther3" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.5,0.26875">
+                    <WZUIImage Type="WZUIImage" GUID="{789b4f24-61ed-4689-8367-72a1a05dfb07}" File="ui/common/common_scale9_beibaodi1.png" UseOriginSize="False" />
+                    <WZUIImage Type="WZUIImage" GUID="{85c8d5c4-e804-4b33-aaf7-b0be4566cda5}" File="ui/space/common_icon_renxiangnan.png" UseOriginSize="True" Scale="0.35" RelativePosition="0.5,0.5" Name="imgDiTuHead_CellCheckOther3" />
+                    <Button Type="WZUIButton" GUID="{4eff1130-0787-4ed0-9d91-f9ac203f0e24}" LuaDoneFunctionName="onCheckSpace" Order="2" Tag="2">
+                        <NormalElement Type="WZUIContainer" GUID="{d0d017e7-9a5b-483f-896d-29e5af510bb0}" />
+                        <SelectElement Type="WZUIContainer" GUID="{2a6dff9b-e1ff-44bf-928b-0f111b92db6c}" />
+                        <DisableElement Type="WZUIContainer" GUID="{a0a6b5d6-767d-494c-8f5f-bfee71d0726c}" />
+                    </Button>
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellCheckOther3>

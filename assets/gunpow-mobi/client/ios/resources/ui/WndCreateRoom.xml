@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" ?>
+<WndCreateRoom GUID="{2630087D-74A4-418b-ACBD-FEBE318CD258}">
+    <WZUIWindow GUID="{6C27E276-0CC2-439a-8EF6-103C07C37DE0}" LuaObjectName="WndCreateRoom" LuaTouchBeganFunction="" Name="WndCreateRoom" NameCreate="True" Type="WZUIWindow" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+        <WZUIContainer Type="WZUIContainer" GUID="{80C0DD92-A036-4097-8136-882296969980}" AbsContentSize="430,534" UseAbsSize="True" RelativePosition="0.678456,0.43637" ShowAll="True" Visible="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{C09E240B-FDF8-4c32-97D9-30A409454ABE}" RelativePosition="0.5,0.5" Visible="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{3B100376-420B-4ddc-9385-29C2F64CBFAF}" RelativeSize="0.5,1" RelativePosition="0.25,0.5" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{5BECB664-FE6C-4a98-98A1-9404E368CA5C}" File="ui/common/common_scale9_di3.png" Opacity="255" RelativePosition="0.5,0.5" Visible="True" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{7375FC94-36FF-4cc4-B371-C42319410618}" RelativeSize="0.5,1" RelativePosition="0.75,0.5" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{1A5AC55A-EC80-4751-82D1-B212B139594C}" File="ui/common/common_scale9_di3.png" Opacity="255" FlipX="False" Visible="True" FlipY="False" RelativePosition="0.5,0.5" ScaleX="-1" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{F034712B-E301-4ac3-A8D0-DACC9BE02D24}" Text="创建房间" FontSize="28" Color="255,255,255" Name="txtRoomTitle_WndCreateRoom" RelativePosition="0.492941,0.940082" BoldFont="True" NameCreate="True" StrokeSize="" Visible="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{43D69A38-199A-4b1e-A4E8-B1F23B0D3AB7}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.530113" RelativeSize="0.92,0.72" Visible="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{D4A41CE4-68A5-4c4d-9C96-E597564A1B10}" RelativePosition="0.5,0.622803" RelativeSize="1,0.72">
+                    <WZUI9Image Type="WZUI9Image" GUID="{0118D4DF-E7A5-4a73-B9F4-FCE594BB23FB}" File="ui/common/bg_11.png" Opacity="255" Visible="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{5839FE55-8708-4609-B707-5B945B8E49A3}" RelativeSize="1,0.4" RelativePosition="0.5,0.795555">
+                        <WZUICheckBoxGroup AbsContentSize="" GUID="{4EEEA47C-90F1-43ae-BA22-AFDE7A3AC9BC}" Name="checkMode_WndCreateRoom" Order="1" RelativePosition="0.5,0.5" Type="WZUICheckBoxGroup" UseAbsSize="False">
+                            <CheckBox AbsContentSize="80,80" AnchorPoint="0,0.5" CheckAction="onModeClick" GUID="{90B6343F-E0A8-4e8e-BD1C-5DD140C59504}" LuaSelectedFunctionName="onCheckGameMode" Name="selMode1_WndCreateRoom" RelativePosition="0.22954,0.472907" SelectedIndex="1" Tag="1" TouchEnable="True" Type="WZUICheckBox" UseAbsSize="True">
+                                <CheckElement GUID="{79FDAD07-D172-4304-9793-34358CCFDD0D}" Type="WZUIContainer">
+                                    <WZUIImage Type="WZUIImage" GUID="{3B541C3B-C203-4b00-9374-D1B93A56C462}" File="ui/common/ziyoumoshi.png" UseOriginSize="True" RelativePosition="0.3,0.5" />
+                                </CheckElement>
+                                <CheckElement GUID="{A83992D2-5C6D-48f0-B9F5-4EFA1500AAC9}" Type="WZUIContainer">
+                                    <WZUIImage Type="WZUIImage" GUID="{9B17DC8E-372A-4bb9-B1F7-647059A115B6}" File="ui/common/ziyoumoshi.png" UseOriginSize="True" RelativePosition="0.3,0.5" />
+                                </CheckElement>
+                                <CheckElement GUID="{93701A90-B766-4dd1-A3E1-103FD7967853}" TouchEnable="True" Type="WZUIContainer" />
+                            </CheckBox>
+                            <CheckBox AbsContentSize="100,80" CheckAction="onModeClick" GUID="{4A32536D-AB23-423e-B634-7F840385D373}" LuaSelectedFunctionName="onCheckGameMode" Name="selMode2_WndCreateRoom" RelativePosition="0.63977,0.490969" Tag="2" Type="WZUICheckBox" UseAbsSize="True">
+                                <CheckElement GUID="{3CC01751-548A-4d0a-8F89-87AD463F03CA}" Type="WZUIContainer">
+                                    <WZUIImage Type="WZUIImage" GUID="{7887FF82-1F97-42ba-840B-46F328D37023}" File="ui/common/fuhuomoshi.png" UseOriginSize="True" RelativePosition="0.682097,0.5" />
+                                </CheckElement>
+                                <CheckElement GUID="{99E8E81F-82FB-4d59-8E09-E04FA22FF29A}" RelativePosition="0.5,0.5" Type="WZUIContainer">
+                                    <WZUIImage Type="WZUIImage" GUID="{2DD7F11D-CC76-474b-B67D-2C881BA90F1A}" File="ui/common/fuhuomoshi.png" UseOriginSize="True" RelativePosition="0.682097,0.5" />
+                                </CheckElement>
+                                <CheckElement GUID="{B7698069-2C87-4b2c-96B7-63A5CA878341}" TouchEnable="True" Type="WZUIContainer" />
+                            </CheckBox>
+                        </WZUICheckBoxGroup>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{97974905-8EC0-4978-8132-C6491EEA17B8}" AbsContentSize="340,60" UseAbsSize="True" RelativePosition="0.5,0.499836">
+                        <WZUI9Image Type="WZUI9Image" GUID="{78FBEFEB-EA7F-461c-820D-00815D6AB28C}" File="ui/common/common_scale9_di8.png" Opacity="150" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{A6D128E0-67AD-4094-86A6-363CB984F031}" Color="233,1116,62" FontSize="22" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" Text="" RelativePosition="0.0477171,0.5" Dimensions="310,0" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{DBE53CA7-7638-412e-BA35-AF4FE341E038}" AbsContentSize="340,40" UseAbsSize="True" RelativePosition="0.502528,0.300972">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{73BFD6E2-8A71-4d78-9F40-BC8D3D64E333}" FontSize="24" Alignment="Left" AnchorPoint="0,0.5" Color="255,227,116" Text="name" RelativePosition="0.0205882,0.5" BoldFont="True" Name="txtRoomName_WndCreateRoom" NameCreate="True" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{3149BC85-545A-4059-81E9-EF8150DA2440}" AbsContentSize="260,40" UseAbsSize="True" RelativePosition="0.617647,0.5">
+                            <WZUI9Image Type="WZUI9Image" GUID="{6656DF7F-0F3E-4cfb-9224-CD7AE4473E3D}" File="ui/common/common_scale9_di8.png" />
+                            <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Color="223,116,62" FontColor="255,255,255" FontSize="22" GUID="{5286AF1C-62FF-4a05-975A-50E9945E1A66}" KeyBordReturnType="TypeDone" LuaEditBoxTextChanged="" MaxLength="18" Name="editRoomName_WndCreateRoom" PlaceHolder="" PlaceholderFontColor="155,131,122" RelativeSize="1,1" Text="大家来玩吧！" Type="WZUIEditBox" UseOriginSize="False" Dimensions="200,25" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{23371F40-35F2-4dc8-91FC-7105327A1200}" AbsContentSize="340,40" UseAbsSize="True" RelativePosition="0.502528,0.122411">
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{89362919-0559-4307-897A-75E43B54AE52}" FontSize="24" Alignment="Left" AnchorPoint="0,0.5" Color="255,227,116" Text="name" RelativePosition="0.0205882,0.5" BoldFont="True" Name="txtRoomPassword_WndCreateRoom" NameCreate="True" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{278C63E0-9902-467b-B998-87ACADFB1E32}" AbsContentSize="260,40" UseAbsSize="True" RelativePosition="0.617647,0.5">
+                            <WZUI9Image Type="WZUI9Image" GUID="{15D977F0-EF78-4281-971E-DF30DFC4BA68}" File="ui/common/common_scale9_di8.png" />
+                            <WZUIEditBox BgPicture="ui/common/transparent_bg.png" Color="223,116,62" FontColor="255,255,255" FontSize="22" GUID="{FD46A885-8400-4254-B9D5-0C2EE0873853}" KeyBordReturnType="TypeDone" MaxLength="6" Name="editRoomPassword_WndCreateRoom" PlaceHolder="" PlaceholderFontColor="155,131,122" RelativeSize="1,1" Type="WZUIEditBox" UseOriginSize="False" />
+                        </WZUIContainer>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{F4DA9FFA-B4DD-47b6-8457-5A6927D0F923}" RelativeSize="1,0.27" RelativePosition="0.5,0.111465" Visible="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{2800667A-EE8D-4180-8294-B96AA0B90F9C}" File="ui/common/bg_11.png" Opacity="255" Visible="True" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{F0E943D9-78A8-4593-91DD-E250FCFE93EA}" RelativeSize="1,0.5" RelativePosition="0.5,0.75">
+                        <WZUICheckBoxGroup AbsContentSize="" GUID="{D3BA2AB5-713A-4395-AE53-AEA9BDB5BBE4}" Name="checkGroupFightMode_WndCreateRoom" RelativePosition="0.5,0.5" Type="WZUICheckBoxGroup" UseAbsSize="False" RelativeSize="1,1" NameCreate="True">
+                            <CheckBox AbsContentSize="" AnchorPoint="0,0.5" GUID="{1496DF84-6740-4104-85D5-567A1A6B2D76}" LuaSelectedFunctionName="onCheckFightMode" RelativePosition="0.0153453,0.3062" SelectedIndex="1" Tag="1" Type="WZUICheckBox" UseAbsSize="False" RelativeSize="0.33,1" Visible="True">
+                                <CheckElement GUID="{B2FD6972-559E-494e-B2F0-AF7A68078BEF}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{CAEE5CCD-1FFC-424e-A50C-6FB5FD04D854}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.259746,0.461468" />
+                                </CheckElement>
+                                <CheckElement GUID="{0ECCDEE4-87C3-43fb-83C0-B01A05F930B3}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{BFC6A7C6-37F9-4a79-82A4-B4C215CE7715}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.259746,0.5" />
+                                    <WZUIImage Type="WZUIImage" GUID="{4869FEAB-23F8-4377-AD5D-DB433D1235C7}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.27,0.638532" />
+                                </CheckElement>
+                                <WZUILabelTTF AnchorPoint="0,0.5" Color="220,211,185" FontSize="24" GUID="{5AB98F27-C204-4d1a-80E3-6693F52CCA44}" Name="txtMatch_WndCreateRoom" RelativePosition="0.4155,0.5" Text="随机" Type="WZUILabelTTF" />
+                            </CheckBox>
+                            <CheckBox AbsContentSize="" AnchorPoint="0,0.5" GUID="{17109D76-E95F-48c7-B6B9-648A17C43EEF}" LuaSelectedFunctionName="onCheckFightMode" RelativePosition="0.36341,0.3062" Tag="2" Type="WZUICheckBox" UseAbsSize="False" RelativeSize="0.33,1" SelectedIndex="0">
+                                <CheckElement GUID="{633BD7AF-729C-4dd5-8905-BA2851DBC74C}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{255C49A7-EEE0-4ec1-9B9E-F413880BF352}" File="ui/common/common_scale9_di13.png" Scale="0.5" UseOriginSize="True" RelativePosition="0.182244,0.480734" />
+                                </CheckElement>
+                                <CheckElement GUID="{D5C9535B-3D30-4595-ABA3-BA138BB7529D}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{D9383F88-BCC4-465a-9606-2196E5AF0927}" File="ui/common/common_scale9_di13.png" Scale="0.5" UseOriginSize="True" RelativePosition="0.182244,0.480734" />
+                                    <WZUIImage Type="WZUIImage" GUID="{9F0C0FF1-9FCA-40f0-8B5C-C914D6C32A70}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.184748,0.638532" />
+                                </CheckElement>
+                                <WZUILabelTTF AnchorPoint="0,0.5" Color="220,211,185" FontSize="24" GUID="{EFB324E8-A40B-4700-BB58-FE83FDA277F7}" Name="txtFree_WndCreateRoom" RelativePosition="0.3845,0.5" Text="队伍" Type="WZUILabelTTF" />
+                            </CheckBox>
+                            <CheckBox AbsContentSize="" AnchorPoint="0,0.5" GUID="{D32B4F39-7F16-46ed-B6EE-6F51F3924076}" LuaSelectedFunctionName="onCheckFightMode" RelativePosition="0.682097,0.3062" Tag="3" Type="WZUICheckBox" UseAbsSize="False" RelativeSize="0.33,1">
+                                <CheckElement GUID="{A0A8008E-C301-48ad-AE51-70A6AD582F2A}" TouchContainerEnable="True" Type="WZUIContainer">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{50996DD3-7EC8-4901-857F-947C86C3F634}" File="ui/common/common_scale9_di13.png" Scale="0.5" UseOriginSize="True" RelativePosition="0.189994,0.5" />
+                                </CheckElement>
+                                <CheckElement GUID="{81D7BCA1-0647-4862-A6F1-AEDBBEF96788}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{38F19740-6854-4628-9B97-83A886EE4702}" File="ui/common/common_scale9_di13.png" Scale="0.5" UseOriginSize="True" RelativePosition="0.189994,0.5" />
+                                    <WZUIImage Type="WZUIImage" GUID="{B4A94EA8-0AA6-4928-AE87-B00C2DB89AC7}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.215749,0.619266" />
+                                </CheckElement>
+                                <WZUILabelTTF AnchorPoint="0,0.5" Color="220,211,185" FontSize="24" GUID="{06263298-5754-4c87-BF0F-6132CAFD5A26}" RelativePosition="0.4,0.5" Text="混战" Type="WZUILabelTTF" Name="txtMix_WndCreateRoom" />
+                            </CheckBox>
+                        </WZUICheckBoxGroup>
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{BC7E593C-6F19-4aa6-9580-56B2BF8874C3}" RelativeSize="1,0.5" RelativePosition="0.5,0.25">
+                        <WZUICheckBoxGroup AbsContentSize="" GUID="{8E3F7FFD-3212-4ee0-99B1-22D3924EBBD1}" Name="checkGroupRoomNum_WndCreateRoom" RelativePosition="0.5,0.5" Type="WZUICheckBoxGroup" UseAbsSize="False" RelativeSize="1,1" NameCreate="True">
+                            <CheckBox AbsContentSize="" AnchorPoint="0,0.5" GUID="{F5A74CBE-578F-4c55-90EB-A4FF90F2E51A}" LuaSelectedFunctionName="onCheckSelPersonNum" RelativePosition="0.0127877,0.654128" SelectedIndex="1" Tag="1" Type="WZUICheckBox" UseAbsSize="False" RelativeSize="0.33,1">
+                                <CheckElement GUID="{A91D9298-09EE-4e5e-9134-2AF068EB23EF}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{0543E3B8-426E-4f03-A9EE-165F2E5BFC35}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.259746,0.480734" />
+                                </CheckElement>
+                                <CheckElement GUID="{8011AD32-826C-40c5-BF3B-5D8E17CF1EF3}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{FE1A4AF6-4010-4bd8-9921-1E47A7D89C81}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.259746,0.5" />
+                                    <WZUIImage Type="WZUIImage" GUID="{6077EE46-4BC0-49d1-A41F-BCC16BB8F534}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.27,0.638532" />
+                                </CheckElement>
+                                <WZUILabelTTF AnchorPoint="0,0.5" Color="220,211,185" FontSize="24" GUID="{2F0E5440-0CC6-4ea2-872C-F9CEA63AD1F0}" RelativePosition="0.40775,0.519266" Text="1V1" Type="WZUILabelTTF" UseOriginSize="True" Alignment="Center" />
+                            </CheckBox>
+                            <CheckBox AbsContentSize="" AnchorPoint="0,0.5" GUID="{7EDD383F-6D09-47b0-ABCD-9A3A2B32AD29}" LuaSelectedFunctionName="onCheckSelPersonNum" RelativePosition="0.36023,0.673394" Tag="2" Type="WZUICheckBox" UseAbsSize="False" RelativeSize="0.33,1">
+                                <CheckElement GUID="{9A95D2CC-984A-4974-B304-550032CACF40}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{4D2F4041-F3AC-49be-8476-A77A90ED0907}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.189995,0.5" />
+                                </CheckElement>
+                                <CheckElement GUID="{FBBDC343-C568-430c-85AC-41525D6B0DC0}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{CAD85C5F-8CA3-47cd-82D0-A535409BECA4}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.189995,0.5" />
+                                    <WZUIImage Type="WZUIImage" GUID="{55FE67CE-AB16-421d-9268-9A578BF7F0A3}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.207999,0.64322" />
+                                </CheckElement>
+                                <WZUILabelTTF AnchorPoint="0,0.5" Color="220,211,185" FontSize="24" GUID="{4332A4DF-DAC8-4e67-B168-BF527688725C}" RelativePosition="0.4,0.5" Text="2V2" Type="WZUILabelTTF" />
+                            </CheckBox>
+                            <CheckBox AbsContentSize="" AnchorPoint="0,0.5" GUID="{313FAC53-641B-445b-894E-D4C21960AD02}" LuaSelectedFunctionName="onCheckSelPersonNum" RelativePosition="0.7,0.692661" Tag="3" Type="WZUICheckBox" UseAbsSize="False" RelativeSize="0.33,1">
+                                <CheckElement GUID="{D5860B31-F423-4edb-A761-03D6071F98B2}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{83DCBE1F-E7FF-41f7-B67E-14274F485BB1}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.151244,0.480734" />
+                                </CheckElement>
+                                <CheckElement GUID="{97C545C8-863F-4aba-B5B7-86E3CD1684C3}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+                                    <WZUI9Image Type="WZUI9Image" GUID="{28D6FDFE-9DE4-4bae-8A95-11FC93F07342}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="0.5" RelativePosition="0.151244,0.480734" />
+                                    <WZUIImage Type="WZUIImage" GUID="{C1A78006-A3C3-4b5e-B0A0-946553F4E2B9}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.169248,0.585422" />
+                                </CheckElement>
+                                <WZUILabelTTF AnchorPoint="0,0.5" Color="220,211,185" FontSize="24" GUID="{07BB8240-24AE-4391-A1A1-FE0E36A13301}" RelativePosition="0.4,0.5" Text="3V3" Type="WZUILabelTTF" />
+                            </CheckBox>
+                        </WZUICheckBoxGroup>
+                    </WZUIContainer>
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="" GUID="{ABC4B52B-D135-486b-A925-3F21D655DBAE}" RelativePosition="0.5,0.0923076" Type="WZUIContainer" UseAbsSize="False" RelativeSize="1,0.1" Visible="False">
+                <WZUIButton AbsContentSize="120,60" GUID="{F6DA1B82-5B0A-42c4-93D7-EE85ED0CA148}" LuaDoneFunctionName="onCloseClick" RelativePosition="0.3,0.5" TouchEnable="True" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{DC356E00-D3B2-485b-834E-CCE7ED1590A2}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{F2B4A4FC-66DD-4797-9CD3-28B0689FA5D2}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{E80C6C2B-638B-4a54-A22B-027BD8B74795}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{E2C16EB9-E239-41e2-B354-DE2BFFDBD6EF}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{8D823DD0-C033-4724-BBEC-ADB8F137044E}" Type="WZUIContainer" UseAbsSize="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{2CC51E83-CE34-4941-818B-AEC720E284BD}" Name="txtCheckRoom_SceneHall" NameCreate="True" FontSize="25" Color="255,255,255" BoldFont="True" Text="" />
+                </WZUIButton>
+                <WZUIButton AbsContentSize="120,60" GUID="{BEF35348-CE00-4978-A1C8-2E89E0529EDA}" LuaDoneFunctionName="onCreateRoom" RelativePosition="0.7,0.5" TouchEnable="True" Type="WZUIButton" UseAbsSize="True">
+                    <NormalElement GUID="{BE3CDF87-20AB-4eb6-87FB-55FE06DA5731}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{13087651-6BA2-4954-922C-95B835D63243}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement GUID="{8848FD1B-EEE0-45d4-AA8B-32F638425C9C}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{5DE1F742-FA3B-4f63-B9D1-7F9E30D7F9D7}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement GUID="{37DE2C99-4B1D-4a1f-8F09-2BE0813FE919}" Type="WZUIContainer" UseAbsSize="False" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ADF202BF-2604-4af1-ACCC-BEA1885753D2}" Name="txtStart_SceneHall" NameCreate="True" Color="255,255,255" FontSize="25" BoldFont="True" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{2B1C0900-541C-474b-A45F-038F37120B73}" Visible="True" TouchEnable="False">
+            <WZUIImage Type="WZUIImage" GUID="{2862E9C1-EC1B-42f4-B0CA-4C78D31012E3}" File="ui/copy_settlement/common_pic_sl.png" RelativeSize="1,1" AnchorPoint="0.5,0.5" Name="" UseOriginSize="True" isValid="True" Visible="True" />
+            <WZUIImage Type="WZUIImage" GUID="{ABB3A840-38CF-4893-9647-4F2DCA3A9370}" File="ui/copy_settlement/common_pic_guangx.png" UseOriginSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0.5" ScaleX="30" Scale="3">
+                <Action Type="WZUIActionRotateBy" GUID="{93A613DB-B08D-4d1b-8D9D-57330C64B512}" Angle="360" IsLoop="True" Duration="30" />
+            </WZUIImage>
+            <WZUIParticle Type="WZUIParticle" GUID="{C707A53E-6D2A-4869-BEF7-C737B947DECB}" PlistFile="particle/ui_jiesuan_stars_01.plist" AnchorPoint="0.5,0" RelativePosition="0.5,0" Visible="True" TouchEnable="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{6852622B-3A9F-47eb-90BB-555E8ED57A89}" AbsContentSize="420,420" UseAbsSize="True" Visible="False">
+            <WZUIContainer Type="WZUIContainer" GUID="{3B731E09-6790-4714-98ED-363CBE6C91D3}">
+                <WZUI9Image Type="WZUI9Image" GUID="{137E67BD-3591-4c49-A100-B2D7CD45B868}" File="ui/common/common_scale9_di46.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{A780A54F-E300-4306-9C75-FFED087AABE1}" AbsContentSize="0" UseAbsSize="False" RelativePosition="0,1" AbsPosition="272.714,555.325" Name="1" RelativeSize="0.14,0.14" AnchorPoint="0,1">
+                <WZUIImage Type="WZUIImage" GUID="{76EFF490-AF47-4f1b-BA47-735D8661471E}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{51493D08-0298-43dd-9AEA-36D103D1325B}" AbsContentSize="" UseAbsSize="False" RelativePosition="0,0.857" AbsPosition="0,480" Name="2" RelativeSize="0.14,0.14" AnchorPoint="0,1">
+                <WZUIImage Type="WZUIImage" GUID="{1ECB5778-766B-40a6-B672-E78C63D95174}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{566BAF86-84DF-45df-9198-B32EFE62F3E1}" AbsContentSize="" UseAbsSize="False" RelativePosition="0,0.644" AbsPosition="0,361" Name="3" AnchorPoint="0,0.5" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{E79417B8-A526-4e97-9E42-03244E9EE0DD}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{60DB3BD9-800B-4fb9-9219-6106F717C8FB}" AbsContentSize="" UseAbsSize="False" RelativePosition="0,0.5" AbsPosition="269.471,298.447" Name="4" AnchorPoint="0,0.5" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{DD95A772-6300-424c-8B05-F3775975277E}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{9FB4794F-7D04-4929-882E-5596E565F61F}" AbsContentSize="" UseAbsSize="False" RelativePosition="0,0.356494" AbsPosition="0,199.637" Name="5" RelativeSize="0.14,0.14" AnchorPoint="0,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{DEB4A814-487A-4e3b-B65B-C30B8A0E6796}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{577242CE-3A2C-445f-869A-DE66C4D205C5}" AbsContentSize="" UseAbsSize="False" RelativePosition="0,0.212561" AbsPosition="0,119.034" Name="6" AnchorPoint="0,0.5" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{764B0EC0-44AC-4a12-9F60-B62AE6E30337}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5E5BDB27-0B56-4112-BF3C-E192FA4FADD4}" AbsContentSize="" UseAbsSize="False" RelativePosition="0,0" AbsPosition="276.088,45.8957" Name="7" AnchorPoint="0,0" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{FBCFA062-513A-491f-A7C0-DEEAC960EB39}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{482E3159-3E42-47f4-83D4-3DAE18C53761}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.213,0" AbsPosition="118.888,0" Name="8" AnchorPoint="0.5,0" RelativeSize="0.14,0.14" UseAbsCoordinate="False">
+                <WZUIImage Type="WZUIImage" GUID="{3839DD00-5993-4464-B109-D162497510B4}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{33877A5B-C8CD-433d-AC11-104473551DE7}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.356,0" AbsPosition="199.399,0" Name="9" AnchorPoint="0.5,0" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{2D6A0A91-36E6-4b8f-869D-CC091864E53B}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{95EE063E-AE73-400c-AB83-C52803809143}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0" AbsPosition="543.78,36.1636" Name="10" AnchorPoint="0.5,0" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{BFD6FF99-96F3-4b9e-BDA3-CCE8D94D75D1}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5C125976-4D84-4e1d-AADC-2131C5F91785}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.644,0" AbsPosition="360.466,0" Name="11" AnchorPoint="0.5,0" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{C754BFAC-1BAB-47a9-98AA-5F2F462E071E}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{6FD33C18-4627-4785-A43C-7996415FA18E}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.787,0" AbsPosition="440.726,0" Name="12" AnchorPoint="0.5,0" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{F3C3730B-E0B3-48cb-AC98-ED62BA303449}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{36B9CB5E-61BA-4d43-BFF4-DC1856317FE4}" AbsContentSize="" UseAbsSize="False" RelativePosition="1,0" AbsPosition="805.849,32.915" Name="13" AnchorPoint="1,0" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{43039224-29F9-49cf-AC4A-D2B39BC07EE8}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{88612D1D-D150-4e1e-8566-C56A928B69EC}" AbsContentSize="" UseAbsSize="False" RelativePosition="1,0.212561" AbsPosition="829.985,111.628" Name="14" AnchorPoint="1,0.5" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{661412B2-2D52-40d9-9C64-10EE0DED2DA3}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{DB195BE0-F682-461f-9F3E-7B8A6165E19A}" AbsContentSize="" UseAbsSize="False" RelativePosition="1,0.356494" AbsPosition="830.927,190.412" Name="15" RelativeSize="0.14,0.14" AnchorPoint="1,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{82165EF6-9D6D-460b-8CB0-275E797B565A}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{E09742B0-A4F1-4741-97AA-268086EA2D4A}" AbsContentSize="" UseAbsSize="False" RelativePosition="1,0.5" AbsPosition="829.846,276.827" Name="16" AnchorPoint="1,0.5" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{CC8E15BE-76C5-4c07-A1C0-67F6A25A8458}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{15A2373E-142E-46cc-90F7-3034B02CE5ED}" AbsContentSize="" UseAbsSize="False" RelativePosition="1,0.644" AbsPosition="828.63,362.16" Name="17" RelativeSize="0.14,0.14" AnchorPoint="1,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{1CBCDB37-BBA5-4123-8D37-97530CFC3781}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{A1BA7DC6-7FAC-43c2-A74D-3CAE151FCFFA}" AbsContentSize="" UseAbsSize="False" RelativePosition="1,0.857" AbsPosition="830.792,451.682" Name="18" RelativeSize="0.14,0.14" AnchorPoint="1,1">
+                <WZUIImage Type="WZUIImage" GUID="{673ED542-8384-4e02-9033-07F8293BC7F6}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{F71F1FF7-6E21-41e8-9E37-626472F2B067}" AbsContentSize="" UseAbsSize="False" RelativePosition="1,1" AbsPosition="826.468,542.353" Name="19" AnchorPoint="1,1" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{CA367560-CE82-48ff-AF4B-168BD2D66789}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{01C51594-FEA1-4500-B169-6A0FC7C41CDD}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.787,1" AbsPosition="735.797,546.677" Name="20" AnchorPoint="0.5,1" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{4F5E55D1-E259-4be3-B295-A71663ACA480}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{C0221DC1-002E-4e90-8933-F527B9CDF0F5}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.644,1" AbsPosition="637.771,544.67" Name="21" RelativeSize="0.14,0.14" AnchorPoint="0.5,1">
+                <WZUIImage Type="WZUIImage" GUID="{66BAC550-5F90-4849-BE0D-C1D290252105}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{373DA159-6613-47a5-B693-391F14ABF8C7}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,1" AbsPosition="546.889,548.839" Name="22" AnchorPoint="0.5,1" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{59EF3D81-3A19-4630-A201-7530959B75E4}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{C8462089-6EB2-49e4-A28D-B0F6AA15F4E8}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.356,1" AbsPosition="458.38,554.244" Name="23" RelativeSize="0.14,0.14" AnchorPoint="0.5,1">
+                <WZUIImage Type="WZUIImage" GUID="{BFC6C7A2-8E94-4d1c-9CEF-C9884C1569C1}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{E0F605FF-B2AA-4d86-82F3-A1E34AC3F2BC}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.213,1" AbsPosition="363.384,556.339" Name="24" AnchorPoint="0.5,1" RelativeSize="0.14,0.14">
+                <WZUIImage Type="WZUIImage" GUID="{2EDF6F85-A2E2-4761-A845-6664256ADC5E}" File="ui/common/frame_bule.png" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{170E4A1F-3D1A-4a20-A35C-7CB880E81365}">
+            <WZUIContainer Type="WZUIContainer" GUID="{659F335E-C894-46ed-9B6A-FCE836DAFB97}" AbsContentSize="720,400,720" UseAbsSize="True" RelativePosition="0.5,0.520312" AbsPosition="480,333">
+                <WZUIContainer Type="WZUIContainer" GUID="{273AF324-F27B-424f-9A63-CD6E35956609}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{75D8E929-C591-4a8f-8920-F2B78DEA59FE}" File="ui/common/common_scale9_di8.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{B1F6F34A-1F8B-44ce-AE9E-B6E65EB10E3C}" AbsContentSize="0" UseAbsSize="False" RelativePosition="0,1" AbsPosition="272.714,555.325" Name="1" RelativeSize="0.1,0.18" AnchorPoint="0,1">
+                    <WZUIImage Type="WZUIImage" GUID="{41798FDA-93D9-4a3b-81DF-F82392FCF889}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{E45FF6B9-47D2-4834-8974-37908B76AD4F}" AbsContentSize="" UseAbsSize="False" RelativePosition="0,0.705" AbsPosition="0,282" Name="2" RelativeSize="0.1,0.18" AnchorPoint="0,0.5">
+                    <WZUIImage Type="WZUIImage" GUID="{01EC525C-42BC-47e0-82C8-D79608CF0FE2}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{4A80DDD9-236C-4f18-A1F2-ED3FC2A56EAF}" AbsContentSize="" UseAbsSize="False" RelativePosition="0,0.5" AbsPosition="0,361" Name="3" AnchorPoint="0,0.5" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{685652D8-DAF9-4d65-B08C-F72654D04D2D}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{1EC6C7FE-BD1F-4abc-93CC-A6D20640F4A9}" AbsContentSize="" UseAbsSize="False" RelativePosition="0,0.295" AbsPosition="0,121" Name="4" AnchorPoint="0,0.5" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{AFD67B78-CD5D-486f-BAE1-0310FC886DDA}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{AB6BF315-84CD-48fa-9DB9-1C3731BA031A}" AbsContentSize="" UseAbsSize="False" RelativePosition="0,0" AbsPosition="0,199.637" Name="5" RelativeSize="0.1,0.18" AnchorPoint="0,0">
+                    <WZUIImage Type="WZUIImage" GUID="{0241F5EB-07F8-42c1-B326-F3F3EDCB139B}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{CCBB0198-709D-4540-9456-BE2716211869}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.163,0" AbsPosition="117.08,0" Name="6" AnchorPoint="0.5,0" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{90E833D3-2B8E-4a39-A002-141F8DB9E5AA}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{DE50E16B-D171-40cb-93A3-8B7F10B9452E}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.276,0" AbsPosition="198.72,0" Name="7" AnchorPoint="0.5,0" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{8C653F58-DD70-4abf-9FF4-B851C23EA462}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{06C9780F-1A74-4ac3-B2E4-7CA2902393E2}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.389389,0" AbsPosition="280.36,0" Name="8" AnchorPoint="0.5,0" RelativeSize="0.1,0.18" UseAbsCoordinate="False">
+                    <WZUIImage Type="WZUIImage" GUID="{7CDED2E0-691E-4b70-9354-E575014B22BA}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{DDCB6E8A-E8CF-466e-809B-DB217553F488}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0" AbsPosition="199.399,0" Name="9" AnchorPoint="0.5,0" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{AE33E717-D542-42f0-BB2C-34689187760B}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{2C9F1F6B-0633-4e19-B661-7E8311D422DE}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.6125,0" AbsPosition="440.999,0" Name="10" AnchorPoint="0.5,0" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{520858FF-749E-4903-8FF8-EE132D761352}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{861D5973-2942-4c05-B8BE-A16F0F8504E6}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.725,0" AbsPosition="521.679,0" Name="11" AnchorPoint="0.5,0" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{F933CE58-D574-4c50-9E36-9A6F1A5414BF}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{C4BE7A03-98DF-48d3-BBC8-87DC441EF2B9}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.837,0" AbsPosition="602.64,0" Name="12" AnchorPoint="0.5,0" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{C326552E-0C2D-41b8-A9D0-B31FBE42E643}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{9346ACD5-2455-45dc-907D-2377F02D8C5B}" AbsContentSize="" UseAbsSize="False" RelativePosition="1,0" AbsPosition="805.849,32.915" Name="13" AnchorPoint="1,0" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{022F0FEE-EF16-45f2-B835-71F9BBE5C740}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{C597E0CF-4FEC-49c6-AF53-197C50C52CEB}" AbsContentSize="" UseAbsSize="False" RelativePosition="1,0.292561" AbsPosition="720,117.024" Name="14" AnchorPoint="1,0.5" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{ECE9926A-152D-4a72-A65E-944D2071CA23}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{B9C89300-A266-4486-9B3C-753C82F015CF}" AbsContentSize="" UseAbsSize="False" RelativePosition="1,0.5" AbsPosition="830.927,190.412" Name="15" RelativeSize="0.1,0.18" AnchorPoint="1,0.5">
+                    <WZUIImage Type="WZUIImage" GUID="{AAF80D60-2568-4cc1-9A6A-ACAD7E316A4D}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{A0B6535D-6767-49cd-939B-37F8BBA5CF13}" AbsContentSize="" UseAbsSize="False" RelativePosition="1,0.705" AbsPosition="720,282" Name="16" AnchorPoint="1,0.5" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{9A86983F-9225-4863-B586-C9B2E6787368}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{EA2A81A5-01D1-422d-89C3-CEE1F4440588}" AbsContentSize="" UseAbsSize="False" RelativePosition="1,1" AbsPosition="828.63,362.16" Name="17" RelativeSize="0.1,0.18" AnchorPoint="1,1">
+                    <WZUIImage Type="WZUIImage" GUID="{4D4E5E5D-B0A1-4b3a-96A7-2F3D0B93C67C}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{E5789FD3-9445-4b4e-90E6-DB60444DD19C}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.837,1" AbsPosition="635.68,397.797" Name="18" RelativeSize="0.1,0.18" AnchorPoint="0.5,1">
+                    <WZUIImage Type="WZUIImage" GUID="{58242872-0FA6-4e4b-97A4-245F8B56239A}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{ACCAEDFC-746E-447b-A88D-E0FA915A6606}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.725,1" AbsPosition="513.998,400" Name="19" AnchorPoint="0.5,1" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{62A7346C-291A-403f-8BD1-F3B7C8A78D67}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{043DFD90-61E0-4d19-9054-2218BD855CFD}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.6125,1" AbsPosition="438.133,397.838" Name="20" AnchorPoint="0.5,1" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{37602484-09E1-4c6b-ABD6-A621F76724AE}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{DF934CDD-3195-4c58-840D-695EC73B6071}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,1" AbsPosition="637.771,544.67" Name="21" RelativeSize="0.1,0.18" AnchorPoint="0.5,1">
+                    <WZUIImage Type="WZUIImage" GUID="{347618B4-6216-4556-845B-16EA3D8E1779}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{C805A297-57FC-40c5-842D-E325BDE88EB7}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.386111,1" AbsPosition="278,400" Name="22" AnchorPoint="0.5,1" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{BFF8F117-F74A-4639-9595-367DBF59E22B}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{EA63B4AD-1F65-457d-A662-D83B48C30005}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.276,1" AbsPosition="196.32,400" Name="23" RelativeSize="0.1,0.18" AnchorPoint="0.5,1">
+                    <WZUIImage Type="WZUIImage" GUID="{1C7273BB-7467-4a51-99C2-867AF9743159}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{ABDDC6E2-AAC7-49b2-AB93-D78C2A476402}" AbsContentSize="" UseAbsSize="False" RelativePosition="0.163,1" AbsPosition="116.36,400" Name="24" AnchorPoint="0.5,1" RelativeSize="0.1,0.18">
+                    <WZUIImage Type="WZUIImage" GUID="{0BC72CE4-B9B1-4e47-84C4-0E68BC7F2F1F}" File="ui/common/frame_bule.png" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{F4B9144E-8D9D-418b-B134-2B3CE7A6E00E}" AbsContentSize="540,70" UseAbsSize="True" RelativePosition="0.503356,0.386959" AbsPosition="483.222,247.654">
+                <WZUIContainer Type="WZUIContainer" GUID="{4B803D6B-732F-4d4e-B997-548F80E83028}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{E3224E8C-2EAB-4deb-A86F-02A618D7F646}" File="ui/common/frame_orange.png" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{32B7C7FA-735C-4b20-BB12-A6C4CDAEF1B9}" AbsContentSize="540,100" UseAbsSize="True" RelativePosition="0.5,0.1" AbsPosition="480,70.0003">
+                <WZUIContainer Type="WZUIContainer" GUID="{80B0A0E1-8050-4655-8A12-8EC1214EE903}">
+                    <WZUI9Image Type="WZUI9Image" GUID="{37BB3689-C85F-43e7-A56B-ED1FE73ADD1E}" File="ui/common/common_scale9_di46.png" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{9CFF0047-BF24-4ec8-8A43-269923D76175}" AbsContentSize="90,80" UseAbsSize="True" RelativePosition="0.170316,0.1" AbsPosition="163.504,72.8512">
+                <WZUIContainer Type="WZUIContainer" GUID="{2BFA0A43-8A2A-441f-AB5D-573B1B3FAC6C}" RelativeSize="0.8,0.4" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                    <WZUIImage Type="WZUIImage" GUID="{F9F6AF08-2B79-4bdf-9653-BB92FD502E00}" File="ui/common/common_icon_jiantou.png" UseOriginSize="False" Rotation="180" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{54143E82-41DA-46b0-BD0C-723A0238B181}" AnchorPoint="0.5,0" RelativePosition="0.5,0" RelativeSize="0.8,0.4">
+                    <WZUIImage Type="WZUIImage" GUID="{E4910615-163F-43d0-BC6D-788FC37C1A14}" File="ui/common/common_btn_marryan.png" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{64ECC092-84DD-467f-997D-A2340674887C}" AbsContentSize="90,80" UseAbsSize="True" RelativePosition="0.829206,0.1" AbsPosition="796.038,69.6757">
+                <WZUIContainer Type="WZUIContainer" GUID="{958DB6BF-7700-455a-8C82-1B23B6B5550E}" RelativeSize="0.8,0.5" RelativePosition="0.5,1" AnchorPoint="0.5,1">
+                    <WZUIImage Type="WZUIImage" GUID="{A89CCA26-FFAD-409a-BF6A-ED30E674346D}" File="ui/common/common_btn_anniu3.png" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{785B6E3C-79C9-44de-BAA6-FC7DC30D216F}" RelativeSize="0.8,0.5" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+                    <WZUIImage Type="WZUIImage" GUID="{5D71870D-5A78-452d-804B-116E36BA9FA1}" File="ui/common/common_btn_anniu10.png" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndCreateRoom>

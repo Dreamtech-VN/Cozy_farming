@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?><WndExistAccount GUID="{36D80313-276F-4191-9C23-A8B923E05A97}">
+    <WZUIWindow GUID="{70917BF0-B9CD-4298-B1CD-A71FE428D5F4}" LuaObjectName="WndExistAccount" Name="WndExistAccount" NameCreate="True" RelativePosition="0.5,0.55" Type="WZUIWindow">
+        <WZUIContainer AbsContentSize="720,540" GUID="{A969BCA5-9FAB-4ce9-AFD0-9B69DC7205C2}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIContainer AbsContentSize="689,500" GUID="{5C955BC7-22E9-49c4-88EB-147660353940}" RelativePosition="0.498321,0.448659" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/Jigsaw/3.png" GUID="{34E987ED-8812-48c0-B0DF-B01744F10352}" Name="imgBg1_WndAccountInfo" RelativePosition="0.5,0.5" Scale="2.6" ScaleX="1" ScaleY="1" Type="WZUI9Image" UseOriginSize="False"/>
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="698,86" GUID="{07CF9D65-7702-411b-9308-42830F16D8E2}" RelativePosition="0.503062,0.924151" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/Jigsaw/5.png" GUID="{9CD0DDAB-5DE8-49b5-8D68-F2485ABFDBF0}" Name="imgBg2_WndAccountInfo" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False"/>
+            </WZUIContainer>
+        </WZUIContainer>
+        <Button AbsContentSize="90,90" GUID="{057C9FF1-41D8-47ce-B15A-4AB693AACDD3}" LuaDoneFunctionName="onClose" RelativePosition="0.822,0.862" Type="WZUIButton" UseAbsSize="True">
+            <NormalElement GUID="{43EB6F5A-D232-4255-95FB-96FB5AEA3E95}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+                <WZUIImage File="common/button/close.png" GUID="{61035032-D54B-4ce9-B21D-A49287E8D780}" Type="WZUIImage" UseOriginSize="True"/>
+            </NormalElement>
+            <SelectElement GUID="{98155EDD-60CD-496f-8537-B24BBF82B554}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsCoordinate="False" UseAbsSize="True">
+                <WZUIImage File="common/button/close_sel.png" GUID="{3FE65E97-47A9-4e6b-BBB4-85F89D7C3334}" Type="WZUIImage" UseOriginSize="True"/>
+            </SelectElement>
+            <DisableElement GUID="{BBA6C5F2-AABE-4dc2-AB07-1E7D37EE1037}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUIImage File="common/button/close_not.png" GUID="{E02E9728-73F4-4a86-A913-D16147860C13}" Type="WZUIImage" UseOriginSize="True"/>
+            </DisableElement>
+        </Button>
+        <WZUIButton AbsContentSize="140,50" GUID="{3578C70D-1575-4614-90B6-43A0E704A7D5}" LuaDoneFunctionName="onOK" RelativePosition="0.754353,0.166889" Type="WZUIButton" UseAbsSize="True">
+            <NormalElement AbsContentSize="140,50" GUID="{6766491C-49FC-46a1-A245-537B5C7A7A71}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/button/button_2.png" GUID="{6B50968A-6C58-4ef0-8A84-5DD7222C1A5C}" Type="WZUI9Image" UseOriginSize="False"/>
+            </NormalElement>
+            <SelectElement AbsContentSize="140,50" GUID="{B5BDFA0E-6EFC-4114-8BE7-76A3C8A91D72}" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/button/button_2_sel.png" GUID="{727FDA1D-EFD6-4b0c-96A0-9576B3CEB465}" Type="WZUI9Image" UseOriginSize="False"/>
+            </SelectElement>
+            <DisableElement AbsContentSize="140,50" GUID="{C6049CD9-BB13-4ac1-968E-34CD1C91C166}" RelativePosition="0.5,0.5" Type="WZUIContainer" UseAbsSize="True">
+                <WZUI9Image File="common/button/button_4.png" GUID="{2878C85B-F6FD-4439-B225-7313F232F8F6}" RelativePosition="0.5,0.5" Type="WZUI9Image" UseOriginSize="False"/>
+            </DisableElement>
+            <WZUIImage File="common/button_text/button_green_2.png" GUID="{7DE9508C-B62F-459f-8C12-C4BEA8848C52}" TouchEnable="False" Type="WZUIImage" UseOriginSize="True" Visible="False"/>
+            <WZUILabelTTF BoldFont="True" Color="255,255,255" EnableStroke="True" FontSize="30" GUID="{2FE832AE-E7B0-402d-9969-1DF960B52D8E}" Name="txtOk_WndExistAccount" StrokeColor="38,47,0" StrokeSize="4" Text="" Type="WZUILabelTTF"/>
+        </WZUIButton>
+        <WZUIEditBox BgPicture="common/Jigsaw/sy_special.png" FontColor="255,255,255" FontSize="24" GUID="{81D711F6-D025-4edb-98BD-97D252637695}" InputFlag="FlagSensitive" InputMode="ModeSingleLine" LuaEditBoxEditingDidBegin="onEditAccountBegin" LuaEditBoxEditingDidEnd="onEditAccountEnd" LuaEditBoxTextChanged="" MaxLength="256" Name="editAccount_WndExistAccount" RelativePosition="0.556521,0.604183" RelativeSize="0.42,0.09" Rotation="0" Scale="1" ScaleX="1" ScaleY="1" Text="asfdsafsafd" Type="WZUIEditBox" UseOriginSize="False"/>
+        <WZUIEditBox BgPicture="common/Jigsaw/sy_special.png" FontColor="255,255,255" FontSize="24" GUID="{5B95688C-C58F-471e-8F1F-D4E42EAB80FA}" InputFlag="FlagPassword" InputMode="ModeSingleLine" LuaEditBoxEditingDidBegin="onEditPswBegin" LuaEditBoxEditingDidEnd="onEditPswEnd" LuaEditBoxTextChanged="" MaxLength="256" Name="editPsw_WndExistAccount" RelativePosition="0.556521,0.439767" RelativeSize="0.42,0.09" Rotation="0" Scale="1" ScaleX="1" ScaleY="1" Text="asfdsafsafd" Type="WZUIEditBox" UseOriginSize="False"/>
+        <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="155,131,122" FontSize="24" GUID="{455243BE-B9E1-4531-BD49-DD5A5F174244}" Name="txtAccountDefaultText_WndExistAccount" RelativePosition="0.353162,0.604183" Text="" Type="WZUILabelTTF"/>
+        <WZUILabelTTF Alignment="Left" AnchorPoint="0,0.5" Color="155,131,122" FontSize="24" GUID="{8D436DA9-4B3A-4dca-A273-4B09E3994347}" Name="txtPswDefaultText_WndExistAccount" RelativePosition="0.353162,0.439767" Type="WZUILabelTTF"/>
+        <WZUILabelTTF Alignment="Right" AnchorPoint="1,0.5" Color="0,0,0" FontSize="24" GUID="{A6764E6D-470E-4331-A4C4-C43403164B43}" Name="txtAccount_WndExistAccount" RelativePosition="0.345065,0.604183" Text="" Type="WZUILabelTTF"/>
+        <WZUILabelTTF Alignment="Right" AnchorPoint="1,0.5" Color="0,0,0" FontSize="24" GUID="{E71EA4C1-6D70-4877-A0AB-F1276EF292FA}" Name="txtPsw_WndExistAccount" RelativePosition="0.345065,0.439767" Text="" Type="WZUILabelTTF"/>
+        <WZUIContainer AbsContentSize="692,38" GUID="{70C4BF25-94CA-4f7d-8205-246DEA9715CD}" RelativePosition="0.4994,0.0593545" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image AbsPosition="" File="common/Jigsaw/60.png" GUID="{FB77475B-4C5C-46db-90DF-4DA85E656EE5}" RelativePosition="0.5,0.5" RelativeSize="1,1" Type="WZUI9Image" UseOriginSize="False"/>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndExistAccount>

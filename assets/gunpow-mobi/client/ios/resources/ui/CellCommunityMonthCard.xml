@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<CellCommunityMonthCard GUID="{4FD18721-7331-46bc-9488-7C36EF15741C}">
+	<WZUIContainer AbsContentSize="445,62" GUID="{74DE8C26-C165-4e84-B8A5-D0373B9C1286}" LuaObjectName="CellCommunityMonthCard" Name="CellCommunityMonthCard" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+		<WZUIContainer Type="WZUIContainer" GUID="{11992738-EFCC-4405-AC2F-DC7D23D202CF}" AbsContentSize="445,62">
+			<WZUI9Image Type="WZUI9Image" GUID="{928C5C51-EE99-4ed3-B83B-221EE1086F18}" File="ui/common/common_scale9_di7.png" />
+		</WZUIContainer>
+		<WZUICheckBox AbsContentSize="" AnchorPoint="0,0.5" GUID="{A7C0D4A3-BC46-42eb-9CFF-3335ED749F68}" LuaSelectedFunctionName="onSelCheckBox" RelativePosition="0.0129136,0.521799" SelectedIndex="0" Tag="1" Type="WZUICheckBox" UseAbsSize="False" RelativeSize="1,1" Name="checkBoxSel_Cell">
+			<CheckElement GUID="{15A226B2-7DD8-48ed-B326-F728530F1AC5}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+				<WZUI9Image Type="WZUI9Image" GUID="{4C69B80B-55C2-4346-B23F-1E11E0F72E50}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="1" RelativePosition="0.1,0.480734" />
+			</CheckElement>
+			<CheckElement GUID="{7396E044-1BBE-4799-9E1E-34D78054652C}" TouchContainerEnable="True" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" RelativePosition="0.5,0.5">
+				<WZUI9Image Type="WZUI9Image" GUID="{CD66E5BD-C6C1-47cd-BA4C-C128C776DE48}" File="ui/common/common_scale9_di13.png" UseOriginSize="True" Scale="1" RelativePosition="0.1,0.480734" />
+				<WZUI9Image Type="WZUI9Image" GUID="{F563C323-9EBB-4538-B562-E251350DF460}" File="ui/common/common_scale9_beibaodi_sel.png" UseOriginSize="True" Scale="0.45" RelativePosition="0.1,0.483654" ScaleX="0.45" ScaleY="0.45" />
+				<WZUIImage Type="WZUIImage" GUID="{7B543A52-5E65-494d-B0FE-1E2612038E34}" File="ui/common/common_icon_gou.png" UseOriginSize="True" RelativePosition="0.0996491,0.493051" />
+			</CheckElement>
+		</WZUICheckBox>
+		<WZUILabelTTF Type="WZUILabelTTF" GUID="{4BA1D74B-3BE8-4a72-A567-B18C089C54B0}" Name="txtLevel_Cell" FontSize="24" Color="243,87,81" BoldFont="True" RelativePosition="0.21,0.5" Text="Lv99" Alignment="Left" AnchorPoint="0,0.5" />
+		<WZUILabelTTF Color="62,34,8" FontSize="22" GUID="{108869F5-8374-4dd6-A940-09BDBAEBBBD8}" Name="txtName_Cell" RelativePosition="0.38,0.5" Text="张飞张飞张飞" Type="WZUILabelTTF" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+		<WZUIButton Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.85,0.5" GUID="{E6141727-4BB2-4b7c-88B9-D51A545EA7F8}" LuaDoneFunctionName="onCheck" Name="btnCheck" Visible="True" TouchContainerEnable="False" TouchEnable="True" LuaActionName="Normal" AbsPosition="378.25,31">
+			<NormalElement Type="WZUIContainer" GUID="{8FF6ABED-438C-4314-91EF-A0550FFF0D45}">
+				<WZUI9Image Type="WZUI9Image" GUID="{ABDBB2D3-0B41-4cbd-8AF3-A2DA4B8DC78C}" File="ui/common/common_btn_anniu7.png" UseOriginSize="False" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{E3CA8BA6-6ED1-4882-905A-0C5F61F572B7}" TextKey="PETLOOK" FontSize="24" Color="255,236,193" RelativePosition="0.5,0.5" EnableStroke="True" BoldFont="True" StrokeColor="79,60,48" StrokeSize="4" LabelStyleKey="SMALL_ORANGE_BTN" />
+			</NormalElement>
+			<SelectElement Type="WZUIContainer" GUID="{355DF188-0F27-4fe2-8439-64836D08182D}">
+				<WZUI9Image Type="WZUI9Image" GUID="{6E00DE60-0302-4e3a-AEC8-2725E5D33D35}" File="ui/common/common_btn_anniu7_sel.png" UseOriginSize="False" Scale="1" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{3DC5931E-3863-440e-B345-57A35E3AFDFF}" TextKey="PETLOOK" FontSize="24" Color="255,236,193" RelativePosition="0.5,0.5" EnableStroke="True" BoldFont="True" StrokeColor="79,60,48" StrokeSize="4" LabelStyleKey="SMALL_ORANGE_BTN" />
+			</SelectElement>
+			<DisableElement Type="WZUIContainer" GUID="{F5BBB148-A1B4-4795-8452-E8EEDCBD4642}">
+				<WZUI9Image Type="WZUI9Image" GUID="{D0568B11-04D1-47a5-88C4-624C8F86E441}" File="ui/common/common_btn_anniu7.png" UseOriginSize="False" GrayRender="True" RelativePosition="0.5,0.5" Visible="False" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{13BB2BA3-8086-4739-9CDC-61410DCEFCA6}" Text="" FontSize="22" Color="158,139,121" TextKey="PETLOOK" LabelStyleKey="SMALL_GRAY_BTN" RelativePosition="0.5,0.5" />
+			</DisableElement>
+		</WZUIButton>
+	</WZUIContainer>
+</CellCommunityMonthCard>

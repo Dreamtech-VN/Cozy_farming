@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" ?>
+<CellVipGiftList GUID="{4FB9BE54-696F-4391-A9DC-E17EC1597BE7}">
+    <WZUIContainer AbsContentSize="715,130" GUID="{0582DCEA-5ADF-4128-89CE-7353A1BB8574}" LuaObjectName="" Name="CellVipGiftList" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5" AbsPosition="465,320" ShowAll="False">
+        <WZUIContainer GUID="{D3CFFE07-D4A5-441b-8410-A3CEC7227D25}" RelativePosition="0.5,0.5" Type="WZUIContainer" AbsContentSize="" UseAbsSize="False" AbsPosition="-14.2342,107.962" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{1A10E7D4-6BAC-4ddf-9602-B82B5EA12E9E}" Visible="True" Name="conBg_CellVipGiftList">
+                <WZUI9Image Type="WZUI9Image" GUID="{454D3368-2BCC-4702-B42C-F08E30A2BF4A}" File="ui/common/common_scale9_di18.png" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5D23337D-7BA6-412d-B69A-389509327409}" RelativeSize="1,0.19" AnchorPoint="0.5,1" RelativePosition="0.174442,0.975" Name="conName_CellVipGiftList" AbsContentSize="300,35" UseAbsSize="True">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{2ac3d891-aeb8-4070-ae20-effc9b900424}" Font="" FontSize="22" Color="255,236,192" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" Alignment="Left" AnchorPoint="0,0.5" Text="累计充值320钻石" RelativePosition="0.15,0.514928" Name="txtName_CellVipGiftList" LabelStyleKey="C1_F20_S4_C5" Visible="False" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{eda4bba6-56c3-4cea-ab42-ae98aa8d157f}" Name="txt_CellVipGiftList" AnchorPoint="0,0.5" MaxWidth="600" RelativePosition="0.155,0.45" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="116,56" GUID="{0330c7af-1967-4884-a1bb-fa061440d5ce}" RelativePosition="0.88,0.36" Scale="1" ScaleX="1" Type="WZUIContainer" UseAbsSize="True" ScaleY="1" AnchorPoint="0.5,0.5" Name="conState_CellVipGiftList" Visible="True">
+                <Button GUID="{a3fc2320-419f-44d7-a198-7a12665e92df}" LuaDoneFunctionName="clickReward" Name="btnReward_CellVipGiftList" Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="False" LuaActionName="Normal">
+                    <NormalElement GUID="{db4ddd81-7b1c-4248-a185-939770d4af1c}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_anniu10_0.png" GUID="{2182539a-268b-4395-b4e5-98212fba8e4e}" Type="WZUI9Image" UseOriginSize="True" />
+                        <WZUILabelTTF Color="255,255,255" FontSize="24" GUID="{41110407-d2bf-4f9a-8b54-6d60d44f290c}" Name="txtBtn_CellVipGiftList" Scale="1" ShadowColor="" StrokeColor="78,38,5" StrokeSize="1" Text="" Type="WZUILabelTTF" ScaleX="1" ScaleY="1" LabelStyleKey="C1_F22_S4_C4" TextKey="" />
+                    </NormalElement>
+                    <SelectElement GUID="{ca4efc3e-dffe-44d1-87b0-76e3ae40b10c}" Type="WZUIContainer">
+                        <WZUI9Image File="ui/common/common_btn_anniu10_0_sel.png" GUID="{7cf5fb55-5368-4bd3-ae26-1d8a35ed046f}" Type="WZUI9Image" Scale="1" UseOriginSize="True" />
+                        <WZUILabelTTF Color="255,255,255" FontSize="24" GUID="{9ce31353-68b5-4c6d-a485-e78affe2b6be}" Name="txtBtnSel_CellVipGiftList" Scale="1" ShadowColor="" StrokeColor="78,38,5" StrokeSize="1" Text="" Type="WZUILabelTTF" ScaleX="1" ScaleY="1" LabelStyleKey="C1_F22_S4_C4" TextKey="" />
+                    </SelectElement>
+                    <DisableElement GUID="{5630a687-4f99-4684-be36-6f2f1955d518}" Type="WZUIContainer">
+                        <WZUIImage Type="WZUIImage" GUID="{dff1fa8f-06d6-400a-a4be-f9c5f3741899}" File="ui/common/commom_icon_ylq.png" Rotation="28" UseOriginSize="True" />
+                    </DisableElement>
+                </Button>
+                <WZUILabelTTF Color="255,255,255" FontSize="24" GUID="{be9fe31b-998f-4f44-ba73-cc1574b8fa45}" Name="txtReward_CellVipGiftList" Scale="1" ShadowColor="" StrokeColor="78,38,5" StrokeSize="1" Text="" Type="WZUILabelTTF" ScaleX="1" ScaleY="1" LabelStyleKey="C8_F22" TextKey="" RelativePosition="0.489356,0.802485" Visible="False" />
+                <WZUIContainer Type="WZUIContainer" GUID="{ebd8342d-25a0-4041-9a97-e6ba2476bc85}" Name="conProgress_CellVipGiftList" RelativePosition="0.5,0.714286" Visible="False">
+                    <WZUILabelTTF Color="255,255,255" FontSize="24" GUID="{6aa53a47-d7bf-47ec-b9b9-8ca300312f6c}" Name="txtProgress_CellVipGiftList" Scale="1" ShadowColor="" StrokeColor="78,38,5" StrokeSize="1" Text="250/300" Type="WZUILabelTTF" ScaleX="1" ScaleY="1" LabelStyleKey="C4_F20" TextKey="" RelativePosition="0.497977,0.766771" Visible="True" />
+                    <WZUIImage Type="WZUIImage" GUID="{f6b5b1eb-118e-4c81-909f-3d72da62b1f6}" File="ui/common/common_progress_chengjiu_bg.png" UseOriginSize="True" RelativePosition="0.5,0.375" />
+                    <WZUIProgress Type="WZUIProgress" GUID="{0c8467a1-f817-4bcb-a25e-65096a3125f4}" BgPicture="ui/common/common_progress_chengjiu_fore.png" UseOriginSize="True" Percentage="100" IsBarType="True" RelativePosition="0.5,0.375" Rotation="0" MidPoint="0,0.5" Name="progress_WndOwnCity" TouchEnable="False" AnchorPoint="0.5,0.5" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{5de8bb7d-51ee-418d-9ad6-5a5f3fdb2b40}" Name="conReward_CellVipGiftList">
+                <WZUIContainer Type="WZUIContainer" GUID="{42d5cf65-81ef-4ab7-9a77-c34e0c187940}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.08,0.37" Name="conLeft1" />
+                <WZUIContainer Type="WZUIContainer" GUID="{b3863b28-bc52-4d9f-a3b5-7fb727145744}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.187,0.37" Name="conLeft2" />
+                <WZUIContainer Type="WZUIContainer" GUID="{99f64d13-f853-4de5-80c4-d75d3791ce30}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.294,0.37" Name="conLeft3" />
+                <WZUIContainer Type="WZUIContainer" GUID="{e07ce6dc-454c-440d-9566-eb21da4723c3}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.401,0.37" Name="conLeft4" />
+                <WZUIContainer Type="WZUIContainer" GUID="{a7fd2d8d-ec70-4bef-8434-989bd96b4a08}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.508,0.37" Name="conLeft5" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{41253025-3226-412d-a72d-2c2e26a2fda8}" Name="conForPrice_CellVipGiftList" Visible="False">
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{74de7190-2bb4-45ef-802f-127a029e1668}" Name="ftxtOriginPrice_CellVipGiftList" MaxWidth="300" AnchorPoint="0.5,0.5" UseAbsSize="True" Visible="True" RelativePosition="0.65,0.55" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{6094c137-da0c-4fb4-8796-87297a798ec6}" Name="ftxtCurPrice_CellVipGiftList" MaxWidth="300" AnchorPoint="0.5,0.5" RelativePosition="0.65,0.25" UseAbsSize="True" Visible="True" />
+                <WZUIImage Type="WZUIImage" GUID="{43821a3b-d067-44e2-a88f-46f110fcf4f8}" File="ui/gameActivity/common_icon_xiexian3.png" UseOriginSize="True" RelativePosition="0.65,0.55" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellVipGiftList>

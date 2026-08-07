@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" ?>
+<SceneLoginMgr GUID="{5C6AAFF7-F187-4f9b-BE52-9E09A8E6367E}">
+    <WZUIFrame Type="WZUIFrame" GUID="{477D96DB-B361-4d93-B0D8-9AAE1C0E5CDA}" LuaTouchBeganFunction="" LuaObjectName="SceneLoginMgr" Name="SceneLoginMgr" AbsContentSize="960,768">
+        <WZUIContainer Type="WZUIContainer" GUID="{AA225745-C22B-4ec5-AC58-594F91D32155}" ShowAll="False">
+            <WZUIImage Type="WZUIImage" GUID="{10dbcefa-d386-49c6-80eb-d4bfea4fa10c}" Name="imgBG_SceneLoginMgr" File="ui/login/normal/speed.png" UseOriginSize="True" RelativePosition="0.5,0.587499" />
+            <WZUIImage Type="WZUIImage" GUID="{c9253a1c-9efc-4902-991d-0f2cf8008bc8}" Name="imgTree_SceneLoginMgr" File="ui/login/normal/shu.png" UseOriginSize="True" RelativePosition="0.45625,0.221875" ShowAll="True" Opacity="120" />
+            <WZUIImage Type="WZUIImage" GUID="{5a9030c1-4e77-40bf-8924-6c26516db2bd}" Name="imgRightMountain_SceneLoginMgr" File="ui/login/normal/shan1.png" UseOriginSize="True" RelativePosition="0.921875,0.298438" ShowAll="True" Opacity="255" Rotation="90" />
+            <WZUIImage Type="WZUIImage" GUID="{41f925af-e1a0-4fec-b501-49af3e72436a}" Name="imgBottomMountain_SceneLoginMgr" File="ui/login/normal/shan.png" UseOriginSize="True" RelativePosition="0.5,0.1625" ShowAll="False" Opacity="255" Rotation="0" />
+            <WZUIContainer Type="WZUIContainer" GUID="{80e312b1-7e35-46a3-bfa7-3d6fb5e96d53}" ShowAll="True">
+                <WZUIContainer Type="WZUIContainer" GUID="{627d00f2-73e9-482b-a256-35c879b8bd54}" Name="conForSpine1_SceneLoginMgr">
+                    <WZUISpine Type="WZUISpine" GUID="{78a76970-d32a-47af-b183-c7767f1c3c8d}" Name="spineDragon_SceneLoginMgr" FileAtlas="role/normal/dragon.atlas" FileJson="role/normal/dragon.json" AnimationName="wait" Loop="True" NoBorder="True" RelativePosition="0.516666,0.344376" Order="-1" Scale="0.7" />
+                    <WZUISpine Type="WZUISpine" GUID="{788ab50e-7af0-4957-b886-c553a2203096}" Name="spineDaodanfx_SceneLoginMgr" FileAtlas="role/normal/daodanfx.atlas" FileJson="role/normal/daodanfx.json" AnimationName="wait" Loop="True" RelativePosition="0.50729,0.014063" Order="-1" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{eb3c136a-2405-46b0-ab6f-866a60c76d4c}" Name="conForSpine2_SceneLoginMgr">
+                    <WZUISpine Type="WZUISpine" GUID="{d6e0ada7-5be6-497d-ad9e-31d8248cbdcd}" Name="spineGirl3_SceneLoginMgr" FileAtlas="role/normal/girl3.atlas" FileJson="role/normal/girl3.json" AnimationName="wait" Loop="True" RelativePosition="0.564583,0.176562" />
+                    <WZUISpine Type="WZUISpine" GUID="{4354ce2d-072e-4ec9-9390-7ac52186cfaf}" Name="spineGirl4_SceneLoginMgr" FileAtlas="role/normal/girl4.atlas" FileJson="role/normal/girl4.json" AnimationName="wait" RelativePosition="0.485416,0.179688" Scale="0.9" />
+                    <WZUISpine Type="WZUISpine" GUID="{2c936d38-c469-4604-8ee0-71c01e9b177a}" Name="spinePet1_SceneLoginMgr" FileAtlas="role/normal/pet1.atlas" FileJson="role/normal/pet1.json" AnimationName="wait" Loop="True" RelativePosition="0.5,-0.0546875" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{cae6bbba-24a4-42d5-868e-37f300a04b6b}" Name="conForSpine3_SceneLoginMgr">
+                    <WZUISpine Type="WZUISpine" GUID="{246c1b13-a5b1-41a5-8702-d6295c1bfe25}" Name="spineGirl1_SceneLoginMgr" FileAtlas="role/normal/girl1.atlas" FileJson="role/normal/girl1.json" AnimationName="wait" Loop="True" RelativePosition="0.533333,0.228125" Order="2" />
+                    <WZUISpine Type="WZUISpine" GUID="{7da04bd9-1b7b-4093-948e-dce6432d33b8}" Order="1" Name="spineDragonman_SceneLoginMgr" FileAtlas="role/normal/dragonman.atlas" FileJson="role/normal/dragonman.json" AnimationName="wait" RelativePosition="0.547917,0.053125" Scale="0.95" />
+                    <WZUISpine Type="WZUISpine" GUID="{0cbca906-6133-4a15-9352-143b7cdac22f}" Name="spineGirl2_SceneLoginMgr" FileAtlas="role/normal/girl2.atlas" FileJson="role/normal/girl2.json" AnimationName="wait" Loop="True" RelativePosition="0.508333,0.196875" Order="2" />
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{c1173ca8-f45a-448d-ace0-b7b3937df3bd}" Name="conForSpine4_SceneLoginMgr">
+                    <WZUISpine Type="WZUISpine" GUID="{7c2aa5a4-6836-4660-b95d-cdd2be618759}" Name="spineMan_SceneLoginMgr" Order="3" FileJson="role/normal/man.json" FileAtlas="role/normal/man.atlas" RelativePosition="0.519792,0.232813" AnimationName="wait" Loop="True" />
+                    <WZUISpine Type="WZUISpine" GUID="{80e7d93e-f35e-49ff-9a11-32bf7dce56bc}" Name="spineGunLight_SceneLoginMgr" Order="5" FileAtlas="role/normal/manfx.atlas" FileJson="role/normal/manfx.json" AnimationName="wait" RelativePosition="0.513542,-0.048437" Loop="True" />
+                    <WZUISpine Type="WZUISpine" GUID="{8604efd6-7aef-4e44-aa91-8672fa876772}" Name="spineMohican_SceneLoginMgr" Order="3" FileAtlas="role/normal/mohican.atlas" FileJson="role/normal/mohican.json" Loop="True" AnimationName="wait" RelativePosition="0.519791,0.204688" />
+                    <WZUISpine Type="WZUISpine" GUID="{7f736d6e-7a18-41e9-a480-13cc601d14a2}" Name="spinePet2_SceneLoginMgr" Order="10" FileAtlas="role/normal/pet2.atlas" FileJson="role/normal/pet2.json" AnimationName="wait" Loop="True" RelativePosition="0.516666,0.11875" />
+                </WZUIContainer>
+                <WZUISpine Type="WZUISpine" GUID="{e6d82ad4-07d3-4e63-80c4-b3d4bc5ff0e7}" Name="spineYan_SceneLoginMgr" FileAtlas="role/normal/huoxing.atlas" FileJson="role/normal/huoxing.json" AnimationName="wait" Loop="True" RelativePosition="0.490624,0.096893" />
+                <WZUISpine Type="WZUISpine" GUID="{e30941b0-5873-428b-8c51-bb5565505e70}" FileAtlas="role/normal/yanfx.atlas" FileJson="role/normal/yanfx.json" AnimationName="wait" Order="15" Rotation="-10" RelativePosition="0.220832,0.365625" Loop="True" />
+                <WZUISpine Type="WZUISpine" GUID="{1c9a1524-465b-45c0-a6e9-76c859c7733d}" FileAtlas="role/normal/yanfx.atlas" FileJson="role/normal/yanfx.json" AnimationName="wait" Order="15" Rotation="10" RelativePosition="0.804165,0.389063" FlipX="True" Loop="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{0c79b2d7-dcba-440e-b6bf-257ec4719eb3}" AbsContentSize="300,168" UseAbsSize="True" RelativePosition="-0.00624997,1.02657" AnchorPoint="0,1" Visible="True" AbsPosition="-2,640" ShowAll="False">
+                <WZUIContainer Type="WZUIContainer" GUID="{c554f1ce-cd34-45cc-8a50-bc4fc28a4c6c}" AbsContentSize="300,168" UseAbsSize="True" RelativePosition="0.5,1" ShowAll="True" AbsPosition="121,99.3599" Visible="True" Scale="1" AnchorPoint="0.5,1" Name="conLogo_SceneLoginMgr">
+                    <WZUIImage Type="WZUIImage" GUID="{eacde0ad-c03b-4da4-b375-7be6b6c10c16}" File="ui/login/login_icon_logo.png" UseOriginSize="True" RelativePosition="0.5,0.5" AbsPosition="140,82" Scale="1" ScaleX="1" ScaleY="1" Visible="True" />
+                </WZUIContainer>
+                <WZUIImage Type="WZUIImage" GUID="{f6a56bb2-f772-4568-957d-bc35dede3dce}" File="" UseOriginSize="True" Name="imgVN_SceneLoginMgr" Scale="0.34999999403953552" ScaleX="0.34999999403953552" ScaleY="0.34999999403953552" RelativePosition="0.44,-0.166666" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIFrame>
+</SceneLoginMgr>

@@ -1,0 +1,138 @@
+﻿<CellWakeupTask GUID="{a76012df-7b4b-4967-a272-2ea8cbc4711b}">
+    <WZUIContainer Type="WZUIContainer" GUID="{d92bdf45-beb9-4154-b1f9-c5a129056798}" LuaObjectName="CellWakeupTask" Name="CellWakeupTask" NameCreate="True" AbsContentSize="737,560" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{69b2ac6c-a5fc-4e6d-a30d-76d0ba7fd15c}" RelativeSize="1,0.12" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+            <WZUICheckBoxGroup Type="WZUICheckBoxGroup" GUID="{c52756b2-cd53-4a33-9672-01d9d048d195}" Name="checkGroup_CellWakeupTask">
+                <CheckBox Type="WZUICheckBox" GUID="{1d7a87f1-73ba-4004-a7f8-87f5d05bc5fb}" AbsContentSize="150,52" UseAbsSize="True" Name="checkTop1_CellWakeupTask" RelativePosition="0.09,0.5" LuaCheckedFunctionName="onClickCheck" Tag="1" Scale="0.9">
+                    <CheckElement Type="WZUIContainer" GUID="{29215fec-d86f-4384-9118-7595afddf0bd}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{ea6c5ab5-bd61-49bb-ae88-b907b8b20505}" File="ui/common/common_btn_anniu17.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{742b7e5f-7d60-4222-9b17-0c0ff7a1a6b9}" FontSize="24" Color="255,236,193" EnableStroke="True" Name="txtCheck1_1_CellWakeupTask" StrokeSize="4" StrokeColor="105,65,46" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{1e88fc17-1fc7-44d4-a54c-7a485b42c667}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{216e6b1c-8a2a-4c60-90be-dafcd57b3cec}" File="ui/common/common_btn_anniu17_sel.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{4caa06f5-ade3-40d4-b5a0-ec3eed4059d1}" FontSize="24" Color="255,236,193" EnableStroke="True" Name="txtCheck1_2_CellWakeupTask" StrokeSize="4" StrokeColor="127,70,26" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{d9b8b23d-5538-4ca6-a128-5b5d9dc0d1db}" AbsContentSize="150,52" UseAbsSize="True" Name="checkTop2_CellWakeupTask" RelativePosition="0.29,0.5" Visible="False" Tag="2" LuaCheckedFunctionName="onClickCheck" Scale="0.9">
+                    <CheckElement Type="WZUIContainer" GUID="{d6109558-9845-404f-b8fe-8d44764d8fb2}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{54741ecd-1d9e-4e8e-aba9-c15b3dbe9e3c}" File="ui/common/common_btn_anniu17.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ab22edec-8efc-4348-8dbb-a28333aa60ea}" FontSize="24" Color="255,236,193" EnableStroke="True" Name="txtCheck2_1_CellWakeupTask" StrokeSize="4" StrokeColor="105,65,46" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{415ef2de-e287-4e35-a04f-ec9166d87a7b}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{e4aa266e-3401-48a7-94b6-e793cc28f67d}" File="ui/common/common_btn_anniu17_sel.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b4d8e692-2f5d-4407-a47e-e4bc74a789e6}" FontSize="24" Color="255,236,193" EnableStroke="True" Name="txtCheck2_2_CellWakeupTask" StrokeSize="4" StrokeColor="127,70,26" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{07199fe9-c5bd-48b1-bdc0-4960211bac4a}" AbsContentSize="150,52" UseAbsSize="True" Name="checkTop3_CellWakeupTask" RelativePosition="0.49,0.5" Visible="False" Tag="3" LuaCheckedFunctionName="onClickCheck" Scale="0.9">
+                    <CheckElement Type="WZUIContainer" GUID="{6fb53162-e4a9-4490-ba50-ada5fb7303c6}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{a8300a90-47a0-4b43-8d19-b1b709e5030e}" File="ui/common/common_btn_anniu17.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b793a3c8-4cf0-42e7-a961-6dd56f63a543}" FontSize="24" Color="255,236,193" EnableStroke="True" Name="txtCheck3_1_CellWakeupTask" StrokeSize="4" StrokeColor="105,65,46" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{b28b152c-8df0-4941-bd74-59fa256d4db6}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{293da001-5507-4535-a0c8-f68090ddea05}" File="ui/common/common_btn_anniu17_sel.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b4162774-c3e7-4201-944e-fa38aacb8573}" FontSize="24" Color="255,236,193" EnableStroke="True" Name="txtCheck3_2_CellWakeupTask" StrokeSize="4" StrokeColor="127,70,26" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{ab1bd697-5959-458f-87a1-61b9b7a6399b}" AbsContentSize="150,52" UseAbsSize="True" Name="checkTop4_CellWakeupTask" RelativePosition="0.69,0.5" Visible="False" Tag="4" LuaCheckedFunctionName="onClickCheck" Scale="0.9">
+                    <CheckElement Type="WZUIContainer" GUID="{00031038-b178-4220-937c-cfb729871c56}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{4920219b-3377-4708-a211-6d0b12e84209}" File="ui/common/common_btn_anniu17.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{cf242b74-6247-456c-a034-6c3568e05a99}" FontSize="24" Color="255,236,193" EnableStroke="True" Name="txtCheck4_1_CellWakeupTask" StrokeSize="4" StrokeColor="105,65,46" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{9a0f3400-f31d-4e57-a3a2-12d7054f242b}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{9c27a0ef-76e4-4e17-b1e4-5331d90ca033}" File="ui/common/common_btn_anniu17_sel.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{b4ead432-d90d-487f-bf9a-9eb4d32f8523}" FontSize="24" Color="255,236,193" EnableStroke="True" Name="txtCheck4_2_CellWakeupTask" StrokeSize="4" StrokeColor="127,70,26" />
+                    </CheckElement>
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{d76e1987-d9ac-475c-afc9-868327dd54c0}" AbsContentSize="150,52" UseAbsSize="True" Name="checkTop5_CellWakeupTask" RelativePosition="0.89,0.5" Visible="False" Tag="5" LuaCheckedFunctionName="onClickCheck" Scale="0.9">
+                    <CheckElement Type="WZUIContainer" GUID="{82fb9821-6192-4def-8592-fbb2329af31f}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{210dd360-a95f-4e5b-b85a-7b311312df70}" File="ui/common/common_btn_anniu17.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{0accd1b9-6350-42b7-9012-c87b10f1b9d7}" FontSize="24" Color="255,236,193" EnableStroke="True" Name="txtCheck5_1_CellWakeupTask" StrokeSize="4" StrokeColor="105,65,46" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{8e066d60-8d4e-466e-9d60-1731b031ba54}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{24d7165d-e68b-440a-8073-a52be3b42525}" File="ui/common/common_btn_anniu17_sel.png" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{628e7087-104e-4557-8db7-fbc25c6c59b6}" FontSize="24" Color="255,236,193" EnableStroke="True" Name="txtCheck5_2_CellWakeupTask" StrokeSize="4" StrokeColor="127,70,26" />
+                    </CheckElement>
+                </CheckBox>
+            </WZUICheckBoxGroup>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{718bf9da-998a-41a5-b092-4e83a00c5d9f}" RelativeSize="1,1" RelativePosition="0.5,0" AnchorPoint="0.5,0" AbsContentSize="737,490" UseAbsSize="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{42adece4-1658-4351-9e58-7c9df54e86ac}" File="ui/common/common_scale9_di110.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{19a9a809-8e42-43f5-9dad-a57219ffa36b}" Name="conForImage_CellWakeupTask" AnchorPoint="0.5,1" RelativePosition="0.5,0.995918" AbsContentSize="732,150" UseAbsSize="True">
+                <WZUIImage Type="WZUIImage" GUID="{ad856236-cf2a-49fd-8f76-a91cd9afeb61}" File="ui/gameActivity/activity_pic_sser.png" UseOriginSize="False" Name="imgTask_CellWakeupTask" />
+                <Button Type="WZUIButton" GUID="{91868d90-135a-4a41-a318-80da5a63a379}" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.915716,0.14" LuaDoneFunctionName="onClickRule">
+                    <NormalElement Type="WZUIContainer" GUID="{d9229c04-f7f3-4af7-aeda-12cc9b82aebc}" />
+                    <SelectElement Type="WZUIContainer" GUID="{d9ebee71-ba98-48f3-ae49-c846d0172be2}" />
+                    <DisableElement Type="WZUIContainer" GUID="{0d271d63-b88f-43d1-afe0-cf7e89e20938}" />
+                    <WZUIImage Type="WZUIImage" GUID="{8719d401-7df7-47bf-803b-24d709aa0b85}" File="ui/common/common_icon_xqsm.png" UseOriginSize="True" Name="" />
+                </Button>
+                <WZUIContainer Type="WZUIContainer" GUID="{aea6f0be-2d4b-40df-ac9f-cd59ac0522f7}" AbsContentSize="180,150" AnchorPoint="0,0.5" RelativePosition="0,0.5" UseAbsSize="True">
+                    <WZUI9Image Type="WZUI9Image" GUID="{15333234-957c-44c2-abb4-43167764f6cf}" File="ui/common/common_scale9_di87.png" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{bdb5b1f0-7a30-4dde-8a62-0536a737adca}" FontSize="20" Color="255,227,116" TextKey="WAKEUP_TEXT35" RelativePosition="0.5,0.866666" Name="txtForDesc_CellWakeupTask" />
+                    <WZUIImage Type="WZUIImage" GUID="{2572eed9-2e2f-4cff-8f5a-cff3af98a932}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.733333" ScaleX="0.9" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{652de163-5e6c-4302-8fb4-d558b7819b49}" AnchorPoint="0.5,0" RelativePosition="0.5,0" RelativeSize="1,0.72" Name="conForProperty_CellWakeupTask" />
+                </WZUIContainer>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{4a774d9b-f6f6-4649-b6d5-ec3d59d68586}" Name="conForTask_CellWakeupTask" AbsContentSize="737,177" UseAbsSize="True" RelativePosition="0.5,0.504429">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{813dd4bc-fade-4b6d-9d82-8bcc6d7936c3}" FontSize="20" Color="195,171,148" Name="txtCondition1_CellWakeupTask" Text="黑恶黑符合" AnchorPoint="0,0.5" RelativePosition="0.02,0.633051" />
+                <WZUIImage Type="WZUIImage" GUID="{f34d9a6a-d4b1-4fdc-bb28-636413893d0e}" File="ui/common/common_scale9_fengexian2.png" UseOriginSize="True" ScaleX="1.15" RelativePosition="0.5,0.550848" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{46102107-c582-4c12-8f18-7a1d1eacc8dd}" FontSize="20" Color="195,171,148" Name="txtCondition2_CellWakeupTask" Text="的刷卡了的疯狂" AnchorPoint="0,0.5" RelativePosition="0.02,0.370904" />
+                <WZUIImage Type="WZUIImage" GUID="{bfe5c493-7001-4448-8ec6-0318a0c50b76}" File="ui/common/common_scale9_fengexian2.png" UseOriginSize="True" ScaleX="1.15" RelativePosition="0.5,0.285311" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{fda2e592-25e0-4091-83bd-ee38f34ad67c}" FontSize="20" Color="195,171,148" Name="txtCondition3_CellWakeupTask" Text="索拉卡胡椒粉鲁大师" RelativePosition="0.02,0.108757" AnchorPoint="0,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a6106950-d37d-40f5-8bc7-80a30fcb7be2}" FontSize="20" Color="255,236,193" Name="txtTarget1_CellWakeupTask" AnchorPoint="1,0.5" RelativePosition="0.98,0.633051" Text="1/6" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{8f9c1521-22cf-47ce-bab5-f91f2413676e}" FontSize="20" Color="255,236,193" Name="txtTarget2_CellWakeupTask" AnchorPoint="1,0.5" RelativePosition="0.98,0.376554" Text="未达成" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{d1a7d772-22af-432a-b38e-1214cd1d1cbe}" FontSize="20" Color="255,236,193" Name="txtTarget3_CellWakeupTask" AnchorPoint="1,0.5" RelativePosition="0.98,0.108757" Text="6/10" />
+                <WZUIContainer Type="WZUIContainer" GUID="{c220f0a2-4790-4bf0-a339-29e26452ae04}" AbsContentSize="737,37" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1.0113">
+                    <WZUI9Image Type="WZUI9Image" GUID="{87bc5d0e-7aad-460d-b6f5-10ceb68926cf}" File="ui/common/common_scale9_heidi6.png" UseOriginSize="True" ScaleX="1.21" ScaleY="0.7" RelativePosition="0.5,0.527027" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{cf0b3644-b2ef-4488-9b39-ea751575edf3}" FontSize="24" Color="255,227,116" Name="txtTaskTitle_CellWakeupTask" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" TextKey="WAKEUP_TEXT3" Text="" StrokeColor="79,60,48" EnableStroke="True" StrokeSize="4" />
+                </WZUIContainer>
+                <Button Type="WZUIButton" GUID="{1ab36faf-bbfa-4d12-9de7-f9040b71361b}" Name="btnGoto1_CellWakeupTask" AbsContentSize="60,36" UseAbsSize="True" RelativePosition="0.953,0.664351" Visible="False" Tag="1" LuaActionName="Normal" LuaDoneFunctionName="onClickGoto">
+                    <NormalElement Type="WZUIContainer" GUID="{497f5c9a-83e9-4806-a692-b8c077bcffcd}">
+                        <WZUIImage Type="WZUIImage" GUID="{0db88cc6-e441-45fa-9ad8-fe57fcafd5cf}" File="ui/common/common_btn_anniu5.png" UseOriginSize="True" ScaleX="1" RelativePosition="0.5,0.5" Scale="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{e7cfe046-2fc3-40c1-b144-31f7d499fec3}">
+                        <WZUIImage Type="WZUIImage" GUID="{d21aec85-d079-44f3-af15-71285da1ee11}" File="ui/common/common_btn_anniu5_sel.png" UseOriginSize="True" ScaleX="1" RelativePosition="0.5,0.5" Scale="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{fa8d9998-df80-4645-8af2-66cf5f040021}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{62d18f21-e89a-41ca-8b67-1c57fa63e036}" FontSize="20" Color="255,236,193" Name="txtBtnGoto1_CellWakeupTask" Text="符合" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" EnableStroke="True" StrokeSize="2" StrokeColor="105,65,46" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{7e3650d9-bb1b-4f67-a212-826c2c13396a}" Name="btnGoto2_CellWakeupTask" AbsContentSize="60,36" UseAbsSize="True" RelativePosition="0.953,0.409605" Visible="False" Tag="2" LuaActionName="Normal" LuaDoneFunctionName="onClickGoto">
+                    <NormalElement Type="WZUIContainer" GUID="{9c2c1154-3392-459b-8383-41c0ecec5ce9}">
+                        <WZUIImage Type="WZUIImage" GUID="{d2782509-66f2-4c80-97ed-636bdad62f98}" File="ui/common/common_btn_anniu5.png" UseOriginSize="True" ScaleX="1" RelativePosition="0.5,0.5" Scale="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{505bac12-e9dc-4190-b195-91b4685b275b}">
+                        <WZUIImage Type="WZUIImage" GUID="{915b600f-6085-49c1-8f86-99fac4cdd22e}" File="ui/common/common_btn_anniu5_sel.png" UseOriginSize="True" ScaleX="1" RelativePosition="0.5,0.5" Scale="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{9f19f32d-fade-471f-b004-805de6f962a9}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{cb438f59-b145-4194-9697-2450edb02ebc}" FontSize="20" Color="255,236,193" Name="txtBtnGoto2_CellWakeupTask" Text="符合" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" EnableStroke="True" StrokeSize="2" StrokeColor="105,65,46" />
+                </Button>
+                <Button Type="WZUIButton" GUID="{d8d76cc2-11e7-45da-b355-ca1ddb2471ba}" Name="btnGoto3_CellWakeupTask" AbsContentSize="60,36" UseAbsSize="True" RelativePosition="0.953,0.144068" Visible="False" Tag="3" LuaActionName="Normal" LuaDoneFunctionName="onClickGoto">
+                    <NormalElement Type="WZUIContainer" GUID="{df79d0a9-fb49-4f39-99f9-bcbb0dc75c9e}">
+                        <WZUIImage Type="WZUIImage" GUID="{fe0a192b-6ecf-4787-b051-90f019174255}" File="ui/common/common_btn_anniu5.png" UseOriginSize="True" ScaleX="1" RelativePosition="0.5,0.5" Scale="1" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{b6f36c7e-cb21-4b87-b0a4-5d10e2fa1c07}">
+                        <WZUIImage Type="WZUIImage" GUID="{144ced40-3b50-40be-8be9-73aedcc96cba}" File="ui/common/common_btn_anniu5_sel.png" UseOriginSize="True" ScaleX="1" RelativePosition="0.5,0.5" Scale="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{bc559f08-5d3e-4b09-b45b-d075656cff98}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{e7014d7c-9daf-449f-9633-a2b8de977109}" FontSize="20" Color="255,236,193" Name="txtBtnGoto3_CellWakeupTask" Text="符合" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" EnableStroke="True" StrokeSize="2" StrokeColor="105,65,46" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{d70a37c2-56cf-44cd-ba40-cd3d4621389b}" Name="conForCost_CellWakeupTask" AbsContentSize="737,163" UseAbsSize="True" RelativePosition="0.5,0" AnchorPoint="0.5,0">
+                <WZUIContainer Type="WZUIContainer" GUID="{8bc96f0c-30d6-4e77-b7ba-cbe5de9ed8f0}" AbsContentSize="737,37" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1">
+                    <WZUI9Image Type="WZUI9Image" GUID="{c87b5042-a97d-4de9-ab69-92f99626fcea}" File="ui/common/common_scale9_heidi6.png" UseOriginSize="True" ScaleX="1.21" ScaleY="0.7" RelativePosition="0.5,0.527027" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{74d15b4a-7ed2-4daf-a0ad-fe5273d25add}" FontSize="24" Color="255,227,116" Name="txtCostTitle_CellWakeupTask" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" TextKey="WAKEUP_TEXT4" Text="" StrokeColor="79,60,48" EnableStroke="True" StrokeSize="4" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a7c4ddf0-b797-4cd8-b5f1-5a544c2c7aae}" FontSize="20" Color="195,171,148" Name="txtAfterWakeup_CellWakeupTask" AnchorPoint="0.5,0.5" RelativePosition="0.88,0.56" Text="6/10" />
+                <Button Type="WZUIButton" GUID="{862b1923-96be-427f-ada7-cb5ed2ea89bf}" AbsContentSize="142,66" UseAbsSize="True" LuaActionName="Normal" LuaDoneFunctionName="onClickWakeup" Name="btnWakeup_CellWakeupTask" RelativePosition="0.888141,0.253333">
+                    <NormalElement Type="WZUIContainer" GUID="{38f872e6-ecf8-4973-8c6e-8b11ee947d9f}">
+                        <WZUIImage Type="WZUIImage" GUID="{018a11f3-cf39-4712-ae5c-c303be1addd3}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{fc93be4d-b4c6-45ab-9c69-0b2f2b8d07f9}">
+                        <WZUIImage Type="WZUIImage" GUID="{3ffef926-2e96-4430-b93b-579b4b675e0d}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{32b44126-7c8d-4f42-af9f-e659f195ecd3}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{72c3b2e9-ab76-4ebe-a9d5-ba93c15352df}" FontSize="20" Color="255,236,193" Name="txtWakeup_CellWakeupTask" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Text="" TextKey="" LabelStyleKey="NORMAL_GREEN_BTN" />
+                </Button>
+                <WZUITableContainer Type="WZUITableContainer" GUID="{8fb7291d-1f79-4e6c-bd48-b9349c82cde7}" RelativeSize="0.75,0.72" RelativePosition="0.02,0.406667" AnchorPoint="0,0.5" EnableMoveHorizontal="False" IsVerticalMode="False" CellElementHeight="0.18" EnableMoveVertical="False" Name="tableCostList_CellWakeupTask" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellWakeupTask>

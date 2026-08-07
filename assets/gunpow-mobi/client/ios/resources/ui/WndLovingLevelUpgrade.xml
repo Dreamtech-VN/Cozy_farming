@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<WndLovingLevelUpgrade GUID="{4262467B-7EC1-4d14-BB45-4B4F545C9343}">
+	<WZUIWindow Type="WZUIWindow" GUID="{9604C7CC-3CBE-4422-9E74-9952802BCF69}" LuaObjectName="WndLovingLevelUpgrade" Name="WndLovingLevelUpgrade" NameCreate="True" AbsContentSize="" Visible="True" LuaTouchBeganFunction="onTouchBegan" ShowAll="True">
+		<WZUIContainer Type="WZUIContainer" GUID="{F51A3040-48F0-433b-9661-3B302F2D422B}" AbsContentSize="0,0" UseAbsSize="False" Visible="True" TouchEnable="False">
+			<WZUISpine Type="WZUISpine" GUID="{1E73352F-2157-46d4-9E8A-5848F9374F89}" FileJson="ui/ui_enaiup_effect_01.json" FileAtlas="ui/ui_enaiup_effect_01.atlas" AnimationName="enaiup" RelativePosition="0.5,0.75" AbsPosition="480,392" Loop="False" Name="spLoveUpgrade_WndLoving" LuaSpineEventFunc="onFirstActionFinish" />
+			<WZUIContainer Type="WZUIContainer" GUID="{5EC61296-2365-40aa-97C4-E96B32FB6F0F}" RelativePosition="0.5,0.5" AbsPosition="480,319">
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{C23CCDC3-889E-4905-B285-F4F391256595}" FontSize="30" EnableStroke="True" StrokeColor="158,0,0" StrokeSize="4" Color="255,166,62" Name="txtPreviousLevel_WndLovingLevelUpgrade" Text="" RelativePosition="0.438066,0.447217" AbsPosition="420.543,286.219" />
+				<WZUIImage Type="WZUIImage" GUID="{3A6A5707-159C-47fd-9A0C-D18EFA0BC914}" File="ui/common/common_icon_jiehunjiantou.png" UseOriginSize="True" RelativePosition="0.501577,0.454628" Scale="1" Visible="False" TouchEnable="False" AbsPosition="481.514,290.962" Name="imgArrow_WndLogingLevelUpgrade" />
+				<WZUILabelTTF Type="WZUILabelTTF" GUID="{71DEC46D-28E8-4e0e-ABAC-EDEB4EB590AF}" FontSize="30" EnableStroke="True" StrokeColor="158,0,0" StrokeSize="4" Color="255,166,62" Name="txtCurLevel_WndLovingLevelUpgrade" Text="" RelativePosition="0.551376,0.447217" Visible="True" />
+			</WZUIContainer>
+		</WZUIContainer>
+	</WZUIWindow>
+</WndLovingLevelUpgrade>

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<CellSingleCopyLevel GUID="{53D28636-7C21-40c4-9DFF-A60F9BE9873B}">
+    <WZUIContainer Type="WZUIContainer" GUID="{8B9A7C7E-068F-4f1f-8804-D8C29EA263DA}" UseAbsSize="True" AbsContentSize="100,170" TouchContainerEnable="True" Name="CellSingleCopyLevel" NameCreate="True" AnchorPoint="0.5,0.5" Visible="True" UseAbsCoordinate="False" AbsPosition="0,0" LuaObjectName="" TouchSwallow="False">
+        <WZUIButton Type="WZUIButton" GUID="{0B6C3EA9-3E24-4597-9072-7B7FCF1E5CDA}" LuaDoneFunctionName="onClickLevel" Name="btn_CellSingleCoypLevel" Order="0" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.5,0.417091" TouchEnable="True">
+            <NormalElement Type="WZUIContainer" GUID="{3C168B05-3C6F-4beb-B56F-4C6A379B12A6}" TouchContainerEnable="False" TouchEnable="False">
+                <WZUIImage Type="WZUIImage" GUID="{7661AA76-942D-4848-B317-96715F4424E8}" File="ui/copy/common_icon_xiao1.png" UseOriginSize="True" Name="imgLevel1_CellSingleCopyLevel" RelativePosition="0.5,0.317577" Scale="1" Order="1" AnchorPoint="0.5,0.5" ScaleX="1" ScaleY="1" TouchEnable="False" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{70E1F1CF-9A98-4e28-BADC-B3C7FC313561}" TouchContainerEnable="False" Scale="1" ScaleX="1" ScaleY="1" TouchEnable="False">
+                <WZUIImage Type="WZUIImage" GUID="{DC8914CE-68FF-4be7-8FA9-D22715261429}" File="ui/copy/common_icon_jingyin2.png" UseOriginSize="True" Name="imgLevel2_CellSingleCopyLevel" RelativePosition="0.5,0.317577" Scale="1" Order="1" AnchorPoint="0.5,0.5" Color="200,200,200" TouchEnable="False" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{CE6EE72A-2720-46e0-A06B-0334FC9CD669}" />
+        </WZUIButton>
+        <WZUIContainer Type="WZUIContainer" GUID="{F8C7D8AE-B39D-434d-9882-9382948B08D2}" Name="conArm_CellSingleCopyLevel" />
+        <WZUIContainer Type="WZUIContainer" GUID="{9EF0FFE9-7740-477c-A4AD-972B2BC5C140}" UseAbsSize="True" AbsContentSize="95,26" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.132374" Order="1" Name="conStar_CellSingleCopyLevel" TouchEnable="False" Visible="True">
+            <WZUIImage Type="WZUIImage" GUID="{BF514D8E-8BD9-40a2-8E00-BF7BE5BE1BF0}" File="ui/common/common_icon_jia-di.png" UseOriginSize="False" ScaleY="0.88" Opacity="186" />
+            <WZUIImage Type="WZUIImage" GUID="{5555795B-F60E-433f-9C8A-51F9A35176FD}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Name="imgStar1_CellSingleCopyLevel" Scale="1" NameCreate="True" RelativePosition="-0.0447325,0.791044" AnchorPoint="0,0.5" />
+            <WZUIImage Type="WZUIImage" GUID="{86A6E8B8-FF07-4ee8-AA33-97556D689B6D}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Name="imgStar2_CellSingleCopyLevel" Scale="1" NameCreate="True" RelativePosition="0.5,0.601345" />
+            <WZUIImage Type="WZUIImage" GUID="{1C2C96C4-76C6-44f9-A342-67F0E7AF65A4}" File="ui/common/common_icon_xingxing2.png" UseOriginSize="True" Name="imgStar3_CellSingleCopyLevel" Scale="1" NameCreate="True" RelativePosition="1.04924,0.791045" AnchorPoint="1,0.5" Color="255,255,255" IsOpacityModifyRGB="True" GrayRender="True" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{BC3D423E-A91C-46f0-B5BF-9137A3B2142E}" FontSize="22" Color="255,255,255" EnableStroke="True" StrokeColor="132,66,29" StrokeSize="4" Name="txtLevelName_CellSingleCoypLevel" Text="" RelativePosition="0.5,0.497507" TouchEnable="False" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{6E539EC0-109C-4f88-948C-CFFB2148954F}" FontSize="22" Color="255,255,255" EnableStroke="True" StrokeColor="132,66,29" StrokeSize="4" Name="txtMonsterName_CellSingleCoypLevel" Text="魔鬼" RelativePosition="0.5,0.942716" TouchEnable="False" Visible="False" />
+    </WZUIContainer>
+</CellSingleCopyLevel>

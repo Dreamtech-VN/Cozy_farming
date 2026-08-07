@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" ?>
+<WndTowerScroll GUID="{138c24ff-0b01-421a-abad-de94af8fa0b0}">
+    <WZUIWindow Type="WZUIWindow" GUID="{31EA6593-CD3D-4927-B601-DCD604C4553F}" LuaTouchBeganFunction="onTouchBegan" LuaTouchMovedFunction="" LuaTouchEndedFunction="" ShowAll="False" RelativePosition="0.5,0.5" LuaTouchCancelledFunction="" LuaObjectName="WndTowerScroll" NameCreate="True" Name="WndTowerScroll" ScaleX="1">
+        <WZUIContainer Type="WZUIContainer" GUID="{23557F74-4260-427c-B248-DD1CA2D525E1}">
+            <WZUIImage Type="WZUIImage" GUID="{4F4E4C09-BA89-4f6f-8BAD-9EA2FE8E33D3}" File="ui/common_bg/common_scale9_di2.png" UseOriginSize="False" />
+            <WZUIMoveContainer Type="WZUIMoveContainer" EnableMoveVertical="True" Name="movMap_WndTowerScroll" EnableBounceBack="False" EnableMoveoutContainer="False" Visible="True" GUID="{CC39FF8C-C50F-4d0e-AD42-F640B8BD9B2E}" AbsContentSize="0,0" UseAbsSize="False" MaxPosition="1450,320" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" EnableDagLoading="False" ShowAll="False" EnableMoveHorizontal="False" ScissorHeight="1.4">
+                <MoveElement Type="WZUIContainer" AbsContentSize="960,2610" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" GUID="{6D0FE1BC-A4C5-4d36-80D9-DE4A7278FD75}" ShowAll="True">
+                    <WZUIContainer Type="WZUIContainer" GUID="{647FE464-178F-473d-962F-7D414440AAE0}" Name="conScrollMap_WndTowerScroll" AnchorPoint="0.5,0" RelativePosition="0.5,0" ShowAll="False" UseAbsSize="True" AbsContentSize="960,2610" Visible="True" />
+                </MoveElement>
+            </WZUIMoveContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{E95DD823-6EB7-4754-9827-B5DFA1B376B0}" AbsContentSize="300,120" UseAbsSize="True" RelativePosition="1,0" AnchorPoint="1,0" Name="conSweap_WndTowerScroll" ShowAll="True" Visible="True" Order="0">
+            <WZUIContainer Type="WZUIContainer" GUID="{EE24E22E-BFF0-47d8-AB2B-4D8204955868}" AbsContentSize="300,40" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.5,1" Name="conSweap2_WndTowerScroll" Visible="False" RelativeSize="1,1.06667">
+                <WZUIImage Type="WZUIImage" GUID="{7D5EC1AE-8D66-4e84-AB87-4B111068B8E7}" File="ui/common/common_scale9_heidi1.png" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{733A4547-4E33-4b8a-AC05-6E89DE688393}" Color="255,227,116" FontSize="22" AnchorPoint="0,0.5" RelativePosition="0.136667,0.5" TextKey="SWEPT_LEAVE_TIEM" Name="txtSweapLTD_WndTowerScroll" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{B5DB9E62-BB50-4879-9061-F40601B76210}" Color="255,89,74" FontSize="22" AnchorPoint="1,0.5" RelativePosition="0.881237,0.5" TextKey="" Name="txtSweapLT_WndTowerScroll" Text="00:00:00" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{591D6150-EC6F-4f30-B500-0EA0E096A182}" AbsContentSize="300,40" Name="conResert_WndTowerScroll" RelativePosition="0.476667,1.06667" UseAbsSize="True" AnchorPoint="0.5,1" Visible="True">
+                <WZUIImage Type="WZUIImage" GUID="{7C6D087D-3057-4bc3-91EE-7D51F7908A0F}" File="ui/common/common_scale9_heidi1.png" UseOriginSize="False" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{ADEB7BA1-41B5-4917-8221-B23D99D3FDFE}" Color="255,227,116" FontSize="22" AnchorPoint="1,0.5" RelativePosition="0.763333,0.5" TextKey="REMAIN_RESET_COUNT" Name="txtResertD_WndTowerScroll" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{92B450DF-DB9A-4910-9ED5-529FA9A458C9}" Color="255,236,193" FontSize="22" AnchorPoint="0,0.5" RelativePosition="0.791866,0.5" TextKey="" Name="txtResertT_WndTowerScroll" Text="" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{9C14C401-9263-467f-8C09-B68E7537C1C1}" AbsContentSize="300,66" UseAbsSize="True" AnchorPoint="1,0" RelativePosition="1,0.0789449" Name="conStart_WndTowerScroll" Visible="True">
+                <WZUIButton Type="WZUIButton" Name="btnResert_WndTowerScroll" AbsContentSize="126,66" UseAbsSize="True" RelativePosition="0.17104,0.5" LuaDoneFunctionName="onBtnReset" GUID="{682CD334-318F-4dc9-A073-883BC64A02DF}" Visible="True" Scale="1" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{9B444349-16A3-4d8f-B3EA-D520B5F713D6}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{0B259C46-650B-41bc-A1CA-120831323058}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{D11787AA-C034-439d-868D-33C38684F959}" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" Text="重置" RelativePosition="0.5,0.5" Name="" Visible="True" TextKey="RESET" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{6442EF4F-3CCE-44da-A05B-989F9F297A60}" Scale="1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{1BCC9F82-6A94-40c8-9317-3AAB5C2CD048}" File="ui/common/common_btn_anniu3_sel.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{51D02238-F980-4dc6-B054-BA59C2F4AB9C}" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" Text="重置" RelativePosition="0.5,0.5" Name="" Visible="True" TextKey="RESET" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{32D42D9A-E9F4-4c1f-8782-1799DFEA6AC7}" />
+                </WZUIButton>
+                <WZUIButton Type="WZUIButton" Name="btnSweap_WndTowerScroll" AbsContentSize="126,66" UseAbsSize="True" RelativePosition="0.695707,0.518575" LuaDoneFunctionName="onBtnRaids" GUID="{5B2207B2-4A9E-4ae7-A2B1-BC6C0BFDE119}" Visible="True" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{AA1BB1ED-EF7A-493c-BF74-62CABF2BB4A0}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{D3868426-ABC8-45af-94C9-2EA2536993ED}" File="ui/common/common_btn_anniu10.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{85BA6F88-6841-42b0-BC91-F5B35A638D6F}" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="0,72,3" Text="扫荡" RelativePosition="0.5,0.5" Name="" TextKey="WIPE_OUT" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{59E8905E-858C-4935-83EF-70F13C4ADBA4}" Scale="1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{975E1505-0D56-46ee-AE9E-7461A7E1CFDE}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="True" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{1724D780-F0C1-4ce1-85BE-7F93EB84736B}" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="0,72,3" Text="扫荡" RelativePosition="0.5,0.5" Name="" TextKey="WIPE_OUT" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{4EA03E07-CF67-4436-9F47-7161E9D0CC9B}" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{C59917AF-EEC8-41d5-84C4-922F8E3873FF}" Name="conSweaping_WndTowerScroll" AbsContentSize="156,66" Visible="False" UseAbsSize="True" RelativePosition="0.695076,0.0789449" AnchorPoint="0.5,00">
+                <WZUIButton Type="WZUIButton" Name="btnSweapFast_WndTowerScroll" AbsContentSize="126,66" UseAbsSize="False" RelativePosition="0.5,0.5" GUID="{65EFD974-3240-433d-B9EB-ACC186A023C4}" LuaDoneFunctionName="onBtnAddSpeed" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{F3C48B63-25AF-433d-97CD-5C4AA11F75EC}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{1B13B5DC-C3A4-4d86-8E98-B629909A1C07}" File="ui/common/common_btn_anniu10.png" UseOriginSize="False" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{23DD3864-0729-4cdd-B39F-E5E68C9CA5BE}" Scale="1">
+                        <WZUI9Image Type="WZUI9Image" GUID="{EADC3D07-03DD-4849-8D3E-6C72A53D6DBB}" File="ui/common/common_btn_anniu10_sel.png" UseOriginSize="False" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{85729903-BD9D-4902-BEE7-B57DE0D29E1F}" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{F4991D79-E9DE-43ce-BA35-72829E6EDA27}" FontSize="24" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="3,111,8" Text="" RelativePosition="0.308884,0.5" Name="txtSweapFast_WndTowerScroll" AnchorPoint="1,0.5" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{63151327-811D-40ee-ADE6-209FC1D4EDBB}" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="3,111,8" Text="30  加速" RelativePosition="0.99006,0.5" Name="txtQuicken_WndTowerScroll" TextKey="QUICKEN" AnchorPoint="1,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{176DE8EC-4EDC-41c9-B259-3EC2D7DEF06D}" File="" UseOriginSize="True" Scale="0.6" RelativePosition="0.430029,0.5" Name="imgDiamond_WndTowerScroll" TouchEnable="False" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{73ED89BC-D58E-4362-BBDB-6B38AE91B74F}" Name="conStopSweaping_WndTowerScroll" AbsContentSize="126,66" Visible="False" UseAbsSize="True" RelativePosition="0.174421,0.0789449" AnchorPoint="0.5,00">
+                <WZUIButton Type="WZUIButton" Name="" AbsContentSize="126,66" UseAbsSize="False" RelativePosition="0.5,0.5" GUID="{BC7DB50C-EA76-42af-BE4C-B398A4DD9269}" LuaDoneFunctionName="onStopSweeping" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" GUID="{4EEBBE8C-6A68-428c-99A3-4F3C3EC95F62}">
+                        <WZUI9Image Type="WZUI9Image" GUID="{780AFE0B-A9B2-48d7-829F-A9C2D9952889}" File="ui/common/common_btn_anniu3.png" UseOriginSize="True" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" GUID="{7F322BC8-BB59-4ac4-A67F-04394AC8379F}" Scale="1.12">
+                        <WZUI9Image Type="WZUI9Image" GUID="{0C3D982D-4A34-43f1-89A3-C414B323B68F}" File="ui/common/common_btn_anniu3_sel.png" UseOriginSize="True" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{C2D57433-76C7-4ea9-A420-D43F6E358C90}" />
+                </WZUIButton>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{2232CF72-60FA-419d-9618-86EB6B948D60}" FontSize="26" Color="255,236,193" EnableStroke="True" StrokeSize="4" StrokeColor="128,54,13" Text="30  加速" RelativePosition="0.5,0.5" Name="txtStopSweep_WndTowerScroll" TextKey="STOP_SWEEPING" AnchorPoint="0.5,0.5" TouchEnable="False" />
+            </WZUIContainer>
+            <WZUIEditBox Type="WZUIEditBox" GUID="{1daae945-32b9-4955-af1d-7e429a27b517}" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{93F1EEFE-1812-40ac-80F5-CF10BA080097}" AbsContentSize="350,80" UseAbsSize="True" RelativePosition="-0.00899131,0.062841" ShowAll="True" Name="conHightRecord_WndTowerScroll" AbsPosition="-8.63165,40.2182" AnchorPoint="0,0.5">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{FD527AC2-A0BB-4821-8218-5868D4DFBF61}" FontSize="22" TextKey="HIGHEST_RECORD" RelativePosition="0.51159,0.674821" Color="255��227��116" StrokeColor="79,60,48" EnableStroke="True" StrokeSize="2" AnchorPoint="1,0.5" Name="txtTop_WndTowerScroll" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4DBB9A15-C360-4fc7-B139-F73EA13F6C21}" Color="255,227,116" FontSize="22" TextKey="SINGLE_MAP_CHALLENGE" RelativePosition="0.503019,0.325178" StrokeSize="2" EnableStroke="True" StrokeColor="79,60,48" Name="txtFight_WndTowerScroll" AnchorPoint="1,0.5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{56A3D9F3-E3FE-4157-A149-1F01FD964280}" Name="txtTopFloor_WndTowerScroll" AnchorPoint="0,0.5" RelativePosition="0.522752,0.674821" Text="" FontSize="22" Color="255,236,193" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{92AC2E1A-95E9-45ac-8BCE-FD35E47DDCBC}" Name="txtFightNum_WndTowerScroll" AnchorPoint="0,0.5" RelativePosition="0.522752,0.325178" Text="" FontSize="22" Color="255,236,193" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{2BC410E5-7A50-44da-898D-8FDFE9A56481}" AbsContentSize="70,70" UseAbsSize="True" AnchorPoint="0,0" RelativePosition="0.003125,0.0046875" ShowAll="True">
+            <Button Type="WZUIButton" Name="btnTowerExplain" LuaDoneFunctionName="onTowerClickExplain" GUID="{4658C771-7887-4558-B90A-C53950A25F90}" LuaActionName="Normal">
+                <NormalElement Type="WZUIContainer" GUID="{4EA3E691-7F52-4a8e-AFF4-80144D87D9BA}">
+                    <WZUIImage Type="WZUIImage" GUID="{2BCF4098-3892-4007-B429-8B86C914C161}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement Type="WZUIContainer" GUID="{5F1AD71F-A2AB-46b9-BE53-9871C0F0E8A6}">
+                    <WZUIImage Type="WZUIImage" GUID="{721609E5-1F5A-4672-AD89-3CBF9D27DFA3}" File="ui/common/common_icon_gth.png" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement Type="WZUIContainer" GUID="{6DABB38F-6063-4e81-984E-F855F2C7700C}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{3E373D1F-549F-4bdc-B09E-867C19A23C71}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.089,0.803469" AbsPosition="38.178,514.22" ShowAll="True" AnchorPoint="0.5,0.5" Name="conRank_WdTowerScroll">
+            <WZUIImage Type="WZUIImage" GUID="{F2794018-0A1F-4520-ABE4-8E52751C3847}" File="ui/copy/common_icon_phztt.png" UseOriginSize="True" RelativePosition="0.5,0.5" TouchEnable="False" />
+            <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onBtnRank" GUID="{A3D90F0C-9441-466b-AAD4-E7FEDFF9A462}">
+                <NormalElement Type="WZUIContainer" GUID="{60786DB4-ED13-408f-A54B-9D069CAEC09B}" />
+                <SelectElement Type="WZUIContainer" GUID="{BE16584C-4561-4038-A2D0-9FAEDEBCD606}" />
+                <DisableElement Type="WZUIContainer" GUID="{C89166A5-3883-477f-90D6-E25F47823AB4}" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onClickSwitch" GUID="{4edc95e4-d3aa-47b5-8926-ffa005eed13f}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.089654,0.663842" Name="btnSwitchMode_WndTowerScroll" LuaActionName="Normal" LocalInterval="300" ShowAll="True">
+            <NormalElement Type="WZUIContainer" GUID="{f6b2177f-5374-4f88-ba96-690227740fd3}" />
+            <SelectElement Type="WZUIContainer" GUID="{abefd533-d448-48c5-91c8-e2d1a2c7784a}" />
+            <DisableElement Type="WZUIContainer" GUID="{332bb4df-c825-4e3f-bd31-e8ebd4b73fdf}" />
+            <WZUIImage Type="WZUIImage" GUID="{1374582f-594e-45da-9b60-8e496dff8b90}" File="ui/copy/common_icon_herotowerbtn.png" UseOriginSize="True" RelativePosition="0.5,0.5" TouchEnable="False" Name="imgBtnSwitch_WndTowerScroll" />
+            <WZUIImage Type="WZUIImage" GUID="{3b32c6ef-4fb6-4490-8792-03ab2c168b4d}" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" Name="imgHeroTowerRed_WndTowerScroll" Scale="0.8" RelativePosition="0.82,0.82" Visible="False" />
+        </WZUIButton>
+        <WZUIContainer Type="WZUIContainer" GUID="{b6aeb9be-ef84-498a-8863-a885d4f7ad9b}" AbsContentSize="70,70" UseAbsSize="True" Name="conForBuff_WndTowerScroll" ShowAll="True" RelativePosition="1,0.82" AnchorPoint="1,0.5" Visible="False">
+            <Button Type="WZUIButton" GUID="{3e08baee-1a6c-4d76-a384-26bf7abee367}" AbsContentSize="70,70" LuaActionName="Normal" LuaDoneFunctionName="onCLickBuff">
+                <NormalElement Type="WZUIContainer" GUID="{7c093650-4a6e-4523-9040-3b00051ab552}" />
+                <SelectElement Type="WZUIContainer" GUID="{ad0ebc03-276f-4adb-a7e4-cc25e083eb74}" />
+                <DisableElement Type="WZUIContainer" GUID="{9a4f6bd0-79c6-43f3-b0dc-5466fd4b0ca9}" />
+                <WZUIImage Type="WZUIImage" GUID="{28017129-9b59-40f0-b238-372398dd6630}" File="ui/copy/herotower_icon_frame.png" UseOriginSize="False" />
+                <WZUIImage Type="WZUIImage" GUID="{a15e9562-4a85-4e49-88d8-979b2b5ef019}" File="ui/common/common_pic_diwen2.png" Scale="1" UseOriginSize="False" />
+                <WZUIImage Type="WZUIImage" GUID="{d58fe685-283d-441f-8927-bac099cfd696}" Name="imgBuffIcon_WndTowerScroll" File="ui/community/common_icon_jineng5.png" Scale="0.7" Visible="True" />
+            </Button>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{41c3d57c-6e1d-4f14-8132-ba714f3f945b}" NameCreate="False" Name="CellBuffShow_WndTowerScroll" Visible="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{c056c7a0-4907-4fe2-a69d-ed9be736bd65}" File="ui/common/common_black_bg.png" Opacity="110" Visible="True" Name="img9OpacityBg_WndTowerScroll" />
+            <WZUIContainer Type="WZUIContainer" GUID="{945749a6-cfd2-4d54-9022-62bcab214551}" AbsContentSize="152,154" UseAbsSize="True" ShowAll="True" Name="conBuffIcon_WndTowerScroll">
+                <WZUIImage Type="WZUIImage" GUID="{f333c840-b95e-4ec6-be4d-0ae22bdb79e9}" File="ui/copy/herotower_icon_pattern.png" UseOriginSize="True" />
+                <WZUIImage Type="WZUIImage" GUID="{57998a15-8f59-4d5a-ac19-c725fb43e0c8}" File="ui/copy/herotower_icon_frame.png" UseOriginSize="True" Scale="1.5" />
+                <WZUIImage Type="WZUIImage" GUID="{e34e146c-18c5-4b03-ae1f-fbfd5874d1c3}" File="ui/copy/herotower_icon_pattern2.png" UseOriginSize="True" />
+                <WZUIImage Type="WZUIImage" GUID="{7949c954-7299-498e-9b94-8fc6e973ca20}" Name="imgBuffIcon2_WndTowerScroll" UseOriginSize="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{a028f626-6a55-428b-9ced-3c2de4bb1ef8}" TextKey="" LabelStyleKey="" RelativePosition="0.5,0" ShowAll="False" EnableStroke="True" Color="255,236,193" FontSize="42" Name="txtBuffName_WndTowerScroll" StrokeSize="4" Text="点击继续" StrokeColor="127,70,26" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{87a109d1-6765-4593-b3fa-fad78afcf01b}" TextKey="CLICKCONTINUE" LabelStyleKey="C1_F22" RelativePosition="0.5,-0.7" ShowAll="True" />
+            </WZUIContainer>
+            <Button Type="WZUIButton" GUID="{e1ed90b9-f42a-4fe8-890a-bfff4cb7a7cd}" LuaDoneFunctionName="onClickContinue">
+                <NormalElement Type="WZUIContainer" GUID="{c5dcd7a2-4002-4a16-8d6b-fd10dd13cf7e}" />
+                <SelectElement Type="WZUIContainer" GUID="{0918f373-1eb3-434b-8a27-2fc11e308f0b}" />
+                <DisableElement Type="WZUIContainer" GUID="{372fd28f-9025-48c1-ba3b-b97b9f50efe6}" />
+            </Button>
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{ccb8fd24-dba5-47b4-8a07-3995e4d405c0}" Name="imgAction_WndTowerScroll" TouchEnable="False" File="ui/common/common_white.png" Color="0,0,0" Visible="False" />
+    </WZUIWindow>
+    <WZUIContainer Type="WZUIContainer" GUID="{6D4D5785-681E-485a-97DB-DC5F1C3D5098}" AbsContentSize="960,640" UseAbsSize="True" AnchorPoint="0.5,0" RelativePosition="0.5,0" Name="conMap_WndTowerScroll" Visible="True" UseAbsCoordinate="True" AbsPosition="0,0">
+        <WZUIImage Type="WZUIImage" GUID="{32F9AD95-D22A-4bdf-87F0-E5AB2231BC0E}" File="ui/copy/climbbg_001.png" RelativePosition="0.5,0.5" UseOriginSize="True" Name="imgMap_WndTowerScroll" TouchEnable="False" Opacity="255" Visible="True" />
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{7B5E39D8-4B86-4376-8F5A-C6207B6885C6}" Name="conMiddleMap_WndTowerScroll" AnchorPoint="0.5,0" RelativePosition="0.5,0" AbsContentSize="960,640" UseAbsSize="True" Visible="True" UseAbsCoordinate="True" AbsPosition="0,0">
+        <WZUIContainer Type="WZUIContainer" GUID="{FFCB3FE6-FA09-47b7-8294-EA9E5963C1E7}" RelativePosition="0.06875,0" AbsContentSize="153,640" UseAbsSize="True" AnchorPoint="1,0" Name="conPillar1_WndTowerScroll">
+            <WZUIImage Type="WZUIImage" GUID="{F2035846-95C4-4808-8C0A-B09C0C2CC4FD}" File="ui/copy/climbbg_002.png" UseOriginSize="False" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" ScaleX="-1" Scale="1" Name="imgPillar1_WndTowerScroll" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{200A4536-7FB5-4177-8147-0F746888B9A4}" AbsContentSize="153,640" UseAbsSize="True" AnchorPoint="0,0" RelativePosition="0.93125,0" Name="conPillar2_WndTowerScroll">
+            <WZUIImage Type="WZUIImage" GUID="{E15301AB-0360-46d9-BDBD-934567AE273C}" File="ui/copy/climbbg_002.png" ScaleX="-1" Scale="1" UseOriginSize="False" Name="imgPillar2_WndTowerScroll" FlipX="True" />
+        </WZUIContainer>
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{B735CF3F-2A25-4166-99AF-CBEF586CCC7D}" Name="CellFloor_WndTowerScroll" AbsContentSize="270,300" UseAbsSize="True" RelativePosition="0.0663236,0.253861" Visible="True" AnchorPoint="0,0" ShowAll="False" AbsPosition="63.6707,162.471">
+        <WZUIImage Type="WZUIImage" GUID="{722F95CD-3D43-416a-889D-FDC0EAFA4AB3}" File="ui/common/common_icon_jiantou.png" UseOriginSize="True" RelativePosition="0.46695,0.602989" Order="3" Name="imgArrow_WndTowerScroll" isValid="True" Visible="False">
+            <Action Type="WZUIActionJumpTo" GUID="{F8125F24-F373-46f4-B4E7-24E633E6EC89}" Height="10" Duration="1000000" Jumps="1000000" IsLoop="False" />
+        </WZUIImage>
+        <WZArmature Type="WZArmature" GUID="{C558DB65-2C85-438c-924A-416D67EDDEA5}" ArmatureFile="ui/ui_pata_qidian_01.xml" ArmatureName="ui_pata_qidian_01" UseOriginSize="True" RelativePosition="0.474074,0.13" Name="armTowerStart_WndTowerScroll" ScaleX="1.2" Scale="1" ScaleY="1" Visible="False">
+            <Action Type="WZUIArmatureAnimationById" GUID="{F9BF48F7-1E49-4142-8A9A-F2756815378F}" AnimationId="0" />
+        </WZArmature>
+        <WZUIContainer Type="WZUIContainer" GUID="{E65A22B5-266F-4b24-9A5A-F36390A66936}" AbsContentSize="105,40" UseAbsSize="True" RelativePosition="0.472974,0.101823" Scale="0.8" Name="conFloorInfo_WndTowerScroll">
+            <WZUIImage Type="WZUIImage" GUID="{41DEB55F-C970-4c01-93CD-129F56E50CBF}" File="ui/common/common_icon_jia-di.png" Scale="0.9" Opacity="180" Name="imgNameBg_WndTowerScroll" RelativePosition="0.5,0.55" ScaleX="0.95" />
+            <WZUIImage Type="WZUIImage" GUID="{BECB3830-EAAE-4a51-9C6F-0B59E3FE0AB4}" Name="imgFloorName_WndTowerScroll" RelativePosition="0.512162,0.583007" File="ui/common/common_icon_qd.png" UseOriginSize="True" Visible="False" />
+            <WZUIImage Type="WZUIImage" GUID="{8E39350F-BCE1-4dda-81E3-E5C59B433ABA}" Name="img1_WndTowerScroll" UseOriginSize="True" File="ui/common/common_icon_di.png" RelativePosition="0.166234,0.583007" Visible="False" />
+            <WZUIImage Type="WZUIImage" GUID="{ADFAAE7C-D4E8-4139-916D-7CED0CC6FF76}" Name="img2_WndTowerScroll" UseOriginSize="True" File="ui/common/common_icon_ceng.png" RelativePosition="0.821605,0.583007" Visible="False" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{BB551516-B313-4494-8CDF-08D7E9BC74F4}" Name="atlasFont_WndTowerScroll" Height="24" Width="16" CharMapFileName="ui/common_num/common_num_pata2.png" Text="100" RelativePosition="0.485136,0.583007" Visible="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{91E6AF2B-BF94-4d38-8E76-B9AED58B36CD}" AbsContentSize="96,130" UseAbsSize="True" RelativePosition="0.484085,0.352259" Name="conPlayerFigure_WndTowerScroll" Tag="1313">
+            <WZArmature Type="WZArmature" GUID="{E0849792-B7E3-4977-80F5-B341605FB3A8}" AnchorPoint="0,0" RelativePosition="-0.199877,-0.2187" ArmatureFile="ui/ui_danrenfuben_box_01.xml" ArmatureName="ui_danrenfuben_box_01" UseOriginSize="True" Name="armBonusBox_WndTowerScroll" Visible="False">
+                <Action Type="WZUIArmatureAnimationById" GUID="{CCEFF340-BF8C-427a-B7BD-641F47C855EA}" AnimationId="0" />
+            </WZArmature>
+            <WZUIContainer Type="WZUIContainer" GUID="{AB8163C3-2390-4263-A493-4A08FB80F715}" Tag="1144" />
+            <WZUIImage Type="WZUIImage" GUID="{4AECFBCE-9BE1-4769-B34B-A4A01CB21782}" File="ui/copy/commom_icon_ytg.png" UseOriginSize="True" RelativePosition="0.5,0.3" TouchEnable="False" Visible="False" Name="imgLevelPassTag_WndTowerScroll" Scale="0.85" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{89ECD293-C62F-48c7-9A17-9A7B92B42474}" AbsContentSize="145,70" UseAbsSize="True" RelativePosition="0.5,0.49" AnchorPoint="0.5,0" Name="conFirendF_WndTowerScroll" Visible="True">
+            <WZUIContainer Type="WZUIContainer" GUID="{8BC5F7CA-70C2-4c5d-9662-1AD653F2EB92}" Name="conPlayer1_WndTowerScroll" AbsContentSize="70,70" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0,0.5" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{24FCBE34-153F-4330-BF88-345CF697C93A}" File="ui/common/common_icon_tx.png" UseOriginSize="True" TouchEnable="False" />
+                <Button Type="WZUIButton" LuaDoneFunctionName="onClickFHead" GUID="{29B2F668-05F9-49ab-9AD9-CBE122EF2933}">
+                    <NormalElement Type="WZUIContainer" GUID="{E5750485-ABA6-453f-B409-800A9567B711}" />
+                    <SelectElement Type="WZUIContainer" GUID="{4EB65789-684D-4117-A435-4389C33E7A6C}" />
+                    <DisableElement Type="WZUIContainer" GUID="{B3ADA85F-0C9C-4b37-9E20-390537E9E29D}" />
+                </Button>
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{61D25905-5702-49cd-951E-480B964506BD}" Name="conPlayer2_WndTowerScroll" AbsContentSize="70,70" UseAbsSize="True" AnchorPoint="1,0.5" RelativePosition="1,0.5" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{66172C2F-7C7B-45df-BEF0-DBF7EE58B196}" File="ui/common/common_icon_tx.png" UseOriginSize="True" TouchEnable="False" />
+                <Button Type="WZUIButton" GUID="{140A0A30-6B15-4c1b-B635-54DED8363461}" LuaDoneFunctionName="onClickFHead">
+                    <NormalElement Type="WZUIContainer" GUID="{719A6D22-8D9E-4e3d-A21B-FE9F1393297C}" />
+                    <SelectElement Type="WZUIContainer" GUID="{4B700B21-D609-4804-A931-A78941A16A78}" />
+                    <DisableElement Type="WZUIContainer" GUID="{9A3C89D0-DE5D-471f-A6A4-2C7EAF1141F6}" />
+                </Button>
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{A48A392E-DBC6-4810-80DD-2E5313041730}" AbsContentSize="240,70" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.451852,0.816667" Name="conFire_WndTowerScroll" Visible="False">
+            <WZArmature Type="WZArmature" GUID="{13FBE8FE-7F5F-4a16-AEF1-D0A2B6AAF1C1}" ArmatureFile="ui/skills_sdhm_01.xml" InitPlayId="" ArmatureName="skills_sdhm_01" UseOriginSize="True" RelativePosition="0.5,1" Name="armFire_WndTowerScroll" AnchorPoint="0.5,1" Visible="True">
+                <Action Type="WZUIArmatureAnimationById" GUID="{88879DE9-E024-4404-BC94-0FC8C8844508}" AnimationId="0" Loop="1" />
+            </WZArmature>
+            <WZArmature Type="WZArmature" GUID="{DBA727A7-990B-4962-BAAF-A48E7DF18208}" ArmatureName="skills_jzd_01" UseOriginSize="True" RelativePosition="0.485361,-0.322377" Name="armWeapon_WndTowerScroll" Visible="True" ArmatureFile="ui/skills_jzd_01.xml">
+                <Action Type="WZUIArmatureAnimationById" GUID="{7CFE4EFB-050C-402d-9E9C-8AA91110256F}" AnimationId="0" Loop="1" />
+            </WZArmature>
+            <WZUIImage Type="WZUIImage" GUID="{1FE070B5-E747-4f90-8640-C0F7F93D3701}" File="ui/common/common_icon_zhandouzhong.png" UseOriginSize="True" Scale="0.8" AnchorPoint="0,0.5" RelativePosition="0.250214,0.482626" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{05170825-C226-4adf-904D-69A62E674DC4}" Name="afFightT_WndTowerScroll" FontSize="24" Color="255,255" EnableStroke="True" StrokeSize="4" AnchorPoint="1,0.5" RelativePosition="0.635666,0.482626" StrokeColor="255,89,74" BoldFont="True" Text="" />
+            <WZUIImage Type="WZUIImage" GUID="{F6B7FCAF-BDF3-40b3-AB81-C6DBBAC47B3E}" File="ui/common/common_icon_miao.png" UseOriginSize="True" RelativePosition="0.705507,0.482626" AnchorPoint="1,0.5" Scale="0.8" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{5A8404C8-82BB-4834-B1FA-99A63A6CCACE}" AbsContentSize="195,100" UseAbsSize="True" RelativePosition="0.5,0.60" AbsPosition="135,195" TouchEnable="False" Name="conNoneActionTip_WndTowerScroll" Visible="False" Order="4">
+            <WZUIImage Type="WZUIImage" GUID="{BEB5AA64-E8A5-4434-824A-E806487C3F46}" File="ui/common/common_icon_duihuakuang.png" UseOriginSize="True" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{932A5DB9-B06B-4990-94C0-9E3F7141EDF1}" FontSize="24" Text="点我试试看！" RelativePosition="0.5,0.6" AbsPosition="97.5,60" StrokeColor="158,0,0" Color="158,0,0" TextKey="CLICK_ME_TOTRY" Name="txtClickMeTotry_WndTowerScroll" />
+        </WZUIContainer>
+        <Button Type="WZUIButton" LuaDoneFunctionName="onClickLevel" Name="btnLevel_WndTowerScroll" GUID="{A9DBCA6D-3F28-47c0-933A-84403DE384BF}" AbsContentSize="100,100" UseAbsSize="True" RelativePosition="0.426719,0.132443" AnchorPoint="0.5,0">
+            <NormalElement Type="WZUIContainer" GUID="{D19AE07F-3CAD-43d9-ACC3-425F5282790D}" />
+            <SelectElement Type="WZUIContainer" GUID="{0DC7FA66-1785-4f0d-9DF5-349B897E1504}" />
+            <DisableElement Type="WZUIContainer" GUID="{63A2AD5F-A69B-4054-B609-85B588B74ED4}" />
+        </Button>
+    </WZUIContainer>
+</WndTowerScroll>

@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<WndTips GUID="{8C45C903-3CF2-496e-BBEA-CF7B24CD31D6}">
+    <WZUIWindow AbsContentSize="300,100" AbsPosition="0,0" AnchorPoint="1.02,0.1" GUID="{C24457FE-D70C-46b1-A798-149F747905D4}" LuaObjectName="WndTips16" Name="WndTips16" NameCreate="True" RelativePosition="0.65,0.5" RelativeSize="1,1" ShowAll="False" TouchContainerEnable="True" TouchEnable="True" TouchSwallow="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="True" Visible="True" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{EA313F59-2D54-4da8-9260-4BEB29034D6D}" AbsContentSize="320,330" UseAbsSize="True" Name="conType16_WndTips" Visible="True">
+            <WZUI9Image Type="WZUI9Image" GUID="{FC2358A6-89B6-4c51-9C5A-A3E7A86CDC19}" File="ui/common/common_scale9_di24.png" />
+            <WZUIContainer Type="WZUIContainer" GUID="{95151C24-E36E-4893-BA69-CF43D6D80C7E}" AbsContentSize="280,95" UseAbsSize="True" AnchorPoint="0.5,1" RelativePosition="0.475,0.982">
+                <WZUIContainer Type="WZUIContainer" GUID="{126FF40C-ABD2-479e-9EBC-85239A2E71DA}" AbsContentSize="76,76" UseAbsSize="True" RelativePosition="0.165,0.5">
+                    <WZUIImage Type="WZUIImage" GUID="{9ED75493-BCD1-4e6e-968E-EC0BAE442C5E}" File="ui/common/common_icon_jinengkuang.png" AbsPosition="76,76" UseOriginSize="False" RelativePosition="0.5,0.5" />
+                    <WZUIImage Type="WZUIImage" GUID="{781A063E-8E19-4521-AD2E-02FFE68763B6}" File="battleitems/battle_icon_dazhao.png" UseOriginSize="True" RelativePosition="0.5,0.5" Name="imgType16_WndTips" />
+                </WZUIContainer>
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{7F4EE7EA-83E5-4e68-ACAC-206694319460}" FontSize="22" Color="255,227,116" Text="Lv4 治疗包" RelativePosition="0.34,0.75" Name="label1Type16_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{01CD2DC7-E51E-4d89-A430-21E1A7B51D05}" FontSize="22" Color="158,139,121" Text="已获得" RelativePosition="0.32,0.45" Name="label3Type16_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{0D33024A-D962-48d5-A557-6565670EA6DE}" RelativePosition="0.5,0.507576" AbsContentSize="300,120" UseAbsSize="True">
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{904B2F7E-FF36-4f04-A843-A9D1DF33488B}" FontSize="22" Color="255,227,116" Text="" RelativePosition="0.04,0.86" Name="label4Type16_WndTips" Alignment="Left" AnchorPoint="0,0.5" TextKey="TIPSWORD1" BoldFont="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{9B461AD6-700D-45a8-A64A-D3970A33B7A0}" FontSize="22" Color="255,227,116" Text="" RelativePosition="0.04,0.67" Name="label5Type16_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" TextKey="TIPSWORD2" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{CA302C94-C3C2-481e-BD14-F19BE4806D50}" FontSize="22" Color="255,227,116" Text="" RelativePosition="0.04,0.46" Visible="True" Name="label6Type16_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" TextKey="TIPSWORD3" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{B5696D76-1362-4d1e-B666-891F97D64E20}" FontSize="22" Color="255,236,193" Text="7000" RelativePosition="0.35,0.86" Visible="True" Name="label7Type16_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{D59E6232-63EF-4678-A6D8-892858D6F8FB}" FontSize="22" Color="255,236,193" Text="1.2秒" RelativePosition="0.35,0.67" Visible="True" Name="label8Type16_WndTips" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{F16B1A72-3522-455c-B933-6ACA305E5C40}" AnchorPoint="0,1" RelativePosition="0.25,0.53" Name="label9Type16_WndTips" MaxWidth="230" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{AEEE72D2-52BC-4566-A6FF-89949B67EF11}">
+                <WZUIButton Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.135151" GUID="{B21ED8BF-0730-4416-858A-3E7E0B551986}" LuaDoneFunctionName="onClick16" Name="btnType16_WndTips" Visible="False" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{01D06AAB-DDEF-473b-BF06-E4D10FDF147B}">
+                        <WZUIImage Type="WZUIImage" GUID="{397F6AEB-3B6B-44eb-9C6F-C56D0F12FED9}" File="ui/common/common_btn_anniu4.png" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{24B3932A-F9EB-4da7-92E8-443A0CBB5753}">
+                        <WZUIImage Type="WZUIImage" GUID="{3515913D-4E7F-45ad-BD8D-B63023245BCC}" File="ui/common/common_btn_anniu4_sel.png" Scale="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{CB09EEDE-7EF6-4227-AB1D-1E0C49BF1DEA}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{B1498B1F-F781-48d8-85D2-353CE10E7A21}" FontSize="22" Color="99,255,95" Text="使用" RelativePosition="0.5,0.5" Visible="True" Name="label10Type16_WndTips" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" LabelStyleKey="SMALL_TIP_BTN" />
+                </WZUIButton>
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{4270193C-B5D3-47ee-8F62-60C972082856}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.701212" ScaleX="1.4" Scale="1.4" ScaleY="1" />
+            <WZUIImage Type="WZUIImage" GUID="{F298B45F-8043-4bc3-A1AA-2BD8E8D03C9F}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.334091" ScaleX="1.4" Scale="1.4" ScaleY="1" Name="imgSecondLine_conType16" Visible="False" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{C8340206-FB8A-4de4-B255-9EDCBBD76C84}" FontSize="22" Color="255,89,74" Text="VIP5解锁该道具" RelativePosition="0.5,0.126" Name="label12Type16_WndTips" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" />
+            <WZUIContainer Type="WZUIContainer" GUID="{339085D7-2DCF-4997-ADA1-5FE7727B4B58}" AbsContentSize="316,35" UseAbsSize="True" RelativePosition="0.5,0.275758" Name="conDiamond_conType16" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{774F20B7-4605-4320-AA01-E2191DD0A432}" File="ui/common/common_scale9_heidi6.png" />
+                <WZUIImage Type="WZUIImage" GUID="{7BF04878-8815-40f3-9B0B-FB73B6A25C2F}" File="ui/common/common_icon_zuanshi.png" UseOriginSize="True" Scale="0.8" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{FD9C292F-358B-4479-9EF5-65F00E43573B}" Color="255,236,193" EnableStroke="True" FontSize="22" StrokeColor="79,60,48" StrokeSize="4" AnchorPoint="1,0.5" RelativePosition="0.42,0.5" TextKey="ATH_SHOP_COST" />
+                <WZUILabelTTF Type="WZUILabelTTF" GUID="{44647524-0D7B-4226-8460-43C2A5AA5FB4}" AnchorPoint="0,0.5" Color="255,236,193" EnableStroke="True" FontSize="24" StrokeColor="79,60,48" StrokeSize="4" RelativePosition="0.58,0.5" Name="txtDiamondNum_conType16" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{D611F97C-6FFE-4693-B960-9D3487BC00C2}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.258334" ScaleX="1.4" Scale="1.4" ScaleY="1" Name="imgThirdLine_conType16" />
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTips>

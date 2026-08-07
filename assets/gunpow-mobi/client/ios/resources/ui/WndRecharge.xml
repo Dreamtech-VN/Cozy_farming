@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?><WndRecharge GUID="{4450C6C7-3E4D-4638-89DF-7E0A0399B50B}">
+    <WZUIWindow AbsContentSize="760,600" AnchorPoint="0.5,0.5" GUID="{004A2850-E79C-458d-987B-0D5EF4F2BCF3}" LuaObjectName="WndRecharge" LuaTouchBeganFunction="" Name="WndRecharge" NameCreate="True" RelativePosition="0.5,0.5" Type="WZUIWindow" UseAbsSize="True">
+        <WZUI9Image AbsPosition="600,400" CapInsets="0,0,0,0" File="common/Jigsaw/3.png" GUID="{9F597C5D-0EB0-4459-903C-8F1032946CA6}" LuaTouchEndedFunction="" Name="img9Bg_WndRecharge" RelativeSize="0.94,1" ScaleY="1" Type="WZUI9Image" UseOriginSize="False" UseOriginSizeProportion="False" Visible="True"/>
+        <WZUIContainer AbsContentSize="695,540" GUID="{527B6C2B-3F1A-4961-961F-03FAEFE2CCD0}" RelativePosition="0.5,0.48" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image File="common/Jigsaw/43.png" GUID="{47918E1E-DCE4-4904-A1D7-D21848F1E149}" Type="WZUI9Image" Visible="False"/>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="740,86" GUID="{1BC7054D-074A-4fe4-BD95-341B8D97CDCE}" Name="conTop_WndRecharge" RelativePosition="0.5,0.944" RelativeSize="1,0.15" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image File="common/Jigsaw/5.png" GUID="{1ABC7445-4062-4570-9CDD-75F2E73C6D22}" RelativePosition="0.502703,0.5" ScaleX="0.98" Type="WZUI9Image"/>
+            <WZUI9Image File="common/Jigsaw/42.png" GUID="{C444D67F-067F-46fb-B2B1-24BEC7BCD3B1}" RelativePosition="0.5,0.6" Type="WZUI9Image" UseOriginSize="True" Visible="False"/>
+            <WZUIButton AbsContentSize="90,90" GUID="{1B461255-CC0D-4b20-8AD4-7C0CED4D99C7}" LuaDoneFunctionName="onCloseWindowBtn" Name="btnClose_WndRecharge" RelativePosition="0.938243,0.526744" Type="WZUIButton" UseAbsCoordinate="False" UseAbsSize="True">
+                <NormalElement AbsContentSize="0,0" GUID="{D76FFA91-2411-441e-8ADC-E46ADB2E0F27}" TouchContainerEnable="True" Type="WZUIContainer" UseAbsSize="False">
+                    <WZUIImage File="common/button/close.png" GUID="{6B9FE119-7281-44c9-86CB-AF1E1F572EAC}" Type="WZUIImage" UseOriginSize="True" UseOriginSizeProportion="True"/>
+                </NormalElement>
+                <SelectElement GUID="{B9292BF9-ECD1-442c-B60E-BEAAF1286039}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close_sel.png" GUID="{4F5FB698-D277-4619-B015-B6DAD41ADC89}" Type="WZUIImage" UseOriginSize="True" UseOriginSizeProportion="True"/>
+                </SelectElement>
+                <DisableElement GUID="{7E37E3D5-2C93-417e-83FA-F50C87BBA97D}" Type="WZUIContainer">
+                    <WZUIImage File="common/button/close_not.png" GUID="{2C6AFB64-D84C-4c0a-B679-478F9148F6E8}" Type="WZUIImage" UseOriginSize="True" UseOriginSizeProportion="True"/>
+                </DisableElement>
+            </WZUIButton>
+            <WZUIImage File="common/text/Recharge_title.png" GUID="{2BEA6FF8-7894-42ee-AC65-40F2D2171216}" Name="imgTopTitle_WndRecharge" RelativePosition="0.5,0.462736" Type="WZUIImage" UseOriginSize="True"/>
+        </WZUIContainer>
+        <WZUIContainer AbsContentSize="200,50" GUID="{0796F4BE-C2BE-4770-8D8E-08192EC71BF9}" Name="conFirst_WndRecharge" RelativePosition="0.265,0.791667" RelativeSize="0.3,0.1" Type="WZUIContainer" UseAbsSize="True">
+            <WZUIImage File="common/Jigsaw/numerical_frame.png" GUID="{EB795BBA-63D4-48bd-AFE9-D4FB575ADA24}" RelativePosition="0.615,0.5" Type="WZUIImage"/>
+            <WZArmature ArmatureName="ui" GUID="{2FFCC3A1-A9A3-4239-82C5-70E01C2A91C8}" Type="WZArmature" UseOriginSize="False"/>
+            <WZUIContainer AbsContentSize="85,85" AbsPosition="" GUID="{882ABE00-3EAE-496c-9C68-CBBF369434F9}" RelativePosition="0.123992,0.65158" Type="WZUIContainer" UseAbsSize="True">
+                <WZArmature ArmatureName="diamond" GUID="{B21BADAF-0934-4ed3-BB14-B12A0C90E763}" RelativePosition="0.5,0" Scale="0.75" Type="WZArmature" UseOriginSize="True">
+                    <Action AnimationId="1" AnimationScale="1" GUID="{BD3A7A4D-D71C-4012-B147-ACAFC5BD2B94}" Type="WZUIArmatureAnimationById"/>
+                </WZArmature>
+            </WZUIContainer>
+            <WZUILabelTTF Alignment="Center" AnchorPoint="0,0.5" Color="255,255,255" FontSize="30" GUID="{791E9314-CCC7-48c0-A1AD-3CB5881EC065}" Name="txtDiamond_WndRecharge" RelativePosition="0.362316,0.440765" Text="" Type="WZUILabelTTF" Visible="True"/>
+        </WZUIContainer>
+        <WZUIScrollContainer AbsContentSize="600,400" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{1136E782-1EC2-4ad4-BE1E-FF5E9206A8FF}" Name="rollconExp_WndRecharge" RelativePosition="0.5,0.393" ScrollPictureDown="common/Jigsaw/rolling_03.png" ScrollPictureMid="common/Jigsaw/rolling_01.png" ScrollPictureTop="common/Jigsaw/rolling_02.png" Type="WZUIScrollContainer" UseAbsSize="True">
+            <MoveElement GUID="{20415817-BB43-44a3-AE60-200521DB9D7C}" Type="WZUIContainer">
+                <WZUILabelTTF Alignment="Center" AnchorPoint="0,0" Color="56,21,0" FontSize="25" GUID="{FE682834-01A6-48c4-9261-D7BD48C30CE6}" Name="txtTheme_WndRecharge" RelativePosition="0.04,0.99" Text="" Type="WZUILabelTTF" Visible="False"/>
+                <WZUILabelTTF Alignment="Left" AnchorPoint="0,0" Color="56,21,0" Dimensions="560,0" FontSize="25" GUID="{14031C42-D1A1-4334-9074-79AF02B4A225}" LuaObjectName="" LuaTouchBeganFunction="" Name="txtTip_WndRecharge" RelativePosition="0.04,0.88" Text="" Type="WZUILabelTTF" Visible="True"/>
+                <WZUIContainer AbsContentSize="577.6,350" AnchorPoint="0,0" GUID="{09486786-B2D5-408a-A376-83A566824601}" Name="conRech_WndRecharge" RelativePosition="0.01,0" Type="WZUIContainer" UseAbsSize="True">
+                    <WZUIContainer AbsContentSize="600,4.8" AnchorPoint="0.5,1" GUID="{C5A6BF37-5E73-4699-BBA2-CAD78F44ABE1}" Name="conTopLine_WndRecharge" RelativePosition="0.5,1" RelativeSize="0.76,0.008" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUI9Image File="common/Jigsaw/4.png" GUID="{14A78790-05E2-4b83-9439-C163F0089924}" Type="WZUI9Image"/>
+                    </WZUIContainer>
+                    <WZUITableContainer AbsContentSize="532,324" CellElementHeight="0.5" ColumnCount="3" EnableMoveHorizontal="False" GUID="{7C93291F-4FFD-44f5-A50C-ACB690C27354}" HorizontalInterval="0.04" Name="tbconProductList_WndRecharge" RelativePosition="0.5,0.5" Type="WZUITableContainer" UseAbsSize="True" Visible="False"/>
+                    <WZUIContainer AbsContentSize="600,4.8" AnchorPoint="0.5,0" GUID="{85C5E00E-3962-4889-90D6-9E2D0586B891}" Name="conBottomLine_WndRecharge" RelativePosition="0.5,0" RelativeSize="0.76,0.008" Type="WZUIContainer" UseAbsSize="True">
+                        <WZUI9Image File="common/Jigsaw/4.png" GUID="{303234BE-53AC-4f10-9C02-8FDF5EBC7F58}" Type="WZUI9Image"/>
+                    </WZUIContainer>
+                    <WZUIContainer AbsContentSize="532,324" GUID="{A10CBF00-0965-40a9-B8C4-2A80579920C5}" Name="conRechargeIcon_WndRecharge" Type="WZUIContainer" UseAbsSize="True"/>
+                </WZUIContainer>
+            </MoveElement>
+        </WZUIScrollContainer>
+        <WZUIContainer AbsContentSize="720,43" GUID="{9FA7E51B-EDA5-44a0-B22C-72476DDC821C}" RelativePosition="0.5,-0.00120926" Type="WZUIContainer" UseAbsSize="True">
+            <WZUI9Image File="common/Jigsaw/60.png" GUID="{2971B123-2E13-466d-846C-F5766C84287F}" RelativePosition="0.499046,0.670068" RelativeSize="1,1" Scale="1" ScaleX="1" ScaleY="1.27" ShowAll="False" Type="WZUI9Image" UseOriginSizeProportion="True"/>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndRecharge>

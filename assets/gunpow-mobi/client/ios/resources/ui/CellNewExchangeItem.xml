@@ -1,0 +1,34 @@
+<CellNewExchangeItem GUID="{f9117190-3aa0-49c0-9853-cd372b41259e}">
+    <WZUIContainer AbsContentSize="486,138" GUID="{e66f07b5-5775-44b6-8ac6-73c61c95e865}" Name="CellNewExchangeItem" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{aab1abc5-e393-4ee3-8477-a26f2931c03f}" Name="conListItem_CellNewExchangeItem">
+            <WZUIContainer GUID="{e0358605-380e-49ea-8b6c-166c961663b1}" Type="WZUIContainer" AbsContentSize="486,138" UseAbsSize="True" RelativePosition="0.5,0.5">
+                <WZUI9Image File="ui/common/common_scale9_di18.png" GUID="{968229a9-10af-4d9e-84d7-bedbd0b94235}" Type="WZUI9Image" />
+            </WZUIContainer>
+            <WZUIContainer AbsContentSize="486,138" GUID="{92c442d0-3d0e-44c2-8915-1763765bd85c}" RelativePosition="0.5,0" Type="WZUIContainer" UseAbsSize="True" AnchorPoint="0.5,0">
+                <WZUIContainer Type="WZUIContainer" GUID="{084069e3-a716-437b-92a5-f8fde3763952}" RelativeSize="0.8,0.68" RelativePosition="0.40391,0.355072">
+                    <WZUIContainer AbsContentSize="80,80" GUID="{6a0b11d0-b0ff-4c0b-8212-454be18976de}" Name="ConItem1_CellNewExchangeItem" RelativePosition="0.15,0.57" Type="WZUIContainer" UseAbsSize="True" RelativeSize="1,1" />
+                    <WZUIContainer AbsContentSize="80,80" GUID="{f0a9588f-6609-4856-8bda-046a6cb658ff}" Name="ConItem2_CellNewExchangeItem" RelativePosition="0.365,0.57" Type="WZUIContainer" UseAbsSize="True" />
+                    <WZUIContainer AbsContentSize="80,80" GUID="{ce42c9cb-bd3e-4cd2-880a-fa37a78df7f6}" Name="ConItem3_CellNewExchangeItem" RelativePosition="0.58,0.57" Type="WZUIContainer" UseAbsSize="True" />
+                    <WZUIContainer AbsContentSize="80,80" GUID="{9b15f941-0643-4f79-b079-015ab0b5083c}" Name="ConItem4_CellNewExchangeItem" RelativePosition="0.795,0.57" Type="WZUIContainer" UseAbsSize="True" />
+                </WZUIContainer>
+                <WZUIContainer AbsContentSize="116,56" GUID="{e961541e-dd65-4d48-83df-a8ab1be52844}" RelativePosition="0.864,0.37" Type="WZUIContainer" UseAbsSize="True" Name="conBtn_CellExchangeItem">
+                    <WZUIButton GUID="{a823051b-c5d9-444a-894c-c40d17da1980}" LuaDoneFunctionName="onClickExchange" Name="btn_GetReward_CellNewExchangeItem" Type="WZUIButton" LuaActionName="Normal" TouchEnable="True">
+                        <NormalElement GUID="{7ade2a5b-782f-4f3c-87aa-d710d074a744}" Type="WZUIContainer">
+                            <WZUI9Image File="ui/common/common_btn_anniu3_0.png" GUID="{eef6ad1e-d97f-4200-9fa9-c46a5c61fc5b}" Type="WZUI9Image" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement GUID="{435bfdae-09f3-469e-84c8-dc62185ba247}" Type="WZUIContainer">
+                            <WZUI9Image File="ui/common/common_btn_anniu3_0_sel.png" GUID="{f7982f65-40ee-4690-9f76-7f6546af00f5}" Type="WZUI9Image" Scale="1" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement GUID="{4caf0064-7efb-4a7f-9b53-31f5beb2afd6}" Type="WZUIContainer">
+                            <WZUI9Image File="ui/common/common_btn_anniu3_0.png" GUID="{14f5dc07-9b9c-4ae7-92cd-3ad23e5ded71}" Type="WZUI9Image" GrayRender="True" UseOriginSize="True" />
+                        </DisableElement>
+                        <WZUILabelTTF Color="255,236,193" EnableStroke="True" FontSize="24" GUID="{4ec01d28-6c4d-4d51-a867-cc711dc820d7}" Name="txtExchange_CellNewExchangeItem" StrokeColor="128,54,13" StrokeSize="4" Text="" Type="WZUILabelTTF" LabelStyleKey="" TextKey="duihuan" />
+                    </WZUIButton>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{3143977d-c95f-4a96-b1fe-da9b01d793b0}" AbsContentSize="480,40" AnchorPoint="0.5,1" RelativePosition="0.5,0.985507" UseAbsSize="True">
+                    <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{d91de62c-b72a-4e79-8746-0ff501d0728b}" Name="ftxtCondition_CellNewExchangeItem" AnchorPoint="0,0.5" RelativePosition="0.04,0.5" MaxWidth="500" />
+                </WZUIContainer>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellNewExchangeItem>

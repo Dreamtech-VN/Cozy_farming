@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WndServersSure GUID="{8E889781-83B8-4b77-BFAA-8736D81E6D5E}">
+    <WZUIWindow Type="WZUIWindow" GUID="{3E1186CB-F577-43c0-925D-4339A163BBEC}" Name="WndServersSure" NameCreate="True" LuaObjectName="WndServersSure">
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{06079422-8225-43fc-BA7C-185F396A6A2A}" FontSize="40" Text="GameGift" Order="1" />
+        <WZUIImage Type="WZUIImage" GUID="{C3C32ABC-DF7D-4ca7-8F9B-A9A88AD07F1C}" File="common/Jigsaw/3.png" />
+        <Button Type="WZUIButton" GUID="{1914BD28-BC06-4d61-9633-6345A2465843}" Name="btnClose_WndServersSure" NameCreate="True" LuaDoneFunctionName="onBtnCloseClick" AbsContentSize="71,71" UseAbsSize="True" RelativePosition="0.883707,0.853866">
+            <NormalElement Type="WZUIContainer" GUID="{489A5B1D-29A0-4e26-9768-6E250E99574D}">
+                <WZUIImage Type="WZUIImage" GUID="{7A1F521D-56C2-4022-8F78-9BA0BA09E06F}" File="common/button/close.png" />
+            </NormalElement>
+            <SelectElement Type="WZUIContainer" GUID="{E1552848-AD8F-4da6-8CF3-E9277480A0E8}">
+                <WZUIImage Type="WZUIImage" GUID="{99F1DE2A-16D2-4881-9305-EBB7A5BB0648}" File="common/button/close_sel.png" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{AAB1027E-CE27-407e-B5CF-06090BACDA92}" />
+        </Button>
+    </WZUIWindow>
+</WndServersSure>

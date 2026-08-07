@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" ?>
+<WndTips GUID="{8C45C903-3CF2-496e-BBEA-CF7B24CD31D6}">
+    <WZUIWindow AbsContentSize="300,100" AbsPosition="0,0" AnchorPoint="1.02,0.1" GUID="{C24457FE-D70C-46b1-A798-149F747905D4}" LuaObjectName="WndTips12" Name="WndTips23" NameCreate="True" RelativePosition="0.65,0.5" RelativeSize="1,1" ShowAll="False" TouchContainerEnable="True" TouchEnable="True" TouchSwallow="True" Type="WZUIWindow" UseAbsCoordinate="False" UseAbsSize="True" Visible="True" LuaTouchBeganFunction="onTouchBegan">
+        <WZUIContainer Type="WZUIContainer" GUID="{0EA4624E-CD89-439d-AE45-3158508280AB}" AbsContentSize="422,405" UseAbsSize="True" Name="conType23_WndTips" Visible="True" RelativePosition="0.5,0.5" AbsPosition="150,50">
+            <WZUI9Image Type="WZUI9Image" GUID="{CDFE6572-C255-4619-9773-C31489AF8D5E}" File="ui/common/common_scale9_di24.png" ScaleY="1" Name="bgType23_WndTips" AnchorPoint="0,1" RelativePosition="0,1" ScaleX="1" />
+            <WZUI9Label Type="WZUI9Label" GUID="{8AABB457-686F-4e38-816A-024CA6ACC4E2}" FontSize="22" BoldFont="True" RelativePosition="0.35,0.92" Color="255,236,193" Text="name" Name="title1Type23_WndTips" Alignment="Left" AnchorPoint="0,0.5" />
+            <WZUI9Label Type="WZUI9Label" GUID="{04BDCD5D-92C8-47a7-8082-ABDEDB394D89}" FontSize="22" BoldFont="True" RelativePosition="0.265,0.845" Color="158,0,0" Text="name" Name="title2Type23_WndTips" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="114.8,226.4" />
+            <WZUI9Label Type="WZUI9Label" GUID="{650A0E5E-D4C7-4acb-9DE8-ABBFA21A4DA4}" FontSize="22" BoldFont="True" RelativePosition="0.265,0.79" Color="255,89,74" Text="name" Name="title3Type23_WndTips" Alignment="Left" AnchorPoint="0,0.5" AbsPosition="114.8,200.5" />
+            <WZUIContainer Type="WZUIContainer" GUID="{5829ED6B-ED37-4d84-8049-04C16D8AAC21}" AbsContentSize="78,78" UseAbsSize="True" RelativePosition="0.14,0.855" AbsPosition="61.6,229.5">
+                <WZUI9Image Type="WZUI9Image" GUID="{95610A4B-48CF-468b-8F8C-84F296257B55}" File="ui/common/common_scale9_cheng.png" Name="img1Type23_WndTips" />
+                <WZUIImage Type="WZUIImage" GUID="{49F6BE69-5DBD-4338-99D7-9502EB029B72}" File="ui/common/common_icon_dk.png" UseOriginSize="True" Name="img2Type23_WndTips" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{895B041B-ED6F-4fdb-80F0-111494D7BC2B}" Name="conBtm_WndTips" RelativePosition="0.5,0.5">
+                <WZUIImage Type="WZUIImage" GUID="{97EFBADD-4358-4174-AC51-D9C6275BA6D1}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.62" ScaleX="1.9" Scale="1.9" ScaleY="1" AbsPosition="140,132.8" Rotation="0" Name="line1Type23_WndTips" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{1D94F1A8-F4E8-4adf-B354-486C9B90C7E2}" Name="txt1Type23_WndTips" AnchorPoint="0,0.5" MaxWidth="240" RelativePosition="0.06,0.56" AbsPosition="28,108.8" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{8C5268D4-4B68-4cdb-A3C0-34F33DB5BD00}" Name="txt2Type23_WndTips" AnchorPoint="0,0.5" MaxWidth="240" RelativePosition="0.06,0.5" AbsPosition="28,72.8" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{5958A0FE-7273-4b63-87A0-47A63B5375C4}" Name="txt3Type23_WndTips" AnchorPoint="0,0.5" MaxWidth="240" RelativePosition="0.06,0.44" AbsPosition="28,43.8" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{e89197d5-a1de-4c9e-831f-327d600c15d6}" Name="txt6Type23_WndTips" AnchorPoint="0,0.5" MaxWidth="240" RelativePosition="0.0578,0.3723" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{d132c009-d485-44af-83bd-30360de32089}" Name="conSkill_WndTips" RelativePosition="0.5,0.5" Visible="True">
+                <WZUIImage Type="WZUIImage" GUID="{3b75b506-ff7a-4576-8cec-c0adf6d12236}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.325" ScaleX="1.9" Scale="1.9" ScaleY="1" AbsPosition="140,132.8" Rotation="0" Name="line2Type23_WndTips" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{6625be6e-7956-44d6-8162-91c0149aa069}" Name="txt7Type23_WndTips" AnchorPoint="0,0.5" MaxWidth="400" RelativePosition="0.06,0.28" AbsPosition="28,108.8" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{18bcb84b-cd60-46ce-ae72-d56806f7fa54}" Name="txt8Type23_WndTips" AnchorPoint="0,0.5" MaxWidth="400" RelativePosition="0.06,0.21" AbsPosition="28,72.8" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{0e848e71-4400-416c-80e7-0f2c1c202ed6}" Name="txt9Type23_WndTips" AnchorPoint="0,0.5" MaxWidth="400" RelativePosition="0.06,0.14" AbsPosition="28,43.8" />
+                <WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{31247673-6019-41ed-92d6-89c4bcb21881}" Name="txt10Type23_WndTips" AnchorPoint="0,0.5" MaxWidth="400" RelativePosition="0.06,0.07" />
+                <WZUIImage Type="WZUIImage" GUID="{ee550006-485a-46fc-b253-f0475835a035}" Name="img7Type23_WndTips" RelativePosition="0.13,0.26" UseOriginSize="True" Scale="0.5" AnchorPoint="1,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{44544747-6a01-4014-9fef-88ed6cf5e652}" Name="img8Type23_WndTips" RelativePosition="0.13,0.19" UseOriginSize="True" Scale="0.5" AnchorPoint="1,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{07f05c06-73ee-4275-af08-2fb3c1b64e83}" Name="img9Type23_WndTips" RelativePosition="0.13,0.12" UseOriginSize="True" Scale="0.5" AnchorPoint="1,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{3ad8bc93-90c0-4279-aef5-fb5a02b4484d}" Name="img10Type23_WndTips" RelativePosition="0.13,0.05" UseOriginSize="True" Scale="0.5" AnchorPoint="1,0.5" />
+            </WZUIContainer>
+            <WZUIImage Type="WZUIImage" GUID="{cf5936f3-8751-418b-b043-4912f82436c3}" File="ui/common/common_icon_xue.png" UseOriginSize="True" Name="img3Type23_WndTips" RelativePosition="0.3,0.92" AbsPosition="120.001,226.941" Scale="0.8" />
+            <WZUIContainer Type="WZUIContainer" GUID="{fdec9f5c-5ed5-43a0-8b7d-a78d3c9665fa}" Name="conForBtnType23_WndTips" Visible="False">
+                <WZUIImage Type="WZUIImage" GUID="{3dbd1b30-851f-47a8-8337-9cbb4067ff10}" File="ui/common/common_scale9_fengexian.png" UseOriginSize="True" RelativePosition="0.5,0.328" ScaleX="1.9" Scale="1.9" ScaleY="1" AbsPosition="140,132.8" Rotation="0" Name="line3Type23_WndTips" />
+                <WZUIButton Type="WZUIButton" AbsContentSize="116,56" UseAbsSize="True" RelativePosition="0.5,0.172" GUID="{38e6c0b7-b476-47c9-9a5c-223535817d3b}" LuaDoneFunctionName="onClickExtraction" Name="btnExtraction_WndTips" Visible="True" LuaActionName="Normal">
+                    <NormalElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{ac13ef2e-5c12-4c12-a86a-0ef286de7894}">
+                        <WZUIImage Type="WZUIImage" GUID="{7934401a-f66d-49d9-9ec8-e5b40fc4220e}" File="ui/common/common_btn_anniu4.png" />
+                    </NormalElement>
+                    <SelectElement Type="WZUIContainer" AbsContentSize="116,56" UseAbsSize="True" GUID="{e6333781-72ad-4714-b1a7-9ef0d0f725b3}">
+                        <WZUIImage Type="WZUIImage" GUID="{e7a0b179-99ac-4da9-bade-ea678e407914}" File="ui/common/common_btn_anniu4_sel.png" Scale="1" />
+                    </SelectElement>
+                    <DisableElement Type="WZUIContainer" GUID="{80177842-74a2-40e4-8600-9b641dbd1d33}" />
+                    <WZUILabelTTF Type="WZUILabelTTF" GUID="{ac412712-1436-40fc-b048-21339c85a20f}" FontSize="24" Color="99,255,95" Text="" RelativePosition="0.5,0.5" Visible="True" Name="txtExtractionType24_WndTips" Alignment="Left" AnchorPoint="0.5,0.5" BoldFont="True" LabelStyleKey="SMALL_TIP_BTN" />
+                </WZUIButton>
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndTips>

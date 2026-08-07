@@ -1,0 +1,129 @@
+﻿<WndGemAppraise GUID="{7d0f3704-bfe0-4b43-a23b-eb485901234b}">
+    <WZUIWindow Type="WZUIWindow" GUID="{013df58a-067e-4669-96d5-3389f16e7a0d}" LuaObjectName="WndGemAppraise" Name="WndGemAppraise" NameCreate="True" AbsContentSize="766,532" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{aae67bbf-63cb-44fb-a2d5-27532608d7f9}">
+            <WZUI9Image Type="WZUI9Image" GUID="{0bce0f99-02ff-4423-a936-dc7e022c0b52}" File="ui/common/common_scale9_di19.png" CapInsets="92,80,1,1" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{b1f5ea96-ca69-4c3b-a8e5-47ea99adc28d}" FontSize="26" Color="255,236,193" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.94" TextKey="DIGGEM_TEXT31" EnableStroke="True" />
+            <Button Type="WZUIButton" GUID="{6ac9940a-a3ef-4c94-a761-f31c2c846b41}" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.945,0.94" LuaActionName="Normal" LuaDoneFunctionName="onCloseClick">
+                <NormalElement Type="WZUIContainer" GUID="{d634746b-c2a3-4be6-9398-8cb47e370a5f}" />
+                <SelectElement Type="WZUIContainer" GUID="{5c4a1065-0dce-4039-b433-ed14a77851fe}" />
+                <DisableElement Type="WZUIContainer" GUID="{1da80aaa-946b-4304-8f47-b9261d1c66ad}" />
+                <WZUIImage Type="WZUIImage" GUID="{5842505b-d448-4c7c-a617-c288ba66e238}" File="ui/common/common_icon_guanbi.png" UseOriginSize="True" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{06f57fce-3bde-40d2-b801-ad98a2daf829}" AnchorPoint="0.5,1" RelativePosition="0.5,0.89" RelativeSize="0.982,0.785">
+                <WZUIContainer Type="WZUIContainer" GUID="{09cad06e-501d-4591-946c-0ff259870347}" RelativePosition="0.827,0.438" RelativeSize="1,1" AbsContentSize="245,447" UseAbsSize="True" Name="conBag_WndGemAppraise">
+                    <WZUI9Image Type="WZUI9Image" GUID="{13680920-ecea-4f86-a983-4740819dc58b}" File="ui/common/common_scale9_di52.png" CapInsets="0,0,0,0" Opacity="125" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{0d28539e-6a6a-4358-8634-75d8e3b9efc9}" AbsContentSize="180,40" UseAbsSize="True" RelativePosition="0.5,0.931767">
+                        <WZUI9Image Type="WZUI9Image" GUID="{6a08c82f-d92a-411a-8d55-b9d4488d8622}" File="ui/common/common_scale9_heidi5.png" CapInsets="0,0,0,0" Opacity="200" UseOriginSize="True" ScaleX="0.52" ScaleY="0.41" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{be705631-aaa9-4747-83c0-d5741dda0979}" FontSize="20" Color="127,70,26" EnableStroke="False" Name="txtName_WndGemLibrary" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" StrokeSize="4" Text="你的名字" StrokeColor="127,70,26" BoldFont="False" TextKey="DIGGEM_TEXT1" />
+                    </WZUIContainer>
+                    <WZUITableContainer Type="WZUITableContainer" GUID="{225f4215-0367-4017-a56c-321f1302b75f}" ColumnCount="3" CellElementHeight="0.255" EnableMoveHorizontal="False" RelativeSize="0.98,0.85" RelativePosition="0.5,0.515" Name="tableBagList_WndGemAppraise" UseAbsSize="True" AbsContentSize="245,334" />
+                    <Button Type="WZUIButton" GUID="{84a76de0-8014-4b07-917f-746fa651512a}" AbsContentSize="116,58" UseAbsSize="True" RelativePosition="0.5,0.07" LuaActionName="Normal" LuaDoneFunctionName="onSelect" Scale="0.85">
+                        <NormalElement Type="WZUIContainer" GUID="{45c3abff-2d94-4e95-adf9-f7aa72740684}">
+                            <WZUIImage Type="WZUIImage" GUID="{ee32e38d-1d4f-49c7-b0e5-e68919c84f3c}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" />
+                        </NormalElement>
+                        <SelectElement Type="WZUIContainer" GUID="{44433458-4467-409b-b702-354fa772289d}">
+                            <WZUIImage Type="WZUIImage" GUID="{1bb0c181-9cba-48e6-864a-52ff167d2974}" File="ui/common/common_btn_anniu10_1_sel.png" UseOriginSize="True" />
+                        </SelectElement>
+                        <DisableElement Type="WZUIContainer" GUID="{90b9d05e-e5fb-43cc-b173-e7fd25df6923}">
+                            <WZUIImage Type="WZUIImage" GUID="{2630ed6e-f0e5-42fe-a95b-46e621315e71}" File="ui/common/common_btn_anniu10_1.png" UseOriginSize="True" GrayRender="True" UseOriginSizeProportion="True" />
+                        </DisableElement>
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{2bc85968-0dbd-4b01-84df-b9bd45b8a5be}" FontSize="26" Color="255,236,193" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.5" TextKey="QUICKSELECT1" EnableStroke="True" LabelStyleKey="SMALL_GREEN_BTN" Name="txtQuickSelect_WndGemAppraise" />
+                    </Button>
+                </WZUIContainer>
+                <WZUIContainer Type="WZUIContainer" GUID="{ae20a7d9-d259-49f5-921f-40db0638b90e}" AbsContentSize="477,447" UseAbsSize="True" RelativePosition="0.328,0.438">
+                    <WZUI9Image Type="WZUI9Image" GUID="{f92f5a1b-c854-45bb-823b-45277e2568f9}" File="ui/digGem/common_pic_bwjd.png" Opacity="255" UseOriginSize="True" RelativePosition="0.5,0.607383" />
+                    <WZUIContainer Type="WZUIContainer" GUID="{903dae7e-8f5d-440d-b911-1d0b22d23f23}" RelativeSize="1,0.8" RelativePosition="0.5,0.611858" Name="conForAppraise_WndGemAppraise">
+                        <WZUIContainer Type="WZUIContainer" GUID="{760bb30b-63fa-461c-9867-d97820db610e}" Name="conItem1_WndGemAppraise" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.346,0.805">
+                            <WZUIImage Type="WZUIImage" GUID="{e76782cd-20bf-47ca-b539-78f956b55cd2}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="False" GrayRender="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{4fb2dc41-f67e-4f4f-8b80-57a27951177f}" File="ui/common/common_scale9_wuse.png" UseOriginSize="False" GrayRender="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{3a8c707e-19ed-48b4-b75c-306475b4cc50}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.8" Name="imgAddIcon1_WndGemAppraise" />
+                            <Button Type="WZUIButton" GUID="{63fa0237-6fad-4376-8210-19edb23a00ef}" Tag="1" LuaDoneFunctionName="onClickAdd" Order="1">
+                                <NormalElement Type="WZUIContainer" GUID="{a2a881d5-25df-493e-9aae-6d19cfea97a5}" />
+                                <SelectElement Type="WZUIContainer" GUID="{4bc37966-7f54-48f7-96e6-709019d5457a}" />
+                                <DisableElement Type="WZUIContainer" GUID="{5bcdc684-08ba-4027-ac0a-f67d968d2432}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{264321ff-1aa5-4e45-9d3a-79a8e5ddc974}" Name="conItem2_WndGemAppraise" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.23,0.546">
+                            <WZUIImage Type="WZUIImage" GUID="{0b16e3af-b1e7-400f-8eb2-21d68a057575}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="False" GrayRender="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{c1cf8210-b59c-4fcf-b10a-c10317477f8a}" File="ui/common/common_scale9_wuse.png" UseOriginSize="False" GrayRender="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{e89399f3-3d9d-4528-9803-82f4d316de1e}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.8" Name="imgAddIcon2_WndGemAppraise" />
+                            <Button Type="WZUIButton" GUID="{de078cbf-c911-44b3-a399-6bfe9fe390de}" Tag="2" LuaDoneFunctionName="onClickAdd" Order="1">
+                                <NormalElement Type="WZUIContainer" GUID="{6ec2891c-b43c-4856-b318-c8932a538d99}" />
+                                <SelectElement Type="WZUIContainer" GUID="{c17266c1-f221-4ea4-b62a-f95eaa6941f8}" />
+                                <DisableElement Type="WZUIContainer" GUID="{ae1452d2-60cd-44dd-8787-7034f4999872}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{e1e8698b-bbc1-4684-85b5-246870865177}" Name="conItem3_WndGemAppraise" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.346,0.291">
+                            <WZUIImage Type="WZUIImage" GUID="{20dfe10e-99a3-40e5-8f89-db1b5eb32473}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="False" GrayRender="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{e2a43afc-1b0a-4375-a01f-74e60618b31c}" File="ui/common/common_scale9_wuse.png" UseOriginSize="False" GrayRender="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{c27cf1d5-4c3b-469e-a3aa-08e743b87d1e}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.8" Name="imgAddIcon3_WndGemAppraise" />
+                            <Button Type="WZUIButton" GUID="{d93aaee7-d34c-4e34-a93b-62a0668d02f4}" Tag="3" LuaDoneFunctionName="onClickAdd" Order="1">
+                                <NormalElement Type="WZUIContainer" GUID="{8f5b53b6-aeb6-460d-81b8-42974c1c707c}" />
+                                <SelectElement Type="WZUIContainer" GUID="{6d31390d-200f-40f8-aa71-c4935dfb656f}" />
+                                <DisableElement Type="WZUIContainer" GUID="{e5286579-f0a0-446e-b7e6-c278378c6c8a}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{78b62b77-7901-4d09-a376-5038266e3273}" Name="conItem4_WndGemAppraise" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.66,0.805">
+                            <WZUIImage Type="WZUIImage" GUID="{2a92ecc6-b7ca-438c-9e77-882582e2c1f4}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="False" GrayRender="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{b1e9c823-a21b-4590-a1f8-a076e44427af}" File="ui/common/common_scale9_wuse.png" UseOriginSize="False" GrayRender="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{915379f4-02a3-40a0-a189-ecc46068dbc7}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.8" Name="imgAddIcon4_WndGemAppraise" />
+                            <Button Type="WZUIButton" GUID="{2cab7764-c5eb-4bd9-8afd-1af87af697c5}" Tag="4" LuaDoneFunctionName="onClickAdd" Order="1">
+                                <NormalElement Type="WZUIContainer" GUID="{7ac1a525-07c2-4634-b087-aee2545b70cf}" />
+                                <SelectElement Type="WZUIContainer" GUID="{432f90f8-8197-47a1-8dd1-0557404a0f6f}" />
+                                <DisableElement Type="WZUIContainer" GUID="{a2383f18-2084-4cf3-b71f-784ce02a522d}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{4aa851d6-d21d-466a-b030-a0f8af70e650}" Name="conItem5_WndGemAppraise" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.77,0.546">
+                            <WZUIImage Type="WZUIImage" GUID="{caa167ba-91e8-41e1-8203-66fdd3d131ea}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="False" GrayRender="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{c53b121f-2205-4596-9d4a-02ae66be0c09}" File="ui/common/common_scale9_wuse.png" UseOriginSize="False" GrayRender="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{81efb4e2-1473-4c4f-a418-3fc1098d2435}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.8" Name="imgAddIcon5_WndGemAppraise" />
+                            <Button Type="WZUIButton" GUID="{40b91bb5-80b1-4c2e-9d85-fc8c8536ccac}" Tag="5" LuaDoneFunctionName="onClickAdd" Order="1">
+                                <NormalElement Type="WZUIContainer" GUID="{b247363d-2396-4bf1-a661-bafdd97c4110}" />
+                                <SelectElement Type="WZUIContainer" GUID="{7c986750-66d3-4c05-b966-a556d189f455}" />
+                                <DisableElement Type="WZUIContainer" GUID="{871a6a9b-70ed-4e4d-8687-10d0eb3590c0}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUIContainer Type="WZUIContainer" GUID="{073260ed-c265-408c-9451-9ba02bc10caf}" Name="conItem6_WndGemAppraise" AbsContentSize="80,80" UseAbsSize="True" RelativePosition="0.66,0.291">
+                            <WZUIImage Type="WZUIImage" GUID="{57840bb0-af07-4f70-9fda-a6d2a7d301d5}" File="ui/common/common_scale9_beibaodi.png" UseOriginSize="False" GrayRender="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{05935c16-f8ff-43cb-8863-347ab056a773}" File="ui/common/common_scale9_wuse.png" UseOriginSize="False" GrayRender="True" />
+                            <WZUIImage Type="WZUIImage" GUID="{45a74118-cf32-4f5c-b7e4-83d7dc96b524}" File="ui/common/common_icon_cwjh.png" UseOriginSize="True" Scale="0.8" Name="imgAddIcon6_WndGemAppraise" />
+                            <Button Type="WZUIButton" GUID="{ad731562-4a22-4c4f-9277-91aef943351f}" Tag="6" LuaDoneFunctionName="onClickAdd" Order="1">
+                                <NormalElement Type="WZUIContainer" GUID="{15244d10-cc32-47f0-8536-3c3d04a78533}" />
+                                <SelectElement Type="WZUIContainer" GUID="{dd90c634-a52e-46d4-81b3-6b6996f8fb78}" />
+                                <DisableElement Type="WZUIContainer" GUID="{dc5a24bb-de98-4aa6-ae2f-baa90d2c8f4f}" />
+                            </Button>
+                        </WZUIContainer>
+                        <WZUISpine Type="WZUISpine" GUID="{00425ec8-7334-42bf-9e34-b0dbe3aec3d6}" FileAtlas="ui/ui_jianding_01.atlas" FileJson="ui/ui_jianding_01.json" AnimationName="stand" Loop="False" RelativePosition="0.342547,0.829695" TouchEnable="False" Name="spine1_WndGemAppraise" Visible="False" />
+                        <WZUISpine Type="WZUISpine" GUID="{3f668c24-3fc7-4394-a1c7-3969ca985573}" FileAtlas="ui/ui_jianding_01.atlas" FileJson="ui/ui_jianding_01.json" AnimationName="stand" Loop="False" RelativePosition="0.224341,0.572425" TouchEnable="False" Name="spine2_WndGemAppraise" Visible="False" />
+                        <WZUISpine Type="WZUISpine" GUID="{b19213ac-b14c-4ffa-9912-2fbdf9688e86}" FileAtlas="ui/ui_jianding_01.atlas" FileJson="ui/ui_jianding_01.json" AnimationName="stand" Loop="False" TouchEnable="False" RelativePosition="0.338575,0.317951" Name="spine3_WndGemAppraise" Visible="False" />
+                        <WZUISpine Type="WZUISpine" GUID="{4918f66e-7907-45e8-ac42-7e61626e6a60}" FileAtlas="ui/ui_jianding_01.atlas" FileJson="ui/ui_jianding_01.json" AnimationName="stand" Loop="False" RelativePosition="0.656177,0.829695" TouchEnable="False" Name="spine4_WndGemAppraise" Visible="False" />
+                        <WZUISpine Type="WZUISpine" GUID="{dc62bac5-ea24-4a35-bfcd-a2af9d5f18d5}" FileAtlas="ui/ui_jianding_01.atlas" FileJson="ui/ui_jianding_01.json" AnimationName="stand" Loop="False" RelativePosition="0.764946,0.572425" TouchEnable="False" Name="spine5_WndGemAppraise" Visible="False" />
+                        <WZUISpine Type="WZUISpine" GUID="{2a927ce3-3332-4f9e-8f93-751cd99c323f}" FileAtlas="ui/ui_jianding_01.atlas" FileJson="ui/ui_jianding_01.json" AnimationName="stand" Loop="False" RelativePosition="0.653835,0.317951" TouchEnable="False" Name="spine6_WndGemAppraise" Visible="False" />
+                    </WZUIContainer>
+                    <WZUIContainer Type="WZUIContainer" GUID="{f1421dd5-11b3-4715-87d9-9e278408d300}" AbsContentSize="470,80" UseAbsSize="True" RelativePosition="0.5,0.0950782">
+                        <WZUI9Image Type="WZUI9Image" GUID="{641fe2d7-b435-4a2c-9de3-ec6455f64030}" File="ui/common/common_shade_chushouheidi.png" Opacity="125" />
+                        <WZUIContainer Type="WZUIContainer" GUID="{7ddba10c-c8de-40e4-bc80-1136d057e09a}" AbsContentSize="104,28" UseAbsSize="True" RelativePosition="0.46,0.5">
+                            <WZUI9Image Type="WZUI9Image" GUID="{63d93c46-981d-4993-b0c7-52eecf9302df}" File="ui/common/common_scale9_di63.png" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{2b182dc9-d8a3-4b07-8a09-db69280f0e5f}" Color="255,236,193" EnableStroke="True" FontSize="20" AnchorPoint="0,0.5" RelativePosition="0.25,0.5" StrokeColor="79,60,48" StrokeSize="4" Text="999" Name="txtCost_WndGemAppraise" />
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{a38ef26f-066b-482d-a8bd-46a1600e4e3b}" Color="255,236,193" EnableStroke="True" FontSize="20" AnchorPoint="1,0.5" RelativePosition="-0.278846,0.5" StrokeColor="79,60,48" StrokeSize="4" Text="999" Name="txtCostWord_WndGemAppraise" TextKey="DIGGEM_TEXT23" />
+                            <WZUIImage Type="WZUIImage" GUID="{b620fcfd-789c-414f-a2a6-473d164d2ded}" RelativePosition="0,0.5" UseOriginSize="True" Name="imgCostIcon_WndGemAppraise" Scale="0.5" />
+                        </WZUIContainer>
+                        <Button Type="WZUIButton" GUID="{28774d8b-1e69-4327-871d-dc07806d4712}" AbsContentSize="116,58" UseAbsSize="True" RelativePosition="0.74,0.5" LuaActionName="Normal" LuaDoneFunctionName="onAppraiseClick">
+                            <NormalElement Type="WZUIContainer" GUID="{befd9504-1eb8-44af-a2bc-3dc80faec901}">
+                                <WZUIImage Type="WZUIImage" GUID="{ecd28fa8-9625-4988-8a72-933f1b40f77b}" File="ui/common/common_btn_anniu10_0.png" />
+                            </NormalElement>
+                            <SelectElement Type="WZUIContainer" GUID="{e78c9364-31e8-4d53-a8be-0ff33adb76f4}">
+                                <WZUIImage Type="WZUIImage" GUID="{fc396003-3702-4dd0-98fe-97c775685c5c}" File="ui/common/common_btn_anniu10_0_sel.png" />
+                            </SelectElement>
+                            <DisableElement Type="WZUIContainer" GUID="{b8b5ad4b-15b8-4bed-a1e9-c4f3845ac9c0}">
+                                <WZUIImage Type="WZUIImage" GUID="{7a14351f-9e63-40ee-80b4-b0de762ba905}" File="ui/common/common_btn_anniu10_0.png" UseOriginSize="True" GrayRender="True" />
+                            </DisableElement>
+                            <WZUILabelTTF Type="WZUILabelTTF" GUID="{21504ff5-99e8-4c8d-b23f-af9bc1585fcd}" FontSize="26" Color="255,236,193" StrokeSize="4" StrokeColor="128,54,13" RelativePosition="0.5,0.5" TextKey="DIGGEM_TEXT32" EnableStroke="True" LabelStyleKey="SMALL_GREEN_BTN" />
+                        </Button>
+                    </WZUIContainer>
+                </WZUIContainer>
+                <WZUI9Image Type="WZUI9Image" GUID="{78f04a56-3f0b-44b8-be04-252efb3ec528}" File="ui/common/common_black_bg.png" Opacity="0" Name="imgLimiteTouch_WndGemAppraise" Visible="False" />
+            </WZUIContainer>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndGemAppraise>

@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<WndBossHall GUID="{F6606ABD-1B32-4ec2-902B-B90E743E3670}">
+    <WZUIWindow AbsContentSize="820,600" GUID="{761986F0-1E43-4b26-9F40-366F0D088EA6}" LuaObjectName="WndBossHall" Name="WndBossHall" NameCreate="True" Type="WZUIWindow" UseAbsSize="True">
+        <WZUIContainer GUID="{09E8B4E3-D166-4cf9-A452-0A4A888F5732}" Type="WZUIContainer">
+            <WZUI9Image File="" GUID="{A141F7AF-BD0C-488f-B90C-B8A50AB59AFC}" Name="img9Bg_WndBossHall" RelativePosition="0.495857,0.504886" RelativeSize="0.96,0.94" Type="WZUI9Image" />
+            <WZUIContainer Type="WZUIContainer" GUID="{F5C31DBC-653D-4d4c-AE2F-3CF4FE1990E2}" UseAbsSize="True" AbsContentSize="774,480" RelativePosition="0.497561,0.453585">
+                <WZUI9Image Type="WZUI9Image" GUID="{37A979EF-E861-4992-95B1-EB5B11AFA98B}" File="" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer GUID="{75BE8DA7-0221-4f17-937C-4766EDB588DD}" Name="conTop_WndBossHall" RelativePosition="0.5,0.905" RelativeSize="0.975,0.14" Type="WZUIContainer" Visible="True">
+            <WZUIImage File="" GUID="{BF96DBB7-376A-4073-B755-FACE70EB9C02}" RelativePosition="0.936059,0.5" Type="WZUIImage" UseOriginSize="True" />
+            <Button AbsContentSize="70,70" GUID="{E8CD6B5B-64E6-4a91-95EE-75FC9BEE5DC3}" LuaDoneFunctionName="onCloseWindowBtn" Name="btnCloseWindow_WndBossHall" RelativePosition="0.935461,0.5" Type="WZUIButton" UseAbsSize="True" Scale="0.75">
+                <NormalElement GUID="{8155E851-4B62-4117-82BB-7616095F7631}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="" GUID="{A30531B3-0D46-49ad-AEDA-107BC6F5E1FD}" Type="WZUIImage" UseOriginSize="True" />
+                </NormalElement>
+                <SelectElement GUID="{F20FD80B-953D-4cd9-AF20-6760743842B9}" TouchContainerEnable="True" Type="WZUIContainer">
+                    <WZUIImage File="" GUID="{24E02FC0-64AA-4061-833E-D1B896D92BBB}" Type="WZUIImage" UseOriginSize="True" />
+                </SelectElement>
+                <DisableElement GUID="{688AF783-DFE3-44c0-9B77-123D2A6F5352}" Type="WZUIContainer" />
+            </Button>
+            <WZUIImage File="" GUID="{8D80A917-03D0-4689-B225-9390A40344E0}" RelativePosition="0.141472,0.5" Type="WZUIImage" UseOriginSize="True" />
+            <WZUIImage File="" GUID="{85E4AACF-B584-4573-9197-AB152CC0D1BA}" Name="imgCopyHallTitle_WndBossHall" RelativePosition="0.141472,0.511905" Type="WZUIImage" UseOriginSize="True" />
+        </WZUIContainer>
+        <WZUIContainer GUID="{DB930B60-A4AE-40a5-817C-9A45B7C89F16}" Name="conRoomList_WndBossHall" RelativePosition="0.497561,0.51" RelativeSize="0.88,0.6" Type="WZUIContainer" Visible="True">
+            <WZUI9Image File="" GUID="{C6AA0A86-8828-4dbd-B6E9-CD401C0024DD}" Type="WZUI9Image" RelativeSize="1.02,1" RelativePosition="0.5,0.5" />
+            <WZUITableContainer CellElementHeight="0.25" EnableHorizontalScroll="False" EnableMoveHorizontal="False" EnableVerticalScroll="True" GUID="{C63A28B3-727D-45af-A64A-65E3F4EEC346}" Name="tbconRoomList_WndBossHall" RelativeSize="1,0.96" ScrollPictureDown="common/Jigsaw/rolling_03.png" ScrollPictureMid="common/Jigsaw/rolling_01.png" ScrollPictureTop="common/Jigsaw/rolling_02.png" Type="WZUITableContainer" VerticalInterval="0.0009" EnableHideUnvisible="True" ScissorHeight="1.02" ScissorWidth="1.02" />
+        </WZUIContainer>
+        <WZUIContainer GUID="{37978002-330C-4b7b-88A8-8A0181A22E56}" Name="conBtn_WndBossHall" RelativePosition="0.5,0.14" RelativeSize="0.94,0.13" Type="WZUIContainer" Visible="True">
+            <Button AbsContentSize="160,60" GUID="{1A5C50CA-6D88-4975-9ADC-4F8C3F6553D1}" LuaDoneFunctionName="onStartCopyBtn" Name="btnStartCopy_WndBossHall" RelativePosition="0.22,0.5" RelativeSize="0.22,1" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{571230AE-2C3C-42b8-9598-BD8F9792D5B2}" Type="WZUIContainer">
+                    <WZUI9Image File="" GUID="{A022030D-9C19-4bb4-90BC-966EEABE4F73}" Type="WZUI9Image" />
+                </NormalElement>
+                <SelectElement GUID="{6A0A188E-4C7A-4a0b-A75C-A1616B99C5F4}" Type="WZUIContainer">
+                    <WZUI9Image File="" GUID="{999FCE8E-0BE7-4d2c-B76B-7B104B82168B}" Type="WZUI9Image" />
+                </SelectElement>
+                <DisableElement GUID="{49823A1E-D59B-48df-9E0F-FBF7BF81B419}" Type="WZUIContainer" />
+                <WZUILabelTTF BoldFont="True" Color="246,225,225" EnableStroke="True" FontSize="28" GUID="{9DFDBA43-24CC-4905-B21A-C31CF0CC2A47}" Name="txtStartCopy_WndBossHall" StrokeColor="19,42,5" StrokeOffset="0" StrokeSize="3" Text="创建副本" Type="WZUILabelTTF" />
+            </Button>
+            <WZUIButton AbsContentSize="162,60" GUID="{9C73C018-A652-49f4-A03F-68A6BF6B4421}" LuaDoneFunctionName="onQuickJoinBtn" Name="btnQuickJoin_WndBossHall" RelativePosition="0.5,0.5" RelativeSize="0.22,1" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{F138010C-96BA-4419-8169-369373EA1E07}" Type="WZUIContainer">
+                    <WZUI9Image File="" GUID="{B588CEA6-4D35-411c-BED8-ACD334F61DEB}" Scale="1" ShowAll="False" Type="WZUI9Image" UseOriginSize="False" Visible="True" />
+                </NormalElement>
+                <SelectElement GUID="{B208185B-E550-4edc-9D37-B6FCB20EC6F2}" Type="WZUIContainer">
+                    <WZUI9Image File="" GUID="{43D01DFE-B6D3-4003-812B-37B17375C4D7}" Scale="1" Type="WZUI9Image" />
+                </SelectElement>
+                <DisableElement GUID="{C508D38B-6C06-4d4a-9EB7-3B86272774BA}" Type="WZUIContainer" />
+                <WZUILabelTTF BoldFont="True" Color="246,225,225" EnableStroke="True" FontSize="28" GUID="{A9C7769B-430F-4d3d-8216-1465D81BAA8B}" Name="txtQuickJoin_WndBossHall" StrokeColor="19,42,5" StrokeOffset="0" StrokeSize="3" Text="快速加入" Type="WZUILabelTTF" />
+            </WZUIButton>
+            <WZUIButton AbsContentSize="160,60" GUID="{7B47E84A-30AF-4dd6-A95B-EBE7D936B2E3}" LuaDoneFunctionName="onFindRoomBtn" Name="btnFindRoom_WndBossHall" RelativePosition="0.778703,0.5" RelativeSize="0.22,1" Type="WZUIButton" UseAbsSize="True">
+                <NormalElement GUID="{18F96A82-B543-4020-BBF2-706FAC8D37B7}" Type="WZUIContainer">
+                    <WZUI9Image File="" GUID="{E83567F0-9836-4cf8-B1C0-FD65240AE195}" Type="WZUI9Image" />
+                </NormalElement>
+                <SelectElement GUID="{228638CD-22EE-4c56-A3C5-D718CEC01972}" Type="WZUIContainer">
+                    <WZUI9Image File="" GUID="{96FF2B6C-AE94-4f44-821C-C253B5B60D7F}" Type="WZUI9Image" />
+                </SelectElement>
+                <DisableElement GUID="{CE405DAD-D410-46b2-8177-8B3F98692E4F}" Type="WZUIContainer" />
+                <WZUILabelTTF BoldFont="True" Color="246,225,225" EnableStroke="True" FontSize="28" GUID="{2702B052-6B06-4bb7-A860-92B3A78204A2}" Name="txtFindRoom_WndBossHall" StrokeColor="19,42,5" StrokeOffset="0" StrokeSize="3" Text="查找房间" Type="WZUILabelTTF" />
+            </WZUIButton>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndBossHall>

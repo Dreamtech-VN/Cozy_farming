@@ -1,0 +1,41 @@
+﻿<WndSkillContainer GUID="{ea7ffdce-27c9-4d7d-b099-ecd7c62341e5}">
+    <WZUIWindow Type="WZUIWindow" GUID="{1760e753-be5f-4308-8b92-9d23fd1518a5}" LuaObjectName="WndSkillContainer" Name="WndSkillContainer" NameCreate="True" AbsContentSize="866,536" UseAbsSize="True" ShowAll="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{52f28fe2-22b4-4310-ad75-fb1914ddd57f}" RelativePosition="0,0.5" Name="conWindow_WndSkillContainer" ShowAll="False" AbsContentSize="772,536" UseAbsSize="True" AnchorPoint="0,0.5">
+            <WZUICheckBoxGroup Type="WZUICheckBoxGroup" GUID="{d8a35fbb-d1d6-4384-b63c-eab6e425c888}" UseAbsSize="True" AbsContentSize="120,200" AnchorPoint="0,1" RelativePosition="0.994003,0.70616" CheckBox="" Name="concbg_WndSkillContainer" ShowAll="False" UseAbsCoordinate="True" AbsPosition="772,485">
+                <CheckBox Type="WZUICheckBox" GUID="{1be80c90-16c8-49f9-93ab-ebcffab4d5f5}" AbsContentSize="104,56" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="-0.0666667,0.77" SelectedIndex="1" LuaSelectedFunctionName="" LuaCheckedFunctionName="onCheckSkill" Name="checkbox1_WndSkillContainer">
+                    <CheckElement Type="WZUIContainer" GUID="{aa1a239f-d3b1-49f0-974e-d6ce799a8d66}">
+                        <WZUIImage Type="WZUIImage" GUID="{15b0f34d-acd1-4adc-b561-549edbdbbbd7}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" RelativePosition="0.442308,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{befed29d-0cf0-4062-8b70-335bae16b7f9}" Color="255,236,193" FontSize="26" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" TextKey="SKILL_TXT" RelativePosition="0.480769,0.5" Name="txtCheck1_WndSkillContainer" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{d44b7674-6729-4d7e-ad1e-888cc8613b0f}">
+                        <WZUIImage Type="WZUIImage" GUID="{5a3f1f96-db76-4fa0-8591-b93de60c7d79}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" RelativePosition="0.471154,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{57891fcf-2c89-4d6e-846a-a8dc3fa16335}" Color="255,236,193" FontSize="26" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" TextKey="SKILL_TXT" RelativePosition="0.461538,0.482143" Name="txtCheckSel1_WndSkillContainer" />
+                    </CheckElement>
+                    <WZUIImage Type="WZUIImage" GUID="{e28d2440-cf67-4566-afa6-de1099830a8e}" Name="imgRed1_WndSkillContainer" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.88874,0.943888" Scale="0.8" Visible="True" />
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{47cd58ef-a0b1-4e2f-b637-c4603ba2b7c4}" AbsContentSize="104,56" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="-0.0666667,0.445" LuaSelectedFunctionName="" LuaCheckedFunctionName="onCheckWeapon" Name="checkbox2_WndSkillContainer" Visible="True">
+                    <CheckElement Type="WZUIContainer" GUID="{1663b614-d31e-4aba-a128-3e61b984e590}">
+                        <WZUIImage Type="WZUIImage" GUID="{40137d2f-14e3-46ea-b321-ba23f0c6b010}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" RelativePosition="0.442308,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{8f113ef7-18a8-4bf5-9510-c96ba3a2f3b4}" Color="255,236,193" FontSize="26" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" TextKey="PROP" RelativePosition="0.480769,0.5" Name="txtCheck2_WndSkillContainer" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{fc88a112-1a67-44f1-867e-182727015179}">
+                        <WZUIImage Type="WZUIImage" GUID="{f45272c0-7e0a-48be-9787-dae674b989cc}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" RelativePosition="0.471154,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{0e4d7967-302e-4141-89be-ea005662fc65}" Color="255,236,193" FontSize="26" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" TextKey="PROP" RelativePosition="0.461538,0.482143" Name="txtCheckSel2_WndSkillContainer" />
+                    </CheckElement>
+                    <WZUIImage Type="WZUIImage" GUID="{372b9fdb-897a-4e41-8e88-c30083e8b49e}" Name="imgRed2_WndSkillContainer" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.865385,0.857143" Scale="0.8" Visible="False" />
+                </CheckBox>
+                <CheckBox Type="WZUICheckBox" GUID="{4fff745c-e861-4801-bbfe-d9cc2b1ac2dc}" AbsContentSize="104,56" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="-0.0666667,0.12" LuaSelectedFunctionName="" LuaCheckedFunctionName="onCheckSkin" Name="checkbox3_WndSkillContainer" Visible="True">
+                    <CheckElement Type="WZUIContainer" GUID="{cb6bfa22-d18b-4659-96c7-7353a014e1f5}">
+                        <WZUIImage Type="WZUIImage" GUID="{448cb1ee-d3f4-46de-bbe6-08661125b61d}" File="ui/common/common_btn_biaoqian.png" UseOriginSize="True" RelativePosition="0.442308,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{ef09e338-48ea-4aac-97da-639caab54201}" Color="255,236,193" FontSize="26" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" TextKey="SKINSKILL1" RelativePosition="0.480769,0.5" Name="txtCheck3_WndSkillContainer" />
+                        <WZUIImage Type="WZUIImage" GUID="{540b59fc-268e-4e09-a181-388aff509d95}" Name="imgRed_WndSkillContainer" File="ui/common/common_icon_xiaodianzhui.png" UseOriginSize="True" RelativePosition="0.865385,0.857143" Scale="0.8" Visible="False" />
+                    </CheckElement>
+                    <CheckElement Type="WZUIContainer" GUID="{04eb1159-c87e-47e8-8fc0-68f3c7a5de0f}">
+                        <WZUIImage Type="WZUIImage" GUID="{4b3fcb42-d14a-4c12-834b-ee10b398f5a1}" File="ui/common/common_btn_biaoqian_sel.png" UseOriginSize="True" RelativePosition="0.471154,0.5" />
+                        <WZUILabelTTF Type="WZUILabelTTF" GUID="{d0542c9c-6b07-42c1-a7a7-c0802b91f63b}" Color="255,236,193" FontSize="26" EnableStroke="True" StrokeSize="4" StrokeColor="105,65,46" TextKey="SKINSKILL1" RelativePosition="0.461538,0.482143" Name="txtCheckSel3_WndSkillContainer" />
+                    </CheckElement>
+                </CheckBox>
+            </WZUICheckBoxGroup>
+        </WZUIContainer>
+    </WZUIWindow>
+</WndSkillContainer>

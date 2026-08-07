@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" ?>
+<CellSpacePhoto GUID="{BD989397-09C4-4fa1-BA1B-8F6E5BD16081}">
+    <WZUIContainer AbsContentSize="120,120" GUID="{2F049575-8185-4d68-AEB7-3127CB862F3F}" LuaObjectName="CellSpacePhoto" Name="CellSpacePhoto" NameCreate="True" Type="WZUIContainer" UseAbsSize="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{FECF8ECE-5D67-49cd-AE97-B149EC1CE072}" AbsContentSize="445,62" Visible="True" TouchEnable="False" RelativePosition="0.5,0.5" AbsPosition="60,60" Order="0">
+            <WZUIContainer Type="WZUIContainer" GUID="{72EA1444-6ED2-4a46-8FC4-D38F3E179B80}" AbsContentSize="130,130" UseAbsSize="True" Visible="True" Order="1" TouchEnable="False" RelativePosition="0.5,0.5" AbsPosition="60,60">
+                <WZUI9Image Type="WZUI9Image" GUID="{3FA626C9-0621-4c99-B4BD-38586374CF00}" File="ui/common/common_scale9_kuang.png" Visible="True" />
+            </WZUIContainer>
+            <WZUI9Image Type="WZUI9Image" GUID="{A853528C-0831-4bc4-B341-5B6D2DBF6631}" File="ui/common/common_scale9_di52.png" Visible="True" Opacity="204" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{DEF5CAAF-76A9-453f-81B5-49D4D6D97C2D}" Name="conType1_CellSpacePhoto" Visible="False" Order="0">
+            <WZUIImage Type="WZUIImage" GUID="{356FDD02-80ED-4118-ACED-BEE0079BEE5F}" File="ui/common/common_icon_suo2.png" UseOriginSize="True" RelativePosition="0.5,0.61" Opacity="102" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{71C3ACEF-DED9-4865-9761-32F10C1BAC45}" Text="VIP8开启" LabelStyleKey="C7_F22" RelativePosition="0.491667,0.19" Color="195,171,148" FontSize="22" Name="ttf1_CellSpacePhoto" AbsPosition="59,22.8" />
+            <WZUIButton Type="WZUIButton" AbsContentSize="147,145" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Name="" GUID="{8EEA0EEF-BFE2-4264-90A4-8FF6A992088A}" LuaDoneFunctionName="onOpen">
+                <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{84B1409D-1D12-4031-AB8E-C36F4123DFB2}" />
+                <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{CB2C2772-A94F-463c-8C73-BD10EB756C54}" />
+                <DisableElement Type="WZUIContainer" GUID="{CF6A5213-12F2-4602-A740-08B3DD1AFEDC}" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{5B5E9BB4-55F2-4879-97A9-A56AF8AEC692}" Name="conType2_CellSpacePhoto" Visible="False" Order="0">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{FE5D8C81-7F1C-4d27-A72B-EFBF232F50A0}" Text="" LabelStyleKey="C7_F22" RelativePosition="0.5,0.19" AbsPosition="60,22.8" Color="195,171,148" FontSize="22" TextKey="SPACE98" Name="ttf3_CellSpacePhoto" />
+            <WZUIImage Type="WZUIImage" GUID="{250A0B59-3D05-43a1-B195-828395464CC0}" File="ui/space/common_icon_renxiang.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.61" AbsPosition="68.7809,74.4594" Opacity="102" />
+            <WZUIButton Type="WZUIButton" AbsContentSize="147,145" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Name="" GUID="{02CB7D61-421B-4908-9D9F-F1903AD5ACB9}" LuaDoneFunctionName="onUpload">
+                <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{943B4CB9-68C4-40f9-A9FD-F120883A41B3}" />
+                <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{665231DB-A0B6-4197-89CA-CAD08A85A493}" />
+                <DisableElement Type="WZUIContainer" GUID="{D45307BC-8A7D-4e32-B0AB-6CDBB7F8D7A6}" />
+            </WZUIButton>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{415AE513-6725-4c62-88B7-44A3AAE20C2D}" Name="conType3_CellSpacePhoto" Visible="False">
+            <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{7B53EEC1-49C1-48b9-A434-61E77DA842F6}" TouchEnable="False" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Visible="True" AbsContentSize="125,125" UseAbsSize="True">
+                <Stencil Type="WZUIImage" GUID="{48305252-A58D-41fa-80E1-88642C53F9C3}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" Scale="2" RelativePosition="0.5,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{8020EF85-EF9B-4eb8-B193-683B1E991E75}" Name="imgType3_CellSpacePhoto" File="" />
+                <WZUIContainer Type="WZUIContainer" GUID="{a11ad1da-645a-496c-bf92-63d8cdeff716}" Name="conHeadType3" />
+            </WZUIClippingContainer>
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7F5C8FA4-36E4-455f-9ACD-ABDFEB1891A1}" Text="" LabelStyleKey="" RelativePosition="0.5,0.11" Scale="1" TextKey="SPACE99" Color="195,171,148" Name="ttf2_CellSpacePhoto" FontSize="22" />
+            <WZUIButton Type="WZUIButton" AbsContentSize="147,145" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Name="" GUID="{B37458C7-DF8E-4de0-A943-F5509890E070}" LuaDoneFunctionName="onCheckType3">
+                <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{609ABF32-D64D-4a64-9B36-011F1DAABDB3}" />
+                <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{B7B483D5-3A64-4808-848E-0F924BDB42F4}" />
+                <DisableElement Type="WZUIContainer" GUID="{C3E05D15-1AFC-4eb9-A441-05760B005F2A}" />
+            </WZUIButton>
+            <WZUI9Image Type="WZUI9Image" GUID="{AFE2943D-4E50-4fdd-9E03-F2F430B6B9BB}" File="ui/common/common_shade_chushouheidi.png" Scale="0.97" TouchEnable="False" />
+            <WZUIContainer Type="WZUIContainer" GUID="{1672F059-44FB-4bfe-8E2F-931F25ED0A21}" AbsContentSize="130,130" UseAbsSize="True" Visible="True" Order="1" TouchEnable="False" RelativePosition="0.5,0.5" AbsPosition="60,60">
+                <WZUI9Image Type="WZUI9Image" GUID="{716B0A0E-0BB2-451e-BA43-8854C6CF90D6}" File="ui/common/common_scale9_kuang.png" Visible="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{F20F3E7E-F9E5-47b0-AD11-6558E1B6186A}" Name="conType4_CellSpacePhoto" Visible="False">
+            <WZUIClippingContainer Type="WZUIClippingContainer" GUID="{80295561-7991-40ac-A80A-2A05D1D9C512}" TouchEnable="False" RelativePosition="0.5,0.5" AnchorPoint="0.5,0.5" Visible="True" AbsContentSize="125,125" UseAbsSize="True">
+                <Stencil Type="WZUIImage" GUID="{A84A1BAD-1403-4ea1-8642-5454DADCC866}" File="ui/bag/common_shade_touxiang2.png" UseOriginSize="True" Scale="2" RelativePosition="0.5,0.5" />
+                <WZUIImage Type="WZUIImage" GUID="{0A20D6F5-E9A7-4f7e-B6E6-BD4DF1B0DBCD}" Name="imgType4_CellSpacePhoto" File="" />
+                <WZUIContainer Type="WZUIContainer" GUID="{5ff7e47b-5373-421c-9453-a40200152a17}" Name="conHeadType4" />
+            </WZUIClippingContainer>
+            <WZUIButton Type="WZUIButton" AbsContentSize="147,145" UseAbsSize="True" AnchorPoint="0.5,0.5" RelativePosition="0.5,0.5" Name="" GUID="{2E1D98CE-581A-4047-8120-9EBB80E5C5E4}" LuaDoneFunctionName="onCheckType4">
+                <NormalElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{690FEA7D-54A2-4db8-B854-44B3A9883236}" />
+                <SelectElement Type="WZUIContainer" TouchContainerEnable="True" GUID="{92A86058-9B3A-49a4-B4CD-03FD0D13575E}" />
+                <DisableElement Type="WZUIContainer" GUID="{B7215CB0-B9F9-4a7e-9C07-70240CF2411B}" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{DBB879DB-06B6-4452-97AD-D14078157BCE}" AbsContentSize="130,130" UseAbsSize="True" Visible="True" Order="1" TouchEnable="False" RelativePosition="0.5,0.5" AbsPosition="60,60">
+                <WZUI9Image Type="WZUI9Image" GUID="{68F3A0D6-FE90-47db-8048-B48707186ABC}" File="ui/common/common_scale9_kuang.png" Visible="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{5CF27140-671E-4432-8870-1C63B65E32E0}" Name="conType5_CellSpacePhoto" Visible="False" Order="0">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{7F66CDE8-224E-49de-B60F-8FC572AB2F9A}" Text="" LabelStyleKey="C7_F22" RelativePosition="0.5,0.19" AbsPosition="75,32.6372" Color="195,171,148" FontSize="22" TextKey="SPACE63" />
+            <WZUIImage Type="WZUIImage" GUID="{99C41AFF-D5F4-4ec3-857B-4B0966E9FEE8}" File="ui/space/common_icon_renxiang.png" UseOriginSize="True" Scale="1" RelativePosition="0.5,0.61" AbsPosition="68.7809,74.4594" />
+        </WZUIContainer>
+        <WZUIImage File="common/loading/loading1.png" GUID="{37CD9E0F-F990-462d-A319-C05E6F103A04}" Type="WZUIImage" UseOriginSize="True" Visible="False" Scale="0.5" Name="imgLoding" TouchEnable="True" RelativePosition="0.5,0.5" AbsPosition="60,60">
+            <Action Angle="360" Duration="2" GUID="{BA787AB6-2829-4697-97C7-73AF22704AA3}" IsLoop="True" Type="WZUIActionRotateTo" />
+        </WZUIImage>
+    </WZUIContainer>
+</CellSpacePhoto>

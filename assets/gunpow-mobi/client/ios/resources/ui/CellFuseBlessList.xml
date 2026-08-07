@@ -1,0 +1,27 @@
+<CellFuseBlessList GUID="{1b8fe47b-9c1f-46be-83d6-554e1ea026b0}">
+    <WZUIContainer Type="WZUIContainer" GUID="{387bbcc6-2be3-485f-8226-f95ecb2c8563}" AbsContentSize="311,101" UseAbsSize="True" LuaObjectName="" Name="CellFuseBlessList" RelativePosition="0.5,0.5" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{b592ff9b-e649-428e-8718-298e14bbb34e}" AbsContentSize="321,102" UseAbsSize="True" RelativePosition="0.499,0.5" TouchEnable="False">
+            <WZUI9Image Type="WZUI9Image" GUID="{9869a475-45de-4fc5-87eb-4eca02f51db8}" File="ui/common/common_scale9_beibaodi_sel.png" Name="imgHighlight_CellFuseBlessList" TouchEnable="False" RelativePosition="0.5,0.486" Visible="False" AbsPosition="160.5,49.164" Scale="0.99" ScaleX="0.995" Order="1" />
+            <WZUIContainer Type="WZUIContainer" GUID="{ce6178d6-cf4b-4a42-927f-7ea647c85bc1}" AbsContentSize="311,92" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{fa718bf1-f0a6-4610-83de-2f487abafa6a}" File="ui/common/common_scale9_di7.png" CapInsets="0" Visible="True" />
+            </WZUIContainer>
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{23c791f8-4de8-4c9b-aa7a-3b0f1c5fe52f}" AbsContentSize="190,38" UseAbsSize="True" RelativePosition="0.65,0.68" TouchEnable="False" AbsPosition="202.15,67.64">
+            <WZUI9Image Type="WZUI9Image" GUID="{33be9c52-7a93-46a5-8c85-f77b6711fc9d}" File="ui/common/common_scale9_di8.png" TouchEnable="False" RelativePosition="0.5,0.5" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{ad6b80c0-531c-4297-9901-aa5e6444ad05}" RelativeSize="1,1" RelativePosition="0.181,0.5" Name="conIcon_CellFuseBlessList" AnchorPoint="0.5,0.5" TouchEnable="False" AbsPosition="56.291,50.5" AbsContentSize="80,80" UseAbsSize="True">
+            <WZUIImage Type="WZUIImage" GUID="{29eb366e-3862-4574-9ac3-bc4b57b10bb6}" File="ui/common/common_scale9_beibaodi2.png" AbsPosition="76,76" UseOriginSize="False" RelativePosition="0.5,0.5" />
+            <WZUISpine Type="WZUISpine" GUID="{61f0ee1c-29bd-4b48-9fed-07a3a58698fe}" FileJson="ui/ui_qifu.json" FileAtlas="ui/ui_qifu.atlas" AnimationName="" Loop="True" Name="spineItem_CellFuseBlessList" ScaleAnimation="0.9" Visible="True" RelativePosition="0.5,0.47" />
+            <WZUIImage Type="WZUIImage" GUID="{48bc00f4-aa83-4ea5-b90e-dbb75ec11119}" Name="imgQuality_CellFuseBlessList" />
+        </WZUIContainer>
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{611617ca-b1c9-4331-af6f-0df290388329}" Name="txtName_CellFuseBlessList" FontSize="20" Text="装备名称" RelativePosition="0.367,0.68" AnchorPoint="0,0.5" Color="255,255,255" AbsPosition="114.137,68.68" TouchEnable="False" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{f9d76f13-dff6-48bd-8eb0-e38d61d4a2ab}" Name="txtState_CellFuseBlessList" RelativePosition="0.36,0.26" AnchorPoint="0,0.5" Color="138,122,106" FontSize="22" Text="" />
+        <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onCellClicked" GUID="{b627b0a6-d80e-43ed-87f0-0452b0c02d31}" UseAbsSize="True" AbsContentSize="311,92" RelativeSize="1,1" RelativePosition="0.5,0.5" Order="2" Name="btn_CellFuseBlessList">
+            <NormalElement Type="WZUIContainer" GUID="{8c7d3b65-66fa-442b-ba91-d19745095ff2}" />
+            <SelectElement Type="WZUIContainer" GUID="{da993a38-5b5e-4660-aef1-08a73578ce57}" AbsContentSize="321,102" UseAbsSize="True">
+                <WZUI9Image Type="WZUI9Image" GUID="{69158d44-c051-405c-b2f0-5165c0e318d1}" File="ui/common/common_scale9_beibaodi_sel.png" Name="imgHighlight_CellStrengthenEquip" TouchEnable="False" RelativePosition="0.5,0.5" Visible="False" />
+            </SelectElement>
+            <DisableElement Type="WZUIContainer" GUID="{4bcd3f29-15c9-4cda-be2f-693e48b04e2e}" />
+        </WZUIButton>
+    </WZUIContainer>
+</CellFuseBlessList>

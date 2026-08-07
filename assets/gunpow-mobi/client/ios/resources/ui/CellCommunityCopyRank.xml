@@ -1,0 +1,29 @@
+﻿<CellCommunityCopyRank GUID="{9663cecd-1f06-4411-b264-eec2abbf45d1}">
+    <WZUIContainer AbsContentSize="640,92" GUID="{bccba490-b297-42a8-9e76-ca8f1ce46df7}" LuaObjectName="CellCommunityCopyRank" Name="CellCommunityCopyRank" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+        <Button GUID="{1a4038bc-00a2-4bd6-a0d3-2010b9b28718}" LuaDoneFunctionName="onClickCellBtn" Name="btnClickCell_CellCommunityMemberList" RelativePosition="0.5,0.5" Type="WZUIButton" Visible="True" AbsContentSize="640,85" UseAbsSize="True">
+            <NormalElement GUID="{49e0084c-ec47-4bb3-afa5-8e049651cee7}" Type="WZUIContainer">
+                <WZUI9Image Type="WZUI9Image" GUID="{13d3d582-97e4-47aa-a5f6-0482da90cec3}" File="ui/common/common_scale9_di7.png" Name="imgBtn1_CellCommunityMemberList" />
+            </NormalElement>
+            <SelectElement GUID="{6b7281fe-ed06-4078-a535-75ddc2857d61}" Type="WZUIContainer">
+                <WZUI9Image Type="WZUI9Image" GUID="{fb383096-36d6-4739-9f35-0901ecb6e11f}" File="ui/common/common_scale9_di7.png" Name="imgBtn2_CellCommunityMemberList" />
+            </SelectElement>
+            <DisableElement GUID="{2b33830a-15c9-419c-990e-7f6539df0422}" RelativePosition="0.5,0.5" ScaleY="1" Type="WZUIContainer" />
+        </Button>
+        <WZUIContainer Type="WZUIContainer" GUID="{7c939a4e-a6ce-4ad8-a4be-ab71397dc32e}" Name="conText" Visible="True" RelativePosition="0.5,0.5">
+            <WZUILabelTTF Color="255,236,193" FontSize="20" GUID="{6352d701-893b-40a9-8537-08470af51845}" Name="txtRanking_CellCommunityMemberList" RelativePosition="0.1,0.5" Text="1" TouchEnable="False" Type="WZUILabelTTF" LabelStyleKey="C11_F20_S4_C5" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{fd3c3a87-e09c-407d-a475-84da79e8f8ab}" Name="txtLevel_CellCommunityMemberList" Text="lv2" RelativePosition="0.33,0.64" FontSize="20" Color="62,34,8" BoldFont="True" LabelStyleKey="C2_F22" Alignment="Left" AnchorPoint="0,0.5" Dimensions="200,0" />
+            <WZUILabelTTF ChineseLengthPolicy="2" Color="62,34,8" Dimensions="200,0" FontSize="20" GUID="{591c31bc-7a50-459e-8f53-dab6bbc37272}" MaxLength="14" Name="txtPlayerName_CellCommunityMemberList" RelativePosition="0.33,0.36" Text="name" TouchEnable="False" Type="WZUILabelTTF" UseOriginSize="True" Alignment="Left" AnchorPoint="0,0.5" BoldFont="True" LabelStyleKey="C5_F22" />
+            <WZUILabelTTF Color="62,34,8" Dimensions="150,0" FontSize="20" GUID="{666c7199-176d-4f4d-9335-4f6a17d72603}" Name="txtHurt" RelativePosition="0.635,0.5" Text="0" TouchEnable="False" Type="WZUILabelTTF" BoldFont="True" LabelStyleKey="C14_F24" />
+            <WZUILabelTTF Color="62,34,8" Dimensions="150,0" FontSize="20" GUID="{4a46ec61-583a-4b65-aba4-6d5338757129}" Name="txtPercent" RelativePosition="0.9,0.5" Text="0" TouchEnable="False" Type="WZUILabelTTF" BoldFont="True" LabelStyleKey="C14_F24" />
+            <WZUIImage Type="WZUIImage" GUID="{4cc23bf4-943e-448e-a2d1-01c2f84e741d}" File="ui/common/common_icon_1st.png" UseOriginSize="True" RelativePosition="0.1,0.584348" Name="imgName_CellCommunityList" Visible="False" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{38577bb1-7750-4e41-a595-30dc4ccba18d}" Name="conHead_Cell" AbsContentSize="80,80" UseAbsSize="True" AnchorPoint="0,0.5" RelativePosition="0.21,0.5" Scale="0.8">
+            <WZUIImage Type="WZUIImage" GUID="{f45286c9-db2f-4c1a-817d-4ac53350faff}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Scale="1.23" RelativePosition="0.505,0.5" />
+        </WZUIContainer>
+        <Button GUID="{62878067-2b23-4556-a143-1057d3df8517}" LuaDoneFunctionName="onCheck" Name="" RelativePosition="0,0.5" Type="WZUIButton" Visible="True" AbsContentSize="250,75" UseAbsSize="True" AnchorPoint="0,0.5">
+            <NormalElement GUID="{890f011d-ad2c-469c-beea-f6f4f60a9a5a}" Type="WZUIContainer" />
+            <SelectElement GUID="{977ee910-8ff5-4798-8fc2-ed35e242fb21}" Type="WZUIContainer" />
+            <DisableElement GUID="{1770bb79-fedf-4c01-a19c-ac7cb20fd4ea}" RelativePosition="0.5,0.5" ScaleY="1" Type="WZUIContainer" />
+        </Button>
+    </WZUIContainer>
+</CellCommunityCopyRank>

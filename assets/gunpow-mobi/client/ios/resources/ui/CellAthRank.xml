@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<CellAthRank GUID="{A8D63361-A3B3-49ee-9AA9-CB7A75A58F5F}">
+	<WZUIContainer AbsContentSize="720,86" GUID="{7DEE9422-E141-4ca6-9C2C-7EB1CB6828C6}" LuaObjectName="" Name="CellAthRank" NameCreate="True" Type="WZUIContainer" UseAbsSize="True" RelativePosition="0.5,0.5">
+		<WZUIContainer GUID="{2B3A46F0-6F03-4851-B29B-C89C8362EE3B}" Type="WZUIContainer" Visible="True" RelativePosition="0.5,0.5">
+			<WZUI9Image File="ui/common/common_scale9_di18.png" GUID="{B2229FC0-0C75-4b77-99D0-F38912490106}" Type="WZUI9Image" Name="imgDi_CellAthRank" />
+		</WZUIContainer>
+		<WZUIContainer AbsContentSize="" GUID="{280992F6-1EBA-4bca-A129-17842C163F18}" RelativePosition="0.025,0.5" Type="WZUIContainer" UseAbsSize="False" RelativeSize="0.15,1" AnchorPoint="0,0.5" AbsPosition="18,50">
+			<WZUILabelTTF Alignment="Center" AnchorPoint="0.5,0.5" Color="158,0,0" EnableStroke="False" FontSize="20" GUID="{8DF4A31C-A0E5-4f42-8FB2-B84972DD3324}" Name="txtRank_CellAthRank" RelativePosition="0.5,0.5" Text="" Type="WZUILabelTTF" StrokeColor="60,19,12" StrokeSize="3" Dimensions="80,0" />
+			<WZUIImage Type="WZUIImage" GUID="{5FF3E443-DFDB-4e67-BC4C-EFD45E9DB64A}" File="ui/common/common_icon_1st.png" UseOriginSize="True" Name="imgRank_CellAthRank" Visible="False" Scale="0.8" AnchorPoint="0.5,1" RelativePosition="0.5,0.98" />
+		</WZUIContainer>
+		<WZUIContainer AbsContentSize="" GUID="{0F93C2C6-5B5B-4a7a-9874-E6510F491FFF}" RelativePosition="0.975,0.5" Type="WZUIContainer" UseAbsSize="False" RelativeSize="0.8,1" AnchorPoint="1,0.5">
+			<WZUIContainer Type="WZUIContainer" GUID="{DF21AD2E-AC99-405f-BE0C-A96F47315E6F}" RelativeSize="0.2,1" AnchorPoint="0,0.5" RelativePosition="0,0.5" AbsContentSize="80,80" UseAbsSize="True">
+				<WZUIImage Type="WZUIImage" GUID="{2EF647BC-601B-46ac-A6DF-755E0B677F84}" File="ui/common/common_icon_tx.png" UseOriginSize="True" Visible="True" />
+				<WZUIContainer Type="WZUIContainer" GUID="{A52A2F67-F01E-41b9-BE8E-682D24127AEC}" Name="conHead_CellAthRank" />
+			</WZUIContainer>
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{213DA7F4-FAE5-4503-B9DC-15EC5759BF14}" Name="txtLv_CellAthRank" Text="LV30" FontSize="24" RelativePosition="0.15,0.65" AbsPosition="88.0631,65.1343" AnchorPoint="0,0.5" Alignment="Left" Color="128,54,13" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{2B491D4E-6609-45fb-B692-486FAA7E4A4F}" Name="txtName_CellAthRank" Text="opopOPOPOPOP" FontSize="24" RelativePosition="0.15,0.34" AbsPosition="88.9825,33.1088" AnchorPoint="0,0.5" Alignment="Left" Color="62,34,8" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{54FAFEEB-260B-4996-97E6-055E64994379}" Name="txtScore&#31;_CellAthRank" Text="30000" FontSize="24" RelativePosition="0.576389,0.5" AbsPosition="332,50" Color="62,34,8" />
+			<WZUILabelTTF Type="WZUILabelTTF" GUID="{2FBF2A7A-0AF5-4585-8BBF-71230DB0C717}" Name="txtWinCnt_CellAthRank" Text="FIGHT_4" FontSize="24" RelativePosition="0.848958,0.5" AbsPosition="489,66" Color="62,34,8" />
+			<WZUIFreeTextBox Type="WZUIFreeTextBox" GUID="{9F308B3E-F9E6-47da-91A6-45E1AF9ECD33}" AnchorPoint="0,0.5" RelativePosition="0.15,0.34" Name="ftbAllName_CellAthRank" MaxWidth="300" />
+		</WZUIContainer>
+		<Button Type="WZUIButton" LuaDoneFunctionName="OnCheckPlayerInfo" GUID="{037FE665-3417-43a7-A637-ED1B785AFE95}">
+			<NormalElement Type="WZUIContainer" GUID="{D78A0990-A76A-4730-BD38-55F9563E01A2}" />
+			<SelectElement Type="WZUIContainer" GUID="{DD5E6E85-BE60-4cce-8207-2FB935AEC39A}" />
+			<DisableElement Type="WZUIContainer" GUID="{69F17AC3-0B3E-42a4-B3B6-1DD1C7100413}" />
+		</Button>
+	</WZUIContainer>
+</CellAthRank>

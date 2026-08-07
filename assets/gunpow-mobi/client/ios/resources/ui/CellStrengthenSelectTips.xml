@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<CellStrengthenSelectTips GUID="{EF37B361-0488-4719-A4B3-505A5B1B04C8}">
+    <WZUIContainer Type="WZUIContainer" GUID="{B8A3F548-08C5-464b-A7CE-090D358FFF49}" AbsContentSize="350,92" UseAbsSize="True" LuaObjectName="" Name="CellStrengthenSelectTips">
+        <WZUIContainer Type="WZUIContainer" GUID="{D7ED2A83-E092-423a-8FA0-6AEEA0DAB422}" AbsContentSize="350,90" UseAbsSize="True" RelativePosition="0.5,0.5">
+            <WZUI9Image Type="WZUI9Image" GUID="{E82C64F6-BF47-4b3d-BC82-22C6DF26939B}" File="ui/common/common_scale9_di7.png" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{D9B3EC62-DFEB-49ba-ACFC-ABAAC1822894}" AbsContentSize="210,38" UseAbsSize="True" RelativePosition="0.63,0.67">
+            <WZUI9Image Type="WZUI9Image" GUID="{39947A57-9CDC-4205-A482-A08AD7F43C74}" File="ui/common/common_scale9_di8.png" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{FCF7A680-CA89-4282-BFF1-9776F0EB5D76}" RelativeSize="0.23,0.9" RelativePosition="0.167143,0.5" Name="conIcon_CellStrengthenSelectTips" AnchorPoint="0.5,0.5" AbsPosition="58.5,46" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{0E981402-1828-4e33-9508-F1B14D228D18}" Name="txtName_CellStrengthenSelectTips" FontSize="20" Text="装备名称" RelativePosition="0.35,0.65913" AnchorPoint="0,0.5" Color="93,222,254" Alignment="Left" AbsPosition="122.5,60.64" />
+        <WZUILabelTTF Type="WZUILabelTTF" GUID="{D6A5ED19-9812-424c-A54B-A2CBA196681A}" Name="txtAttr_CellStrengthenSelectTips" FontSize="20" Text="攻击+999" RelativePosition="0.354,0.25" AnchorPoint="0,0.5" Color="62,34,8" Alignment="Left" AbsPosition="123.5,23" />
+        <WZUIContainer Type="WZUIContainer" GUID="{9264CE8F-C922-495a-A481-36DC135BE449}" RelativeSize="0.33,0.5" RelativePosition="0.708528,0.5" Name="conNum_CellStrengthenSelectTips" Visible="False">
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4849388A-3067-411e-A3E5-F1CBB11E4A9D}" Name="txtNumWord_CellStrengthenSelectTips" Text="数量:" FontSize="20" AnchorPoint="1,0.5" RelativePosition="0.5,0.5" Color="0,255,255" />
+            <WZUILabelTTF Type="WZUILabelTTF" GUID="{4C068336-8835-4ab1-95B4-F919D5B31B35}" Name="txtNum_CellStrengthenSelectTips" Text="999" FontSize="20" AnchorPoint="0,0.5" Color="0,255,255" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{3260F4C8-F409-4618-AF95-9B50A0492E3C}" AbsContentSize="330,90" UseAbsSize="True" RelativePosition="0.5,0.5" Visible="True">
+            <WZUICheckBox GUID="{18B2347E-2DF9-4464-9DC0-19E51D16DC3A}" LuaSelectedFunctionName="" Name="checkboxSelect_CellStrengthenSelectTips" RelativePosition="0.5,0.5" RelativeSize="1,1" SelectedIndex="0" Type="WZUICheckBox" LuaCheckedFunctionName="onCheckBoxClick">
+                <CheckElement Type="WZUIContainer" GUID="{DAC203C4-A9E2-4c41-B63A-FF5C291E0142}" TouchContainerEnable="True" RelativePosition="0.5,0.5" />
+                <CheckElement Type="WZUIContainer" GUID="{1958CD9E-2D90-45a7-ADB6-F88F1D7C9958}" AbsContentSize="350,96" UseAbsSize="True" TouchContainerEnable="True" RelativePosition="0.5,0.5">
+                    <WZUI9Image Type="WZUI9Image" GUID="{D64689FB-2637-4cfb-852E-5F5079A7ABC6}" File="ui/common/common_scale9_beibaodi_sel.png" />
+                </CheckElement>
+            </WZUICheckBox>
+        </WZUIContainer>
+    </WZUIContainer>
+</CellStrengthenSelectTips>

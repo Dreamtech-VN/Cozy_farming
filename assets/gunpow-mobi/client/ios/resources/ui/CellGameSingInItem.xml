@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<CellGameSingInItem GUID="{0501178A-EA57-4457-9F6F-AD9371FBB02D}">
+    <WZUIContainer Type="WZUIContainer" GUID="{97B6AD4B-BFE7-4fad-A61B-417A4C6FAC5F}" AbsContentSize="480,120" UseAbsSize="True" RelativePosition="0.5,0.5" LuaObjectName="" Name="CellGameSingInItem" NameCreate="True">
+        <WZUIContainer Type="WZUIContainer" GUID="{4D49EA95-BC38-4778-9B67-CA542779F3DA}" AbsContentSize="119,119" UseAbsSize="True" ShowAll="False" RelativePosition="0.125,0.5" Name="conSingInItem1" Tag="1">
+            <Button Type="WZUIButton" LuaDoneFunctionName="onItemClickEvent" Tag="1" GUID="{135179F7-E63F-4cf7-8D5A-CD7FC3AEF9F6}">
+                <NormalElement Type="WZUIContainer" GUID="{367061CA-800F-4607-96B0-32E6375E25DC}" />
+                <SelectElement Type="WZUIContainer" GUID="{97E7D259-04E1-40f9-8EFC-A85F54CF7010}" />
+                <DisableElement Type="WZUIContainer" GUID="{678D862C-A359-4ef5-81ED-999FF5CB7E3C}" />
+            </Button>
+            <WZUIContainer Type="WZUIContainer" GUID="{23937E65-4659-4ccf-9957-CE53F172525C}" AbsContentSize="119,119" UseAbsSize="True" RelativePosition="0.5,0.5" TouchEnable="False" TouchSwallow="False" Name="conSignInBK1_CellGameSingInItem">
+                <WZUI9Image Type="WZUI9Image" GUID="{0101D411-010D-4bc6-BAE7-9345CECFE0E4}" File="ui/common/common_scale9_di61.png" Name="imgItemBg_1_CellSingInItem_WndGameSingIn" CapInsets="15,15,15,15" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{470595F5-A565-405c-B5D6-D2DD30688337}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.5,0.5" Name="con_dayitem_1" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{3D5B10C4-F9EE-49c9-B486-79FA96442120}" AbsContentSize="119,119" UseAbsSize="True" ShowAll="False" RelativePosition="0.375,0.5" Name="conSingInItem2" Tag="2">
+            <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onItemClickEvent" Tag="2" GUID="{79DC1418-9DDB-4329-B395-033877C6B2EF}">
+                <NormalElement Type="WZUIContainer" GUID="{C163595D-164C-4a0d-8946-E4B3EBE14C66}" />
+                <SelectElement Type="WZUIContainer" GUID="{ACAABDE1-B54F-4fd8-B6CF-3506C342AFB8}" />
+                <DisableElement Type="WZUIContainer" GUID="{A6347EC9-4767-4ac6-A7C7-C0961DC231D4}" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{CFB0A1E2-EC2E-4033-BF0B-A90162C1AE23}" AbsContentSize="119,119" UseAbsSize="True" RelativePosition="0.5,0.5" TouchEnable="False" TouchSwallow="False" Name="conSignInBK2_CellGameSingInItem">
+                <WZUI9Image Type="WZUI9Image" GUID="{6E5629C4-0757-419c-84E4-E44DB9F9264C}" File="ui/common/common_scale9_di61.png" Name="imgItemBg_2_CellSingInItem_WndGameSingIn" CapInsets="15,15,15,15" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{7B4E5337-398C-4efa-913A-F925492C16BE}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.5,0.5" Name="con_dayitem_2" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{F490C756-7957-41fe-8E11-93EE2E91E558}" AbsContentSize="119,119" UseAbsSize="True" ShowAll="False" RelativePosition="0.625,0.5" Name="conSingInItem3" Tag="3">
+            <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onItemClickEvent" Tag="3" GUID="{C91A336E-FC8C-41a8-8149-5355709A76EE}">
+                <NormalElement Type="WZUIContainer" GUID="{F4EDA03D-82FD-4f9a-B24D-D61D410FBB0A}" />
+                <SelectElement Type="WZUIContainer" GUID="{3C5C64D5-9D3B-48ed-8B23-7B964B3E1FAF}" />
+                <DisableElement Type="WZUIContainer" GUID="{1E8A8321-2135-4065-B092-FDD3CBDE2D6B}" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{2AA228DC-8FDA-4fbd-B3AE-2C2C907A477B}" AbsContentSize="119,119" UseAbsSize="True" RelativePosition="0.5,0.5" TouchEnable="False" TouchSwallow="False" Name="conSignInBK3_CellGameSingInItem">
+                <WZUI9Image Type="WZUI9Image" GUID="{9ED5274C-5D36-4fa6-9C66-1A17082478B6}" File="ui/common/common_scale9_di61.png" Name="imgItemBg_3_CellSingInItem_WndGameSingIn" CapInsets="15,15,15,15" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{1879FDA2-4CCC-4a8a-8876-AA3715A6780F}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.5,0.5" Name="con_dayitem_3" />
+        </WZUIContainer>
+        <WZUIContainer Type="WZUIContainer" GUID="{722C9A58-F072-41d3-9FE8-688A5028F01D}" AbsContentSize="119,119" UseAbsSize="True" ShowAll="False" RelativePosition="0.875,0.5" Name="conSingInItem4" Tag="4">
+            <WZUIButton Type="WZUIButton" LuaDoneFunctionName="onItemClickEvent" Tag="4" GUID="{5D639A36-D593-4326-8241-45AF3CD8BFA4}">
+                <NormalElement Type="WZUIContainer" GUID="{C82E3236-C463-4688-AB14-C5A7D5991449}" />
+                <SelectElement Type="WZUIContainer" GUID="{E44BD507-3A99-443a-ABD0-45CA6B260506}" />
+                <DisableElement Type="WZUIContainer" GUID="{E285F940-28F4-4db9-804A-35D9DC4A5A6B}" />
+            </WZUIButton>
+            <WZUIContainer Type="WZUIContainer" GUID="{3ADC290A-333E-472b-818F-FE906C0F5641}" AbsContentSize="119,119" UseAbsSize="True" RelativePosition="0.5,0.5" TouchEnable="False" TouchSwallow="False" Name="conSignInBK4_CellGameSingInItem">
+                <WZUI9Image Type="WZUI9Image" GUID="{0F56C930-26AD-4a76-AEDA-C2D3695B2E4B}" File="ui/common/common_scale9_di61.png" Name="imgItemBg_4_CellSingInItem_WndGameSingIn" CapInsets="15,15,15,15" />
+            </WZUIContainer>
+            <WZUIContainer Type="WZUIContainer" GUID="{F942DBAD-283A-4c71-8415-A2FB2BED1E39}" AbsContentSize="70,70" UseAbsSize="True" RelativePosition="0.5,0.5" Name="con_dayitem_4" />
+        </WZUIContainer>
+    </WZUIContainer>
+    <WZUIContainer Type="WZUIContainer" GUID="{51DE7BD8-7B39-4b97-8D80-0B070AB04621}" AbsContentSize="119,119" UseAbsSize="True" LuaObjectName="CellVipIcon_WndGameSingIn" Name="CellVipIcon_WndGameSingIn" NameCreate="True" Rotation="0" ShowAll="False" Visible="True" Order="0">
+        <WZUIImage Type="WZUIImage" GUID="{3E6CDA31-4D25-460f-88AC-D5B726AC7640}" File="ui/common/common_icon_shuangbei.png" UseOriginSize="True" RelativePosition="0.271,0.758334" TouchEnable="False" />
+        <WZUIContainer Type="WZUIContainer" GUID="{7482F900-07BE-47ca-9272-391F9398240E}" Name="conVipTip_CellGameSingInItem" UseAbsSize="False">
+            <WZUIImage Type="WZUIImage" GUID="{D31F7BBE-DC17-4f54-A05C-1073AAC69FE1}" File="ui/common/commom_icon_qdsb.png" UseOriginSize="True" Rotation="-45" RelativePosition="0.233193,0.883263" TouchEnable="False" Name="imgQD_CellGameSingInItem" />
+            <WZUIImage Type="WZUIImage" GUID="{54C22847-F2A9-4a52-B052-B8F3EC0F6110}" File="ui/common/commom_icon_qdv.png" UseOriginSize="True" Rotation="-45" RelativePosition="0.0508067,0.683474" TouchEnable="False" Name="imgQDLv_CellGameSingInItem" />
+            <WZUILabelAtlasFont Type="WZUILabelAtlasFont" GUID="{626B9F56-A356-452b-8975-34A5680D0031}" CharMapFileName="ui/common_num/common_num_qd.png" Text="1" Height="16" Width="12" Rotation="-39" RelativePosition="0.103193,0.741596" Name="txtVipLevel_CellVipIcon" TouchEnable="False" Scale="1" UseOriginSizeProportion="False" UseOriginSize="True" />
+        </WZUIContainer>
+        <WZUIImage Type="WZUIImage" GUID="{933F6C25-50F9-4a74-935C-E23D6A00923F}" File="ui/signInNum/commom_icon_qd10.png" UseOriginSize="True" Rotation="-45" RelativePosition="0.2,0.816667" Visible="False" Name="imgdoubleNum_CellGameSingInItem" />
+    </WZUIContainer>
+</CellGameSingInItem>
