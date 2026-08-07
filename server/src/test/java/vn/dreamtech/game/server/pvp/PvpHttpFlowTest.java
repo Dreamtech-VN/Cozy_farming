@@ -7,6 +7,7 @@ import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import vn.dreamtech.game.server.admin.AdminAdjustPvpRankHandler;
 import vn.dreamtech.game.server.battle.BattleService;
 import vn.dreamtech.game.server.dao.CharacterDao;
 import vn.dreamtech.game.server.dao.ChallengeAttemptDao;
@@ -69,7 +70,8 @@ class PvpHttpFlowTest {
         WalletDao walletDao = new WalletDao(dataSource);
         LevelDao levelDao = new LevelDao(dataSource);
         BattleService battleService = new BattleService(levelDao, walletDao, new ChallengeAttemptDao(dataSource), new TowerRecordDao(dataSource));
-        PvpService pvpService = new PvpService(characterDao, battleService, new PvpRankDao(dataSource), new PvpMatchHistoryDao(dataSource));
+        PvpRankDao pvpRankDao = new PvpRankDao(dataSource);
+        PvpService pvpService = new PvpService(characterDao, battleService, pvpRankDao, new PvpMatchHistoryDao(dataSource));
 
         server = HttpServer.create(new InetSocketAddress(0), 0);
         server.createContext("/api/pvp/queue/join", new JoinQueueHandler(pvpService));
@@ -80,6 +82,7 @@ class PvpHttpFlowTest {
         server.createContext("/api/pvp/match/my", new MyMatchHandler(pvpService));
         server.createContext("/api/pvp/rank", new RankHandler(pvpService));
         server.createContext("/api/pvp/leaderboard", new RankingListHandler(pvpService));
+        server.createContext("/api/admin/pvp/rank/adjust", new AdminAdjustPvpRankHandler(userDao, pvpRankDao));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -162,5 +165,12 @@ class PvpHttpFlowTest {
 
         var leaderboard = get("/api/pvp/leaderboard");
         assertEquals(200, leaderboard.statusCode());
+    }
+
+    @Test
+    void adminAdjustPvpRankRequiresAdminToken() throws Exception {
+        int userId = newPlayer("Solo");
+        var res = post("/api/admin/pvp/rank/adjust", new AdminAdjustPvpRankHandler.Req(userId, 100, false));
+        assertEquals(503, res.statusCode());
     }
 }

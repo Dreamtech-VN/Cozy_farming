@@ -798,6 +798,16 @@ cũ.
       Test: `CharacterDaoTest` thêm 2 test (đổi tên chỉ đổi đúng field tên,
       đổi tên user chưa có nhân vật trả về false); `CharacterFlowTest`
       thêm 1 test (endpoint đòi hỏi `ADMIN_TOKEN`).
+- [x] **Giai đoạn 34 — admin chỉnh rank PvP**: trước đây admin chỉnh được
+      ví (`AdminAdjustWalletHandler`) nhưng không có cách nào sửa/reset
+      rating PvP khi phát hiện gian lận/exploit trong queue hoặc report
+      score.
+      - `POST /api/admin/pvp/rank/adjust` {userId, ratingDelta, resetStats}
+        — tái dùng `PvpRankDao.find`/`save` có sẵn (không thêm method DAO
+        mới); `ratingDelta` cộng dồn vào rating hiện tại, kẹp về 0 (khớp
+        cách `WalletDao.adjustGold`/`adjustDiamond` đã làm); `resetStats`
+        = true thì đưa wins/losses/draws về 0. Cần header `X-Admin-Token`.
+      Test: `PvpHttpFlowTest` thêm 1 test (endpoint đòi hỏi `ADMIN_TOKEN`).
 
 ## Chạy thử
 
