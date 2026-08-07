@@ -841,6 +841,20 @@ cũ.
       Test: `PvpMatchHistoryDaoTest` thêm 3 test (lấy đúng trận theo 2 vai
       trò, giới hạn limit, rỗng khi chưa đấu); `PvpHttpFlowTest` thêm 1
       test (endpoint đòi hỏi `ADMIN_TOKEN`).
+- [x] **Giai đoạn 38 — admin can thiệp hôn nhân**: `MarriageDao.deleteByUser`
+      và `MarriageProposalDao.delete` đã có sẵn (dùng cho ly hôn/từ chối tự
+      nguyện) nhưng chưa có đường admin nào dùng lại — GM không thể huỷ hôn
+      nhân gian lận (VD: farm tiền nhẫn qua cưới/ly hôn liên tục) hay huỷ 1
+      lời cầu hôn bị report spam/quấy rối mà không cần chính chủ thao tác.
+      - `POST /api/admin/marriage/annul` {userId} — dùng lại đúng logic
+        `DivorceHandler` (xoá hôn nhân + áp cooldown tái hôn cho cả hai),
+        chỉ khác ở chỗ không cần chính chủ gọi. 404 nếu chưa kết hôn.
+      - `POST /api/admin/marriage/proposal/cancel` {proposalId} — xoá lời
+        cầu hôn đang chờ. 404 nếu không tìm thấy.
+      - Cả hai không thêm method DAO mới, chỉ tái dùng `MarriageDao`/
+        `MarriageProposalDao` có sẵn. Cần header `X-Admin-Token`.
+      Test: `MarriageFlowTest` thêm 2 test (cả hai endpoint đòi hỏi
+      `ADMIN_TOKEN`).
 
 ## Chạy thử
 

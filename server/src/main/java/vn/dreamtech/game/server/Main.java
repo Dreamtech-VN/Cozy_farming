@@ -86,6 +86,8 @@ import vn.dreamtech.game.server.dao.WorldBossContributionDao;
 import vn.dreamtech.game.server.dao.WorldBossCycleDao;
 import vn.dreamtech.game.server.db.DataSourceProvider;
 import vn.dreamtech.game.server.admin.AdminAdjustPvpRankHandler;
+import vn.dreamtech.game.server.admin.AdminAnnulMarriageHandler;
+import vn.dreamtech.game.server.admin.AdminCancelMarriageProposalHandler;
 import vn.dreamtech.game.server.admin.AdminPvpMatchHistoryHandler;
 import vn.dreamtech.game.server.admin.AdminAdjustWalletHandler;
 import vn.dreamtech.game.server.admin.AdminBanUserHandler;
@@ -291,6 +293,8 @@ public final class Main {
         server.createContext("/api/marriage/respond", new RespondProposalHandler(marriageProposalDao, marriageDao));
         server.createContext("/api/marriage/status", new MarriageStatusHandler(marriageDao));
         server.createContext("/api/marriage/divorce", new DivorceHandler(marriageDao, divorceCooldownDao));
+        server.createContext("/api/admin/marriage/annul", new AdminAnnulMarriageHandler(marriageDao, divorceCooldownDao));
+        server.createContext("/api/admin/marriage/proposal/cancel", new AdminCancelMarriageProposalHandler(marriageProposalDao));
         server.createContext("/api/marriage/online-tick", new OnlineTickHandler(marriageActivityService));
         server.createContext("/api/marriage/duo-quest/claim", new ClaimDuoQuestHandler(marriageActivityService));
         server.createContext("/api/marriage/battle/start", new StartCoopBattleHandler(marriageActivityService));

@@ -7,6 +7,8 @@ import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import vn.dreamtech.game.server.admin.AdminAnnulMarriageHandler;
+import vn.dreamtech.game.server.admin.AdminCancelMarriageProposalHandler;
 import vn.dreamtech.game.server.dao.DivorceCooldownDao;
 import vn.dreamtech.game.server.dao.FriendshipDao;
 import vn.dreamtech.game.server.dao.LevelDao;
@@ -34,6 +36,7 @@ class MarriageFlowTest {
     private HttpServer server;
     private int port;
     private FriendshipDao friendshipDao;
+    private MarriageProposalDao proposalDao;
     private MarriageDao marriageDao;
     private LevelDao levelDao;
     private PresenceDao presenceDao;
@@ -68,6 +71,7 @@ class MarriageFlowTest {
         }
         friendshipDao = new FriendshipDao(dataSource);
         MarriageProposalDao proposalDao = new MarriageProposalDao(dataSource);
+        this.proposalDao = proposalDao;
         marriageDao = new MarriageDao(dataSource);
         levelDao = new LevelDao(dataSource);
         presenceDao = new PresenceDao(dataSource);
@@ -80,6 +84,8 @@ class MarriageFlowTest {
         server.createContext("/api/marriage/respond", new RespondProposalHandler(proposalDao, marriageDao));
         server.createContext("/api/marriage/status", new MarriageStatusHandler(marriageDao));
         server.createContext("/api/marriage/divorce", new DivorceHandler(marriageDao, divorceCooldownDao));
+        server.createContext("/api/admin/marriage/annul", new AdminAnnulMarriageHandler(marriageDao, divorceCooldownDao));
+        server.createContext("/api/admin/marriage/proposal/cancel", new AdminCancelMarriageProposalHandler(proposalDao));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -251,5 +257,17 @@ class MarriageFlowTest {
         assertEquals(200, reject.statusCode());
         assertFalse(marriageDao.isMarried(1));
         assertEquals(0, walletDao.find(1).gold());
+    }
+
+    @Test
+    void adminAnnulMarriageRequiresAdminToken() throws Exception {
+        var res = post("/api/admin/marriage/annul", new AdminAnnulMarriageHandler.Req(1));
+        assertEquals(503, res.statusCode());
+    }
+
+    @Test
+    void adminCancelMarriageProposalRequiresAdminToken() throws Exception {
+        var res = post("/api/admin/marriage/proposal/cancel", new AdminCancelMarriageProposalHandler.Req(1));
+        assertEquals(503, res.statusCode());
     }
 }
