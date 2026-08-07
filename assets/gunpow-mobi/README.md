@@ -3,8 +3,23 @@
 Asset client game trích ra từ `Server.7z` của release
 [`Test`](https://github.com/Dreamtech-VN/Cozy_farming/releases/tag/Test).
 
-> **Lưu ý:** đây là asset của **GunPow Mobi** (game Cocos2d-x, bản địa hoá tiếng Việt),
-> không phải của Cozy Farming. Giữ ở đây làm tài liệu tham khảo.
+> **Lưu ý:** đây là asset của **GunPow Mobi** (tên gốc 弹弹岛2, game Cocos2d-x,
+> bản địa hoá tiếng Việt), không phải của Cozy Farming. Giữ ở đây làm tài liệu
+> tham khảo.
+
+> **Đây chỉ là bản vá, không phải game đầy đủ.** File manifest ghi
+> `installversion = "1.0.0"` và hai gói `1.1.1`, `1.1.2` — tức những gì có ở đây
+> là bản vá, còn bản cài gốc 1.0.0 **không nằm trong máy ảo** (không có `.apk`,
+> `.ipa` hay `.obb` nào). Đối chiếu đường dẫn tài nguyên mà mã Lua gọi tới với
+> file thực có: **3 737/3 908 đường dẫn bị thiếu (96%)**, gồm toàn bộ art nhân
+> vật — `battle/head` (ảnh nhân vật, quái, boss), `ui/card` (thẻ nhân vật),
+> `battle/pet_card` (thú cưng), `shopitems` (icon vật phẩm, 1 752 file) và
+> `battle/map` (bản đồ trận). Ảnh trong `client-png/` chỉ là ảnh giao diện được
+> thay ở hai bản vá đó — tất cả đều nằm dưới `image/ui/`.
+>
+> Muốn có art nhân vật thì cần thêm file cài đặt gốc bản 1.0.0. Ngược lại, **bảng
+> số liệu game thì đầy đủ** trong `client-lua/` (`LocalData*.lua`): thông số kỹ
+> năng, phụ bản, trang bị, thú cưng kèm tên tiếng Việt.
 
 ## Nguồn gốc
 
