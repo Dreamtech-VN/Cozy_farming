@@ -248,6 +248,8 @@ public final class BattleService {
             session.enemyHp = Math.max(0, session.enemyHp - damageDealt);
             session.mana = Math.min(MANA_MAX, session.mana + manaGained);
             session.totalDamageDealt += damageDealt;
+
+            BoardGenerator.ensurePlayable(board, COLOR_COUNT, session.random);
         } else {
             session.comboCount = 0;
         }

@@ -80,6 +80,30 @@ public final class TileBoard {
         }
     }
 
+    /** Xáo lại vị trí các ô hiện có (giữ nguyên số lượng mỗi màu) — dùng khi bàn cờ bị kẹt, không còn nước đi hợp lệ. */
+    public void shuffle(Random random) {
+        int total = rows * cols;
+        int[] flat = new int[total];
+        int i = 0;
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                flat[i++] = grid[r][c];
+            }
+        }
+        for (int i2 = total - 1; i2 > 0; i2--) {
+            int j = random.nextInt(i2 + 1);
+            int tmp = flat[i2];
+            flat[i2] = flat[j];
+            flat[j] = tmp;
+        }
+        i = 0;
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                grid[r][c] = flat[i++];
+            }
+        }
+    }
+
     public int[][] toArray() {
         int[][] out = new int[rows][cols];
         for (int r = 0; r < rows; r++) {

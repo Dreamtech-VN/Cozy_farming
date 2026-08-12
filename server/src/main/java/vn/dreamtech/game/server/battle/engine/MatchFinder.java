@@ -46,6 +46,24 @@ public final class MatchFinder {
         return new MatchScanResult(cleared, groupSizes);
     }
 
+    /** Có ít nhất 1 cặp ô liền kề đổi chỗ cho nhau là ra khớp không — dùng để phát hiện bàn cờ bị kẹt (deadlock). */
+    public static boolean hasAnyValidMove(TileBoard board) {
+        for (int r = 0; r < board.rows(); r++) {
+            for (int c = 0; c < board.cols(); c++) {
+                if (c + 1 < board.cols() && wouldMatchAfterSwap(board, r, c, r, c + 1)) return true;
+                if (r + 1 < board.rows() && wouldMatchAfterSwap(board, r, c, r + 1, c)) return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean wouldMatchAfterSwap(TileBoard board, int r1, int c1, int r2, int c2) {
+        board.swapCells(r1, c1, r2, c2);
+        boolean matches = !find(board).isEmpty();
+        board.swapCells(r1, c1, r2, c2);
+        return matches;
+    }
+
     private MatchFinder() {
     }
 }
