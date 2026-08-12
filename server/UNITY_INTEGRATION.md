@@ -320,7 +320,7 @@ suốt game.
 public async Task OnPlayerSwap(int r1, int c1, int r2, int c2)
 {
     var result = await ApiClient.PostAsync<BattleStateView>("/api/battle/swap", new {
-        battleId = currentBattleId, r1, c1, r2, c2
+        userId = Session.UserId, battleId = currentBattleId, r1, c1, r2, c2
     });
     DrawBoard(result.board);
     UpdateHud(result);
@@ -345,10 +345,16 @@ không hợp lệ (400) hoặc không tạo ra khớp nào (vẫn 200 nhưng
 
 ```csharp
 var result = await ApiClient.PostAsync<BattleStateView>(
-    "/api/battle/ultimate", new { battleId = currentBattleId });
+    "/api/battle/ultimate", new { userId = Session.UserId, battleId = currentBattleId });
 ```
 Chỉ gọi được khi `mana >= manaMax` (server trả lỗi 400 nếu chưa đủ, nên
 disable nút ultimate ở UI khi `mana < manaMax`).
+
+> `userId` là **bắt buộc** ở cả `swap`, `ultimate`, và `GET
+> /api/battle/state?battleId=&userId=` (không có ở phiên bản tài liệu
+> cũ) — server xác nhận `battleId` thuộc đúng người gọi, trả `403` nếu
+> không khớp (chặn trường hợp ai đó có được `battleId` của người khác
+> thì chơi/xem trộm được trận đấu).
 
 ### 7.6. Trận kết thúc
 
