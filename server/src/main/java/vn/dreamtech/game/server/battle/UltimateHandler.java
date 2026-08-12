@@ -14,7 +14,7 @@ public final class UltimateHandler implements HttpHandler {
         this.battleService = battleService;
     }
 
-    record Req(String battleId) {
+    record Req(int userId, String battleId) {
     }
 
     @Override
@@ -25,7 +25,7 @@ public final class UltimateHandler implements HttpHandler {
         }
         Req req = JsonHttp.readBody(exchange, Req.class);
         try {
-            JsonHttp.write(exchange, 200, battleService.useUltimate(req.battleId()));
+            JsonHttp.write(exchange, 200, battleService.useUltimate(req.userId(), req.battleId()));
         } catch (BattleException e) {
             JsonHttp.writeError(exchange, e.status(), e.getMessage());
         }

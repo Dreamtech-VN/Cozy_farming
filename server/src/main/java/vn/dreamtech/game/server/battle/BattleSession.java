@@ -6,6 +6,7 @@ import vn.dreamtech.game.server.battle.engine.TileBoard;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Trạng thái 1 trận đấu đang diễn ra — giữ trong bộ nhớ (không lưu DB), vì
@@ -21,6 +22,9 @@ public final class BattleSession {
     final ChallengeType challengeType; // chỉ có ý nghĩa khi mode == DAILY/WEEKLY
     final FloorSource floorSource; // chỉ có ý nghĩa khi mode == DUNGEON/TOWER
     final Random random;
+    // Chặn 2 request cùng lúc (double-tap, retry, hoặc client cố tình gửi trùng) đè lên nhau
+    // trong lúc sửa board/HP/mana/reward — mỗi trận 1 lock riêng, không khoá cả bảng sessions.
+    final ReentrantLock lock = new ReentrantLock();
 
     EnemyDef level; // đổi được: sang tầng mới thì đổi sang địch tầng đó
     TileBoard board; // đổi được: sang tầng mới thì sinh bàn mới

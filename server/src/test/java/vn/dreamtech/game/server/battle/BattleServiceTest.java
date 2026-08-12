@@ -111,6 +111,38 @@ class BattleServiceTest {
     }
 
     @Test
+    void swapByNonOwnerRejected() {
+        BattleStateView view = battleService.startStory(1, 1);
+        BattleException e = assertThrows(BattleException.class,
+                () -> battleService.swap(2, view.battleId(), 0, 0, 0, 1));
+        assertEquals(403, e.status());
+    }
+
+    @Test
+    void useUltimateByNonOwnerRejected() {
+        BattleStateView view = battleService.startStory(1, 1);
+        BattleException e = assertThrows(BattleException.class,
+                () -> battleService.useUltimate(2, view.battleId()));
+        assertEquals(403, e.status());
+    }
+
+    @Test
+    void getStateByNonOwnerRejected() {
+        BattleStateView view = battleService.startStory(1, 1);
+        BattleException e = assertThrows(BattleException.class,
+                () -> battleService.getState(2, view.battleId()));
+        assertEquals(403, e.status());
+    }
+
+    @Test
+    void swapByOwnerSucceeds() {
+        BattleStateView view = battleService.startStory(1, 1);
+        BattleException e = assertThrows(BattleException.class,
+                () -> battleService.swap(1, view.battleId(), 0, 0, 5, 5)); // toạ độ sai để dễ assert, không phải bị chặn quyền
+        assertEquals(400, e.status()); // 400 (toạ độ), không phải 403 -> chứng tỏ qua được vòng kiểm tra chủ sở hữu
+    }
+
+    @Test
     void ultimateBeforeManaFullRejected() {
         BattleStateView view = battleService.startStory(1, 1);
         BattleException e = assertThrows(BattleException.class, () -> battleService.useUltimate(view.battleId()));

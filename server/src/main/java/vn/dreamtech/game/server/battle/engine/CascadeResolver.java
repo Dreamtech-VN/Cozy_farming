@@ -17,7 +17,7 @@ public final class CascadeResolver {
         while (level <= MAX_CHAIN_LEVELS) {
             MatchScanResult found = MatchFinder.find(board);
             if (found.isEmpty()) break;
-            steps.add(new ChainStep(level, found.groupSizes()));
+            steps.add(new ChainStep(level, found.groupSizes(), found.cleared().size()));
             for (Position p : found.cleared()) {
                 board.set(p.row(), p.col(), TileBoard.EMPTY);
             }

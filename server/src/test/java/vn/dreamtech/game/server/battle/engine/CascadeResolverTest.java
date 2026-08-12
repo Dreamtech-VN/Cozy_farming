@@ -57,4 +57,26 @@ class CascadeResolverTest {
         assertTrue(result.matched());
         assertTrue(result.chainLevels() >= 1);
     }
+
+    @Test
+    void lShapeMatch_uniqueTilesClearedDoesNotDoubleCountSharedCorner() {
+        // Hình L: hàng ngang (0,0)-(0,2) và cột dọc (0,0)-(2,0) dùng chung ô góc (0,0).
+        TileBoard board = new TileBoard(3, 3);
+        board.set(0, 0, 4);
+        board.set(0, 1, 4);
+        board.set(0, 2, 4);
+        board.set(1, 0, 4);
+        board.set(2, 0, 4);
+        board.set(1, 1, 1);
+        board.set(1, 2, 1);
+        board.set(2, 1, 2);
+        board.set(2, 2, 2);
+
+        CascadeResult result = CascadeResolver.resolve(board, new Random(1), 6);
+        ChainStep step = result.steps().get(0);
+
+        int groupSizeSum = step.groupSizes().stream().mapToInt(Integer::intValue).sum();
+        assertEquals(6, groupSizeSum); // 2 group (ngang 3 + dọc 3) tính riêng, chưa gộp trùng
+        assertEquals(5, step.uniqueTilesCleared()); // (0,0) chỉ tính 1 lần trong số ô vật lý thật sự bị xoá
+    }
 }

@@ -21,13 +21,15 @@ public final class BattleStateHandler implements HttpHandler {
             JsonHttp.writeError(exchange, 405, "Chỉ nhận GET");
             return;
         }
-        String battleId = QueryParam.stringParam(exchange.getRequestURI().getQuery(), "battleId");
-        if (battleId == null) {
-            JsonHttp.writeError(exchange, 400, "Thiếu tham số battleId");
+        String query = exchange.getRequestURI().getQuery();
+        String battleId = QueryParam.stringParam(query, "battleId");
+        Integer userId = QueryParam.intParam(query, "userId");
+        if (battleId == null || userId == null) {
+            JsonHttp.writeError(exchange, 400, "Thiếu tham số battleId/userId");
             return;
         }
         try {
-            JsonHttp.write(exchange, 200, battleService.getState(battleId));
+            JsonHttp.write(exchange, 200, battleService.getState(userId, battleId));
         } catch (BattleException e) {
             JsonHttp.writeError(exchange, e.status(), e.getMessage());
         }

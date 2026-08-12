@@ -95,16 +95,19 @@ class BattleFlowTest {
         String battleId = started.get("battleId").getAsString();
         assertEquals("ONGOING", started.get("status").getAsString());
 
-        var state = get("/api/battle/state?battleId=" + battleId);
+        var state = get("/api/battle/state?battleId=" + battleId + "&userId=1");
         assertEquals(200, state.statusCode());
 
-        var badSwap = post("/api/battle/swap", new SwapHandler.Req(battleId, 0, 0, 5, 5));
+        var badSwap = post("/api/battle/swap", new SwapHandler.Req(1, battleId, 0, 0, 5, 5));
         assertEquals(400, badSwap.statusCode());
 
-        var ultimateTooEarly = post("/api/battle/ultimate", new UltimateHandler.Req(battleId));
+        var ultimateTooEarly = post("/api/battle/ultimate", new UltimateHandler.Req(1, battleId));
         assertEquals(400, ultimateTooEarly.statusCode());
 
-        var unknownState = get("/api/battle/state?battleId=does-not-exist");
+        var wrongOwnerState = get("/api/battle/state?battleId=" + battleId + "&userId=2");
+        assertEquals(403, wrongOwnerState.statusCode());
+
+        var unknownState = get("/api/battle/state?battleId=does-not-exist&userId=1");
         assertEquals(404, unknownState.statusCode());
     }
 }

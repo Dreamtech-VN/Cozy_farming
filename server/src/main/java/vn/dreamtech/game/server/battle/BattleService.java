@@ -164,8 +164,35 @@ public final class BattleService {
         return toView(find(battleId), false, false, 0, 0, 0, false, false);
     }
 
+    /** Dùng cho endpoint HTTP công khai — xác nhận battleId thuộc về userId trước khi trả trạng thái. */
+    public BattleStateView getState(int userId, String battleId) {
+        requireOwnership(find(battleId), userId);
+        return getState(battleId);
+    }
+
+    /** Dùng cho endpoint HTTP công khai — xác nhận battleId thuộc về userId trước khi cho đánh. */
+    public BattleStateView swap(int userId, String battleId, int r1, int c1, int r2, int c2) {
+        requireOwnership(find(battleId), userId);
+        return swap(battleId, r1, c1, r2, c2);
+    }
+
+    /** Dùng cho endpoint HTTP công khai — xác nhận battleId thuộc về userId trước khi dùng chiêu cuối. */
+    public BattleStateView useUltimate(int userId, String battleId) {
+        requireOwnership(find(battleId), userId);
+        return useUltimate(battleId);
+    }
+
     public BattleStateView swap(String battleId, int r1, int c1, int r2, int c2) {
         BattleSession session = find(battleId);
+        session.lock.lock();
+        try {
+            return doSwap(session, r1, c1, r2, c2);
+        } finally {
+            session.lock.unlock();
+        }
+    }
+
+    private BattleStateView doSwap(BattleSession session, int r1, int c1, int r2, int c2) {
         requireOngoing(session);
         TileBoard board = session.board;
         if (!board.inBounds(r1, c1) || !board.inBounds(r2, c2)) {
@@ -198,14 +225,17 @@ public final class BattleService {
             double rawDamage = 0;
             int tilesCleared = 0;
             for (ChainStep step : cascade.steps()) {
-                double stepDamage = 0;
+                // Ô hình L/T có thể nằm trong 2 group cùng lúc (xem MatchScanResult) — base damage tính
+                // theo số ô vật lý duy nhất (uniqueTilesCleared), phần "bonus" của group lớn/critical vẫn
+                // cộng riêng theo từng group để không mất thưởng cho hình dạng, nhưng không nhân đôi base.
+                double stepDamage = BASE_DAMAGE_PER_TILE * step.uniqueTilesCleared();
                 for (int groupSize : step.groupSizes()) {
                     double groupMult = groupSize >= CRITICAL_GROUP_SIZE ? 2.0 : groupSize == BONUS_GROUP_SIZE ? 1.5 : 1.0;
-                    stepDamage += BASE_DAMAGE_PER_TILE * groupSize * groupMult;
+                    stepDamage += BASE_DAMAGE_PER_TILE * groupSize * (groupMult - 1.0);
                 }
                 stepDamage *= 1 + CHAIN_BONUS_PER_LEVEL * (step.level() - 1);
                 rawDamage += stepDamage;
-                tilesCleared += step.tilesCleared();
+                tilesCleared += step.uniqueTilesCleared();
             }
 
             double comboMult = 1 + COMBO_BONUS_PER_STACK * Math.min(session.comboCount, COMBO_MAX_STACK);
@@ -242,15 +272,20 @@ public final class BattleService {
 
     public BattleStateView useUltimate(String battleId) {
         BattleSession session = find(battleId);
-        requireOngoing(session);
-        if (session.mana < MANA_MAX) {
-            throw new BattleException(400, "Chưa đủ mana để dùng chiêu cuối");
+        session.lock.lock();
+        try {
+            requireOngoing(session);
+            if (session.mana < MANA_MAX) {
+                throw new BattleException(400, "Chưa đủ mana để dùng chiêu cuối");
+            }
+            session.mana = 0;
+            session.enemyHp = Math.max(0, session.enemyHp - ULTIMATE_DAMAGE);
+            session.totalDamageDealt += ULTIMATE_DAMAGE;
+            boolean floorCleared = resolveOutcome(session);
+            return toView(session, false, false, 0, ULTIMATE_DAMAGE, 0, false, floorCleared);
+        } finally {
+            session.lock.unlock();
         }
-        session.mana = 0;
-        session.enemyHp = Math.max(0, session.enemyHp - ULTIMATE_DAMAGE);
-        session.totalDamageDealt += ULTIMATE_DAMAGE;
-        boolean floorCleared = resolveOutcome(session);
-        return toView(session, false, false, 0, ULTIMATE_DAMAGE, 0, false, floorCleared);
     }
 
     /** @return true nếu vừa qua 1 tầng (Dungeon/Tower, còn tầng tiếp theo, trận vẫn ONGOING). */
@@ -335,6 +370,12 @@ public final class BattleService {
     private void requireOngoing(BattleSession session) {
         if (session.status != BattleStatus.ONGOING) {
             throw new BattleException(409, "Trận đấu đã kết thúc");
+        }
+    }
+
+    private void requireOwnership(BattleSession session, int userId) {
+        if (session.userId != userId) {
+            throw new BattleException(403, "Trận đấu không thuộc về bạn");
         }
     }
 

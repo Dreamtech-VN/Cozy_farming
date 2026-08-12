@@ -14,7 +14,7 @@ public final class SwapHandler implements HttpHandler {
         this.battleService = battleService;
     }
 
-    record Req(String battleId, int r1, int c1, int r2, int c2) {
+    record Req(int userId, String battleId, int r1, int c1, int r2, int c2) {
     }
 
     @Override
@@ -25,7 +25,7 @@ public final class SwapHandler implements HttpHandler {
         }
         Req req = JsonHttp.readBody(exchange, Req.class);
         try {
-            JsonHttp.write(exchange, 200, battleService.swap(req.battleId(), req.r1(), req.c1(), req.r2(), req.c2()));
+            JsonHttp.write(exchange, 200, battleService.swap(req.userId(), req.battleId(), req.r1(), req.c1(), req.r2(), req.c2()));
         } catch (BattleException e) {
             JsonHttp.writeError(exchange, e.status(), e.getMessage());
         }
