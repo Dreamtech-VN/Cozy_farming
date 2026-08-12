@@ -34,23 +34,29 @@ Assets/Scripts/
   Auth/AuthModels.cs, AuthService.cs      — đăng nhập khách, tự lưu/nạp guestToken qua PlayerPrefs
   Character/CharacterModels.cs, OutfitAssets.cs, CharacterService.cs
                                            — tạo nhân vật (Giai đoạn 3), bảng ánh xạ trang phục tự quy ước
+  Character/CharacterCreatePanel.cs       — UI tạo nhân vật, bắn event Created khi xong
+  Guild/GuildModels.cs, GuildService.cs   — list/create/join/leave/my guild (Giai đoạn 16)
+  Guild/GuildPanel.cs                     — UI: chưa có guild -> list + vào; có rồi -> thông tin + thành viên + rời
   Battle/BattleStateView.cs               — model khớp BattleStateView bên server
   Battle/BattleService.cs                 — start/swap/ultimate/state (đều gửi kèm userId)
   Battle/BattleEvents.cs                  — event tĩnh để HUD nghe cập nhật trạng thái trận
   Battle/BattleHud.cs                     — thanh HP/mana + nút chiêu cuối + text trạng thái
   Battle/Engine/BoardRenderer.cs          — vẽ bàn cờ 8x8, bắt click đổi ô
   Battle/Engine/BoardTile.cs              — gắn vào tilePrefab để nhận click (cần Collider2D)
-  Bootstrap/GameBootstrap.cs              — nối cả luồng: đăng nhập -> chọn màn -> vào trận
+  Bootstrap/GameBootstrap.cs              — nối luồng chính: đăng nhập -> tạo nhân vật (nếu chưa có) -> chọn màn -> vào trận
 Packages/manifest.json                    — Newtonsoft Json + package UI/2D cần thiết
 ProjectSettings/ProjectVersion.txt        — ghim bản Unity 2022.3 LTS (đổi nếu bạn dùng bản khác)
 ```
 
-Đây là 1 lát cắt dọc (vertical slice) đủ chạy: đăng nhập khách → danh sách
-màn Story → đấu match-3 (swap + ultimate) → thắng/thua. **Chưa làm**: tạo
-nhân vật (script có sẵn, chưa nối UI), Lobby/Chat, Cosmetic, Guild, PvP —
-tài liệu `UNITY_INTEGRATION.md` mục 6, 8, 9, 10 đã có sẵn code mẫu tương
-tự, nối theo đúng pattern `XxxService.cs` gọi `ApiClient` như các module
-trên.
+Đây là 1 lát cắt dọc (vertical slice) đủ chạy: đăng nhập khách → tạo nhân
+vật (nếu chưa có) → danh sách màn Story → đấu match-3 (swap + ultimate) →
+thắng/thua, cộng module Guild độc lập (list/join/leave/xem thành viên) —
+`GuildPanel` chưa nối vào luồng chính của `GameBootstrap`, tự thêm 1 nút
+"Guild" ở menu để bật panel này lên khi cần. **Chưa làm**: Lobby/Chat,
+Cosmetic, PvP — tài liệu `UNITY_INTEGRATION.md` mục 6, 8, 9 đã có sẵn code
+mẫu, nối theo đúng pattern `XxxService.cs` gọi `ApiClient` như các module
+trên (ví dụ `GuildService.cs`/`GuildPanel.cs` ở đây là mẫu tham khảo gần
+nhất cho PvP, vì PvP cũng theo kiểu list/join/report tương tự).
 
 ## Mở project
 
@@ -73,12 +79,19 @@ Unity rồi ghép theo cấu trúc:
 ```
 GameBootstrap (empty GameObject, gắn script GameBootstrap.cs)
 Canvas (UI)
+  CharacterCreatePanel (gắn CharacterCreatePanel.cs, kéo InputField/Toggle/Button/Text tương ứng
+                         + kéo GameObject này vào ô "Character Create Panel Object" của GameBootstrap
+                         + kéo component vào ô "Character Create Panel")
   LevelSelectPanel
     LevelListContent (Vertical Layout Group, kéo vào ô "Level List Content")
     LevelButtonPrefab (Button + Text con, kéo vào ô "Level Button Prefab")
   BattlePanel
     BoardRoot (Transform trống, kéo vào BoardRenderer.boardRoot)
     HUD (gắn BattleHud.cs, kéo 3 Slider + 1 Button + 1 Text tương ứng)
+  GuildPanel (độc lập, không nằm trong luồng GameBootstrap — gắn GuildPanel.cs, kéo:
+              NoGuildView (GameObject) + GuildListContent + GuildListButtonPrefab,
+              MyGuildView (GameObject) + MyGuildNameText + MemberListContent + MemberEntryTemplate (Text,
+              để inactive sẵn — panel Instantiate rồi SetActive(true)) + LeaveButton, ErrorText)
 StatusText (kéo vào ô "Status Text" của GameBootstrap)
 ```
 

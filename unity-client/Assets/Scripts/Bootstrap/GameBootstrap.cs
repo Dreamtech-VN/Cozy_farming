@@ -6,6 +6,8 @@ using UnityEngine.UI;
 // Vòng lặp MVP: đăng nhập khách -> chọn màn Story -> vào màn hình chiến đấu.
 public class GameBootstrap : MonoBehaviour
 {
+    [SerializeField] private GameObject characterCreatePanelObject;
+    [SerializeField] private CharacterCreatePanel characterCreatePanel;
     [SerializeField] private GameObject levelSelectPanel;
     [SerializeField] private GameObject battlePanel;
     [SerializeField] private Transform levelListContent;
@@ -16,6 +18,7 @@ public class GameBootstrap : MonoBehaviour
 
     private async void Start()
     {
+        characterCreatePanelObject.SetActive(false);
         battlePanel.SetActive(false);
         levelSelectPanel.SetActive(false);
         statusText.text = "Đang đăng nhập...";
@@ -30,6 +33,26 @@ public class GameBootstrap : MonoBehaviour
             return;
         }
 
+        var character = await CharacterService.GetMyCharacterOrNull();
+        if (character == null)
+        {
+            ShowCharacterCreate();
+            return;
+        }
+
+        await ShowLevelSelect();
+    }
+
+    private void ShowCharacterCreate()
+    {
+        characterCreatePanelObject.SetActive(true);
+        characterCreatePanel.Created += OnCharacterCreated;
+    }
+
+    private async void OnCharacterCreated(CharacterResponse character)
+    {
+        characterCreatePanel.Created -= OnCharacterCreated;
+        characterCreatePanelObject.SetActive(false);
         await ShowLevelSelect();
     }
 
