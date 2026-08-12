@@ -81,6 +81,7 @@ class GuildFlowTest {
         server.createContext("/api/guild/my", new MyGuildHandler(guildService));
         server.createContext("/api/admin/guild/disband", new AdminDisbandGuildHandler(guildService));
         server.createContext("/api/admin/guild/kick", new AdminKickMemberHandler(guildService));
+        server.createContext("/api/admin/guild/transfer-leader", new AdminTransferLeaderHandler(guildService));
         server.setExecutor(null);
         server.start();
         port = server.getAddress().getPort();
@@ -281,6 +282,40 @@ class GuildFlowTest {
     }
 
     @Test
+    void adminTransferLeaderPromotesTargetAndDemotesOldLeader() throws Exception {
+        int leader = newPlayer("Leader", 20_000);
+        var guild = guildService.create(leader, "Rồng Lửa", "RL", null);
+        int member = newPlayer("Member", 0);
+        guildService.join(member, guild.id());
+
+        guildService.adminTransferLeader(guild.id(), member);
+
+        var info = guildService.info(guild.id());
+        assertEquals(member, info.leaderUserId());
+    }
+
+    @Test
+    void adminTransferLeaderTargetNotInGuildRejected() throws Exception {
+        int leader = newPlayer("Leader", 20_000);
+        var guild = guildService.create(leader, "Rồng Lửa", "RL", null);
+        int outsider = newPlayer("Outsider", 0);
+
+        var e = org.junit.jupiter.api.Assertions.assertThrows(GuildException.class,
+                () -> guildService.adminTransferLeader(guild.id(), outsider));
+        assertEquals(404, e.status());
+    }
+
+    @Test
+    void adminTransferLeaderUnknownGuildRejected() throws Exception {
+        int leader = newPlayer("Leader", 20_000);
+        guildService.create(leader, "Rồng Lửa", "RL", null);
+
+        var e = org.junit.jupiter.api.Assertions.assertThrows(GuildException.class,
+                () -> guildService.adminTransferLeader(999, leader));
+        assertEquals(404, e.status());
+    }
+
+    @Test
     void adminEndpointsRequireAdminToken() throws Exception {
         int leader = newPlayer("Leader", 20_000);
         var guild = guildService.create(leader, "Rồng Lửa", "RL", null);
@@ -290,5 +325,8 @@ class GuildFlowTest {
 
         var kick = post("/api/admin/guild/kick", new AdminKickMemberHandler.Req(guild.id(), leader));
         assertEquals(503, kick.statusCode());
+
+        var transfer = post("/api/admin/guild/transfer-leader", new AdminTransferLeaderHandler.Req(guild.id(), leader));
+        assertEquals(503, transfer.statusCode());
     }
 }

@@ -121,6 +121,7 @@ import vn.dreamtech.game.server.mail.MailReadHandler;
 import vn.dreamtech.game.server.mail.MailService;
 import vn.dreamtech.game.server.guild.AdminDisbandGuildHandler;
 import vn.dreamtech.game.server.guild.AdminKickMemberHandler;
+import vn.dreamtech.game.server.guild.AdminTransferLeaderHandler;
 import vn.dreamtech.game.server.guild.ChangeRoleHandler;
 import vn.dreamtech.game.server.guild.CreateGuildHandler;
 import vn.dreamtech.game.server.guild.DisbandGuildHandler;
@@ -391,6 +392,7 @@ public final class Main {
         server.createContext("/api/admin/users/lookup", new AdminLookupUserHandler(userDao, characterDao, walletDao, levelDao, bannedUserDao));
         server.createContext("/api/admin/guild/disband", new AdminDisbandGuildHandler(guildService));
         server.createContext("/api/admin/guild/kick", new AdminKickMemberHandler(guildService));
+        server.createContext("/api/admin/guild/transfer-leader", new AdminTransferLeaderHandler(guildService));
         server.createContext("/api/admin/tower/record/reset", new AdminResetTowerRecordHandler(userDao, towerRecordDao));
         server.createContext("/api/admin/level/set", new AdminSetLevelHandler(userDao, levelDao));
         server.createContext("/api/admin/friend/remove", new AdminRemoveFriendshipHandler(userDao, friendshipDao));

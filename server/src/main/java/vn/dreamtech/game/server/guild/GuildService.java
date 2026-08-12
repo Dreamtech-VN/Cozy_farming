@@ -218,6 +218,25 @@ public final class GuildService {
         }
     }
 
+    public void adminTransferLeader(int guildId, int targetUserId) {
+        try {
+            Guild guild = guildDao.findById(guildId).orElseThrow(() -> new GuildException(404, "Không tìm thấy guild"));
+            GuildMembership target = guildMemberDao.findByUserId(targetUserId)
+                    .orElseThrow(() -> new GuildException(404, "Người này không trong guild nào"));
+            if (target.guildId() != guildId) {
+                throw new GuildException(400, "Người này không ở guild đó");
+            }
+            if (guildMemberDao.findByUserId(guild.leaderUserId())
+                    .filter(m -> m.guildId() == guildId).isPresent()) {
+                guildMemberDao.updateRole(guild.leaderUserId(), GuildRole.OFFICER);
+            }
+            guildDao.updateLeader(guildId, targetUserId);
+            guildMemberDao.updateRole(targetUserId, GuildRole.LEADER);
+        } catch (SQLException e) {
+            throw new GuildException(500, "Lỗi chuyển quyền hội trưởng: " + e.getMessage());
+        }
+    }
+
     public List<GuildSummaryView> list() {
         try {
             List<Guild> guilds = guildDao.listAll();
