@@ -37,6 +37,9 @@ Assets/Scripts/
   Character/CharacterCreatePanel.cs       — UI tạo nhân vật, bắn event Created khi xong
   Guild/GuildModels.cs, GuildService.cs   — list/create/join/leave/my guild (Giai đoạn 16)
   Guild/GuildPanel.cs                     — UI: chưa có guild -> list + vào; có rồi -> thông tin + thành viên + rời
+  Pvp/PvpModels.cs, PvpService.cs         — queue/match/report/rank/leaderboard (Giai đoạn 20)
+  Pvp/PvpPanel.cs                         — UI: vào hàng chờ -> ghép cặp -> đấu (dùng lại BoardRenderer/BattleHud
+                                             chung) -> tự nộp điểm -> đợi đối thủ -> hiện thắng/thua/hoà
   Battle/BattleStateView.cs               — model khớp BattleStateView bên server
   Battle/BattleService.cs                 — start/swap/ultimate/state (đều gửi kèm userId)
   Battle/BattleEvents.cs                  — event tĩnh để HUD nghe cập nhật trạng thái trận
@@ -50,13 +53,24 @@ ProjectSettings/ProjectVersion.txt        — ghim bản Unity 2022.3 LTS (đổ
 
 Đây là 1 lát cắt dọc (vertical slice) đủ chạy: đăng nhập khách → tạo nhân
 vật (nếu chưa có) → danh sách màn Story → đấu match-3 (swap + ultimate) →
-thắng/thua, cộng module Guild độc lập (list/join/leave/xem thành viên) —
-`GuildPanel` chưa nối vào luồng chính của `GameBootstrap`, tự thêm 1 nút
-"Guild" ở menu để bật panel này lên khi cần. **Chưa làm**: Lobby/Chat,
-Cosmetic, PvP — tài liệu `UNITY_INTEGRATION.md` mục 6, 8, 9 đã có sẵn code
-mẫu, nối theo đúng pattern `XxxService.cs` gọi `ApiClient` như các module
-trên (ví dụ `GuildService.cs`/`GuildPanel.cs` ở đây là mẫu tham khảo gần
-nhất cho PvP, vì PvP cũng theo kiểu list/join/report tương tự).
+thắng/thua, cộng 2 module độc lập (chưa nối vào luồng chính của
+`GameBootstrap`, tự thêm nút ở menu để bật lên khi cần):
+- **Guild** — list/join/leave/xem thành viên.
+- **PvP** — vào hàng chờ, ghép cặp (ngay hoặc tự poll), đấu (dùng LẠI
+  đúng `BoardRenderer`/`BattleHud` của màn Battle chung — kéo cùng 1
+  GameObject vào cả 2 nơi, xem mục wiring bên dưới), hết lượt tự nộp
+  điểm, đợi đối thủ report nốt rồi hiện thắng/thua/hoà.
+  `PollUntilMatched` ở đây có sửa 1 chỗ so với mẫu trong
+  `UNITY_INTEGRATION.md` mục 9: mẫu gốc chỉ check "có match hay chưa"
+  (404 hay không), nhưng `GET /api/pvp/match/my` trả về **trận PvP gần
+  nhất kể cả đã kết thúc** — poll ngay sau khi rời 1 trận cũ mà chưa
+  được ghép trận mới sẽ nhận NHẦM lại trận cũ đó. Code ở đây so thêm
+  `matchId` với `Session.LastPvpMatchId` (set sau mỗi lần report xong)
+  để bỏ qua trận cũ, chỉ nhận trận thật sự mới.
+
+**Chưa làm**: Lobby/Chat, Cosmetic — tài liệu `UNITY_INTEGRATION.md` mục
+6, 8 đã có sẵn code mẫu, nối theo đúng pattern `XxxService.cs` gọi
+`ApiClient` như các module trên.
 
 ## Mở project
 
@@ -92,6 +106,13 @@ Canvas (UI)
               NoGuildView (GameObject) + GuildListContent + GuildListButtonPrefab,
               MyGuildView (GameObject) + MyGuildNameText + MemberListContent + MemberEntryTemplate (Text,
               để inactive sẵn — panel Instantiate rồi SetActive(true)) + LeaveButton, ErrorText)
+  PvpPanel (độc lập — gắn PvpPanel.cs, kéo:
+            QueuePanel (GameObject) + QueueStatusText + JoinButton,
+            ResultPanel (GameObject, để inactive sẵn) + ResultText,
+            "Battle Panel"/"Board Renderer"/"Battle Hud" -> kéo ĐÚNG 3 GameObject/component
+            đã dùng cho BattlePanel ở trên, KHÔNG tạo bản sao riêng — PvP dùng lại
+            nguyên màn hình chiến đấu chung, chỉ khác cách bắt đầu (match/start thay vì
+            story/start) và có thêm bước tự nộp điểm lúc kết thúc)
 StatusText (kéo vào ô "Status Text" của GameBootstrap)
 ```
 
