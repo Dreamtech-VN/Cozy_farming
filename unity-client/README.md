@@ -40,6 +40,14 @@ Assets/Scripts/
   Pvp/PvpModels.cs, PvpService.cs         — queue/match/report/rank/leaderboard (Giai đoạn 20)
   Pvp/PvpPanel.cs                         — UI: vào hàng chờ -> ghép cặp -> đấu (dùng lại BoardRenderer/BattleHud
                                              chung) -> tự nộp điểm -> đợi đối thủ -> hiện thắng/thua/hoà
+  Lobby/LobbyModels.cs, LobbyService.cs   — heartbeat/players/leave (Giai đoạn 4)
+  Lobby/LobbyController.cs                — gắn vào GameObject nhân vật mình trong sảnh: di chuyển WASD,
+                                             tự heartbeat + poll người chơi khác định kỳ, tự rời sảnh khi tắt
+  Chat/ChatModels.cs, ChatService.cs      — send/recent (Giai đoạn 5)
+  Chat/ChatController.cs                 — poll tin nhắn mới bằng lastSeenId (KHÔNG dùng mốc thời gian)
+  Cosmetics/CosmeticModels.cs, CosmeticService.cs — catalog/owned/unlock/equip/appearance (Giai đoạn 11)
+  Cosmetics/CosmeticPanel.cs              — list toàn bộ catalog thật từ server, đánh dấu đã sở hữu/đang
+                                             trang bị, bấm trang bị (không có nút "mua" — chưa có shop thật)
   Battle/BattleStateView.cs               — model khớp BattleStateView bên server
   Battle/BattleService.cs                 — start/swap/ultimate/state (đều gửi kèm userId)
   Battle/BattleEvents.cs                  — event tĩnh để HUD nghe cập nhật trạng thái trận
@@ -68,9 +76,22 @@ thắng/thua, cộng 2 module độc lập (chưa nối vào luồng chính củ
   `matchId` với `Session.LastPvpMatchId` (set sau mỗi lần report xong)
   để bỏ qua trận cũ, chỉ nhận trận thật sự mới.
 
-**Chưa làm**: Lobby/Chat, Cosmetic — tài liệu `UNITY_INTEGRATION.md` mục
-6, 8 đã có sẵn code mẫu, nối theo đúng pattern `XxxService.cs` gọi
-`ApiClient` như các module trên.
+Cộng 3 module độc lập nữa cũng chưa nối vào luồng chính (tự thêm nút/màn
+hình riêng để bật lên khi cần, giống Guild/PvP):
+- **Lobby** (`LobbyController`) — sảnh chung thời gian thực kiểu polling,
+  không WebSocket (đúng giới hạn đã ghi ở mục 0 tài liệu): nhân vật mình
+  di chuyển bằng phím, heartbeat báo còn hoạt động + gửi vị trí, đồng thời
+  poll người chơi khác đang ở sảnh để vẽ marker (placeholder, không phải
+  sprite nhân vật thật — chưa có art).
+- **Chat** (`ChatController`) — 1 kênh chung, poll bằng `lastSeenId` tăng
+  dần (không dùng mốc thời gian, đúng lưu ý của server tránh lệch giờ máy).
+- **Cosmetic** (`CosmeticPanel`) — LUÔN lấy catalog + vật phẩm sở hữu từ
+  server lúc vào (không hardcode danh sách trong Unity, đúng nguyên tắc
+  mục 0/8 tài liệu), cho trang bị vật phẩm đã sở hữu vào đúng ô.
+
+Vậy là đã phủ hết các mục chính của `UNITY_INTEGRATION.md` (0, 2-10) ở
+mức vertical-slice — còn thiếu chủ yếu là UI polish, animation, và art
+thật (xem mục cuối file này).
 
 ## Mở project
 
@@ -113,7 +134,16 @@ Canvas (UI)
             đã dùng cho BattlePanel ở trên, KHÔNG tạo bản sao riêng — PvP dùng lại
             nguyên màn hình chiến đấu chung, chỉ khác cách bắt đầu (match/start thay vì
             story/start) và có thêm bước tự nộp điểm lúc kết thúc)
+  ChatPanel (độc lập — gắn ChatController.cs, kéo MessageListContent + MessageEntryTemplate
+             (Text, để inactive sẵn) + MessageInput (InputField) + SendButton + ErrorText)
+  CosmeticPanel (độc lập — gắn CosmeticPanel.cs, kéo ItemListContent + ItemButtonPrefab
+                 (Button + Text con) + ErrorText)
 StatusText (kéo vào ô "Status Text" của GameBootstrap)
+LobbyScene (scene RIÊNG hoặc panel riêng — LobbyController gắn vào GameObject đại diện
+            nhân vật mình, kéo RemotePlayersRoot (Transform trống) + RemotePlayerPrefab
+            (GameObject bất kỳ, có SpriteRenderer/Text con để hiện tên); không bắt buộc
+            chung Canvas với các panel trên vì đây là không gian 2D di chuyển được,
+            không phải UI thuần)
 ```
 
 `tilePrefab` (kéo vào `BoardRenderer.tilePrefab`) cần: `SpriteRenderer` +
