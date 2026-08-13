@@ -46,8 +46,10 @@ Assets/Scripts/
   Chat/ChatModels.cs, ChatService.cs      — send/recent (Giai đoạn 5)
   Chat/ChatController.cs                 — poll tin nhắn mới bằng lastSeenId (KHÔNG dùng mốc thời gian)
   Cosmetics/CosmeticModels.cs, CosmeticService.cs — catalog/owned/unlock/equip/appearance (Giai đoạn 11)
-  Cosmetics/CosmeticPanel.cs              — list toàn bộ catalog thật từ server, đánh dấu đã sở hữu/đang
-                                             trang bị, bấm trang bị (không có nút "mua" — chưa có shop thật)
+  Cosmetics/ShopModels.cs, ShopService.cs — shop cosmetic thật: GET /api/shop/cosmetics (kèm giá vàng),
+                                             POST /api/shop/cosmetics/buy (giai đoạn 45 phía server)
+  Cosmetics/CosmeticPanel.cs              — panel cosmetic kiêm shop: chưa sở hữu -> nút mua kèm giá
+                                             (miễn phí nếu giá 0), sở hữu rồi -> nút trang bị
   Battle/BattleStateView.cs               — model khớp BattleStateView bên server
   Battle/BattleService.cs                 — start/swap/ultimate/state (đều gửi kèm userId)
   Battle/BattleEvents.cs                  — event tĩnh để HUD nghe cập nhật trạng thái trận

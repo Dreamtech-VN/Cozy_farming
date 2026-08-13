@@ -161,6 +161,8 @@ import vn.dreamtech.game.server.lobby.LeaveLobbyHandler;
 import vn.dreamtech.game.server.lobby.LobbyPlayersHandler;
 import vn.dreamtech.game.server.settings.GetSettingsHandler;
 import vn.dreamtech.game.server.settings.UpdateSettingsHandler;
+import vn.dreamtech.game.server.shop.BuyCosmeticHandler;
+import vn.dreamtech.game.server.shop.ShopListHandler;
 import vn.dreamtech.game.server.social.friend.FriendsListHandler;
 import vn.dreamtech.game.server.social.friend.PendingRequestsHandler;
 import vn.dreamtech.game.server.social.friend.RemoveFriendHandler;
@@ -312,6 +314,8 @@ public final class Main {
         server.createContext("/api/cosmetics/catalog", new CosmeticCatalogHandler());
         server.createContext("/api/cosmetics/owned", new OwnedCosmeticsHandler(playerCosmeticDao));
         server.createContext("/api/cosmetics/unlock", new UnlockCosmeticHandler(playerCosmeticDao));
+        server.createContext("/api/shop/cosmetics", new ShopListHandler());
+        server.createContext("/api/shop/cosmetics/buy", new BuyCosmeticHandler(userDao, walletDao, playerCosmeticDao));
         server.createContext("/api/character/appearance/equip", new EquipCosmeticHandler(characterDao, characterAppearanceDao, playerCosmeticDao));
         server.createContext("/api/character/appearance", new GetAppearanceHandler(characterAppearanceDao));
         server.createContext("/api/battle/story/levels", new StoryLevelsHandler());
