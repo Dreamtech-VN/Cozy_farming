@@ -34,3 +34,63 @@ public class StoryLevelDef
     public int rewardExp;
     public int rewardGold;
 }
+
+[Serializable]
+public class FloorDefResponse
+{
+    public int enemyHp;
+    public int enemyCounterDamage;
+}
+
+[Serializable]
+public class DungeonDefResponse
+{
+    public int id;
+    public string name;
+    public List<FloorDefResponse> floors;
+    public int rewardExp;
+    public int rewardGold;
+}
+
+[Serializable]
+public class TowerDefResponse
+{
+    public int id;
+    public string name;
+    public int startEnemyHp;
+    public int hpStepPerFloor;
+    public int startCounterDamage;
+    public int counterStepPerFloor;
+    public int maxFloors;
+    public int rewardExpPerFloor;
+    public int rewardGoldPerFloor;
+}
+
+[Serializable]
+public class EventPuzzleDefResponse
+{
+    public int id;
+    public string name;
+    public int enemyHp;
+    public int enemyCounterDamage;
+    public int rewardExp;
+    public int rewardGold;
+    public long startAt;
+    public long endAt;
+}
+
+[Serializable]
+public class ChallengeStatusResponse
+{
+    public string type; // "DAILY", "WEEKLY"
+    public bool available;
+    public long cooldownRemainingMs;
+}
+
+[Serializable]
+public class TowerLeaderboardEntryResponse
+{
+    public int rank;
+    public int userId;
+    public int bestFloor;
+}

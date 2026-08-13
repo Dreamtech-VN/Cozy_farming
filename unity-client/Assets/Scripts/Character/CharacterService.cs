@@ -14,6 +14,17 @@ public static class CharacterService
         }
     }
 
+    public static Task<CharacterResponse> UpdateOutfit(int hairId, int topId, int bottomId)
+    {
+        return ApiClient.PostAsync<CharacterResponse>("/api/character/outfit", new
+        {
+            userId = Session.UserId,
+            hairId,
+            topId,
+            bottomId,
+        });
+    }
+
     public static Task<CharacterResponse> Create(string name, int gender, int hairId, int topId, int bottomId)
     {
         return ApiClient.PostAsync<CharacterResponse>("/api/character/create", new CreateCharacterRequest

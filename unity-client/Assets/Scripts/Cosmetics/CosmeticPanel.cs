@@ -62,6 +62,7 @@ public class CosmeticPanel : MonoBehaviour
         try
         {
             await ShopService.Buy(item.itemId);
+            ProgressionHud.RequestRefresh();
             await Refresh();
         }
         catch (ApiException e)

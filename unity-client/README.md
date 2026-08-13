@@ -50,12 +50,25 @@ Assets/Scripts/
                                              POST /api/shop/cosmetics/buy (giai đoạn 45 phía server)
   Cosmetics/CosmeticPanel.cs              — panel cosmetic kiêm shop: chưa sở hữu -> nút mua kèm giá
                                              (miễn phí nếu giá 0), sở hữu rồi -> nút trang bị
-  Battle/BattleStateView.cs               — model khớp BattleStateView bên server
-  Battle/BattleService.cs                 — start/swap/ultimate/state (đều gửi kèm userId)
+  Battle/BattleStateView.cs               — model khớp BattleStateView + def các mode (dungeon/tower/event...)
+  Battle/BattleService.cs                 — start mọi mode PvE (story/adventure/event-puzzle/dungeon/tower/
+                                             challenge) + swap/ultimate/state (đều gửi kèm userId)
+  Battle/PveModesPanel.cs                 — panel gom các mode PvE ngoài Story, dùng lại màn battle chung
+  Battle/BossModels.cs, BossService.cs    — World Boss / Guild Boss / Guild War: status/attack/report/leaderboard
+  Battle/BossBattlePanel.cs               — đánh trùm rồi TỰ ĐỘNG report khi trận kết thúc (quên report là
+                                             sát thương không được cộng vào HP/điểm chung — server không tự làm)
   Battle/BattleEvents.cs                  — event tĩnh để HUD nghe cập nhật trạng thái trận
   Battle/BattleHud.cs                     — thanh HP/mana + nút chiêu cuối + text trạng thái
   Battle/Engine/BoardRenderer.cs          — vẽ bàn cờ 8x8, bắt click đổi ô
   Battle/Engine/BoardTile.cs              — gắn vào tilePrefab để nhận click (cần Collider2D)
+  Progression/…                           — ví (vàng/kim cương) + level/exp; ProgressionHud tự poll + các
+                                             panel khác gọi ProgressionHud.RequestRefresh() sau khi tiêu/nhận tiền
+  Social/FriendService.cs, FriendsPanel.cs — kết bạn (gửi/nhận lời mời), tặng quà tăng thân mật
+  Social/MarriageService.cs, MarriagePanel.cs — cầu hôn/ly hôn/duo-quest + đấu co-op (tự report như boss)
+  Mail/…                                  — hộp thư: đọc + nhận thưởng, kèm item catalog để hiện tên item
+  Misc/…                                  — giftcode (thưởng gửi qua hộp thư), bảng sự kiện, cài đặt
+                                             (thông báo/quyền riêng tư, server chỉ nhận EVERYONE/NOBODY),
+                                             report hỗ trợ (category server chỉ nhận "bug"/"contact")
   Bootstrap/GameBootstrap.cs              — nối luồng chính: đăng nhập -> tạo nhân vật (nếu chưa có) -> chọn màn -> vào trận
 Packages/manifest.json                    — Newtonsoft Json + package UI/2D cần thiết
 ProjectSettings/ProjectVersion.txt        — ghim bản Unity 2022.3 LTS (đổi nếu bạn dùng bản khác)
@@ -91,9 +104,14 @@ hình riêng để bật lên khi cần, giống Guild/PvP):
   server lúc vào (không hardcode danh sách trong Unity, đúng nguyên tắc
   mục 0/8 tài liệu), cho trang bị vật phẩm đã sở hữu vào đúng ô.
 
-Vậy là đã phủ hết các mục chính của `UNITY_INTEGRATION.md` (0, 2-10) ở
-mức vertical-slice — còn thiếu chủ yếu là UI polish, animation, và art
-thật (xem mục cuối file này).
+Vậy là đã phủ **toàn bộ endpoint không-admin của server** ở mức
+vertical-slice (trừ nhóm auth nâng cao: đăng ký/đăng nhập mật khẩu,
+Google/Apple, đổi/quên mật khẩu, xoá tài khoản — cần UI/OAuth riêng,
+guest login hiện tại đủ chơi mọi tính năng). Các panel mới đều theo cùng
+1 pattern wiring như Guild/PvP: panel độc lập + kéo reference qua
+Inspector; panel nào có đánh trận (PvE modes, Boss, Marriage co-op) thì
+kéo CHUNG bộ battlePanel/boardRenderer/battleHud như PvpPanel. Còn thiếu
+chủ yếu: UI polish, animation, và art thật (xem mục cuối file này).
 
 ## Mở project
 

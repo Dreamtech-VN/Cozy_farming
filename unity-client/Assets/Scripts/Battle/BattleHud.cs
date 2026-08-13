@@ -32,7 +32,10 @@ public class BattleHud : MonoBehaviour
         ultimateButton.interactable = state.mana >= state.manaMax && state.status == "ONGOING";
 
         if (state.status == "WON")
+        {
             statusText.text = $"Thắng! +{state.rewardExp} EXP, +{state.rewardGold} vàng";
+            ProgressionHud.RequestRefresh();
+        }
         else if (state.status == "LOST")
             statusText.text = "Thua trận rồi...";
         else if (state.matched)
