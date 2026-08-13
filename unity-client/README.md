@@ -32,6 +32,8 @@ Assets/Scripts/
   Network/ApiClient.cs, ApiException.cs   — lớp gọi HTTP dùng chung (đúng bản trong UNITY_INTEGRATION.md)
   Auth/Session.cs                         — userId/guestToken/battleId dùng chung cả phiên chơi
   Auth/AuthModels.cs, AuthService.cs      — đăng nhập khách, tự lưu/nạp guestToken qua PlayerPrefs
+  Auth/AccountService.cs, AccountPanel.cs — đăng ký/đăng nhập mật khẩu, nâng cấp guest (giữ dữ liệu chơi),
+                                             đổi/quên mật khẩu, xoá tài khoản; Google/Apple cần SDK OAuth — chưa nối
   Character/CharacterModels.cs, OutfitAssets.cs, CharacterService.cs
                                            — tạo nhân vật (Giai đoạn 3), bảng ánh xạ trang phục tự quy ước
   Character/CharacterCreatePanel.cs       — UI tạo nhân vật, bắn event Created khi xong
@@ -105,9 +107,8 @@ hình riêng để bật lên khi cần, giống Guild/PvP):
   mục 0/8 tài liệu), cho trang bị vật phẩm đã sở hữu vào đúng ô.
 
 Vậy là đã phủ **toàn bộ endpoint không-admin của server** ở mức
-vertical-slice (trừ nhóm auth nâng cao: đăng ký/đăng nhập mật khẩu,
-Google/Apple, đổi/quên mật khẩu, xoá tài khoản — cần UI/OAuth riêng,
-guest login hiện tại đủ chơi mọi tính năng). Các panel mới đều theo cùng
+vertical-slice (trừ đăng nhập Google/Apple — bắt buộc cần SDK OAuth của
+từng nền tảng, không nối "chay" được). Các panel mới đều theo cùng
 1 pattern wiring như Guild/PvP: panel độc lập + kéo reference qua
 Inspector; panel nào có đánh trận (PvE modes, Boss, Marriage co-op) thì
 kéo CHUNG bộ battlePanel/boardRenderer/battleHud như PvpPanel. Còn thiếu
