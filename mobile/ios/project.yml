@@ -1,0 +1,21 @@
+# XcodeGen spec — chạy `xcodegen generate` trong mobile/ios để tạo MyZoo.xcodeproj
+# (cài: brew install xcodegen). Không có XcodeGen thì tạo iOS App project trống
+# trong Xcode rồi kéo thư mục MyZoo/ vào, xem mobile/README.md.
+name: MyZoo
+options:
+  bundleIdPrefix: vn.dreamtech
+  deploymentTarget:
+    iOS: "16.0"
+targets:
+  MyZoo:
+    type: application
+    platform: iOS
+    sources: [MyZoo]
+    info:
+      path: MyZoo/Info.plist
+      properties:
+        UILaunchScreen: {}
+    settings:
+      base:
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        TARGETED_DEVICE_FAMILY: "1,2"

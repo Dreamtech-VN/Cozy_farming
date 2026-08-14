@@ -16,10 +16,82 @@ const state = {
   farm: null,
   zoo: null,
   screen: "farm",
-  selectedCrop: "wheat",
   minigame: null,
 };
 
+// ---------- Sprite atlas ----------
+const sprites = { img: new Image(), atlas: null, ready: false, urls: {}, patterns: {} };
+
+async function loadSprites() {
+  try {
+    const atlas = await (await fetch("assets/sprites.json")).json();
+    await new Promise((ok, err) => {
+      sprites.img.onload = ok;
+      sprites.img.onerror = err;
+      sprites.img.src = "assets/sprites.png";
+    });
+    sprites.atlas = atlas;
+    sprites.ready = true;
+    document.querySelector("#hud .gold").firstChild.replaceWith(iconNode("icon_coin", 16));
+    document.querySelector("#hud .gem").firstChild.replaceWith(iconNode("icon_gem", 16));
+  } catch (e) { /* chạy tiếp bằng emoji */ }
+}
+
+function drawSprite(name, x, y, scale) {
+  if (!sprites.ready || !sprites.atlas[name]) return false;
+  const a = sprites.atlas[name];
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(sprites.img, a.x, a.y, a.w, a.h, x, y, a.w * scale, a.h * scale);
+  return true;
+}
+
+function drawSpriteRect(name, x, y, w, h) {
+  if (!sprites.ready || !sprites.atlas[name]) return false;
+  const a = sprites.atlas[name];
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(sprites.img, a.x, a.y, a.w, a.h, x, y, w, h);
+  return true;
+}
+
+function spriteUrl(name) {
+  if (!sprites.ready || !sprites.atlas[name]) return null;
+  if (sprites.urls[name]) return sprites.urls[name];
+  const a = sprites.atlas[name];
+  const c = document.createElement("canvas");
+  c.width = a.w; c.height = a.h;
+  c.getContext("2d").drawImage(sprites.img, a.x, a.y, a.w, a.h, 0, 0, a.w, a.h);
+  return (sprites.urls[name] = c.toDataURL());
+}
+
+function iconHtml(name, px, fallback) {
+  const url = spriteUrl(name);
+  if (!url) return fallback || "";
+  return `<img src="${url}" style="width:${px}px;height:${px}px;image-rendering:pixelated;vertical-align:middle" alt="">`;
+}
+
+function iconNode(name, px) {
+  const span = document.createElement("span");
+  span.innerHTML = iconHtml(name, px);
+  return span.firstChild || document.createTextNode("");
+}
+
+function cropIcon(id, px) { return iconHtml("crop_" + id, px || 22, CROP_EMOJI[id]); }
+function animalIcon(id, px) { return iconHtml("animal_" + id, px || 26, SPECIES_EMOJI[id]); }
+
+function groundPattern(tile) {
+  if (!sprites.ready) return null;
+  if (sprites.patterns[tile]) return sprites.patterns[tile];
+  const a = sprites.atlas[tile];
+  const c = document.createElement("canvas");
+  const s = 3;
+  c.width = a.w * s; c.height = a.h * s;
+  const cc = c.getContext("2d");
+  cc.imageSmoothingEnabled = false;
+  cc.drawImage(sprites.img, a.x, a.y, a.w, a.h, 0, 0, a.w * s, a.h * s);
+  return (sprites.patterns[tile] = ctx.createPattern(c, "repeat"));
+}
+
+// ---------- Khung ----------
 function fitStage() {
   const stage = document.getElementById("stage");
   const scale = Math.min(window.innerWidth / 960, window.innerHeight / 540);
@@ -96,7 +168,7 @@ async function clickFarm(mx, my) {
 
 function openCropPicker(idx) {
   const rows = state.catalog.crops.map(c =>
-    `<div class="row">${CROP_EMOJI[c.id]} <b>${c.name}</b>
+    `<div class="row">${cropIcon(c.id)} <b>${c.name}</b>
      <span style="margin-left:auto">🪙${c.seedCost} · ${fmtTime(c.growthSeconds)}</span>
      <button onclick="plant(${idx}, '${c.id}')">Trồng</button></div>`).join("");
   panel(`<h3>Chọn cây trồng — ô ${idx + 1}</h3>${rows}`, 300, 60, 340);
@@ -110,48 +182,69 @@ window.plant = async function (idx, cropId) {
   } catch (e) { toast(e.message); }
 };
 
+function drawGround(color, tile) {
+  const pat = groundPattern(tile);
+  ctx.fillStyle = pat || color;
+  ctx.fillRect(0, 280, 960, 260);
+}
+
 function drawFarm() {
-  drawSky("#bde3ff", "#8bc34a");
-  drawChibiFarmer(95, 330);
+  drawSky("#bde3ff");
+  drawGround("#8bc34a", "tile_grass");
+  if (!drawSprite("char_farmer", 55, 300, 6)) drawChibi(95, 330, "#66bb6a", "👒");
+
   ctx.font = "15px sans-serif";
-  ctx.fillStyle = "#2e4d1f";
+  ctx.fillStyle = "#1d3311";
   ctx.fillText("Kho nông sản:", 30, 470);
-  let sx = 30;
   const storage = state.farm ? state.farm.storage : {};
   const keys = Object.keys(storage);
   if (!keys.length) ctx.fillText("(trống)", 140, 470);
+  let sx = 30;
   for (const k of keys) {
-    ctx.font = "20px sans-serif";
-    ctx.fillText(`${CROP_EMOJI[k]}×${storage[k]}`, sx, 500);
-    sx += 74;
+    if (drawSprite("crop_" + k, sx, 478, 2)) {
+      ctx.fillText("×" + storage[k], sx + 34, 500);
+    } else {
+      ctx.font = "20px sans-serif";
+      ctx.fillText(`${CROP_EMOJI[k]}×${storage[k]}`, sx, 500);
+      ctx.font = "15px sans-serif";
+    }
+    sx += 78;
   }
 
   const g = FARM_GRID;
   for (let i = 0; i < 48; i++) {
     const col = i % g.cols, row = Math.floor(i / g.cols);
     const x = g.x + col * g.cw, y = g.y + row * g.ch;
-    ctx.fillStyle = "#8d6e63";
-    roundRect(x + 3, y + 3, g.cw - 6, g.ch - 6, 10);
-    ctx.fillStyle = "#a1887f";
-    roundRect(x + 7, y + 7, g.cw - 14, g.ch - 14, 8);
+    if (!drawSpriteRect("tile_soil", x + 3, y + 3, g.cw - 6, g.ch - 6)) {
+      ctx.fillStyle = "#8d6e63";
+      roundRect(x + 3, y + 3, g.cw - 6, g.ch - 6, 10);
+      ctx.fillStyle = "#a1887f";
+      roundRect(x + 7, y + 7, g.cw - 14, g.ch - 14, 8);
+    }
     const plot = state.farm && state.farm.plots[i];
     if (!plot || plot.state === "EMPTY") continue;
+    const cx = x + g.cw / 2, cy = y + g.ch / 2;
     ctx.textAlign = "center";
     if (plot.state === "READY") {
-      ctx.font = "30px sans-serif";
-      ctx.fillText(CROP_EMOJI[plot.cropId], x + g.cw / 2, y + g.ch / 2 + 10);
-      ctx.font = "12px sans-serif";
+      if (!drawSprite("crop_" + plot.cropId, cx - 24, cy - 27, 3)) {
+        ctx.font = "30px sans-serif";
+        ctx.fillText(CROP_EMOJI[plot.cropId], cx, cy + 10);
+      }
+      ctx.font = "11px sans-serif";
       ctx.fillStyle = "#fff59d";
-      ctx.fillText("✨ Thu hoạch!", x + g.cw / 2, y + g.ch - 12);
+      ctx.fillText("✨ Thu hoạch!", cx, y + g.ch - 6);
     } else {
       const total = plot.readyAt - plot.plantedAt;
       const done = Math.min(1, (Date.now() - plot.plantedAt) / total);
-      ctx.font = done > 0.5 ? "22px sans-serif" : "16px sans-serif";
-      ctx.fillText("🌱", x + g.cw / 2, y + g.ch / 2 + 6);
+      const stage = done < 0.5 ? "sprout" : "plant_mid";
+      if (!drawSprite(stage, cx - 24, cy - 28, 3)) {
+        ctx.font = done > 0.5 ? "22px sans-serif" : "16px sans-serif";
+        ctx.fillText("🌱", cx, cy + 6);
+      }
       ctx.fillStyle = "#33691e";
-      ctx.fillRect(x + 12, y + g.ch - 16, (g.cw - 24) * done, 6);
+      ctx.fillRect(x + 12, y + g.ch - 13, (g.cw - 24) * done, 6);
       ctx.strokeStyle = "#1b5e20";
-      ctx.strokeRect(x + 12, y + g.ch - 16, g.cw - 24, 6);
+      ctx.strokeRect(x + 12, y + g.ch - 13, g.cw - 24, 6);
     }
     ctx.textAlign = "left";
   }
@@ -172,13 +265,14 @@ function habitatCardAt(mx, my) {
 }
 
 function drawZoo() {
-  drawSky("#ffe9c9", "#aed581");
-  drawChibiKeeper(95, 330);
+  drawSky("#ffe9c9");
+  drawGround("#aed581", "tile_grass");
+  if (!drawSprite("char_keeper", 55, 300, 6)) drawChibi(95, 330, "#4fc3f7", "🧢");
   const zoo = state.zoo;
   if (!zoo) return;
 
   ctx.font = "15px sans-serif";
-  ctx.fillStyle = "#2e4d1f";
+  ctx.fillStyle = "#1d3311";
   ctx.fillText(zoo.isOpen ? "🟢 Zoo ĐANG MỞ" : "🔴 Zoo đóng cửa", 30, 452);
   ctx.fillText(`Độ hấp dẫn: ${zoo.totalAppeal} · No: ${Math.round(zoo.foodCoverage * 100)}%`, 30, 474);
   ctx.fillText(`Chờ thu: 🪙${zoo.pendingVang}`, 30, 496);
@@ -192,26 +286,38 @@ function drawZoo() {
     ctx.strokeStyle = "#6d4c41";
     ctx.lineWidth = 3;
     strokeRoundRect(x, y, z.cw, z.ch, 14);
+    for (let f = 0; f < 4; f++) drawSprite("tile_fence", x + 24 + f * 48, y + z.ch - 30, 1.6);
     ctx.fillStyle = "#33422a";
     ctx.font = "bold 14px sans-serif";
     ctx.fillText(`${h.name} (${h.animals.length}/${h.capacity})`, x + 10, y + 20);
     h.animals.forEach((a, j) => {
-      ctx.font = "34px sans-serif";
-      ctx.fillText(SPECIES_EMOJI[a.speciesId], x + 14 + j * 62, y + 70);
-      ctx.font = "14px sans-serif";
-      ctx.fillText(a.fed ? "😋" : "🍽️❗", x + 20 + j * 62, y + 92);
+      const ax = x + 14 + j * 66, ay = y + 30;
+      if (!drawSprite("animal_" + a.speciesId, ax, ay, 3)) {
+        ctx.font = "34px sans-serif";
+        ctx.fillText(SPECIES_EMOJI[a.speciesId], ax, ay + 40);
+      }
+      if (!drawSprite(a.fed ? "icon_heart" : "icon_hungry", ax + 34, ay - 8, 1)) {
+        ctx.font = "14px sans-serif";
+        ctx.fillText(a.fed ? "😋" : "🍽️❗", ax + 6, ay + 62);
+      }
     });
-    ctx.font = "12px sans-serif";
-    ctx.fillStyle = "#555";
-    ctx.fillText("Bấm để quản lý", x + 10, y + z.ch - 10);
   });
 
   const shopY = ZOO_CARDS.y + 2 * (z.ch + z.gap);
   ctx.fillStyle = "#33422a";
   ctx.font = "14px sans-serif";
-  ctx.fillText("Kho Zoo: " + (Object.keys(zoo.warehouse).length
-      ? Object.entries(zoo.warehouse).map(([k, v]) => `${CROP_EMOJI[k]}×${v}`).join("  ")
-      : "(trống)"), z.x, shopY + 26);
+  const entries = Object.entries(zoo.warehouse);
+  ctx.fillText("Kho Zoo:", z.x, shopY + 26);
+  if (!entries.length) ctx.fillText("(trống)", z.x + 70, shopY + 26);
+  let wx = z.x + 76;
+  for (const [k, v] of entries) {
+    if (drawSprite("crop_" + k, wx, shopY + 8, 1.6)) {
+      ctx.fillText("×" + v, wx + 28, shopY + 26);
+    } else {
+      ctx.fillText(`${CROP_EMOJI[k]}×${v}`, wx, shopY + 26);
+    }
+    wx += 66;
+  }
 }
 
 function openZooMenu() {
@@ -224,7 +330,7 @@ function openZooMenu() {
        <button onclick="zooToggle('collect')">Thu tiền 🪙${zoo.pendingVang}</button>`
     : `<button onclick="zooToggle('open')">Mở cửa đón khách</button>`;
   const deliverRows = Object.entries(state.farm.storage).map(([k, v]) =>
-    `<div class="row">${CROP_EMOJI[k]}×${v}<button style="margin-left:auto" onclick="deliver('${k}', ${v})">Chuyển hết sang Zoo</button></div>`).join("")
+    `<div class="row">${cropIcon(k)}×${v}<button style="margin-left:auto" onclick="deliver('${k}', ${v})">Chuyển hết sang Zoo</button></div>`).join("")
     || "<div class='row'>(Kho nông sản trống — trồng trọt rồi quay lại)</div>";
   panel(`<h3>Quản lý sở thú</h3><div class="row">${openBtn}</div>
     <h3 style="margin-top:8px">Xây chuồng</h3>${habitatRows}
@@ -233,7 +339,7 @@ function openZooMenu() {
 
 function openHabitatPanel(h) {
   const speciesRows = state.catalog.species.map(s =>
-    `<div class="row">${SPECIES_EMOJI[s.id]} <b>${s.name}</b> <small>[${s.rarity}] hấp dẫn ${s.appeal}, ăn ${s.diet.map(d => CROP_EMOJI[d]).join("")}</small>
+    `<div class="row">${animalIcon(s.id)} <b>${s.name}</b> <small>[${s.rarity}] hấp dẫn ${s.appeal}, ăn ${s.diet.map(d => cropIcon(d, 16)).join("")}</small>
      <span style="margin-left:auto">🪙${s.cost}</span>
      <button onclick="buyAnimal(${h.id}, '${s.id}')">Mua</button></div>`).join("");
   panel(`<h3>${h.name} (${h.animals.length}/${h.capacity})</h3>
@@ -264,7 +370,13 @@ window.zooToggle = act(action => api("POST", "/v1/zoo/" + action, {}),
   r => r && r.vangEarned !== undefined ? `Thu được 🪙${r.vangEarned} (+${r.zooXp} XP)` : "Zoo đã mở cửa 🎉");
 
 // ---------- Minigame (match-3) ----------
-const M3 = { size: 6, fruits: ["🍎", "🍇", "🍊", "🍋", "🫐"] };
+const M3 = {
+  size: 6,
+  fruits: ["🍎", "🍇", "🍊", "🍋", "🫐"],
+  spriteNames: ["fruit_apple", "fruit_grape", "fruit_orange", "fruit_lemon", "fruit_blueberry"],
+};
+
+function fruitHtml(v) { return iconHtml(M3.spriteNames[v], 34, M3.fruits[v]); }
 
 function mulberry32(a) {
   return function () {
@@ -289,7 +401,7 @@ async function openMinigame() {
 function renderMinigame() {
   const m = state.minigame;
   const cells = m.board.map((v, i) =>
-    `<div class="m3-cell ${m.sel === i ? "sel" : ""}" onclick="m3Click(${i})">${M3.fruits[v]}</div>`).join("");
+    `<div class="m3-cell ${m.sel === i ? "sel" : ""}" onclick="m3Click(${i})">${fruitHtml(v)}</div>`).join("");
   panel(`<h3>Ghép trái cây 🍎 — còn ${m.moves} lượt · ${m.lines} hàng (🪙${m.session.vangPerLine}/hàng)</h3>
     <div id="m3-board">${cells}</div>
     <div class="row"><button onclick="m3Finish()">Kết thúc & nhận thưởng</button></div>`, 330, 46, 320);
@@ -364,7 +476,7 @@ window.m3Finish = async function () {
   } catch (e) { toast(e.message); }
 };
 
-// ---------- Drawing helpers ----------
+// ---------- Vẽ nền & fallback ----------
 function roundRect(x, y, w, h, r) {
   ctx.beginPath();
   ctx.roundRect(x, y, w, h, r);
@@ -376,23 +488,21 @@ function strokeRoundRect(x, y, w, h, r) {
   ctx.stroke();
 }
 
-function drawSky(sky, grass) {
+function drawSky(sky) {
   const grd = ctx.createLinearGradient(0, 0, 0, 300);
   grd.addColorStop(0, sky);
   grd.addColorStop(1, "#fffde7");
   ctx.fillStyle = grd;
   ctx.fillRect(0, 0, 960, 300);
-  ctx.fillStyle = grass;
-  ctx.fillRect(0, 280, 960, 260);
   ctx.font = "36px sans-serif";
   ctx.fillText("☁️", 700, 70);
   ctx.fillText("☀️", 880, 60);
 }
 
-function drawChibi(x, y, skin, shirt, hatEmoji) {
+function drawChibi(x, y, shirt, hatEmoji) {
   ctx.fillStyle = shirt;
   roundRect(x - 22, y + 30, 44, 46, 14);
-  ctx.fillStyle = skin;
+  ctx.fillStyle = "#ffe0b2";
   ctx.beginPath();
   ctx.arc(x, y, 34, 0, Math.PI * 2);
   ctx.fill();
@@ -411,25 +521,13 @@ function drawChibi(x, y, skin, shirt, hatEmoji) {
   ctx.textAlign = "left";
 }
 
-function drawChibiFarmer(x, y) {
-  drawChibi(x, y, "#ffe0b2", "#66bb6a", "👒");
-  ctx.font = "26px sans-serif";
-  ctx.fillText("🌾", x + 40, y + 66);
-}
-
-function drawChibiKeeper(x, y) {
-  drawChibi(x, y, "#ffe0b2", "#4fc3f7", "🧢");
-  ctx.font = "26px sans-serif";
-  ctx.fillText("🥕", x + 40, y + 66);
-}
-
 function fmtTime(sec) {
   if (sec >= 3600) return Math.floor(sec / 3600) + "h" + Math.floor((sec % 3600) / 60) + "p";
   if (sec >= 60) return Math.floor(sec / 60) + "p" + (sec % 60) + "s";
   return sec + "s";
 }
 
-// ---------- Input & loop ----------
+// ---------- Input & vòng lặp ----------
 canvas.addEventListener("click", e => {
   const rect = canvas.getBoundingClientRect();
   const mx = (e.clientX - rect.left) * (960 / rect.width);
@@ -460,11 +558,12 @@ function loop() {
 }
 
 async function boot() {
+  const spritesLoading = loadSprites();
   const login = await api("POST", "/v1/auth/guest", { guestToken: state.token });
   state.token = login.guestToken;
   localStorage.setItem("myzoo_token", state.token);
   state.catalog = await api("GET", "/v1/catalog");
-  await Promise.all([refreshMe(), refreshFarm(), refreshZoo()]);
+  await Promise.all([refreshMe(), refreshFarm(), refreshZoo(), spritesLoading]);
   if (!state.me.name) {
     const name = prompt("Đặt tên nông trại của bạn (2-20 ký tự):", "");
     if (name && name.trim().length >= 2) {

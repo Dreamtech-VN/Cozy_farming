@@ -11,7 +11,9 @@ Vòng lặp cốt lõi: **Trồng trọt → Thu hoạch thức ăn → Chuyển
   - Idempotency key: retry cùng `requestId` trả đúng response cũ, không chạy lại giao dịch.
   - Thời gian đánh giá lười (lazy): cây chín theo `ready_at`, doanh thu zoo tích lũy khi mở cửa (trần 8h), thú "no" trong 4h sau khi ăn.
 - **DB**: H2 file (mặc định, không cần cài gì) hoặc MySQL qua biến môi trường `DB_URL`, `DB_USER`, `DB_PASSWORD`. Schema tự tạo khi khởi động.
-- **Client**: HTML5 Canvas thuần (không cần build), 960×540 landscape, chibi vẽ bằng code + emoji, do chính server phục vụ.
+- **Client web**: HTML5 Canvas thuần (không cần build), 960×540 landscape, do chính server phục vụ.
+- **Asset 2D**: sprite pixel-art chibi **gốc của dự án** (không dùng asset bên thứ ba), sinh từ `tools/gen_sprites.py` ra `client/assets/sprites.png` + atlas JSON. Muốn sửa/thêm sprite: sửa lưới ký tự trong script rồi chạy lại `python3 tools/gen_sprites.py`.
+- **Client Android/iOS** (`mobile/`): app native mỏng bọc client HTML5 trong WebView, khoá màn hình ngang — xem `mobile/README.md`.
 
 ## Chạy game
 
