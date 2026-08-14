@@ -37,7 +37,7 @@ class FarmServiceTest {
     @Test
     void plantOnOccupiedPlotRejected() {
         farm.plant(playerId, 3, "wheat");
-        assertEquals(409, assertThrows(ApiException.class, () -> farm.plant(playerId, 3, "corn")).status());
+        assertEquals(409, assertThrows(ApiException.class, () -> farm.plant(playerId, 3, "carrot")).status());
     }
 
     @Test
@@ -69,6 +69,25 @@ class FarmServiceTest {
     @Test
     void harvestEmptyPlotRejected() {
         assertEquals(409, assertThrows(ApiException.class, () -> farm.harvest(playerId, 5)).status());
+    }
+
+    @Test
+    void sellPaysPerUnitAndChecksStock() {
+        farm.plant(playerId, 0, "wheat");
+        time.advance(60_000);
+        int harvested = farm.harvest(playerId, 0).yield();
+        var result = farm.sell(playerId, "wheat", harvested);
+        assertEquals(55L * harvested, result.vangEarned());
+        assertNull(farm.storage(playerId).get("wheat"));
+        assertEquals(409, assertThrows(ApiException.class, () -> farm.sell(playerId, "wheat", 1)).status());
+        assertEquals(400, assertThrows(ApiException.class, () -> farm.sell(playerId, "wheat", 0)).status());
+    }
+
+    @Test
+    void plantGatedByFarmLevel() {
+        assertEquals(403, assertThrows(ApiException.class, () -> farm.plant(playerId, 0, "bamboo")).status());
+        players.addFarmXp(playerId, 2000);
+        farm.plant(playerId, 0, "bamboo");
     }
 
     @Test

@@ -109,6 +109,24 @@ public final class SchemaInit {
                   reward BIGINT
                 )
                 """,
+                """
+                CREATE TABLE IF NOT EXISTS mission_progress (
+                  player_id INT NOT NULL,
+                  mission_id VARCHAR(30) NOT NULL,
+                  day_key VARCHAR(10) NOT NULL,
+                  progress INT NOT NULL DEFAULT 0,
+                  claimed BOOLEAN NOT NULL DEFAULT FALSE,
+                  PRIMARY KEY (player_id, mission_id, day_key)
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS daily_checkin (
+                  player_id INT NOT NULL,
+                  day_key VARCHAR(10) NOT NULL,
+                  streak INT NOT NULL,
+                  PRIMARY KEY (player_id, day_key)
+                )
+                """,
         };
         try (Connection c = dataSource.getConnection(); Statement st = c.createStatement()) {
             for (String sql : ddl) {

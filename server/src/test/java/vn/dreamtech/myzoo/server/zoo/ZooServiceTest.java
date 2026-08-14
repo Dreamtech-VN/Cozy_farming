@@ -28,6 +28,8 @@ class ZooServiceTest {
         zoo = new ZooService(db, economy, farm, players, time);
         playerId = players.guestLogin(null).playerId();
         economy.earn(playerId, EconomyService.VANG, 10_000, "TEST", "t", "0");
+        players.addZooXp(playerId, 2000);
+        players.addFarmXp(playerId, 2000);
     }
 
     int buildRabbitHabitat() {
@@ -79,6 +81,16 @@ class ZooServiceTest {
         assertEquals(1, result.animalsFed());
         assertTrue(zoo.view(playerId).habitats().get(0).animals().get(0).fed());
         assertEquals(409, assertThrows(ApiException.class, () -> zoo.feed(playerId, habitatId)).status());
+    }
+
+    @Test
+    void purchasesGatedByZooLevel() {
+        int fresh = players.guestLogin(null).playerId();
+        economy.earn(fresh, EconomyService.VANG, 50_000, "TEST", "t", "2");
+        assertEquals(403, assertThrows(ApiException.class, () -> zoo.buyHabitat(fresh, "grove")).status());
+        int habitatId = zoo.buyHabitat(fresh, "meadow").id();
+        assertEquals(403, assertThrows(ApiException.class, () -> zoo.buyAnimal(fresh, habitatId, "panda")).status());
+        zoo.buyAnimal(fresh, habitatId, "rabbit");
     }
 
     @Test

@@ -86,6 +86,9 @@ public final class ZooService {
         players.requirePlayer(playerId);
         Catalog.HabitatTypeDef type = Catalog.habitatType(typeId)
                 .orElseThrow(() -> new ApiException(404, "Không có loại chuồng này"));
+        if (players.profile(playerId).zooLevel() < type.minZooLevel()) {
+            throw new ApiException(403, "Cần Sở thú level " + type.minZooLevel() + " để xây " + type.name());
+        }
         long balance = economy.spend(playerId, EconomyService.VANG, type.cost(), "BUILD_HABITAT", "habitat", typeId);
         try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
                 "INSERT INTO habitats (player_id, type_id) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
@@ -105,6 +108,9 @@ public final class ZooService {
         players.requirePlayer(playerId);
         Catalog.SpeciesDef species = Catalog.species(speciesId)
                 .orElseThrow(() -> new ApiException(404, "Không có loài này"));
+        if (players.profile(playerId).zooLevel() < species.minZooLevel()) {
+            throw new ApiException(403, "Cần Sở thú level " + species.minZooLevel() + " để mua " + species.name());
+        }
         HabitatRow habitat = habitatRow(playerId, habitatId);
         Catalog.HabitatTypeDef type = Catalog.habitatType(habitat.typeId).orElseThrow();
         if (countAnimals(habitatId) >= type.capacity()) {

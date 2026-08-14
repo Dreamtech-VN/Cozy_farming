@@ -10,6 +10,7 @@ import vn.dreamtech.myzoo.server.http.Idempotency;
 import vn.dreamtech.myzoo.server.http.JsonHttp;
 import vn.dreamtech.myzoo.server.http.StaticFileHandler;
 import vn.dreamtech.myzoo.server.minigame.MinigameService;
+import vn.dreamtech.myzoo.server.mission.MissionService;
 import vn.dreamtech.myzoo.server.player.PlayerService;
 import vn.dreamtech.myzoo.server.time.TimeSource;
 import vn.dreamtech.myzoo.server.zoo.ZooService;
@@ -33,10 +34,11 @@ public final class Main {
         FarmService farm = new FarmService(dataSource, economy, players, time);
         ZooService zoo = new ZooService(dataSource, economy, farm, players, time);
         MinigameService minigames = new MinigameService(dataSource, economy, players, time);
+        MissionService missions = new MissionService(dataSource, economy, players, time);
         Idempotency idempotency = new Idempotency(dataSource, time);
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/v1", new ApiRouter(players, farm, zoo, minigames, idempotency));
+        server.createContext("/v1", new ApiRouter(players, farm, zoo, minigames, missions, idempotency));
         server.createContext("/health", ex -> JsonHttp.write(ex, 200, Map.of("status", "ok")));
 
         Path clientDir = Path.of(System.getenv().getOrDefault("CLIENT_DIR", "client"));

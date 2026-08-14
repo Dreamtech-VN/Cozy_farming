@@ -35,7 +35,8 @@ public final class MinigameService {
     public record Session(String sessionId, long seed, int movesAllowed, int maxLines, long vangPerLine) {
     }
 
-    public record FinishResult(String sessionId, int linesCounted, long vangReward, long vangBalance) {
+    public record FinishResult(String sessionId, int linesCounted, long vangReward, long vangBalance,
+                               boolean newlyFinished) {
     }
 
     public Session create(int playerId) {
@@ -64,7 +65,7 @@ public final class MinigameService {
         if (row == null || row.playerId != playerId) throw new ApiException(404, "Không tìm thấy phiên minigame");
         if (row.finished) {
             return new FinishResult(sessionId, row.linesMade, row.reward,
-                    economy.balances(playerId).get(EconomyService.VANG));
+                    economy.balances(playerId).get(EconomyService.VANG), false);
         }
         int counted = Math.min(linesMade, row.maxLines);
         long reward = counted * VANG_PER_LINE;
@@ -76,7 +77,7 @@ public final class MinigameService {
             if (ps.executeUpdate() == 0) {
                 SessionRow done = find(sessionId);
                 return new FinishResult(sessionId, done.linesMade, done.reward,
-                        economy.balances(playerId).get(EconomyService.VANG));
+                        economy.balances(playerId).get(EconomyService.VANG), false);
             }
         } catch (SQLException e) {
             throw new ApiException(500, "Lỗi kết thúc minigame: " + e.getMessage());
@@ -84,7 +85,7 @@ public final class MinigameService {
         long balance = reward > 0
                 ? economy.earn(playerId, EconomyService.VANG, reward, "MINIGAME", "session", sessionId)
                 : economy.balances(playerId).get(EconomyService.VANG);
-        return new FinishResult(sessionId, counted, reward, balance);
+        return new FinishResult(sessionId, counted, reward, balance, true);
     }
 
     private record SessionRow(int playerId, int maxLines, boolean finished, int linesMade, long reward) {

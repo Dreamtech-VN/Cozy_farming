@@ -46,6 +46,9 @@ public final class FarmService {
     public record HarvestResult(int plotIndex, String cropId, int yield, int xp) {
     }
 
+    public record SellResult(String foodId, int quantity, long vangEarned, long vangBalance) {
+    }
+
     public FarmView view(int playerId) {
         players.requirePlayer(playerId);
         long now = time.now();
@@ -79,6 +82,9 @@ public final class FarmService {
         if (plotIndex < 0 || plotIndex >= PLOT_COUNT) throw new ApiException(400, "Ô đất không hợp lệ");
         Catalog.CropDef crop = Catalog.crop(cropId)
                 .orElseThrow(() -> new ApiException(404, "Không có loại cây này"));
+        if (players.profile(playerId).farmLevel() < crop.minFarmLevel()) {
+            throw new ApiException(403, "Cần Nông trại level " + crop.minFarmLevel() + " để trồng " + crop.name());
+        }
         if (findCrop(playerId, plotIndex) != null) throw new ApiException(409, "Ô đất đang có cây");
 
         long balance = economy.spend(playerId, EconomyService.VANG, crop.seedCost(), "SEED", "plot", cropId);
@@ -133,6 +139,21 @@ public final class FarmService {
         }
         players.addFarmXp(playerId, crop.xp());
         return new HarvestResult(plotIndex, row.cropId, yield, crop.xp());
+    }
+
+    public SellResult sell(int playerId, String foodId, int quantity) {
+        players.requirePlayer(playerId);
+        if (quantity <= 0) throw new ApiException(400, "Số lượng phải > 0");
+        Catalog.CropDef crop = Catalog.crop(foodId)
+                .orElseThrow(() -> new ApiException(404, "Không có loại nông sản này"));
+        try (Connection c = dataSource.getConnection()) {
+            addToInventory(c, "farm_inventory", playerId, foodId, -quantity);
+        } catch (SQLException e) {
+            throw new ApiException(500, "Lỗi bán nông sản: " + e.getMessage());
+        }
+        long earned = crop.sellPrice() * quantity;
+        long balance = economy.earn(playerId, EconomyService.VANG, earned, "SELL_PRODUCE", "food", foodId);
+        return new SellResult(foodId, quantity, earned, balance);
     }
 
     public Map<String, Integer> storage(int playerId) {
