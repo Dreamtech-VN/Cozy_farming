@@ -234,7 +234,39 @@ namespace MyZoo
 
 ## 1.2. `Api.cs` — lớp gọi server
 
-Tạo GameObject rỗng tên **`App`** ở gốc scene, gắn script này vào. Nhớ bật **Don't Destroy On Load** không cần thiết vì chỉ có 1 scene.
+File **duy nhất** nói chuyện với server. Mọi screen về sau chỉ gọi `Api.I.Plant(...)`, không tự viết code mạng.
+
+**Làm theo 4 bước:**
+
+1. Cửa sổ **Project** → chuột phải `Assets/Scripts` → **Create → C# Script** → đặt tên chính xác là `Api`. *(Tên file phải trùng tên class, sai là lỗi biên dịch ngay.)*
+2. Double-click file → **xoá sạch** nội dung mẫu → dán code dưới đây → Ctrl+S. Quay lại Unity, đợi nó biên dịch xong (vòng xoay nhỏ góc phải dưới).
+3. Cửa sổ **Hierarchy** → chuột phải vùng trống → **Create Empty** → đổi tên thành `App`. *(Script kiểu MonoBehaviour phải nằm trên một GameObject mới chạy được.)*
+4. Chọn `App` → kéo file `Api.cs` thả vào **Inspector** (hoặc **Add Component** → gõ "Api"). Inspector sẽ hiện ô **Base Url** — đây là chỗ đổi địa chỉ khi lên VPS, **không cần sửa code**.
+
+**Giải thích mấy chỗ hay thắc mắc trong code:**
+
+| Trong code | Nghĩa là gì |
+|---|---|
+| `public static Api I` + `Awake() => I = this` | Singleton — nhờ nó mọi script gọi được `Api.I.Xxx()` mà không phải kéo thả tham chiếu |
+| `IEnumerator` + `yield return` | Coroutine: chờ mạng trả lời mà không làm đơ game. Bên gọi luôn viết `StartCoroutine(Api.I.GetMe(...))` |
+| 2 tham số `ok` và `fail` | Thành công chạy `ok`, lỗi chạy `fail`. Thường truyền `Toast.Show` cho `fail` là đủ — server đã trả thông báo tiếng Việt |
+| `ApplyHeaders` và `NewId()` | Tự gắn token và tự sinh `requestId`, nên **từng screen không phải nhớ 2 quy ước đó nữa** |
+
+**Kiểm tra bước này chạy đúng** (chưa cần dựng UI): tạo thêm `TestApi.cs`, gắn vào cùng GameObject `App`:
+
+```csharp
+using UnityEngine;
+using MyZoo;
+
+public class TestApi : MonoBehaviour
+{
+    void Start() => StartCoroutine(Api.I.GetConfig(
+        c => Debug.Log("Server OK, phiên bản " + c.gameVersion),
+        e => Debug.LogError("Lỗi: " + e)));
+}
+```
+
+Bật server rồi bấm **Play** — Console hiện `Server OK, phiên bản 0.1.0` là xong. Xoá script test rồi làm tiếp 1.3.
 
 ```csharp
 using System;
@@ -393,7 +425,9 @@ namespace MyZoo
 
 ## 1.3. `App.cs` — trạng thái dùng chung
 
-Gắn cùng GameObject `App`.
+Nơi giữ dữ liệu đang chơi (hồ sơ, nông trại, sở thú, nhiệm vụ) để các screen dùng chung, khỏi gọi API lại.
+
+Tạo file `App.cs` như bước 1.2 rồi **Add Component vào đúng GameObject `App`** (cùng chỗ với `Api`).
 
 ```csharp
 using System.Collections.Generic;
@@ -434,7 +468,9 @@ namespace MyZoo
 
 ## 1.4. `ScreenManager.cs` + `Toast.cs`
 
-Gắn `ScreenManager` vào `App`, kéo từng screen GameObject vào mảng `screens` trong Inspector.
+`ScreenManager` lo bật/tắt screen; `Toast` hiện thông báo ngắn ở đáy màn.
+
+Tạo `ScreenManager.cs` → Add Component vào GameObject `App` → trong Inspector, ô **Screens** gõ Size = số screen rồi kéo từng GameObject S01…S40 vào; ô **Hud** kéo GameObject `HUD` vào. *(Làm bước này sau khi đã tạo đủ screen ở mục 0.5 — chưa có thì để trống, quay lại kéo sau.)*
 
 ```csharp
 using UnityEngine;
