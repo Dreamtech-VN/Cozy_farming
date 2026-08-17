@@ -76,6 +76,7 @@ public static class SceneBuilder
         BuildWallet(screens.transform, prefabs);
         BuildSettings(screens.transform, prefabs);
         BuildGacha(screens.transform, prefabs);
+        BuildBarn(screens.transform, prefabs);
 
         var app = new GameObject("App", typeof(Api), typeof(App), typeof(ScreenManager));
         var manager = app.GetComponent<ScreenManager>();
@@ -669,6 +670,11 @@ public static class SceneBuilder
         comp.plotPrefab = prefabs.plotCell;
         comp.rowPrefab = prefabs.row;
         comp.closePickerButton = closePicker.GetComponent<Button>();
+
+        var barn = Button("BarnButton", screen.transform, new Color(0.85f, 0.72f, 0.50f), 160, 40);
+        Center(barn, 380, 150);
+        Stretch(Text("Label", barn.transform, "CHUỒNG TRẠI", 14, Dark, TextAnchor.MiddleCenter));
+        comp.barnButton = barn.GetComponent<Button>();
     }
 
     static void BuildZoo(Transform parent, Prefabs prefabs)
@@ -740,11 +746,76 @@ public static class SceneBuilder
 
     static void BuildMissions(Transform parent, Prefabs prefabs)
     {
-        var screen = Screen("S30_Missions", parent, "Nhiệm vụ hôm nay");
-        var list = ScrollList("MissionList", screen.transform, 620, 350, 0, -20);
+        var screen = Screen("S30_Missions", parent, "Nhiệm vụ");
+
+        var daily = Button("DailyTabButton", screen.transform, Primary, 150, 34);
+        Center(daily, -160, 150);
+        Stretch(Text("Label", daily.transform, "Hằng ngày", 14, Dark, TextAnchor.MiddleCenter));
+        var weekly = Button("WeeklyTabButton", screen.transform, new Color(0.55f, 0.72f, 0.95f), 150, 34);
+        Center(weekly, 0, 150);
+        Stretch(Text("Label", weekly.transform, "Hằng tuần", 14, Dark, TextAnchor.MiddleCenter));
+        var events = Button("EventTabButton", screen.transform, new Color(0.95f, 0.75f, 0.85f), 150, 34);
+        Center(events, 160, 150);
+        Stretch(Text("Label", events.transform, "Sự kiện", 14, Dark, TextAnchor.MiddleCenter));
+
+        var list = ScrollList("MissionList", screen.transform, 620, 320, 0, -40);
+        var empty = Text("EmptyText", screen.transform, "", 15, new Color(1, 1, 1, 0.6f), TextAnchor.MiddleCenter);
+        Center(empty, 0, -40); Size(empty, 500, 24);
+        empty.SetActive(false);
+
         var comp = screen.AddComponent<MissionsScreen>();
         comp.content = list;
         comp.rowPrefab = prefabs.row;
+        comp.dailyTabButton = daily.GetComponent<Button>();
+        comp.weeklyTabButton = weekly.GetComponent<Button>();
+        comp.eventTabButton = events.GetComponent<Button>();
+        comp.emptyText = empty.GetComponent<Text>();
+    }
+
+    static void BuildBarn(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S12_Barn", parent, "Chuồng trại");
+
+        var slot = Text("SlotText", screen.transform, "", 15, Color.white, TextAnchor.MiddleLeft);
+        Center(slot, -280, 150); Size(slot, 260, 24);
+        var storage = Text("StorageText", screen.transform, "", 13, new Color(1, 1, 1, 0.8f), TextAnchor.MiddleLeft);
+        Center(storage, 40, 150); Size(storage, 560, 22);
+
+        var list = ScrollList("AnimalList", screen.transform, 700, 300, 0, -20);
+        var empty = Text("EmptyText", screen.transform, "Chưa có con nào — bấm Mua vật nuôi", 15,
+                new Color(1, 1, 1, 0.6f), TextAnchor.MiddleCenter);
+        Center(empty, 0, -20); Size(empty, 500, 24);
+        empty.SetActive(false);
+
+        var feed = Button("FeedButton", screen.transform, Primary, 200, 44);
+        Center(feed, -120, -195);
+        Stretch(Text("Label", feed.transform, "CHO ĂN TẤT CẢ", 15, Dark, TextAnchor.MiddleCenter));
+        var openBuy = Button("OpenBuyButton", screen.transform, new Color(0.98f, 0.80f, 0.30f), 200, 44);
+        Center(openBuy, 120, -195);
+        Stretch(Text("Label", openBuy.transform, "MUA VẬT NUÔI", 15, Dark, TextAnchor.MiddleCenter));
+
+        var buyPanel = Image("BuyPanel", screen.transform, new Color(0.12f, 0.16f, 0.13f, 0.97f), 760, 380);
+        Center(buyPanel, 0, 0);
+        var buyTitle = Text("BuyTitle", buyPanel.transform, "Chọn vật nuôi", 17, Color.white, TextAnchor.MiddleCenter);
+        Center(buyTitle, 0, 166); Size(buyTitle, 400, 24);
+        var buyList = ScrollList("BuyList", buyPanel.transform, 730, 280, 0, 0);
+        var closeBuy = Button("CloseBuyButton", buyPanel.transform, Primary, 160, 36);
+        Center(closeBuy, 0, -156);
+        Stretch(Text("Label", closeBuy.transform, "Đóng", 14, Dark, TextAnchor.MiddleCenter));
+        buyPanel.SetActive(false);
+
+        var comp = screen.AddComponent<BarnScreen>();
+        comp.slotText = slot.GetComponent<Text>();
+        comp.storageText = storage.GetComponent<Text>();
+        comp.emptyText = empty.GetComponent<Text>();
+        comp.animalContent = list;
+        comp.buyContent = buyList;
+        comp.rowPrefab = prefabs.chatRow;
+        comp.buyPanel = buyPanel;
+        comp.feedButton = feed.GetComponent<Button>();
+        comp.openBuyButton = openBuy.GetComponent<Button>();
+        comp.closeBuyButton = closeBuy.GetComponent<Button>();
+        comp.backButton = CloseButton(screen.transform);
     }
 
     static void BuildMinigame(Transform parent, Prefabs prefabs)

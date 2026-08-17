@@ -276,6 +276,31 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `POST /v1/processing/collect` | `slotId` | 409 chưa xong, 404 đã thu |
 | `POST /v1/zoo/decors` | `habitatId, decorId` | trang trí chuồng; 409 đã có món đó, 403 thiếu Zoo level |
 
+**Chăn nuôi** (spec §6.4):
+
+| Method & path | Body | Ghi chú |
+|---|---|---|
+| `GET /v1/livestock` | — | `{animals[], maxAnimals, storage[]}`. Trạng thái mỗi con: `HUNGRY` → `GROWING` → `READY` |
+| `POST /v1/livestock/buy` | `speciesId` | Trừ Vàng; 403 thiếu Farm level, 409 chuồng đầy (tối đa 8 con) |
+| `POST /v1/livestock/feed` | — | Cho ăn **mọi con đang đói mà kho đủ thức ăn**; 409 nếu không có con nào ăn được |
+| `POST /v1/livestock/collect` | `animalId` | 409 chưa tới giờ hoặc đã thu, 404 không phải con của mình |
+
+5 loài: gà (lúa mì → trứng), vịt (ngô → trứng vịt), dê (cỏ → sữa dê), bò (cỏ → sữa bò),
+heo (khoai tây → nấm cục). Spec liệt kê cừu nhưng cừu đã là thú sở thú nên đổi sang dê.
+
+Thời gian tính lười theo `next_product_at`, **không có tiến trình nền nào chạy** — tắt game một
+tuần rồi vào vẫn nhận đúng một lứa, không dồn vô hạn. Sản phẩm vào thẳng kho nông trại và nối vào
+chế biến để khép vòng theo spec §6.5: Sữa → Phô mai, Trứng → Bánh kem.
+
+**Nhiệm vụ** (spec §11): định nghĩa nằm trong bảng `mission_defs`, **không phải hằng số Java**.
+Mỗi dòng có `scope` (`DAILY` / `WEEKLY` / `EVENT`), `event_id`, `active_from`, `active_to`.
+Tiến độ dùng chung cột `day_key` với ý nghĩa khác nhau theo scope: ngày cho `DAILY`, tuần ISO
+(`2026-W33`) cho `WEEKLY`, mã sự kiện cho `EVENT`. Bật/tắt sự kiện = sửa `active_from`/`active_to`
+trong DB, không cần cập nhật client.
+
+Nhiệm vụ tuần `w_help_10` là **nguồn Kim Cương miễn phí duy nhất ngoài nạp** — 25 KC/tuần,
+khoảng 1 lượt quay gacha mỗi tháng. Đổi con số này trong DB nếu thấy nhanh hoặc chậm quá.
+
 **Gacha & ngoại hình** (spec §27.8–27.10):
 
 | Method & path | Body / query | Ghi chú |

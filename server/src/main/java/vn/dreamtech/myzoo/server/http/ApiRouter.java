@@ -9,6 +9,7 @@ import vn.dreamtech.myzoo.server.chat.ChatService;
 import vn.dreamtech.myzoo.server.config.GameConfig;
 import vn.dreamtech.myzoo.server.economy.EconomyService;
 import vn.dreamtech.myzoo.server.farm.FarmService;
+import vn.dreamtech.myzoo.server.farm.LivestockService;
 import vn.dreamtech.myzoo.server.gacha.CosmeticService;
 import vn.dreamtech.myzoo.server.gacha.GachaService;
 import vn.dreamtech.myzoo.server.minigame.MinigameService;
@@ -41,6 +42,7 @@ public final class ApiRouter implements HttpHandler {
     private final ProcessingService processing;
     private final ChatService chat;
     private final EconomyService economy;
+    private final LivestockService livestock;
     private final GachaService gacha;
     private final CosmeticService cosmetics;
     private final Idempotency idempotency;
@@ -51,8 +53,9 @@ public final class ApiRouter implements HttpHandler {
                      MissionService missions, AccountService accounts, SocialService social, MailService mail,
                      GiftcodeService giftcodes, AchievementService achievements, ShopService shop,
                      ProcessingService processing, ChatService chat, EconomyService economy,
-                     GachaService gacha, CosmeticService cosmetics,
+                     GachaService gacha, CosmeticService cosmetics, LivestockService livestock,
                      Idempotency idempotency, RateLimiter limiter) {
+        this.livestock = livestock;
         this.gacha = gacha;
         this.cosmetics = cosmetics;
         this.limiter = limiter;
@@ -125,6 +128,7 @@ public final class ApiRouter implements HttpHandler {
         String bannerId;
         Integer count;
         String cosmeticId;
+        Long animalId;
     }
 
     @Override
@@ -224,8 +228,31 @@ public final class ApiRouter implements HttpHandler {
                     "decors", Catalog.DECORS,
                     "recipes", ProcessingService.RECIPES,
                     "games", MinigameService.GAMES,
+                    "livestock", Catalog.LIVESTOCK,
                     "plotCount", FarmService.PLOT_COUNT));
             case "GET /v1/me" -> JsonHttp.write(ex, 200, players.profile(auth(ex)));
+            case "GET /v1/livestock" -> JsonHttp.write(ex, 200, livestock.view(auth(ex)));
+            case "POST /v1/livestock/buy" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.speciesId != null, "Cần speciesId");
+                mutate(ex, b, playerId, () -> livestock.buy(playerId, b.speciesId));
+            }
+            case "POST /v1/livestock/feed" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                mutate(ex, b, playerId, () -> livestock.feedAll(playerId));
+            }
+            case "POST /v1/livestock/collect" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.animalId != null, "Cần animalId");
+                mutate(ex, b, playerId, () -> {
+                    var r = livestock.collect(playerId, b.animalId);
+                    track(playerId, "LIVESTOCK", r.quantity());
+                    return r;
+                });
+            }
             case "GET /v1/gacha/banners" -> {
                 auth(ex);
                 JsonHttp.write(ex, 200, Map.of("banners", gacha.banners()));

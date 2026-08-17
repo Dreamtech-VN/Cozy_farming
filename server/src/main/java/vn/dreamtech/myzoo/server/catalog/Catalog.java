@@ -56,7 +56,31 @@ public final class Catalog {
             new ProductDef("flour", "Bột mì", 220),
             new ProductDef("bread", "Bánh mì", 560),
             new ProductDef("carrot_cake", "Bánh cà rốt", 320),
-            new ProductDef("berry_jam", "Mứt dâu", 360));
+            new ProductDef("berry_jam", "Mứt dâu", 360),
+            new ProductDef("egg", "Trứng gà", 45),
+            new ProductDef("duck_egg", "Trứng vịt", 55),
+            new ProductDef("milk", "Sữa bò", 90),
+            new ProductDef("goat_milk", "Sữa dê", 110),
+            new ProductDef("truffle", "Nấm cục", 150),
+            new ProductDef("cheese", "Phô mai", 380),
+            new ProductDef("cake", "Bánh kem", 520));
+
+    // Vật nuôi: ăn nông sản rồi sinh sản phẩm sau một khoảng thời gian.
+    // Không trùng loài với sở thú (spec liệt kê cừu nhưng cừu đã là thú sở thú, nên đổi sang dê).
+    public record LivestockDef(String id, String name, long cost, String foodId, int foodQty,
+                               String productId, int productQty, int productSeconds, int minFarmLevel) {
+    }
+
+    public static final List<LivestockDef> LIVESTOCK = List.of(
+            new LivestockDef("chicken", "Gà", 600, "wheat", 1, "egg", 2, 300, 1),
+            new LivestockDef("duck", "Vịt", 800, "corn", 1, "duck_egg", 2, 420, 2),
+            new LivestockDef("goat", "Dê", 1600, "grass", 2, "goat_milk", 1, 600, 3),
+            new LivestockDef("cow", "Bò", 2400, "grass", 3, "milk", 2, 900, 4),
+            new LivestockDef("pig", "Heo", 3200, "potato", 2, "truffle", 1, 1200, 5));
+
+    public static Optional<LivestockDef> livestock(String id) {
+        return LIVESTOCK.stream().filter(l -> l.id().equals(id)).findFirst();
+    }
 
     // Trang trí chuồng: cộng thẳng vào độ hấp dẫn khi chuồng có thú đã được cho ăn.
     public record DecorDef(String id, String name, long cost, int appealBonus, int minZooLevel) {

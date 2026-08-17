@@ -41,6 +41,7 @@ Mọi thứ hiện là hình vuông màu. Bỏ sprite của bạn vào `Assets/S
 | GameObject **S07_CharacterCreate** → script `CharacterCreateScreen` | mảng **Looks** | Mỗi phần tử: `id` (chuỗi server lưu) + `sprite`. Thêm bao nhiêu ngoại hình cũng được, server không cần biết |
 | GameObject **S37_Chat** → script `ChatScreen` | danh sách **Sticker Art** | Mỗi phần tử: `id` + `sprite`. `id` phải trùng danh mục server trả về ở `/v1/chat/catalog`: sticker `hi`, `happy`, `cry`, `angry`, `thanks`, `gg`, `help`, `love`; GIF `rabbit_dance`, `panda_roll`, `harvest`, `fireworks`. Không gán thì hiện tên chữ |
 | `Assets/Prefabs/ChatRow.prefab`, `PickerCell.prefab` | Image **Icon**, Image nền | Dòng tin nhắn và ô chọn sticker/GIF |
+| GameObject **S12_Barn** → script `BarnScreen` | danh sách **Livestock Art** | Mỗi phần tử: `id` + `sprite`, khớp id vật nuôi: `chicken`, `duck`, `goat`, `cow`, `pig` |
 | GameObject **S45_Gacha** → script `GachaScreen` | danh sách **Cosmetic Art** | Mỗi phần tử: `id` + `sprite`, khớp id trong `CosmeticCatalog.java`: `av_*` là ngoại hình nhân vật, `skin_*` là trang trí sở thú. Không gán thì hiện tên chữ |
 | `Assets/Prefabs/HabitatCard.prefab`, `ServerCard.prefab`, `Row.prefab` | Image nền | Đổi khung viền, màu nền |
 | **S01_Splash**, các screen | Image **Bg**, **Logo** | Nền từng màn |
@@ -63,7 +64,8 @@ Canvas
 │   ├── S30_Shop · S32_Inventory
 │   ├── S34_Processing · S41_Memory
 │   ├── S37_Chat
-│   └── S38_Wallet · S39_Settings · S45_Gacha
+│   ├── S38_Wallet · S39_Settings · S45_Gacha
+│   └── S12_Barn
 ├── HUD          (tên, Vàng, KC, level, nút về sảnh)
 └── Toast        (thông báo đáy màn)
 App              (Api + App + ScreenManager)

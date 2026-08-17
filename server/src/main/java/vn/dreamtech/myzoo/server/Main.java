@@ -9,6 +9,7 @@ import vn.dreamtech.myzoo.server.economy.EconomyService;
 import vn.dreamtech.myzoo.server.gacha.CosmeticService;
 import vn.dreamtech.myzoo.server.gacha.GachaService;
 import vn.dreamtech.myzoo.server.farm.FarmService;
+import vn.dreamtech.myzoo.server.farm.LivestockService;
 import vn.dreamtech.myzoo.server.http.ApiRouter;
 import vn.dreamtech.myzoo.server.http.Idempotency;
 import vn.dreamtech.myzoo.server.http.JsonHttp;
@@ -54,12 +55,13 @@ public final class Main {
         ShopService shop = new ShopService(dataSource, economy, players, farm, time);
         ProcessingService processing = new ProcessingService(dataSource, players, farm, time);
         ChatService chat = new ChatService(dataSource, players, time);
+        LivestockService livestock = new LivestockService(dataSource, economy, players, farm, time);
         CosmeticService cosmetics = new CosmeticService(dataSource, players, time);
         GachaService gacha = new GachaService(dataSource, economy, players, cosmetics, time);
         Idempotency idempotency = new Idempotency(dataSource, time);
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/v1", new ApiRouter(players, farm, zoo, minigames, missions, accounts, social, mail, giftcodes, achievements, shop, processing, chat, economy, gacha, cosmetics, idempotency, new RateLimiter(time)));
+        server.createContext("/v1", new ApiRouter(players, farm, zoo, minigames, missions, accounts, social, mail, giftcodes, achievements, shop, processing, chat, economy, gacha, cosmetics, livestock, idempotency, new RateLimiter(time)));
         server.createContext("/health", ex -> JsonHttp.write(ex, 200, Map.of("status", "ok")));
 
         Path clientDir = Path.of(System.getenv().getOrDefault("CLIENT_DIR", "client"));
