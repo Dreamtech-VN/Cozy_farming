@@ -12,7 +12,10 @@ import vn.dreamtech.myzoo.server.http.JsonHttp;
 import vn.dreamtech.myzoo.server.http.StaticFileHandler;
 import vn.dreamtech.myzoo.server.minigame.MinigameService;
 import vn.dreamtech.myzoo.server.mission.MissionService;
+import vn.dreamtech.myzoo.server.mail.MailService;
 import vn.dreamtech.myzoo.server.player.PlayerService;
+import vn.dreamtech.myzoo.server.reward.AchievementService;
+import vn.dreamtech.myzoo.server.reward.GiftcodeService;
 import vn.dreamtech.myzoo.server.social.SocialService;
 import vn.dreamtech.myzoo.server.time.TimeSource;
 import vn.dreamtech.myzoo.server.zoo.ZooService;
@@ -39,10 +42,13 @@ public final class Main {
         MissionService missions = new MissionService(dataSource, economy, players, time);
         AccountService accounts = new AccountService(dataSource, players, time);
         SocialService social = new SocialService(dataSource, economy, players, farm, zoo, time);
+        MailService mail = new MailService(dataSource, economy, players, time);
+        GiftcodeService giftcodes = new GiftcodeService(dataSource, mail, players, time);
+        AchievementService achievements = new AchievementService(dataSource, economy, players, time);
         Idempotency idempotency = new Idempotency(dataSource, time);
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/v1", new ApiRouter(players, farm, zoo, minigames, missions, accounts, social, idempotency));
+        server.createContext("/v1", new ApiRouter(players, farm, zoo, minigames, missions, accounts, social, mail, giftcodes, achievements, idempotency));
         server.createContext("/health", ex -> JsonHttp.write(ex, 200, Map.of("status", "ok")));
 
         Path clientDir = Path.of(System.getenv().getOrDefault("CLIENT_DIR", "client"));

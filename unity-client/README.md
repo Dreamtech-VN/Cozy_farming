@@ -34,6 +34,8 @@ Mọi thứ hiện là hình vuông màu. Bỏ sprite của bạn vào `Assets/S
 | GameObject **S10_Farm** → script `FarmScreen` | mảng **Crop Sprites** | **Tên sprite phải trùng id**: `wheat`, `corn`, `carrot`, `lettuce`, `potato`, `grass`, `bamboo`, `berry`. Thêm ô **Sprout Sprite** cho cây non |
 | GameObject **S20_Zoo** → script `ZooScreen` | mảng **Animal Sprites** | Tên trùng id: `rabbit`, `sheep`, `monkey`, `giraffe`, `elephant`, `panda` |
 | GameObject **S40_Minigame** → script `MinigameScreen` | mảng **Fruit Sprites** | Đúng 5 sprite. Bỏ trống thì dùng 5 màu |
+| GameObject **S35_Achievements** → script `AchievementScreen` | mảng **Animal Sprites** | Bộ sưu tập; loài chưa có sẽ tự tô tối |
+| `Assets/Prefabs/SpeciesCard.prefab` | Image nền | Ô trong bộ sưu tập |
 | GameObject **S26_VisitFriend** → script `VisitFriendScreen` | **Crop Sprites**, **Animal Sprites**, **Sprout Sprite** | Kéo cùng bộ với S10/S20 |
 | GameObject **S07_CharacterCreate** → script `CharacterCreateScreen` | mảng **Looks** | Mỗi phần tử: `id` (chuỗi server lưu) + `sprite`. Thêm bao nhiêu ngoại hình cũng được, server không cần biết |
 | `Assets/Prefabs/HabitatCard.prefab`, `ServerCard.prefab`, `Row.prefab` | Image nền | Đổi khung viền, màu nền |
@@ -52,7 +54,8 @@ Canvas
 │   ├── S06_ServerSelect · S07_CharacterCreate · S08_Loading
 │   ├── S09_Lobby
 │   ├── S10_Farm · S20_Zoo · S30_Missions · S40_Minigame
-│   └── S24_Social · S26_VisitFriend · S36_Leaderboard
+│   ├── S24_Social · S26_VisitFriend · S36_Leaderboard
+│   └── S33_Mail · S35_Achievements
 ├── HUD          (tên, Vàng, KC, level, nút về sảnh)
 └── Toast        (thông báo đáy màn)
 App              (Api + App + ScreenManager)

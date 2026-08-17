@@ -8,7 +8,10 @@ import vn.dreamtech.myzoo.server.config.GameConfig;
 import vn.dreamtech.myzoo.server.farm.FarmService;
 import vn.dreamtech.myzoo.server.minigame.MinigameService;
 import vn.dreamtech.myzoo.server.mission.MissionService;
+import vn.dreamtech.myzoo.server.mail.MailService;
 import vn.dreamtech.myzoo.server.player.PlayerService;
+import vn.dreamtech.myzoo.server.reward.AchievementService;
+import vn.dreamtech.myzoo.server.reward.GiftcodeService;
 import vn.dreamtech.myzoo.server.social.SocialService;
 import vn.dreamtech.myzoo.server.zoo.ZooService;
 
@@ -23,12 +26,19 @@ public final class ApiRouter implements HttpHandler {
     private final MissionService missions;
     private final AccountService accounts;
     private final SocialService social;
+    private final MailService mail;
+    private final GiftcodeService giftcodes;
+    private final AchievementService achievements;
     private final Idempotency idempotency;
 
     public ApiRouter(PlayerService players, FarmService farm, ZooService zoo, MinigameService minigames,
-                     MissionService missions, AccountService accounts, SocialService social, Idempotency idempotency) {
+                     MissionService missions, AccountService accounts, SocialService social, MailService mail,
+                     GiftcodeService giftcodes, AchievementService achievements, Idempotency idempotency) {
         this.accounts = accounts;
         this.social = social;
+        this.mail = mail;
+        this.giftcodes = giftcodes;
+        this.achievements = achievements;
         this.players = players;
         this.farm = farm;
         this.zoo = zoo;
@@ -59,6 +69,16 @@ public final class ApiRouter implements HttpHandler {
         Integer friendId;
         String friendName;
         String type;
+        Long mailId;
+        String code;
+        String achievementId;
+        Integer targetPlayerId;
+        String title;
+        String body;
+        Long rewardVang;
+        Long rewardKc;
+        Integer maxUses;
+        Integer expiresDays;
     }
 
     @Override
@@ -194,6 +214,55 @@ public final class ApiRouter implements HttpHandler {
                 Body b = JsonHttp.readBody(ex, Body.class);
                 mutate(ex, b, playerId, () -> missions.checkin(playerId));
             }
+            case "POST /v1/admin/mail" -> {
+                requireAdmin(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.targetPlayerId != null && b.title != null, "Cần targetPlayerId và title");
+                long id = mail.send(b.targetPlayerId, b.title, b.body == null ? "" : b.body,
+                        b.rewardVang == null ? 0 : b.rewardVang, b.rewardKc == null ? 0 : b.rewardKc,
+                        b.foodId, b.quantity == null ? 0 : b.quantity);
+                JsonHttp.write(ex, 200, Map.of("mailId", id));
+            }
+            case "POST /v1/admin/giftcode" -> {
+                requireAdmin(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.code != null, "Cần code");
+                long days = b.expiresDays == null ? 30 : b.expiresDays;
+                giftcodes.create(b.code,
+                        b.rewardVang == null ? 0 : b.rewardVang, b.rewardKc == null ? 0 : b.rewardKc,
+                        b.foodId, b.quantity == null ? 0 : b.quantity,
+                        b.maxUses == null ? 1000 : b.maxUses,
+                        System.currentTimeMillis() + days * 24 * 60 * 60 * 1000L);
+                JsonHttp.write(ex, 200, Map.of("code", GiftcodeService.normalize(b.code)));
+            }
+            case "GET /v1/mails" -> JsonHttp.write(ex, 200, Map.of("mails", mail.inbox(auth(ex))));
+            case "POST /v1/mails/claim" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.mailId != null, "Cần mailId");
+                mutate(ex, b, playerId, () -> mail.claim(playerId, b.mailId));
+            }
+            case "POST /v1/mails/claim-all" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                mutate(ex, b, playerId, () -> Map.of("claimed", mail.claimAll(playerId)));
+            }
+            case "POST /v1/giftcodes/redeem" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.code != null, "Cần code");
+                mutate(ex, b, playerId, () -> giftcodes.redeem(playerId, b.code));
+            }
+            case "GET /v1/achievements" -> JsonHttp.write(ex, 200,
+                    Map.of("achievements", achievements.view(auth(ex))));
+            case "POST /v1/achievements/claim" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.achievementId != null, "Cần achievementId");
+                mutate(ex, b, playerId, () -> achievements.claim(playerId, b.achievementId));
+            }
+            case "GET /v1/collection" -> JsonHttp.write(ex, 200,
+                    Map.of("species", achievements.collection(auth(ex))));
             case "GET /v1/friends" -> JsonHttp.write(ex, 200, social.view(auth(ex)));
             case "POST /v1/friends/request" -> {
                 int playerId = auth(ex);
@@ -232,7 +301,11 @@ public final class ApiRouter implements HttpHandler {
                 int playerId = auth(ex);
                 Body b = JsonHttp.readBody(ex, Body.class);
                 requireFields(b.friendId != null, "Cần friendId");
-                mutate(ex, b, playerId, () -> social.help(playerId, b.friendId));
+                mutate(ex, b, playerId, () -> {
+                    var r = social.help(playerId, b.friendId);
+                    track(playerId, "FRIEND_HELP", 1);
+                    return r;
+                });
             }
             case "GET /v1/leaderboard" -> {
                 auth(ex);
@@ -253,7 +326,14 @@ public final class ApiRouter implements HttpHandler {
                 int playerId = auth(ex);
                 Body b = JsonHttp.readBody(ex, Body.class);
                 requireFields(b.habitatId != null && b.speciesId != null, "Cần habitatId và speciesId");
-                mutate(ex, b, playerId, () -> zoo.buyAnimal(playerId, b.habitatId, b.speciesId));
+                mutate(ex, b, playerId, () -> {
+                    var r = zoo.buyAnimal(playerId, b.habitatId, b.speciesId);
+                    try {
+                        achievements.recordSpecies(playerId, b.speciesId);
+                    } catch (RuntimeException ignored) {
+                    }
+                    return r;
+                });
             }
             case "POST /v1/zoo/deliver" -> {
                 int playerId = auth(ex);
@@ -326,14 +406,26 @@ public final class ApiRouter implements HttpHandler {
         JsonHttp.writeRaw(ex, 200, idempotency.execute(b.requestId, playerId, action));
     }
 
+    // Admin chỉ mở khi đặt biến môi trường ADMIN_TOKEN trên server.
+    private static void requireAdmin(HttpExchange ex) {
+        String expected = GameConfig.adminToken();
+        if (expected == null || expected.isBlank()) throw new ApiException(404, "Không có đường dẫn này");
+        String given = ex.getRequestHeaders().getFirst("X-Admin-Token");
+        if (!expected.equals(given)) throw new ApiException(401, "Sai admin token");
+    }
+
     private static void requireFields(boolean ok, String message) {
         if (!ok) throw new ApiException(400, message);
     }
 
-    // Tiến độ nhiệm vụ không được làm hỏng hành động chính.
+    // Tiến độ nhiệm vụ/thành tựu không được làm hỏng hành động chính.
     private void track(int playerId, String type, int amount) {
         try {
             missions.record(playerId, type, amount);
+        } catch (RuntimeException ignored) {
+        }
+        try {
+            achievements.record(playerId, type, amount);
         } catch (RuntimeException ignored) {
         }
     }
