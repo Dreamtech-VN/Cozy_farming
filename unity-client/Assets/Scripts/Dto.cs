@@ -166,6 +166,37 @@ namespace MyZoo
         public List<Mission> missions;
     }
 
+    [Serializable]
+    public class FriendView
+    {
+        public int playerId, farmLevel, zooLevel, zooAppeal;
+        public string name, avatar;
+    }
+    [Serializable]
+    public class FriendsView
+    {
+        public List<FriendView> friends, incoming, outgoing;
+        public int helpsLeftToday;
+    }
+    [Serializable]
+    public class VisitView
+    {
+        public int playerId, farmLevel, zooLevel, totalAppeal;
+        public string name, avatar;
+        public List<Plot> plots;
+        public List<Habitat> habitats;
+        public bool isOpen, canHelp;
+    }
+    [Serializable] public class HelpResult { public int friendId, helpsLeftToday; public long vangEarned, vangBalance; }
+
+    [Serializable]
+    public class RankRow
+    {
+        public int rank, playerId, zooLevel, farmLevel, score;
+        public string name;
+    }
+    [Serializable] public class Leaderboard { public List<RankRow> rows; }
+
     [Serializable] public class OkResult { public bool ok; }
 
     public static class Items

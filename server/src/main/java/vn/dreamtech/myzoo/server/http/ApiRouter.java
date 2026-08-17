@@ -9,6 +9,7 @@ import vn.dreamtech.myzoo.server.farm.FarmService;
 import vn.dreamtech.myzoo.server.minigame.MinigameService;
 import vn.dreamtech.myzoo.server.mission.MissionService;
 import vn.dreamtech.myzoo.server.player.PlayerService;
+import vn.dreamtech.myzoo.server.social.SocialService;
 import vn.dreamtech.myzoo.server.zoo.ZooService;
 
 import java.io.IOException;
@@ -21,11 +22,13 @@ public final class ApiRouter implements HttpHandler {
     private final MinigameService minigames;
     private final MissionService missions;
     private final AccountService accounts;
+    private final SocialService social;
     private final Idempotency idempotency;
 
     public ApiRouter(PlayerService players, FarmService farm, ZooService zoo, MinigameService minigames,
-                     MissionService missions, AccountService accounts, Idempotency idempotency) {
+                     MissionService missions, AccountService accounts, SocialService social, Idempotency idempotency) {
         this.accounts = accounts;
+        this.social = social;
         this.players = players;
         this.farm = farm;
         this.zoo = zoo;
@@ -53,6 +56,9 @@ public final class ApiRouter implements HttpHandler {
         String newPassword;
         String serverId;
         String avatar;
+        Integer friendId;
+        String friendName;
+        String type;
     }
 
     @Override
@@ -187,6 +193,54 @@ public final class ApiRouter implements HttpHandler {
                 int playerId = auth(ex);
                 Body b = JsonHttp.readBody(ex, Body.class);
                 mutate(ex, b, playerId, () -> missions.checkin(playerId));
+            }
+            case "GET /v1/friends" -> JsonHttp.write(ex, 200, social.view(auth(ex)));
+            case "POST /v1/friends/request" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.friendName != null, "Cần friendName");
+                mutate(ex, b, playerId, () -> {
+                    social.sendRequest(playerId, b.friendName);
+                    return social.view(playerId);
+                });
+            }
+            case "POST /v1/friends/accept" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.friendId != null, "Cần friendId");
+                mutate(ex, b, playerId, () -> {
+                    social.accept(playerId, b.friendId);
+                    return social.view(playerId);
+                });
+            }
+            case "POST /v1/friends/remove" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.friendId != null, "Cần friendId");
+                mutate(ex, b, playerId, () -> {
+                    social.remove(playerId, b.friendId);
+                    return social.view(playerId);
+                });
+            }
+            case "GET /v1/friends/visit" -> {
+                int playerId = auth(ex);
+                Integer friendId = QueryParam.intParam(ex.getRequestURI().getQuery(), "friendId");
+                requireFields(friendId != null, "Cần friendId");
+                JsonHttp.write(ex, 200, social.visit(playerId, friendId));
+            }
+            case "POST /v1/friends/help" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.friendId != null, "Cần friendId");
+                mutate(ex, b, playerId, () -> social.help(playerId, b.friendId));
+            }
+            case "GET /v1/leaderboard" -> {
+                auth(ex);
+                String query = ex.getRequestURI().getQuery();
+                String type = QueryParam.stringParam(query, "type");
+                Integer limit = QueryParam.intParam(query, "limit");
+                JsonHttp.write(ex, 200, Map.of("rows",
+                        social.leaderboard(type == null ? "zoo" : type, limit == null ? 20 : limit)));
             }
             case "GET /v1/zoo" -> JsonHttp.write(ex, 200, zoo.view(auth(ex)));
             case "POST /v1/zoo/habitats" -> {

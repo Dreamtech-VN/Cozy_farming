@@ -145,6 +145,24 @@ public final class SchemaInit {
                   created_at TIMESTAMP NOT NULL
                 )
                 """,
+                """
+                CREATE TABLE IF NOT EXISTS friendships (
+                  requester_id INT NOT NULL,
+                  addressee_id INT NOT NULL,
+                  status VARCHAR(10) NOT NULL,
+                  created_at TIMESTAMP NOT NULL,
+                  PRIMARY KEY (requester_id, addressee_id)
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS friend_helps (
+                  helper_id INT NOT NULL,
+                  friend_id INT NOT NULL,
+                  day_key VARCHAR(10) NOT NULL,
+                  created_at TIMESTAMP NOT NULL,
+                  PRIMARY KEY (helper_id, friend_id, day_key)
+                )
+                """,
         };
         try (Connection c = dataSource.getConnection(); Statement st = c.createStatement()) {
             for (String sql : ddl) {
