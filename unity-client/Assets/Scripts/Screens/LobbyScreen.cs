@@ -9,6 +9,7 @@ namespace MyZoo
         public Button farmButton, zooButton, minigameButton, missionButton, checkinButton, logoutButton;
         public Button socialButton, rankButton, mailButton, achievementButton, shopButton, inventoryButton, processingButton, memoryButton, chatButton, settingsButton;
         public GameObject farmDot, zooDot, missionDot, mailDot;
+        public Text reminderText;
 
         void Start()
         {
@@ -43,10 +44,20 @@ namespace MyZoo
 
         public void RefreshDots()
         {
+            ShowReminders();
             if (farmDot != null) farmDot.SetActive(App.I.HasReadyCrop());
             if (zooDot != null) zooDot.SetActive(App.I.ZooNeedsAttention());
             if (missionDot != null) missionDot.SetActive(App.I.HasClaimableMission());
             if (mailDot != null) StartCoroutine(CheckMail());
+        }
+
+        // Gộp mọi việc đang chờ thành một dòng nhắc, đỡ phải mở từng màn để xem.
+        void ShowReminders()
+        {
+            if (reminderText == null) return;
+            var items = Notifications.Pending();
+            reminderText.text = items.Count == 0 ? "Mọi thứ đều ổn" : items[0].text
+                + (items.Count > 1 ? "  (+" + (items.Count - 1) + " việc khác)" : "");
         }
 
         IEnumerator CheckMail()
@@ -80,7 +91,15 @@ namespace MyZoo
 
         void OnApplicationFocus(bool focus)
         {
-            if (focus && gameObject.activeInHierarchy) StartCoroutine(Refresh());
+            if (focus)
+            {
+                OsNotifications.CancelAll();
+                if (gameObject.activeInHierarchy) StartCoroutine(Refresh());
+                return;
+            }
+            // Rời game: hẹn nhắc lúc cây chín sớm nhất.
+            long readyAt = Notifications.NextCropReadyAt();
+            if (readyAt > 0) OsNotifications.ScheduleCropReady(readyAt);
         }
 
         IEnumerator Refresh()

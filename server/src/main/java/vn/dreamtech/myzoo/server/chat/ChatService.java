@@ -436,10 +436,58 @@ public final class ChatService {
             ps.executeUpdate();
             try (ResultSet keys = ps.getGeneratedKeys()) {
                 keys.next();
-                return keys.getLong(1);
+                long id = keys.getLong(1);
+                wakeWaiters(id);
+                return id;
             }
         } catch (SQLException e) {
             throw new ApiException(500, "Lỗi gửi tin nhắn: " + e.getMessage());
+        }
+    }
+
+    // ---------- Long-poll ----------
+    // Client treo một request tới 25 giây thay vì hỏi lại mỗi 3 giây: tin tới là hiện ngay và
+    // số request giảm gần 10 lần. Chạy được vì HTTP server dùng virtual thread (xem Main).
+    public static final int MAX_WAIT_MS = 25_000;
+
+    private final Object waitLock = new Object();
+    private volatile long lastMessageId;
+
+    private void wakeWaiters(long id) {
+        synchronized (waitLock) {
+            if (id > lastMessageId) lastMessageId = id;
+            waitLock.notifyAll();
+        }
+    }
+
+    // Chờ tới khi có tin mới hơn sinceId hoặc hết giờ. Chỉ so id nên rẻ; việc lọc quyền vẫn do
+    // world()/conversation() làm sau đó như thường.
+    public void awaitNewMessage(long sinceId, int waitMs) {
+        // Dùng đồng hồ thật chứ không phải TimeSource: đây là chờ ngoài đời, không phải thời gian trong game.
+        long deadline = System.currentTimeMillis() + Math.min(MAX_WAIT_MS, Math.max(0, waitMs));
+        synchronized (waitLock) {
+            if (lastMessageId == 0) lastMessageId = maxMessageId();
+            while (lastMessageId <= sinceId) {
+                long remaining = deadline - System.currentTimeMillis();
+                if (remaining <= 0) return;
+                try {
+                    waitLock.wait(remaining);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    return;
+                }
+            }
+        }
+    }
+
+    private long maxMessageId() {
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
+                "SELECT COALESCE(MAX(id), 0) FROM chat_messages")) {
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? rs.getLong(1) : 0;
+            }
+        } catch (SQLException e) {
+            return 0;
         }
     }
 

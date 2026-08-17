@@ -30,7 +30,9 @@ namespace MyZoo
         public List<StickerArt> stickerArt = new List<StickerArt>();
 
         static readonly string[] Emojis = { "🐰", "🐼", "🌾", "🌻", "💰", "❤️", "😄", "😢", "👍", "🎉" };
-        const float PollSeconds = 3f;
+        // Long-poll: server giữ request tới khi có tin, nên chỉ nghỉ rất ngắn giữa hai vòng.
+        const float PollSeconds = 0.2f;
+        const int WaitSeconds = 25;
 
         static int pendingPartnerId;
         static string pendingPartnerName;
@@ -103,6 +105,7 @@ namespace MyZoo
         void Reset()
         {
             sinceId = 0;
+            fetching = false;
             shown.Clear();
             foreach (Transform child in messageContent) Destroy(child.gameObject);
             titleText.text = channel == "WORLD" ? "Chat thế giới" : "Chat riêng";
@@ -144,9 +147,13 @@ namespace MyZoo
             if (messageContent.childCount == 0) partnerText.text = "Chưa có bạn bè — kết bạn ở màn Bạn bè trước nhé";
         }
 
+        bool fetching;
+
         IEnumerator Fetch()
         {
+            if (fetching) yield break;
             if (channel == "PRIVATE" && partnerId <= 0) yield break;
+            fetching = true;
             if (catalog == null) yield return Api.I.GetChatCatalog(delegate (ChatCatalogDto c) { catalog = c; }, delegate (string e) { });
 
             string wanted = channel;
@@ -161,8 +168,9 @@ namespace MyZoo
                     AddRow(message);
                 }
             };
-            if (channel == "WORLD") yield return Api.I.GetWorldChat(sinceId, apply, delegate (string e) { });
-            else yield return Api.I.GetPrivateChat(partnerId, sinceId, apply, delegate (string e) { });
+            if (channel == "WORLD") yield return Api.I.GetWorldChat(sinceId, WaitSeconds, apply, delegate (string e) { });
+            else yield return Api.I.GetPrivateChat(partnerId, sinceId, WaitSeconds, apply, delegate (string e) { });
+            fetching = false;
         }
 
         void ShowBan(ChatBan ban)
@@ -258,7 +266,8 @@ namespace MyZoo
                 {
                     messageInput.text = "";
                     if (!string.IsNullOrEmpty(result.notice)) Toast.Show(result.notice);
-                    StartCoroutine(Fetch());
+                    // Không gọi Fetch ở đây: vòng long-poll đang treo sẽ nhận tin này ngay,
+                    // gọi thêm sẽ chạy song song và thêm trùng dòng.
                 }, Toast.Show);
             sendButton.interactable = true;
         }

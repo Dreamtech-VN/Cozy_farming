@@ -69,7 +69,9 @@ public final class Main {
             server.createContext("/", new StaticFileHandler(clientDir));
         }
 
-        server.setExecutor(Executors.newFixedThreadPool(16));
+        // Virtual thread (Java 21): long-poll của chat giữ kết nối tới 25 giây mà không chiếm thread thật,
+        // nên vài nghìn người treo chờ tin mới vẫn không nghẽn server.
+        server.setExecutor(Executors.newVirtualThreadPerTaskExecutor());
         server.start();
         System.out.println("MyZoo server chạy tại http://localhost:" + port
                 + (Files.isDirectory(clientDir) ? " (client: " + clientDir.toAbsolutePath() + ")" : ""));
