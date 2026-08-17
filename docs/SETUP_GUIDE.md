@@ -265,6 +265,13 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `GET /v1/achievements` | — | `{achievements: [...]}` — tích luỹ trọn đời, **không reset** như nhiệm vụ ngày |
 | `POST /v1/achievements/claim` | `achievementId` | 409 chưa xong hoặc đã nhận |
 | `GET /v1/collection` | — | `{species: [{speciesId, name, rarity, appeal, owned, firstOwnedAt}]}` |
+| `GET /v1/shop` | — | `{items: [{id, name, description, currency VANG\|KC, price, type, param, value}], kcPacks: [...]}` |
+| `POST /v1/shop/purchase` | `itemId, quantity?` | trừ **đúng một loại tiền** theo `currency` của món; 402 thiếu tiền |
+| `GET /v1/inventory` | — | `{items: [{itemId, name, description, type, quantity}]}` |
+| `POST /v1/items/use` | `itemId, plotIndex?` | `FOOD` → cộng thẳng kho nông trại; `GROW_BOOST` → cần `plotIndex`, làm chín ngay ô đang lớn. Dùng hỏng thì **tự hoàn lại vật phẩm** |
+| `POST /v1/shop/topup` | `packId` | nạp Kim Cương **giả lập** (chưa nối cổng thật), vẫn ghi sổ cái `TOPUP_MOCK` |
+
+> **Hai loại tiền tách bạch** (spec): mỗi món chỉ mua bằng đúng một loại tiền, và **không có endpoint nào đổi Kim Cương ↔ Vàng**.
 
 **Endpoint vận hành** (chỉ bật khi đặt biến môi trường `ADMIN_TOKEN`, gửi kèm header `X-Admin-Token`; không đặt biến thì trả 404 như không tồn tại):
 

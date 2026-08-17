@@ -237,6 +237,41 @@ namespace MyZoo
     }
     [Serializable] public class CollectionList { public List<SpeciesEntry> species; }
 
+    [Serializable]
+    public class ShopItem
+    {
+        public string id, name, description, currency, type, param;
+        public long price;
+        public int value;
+    }
+    [Serializable] public class KcPack { public string id, name; public long kcAmount, priceVnd; }
+    [Serializable] public class ShopCatalogDto { public List<ShopItem> items; public List<KcPack> kcPacks; }
+
+    [Serializable]
+    public class InventoryEntry
+    {
+        public string itemId, name, description, type;
+        public int quantity;
+    }
+    [Serializable] public class InventoryList { public List<InventoryEntry> items; }
+    [Serializable]
+    public class PurchaseResult
+    {
+        public string itemId, currency;
+        public int quantity;
+        public long spent, vangBalance, kcBalance;
+        public List<InventoryEntry> inventory;
+    }
+    [Serializable]
+    public class UseItemResult
+    {
+        public string itemId, effect;
+        public int remaining;
+        public List<ItemStack> farmStorage;
+        public List<InventoryEntry> inventory;
+    }
+    [Serializable] public class TopupResult { public string packId; public long kcAdded, kcBalance; }
+
     [Serializable] public class OkResult { public bool ok; }
 
     public static class Items

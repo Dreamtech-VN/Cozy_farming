@@ -160,6 +160,23 @@ public final class FarmService {
         return new SellResult(foodId, quantity, earned, balance);
     }
 
+    // Dùng vật phẩm tăng tốc: kéo ready_at về hiện tại. Chỉ áp dụng cho ô đang lớn.
+    public void boostGrow(int playerId, int plotIndex) {
+        players.requirePlayer(playerId);
+        PlotRow row = findCrop(playerId, plotIndex);
+        if (row == null) throw new ApiException(409, "Ô đất trống");
+        if (time.now() >= row.readyAt) throw new ApiException(409, "Cây đã chín rồi");
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
+                "UPDATE farm_plots SET ready_at = ? WHERE player_id = ? AND plot_index = ?")) {
+            ps.setTimestamp(1, new Timestamp(time.now()));
+            ps.setInt(2, playerId);
+            ps.setInt(3, plotIndex);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new ApiException(500, "Lỗi giục cây: " + e.getMessage());
+        }
+    }
+
     public List<ItemStack> storage(int playerId) {
         return readInventory("farm_inventory", playerId);
     }

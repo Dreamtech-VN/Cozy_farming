@@ -7,7 +7,7 @@ namespace MyZoo
     public class LobbyScreen : MonoBehaviour
     {
         public Button farmButton, zooButton, minigameButton, missionButton, checkinButton, logoutButton;
-        public Button socialButton, rankButton, mailButton, achievementButton;
+        public Button socialButton, rankButton, mailButton, achievementButton, shopButton, inventoryButton;
         public GameObject farmDot, zooDot, missionDot, mailDot;
 
         void Start()
@@ -23,6 +23,9 @@ namespace MyZoo
             if (mailButton != null) mailButton.onClick.AddListener(delegate { ScreenManager.I.Show("S33_Mail", true); });
             if (achievementButton != null)
                 achievementButton.onClick.AddListener(delegate { ScreenManager.I.Show("S35_Achievements", true); });
+            if (shopButton != null) shopButton.onClick.AddListener(delegate { ScreenManager.I.Show("S30_Shop", true); });
+            if (inventoryButton != null)
+                inventoryButton.onClick.AddListener(delegate { ScreenManager.I.Show("S32_Inventory", true); });
         }
 
         void OnEnable() { RefreshDots(); }

@@ -222,6 +222,14 @@ public final class SchemaInit {
                   PRIMARY KEY (player_id, species_id)
                 )
                 """,
+                """
+                CREATE TABLE IF NOT EXISTS player_items (
+                  player_id INT NOT NULL,
+                  item_id VARCHAR(30) NOT NULL,
+                  quantity INT NOT NULL DEFAULT 0,
+                  PRIMARY KEY (player_id, item_id)
+                )
+                """,
         };
         try (Connection c = dataSource.getConnection(); Statement st = c.createStatement()) {
             for (String sql : ddl) {

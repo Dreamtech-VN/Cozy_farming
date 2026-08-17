@@ -55,7 +55,8 @@ Canvas
 │   ├── S09_Lobby
 │   ├── S10_Farm · S20_Zoo · S30_Missions · S40_Minigame
 │   ├── S24_Social · S26_VisitFriend · S36_Leaderboard
-│   └── S33_Mail · S35_Achievements
+│   ├── S33_Mail · S35_Achievements
+│   └── S30_Shop · S32_Inventory
 ├── HUD          (tên, Vàng, KC, level, nút về sảnh)
 └── Toast        (thông báo đáy màn)
 App              (Api + App + ScreenManager)
