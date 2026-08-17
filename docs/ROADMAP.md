@@ -50,7 +50,9 @@ Tiêu chí MVP ở §22.1 đã đạt, trừ dòng "thế giới 2D đi lại đ
 | 7 | Nhiệm vụ tuần/sự kiện dữ liệu hoá + chăn nuôi | #80 | Xong |
 | 8 | Xếp hạng sở thú, sức chứa khách, chợ thức ăn khẩn cấp | #81 | Xong |
 | 9 | Long-poll chat + nhắc việc trong game | #82 | Xong |
-| 10 | IAP thật, trang GM, analytics | — | Đang làm |
+| 10 | IAP thật, trang GM, analytics | #83 | Xong |
+
+**Lộ trình 10 đợt đã xong.** Mọi việc còn lại nằm ở hai mục dưới đây.
 
 ## Không phải việc code nhưng vẫn chặn ngày ra mắt
 
@@ -58,6 +60,8 @@ Tiêu chí MVP ở §22.1 đã đạt, trừ dòng "thế giới 2D đi lại đ
   chừa sẵn, xem bảng trong `unity-client/README.md`.
 - **Âm thanh, nhạc nền**: chưa có file nào. Màn Cài đặt đã có sẵn thanh chỉnh âm lượng.
 - **Cân bằng số liệu**: giá cây, thời gian lớn, doanh thu sở thú đang là số đặt tạm.
+- **Client Unity chưa được biên dịch lần nào.** Toàn bộ script viết mù, chưa mở Unity để kiểm.
+  Việc đầu tiên nên làm: mở project, chạy **MyZoo → Dựng scene**, bấm Play, sửa hết lỗi Console.
 - **Kiểm thử trên máy thật** theo ma trận QA §19.
 - **Hạ tầng production**: HTTPS + MySQL. Đã có hướng dẫn ở `docs/SETUP_GUIDE.md`, chưa dựng thật.
 - **Pháp lý**: chính sách riêng tư, giới hạn độ tuổi, và **công bố tỉ lệ gacha** — bắt buộc theo quy
