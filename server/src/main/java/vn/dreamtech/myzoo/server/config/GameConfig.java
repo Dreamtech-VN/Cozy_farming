@@ -16,6 +16,11 @@ public final class GameConfig {
             new ServerDef("s1", "Đồng Cỏ Xanh", "VN", "ONLINE", "SMOOTH", true),
             new ServerDef("s2", "Rừng Tre", "VN", "ONLINE", "BUSY", false));
 
+    // Endpoint admin chỉ bật khi có ADMIN_TOKEN — mặc định tắt hoàn toàn cho an toàn.
+    public static String adminToken() {
+        return System.getenv("ADMIN_TOKEN");
+    }
+
     public static boolean maintenance() {
         return Boolean.parseBoolean(System.getenv().getOrDefault("MAINTENANCE", "false"));
     }

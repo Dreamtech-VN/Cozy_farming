@@ -163,6 +163,65 @@ public final class SchemaInit {
                   PRIMARY KEY (helper_id, friend_id, day_key)
                 )
                 """,
+                """
+                CREATE TABLE IF NOT EXISTS mails (
+                  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                  player_id INT NOT NULL,
+                  title VARCHAR(120) NOT NULL,
+                  body VARCHAR(500),
+                  reward_vang BIGINT NOT NULL DEFAULT 0,
+                  reward_kc BIGINT NOT NULL DEFAULT 0,
+                  reward_food_id VARCHAR(20),
+                  reward_food_qty INT NOT NULL DEFAULT 0,
+                  claimed BOOLEAN NOT NULL DEFAULT FALSE,
+                  created_at TIMESTAMP NOT NULL,
+                  expires_at TIMESTAMP NOT NULL
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS giftcodes (
+                  code VARCHAR(32) PRIMARY KEY,
+                  reward_vang BIGINT NOT NULL DEFAULT 0,
+                  reward_kc BIGINT NOT NULL DEFAULT 0,
+                  reward_food_id VARCHAR(20),
+                  reward_food_qty INT NOT NULL DEFAULT 0,
+                  max_uses INT NOT NULL,
+                  used_count INT NOT NULL DEFAULT 0,
+                  expires_at TIMESTAMP NOT NULL
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS giftcode_uses (
+                  code VARCHAR(32) NOT NULL,
+                  player_id INT NOT NULL,
+                  created_at TIMESTAMP NOT NULL,
+                  PRIMARY KEY (code, player_id)
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS achievement_counters (
+                  player_id INT NOT NULL,
+                  counter_type VARCHAR(20) NOT NULL,
+                  counter INT NOT NULL DEFAULT 0,
+                  PRIMARY KEY (player_id, counter_type)
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS achievement_claims (
+                  player_id INT NOT NULL,
+                  achievement_id VARCHAR(30) NOT NULL,
+                  created_at TIMESTAMP NOT NULL,
+                  PRIMARY KEY (player_id, achievement_id)
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS species_collection (
+                  player_id INT NOT NULL,
+                  species_id VARCHAR(20) NOT NULL,
+                  first_owned_at TIMESTAMP NOT NULL,
+                  PRIMARY KEY (player_id, species_id)
+                )
+                """,
         };
         try (Connection c = dataSource.getConnection(); Statement st = c.createStatement()) {
             for (String sql : ddl) {

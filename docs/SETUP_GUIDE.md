@@ -258,6 +258,20 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `GET /v1/friends/visit?friendId=` | — | xem nông trại + sở thú của bạn (chỉ đọc), kèm `canHelp` |
 | `POST /v1/friends/help` | `friendId` | +60 Vàng cho mình, +30 cho bạn; mỗi người 1 lần/ngày, tối đa 10 lượt/ngày |
 | `GET /v1/leaderboard?type=zoo\|farm` | — | `rows[] {rank, playerId, name, zooLevel, farmLevel, score}` |
+| `GET /v1/mails` | — | `{mails: [{id, title, body, rewardVang, rewardKc, rewardFoodId, rewardFoodQty, claimed, expiresAt}]}` — thư hết hạn tự ẩn (30 ngày) |
+| `POST /v1/mails/claim` | `mailId` | nhận quà; 409 nếu đã nhận hoặc hết hạn |
+| `POST /v1/mails/claim-all` | — | `{claimed: n}` |
+| `POST /v1/giftcodes/redeem` | `code` | quà gửi vào hộp thư; 409 đã dùng/hết lượt/hết hạn, 404 mã sai |
+| `GET /v1/achievements` | — | `{achievements: [...]}` — tích luỹ trọn đời, **không reset** như nhiệm vụ ngày |
+| `POST /v1/achievements/claim` | `achievementId` | 409 chưa xong hoặc đã nhận |
+| `GET /v1/collection` | — | `{species: [{speciesId, name, rarity, appeal, owned, firstOwnedAt}]}` |
+
+**Endpoint vận hành** (chỉ bật khi đặt biến môi trường `ADMIN_TOKEN`, gửi kèm header `X-Admin-Token`; không đặt biến thì trả 404 như không tồn tại):
+
+| Method & path | Body | Dùng để |
+|---|---|---|
+| `POST /v1/admin/mail` | `targetPlayerId, title, body?, rewardVang?, rewardKc?, foodId?, quantity?` | Gửi thư/đền bù cho 1 người chơi |
+| `POST /v1/admin/giftcode` | `code, rewardVang?, rewardKc?, foodId?, quantity?, maxUses?, expiresDays?` | Tạo mã quà tặng |
 | `POST /v1/minigames/session` | — | `sessionId, seed, movesAllowed, maxLines, vangPerLine` — sinh bàn 6×6 từ `seed` |
 | `POST /v1/minigames/finish` | `sessionId, linesMade` | server kẹp `linesMade ≤ maxLines`; gọi lại cùng session trả kết quả cũ |
 

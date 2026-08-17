@@ -66,6 +66,8 @@ public static class SceneBuilder
         BuildSocial(screens.transform, prefabs);
         BuildVisitFriend(screens.transform, prefabs);
         BuildLeaderboard(screens.transform, prefabs);
+        BuildMail(screens.transform, prefabs);
+        BuildAchievements(screens.transform, prefabs);
 
         var app = new GameObject("App", typeof(Api), typeof(App), typeof(ScreenManager));
         var manager = app.GetComponent<ScreenManager>();
@@ -106,13 +108,14 @@ public static class SceneBuilder
     // ---------------- Prefabs ----------------
     class Prefabs
     {
-        public GameObject row, plotCell, habitatCard, animalIcon, serverCard, boardCell;
+        public GameObject row, plotCell, habitatCard, animalIcon, serverCard, boardCell, speciesCard;
     }
 
     static Prefabs BuildPrefabs()
     {
         System.IO.Directory.CreateDirectory("Assets/Prefabs");
         var p = new Prefabs();
+        p.speciesCard = SavePrefab(MakeSpeciesCard(), "SpeciesCard");
         p.row = SavePrefab(MakeRow(), "Row");
         p.plotCell = SavePrefab(MakePlotCell(), "PlotCell");
         p.animalIcon = SavePrefab(MakeAnimalIcon(), "AnimalIcon");
@@ -209,6 +212,14 @@ public static class SceneBuilder
         card.statusText = status.GetComponent<Text>();
         card.populationText = population.GetComponent<Text>();
         card.recommendBadge = badge;
+        return go;
+    }
+
+    static GameObject MakeSpeciesCard()
+    {
+        var go = Image("SpeciesCard", null, Color.white, 84, 96);
+        var label = Text("Label", go.transform, "???", 12, Dark, TextAnchor.LowerCenter);
+        Stretch(label, 2, 2);
         return go;
     }
 
@@ -501,12 +512,26 @@ public static class SceneBuilder
         Center(rank, 0, -155);
         Stretch(Text("Label", rank.transform, "XẾP HẠNG", 16, Dark, TextAnchor.MiddleCenter));
 
+        var mail = Button("MailButton", screen.transform, new Color(0.85f, 0.70f, 0.95f), 170, 44);
+        Center(mail, 180, -155);
+        Stretch(Text("Label", mail.transform, "HỘP THƯ", 16, Dark, TextAnchor.MiddleCenter));
+        var mailDot = Image("Dot", mail.transform, new Color(0.9f, 0.2f, 0.2f), 16, 16);
+        var mailDotRt = mailDot.GetComponent<RectTransform>();
+        mailDotRt.anchorMin = mailDotRt.anchorMax = new Vector2(1, 1);
+        mailDotRt.pivot = new Vector2(1, 1);
+        mailDotRt.anchoredPosition = new Vector2(-6, -6);
+        mailDot.SetActive(false);
+
+        var achievement = Button("AchievementButton", screen.transform, new Color(0.95f, 0.65f, 0.55f), 200, 38);
+        Center(achievement, -280, -215);
+        Stretch(Text("Label", achievement.transform, "Thành tựu", 14, Dark, TextAnchor.MiddleCenter));
+
         var checkin = Button("CheckinButton", screen.transform, new Color(0.98f, 0.80f, 0.30f), 180, 40);
-        Center(checkin, -110, -215);
+        Center(checkin, -80, -215);
         Stretch(Text("Label", checkin.transform, "Điểm danh", 15, Dark, TextAnchor.MiddleCenter));
 
         var logout = Button("LogoutButton", screen.transform, new Color(0.75f, 0.75f, 0.75f), 140, 40);
-        Center(logout, 110, -215);
+        Center(logout, 120, -215);
         Stretch(Text("Label", logout.transform, "Đăng xuất", 14, Dark, TextAnchor.MiddleCenter));
 
         var comp = screen.AddComponent<LobbyScreen>();
@@ -518,6 +543,9 @@ public static class SceneBuilder
         comp.logoutButton = logout.GetComponent<Button>();
         comp.socialButton = social.GetComponent<Button>();
         comp.rankButton = rank.GetComponent<Button>();
+        comp.mailButton = mail.GetComponent<Button>();
+        comp.achievementButton = achievement.GetComponent<Button>();
+        comp.mailDot = mailDot;
         comp.farmDot = farm.transform.Find("Dot").gameObject;
         comp.zooDot = zoo.transform.Find("Dot").gameObject;
         comp.missionDot = mission.transform.Find("Dot").gameObject;
@@ -777,6 +805,59 @@ public static class SceneBuilder
         comp.zooTabButton = zooTab.GetComponent<Button>();
         comp.farmTabButton = farmTab.GetComponent<Button>();
         comp.titleText = title.GetComponent<Text>();
+    }
+
+    static void BuildMail(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S33_Mail", parent, "Hộp thư");
+
+        var code = InputField("GiftcodeInput", screen.transform, "Nhập mã quà tặng", -110, 150);
+        Size(code, 320, 42);
+        var redeem = Button("RedeemButton", screen.transform, Primary, 130, 42);
+        Center(redeem, 130, 150);
+        Stretch(Text("Label", redeem.transform, "Đổi mã", 15, Dark, TextAnchor.MiddleCenter));
+
+        var claimAll = Button("ClaimAllButton", screen.transform, new Color(0.98f, 0.80f, 0.30f), 150, 38);
+        Center(claimAll, 280, 150);
+        Stretch(Text("Label", claimAll.transform, "Nhận tất cả", 14, Dark, TextAnchor.MiddleCenter));
+
+        var list = ScrollList("MailList", screen.transform, 660, 300, 0, -40);
+        var empty = Text("Empty", screen.transform, "Hộp thư trống", 15, new Color(1, 1, 1, 0.6f), TextAnchor.MiddleCenter);
+        Center(empty, 0, -40); Size(empty, 400, 24);
+
+        var comp = screen.AddComponent<MailScreen>();
+        comp.content = list;
+        comp.rowPrefab = prefabs.row;
+        comp.giftcodeInput = code.GetComponent<InputField>();
+        comp.redeemButton = redeem.GetComponent<Button>();
+        comp.claimAllButton = claimAll.GetComponent<Button>();
+        comp.emptyText = empty.GetComponent<Text>();
+    }
+
+    static void BuildAchievements(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S35_Achievements", parent, "Thành tựu & Bộ sưu tập");
+
+        var achievementList = ScrollList("AchievementList", screen.transform, 470, 320, -230, -30);
+
+        var summary = Text("CollectionSummary", screen.transform, "Bộ sưu tập", 15, Color.white, TextAnchor.MiddleCenter);
+        Center(summary, 240, 130); Size(summary, 420, 22);
+
+        var collection = Empty("CollectionGrid", screen.transform);
+        Size(collection, 420, 290);
+        Center(collection, 240, -40);
+        var layout = collection.AddComponent<GridLayoutGroup>();
+        layout.cellSize = new Vector2(84, 96);
+        layout.spacing = new Vector2(8, 8);
+        layout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        layout.constraintCount = 4;
+
+        var comp = screen.AddComponent<AchievementScreen>();
+        comp.achievementContent = achievementList;
+        comp.collectionContent = collection.transform;
+        comp.rowPrefab = prefabs.row;
+        comp.speciesPrefab = prefabs.speciesCard;
+        comp.collectionSummaryText = summary.GetComponent<Text>();
     }
 
     // ---------------- Helper UI ----------------

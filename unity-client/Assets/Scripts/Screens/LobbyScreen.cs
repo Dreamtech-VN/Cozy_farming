@@ -7,8 +7,8 @@ namespace MyZoo
     public class LobbyScreen : MonoBehaviour
     {
         public Button farmButton, zooButton, minigameButton, missionButton, checkinButton, logoutButton;
-        public Button socialButton, rankButton;
-        public GameObject farmDot, zooDot, missionDot;
+        public Button socialButton, rankButton, mailButton, achievementButton;
+        public GameObject farmDot, zooDot, missionDot, mailDot;
 
         void Start()
         {
@@ -20,6 +20,9 @@ namespace MyZoo
             if (logoutButton != null) logoutButton.onClick.AddListener(delegate { StartCoroutine(DoLogout()); });
             if (socialButton != null) socialButton.onClick.AddListener(delegate { ScreenManager.I.Show("S24_Social", true); });
             if (rankButton != null) rankButton.onClick.AddListener(delegate { ScreenManager.I.Show("S36_Leaderboard", true); });
+            if (mailButton != null) mailButton.onClick.AddListener(delegate { ScreenManager.I.Show("S33_Mail", true); });
+            if (achievementButton != null)
+                achievementButton.onClick.AddListener(delegate { ScreenManager.I.Show("S35_Achievements", true); });
         }
 
         void OnEnable() { RefreshDots(); }
@@ -29,6 +32,18 @@ namespace MyZoo
             if (farmDot != null) farmDot.SetActive(App.I.HasReadyCrop());
             if (zooDot != null) zooDot.SetActive(App.I.ZooNeedsAttention());
             if (missionDot != null) missionDot.SetActive(App.I.HasClaimableMission());
+            if (mailDot != null) StartCoroutine(CheckMail());
+        }
+
+        IEnumerator CheckMail()
+        {
+            yield return Api.I.GetMails(delegate (MailList list)
+            {
+                bool hasUnclaimed = false;
+                if (list != null && list.mails != null)
+                    foreach (var m in list.mails) if (!m.claimed) hasUnclaimed = true;
+                mailDot.SetActive(hasUnclaimed);
+            }, delegate (string e) { });
         }
 
         IEnumerator DoCheckin()

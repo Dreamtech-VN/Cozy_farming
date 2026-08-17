@@ -197,6 +197,46 @@ namespace MyZoo
     }
     [Serializable] public class Leaderboard { public List<RankRow> rows; }
 
+    [Serializable]
+    public class MailView
+    {
+        public long id, rewardVang, rewardKc, createdAt, expiresAt;
+        public string title, body, rewardFoodId;
+        public int rewardFoodQty;
+        public bool claimed;
+    }
+    [Serializable] public class MailList { public List<MailView> mails; }
+    [Serializable]
+    public class MailClaimResult
+    {
+        public long mailId, rewardVang, rewardKc, vangBalance, kcBalance;
+        public string rewardFoodId;
+        public int rewardFoodQty;
+    }
+    [Serializable] public class ClaimAllResult { public int claimed; }
+    [Serializable] public class RedeemResult { public string code, message; public long mailId; }
+
+    [Serializable]
+    public class Achievement
+    {
+        public string id, name;
+        public int target, progress;
+        public long rewardVang;
+        public bool claimed;
+    }
+    [Serializable] public class AchievementList { public List<Achievement> achievements; }
+    [Serializable] public class AchievementClaimResult { public string achievementId; public long rewardVang, vangBalance; }
+
+    [Serializable]
+    public class SpeciesEntry
+    {
+        public string speciesId, name, rarity;
+        public int appeal;
+        public bool owned;
+        public long firstOwnedAt;
+    }
+    [Serializable] public class CollectionList { public List<SpeciesEntry> species; }
+
     [Serializable] public class OkResult { public bool ok; }
 
     public static class Items

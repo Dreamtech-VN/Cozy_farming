@@ -162,6 +162,39 @@ namespace MyZoo
             return Get("/v1/leaderboard?type=" + type, ok, fail);
         }
 
+        // ---------- Hộp thư / quà ----------
+        public IEnumerator GetMails(Action<MailList> ok, Action<string> fail) { return Get("/v1/mails", ok, fail); }
+
+        public IEnumerator ClaimMail(long mailId, Action<MailClaimResult> ok, Action<string> fail)
+        {
+            return Post("/v1/mails/claim", "{" + Num("mailId", mailId) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator ClaimAllMails(Action<ClaimAllResult> ok, Action<string> fail)
+        {
+            return Post("/v1/mails/claim-all", "{" + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator RedeemGiftcode(string code, Action<RedeemResult> ok, Action<string> fail)
+        {
+            return Post("/v1/giftcodes/redeem", "{" + Str("code", code) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator GetAchievements(Action<AchievementList> ok, Action<string> fail)
+        {
+            return Get("/v1/achievements", ok, fail);
+        }
+
+        public IEnumerator ClaimAchievement(string achievementId, Action<AchievementClaimResult> ok, Action<string> fail)
+        {
+            return Post("/v1/achievements/claim", "{" + Str("achievementId", achievementId) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator GetCollection(Action<CollectionList> ok, Action<string> fail)
+        {
+            return Get("/v1/collection", ok, fail);
+        }
+
         // ---------- Nhiệm vụ / minigame ----------
         public IEnumerator ClaimMission(string missionId, Action<ClaimResult> ok, Action<string> fail)
         {
