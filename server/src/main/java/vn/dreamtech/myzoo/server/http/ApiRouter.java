@@ -2,7 +2,9 @@ package vn.dreamtech.myzoo.server.http;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import vn.dreamtech.myzoo.server.auth.AccountService;
 import vn.dreamtech.myzoo.server.catalog.Catalog;
+import vn.dreamtech.myzoo.server.config.GameConfig;
 import vn.dreamtech.myzoo.server.farm.FarmService;
 import vn.dreamtech.myzoo.server.minigame.MinigameService;
 import vn.dreamtech.myzoo.server.mission.MissionService;
@@ -18,10 +20,12 @@ public final class ApiRouter implements HttpHandler {
     private final ZooService zoo;
     private final MinigameService minigames;
     private final MissionService missions;
+    private final AccountService accounts;
     private final Idempotency idempotency;
 
     public ApiRouter(PlayerService players, FarmService farm, ZooService zoo, MinigameService minigames,
-                     MissionService missions, Idempotency idempotency) {
+                     MissionService missions, AccountService accounts, Idempotency idempotency) {
+        this.accounts = accounts;
         this.players = players;
         this.farm = farm;
         this.zoo = zoo;
@@ -44,6 +48,11 @@ public final class ApiRouter implements HttpHandler {
         String sessionId;
         Integer linesMade;
         String missionId;
+        String username;
+        String password;
+        String newPassword;
+        String serverId;
+        String avatar;
     }
 
     @Override
@@ -62,7 +71,64 @@ public final class ApiRouter implements HttpHandler {
         String method = ex.getRequestMethod();
         String key = method + " " + path;
 
+        // Bảo trì: chỉ cho phép đọc cấu hình để client hiện thông báo.
+        if (GameConfig.maintenance() && !key.equals("GET /v1/config")) {
+            JsonHttp.writeError(ex, 503, GameConfig.maintenanceMessage());
+            return;
+        }
+
         switch (key) {
+            case "GET /v1/config" -> JsonHttp.write(ex, 200, Map.of(
+                    "gameVersion", GameConfig.GAME_VERSION,
+                    "minClientVersion", GameConfig.MIN_CLIENT_VERSION,
+                    "maintenance", GameConfig.maintenance(),
+                    "maintenanceMessage", GameConfig.maintenance() ? GameConfig.maintenanceMessage() : "",
+                    "serverTime", System.currentTimeMillis()));
+            case "GET /v1/servers" -> JsonHttp.write(ex, 200, Map.of("servers", GameConfig.SERVERS));
+            case "POST /v1/servers/select" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.serverId != null, "Cần serverId");
+                mutate(ex, b, playerId, () -> {
+                    players.selectServer(playerId, b.serverId);
+                    return players.profile(playerId);
+                });
+            }
+            case "POST /v1/auth/register" -> {
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.username != null && b.password != null, "Cần username và password");
+                JsonHttp.write(ex, 200, accounts.register(b.username, b.password, b.guestToken));
+            }
+            case "POST /v1/auth/login" -> {
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.username != null && b.password != null, "Cần username và password");
+                JsonHttp.write(ex, 200, accounts.login(b.username, b.password));
+            }
+            case "POST /v1/auth/logout" -> {
+                players.logout(tokenOf(ex));
+                JsonHttp.write(ex, 200, Map.of("ok", true));
+            }
+            case "POST /v1/auth/password" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.password != null && b.newPassword != null, "Cần password và newPassword");
+                accounts.changePassword(playerId, b.password, b.newPassword);
+                JsonHttp.write(ex, 200, Map.of("ok", true));
+            }
+            case "POST /v1/players" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.name != null, "Cần name");
+                mutate(ex, b, playerId, () -> players.createCharacter(playerId, b.name, b.avatar));
+            }
+            case "GET /v1/world/snapshot" -> {
+                int playerId = auth(ex);
+                JsonHttp.write(ex, 200, Map.of(
+                        "me", players.profile(playerId),
+                        "farm", farm.view(playerId),
+                        "zoo", zoo.view(playerId),
+                        "missions", missions.view(playerId)));
+            }
             case "POST /v1/auth/guest" -> {
                 Body b = JsonHttp.readBody(ex, Body.class);
                 JsonHttp.write(ex, 200, players.guestLogin(b.guestToken));
@@ -193,7 +259,12 @@ public final class ApiRouter implements HttpHandler {
     }
 
     private int auth(HttpExchange ex) {
-        return players.authenticate(ex.getRequestHeaders().getFirst("X-Guest-Token"));
+        return players.authenticate(tokenOf(ex));
+    }
+
+    private static String tokenOf(HttpExchange ex) {
+        String session = ex.getRequestHeaders().getFirst("X-Session-Token");
+        return session != null ? session : ex.getRequestHeaders().getFirst("X-Guest-Token");
     }
 
     private void mutate(HttpExchange ex, Body b, int playerId, java.util.function.Supplier<Object> action)

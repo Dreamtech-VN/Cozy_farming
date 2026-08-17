@@ -2,6 +2,7 @@ package vn.dreamtech.myzoo.server.db;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -127,14 +128,47 @@ public final class SchemaInit {
                   PRIMARY KEY (player_id, day_key)
                 )
                 """,
+                """
+                CREATE TABLE IF NOT EXISTS accounts (
+                  id INT AUTO_INCREMENT PRIMARY KEY,
+                  username VARCHAR(32) NOT NULL UNIQUE,
+                  password_hash VARCHAR(64) NOT NULL,
+                  password_salt VARCHAR(32) NOT NULL,
+                  banned BOOLEAN NOT NULL DEFAULT FALSE,
+                  created_at TIMESTAMP NOT NULL
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS sessions (
+                  token VARCHAR(64) PRIMARY KEY,
+                  player_id INT NOT NULL,
+                  created_at TIMESTAMP NOT NULL
+                )
+                """,
         };
         try (Connection c = dataSource.getConnection(); Statement st = c.createStatement()) {
             for (String sql : ddl) {
                 st.execute(sql);
             }
+            addColumn(c, st, "players", "account_id", "INT");
+            addColumn(c, st, "players", "server_id", "VARCHAR(20)");
+            addColumn(c, st, "players", "avatar", "VARCHAR(40)");
         } catch (SQLException e) {
             throw new IllegalStateException("Không khởi tạo được schema: " + e.getMessage(), e);
         }
+    }
+
+    // ALTER ... ADD COLUMN IF NOT EXISTS không portable giữa H2/MySQL nên kiểm tra metadata trước.
+    private static void addColumn(Connection c, Statement st, String table, String column, String type)
+            throws SQLException {
+        for (String candidate : new String[]{table, table.toUpperCase()}) {
+            try (ResultSet rs = c.getMetaData().getColumns(null, null, candidate, null)) {
+                while (rs.next()) {
+                    if (column.equalsIgnoreCase(rs.getString("COLUMN_NAME"))) return;
+                }
+            }
+        }
+        st.execute("ALTER TABLE " + table + " ADD COLUMN " + column + " " + type);
     }
 
     private SchemaInit() {

@@ -1,5 +1,6 @@
 package vn.dreamtech.myzoo.server.player;
 
+import vn.dreamtech.myzoo.server.config.GameConfig;
 import vn.dreamtech.myzoo.server.economy.EconomyService;
 import vn.dreamtech.myzoo.server.http.ApiException;
 import vn.dreamtech.myzoo.server.time.TimeSource;
@@ -27,22 +28,25 @@ public final class PlayerService {
         this.time = time;
     }
 
-    public record GuestLogin(int playerId, String guestToken, boolean isNew, String name) {
+    public record GuestLogin(int playerId, String guestToken, String sessionToken, boolean isNew, String name,
+                             String serverId) {
     }
 
-    public record Profile(int playerId, String name, int farmXp, int farmLevel, int zooXp, int zooLevel,
-                           Map<String, Long> wallets) {
+    public record Profile(int playerId, String name, String avatar, String serverId, boolean hasAccount,
+                          int farmXp, int farmLevel, int zooXp, int zooLevel, Map<String, Long> wallets) {
     }
 
     public GuestLogin guestLogin(String guestToken) {
         try {
             if (guestToken != null && !guestToken.isBlank()) {
                 try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
-                        "SELECT id, name FROM players WHERE guest_token = ?")) {
+                        "SELECT id, name, server_id FROM players WHERE guest_token = ?")) {
                     ps.setString(1, guestToken);
                     try (ResultSet rs = ps.executeQuery()) {
                         if (rs.next()) {
-                            return new GuestLogin(rs.getInt("id"), guestToken, false, rs.getString("name"));
+                            int existingId = rs.getInt("id");
+                            return new GuestLogin(existingId, guestToken, mintSession(existingId), false,
+                                    rs.getString("name"), rs.getString("server_id"));
                         }
                     }
                 }
@@ -60,33 +64,108 @@ public final class PlayerService {
                 }
             }
             economy.earn(id, EconomyService.VANG, STARTER_VANG, "STARTER", "player", String.valueOf(id));
-            return new GuestLogin(id, token, true, null);
+            return new GuestLogin(id, token, mintSession(id), true, null, null);
         } catch (SQLException e) {
             throw new ApiException(500, "Lỗi đăng nhập khách: " + e.getMessage());
         }
     }
 
-    public int authenticate(String guestToken) {
-        if (guestToken == null || guestToken.isBlank()) {
-            throw new ApiException(401, "Thiếu guest token");
-        }
-        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
-                "SELECT id FROM players WHERE guest_token = ?")) {
-            ps.setString(1, guestToken);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (!rs.next()) throw new ApiException(401, "Guest token không hợp lệ");
-                return rs.getInt("id");
+    public int authenticate(String token) {
+        if (token == null || token.isBlank()) throw new ApiException(401, "Thiếu token đăng nhập");
+        try (Connection c = dataSource.getConnection()) {
+            try (PreparedStatement ps = c.prepareStatement("SELECT player_id FROM sessions WHERE token = ?")) {
+                ps.setString(1, token);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) return rs.getInt("player_id");
+                }
+            }
+            // Token thiết bị (đăng nhập khách) vẫn dùng được để tự vào lại.
+            try (PreparedStatement ps = c.prepareStatement("SELECT id FROM players WHERE guest_token = ?")) {
+                ps.setString(1, token);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) return rs.getInt("id");
+                }
             }
         } catch (SQLException e) {
             throw new ApiException(500, "Lỗi xác thực: " + e.getMessage());
         }
+        throw new ApiException(401, "Phiên đăng nhập không hợp lệ");
     }
 
-    public void setName(int playerId, String name) {
+    public String mintSession(int playerId) {
+        String token = UUID.randomUUID().toString();
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
+                "INSERT INTO sessions (token, player_id, created_at) VALUES (?, ?, ?)")) {
+            ps.setString(1, token);
+            ps.setInt(2, playerId);
+            ps.setTimestamp(3, new Timestamp(time.now()));
+            ps.executeUpdate();
+            return token;
+        } catch (SQLException e) {
+            throw new ApiException(500, "Lỗi tạo phiên: " + e.getMessage());
+        }
+    }
+
+    public void logout(String token) {
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
+                "DELETE FROM sessions WHERE token = ?")) {
+            ps.setString(1, token);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new ApiException(500, "Lỗi đăng xuất: " + e.getMessage());
+        }
+    }
+
+    public void selectServer(int playerId, String serverId) {
+        if (!GameConfig.isValidServer(serverId)) throw new ApiException(404, "Không có máy chủ này");
+        if (!GameConfig.isJoinable(serverId)) throw new ApiException(409, "Máy chủ đang không nhận người chơi");
+        requirePlayer(playerId);
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
+                "UPDATE players SET server_id = ? WHERE id = ?")) {
+            ps.setString(1, serverId);
+            ps.setInt(2, playerId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new ApiException(500, "Lỗi chọn máy chủ: " + e.getMessage());
+        }
+    }
+
+    // Tạo nhân vật (S07): đặt tên + ngoại hình trong một bước.
+    public Profile createCharacter(int playerId, String name, String avatar) {
+        requirePlayer(playerId);
+        String trimmed = validateName(name);
+        String look = avatar == null || avatar.isBlank() ? "farmer_1" : avatar.trim();
+        if (look.length() > 40) throw new ApiException(400, "Ngoại hình không hợp lệ");
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
+                "UPDATE players SET name = ?, avatar = ? WHERE id = ?")) {
+            ps.setString(1, trimmed);
+            ps.setString(2, look);
+            ps.setInt(3, playerId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new ApiException(409, "Tên đã có người dùng");
+        }
+        return profile(playerId);
+    }
+
+    public static String validateName(String name) {
         String trimmed = name == null ? "" : name.trim();
         if (trimmed.length() < 2 || trimmed.length() > 20) {
             throw new ApiException(400, "Tên phải từ 2-20 ký tự");
         }
+        if (!trimmed.matches("[\\p{L}0-9 _]+")) {
+            throw new ApiException(400, "Tên chỉ gồm chữ, số, dấu cách và gạch dưới");
+        }
+        for (String bad : BANNED_NAME_PARTS) {
+            if (trimmed.toLowerCase().contains(bad)) throw new ApiException(400, "Tên chứa từ không cho phép");
+        }
+        return trimmed;
+    }
+
+    private static final String[] BANNED_NAME_PARTS = {"admin", "gm ", "quantri", "moderator"};
+
+    public void setName(int playerId, String name) {
+        String trimmed = validateName(name);
         requirePlayer(playerId);
         try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
                 "UPDATE players SET name = ? WHERE id = ?")) {
@@ -100,13 +179,16 @@ public final class PlayerService {
 
     public Profile profile(int playerId) {
         try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
-                "SELECT name, farm_xp, zoo_xp FROM players WHERE id = ?")) {
+                "SELECT name, avatar, server_id, account_id, farm_xp, zoo_xp FROM players WHERE id = ?")) {
             ps.setInt(1, playerId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (!rs.next()) throw new ApiException(404, "Không tìm thấy người chơi");
                 int farmXp = rs.getInt("farm_xp");
                 int zooXp = rs.getInt("zoo_xp");
-                return new Profile(playerId, rs.getString("name"),
+                rs.getInt("account_id");
+                boolean hasAccount = !rs.wasNull();
+                return new Profile(playerId, rs.getString("name"), rs.getString("avatar"), rs.getString("server_id"),
+                        hasAccount,
                         farmXp, levelFor(farmXp), zooXp, levelFor(zooXp), economy.balances(playerId));
             }
         } catch (SQLException e) {
