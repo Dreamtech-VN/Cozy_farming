@@ -358,6 +358,31 @@ public final class SchemaInit {
                 )
                 """,
                 """
+                CREATE TABLE IF NOT EXISTS mission_defs (
+                  id VARCHAR(40) PRIMARY KEY,
+                  name VARCHAR(80) NOT NULL,
+                  type VARCHAR(20) NOT NULL,
+                  target INT NOT NULL,
+                  reward_vang BIGINT NOT NULL DEFAULT 0,
+                  reward_kc BIGINT NOT NULL DEFAULT 0,
+                  scope VARCHAR(10) NOT NULL DEFAULT 'DAILY',
+                  event_id VARCHAR(40),
+                  active_from TIMESTAMP,
+                  active_to TIMESTAMP,
+                  sort_order INT NOT NULL DEFAULT 0
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS livestock (
+                  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                  player_id INT NOT NULL,
+                  species_id VARCHAR(20) NOT NULL,
+                  last_fed_at TIMESTAMP,
+                  next_product_at TIMESTAMP,
+                  created_at TIMESTAMP NOT NULL
+                )
+                """,
+                """
                 CREATE TABLE IF NOT EXISTS gacha_fragments (
                   player_id INT PRIMARY KEY,
                   amount INT NOT NULL DEFAULT 0

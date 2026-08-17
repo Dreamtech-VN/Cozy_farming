@@ -91,6 +91,7 @@ namespace MyZoo
         public List<DecorDef> decors;
         public List<RecipeDef> recipes;
         public List<GameDef> games;
+        public List<LivestockDef> livestock;
         public int plotCount;
     }
 
@@ -148,13 +149,13 @@ namespace MyZoo
     [Serializable]
     public class Mission
     {
-        public string id, name;
+        public string id, name, scope;
         public int target, progress;
-        public long rewardVang;
+        public long rewardVang, rewardKc, endsAt;
         public bool claimed;
     }
     [Serializable] public class MissionList { public List<Mission> missions; }
-    [Serializable] public class ClaimResult { public string missionId; public long rewardVang, vangBalance; }
+    [Serializable] public class ClaimResult { public string missionId; public long rewardVang, rewardKc, vangBalance, kcBalance; }
     [Serializable] public class CheckinResult { public string day; public int streak; public long rewardVang, vangBalance; }
 
     [Serializable]
@@ -344,6 +345,51 @@ namespace MyZoo
     {
         public long vang, kc, nextCursor;
         public List<LedgerEntry> entries;
+    }
+
+    [Serializable]
+    public class LivestockDef
+    {
+        public string id, name, foodId, productId;
+        public long cost;
+        public int foodQty, productQty, productSeconds, minFarmLevel;
+    }
+    [Serializable]
+    public class BarnAnimal
+    {
+        public long id, readyAt;
+        public string speciesId, name, state, foodId, productId;
+        public int foodQty, productQty;
+    }
+    [Serializable]
+    public class BarnView
+    {
+        public List<BarnAnimal> animals;
+        public int maxAnimals;
+        public List<ItemStack> storage;
+    }
+    [Serializable]
+    public class BarnBuyResult
+    {
+        public long id;
+        public string speciesId;
+        public long vangBalance;
+        public List<BarnAnimal> animals;
+    }
+    [Serializable]
+    public class BarnFeedResult
+    {
+        public int fedCount;
+        public List<BarnAnimal> animals;
+        public List<ItemStack> storage;
+    }
+    [Serializable]
+    public class BarnCollectResult
+    {
+        public string productId;
+        public int quantity;
+        public List<BarnAnimal> animals;
+        public List<ItemStack> storage;
     }
 
     [Serializable] public class RateRow { public string tier; public double percent; }

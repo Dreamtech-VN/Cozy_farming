@@ -29,7 +29,10 @@ public final class ProcessingService {
             new RecipeDef("flour", "Bột mì", "wheat", 3, "flour", 1, 120, 1),
             new RecipeDef("bread", "Bánh mì", "flour", 2, "bread", 1, 240, 2),
             new RecipeDef("carrot_cake", "Bánh cà rốt", "carrot", 4, "carrot_cake", 1, 300, 3),
-            new RecipeDef("berry_jam", "Mứt dâu", "berry", 3, "berry_jam", 1, 360, 4));
+            new RecipeDef("berry_jam", "Mứt dâu", "berry", 3, "berry_jam", 1, 360, 4),
+            // Khép vòng chăn nuôi → chế biến theo spec §6.5: Sữa → Phô mai, Trứng → Bánh.
+            new RecipeDef("cheese", "Phô mai", "milk", 3, "cheese", 1, 480, 3),
+            new RecipeDef("cake", "Bánh kem", "egg", 4, "cake", 1, 540, 4));
 
     public static Optional<RecipeDef> recipe(String id) {
         return RECIPES.stream().filter(r -> r.id().equals(id)).findFirst();

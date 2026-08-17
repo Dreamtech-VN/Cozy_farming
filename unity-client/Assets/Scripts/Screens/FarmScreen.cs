@@ -9,7 +9,7 @@ namespace MyZoo
     {
         public Transform plotGrid, storageContent, cropPickerContent;
         public GameObject plotPrefab, rowPrefab, cropPickerPanel;
-        public Button closePickerButton;
+        public Button closePickerButton, barnButton;
 
         [Tooltip("Đặt tên sprite trùng id nông sản: wheat, corn, carrot, lettuce, potato, grass, bamboo, berry")]
         public Sprite[] cropSprites;
@@ -22,6 +22,8 @@ namespace MyZoo
         {
             if (closePickerButton != null)
                 closePickerButton.onClick.AddListener(delegate { cropPickerPanel.SetActive(false); });
+            if (barnButton != null)
+                barnButton.onClick.AddListener(delegate { ScreenManager.I.Show("S12_Barn", true); });
         }
 
         void OnEnable()
