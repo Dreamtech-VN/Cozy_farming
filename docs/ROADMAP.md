@@ -30,6 +30,7 @@ Cập nhật cuối mỗi đợt. Mục đích: nhìn một chỗ là biết cò
 | §27.14 IAP | Nạp tiền thật, xác thực hoá đơn | **Chưa — Đợt 10** (đang là `TOPUP_MOCK`) |
 | §27.21 Analytics | Sự kiện đo lường | **Chưa — Đợt 10** |
 | §29 Farm→Zoo loop | Chế biến, kho, cho ăn, doanh thu | Xong |
+| §29.18 Zoo dashboard | Bảng hạng/khách/doanh thu | Một phần — gộp thành một luồng doanh thu thay vì tách 6 nguồn (vé, đồ ăn, nước, quà lưu niệm, ảnh, trò chơi); **chưa có báo cáo cuối ngày** vì cần tiến trình chạy định kỳ mà kiến trúc hiện tại cố tình không có |
 | §29.23 Chợ khẩn cấp | Mua thức ăn giá cao khi kho cạn | Xong ở Đợt 8 |
 | §30 Long-term | Thời tiết/mùa, guild, giao dịch, câu cá, thú cưng, danh hiệu... | Spec ghi rõ **post-MVP** — chưa đụng |
 
