@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>MyZoo — Bảng quản trị</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; background: #1b2a1c; color: #f3f0e6; }
+  header { background: #24391f; padding: 16px 24px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  h1 { font-size: 18px; margin: 0; }
+  main { padding: 20px 24px; display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  section { background: #24391f; border-radius: 10px; padding: 16px; }
+  h2 { font-size: 15px; margin: 0 0 12px; color: #cfe6b0; }
+  label { display: block; font-size: 12px; margin: 8px 0 2px; color: #b9c9ad; }
+  input, textarea, select { width: 100%; box-sizing: border-box; padding: 7px 9px; border-radius: 6px;
+    border: 1px solid #3b5533; background: #16210f; color: #f3f0e6; font-size: 13px; }
+  button { margin-top: 12px; padding: 8px 16px; border: 0; border-radius: 6px; background: #8cc24a;
+    color: #1b2a1c; font-weight: 600; cursor: pointer; font-size: 13px; }
+  button:hover { background: #9fd45c; }
+  pre { background: #16210f; padding: 10px; border-radius: 6px; font-size: 12px; max-height: 260px;
+    overflow: auto; white-space: pre-wrap; word-break: break-word; margin: 12px 0 0; }
+  .row { display: flex; gap: 10px; }
+  .row > * { flex: 1; }
+  .note { font-size: 12px; color: #9db08f; margin: 4px 0 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>MyZoo — Bảng quản trị</h1>
+  <div class="row" style="flex: 1; min-width: 320px;">
+    <input id="baseUrl" placeholder="Để trống = chính máy chủ đang mở trang này" value="">
+    <input id="adminToken" type="password" placeholder="ADMIN_TOKEN">
+  </div>
+</header>
+
+<main>
+  <section>
+    <h2>Gửi thư / đền bù</h2>
+    <label>playerId</label><input id="mailPlayer" type="number">
+    <label>Tiêu đề</label><input id="mailTitle" value="Quà từ ban quản trị">
+    <label>Nội dung</label><textarea id="mailBody" rows="2"></textarea>
+    <div class="row">
+      <div><label>Vàng</label><input id="mailVang" type="number" value="0"></div>
+      <div><label>Kim Cương</label><input id="mailKc" type="number" value="0"></div>
+    </div>
+    <button onclick="post('/v1/admin/mail', {targetPlayerId:+v('mailPlayer'), title:v('mailTitle'), body:v('mailBody'), rewardVang:+v('mailVang'), rewardKc:+v('mailKc')})">Gửi thư</button>
+  </section>
+
+  <section>
+    <h2>Tạo mã quà tặng</h2>
+    <label>Mã</label><input id="gcCode" placeholder="TETVUIVE2026">
+    <div class="row">
+      <div><label>Vàng</label><input id="gcVang" type="number" value="0"></div>
+      <div><label>Kim Cương</label><input id="gcKc" type="number" value="0"></div>
+    </div>
+    <div class="row">
+      <div><label>Số lượt dùng</label><input id="gcUses" type="number" value="100"></div>
+      <div><label>Hết hạn (ngày)</label><input id="gcDays" type="number" value="30"></div>
+    </div>
+    <button onclick="post('/v1/admin/giftcode', {code:v('gcCode'), rewardVang:+v('gcVang'), rewardKc:+v('gcKc'), maxUses:+v('gcUses'), expiresDays:+v('gcDays')})">Tạo mã</button>
+  </section>
+
+  <section>
+    <h2>Chat</h2>
+    <label>Thông báo hệ thống</label><input id="announceText" placeholder="Máy chủ bảo trì lúc 22h">
+    <button onclick="post('/v1/admin/chat/announce', {text:v('announceText')})">Đăng thông báo</button>
+    <div class="row">
+      <div><label>Xoá tin (messageId)</label><input id="delMsg" type="number"></div>
+      <div><label>&nbsp;</label><button onclick="post('/v1/admin/chat/delete', {messageId:+v('delMsg')})">Xoá tin</button></div>
+    </div>
+    <div class="row">
+      <div><label>Cấm chat (playerId)</label><input id="banPlayer" type="number"></div>
+      <div><label>Số phút (0 = gỡ)</label><input id="banMinutes" type="number" value="60"></div>
+    </div>
+    <label>Lý do</label><input id="banReason" placeholder="Quấy rối">
+    <button onclick="post('/v1/admin/chat/ban', {targetPlayerId:+v('banPlayer'), minutes:+v('banMinutes'), reason:v('banReason')})">Áp dụng</button>
+  </section>
+
+  <section>
+    <h2>Xem nhanh</h2>
+    <button onclick="get('/v1/admin/chat/reports?limit=20')">Tin bị báo cáo</button>
+    <button onclick="get('/v1/admin/chat/log?limit=20')">Lịch sử chat</button>
+    <button onclick="get('/v1/admin/analytics?days=7')">Thống kê 7 ngày</button>
+    <button onclick="get('/v1/admin/analytics?days=30')">Thống kê 30 ngày</button>
+    <p class="note">Token chỉ nằm trong trình duyệt của bạn, không được lưu ở đâu cả.<br>
+      Trang này do chính máy chủ phục vụ nên không vướng CORS — mở tại <code>/gm.html</code>.</p>
+  </section>
+</main>
+
+<pre id="out" style="margin: 0 24px 24px;">Kết quả sẽ hiện ở đây.</pre>
+
+<script>
+const v = id => document.getElementById(id).value;
+const show = text => document.getElementById('out').textContent = text;
+
+function headers() {
+  const token = v('adminToken');
+  if (!token) { show('Chưa nhập ADMIN_TOKEN.'); throw new Error('no token'); }
+  return { 'Content-Type': 'application/json', 'X-Admin-Token': token };
+}
+
+async function call(path, options) {
+  try {
+    const response = await fetch(v('baseUrl') + path, options);
+    const text = await response.text();
+    let pretty = text;
+    try { pretty = JSON.stringify(JSON.parse(text), null, 2); } catch (e) { /* không phải JSON */ }
+    show(response.status + ' ' + response.statusText + '\n\n' + pretty);
+  } catch (e) {
+    show('Lỗi gọi máy chủ: ' + e.message + '\nKiểm tra lại địa chỉ và CORS.');
+  }
+}
+
+const get = path => call(path, { headers: headers() });
+const post = (path, body) => call(path, { method: 'POST', headers: headers(), body: JSON.stringify(body) });
+</script>
+</body>
+</html>

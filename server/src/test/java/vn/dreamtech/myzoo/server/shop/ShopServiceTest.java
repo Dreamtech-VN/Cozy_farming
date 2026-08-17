@@ -25,7 +25,8 @@ class ShopServiceTest {
         economy = new EconomyService(db, time);
         players = new PlayerService(db, economy, time);
         farm = new FarmService(db, economy, players, time);
-        shop = new ShopService(db, economy, players, farm, time);
+        // Bật cổng nạp giả lập để test tự nạp Kim Cương; production mặc định tắt (xem IapOrderTest).
+        shop = new ShopService(db, economy, players, farm, time, new IapVerifier(true));
         playerId = players.guestLogin(null).playerId();
     }
 
