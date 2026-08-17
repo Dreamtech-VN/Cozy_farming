@@ -9,6 +9,9 @@ namespace MyZoo
     {
         const int Size = 6, Kinds = 5;
 
+        // Loại game do sảnh chọn trước khi mở screen.
+        public static string NextGameType = "MATCH3";
+
         public Transform board;
         public GameObject cellPrefab;    // Button có Image
         public Text headerText;
@@ -39,7 +42,7 @@ namespace MyZoo
         IEnumerator Begin()
         {
             finishing = false;
-            yield return Api.I.StartMinigame(delegate (MinigameSession s)
+            yield return Api.I.StartMinigame(NextGameType, delegate (MinigameSession s)
             {
                 session = s;
                 rngState = (uint)(s.seed & 0xFFFFFFFF);
@@ -91,7 +94,7 @@ namespace MyZoo
                 buttons[i].transform.localScale = selected == i ? Vector3.one * 1.15f : Vector3.one;
             }
             headerText.text = "Còn " + movesLeft + " lượt · " + lines + " hàng · dự kiến "
-                            + (lines * session.vangPerLine) + " Vàng";
+                            + (lines * session.vangPerScore) + " Vàng";
         }
 
         void OnCellClicked(int index)
@@ -175,7 +178,7 @@ namespace MyZoo
             finishButton.interactable = false;
             yield return Api.I.FinishMinigame(session.sessionId, lines, delegate (MinigameResult r)
             {
-                Toast.Show("Nhận " + r.vangReward + " Vàng cho " + r.linesCounted + " hàng!");
+                Toast.Show("Nhận " + r.vangReward + " Vàng cho " + r.scoreCounted + " điểm!");
                 App.I.SetVang(r.vangBalance);
                 ScreenManager.I.Show("S09_Lobby", true);
             }, Toast.Show);

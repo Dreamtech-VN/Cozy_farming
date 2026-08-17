@@ -94,6 +94,36 @@ class ZooServiceTest {
     }
 
     @Test
+    void decorAddsAppealOnlyWhenHabitatHasFedAnimal() {
+        int habitatId = zoo.buyHabitat(playerId, "meadow").id();
+        zoo.buyDecor(playerId, habitatId, "rock");           // +3 hấp dẫn
+        assertEquals(0, zoo.view(playerId).totalAppeal(), "chuồng rỗng thì trang trí chưa tính");
+
+        zoo.buyAnimal(playerId, habitatId, "rabbit");        // thỏ 5 hấp dẫn, mua xong là đã no
+        assertEquals(5 + 3, zoo.view(playerId).totalAppeal());
+        assertEquals(3, zoo.view(playerId).habitats().get(0).decorAppeal());
+
+        time.advance(ZooService.FED_WINDOW_MS + 1000);       // thú đói -> mất cả bonus trang trí
+        assertEquals(0, zoo.view(playerId).totalAppeal());
+    }
+
+    @Test
+    void decorCannotBeBoughtTwiceAndIsLevelGated() {
+        int habitatId = zoo.buyHabitat(playerId, "meadow").id();
+        zoo.buyDecor(playerId, habitatId, "rock");
+        assertEquals(409, assertThrows(ApiException.class,
+                () -> zoo.buyDecor(playerId, habitatId, "rock")).status());
+        assertEquals(404, assertThrows(ApiException.class,
+                () -> zoo.buyDecor(playerId, habitatId, "khong-co")).status());
+
+        int fresh = players.guestLogin(null).playerId();
+        economy.earn(fresh, EconomyService.VANG, 50_000, "TEST", "t", "9");
+        int freshHabitat = zoo.buyHabitat(fresh, "meadow").id();
+        assertEquals(403, assertThrows(ApiException.class,
+                () -> zoo.buyDecor(fresh, freshHabitat, "fountain")).status());
+    }
+
+    @Test
     void openRequiresAnimal() {
         zoo.buyHabitat(playerId, "meadow");
         assertEquals(409, assertThrows(ApiException.class, () -> zoo.open(playerId)).status());

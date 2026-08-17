@@ -388,7 +388,7 @@ function mulberry32(a) {
 
 async function openMinigame() {
   try {
-    const s = await api("POST", "/v1/minigames/session", {});
+    const s = await api("POST", "/v1/minigames/session", { gameType: "MATCH3" });
     const rng = mulberry32(Number(BigInt.asUintN(32, BigInt(s.seed))));
     const board = [];
     for (let i = 0; i < M3.size * M3.size; i++) board.push(Math.floor(rng() * M3.fruits.length));
@@ -401,7 +401,7 @@ function renderMinigame() {
   const m = state.minigame;
   const cells = m.board.map((v, i) =>
     `<div class="m3-cell ${m.sel === i ? "sel" : ""}" onclick="m3Click(${i})">${fruitHtml(v)}</div>`).join("");
-  panel(`<h3>Ghép trái cây 🍎 — còn ${m.moves} lượt · ${m.lines} hàng (🪙${m.session.vangPerLine}/hàng)</h3>
+  panel(`<h3>Ghép trái cây 🍎 — còn ${m.moves} lượt · ${m.lines} hàng (🪙${m.session.vangPerScore}/hàng)</h3>
     <div id="m3-board">${cells}</div>
     <div class="row"><button onclick="m3Finish()">Kết thúc & nhận thưởng</button></div>`, 330, 46, 320);
 }
@@ -469,8 +469,8 @@ window.m3Finish = async function () {
   closePanel();
   state.minigame = null;
   try {
-    const r = await api("POST", "/v1/minigames/finish", { sessionId: m.session.sessionId, linesMade: m.lines });
-    toast(`Nhận 🪙${r.vangReward} cho ${r.linesCounted} hàng!`);
+    const r = await api("POST", "/v1/minigames/finish", { sessionId: m.session.sessionId, score: m.lines });
+    toast(`Nhận 🪙${r.vangReward} cho ${r.scoreCounted} hàng!`);
     await refreshMe();
   } catch (e) { toast(e.message); }
 };

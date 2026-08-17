@@ -7,14 +7,18 @@ namespace MyZoo
     public class LobbyScreen : MonoBehaviour
     {
         public Button farmButton, zooButton, minigameButton, missionButton, checkinButton, logoutButton;
-        public Button socialButton, rankButton, mailButton, achievementButton, shopButton, inventoryButton;
+        public Button socialButton, rankButton, mailButton, achievementButton, shopButton, inventoryButton, processingButton, memoryButton;
         public GameObject farmDot, zooDot, missionDot, mailDot;
 
         void Start()
         {
             farmButton.onClick.AddListener(delegate { ScreenManager.I.Show("S10_Farm", true); });
             zooButton.onClick.AddListener(delegate { ScreenManager.I.Show("S20_Zoo", true); });
-            minigameButton.onClick.AddListener(delegate { ScreenManager.I.Show("S40_Minigame", true); });
+            minigameButton.onClick.AddListener(delegate
+            {
+                MinigameScreen.NextGameType = "MATCH3";
+                ScreenManager.I.Show("S40_Minigame", true);
+            });
             missionButton.onClick.AddListener(delegate { ScreenManager.I.Show("S30_Missions", true); });
             checkinButton.onClick.AddListener(delegate { StartCoroutine(DoCheckin()); });
             if (logoutButton != null) logoutButton.onClick.AddListener(delegate { StartCoroutine(DoLogout()); });
@@ -26,6 +30,10 @@ namespace MyZoo
             if (shopButton != null) shopButton.onClick.AddListener(delegate { ScreenManager.I.Show("S30_Shop", true); });
             if (inventoryButton != null)
                 inventoryButton.onClick.AddListener(delegate { ScreenManager.I.Show("S32_Inventory", true); });
+            if (processingButton != null)
+                processingButton.onClick.AddListener(delegate { ScreenManager.I.Show("S34_Processing", true); });
+            if (memoryButton != null)
+                memoryButton.onClick.AddListener(delegate { ScreenManager.I.Show("S41_Memory", true); });
         }
 
         void OnEnable() { RefreshDots(); }

@@ -34,6 +34,7 @@ Mọi thứ hiện là hình vuông màu. Bỏ sprite của bạn vào `Assets/S
 | GameObject **S10_Farm** → script `FarmScreen` | mảng **Crop Sprites** | **Tên sprite phải trùng id**: `wheat`, `corn`, `carrot`, `lettuce`, `potato`, `grass`, `bamboo`, `berry`. Thêm ô **Sprout Sprite** cho cây non |
 | GameObject **S20_Zoo** → script `ZooScreen` | mảng **Animal Sprites** | Tên trùng id: `rabbit`, `sheep`, `monkey`, `giraffe`, `elephant`, `panda` |
 | GameObject **S40_Minigame** → script `MinigameScreen` | mảng **Fruit Sprites** | Đúng 5 sprite. Bỏ trống thì dùng 5 màu |
+| GameObject **S41_Memory** → script `MemoryGameScreen` | **Face Sprites** (8), **Back Sprite** | Mặt trước 8 cặp và mặt sau lá bài |
 | GameObject **S35_Achievements** → script `AchievementScreen` | mảng **Animal Sprites** | Bộ sưu tập; loài chưa có sẽ tự tô tối |
 | `Assets/Prefabs/SpeciesCard.prefab` | Image nền | Ô trong bộ sưu tập |
 | GameObject **S26_VisitFriend** → script `VisitFriendScreen` | **Crop Sprites**, **Animal Sprites**, **Sprout Sprite** | Kéo cùng bộ với S10/S20 |
@@ -56,7 +57,8 @@ Canvas
 │   ├── S10_Farm · S20_Zoo · S30_Missions · S40_Minigame
 │   ├── S24_Social · S26_VisitFriend · S36_Leaderboard
 │   ├── S33_Mail · S35_Achievements
-│   └── S30_Shop · S32_Inventory
+│   ├── S30_Shop · S32_Inventory
+│   └── S34_Processing · S41_Memory
 ├── HUD          (tên, Vàng, KC, level, nút về sảnh)
 └── Toast        (thông báo đáy màn)
 App              (Api + App + ScreenManager)

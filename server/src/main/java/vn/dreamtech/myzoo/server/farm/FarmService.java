@@ -148,14 +148,14 @@ public final class FarmService {
     public SellResult sell(int playerId, String foodId, int quantity) {
         players.requirePlayer(playerId);
         if (quantity <= 0) throw new ApiException(400, "Số lượng phải > 0");
-        Catalog.CropDef crop = Catalog.crop(foodId)
-                .orElseThrow(() -> new ApiException(404, "Không có loại nông sản này"));
+        long unitPrice = Catalog.sellPrice(foodId)
+                .orElseThrow(() -> new ApiException(404, "Không bán được loại này"));
         try (Connection c = dataSource.getConnection()) {
             addToInventory(c, "farm_inventory", playerId, foodId, -quantity);
         } catch (SQLException e) {
             throw new ApiException(500, "Lỗi bán nông sản: " + e.getMessage());
         }
-        long earned = crop.sellPrice() * quantity;
+        long earned = unitPrice * quantity;
         long balance = economy.earn(playerId, EconomyService.VANG, earned, "SELL_PRODUCE", "food", foodId);
         return new SellResult(foodId, quantity, earned, balance);
     }

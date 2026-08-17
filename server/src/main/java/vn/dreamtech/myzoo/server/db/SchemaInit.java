@@ -230,6 +230,24 @@ public final class SchemaInit {
                   PRIMARY KEY (player_id, item_id)
                 )
                 """,
+                """
+                CREATE TABLE IF NOT EXISTS processing_slots (
+                  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                  player_id INT NOT NULL,
+                  recipe_id VARCHAR(30) NOT NULL,
+                  started_at TIMESTAMP NOT NULL,
+                  ready_at TIMESTAMP NOT NULL,
+                  collected BOOLEAN NOT NULL DEFAULT FALSE
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS habitat_decors (
+                  habitat_id INT NOT NULL,
+                  decor_id VARCHAR(20) NOT NULL,
+                  created_at TIMESTAMP NOT NULL,
+                  PRIMARY KEY (habitat_id, decor_id)
+                )
+                """,
         };
         try (Connection c = dataSource.getConnection(); Statement st = c.createStatement()) {
             for (String sql : ddl) {
@@ -238,6 +256,7 @@ public final class SchemaInit {
             addColumn(c, st, "players", "account_id", "INT");
             addColumn(c, st, "players", "server_id", "VARCHAR(20)");
             addColumn(c, st, "players", "avatar", "VARCHAR(40)");
+            addColumn(c, st, "minigame_sessions", "game_type", "VARCHAR(20)");
         } catch (SQLException e) {
             throw new IllegalStateException("Không khởi tạo được schema: " + e.getMessage(), e);
         }

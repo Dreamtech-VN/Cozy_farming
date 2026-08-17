@@ -10,6 +10,7 @@ import vn.dreamtech.myzoo.server.minigame.MinigameService;
 import vn.dreamtech.myzoo.server.mission.MissionService;
 import vn.dreamtech.myzoo.server.mail.MailService;
 import vn.dreamtech.myzoo.server.player.PlayerService;
+import vn.dreamtech.myzoo.server.processing.ProcessingService;
 import vn.dreamtech.myzoo.server.reward.AchievementService;
 import vn.dreamtech.myzoo.server.reward.GiftcodeService;
 import vn.dreamtech.myzoo.server.shop.ShopCatalog;
@@ -32,13 +33,15 @@ public final class ApiRouter implements HttpHandler {
     private final GiftcodeService giftcodes;
     private final AchievementService achievements;
     private final ShopService shop;
+    private final ProcessingService processing;
     private final Idempotency idempotency;
 
     public ApiRouter(PlayerService players, FarmService farm, ZooService zoo, MinigameService minigames,
                      MissionService missions, AccountService accounts, SocialService social, MailService mail,
                      GiftcodeService giftcodes, AchievementService achievements, ShopService shop,
-                     Idempotency idempotency) {
+                     ProcessingService processing, Idempotency idempotency) {
         this.shop = shop;
+        this.processing = processing;
         this.accounts = accounts;
         this.social = social;
         this.mail = mail;
@@ -86,6 +89,11 @@ public final class ApiRouter implements HttpHandler {
         Integer expiresDays;
         String itemId;
         String packId;
+        String recipeId;
+        Long slotId;
+        String decorId;
+        String gameType;
+        Integer score;
     }
 
     @Override
@@ -170,6 +178,10 @@ public final class ApiRouter implements HttpHandler {
                     "crops", Catalog.CROPS,
                     "species", Catalog.SPECIES,
                     "habitatTypes", Catalog.HABITAT_TYPES,
+                    "products", Catalog.PRODUCTS,
+                    "decors", Catalog.DECORS,
+                    "recipes", ProcessingService.RECIPES,
+                    "games", MinigameService.GAMES,
                     "plotCount", FarmService.PLOT_COUNT));
             case "GET /v1/me" -> JsonHttp.write(ex, 200, players.profile(auth(ex)));
             case "POST /v1/players/name" -> {
@@ -241,6 +253,25 @@ public final class ApiRouter implements HttpHandler {
                         b.maxUses == null ? 1000 : b.maxUses,
                         System.currentTimeMillis() + days * 24 * 60 * 60 * 1000L);
                 JsonHttp.write(ex, 200, Map.of("code", GiftcodeService.normalize(b.code)));
+            }
+            case "GET /v1/processing" -> JsonHttp.write(ex, 200, processing.view(auth(ex)));
+            case "POST /v1/processing/start" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.recipeId != null, "Cần recipeId");
+                mutate(ex, b, playerId, () -> processing.start(playerId, b.recipeId));
+            }
+            case "POST /v1/processing/collect" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.slotId != null, "Cần slotId");
+                mutate(ex, b, playerId, () -> processing.collect(playerId, b.slotId));
+            }
+            case "POST /v1/zoo/decors" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.habitatId != null && b.decorId != null, "Cần habitatId và decorId");
+                mutate(ex, b, playerId, () -> zoo.buyDecor(playerId, b.habitatId, b.decorId));
             }
             case "GET /v1/shop" -> {
                 auth(ex);
@@ -407,14 +438,15 @@ public final class ApiRouter implements HttpHandler {
             case "POST /v1/minigames/session" -> {
                 int playerId = auth(ex);
                 Body b = JsonHttp.readBody(ex, Body.class);
-                mutate(ex, b, playerId, () -> minigames.create(playerId));
+                mutate(ex, b, playerId, () -> minigames.create(playerId, b.gameType));
             }
             case "POST /v1/minigames/finish" -> {
                 int playerId = auth(ex);
                 Body b = JsonHttp.readBody(ex, Body.class);
-                requireFields(b.sessionId != null && b.linesMade != null, "Cần sessionId và linesMade");
+                Integer score = b.score != null ? b.score : b.linesMade;
+                requireFields(b.sessionId != null && score != null, "Cần sessionId và score");
                 mutate(ex, b, playerId, () -> {
-                    var r = minigames.finish(playerId, b.sessionId, b.linesMade);
+                    var r = minigames.finish(playerId, b.sessionId, score);
                     if (r.newlyFinished()) track(playerId, "MINIGAME", 1);
                     return r;
                 });

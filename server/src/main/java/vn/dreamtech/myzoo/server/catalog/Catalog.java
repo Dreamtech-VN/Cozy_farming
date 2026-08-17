@@ -48,6 +48,47 @@ public final class Catalog {
     private static final Map<String, SpeciesDef> SPECIES_BY_ID = index(SPECIES, SpeciesDef::id);
     private static final Map<String, HabitatTypeDef> HABITAT_BY_ID = index(HABITAT_TYPES, HabitatTypeDef::id);
 
+    // Thành phẩm chế biến: không trồng được, chỉ bán. Giá cao hơn tổng nguyên liệu.
+    public record ProductDef(String id, String name, long sellPrice) {
+    }
+
+    public static final List<ProductDef> PRODUCTS = List.of(
+            new ProductDef("flour", "Bột mì", 220),
+            new ProductDef("bread", "Bánh mì", 560),
+            new ProductDef("carrot_cake", "Bánh cà rốt", 320),
+            new ProductDef("berry_jam", "Mứt dâu", 360));
+
+    // Trang trí chuồng: cộng thẳng vào độ hấp dẫn khi chuồng có thú đã được cho ăn.
+    public record DecorDef(String id, String name, long cost, int appealBonus, int minZooLevel) {
+    }
+
+    public static final List<DecorDef> DECORS = List.of(
+            new DecorDef("rock", "Tảng đá", 600, 3, 1),
+            new DecorDef("pond", "Hồ nước nhỏ", 1500, 8, 2),
+            new DecorDef("tree", "Cây cổ thụ", 2600, 14, 3),
+            new DecorDef("fountain", "Đài phun nước", 5000, 25, 4));
+
+    public static Optional<ProductDef> product(String id) {
+        return PRODUCTS.stream().filter(p -> p.id().equals(id)).findFirst();
+    }
+
+    public static Optional<DecorDef> decor(String id) {
+        return DECORS.stream().filter(d -> d.id().equals(id)).findFirst();
+    }
+
+    // Giá bán chung cho cả nông sản lẫn thành phẩm.
+    public static Optional<Long> sellPrice(String foodId) {
+        var c = crop(foodId);
+        if (c.isPresent()) return Optional.of(c.get().sellPrice());
+        return product(foodId).map(ProductDef::sellPrice);
+    }
+
+    public static String displayName(String foodId) {
+        var c = crop(foodId);
+        if (c.isPresent()) return c.get().name();
+        return product(foodId).map(ProductDef::name).orElse(foodId);
+    }
+
     public static Optional<CropDef> crop(String id) {
         return Optional.ofNullable(CROP_BY_ID.get(id));
     }
