@@ -41,6 +41,12 @@ namespace MyZoo
             Changed();
         }
 
+        public void SetKc(long kc)
+        {
+            if (Me != null && Me.wallets != null) Me.wallets.KC = kc;
+            Changed();
+        }
+
         public CropDef Crop(string id)
         {
             if (Catalog == null) return null;

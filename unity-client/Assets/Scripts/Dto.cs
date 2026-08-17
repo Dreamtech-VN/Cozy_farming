@@ -346,6 +346,55 @@ namespace MyZoo
         public List<LedgerEntry> entries;
     }
 
+    [Serializable] public class RateRow { public string tier; public double percent; }
+    [Serializable]
+    public class GachaBanner
+    {
+        public string id, name;
+        public int costSingle, costTen, pityThreshold;
+        public long startAt, endAt;
+        public List<RateRow> rates;
+    }
+    [Serializable] public class BannerList { public List<GachaBanner> banners; }
+    [Serializable]
+    public class PullResult
+    {
+        public string cosmeticId, name, kind, tier;
+        public bool duplicate;
+        public int fragments;
+    }
+    [Serializable]
+    public class PullBatch
+    {
+        public string bannerId;
+        public List<PullResult> results;
+        public long kcBalance;
+        public int fragments, pityCounter;
+    }
+    [Serializable]
+    public class PullRow
+    {
+        public long id, createdAt;
+        public string bannerId, cosmeticId, name, tier;
+        public bool duplicate;
+        public int fragments;
+    }
+    [Serializable]
+    public class GachaHistory
+    {
+        public List<PullRow> pulls;
+        public int fragments, pity;
+    }
+    [Serializable]
+    public class CosmeticEntry
+    {
+        public string id, name, kind, tier;
+        public bool owned, equipped;
+    }
+    [Serializable] public class CosmeticList { public List<CosmeticEntry> cosmetics; public int fragments; }
+    [Serializable] public class EquipResult { public string cosmeticId, kind, avatar, zooSkin; }
+    [Serializable] public class ExchangeResult { public string cosmeticId; public int fragmentsLeft; }
+
     [Serializable] public class OkResult { public bool ok; }
 
     public static class Items

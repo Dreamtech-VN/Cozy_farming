@@ -306,6 +306,63 @@ public final class SchemaInit {
                   created_at TIMESTAMP NOT NULL
                 )
                 """,
+                """
+                CREATE TABLE IF NOT EXISTS gacha_banners (
+                  id VARCHAR(40) PRIMARY KEY,
+                  name VARCHAR(60) NOT NULL,
+                  version INT NOT NULL DEFAULT 1,
+                  cost_single INT NOT NULL,
+                  cost_ten INT NOT NULL,
+                  pity_threshold INT NOT NULL,
+                  start_at TIMESTAMP,
+                  end_at TIMESTAMP
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS gacha_pools (
+                  banner_id VARCHAR(40) NOT NULL,
+                  tier VARCHAR(5) NOT NULL,
+                  weight INT NOT NULL,
+                  PRIMARY KEY (banner_id, tier)
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS gacha_pity (
+                  player_id INT NOT NULL,
+                  banner_id VARCHAR(40) NOT NULL,
+                  counter INT NOT NULL DEFAULT 0,
+                  PRIMARY KEY (player_id, banner_id)
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS gacha_pulls (
+                  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                  player_id INT NOT NULL,
+                  banner_id VARCHAR(40) NOT NULL,
+                  cosmetic_id VARCHAR(40) NOT NULL,
+                  tier VARCHAR(5) NOT NULL,
+                  duplicate BOOLEAN NOT NULL DEFAULT FALSE,
+                  fragments INT NOT NULL DEFAULT 0,
+                  pity_before INT NOT NULL,
+                  pity_after INT NOT NULL,
+                  created_at TIMESTAMP NOT NULL
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS owned_cosmetics (
+                  player_id INT NOT NULL,
+                  cosmetic_id VARCHAR(40) NOT NULL,
+                  source VARCHAR(20) NOT NULL,
+                  acquired_at TIMESTAMP NOT NULL,
+                  PRIMARY KEY (player_id, cosmetic_id)
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS gacha_fragments (
+                  player_id INT PRIMARY KEY,
+                  amount INT NOT NULL DEFAULT 0
+                )
+                """,
         };
         try (Connection c = dataSource.getConnection(); Statement st = c.createStatement()) {
             for (String sql : ddl) {
@@ -314,6 +371,7 @@ public final class SchemaInit {
             addColumn(c, st, "players", "account_id", "INT");
             addColumn(c, st, "players", "server_id", "VARCHAR(20)");
             addColumn(c, st, "players", "avatar", "VARCHAR(40)");
+            addColumn(c, st, "players", "equipped_skin", "VARCHAR(40)");
             addColumn(c, st, "minigame_sessions", "game_type", "VARCHAR(20)");
         } catch (SQLException e) {
             throw new IllegalStateException("Không khởi tạo được schema: " + e.getMessage(), e);

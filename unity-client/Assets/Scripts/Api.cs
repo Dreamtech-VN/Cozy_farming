@@ -72,6 +72,38 @@ namespace MyZoo
 
         public IEnumerator Logout(Action<OkResult> ok, Action<string> fail) { return Post("/v1/auth/logout", "{}", ok, fail); }
 
+        // ---------- Gacha & ngoại hình ----------
+        public IEnumerator GetBanners(Action<BannerList> ok, Action<string> fail)
+        {
+            return Get("/v1/gacha/banners", ok, fail);
+        }
+
+        public IEnumerator Pull(string bannerId, int count, Action<PullBatch> ok, Action<string> fail)
+        {
+            return Post("/v1/gacha/pull",
+                "{" + Str("bannerId", bannerId) + "," + Num("count", count) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator GetGachaHistory(int limit, Action<GachaHistory> ok, Action<string> fail)
+        {
+            return Get("/v1/gacha/history?limit=" + limit, ok, fail);
+        }
+
+        public IEnumerator ExchangeFragments(string cosmeticId, Action<ExchangeResult> ok, Action<string> fail)
+        {
+            return Post("/v1/gacha/exchange", "{" + Str("cosmeticId", cosmeticId) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator GetCosmetics(Action<CosmeticList> ok, Action<string> fail)
+        {
+            return Get("/v1/cosmetics", ok, fail);
+        }
+
+        public IEnumerator EquipCosmetic(string cosmeticId, Action<EquipResult> ok, Action<string> fail)
+        {
+            return Post("/v1/cosmetics/equip", "{" + Str("cosmeticId", cosmeticId) + "," + Req() + "}", ok, fail);
+        }
+
         // cursor = 0 là tải từ đầu; các lần sau truyền nextCursor của trang trước.
         public IEnumerator GetWallet(long cursor, int limit, Action<WalletView> ok, Action<string> fail)
         {
