@@ -4,6 +4,8 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import vn.dreamtech.myzoo.server.auth.AccountService;
 import vn.dreamtech.myzoo.server.catalog.Catalog;
+import vn.dreamtech.myzoo.server.chat.ChatCatalog;
+import vn.dreamtech.myzoo.server.chat.ChatService;
 import vn.dreamtech.myzoo.server.config.GameConfig;
 import vn.dreamtech.myzoo.server.farm.FarmService;
 import vn.dreamtech.myzoo.server.minigame.MinigameService;
@@ -34,14 +36,16 @@ public final class ApiRouter implements HttpHandler {
     private final AchievementService achievements;
     private final ShopService shop;
     private final ProcessingService processing;
+    private final ChatService chat;
     private final Idempotency idempotency;
 
     public ApiRouter(PlayerService players, FarmService farm, ZooService zoo, MinigameService minigames,
                      MissionService missions, AccountService accounts, SocialService social, MailService mail,
                      GiftcodeService giftcodes, AchievementService achievements, ShopService shop,
-                     ProcessingService processing, Idempotency idempotency) {
+                     ProcessingService processing, ChatService chat, Idempotency idempotency) {
         this.shop = shop;
         this.processing = processing;
+        this.chat = chat;
         this.accounts = accounts;
         this.social = social;
         this.mail = mail;
@@ -94,6 +98,16 @@ public final class ApiRouter implements HttpHandler {
         String decorId;
         String gameType;
         Integer score;
+        String channel;
+        Integer targetId;
+        String text;
+        String refId;
+        Long messageId;
+        String mode;
+        String reason;
+        Long minutes;
+        String voiceBase64;
+        Integer durationMs;
     }
 
     @Override
@@ -254,6 +268,118 @@ public final class ApiRouter implements HttpHandler {
                         System.currentTimeMillis() + days * 24 * 60 * 60 * 1000L);
                 JsonHttp.write(ex, 200, Map.of("code", GiftcodeService.normalize(b.code)));
             }
+            case "GET /v1/chat/catalog" -> {
+                auth(ex);
+                JsonHttp.write(ex, 200, Map.of("stickers", ChatCatalog.STICKERS, "gifs", ChatCatalog.GIFS,
+                        "maxTextLength", vn.dreamtech.myzoo.server.chat.ChatModeration.MAX_LENGTH));
+            }
+            case "GET /v1/chat/world" -> {
+                int playerId = auth(ex);
+                String query = ex.getRequestURI().getQuery();
+                Integer since = QueryParam.intParam(query, "sinceId");
+                Integer limit = QueryParam.intParam(query, "limit");
+                JsonHttp.write(ex, 200, Map.of(
+                        "messages", chat.world(playerId, since == null ? null : since.longValue(),
+                                limit == null ? 50 : limit),
+                        "ban", chat.banInfo(playerId)));
+            }
+            case "GET /v1/chat/private" -> {
+                int playerId = auth(ex);
+                String query = ex.getRequestURI().getQuery();
+                Integer other = QueryParam.intParam(query, "playerId");
+                Integer since = QueryParam.intParam(query, "sinceId");
+                Integer limit = QueryParam.intParam(query, "limit");
+                requireFields(other != null, "Cần playerId");
+                JsonHttp.write(ex, 200, Map.of("messages",
+                        chat.conversation(playerId, other, since == null ? null : since.longValue(),
+                                limit == null ? 50 : limit)));
+            }
+            case "POST /v1/chat/send" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                mutate(ex, b, playerId, () -> chat.send(playerId, b.channel, b.targetId, b.type, b.text, b.refId));
+            }
+            case "POST /v1/chat/voice" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.voiceBase64 != null && b.durationMs != null, "Cần voiceBase64 và durationMs");
+                byte[] data;
+                try {
+                    data = java.util.Base64.getDecoder().decode(b.voiceBase64);
+                } catch (IllegalArgumentException e) {
+                    throw new ApiException(400, "Dữ liệu ghi âm không hợp lệ");
+                }
+                mutate(ex, b, playerId, () -> chat.saveVoice(playerId, data, b.durationMs));
+            }
+            case "GET /v1/chat/voice" -> {
+                int playerId = auth(ex);
+                String voiceId = QueryParam.stringParam(ex.getRequestURI().getQuery(), "voiceId");
+                requireFields(voiceId != null, "Cần voiceId");
+                byte[] data = chat.readVoice(playerId, voiceId);
+                ex.getResponseHeaders().add("Content-Type", "application/octet-stream");
+                ex.sendResponseHeaders(200, data.length);
+                try (var os = ex.getResponseBody()) {
+                    os.write(data);
+                }
+            }
+            case "GET /v1/chat/relations" -> JsonHttp.write(ex, 200, chat.relations(auth(ex)));
+            case "POST /v1/chat/relations" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.targetId != null && b.mode != null, "Cần targetId và mode");
+                mutate(ex, b, playerId, () -> {
+                    chat.setRelation(playerId, b.targetId, b.mode);
+                    return chat.relations(playerId);
+                });
+            }
+            case "POST /v1/chat/report" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.messageId != null, "Cần messageId");
+                mutate(ex, b, playerId, () -> {
+                    chat.report(playerId, b.messageId, b.reason);
+                    return Map.of("ok", true);
+                });
+            }
+            case "POST /v1/admin/chat/delete" -> {
+                requireAdmin(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.messageId != null, "Cần messageId");
+                chat.deleteMessage(b.messageId, 0);
+                JsonHttp.write(ex, 200, Map.of("ok", true));
+            }
+            case "POST /v1/admin/chat/ban" -> {
+                requireAdmin(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.targetPlayerId != null, "Cần targetPlayerId");
+                if (b.minutes != null && b.minutes <= 0) {
+                    chat.unbanChat(b.targetPlayerId);
+                    JsonHttp.write(ex, 200, Map.of("ok", true));
+                } else {
+                    JsonHttp.write(ex, 200, chat.banChat(b.targetPlayerId,
+                            b.minutes == null ? 60 : b.minutes, b.reason));
+                }
+            }
+            case "POST /v1/admin/chat/announce" -> {
+                requireAdmin(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.text != null, "Cần text");
+                JsonHttp.write(ex, 200, Map.of("messageId", chat.system(b.text)));
+            }
+            case "GET /v1/admin/chat/log" -> {
+                requireAdmin(ex);
+                String query = ex.getRequestURI().getQuery();
+                Integer since = QueryParam.intParam(query, "sinceId");
+                Integer limit = QueryParam.intParam(query, "limit");
+                JsonHttp.write(ex, 200, Map.of("messages",
+                        chat.adminLog(QueryParam.stringParam(query, "channel"),
+                                since == null ? null : since.longValue(), limit == null ? 100 : limit)));
+            }
+            case "GET /v1/admin/chat/reports" -> {
+                requireAdmin(ex);
+                Integer limit = QueryParam.intParam(ex.getRequestURI().getQuery(), "limit");
+                JsonHttp.write(ex, 200, Map.of("reports", chat.reports(limit == null ? 50 : limit)));
+            }
             case "GET /v1/processing" -> JsonHttp.write(ex, 200, processing.view(auth(ex)));
             case "POST /v1/processing/start" -> {
                 int playerId = auth(ex);
@@ -392,6 +518,7 @@ public final class ApiRouter implements HttpHandler {
                     var r = zoo.buyAnimal(playerId, b.habitatId, b.speciesId);
                     try {
                         achievements.recordSpecies(playerId, b.speciesId);
+                        announceRareAnimal(playerId, b.speciesId);
                     } catch (RuntimeException ignored) {
                     }
                     return r;
@@ -467,6 +594,16 @@ public final class ApiRouter implements HttpHandler {
     private void mutate(HttpExchange ex, Body b, int playerId, java.util.function.Supplier<Object> action)
             throws IOException {
         JsonHttp.writeRaw(ex, 200, idempotency.execute(b.requestId, playerId, action));
+    }
+
+    // Khoe thú hiếm lên kênh hệ thống — tạo không khí và khuyến khích sưu tầm.
+    private void announceRareAnimal(int playerId, String speciesId) {
+        Catalog.species(speciesId).ifPresent(species -> {
+            if (!"SSR".equals(species.rarity())) return;
+            String name = players.profile(playerId).name();
+            if (name == null) return;
+            chat.system(name + " vừa đón " + species.name() + " [SSR] về sở thú!");
+        });
     }
 
     // Admin chỉ mở khi đặt biến môi trường ADMIN_TOKEN trên server.

@@ -72,6 +72,7 @@ public static class SceneBuilder
         BuildInventory(screens.transform, prefabs);
         BuildProcessing(screens.transform, prefabs);
         BuildMemoryGame(screens.transform, prefabs);
+        BuildChat(screens.transform, prefabs);
 
         var app = new GameObject("App", typeof(Api), typeof(App), typeof(ScreenManager));
         var manager = app.GetComponent<ScreenManager>();
@@ -106,13 +107,15 @@ public static class SceneBuilder
         // Cho phép gọi http:// khi dev; lên production dùng https thì đổi lại NotAllowed
         PlayerSettings.insecureHttpOption = InsecureHttpOption.AlwaysAllowed;
 #endif
-        Debug.Log("MyZoo: đã khoá màn hình ngang và cho phép HTTP.");
+        // iOS bắt buộc phải khai lý do dùng micro, không khai là bị từ chối lúc duyệt app.
+        PlayerSettings.iOS.microphoneUsageDescription = "Dùng để gửi tin nhắn thoại trong khung chat.";
+        Debug.Log("MyZoo: đã khoá màn hình ngang, cho phép HTTP và khai quyền micro.");
     }
 
     // ---------------- Prefabs ----------------
     class Prefabs
     {
-        public GameObject row, plotCell, habitatCard, animalIcon, serverCard, boardCell, speciesCard;
+        public GameObject row, plotCell, habitatCard, animalIcon, serverCard, boardCell, speciesCard, chatRow, pickerCell;
     }
 
     static Prefabs BuildPrefabs()
@@ -126,6 +129,8 @@ public static class SceneBuilder
         p.habitatCard = SavePrefab(MakeHabitatCard(p.animalIcon), "HabitatCard");
         p.serverCard = SavePrefab(MakeServerCard(), "ServerCard");
         p.boardCell = SavePrefab(MakeBoardCell(), "BoardCell");
+        p.chatRow = SavePrefab(MakeChatRow(), "ChatRow");
+        p.pickerCell = SavePrefab(MakePickerCell(), "PickerCell");
         return p;
     }
 
@@ -142,6 +147,32 @@ public static class SceneBuilder
         var go = Button("Row", null, Panel, 420, 40);
         var label = Text("Label", go.transform, "", 14, Dark, TextAnchor.MiddleLeft);
         Stretch(label, 10, 0);
+        return go;
+    }
+
+    // Dòng chat: ô Icon để trống sẵn cho sprite sticker/GIF, ráp sau trong Inspector của ChatScreen.
+    static GameObject MakeChatRow()
+    {
+        var go = Button("ChatRow", null, new Color(1f, 1f, 1f, 0.08f), 560, 34);
+        var icon = Image("Icon", go.transform, Color.white, 28, 28);
+        var irt = icon.GetComponent<RectTransform>();
+        irt.anchorMin = irt.anchorMax = new Vector2(0, 0.5f);
+        irt.pivot = new Vector2(0, 0.5f);
+        irt.anchoredPosition = new Vector2(6, 0);
+        icon.SetActive(false);
+        var label = Text("Label", go.transform, "", 14, Color.white, TextAnchor.MiddleLeft);
+        Stretch(label, 40, 0);
+        return go;
+    }
+
+    static GameObject MakePickerCell()
+    {
+        var go = Button("PickerCell", null, Panel, 84, 48);
+        var icon = Image("Icon", go.transform, Color.white, 32, 32);
+        Center(icon, 0, 8);
+        icon.SetActive(false);
+        var label = Text("Label", go.transform, "", 12, Dark, TextAnchor.MiddleCenter);
+        Stretch(label, 2, 2);
         return go;
     }
 
@@ -550,6 +581,10 @@ public static class SceneBuilder
         Center(checkin, -80, -215);
         Stretch(Text("Label", checkin.transform, "Điểm danh", 15, Dark, TextAnchor.MiddleCenter));
 
+        var chat = Button("ChatButton", screen.transform, new Color(0.60f, 0.85f, 0.85f), 150, 38);
+        Center(chat, 440, -215);
+        Stretch(Text("Label", chat.transform, "Chat", 14, Dark, TextAnchor.MiddleCenter));
+
         var logout = Button("LogoutButton", screen.transform, new Color(0.75f, 0.75f, 0.75f), 140, 40);
         Center(logout, 120, -215);
         Stretch(Text("Label", logout.transform, "Đăng xuất", 14, Dark, TextAnchor.MiddleCenter));
@@ -569,6 +604,7 @@ public static class SceneBuilder
         comp.inventoryButton = inventory.GetComponent<Button>();
         comp.processingButton = processing.GetComponent<Button>();
         comp.memoryButton = memory.GetComponent<Button>();
+        comp.chatButton = chat.GetComponent<Button>();
         comp.mailDot = mailDot;
         comp.farmDot = farm.transform.Find("Dot").gameObject;
         comp.zooDot = zoo.transform.Find("Dot").gameObject;
@@ -985,6 +1021,111 @@ public static class SceneBuilder
         comp.cellPrefab = prefabs.boardCell;
         comp.headerText = header.GetComponent<Text>();
         comp.finishButton = finish.GetComponent<Button>();
+    }
+
+    static void BuildChat(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S37_Chat", parent, "Chat");
+
+        var world = Button("WorldTabButton", screen.transform, Primary, 140, 34);
+        Center(world, -350, 150);
+        Stretch(Text("Label", world.transform, "Thế giới", 14, Dark, TextAnchor.MiddleCenter));
+
+        var priv = Button("PrivateTabButton", screen.transform, new Color(0.55f, 0.72f, 0.95f), 140, 34);
+        Center(priv, -200, 150);
+        Stretch(Text("Label", priv.transform, "Chat riêng", 14, Dark, TextAnchor.MiddleCenter));
+
+        var partner = Text("Partner", screen.transform, "", 13, new Color(1, 1, 1, 0.85f), TextAnchor.MiddleLeft);
+        Center(partner, 120, 150); Size(partner, 420, 20);
+
+        var ban = Text("BanNotice", screen.transform, "", 13, new Color(1f, 0.55f, 0.5f), TextAnchor.MiddleCenter);
+        Center(ban, 0, 122); Size(ban, 800, 20);
+        ban.SetActive(false);
+
+        var messages = ScrollList("MessageList", screen.transform, 660, 250, -130, -20);
+        var messageScroll = messages.parent.parent.GetComponent<ScrollRect>();
+
+        var picker = Image("PickerPanel", screen.transform, new Color(0, 0, 0, 0.35f), 240, 250);
+        Center(picker, 330, -20);
+        var pickerList = ScrollList("PickerList", picker.transform, 232, 242, 0, 0);
+        picker.SetActive(false);
+
+        var emojiBar = Empty("EmojiBar", screen.transform);
+        Size(emojiBar, 660, 34); Center(emojiBar, -130, -128);
+        var emojiLayout = emojiBar.AddComponent<HorizontalLayoutGroup>();
+        emojiLayout.spacing = 4;
+        emojiLayout.childForceExpandWidth = false;
+        emojiLayout.childControlWidth = false;
+        emojiLayout.childForceExpandHeight = false;
+        emojiLayout.childControlHeight = false;
+
+        var input = InputField("MessageInput", screen.transform, "Nhập tin nhắn...", -180, -180);
+        Size(input, 560, 42);
+
+        var send = Button("SendButton", screen.transform, Primary, 90, 42);
+        Center(send, 150, -180);
+        Stretch(Text("Label", send.transform, "Gửi", 15, Dark, TextAnchor.MiddleCenter));
+
+        var sticker = Button("StickerButton", screen.transform, new Color(0.95f, 0.85f, 0.55f), 90, 42);
+        Center(sticker, 250, -180);
+        Stretch(Text("Label", sticker.transform, "Sticker", 14, Dark, TextAnchor.MiddleCenter));
+
+        var gif = Button("GifButton", screen.transform, new Color(0.85f, 0.75f, 0.95f), 70, 42);
+        Center(gif, 340, -180);
+        Stretch(Text("Label", gif.transform, "GIF", 14, Dark, TextAnchor.MiddleCenter));
+
+        var voice = Button("VoiceButton", screen.transform, new Color(0.95f, 0.65f, 0.55f), 90, 42);
+        Center(voice, 420, -180);
+        Stretch(Text("Label", voice.transform, "Ghi âm", 14, Dark, TextAnchor.MiddleCenter));
+
+        // Bảng hành động khi bấm vào một tin của người khác.
+        var action = Image("ActionPanel", screen.transform, Panel, 300, 240);
+        Center(action, 0, 0);
+        var actionTitle = Text("ActionTitle", action.transform, "", 16, Dark, TextAnchor.MiddleCenter);
+        Center(actionTitle, 0, 92); Size(actionTitle, 280, 24);
+        var actPrivate = ActionButton(action.transform, "ActionPrivateButton", "Nhắn riêng", 50);
+        var actMute = ActionButton(action.transform, "ActionMuteButton", "Ẩn tin của người này", 8);
+        var actBlock = ActionButton(action.transform, "ActionBlockButton", "Chặn người này", -34);
+        var actReport = ActionButton(action.transform, "ActionReportButton", "Báo cáo tin nhắn", -76);
+        var actClose = ActionButton(action.transform, "ActionCloseButton", "Đóng", -114);
+        action.SetActive(false);
+
+        var back = CloseButton(screen.transform);
+
+        var comp = screen.AddComponent<ChatScreen>();
+        comp.titleText = screen.transform.Find("Title").GetComponent<Text>();
+        comp.banText = ban.GetComponent<Text>();
+        comp.partnerText = partner.GetComponent<Text>();
+        comp.worldTabButton = world.GetComponent<Button>();
+        comp.privateTabButton = priv.GetComponent<Button>();
+        comp.sendButton = send.GetComponent<Button>();
+        comp.stickerButton = sticker.GetComponent<Button>();
+        comp.gifButton = gif.GetComponent<Button>();
+        comp.voiceButton = voice.GetComponent<Button>();
+        comp.backButton = back;
+        comp.messageInput = input.GetComponent<InputField>();
+        comp.messageContent = messages;
+        comp.messageScroll = messageScroll;
+        comp.pickerContent = pickerList;
+        comp.pickerPanel = picker;
+        comp.emojiContent = emojiBar.transform;
+        comp.rowPrefab = prefabs.chatRow;
+        comp.pickerCellPrefab = prefabs.pickerCell;
+        comp.actionPanel = action;
+        comp.actionTitleText = actionTitle.GetComponent<Text>();
+        comp.actionPrivateButton = actPrivate;
+        comp.actionMuteButton = actMute;
+        comp.actionBlockButton = actBlock;
+        comp.actionReportButton = actReport;
+        comp.actionCloseButton = actClose;
+    }
+
+    static Button ActionButton(Transform parent, string name, string label, float y)
+    {
+        var go = Button(name, parent, Primary, 260, 36);
+        Center(go, 0, y);
+        Stretch(Text("Label", go.transform, label, 14, Dark, TextAnchor.MiddleCenter));
+        return go.GetComponent<Button>();
     }
 
     // ---------------- Helper UI ----------------

@@ -306,6 +306,33 @@ namespace MyZoo
     [Serializable] public class ProcessStartResult { public long slotId, readyAt; public string recipeId; public List<ItemStack> storage; }
     [Serializable] public class ProcessCollectResult { public long slotId; public string outputFoodId; public int quantity; public List<ItemStack> storage; }
 
+    [Serializable]
+    public class ChatMessage
+    {
+        public long id, createdAt;
+        public string channel, senderName, type, text, refId;
+        public int senderId;
+        public int targetId;
+        public bool deleted;
+    }
+    [Serializable] public class ChatBan { public bool banned; public long until; public string reason; }
+    [Serializable] public class ChatFeed { public List<ChatMessage> messages; public ChatBan ban; }
+    [Serializable]
+    public class ChatSendResult
+    {
+        public long id, createdAt;
+        public string channel, type, text, refId, notice;
+    }
+    [Serializable] public class StickerDef { public string id, name; }
+    [Serializable]
+    public class ChatCatalogDto
+    {
+        public List<StickerDef> stickers, gifs;
+        public int maxTextLength;
+    }
+    [Serializable] public class ChatRelations { public List<int> muted, blocked; }
+    [Serializable] public class VoiceMeta { public string voiceId; public int durationMs, bytes; }
+
     [Serializable] public class OkResult { public bool ok; }
 
     public static class Items

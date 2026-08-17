@@ -9,6 +9,7 @@ WorkingDirectory=/opt/myzoo
 ExecStart=/usr/bin/java -Xms128m -Xmx512m -jar /opt/myzoo/myzoo-server.jar
 Environment=SERVER_PORT=8080
 Environment=CLIENT_DIR=/opt/myzoo/client
+Environment=VOICE_DIR=/opt/myzoo/voice
 # Bỏ comment để bật endpoint vận hành (gửi thư, tạo giftcode). Đặt chuỗi ngẫu nhiên dài.
 #Environment=ADMIN_TOKEN=doi-chuoi-nay-thanh-token-bi-mat
 # Dùng MySQL thì bỏ comment 3 dòng dưới (mặc định là H2 file ./myzoo-data trong WorkingDirectory)

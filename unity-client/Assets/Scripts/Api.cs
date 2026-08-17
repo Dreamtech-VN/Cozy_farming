@@ -234,6 +234,61 @@ namespace MyZoo
             return Post("/v1/minigames/finish", "{" + Str("sessionId", sessionId) + "," + Num("score", score) + "," + Req() + "}", ok, fail);
         }
 
+        // ---------- Chat ----------
+        public IEnumerator GetChatCatalog(Action<ChatCatalogDto> ok, Action<string> fail)
+        {
+            return Get("/v1/chat/catalog", ok, fail);
+        }
+
+        public IEnumerator GetWorldChat(long sinceId, Action<ChatFeed> ok, Action<string> fail)
+        {
+            return Get("/v1/chat/world?sinceId=" + sinceId, ok, fail);
+        }
+
+        public IEnumerator GetPrivateChat(int otherPlayerId, long sinceId, Action<ChatFeed> ok, Action<string> fail)
+        {
+            return Get("/v1/chat/private?playerId=" + otherPlayerId + "&sinceId=" + sinceId, ok, fail);
+        }
+
+        public IEnumerator SendChat(string channel, int targetId, string type, string text, string refId,
+                                    Action<ChatSendResult> ok, Action<string> fail)
+        {
+            string body = "{" + Str("channel", channel) + "," + Str("type", type);
+            if (targetId > 0) body += "," + Num("targetId", targetId);
+            if (text != null) body += "," + Str("text", text);
+            if (refId != null) body += "," + Str("refId", refId);
+            return Post("/v1/chat/send", body + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator UploadVoice(byte[] clip, int durationMs, Action<VoiceMeta> ok, Action<string> fail)
+        {
+            string body = "{" + Str("voiceBase64", Convert.ToBase64String(clip)) + ","
+                        + Num("durationMs", durationMs) + "," + Req() + "}";
+            return Post("/v1/chat/voice", body, ok, fail);
+        }
+
+        public IEnumerator DownloadVoice(string voiceId, Action<byte[]> ok, Action<string> fail)
+        {
+            return GetBytes("/v1/chat/voice?voiceId=" + voiceId, ok, fail);
+        }
+
+        public IEnumerator GetChatRelations(Action<ChatRelations> ok, Action<string> fail)
+        {
+            return Get("/v1/chat/relations", ok, fail);
+        }
+
+        public IEnumerator SetChatRelation(int targetId, string mode, Action<ChatRelations> ok, Action<string> fail)
+        {
+            return Post("/v1/chat/relations",
+                "{" + Num("targetId", targetId) + "," + Str("mode", mode) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator ReportMessage(long messageId, string reason, Action<OkResult> ok, Action<string> fail)
+        {
+            return Post("/v1/chat/report",
+                "{" + Num("messageId", messageId) + "," + Str("reason", reason) + "," + Req() + "}", ok, fail);
+        }
+
         // ---------- Chế biến / trang trí ----------
         public IEnumerator GetProcessing(Action<ProcessingView> ok, Action<string> fail) { return Get("/v1/processing", ok, fail); }
 
@@ -302,6 +357,24 @@ namespace MyZoo
                 ApplyHeaders(req);
                 yield return req.SendWebRequest();
                 Handle(req, ok, fail);
+            }
+        }
+
+        // Tải dữ liệu nhị phân (đoạn ghi âm) — không đi qua JSON.
+        IEnumerator GetBytes(string path, Action<byte[]> ok, Action<string> fail)
+        {
+            using (var req = UnityWebRequest.Get(baseUrl + path))
+            {
+                ApplyHeaders(req);
+                yield return req.SendWebRequest();
+                bool success =
+#if UNITY_2020_2_OR_NEWER
+                    req.result == UnityWebRequest.Result.Success;
+#else
+                    !req.isNetworkError && !req.isHttpError;
+#endif
+                if (success) ok(req.downloadHandler.data);
+                else fail(string.IsNullOrEmpty(req.error) ? "Không tải được ghi âm" : req.error);
             }
         }
 
