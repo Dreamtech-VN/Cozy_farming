@@ -129,6 +129,39 @@ namespace MyZoo
         public IEnumerator CloseZoo(Action<CollectResult> ok, Action<string> fail) { return Post("/v1/zoo/close", "{" + Req() + "}", ok, fail); }
         public IEnumerator Collect(Action<CollectResult> ok, Action<string> fail) { return Post("/v1/zoo/collect", "{" + Req() + "}", ok, fail); }
 
+        // ---------- Bạn bè ----------
+        public IEnumerator GetFriends(Action<FriendsView> ok, Action<string> fail) { return Get("/v1/friends", ok, fail); }
+
+        public IEnumerator SendFriendRequest(string friendName, Action<FriendsView> ok, Action<string> fail)
+        {
+            return Post("/v1/friends/request", "{" + Str("friendName", friendName) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator AcceptFriend(int friendId, Action<FriendsView> ok, Action<string> fail)
+        {
+            return Post("/v1/friends/accept", "{" + Num("friendId", friendId) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator RemoveFriend(int friendId, Action<FriendsView> ok, Action<string> fail)
+        {
+            return Post("/v1/friends/remove", "{" + Num("friendId", friendId) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator VisitFriend(int friendId, Action<VisitView> ok, Action<string> fail)
+        {
+            return Get("/v1/friends/visit?friendId=" + friendId, ok, fail);
+        }
+
+        public IEnumerator HelpFriend(int friendId, Action<HelpResult> ok, Action<string> fail)
+        {
+            return Post("/v1/friends/help", "{" + Num("friendId", friendId) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator GetLeaderboard(string type, Action<Leaderboard> ok, Action<string> fail)
+        {
+            return Get("/v1/leaderboard?type=" + type, ok, fail);
+        }
+
         // ---------- Nhiệm vụ / minigame ----------
         public IEnumerator ClaimMission(string missionId, Action<ClaimResult> ok, Action<string> fail)
         {

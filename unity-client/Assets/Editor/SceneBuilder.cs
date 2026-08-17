@@ -63,6 +63,9 @@ public static class SceneBuilder
         BuildZoo(screens.transform, prefabs);
         BuildMissions(screens.transform, prefabs);
         BuildMinigame(screens.transform, prefabs);
+        BuildSocial(screens.transform, prefabs);
+        BuildVisitFriend(screens.transform, prefabs);
+        BuildLeaderboard(screens.transform, prefabs);
 
         var app = new GameObject("App", typeof(Api), typeof(App), typeof(ScreenManager));
         var manager = app.GetComponent<ScreenManager>();
@@ -490,12 +493,20 @@ public static class SceneBuilder
         var minigame = BigButton(screen.transform, "MinigameButton", "MINI GAME", -170, -90);
         var mission = BigButton(screen.transform, "MissionButton", "NHIỆM VỤ", 170, -90);
 
+        var social = Button("SocialButton", screen.transform, new Color(0.55f, 0.72f, 0.95f), 170, 44);
+        Center(social, -180, -155);
+        Stretch(Text("Label", social.transform, "BẠN BÈ", 16, Dark, TextAnchor.MiddleCenter));
+
+        var rank = Button("RankButton", screen.transform, new Color(0.95f, 0.80f, 0.45f), 170, 44);
+        Center(rank, 0, -155);
+        Stretch(Text("Label", rank.transform, "XẾP HẠNG", 16, Dark, TextAnchor.MiddleCenter));
+
         var checkin = Button("CheckinButton", screen.transform, new Color(0.98f, 0.80f, 0.30f), 180, 40);
-        Center(checkin, -110, -180);
+        Center(checkin, -110, -215);
         Stretch(Text("Label", checkin.transform, "Điểm danh", 15, Dark, TextAnchor.MiddleCenter));
 
         var logout = Button("LogoutButton", screen.transform, new Color(0.75f, 0.75f, 0.75f), 140, 40);
-        Center(logout, 110, -180);
+        Center(logout, 110, -215);
         Stretch(Text("Label", logout.transform, "Đăng xuất", 14, Dark, TextAnchor.MiddleCenter));
 
         var comp = screen.AddComponent<LobbyScreen>();
@@ -505,6 +516,8 @@ public static class SceneBuilder
         comp.missionButton = mission.GetComponent<Button>();
         comp.checkinButton = checkin.GetComponent<Button>();
         comp.logoutButton = logout.GetComponent<Button>();
+        comp.socialButton = social.GetComponent<Button>();
+        comp.rankButton = rank.GetComponent<Button>();
         comp.farmDot = farm.transform.Find("Dot").gameObject;
         comp.zooDot = zoo.transform.Find("Dot").gameObject;
         comp.missionDot = mission.transform.Find("Dot").gameObject;
@@ -662,6 +675,108 @@ public static class SceneBuilder
         comp.cellPrefab = prefabs.boardCell;
         comp.headerText = header.GetComponent<Text>();
         comp.finishButton = finish.GetComponent<Button>();
+    }
+
+    static void BuildSocial(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S24_Social", parent, "Bạn bè");
+
+        var search = InputField("SearchInput", screen.transform, "Tên người chơi muốn kết bạn", -80, 150);
+        Size(search, 380, 42);
+        var add = Button("AddButton", screen.transform, Primary, 120, 42);
+        Center(add, 180, 150);
+        Stretch(Text("Label", add.transform, "Kết bạn", 15, Dark, TextAnchor.MiddleCenter));
+
+        var helps = Text("HelpsLeft", screen.transform, "", 13, new Color(1, 1, 1, 0.8f), TextAnchor.MiddleCenter);
+        Center(helps, 0, 112); Size(helps, 600, 20);
+
+        var friendLabel = Text("FriendLabel", screen.transform, "Bạn bè", 15, Color.white, TextAnchor.MiddleLeft);
+        Center(friendLabel, -230, 82); Size(friendLabel, 300, 22);
+        var friendList = ScrollList("FriendList", screen.transform, 440, 220, -230, -40);
+
+        var requestLabel = Text("RequestLabel", screen.transform, "Lời mời", 15, Color.white, TextAnchor.MiddleLeft);
+        Center(requestLabel, 230, 82); Size(requestLabel, 300, 22);
+        var requestList = ScrollList("RequestList", screen.transform, 440, 220, 230, -40);
+
+        var comp = screen.AddComponent<SocialScreen>();
+        comp.friendContent = friendList;
+        comp.requestContent = requestList;
+        comp.rowPrefab = prefabs.row;
+        comp.searchInput = search.GetComponent<InputField>();
+        comp.addButton = add.GetComponent<Button>();
+        comp.helpsLeftText = helps.GetComponent<Text>();
+        comp.sectionFriendText = friendLabel.GetComponent<Text>();
+        comp.sectionRequestText = requestLabel.GetComponent<Text>();
+    }
+
+    static void BuildVisitFriend(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S26_VisitFriend", parent, null);
+
+        var title = Text("Title", screen.transform, "Nông trại của bạn", 20, Color.white, TextAnchor.MiddleLeft);
+        Center(title, -220, 190); Size(title, 500, 26);
+        var status = Text("Status", screen.transform, "", 13, new Color(1, 1, 1, 0.8f), TextAnchor.MiddleLeft);
+        Center(status, -220, 165); Size(status, 500, 20);
+
+        var grid = Empty("PlotGrid", screen.transform);
+        Size(grid, 700, 260);
+        Center(grid, -80, 20);
+        var layout = grid.AddComponent<GridLayoutGroup>();
+        layout.cellSize = new Vector2(56, 46);
+        layout.spacing = new Vector2(3, 3);
+        layout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        layout.constraintCount = 12;
+
+        var habitats = Empty("HabitatRow", screen.transform);
+        Size(habitats, 900, 140);
+        Center(habitats, 0, -150);
+        var hlayout = habitats.AddComponent<HorizontalLayoutGroup>();
+        hlayout.spacing = 10;
+        hlayout.childForceExpandWidth = false;
+        hlayout.childAlignment = TextAnchor.MiddleCenter;
+
+        var help = Button("HelpButton", screen.transform, Primary, 200, 46);
+        Center(help, 330, 150);
+        Stretch(Text("Label", help.transform, "Giúp bạn (+Vàng)", 15, Dark, TextAnchor.MiddleCenter));
+
+        var back = Button("BackButton", screen.transform, new Color(0.8f, 0.8f, 0.8f), 140, 36);
+        Center(back, 330, 95);
+        Stretch(Text("Label", back.transform, "◀ Danh sách bạn", 13, Dark, TextAnchor.MiddleCenter));
+
+        var comp = screen.AddComponent<VisitFriendScreen>();
+        comp.titleText = title.GetComponent<Text>();
+        comp.statusText = status.GetComponent<Text>();
+        comp.plotGrid = grid.transform;
+        comp.habitatRow = habitats.transform;
+        comp.plotPrefab = prefabs.plotCell;
+        comp.habitatPrefab = prefabs.habitatCard;
+        comp.helpButton = help.GetComponent<Button>();
+        comp.backButton = back.GetComponent<Button>();
+    }
+
+    static void BuildLeaderboard(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S36_Leaderboard", parent, null);
+
+        var title = Text("Title", screen.transform, "Xếp hạng", 24, Color.white, TextAnchor.MiddleCenter);
+        Center(title, 0, 200); Size(title, 600, 30);
+
+        var zooTab = Button("ZooTab", screen.transform, Primary, 160, 38);
+        Center(zooTab, -90, 158);
+        Stretch(Text("Label", zooTab.transform, "Sở thú", 14, Dark, TextAnchor.MiddleCenter));
+
+        var farmTab = Button("FarmTab", screen.transform, Primary, 160, 38);
+        Center(farmTab, 90, 158);
+        Stretch(Text("Label", farmTab.transform, "Nông trại", 14, Dark, TextAnchor.MiddleCenter));
+
+        var list = ScrollList("RankList", screen.transform, 640, 300, 0, -40);
+
+        var comp = screen.AddComponent<LeaderboardScreen>();
+        comp.content = list;
+        comp.rowPrefab = prefabs.row;
+        comp.zooTabButton = zooTab.GetComponent<Button>();
+        comp.farmTabButton = farmTab.GetComponent<Button>();
+        comp.titleText = title.GetComponent<Text>();
     }
 
     // ---------------- Helper UI ----------------

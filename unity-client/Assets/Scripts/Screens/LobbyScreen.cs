@@ -7,6 +7,7 @@ namespace MyZoo
     public class LobbyScreen : MonoBehaviour
     {
         public Button farmButton, zooButton, minigameButton, missionButton, checkinButton, logoutButton;
+        public Button socialButton, rankButton;
         public GameObject farmDot, zooDot, missionDot;
 
         void Start()
@@ -17,6 +18,8 @@ namespace MyZoo
             missionButton.onClick.AddListener(delegate { ScreenManager.I.Show("S30_Missions", true); });
             checkinButton.onClick.AddListener(delegate { StartCoroutine(DoCheckin()); });
             if (logoutButton != null) logoutButton.onClick.AddListener(delegate { StartCoroutine(DoLogout()); });
+            if (socialButton != null) socialButton.onClick.AddListener(delegate { ScreenManager.I.Show("S24_Social", true); });
+            if (rankButton != null) rankButton.onClick.AddListener(delegate { ScreenManager.I.Show("S36_Leaderboard", true); });
         }
 
         void OnEnable() { RefreshDots(); }

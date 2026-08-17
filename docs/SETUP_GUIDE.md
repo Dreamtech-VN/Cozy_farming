@@ -251,6 +251,13 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `GET /v1/missions` | — | `{missions: [{id, name, target, progress, rewardVang, claimed}]}` — tiến độ server tự ghi |
 | `POST /v1/missions/claim` | `missionId` | 409 chưa xong/đã nhận |
 | `POST /v1/daily/checkin` | — | `streak, rewardVang`; 409 đã điểm danh hôm nay |
+| `GET /v1/friends` | — | `friends[]`, `incoming[]`, `outgoing[]`, `helpsLeftToday` |
+| `POST /v1/friends/request` | `friendName` | 404 không có tên đó, 409 đã là bạn/đã mời |
+| `POST /v1/friends/accept` | `friendId` | 404 không có lời mời |
+| `POST /v1/friends/remove` | `friendId` | dùng cho cả từ chối lời mời và huỷ kết bạn |
+| `GET /v1/friends/visit?friendId=` | — | xem nông trại + sở thú của bạn (chỉ đọc), kèm `canHelp` |
+| `POST /v1/friends/help` | `friendId` | +60 Vàng cho mình, +30 cho bạn; mỗi người 1 lần/ngày, tối đa 10 lượt/ngày |
+| `GET /v1/leaderboard?type=zoo\|farm` | — | `rows[] {rank, playerId, name, zooLevel, farmLevel, score}` |
 | `POST /v1/minigames/session` | — | `sessionId, seed, movesAllowed, maxLines, vangPerLine` — sinh bàn 6×6 từ `seed` |
 | `POST /v1/minigames/finish` | `sessionId, linesMade` | server kẹp `linesMade ≤ maxLines`; gọi lại cùng session trả kết quả cũ |
 
