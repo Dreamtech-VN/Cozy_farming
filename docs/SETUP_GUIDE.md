@@ -61,7 +61,7 @@ Reset sạch dữ liệu dev: tắt server, xoá `myzoo-data.mv.db`, chạy lạ
 ## A5. Chạy test
 
 ```bash
-cd server && mvn test    # 38 test, dùng H2 in-memory + fake time, chạy trong vài giây
+cd server && mvn test    # 50 test, dùng H2 in-memory + fake time, chạy trong vài giây
 ```
 
 ---
@@ -210,8 +210,11 @@ Dev bằng HTTP thì phải nới cleartext:
 
 ## C3. Ba quy ước bắt buộc của API
 
-1. **Đăng nhập khách**: `POST /v1/auth/guest` body `{"guestToken": "<token cũ hoặc bỏ trống>"}` → trả `playerId, guestToken, isNew, name`. **Lưu `guestToken` vào PlayerPrefs ngay** — token là tài khoản, mất là mất acc.
-2. **Header `X-Guest-Token`** gắn vào mọi request sau đăng nhập. Thiếu/sai → 401.
+1. **Đăng nhập** — 3 cách, cách nào cũng trả về `sessionToken`:
+   - Khách: `POST /v1/auth/guest {guestToken?}` → thêm `guestToken` (credential thiết bị, **lưu PlayerPrefs** để tự vào lại và để nâng cấp tài khoản sau).
+   - Đăng ký: `POST /v1/auth/register {username, password, guestToken?}` — gửi kèm `guestToken` để giữ nguyên tiến độ đang chơi khách.
+   - Đăng nhập: `POST /v1/auth/login {username, password}`.
+2. **Header `X-Session-Token`** gắn vào mọi request sau đăng nhập (header cũ `X-Guest-Token` vẫn được chấp nhận cho token thiết bị). Thiếu/sai → 401.
 3. **`requestId` idempotent**: mọi POST thay đổi dữ liệu gửi kèm `"requestId": "<GUID>"`. Rớt mạng → gửi lại **y nguyên body cũ** (cùng GUID): server trả đúng response cũ, không bao giờ trừ tiền/cộng thưởng 2 lần. Hành động mới mới sinh GUID mới.
 
 ## C4. Bảng endpoint
@@ -220,9 +223,18 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 
 | Method & path | Body (ngoài requestId) | Trả về / ghi chú |
 |---|---|---|
-| `POST /v1/auth/guest` | `guestToken?` | `playerId, guestToken, isNew, name` — không cần header |
-| `GET /v1/me` | — | `name, farmXp, farmLevel, zooXp, zooLevel, wallets{VANG,KC}` |
-| `POST /v1/players/name` | `name` (2-20 ký tự) | 409 nếu trùng |
+| `GET /v1/config` | — | `gameVersion, minClientVersion, maintenance, maintenanceMessage, serverTime` — không cần token; khi bảo trì mọi endpoint khác trả 503 |
+| `GET /v1/servers` | — | `servers[] {id, name, region, status, population, recommended}` — không cần token |
+| `POST /v1/servers/select` | `serverId` | gắn người chơi vào máy chủ; 404 sai id, 409 máy chủ không nhận |
+| `POST /v1/auth/guest` | `guestToken?` | `playerId, guestToken, sessionToken, isNew, name, serverId` — không cần token |
+| `POST /v1/auth/register` | `username, password, guestToken?` | `accountId, playerId, sessionToken, name, serverId, needsCharacter`; gửi `guestToken` để giữ tiến độ khách; 409 trùng tên đăng nhập |
+| `POST /v1/auth/login` | `username, password` | như trên; 401 sai thông tin, 403 tài khoản bị khoá |
+| `POST /v1/auth/logout` | — | huỷ session hiện tại |
+| `POST /v1/auth/password` | `password, newPassword` | đổi mật khẩu; 401 sai mật khẩu cũ |
+| `POST /v1/players` | `name, avatar?` | tạo nhân vật; 400 tên sai luật, 409 trùng tên |
+| `GET /v1/world/snapshot` | — | gộp `{me, farm, zoo, missions}` — dùng lúc vào game thay vì gọi lẻ |
+| `GET /v1/me` | — | `name, avatar, serverId, hasAccount, farmXp, farmLevel, zooXp, zooLevel, wallets{VANG,KC}` |
+| `POST /v1/players/name` | `name` (2-20 ký tự) | đổi tên sau khi đã tạo nhân vật; 409 nếu trùng |
 | `GET /v1/catalog` | — | `crops[]` (seedCost, growthSeconds, yieldMin/Max, xp, sellPrice, minFarmLevel), `species[]` (cost, diet[], appeal, rarity, minZooLevel), `habitatTypes[]` (cost, capacity, minZooLevel), `plotCount` — tải 1 lần lúc boot, đừng hardcode số liệu |
 | `GET /v1/farm` | — | `plots[48] {plotIndex, state EMPTY/GROWING/READY, cropId, plantedAt, readyAt}`, `storage{}` |
 | `POST /v1/farm/plant` | `plotIndex, cropId` | 402 thiếu Vàng · 403 thiếu level · 409 ô có cây |
@@ -241,7 +253,7 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `POST /v1/minigames/session` | — | `sessionId, seed, movesAllowed, maxLines, vangPerLine` — sinh bàn 6×6 từ `seed` |
 | `POST /v1/minigames/finish` | `sessionId, linesMade` | server kẹp `linesMade ≤ maxLines`; gọi lại cùng session trả kết quả cũ |
 
-Mã lỗi: `401` sai token · `402` thiếu tiền · `403` thiếu level · `404` không tồn tại · `409` sai trạng thái.
+Mã lỗi: `401` sai token/sai mật khẩu · `402` thiếu tiền · `403` thiếu level hoặc bị khoá · `404` không tồn tại · `409` sai trạng thái · `503` bảo trì.
 
 ## C5. Lớp gọi API mẫu (`Assets/Scripts/MyZooApi.cs`)
 
@@ -257,9 +269,9 @@ public class MyZooApi : MonoBehaviour
     [SerializeField] string baseUrl = "http://localhost:8080"; // đổi khi lên VPS
     string token;
 
-    [Serializable] public class GuestLogin { public int playerId; public string guestToken; public bool isNew; public string name; }
+    [Serializable] public class GuestLogin { public int playerId; public string guestToken; public string sessionToken; public bool isNew; public string name; public string serverId; }
     [Serializable] public class Wallets { public long VANG; public long KC; }
-    [Serializable] public class Profile { public int playerId; public string name; public int farmXp, farmLevel, zooXp, zooLevel; public Wallets wallets; }
+    [Serializable] public class Profile { public int playerId; public string name, avatar, serverId; public bool hasAccount; public int farmXp, farmLevel, zooXp, zooLevel; public Wallets wallets; }
     [Serializable] public class ApiError { public string error; }
     // Khai báo thêm DTO theo bảng C4 — field trùng tên JSON là JsonUtility tự map.
 
@@ -270,8 +282,9 @@ public class MyZooApi : MonoBehaviour
         yield return Post("/v1/auth/guest", body, json =>
         {
             var login = JsonUtility.FromJson<GuestLogin>(json);
-            token = login.guestToken;
-            PlayerPrefs.SetString("guestToken", token);
+            token = login.sessionToken;
+            PlayerPrefs.SetString("sessionToken", token);
+            PlayerPrefs.SetString("guestToken", login.guestToken);
             PlayerPrefs.Save();
             ok(login);
         }, fail);
@@ -288,7 +301,7 @@ public class MyZooApi : MonoBehaviour
     IEnumerator Get(string path, Action<string> ok, Action<string> fail)
     {
         using var req = UnityWebRequest.Get(baseUrl + path);
-        if (token != null) req.SetRequestHeader("X-Guest-Token", token);
+        if (token != null) req.SetRequestHeader("X-Session-Token", token);
         yield return req.SendWebRequest();
         Handle(req, ok, fail);
     }
@@ -299,7 +312,7 @@ public class MyZooApi : MonoBehaviour
         req.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(jsonBody));
         req.downloadHandler = new DownloadHandlerBuffer();
         req.SetRequestHeader("Content-Type", "application/json");
-        if (token != null) req.SetRequestHeader("X-Guest-Token", token);
+        if (token != null) req.SetRequestHeader("X-Session-Token", token);
         yield return req.SendWebRequest();
         Handle(req, ok, fail);
     }
@@ -335,7 +348,7 @@ Test nhanh trong Editor: gắn `MyZooApi` vào 1 GameObject, script khác gọi 
 
 ## C8. Checklist hay quên
 
-- [ ] Lưu `guestToken` vào PlayerPrefs ngay sau login đầu
+- [ ] Lưu `sessionToken` (và `guestToken` nếu chơi khách) vào PlayerPrefs ngay sau login
 - [ ] GUID mới mỗi hành động — GIỮ NGUYÊN GUID khi retry
 - [ ] Android Emulator dùng `10.0.2.2`, không phải `localhost`
 - [ ] Hiển thị lỗi từ field `error`, đừng tự đoán

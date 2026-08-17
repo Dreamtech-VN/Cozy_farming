@@ -7,40 +7,139 @@ Thiết kế chuẩn: **màn hình ngang 16:9, khung logic 960×540** (Canvas Sc
 ## Sơ đồ điều hướng
 
 ```
-S00 BOOT ──► S01 ĐẶT TÊN (chỉ khi name null)
-   │
-   ▼
-┌─────────────────────────────────────────────┐
-│           HUD (luôn hiển thị)               │
-│  S10 FARM ◄──tab──► S20 ZOO   S40 MINIGAME  │
-│     │                  │                    │
-│  P11 CHỌN CÂY      P21 QUẢN LÝ ZOO          │
-│                    P22 CHI TIẾT CHUỒNG      │
-│  S30 NHIỆM VỤ + ĐIỂM DANH (nút trên HUD)    │
-└─────────────────────────────────────────────┘
+S01 SPLASH ─► S02 ĐĂNG NHẬP ─┬─► S03 ĐĂNG KÝ ─┐
+                             ├─► chơi khách ───┤
+                             └─► auto-login ───┤
+                                               ▼
+                              S06 CHỌN SERVER ─► S07 TẠO NHÂN VẬT
+                                                       │
+                                          S08 VÀO GAME (tải dữ liệu)
+                                                       ▼
+┌──────────────────────────────────────────────────────────────┐
+│                    HUD (luôn hiển thị)                       │
+│                     S09 SẢNH CHÍNH                           │
+│   S10 FARM      S20 ZOO      S40 MINIGAME     S30 NHIỆM VỤ   │
+│      │             │                                         │
+│  P11 CHỌN CÂY  P21 QUẢN LÝ ZOO / P22 CHI TIẾT CHUỒNG         │
+└──────────────────────────────────────────────────────────────┘
 S = screen toàn màn · P = panel/popup đè lên screen
 ```
+
+Người chơi cũ (đã có token trong PlayerPrefs) đi thẳng S01 → S08 → S09, bỏ qua S02/S06/S07.
 
 Kiến trúc gợi ý: 1 scene duy nhất, mỗi screen là 1 GameObject bật/tắt (đơn giản, khỏi lo truyền state giữa scene). Panel là prefab đè lên, nền mờ đen 60%, bấm ngoài hoặc nút ✕ để đóng.
 
 ---
 
-## S00 — BOOT / LOADING
+## S01 — SPLASH / KHUNG VÀO GAME
 
-**Nhiệm vụ:** lo hết phần mạng trước khi người chơi thấy game.
+**Mục đích:** kiểm tra phiên bản, bảo trì, và tự đăng nhập nếu có token cũ.
 
-Thứ tự (coroutine tuần tự):
-1. `POST /v1/auth/guest` với token trong PlayerPrefs (nếu có) → lưu lại `guestToken`.
-2. `GET /v1/catalog` → cache vào 1 object sống suốt phiên (giá cây, thú, chuồng, level yêu cầu — **mọi số liệu hiển thị lấy từ đây, không hardcode**).
-3. `GET /v1/me`, `GET /v1/farm`, `GET /v1/zoo` (chạy song song được).
-4. `me.name == null` → sang **S01**; ngược lại → **S10 FARM**.
+**UI:** logo, thanh tiến trình, số phiên bản góc màn, chỗ trống cho banner bảo trì.
 
-**UI:** logo + thanh tiến trình + dòng trạng thái ("Đang kết nối..."). Lỗi mạng → popup "Không kết nối được máy chủ" + nút **Thử lại** (chạy lại từ bước lỗi, đừng quay về đầu).
+**Luồng:**
+1. `GET /v1/config` (không cần token) → `{gameVersion, minClientVersion, maintenance, maintenanceMessage, serverTime}`.
+   - `maintenance == true` → hiện `maintenanceMessage` + nút **Thử lại**, **dừng ở đây** (mọi API khác trả 503).
+   - Phiên bản client < `minClientVersion` → hiện "Cần cập nhật" + nút ra store, dừng.
+   - Lưu `serverTime` để tính chênh lệch đồng hồ: `offset = serverTime - thời gian máy`. Dùng offset này cho mọi đếm ngược trong game.
+2. Có `sessionToken` trong PlayerPrefs → thử `GET /v1/me`:
+   - 200 và `name != null` → nhảy thẳng **S08**.
+   - 200 và `name == null` → **S06** (đăng ký giữa chừng lần trước).
+   - 401 → token hết hạn, sang **S02**.
+3. Không có token → **S02**.
 
-## S01 — ĐẶT TÊN
+Lỗi mạng → popup "Không kết nối được máy chủ" + **Thử lại** (chạy lại từ bước lỗi, đừng về đầu).
 
-- 1 InputField (2-20 ký tự — validate độ dài ở client cho đỡ gọi phí, server vẫn kiểm lại) + nút **Bắt đầu**.
-- `POST /v1/players/name {name}` → thành công sang S10; lỗi 409 hiện "Tên đã có người dùng" ngay dưới ô nhập, không đóng screen.
+## S02 — ĐĂNG NHẬP
+
+**UI:** logo · ô Tên đăng nhập · ô Mật khẩu (ẩn ký tự) · nút **Đăng nhập** · link **Đăng ký** → S03 · nút phụ **Chơi ngay (khách)**.
+
+| Hành động | API | Xử lý kết quả |
+|---|---|---|
+| Đăng nhập | `POST /v1/auth/login {username, password}` | Trả `{accountId, playerId, username, sessionToken, name, serverId, needsCharacter}` |
+| Chơi khách | `POST /v1/auth/guest {guestToken?}` | Trả `{playerId, guestToken, sessionToken, isNew, name, serverId}` |
+
+- **Lưu ngay 2 thứ vào PlayerPrefs:** `sessionToken` (dùng cho mọi request) và `guestToken` nếu chơi khách (credential thiết bị, dùng để tự vào lại và để nâng cấp tài khoản sau này).
+- Đi tiếp: `needsCharacter == true` (hoặc `name == null`) → **S06**; ngược lại → **S08**.
+- Lỗi: `401` "Sai tên đăng nhập hoặc mật khẩu" hiện dưới ô mật khẩu; `403` = tài khoản bị khoá, hiện popup.
+- Nút Đăng nhập disable trong lúc chờ response.
+
+## S03 — ĐĂNG KÝ
+
+**UI:** ô Tên đăng nhập · Mật khẩu · Nhập lại mật khẩu · checkbox điều khoản · nút **Tạo tài khoản** · link quay lại S02.
+
+`POST /v1/auth/register {username, password, guestToken?}`
+
+- **Quan trọng — giữ tiến độ chơi khách:** nếu người chơi đang chơi khách và bấm đăng ký, **gửi kèm `guestToken`** đang có trong PlayerPrefs. Server gắn tài khoản vào đúng nhân vật đó, giữ nguyên Vàng/nông trại/sở thú. Không gửi thì tạo nhân vật mới toanh (mất tiến độ khách).
+- Validate ở client cho nhanh, server vẫn kiểm lại: tên đăng nhập 4-32 ký tự `a-z 0-9 _` (server tự hạ chữ thường), mật khẩu 6-64 ký tự, 2 ô mật khẩu phải khớp (client tự kiểm).
+- Lỗi: `409` "Tên đăng nhập đã tồn tại" hoặc "Tài khoản này đã đăng ký rồi" (khách đã liên kết trước đó); `400` kèm thông báo cụ thể.
+- Thành công → lưu `sessionToken` → `needsCharacter` quyết định đi **S06** hay **S08**.
+
+**Đổi mật khẩu** (đặt trong Cài đặt, thay cho quên-mật-khẩu vì chưa có email/OTP): `POST /v1/auth/password {password, newPassword}`, cần token. Sai mật khẩu cũ → 401.
+
+**Đăng xuất:** `POST /v1/auth/logout` → xoá `sessionToken` khỏi PlayerPrefs, về S02. Lưu ý `guestToken` vẫn còn giá trị (vào lại được bằng thiết bị) — muốn "thoát hẳn" thì xoá cả hai.
+
+## S06 — CHỌN SERVER
+
+`GET /v1/servers` → `{servers: [{id, name, region, status, population, recommended}]}`
+
+**UI:** tab khu vực (`region`) · list thẻ server: tên, chấm trạng thái, mức tải, huy hiệu "Đề xuất" khi `recommended`.
+
+| `status` | Hiển thị | Bấm được? |
+|---|---|---|
+| `ONLINE` | chấm xanh | ✅ |
+| `FULL` | chấm vàng "Đầy" | ❌ |
+| `MAINTENANCE` | chấm xám "Bảo trì" | ❌ |
+| `LOCKED` | ổ khoá | ❌ |
+
+`population`: `SMOOTH` (mượt) / `BUSY` (đông) — chỉ để hiển thị.
+
+Chọn server → `POST /v1/servers/select {serverId}` → trả profile đã cập nhật. Lỗi `404` server không tồn tại, `409` server không nhận người chơi. Sau đó: `name == null` → **S07**, ngược lại → **S08**.
+
+## S07 — TẠO NHÂN VẬT
+
+**UI:** khung xem trước nhân vật (giữa) · nút mũi tên đổi ngoại hình trái/phải · ô nhập tên · nút 🎲 random tên · nút **Vào game**.
+
+`POST /v1/players {name, avatar}`
+
+- `avatar` là **chuỗi id ngoại hình** do client tự quy ước (`farmer_1`, `farmer_2`, `keeper_1`...), server chỉ lưu và trả lại — bạn tự do thêm ngoại hình mà không cần đụng server. Bỏ trống → server mặc định `farmer_1`.
+- Luật tên (server kiểm, client nên kiểm trước cho mượt): 2-20 ký tự; chỉ chữ (có dấu tiếng Việt được), số, dấu cách, gạch dưới; không chứa từ cấm (`admin`, `gm `, `quantri`, `moderator`); không trùng tên người khác.
+- Lỗi: `400` kèm lý do cụ thể hiện ngay dưới ô tên; `409` "Tên đã có người dùng" → gợi ý tên khác, **đừng đóng screen**.
+- Thành công → **S08**.
+
+## S08 — KHUNG TẢI DỮ LIỆU (VÀO GAME)
+
+**UI:** artwork toàn màn · thanh tiến trình · dòng mẹo chơi đổi mỗi vài giây.
+
+Chỉ cần **2 lời gọi**:
+1. `GET /v1/catalog` → cache suốt phiên (giá cây/thú/chuồng, thời gian lớn, level yêu cầu). **Mọi số liệu hiển thị lấy từ đây, không hardcode trong client.**
+2. `GET /v1/world/snapshot` → gói gọn `{me, farm, zoo, missions}` trong 1 request — dùng cái này thay vì gọi lẻ 4 endpoint lúc khởi động.
+
+Nạp xong → **S09**. Lỗi giữa chừng → nút Thử lại chạy lại đúng bước hỏng.
+
+## S09 — SẢNH CHÍNH
+
+Màn điều hướng trung tâm sau khi vào game. **Không cần gọi API riêng** — dữ liệu đã có từ snapshot.
+
+```
+┌──────────────────────────────────────────────┐
+│ HUD: tên · 🪙 · 💎 · Lv farm · Lv zoo · ⚙️     │
+├──────────────────────────────────────────────┤
+│                                              │
+│   [🌾 NÔNG TRẠI]        [🦁 SỞ THÚ]           │
+│                                              │
+│   [🎮 MINIGAME]         [📋 NHIỆM VỤ •]       │
+│                                              │
+│   nhân vật chibi đứng giữa sảnh              │
+├──────────────────────────────────────────────┤
+│  [Điểm danh]  [Cài đặt]                      │
+└──────────────────────────────────────────────┘
+```
+
+- 4 nút lớn dẫn sang S10 / S20 / S40 / S30.
+- **Chấm đỏ** trên nút Nông trại khi có ô `state == "READY"`; trên nút Sở thú khi `pendingVang > 0` hoặc có thú `fed == false`; trên Nhiệm vụ khi có mission `progress >= target && !claimed`. Tất cả tính từ snapshot, không cần API riêng.
+- Nút **Điểm danh** nổi bật nếu hôm nay chưa nhận (thử `POST /v1/daily/checkin`, gặp 409 thì coi như đã nhận — hoặc nhớ ngày nhận gần nhất ở client cho đỡ gọi).
+- Vào lại app sau khi minimize → gọi lại `GET /v1/world/snapshot` rồi refresh sảnh.
 
 ## HUD — thanh trên cùng, hiển thị ở mọi screen chính
 
@@ -149,12 +248,12 @@ Thứ tự (coroutine tuần tự):
 **Refresh dữ liệu:**
 - Response của mọi mutation đã chứa dữ liệu mới (số dư, kho, trạng thái) → cập nhật UI ngay từ response, **không** gọi GET lại.
 - Poll nền `GET /v1/farm` + `/v1/zoo` mỗi 10-15 giây (cây chín, tiền zoo tích) — chỉ khi đang ở screen tương ứng cho đỡ tốn.
-- Quay lại app sau khi minimize (`OnApplicationFocus`) → refresh cả me/farm/zoo ngay.
+- Quay lại app sau khi minimize (`OnApplicationFocus`) → gọi `GET /v1/world/snapshot` refresh một lần.
 
 **Xử lý lỗi thống nhất (1 hàm dùng chung):**
 | Mã | Xử lý |
 |---|---|
-| 401 | token hỏng → xoá PlayerPrefs, về S00 login lại |
+| 401 | token hết hạn → xoá `sessionToken`, về **S02** (còn `guestToken` thì thử đăng nhập khách trước) |
 | 402 / 403 / 409 | toast field `error` (server trả sẵn tiếng Việt), refresh dữ liệu screen hiện tại |
 | 5xx / timeout | toast "Mất kết nối" + **retry cùng body** (giữ nguyên `requestId` — an toàn tuyệt đối, xem SETUP_GUIDE C3) |
 
@@ -164,10 +263,10 @@ Thứ tự (coroutine tuần tự):
 
 ## Thứ tự dựng khuyên dùng (mỗi bước ra được bản chơi thử)
 
-1. S00 Boot + HUD (login, hiện được tên + Vàng) — thông API là xong nửa việc
-2. S10 Farm + P11 (trồng → đợi → thu hoạch → thấy Vàng/kho đổi)
-3. Kho + nút bán (khép vòng tiền đầu tiên)
-4. S20 Zoo + P21/P22 (xây → mua thú → chuyển thức ăn → cho ăn → mở cửa → thu tiền)
-5. S30 Nhiệm vụ + điểm danh
-6. S40 Minigame
-7. Polish: tween, âm thanh, hiệu ứng bay số, chấm đỏ nhiệm vụ
+1. **S01 + S02 (nút "Chơi ngay") + S08 + S09 + HUD** — đường ngắn nhất để vào được sảnh; thông API là xong nửa việc
+2. **S10 Farm + P11** (trồng → đợi → thu hoạch → thấy Vàng/kho đổi)
+3. **Kho + nút bán** (khép vòng tiền đầu tiên)
+4. **S20 Zoo + P21/P22** (xây → mua thú → chuyển thức ăn → cho ăn → mở cửa → thu tiền)
+5. **S03 đăng ký + S06 chọn server + S07 tạo nhân vật** — làm sau cùng trong nhóm bắt buộc, vì chơi khách đã đủ để test toàn bộ gameplay
+6. **S30 Nhiệm vụ + điểm danh**, **S40 Minigame**
+7. Polish: tween, âm thanh, hiệu ứng bay số, chấm đỏ
