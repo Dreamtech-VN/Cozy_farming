@@ -248,6 +248,64 @@ public final class SchemaInit {
                   PRIMARY KEY (habitat_id, decor_id)
                 )
                 """,
+                """
+                CREATE TABLE IF NOT EXISTS chat_messages (
+                  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                  channel VARCHAR(10) NOT NULL,
+                  sender_id INT NOT NULL,
+                  target_id INT,
+                  type VARCHAR(10) NOT NULL,
+                  text VARCHAR(300),
+                  ref_id VARCHAR(40),
+                  created_at TIMESTAMP NOT NULL,
+                  deleted BOOLEAN NOT NULL DEFAULT FALSE,
+                  deleted_by INT
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS chat_relations (
+                  player_id INT NOT NULL,
+                  target_id INT NOT NULL,
+                  mode VARCHAR(10) NOT NULL,
+                  created_at TIMESTAMP NOT NULL,
+                  PRIMARY KEY (player_id, target_id)
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS chat_reports (
+                  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                  message_id BIGINT NOT NULL,
+                  reporter_id INT NOT NULL,
+                  reason VARCHAR(200),
+                  created_at TIMESTAMP NOT NULL,
+                  handled BOOLEAN NOT NULL DEFAULT FALSE,
+                  UNIQUE (message_id, reporter_id)
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS chat_bans (
+                  player_id INT PRIMARY KEY,
+                  banned_until TIMESTAMP NOT NULL,
+                  reason VARCHAR(200)
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS chat_violations (
+                  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                  player_id INT NOT NULL,
+                  reason VARCHAR(200),
+                  created_at TIMESTAMP NOT NULL
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS chat_voices (
+                  voice_id VARCHAR(40) PRIMARY KEY,
+                  player_id INT NOT NULL,
+                  duration_ms INT NOT NULL,
+                  bytes INT NOT NULL,
+                  created_at TIMESTAMP NOT NULL
+                )
+                """,
         };
         try (Connection c = dataSource.getConnection(); Statement st = c.createStatement()) {
             for (String sql : ddl) {

@@ -54,7 +54,7 @@ curl http://localhost:8080/health
 
 Mở trình duyệt vào `http://localhost:8080` — có sẵn **client web mẫu** (đầy đủ farm/zoo/minigame). Dùng nó làm chuẩn đối chiếu hành vi khi client Unity của bạn có gì đó sai.
 
-Biến môi trường tuỳ chọn: `SERVER_PORT` (mặc định 8080) · `CLIENT_DIR` (thư mục client web, mặc định `client`) · `DB_URL`/`DB_USER`/`DB_PASSWORD` (chuyển sang MySQL).
+Biến môi trường tuỳ chọn: `SERVER_PORT` (mặc định 8080) · `CLIENT_DIR` (thư mục client web, mặc định `client`) · `DB_URL`/`DB_USER`/`DB_PASSWORD` (chuyển sang MySQL) · `VOICE_DIR` (thư mục chứa file ghi âm của chat, mặc định `myzoo-voice` cạnh chỗ chạy server — trên VPS nên trỏ vào ổ có backup).
 
 Reset sạch dữ liệu dev: tắt server, xoá `myzoo-data.mv.db`, chạy lại.
 
@@ -274,6 +274,32 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `POST /v1/processing/start` | `recipeId` | trừ nguyên liệu, đặt `ready_at`; 409 thiếu nguyên liệu/hết lò, 403 thiếu level |
 | `POST /v1/processing/collect` | `slotId` | 409 chưa xong, 404 đã thu |
 | `POST /v1/zoo/decors` | `habitatId, decorId` | trang trí chuồng; 409 đã có món đó, 403 thiếu Zoo level |
+
+**Chat** (kênh `WORLD` · `PRIVATE` · `SYSTEM`; loại nội dung `TEXT` · `STICKER` · `GIF` · `VOICE`, emoji đi kèm trong `TEXT`):
+
+| Method & path | Body / query | Ghi chú |
+|---|---|---|
+| `GET /v1/chat/catalog` | — | `{stickers[], gifs[], maxTextLength}` — sticker/GIF **chỉ lấy từ danh mục này**, client không gửi URL tự do |
+| `GET /v1/chat/world?sinceId=&limit=` | — | `{messages[], ban}` — kèm cả tin `SYSTEM`; đã lọc bỏ người mình mute/block |
+| `GET /v1/chat/private?playerId=&sinceId=` | — | Hội thoại 2 chiều với 1 người |
+| `POST /v1/chat/send` | `channel, type, text?, refId?, targetId?` | 422 nội dung bị chặn (kèm lý do), 429 gửi quá nhanh/trùng lặp, 403 bị cấm chat hoặc bị chặn, 404 sticker/GIF không có trong danh mục |
+| `POST /v1/chat/voice` | `voiceBase64, durationMs` | Tối đa 200 KB / 30 giây → `{voiceId}`; gửi tiếp bằng `type=VOICE, refId=voiceId` |
+| `GET /v1/chat/voice?voiceId=` | — | Trả **bytes thô**. Chỉ nghe được nếu tin đã đăng ở kênh thế giới, hoặc mình là 1 trong 2 phía của tin riêng |
+| `GET /v1/chat/relations` | — | `{muted[], blocked[]}` |
+| `POST /v1/chat/relations` | `targetId, mode` (`MUTE` \| `BLOCK` \| `NONE`) | `MUTE` chỉ ẩn tin ở kênh chung; `BLOCK` chặn luôn tin riêng |
+| `POST /v1/chat/report` | `messageId, reason?` | 409 nếu đã báo cáo tin đó rồi |
+
+Luật kiểm duyệt chạy ở server: chặn link/số điện thoại/nội dung rao bán — lừa đảo, chặn từ cấm (đã bỏ dấu và bỏ ký tự chèn giữa nên `d.m`, `n g u` không lách được), che từ nhẹ bằng `***`, giới hạn 1 giây/tin · 5 tin trong 10 giây · không lặp lại tin trong 30 giây. Vi phạm 3 lần trong 10 phút thì **tự động cấm chat 15 phút**.
+
+| Method & path | Body | Dùng để |
+|---|---|---|
+| `POST /v1/admin/chat/delete` | `messageId` | Xoá tin — người chơi thấy "(tin nhắn đã bị xoá)", log admin vẫn giữ nội dung gốc |
+| `POST /v1/admin/chat/ban` | `targetPlayerId, minutes, reason?` | `minutes ≤ 0` là gỡ cấm |
+| `POST /v1/admin/chat/announce` | `text` | Đăng thông báo hệ thống vào kênh chung |
+| `GET /v1/admin/chat/log` | `?channel=&sinceId=&limit=` | Lịch sử chat đầy đủ để tra cứu |
+| `GET /v1/admin/chat/reports` | `?limit=` | Danh sách tin bị báo cáo |
+
+> Ảnh động và sticker an toàn **theo cấu trúc**: server chỉ phát nội dung trong danh mục có sẵn nên không có đường nào đẩy ảnh NSFW vào game. Ngược lại, **voice không tự lọc được** — chỉ có báo cáo + admin xem lại, nên bật voice ở server công khai thì cần người trực.
 
 > **Hai loại tiền tách bạch** (spec): mỗi món chỉ mua bằng đúng một loại tiền, và **không có endpoint nào đổi Kim Cương ↔ Vàng**.
 

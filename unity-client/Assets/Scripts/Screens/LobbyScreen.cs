@@ -7,7 +7,7 @@ namespace MyZoo
     public class LobbyScreen : MonoBehaviour
     {
         public Button farmButton, zooButton, minigameButton, missionButton, checkinButton, logoutButton;
-        public Button socialButton, rankButton, mailButton, achievementButton, shopButton, inventoryButton, processingButton, memoryButton;
+        public Button socialButton, rankButton, mailButton, achievementButton, shopButton, inventoryButton, processingButton, memoryButton, chatButton;
         public GameObject farmDot, zooDot, missionDot, mailDot;
 
         void Start()
@@ -34,6 +34,7 @@ namespace MyZoo
                 processingButton.onClick.AddListener(delegate { ScreenManager.I.Show("S34_Processing", true); });
             if (memoryButton != null)
                 memoryButton.onClick.AddListener(delegate { ScreenManager.I.Show("S41_Memory", true); });
+            if (chatButton != null) chatButton.onClick.AddListener(delegate { ScreenManager.I.Show("S37_Chat", true); });
         }
 
         void OnEnable() { RefreshDots(); }
