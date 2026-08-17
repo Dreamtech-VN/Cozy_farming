@@ -61,7 +61,7 @@ class FarmServiceTest {
         var result = farm.harvest(playerId, 0);
         assertTrue(result.yield() >= 2 && result.yield() <= 3);
         assertEquals(5, result.xp());
-        assertEquals(result.yield(), farm.storage(playerId).get("wheat"));
+        assertEquals(result.yield(), TestSupport.qty(farm.storage(playerId), "wheat"));
         assertEquals("EMPTY", farm.view(playerId).plots().get(0).state());
         assertEquals(5, players.profile(playerId).farmXp());
     }
@@ -78,7 +78,7 @@ class FarmServiceTest {
         int harvested = farm.harvest(playerId, 0).yield();
         var result = farm.sell(playerId, "wheat", harvested);
         assertEquals(55L * harvested, result.vangEarned());
-        assertNull(farm.storage(playerId).get("wheat"));
+        assertEquals(0, TestSupport.qty(farm.storage(playerId), "wheat"));
         assertEquals(409, assertThrows(ApiException.class, () -> farm.sell(playerId, "wheat", 1)).status());
         assertEquals(400, assertThrows(ApiException.class, () -> farm.sell(playerId, "wheat", 0)).status());
     }

@@ -6,6 +6,8 @@ Hướng dẫn thao tác cụ thể trong Unity: tạo GameObject nào, gắn co
 - Muốn biết **screen có gì, nút nào làm gì**: `docs/SCREEN_GUIDE.md`.
 - File này trả lời: **làm sao dựng ra nó trong Unity**.
 
+> 🚀 **Không muốn dựng tay?** Dùng project đã dựng sẵn tại **`unity-client/`** — copy thư mục `Assets` vào project Unity mới rồi bấm menu **MyZoo → Dựng scene**, toàn bộ screen/prefab/tham chiếu tự sinh. Xem `unity-client/README.md`. Tài liệu này dành cho ai muốn tự dựng để hiểu từng bước.
+
 Toàn bộ script bên dưới là code thật, dán vào là chạy. Lưu ý: mình viết chuẩn theo API server nhưng chưa biên dịch được trong Unity (môi trường không có Unity Editor), nên gặp lỗi vặt lúc compile là bình thường — báo mình sửa.
 
 ---
@@ -16,15 +18,9 @@ Toàn bộ script bên dưới là code thật, dán vào là chạy. Lưu ý: m
 
 Unity Hub → New Project → **2D (Built-in Render Pipeline)** → tên `MyZooClient`.
 
-## 0.2. Cài Newtonsoft Json (bắt buộc)
+## 0.2. Không cần cài package nào
 
-Window → Package Manager → nút **+** → **Add package by name** → gõ:
-
-```
-com.unity.nuget.newtonsoft-json
-```
-
-**Vì sao bắt buộc:** kho đồ trong game (`storage`, `warehouse`) là object khoá động kiểu `{"wheat":3,"carrot":2}`. `JsonUtility` có sẵn của Unity **không đọc được** dạng này. Newtonsoft đọc thẳng thành `Dictionary<string,int>`.
+Server trả kho đồ dạng **mảng** (`storage: [{foodId, quantity}]`) chứ không phải map khoá động, nên `JsonUtility` có sẵn của Unity đọc được hết — không cần Newtonsoft hay thư viện JSON nào khác.
 
 ## 0.3. Player Settings
 

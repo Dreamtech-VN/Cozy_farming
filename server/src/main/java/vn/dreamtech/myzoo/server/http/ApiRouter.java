@@ -176,7 +176,7 @@ public final class ApiRouter implements HttpHandler {
                     return r;
                 });
             }
-            case "GET /v1/missions" -> JsonHttp.write(ex, 200, missions.view(auth(ex)));
+            case "GET /v1/missions" -> JsonHttp.write(ex, 200, Map.of("missions", missions.view(auth(ex))));
             case "POST /v1/missions/claim" -> {
                 int playerId = auth(ex);
                 Body b = JsonHttp.readBody(ex, Body.class);

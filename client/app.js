@@ -196,16 +196,15 @@ function drawFarm() {
   ctx.font = "15px sans-serif";
   ctx.fillStyle = "#1d3311";
   ctx.fillText("Kho nông sản:", 30, 470);
-  const storage = state.farm ? state.farm.storage : {};
-  const keys = Object.keys(storage);
-  if (!keys.length) ctx.fillText("(trống)", 140, 470);
+  const storage = (state.farm && state.farm.storage) || [];
+  if (!storage.length) ctx.fillText("(trống)", 140, 470);
   let sx = 30;
-  for (const k of keys) {
-    if (drawSprite("crop_" + k, sx, 478, 2)) {
-      ctx.fillText("×" + storage[k], sx + 34, 500);
+  for (const item of storage) {
+    if (drawSprite("crop_" + item.foodId, sx, 478, 2)) {
+      ctx.fillText("×" + item.quantity, sx + 34, 500);
     } else {
       ctx.font = "20px sans-serif";
-      ctx.fillText(`${CROP_EMOJI[k]}×${storage[k]}`, sx, 500);
+      ctx.fillText(`${CROP_EMOJI[item.foodId]}×${item.quantity}`, sx, 500);
       ctx.font = "15px sans-serif";
     }
     sx += 78;
@@ -306,15 +305,15 @@ function drawZoo() {
   const shopY = ZOO_CARDS.y + 2 * (z.ch + z.gap);
   ctx.fillStyle = "#33422a";
   ctx.font = "14px sans-serif";
-  const entries = Object.entries(zoo.warehouse);
+  const entries = zoo.warehouse || [];
   ctx.fillText("Kho Zoo:", z.x, shopY + 26);
   if (!entries.length) ctx.fillText("(trống)", z.x + 70, shopY + 26);
   let wx = z.x + 76;
-  for (const [k, v] of entries) {
-    if (drawSprite("crop_" + k, wx, shopY + 8, 1.6)) {
-      ctx.fillText("×" + v, wx + 28, shopY + 26);
+  for (const item of entries) {
+    if (drawSprite("crop_" + item.foodId, wx, shopY + 8, 1.6)) {
+      ctx.fillText("×" + item.quantity, wx + 28, shopY + 26);
     } else {
-      ctx.fillText(`${CROP_EMOJI[k]}×${v}`, wx, shopY + 26);
+      ctx.fillText(`${CROP_EMOJI[item.foodId]}×${item.quantity}`, wx, shopY + 26);
     }
     wx += 66;
   }
@@ -329,8 +328,8 @@ function openZooMenu() {
     ? `<button class="warn" onclick="zooToggle('close')">Đóng cửa & thu 🪙${zoo.pendingVang}</button>
        <button onclick="zooToggle('collect')">Thu tiền 🪙${zoo.pendingVang}</button>`
     : `<button onclick="zooToggle('open')">Mở cửa đón khách</button>`;
-  const deliverRows = Object.entries(state.farm.storage).map(([k, v]) =>
-    `<div class="row">${cropIcon(k)}×${v}<button style="margin-left:auto" onclick="deliver('${k}', ${v})">Chuyển hết sang Zoo</button></div>`).join("")
+  const deliverRows = (state.farm.storage || []).map(item =>
+    `<div class="row">${cropIcon(item.foodId)}×${item.quantity}<button style="margin-left:auto" onclick="deliver('${item.foodId}', ${item.quantity})">Chuyển hết sang Zoo</button></div>`).join("")
     || "<div class='row'>(Kho nông sản trống — trồng trọt rồi quay lại)</div>";
   panel(`<h3>Quản lý sở thú</h3><div class="row">${openBtn}</div>
     <h3 style="margin-top:8px">Xây chuồng</h3>${habitatRows}

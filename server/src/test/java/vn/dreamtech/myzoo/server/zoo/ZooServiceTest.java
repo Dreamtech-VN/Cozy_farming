@@ -63,8 +63,8 @@ class ZooServiceTest {
         time.advance(90_000);
         int harvested = farm.harvest(playerId, 0).yield();
         var result = zoo.deliver(playerId, "carrot", harvested);
-        assertEquals(harvested, result.warehouse().get("carrot"));
-        assertNull(result.farmStorage().get("carrot"));
+        assertEquals(harvested, TestSupport.qty(result.warehouse(), "carrot"));
+        assertEquals(0, TestSupport.qty(result.farmStorage(), "carrot"));
         assertEquals(409, assertThrows(ApiException.class,
                 () -> zoo.deliver(playerId, "carrot", harvested + 1)).status());
     }

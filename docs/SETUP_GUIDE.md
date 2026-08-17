@@ -189,7 +189,8 @@ Bỏ comment 3 dòng `DB_*` trong `/etc/systemd/system/myzoo.service`, sửa m�
 
 - **Unity 6 LTS (6000.0.x)** hoặc 2022.3 LTS (client cũ của repo từng dùng 2022.3.21f1). Template **2D**.
 - Player Settings → Resolution and Presentation: chỉ tick **Landscape Left + Landscape Right** (game màn hình ngang, thiết kế gốc 960×540, tỉ lệ 16:9).
-- Không cần package mạng — dùng `UnityWebRequest` có sẵn; JSON dùng `JsonUtility` hoặc Newtonsoft.
+- Không cần package nào — dùng `UnityWebRequest` + `JsonUtility` có sẵn (API trả mảng thay vì map khoá động nên `JsonUtility` đọc được hết).
+- **Nhanh nhất: dùng project dựng sẵn** tại `unity-client/` — xem `unity-client/README.md`, copy `Assets` vào project mới rồi bấm menu **MyZoo → Dựng scene**.
 
 ## C2. BASE_URL theo môi trường
 
@@ -236,18 +237,18 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `GET /v1/me` | — | `name, avatar, serverId, hasAccount, farmXp, farmLevel, zooXp, zooLevel, wallets{VANG,KC}` |
 | `POST /v1/players/name` | `name` (2-20 ký tự) | đổi tên sau khi đã tạo nhân vật; 409 nếu trùng |
 | `GET /v1/catalog` | — | `crops[]` (seedCost, growthSeconds, yieldMin/Max, xp, sellPrice, minFarmLevel), `species[]` (cost, diet[], appeal, rarity, minZooLevel), `habitatTypes[]` (cost, capacity, minZooLevel), `plotCount` — tải 1 lần lúc boot, đừng hardcode số liệu |
-| `GET /v1/farm` | — | `plots[48] {plotIndex, state EMPTY/GROWING/READY, cropId, plantedAt, readyAt}`, `storage{}` |
+| `GET /v1/farm` | — | `plots[48] {plotIndex, state EMPTY/GROWING/READY, cropId, plantedAt, readyAt}`, `storage[] {foodId, quantity}` |
 | `POST /v1/farm/plant` | `plotIndex, cropId` | 402 thiếu Vàng · 403 thiếu level · 409 ô có cây |
 | `POST /v1/farm/harvest` | `plotIndex` | `yield, xp`; 409 chưa chín — client đếm ngược từ `readyAt`, server là trọng tài |
 | `POST /v1/farm/sell` | `foodId, quantity` | `vangEarned, vangBalance`; 409 thiếu hàng |
-| `GET /v1/zoo` | — | `habitats[]{id, typeId, capacity, animals[]{id, speciesId, fed, appeal}}`, `warehouse{}`, `isOpen`, `foodCoverage`, `totalAppeal`, `pendingVang` |
+| `GET /v1/zoo` | — | `habitats[]{id, typeId, capacity, animals[]{id, speciesId, fed, appeal}}`, `warehouse[] {foodId, quantity}`, `isOpen`, `foodCoverage`, `totalAppeal`, `pendingVang` |
 | `POST /v1/zoo/habitats` | `typeId` | trả `id` chuồng; 403 thiếu Zoo level |
 | `POST /v1/zoo/animals` | `habitatId, speciesId` | 409 chuồng đầy · 403 thiếu level |
 | `POST /v1/zoo/deliver` | `foodId, quantity` | chuyển kho farm → kho zoo |
 | `POST /v1/zoo/feed` | `habitatId` | mỗi con đói ăn 1 food hợp `species.diet`; no 4 tiếng |
 | `POST /v1/zoo/open` / `close` | — | mở cần ≥1 thú; close tự thu tiền trước |
 | `POST /v1/zoo/collect` | — | `vangEarned = floor(tổng appeal thú no × 10/giờ, trần 8h)`, `zooXp` |
-| `GET /v1/missions` | — | 6 nhiệm vụ ngày `{id, name, target, progress, rewardVang, claimed}` — tiến độ server tự ghi |
+| `GET /v1/missions` | — | `{missions: [{id, name, target, progress, rewardVang, claimed}]}` — tiến độ server tự ghi |
 | `POST /v1/missions/claim` | `missionId` | 409 chưa xong/đã nhận |
 | `POST /v1/daily/checkin` | — | `streak, rewardVang`; 409 đã điểm danh hôm nay |
 | `POST /v1/minigames/session` | — | `sessionId, seed, movesAllowed, maxLines, vangPerLine` — sinh bàn 6×6 từ `seed` |
