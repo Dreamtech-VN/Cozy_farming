@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>MyZoo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="rotate-hint">Xoay ngang màn hình để chơi 🐰</div>
+<div id="stage">
+  <canvas id="game" width="960" height="540"></canvas>
+  <div id="ui">
+    <div id="hud">
+      <span id="hud-name">...</span>
+      <span class="hud-chip gold">🪙 <b id="hud-vang">0</b></span>
+      <span class="hud-chip gem">💎 <b id="hud-kc">0</b></span>
+      <span class="hud-chip">🌾 Lv<b id="hud-farm-lv">1</b></span>
+      <span class="hud-chip">🦁 Lv<b id="hud-zoo-lv">1</b></span>
+      <span id="hud-tabs">
+        <button id="tab-farm" class="tab active">Nông trại</button>
+        <button id="tab-zoo" class="tab">Sở thú</button>
+        <button id="tab-game" class="tab">Mini game</button>
+      </span>
+    </div>
+    <div id="panel"></div>
+    <div id="toast"></div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
