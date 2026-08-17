@@ -9,7 +9,9 @@ namespace MyZoo
         public Slider musicSlider, sfxSlider;
         public Text musicValueText, sfxValueText, accountText, versionText;
         public InputField oldPasswordInput, newPasswordInput;
-        public Button changePasswordButton, backButton, logoutButton, walletButton;
+        public Button changePasswordButton, backButton, logoutButton, walletButton, gachaButton;
+        public Transform cosmeticContent;
+        public GameObject cosmeticRowPrefab;
         public GameObject linkPanel, passwordPanel;
         public InputField linkUsernameInput, linkPasswordInput;
         public Button linkButton;
@@ -31,6 +33,8 @@ namespace MyZoo
             backButton.onClick.AddListener(delegate { ScreenManager.I.Show("S09_Lobby", true); });
             if (walletButton != null)
                 walletButton.onClick.AddListener(delegate { ScreenManager.I.Show("S38_Wallet", true); });
+            if (gachaButton != null)
+                gachaButton.onClick.AddListener(delegate { ScreenManager.I.Show("S45_Gacha", true); });
         }
 
         void OnEnable()
@@ -43,6 +47,36 @@ namespace MyZoo
                 ? "Tài khoản: " + (App.I.Me != null ? App.I.Me.name : "")
                 : "Bạn đang chơi bằng tài khoản khách — mất máy là mất tiến độ. Đặt tên đăng nhập để giữ lại.";
             StartCoroutine(LoadVersion());
+            if (cosmeticContent != null) StartCoroutine(LoadCosmetics());
+        }
+
+        // Chỉ liệt kê món đã sở hữu — món chưa có thì xem ở màn quay số.
+        IEnumerator LoadCosmetics()
+        {
+            foreach (Transform child in cosmeticContent) Destroy(child.gameObject);
+            yield return Api.I.GetCosmetics(delegate (CosmeticList list)
+            {
+                if (list == null || list.cosmetics == null) return;
+                foreach (var item in list.cosmetics)
+                {
+                    if (!item.owned) continue;
+                    var row = Instantiate(cosmeticRowPrefab, cosmeticContent).GetComponent<Button>();
+                    row.GetComponentInChildren<Text>().text =
+                        "[" + item.tier + "] " + item.name + (item.equipped ? "   ĐANG MẶC" : "");
+                    string id = item.id;
+                    row.onClick.AddListener(delegate { StartCoroutine(Equip(id)); });
+                }
+            }, delegate (string e) { });
+        }
+
+        IEnumerator Equip(string cosmeticId)
+        {
+            yield return Api.I.EquipCosmetic(cosmeticId, delegate (EquipResult result)
+            {
+                Toast.Show("Đã mặc");
+                if (App.I.Me != null && result.avatar != null) App.I.Me.avatar = result.avatar;
+                StartCoroutine(LoadCosmetics());
+            }, Toast.Show);
         }
 
         void SetVolume(string key, float value)

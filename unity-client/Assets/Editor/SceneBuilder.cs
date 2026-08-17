@@ -74,7 +74,8 @@ public static class SceneBuilder
         BuildMemoryGame(screens.transform, prefabs);
         BuildChat(screens.transform, prefabs);
         BuildWallet(screens.transform, prefabs);
-        BuildSettings(screens.transform);
+        BuildSettings(screens.transform, prefabs);
+        BuildGacha(screens.transform, prefabs);
 
         var app = new GameObject("App", typeof(Api), typeof(App), typeof(ScreenManager));
         var manager = app.GetComponent<ScreenManager>();
@@ -1157,7 +1158,88 @@ public static class SceneBuilder
         comp.backButton = CloseButton(screen.transform);
     }
 
-    static void BuildSettings(Transform parent)
+    static void BuildGacha(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S45_Gacha", parent, "Tủ đồ nông trại");
+
+        var bannerName = Text("BannerName", screen.transform, "", 20, Color.white, TextAnchor.MiddleCenter);
+        Center(bannerName, 0, 140); Size(bannerName, 700, 28);
+        var cost = Text("CostText", screen.transform, "", 15, new Color(1, 1, 1, 0.85f), TextAnchor.MiddleCenter);
+        Center(cost, 0, 106); Size(cost, 700, 22);
+        var pity = Text("PityText", screen.transform, "", 14, new Color(1f, 0.85f, 0.5f), TextAnchor.MiddleCenter);
+        Center(pity, -160, 74); Size(pity, 300, 22);
+        var fragment = Text("FragmentText", screen.transform, "Mảnh: 0", 14,
+                new Color(0.8f, 0.9f, 1f), TextAnchor.MiddleCenter);
+        Center(fragment, 160, 74); Size(fragment, 300, 22);
+
+        var one = Button("PullOneButton", screen.transform, Primary, 200, 52);
+        Center(one, -160, -10);
+        Stretch(Text("Label", one.transform, "QUAY 1 LƯỢT", 16, Dark, TextAnchor.MiddleCenter));
+        var ten = Button("PullTenButton", screen.transform, new Color(0.98f, 0.80f, 0.30f), 200, 52);
+        Center(ten, 160, -10);
+        Stretch(Text("Label", ten.transform, "QUAY 10 LƯỢT", 16, Dark, TextAnchor.MiddleCenter));
+
+        var rates = Button("RatesButton", screen.transform, new Color(0.75f, 0.80f, 0.85f), 180, 40);
+        Center(rates, -160, -80);
+        Stretch(Text("Label", rates.transform, "Xem tỉ lệ", 14, Dark, TextAnchor.MiddleCenter));
+        var history = Button("HistoryButton", screen.transform, new Color(0.75f, 0.80f, 0.85f), 180, 40);
+        Center(history, 160, -80);
+        Stretch(Text("Label", history.transform, "Lịch sử quay", 14, Dark, TextAnchor.MiddleCenter));
+
+        // Bảng tỉ lệ: bắt buộc phải xem được trong game theo quy định của Apple/Google.
+        var ratePanel = Image("RatePanel", screen.transform, Panel, 480, 380);
+        Center(ratePanel, 0, 0);
+        var rateText = Text("RateText", ratePanel.transform, "", 14, Dark, TextAnchor.UpperLeft);
+        Stretch(rateText, 24, 56);
+        var closeRates = Button("CloseRatesButton", ratePanel.transform, Primary, 160, 36);
+        Center(closeRates, 0, -160);
+        Stretch(Text("Label", closeRates.transform, "Đóng", 14, Dark, TextAnchor.MiddleCenter));
+        ratePanel.SetActive(false);
+
+        var resultPanel = Image("ResultPanel", screen.transform, new Color(0.12f, 0.16f, 0.13f, 0.97f), 620, 400);
+        Center(resultPanel, 0, 0);
+        var resultTitle = Text("ResultTitle", resultPanel.transform, "Kết quả", 17, Color.white, TextAnchor.MiddleCenter);
+        Center(resultTitle, 0, 176); Size(resultTitle, 400, 24);
+        var resultList = ScrollList("ResultList", resultPanel.transform, 590, 300, 0, 10);
+        var closeResult = Button("CloseResultButton", resultPanel.transform, Primary, 160, 36);
+        Center(closeResult, 0, -160);
+        Stretch(Text("Label", closeResult.transform, "Xong", 14, Dark, TextAnchor.MiddleCenter));
+        resultPanel.SetActive(false);
+
+        var historyPanel = Image("HistoryPanel", screen.transform, new Color(0.12f, 0.16f, 0.13f, 0.97f), 620, 400);
+        Center(historyPanel, 0, 0);
+        var historyTitle = Text("HistoryTitle", historyPanel.transform, "Lịch sử quay", 17,
+                Color.white, TextAnchor.MiddleCenter);
+        Center(historyTitle, 0, 176); Size(historyTitle, 400, 24);
+        var historyList = ScrollList("HistoryList", historyPanel.transform, 590, 300, 0, 10);
+        var closeHistory = Button("CloseHistoryButton", historyPanel.transform, Primary, 160, 36);
+        Center(closeHistory, 0, -160);
+        Stretch(Text("Label", closeHistory.transform, "Đóng", 14, Dark, TextAnchor.MiddleCenter));
+        historyPanel.SetActive(false);
+
+        var comp = screen.AddComponent<GachaScreen>();
+        comp.bannerNameText = bannerName.GetComponent<Text>();
+        comp.costText = cost.GetComponent<Text>();
+        comp.pityText = pity.GetComponent<Text>();
+        comp.fragmentText = fragment.GetComponent<Text>();
+        comp.rateText = rateText.GetComponent<Text>();
+        comp.pullOneButton = one.GetComponent<Button>();
+        comp.pullTenButton = ten.GetComponent<Button>();
+        comp.ratesButton = rates.GetComponent<Button>();
+        comp.historyButton = history.GetComponent<Button>();
+        comp.closeRatesButton = closeRates.GetComponent<Button>();
+        comp.closeResultButton = closeResult.GetComponent<Button>();
+        comp.closeHistoryButton = closeHistory.GetComponent<Button>();
+        comp.ratePanel = ratePanel;
+        comp.resultPanel = resultPanel;
+        comp.historyPanel = historyPanel;
+        comp.resultContent = resultList;
+        comp.historyContent = historyList;
+        comp.rowPrefab = prefabs.chatRow;
+        comp.backButton = CloseButton(screen.transform);
+    }
+
+    static void BuildSettings(Transform parent, Prefabs prefabs)
     {
         var screen = Screen("S39_Settings", parent, "Cài đặt");
 
@@ -1199,8 +1281,17 @@ public static class SceneBuilder
         Center(logout, 250, 40);
         Stretch(Text("Label", logout.transform, "Đăng xuất", 14, Dark, TextAnchor.MiddleCenter));
 
+        var gacha = Button("GachaButton", screen.transform, new Color(0.95f, 0.75f, 0.85f), 220, 42);
+        Center(gacha, 250, -20);
+        Stretch(Text("Label", gacha.transform, "Tủ đồ (quay số)", 14, Dark, TextAnchor.MiddleCenter));
+
+        var lookLabel = Text("LookLabel", screen.transform, "Ngoại hình đã có — bấm để mặc", 13,
+                new Color(1, 1, 1, 0.75f), TextAnchor.MiddleCenter);
+        Center(lookLabel, 250, -62); Size(lookLabel, 300, 20);
+        var lookList = ScrollList("CosmeticList", screen.transform, 300, 120, 250, -132);
+
         var version = Text("VersionText", screen.transform, "", 13, new Color(1, 1, 1, 0.6f), TextAnchor.MiddleCenter);
-        Center(version, 250, -20); Size(version, 300, 22);
+        Center(version, 250, -205); Size(version, 300, 22);
 
         var comp = screen.AddComponent<SettingsScreen>();
         comp.musicSlider = music.GetComponentInChildren<Slider>();
@@ -1218,6 +1309,9 @@ public static class SceneBuilder
         comp.newPasswordInput = newPass.GetComponent<InputField>();
         comp.changePasswordButton = changeBtn.GetComponent<Button>();
         comp.walletButton = wallet.GetComponent<Button>();
+        comp.gachaButton = gacha.GetComponent<Button>();
+        comp.cosmeticContent = lookList;
+        comp.cosmeticRowPrefab = prefabs.row;
         comp.logoutButton = logout.GetComponent<Button>();
         comp.backButton = CloseButton(screen.transform);
     }

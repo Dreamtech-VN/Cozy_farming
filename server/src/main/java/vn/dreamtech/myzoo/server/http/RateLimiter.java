@@ -26,7 +26,10 @@ public final class RateLimiter {
         this.time = time;
     }
 
-    public static boolean isSensitive(String path) {
+    // Chỉ siết request ghi. Mở một màn hình thường phải gọi vài endpoint đọc, tính chung vào hạn mức
+    // chặt thì người chơi bình thường bị chặn oan trong khi kẻ dò mật khẩu vẫn là POST.
+    public static boolean isSensitive(String method, String path) {
+        if ("GET".equals(method)) return false;
         for (String prefix : SENSITIVE) {
             if (path.startsWith(prefix)) return true;
         }
@@ -34,9 +37,10 @@ public final class RateLimiter {
     }
 
     // Trả về số giây phải chờ nếu vượt hạn, 0 nếu được đi tiếp.
-    public int retryAfterSeconds(String caller, String path) {
-        int limit = isSensitive(path) ? SENSITIVE_LIMIT : NORMAL_LIMIT;
-        String key = (isSensitive(path) ? "s:" : "n:") + caller;
+    public int retryAfterSeconds(String caller, String method, String path) {
+        boolean sensitive = isSensitive(method, path);
+        int limit = sensitive ? SENSITIVE_LIMIT : NORMAL_LIMIT;
+        String key = (sensitive ? "s:" : "n:") + caller;
         long now = time.now();
         Deque<Long> window = hits.computeIfAbsent(key, k -> new ArrayDeque<>());
         synchronized (window) {

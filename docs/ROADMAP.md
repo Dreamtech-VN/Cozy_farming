@@ -25,7 +25,7 @@ Cập nhật cuối mỗi đợt. Mục đích: nhìn một chỗ là biết cò
 | §19 QA | Ma trận kiểm thử | **Chưa** |
 | §21 LiveOps | Công cụ GM | Một phần — có endpoint admin, chưa có giao diện, **Đợt 10** |
 | §26.15 Settings | Màn cài đặt, cập nhật bắt buộc, thông báo bảo trì | Xong ở Đợt 5 |
-| §27.8 Gacha | Banner, tỉ lệ, pity, lịch sử quay | **Chưa — Đợt 6** |
+| §27.8 Gacha | Banner, tỉ lệ công khai, pity, trùng → mảnh, lịch sử quay | Xong ở Đợt 6 |
 | §27.13 Wallet | Số dư + lịch sử thu chi | Xong ở Đợt 5 |
 | §27.14 IAP | Nạp tiền thật, xác thực hoá đơn | **Chưa — Đợt 10** (đang là `TOPUP_MOCK`) |
 | §27.21 Analytics | Sự kiện đo lường | **Chưa — Đợt 10** |
@@ -44,8 +44,8 @@ Tiêu chí MVP ở §22.1 đã đạt, trừ dòng "thế giới 2D đi lại đ
 | 3 | Cửa hàng, Kim Cương, kho đồ | #75 | Xong |
 | 4 | Chế biến, trang trí, minigame thứ hai | #76 | Xong |
 | — | Chat thế giới/riêng/hệ thống + kiểm duyệt | #77 | Xong |
-| 5 | Ví + lịch sử giao dịch, màn Cài đặt, rate limit toàn API | — | Đang làm |
-| 6 | Gacha (banner, tỉ lệ công khai, pity, lịch sử) | — | Chưa |
+| 5 | Ví + lịch sử giao dịch, màn Cài đặt, rate limit toàn API | #78 | Xong |
+| 6 | Gacha + hệ ngoại hình (pool chỉ có đồ cosmetic) | — | Đang làm |
 | 7 | Nhiệm vụ tuần/sự kiện dữ liệu hoá + chăn nuôi | — | Chưa |
 | 8 | Xếp hạng sở thú, sức chứa khách, chợ thức ăn khẩn cấp | — | Chưa |
 | 9 | Realtime (hoặc long-poll) + thông báo cục bộ | — | Chưa |
@@ -60,7 +60,8 @@ Tiêu chí MVP ở §22.1 đã đạt, trừ dòng "thế giới 2D đi lại đ
 - **Kiểm thử trên máy thật** theo ma trận QA §19.
 - **Hạ tầng production**: HTTPS + MySQL. Đã có hướng dẫn ở `docs/SETUP_GUIDE.md`, chưa dựng thật.
 - **Pháp lý**: chính sách riêng tư, giới hạn độ tuổi, và **công bố tỉ lệ gacha** — bắt buộc theo quy
-  định của Apple/Google và luật ở nhiều nước. Làm cùng lúc với Đợt 6, không để sau.
+  định của Apple/Google và luật ở nhiều nước. Bảng tỉ lệ đã làm trong Đợt 6, xem được ngay trong
+  màn quay số; phần chính sách riêng tư và giới hạn độ tuổi thì vẫn còn thiếu.
 
 ## Rủi ro đã biết
 

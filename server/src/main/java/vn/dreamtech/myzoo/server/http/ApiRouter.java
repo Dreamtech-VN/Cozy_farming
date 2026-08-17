@@ -9,6 +9,8 @@ import vn.dreamtech.myzoo.server.chat.ChatService;
 import vn.dreamtech.myzoo.server.config.GameConfig;
 import vn.dreamtech.myzoo.server.economy.EconomyService;
 import vn.dreamtech.myzoo.server.farm.FarmService;
+import vn.dreamtech.myzoo.server.gacha.CosmeticService;
+import vn.dreamtech.myzoo.server.gacha.GachaService;
 import vn.dreamtech.myzoo.server.minigame.MinigameService;
 import vn.dreamtech.myzoo.server.mission.MissionService;
 import vn.dreamtech.myzoo.server.mail.MailService;
@@ -39,6 +41,8 @@ public final class ApiRouter implements HttpHandler {
     private final ProcessingService processing;
     private final ChatService chat;
     private final EconomyService economy;
+    private final GachaService gacha;
+    private final CosmeticService cosmetics;
     private final Idempotency idempotency;
     private final RateLimiter limiter;
     private final java.util.concurrent.atomic.AtomicLong requestCount = new java.util.concurrent.atomic.AtomicLong();
@@ -47,7 +51,10 @@ public final class ApiRouter implements HttpHandler {
                      MissionService missions, AccountService accounts, SocialService social, MailService mail,
                      GiftcodeService giftcodes, AchievementService achievements, ShopService shop,
                      ProcessingService processing, ChatService chat, EconomyService economy,
+                     GachaService gacha, CosmeticService cosmetics,
                      Idempotency idempotency, RateLimiter limiter) {
+        this.gacha = gacha;
+        this.cosmetics = cosmetics;
         this.limiter = limiter;
         this.economy = economy;
         this.shop = shop;
@@ -115,6 +122,9 @@ public final class ApiRouter implements HttpHandler {
         Long minutes;
         String voiceBase64;
         Integer durationMs;
+        String bannerId;
+        Integer count;
+        String cosmeticId;
     }
 
     @Override
@@ -140,7 +150,7 @@ public final class ApiRouter implements HttpHandler {
         }
 
         // Chặn spam ở đúng một chỗ — mọi request đều đi qua đây.
-        int retryAfter = limiter.retryAfterSeconds(callerOf(ex), path);
+        int retryAfter = limiter.retryAfterSeconds(callerOf(ex), method, path);
         if (retryAfter > 0) {
             ex.getResponseHeaders().set("Retry-After", String.valueOf(retryAfter));
             JsonHttp.writeError(ex, 429, "Bạn thao tác quá nhanh, thử lại sau " + retryAfter + " giây");
@@ -190,6 +200,8 @@ public final class ApiRouter implements HttpHandler {
                 int playerId = auth(ex);
                 Body b = JsonHttp.readBody(ex, Body.class);
                 requireFields(b.name != null, "Cần name");
+                // Chỉ cho đặt ngoại hình gốc hoặc món đã sở hữu — trước đây client gửi chuỗi gì cũng nhận.
+                cosmetics.requireWearable(playerId, b.avatar);
                 mutate(ex, b, playerId, () -> players.createCharacter(playerId, b.name, b.avatar));
             }
             case "GET /v1/world/snapshot" -> {
@@ -214,6 +226,41 @@ public final class ApiRouter implements HttpHandler {
                     "games", MinigameService.GAMES,
                     "plotCount", FarmService.PLOT_COUNT));
             case "GET /v1/me" -> JsonHttp.write(ex, 200, players.profile(auth(ex)));
+            case "GET /v1/gacha/banners" -> {
+                auth(ex);
+                JsonHttp.write(ex, 200, Map.of("banners", gacha.banners()));
+            }
+            case "POST /v1/gacha/pull" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                mutate(ex, b, playerId, () -> gacha.pull(playerId, b.bannerId, b.count == null ? 1 : b.count));
+            }
+            case "GET /v1/gacha/history" -> {
+                int playerId = auth(ex);
+                Integer limit = QueryParam.intParam(ex.getRequestURI().getQuery(), "limit");
+                JsonHttp.write(ex, 200, Map.of(
+                        "pulls", gacha.history(playerId, limit == null ? 50 : limit),
+                        "fragments", gacha.fragments(playerId),
+                        "pity", gacha.pityOf(playerId, GachaService.DEFAULT_BANNER)));
+            }
+            case "POST /v1/gacha/exchange" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.cosmeticId != null, "Cần cosmeticId");
+                mutate(ex, b, playerId, () -> gacha.exchange(playerId, b.cosmeticId));
+            }
+            case "GET /v1/cosmetics" -> {
+                int playerId = auth(ex);
+                JsonHttp.write(ex, 200, Map.of(
+                        "cosmetics", cosmetics.list(playerId),
+                        "fragments", gacha.fragments(playerId)));
+            }
+            case "POST /v1/cosmetics/equip" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.cosmeticId != null, "Cần cosmeticId");
+                mutate(ex, b, playerId, () -> cosmetics.equip(playerId, b.cosmeticId));
+            }
             case "GET /v1/wallet" -> {
                 int playerId = auth(ex);
                 String query = ex.getRequestURI().getQuery();

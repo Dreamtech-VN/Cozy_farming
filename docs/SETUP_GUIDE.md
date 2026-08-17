@@ -276,6 +276,31 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `POST /v1/processing/collect` | `slotId` | 409 chưa xong, 404 đã thu |
 | `POST /v1/zoo/decors` | `habitatId, decorId` | trang trí chuồng; 409 đã có món đó, 403 thiếu Zoo level |
 
+**Gacha & ngoại hình** (spec §27.8–27.10):
+
+| Method & path | Body / query | Ghi chú |
+|---|---|---|
+| `GET /v1/gacha/banners` | — | Banner đang mở **kèm bảng tỉ lệ công khai** và mốc bắt đầu/kết thúc |
+| `POST /v1/gacha/pull` | `bannerId, count` (1 hoặc 10) | Trừ KC, quay bằng RNG server, ghi `gacha_pulls` trước khi trả lời. 402 thiếu KC, 404 banner đóng, 400 số lượt sai |
+| `GET /v1/gacha/history?limit=` | — | `{pulls[], fragments, pity}` |
+| `POST /v1/gacha/exchange` | `cosmeticId` | Đổi 100 mảnh lấy 1 món SSR tự chọn. 402 thiếu mảnh, 409 đã có, 400 không phải SSR |
+| `GET /v1/cosmetics` | — | Toàn bộ danh mục kèm cờ `owned`/`equipped` |
+| `POST /v1/cosmetics/equip` | `cosmeticId` | 403 nếu chưa sở hữu |
+
+Tỉ lệ mặc định: **R 79% · SR 17% · SSR 3.5% · UR 0.5%**. Giá 1 lượt 100 KC, 10 lượt 900 KC.
+Pity: 80 lượt liên tiếp không ra SSR thì lượt kế tiếp chắc chắn SSR trở lên, trúng thì đếm lại từ 0.
+Quay 10 luôn có ít nhất 1 món SR trở lên. Trùng món đã có thì đổi thành mảnh theo bậc
+(R 1 · SR 5 · SSR 20 · UR 50), đủ 100 mảnh đổi 1 món SSR tự chọn.
+
+Tỉ lệ và giá nằm trong bảng `gacha_banners` / `gacha_pools`, **sửa trong DB là đổi ngay, không cần
+build lại client**. Bảng tỉ lệ hiển thị trong game lấy thẳng từ đây nên không bao giờ lệch với RNG thật.
+
+> **Pool chỉ có đồ ngoại hình** (spec §27.20): không có thú và không có trang trí cộng độ hấp dẫn.
+> Bỏ thú vào pool là bán sức mạnh vì độ hấp dẫn quy thẳng ra doanh thu sở thú.
+>
+> **Bắt buộc trước khi phát hành**: công bố tỉ lệ là yêu cầu của Apple/Google và luật ở nhiều nước.
+> Bảng tỉ lệ đã có sẵn trong màn quay số, đừng gỡ đi.
+
 **Chat** (kênh `WORLD` · `PRIVATE` · `SYSTEM`; loại nội dung `TEXT` · `STICKER` · `GIF` · `VOICE`, emoji đi kèm trong `TEXT`):
 
 | Method & path | Body / query | Ghi chú |
