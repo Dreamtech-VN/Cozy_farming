@@ -348,6 +348,24 @@ namespace MyZoo
     }
 
     [Serializable]
+    public class ZooReport
+    {
+        public int rating, capacity, visitorsPerHour;
+        public double stars;
+        public long grossPerHour, maintenancePerHour, netPerHour;
+    }
+    [Serializable] public class MarketItem { public string foodId, name; public long price; }
+    [Serializable] public class MarketList { public List<MarketItem> items; }
+    [Serializable]
+    public class MarketResult
+    {
+        public string foodId;
+        public int quantity;
+        public long spent, vangBalance;
+        public List<ItemStack> warehouse;
+    }
+
+    [Serializable]
     public class LivestockDef
     {
         public string id, name, foodId, productId;

@@ -69,9 +69,28 @@ public final class ZooService {
         players.requirePlayer(playerId);
         long now = time.now();
         List<HabitatView> habitats = loadHabitats(playerId, now);
+        Stats stats = statsOf(habitats);
+        ZooRow zoo = zooRow(playerId);
+        long pending = zoo.isOpen ? accruedVang(playerId, zoo, stats, now) : 0;
+        return new ZooView(habitats, farm.readInventory("zoo_warehouse", playerId), zoo.isOpen,
+                stats.coverage, stats.totalAppeal, pending);
+    }
+
+    // Bảng điều khiển sở thú (spec §29.18): cho người chơi thấy vì sao doanh thu cao hay thấp.
+    public ZooEconomy.Report report(int playerId) {
+        players.requirePlayer(playerId);
+        Stats stats = statsOf(loadHabitats(playerId, time.now()));
+        return ZooEconomy.report(stats.totalAppeal, stats.coverage, stats.decorAppeal, stats.distinctSpecies,
+                players.profile(playerId).zooLevel(), stats.habitatCount);
+    }
+
+    // Gom số liệu một lần rồi dùng chung cho view, report và thu tiền — tránh ba nơi tính lệch nhau.
+    private Stats statsOf(List<HabitatView> habitats) {
         int totalAnimals = 0;
         int fedAnimals = 0;
         int totalAppeal = 0;
+        int decorAppeal = 0;
+        var species = new java.util.HashSet<String>();
         for (HabitatView h : habitats) {
             boolean anyFed = false;
             for (AnimalView a : h.animals()) {
@@ -80,14 +99,19 @@ public final class ZooService {
                     fedAnimals++;
                     anyFed = true;
                     totalAppeal += a.appeal();
+                    species.add(a.speciesId());
                 }
             }
-            if (anyFed) totalAppeal += h.decorAppeal();
+            if (anyFed) {
+                totalAppeal += h.decorAppeal();
+                decorAppeal += h.decorAppeal();
+            }
         }
         double coverage = totalAnimals == 0 ? 0 : (double) fedAnimals / totalAnimals;
-        ZooRow zoo = zooRow(playerId);
-        long pending = zoo.isOpen ? accruedVang(zoo, totalAppeal, now) : 0;
-        return new ZooView(habitats, farm.readInventory("zoo_warehouse", playerId), zoo.isOpen, coverage, totalAppeal, pending);
+        return new Stats(totalAppeal, coverage, decorAppeal, species.size(), habitats.size());
+    }
+
+    private record Stats(int totalAppeal, double coverage, int decorAppeal, int distinctSpecies, int habitatCount) {
     }
 
     // Trang trí: cộng độ hấp dẫn cho chuồng, nhưng chỉ tính khi chuồng có thú đã được cho ăn —
@@ -270,6 +294,53 @@ public final class ZooService {
         return new FeedResult(habitatId, fedCount, farm.readInventory("zoo_warehouse", playerId));
     }
 
+    // Chợ thức ăn khẩn cấp (spec §29.23): mua thẳng vào kho Zoo, giá cao hơn tự trồng để nông trại
+    // vẫn là con đường chính — nhưng người chơi không bao giờ kẹt cứng vì hết thức ăn.
+    public static final long EMERGENCY_PRICE_MULTIPLIER = 3;
+    public static final int EMERGENCY_MAX_QUANTITY = 50;
+
+    public record MarketItem(String foodId, String name, long price) {
+    }
+
+    public record MarketResult(String foodId, int quantity, long spent, long vangBalance,
+                               List<FarmService.ItemStack> warehouse) {
+    }
+
+    public static long emergencyPrice(String foodId) {
+        return Catalog.sellPrice(foodId).orElseThrow(() -> new ApiException(404, "Không bán loại này"))
+                * EMERGENCY_PRICE_MULTIPLIER;
+    }
+
+    // Chỉ bán thứ thú ăn được, không bán thành phẩm chế biến.
+    public List<MarketItem> market() {
+        List<MarketItem> out = new ArrayList<>();
+        for (Catalog.CropDef crop : Catalog.CROPS) {
+            boolean eaten = Catalog.SPECIES.stream().anyMatch(s -> s.diet().contains(crop.id()));
+            if (eaten) out.add(new MarketItem(crop.id(), crop.name(), emergencyPrice(crop.id())));
+        }
+        return out;
+    }
+
+    public MarketResult buyEmergencyFood(int playerId, String foodId, int quantity) {
+        players.requirePlayer(playerId);
+        if (quantity <= 0 || quantity > EMERGENCY_MAX_QUANTITY) {
+            throw new ApiException(400, "Số lượng phải từ 1 đến " + EMERGENCY_MAX_QUANTITY);
+        }
+        if (market().stream().noneMatch(m -> m.foodId().equals(foodId))) {
+            throw new ApiException(404, "Chợ không bán loại này");
+        }
+        long total = emergencyPrice(foodId) * quantity;
+        long balance = economy.spend(playerId, EconomyService.VANG, total, "EMERGENCY_FOOD", "food", foodId);
+        try (Connection c = dataSource.getConnection()) {
+            FarmService.addToInventory(c, "zoo_warehouse", playerId, foodId, quantity);
+        } catch (SQLException e) {
+            economy.earn(playerId, EconomyService.VANG, total, "EMERGENCY_FOOD_REFUND", "food", foodId);
+            throw new ApiException(500, "Lỗi thêm vào kho Zoo: " + e.getMessage());
+        }
+        return new MarketResult(foodId, quantity, total, balance,
+                farm.readInventory("zoo_warehouse", playerId));
+    }
+
     public void open(int playerId) {
         players.requirePlayer(playerId);
         ZooRow zoo = zooRow(playerId);
@@ -291,18 +362,8 @@ public final class ZooService {
         ZooRow zoo = zooRow(playerId);
         if (!zoo.isOpen) throw new ApiException(409, "Zoo chưa mở cửa");
         long now = time.now();
-        int totalAppeal = 0;
-        for (HabitatView h : loadHabitats(playerId, now)) {
-            boolean anyFed = false;
-            for (AnimalView a : h.animals()) {
-                if (a.fed()) {
-                    anyFed = true;
-                    totalAppeal += a.appeal();
-                }
-            }
-            if (anyFed) totalAppeal += h.decorAppeal();
-        }
-        long earned = accruedVang(zoo, totalAppeal, now);
+        Stats stats = statsOf(loadHabitats(playerId, now));
+        long earned = accruedVang(playerId, zoo, stats, now);
         saveZoo(playerId, true, now);
         long balance = earned > 0
                 ? economy.earn(playerId, EconomyService.VANG, earned, "ZOO_REVENUE", "zoo", String.valueOf(playerId))
@@ -312,11 +373,14 @@ public final class ZooService {
         return new CollectResult(earned, xp, balance);
     }
 
-    private long accruedVang(ZooRow zoo, int totalAppeal, long now) {
+    // Doanh thu = số khách × chi tiêu (tuỳ hạng) − chi phí vận hành, tính theo giờ đã trôi qua.
+    private long accruedVang(int playerId, ZooRow zoo, Stats stats, long now) {
         if (zoo.lastCollectAt == null) return 0;
         long elapsed = Math.min(MAX_ACCRUAL_MS, Math.max(0, now - zoo.lastCollectAt));
         double hours = elapsed / 3_600_000.0;
-        return (long) Math.floor(totalAppeal * VANG_PER_APPEAL_PER_HOUR * hours);
+        var report = ZooEconomy.report(stats.totalAppeal, stats.coverage, stats.decorAppeal,
+                stats.distinctSpecies, players.profile(playerId).zooLevel(), stats.habitatCount);
+        return (long) Math.floor(report.netPerHour() * hours);
     }
 
     private List<HabitatView> loadHabitats(int playerId, long now) {

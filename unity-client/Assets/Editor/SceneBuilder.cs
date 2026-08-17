@@ -742,6 +742,31 @@ public static class SceneBuilder
         comp.statusText = status.GetComponent<Text>();
         comp.actionText = actionLabel.GetComponent<Text>();
         comp.habitatTitle = habitatTitle.GetComponent<Text>();
+
+        // Bảng điều khiển + chợ thức ăn khẩn cấp (Đợt 8).
+        var rating = Text("RatingText", screen.transform, "", 13, new Color(1f, 0.92f, 0.7f), TextAnchor.UpperLeft);
+        Center(rating, -340, 10); Size(rating, 270, 90);
+
+        var market = Button("MarketButton", screen.transform, new Color(0.95f, 0.70f, 0.45f), 200, 40);
+        Center(market, -340, -140);
+        Stretch(Text("Label", market.transform, "CHỢ THỨC ĂN", 14, Dark, TextAnchor.MiddleCenter));
+
+        var marketPanel = Image("MarketPanel", screen.transform, new Color(0.12f, 0.16f, 0.13f, 0.97f), 620, 360);
+        Center(marketPanel, 0, 0);
+        var marketTitle = Text("MarketTitle", marketPanel.transform,
+                "Chợ thức ăn khẩn cấp — đắt hơn tự trồng", 15, Color.white, TextAnchor.MiddleCenter);
+        Center(marketTitle, 0, 148); Size(marketTitle, 560, 24);
+        var marketList = ScrollList("MarketList", marketPanel.transform, 590, 250, 0, 0);
+        var closeMarket = Button("CloseMarketButton", marketPanel.transform, Primary, 160, 36);
+        Center(closeMarket, 0, -148);
+        Stretch(Text("Label", closeMarket.transform, "Đóng", 14, Dark, TextAnchor.MiddleCenter));
+        marketPanel.SetActive(false);
+
+        comp.ratingText = rating.GetComponent<Text>();
+        comp.marketButton = market.GetComponent<Button>();
+        comp.marketPanel = marketPanel;
+        comp.marketContent = marketList;
+        comp.closeMarketButton = closeMarket.GetComponent<Button>();
     }
 
     static void BuildMissions(Transform parent, Prefabs prefabs)

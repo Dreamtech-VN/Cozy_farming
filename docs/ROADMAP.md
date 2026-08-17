@@ -11,7 +11,7 @@ Cập nhật cuối mỗi đợt. Mục đích: nhìn một chỗ là biết cò
 | §6 Farm | 48 ô, 8 loại cây, trạng thái cây, kho nông sản | Xong |
 | §6.4 Livestock | 5 loài, đói/sản phẩm tính lười, nối vào chế biến | Xong ở Đợt 7 |
 | §7 Zoo | Chuồng, 6 loài thú, cho ăn theo cửa sổ đói, mở cửa, doanh thu | Xong |
-| §7.4 Visitor simulation | Khách tham quan, sức chứa, xếp hạng sở thú | **Chưa — Đợt 8** |
+| §7.4 Visitor simulation | Xếp hạng, sức chứa khách, doanh thu theo hạng | Xong ở Đợt 8 |
 | §8 Mini-game | Match-3 + Lật hình, server sinh seed và chấm điểm | Xong |
 | §9 Economy | 2 loại tiền tách bạch, sổ cái, idempotency | Xong |
 | §10 Social | Bạn bè, thăm vườn, giúp bạn, bảng xếp hạng | Xong |
@@ -30,7 +30,8 @@ Cập nhật cuối mỗi đợt. Mục đích: nhìn một chỗ là biết cò
 | §27.14 IAP | Nạp tiền thật, xác thực hoá đơn | **Chưa — Đợt 10** (đang là `TOPUP_MOCK`) |
 | §27.21 Analytics | Sự kiện đo lường | **Chưa — Đợt 10** |
 | §29 Farm→Zoo loop | Chế biến, kho, cho ăn, doanh thu | Xong |
-| §29.23 Chợ khẩn cấp | Mua thức ăn giá cao khi kho cạn | **Chưa — Đợt 8** |
+| §29.18 Zoo dashboard | Bảng hạng/khách/doanh thu | Một phần — gộp thành một luồng doanh thu thay vì tách 6 nguồn (vé, đồ ăn, nước, quà lưu niệm, ảnh, trò chơi); **chưa có báo cáo cuối ngày** vì cần tiến trình chạy định kỳ mà kiến trúc hiện tại cố tình không có |
+| §29.23 Chợ khẩn cấp | Mua thức ăn giá cao khi kho cạn | Xong ở Đợt 8 |
 | §30 Long-term | Thời tiết/mùa, guild, giao dịch, câu cá, thú cưng, danh hiệu... | Spec ghi rõ **post-MVP** — chưa đụng |
 
 Tiêu chí MVP ở §22.1 đã đạt, trừ dòng "thế giới 2D đi lại được" — hiện game là giao diện màn hình.
@@ -46,8 +47,8 @@ Tiêu chí MVP ở §22.1 đã đạt, trừ dòng "thế giới 2D đi lại đ
 | — | Chat thế giới/riêng/hệ thống + kiểm duyệt | #77 | Xong |
 | 5 | Ví + lịch sử giao dịch, màn Cài đặt, rate limit toàn API | #78 | Xong |
 | 6 | Gacha + hệ ngoại hình (pool chỉ có đồ cosmetic) | #79 | Xong |
-| 7 | Nhiệm vụ tuần/sự kiện dữ liệu hoá + chăn nuôi | — | Đang làm |
-| 8 | Xếp hạng sở thú, sức chứa khách, chợ thức ăn khẩn cấp | — | Chưa |
+| 7 | Nhiệm vụ tuần/sự kiện dữ liệu hoá + chăn nuôi | #80 | Xong |
+| 8 | Xếp hạng sở thú, sức chứa khách, chợ thức ăn khẩn cấp | — | Đang làm |
 | 9 | Realtime (hoặc long-poll) + thông báo cục bộ | — | Chưa |
 | 10 | IAP thật, trang GM, analytics | — | Chưa |
 

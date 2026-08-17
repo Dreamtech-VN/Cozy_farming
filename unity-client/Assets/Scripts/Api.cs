@@ -72,6 +72,23 @@ namespace MyZoo
 
         public IEnumerator Logout(Action<OkResult> ok, Action<string> fail) { return Post("/v1/auth/logout", "{}", ok, fail); }
 
+        // ---------- Sở thú: bảng điều khiển & chợ khẩn cấp ----------
+        public IEnumerator GetZooReport(Action<ZooReport> ok, Action<string> fail)
+        {
+            return Get("/v1/zoo/report", ok, fail);
+        }
+
+        public IEnumerator GetEmergencyMarket(Action<MarketList> ok, Action<string> fail)
+        {
+            return Get("/v1/zoo/market", ok, fail);
+        }
+
+        public IEnumerator BuyEmergencyFood(string foodId, int quantity, Action<MarketResult> ok, Action<string> fail)
+        {
+            return Post("/v1/zoo/market",
+                "{" + Str("foodId", foodId) + "," + Num("quantity", quantity) + "," + Req() + "}", ok, fail);
+        }
+
         // ---------- Chăn nuôi ----------
         public IEnumerator GetBarn(Action<BarnView> ok, Action<string> fail) { return Get("/v1/livestock", ok, fail); }
 
