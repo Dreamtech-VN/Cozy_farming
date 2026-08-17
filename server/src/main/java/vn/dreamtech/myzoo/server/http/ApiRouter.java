@@ -7,6 +7,7 @@ import vn.dreamtech.myzoo.server.catalog.Catalog;
 import vn.dreamtech.myzoo.server.chat.ChatCatalog;
 import vn.dreamtech.myzoo.server.chat.ChatService;
 import vn.dreamtech.myzoo.server.config.GameConfig;
+import vn.dreamtech.myzoo.server.economy.EconomyService;
 import vn.dreamtech.myzoo.server.farm.FarmService;
 import vn.dreamtech.myzoo.server.minigame.MinigameService;
 import vn.dreamtech.myzoo.server.mission.MissionService;
@@ -37,12 +38,18 @@ public final class ApiRouter implements HttpHandler {
     private final ShopService shop;
     private final ProcessingService processing;
     private final ChatService chat;
+    private final EconomyService economy;
     private final Idempotency idempotency;
+    private final RateLimiter limiter;
+    private final java.util.concurrent.atomic.AtomicLong requestCount = new java.util.concurrent.atomic.AtomicLong();
 
     public ApiRouter(PlayerService players, FarmService farm, ZooService zoo, MinigameService minigames,
                      MissionService missions, AccountService accounts, SocialService social, MailService mail,
                      GiftcodeService giftcodes, AchievementService achievements, ShopService shop,
-                     ProcessingService processing, ChatService chat, Idempotency idempotency) {
+                     ProcessingService processing, ChatService chat, EconomyService economy,
+                     Idempotency idempotency, RateLimiter limiter) {
+        this.limiter = limiter;
+        this.economy = economy;
         this.shop = shop;
         this.processing = processing;
         this.chat = chat;
@@ -132,6 +139,15 @@ public final class ApiRouter implements HttpHandler {
             return;
         }
 
+        // Chặn spam ở đúng một chỗ — mọi request đều đi qua đây.
+        int retryAfter = limiter.retryAfterSeconds(callerOf(ex), path);
+        if (retryAfter > 0) {
+            ex.getResponseHeaders().set("Retry-After", String.valueOf(retryAfter));
+            JsonHttp.writeError(ex, 429, "Bạn thao tác quá nhanh, thử lại sau " + retryAfter + " giây");
+            return;
+        }
+        if (requestCount.incrementAndGet() % 500 == 0) limiter.evictIdle();
+
         switch (key) {
             case "GET /v1/config" -> JsonHttp.write(ex, 200, Map.of(
                     "gameVersion", GameConfig.GAME_VERSION,
@@ -198,6 +214,20 @@ public final class ApiRouter implements HttpHandler {
                     "games", MinigameService.GAMES,
                     "plotCount", FarmService.PLOT_COUNT));
             case "GET /v1/me" -> JsonHttp.write(ex, 200, players.profile(auth(ex)));
+            case "GET /v1/wallet" -> {
+                int playerId = auth(ex);
+                String query = ex.getRequestURI().getQuery();
+                Integer limit = QueryParam.intParam(query, "limit");
+                int size = EconomyService.pageSize(limit == null ? 0 : limit);
+                var entries = economy.history(playerId, QueryParam.longParam(query, "cursor"), size);
+                var balances = economy.balances(playerId);
+                JsonHttp.write(ex, 200, Map.of(
+                        "vang", balances.get(EconomyService.VANG),
+                        "kc", balances.get(EconomyService.KIM_CUONG),
+                        "entries", entries,
+                        // Trang cuối trả 0 để client biết dừng, khỏi phải gọi thêm một lần rỗng.
+                        "nextCursor", entries.size() < size ? 0L : entries.get(entries.size() - 1).id()));
+            }
             case "POST /v1/players/name" -> {
                 int playerId = auth(ex);
                 Body b = JsonHttp.readBody(ex, Body.class);
@@ -584,6 +614,14 @@ public final class ApiRouter implements HttpHandler {
 
     private int auth(HttpExchange ex) {
         return players.authenticate(tokenOf(ex));
+    }
+
+    // Đếm theo token nếu có (khỏi phải tra DB), không có thì theo IP để khách vãng lai cũng bị giới hạn.
+    private static String callerOf(HttpExchange ex) {
+        String token = tokenOf(ex);
+        if (token != null && !token.isBlank()) return token;
+        var remote = ex.getRemoteAddress();
+        return remote == null ? "unknown" : remote.getAddress().getHostAddress();
     }
 
     private static String tokenOf(HttpExchange ex) {

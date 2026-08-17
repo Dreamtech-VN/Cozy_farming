@@ -61,7 +61,8 @@ Canvas
 │   ├── S33_Mail · S35_Achievements
 │   ├── S30_Shop · S32_Inventory
 │   ├── S34_Processing · S41_Memory
-│   └── S37_Chat
+│   ├── S37_Chat
+│   └── S38_Wallet · S39_Settings
 ├── HUD          (tên, Vàng, KC, level, nút về sảnh)
 └── Toast        (thông báo đáy màn)
 App              (Api + App + ScreenManager)

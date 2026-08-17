@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class EconomyService {
@@ -39,6 +41,40 @@ public final class EconomyService {
             return out;
         } catch (SQLException e) {
             throw new ApiException(500, "Lỗi đọc ví: " + e.getMessage());
+        }
+    }
+
+    public record LedgerEntry(long id, String currency, long amount, long balanceAfter,
+                              String reason, String refType, String refId, long createdAt) {
+    }
+
+    // Lịch sử tiền vào/ra. Phân trang bằng cursor = id nhỏ nhất đã lấy, không dùng OFFSET
+    // để trang sau không bị lệch khi có giao dịch mới chen vào.
+    public static int pageSize(int requested) {
+        return requested <= 0 || requested > 100 ? 30 : requested;
+    }
+
+    public List<LedgerEntry> history(int playerId, Long cursor, int limit) {
+        int size = pageSize(limit);
+        String sql = "SELECT id, currency, amount, balance_after, reason, ref_type, ref_id, created_at "
+                + "FROM economy_ledger WHERE player_id = ?" + (cursor == null ? "" : " AND id < ?")
+                + " ORDER BY id DESC LIMIT ?";
+        List<LedgerEntry> out = new ArrayList<>();
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            int index = 1;
+            ps.setInt(index++, playerId);
+            if (cursor != null) ps.setLong(index++, cursor);
+            ps.setInt(index, size);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    out.add(new LedgerEntry(rs.getLong("id"), rs.getString("currency"), rs.getLong("amount"),
+                            rs.getLong("balance_after"), rs.getString("reason"), rs.getString("ref_type"),
+                            rs.getString("ref_id"), rs.getTimestamp("created_at").getTime()));
+                }
+            }
+            return out;
+        } catch (SQLException e) {
+            throw new ApiException(500, "Lỗi đọc lịch sử giao dịch: " + e.getMessage());
         }
     }
 

@@ -235,6 +235,7 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `POST /v1/players` | `name, avatar?` | tạo nhân vật; 400 tên sai luật, 409 trùng tên |
 | `GET /v1/world/snapshot` | — | gộp `{me, farm, zoo, missions}` — dùng lúc vào game thay vì gọi lẻ |
 | `GET /v1/me` | — | `name, avatar, serverId, hasAccount, farmXp, farmLevel, zooXp, zooLevel, wallets{VANG,KC}` |
+| `GET /v1/wallet?cursor=&limit=` | — | `{vang, kc, entries[], nextCursor}` — sổ cái tiền vào/ra. Phân trang bằng `cursor` (id dòng cuối trang trước), `nextCursor = 0` là hết |
 | `POST /v1/players/name` | `name` (2-20 ký tự) | đổi tên sau khi đã tạo nhân vật; 409 nếu trùng |
 | `GET /v1/catalog` | — | `crops[]` (seedCost, growthSeconds, yieldMin/Max, xp, sellPrice, minFarmLevel), `species[]` (cost, diet[], appeal, rarity, minZooLevel), `habitatTypes[]`, `products[]`, `decors[]`, `recipes[]`, `games[]`, `plotCount` — tải 1 lần lúc boot, đừng hardcode số liệu |
 | `GET /v1/farm` | — | `plots[48] {plotIndex, state EMPTY/GROWING/READY, cropId, plantedAt, readyAt}`, `storage[] {foodId, quantity}` |
@@ -312,7 +313,13 @@ Luật kiểm duyệt chạy ở server: chặn link/số điện thoại/nội 
 | `POST /v1/minigames/session` | `gameType` (`MATCH3` \| `MEMORY`) | `sessionId, gameType, seed, movesAllowed, maxScore, vangPerScore` — sinh bàn từ `seed` |
 | `POST /v1/minigames/finish` | `sessionId, score` | server kẹp `score ≤ maxScore` theo luật từng game; gọi lại cùng session trả kết quả cũ |
 
-Mã lỗi: `401` sai token/sai mật khẩu · `402` thiếu tiền · `403` thiếu level hoặc bị khoá · `404` không tồn tại · `409` sai trạng thái · `503` bảo trì.
+Mã lỗi: `401` sai token/sai mật khẩu · `402` thiếu tiền · `403` thiếu level hoặc bị khoá · `404` không tồn tại · `409` sai trạng thái · `429` gọi quá nhanh · `503` bảo trì.
+
+**Giới hạn tần suất**: mọi endpoint đều đi qua một bộ đếm cửa sổ trượt 60 giây — 120 request/phút cho
+nhóm thường, 12 request/phút cho nhóm nhạy cảm (`/v1/auth/*`, `/v1/shop/*`, `/v1/gacha/*`,
+`/v1/players`, `/v1/giftcodes/*`) để chặn dò mật khẩu. Vượt hạn trả `429` kèm header `Retry-After`
+(số giây). Đếm theo token nếu đã đăng nhập, chưa đăng nhập thì đếm theo IP. Chat có thêm luật riêng
+ở tầng nghiệp vụ (chống trùng tin, chống flood) — hai lớp này độc lập nhau.
 
 ## C5. Lớp gọi API mẫu (`Assets/Scripts/MyZooApi.cs`)
 
