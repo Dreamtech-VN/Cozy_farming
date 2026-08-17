@@ -470,14 +470,17 @@ namespace MyZoo
 
 `ScreenManager` lo bật/tắt screen; `Toast` hiện thông báo ngắn ở đáy màn.
 
-Tạo `ScreenManager.cs` → Add Component vào GameObject `App`. Trong Inspector chỉ cần kéo **2 thứ**:
+Tạo `ScreenManager.cs` → Add Component vào GameObject `App`.
 
-| Ô trong Inspector | Kéo cái gì vào |
+**Không cần làm gì trong Inspector**: nếu bạn đặt tên GameObject đúng là `Screens` và `HUD` (như sơ đồ ở mục 0.5), script tự tìm ra chúng lúc chạy. Muốn dùng tên khác thì mới phải gán tay vào 2 ô `Screens Root` / `Hud`.
+
+**Ba cách gán một ô kiểu kéo-thả trong Unity** (áp dụng cho mọi ô object ở các bước sau):
+
+| Cách | Thao tác |
 |---|---|
-| **Screens Root** | GameObject `Screens` (cha của tất cả S01…S40) |
-| **Hud** | GameObject `HUD` |
-
-Script tự lấy toàn bộ screen con của `Screens Root` khi chạy — **không phải kéo từng screen một**, và thêm screen mới về sau cũng không cần đụng lại Inspector.
+| Kéo chuột | Chọn `App` trong Hierarchy trước. Rồi **bấm giữ** chuột lên `Screens` trong Hierarchy, **giữ nguyên tay** rê sang ô trong Inspector, ô sáng viền xanh mới thả. *(Đừng click chọn `Screens` trước khi kéo — click là Inspector nhảy sang object đó, mất chỗ thả.)* |
+| Nút tròn ⊙ | Bấm hình tròn nhỏ ở mép phải ô → cửa sổ **Select GameObject** hiện ra → gõ tên → **double-click** kết quả. Không phải kéo gì. |
+| Để trống | Với `ScreenManager`, cứ để trống — script tự tìm theo tên. |
 
 ```csharp
 using System.Collections.Generic;
@@ -489,9 +492,9 @@ namespace MyZoo
     {
         public static ScreenManager I;
 
-        [Tooltip("Kéo GameObject 'Screens' (cha của S01..S40) vào đây")]
+        [Tooltip("Để trống thì tự tìm GameObject tên 'Screens'")]
         public Transform screensRoot;
-        [Tooltip("Kéo GameObject 'HUD' vào đây")]
+        [Tooltip("Để trống thì tự tìm GameObject tên 'HUD'")]
         public GameObject hud;
 
         readonly List<GameObject> screens = new();
@@ -499,6 +502,21 @@ namespace MyZoo
         void Awake()
         {
             I = this;
+
+            // Để trống 2 ô trong Inspector cũng chạy: tự tìm theo tên GameObject.
+            if (screensRoot == null)
+            {
+                var found = GameObject.Find("Screens");
+                if (found == null)
+                {
+                    Debug.LogError("Không thấy GameObject tên 'Screens'. Tạo nó trong Canvas (mục 0.5), "
+                                 + "hoặc gán thủ công vào ô Screens Root.");
+                    return;
+                }
+                screensRoot = found.transform;
+            }
+            if (hud == null) hud = GameObject.Find("HUD");
+
             // Tự gom mọi screen con — khỏi kéo thả từng cái, thêm screen mới cũng không cần sửa Inspector
             foreach (Transform child in screensRoot) screens.Add(child.gameObject);
         }
@@ -1750,7 +1768,7 @@ namespace MyZoo
 
 1. Bật server: `java -jar server/target/myzoo-server-0.1.0-SNAPSHOT.jar`
 2. Trong Unity, chọn GameObject `App` → ô **Base Url** để `http://localhost:8080`
-3. Chọn GameObject `App` → kéo `Screens` vào ô **Screens Root**, kéo `HUD` vào ô **Hud**
+3. Không cần gán gì cho `ScreenManager` nếu GameObject đã đặt đúng tên `Screens` và `HUD`
 4. Bấm **Play** — phải thấy Splash → Login. Bấm **Chơi ngay** → chọn server → tạo nhân vật → vào sảnh.
 
 **Checklist nghiệm thu:**
