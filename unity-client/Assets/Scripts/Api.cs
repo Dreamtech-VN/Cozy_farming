@@ -162,6 +162,27 @@ namespace MyZoo
             return Get("/v1/leaderboard?type=" + type, ok, fail);
         }
 
+        // ---------- Cửa hàng / kho đồ ----------
+        public IEnumerator GetShop(Action<ShopCatalogDto> ok, Action<string> fail) { return Get("/v1/shop", ok, fail); }
+        public IEnumerator GetInventory(Action<InventoryList> ok, Action<string> fail) { return Get("/v1/inventory", ok, fail); }
+
+        public IEnumerator Purchase(string itemId, int quantity, Action<PurchaseResult> ok, Action<string> fail)
+        {
+            return Post("/v1/shop/purchase", "{" + Str("itemId", itemId) + "," + Num("quantity", quantity) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator UseItem(string itemId, int plotIndex, Action<UseItemResult> ok, Action<string> fail)
+        {
+            string body = "{" + Str("itemId", itemId);
+            if (plotIndex >= 0) body += "," + Num("plotIndex", plotIndex);
+            return Post("/v1/items/use", body + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator Topup(string packId, Action<TopupResult> ok, Action<string> fail)
+        {
+            return Post("/v1/shop/topup", "{" + Str("packId", packId) + "," + Req() + "}", ok, fail);
+        }
+
         // ---------- Hộp thư / quà ----------
         public IEnumerator GetMails(Action<MailList> ok, Action<string> fail) { return Get("/v1/mails", ok, fail); }
 

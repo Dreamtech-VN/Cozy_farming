@@ -68,6 +68,8 @@ public static class SceneBuilder
         BuildLeaderboard(screens.transform, prefabs);
         BuildMail(screens.transform, prefabs);
         BuildAchievements(screens.transform, prefabs);
+        BuildShop(screens.transform, prefabs);
+        BuildInventory(screens.transform, prefabs);
 
         var app = new GameObject("App", typeof(Api), typeof(App), typeof(ScreenManager));
         var manager = app.GetComponent<ScreenManager>();
@@ -522,8 +524,16 @@ public static class SceneBuilder
         mailDotRt.anchoredPosition = new Vector2(-6, -6);
         mailDot.SetActive(false);
 
-        var achievement = Button("AchievementButton", screen.transform, new Color(0.95f, 0.65f, 0.55f), 200, 38);
-        Center(achievement, -280, -215);
+        var shop = Button("ShopButton", screen.transform, new Color(0.99f, 0.72f, 0.36f), 170, 44);
+        Center(shop, 360, -155);
+        Stretch(Text("Label", shop.transform, "CỬA HÀNG", 16, Dark, TextAnchor.MiddleCenter));
+
+        var inventory = Button("InventoryButton", screen.transform, new Color(0.75f, 0.85f, 0.70f), 150, 38);
+        Center(inventory, 300, -215);
+        Stretch(Text("Label", inventory.transform, "Kho đồ", 14, Dark, TextAnchor.MiddleCenter));
+
+        var achievement = Button("AchievementButton", screen.transform, new Color(0.95f, 0.65f, 0.55f), 180, 38);
+        Center(achievement, -290, -215);
         Stretch(Text("Label", achievement.transform, "Thành tựu", 14, Dark, TextAnchor.MiddleCenter));
 
         var checkin = Button("CheckinButton", screen.transform, new Color(0.98f, 0.80f, 0.30f), 180, 40);
@@ -545,6 +555,8 @@ public static class SceneBuilder
         comp.rankButton = rank.GetComponent<Button>();
         comp.mailButton = mail.GetComponent<Button>();
         comp.achievementButton = achievement.GetComponent<Button>();
+        comp.shopButton = shop.GetComponent<Button>();
+        comp.inventoryButton = inventory.GetComponent<Button>();
         comp.mailDot = mailDot;
         comp.farmDot = farm.transform.Find("Dot").gameObject;
         comp.zooDot = zoo.transform.Find("Dot").gameObject;
@@ -858,6 +870,62 @@ public static class SceneBuilder
         comp.rowPrefab = prefabs.row;
         comp.speciesPrefab = prefabs.speciesCard;
         comp.collectionSummaryText = summary.GetComponent<Text>();
+    }
+
+    static void BuildShop(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S30_Shop", parent, null);
+
+        var title = Text("Title", screen.transform, "Cửa hàng", 24, Color.white, TextAnchor.MiddleCenter);
+        Center(title, 0, 200); Size(title, 600, 30);
+
+        var itemTab = Button("ItemTab", screen.transform, Primary, 170, 38);
+        Center(itemTab, -95, 158);
+        Stretch(Text("Label", itemTab.transform, "Vật phẩm", 14, Dark, TextAnchor.MiddleCenter));
+
+        var packTab = Button("PackTab", screen.transform, new Color(0.55f, 0.80f, 0.95f), 170, 38);
+        Center(packTab, 95, 158);
+        Stretch(Text("Label", packTab.transform, "Kim Cương", 14, Dark, TextAnchor.MiddleCenter));
+
+        var itemList = ScrollList("ItemList", screen.transform, 640, 260, 0, -20);
+        var packList = ScrollList("PackList", screen.transform, 640, 260, 0, -20);
+
+        var note = Text("Note", screen.transform, "", 12, new Color(1, 1, 1, 0.65f), TextAnchor.MiddleCenter);
+        Center(note, 0, -180); Size(note, 700, 22);
+
+        var comp = screen.AddComponent<ShopScreen>();
+        comp.itemContent = itemList;
+        comp.packContent = packList;
+        comp.rowPrefab = prefabs.row;
+        comp.itemTabButton = itemTab.GetComponent<Button>();
+        comp.packTabButton = packTab.GetComponent<Button>();
+        comp.titleText = title.GetComponent<Text>();
+        comp.noteText = note.GetComponent<Text>();
+    }
+
+    static void BuildInventory(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S32_Inventory", parent, "Kho đồ");
+
+        var list = ScrollList("ItemList", screen.transform, 640, 320, 0, -30);
+        var empty = Text("Empty", screen.transform, "Kho đồ trống — mua ở Cửa hàng", 15,
+                new Color(1, 1, 1, 0.6f), TextAnchor.MiddleCenter);
+        Center(empty, 0, -30); Size(empty, 500, 24);
+
+        var picker = Image("PlotPickerPanel", screen.transform, Panel, 420, 380);
+        Center(picker, 0, 0);
+        Stretch(Text("PickerTitle", picker.transform, "Chọn ô muốn giục chín", 16, Dark, TextAnchor.UpperCenter), 0, 8);
+        var pickerList = ScrollList("PlotList", picker.transform, 400, 300, 0, -20);
+        var close = CloseButton(picker.transform);
+        picker.SetActive(false);
+
+        var comp = screen.AddComponent<InventoryScreen>();
+        comp.content = list;
+        comp.plotPickerContent = pickerList;
+        comp.rowPrefab = prefabs.row;
+        comp.plotPickerPanel = picker;
+        comp.closePickerButton = close;
+        comp.emptyText = empty.GetComponent<Text>();
     }
 
     // ---------------- Helper UI ----------------

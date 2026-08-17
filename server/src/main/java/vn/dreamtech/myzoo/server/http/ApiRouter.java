@@ -12,6 +12,8 @@ import vn.dreamtech.myzoo.server.mail.MailService;
 import vn.dreamtech.myzoo.server.player.PlayerService;
 import vn.dreamtech.myzoo.server.reward.AchievementService;
 import vn.dreamtech.myzoo.server.reward.GiftcodeService;
+import vn.dreamtech.myzoo.server.shop.ShopCatalog;
+import vn.dreamtech.myzoo.server.shop.ShopService;
 import vn.dreamtech.myzoo.server.social.SocialService;
 import vn.dreamtech.myzoo.server.zoo.ZooService;
 
@@ -29,11 +31,14 @@ public final class ApiRouter implements HttpHandler {
     private final MailService mail;
     private final GiftcodeService giftcodes;
     private final AchievementService achievements;
+    private final ShopService shop;
     private final Idempotency idempotency;
 
     public ApiRouter(PlayerService players, FarmService farm, ZooService zoo, MinigameService minigames,
                      MissionService missions, AccountService accounts, SocialService social, MailService mail,
-                     GiftcodeService giftcodes, AchievementService achievements, Idempotency idempotency) {
+                     GiftcodeService giftcodes, AchievementService achievements, ShopService shop,
+                     Idempotency idempotency) {
+        this.shop = shop;
         this.accounts = accounts;
         this.social = social;
         this.mail = mail;
@@ -79,6 +84,8 @@ public final class ApiRouter implements HttpHandler {
         Long rewardKc;
         Integer maxUses;
         Integer expiresDays;
+        String itemId;
+        String packId;
     }
 
     @Override
@@ -234,6 +241,30 @@ public final class ApiRouter implements HttpHandler {
                         b.maxUses == null ? 1000 : b.maxUses,
                         System.currentTimeMillis() + days * 24 * 60 * 60 * 1000L);
                 JsonHttp.write(ex, 200, Map.of("code", GiftcodeService.normalize(b.code)));
+            }
+            case "GET /v1/shop" -> {
+                auth(ex);
+                JsonHttp.write(ex, 200, Map.of("items", ShopCatalog.ITEMS, "kcPacks", ShopCatalog.KC_PACKS));
+            }
+            case "GET /v1/inventory" -> JsonHttp.write(ex, 200, Map.of("items", shop.inventory(auth(ex))));
+            case "POST /v1/shop/purchase" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.itemId != null, "Cần itemId");
+                mutate(ex, b, playerId, () -> shop.purchase(playerId, b.itemId,
+                        b.quantity == null ? 1 : b.quantity));
+            }
+            case "POST /v1/items/use" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.itemId != null, "Cần itemId");
+                mutate(ex, b, playerId, () -> shop.use(playerId, b.itemId, b.plotIndex));
+            }
+            case "POST /v1/shop/topup" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.packId != null, "Cần packId");
+                mutate(ex, b, playerId, () -> shop.topup(playerId, b.packId));
             }
             case "GET /v1/mails" -> JsonHttp.write(ex, 200, Map.of("mails", mail.inbox(auth(ex))));
             case "POST /v1/mails/claim" -> {
