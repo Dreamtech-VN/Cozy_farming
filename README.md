@@ -18,7 +18,8 @@ Vòng lặp cốt lõi: **Trồng trọt → Thu hoạch thức ăn → Chuyển
 
 > 📖 **Tài liệu:**
 > - **[docs/SETUP_GUIDE.md](docs/SETUP_GUIDE.md)** — setup server local bằng VSCode, deploy VPS, build client Unity + kết nối API
-> - **[docs/SCREEN_GUIDE.md](docs/SCREEN_GUIDE.md)** — dựng từng screen trong Unity: bố cục, nút nào gọi API nào, xử lý lỗi
+> - **[docs/SCREEN_GUIDE.md](docs/SCREEN_GUIDE.md)** — đặc tả từng screen: bố cục, nút nào gọi API nào, xử lý lỗi
+> - **[docs/UNITY_STEP_BY_STEP.md](docs/UNITY_STEP_BY_STEP.md)** — dựng client Unity từng bước: cây GameObject, component, script đầy đủ cho từng screen
 
 ## Chạy game
 

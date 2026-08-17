@@ -1,6 +1,8 @@
 # MyZoo — Hướng dẫn dựng screen (client Unity)
 
-Tài liệu cho người dựng UI/scene trong Unity. Mỗi screen ghi rõ: bố cục, dữ liệu lấy từ endpoint nào, mỗi nút bấm gọi API gì, và xử lý lỗi/trạng thái. Đọc kèm `docs/SETUP_GUIDE.md` phần C (BASE_URL, 3 quy ước API, bảng endpoint, `MyZooApi.cs`).
+Đặc tả từng screen: bố cục, dữ liệu lấy từ endpoint nào, mỗi nút bấm gọi API gì, xử lý lỗi/trạng thái.
+
+👉 **Cần hướng dẫn thao tác cụ thể trong Unity** (tạo GameObject nào, gắn component gì, script dán vào đâu): xem **[UNITY_STEP_BY_STEP.md](UNITY_STEP_BY_STEP.md)**. Đọc kèm `SETUP_GUIDE.md` phần C cho BASE_URL và bảng endpoint.
 
 Thiết kế chuẩn: **màn hình ngang 16:9, khung logic 960×540** (Canvas Scaler → Scale With Screen Size, Reference 960×540, Match 0.5). Client web mẫu tại `http://localhost:8080` là bản chạy được của đúng các screen này — làm giống nó trước, đẹp sau.
 
