@@ -73,6 +73,8 @@ public static class SceneBuilder
         BuildProcessing(screens.transform, prefabs);
         BuildMemoryGame(screens.transform, prefabs);
         BuildChat(screens.transform, prefabs);
+        BuildWallet(screens.transform, prefabs);
+        BuildSettings(screens.transform);
 
         var app = new GameObject("App", typeof(Api), typeof(App), typeof(ScreenManager));
         var manager = app.GetComponent<ScreenManager>();
@@ -585,6 +587,11 @@ public static class SceneBuilder
         Center(chat, 440, -215);
         Stretch(Text("Label", chat.transform, "Chat", 14, Dark, TextAnchor.MiddleCenter));
 
+        // Ví nằm trong Cài đặt nên sảnh chỉ cần một nút.
+        var settings = Button("SettingsButton", screen.transform, new Color(0.80f, 0.80f, 0.85f), 150, 44);
+        Center(settings, -360, -155);
+        Stretch(Text("Label", settings.transform, "CÀI ĐẶT", 15, Dark, TextAnchor.MiddleCenter));
+
         var logout = Button("LogoutButton", screen.transform, new Color(0.75f, 0.75f, 0.75f), 140, 40);
         Center(logout, 120, -215);
         Stretch(Text("Label", logout.transform, "Đăng xuất", 14, Dark, TextAnchor.MiddleCenter));
@@ -605,6 +612,7 @@ public static class SceneBuilder
         comp.processingButton = processing.GetComponent<Button>();
         comp.memoryButton = memory.GetComponent<Button>();
         comp.chatButton = chat.GetComponent<Button>();
+        comp.settingsButton = settings.GetComponent<Button>();
         comp.mailDot = mailDot;
         comp.farmDot = farm.transform.Find("Dot").gameObject;
         comp.zooDot = zoo.transform.Find("Dot").gameObject;
@@ -1118,6 +1126,127 @@ public static class SceneBuilder
         comp.actionBlockButton = actBlock;
         comp.actionReportButton = actReport;
         comp.actionCloseButton = actClose;
+    }
+
+    static void BuildWallet(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S38_Wallet", parent, "Ví của tôi");
+
+        var vang = Text("VangText", screen.transform, "Vàng: 0", 18, new Color(1f, 0.9f, 0.5f), TextAnchor.MiddleLeft);
+        Center(vang, -230, 148); Size(vang, 300, 26);
+        var kc = Text("KcText", screen.transform, "Kim Cương: 0", 18, new Color(0.7f, 0.9f, 1f), TextAnchor.MiddleLeft);
+        Center(kc, 60, 148); Size(kc, 300, 26);
+
+        var list = ScrollList("HistoryList", screen.transform, 780, 300, 0, -20);
+        var empty = Text("EmptyText", screen.transform, "Chưa có giao dịch nào", 15,
+                new Color(1, 1, 1, 0.6f), TextAnchor.MiddleCenter);
+        Center(empty, 0, -20); Size(empty, 500, 24);
+        empty.SetActive(false);
+
+        var more = Button("MoreButton", screen.transform, Primary, 200, 38);
+        Center(more, 0, -195);
+        Stretch(Text("Label", more.transform, "Xem thêm", 15, Dark, TextAnchor.MiddleCenter));
+
+        var comp = screen.AddComponent<WalletScreen>();
+        comp.vangText = vang.GetComponent<Text>();
+        comp.kcText = kc.GetComponent<Text>();
+        comp.emptyText = empty.GetComponent<Text>();
+        comp.listContent = list;
+        comp.rowPrefab = prefabs.chatRow;
+        comp.moreButton = more.GetComponent<Button>();
+        comp.backButton = CloseButton(screen.transform);
+    }
+
+    static void BuildSettings(Transform parent)
+    {
+        var screen = Screen("S39_Settings", parent, "Cài đặt");
+
+        var music = Slider("MusicSlider", screen.transform, "Nhạc nền", -230, 120);
+        var sfx = Slider("SfxSlider", screen.transform, "Hiệu ứng", -230, 70);
+
+        var account = Text("AccountText", screen.transform, "", 14, Color.white, TextAnchor.UpperLeft);
+        Center(account, -230, 10); Size(account, 420, 60);
+
+        // Khách thì hiện khung liên kết tài khoản, có tài khoản rồi thì hiện khung đổi mật khẩu.
+        var linkPanel = Image("LinkPanel", screen.transform, new Color(0, 0, 0, 0.2f), 440, 170);
+        Center(linkPanel, -230, -110);
+        var linkUser = InputField("LinkUsername", linkPanel.transform, "Tên đăng nhập", 0, 50);
+        Size(linkUser, 400, 40);
+        var linkPass = InputField("LinkPassword", linkPanel.transform, "Mật khẩu (từ 6 ký tự)", 0, 4);
+        Size(linkPass, 400, 40);
+        linkPass.GetComponent<InputField>().contentType = InputField.ContentType.Password;
+        var linkBtn = Button("LinkButton", linkPanel.transform, Primary, 400, 38);
+        Center(linkBtn, 0, -50);
+        Stretch(Text("Label", linkBtn.transform, "Tạo tài khoản, giữ tiến độ", 14, Dark, TextAnchor.MiddleCenter));
+
+        var passPanel = Image("PasswordPanel", screen.transform, new Color(0, 0, 0, 0.2f), 440, 170);
+        Center(passPanel, -230, -110);
+        var oldPass = InputField("OldPassword", passPanel.transform, "Mật khẩu hiện tại", 0, 50);
+        Size(oldPass, 400, 40);
+        oldPass.GetComponent<InputField>().contentType = InputField.ContentType.Password;
+        var newPass = InputField("NewPassword", passPanel.transform, "Mật khẩu mới", 0, 4);
+        Size(newPass, 400, 40);
+        newPass.GetComponent<InputField>().contentType = InputField.ContentType.Password;
+        var changeBtn = Button("ChangePasswordButton", passPanel.transform, Primary, 400, 38);
+        Center(changeBtn, 0, -50);
+        Stretch(Text("Label", changeBtn.transform, "Đổi mật khẩu", 14, Dark, TextAnchor.MiddleCenter));
+
+        var wallet = Button("WalletButton", screen.transform, new Color(0.95f, 0.85f, 0.55f), 220, 42);
+        Center(wallet, 250, 100);
+        Stretch(Text("Label", wallet.transform, "Ví & lịch sử giao dịch", 14, Dark, TextAnchor.MiddleCenter));
+
+        var logout = Button("LogoutButton", screen.transform, new Color(0.9f, 0.6f, 0.6f), 220, 42);
+        Center(logout, 250, 40);
+        Stretch(Text("Label", logout.transform, "Đăng xuất", 14, Dark, TextAnchor.MiddleCenter));
+
+        var version = Text("VersionText", screen.transform, "", 13, new Color(1, 1, 1, 0.6f), TextAnchor.MiddleCenter);
+        Center(version, 250, -20); Size(version, 300, 22);
+
+        var comp = screen.AddComponent<SettingsScreen>();
+        comp.musicSlider = music.GetComponentInChildren<Slider>();
+        comp.sfxSlider = sfx.GetComponentInChildren<Slider>();
+        comp.musicValueText = music.transform.Find("Value").GetComponent<Text>();
+        comp.sfxValueText = sfx.transform.Find("Value").GetComponent<Text>();
+        comp.accountText = account.GetComponent<Text>();
+        comp.versionText = version.GetComponent<Text>();
+        comp.linkPanel = linkPanel;
+        comp.passwordPanel = passPanel;
+        comp.linkUsernameInput = linkUser.GetComponent<InputField>();
+        comp.linkPasswordInput = linkPass.GetComponent<InputField>();
+        comp.linkButton = linkBtn.GetComponent<Button>();
+        comp.oldPasswordInput = oldPass.GetComponent<InputField>();
+        comp.newPasswordInput = newPass.GetComponent<InputField>();
+        comp.changePasswordButton = changeBtn.GetComponent<Button>();
+        comp.walletButton = wallet.GetComponent<Button>();
+        comp.logoutButton = logout.GetComponent<Button>();
+        comp.backButton = CloseButton(screen.transform);
+    }
+
+    // Hàng gồm nhãn + thanh trượt + số phần trăm; trả về GameObject bọc để lấy các phần con.
+    static GameObject Slider(string name, Transform parent, string label, float x, float y)
+    {
+        var row = Empty(name, parent);
+        Size(row, 440, 40); Center(row, x, y);
+        var caption = Text("Caption", row.transform, label, 15, Color.white, TextAnchor.MiddleLeft);
+        Center(caption, -170, 0); Size(caption, 100, 24);
+        var value = Text("Value", row.transform, "", 14, new Color(1, 1, 1, 0.8f), TextAnchor.MiddleRight);
+        Center(value, 190, 0); Size(value, 60, 24);
+
+        var bar = Image("Bar", row.transform, new Color(0, 0, 0, 0.3f), 240, 12);
+        Center(bar, 20, 0);
+        var slider = bar.AddComponent<Slider>();
+        var fillArea = Empty("FillArea", bar.transform);
+        Stretch(fillArea, 0, 0);
+        var fill = Image("Fill", fillArea.transform, Primary, 0, 0);
+        Stretch(fill);
+        var handle = Image("Handle", bar.transform, Panel, 18, 22);
+        slider.fillRect = fill.GetComponent<RectTransform>();
+        slider.handleRect = handle.GetComponent<RectTransform>();
+        slider.targetGraphic = handle.GetComponent<Image>();
+        slider.direction = Slider.Direction.LeftToRight;
+        slider.minValue = 0f;
+        slider.maxValue = 1f;
+        return row;
     }
 
     static Button ActionButton(Transform parent, string name, string label, float y)

@@ -72,6 +72,13 @@ namespace MyZoo
 
         public IEnumerator Logout(Action<OkResult> ok, Action<string> fail) { return Post("/v1/auth/logout", "{}", ok, fail); }
 
+        // cursor = 0 là tải từ đầu; các lần sau truyền nextCursor của trang trước.
+        public IEnumerator GetWallet(long cursor, int limit, Action<WalletView> ok, Action<string> fail)
+        {
+            string path = "/v1/wallet?limit=" + limit + (cursor > 0 ? "&cursor=" + cursor : "");
+            return Get(path, ok, fail);
+        }
+
         public IEnumerator ChangePassword(string oldPassword, string newPassword, Action<OkResult> ok, Action<string> fail)
         {
             return Post("/v1/auth/password",

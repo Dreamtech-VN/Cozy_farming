@@ -333,6 +333,19 @@ namespace MyZoo
     [Serializable] public class ChatRelations { public List<int> muted, blocked; }
     [Serializable] public class VoiceMeta { public string voiceId; public int durationMs, bytes; }
 
+    [Serializable]
+    public class LedgerEntry
+    {
+        public long id, amount, balanceAfter, createdAt;
+        public string currency, reason, refType, refId;
+    }
+    [Serializable]
+    public class WalletView
+    {
+        public long vang, kc, nextCursor;
+        public List<LedgerEntry> entries;
+    }
+
     [Serializable] public class OkResult { public bool ok; }
 
     public static class Items

@@ -10,6 +10,7 @@ import vn.dreamtech.myzoo.server.farm.FarmService;
 import vn.dreamtech.myzoo.server.http.ApiRouter;
 import vn.dreamtech.myzoo.server.http.Idempotency;
 import vn.dreamtech.myzoo.server.http.JsonHttp;
+import vn.dreamtech.myzoo.server.http.RateLimiter;
 import vn.dreamtech.myzoo.server.http.StaticFileHandler;
 import vn.dreamtech.myzoo.server.minigame.MinigameService;
 import vn.dreamtech.myzoo.server.mission.MissionService;
@@ -54,7 +55,7 @@ public final class Main {
         Idempotency idempotency = new Idempotency(dataSource, time);
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/v1", new ApiRouter(players, farm, zoo, minigames, missions, accounts, social, mail, giftcodes, achievements, shop, processing, chat, idempotency));
+        server.createContext("/v1", new ApiRouter(players, farm, zoo, minigames, missions, accounts, social, mail, giftcodes, achievements, shop, processing, chat, economy, idempotency, new RateLimiter(time)));
         server.createContext("/health", ex -> JsonHttp.write(ex, 200, Map.of("status", "ok")));
 
         Path clientDir = Path.of(System.getenv().getOrDefault("CLIENT_DIR", "client"));
