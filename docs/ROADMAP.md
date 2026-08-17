@@ -18,7 +18,7 @@ Cập nhật cuối mỗi đợt. Mục đích: nhìn một chỗ là biết cò
 | §11 Missions | Ngày + tuần + sự kiện, định nghĩa nằm trong DB | Xong ở Đợt 7 |
 | §12 Database | Bảng lõi + ràng buộc | Xong |
 | §13 REST API | ~80 endpoint | Xong |
-| §14 Realtime | `WSS /v1/realtime` | **Chưa — Đợt 9** (client đang poll) |
+| §14 Realtime | Long-poll thay cho WebSocket | Xong ở Đợt 9 — xem ghi chú rủi ro bên dưới |
 | §15 Unity client | Toàn bộ màn hình dựng bằng `SceneBuilder` | Xong |
 | §16 Art | Asset gốc | **Chưa — không phải việc code** |
 | §17 Security | Rate limit, chống cheat, server giữ quyền quyết định | Xong ở Đợt 5 |
@@ -48,8 +48,8 @@ Tiêu chí MVP ở §22.1 đã đạt, trừ dòng "thế giới 2D đi lại đ
 | 5 | Ví + lịch sử giao dịch, màn Cài đặt, rate limit toàn API | #78 | Xong |
 | 6 | Gacha + hệ ngoại hình (pool chỉ có đồ cosmetic) | #79 | Xong |
 | 7 | Nhiệm vụ tuần/sự kiện dữ liệu hoá + chăn nuôi | #80 | Xong |
-| 8 | Xếp hạng sở thú, sức chứa khách, chợ thức ăn khẩn cấp | — | Đang làm |
-| 9 | Realtime (hoặc long-poll) + thông báo cục bộ | — | Chưa |
+| 8 | Xếp hạng sở thú, sức chứa khách, chợ thức ăn khẩn cấp | #81 | Xong |
+| 9 | Long-poll chat + nhắc việc trong game | — | Đang làm |
 | 10 | IAP thật, trang GM, analytics | — | Chưa |
 
 ## Không phải việc code nhưng vẫn chặn ngày ra mắt
@@ -66,8 +66,14 @@ Tiêu chí MVP ở §22.1 đã đạt, trừ dòng "thế giới 2D đi lại đ
 
 ## Rủi ro đã biết
 
-- **Maven chạy offline**: thư viện mới chỉ dùng được nếu đã có trong cache. Ảnh hưởng trực tiếp tới
-  lựa chọn WebSocket ở Đợt 9 — phải kiểm tra trước khi cam kết làm theo spec §14.
+- **WebSocket**: đã khảo sát ở Đợt 9 — Maven cache không có thư viện WebSocket nào, và server đang
+  chạy `com.sun.net.httpserver` thuần nên thêm WS đồng nghĩa với đổi cả tầng HTTP hoặc mở thêm cổng.
+  Đã chọn **long-poll** thay thế: cùng hiệu quả với chat, không thêm phụ thuộc, đi qua HTTPS/nginx
+  sẵn có. Nếu sau này cần đồng bộ vị trí nhân vật theo thời gian thực (spec §14 nói tới MOVE_INTENT)
+  thì lúc đó mới phải tính lại WebSocket.
+- **Thông báo hệ thống**: code đã viết sẵn trong `Notifications.cs` nhưng nằm sau define
+  `MYZOO_MOBILE_NOTIFICATIONS` vì cần cài gói `com.unity.mobile.notifications`. Chưa bật thì chỉ có
+  nhắc việc trong game.
 - **IAP cần tài khoản nhà phát triển thật** mới test được đầu-cuối. Đây là lý do Đợt 10 để cuối.
 - **Voice chat không tự lọc nội dung được**. Sticker/GIF an toàn theo cấu trúc vì server chỉ phát nội
   dung trong danh mục duyệt sẵn, nhưng ghi âm thì chỉ có report + admin nghe lại. Mở voice trên máy

@@ -46,6 +46,16 @@ Mọi thứ hiện là hình vuông màu. Bỏ sprite của bạn vào `Assets/S
 | `Assets/Prefabs/HabitatCard.prefab`, `ServerCard.prefab`, `Row.prefab` | Image nền | Đổi khung viền, màu nền |
 | **S01_Splash**, các screen | Image **Bg**, **Logo** | Nền từng màn |
 
+## Bật thông báo hệ thống (tuỳ chọn)
+
+Mặc định game chỉ nhắc việc **khi đang mở** (dòng nhắc ở sảnh). Muốn có thông báo hiện cả khi đã thoát:
+
+1. **Window → Package Manager → Unity Registry** → cài **Mobile Notifications**.
+2. **Project Settings → Player → Scripting Define Symbols** → thêm `MYZOO_MOBILE_NOTIFICATIONS`.
+
+Code đã viết sẵn trong `Assets/Scripts/Notifications.cs`, không cài thì phần đó bị bỏ qua và game vẫn
+chạy bình thường. Sảnh tự hẹn nhắc lúc cây chín sớm nhất khi bạn rời game, và huỷ khi quay lại.
+
 **Import sprite pixel-art**: chọn file → Inspector → **Filter Mode = Point (no filter)**, **Compression = None** → Apply. Không làm bước này thì hình bị mờ.
 
 Bộ sprite tạm của dự án nằm ở `client/assets/sprites.png` (kèm toạ độ trong `sprites.json`) nếu bạn muốn dùng trước khi có asset riêng.

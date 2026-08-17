@@ -314,14 +314,24 @@ namespace MyZoo
             return Get("/v1/chat/catalog", ok, fail);
         }
 
-        public IEnumerator GetWorldChat(long sinceId, Action<ChatFeed> ok, Action<string> fail)
+        // waitSeconds > 0: server treo request tới khi có tin mới hoặc hết giờ (long-poll).
+        // Tin hiện gần như tức thì mà không phải hỏi lại liên tục.
+        public IEnumerator GetWorldChat(long sinceId, int waitSeconds, Action<ChatFeed> ok, Action<string> fail)
         {
-            return Get("/v1/chat/world?sinceId=" + sinceId, ok, fail);
+            return Get("/v1/chat/world?sinceId=" + sinceId + Wait(waitSeconds, sinceId), ok, fail);
         }
 
-        public IEnumerator GetPrivateChat(int otherPlayerId, long sinceId, Action<ChatFeed> ok, Action<string> fail)
+        public IEnumerator GetPrivateChat(int otherPlayerId, long sinceId, int waitSeconds,
+                                          Action<ChatFeed> ok, Action<string> fail)
         {
-            return Get("/v1/chat/private?playerId=" + otherPlayerId + "&sinceId=" + sinceId, ok, fail);
+            return Get("/v1/chat/private?playerId=" + otherPlayerId + "&sinceId=" + sinceId
+                       + Wait(waitSeconds, sinceId), ok, fail);
+        }
+
+        // Lần tải đầu (sinceId = 0) lấy ngay lịch sử, không treo chờ.
+        static string Wait(int waitSeconds, long sinceId)
+        {
+            return waitSeconds > 0 && sinceId > 0 ? "&wait=" + waitSeconds : "";
         }
 
         public IEnumerator SendChat(string channel, int targetId, string type, string text, string refId,

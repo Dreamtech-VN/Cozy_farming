@@ -598,7 +598,11 @@ public static class SceneBuilder
         Center(logout, 120, -215);
         Stretch(Text("Label", logout.transform, "Đăng xuất", 14, Dark, TextAnchor.MiddleCenter));
 
+        var reminder = Text("ReminderText", screen.transform, "", 14, new Color(1f, 0.95f, 0.7f), TextAnchor.MiddleCenter);
+        Center(reminder, 0, 150); Size(reminder, 800, 24);
+
         var comp = screen.AddComponent<LobbyScreen>();
+        comp.reminderText = reminder.GetComponent<Text>();
         comp.farmButton = farm.GetComponent<Button>();
         comp.zooButton = zoo.GetComponent<Button>();
         comp.minigameButton = minigame.GetComponent<Button>();

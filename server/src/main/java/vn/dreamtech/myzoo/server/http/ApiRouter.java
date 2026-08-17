@@ -393,6 +393,7 @@ public final class ApiRouter implements HttpHandler {
                 String query = ex.getRequestURI().getQuery();
                 Integer since = QueryParam.intParam(query, "sinceId");
                 Integer limit = QueryParam.intParam(query, "limit");
+                awaitIfRequested(query, since);
                 JsonHttp.write(ex, 200, Map.of(
                         "messages", chat.world(playerId, since == null ? null : since.longValue(),
                                 limit == null ? 50 : limit),
@@ -405,6 +406,7 @@ public final class ApiRouter implements HttpHandler {
                 Integer since = QueryParam.intParam(query, "sinceId");
                 Integer limit = QueryParam.intParam(query, "limit");
                 requireFields(other != null, "Cần playerId");
+                awaitIfRequested(query, since);
                 JsonHttp.write(ex, 200, Map.of("messages",
                         chat.conversation(playerId, other, since == null ? null : since.longValue(),
                                 limit == null ? 50 : limit)));
@@ -695,6 +697,13 @@ public final class ApiRouter implements HttpHandler {
             }
             default -> JsonHttp.writeError(ex, 404, "Không có đường dẫn này");
         }
+    }
+
+    // ?wait=<giây>: treo request tới khi có tin mới hoặc hết giờ, thay cho việc client hỏi lại liên tục.
+    private void awaitIfRequested(String query, Integer sinceId) {
+        Integer wait = QueryParam.intParam(query, "wait");
+        if (wait == null || wait <= 0 || sinceId == null) return;
+        chat.awaitNewMessage(sinceId, wait * 1000);
     }
 
     private int auth(HttpExchange ex) {

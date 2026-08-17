@@ -350,8 +350,16 @@ build lại client**. Bảng tỉ lệ hiển thị trong game lấy thẳng t�
 | Method & path | Body / query | Ghi chú |
 |---|---|---|
 | `GET /v1/chat/catalog` | — | `{stickers[], gifs[], maxTextLength}` — sticker/GIF **chỉ lấy từ danh mục này**, client không gửi URL tự do |
-| `GET /v1/chat/world?sinceId=&limit=` | — | `{messages[], ban}` — kèm cả tin `SYSTEM`; đã lọc bỏ người mình mute/block |
-| `GET /v1/chat/private?playerId=&sinceId=` | — | Hội thoại 2 chiều với 1 người |
+| `GET /v1/chat/world?sinceId=&limit=&wait=` | — | `{messages[], ban}` — kèm cả tin `SYSTEM`; đã lọc bỏ người mình mute/block |
+| `GET /v1/chat/private?playerId=&sinceId=&wait=` | — | Hội thoại 2 chiều với 1 người |
+
+**Long-poll**: thêm `&wait=<giây>` (tối đa 25) thì server **giữ request tới khi có tin mới** rồi mới trả
+lời, thay vì client hỏi lại mỗi vài giây. Tin hiện gần như tức thì và số request giảm gần 10 lần.
+Bỏ `wait` đi thì trả về ngay như cũ, nên client cũ vẫn chạy bình thường.
+
+Chạy được là nhờ HTTP server dùng **virtual thread của Java 21** — vài nghìn người treo chờ cùng lúc
+cũng không chiếm thread thật. Nếu đặt nginx phía trước, nhớ để `proxy_read_timeout` **lớn hơn 25 giây**
+(mặc định của nginx là 60s nên thường không phải sửa).
 | `POST /v1/chat/send` | `channel, type, text?, refId?, targetId?` | 422 nội dung bị chặn (kèm lý do), 429 gửi quá nhanh/trùng lặp, 403 bị cấm chat hoặc bị chặn, 404 sticker/GIF không có trong danh mục |
 | `POST /v1/chat/voice` | `voiceBase64, durationMs` | Tối đa 200 KB / 30 giây → `{voiceId}`; gửi tiếp bằng `type=VOICE, refId=voiceId` |
 | `GET /v1/chat/voice?voiceId=` | — | Trả **bytes thô**. Chỉ nghe được nếu tin đã đăng ở kênh thế giới, hoặc mình là 1 trong 2 phía của tin riêng |
