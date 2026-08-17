@@ -276,6 +276,25 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `POST /v1/processing/collect` | `slotId` | 409 chưa xong, 404 đã thu |
 | `POST /v1/zoo/decors` | `habitatId, decorId` | trang trí chuồng; 409 đã có món đó, 403 thiếu Zoo level |
 
+**Sở thú — xếp hạng, sức chứa, chợ khẩn cấp** (spec §29.17–29.23):
+
+| Method & path | Body | Ghi chú |
+|---|---|---|
+| `GET /v1/zoo/report` | — | `{rating, stars, capacity, visitorsPerHour, grossPerHour, maintenancePerHour, netPerHour}` |
+| `GET /v1/zoo/market` | — | Danh sách thức ăn bán được kèm giá |
+| `POST /v1/zoo/market` | `foodId, quantity` | Mua thẳng vào kho Zoo; 404 không bán loại đó, 400 quá 50 cái, 402 thiếu Vàng |
+
+Công thức nằm trong `zoo/ZooEconomy.java`, toàn hàm thuần nên đổi cân bằng chỉ cần sửa một chỗ:
+
+- **Hạng 0–100** = độ hấp dẫn (tối đa 40) + chăm sóc (25) + trang trí (15) + đa dạng loài (20),
+  hiển thị 1.0–5.0 sao. **Chỉ tính thú đã được cho ăn** — bỏ đói là hạng tụt.
+- **Sức chứa** = 40 + 20×Zoo level + 15×số chuồng. Khách/giờ = min(sức chứa, độ hấp dẫn × 2),
+  nên nhồi thêm thú không tăng doanh thu nếu cổng đã chật (spec §29.20).
+- **Doanh thu** = khách × 5 Vàng × hệ số chi tiêu (0.7–1.3 theo hạng) − phí vận hành (6 Vàng/chuồng/giờ).
+  Lỗ thì về 0 chứ không trừ tiền người chơi.
+- Chợ khẩn cấp bán **gấp 3 giá bán nông sản** — cố tình đắt để nông trại vẫn là đường chính, nhưng
+  người chơi không bao giờ kẹt cứng vì hết thức ăn (spec §29.23).
+
 **Chăn nuôi** (spec §6.4):
 
 | Method & path | Body | Ghi chú |

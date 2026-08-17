@@ -9,7 +9,10 @@ namespace MyZoo
         public Transform habitatGrid, buildContent, deliverContent, speciesContent;
         public GameObject habitatPrefab, rowPrefab, managePanel, habitatPanel;
         public Button actionButton, manageButton, feedButton, closeManageButton, closeHabitatButton;
-        public Text statusText, actionText, habitatTitle;
+        public Button marketButton, closeMarketButton;
+        public Text statusText, actionText, habitatTitle, ratingText;
+        public GameObject marketPanel;
+        public Transform marketContent;
 
         [Tooltip("Đặt tên sprite trùng id loài: rabbit, sheep, monkey, giraffe, elephant, panda")]
         public Sprite[] animalSprites;
@@ -22,13 +25,59 @@ namespace MyZoo
             feedButton.onClick.AddListener(delegate { StartCoroutine(DoFeed()); });
             if (closeManageButton != null) closeManageButton.onClick.AddListener(delegate { managePanel.SetActive(false); });
             if (closeHabitatButton != null) closeHabitatButton.onClick.AddListener(delegate { habitatPanel.SetActive(false); });
+            if (marketButton != null) marketButton.onClick.AddListener(delegate { StartCoroutine(OpenMarket()); });
+            if (closeMarketButton != null) closeMarketButton.onClick.AddListener(delegate { marketPanel.SetActive(false); });
         }
 
         void OnEnable()
         {
             managePanel.SetActive(false);
             habitatPanel.SetActive(false);
+            if (marketPanel != null) marketPanel.SetActive(false);
             Redraw();
+        }
+
+        // Bảng điều khiển: cho người chơi thấy vì sao doanh thu cao hay thấp (spec §29.18).
+        IEnumerator LoadReport()
+        {
+            yield return Api.I.GetZooReport(delegate (ZooReport report)
+            {
+                if (report == null || ratingText == null) return;
+                ratingText.text = "Hạng " + report.stars.ToString("0.0") + "★  (" + report.rating + "/100)"
+                    + "\nKhách: " + report.visitorsPerHour + "/giờ · sức chứa " + report.capacity
+                    + "\nThu " + report.grossPerHour + " − vận hành " + report.maintenancePerHour
+                    + " = " + report.netPerHour + " Vàng/giờ";
+            }, delegate (string e) { });
+        }
+
+        IEnumerator OpenMarket()
+        {
+            marketPanel.SetActive(true);
+            foreach (Transform child in marketContent) Destroy(child.gameObject);
+            yield return Api.I.GetEmergencyMarket(delegate (MarketList list)
+            {
+                if (list == null || list.items == null) return;
+                foreach (var item in list.items)
+                {
+                    var row = Instantiate(rowPrefab, marketContent).GetComponent<Button>();
+                    row.GetComponentInChildren<Text>().text =
+                        item.name + "  ·  " + item.price + " Vàng/cái  — bấm để mua 10";
+                    string foodId = item.foodId;
+                    row.onClick.AddListener(delegate { StartCoroutine(BuyFood(foodId, 10)); });
+                }
+            }, Toast.Show);
+        }
+
+        IEnumerator BuyFood(string foodId, int quantity)
+        {
+            yield return Api.I.BuyEmergencyFood(foodId, quantity, delegate (MarketResult result)
+            {
+                Toast.Show("Đã mua " + result.quantity + " vào kho Zoo (-" + result.spent + " Vàng)");
+                App.I.SetVang(result.vangBalance);
+                if (App.I.Zoo != null) App.I.Zoo.warehouse = result.warehouse;
+                marketPanel.SetActive(false);
+                Redraw();
+            }, Toast.Show);
         }
 
         void Redraw()
@@ -51,6 +100,7 @@ namespace MyZoo
             actionButton.onClick.RemoveAllListeners();
             bool isOpen = zoo.isOpen;
             actionButton.onClick.AddListener(delegate { StartCoroutine(isOpen ? DoCollect() : DoOpen()); });
+            StartCoroutine(LoadReport());
         }
 
         IEnumerator DoOpen()

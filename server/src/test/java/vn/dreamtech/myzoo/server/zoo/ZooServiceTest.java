@@ -129,14 +129,36 @@ class ZooServiceTest {
         assertEquals(409, assertThrows(ApiException.class, () -> zoo.open(playerId)).status());
     }
 
+    // Doanh thu = (khách × chi tiêu theo hạng − phí vận hành) × số giờ, xem ZooEconomy.
     @Test
-    void collectPaysAppealTimesRatePerHourWhileFed() {
+    void collectPaysNetProfitPerHourWhileFed() {
         buildRabbitHabitat();
         zoo.open(playerId);
+        long netPerHour = zoo.report(playerId).netPerHour();
+        assertTrue(netPerHour > 0, "sở thú 1 con thỏ được chăm vẫn phải có lãi");
+
         time.advance(2 * 60 * 60 * 1000L);
         var result = zoo.collect(playerId);
-        assertEquals(100, result.vangEarned());
-        assertEquals(5, result.zooXp());
+        assertEquals(netPerHour * 2, result.vangEarned());
+        assertEquals(result.vangEarned() / 20, result.zooXp());
+    }
+
+    @Test
+    void reportExplainsWhereTheMoneyComesFrom() {
+        buildRabbitHabitat();
+        var report = zoo.report(playerId);
+        assertTrue(report.capacity() > 0);
+        assertTrue(report.rating() > 0 && report.rating() <= 100);
+        assertTrue(report.stars() >= 1.0 && report.stars() <= 5.0);
+        assertEquals(report.grossPerHour() - report.maintenancePerHour(), report.netPerHour());
+    }
+
+    @Test
+    void ratingDropsWhenAnimalsGoHungry() {
+        buildRabbitHabitat();
+        int fedRating = zoo.report(playerId).rating();
+        time.advance(3 * ZooService.FED_WINDOW_MS);
+        assertTrue(zoo.report(playerId).rating() < fedRating, "bỏ đói thì hạng tụt");
     }
 
     @Test
@@ -158,8 +180,9 @@ class ZooServiceTest {
         farm.harvest(playerId, 0);
         zoo.deliver(playerId, "carrot", 1);
         zoo.feed(playerId, habitatId);
+        long netPerHour = zoo.report(playerId).netPerHour();
         var result = zoo.collect(playerId);
-        assertEquals(5 * 10 * 8, result.vangEarned());
+        assertEquals(netPerHour * 8, result.vangEarned(), "dồn tối đa 8 giờ");
     }
 
     @Test
@@ -171,9 +194,61 @@ class ZooServiceTest {
     void closeCollectsThenCloses() {
         buildRabbitHabitat();
         zoo.open(playerId);
+        long netPerHour = zoo.report(playerId).netPerHour();
         time.advance(60 * 60 * 1000L);
         var result = zoo.close(playerId);
-        assertEquals(50, result.vangEarned());
+        assertEquals(netPerHour, result.vangEarned());
         assertFalse(zoo.view(playerId).isOpen());
+    }
+
+    // ---------- Chợ thức ăn khẩn cấp (spec §29.23) ----------
+    @Test
+    void emergencyFoodIsDeliberatelyMoreExpensiveThanFarming() {
+        for (var item : zoo.market()) {
+            long farmPrice = vn.dreamtech.myzoo.server.catalog.Catalog.sellPrice(item.foodId()).orElseThrow();
+            assertTrue(item.price() > farmPrice,
+                    item.foodId() + " phải đắt hơn tự trồng, không thì nông trại mất ý nghĩa");
+        }
+        assertFalse(zoo.market().isEmpty());
+    }
+
+    @Test
+    void marketOnlySellsWhatAnimalsActuallyEat() {
+        for (var item : zoo.market()) {
+            assertTrue(vn.dreamtech.myzoo.server.catalog.Catalog.SPECIES.stream()
+                            .anyMatch(s -> s.diet().contains(item.foodId())),
+                    item.foodId() + " không con thú nào ăn, bán làm gì");
+        }
+        assertTrue(zoo.market().stream().noneMatch(m -> m.foodId().equals("flour")), "không bán thành phẩm");
+    }
+
+    @Test
+    void buyingEmergencyFoodFillsZooWarehouse() {
+        long before = economy.balances(playerId).get(EconomyService.VANG);
+        var result = zoo.buyEmergencyFood(playerId, "carrot", 5);
+
+        assertEquals(ZooService.emergencyPrice("carrot") * 5, result.spent());
+        assertEquals(before - result.spent(), result.vangBalance());
+        assertEquals(5, TestSupport.qty(result.warehouse(), "carrot"));
+    }
+
+    @Test
+    void emergencyMarketRejectsBadInput() {
+        assertEquals(404, assertThrows(ApiException.class,
+                () -> zoo.buyEmergencyFood(playerId, "flour", 1)).status(), "không bán thành phẩm");
+        assertEquals(404, assertThrows(ApiException.class,
+                () -> zoo.buyEmergencyFood(playerId, "khong-co", 1)).status());
+        assertEquals(400, assertThrows(ApiException.class,
+                () -> zoo.buyEmergencyFood(playerId, "carrot", 0)).status());
+        assertEquals(400, assertThrows(ApiException.class,
+                () -> zoo.buyEmergencyFood(playerId, "carrot", ZooService.EMERGENCY_MAX_QUANTITY + 1)).status());
+    }
+
+    @Test
+    void cannotBuyEmergencyFoodWithoutGold() {
+        long balance = economy.balances(playerId).get(EconomyService.VANG);
+        economy.spend(playerId, EconomyService.VANG, balance, "TEST", null, null);
+        assertEquals(402, assertThrows(ApiException.class,
+                () -> zoo.buyEmergencyFood(playerId, "carrot", 1)).status());
     }
 }

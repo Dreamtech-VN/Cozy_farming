@@ -231,6 +231,17 @@ public final class ApiRouter implements HttpHandler {
                     "livestock", Catalog.LIVESTOCK,
                     "plotCount", FarmService.PLOT_COUNT));
             case "GET /v1/me" -> JsonHttp.write(ex, 200, players.profile(auth(ex)));
+            case "GET /v1/zoo/report" -> JsonHttp.write(ex, 200, zoo.report(auth(ex)));
+            case "GET /v1/zoo/market" -> {
+                auth(ex);
+                JsonHttp.write(ex, 200, Map.of("items", zoo.market()));
+            }
+            case "POST /v1/zoo/market" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.foodId != null && b.quantity != null, "Cần foodId và quantity");
+                mutate(ex, b, playerId, () -> zoo.buyEmergencyFood(playerId, b.foodId, b.quantity));
+            }
             case "GET /v1/livestock" -> JsonHttp.write(ex, 200, livestock.view(auth(ex)));
             case "POST /v1/livestock/buy" -> {
                 int playerId = auth(ex);
