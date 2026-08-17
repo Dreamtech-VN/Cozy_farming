@@ -16,6 +16,7 @@ import vn.dreamtech.myzoo.server.mail.MailService;
 import vn.dreamtech.myzoo.server.player.PlayerService;
 import vn.dreamtech.myzoo.server.reward.AchievementService;
 import vn.dreamtech.myzoo.server.reward.GiftcodeService;
+import vn.dreamtech.myzoo.server.processing.ProcessingService;
 import vn.dreamtech.myzoo.server.shop.ShopService;
 import vn.dreamtech.myzoo.server.social.SocialService;
 import vn.dreamtech.myzoo.server.time.TimeSource;
@@ -47,10 +48,11 @@ public final class Main {
         GiftcodeService giftcodes = new GiftcodeService(dataSource, mail, players, time);
         AchievementService achievements = new AchievementService(dataSource, economy, players, time);
         ShopService shop = new ShopService(dataSource, economy, players, farm, time);
+        ProcessingService processing = new ProcessingService(dataSource, players, farm, time);
         Idempotency idempotency = new Idempotency(dataSource, time);
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/v1", new ApiRouter(players, farm, zoo, minigames, missions, accounts, social, mail, giftcodes, achievements, shop, idempotency));
+        server.createContext("/v1", new ApiRouter(players, farm, zoo, minigames, missions, accounts, social, mail, giftcodes, achievements, shop, processing, idempotency));
         server.createContext("/health", ex -> JsonHttp.write(ex, 200, Map.of("status", "ok")));
 
         Path clientDir = Path.of(System.getenv().getOrDefault("CLIENT_DIR", "client"));

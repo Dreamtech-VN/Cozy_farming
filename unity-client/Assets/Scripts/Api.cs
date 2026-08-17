@@ -224,14 +224,32 @@ namespace MyZoo
 
         public IEnumerator Checkin(Action<CheckinResult> ok, Action<string> fail) { return Post("/v1/daily/checkin", "{" + Req() + "}", ok, fail); }
 
-        public IEnumerator StartMinigame(Action<MinigameSession> ok, Action<string> fail)
+        public IEnumerator StartMinigame(string gameType, Action<MinigameSession> ok, Action<string> fail)
         {
-            return Post("/v1/minigames/session", "{" + Req() + "}", ok, fail);
+            return Post("/v1/minigames/session", "{" + Str("gameType", gameType) + "," + Req() + "}", ok, fail);
         }
 
-        public IEnumerator FinishMinigame(string sessionId, int linesMade, Action<MinigameResult> ok, Action<string> fail)
+        public IEnumerator FinishMinigame(string sessionId, int score, Action<MinigameResult> ok, Action<string> fail)
         {
-            return Post("/v1/minigames/finish", "{" + Str("sessionId", sessionId) + "," + Num("linesMade", linesMade) + "," + Req() + "}", ok, fail);
+            return Post("/v1/minigames/finish", "{" + Str("sessionId", sessionId) + "," + Num("score", score) + "," + Req() + "}", ok, fail);
+        }
+
+        // ---------- Chế biến / trang trí ----------
+        public IEnumerator GetProcessing(Action<ProcessingView> ok, Action<string> fail) { return Get("/v1/processing", ok, fail); }
+
+        public IEnumerator StartProcessing(string recipeId, Action<ProcessStartResult> ok, Action<string> fail)
+        {
+            return Post("/v1/processing/start", "{" + Str("recipeId", recipeId) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator CollectProcessing(long slotId, Action<ProcessCollectResult> ok, Action<string> fail)
+        {
+            return Post("/v1/processing/collect", "{" + Num("slotId", slotId) + "," + Req() + "}", ok, fail);
+        }
+
+        public IEnumerator BuyDecor(int habitatId, string decorId, Action<BuyResult> ok, Action<string> fail)
+        {
+            return Post("/v1/zoo/decors", "{" + Num("habitatId", habitatId) + "," + Str("decorId", decorId) + "," + Req() + "}", ok, fail);
         }
 
         // ---------- Dựng JSON ----------

@@ -41,7 +41,11 @@ public final class ZooService {
     public record AnimalView(int id, String speciesId, String name, int habitatId, boolean fed, int appeal, String rarity) {
     }
 
-    public record HabitatView(int id, String typeId, String name, int capacity, List<AnimalView> animals) {
+    public record DecorView(String decorId, String name, int appealBonus) {
+    }
+
+    public record HabitatView(int id, String typeId, String name, int capacity, List<AnimalView> animals,
+                              List<DecorView> decors, int decorAppeal) {
     }
 
     public record ZooView(List<HabitatView> habitats, List<FarmService.ItemStack> warehouse, boolean isOpen,
@@ -69,18 +73,64 @@ public final class ZooService {
         int fedAnimals = 0;
         int totalAppeal = 0;
         for (HabitatView h : habitats) {
+            boolean anyFed = false;
             for (AnimalView a : h.animals()) {
                 totalAnimals++;
                 if (a.fed()) {
                     fedAnimals++;
+                    anyFed = true;
                     totalAppeal += a.appeal();
                 }
             }
+            if (anyFed) totalAppeal += h.decorAppeal();
         }
         double coverage = totalAnimals == 0 ? 0 : (double) fedAnimals / totalAnimals;
         ZooRow zoo = zooRow(playerId);
         long pending = zoo.isOpen ? accruedVang(zoo, totalAppeal, now) : 0;
         return new ZooView(habitats, farm.readInventory("zoo_warehouse", playerId), zoo.isOpen, coverage, totalAppeal, pending);
+    }
+
+    // Trang trí: cộng độ hấp dẫn cho chuồng, nhưng chỉ tính khi chuồng có thú đã được cho ăn —
+    // trang trí là để tăng thêm, không thay thế việc chăm thú.
+    public BuyResult buyDecor(int playerId, int habitatId, String decorId) {
+        players.requirePlayer(playerId);
+        Catalog.DecorDef decor = Catalog.decor(decorId)
+                .orElseThrow(() -> new ApiException(404, "Không có món trang trí này"));
+        if (players.profile(playerId).zooLevel() < decor.minZooLevel()) {
+            throw new ApiException(403, "Cần Sở thú level " + decor.minZooLevel() + " để mua " + decor.name());
+        }
+        habitatRow(playerId, habitatId);
+        if (decorsOf(habitatId).stream().anyMatch(d -> d.decorId().equals(decorId))) {
+            throw new ApiException(409, "Chuồng này đã có " + decor.name());
+        }
+        long balance = economy.spend(playerId, EconomyService.VANG, decor.cost(), "BUY_DECOR", "decor", decorId);
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
+                "INSERT INTO habitat_decors (habitat_id, decor_id, created_at) VALUES (?, ?, ?)")) {
+            ps.setInt(1, habitatId);
+            ps.setString(2, decorId);
+            ps.setTimestamp(3, new Timestamp(time.now()));
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new ApiException(409, "Chuồng này đã có " + decor.name());
+        }
+        return new BuyResult(habitatId, balance);
+    }
+
+    List<DecorView> decorsOf(int habitatId) {
+        List<DecorView> out = new ArrayList<>();
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
+                "SELECT decor_id FROM habitat_decors WHERE habitat_id = ? ORDER BY decor_id")) {
+            ps.setInt(1, habitatId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Catalog.decor(rs.getString("decor_id")).ifPresent(
+                            d -> out.add(new DecorView(d.id(), d.name(), d.appealBonus())));
+                }
+            }
+            return out;
+        } catch (SQLException e) {
+            throw new ApiException(500, "Lỗi đọc trang trí: " + e.getMessage());
+        }
     }
 
     public BuyResult buyHabitat(int playerId, String typeId) {
@@ -243,9 +293,14 @@ public final class ZooService {
         long now = time.now();
         int totalAppeal = 0;
         for (HabitatView h : loadHabitats(playerId, now)) {
+            boolean anyFed = false;
             for (AnimalView a : h.animals()) {
-                if (a.fed()) totalAppeal += a.appeal();
+                if (a.fed()) {
+                    anyFed = true;
+                    totalAppeal += a.appeal();
+                }
             }
+            if (anyFed) totalAppeal += h.decorAppeal();
         }
         long earned = accruedVang(zoo, totalAppeal, now);
         saveZoo(playerId, true, now);
@@ -273,7 +328,11 @@ public final class ZooService {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         Catalog.HabitatTypeDef type = Catalog.habitatType(rs.getString("type_id")).orElseThrow();
-                        out.add(new HabitatView(rs.getInt("id"), type.id(), type.name(), type.capacity(), new ArrayList<>()));
+                        int habitatId = rs.getInt("id");
+                        List<DecorView> decors = decorsOf(habitatId);
+                        int decorAppeal = decors.stream().mapToInt(DecorView::appealBonus).sum();
+                        out.add(new HabitatView(habitatId, type.id(), type.name(), type.capacity(),
+                                new ArrayList<>(), decors, decorAppeal));
                     }
                 }
             }

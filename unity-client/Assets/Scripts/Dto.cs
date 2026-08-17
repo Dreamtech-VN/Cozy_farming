@@ -71,12 +71,26 @@ namespace MyZoo
         public long cost;
         public int capacity, minZooLevel;
     }
+    [Serializable] public class ProductDef { public string id, name; public long sellPrice; }
+    [Serializable] public class DecorDef { public string id, name; public long cost; public int appealBonus, minZooLevel; }
+    [Serializable]
+    public class RecipeDef
+    {
+        public string id, name, inputFoodId, outputFoodId;
+        public int inputQty, outputQty, seconds, minFarmLevel;
+    }
+    [Serializable] public class GameDef { public string id, name; public int movesAllowed, maxScore; public long vangPerScore; }
+
     [Serializable]
     public class Catalog
     {
         public List<CropDef> crops;
         public List<SpeciesDef> species;
         public List<HabitatTypeDef> habitatTypes;
+        public List<ProductDef> products;
+        public List<DecorDef> decors;
+        public List<RecipeDef> recipes;
+        public List<GameDef> games;
         public int plotCount;
     }
 
@@ -107,12 +121,14 @@ namespace MyZoo
         public string speciesId, name, rarity;
         public bool fed;
     }
+    [Serializable] public class DecorView { public string decorId, name; public int appealBonus; }
     [Serializable]
     public class Habitat
     {
-        public int id, capacity;
+        public int id, capacity, decorAppeal;
         public string typeId, name;
         public List<Animal> animals;
+        public List<DecorView> decors;
     }
     [Serializable]
     public class ZooView
@@ -144,15 +160,15 @@ namespace MyZoo
     [Serializable]
     public class MinigameSession
     {
-        public string sessionId;
-        public long seed, vangPerLine;
-        public int movesAllowed, maxLines;
+        public string sessionId, gameType;
+        public long seed, vangPerScore;
+        public int movesAllowed, maxScore;
     }
     [Serializable]
     public class MinigameResult
     {
-        public string sessionId;
-        public int linesCounted;
+        public string sessionId, gameType;
+        public int scoreCounted;
         public long vangReward, vangBalance;
         public bool newlyFinished;
     }
@@ -271,6 +287,24 @@ namespace MyZoo
         public List<InventoryEntry> inventory;
     }
     [Serializable] public class TopupResult { public string packId; public long kcAdded, kcBalance; }
+
+    [Serializable]
+    public class ProcessingSlot
+    {
+        public long id, startedAt, readyAt;
+        public string recipeId, name, outputFoodId;
+        public int outputQty;
+        public bool ready;
+    }
+    [Serializable]
+    public class ProcessingView
+    {
+        public List<ProcessingSlot> slots;
+        public int maxSlots;
+        public List<ItemStack> storage;
+    }
+    [Serializable] public class ProcessStartResult { public long slotId, readyAt; public string recipeId; public List<ItemStack> storage; }
+    [Serializable] public class ProcessCollectResult { public long slotId; public string outputFoodId; public int quantity; public List<ItemStack> storage; }
 
     [Serializable] public class OkResult { public bool ok; }
 

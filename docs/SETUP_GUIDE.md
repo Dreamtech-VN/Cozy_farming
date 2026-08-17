@@ -236,7 +236,7 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `GET /v1/world/snapshot` | — | gộp `{me, farm, zoo, missions}` — dùng lúc vào game thay vì gọi lẻ |
 | `GET /v1/me` | — | `name, avatar, serverId, hasAccount, farmXp, farmLevel, zooXp, zooLevel, wallets{VANG,KC}` |
 | `POST /v1/players/name` | `name` (2-20 ký tự) | đổi tên sau khi đã tạo nhân vật; 409 nếu trùng |
-| `GET /v1/catalog` | — | `crops[]` (seedCost, growthSeconds, yieldMin/Max, xp, sellPrice, minFarmLevel), `species[]` (cost, diet[], appeal, rarity, minZooLevel), `habitatTypes[]` (cost, capacity, minZooLevel), `plotCount` — tải 1 lần lúc boot, đừng hardcode số liệu |
+| `GET /v1/catalog` | — | `crops[]` (seedCost, growthSeconds, yieldMin/Max, xp, sellPrice, minFarmLevel), `species[]` (cost, diet[], appeal, rarity, minZooLevel), `habitatTypes[]`, `products[]`, `decors[]`, `recipes[]`, `games[]`, `plotCount` — tải 1 lần lúc boot, đừng hardcode số liệu |
 | `GET /v1/farm` | — | `plots[48] {plotIndex, state EMPTY/GROWING/READY, cropId, plantedAt, readyAt}`, `storage[] {foodId, quantity}` |
 | `POST /v1/farm/plant` | `plotIndex, cropId` | 402 thiếu Vàng · 403 thiếu level · 409 ô có cây |
 | `POST /v1/farm/harvest` | `plotIndex` | `yield, xp`; 409 chưa chín — client đếm ngược từ `readyAt`, server là trọng tài |
@@ -270,6 +270,10 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `GET /v1/inventory` | — | `{items: [{itemId, name, description, type, quantity}]}` |
 | `POST /v1/items/use` | `itemId, plotIndex?` | `FOOD` → cộng thẳng kho nông trại; `GROW_BOOST` → cần `plotIndex`, làm chín ngay ô đang lớn. Dùng hỏng thì **tự hoàn lại vật phẩm** |
 | `POST /v1/shop/topup` | `packId` | nạp Kim Cương **giả lập** (chưa nối cổng thật), vẫn ghi sổ cái `TOPUP_MOCK` |
+| `GET /v1/processing` | — | `{slots: [{id, name, outputFoodId, readyAt, ready}], maxSlots, storage[]}` |
+| `POST /v1/processing/start` | `recipeId` | trừ nguyên liệu, đặt `ready_at`; 409 thiếu nguyên liệu/hết lò, 403 thiếu level |
+| `POST /v1/processing/collect` | `slotId` | 409 chưa xong, 404 đã thu |
+| `POST /v1/zoo/decors` | `habitatId, decorId` | trang trí chuồng; 409 đã có món đó, 403 thiếu Zoo level |
 
 > **Hai loại tiền tách bạch** (spec): mỗi món chỉ mua bằng đúng một loại tiền, và **không có endpoint nào đổi Kim Cương ↔ Vàng**.
 
@@ -279,8 +283,8 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 |---|---|---|
 | `POST /v1/admin/mail` | `targetPlayerId, title, body?, rewardVang?, rewardKc?, foodId?, quantity?` | Gửi thư/đền bù cho 1 người chơi |
 | `POST /v1/admin/giftcode` | `code, rewardVang?, rewardKc?, foodId?, quantity?, maxUses?, expiresDays?` | Tạo mã quà tặng |
-| `POST /v1/minigames/session` | — | `sessionId, seed, movesAllowed, maxLines, vangPerLine` — sinh bàn 6×6 từ `seed` |
-| `POST /v1/minigames/finish` | `sessionId, linesMade` | server kẹp `linesMade ≤ maxLines`; gọi lại cùng session trả kết quả cũ |
+| `POST /v1/minigames/session` | `gameType` (`MATCH3` \| `MEMORY`) | `sessionId, gameType, seed, movesAllowed, maxScore, vangPerScore` — sinh bàn từ `seed` |
+| `POST /v1/minigames/finish` | `sessionId, score` | server kẹp `score ≤ maxScore` theo luật từng game; gọi lại cùng session trả kết quả cũ |
 
 Mã lỗi: `401` sai token/sai mật khẩu · `402` thiếu tiền · `403` thiếu level hoặc bị khoá · `404` không tồn tại · `409` sai trạng thái · `503` bảo trì.
 

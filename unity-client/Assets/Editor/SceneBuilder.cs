@@ -70,6 +70,8 @@ public static class SceneBuilder
         BuildAchievements(screens.transform, prefabs);
         BuildShop(screens.transform, prefabs);
         BuildInventory(screens.transform, prefabs);
+        BuildProcessing(screens.transform, prefabs);
+        BuildMemoryGame(screens.transform, prefabs);
 
         var app = new GameObject("App", typeof(Api), typeof(App), typeof(ScreenManager));
         var manager = app.GetComponent<ScreenManager>();
@@ -528,8 +530,16 @@ public static class SceneBuilder
         Center(shop, 360, -155);
         Stretch(Text("Label", shop.transform, "CỬA HÀNG", 16, Dark, TextAnchor.MiddleCenter));
 
+        var processing = Button("ProcessingButton", screen.transform, new Color(0.85f, 0.75f, 0.55f), 150, 38);
+        Center(processing, 140, -215);
+        Stretch(Text("Label", processing.transform, "Chế biến", 14, Dark, TextAnchor.MiddleCenter));
+
+        var memory = Button("MemoryButton", screen.transform, new Color(0.70f, 0.80f, 0.95f), 150, 38);
+        Center(memory, 300, -215);
+        Stretch(Text("Label", memory.transform, "Lật hình", 14, Dark, TextAnchor.MiddleCenter));
+
         var inventory = Button("InventoryButton", screen.transform, new Color(0.75f, 0.85f, 0.70f), 150, 38);
-        Center(inventory, 300, -215);
+        Center(inventory, -140, -215);
         Stretch(Text("Label", inventory.transform, "Kho đồ", 14, Dark, TextAnchor.MiddleCenter));
 
         var achievement = Button("AchievementButton", screen.transform, new Color(0.95f, 0.65f, 0.55f), 180, 38);
@@ -557,6 +567,8 @@ public static class SceneBuilder
         comp.achievementButton = achievement.GetComponent<Button>();
         comp.shopButton = shop.GetComponent<Button>();
         comp.inventoryButton = inventory.GetComponent<Button>();
+        comp.processingButton = processing.GetComponent<Button>();
+        comp.memoryButton = memory.GetComponent<Button>();
         comp.mailDot = mailDot;
         comp.farmDot = farm.transform.Find("Dot").gameObject;
         comp.zooDot = zoo.transform.Find("Dot").gameObject;
@@ -926,6 +938,53 @@ public static class SceneBuilder
         comp.plotPickerPanel = picker;
         comp.closePickerButton = close;
         comp.emptyText = empty.GetComponent<Text>();
+    }
+
+    static void BuildProcessing(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S34_Processing", parent, "Chế biến nông sản");
+
+        var summary = Text("Summary", screen.transform, "", 14, Color.white, TextAnchor.MiddleCenter);
+        Center(summary, -230, 128); Size(summary, 420, 22);
+        var slots = ScrollList("SlotList", screen.transform, 440, 250, -230, -30);
+
+        var recipeLabel = Text("RecipeLabel", screen.transform, "Công thức", 15, Color.white, TextAnchor.MiddleCenter);
+        Center(recipeLabel, 230, 128); Size(recipeLabel, 420, 22);
+        var recipes = ScrollList("RecipeList", screen.transform, 440, 250, 230, -30);
+
+        var comp = screen.AddComponent<ProcessingScreen>();
+        comp.slotContent = slots;
+        comp.recipeContent = recipes;
+        comp.rowPrefab = prefabs.row;
+        comp.summaryText = summary.GetComponent<Text>();
+    }
+
+    static void BuildMemoryGame(Transform parent, Prefabs prefabs)
+    {
+        var screen = Screen("S41_Memory", parent, null);
+
+        var header = Text("Header", screen.transform, "", 16, Color.white, TextAnchor.MiddleCenter);
+        Size(header, 700, 30);
+        Center(header, 0, 190);
+
+        var board = Empty("Board", screen.transform);
+        Size(board, 332, 332);
+        Center(board, 0, -10);
+        var layout = board.AddComponent<GridLayoutGroup>();
+        layout.cellSize = new Vector2(74, 74);
+        layout.spacing = new Vector2(8, 8);
+        layout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        layout.constraintCount = 4;
+
+        var finish = Button("FinishButton", screen.transform, Primary, 240, 44);
+        Center(finish, 0, -215);
+        Stretch(Text("Label", finish.transform, "Kết thúc & nhận thưởng", 15, Dark, TextAnchor.MiddleCenter));
+
+        var comp = screen.AddComponent<MemoryGameScreen>();
+        comp.board = board.transform;
+        comp.cellPrefab = prefabs.boardCell;
+        comp.headerText = header.GetComponent<Text>();
+        comp.finishButton = finish.GetComponent<Button>();
     }
 
     // ---------------- Helper UI ----------------
