@@ -15,7 +15,9 @@ Vòng lặp cốt lõi: **Trồng trọt → Thu hoạch thức ăn → Chuyển
 - **Asset 2D**: sprite pixel-art chibi **gốc của dự án** (không dùng asset bên thứ ba), sinh từ `tools/gen_sprites.py` ra `client/assets/sprites.png` + atlas JSON. Muốn sửa/thêm sprite: sửa lưới ký tự trong script rồi chạy lại `python3 tools/gen_sprites.py`.
 - **Client Android/iOS** (`mobile/`): app native mỏng bọc client HTML5 trong WebView, khoá màn hình ngang — xem `mobile/README.md`.
 
-> 📖 **Hướng dẫn đầy đủ** (setup server local bằng VSCode, deploy VPS, build client Unity + kết nối): xem **[docs/SETUP_GUIDE.md](docs/SETUP_GUIDE.md)** — đây là tài liệu duy nhất, các hướng dẫn cũ đã xoá.
+> 📖 **Tài liệu:**
+> - **[docs/SETUP_GUIDE.md](docs/SETUP_GUIDE.md)** — setup server local bằng VSCode, deploy VPS, build client Unity + kết nối API
+> - **[docs/SCREEN_GUIDE.md](docs/SCREEN_GUIDE.md)** — dựng từng screen trong Unity: bố cục, nút nào gọi API nào, xử lý lỗi
 
 ## Chạy game
 
