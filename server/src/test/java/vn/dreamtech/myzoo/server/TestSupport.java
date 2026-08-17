@@ -18,6 +18,11 @@ public final class TestSupport {
         return ds;
     }
 
+    public static int qty(java.util.List<vn.dreamtech.myzoo.server.farm.FarmService.ItemStack> stacks, String foodId) {
+        return stacks.stream().filter(s -> s.foodId().equals(foodId)).mapToInt(
+                vn.dreamtech.myzoo.server.farm.FarmService.ItemStack::quantity).findFirst().orElse(0);
+    }
+
     public static final class FakeTime implements TimeSource {
         public long now = 1_700_000_000_000L;
 

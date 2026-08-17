@@ -37,7 +37,11 @@ public final class FarmService {
     public record PlotView(int plotIndex, String state, String cropId, Long plantedAt, Long readyAt) {
     }
 
-    public record FarmView(List<PlotView> plots, Map<String, Integer> storage) {
+    // Kho trả về dạng mảng (không phải map khoá động) để client engine đọc bằng JSON parser có sẵn.
+    public record ItemStack(String foodId, int quantity) {
+    }
+
+    public record FarmView(List<PlotView> plots, List<ItemStack> storage) {
     }
 
     public record PlantResult(int plotIndex, String cropId, long readyAt, long vangBalance) {
@@ -156,7 +160,7 @@ public final class FarmService {
         return new SellResult(foodId, quantity, earned, balance);
     }
 
-    public Map<String, Integer> storage(int playerId) {
+    public List<ItemStack> storage(int playerId) {
         return readInventory("farm_inventory", playerId);
     }
 
@@ -191,7 +195,13 @@ public final class FarmService {
         }
     }
 
-    public Map<String, Integer> readInventory(String table, int playerId) {
+    public List<ItemStack> readInventory(String table, int playerId) {
+        List<ItemStack> out = new ArrayList<>();
+        readInventoryMap(table, playerId).forEach((foodId, qty) -> out.add(new ItemStack(foodId, qty)));
+        return out;
+    }
+
+    public Map<String, Integer> readInventoryMap(String table, int playerId) {
         Map<String, Integer> out = new LinkedHashMap<>();
         try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
                 "SELECT food_id, quantity FROM " + table + " WHERE player_id = ? AND quantity > 0")) {

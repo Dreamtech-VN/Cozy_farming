@@ -44,17 +44,18 @@ public final class ZooService {
     public record HabitatView(int id, String typeId, String name, int capacity, List<AnimalView> animals) {
     }
 
-    public record ZooView(List<HabitatView> habitats, Map<String, Integer> warehouse, boolean isOpen,
+    public record ZooView(List<HabitatView> habitats, List<FarmService.ItemStack> warehouse, boolean isOpen,
                            double foodCoverage, int totalAppeal, long pendingVang) {
     }
 
     public record BuyResult(int id, long vangBalance) {
     }
 
-    public record DeliverResult(String foodId, int quantity, Map<String, Integer> farmStorage, Map<String, Integer> warehouse) {
+    public record DeliverResult(String foodId, int quantity, List<FarmService.ItemStack> farmStorage,
+                                List<FarmService.ItemStack> warehouse) {
     }
 
-    public record FeedResult(int habitatId, int animalsFed, Map<String, Integer> warehouse) {
+    public record FeedResult(int habitatId, int animalsFed, List<FarmService.ItemStack> warehouse) {
     }
 
     public record CollectResult(long vangEarned, int zooXp, long vangBalance) {
@@ -183,7 +184,7 @@ public final class ZooService {
                         }
                     }
                 }
-                Map<String, Integer> warehouse = farm.readInventory("zoo_warehouse", playerId);
+                Map<String, Integer> warehouse = farm.readInventoryMap("zoo_warehouse", playerId);
                 for (int i = 0; i < hungry.size(); i++) {
                     Catalog.SpeciesDef species = Catalog.species(speciesIds.get(i)).orElseThrow();
                     String usable = null;

@@ -6,6 +6,8 @@ Hướng dẫn thao tác cụ thể trong Unity: tạo GameObject nào, gắn co
 - Muốn biết **screen có gì, nút nào làm gì**: `docs/SCREEN_GUIDE.md`.
 - File này trả lời: **làm sao dựng ra nó trong Unity**.
 
+> 🚀 **Không muốn dựng tay?** Dùng project đã dựng sẵn tại **`unity-client/`** — copy thư mục `Assets` vào project Unity mới rồi bấm menu **MyZoo → Dựng scene**, toàn bộ screen/prefab/tham chiếu tự sinh. Xem `unity-client/README.md`. Tài liệu này dành cho ai muốn tự dựng để hiểu từng bước.
+
 Toàn bộ script bên dưới là code thật, dán vào là chạy. Lưu ý: mình viết chuẩn theo API server nhưng chưa biên dịch được trong Unity (môi trường không có Unity Editor), nên gặp lỗi vặt lúc compile là bình thường — báo mình sửa.
 
 ---
@@ -16,15 +18,9 @@ Toàn bộ script bên dưới là code thật, dán vào là chạy. Lưu ý: m
 
 Unity Hub → New Project → **2D (Built-in Render Pipeline)** → tên `MyZooClient`.
 
-## 0.2. Cài Newtonsoft Json (bắt buộc)
+## 0.2. Không cần cài package nào
 
-Window → Package Manager → nút **+** → **Add package by name** → gõ:
-
-```
-com.unity.nuget.newtonsoft-json
-```
-
-**Vì sao bắt buộc:** kho đồ trong game (`storage`, `warehouse`) là object khoá động kiểu `{"wheat":3,"carrot":2}`. `JsonUtility` có sẵn của Unity **không đọc được** dạng này. Newtonsoft đọc thẳng thành `Dictionary<string,int>`.
+Server trả kho đồ dạng **mảng** (`storage: [{foodId, quantity}]`) chứ không phải map khoá động, nên `JsonUtility` có sẵn của Unity đọc được hết — không cần Newtonsoft hay thư viện JSON nào khác.
 
 ## 0.3. Player Settings
 
@@ -81,9 +77,16 @@ Tạo GameObject rỗng: chuột phải Canvas → Create Empty, đặt tên `Sc
 
 ---
 
-# PHẦN 1 — Bốn script nền
+# PHẦN 1 — Sáu script nền
 
 Tạo trong `Assets/Scripts/`. Đây là phần dùng lại cho mọi screen, làm kỹ 1 lần.
+
+> ⚠️ **Tạo đủ cả 6 file rồi hãy kiểm tra**: `Dto.cs`, `Api.cs`, `App.cs`, `ScreenManager.cs`, `Toast.cs`, `Hud.cs`.
+> Chúng gọi lẫn nhau, nên khi mới tạo được vài file thì Console sẽ có **lỗi đỏ** kiểu
+> `The name 'Hud' does not exist in the current context` — **bình thường**, tạo nốt là hết.
+>
+> Chừng nào còn lỗi đỏ, Unity giữ nguyên bản biên dịch cũ: **Inspector sẽ không hiện các ô** như Base Url,
+> dù bạn đã dán code đúng. Thấy Inspector chỉ có mỗi dòng `Script` → mở Console xem lỗi trước, đừng dán lại code.
 
 ## 1.1. `Dto.cs` — khai báo dữ liệu server trả về
 
@@ -470,9 +473,20 @@ namespace MyZoo
 
 `ScreenManager` lo bật/tắt screen; `Toast` hiện thông báo ngắn ở đáy màn.
 
-Tạo `ScreenManager.cs` → Add Component vào GameObject `App` → trong Inspector, ô **Screens** gõ Size = số screen rồi kéo từng GameObject S01…S40 vào; ô **Hud** kéo GameObject `HUD` vào. *(Làm bước này sau khi đã tạo đủ screen ở mục 0.5 — chưa có thì để trống, quay lại kéo sau.)*
+Tạo `ScreenManager.cs` → Add Component vào GameObject `App`.
+
+**Không cần làm gì trong Inspector**: nếu bạn đặt tên GameObject đúng là `Screens` và `HUD` (như sơ đồ ở mục 0.5), script tự tìm ra chúng lúc chạy. Muốn dùng tên khác thì mới phải gán tay vào 2 ô `Screens Root` / `Hud`.
+
+**Ba cách gán một ô kiểu kéo-thả trong Unity** (áp dụng cho mọi ô object ở các bước sau):
+
+| Cách | Thao tác |
+|---|---|
+| Kéo chuột | Chọn `App` trong Hierarchy trước. Rồi **bấm giữ** chuột lên `Screens` trong Hierarchy, **giữ nguyên tay** rê sang ô trong Inspector, ô sáng viền xanh mới thả. *(Đừng click chọn `Screens` trước khi kéo — click là Inspector nhảy sang object đó, mất chỗ thả.)* |
+| Nút tròn ⊙ | Bấm hình tròn nhỏ ở mép phải ô → cửa sổ **Select GameObject** hiện ra → gõ tên → **double-click** kết quả. Không phải kéo gì. |
+| Để trống | Với `ScreenManager`, cứ để trống — script tự tìm theo tên. |
 
 ```csharp
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyZoo
@@ -480,19 +494,53 @@ namespace MyZoo
     public class ScreenManager : MonoBehaviour
     {
         public static ScreenManager I;
-        public GameObject[] screens;   // kéo tất cả S01..S40 vào đây
+
+        [Tooltip("Để trống thì tự tìm GameObject tên 'Screens'")]
+        public Transform screensRoot;
+        [Tooltip("Để trống thì tự tìm GameObject tên 'HUD'")]
         public GameObject hud;
 
-        void Awake() => I = this;
+        readonly List<GameObject> screens = new();
+
+        void Awake()
+        {
+            I = this;
+
+            // Để trống 2 ô trong Inspector cũng chạy: tự tìm theo tên GameObject.
+            if (screensRoot == null)
+            {
+                var found = GameObject.Find("Screens");
+                if (found == null)
+                {
+                    Debug.LogError("Không thấy GameObject tên 'Screens'. Tạo nó trong Canvas (mục 0.5), "
+                                 + "hoặc gán thủ công vào ô Screens Root.");
+                    return;
+                }
+                screensRoot = found.transform;
+            }
+            if (hud == null) hud = GameObject.Find("HUD");
+
+            // Tự gom mọi screen con — khỏi kéo thả từng cái, thêm screen mới cũng không cần sửa Inspector
+            foreach (Transform child in screensRoot) screens.Add(child.gameObject);
+        }
 
         public void Show(string screenName, bool showHud = false)
         {
-            foreach (var s in screens) s.SetActive(s.name == screenName);
+            bool found = false;
+            foreach (var s in screens)
+            {
+                bool match = s.name == screenName;
+                s.SetActive(match);
+                found |= match;
+            }
+            if (!found) Debug.LogError($"Không tìm thấy screen '{screenName}' — sai tên GameObject?");
             if (hud) hud.SetActive(showHud);
         }
     }
 }
 ```
+
+**Lưu ý:** tên GameObject phải khớp **chính xác** chuỗi truyền vào `Show()` (`S02_Login`, `S10_Farm`…). Gõ sai một ký tự thì màn hình sẽ đen thui — nên script có sẵn dòng `Debug.LogError` báo tên nào không tìm thấy.
 
 Toast: tạo UI → Panel tên `Toast` (anchor giữa-dưới, cao 60, rộng 500), bên trong 1 Text tên `Label`. Gắn script:
 
@@ -538,7 +586,10 @@ namespace MyZoo
 
 ---
 
-# PHẦN 2 — HUD
+
+## 1.5. `Hud.cs` — thanh thông tin trên cùng
+
+Tạo file `Hud.cs` như các bước trên. Phần GameObject/UI có thể dựng sau — nhưng **file phải tồn tại ngay**, vì `App.cs` ở bước 1.3 có gọi tới nó.
 
 Tạo `Canvas → HUD` (Create Empty, anchor stretch ngang, cao 44, ghim đỉnh màn). Bên trong thêm bằng UI → Text (hoặc TextMeshPro nếu quen):
 
@@ -591,9 +642,10 @@ namespace MyZoo
 }
 ```
 
+
 ---
 
-# PHẦN 3 — Dựng từng screen
+# PHẦN 2 — Dựng từng screen
 
 ## S01_Splash
 
@@ -1719,11 +1771,11 @@ namespace MyZoo
 
 ---
 
-# PHẦN 4 — Chạy thử
+# PHẦN 3 — Chạy thử
 
 1. Bật server: `java -jar server/target/myzoo-server-0.1.0-SNAPSHOT.jar`
 2. Trong Unity, chọn GameObject `App` → ô **Base Url** để `http://localhost:8080`
-3. Kéo tất cả screen vào mảng `screens` của `ScreenManager`, kéo `HUD` vào ô `hud`
+3. Không cần gán gì cho `ScreenManager` nếu GameObject đã đặt đúng tên `Screens` và `HUD`
 4. Bấm **Play** — phải thấy Splash → Login. Bấm **Chơi ngay** → chọn server → tạo nhân vật → vào sảnh.
 
 **Checklist nghiệm thu:**
@@ -1743,6 +1795,9 @@ namespace MyZoo
 
 | Hiện tượng | Nguyên nhân |
 |---|---|
+| Inspector chỉ hiện dòng `Script`, không có ô nào (Base Url, Screens Root…) | Project đang có **lỗi biên dịch** → Unity giữ bản cũ. Mở Console xem dòng đỏ. Hay gặp nhất: chưa tạo đủ 6 file ở Phần 1, hoặc chưa cài Newtonsoft (bước 0.2) |
+| Console báo `The name 'Hud' does not exist` | Chưa tạo `Hud.cs` (bước 1.5) — `App.cs` cần nó |
+| Console báo `The type or namespace 'Newtonsoft' could not be found` | Chưa cài package ở bước 0.2 |
 | `JsonSerializationException` ở `storage` | Chưa cài Newtonsoft, đang dùng JsonUtility |
 | Mọi request trả 401 | Chưa lưu token, hoặc gửi sai header (`X-Session-Token`) |
 | Android build gọi API không được | Chưa bật Allow downloads over HTTP, hoặc dùng `localhost` thay vì `10.0.2.2` |
