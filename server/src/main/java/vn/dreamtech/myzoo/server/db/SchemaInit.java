@@ -358,6 +358,29 @@ public final class SchemaInit {
                 )
                 """,
                 """
+                CREATE TABLE IF NOT EXISTS premium_orders (
+                  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                  player_id INT NOT NULL,
+                  provider VARCHAR(20) NOT NULL,
+                  product_id VARCHAR(60) NOT NULL,
+                  external_transaction_id VARCHAR(160) NOT NULL UNIQUE,
+                  status VARCHAR(20) NOT NULL,
+                  kc_amount BIGINT NOT NULL,
+                  price_vnd BIGINT NOT NULL,
+                  created_at TIMESTAMP NOT NULL
+                )
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS analytics_events (
+                  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                  player_id INT,
+                  event VARCHAR(40) NOT NULL,
+                  props VARCHAR(500),
+                  day_key VARCHAR(10) NOT NULL,
+                  created_at TIMESTAMP NOT NULL
+                )
+                """,
+                """
                 CREATE TABLE IF NOT EXISTS mission_defs (
                   id VARCHAR(40) PRIMARY KEY,
                   name VARCHAR(80) NOT NULL,

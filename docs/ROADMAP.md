@@ -23,12 +23,12 @@ Cập nhật cuối mỗi đợt. Mục đích: nhìn một chỗ là biết cò
 | §16 Art | Asset gốc | **Chưa — không phải việc code** |
 | §17 Security | Rate limit, chống cheat, server giữ quyền quyết định | Xong ở Đợt 5 |
 | §19 QA | Ma trận kiểm thử | **Chưa** |
-| §21 LiveOps | Công cụ GM | Một phần — có endpoint admin, chưa có giao diện, **Đợt 10** |
+| §21 LiveOps | Công cụ GM | Xong ở Đợt 10 — trang `/gm.html` |
 | §26.15 Settings | Màn cài đặt, cập nhật bắt buộc, thông báo bảo trì | Xong ở Đợt 5 |
 | §27.8 Gacha | Banner, tỉ lệ công khai, pity, trùng → mảnh, lịch sử quay | Xong ở Đợt 6 |
 | §27.13 Wallet | Số dư + lịch sử thu chi | Xong ở Đợt 5 |
-| §27.14 IAP | Nạp tiền thật, xác thực hoá đơn | **Chưa — Đợt 10** (đang là `TOPUP_MOCK`) |
-| §27.21 Analytics | Sự kiện đo lường | **Chưa — Đợt 10** |
+| §27.14 IAP | Nạp tiền thật, xác thực hoá đơn | Code xong ở Đợt 10 — **chưa chạy thật được** vì cần tài khoản nhà phát triển |
+| §27.21 Analytics | Sự kiện đo lường | Xong ở Đợt 10 — 6 sự kiện chính |
 | §29 Farm→Zoo loop | Chế biến, kho, cho ăn, doanh thu | Xong |
 | §29.18 Zoo dashboard | Bảng hạng/khách/doanh thu | Một phần — gộp thành một luồng doanh thu thay vì tách 6 nguồn (vé, đồ ăn, nước, quà lưu niệm, ảnh, trò chơi); **chưa có báo cáo cuối ngày** vì cần tiến trình chạy định kỳ mà kiến trúc hiện tại cố tình không có |
 | §29.23 Chợ khẩn cấp | Mua thức ăn giá cao khi kho cạn | Xong ở Đợt 8 |
@@ -49,8 +49,8 @@ Tiêu chí MVP ở §22.1 đã đạt, trừ dòng "thế giới 2D đi lại đ
 | 6 | Gacha + hệ ngoại hình (pool chỉ có đồ cosmetic) | #79 | Xong |
 | 7 | Nhiệm vụ tuần/sự kiện dữ liệu hoá + chăn nuôi | #80 | Xong |
 | 8 | Xếp hạng sở thú, sức chứa khách, chợ thức ăn khẩn cấp | #81 | Xong |
-| 9 | Long-poll chat + nhắc việc trong game | — | Đang làm |
-| 10 | IAP thật, trang GM, analytics | — | Chưa |
+| 9 | Long-poll chat + nhắc việc trong game | #82 | Xong |
+| 10 | IAP thật, trang GM, analytics | — | Đang làm |
 
 ## Không phải việc code nhưng vẫn chặn ngày ra mắt
 
@@ -74,7 +74,11 @@ Tiêu chí MVP ở §22.1 đã đạt, trừ dòng "thế giới 2D đi lại đ
 - **Thông báo hệ thống**: code đã viết sẵn trong `Notifications.cs` nhưng nằm sau define
   `MYZOO_MOBILE_NOTIFICATIONS` vì cần cài gói `com.unity.mobile.notifications`. Chưa bật thì chỉ có
   nhắc việc trong game.
-- **IAP cần tài khoản nhà phát triển thật** mới test được đầu-cuối. Đây là lý do Đợt 10 để cuối.
+- **IAP chưa chạy thật bao giờ.** Code xác thực biên nhận Google Play và App Store đã viết, phần
+  chống cộng tiền hai lần đã test kỹ, nhưng **chưa gọi tới cổng thật lần nào** vì cần tài khoản nhà
+  phát triển. Trước khi mở bán phải chạy thử với biên nhận sandbox của cả hai store.
+- **`IAP_ALLOW_MOCK` không được bật trên máy chủ thật** — bật là ai cũng tự cộng được Kim Cương.
+  Mặc định tắt và có test khẳng định điều đó.
 - **Voice chat không tự lọc nội dung được**. Sticker/GIF an toàn theo cấu trúc vì server chỉ phát nội
   dung trong danh mục duyệt sẵn, nhưng ghi âm thì chỉ có report + admin nghe lại. Mở voice trên máy
   chủ công khai thì cần người trực.

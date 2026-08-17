@@ -54,14 +54,14 @@ curl http://localhost:8080/health
 
 Mở trình duyệt vào `http://localhost:8080` — có sẵn **client web mẫu** (đầy đủ farm/zoo/minigame). Dùng nó làm chuẩn đối chiếu hành vi khi client Unity của bạn có gì đó sai.
 
-Biến môi trường tuỳ chọn: `SERVER_PORT` (mặc định 8080) · `CLIENT_DIR` (thư mục client web, mặc định `client`) · `DB_URL`/`DB_USER`/`DB_PASSWORD` (chuyển sang MySQL) · `VOICE_DIR` (thư mục chứa file ghi âm của chat, mặc định `myzoo-voice` cạnh chỗ chạy server — trên VPS nên trỏ vào ổ có backup).
+Biến môi trường tuỳ chọn: `SERVER_PORT` (mặc định 8080) · `CLIENT_DIR` (thư mục client web, mặc định `client`) · `DB_URL`/`DB_USER`/`DB_PASSWORD` (chuyển sang MySQL) · `VOICE_DIR` (thư mục chứa file ghi âm của chat, mặc định `myzoo-voice` cạnh chỗ chạy server — trên VPS nên trỏ vào ổ có backup) · `IAP_ALLOW_MOCK` (bật nạp giả lập khi phát triển, **mặc định tắt**) · `GOOGLE_PLAY_PACKAGE`, `GOOGLE_PLAY_ACCESS_TOKEN`, `APP_STORE_SHARED_SECRET` (nạp tiền thật).
 
 Reset sạch dữ liệu dev: tắt server, xoá `myzoo-data.mv.db`, chạy lại.
 
 ## A5. Chạy test
 
 ```bash
-cd server && mvn test    # 50 test, dùng H2 in-memory + fake time, chạy trong vài giây
+cd server && mvn test    # 203 test, dùng H2 in-memory + fake time, chạy trong vài chục giây
 ```
 
 ---
@@ -270,7 +270,9 @@ JSON camelCase, timestamp là **epoch milliseconds**, lỗi trả `{"error": "th
 | `POST /v1/shop/purchase` | `itemId, quantity?` | trừ **đúng một loại tiền** theo `currency` của món; 402 thiếu tiền |
 | `GET /v1/inventory` | — | `{items: [{itemId, name, description, type, quantity}]}` |
 | `POST /v1/items/use` | `itemId, plotIndex?` | `FOOD` → cộng thẳng kho nông trại; `GROW_BOOST` → cần `plotIndex`, làm chín ngay ô đang lớn. Dùng hỏng thì **tự hoàn lại vật phẩm** |
-| `POST /v1/shop/topup` | `packId` | nạp Kim Cương **giả lập** (chưa nối cổng thật), vẫn ghi sổ cái `TOPUP_MOCK` |
+| `POST /v1/shop/topup` | `packId` | Nạp **giả lập**, chỉ chạy khi đặt `IAP_ALLOW_MOCK=true`. Không đặt → 503 |
+| `POST /v1/shop/purchase-verify` | `provider, packId, receipt` | Luồng nạp thật: server hỏi lại store rồi mới cộng. 503 chưa cấu hình, 402 biên nhận không hợp lệ |
+| `GET /v1/shop/orders?limit=` | — | Lịch sử nạp của người chơi |
 | `GET /v1/processing` | — | `{slots: [{id, name, outputFoodId, readyAt, ready}], maxSlots, storage[]}` |
 | `POST /v1/processing/start` | `recipeId` | trừ nguyên liệu, đặt `ready_at`; 409 thiếu nguyên liệu/hết lò, 403 thiếu level |
 | `POST /v1/processing/collect` | `slotId` | 409 chưa xong, 404 đã thu |
@@ -380,6 +382,27 @@ Luật kiểm duyệt chạy ở server: chặn link/số điện thoại/nội 
 > Ảnh động và sticker an toàn **theo cấu trúc**: server chỉ phát nội dung trong danh mục có sẵn nên không có đường nào đẩy ảnh NSFW vào game. Ngược lại, **voice không tự lọc được** — chỉ có báo cáo + admin xem lại, nên bật voice ở server công khai thì cần người trực.
 
 > **Hai loại tiền tách bạch** (spec): mỗi món chỉ mua bằng đúng một loại tiền, và **không có endpoint nào đổi Kim Cương ↔ Vàng**.
+
+**Nạp tiền thật** (spec §27.14–27.15): client mua ở store → lấy biên nhận → gọi `purchase-verify` →
+server hỏi lại Google/Apple → ghi `premium_orders` → cộng Kim Cương → ghi sổ cái. **Client không bao
+giờ tự khai số tiền.**
+
+- `provider`: `GOOGLE_PLAY` (cần `GOOGLE_PLAY_PACKAGE` + `GOOGLE_PLAY_ACCESS_TOKEN`),
+  `APP_STORE` (cần `APP_STORE_SHARED_SECRET`), hoặc `MOCK` (cần `IAP_ALLOW_MOCK=true`).
+- Chưa đặt biến tương ứng thì trả **503**, không bao giờ im lặng cộng tiền.
+- `external_transaction_id` là **UNIQUE**: gửi lại cùng một biên nhận trả về đơn cũ với `kcAdded = 0`,
+  không cộng lần hai — kể cả khi `requestId` khác.
+
+> **Đừng đặt `IAP_ALLOW_MOCK=true` trên máy chủ thật.** Bật cờ đó nghĩa là bất kỳ ai cũng tự cộng
+> được Kim Cương. Mặc định tắt.
+
+**Bảng quản trị**: mở `http://<máy-chủ>:8080/gm.html` (do chính server phục vụ nên không vướng CORS),
+nhập `ADMIN_TOKEN` vào ô trên cùng. Gửi thư, tạo giftcode, xoá tin, cấm chat, xem báo cáo và thống kê
+đều bấm được thay vì gõ curl. Token chỉ nằm trong trình duyệt, không lưu ở đâu.
+
+**Thống kê**: `GET /v1/admin/analytics?days=` trả số người chơi hoạt động và số lần mỗi sự kiện
+(`login`, `character_create`, `gacha_pull`, `premium_purchase`, `mission_claim`, `zoo_collect`).
+Ghi thống kê hỏng không bao giờ làm hỏng hành động chính của người chơi.
 
 **Endpoint vận hành** (chỉ bật khi đặt biến môi trường `ADMIN_TOKEN`, gửi kèm header `X-Admin-Token`; không đặt biến thì trả 404 như không tồn tại):
 

@@ -2,6 +2,7 @@ package vn.dreamtech.myzoo.server;
 
 import com.sun.net.httpserver.HttpServer;
 import vn.dreamtech.myzoo.server.db.DataSourceProvider;
+import vn.dreamtech.myzoo.server.analytics.AnalyticsService;
 import vn.dreamtech.myzoo.server.auth.AccountService;
 import vn.dreamtech.myzoo.server.chat.ChatService;
 import vn.dreamtech.myzoo.server.db.SchemaInit;
@@ -58,10 +59,11 @@ public final class Main {
         LivestockService livestock = new LivestockService(dataSource, economy, players, farm, time);
         CosmeticService cosmetics = new CosmeticService(dataSource, players, time);
         GachaService gacha = new GachaService(dataSource, economy, players, cosmetics, time);
+        AnalyticsService analytics = new AnalyticsService(dataSource, time);
         Idempotency idempotency = new Idempotency(dataSource, time);
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/v1", new ApiRouter(players, farm, zoo, minigames, missions, accounts, social, mail, giftcodes, achievements, shop, processing, chat, economy, gacha, cosmetics, livestock, idempotency, new RateLimiter(time)));
+        server.createContext("/v1", new ApiRouter(players, farm, zoo, minigames, missions, accounts, social, mail, giftcodes, achievements, shop, processing, chat, economy, gacha, cosmetics, livestock, analytics, idempotency, new RateLimiter(time)));
         server.createContext("/health", ex -> JsonHttp.write(ex, 200, Map.of("status", "ok")));
 
         Path clientDir = Path.of(System.getenv().getOrDefault("CLIENT_DIR", "client"));

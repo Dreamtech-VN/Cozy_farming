@@ -2,6 +2,7 @@ package vn.dreamtech.myzoo.server.http;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import vn.dreamtech.myzoo.server.analytics.AnalyticsService;
 import vn.dreamtech.myzoo.server.auth.AccountService;
 import vn.dreamtech.myzoo.server.catalog.Catalog;
 import vn.dreamtech.myzoo.server.chat.ChatCatalog;
@@ -42,6 +43,7 @@ public final class ApiRouter implements HttpHandler {
     private final ProcessingService processing;
     private final ChatService chat;
     private final EconomyService economy;
+    private final AnalyticsService analytics;
     private final LivestockService livestock;
     private final GachaService gacha;
     private final CosmeticService cosmetics;
@@ -54,7 +56,9 @@ public final class ApiRouter implements HttpHandler {
                      GiftcodeService giftcodes, AchievementService achievements, ShopService shop,
                      ProcessingService processing, ChatService chat, EconomyService economy,
                      GachaService gacha, CosmeticService cosmetics, LivestockService livestock,
+                     AnalyticsService analytics,
                      Idempotency idempotency, RateLimiter limiter) {
+        this.analytics = analytics;
         this.livestock = livestock;
         this.gacha = gacha;
         this.cosmetics = cosmetics;
@@ -129,6 +133,9 @@ public final class ApiRouter implements HttpHandler {
         Integer count;
         String cosmeticId;
         Long animalId;
+        String provider;
+        String receipt;
+        Integer days;
     }
 
     @Override
@@ -206,7 +213,11 @@ public final class ApiRouter implements HttpHandler {
                 requireFields(b.name != null, "Cần name");
                 // Chỉ cho đặt ngoại hình gốc hoặc món đã sở hữu — trước đây client gửi chuỗi gì cũng nhận.
                 cosmetics.requireWearable(playerId, b.avatar);
-                mutate(ex, b, playerId, () -> players.createCharacter(playerId, b.name, b.avatar));
+                mutate(ex, b, playerId, () -> {
+                    var profile = players.createCharacter(playerId, b.name, b.avatar);
+                    analytics.track(playerId, AnalyticsService.CHARACTER_CREATE, Map.of("avatar", b.avatar));
+                    return profile;
+                });
             }
             case "GET /v1/world/snapshot" -> {
                 int playerId = auth(ex);
@@ -218,7 +229,9 @@ public final class ApiRouter implements HttpHandler {
             }
             case "POST /v1/auth/guest" -> {
                 Body b = JsonHttp.readBody(ex, Body.class);
-                JsonHttp.write(ex, 200, players.guestLogin(b.guestToken));
+                var login = players.guestLogin(b.guestToken);
+                analytics.track(login.playerId(), AnalyticsService.LOGIN, Map.of("kind", "guest"));
+                JsonHttp.write(ex, 200, login);
             }
             case "GET /v1/catalog" -> JsonHttp.write(ex, 200, Map.of(
                     "crops", Catalog.CROPS,
@@ -231,6 +244,30 @@ public final class ApiRouter implements HttpHandler {
                     "livestock", Catalog.LIVESTOCK,
                     "plotCount", FarmService.PLOT_COUNT));
             case "GET /v1/me" -> JsonHttp.write(ex, 200, players.profile(auth(ex)));
+            case "POST /v1/shop/purchase-verify" -> {
+                int playerId = auth(ex);
+                Body b = JsonHttp.readBody(ex, Body.class);
+                requireFields(b.provider != null && b.packId != null && b.receipt != null,
+                        "Cần provider, packId và receipt");
+                mutate(ex, b, playerId, () -> {
+                    var order = shop.verifyAndGrant(playerId, b.provider, b.packId, b.receipt);
+                    if (!order.alreadyGranted()) {
+                        analytics.track(playerId, AnalyticsService.PREMIUM_PURCHASE,
+                                Map.of("packId", b.packId, "provider", order.provider(), "kc", order.kcAdded()));
+                    }
+                    return order;
+                });
+            }
+            case "GET /v1/shop/orders" -> {
+                int playerId = auth(ex);
+                Integer limit = QueryParam.intParam(ex.getRequestURI().getQuery(), "limit");
+                JsonHttp.write(ex, 200, Map.of("orders", shop.orders(playerId, limit == null ? 30 : limit)));
+            }
+            case "GET /v1/admin/analytics" -> {
+                requireAdmin(ex);
+                Integer days = QueryParam.intParam(ex.getRequestURI().getQuery(), "days");
+                JsonHttp.write(ex, 200, analytics.summary(days == null ? 7 : days));
+            }
             case "GET /v1/zoo/report" -> JsonHttp.write(ex, 200, zoo.report(auth(ex)));
             case "GET /v1/zoo/market" -> {
                 auth(ex);
@@ -271,7 +308,12 @@ public final class ApiRouter implements HttpHandler {
             case "POST /v1/gacha/pull" -> {
                 int playerId = auth(ex);
                 Body b = JsonHttp.readBody(ex, Body.class);
-                mutate(ex, b, playerId, () -> gacha.pull(playerId, b.bannerId, b.count == null ? 1 : b.count));
+                mutate(ex, b, playerId, () -> {
+                    var batch = gacha.pull(playerId, b.bannerId, b.count == null ? 1 : b.count);
+                    analytics.track(playerId, AnalyticsService.GACHA_PULL,
+                            Map.of("bannerId", batch.bannerId(), "count", batch.results().size()));
+                    return batch;
+                });
             }
             case "GET /v1/gacha/history" -> {
                 int playerId = auth(ex);
@@ -355,7 +397,12 @@ public final class ApiRouter implements HttpHandler {
                 int playerId = auth(ex);
                 Body b = JsonHttp.readBody(ex, Body.class);
                 requireFields(b.missionId != null, "Cần missionId");
-                mutate(ex, b, playerId, () -> missions.claim(playerId, b.missionId));
+                mutate(ex, b, playerId, () -> {
+                    var result = missions.claim(playerId, b.missionId);
+                    analytics.track(playerId, AnalyticsService.MISSION_CLAIM,
+                            Map.of("missionId", b.missionId, "vang", result.rewardVang()));
+                    return result;
+                });
             }
             case "POST /v1/daily/checkin" -> {
                 int playerId = auth(ex);
@@ -675,7 +722,10 @@ public final class ApiRouter implements HttpHandler {
                 Body b = JsonHttp.readBody(ex, Body.class);
                 mutate(ex, b, playerId, () -> {
                     var r = zoo.collect(playerId);
-                    if (r.vangEarned() > 0) track(playerId, "COLLECT", 1);
+                    if (r.vangEarned() > 0) {
+                        track(playerId, "COLLECT", 1);
+                        analytics.track(playerId, AnalyticsService.ZOO_COLLECT, Map.of("vang", r.vangEarned()));
+                    }
                     return r;
                 });
             }

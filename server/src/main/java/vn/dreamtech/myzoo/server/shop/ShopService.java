@@ -20,9 +20,16 @@ public final class ShopService {
     private final PlayerService players;
     private final FarmService farm;
     private final TimeSource time;
+    private final IapVerifier verifier;
 
     public ShopService(DataSource dataSource, EconomyService economy, PlayerService players,
                        FarmService farm, TimeSource time) {
+        this(dataSource, economy, players, farm, time, new IapVerifier());
+    }
+
+    public ShopService(DataSource dataSource, EconomyService economy, PlayerService players,
+                       FarmService farm, TimeSource time, IapVerifier verifier) {
+        this.verifier = verifier;
         this.dataSource = dataSource;
         this.economy = economy;
         this.players = players;
@@ -89,14 +96,119 @@ public final class ShopService {
         return new UseResult(itemId, effect, quantityOf(playerId, itemId), farm.storage(playerId), inventory(playerId));
     }
 
-    // Nạp Kim Cương giả lập: chưa nối cổng thanh toán, nhưng vẫn ghi sổ cái như giao dịch thật.
+    // Nạp giả lập cho lúc phát triển. Mặc định TẮT — trước đây endpoint này mở cho mọi người,
+    // nghĩa là ai cũng tự cộng được Kim Cương nếu server chạy thật.
     public TopupResult topup(int playerId, String packId) {
         players.requirePlayer(playerId);
+        if (!verifier.mockAllowed()) {
+            throw new ApiException(503, "Nạp giả lập đang tắt — dùng /v1/shop/purchase-verify");
+        }
         ShopCatalog.KcPack pack = ShopCatalog.pack(packId)
                 .orElseThrow(() -> new ApiException(404, "Không có gói nạp này"));
         long balance = economy.earn(playerId, EconomyService.KIM_CUONG, pack.kcAmount(),
                 "TOPUP_MOCK", "pack", packId);
         return new TopupResult(packId, pack.kcAmount(), balance);
+    }
+
+    public record OrderResult(long orderId, String provider, String productId, long kcAdded,
+                              long kcBalance, boolean alreadyGranted) {
+    }
+
+    public record OrderRow(long id, int playerId, String provider, String productId,
+                           String externalTransactionId, String status, long kcAmount, long priceVnd,
+                           long createdAt) {
+    }
+
+    // Luồng đúng theo spec §27.14: client mua ở store rồi gửi biên nhận lên, server hỏi lại store,
+    // ghi đơn hàng, cộng Kim Cương, ghi sổ cái. Client không bao giờ tự khai số tiền.
+    public OrderResult verifyAndGrant(int playerId, String provider, String packId, String receipt) {
+        players.requirePlayer(playerId);
+        ShopCatalog.KcPack pack = ShopCatalog.pack(packId)
+                .orElseThrow(() -> new ApiException(404, "Không có gói nạp này"));
+
+        var verified = verifier.verify(provider, packId, receipt);
+
+        // Khoá duy nhất trên mã giao dịch: gửi lại cùng một biên nhận không bao giờ cộng tiền lần hai.
+        Long existingId = findOrderId(verified.externalTransactionId());
+        if (existingId != null) {
+            return new OrderResult(existingId, verified.provider(), packId, 0,
+                    economy.balances(playerId).get(EconomyService.KIM_CUONG), true);
+        }
+
+        long orderId;
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
+                "INSERT INTO premium_orders (player_id, provider, product_id, external_transaction_id, "
+                        + "status, kc_amount, price_vnd, created_at) VALUES (?, ?, ?, ?, 'PENDING', ?, ?, ?)",
+                java.sql.Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, playerId);
+            ps.setString(2, verified.provider());
+            ps.setString(3, packId);
+            ps.setString(4, verified.externalTransactionId());
+            ps.setLong(5, pack.kcAmount());
+            ps.setLong(6, pack.priceVnd());
+            ps.setTimestamp(7, new java.sql.Timestamp(time.now()));
+            ps.executeUpdate();
+            try (ResultSet keys = ps.getGeneratedKeys()) {
+                orderId = keys.next() ? keys.getLong(1) : 0;
+            }
+        } catch (SQLException e) {
+            // Hai request song song cùng biên nhận: cái thua cuộc đọc lại đơn của cái thắng.
+            Long winner = findOrderId(verified.externalTransactionId());
+            if (winner != null) {
+                return new OrderResult(winner, verified.provider(), packId, 0,
+                        economy.balances(playerId).get(EconomyService.KIM_CUONG), true);
+            }
+            throw new ApiException(500, "Lỗi ghi đơn hàng: " + e.getMessage());
+        }
+
+        long balance = economy.earn(playerId, EconomyService.KIM_CUONG, pack.kcAmount(),
+                "IAP", "order", String.valueOf(orderId));
+        markGranted(orderId);
+        return new OrderResult(orderId, verified.provider(), packId, pack.kcAmount(), balance, false);
+    }
+
+    public List<OrderRow> orders(int playerId, int limit) {
+        int size = limit <= 0 || limit > 100 ? 30 : limit;
+        List<OrderRow> out = new ArrayList<>();
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
+                "SELECT id, player_id, provider, product_id, external_transaction_id, status, kc_amount, "
+                        + "price_vnd, created_at FROM premium_orders WHERE player_id = ? ORDER BY id DESC LIMIT ?")) {
+            ps.setInt(1, playerId);
+            ps.setInt(2, size);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    out.add(new OrderRow(rs.getLong("id"), rs.getInt("player_id"), rs.getString("provider"),
+                            rs.getString("product_id"), rs.getString("external_transaction_id"),
+                            rs.getString("status"), rs.getLong("kc_amount"), rs.getLong("price_vnd"),
+                            rs.getTimestamp("created_at").getTime()));
+                }
+            }
+        } catch (SQLException e) {
+            throw new ApiException(500, "Lỗi đọc lịch sử nạp: " + e.getMessage());
+        }
+        return out;
+    }
+
+    private Long findOrderId(String externalTransactionId) {
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
+                "SELECT id FROM premium_orders WHERE external_transaction_id = ?")) {
+            ps.setString(1, externalTransactionId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? rs.getLong("id") : null;
+            }
+        } catch (SQLException e) {
+            throw new ApiException(500, "Lỗi tra đơn hàng: " + e.getMessage());
+        }
+    }
+
+    private void markGranted(long orderId) {
+        try (Connection c = dataSource.getConnection(); PreparedStatement ps = c.prepareStatement(
+                "UPDATE premium_orders SET status = 'GRANTED' WHERE id = ?")) {
+            ps.setLong(1, orderId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new ApiException(500, "Lỗi cập nhật đơn hàng: " + e.getMessage());
+        }
     }
 
     public List<InventoryEntry> inventory(int playerId) {
