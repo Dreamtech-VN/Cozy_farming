@@ -470,9 +470,17 @@ namespace MyZoo
 
 `ScreenManager` lo bật/tắt screen; `Toast` hiện thông báo ngắn ở đáy màn.
 
-Tạo `ScreenManager.cs` → Add Component vào GameObject `App` → trong Inspector, ô **Screens** gõ Size = số screen rồi kéo từng GameObject S01…S40 vào; ô **Hud** kéo GameObject `HUD` vào. *(Làm bước này sau khi đã tạo đủ screen ở mục 0.5 — chưa có thì để trống, quay lại kéo sau.)*
+Tạo `ScreenManager.cs` → Add Component vào GameObject `App`. Trong Inspector chỉ cần kéo **2 thứ**:
+
+| Ô trong Inspector | Kéo cái gì vào |
+|---|---|
+| **Screens Root** | GameObject `Screens` (cha của tất cả S01…S40) |
+| **Hud** | GameObject `HUD` |
+
+Script tự lấy toàn bộ screen con của `Screens Root` khi chạy — **không phải kéo từng screen một**, và thêm screen mới về sau cũng không cần đụng lại Inspector.
 
 ```csharp
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyZoo
@@ -480,19 +488,38 @@ namespace MyZoo
     public class ScreenManager : MonoBehaviour
     {
         public static ScreenManager I;
-        public GameObject[] screens;   // kéo tất cả S01..S40 vào đây
+
+        [Tooltip("Kéo GameObject 'Screens' (cha của S01..S40) vào đây")]
+        public Transform screensRoot;
+        [Tooltip("Kéo GameObject 'HUD' vào đây")]
         public GameObject hud;
 
-        void Awake() => I = this;
+        readonly List<GameObject> screens = new();
+
+        void Awake()
+        {
+            I = this;
+            // Tự gom mọi screen con — khỏi kéo thả từng cái, thêm screen mới cũng không cần sửa Inspector
+            foreach (Transform child in screensRoot) screens.Add(child.gameObject);
+        }
 
         public void Show(string screenName, bool showHud = false)
         {
-            foreach (var s in screens) s.SetActive(s.name == screenName);
+            bool found = false;
+            foreach (var s in screens)
+            {
+                bool match = s.name == screenName;
+                s.SetActive(match);
+                found |= match;
+            }
+            if (!found) Debug.LogError($"Không tìm thấy screen '{screenName}' — sai tên GameObject?");
             if (hud) hud.SetActive(showHud);
         }
     }
 }
 ```
+
+**Lưu ý:** tên GameObject phải khớp **chính xác** chuỗi truyền vào `Show()` (`S02_Login`, `S10_Farm`…). Gõ sai một ký tự thì màn hình sẽ đen thui — nên script có sẵn dòng `Debug.LogError` báo tên nào không tìm thấy.
 
 Toast: tạo UI → Panel tên `Toast` (anchor giữa-dưới, cao 60, rộng 500), bên trong 1 Text tên `Label`. Gắn script:
 
@@ -1723,7 +1750,7 @@ namespace MyZoo
 
 1. Bật server: `java -jar server/target/myzoo-server-0.1.0-SNAPSHOT.jar`
 2. Trong Unity, chọn GameObject `App` → ô **Base Url** để `http://localhost:8080`
-3. Kéo tất cả screen vào mảng `screens` của `ScreenManager`, kéo `HUD` vào ô `hud`
+3. Chọn GameObject `App` → kéo `Screens` vào ô **Screens Root**, kéo `HUD` vào ô **Hud**
 4. Bấm **Play** — phải thấy Splash → Login. Bấm **Chơi ngay** → chọn server → tạo nhân vật → vào sảnh.
 
 **Checklist nghiệm thu:**
