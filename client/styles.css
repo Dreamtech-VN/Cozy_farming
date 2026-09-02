@@ -20,15 +20,19 @@
   --radius: 14px;
   --safe: env(safe-area-inset-bottom, 0px);
 
-  /* Kính mờ cho khung HUD. Nền game sáng (trời xanh + cỏ) nên lớp kính pha tối
-     và chữ sáng: kính sáng + chữ tối sẽ mất tương phản khi đứng trên nền cỏ. */
-  --glass: rgba(18, 34, 29, .34);
-  --glass-strong: rgba(16, 30, 26, .48);
-  --glass-edge: rgba(255, 255, 255, .42);
-  --glass-blur: blur(16px) saturate(155%);
-  --glass-shadow: 0 10px 26px rgba(0, 0, 0, .34);
-  --glass-ink: #f2f8f3;
-  --glass-ink-soft: rgba(238, 246, 239, .72);
+  /* Kính mờ cho khung HUD.
+     Lớp nền là một gradient tối RẤT nhẹ ở trên, đậm dần xuống dưới: đủ để chữ
+     sáng luôn đọc được dù khung đứng trên trời hay trên cỏ, nhưng không biến
+     mặt kính thành mảng xám đục như bản trước. */
+  --glass-scrim: linear-gradient(165deg, rgba(9, 24, 20, .30) 0%, rgba(9, 22, 19, .56) 100%);
+  --glass-scrim-strong: linear-gradient(165deg, rgba(9, 24, 20, .42) 0%, rgba(9, 22, 19, .66) 100%);
+  --glass-blur: blur(20px) saturate(185%);
+  --glass-edge: rgba(255, 255, 255, .34);
+  /* Bóng kép: một bóng tiếp xúc sát và một bóng toả rộng — chỉ dùng bóng rộng
+     thì khung trông như dán lên màn hình chứ không nổi khỏi nền. */
+  --glass-shadow: 0 2px 5px rgba(0, 0, 0, .26), 0 16px 36px rgba(0, 0, 0, .32);
+  --glass-ink: #ffffff;
+  --glass-ink-soft: rgba(255, 255, 255, .74);
 
   /* Chữ trên badge sao vàng: nền vàng nên vẫn dùng mực nâu đậm cho tương phản. */
   --ink: #4a3120;
@@ -65,7 +69,10 @@ html, body {
 .hud-center { display: flex; align-items: center; gap: 6px; }
 .hud-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
 
-/* ---------- Thông tin nhân vật (kính mờ) ---------- */
+/* ---------- Thông tin nhân vật (kính mờ) ----------
+   Bố cục: chân dung tròn mang badge cấp ở góc, bên phải là tên trên một dòng
+   riêng và thanh XP ở dòng dưới. Bản trước xếp sao, thanh và số cùng một hàng
+   nên ba thứ tranh nhau, không có điểm nhìn. */
 #player-card {
   pointer-events: auto;
   position: relative;
@@ -73,178 +80,173 @@ html, body {
   padding: 0; border: 0; background: none;
   font: inherit; text-align: left; cursor: pointer;
   /* Không đặt filter ở đây: filter trên phần tử cha vô hiệu hoá backdrop-filter
-     của con, kính sẽ không còn nhìn xuyên nền. Bóng đổ nằm ở từng mảnh kính. */
+     của con, kính sẽ không còn nhìn xuyên nền. */
 }
 #player-card:active { transform: translateY(1px); }
 
+/* --- Chân dung --- */
 #player-card .portrait {
   position: relative; z-index: 2; flex: 0 0 auto;
-  width: 88px; height: 88px; border-radius: 50%;
-  background: var(--glass-strong);
+  width: 76px; height: 76px; border-radius: 50%;
+  background: var(--glass-scrim-strong);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border: 1.5px solid var(--glass-edge);
+  padding: 4px;
   box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, .5),
-    inset 0 -2px 6px rgba(0, 0, 0, .22),
+    inset 0 0 0 1px rgba(255, 255, 255, .5),
+    inset 0 2px 0 rgba(255, 255, 255, .55),
     var(--glass-shadow);
   display: grid; place-items: center;
 }
 #player-card canvas {
-  width: 66px; height: 66px; display: block; border-radius: 50%;
-  background: linear-gradient(180deg, #6fc0e8 0%, #a9dcf2 65%, #cfeaf7 100%);
+  width: 100%; height: 100%; display: block; border-radius: 50%;
+  background: linear-gradient(180deg, #7cc9ee 0%, #a9dcf2 62%, #d6eefb 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), inset 0 -6px 12px rgba(11, 52, 74, .22);
 }
 
-/* Vệt sáng chéo — thứ làm bề mặt đọc ra là kính chứ không phải nhựa mờ. */
-#player-card .portrait::after,
+/* Badge cấp gác lên viền chân dung, không chen vào hàng thanh XP nữa. */
+/* Badge nằm gọn trong chiều cao card: thò xuống dưới thì phần đuôi sao bị cắt
+   bởi mép card và trông như lỗi dựng. */
+#player-card .level-star {
+  position: absolute; right: -6px; bottom: 1px;
+  width: 32px; height: 31px;
+  display: grid; place-items: center;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .45));
+}
+#player-card .level-star svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+#player-card .lv-value {
+  position: relative; margin-top: -1px;
+  color: #4a3120; font-size: 12.5px; font-weight: 800; line-height: 1;
+}
+
+/* --- Bảng kính --- */
+#player-card .banner {
+  position: relative; z-index: 1;
+  margin-left: -20px; padding: 10px 18px 11px 30px;
+  min-width: 236px;
+  display: flex; flex-direction: column; gap: 8px;
+  background: var(--glass-scrim);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-radius: 17px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .28),
+    inset 0 1px 0 rgba(255, 255, 255, .5),
+    var(--glass-shadow);
+}
+/* Ánh sáng dội ở mép trên — vệt chéo phủ cả mặt như bản trước làm kính bị đục. */
 #player-card .banner::before,
 #minimap::before,
 #channel-button::before {
   content: ''; position: absolute; inset: 0; border-radius: inherit;
   pointer-events: none;
-  background: linear-gradient(135deg,
-    rgba(255, 255, 255, .40) 0%,
-    rgba(255, 255, 255, .12) 24%,
-    rgba(255, 255, 255, 0) 52%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .26) 0%, rgba(255, 255, 255, 0) 44%);
 }
+#player-card:hover .banner { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), inset 0 1px 0 rgba(255, 255, 255, .6), var(--glass-shadow); }
 
-#player-card .banner {
-  position: relative; z-index: 1;
-  margin-left: -26px; padding: 9px 16px 9px 38px;
-  min-width: 268px;
-  display: flex; flex-direction: column; gap: 7px;
-  background: var(--glass);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 1.5px solid var(--glass-edge);
-  border-radius: 18px;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, .45),
-    inset 0 -1px 0 rgba(255, 255, 255, .12),
-    var(--glass-shadow);
-}
-#player-card:hover .banner,
-#player-card:hover .portrait { border-color: rgba(255, 255, 255, .62); }
-
-#player-card .banner-top { display: flex; align-items: center; overflow: hidden; }
 #player-card .name {
-  color: var(--glass-ink); font-size: 20px; font-weight: 800; line-height: 1.1;
-  letter-spacing: .2px; max-width: 200px;
+  color: var(--glass-ink); font-size: 18px; font-weight: 800; line-height: 1;
+  letter-spacing: .3px; max-width: 214px;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .45);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .34);
 }
 
-#player-card .banner-bottom { display: flex; align-items: center; gap: 9px; }
-
-/* Badge sao giữ màu vàng: một điểm nhấn đục trên nền kính, và là chỗ duy nhất
-   còn dùng mực nâu vì chữ nằm trên nền vàng. */
-#player-card .level-star {
-  position: relative; flex: 0 0 auto;
-  width: 42px; height: 40px;
-  display: grid; place-items: center;
-  margin: 0 2px 0 0;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .38));
-}
-#player-card .level-star svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-#player-card .lv-stack {
-  position: relative; display: flex; flex-direction: column; align-items: center;
-  gap: 1px; margin-top: -2px; color: var(--ink);
-}
-#player-card .lv-text { font-size: 8px; font-weight: 800; line-height: 1; }
-#player-card .lv-value { font-size: 15px; font-weight: 800; line-height: 1; }
+#player-card .banner-bottom { display: flex; align-items: center; gap: 10px; }
 
 #player-card .xp-bar {
-  flex: 1 1 auto; min-width: 62px; height: 17px;
+  flex: 1 1 auto; min-width: 70px; height: 10px;
   border-radius: 999px;
-  background: rgba(0, 0, 0, .32);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(255, 255, 255, .18);
+  /* Rãnh sáng mờ chứ không phải hố đen: nền tối đặc làm thanh trông rỗng khi
+     tiến độ còn ít. */
+  background: rgba(255, 255, 255, .16);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .38), inset 0 0 0 1px rgba(255, 255, 255, .2);
   overflow: hidden;
 }
 #player-card .xp-fill {
   display: block; height: 100%; width: 0%;
   border-radius: 999px;
-  background: linear-gradient(180deg, #9ada4f 0%, #74c236 55%, #5da82c 100%);
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .45);
+  background: linear-gradient(180deg, #b6f06a 0%, #7fd23c 52%, #58ad24 100%);
+  /* Quầng sáng để phần đã đầy vẫn thấy rõ khi tiến độ còn ít. */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 0 8px rgba(140, 226, 84, .75);
   transition: width .3s ease;
 }
 #player-card .xp-text {
   flex: 0 0 auto; color: var(--glass-ink-soft);
-  font-size: 13.5px; font-weight: 800; line-height: 1; white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+  font-size: 12px; font-weight: 700; line-height: 1;
+  letter-spacing: .2px; white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .38);
 }
 
 /* ---------- Minimap + chọn khu ---------- */
-/* Khung minimap dạng kính: nền mờ nhìn xuyên, viền sáng mảnh, vệt sáng chéo.
-   Không dùng filter trên #minimap vì nó sẽ vô hiệu hoá backdrop-filter của chính nó. */
+/* Khung minimap dạng kính: viền mảnh, nhãn là chip nhỏ nằm TRONG khung.
+   Biển tên treo lủng lẳng dưới đáy như bản trước làm khối bị lệch và đè lên nút
+   chuyển khu. */
 #minimap {
   pointer-events: auto;
   position: relative; display: block;
-  padding: 11px;
-  background: var(--glass);
+  padding: 7px;
+  background: var(--glass-scrim);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border: 1.5px solid var(--glass-edge);
-  border-radius: 20px;
+  border-radius: 16px;
   cursor: pointer; overflow: visible;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, .45),
-    inset 0 -1px 0 rgba(255, 255, 255, .12),
+    inset 0 0 0 1px rgba(255, 255, 255, .28),
+    inset 0 1px 0 rgba(255, 255, 255, .5),
     var(--glass-shadow);
 }
-#minimap:hover { border-color: rgba(255, 255, 255, .62); }
+#minimap:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), inset 0 1px 0 rgba(255, 255, 255, .6), var(--glass-shadow); }
 #minimap:active { transform: translateY(1px); }
 
-/* Miệng khung: viền kính mảnh, bóng hắt vào trong cho vùng bản đồ trông lõm. */
 .minimap-frame {
   position: relative; display: block;
-  border-radius: 11px;
+  border-radius: 10px; overflow: hidden;
   box-shadow:
-    0 0 0 1.5px rgba(255, 255, 255, .34),
-    inset 0 3px 8px rgba(0, 0, 0, .4);
+    0 0 0 1px rgba(255, 255, 255, .3),
+    inset 0 2px 6px rgba(0, 0, 0, .35);
 }
-.minimap-frame canvas { border-radius: 11px; }
-/* Biển tên gác lên khung nên phải nằm ở lớp ngoài, không bị .minimap-frame cắt. */
-#minimap > .minimap-label { z-index: 3; }
-#minimap canvas { display: block; width: 184px; height: 78px; }
+#minimap canvas { display: block; width: 184px; height: 78px; border-radius: 10px; }
 
-/* Tên khu vực là một viên kính nhỏ gác lên cạnh dưới khung, thay cho dải tối
-   phủ ngang bản đồ — dải đó che mất phần đất phía dưới. */
 .minimap-label {
-  position: absolute; left: 50%; bottom: -12px;
-  transform: translateX(-50%);
-  max-width: calc(100% + 16px);
-  padding: 3px 14px;
-  font-size: 11.5px; font-weight: 800; color: var(--glass-ink);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
-  background: var(--glass-strong);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 1.5px solid var(--glass-edge); border-radius: 999px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), var(--glass-shadow);
+  position: absolute; left: 13px; top: 13px; z-index: 3;
+  max-width: calc(100% - 26px);
+  padding: 2px 9px;
+  font-size: 10.5px; font-weight: 800; letter-spacing: .2px;
+  color: var(--glass-ink);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .6);
+  background: rgba(9, 22, 19, .5);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
 /* Nút chuyển khu — cùng chất kính với các khung HUD khác. */
 #channel-button {
   pointer-events: auto; position: relative;
-  display: inline-flex; align-items: center; gap: 7px;
-  min-height: 34px; padding: 0 13px;
-  background: var(--glass);
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 32px; padding: 0 6px 0 13px;
+  background: var(--glass-scrim);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border: 1.5px solid var(--glass-edge); border-radius: 999px;
+  border: 0; border-radius: 999px;
   color: var(--glass-ink); font: inherit; font-weight: 800; cursor: pointer;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), var(--glass-shadow);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .28),
+    inset 0 1px 0 rgba(255, 255, 255, .5),
+    var(--glass-shadow);
 }
-#channel-button:hover { border-color: rgba(255, 255, 255, .62); }
+#channel-button:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), inset 0 1px 0 rgba(255, 255, 255, .6), var(--glass-shadow); }
 #channel-button:active { transform: translateY(1px); }
 #channel-button[disabled] { opacity: .6; cursor: default; }
 .channel-label { font-size: 12px; font-weight: 800; color: var(--glass-ink-soft); }
 .channel-value { font-size: 15px; font-weight: 800; }
 .channel-load {
-  font-size: 11.5px; font-weight: 700; color: var(--glass-ink-soft);
-  background: rgba(0, 0, 0, .26); border-radius: 999px; padding: 2px 7px;
+  font-size: 11px; font-weight: 700; color: var(--glass-ink-soft);
+  background: rgba(0, 0, 0, .34); border-radius: 999px; padding: 3px 8px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
 }
 .channel-caret { width: 11px; height: 8px; color: rgba(255, 255, 255, .75); }
 
@@ -272,22 +274,43 @@ html, body {
 
 /* ---------- Pill chung (tiền tệ, nhãn) ---------- */
 .pill {
-  background: var(--glass);
+  background: var(--glass-scrim);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border: 1.5px solid var(--glass-edge);
+  border: 0;
   border-radius: 999px;
-  padding: 6px 13px;
-  font-size: 13px;
-  font-weight: 700;
+  padding: 5px 14px 5px 5px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .2px;
   color: var(--glass-ink);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), var(--glass-shadow);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .28),
+    inset 0 1px 0 rgba(255, 255, 255, .5),
+    var(--glass-shadow);
 }
-.currency { display: inline-flex; align-items: center; gap: 6px; }
-.dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
-.dot.coin { background: var(--accent-2); }
-.dot.gem { background: #7ad3f0; }
+.currency { display: inline-flex; align-items: center; gap: 8px; }
+
+/* Xu và ngọc vẽ thành hai vật thể khác chất, không phải hai chấm tròn đổi màu. */
+.dot { width: 22px; height: 22px; display: inline-block; flex: 0 0 auto; }
+.dot.coin {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, #fff5c2 0 18%, transparent 19%),
+    linear-gradient(160deg, #ffe071 0%, #f2b52c 52%, #c9821a 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 236, 160, .85),
+    inset 0 -2px 3px rgba(140, 88, 12, .5),
+    0 1px 3px rgba(0, 0, 0, .4);
+}
+.dot.gem {
+  /* clip-path cắt hình viên đá nhiều mặt; gradient chéo tạo mặt cắt sáng tối. */
+  clip-path: polygon(50% 0%, 100% 36%, 78% 100%, 22% 100%, 0% 36%);
+  background:
+    linear-gradient(115deg, #eafcff 0 26%, #7ad3f0 26% 55%, #2f9fc9 55% 100%);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .45));
+}
 
 /* ---------- Toolbar ---------- */
 /* Một hàng duy nhất ở đáy màn hình ngang; cuộn ngang nếu cửa sổ quá hẹp. */

@@ -3,6 +3,23 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.10 — 2026-09-02
+
+### Thay đổi
+- **Dựng lại bố cục cụm thông tin nhân vật.** Badge cấp chuyển lên gác vào viền
+  chân dung; tên đứng riêng một dòng, thanh XP và số nằm dòng dưới. Bản trước xếp
+  sao, thanh và số cùng một hàng nên ba thứ tranh chỗ, không có điểm nhìn.
+- **Chất kính làm lại**: nền là gradient tối rất nhẹ ở trên đậm dần xuống dưới
+  thay cho một lớp phủ đục đều; ánh sáng dội gom về mép trên thay cho vệt chéo
+  phủ cả mặt; bóng kép (một bóng tiếp xúc sát + một bóng toả rộng) để khung nổi
+  khỏi nền thay vì như dán lên màn hình.
+- **Xu và ngọc vẽ thành hai vật thể khác chất** — xu tròn có highlight và vành
+  sáng, ngọc cắt `clip-path` nhiều mặt — thay cho hai chấm tròn chỉ khác màu.
+- **Nhãn tên khu vực** thành chip nhỏ nằm trong khung minimap; biển treo dưới đáy
+  ở bản trước làm khối bị lệch và đè lên nút chuyển khu.
+- Rãnh thanh XP dùng nền sáng mờ thay vì nền tối đặc — nền tối làm thanh trông
+  rỗng khi tiến độ còn ít.
+
 ## 0.1.9 — 2026-09-02
 
 ### Thay đổi

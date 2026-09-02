@@ -14,29 +14,30 @@
 
     <!-- HUD (doc 12 — world là trung tâm, UI là overlay) -->
     <header id="hud" class="hidden">
-      <!-- Trái: thông tin nhân vật (khung gỗ, nền giấy) -->
+      <!-- Trái: thông tin nhân vật -->
       <div class="hud-left">
         <button id="player-card" type="button" aria-label="Mở thông tin nhân vật">
           <span class="portrait">
             <canvas id="avatar-portrait" width="176" height="176"></canvas>
+            <span class="level-star">
+              <svg viewBox="0 0 48 46" aria-hidden="true">
+                <path d="M24 2l6.2 15.5 16.6 1.1L34 29.4l4.1 16.1L24 36.4 9.9 45.5 14 29.4 1.2 18.6l16.6-1.1z"
+                      fill="url(#starFill)" stroke="#b8791a" stroke-width="2.6" stroke-linejoin="round"/>
+                <defs>
+                  <linearGradient id="starFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#ffe98a"/>
+                    <stop offset="0.55" stop-color="#f9c93f"/>
+                    <stop offset="1" stop-color="#e8a218"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <span class="lv-value" id="hud-level">1</span>
+            </span>
           </span>
 
           <span class="banner">
-            <span class="banner-top">
-              <span class="name" id="hud-name">—</span>
-            </span>
-
+            <span class="name" id="hud-name">—</span>
             <span class="banner-bottom">
-              <span class="level-star">
-                <svg viewBox="0 0 48 46" aria-hidden="true">
-                  <path d="M24 2l6.2 15.5 16.6 1.1L34 29.4l4.1 16.1L24 36.4 9.9 45.5 14 29.4 1.2 18.6l16.6-1.1z"
-                        fill="#f7cf4f" stroke="#c68d20" stroke-width="2.4" stroke-linejoin="round"/>
-                </svg>
-                <span class="lv-stack">
-                  <span class="lv-text">Lv.</span>
-                  <span class="lv-value" id="hud-level">1</span>
-                </span>
-              </span>
               <span class="xp-bar"><span class="xp-fill" id="hud-xp-fill"></span></span>
               <span class="xp-text" id="hud-xp">0 / 0</span>
             </span>
