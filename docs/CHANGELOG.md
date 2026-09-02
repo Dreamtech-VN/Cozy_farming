@@ -3,6 +3,23 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.4 — 2026-09-02
+
+### Thay đổi
+- **Vẽ lại cụm thông tin nhân vật theo bản UI được duyệt**: khung gỗ nâu, nền
+  giấy kem, chân dung tròn viền gỗ trên nền trời, dây lá trang trí cạnh tên,
+  badge sao vàng mang cấp độ, thanh XP xanh trên rãnh gỗ.
+- Cụm thông tin nhân vật trở lại **góc trên trái**; minimap và dropdown chuyển khu
+  dời sang **góc trên phải**. Tiền tệ vẫn ở giữa.
+- Chân dung lấy cả phần vai thay vì cắt ngay dưới cằm; khuôn mặt avatar thêm
+  miệng và má hồng vì chân dung phóng khá to.
+- Số XP bỏ dấu phân cách ngàn: "529 / 9016" thay vì "529 / 9.016" — dạng cũ dễ bị
+  đọc nhầm thành số thập phân.
+
+### Sửa lỗi
+- Style `.pill` / `.dot` bị xoá nhầm khi thay khối CSS, làm hai ô tiền tệ ở giữa
+  HUD mất khung và mất chấm màu.
+
 ## 0.1.3 — 2026-09-02
 
 ### Thêm mới

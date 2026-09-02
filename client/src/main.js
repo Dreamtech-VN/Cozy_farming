@@ -235,7 +235,8 @@ class Game {
     document.getElementById('hud-xp-fill').style.width = `${progress.ratio * 100}%`;
     document.getElementById('hud-xp').textContent = progress.maxed
       ? 'Cấp tối đa'
-      : `${formatNumber(progress.current)} / ${formatNumber(progress.needed)} XP`;
+      // Không dùng dấu phân cách ngàn ở đây: "529 / 9.016" dễ bị đọc thành số thập phân.
+      : `${Math.round(progress.current)} / ${Math.round(progress.needed)}`;
 
     drawAvatarPortrait(document.getElementById('avatar-portrait'), this.content, {
       equipment: profile.equipment,

@@ -86,6 +86,21 @@ export function drawAvatar(ctx, content, { equipment, palette = null, facing = 1
   ctx.ellipse(-2, y - 76, 2.4, 3.2, 0, 0, Math.PI * 2);
   ctx.fill();
 
+  // Má hồng + miệng: chân dung trên HUD phóng khuôn mặt khá to, chỉ hai chấm mắt
+  // thì trông trơ.
+  ctx.fillStyle = 'rgba(224, 122, 122, .35)';
+  ctx.beginPath();
+  ctx.ellipse(9, y - 70, 3.6, 2.4, 0, 0, Math.PI * 2);
+  ctx.ellipse(-5, y - 70, 3.6, 2.4, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = eyes;
+  ctx.lineWidth = 1.4;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.arc(2, y - 70, 4.2, Math.PI * 0.15, Math.PI * 0.85);
+  ctx.stroke();
+
   // Tóc — vẽ sau đầu để không bị đè
   ctx.fillStyle = hair;
   ctx.beginPath();
@@ -173,9 +188,10 @@ export function drawAvatarPortrait(canvas, content, options) {
   ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
   ctx.clip();
 
-  // Avatar vẽ với gốc toạ độ ở chân; đưa vùng đầu–vai (y từ -100 đến -54) lấp đầy khung.
-  const zoom = size / 46;
-  ctx.translate(size / 2, zoom * 100);
+  // Avatar vẽ với gốc toạ độ ở chân; đưa vùng đầu–vai (y từ -106 đến -42) lấp đầy
+  // khung. Cắt cao hơn thì mất vai, chỉ còn cái đầu lơ lửng.
+  const zoom = size / 64;
+  ctx.translate(size / 2, zoom * 106);
   ctx.scale(zoom, zoom);
   drawAvatar(ctx, content, { ...options, facing: 1, state: 'idle', phase: 0, nickname: null, emote: null });
   ctx.restore();

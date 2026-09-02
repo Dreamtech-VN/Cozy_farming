@@ -19,6 +19,15 @@
   --danger: #e0576f;
   --radius: 14px;
   --safe: env(safe-area-inset-bottom, 0px);
+
+  /* Tone gỗ/giấy cho cụm thông tin nhân vật */
+  --wood: #b98a55;
+  --wood-dark: #8a6134;
+  --wood-light: #e2c79c;
+  --paper: #ecdcbd;
+  --paper-light: #f7ecd6;
+  --ink: #4a3120;
+  --ink-soft: #6b4c30;
   color-scheme: dark;
 }
 
@@ -48,9 +57,9 @@ html, body {
   padding: calc(8px + env(safe-area-inset-top, 0px)) 10px 8px;
   pointer-events: none;
 }
-.hud-left { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.hud-left { display: flex; align-items: flex-start; }
 .hud-center { display: flex; align-items: center; gap: 6px; }
-.hud-right { display: flex; align-items: flex-start; gap: 6px; }
+.hud-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 
 /* ---------- Minimap + chọn khu ---------- */
 #minimap {
@@ -89,51 +98,100 @@ html, body {
 }
 .channel-picker select:disabled { opacity: .5; cursor: not-allowed; }
 
-/* ---------- Góc thông tin nhân vật ---------- */
+/* ---------- Thông tin nhân vật (khung gỗ, nền giấy) ----------
+   Tone riêng so với phần còn lại của HUD: khung gỗ nâu, nền giấy kem, chữ nâu
+   đậm — theo bản UI được duyệt cho cụm này. */
 #player-card {
   pointer-events: auto;
-  display: flex; align-items: center; gap: 10px;
-  padding: 6px 14px 6px 6px;
-  background: rgba(16, 26, 22, .82);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--text); font: inherit; text-align: left; cursor: pointer;
-  backdrop-filter: blur(4px);
+  position: relative;
+  display: flex; align-items: center;
+  padding: 0; border: 0; background: none;
+  font: inherit; text-align: left; cursor: pointer;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .35));
 }
-#player-card:hover { border-color: var(--accent); }
 #player-card:active { transform: translateY(1px); }
 
-#player-card .portrait { position: relative; flex: 0 0 auto; display: block; }
-#player-card canvas {
-  width: 46px; height: 46px; display: block;
-  border-radius: 50%;
-  background: linear-gradient(160deg, #3d6152, #24382f);
-  border: 1px solid var(--line);
+/* --- Chân dung tròn viền gỗ --- */
+#player-card .portrait {
+  position: relative; z-index: 2; flex: 0 0 auto;
+  width: 78px; height: 78px; border-radius: 50%;
+  background: var(--wood);
+  border: 3px solid var(--wood-dark);
+  box-shadow: inset 0 0 0 3px var(--wood-light), 0 2px 0 rgba(0, 0, 0, .18);
+  display: grid; place-items: center;
 }
-#player-card .level-badge {
-  position: absolute; right: -3px; bottom: -3px;
-  min-width: 20px; height: 20px; padding: 0 4px;
-  border-radius: 999px;
-  background: var(--accent-2); color: #2a2107;
-  font-size: 11px; font-weight: 700; line-height: 20px; text-align: center;
-  border: 2px solid var(--panel);
+#player-card canvas {
+  width: 62px; height: 62px; display: block; border-radius: 50%;
+  /* Nền trời trong khung chân dung, giống ảnh thẻ nhân vật. */
+  background: linear-gradient(180deg, #6fc0e8 0%, #a9dcf2 65%, #cfeaf7 100%);
+}
+#player-card .portrait-leaves {
+  position: absolute; left: -14px; bottom: -4px;
+  width: 40px; height: 25px; pointer-events: none;
 }
 
-#player-card .identity { display: flex; flex-direction: column; gap: 3px; min-width: 92px; }
-#player-card .name {
-  font-size: 13.5px; font-weight: 700; line-height: 1.1;
-  max-width: 148px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+/* --- Bảng giấy --- */
+#player-card .banner {
+  position: relative; z-index: 1;
+  margin-left: -22px; padding: 7px 14px 7px 32px;
+  min-width: 236px;
+  display: flex; flex-direction: column; gap: 5px;
+  background: linear-gradient(180deg, var(--paper-light), var(--paper));
+  border: 3px solid var(--wood-dark);
+  border-radius: 16px;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .55), inset 0 -2px 0 rgba(0, 0, 0, .06);
 }
+#player-card:hover .banner { border-color: var(--wood); }
+
+#player-card .banner-top { display: flex; align-items: center; gap: 8px; overflow: hidden; }
+#player-card .name {
+  color: var(--ink); font-size: 17px; font-weight: 800; line-height: 1.1;
+  letter-spacing: .2px; max-width: 168px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#player-card .vine { flex: 1 1 auto; min-width: 0; height: 22px; opacity: .95; }
+
+#player-card .banner-bottom { display: flex; align-items: center; gap: 9px; }
+
+/* --- Badge sao vàng --- */
+#player-card .level-star {
+  position: relative; flex: 0 0 auto;
+  width: 37px; height: 35px;
+  display: grid; place-items: center;
+  margin: 0 2px 0 0;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .25));
+}
+#player-card .level-star svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* Chữ "Lv." và số xếp chồng, dịch lên một chút cho khớp thân sao (đỉnh sao nhọn
+   nên tâm hình học nằm thấp hơn tâm thị giác). */
+#player-card .lv-stack {
+  position: relative; display: flex; flex-direction: column; align-items: center;
+  gap: 1px; margin-top: -2px; color: var(--ink);
+}
+#player-card .lv-text { font-size: 7.5px; font-weight: 800; line-height: 1; }
+#player-card .lv-value { font-size: 13px; font-weight: 800; line-height: 1; }
+
+/* --- Thanh kinh nghiệm --- */
 #player-card .xp-bar {
-  display: block; width: 100%; height: 5px; border-radius: 999px;
-  background: rgba(255, 255, 255, .14); overflow: hidden;
+  flex: 1 1 auto; min-width: 62px; height: 15px;
+  border-radius: 999px;
+  background: #7b5c3d;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, .35);
+  overflow: hidden;
 }
 #player-card .xp-fill {
   display: block; height: 100%; width: 0%;
-  background: linear-gradient(90deg, var(--accent), #b6e6ac);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #9ada4f 0%, #74c236 55%, #5da82c 100%);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .45);
   transition: width .3s ease;
 }
-#player-card .xp-text { font-size: 10.5px; color: var(--muted); line-height: 1; }
+#player-card .xp-text {
+  flex: 0 0 auto; color: var(--ink-soft);
+  font-size: 12.5px; font-weight: 700; line-height: 1; white-space: nowrap;
+}
+
+/* ---------- Pill chung (tiền tệ, nhãn) ---------- */
 .pill {
   background: rgba(16, 26, 22, .78);
   border: 1px solid var(--line);
@@ -147,7 +205,6 @@ html, body {
 .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
 .dot.coin { background: var(--accent-2); }
 .dot.gem { background: #7ad3f0; }
-.dot.energy { background: #ff9c5b; }
 
 /* ---------- Toolbar ---------- */
 /* Một hàng duy nhất ở đáy màn hình ngang; cuộn ngang nếu cửa sổ quá hẹp. */
@@ -316,8 +373,10 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
   #toolbar button { min-height: 38px; min-width: 76px; font-size: 13px; }
   .pill { padding: 4px 9px; font-size: 12px; }
   #hud { padding: 6px 8px; }
-  #player-card { padding: 4px 11px 4px 4px; gap: 8px; }
-  #player-card canvas { width: 38px; height: 38px; }
-  #player-card .xp-text { display: none; }
+  #player-card .portrait { width: 62px; height: 62px; }
+  #player-card canvas { width: 48px; height: 48px; }
+  #player-card .banner { min-width: 200px; padding: 5px 11px 5px 28px; }
+  #player-card .name { font-size: 15px; max-width: 132px; }
+  #player-card .vine { display: none; }
   #minimap canvas { width: 148px; height: 62px; }
 }
