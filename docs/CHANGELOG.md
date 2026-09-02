@@ -3,6 +3,25 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.7 — 2026-09-02
+
+### Thêm mới
+- **`client/assets/ui/frame-wood.svg`**: asset khung gỗ dùng qua CSS `border-image`
+  (9-slice). Vân gỗ bằng `feTurbulence` cộng các đường đồng tâm, gờ vát sáng ngoài
+  và tối trong, góc bo. Co giãn ở mọi kích thước mà không méo góc.
+- **`client/assets/ui/vine-corner.svg`**: cụm dây lá cho góc khung — thân dây có
+  tua cuốn, lá có gân giữa, một hoa lớn và một hoa nhỏ lệch nhịp. Góc dưới-phải
+  dùng lại chính file này, xoay 180° bằng CSS.
+
+### Thay đổi
+- Khung minimap chuyển từ xếp chồng `box-shadow` sang dùng hai asset trên.
+- Tên khu vực thành biển gỗ nhỏ gác lên cạnh dưới khung, thay cho dải tối phủ
+  ngang bản đồ (dải đó che mất phần đất phía dưới).
+
+### Ghi chú
+Phiên làm việc này không có công cụ sinh ảnh AI. Asset được dựng bằng SVG viết
+tay; khoảng cách còn lại so với bản UI tham chiếu là chất liệu vẽ tay, cần hoạ sĩ.
+
 ## 0.1.6 — 2026-09-02
 
 ### Thay đổi

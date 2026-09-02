@@ -66,48 +66,50 @@ html, body {
 /* ---------- Minimap + chọn khu ---------- */
 /* Khung minimap: khung gỗ hai lớp + dây lá ở hai góc đối nhau.
    overflow phải là visible để dây lá tràn ra ngoài khung như bản UI. */
+/* Khung minimap dùng asset gỗ 9-slice (client/assets/ui/frame-wood.svg):
+   vân gỗ, gờ vát và khắc lõm nằm trong asset nên khung không phụ thuộc vào việc
+   xếp chồng box-shadow, và co giãn ở mọi kích thước mà không méo góc.
+   repeat: stretch để vân gỗ liền mạch; tile (round) làm lộ mối nối dọc cạnh. */
 #minimap {
   pointer-events: auto;
   position: relative; display: block;
-  padding: 9px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, .38), rgba(0, 0, 0, .12)),
-    linear-gradient(135deg, var(--wood-light), var(--wood) 42%, var(--wood-dark));
-  border: 4px solid var(--wood-dark);
-  border-radius: 20px;
+  padding: 0;
+  background: none;
+  border: 17px solid transparent;
+  border-image: url('/assets/ui/frame-wood.svg') 40 / 17px / 0 stretch;
   cursor: pointer; overflow: visible;
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, .45),
-    inset 0 -3px 0 rgba(90, 62, 32, .35),
-    0 5px 14px rgba(0, 0, 0, .38);
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, .42));
 }
-#minimap:hover { border-color: var(--wood); }
 #minimap:active { transform: translateY(1px); }
 
-/* Lớp trong: gờ gỗ sáng ôm lấy vùng bản đồ. */
 .minimap-frame {
   position: relative; display: block;
-  border-radius: 12px; overflow: hidden;
-  border: 2px solid var(--wood-dark);
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .32);
+  border-radius: 5px; overflow: hidden;
 }
+/* Biển tên gác lên khung nên phải nằm ở lớp ngoài, không bị .minimap-frame cắt. */
+#minimap > .minimap-label { z-index: 3; }
 #minimap canvas { display: block; width: 184px; height: 78px; }
 
+/* Tên khu vực làm thành biển gỗ nhỏ gác lên cạnh dưới của khung, thay cho dải
+   tối phủ ngang bản đồ — dải đó che mất phần đất phía dưới. */
 .minimap-label {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  padding: 3px 8px; font-size: 11.5px; font-weight: 700;
-  color: #fff8e6;
-  background: linear-gradient(180deg, transparent, rgba(58, 40, 22, .88) 55%);
-  text-align: left;
+  position: absolute; left: 50%; bottom: -13px;
+  transform: translateX(-50%);
+  max-width: calc(100% + 16px);
+  padding: 3px 14px;
+  font-size: 11.5px; font-weight: 800; color: var(--ink);
+  background: linear-gradient(180deg, var(--paper-light), var(--paper));
+  border: 2.5px solid var(--wood-dark); border-radius: 999px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 2px 4px rgba(0, 0, 0, .3);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
 .corner-vine {
-  position: absolute; width: 52px; height: 52px; pointer-events: none;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .3));
+  position: absolute; width: 58px; height: 58px; pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .32));
 }
-.corner-vine.tl { top: -15px; left: -15px; }
-.corner-vine.br { bottom: -15px; right: -15px; transform: rotate(180deg); }
+.corner-vine.tl { top: -19px; left: -19px; }
+.corner-vine.br { bottom: -19px; right: -19px; transform: rotate(180deg); }
 
 /* Nút chuyển khu — cùng tone gỗ/giấy với cụm thông tin nhân vật. */
 #channel-button {
@@ -445,8 +447,10 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
   #player-card .banner { min-width: 200px; padding: 5px 11px 5px 28px; }
   #player-card .name { font-size: 15px; max-width: 132px; }
   #player-card .vine { display: none; }
-  #minimap { padding: 7px; }
+  #minimap { border-width: 14px; border-image-width: 14px; }
   #minimap canvas { width: 150px; height: 64px; }
-  .corner-vine { width: 42px; height: 42px; }
+  .corner-vine { width: 46px; height: 46px; }
+  .corner-vine.tl { top: -15px; left: -15px; }
+  .corner-vine.br { bottom: -15px; right: -15px; }
   #channel-button { min-height: 30px; padding: 0 9px; }
 }
