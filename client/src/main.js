@@ -12,7 +12,7 @@ import { levelProgress } from './core/progression.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
-import { openQuests, openInventory, openFarm, openSocial, openChat, openProfile, openShop, harvest, openAreaMap, energyLine } from './ui/panels.js';
+import { openQuests, openInventory, openFarm, openSocial, openChat, openProfile, openShop, harvest, openAreaMap, openChannelPicker, energyLine } from './ui/panels.js';
 import { drawAreaMap } from './ui/minimap.js';
 
 const GRAVITY = 1800;
@@ -98,17 +98,10 @@ class Game {
       openAreaMap(this);
     });
 
-    // Chuyển khu: vào lại đúng map hiện tại nhưng ở instance khác.
-    document.getElementById('channel-select').addEventListener('change', async (event) => {
-      const channel = Number(event.target.value);
-      if (!this.currentMap || channel === this.channel) return;
-      try {
-        await this.enterMap(this.currentMap.map_id, 'spawn_default', channel);
-        toast(`Đã chuyển sang khu ${channel}`, 'good');
-      } catch (err) {
-        toast(err.message, 'bad');
-        event.target.value = String(this.channel);
-      }
+    // Chuyển khu: mở lưới chọn khu kèm sĩ số từng khu.
+    document.getElementById('channel-button').addEventListener('click', () => {
+      closePanel();
+      openChannelPicker(this);
     });
 
     // Chạm vào ô đất trong nông trại để thu hoạch nhanh (doc 12 — một hành động chính).
@@ -186,7 +179,13 @@ class Game {
 
     await this.enterMap(profile.position.map_id, 'spawn_default');
     this.#updateHud();
-    if (!this.running) { this.running = true; this.#loop(); }
+    if (!this.running) {
+      this.running = true;
+      this.#loop();
+      // Sĩ số khu đổi khi người khác ra vào, nên làm mới định kỳ thay vì chỉ đọc
+      // một lần lúc vào map.
+      setInterval(() => this.#refreshChannels().catch(() => {}), 15_000);
+    }
   }
 
   async enterMap(mapId, spawnId = 'spawn_default', channel = 1) {
@@ -247,33 +246,30 @@ class Game {
     document.getElementById('hud-gem').lastElementChild.textContent = formatNumber(profile.wallet.gem ?? 0);
   }
 
-  /** Dropdown chuyển khu: 1..N lấy từ content, kèm sĩ số hiện tại của từng khu. */
+  /** Nút chuyển khu trên HUD: hiện khu hiện tại và sĩ số của nó. */
   async #refreshChannels() {
-    const select = document.getElementById('channel-select');
+    const button = document.getElementById('channel-button');
     const map = this.currentMap;
     if (!map) return;
 
     // Map private (nông trại, nhà) không chia khu.
     if (map.instance_policy === 'owner') {
-      select.replaceChildren(new Option('riêng', '0'));
-      select.disabled = true;
+      button.disabled = true;
+      document.getElementById('channel-value').textContent = 'riêng';
+      document.getElementById('channel-load').textContent = 'chỉ mình bạn';
       return;
     }
 
-    select.disabled = false;
-    let channels = null;
+    button.disabled = false;
+    document.getElementById('channel-value').textContent = String(this.channel);
     try {
-      channels = (await this.api.get(`/v1/maps/${map.map_id}/channels`)).channels;
-    } catch { /* mất mạng thì vẫn dựng danh sách khu, chỉ thiếu sĩ số */ }
-
-    const count = this.content.channel_count ?? 20;
-    select.replaceChildren(...Array.from({ length: count }, (_, index) => {
-      const channel = index + 1;
-      const info = channels?.find((c) => c.channel === channel);
-      const label = info ? `${channel}  ·  ${info.players}/${info.capacity}` : String(channel);
-      return new Option(label, String(channel));
-    }));
-    select.value = String(this.channel);
+      const { channels } = await this.api.get(`/v1/maps/${map.map_id}/channels`);
+      const info = channels.find((c) => c.channel === this.channel);
+      document.getElementById('channel-load').textContent = info ? `${info.players}/${info.capacity}` : '';
+    } catch {
+      // Mất mạng thì vẫn hiện số khu, chỉ thiếu sĩ số.
+      document.getElementById('channel-load').textContent = '';
+    }
   }
 
   #drawMinimap() {

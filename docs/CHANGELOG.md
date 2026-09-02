@@ -3,6 +3,18 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.5 — 2026-09-02
+
+### Thay đổi
+- **Card nhân vật bám sát bản UI hơn**: viền gỗ hai tông có vệt sáng, bảng giấy
+  cao hơn và có vân, tên to hơn, dây lá kéo dài hết chiều ngang, sao cấp độ lớn hơn.
+- **Vẽ lại UI chuyển khu**: thay `<select>` bằng nút gỗ hiện khu hiện tại và sĩ số,
+  bấm vào mở lưới 20 khu — mỗi ô có số người, thanh mức đông (xanh/vàng/đỏ), khu
+  đầy bị khoá, khu đang đứng được đánh dấu. Dropdown cũ không nhét vừa những
+  thông tin này vào một dòng `<option>`.
+- Ở map riêng (nông trại), nút khu hiện "riêng · chỉ mình bạn" và bị khoá.
+- Sĩ số trên nút khu làm mới mỗi 15 giây thay vì chỉ đọc một lần lúc vào map.
+
 ## 0.1.4 — 2026-09-02
 
 ### Thay đổi

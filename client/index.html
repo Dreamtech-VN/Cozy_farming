@@ -80,10 +80,14 @@
           <canvas id="minimap-canvas" width="360" height="150"></canvas>
           <span class="minimap-label" id="hud-map">—</span>
         </button>
-        <label class="channel-picker">
+        <button id="channel-button" type="button" aria-label="Chuyển khu">
           <span class="channel-label">Khu</span>
-          <select id="channel-select" aria-label="Chuyển khu"></select>
-        </label>
+          <span class="channel-value" id="channel-value">1</span>
+          <span class="channel-load" id="channel-load">0/40</span>
+          <svg class="channel-caret" viewBox="0 0 12 8" aria-hidden="true">
+            <path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </div>
     </header>
 

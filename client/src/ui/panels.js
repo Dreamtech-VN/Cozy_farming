@@ -285,6 +285,59 @@ export function openWorldAtlas(game) {
   });
 }
 
+/**
+ * Chọn khu (doc 03/16). Dùng lưới thay cho dropdown: 20 lựa chọn kèm sĩ số và
+ * mức đông — thông tin này không nhét vừa một thẻ <option> để đọc nhanh được.
+ */
+export function openChannelPicker(game) {
+  const map = game.currentMap;
+  if (!map || map.instance_policy === 'owner') return;
+
+  showPanel('Chọn khu', async (body, rerender) => {
+    body.append(emptyState('Đang tải…'));
+    let data;
+    try {
+      data = await game.api.get(`/v1/maps/${map.map_id}/channels`);
+    } catch (err) {
+      body.replaceChildren(emptyState(err.message));
+      return;
+    }
+    body.replaceChildren();
+
+    body.append(el('p', { class: 'sub', style: 'margin:0 0 10px', text: `${t(map.name_key)} — mỗi khu là một bản sao riêng của khu vực, sức chứa ${map.player_capacity} người.` }));
+
+    const grid = el('div', { class: 'channel-grid' });
+    for (const info of data.channels) {
+      const ratio = info.capacity > 0 ? info.players / info.capacity : 0;
+      const full = info.players >= info.capacity;
+      const current = info.channel === game.channel;
+      const color = ratio >= 1 ? '#e0576f' : ratio >= 0.7 ? '#e0a33f' : '#7fc98a';
+
+      grid.append(el('button', {
+        class: 'channel-tile', type: 'button',
+        'aria-current': current ? 'true' : 'false',
+        disabled: full && !current,
+        onClick: async () => {
+          if (current) { closePanel(); return; }
+          try {
+            await game.enterMap(map.map_id, 'spawn_default', info.channel);
+            toast(`Đã chuyển sang khu ${info.channel}`, 'good');
+            closePanel();
+          } catch (err) {
+            toast(err.message, 'bad');
+            rerender();
+          }
+        },
+      }, [
+        el('span', { class: 'n', text: `Khu ${info.channel}` }),
+        el('span', { class: 'load' }, [el('i', { style: `width:${Math.min(100, ratio * 100)}%;background:${color}` })]),
+        el('span', { class: 'count', text: current ? `${info.players}/${info.capacity} · ở đây` : `${info.players}/${info.capacity}` }),
+      ]));
+    }
+    body.append(grid);
+  });
+}
+
 export function openSocial(game) {
   showPanel('Bạn bè', async (body, rerender) => {
     body.append(emptyState('Đang tải…'));
