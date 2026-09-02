@@ -3,6 +3,23 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.9 — 2026-09-02
+
+### Thay đổi
+- **HUD chuyển sang chất kính mờ (frosted glass)**: khung thông tin nhân vật,
+  khung minimap, biển tên khu vực, nút chuyển khu, pill tiền tệ và toolbar dùng
+  chung bộ token `--glass-*` — nền mờ `backdrop-filter`, viền sáng mảnh, vệt sáng
+  chéo và bóng đổ mềm.
+- Lớp kính pha tối và chữ sáng: nền game sáng (trời xanh, cỏ), kính sáng kèm chữ
+  tối sẽ mất tương phản khi khung đứng trên nền cỏ.
+- Badge sao vàng giữ nguyên làm điểm nhấn đục trên nền kính.
+- Bỏ toàn bộ trang trí dây lá và bảng màu gỗ/giấy — chúng chọi với chất kính.
+
+### Ghi chú kỹ thuật
+Không đặt `filter` trên phần tử cha của một mặt kính: `filter` vô hiệu hoá
+`backdrop-filter` của con, kính sẽ mất khả năng nhìn xuyên nền. Bóng đổ vì thế
+nằm ở từng mảnh kính bằng `box-shadow`.
+
 ## 0.1.8 — 2026-09-02
 
 ### Thay đổi
