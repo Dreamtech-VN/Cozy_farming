@@ -3,6 +3,17 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.6 — 2026-09-02
+
+### Thay đổi
+- **Khung minimap theo bản UI được duyệt**: khung gỗ hai lớp bo góc, gờ sáng phía
+  trong, dây lá kèm hoa trắng ở hai góc đối nhau (trên-trái và dưới-phải).
+- Nội dung minimap vẽ nền đục theo bảng màu của map (trời chuyển sắc, mặt đất có
+  vệt sáng mép cỏ, chấm NPC/người chơi có viền). Trước đó nền để trong suốt nên
+  lộ màu khung ra sau và bản đồ trông đục.
+- `.hud-right` nới khoảng cách vì dây lá góc dưới tràn ra ngoài khung ~15px và
+  đè lên nút chuyển khu.
+
 ## 0.1.5 — 2026-09-02
 
 ### Thay đổi

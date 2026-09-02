@@ -61,16 +61,22 @@ export function drawAreaMap(canvas, map, { self, players = [], detail = false } 
   const fit = fitTransform(canvas, map, padding);
   const dot = (detail ? 5 : 3) * dpr;
 
-  // Nền trời của map để bản đồ nhận diện được theo màu khu vực.
-  ctx.fillStyle = map.theme.sky[1];
-  ctx.globalAlpha = 0.34;
+  // Nền vẽ đục hẳn theo bảng màu của map: minimap nằm trong khung gỗ sáng, để
+  // nền trong suốt thì lộ màu khung ra sau và bản đồ trông đục.
+  const sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  sky.addColorStop(0, map.theme.sky[0]);
+  sky.addColorStop(1, map.theme.sky[1]);
+  ctx.fillStyle = sky;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.globalAlpha = 1;
 
   // Mặt đất
-  ctx.fillStyle = COLORS.ground;
+  ctx.fillStyle = map.theme.ground;
   ctx.fillRect(fit.x(0), fit.y(map.ground_y), map.width * fit.scale,
     Math.max(4 * dpr, (map.height - map.ground_y) * fit.scaleY));
+
+  // Vệt sáng mép cỏ cho mặt đất có khối.
+  ctx.fillStyle = 'rgba(255, 255, 255, .28)';
+  ctx.fillRect(fit.x(0), fit.y(map.ground_y), map.width * fit.scale, Math.max(1.5 * dpr, 2 * dpr));
 
   for (const platform of map.platforms ?? []) {
     ctx.fillStyle = COLORS.platform;
@@ -100,9 +106,12 @@ export function drawAreaMap(canvas, map, { self, players = [], detail = false } 
 
   for (const npc of map.npcs) {
     ctx.fillStyle = COLORS.npc;
+    ctx.strokeStyle = 'rgba(90, 62, 20, .8)';
+    ctx.lineWidth = 1.2 * dpr;
     ctx.beginPath();
     ctx.arc(fit.x(npc.x), fit.y(npc.y) - dot, dot, 0, Math.PI * 2);
     ctx.fill();
+    ctx.stroke();
     if (detail) {
       const label = t(npc.name_key);
       ctx.fillText(label, labelX(fit.x(npc.x), label), fit.y(npc.y) + 16 * dpr);
@@ -111,18 +120,24 @@ export function drawAreaMap(canvas, map, { self, players = [], detail = false } 
 
   for (const player of players) {
     ctx.fillStyle = COLORS.other;
+    ctx.strokeStyle = 'rgba(40, 50, 40, .75)';
+    ctx.lineWidth = 1.2 * dpr;
     ctx.beginPath();
     ctx.arc(fit.x(player.x), fit.y(player.y) - dot, dot * 0.85, 0, Math.PI * 2);
     ctx.fill();
+    ctx.stroke();
   }
 
   if (self) {
     const x = fit.x(self.x);
     const y = fit.y(self.y) - dot;
     ctx.fillStyle = COLORS.self;
+    ctx.strokeStyle = 'rgba(30, 60, 30, .85)';
+    ctx.lineWidth = 1.4 * dpr;
     ctx.beginPath();
     ctx.arc(x, y, dot * 1.3, 0, Math.PI * 2);
     ctx.fill();
+    ctx.stroke();
     ctx.strokeStyle = 'rgba(255,255,255,.9)';
     ctx.lineWidth = 1.5 * dpr;
     ctx.beginPath();
