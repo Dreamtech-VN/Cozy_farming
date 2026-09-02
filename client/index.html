@@ -14,9 +14,26 @@
 
     <!-- HUD (doc 12 — world là trung tâm, UI là overlay) -->
     <header id="hud" class="hidden">
+      <!-- Trái: minimap + chọn khu -->
       <div class="hud-left">
-        <!-- Góc thông tin nhân vật: chân dung avatar thật (vẽ từ cosmetic đang
-             mặc), tên, level và tiến độ XP. Bấm vào mở panel Nhân vật. -->
+        <button id="minimap" type="button" aria-label="Mở bản đồ khu vực">
+          <canvas id="minimap-canvas" width="360" height="150"></canvas>
+          <span class="minimap-label" id="hud-map">—</span>
+        </button>
+        <label class="channel-picker">
+          <span class="channel-label">Khu</span>
+          <select id="channel-select" aria-label="Chuyển khu"></select>
+        </label>
+      </div>
+
+      <!-- Giữa: tiền tệ -->
+      <div class="hud-center">
+        <div class="pill currency" id="hud-coin"><span class="dot coin"></span><span>0</span></div>
+        <div class="pill currency" id="hud-gem"><span class="dot gem"></span><span>0</span></div>
+      </div>
+
+      <!-- Phải: thông tin nhân vật -->
+      <div class="hud-right">
         <button id="player-card" type="button" aria-label="Mở thông tin nhân vật">
           <span class="portrait">
             <canvas id="avatar-portrait" width="112" height="112"></canvas>
@@ -28,12 +45,6 @@
             <span class="xp-text" id="hud-xp">0 / 0 XP</span>
           </span>
         </button>
-        <div class="pill" id="hud-map">—</div>
-      </div>
-      <div class="hud-right">
-        <div class="pill currency" id="hud-coin"><span class="dot coin"></span><span>0</span></div>
-        <div class="pill currency" id="hud-gem"><span class="dot gem"></span><span>0</span></div>
-        <div class="pill currency" id="hud-energy"><span class="dot energy"></span><span>0</span></div>
       </div>
     </header>
 

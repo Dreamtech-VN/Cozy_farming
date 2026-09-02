@@ -42,8 +42,8 @@ describe('Realtime world (doc 16)', () => {
   before(async () => { server = await startTestServer(); });
   after(() => server.close());
 
-  const enter = async (player, mapId = 'map_city_plaza') => {
-    const res = await server.post(`/v1/maps/${mapId}/enter`, { token: player.access_token, body: {} });
+  const enter = async (player, mapId = 'map_city_plaza', channel = 1) => {
+    const res = await server.post(`/v1/maps/${mapId}/enter`, { token: player.access_token, body: { channel } });
     assert.equal(res.status, 200);
     return res.body.instance_id;
   };
@@ -167,6 +167,99 @@ describe('Realtime world (doc 16)', () => {
     const left = await clientA.waitFor((m) => m.type === 'player_leave' && m.character_id === bob.character_id);
     assert.ok(left);
     clientA.close();
+  });
+
+  test('hai khu khác nhau của cùng một map là hai instance tách biệt', async () => {
+    const alice = await createPlayer(server);
+    const bob = await createPlayer(server);
+    const ch1 = await enter(alice, 'map_city_plaza', 1);
+    const ch7 = await enter(bob, 'map_city_plaza', 7);
+    assert.notEqual(ch1, ch7);
+
+    const clientA = connect(server, alice.access_token, ch1);
+    await clientA.open();
+    const joined = await clientA.waitFor((m) => m.type === 'joined');
+    assert.deepEqual(joined.players, [], 'khu 1 phải trống, bob đang ở khu 7');
+
+    const clientB = connect(server, bob.access_token, ch7);
+    await clientB.open();
+    await clientB.waitFor((m) => m.type === 'joined');
+
+    // Alice không được nhận player_join của Bob vì khác khu.
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    await assert.rejects(
+      clientA.waitFor((m) => m.type === 'player_join', 400),
+      /hết thời gian chờ/,
+    );
+    clientA.close();
+    clientB.close();
+  });
+
+  test('khu ngoài khoảng 1–20 bị từ chối', async () => {
+    const player = await createPlayer(server);
+    for (const channel of [0, 21, -3, 1.5, 'abc']) {
+      const res = await server.post('/v1/maps/map_city_plaza/enter', { token: player.access_token, body: { channel } });
+      assert.equal(res.status, 400, `khu ${channel} phải bị từ chối`);
+      assert.equal(res.body.error.details.channel_count, 20);
+    }
+  });
+
+  test('danh sách khu trả về sĩ số từng khu', async () => {
+    const alice = await createPlayer(server);
+    const bob = await createPlayer(server);
+    const instanceId = await enter(alice, 'map_city_plaza', 5);
+    await enter(bob, 'map_city_plaza', 5);
+
+    const clientA = connect(server, alice.access_token, instanceId);
+    await clientA.open();
+    await clientA.waitFor((m) => m.type === 'joined');
+    const clientB = connect(server, bob.access_token, instanceId);
+    await clientB.open();
+    await clientB.waitFor((m) => m.type === 'joined');
+
+    const res = await server.get('/v1/maps/map_city_plaza/channels', { token: alice.access_token });
+    assert.equal(res.status, 200);
+    assert.equal(res.body.channels.length, 20);
+    assert.equal(res.body.channels.find((c) => c.channel === 5).players, 2);
+    assert.equal(res.body.channels.find((c) => c.channel === 5).capacity, 40);
+
+    clientA.close();
+    clientB.close();
+  });
+
+  test('map private bỏ qua khu — mỗi người một instance riêng', async () => {
+    const alice = await createPlayer(server);
+    const res = await server.post('/v1/maps/map_player_farm/enter', { token: alice.access_token, body: { channel: 9 } });
+    assert.equal(res.status, 200);
+    assert.equal(res.body.channel, null);
+    assert.ok(res.body.instance_id.includes(alice.character_id));
+
+    const list = await server.get('/v1/maps/map_player_farm/channels', { token: alice.access_token });
+    assert.deepEqual(list.body.channels, []);
+  });
+
+  test('bản đồ thành phố trả về node và cạnh khớp với portal trong data', async () => {
+    const player = await createPlayer(server);
+    const res = await server.get('/v1/world/atlas', { token: player.access_token });
+    assert.equal(res.status, 200);
+
+    const { content } = server.app.ctx;
+    assert.equal(res.body.maps.length, content.maps.length);
+
+    const forest = res.body.maps.find((m) => m.map_id === 'map_forest');
+    assert.equal(forest.locked, true, 'rừng cần cấp 3 nên phải bị khoá với người mới');
+
+    // Mỗi cạnh phải trỏ tới một map có thật.
+    const ids = new Set(res.body.maps.map((m) => m.map_id));
+    for (const map of res.body.maps) {
+      for (const link of map.links) assert.ok(ids.has(link.to), `${map.map_id} nối tới map lạ ${link.to}`);
+    }
+
+    const plaza = res.body.maps.find((m) => m.map_id === 'map_city_plaza');
+    assert.deepEqual(
+      plaza.links.map((l) => l.to).sort(),
+      ['map_city_shopping', 'map_farm_village'],
+    );
   });
 
   test('nông trại riêng là instance riêng của từng người', async () => {

@@ -29,7 +29,7 @@ mốc thời gian; nó chỉ gửi ý định và hiển thị kết quả serve
 | Tài liệu | Hiện thực chính |
 | --- | --- |
 | 01 Project Vision, 02 Master GDD | Vòng lặp lõi nối bởi `client/src/main.js` + domain layer |
-| 03 World Design | `data/content/maps.json`, `server/src/realtime/world.js`, `client/src/render/world.js` |
+| 03 World Design | `data/content/maps.json` (kèm `world.channel_count`), `server/src/realtime/world.js`, `client/src/render/world.js`, `client/src/ui/minimap.js` |
 | 04 Character Design | `data/content/avatar_items.json`, `client/src/render/avatar.js`, bảng `character_equipment` / `character_wardrobe` |
 | 05 Art Bible | `client/src/render/*` (vẽ theo layer, prop modular, palette theo map) |
 | 06 Farming Design | `data/content/crops.json`, `server/src/domain/farm.js` |
@@ -68,6 +68,12 @@ lồng nhau, vì domain layer thường xuyên gọi chồng (ví dụ `farm.pla
 **Idempotency.** Mọi thay đổi tài nguyên đi qua `economy.applyChange`, có
 `idempotency_key` lưu trong bảng `transactions`. Client retry mạng không bao giờ
 nhân đôi phần thưởng — đây là ràng buộc trong doc 10 và doc 22, và có test riêng.
+
+**Khu (channel).** Map public được chia thành `world.channel_count` khu cùng nội
+dung nhưng khác danh sách người chơi — instance id là `<map_id>:ch<N>`. Map
+`instance_policy: "owner"` (nông trại, nhà) bỏ qua khu, instance thuộc về chủ sở
+hữu. Sĩ số từng khu lấy trực tiếp từ bộ nhớ của `realtime/world.js`; khi tách
+realtime thành nhiều tiến trình thì số này phải lấy từ registry dùng chung.
 
 **Board Match-3 nằm ở server.** Client chỉ gửi `{from, to}`; server tự resolve
 cascade và trả về các bước để phát animation. Mỗi trận lưu `seed` nên dựng lại

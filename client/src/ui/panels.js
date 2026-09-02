@@ -1,6 +1,7 @@
 /** Các panel gameplay: nhiệm vụ, túi đồ, nông trại, bạn bè, chat, nhân vật, shop. */
 import { el, showPanel, toast, emptyState, confirmAction, closePanel } from './ui.js';
 import { t, formatNumber, formatDuration } from '../core/i18n.js';
+import { drawAreaMap, drawWorldAtlas } from './minimap.js';
 
 const itemName = (game, itemId) => t(game.content.itemsById.get(itemId)?.name_key ?? itemId);
 const cosmeticName = (game, itemId) => t(game.content.avatarItemsById.get(itemId)?.name_key ?? itemId);
@@ -225,6 +226,65 @@ export function openShop(game, shopId) {
   });
 }
 
+/**
+ * Popup bản đồ khu vực hiện tại, kèm nút mở bản đồ thành phố (doc 03, doc 12).
+ * Bản đồ chỉ để xem: di chuyển giữa các map vẫn phải đi qua portal.
+ */
+export function openAreaMap(game) {
+  const map = game.currentMap;
+  if (!map) return;
+
+  showPanel(t(map.name_key), (body) => {
+    const canvas = el('canvas', { class: 'map-view' });
+    canvas.style.cssText = 'width:100%;aspect-ratio:16/7';
+    body.append(canvas);
+
+    body.append(el('div', { class: 'map-legend' }, [
+      el('span', {}, [el('i', { style: 'background:#7fc98a' }), el('span', { text: 'Bạn' })]),
+      el('span', {}, [el('i', { style: 'background:#e9f2ea' }), el('span', { text: 'Người chơi khác' })]),
+      el('span', {}, [el('i', { style: 'background:#f2c94c' }), el('span', { text: 'NPC' })]),
+      el('span', {}, [el('i', { style: 'background:#7ad3f0' }), el('span', { text: 'Cổng dịch chuyển' })]),
+    ]));
+
+    body.append(el('div', { class: 'row' }, [
+      el('div', { class: 'grow' }, [
+        el('div', { class: 'sub', text: `${map.map_type} · rộng ${formatNumber(map.width)} · sức chứa ${map.player_capacity} người mỗi khu` }),
+      ]),
+      el('button', { class: 'primary', type: 'button', text: 'Bản đồ thành phố', onClick: () => openWorldAtlas(game) }),
+    ]));
+
+    // Vẽ sau một nhịp để canvas đã có kích thước thật từ CSS.
+    requestAnimationFrame(() => {
+      const redraw = () => drawAreaMap(canvas, map, {
+        self: game.self,
+        players: [...game.players.values()],
+        detail: true,
+      });
+      redraw();
+      const timer = setInterval(() => (canvas.isConnected ? redraw() : clearInterval(timer)), 500);
+    });
+  });
+}
+
+/** Bản đồ thành phố: toàn bộ map và các cổng nối giữa chúng. */
+export function openWorldAtlas(game) {
+  showPanel('Bản đồ thành phố', async (body) => {
+    body.append(emptyState('Đang tải…'));
+    const atlas = await game.api.get('/v1/world/atlas');
+    body.replaceChildren();
+
+    const canvas = el('canvas', { class: 'map-view' });
+    canvas.style.cssText = 'width:100%;aspect-ratio:16/9';
+    body.append(canvas);
+    body.append(el('p', { class: 'sub', style: 'margin:10px 0 0', text: 'Đường nối là cổng dịch chuyển giữa các khu vực. Muốn sang khu vực khác thì đi tới cổng trong game.' }));
+
+    requestAnimationFrame(() => drawWorldAtlas(canvas, atlas, game.currentMap?.map_id));
+    addEventListener('resize', () => {
+      if (canvas.isConnected) drawWorldAtlas(canvas, atlas, game.currentMap?.map_id);
+    }, { once: true });
+  });
+}
+
 export function openSocial(game) {
   showPanel('Bạn bè', async (body, rerender) => {
     body.append(emptyState('Đang tải…'));
@@ -389,6 +449,18 @@ export function openProfile(game) {
       body.append(grid);
     }
   }, { key: 'profile' });
+}
+
+/** Energy không còn trên HUD (HUD chỉ hiện xu và ngọc), nên hiện ở nơi tiêu nó. */
+export function energyLine(game) {
+  const energy = game.profile?.wallet?.energy ?? 0;
+  return el('div', { class: 'row' }, [
+    el('div', { class: 'grow' }, [
+      el('div', { class: 'title', text: 'Năng lượng' }),
+      el('div', { class: 'sub', text: 'Hồi lại theo thời gian, dùng để vào trận Match-3.' }),
+    ]),
+    el('span', { class: 'tag done', text: formatNumber(energy) }),
+  ]);
 }
 
 const SLOT_NAME = {

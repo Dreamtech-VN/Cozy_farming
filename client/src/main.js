@@ -12,7 +12,8 @@ import { levelProgress } from './core/progression.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
-import { openQuests, openInventory, openFarm, openSocial, openChat, openProfile, openShop, harvest } from './ui/panels.js';
+import { openQuests, openInventory, openFarm, openSocial, openChat, openProfile, openShop, harvest, openAreaMap, energyLine } from './ui/panels.js';
+import { drawAreaMap } from './ui/minimap.js';
 
 const GRAVITY = 1800;
 const RUN_SPEED = 260;
@@ -33,6 +34,8 @@ class Game {
     this.time = 0;
     this.hintTarget = null;
     this.emotes = new Map();
+    this.channel = 1;
+    this.minimapAt = 0;
   }
 
   async boot() {
@@ -87,6 +90,25 @@ class Game {
     document.getElementById('player-card').addEventListener('click', () => {
       closePanel();
       openProfile(this);
+    });
+
+    // Minimap mở popup bản đồ khu vực.
+    document.getElementById('minimap').addEventListener('click', () => {
+      closePanel();
+      openAreaMap(this);
+    });
+
+    // Chuyển khu: vào lại đúng map hiện tại nhưng ở instance khác.
+    document.getElementById('channel-select').addEventListener('change', async (event) => {
+      const channel = Number(event.target.value);
+      if (!this.currentMap || channel === this.channel) return;
+      try {
+        await this.enterMap(this.currentMap.map_id, 'spawn_default', channel);
+        toast(`Đã chuyển sang khu ${channel}`, 'good');
+      } catch (err) {
+        toast(err.message, 'bad');
+        event.target.value = String(this.channel);
+      }
     });
 
     // Chạm vào ô đất trong nông trại để thu hoạch nhanh (doc 12 — một hành động chính).
@@ -167,10 +189,10 @@ class Game {
     if (!this.running) { this.running = true; this.#loop(); }
   }
 
-  async enterMap(mapId, spawnId = 'spawn_default') {
+  async enterMap(mapId, spawnId = 'spawn_default', channel = 1) {
     const [map, entered] = await Promise.all([
       this.api.get(`/v1/maps/${mapId}`),
-      this.api.post(`/v1/maps/${mapId}/enter`, { spawn_id: spawnId }),
+      this.api.post(`/v1/maps/${mapId}/enter`, { spawn_id: spawnId, channel }),
     ]);
     this.currentMap = map;
     this.renderer.setMap(map);
@@ -186,7 +208,10 @@ class Game {
     this.realtime.connect(entered.instance_id);
 
     this.farm = map.farm_layout ? await this.api.get('/v1/farm') : null;
+    this.channel = entered.channel ?? 1;
     document.getElementById('hud-map').textContent = t(map.name_key);
+    await this.#refreshChannels();
+    this.#drawMinimap();
   }
 
   async refreshFarm() {
@@ -219,7 +244,43 @@ class Game {
 
     document.getElementById('hud-coin').lastElementChild.textContent = formatNumber(profile.wallet.coin ?? 0);
     document.getElementById('hud-gem').lastElementChild.textContent = formatNumber(profile.wallet.gem ?? 0);
-    document.getElementById('hud-energy').lastElementChild.textContent = formatNumber(profile.wallet.energy ?? 0);
+  }
+
+  /** Dropdown chuyển khu: 1..N lấy từ content, kèm sĩ số hiện tại của từng khu. */
+  async #refreshChannels() {
+    const select = document.getElementById('channel-select');
+    const map = this.currentMap;
+    if (!map) return;
+
+    // Map private (nông trại, nhà) không chia khu.
+    if (map.instance_policy === 'owner') {
+      select.replaceChildren(new Option('riêng', '0'));
+      select.disabled = true;
+      return;
+    }
+
+    select.disabled = false;
+    let channels = null;
+    try {
+      channels = (await this.api.get(`/v1/maps/${map.map_id}/channels`)).channels;
+    } catch { /* mất mạng thì vẫn dựng danh sách khu, chỉ thiếu sĩ số */ }
+
+    const count = this.content.channel_count ?? 20;
+    select.replaceChildren(...Array.from({ length: count }, (_, index) => {
+      const channel = index + 1;
+      const info = channels?.find((c) => c.channel === channel);
+      const label = info ? `${channel}  ·  ${info.players}/${info.capacity}` : String(channel);
+      return new Option(label, String(channel));
+    }));
+    select.value = String(this.channel);
+  }
+
+  #drawMinimap() {
+    if (!this.currentMap) return;
+    drawAreaMap(document.getElementById('minimap-canvas'), this.currentMap, {
+      self: this.self,
+      players: [...this.players.values()],
+    });
   }
 
   pauseWorld() { this.paused = true; this.input.enabled = false; }
@@ -342,6 +403,7 @@ class Game {
   #openMatchPicker() {
     import('./ui/ui.js').then(({ showPanel, el }) => {
       showPanel('Chọn màn Match-3', (body) => {
+        body.append(energyLine(this));
         for (const level of this.content.levels) {
           const locked = (this.profile?.level ?? 1) < level.unlock_level;
           body.append(el('div', { class: 'row' }, [
@@ -382,6 +444,11 @@ class Game {
           hintTarget: this.hintTarget,
           time: this.time,
         });
+      }
+      // Minimap chỉ cần ~4 khung/giây, vẽ mỗi frame là phí.
+      if (this.currentMap && now - this.minimapAt > 250) {
+        this.minimapAt = now;
+        this.#drawMinimap();
       }
       requestAnimationFrame(frame);
     };

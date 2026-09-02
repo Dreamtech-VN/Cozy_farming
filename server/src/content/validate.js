@@ -78,6 +78,10 @@ export function validateContent(content) {
     if (!spawnIds.has('spawn_default')) issues.push(err('invalid_map', `map ${map.map_id}: thiếu spawn_default`));
   }
 
+  if (!Number.isInteger(content.channelCount) || content.channelCount < 1 || content.channelCount > 64) {
+    issues.push(err('invalid_range', `world.channel_count phải là số nguyên 1–64, đang là ${content.channelCount}`));
+  }
+
   // --- Match-3 ---
   const tiers = new Set(content.difficultyTable.map((d) => d.tier));
   for (const level of content.levels) {

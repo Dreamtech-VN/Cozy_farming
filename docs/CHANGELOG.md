@@ -3,6 +3,26 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.3 — 2026-09-02
+
+### Thêm mới
+- **Khu (channel) cho map public** (doc 03 — public map chia thành nhiều instance,
+  doc 16 — player capacity mỗi instance). `data/content/maps.json` khai báo
+  `world.channel_count` (hiện là 20); `POST /v1/maps/{id}/enter` nhận `channel`,
+  `GET /v1/maps/{id}/channels` trả sĩ số từng khu. Map private (nông trại) bỏ qua khu.
+- **`GET /v1/world/atlas`**: đồ hình thế giới — mỗi map là một node, mỗi portal là
+  một cạnh — phục vụ bản đồ thành phố.
+- **Minimap ở góc trên trái**: sơ đồ khu vực hiện tại với mặt đất, bệ đứng, portal,
+  NPC, người chơi khác và vị trí của bạn. Bấm vào mở popup bản đồ khu vực (có nhãn
+  đầy đủ) kèm nút **Bản đồ thành phố** hiện toàn bộ map và các cổng nối.
+- **Dropdown chuyển khu** ngay dưới minimap, 1–20, kèm sĩ số từng khu.
+
+### Thay đổi
+- HUD chia lại ba cụm: trái là minimap + chọn khu, **giữa là tiền tệ (chỉ xu và
+  ngọc)**, phải là thông tin nhân vật.
+- Năng lượng không còn trên HUD; chuyển xuống panel chọn màn Match-3 — nơi thực
+  sự tiêu nó.
+
 ## 0.1.2 — 2026-09-02
 
 ### Thay đổi

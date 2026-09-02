@@ -6,6 +6,7 @@
  * cục bộ, server kiểm tra bounds/collision/tốc độ rồi broadcast state chuẩn.
  */
 import { verifyToken } from '../lib/token.js';
+import { badRequest } from '../lib/errors.js';
 import { logger } from '../lib/logger.js';
 import { getEquipment } from '../domain/player.js';
 import { savePosition } from '../domain/player.js';
@@ -29,13 +30,44 @@ export function createWorld(ctx) {
     refillPerSecond: content.economy.rate_limits.chat_messages_per_minute / 60,
   });
 
-  const instanceIdFor = (map, characterId) =>
-    map.instance_policy === 'owner' ? `${map.map_id}:${characterId}` : `${map.map_id}:public:0`;
+  /**
+   * Map public được chia thành nhiều "khu" (channel) cùng nội dung nhưng khác
+   * danh sách người chơi (doc 03 — public map partitioned into instances,
+   * doc 16 — player capacity mỗi instance). Map private (nông trại, nhà) bỏ qua
+   * channel: instance luôn thuộc về chủ sở hữu.
+   */
+  const instanceIdFor = (map, characterId, channel) =>
+    map.instance_policy === 'owner' ? `${map.map_id}:${characterId}` : `${map.map_id}:ch${channel}`;
 
-  function assignInstance(map, characterId) {
-    const instanceId = instanceIdFor(map, characterId);
+  function assignInstance(map, characterId, channel = 1) {
+    const instanceId = instanceIdFor(map, characterId, normalizeChannel(channel));
     if (!instances.has(instanceId)) instances.set(instanceId, { instance_id: instanceId, map, members: new Map() });
-    return { instance_id: instanceId, channel: `/ws?instance=${encodeURIComponent(instanceId)}` };
+    return {
+      instance_id: instanceId,
+      channel: map.instance_policy === 'owner' ? null : normalizeChannel(channel),
+      socket_path: `/ws?instance=${encodeURIComponent(instanceId)}`,
+    };
+  }
+
+  function normalizeChannel(channel) {
+    const value = Number(channel);
+    if (!Number.isInteger(value) || value < 1 || value > content.channelCount) {
+      throw badRequest(`Khu phải là số nguyên từ 1 đến ${content.channelCount}`, { channel_count: content.channelCount });
+    }
+    return value;
+  }
+
+  /** Sĩ số từng khu của một map — để client hiện khu nào đang đông. */
+  function listChannels(map) {
+    if (map.instance_policy === 'owner') return [];
+    return Array.from({ length: content.channelCount }, (_, index) => {
+      const channel = index + 1;
+      return {
+        channel,
+        players: instances.get(`${map.map_id}:ch${channel}`)?.members.size ?? 0,
+        capacity: map.player_capacity,
+      };
+    });
   }
 
   function broadcast(instanceId, payload, exceptCharacterId = null) {
@@ -276,6 +308,7 @@ export function createWorld(ctx) {
 
   return {
     assignInstance,
+    listChannels,
     broadcastMessage,
     handleConnection,
     stats: () => ({

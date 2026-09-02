@@ -1,6 +1,10 @@
 {
   "version": "0.1.0",
   "comment": "Doc 03 — map 2D side-view. ground_y là mặt đất mặc định; platforms là các bệ đứng thêm.",
+  "world": {
+    "comment": "Doc 03/16 — map public được chia thành nhiều khu (channel) cùng nội dung, khác danh sách người chơi.",
+    "channel_count": 20
+  },
   "maps": [
     {
       "map_id": "map_city_plaza",

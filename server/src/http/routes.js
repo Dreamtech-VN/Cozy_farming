@@ -23,6 +23,7 @@ export function registerRoutes(router, ctx) {
   router.get('/v1/content', () => ({
     body: {
       version: content.version,
+      channel_count: content.channelCount,
       crops: content.crops,
       items: content.items,
       avatar_items: content.avatarItems,
@@ -90,12 +91,46 @@ export function registerRoutes(router, ctx) {
       throw badRequest('Chưa mở khoá map này', { required_level: map.unlock_level });
     }
     const spawn = map.spawn_points.find((s) => s.id === (body.spawn_id ?? 'spawn_default')) ?? map.spawn_points[0];
-    const instance = ctx.world.assignInstance(map, character.id);
+    const instance = ctx.world.assignInstance(map, character.id, body.channel ?? 1);
     player.savePosition(db, character.id, map.map_id, spawn.x, spawn.y);
     quest.trackProgress(db, content, character.id, 'visit_map', map.map_id);
-    logEvent(db, character.id, 'map_enter', { map_id: map.map_id, instance_id: instance.instance_id });
-    return { body: { map_id: map.map_id, instance_id: instance.instance_id, spawn, realtime_channel: instance.channel } };
+    logEvent(db, character.id, 'map_enter', { map_id: map.map_id, instance_id: instance.instance_id, channel: instance.channel });
+    return {
+      body: {
+        map_id: map.map_id,
+        instance_id: instance.instance_id,
+        channel: instance.channel,
+        channel_count: content.channelCount,
+        spawn,
+        socket_path: instance.socket_path,
+      },
+    };
   });
+
+  /** Sĩ số từng khu, để dropdown chuyển khu biết khu nào đang đông (doc 16). */
+  router.get('/v1/maps/:mapId/channels', ({ params, character }) => {
+    const map = content.byMap.get(params.mapId);
+    if (!map) throw notFound(`map không tồn tại: ${params.mapId}`);
+    if (character.level < map.unlock_level) throw badRequest('Chưa mở khoá map này');
+    return { body: { map_id: map.map_id, channel_count: content.channelCount, channels: ctx.world.listChannels(map) } };
+  });
+
+  /** Đồ hình thế giới cho bản đồ thành phố: node là map, cạnh là portal (doc 03). */
+  router.get('/v1/world/atlas', ({ character }) => ({
+    body: {
+      maps: content.maps.map((map) => ({
+        map_id: map.map_id,
+        name_key: map.name_key,
+        map_type: map.map_type,
+        group: map.group,
+        unlock_level: map.unlock_level,
+        instance_policy: map.instance_policy,
+        width: map.width,
+        locked: character.level < map.unlock_level,
+        links: map.portals.map((portal) => ({ to: portal.target_map_id, label_key: portal.label_key })),
+      })),
+    },
+  }));
 
   // ---------- Farm (doc 15 §Farm, doc 06) ----------
   router.get('/v1/farm', ({ character }) => ({ body: farm.getFarm(db, content, character.id) }));

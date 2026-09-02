@@ -25,6 +25,10 @@ Game chơi ở **màn hình ngang**, điều khiển bằng bàn phím:
 | `Space`, `↑`, `W` | Nhảy |
 | `E` hoặc `Enter` | Nói chuyện NPC, đi qua portal, tương tác |
 
+HUD: góc trái là minimap (bấm để mở bản đồ khu vực, trong đó có nút mở bản đồ
+thành phố) và dropdown chuyển khu 1–20; giữa là xu và ngọc; phải là thông tin
+nhân vật.
+
 Muốn có sẵn dữ liệu để xem:
 
 ```bash
