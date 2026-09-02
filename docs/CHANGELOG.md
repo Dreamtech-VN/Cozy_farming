@@ -3,6 +3,22 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.2 — 2026-09-02
+
+### Thay đổi
+- **Vẽ lại góc thông tin nhân vật.** Thay ba pill rời (tên / level / map) bằng một
+  player card gồm: chân dung avatar hình tròn vẽ từ chính cosmetic đang mặc,
+  badge level, nickname và thanh tiến độ XP tới cấp kế tiếp. Bấm vào card mở
+  thẳng panel Nhân vật.
+- Chân dung dùng lại `drawAvatar` của thế giới (`drawAvatarPortrait`), nên thay
+  đồ là chân dung đổi theo — không phải duy trì hai bộ hình.
+- `client/src/core/progression.js`: công thức level lấy tham số từ `/v1/content`,
+  chỉ dùng để hiển thị; server vẫn quyết định cấp độ thật.
+
+### Sửa lỗi
+- Các pill tiền tệ ở góc phải HUD bị kéo cao bằng cả cụm thông tin nhân vật bên
+  trái (`#hud` thiếu `align-items: flex-start`).
+
 ## 0.1.1 — 2026-09-02
 
 ### Thay đổi

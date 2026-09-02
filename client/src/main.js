@@ -7,6 +7,8 @@ import { Realtime } from './net/realtime.js';
 import { i18n, t, formatNumber } from './core/i18n.js';
 import { Input } from './core/input.js';
 import { WorldRenderer } from './render/world.js';
+import { drawAvatarPortrait } from './render/avatar.js';
+import { levelProgress } from './core/progression.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
@@ -80,6 +82,12 @@ class Game {
         })[panel]?.();
       });
     }
+
+    // Góc thông tin nhân vật mở thẳng panel Nhân vật.
+    document.getElementById('player-card').addEventListener('click', () => {
+      closePanel();
+      openProfile(this);
+    });
 
     // Chạm vào ô đất trong nông trại để thu hoạch nhanh (doc 12 — một hành động chính).
     this.canvas.addEventListener('pointerdown', (event) => {
@@ -193,11 +201,25 @@ class Game {
 
   #updateHud() {
     if (!this.profile) return;
-    document.getElementById('hud-name').textContent = this.profile.nickname;
-    document.getElementById('hud-level').textContent = `Lv ${this.profile.level}`;
-    document.getElementById('hud-coin').lastElementChild.textContent = formatNumber(this.profile.wallet.coin ?? 0);
-    document.getElementById('hud-gem').lastElementChild.textContent = formatNumber(this.profile.wallet.gem ?? 0);
-    document.getElementById('hud-energy').lastElementChild.textContent = formatNumber(this.profile.wallet.energy ?? 0);
+    const profile = this.profile;
+
+    document.getElementById('hud-name').textContent = profile.nickname;
+    document.getElementById('hud-level').textContent = String(profile.level);
+
+    const progress = levelProgress(this.content.economy.level_curve, profile.level, profile.xp);
+    document.getElementById('hud-xp-fill').style.width = `${progress.ratio * 100}%`;
+    document.getElementById('hud-xp').textContent = progress.maxed
+      ? 'Cấp tối đa'
+      : `${formatNumber(progress.current)} / ${formatNumber(progress.needed)} XP`;
+
+    drawAvatarPortrait(document.getElementById('avatar-portrait'), this.content, {
+      equipment: profile.equipment,
+      body_type: profile.body_type,
+    });
+
+    document.getElementById('hud-coin').lastElementChild.textContent = formatNumber(profile.wallet.coin ?? 0);
+    document.getElementById('hud-gem').lastElementChild.textContent = formatNumber(profile.wallet.gem ?? 0);
+    document.getElementById('hud-energy').lastElementChild.textContent = formatNumber(profile.wallet.energy ?? 0);
   }
 
   pauseWorld() { this.paused = true; this.input.enabled = false; }

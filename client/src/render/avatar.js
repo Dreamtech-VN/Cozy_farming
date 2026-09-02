@@ -148,3 +148,35 @@ export function roundRect(ctx, x, y, w, h, r) {
 }
 
 export { AVATAR_HEIGHT };
+
+/**
+ * Vẽ chân dung (đầu + vai) vào một canvas riêng — dùng cho góc thông tin nhân
+ * vật trên HUD. Dùng lại đúng hàm vẽ avatar trong thế giới nên đổi cosmetic là
+ * chân dung đổi theo, không phải duy trì hai bộ hình.
+ */
+export function drawAvatarPortrait(canvas, content, options) {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const size = canvas.clientWidth || canvas.width;
+  if (canvas.width !== Math.round(size * dpr)) {
+    canvas.width = Math.round(size * dpr);
+    canvas.height = Math.round(size * dpr);
+  }
+
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
+  ctx.scale(dpr, dpr);
+
+  // Cắt tròn cho khớp khung ảnh đại diện.
+  ctx.beginPath();
+  ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+  ctx.clip();
+
+  // Avatar vẽ với gốc toạ độ ở chân; đưa vùng đầu–vai (y từ -100 đến -54) lấp đầy khung.
+  const zoom = size / 46;
+  ctx.translate(size / 2, zoom * 100);
+  ctx.scale(zoom, zoom);
+  drawAvatar(ctx, content, { ...options, facing: 1, state: 'idle', phase: 0, nickname: null, emote: null });
+  ctx.restore();
+}

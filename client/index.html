@@ -15,8 +15,19 @@
     <!-- HUD (doc 12 — world là trung tâm, UI là overlay) -->
     <header id="hud" class="hidden">
       <div class="hud-left">
-        <div class="pill" id="hud-name">—</div>
-        <div class="pill" id="hud-level">Lv 1</div>
+        <!-- Góc thông tin nhân vật: chân dung avatar thật (vẽ từ cosmetic đang
+             mặc), tên, level và tiến độ XP. Bấm vào mở panel Nhân vật. -->
+        <button id="player-card" type="button" aria-label="Mở thông tin nhân vật">
+          <span class="portrait">
+            <canvas id="avatar-portrait" width="112" height="112"></canvas>
+            <span class="level-badge" id="hud-level">1</span>
+          </span>
+          <span class="identity">
+            <span class="name" id="hud-name">—</span>
+            <span class="xp-bar"><span class="xp-fill" id="hud-xp-fill"></span></span>
+            <span class="xp-text" id="hud-xp">0 / 0 XP</span>
+          </span>
+        </button>
         <div class="pill" id="hud-map">—</div>
       </div>
       <div class="hud-right">
