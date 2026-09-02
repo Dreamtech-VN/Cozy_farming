@@ -35,20 +35,20 @@
       <button data-panel="profile" type="button">Nhân vật</button>
     </nav>
 
-    <!-- Điều khiển cảm ứng cho mobile portrait (doc 12) -->
-    <div id="touch-controls" class="hidden">
-      <button class="touch-btn" data-key="left" type="button" aria-label="Sang trái">◀</button>
-      <button class="touch-btn" data-key="right" type="button" aria-label="Sang phải">▶</button>
-      <button class="touch-btn action" data-key="action" type="button" aria-label="Tương tác">✦</button>
-      <button class="touch-btn" data-key="jump" type="button" aria-label="Nhảy">▲</button>
-    </div>
-
     <div id="interact-hint" class="hidden"></div>
     <div id="toast-stack"></div>
     <div id="panels"></div>
     <div id="overlay" class="hidden"></div>
 
     <div id="connection" class="hidden">Mất kết nối — đang thử lại…</div>
+
+    <!-- Game chơi ở màn hình ngang; màn dọc chỉ nhắc xoay máy. -->
+    <div id="rotate-notice">
+      <div>
+        <strong>Xoay ngang màn hình</strong>
+        <p>Thế giới 2D side-view hiển thị theo chiều ngang.</p>
+      </div>
+    </div>
   </div>
 
   <script type="module" src="/src/main.js"></script>

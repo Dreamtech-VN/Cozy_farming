@@ -17,6 +17,14 @@ node server/src/index.js        # hoặc: npm start
 
 Mở http://localhost:8080, bấm **Tạo tài khoản** là vào game.
 
+Game chơi ở **màn hình ngang**, điều khiển bằng bàn phím:
+
+| Phím | Việc |
+| --- | --- |
+| `←` `→` hoặc `A` `D` | Di chuyển |
+| `Space`, `↑`, `W` | Nhảy |
+| `E` hoặc `Enter` | Nói chuyện NPC, đi qua portal, tương tác |
+
 Muốn có sẵn dữ liệu để xem:
 
 ```bash
@@ -66,6 +74,12 @@ mở thêm ô đất, mua cosmetic → chat và kết bạn → quay lại.
   Các tính năng này đã có sẵn feature flag trong `data/content/liveops.json`.
 
 ## Ghi chú kỹ thuật
+
+Client hướng màn hình ngang và không có nút điều khiển cảm ứng — khác với mục
+*Responsive* của doc 12 (ưu tiên mobile portrait). Layout vẫn dùng đơn vị tương
+đối nên quay lại portrait không phải viết lại, nhưng muốn chơi được trên điện
+thoại thì phải bổ sung lại lớp điều khiển cảm ứng.
+
 
 Server không dùng package ngoài nào: HTTP từ `node:http`, database từ
 `node:sqlite`, WebSocket tự hiện thực theo RFC 6455, test bằng `node:test`.

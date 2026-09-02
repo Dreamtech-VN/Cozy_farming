@@ -153,7 +153,6 @@ class Game {
 
     document.getElementById('hud').classList.remove('hidden');
     document.getElementById('toolbar').classList.remove('hidden');
-    document.getElementById('touch-controls').classList.remove('hidden');
 
     await this.enterMap(profile.position.map_id, 'spawn_default');
     this.#updateHud();

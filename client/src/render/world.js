@@ -31,7 +31,8 @@ export class WorldRenderer {
 
   /**
    * Zoom cân giữa hai ràng buộc:
-   *  - chiều rộng: game side-view sống nhờ bối cảnh hai bên, cần thấy đủ rộng;
+   *  - chiều rộng: game side-view sống nhờ bối cảnh hai bên. Màn hình ngang cho
+   *    thấy khoảng 900px thế giới, đủ để NPC và portal hai bên vào khung;
    *  - chiều cao: nếu khung nhìn cao hơn map quá nhiều thì nửa dưới màn hình chỉ
    *    còn một mảng đất trống.
    * Lấy giá trị lớn hơn của hai mức tối thiểu để không vi phạm ràng buộc nào.
@@ -40,9 +41,9 @@ export class WorldRenderer {
     const width = this.canvas.width / this.dpr;
     const height = this.canvas.height / this.dpr;
     const mapHeight = this.map?.height ?? 720;
-    const byWidth = width / 640;
+    const byWidth = width / 900;
     const byHeight = height / (mapHeight * 1.35);
-    return Math.max(0.5, Math.min(1.6, Math.max(byWidth, byHeight)));
+    return Math.max(0.5, Math.min(1.8, Math.max(byWidth, byHeight)));
   }
 
   /** Nhân vật đứng ở khoảng 66% chiều cao khung nhìn, chừa đất phía dưới. */
@@ -156,10 +157,15 @@ export class WorldRenderer {
     const ctx = this.ctx;
     const rng = seededRandom(hashString(map.map_id));
     const city = map.group === 'City';
-    const count = Math.floor(map.width / 190);
+    const count = Math.floor(map.width / 240);
+
+    // Cảnh vật là lớp nền: giảm độ đậm để nhân vật và NPC luôn nổi lên phía trước
+    // (doc 05 — silhouette gameplay phải đọc được trước bối cảnh).
+    ctx.save();
+    ctx.globalAlpha = 0.72;
 
     for (let i = 0; i < count; i++) {
-      const x = 60 + i * 190 + rng() * 70;
+      const x = 60 + i * 240 + rng() * 90;
       const scale = 0.75 + rng() * 0.55;
       const y = map.ground_y + 4;
 
@@ -189,6 +195,7 @@ export class WorldRenderer {
       ctx.arc(x + 26 * scale, y - trunk - 8 * scale, 28 * scale, 0, Math.PI * 2);
       ctx.fill();
     }
+    ctx.restore();
   }
 
   #drawGround(map) {
@@ -200,6 +207,22 @@ export class WorldRenderer {
     ctx.fillRect(-200, map.ground_y, map.width + 400, depth);
     ctx.fillStyle = shade(map.theme.ground, 22);
     ctx.fillRect(-200, map.ground_y, map.width + 400, 10);
+
+    // Vệt cỏ rải trên mặt đất: màn hình ngang để lộ nhiều nền, nếu để phẳng trơn
+    // thì mất cảm giác chiều sâu. Sinh theo seed của map nên bố cục cố định.
+    const rng = seededRandom(hashString(map.map_id) ^ 0x9e3779b9);
+    ctx.fillStyle = shade(map.theme.ground, -18);
+    const rows = Math.ceil(Math.min(depth, this.viewHeight) / 70);
+    for (let row = 0; row < rows; row++) {
+      const y = map.ground_y + 26 + row * 70;
+      for (let i = 0; i < map.width / 70; i++) {
+        const x = i * 70 + rng() * 60;
+        const w = 10 + rng() * 16;
+        ctx.beginPath();
+        ctx.ellipse(x, y + rng() * 26, w, 3.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
   }
 
   #drawPlatforms(map) {

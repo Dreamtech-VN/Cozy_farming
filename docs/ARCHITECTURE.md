@@ -38,7 +38,7 @@ mốc thời gian; nó chỉ gửi ý định và hiển thị kết quả serve
 | 09 Economy Design | `data/content/economy.json`, `server/src/domain/economy.js` |
 | 10 Monetization | `server/src/domain/shop.js` (idempotency + audit; IAP thật chưa nối) |
 | 11 Quest & Content | `data/content/quests.json`, `server/src/domain/quest.js` |
-| 12 UX/UI Design | `client/index.html`, `client/styles.css`, `client/src/ui/*` |
+| 12 UX/UI Design | `client/index.html`, `client/styles.css`, `client/src/ui/*` — hướng màn hình ngang, điều khiển bàn phím (xem ghi chú dưới) |
 | 13 Technical Design | `server/src/app.js` và cấu trúc thư mục nói chung |
 | 14 Database Design | `server/src/db/migrations/001_init.sql`, `server/src/db/index.js` |
 | 15 API Specification | `server/src/http/routes.js` |
@@ -72,6 +72,13 @@ nhân đôi phần thưởng — đây là ràng buộc trong doc 10 và doc 22,
 **Board Match-3 nằm ở server.** Client chỉ gửi `{from, to}`; server tự resolve
 cascade và trả về các bước để phát animation. Mỗi trận lưu `seed` nên dựng lại
 được y hệt khi cần audit.
+
+**Màn hình ngang, không có điều khiển cảm ứng.** Khác mục *Responsive* của doc 12
+(ưu tiên mobile portrait): client dựng cho màn hình ngang và điều khiển bằng bàn
+phím. `WorldRenderer#scale` lấy khoảng 900px chiều rộng thế giới làm mốc, chặn
+dưới bởi ràng buộc chiều cao để khung nhìn không cao hơn map quá nhiều. Muốn hỗ
+trợ điện thoại thì phải thêm lại lớp điều khiển cảm ứng — layout CSS vẫn dùng đơn
+vị tương đối nên không phải viết lại.
 
 **Content không nằm trong database.** Item, crop, map, quest, shop, event đều là
 JSON trong `data/content` và được validate lúc khởi động; content sai reference

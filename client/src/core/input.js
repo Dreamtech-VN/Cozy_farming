@@ -1,4 +1,4 @@
-/** Bàn phím + nút cảm ứng, gộp về một tập trạng thái duy nhất (doc 12). */
+/** Điều khiển bằng bàn phím. Game chạy ở màn hình ngang, không có nút cảm ứng. */
 export class Input {
   constructor() {
     this.keys = { left: false, right: false, jump: false, action: false };
@@ -30,19 +30,6 @@ export class Input {
 
     addEventListener('blur', () => { for (const key of Object.keys(this.keys)) this.keys[key] = false; });
 
-    for (const button of document.querySelectorAll('.touch-btn')) {
-      const key = button.dataset.key;
-      const press = (event) => {
-        event.preventDefault();
-        this.keys[key] = true;
-        if (key === 'action') this.actionPressed = true;
-      };
-      const release = (event) => { event.preventDefault(); this.keys[key] = false; };
-      button.addEventListener('pointerdown', press);
-      button.addEventListener('pointerup', release);
-      button.addEventListener('pointercancel', release);
-      button.addEventListener('pointerleave', release);
-    }
   }
 
   /** Đọc-và-xoá: dùng cho hành động một lần như "tương tác". */

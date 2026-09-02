@@ -1,7 +1,11 @@
 /*
- * UI theo doc 12: mobile portrait ưu tiên, một hành động chính mỗi màn,
- * đủ trạng thái default/pressed/disabled/loading/empty. Doc 05: typography
- * dễ đọc, tương phản rõ trên nền thế giới 2D.
+ * UI theo doc 12 — một hành động chính mỗi màn, đủ trạng thái
+ * default/pressed/disabled/loading/empty; doc 05 — typography dễ đọc, tương phản
+ * rõ trên nền thế giới 2D.
+ *
+ * Khác doc 12 một điểm: bản này hướng MÀN HÌNH NGANG thay vì mobile portrait,
+ * và không có nút điều khiển cảm ứng (điều khiển bằng bàn phím). Layout vẫn
+ * dùng đơn vị tương đối nên đổi lại về portrait sau này không phải viết lại.
  */
 :root {
   --bg: #101a16;
@@ -59,12 +63,11 @@ html, body {
 .dot.energy { background: #ff9c5b; }
 
 /* ---------- Toolbar ---------- */
-/* Một hàng duy nhất, cuộn ngang khi hẹp — nếu để wrap, toolbar cao lên và
-   nằm chồng lên nút điều khiển cảm ứng, chặn mất thao tác (doc 12). */
+/* Một hàng duy nhất ở đáy màn hình ngang; cuộn ngang nếu cửa sổ quá hẹp. */
 #toolbar {
-  position: absolute; left: 0; right: 0; bottom: calc(6px + var(--safe));
-  display: flex; gap: 6px; justify-content: flex-start; flex-wrap: nowrap;
-  padding: 0 8px; overflow-x: auto; scrollbar-width: none;
+  position: absolute; left: 0; right: 0; bottom: calc(10px + var(--safe));
+  display: flex; gap: 8px; justify-content: center; flex-wrap: nowrap;
+  padding: 0 12px; overflow-x: auto; scrollbar-width: none;
 }
 #toolbar::-webkit-scrollbar { display: none; }
 #toolbar button {
@@ -76,20 +79,6 @@ html, body {
 }
 #toolbar button:active { background: var(--panel-2); transform: translateY(1px); }
 #toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
-
-/* ---------- Điều khiển cảm ứng ---------- */
-#touch-controls {
-  position: absolute; left: 0; right: 0; bottom: calc(66px + var(--safe));
-  display: flex; justify-content: space-between; padding: 0 14px; pointer-events: none;
-}
-#touch-controls > * { pointer-events: auto; }
-.touch-btn {
-  width: 62px; height: 62px; border-radius: 50%;
-  background: rgba(27, 43, 36, .78); border: 1px solid var(--line);
-  color: var(--text); font-size: 22px; cursor: pointer;
-}
-.touch-btn:active { background: var(--accent); color: #10201a; }
-.touch-btn.action { background: rgba(127, 201, 138, .28); }
 
 /* ---------- Gợi ý tương tác ---------- */
 #interact-hint {
@@ -105,7 +94,7 @@ html, body {
 .panel {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
   width: min(560px, calc(100vw - 24px));
-  max-height: min(72vh, 620px);
+  max-height: min(86vh, 620px);
   background: var(--panel); border: 1px solid var(--line);
   border-radius: var(--radius);
   display: flex; flex-direction: column; overflow: hidden;
@@ -156,7 +145,7 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
 .cell.selected { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
 
 /* ---------- Chat ---------- */
-#chat-log { height: 240px; overflow: auto; font-size: 13.5px; }
+#chat-log { height: min(240px, 34vh); overflow: auto; font-size: 13.5px; }
 #chat-log .line { padding: 3px 0; word-break: break-word; }
 #chat-log .who { color: var(--accent); font-weight: 600; }
 #chat-log .system { color: var(--muted); font-style: italic; }
@@ -212,8 +201,23 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
   padding: 6px 14px; font-size: 12.5px; font-weight: 600;
 }
 
-@media (min-width: 860px) {
-  #toolbar { bottom: 14px; justify-content: center; }
-  #toolbar button { min-width: 108px; }
-  #touch-controls { display: none !important; }
+/* ---------- Nhắc xoay ngang ---------- */
+#rotate-notice { display: none; }
+
+/* Màn dọc trên thiết bị cảm ứng: game không có nút điều khiển nên chỉ nhắc xoay. */
+@media (orientation: portrait) and (pointer: coarse) {
+  #rotate-notice {
+    position: absolute; inset: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg); text-align: center; padding: 24px;
+  }
+  #rotate-notice strong { font-size: 18px; display: block; margin-bottom: 6px; }
+  #rotate-notice p { color: var(--muted); margin: 0; font-size: 14px; }
+}
+
+/* Cửa sổ thấp (laptop nhỏ, ngang trên điện thoại): thu gọn HUD và toolbar. */
+@media (max-height: 520px) {
+  #toolbar button { min-height: 38px; min-width: 76px; font-size: 13px; }
+  .pill { padding: 4px 9px; font-size: 12px; }
+  #hud { padding: 6px 8px; }
 }

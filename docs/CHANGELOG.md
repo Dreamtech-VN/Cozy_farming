@@ -3,6 +3,22 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.1 — 2026-09-02
+
+### Thay đổi
+- **Client hướng màn hình ngang.** Camera lấy khoảng 900px chiều rộng thế giới,
+  HUD gom về một hàng, toolbar canh giữa đáy màn hình.
+- **Bỏ nút điều khiển cảm ứng.** Điều khiển hoàn toàn bằng bàn phím
+  (←/→ hoặc A/D di chuyển, Space/↑/W nhảy, E/Enter tương tác). Màn hình dọc trên
+  thiết bị cảm ứng hiện thông báo xoay máy.
+- Cảnh vật nền được làm mờ nhẹ để nhân vật và NPC nổi rõ phía trước; nền đất có
+  thêm vệt cỏ vì màn hình ngang để lộ nhiều mặt đất hơn.
+
+> Khác doc 12, mục *Responsive* ("MVP ưu tiên mobile portrait"): bản này hướng
+> màn hình ngang theo yêu cầu sản xuất. Layout vẫn dùng đơn vị tương đối nên
+> quay lại portrait không phải viết lại. Nếu cần chơi trên điện thoại thì phải
+> bổ sung lại lớp điều khiển cảm ứng.
+
 ## 0.1.0 — 2026-09-02
 
 Baseline hiện thực đầu tiên theo bộ tài liệu 00–24.
