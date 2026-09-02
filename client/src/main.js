@@ -9,7 +9,7 @@ import { Input } from './core/input.js';
 import { WorldRenderer } from './render/world.js';
 import { drawAvatarPortrait } from './render/avatar.js';
 import { levelProgress } from './core/progression.js';
-import { WorldClock, phaseIcon, weatherIcon } from './core/world_clock.js';
+import { WorldClock, weatherIcon } from './core/world_clock.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
@@ -242,8 +242,7 @@ class Game {
     document.getElementById('world-clock').textContent = state.clock;
     document.getElementById('world-phase').textContent = phaseName;
     document.getElementById('weather-name').textContent = weatherName;
-    document.getElementById('phase-icon').innerHTML = phaseIcon(state.phase);
-    document.getElementById('weather-icon').innerHTML = weatherIcon(state.weather.id);
+    document.getElementById('weather-icon').innerHTML = weatherIcon(state.weather.id, state.phase);
     // Chip chỉ hiện biểu tượng và giờ; tên đầy đủ nằm ở tooltip.
     document.getElementById('world-status').title = `${state.clock} · ${phaseName} · ${weatherName}`;
 

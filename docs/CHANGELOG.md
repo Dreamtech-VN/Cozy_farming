@@ -3,6 +3,16 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.15 — 2026-09-02
+
+### Thay đổi
+- **Bỏ ký hiệu sáng tối khỏi chip** — chính con số giờ đã nói rõ đang là ban ngày
+  hay ban đêm. Chip còn giờ + biểu tượng thời tiết, rộng 88px.
+- Biểu tượng "trời quang" giờ biết đang là giai đoạn nào: ban đêm vẽ trăng và sao
+  thay vì mặt trời. Nếu không, chip hiện mặt trời cạnh con số 22:27 và đọc ra
+  mâu thuẫn với chính nó.
+- Xoá hàm `phaseIcon` vì không còn nơi dùng.
+
 ## 0.1.14 — 2026-09-02
 
 ### Thay đổi

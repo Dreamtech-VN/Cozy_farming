@@ -30,29 +30,12 @@ export class WorldClock {
   }
 }
 
-/** Icon theo giai đoạn trong ngày. */
-export function phaseIcon(phase) {
-  if (phase === 'night') {
-    return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="#dfe9ff" stroke="#95a7cc" stroke-width="1.3" stroke-linejoin="round"/></svg>`;
-  }
-  if (phase === 'dawn' || phase === 'dusk') {
-    const color = phase === 'dawn' ? '#ffd98a' : '#ffb072';
-    return `<svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 17h16" stroke="#f0a35a" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="M12 6.5a6 6 0 0 1 6 6H6a6 6 0 0 1 6-6z" fill="${color}" stroke="#e08b3c" stroke-width="1.3" stroke-linejoin="round"/>
-      <path d="M12 2.5v2M4.6 5.6l1.4 1.4M19.4 5.6 18 7" stroke="#f0a35a" stroke-width="1.6" stroke-linecap="round"/>
-    </svg>`;
-  }
-  return `<svg viewBox="0 0 24 24" aria-hidden="true">
-    <circle cx="12" cy="12" r="5" fill="#ffd45e" stroke="#e8a318" stroke-width="1.3"/>
-    <g stroke="#ffd45e" stroke-width="1.8" stroke-linecap="round">
-      <path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/>
-    </g>
-  </svg>`;
-}
-
-/** Icon theo kiểu thời tiết. */
-export function weatherIcon(weather) {
+/**
+ * Icon theo kiểu thời tiết.
+ * Cần biết cả giai đoạn trong ngày: "trời quang" ban đêm mà vẽ mặt trời thì chip
+ * đọc ra mâu thuẫn với chính con số giờ ngay bên cạnh.
+ */
+export function weatherIcon(weather, phase = 'day') {
   const cloud = `<path d="M7 17h9.5a3.5 3.5 0 0 0 .3-7A5.5 5.5 0 0 0 6.3 11 3 3 0 0 0 7 17z" fill="#e8eef6" stroke="#9fb0c4" stroke-width="1.3" stroke-linejoin="round"/>`;
   if (weather === 'rain') {
     return `<svg viewBox="0 0 24 24" aria-hidden="true">${cloud}
@@ -65,6 +48,13 @@ export function weatherIcon(weather) {
   }
   if (weather === 'cloudy') {
     return `<svg viewBox="0 0 24 24" aria-hidden="true">${cloud}</svg>`;
+  }
+  // Trời quang: ban đêm là trăng và sao, còn lại là mặt trời.
+  if (phase === 'night') {
+    return `<svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="#dfe9ff" stroke="#95a7cc" stroke-width="1.3" stroke-linejoin="round"/>
+      <g fill="#fff3b0"><circle cx="18.5" cy="5.5" r="1.3"/><circle cx="21" cy="9.5" r="1"/></g>
+    </svg>`;
   }
   return `<svg viewBox="0 0 24 24" aria-hidden="true">
     <circle cx="12" cy="12" r="5" fill="#ffd45e" stroke="#e8a318" stroke-width="1.3"/>
