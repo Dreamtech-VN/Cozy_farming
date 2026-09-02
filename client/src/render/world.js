@@ -46,8 +46,12 @@ export class WorldRenderer {
     return Math.max(0.5, Math.min(1.8, Math.max(byWidth, byHeight)));
   }
 
-  /** Nhân vật đứng ở khoảng 66% chiều cao khung nhìn, chừa đất phía dưới. */
-  get anchorY() { return this.viewHeight * 0.66; }
+  /**
+   * Nhân vật đứng ở khoảng 76% chiều cao khung nhìn — tức camera đặt cao hơn và
+   * chúc xuống. Để thấp hơn (66% như trước) thì gần một phần ba màn hình phía
+   * dưới chỉ còn nền đất trống, trong khi nhà cửa và cây phía trên bị cắt ngọn.
+   */
+  get anchorY() { return this.viewHeight * 0.76; }
 
   followCamera(map, target) {
     const halfW = this.viewWidth / 2;

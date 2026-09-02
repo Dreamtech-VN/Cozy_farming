@@ -3,6 +3,13 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.11 — 2026-09-02
+
+### Thay đổi
+- **Camera đặt cao hơn**: nhân vật đứng ở ~76% chiều cao khung nhìn thay vì 66%.
+  Ở mức cũ gần một phần ba màn hình phía dưới chỉ là nền đất trống, trong khi
+  nhà cửa và cây phía trên bị cắt ngọn.
+
 ## 0.1.10 — 2026-09-02
 
 ### Thay đổi
