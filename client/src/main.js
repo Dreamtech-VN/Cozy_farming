@@ -9,6 +9,7 @@ import { Input } from './core/input.js';
 import { WorldRenderer } from './render/world.js';
 import { drawAvatarPortrait } from './render/avatar.js';
 import { levelProgress } from './core/progression.js';
+import { WorldClock, phaseIcon, weatherIcon } from './core/world_clock.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
@@ -36,6 +37,8 @@ class Game {
     this.emotes = new Map();
     this.channel = 1;
     this.minimapAt = 0;
+    this.worldClock = new WorldClock(this.api);
+    this.worldClockAt = 0;
   }
 
   async boot() {
@@ -185,6 +188,9 @@ class Game {
       // Sĩ số khu đổi khi người khác ra vào, nên làm mới định kỳ thay vì chỉ đọc
       // một lần lúc vào map.
       setInterval(() => this.#refreshChannels().catch(() => {}), 15_000);
+      // Đồng hồ chạy cục bộ mỗi giây; hỏi lại server mỗi phút để không trôi lệch.
+      setInterval(() => this.#renderWorldClock(), 1000);
+      setInterval(() => this.#refreshWorldClock(), 60_000);
     }
   }
 
@@ -210,7 +216,34 @@ class Game {
     this.channel = entered.channel ?? 1;
     document.getElementById('hud-map').textContent = t(map.name_key);
     await this.#refreshChannels();
+    await this.#refreshWorldClock();
     this.#drawMinimap();
+  }
+
+  /** Giờ trong game, sáng tối và thời tiết — lấy từ server, hiển thị ở dải HUD. */
+  async #refreshWorldClock() {
+    if (!this.currentMap) return;
+    try {
+      await this.worldClock.refresh(this.currentMap.map_id);
+    } catch {
+      // Mất mạng thì giữ nguyên trạng thái cũ thay vì xoá trắng dải thông tin.
+      return;
+    }
+    this.#renderWorldClock();
+  }
+
+  #renderWorldClock() {
+    const state = this.worldClock.now();
+    if (!state) return;
+
+    document.getElementById('world-clock').textContent = state.clock;
+    document.getElementById('world-phase').textContent = t(state.phase_name_key);
+    document.getElementById('phase-icon').innerHTML = phaseIcon(state.phase);
+    document.getElementById('weather-name').textContent = t(state.weather.name_key);
+    document.getElementById('weather-icon').innerHTML = weatherIcon(state.weather.id);
+
+    // Renderer dùng để phủ sắc trời theo giờ và vẽ mưa.
+    this.renderer.setWorldState(state);
   }
 
   async refreshFarm() {

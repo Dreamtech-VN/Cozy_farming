@@ -82,6 +82,36 @@ export function validateContent(content) {
     issues.push(err('invalid_range', `world.channel_count phải là số nguyên 1–64, đang là ${content.channelCount}`));
   }
 
+  // --- Chu kỳ ngày & thời tiết (doc 03) ---
+  const cycle = content.world?.day_cycle;
+  if (!cycle) issues.push(err('missing_ref', 'world.day_cycle chưa được khai báo'));
+  else {
+    if (!(cycle.real_minutes_per_day > 0)) issues.push(err('invalid_range', 'world.day_cycle.real_minutes_per_day phải > 0'));
+    // Các giai đoạn phải phủ kín 1440 phút, không hở và không chồng nhau.
+    let covered = 0;
+    for (const phase of cycle.phases ?? []) {
+      for (const bound of [phase.from, phase.to]) {
+        if (!Number.isInteger(bound) || bound < 0 || bound > 1439) {
+          issues.push(err('invalid_range', `phase ${phase.id}: mốc ${bound} phải nằm trong 0–1439`));
+        }
+      }
+      covered += (phase.to - phase.from + 1440) % 1440;
+    }
+    if (covered !== 1440) {
+      issues.push(err('invalid_range', `world.day_cycle: các giai đoạn phủ ${covered} phút, phải đúng 1440`));
+    }
+  }
+
+  const weather = content.world?.weather;
+  if (!weather) issues.push(err('missing_ref', 'world.weather chưa được khai báo'));
+  else {
+    if (!(weather.slot_minutes > 0)) issues.push(err('invalid_range', 'world.weather.slot_minutes phải > 0'));
+    if (!(weather.types?.length > 0)) issues.push(err('invalid_range', 'world.weather.types không được rỗng'));
+    for (const type of weather.types ?? []) {
+      if (!(type.weight > 0)) issues.push(err('invalid_range', `weather ${type.id}: weight phải > 0`));
+    }
+  }
+
   // --- Match-3 ---
   const tiers = new Set(content.difficultyTable.map((d) => d.tier));
   for (const level of content.levels) {
@@ -192,7 +222,7 @@ export function collectLocalizationKeys(content) {
   walk({
     crops: content.crops, items: content.items, avatarItems: content.avatarItems, emotes: content.emotes,
     maps: content.maps, levels: content.levels, quests: content.quests, dialogues: content.dialogues,
-    shops: content.shops, economy: content.economy, liveops: content.liveops,
+    shops: content.shops, economy: content.economy, liveops: content.liveops, world: content.world,
   });
   return keys;
 }

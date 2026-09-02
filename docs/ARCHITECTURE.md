@@ -29,7 +29,7 @@ mốc thời gian; nó chỉ gửi ý định và hiển thị kết quả serve
 | Tài liệu | Hiện thực chính |
 | --- | --- |
 | 01 Project Vision, 02 Master GDD | Vòng lặp lõi nối bởi `client/src/main.js` + domain layer |
-| 03 World Design | `data/content/maps.json` (kèm `world.channel_count`), `server/src/realtime/world.js`, `client/src/render/world.js`, `client/src/ui/minimap.js` |
+| 03 World Design | `data/content/maps.json` (kèm `world.channel_count`, `world.day_cycle`, `world.weather`), `server/src/realtime/world.js`, `server/src/domain/world_clock.js`, `client/src/render/world.js`, `client/src/ui/minimap.js` |
 | 04 Character Design | `data/content/avatar_items.json`, `client/src/render/avatar.js`, bảng `character_equipment` / `character_wardrobe` |
 | 05 Art Bible | `client/src/render/*` (vẽ theo layer, prop modular, palette theo map) |
 | 06 Farming Design | `data/content/crops.json`, `server/src/domain/farm.js` |
@@ -74,6 +74,12 @@ dung nhưng khác danh sách người chơi — instance id là `<map_id>:ch<N>`
 `instance_policy: "owner"` (nông trại, nhà) bỏ qua khu, instance thuộc về chủ sở
 hữu. Sĩ số từng khu lấy trực tiếp từ bộ nhớ của `realtime/world.js`; khi tách
 realtime thành nhiều tiến trình thì số này phải lấy từ registry dùng chung.
+
+**Giờ và thời tiết không lưu state.** `domain/world_clock.js` suy ra giai đoạn
+trong ngày từ thời gian thật, và thời tiết từ `hash(map_id + số thứ tự lát thời
+gian)`. Cùng một mốc thời gian luôn cho cùng kết quả, nên mọi người trong một khu
+thấy giống nhau mà không cần bảng nào để ghi, cũng không lệch giữa các tiến trình
+khi scale ngang.
 
 **Board Match-3 nằm ở server.** Client chỉ gửi `{from, to}`; server tự resolve
 cascade và trả về các bước để phát animation. Mỗi trận lưu `seed` nên dựng lại

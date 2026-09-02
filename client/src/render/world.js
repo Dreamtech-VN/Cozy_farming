@@ -29,6 +29,9 @@ export class WorldRenderer {
   /** Map hiện tại quyết định zoom, nên renderer cần biết map đang vẽ. */
   setMap(map) { this.map = map; }
 
+  /** Giờ trong ngày và thời tiết lấy từ server (doc 03 — weather/day-night flags). */
+  setWorldState(state) { this.world = state; }
+
   /**
    * Zoom cân giữa hai ràng buộc:
    *  - chiều rộng: game side-view sống nhờ bối cảnh hai bên. Màn hình ngang cho
@@ -98,6 +101,64 @@ export class WorldRenderer {
     }
 
     this.#drawForeground(map);
+    ctx.restore();
+
+    this.#drawWorldMood(time);
+  }
+
+  /**
+   * Phủ sắc theo giờ trong ngày và vẽ thời tiết. Vẽ ở toạ độ MÀN HÌNH sau khi đã
+   * dựng xong thế giới, nên một lớp phủ là đủ cho cả trời lẫn đất — không phải
+   * đụng vào từng lớp vẽ bên trong.
+   */
+  #drawWorldMood(time) {
+    const state = this.world;
+    if (!state) return;
+    const ctx = this.ctx;
+    const width = this.viewWidth;
+    const height = this.viewHeight;
+
+    const tint = PHASE_TINT[state.phase];
+    if (tint) {
+      const gradient = ctx.createLinearGradient(0, 0, 0, height);
+      gradient.addColorStop(0, tint.top);
+      gradient.addColorStop(1, tint.bottom);
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+    }
+
+    const weather = state.weather?.id;
+    const veil = WEATHER_VEIL[weather];
+    if (veil) {
+      ctx.fillStyle = veil;
+      ctx.fillRect(0, 0, width, height);
+    }
+
+    if (weather === 'rain' || weather === 'storm') this.#drawRain(width, height, time, weather === 'storm');
+  }
+
+  /** Mưa: các vệt rơi tính thẳng từ thời gian nên không phải giữ mảng hạt. */
+  #drawRain(width, height, time, heavy) {
+    const ctx = this.ctx;
+    const count = heavy ? 160 : 90;
+    const speed = heavy ? 1150 : 780;
+    const slant = heavy ? 0.28 : 0.16;
+    const length = heavy ? 26 : 18;
+
+    ctx.save();
+    ctx.strokeStyle = heavy ? 'rgba(198, 224, 255, .55)' : 'rgba(200, 226, 255, .45)';
+    ctx.lineWidth = heavy ? 1.6 : 1.2;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    for (let i = 0; i < count; i++) {
+      const seedX = ((i * 9301 + 49297) % 233280) / 233280;
+      const seedY = ((i * 4801 + 12923) % 233280) / 233280;
+      const fall = (seedY * height + time * speed) % (height + length);
+      const x = seedX * (width + 200) - 100 + fall * slant;
+      ctx.moveTo(x, fall - length);
+      ctx.lineTo(x - length * slant, fall);
+    }
+    ctx.stroke();
     ctx.restore();
   }
 
@@ -370,6 +431,24 @@ export class WorldRenderer {
     return { x, y };
   }
 }
+
+/**
+ * Sắc phủ theo giai đoạn trong ngày. Bình minh và hoàng hôn ám ấm, ban đêm ám
+ * xanh lạnh và đậm hơn hẳn; ban ngày không phủ gì.
+ */
+const PHASE_TINT = {
+  dawn: { top: 'rgba(255, 176, 104, .17)', bottom: 'rgba(255, 214, 162, .07)' },
+  dusk: { top: 'rgba(255, 128, 72, .19)', bottom: 'rgba(146, 92, 128, .10)' },
+  night: { top: 'rgba(14, 26, 68, .50)', bottom: 'rgba(24, 44, 88, .34)' },
+};
+
+/* Màn thời tiết phải nhẹ tay: nó chồng lên sắc phủ theo giờ, hai lớp cộng lại
+   dễ biến cả khung hình thành một mảng xám bệch. */
+const WEATHER_VEIL = {
+  cloudy: 'rgba(120, 134, 152, .10)',
+  rain: 'rgba(64, 92, 128, .15)',
+  storm: 'rgba(38, 54, 86, .26)',
+};
 
 /** Hash chuỗi -> số nguyên, để mỗi map có bố cục cảnh vật cố định. */
 function hashString(value) {

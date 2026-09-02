@@ -3,6 +3,27 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.12 — 2026-09-02
+
+### Thêm mới
+- **Giờ trong game, sáng tối và thời tiết** (doc 03 — weather/day-night flags).
+  `data/content/maps.json` khai báo `world.day_cycle` (một ngày game dài 120 phút
+  thật, bốn giai đoạn dawn/day/dusk/night) và `world.weather` (bốn kiểu thời tiết
+  có trọng số, đổi mỗi 20 phút).
+  - `GET /v1/world/clock?map_id=` trả giờ, giai đoạn và thời tiết của map.
+  - Cả hai đều **suy ra xác định** từ thời gian thật và `map_id`, không lưu state:
+    mọi người trong cùng khu thấy giống nhau, và không có gì lệch khi scale ngang.
+  - Client hỏi lại server mỗi phút rồi tự chạy đồng hồ giữa hai lần hỏi.
+- **Thế giới phản ánh trạng thái đó**: lớp phủ sắc theo giai đoạn (bình minh và
+  hoàng hôn ám ấm, ban đêm ám xanh lạnh) và mưa/giông vẽ thành vệt rơi.
+- Validator kiểm tra các giai đoạn phủ đúng 1440 phút, không hở không chồng, và
+  trọng số thời tiết đều dương.
+
+### Thay đổi
+- **Bố cục HUD**: ví tiền chuyển sang cột trái, nằm dưới card nhân vật; cột phải
+  lùi xuống một hàng nên minimap ngang tầm hàng ví; dưới minimap là một dải gồm
+  nút chuyển khu, chip giờ + giai đoạn, và chip thời tiết.
+
 ## 0.1.11 — 2026-09-02
 
 ### Thay đổi

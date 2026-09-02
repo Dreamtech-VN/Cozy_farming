@@ -10,6 +10,7 @@ import * as quest from '../domain/quest.js';
 import * as social from '../domain/social.js';
 import * as shop from '../domain/shop.js';
 import { getWallet, regenerateEnergy } from '../domain/economy.js';
+import { worldState } from '../domain/world_clock.js';
 import { logEvent, summarize } from '../domain/analytics.js';
 
 export function registerRoutes(router, ctx) {
@@ -113,6 +114,16 @@ export function registerRoutes(router, ctx) {
     if (!map) throw notFound(`map không tồn tại: ${params.mapId}`);
     if (character.level < map.unlock_level) throw badRequest('Chưa mở khoá map này');
     return { body: { map_id: map.map_id, channel_count: content.channelCount, channels: ctx.world.listChannels(map) } };
+  });
+
+  /**
+   * Giờ trong game, giai đoạn sáng/tối và thời tiết của một map (doc 03).
+   * Server là nguồn duy nhất để mọi người trong cùng khu thấy giống nhau.
+   */
+  router.get('/v1/world/clock', ({ query }) => {
+    const mapId = query.get('map_id');
+    if (mapId && !content.byMap.has(mapId)) throw notFound(`map không tồn tại: ${mapId}`);
+    return { body: worldState(content, mapId ?? 'map_city_plaza') };
   });
 
   /** Đồ hình thế giới cho bản đồ thành phố: node là map, cạnh là portal (doc 03). */

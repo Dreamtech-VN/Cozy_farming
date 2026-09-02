@@ -2,8 +2,28 @@
   "version": "0.1.0",
   "comment": "Doc 03 — map 2D side-view. ground_y là mặt đất mặc định; platforms là các bệ đứng thêm.",
   "world": {
-    "comment": "Doc 03/16 — map public được chia thành nhiều khu (channel) cùng nội dung, khác danh sách người chơi.",
-    "channel_count": 20
+    "comment": "Doc 03/16 — map public chia thành nhiều khu (channel); doc 03 — weather/day-night flags.",
+    "channel_count": 20,
+    "day_cycle": {
+      "comment": "Một ngày trong game kéo dài bao nhiêu phút thật. Mốc giờ tính theo phút trong ngày (0–1439).",
+      "real_minutes_per_day": 120,
+      "phases": [
+        { "id": "dawn",  "from": 300,  "to": 420,  "name_key": "phase.dawn" },
+        { "id": "day",   "from": 420,  "to": 1020, "name_key": "phase.day" },
+        { "id": "dusk",  "from": 1020, "to": 1140, "name_key": "phase.dusk" },
+        { "id": "night", "from": 1140, "to": 300,  "name_key": "phase.night" }
+      ]
+    },
+    "weather": {
+      "comment": "Thời tiết đổi theo từng lát thời gian, suy ra xác định từ map_id + số thứ tự lát nên mọi client đều ra cùng kết quả mà không cần lưu state.",
+      "slot_minutes": 20,
+      "types": [
+        { "id": "clear",  "name_key": "weather.clear",  "weight": 50 },
+        { "id": "cloudy", "name_key": "weather.cloudy", "weight": 27 },
+        { "id": "rain",   "name_key": "weather.rain",   "weight": 17 },
+        { "id": "storm",  "name_key": "weather.storm",  "weight": 6 }
+      ]
+    }
   },
   "maps": [
     {

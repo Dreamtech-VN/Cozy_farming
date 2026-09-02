@@ -32,6 +32,7 @@ export function loadContent({ dataDir, localeDir }) {
     emotes: raw.avatar_items.emotes,
     maps: raw.maps.maps,
     channelCount: raw.maps.world?.channel_count ?? 1,
+    world: raw.maps.world ?? {},
     tileTypes: raw.match3_levels.tile_types,
     specialTiles: raw.match3_levels.special_tiles,
     difficultyTable: raw.match3_levels.difficulty_table,
