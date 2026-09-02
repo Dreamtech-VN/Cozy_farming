@@ -99,12 +99,14 @@ html, body {
   white-space: nowrap;
 }
 #world-clock { font-variant-numeric: tabular-nums; }
+#world-status { gap: 6px; padding: 0 11px; }
 
-/* Vạch ngăn giữa nửa "giờ" và nửa "thời tiết" trong cùng một chip. */
-.chip-divider {
-  width: 1px; height: 15px; flex: 0 0 auto;
-  background: rgba(255, 255, 255, .26);
-  margin: 0 1px;
+/* Chỉ ẩn khỏi mắt, không ẩn khỏi trình đọc màn hình: dùng display:none thì
+   người dùng trình đọc mất luôn thông tin giai đoạn và thời tiết. */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
 
 /* ---------- Thông tin nhân vật (kính mờ) ----------
@@ -529,6 +531,5 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
   #minimap canvas { width: 150px; height: 64px; }
   #channel-button { min-height: 30px; padding: 0 5px 0 9px; }
   .world-chip { min-height: 28px; padding: 0 9px; font-size: 12px; gap: 5px; }
-  /* Cửa sổ thấp: bỏ tên giai đoạn, giữ giờ và thời tiết cho chip khỏi tràn. */
-  #world-phase { display: none; }
+  #world-status { padding: 0 9px; }
 }

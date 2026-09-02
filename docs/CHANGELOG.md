@@ -3,6 +3,14 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.14 — 2026-09-02
+
+### Thay đổi
+- **Chip giờ và thời tiết rút gọn** còn biểu tượng giai đoạn + đồng hồ + biểu
+  tượng thời tiết (rộng 112px). Tên giai đoạn và tên thời tiết chuyển vào tooltip.
+- Hai tên đó vẫn nằm trong DOM dưới dạng `.sr-only` chứ không `display: none`,
+  để người dùng trình đọc màn hình không mất thông tin.
+
 ## 0.1.13 — 2026-09-02
 
 ### Thay đổi

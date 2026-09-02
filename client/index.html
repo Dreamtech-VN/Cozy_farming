@@ -68,13 +68,15 @@
             </svg>
           </button>
 
-          <span class="world-chip" id="world-status" title="Giờ trong game và thời tiết">
+          <!-- Chip gọn: biểu tượng giai đoạn + giờ + biểu tượng thời tiết.
+               Tên giai đoạn và tên thời tiết vẫn nằm trong DOM cho trình đọc màn
+               hình, và hiện ra ở tooltip khi rê chuột. -->
+          <span class="world-chip" id="world-status">
             <span class="chip-icon" id="phase-icon"></span>
             <b id="world-clock">--:--</b>
-            <span class="chip-sub" id="world-phase">—</span>
-            <span class="chip-divider" aria-hidden="true"></span>
             <span class="chip-icon" id="weather-icon"></span>
-            <span class="chip-sub" id="weather-name">—</span>
+            <span class="sr-only" id="world-phase">—</span>
+            <span class="sr-only" id="weather-name">—</span>
           </span>
         </div>
       </div>

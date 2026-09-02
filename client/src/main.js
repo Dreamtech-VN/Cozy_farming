@@ -236,11 +236,16 @@ class Game {
     const state = this.worldClock.now();
     if (!state) return;
 
+    const phaseName = t(state.phase_name_key);
+    const weatherName = t(state.weather.name_key);
+
     document.getElementById('world-clock').textContent = state.clock;
-    document.getElementById('world-phase').textContent = t(state.phase_name_key);
+    document.getElementById('world-phase').textContent = phaseName;
+    document.getElementById('weather-name').textContent = weatherName;
     document.getElementById('phase-icon').innerHTML = phaseIcon(state.phase);
-    document.getElementById('weather-name').textContent = t(state.weather.name_key);
     document.getElementById('weather-icon').innerHTML = weatherIcon(state.weather.id);
+    // Chip chỉ hiện biểu tượng và giờ; tên đầy đủ nằm ở tooltip.
+    document.getElementById('world-status').title = `${state.clock} · ${phaseName} · ${weatherName}`;
 
     // Renderer dùng để phủ sắc trời theo giờ và vẽ mưa.
     this.renderer.setWorldState(state);
