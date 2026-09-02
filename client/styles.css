@@ -65,13 +65,11 @@ html, body {
   padding: calc(8px + env(safe-area-inset-top, 0px)) 10px 8px;
   pointer-events: none;
 }
-/* Cột trái: card nhân vật ở hàng trên, ví tiền ở hàng dưới. */
-.hud-left { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
-.hud-wallet { display: flex; gap: 8px; padding-left: 6px; }
+.hud-left { display: flex; align-items: flex-start; }
 
-/* Cột phải lùi xuống một hàng để minimap ngang tầm hàng ví bên trái, chừa dải
-   trên cùng cho card nhân vật thở. */
-.hud-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; margin-top: 46px; }
+/* Cột phải xếp dọc: ví tiền, minimap, rồi dải khu + trạng thái thế giới. */
+.hud-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.hud-wallet { display: flex; gap: 8px; }
 .hud-strip { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 
 /* ---------- Chip trạng thái thế giới (giờ, sáng tối, thời tiết) ---------- */
@@ -101,6 +99,13 @@ html, body {
   white-space: nowrap;
 }
 #world-clock { font-variant-numeric: tabular-nums; }
+
+/* Vạch ngăn giữa nửa "giờ" và nửa "thời tiết" trong cùng một chip. */
+.chip-divider {
+  width: 1px; height: 15px; flex: 0 0 auto;
+  background: rgba(255, 255, 255, .26);
+  margin: 0 1px;
+}
 
 /* ---------- Thông tin nhân vật (kính mờ) ----------
    Bố cục: chân dung tròn mang badge cấp ở góc, bên phải là tên trên một dòng
@@ -523,6 +528,7 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
   #minimap { padding: 10px; border-radius: 18px; }
   #minimap canvas { width: 150px; height: 64px; }
   #channel-button { min-height: 30px; padding: 0 5px 0 9px; }
-  .world-chip { min-height: 28px; padding: 0 9px; font-size: 12px; }
-  .hud-right { margin-top: 36px; }
+  .world-chip { min-height: 28px; padding: 0 9px; font-size: 12px; gap: 5px; }
+  /* Cửa sổ thấp: bỏ tên giai đoạn, giữ giờ và thời tiết cho chip khỏi tràn. */
+  #world-phase { display: none; }
 }

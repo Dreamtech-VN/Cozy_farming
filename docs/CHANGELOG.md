@@ -3,6 +3,15 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.13 — 2026-09-02
+
+### Thay đổi
+- **Ví tiền lên trên minimap**, cùng cột phải. Cột phải giờ xếp dọc: ví, minimap,
+  rồi dải khu + trạng thái thế giới. Cột trái chỉ còn card nhân vật.
+- **Gộp giờ và thời tiết vào một chip**: biểu tượng giai đoạn, đồng hồ, tên giai
+  đoạn, vạch ngăn, rồi biểu tượng và tên thời tiết. Cửa sổ thấp thì ẩn tên giai
+  đoạn để chip không tràn.
+
 ## 0.1.12 — 2026-09-02
 
 ### Thêm mới
