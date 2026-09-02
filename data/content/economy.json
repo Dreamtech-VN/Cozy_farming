@@ -1,0 +1,38 @@
+{
+  "version": "0.1.0",
+  "comment": "Doc 09 — mọi giá trị cân bằng nằm ở đây, không hard-code trong code.",
+  "currencies": [
+    { "currency_id": "coin",        "name_key": "currency.coin",  "premium": false, "cap": 999999999 },
+    { "currency_id": "gem",         "name_key": "currency.gem",   "premium": true,  "cap": 9999999 },
+    { "currency_id": "energy",      "name_key": "currency.energy", "premium": false, "cap": 120 },
+    { "currency_id": "event_token", "name_key": "currency.event_token", "premium": false, "cap": 99999, "expires_with_event": true }
+  ],
+  "starting_grant": { "coin": 500, "gem": 20, "energy": 60 },
+  "energy": { "regen_seconds": 300, "regen_amount": 1, "soft_cap": 60 },
+  "level_curve": { "base_xp": 100, "growth": 1.35, "max_level": 60 },
+  "farm": {
+    "starting_plots": 6,
+    "max_plots": 24,
+    "plot_unlock": [
+      { "plots": 8,  "farm_level": 2, "coin": 1500 },
+      { "plots": 10, "farm_level": 3, "coin": 4000 },
+      { "plots": 12, "farm_level": 4, "coin": 9000 },
+      { "plots": 16, "farm_level": 6, "coin": 20000 },
+      { "plots": 20, "farm_level": 8, "coin": 45000 },
+      { "plots": 24, "farm_level": 10, "coin": 90000 }
+    ],
+    "farm_level_xp": { "base_xp": 150, "growth": 1.4, "max_level": 20 }
+  },
+  "sinks": [
+    { "sink_id": "sink_shop_seed", "currency": "coin", "note": "mua hạt giống" },
+    { "sink_id": "sink_shop_cosmetic", "currency": "coin|gem", "note": "cosmetic" },
+    { "sink_id": "sink_plot_unlock", "currency": "coin", "note": "mở rộng nông trại" },
+    { "sink_id": "sink_energy_refill", "currency": "gem", "note": "hồi energy" }
+  ],
+  "rate_limits": {
+    "chat_messages_per_minute": 20,
+    "auth_attempts_per_minute": 10,
+    "match_actions_per_second": 8,
+    "api_requests_per_minute": 240
+  }
+}

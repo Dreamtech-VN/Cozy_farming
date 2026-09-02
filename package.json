@@ -1,0 +1,20 @@
+{
+  "name": "social-mmo-2d",
+  "version": "0.1.0",
+  "private": true,
+  "description": "2D Social MMO — Farming + Social + Match-3. Server, client và content pipeline theo bộ tài liệu thiết kế trong docs/.",
+  "type": "module",
+  "engines": { "node": ">=22.5.0" },
+  "scripts": {
+    "start": "node server/src/index.js",
+    "dev": "NODE_ENV=development LOG_LEVEL=debug node --watch server/src/index.js",
+    "test": "node --test 'tests/*.test.js'",
+    "validate:content": "node tools/validate-content.mjs",
+    "lint": "node tools/lint.mjs",
+    "check": "npm run lint && npm run validate:content && npm test",
+    "seed": "node tools/seed-dev.mjs",
+    "docs:import": "node tools/docx-to-markdown.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,0 +1,23 @@
+{
+  "version": "0.1.0",
+  "comment": "Doc 11 — objective type: harvest | collect | match3_win | visit_map | talk_npc | reach_level | buy_item.",
+  "quests": [
+    { "quest_id": "quest_main_001", "type": "main", "name_key": "quest.main_001.name", "desc_key": "quest.main_001.desc", "dialogue_id": "dlg_guide_intro", "prerequisites": [], "objectives": [{ "type": "talk_npc", "target": "npc_farmer_tu", "count": 1 }], "rewards": { "coin": 200, "xp": 50, "items": [{ "item_id": "item_seed_carrot", "count": 5 }] }, "unlocks": ["quest_main_002"] },
+    { "quest_id": "quest_main_002", "type": "main", "name_key": "quest.main_002.name", "desc_key": "quest.main_002.desc", "dialogue_id": "dlg_farm_intro", "prerequisites": ["quest_main_001"], "objectives": [{ "type": "harvest", "target": "crop_carrot", "count": 3 }], "rewards": { "coin": 300, "xp": 80, "items": [{ "item_id": "item_seed_turnip", "count": 5 }] }, "unlocks": ["quest_main_003"] },
+    { "quest_id": "quest_main_003", "type": "main", "name_key": "quest.main_003.name", "desc_key": "quest.main_003.desc", "dialogue_id": "dlg_arcade_hello", "prerequisites": ["quest_main_002"], "objectives": [{ "type": "match3_win", "target": "m3_pve_001", "count": 1 }], "rewards": { "coin": 400, "xp": 120, "items": [], "avatar_items": ["outfit_hat_straw"] }, "unlocks": ["quest_main_004"] },
+    { "quest_id": "quest_main_004", "type": "main", "name_key": "quest.main_004.name", "desc_key": "quest.main_004.desc", "dialogue_id": "dlg_forest_intro", "prerequisites": ["quest_main_003"], "objectives": [{ "type": "visit_map", "target": "map_forest", "count": 1 }], "rewards": { "coin": 500, "xp": 160, "items": [{ "item_id": "item_energy_snack", "count": 2 }] }, "unlocks": [] },
+    { "quest_id": "quest_side_001", "type": "side", "name_key": "quest.side_001.name", "desc_key": "quest.side_001.desc", "dialogue_id": "dlg_shop_hello", "prerequisites": ["quest_main_001"], "objectives": [{ "type": "collect", "target": "item_crop_turnip", "count": 5 }], "rewards": { "coin": 250, "xp": 60, "items": [] }, "unlocks": [] },
+    { "quest_id": "quest_daily_harvest", "type": "daily", "name_key": "quest.daily_harvest.name", "desc_key": "quest.daily_harvest.desc", "dialogue_id": null, "prerequisites": [], "objectives": [{ "type": "harvest", "target": "any", "count": 8 }], "rewards": { "coin": 300, "xp": 90, "items": [] }, "unlocks": [] },
+    { "quest_id": "quest_daily_match3", "type": "daily", "name_key": "quest.daily_match3.name", "desc_key": "quest.daily_match3.desc", "dialogue_id": null, "prerequisites": [], "objectives": [{ "type": "match3_win", "target": "any", "count": 2 }], "rewards": { "coin": 350, "xp": 110, "items": [{ "item_id": "item_energy_snack", "count": 1 }] }, "unlocks": [] },
+    { "quest_id": "quest_daily_social", "type": "daily", "name_key": "quest.daily_social.name", "desc_key": "quest.daily_social.desc", "dialogue_id": null, "prerequisites": [], "objectives": [{ "type": "visit_map", "target": "map_city_plaza", "count": 1 }], "rewards": { "coin": 150, "xp": 40, "items": [] }, "unlocks": [] },
+    { "quest_id": "quest_weekly_level", "type": "weekly", "name_key": "quest.weekly_level.name", "desc_key": "quest.weekly_level.desc", "dialogue_id": null, "prerequisites": [], "objectives": [{ "type": "reach_level", "target": "5", "count": 1 }], "rewards": { "coin": 1000, "gem": 10, "xp": 300, "items": [] }, "unlocks": [] }
+  ],
+  "dialogues": [
+    { "dialogue_id": "dlg_guide_intro",     "speaker": "npc_guide_mai",     "lines": ["dialogue.guide_intro.1", "dialogue.guide_intro.2"] },
+    { "dialogue_id": "dlg_shop_hello",      "speaker": "npc_shop_keeper",   "lines": ["dialogue.shop_hello.1"] },
+    { "dialogue_id": "dlg_cosmetic_hello",  "speaker": "npc_cosmetic_lan",  "lines": ["dialogue.cosmetic_hello.1"] },
+    { "dialogue_id": "dlg_arcade_hello",    "speaker": "npc_arcade_bo",     "lines": ["dialogue.arcade_hello.1", "dialogue.arcade_hello.2"] },
+    { "dialogue_id": "dlg_farm_intro",      "speaker": "npc_farmer_tu",     "lines": ["dialogue.farm_intro.1", "dialogue.farm_intro.2"] },
+    { "dialogue_id": "dlg_forest_intro",    "speaker": "npc_ranger_hoa",    "lines": ["dialogue.forest_intro.1"] }
+  ]
+}

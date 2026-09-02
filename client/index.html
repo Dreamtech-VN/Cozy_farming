@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#2d4a3e" />
+  <title>2D Social MMO — Farming + Social + Match-3</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <canvas id="stage" aria-label="Thế giới game"></canvas>
+
+    <!-- HUD (doc 12 — world là trung tâm, UI là overlay) -->
+    <header id="hud" class="hidden">
+      <div class="hud-left">
+        <div class="pill" id="hud-name">—</div>
+        <div class="pill" id="hud-level">Lv 1</div>
+        <div class="pill" id="hud-map">—</div>
+      </div>
+      <div class="hud-right">
+        <div class="pill currency" id="hud-coin"><span class="dot coin"></span><span>0</span></div>
+        <div class="pill currency" id="hud-gem"><span class="dot gem"></span><span>0</span></div>
+        <div class="pill currency" id="hud-energy"><span class="dot energy"></span><span>0</span></div>
+      </div>
+    </header>
+
+    <nav id="toolbar" class="hidden">
+      <button data-panel="quests" type="button">Nhiệm vụ</button>
+      <button data-panel="inventory" type="button">Túi đồ</button>
+      <button data-panel="farm" type="button">Nông trại</button>
+      <button data-panel="social" type="button">Bạn bè</button>
+      <button data-panel="chat" type="button">Chat</button>
+      <button data-panel="profile" type="button">Nhân vật</button>
+    </nav>
+
+    <!-- Điều khiển cảm ứng cho mobile portrait (doc 12) -->
+    <div id="touch-controls" class="hidden">
+      <button class="touch-btn" data-key="left" type="button" aria-label="Sang trái">◀</button>
+      <button class="touch-btn" data-key="right" type="button" aria-label="Sang phải">▶</button>
+      <button class="touch-btn action" data-key="action" type="button" aria-label="Tương tác">✦</button>
+      <button class="touch-btn" data-key="jump" type="button" aria-label="Nhảy">▲</button>
+    </div>
+
+    <div id="interact-hint" class="hidden"></div>
+    <div id="toast-stack"></div>
+    <div id="panels"></div>
+    <div id="overlay" class="hidden"></div>
+
+    <div id="connection" class="hidden">Mất kết nối — đang thử lại…</div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

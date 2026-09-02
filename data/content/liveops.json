@@ -1,0 +1,33 @@
+{
+  "version": "0.1.0",
+  "comment": "Doc 17 — season/event/feature flag đều là configuration, đổi được mà không cần deploy client.",
+  "feature_flags": {
+    "match3_pvp": false,
+    "housing": false,
+    "pets": false,
+    "trading": false,
+    "rewarded_ads": false,
+    "chat_global": true
+  },
+  "seasons": [
+    {
+      "season_id": "season_001", "name_key": "season.001",
+      "starts_at": "2026-09-01T00:00:00Z", "ends_at": "2026-11-30T23:59:59Z",
+      "pass_tiers": [
+        { "tier": 1, "xp": 0,    "free_reward": { "coin": 200 },  "premium_reward": { "gem": 10 } },
+        { "tier": 2, "xp": 500,  "free_reward": { "coin": 400 },  "premium_reward": { "avatar_item_id": "outfit_hair_03" } },
+        { "tier": 3, "xp": 1200, "free_reward": { "coin": 800 },  "premium_reward": { "avatar_item_id": "outfit_hat_party" } }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "event_id": "event_harvest_festival", "name_key": "event.harvest_festival",
+      "starts_at": "2026-10-01T00:00:00Z", "ends_at": "2026-10-15T23:59:59Z",
+      "currency": "event_token",
+      "quest_pool": ["quest_daily_harvest"],
+      "shop_pool": ["shop_cosmetic"],
+      "map_ids": ["map_farm_village"]
+    }
+  ]
+}

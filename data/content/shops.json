@@ -1,0 +1,40 @@
+{
+  "version": "0.1.0",
+  "comment": "Doc 09/10 — mọi giá nằm trong data; server là nơi duy nhất trừ tiền và cấp item.",
+  "shops": [
+    {
+      "shop_id": "shop_seed", "name_key": "shop.seed", "npc_id": "npc_farmer_tu",
+      "entries": [
+        { "entry_id": "se_carrot",     "item_id": "item_seed_carrot",     "currency": "coin", "price": 4,   "unlock_level": 1,  "limit_per_day": 0 },
+        { "entry_id": "se_turnip",     "item_id": "item_seed_turnip",     "currency": "coin", "price": 6,   "unlock_level": 1,  "limit_per_day": 0 },
+        { "entry_id": "se_potato",     "item_id": "item_seed_potato",     "currency": "coin", "price": 8,   "unlock_level": 2,  "limit_per_day": 0 },
+        { "entry_id": "se_tomato",     "item_id": "item_seed_tomato",     "currency": "coin", "price": 12,  "unlock_level": 2,  "limit_per_day": 0 },
+        { "entry_id": "se_corn",       "item_id": "item_seed_corn",       "currency": "coin", "price": 19,  "unlock_level": 3,  "limit_per_day": 0 },
+        { "entry_id": "se_strawberry", "item_id": "item_seed_strawberry", "currency": "coin", "price": 27,  "unlock_level": 4,  "limit_per_day": 0 },
+        { "entry_id": "se_wheat",      "item_id": "item_seed_wheat",      "currency": "coin", "price": 34,  "unlock_level": 5,  "limit_per_day": 0 },
+        { "entry_id": "se_pumpkin",    "item_id": "item_seed_pumpkin",    "currency": "coin", "price": 53,  "unlock_level": 6,  "limit_per_day": 0 },
+        { "entry_id": "se_sunflower",  "item_id": "item_seed_sunflower",  "currency": "coin", "price": 69,  "unlock_level": 7,  "limit_per_day": 0 },
+        { "entry_id": "se_blueberry",  "item_id": "item_seed_blueberry",  "currency": "coin", "price": 98,  "unlock_level": 8,  "limit_per_day": 0 },
+        { "entry_id": "se_watermelon", "item_id": "item_seed_watermelon", "currency": "coin", "price": 147, "unlock_level": 9,  "limit_per_day": 0 }
+      ]
+    },
+    {
+      "shop_id": "shop_general", "name_key": "shop.general", "npc_id": "npc_shop_keeper",
+      "entries": [
+        { "entry_id": "ge_snack",   "item_id": "item_energy_snack",    "currency": "coin", "price": 60,  "unlock_level": 1, "limit_per_day": 10 },
+        { "entry_id": "ge_meal",    "item_id": "item_energy_meal",     "currency": "gem",  "price": 15,  "unlock_level": 1, "limit_per_day": 5 },
+        { "entry_id": "ge_shuffle", "item_id": "item_booster_shuffle", "currency": "coin", "price": 180, "unlock_level": 3, "limit_per_day": 0 },
+        { "entry_id": "ge_bomb",    "item_id": "item_booster_bomb",    "currency": "coin", "price": 320, "unlock_level": 5, "limit_per_day": 0 }
+      ]
+    },
+    {
+      "shop_id": "shop_cosmetic", "name_key": "shop.cosmetic", "npc_id": "npc_cosmetic_lan",
+      "entries": [
+        { "entry_id": "co_hair03", "avatar_item_id": "outfit_hair_03", "currency": "coin", "price": 900,  "unlock_level": 2, "limit_per_day": 0 },
+        { "entry_id": "co_top03",  "avatar_item_id": "outfit_top_03",  "currency": "coin", "price": 1200, "unlock_level": 2, "limit_per_day": 0 },
+        { "entry_id": "co_scarf",  "avatar_item_id": "outfit_acc_scarf", "currency": "gem", "price": 40,  "unlock_level": 3, "limit_per_day": 0 },
+        { "entry_id": "co_party",  "avatar_item_id": "outfit_hat_party", "currency": "gem", "price": 80,  "unlock_level": 5, "limit_per_day": 0 }
+      ]
+    }
+  ]
+}

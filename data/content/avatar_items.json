@@ -1,0 +1,32 @@
+{
+  "version": "0.1.0",
+  "comment": "Doc 04 — mỗi cosmetic là 1 layer độc lập; client vẽ theo thứ tự layer_order.",
+  "layer_order": ["back", "body", "bottom", "top", "shoes", "face", "hair", "hat", "accessory"],
+  "avatar_items": [
+    { "item_id": "outfit_body_01",      "slot": "body",      "name_key": "avatar.body_01",      "rarity": "common", "body_types": ["a", "b"], "colors": ["#f3c9a5"], "unlock": { "type": "default" } },
+    { "item_id": "outfit_body_02",      "slot": "body",      "name_key": "avatar.body_02",      "rarity": "common", "body_types": ["a", "b"], "colors": ["#d9a173"], "unlock": { "type": "default" } },
+    { "item_id": "outfit_body_03",      "slot": "body",      "name_key": "avatar.body_03",      "rarity": "common", "body_types": ["a", "b"], "colors": ["#8d5a3b"], "unlock": { "type": "default" } },
+    { "item_id": "outfit_face_01",      "slot": "face",      "name_key": "avatar.face_01",      "rarity": "common", "body_types": ["a", "b"], "colors": ["#2b2b33"], "unlock": { "type": "default" } },
+    { "item_id": "outfit_face_02",      "slot": "face",      "name_key": "avatar.face_02",      "rarity": "common", "body_types": ["a", "b"], "colors": ["#4a3a2a"], "unlock": { "type": "default" } },
+    { "item_id": "outfit_hair_01",      "slot": "hair",      "name_key": "avatar.hair_01",      "rarity": "common", "body_types": ["a", "b"], "colors": ["#3a2c26"], "unlock": { "type": "default" } },
+    { "item_id": "outfit_hair_02",      "slot": "hair",      "name_key": "avatar.hair_02",      "rarity": "common", "body_types": ["a", "b"], "colors": ["#c8763c"], "unlock": { "type": "default" } },
+    { "item_id": "outfit_hair_03",      "slot": "hair",      "name_key": "avatar.hair_03",      "rarity": "rare",   "body_types": ["a", "b"], "colors": ["#6f5ad0"], "unlock": { "type": "shop", "shop_id": "shop_cosmetic" } },
+    { "item_id": "outfit_top_01",       "slot": "top",       "name_key": "avatar.top_01",       "rarity": "common", "body_types": ["a", "b"], "colors": ["#4a86c8"], "unlock": { "type": "default" } },
+    { "item_id": "outfit_top_02",       "slot": "top",       "name_key": "avatar.top_02",       "rarity": "common", "body_types": ["a", "b"], "colors": ["#59b06a"], "unlock": { "type": "default" } },
+    { "item_id": "outfit_top_03",       "slot": "top",       "name_key": "avatar.top_03",       "rarity": "rare",   "body_types": ["a", "b"], "colors": ["#e0576f"], "unlock": { "type": "shop", "shop_id": "shop_cosmetic" } },
+    { "item_id": "outfit_bottom_01",    "slot": "bottom",    "name_key": "avatar.bottom_01",    "rarity": "common", "body_types": ["a", "b"], "colors": ["#3d4c66"], "unlock": { "type": "default" } },
+    { "item_id": "outfit_bottom_02",    "slot": "bottom",    "name_key": "avatar.bottom_02",    "rarity": "common", "body_types": ["a", "b"], "colors": ["#7a5b3c"], "unlock": { "type": "default" } },
+    { "item_id": "outfit_shoes_01",     "slot": "shoes",     "name_key": "avatar.shoes_01",     "rarity": "common", "body_types": ["a", "b"], "colors": ["#2f2f36"], "unlock": { "type": "default" } },
+    { "item_id": "outfit_hat_straw",    "slot": "hat",       "name_key": "avatar.hat_straw",    "rarity": "common", "body_types": ["a", "b"], "colors": ["#dcc07a"], "unlock": { "type": "quest", "quest_id": "quest_main_003" } },
+    { "item_id": "outfit_hat_party",    "slot": "hat",       "name_key": "avatar.hat_party",    "rarity": "epic",   "body_types": ["a", "b"], "colors": ["#e35d9a"], "unlock": { "type": "shop", "shop_id": "shop_cosmetic" } },
+    { "item_id": "outfit_acc_scarf",    "slot": "accessory", "name_key": "avatar.acc_scarf",    "rarity": "rare",   "body_types": ["a", "b"], "colors": ["#d8534f"], "unlock": { "type": "shop", "shop_id": "shop_cosmetic" } },
+    { "item_id": "outfit_back_bag",     "slot": "back",      "name_key": "avatar.back_bag",     "rarity": "common", "body_types": ["a", "b"], "colors": ["#8a6a45"], "unlock": { "type": "default" } }
+  ],
+  "emotes": [
+    { "emote_id": "emote_hello", "name_key": "emote.hello", "glyph": "!" },
+    { "emote_id": "emote_happy", "name_key": "emote.happy", "glyph": "^" },
+    { "emote_id": "emote_sad",   "name_key": "emote.sad",   "glyph": "~" },
+    { "emote_id": "emote_love",  "name_key": "emote.love",  "glyph": "<3" },
+    { "emote_id": "emote_gg",    "name_key": "emote.gg",    "glyph": "GG" }
+  ]
+}

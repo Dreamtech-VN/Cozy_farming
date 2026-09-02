@@ -1,0 +1,125 @@
+{
+  "version": "0.1.0",
+  "comment": "Doc 03 — map 2D side-view. ground_y là mặt đất mặc định; platforms là các bệ đứng thêm.",
+  "maps": [
+    {
+      "map_id": "map_city_plaza",
+      "name_key": "map.city_plaza",
+      "map_type": "city",
+      "group": "City",
+      "width": 2400, "height": 720, "ground_y": 600,
+      "player_capacity": 40,
+      "instance_policy": "public",
+      "unlock_level": 1,
+      "theme": { "sky": ["#8fd0f0", "#dff2fb"], "ground": "#6aa84f", "accent": "#c9a227" },
+      "spawn_points": [
+        { "id": "spawn_default", "x": 300, "y": 600 },
+        { "id": "spawn_from_shopping", "x": 2200, "y": 600 },
+        { "id": "spawn_from_farm_village", "x": 180, "y": 600 }
+      ],
+      "platforms": [{ "x": 900, "y": 470, "w": 260, "h": 24 }],
+      "portals": [
+        { "portal_id": "portal_plaza_shopping", "x": 2320, "y": 600, "w": 60, "h": 120, "target_map_id": "map_city_shopping", "target_spawn": "spawn_from_plaza", "label_key": "portal.shopping" },
+        { "portal_id": "portal_plaza_farmvillage", "x": 40, "y": 600, "w": 60, "h": 120, "target_map_id": "map_farm_village", "target_spawn": "spawn_from_plaza", "label_key": "portal.farm_village" }
+      ],
+      "npcs": [
+        { "npc_id": "npc_guide_mai", "x": 520, "y": 600, "name_key": "npc.guide_mai", "dialogue_id": "dlg_guide_intro", "palette": ["#f3c9a5", "#e0576f", "#3a2c26"] },
+        { "npc_id": "npc_shop_keeper", "x": 1500, "y": 600, "name_key": "npc.shop_keeper", "dialogue_id": "dlg_shop_hello", "shop_id": "shop_general", "palette": ["#f3c9a5", "#4a86c8", "#c8763c"] }
+      ],
+      "objects": [
+        { "object_id": "obj_plaza_fountain", "type": "decoration", "x": 1150, "y": 600, "w": 160, "h": 90 },
+        { "object_id": "obj_plaza_board", "type": "notice_board", "x": 760, "y": 600, "w": 60, "h": 90, "action": "open_quest" }
+      ]
+    },
+    {
+      "map_id": "map_city_shopping",
+      "name_key": "map.city_shopping",
+      "map_type": "city",
+      "group": "City",
+      "width": 1800, "height": 720, "ground_y": 600,
+      "player_capacity": 40,
+      "instance_policy": "public",
+      "unlock_level": 1,
+      "theme": { "sky": ["#b9c8f0", "#eef2fb"], "ground": "#8d8f9a", "accent": "#e35d9a" },
+      "spawn_points": [{ "id": "spawn_default", "x": 200, "y": 600 }, { "id": "spawn_from_plaza", "x": 160, "y": 600 }],
+      "platforms": [],
+      "portals": [
+        { "portal_id": "portal_shopping_plaza", "x": 40, "y": 600, "w": 60, "h": 120, "target_map_id": "map_city_plaza", "target_spawn": "spawn_from_shopping", "label_key": "portal.plaza" }
+      ],
+      "npcs": [
+        { "npc_id": "npc_cosmetic_lan", "x": 700, "y": 600, "name_key": "npc.cosmetic_lan", "dialogue_id": "dlg_cosmetic_hello", "shop_id": "shop_cosmetic", "palette": ["#d9a173", "#6f5ad0", "#3a2c26"] },
+        { "npc_id": "npc_arcade_bo", "x": 1300, "y": 600, "name_key": "npc.arcade_bo", "dialogue_id": "dlg_arcade_hello", "action": "open_match3", "palette": ["#f3c9a5", "#59b06a", "#c8763c"] }
+      ],
+      "objects": [
+        { "object_id": "obj_arcade_cabinet", "type": "match3_entry", "x": 1400, "y": 600, "w": 80, "h": 110, "action": "open_match3" }
+      ]
+    },
+    {
+      "map_id": "map_farm_village",
+      "name_key": "map.farm_village",
+      "map_type": "farming",
+      "group": "Farming",
+      "width": 2000, "height": 720, "ground_y": 610,
+      "player_capacity": 30,
+      "instance_policy": "public",
+      "unlock_level": 1,
+      "theme": { "sky": ["#9fdcf5", "#f0f8dd"], "ground": "#5f9e46", "accent": "#c9782c" },
+      "spawn_points": [{ "id": "spawn_default", "x": 300, "y": 610 }, { "id": "spawn_from_plaza", "x": 1880, "y": 610 }],
+      "platforms": [],
+      "portals": [
+        { "portal_id": "portal_village_plaza", "x": 1950, "y": 610, "w": 60, "h": 120, "target_map_id": "map_city_plaza", "target_spawn": "spawn_from_farm_village", "label_key": "portal.plaza" },
+        { "portal_id": "portal_village_farm", "x": 1000, "y": 610, "w": 70, "h": 130, "target_map_id": "map_player_farm", "target_spawn": "spawn_default", "label_key": "portal.my_farm" },
+        { "portal_id": "portal_village_forest", "x": 40, "y": 610, "w": 60, "h": 120, "target_map_id": "map_forest", "target_spawn": "spawn_default", "label_key": "portal.forest" }
+      ],
+      "npcs": [
+        { "npc_id": "npc_farmer_tu", "x": 620, "y": 610, "name_key": "npc.farmer_tu", "dialogue_id": "dlg_farm_intro", "shop_id": "shop_seed", "palette": ["#d9a173", "#8a9a45", "#3a2c26"] }
+      ],
+      "objects": [
+        { "object_id": "obj_village_well", "type": "decoration", "x": 1400, "y": 610, "w": 90, "h": 80 }
+      ]
+    },
+    {
+      "map_id": "map_player_farm",
+      "name_key": "map.player_farm",
+      "map_type": "farming",
+      "group": "Farming",
+      "width": 1600, "height": 720, "ground_y": 610,
+      "player_capacity": 8,
+      "instance_policy": "owner",
+      "unlock_level": 1,
+      "theme": { "sky": ["#a8e2f2", "#f4fbe4" ], "ground": "#79a24d", "accent": "#a9712f" },
+      "spawn_points": [{ "id": "spawn_default", "x": 180, "y": 610 }],
+      "platforms": [],
+      "portals": [
+        { "portal_id": "portal_farm_village", "x": 40, "y": 610, "w": 60, "h": 120, "target_map_id": "map_farm_village", "target_spawn": "spawn_default", "label_key": "portal.farm_village" }
+      ],
+      "npcs": [],
+      "objects": [
+        { "object_id": "obj_farm_storage", "type": "storage", "x": 1420, "y": 610, "w": 110, "h": 100, "action": "open_inventory" }
+      ],
+      "farm_layout": { "plot_origin_x": 380, "plot_spacing_x": 110, "plot_y": 610, "plots_per_row": 8 }
+    },
+    {
+      "map_id": "map_forest",
+      "name_key": "map.forest",
+      "map_type": "adventure",
+      "group": "Adventure",
+      "width": 2600, "height": 720, "ground_y": 600,
+      "player_capacity": 25,
+      "instance_policy": "public",
+      "unlock_level": 3,
+      "theme": { "sky": ["#79b7a0", "#dff0e4"], "ground": "#3f7a3c", "accent": "#2f5d4a" },
+      "spawn_points": [{ "id": "spawn_default", "x": 200, "y": 600 }],
+      "platforms": [{ "x": 1200, "y": 470, "w": 300, "h": 24 }, { "x": 1750, "y": 380, "w": 220, "h": 24 }],
+      "portals": [
+        { "portal_id": "portal_forest_village", "x": 40, "y": 600, "w": 60, "h": 120, "target_map_id": "map_farm_village", "target_spawn": "spawn_default", "label_key": "portal.farm_village" }
+      ],
+      "npcs": [
+        { "npc_id": "npc_ranger_hoa", "x": 900, "y": 600, "name_key": "npc.ranger_hoa", "dialogue_id": "dlg_forest_intro", "palette": ["#f3c9a5", "#3f7a3c", "#4a3a2a"] }
+      ],
+      "objects": [
+        { "object_id": "obj_forest_shrine", "type": "match3_entry", "x": 2200, "y": 600, "w": 100, "h": 130, "action": "open_match3" }
+      ]
+    }
+  ]
+}

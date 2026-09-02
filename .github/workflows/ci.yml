@@ -1,0 +1,40 @@
+# CI theo doc 21 — DevOps & Infrastructure.
+# Thứ tự: lint -> validate content -> unit/integration test -> smoke test server.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Lint (cú pháp + import + quy ước)
+        run: npm run lint
+
+      - name: Validate content schema (doc 18)
+        run: npm run validate:content
+
+      - name: Test (unit + integration + realtime)
+        run: npm test
+
+      - name: Smoke test — server khởi động và trả /v1/health
+        run: |
+          DB_FILE=:memory: PORT=8099 node server/src/index.js &
+          SERVER_PID=$!
+          for i in $(seq 1 30); do
+            if curl -sf http://127.0.0.1:8099/v1/health > /dev/null; then break; fi
+            sleep 0.5
+          done
+          curl -sf http://127.0.0.1:8099/v1/health | tee /dev/stderr | grep -q '"status":"ok"'
+          curl -sf http://127.0.0.1:8099/ | grep -q '<title>'
+          kill $SERVER_PID

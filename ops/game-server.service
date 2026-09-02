@@ -1,0 +1,26 @@
+# systemd unit cho deploy trên VM (doc 21).
+[Unit]
+Description=2D Social MMO game server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=game
+Group=game
+WorkingDirectory=/opt/game
+EnvironmentFile=/opt/game/.env
+ExecStartPre=/usr/bin/node tools/validate-content.mjs
+ExecStart=/usr/bin/node server/src/index.js
+Restart=always
+RestartSec=3
+
+# Hardening cơ bản (doc 22)
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/game/var
+
+[Install]
+WantedBy=multi-user.target

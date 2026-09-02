@@ -1,0 +1,219 @@
+/*
+ * UI theo doc 12: mobile portrait ưu tiên, một hành động chính mỗi màn,
+ * đủ trạng thái default/pressed/disabled/loading/empty. Doc 05: typography
+ * dễ đọc, tương phản rõ trên nền thế giới 2D.
+ */
+:root {
+  --bg: #101a16;
+  --panel: #1b2b24;
+  --panel-2: #24382f;
+  --line: #35513f;
+  --text: #eef6ef;
+  --muted: #a8c0ae;
+  --accent: #7fc98a;
+  --accent-2: #f2c94c;
+  --danger: #e0576f;
+  --radius: 14px;
+  --safe: env(safe-area-inset-bottom, 0px);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.45 "Segoe UI", system-ui, -apple-system, "Noto Sans", sans-serif;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;
+}
+
+#app { position: fixed; inset: 0; }
+#stage { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; display: block; }
+.hidden { display: none !important; }
+
+/* ---------- HUD ---------- */
+#hud {
+  position: absolute; inset: 0 0 auto 0;
+  display: flex; justify-content: space-between; gap: 8px;
+  padding: calc(8px + env(safe-area-inset-top, 0px)) 10px 8px;
+  pointer-events: none;
+}
+.hud-left, .hud-right { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill {
+  background: rgba(16, 26, 22, .78);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 13px;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+.currency { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+.dot.coin { background: var(--accent-2); }
+.dot.gem { background: #7ad3f0; }
+.dot.energy { background: #ff9c5b; }
+
+/* ---------- Toolbar ---------- */
+/* Một hàng duy nhất, cuộn ngang khi hẹp — nếu để wrap, toolbar cao lên và
+   nằm chồng lên nút điều khiển cảm ứng, chặn mất thao tác (doc 12). */
+#toolbar {
+  position: absolute; left: 0; right: 0; bottom: calc(6px + var(--safe));
+  display: flex; gap: 6px; justify-content: flex-start; flex-wrap: nowrap;
+  padding: 0 8px; overflow-x: auto; scrollbar-width: none;
+}
+#toolbar::-webkit-scrollbar { display: none; }
+#toolbar button {
+  flex: 0 0 auto; min-width: 84px; min-height: 44px;
+  background: rgba(27, 43, 36, .92);
+  color: var(--text); border: 1px solid var(--line);
+  border-radius: var(--radius); font: inherit; font-weight: 600;
+  cursor: pointer;
+}
+#toolbar button:active { background: var(--panel-2); transform: translateY(1px); }
+#toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- Điều khiển cảm ứng ---------- */
+#touch-controls {
+  position: absolute; left: 0; right: 0; bottom: calc(66px + var(--safe));
+  display: flex; justify-content: space-between; padding: 0 14px; pointer-events: none;
+}
+#touch-controls > * { pointer-events: auto; }
+.touch-btn {
+  width: 62px; height: 62px; border-radius: 50%;
+  background: rgba(27, 43, 36, .78); border: 1px solid var(--line);
+  color: var(--text); font-size: 22px; cursor: pointer;
+}
+.touch-btn:active { background: var(--accent); color: #10201a; }
+.touch-btn.action { background: rgba(127, 201, 138, .28); }
+
+/* ---------- Gợi ý tương tác ---------- */
+#interact-hint {
+  position: absolute; left: 50%; bottom: calc(132px + var(--safe));
+  transform: translateX(-50%);
+  background: rgba(16, 26, 22, .9); border: 1px solid var(--accent);
+  border-radius: 999px; padding: 7px 16px; font-size: 13px; font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------- Panel ---------- */
+#panels { position: absolute; inset: 0; pointer-events: none; }
+.panel {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: min(560px, calc(100vw - 24px));
+  max-height: min(72vh, 620px);
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: flex; flex-direction: column; overflow: hidden;
+  pointer-events: auto;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .5);
+}
+.panel header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px; border-bottom: 1px solid var(--line); background: var(--panel-2);
+}
+.panel header h2 { margin: 0; font-size: 16px; }
+.panel .body { padding: 12px 14px; overflow: auto; -webkit-overflow-scrolling: touch; }
+.panel .close {
+  background: none; border: 1px solid var(--line); color: var(--muted);
+  border-radius: 8px; width: 32px; height: 32px; font-size: 18px; cursor: pointer;
+}
+
+.row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 0; border-bottom: 1px solid rgba(53, 81, 63, .5);
+}
+.row:last-child { border-bottom: 0; }
+.row .grow { flex: 1; min-width: 0; }
+.row .title { font-weight: 600; }
+.row .sub { color: var(--muted); font-size: 12.5px; }
+
+button.primary, button.ghost {
+  min-height: 38px; padding: 0 14px; border-radius: 10px;
+  font: inherit; font-weight: 600; cursor: pointer; white-space: nowrap;
+}
+button.primary { background: var(--accent); color: #10201a; border: 0; }
+button.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+button.primary:disabled, button.ghost:disabled { opacity: .45; cursor: not-allowed; }
+button.primary:active:not(:disabled) { filter: brightness(.92); }
+
+.empty { color: var(--muted); text-align: center; padding: 26px 10px; }
+.tag { font-size: 11.5px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.tag.done { color: var(--accent); border-color: var(--accent); }
+.tag.locked { color: var(--danger); border-color: var(--danger); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+.cell {
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px;
+  padding: 8px; text-align: center; cursor: pointer; font-size: 12.5px;
+}
+.cell:active { border-color: var(--accent); }
+.cell .qty { color: var(--accent-2); font-weight: 700; }
+.cell.selected { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+
+/* ---------- Chat ---------- */
+#chat-log { height: 240px; overflow: auto; font-size: 13.5px; }
+#chat-log .line { padding: 3px 0; word-break: break-word; }
+#chat-log .who { color: var(--accent); font-weight: 600; }
+#chat-log .system { color: var(--muted); font-style: italic; }
+.chat-input { display: flex; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--line); }
+.chat-input input, .field input, .field select {
+  flex: 1; min-height: 40px; padding: 0 12px; border-radius: 10px;
+  background: var(--bg); border: 1px solid var(--line); color: var(--text); font: inherit;
+}
+.field { margin-bottom: 10px; }
+.field label { display: block; font-size: 12.5px; color: var(--muted); margin-bottom: 4px; }
+.field input, .field select { width: 100%; }
+
+/* ---------- Overlay toàn màn (login, tạo nhân vật, match-3) ---------- */
+#overlay {
+  position: absolute; inset: 0; background: linear-gradient(180deg, #16241d, #0d1712);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+  overflow: auto;
+}
+.card {
+  width: min(460px, 100%); background: var(--panel);
+  border: 1px solid var(--line); border-radius: 18px; padding: 20px;
+}
+.card h1 { margin: 0 0 4px; font-size: 21px; }
+.card p.lead { margin: 0 0 16px; color: var(--muted); font-size: 13.5px; }
+.card .actions { display: flex; gap: 8px; margin-top: 14px; }
+.card .actions button { flex: 1; }
+.error {
+  background: rgba(224, 87, 111, .14); border: 1px solid var(--danger);
+  color: #ffd9df; border-radius: 10px; padding: 9px 12px; font-size: 13px; margin-bottom: 12px;
+}
+
+.swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+.swatch {
+  width: 40px; height: 40px; border-radius: 10px; border: 2px solid transparent; cursor: pointer;
+}
+.swatch[aria-pressed="true"] { border-color: var(--text); }
+
+/* ---------- Toast ---------- */
+#toast-stack {
+  position: absolute; left: 50%; top: 58px; transform: translateX(-50%);
+  display: flex; flex-direction: column; gap: 6px; align-items: center; pointer-events: none;
+}
+.toast {
+  background: rgba(16, 26, 22, .94); border: 1px solid var(--line);
+  border-radius: 10px; padding: 8px 14px; font-size: 13px; max-width: 84vw;
+}
+.toast.good { border-color: var(--accent); }
+.toast.bad { border-color: var(--danger); }
+
+#connection {
+  position: absolute; left: 50%; top: 10px; transform: translateX(-50%);
+  background: var(--danger); color: #fff; border-radius: 999px;
+  padding: 6px 14px; font-size: 12.5px; font-weight: 600;
+}
+
+@media (min-width: 860px) {
+  #toolbar { bottom: 14px; justify-content: center; }
+  #toolbar button { min-width: 108px; }
+  #touch-controls { display: none !important; }
+}

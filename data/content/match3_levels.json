@@ -1,0 +1,71 @@
+{
+  "version": "0.1.0",
+  "comment": "Doc 07 — board do server sinh và giữ; difficulty table điều chỉnh modifier/enemy/objective.",
+  "tile_types": [
+    { "tile_id": "t_leaf",   "color": "#5db06a" },
+    { "tile_id": "t_berry",  "color": "#e0576f" },
+    { "tile_id": "t_water",  "color": "#4a86c8" },
+    { "tile_id": "t_sun",    "color": "#f2c94c" },
+    { "tile_id": "t_stone",  "color": "#9aa1ad" },
+    { "tile_id": "t_bloom",  "color": "#b98ce0" }
+  ],
+  "special_tiles": [
+    { "special_id": "sp_line_h", "made_by": "match4_row",  "effect": "clear_row" },
+    { "special_id": "sp_line_v", "made_by": "match4_col",  "effect": "clear_col" },
+    { "special_id": "sp_area",   "made_by": "match_l_or_t", "effect": "clear_area_3x3" },
+    { "special_id": "sp_color",  "made_by": "match5_line", "effect": "clear_color" }
+  ],
+  "difficulty_table": [
+    { "tier": 1, "tile_type_count": 5, "enemy_hp_mult": 1.0, "move_mult": 1.0 },
+    { "tier": 2, "tile_type_count": 5, "enemy_hp_mult": 1.4, "move_mult": 0.95 },
+    { "tier": 3, "tile_type_count": 6, "enemy_hp_mult": 1.9, "move_mult": 0.9 },
+    { "tier": 4, "tile_type_count": 6, "enemy_hp_mult": 2.6, "move_mult": 0.85 }
+  ],
+  "levels": [
+    {
+      "level_id": "m3_pve_001", "name_key": "m3.level_001", "tier": 1, "unlock_level": 1,
+      "board": { "width": 8, "height": 8 }, "moves": 22,
+      "objective": { "type": "defeat_enemy" },
+      "enemy": { "enemy_id": "enemy_slime_green", "name_key": "enemy.slime_green", "hp": 800, "attack": 40, "attack_every_turns": 3, "color": "#5db06a" },
+      "energy_cost": 5,
+      "rewards": { "coin": 120, "xp": 40, "items": [{ "item_id": "item_seed_carrot", "min": 1, "max": 2 }] },
+      "first_clear_rewards": { "coin": 200, "gem": 5, "items": [] }
+    },
+    {
+      "level_id": "m3_pve_002", "name_key": "m3.level_002", "tier": 1, "unlock_level": 2,
+      "board": { "width": 8, "height": 8 }, "moves": 20,
+      "objective": { "type": "defeat_enemy" },
+      "enemy": { "enemy_id": "enemy_crow", "name_key": "enemy.crow", "hp": 1100, "attack": 55, "attack_every_turns": 3, "color": "#4a4a58" },
+      "energy_cost": 5,
+      "rewards": { "coin": 180, "xp": 60, "items": [{ "item_id": "item_mat_fiber", "min": 1, "max": 3 }] },
+      "first_clear_rewards": { "coin": 260, "gem": 5, "items": [] }
+    },
+    {
+      "level_id": "m3_pve_003", "name_key": "m3.level_003", "tier": 2, "unlock_level": 4,
+      "board": { "width": 8, "height": 8 }, "moves": 20,
+      "objective": { "type": "defeat_enemy" },
+      "enemy": { "enemy_id": "enemy_boar", "name_key": "enemy.boar", "hp": 1800, "attack": 80, "attack_every_turns": 2, "color": "#8a6a45" },
+      "energy_cost": 6,
+      "rewards": { "coin": 280, "xp": 90, "items": [{ "item_id": "item_mat_wood", "min": 1, "max": 3 }] },
+      "first_clear_rewards": { "coin": 400, "gem": 8, "items": [{ "item_id": "item_booster_shuffle", "min": 1, "max": 1 }] }
+    },
+    {
+      "level_id": "m3_pve_004", "name_key": "m3.level_004", "tier": 3, "unlock_level": 6,
+      "board": { "width": 8, "height": 8 }, "moves": 18,
+      "objective": { "type": "defeat_enemy" },
+      "enemy": { "enemy_id": "enemy_stone_golem", "name_key": "enemy.stone_golem", "hp": 3000, "attack": 110, "attack_every_turns": 2, "color": "#9aa1ad" },
+      "energy_cost": 8,
+      "rewards": { "coin": 420, "xp": 140, "items": [{ "item_id": "item_booster_bomb", "min": 1, "max": 1 }] },
+      "first_clear_rewards": { "coin": 600, "gem": 12, "items": [] }
+    },
+    {
+      "level_id": "m3_pve_005", "name_key": "m3.level_005", "tier": 4, "unlock_level": 9,
+      "board": { "width": 8, "height": 8 }, "moves": 18,
+      "objective": { "type": "defeat_enemy" },
+      "enemy": { "enemy_id": "enemy_night_bloom", "name_key": "enemy.night_bloom", "hp": 5200, "attack": 150, "attack_every_turns": 2, "color": "#b98ce0" },
+      "energy_cost": 10,
+      "rewards": { "coin": 700, "xp": 220, "items": [{ "item_id": "item_seed_moon_lotus", "min": 1, "max": 1 }] },
+      "first_clear_rewards": { "coin": 1000, "gem": 20, "items": [] }
+    }
+  ]
+}
