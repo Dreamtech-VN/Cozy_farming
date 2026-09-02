@@ -3,6 +3,21 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.8 — 2026-09-02
+
+### Thay đổi
+- **Khung minimap vẽ lại hoàn toàn bằng CSS**, bỏ hai file SVG asset của 0.1.7.
+  Vân gỗ là ba lớp gradient chồng nhau (hai lớp sọc lặp lệch góc và lệch chu kỳ
+  để không thành ca-rô, cộng một lớp khối màu); gờ vát và bóng đổ bằng `box-shadow`.
+- **Dây lá góc cũng vẽ bằng CSS**: thân dây là hình tròn chỉ tô hai cạnh (thành
+  một cung ôm góc), thêm hai nhánh chạy dọc cạnh khung và một tua cuốn; lá bo hai
+  góc đối nhau với gân giữa bằng gradient; hoa là sáu lớp radial-gradient
+  (năm cánh và một nhuỵ). Góc dưới-phải dùng lại cùng bộ class, xoay 180°.
+
+### Ghi chú
+Mọi chi tiết trang trí phải nằm trong dải chữ L của khung — phần tử có cả `top`
+và `left` vượt quá bề dày khung sẽ đè lên lòng bản đồ.
+
 ## 0.1.7 — 2026-09-02
 
 ### Thêm mới

@@ -66,26 +66,45 @@ html, body {
 /* ---------- Minimap + chọn khu ---------- */
 /* Khung minimap: khung gỗ hai lớp + dây lá ở hai góc đối nhau.
    overflow phải là visible để dây lá tràn ra ngoài khung như bản UI. */
-/* Khung minimap dùng asset gỗ 9-slice (client/assets/ui/frame-wood.svg):
-   vân gỗ, gờ vát và khắc lõm nằm trong asset nên khung không phụ thuộc vào việc
-   xếp chồng box-shadow, và co giãn ở mọi kích thước mà không méo góc.
-   repeat: stretch để vân gỗ liền mạch; tile (round) làm lộ mối nối dọc cạnh. */
+/* Khung minimap vẽ hoàn toàn bằng CSS.
+   Vân gỗ = ba lớp gradient chồng nhau: hai lớp sọc lặp lệch góc và lệch chu kỳ
+   để không thành ca-rô, cộng một lớp khối màu. Gờ vát và bóng đổ = box-shadow. */
 #minimap {
   pointer-events: auto;
   position: relative; display: block;
-  padding: 0;
-  background: none;
-  border: 17px solid transparent;
-  border-image: url('/assets/ui/frame-wood.svg') 40 / 17px / 0 stretch;
+  padding: 13px;
+  background-image:
+    repeating-linear-gradient(94deg,
+      rgba(122, 82, 40, .17) 0 1px,
+      rgba(255, 246, 228, .07) 1px 2px,
+      transparent 2px 6px),
+    repeating-linear-gradient(87deg,
+      rgba(92, 60, 26, .13) 0 2px,
+      transparent 2px 11px),
+    radial-gradient(120% 90% at 22% 0%, rgba(255, 246, 228, .5), transparent 62%),
+    linear-gradient(158deg, #e3c096 0%, #c99a67 38%, #b1834f 66%, #8d6238 100%);
+  border: 4px solid #6b4726;
+  border-radius: 22px;
   cursor: pointer; overflow: visible;
-  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, .42));
+  box-shadow:
+    inset 0 0 0 3px rgba(247, 226, 196, .55),
+    inset 0 4px 7px rgba(255, 246, 228, .42),
+    inset 0 -5px 9px rgba(84, 56, 26, .42),
+    0 6px 14px rgba(0, 0, 0, .42);
 }
 #minimap:active { transform: translateY(1px); }
 
+/* Miệng khung: viền sẫm khoét vào trong, thêm một vòng sáng và bóng hắt xuống
+   để vùng bản đồ trông như lõm xuống dưới mặt gỗ. */
 .minimap-frame {
   position: relative; display: block;
-  border-radius: 5px; overflow: hidden;
+  border-radius: 7px;
+  box-shadow:
+    0 0 0 3px #6b4726,
+    0 0 0 5px rgba(247, 226, 196, .45),
+    inset 0 3px 6px rgba(0, 0, 0, .38);
 }
+.minimap-frame canvas { border-radius: 7px; }
 /* Biển tên gác lên khung nên phải nằm ở lớp ngoài, không bị .minimap-frame cắt. */
 #minimap > .minimap-label { z-index: 3; }
 #minimap canvas { display: block; width: 184px; height: 78px; }
@@ -104,12 +123,68 @@ html, body {
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
+/* ---------- Dây lá ở góc khung, vẽ bằng CSS ---------- */
+/* Hộp trang trí lệch ra ngoài khung vừa đủ để hoa nằm ĐÈ LÊN góc, không bay hẳn
+   ra ngoài. Cung dây bên trong bám theo bán kính bo của khung. */
 .corner-vine {
-  position: absolute; width: 58px; height: 58px; pointer-events: none;
-  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .32));
+  position: absolute; width: 62px; height: 62px; pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .3));
 }
-.corner-vine.tl { top: -19px; left: -19px; }
-.corner-vine.br { bottom: -19px; right: -19px; transform: rotate(180deg); }
+.corner-vine.tl { top: -9px; left: -9px; }
+.corner-vine.br { bottom: -9px; right: -9px; transform: rotate(180deg); }
+.corner-vine i { position: absolute; display: block; }
+
+/* Thân dây: hình tròn chỉ tô hai cạnh -> một cung ôm lấy góc. */
+.corner-vine .stem {
+  top: 10px; left: 10px; width: 42px; height: 42px;
+  border: 4px solid #5d8a37; border-radius: 50%;
+  border-right-color: transparent; border-bottom-color: transparent;
+}
+/* Hai nhánh chạy tiếp dọc cạnh khung: chỉ có cung ở góc thì trông như cụm hoa
+   rời, có nhánh mới ra dáng dây leo bám khung. */
+.corner-vine .twig {
+  background: #5d8a37; border-radius: 999px;
+}
+.corner-vine .twig.h { top: 7px; left: 28px; width: 32px; height: 4px; transform: rotate(-7deg); }
+.corner-vine .twig.v { top: 28px; left: 7px; width: 4px; height: 32px; transform: rotate(7deg); }
+
+/* Tua cuốn nhỏ ở đuôi dây. */
+.corner-vine .curl {
+  top: 14px; left: 54px; width: 11px; height: 11px;
+  border: 3px solid #6d9a42; border-radius: 50%;
+  border-left-color: transparent; border-bottom-color: transparent;
+  transform: rotate(28deg);
+}
+
+/* Lá: bo hai góc đối nhau tạo hình chiếc lá, gân giữa bằng gradient tuyến tính. */
+.corner-vine .leaf {
+  background:
+    linear-gradient(90deg, transparent calc(50% - 0.6px), rgba(63, 107, 40, .55) calc(50% - 0.6px) calc(50% + 0.6px), transparent calc(50% + 0.6px)),
+    linear-gradient(140deg, #aed172 0%, #7cae49 52%, #517f30 100%);
+  border-radius: 100% 0 100% 0;
+  box-shadow: inset 0 0 0 1px rgba(63, 107, 40, .45);
+}
+.corner-vine .leaf.a { top: 2px;  left: 32px; width: 22px; height: 12px; transform: rotate(-22deg); }
+.corner-vine .leaf.b { top: 32px; left: 2px;  width: 22px; height: 12px; transform: rotate(68deg); }
+.corner-vine .leaf.c { top: 13px; left: 13px; width: 16px; height: 10px; transform: rotate(30deg); }
+.corner-vine .leaf.d { top: 45px; left: 10px; width: 15px; height: 9px;  transform: rotate(96deg); }
+.corner-vine .leaf.e { top: 12px; left: 48px; width: 14px; height: 9px;  transform: rotate(-40deg); }
+
+/* Hoa: một lớp gradient cho nhuỵ, năm lớp cho năm cánh. */
+.corner-vine .bloom {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #f2b529 0 25%, transparent 26%),
+    radial-gradient(circle at 50% 15%, #fffdf6 0 29%, rgba(205, 185, 141, .9) 30%, transparent 31%),
+    radial-gradient(circle at 83% 41%, #fffdf6 0 29%, rgba(205, 185, 141, .9) 30%, transparent 31%),
+    radial-gradient(circle at 70% 85%, #fffdf6 0 29%, rgba(205, 185, 141, .9) 30%, transparent 31%),
+    radial-gradient(circle at 30% 85%, #fffdf6 0 29%, rgba(205, 185, 141, .9) 30%, transparent 31%),
+    radial-gradient(circle at 17% 41%, #fffdf6 0 29%, rgba(205, 185, 141, .9) 30%, transparent 31%);
+}
+.corner-vine .bloom.big { top: 2px; left: 2px; width: 24px; height: 24px; }
+/* Giữ mọi chi tiết trong dải chữ L của khung: ô nào có cả top và left vượt ~30px
+   là đã nằm đè lên lòng bản đồ. */
+.corner-vine .bloom.small { top: 0; left: 37px; width: 16px; height: 16px; }
 
 /* Nút chuyển khu — cùng tone gỗ/giấy với cụm thông tin nhân vật. */
 #channel-button {
@@ -447,10 +522,10 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
   #player-card .banner { min-width: 200px; padding: 5px 11px 5px 28px; }
   #player-card .name { font-size: 15px; max-width: 132px; }
   #player-card .vine { display: none; }
-  #minimap { border-width: 14px; border-image-width: 14px; }
+  #minimap { padding: 10px; border-radius: 18px; }
   #minimap canvas { width: 150px; height: 64px; }
-  .corner-vine { width: 46px; height: 46px; }
-  .corner-vine.tl { top: -15px; left: -15px; }
-  .corner-vine.br { bottom: -15px; right: -15px; }
+  .corner-vine { width: 54px; height: 54px; }
+  .corner-vine.tl { top: -8px; left: -8px; }
+  .corner-vine.br { bottom: -8px; right: -8px; }
   #channel-button { min-height: 30px; padding: 0 9px; }
 }
