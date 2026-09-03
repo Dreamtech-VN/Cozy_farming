@@ -510,6 +510,7 @@ export function openProfile(game) {
 export function energyLine(game) {
   const energy = game.profile?.wallet?.energy ?? 0;
   return el('div', { class: 'row' }, [
+    el('span', { class: 'dot energy' }),
     el('div', { class: 'grow' }, [
       el('div', { class: 'title', text: 'Năng lượng' }),
       el('div', { class: 'sub', text: 'Hồi lại theo thời gian, dùng để vào trận Match-3.' }),

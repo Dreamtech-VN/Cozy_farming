@@ -55,6 +55,7 @@ data/content/  content data-driven: crop, item, cosmetic, map, match-3, quest, s
 locales/       chuỗi hiển thị theo key (vi, en)
 server/src/    http/ realtime/ domain/ db/ content/ lib/
 client/        client HTML5 canvas, ESM thuần, không cần bước build
+               (assets/ chứa asset giao diện — xem client/assets/ATTRIBUTION.md)
 tests/         test theo critical test cases của doc 20
 tools/         validator content, lint, seed dev, chuyển đổi tài liệu
 ops/           Dockerfile, systemd unit, script deploy

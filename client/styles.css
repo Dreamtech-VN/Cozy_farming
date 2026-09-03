@@ -20,22 +20,14 @@
   --radius: 14px;
   --safe: env(safe-area-inset-bottom, 0px);
 
-  /* Kính mờ cho khung HUD.
-     Lớp nền là một gradient tối RẤT nhẹ ở trên, đậm dần xuống dưới: đủ để chữ
-     sáng luôn đọc được dù khung đứng trên trời hay trên cỏ, nhưng không biến
-     mặt kính thành mảng xám đục như bản trước. */
-  --glass-scrim: linear-gradient(165deg, rgba(9, 24, 20, .30) 0%, rgba(9, 22, 19, .56) 100%);
-  --glass-scrim-strong: linear-gradient(165deg, rgba(9, 24, 20, .42) 0%, rgba(9, 22, 19, .66) 100%);
-  --glass-blur: blur(20px) saturate(185%);
-  --glass-edge: rgba(255, 255, 255, .34);
-  /* Bóng kép: một bóng tiếp xúc sát và một bóng toả rộng — chỉ dùng bóng rộng
-     thì khung trông như dán lên màn hình chứ không nổi khỏi nền. */
-  --glass-shadow: 0 2px 5px rgba(0, 0, 0, .26), 0 16px 36px rgba(0, 0, 0, .32);
-  --glass-ink: #ffffff;
-  --glass-ink-soft: rgba(255, 255, 255, .74);
-
-  /* Chữ trên badge sao vàng: nền vàng nên vẫn dùng mực nâu đậm cho tương phản. */
-  --ink: #4a3120;
+  /* Giao diện dùng bộ asset gỗ/giấy trong client/assets/ui (xem
+     client/assets/ATTRIBUTION.md). Khung và nút là ảnh 9-slice; các biến dưới
+     đây chỉ lo phần chữ và bóng đổ. */
+  --ink: #4a2f1c;
+  --ink-soft: #7a5636;
+  --ink-cream: #fbf4e4;
+  --ui-shadow: drop-shadow(0 3px 4px rgba(50, 28, 10, .32));
+  --ui-text-shadow: 0 1px 0 rgba(255, 244, 222, .5);
   color-scheme: dark;
 }
 
@@ -74,334 +66,274 @@ html, body {
 /* ---------- Bảng theo dõi nhiệm vụ ---------- */
 #quest-tracker {
   pointer-events: auto;
-  width: 292px; max-width: calc(100vw - 20px);
-  margin-left: 8px;
-  padding: 9px 12px 10px;
+  width: 300px; max-width: calc(100vw - 20px);
+  margin-left: 6px;
+  padding: 0 4px 2px;
   display: flex; flex-direction: column; gap: 7px;
-  background: var(--glass-scrim);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border-radius: 14px;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .26),
-    inset 0 1px 0 rgba(255, 255, 255, .45),
-    var(--glass-shadow);
+  border: 20px solid transparent;
+  border-image: url('/assets/ui/panel-wood.png') 60 fill / 20px stretch;
+  filter: var(--ui-shadow);
 }
 .qt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .qt-title {
   font-size: 12px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase;
-  color: var(--glass-ink-soft); text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+  color: var(--ink); text-shadow: var(--ui-text-shadow);
 }
 .qt-more {
   background: none; border: 0; padding: 0; cursor: pointer;
-  font: inherit; font-size: 11.5px; font-weight: 700;
-  color: var(--accent); text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+  font: inherit; font-size: 11.5px; font-weight: 800;
+  color: #a35b1e; text-decoration: underline;
 }
-.qt-more:hover { text-decoration: underline; }
+.qt-more:hover { color: #7c4213; }
 
-.qt-row { display: flex; flex-direction: column; gap: 4px; }
+.qt-row { display: flex; flex-direction: column; gap: 3px; }
 .qt-line { display: flex; align-items: center; gap: 8px; }
 .qt-name {
   flex: 1 1 auto; min-width: 0;
-  font-size: 12.5px; font-weight: 700; color: var(--glass-ink);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .38);
+  font-size: 12.5px; font-weight: 700; color: var(--ink);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .qt-tag {
-  flex: 0 0 auto; font-size: 10px; font-weight: 700; color: var(--glass-ink-soft);
-  background: rgba(0, 0, 0, .3); border-radius: 999px; padding: 2px 7px;
+  flex: 0 0 auto; font-size: 10px; font-weight: 800; color: #fdf3e0;
+  background: #a9784a; border-radius: 999px; padding: 2px 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 240, 214, .35);
 }
 .qt-bar {
-  flex: 1 1 auto; height: 6px; border-radius: 999px;
-  background: rgba(255, 255, 255, .16);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .34);
+  flex: 1 1 auto; height: 8px; border-radius: 999px;
+  background: #8a5f37;
+  box-shadow: inset 0 1px 2px rgba(52, 30, 12, .55), 0 1px 0 rgba(255, 240, 214, .4);
   overflow: hidden;
 }
 .qt-bar i {
   display: block; height: 100%; border-radius: 999px;
   background: linear-gradient(180deg, #b6f06a, #6fbf30);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5);
   transition: width .3s ease;
 }
 .qt-count {
-  flex: 0 0 auto; font-size: 11px; font-weight: 700;
-  color: var(--glass-ink-soft); font-variant-numeric: tabular-nums;
+  flex: 0 0 auto; font-size: 11px; font-weight: 800;
+  color: var(--ink-soft); font-variant-numeric: tabular-nums;
 }
 .qt-row.done .qt-bar i { background: linear-gradient(180deg, #ffe98a, #f2b529); }
+/* border-width phải xấp xỉ bề dày viền trong ảnh, để mỏng thì phần viền bị ép
+   mất và nút chỉ còn là một khối trắng trơn. */
 .qt-claim {
-  flex: 0 0 auto; min-height: 22px; padding: 0 10px;
-  border: 0; border-radius: 999px; cursor: pointer;
-  font: inherit; font-size: 11px; font-weight: 800;
-  background: linear-gradient(180deg, #ffe98a, #f2b529); color: #4a3120;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+  flex: 0 0 auto; min-height: 30px; padding: 0 2px;
+  min-width: 64px;
+  border: 14px solid transparent;
+  border-image: url('/assets/ui/btn-cream.png') 54 fill / 14px stretch;
+  background: none; cursor: pointer;
+  font: inherit; font-size: 11px; font-weight: 800; color: var(--ink);
+  text-shadow: var(--ui-text-shadow);
 }
 .qt-claim:active { transform: translateY(1px); }
 
-/* Cột phải xếp dọc: ví tiền, minimap, rồi dải khu + trạng thái thế giới. */
-.hud-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-.hud-wallet { display: flex; gap: 8px; }
-.hud-strip { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-
-/* ---------- Chip trạng thái thế giới (giờ, sáng tối, thời tiết) ---------- */
+/* ---------- Chip trạng thái thế giới (giờ, thời tiết) ---------- */
 .world-chip {
   pointer-events: auto; position: relative;
-  display: inline-flex; align-items: center; gap: 7px;
-  min-height: 32px; padding: 0 12px;
-  background: var(--glass-scrim);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border-radius: 999px;
-  color: var(--glass-ink); font-size: 13px; font-weight: 800;
-  letter-spacing: .2px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .28),
-    inset 0 1px 0 rgba(255, 255, 255, .5),
-    var(--glass-shadow);
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 34px; padding: 0 4px;
+  border: 11px solid transparent;
+  border-image: url('/assets/ui/pill-cream.png') 78 fill / 11px stretch;
+  color: var(--ink); font-size: 13px; font-weight: 800;
+  letter-spacing: .2px; text-shadow: var(--ui-text-shadow);
+  filter: var(--ui-shadow);
 }
 .world-chip .chip-icon {
   width: 18px; height: 18px; flex: 0 0 auto;
   display: grid; place-items: center;
 }
 .world-chip .chip-icon svg { width: 18px; height: 18px; display: block; }
-.world-chip .chip-sub {
-  font-size: 11.5px; font-weight: 700; color: var(--glass-ink-soft);
-  white-space: nowrap;
-}
+.world-chip .chip-sub { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); white-space: nowrap; }
 #world-clock { font-variant-numeric: tabular-nums; }
-#world-status { gap: 6px; padding: 0 11px; }
+#world-status { gap: 7px; padding: 0 6px; }
 
-/* Chỉ ẩn khỏi mắt, không ẩn khỏi trình đọc màn hình: dùng display:none thì
-   người dùng trình đọc mất luôn thông tin giai đoạn và thời tiết. */
+/* Chỉ ẩn khỏi mắt, không ẩn khỏi trình đọc màn hình. */
 .sr-only {
   position: absolute; width: 1px; height: 1px;
   margin: -1px; padding: 0; border: 0;
   overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
 
-/* ---------- Thông tin nhân vật (kính mờ) ----------
-   Bố cục: chân dung tròn mang badge cấp ở góc, bên phải là tên trên một dòng
-   riêng và thanh XP ở dòng dưới. Bản trước xếp sao, thanh và số cùng một hàng
-   nên ba thứ tranh nhau, không có điểm nhìn. */
+/* ---------- Thông tin nhân vật ---------- */
 #player-card {
   pointer-events: auto;
   position: relative;
   display: flex; align-items: center;
   padding: 0; border: 0; background: none;
   font: inherit; text-align: left; cursor: pointer;
-  /* Không đặt filter ở đây: filter trên phần tử cha vô hiệu hoá backdrop-filter
-     của con, kính sẽ không còn nhìn xuyên nền. */
 }
 #player-card:active { transform: translateY(1px); }
 
-/* --- Chân dung --- */
 #player-card .portrait {
   position: relative; z-index: 2; flex: 0 0 auto;
-  width: 76px; height: 76px; border-radius: 50%;
-  background: var(--glass-scrim-strong);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  padding: 4px;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .5),
-    inset 0 2px 0 rgba(255, 255, 255, .55),
-    var(--glass-shadow);
+  width: 84px; height: 84px;
+  background: url('/assets/ui/round-wood.png') center/100% 100% no-repeat;
   display: grid; place-items: center;
+  filter: var(--ui-shadow);
 }
 #player-card canvas {
-  width: 100%; height: 100%; display: block; border-radius: 50%;
+  width: 58px; height: 58px; display: block; border-radius: 50%;
   background: linear-gradient(180deg, #7cc9ee 0%, #a9dcf2 62%, #d6eefb 100%);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), inset 0 -6px 12px rgba(11, 52, 74, .22);
+  box-shadow: inset 0 0 0 1px rgba(120, 80, 40, .35), inset 0 -6px 12px rgba(11, 52, 74, .2);
 }
 
-/* Badge cấp gác lên viền chân dung, không chen vào hàng thanh XP nữa. */
-/* Badge nằm gọn trong chiều cao card: thò xuống dưới thì phần đuôi sao bị cắt
-   bởi mép card và trông như lỗi dựng. */
+/* Badge cấp gác lên viền chân dung, không chen vào hàng thanh XP. */
 #player-card .level-star {
-  position: absolute; right: -6px; bottom: 1px;
-  width: 32px; height: 31px;
+  position: absolute; right: -3px; bottom: 3px;
+  width: 31px; height: 30px;
   display: grid; place-items: center;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .45));
+  filter: drop-shadow(0 2px 3px rgba(50, 28, 10, .45));
 }
 #player-card .level-star svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 #player-card .lv-value {
   position: relative; margin-top: -1px;
-  color: #4a3120; font-size: 12.5px; font-weight: 800; line-height: 1;
+  color: var(--ink); font-size: 12.5px; font-weight: 800; line-height: 1;
 }
 
-/* --- Bảng kính --- */
+/* Bảng gỗ 9-slice. border-width phải đủ dày để phần viền trong ảnh không bị ép
+   méo; phần giữa được kéo giãn nhờ từ khoá fill. */
 #player-card .banner {
   position: relative; z-index: 1;
-  margin-left: -20px; padding: 10px 18px 11px 30px;
-  min-width: 236px;
-  display: flex; flex-direction: column; gap: 8px;
-  background: var(--glass-scrim);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border-radius: 17px;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .28),
-    inset 0 1px 0 rgba(255, 255, 255, .5),
-    var(--glass-shadow);
+  margin-left: -26px;
+  min-width: 250px;
+  display: flex; flex-direction: column; gap: 9px;
+  padding: 4px 8px 5px 26px;
+  border: 22px solid transparent;
+  border-image: url('/assets/ui/panel-wood.png') 60 fill / 22px stretch;
+  filter: var(--ui-shadow);
 }
-/* Ánh sáng dội ở mép trên — vệt chéo phủ cả mặt như bản trước làm kính bị đục. */
-#player-card .banner::before,
-#minimap::before,
-#channel-button::before {
-  content: ''; position: absolute; inset: 0; border-radius: inherit;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(255, 255, 255, .26) 0%, rgba(255, 255, 255, 0) 44%);
-}
-#player-card:hover .banner { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), inset 0 1px 0 rgba(255, 255, 255, .6), var(--glass-shadow); }
 
 #player-card .name {
-  color: var(--glass-ink); font-size: 18px; font-weight: 800; line-height: 1;
+  color: var(--ink); font-size: 18px; font-weight: 800; line-height: 1;
   letter-spacing: .3px; max-width: 214px;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .34);
+  text-shadow: var(--ui-text-shadow);
 }
 
 #player-card .banner-bottom { display: flex; align-items: center; gap: 10px; }
 
 #player-card .xp-bar {
-  flex: 1 1 auto; min-width: 70px; height: 10px;
+  flex: 1 1 auto; min-width: 70px; height: 11px;
   border-radius: 999px;
-  /* Rãnh sáng mờ chứ không phải hố đen: nền tối đặc làm thanh trông rỗng khi
-     tiến độ còn ít. */
-  background: rgba(255, 255, 255, .16);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .38), inset 0 0 0 1px rgba(255, 255, 255, .2);
+  background: #8a5f37;
+  box-shadow: inset 0 2px 3px rgba(52, 30, 12, .55), 0 1px 0 rgba(255, 240, 214, .4);
   overflow: hidden;
 }
 #player-card .xp-fill {
   display: block; height: 100%; width: 0%;
   border-radius: 999px;
   background: linear-gradient(180deg, #b6f06a 0%, #7fd23c 52%, #58ad24 100%);
-  /* Quầng sáng để phần đã đầy vẫn thấy rõ khi tiến độ còn ít. */
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 0 8px rgba(140, 226, 84, .75);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
   transition: width .3s ease;
 }
 #player-card .xp-text {
-  flex: 0 0 auto; color: var(--glass-ink-soft);
-  font-size: 12px; font-weight: 700; line-height: 1;
+  flex: 0 0 auto; color: var(--ink-soft);
+  font-size: 12px; font-weight: 800; line-height: 1;
   letter-spacing: .2px; white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .38);
 }
 
 /* ---------- Minimap + chọn khu ---------- */
-/* Khung minimap dạng kính: viền mảnh, nhãn là chip nhỏ nằm TRONG khung.
-   Biển tên treo lủng lẳng dưới đáy như bản trước làm khối bị lệch và đè lên nút
-   chuyển khu. */
 #minimap {
   pointer-events: auto;
   position: relative; display: block;
-  padding: 7px;
-  background: var(--glass-scrim);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border-radius: 16px;
+  padding: 0; background: none;
+  border: 20px solid transparent;
+  border-image: url('/assets/ui/panel-wood.png') 60 fill / 20px stretch;
   cursor: pointer; overflow: visible;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .28),
-    inset 0 1px 0 rgba(255, 255, 255, .5),
-    var(--glass-shadow);
+  filter: var(--ui-shadow);
 }
-#minimap:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), inset 0 1px 0 rgba(255, 255, 255, .6), var(--glass-shadow); }
 #minimap:active { transform: translateY(1px); }
 
+/* Miệng khung: viền sẫm khoét vào trong cho vùng bản đồ trông lõm dưới mặt gỗ. */
 .minimap-frame {
   position: relative; display: block;
-  border-radius: 10px; overflow: hidden;
+  border-radius: 8px; overflow: hidden;
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, .3),
+    0 0 0 2px #7b5230,
+    0 0 0 3px rgba(255, 240, 214, .4),
     inset 0 2px 6px rgba(0, 0, 0, .35);
 }
-#minimap canvas { display: block; width: 184px; height: 78px; border-radius: 10px; }
+#minimap canvas { display: block; width: 184px; height: 78px; border-radius: 8px; }
 
 .minimap-label {
-  position: absolute; left: 13px; top: 13px; z-index: 3;
-  max-width: calc(100% - 26px);
+  position: absolute; left: 8px; top: 8px; z-index: 3;
+  max-width: calc(100% - 16px);
   padding: 2px 9px;
   font-size: 10.5px; font-weight: 800; letter-spacing: .2px;
-  color: var(--glass-ink);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .6);
-  background: rgba(9, 22, 19, .5);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  color: var(--ink-cream);
+  background: rgba(74, 47, 28, .82);
   border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28);
+  box-shadow: inset 0 0 0 1px rgba(255, 240, 214, .3);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
-/* Nút chuyển khu — cùng chất kính với các khung HUD khác. */
+/* Nút chuyển khu. */
 #channel-button {
   pointer-events: auto; position: relative;
-  display: inline-flex; align-items: center; gap: 8px;
-  min-height: 32px; padding: 0 6px 0 13px;
-  background: var(--glass-scrim);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 0; border-radius: 999px;
-  color: var(--glass-ink); font: inherit; font-weight: 800; cursor: pointer;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .28),
-    inset 0 1px 0 rgba(255, 255, 255, .5),
-    var(--glass-shadow);
+  display: inline-flex; align-items: center; gap: 7px;
+  min-height: 34px; padding: 0 2px 0 6px;
+  border: 11px solid transparent;
+  border-image: url('/assets/ui/pill-wood.png') 78 fill / 11px stretch;
+  background: none;
+  color: var(--ink); font: inherit; font-weight: 800; cursor: pointer;
+  text-shadow: var(--ui-text-shadow);
+  filter: var(--ui-shadow);
 }
-#channel-button:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), inset 0 1px 0 rgba(255, 255, 255, .6), var(--glass-shadow); }
 #channel-button:active { transform: translateY(1px); }
-#channel-button[disabled] { opacity: .6; cursor: default; }
-.channel-label { font-size: 12px; font-weight: 800; color: var(--glass-ink-soft); }
+#channel-button[disabled] { opacity: .65; cursor: default; }
+.channel-label { font-size: 12px; font-weight: 800; color: var(--ink-soft); }
 .channel-value { font-size: 15px; font-weight: 800; }
 .channel-load {
-  font-size: 11px; font-weight: 700; color: var(--glass-ink-soft);
-  background: rgba(0, 0, 0, .34); border-radius: 999px; padding: 3px 8px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
+  font-size: 11px; font-weight: 800; color: var(--ink-cream);
+  background: #a9784a; border-radius: 999px; padding: 3px 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 240, 214, .35);
+  text-shadow: none;
 }
-.channel-caret { width: 11px; height: 8px; color: rgba(255, 255, 255, .75); }
+/* Mũi tên lấy từ bộ asset thay vì vẽ bằng SVG, cho khớp nét với khung gỗ. */
+.channel-caret {
+  width: 17px; height: 13px; flex: 0 0 auto;
+  background: url('/assets/ui/arrow-down.png') center/contain no-repeat;
+}
+.channel-caret path { display: none; }
 
 /* Lưới chọn khu trong popup */
-.channel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); gap: 8px; }
+.channel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 9px; }
 .channel-tile {
-  /* min-height cố định: ô đang đứng có thêm chữ "ở đây", không khoá chiều cao thì
-     nó cao hơn các ô còn lại và lưới bị so le. */
   display: flex; flex-direction: column; align-items: flex-start; gap: 5px;
-  min-height: 74px; justify-content: center;
-  padding: 9px 10px; border-radius: 12px; cursor: pointer;
-  background: var(--panel-2); border: 1.5px solid var(--line);
-  color: var(--text); font: inherit; text-align: left;
+  min-height: 78px; justify-content: center;
+  padding: 2px 4px;
+  border: 14px solid transparent;
+  border-image: url('/assets/ui/btn-cream.png') 54 fill / 14px stretch;
+  background: none; cursor: pointer;
+  color: var(--ink); font: inherit; text-align: left;
 }
-.channel-tile:hover:not(:disabled) { border-color: var(--accent); }
 .channel-tile:disabled { opacity: .45; cursor: not-allowed; }
-.channel-tile[aria-current="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.channel-tile[aria-current="true"] { border-image-source: url('/assets/ui/btn-wood.png'); }
 .channel-tile .n { font-size: 14px; font-weight: 800; }
-.channel-tile .count { font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+.channel-tile .count { font-size: 11.5px; color: var(--ink-soft); white-space: nowrap; }
 .channel-tile .load {
-  width: 100%; height: 5px; border-radius: 999px;
-  background: rgba(255, 255, 255, .14); overflow: hidden;
+  width: 100%; height: 6px; border-radius: 999px;
+  background: #8a5f37; overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(52, 30, 12, .5);
 }
 .channel-tile .load i { display: block; height: 100%; border-radius: 999px; }
 
-/* ---------- Pill chung (tiền tệ, nhãn) ---------- */
+/* ---------- Pill chung (tiền tệ) ---------- */
 .pill {
-  background: var(--glass-scrim);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 0;
-  border-radius: 999px;
-  padding: 5px 14px 5px 5px;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: .2px;
-  color: var(--glass-ink);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .28),
-    inset 0 1px 0 rgba(255, 255, 255, .5),
-    var(--glass-shadow);
+  position: relative;
+  border: 11px solid transparent;
+  border-image: url('/assets/ui/pill-cream.png') 78 fill / 11px stretch;
+  padding: 0 6px 0 2px;
+  min-height: 34px;
+  display: inline-flex; align-items: center;
+  font-size: 14px; font-weight: 800; letter-spacing: .2px;
+  color: var(--ink); text-shadow: var(--ui-text-shadow);
+  filter: var(--ui-shadow);
 }
-.currency { display: inline-flex; align-items: center; gap: 8px; }
+.currency { gap: 7px; }
 
-/* Xu và ngọc vẽ thành hai vật thể khác chất, không phải hai chấm tròn đổi màu. */
+/* Xu và ngọc vẫn vẽ bằng CSS: bộ asset không có icon tiền tệ. */
 .dot { width: 22px; height: 22px; display: inline-block; flex: 0 0 auto; }
 .dot.coin {
   border-radius: 50%;
@@ -411,14 +343,16 @@ html, body {
   box-shadow:
     inset 0 0 0 2px rgba(255, 236, 160, .85),
     inset 0 -2px 3px rgba(140, 88, 12, .5),
-    0 1px 3px rgba(0, 0, 0, .4);
+    0 1px 2px rgba(60, 34, 12, .4);
 }
 .dot.gem {
-  /* clip-path cắt hình viên đá nhiều mặt; gradient chéo tạo mặt cắt sáng tối. */
   clip-path: polygon(50% 0%, 100% 36%, 78% 100%, 22% 100%, 0% 36%);
-  background:
-    linear-gradient(115deg, #eafcff 0 26%, #7ad3f0 26% 55%, #2f9fc9 55% 100%);
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .45));
+  background: linear-gradient(115deg, #eafcff 0 26%, #7ad3f0 26% 55%, #2f9fc9 55% 100%);
+  filter: drop-shadow(0 1px 2px rgba(60, 34, 12, .45));
+}
+/* Năng lượng dùng icon tia sét trong bộ asset. */
+.dot.energy {
+  background: url('/assets/icons/energy.png') center/contain no-repeat;
 }
 
 /* ---------- Toolbar ---------- */
@@ -430,18 +364,19 @@ html, body {
 }
 #toolbar::-webkit-scrollbar { display: none; }
 #toolbar button {
-  flex: 0 0 auto; min-width: 84px; min-height: 44px;
-  background: var(--glass);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  color: var(--glass-ink); border: 1.5px solid var(--glass-edge);
-  border-radius: var(--radius); font: inherit; font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), var(--glass-shadow);
+  flex: 0 0 auto; min-width: 96px; min-height: 46px;
+  padding: 0 10px;
+  background: none;
+  border: 15px solid transparent;
+  border-image: url('/assets/ui/btn-wood.png') 54 fill / 15px stretch;
+  color: var(--ink); font: inherit; font-weight: 800; font-size: 14px;
+  text-shadow: var(--ui-text-shadow);
+  filter: var(--ui-shadow);
   cursor: pointer;
 }
-#toolbar button:active { background: var(--glass-strong); transform: translateY(1px); }
-#toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+#toolbar button:active { transform: translateY(1px); }
+/* Panel đang mở thì nút đổi sang gỗ sáng cho thấy trạng thái. */
+#toolbar button[aria-pressed="true"] { border-image-source: url('/assets/ui/btn-cream.png'); }
 
 /* ---------- Gợi ý tương tác ---------- */
 #interact-hint {
@@ -458,103 +393,136 @@ html, body {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
   width: min(560px, calc(100vw - 24px));
   max-height: min(86vh, 620px);
-  background: var(--panel); border: 1px solid var(--line);
-  border-radius: var(--radius);
+  padding: 0 4px 4px;
+  border: 26px solid transparent;
+  border-image: url('/assets/ui/panel-wood.png') 60 fill / 26px stretch;
   display: flex; flex-direction: column; overflow: hidden;
   pointer-events: auto;
-  box-shadow: 0 18px 48px rgba(0, 0, 0, .5);
+  color: var(--ink);
+  filter: drop-shadow(0 10px 26px rgba(40, 22, 8, .45));
 }
 .panel header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 14px; border-bottom: 1px solid var(--line); background: var(--panel-2);
+  padding: 0 2px 10px; margin-bottom: 4px;
+  border-bottom: 2px solid rgba(122, 86, 54, .35);
 }
-.panel header h2 { margin: 0; font-size: 16px; }
-.panel .body { padding: 12px 14px; overflow: auto; -webkit-overflow-scrolling: touch; }
+.panel header h2 { margin: 0; font-size: 17px; font-weight: 800; text-shadow: var(--ui-text-shadow); }
+.panel .body { padding: 2px; overflow: auto; -webkit-overflow-scrolling: touch; }
 .panel .close {
-  background: none; border: 1px solid var(--line); color: var(--muted);
-  border-radius: 8px; width: 32px; height: 32px; font-size: 18px; cursor: pointer;
+  width: 34px; height: 34px; padding: 0;
+  border: 0; background: url('/assets/icons/close.png') center/contain no-repeat;
+  font-size: 0; cursor: pointer;
+  filter: drop-shadow(0 1px 2px rgba(50, 28, 10, .4));
 }
+.panel .close:active { transform: translateY(1px); }
 
 .row {
   display: flex; align-items: center; gap: 10px;
-  padding: 9px 0; border-bottom: 1px solid rgba(53, 81, 63, .5);
+  padding: 9px 2px; border-bottom: 1px dashed rgba(122, 86, 54, .4);
 }
 .row:last-child { border-bottom: 0; }
 .row .grow { flex: 1; min-width: 0; }
-.row .title { font-weight: 600; }
-.row .sub { color: var(--muted); font-size: 12.5px; }
+.row .title { font-weight: 800; }
+.row .sub { color: var(--ink-soft); font-size: 12.5px; }
 
 button.primary, button.ghost {
-  min-height: 38px; padding: 0 14px; border-radius: 10px;
-  font: inherit; font-weight: 600; cursor: pointer; white-space: nowrap;
+  min-height: 40px; padding: 0 6px; min-width: 84px;
+  border: 14px solid transparent;
+  background: none; cursor: pointer; white-space: nowrap;
+  font: inherit; font-weight: 800; color: var(--ink);
+  text-shadow: var(--ui-text-shadow);
 }
-button.primary { background: var(--accent); color: #10201a; border: 0; }
-button.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+button.primary { border-image: url('/assets/ui/btn-wood.png') 54 fill / 14px stretch; }
+button.ghost { border-image: url('/assets/ui/btn-cream.png') 54 fill / 14px stretch; }
 button.primary:disabled, button.ghost:disabled { opacity: .45; cursor: not-allowed; }
-button.primary:active:not(:disabled) { filter: brightness(.92); }
+button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { transform: translateY(1px); }
 
-.empty { color: var(--muted); text-align: center; padding: 26px 10px; }
-.tag { font-size: 11.5px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
-.tag.done { color: var(--accent); border-color: var(--accent); }
-.tag.locked { color: var(--danger); border-color: var(--danger); }
-
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
-.cell {
-  background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px;
-  padding: 8px; text-align: center; cursor: pointer; font-size: 12.5px;
+.empty { color: var(--ink-soft); text-align: center; padding: 26px 10px; }
+.tag {
+  font-size: 11.5px; font-weight: 800; padding: 3px 9px; border-radius: 999px;
+  color: var(--ink-cream); background: #a9784a;
+  box-shadow: inset 0 1px 0 rgba(255, 240, 214, .35);
 }
-.cell:active { border-color: var(--accent); }
-.cell .qty { color: var(--accent-2); font-weight: 700; }
-.cell.selected { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.tag.done { background: #6a9b3c; }
+.tag.locked { background: #b8524f; }
+
+/* Ô vật phẩm dùng asset ItemSlot trong bộ UI. */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(98px, 1fr)); gap: 9px; }
+.cell {
+  padding: 4px;
+  border: 16px solid transparent;
+  border-image: url('/assets/ui/slot.png') 40 fill / 16px stretch;
+  background: none; text-align: center; cursor: pointer;
+  font-size: 12.5px; font-weight: 700; color: var(--ink-cream);
+  text-shadow: 0 1px 2px rgba(30, 16, 6, .6);
+}
+.cell:active { transform: translateY(1px); }
+.cell .qty { color: #ffd45e; font-weight: 800; }
+.cell .sub { color: rgba(251, 244, 228, .75); font-size: 11.5px; }
+.cell.selected { border-image-source: url('/assets/ui/slot-selected.png'); color: var(--ink); text-shadow: var(--ui-text-shadow); }
+.cell.selected .sub { color: var(--ink-soft); }
 
 /* ---------- Bản đồ (popup) ---------- */
 .map-view {
   width: 100%; border-radius: 10px; display: block;
-  background: rgba(0, 0, 0, .22); border: 1px solid var(--line);
+  background: rgba(74, 47, 28, .5); border: 3px solid #8a6134;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, .35);
 }
-.map-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; font-size: 12px; color: var(--muted); }
+.map-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; font-size: 12px; font-weight: 700; color: var(--ink-soft); }
 .map-legend span { display: inline-flex; align-items: center; gap: 5px; }
 .map-legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
 
 /* ---------- Chat ---------- */
-#chat-log { height: min(240px, 34vh); overflow: auto; font-size: 13.5px; }
-#chat-log .line { padding: 3px 0; word-break: break-word; }
-#chat-log .who { color: var(--accent); font-weight: 600; }
-#chat-log .system { color: var(--muted); font-style: italic; }
-.chat-input { display: flex; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--line); }
+#chat-log {
+  height: min(240px, 34vh); overflow: auto; font-size: 13.5px;
+  background: rgba(255, 246, 228, .5); border-radius: 10px; padding: 8px 10px;
+  box-shadow: inset 0 1px 3px rgba(80, 50, 22, .28);
+}
+#chat-log .line { padding: 3px 0; word-break: break-word; color: var(--ink); }
+#chat-log .who { color: #a35b1e; font-weight: 800; }
+#chat-log .system { color: var(--ink-soft); font-style: italic; }
+.chat-input { display: flex; gap: 8px; padding: 10px 2px 2px; border-top: 2px solid rgba(122, 86, 54, .3); }
 .chat-input input, .field input, .field select {
   flex: 1; min-height: 40px; padding: 0 12px; border-radius: 10px;
-  background: var(--bg); border: 1px solid var(--line); color: var(--text); font: inherit;
+  background: #fdf6e6; border: 2px solid #b98a55; color: var(--ink); font: inherit; font-weight: 600;
+  box-shadow: inset 0 2px 3px rgba(80, 50, 22, .18);
 }
+.chat-input input::placeholder, .field input::placeholder { color: #a98a68; }
 .field { margin-bottom: 10px; }
-.field label { display: block; font-size: 12.5px; color: var(--muted); margin-bottom: 4px; }
+.field label { display: block; font-size: 12.5px; font-weight: 700; color: var(--ink-soft); margin-bottom: 4px; }
 .field input, .field select { width: 100%; }
 
 /* ---------- Overlay toàn màn (login, tạo nhân vật, match-3) ---------- */
 #overlay {
   position: absolute; inset: 0; z-index: 40;
-  background: linear-gradient(180deg, #16241d, #0d1712);
+  background: linear-gradient(180deg, #3d2b18, #241708);
   display: flex; align-items: center; justify-content: center; padding: 16px;
   overflow: auto;
 }
 .card {
-  width: min(460px, 100%); background: var(--panel);
-  border: 1px solid var(--line); border-radius: 18px; padding: 20px;
+  width: min(460px, 100%);
+  padding: 4px 6px 6px;
+  border: 28px solid transparent;
+  border-image: url('/assets/ui/panel-wood.png') 60 fill / 28px stretch;
+  color: var(--ink);
+  filter: drop-shadow(0 10px 26px rgba(20, 10, 2, .5));
 }
-.card h1 { margin: 0 0 4px; font-size: 21px; }
-.card p.lead { margin: 0 0 16px; color: var(--muted); font-size: 13.5px; }
+.card h1 { margin: 0 0 4px; font-size: 21px; font-weight: 800; text-shadow: var(--ui-text-shadow); }
+.card p.lead { margin: 0 0 16px; color: var(--ink-soft); font-size: 13.5px; }
 .card .actions { display: flex; gap: 8px; margin-top: 14px; }
 .card .actions button { flex: 1; }
 .error {
-  background: rgba(224, 87, 111, .14); border: 1px solid var(--danger);
-  color: #ffd9df; border-radius: 10px; padding: 9px 12px; font-size: 13px; margin-bottom: 12px;
+  background: rgba(184, 82, 79, .16); border: 2px solid #b8524f;
+  color: #7c2b28; font-weight: 700;
+  border-radius: 10px; padding: 9px 12px; font-size: 13px; margin-bottom: 12px;
 }
 
 .swatches { display: flex; gap: 8px; flex-wrap: wrap; }
 .swatch {
-  width: 40px; height: 40px; border-radius: 10px; border: 2px solid transparent; cursor: pointer;
+  width: 40px; height: 40px; border-radius: 10px;
+  border: 3px solid rgba(122, 86, 54, .45); cursor: pointer;
 }
-.swatch[aria-pressed="true"] { border-color: var(--text); }
+.swatch[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 2px rgba(255, 240, 214, .6); }
 
 /* ---------- Toast ---------- */
 #toast-stack {
@@ -562,11 +530,16 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
   display: flex; flex-direction: column; gap: 6px; align-items: center; pointer-events: none;
 }
 .toast {
-  background: rgba(16, 26, 22, .94); border: 1px solid var(--line);
-  border-radius: 10px; padding: 8px 14px; font-size: 13px; max-width: 84vw;
+  padding: 2px 8px; min-height: 34px;
+  display: flex; align-items: center;
+  border: 13px solid transparent;
+  border-image: url('/assets/ui/pill-cream.png') 78 fill / 13px stretch;
+  font-size: 13px; font-weight: 700; max-width: 84vw;
+  color: var(--ink); text-shadow: var(--ui-text-shadow);
+  filter: var(--ui-shadow);
 }
-.toast.good { border-color: var(--accent); }
-.toast.bad { border-color: var(--danger); }
+.toast.good { border-image-source: url('/assets/ui/btn-cream.png'); }
+.toast.bad { border-image-source: url('/assets/ui/btn-red.png'); color: #fff3f3; text-shadow: 0 1px 2px rgba(90, 20, 20, .6); }
 
 #connection {
   position: absolute; left: 50%; top: 10px; transform: translateX(-50%); z-index: 60;

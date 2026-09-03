@@ -3,6 +3,31 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.2.0 — 2026-09-02
+
+### Thêm mới
+- **Bộ asset giao diện gỗ/giấy** trong `client/assets/ui` và `client/assets/icons`,
+  lấy từ Cozy UI Pack (bản DEMO) của dobo_ui. Nguồn và ánh xạ tên file ghi trong
+  `client/assets/ATTRIBUTION.md`.
+
+  > Bộ DEMO không kèm điều khoản bản quyền rõ ràng. Phải kiểm tra lại trên trang
+  > itch.io của tác giả, hoặc mua bản đầy đủ, trước khi phát hành thương mại.
+
+### Thay đổi
+- **Toàn bộ giao diện chuyển từ kính mờ sang tone gỗ/giấy** dùng ảnh 9-slice:
+  khung nhân vật, bảng nhiệm vụ, khung minimap, nút chuyển khu, pill tiền tệ,
+  chip thời tiết, toolbar, panel, nút, ô túi đồ, toast, gợi ý tương tác và
+  overlay đăng nhập.
+- Ô túi đồ và lưới chọn khu dùng `ItemSlot` / `ItemSlotSelected` của bộ asset.
+- Nút đóng panel dùng icon X, mũi tên dropdown dùng arrow của bộ asset, năng
+  lượng dùng icon tia sét.
+- Xu và ngọc vẫn vẽ bằng CSS vì bộ asset không có icon tiền tệ.
+
+### Ghi chú kỹ thuật
+`border-width` của mỗi khung 9-slice phải xấp xỉ bề dày viền trong ảnh gốc. Để
+mỏng quá thì phần viền bị ép mất và nút chỉ còn là một khối màu trơn — đã gặp
+đúng lỗi này ở nút "Nhận" của bảng nhiệm vụ.
+
 ## 0.1.17 — 2026-09-02
 
 ### Thêm mới
