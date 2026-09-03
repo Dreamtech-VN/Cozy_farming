@@ -57,18 +57,21 @@
 
     <!-- Dưới giữa: khung chat -->
     <section id="chat-dock" class="hidden" aria-label="Trò chuyện">
-      <!-- Ba tầng dính liền thành MỘT khối như mẫu: hàng công cụ, khung tin,
-           hàng nhập. Ba mảnh rời nhau trông như ba widget không liên quan. -->
-      <div class="chat-tools">
-        <button class="chat-tool" id="chat-emote" type="button"><span class="ct-ico e">☺</span>Biểu cảm</button>
-        <button class="chat-tool" id="chat-friends" type="button"><span class="ct-ico f">♥</span>Bạn bè</button>
+      <!-- Nút Bạn bè đứng RIÊNG bên trái khối chat, đúng vị trí 好友 trong mẫu.
+           Nội dung nút dựng ở chat_dock.js để dùng chung icon với HUD. -->
+      <button id="chat-friends" class="icon-btn" type="button"></button>
+      <!-- Ba tầng dính liền thành một khối: hàng công cụ, khung tin, hàng nhập. -->
+      <div class="chat-col">
+        <div class="chat-tools">
+          <button class="chat-tool" id="chat-emote" type="button"><span class="ct-ico e">☺</span>Biểu cảm</button>
+        </div>
+        <div id="chat-stream" aria-live="polite"></div>
+        <form id="chat-entry" autocomplete="off">
+          <button class="scope-pill" id="chat-scope" type="button" data-scope="map" aria-label="Đổi kênh chat">Khu</button>
+          <input id="chat-input" type="text" maxlength="200" placeholder="Nhập nội dung…" />
+          <button class="primary" type="submit" aria-label="Gửi">↵</button>
+        </form>
       </div>
-      <div id="chat-stream" aria-live="polite"></div>
-      <form id="chat-entry" autocomplete="off">
-        <button class="scope-pill" id="chat-scope" type="button" data-scope="map" aria-label="Đổi kênh chat">Khu</button>
-        <input id="chat-input" type="text" maxlength="200" placeholder="Nhập nội dung…" />
-        <button class="primary" type="submit" aria-label="Gửi">➤</button>
-      </form>
     </section>
 
     <div id="interact-hint" class="hidden"></div>

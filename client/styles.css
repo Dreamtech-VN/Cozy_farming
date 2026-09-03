@@ -148,11 +148,17 @@ html, body {
   position: absolute; z-index: 5;
   left: 50%; bottom: calc(9px + var(--safe));
   transform: translateX(-50%);
+  display: flex; align-items: flex-end; gap: 6px;
+  pointer-events: none;
+}
+/* Nút Bạn bè bên trái là nút icon bình thường nên phải bấm được. */
+#chat-friends { pointer-events: auto; flex: 0 0 auto; margin-bottom: 2px; }
+
+.chat-col {
   /* Chừa chỗ cho hai cụm nút hai bên: cửa sổ hẹp mà không trừ đủ thì hàng nhập
      chui xuống dưới cụm nút góc dưới phải. */
-  width: min(400px, max(240px, calc(100vw - 700px)));
+  width: min(400px, max(230px, calc(100vw - 760px)));
   display: flex; flex-direction: column; align-items: stretch;
-  pointer-events: none;
 }
 
 .chat-tools {
@@ -184,10 +190,14 @@ html, body {
 .chat-tool:active { transform: translateY(1px); }
 
 #chat-stream {
-  max-height: 74px; min-height: 0; overflow-y: auto; overflow-x: hidden;
-  display: flex; flex-direction: column; gap: 2px;
+  /* Cao đúng 4 dòng + đệm: để lẻ thì cuộn xuống đáy hay cắt ngang một dòng,
+     nhìn như khung bị vỡ. */
+  --chat-line-h: 18px;
+  max-height: calc(var(--chat-line-h) * 4 + 12px);
+  min-height: 0; overflow-y: auto; overflow-x: hidden;
+  display: flex; flex-direction: column;
   padding: 6px 9px; border-radius: 0 10px 0 0;
-  font-size: 12.5px; line-height: 1.35;
+  font-size: 12.5px; line-height: var(--chat-line-h);
   scrollbar-width: none; pointer-events: auto;
   background: var(--plate);
   -webkit-backdrop-filter: var(--plate-blur);

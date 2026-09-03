@@ -4,7 +4,7 @@
  */
 import { el, toast } from './ui.js';
 import { openSocial } from './panels.js';
-import { markActiveMenu } from './hud_menu.js';
+import { markActiveMenu, icon } from './hud_menu.js';
 
 const MAX_LINES = 40;
 
@@ -39,7 +39,15 @@ export class ChatDock {
       this.loadHistory();
     });
     document.getElementById('chat-emote').addEventListener('click', () => this.#openEmotes());
-    document.getElementById('chat-friends').addEventListener('click', () => { openSocial(this.game); markActiveMenu('social'); });
+    // Nút Bạn bè dùng chung kiểu icon với HUD nên dựng nội dung ở đây.
+    const friends = document.getElementById('chat-friends');
+    friends.dataset.key = 'social';
+    friends.style.setProperty('--btn-color', '#5aa9e6');
+    friends.replaceChildren(
+      el('span', { class: 'icon-btn-face', html: icon('friends') }),
+      el('span', { class: 'icon-btn-label', text: 'Bạn bè' }),
+    );
+    friends.addEventListener('click', () => { openSocial(this.game); markActiveMenu('social'); });
   }
 
   show() { this.root.classList.remove('hidden'); }

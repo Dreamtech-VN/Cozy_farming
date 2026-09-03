@@ -3,6 +3,23 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.3.4 — 2026-09-03
+
+### Thay đổi
+Sửa nốt khu vực chat cho khớp mẫu:
+
+- **Nút Bạn bè tách ra đứng riêng bên trái khối chat** (đúng chỗ 好友 trong mẫu),
+  dùng chung kiểu icon với HUD. Nhờ vậy **hàng nút góc dưới phải còn đúng 4 nút**
+  như mẫu: Nhiệm vụ, Túi đồ, Nông trại, Nhân vật.
+- **Khung tin cao đúng 4 dòng chữ.** Để chiều cao lẻ thì cuộn xuống đáy hay cắt
+  ngang một dòng, nhìn như khung bị vỡ.
+- Nút gửi đổi thành mũi tên xuống dòng `↵` như mẫu.
+
+### Ghi chú
+Mẫu có 3 nút công cụ chat (biểu cảm / động tác / ném đồ) nhưng game hiện chỉ có
+5 emote và không chia nhóm, nên hàng công cụ để đúng một nút thật thay vì thêm
+hai nút bấm vào không chạy gì.
+
 ## 0.3.3 — 2026-09-03
 
 ### Thay đổi

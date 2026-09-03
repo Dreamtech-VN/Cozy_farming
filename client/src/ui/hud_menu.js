@@ -20,7 +20,7 @@ const ICONS = {
   quest: `<rect x="5" y="3.5" width="14" height="17" rx="2.2"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4"/>`,
 };
 
-const icon = (name) =>
+export const icon = (name) =>
   `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
         stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${ICONS[name] ?? ''}</svg>`;
 
@@ -61,11 +61,11 @@ export function buildHudMenus(game, handlers) {
     { key: 'channel', icon: 'channel', label: 'Đổi khu', title: 'Chuyển khu', run: handlers.channel },
     { key: 'event', icon: 'event', label: 'Sự kiện', run: handlers.event },
   ];
+  // Hàng dưới phải đúng 4 nút như mẫu; Bạn bè đã có nút riêng cạnh khung chat.
   const bottom = [
     { key: 'quests', icon: 'quest', label: 'Nhiệm vụ', run: handlers.quests },
     { key: 'inventory', icon: 'bag', label: 'Túi đồ', run: handlers.inventory },
     { key: 'farm', icon: 'home', label: 'Nông trại', run: handlers.farm },
-    { key: 'social', icon: 'friends', label: 'Bạn bè', run: handlers.social },
     { key: 'profile', icon: 'dress', label: 'Nhân vật', run: handlers.profile },
   ];
 
