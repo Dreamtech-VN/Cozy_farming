@@ -3,6 +3,28 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.3.1 — 2026-09-03
+
+### Thay đổi
+- **HUD đổi sang tông nâu ấm + viền vàng.** Bản 0.3.0 dùng scrim xanh-xám nên các
+  góc màn hình trông như thanh công cụ trình duyệt dán lên game, không ăn với
+  cảnh đồng quê lẫn popup gỗ.
+- **Gộp nhân vật và ví vào một tấm nền** (`.hud-identity`), bảng nhiệm vụ dùng
+  chung bề ngang (`--hud-col`) và xếp sát ngay dưới — góc trái đọc thành một cột
+  thay vì ba tấm kính rời chồng nhau. Pill tiền tệ bỏ nền riêng vì kính lồng
+  kính làm cả cụm đục lại.
+- **Nút chức năng thành đĩa tròn, nhãn nằm ngoài đĩa.** Nhồi icon và chữ vào một
+  ô vuông làm nhãn bị cắt cụt ("Chuyển ..."), và chín ô vuông xám cạnh nhau
+  trông như thanh tác vụ.
+- **Chat gọn lại và dời xuống góc dưới trái.** Chỉ hàng nhập có tấm nền; các dòng
+  chat trôi thẳng trên cảnh. Hộp nền cao 76px ở giữa màn hình lúc chưa ai nói gì
+  chỉ là một mảng trống che mất thế giới. Nút biểu cảm và chọn kênh gộp vào hàng
+  nhập.
+- **Bảng nhiệm vụ**: tên và tiến độ cùng một dòng, mô tả xuống dòng riêng (cửa sổ
+  thấp ẩn cả dòng mô tả mà không mất nút nhận thưởng); bỏ nhãn loại vì nó lặp
+  đúng tên tab đang chọn; "Xem tất cả nhiệm vụ" thành nút thật, không còn là
+  link gạch chân. Tab đổi tên ngắn (Chính / Phụ / Ngày) cho vừa bề ngang.
+
 ## 0.3.0 — 2026-09-03
 
 ### Thay đổi

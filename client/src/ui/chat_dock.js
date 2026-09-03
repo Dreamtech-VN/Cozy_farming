@@ -5,7 +5,6 @@
 import { el, toast } from './ui.js';
 
 const MAX_LINES = 40;
-const VISIBLE_HINT = 4;
 
 export class ChatDock {
   constructor(game) {
@@ -93,6 +92,4 @@ export class ChatDock {
     if (existing) { existing.remove(); return; }
     this.root.prepend(bar);
   }
-
-  get visibleHint() { return VISIBLE_HINT; }
 }

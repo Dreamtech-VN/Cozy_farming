@@ -9,13 +9,12 @@ const MAX_ROWS = 4;
 
 /** Cốt truyện trước, rồi phụ, rồi hằng ngày/tuần — thứ tự người chơi quan tâm. */
 const TYPE_ORDER = { main: 0, side: 1, daily: 2, weekly: 3, event: 4, achievement: 5 };
-const TYPE_LABEL = { main: 'Cốt truyện', side: 'Phụ', daily: 'Hằng ngày', weekly: 'Hằng tuần', event: 'Sự kiện' };
 
 /** Tab lọc theo nhóm loại nhiệm vụ. */
 const TABS = [
-  { key: 'main', label: 'Cốt truyện', types: ['main'] },
+  { key: 'main', label: 'Chính', types: ['main'] },
   { key: 'side', label: 'Phụ', types: ['side', 'event', 'achievement'] },
-  { key: 'daily', label: 'Hằng ngày', types: ['daily', 'weekly'] },
+  { key: 'daily', label: 'Ngày', types: ['daily', 'weekly'] },
 ];
 
 /** Tab đang chọn và trạng thái thu gọn được nhớ giữa các lần vẽ lại. */
@@ -89,19 +88,19 @@ export function renderQuestTracker(game, quests, { onOpen, onClaim }) {
       const progress = progressOf(quest);
       const done = quest.state === 'completed';
       return el('div', { class: `qt-row ${done ? 'done' : ''}`.trim() }, [
+        // Tên và tiến độ cùng một dòng; mô tả xuống dòng riêng để cửa sổ thấp
+        // ẩn được cả dòng mô tả mà không mất chỗ nhận thưởng.
+        // Không in lại nhãn loại: nó lặp đúng tên tab đang chọn ngay phía trên.
         el('div', { class: 'qt-line' }, [
-          el('span', { class: 'qt-tag', text: TYPE_LABEL[quest.type] ?? quest.type }),
           el('span', { class: 'qt-name', text: t(quest.name_key) }),
-        ]),
-        el('div', { class: 'qt-line' }, [
-          el('span', { class: 'qt-desc', text: t(quest.desc_key) }),
           done
             ? el('button', {
                 class: 'qt-claim', type: 'button', text: 'Nhận',
                 onClick: (event) => { event.stopPropagation(); onClaim(quest.quest_id); },
               })
-            : el('span', { class: 'qt-count', text: `(${progress.current}/${progress.total})` }),
+            : el('span', { class: 'qt-count', text: `${progress.current}/${progress.total}` }),
         ]),
+        el('div', { class: 'qt-sub' }, [el('span', { class: 'qt-desc', text: t(quest.desc_key) })]),
         el('span', { class: 'qt-bar' }, [el('i', { style: `width:${Math.round(progress.ratio * 100)}%` })]),
       ]);
       }),

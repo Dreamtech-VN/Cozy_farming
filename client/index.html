@@ -16,6 +16,9 @@
     <header id="hud" class="hidden">
       <!-- Trái: nhân vật, ví tiền, bảng nhiệm vụ -->
       <div class="hud-left">
+        <!-- Nhân vật và ví nằm CHUNG một tấm nền: ba tấm rời như bản trước làm
+             góc trái vụn thành mấy mảng xám không liên quan gì nhau. -->
+        <div class="hud-identity">
         <button id="player-card" type="button" aria-label="Mở thông tin nhân vật">
           <span class="portrait">
             <canvas id="avatar-portrait" width="176" height="176"></canvas>
@@ -48,6 +51,7 @@
           <div class="pill currency" id="hud-gem"><span class="dot gem"></span><span>0</span></div>
           <button class="wallet-add" id="wallet-add" type="button" aria-label="Tới cửa hàng">+</button>
         </div>
+        </div>
 
         <!-- Bảng nhiệm vụ: tab theo loại, thu gọn được. Nội dung dựng ở
              client/src/ui/quest_tracker.js -->
@@ -65,17 +69,16 @@
 
     <!-- Dưới giữa: khung chat cố định -->
     <section id="chat-dock" class="hidden" aria-label="Trò chuyện">
-      <div class="chat-tools">
-        <button class="chat-tool" id="chat-emote" type="button">Biểu cảm</button>
-        <span class="chat-tool-sep"></span>
-        <select id="chat-scope" aria-label="Kênh chat">
-          <option value="map">Trong map</option>
-          <option value="world">Thế giới</option>
-        </select>
-      </div>
+      <!-- Dòng chat trôi thẳng trên nền thế giới, chỉ hàng nhập mới có tấm nền:
+           một hộp nền cao 76px lúc chưa ai nói gì chỉ là mảng trống che mất cảnh. -->
       <div id="chat-stream" aria-live="polite"></div>
       <form id="chat-entry" autocomplete="off">
+        <select id="chat-scope" aria-label="Kênh chat">
+          <option value="map">Khu này</option>
+          <option value="world">Thế giới</option>
+        </select>
         <input id="chat-input" type="text" maxlength="200" placeholder="Nhập nội dung…" />
+        <button class="chat-tool" id="chat-emote" type="button" aria-label="Biểu cảm" title="Biểu cảm">☺</button>
         <button class="primary" type="submit">Gửi</button>
       </form>
     </section>
