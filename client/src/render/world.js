@@ -200,12 +200,14 @@ export class WorldRenderer {
 
     this.#drawScenery(map);
 
-    // Mây trôi nhẹ để thế giới có nhịp sống.
+    // Mây trôi nhẹ để thế giới có nhịp sống. Giữ mây đủ thấp so với mép trên
+    // khung nhìn: mây bị mép cắt ngang trông như một mảng trắng dán lên màn hình.
+    const cloudTop = Math.max(map.ground_y - 430, this.camera.y - this.anchorY + 60);
     ctx.globalAlpha = 0.5;
     ctx.fillStyle = '#ffffff';
     for (let i = 0; i < 8; i++) {
       const x = ((i * 397 + time * 12) % (map.width + 500)) - 250 + this.camera.x * 0.05;
-      const y = 90 + (i % 3) * 60;
+      const y = cloudTop + (i % 3) * 58;
       ctx.beginPath();
       ctx.ellipse(x, y, 52, 20, 0, 0, Math.PI * 2);
       ctx.ellipse(x + 40, y + 6, 36, 15, 0, 0, Math.PI * 2);

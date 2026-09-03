@@ -57,8 +57,11 @@ html, body {
 .hidden { display: none !important; }
 
 /* ---------- HUD ---------- */
+/* Mỗi lớp giao diện phải có z-index riêng. Nếu #hud để z-index auto thì các
+   z-index bên trong card nhân vật (chân dung, bảng) thoát ra stacking context
+   gốc và nổi đè lên cả overlay trận Match-3. */
 #hud {
-  position: absolute; inset: 0 0 auto 0;
+  position: absolute; inset: 0 0 auto 0; z-index: 5;
   /* align-items: flex-start — nếu để mặc định (stretch) thì các pill bên phải bị
      kéo cao bằng cả cụm thông tin nhân vật bên trái. */
   display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
@@ -355,7 +358,7 @@ html, body {
 /* ---------- Toolbar ---------- */
 /* Một hàng duy nhất ở đáy màn hình ngang; cuộn ngang nếu cửa sổ quá hẹp. */
 #toolbar {
-  position: absolute; left: 0; right: 0; bottom: calc(10px + var(--safe));
+  position: absolute; left: 0; right: 0; bottom: calc(10px + var(--safe)); z-index: 5;
   display: flex; gap: 8px; justify-content: center; flex-wrap: nowrap;
   padding: 0 12px; overflow-x: auto; scrollbar-width: none;
 }
@@ -384,7 +387,7 @@ html, body {
 }
 
 /* ---------- Panel ---------- */
-#panels { position: absolute; inset: 0; pointer-events: none; }
+#panels { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
 .panel {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
   width: min(560px, calc(100vw - 24px));
@@ -463,7 +466,8 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
 
 /* ---------- Overlay toàn màn (login, tạo nhân vật, match-3) ---------- */
 #overlay {
-  position: absolute; inset: 0; background: linear-gradient(180deg, #16241d, #0d1712);
+  position: absolute; inset: 0; z-index: 40;
+  background: linear-gradient(180deg, #16241d, #0d1712);
   display: flex; align-items: center; justify-content: center; padding: 16px;
   overflow: auto;
 }
@@ -488,7 +492,7 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
 
 /* ---------- Toast ---------- */
 #toast-stack {
-  position: absolute; left: 50%; top: 58px; transform: translateX(-50%);
+  position: absolute; left: 50%; top: 58px; transform: translateX(-50%); z-index: 50;
   display: flex; flex-direction: column; gap: 6px; align-items: center; pointer-events: none;
 }
 .toast {
@@ -499,7 +503,7 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
 .toast.bad { border-color: var(--danger); }
 
 #connection {
-  position: absolute; left: 50%; top: 10px; transform: translateX(-50%);
+  position: absolute; left: 50%; top: 10px; transform: translateX(-50%); z-index: 60;
   background: var(--danger); color: #fff; border-radius: 999px;
   padding: 6px 14px; font-size: 12.5px; font-weight: 600;
 }
@@ -510,7 +514,7 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
 /* Màn dọc trên thiết bị cảm ứng: game không có nút điều khiển nên chỉ nhắc xoay. */
 @media (orientation: portrait) and (pointer: coarse) {
   #rotate-notice {
-    position: absolute; inset: 0; z-index: 50;
+    position: absolute; inset: 0; z-index: 70;
     display: flex; align-items: center; justify-content: center;
     background: var(--bg); text-align: center; padding: 24px;
   }

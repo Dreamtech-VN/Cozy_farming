@@ -3,6 +3,17 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.16 — 2026-09-02
+
+### Sửa lỗi
+- **Card nhân vật nổi đè lên overlay trận Match-3.** `#hud` để `z-index: auto`
+  nên các `z-index` bên trong card (chân dung, bảng) thoát ra stacking context
+  gốc và vẽ lên trên cả overlay. Đã đặt `z-index` tường minh cho từng lớp giao
+  diện: HUD và toolbar 5, panel 20, overlay 40, toast 50, báo mất kết nối 60,
+  nhắc xoay ngang 70.
+- **Mây bị mép trên khung nhìn cắt ngang** trông như một mảng trắng dán lên màn
+  hình, lộ ra sau khi nâng camera. Mây giờ được giữ đủ thấp so với mép khung.
+
 ## 0.1.15 — 2026-09-02
 
 ### Thay đổi
