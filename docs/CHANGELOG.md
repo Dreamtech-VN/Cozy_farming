@@ -3,6 +3,25 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.4.0 — 2026-09-03
+
+### Thay đổi
+Chủ dự án đã mua bản đầy đủ **Cozy UI Pack** của dobo_ui, nên thay phần giao diện
+tự vẽ bằng art thật:
+
+- **Icon chức năng dùng ảnh trong pack** thay cho SVG nét tự dựng. Đây là chỗ
+  lệch rõ nhất so với ảnh mẫu — mẫu dùng icon vẽ tay, mô phỏng bằng nét vẽ thì
+  bao giờ cũng khô. Ánh xạ: la bàn → Bản đồ, quầy hàng → Cửa hàng, danh sách →
+  Đổi khu, lịch → Sự kiện, checklist → Nhiệm vụ, lọ đồ → Túi đồ, nhà → Nông
+  trại, hai người → Bạn bè, áo → Nhân vật.
+- **Xu, ngọc, huy hiệu cấp, nút cộng, nút biểu cảm** dùng icon thật thay cho
+  gradient và `clip-path` tự vẽ.
+- **Khung chân dung** dùng `Frames/Frame10` cắt 9 ô.
+
+### Sửa
+- Bỏ cảnh báo bản quyền bản DEMO trong `client/assets/ATTRIBUTION.md`; ghi lại
+  ánh xạ tên file cho toàn bộ icon mới.
+
 ## 0.3.4 — 2026-09-03
 
 ### Thay đổi

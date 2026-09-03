@@ -80,12 +80,10 @@ html, body {
 .hud-wallet { display: flex; align-items: center; gap: 6px; pointer-events: auto; }
 
 .wallet-add {
-  width: 25px; height: 25px; flex: 0 0 auto;
-  border: 0; border-radius: 50%;
-  background: linear-gradient(180deg, #9ee06f, #56a02d);
-  color: #fff; font: inherit; font-size: 17px; font-weight: 800; line-height: 1;
-  cursor: pointer;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 2px 4px rgba(74, 46, 20, .3);
+  width: 26px; height: 26px; flex: 0 0 auto;
+  border: 0; background: url('/assets/icons/plus.png') center/contain no-repeat;
+  font-size: 0; cursor: pointer;
+  filter: drop-shadow(0 1px 2px rgba(40, 26, 14, .4));
 }
 .wallet-add:active { transform: translateY(1px); }
 
@@ -111,18 +109,14 @@ html, body {
 .icon-btn:active { transform: translateY(1px); }
 
 .icon-btn-face {
-  width: 34px; height: 34px; display: grid; place-items: center;
-  color: var(--btn-color);
+  width: 36px; height: 36px; display: grid; place-items: center;
   filter: drop-shadow(0 2px 3px rgba(40, 26, 14, .45));
 }
-/* paint-order: viền trắng vẽ NGOÀI nét màu nên icon nổi trên mọi nền, đúng kiểu
-   icon vẽ tay của mẫu mà không cần file ảnh. */
-.icon-btn-face svg {
-  width: 32px; height: 32px; display: block;
-  fill: var(--btn-color); stroke: #fffdf6; stroke-width: 3.2;
-  paint-order: stroke fill;
+.icon-btn-face img {
+  width: 36px; height: 36px; display: block;
+  image-rendering: auto; user-select: none;
 }
-.icon-btn[aria-pressed="true"] .icon-btn-face { transform: scale(1.08); }
+.icon-btn[aria-pressed="true"] .icon-btn-face { transform: scale(1.1); }
 
 .icon-btn-label {
   max-width: 100%;
@@ -180,13 +174,10 @@ html, body {
 /* Kẻ mảnh giữa các ô thay cho khoảng hở — mẫu để chúng dính liền. */
 .chat-tool + .chat-tool { box-shadow: inset 1px 0 0 rgba(255, 255, 255, .2); }
 .chat-tool .ct-ico {
-  width: 16px; height: 16px; border-radius: 50%;
-  display: grid; place-items: center;
-  color: #fff; font-size: 10px; line-height: 1;
-  text-shadow: none;
+  width: 17px; height: 17px; font-size: 0;
+  background-size: contain; background-repeat: no-repeat; background-position: center;
 }
-.chat-tool .ct-ico.e { background: linear-gradient(180deg, #ffd979, #eda52c); }
-.chat-tool .ct-ico.f { background: linear-gradient(180deg, #ff9fb2, #e8536f); }
+.chat-tool .ct-ico.e { background-image: url('/assets/icons/face.png'); }
 .chat-tool:active { transform: translateY(1px); }
 
 #chat-stream {
@@ -292,8 +283,8 @@ html, body {
   pointer-events: auto;
   position: relative;
   display: flex; align-items: center; gap: 8px;
-  min-height: 38px; margin: 5px 0 0 6px;
-  padding: 3px 14px 3px 44px;
+  min-height: 40px; margin: 6px 0 0 7px;
+  padding: 3px 14px 3px 48px;
   border: 0; border-radius: 10px;
   background: var(--plate);
   -webkit-backdrop-filter: var(--plate-blur);
@@ -303,15 +294,20 @@ html, body {
 }
 #player-card:active { transform: translateY(1px); }
 
+/* Khung chân dung dùng art Frame10 của pack, cắt 9 ô nên phóng to không méo. */
+/* border-image đã vẽ cả viền lẫn ruột nên KHÔNG thêm padding: cộng cả padding
+   lẫn bề dày viền thì chỗ còn lại cho avatar chỉ còn 16px. */
 #player-card .portrait {
-  position: absolute; left: -6px; top: -5px;
-  width: 48px; height: 48px; border-radius: 13px;
-  padding: 3px;
-  background: linear-gradient(180deg, #fff3cd, #e8b04a);
+  position: absolute; left: -8px; top: -7px;
+  width: 54px; height: 54px;
+  padding: 0;
+  border: 10px solid transparent;
+  border-image: url('/assets/ui/portrait-frame.png') 46 fill / 10px / 0 round;
   display: grid; place-items: center;
+  filter: drop-shadow(0 2px 3px rgba(40, 26, 14, .4));
 }
 #player-card canvas {
-  width: 100%; height: 100%; display: block; border-radius: 10px;
+  width: 100%; height: 100%; display: block; border-radius: 7px;
   background: linear-gradient(180deg, #8fd4f2 0%, #b9e4f6 62%, #dcf0fb 100%);
 }
 
@@ -326,13 +322,20 @@ html, body {
   text-shadow: 0 1px 2px rgba(40, 26, 14, .6);
 }
 
-#player-card .banner-bottom { display: flex; align-items: center; gap: 6px; }
+#player-card .banner-bottom { display: flex; align-items: center; gap: 5px; }
+/* Huy hiệu trong pack đã in sẵn chữ "LVL" nên số cấp đứng CẠNH huy hiệu; đặt
+   chồng lên thì hai lớp chữ đè nhau, không đọc được. */
 #player-card .lv-label {
   flex: 0 0 auto;
-  color: var(--plate-ink-soft); font-size: 10px; font-weight: 700; line-height: 1;
-  white-space: nowrap; text-shadow: 0 1px 2px rgba(40, 26, 14, .6);
+  width: 22px; height: 22px;
+  background: url('/assets/icons/level.png') center/contain no-repeat;
+  filter: drop-shadow(0 1px 2px rgba(40, 26, 14, .4));
 }
-#player-card .lv-label b { color: #fff; font-size: 11px; }
+#player-card .lv-value {
+  flex: 0 0 auto; margin-left: -2px;
+  color: #fff; font-size: 12px; font-weight: 800; line-height: 1;
+  text-shadow: 0 1px 2px rgba(40, 26, 14, .6);
+}
 
 /* Thanh XP mang luôn con số bên trong, như mẫu. */
 #player-card .xp-bar {
@@ -500,25 +503,14 @@ html, body {
 .hud-wallet { margin-left: 2px; }
 .hud-wallet .dot { width: 17px; height: 17px; }
 
-/* Xu và ngọc vẽ thành hai vật thể khác chất, không phải hai chấm tròn đổi màu. */
-.dot { width: 22px; height: 22px; display: inline-block; flex: 0 0 auto; }
-.dot.coin {
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 34% 28%, #fff5c2 0 18%, transparent 19%),
-    linear-gradient(160deg, #ffe071 0%, #f2b52c 52%, #c9821a 100%);
-  box-shadow:
-    inset 0 0 0 2px rgba(255, 236, 160, .85),
-    inset 0 -2px 3px rgba(140, 88, 12, .5),
-    0 1px 3px rgba(0, 0, 0, .4);
+/* Xu và ngọc dùng art thật trong bộ pack thay cho gradient + clip-path tự vẽ. */
+.dot {
+  width: 22px; height: 22px; display: inline-block; flex: 0 0 auto;
+  background-size: contain; background-repeat: no-repeat; background-position: center;
+  filter: drop-shadow(0 1px 2px rgba(40, 26, 14, .4));
 }
-.dot.gem {
-  /* clip-path cắt hình viên đá nhiều mặt; gradient chéo tạo mặt cắt sáng tối. */
-  clip-path: polygon(50% 0%, 100% 36%, 78% 100%, 22% 100%, 0% 36%);
-  background:
-    linear-gradient(115deg, #eafcff 0 26%, #7ad3f0 26% 55%, #2f9fc9 55% 100%);
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .45));
-}
+.dot.coin { background-image: url('/assets/icons/coin.png'); }
+.dot.gem { background-image: url('/assets/icons/gem.png'); }
 
 /* ---------- Gợi ý tương tác ---------- */
 #interact-hint {

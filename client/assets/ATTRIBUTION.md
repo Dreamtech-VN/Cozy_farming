@@ -2,12 +2,12 @@
 
 Thư mục `client/assets/ui/` và `client/assets/icons/` dùng ảnh từ:
 
-**Cozy UI Pack (bản DEMO) — dobo_ui**
+**Cozy UI Pack — dobo_ui** (bản đầy đủ, đã mua)
 https://dobo-ui.itch.io/
 
-File gốc kèm theo bộ asset chỉ có lời cảm ơn và lời mời mua bản đầy đủ, **không
-ghi rõ điều khoản bản quyền**. Trước khi phát hành thương mại phải kiểm tra lại
-điều khoản trên trang itch.io của tác giả, hoặc mua bản đầy đủ.
+Chủ dự án đã mua bản đầy đủ, nên bản DEMO cùng cảnh báo bản quyền kèm theo ở
+những bản trước không còn áp dụng. Điều khoản sử dụng theo giấy phép bán kèm của
+tác giả trên itch.io.
 
 ## Ánh xạ tên file
 
@@ -26,6 +26,21 @@ ghi rõ điều khoản bản quyền**. Trước khi phát hành thương mại
 | `ui/slot-selected.png` | `Inventory/ItemSlots/ItemSlotsSelected/ItemSlotSelected1.png` |
 | `ui/arrow-down.png` | `Arrows/BrownOutline/ArrowBrownOuline18.png` |
 | `ui/check.png` | `Checkboxes/Checkbox2_checked.png` |
-| `icons/energy.png` | `Icons/Icons Default/64px/IconsDefault5_64px.png` |
-| `icons/close.png` | `Icons/Icons Default/64px/IconsDefault25_64px.png` |
-| `icons/plus.png` | `Icons/Icons Default/64px/IconsDefault19_64px.png` |
+| `icons/map.png` | `Icons/IconsDefault/128px/IconsDefault10_128px.png` |
+| `icons/shop.png` | `Icons/IconsDefault/128px/IconsDefault12_128px.png` |
+| `icons/channel.png` | `Icons/IconsDefault/128px/IconsDefault20_128px.png` |
+| `icons/event.png` | `Icons/IconsDefault/128px/IconsDefault28_128px.png` |
+| `icons/quest.png` | `Icons/IconsDefault/128px/IconsDefault13_128px.png` |
+| `icons/bag.png` | `Icons/IconsDefault/128px/IconsDefault54_128px.png` |
+| `icons/home.png` | `Icons/IconsDefault/128px/IconsDefault4_128px.png` |
+| `icons/friends.png` | `Icons/IconsDefault/128px/IconsDefault43_128px.png` |
+| `icons/dress.png` | `Icons/IconsDefault/128px/IconsDefault27_128px.png` |
+| `icons/face.png` | `Icons/IconsDefault/128px/IconsDefault44_128px.png` |
+| `icons/coin.png` | `Icons/IconsDefault/128px/IconsDefault26_128px.png` |
+| `icons/gem.png` | `Icons/IconsDefault/128px/IconsDefault23_128px.png` |
+| `icons/level.png` | `Icons/IconsDefault/128px/IconsDefault41_128px.png` |
+| `icons/check.png` | `Icons/IconsDefault/128px/IconsDefault31_128px.png` |
+| `icons/plus.png` | `Icons/IconsDefault/128px/IconsDefault19_128px.png` |
+| `icons/energy.png` | `Icons/IconsDefault/128px/IconsDefault5_128px.png` |
+| `icons/close.png` | `Icons/IconsDefault/128px/IconsDefault25_128px.png` |
+| `ui/portrait-frame.png` | `Frames/Frame10.png` |
