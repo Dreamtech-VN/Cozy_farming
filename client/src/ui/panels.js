@@ -550,7 +550,7 @@ export { closePanel };
 
 /** Bảng Menu: gom các chức năng không cần bấm liên tục. */
 export function openMenu(game, handlers) {
-  showPanel('Menu', (body) => buildMenuPanel(game, body, handlers), { key: 'menu' });
+  showPanel('Menu', (body) => buildMenuPanel(game, body, handlers), { key: 'menu', compact: true });
 }
 
 /** Cài đặt: Đồ hoạ / Âm thanh / Tài khoản. */
@@ -565,15 +565,15 @@ const PROVIDER_LABEL = { google: 'Google', facebook: 'Facebook', apple: 'Apple' 
 
 export function openSettings(game) {
   showPanel('Cài đặt', (body, rerender) => {
-    body.append(el('div', { class: 'tab-bar' }, SETTINGS_TABS.map((tab) => el('button', {
+    // Tab xếp dọc bên trái: nhóm cài đặt sẽ còn dài ra, hàng ngang hết chỗ ngay.
+    const rail = el('div', { class: 'tab-rail' }, SETTINGS_TABS.map((tab) => el('button', {
       class: 'tab', type: 'button',
       'aria-selected': tab.key === settingsTab ? 'true' : 'false',
       text: tab.label,
       onClick: () => { settingsTab = tab.key; rerender(); },
-    }))));
-
+    })));
     const pane = el('div', { class: 'tab-pane' });
-    body.append(pane);
+    body.append(el('div', { class: 'tab-layout' }, [rail, pane]));
     if (settingsTab === 'graphics') graphicsTab(pane);
     else if (settingsTab === 'audio') audioTab(pane);
     else accountTab(game, pane, rerender);
@@ -598,20 +598,20 @@ const toggle = (on, onChange) => el('button', {
 function graphicsTab(pane) {
   const g = settings.value.graphics;
 
-  pane.append(settingRow('Mức đồ hoạ', 'Đặt sẵn độ nét, thời tiết và giới hạn khung hình.',
+  pane.append(settingRow('Mức đồ hoạ', null,
     el('div', { class: 'seg' }, Object.entries(GRAPHICS_PRESETS).map(([key, spec]) => el('button', {
       class: 'seg-btn', type: 'button', text: spec.label,
       'aria-pressed': g.preset === key ? 'true' : 'false',
       onClick: () => { settings.applyPreset(key); rerenderPanel(); },
     })))));
 
-  pane.append(settingRow('Hiệu ứng thời tiết', 'Mưa và lớp phủ trời. Tắt đi cho máy yếu.',
+  pane.append(settingRow('Hiệu ứng thời tiết', null,
     toggle(g.weather, (on) => { settings.patch({ graphics: { weather: on } }); rerenderPanel(); })));
 
-  pane.append(settingRow('Hiện tên người chơi khác', 'Tắt cho đỡ rối ở khu đông người.',
+  pane.append(settingRow('Hiện tên người chơi khác', null,
     toggle(g.otherNames, (on) => { settings.patch({ graphics: { otherNames: on } }); rerenderPanel(); })));
 
-  pane.append(settingRow('Giới hạn khung hình', 'Giảm còn 30 để đỡ nóng máy và tốn pin.',
+  pane.append(settingRow('Giới hạn khung hình', null,
     el('div', { class: 'seg' }, [30, 60].map((fps) => el('button', {
       class: 'seg-btn', type: 'button', text: `${fps} FPS`,
       'aria-pressed': g.fpsCap === fps ? 'true' : 'false',
@@ -622,7 +622,7 @@ function graphicsTab(pane) {
 function audioTab(pane) {
   const a = settings.value.audio;
 
-  pane.append(settingRow('Tắt tiếng', 'Tắt toàn bộ âm thanh của game.',
+  pane.append(settingRow('Tắt tiếng', null,
     toggle(a.muted, (on) => { settings.patch({ audio: { muted: on } }); rerenderPanel(); })));
 
   const slider = (label, hint, key, preview) => {
@@ -641,11 +641,9 @@ function audioTab(pane) {
     return settingRow(label, hint, el('div', { class: 'slider' }, [input, value]));
   };
 
-  pane.append(slider('Âm lượng chung', 'Nhân với hai mức bên dưới.', 'master', () => audio.success()));
+  pane.append(slider('Âm lượng chung', null, 'master', () => audio.success()));
   pane.append(slider('Nhạc nền', null, 'music', () => audio.previewMusic()));
-  pane.append(slider('Hiệu ứng', 'Tiếng bấm nút, thu hoạch, thắng trận.', 'sfx', () => audio.click()));
-
-  pane.append(el('p', { class: 'sub', text: 'Bản này chưa có file nhạc và hiệu ứng riêng — tiếng đang nghe là do game tự tổng hợp, nhưng các mức âm lượng ở đây áp thẳng vào bus âm thanh nên khi lắp file thật là chạy luôn.' }));
+  pane.append(slider('Hiệu ứng', null, 'sfx', () => audio.click()));
 }
 
 function accountTab(game, pane, rerender) {
@@ -653,15 +651,11 @@ function accountTab(game, pane, rerender) {
   game.api.get('/v1/account').then((account) => {
     pane.replaceChildren();
 
-    pane.append(settingRow('Tên đăng nhập', `Tạo ngày ${new Date(account.created_at).toLocaleDateString('vi-VN')}`,
-      el('span', { class: 'tag', text: account.username })));
+    pane.append(settingRow('Tên đăng nhập', null, el('span', { class: 'tag', text: account.username })));
 
     // --- Liên kết mạng xã hội ---
     for (const entry of account.providers) {
-      pane.append(settingRow(`Liên kết ${PROVIDER_LABEL[entry.provider]}`,
-        entry.configured
-          ? (entry.linked ? 'Đã liên kết.' : 'Chưa liên kết.')
-          : 'Server này chưa bật đăng nhập qua nhà cung cấp đó.',
+      pane.append(settingRow(`Liên kết ${PROVIDER_LABEL[entry.provider]}`, null,
         entry.configured
           ? el('button', {
               class: entry.linked ? 'ghost' : 'primary', type: 'button',
@@ -676,7 +670,6 @@ function accountTab(game, pane, rerender) {
     const next = el('input', { type: 'password', autocomplete: 'new-password', placeholder: 'Mật khẩu mới, tối thiểu 8 ký tự' });
     pane.append(el('div', { class: 'block' }, [
       el('div', { class: 'title', text: 'Đổi mật khẩu' }),
-      el('div', { class: 'sub', text: 'Đổi xong mọi thiết bị khác sẽ bị đăng xuất.' }),
       current, next,
       el('button', {
         class: 'primary', type: 'button', text: 'Đổi mật khẩu',
@@ -712,7 +705,7 @@ function accountTab(game, pane, rerender) {
     ]));
 
     // --- Đổi server ---
-    pane.append(settingRow('Server', account.servers.length > 1 ? 'Chuyển sang cụm server khác.' : 'Chỉ có một server đang chạy.',
+    pane.append(settingRow('Server', null,
       account.servers.length > 1
         ? el('div', { class: 'seg' }, account.servers.map((server) => el('button', {
             class: 'seg-btn', type: 'button', text: server.name,
@@ -722,7 +715,7 @@ function accountTab(game, pane, rerender) {
         : el('span', { class: 'tag', text: account.servers[0]?.name ?? 'Mặc định' })));
 
     // --- Ngôn ngữ ---
-    pane.append(settingRow('Ngôn ngữ', 'Áp dụng cho toàn bộ giao diện.',
+    pane.append(settingRow('Ngôn ngữ', null,
       el('div', { class: 'seg' }, [['vi', 'Tiếng Việt'], ['en', 'English']].map(([locale, label]) => el('button', {
         class: 'seg-btn', type: 'button', text: label,
         'aria-pressed': i18n.locale === locale ? 'true' : 'false',

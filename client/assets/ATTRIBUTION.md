@@ -49,8 +49,9 @@ tác giả trên itch.io.
 
 ## File tự vẽ
 
-`icons/bag.png` không lấy từ pack: cả hai bộ icon (Default 1–64, Outline có thêm
-65–70) lẫn thư mục `Inventory/EquipmentSlots` đều không có hình túi/ba lô nào.
+`icons/bag.png` (ba lô) không lấy từ pack: cả hai bộ icon (Default 1–64, Outline
+có thêm 65–70) lẫn thư mục `Inventory/EquipmentSlots` đều không có hình túi/ba lô
+nào.
 File này vẽ tay bám theo cách dựng hình của pack — keyline trắng ở ngoài, nét nâu
 đỏ ở trong, mảng màu phẳng, một vệt sáng — nên đứng cạnh các icon còn lại không
 lệch tông. Nguồn SVG nằm trong lịch sử commit của lần thêm file.

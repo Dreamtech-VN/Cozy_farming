@@ -39,10 +39,11 @@ export function closePanel() {
   for (const button of document.querySelectorAll('.icon-btn')) button.setAttribute('aria-pressed', 'false');
 }
 
-export function showPanel(title, buildBody, { footer = null, key = null } = {}) {
+export function showPanel(title, buildBody, { footer = null, key = null, compact = false } = {}) {
   closePanel();
   const body = el('div', { class: 'body' });
-  const panel = el('div', { class: 'panel' }, [
+  // Panel ít nội dung dùng bản hẹp, khỏi trải một tấm gỗ to đùng cho vài nút.
+  const panel = el('div', { class: `panel ${compact ? 'compact' : ''}`.trim() }, [
     el('header', {}, [
       el('h2', { text: title }),
       el('button', { class: 'close', type: 'button', 'aria-label': 'Đóng', text: '×', onClick: closePanel }),

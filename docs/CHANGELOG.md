@@ -3,6 +3,18 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.5.1 — 2026-09-03
+
+### Thay đổi
+- **Icon Túi đồ vẽ lại thành ba lô** (hai quai, nắp trên, túi trước có khoá) thay
+  cho cái túi xách của bản trước. Bản đầu bị nét quá dày so với hình nên mọi chi
+  tiết dính thành một cục; nay nét mảnh hơn và hình choán gần hết khung như các
+  icon khác của pack.
+- **Panel Menu dùng bản hẹp**, rộng theo nội dung thay vì trải hết 560px cho vài
+  nút.
+- **Tab trong Cài đặt xếp dọc bên trái**, nội dung nằm bên phải.
+- **Bỏ toàn bộ ghi chú trong Cài đặt** — chỉ còn nhãn và phần điều khiển.
+
 ## 0.5.0 — 2026-09-03
 
 ### Thêm mới
