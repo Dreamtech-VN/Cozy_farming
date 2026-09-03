@@ -11,7 +11,7 @@ import { drawAvatarPortrait } from './render/avatar.js';
 import { levelProgress } from './core/progression.js';
 import { WorldClock } from './core/world_clock.js';
 import { renderQuestTracker, claimFromTracker } from './ui/quest_tracker.js';
-import { buildHudMenus, markActiveMenu } from './ui/hud_menu.js';
+import { buildHudMenus, markActiveMenu, markMenuBadge } from './ui/hud_menu.js';
 import { ChatDock } from './ui/chat_dock.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
@@ -248,9 +248,11 @@ class Game {
     try {
       const { quests } = await this.api.get('/v1/quests');
       renderQuestTracker(this, quests, {
-        onOpen: () => { closePanel(); openQuests(this); },
+        onOpen: () => { closePanel(); openQuests(this); markActiveMenu('quests'); },
         onClaim: (questId) => claimFromTracker(this, questId),
       });
+      // Chấm đỏ trên nút Nhiệm vụ khi có phần thưởng chờ nhận.
+      markMenuBadge('quests', quests.some((quest) => quest.state === 'completed'));
     } catch {
       // Mất mạng thì giữ nguyên bảng cũ thay vì xoá trắng.
     }

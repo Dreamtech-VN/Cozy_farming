@@ -20,26 +20,21 @@
   --radius: 14px;
   --safe: env(safe-area-inset-bottom, 0px);
 
-  /* HUD theo mẫu: cụm trái và nút chức năng là tấm KEM SÁNG chữ nâu, chỉ khung
-     chat mới là tấm tối chữ sáng. Bản trước để tất cả là kính tối nên cả HUD
-     nặng như thanh công cụ, không ra tông cozy. */
-  --plate: rgba(255, 250, 240, .82);
-  --plate-soft: rgba(255, 250, 240, .66);
-  --plate-blur: blur(10px) saturate(115%);
-  --plate-ink: #5b3d24;
-  --plate-ink-soft: #8a6743;
-  --plate-frame:
-    inset 0 0 0 1.5px rgba(255, 255, 255, .9),
-    inset 0 -2px 0 rgba(180, 138, 96, .28);
-  --plate-shadow: 0 2px 4px rgba(74, 46, 20, .18), 0 8px 20px rgba(74, 46, 20, .22);
+  /* HUD theo mẫu: các tấm là KÍNH MỜ XÁM-NÂU chữ TRẮNG, chỉ tab đang chọn và
+     nút chính mới là mảng kem/vàng. Bản trước làm cả tấm màu kem chữ nâu nên
+     ngược hẳn: mẫu chỉ dùng kem cho điểm nhấn. */
+  --plate: rgba(96, 84, 72, .52);
+  --plate-soft: rgba(96, 84, 72, .42);
+  --plate-blur: blur(9px) saturate(115%);
+  --plate-ink: #ffffff;
+  --plate-ink-soft: rgba(255, 255, 255, .82);
+  --plate-frame: inset 0 0 0 1px rgba(255, 255, 255, .18);
+  --plate-shadow: 0 2px 6px rgba(40, 26, 14, .28);
+  /* Điểm nhấn kem/vàng: tab đang chọn, nút đổi kênh, nút gửi. */
+  --cream: linear-gradient(180deg, #fff6d6, #ffe09a);
+  --cream-ink: #6b4415;
 
-  /* Tấm tối, chỉ dùng cho khung chat và ô nhập. */
-  --dim: rgba(38, 30, 24, .55);
-  --dim-strong: rgba(34, 27, 21, .72);
-  --dim-ink: #fdf3df;
-  --dim-ink-soft: rgba(253, 243, 223, .68);
-
-  --gold: #f0b83c;
+  --gold: #f5cf6a;
 
   /* Mực nâu cho những chỗ đứng trên nền gỗ/giấy: badge sao vàng trên HUD, và
      toàn bộ popup (panel, overlay) vẫn dùng asset gỗ trong client/assets/ui. */
@@ -95,9 +90,10 @@ html, body {
 .wallet-add:active { transform: translateY(1px); }
 
 /* ---------- Nút chức năng dạng icon ----------
-   Mẫu dùng đĩa tròn nhiều màu, nhãn nằm dưới đĩa. Màu lấy từ biến --btn-color
-   mà hud_menu.js gắn cho từng nút. */
-.icon-grid, .icon-row { display: flex; gap: 7px; pointer-events: auto; }
+   Mẫu KHÔNG có đĩa nền: icon là một hình đặc màu có viền trắng, đứng thẳng trên
+   cảnh, nhãn ngay dưới. Đĩa nền như bản trước làm cả góc màn hình nặng thêm chín
+   mảng tròn. */
+.icon-grid, .icon-row { display: flex; gap: 6px; pointer-events: auto; }
 .icon-grid { flex-wrap: wrap; justify-content: flex-end; max-width: 300px; }
 
 #menu-bottom {
@@ -106,42 +102,48 @@ html, body {
 }
 
 .icon-btn {
+  position: relative;
   width: 54px; padding: 0;
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  display: flex; flex-direction: column; align-items: center; gap: 1px;
   border: 0; background: none;
   font: inherit; cursor: pointer;
 }
 .icon-btn:active { transform: translateY(1px); }
 
 .icon-btn-face {
-  width: 40px; height: 40px; border-radius: 50%;
-  display: grid; place-items: center;
-  color: #fff;
-  background:
-    radial-gradient(circle at 50% 22%, rgba(255, 255, 255, .55) 0 30%, transparent 62%),
-    linear-gradient(180deg, var(--btn-color) 0%, rgba(0, 0, 0, .22) 260%);
-  box-shadow:
-    inset 0 0 0 2px rgba(255, 255, 255, .85),
-    0 2px 4px rgba(74, 46, 20, .3);
+  width: 34px; height: 34px; display: grid; place-items: center;
+  color: var(--btn-color);
+  filter: drop-shadow(0 2px 3px rgba(40, 26, 14, .45));
 }
-.icon-btn-face svg { width: 21px; height: 21px; display: block; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .25)); }
-.icon-btn[aria-pressed="true"] .icon-btn-face {
-  box-shadow: inset 0 0 0 2px #fff, 0 0 0 2.5px var(--btn-color), 0 2px 5px rgba(74, 46, 20, .35);
+/* paint-order: viền trắng vẽ NGOÀI nét màu nên icon nổi trên mọi nền, đúng kiểu
+   icon vẽ tay của mẫu mà không cần file ảnh. */
+.icon-btn-face svg {
+  width: 32px; height: 32px; display: block;
+  fill: var(--btn-color); stroke: #fffdf6; stroke-width: 3.2;
+  paint-order: stroke fill;
 }
+.icon-btn[aria-pressed="true"] .icon-btn-face { transform: scale(1.08); }
 
-/* Nhãn đứng thẳng trên cảnh nên cần viền chữ, không cần tấm nền riêng. */
 .icon-btn-label {
   max-width: 100%;
   font-size: 10px; font-weight: 800; line-height: 1.15;
   color: #fff8ea;
-  text-shadow: 0 1px 2px rgba(50, 30, 10, .95), 0 0 3px rgba(50, 30, 10, .8);
+  text-shadow: 0 1px 2px rgba(50, 30, 10, .95), 0 0 3px rgba(50, 30, 10, .85);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .icon-btn[aria-pressed="true"] .icon-btn-label { color: var(--gold); }
 
+/* Chấm đỏ báo việc ở góc icon, như các icon có chấm trong mẫu. */
+.icon-btn-dot {
+  position: absolute; top: -1px; right: 9px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #f0483f;
+  box-shadow: 0 0 0 1.5px #fff, 0 1px 2px rgba(40, 26, 14, .5);
+}
+
 /* ---------- Khung chat cố định ----------
-   Theo mẫu: hàng công cụ ở trên, dòng chat trên tấm tối ở giữa, hàng nhập với
-   hai nút chọn kênh ở dưới. Cả cụm nằm dưới giữa màn hình. */
+   Ba tầng DÍNH LIỀN thành một khối: hàng công cụ (bo góc trên), khung tin, hàng
+   nhập (bo góc dưới). Mẫu xếp đúng như vậy. */
 #chat-dock {
   position: absolute; z-index: 5;
   left: 50%; bottom: calc(9px + var(--safe));
@@ -149,105 +151,120 @@ html, body {
   /* Chừa chỗ cho hai cụm nút hai bên: cửa sổ hẹp mà không trừ đủ thì hàng nhập
      chui xuống dưới cụm nút góc dưới phải. */
   width: min(400px, max(240px, calc(100vw - 700px)));
-  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  display: flex; flex-direction: column; align-items: stretch;
   pointer-events: none;
 }
 
-.chat-tools { display: flex; gap: 5px; pointer-events: auto; }
-.chat-tool {
-  display: inline-flex; align-items: center; gap: 5px;
-  min-height: 24px; padding: 0 11px 0 6px;
-  border: 0; border-radius: 999px; cursor: pointer;
-  background: var(--plate);
+.chat-tools {
+  align-self: flex-start;
+  display: flex; pointer-events: auto;
+  border-radius: 10px 10px 0 0; overflow: hidden;
+  background: var(--plate-soft);
   -webkit-backdrop-filter: var(--plate-blur);
   backdrop-filter: var(--plate-blur);
-  color: var(--plate-ink); font: inherit; font-size: 11.5px; font-weight: 800;
-  box-shadow: var(--plate-frame), var(--plate-shadow);
+  box-shadow: var(--plate-frame);
 }
+.chat-tool {
+  display: inline-flex; align-items: center; gap: 4px;
+  min-height: 25px; padding: 0 10px;
+  border: 0; background: none; cursor: pointer;
+  color: var(--plate-ink); font: inherit; font-size: 11.5px; font-weight: 700;
+  text-shadow: 0 1px 2px rgba(40, 26, 14, .5);
+}
+/* Kẻ mảnh giữa các ô thay cho khoảng hở — mẫu để chúng dính liền. */
+.chat-tool + .chat-tool { box-shadow: inset 1px 0 0 rgba(255, 255, 255, .2); }
 .chat-tool .ct-ico {
-  width: 17px; height: 17px; border-radius: 50%;
+  width: 16px; height: 16px; border-radius: 50%;
   display: grid; place-items: center;
-  background: linear-gradient(180deg, #ffd979, #eda52c);
-  color: #fff; font-size: 11px; line-height: 1;
+  color: #fff; font-size: 10px; line-height: 1;
+  text-shadow: none;
 }
+.chat-tool .ct-ico.e { background: linear-gradient(180deg, #ffd979, #eda52c); }
+.chat-tool .ct-ico.f { background: linear-gradient(180deg, #ff9fb2, #e8536f); }
 .chat-tool:active { transform: translateY(1px); }
 
 #chat-stream {
-  width: 100%;
   max-height: 74px; min-height: 0; overflow-y: auto; overflow-x: hidden;
-  display: flex; flex-direction: column; gap: 1px;
-  padding: 6px 9px; border-radius: 11px;
-  font-size: 12.5px; line-height: 1.4;
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 6px 9px; border-radius: 0 10px 0 0;
+  font-size: 12.5px; line-height: 1.35;
   scrollbar-width: none; pointer-events: auto;
-  background: var(--dim);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-}
-#chat-stream:empty { display: none; }
-#chat-stream::-webkit-scrollbar { width: 0; }
-.chat-line { color: var(--dim-ink); word-break: break-word; }
-.chat-line .who { color: var(--gold); font-weight: 800; }
-.chat-line.mine .who { color: #9de06f; }
-.chat-line.system { color: var(--dim-ink-soft); font-style: italic; }
-
-#chat-entry {
-  width: 100%;
-  display: flex; align-items: center; gap: 5px;
-  padding: 4px 4px 4px 5px;
-  pointer-events: auto;
-  background: var(--dim-strong);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16), 0 4px 12px rgba(40, 24, 10, .3);
-}
-
-/* Hai nút gạt chọn kênh, thay cho <select> — mẫu dùng đúng kiểu này. */
-.scope-switch { display: flex; flex: 0 0 auto; gap: 2px; }
-.scope-switch button {
-  min-height: 24px; padding: 0 9px;
-  border: 0; border-radius: 999px; cursor: pointer;
-  background: rgba(255, 255, 255, .12); color: var(--dim-ink-soft);
-  font: inherit; font-size: 11px; font-weight: 800;
-}
-.scope-switch button[aria-pressed="true"] {
-  background: linear-gradient(180deg, #ffd979, #eda52c);
-  color: #4a2f12;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
-}
-
-#chat-input {
-  flex: 1 1 auto; min-width: 0; min-height: 26px;
-  padding: 0 8px; border: 0; border-radius: 999px;
-  background: none; color: var(--dim-ink); font: inherit; font-size: 13px;
-}
-#chat-input:focus { outline: none; }
-#chat-input::placeholder { color: rgba(253, 243, 223, .42); }
-
-#chat-entry .primary {
-  flex: 0 0 auto;
-  width: 28px; height: 28px; min-height: 0; min-width: 0; padding: 0;
-  border: 0; border-radius: 50%;
-  background: linear-gradient(180deg, #9ee06f, #56a02d);
-  color: #fff; font-size: 13px; font-weight: 800; line-height: 1;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 2px 4px rgba(40, 24, 10, .35);
-}
-
-.emote-bar {
-  display: flex; gap: 5px; flex-wrap: wrap;
-  padding: 6px; pointer-events: auto;
   background: var(--plate);
   -webkit-backdrop-filter: var(--plate-blur);
   backdrop-filter: var(--plate-blur);
-  border-radius: 13px;
+  box-shadow: var(--plate-frame);
+}
+#chat-stream:empty { display: none; }
+#chat-stream::-webkit-scrollbar { width: 0; }
+.chat-line {
+  color: #fff; word-break: break-word;
+  text-shadow: 0 1px 2px rgba(40, 26, 14, .55);
+}
+/* Chip kênh đứng trước tên người gửi, như mẫu. */
+.ch-tag {
+  display: inline-block; margin-right: 5px; padding: 0 5px;
+  border-radius: 5px; font-size: 10px; font-weight: 800; line-height: 15px;
+  color: #fff; text-shadow: none; vertical-align: 1px;
+  background: #4f9e57;
+}
+.ch-tag.c-world { background: #4c86c4; }
+.ch-tag.c-private { background: #b06fc4; }
+.chat-line .who { color: var(--gold); font-weight: 800; }
+.chat-line.mine .who { color: #a9e77c; }
+.chat-line.system { color: var(--plate-ink-soft); font-style: italic; }
+
+#chat-entry {
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px; pointer-events: auto;
+  border-radius: 0 0 10px 10px;
+  background: var(--plate);
+  -webkit-backdrop-filter: var(--plate-blur);
+  backdrop-filter: var(--plate-blur);
+  box-shadow: var(--plate-frame), var(--plate-shadow);
+}
+
+/* Một nút kem đổi kênh qua lại, đúng như mẫu (mẫu để chip vàng ở đầu ô nhập). */
+.scope-pill {
+  flex: 0 0 auto; min-width: 46px; min-height: 24px; padding: 0 9px;
+  border: 0; border-radius: 7px; cursor: pointer;
+  background: var(--cream); color: var(--cream-ink);
+  font: inherit; font-size: 11px; font-weight: 800;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .7);
+}
+.scope-pill:active { transform: translateY(1px); }
+
+#chat-input {
+  flex: 1 1 auto; min-width: 0; min-height: 26px;
+  padding: 0 6px; border: 0; border-radius: 7px;
+  background: none; color: #fff; font: inherit; font-size: 13px;
+}
+#chat-input:focus { outline: none; }
+#chat-input::placeholder { color: rgba(255, 255, 255, .55); }
+
+#chat-entry .primary {
+  flex: 0 0 auto;
+  width: 27px; height: 27px; min-height: 0; min-width: 0; padding: 0;
+  border: 0; border-radius: 7px;
+  background: var(--cream); color: var(--cream-ink);
+  font-size: 12px; font-weight: 800; line-height: 1;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .7);
+}
+
+.emote-bar {
+  align-self: flex-start;
+  display: flex; gap: 5px; flex-wrap: wrap;
+  padding: 6px; margin-bottom: 3px; pointer-events: auto;
+  border-radius: 10px;
+  background: var(--plate);
+  -webkit-backdrop-filter: var(--plate-blur);
+  backdrop-filter: var(--plate-blur);
   box-shadow: var(--plate-frame), var(--plate-shadow);
 }
 .emote-btn {
-  min-width: 34px; min-height: 30px; padding: 0 7px;
-  border: 0; border-radius: 9px; cursor: pointer;
-  background: rgba(180, 138, 96, .18); color: var(--plate-ink);
+  min-width: 32px; min-height: 28px; padding: 0 6px;
+  border: 0; border-radius: 8px; cursor: pointer;
+  background: rgba(255, 255, 255, .18); color: #fff;
   font: inherit; font-size: 15px; font-weight: 800;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .7);
 }
 .emote-btn:active { transform: translateY(1px); }
 
@@ -259,13 +276,15 @@ html, body {
 }
 
 /* ---------- Thông tin nhân vật ----------
-   Viên nang ngang theo mẫu: khung avatar vuông bo tròn ở đầu, tên và thanh XP
-   xếp bên phải. Tấm kem chữ nâu, không phải kính tối. */
+   Khung avatar THÒ RA khỏi viên nang (cao hơn, lấn sang trái) đúng như mẫu;
+   viên nang là kính mờ xám-nâu chữ trắng, không phải tấm kem chữ nâu. */
 #player-card {
   pointer-events: auto;
+  position: relative;
   display: flex; align-items: center; gap: 8px;
-  padding: 4px 14px 4px 4px;
-  border: 0; border-radius: 999px;
+  min-height: 38px; margin: 5px 0 0 6px;
+  padding: 3px 14px 3px 44px;
+  border: 0; border-radius: 10px;
   background: var(--plate);
   -webkit-backdrop-filter: var(--plate-blur);
   backdrop-filter: var(--plate-blur);
@@ -275,161 +294,157 @@ html, body {
 #player-card:active { transform: translateY(1px); }
 
 #player-card .portrait {
-  position: relative; flex: 0 0 auto;
-  width: 42px; height: 42px; border-radius: 13px;
-  padding: 2px;
-  background: linear-gradient(180deg, #ffd979, #e0a02c);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .7);
+  position: absolute; left: -6px; top: -5px;
+  width: 48px; height: 48px; border-radius: 13px;
+  padding: 3px;
+  background: linear-gradient(180deg, #fff3cd, #e8b04a);
   display: grid; place-items: center;
 }
 #player-card canvas {
-  width: 100%; height: 100%; display: block; border-radius: 11px;
+  width: 100%; height: 100%; display: block; border-radius: 10px;
   background: linear-gradient(180deg, #8fd4f2 0%, #b9e4f6 62%, #dcf0fb 100%);
-}
-
-/* Cấp là một viên tròn nhỏ ở góc khung, không phải ngôi sao to chen vào avatar. */
-#player-card .level-badge {
-  position: absolute; right: -4px; bottom: -4px;
-  min-width: 18px; height: 18px; padding: 0 3px;
-  display: grid; place-items: center;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #ffdf8c, #e09a1f);
-  color: #4a2f12; font-size: 10.5px; font-weight: 800; line-height: 1;
-  box-shadow: inset 0 0 0 1.5px #fff, 0 1px 3px rgba(74, 46, 20, .4);
 }
 
 #player-card .banner {
   flex: 1 1 auto; min-width: 0;
-  display: flex; flex-direction: column; gap: 4px;
+  display: flex; flex-direction: column; gap: 3px;
 }
 #player-card .name {
-  color: var(--plate-ink); font-size: 13.5px; font-weight: 800; line-height: 1.1;
-  max-width: 128px;
+  color: #fff; font-size: 13px; font-weight: 800; line-height: 1.1;
+  max-width: 132px;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(40, 26, 14, .6);
 }
 
 #player-card .banner-bottom { display: flex; align-items: center; gap: 6px; }
+#player-card .lv-label {
+  flex: 0 0 auto;
+  color: var(--plate-ink-soft); font-size: 10px; font-weight: 700; line-height: 1;
+  white-space: nowrap; text-shadow: 0 1px 2px rgba(40, 26, 14, .6);
+}
+#player-card .lv-label b { color: #fff; font-size: 11px; }
 
+/* Thanh XP mang luôn con số bên trong, như mẫu. */
 #player-card .xp-bar {
-  flex: 1 1 auto; min-width: 54px; height: 7px;
-  border-radius: 999px;
-  background: rgba(150, 112, 74, .3);
-  box-shadow: inset 0 1px 1px rgba(110, 76, 42, .35);
-  overflow: hidden;
+  position: relative;
+  flex: 1 1 auto; min-width: 74px; height: 13px;
+  border-radius: 999px; overflow: hidden;
+  background: rgba(30, 20, 12, .45);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .4);
 }
 #player-card .xp-fill {
-  display: block; height: 100%; width: 0%;
+  position: absolute; inset: 0 auto 0 0; width: 0%;
   border-radius: 999px;
   background: linear-gradient(180deg, #b7ef7e 0%, #74cf3f 55%, #4fa525 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5);
   transition: width .3s ease;
 }
 #player-card .xp-text {
-  flex: 0 0 auto; color: var(--plate-ink-soft);
-  font-size: 10.5px; font-weight: 800; line-height: 1; white-space: nowrap;
+  position: relative; display: block; text-align: center;
+  color: #fff; font-size: 9.5px; font-weight: 800; line-height: 13px;
+  text-shadow: 0 1px 2px rgba(30, 20, 12, .75);
 }
 
 /* ---------- Bảng theo dõi nhiệm vụ ----------
-   Theo mẫu: hàng tab gạt ở trên (tab đang chọn là thẻ kem nổi lên), thân bảng
-   là tấm kem mờ hơn, mỗi dòng mở đầu bằng nhãn [loại] có màu riêng. */
+   Hàng tab là một thanh kính riêng; MỖI nhiệm vụ là một khối kính riêng có khe
+   hở — mẫu tách từng nhiệm vụ chứ không dồn vào một tấm. */
 #quest-tracker {
   pointer-events: auto;
-  width: 276px;
+  width: 268px;
   display: flex; flex-direction: column; gap: 4px;
 }
 
 .qt-tabs {
-  display: flex; align-items: center; gap: 3px;
-  padding: 3px; border-radius: 11px;
+  display: flex; align-items: center; gap: 2px;
+  padding: 2px; border-radius: 9px;
   background: var(--plate-soft);
   -webkit-backdrop-filter: var(--plate-blur);
   backdrop-filter: var(--plate-blur);
   box-shadow: var(--plate-frame), var(--plate-shadow);
 }
 .qt-tab {
+  position: relative;
   flex: 1 1 0; min-width: 0; min-height: 22px; padding: 0 5px;
-  border: 0; border-radius: 8px; cursor: pointer;
+  border: 0; border-radius: 7px; cursor: pointer;
   background: none; color: var(--plate-ink-soft);
   font: inherit; font-size: 11.5px; font-weight: 800;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(40, 26, 14, .55);
 }
 .qt-tab[aria-selected="true"] {
-  background: linear-gradient(180deg, #fffdf7, #ffeec4);
-  color: #4a2f12;
-  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .95), 0 1px 3px rgba(120, 84, 40, .3);
+  background: var(--cream); color: var(--cream-ink);
+  text-shadow: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .8);
 }
 .qt-tab:active { transform: translateY(1px); }
-/* Chấm báo có việc chưa nhận ở tab khác — không cần mở tab mới thấy. */
-.qt-tab { position: relative; }
 .qt-dot {
   position: absolute; top: 2px; right: 3px;
   width: 6px; height: 6px; border-radius: 50%;
-  background: var(--danger); box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .85);
+  background: #f0483f; box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .9);
 }
 .qt-collapse {
   flex: 0 0 auto; width: 20px; min-height: 22px;
-  border: 0; border-radius: 8px; cursor: pointer;
-  background: rgba(180, 138, 96, .2); color: var(--plate-ink);
+  border: 0; border-radius: 7px; cursor: pointer;
+  background: var(--cream); color: var(--cream-ink);
   font: inherit; font-size: 13px; font-weight: 800; line-height: 1;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .8);
 }
 
-.qt-body {
-  display: flex; flex-direction: column; gap: 6px;
-  padding: 7px 9px 8px; border-radius: 12px;
-  background: var(--plate-soft);
+.qt-body { display: flex; flex-direction: column; gap: 4px; }
+#quest-tracker.collapsed .qt-body { display: none; }
+
+/* Mỗi nhiệm vụ một khối kính riêng. */
+.qt-row {
+  display: flex; flex-direction: column; gap: 1px;
+  padding: 5px 8px 6px; border-radius: 9px;
+  background: var(--plate);
   -webkit-backdrop-filter: var(--plate-blur);
   backdrop-filter: var(--plate-blur);
   box-shadow: var(--plate-frame), var(--plate-shadow);
 }
-#quest-tracker.collapsed .qt-body { display: none; }
-
-.qt-row { display: flex; flex-direction: column; gap: 2px; }
 .qt-line { display: flex; align-items: center; gap: 5px; }
 /* Nhãn [loại] có màu riêng cho từng tuyến nhiệm vụ, như mẫu. */
 .qt-tag {
   flex: 0 0 auto;
-  font-size: 10.5px; font-weight: 800; line-height: 1.2;
-  color: #c2557a;
+  font-size: 11px; font-weight: 800; line-height: 1.2;
+  color: #ff9ab4; text-shadow: 0 1px 2px rgba(40, 26, 14, .6);
 }
-.qt-tag.t-daily, .qt-tag.t-weekly { color: #3f8f5c; }
-.qt-tag.t-event, .qt-tag.t-achievement { color: #b5761d; }
+.qt-tag.t-daily, .qt-tag.t-weekly { color: #9de07f; }
+.qt-tag.t-event, .qt-tag.t-achievement { color: #ffd27a; }
 .qt-name {
   flex: 1 1 auto; min-width: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  font-size: 12.5px; font-weight: 800; color: var(--plate-ink);
+  font-size: 12.5px; font-weight: 800; color: #fff;
+  text-shadow: 0 1px 2px rgba(40, 26, 14, .6);
 }
-.qt-sub { display: flex; padding-left: 2px; }
+/* Mô tả được xuống dòng: mẫu để mô tả tràn 2 dòng chứ không cắt cụt. */
 .qt-desc {
-  flex: 1 1 auto; min-width: 0;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  font-size: 11px; color: var(--plate-ink-soft);
+  margin: 0;
+  font-size: 11px; line-height: 1.35; color: var(--plate-ink-soft);
+  text-shadow: 0 1px 2px rgba(40, 26, 14, .55);
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+  overflow: hidden;
 }
-.qt-count { flex: 0 0 auto; font-size: 11px; font-weight: 800; color: var(--plate-ink-soft); }
+.qt-count { font-weight: 800; color: #fff; }
 .qt-claim {
   flex: 0 0 auto; min-height: 20px; padding: 0 9px;
-  border: 0; border-radius: 999px; cursor: pointer;
-  background: linear-gradient(180deg, #9ee06f, #56a02d);
-  color: #fff; font: inherit; font-size: 10.5px; font-weight: 800;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 1px 3px rgba(74, 46, 20, .3);
+  border: 0; border-radius: 7px; cursor: pointer;
+  background: var(--cream); color: var(--cream-ink);
+  font: inherit; font-size: 10.5px; font-weight: 800;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .8);
 }
 .qt-claim:active { transform: translateY(1px); }
 
-.qt-bar {
-  display: block; height: 3px; margin-top: 2px;
-  border-radius: 999px; overflow: hidden;
-  background: rgba(150, 112, 74, .28);
-}
-.qt-bar i {
-  display: block; height: 100%; border-radius: inherit;
-  background: linear-gradient(90deg, #ffd979, #e09a1f);
-}
-.qt-row.done .qt-bar i { background: linear-gradient(90deg, #b7ef7e, #4fa525); }
-
 .qt-more {
   align-self: stretch;
-  min-height: 21px; border: 0; border-radius: 8px; cursor: pointer;
-  background: rgba(180, 138, 96, .2); color: var(--plate-ink-soft);
+  min-height: 22px; border: 0; border-radius: 9px; cursor: pointer;
+  background: var(--plate-soft);
+  -webkit-backdrop-filter: var(--plate-blur);
+  backdrop-filter: var(--plate-blur);
+  color: var(--plate-ink-soft);
   font: inherit; font-size: 10.5px; font-weight: 800;
+  text-shadow: 0 1px 2px rgba(40, 26, 14, .55);
+  box-shadow: var(--plate-frame), var(--plate-shadow);
 }
 .qt-more:active { transform: translateY(1px); }
 
@@ -457,20 +472,23 @@ html, body {
 .channel-tile .load i { display: block; height: 100%; border-radius: 999px; }
 
 /* ---------- Pill chung (tiền tệ, nhãn) ---------- */
+/* Ví của mẫu là ô CHỮ NHẬT bo nhẹ, không phải viên nang tròn. */
 .pill {
   background: var(--plate);
   -webkit-backdrop-filter: var(--plate-blur);
   backdrop-filter: var(--plate-blur);
   border: 0;
-  border-radius: 999px;
-  padding: 3px 11px 3px 3px;
+  border-radius: 8px;
+  padding: 3px 12px 3px 4px;
   font-size: 12.5px;
   font-weight: 800;
-  color: var(--plate-ink);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(40, 26, 14, .6);
   box-shadow: var(--plate-frame), var(--plate-shadow);
 }
 .currency { display: inline-flex; align-items: center; gap: 5px; }
-.hud-wallet .dot { width: 18px; height: 18px; }
+.hud-wallet { margin-left: 2px; }
+.hud-wallet .dot { width: 17px; height: 17px; }
 
 /* Xu và ngọc vẽ thành hai vật thể khác chất, không phải hai chấm tròn đổi màu. */
 .dot { width: 22px; height: 22px; display: inline-block; flex: 0 0 auto; }
@@ -673,13 +691,13 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
 /* Cửa sổ thấp (laptop nhỏ, ngang trên điện thoại): thu gọn HUD. */
 @media (max-height: 520px) {
   #hud { padding: 6px 8px; }
-  #player-card .portrait { width: 38px; height: 38px; }
-  /* Cửa sổ thấp: bảng nhiệm vụ gọn lại, chỉ giữ một dòng thông tin mỗi mục. */
-  #quest-tracker { width: 236px; }
-  #quest-tracker .qt-body { padding: 6px 8px 7px; gap: 5px; }
-  #quest-tracker .qt-sub { display: none; }
-  .icon-btn { width: 58px; }
-  .icon-btn-face { width: 34px; height: 34px; }
-  .icon-btn-face svg { width: 18px; height: 18px; }
+  #player-card { min-height: 34px; padding-left: 40px; }
+  #player-card .portrait { width: 42px; height: 42px; }
+  /* Cửa sổ thấp: bảng nhiệm vụ gọn lại, mô tả rút còn một dòng. */
+  #quest-tracker { width: 240px; }
+  #quest-tracker .qt-desc { -webkit-line-clamp: 1; }
+  .icon-btn { width: 50px; }
+  .icon-btn-face { width: 30px; height: 30px; }
+  .icon-btn-face svg { width: 28px; height: 28px; }
   #chat-stream { max-height: 52px; }
 }

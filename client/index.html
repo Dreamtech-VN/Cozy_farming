@@ -16,18 +16,21 @@
     <header id="hud" class="hidden">
       <!-- Trái: nhân vật, ví tiền, bảng nhiệm vụ -->
       <div class="hud-left">
-        <!-- Nhân vật là một viên nang ngang: khung avatar vuông bo tròn, tên và
-             thanh XP xếp bên phải. Ví là một hàng pill RIÊNG ngay dưới. -->
+        <!-- Khung avatar THÒ RA khỏi viên nang (cao hơn và lấn sang trái) đúng
+             như mẫu; tên ở dòng trên, cấp + thanh XP ở dòng dưới. -->
         <button id="player-card" type="button" aria-label="Mở thông tin nhân vật">
           <span class="portrait">
             <canvas id="avatar-portrait" width="176" height="176"></canvas>
-            <span class="level-badge" id="hud-level">1</span>
           </span>
           <span class="banner">
             <span class="name" id="hud-name">—</span>
             <span class="banner-bottom">
-              <span class="xp-bar"><span class="xp-fill" id="hud-xp-fill"></span></span>
-              <span class="xp-text" id="hud-xp">0 / 0</span>
+              <span class="lv-label">Cấp <b id="hud-level">1</b></span>
+              <!-- Số XP nằm TRÊN thanh như mẫu, không tách thành chữ rời bên phải. -->
+              <span class="xp-bar">
+                <span class="xp-fill" id="hud-xp-fill"></span>
+                <span class="xp-text" id="hud-xp">0 / 0</span>
+              </span>
             </span>
           </span>
         </button>
@@ -52,19 +55,17 @@
     <!-- Góc dưới phải: các nút dùng nhiều nhất -->
     <nav id="menu-bottom" class="icon-row hidden" aria-label="Truy cập nhanh"></nav>
 
-    <!-- Dưới giữa: khung chat — hàng công cụ ở trên, dòng chat ở giữa, hàng nhập
-         với hai nút chọn kênh ở dưới, theo đúng bố cục mẫu. -->
+    <!-- Dưới giữa: khung chat -->
     <section id="chat-dock" class="hidden" aria-label="Trò chuyện">
+      <!-- Ba tầng dính liền thành MỘT khối như mẫu: hàng công cụ, khung tin,
+           hàng nhập. Ba mảnh rời nhau trông như ba widget không liên quan. -->
       <div class="chat-tools">
-        <button class="chat-tool" id="chat-emote" type="button"><span class="ct-ico">☺</span>Biểu cảm</button>
-        <button class="chat-tool" id="chat-action" type="button"><span class="ct-ico">✦</span>Động tác</button>
+        <button class="chat-tool" id="chat-emote" type="button"><span class="ct-ico e">☺</span>Biểu cảm</button>
+        <button class="chat-tool" id="chat-friends" type="button"><span class="ct-ico f">♥</span>Bạn bè</button>
       </div>
       <div id="chat-stream" aria-live="polite"></div>
       <form id="chat-entry" autocomplete="off">
-        <div class="scope-switch" id="chat-scope" role="group" aria-label="Kênh chat">
-          <button type="button" data-scope="map" aria-pressed="true">Khu</button>
-          <button type="button" data-scope="world" aria-pressed="false">Thế giới</button>
-        </div>
+        <button class="scope-pill" id="chat-scope" type="button" data-scope="map" aria-label="Đổi kênh chat">Khu</button>
         <input id="chat-input" type="text" maxlength="200" placeholder="Nhập nội dung…" />
         <button class="primary" type="submit" aria-label="Gửi">➤</button>
       </form>

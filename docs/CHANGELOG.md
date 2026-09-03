@@ -3,6 +3,32 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.3.3 — 2026-09-03
+
+### Thay đổi
+Soi lại ảnh mẫu ở mức phóng to từng vùng (trước đó chỉ nhìn tổng thể nên đoán
+sai) và sửa đúng những chỗ còn lệch:
+
+- **Đảo lại tông tấm HUD.** Mẫu dùng kính mờ xám-nâu chữ TRẮNG, chỉ tab đang
+  chọn và các nút chính mới là mảng kem/vàng. Bản 0.3.2 làm ngược: cả tấm màu
+  kem chữ nâu.
+- **Khung avatar thò ra khỏi viên nang** (cao hơn và lấn sang trái), và **số XP
+  nằm trên thanh** thay vì tách thành chữ rời bên phải.
+- **Ví thành ô chữ nhật bo nhẹ**, không phải viên nang tròn.
+- **Bỏ đĩa nền sau icon.** Mẫu vẽ icon là hình đặc có viền trắng đứng thẳng trên
+  cảnh; `paint-order: stroke fill` cho viền trắng nằm ngoài nét màu nên icon đọc
+  được trên mọi nền mà không cần file ảnh. Thêm **chấm đỏ báo việc** trên nút
+  Nhiệm vụ khi có thưởng chờ nhận.
+- **Khung chat dính liền thành một khối** (hàng công cụ bo góc trên → khung tin →
+  hàng nhập bo góc dưới), thêm **chip kênh trước tên người gửi**, và nút đổi kênh
+  thành **một pill kem đổi qua lại** thay cho hai nút gạt.
+- **Mỗi nhiệm vụ là một khối kính riêng** có khe hở, mô tả được xuống 2 dòng với
+  số tiến độ ở cuối — mẫu tách từng nhiệm vụ chứ không dồn vào một tấm.
+
+### Sửa
+- Icon "Đổi khu" là mấy gạch ngang hở nên khi tô đặc biến thành mảng loang; đổi
+  sang hai hình thoi xếp chồng (hình kín).
+
 ## 0.3.2 — 2026-09-03
 
 ### Thay đổi

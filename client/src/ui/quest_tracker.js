@@ -90,8 +90,8 @@ export function renderQuestTracker(game, quests, { onOpen, onClaim }) {
       const progress = progressOf(quest);
       const done = quest.state === 'completed';
       return el('div', { class: `qt-row ${done ? 'done' : ''}`.trim() }, [
-        // Tên và tiến độ cùng một dòng; mô tả xuống dòng riêng để cửa sổ thấp
-        // ẩn được cả dòng mô tả mà không mất chỗ nhận thưởng.
+        // Dòng 1: nhãn [loại] có màu + tên. Dòng 2: mô tả xuống dòng được, số
+        // tiến độ nằm ngay cuối mô tả — đúng cách mẫu xếp chữ.
         el('div', { class: 'qt-line' }, [
           el('span', { class: `qt-tag t-${quest.type}`, text: `[${TYPE_LABEL[quest.type] ?? quest.type}]` }),
           el('span', { class: 'qt-name', text: t(quest.name_key) }),
@@ -100,10 +100,12 @@ export function renderQuestTracker(game, quests, { onOpen, onClaim }) {
                 class: 'qt-claim', type: 'button', text: 'Nhận',
                 onClick: (event) => { event.stopPropagation(); onClaim(quest.quest_id); },
               })
-            : el('span', { class: 'qt-count', text: `${progress.current}/${progress.total}` }),
+            : null,
         ]),
-        el('div', { class: 'qt-sub' }, [el('span', { class: 'qt-desc', text: t(quest.desc_key) })]),
-        el('span', { class: 'qt-bar' }, [el('i', { style: `width:${Math.round(progress.ratio * 100)}%` })]),
+        el('p', { class: 'qt-desc' }, [
+          el('span', { text: t(quest.desc_key) }),
+          el('span', { class: 'qt-count', text: ` (${progress.current}/${progress.total})` }),
+        ]),
       ]);
       }),
       el('button', { class: 'qt-more', type: 'button', text: 'Xem tất cả nhiệm vụ', onClick: onOpen }),

@@ -10,7 +10,9 @@ const ICONS = {
   map: `<path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/>`,
   shop: `<path d="M4 8h16l-1.2 11.2A2 2 0 0 1 16.8 21H7.2a2 2 0 0 1-2-1.8z"/><path d="M8.5 8V6a3.5 3.5 0 0 1 7 0v2"/>`,
   event: `<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3.2v3.6M16 3.2v3.6"/>`,
-  channel: `<path d="M4 8h16M4 12h16M4 16h16"/><circle cx="8" cy="8" r="1.6"/><circle cx="16" cy="12" r="1.6"/><circle cx="10" cy="16" r="1.6"/>`,
+  // Icon tô đặc nên chỉ dùng hình KÍN; nét hở (mấy gạch ngang) tô vào thành
+  // mảng loang. Hai hình thoi xếp chồng đọc ra "nhiều lớp/nhiều khu".
+  channel: `<path d="M12 2.6 21.4 8 12 13.4 2.6 8z"/><path d="M12 12.2 19 16.1 12 20 5 16.1z"/>`,
   bag: `<path d="M4.5 8h15l-1 11.2a2 2 0 0 1-2 1.8H7.5a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.2A3 3 0 0 1 15 6.2V8"/><path d="M9 12h6"/>`,
   home: `<path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.6V20h13V9.6"/><path d="M10 20v-5h4v5"/>`,
   friends: `<circle cx="9" cy="8.5" r="3.4"/><path d="M3 20c0-3.3 2.7-5.6 6-5.6s6 2.3 6 5.6"/><path d="M16 5.6a3.4 3.4 0 0 1 0 6.8M17.5 14.8c2.1.7 3.5 2.6 3.5 5.2"/>`,
@@ -43,6 +45,7 @@ function button(item, game) {
   }, [
     el('span', { class: 'icon-btn-face', html: icon(item.icon) }),
     el('span', { class: 'icon-btn-label', text: item.label }),
+    el('i', { class: 'icon-btn-dot hidden' }),
   ]);
 }
 
@@ -68,6 +71,12 @@ export function buildHudMenus(game, handlers) {
 
   document.getElementById('menu-top').replaceChildren(...top.map((i) => button(i, game)));
   document.getElementById('menu-bottom').replaceChildren(...bottom.map((i) => button(i, game)));
+}
+
+/** Bật/tắt chấm đỏ báo việc trên một nút, như các icon có chấm trong mẫu. */
+export function markMenuBadge(key, show) {
+  const dot = document.querySelector(`.icon-btn[data-key="${key}"] .icon-btn-dot`);
+  dot?.classList.toggle('hidden', !show);
 }
 
 /** Đánh dấu nút tương ứng khi panel của nó đang mở. */

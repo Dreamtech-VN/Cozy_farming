@@ -3,8 +3,13 @@
  * Luôn thấy vài dòng gần nhất và ô nhập, không phải mở panel mới chat được.
  */
 import { el, toast } from './ui.js';
+import { openSocial } from './panels.js';
+import { markActiveMenu } from './hud_menu.js';
 
 const MAX_LINES = 40;
+
+/** Nhãn kênh dùng cho cả nút đổi kênh lẫn chip trước tên người gửi. */
+const SCOPE_LABEL = { map: 'Khu', world: 'Thế giới', private: 'Riêng' };
 
 export class ChatDock {
   constructor(game) {
@@ -12,7 +17,7 @@ export class ChatDock {
     this.root = document.getElementById('chat-dock');
     this.stream = document.getElementById('chat-stream');
     this.input = document.getElementById('chat-input');
-    this.scopeSwitch = document.getElementById('chat-scope');
+    this.scopePill = document.getElementById('chat-scope');
     this.form = document.getElementById('chat-entry');
     this.scope = 'map';
 
@@ -25,19 +30,16 @@ export class ChatDock {
       if (event.key === 'Escape') this.input.blur();
       event.stopPropagation();
     });
-    // Chọn kênh bằng hai nút gạt thay cho <select>: đúng bố cục mẫu và không
-    // phải mở menu hệ thống mới đổi được kênh.
-    this.scopeSwitch.addEventListener('click', (event) => {
-      const button = event.target.closest('button[data-scope]');
-      if (!button || button.dataset.scope === this.scope) return;
-      this.scope = button.dataset.scope;
-      for (const b of this.scopeSwitch.querySelectorAll('button')) {
-        b.setAttribute('aria-pressed', b.dataset.scope === this.scope ? 'true' : 'false');
-      }
+    // Một nút đổi kênh qua lại, hiện đúng kênh đang dùng — mẫu dùng đúng kiểu
+    // này, và cũng đỡ một menu hệ thống so với <select>.
+    this.scopePill.addEventListener('click', () => {
+      this.scope = this.scope === 'map' ? 'world' : 'map';
+      this.scopePill.dataset.scope = this.scope;
+      this.scopePill.textContent = SCOPE_LABEL[this.scope];
       this.loadHistory();
     });
     document.getElementById('chat-emote').addEventListener('click', () => this.#openEmotes());
-    document.getElementById('chat-action').addEventListener('click', () => this.#openEmotes());
+    document.getElementById('chat-friends').addEventListener('click', () => { openSocial(this.game); markActiveMenu('social'); });
   }
 
   show() { this.root.classList.remove('hidden'); }
@@ -59,6 +61,7 @@ export class ChatDock {
   append(message, notify = true) {
     const mine = message.sender_id === this.game.characterId;
     this.stream.append(el('div', { class: `chat-line ${mine ? 'mine' : ''}`.trim() }, [
+      el('span', { class: `ch-tag c-${message.channel}`, text: SCOPE_LABEL[message.channel] ?? message.channel }),
       el('span', { class: 'who', text: `${message.sender_nickname}: ` }),
       el('span', { text: message.body }),
     ]));
