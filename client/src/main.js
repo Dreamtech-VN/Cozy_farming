@@ -9,13 +9,14 @@ import { Input } from './core/input.js';
 import { WorldRenderer } from './render/world.js';
 import { drawAvatarPortrait } from './render/avatar.js';
 import { levelProgress } from './core/progression.js';
-import { WorldClock, weatherIcon } from './core/world_clock.js';
+import { WorldClock } from './core/world_clock.js';
 import { renderQuestTracker, claimFromTracker } from './ui/quest_tracker.js';
+import { buildHudMenus, markActiveMenu } from './ui/hud_menu.js';
+import { ChatDock } from './ui/chat_dock.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
-import { openQuests, openInventory, openFarm, openSocial, openChat, openProfile, openShop, harvest, openAreaMap, openChannelPicker, energyLine } from './ui/panels.js';
-import { drawAreaMap } from './ui/minimap.js';
+import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openChannelPicker, openLiveOps, energyLine } from './ui/panels.js';
 
 const GRAVITY = 1800;
 const RUN_SPEED = 260;
@@ -37,7 +38,6 @@ class Game {
     this.hintTarget = null;
     this.emotes = new Map();
     this.channel = 1;
-    this.minimapAt = 0;
     this.worldClock = new WorldClock(this.api);
     this.worldClockAt = 0;
   }
@@ -73,39 +73,30 @@ class Game {
   }
 
   #bindUi() {
-    for (const button of document.querySelectorAll('#toolbar button')) {
-      button.addEventListener('click', () => {
-        const panel = button.dataset.panel;
-        const alreadyOpen = button.getAttribute('aria-pressed') === 'true';
-        closePanel();
-        if (alreadyOpen) return;
-        ({
-          quests: () => openQuests(this),
-          inventory: () => openInventory(this),
-          farm: () => openFarm(this),
-          social: () => openSocial(this),
-          chat: () => openChat(this),
-          profile: () => openProfile(this),
-        })[panel]?.();
-      });
-    }
+    buildHudMenus(this, {
+      map: () => { openAreaMap(this); markActiveMenu('map'); },
+      shop: () => { openShop(this, 'shop_general'); markActiveMenu('shop'); },
+      channel: () => { openChannelPicker(this); markActiveMenu('channel'); },
+      event: () => { openLiveOps(this); markActiveMenu('event'); },
+      quests: () => { openQuests(this); markActiveMenu('quests'); },
+      inventory: () => { openInventory(this); markActiveMenu('inventory'); },
+      farm: () => { openFarm(this); markActiveMenu('farm'); },
+      social: () => { openSocial(this); markActiveMenu('social'); },
+      profile: () => { openProfile(this); markActiveMenu('profile'); },
+    });
 
-    // Góc thông tin nhân vật mở thẳng panel Nhân vật.
+    // Cụm thông tin nhân vật mở thẳng panel Nhân vật.
     document.getElementById('player-card').addEventListener('click', () => {
       closePanel();
       openProfile(this);
+      markActiveMenu('profile');
     });
 
-    // Minimap mở popup bản đồ khu vực.
-    document.getElementById('minimap').addEventListener('click', () => {
+    // Dấu cộng cạnh ví dẫn tới cửa hàng.
+    document.getElementById('wallet-add').addEventListener('click', () => {
       closePanel();
-      openAreaMap(this);
-    });
-
-    // Chuyển khu: mở lưới chọn khu kèm sĩ số từng khu.
-    document.getElementById('channel-button').addEventListener('click', () => {
-      closePanel();
-      openChannelPicker(this);
+      openShop(this, 'shop_general');
+      markActiveMenu('shop');
     });
 
     // Chạm vào ô đất trong nông trại để thu hoạch nhanh (doc 12 — một hành động chính).
@@ -115,7 +106,7 @@ class Game {
       const plot = this.farm.plots.find((p) => p.screen && Math.abs(p.screen.x - point.x) < 46 && Math.abs(p.screen.y - point.y) < 70);
       if (!plot) return;
       if (plot.state === 'mature') harvest(this, plot.plot_id, () => this.refreshFarm());
-      else openFarm(this);
+      else { openFarm(this); markActiveMenu('farm'); }
     });
   }
 
@@ -160,9 +151,7 @@ class Game {
     });
 
     this.realtime.addEventListener('chat', (event) => {
-      const message = event.detail.message;
-      this.chatSink?.(message);
-      if (message.sender_id !== this.characterId) toast(`${message.sender_nickname}: ${message.body}`);
+      this.chatDock?.append(event.detail.message);
     });
 
     this.realtime.addEventListener('emote', (event) => {
@@ -179,7 +168,9 @@ class Game {
     this.profile = profile;
 
     document.getElementById('hud').classList.remove('hidden');
-    document.getElementById('toolbar').classList.remove('hidden');
+    document.getElementById('menu-bottom').classList.remove('hidden');
+    this.chatDock ??= new ChatDock(this);
+    this.chatDock.show();
 
     await this.enterMap(profile.position.map_id, 'spawn_default');
     this.#updateHud();
@@ -188,7 +179,6 @@ class Game {
       this.#loop();
       // Sĩ số khu đổi khi người khác ra vào, nên làm mới định kỳ thay vì chỉ đọc
       // một lần lúc vào map.
-      setInterval(() => this.#refreshChannels().catch(() => {}), 15_000);
       // Đồng hồ chạy cục bộ mỗi giây; hỏi lại server mỗi phút để không trôi lệch.
       setInterval(() => this.#renderWorldClock(), 1000);
       setInterval(() => this.#refreshWorldClock(), 60_000);
@@ -218,41 +208,29 @@ class Game {
 
     this.farm = map.farm_layout ? await this.api.get('/v1/farm') : null;
     this.channel = entered.channel ?? 1;
-    document.getElementById('hud-map').textContent = t(map.name_key);
-    await this.#refreshChannels();
     await this.#refreshWorldClock();
     await this.refreshQuests();
-    this.#drawMinimap();
+    await this.chatDock?.loadHistory();
   }
 
-  /** Giờ trong game, sáng tối và thời tiết — lấy từ server, hiển thị ở dải HUD. */
+  /**
+   * Giờ trong game, sáng tối và thời tiết — lấy từ server.
+   * HUD không còn hiện đồng hồ nữa; dữ liệu này chỉ để renderer phủ sắc trời
+   * theo giai đoạn trong ngày và vẽ mưa.
+   */
   async #refreshWorldClock() {
     if (!this.currentMap) return;
     try {
       await this.worldClock.refresh(this.currentMap.map_id);
     } catch {
-      // Mất mạng thì giữ nguyên trạng thái cũ thay vì xoá trắng dải thông tin.
-      return;
+      return; // Mất mạng thì giữ nguyên trạng thái cũ.
     }
     this.#renderWorldClock();
   }
 
   #renderWorldClock() {
     const state = this.worldClock.now();
-    if (!state) return;
-
-    const phaseName = t(state.phase_name_key);
-    const weatherName = t(state.weather.name_key);
-
-    document.getElementById('world-clock').textContent = state.clock;
-    document.getElementById('world-phase').textContent = phaseName;
-    document.getElementById('weather-name').textContent = weatherName;
-    document.getElementById('weather-icon').innerHTML = weatherIcon(state.weather.id, state.phase);
-    // Chip chỉ hiện biểu tượng và giờ; tên đầy đủ nằm ở tooltip.
-    document.getElementById('world-status').title = `${state.clock} · ${phaseName} · ${weatherName}`;
-
-    // Renderer dùng để phủ sắc trời theo giờ và vẽ mưa.
-    this.renderer.setWorldState(state);
+    if (state) this.renderer.setWorldState(state);
   }
 
   async refreshFarm() {
@@ -299,40 +277,6 @@ class Game {
 
     document.getElementById('hud-coin').lastElementChild.textContent = formatNumber(profile.wallet.coin ?? 0);
     document.getElementById('hud-gem').lastElementChild.textContent = formatNumber(profile.wallet.gem ?? 0);
-  }
-
-  /** Nút chuyển khu trên HUD: hiện khu hiện tại và sĩ số của nó. */
-  async #refreshChannels() {
-    const button = document.getElementById('channel-button');
-    const map = this.currentMap;
-    if (!map) return;
-
-    // Map private (nông trại, nhà) không chia khu.
-    if (map.instance_policy === 'owner') {
-      button.disabled = true;
-      document.getElementById('channel-value').textContent = 'riêng';
-      document.getElementById('channel-load').textContent = 'chỉ mình bạn';
-      return;
-    }
-
-    button.disabled = false;
-    document.getElementById('channel-value').textContent = String(this.channel);
-    try {
-      const { channels } = await this.api.get(`/v1/maps/${map.map_id}/channels`);
-      const info = channels.find((c) => c.channel === this.channel);
-      document.getElementById('channel-load').textContent = info ? `${info.players}/${info.capacity}` : '';
-    } catch {
-      // Mất mạng thì vẫn hiện số khu, chỉ thiếu sĩ số.
-      document.getElementById('channel-load').textContent = '';
-    }
-  }
-
-  #drawMinimap() {
-    if (!this.currentMap) return;
-    drawAreaMap(document.getElementById('minimap-canvas'), this.currentMap, {
-      self: this.self,
-      players: [...this.players.values()],
-    });
   }
 
   pauseWorld() { this.paused = true; this.input.enabled = false; }
@@ -497,11 +441,6 @@ class Game {
           hintTarget: this.hintTarget,
           time: this.time,
         });
-      }
-      // Minimap chỉ cần ~4 khung/giây, vẽ mỗi frame là phí.
-      if (this.currentMap && now - this.minimapAt > 250) {
-        this.minimapAt = now;
-        this.#drawMinimap();
       }
       requestAnimationFrame(frame);
     };

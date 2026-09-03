@@ -5,16 +5,27 @@
 import { el, toast } from './ui.js';
 import { t } from '../core/i18n.js';
 
-const MAX_ROWS = 3;
+const MAX_ROWS = 4;
 
 /** Cốt truyện trước, rồi phụ, rồi hằng ngày/tuần — thứ tự người chơi quan tâm. */
 const TYPE_ORDER = { main: 0, side: 1, daily: 2, weekly: 3, event: 4, achievement: 5 };
 const TYPE_LABEL = { main: 'Cốt truyện', side: 'Phụ', daily: 'Hằng ngày', weekly: 'Hằng tuần', event: 'Sự kiện' };
 
+/** Tab lọc theo nhóm loại nhiệm vụ. */
+const TABS = [
+  { key: 'main', label: 'Cốt truyện', types: ['main'] },
+  { key: 'side', label: 'Phụ', types: ['side', 'event', 'achievement'] },
+  { key: 'daily', label: 'Hằng ngày', types: ['daily', 'weekly'] },
+];
+
+/** Tab đang chọn và trạng thái thu gọn được nhớ giữa các lần vẽ lại. */
+const state = { tab: 'main', collapsed: false };
+
 /** Nhiệm vụ đã hoàn thành nhưng chưa nhận thưởng phải lên đầu. */
-function pickVisible(quests) {
+function pickVisible(quests, tab) {
+  const types = TABS.find((t) => t.key === tab)?.types ?? [];
   return quests
-    .filter((quest) => quest.state !== 'claimed')
+    .filter((quest) => quest.state !== 'claimed' && types.includes(quest.type))
     .sort((a, b) => {
       const done = (b.state === 'completed') - (a.state === 'completed');
       if (done !== 0) return done;
@@ -22,6 +33,12 @@ function pickVisible(quests) {
     })
     .slice(0, MAX_ROWS);
 }
+
+/** Số mục chưa nhận của mỗi tab, để chấm báo trên tab. */
+const pendingByTab = (quests) => Object.fromEntries(TABS.map((tab) => [
+  tab.key,
+  quests.filter((q) => q.state === 'completed' && tab.types.includes(q.type)).length,
+]));
 
 const progressOf = (quest) => {
   const current = quest.objectives.reduce((sum, o) => sum + Math.min(o.current, o.count), 0);
@@ -31,39 +48,65 @@ const progressOf = (quest) => {
 
 export function renderQuestTracker(game, quests, { onOpen, onClaim }) {
   const root = document.getElementById('quest-tracker');
-  const visible = pickVisible(quests);
+  const open = quests.filter((q) => q.state !== 'claimed');
 
-  if (visible.length === 0) {
+  if (open.length === 0) {
     root.classList.add('hidden');
     root.replaceChildren();
     return;
   }
 
+  // Tab rỗng thì tự nhảy sang tab đầu tiên còn việc, khỏi hiện bảng trống trơn.
+  if (pickVisible(quests, state.tab).length === 0) {
+    state.tab = TABS.find((tab) => pickVisible(quests, tab.key).length > 0)?.key ?? state.tab;
+  }
+  const visible = pickVisible(quests, state.tab);
+  const pending = pendingByTab(quests);
+
+  const redraw = () => renderQuestTracker(game, quests, { onOpen, onClaim });
+
   root.classList.remove('hidden');
+  root.classList.toggle('collapsed', state.collapsed);
   root.replaceChildren(
-    el('div', { class: 'qt-head' }, [
-      el('span', { class: 'qt-title', text: 'Nhiệm vụ' }),
-      el('button', { class: 'qt-more', type: 'button', text: 'Xem tất cả', onClick: onOpen }),
+    el('div', { class: 'qt-tabs' }, [
+      ...TABS.map((tab) => el('button', {
+        class: 'qt-tab', type: 'button',
+        'aria-selected': tab.key === state.tab ? 'true' : 'false',
+        onClick: () => { state.tab = tab.key; redraw(); },
+      }, [
+        el('span', { text: tab.label }),
+        pending[tab.key] > 0 ? el('i', { class: 'qt-dot' }) : null,
+      ])),
+      el('button', {
+        class: 'qt-collapse', type: 'button',
+        title: state.collapsed ? 'Mở rộng' : 'Thu gọn',
+        text: state.collapsed ? '›' : '‹',
+        onClick: () => { state.collapsed = !state.collapsed; redraw(); },
+      }),
     ]),
-    ...visible.map((quest) => {
+    el('div', { class: 'qt-body' }, [
+      ...visible.map((quest) => {
       const progress = progressOf(quest);
       const done = quest.state === 'completed';
       return el('div', { class: `qt-row ${done ? 'done' : ''}`.trim() }, [
         el('div', { class: 'qt-line' }, [
-          el('span', { class: 'qt-name', text: t(quest.name_key) }),
           el('span', { class: 'qt-tag', text: TYPE_LABEL[quest.type] ?? quest.type }),
+          el('span', { class: 'qt-name', text: t(quest.name_key) }),
         ]),
         el('div', { class: 'qt-line' }, [
-          el('span', { class: 'qt-bar' }, [el('i', { style: `width:${Math.round(progress.ratio * 100)}%` })]),
+          el('span', { class: 'qt-desc', text: t(quest.desc_key) }),
           done
             ? el('button', {
                 class: 'qt-claim', type: 'button', text: 'Nhận',
                 onClick: (event) => { event.stopPropagation(); onClaim(quest.quest_id); },
               })
-            : el('span', { class: 'qt-count', text: `${progress.current}/${progress.total}` }),
+            : el('span', { class: 'qt-count', text: `(${progress.current}/${progress.total})` }),
         ]),
+        el('span', { class: 'qt-bar' }, [el('i', { style: `width:${Math.round(progress.ratio * 100)}%` })]),
       ]);
-    }),
+      }),
+      el('button', { class: 'qt-more', type: 'button', text: 'Xem tất cả nhiệm vụ', onClick: onOpen }),
+    ]),
   );
 }
 

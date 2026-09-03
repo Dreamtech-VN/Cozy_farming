@@ -3,6 +3,27 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.3.0 — 2026-09-03
+
+### Thay đổi
+- **Bỏ minimap và đồng hồ thế giới khỏi HUD.** Góc trên trái giờ chỉ còn cụm nhân
+  vật, ví tiền và bảng nhiệm vụ. Ngày/đêm và mưa vẫn chạy — client vẫn gọi
+  `/v1/world/clock` để đổi tông màu cảnh, chỉ là không hiện chip thời tiết nữa.
+- **Thay thanh công cụ bằng hai cụm nút icon.** `#menu-top` (bản đồ, cửa hàng, đổi
+  khu, sự kiện) ở góc trên phải, `#menu-bottom` (nhiệm vụ, túi đồ, nông trại, bạn
+  bè, nhân vật) ở góc dưới phải. Nút nào đang mở panel thì sáng viền.
+- **Khung chat cố định dưới giữa màn hình** thay cho panel chat: dòng chat, ô nhập,
+  nút biểu cảm và chọn kênh (trong map / thế giới). Chat riêng với bạn bè chuyển
+  vào panel Bạn bè.
+- **Bảng nhiệm vụ có tab và nút thu gọn**: Cốt truyện / Phụ / Hằng ngày, chấm báo
+  khi tab khác có phần thưởng chưa nhận.
+- Đổi tên `client/src/ui/minimap.js` thành `map_draw.js` — file chỉ còn phục vụ
+  popup bản đồ khu và bản đồ thành phố.
+
+### Sửa
+- `closePanel()` xoá trạng thái `aria-pressed` trên `#toolbar` — thanh công cụ đã
+  bị bỏ nên nút icon không bao giờ tắt sáng. Nay xoá đúng trên `.icon-btn`.
+
 ## 0.2.1 — 2026-09-02
 
 ### Thay đổi

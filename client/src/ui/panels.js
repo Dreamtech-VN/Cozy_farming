@@ -1,7 +1,7 @@
 /** Các panel gameplay: nhiệm vụ, túi đồ, nông trại, bạn bè, chat, nhân vật, shop. */
 import { el, showPanel, toast, emptyState, confirmAction, closePanel } from './ui.js';
 import { t, formatNumber, formatDuration } from '../core/i18n.js';
-import { drawAreaMap, drawWorldAtlas } from './minimap.js';
+import { drawAreaMap, drawWorldAtlas } from './map_draw.js';
 
 const itemName = (game, itemId) => t(game.content.itemsById.get(itemId)?.name_key ?? itemId);
 const cosmeticName = (game, itemId) => t(game.content.avatarItemsById.get(itemId)?.name_key ?? itemId);
@@ -383,16 +383,21 @@ export function openSocial(game) {
           el('div', { class: 'title', text: friend.nickname }),
           el('div', { class: 'sub', text: `Cấp ${friend.level} · ${t(game.content.mapsById.get(friend.last_map_id)?.name_key ?? '')}` }),
         ]),
-        el('button', { class: 'ghost', type: 'button', text: 'Nhắn', onClick: () => openChat(game, { channel: 'private', to: friend.nickname }) }),
+        el('button', {
+          class: 'ghost', type: 'button', text: 'Nhắn',
+          // Chat riêng gửi thẳng từ đây; kênh map/thế giới đã có khung chat dưới màn hình.
+          onClick: () => openPrivateChat(game, friend),
+        }),
       ]));
     }
   }, { key: 'social' });
 }
 
-export function openChat(game, options = {}) {
-  const state = { channel: options.channel ?? 'map', to: options.to ?? '' };
+/** Sự kiện và mùa đang chạy (doc 17 — LiveOps). */
+/** Hộp thoại nhắn riêng cho một người bạn (doc 08 — private message). */
+export function openPrivateChat(game, friend) {
   const log = el('div', { id: 'chat-log' });
-  const input = el('input', { type: 'text', placeholder: 'Nhập tin nhắn…', maxlength: '200' });
+  const input = el('input', { type: 'text', maxlength: '200', placeholder: `Nhắn cho ${friend.nickname}…` });
 
   const append = (message) => {
     log.append(el('div', { class: 'line' }, [
@@ -403,62 +408,72 @@ export function openChat(game, options = {}) {
   };
 
   const send = async () => {
-    const text = input.value.trim();
-    if (!text) return;
+    const body = input.value.trim();
+    if (!body) return;
     input.value = '';
     try {
-      if (state.channel === 'map') {
-        game.realtime.send({ type: 'chat', body: text });
-      } else {
-        await game.api.post('/v1/chat/messages', {
-          channel: state.channel,
-          body: text,
-          ...(state.channel === 'private' ? { to: state.to } : {}),
-        });
-      }
+      const message = await game.api.post('/v1/chat/messages', { channel: 'private', to: friend.nickname, body });
+      append(message);
     } catch (err) { toast(err.message, 'bad'); }
   };
 
-  const { body } = showPanel('Chat', async (panelBody) => {
-    const select = el('select', {
-      onChange: (event) => { state.channel = event.target.value; load(); },
-    }, [
-      el('option', { value: 'map', text: 'Trong map' }),
-      el('option', { value: 'world', text: 'Thế giới' }),
-      ...(state.to ? [el('option', { value: 'private', text: `Riêng với ${state.to}` })] : []),
-    ]);
-    select.value = state.channel;
-    panelBody.append(el('div', { class: 'field' }, [el('label', { text: 'Kênh' }), select]));
-    panelBody.append(log);
-
-    const load = async () => {
-      log.replaceChildren();
-      try {
-        const scope = state.channel === 'map' ? game.currentMap?.map_id
-          : state.channel === 'private' ? game.friendIdByNickname?.get(state.to)
-            : null;
-        const query = new URLSearchParams({ channel: state.channel, ...(scope ? { scope_id: scope } : {}) });
-        const data = await game.api.get(`/v1/chat/messages?${query}`);
-        for (const message of data.messages) append(message);
-      } catch (err) {
-        log.append(el('div', { class: 'line system', text: err.message }));
-      }
-    };
-    await load();
+  showPanel(friend.nickname, async (body) => {
+    body.append(log);
+    try {
+      const data = await game.api.get(`/v1/chat/messages?channel=private&scope_id=${encodeURIComponent(friend.id)}`);
+      for (const message of data.messages) append(message);
+    } catch (err) {
+      log.append(el('div', { class: 'line system', text: err.message }));
+    }
   }, {
-    key: 'chat',
     footer: el('div', { class: 'chat-input' }, [
       input,
       el('button', { class: 'primary', type: 'button', text: 'Gửi', onClick: send }),
     ]),
   });
-
   input.addEventListener('keydown', (event) => { if (event.key === 'Enter') send(); });
-  game.chatSink = (message) => {
-    if (state.channel === 'map' && message.channel !== 'map') return;
-    if (state.channel === 'world' && message.channel !== 'world') return;
-    append(message);
-  };
+}
+
+/** Sự kiện và mùa đang chạy (doc 17 — LiveOps). */
+export function openLiveOps(game) {
+  showPanel('Sự kiện', async (body) => {
+    body.append(emptyState('Đang tải…'));
+    const config = await game.api.get('/v1/liveops/config');
+    body.replaceChildren();
+
+    const now = Date.now();
+    const fmt = (iso) => new Date(iso).toLocaleDateString('vi-VN');
+
+    for (const season of config.seasons ?? []) {
+      body.append(el('div', { class: 'row' }, [
+        el('div', { class: 'grow' }, [
+          el('div', { class: 'title', text: t(season.name_key) }),
+          el('div', { class: 'sub', text: `Mùa · ${fmt(season.starts_at)} – ${fmt(season.ends_at)}` }),
+        ]),
+        el('span', { class: 'tag done', text: `${season.pass_tiers.length} mốc` }),
+      ]));
+    }
+
+    if ((config.events ?? []).length === 0) {
+      body.append(emptyState('Chưa có sự kiện nào đang chạy.'));
+    }
+    for (const event of config.events ?? []) {
+      const started = Date.parse(event.starts_at) <= now;
+      body.append(el('div', { class: 'row' }, [
+        el('div', { class: 'grow' }, [
+          el('div', { class: 'title', text: t(event.name_key) }),
+          el('div', { class: 'sub', text: `${fmt(event.starts_at)} – ${fmt(event.ends_at)}` }),
+        ]),
+        el('span', { class: `tag ${started ? 'done' : ''}`.trim(), text: started ? 'Đang diễn ra' : 'Sắp tới' }),
+      ]));
+    }
+
+    const flags = Object.entries(config.feature_flags ?? {}).filter(([, on]) => on);
+    if (flags.length > 0) {
+      body.append(el('h3', { text: 'Tính năng đang bật', style: 'margin:14px 0 4px;font-size:14px' }));
+      body.append(el('div', { class: 'sub', text: flags.map(([name]) => name).join(', ') }));
+    }
+  });
 }
 
 export function openProfile(game) {

@@ -20,7 +20,7 @@ let openPanel = null;
 export function closePanel() {
   openPanel?.remove();
   openPanel = null;
-  for (const button of document.querySelectorAll('#toolbar button')) button.setAttribute('aria-pressed', 'false');
+  for (const button of document.querySelectorAll('.icon-btn')) button.setAttribute('aria-pressed', 'false');
 }
 
 export function showPanel(title, buildBody, { footer = null, key = null } = {}) {
@@ -36,7 +36,6 @@ export function showPanel(title, buildBody, { footer = null, key = null } = {}) 
   ]);
   panels.append(panel);
   openPanel = panel;
-  if (key) document.querySelector(`#toolbar button[data-panel="${key}"]`)?.setAttribute('aria-pressed', 'true');
 
   const render = () => { body.replaceChildren(); buildBody(body, render); };
   render();

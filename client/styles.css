@@ -63,120 +63,139 @@ html, body {
 
 /* ---------- HUD ---------- */
 /* Mỗi lớp giao diện phải có z-index riêng. Nếu #hud để z-index auto thì các
-   z-index bên trong card nhân vật (chân dung, bảng) thoát ra stacking context
-   gốc và nổi đè lên cả overlay trận Match-3. */
+   z-index bên trong cụm nhân vật thoát ra stacking context gốc và nổi đè lên
+   cả overlay trận Match-3. */
 #hud {
   position: absolute; inset: 0 0 auto 0; z-index: 5;
-  /* align-items: flex-start — nếu để mặc định (stretch) thì các pill bên phải bị
-     kéo cao bằng cả cụm thông tin nhân vật bên trái. */
   display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
   padding: calc(8px + env(safe-area-inset-top, 0px)) 10px 8px;
   pointer-events: none;
 }
-/* Cột trái: cụm nhân vật ở trên, bảng nhiệm vụ ngay dưới. */
 .hud-left { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.hud-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.hud-wallet { display: flex; align-items: center; gap: 8px; margin-left: 6px; }
 
-/* ---------- Bảng theo dõi nhiệm vụ ---------- */
-#quest-tracker {
+.wallet-add {
   pointer-events: auto;
-  width: 292px; max-width: calc(100vw - 20px);
-  margin-left: 8px;
-  padding: 9px 12px 10px;
-  display: flex; flex-direction: column; gap: 7px;
+  width: 30px; height: 30px; flex: 0 0 auto;
+  border: 0; border-radius: 50%;
+  background: linear-gradient(180deg, #8ede63, #4f9e2c);
+  color: #fff; font: inherit; font-size: 20px; font-weight: 800; line-height: 1;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55), 0 2px 5px rgba(0, 0, 0, .35);
+}
+.wallet-add:active { transform: translateY(1px); }
+
+/* ---------- Nút chức năng dạng icon ---------- */
+.icon-grid, .icon-row { display: flex; gap: 6px; pointer-events: auto; }
+.icon-grid { flex-wrap: wrap; justify-content: flex-end; max-width: 296px; }
+
+#menu-bottom {
+  position: absolute; z-index: 5;
+  right: 10px; bottom: calc(10px + var(--safe));
+}
+
+.icon-btn {
+  width: 66px; padding: 5px 3px 4px;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
   background: var(--glass-scrim);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border-radius: 14px;
+  border: 0; border-radius: 13px;
+  color: var(--glass-ink); font: inherit; cursor: pointer;
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, .26),
     inset 0 1px 0 rgba(255, 255, 255, .45),
     var(--glass-shadow);
 }
-.qt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.qt-title {
-  font-size: 12px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase;
-  color: var(--glass-ink-soft); text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+.icon-btn:active { transform: translateY(1px); }
+.icon-btn[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--accent), var(--glass-shadow); }
+.icon-btn-face {
+  width: 30px; height: 30px; display: grid; place-items: center;
+  color: #fdf4e0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .5));
 }
-.qt-more {
-  background: none; border: 0; padding: 0; cursor: pointer;
-  font: inherit; font-size: 11.5px; font-weight: 700;
-  color: var(--accent); text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+.icon-btn-face svg { width: 26px; height: 26px; display: block; }
+.icon-btn-label {
+  max-width: 100%;
+  font-size: 10.5px; font-weight: 700; line-height: 1.1;
+  color: var(--glass-ink-soft); text-shadow: 0 1px 2px rgba(0, 0, 0, .45);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.qt-more:hover { text-decoration: underline; }
 
-.qt-row { display: flex; flex-direction: column; gap: 4px; }
-.qt-line { display: flex; align-items: center; gap: 8px; }
-.qt-name {
-  flex: 1 1 auto; min-width: 0;
-  font-size: 12.5px; font-weight: 700; color: var(--glass-ink);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .38);
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-.qt-tag {
-  flex: 0 0 auto; font-size: 10px; font-weight: 700; color: var(--glass-ink-soft);
-  background: rgba(0, 0, 0, .3); border-radius: 999px; padding: 2px 7px;
-}
-.qt-bar {
-  flex: 1 1 auto; height: 6px; border-radius: 999px;
-  background: rgba(255, 255, 255, .16);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .34);
-  overflow: hidden;
-}
-.qt-bar i {
-  display: block; height: 100%; border-radius: 999px;
-  background: linear-gradient(180deg, #b6f06a, #6fbf30);
-  transition: width .3s ease;
-}
-.qt-count {
-  flex: 0 0 auto; font-size: 11px; font-weight: 700;
-  color: var(--glass-ink-soft); font-variant-numeric: tabular-nums;
-}
-.qt-row.done .qt-bar i { background: linear-gradient(180deg, #ffe98a, #f2b529); }
-.qt-claim {
-  flex: 0 0 auto; min-height: 22px; padding: 0 10px;
-  border: 0; border-radius: 999px; cursor: pointer;
-  font: inherit; font-size: 11px; font-weight: 800;
-  background: linear-gradient(180deg, #ffe98a, #f2b529); color: #4a3120;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
-}
-.qt-claim:active { transform: translateY(1px); }
-
-/* Cột phải xếp dọc: ví tiền, minimap, rồi dải khu + trạng thái thế giới. */
-.hud-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-.hud-wallet { display: flex; gap: 8px; }
-.hud-strip { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-
-/* ---------- Chip trạng thái thế giới (giờ, sáng tối, thời tiết) ---------- */
-.world-chip {
-  pointer-events: auto; position: relative;
-  display: inline-flex; align-items: center; gap: 7px;
-  min-height: 32px; padding: 0 12px;
+/* ---------- Khung chat cố định ---------- */
+#chat-dock {
+  position: absolute; z-index: 5;
+  left: 50%; bottom: calc(10px + var(--safe));
+  transform: translateX(-50%);
+  width: min(430px, calc(100vw - 200px));
+  display: flex; flex-direction: column; gap: 5px;
+  padding: 7px 9px 8px;
+  pointer-events: auto;
   background: var(--glass-scrim);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border-radius: 999px;
-  color: var(--glass-ink); font-size: 13px; font-weight: 800;
-  letter-spacing: .2px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  border-radius: 14px;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .28),
-    inset 0 1px 0 rgba(255, 255, 255, .5),
+    inset 0 0 0 1px rgba(255, 255, 255, .24),
+    inset 0 1px 0 rgba(255, 255, 255, .42),
     var(--glass-shadow);
 }
-.world-chip .chip-icon {
-  width: 18px; height: 18px; flex: 0 0 auto;
-  display: grid; place-items: center;
+.chat-tools { display: flex; align-items: center; gap: 8px; }
+.chat-tool {
+  border: 0; border-radius: 999px; cursor: pointer;
+  padding: 4px 11px; font: inherit; font-size: 11.5px; font-weight: 700;
+  background: rgba(255, 255, 255, .16); color: var(--glass-ink);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22);
 }
-.world-chip .chip-icon svg { width: 18px; height: 18px; display: block; }
-.world-chip .chip-sub {
-  font-size: 11.5px; font-weight: 700; color: var(--glass-ink-soft);
-  white-space: nowrap;
+.chat-tool:active { transform: translateY(1px); }
+.chat-tool-sep { flex: 1 1 auto; }
+#chat-scope {
+  border: 0; border-radius: 999px; cursor: pointer;
+  padding: 4px 8px; font: inherit; font-size: 11.5px; font-weight: 700;
+  background: rgba(0, 0, 0, .3); color: var(--glass-ink);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2);
 }
-#world-clock { font-variant-numeric: tabular-nums; }
-#world-status { gap: 6px; padding: 0 11px; }
 
-/* Chỉ ẩn khỏi mắt, không ẩn khỏi trình đọc màn hình: dùng display:none thì
-   người dùng trình đọc mất luôn thông tin giai đoạn và thời tiết. */
+#chat-stream {
+  height: 76px; overflow-y: auto; overflow-x: hidden;
+  display: flex; flex-direction: column; gap: 2px;
+  font-size: 12.5px; line-height: 1.35;
+  scrollbar-width: thin;
+}
+.chat-line { color: var(--glass-ink); text-shadow: 0 1px 2px rgba(0, 0, 0, .45); word-break: break-word; }
+.chat-line .who { color: #ffd45e; font-weight: 800; }
+.chat-line.mine .who { color: #a7e77a; }
+.chat-line.system { color: var(--glass-ink-soft); font-style: italic; }
+
+#chat-entry { display: flex; gap: 6px; }
+#chat-input {
+  flex: 1 1 auto; min-width: 0; min-height: 32px;
+  padding: 0 11px; border: 0; border-radius: 999px;
+  background: rgba(0, 0, 0, .32); color: var(--glass-ink); font: inherit; font-size: 13px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22);
+}
+#chat-input::placeholder { color: rgba(255, 255, 255, .5); }
+/* Khung chat là kính nên nút gửi cũng phải là kính, không mượn viền gỗ của .primary. */
+#chat-entry .primary {
+  min-height: 32px; min-width: 62px; padding: 0 12px;
+  border: 0; border-radius: 999px;
+  background: linear-gradient(180deg, #8ede63, #4f9e2c);
+  color: #14300a; font-weight: 800; font-size: 13px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 2px 4px rgba(0, 0, 0, .3);
+}
+
+.emote-bar { display: flex; gap: 6px; flex-wrap: wrap; padding-bottom: 3px; }
+.emote-btn {
+  min-width: 38px; min-height: 32px; padding: 0 8px;
+  border: 0; border-radius: 10px; cursor: pointer;
+  background: rgba(255, 255, 255, .18); color: var(--glass-ink);
+  font: inherit; font-weight: 800;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .24);
+}
+.emote-btn:active { transform: translateY(1px); }
+
+/* Chỉ ẩn khỏi mắt, không ẩn khỏi trình đọc màn hình. */
 .sr-only {
   position: absolute; width: 1px; height: 1px;
   margin: -1px; padding: 0; border: 0;
@@ -291,79 +310,104 @@ html, body {
   text-shadow: 0 1px 2px rgba(0, 0, 0, .38);
 }
 
-/* ---------- Minimap + chọn khu ---------- */
-/* Khung minimap dạng kính: viền mảnh, nhãn là chip nhỏ nằm TRONG khung.
-   Biển tên treo lủng lẳng dưới đáy như bản trước làm khối bị lệch và đè lên nút
-   chuyển khu. */
-#minimap {
+/* ---------- Bảng theo dõi nhiệm vụ ---------- */
+/* Nằm dưới cụm nhân vật, cùng chất kính với HUD. Thu gọn thì chỉ còn hàng tab
+   để người chơi lấy lại tầm nhìn ra thế giới mà không mất chỗ bấm. */
+#quest-tracker {
   pointer-events: auto;
-  position: relative; display: block;
-  padding: 7px;
+  width: 288px;
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 7px 9px 8px;
   background: var(--glass-scrim);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border-radius: 16px;
-  cursor: pointer; overflow: visible;
+  border-radius: 14px;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .28),
-    inset 0 1px 0 rgba(255, 255, 255, .5),
+    inset 0 0 0 1px rgba(255, 255, 255, .24),
+    inset 0 1px 0 rgba(255, 255, 255, .42),
     var(--glass-shadow);
 }
-#minimap:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), inset 0 1px 0 rgba(255, 255, 255, .6), var(--glass-shadow); }
-#minimap:active { transform: translateY(1px); }
 
-.minimap-frame {
-  position: relative; display: block;
-  border-radius: 10px; overflow: hidden;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, .3),
-    inset 0 2px 6px rgba(0, 0, 0, .35);
+.qt-tabs { display: flex; align-items: center; gap: 4px; }
+.qt-tab {
+  position: relative;
+  flex: 1 1 0; min-width: 0; min-height: 24px; padding: 0 6px;
+  border: 0; border-radius: 8px; cursor: pointer;
+  background: rgba(0, 0, 0, .26); color: var(--glass-ink-soft);
+  font: inherit; font-size: 11px; font-weight: 700;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16);
 }
-#minimap canvas { display: block; width: 184px; height: 78px; border-radius: 10px; }
+.qt-tab[aria-selected="true"] {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .34), rgba(255, 255, 255, .14));
+  color: #fff8e8;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .4);
+}
+.qt-tab:active { transform: translateY(1px); }
+/* Chấm báo có việc chưa nhận ở tab khác — không cần mở tab mới thấy. */
+.qt-dot {
+  position: absolute; top: 3px; right: 4px;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--danger); box-shadow: 0 0 0 1px rgba(0, 0, 0, .35);
+}
+.qt-collapse {
+  flex: 0 0 auto; width: 22px; min-height: 24px;
+  border: 0; border-radius: 8px; cursor: pointer;
+  background: rgba(0, 0, 0, .26); color: var(--glass-ink);
+  font: inherit; font-size: 14px; font-weight: 800; line-height: 1;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16);
+}
 
-.minimap-label {
-  position: absolute; left: 13px; top: 13px; z-index: 3;
-  max-width: calc(100% - 26px);
-  padding: 2px 9px;
-  font-size: 10.5px; font-weight: 800; letter-spacing: .2px;
-  color: var(--glass-ink);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .6);
-  background: rgba(9, 22, 19, .5);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28);
+.qt-body { display: flex; flex-direction: column; gap: 6px; }
+#quest-tracker.collapsed .qt-body { display: none; }
+
+.qt-row { display: flex; flex-direction: column; gap: 3px; }
+.qt-line { display: flex; align-items: center; gap: 6px; }
+.qt-tag {
+  flex: 0 0 auto; padding: 1px 6px; border-radius: 999px;
+  background: rgba(255, 255, 255, .2); color: var(--glass-ink);
+  font-size: 10px; font-weight: 800;
+}
+.qt-name {
+  flex: 1 1 auto; min-width: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 12.5px; font-weight: 700; color: var(--glass-ink);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .45);
+}
+.qt-desc {
+  flex: 1 1 auto; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 11.5px; color: var(--glass-ink-soft);
+}
+.qt-count { flex: 0 0 auto; font-size: 11.5px; font-weight: 700; color: var(--glass-ink-soft); }
+.qt-claim {
+  flex: 0 0 auto; min-height: 22px; padding: 0 10px;
+  border: 0; border-radius: 999px; cursor: pointer;
+  background: linear-gradient(180deg, #8ede63, #4f9e2c);
+  color: #14300a; font: inherit; font-size: 11px; font-weight: 800;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 2px 4px rgba(0, 0, 0, .3);
+}
+.qt-claim:active { transform: translateY(1px); }
+
+.qt-bar {
+  display: block; height: 4px; border-radius: 999px; overflow: hidden;
+  background: rgba(0, 0, 0, .34);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14);
+}
+.qt-bar i {
+  display: block; height: 100%; border-radius: inherit;
+  background: linear-gradient(90deg, #ffd45e, #ff9b3d);
+}
+.qt-row.done .qt-bar i { background: linear-gradient(90deg, #a7e77a, #4f9e2c); }
+
+.qt-more {
+  align-self: flex-start;
+  border: 0; background: none; cursor: pointer; padding: 0;
+  font: inherit; font-size: 11px; font-weight: 700;
+  color: var(--glass-ink-soft); text-decoration: underline;
 }
 
-/* Nút chuyển khu — cùng chất kính với các khung HUD khác. */
-#channel-button {
-  pointer-events: auto; position: relative;
-  display: inline-flex; align-items: center; gap: 8px;
-  min-height: 32px; padding: 0 6px 0 13px;
-  background: var(--glass-scrim);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 0; border-radius: 999px;
-  color: var(--glass-ink); font: inherit; font-weight: 800; cursor: pointer;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .28),
-    inset 0 1px 0 rgba(255, 255, 255, .5),
-    var(--glass-shadow);
-}
-#channel-button:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), inset 0 1px 0 rgba(255, 255, 255, .6), var(--glass-shadow); }
-#channel-button:active { transform: translateY(1px); }
-#channel-button[disabled] { opacity: .6; cursor: default; }
-.channel-label { font-size: 12px; font-weight: 800; color: var(--glass-ink-soft); }
-.channel-value { font-size: 15px; font-weight: 800; }
-.channel-load {
-  font-size: 11px; font-weight: 700; color: var(--glass-ink-soft);
-  background: rgba(0, 0, 0, .34); border-radius: 999px; padding: 3px 8px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
-}
-.channel-caret { width: 11px; height: 8px; color: rgba(255, 255, 255, .75); }
-
+/* ---------- Chọn khu ---------- */
 /* Lưới chọn khu trong popup */
 .channel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 9px; }
 .channel-tile {
@@ -425,28 +469,6 @@ html, body {
     linear-gradient(115deg, #eafcff 0 26%, #7ad3f0 26% 55%, #2f9fc9 55% 100%);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .45));
 }
-
-/* ---------- Toolbar ---------- */
-/* Một hàng duy nhất ở đáy màn hình ngang; cuộn ngang nếu cửa sổ quá hẹp. */
-#toolbar {
-  position: absolute; left: 0; right: 0; bottom: calc(10px + var(--safe)); z-index: 5;
-  display: flex; gap: 8px; justify-content: center; flex-wrap: nowrap;
-  padding: 0 12px; overflow-x: auto; scrollbar-width: none;
-}
-#toolbar::-webkit-scrollbar { display: none; }
-#toolbar button {
-  flex: 0 0 auto; min-width: 84px; min-height: 44px;
-  background: var(--glass);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  color: var(--glass-ink); border: 1.5px solid var(--glass-edge);
-  border-radius: var(--radius); font: inherit; font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), var(--glass-shadow);
-  cursor: pointer;
-}
-#toolbar button:active { background: var(--glass-strong); transform: translateY(1px); }
-#toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
 
 /* ---------- Gợi ý tương tác ---------- */
 #interact-hint {
@@ -626,9 +648,8 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
   #rotate-notice p { color: var(--muted); margin: 0; font-size: 14px; }
 }
 
-/* Cửa sổ thấp (laptop nhỏ, ngang trên điện thoại): thu gọn HUD và toolbar. */
+/* Cửa sổ thấp (laptop nhỏ, ngang trên điện thoại): thu gọn HUD. */
 @media (max-height: 520px) {
-  #toolbar button { min-height: 38px; min-width: 76px; font-size: 13px; }
   .pill { padding: 4px 9px; font-size: 12px; }
   #hud { padding: 6px 8px; }
   #player-card .portrait { width: 62px; height: 62px; }
@@ -636,11 +657,11 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
   #player-card .banner { min-width: 200px; padding: 5px 11px 5px 28px; }
   #player-card .name { font-size: 15px; max-width: 150px; }
   /* Cửa sổ thấp: bảng nhiệm vụ gọn lại, chỉ giữ một dòng thông tin mỗi mục. */
-  #quest-tracker { width: 240px; padding: 7px 10px 8px; gap: 5px; }
+  #quest-tracker { width: 240px; padding: 6px 8px 7px; gap: 5px; }
   #quest-tracker .qt-tag { display: none; }
-  #minimap { padding: 10px; border-radius: 18px; }
-  #minimap canvas { width: 150px; height: 64px; }
-  #channel-button { min-height: 30px; padding: 0 5px 0 9px; }
-  .world-chip { min-height: 28px; padding: 0 9px; font-size: 12px; gap: 5px; }
-  #world-status { padding: 0 9px; }
+  #quest-tracker .qt-desc { display: none; }
+  .icon-btn { width: 52px; padding: 4px 2px 3px; }
+  .icon-btn-face { width: 24px; height: 24px; }
+  .icon-btn-face svg { width: 22px; height: 22px; }
+  #chat-stream { height: 58px; }
 }
