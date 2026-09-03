@@ -5,6 +5,8 @@
 import { Api } from './net/api.js';
 import { Realtime } from './net/realtime.js';
 import { i18n, t, formatNumber } from './core/i18n.js';
+import { settings } from './core/settings.js';
+import { audio } from './core/audio.js';
 import { Input } from './core/input.js';
 import { WorldRenderer } from './render/world.js';
 import { drawAvatarPortrait } from './render/avatar.js';
@@ -16,7 +18,7 @@ import { ChatDock } from './ui/chat_dock.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
-import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openChannelPicker, openLiveOps, openMenu, openSettings, energyLine } from './ui/panels.js';
+import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openLiveOps, openMenu, openSettings, energyLine } from './ui/panels.js';
 
 const GRAVITY = 1800;
 const RUN_SPEED = 260;
@@ -55,7 +57,7 @@ class Game {
       mapsById: new Map(),
       shopsById: new Map(),
     };
-    await i18n.load(this.api, 'vi');
+    await i18n.load(this.api, settings.value.locale);
 
     this.renderer = new WorldRenderer(this.canvas, this.content);
     this.match3 = new Match3Scene(this);
@@ -73,16 +75,21 @@ class Game {
   }
 
   #bindUi() {
+    // Đổi mức đồ hoạ phải vẽ lại canvas ở độ phân giải mới ngay.
+    settings.addEventListener('change', () => this.renderer.resize());
+    // Tiếng bấm cho mọi nút giao diện, đi qua bus âm thanh nên tuân theo âm lượng.
+    document.addEventListener('pointerdown', (event) => {
+      if (event.target.closest('button')) audio.click();
+    });
+
+
     const menuHandlers = {
-      quests: () => { openQuests(this); markActiveMenu('menu'); },
       inventory: () => { openInventory(this); markActiveMenu('menu'); },
-      farm: () => { openFarm(this); markActiveMenu('menu'); },
-      channel: () => { openChannelPicker(this); markActiveMenu('menu'); },
+      map: () => { openAreaMap(this); markActiveMenu('menu'); },
     };
     this.menuHandlers = menuHandlers;
 
     buildHudMenus(this, {
-      map: () => { openAreaMap(this); markActiveMenu('map'); },
       shop: () => { openShop(this, 'shop_general'); markActiveMenu('shop'); },
       event: () => { openLiveOps(this); markActiveMenu('event'); },
       menu: () => { openMenu(this, menuHandlers); markActiveMenu('menu'); },
@@ -433,13 +440,20 @@ class Game {
 
   #loop() {
     let last = performance.now();
+    let lastDraw = 0;
     const frame = (now) => {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       this.time += dt;
       this.#step(dt);
 
-      if (this.currentMap && !this.paused) {
+      // Giới hạn FPS theo thiết lập: máy yếu chọn 30 thì bỏ nửa số khung vẽ,
+      // nhưng phần mô phỏng ở #step vẫn chạy mỗi khung cho mượt điều khiển.
+      const minGap = 1000 / settings.value.graphics.fpsCap - 1;
+      const shouldDraw = now - lastDraw >= minGap;
+      if (shouldDraw) lastDraw = now;
+
+      if (this.currentMap && !this.paused && shouldDraw) {
         this.renderer.followCamera(this.currentMap, this.self);
         const others = [...this.players.values()].map((player) => ({
           ...player,

@@ -1,8 +1,11 @@
 /** Tiện ích dựng server thật trên cổng ngẫu nhiên + client HTTP nhỏ cho test. */
 import { createApp } from '../server/src/app.js';
 
-export async function startTestServer() {
-  const app = createApp({ dbFile: ':memory:', logLevel: 'error', worldTickMs: 20, presenceTimeoutMs: 2000, authRateLimitPerMinute: 10_000 });
+export async function startTestServer(overrides = {}) {
+  const app = createApp({
+    dbFile: ':memory:', logLevel: 'error', worldTickMs: 20, presenceTimeoutMs: 2000,
+    authRateLimitPerMinute: 10_000, ...overrides,
+  });
   const address = await app.listen(0, '127.0.0.1');
   const base = `http://127.0.0.1:${address.port}`;
 

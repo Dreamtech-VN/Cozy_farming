@@ -1,9 +1,11 @@
 /** Các panel gameplay: nhiệm vụ, túi đồ, nông trại, bạn bè, chat, nhân vật, shop. */
-import { el, showPanel, toast, emptyState, confirmAction, closePanel } from './ui.js';
+import { el, showPanel, toast, emptyState, confirmAction, closePanel, rerenderPanel } from './ui.js';
 import { t, formatNumber, formatDuration } from '../core/i18n.js';
 import { drawAreaMap, drawWorldAtlas } from './map_draw.js';
 import { buildMenuPanel } from './hud_menu.js';
 import { i18n } from '../core/i18n.js';
+import { settings, GRAPHICS_PRESETS } from '../core/settings.js';
+import { audio } from '../core/audio.js';
 
 const itemName = (game, itemId) => t(game.content.itemsById.get(itemId)?.name_key ?? itemId);
 const cosmeticName = (game, itemId) => t(game.content.avatarItemsById.get(itemId)?.name_key ?? itemId);
@@ -254,6 +256,9 @@ export function openAreaMap(game) {
       el('div', { class: 'grow' }, [
         el('div', { class: 'sub', text: `${map.map_type} · rộng ${formatNumber(map.width)} · sức chứa ${map.player_capacity} người mỗi khu` }),
       ]),
+      // Đổi khu không còn nút riêng trên HUD; đặt ở đây vì đổi khu là đổi bản
+      // sao của ĐÚNG map đang xem.
+      el('button', { class: 'ghost', type: 'button', text: 'Đổi khu', onClick: () => openChannelPicker(game) }),
       el('button', { class: 'primary', type: 'button', text: 'Bản đồ thành phố', onClick: () => openWorldAtlas(game) }),
     ]));
 
@@ -548,49 +553,244 @@ export function openMenu(game, handlers) {
   showPanel('Menu', (body) => buildMenuPanel(game, body, handlers), { key: 'menu' });
 }
 
-/** Cài đặt: chỉ những thứ client thật sự làm được. */
+/** Cài đặt: Đồ hoạ / Âm thanh / Tài khoản. */
+const SETTINGS_TABS = [
+  { key: 'graphics', label: 'Đồ hoạ' },
+  { key: 'audio', label: 'Âm thanh' },
+  { key: 'account', label: 'Tài khoản' },
+];
+let settingsTab = 'graphics';
+
+const PROVIDER_LABEL = { google: 'Google', facebook: 'Facebook', apple: 'Apple' };
+
 export function openSettings(game) {
-  showPanel('Cài đặt', async (body, rerender) => {
-    body.append(el('div', { class: 'row' }, [
-      el('div', { class: 'grow' }, [
-        el('div', { class: 'title', text: 'Ngôn ngữ' }),
-        el('div', { class: 'sub', text: 'Đổi ngôn ngữ hiển thị của toàn bộ giao diện.' }),
-      ]),
-      ...['vi', 'en'].map((locale) => el('button', {
-        class: i18n.locale === locale ? 'primary' : 'ghost', type: 'button',
-        text: locale === 'vi' ? 'Tiếng Việt' : 'English',
-        disabled: i18n.locale === locale,
+  showPanel('Cài đặt', (body, rerender) => {
+    body.append(el('div', { class: 'tab-bar' }, SETTINGS_TABS.map((tab) => el('button', {
+      class: 'tab', type: 'button',
+      'aria-selected': tab.key === settingsTab ? 'true' : 'false',
+      text: tab.label,
+      onClick: () => { settingsTab = tab.key; rerender(); },
+    }))));
+
+    const pane = el('div', { class: 'tab-pane' });
+    body.append(pane);
+    if (settingsTab === 'graphics') graphicsTab(pane);
+    else if (settingsTab === 'audio') audioTab(pane);
+    else accountTab(game, pane, rerender);
+  }, { key: 'settings' });
+}
+
+/** Một hàng thiết lập: tiêu đề + mô tả bên trái, phần điều khiển bên phải. */
+const settingRow = (title, hint, control) => el('div', { class: 'row' }, [
+  el('div', { class: 'grow' }, [
+    el('div', { class: 'title', text: title }),
+    hint ? el('div', { class: 'sub', text: hint }) : null,
+  ]),
+  control,
+]);
+
+const toggle = (on, onChange) => el('button', {
+  class: `switch ${on ? 'on' : ''}`.trim(), type: 'button',
+  role: 'switch', 'aria-checked': on ? 'true' : 'false',
+  onClick: () => onChange(!on),
+}, [el('i')]);
+
+function graphicsTab(pane) {
+  const g = settings.value.graphics;
+
+  pane.append(settingRow('Mức đồ hoạ', 'Đặt sẵn độ nét, thời tiết và giới hạn khung hình.',
+    el('div', { class: 'seg' }, Object.entries(GRAPHICS_PRESETS).map(([key, spec]) => el('button', {
+      class: 'seg-btn', type: 'button', text: spec.label,
+      'aria-pressed': g.preset === key ? 'true' : 'false',
+      onClick: () => { settings.applyPreset(key); rerenderPanel(); },
+    })))));
+
+  pane.append(settingRow('Hiệu ứng thời tiết', 'Mưa và lớp phủ trời. Tắt đi cho máy yếu.',
+    toggle(g.weather, (on) => { settings.patch({ graphics: { weather: on } }); rerenderPanel(); })));
+
+  pane.append(settingRow('Hiện tên người chơi khác', 'Tắt cho đỡ rối ở khu đông người.',
+    toggle(g.otherNames, (on) => { settings.patch({ graphics: { otherNames: on } }); rerenderPanel(); })));
+
+  pane.append(settingRow('Giới hạn khung hình', 'Giảm còn 30 để đỡ nóng máy và tốn pin.',
+    el('div', { class: 'seg' }, [30, 60].map((fps) => el('button', {
+      class: 'seg-btn', type: 'button', text: `${fps} FPS`,
+      'aria-pressed': g.fpsCap === fps ? 'true' : 'false',
+      onClick: () => { settings.patch({ graphics: { fpsCap: fps } }); rerenderPanel(); },
+    })))));
+}
+
+function audioTab(pane) {
+  const a = settings.value.audio;
+
+  pane.append(settingRow('Tắt tiếng', 'Tắt toàn bộ âm thanh của game.',
+    toggle(a.muted, (on) => { settings.patch({ audio: { muted: on } }); rerenderPanel(); })));
+
+  const slider = (label, hint, key, preview) => {
+    const value = el('span', { class: 'slider-value', text: `${Math.round(a[key] * 100)}%` });
+    const input = el('input', {
+      type: 'range', min: '0', max: '100', step: '5',
+      value: String(Math.round(a[key] * 100)),
+      disabled: a.muted,
+    });
+    // input để nghe ngay khi kéo; change để nghe thử sau khi thả tay.
+    input.addEventListener('input', () => {
+      value.textContent = `${input.value}%`;
+      settings.patch({ audio: { [key]: Number(input.value) / 100 } });
+    });
+    input.addEventListener('change', preview);
+    return settingRow(label, hint, el('div', { class: 'slider' }, [input, value]));
+  };
+
+  pane.append(slider('Âm lượng chung', 'Nhân với hai mức bên dưới.', 'master', () => audio.success()));
+  pane.append(slider('Nhạc nền', null, 'music', () => audio.previewMusic()));
+  pane.append(slider('Hiệu ứng', 'Tiếng bấm nút, thu hoạch, thắng trận.', 'sfx', () => audio.click()));
+
+  pane.append(el('p', { class: 'sub', text: 'Bản này chưa có file nhạc và hiệu ứng riêng — tiếng đang nghe là do game tự tổng hợp, nhưng các mức âm lượng ở đây áp thẳng vào bus âm thanh nên khi lắp file thật là chạy luôn.' }));
+}
+
+function accountTab(game, pane, rerender) {
+  pane.append(emptyState('Đang tải…'));
+  game.api.get('/v1/account').then((account) => {
+    pane.replaceChildren();
+
+    pane.append(settingRow('Tên đăng nhập', `Tạo ngày ${new Date(account.created_at).toLocaleDateString('vi-VN')}`,
+      el('span', { class: 'tag', text: account.username })));
+
+    // --- Liên kết mạng xã hội ---
+    for (const entry of account.providers) {
+      pane.append(settingRow(`Liên kết ${PROVIDER_LABEL[entry.provider]}`,
+        entry.configured
+          ? (entry.linked ? 'Đã liên kết.' : 'Chưa liên kết.')
+          : 'Server này chưa bật đăng nhập qua nhà cung cấp đó.',
+        entry.configured
+          ? el('button', {
+              class: entry.linked ? 'ghost' : 'primary', type: 'button',
+              text: entry.linked ? 'Gỡ' : 'Liên kết',
+              onClick: () => linkProvider(game, entry, rerender),
+            })
+          : el('span', { class: 'tag', text: 'Chưa hỗ trợ' })));
+    }
+
+    // --- Đổi mật khẩu ---
+    const current = el('input', { type: 'password', autocomplete: 'current-password', placeholder: 'Mật khẩu hiện tại' });
+    const next = el('input', { type: 'password', autocomplete: 'new-password', placeholder: 'Mật khẩu mới, tối thiểu 8 ký tự' });
+    pane.append(el('div', { class: 'block' }, [
+      el('div', { class: 'title', text: 'Đổi mật khẩu' }),
+      el('div', { class: 'sub', text: 'Đổi xong mọi thiết bị khác sẽ bị đăng xuất.' }),
+      current, next,
+      el('button', {
+        class: 'primary', type: 'button', text: 'Đổi mật khẩu',
         onClick: async () => {
           try {
-            await i18n.load(game.api, locale);
-            // Nhãn nhiệm vụ và tên map lấy từ bảng dịch nên phải vẽ lại.
-            await game.refreshQuests();
-            rerender();
-            toast('Đã đổi ngôn ngữ', 'good');
+            await game.api.post('/v1/auth/password', {
+              current_password: current.value, new_password: next.value,
+            });
+            toast('Đã đổi mật khẩu, hãy đăng nhập lại', 'good');
+            await game.logout();
           } catch (err) { toast(err.message, 'bad'); }
-        },
-      })),
-    ]));
-
-    body.append(el('div', { class: 'row' }, [
-      el('div', { class: 'grow' }, [
-        el('div', { class: 'title', text: 'Phiên bản nội dung' }),
-        el('div', { class: 'sub', text: game.content?.version ?? '—' }),
-      ]),
-    ]));
-
-    body.append(el('div', { class: 'row' }, [
-      el('div', { class: 'grow' }, [
-        el('div', { class: 'title', text: 'Tài khoản' }),
-        el('div', { class: 'sub', text: game.profile?.nickname ?? '—' }),
-      ]),
-      el('button', {
-        class: 'ghost', type: 'button', text: 'Đăng xuất',
-        onClick: async () => {
-          if (!(await confirmAction('Đăng xuất khỏi tài khoản này?'))) return;
-          await game.logout();
         },
       }),
     ]));
-  }, { key: 'settings' });
+
+    // --- Giftcode ---
+    const code = el('input', { type: 'text', maxlength: '16', placeholder: 'Nhập mã, ví dụ COZY2026' });
+    pane.append(el('div', { class: 'block' }, [
+      el('div', { class: 'title', text: 'Đổi giftcode' }),
+      code,
+      el('button', {
+        class: 'primary', type: 'button', text: 'Đổi mã',
+        onClick: async () => {
+          try {
+            await game.api.post('/v1/giftcodes/redeem', { code: code.value.trim() });
+            toast('Đã nhận quà từ mã', 'good');
+            audio.success();
+            code.value = '';
+            await game.refreshPlayer();
+          } catch (err) { toast(err.message, 'bad'); }
+        },
+      }),
+    ]));
+
+    // --- Đổi server ---
+    pane.append(settingRow('Server', account.servers.length > 1 ? 'Chuyển sang cụm server khác.' : 'Chỉ có một server đang chạy.',
+      account.servers.length > 1
+        ? el('div', { class: 'seg' }, account.servers.map((server) => el('button', {
+            class: 'seg-btn', type: 'button', text: server.name,
+            'aria-pressed': location.origin === server.url ? 'true' : 'false',
+            onClick: () => { location.href = server.url; },
+          })))
+        : el('span', { class: 'tag', text: account.servers[0]?.name ?? 'Mặc định' })));
+
+    // --- Ngôn ngữ ---
+    pane.append(settingRow('Ngôn ngữ', 'Áp dụng cho toàn bộ giao diện.',
+      el('div', { class: 'seg' }, [['vi', 'Tiếng Việt'], ['en', 'English']].map(([locale, label]) => el('button', {
+        class: 'seg-btn', type: 'button', text: label,
+        'aria-pressed': i18n.locale === locale ? 'true' : 'false',
+        onClick: async () => {
+          try {
+            await i18n.load(game.api, locale);
+            settings.patch({ locale });
+            await game.refreshQuests();
+            rerender();
+          } catch (err) { toast(err.message, 'bad'); }
+        },
+      })))));
+
+    pane.append(settingRow('Phiên bản nội dung', null, el('span', { class: 'tag', text: game.content?.version ?? '—' })));
+
+    pane.append(el('button', {
+      class: 'ghost', type: 'button', text: 'Đăng xuất',
+      onClick: async () => {
+        if (!(await confirmAction('Đăng xuất khỏi tài khoản này?'))) return;
+        await game.logout();
+      },
+    }));
+  }).catch((err) => {
+    pane.replaceChildren(emptyState(err.message));
+  });
 }
+
+/**
+ * Liên kết mạng xã hội cần luồng OAuth của từng nhà cung cấp. Server chỉ nhận
+ * provider_user_id ĐÃ xác minh, nên chỗ này chỉ chạy khi server báo provider đó
+ * đã cấu hình; chưa cấu hình thì UI không hiện nút.
+ */
+async function linkProvider(game, entry, rerender) {
+  try {
+    if (entry.linked) {
+      if (!(await confirmAction(`Gỡ liên kết ${PROVIDER_LABEL[entry.provider]}?`))) return;
+      await game.api.del(`/v1/account/links/${entry.provider}`);
+      toast('Đã gỡ liên kết', 'good');
+    } else {
+      const token = await requestOauthToken(entry.provider);
+      await game.api.post('/v1/account/links', { provider: entry.provider, provider_user_id: token });
+      toast('Đã liên kết', 'good');
+    }
+    rerender();
+  } catch (err) { toast(err.message, 'bad'); }
+}
+
+/**
+ * Mở cửa sổ đăng nhập của nhà cung cấp và chờ nó postMessage lại id đã xác minh.
+ * Endpoint /auth/oauth/<provider> do server dựng khi có client id + secret.
+ */
+function requestOauthToken(provider) {
+  return new Promise((resolve, reject) => {
+    const popup = open(`/auth/oauth/${provider}`, 'oauth', 'width=480,height=640');
+    if (!popup) { reject(new Error('Trình duyệt chặn cửa sổ đăng nhập')); return; }
+
+    const timer = setInterval(() => {
+      if (popup.closed) { cleanup(); reject(new Error('Đã huỷ đăng nhập')); }
+    }, 500);
+    const onMessage = (event) => {
+      if (event.origin !== location.origin || event.data?.type !== 'oauth') return;
+      cleanup();
+      popup.close();
+      if (event.data.provider_user_id) resolve(event.data.provider_user_id);
+      else reject(new Error(event.data.error ?? 'Đăng nhập thất bại'));
+    };
+    const cleanup = () => { clearInterval(timer); removeEventListener('message', onMessage); };
+    addEventListener('message', onMessage);
+  });
+}
+

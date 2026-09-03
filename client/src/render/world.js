@@ -5,6 +5,7 @@
  */
 import { drawAvatar, roundRect } from './avatar.js';
 import { t } from '../core/i18n.js';
+import { settings } from '../core/settings.js';
 
 export class WorldRenderer {
   constructor(canvas, content) {
@@ -18,7 +19,9 @@ export class WorldRenderer {
   }
 
   resize() {
-    this.dpr = Math.min(devicePixelRatio || 1, 2);
+    // Trần dpr lấy từ thiết lập đồ hoạ: máy yếu hạ xuống 1 là giảm hẳn số điểm
+    // phải vẽ mỗi khung.
+    this.dpr = Math.min(devicePixelRatio || 1, settings.maxDpr);
     this.canvas.width = Math.floor(this.canvas.clientWidth * this.dpr);
     this.canvas.height = Math.floor(this.canvas.clientHeight * this.dpr);
   }
@@ -94,7 +97,8 @@ export class WorldRenderer {
         facing: player.facing,
         state: player.state,
         phase: player.phase ?? 0,
-        nickname: player.nickname,
+        // Ẩn tên người khác giúp màn hình đỡ rối ở khu đông người.
+        nickname: player === self || settings.value.graphics.otherNames ? player.nickname : null,
         emote: player.emote,
       });
       ctx.restore();
@@ -127,7 +131,7 @@ export class WorldRenderer {
       ctx.fillRect(0, 0, width, height);
     }
 
-    const weather = state.weather?.id;
+    const weather = settings.value.graphics.weather ? state.weather?.id : null;
     const veil = WEATHER_VEIL[weather];
     if (veil) {
       ctx.fillStyle = veil;

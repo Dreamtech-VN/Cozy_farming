@@ -38,6 +38,16 @@ export const config = {
   /** Override hạn mức brute-force đăng nhập; mặc định lấy từ data/content/economy.json. */
   authRateLimitPerMinute: process.env.AUTH_RATE_LIMIT ? int('AUTH_RATE_LIMIT', 10) : null,
 
+  /**
+   * Provider đăng nhập mạng xã hội ĐÃ cấu hình. Mỗi provider cần client id +
+   * secret riêng nên mặc định để trống: client sẽ hiện "chưa hỗ trợ" thay vì
+   * một nút bấm vào không chạy gì.
+   */
+  oauthProviders: (process.env.OAUTH_PROVIDERS ?? '').split(',').map((s) => s.trim()).filter(Boolean),
+
+  /** Danh sách server cho mục "đổi server" trong Cài đặt. */
+  servers: JSON.parse(process.env.SERVERS ?? '[]'),
+
   logLevel: process.env.LOG_LEVEL ?? 'info',
 };
 

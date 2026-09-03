@@ -9,6 +9,7 @@ import * as match3 from '../domain/match3.js';
 import * as quest from '../domain/quest.js';
 import * as social from '../domain/social.js';
 import * as shop from '../domain/shop.js';
+import * as account from '../domain/account.js';
 import { getWallet, regenerateEnergy } from '../domain/economy.js';
 import { worldState } from '../domain/world_clock.js';
 import { logEvent, summarize } from '../domain/analytics.js';
@@ -56,6 +57,21 @@ export function registerRoutes(router, ctx) {
   router.post('/v1/auth/login', async ({ body }) => ({ body: await player.login(db, body) }), { auth: false });
   router.post('/v1/auth/refresh', ({ body }) => ({ body: player.refreshSession(db, body.refresh_token) }), { auth: false });
   router.post('/v1/auth/logout', ({ body }) => ({ body: player.logout(db, body.refresh_token) }), { auth: false });
+  router.post('/v1/auth/password', async ({ character, body }) => ({
+    body: await account.changePassword(db, character.user_id, body),
+  }));
+
+  // ---------- Tài khoản (doc 22 §Account) ----------
+  router.get('/v1/account', ({ character }) => ({ body: account.getAccount(db, ctx.config, character.user_id) }));
+  router.post('/v1/account/links', ({ character, body }) => ({
+    body: account.linkIdentity(db, ctx.config, character.user_id, body),
+  }));
+  router.delete('/v1/account/links/:provider', ({ character, params }) => ({
+    body: account.unlinkIdentity(db, character.user_id, params.provider),
+  }));
+  router.post('/v1/giftcodes/redeem', ({ character, body }) => ({
+    body: account.redeemGiftcode(db, content, character, character.user_id, body.code),
+  }));
 
   // ---------- Player (doc 15 §Player) ----------
   router.get('/v1/player/profile', ({ character }) => ({ body: player.getProfile(db, content, character.id) }));

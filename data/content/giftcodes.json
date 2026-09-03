@@ -1,0 +1,20 @@
+{
+  "version": "0.1.0",
+  "comment": "Doc 18 — giftcode data-driven. reward dùng đúng khuôn của economy.applyChange. max_uses = 0 nghĩa là không giới hạn tổng lượt; mỗi tài khoản luôn chỉ đổi được một lần.",
+  "giftcodes": [
+    {
+      "code": "COZY2026",
+      "name_key": "giftcode.launch",
+      "max_uses": 0,
+      "expires_at": null,
+      "reward": { "currencies": { "coin": 1000, "gem": 20 }, "items": [{ "item_id": "item_seed_carrot", "count": 5 }] }
+    },
+    {
+      "code": "TANTHU100",
+      "name_key": "giftcode.newbie",
+      "max_uses": 1000,
+      "expires_at": null,
+      "reward": { "currencies": { "coin": 500 }, "items": [{ "item_id": "item_seed_carrot", "count": 3 }] }
+    }
+  ]
+}

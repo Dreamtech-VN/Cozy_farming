@@ -28,6 +28,7 @@ export function validateContent(content) {
   checkDuplicates(issues, content.levels, 'level_id', 'match3_levels');
   checkDuplicates(issues, content.quests, 'quest_id', 'quests');
   checkDuplicates(issues, content.shops, 'shop_id', 'shops');
+  checkDuplicates(issues, content.giftcodes, 'code', 'giftcodes');
   checkDuplicates(issues, content.dialogues, 'dialogue_id', 'dialogues');
 
   const itemIds = new Set(content.items.map((i) => i.item_id));
@@ -172,6 +173,23 @@ export function validateContent(content) {
       if (!sells) issues.push(err('invalid_shop', `shop ${shop.shop_id}: entry ${entry.entry_id} không bán gì cả`));
       else if (entry.item_id && !itemIds.has(entry.item_id)) issues.push(err('missing_ref', `shop ${shop.shop_id}: item ${entry.item_id} không tồn tại`));
       else if (entry.avatar_item_id && !avatarIds.has(entry.avatar_item_id)) issues.push(err('missing_ref', `shop ${shop.shop_id}: cosmetic ${entry.avatar_item_id} không tồn tại`));
+    }
+  }
+
+  // --- Giftcode ---
+  for (const gift of content.giftcodes) {
+    if (!/^[A-Z0-9]{4,16}$/.test(gift.code)) {
+      issues.push(err('invalid_range', `giftcode ${gift.code}: mã chỉ được gồm 4–16 ký tự A–Z và 0–9`));
+    }
+    if (!(gift.max_uses >= 0)) issues.push(err('invalid_range', `giftcode ${gift.code}: max_uses phải >= 0`));
+    for (const [currencyId] of Object.entries(gift.reward?.currencies ?? {})) {
+      if (!currencyIds.has(currencyId)) issues.push(err('missing_ref', `giftcode ${gift.code}: currency ${currencyId} không tồn tại`));
+    }
+    for (const entry of gift.reward?.items ?? []) {
+      if (!itemIds.has(entry.item_id)) issues.push(err('missing_ref', `giftcode ${gift.code}: item ${entry.item_id} không tồn tại`));
+    }
+    for (const cosmetic of gift.reward?.avatar_items ?? []) {
+      if (!avatarIds.has(cosmetic)) issues.push(err('missing_ref', `giftcode ${gift.code}: cosmetic ${cosmetic} không tồn tại`));
     }
   }
 

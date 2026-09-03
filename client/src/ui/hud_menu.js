@@ -39,7 +39,6 @@ export function buildHudMenus(game, handlers) {
   // Hàng trên phải giữ đúng những thứ bấm liên tục; phần còn lại nằm sau nút
   // Menu để góc màn hình không thành một dãy icon dài.
   const top = [
-    { key: 'map', icon: 'map', label: 'Bản đồ', run: handlers.map },
     { key: 'shop', icon: 'shop', label: 'Cửa hàng', run: handlers.shop },
     { key: 'event', icon: 'event', label: 'Sự kiện', run: handlers.event },
     { key: 'menu', icon: 'menu', label: 'Menu', run: handlers.menu },
@@ -50,10 +49,8 @@ export function buildHudMenus(game, handlers) {
 /** Các mục nằm trong bảng Menu. Dựng ở đây để dùng chung kiểu nút với HUD. */
 export function buildMenuPanel(game, body, handlers) {
   const items = [
-    { key: 'quests', icon: 'quest', label: 'Nhiệm vụ', run: handlers.quests },
     { key: 'inventory', icon: 'bag', label: 'Túi đồ', run: handlers.inventory },
-    { key: 'farm', icon: 'home', label: 'Nông trại', run: handlers.farm },
-    { key: 'channel', icon: 'channel', label: 'Đổi khu', run: handlers.channel },
+    { key: 'map', icon: 'map', label: 'Bản đồ', run: handlers.map },
   ];
   body.append(el('div', { class: 'menu-grid' }, items.map((item) => el('button', {
     class: 'menu-item', type: 'button', onClick: () => item.run(game),

@@ -33,7 +33,7 @@ tác giả trên itch.io.
 | `icons/settings.png` | `Icons/IconsDefault/128px/IconsDefault14_128px.png` |
 | `icons/event.png` | `Icons/IconsDefault/128px/IconsDefault28_128px.png` |
 | `icons/quest.png` | `Icons/IconsDefault/128px/IconsDefault13_128px.png` |
-| `icons/bag.png` | `Icons/IconsDefault/128px/IconsDefault54_128px.png` |
+| `icons/bag.png` | *(tự vẽ — pack không có icon túi)* |
 | `icons/home.png` | `Icons/IconsDefault/128px/IconsDefault4_128px.png` |
 | `icons/friends.png` | `Icons/IconsDefault/128px/IconsDefault43_128px.png` |
 | `icons/dress.png` | `Icons/IconsDefault/128px/IconsDefault27_128px.png` |
@@ -46,3 +46,11 @@ tác giả trên itch.io.
 | `icons/energy.png` | `Icons/IconsDefault/128px/IconsDefault5_128px.png` |
 | `icons/close.png` | `Icons/IconsDefault/128px/IconsDefault25_128px.png` |
 | `ui/portrait-frame.png` | `Frames/Frame10.png` |
+
+## File tự vẽ
+
+`icons/bag.png` không lấy từ pack: cả hai bộ icon (Default 1–64, Outline có thêm
+65–70) lẫn thư mục `Inventory/EquipmentSlots` đều không có hình túi/ba lô nào.
+File này vẽ tay bám theo cách dựng hình của pack — keyline trắng ở ngoài, nét nâu
+đỏ ở trong, mảng màu phẳng, một vệt sáng — nên đứng cạnh các icon còn lại không
+lệch tông. Nguồn SVG nằm trong lịch sử commit của lần thêm file.

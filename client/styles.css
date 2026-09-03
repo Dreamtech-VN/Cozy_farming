@@ -608,12 +608,12 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
 #chat-log .who { color: #a35b1e; font-weight: 800; }
 #chat-log .system { color: var(--ink-soft); font-style: italic; }
 .chat-input { display: flex; gap: 8px; padding: 10px 2px 2px; border-top: 2px solid rgba(122, 86, 54, .3); }
-.chat-input input, .field input, .field select {
+.chat-input input, .field input, .field select, .block input {
   flex: 1; min-height: 40px; padding: 0 12px; border-radius: 10px;
   background: #fdf6e6; border: 2px solid #b98a55; color: var(--ink); font: inherit; font-weight: 600;
   box-shadow: inset 0 2px 3px rgba(80, 50, 22, .18);
 }
-.chat-input input::placeholder, .field input::placeholder { color: #a98a68; }
+.chat-input input::placeholder, .field input::placeholder, .block input::placeholder { color: #a98a68; }
 .field { margin-bottom: 10px; }
 .field label { display: block; font-size: 12.5px; font-weight: 700; color: var(--ink-soft); margin-bottom: 4px; }
 .field input, .field select { width: 100%; }
@@ -711,3 +711,93 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
 .menu-item .icon-btn-face { width: 40px; height: 40px; }
 .menu-item .icon-btn-face img { width: 40px; height: 40px; }
 .menu-item-label { text-shadow: var(--ui-text-shadow); }
+
+/* ---------- Điều khiển trong panel Cài đặt ---------- */
+.tab-bar { display: flex; gap: 4px; margin-bottom: 10px; }
+.tab {
+  flex: 1 1 0; min-height: 32px;
+  border: 9px solid transparent;
+  border-image: url('/assets/ui/btn-cream.png') 54 fill / 9px / 0 round;
+  color: var(--ink-soft); font: inherit; font-size: 13px; font-weight: 800;
+  cursor: pointer; text-shadow: var(--ui-text-shadow);
+}
+.tab[aria-selected="true"] {
+  border-image-source: url('/assets/ui/btn-wood.png');
+  color: var(--ink-cream); text-shadow: 0 1px 2px rgba(60, 34, 12, .6);
+}
+.tab-pane { display: flex; flex-direction: column; gap: 8px; }
+
+/* Công tắc bật/tắt. */
+.switch {
+  flex: 0 0 auto;
+  width: 46px; height: 26px; padding: 3px;
+  border: 0; border-radius: 999px; cursor: pointer;
+  background: rgba(122, 86, 54, .3);
+  box-shadow: inset 0 1px 3px rgba(74, 47, 28, .45);
+  display: flex; justify-content: flex-start;
+}
+.switch i {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #fffaf0;
+  box-shadow: 0 1px 3px rgba(74, 47, 28, .5);
+  transition: transform .16s ease;
+}
+.switch.on { background: linear-gradient(180deg, #9ee06f, #56a02d); }
+.switch.on i { transform: translateX(20px); }
+
+/* Nhóm nút chọn một trong nhiều. */
+.seg { display: flex; gap: 4px; flex: 0 0 auto; }
+.seg-btn {
+  min-height: 30px; padding: 0 10px;
+  border: 8px solid transparent;
+  border-image: url('/assets/ui/btn-cream.png') 54 fill / 8px / 0 round;
+  color: var(--ink-soft); font: inherit; font-size: 12px; font-weight: 800;
+  cursor: pointer; white-space: nowrap; text-shadow: var(--ui-text-shadow);
+}
+.seg-btn[aria-pressed="true"] {
+  border-image-source: url('/assets/ui/btn-wood.png');
+  color: var(--ink-cream); text-shadow: 0 1px 2px rgba(60, 34, 12, .6);
+}
+
+/* Thanh trượt âm lượng. */
+.slider { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+.slider input[type="range"] {
+  width: 140px; height: 20px; margin: 0;
+  -webkit-appearance: none; appearance: none; background: none; cursor: pointer;
+}
+.slider input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px; border-radius: 999px;
+  background: rgba(122, 86, 54, .3);
+  box-shadow: inset 0 1px 2px rgba(74, 47, 28, .4);
+}
+.slider input[type="range"]::-moz-range-track {
+  height: 8px; border-radius: 999px; background: rgba(122, 86, 54, .3);
+}
+.slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 18px; height: 18px; margin-top: -5px; border-radius: 50%;
+  background: linear-gradient(180deg, #fff6d6, #e6ab34);
+  box-shadow: inset 0 0 0 1.5px #fffaf0, 0 1px 3px rgba(74, 47, 28, .5);
+}
+.slider input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px; border: 0; border-radius: 50%;
+  background: linear-gradient(180deg, #fff6d6, #e6ab34);
+  box-shadow: inset 0 0 0 1.5px #fffaf0, 0 1px 3px rgba(74, 47, 28, .5);
+}
+.slider input[type="range"]:disabled { opacity: .45; cursor: default; }
+.slider-value {
+  min-width: 38px; text-align: right;
+  color: var(--ink-soft); font-size: 12px; font-weight: 800;
+}
+
+/* Khối có tiêu đề + vài ô nhập, ví dụ đổi mật khẩu và giftcode. */
+.block {
+  display: flex; flex-direction: column; gap: 7px; align-items: stretch;
+  padding: 12px;
+  border: 12px solid transparent;
+  border-image: url('/assets/ui/panel-note.png') 54 fill / 12px / 0 round;
+}
+.block .title { color: var(--ink); font-size: 14px; font-weight: 800; }
+.block .sub { color: var(--ink-soft); font-size: 12px; }
+.block input { width: 100%; min-height: 36px; }
+.block .primary { align-self: flex-end; }

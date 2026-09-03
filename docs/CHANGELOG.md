@@ -3,6 +3,47 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.5.0 — 2026-09-03
+
+### Thêm mới
+- **Cài đặt đầy đủ, ba tab.**
+  - *Đồ hoạ*: mức đặt sẵn Thấp/Vừa/Cao (chi phối trần `devicePixelRatio`), bật tắt
+    hiệu ứng thời tiết, ẩn tên người chơi khác, giới hạn 30/60 FPS. Tất cả nối
+    thẳng vào renderer và vòng lặp game, lưu ở `localStorage` vì đây là lựa chọn
+    của từng máy chứ không phải state của tài khoản.
+  - *Âm thanh*: tắt tiếng, ba mức âm lượng chung/nhạc/hiệu ứng chạy trên một bus
+    WebAudio thật (`client/src/core/audio.js`).
+  - *Tài khoản*: tên đăng nhập, liên kết Google/Facebook/Apple, đổi mật khẩu, đổi
+    giftcode, đổi server, đổi ngôn ngữ, phiên bản nội dung, đăng xuất.
+- **Server**: `POST /v1/auth/password` (đổi mật khẩu, huỷ toàn bộ phiên cũ),
+  `GET /v1/account`, `POST /v1/account/links`, `DELETE /v1/account/links/:provider`,
+  `POST /v1/giftcodes/redeem`. Migration `002_account.sql` thêm bảng
+  `user_identities` và `giftcode_redemptions`.
+- **Giftcode data-driven** trong `data/content/giftcodes.json`, có validation
+  riêng; phần thưởng đi qua `economy.applyChange` nên vẫn nguyên tử và idempotent.
+- 12 test mới cho đổi mật khẩu, liên kết tài khoản và giftcode (98 test tổng).
+
+### Thay đổi
+- **Menu rút còn Túi đồ và Bản đồ.** Bỏ nút Nhiệm vụ, Nông trại, Đổi khu khỏi
+  menu; Bản đồ chuyển từ hàng trên phải vào menu. Hàng trên phải còn Cửa hàng,
+  Sự kiện, Menu.
+- **Đổi khu** chuyển vào popup Bản đồ — đổi khu là đổi bản sao của đúng map đang
+  xem nên đặt ở đó hợp hơn là một nút riêng.
+- **Icon Túi đồ**: vẽ một cái túi bám theo nét của pack. Pack không có icon túi
+  nào (đã kiểm cả hai bộ icon và thư mục Inventory), icon lọ thuốc dùng tạm ở bản
+  trước đọc ra "vật phẩm" chứ không ra "túi đồ".
+
+### Ghi chú
+Liên kết Google/Facebook/Apple cần OAuth client id + secret của từng nhà cung cấp,
+đặt qua env `OAUTH_PROVIDERS`. Chưa cấu hình thì server từ chối thẳng và client
+hiện "Chưa hỗ trợ" thay vì một nút bấm vào không chạy gì. Phía client đã có sẵn
+luồng mở popup `/auth/oauth/<provider>` và nhận `postMessage`, chỉ còn thiếu
+endpoint OAuth phía server.
+
+Tương tự, game chưa có file nhạc và hiệu ứng nào; bus âm thanh tự tổng hợp tiếng
+bằng WebAudio để thanh âm lượng điều khiển tiếng thật, khi lắp file vào chỉ cần
+nối đúng gain node.
+
 ## 0.4.1 — 2026-09-03
 
 ### Thay đổi

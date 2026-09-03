@@ -17,6 +17,10 @@ export const el = (tag, props = {}, children = []) => {
 
 let openPanel = null;
 let openPanelKey = null;
+let openPanelRender = null;
+
+/** Vẽ lại panel đang mở tại chỗ — dùng khi một thiết lập đổi ngoài luồng bấm nút. */
+export function rerenderPanel() { openPanelRender?.(); }
 
 /** Panel nào đang mở — nút HUD dựa vào đây để biết bấm lần nữa là đóng hay mở. */
 export function currentPanelKey() { return openPanelKey; }
@@ -31,6 +35,7 @@ export function closePanel() {
   openPanel?.remove();
   openPanel = null;
   openPanelKey = null;
+  openPanelRender = null;
   for (const button of document.querySelectorAll('.icon-btn')) button.setAttribute('aria-pressed', 'false');
 }
 
@@ -50,6 +55,7 @@ export function showPanel(title, buildBody, { footer = null, key = null } = {}) 
   openPanelKey = key;
 
   const render = () => { body.replaceChildren(); buildBody(body, render); };
+  openPanelRender = render;
   render();
   return { panel, body, rerender: render };
 }

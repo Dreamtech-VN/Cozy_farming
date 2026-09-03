@@ -7,7 +7,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { validateContent } from './validate.js';
 
-const FILES = ['crops', 'items', 'avatar_items', 'maps', 'match3_levels', 'quests', 'shops', 'economy', 'liveops'];
+const FILES = ['crops', 'items', 'avatar_items', 'maps', 'match3_levels', 'quests', 'shops', 'economy', 'liveops', 'giftcodes'];
 
 const indexBy = (rows, key) => new Map(rows.map((row) => [row[key], row]));
 
@@ -30,6 +30,7 @@ export function loadContent({ dataDir, localeDir }) {
     avatarItems: raw.avatar_items.avatar_items,
     layerOrder: raw.avatar_items.layer_order,
     emotes: raw.avatar_items.emotes,
+    giftcodes: raw.giftcodes.giftcodes,
     maps: raw.maps.maps,
     channelCount: raw.maps.world?.channel_count ?? 1,
     world: raw.maps.world ?? {},
@@ -53,6 +54,9 @@ export function loadContent({ dataDir, localeDir }) {
     byDialogue: indexBy(raw.quests.dialogues, 'dialogue_id'),
     byShop: indexBy(raw.shops.shops, 'shop_id'),
     byCurrency: indexBy(raw.economy.currencies, 'currency_id'),
+    // Mã đổi quà không phân biệt hoa thường: người chơi gõ tay nên chuẩn hoá
+    // ngay ở tầng index thay vì mỗi chỗ dùng lại tự upper.
+    byGiftcode: new Map(raw.giftcodes.giftcodes.map((g) => [String(g.code).toUpperCase(), g])),
   };
 
   content.byNpc = new Map();
