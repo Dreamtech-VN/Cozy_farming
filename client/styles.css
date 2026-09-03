@@ -20,9 +20,22 @@
   --radius: 14px;
   --safe: env(safe-area-inset-bottom, 0px);
 
-  /* Giao diện dùng bộ asset gỗ/giấy trong client/assets/ui (xem
-     client/assets/ATTRIBUTION.md). Khung và nút là ảnh 9-slice; các biến dưới
-     đây chỉ lo phần chữ và bóng đổ. */
+  /* Kính mờ cho khung HUD.
+     Lớp nền là một gradient tối RẤT nhẹ ở trên, đậm dần xuống dưới: đủ để chữ
+     sáng luôn đọc được dù khung đứng trên trời hay trên cỏ, nhưng không biến
+     mặt kính thành mảng xám đục như bản trước. */
+  --glass-scrim: linear-gradient(165deg, rgba(9, 24, 20, .30) 0%, rgba(9, 22, 19, .56) 100%);
+  --glass-scrim-strong: linear-gradient(165deg, rgba(9, 24, 20, .42) 0%, rgba(9, 22, 19, .66) 100%);
+  --glass-blur: blur(20px) saturate(185%);
+  --glass-edge: rgba(255, 255, 255, .34);
+  /* Bóng kép: một bóng tiếp xúc sát và một bóng toả rộng — chỉ dùng bóng rộng
+     thì khung trông như dán lên màn hình chứ không nổi khỏi nền. */
+  --glass-shadow: 0 2px 5px rgba(0, 0, 0, .26), 0 16px 36px rgba(0, 0, 0, .32);
+  --glass-ink: #ffffff;
+  --glass-ink-soft: rgba(255, 255, 255, .74);
+
+  /* Mực nâu cho những chỗ đứng trên nền gỗ/giấy: badge sao vàng trên HUD, và
+     toàn bộ popup (panel, overlay) vẫn dùng asset gỗ trong client/assets/ui. */
   --ink: #4a2f1c;
   --ink-soft: #7a5636;
   --ink-cream: #fbf4e4;
@@ -66,236 +79,290 @@ html, body {
 /* ---------- Bảng theo dõi nhiệm vụ ---------- */
 #quest-tracker {
   pointer-events: auto;
-  width: 300px; max-width: calc(100vw - 20px);
-  margin-left: 6px;
-  padding: 0 4px 2px;
+  width: 292px; max-width: calc(100vw - 20px);
+  margin-left: 8px;
+  padding: 9px 12px 10px;
   display: flex; flex-direction: column; gap: 7px;
-  border: 20px solid transparent;
-  border-image: url('/assets/ui/panel-wood.png') 60 fill / 20px stretch;
-  filter: var(--ui-shadow);
+  background: var(--glass-scrim);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .26),
+    inset 0 1px 0 rgba(255, 255, 255, .45),
+    var(--glass-shadow);
 }
 .qt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .qt-title {
   font-size: 12px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase;
-  color: var(--ink); text-shadow: var(--ui-text-shadow);
+  color: var(--glass-ink-soft); text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
 }
 .qt-more {
   background: none; border: 0; padding: 0; cursor: pointer;
-  font: inherit; font-size: 11.5px; font-weight: 800;
-  color: #a35b1e; text-decoration: underline;
+  font: inherit; font-size: 11.5px; font-weight: 700;
+  color: var(--accent); text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
 }
-.qt-more:hover { color: #7c4213; }
+.qt-more:hover { text-decoration: underline; }
 
-.qt-row { display: flex; flex-direction: column; gap: 3px; }
+.qt-row { display: flex; flex-direction: column; gap: 4px; }
 .qt-line { display: flex; align-items: center; gap: 8px; }
 .qt-name {
   flex: 1 1 auto; min-width: 0;
-  font-size: 12.5px; font-weight: 700; color: var(--ink);
+  font-size: 12.5px; font-weight: 700; color: var(--glass-ink);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .38);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .qt-tag {
-  flex: 0 0 auto; font-size: 10px; font-weight: 800; color: #fdf3e0;
-  background: #a9784a; border-radius: 999px; padding: 2px 8px;
-  box-shadow: inset 0 1px 0 rgba(255, 240, 214, .35);
+  flex: 0 0 auto; font-size: 10px; font-weight: 700; color: var(--glass-ink-soft);
+  background: rgba(0, 0, 0, .3); border-radius: 999px; padding: 2px 7px;
 }
 .qt-bar {
-  flex: 1 1 auto; height: 8px; border-radius: 999px;
-  background: #8a5f37;
-  box-shadow: inset 0 1px 2px rgba(52, 30, 12, .55), 0 1px 0 rgba(255, 240, 214, .4);
+  flex: 1 1 auto; height: 6px; border-radius: 999px;
+  background: rgba(255, 255, 255, .16);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .34);
   overflow: hidden;
 }
 .qt-bar i {
   display: block; height: 100%; border-radius: 999px;
   background: linear-gradient(180deg, #b6f06a, #6fbf30);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5);
   transition: width .3s ease;
 }
 .qt-count {
-  flex: 0 0 auto; font-size: 11px; font-weight: 800;
-  color: var(--ink-soft); font-variant-numeric: tabular-nums;
+  flex: 0 0 auto; font-size: 11px; font-weight: 700;
+  color: var(--glass-ink-soft); font-variant-numeric: tabular-nums;
 }
 .qt-row.done .qt-bar i { background: linear-gradient(180deg, #ffe98a, #f2b529); }
-/* border-width phải xấp xỉ bề dày viền trong ảnh, để mỏng thì phần viền bị ép
-   mất và nút chỉ còn là một khối trắng trơn. */
 .qt-claim {
-  flex: 0 0 auto; min-height: 30px; padding: 0 2px;
-  min-width: 64px;
-  border: 14px solid transparent;
-  border-image: url('/assets/ui/btn-cream.png') 54 fill / 14px stretch;
-  background: none; cursor: pointer;
-  font: inherit; font-size: 11px; font-weight: 800; color: var(--ink);
-  text-shadow: var(--ui-text-shadow);
+  flex: 0 0 auto; min-height: 22px; padding: 0 10px;
+  border: 0; border-radius: 999px; cursor: pointer;
+  font: inherit; font-size: 11px; font-weight: 800;
+  background: linear-gradient(180deg, #ffe98a, #f2b529); color: #4a3120;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
 }
 .qt-claim:active { transform: translateY(1px); }
 
-/* ---------- Chip trạng thái thế giới (giờ, thời tiết) ---------- */
+/* Cột phải xếp dọc: ví tiền, minimap, rồi dải khu + trạng thái thế giới. */
+.hud-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.hud-wallet { display: flex; gap: 8px; }
+.hud-strip { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+
+/* ---------- Chip trạng thái thế giới (giờ, sáng tối, thời tiết) ---------- */
 .world-chip {
   pointer-events: auto; position: relative;
-  display: inline-flex; align-items: center; gap: 6px;
-  min-height: 34px; padding: 0 4px;
-  border: 11px solid transparent;
-  border-image: url('/assets/ui/pill-cream.png') 78 fill / 11px stretch;
-  color: var(--ink); font-size: 13px; font-weight: 800;
-  letter-spacing: .2px; text-shadow: var(--ui-text-shadow);
-  filter: var(--ui-shadow);
+  display: inline-flex; align-items: center; gap: 7px;
+  min-height: 32px; padding: 0 12px;
+  background: var(--glass-scrim);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-radius: 999px;
+  color: var(--glass-ink); font-size: 13px; font-weight: 800;
+  letter-spacing: .2px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .28),
+    inset 0 1px 0 rgba(255, 255, 255, .5),
+    var(--glass-shadow);
 }
 .world-chip .chip-icon {
   width: 18px; height: 18px; flex: 0 0 auto;
   display: grid; place-items: center;
 }
 .world-chip .chip-icon svg { width: 18px; height: 18px; display: block; }
-.world-chip .chip-sub { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); white-space: nowrap; }
+.world-chip .chip-sub {
+  font-size: 11.5px; font-weight: 700; color: var(--glass-ink-soft);
+  white-space: nowrap;
+}
 #world-clock { font-variant-numeric: tabular-nums; }
-#world-status { gap: 7px; padding: 0 6px; }
+#world-status { gap: 6px; padding: 0 11px; }
 
-/* Chỉ ẩn khỏi mắt, không ẩn khỏi trình đọc màn hình. */
+/* Chỉ ẩn khỏi mắt, không ẩn khỏi trình đọc màn hình: dùng display:none thì
+   người dùng trình đọc mất luôn thông tin giai đoạn và thời tiết. */
 .sr-only {
   position: absolute; width: 1px; height: 1px;
   margin: -1px; padding: 0; border: 0;
   overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
 
-/* ---------- Thông tin nhân vật ---------- */
+/* ---------- Thông tin nhân vật (kính mờ) ----------
+   Bố cục: chân dung tròn mang badge cấp ở góc, bên phải là tên trên một dòng
+   riêng và thanh XP ở dòng dưới. Bản trước xếp sao, thanh và số cùng một hàng
+   nên ba thứ tranh nhau, không có điểm nhìn. */
 #player-card {
   pointer-events: auto;
   position: relative;
   display: flex; align-items: center;
   padding: 0; border: 0; background: none;
   font: inherit; text-align: left; cursor: pointer;
+  /* Không đặt filter ở đây: filter trên phần tử cha vô hiệu hoá backdrop-filter
+     của con, kính sẽ không còn nhìn xuyên nền. */
 }
 #player-card:active { transform: translateY(1px); }
 
+/* --- Chân dung --- */
 #player-card .portrait {
   position: relative; z-index: 2; flex: 0 0 auto;
-  width: 84px; height: 84px;
-  background: url('/assets/ui/round-wood.png') center/100% 100% no-repeat;
+  width: 76px; height: 76px; border-radius: 50%;
+  background: var(--glass-scrim-strong);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  padding: 4px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .5),
+    inset 0 2px 0 rgba(255, 255, 255, .55),
+    var(--glass-shadow);
   display: grid; place-items: center;
-  filter: var(--ui-shadow);
 }
 #player-card canvas {
-  width: 58px; height: 58px; display: block; border-radius: 50%;
+  width: 100%; height: 100%; display: block; border-radius: 50%;
   background: linear-gradient(180deg, #7cc9ee 0%, #a9dcf2 62%, #d6eefb 100%);
-  box-shadow: inset 0 0 0 1px rgba(120, 80, 40, .35), inset 0 -6px 12px rgba(11, 52, 74, .2);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), inset 0 -6px 12px rgba(11, 52, 74, .22);
 }
 
-/* Badge cấp gác lên viền chân dung, không chen vào hàng thanh XP. */
+/* Badge cấp gác lên viền chân dung, không chen vào hàng thanh XP nữa. */
+/* Badge nằm gọn trong chiều cao card: thò xuống dưới thì phần đuôi sao bị cắt
+   bởi mép card và trông như lỗi dựng. */
 #player-card .level-star {
-  position: absolute; right: -3px; bottom: 3px;
-  width: 31px; height: 30px;
+  position: absolute; right: -6px; bottom: 1px;
+  width: 32px; height: 31px;
   display: grid; place-items: center;
-  filter: drop-shadow(0 2px 3px rgba(50, 28, 10, .45));
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .45));
 }
 #player-card .level-star svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 #player-card .lv-value {
   position: relative; margin-top: -1px;
-  color: var(--ink); font-size: 12.5px; font-weight: 800; line-height: 1;
+  color: #4a3120; font-size: 12.5px; font-weight: 800; line-height: 1;
 }
 
-/* Bảng gỗ 9-slice. border-width phải đủ dày để phần viền trong ảnh không bị ép
-   méo; phần giữa được kéo giãn nhờ từ khoá fill. */
+/* --- Bảng kính --- */
 #player-card .banner {
   position: relative; z-index: 1;
-  margin-left: -26px;
-  min-width: 250px;
-  display: flex; flex-direction: column; gap: 9px;
-  padding: 4px 8px 5px 26px;
-  border: 22px solid transparent;
-  border-image: url('/assets/ui/panel-wood.png') 60 fill / 22px stretch;
-  filter: var(--ui-shadow);
+  margin-left: -20px; padding: 10px 18px 11px 30px;
+  min-width: 236px;
+  display: flex; flex-direction: column; gap: 8px;
+  background: var(--glass-scrim);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-radius: 17px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .28),
+    inset 0 1px 0 rgba(255, 255, 255, .5),
+    var(--glass-shadow);
 }
+/* Ánh sáng dội ở mép trên — vệt chéo phủ cả mặt như bản trước làm kính bị đục. */
+#player-card .banner::before,
+#minimap::before,
+#channel-button::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .26) 0%, rgba(255, 255, 255, 0) 44%);
+}
+#player-card:hover .banner { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), inset 0 1px 0 rgba(255, 255, 255, .6), var(--glass-shadow); }
 
 #player-card .name {
-  color: var(--ink); font-size: 18px; font-weight: 800; line-height: 1;
+  color: var(--glass-ink); font-size: 18px; font-weight: 800; line-height: 1;
   letter-spacing: .3px; max-width: 214px;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  text-shadow: var(--ui-text-shadow);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .34);
 }
 
 #player-card .banner-bottom { display: flex; align-items: center; gap: 10px; }
 
 #player-card .xp-bar {
-  flex: 1 1 auto; min-width: 70px; height: 11px;
+  flex: 1 1 auto; min-width: 70px; height: 10px;
   border-radius: 999px;
-  background: #8a5f37;
-  box-shadow: inset 0 2px 3px rgba(52, 30, 12, .55), 0 1px 0 rgba(255, 240, 214, .4);
+  /* Rãnh sáng mờ chứ không phải hố đen: nền tối đặc làm thanh trông rỗng khi
+     tiến độ còn ít. */
+  background: rgba(255, 255, 255, .16);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .38), inset 0 0 0 1px rgba(255, 255, 255, .2);
   overflow: hidden;
 }
 #player-card .xp-fill {
   display: block; height: 100%; width: 0%;
   border-radius: 999px;
   background: linear-gradient(180deg, #b6f06a 0%, #7fd23c 52%, #58ad24 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
+  /* Quầng sáng để phần đã đầy vẫn thấy rõ khi tiến độ còn ít. */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 0 8px rgba(140, 226, 84, .75);
   transition: width .3s ease;
 }
 #player-card .xp-text {
-  flex: 0 0 auto; color: var(--ink-soft);
-  font-size: 12px; font-weight: 800; line-height: 1;
+  flex: 0 0 auto; color: var(--glass-ink-soft);
+  font-size: 12px; font-weight: 700; line-height: 1;
   letter-spacing: .2px; white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .38);
 }
 
 /* ---------- Minimap + chọn khu ---------- */
+/* Khung minimap dạng kính: viền mảnh, nhãn là chip nhỏ nằm TRONG khung.
+   Biển tên treo lủng lẳng dưới đáy như bản trước làm khối bị lệch và đè lên nút
+   chuyển khu. */
 #minimap {
   pointer-events: auto;
   position: relative; display: block;
-  padding: 0; background: none;
-  border: 20px solid transparent;
-  border-image: url('/assets/ui/panel-wood.png') 60 fill / 20px stretch;
+  padding: 7px;
+  background: var(--glass-scrim);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-radius: 16px;
   cursor: pointer; overflow: visible;
-  filter: var(--ui-shadow);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .28),
+    inset 0 1px 0 rgba(255, 255, 255, .5),
+    var(--glass-shadow);
 }
+#minimap:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), inset 0 1px 0 rgba(255, 255, 255, .6), var(--glass-shadow); }
 #minimap:active { transform: translateY(1px); }
 
-/* Miệng khung: viền sẫm khoét vào trong cho vùng bản đồ trông lõm dưới mặt gỗ. */
 .minimap-frame {
   position: relative; display: block;
-  border-radius: 8px; overflow: hidden;
+  border-radius: 10px; overflow: hidden;
   box-shadow:
-    0 0 0 2px #7b5230,
-    0 0 0 3px rgba(255, 240, 214, .4),
+    0 0 0 1px rgba(255, 255, 255, .3),
     inset 0 2px 6px rgba(0, 0, 0, .35);
 }
-#minimap canvas { display: block; width: 184px; height: 78px; border-radius: 8px; }
+#minimap canvas { display: block; width: 184px; height: 78px; border-radius: 10px; }
 
 .minimap-label {
-  position: absolute; left: 8px; top: 8px; z-index: 3;
-  max-width: calc(100% - 16px);
+  position: absolute; left: 13px; top: 13px; z-index: 3;
+  max-width: calc(100% - 26px);
   padding: 2px 9px;
   font-size: 10.5px; font-weight: 800; letter-spacing: .2px;
-  color: var(--ink-cream);
-  background: rgba(74, 47, 28, .82);
+  color: var(--glass-ink);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .6);
+  background: rgba(9, 22, 19, .5);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(255, 240, 214, .3);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
-/* Nút chuyển khu. */
+/* Nút chuyển khu — cùng chất kính với các khung HUD khác. */
 #channel-button {
   pointer-events: auto; position: relative;
-  display: inline-flex; align-items: center; gap: 7px;
-  min-height: 34px; padding: 0 2px 0 6px;
-  border: 11px solid transparent;
-  border-image: url('/assets/ui/pill-wood.png') 78 fill / 11px stretch;
-  background: none;
-  color: var(--ink); font: inherit; font-weight: 800; cursor: pointer;
-  text-shadow: var(--ui-text-shadow);
-  filter: var(--ui-shadow);
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 32px; padding: 0 6px 0 13px;
+  background: var(--glass-scrim);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 0; border-radius: 999px;
+  color: var(--glass-ink); font: inherit; font-weight: 800; cursor: pointer;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .28),
+    inset 0 1px 0 rgba(255, 255, 255, .5),
+    var(--glass-shadow);
 }
+#channel-button:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), inset 0 1px 0 rgba(255, 255, 255, .6), var(--glass-shadow); }
 #channel-button:active { transform: translateY(1px); }
-#channel-button[disabled] { opacity: .65; cursor: default; }
-.channel-label { font-size: 12px; font-weight: 800; color: var(--ink-soft); }
+#channel-button[disabled] { opacity: .6; cursor: default; }
+.channel-label { font-size: 12px; font-weight: 800; color: var(--glass-ink-soft); }
 .channel-value { font-size: 15px; font-weight: 800; }
 .channel-load {
-  font-size: 11px; font-weight: 800; color: var(--ink-cream);
-  background: #a9784a; border-radius: 999px; padding: 3px 8px;
-  box-shadow: inset 0 1px 0 rgba(255, 240, 214, .35);
-  text-shadow: none;
+  font-size: 11px; font-weight: 700; color: var(--glass-ink-soft);
+  background: rgba(0, 0, 0, .34); border-radius: 999px; padding: 3px 8px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
 }
-/* Mũi tên lấy từ bộ asset thay vì vẽ bằng SVG, cho khớp nét với khung gỗ. */
-.channel-caret {
-  width: 17px; height: 13px; flex: 0 0 auto;
-  background: url('/assets/ui/arrow-down.png') center/contain no-repeat;
-}
-.channel-caret path { display: none; }
+.channel-caret { width: 11px; height: 8px; color: rgba(255, 255, 255, .75); }
 
 /* Lưới chọn khu trong popup */
 .channel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 9px; }
@@ -319,21 +386,27 @@ html, body {
 }
 .channel-tile .load i { display: block; height: 100%; border-radius: 999px; }
 
-/* ---------- Pill chung (tiền tệ) ---------- */
+/* ---------- Pill chung (tiền tệ, nhãn) ---------- */
 .pill {
-  position: relative;
-  border: 11px solid transparent;
-  border-image: url('/assets/ui/pill-cream.png') 78 fill / 11px stretch;
-  padding: 0 6px 0 2px;
-  min-height: 34px;
-  display: inline-flex; align-items: center;
-  font-size: 14px; font-weight: 800; letter-spacing: .2px;
-  color: var(--ink); text-shadow: var(--ui-text-shadow);
-  filter: var(--ui-shadow);
+  background: var(--glass-scrim);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 0;
+  border-radius: 999px;
+  padding: 5px 14px 5px 5px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  color: var(--glass-ink);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .28),
+    inset 0 1px 0 rgba(255, 255, 255, .5),
+    var(--glass-shadow);
 }
-.currency { gap: 7px; }
+.currency { display: inline-flex; align-items: center; gap: 8px; }
 
-/* Xu và ngọc vẫn vẽ bằng CSS: bộ asset không có icon tiền tệ. */
+/* Xu và ngọc vẽ thành hai vật thể khác chất, không phải hai chấm tròn đổi màu. */
 .dot { width: 22px; height: 22px; display: inline-block; flex: 0 0 auto; }
 .dot.coin {
   border-radius: 50%;
@@ -343,16 +416,14 @@ html, body {
   box-shadow:
     inset 0 0 0 2px rgba(255, 236, 160, .85),
     inset 0 -2px 3px rgba(140, 88, 12, .5),
-    0 1px 2px rgba(60, 34, 12, .4);
+    0 1px 3px rgba(0, 0, 0, .4);
 }
 .dot.gem {
+  /* clip-path cắt hình viên đá nhiều mặt; gradient chéo tạo mặt cắt sáng tối. */
   clip-path: polygon(50% 0%, 100% 36%, 78% 100%, 22% 100%, 0% 36%);
-  background: linear-gradient(115deg, #eafcff 0 26%, #7ad3f0 26% 55%, #2f9fc9 55% 100%);
-  filter: drop-shadow(0 1px 2px rgba(60, 34, 12, .45));
-}
-/* Năng lượng dùng icon tia sét trong bộ asset. */
-.dot.energy {
-  background: url('/assets/icons/energy.png') center/contain no-repeat;
+  background:
+    linear-gradient(115deg, #eafcff 0 26%, #7ad3f0 26% 55%, #2f9fc9 55% 100%);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .45));
 }
 
 /* ---------- Toolbar ---------- */
@@ -364,19 +435,18 @@ html, body {
 }
 #toolbar::-webkit-scrollbar { display: none; }
 #toolbar button {
-  flex: 0 0 auto; min-width: 96px; min-height: 46px;
-  padding: 0 10px;
-  background: none;
-  border: 15px solid transparent;
-  border-image: url('/assets/ui/btn-wood.png') 54 fill / 15px stretch;
-  color: var(--ink); font: inherit; font-weight: 800; font-size: 14px;
-  text-shadow: var(--ui-text-shadow);
-  filter: var(--ui-shadow);
+  flex: 0 0 auto; min-width: 84px; min-height: 44px;
+  background: var(--glass);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  color: var(--glass-ink); border: 1.5px solid var(--glass-edge);
+  border-radius: var(--radius); font: inherit; font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), var(--glass-shadow);
   cursor: pointer;
 }
-#toolbar button:active { transform: translateY(1px); }
-/* Panel đang mở thì nút đổi sang gỗ sáng cho thấy trạng thái. */
-#toolbar button[aria-pressed="true"] { border-image-source: url('/assets/ui/btn-cream.png'); }
+#toolbar button:active { background: var(--glass-strong); transform: translateY(1px); }
+#toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
 
 /* ---------- Gợi ý tương tác ---------- */
 #interact-hint {
@@ -530,16 +600,11 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
   display: flex; flex-direction: column; gap: 6px; align-items: center; pointer-events: none;
 }
 .toast {
-  padding: 2px 8px; min-height: 34px;
-  display: flex; align-items: center;
-  border: 13px solid transparent;
-  border-image: url('/assets/ui/pill-cream.png') 78 fill / 13px stretch;
-  font-size: 13px; font-weight: 700; max-width: 84vw;
-  color: var(--ink); text-shadow: var(--ui-text-shadow);
-  filter: var(--ui-shadow);
+  background: rgba(16, 26, 22, .94); border: 1px solid var(--line);
+  border-radius: 10px; padding: 8px 14px; font-size: 13px; max-width: 84vw;
 }
-.toast.good { border-image-source: url('/assets/ui/btn-cream.png'); }
-.toast.bad { border-image-source: url('/assets/ui/btn-red.png'); color: #fff3f3; text-shadow: 0 1px 2px rgba(90, 20, 20, .6); }
+.toast.good { border-color: var(--accent); }
+.toast.bad { border-color: var(--danger); }
 
 #connection {
   position: absolute; left: 50%; top: 10px; transform: translateX(-50%); z-index: 60;

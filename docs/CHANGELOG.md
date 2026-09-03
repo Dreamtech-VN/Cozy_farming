@@ -3,6 +3,16 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.2.1 — 2026-09-02
+
+### Thay đổi
+- **HUD quay lại chất kính mờ.** Áp asset gỗ lên toàn bộ giao diện ở 0.2.0 làm cả
+  màn hình thành một mảng nâu đất đơn điệu, chữ nâu trên nền nâu nên tương phản
+  kém và HUD che mất thế giới.
+- **Popup vẫn dùng asset gỗ**: panel, nút, ô túi đồ, lưới chọn khu, overlay đăng
+  nhập và màn Match-3. Popup không cần nhìn xuyên xuống thế giới nên asset thật
+  đọc tốt hơn ở đó, còn HUD thì ngược lại.
+
 ## 0.2.0 — 2026-09-02
 
 ### Thêm mới
