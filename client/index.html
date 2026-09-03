@@ -16,26 +16,12 @@
     <header id="hud" class="hidden">
       <!-- Trái: nhân vật, ví tiền, bảng nhiệm vụ -->
       <div class="hud-left">
-        <!-- Nhân vật và ví nằm CHUNG một tấm nền: ba tấm rời như bản trước làm
-             góc trái vụn thành mấy mảng xám không liên quan gì nhau. -->
-        <div class="hud-identity">
+        <!-- Nhân vật là một viên nang ngang: khung avatar vuông bo tròn, tên và
+             thanh XP xếp bên phải. Ví là một hàng pill RIÊNG ngay dưới. -->
         <button id="player-card" type="button" aria-label="Mở thông tin nhân vật">
           <span class="portrait">
             <canvas id="avatar-portrait" width="176" height="176"></canvas>
-            <span class="level-star">
-              <svg viewBox="0 0 48 46" aria-hidden="true">
-                <path d="M24 2l6.2 15.5 16.6 1.1L34 29.4l4.1 16.1L24 36.4 9.9 45.5 14 29.4 1.2 18.6l16.6-1.1z"
-                      fill="url(#starFill)" stroke="#b8791a" stroke-width="2.6" stroke-linejoin="round"/>
-                <defs>
-                  <linearGradient id="starFill" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stop-color="#ffe98a"/>
-                    <stop offset="0.55" stop-color="#f9c93f"/>
-                    <stop offset="1" stop-color="#e8a218"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-              <span class="lv-value" id="hud-level">1</span>
-            </span>
+            <span class="level-badge" id="hud-level">1</span>
           </span>
           <span class="banner">
             <span class="name" id="hud-name">—</span>
@@ -50,7 +36,6 @@
           <div class="pill currency" id="hud-coin"><span class="dot coin"></span><span>0</span></div>
           <div class="pill currency" id="hud-gem"><span class="dot gem"></span><span>0</span></div>
           <button class="wallet-add" id="wallet-add" type="button" aria-label="Tới cửa hàng">+</button>
-        </div>
         </div>
 
         <!-- Bảng nhiệm vụ: tab theo loại, thu gọn được. Nội dung dựng ở
@@ -67,19 +52,21 @@
     <!-- Góc dưới phải: các nút dùng nhiều nhất -->
     <nav id="menu-bottom" class="icon-row hidden" aria-label="Truy cập nhanh"></nav>
 
-    <!-- Dưới giữa: khung chat cố định -->
+    <!-- Dưới giữa: khung chat — hàng công cụ ở trên, dòng chat ở giữa, hàng nhập
+         với hai nút chọn kênh ở dưới, theo đúng bố cục mẫu. -->
     <section id="chat-dock" class="hidden" aria-label="Trò chuyện">
-      <!-- Dòng chat trôi thẳng trên nền thế giới, chỉ hàng nhập mới có tấm nền:
-           một hộp nền cao 76px lúc chưa ai nói gì chỉ là mảng trống che mất cảnh. -->
+      <div class="chat-tools">
+        <button class="chat-tool" id="chat-emote" type="button"><span class="ct-ico">☺</span>Biểu cảm</button>
+        <button class="chat-tool" id="chat-action" type="button"><span class="ct-ico">✦</span>Động tác</button>
+      </div>
       <div id="chat-stream" aria-live="polite"></div>
       <form id="chat-entry" autocomplete="off">
-        <select id="chat-scope" aria-label="Kênh chat">
-          <option value="map">Khu này</option>
-          <option value="world">Thế giới</option>
-        </select>
+        <div class="scope-switch" id="chat-scope" role="group" aria-label="Kênh chat">
+          <button type="button" data-scope="map" aria-pressed="true">Khu</button>
+          <button type="button" data-scope="world" aria-pressed="false">Thế giới</button>
+        </div>
         <input id="chat-input" type="text" maxlength="200" placeholder="Nhập nội dung…" />
-        <button class="chat-tool" id="chat-emote" type="button" aria-label="Biểu cảm" title="Biểu cảm">☺</button>
-        <button class="primary" type="submit">Gửi</button>
+        <button class="primary" type="submit" aria-label="Gửi">➤</button>
       </form>
     </section>
 

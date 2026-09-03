@@ -19,30 +19,27 @@
   --danger: #e0576f;
   --radius: 14px;
   --safe: env(safe-area-inset-bottom, 0px);
-  /* Cụm nhân vật và bảng nhiệm vụ dùng chung bề ngang này cho thẳng cột. */
-  --hud-col: 264px;
 
-  /* Kính mờ cho khung HUD — tông NÂU ẤM, không phải xám lạnh.
-     Bản trước dùng scrim xanh-xám nên cả góc màn hình trông như thanh công cụ
-     trình duyệt dán lên game. Nền nâu cacao + viền vàng chỉ một sợi làm khung
-     ăn với popup gỗ và với cảnh đồng quê, mà vẫn nhìn xuyên xuống thế giới. */
-  --glass-scrim: linear-gradient(168deg, rgba(74, 50, 33, .56) 0%, rgba(40, 27, 18, .72) 100%);
-  --glass-scrim-strong: linear-gradient(168deg, rgba(74, 50, 33, .68) 0%, rgba(38, 25, 17, .8) 100%);
-  --glass-blur: blur(18px) saturate(150%);
-  /* Viền là một sợi vàng mảnh, không phải vệt trắng — vệt trắng làm mặt kính
-     trông như tấm nhựa. */
-  --glass-edge: rgba(247, 214, 140, .40);
-  --glass-edge-strong: rgba(250, 222, 156, .68);
-  /* Bóng kép: một bóng tiếp xúc sát và một bóng toả rộng — chỉ dùng bóng rộng
-     thì khung trông như dán lên màn hình chứ không nổi khỏi nền. */
-  --glass-shadow: 0 2px 5px rgba(24, 12, 4, .30), 0 14px 30px rgba(24, 12, 4, .34);
-  --glass-ink: #fdf3df;
-  --glass-ink-soft: rgba(253, 243, 223, .72);
-  --gold: #f5c65a;
-  /* Đường viền dùng lại ở mọi tấm HUD, khai báo một chỗ cho khỏi lệch nhau. */
-  --glass-frame:
-    inset 0 0 0 1px var(--glass-edge),
-    inset 0 1px 0 rgba(255, 246, 226, .30);
+  /* HUD theo mẫu: cụm trái và nút chức năng là tấm KEM SÁNG chữ nâu, chỉ khung
+     chat mới là tấm tối chữ sáng. Bản trước để tất cả là kính tối nên cả HUD
+     nặng như thanh công cụ, không ra tông cozy. */
+  --plate: rgba(255, 250, 240, .82);
+  --plate-soft: rgba(255, 250, 240, .66);
+  --plate-blur: blur(10px) saturate(115%);
+  --plate-ink: #5b3d24;
+  --plate-ink-soft: #8a6743;
+  --plate-frame:
+    inset 0 0 0 1.5px rgba(255, 255, 255, .9),
+    inset 0 -2px 0 rgba(180, 138, 96, .28);
+  --plate-shadow: 0 2px 4px rgba(74, 46, 20, .18), 0 8px 20px rgba(74, 46, 20, .22);
+
+  /* Tấm tối, chỉ dùng cho khung chat và ô nhập. */
+  --dim: rgba(38, 30, 24, .55);
+  --dim-strong: rgba(34, 27, 21, .72);
+  --dim-ink: #fdf3df;
+  --dim-ink-soft: rgba(253, 243, 223, .68);
+
+  --gold: #f0b83c;
 
   /* Mực nâu cho những chỗ đứng trên nền gỗ/giấy: badge sao vàng trên HUD, và
      toàn bộ popup (panel, overlay) vẫn dùng asset gỗ trong client/assets/ui. */
@@ -78,182 +75,179 @@ html, body {
 #hud {
   position: absolute; inset: 0 0 auto 0; z-index: 5;
   display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
-  padding: calc(8px + env(safe-area-inset-top, 0px)) 10px 8px;
+  padding: calc(7px + env(safe-area-inset-top, 0px)) 9px 8px;
   pointer-events: none;
 }
-/* Cột trái xếp sát nhau (gap 6) để đọc thành MỘT khối, không phải mấy tấm rời. */
-.hud-left { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.hud-left { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
 .hud-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
 
-/* Tấm nền chung: nhân vật ở trên, ví ở dưới, cách nhau bằng một sợi kẻ. */
-.hud-identity {
-  pointer-events: auto;
-  width: var(--hud-col);
-  display: flex; flex-direction: column;
-  padding: 8px;
-  background: var(--glass-scrim);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border-radius: 16px;
-  box-shadow: var(--glass-frame), var(--glass-shadow);
-}
-
-.hud-wallet {
-  display: flex; align-items: center; gap: 6px;
-  margin-top: 7px; padding-top: 7px;
-  border-top: 1px solid rgba(247, 214, 140, .22);
-}
+/* Ví là một hàng pill RIÊNG dưới viên nang nhân vật, đúng như mẫu. */
+.hud-wallet { display: flex; align-items: center; gap: 6px; pointer-events: auto; }
 
 .wallet-add {
-  pointer-events: auto;
-  width: 26px; height: 26px; flex: 0 0 auto; margin-left: auto;
+  width: 25px; height: 25px; flex: 0 0 auto;
   border: 0; border-radius: 50%;
-  background: linear-gradient(180deg, #9ee06f, #59a530);
-  color: #16330a; font: inherit; font-size: 18px; font-weight: 800; line-height: 1;
+  background: linear-gradient(180deg, #9ee06f, #56a02d);
+  color: #fff; font: inherit; font-size: 17px; font-weight: 800; line-height: 1;
   cursor: pointer;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 2px 4px rgba(24, 12, 4, .38);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 2px 4px rgba(74, 46, 20, .3);
 }
 .wallet-add:active { transform: translateY(1px); }
 
 /* ---------- Nút chức năng dạng icon ----------
-   Nút là một đĩa TRÒN viền vàng, nhãn nằm NGOÀI đĩa. Bản trước nhồi cả icon và
-   nhãn vào một ô vuông 66px nên chữ bị cắt cụt ("Chuyển ...") và chín ô vuông
-   xám xếp cạnh nhau trông như thanh tác vụ. */
-.icon-grid, .icon-row { display: flex; gap: 8px; pointer-events: auto; }
-.icon-grid { flex-wrap: wrap; justify-content: flex-end; max-width: 360px; }
+   Mẫu dùng đĩa tròn nhiều màu, nhãn nằm dưới đĩa. Màu lấy từ biến --btn-color
+   mà hud_menu.js gắn cho từng nút. */
+.icon-grid, .icon-row { display: flex; gap: 7px; pointer-events: auto; }
+.icon-grid { flex-wrap: wrap; justify-content: flex-end; max-width: 300px; }
 
 #menu-bottom {
   position: absolute; z-index: 5;
-  right: 10px; bottom: calc(10px + var(--safe));
+  right: 9px; bottom: calc(9px + var(--safe));
 }
 
 .icon-btn {
-  width: 64px; padding: 0;
-  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  width: 54px; padding: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
   border: 0; background: none;
-  color: var(--glass-ink); font: inherit; cursor: pointer;
+  font: inherit; cursor: pointer;
 }
 .icon-btn:active { transform: translateY(1px); }
 
 .icon-btn-face {
-  width: 42px; height: 42px; border-radius: 50%;
+  width: 40px; height: 40px; border-radius: 50%;
   display: grid; place-items: center;
-  color: #fdf3df;
-  background: var(--glass-scrim-strong);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
+  color: #fff;
+  background:
+    radial-gradient(circle at 50% 22%, rgba(255, 255, 255, .55) 0 30%, transparent 62%),
+    linear-gradient(180deg, var(--btn-color) 0%, rgba(0, 0, 0, .22) 260%);
   box-shadow:
-    inset 0 0 0 1.5px var(--glass-edge),
-    inset 0 1px 0 rgba(255, 246, 226, .34),
-    var(--glass-shadow);
+    inset 0 0 0 2px rgba(255, 255, 255, .85),
+    0 2px 4px rgba(74, 46, 20, .3);
 }
-.icon-btn-face svg { width: 22px; height: 22px; display: block; }
+.icon-btn-face svg { width: 21px; height: 21px; display: block; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .25)); }
 .icon-btn[aria-pressed="true"] .icon-btn-face {
-  color: #3a2410;
-  background: linear-gradient(180deg, #ffe6a4, #e6ab34);
-  box-shadow: inset 0 0 0 1.5px rgba(255, 250, 233, .8), 0 2px 6px rgba(24, 12, 4, .45);
+  box-shadow: inset 0 0 0 2px #fff, 0 0 0 2.5px var(--btn-color), 0 2px 5px rgba(74, 46, 20, .35);
+}
+
+/* Nhãn đứng thẳng trên cảnh nên cần viền chữ, không cần tấm nền riêng. */
+.icon-btn-label {
+  max-width: 100%;
+  font-size: 10px; font-weight: 800; line-height: 1.15;
+  color: #fff8ea;
+  text-shadow: 0 1px 2px rgba(50, 30, 10, .95), 0 0 3px rgba(50, 30, 10, .8);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .icon-btn[aria-pressed="true"] .icon-btn-label { color: var(--gold); }
 
-/* Nhãn đứng trên nền thế giới nên cần viền chữ đậm, không cần tấm nền riêng. */
-.icon-btn-label {
-  max-width: 100%;
-  font-size: 10px; font-weight: 800; line-height: 1.1; letter-spacing: 0;
-  color: var(--glass-ink);
-  text-shadow: 0 1px 3px rgba(24, 12, 4, .85), 0 0 2px rgba(24, 12, 4, .7);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-
 /* ---------- Khung chat cố định ----------
-   Chỉ hàng nhập có tấm nền; các dòng chat trôi thẳng trên cảnh như trong game
-   MMO thật. Bản trước bọc cả cụm trong một hộp cao 76px nên lúc chưa ai nói gì
-   thì giữa màn hình là một mảng trống ăn mất cảnh. */
+   Theo mẫu: hàng công cụ ở trên, dòng chat trên tấm tối ở giữa, hàng nhập với
+   hai nút chọn kênh ở dưới. Cả cụm nằm dưới giữa màn hình. */
 #chat-dock {
   position: absolute; z-index: 5;
-  left: 10px; bottom: calc(10px + var(--safe));
-  width: min(340px, calc(100vw - 420px));
-  display: flex; flex-direction: column; align-items: flex-start; gap: 5px;
+  left: 50%; bottom: calc(9px + var(--safe));
+  transform: translateX(-50%);
+  /* Chừa chỗ cho hai cụm nút hai bên: cửa sổ hẹp mà không trừ đủ thì hàng nhập
+     chui xuống dưới cụm nút góc dưới phải. */
+  width: min(400px, max(240px, calc(100vw - 700px)));
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
   pointer-events: none;
 }
 
+.chat-tools { display: flex; gap: 5px; pointer-events: auto; }
+.chat-tool {
+  display: inline-flex; align-items: center; gap: 5px;
+  min-height: 24px; padding: 0 11px 0 6px;
+  border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--plate);
+  -webkit-backdrop-filter: var(--plate-blur);
+  backdrop-filter: var(--plate-blur);
+  color: var(--plate-ink); font: inherit; font-size: 11.5px; font-weight: 800;
+  box-shadow: var(--plate-frame), var(--plate-shadow);
+}
+.chat-tool .ct-ico {
+  width: 17px; height: 17px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: linear-gradient(180deg, #ffd979, #eda52c);
+  color: #fff; font-size: 11px; line-height: 1;
+}
+.chat-tool:active { transform: translateY(1px); }
+
 #chat-stream {
   width: 100%;
-  max-height: 78px; overflow-y: auto; overflow-x: hidden;
+  max-height: 74px; min-height: 0; overflow-y: auto; overflow-x: hidden;
   display: flex; flex-direction: column; gap: 1px;
-  font-size: 12.5px; line-height: 1.35;
-  scrollbar-width: none;
-  pointer-events: auto;
+  padding: 6px 9px; border-radius: 11px;
+  font-size: 12.5px; line-height: 1.4;
+  scrollbar-width: none; pointer-events: auto;
+  background: var(--dim);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
+#chat-stream:empty { display: none; }
 #chat-stream::-webkit-scrollbar { width: 0; }
-.chat-line {
-  color: var(--glass-ink); word-break: break-word;
-  text-shadow: 0 1px 3px rgba(24, 12, 4, .95), 0 0 2px rgba(24, 12, 4, .8);
-}
+.chat-line { color: var(--dim-ink); word-break: break-word; }
 .chat-line .who { color: var(--gold); font-weight: 800; }
-.chat-line.mine .who { color: #a7e77a; }
-.chat-line.system { color: var(--glass-ink-soft); font-style: italic; }
+.chat-line.mine .who { color: #9de06f; }
+.chat-line.system { color: var(--dim-ink-soft); font-style: italic; }
 
 #chat-entry {
   width: 100%;
   display: flex; align-items: center; gap: 5px;
-  padding: 5px;
+  padding: 4px 4px 4px 5px;
   pointer-events: auto;
-  background: var(--glass-scrim);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
+  background: var(--dim-strong);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   border-radius: 999px;
-  box-shadow: var(--glass-frame), var(--glass-shadow);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16), 0 4px 12px rgba(40, 24, 10, .3);
 }
-#chat-scope {
-  flex: 0 0 auto; max-width: 104px;
+
+/* Hai nút gạt chọn kênh, thay cho <select> — mẫu dùng đúng kiểu này. */
+.scope-switch { display: flex; flex: 0 0 auto; gap: 2px; }
+.scope-switch button {
+  min-height: 24px; padding: 0 9px;
   border: 0; border-radius: 999px; cursor: pointer;
-  padding: 4px 2px 4px 9px; font: inherit; font-size: 11px; font-weight: 700;
-  background: rgba(24, 12, 4, .42); color: var(--glass-ink);
-  box-shadow: inset 0 0 0 1px rgba(247, 214, 140, .26);
+  background: rgba(255, 255, 255, .12); color: var(--dim-ink-soft);
+  font: inherit; font-size: 11px; font-weight: 800;
 }
+.scope-switch button[aria-pressed="true"] {
+  background: linear-gradient(180deg, #ffd979, #eda52c);
+  color: #4a2f12;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
+}
+
 #chat-input {
-  flex: 1 1 auto; min-width: 0; min-height: 28px;
+  flex: 1 1 auto; min-width: 0; min-height: 26px;
   padding: 0 8px; border: 0; border-radius: 999px;
-  background: none; color: var(--glass-ink); font: inherit; font-size: 13px;
+  background: none; color: var(--dim-ink); font: inherit; font-size: 13px;
 }
 #chat-input:focus { outline: none; }
-#chat-input::placeholder { color: rgba(253, 243, 223, .45); }
+#chat-input::placeholder { color: rgba(253, 243, 223, .42); }
 
-.chat-tool {
-  flex: 0 0 auto;
-  width: 28px; height: 28px; padding: 0;
-  border: 0; border-radius: 50%; cursor: pointer;
-  font: inherit; font-size: 15px; line-height: 1;
-  background: rgba(24, 12, 4, .42); color: var(--gold);
-  box-shadow: inset 0 0 0 1px rgba(247, 214, 140, .26);
-}
-.chat-tool:active { transform: translateY(1px); }
-
-/* Nút gửi phải cùng chất với khung chat, không mượn viền gỗ của .primary. */
 #chat-entry .primary {
   flex: 0 0 auto;
-  min-height: 28px; min-width: 0; padding: 0 13px;
-  border: 0; border-radius: 999px;
-  background: linear-gradient(180deg, #9ee06f, #59a530);
-  color: #16330a; font-weight: 800; font-size: 12.5px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55), 0 2px 4px rgba(24, 12, 4, .38);
+  width: 28px; height: 28px; min-height: 0; min-width: 0; padding: 0;
+  border: 0; border-radius: 50%;
+  background: linear-gradient(180deg, #9ee06f, #56a02d);
+  color: #fff; font-size: 13px; font-weight: 800; line-height: 1;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 2px 4px rgba(40, 24, 10, .35);
 }
 
 .emote-bar {
   display: flex; gap: 5px; flex-wrap: wrap;
   padding: 6px; pointer-events: auto;
-  background: var(--glass-scrim);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border-radius: 14px;
-  box-shadow: var(--glass-frame), var(--glass-shadow);
+  background: var(--plate);
+  -webkit-backdrop-filter: var(--plate-blur);
+  backdrop-filter: var(--plate-blur);
+  border-radius: 13px;
+  box-shadow: var(--plate-frame), var(--plate-shadow);
 }
 .emote-btn {
   min-width: 34px; min-height: 30px; padding: 0 7px;
   border: 0; border-radius: 9px; cursor: pointer;
-  background: rgba(24, 12, 4, .38); color: var(--glass-ink);
+  background: rgba(180, 138, 96, .18); color: var(--plate-ink);
   font: inherit; font-size: 15px; font-weight: 800;
-  box-shadow: inset 0 0 0 1px rgba(247, 214, 140, .26);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .7);
 }
 .emote-btn:active { transform: translateY(1px); }
 
@@ -265,179 +259,177 @@ html, body {
 }
 
 /* ---------- Thông tin nhân vật ----------
-   Chân dung tròn viền vàng, bên phải là tên và thanh XP. Cả cụm nằm TRONG tấm
-   .hud-identity nên bản thân nút không có nền riêng — bản trước mỗi thứ một
-   tấm kính nên góc trái thành ba mảng chồng nhau. */
+   Viên nang ngang theo mẫu: khung avatar vuông bo tròn ở đầu, tên và thanh XP
+   xếp bên phải. Tấm kem chữ nâu, không phải kính tối. */
 #player-card {
   pointer-events: auto;
-  position: relative;
-  display: flex; align-items: center; gap: 9px;
-  width: 100%; padding: 0; border: 0; background: none;
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 14px 4px 4px;
+  border: 0; border-radius: 999px;
+  background: var(--plate);
+  -webkit-backdrop-filter: var(--plate-blur);
+  backdrop-filter: var(--plate-blur);
   font: inherit; text-align: left; cursor: pointer;
+  box-shadow: var(--plate-frame), var(--plate-shadow);
 }
 #player-card:active { transform: translateY(1px); }
 
-/* --- Chân dung --- */
 #player-card .portrait {
   position: relative; flex: 0 0 auto;
-  width: 54px; height: 54px; border-radius: 50%;
+  width: 42px; height: 42px; border-radius: 13px;
   padding: 2px;
-  background: linear-gradient(180deg, #ffe6a4, #d59a2e);
-  box-shadow: 0 2px 4px rgba(24, 12, 4, .4);
+  background: linear-gradient(180deg, #ffd979, #e0a02c);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .7);
   display: grid; place-items: center;
 }
 #player-card canvas {
-  width: 100%; height: 100%; display: block; border-radius: 50%;
-  background: linear-gradient(180deg, #7cc9ee 0%, #a9dcf2 62%, #d6eefb 100%);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .5), inset 0 -6px 12px rgba(11, 52, 74, .2);
+  width: 100%; height: 100%; display: block; border-radius: 11px;
+  background: linear-gradient(180deg, #8fd4f2 0%, #b9e4f6 62%, #dcf0fb 100%);
 }
 
-/* Badge cấp gác lên mép dưới chân dung. */
-#player-card .level-star {
-  position: absolute; right: -5px; bottom: -4px;
-  width: 26px; height: 25px;
+/* Cấp là một viên tròn nhỏ ở góc khung, không phải ngôi sao to chen vào avatar. */
+#player-card .level-badge {
+  position: absolute; right: -4px; bottom: -4px;
+  min-width: 18px; height: 18px; padding: 0 3px;
   display: grid; place-items: center;
-  filter: drop-shadow(0 2px 3px rgba(24, 12, 4, .5));
-}
-#player-card .level-star svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-#player-card .lv-value {
-  position: relative; margin-top: -1px;
-  color: #4a3120; font-size: 11px; font-weight: 800; line-height: 1;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffdf8c, #e09a1f);
+  color: #4a2f12; font-size: 10.5px; font-weight: 800; line-height: 1;
+  box-shadow: inset 0 0 0 1.5px #fff, 0 1px 3px rgba(74, 46, 20, .4);
 }
 
 #player-card .banner {
   flex: 1 1 auto; min-width: 0;
-  display: flex; flex-direction: column; gap: 6px;
+  display: flex; flex-direction: column; gap: 4px;
 }
-#player-card:hover .name { color: #fff; }
-
 #player-card .name {
-  color: var(--glass-ink); font-size: 16px; font-weight: 800; line-height: 1.1;
-  letter-spacing: .2px;
+  color: var(--plate-ink); font-size: 13.5px; font-weight: 800; line-height: 1.1;
+  max-width: 128px;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(24, 12, 4, .5);
 }
 
-#player-card .banner-bottom { display: flex; align-items: center; gap: 8px; }
+#player-card .banner-bottom { display: flex; align-items: center; gap: 6px; }
 
 #player-card .xp-bar {
-  flex: 1 1 auto; min-width: 60px; height: 8px;
+  flex: 1 1 auto; min-width: 54px; height: 7px;
   border-radius: 999px;
-  background: rgba(24, 12, 4, .45);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(247, 214, 140, .26);
+  background: rgba(150, 112, 74, .3);
+  box-shadow: inset 0 1px 1px rgba(110, 76, 42, .35);
   overflow: hidden;
 }
 #player-card .xp-fill {
   display: block; height: 100%; width: 0%;
   border-radius: 999px;
-  background: linear-gradient(180deg, #ffe89a 0%, #f7c64f 55%, #e09b1c 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55);
+  background: linear-gradient(180deg, #b7ef7e 0%, #74cf3f 55%, #4fa525 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
   transition: width .3s ease;
 }
 #player-card .xp-text {
-  flex: 0 0 auto; color: var(--glass-ink-soft);
-  font-size: 11px; font-weight: 700; line-height: 1;
-  white-space: nowrap;
+  flex: 0 0 auto; color: var(--plate-ink-soft);
+  font-size: 10.5px; font-weight: 800; line-height: 1; white-space: nowrap;
 }
 
 /* ---------- Bảng theo dõi nhiệm vụ ----------
-   Cùng bề ngang và cùng chất với cụm nhân vật ở trên, xếp sát để cột trái đọc
-   thành một khối. Thu gọn thì chỉ còn hàng tab. */
+   Theo mẫu: hàng tab gạt ở trên (tab đang chọn là thẻ kem nổi lên), thân bảng
+   là tấm kem mờ hơn, mỗi dòng mở đầu bằng nhãn [loại] có màu riêng. */
 #quest-tracker {
   pointer-events: auto;
-  width: var(--hud-col);
-  display: flex; flex-direction: column; gap: 6px;
-  padding: 7px 8px 8px;
-  background: var(--glass-scrim);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border-radius: 16px;
-  box-shadow: var(--glass-frame), var(--glass-shadow);
+  width: 276px;
+  display: flex; flex-direction: column; gap: 4px;
 }
 
-.qt-tabs { display: flex; align-items: center; gap: 3px; }
+.qt-tabs {
+  display: flex; align-items: center; gap: 3px;
+  padding: 3px; border-radius: 11px;
+  background: var(--plate-soft);
+  -webkit-backdrop-filter: var(--plate-blur);
+  backdrop-filter: var(--plate-blur);
+  box-shadow: var(--plate-frame), var(--plate-shadow);
+}
 .qt-tab {
-  position: relative;
-  flex: 1 1 0; min-width: 0; min-height: 23px; padding: 0 5px;
+  flex: 1 1 0; min-width: 0; min-height: 22px; padding: 0 5px;
   border: 0; border-radius: 8px; cursor: pointer;
-  background: rgba(24, 12, 4, .34); color: var(--glass-ink-soft);
-  font: inherit; font-size: 11px; font-weight: 700;
+  background: none; color: var(--plate-ink-soft);
+  font: inherit; font-size: 11.5px; font-weight: 800;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  box-shadow: inset 0 0 0 1px rgba(247, 214, 140, .18);
 }
 .qt-tab[aria-selected="true"] {
-  background: linear-gradient(180deg, #ffe6a4, #e6ab34);
-  color: #3a2410;
-  box-shadow: inset 0 1px 0 rgba(255, 250, 233, .7);
+  background: linear-gradient(180deg, #fffdf7, #ffeec4);
+  color: #4a2f12;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .95), 0 1px 3px rgba(120, 84, 40, .3);
 }
 .qt-tab:active { transform: translateY(1px); }
 /* Chấm báo có việc chưa nhận ở tab khác — không cần mở tab mới thấy. */
+.qt-tab { position: relative; }
 .qt-dot {
-  position: absolute; top: 3px; right: 4px;
+  position: absolute; top: 2px; right: 3px;
   width: 6px; height: 6px; border-radius: 50%;
-  background: var(--danger); box-shadow: 0 0 0 1px rgba(24, 12, 4, .5);
+  background: var(--danger); box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .85);
 }
 .qt-collapse {
-  flex: 0 0 auto; width: 21px; min-height: 23px;
+  flex: 0 0 auto; width: 20px; min-height: 22px;
   border: 0; border-radius: 8px; cursor: pointer;
-  background: rgba(24, 12, 4, .34); color: var(--gold);
+  background: rgba(180, 138, 96, .2); color: var(--plate-ink);
   font: inherit; font-size: 13px; font-weight: 800; line-height: 1;
-  box-shadow: inset 0 0 0 1px rgba(247, 214, 140, .18);
 }
 
-.qt-body { display: flex; flex-direction: column; gap: 7px; }
+.qt-body {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 7px 9px 8px; border-radius: 12px;
+  background: var(--plate-soft);
+  -webkit-backdrop-filter: var(--plate-blur);
+  backdrop-filter: var(--plate-blur);
+  box-shadow: var(--plate-frame), var(--plate-shadow);
+}
 #quest-tracker.collapsed .qt-body { display: none; }
 
 .qt-row { display: flex; flex-direction: column; gap: 2px; }
-.qt-line { display: flex; align-items: center; gap: 6px; }
-/* Đầu dòng là một chấm vàng thay cho nhãn loại: nhãn lặp lại đúng tên tab đang
-   chọn ngay phía trên nên chỉ làm dòng chật thêm. */
-.qt-line::before {
-  content: ''; flex: 0 0 auto;
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--gold); box-shadow: 0 0 0 1px rgba(24, 12, 4, .45);
+.qt-line { display: flex; align-items: center; gap: 5px; }
+/* Nhãn [loại] có màu riêng cho từng tuyến nhiệm vụ, như mẫu. */
+.qt-tag {
+  flex: 0 0 auto;
+  font-size: 10.5px; font-weight: 800; line-height: 1.2;
+  color: #c2557a;
 }
-/* Dòng mô tả thụt vào thẳng hàng với tên, khỏi cần thêm một chấm nữa. */
-.qt-sub { display: flex; padding-left: 11px; margin-bottom: 2px; }
+.qt-tag.t-daily, .qt-tag.t-weekly { color: #3f8f5c; }
+.qt-tag.t-event, .qt-tag.t-achievement { color: #b5761d; }
 .qt-name {
   flex: 1 1 auto; min-width: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  font-size: 12.5px; font-weight: 700; color: var(--glass-ink);
-  text-shadow: 0 1px 2px rgba(24, 12, 4, .5);
+  font-size: 12.5px; font-weight: 800; color: var(--plate-ink);
 }
+.qt-sub { display: flex; padding-left: 2px; }
 .qt-desc {
   flex: 1 1 auto; min-width: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  font-size: 11px; color: var(--glass-ink-soft);
+  font-size: 11px; color: var(--plate-ink-soft);
 }
-.qt-count { flex: 0 0 auto; font-size: 11px; font-weight: 800; color: var(--gold); }
+.qt-count { flex: 0 0 auto; font-size: 11px; font-weight: 800; color: var(--plate-ink-soft); }
 .qt-claim {
-  flex: 0 0 auto; min-height: 21px; padding: 0 10px;
+  flex: 0 0 auto; min-height: 20px; padding: 0 9px;
   border: 0; border-radius: 999px; cursor: pointer;
-  background: linear-gradient(180deg, #9ee06f, #59a530);
-  color: #16330a; font: inherit; font-size: 11px; font-weight: 800;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55), 0 2px 4px rgba(24, 12, 4, .38);
+  background: linear-gradient(180deg, #9ee06f, #56a02d);
+  color: #fff; font: inherit; font-size: 10.5px; font-weight: 800;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 1px 3px rgba(74, 46, 20, .3);
 }
 .qt-claim:active { transform: translateY(1px); }
 
 .qt-bar {
-  display: block; height: 4px; border-radius: 999px; overflow: hidden;
-  background: rgba(24, 12, 4, .45);
-  box-shadow: inset 0 0 0 1px rgba(247, 214, 140, .2);
+  display: block; height: 3px; margin-top: 2px;
+  border-radius: 999px; overflow: hidden;
+  background: rgba(150, 112, 74, .28);
 }
 .qt-bar i {
   display: block; height: 100%; border-radius: inherit;
-  background: linear-gradient(90deg, #ffe89a, #e09b1c);
+  background: linear-gradient(90deg, #ffd979, #e09a1f);
 }
-.qt-row.done .qt-bar i { background: linear-gradient(90deg, #b9ec8c, #59a530); }
+.qt-row.done .qt-bar i { background: linear-gradient(90deg, #b7ef7e, #4fa525); }
 
-/* Nút "xem tất cả" là một hàng bấm được, không phải link gạch chân kiểu HTML. */
 .qt-more {
   align-self: stretch;
-  min-height: 23px; border: 0; border-radius: 8px; cursor: pointer;
-  background: rgba(24, 12, 4, .3); color: var(--glass-ink-soft);
-  font: inherit; font-size: 11px; font-weight: 700;
-  box-shadow: inset 0 0 0 1px rgba(247, 214, 140, .18);
+  min-height: 21px; border: 0; border-radius: 8px; cursor: pointer;
+  background: rgba(180, 138, 96, .2); color: var(--plate-ink-soft);
+  font: inherit; font-size: 10.5px; font-weight: 800;
 }
 .qt-more:active { transform: translateY(1px); }
 
@@ -466,32 +458,19 @@ html, body {
 
 /* ---------- Pill chung (tiền tệ, nhãn) ---------- */
 .pill {
-  background: var(--glass-scrim);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
+  background: var(--plate);
+  -webkit-backdrop-filter: var(--plate-blur);
+  backdrop-filter: var(--plate-blur);
   border: 0;
   border-radius: 999px;
-  padding: 5px 14px 5px 5px;
-  font-size: 14px;
+  padding: 3px 11px 3px 3px;
+  font-size: 12.5px;
   font-weight: 800;
-  letter-spacing: .2px;
-  color: var(--glass-ink);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .28),
-    inset 0 1px 0 rgba(255, 255, 255, .5),
-    var(--glass-shadow);
+  color: var(--plate-ink);
+  box-shadow: var(--plate-frame), var(--plate-shadow);
 }
-.currency { display: inline-flex; align-items: center; gap: 7px; }
-
-/* Ví nằm trong tấm .hud-identity nên pill bỏ nền và bóng riêng: kính lồng kính
-   làm góc trái đục lại và mỗi số tiền thành một viên rời. */
-.hud-wallet .pill {
-  flex: 1 1 0; min-width: 0;
-  background: none; -webkit-backdrop-filter: none; backdrop-filter: none;
-  box-shadow: none; padding: 0; font-size: 13.5px;
-}
-.hud-wallet .dot { width: 19px; height: 19px; }
+.currency { display: inline-flex; align-items: center; gap: 5px; }
+.hud-wallet .dot { width: 18px; height: 18px; }
 
 /* Xu và ngọc vẽ thành hai vật thể khác chất, không phải hai chấm tròn đổi màu. */
 .dot { width: 22px; height: 22px; display: inline-block; flex: 0 0 auto; }
@@ -693,16 +672,14 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
 
 /* Cửa sổ thấp (laptop nhỏ, ngang trên điện thoại): thu gọn HUD. */
 @media (max-height: 520px) {
-  .pill { padding: 4px 9px; font-size: 12px; }
   #hud { padding: 6px 8px; }
-  #player-card .portrait { width: 46px; height: 46px; }
-  #player-card .name { font-size: 14.5px; }
+  #player-card .portrait { width: 38px; height: 38px; }
   /* Cửa sổ thấp: bảng nhiệm vụ gọn lại, chỉ giữ một dòng thông tin mỗi mục. */
-  :root { --hud-col: 232px; }
-  #quest-tracker { padding: 6px 7px 7px; gap: 5px; }
+  #quest-tracker { width: 236px; }
+  #quest-tracker .qt-body { padding: 6px 8px 7px; gap: 5px; }
   #quest-tracker .qt-sub { display: none; }
-  .icon-btn { width: 62px; }
-  .icon-btn-face { width: 36px; height: 36px; }
-  .icon-btn-face svg { width: 19px; height: 19px; }
-  #chat-stream { max-height: 54px; }
+  .icon-btn { width: 58px; }
+  .icon-btn-face { width: 34px; height: 34px; }
+  .icon-btn-face svg { width: 18px; height: 18px; }
+  #chat-stream { max-height: 52px; }
 }

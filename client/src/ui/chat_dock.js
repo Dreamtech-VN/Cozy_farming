@@ -12,8 +12,9 @@ export class ChatDock {
     this.root = document.getElementById('chat-dock');
     this.stream = document.getElementById('chat-stream');
     this.input = document.getElementById('chat-input');
-    this.scope = document.getElementById('chat-scope');
+    this.scopeSwitch = document.getElementById('chat-scope');
     this.form = document.getElementById('chat-entry');
+    this.scope = 'map';
 
     this.form.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -24,15 +25,26 @@ export class ChatDock {
       if (event.key === 'Escape') this.input.blur();
       event.stopPropagation();
     });
-    this.scope.addEventListener('change', () => this.loadHistory());
+    // Chọn kênh bằng hai nút gạt thay cho <select>: đúng bố cục mẫu và không
+    // phải mở menu hệ thống mới đổi được kênh.
+    this.scopeSwitch.addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-scope]');
+      if (!button || button.dataset.scope === this.scope) return;
+      this.scope = button.dataset.scope;
+      for (const b of this.scopeSwitch.querySelectorAll('button')) {
+        b.setAttribute('aria-pressed', b.dataset.scope === this.scope ? 'true' : 'false');
+      }
+      this.loadHistory();
+    });
     document.getElementById('chat-emote').addEventListener('click', () => this.#openEmotes());
+    document.getElementById('chat-action').addEventListener('click', () => this.#openEmotes());
   }
 
   show() { this.root.classList.remove('hidden'); }
 
   /** Nạp lịch sử của kênh đang chọn. */
   async loadHistory() {
-    const channel = this.scope.value;
+    const channel = this.scope;
     const scopeId = channel === 'map' ? this.game.currentMap?.map_id : null;
     this.stream.replaceChildren();
     try {
@@ -68,7 +80,7 @@ export class ChatDock {
     const body = this.input.value.trim();
     if (!body) return;
     this.input.value = '';
-    const channel = this.scope.value;
+    const channel = this.scope;
     try {
       if (channel === 'map') this.game.realtime.send({ type: 'chat', body });
       else await this.game.api.post('/v1/chat/messages', { channel, body });

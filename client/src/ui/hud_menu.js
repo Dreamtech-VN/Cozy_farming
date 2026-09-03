@@ -22,9 +22,19 @@ const icon = (name) =>
   `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
         stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${ICONS[name] ?? ''}</svg>`;
 
+/* Mỗi chức năng một màu riêng: mẫu dùng icon nhiều màu nên người chơi nhận ra
+   nút theo màu trước khi kịp đọc nhãn. Chín đĩa cùng một màu xám thì phải đọc
+   từng chữ mới bấm đúng. */
+const COLORS = {
+  map: '#4fb0d8', shop: '#f07fa8', channel: '#9a86e0', event: '#f5a63c',
+  quests: '#f2c53d', inventory: '#d99152', farm: '#69c163', social: '#5aa9e6',
+  profile: '#ef7d6b',
+};
+
 function button(item, game) {
   return el('button', {
     class: 'icon-btn', type: 'button', 'data-key': item.key, title: item.title ?? item.label,
+    style: `--btn-color: ${COLORS[item.key] ?? '#8fa5b8'}`,
     onClick: () => {
       const alreadyOpen = document.querySelector(`.icon-btn[data-key="${item.key}"][aria-pressed="true"]`);
       closePanel();

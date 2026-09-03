@@ -3,6 +3,28 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.3.2 — 2026-09-03
+
+### Thay đổi
+Dựng lại HUD bám đúng ảnh mẫu, sửa năm chỗ lệch về cấu trúc chứ không chỉ màu:
+
+- **Tấm HUD đổi từ kính TỐI sang tấm KEM SÁNG chữ nâu.** Mẫu chỉ để khung chat
+  là tấm tối; để cả HUD tối như bản trước thì mọi góc màn hình nặng như thanh
+  công cụ, mất hẳn tông cozy.
+- **Cụm nhân vật thành viên nang ngang** (khung avatar vuông bo tròn + tên +
+  thanh XP), **ví tách thành hàng pill riêng** ngay dưới — bản trước gộp cả hai
+  vào một tấm to, mẫu để rời.
+- **Nút chức năng thành đĩa tròn nhiều màu**, mỗi chức năng một màu (`--btn-color`
+  gắn trong `hud_menu.js`). Chín đĩa cùng màu xám thì phải đọc từng chữ mới bấm
+  đúng nút.
+- **Khung chat về lại dưới giữa** với đúng ba tầng của mẫu: hàng công cụ (Biểu
+  cảm / Động tác) ở trên, dòng chat trên tấm tối ở giữa, hàng nhập ở dưới. Ô
+  chọn kênh `<select>` thay bằng **hai nút gạt Khu / Thế giới**, nút gửi thành
+  đĩa tròn. Bề ngang trừ chỗ cho hai cụm nút hai bên nên cửa sổ hẹp không bị
+  chồng lên nhau.
+- **Bảng nhiệm vụ lấy lại nhãn `[loại]` có màu** đứng trước tên nhiệm vụ, hàng
+  tab tách thành thanh gạt riêng phía trên thân bảng.
+
 ## 0.3.1 — 2026-09-03
 
 ### Thay đổi
