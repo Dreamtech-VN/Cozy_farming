@@ -3,6 +3,18 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.1.17 — 2026-09-02
+
+### Thêm mới
+- **Bảng theo dõi nhiệm vụ trên HUD**, ngay dưới cụm thông tin nhân vật (doc 11,
+  doc 12). Hiện tối đa 3 nhiệm vụ đang làm, ưu tiên mục đã hoàn thành chưa nhận
+  thưởng, rồi tới cốt truyện, phụ, hằng ngày, hằng tuần.
+  - Mỗi mục có tên, loại, thanh tiến độ và số đếm; mục hoàn thành đổi thanh sang
+    vàng kèm nút **Nhận** để lấy thưởng ngay trên HUD, khỏi mở panel.
+  - Nút **Xem tất cả** mở panel Nhiệm vụ đầy đủ.
+  - Bảng tự làm mới sau mọi hành động đổi tiến độ (thu hoạch, kết thúc trận
+    Match-3, nói chuyện NPC, đổi map, nhận thưởng) và quét lại mỗi 20 giây.
+
 ## 0.1.16 — 2026-09-02
 
 ### Sửa lỗi

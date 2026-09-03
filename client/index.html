@@ -14,7 +14,7 @@
 
     <!-- HUD (doc 12 — world là trung tâm, UI là overlay) -->
     <header id="hud" class="hidden">
-      <!-- Trái: thông tin nhân vật -->
+      <!-- Trái: thông tin nhân vật, rồi bảng nhiệm vụ -->
       <div class="hud-left">
         <button id="player-card" type="button" aria-label="Mở thông tin nhân vật">
           <span class="portrait">
@@ -43,6 +43,10 @@
             </span>
           </span>
         </button>
+
+        <!-- Bảng theo dõi nhiệm vụ, ngay dưới cụm nhân vật. Nội dung do
+             client/src/ui/quest_tracker.js dựng từ /v1/quests. -->
+        <section id="quest-tracker" class="hidden" aria-label="Nhiệm vụ đang làm"></section>
       </div>
 
       <!-- Phải: ví tiền, minimap, rồi khu + trạng thái thế giới -->

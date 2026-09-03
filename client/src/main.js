@@ -10,6 +10,7 @@ import { WorldRenderer } from './render/world.js';
 import { drawAvatarPortrait } from './render/avatar.js';
 import { levelProgress } from './core/progression.js';
 import { WorldClock, weatherIcon } from './core/world_clock.js';
+import { renderQuestTracker, claimFromTracker } from './ui/quest_tracker.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
@@ -191,6 +192,9 @@ class Game {
       // Đồng hồ chạy cục bộ mỗi giây; hỏi lại server mỗi phút để không trôi lệch.
       setInterval(() => this.#renderWorldClock(), 1000);
       setInterval(() => this.#refreshWorldClock(), 60_000);
+      // Tiến độ nhiệm vụ đổi theo nhiều đường (thu hoạch, trận đấu, NPC), nên
+      // ngoài các điểm gọi tường minh vẫn quét lại định kỳ cho chắc.
+      setInterval(() => this.refreshQuests(), 20_000);
     }
   }
 
@@ -217,6 +221,7 @@ class Game {
     document.getElementById('hud-map').textContent = t(map.name_key);
     await this.#refreshChannels();
     await this.#refreshWorldClock();
+    await this.refreshQuests();
     this.#drawMinimap();
   }
 
@@ -258,6 +263,19 @@ class Game {
     this.profile = await this.api.get('/v1/player/profile');
     this.self.equipment = this.profile.equipment;
     this.#updateHud();
+  }
+
+  /** Bảng nhiệm vụ trên HUD. Gọi lại sau mỗi hành động có thể đổi tiến độ. */
+  async refreshQuests() {
+    try {
+      const { quests } = await this.api.get('/v1/quests');
+      renderQuestTracker(this, quests, {
+        onOpen: () => { closePanel(); openQuests(this); },
+        onClaim: (questId) => claimFromTracker(this, questId),
+      });
+    } catch {
+      // Mất mạng thì giữ nguyên bảng cũ thay vì xoá trắng.
+    }
   }
 
   #updateHud() {
@@ -418,6 +436,7 @@ class Game {
         if (result.dialogue) {
           for (const line of result.dialogue.lines) toast(`${t(target.data.name_key)}: ${t(line)}`);
         }
+        await this.refreshQuests();
         if (target.data.action === 'open_match3') { this.#openMatchPicker(); return; }
         if (result.shop_id) {
           this.content.shopsById.set(result.shop_id, { shop_id: result.shop_id });

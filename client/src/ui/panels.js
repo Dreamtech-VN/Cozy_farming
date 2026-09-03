@@ -32,6 +32,7 @@ export function openQuests(game) {
                   await game.api.post(`/v1/quests/${quest.quest_id}/claim`, {});
                   toast('Đã nhận thưởng', 'good');
                   await game.refreshPlayer();
+                  await game.refreshQuests();
                   rerender();
                 } catch (err) { toast(err.message, 'bad'); }
               },
@@ -186,6 +187,7 @@ export async function harvest(game, plotId, refresh) {
     toast(`Thu hoạch: ${gained}`, 'good');
     await game.refreshPlayer();
     await game.refreshFarm();
+    await game.refreshQuests();
     refresh?.();
   } catch (err) {
     toast(err.message, 'bad');

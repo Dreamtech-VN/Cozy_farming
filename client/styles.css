@@ -68,7 +68,73 @@ html, body {
   padding: calc(8px + env(safe-area-inset-top, 0px)) 10px 8px;
   pointer-events: none;
 }
-.hud-left { display: flex; align-items: flex-start; }
+/* Cột trái: cụm nhân vật ở trên, bảng nhiệm vụ ngay dưới. */
+.hud-left { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+
+/* ---------- Bảng theo dõi nhiệm vụ ---------- */
+#quest-tracker {
+  pointer-events: auto;
+  width: 292px; max-width: calc(100vw - 20px);
+  margin-left: 8px;
+  padding: 9px 12px 10px;
+  display: flex; flex-direction: column; gap: 7px;
+  background: var(--glass-scrim);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .26),
+    inset 0 1px 0 rgba(255, 255, 255, .45),
+    var(--glass-shadow);
+}
+.qt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.qt-title {
+  font-size: 12px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase;
+  color: var(--glass-ink-soft); text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+}
+.qt-more {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font: inherit; font-size: 11.5px; font-weight: 700;
+  color: var(--accent); text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+}
+.qt-more:hover { text-decoration: underline; }
+
+.qt-row { display: flex; flex-direction: column; gap: 4px; }
+.qt-line { display: flex; align-items: center; gap: 8px; }
+.qt-name {
+  flex: 1 1 auto; min-width: 0;
+  font-size: 12.5px; font-weight: 700; color: var(--glass-ink);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .38);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.qt-tag {
+  flex: 0 0 auto; font-size: 10px; font-weight: 700; color: var(--glass-ink-soft);
+  background: rgba(0, 0, 0, .3); border-radius: 999px; padding: 2px 7px;
+}
+.qt-bar {
+  flex: 1 1 auto; height: 6px; border-radius: 999px;
+  background: rgba(255, 255, 255, .16);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .34);
+  overflow: hidden;
+}
+.qt-bar i {
+  display: block; height: 100%; border-radius: 999px;
+  background: linear-gradient(180deg, #b6f06a, #6fbf30);
+  transition: width .3s ease;
+}
+.qt-count {
+  flex: 0 0 auto; font-size: 11px; font-weight: 700;
+  color: var(--glass-ink-soft); font-variant-numeric: tabular-nums;
+}
+.qt-row.done .qt-bar i { background: linear-gradient(180deg, #ffe98a, #f2b529); }
+.qt-claim {
+  flex: 0 0 auto; min-height: 22px; padding: 0 10px;
+  border: 0; border-radius: 999px; cursor: pointer;
+  font: inherit; font-size: 11px; font-weight: 800;
+  background: linear-gradient(180deg, #ffe98a, #f2b529); color: #4a3120;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+}
+.qt-claim:active { transform: translateY(1px); }
 
 /* Cột phải xếp dọc: ví tiền, minimap, rồi dải khu + trạng thái thế giới. */
 .hud-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
@@ -531,6 +597,9 @@ button.primary:active:not(:disabled) { filter: brightness(.92); }
   #player-card canvas { width: 48px; height: 48px; }
   #player-card .banner { min-width: 200px; padding: 5px 11px 5px 28px; }
   #player-card .name { font-size: 15px; max-width: 150px; }
+  /* Cửa sổ thấp: bảng nhiệm vụ gọn lại, chỉ giữ một dòng thông tin mỗi mục. */
+  #quest-tracker { width: 240px; padding: 7px 10px 8px; gap: 5px; }
+  #quest-tracker .qt-tag { display: none; }
   #minimap { padding: 10px; border-radius: 18px; }
   #minimap canvas { width: 150px; height: 64px; }
   #channel-button { min-height: 30px; padding: 0 5px 0 9px; }

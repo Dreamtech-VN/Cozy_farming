@@ -171,6 +171,7 @@ export class Match3Scene {
       ]),
     ]));
     await this.game.refreshPlayer();
+    await this.game.refreshQuests();
   }
 
   async #abandon() {
