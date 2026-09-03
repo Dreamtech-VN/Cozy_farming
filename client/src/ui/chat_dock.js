@@ -3,7 +3,7 @@
  * Luôn thấy vài dòng gần nhất và ô nhập, không phải mở panel mới chat được.
  */
 import { el, toast } from './ui.js';
-import { openSocial } from './panels.js';
+import { openSocial, openSettings } from './panels.js';
 import { markActiveMenu, icon } from './hud_menu.js';
 
 const MAX_LINES = 40;
@@ -39,15 +39,20 @@ export class ChatDock {
       this.loadHistory();
     });
     document.getElementById('chat-emote').addEventListener('click', () => this.#openEmotes());
-    // Nút Bạn bè dùng chung kiểu icon với HUD nên dựng nội dung ở đây.
-    const friends = document.getElementById('chat-friends');
-    friends.dataset.key = 'social';
-    friends.style.setProperty('--btn-color', '#5aa9e6');
-    friends.replaceChildren(
-      el('span', { class: 'icon-btn-face', html: icon('friends') }),
-      el('span', { class: 'icon-btn-label', text: 'Bạn bè' }),
-    );
-    friends.addEventListener('click', () => { openSocial(this.game); markActiveMenu('social'); });
+    // Hai nút cạnh chat dùng chung kiểu icon với HUD nên dựng nội dung ở đây.
+    const sideButton = (id, key, iconName, label, run) => {
+      const node = document.getElementById(id);
+      node.dataset.key = key;
+      node.replaceChildren(
+        el('span', { class: 'icon-btn-face', html: icon(iconName) }),
+        el('span', { class: 'icon-btn-label', text: label }),
+      );
+      node.addEventListener('click', run);
+    };
+    sideButton('chat-settings', 'settings', 'settings', 'Cài đặt',
+      () => { openSettings(this.game); markActiveMenu('settings'); });
+    sideButton('chat-friends', 'social', 'friends', 'Bạn bè',
+      () => { openSocial(this.game); markActiveMenu('social'); });
   }
 
   show() { this.root.classList.remove('hidden'); }

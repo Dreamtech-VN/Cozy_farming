@@ -16,7 +16,7 @@ import { ChatDock } from './ui/chat_dock.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
-import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openChannelPicker, openLiveOps, energyLine } from './ui/panels.js';
+import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openChannelPicker, openLiveOps, openMenu, openSettings, energyLine } from './ui/panels.js';
 
 const GRAVITY = 1800;
 const RUN_SPEED = 260;
@@ -73,23 +73,26 @@ class Game {
   }
 
   #bindUi() {
+    const menuHandlers = {
+      quests: () => { openQuests(this); markActiveMenu('menu'); },
+      inventory: () => { openInventory(this); markActiveMenu('menu'); },
+      farm: () => { openFarm(this); markActiveMenu('menu'); },
+      channel: () => { openChannelPicker(this); markActiveMenu('menu'); },
+    };
+    this.menuHandlers = menuHandlers;
+
     buildHudMenus(this, {
       map: () => { openAreaMap(this); markActiveMenu('map'); },
       shop: () => { openShop(this, 'shop_general'); markActiveMenu('shop'); },
-      channel: () => { openChannelPicker(this); markActiveMenu('channel'); },
       event: () => { openLiveOps(this); markActiveMenu('event'); },
-      quests: () => { openQuests(this); markActiveMenu('quests'); },
-      inventory: () => { openInventory(this); markActiveMenu('inventory'); },
-      farm: () => { openFarm(this); markActiveMenu('farm'); },
-      social: () => { openSocial(this); markActiveMenu('social'); },
-      profile: () => { openProfile(this); markActiveMenu('profile'); },
+      menu: () => { openMenu(this, menuHandlers); markActiveMenu('menu'); },
     });
 
     // Cụm thông tin nhân vật mở thẳng panel Nhân vật.
     document.getElementById('player-card').addEventListener('click', () => {
       closePanel();
       openProfile(this);
-      markActiveMenu('profile');
+      markActiveMenu(null);
     });
 
     // Dấu cộng cạnh ví dẫn tới cửa hàng.
@@ -106,7 +109,7 @@ class Game {
       const plot = this.farm.plots.find((p) => p.screen && Math.abs(p.screen.x - point.x) < 46 && Math.abs(p.screen.y - point.y) < 70);
       if (!plot) return;
       if (plot.state === 'mature') harvest(this, plot.plot_id, () => this.refreshFarm());
-      else { openFarm(this); markActiveMenu('farm'); }
+      else { openFarm(this); markActiveMenu('menu'); }
     });
   }
 
@@ -168,7 +171,6 @@ class Game {
     this.profile = profile;
 
     document.getElementById('hud').classList.remove('hidden');
-    document.getElementById('menu-bottom').classList.remove('hidden');
     this.chatDock ??= new ChatDock(this);
     this.chatDock.show();
 
@@ -243,16 +245,23 @@ class Game {
     this.#updateHud();
   }
 
+  /** Đăng xuất: báo server rồi xoá phiên và tải lại trang cho sạch trạng thái. */
+  async logout() {
+    try { await this.api.post('/v1/auth/logout', {}); } catch { /* hết hạn rồi thì thôi */ }
+    this.api.setSession(null);
+    location.reload();
+  }
+
   /** Bảng nhiệm vụ trên HUD. Gọi lại sau mỗi hành động có thể đổi tiến độ. */
   async refreshQuests() {
     try {
       const { quests } = await this.api.get('/v1/quests');
       renderQuestTracker(this, quests, {
-        onOpen: () => { closePanel(); openQuests(this); markActiveMenu('quests'); },
+        onOpen: () => { closePanel(); openQuests(this); markActiveMenu('menu'); },
         onClaim: (questId) => claimFromTracker(this, questId),
       });
       // Chấm đỏ trên nút Nhiệm vụ khi có phần thưởng chờ nhận.
-      markMenuBadge('quests', quests.some((quest) => quest.state === 'completed'));
+      markMenuBadge('menu', quests.some((quest) => quest.state === 'completed'));
     } catch {
       // Mất mạng thì giữ nguyên bảng cũ thay vì xoá trắng.
     }

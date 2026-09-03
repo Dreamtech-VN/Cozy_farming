@@ -16,10 +16,21 @@ export const el = (tag, props = {}, children = []) => {
 };
 
 let openPanel = null;
+let openPanelKey = null;
+
+/** Panel nào đang mở — nút HUD dựa vào đây để biết bấm lần nữa là đóng hay mở. */
+export function currentPanelKey() { return openPanelKey; }
+
+// Esc đóng panel đang mở. Trước đây chỉ có nút × nên panel che mất cụm nút cạnh
+// chat mà không có cách nào đóng nhanh bằng bàn phím.
+addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && openPanel) { closePanel(); event.stopPropagation(); }
+});
 
 export function closePanel() {
   openPanel?.remove();
   openPanel = null;
+  openPanelKey = null;
   for (const button of document.querySelectorAll('.icon-btn')) button.setAttribute('aria-pressed', 'false');
 }
 
@@ -36,6 +47,7 @@ export function showPanel(title, buildBody, { footer = null, key = null } = {}) 
   ]);
   panels.append(panel);
   openPanel = panel;
+  openPanelKey = key;
 
   const render = () => { body.replaceChildren(); buildBody(body, render); };
   render();

@@ -25,7 +25,7 @@
           <span class="banner">
             <span class="name" id="hud-name">—</span>
             <span class="banner-bottom">
-              <span class="lv-label" aria-label="Cấp"></span><b class="lv-value" id="hud-level">1</b>
+              <span class="lv-value">Lv <b id="hud-level">1</b></span>
               <!-- Số XP nằm TRÊN thanh như mẫu, không tách thành chữ rời bên phải. -->
               <span class="xp-bar">
                 <span class="xp-fill" id="hud-xp-fill"></span>
@@ -52,14 +52,14 @@
       </div>
     </header>
 
-    <!-- Góc dưới phải: các nút dùng nhiều nhất -->
-    <nav id="menu-bottom" class="icon-row hidden" aria-label="Truy cập nhanh"></nav>
-
     <!-- Dưới giữa: khung chat -->
     <section id="chat-dock" class="hidden" aria-label="Trò chuyện">
-      <!-- Nút Bạn bè đứng RIÊNG bên trái khối chat, đúng vị trí 好友 trong mẫu.
-           Nội dung nút dựng ở chat_dock.js để dùng chung icon với HUD. -->
-      <button id="chat-friends" class="icon-btn" type="button"></button>
+      <!-- Cột nút bên trái khối chat: Cài đặt ở trên, Bạn bè ở dưới. Nội dung
+           dựng ở chat_dock.js để dùng chung icon với HUD. -->
+      <div class="chat-side">
+        <button id="chat-settings" class="icon-btn" type="button"></button>
+        <button id="chat-friends" class="icon-btn" type="button"></button>
+      </div>
       <!-- Ba tầng dính liền thành một khối: hàng công cụ, khung tin, hàng nhập. -->
       <div class="chat-col">
         <div class="chat-tools">

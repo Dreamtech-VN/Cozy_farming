@@ -3,7 +3,7 @@
  * Mỗi nút là icon + nhãn, dựng từ một bảng khai báo nên thêm tính năng mới chỉ
  * cần thêm một dòng.
  */
-import { el, closePanel } from './ui.js';
+import { el, closePanel, currentPanelKey } from './ui.js';
 
 /**
  * Icon là ảnh thật trong bộ Cozy UI Pack (xem client/assets/ATTRIBUTION.md).
@@ -17,7 +17,10 @@ function button(item, game) {
   return el('button', {
     class: 'icon-btn', type: 'button', 'data-key': item.key, title: item.title ?? item.label,
     onClick: () => {
-      const alreadyOpen = document.querySelector(`.icon-btn[data-key="${item.key}"][aria-pressed="true"]`);
+      // Phải so với panel ĐANG mở, không phải trạng thái sáng của nút: panel con
+      // mở từ bảng Menu cũng làm nút Menu sáng, khi đó bấm Menu phải mở lại bảng
+      // chứ không phải đóng suông.
+      const alreadyOpen = currentPanelKey() === item.key;
       closePanel();
       if (!alreadyOpen) item.run(game);
     },
@@ -33,23 +36,31 @@ function button(item, game) {
  *        biết gì về từng panel cụ thể.
  */
 export function buildHudMenus(game, handlers) {
+  // Hàng trên phải giữ đúng những thứ bấm liên tục; phần còn lại nằm sau nút
+  // Menu để góc màn hình không thành một dãy icon dài.
   const top = [
     { key: 'map', icon: 'map', label: 'Bản đồ', run: handlers.map },
     { key: 'shop', icon: 'shop', label: 'Cửa hàng', run: handlers.shop },
-    // Nhãn phải vừa bề ngang nút; tên đầy đủ để ở tooltip.
-    { key: 'channel', icon: 'channel', label: 'Đổi khu', title: 'Chuyển khu', run: handlers.channel },
     { key: 'event', icon: 'event', label: 'Sự kiện', run: handlers.event },
+    { key: 'menu', icon: 'menu', label: 'Menu', run: handlers.menu },
   ];
-  // Hàng dưới phải đúng 4 nút như mẫu; Bạn bè đã có nút riêng cạnh khung chat.
-  const bottom = [
+  document.getElementById('menu-top').replaceChildren(...top.map((item) => button(item, game)));
+}
+
+/** Các mục nằm trong bảng Menu. Dựng ở đây để dùng chung kiểu nút với HUD. */
+export function buildMenuPanel(game, body, handlers) {
+  const items = [
     { key: 'quests', icon: 'quest', label: 'Nhiệm vụ', run: handlers.quests },
     { key: 'inventory', icon: 'bag', label: 'Túi đồ', run: handlers.inventory },
     { key: 'farm', icon: 'home', label: 'Nông trại', run: handlers.farm },
-    { key: 'profile', icon: 'dress', label: 'Nhân vật', run: handlers.profile },
+    { key: 'channel', icon: 'channel', label: 'Đổi khu', run: handlers.channel },
   ];
-
-  document.getElementById('menu-top').replaceChildren(...top.map((i) => button(i, game)));
-  document.getElementById('menu-bottom').replaceChildren(...bottom.map((i) => button(i, game)));
+  body.append(el('div', { class: 'menu-grid' }, items.map((item) => el('button', {
+    class: 'menu-item', type: 'button', onClick: () => item.run(game),
+  }, [
+    el('span', { class: 'icon-btn-face', html: icon(item.icon) }),
+    el('span', { class: 'menu-item-label', text: item.label }),
+  ]))));
 }
 
 /** Bật/tắt chấm đỏ báo việc trên một nút, như các icon có chấm trong mẫu. */

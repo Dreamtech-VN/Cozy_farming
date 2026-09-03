@@ -91,13 +91,7 @@ html, body {
    Mẫu KHÔNG có đĩa nền: icon là một hình đặc màu có viền trắng, đứng thẳng trên
    cảnh, nhãn ngay dưới. Đĩa nền như bản trước làm cả góc màn hình nặng thêm chín
    mảng tròn. */
-.icon-grid, .icon-row { display: flex; gap: 6px; pointer-events: auto; }
-.icon-grid { flex-wrap: wrap; justify-content: flex-end; max-width: 300px; }
-
-#menu-bottom {
-  position: absolute; z-index: 5;
-  right: 9px; bottom: calc(9px + var(--safe));
-}
+.icon-grid { display: flex; gap: 6px; pointer-events: auto; flex-wrap: wrap; justify-content: flex-end; max-width: 300px; }
 
 .icon-btn {
   position: relative;
@@ -145,13 +139,16 @@ html, body {
   display: flex; align-items: flex-end; gap: 6px;
   pointer-events: none;
 }
-/* Nút Bạn bè bên trái là nút icon bình thường nên phải bấm được. */
-#chat-friends { pointer-events: auto; flex: 0 0 auto; margin-bottom: 2px; }
+/* Cột nút bên trái khối chat: Cài đặt trên, Bạn bè dưới. */
+.chat-side {
+  pointer-events: auto; flex: 0 0 auto;
+  display: flex; flex-direction: column; gap: 4px; margin-bottom: 2px;
+}
 
 .chat-col {
-  /* Chừa chỗ cho hai cụm nút hai bên: cửa sổ hẹp mà không trừ đủ thì hàng nhập
-     chui xuống dưới cụm nút góc dưới phải. */
-  width: min(400px, max(230px, calc(100vw - 760px)));
+  /* Góc dưới phải không còn hàng nút nên khung chat rộng ra được; vẫn chừa chỗ
+     cho cột nút cạnh chat và cụm nhân vật bên trái. */
+  width: min(430px, max(250px, calc(100vw - 460px)));
   display: flex; flex-direction: column; align-items: stretch;
 }
 
@@ -323,19 +320,14 @@ html, body {
 }
 
 #player-card .banner-bottom { display: flex; align-items: center; gap: 5px; }
-/* Huy hiệu trong pack đã in sẵn chữ "LVL" nên số cấp đứng CẠNH huy hiệu; đặt
-   chồng lên thì hai lớp chữ đè nhau, không đọc được. */
-#player-card .lv-label {
-  flex: 0 0 auto;
-  width: 22px; height: 22px;
-  background: url('/assets/icons/level.png') center/contain no-repeat;
-  filter: drop-shadow(0 1px 2px rgba(40, 26, 14, .4));
-}
+/* Cấp viết gọn bằng chữ: huy hiệu trong pack đã in sẵn chữ "LVL" nên ghép thêm
+   số vào là hai lớp chữ chen nhau, mà tách ra thì thừa một hình. */
 #player-card .lv-value {
-  flex: 0 0 auto; margin-left: -2px;
-  color: #fff; font-size: 12px; font-weight: 800; line-height: 1;
-  text-shadow: 0 1px 2px rgba(40, 26, 14, .6);
+  flex: 0 0 auto;
+  color: var(--gold); font-size: 11px; font-weight: 800; line-height: 1;
+  white-space: nowrap; text-shadow: 0 1px 2px rgba(40, 26, 14, .6);
 }
+#player-card .lv-value b { color: #fff; font-size: 12px; }
 
 /* Thanh XP mang luôn con số bên trong, như mẫu. */
 #player-card .xp-bar {
@@ -700,6 +692,22 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
   #quest-tracker .qt-desc { -webkit-line-clamp: 1; }
   .icon-btn { width: 50px; }
   .icon-btn-face { width: 30px; height: 30px; }
-  .icon-btn-face svg { width: 28px; height: 28px; }
+  .icon-btn-face img { width: 30px; height: 30px; }
   #chat-stream { max-height: 52px; }
 }
+
+/* ---------- Bảng Menu ----------
+   Các chức năng ít bấm gom vào đây; nút dùng lại art icon của HUD. */
+.menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.menu-item {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  padding: 10px 4px 8px;
+  border: 10px solid transparent;
+  border-image: url('/assets/ui/btn-cream.png') 54 fill / 10px / 0 round;
+  color: var(--ink); font: inherit; font-size: 12px; font-weight: 800;
+  cursor: pointer;
+}
+.menu-item:active { transform: translateY(1px); }
+.menu-item .icon-btn-face { width: 40px; height: 40px; }
+.menu-item .icon-btn-face img { width: 40px; height: 40px; }
+.menu-item-label { text-shadow: var(--ui-text-shadow); }

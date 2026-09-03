@@ -2,6 +2,8 @@
 import { el, showPanel, toast, emptyState, confirmAction, closePanel } from './ui.js';
 import { t, formatNumber, formatDuration } from '../core/i18n.js';
 import { drawAreaMap, drawWorldAtlas } from './map_draw.js';
+import { buildMenuPanel } from './hud_menu.js';
+import { i18n } from '../core/i18n.js';
 
 const itemName = (game, itemId) => t(game.content.itemsById.get(itemId)?.name_key ?? itemId);
 const cosmeticName = (game, itemId) => t(game.content.avatarItemsById.get(itemId)?.name_key ?? itemId);
@@ -540,3 +542,55 @@ const SLOT_NAME = {
 };
 
 export { closePanel };
+
+/** Bảng Menu: gom các chức năng không cần bấm liên tục. */
+export function openMenu(game, handlers) {
+  showPanel('Menu', (body) => buildMenuPanel(game, body, handlers), { key: 'menu' });
+}
+
+/** Cài đặt: chỉ những thứ client thật sự làm được. */
+export function openSettings(game) {
+  showPanel('Cài đặt', async (body, rerender) => {
+    body.append(el('div', { class: 'row' }, [
+      el('div', { class: 'grow' }, [
+        el('div', { class: 'title', text: 'Ngôn ngữ' }),
+        el('div', { class: 'sub', text: 'Đổi ngôn ngữ hiển thị của toàn bộ giao diện.' }),
+      ]),
+      ...['vi', 'en'].map((locale) => el('button', {
+        class: i18n.locale === locale ? 'primary' : 'ghost', type: 'button',
+        text: locale === 'vi' ? 'Tiếng Việt' : 'English',
+        disabled: i18n.locale === locale,
+        onClick: async () => {
+          try {
+            await i18n.load(game.api, locale);
+            // Nhãn nhiệm vụ và tên map lấy từ bảng dịch nên phải vẽ lại.
+            await game.refreshQuests();
+            rerender();
+            toast('Đã đổi ngôn ngữ', 'good');
+          } catch (err) { toast(err.message, 'bad'); }
+        },
+      })),
+    ]));
+
+    body.append(el('div', { class: 'row' }, [
+      el('div', { class: 'grow' }, [
+        el('div', { class: 'title', text: 'Phiên bản nội dung' }),
+        el('div', { class: 'sub', text: game.content?.version ?? '—' }),
+      ]),
+    ]));
+
+    body.append(el('div', { class: 'row' }, [
+      el('div', { class: 'grow' }, [
+        el('div', { class: 'title', text: 'Tài khoản' }),
+        el('div', { class: 'sub', text: game.profile?.nickname ?? '—' }),
+      ]),
+      el('button', {
+        class: 'ghost', type: 'button', text: 'Đăng xuất',
+        onClick: async () => {
+          if (!(await confirmAction('Đăng xuất khỏi tài khoản này?'))) return;
+          await game.logout();
+        },
+      }),
+    ]));
+  }, { key: 'settings' });
+}

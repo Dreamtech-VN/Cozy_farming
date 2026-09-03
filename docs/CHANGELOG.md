@@ -3,6 +3,28 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.4.1 — 2026-09-03
+
+### Thay đổi
+- **Bỏ hẳn hàng nút góc dưới phải.** Nhiệm vụ, Túi đồ, Nông trại chuyển vào bảng
+  **Menu** mở từ nút burger ở hàng trên phải; Nhân vật mở bằng cách bấm vào cụm
+  avatar. Hàng trên phải còn: Bản đồ, Cửa hàng, Sự kiện, Menu.
+- **Đổi khu** rời khỏi HUD, nằm trong bảng Menu.
+- **Thêm nút Cài đặt** phía trên nút Bạn bè cạnh khung chat: đổi ngôn ngữ
+  (Tiếng Việt / English), xem phiên bản nội dung, đăng xuất.
+- **Cấp viết gọn thành chữ `Lv 1`.** Huy hiệu trong pack đã in sẵn chữ "LVL" nên
+  ghép số vào là hai lớp chữ chen nhau, mà tách ra thì thừa một hình.
+- **Icon Bản đồ đổi sang ghim bản đồ.** Icon cũ (`IconsDefault10`) là đồng hồ
+  bấm giờ chứ không phải la bàn.
+- Khung chat rộng thêm vì góc dưới phải đã trống.
+
+### Sửa
+- Nút HUD so trạng thái bật/tắt bằng `aria-pressed` của chính nó, nên sau khi mở
+  panel con từ bảng Menu (panel con cũng làm nút Menu sáng) thì bấm Menu chỉ đóng
+  suông chứ không mở lại bảng. Nay so với panel đang mở thật (`currentPanelKey`).
+- Esc đóng panel đang mở. Trước chỉ có nút ×, mà panel lại che đúng cụm nút cạnh
+  khung chat nên không bấm được gì.
+
 ## 0.4.0 — 2026-09-03
 
 ### Thay đổi

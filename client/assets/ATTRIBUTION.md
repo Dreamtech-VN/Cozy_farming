@@ -26,9 +26,11 @@ tác giả trên itch.io.
 | `ui/slot-selected.png` | `Inventory/ItemSlots/ItemSlotsSelected/ItemSlotSelected1.png` |
 | `ui/arrow-down.png` | `Arrows/BrownOutline/ArrowBrownOuline18.png` |
 | `ui/check.png` | `Checkboxes/Checkbox2_checked.png` |
-| `icons/map.png` | `Icons/IconsDefault/128px/IconsDefault10_128px.png` |
+| `icons/map.png` | `Icons/IconsDefault/128px/IconsDefault51_128px.png` |
 | `icons/shop.png` | `Icons/IconsDefault/128px/IconsDefault12_128px.png` |
-| `icons/channel.png` | `Icons/IconsDefault/128px/IconsDefault20_128px.png` |
+| `icons/channel.png` | `Icons/IconsDefault/128px/IconsDefault42_128px.png` |
+| `icons/menu.png` | `Icons/IconsDefault/128px/IconsDefault20_128px.png` |
+| `icons/settings.png` | `Icons/IconsDefault/128px/IconsDefault14_128px.png` |
 | `icons/event.png` | `Icons/IconsDefault/128px/IconsDefault28_128px.png` |
 | `icons/quest.png` | `Icons/IconsDefault/128px/IconsDefault13_128px.png` |
 | `icons/bag.png` | `Icons/IconsDefault/128px/IconsDefault54_128px.png` |
