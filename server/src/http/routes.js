@@ -10,6 +10,7 @@ import * as quest from '../domain/quest.js';
 import * as social from '../domain/social.js';
 import * as shop from '../domain/shop.js';
 import * as account from '../domain/account.js';
+import * as mail from '../domain/mail.js';
 import { getWallet, regenerateEnergy } from '../domain/economy.js';
 import { worldState } from '../domain/world_clock.js';
 import { logEvent, summarize } from '../domain/analytics.js';
@@ -72,6 +73,12 @@ export function registerRoutes(router, ctx) {
   router.post('/v1/giftcodes/redeem', ({ character, body }) => ({
     body: account.redeemGiftcode(db, content, character, character.user_id, body.code),
   }));
+
+  // ---------- Hòm thư (doc 08) ----------
+  router.get('/v1/mails', ({ character }) => ({ body: mail.listMails(db, content, character.id) }));
+  router.post('/v1/mails/:mailId/read', ({ character, params }) => ({ body: mail.markRead(db, character.id, params.mailId) }));
+  router.post('/v1/mails/:mailId/claim', ({ character, params }) => ({ body: mail.claimMail(db, content, character.id, params.mailId) }));
+  router.delete('/v1/mails/:mailId', ({ character, params }) => ({ body: mail.deleteMail(db, character.id, params.mailId) }));
 
   // ---------- Player (doc 15 §Player) ----------
   router.get('/v1/player/profile', ({ character }) => ({ body: player.getProfile(db, content, character.id) }));

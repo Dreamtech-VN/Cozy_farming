@@ -18,7 +18,7 @@ import { ChatDock } from './ui/chat_dock.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
-import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openLiveOps, openMenu, openSettings, energyLine } from './ui/panels.js';
+import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openLiveOps, openMenu, openMail, openSettings, energyLine } from './ui/panels.js';
 
 const GRAVITY = 1800;
 const RUN_SPEED = 260;
@@ -54,6 +54,7 @@ class Game {
       cropsById: new Map(raw.crops.map((c) => [c.crop_id, c])),
       avatarItemsById: new Map(raw.avatar_items.map((i) => [i.item_id, i])),
       levelsById: new Map(raw.levels.map((l) => [l.level_id, l])),
+      currenciesById: new Map((raw.economy?.currencies ?? []).map((c) => [c.currency_id, c])),
       mapsById: new Map(),
       shopsById: new Map(),
     };
@@ -85,6 +86,7 @@ class Game {
 
     const menuHandlers = {
       inventory: () => { openInventory(this); markActiveMenu('menu'); },
+      mail: () => { openMail(this); markActiveMenu('menu'); },
       map: () => { openAreaMap(this); markActiveMenu('menu'); },
     };
     this.menuHandlers = menuHandlers;
@@ -92,7 +94,7 @@ class Game {
     buildHudMenus(this, {
       shop: () => { openShop(this, 'shop_general'); markActiveMenu('shop'); },
       event: () => { openLiveOps(this); markActiveMenu('event'); },
-      menu: () => { openMenu(this, menuHandlers); markActiveMenu('menu'); },
+      menu: (game, node) => { openMenu(this, menuHandlers, node); markActiveMenu('menu'); },
     });
 
     // Cụm thông tin nhân vật mở thẳng panel Nhân vật.
@@ -220,6 +222,7 @@ class Game {
     await this.#refreshWorldClock();
     await this.refreshQuests();
     await this.chatDock?.loadHistory();
+    await this.refreshMail();
   }
 
   /**
@@ -252,6 +255,22 @@ class Game {
     this.#updateHud();
   }
 
+  /** Nhớ số thư chưa đọc để chấm đỏ trên nút Menu khớp với hòm thư. */
+  setMailCounts({ unread, unclaimed }) {
+    this.mailUnread = unread;
+    this.mailUnclaimed = unclaimed;
+    this.#refreshMenuBadge();
+  }
+
+  async refreshMail() {
+    try { this.setMailCounts(await this.api.get('/v1/mails')); } catch { /* để nguyên số cũ */ }
+  }
+
+  #refreshMenuBadge() {
+    const pending = (this.mailUnread ?? 0) > 0 || (this.questsPending ?? false);
+    markMenuBadge('menu', pending);
+  }
+
   /** Đăng xuất: báo server rồi xoá phiên và tải lại trang cho sạch trạng thái. */
   async logout() {
     try { await this.api.post('/v1/auth/logout', {}); } catch { /* hết hạn rồi thì thôi */ }
@@ -267,8 +286,9 @@ class Game {
         onOpen: () => { closePanel(); openQuests(this); markActiveMenu('menu'); },
         onClaim: (questId) => claimFromTracker(this, questId),
       });
-      // Chấm đỏ trên nút Nhiệm vụ khi có phần thưởng chờ nhận.
-      markMenuBadge('menu', quests.some((quest) => quest.state === 'completed'));
+      // Chấm đỏ trên nút Menu gộp cả nhiệm vụ chờ nhận lẫn thư chưa đọc.
+      this.questsPending = quests.some((quest) => quest.state === 'completed');
+      this.#refreshMenuBadge();
     } catch {
       // Mất mạng thì giữ nguyên bảng cũ thay vì xoá trắng.
     }

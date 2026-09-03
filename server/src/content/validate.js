@@ -193,6 +193,21 @@ export function validateContent(content) {
     }
   }
 
+  // --- Thư hệ thống ---
+  checkDuplicates(issues, content.mails, 'mail_id', 'mails');
+  for (const mail of content.mails) {
+    if (!mail.subject_key || !mail.body_key) issues.push(err('invalid_range', `mail ${mail.mail_id}: thiếu subject_key hoặc body_key`));
+    for (const [currencyId] of Object.entries(mail.attachments?.currencies ?? {})) {
+      if (!currencyIds.has(currencyId)) issues.push(err('missing_ref', `mail ${mail.mail_id}: currency ${currencyId} không tồn tại`));
+    }
+    for (const entry of mail.attachments?.items ?? []) {
+      if (!itemIds.has(entry.item_id)) issues.push(err('missing_ref', `mail ${mail.mail_id}: item ${entry.item_id} không tồn tại`));
+    }
+    for (const cosmetic of mail.attachments?.avatar_items ?? []) {
+      if (!avatarIds.has(cosmetic)) issues.push(err('missing_ref', `mail ${mail.mail_id}: cosmetic ${cosmetic} không tồn tại`));
+    }
+  }
+
   // --- Economy (doc 09: mọi currency phải có source và sink) ---
   for (const currency of content.economy.currencies) {
     if (!(currency.cap > 0)) issues.push(err('invalid_range', `currency ${currency.currency_id}: cap phải > 0`));
@@ -241,6 +256,7 @@ export function collectLocalizationKeys(content) {
     crops: content.crops, items: content.items, avatarItems: content.avatarItems, emotes: content.emotes,
     maps: content.maps, levels: content.levels, quests: content.quests, dialogues: content.dialogues,
     shops: content.shops, economy: content.economy, liveops: content.liveops, world: content.world,
+    giftcodes: content.giftcodes,
   });
   return keys;
 }

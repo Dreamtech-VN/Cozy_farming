@@ -548,9 +548,73 @@ const SLOT_NAME = {
 
 export { closePanel };
 
-/** Bảng Menu: gom các chức năng không cần bấm liên tục. */
-export function openMenu(game, handlers) {
-  showPanel('Menu', (body) => buildMenuPanel(game, body, handlers), { key: 'menu', compact: true });
+/** Bảng Menu: thả ngay dưới nút Menu, không nhảy ra giữa màn hình. */
+export function openMenu(game, handlers, anchor) {
+  showPanel('Menu', (body) => buildMenuPanel(game, body, handlers, { mail: game.mailUnread > 0 }),
+    { key: 'menu', compact: true, anchor });
+}
+
+/** Hòm thư (doc 08). */
+export function openMail(game) {
+  showPanel('Thư', async (body, rerender) => {
+    body.append(emptyState('Đang tải…'));
+    const data = await game.api.get('/v1/mails');
+    game.setMailCounts(data);
+    body.replaceChildren();
+    if (data.mails.length === 0) { body.append(emptyState('Hòm thư trống.')); return; }
+
+    for (const mail of data.mails) {
+      const claimable = mail.has_attachments && !mail.claimed;
+      body.append(el('div', { class: `row mail ${mail.read ? '' : 'unread'}`.trim() }, [
+        el('div', { class: 'grow' }, [
+          el('div', { class: 'title' }, [
+            mail.read ? null : el('i', { class: 'mail-dot' }),
+            el('span', { text: t(mail.subject_key) }),
+          ]),
+          el('div', { class: 'sub', text: t(mail.body_key) }),
+          mail.has_attachments
+            ? el('div', { class: 'sub', text: `Quà: ${describeReward(game, mail.attachments)}` })
+            : null,
+        ]),
+        claimable
+          ? el('button', {
+              class: 'primary', type: 'button', text: 'Nhận',
+              onClick: async () => {
+                try {
+                  await game.api.post(`/v1/mails/${mail.mail_id}/claim`, {});
+                  toast('Đã nhận quà', 'good');
+                  audio.success();
+                  await game.refreshPlayer();
+                  rerender();
+                } catch (err) { toast(err.message, 'bad'); }
+              },
+            })
+          : el('button', {
+              class: 'ghost', type: 'button', text: 'Xoá',
+              onClick: async () => {
+                try {
+                  await game.api.del(`/v1/mails/${mail.mail_id}`);
+                  rerender();
+                } catch (err) { toast(err.message, 'bad'); }
+              },
+            }),
+      ]));
+
+      // Mở panel là coi như đã đọc; không bắt bấm thêm một nút nữa.
+      if (!mail.read) game.api.post(`/v1/mails/${mail.mail_id}/read`, {}).catch(() => {});
+    }
+  }, { key: 'mail' });
+}
+
+/** Mô tả quà đính kèm bằng một dòng chữ. */
+function describeReward(game, reward) {
+  const parts = [];
+  for (const [currencyId, amount] of Object.entries(reward.currencies ?? {})) {
+    parts.push(`${formatNumber(amount)} ${t(game.content.currenciesById?.get(currencyId)?.name_key ?? currencyId)}`);
+  }
+  for (const entry of reward.items ?? []) parts.push(`${itemName(game, entry.item_id)} ×${entry.count}`);
+  for (const cosmetic of reward.avatar_items ?? []) parts.push(cosmeticName(game, cosmetic));
+  return parts.join(' · ');
 }
 
 /** Cài đặt: Đồ hoạ / Âm thanh / Tài khoản. */
@@ -577,7 +641,7 @@ export function openSettings(game) {
     if (settingsTab === 'graphics') graphicsTab(pane);
     else if (settingsTab === 'audio') audioTab(pane);
     else accountTab(game, pane, rerender);
-  }, { key: 'settings' });
+  }, { key: 'settings', fullscreen: true });
 }
 
 /** Một hàng thiết lập: tiêu đề + mô tả bên trái, phần điều khiển bên phải. */

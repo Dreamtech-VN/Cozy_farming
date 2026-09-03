@@ -10,6 +10,7 @@ const KNOWN_EVENTS = new Set([
   'match_start', 'match_win', 'match_loss', 'quest_complete',
   'item_obtained', 'item_spent', 'shop_purchase',
   'friend_request', 'friend_accept', 'chat_sent', 'gift_sent', 'home_visit', 'report',
+  'giftcode_redeem', 'mail_claim',
 ]);
 
 export function logEvent(db, characterId, eventName, payload = {}) {

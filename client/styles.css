@@ -517,6 +517,15 @@ html, body {
 #panels { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
 /* Panel ít nội dung: rộng theo nội dung thay vì trải hết 560px. */
 .panel.compact { width: auto; min-width: 240px; max-width: min(440px, calc(100vw - 24px)); }
+/* Panel nhiều nhóm nội dung trải hết màn hình. */
+.panel.fullscreen {
+  left: 10px; top: calc(10px + env(safe-area-inset-top, 0px)); transform: none;
+  width: calc(100vw - 20px);
+  height: calc(100vh - 20px - var(--safe));
+  max-width: none; max-height: none;
+}
+/* Panel thả xuống dưới nút mở nó: vị trí do showPanel tính từ toạ độ nút. */
+.panel.anchored { left: auto; top: auto; transform: none; }
 .panel {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
   width: min(560px, calc(100vw - 24px));
@@ -700,10 +709,11 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
 
 /* ---------- Bảng Menu ----------
    Các chức năng ít bấm gom vào đây; nút dùng lại art icon của HUD. */
-/* Hai cột cố định: panel hẹp có width auto nên auto-fill không tính được số cột
-   và mọi nút rơi xuống một hàng dọc. */
-.menu-grid { display: grid; grid-template-columns: repeat(2, 96px); gap: 8px; justify-content: center; }
+/* Cột cố định: panel hẹp có width auto nên auto-fill không tính được số cột và
+   mọi nút rơi xuống một hàng dọc. */
+.menu-grid { display: grid; grid-template-columns: repeat(3, 92px); gap: 8px; justify-content: center; }
 .menu-item {
+  position: relative;
   display: flex; flex-direction: column; align-items: center; gap: 5px;
   padding: 10px 4px 8px;
   border: 10px solid transparent;
@@ -715,12 +725,26 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
 .menu-item .icon-btn-face { width: 40px; height: 40px; }
 .menu-item .icon-btn-face img { width: 40px; height: 40px; }
 .menu-item-label { text-shadow: var(--ui-text-shadow); }
+/* Chấm đỏ trên mục có việc chờ, ví dụ thư chưa đọc. */
+.menu-item-dot {
+  position: absolute; top: 4px; right: 4px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #f0483f; box-shadow: 0 0 0 2px #fffaf0;
+}
+
+/* ---------- Hòm thư ---------- */
+.row.mail .title { display: flex; align-items: center; gap: 6px; }
+.row.mail .sub { white-space: normal; }
+.mail-dot {
+  flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%;
+  background: #f0483f;
+}
 
 /* ---------- Điều khiển trong panel Cài đặt ---------- */
 /* Tab xếp dọc bên trái, nội dung bên phải. */
 .tab-layout { display: flex; gap: 10px; align-items: flex-start; }
 .tab-rail {
-  flex: 0 0 auto; width: 108px;
+  flex: 0 0 auto; width: 124px;
   display: flex; flex-direction: column; gap: 4px;
   position: sticky; top: 0;
 }
@@ -735,7 +759,9 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
   border-image-source: url('/assets/ui/btn-wood.png');
   color: var(--ink-cream); text-shadow: 0 1px 2px rgba(60, 34, 12, .6);
 }
-.tab-pane { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+/* Chặn bề ngang phần nội dung: ở chế độ toàn màn hình mà để tự do thì mỗi hàng
+   kéo dài gần 2000px, nhãn một đầu và nút một đầu. */
+.tab-pane { flex: 1 1 auto; min-width: 0; max-width: 760px; display: flex; flex-direction: column; gap: 8px; }
 
 /* Công tắc bật/tắt. */
 .switch {

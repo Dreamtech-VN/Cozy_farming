@@ -43,6 +43,7 @@ export function loadContent({ dataDir, localeDir }) {
     shops: raw.shops.shops,
     economy: raw.economy,
     liveops: raw.liveops,
+    mails: raw.liveops.mails ?? [],
     locales,
 
     byCrop: indexBy(raw.crops.crops, 'crop_id'),

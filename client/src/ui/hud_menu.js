@@ -14,7 +14,7 @@ export const icon = (name) =>
   `<img src="/assets/icons/${name}.png" alt="" width="128" height="128" draggable="false">`;
 
 function button(item, game) {
-  return el('button', {
+  const node = el('button', {
     class: 'icon-btn', type: 'button', 'data-key': item.key, title: item.title ?? item.label,
     onClick: () => {
       // Phải so với panel ĐANG mở, không phải trạng thái sáng của nút: panel con
@@ -22,13 +22,15 @@ function button(item, game) {
       // chứ không phải đóng suông.
       const alreadyOpen = currentPanelKey() === item.key;
       closePanel();
-      if (!alreadyOpen) item.run(game);
+      // Truyền cả nút để panel dạng thả xuống biết neo vào đâu.
+      if (!alreadyOpen) item.run(game, node);
     },
   }, [
     el('span', { class: 'icon-btn-face', html: icon(item.icon) }),
     el('span', { class: 'icon-btn-label', text: item.label }),
     el('i', { class: 'icon-btn-dot hidden' }),
   ]);
+  return node;
 }
 
 /**
@@ -47,16 +49,18 @@ export function buildHudMenus(game, handlers) {
 }
 
 /** Các mục nằm trong bảng Menu. Dựng ở đây để dùng chung kiểu nút với HUD. */
-export function buildMenuPanel(game, body, handlers) {
+export function buildMenuPanel(game, body, handlers, badges = {}) {
   const items = [
     { key: 'inventory', icon: 'bag', label: 'Túi đồ', run: handlers.inventory },
+    { key: 'mail', icon: 'mail', label: 'Thư', run: handlers.mail },
     { key: 'map', icon: 'map', label: 'Bản đồ', run: handlers.map },
   ];
   body.append(el('div', { class: 'menu-grid' }, items.map((item) => el('button', {
-    class: 'menu-item', type: 'button', onClick: () => item.run(game),
+    class: 'menu-item', type: 'button', 'data-key': item.key, onClick: () => item.run(game),
   }, [
     el('span', { class: 'icon-btn-face', html: icon(item.icon) }),
     el('span', { class: 'menu-item-label', text: item.label }),
+    badges[item.key] ? el('i', { class: 'menu-item-dot' }) : null,
   ]))));
 }
 

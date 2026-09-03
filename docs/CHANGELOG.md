@@ -3,6 +3,36 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.6.0 — 2026-09-03
+
+### Thêm mới
+- **Hòm thư** (`Menu → Thư`). Thư hệ thống khai báo trong `data/content/liveops.json`
+  và gửi LƯỜI: chỉ tạo bản ghi khi người chơi mở hòm thư, nên thêm thư mới không
+  phải chạy job ghi hàng loạt cho mọi tài khoản. Quà đính kèm đi qua
+  `economy.applyChange` nên vẫn nguyên tử và idempotent.
+  - `GET /v1/mails`, `POST /v1/mails/:id/read`, `POST /v1/mails/:id/claim`,
+    `DELETE /v1/mails/:id`; migration `003_mail.sql`.
+  - Chấm đỏ trên nút Menu gộp cả nhiệm vụ chờ nhận lẫn thư chưa đọc.
+  - 8 test mới (106 test tổng).
+
+### Thay đổi
+- **Cài đặt mở toàn màn hình.**
+- **Bảng Menu thả ngay dưới nút Menu** thay vì nhảy ra giữa màn hình.
+- **Vẽ lại icon ba lô lần nữa.** Hai bản trước bọc hai lớp nét dày nên nhìn như
+  sticker: soi lại icon của pack ở cỡ lớn mới thấy pack **không dùng nét viền
+  nào cả**, chỉ ghép mảng phẳng bo tròn với một tông đậm làm khối và một vệt
+  sáng. Bản mới theo đúng cách đó, thêm hai dải quai đeo chạy dọc hai bên thân
+  cho ra ba lô chứ không phải túi xách.
+- Thư và giftcode dùng khoá dịch (`subject_key`/`body_key`, `name_key`) và đã bổ
+  sung chuỗi cho cả `vi` lẫn `en`; validator giờ soát cả hai nhóm này.
+
+### Sửa
+- **Xoá thư xong mở lại hòm là thư quay về.** Việc chống gửi trùng dựa vào chính
+  bản ghi trong hòm thư, nên xoá đi là mất dấu. Nay tách `mail_deliveries` làm sổ
+  ghi đã gửi, độc lập với hòm thư.
+- `giftcode_redeem` và `mail_claim` chưa nằm trong danh sách sự kiện analytics
+  nên mỗi lần nhận quà là log một dòng cảnh báo.
+
 ## 0.5.1 — 2026-09-03
 
 ### Thay đổi
