@@ -19,7 +19,7 @@ import { ChatDock } from './ui/chat_dock.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
-import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openLiveOps, openMenu, openMail, openSettings, energyLine } from './ui/panels.js';
+import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openLiveOps, openMenu, openMail, openSettings, openDaily, energyLine } from './ui/panels.js';
 
 const GRAVITY = 1800;
 const RUN_SPEED = 260;
@@ -188,6 +188,8 @@ class Game {
 
     await this.enterMap(profile.position.map_id, 'spawn_default');
     this.#updateHud();
+    // Mỏ neo đầu phiên: vào game là có thứ để nhận ngay.
+    await openDaily(this, { auto: true });
     if (!this.running) {
       this.running = true;
       this.#loop();

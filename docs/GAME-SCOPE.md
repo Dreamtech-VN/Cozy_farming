@@ -86,7 +86,7 @@ bản demo kỹ thuật hơn là một game.
 | Ngày đêm và thời tiết | Đổi tông màu, mưa, hiệu ứng | ✅ suy ra xác định từ map + lát thời gian |
 | NPC có lịch sinh hoạt | Di chuyển theo giờ, đổi lời thoại | ⬜ đứng yên |
 | Điểm nhấn trong map | Mốc để định hướng, chỗ ngồi, chỗ chụp ảnh | 🟡 mới có prop rải đều |
-| Đăng nhập hằng ngày | Thưởng chuỗi ngày | ⬜ |
+| Đăng nhập hằng ngày | Thưởng chuỗi ngày | ✅ chu kỳ 7 ngày, có test |
 | Nhiệm vụ tân thủ 7 ngày | Dẫn người chơi qua tuần đầu | ⬜ |
 | Chỉ dẫn nhiệm vụ | Mũi tên hoặc đường dẫn tới mục tiêu | ⬜ |
 | Bảng thành tựu | Mốc dài hạn | ⬜ |
@@ -109,8 +109,8 @@ Sự kiện ngày  → mục tiêu ngắn có hạn            căng    0.8
 Thoát         → hẹn giờ cây chín lần sau        nghỉ    0.1
 ```
 
-Bản hiện tại **chưa có bậc "sự kiện ngày"** và **chưa có phần thưởng khi vào
-game**, nên nhịp đang phẳng: vào → thu hoạch → hết việc.
+Từ 0.9.0 bậc đầu tiên đã có thật: **điểm danh hằng ngày** tự mở khi vào game.
+Còn thiếu bậc **"sự kiện ngày"** — mục tiêu ngắn có hạn trong ngày.
 
 ---
 
@@ -124,10 +124,17 @@ không thì người chơi kẹt cứng.
 | Rừng (`map_forest`) | Cấp 3 | XP từ nông trại và nhiệm vụ đầu | ✅ |
 | Màn Match-3 số 5 | Cấp 9 | XP tích luỹ | ✅ |
 | Mở rộng nông trại | Xu | Bán nông sản | ✅ |
-| Trang phục trong shop | Xu / ngọc | Ngọc chỉ có từ quà, **chưa có nguồn đều** | ⚠️ |
+| Trang phục trong shop | Xu / ngọc | Điểm danh 35/tuần + quest tuần 10/tuần | ✅ |
 
-Chỗ ⚠️ là một lỗ thật: ngọc hiện chỉ đến từ giftcode và thư, chưa có nguồn lặp
-lại, nên mọi thứ bán bằng ngọc thực chất là khoá cứng.
+**Đính chính bản trước.** Tôi từng ghi "ngọc chưa có nguồn lặp lại" — sai: quest
+tuần vẫn cho 10 ngọc mỗi tuần. Nhưng con số đó quá nhỏ nên kết luận thì đúng.
+Cân lại bằng bảng nguồn/bồn:
+
+| | Trước 0.9.0 | Sau |
+| --- | --- | --- |
+| Nguồn ngọc lặp lại | 10/tuần (quest tuần) | 45/tuần (+35 từ điểm danh) |
+| Bồn ngọc | tới 525/tuần (bữa ăn hồi energy 15 ngọc × 5 lượt/ngày) | như cũ |
+| Kết luận | lệch ~50 lần → người chơi đói tài nguyên | 3 bữa/tuần, bữa ăn thành tiện ích chứ không phải tường chắn |
 
 ---
 
@@ -137,9 +144,9 @@ Xếp theo *đổi cảm giác chơi trên mỗi giờ công*, không theo độ
 
 1. **Phản hồi khi hành động** — số bay lên, hiệu ứng thu hoạch, tiếng động.
    Rẻ nhất mà đổi cảm giác nhiều nhất.
-2. **Thưởng đăng nhập hằng ngày + nhiệm vụ tân thủ 7 ngày** — cho người chơi lý
-   do quay lại, và làm nhịp hết phẳng.
-3. **Nguồn ngọc lặp lại** — vá lỗ gating ở mục 5.
+2. ~~Thưởng đăng nhập hằng ngày~~ — **xong ở 0.9.0**. Còn lại: nhiệm vụ tân thủ
+   7 ngày.
+3. ~~Nguồn ngọc lặp lại~~ — **xong ở 0.9.0**, xem bảng cân ở mục 5.
 4. **Sprite nhân vật vẽ theo cùng bộ pixel** — hiện nhân vật vẫn là hình vector,
    lệch hẳn với thế giới đã chuyển sang pixel.
 5. **NPC có lịch sinh hoạt** — làng có nhịp sống thay vì mấy hình đứng yên.

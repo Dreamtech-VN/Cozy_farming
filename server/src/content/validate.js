@@ -208,6 +208,20 @@ export function validateContent(content) {
     }
   }
 
+  // --- Điểm danh hằng ngày ---
+  const daily = content.economy.daily_rewards;
+  if (daily) {
+    if (!(daily.cycle?.length > 0)) issues.push(err('invalid_range', 'daily_rewards: cycle rỗng'));
+    for (const entry of daily.cycle ?? []) {
+      for (const [currencyId] of Object.entries(entry.currencies ?? {})) {
+        if (!currencyIds.has(currencyId)) issues.push(err('missing_ref', `daily ngày ${entry.day}: currency ${currencyId} không tồn tại`));
+      }
+      for (const item of entry.items ?? []) {
+        if (!itemIds.has(item.item_id)) issues.push(err('missing_ref', `daily ngày ${entry.day}: item ${item.item_id} không tồn tại`));
+      }
+    }
+  }
+
   // --- Economy (doc 09: mọi currency phải có source và sink) ---
   for (const currency of content.economy.currencies) {
     if (!(currency.cap > 0)) issues.push(err('invalid_range', `currency ${currency.currency_id}: cap phải > 0`));

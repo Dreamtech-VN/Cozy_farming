@@ -3,6 +3,40 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.9.0 — 2026-09-03
+
+### Thêm mới
+Áp ba khung của bộ skill **claude-game-design-suite** (`core-loop-designer`,
+`economy-progression-designer`, `design-pillars-architect`).
+
+- **Điểm danh hằng ngày** — chu kỳ 7 ngày, chuỗi liên tiếp đi tiếp trong chu kỳ,
+  bỏ một ngày thì quay về ngày 1 nhưng **không mất thứ đã nhận**. Bảng tự mở khi
+  vào game. `GET /v1/daily`, `POST /v1/daily/claim`, migration `004_daily.sql`,
+  9 test mới (115 test tổng).
+  - Mốc ngày do SERVER quyết theo múi giờ khai báo trong content (doc 13), client
+    đổi giờ máy không ăn thêm lượt.
+  - Khoá idempotent gắn với ngày nên hai request song song chỉ cộng một lần.
+- `docs/DESIGN-PILLARS.md` — ba trụ thiết kế theo khuôn của
+  `design-pillars-architect`: mỗi trụ có phát biểu, "nghĩa là", "không có nghĩa
+  là", cách kiểm và thứ tự ưu tiên khi xung đột.
+
+### Sửa — cân lại kinh tế ngọc
+Dựng bảng nguồn/bồn theo `economy-progression-designer`:
+
+| | Trước | Sau |
+| --- | --- | --- |
+| Nguồn ngọc lặp lại | 10/tuần | 45/tuần |
+| Bồn ngọc | tới 525/tuần | như cũ |
+
+Lệch ~50 lần là **deflation**: người chơi đói tài nguyên và mọi thứ bán bằng ngọc
+thành tường chắn. Điểm danh thêm 35 ngọc/tuần (dồn vào ngày 4 và ngày 7 để phần
+thưởng có cao trào), đưa bữa ăn hồi energy về đúng vai trò tiện ích.
+
+### Đính chính
+`docs/GAME-SCOPE.md` bản trước ghi "ngọc chưa có nguồn lặp lại" — sai, quest tuần
+vẫn cho 10 ngọc/tuần. Con số quá nhỏ nên kết luận vẫn đúng, nhưng số liệu thì
+sai; đã sửa kèm bảng cân.
+
 ## 0.8.1 — 2026-09-03
 
 ### Sửa

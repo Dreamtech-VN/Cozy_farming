@@ -855,3 +855,44 @@ function requestOauthToken(provider) {
   });
 }
 
+/**
+ * Điểm danh hằng ngày. Tự mở khi vào game nếu còn lượt — đây là "mỏ neo" đầu
+ * phiên chơi: vừa vào là có thứ để nhận, thay vì mở game ra không biết làm gì.
+ */
+export async function openDaily(game, { auto = false } = {}) {
+  let state;
+  try {
+    state = await game.api.get('/v1/daily');
+  } catch { return; }
+  // Mở tự động thì chỉ mở khi thật sự còn lượt, không chen ngang vô cớ.
+  if (auto && !state.can_claim) return;
+
+  showPanel('Điểm danh', (body, rerender) => {
+    body.append(el('p', { class: 'sub', text: `Chuỗi ${state.streak} ngày · đã điểm danh ${state.total_claims} lần` }));
+
+    body.append(el('div', { class: 'daily-track' }, state.cycle.map((entry, index) => {
+      const done = index < state.position || (!state.can_claim && index === state.position);
+      const today = index === state.position && state.can_claim;
+      return el('div', {
+        class: `daily-day ${done ? 'done' : ''} ${today ? 'today' : ''}`.trim(),
+      }, [
+        el('div', { class: 'daily-label', text: `Ngày ${entry.day}` }),
+        el('div', { class: 'daily-reward', text: describeReward(game, entry) }),
+        done ? el('span', { class: 'daily-check', 'aria-label': 'Đã nhận' }) : null,
+      ]);
+    })));
+
+    body.append(state.can_claim
+      ? bindSubmit(el('button', { class: 'primary', type: 'button', text: 'Nhận thưởng hôm nay' }), async () => {
+          try {
+            await game.api.post('/v1/daily/claim', {});
+            toast('Đã điểm danh', 'good');
+            audio.success();
+            await game.refreshPlayer();
+            state = await game.api.get('/v1/daily');
+            rerender();
+          } catch (err) { toast(err.message, 'bad'); }
+        })
+      : emptyState('Hôm nay đã điểm danh. Mai quay lại nhé!'));
+  }, { key: 'daily', compact: true });
+}

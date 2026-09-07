@@ -11,6 +11,7 @@ import * as social from '../domain/social.js';
 import * as shop from '../domain/shop.js';
 import * as account from '../domain/account.js';
 import * as mail from '../domain/mail.js';
+import * as daily from '../domain/daily.js';
 import { getWallet, regenerateEnergy } from '../domain/economy.js';
 import { worldState } from '../domain/world_clock.js';
 import { logEvent, summarize } from '../domain/analytics.js';
@@ -73,6 +74,10 @@ export function registerRoutes(router, ctx) {
   router.post('/v1/giftcodes/redeem', ({ character, body }) => ({
     body: account.redeemGiftcode(db, content, character, character.user_id, body.code),
   }));
+
+  // ---------- Điểm danh hằng ngày (doc 09) ----------
+  router.get('/v1/daily', ({ character }) => ({ body: daily.getDaily(db, content, character.id) }));
+  router.post('/v1/daily/claim', ({ character }) => ({ body: daily.claimDaily(db, content, character.id) }));
 
   // ---------- Hòm thư (doc 08) ----------
   router.get('/v1/mails', ({ character }) => ({ body: mail.listMails(db, content, character.id) }));
