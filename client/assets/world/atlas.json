@@ -1,0 +1,64 @@
+{
+  "comment": "Sinh bằng tools/gen-art.mjs — đừng sửa tay, sửa trong tools/art/ rồi chạy npm run art.",
+  "tiles": {
+    "file": "tiles.png",
+    "size": 16,
+    "names": [
+      "grass_top_a",
+      "grass_top_b",
+      "grass_top_c",
+      "dirt_a",
+      "dirt_b",
+      "stone_a",
+      "stone_b",
+      "water_a",
+      "water_b"
+    ]
+  },
+  "props": {
+    "file": "props.png",
+    "cell": 64,
+    "cols": 5,
+    "names": [
+      "tree_big",
+      "tree_small",
+      "bush",
+      "rock",
+      "flowers",
+      "fence",
+      "crate",
+      "barrel",
+      "well",
+      "sign",
+      "house",
+      "stall",
+      "lamp",
+      "haystack",
+      "stump",
+      "soil",
+      "fountain",
+      "arcade",
+      "board",
+      "chest"
+    ]
+  },
+  "crops": {
+    "file": "crops.png",
+    "cell": 32,
+    "stages": 4,
+    "kinds": [
+      "crop_carrot",
+      "crop_turnip",
+      "crop_potato",
+      "crop_tomato",
+      "crop_corn",
+      "crop_strawberry",
+      "crop_wheat",
+      "crop_pumpkin",
+      "crop_sunflower",
+      "crop_blueberry",
+      "crop_watermelon",
+      "crop_moon_lotus"
+    ]
+  }
+}

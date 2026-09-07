@@ -6,6 +6,13 @@
 import { drawAvatar, roundRect } from './avatar.js';
 import { t } from '../core/i18n.js';
 import { settings } from '../core/settings.js';
+import { atlas } from './atlas.js';
+
+/** Tile 16px phóng 3 lần: đủ to để thấy rõ pixel mà không vỡ hình. */
+const TILE_SCALE = 3;
+
+/** Chọn biến thể tile cố định theo cột, để cùng một chỗ luôn ra cùng hoa văn. */
+const hashCol = (mapId, col) => Math.abs(hashString(`${mapId}:${col}`));
 
 export class WorldRenderer {
   constructor(canvas, content) {
@@ -230,41 +237,31 @@ export class WorldRenderer {
     const city = map.group === 'City';
     const count = Math.floor(map.width / 240);
 
-    // Cảnh vật là lớp nền: giảm độ đậm để nhân vật và NPC luôn nổi lên phía trước
-    // (doc 05 — silhouette gameplay phải đọc được trước bối cảnh).
+    // Cảnh vật là lớp nền: giảm độ đậm để nhân vật và NPC luôn nổi lên phía
+    // trước (doc 05 — silhouette gameplay phải đọc được trước bối cảnh).
     ctx.save();
-    ctx.globalAlpha = 0.72;
+    ctx.globalAlpha = 0.82;
 
     for (let i = 0; i < count; i++) {
       const x = 60 + i * 240 + rng() * 90;
-      const scale = 0.75 + rng() * 0.55;
+      const scale = 1.6 + rng() * 1.1;
       const y = map.ground_y + 4;
+      const roll = rng();
 
-      if (city && rng() > 0.35) {
-        const w = 96 * scale;
-        const h = (150 + rng() * 90) * scale;
-        ctx.fillStyle = shade(map.theme.accent, -60 + Math.floor(rng() * 26));
-        roundRect(ctx, x - w / 2, y - h, w, h, 6);
-        ctx.fillStyle = shade(map.theme.accent, 34);
-        for (let row = 0; row < Math.floor(h / 42); row++) {
-          for (let col = 0; col < 2; col++) {
-            roundRect(ctx, x - w / 2 + 16 + col * (w / 2 - 4), y - h + 22 + row * 42, 18, 20, 3);
-          }
-        }
-        continue;
+      if (!atlas.ready) continue;
+      if (city) {
+        atlas.prop(ctx, roll > 0.45 ? 'house' : (roll > 0.2 ? 'stall' : 'tree_big'), x, y, scale);
+      } else {
+        const kind = roll > 0.55 ? 'tree_big' : roll > 0.3 ? 'tree_small' : roll > 0.15 ? 'bush' : 'rock';
+        atlas.prop(ctx, kind, x, y, scale);
       }
+    }
 
-      // Tán cây dùng bảng màu riêng, không phái sinh từ màu nền: nếu lấy theo
-      // theme.ground thì cây chìm hẳn vào đồi và chỉ còn thấy mỗi thân cây.
-      const trunk = 52 * scale;
-      ctx.fillStyle = '#6a4a2f';
-      roundRect(ctx, x - 7 * scale, y - trunk, 14 * scale, trunk, 4);
-      ctx.fillStyle = shade('#2f6b34', Math.floor(rng() * 30));
-      ctx.beginPath();
-      ctx.arc(x, y - trunk - 26 * scale, 40 * scale, 0, Math.PI * 2);
-      ctx.arc(x - 26 * scale, y - trunk - 8 * scale, 28 * scale, 0, Math.PI * 2);
-      ctx.arc(x + 26 * scale, y - trunk - 8 * scale, 28 * scale, 0, Math.PI * 2);
-      ctx.fill();
+    // Lớp bụi cỏ và hoa sát mặt đất, dày hơn cây nên cảnh không bị trống.
+    for (let i = 0; i < count * 3; i++) {
+      if (!atlas.ready) break;
+      const x = 30 + i * 80 + rng() * 50;
+      atlas.prop(ctx, rng() > 0.5 ? 'flowers' : 'bush', x, map.ground_y + 6, 0.7 + rng() * 0.4);
     }
     ctx.restore();
   }
@@ -274,24 +271,36 @@ export class WorldRenderer {
     // Kéo nền đất xuống hết khung nhìn: camera dọc được phép tràn dưới đáy map,
     // nếu chỉ fill tới map.height thì lộ ra khoảng trời ở dưới chân nhân vật.
     const depth = map.height - map.ground_y + this.viewHeight + 400;
-    ctx.fillStyle = map.theme.ground;
-    ctx.fillRect(-200, map.ground_y, map.width + 400, depth);
-    ctx.fillStyle = shade(map.theme.ground, 22);
-    ctx.fillRect(-200, map.ground_y, map.width + 400, 10);
 
-    // Vệt cỏ rải trên mặt đất: màn hình ngang để lộ nhiều nền, nếu để phẳng trơn
-    // thì mất cảm giác chiều sâu. Sinh theo seed của map nên bố cục cố định.
-    const rng = seededRandom(hashString(map.map_id) ^ 0x9e3779b9);
-    ctx.fillStyle = shade(map.theme.ground, -18);
-    const rows = Math.ceil(Math.min(depth, this.viewHeight) / 70);
-    for (let row = 0; row < rows; row++) {
-      const y = map.ground_y + 26 + row * 70;
-      for (let i = 0; i < map.width / 70; i++) {
-        const x = i * 70 + rng() * 60;
-        const w = 10 + rng() * 16;
-        ctx.beginPath();
-        ctx.ellipse(x, y + rng() * 26, w, 3.5, 0, 0, Math.PI * 2);
-        ctx.fill();
+    if (!atlas.ready) {
+      ctx.fillStyle = map.theme.ground;
+      ctx.fillRect(-200, map.ground_y, map.width + 400, depth);
+      return;
+    }
+
+    // Lát tile theo lưới: một hàng tile "mặt cỏ" ở trên, còn lại là đất. Chỉ vẽ
+    // phần lọt vào khung nhìn — map rộng 2600px mà lát hết thì mỗi khung tốn
+    // hàng nghìn lệnh drawImage vô ích.
+    // camera.x/y là TÂM khung nhìn (xem followCamera), không phải mép trái/trên
+    // — lấy nhầm là nửa màn hình bên trái không được lát tile nào.
+    const size = atlas.meta.tiles.size * TILE_SCALE;
+    const viewLeft = this.camera.x - this.viewWidth / 2;
+    const viewBottom = this.camera.y + (this.viewHeight - this.anchorY);
+    const left = Math.floor((viewLeft - size) / size) * size;
+    const right = viewLeft + this.viewWidth + size;
+    const rows = Math.ceil(depth / size);
+    const seed = hashString(map.map_id);
+
+    for (let x = left; x < right; x += size) {
+      const col = Math.round(x / size);
+      for (let row = 0; row < rows; row++) {
+        const y = map.ground_y + row * size;
+        if (y > viewBottom + size) break;
+        // Hàng đầu là mặt cỏ (3 biến thể), các hàng dưới là đất (2 biến thể).
+        const index = row === 0
+          ? Math.abs(hashString(`${seed}:${col}`)) % 3
+          : 3 + (Math.abs(hashString(`${seed}:${col}:${row}`)) % 2);
+        atlas.tile(ctx, index, x, y, TILE_SCALE);
       }
     }
   }
@@ -299,10 +308,24 @@ export class WorldRenderer {
   #drawPlatforms(map) {
     const ctx = this.ctx;
     for (const platform of map.platforms ?? []) {
-      ctx.fillStyle = shade(map.theme.ground, -8);
-      roundRect(ctx, platform.x, platform.y, platform.w, platform.h, 6);
-      ctx.fillStyle = shade(map.theme.ground, 26);
-      roundRect(ctx, platform.x, platform.y, platform.w, 4, 2);
+      if (!atlas.ready) {
+        ctx.fillStyle = shade(map.theme.ground, -8);
+        roundRect(ctx, platform.x, platform.y, platform.w, platform.h, 6);
+        continue;
+      }
+      // Bệ đứng lát bằng chính tile mặt đất, khỏi lạc chất với nền.
+      const size = atlas.meta.tiles.size * TILE_SCALE;
+      const cols = Math.max(1, Math.round(platform.w / size));
+      const step = platform.w / cols;
+      for (let i = 0; i < cols; i++) {
+        const x = platform.x + i * step;
+        ctx.save();
+        // Bệ hẹp hơn một tile thì phải co ngang, không thì thò ra ngoài mép bệ.
+        ctx.translate(x, platform.y);
+        ctx.scale(step / size, 1);
+        atlas.tile(ctx, hashCol(map.map_id, i) % 3, 0, 0, TILE_SCALE);
+        ctx.restore();
+      }
     }
   }
 
@@ -317,32 +340,21 @@ export class WorldRenderer {
       const y = layout.plot_y;
       plot.screen = { x, y };
 
-      ctx.fillStyle = plot.state === 'empty' ? '#6b4b30' : '#7a5a3a';
-      roundRect(ctx, x - 42, y - 16, 84, 20, 6);
-      ctx.fillStyle = 'rgba(0,0,0,.16)';
-      roundRect(ctx, x - 42, y - 16, 84, 5, 3);
+      if (atlas.ready) {
+        const crop = plot.crop_id ? this.content.cropsById.get(plot.crop_id) : null;
+        // stage của server đếm từ 0; ô chín vẽ khung cuối cùng của sprite.
+        const stage = plot.state === 'mature' ? atlas.meta.crops.stages - 1 : plot.stage ?? 0;
+        // Sprite tra theo crop_id nên thêm cây mới không phải sửa gì ở đây.
+        if (plot.state === 'empty') atlas.prop(ctx, 'soil', x, y + 4, 1.6);
+        else atlas.crop(ctx, plot.crop_id, stage, x, y + 4, 2.6);
+      }
 
       if (plot.state === 'empty') return;
       const crop = this.content.cropsById.get(plot.crop_id);
       if (!crop) return;
-
       const ready = plot.state === 'mature';
-      const progress = ready ? 1 : (plot.stage + 1) / crop.stages;
-      const height = 12 + progress * 42;
-      const sway = Math.sin(time * 2 + index) * (2 + progress * 2);
-
-      ctx.strokeStyle = crop.palette[1];
-      ctx.lineWidth = 4;
-      ctx.beginPath();
-      ctx.moveTo(x, y - 14);
-      ctx.quadraticCurveTo(x + sway, y - 14 - height / 2, x + sway, y - 14 - height);
-      ctx.stroke();
-
-      ctx.fillStyle = crop.palette[0];
-      const size = 5 + progress * 9;
-      ctx.beginPath();
-      ctx.arc(x + sway, y - 16 - height, size, 0, Math.PI * 2);
-      ctx.fill();
+      const sway = Math.sin(time * 2 + index) * 2;
+      const height = 40;
 
       if (ready) { // hào quang báo "thu hoạch được"
         ctx.strokeStyle = 'rgba(242,201,76,.85)';
@@ -358,10 +370,16 @@ export class WorldRenderer {
     const ctx = this.ctx;
     for (const object of map.objects ?? []) {
       const highlight = hintTarget?.id === object.object_id;
+      if (atlas.ready && object.sprite) {
+        // Vật đang trong tầm tương tác thì sáng lên, thay cho đổi màu tô.
+        ctx.save();
+        if (highlight) { ctx.shadowColor = 'rgba(255,232,150,.95)'; ctx.shadowBlur = 18; }
+        atlas.prop(ctx, object.sprite, object.x, object.y + 4, object.scale ?? 2);
+        ctx.restore();
+        continue;
+      }
       ctx.fillStyle = highlight ? shade(map.theme.accent, 30) : map.theme.accent;
       roundRect(ctx, object.x - object.w / 2, object.y - object.h, object.w, object.h, 8);
-      ctx.fillStyle = 'rgba(255,255,255,.18)';
-      roundRect(ctx, object.x - object.w / 2, object.y - object.h, object.w, 8, 4);
     }
   }
 

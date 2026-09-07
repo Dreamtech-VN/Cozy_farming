@@ -729,10 +729,12 @@ function accountTab(game, pane, rerender) {
           : el('span', { class: 'tag', text: 'Chưa hỗ trợ' })));
     }
 
-    // --- Đổi mật khẩu ---
+    // --- Đổi mật khẩu và giftcode: hai khối cạnh nhau cho cân hai bên ---
     const current = el('input', { type: 'password', autocomplete: 'current-password', placeholder: 'Mật khẩu hiện tại' });
     const next = el('input', { type: 'password', autocomplete: 'new-password', placeholder: 'Mật khẩu mới, tối thiểu 8 ký tự' });
-    pane.append(el('div', { class: 'block' }, [
+    const pair = el('div', { class: 'block-pair' });
+    pane.append(pair);
+    pair.append(el('div', { class: 'block' }, [
       el('div', { class: 'title', text: 'Đổi mật khẩu' }),
       current, next,
       el('button', {
@@ -749,9 +751,8 @@ function accountTab(game, pane, rerender) {
       }),
     ]));
 
-    // --- Giftcode ---
     const code = el('input', { type: 'text', maxlength: '16', placeholder: 'Nhập mã, ví dụ COZY2026' });
-    pane.append(el('div', { class: 'block' }, [
+    pair.append(el('div', { class: 'block' }, [
       el('div', { class: 'title', text: 'Đổi giftcode' }),
       code,
       el('button', {

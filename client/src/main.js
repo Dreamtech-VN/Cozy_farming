@@ -6,6 +6,7 @@ import { Api } from './net/api.js';
 import { Realtime } from './net/realtime.js';
 import { i18n, t, formatNumber } from './core/i18n.js';
 import { settings } from './core/settings.js';
+import { atlas } from './render/atlas.js';
 import { audio } from './core/audio.js';
 import { Input } from './core/input.js';
 import { WorldRenderer } from './render/world.js';
@@ -59,6 +60,8 @@ class Game {
       shopsById: new Map(),
     };
     await i18n.load(this.api, settings.value.locale);
+    // Art hỏng thì vẫn vào được game, chỉ là cảnh về lại bản tô màu phẳng.
+    await atlas.load().catch((err) => console.warn('không nạp được art:', err.message));
 
     this.renderer = new WorldRenderer(this.canvas, this.content);
     this.match3 = new Match3Scene(this);

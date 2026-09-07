@@ -51,8 +51,8 @@
         { "npc_id": "npc_shop_keeper", "x": 1500, "y": 600, "name_key": "npc.shop_keeper", "dialogue_id": "dlg_shop_hello", "shop_id": "shop_general", "palette": ["#f3c9a5", "#4a86c8", "#c8763c"] }
       ],
       "objects": [
-        { "object_id": "obj_plaza_fountain", "type": "decoration", "x": 1150, "y": 600, "w": 160, "h": 90 },
-        { "object_id": "obj_plaza_board", "type": "notice_board", "x": 760, "y": 600, "w": 60, "h": 90, "action": "open_quest" }
+        { "object_id": "obj_plaza_fountain", "sprite": "fountain", "scale": 2.6, "type": "decoration", "x": 1150, "y": 600, "w": 160, "h": 90 },
+        { "object_id": "obj_plaza_board", "sprite": "board", "scale": 2.2, "type": "notice_board", "x": 760, "y": 600, "w": 60, "h": 90, "action": "open_quest" }
       ]
     },
     {
@@ -75,7 +75,7 @@
         { "npc_id": "npc_arcade_bo", "x": 1300, "y": 600, "name_key": "npc.arcade_bo", "dialogue_id": "dlg_arcade_hello", "action": "open_match3", "palette": ["#f3c9a5", "#59b06a", "#c8763c"] }
       ],
       "objects": [
-        { "object_id": "obj_arcade_cabinet", "type": "match3_entry", "x": 1400, "y": 600, "w": 80, "h": 110, "action": "open_match3" }
+        { "object_id": "obj_arcade_cabinet", "sprite": "arcade", "scale": 2.4, "type": "match3_entry", "x": 1400, "y": 600, "w": 80, "h": 110, "action": "open_match3" }
       ]
     },
     {
@@ -99,7 +99,7 @@
         { "npc_id": "npc_farmer_tu", "x": 620, "y": 610, "name_key": "npc.farmer_tu", "dialogue_id": "dlg_farm_intro", "shop_id": "shop_seed", "palette": ["#d9a173", "#8a9a45", "#3a2c26"] }
       ],
       "objects": [
-        { "object_id": "obj_village_well", "type": "decoration", "x": 1400, "y": 610, "w": 90, "h": 80 }
+        { "object_id": "obj_village_well", "sprite": "well", "scale": 2.4, "type": "decoration", "x": 1400, "y": 610, "w": 90, "h": 80 }
       ]
     },
     {
@@ -119,7 +119,7 @@
       ],
       "npcs": [],
       "objects": [
-        { "object_id": "obj_farm_storage", "type": "storage", "x": 1420, "y": 610, "w": 110, "h": 100, "action": "open_inventory" }
+        { "object_id": "obj_farm_storage", "sprite": "chest", "scale": 2.4, "type": "storage", "x": 1420, "y": 610, "w": 110, "h": 100, "action": "open_inventory" }
       ],
       "farm_layout": { "plot_origin_x": 380, "plot_spacing_x": 110, "plot_y": 610, "plots_per_row": 8 }
     },
@@ -142,7 +142,7 @@
         { "npc_id": "npc_ranger_hoa", "x": 900, "y": 600, "name_key": "npc.ranger_hoa", "dialogue_id": "dlg_forest_intro", "palette": ["#f3c9a5", "#3f7a3c", "#4a3a2a"] }
       ],
       "objects": [
-        { "object_id": "obj_forest_shrine", "type": "match3_entry", "x": 2200, "y": 600, "w": 100, "h": 130, "action": "open_match3" }
+        { "object_id": "obj_forest_shrine", "sprite": "sign", "scale": 2.4, "type": "match3_entry", "x": 2200, "y": 600, "w": 100, "h": 130, "action": "open_match3" }
       ]
     }
   ]

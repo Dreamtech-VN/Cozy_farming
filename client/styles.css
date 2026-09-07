@@ -740,16 +740,21 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
   background: #f0483f;
 }
 
-/* ---------- Điều khiển trong panel Cài đặt ---------- */
-/* Tab xếp dọc bên trái, nội dung bên phải. */
-.tab-layout { display: flex; gap: 10px; align-items: flex-start; }
+/* ---------- Điều khiển trong panel Cài đặt ----------
+   Toàn màn hình thì phải CÂN nội dung, không thể dồn hết vào mép trái: khối
+   tab + nội dung căn giữa và có bề ngang tối đa, phần thừa để trống hai bên. */
+.tab-layout {
+  display: flex; gap: 20px; align-items: flex-start;
+  width: 100%; max-width: 940px; margin: 0 auto;
+}
 .tab-rail {
-  flex: 0 0 auto; width: 124px;
-  display: flex; flex-direction: column; gap: 4px;
+  flex: 0 0 auto; width: 150px;
+  display: flex; flex-direction: column; gap: 6px;
   position: sticky; top: 0;
 }
 .tab {
-  min-height: 34px; padding: 0 8px;
+  /* 44px là ngưỡng chạm tối thiểu cho ngón tay. */
+  min-height: 44px; padding: 0 10px;
   border: 9px solid transparent;
   border-image: url('/assets/ui/btn-cream.png') 54 fill / 9px / 0 round;
   color: var(--ink-soft); font: inherit; font-size: 13px; font-weight: 800;
@@ -761,7 +766,11 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
 }
 /* Chặn bề ngang phần nội dung: ở chế độ toàn màn hình mà để tự do thì mỗi hàng
    kéo dài gần 2000px, nhãn một đầu và nút một đầu. */
-.tab-pane { flex: 1 1 auto; min-width: 0; max-width: 760px; display: flex; flex-direction: column; gap: 8px; }
+.tab-pane { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.tab-pane .row { min-height: 52px; }
+/* Hai khối nhập (mật khẩu, giftcode) xếp cạnh nhau khi còn chỗ. */
+.tab-pane .block { flex: 1 1 300px; }
+.block-pair { display: flex; flex-wrap: wrap; gap: 10px; }
 
 /* Công tắc bật/tắt. */
 .switch {

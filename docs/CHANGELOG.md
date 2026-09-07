@@ -3,6 +3,42 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.7.0 — 2026-09-03
+
+### Thêm mới
+- **Bộ sinh art pixel** (`tools/art/`, `npm run art`). Art là CODE chứ không phải
+  file nhị phân rơi vào repo: sửa một màu trong palette rồi chạy lại là mọi thứ
+  đồng bộ, diff vẫn đọc được. Không thêm dependency nào — bộ mã hoá PNG viết tay
+  trên `node:zlib`.
+  - `tiles.png` — tileset 16px: mặt cỏ 3 biến thể, đất 2, đá 2, nước 2.
+  - `props.png` — 20 sprite: cây, bụi, đá, hoa, hàng rào, thùng, giếng, biển,
+    nhà, sạp hàng, đèn, đống rơm, gốc cây, luống đất, đài phun, máy game, bảng
+    tin, rương.
+  - `crops.png` — sinh THẲNG từ `data/content/crops.json`, mỗi cây một hàng, màu
+    lấy từ palette của chính cây đó, nên thêm cây mới vào content là có sprite
+    ngay không phải vẽ tay.
+- `docs/GAME-SCOPE.md` — đối chiếu các màn và tính năng của một game thể loại
+  này với repo, kèm nhịp một phiên chơi và bảng cổng mở khoá.
+
+### Thay đổi
+- **Thế giới vẽ bằng tile và sprite thay cho `fillRect` màu phẳng.** Mặt đất lát
+  tile theo lưới (chỉ lát phần lọt khung nhìn), nhà cửa và cây cối là sprite,
+  bệ đứng lát bằng chính tile mặt đất, ô đất và cây trồng dùng sprite theo
+  `crop_id` và giai đoạn.
+- Vật thể trên map khai báo `sprite` và `scale` trong `data/content/maps.json` —
+  đổi hình một vật là sửa content, không phải sửa renderer.
+- **Trang Cài đặt cân đối lại**: khối tab + nội dung căn giữa với bề ngang tối
+  đa thay vì dồn hết vào mép trái, nút tab đạt ngưỡng chạm 44px, hai khối nhập
+  (mật khẩu, giftcode) xếp cạnh nhau.
+
+### Sửa
+- Lát tile dùng `camera.x` như thể là mép trái khung nhìn, trong khi đó là TÂM
+  (xem `followCamera`) — nửa màn hình bên trái không được lát tile nào.
+
+### Ghi chú
+Nhân vật vẫn là hình vector, chưa chuyển sang pixel nên còn lệch với thế giới —
+đây là mục 4 trong đề nghị thứ tự làm tiếp ở `docs/GAME-SCOPE.md`.
+
 ## 0.6.0 — 2026-09-03
 
 ### Thêm mới
