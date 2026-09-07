@@ -104,3 +104,49 @@ export function hideOverlay() {
   overlay.classList.add('hidden');
   overlay.replaceChildren();
 }
+
+/**
+ * Bọc một nút gửi request: khoá nút trong lúc chờ rồi mở lại.
+ *
+ * Không khoá thì bấm nhanh hai lần là gửi hai request — với những thao tác đổi
+ * tài nguyên thì đó là hai giao dịch.
+ */
+export function bindSubmit(button, run) {
+  button.addEventListener('click', async () => {
+    if (button.disabled) return;
+    const label = button.textContent;
+    button.disabled = true;
+    button.textContent = 'Đang xử lý…';
+    try {
+      await run();
+    } finally {
+      button.disabled = false;
+      button.textContent = label;
+    }
+  });
+  return button;
+}
+
+/**
+ * Ô nhập kèm nhãn hiện rõ và chỗ để báo lỗi ngay dưới ô.
+ * Placeholder không thay được nhãn: gõ vào là placeholder biến mất.
+ */
+export function labelledInput(labelText, attrs) {
+  const id = `f_${Math.random().toString(36).slice(2, 9)}`;
+  const input = el('input', { id, ...attrs });
+  const error = el('p', { class: 'field-error hidden', id: `${id}_err`, role: 'alert' });
+  input.setAttribute('aria-describedby', error.id);
+  const wrap = el('div', {}, [el('label', { for: id, text: labelText }), input, error]);
+  return {
+    wrap,
+    input,
+    get value() { return input.value; },
+    clear() { input.value = ''; },
+    setError(message) {
+      error.textContent = message ?? '';
+      error.classList.toggle('hidden', !message);
+      input.setAttribute('aria-invalid', message ? 'true' : 'false');
+      if (message) input.focus();
+    },
+  };
+}

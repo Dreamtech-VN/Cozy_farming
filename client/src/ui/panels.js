@@ -1,5 +1,5 @@
 /** Các panel gameplay: nhiệm vụ, túi đồ, nông trại, bạn bè, chat, nhân vật, shop. */
-import { el, showPanel, toast, emptyState, confirmAction, closePanel, rerenderPanel } from './ui.js';
+import { el, showPanel, toast, emptyState, confirmAction, closePanel, rerenderPanel, bindSubmit, labelledInput } from './ui.js';
 import { t, formatNumber, formatDuration } from '../core/i18n.js';
 import { drawAreaMap, drawWorldAtlas } from './map_draw.js';
 import { buildMenuPanel } from './hud_menu.js';
@@ -592,6 +592,7 @@ export function openMail(game) {
           : el('button', {
               class: 'ghost', type: 'button', text: 'Xoá',
               onClick: async () => {
+                if (!(await confirmAction('Xoá thư này? Không lấy lại được.'))) return;
                 try {
                   await game.api.del(`/v1/mails/${mail.mail_id}`);
                   rerender();
@@ -730,42 +731,44 @@ function accountTab(game, pane, rerender) {
     }
 
     // --- Đổi mật khẩu và giftcode: hai khối cạnh nhau cho cân hai bên ---
-    const current = el('input', { type: 'password', autocomplete: 'current-password', placeholder: 'Mật khẩu hiện tại' });
-    const next = el('input', { type: 'password', autocomplete: 'new-password', placeholder: 'Mật khẩu mới, tối thiểu 8 ký tự' });
+    const current = labelledInput('Mật khẩu hiện tại', { type: 'password', autocomplete: 'current-password' });
+    const next = labelledInput('Mật khẩu mới', { type: 'password', autocomplete: 'new-password' });
     const pair = el('div', { class: 'block-pair' });
     pane.append(pair);
     pair.append(el('div', { class: 'block' }, [
       el('div', { class: 'title', text: 'Đổi mật khẩu' }),
-      current, next,
-      el('button', {
-        class: 'primary', type: 'button', text: 'Đổi mật khẩu',
-        onClick: async () => {
-          try {
-            await game.api.post('/v1/auth/password', {
-              current_password: current.value, new_password: next.value,
-            });
-            toast('Đã đổi mật khẩu, hãy đăng nhập lại', 'good');
-            await game.logout();
-          } catch (err) { toast(err.message, 'bad'); }
-        },
+      current.wrap, next.wrap,
+      bindSubmit(el('button', { class: 'primary', type: 'button', text: 'Đổi mật khẩu' }), async () => {
+        current.setError(null);
+        next.setError(null);
+        if (next.value.length < 8) { next.setError('Mật khẩu mới phải từ 8 ký tự'); return; }
+        try {
+          await game.api.post('/v1/auth/password', {
+            current_password: current.value, new_password: next.value,
+          });
+          toast('Đã đổi mật khẩu, hãy đăng nhập lại', 'good');
+          await game.logout();
+        } catch (err) {
+          // Lỗi hiện ngay dưới ô sai, không chỉ đẩy lên toast rồi biến mất.
+          if (err.status === 403) current.setError(err.message);
+          else next.setError(err.message);
+        }
       }),
     ]));
 
-    const code = el('input', { type: 'text', maxlength: '16', placeholder: 'Nhập mã, ví dụ COZY2026' });
+    const code = labelledInput('Mã quà tặng', { type: 'text', maxlength: '16', placeholder: 'ví dụ COZY2026' });
     pair.append(el('div', { class: 'block' }, [
       el('div', { class: 'title', text: 'Đổi giftcode' }),
-      code,
-      el('button', {
-        class: 'primary', type: 'button', text: 'Đổi mã',
-        onClick: async () => {
-          try {
-            await game.api.post('/v1/giftcodes/redeem', { code: code.value.trim() });
-            toast('Đã nhận quà từ mã', 'good');
-            audio.success();
-            code.value = '';
-            await game.refreshPlayer();
-          } catch (err) { toast(err.message, 'bad'); }
-        },
+      code.wrap,
+      bindSubmit(el('button', { class: 'primary', type: 'button', text: 'Đổi mã' }), async () => {
+        code.setError(null);
+        try {
+          await game.api.post('/v1/giftcodes/redeem', { code: code.value.trim() });
+          toast('Đã nhận quà từ mã', 'good');
+          audio.success();
+          code.clear();
+          await game.refreshPlayer();
+        } catch (err) { code.setError(err.message); }
       }),
     ]));
 

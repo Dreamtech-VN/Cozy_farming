@@ -81,6 +81,8 @@ export function renderQuestTracker(game, quests, { onOpen, onClaim }) {
       el('button', {
         class: 'qt-collapse', type: 'button',
         title: state.collapsed ? 'Mở rộng' : 'Thu gọn',
+        'aria-label': state.collapsed ? 'Mở rộng bảng nhiệm vụ' : 'Thu gọn bảng nhiệm vụ',
+        'aria-expanded': state.collapsed ? 'false' : 'true',
         text: state.collapsed ? '›' : '‹',
         onClick: () => { state.collapsed = !state.collapsed; redraw(); },
       }),

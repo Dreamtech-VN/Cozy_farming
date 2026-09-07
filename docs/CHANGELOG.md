@@ -3,6 +3,34 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.7.1 — 2026-09-03
+
+### Sửa
+Audit giao diện bằng bộ `ux-guidelines.csv` của skill ui-ux-pro-max (bản đầy đủ
+trên GitHub, khác bản đồng bộ sẵn vốn thiếu data). Đối chiếu 44 mục mức High,
+tìm ra 6 lỗi thật và sửa hết:
+
+- **Không có vòng focus bàn phím.** `#chat-input` còn bị `outline: none` mà không
+  thay bằng gì. Nay mọi control có `:focus-visible` viền 3px, offset 2px theo
+  WCAG 2.2.
+- **Không đọc `prefers-reduced-motion`.** Nay tắt chuyển động của GIAO DIỆN khi
+  hệ điều hành yêu cầu; chuyển động của thế giới giữ nguyên vì đó là nội dung
+  game chứ không phải hiệu ứng trang trí.
+- **Bốn nhóm nút dưới ngưỡng chạm 24px** (nút nhận thưởng 20px, thu gọn 21px,
+  tab nhiệm vụ và "xem tất cả" 22px) — nay tối thiểu 26px.
+- **Ô nhập chỉ có placeholder làm nhãn.** Gõ vào là nhãn biến mất. Nay có
+  `<label for>` hiện rõ, thêm `labelledInput()` dùng chung.
+- **Lỗi form chỉ hiện bằng toast rồi biến mất.** Nay hiện ngay dưới đúng ô sai,
+  có `role="alert"` và `aria-describedby`.
+- **Nút gửi không khoá khi đang chờ** — bấm nhanh hai lần là hai giao dịch. Thêm
+  `bindSubmit()` khoá nút và đổi nhãn trong lúc chờ.
+- **Xoá thư không hỏi lại** dù không hoàn tác được — nay có xác nhận.
+- **Tương phản chữ dưới 4.5:1**: đo bằng công thức WCAG trên chính nền gỗ của
+  panel, `--ink` cũ chỉ đạt 3.9:1. Đổi sang `#331e11` (5.01:1) và chữ trên nền
+  gỗ đậm sang trắng (4.89:1).
+
+Nút thu gọn bảng nhiệm vụ thêm `aria-label` và `aria-expanded`.
+
 ## 0.7.0 — 2026-09-03
 
 ### Thêm mới
