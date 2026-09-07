@@ -3,6 +3,40 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.10.0 — 2026-09-03
+
+### Sửa — cân bằng lại toàn bộ cây trồng
+Chạy `systems-interaction-mapper` (bài "nếu tôi cố phá game này") trên số liệu
+thật, tìm ra một lỗi cân bằng nặng: **bốn cây mở khoá cấp cao lại lời ÍT HƠN cà
+rốt cấp 1** (bắp 711, bí 644, hướng dương 788, dưa hấu 602 so với cà rốt 840
+xu/giờ). Lên cấp mà nhận về lựa chọn tệ hơn, nên người chơi tối ưu trồng cà rốt
+mãi — mất luôn quyết định "trồng gì".
+
+Đường cong mới suy thẳng từ `docs/DESIGN-PILLARS.md`:
+
+| | Cà rốt (1 phút) | Dưa hấu (90 phút) |
+| --- | --- | --- |
+| Xu/giờ | 1.260 | **3.663** |
+| XP/giờ | **180** | 91 |
+
+Hai trục thắng khác nhau nên không cây nào thắng tuyệt đối: canh cây ngắn thì
+lên cấp nhanh, trồng cây lâu thì nhiều tiền. Quan trọng nhất là **lối chơi
+thảnh thơi giờ là lối tối ưu về tiền** — trước đây game thưởng cho việc ngồi bấm
+từng phút, ngược hẳn trụ 1.
+
+### Thêm mới
+- **Hai bất biến cân bằng vào validator content** — cây lâu phải nhiều xu hơn
+  mỗi giờ, cây ngắn phải nhiều XP hơn mỗi giờ. Sai là server không khởi động.
+- `tests/balance.test.js` — 4 test, trong đó có một test dựng sẵn content hỏng
+  để chắc validator thật sự kêu chứ không phải luôn xanh (119 test tổng).
+- Cài 22 skill của `claude-game-design-suite` vào `.claude/skills/` để lần sau
+  dùng lại được.
+
+### Thay đổi
+- `tests/economy.test.js` đọc giá **từ content** thay vì chép cứng. Cân bằng còn
+  chỉnh nhiều lần; test chép cứng giá là đang kiểm giá chứ không kiểm luồng giao
+  dịch.
+
 ## 0.9.0 — 2026-09-03
 
 ### Thêm mới

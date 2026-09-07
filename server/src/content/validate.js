@@ -208,6 +208,48 @@ export function validateContent(content) {
     }
   }
 
+  // --- Cân bằng cây trồng ---
+  // Hai bất biến này giữ cho không cây nào thắng tuyệt đối, và giữ cho lối chơi
+  // thảnh thơi không bị thiệt tiền (xem docs/DESIGN-PILLARS.md, trụ 1 và trụ 3):
+  //   1. cây LÂU phải cho nhiều XU hơn mỗi giờ;
+  //   2. cây NGẮN phải cho nhiều XP hơn mỗi giờ.
+  // Không có hai bất biến này thì mở khoá cây cấp cao lại ra lựa chọn tệ hơn,
+  // và game quay ra thưởng cho việc ngồi canh cây từng phút.
+  const seedPrice = new Map();
+  for (const shop of content.shops) {
+    for (const entry of shop.entries) {
+      if (entry.item_id && entry.currency === 'coin') seedPrice.set(entry.item_id, entry.price);
+    }
+  }
+  const sellPrice = new Map(content.items.map((item) => [item.item_id, item.sell_price ?? 0]));
+
+  const economics = content.crops
+    .filter((crop) => seedPrice.has(crop.seed_item_id) && crop.growth_seconds > 0)
+    .map((crop) => {
+      const total = crop.yield_table.reduce((sum, y) => sum + y.weight, 0);
+      const avg = crop.yield_table.reduce((sum, y) => sum + ((y.min + y.max) / 2) * (y.weight / total), 0);
+      const hours = crop.growth_seconds / 3600;
+      const profit = avg * (sellPrice.get(crop.product_item_id) ?? 0) - seedPrice.get(crop.seed_item_id);
+      return { crop, minutes: crop.growth_seconds / 60, coinPerHour: profit / hours, xpPerHour: crop.xp / hours };
+    })
+    .sort((a, b) => a.minutes - b.minutes);
+
+  for (let i = 1; i < economics.length; i++) {
+    const prev = economics[i - 1];
+    const cur = economics[i];
+    if (cur.coinPerHour < prev.coinPerHour) {
+      issues.push(err('balance', `cây ${cur.crop.crop_id} lớn lâu hơn ${prev.crop.crop_id} nhưng chỉ cho ${Math.round(cur.coinPerHour)} xu/giờ so với ${Math.round(prev.coinPerHour)} — trồng cây lâu phải đáng hơn`));
+    }
+  }
+
+  if (economics.length >= 2) {
+    const shortest = economics[0];
+    const longest = economics[economics.length - 1];
+    if (longest.xpPerHour >= shortest.xpPerHour) {
+      issues.push(err('balance', `cây ${longest.crop.crop_id} vừa nhiều xu vừa nhiều XP mỗi giờ hơn ${shortest.crop.crop_id} — thành lựa chọn thắng tuyệt đối, mất chỗ để cân nhắc`));
+    }
+  }
+
   // --- Điểm danh hằng ngày ---
   const daily = content.economy.daily_rewards;
   if (daily) {

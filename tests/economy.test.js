@@ -3,6 +3,15 @@ import assert from 'node:assert/strict';
 import { startTestServer, createPlayer, grant } from './helpers.js';
 import { applyChange, xpForLevel } from '../server/src/domain/economy.js';
 
+/**
+ * Giá đọc THẲNG từ content thay vì chép cứng: cân bằng còn chỉnh nhiều lần, mà
+ * mỗi lần chỉnh giá lại phải sửa test thì test đang kiểm giá chứ không kiểm
+ * luồng giao dịch.
+ */
+const priceOf = (server, shopId, entryId) =>
+  server.app.ctx.content.byShop.get(shopId).entries.find((e) => e.entry_id === entryId).price;
+const sellPriceOf = (server, itemId) => server.app.ctx.content.byItem.get(itemId).sell_price;
+
 describe('Economy & shop (doc 09/10, doc 20 — purchase grant, inventory transaction)', () => {
   let server; let player; let token;
   before(async () => {
@@ -16,12 +25,13 @@ describe('Economy & shop (doc 09/10, doc 20 — purchase grant, inventory transa
     await grant(server, player.character_id, { currencies: { coin: 1000 } });
     const before = (await server.get('/v1/player/wallet', { token })).body;
 
+    const cost = priceOf(server, 'shop_seed', 'se_carrot') * 3;
     const res = await server.post('/v1/shops/shop_seed/purchase', { token, body: { entry_id: 'se_carrot', quantity: 3 } });
     assert.equal(res.status, 200);
-    assert.equal(res.body.cost, 12);
+    assert.equal(res.body.cost, cost);
 
     const after = (await server.get('/v1/player/wallet', { token })).body;
-    assert.equal(after.coin, before.coin - 12);
+    assert.equal(after.coin, before.coin - cost);
 
     const inv = (await server.get('/v1/player/inventory', { token })).body;
     assert.equal(inv.items.find((i) => i.item_id === 'item_seed_carrot').quantity, 8); // 5 khởi đầu + 3
@@ -51,7 +61,7 @@ describe('Economy & shop (doc 09/10, doc 20 — purchase grant, inventory transa
     assert.equal(second.body.transaction.replayed, true);
 
     const after = (await server.get('/v1/player/wallet', { token })).body;
-    assert.equal(after.coin, before.coin - 12, 'chỉ được trừ tiền cho lần đầu');
+    assert.equal(after.coin, before.coin - priceOf(server, 'shop_seed', 'se_turnip') * 2, 'chỉ được trừ tiền cho lần đầu');
   });
 
   test('không mua được món chưa đủ cấp', async () => {
@@ -83,11 +93,12 @@ describe('Economy & shop (doc 09/10, doc 20 — purchase grant, inventory transa
   test('bán vật phẩm cộng coin và trừ item', async () => {
     await grant(server, player.character_id, { items: [{ item_id: 'item_crop_carrot', count: 10 }] });
     const before = (await server.get('/v1/player/wallet', { token })).body;
+    const gain = sellPriceOf(server, 'item_crop_carrot') * 4;
     const res = await server.post('/v1/shops/sell', { token, body: { item_id: 'item_crop_carrot', quantity: 4 } });
     assert.equal(res.status, 200);
-    assert.equal(res.body.gain, 48);
+    assert.equal(res.body.gain, gain);
     const after = (await server.get('/v1/player/wallet', { token })).body;
-    assert.equal(after.coin, before.coin + 48);
+    assert.equal(after.coin, before.coin + gain);
   });
 
   test('không bán được nhiều hơn số đang có', async () => {

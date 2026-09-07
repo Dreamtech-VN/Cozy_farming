@@ -138,6 +138,38 @@ Cân lại bằng bảng nguồn/bồn:
 
 ---
 
+## 5b. Cân bằng cây trồng
+
+Chạy bài "nếu tôi cố phá game này" trên số liệu thật trong content, tìm ra **bốn
+cây mở khoá cấp cao mà lời ÍT HƠN cà rốt cấp 1**:
+
+| Cây | Mở ở cấp | xu/giờ (cũ) | so với cà rốt (840) |
+| --- | --- | --- | --- |
+| `crop_corn` | 3 | 711 | kém 129 |
+| `crop_pumpkin` | 6 | 644 | kém 196 |
+| `crop_sunflower` | 7 | 788 | kém 52 |
+| `crop_watermelon` | 9 | 602 | kém 238 |
+
+Nghĩa là **lên cấp lại nhận về lựa chọn tệ hơn**, và người chơi tối ưu sẽ trồng
+cà rốt mãi mãi — mất luôn quyết định "trồng gì", đúng thứ trụ 3 đòi phải có.
+
+Sửa xong, hai trục thắng khác nhau nên không cây nào thắng tuyệt đối:
+
+| | Cây ngắn (cà rốt 1 phút) | Cây lâu (dưa hấu 90 phút) |
+| --- | --- | --- |
+| Xu mỗi giờ | 1.260 | **3.663** |
+| XP mỗi giờ | **180** | 91 |
+| Xu mỗi lần ghé | 21 | **5.495** |
+
+Muốn lên cấp nhanh thì ngồi canh cây ngắn; muốn tiền thì trồng cây lâu rồi thoát
+ra. Lối chơi thảnh thơi **không hề thiệt tiền** — đúng trụ 1.
+
+Hai bất biến này đã khoá lại trong `server/src/content/validate.js` và
+`tests/balance.test.js`, kèm một test dựng sẵn content hỏng để chắc chắn
+validator thật sự kêu.
+
+---
+
 ## 6. Đề nghị thứ tự làm tiếp
 
 Xếp theo *đổi cảm giác chơi trên mỗi giờ công*, không theo độ khó:
