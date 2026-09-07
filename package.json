@@ -13,6 +13,7 @@
     "lint": "node tools/lint.mjs",
     "check": "npm run lint && npm run validate:content && npm test",
     "art": "node tools/gen-art.mjs",
+    "fonts": "node tools/fetch-fonts.mjs",
     "seed": "node tools/seed-dev.mjs",
     "docs:import": "node tools/docx-to-markdown.mjs"
   },

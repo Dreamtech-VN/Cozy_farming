@@ -6,8 +6,43 @@
  * Khác doc 12 một điểm: bản này hướng MÀN HÌNH NGANG thay vì mobile portrait,
  * và không có nút điều khiển cảm ứng (điều khiển bằng bàn phím). Layout vẫn
  * dùng đơn vị tương đối nên đổi lại về portrait sau này không phải viết lại.
+ *
+ * Hệ thiết kế: xem design-system/cozy-farming/MASTER.md.
+ * Phong cách Claymorphism — bo góc dày, viền dày, bóng kép trong+ngoài, nhấn
+ * nút nảy nhẹ. Mọi giá trị đều là token ở :root, component KHÔNG viết mã màu
+ * thẳng vào nữa.
  */
+@import url('/assets/fonts/fonts.css');
+
 :root {
+  /* ---- Chữ ---- */
+  --font-display: 'Baloo 2', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Nunito', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* ---- Bậc bo góc (Claymorphism: 16–24px cho khối lớn) ---- */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  /* ---- Bậc khoảng cách ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /* ---- Bóng kép: một bóng trong tạo độ dày, một bóng ngoài tách khỏi nền ---- */
+  --shadow-clay: inset 0 -3px 0 rgba(90, 55, 25, .22), 0 4px 10px rgba(60, 34, 12, .28);
+  --shadow-clay-sm: inset 0 -2px 0 rgba(90, 55, 25, .2), 0 2px 5px rgba(60, 34, 12, .24);
+  --shadow-press: inset 0 2px 4px rgba(60, 34, 12, .3);
+
+  /* ---- Nhịp chuyển động: 150–300ms, nhấn nút nảy nhẹ ---- */
+  --ease-bounce: cubic-bezier(.34, 1.56, .64, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+
   --bg: #101a16;
   --panel: #1b2b24;
   --panel-2: #24382f;
@@ -17,12 +52,10 @@
   --accent: #7fc98a;
   --accent-2: #f2c94c;
   --danger: #e0576f;
-  --radius: 14px;
+  --radius: var(--radius-md);
   --safe: env(safe-area-inset-bottom, 0px);
 
-  /* HUD theo mẫu: các tấm là KÍNH MỜ XÁM-NÂU chữ TRẮNG, chỉ tab đang chọn và
-     nút chính mới là mảng kem/vàng. Bản trước làm cả tấm màu kem chữ nâu nên
-     ngược hẳn: mẫu chỉ dùng kem cho điểm nhấn. */
+  /* ---- Tấm HUD: kính mờ xám-nâu chữ trắng, kem/vàng chỉ dùng cho điểm nhấn ---- */
   --plate: rgba(96, 84, 72, .52);
   --plate-soft: rgba(96, 84, 72, .42);
   --plate-blur: blur(9px) saturate(115%);
@@ -30,20 +63,26 @@
   --plate-ink-soft: rgba(255, 255, 255, .82);
   --plate-frame: inset 0 0 0 1px rgba(255, 255, 255, .18);
   --plate-shadow: 0 2px 6px rgba(40, 26, 14, .28);
-  /* Điểm nhấn kem/vàng: tab đang chọn, nút đổi kênh, nút gửi. */
   --cream: linear-gradient(180deg, #fff6d6, #ffe09a);
   --cream-ink: #6b4415;
-
   --gold: #f5cf6a;
 
-  /* Mực nâu cho những chỗ đứng trên nền gỗ/giấy: badge sao vàng trên HUD, và
-     toàn bộ popup (panel, overlay) vẫn dùng asset gỗ trong client/assets/ui. */
-  /* Mực nâu đo bằng WCAG trên chính nền gỗ của panel (#c78060): #4a2f1c chỉ
-     đạt 3.9:1, dưới ngưỡng 4.5:1 cho chữ thường. #331e11 đạt 5.0:1. */
+  /* ---- Mực trên nền gỗ/giấy của popup. Số đo bằng công thức WCAG trên chính
+         nền gỗ #c78060: #331e11 đạt 5.01:1, #4a2f1c cũ chỉ 3.9:1. ---- */
   --ink: #331e11;
   --ink-soft: #6b4a2d;
-  /* Chữ kem trên nền gỗ đậm: #fbf4e4 đạt 4.47:1, sát mép — dùng trắng cho chắc. */
   --ink-cream: #ffffff;
+  /* ---- Bí danh ngữ nghĩa (theo MASTER.md) — component dùng tên VAI TRÒ,
+         không viết mã màu thẳng vào. Giá trị lấy từ art, lý do ghi ở
+         design-system/cozy-farming/pages/game-hud.md ---- */
+  --color-foreground: var(--ink);
+  --color-muted-foreground: var(--ink-soft);
+  --color-on-accent: var(--cream-ink);
+  --color-accent: var(--gold);
+  --color-success: #56a02d;
+  --color-destructive: #f0483f;
+  --color-ring: #ffd45e;
+
   --ui-shadow: drop-shadow(0 3px 4px rgba(50, 28, 10, .32));
   --ui-text-shadow: 0 1px 0 rgba(255, 244, 222, .5);
   color-scheme: dark;
@@ -55,7 +94,7 @@
    bấm không hiện vòng, chỉ bàn phím mới hiện.
    Viền 2px + offset 2px theo WCAG 2.2 (diện tích và tương phản tối thiểu). */
 :focus-visible {
-  outline: 3px solid #ffd45e;
+  outline: 3px solid var(--color-ring);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -77,7 +116,7 @@ html, body {
   overflow: hidden;
   background: var(--bg);
   color: var(--text);
-  font: 15px/1.45 "Segoe UI", system-ui, -apple-system, "Noto Sans", sans-serif;
+  font: 15px/1.5 var(--font-body);
   -webkit-text-size-adjust: 100%;
   overscroll-behavior: none;
 }
@@ -867,7 +906,28 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
 }
 .block .title { color: var(--ink); font-size: 14px; font-weight: 800; }
 .block label { display: block; font-size: 12px; font-weight: 700; color: var(--ink-soft); margin-bottom: 3px; }
-.block .field-error { color: #b3372f; font-size: 12px; font-weight: 700; }
+.block .field-error { color: var(--color-destructive); font-size: 12px; font-weight: 700; }
 .block .sub { color: var(--ink-soft); font-size: 12px; }
 .block input { width: 100%; min-height: 36px; }
 .block .primary { align-self: flex-end; }
+
+/* ---------- Áp hệ thiết kế Claymorphism ----------
+   Chữ tiêu đề và nhãn nút dùng font bo tròn; thân bài dùng font đọc dài. */
+.panel h2, .block .title, .row .title, .menu-item-label, .icon-btn-label,
+.tab, .seg-btn, .qt-name, #player-card .name, .chat-tool, .primary, .ghost {
+  font-family: var(--font-display);
+  letter-spacing: .2px;
+}
+/* Nunito nét mảnh hơn font hệ thống nên nâng một bậc đậm cho chữ nhỏ. */
+.row .sub, .qt-desc, .chat-line { font-weight: 500; }
+
+/* Nhấn nút nảy nhẹ — dấu hiệu nhận biết của phong cách này. */
+.primary, .ghost, .menu-item, .icon-btn, .seg-btn, .tab, .qt-claim, .chat-tool {
+  transition: transform var(--dur-fast) var(--ease-bounce);
+}
+.primary:active, .ghost:active, .menu-item:active,
+.seg-btn:active, .tab:active, .qt-claim:active { transform: scale(.95); }
+
+/* Bóng kép cho khối nổi trên nền gỗ. */
+.block, .menu-item { box-shadow: var(--shadow-clay-sm); }
+.panel { box-shadow: var(--shadow-clay); }

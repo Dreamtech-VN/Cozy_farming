@@ -3,6 +3,38 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.8.0 — 2026-09-03
+
+### Thêm mới
+Áp hệ thiết kế theo skill **ui-ux-pro-max** (bản đầy đủ trên GitHub, có `data/`
+và `scripts/search.py` mà bản đồng bộ sẵn bị thiếu).
+
+- `design-system/cozy-farming/MASTER.md` — sinh bằng `--design-system --persist`,
+  đúng quy trình của skill.
+- `design-system/cozy-farming/pages/game-hud.md` — file đè, ghi rõ chỗ nào chệch
+  khỏi MASTER và **vì sao**.
+- **Font tự host** trong `client/assets/fonts/` (SIL OFL 1.1, kèm OFL.txt), sinh
+  bằng `tools/fetch-fonts.mjs`: **Baloo 2** cho tiêu đề và nhãn nút, **Nunito**
+  cho thân bài. Chỉ lấy ba subset latin, latin-ext, vietnamese — tổng 176 KB.
+- **Lớp token thiết kế** ở `:root`: bậc bo góc, bậc khoảng cách, bóng kép, nhịp
+  chuyển động, và bí danh màu ngữ nghĩa (`--color-foreground`, `--color-accent`,
+  `--color-destructive`, `--color-ring`…) để component không viết mã màu thẳng.
+
+### Thay đổi
+- **Phong cách Claymorphism** (bảng tra khớp đúng hạng mục "casual games"): bo
+  góc dày, bóng kép trong + ngoài, nhấn nút nảy nhẹ 150ms với
+  `cubic-bezier(.34,1.56,.64,1)`.
+
+### Ghi chú — hai chỗ cố ý chệch khỏi bảng tra
+1. **Màu.** MASTER đề xuất hồng tươi + tím trên nền hồng nhạt cho hạng mục
+   *Casual Puzzle Game*. Không dùng được vì màu ở đây **đã bị art quyết định
+   trước**: popup là asset gỗ của pack đã mua, thế giới là tileset pixel tự sinh.
+   Giữ cấu trúc của MASTER, lấy màu từ art, ghi lại trong file đè.
+2. **Font.** Cặp mà bảng tra gợi ý cho "gaming" là **Fredoka + Nunito**, nhưng
+   Fredoka **không có subset vietnamese** — game viết bằng tiếng Việt thì mọi
+   chữ có dấu rơi về font hệ thống. Đổi sang Baloo 2, vốn cũng nằm trong bảng
+   tra ở cặp "Kids/Education — educational games" và có đủ tiếng Việt.
+
 ## 0.7.1 — 2026-09-03
 
 ### Sửa
