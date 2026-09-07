@@ -3,6 +3,42 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.11.0 — 2026-09-07
+
+### Thêm — nền nhiều lớp parallax
+
+Áp dụng `claude-skill-game-assets-enhancer` (adamlyttleapps). Bước audit tìm ra
+nền cũ chỉ có **một lớp giữa chạy cùng tốc độ camera** (factor 1.0) — tức là
+không có parallax thật, và không có lớp tiền cảnh nào.
+
+`client/src/render/world.js` viết lại quanh một hằng `LAYERS` khai báo đúng một
+chỗ, xếp từ xa tới gần:
+
+| Lớp | Hệ số | Nội dung |
+| --- | --- | --- |
+| `hillsFar` | 0,12 | cây to/nhỏ trên rặng đồi xa |
+| `hillsNear` | 0,30 | cây, bụi, đá |
+| `mid` | 0,55 | nhà, sạp hàng, cây, đống rơm |
+| `fore` | 1,50 | viền cỏ bám đáy khung nhìn |
+
+- `slotHash(mapId, layer, slot, salt)` đặt vật thể theo ô cố định, nên nền giống
+  nhau giữa các lần vào map mà không cần lưu gì; chỉ vẽ các ô đang lọt khung.
+- `#drawRidge()` vẽ hai rặng đồi bằng dải ellipse chồng nhau.
+- Thêm 5 sprite chi tiết vào `tools/art/props.mjs`: `grass_tall`, `leaf_branch`,
+  `reed`, `log`, `mushroom` (`props.png` lên 320×320).
+
+### Sửa — phối cảnh khí quyển bị ngược
+Rặng đồi càng xa càng **đậm** màu, đúng ngược đời thật. Thêm `mixColour()` trộn
+màu lớp về phía màu trời theo độ xa (`haze` 0,62 → 0).
+
+### Bỏ bớt có chủ ý
+- Lớp tiền cảnh chỉ còn viền cỏ mờ bám đáy khung nhìn. Bản đầy đủ của kỹ thuật
+  (vật to lướt sát camera) hợp game chạy ngang tốc độ cao; ở đây camera đi bộ
+  chậm và vùng chơi nằm giữa màn hình, nên vật tiền cảnh to sẽ che mất chỗ đang
+  chơi — trái nguyên tắc "vùng tương tác luôn là lớp trên cùng".
+- Bước 2 của skill (sinh asset qua fal.ai MCP) là dịch vụ trả phí, không có ở
+  môi trường này nên bỏ qua; art vẫn sinh bằng `npm run art`.
+
 ## 0.10.0 — 2026-09-03
 
 ### Sửa — cân bằng lại toàn bộ cây trồng

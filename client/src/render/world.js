@@ -14,6 +14,39 @@ const TILE_SCALE = 3;
 /** Chọn biến thể tile cố định theo cột, để cùng một chỗ luôn ra cùng hoa văn. */
 const hashCol = (mapId, col) => Math.abs(hashString(`${mapId}:${col}`));
 
+/**
+ * Ngăn xếp lớp cảnh, khai báo MỘT chỗ và vẽ đúng thứ tự này.
+ *
+ * `factor` là tốc độ trôi so với mặt sân (mặt sân = 1). Hai lớp đồi là thứ tạo
+ * ra chiều sâu chứ không phải trang trí: hai dải trôi ở hai tốc độ khác nhau
+ * mới ra parallax, một dải thì nhìn vẫn phẳng.
+ *
+ * Quy tắc đọc được: KHÔNG lớp nền nào được dùng sprite mà người chơi phải tương
+ * tác (đài phun, bảng tin, máy game) — nhìn thấy ở nền rồi chạy tới bấm không
+ * được thì ức chế. Vật tương tác chỉ nằm ở lớp mặt sân.
+ */
+const LAYERS = {
+  hillsFar:  { factor: 0.12, slot: 300, baseY: -96, kinds: ['tree_big', 'tree_small'], scale: [1.5, 2.2], skip: 0.1, haze: 0.62 },
+  hillsNear: { factor: 0.30, slot: 260, baseY: -58, kinds: ['tree_big', 'bush', 'rock'], scale: [1.5, 2.2], skip: 0.15, haze: 0.34 },
+  mid:       { factor: 0.55, slot: 300, baseY: 0, kinds: ['house', 'stall', 'tree_big', 'tree_small', 'haystack'], scale: [1.8, 2.6], skip: 0.2, haze: 0.1 },
+  /*
+   * Tiền cảnh: chỉ một viền cỏ ở SÁT MÉP DƯỚI màn hình.
+   *
+   * Bản đầy đủ của kỹ thuật này (vật to lướt ngang qua sát camera) hợp game
+   * chạy ngang tốc độ cao. Ở đây camera đi bộ chậm và vùng chơi nằm ngay giữa
+   * màn hình, nên vật tiền cảnh to sẽ che mất chỗ đang chơi — trái đúng nguyên
+   * tắc "vùng tương tác luôn là lớp trên cùng". Giữ đúng phần thêm chiều sâu mà
+   * không chắn tầm nhìn: neo dưới mép dưới nên chỉ ló ngọn cỏ.
+   */
+  fore:      { factor: 1.5, slot: 300, anchor: 'viewBottom', baseY: 128, kinds: ['grass_tall'], scale: [2, 2.8], skip: 0.4, haze: 0 },
+};
+
+/** Băm xác định theo (lớp, ô) — quay lại chỗ cũ là thấy đúng cảnh cũ, không lưu gì. */
+const slotHash = (mapId, layer, slot, salt) => {
+  const h = hashString(`${mapId}|${layer}|${slot}|${salt}`);
+  return (Math.abs(h) % 10000) / 10000;
+};
+
 export class WorldRenderer {
   constructor(canvas, content) {
     this.canvas = canvas;
@@ -112,6 +145,8 @@ export class WorldRenderer {
     }
 
     this.#drawForeground(map);
+    // Lớp tiền cảnh lướt qua sát camera, vẽ sau cùng và không hề chặn thao tác.
+    this.#drawLayer(map, 'fore', time);
     ctx.restore();
 
     this.#drawWorldMood(time);
@@ -182,86 +217,95 @@ export class WorldRenderer {
     ctx.fillRect(0, 0, this.viewWidth, this.viewHeight);
   }
 
-  /** Parallax: đồi xa trôi chậm hơn camera (doc 05 — nhiều lớp chiều sâu). */
+  /**
+   * Vẽ một lớp cảnh: chia thế giới thành ô, mỗi ô băm ra biến thể/vị trí/cỡ.
+   * Chỉ dựng những ô lọt vào khung nhìn nên map rộng bao nhiêu cũng vậy.
+   */
+  #drawLayer(map, name, time) {
+    if (!atlas.ready) return;
+    const ctx = this.ctx;
+    const spec = LAYERS[name];
+    // Lớp trôi chậm hơn mặt sân, nên dịch ngược lại phần chênh lệch.
+    const shift = this.camera.x * (1 - spec.factor);
+    const viewLeft = this.camera.x - this.viewWidth / 2 - shift;
+    const from = Math.floor((viewLeft - spec.slot) / spec.slot);
+    const to = Math.ceil((viewLeft + this.viewWidth + spec.slot) / spec.slot);
+
+    ctx.save();
+    ctx.translate(shift, 0);
+    if (spec.haze > 0) ctx.globalAlpha = 1 - spec.haze;
+    // Lớp tiền cảnh lướt sát camera nên làm mờ — đó là thứ khiến nó đọc ra
+    // "gần" chứ không phải "vật cản".
+    if (name === 'fore') { ctx.filter = 'blur(3px)'; ctx.globalAlpha = 0.9; }
+
+    for (let slot = from; slot <= to; slot++) {
+      if (slotHash(map.map_id, name, slot, 'skip') < spec.skip) continue;
+      const pick = slotHash(map.map_id, name, slot, 'kind');
+      const kind = spec.kinds[Math.floor(pick * spec.kinds.length) % spec.kinds.length];
+      const jitter = (slotHash(map.map_id, name, slot, 'x') - 0.5) * spec.slot * 0.7;
+      const [lo, hi] = spec.scale;
+      const scale = lo + slotHash(map.map_id, name, slot, 's') * (hi - lo);
+      const x = slot * spec.slot + jitter;
+      // Chân đặt theo mốc riêng của lớp: lớp đồi đứng trên sườn đồi phía sau,
+      // lớp tiền cảnh neo vào mép dưới khung nhìn nên luôn ló đúng phần ngọn dù
+      // camera đang ở đâu.
+      const anchorBase = spec.anchor === 'viewBottom'
+        ? this.camera.y + (this.viewHeight - this.anchorY)
+        : map.ground_y;
+      const y = anchorBase + spec.baseY;
+      atlas.prop(ctx, kind, x, y, scale);
+    }
+    ctx.restore();
+  }
+
+  /** Nền: trời → mây → hai dải đồi → lớp cảnh giữa. */
   #drawBackground(map, time) {
     const ctx = this.ctx;
-    const drift = this.camera.x * 0.35;
-    ctx.save();
-    ctx.translate(drift, 0);
-    ctx.fillStyle = shade(map.theme.ground, -32);
-    for (let i = -1; i < map.width / 420 + 2; i++) {
-      const x = i * 420 - drift * 0.6;
-      ctx.beginPath();
-      ctx.ellipse(x, map.ground_y - 10, 260, 130, 0, Math.PI, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
-
-    const drift2 = this.camera.x * 0.18;
-    ctx.save();
-    ctx.translate(drift2, 0);
-    ctx.fillStyle = shade(map.theme.ground, -16);
-    for (let i = -1; i < map.width / 300 + 2; i++) {
-      const x = i * 300 - drift2 * 0.5;
-      ctx.beginPath();
-      ctx.ellipse(x, map.ground_y + 6, 190, 90, 0, Math.PI, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
-
-    this.#drawScenery(map);
 
     // Mây trôi nhẹ để thế giới có nhịp sống. Giữ mây đủ thấp so với mép trên
     // khung nhìn: mây bị mép cắt ngang trông như một mảng trắng dán lên màn hình.
     const cloudTop = Math.max(map.ground_y - 430, this.camera.y - this.anchorY + 60);
+    ctx.save();
     ctx.globalAlpha = 0.5;
     ctx.fillStyle = '#ffffff';
     for (let i = 0; i < 8; i++) {
-      const x = ((i * 397 + time * 12) % (map.width + 500)) - 250 + this.camera.x * 0.05;
+      const x = ((i * 397 + time * 12) % (map.width + 500)) - 250 + this.camera.x * 0.9;
       const y = cloudTop + (i % 3) * 58;
       ctx.beginPath();
       ctx.ellipse(x, y, 52, 20, 0, 0, Math.PI * 2);
       ctx.ellipse(x + 40, y + 6, 36, 15, 0, 0, Math.PI * 2);
       ctx.fill();
     }
-    ctx.globalAlpha = 1;
+    ctx.restore();
+
+    // Phối cảnh trên không: dải càng XA thì càng ngả về màu trời — nhạt hơn và
+    // ít tương phản hơn, chứ không phải tối hơn. Tối dần về xa là làm ngược,
+    // nhìn ra hai vệt đè lên nhau chứ không ra chiều sâu.
+    const sky = map.theme.sky[1];
+    this.#drawRidge(map, 0.12, 128, mixColour(map.theme.ground, sky, 0.5), 470);
+    this.#drawRidge(map, 0.30, 96, mixColour(map.theme.ground, sky, 0.26), 330);
+
+    this.#drawLayer(map, 'hillsFar', time);
+    this.#drawLayer(map, 'hillsNear', time);
+    this.#drawLayer(map, 'mid', time);
   }
 
-  /**
-   * Cây và nhà dọc theo mặt đất. Sinh xác định từ map_id nên mỗi map luôn có
-   * cùng một bố cục, và thêm map mới không cần vẽ tay asset (doc 05 — modular prop).
-   */
-  #drawScenery(map) {
+  /** Một dải đồi liền mạch; các mảnh chồng lên nhau nên không thành gò rời rạc. */
+  #drawRidge(map, factor, height, colour, spacing) {
     const ctx = this.ctx;
-    const rng = seededRandom(hashString(map.map_id));
-    const city = map.group === 'City';
-    const count = Math.floor(map.width / 240);
-
-    // Cảnh vật là lớp nền: giảm độ đậm để nhân vật và NPC luôn nổi lên phía
-    // trước (doc 05 — silhouette gameplay phải đọc được trước bối cảnh).
+    const shift = this.camera.x * (1 - factor);
+    const viewLeft = this.camera.x - this.viewWidth / 2 - shift;
     ctx.save();
-    ctx.globalAlpha = 0.82;
-
-    for (let i = 0; i < count; i++) {
-      const x = 60 + i * 240 + rng() * 90;
-      const scale = 1.6 + rng() * 1.1;
-      const y = map.ground_y + 4;
-      const roll = rng();
-
-      if (!atlas.ready) continue;
-      if (city) {
-        atlas.prop(ctx, roll > 0.45 ? 'house' : (roll > 0.2 ? 'stall' : 'tree_big'), x, y, scale);
-      } else {
-        const kind = roll > 0.55 ? 'tree_big' : roll > 0.3 ? 'tree_small' : roll > 0.15 ? 'bush' : 'rock';
-        atlas.prop(ctx, kind, x, y, scale);
-      }
-    }
-
-    // Lớp bụi cỏ và hoa sát mặt đất, dày hơn cây nên cảnh không bị trống.
-    for (let i = 0; i < count * 3; i++) {
-      if (!atlas.ready) break;
-      const x = 30 + i * 80 + rng() * 50;
-      atlas.prop(ctx, rng() > 0.5 ? 'flowers' : 'bush', x, map.ground_y + 6, 0.7 + rng() * 0.4);
+    ctx.translate(shift, 0);
+    ctx.fillStyle = colour;
+    const from = Math.floor((viewLeft - spacing) / spacing);
+    const to = Math.ceil((viewLeft + this.viewWidth + spacing) / spacing);
+    for (let i = from; i <= to; i++) {
+      const wobble = 0.8 + slotHash(map.map_id, `ridge${factor}`, i, 'h') * 0.5;
+      ctx.beginPath();
+      // Bán trục ngang lớn hơn khoảng cách ô nên các vòm chồng mép vào nhau.
+      ctx.ellipse(i * spacing, map.ground_y + 8, spacing * 0.78, height * wobble, 0, Math.PI, Math.PI * 2);
+      ctx.fill();
     }
     ctx.restore();
   }
@@ -493,6 +537,19 @@ function seededRandom(seed) {
 }
 
 /** Làm sáng/tối một màu hex — dùng để dựng bảng màu phái sinh cho từng map. */
+/** Trộn hai màu hex theo tỉ lệ — dùng cho phối cảnh trên không của các dải đồi. */
+export function mixColour(a, b, k) {
+  const parse = (hex) => {
+    const v = hex.replace('#', '');
+    const n = parseInt(v.length === 3 ? [...v].map((c) => c + c).join('') : v, 16);
+    return [(n >> 16) & 0xff, (n >> 8) & 0xff, n & 0xff];
+  };
+  const [r1, g1, b1] = parse(a);
+  const [r2, g2, b2] = parse(b);
+  const mix = (x, y) => Math.round(x + (y - x) * k);
+  return `#${((mix(r1, r2) << 16) | (mix(g1, g2) << 8) | mix(b1, b2)).toString(16).padStart(6, '0')}`;
+}
+
 export function shade(hex, amount) {
   const value = hex.replace('#', '');
   const num = parseInt(value.length === 3 ? value.split('').map((c) => c + c).join('') : value, 16);

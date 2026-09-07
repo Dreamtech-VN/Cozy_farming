@@ -13,6 +13,7 @@ export const PROP_NAMES = [
   'fence', 'crate', 'barrel', 'well', 'sign',
   'house', 'stall', 'lamp', 'haystack', 'stump',
   'soil', 'fountain', 'arcade', 'board', 'chest',
+  'grass_tall', 'leaf_branch', 'reed', 'log', 'mushroom',
 ];
 export const PROP_COLS = 5;
 
@@ -238,11 +239,66 @@ function chest(px, ox, oy) {
   px.rect(cx - 3, base - 20, 6, 9, P.cropLight);
 }
 
+/* --- Lớp tiền cảnh: vật lướt qua sát camera, chỉ là bóng dáng nên vẽ đậm và
+   đơn giản, chi tiết sẽ bị làm mờ hết khi vẽ. --- */
+function grassTall(px, ox, oy) {
+  const base = oy + CELL;
+  for (let i = 0; i < 9; i++) {
+    const x = ox + 6 + i * 6;
+    const h = 26 + ((i * 7) % 18);
+    const lean = ((i % 3) - 1) * 4;
+    for (let y = 0; y < h; y++) {
+      px.set(x + Math.round((lean * y) / h), base - y, i % 2 ? P.leafDark : P.leaf);
+      px.set(x + 1 + Math.round((lean * y) / h), base - y, P.leafDark);
+    }
+  }
+}
+
+function leafBranch(px, ox, oy) {
+  const y = oy + 8;
+  px.rect(ox, y, CELL - 6, 4, P.woodDark);
+  for (let i = 0; i < 6; i++) {
+    const x = ox + 6 + i * 9;
+    px.ellipse(x, y + 10, 7, 5, i % 2 ? P.leaf : P.leafDark);
+    px.ellipse(x + 4, y + 2, 6, 4, P.leafDark);
+  }
+}
+
+function reed(px, ox, oy) {
+  const base = oy + CELL;
+  for (let i = 0; i < 5; i++) {
+    const x = ox + 12 + i * 9;
+    const h = 34 + ((i * 11) % 14);
+    px.rect(x, base - h, 2, h, P.leafDark);
+    px.ellipse(x + 1, base - h - 3, 3, 6, P.woodDark);
+  }
+}
+
+function log(px, ox, oy) {
+  const base = oy + CELL - 6;
+  px.rect(ox + 4, base - 14, CELL - 8, 14, P.wood);
+  px.rect(ox + 4, base - 14, CELL - 8, 3, P.woodLight);
+  px.rect(ox + 4, base - 3, CELL - 8, 3, P.woodDark);
+  px.ellipse(ox + 6, base - 7, 4, 7, P.woodDark);
+  px.ellipse(ox + 6, base - 7, 2, 3, P.woodLight);
+}
+
+function mushroom(px, ox, oy) {
+  const base = oy + CELL - 6;
+  for (const [dx, scale] of [[-8, 1], [8, 0.75]]) {
+    const cx = ox + CELL / 2 + dx;
+    px.rect(cx - 2, base - 8 * scale, 4, 8 * scale, P.wallLight);
+    px.ellipse(cx, base - 9 * scale, 8 * scale, 5 * scale, P.roof);
+    px.ellipse(cx - 2, base - 10 * scale, 2, 1.5, P.wallLight);
+  }
+}
+
 export function drawProps(px) {
   const draw = [tree, (p, x, y) => tree(p, x, y, 0.7), bush, rock, flowers,
     fence, crate, barrel, well, sign,
     house, stall, lamp, haystack, stump,
-    soil, fountain, arcade, board, chest];
+    soil, fountain, arcade, board, chest,
+    grassTall, leafBranch, reed, log, mushroom];
   draw.forEach((fn, i) => {
     const ox = (i % 5) * CELL;
     const oy = Math.floor(i / 5) * CELL;
