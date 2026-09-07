@@ -3,6 +3,14 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.8.1 — 2026-09-03
+
+### Sửa
+- **Trang Cài đặt toàn màn hình vẫn hở viền.** Panel đang chừa 10px mỗi bên nên
+  lộ ra thế giới chạy phía sau, nhìn như panel bị hụt chứ không phải một trang
+  riêng. Nay phủ kín viewport (`inset: 0`, `100dvh` để trừ đúng thanh địa chỉ
+  trên di động), nội dung lùi vào theo vùng an toàn của máy có tai thỏ.
+
 ## 0.8.0 — 2026-09-03
 
 ### Thêm mới
