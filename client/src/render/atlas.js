@@ -220,6 +220,23 @@ class Atlas {
   }
 
   /**
+   * Ô sprite kèm ẢNH TRANG chứa nó — cho chỗ cần tự vẽ lấy thay vì gọi `sprite`.
+   *
+   * Ghép nhân vật từ nhiều mảnh (thân, mặt, tóc) phải tự tính vị trí từng mảnh
+   * theo mảnh khác, nên không dùng được các hàm vẽ sẵn ở trên: chúng đều neo
+   * đáy giữa của riêng mảnh đó.
+   *
+   * @returns {{rect, img}|null} null khi chưa có art — trang được nạp ngầm.
+   */
+  part(name) {
+    const rect = this.meta?.sprites?.index?.[name];
+    if (!rect) return null;
+    const img = this.#pageImages.get(rect.page);
+    if (!img) { this.ensurePage(rect.page); return null; }
+    return { rect, img };
+  }
+
+  /**
    * Lời hứa cho trang chứa sprite này, nếu nó CHƯA sẵn sàng; null nếu đã có.
    *
    * Dành cho chỗ vẽ đúng một lần (chân dung trên HUD): không có vòng lặp nào vẽ

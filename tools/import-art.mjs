@@ -14,7 +14,18 @@ import { join } from 'node:path';
 import { readPng, Pixels } from './art/png.mjs';
 import { splitSheet } from './art/split.mjs';
 import { downscale } from './art/resize.mjs';
+import { stripHead } from './art/head.mjs';
 
+
+/** Cắt một khung con khỏi tấm gộp, giữ nguyên pixel. */
+function cropRegion(img, [x0, y0, w, h]) {
+  const out = new Pixels(w, h);
+  for (let y = 0; y < h; y++) {
+    const src = ((y0 + y) * img.width + x0) * 4;
+    out.data.set(img.data.subarray(src, src + w * 4), y * w * 4);
+  }
+  return { width: w, height: h, data: out.data };
+}
 
 const ROOT = process.cwd();
 const SHEETS = join(ROOT, 'art-src', 'sheets');
@@ -44,22 +55,34 @@ for (const file of sheets) {
   const maps = JSON.parse(readFileSync(join(SHEETS, file), 'utf8'));
   const page = maps.page ?? 'outdoor';
   const sheet = readPng(readFileSync(join(SHEETS, maps.source)));
-  // Mỗi tấm bày một kiểu nên tự khai tham số cắt trong <tấm>.names.json; giữ
-  // cạnh nhau với danh sách tên để sửa tham số là thấy ngay ảnh hưởng tới tên nào.
-  const pieces = splitSheet(sheet, { tol: 22, minArea: 400, gap: 10, ...(maps.split ?? {}) });
+  // Tấm bảng thành phần chia sẵn thành nhiều KHUNG, mỗi khung một kiểu bày và
+  // một nhãn vẽ chết ở góc. Cắt cả tấm một lần là nhãn cũng thành sprite, còn
+  // tham số hợp với khung tóc thì hỏng ở khung mặt. Nên cắt theo từng khung.
+  const areas = maps.regions ?? [{ rect: null, split: maps.split, names: maps.names }];
   let count = 0;
-  const maxHeight = maps.split?.maxHeight ?? 0;
-  pieces.forEach((raw, i) => {
-    const name = maps.names[String(i)];
-    if (!name) return;
-    const piece = maxHeight && raw.h > maxHeight ? { ...raw, ...downscale(raw, raw.h / maxHeight) } : raw;
-    if (seen.has(name)) throw new Error(`tên sprite "${name}" có ở cả ${seen.get(name)} và ${maps.source}`);
-    seen.set(name, maps.source);
-    if (!pages.has(page)) pages.set(page, []);
-    pages.get(page).push({ ...piece, name });
-    count++;
-  });
-  console.log(`${maps.source.padEnd(14)} → ${page.padEnd(8)} ${String(pieces.length).padStart(3)} vật cắt được, ${count} đặt tên`);
+  let cut = 0;
+  for (const area of areas) {
+    // Mỗi tấm bày một kiểu nên tự khai tham số cắt trong <tấm>.names.json; giữ
+    // cạnh nhau với danh sách tên để sửa tham số là thấy ngay ảnh hưởng tới tên nào.
+    const img = area.rect ? cropRegion(sheet, area.rect) : sheet;
+    const pieces = splitSheet(img, { tol: 22, minArea: 400, gap: 10, ...(area.split ?? {}) });
+    cut += pieces.length;
+    const maxHeight = area.split?.maxHeight ?? 0;
+    pieces.forEach((raw, i) => {
+      const name = area.names[String(i)];
+      if (!name) return;
+      const piece = maxHeight && raw.h > maxHeight ? { ...raw, ...downscale(raw, raw.h / maxHeight) } : raw;
+      // Mảnh tóc là cả cái đầu đội tóc; khoét mặt đi mới chồng được lên khuôn
+      // mặt tự chọn, và khung lỗ khoét được chính là mốc căn.
+      const hole = area.strip === 'head' ? stripHead(piece) : null;
+      if (seen.has(name)) throw new Error(`tên sprite "${name}" có ở cả ${seen.get(name)} và ${maps.source}`);
+      seen.set(name, maps.source);
+      if (!pages.has(page)) pages.set(page, []);
+      pages.get(page).push({ ...piece, name, hole });
+      count++;
+    });
+  }
+  console.log(`${maps.source.padEnd(14)} → ${page.padEnd(8)} ${String(cut).padStart(3)} vật cắt được, ${count} đặt tên`);
 }
 
 mkdirSync(OUT, { recursive: true });
@@ -97,7 +120,10 @@ for (const [page, items] of [...pages].sort()) {
   // thanh tiến độ mới chạy đều, chứ dựa vào Content-Length thì phải gửi xong
   // request đầu mới biết được tổng, làm thanh nhảy giật.
   pageFiles[page] = { file, bytes: buf.length };
-  for (const piece of sorted) index[piece.name] = { page, x: piece.ax, y: piece.ay, w: piece.w, h: piece.h };
+  for (const piece of sorted) {
+    index[piece.name] = { page, x: piece.ax, y: piece.ay, w: piece.w, h: piece.h };
+    if (piece.hole) index[piece.name].hole = piece.hole;
+  }
   console.log(`${file.padEnd(22)} ${ATLAS_W}×${atlasH}  ${(buf.length / 1024 / 1024).toFixed(1)} MB · ${items.length} vật`);
 }
 

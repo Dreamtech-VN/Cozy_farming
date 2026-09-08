@@ -1,0 +1,277 @@
+{
+  "comment": "Bảng thành phần tạo nhân vật. Tấm KHÔNG có alpha — nền caro vẽ chết vào ảnh nên bắt nền theo tính chất \"xám và sáng\" (bgTest light). Cắt theo LƯỚI chứ không theo khe: tóc dài của các cô bé chạm nhau nên khe biến mất, mà nới ngưỡng nhiễu lên đủ để tách thì ăn cụt chỏm tóc. Biên hàng/cột ghi thẳng chứ không chia đều: các cột trên tấm lệch nhau vài chục pixel, chia đều là mép tóc của kiểu bên cạnh lọt vào ô này. Mỗi khung một `rect` riêng vì mỗi khung có nhãn vẽ chết ở góc, cắt cả tấm là nhãn cũng thành sprite. Bốn dáng người mẫu (Base) và hai khung màu da KHÔNG nhập: dáng người đã có trong hero.png, còn màu da là màu chứ không phải hình — nằm trong data/content/avatar_items.json.",
+  "source": "charparts.png",
+  "page": "parts",
+  "regions": [
+    {
+      "what": "khuôn mặt nam, 3 hàng × 3 cột",
+      "rect": [
+        478,
+        38,
+        280,
+        259
+      ],
+      "split": {
+        "mode": "grid",
+        "bgTest": "light",
+        "cols": [
+          0,
+          93,
+          186,
+          280
+        ],
+        "rows": [
+          0,
+          90,
+          175,
+          259
+        ]
+      },
+      "names": {
+        "0": "face_m_01",
+        "1": "face_m_02",
+        "2": "face_m_03",
+        "3": "face_m_04",
+        "4": "face_m_05",
+        "5": "face_m_06",
+        "6": "face_m_07",
+        "7": "face_m_08",
+        "8": "face_m_09"
+      }
+    },
+    {
+      "what": "khuôn mặt nữ, 3 hàng × 3 cột",
+      "rect": [
+        1283,
+        45,
+        240,
+        252
+      ],
+      "split": {
+        "mode": "grid",
+        "bgTest": "light",
+        "cols": [
+          0,
+          78,
+          160,
+          240
+        ],
+        "rows": [
+          0,
+          86,
+          172,
+          252
+        ]
+      },
+      "names": {
+        "0": "face_f_01",
+        "1": "face_f_02",
+        "2": "face_f_03",
+        "3": "face_f_04",
+        "4": "face_f_05",
+        "5": "face_f_06",
+        "6": "face_f_07",
+        "7": "face_f_08",
+        "8": "face_f_09"
+      }
+    },
+    {
+      "what": "tóc nam nhìn trước",
+      "rect": [
+        14,
+        340,
+        586,
+        104
+      ],
+      "split": {
+        "mode": "grid",
+        "bgTest": "light",
+        "cols": [
+          0,
+          103,
+          195,
+          287,
+          387,
+          484,
+          586
+        ],
+        "rows": [
+          0,
+          104
+        ]
+      },
+      "names": {
+        "0": "hair_m_01",
+        "1": "hair_m_02",
+        "2": "hair_m_03",
+        "3": "hair_m_04",
+        "4": "hair_m_05",
+        "5": "hair_m_06"
+      },
+      "strip": "head"
+    },
+    {
+      "what": "tóc nam nhìn sau, cùng thứ tự với hàng trước",
+      "rect": [
+        16,
+        447,
+        588,
+        105
+      ],
+      "split": {
+        "mode": "grid",
+        "bgTest": "light",
+        "cols": [
+          0,
+          94,
+          191,
+          284,
+          386,
+          485,
+          588
+        ],
+        "rows": [
+          0,
+          105
+        ]
+      },
+      "names": {
+        "0": "hair_m_01_back",
+        "1": "hair_m_02_back",
+        "2": "hair_m_03_back",
+        "3": "hair_m_04_back",
+        "4": "hair_m_05_back",
+        "5": "hair_m_06_back"
+      }
+    },
+    {
+      "what": "tóc nữ nhìn trước",
+      "rect": [
+        790,
+        341,
+        562,
+        138
+      ],
+      "split": {
+        "mode": "grid",
+        "bgTest": "light",
+        "cols": [
+          0,
+          110,
+          211,
+          336,
+          448,
+          562
+        ],
+        "rows": [
+          0,
+          138
+        ]
+      },
+      "names": {
+        "0": "hair_f_01",
+        "1": "hair_f_02",
+        "2": "hair_f_03",
+        "3": "hair_f_04",
+        "4": "hair_f_05"
+      },
+      "strip": "head"
+    },
+    {
+      "what": "tóc nữ nhìn sau, cùng thứ tự với hàng trước",
+      "rect": [
+        792,
+        478,
+        553,
+        96
+      ],
+      "split": {
+        "mode": "grid",
+        "bgTest": "light",
+        "cols": [
+          0,
+          100,
+          210,
+          335,
+          443,
+          553
+        ],
+        "rows": [
+          0,
+          96
+        ]
+      },
+      "names": {
+        "0": "hair_f_01_back",
+        "1": "hair_f_02_back",
+        "2": "hair_f_03_back",
+        "3": "hair_f_04_back",
+        "4": "hair_f_05_back"
+      }
+    },
+    {
+      "what": "trang phục nam, thân người không đầu",
+      "rect": [
+        25,
+        600,
+        681,
+        145
+      ],
+      "split": {
+        "mode": "grid",
+        "bgTest": "light",
+        "cols": [
+          0,
+          123,
+          256,
+          398,
+          542,
+          681
+        ],
+        "rows": [
+          0,
+          145
+        ]
+      },
+      "names": {
+        "0": "outfit_m_01",
+        "1": "outfit_m_02",
+        "2": "outfit_m_03",
+        "3": "outfit_m_04",
+        "4": "outfit_m_05"
+      }
+    },
+    {
+      "what": "trang phục nữ, thân người không đầu",
+      "rect": [
+        826,
+        607,
+        639,
+        138
+      ],
+      "split": {
+        "mode": "grid",
+        "bgTest": "light",
+        "cols": [
+          0,
+          138,
+          256,
+          385,
+          512,
+          639
+        ],
+        "rows": [
+          0,
+          138
+        ]
+      },
+      "names": {
+        "0": "outfit_f_01",
+        "1": "outfit_f_02",
+        "2": "outfit_f_03",
+        "3": "outfit_f_04",
+        "4": "outfit_f_05"
+      }
+    }
+  ]
+}
