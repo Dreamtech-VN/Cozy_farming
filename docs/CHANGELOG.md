@@ -3,6 +3,43 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.12.0 — 2026-09-08
+
+### Thêm — nhân vật vẽ theo kiểu paperdoll
+
+Trước bản này nhân vật vẽ bằng lệnh hình khối của canvas (`roundRect`,
+`ellipse`), mỗi slot đúng một màu phẳng. Nay chuyển sang **paperdoll**: thân quy
+định 6 khung hình, mỗi món trang bị có sprite riêng cho đúng 6 khung đó rồi xếp
+theo `zOrder` khai báo trong atlas. Thêm một cái mũ = thêm data, không sửa code vẽ.
+
+- `tools/art/parts.mjs` — 14 bộ phận × 6 khung (2 khung đứng thở, 4 khung đi),
+  sinh ra `client/assets/world/parts.png` (240×896). Mọi bộ phận đọc chung một
+  hàm `rig(frame)` thay vì chép tay `dx/dy` từng khung, nên tay áo không thể
+  trôi khỏi cánh tay — cả hai lấy cùng một bộ toạ độ.
+- Sprite vẽ bằng **thang xám**, client nhân màu (`globalCompositeOperation =
+  'multiply'`) lúc chạy: một bộ sprite phục vụ mọi màu mà vẫn giữ khối sáng–tối.
+  Cache theo (bộ phận, màu) cho cả dải 6 khung, không phải từng khung một.
+- `data/content/avatar_items.json` thêm trường `part` cho cả 18 món.
+- `avatar.js` giữ lại bản vẽ hình khối làm đường lui, vì atlas nạp bất đồng bộ
+  còn màn hình đăng nhập dựng avatar trước khi thế giới nạp xong.
+
+### Sửa
+- `capsule()` kẹp bán kính theo cả chiều cao. Hình thấp hơn rộng (đôi giày) lấy
+  `r = w/2` làm hai chỏm tròn nằm chồng ra ngoài ô, tràn sang hàng kế bên trên
+  sheet — `Pixels.set` chỉ cắt theo mép ảnh chứ không cắt theo ô. Triệu chứng là
+  một vệt màu lạ dính dưới chân nhân vật.
+- Ô sprite cao 64px thay vì 56px để chừa chỗ cho mũ vẽ cao hơn đỉnh đầu; atlas
+  ghi thêm `ground` (khoảng cách từ đáy ô lên vạch đất) và `bodyH` (chiều cao
+  thân thật) để client neo chân đúng mặt đất và quy tỉ lệ theo thân, không theo ô.
+- Tóc dựng từ các mảng chừa sẵn vùng mặt. Bản đầu phủ một ellipse kín cả đầu nên
+  mất luôn mắt mũi miệng; `Pixels` không có lệnh xoá nên không thể phủ rồi khoét.
+
+### Ghi chú nguồn
+Kiến trúc paperdoll tham khảo cách các client MMO 2D đời J2ME tổ chức dữ liệu
+(`ImageInfo{bigID,x0,y0,w,h}` trên atlas, `Part{imgID[],dx[],dy[],zOrder}` cho
+trang bị, sprite là dải khung dọc). Chỉ tham khảo **cách tổ chức**; toàn bộ art
+trong repo sinh bằng `npm run art` từ `tools/art/`.
+
 ## 0.11.0 — 2026-09-07
 
 ### Thêm — nền nhiều lớp parallax
