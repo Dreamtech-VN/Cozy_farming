@@ -3,6 +3,40 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.15.0 — 2026-09-08
+
+### Thêm — 547 vật nội thất, atlas tách trang
+
+Năm tấm art nội thất: phòng khách, bếp, cửa hàng, trường/văn phòng/phòng khám,
+và đồ trang trí. Tổng bộ art lên **760 sprite**.
+
+Ở cỡ này thì gộp một trang là hỏng: 25 MB tải trước khi vào được game, mà phần
+lớn không dùng tới — đang đứng ngoài phố thì không cần cái tủ lạnh. Nên atlas
+tách theo **trang**, mỗi tấm khai báo `page` trong `<tấm>.names.json`:
+
+| Trang | Vật | Nặng | Nạp khi nào |
+| --- | --- | --- | --- |
+| `outdoor` | 213 | 7,2 MB | Ngay khi vào game |
+| `indoor` | 547 | 15,5 MB | Chỉ khi map cần tới |
+
+- `atlas.ensurePage(page)` nhớ lời hứa nên gọi nhiều lần không tải lại;
+  `ensureFor(names)` nạp đúng những trang chứa các sprite sắp vẽ.
+- `world.setMap()` nạp trước trang cho cảnh vật của map. Không gọi thì sprite
+  chỉ hiện sau khi đã thử vẽ hụt một lần, tức là trễ mất một khung hình.
+- Nạp hụt một trang thì rơi về art sinh bằng code chứ không làm vỡ cảnh.
+
+### Thêm — bản tra cứu art
+`npm run art-index` sinh `docs/art-index.html`: 760 sprite kèm tên, nhóm theo
+trang. Tên đồ nội thất đặt theo nhóm + số thứ tự (`hm_seat_03`) vì đặt tay 547
+cái tên riêng vừa lâu vừa dễ sai; tên kiểu đó chỉ dùng được khi NHÌN được vật
+nào là vật nào, nên trang tra cứu là một phần của bộ art chứ không phải tài
+liệu cho vui.
+
+### Chưa dùng được vào đâu
+Game hiện chỉ có 5 map ngoài trời. **Không có map trong nhà nào**, nên 547 vật
+nội thất chưa có chỗ đặt. Để dùng được cần: một loại map nội thất, cửa ra vào
+dẫn vào đó, và hệ đặt đồ. Art đã sẵn, phần thiếu là tính năng.
+
 ## 0.14.0 — 2026-09-08
 
 ### Thêm — tấm art thứ hai, 213 vật

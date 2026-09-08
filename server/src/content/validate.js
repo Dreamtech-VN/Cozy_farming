@@ -33,7 +33,7 @@ function knownSpriteNames() {
   if (!existsSync(path)) return null;
   try {
     const atlas = JSON.parse(readFileSync(path, 'utf8'));
-    return new Set([...(atlas.props?.names ?? []), ...Object.keys(atlas.sprites?.sprites ?? {})]);
+    return new Set([...(atlas.props?.names ?? []), ...Object.keys(atlas.sprites?.index ?? {})]);
   } catch {
     return null;
   }

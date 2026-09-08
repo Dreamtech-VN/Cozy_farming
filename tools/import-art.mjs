@@ -33,63 +33,72 @@ if (!sheets.length) {
   process.exit(0);
 }
 
-const named = [];
+// Gom theo TRANG: mỗi tấm khai báo `page` trong <tấm>.names.json. Nhét cả 760
+// vật vào một trang là ~25 MB, mà đồ nội thất chỉ cần khi vào trong nhà — tách
+// trang để client nạp đúng phần map đang dùng.
+const pages = new Map();
 const seen = new Map();
 for (const file of sheets) {
   const maps = JSON.parse(readFileSync(join(SHEETS, file), 'utf8'));
+  const page = maps.page ?? 'outdoor';
   const sheet = readPng(readFileSync(join(SHEETS, maps.source)));
   const pieces = splitSheet(sheet, { tol: 22, minArea: 400, gap: 10 });
   let count = 0;
   pieces.forEach((piece, i) => {
     const name = maps.names[String(i)];
     if (!name) return;
-    if (seen.has(name)) {
-      throw new Error(`tên sprite "${name}" có ở cả ${seen.get(name)} và ${maps.source}`);
-    }
+    if (seen.has(name)) throw new Error(`tên sprite "${name}" có ở cả ${seen.get(name)} và ${maps.source}`);
     seen.set(name, maps.source);
-    named.push({ ...piece, name });
+    if (!pages.has(page)) pages.set(page, []);
+    pages.get(page).push({ ...piece, name });
     count++;
   });
-  console.log(`${maps.source.padEnd(14)} ${String(pieces.length).padStart(3)} vật cắt được → ${count} đặt tên`);
-}
-
-// Xếp theo kệ: sắp cao xuống thấp rồi rải thành từng hàng. Đơn giản mà lãng phí
-// ít, và quan trọng hơn là kết quả ỔN ĐỊNH — cùng đầu vào ra cùng bố cục, nên
-// diff của file atlas đọc được.
-const sorted = [...named].sort((a, b) => b.h - a.h || a.name.localeCompare(b.name));
-const ATLAS_W = 2048;
-let penX = PAD; let penY = PAD; let rowH = 0; let atlasH = 0;
-for (const piece of sorted) {
-  if (penX + piece.w + PAD > ATLAS_W) { penX = PAD; penY += rowH + PAD; rowH = 0; }
-  piece.ax = penX; piece.ay = penY;
-  penX += piece.w + PAD;
-  if (piece.h > rowH) rowH = piece.h;
-  atlasH = Math.max(atlasH, penY + piece.h + PAD);
-}
-
-const page = new Pixels(ATLAS_W, atlasH);
-for (const piece of sorted) {
-  for (let y = 0; y < piece.h; y++) {
-    const src = y * piece.w * 4;
-    const dst = ((piece.ay + y) * ATLAS_W + piece.ax) * 4;
-    page.data.set(piece.data.subarray(src, src + piece.w * 4), dst);
-  }
+  console.log(`${maps.source.padEnd(14)} → ${page.padEnd(8)} ${String(pieces.length).padStart(3)} vật cắt được, ${count} đặt tên`);
 }
 
 mkdirSync(OUT, { recursive: true });
-const png = page.toPng();
-writeFileSync(join(OUT, 'sprites.png'), png);
+const ATLAS_W = 2048;
+const index = {};
+const pageFiles = {};
+
+for (const [page, items] of [...pages].sort()) {
+  // Xếp theo kệ: sắp cao xuống thấp rồi rải thành hàng. Đơn giản mà lãng phí ít,
+  // và quan trọng hơn là kết quả ỔN ĐỊNH — cùng đầu vào ra cùng bố cục, nên diff
+  // của file atlas đọc được.
+  const sorted = [...items].sort((a, b) => b.h - a.h || a.name.localeCompare(b.name));
+  let penX = PAD; let penY = PAD; let rowH = 0; let atlasH = 0;
+  for (const piece of sorted) {
+    if (penX + piece.w + PAD > ATLAS_W) { penX = PAD; penY += rowH + PAD; rowH = 0; }
+    piece.ax = penX; piece.ay = penY;
+    penX += piece.w + PAD;
+    if (piece.h > rowH) rowH = piece.h;
+    atlasH = Math.max(atlasH, penY + piece.h + PAD);
+  }
+
+  const canvas = new Pixels(ATLAS_W, atlasH);
+  for (const piece of sorted) {
+    for (let y = 0; y < piece.h; y++) {
+      const src = y * piece.w * 4;
+      const dst = ((piece.ay + y) * ATLAS_W + piece.ax) * 4;
+      canvas.data.set(piece.data.subarray(src, src + piece.w * 4), dst);
+    }
+  }
+
+  const file = `sprites-${page}.png`;
+  const buf = canvas.toPng();
+  writeFileSync(join(OUT, file), buf);
+  pageFiles[page] = file;
+  for (const piece of sorted) index[piece.name] = { page, x: piece.ax, y: piece.ay, w: piece.w, h: piece.h };
+  console.log(`${file.padEnd(22)} ${ATLAS_W}×${atlasH}  ${(buf.length / 1024 / 1024).toFixed(1)} MB · ${items.length} vật`);
+}
 
 const atlasPath = join(OUT, 'atlas.json');
 const atlas = JSON.parse(readFileSync(atlasPath, 'utf8'));
 atlas.sprites = {
-  file: 'sprites.png',
-  comment: 'Art vẽ sẵn, đóng gói bằng tools/import-art.mjs từ art-src/sheets/. Mỗi vật một khung riêng, neo ĐÁY GIỮA.',
-  sprites: Object.fromEntries(
-    [...sorted].sort((a, b) => a.name.localeCompare(b.name))
-      .map((p) => [p.name, { x: p.ax, y: p.ay, w: p.w, h: p.h }]),
-  ),
+  comment: 'Art vẽ sẵn, đóng gói bằng tools/import-art.mjs từ art-src/sheets/. Neo ĐÁY GIỮA. Mỗi sprite ghi rõ nằm ở trang nào để client nạp đúng trang cần.',
+  pages: pageFiles,
+  index: Object.fromEntries(Object.entries(index).sort(([a], [b]) => a.localeCompare(b))),
 };
 writeFileSync(atlasPath, JSON.stringify(atlas, null, 2) + '\n');
 
-console.log(`sprites.png  ${ATLAS_W}×${atlasH}  ${(png.length / 1024).toFixed(0)} KB · ${named.length} vật`);
+console.log(`tổng ${Object.keys(index).length} sprite trong ${Object.keys(pageFiles).length} trang`);

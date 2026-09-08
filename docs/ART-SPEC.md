@@ -125,11 +125,16 @@ Bộ Cozy UI Pack đã mua đang dùng cho HUD, không cần sinh thêm.
 
 ## Đã có gì rồi
 
-**213 vật** đã lắp vào game, gộp từ hai tấm:
+**760 vật** đã nhập, chia hai trang atlas. Xem `docs/art-index.html` để biết
+tên nào là vật nào (`npm run art-index` sinh lại).
 
-- `city.png` — nhà cửa, cửa hàng, trụ sở, xe cộ, đèn đường, thùng rác, ghế.
-- `village.png` — cây thiên nhiên, đá, khúc gỗ, nấm, giếng phun, ao, cổng,
-  giàn hoa, sạp chợ, thùng rau, bao tải, tàu thuyền.
+| Trang | Tấm | Vật | Nạp khi nào |
+| --- | --- | --- | --- |
+| `outdoor` | `city`, `village` | 213 | Ngay khi vào game |
+| `indoor` | `home`, `kitchen`, `retail`, `civic`, `decor` | 547 | Chỉ khi map cần |
+
+Đồ nội thất **chưa dùng được**: game chỉ có map ngoài trời, chưa có map trong
+nhà nào. Cần thêm loại map nội thất, cửa dẫn vào, và hệ đặt đồ.
 
 Còn thiếu, xếp theo mức ảnh hưởng:
 
@@ -161,7 +166,7 @@ art cũ cho tới khi có ảnh thay thế.
 **Gửi cả tấm gộp cũng được** — không cần tự cắt. Bày các vật rời nhau trên một
 nền phẳng một màu, cách nhau ít nhất 20px, rồi để nguyên một file. `npm run
 import-art` tự tách nền, cắt từng vật và đóng vào atlas; tôi chỉ phải đặt tên
-trong `<tấm>.names.json`.
+trong `<tấm>.names.json`, trong đó `page` quyết định vật nằm ở trang atlas nào.
 
 Hai điều kiện để bộ tách chạy đúng:
 - Nền **phẳng một màu**, không hoa văn, không đổ bóng ra nền.

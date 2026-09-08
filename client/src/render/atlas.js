@@ -33,18 +33,55 @@ class Atlas {
     const [tiles, props, crops, parts] = await Promise.all([
       load(meta.tiles.file), load(meta.props.file), load(meta.crops.file), load(meta.parts.file),
     ]);
-    this.images = { tiles, props, crops, parts, sprites: null };
+    this.images = { tiles, props, crops, parts };
+    this.load = load;
     this.partIndex = new Map(meta.parts.names.map((name, i) => [name, i]));
     this.propIndex = new Map(meta.props.names.map((name, i) => [name, i]));
     this.cropIndex = new Map(meta.crops.kinds.map((name, i) => [name, i]));
     this.ready = true;
 
-    if (meta.sprites) {
-      this.spritesPending = load(meta.sprites.file)
-        .then((img) => { this.images.sprites = img; })
-        .catch((error) => { console.warn('không nạp được art vẽ sẵn, dùng art sinh bằng code:', error.message); });
-    }
+    // Trang art vẽ sẵn nạp riêng, theo nhu cầu — xem loadPage().
+    this.ensurePage('outdoor');
   }
+
+  /**
+   * Nạp một trang art vẽ sẵn, nhớ lại lời hứa để gọi nhiều lần không tải lại.
+   *
+   * Trang ngoài trời 7 MB, trang nội thất 15 MB. Nạp hết ngay từ đầu là bắt
+   * người chơi tải 22 MB trước khi vào được game, mà phần lớn không dùng tới:
+   * đang đứng ngoài phố thì không cần cái tủ lạnh.
+   */
+  ensurePage(page) {
+    const file = this.meta?.sprites?.pages?.[page];
+    if (!file) return Promise.resolve(null);
+    let pending = this.#pages.get(page);
+    if (pending) return pending;
+    pending = this.load(file)
+      .then((img) => { this.#pageImages.set(page, img); return img; })
+      .catch((error) => {
+        // Thiếu art vẽ sẵn thì rơi về art sinh bằng code chứ không làm vỡ cảnh.
+        console.warn(`không nạp được trang art "${page}":`, error.message);
+        this.#pages.delete(page);
+        return null;
+      });
+    this.#pages.set(page, pending);
+    return pending;
+  }
+
+  /** Nạp trước mọi trang chứa các sprite sắp vẽ. */
+  ensureFor(names) {
+    const index = this.meta?.sprites?.index;
+    if (!index) return;
+    const need = new Set();
+    for (const name of names) {
+      const entry = index[name];
+      if (entry) need.add(entry.page);
+    }
+    for (const page of need) this.ensurePage(page);
+  }
+
+  #pages = new Map();
+  #pageImages = new Map();
 
   /** Một ô tileset, vẽ phóng to `scale` lần tại (x, y). */
   tile(ctx, index, x, y, scale) {
@@ -75,21 +112,23 @@ class Atlas {
    * @returns true nếu vẽ được, false nếu không có tên này.
    */
   sprite(ctx, name, x, groundY, scale = 1) {
-    const rect = this.meta?.sprites?.sprites?.[name];
-    if (!rect || !this.images.sprites) return false;
+    const rect = this.meta?.sprites?.index?.[name];
+    if (!rect) return false;
+    const img = this.#pageImages.get(rect.page);
+    if (!img) { this.ensurePage(rect.page); return false; }
     const k = (scale * SPRITE_UNIT) / rect.h;
     const w = rect.w * k;
     const h = rect.h * k;
-    ctx.drawImage(this.images.sprites, rect.x, rect.y, rect.w, rect.h, x - w / 2, groundY - h, w, h);
+    ctx.drawImage(img, rect.x, rect.y, rect.w, rect.h, x - w / 2, groundY - h, w, h);
     return true;
   }
 
   hasSprite(name) {
-    return Boolean(this.meta?.sprites?.sprites?.[name]);
+    return Boolean(this.meta?.sprites?.index?.[name]);
   }
 
   spriteNames() {
-    return Object.keys(this.meta?.sprites?.sprites ?? {});
+    return Object.keys(this.meta?.sprites?.index ?? {});
   }
 
   crop(ctx, kind, stage, x, groundY, scale = 1) {

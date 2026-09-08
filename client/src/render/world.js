@@ -73,7 +73,12 @@ export class WorldRenderer {
   get viewHeight() { return this.canvas.height / this.dpr / this.scale; }
 
   /** Map hiện tại quyết định zoom, nên renderer cần biết map đang vẽ. */
-  setMap(map) { this.map = map; }
+  setMap(map) {
+    this.map = map;
+    // Nạp trước trang art chứa cảnh vật của map này. Không gọi thì sprite chỉ
+    // hiện ra sau khi đã thử vẽ hụt một lần, tức là trễ mất một khung hình.
+    if (map?.scenery) atlas.ensureFor(Object.values(map.scenery).flat());
+  }
 
   /** Giờ trong ngày và thời tiết lấy từ server (doc 03 — weather/day-night flags). */
   setWorldState(state) { this.world = state; }
