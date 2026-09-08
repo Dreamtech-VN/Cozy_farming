@@ -103,7 +103,11 @@ export const overlay = document.getElementById('overlay');
 export function showOverlay(node, { backdrop = null } = {}) {
   overlay.classList.remove('backdrop-entry', 'backdrop-server', 'backdrop-character', 'backdrop-loading');
   if (backdrop) overlay.classList.add(`backdrop-${backdrop}`);
-  overlay.replaceChildren(node);
+  // Logo là ảnh rời, gắn ở đây một chỗ cho mọi màn ngoài game — nhét vào từng
+  // màn thì bốn nơi phải nhớ cùng một việc.
+  overlay.replaceChildren(...(backdrop
+    ? [el('img', { class: 'entry-logo', src: '/assets/ui/logo.png', alt: 'Sunny Town' }), node]
+    : [node]));
   overlay.classList.remove('hidden');
 }
 

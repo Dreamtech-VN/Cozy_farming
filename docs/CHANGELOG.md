@@ -3,6 +3,30 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.22.0 — 2026-09-08
+
+### Đổi — nền sạch + logo rời, bỏ hết phủ mờ
+
+Nhận được bản nền **không có giao diện vẽ sẵn** và **logo tách riêng** (PNG có
+alpha), nên gỡ được toàn bộ mấy lớp phủ mờ dựng tạm:
+
+- Xoá hết `::before` phủ mờ ở bốn màn ngoài game.
+- Xoá luôn bước xoá-giao-diện-vẽ-chết trong `prep-ui.mjs` (hàm làm nhoè có mép
+  mềm) — không còn gì để xoá.
+- `_loading.png` không đóng gói nữa; mọi màn ngoài game dùng chung một nền.
+- `showOverlay()` tự gắn logo cho mọi màn có tranh nền — nhét vào từng màn thì
+  bốn nơi phải nhớ cùng một việc.
+
+`prep-ui` biết tự tránh ép ảnh về bảng màu khi ảnh có **mép mềm**: logo gần như
+toàn pixel bán trong suốt, mà bảng màu chỉ giữ được một mức trong suốt nên mép
+khử răng cưa sẽ vỡ thành răng cưa cứng. Logo cũng thu về 760px thay vì 1774px.
+
+### Sửa
+- **Một `*/` thừa do lệnh xoá của tôi để lại làm hỏng cú pháp CSS**, khiến trình
+  duyệt bỏ qua toàn bộ phần sau đó — thẻ đăng nhập mất nền kem và quay về khung
+  gỗ. Lỗi này không hiện ra ở `node --check` vì đó là CSS, nên phải soi bằng
+  `getComputedStyle` trong trình duyệt mới thấy `borderImageSource` vẫn là ảnh gỗ.
+
 ## 0.21.0 — 2026-09-08
 
 ### Đổi — tách đăng ký tài khoản khỏi tạo nhân vật

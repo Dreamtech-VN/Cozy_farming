@@ -997,137 +997,22 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
   background: var(--cream);
 }
 
-/* Tranh nền cho các màn ngoài game. Giao diện trong tranh (ô nhập, nút) là hình
-   VẼ CHẾT, không bấm được — nên phủ mờ dải giữa để nó tan vào nền, rồi đặt form
-   thật đè lên. Phủ theo phần trăm bề ngang nên co giãn màn hình vẫn che đúng
-   chỗ, khác với căn theo pixel cố định. */
 /* KHÔNG đặt position ở đây: #overlay đã là absolute, ghi đè thành relative là
    mất luôn inset:0 và cả khung nhìn vỡ theo. */
-#overlay.backdrop-entry {
-  background: #6fc0ee center / cover no-repeat;
-  /* Đẩy thẻ xuống dưới logo. Logo trong tranh chiếm tới 40% chiều cao (kể cả
-     dải chữ "Small Town · Big Happiness"), nên 13vh là chưa đủ — thẻ vẫn cắt
-     ngang chân chữ. */
-  padding-top: clamp(16px, 42vh, 380px);
-  /* `safe` cứu trường hợp thẻ cao hơn khung nhìn: căn giữa thường sẽ cắt cụt
-     phần thò ra ở ĐẦU TRÊN và không cuộn tới được. */
-  align-items: safe center;
-}
-#overlay.backdrop-entry { background-image: url('/assets/ui/entry.png'); }
-
-/* Màn chọn server dùng chung tranh với đăng nhập, nhưng đặt nội dung ĐÚNG chỗ
-   hàng server và nút vẽ chết trong tranh (khoảng 46–75% chiều cao) để che hẳn
-   chúng, thay vì nằm dưới và để lộ vệt mờ phía trên. */
-#overlay.backdrop-server {
-  background: #6fc0ee center / cover no-repeat url('/assets/ui/entry.png');
-  /* Neo từ TRÊN xuống chứ không căn giữa: cần đặt đúng vào khoảng 40–60% chiều
-     cao, chỗ hàng server và nút vẽ chết trong tranh, để che hẳn chúng. Căn giữa
-     thì nội dung luôn rơi xuống dưới và vệt mờ lộ ra phía trên. */
-  align-items: flex-start;
-  padding-top: clamp(16px, 40vh, 420px);
-}
-#overlay.backdrop-server::before {
-  content: '';
-  position: absolute;
-  top: 34%;
-  bottom: 8%;
-  left: 50%;
-  translate: -50% 0;
-  width: clamp(420px, 58vw, 760px);
-  backdrop-filter: blur(22px) saturate(.85);
-  -webkit-backdrop-filter: blur(22px) saturate(.85);
-  /* Đậm hơn hẳn dải phủ ở màn đăng nhập: chỗ này giao diện vẽ chết là một
-     thanh gần đen, phủ nhạt thì chỉ thành vệt xám nhoè chứ không tan đi. */
-  background: linear-gradient(90deg, rgba(20, 36, 52, 0), rgba(20, 36, 52, .58) 18%, rgba(20, 36, 52, .58) 82%, rgba(20, 36, 52, 0));
-  mask-image:
-    linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent),
-    linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
-  mask-composite: intersect;
-  -webkit-mask-composite: source-in;
-  pointer-events: none;
-}
-#overlay.backdrop-server > * { position: relative; z-index: 1; }
-
-/* Màn nhân vật dùng chung tranh và dải phủ với màn chọn server, nhưng nội dung
-   cao hơn (có ô xem trước nhân vật) nên phải neo cao hơn — giữ nguyên 40% thì
-   nội dung tụt xuống và hàng server vẽ chết hở ra phía trên. */
-#overlay.backdrop-character {
-  background: #6fc0ee center / cover no-repeat url('/assets/ui/entry.png');
-  align-items: flex-start;
-  padding-top: clamp(16px, 35vh, 370px);
-}
-#overlay.backdrop-character::before {
-  content: '';
-  position: absolute;
-  /* 34% chứ không cao hơn: logo trong tranh kết thúc ở 33%, phủ mờ leo lên trên
-     đó là làm xám chân chữ. */
-  top: 34%;
-  bottom: 4%;
-  left: 50%;
-  translate: -50% 0;
-  width: clamp(420px, 58vw, 760px);
-  backdrop-filter: blur(22px) saturate(.85);
-  -webkit-backdrop-filter: blur(22px) saturate(.85);
-  background: linear-gradient(90deg, rgba(20, 36, 52, 0), rgba(20, 36, 52, .58) 18%, rgba(20, 36, 52, .58) 82%, rgba(20, 36, 52, 0));
-  mask-image:
-    linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent),
-    linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
-  mask-composite: intersect;
-  -webkit-mask-composite: source-in;
-  pointer-events: none;
-}
-#overlay.backdrop-character > * { position: relative; z-index: 1; }
-
-/* Màn chờ tải có tranh riêng: thanh tiến độ trong tranh nằm ở ĐÁY giữa, nên
-   thẻ thật đặt đúng chỗ đó thay vì giữa màn hình. */
-#overlay.backdrop-loading {
-  background: #6fc0ee center / cover no-repeat url('/assets/ui/loading.png');
-  align-items: flex-end;
-  padding-bottom: clamp(10px, 5vh, 56px);
-}
-/* KHÔNG cần phủ mờ ở đây: chữ và thanh vẽ chết đã bị xoá khỏi tranh ở khâu
-   đóng gói (xem tools/prep-ui.mjs), nền dưới giao diện là mặt đất sạch. */
 
 /* Bắt đầu từ 36% chiều cao trở xuống: logo trong tranh nằm ở khoảng 5–33%, phủ
    mờ lên đó là xoá mất luôn thương hiệu. Giao diện vẽ chết nằm ở 46–75% nên
    36% là đủ sớm để che hết. */
-#overlay.backdrop-entry::before {
-  content: '';
-  position: absolute;
-  top: 36%;
-  bottom: 0;
-  left: 50%;
-  translate: -50% 0;
-  width: clamp(420px, 58vw, 760px);
-  backdrop-filter: blur(22px) saturate(.85);
-  -webkit-backdrop-filter: blur(22px) saturate(.85);
-  background: linear-gradient(90deg, rgba(24, 42, 60, 0), rgba(24, 42, 60, .28) 18%, rgba(24, 42, 60, .28) 82%, rgba(24, 42, 60, 0));
-  /* Mép mờ dần hai bên để không thành một khối chữ nhật cắm giữa tranh. */
-  /* Mờ dần ở CẢ BỐN phía. Chỉ mờ dần hai bên thì mép trên thành một đường kẻ
-     ngang cắt ngang tranh. Hai lớp mặt nạ giao nhau cho ra vùng mờ mép mềm. */
-  mask-image:
-    linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent),
-    linear-gradient(180deg, transparent, #000 14%);
-  mask-composite: intersect;
-  -webkit-mask-composite: source-in;
-  pointer-events: none;
-}
-#overlay.backdrop-entry > * { position: relative; z-index: 1; }
 
 /* Trình duyệt không có backdrop-filter thì phủ đặc hơn để chữ vẽ chết không
    lộ ra sau form. */
-@supports not (backdrop-filter: blur(1px)) {
-  #overlay.backdrop-entry::before {
-    background: linear-gradient(90deg, rgba(20, 36, 52, 0), rgba(20, 36, 52, .82) 18%, rgba(20, 36, 52, .82) 82%, rgba(20, 36, 52, 0));
-  }
-}
-
 /* Thẻ cho các màn ngoài game. Khung gỗ là phong cách TRONG game, đặt lên tranh
    sáng màu này thì nặng và tối; bản mẫu dùng thẻ trắng bo tròn. */
 .card.entry {
+  /* Phải tắt border-image: .card dùng ảnh khung gỗ 9-slice có phần FILL, nó vẽ
+     đè lên background nên thẻ chỉ còn thấy màu gỗ. */
   border: 0;
   border-image: none;
-  padding: 26px 26px 24px;
   border-radius: 22px;
   background: rgba(255, 253, 247, .96);
   box-shadow: 0 18px 44px rgba(18, 40, 58, .3), inset 0 1px 0 rgba(255, 255, 255, .8);
@@ -1321,3 +1206,23 @@ button.server-start:active { transform: translateY(3px); box-shadow: 0 2px 0 #2b
   padding: 10px 14px;
 }
 .char-pick .error { color: #ffd9d9; text-shadow: 0 2px 4px rgba(12, 26, 40, .8); }
+
+/* Tranh nền cho mọi màn ngoài game. Nền là bản SẠCH, không có giao diện vẽ sẵn,
+   nên không cần phủ mờ gì — logo là ảnh rời đặt lên trên. */
+#overlay[class*="backdrop-"] {
+  background: #6fc0ee center / cover no-repeat url('/assets/ui/entry.png');
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 2.5vh, 28px);
+  padding-top: clamp(10px, 4vh, 44px);
+}
+.entry-logo {
+  width: min(380px, 46vw);
+  height: auto;
+  flex: none;
+  filter: drop-shadow(0 8px 18px rgba(14, 40, 62, .35));
+  /* Không nhận thao tác: nó chỉ là hình, bấm vào phải trúng nút phía dưới. */
+  pointer-events: none;
+}
+/* Màn chờ tải neo xuống đáy như bản mẫu; các màn khác đứng ngay dưới logo. */
+#overlay.backdrop-loading { justify-content: space-between; padding-bottom: clamp(10px, 5vh, 56px); }

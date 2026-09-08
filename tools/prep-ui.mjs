@@ -17,18 +17,6 @@ import { downscale } from './art/resize.mjs';
 const SRC = join(process.cwd(), 'art-src', 'ui');
 
 /**
- * Vùng cần XOÁ khỏi tranh, theo tỉ lệ bề ngang/cao.
- *
- * Bản mẫu vẽ sẵn chữ và thanh tiến độ vào tranh. Phủ mờ lúc chạy không ăn thua:
- * đó là chữ trắng viền dày, làm mờ chỉ biến nó thành vệt sáng vẫn đọc được và
- * chồng lên chữ thật. Xoá hẳn ở khâu đóng gói thì giao diện thật nằm trên nền
- * sạch, khỏi cần phủ gì.
- */
-const ERASE = {
-  'loading.png': [{ x: 0.19, y: 0.735, w: 0.68, h: 0.25 }],
-};
-
-/**
  * Làm NHOÈ một vùng, mép vùng tan dần ra ngoài.
  *
  * Không dùng cách nội suy dọc giữa hai mép: chỗ này có hàng rào, bụi cây và lối
@@ -96,6 +84,8 @@ function softBlur(img, rect, radius = 16) {
 }
 const OUT = join(process.cwd(), 'client', 'assets', 'ui');
 const MAX_W = 1440;
+// Logo hiện ra cỡ nửa bề ngang màn hình, giữ nguyên 1774px là phí băng thông.
+const MAX_W_BY_FILE = { 'logo.png': 760 };
 
 if (!existsSync(SRC)) { console.log('chưa có art-src/ui/ — bỏ qua'); process.exit(0); }
 mkdirSync(OUT, { recursive: true });
@@ -106,15 +96,20 @@ for (const file of readdirSync(SRC).filter((f) => f.endsWith('.png') && !f.start
   const raw = readPng(readFileSync(join(SRC, file)));
   // downscale() dùng {w,h} như sprite, còn readPng() trả {width,height}.
   const img = { w: raw.width, h: raw.height, data: raw.data };
-  for (const rect of ERASE[file] ?? []) softBlur(img, rect);
-  const small = img.w > MAX_W ? downscale(img, img.w / MAX_W) : img;
+  const maxW = MAX_W_BY_FILE[file] ?? MAX_W;
+  const small = img.w > maxW ? downscale(img, img.w / maxW) : img;
   const full = new Pixels(small.w, small.h);
   full.data.set(small.data);
   // So cả hai cách rồi lấy cái nhẹ hơn: ảnh ít màu thì màu thật đã đủ nhỏ, ảnh
   // vẽ tay chuyển màu mềm thì bảng màu thắng cách biệt.
   const truecolour = full.toPng();
-  const indexed = toIndexedPng(small.w, small.h, small.data, 256);
-  const buf = indexed.length < truecolour.length ? indexed : truecolour;
+  // Ảnh có mép mềm (logo) thì KHÔNG ép về bảng màu: bảng màu chỉ giữ được một
+  // mức trong suốt, mép khử răng cưa sẽ vỡ thành răng cưa cứng.
+  let soft = 0;
+  for (let i = 3; i < small.data.length; i += 4) if (small.data[i] > 0 && small.data[i] < 250) soft++;
+  const hasSoftEdges = soft > small.w * small.h * 0.01;
+  const indexed = hasSoftEdges ? null : toIndexedPng(small.w, small.h, small.data, 256);
+  const buf = indexed && indexed.length < truecolour.length ? indexed : truecolour;
   const how = buf === indexed ? 'bảng màu' : 'màu thật';
   writeFileSync(join(OUT, file), buf);
   console.log(`${file.padEnd(12)} ${img.w}×${img.h} → ${full.width}×${full.height}  ${how}  ${(buf.length / 1024).toFixed(0)} KB (màu thật ${(truecolour.length / 1024).toFixed(0)} KB)`);
