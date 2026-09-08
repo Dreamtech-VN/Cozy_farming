@@ -94,7 +94,7 @@ const MAX_W_BY_FILE = { 'logo.png': 760 };
 //  - leaves.png: cắt ra từ một bảng phụ kiện xếp sát nhau nên mép dưới và mép
 //    trái xén vào giữa tán lá; hai mép kia thì đúng dáng lá.
 const FADE_BY_FILE = {
-  'create.png': { top: 36 },
+  'create.png': { top: 14 },
   'leaves.png': { bottom: 18, left: 22 },
 };
 

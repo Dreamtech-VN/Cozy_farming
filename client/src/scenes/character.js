@@ -87,8 +87,11 @@ function stage(get, { width = 300, height = 400, onPlaza = false } = {}) {
   const place = () => {
     if (!canvas.isConnected) return false;
     const stageBox = canvas.parentElement.getBoundingClientRect();
-    const backdrop = document.getElementById('overlay').getBoundingClientRect();
+    const overlay = document.getElementById('overlay');
+    const backdrop = overlay.getBoundingClientRect();
     const point = plazaPointIn(backdrop);
+    // Mép trên của tranh nền, để dải trời nối lên trên kết thúc đúng chỗ đó.
+    overlay.style.setProperty('--bg-top', `${backdrop.height - PLAZA.h * (backdrop.width / PLAZA.w)}px`);
     // Cỡ khung vẽ bám theo cỡ nhân vật, chừa chỗ cho tóc dựng và bóng đổ.
     const charH = backdrop.width * CHAR_OF_BG;
     box = { w: Math.round(charH * 0.9), h: Math.round(charH + 40), charH };

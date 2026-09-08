@@ -1371,8 +1371,13 @@ button.primary.big-cta:active:not(:disabled) { transform: translateY(2px); box-s
   background:
     url('/assets/ui/leaves.png') left top / clamp(200px, 24vw, 340px) auto no-repeat,
     url('/assets/ui/leaves.png') right top / clamp(170px, 20vw, 290px) auto no-repeat,
+    url('/assets/ui/balloon.png') 60% 15% / clamp(70px, 8vw, 120px) auto no-repeat,
+    url('/assets/ui/blimp.png') 28% 8% / clamp(120px, 14vw, 210px) auto no-repeat,
     url('/assets/ui/create.png') bottom center / 100% auto no-repeat,
-    linear-gradient(#8ccdf7 0%, #6fbdf3 55%, #6abff6 100%) no-repeat;
+    /* Dải trời nối lên phía trên phải KẾT THÚC đúng màu mép trên của tranh, và
+       mép trên của tranh nằm ở đâu thì tuỳ bề ngang màn hình — JS đo rồi đặt
+       vào --bg-top. Không khớp màu thì chỗ nối hiện ra một vệt. */
+    linear-gradient(#4fa8ea 0, #6abff6 var(--bg-top, 45%)) no-repeat;
   justify-content: center;
   padding-top: 0;
 }

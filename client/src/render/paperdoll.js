@@ -28,9 +28,13 @@ export const EYE_COLOURS = [
   { id: 'ho_phach', label: 'Hổ phách', hex: '#d99a2b' },
 ];
 
-// Cổ áo chờm lên cằm vài pixel: để hở là nhân vật có một khe sáng giữa đầu và
-// thân, nhìn như cái đầu bay lơ lửng.
-const NECK_OVERLAP = 6;
+// Cằm lún vào cổ áo bao nhiêu pixel (tính theo art gốc).
+//
+// Phải sâu chừng này vì hai mảnh không khớp viền nhau: mép dưới mảnh mặt là
+// đường cong CẰM, còn mép trên mảnh trang phục là đường VAI võng xuống ở giữa —
+// chồng nông thì hai bên cổ còn một vệt hở nhìn thấu qua nền. Đo bằng cách vẽ
+// trên nền hồng chói: 12 vẫn còn vệt, 18 thì kín.
+const NECK_OVERLAP = 18;
 
 // Khuôn mặt trên tấm gốc vẽ TO hơn cái đầu mà các kiểu tóc ôm quanh — bày
 // riêng một khung để nhìn cho rõ nên nó được vẽ rộng ra. Đội thẳng thì đỉnh
@@ -102,6 +106,20 @@ function eyeMask(data, w, h) {
   return mask;
 }
 
+/** Tông màu giữa của vùng mắt — mốc để xoay sang màu người chơi chọn. */
+function medianHue(d, mask) {
+  const hues = [];
+  for (let i = 0; i < mask.length; i++) {
+    if (!mask[i]) continue;
+    const p = i * 4;
+    const [h, sat] = toHsl(d[p], d[p + 1], d[p + 2]);
+    if (sat >= 0.2) hues.push(h);
+  }
+  if (!hues.length) return 25; // nâu, tông mắt trên art gốc
+  hues.sort((a, b) => a - b);
+  return hues[hues.length >> 1];
+}
+
 /**
  * Bản sao của một mảnh art đã đổi tông da và/hoặc màu mắt.
  *
@@ -139,12 +157,23 @@ function recoloured(part, skin, eyes) {
   if (eyes) {
     const mask = eyeMask(d, rect.w, rect.h);
     const hex = EYE_COLOURS[eyes].hex;
-    const [th, ts] = toHsl(...[1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)));
+    const [th] = toHsl(...[1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)));
+
+    // XOAY tông màu, không gán tông mới.
+    //
+    // Gán thẳng tông và độ tươi của màu đích cho mọi pixel trong vùng mắt thì
+    // nét viền và phần trắng cũng bị nhuộm đậm như nhau, con mắt biến thành
+    // một MẢNG MÀU vuông vắn thay vì con mắt có vành, có lòng, có chấm sáng.
+    // Xoay thì mỗi pixel giữ nguyên độ tươi và độ sáng của nó, chỉ đổi tông —
+    // nét gần như không màu vẫn gần như không màu.
+    const base = medianHue(d, mask);
+    const turn = ((th - base) % 360 + 360) % 360;
     for (let i = 0; i < mask.length; i++) {
       if (!mask[i]) continue;
       const p = i * 4;
-      const [, , l] = toHsl(d[p], d[p + 1], d[p + 2]);
-      const [r, g, b] = fromHsl(th, ts, l);
+      const [h, sat, l] = toHsl(d[p], d[p + 1], d[p + 2]);
+      if (sat < 0.12) continue; // chấm sáng và nét xám: để yên
+      const [r, g, b] = fromHsl((h + turn) % 360, Math.min(1, sat * 1.15), l);
       d[p] = r; d[p + 1] = g; d[p + 2] = b;
     }
   }
