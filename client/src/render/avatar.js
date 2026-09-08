@@ -1,31 +1,22 @@
 /**
- * Vẽ nhân vật theo kiểu paperdoll: thân quy định 6 khung hình, mỗi món trang bị
- * có sprite riêng cho đúng 6 khung đó, xếp theo zOrder khai báo trong atlas
- * (doc 04 + doc 05). Thêm món mới = thêm data, không sửa code vẽ.
+ * Vẽ nhân vật từ art vẽ sẵn (doc 04 + doc 05).
  *
- * Sprite vẽ bằng thang xám rồi nhân với màu của món đồ lúc chạy, nên một bộ
- * sprite phục vụ mọi màu mà vẫn giữ khối sáng–tối.
+ * Art chỉ có MỘT khung đứng cho mỗi nhân vật, không phải dải khung đi. Nên
+ * chuyển động nặn bằng phép biến hình trên chính khung đó: nhún người, nghiêng
+ * theo bước, và ép–giãn nhẹ. Cách này quen thuộc trong game 2D dùng sprite đơn,
+ * và ở cỡ chibi thì đọc ra "đang đi" rõ hơn người ta tưởng.
  *
- * Vẫn giữ bản vẽ bằng hình khối làm đường lui: atlas nạp bất đồng bộ, và màn
- * hình đăng nhập dựng avatar trước khi thế giới kịp nạp xong.
+ * Vẫn giữ bản vẽ bằng hình khối làm đường lui: màn đăng nhập dựng avatar trước
+ * khi trang art kịp tải xong.
  */
 import { atlas } from './atlas.js';
 
 const AVATAR_HEIGHT = 96;
 
-// Tỉ lệ tính từ CHIỀU CAO THÂN trong atlas, không phải chiều cao ô: ô có chừa
-// khoảng hở phía trên cho mũ, lấy nhầm là nhân vật bị lùn đi.
-const partScale = () => AVATAR_HEIGHT / (atlas.meta?.parts?.bodyH ?? 54);
-
-const DEFAULT_PART = { body: 'body', face: 'face', hair: 'hair_short', top: 'top_tee', bottom: 'bottom_long', shoes: 'shoes' };
 const DEFAULT_COLOUR = {
   body: '#f3c9a5', face: '#2b2b33', hair: '#3a2c26', top: '#4a86c8',
   bottom: '#3d4c66', shoes: '#2f2f36', hat: '#dcc07a', accessory: '#d8534f', back: '#8a6a45',
 };
-
-// Slot nào không mặc gì thì vẫn phải vẽ (không ai đi chơi mà thiếu thân hoặc
-// tóc); slot phụ kiện thì để trống là đúng.
-const REQUIRED_SLOTS = ['back', 'body', 'bottom', 'shoes', 'top', 'face', 'hair', 'hat', 'accessory'];
 
 /**
  * Tra màu của cosmetic đang mặc ở một slot.
@@ -39,30 +30,52 @@ function colorOf(content, equipment, slot, fallback, palette) {
   return item?.colors?.[0] ?? fallback;
 }
 
-function partOf(content, equipment, slot) {
-  const itemId = equipment?.[slot];
-  const item = itemId ? content.avatarItemsById.get(itemId) : null;
-  return item?.part ?? DEFAULT_PART[slot] ?? null;
+/**
+ * Biến hình theo trạng thái. Trả về { bob, lean, squash } cho atlas.character().
+ *
+ * Ba thành phần cùng chạy trên một pha:
+ *  - bob: nhún lên xuống hai nhịp mỗi bước, đây là thứ đọc ra "đang đi".
+ *  - squash: chạm đất thì bè ra, bật lên thì thon lại — giữ thể tích nên
+ *    người không bị phồng to.
+ *  - lean: nghiêng nhẹ về trước, cho cảm giác có đà.
+ */
+function transformFor(state, phase) {
+  if (state === 'walk' || state === 'run') {
+    const heavy = state === 'run';
+    const step = Math.sin(phase * Math.PI * 4);      // hai nhịp mỗi chu kỳ
+    const lift = Math.abs(step);
+    return {
+      bob: -lift * (heavy ? 5 : 3),
+      squash: 1 + lift * (heavy ? 0.05 : 0.03),
+      lean: step * (heavy ? 0.05 : 0.03),
+    };
+  }
+  if (state === 'jump') return { bob: 0, squash: 1.06, lean: 0 };
+  if (state === 'sit') return { bob: 0, squash: 0.86, lean: 0 };
+  if (state === 'farm') return { bob: 0, squash: 0.94, lean: 0.1 };
+  // Đứng yên vẫn phải thở, không thì nhìn như game đơ.
+  return { bob: 0, squash: 1 + Math.sin(phase * Math.PI * 2) * 0.008, lean: 0 };
 }
 
-/** Khung hình theo trạng thái: 0–1 đứng yên, 2–5 chu kỳ đi. */
-function frameFor(state, phase) {
-  if (state === 'walk' || state === 'run') return 2 + Math.floor(phase * 4) % 4;
-  return phase % 1 < 0.5 ? 0 : 1;
+/** Sprite của nhân vật: NPC khai trong data map, người chơi theo giới tính. */
+function spriteOf({ sprite, bodyType }) {
+  if (sprite) return sprite;
+  return bodyType === 'b' ? 'hero_girl' : 'hero_boy';
 }
 
 /**
  * @param ctx canvas 2d context, đã dịch gốc toạ độ về chân nhân vật.
  * @param options.state idle | walk | run | jump | sit | farm
- * @param options.phase 0..1 — pha animation, dùng cho bước chân và nhún người.
+ * @param options.phase 0..1 — pha animation.
+ * @param options.sprite tên sprite nhân vật; bỏ trống thì suy từ trang phục.
  */
 export function drawAvatar(ctx, content, options) {
-  const { facing = 1, scale = 1, nickname = null, emote = null } = options;
+  const { facing = 1, scale = 1, nickname = null, emote = null, state = 'idle', phase = 0 } = options;
 
   ctx.save();
   ctx.scale(scale, scale);
-  // Bóng đổ vẽ ở đây chứ không nướng vào sprite: sprite thân bị nhân với màu da
-  // nên bóng lọt vào đó sẽ thành vũng màu da.
+  // Bóng đổ vẽ ở đây, không nướng vào sprite: bóng phải nằm yên dưới chân khi
+  // người nhún lên, nướng vào sprite là bóng nhún theo.
   ctx.globalAlpha = 0.22;
   ctx.fillStyle = '#000';
   ctx.beginPath();
@@ -71,8 +84,15 @@ export function drawAvatar(ctx, content, options) {
   ctx.globalAlpha = 1;
   ctx.restore();
 
-  if (atlas.ready) drawPaperdoll(ctx, content, options);
-  else drawShapes(ctx, content, options);
+  let drawn = false;
+  const name = spriteOf(options);
+  if (atlas.hasSprite(name)) {
+    ctx.save();
+    ctx.scale(facing * scale, scale);
+    drawn = atlas.character(ctx, name, 0, 0, AVATAR_HEIGHT, transformFor(state, phase));
+    ctx.restore();
+  }
+  if (!drawn) drawShapes(ctx, content, options);
 
   if (nickname) {
     ctx.save();
@@ -100,35 +120,8 @@ export function drawAvatar(ctx, content, options) {
   }
 }
 
-function drawPaperdoll(ctx, content, { equipment, palette = null, facing = 1, state = 'idle', phase = 0, scale = 1 }) {
-  const frame = frameFor(state, phase);
-  // Ngồi và làm ruộng chưa có khung riêng; hạ người xuống cho khác tư thế đứng
-  // thay vì vẽ y hệt rồi để người chơi tưởng game đơ.
-  const crouch = state === 'sit' ? 10 : state === 'farm' ? 6 : 0;
-
-  const wearing = [];
-  for (const slot of REQUIRED_SLOTS) {
-    const part = partOf(content, equipment, slot);
-    if (!part) continue;
-    // Mũ/phụ kiện/đồ lưng chỉ vẽ khi thực sự mặc.
-    if (!DEFAULT_PART[slot] && !equipment?.[slot] && !palette?.[slot]) continue;
-    wearing.push({ part, colour: colorOf(content, equipment, slot, DEFAULT_COLOUR[slot], palette) });
-  }
-
-  ctx.save();
-  ctx.imageSmoothingEnabled = false;
-  ctx.scale(facing * scale, scale);
-  ctx.translate(0, -crouch);
-  const order = atlas.partOrder(wearing.map((w) => w.part));
-  for (const name of order) {
-    const w = wearing.find((item) => item.part === name);
-    atlas.part(ctx, name, w.colour, frame, 0, 0, partScale());
-  }
-  ctx.restore();
-}
-
 function drawShapes(ctx, content, { equipment, palette = null, facing = 1, state = 'idle', phase = 0, scale = 1 }) {
-  const skin = colorOf(content, equipment, 'body', '#f3c9a5', palette);
+  const skin = colorOf(content, equipment, 'body', DEFAULT_COLOUR.body, palette);
   const eyes = colorOf(content, equipment, 'face', '#2b2b33', palette);
   const hair = colorOf(content, equipment, 'hair', '#3a2c26', palette);
   const top = colorOf(content, equipment, 'top', '#4a86c8', palette);

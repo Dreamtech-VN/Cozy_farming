@@ -50,7 +50,7 @@ export function showRegister(game) {
   // Chọn ngoại hình: mỗi slot lấy đúng các cosmetic mặc định từ content (doc 04).
   const defaults = game.content.avatarItems.filter((item) => item.unlock.type === 'default');
   const slots = ['body', 'face', 'hair', 'top', 'bottom', 'shoes'];
-  const appearance = {};
+  const appearance = { body_type: 'a' };
   for (const slot of slots) appearance[slot] = defaults.find((item) => item.slot === slot)?.item_id;
 
   const preview = el('canvas', { width: 200, height: 260 });
@@ -62,8 +62,35 @@ export function showRegister(game) {
     ctx.clearRect(0, 0, preview.width, preview.height);
     ctx.translate(preview.width / 2, preview.height - 24);
     ctx.scale(1.7, 1.7);
-    drawAvatar(ctx, game.content, { equipment: appearance, facing: 1, state: 'idle', phase: 0 });
+    drawAvatar(ctx, game.content, {
+      equipment: appearance,
+      bodyType: appearance.body_type,
+      facing: 1,
+      state: 'idle',
+      phase: 0,
+    });
   };
+
+  // Chọn nhân vật. Art là hai người vẽ sẵn nguyên bộ, không tháo rời được, nên
+  // đây là lựa chọn đầu tiên chứ không phải một slot trang phục.
+  const HEROES = [{ id: 'a', label: 'Bạn nam' }, { id: 'b', label: 'Bạn nữ' }];
+  const heroPicker = el('div', { class: 'field' }, [
+    el('label', { text: 'Nhân vật' }),
+    el('div', { class: 'hero-picker', role: 'radiogroup', 'aria-label': 'Chọn nhân vật' },
+      HEROES.map((hero) => el('button', {
+        class: 'hero-option',
+        type: 'button',
+        role: 'radio',
+        text: hero.label,
+        'aria-checked': appearance.body_type === hero.id ? 'true' : 'false',
+        onClick: (event) => {
+          appearance.body_type = hero.id;
+          for (const sibling of event.currentTarget.parentElement.children) sibling.setAttribute('aria-checked', 'false');
+          event.currentTarget.setAttribute('aria-checked', 'true');
+          drawPreview();
+        },
+      }))),
+  ]);
 
   const pickers = slots.map((slot) => {
     const options = defaults.filter((item) => item.slot === slot);
@@ -82,6 +109,7 @@ export function showRegister(game) {
       })));
     return el('div', { class: 'field' }, [el('label', { text: SLOT_LABEL[slot] }), row]);
   }).filter(Boolean);
+  pickers.unshift(heroPicker);
 
   const submit = async () => {
     error.classList.add('hidden');

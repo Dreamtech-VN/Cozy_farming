@@ -132,8 +132,9 @@ tên nào là vật nào (`npm run art-index` sinh lại).
 | --- | --- | --- | --- |
 | `outdoor` | `city`, `village` | 213 | 7,2 MB |
 | `indoor` | `home`, `kitchen`, `retail`, `civic`, `decor` | 547 | 15,5 MB |
+| `chars` | `hero`, `npc` | 104 | 2,0 MB |
 
-Cả hai trang tải hết ở màn chờ trước khi vào game (tổng 22,7 MB), có thanh tiến
+Cả ba trang tải hết ở màn chờ trước khi vào game (tổng 24,7 MB), có thanh tiến
 độ chạy theo số byte thật. Thêm art là thêm vào con số này — cân nhắc trước khi
 sinh thêm tấm mới.
 

@@ -6,10 +6,104 @@
  * giờ đều ô.
  */
 
+/**
+ * Cắt theo LƯỚI THƯA: tìm dải trống ngang để chia hàng, rồi trong từng hàng tìm
+ * khoảng trống dọc để chia cột.
+ *
+ * Dùng cho tấm mà các vật CHẠM NHAU — art nhân vật có quầng sáng mờ rộng, xếp
+ * sát nhau nên gom cụm liên thông sẽ dính cả tấm thành một khối. Cắt theo dải
+ * trống không cần vật rời nhau, chỉ cần có khe.
+ */
+/**
+ * Xoá quầng mờ quanh sprite, giữ nguyên mép khử răng cưa.
+ *
+ * Art sinh bằng model hay có một lớp sương rất nhạt lan rộng ra ngoài dáng vật.
+ * Trên nền phẳng của tấm gốc thì không thấy, nhưng đặt lên nền trời trong game
+ * là hiện ra viền sáng hình chữ nhật. Mép thật nhảy vọt qua ngưỡng này chỉ
+ * trong một hai pixel nên cắt ở đây không làm sứt dáng.
+ */
+function trimGlow(rgba, cut) {
+  for (let i = 3; i < rgba.length; i += 4) {
+    if (rgba[i] < cut) { rgba[i] = 0; continue; }
+    if (rgba[i] >= 250) rgba[i] = 255;
+  }
+}
+
+function sliceByGaps(img, { alphaCut, minRun, minSize, trim }) {
+  const { width: W, height: H, data } = img;
+  const solidAt = (x, y) => data[(y * W + x) * 4 + 3] >= alphaCut;
+
+  const bands = (from, to, along, cross, isSolid) => {
+    const out = [];
+    let start = -1; let gap = 0;
+    for (let i = from; i <= to; i++) {
+      let any = false;
+      for (let j = cross[0]; j <= cross[1] && !any; j++) any = isSolid(i, j);
+      if (any) {
+        if (start === -1) start = i;
+        gap = 0;
+      } else if (start !== -1) {
+        gap++;
+        // Chỉ cắt khi khe đủ rộng: khe hẹp là kẽ giữa hai chân, không phải
+        // ranh giới giữa hai nhân vật.
+        if (gap >= minRun) { out.push([start, i - gap]); start = -1; gap = 0; }
+      }
+    }
+    if (start !== -1) out.push([start, to]);
+    return out.filter(([a, b]) => b - a + 1 >= minSize);
+  };
+
+  const rows = bands(0, H - 1, 'y', [0, W - 1], (y, x) => solidAt(x, y));
+  const cells = [];
+  for (const [y0, y1] of rows) {
+    for (const [x0, x1] of bands(0, W - 1, 'x', [y0, y1], (x, y) => solidAt(x, y))) {
+      // Cắt sát nội dung thật trong ô, không giữ nguyên khung dải.
+      let ax = x1, ay = y1, bx = x0, by = y0;
+      for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
+        if (!solidAt(x, y)) continue;
+        if (x < ax) ax = x; if (x > bx) bx = x;
+        if (y < ay) ay = y; if (y > by) by = y;
+      }
+      if (bx < ax) continue;
+      const w = bx - ax + 1; const h = by - ay + 1;
+      const out = new Uint8Array(w * h * 4);
+      for (let y = 0; y < h; y++) {
+        const src = ((ay + y) * W + ax) * 4;
+        out.set(data.subarray(src, src + w * 4), y * w * 4);
+      }
+      if (trim) trimGlow(out, trim);
+      cells.push({ w, h, x: ax, y: ay, data: out });
+    }
+  }
+  return cells;
+}
+
 /** @returns mảng {w, h, x, y, data} theo thứ tự đọc: trên xuống, trái sang phải. */
 export function splitSheet(img, options = {}) {
+  if (options.mode === 'gaps') {
+    return sliceByGaps(img, {
+      alphaCut: options.alpha ?? 110,
+      minRun: options.minRun ?? 4,
+      minSize: options.minSize ?? 24,
+      trim: options.trim ?? 0,
+    });
+  }
   const { width: W, height: H, data } = img;
-    const { tol: TOL = 22, minArea: MIN_AREA = 400, gap: GAP = 10 } = options;
+    const {
+    tol: TOL = 22, minArea: MIN_AREA = 400, gap: GAP = 10, alpha: ALPHA = null,
+    bgTest: BG_TEST = 'colour', lightSat: LIGHT_SAT = 14, lightMin: LIGHT_MIN = 196,
+  } = options;
+
+  // Ảnh đã có alpha thật thì cắt theo alpha, đừng đoán màu nền. Nhưng phải lấy
+  // NGƯỠNG cao: art nhân vật có quầng sáng mờ rộng quanh người, cắt ở alpha > 0
+  // là quầng của hai người cạnh nhau chạm nhau và dính thành một cụm.
+  let hasAlpha = ALPHA !== null;
+  if (ALPHA === null) {
+    let clear = 0;
+    for (let i = 3; i < data.length; i += 4) if (data[i] === 0) clear++;
+    hasAlpha = clear > W * H * 0.05;
+  }
+  const alphaCut = ALPHA ?? 110;
 
   // Màu nền lấy từ trung vị viền ảnh, không lấy một pixel góc: model hay để
   // nền chuyển màu nhè nhẹ nên một mẫu đơn lẻ dễ lệch.
@@ -19,10 +113,19 @@ export function splitSheet(img, options = {}) {
   const med = (arr) => arr.sort((a, b) => a - b)[arr.length >> 1];
   const bg = [0, 1, 2].map((c) => med(border.map(([x, y]) => data[(y * W + x) * 4 + c])));
 
-  const near = (p) => {
-    const dr = data[p] - bg[0], dg = data[p + 1] - bg[1], db = data[p + 2] - bg[2];
-    return Math.sqrt(dr * dr + dg * dg + db * db) <= TOL;
+  // Nền là ô caro xám nhạt, KHÔNG đồng màu: bốn góc tấm hero chênh nhau tới 60
+  // nên một ngưỡng quanh một màu gốc không phủ nổi. Bắt theo tính chất thay vì
+  // theo màu cụ thể: xám (bão hoà thấp) và sáng. Nhân vật có nét viền tối bao
+  // quanh nên vùng trắng bên trong (áo, giày) không bị loang tới.
+  const isLightGrey = (p) => {
+    const r = data[p], g = data[p + 1], b = data[p + 2];
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    return max - min <= LIGHT_SAT && min >= LIGHT_MIN;
   };
+
+  const near = (p) => (BG_TEST === 'light' ? isLightGrey(p) : hasAlpha
+    ? data[p + 3] < alphaCut
+    : Math.sqrt((data[p] - bg[0]) ** 2 + (data[p + 1] - bg[1]) ** 2 + (data[p + 2] - bg[2]) ** 2) <= TOL);
 
   // Loang nền từ viền. Dùng hàng đợi mảng phẳng thay vì đệ quy — 3,7 triệu pixel
   // sẽ làm tràn ngăn xếp.
@@ -127,9 +230,19 @@ export function splitSheet(img, options = {}) {
         const p = i * 4;
         // Mép khử răng cưa: pixel càng gần màu nền thì càng trong, nếu không
         // vật sẽ có viền lởm chởm màu nền cũ khi đặt lên nền khác.
-        const dr = data[p] - bg[0], dg = data[p + 1] - bg[1], db = data[p + 2] - bg[2];
-        const dist = Math.sqrt(dr * dr + dg * dg + db * db);
-        const alpha = dist >= TOL * 2 ? 255 : Math.round((dist / (TOL * 2)) * 255);
+        // Cắt theo alpha thì giữ nguyên alpha gốc; cắt theo màu thì suy alpha
+        // từ khoảng cách màu để mép khử răng cưa không thành viền lởm chởm.
+        let alpha;
+        if (BG_TEST === 'light') {
+          // Nhị phân: ảnh gốc cao gấp 10 lần cỡ vẽ trong game nên bước thu nhỏ
+          // tự làm mượt mép, không cần suy alpha từ khoảng cách màu.
+          alpha = 255;
+        } else if (hasAlpha) {
+          alpha = data[p + 3];
+        } else {
+          const dist = Math.sqrt((data[p] - bg[0]) ** 2 + (data[p + 1] - bg[1]) ** 2 + (data[p + 2] - bg[2]) ** 2);
+          alpha = dist >= TOL * 2 ? 255 : Math.round((dist / (TOL * 2)) * 255);
+        }
         out.set([data[p], data[p + 1], data[p + 2], alpha], (y * w + x) * 4);
       }
     }

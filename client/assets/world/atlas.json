@@ -66,49 +66,13 @@
       "crop_moon_lotus"
     ]
   },
-  "parts": {
-    "file": "parts.png",
-    "w": 40,
-    "h": 64,
-    "frames": 6,
-    "ground": 2,
-    "bodyH": 54,
-    "names": [
-      "back_pack",
-      "body",
-      "bottom_long",
-      "bottom_short",
-      "shoes",
-      "top_tee",
-      "top_dress",
-      "face",
-      "scarf",
-      "hair_short",
-      "hair_long",
-      "hair_pony",
-      "hat_straw",
-      "hat_cap"
-    ],
-    "zOrder": {
-      "back_pack": 0,
-      "body": 10,
-      "bottom_long": 20,
-      "bottom_short": 20,
-      "shoes": 25,
-      "top_tee": 30,
-      "top_dress": 30,
-      "face": 40,
-      "scarf": 45,
-      "hair_short": 50,
-      "hair_long": 50,
-      "hair_pony": 50,
-      "hat_straw": 60,
-      "hat_cap": 60
-    }
-  },
   "sprites": {
     "comment": "Art vẽ sẵn, đóng gói bằng tools/import-art.mjs từ art-src/sheets/. Neo ĐÁY GIỮA. Mỗi sprite ghi rõ nằm ở trang nào để client nạp đúng trang cần.",
     "pages": {
+      "chars": {
+        "file": "sprites-chars.png",
+        "bytes": 2070759
+      },
       "indoor": {
         "file": "sprites-indoor.png",
         "bytes": 16281854
@@ -2261,6 +2225,20 @@
         "w": 169,
         "h": 153
       },
+      "hero_boy": {
+        "page": "chars",
+        "x": 2,
+        "y": 2,
+        "w": 163,
+        "h": 320
+      },
+      "hero_girl": {
+        "page": "chars",
+        "x": 167,
+        "y": 2,
+        "w": 194,
+        "h": 320
+      },
       "hm_bed_01": {
         "page": "indoor",
         "x": 2,
@@ -3912,6 +3890,720 @@
         "y": 4108,
         "w": 109,
         "h": 112
+      },
+      "npc_casual_01": {
+        "page": "chars",
+        "x": 249,
+        "y": 470,
+        "w": 51,
+        "h": 127
+      },
+      "npc_casual_02": {
+        "page": "chars",
+        "x": 190,
+        "y": 324,
+        "w": 56,
+        "h": 143
+      },
+      "npc_casual_03": {
+        "page": "chars",
+        "x": 498,
+        "y": 324,
+        "w": 58,
+        "h": 142
+      },
+      "npc_casual_04": {
+        "page": "chars",
+        "x": 1943,
+        "y": 2,
+        "w": 66,
+        "h": 144
+      },
+      "npc_casual_05": {
+        "page": "chars",
+        "x": 558,
+        "y": 324,
+        "w": 66,
+        "h": 142
+      },
+      "npc_casual_06": {
+        "page": "chars",
+        "x": 1213,
+        "y": 324,
+        "w": 63,
+        "h": 140
+      },
+      "npc_casual_07": {
+        "page": "chars",
+        "x": 114,
+        "y": 470,
+        "w": 66,
+        "h": 129
+      },
+      "npc_casual_08": {
+        "page": "chars",
+        "x": 61,
+        "y": 470,
+        "w": 51,
+        "h": 131
+      },
+      "npc_casual_09": {
+        "page": "chars",
+        "x": 2,
+        "y": 324,
+        "w": 65,
+        "h": 144
+      },
+      "npc_casual_10": {
+        "page": "chars",
+        "x": 1522,
+        "y": 324,
+        "w": 54,
+        "h": 137
+      },
+      "npc_casual_11": {
+        "page": "chars",
+        "x": 182,
+        "y": 470,
+        "w": 65,
+        "h": 128
+      },
+      "npc_casual_12": {
+        "page": "chars",
+        "x": 1462,
+        "y": 324,
+        "w": 58,
+        "h": 138
+      },
+      "npc_casual_13": {
+        "page": "chars",
+        "x": 626,
+        "y": 324,
+        "w": 65,
+        "h": 142
+      },
+      "npc_casual_14": {
+        "page": "chars",
+        "x": 693,
+        "y": 324,
+        "w": 59,
+        "h": 142
+      },
+      "npc_casual_15": {
+        "page": "chars",
+        "x": 484,
+        "y": 470,
+        "w": 59,
+        "h": 126
+      },
+      "npc_casual_16": {
+        "page": "chars",
+        "x": 952,
+        "y": 324,
+        "w": 61,
+        "h": 141
+      },
+      "npc_casual_17": {
+        "page": "chars",
+        "x": 1973,
+        "y": 324,
+        "w": 56,
+        "h": 132
+      },
+      "npc_elder_01": {
+        "page": "chars",
+        "x": 563,
+        "y": 2,
+        "w": 57,
+        "h": 152
+      },
+      "npc_elder_02": {
+        "page": "chars",
+        "x": 1437,
+        "y": 2,
+        "w": 64,
+        "h": 146
+      },
+      "npc_elder_03": {
+        "page": "chars",
+        "x": 1503,
+        "y": 2,
+        "w": 63,
+        "h": 146
+      },
+      "npc_elder_04": {
+        "page": "chars",
+        "x": 429,
+        "y": 2,
+        "w": 66,
+        "h": 154
+      },
+      "npc_elder_05": {
+        "page": "chars",
+        "x": 902,
+        "y": 2,
+        "w": 64,
+        "h": 148
+      },
+      "npc_elder_06": {
+        "page": "chars",
+        "x": 754,
+        "y": 324,
+        "w": 64,
+        "h": 142
+      },
+      "npc_elder_07": {
+        "page": "chars",
+        "x": 248,
+        "y": 324,
+        "w": 66,
+        "h": 143
+      },
+      "npc_elder_08": {
+        "page": "chars",
+        "x": 697,
+        "y": 2,
+        "w": 56,
+        "h": 150
+      },
+      "npc_elder_09": {
+        "page": "chars",
+        "x": 1095,
+        "y": 2,
+        "w": 82,
+        "h": 147
+      },
+      "npc_elder_10": {
+        "page": "chars",
+        "x": 1756,
+        "y": 2,
+        "w": 62,
+        "h": 145
+      },
+      "npc_elder_11": {
+        "page": "chars",
+        "x": 968,
+        "y": 2,
+        "w": 58,
+        "h": 148
+      },
+      "npc_elder_12": {
+        "page": "chars",
+        "x": 622,
+        "y": 2,
+        "w": 73,
+        "h": 152
+      },
+      "npc_elder_13": {
+        "page": "chars",
+        "x": 363,
+        "y": 2,
+        "w": 64,
+        "h": 157
+      },
+      "npc_elder_14": {
+        "page": "chars",
+        "x": 1179,
+        "y": 2,
+        "w": 65,
+        "h": 147
+      },
+      "npc_elder_15": {
+        "page": "chars",
+        "x": 755,
+        "y": 2,
+        "w": 78,
+        "h": 150
+      },
+      "npc_elder_16": {
+        "page": "chars",
+        "x": 1278,
+        "y": 324,
+        "w": 56,
+        "h": 140
+      },
+      "npc_kid_01": {
+        "page": "chars",
+        "x": 670,
+        "y": 470,
+        "w": 54,
+        "h": 124
+      },
+      "npc_kid_02": {
+        "page": "chars",
+        "x": 302,
+        "y": 470,
+        "w": 64,
+        "h": 127
+      },
+      "npc_kid_03": {
+        "page": "chars",
+        "x": 1249,
+        "y": 470,
+        "w": 53,
+        "h": 114
+      },
+      "npc_kid_04": {
+        "page": "chars",
+        "x": 545,
+        "y": 470,
+        "w": 64,
+        "h": 126
+      },
+      "npc_kid_05": {
+        "page": "chars",
+        "x": 1145,
+        "y": 470,
+        "w": 49,
+        "h": 115
+      },
+      "npc_kid_06": {
+        "page": "chars",
+        "x": 791,
+        "y": 470,
+        "w": 64,
+        "h": 122
+      },
+      "npc_kid_07": {
+        "page": "chars",
+        "x": 1419,
+        "y": 470,
+        "w": 61,
+        "h": 96
+      },
+      "npc_kid_08": {
+        "page": "chars",
+        "x": 911,
+        "y": 470,
+        "w": 47,
+        "h": 121
+      },
+      "npc_kid_09": {
+        "page": "chars",
+        "x": 1304,
+        "y": 470,
+        "w": 58,
+        "h": 114
+      },
+      "npc_kid_10": {
+        "page": "chars",
+        "x": 1086,
+        "y": 470,
+        "w": 57,
+        "h": 118
+      },
+      "npc_kid_11": {
+        "page": "chars",
+        "x": 960,
+        "y": 470,
+        "w": 58,
+        "h": 119
+      },
+      "npc_kid_12": {
+        "page": "chars",
+        "x": 857,
+        "y": 470,
+        "w": 52,
+        "h": 122
+      },
+      "npc_kid_13": {
+        "page": "chars",
+        "x": 1020,
+        "y": 470,
+        "w": 64,
+        "h": 119
+      },
+      "npc_kid_14": {
+        "page": "chars",
+        "x": 1364,
+        "y": 470,
+        "w": 53,
+        "h": 114
+      },
+      "npc_kid_15": {
+        "page": "chars",
+        "x": 1482,
+        "y": 470,
+        "w": 50,
+        "h": 94
+      },
+      "npc_kid_16": {
+        "page": "chars",
+        "x": 1196,
+        "y": 470,
+        "w": 51,
+        "h": 115
+      },
+      "npc_kid_17": {
+        "page": "chars",
+        "x": 726,
+        "y": 470,
+        "w": 63,
+        "h": 124
+      },
+      "npc_office_01": {
+        "page": "chars",
+        "x": 1844,
+        "y": 324,
+        "w": 61,
+        "h": 134
+      },
+      "npc_office_02": {
+        "page": "chars",
+        "x": 1246,
+        "y": 2,
+        "w": 64,
+        "h": 147
+      },
+      "npc_office_03": {
+        "page": "chars",
+        "x": 69,
+        "y": 324,
+        "w": 61,
+        "h": 144
+      },
+      "npc_office_04": {
+        "page": "chars",
+        "x": 1568,
+        "y": 2,
+        "w": 71,
+        "h": 146
+      },
+      "npc_office_05": {
+        "page": "chars",
+        "x": 1714,
+        "y": 324,
+        "w": 64,
+        "h": 135
+      },
+      "npc_office_06": {
+        "page": "chars",
+        "x": 1641,
+        "y": 2,
+        "w": 56,
+        "h": 146
+      },
+      "npc_office_07": {
+        "page": "chars",
+        "x": 1312,
+        "y": 2,
+        "w": 60,
+        "h": 147
+      },
+      "npc_office_08": {
+        "page": "chars",
+        "x": 835,
+        "y": 2,
+        "w": 65,
+        "h": 149
+      },
+      "npc_office_09": {
+        "page": "chars",
+        "x": 132,
+        "y": 324,
+        "w": 56,
+        "h": 144
+      },
+      "npc_office_10": {
+        "page": "chars",
+        "x": 1015,
+        "y": 324,
+        "w": 63,
+        "h": 141
+      },
+      "npc_office_11": {
+        "page": "chars",
+        "x": 1374,
+        "y": 2,
+        "w": 61,
+        "h": 147
+      },
+      "npc_office_12": {
+        "page": "chars",
+        "x": 497,
+        "y": 2,
+        "w": 64,
+        "h": 154
+      },
+      "npc_office_13": {
+        "page": "chars",
+        "x": 1336,
+        "y": 324,
+        "w": 61,
+        "h": 140
+      },
+      "npc_office_14": {
+        "page": "chars",
+        "x": 316,
+        "y": 324,
+        "w": 61,
+        "h": 143
+      },
+      "npc_office_15": {
+        "page": "chars",
+        "x": 1820,
+        "y": 2,
+        "w": 55,
+        "h": 145
+      },
+      "npc_office_16": {
+        "page": "chars",
+        "x": 1028,
+        "y": 2,
+        "w": 65,
+        "h": 148
+      },
+      "npc_office_17": {
+        "page": "chars",
+        "x": 379,
+        "y": 324,
+        "w": 62,
+        "h": 143
+      },
+      "npc_worker_01": {
+        "page": "chars",
+        "x": 1699,
+        "y": 2,
+        "w": 55,
+        "h": 146
+      },
+      "npc_worker_02": {
+        "page": "chars",
+        "x": 1877,
+        "y": 2,
+        "w": 64,
+        "h": 145
+      },
+      "npc_worker_03": {
+        "page": "chars",
+        "x": 611,
+        "y": 470,
+        "w": 57,
+        "h": 125
+      },
+      "npc_worker_04": {
+        "page": "chars",
+        "x": 1780,
+        "y": 324,
+        "w": 62,
+        "h": 135
+      },
+      "npc_worker_05": {
+        "page": "chars",
+        "x": 1080,
+        "y": 324,
+        "w": 64,
+        "h": 141
+      },
+      "npc_worker_06": {
+        "page": "chars",
+        "x": 820,
+        "y": 324,
+        "w": 64,
+        "h": 142
+      },
+      "npc_worker_07": {
+        "page": "chars",
+        "x": 886,
+        "y": 324,
+        "w": 64,
+        "h": 142
+      },
+      "npc_worker_08": {
+        "page": "chars",
+        "x": 1399,
+        "y": 324,
+        "w": 61,
+        "h": 140
+      },
+      "npc_worker_09": {
+        "page": "chars",
+        "x": 368,
+        "y": 470,
+        "w": 55,
+        "h": 127
+      },
+      "npc_worker_10": {
+        "page": "chars",
+        "x": 1146,
+        "y": 324,
+        "w": 65,
+        "h": 141
+      },
+      "npc_worker_11": {
+        "page": "chars",
+        "x": 1578,
+        "y": 324,
+        "w": 65,
+        "h": 137
+      },
+      "npc_worker_12": {
+        "page": "chars",
+        "x": 1645,
+        "y": 324,
+        "w": 67,
+        "h": 137
+      },
+      "npc_worker_13": {
+        "page": "chars",
+        "x": 443,
+        "y": 324,
+        "w": 53,
+        "h": 143
+      },
+      "npc_worker_14": {
+        "page": "chars",
+        "x": 2,
+        "y": 470,
+        "w": 57,
+        "h": 132
+      },
+      "npc_worker_15": {
+        "page": "chars",
+        "x": 425,
+        "y": 470,
+        "w": 57,
+        "h": 127
+      },
+      "npc_worker_16": {
+        "page": "chars",
+        "x": 1907,
+        "y": 324,
+        "w": 64,
+        "h": 133
+      },
+      "pet_01": {
+        "page": "chars",
+        "x": 1651,
+        "y": 470,
+        "w": 58,
+        "h": 92
+      },
+      "pet_02": {
+        "page": "chars",
+        "x": 114,
+        "y": 604,
+        "w": 73,
+        "h": 78
+      },
+      "pet_03": {
+        "page": "chars",
+        "x": 1534,
+        "y": 470,
+        "w": 115,
+        "h": 93
+      },
+      "pet_04": {
+        "page": "chars",
+        "x": 1945,
+        "y": 470,
+        "w": 48,
+        "h": 81
+      },
+      "pet_05": {
+        "page": "chars",
+        "x": 1764,
+        "y": 470,
+        "w": 57,
+        "h": 90
+      },
+      "pet_06": {
+        "page": "chars",
+        "x": 1995,
+        "y": 470,
+        "w": 46,
+        "h": 80
+      },
+      "pet_07": {
+        "page": "chars",
+        "x": 2,
+        "y": 604,
+        "w": 47,
+        "h": 80
+      },
+      "pet_08": {
+        "page": "chars",
+        "x": 480,
+        "y": 604,
+        "w": 28,
+        "h": 69
+      },
+      "pet_09": {
+        "page": "chars",
+        "x": 510,
+        "y": 604,
+        "w": 32,
+        "h": 61
+      },
+      "pet_10": {
+        "page": "chars",
+        "x": 1823,
+        "y": 470,
+        "w": 58,
+        "h": 88
+      },
+      "pet_11": {
+        "page": "chars",
+        "x": 374,
+        "y": 604,
+        "w": 35,
+        "h": 73
+      },
+      "pet_12": {
+        "page": "chars",
+        "x": 246,
+        "y": 604,
+        "w": 58,
+        "h": 74
+      },
+      "pet_13": {
+        "page": "chars",
+        "x": 1711,
+        "y": 470,
+        "w": 51,
+        "h": 91
+      },
+      "pet_14": {
+        "page": "chars",
+        "x": 411,
+        "y": 604,
+        "w": 67,
+        "h": 72
+      },
+      "pet_15": {
+        "page": "chars",
+        "x": 306,
+        "y": 604,
+        "w": 66,
+        "h": 74
+      },
+      "pet_16": {
+        "page": "chars",
+        "x": 189,
+        "y": 604,
+        "w": 55,
+        "h": 78
+      },
+      "pet_17": {
+        "page": "chars",
+        "x": 51,
+        "y": 604,
+        "w": 61,
+        "h": 80
+      },
+      "pet_18": {
+        "page": "chars",
+        "x": 544,
+        "y": 604,
+        "w": 31,
+        "h": 60
+      },
+      "pet_19": {
+        "page": "chars",
+        "x": 1883,
+        "y": 470,
+        "w": 60,
+        "h": 87
       },
       "plant_bamboo": {
         "page": "outdoor",

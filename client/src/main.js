@@ -141,7 +141,9 @@ class Game {
       this.self.equipment = you.equipment;
       this.self.nickname = you.nickname;
       this.players.clear();
-      for (const player of players) this.players.set(player.character_id, { ...player, phase: 0 });
+      // Máy chủ gửi body_type; đổi sang bodyType một chỗ ở đây để chỗ vẽ không
+      // phải nhớ hai cách viết.
+      for (const player of players) this.players.set(player.character_id, { ...player, bodyType: player.body_type, phase: 0 });
     });
 
     this.realtime.addEventListener('player_join', (event) => {
@@ -186,6 +188,7 @@ class Game {
     this.characterId = profile.character_id;
     this.self.equipment = profile.equipment;
     this.self.nickname = profile.nickname;
+    this.self.bodyType = profile.body_type;
     this.profile = profile;
 
     document.getElementById('hud').classList.remove('hidden');
@@ -320,8 +323,8 @@ class Game {
       : `${Math.round(progress.current)} / ${Math.round(progress.needed)}`;
 
     drawAvatarPortrait(document.getElementById('avatar-portrait'), this.content, {
+      bodyType: this.self.bodyType,
       equipment: profile.equipment,
-      body_type: profile.body_type,
     });
 
     document.getElementById('hud-coin').lastElementChild.textContent = formatNumber(profile.wallet.coin ?? 0);

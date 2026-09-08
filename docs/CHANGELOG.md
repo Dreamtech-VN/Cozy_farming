@@ -3,6 +3,55 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.17.0 — 2026-09-08
+
+### Thêm — nhân vật và NPC vẽ sẵn, bỏ hệ paperdoll
+
+104 nhân vật: 2 nhân vật chính (`hero_boy`, `hero_girl`) và 102 NPC gồm người
+lớn, trẻ em, dân văn phòng, thợ, người già và thú nuôi. Trang atlas thứ ba
+`chars`, 2,0 MB.
+
+Hệ paperdoll (thân 6 khung + trang bị xếp lớp theo `zOrder`) **bị bỏ**. Nó chỉ
+chạy khi mọi món đồ vẽ khớp cùng một bộ khớp xương; art thật là hai người vẽ
+sẵn nguyên bộ, không tháo rời được. `tools/art/parts.mjs` và `parts.png` xoá.
+
+**Art chỉ có MỘT khung đứng**, không phải dải khung đi. Nên chuyển động nặn
+bằng phép biến hình trên chính khung đó (`transformFor()`):
+
+- `bob` — nhún lên xuống hai nhịp mỗi bước, đây là thứ đọc ra "đang đi".
+- `squash` — chạm đất thì bè ra, bật lên thì thon lại.
+- `lean` — nghiêng nhẹ về trước cho có đà.
+
+Gốc biến hình đặt ở CHÂN, không phải giữa người: nhún thì đầu hạ xuống còn chân
+đứng yên. Bóng đổ vẽ riêng ngoài sprite nên không nhún theo.
+
+Đứng yên vẫn thở nhẹ, và mỗi NPC lệch pha một chút — không thì cả map phập
+phồng cùng nhịp.
+
+### Thêm — chọn nhân vật khi tạo tài khoản
+Hai nhân vật chính là hai bộ vẽ sẵn nên đây là lựa chọn đầu tiên, không phải một
+slot trang phục. Lưu vào `body_type` (đã có sẵn trong CSDL); realtime vốn đã gửi
+trường này nên người chơi khác cũng hiện đúng nhân vật.
+
+NPC khai `sprite` trong `maps.json`; validator bắt tên không tồn tại.
+
+### Sửa — hai kiểu tấm art mới
+- **Tấm NPC**: có alpha thật nhưng quầng sáng mờ nối các nhân vật thành một
+  khối, gom cụm liên thông ra đúng 1 vật. Thêm chế độ cắt theo DẢI TRỐNG
+  (`mode: 'gaps'`): tìm khe ngang chia hàng rồi tìm khe dọc trong từng hàng.
+  Không cần vật rời nhau, chỉ cần có khe.
+- **Xoá quầng** (`trim: 40`): quầng nằm ở dải alpha 1–39 còn mép thật nhảy từ
+  19 lên 167 trong một pixel, nên cắt ở 40 không làm sứt dáng. Không xoá thì
+  đặt lên nền trời là hiện viền sáng hình chữ nhật.
+- **Tấm nhân vật chính**: không có alpha, ô caro vẽ chết vào ảnh và **không đồng
+  màu** — bốn góc chênh nhau tới 60, một ngưỡng quanh một màu gốc không phủ nổi.
+  Thêm `bgTest: 'light'` bắt nền theo tính chất (xám và sáng) thay vì theo màu.
+  Vùng trắng bên trong nhân vật an toàn vì nét viền tối chặn đường loang.
+- **Thu nhỏ lúc nhập** (`maxHeight`): ảnh gốc cao 1024px cho nhân vật vẽ ra 96px
+  là phí chỗ trong atlas cả trăm lần diện tích. Trung bình cả vùng chứ không lấy
+  mẫu điểm, và nhân trước với alpha để màu vùng trong suốt không rỉ ra thành
+  viền tối. 529×1024 → 163×320.
+
 ## 0.16.0 — 2026-09-08
 
 ### Đổi — tải hết art rồi mới cho vào game

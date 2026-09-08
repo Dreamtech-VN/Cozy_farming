@@ -24,7 +24,17 @@ const arg = (name, fallback) => {
 };
 
 const img = readPng(readFileSync(src));
-const pieces = splitSheet(img, { tol: arg('tol', 22), minArea: arg('min', 400), gap: arg('gap', 10) });
+const alphaArg = process.argv.indexOf('--alpha');
+const pieces = splitSheet(img, {
+  tol: arg('tol', 22),
+  minArea: arg('min', 400),
+  gap: arg('gap', 10),
+  alpha: alphaArg === -1 ? null : Number(process.argv[alphaArg + 1]),
+  mode: process.argv.includes('--gaps') ? 'gaps' : undefined,
+  minRun: arg('run', 4),
+  minSize: arg('size', 24),
+  trim: arg('trim', 0),
+});
 
 mkdirSync(outDir, { recursive: true });
 const manifest = pieces.map((piece, n) => {

@@ -80,6 +80,13 @@ export function validateContent(content) {
   // --- Map ---
   for (const map of content.maps) {
     if (!map.spawn_points?.length) issues.push(err('invalid_map', `map ${map.map_id}: thiếu spawn_points`));
+    if (sprites) {
+      for (const npc of map.npcs ?? []) {
+        if (npc.sprite && !sprites.has(npc.sprite)) {
+          issues.push(err('missing_reference', `map ${map.map_id}: NPC ${npc.npc_id} trỏ tới sprite không có "${npc.sprite}"`));
+        }
+      }
+    }
     if (sprites && map.scenery) {
       for (const [layer, kinds] of Object.entries(map.scenery)) {
         if (!Array.isArray(kinds) || !kinds.length) {

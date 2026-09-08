@@ -142,6 +142,7 @@ export class WorldRenderer {
       ctx.translate(player.x, player.y);
       drawAvatar(ctx, this.content, {
         equipment: player.equipment,
+        bodyType: player.bodyType,
         facing: player.facing,
         state: player.state,
         phase: player.phase ?? 0,
@@ -467,13 +468,16 @@ export class WorldRenderer {
     for (const npc of map.npcs) {
       ctx.save();
       ctx.translate(npc.x, npc.y);
-      // NPC không có tủ đồ; màu lấy thẳng từ palette khai báo trong data map.
+      // NPC không có tủ đồ: sprite khai thẳng trong data map. `palette` giữ lại
+      // cho đường lui vẽ bằng hình khối khi art chưa tải xong.
       drawAvatar(ctx, this.content, {
+        sprite: npc.sprite,
         equipment: {},
         palette: { body: npc.palette[0], top: npc.palette[1], hair: npc.palette[2] },
         facing: -1,
         state: 'idle',
-        phase: 0,
+        // Mỗi NPC lệch pha thở một chút, không thì cả map phập phồng cùng nhịp.
+        phase: (time * 0.35 + npc.x * 0.01) % 1,
         nickname: t(npc.name_key),
       });
       ctx.restore();
