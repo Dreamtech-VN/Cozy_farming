@@ -3,6 +3,25 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.20.1 — 2026-09-08
+
+### Đổi — thanh tải bám đúng bản mẫu
+Bỏ thẻ trắng ở màn chờ tải. Chữ, thanh và dòng mẹo nằm thẳng trên tranh như bản
+mẫu: chữ trắng viền đậm, thanh sọc chéo chạy trong rãnh xanh đậm, dòng mẹo có
+biểu tượng bóng đèn.
+
+### Sửa — xoá giao diện vẽ chết khỏi tranh, thay vì phủ mờ lúc chạy
+Phủ mờ không ăn thua: chữ "Loading… 68%" trong tranh là chữ trắng viền dày, làm
+mờ chỉ biến nó thành vệt sáng vẫn đọc được và chồng lên chữ thật.
+
+`tools/prep-ui.mjs` giờ xoá hẳn vùng đó ở khâu đóng gói. Cách đầu — nội suy dọc
+giữa hàng trên và hàng dưới — hỏng: chỗ đó có hàng rào, bụi cây và lối đi, nội
+suy ra một khối vệt kéo dọc thấy ngay là vá. Cách dùng là **làm nhoè mạnh với
+mép tan dần**: chữ tan thành mảng mờ, và vì mép vùng tan dần nên không lộ khung
+chữ nhật — mắt đọc ra là hiệu ứng xoá phông.
+
+Nhờ vậy bỏ được luôn dải phủ mờ lúc chạy ở màn này.
+
 ## 0.20.0 — 2026-09-08
 
 ### Thêm — màn chọn server
