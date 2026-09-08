@@ -977,3 +977,31 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
   background: var(--color-accent); color: var(--color-on-accent);
   font-family: var(--font-display); font-size: 10px; font-weight: 700;
 }
+
+/* Màn chờ tải tài nguyên. Thanh chạy theo số byte thật nên không cần hiệu ứng
+   giả vờ đang chạy; chỉ làm mượt bước nhảy giữa hai lần cập nhật. */
+.loading-card { text-align: center; }
+.progress-track {
+  height: 14px;
+  margin: var(--space-4) 0 var(--space-2);
+  border-radius: 999px;
+  background: rgba(51, 30, 17, .16);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold), #ffd77a);
+  transition: width .18s linear;
+}
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+  color: var(--ink);
+}
+.progress-row strong { font-size: 18px; font-family: var(--font-display); }
+.progress-size { opacity: .75; font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { .progress-fill { transition: none; } }

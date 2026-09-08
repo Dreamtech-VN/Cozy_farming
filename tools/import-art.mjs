@@ -87,7 +87,10 @@ for (const [page, items] of [...pages].sort()) {
   const file = `sprites-${page}.png`;
   const buf = canvas.toPng();
   writeFileSync(join(OUT, file), buf);
-  pageFiles[page] = file;
+  // Ghi luôn dung lượng: client cần biết TỔNG số byte trước khi bắt đầu tải thì
+  // thanh tiến độ mới chạy đều, chứ dựa vào Content-Length thì phải gửi xong
+  // request đầu mới biết được tổng, làm thanh nhảy giật.
+  pageFiles[page] = { file, bytes: buf.length };
   for (const piece of sorted) index[piece.name] = { page, x: piece.ax, y: piece.ay, w: piece.w, h: piece.h };
   console.log(`${file.padEnd(22)} ${ATLAS_W}×${atlasH}  ${(buf.length / 1024 / 1024).toFixed(1)} MB · ${items.length} vật`);
 }

@@ -109,8 +109,14 @@
   "sprites": {
     "comment": "Art vẽ sẵn, đóng gói bằng tools/import-art.mjs từ art-src/sheets/. Neo ĐÁY GIỮA. Mỗi sprite ghi rõ nằm ở trang nào để client nạp đúng trang cần.",
     "pages": {
-      "indoor": "sprites-indoor.png",
-      "outdoor": "sprites-outdoor.png"
+      "indoor": {
+        "file": "sprites-indoor.png",
+        "bytes": 16281854
+      },
+      "outdoor": {
+        "file": "sprites-outdoor.png",
+        "bytes": 7500462
+      }
     },
     "index": {
       "awning_purple": {

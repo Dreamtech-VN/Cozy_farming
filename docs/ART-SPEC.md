@@ -128,10 +128,14 @@ Bộ Cozy UI Pack đã mua đang dùng cho HUD, không cần sinh thêm.
 **760 vật** đã nhập, chia hai trang atlas. Xem `docs/art-index.html` để biết
 tên nào là vật nào (`npm run art-index` sinh lại).
 
-| Trang | Tấm | Vật | Nạp khi nào |
+| Trang | Tấm | Vật | Nặng |
 | --- | --- | --- | --- |
-| `outdoor` | `city`, `village` | 213 | Ngay khi vào game |
-| `indoor` | `home`, `kitchen`, `retail`, `civic`, `decor` | 547 | Chỉ khi map cần |
+| `outdoor` | `city`, `village` | 213 | 7,2 MB |
+| `indoor` | `home`, `kitchen`, `retail`, `civic`, `decor` | 547 | 15,5 MB |
+
+Cả hai trang tải hết ở màn chờ trước khi vào game (tổng 22,7 MB), có thanh tiến
+độ chạy theo số byte thật. Thêm art là thêm vào con số này — cân nhắc trước khi
+sinh thêm tấm mới.
 
 Đồ nội thất **chưa dùng được**: game chỉ có map ngoài trời, chưa có map trong
 nhà nào. Cần thêm loại map nội thất, cửa dẫn vào, và hệ đặt đồ.

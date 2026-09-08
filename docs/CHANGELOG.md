@@ -3,6 +3,28 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.16.0 — 2026-09-08
+
+### Đổi — tải hết art rồi mới cho vào game
+
+Trước đó trang art nạp nền: vào được ngay nhưng cảnh vật hiện dần, trông như
+game lỗi. Nay chặn ở màn chờ tới khi tải xong cả 22,7 MB.
+
+- `atlas.preloadAll(onProgress)` tải mọi trang bằng `fetch` + đọc theo luồng,
+  báo tiến độ theo **số byte thật**. Thẻ `Image` không báo được đã tải bao
+  nhiêu nên chỉ làm được vòng xoay giả — người chơi không biết còn phải chờ
+  bao lâu, mà ở đây là hơn 20 MB.
+- `import-art.mjs` ghi luôn dung lượng mỗi trang vào `atlas.json`. Dựa vào
+  `Content-Length` thì phải gửi xong request đầu mới biết tổng, làm thanh nhảy
+  giật; biết trước thì chạy đều từ 0%.
+- `blobToImage()` giải mã bằng `createImageBitmap` (ngoài luồng chính, không
+  làm khựng khung hình), không có thì quay về object URL.
+- Một trang tải hỏng thì cảnh về lại art sinh bằng code chứ không kẹt màn chờ.
+- Màn chờ có `role="progressbar"` với `aria-valuenow` cập nhật theo tiến độ.
+
+Đường nạp theo nhu cầu (`ensurePage`/`ensureFor`) giữ lại làm lưới an toàn cho
+trường hợp tải hụt, không phải đường chính nữa.
+
 ## 0.15.0 — 2026-09-08
 
 ### Thêm — 547 vật nội thất, atlas tách trang

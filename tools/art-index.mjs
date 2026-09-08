@@ -36,13 +36,13 @@ const section = ([page, items]) => {
       // Ảnh nền cắt đúng ô sprite, co cho vừa ô xem mà giữ tỉ lệ.
       const k = Math.min(CELL / it.w, CELL / it.h);
       return `<figure>
-  <div><i style="--w:${it.w * k}px;--h:${it.h * k}px;--bx:${-it.x * k}px;--by:${-it.y * k}px;--bw:${2048 * k}px;background-image:url('../client/assets/world/${pages[page]}')"></i></div>
+  <div><i style="--w:${it.w * k}px;--h:${it.h * k}px;--bx:${-it.x * k}px;--by:${-it.y * k}px;--bw:${2048 * k}px;background-image:url('../client/assets/world/${pages[page].file}')"></i></div>
   <figcaption>${it.name}</figcaption>
 </figure>`;
     }).join('\n');
     return `<h3>${key} <small>${list.length}</small></h3>\n<div class="grid">\n${cells}\n</div>`;
   }).join('\n');
-  return `<section><h2>${page} <small>${items.length} vật · ${pages[page]}</small></h2>\n${blocks}</section>`;
+  return `<section><h2>${page} <small>${items.length} vật · ${pages[page].file} · ${(pages[page].bytes / 1024 / 1024).toFixed(1)} MB</small></h2>\n${blocks}</section>`;
 };
 
 const html = `<!doctype html>

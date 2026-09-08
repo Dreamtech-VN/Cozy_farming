@@ -7,6 +7,7 @@ import { Realtime } from './net/realtime.js';
 import { i18n, t, formatNumber } from './core/i18n.js';
 import { settings } from './core/settings.js';
 import { atlas } from './render/atlas.js';
+import { showLoading } from './scenes/loading.js';
 import { audio } from './core/audio.js';
 import { Input } from './core/input.js';
 import { WorldRenderer } from './render/world.js';
@@ -61,6 +62,8 @@ class Game {
     };
     await i18n.load(this.api, settings.value.locale);
     // Art hỏng thì vẫn vào được game, chỉ là cảnh về lại bản tô màu phẳng.
+    // Đây mới là phần nhẹ (tile, sprite sinh bằng code); trang art vẽ sẵn nặng
+    // hơn 20 MB nên tải ở màn chờ trong enterGame(), có thanh tiến độ.
     await atlas.load().catch((err) => console.warn('không nạp được art:', err.message));
 
     this.renderer = new WorldRenderer(this.canvas, this.content);
@@ -176,6 +179,9 @@ class Game {
   }
 
   async enterGame() {
+    // Chặn ở màn chờ tới khi tải xong art. Vào thẳng rồi để cảnh vật hiện dần
+    // trông như game lỗi.
+    await showLoading();
     const profile = await this.api.get('/v1/player/profile');
     this.characterId = profile.character_id;
     this.self.equipment = profile.equipment;

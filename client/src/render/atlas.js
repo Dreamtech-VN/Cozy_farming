@@ -40,8 +40,63 @@ class Atlas {
     this.cropIndex = new Map(meta.crops.kinds.map((name, i) => [name, i]));
     this.ready = true;
 
-    // Trang art vẽ sẵn nạp riêng, theo nhu cầu — xem loadPage().
-    this.ensurePage('outdoor');
+    // Trang art vẽ sẵn tải riêng — xem preloadAll().
+  }
+
+  /** Tổng số byte của mọi trang art, biết trước nên thanh tiến độ chạy đều. */
+  get totalBytes() {
+    return Object.values(this.meta?.sprites?.pages ?? {}).reduce((sum, p) => sum + (p.bytes ?? 0), 0);
+  }
+
+  /**
+   * Tải TOÀN BỘ trang art, báo tiến độ theo số byte thật.
+   *
+   * Dùng fetch + đọc theo luồng chứ không phải `new Image()`: thẻ Image không
+   * báo được đã tải bao nhiêu, nên chỉ làm được vòng xoay giả — người chơi
+   * không biết còn phải chờ bao lâu, mà ở đây là hơn 20 MB.
+   *
+   * @param onProgress ({ loaded, total }) → gọi mỗi lần nhận thêm dữ liệu.
+   */
+  async preloadAll(onProgress) {
+    const pages = Object.entries(this.meta?.sprites?.pages ?? {});
+    if (!pages.length) return;
+    const total = this.totalBytes;
+    let loaded = 0;
+    const report = () => onProgress?.({ loaded, total });
+    report();
+
+    await Promise.all(pages.map(async ([page, info]) => {
+      if (this.#pageImages.has(page)) return;
+      try {
+        const res = await fetch(`${BASE}/${info.file}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const chunks = [];
+        // Không có body đọc theo luồng thì vẫn tải được, chỉ là tiến độ nhảy
+        // một phát ở cuối — vẫn hơn là hỏng.
+        if (res.body?.getReader) {
+          const reader = res.body.getReader();
+          for (;;) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            chunks.push(value);
+            loaded += value.length;
+            report();
+          }
+        } else {
+          chunks.push(new Uint8Array(await res.arrayBuffer()));
+          loaded += info.bytes ?? 0;
+          report();
+        }
+        const blob = new Blob(chunks, { type: 'image/png' });
+        this.#pageImages.set(page, await blobToImage(blob));
+        this.#pages.set(page, Promise.resolve(this.#pageImages.get(page)));
+      } catch (error) {
+        // Thiếu một trang thì cảnh về lại art sinh bằng code, không chặn vào game.
+        console.warn(`không tải được trang art "${page}":`, error.message);
+        loaded += info.bytes ?? 0;
+        report();
+      }
+    }));
   }
 
   /**
@@ -52,11 +107,11 @@ class Atlas {
    * đang đứng ngoài phố thì không cần cái tủ lạnh.
    */
   ensurePage(page) {
-    const file = this.meta?.sprites?.pages?.[page];
-    if (!file) return Promise.resolve(null);
+    const info = this.meta?.sprites?.pages?.[page];
+    if (!info) return Promise.resolve(null);
     let pending = this.#pages.get(page);
     if (pending) return pending;
-    pending = this.load(file)
+    pending = this.load(info.file)
       .then((img) => { this.#pageImages.set(page, img); return img; })
       .catch((error) => {
         // Thiếu art vẽ sẵn thì rơi về art sinh bằng code chứ không làm vỡ cảnh.
@@ -193,6 +248,28 @@ class Atlas {
   partOrder(names) {
     const z = this.meta.parts.zOrder;
     return [...names].sort((a, b) => (z[a] ?? 0) - (z[b] ?? 0));
+  }
+}
+
+/**
+ * Blob → ảnh vẽ được. `createImageBitmap` giải mã ngoài luồng chính nên không
+ * làm khựng khung hình; trình duyệt nào không có thì quay về đường object URL.
+ */
+async function blobToImage(blob) {
+  if (typeof createImageBitmap === 'function') {
+    try { return await createImageBitmap(blob); } catch { /* rơi xuống dưới */ }
+  }
+  const url = URL.createObjectURL(blob);
+  try {
+    const img = new Image();
+    await new Promise((resolve, reject) => {
+      img.onload = resolve;
+      img.onerror = () => reject(new Error('giải mã ảnh hỏng'));
+      img.src = url;
+    });
+    return img;
+  } finally {
+    URL.revokeObjectURL(url);
   }
 }
 
