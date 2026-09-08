@@ -21,11 +21,12 @@ const NICKNAME_RE = /^[\p{L}\p{N} _-]{2,16}$/u;
 // nhất quán với giới, đủ để không nhận rác vào cơ sở dữ liệu.
 const PART_RE = { face: /^face_[mf]_\d{2}$/, hair: /^hair_[mf]_\d{2}$/, outfit: /^outfit_[mf]_\d{2}$/ };
 const SKIN_COUNT = 4;
+const EYE_COUNT = 5;
 
 export function validateAppearance(appearance = {}) {
   const bodyType = appearance?.body_type === 'b' ? 'b' : 'a';
   const sex = bodyType === 'b' ? 'f' : 'm';
-  const look = { body_type: bodyType, skin: 0 };
+  const look = { body_type: bodyType, skin: 0, eyes: 0 };
   for (const [slot, re] of Object.entries(PART_RE)) {
     const value = appearance?.[slot];
     if (value === undefined || value === null) continue;
@@ -34,9 +35,11 @@ export function validateAppearance(appearance = {}) {
     if (value.split('_')[1] !== sex) throw badRequest(`Ngoại hình không hợp lệ: ${slot} không thuộc giới đã chọn`);
     look[slot] = value;
   }
-  const skin = Number(appearance?.skin ?? 0);
-  if (!Number.isInteger(skin) || skin < 0 || skin >= SKIN_COUNT) throw badRequest('Ngoại hình không hợp lệ: màu da');
-  look.skin = skin;
+  for (const [field, count, what] of [['skin', SKIN_COUNT, 'màu da'], ['eyes', EYE_COUNT, 'màu mắt']]) {
+    const value = Number(appearance?.[field] ?? 0);
+    if (!Number.isInteger(value) || value < 0 || value >= count) throw badRequest(`Ngoại hình không hợp lệ: ${what}`);
+    look[field] = value;
+  }
   return look;
 }
 

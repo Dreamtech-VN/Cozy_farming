@@ -14,6 +14,20 @@
 /** Bốn tông da trên bảng thành phần, đọc thẳng từ ô màu trong tấm gốc. */
 export const SKIN_TONES = ['#fee8d2', '#fed2b5', '#fbc4a1', '#d69a7a'];
 
+/**
+ * Màu mắt. Mảnh khuôn mặt gốc vẽ mắt nâu, các màu sau là nhuộm lại.
+ *
+ * Nhuộm chứ không vẽ thêm mảnh: mắt trên art gốc có cả vành tối, lòng sáng dần
+ * và một chấm sáng — thay bằng một mảng màu phẳng là mất hết chiều sâu đó.
+ */
+export const EYE_COLOURS = [
+  { id: 'nau', label: 'Nâu', hex: '#7a4a2a' },
+  { id: 'xanh_duong', label: 'Xanh dương', hex: '#3d7bd6' },
+  { id: 'xanh_la', label: 'Xanh lá', hex: '#3f9e5c' },
+  { id: 'tim', label: 'Tím', hex: '#8a5ad6' },
+  { id: 'ho_phach', label: 'Hổ phách', hex: '#d99a2b' },
+];
+
 // Cổ áo chờm lên cằm vài pixel: để hở là nhân vật có một khe sáng giữa đầu và
 // thân, nhìn như cái đầu bay lơ lửng.
 const NECK_OVERLAP = 6;
@@ -30,18 +44,75 @@ function isSkin(r, g, b) {
   return r >= 185 && r > g && g >= b && r - b >= 15 && r - b <= 95 && r - g <= 45;
 }
 
-const tintCache = new Map();
+const variantCache = new Map();
+
+function toHsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min;
+  const l = (max + min) / 2;
+  if (!d) return [0, 0, l];
+  const s = d / (1 - Math.abs(2 * l - 1));
+  const h = max === r ? ((g - b) / d + (g < b ? 6 : 0)) : max === g ? ((b - r) / d + 2) : ((r - g) / d + 4);
+  return [h * 60, s, l];
+}
+
+function fromHsl(h, s, l) {
+  const c = (1 - Math.abs(2 * l - 1)) * s;
+  const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+  const m = l - c / 2;
+  const [r, g, b] = h < 60 ? [c, x, 0] : h < 120 ? [x, c, 0] : h < 180 ? [0, c, x]
+    : h < 240 ? [0, x, c] : h < 300 ? [x, 0, c] : [c, 0, x];
+  return [(r + m) * 255, (g + m) * 255, (b + m) * 255];
+}
 
 /**
- * Bản sao của một mảnh art đã đổi tông da.
+ * Hai con mắt trên mảnh khuôn mặt: hai cụm pixel TỐI to nhất.
  *
- * Nhân theo TỈ LỆ với tông gốc chứ không tô đè: giữ nguyên mảng sáng tối đã vẽ
- * sẵn trên mặt, tô đè một màu phẳng là mất hết khối.
+ * Tìm theo cụm chứ không theo màu: lông mày và nét viền cũng nâu sẫm y hệt
+ * lòng mắt, chỉ khác ở chỗ chúng bé hơn nhiều. Trên mảnh face_m_01 hai mắt là
+ * 268 và 240 pixel, còn lông mày chỉ 38 và 33.
  */
-function tinted(part, toneIndex) {
+function eyeMask(data, w, h) {
+  const dark = (i) => data[i * 4 + 3] > 128
+    && 0.2126 * data[i * 4] + 0.7152 * data[i * 4 + 1] + 0.0722 * data[i * 4 + 2] < 150;
+  const label = new Int32Array(w * h).fill(-1);
+  const queue = new Int32Array(w * h);
+  const clusters = [];
+  for (let start = 0; start < w * h; start++) {
+    if (label[start] >= 0 || !dark(start)) continue;
+    let qh = 0, qt = 0;
+    queue[qt++] = start; label[start] = start;
+    const cluster = [start];
+    while (qh < qt) {
+      const i = queue[qh++];
+      const x = i % w, y = (i / w) | 0;
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        const nx = x + dx, ny = y + dy;
+        if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue;
+        const j = ny * w + nx;
+        if (label[j] >= 0 || !dark(j)) continue;
+        label[j] = start; queue[qt++] = j; cluster.push(j);
+      }
+    }
+    clusters.push(cluster);
+  }
+  clusters.sort((a, b) => b.length - a.length);
+  const mask = new Uint8Array(w * h);
+  for (const cluster of clusters.slice(0, 2)) for (const i of cluster) mask[i] = 1;
+  return mask;
+}
+
+/**
+ * Bản sao của một mảnh art đã đổi tông da và/hoặc màu mắt.
+ *
+ * Da nhân theo TỈ LỆ với tông gốc chứ không tô đè: giữ nguyên mảng sáng tối đã
+ * vẽ sẵn trên mặt, tô đè một màu phẳng là mất hết khối. Mắt thì giữ nguyên độ
+ * sáng của từng pixel và chỉ thay màu, nên vành tối và chấm sáng còn nguyên.
+ */
+function recoloured(part, skin, eyes) {
   const { rect, img } = part;
-  const key = `${rect.page}:${rect.x}:${rect.y}:${toneIndex}`;
-  const hit = tintCache.get(key);
+  const key = `${rect.page}:${rect.x}:${rect.y}:${skin}:${eyes}`;
+  const hit = variantCache.get(key);
   if (hit) return hit;
 
   const canvas = document.createElement('canvas');
@@ -50,26 +121,43 @@ function tinted(part, toneIndex) {
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
   ctx.drawImage(img, rect.x, rect.y, rect.w, rect.h, 0, 0, rect.w, rect.h);
 
-  const tone = SKIN_TONES[toneIndex];
-  const target = [1, 3, 5].map((i) => parseInt(tone.slice(i, i + 2), 16));
-  const ratio = target.map((c, i) => c / BASE_SKIN[i]);
   const px = ctx.getImageData(0, 0, rect.w, rect.h);
   const d = px.data;
-  for (let i = 0; i < d.length; i += 4) {
-    if (!d[i + 3] || !isSkin(d[i], d[i + 1], d[i + 2])) continue;
-    d[i] = Math.min(255, d[i] * ratio[0]);
-    d[i + 1] = Math.min(255, d[i + 1] * ratio[1]);
-    d[i + 2] = Math.min(255, d[i + 2] * ratio[2]);
+
+  if (skin) {
+    const tone = SKIN_TONES[skin];
+    const target = [1, 3, 5].map((i) => parseInt(tone.slice(i, i + 2), 16));
+    const ratio = target.map((c, i) => c / BASE_SKIN[i]);
+    for (let i = 0; i < d.length; i += 4) {
+      if (!d[i + 3] || !isSkin(d[i], d[i + 1], d[i + 2])) continue;
+      d[i] = Math.min(255, d[i] * ratio[0]);
+      d[i + 1] = Math.min(255, d[i + 1] * ratio[1]);
+      d[i + 2] = Math.min(255, d[i + 2] * ratio[2]);
+    }
   }
+
+  if (eyes) {
+    const mask = eyeMask(d, rect.w, rect.h);
+    const hex = EYE_COLOURS[eyes].hex;
+    const [th, ts] = toHsl(...[1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)));
+    for (let i = 0; i < mask.length; i++) {
+      if (!mask[i]) continue;
+      const p = i * 4;
+      const [, , l] = toHsl(d[p], d[p + 1], d[p + 2]);
+      const [r, g, b] = fromHsl(th, ts, l);
+      d[p] = r; d[p + 1] = g; d[p + 2] = b;
+    }
+  }
+
   ctx.putImageData(px, 0, 0);
-  tintCache.set(key, canvas);
+  variantCache.set(key, canvas);
   return canvas;
 }
 
-/** Mảnh art để vẽ: ảnh nguồn kèm ô cần cắt, đã đổi tông da nếu cần. */
-function source(part, toneIndex) {
-  if (!toneIndex) return { img: part.img, sx: part.rect.x, sy: part.rect.y };
-  return { img: tinted(part, toneIndex), sx: 0, sy: 0 };
+/** Mảnh art để vẽ: ảnh nguồn kèm ô cần cắt, đã nhuộm lại nếu cần. */
+function source(part, { skin = 0, eyes = 0 } = {}) {
+  if (!skin && !eyes) return { img: part.img, sx: part.rect.x, sy: part.rect.y };
+  return { img: recoloured(part, skin, eyes), sx: 0, sy: 0 };
 }
 
 /**
@@ -105,21 +193,21 @@ export function drawLook(ctx, atlas, look, { x, groundY, height }) {
   const tone = look.skin ?? 0;
   const s = height / naturalHeight(parts);
 
-  const putAt = (part, dx, dy, scale, toneIndex) => {
-    const { img, sx, sy } = source(part, toneIndex);
+  const putAt = (part, dx, dy, scale, opts) => {
+    const { img, sx, sy } = source(part, opts);
     ctx.drawImage(img, sx, sy, part.rect.w, part.rect.h,
       dx, dy, part.rect.w * scale, part.rect.h * scale);
   };
-  const put = (part, dx, dy, toneIndex) => putAt(part, dx, dy, s, toneIndex);
+  const put = (part, dx, dy, opts) => putAt(part, dx, dy, s, opts);
 
   const bodyW = outfit.rect.w * s;
   const bodyTop = groundY - outfit.rect.h * s;
-  put(outfit, x - bodyW / 2, bodyTop, tone);
+  put(outfit, x - bodyW / 2, bodyTop, { skin: tone });
 
   const chinY = bodyTop + NECK_OVERLAP * s;
   const faceS = s * FACE_FIT;
   const faceW = face.rect.w * faceS;
-  putAt(face, x - faceW / 2, chinY - face.rect.h * faceS, faceS, tone);
+  putAt(face, x - faceW / 2, chinY - face.rect.h * faceS, faceS, { skin: tone, eyes: look.eyes ?? 0 });
 
   if (hair) {
     // Căn theo LỖ khoét trên mảnh tóc: tâm lỗ trùng tâm mặt, đáy lỗ trùng cằm.
@@ -133,7 +221,7 @@ export function drawLook(ctx, atlas, look, { x, groundY, height }) {
       : chinY - hair.rect.h * s;
     // Tóc KHÔNG đổi theo tông da: tóc vàng và da gần như trùng màu nên phép
     // thử da bắt luôn cả mái tóc, chọn da ngăm là tóc vàng thành tóc nâu.
-    put(hair, hairX, hairY, 0);
+    put(hair, hairX, hairY, {});
   }
   return true;
 }
@@ -148,7 +236,7 @@ export function lookOptions(atlas, gender) {
   return { face: pick('face'), hair: pick('hair'), outfit: pick('outfit') };
 }
 
-/** Bộ ngoại hình mở màn: mảnh đầu tiên của mỗi loại, da sáng nhất. */
+/** Bộ ngoại hình mở màn: mảnh đầu tiên của mỗi loại, da sáng nhất, mắt nâu. */
 export function defaultLook(atlas, gender) {
   const options = lookOptions(atlas, gender);
   return {
@@ -157,6 +245,7 @@ export function defaultLook(atlas, gender) {
     hair: options.hair[0],
     outfit: options.outfit[0],
     skin: 0,
+    eyes: 0,
   };
 }
 
@@ -166,10 +255,14 @@ export function randomLook(atlas, gender) {
   const any = (list) => list[Math.floor(Math.random() * list.length)];
   return {
     gender,
-    face: any(options.face),
+    // Khuôn mặt chỉ dùng MỘT mảnh: những mảnh còn lại trên tấm gốc khác nhau ở
+    // nét mặt (nháy mắt, cười) chứ không phải ở kiểu, để dành cho biểu cảm sau
+    // này. Cái người chơi đổi được ở đây là màu mắt.
+    face: options.face[0],
     hair: any(options.hair),
     outfit: any(options.outfit),
     skin: Math.floor(Math.random() * SKIN_TONES.length),
+    eyes: Math.floor(Math.random() * EYE_COLOURS.length),
   };
 }
 
@@ -179,7 +272,7 @@ export function randomLook(atlas, gender) {
  * Ô chọn kiểu tóc phải thấy cả khuôn mặt mới biết tóc ôm đầu thế nào, nên
  * `face` truyền vào thì vẽ mặt trước rồi mới úp tóc lên.
  */
-export function drawThumb(ctx, atlas, name, { x, y, w, h, face = null, skin = 0 }) {
+export function drawThumb(ctx, atlas, name, { x, y, w, h, face = null, skin = 0, eyes = 0 }) {
   const part = atlas.part(name);
   if (!part) return false;
   const head = face ? atlas.part(face) : null;
@@ -194,11 +287,11 @@ export function drawThumb(ctx, atlas, name, { x, y, w, h, face = null, skin = 0 
     const hole = part.rect.hole;
     const chin = hole ? bottom - (part.rect.h - hole.y - hole.h) * s : bottom;
     const faceS = s * FACE_FIT;
-    const src = source(head, skin);
+    const src = source(head, { skin, eyes });
     ctx.drawImage(src.img, src.sx, src.sy, head.rect.w, head.rect.h,
       cx - head.rect.w * faceS / 2, chin - head.rect.h * faceS, head.rect.w * faceS, head.rect.h * faceS);
   }
-  const src = source(part, head ? 0 : skin);
+  const src = source(part, head ? {} : { skin, eyes });
   ctx.drawImage(src.img, src.sx, src.sy, part.rect.w, part.rect.h,
     cx - part.rect.w * s / 2, bottom - part.rect.h * s, part.rect.w * s, part.rect.h * s);
   return true;

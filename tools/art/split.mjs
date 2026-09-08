@@ -104,7 +104,41 @@ function sliceByGaps(img, { alphaCut, minRun, minSize, trim, noise }) {
  * ăn cụt chỏm tóc. Biết trước lưới thì chia thẳng theo lưới, chỉ còn việc co
  * khung cho sát hình.
  */
-function sliceByGrid(img, { rows, cols, trim }) {
+/**
+ * Xoá những cụm pixel LẺ TẺ còn sót của nền.
+ *
+ * Phép thử nền "xám và sáng" bỏ lọt vài pixel ở mép ô caro — chúng hơi ngả màu
+ * hoặc hơi tối hơn ngưỡng nên không bị loang tới. Nhìn thì chỉ là bụi, nhưng
+ * chúng nằm TRONG khung bao nên khung cao thêm cả chục pixel, mà khung bao lại
+ * là mốc căn đầu với thân: bụi ở trên đỉnh đầu là cả khuôn mặt tụt xuống.
+ *
+ * Ngưỡng để rất thấp: trên tấm này cụm rác lớn nhất là 9 pixel còn khuôn mặt là
+ * 5162, nên không có gì để nhầm.
+ */
+function despeckle(data, W, H, minArea) {
+  const label = new Int32Array(W * H).fill(-1);
+  const queue = new Int32Array(W * H);
+  for (let start = 0; start < W * H; start++) {
+    if (label[start] >= 0 || data[start * 4 + 3] <= 40) continue;
+    let qh = 0, qt = 0;
+    queue[qt++] = start; label[start] = start;
+    const cluster = [start];
+    while (qh < qt) {
+      const i = queue[qh++];
+      const x = i % W, y = (i / W) | 0;
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        const nx = x + dx, ny = y + dy;
+        if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
+        const j = ny * W + nx;
+        if (label[j] >= 0 || data[j * 4 + 3] <= 40) continue;
+        label[j] = start; queue[qt++] = j; cluster.push(j);
+      }
+    }
+    if (cluster.length < minArea) for (const i of cluster) data[i * 4 + 3] = 0;
+  }
+}
+
+function sliceByGrid(img, { rows, cols, trim, minArea }) {
   const { width: W, height: H, data } = img;
   const cut = Math.max(1, trim || 24);
   // Biên ô: một con số nghĩa là chia đều, một mảng nghĩa là biên đo sẵn.
@@ -120,9 +154,22 @@ function sliceByGrid(img, { rows, cols, trim }) {
     for (let c = 0; c < xs.length - 1; c++) {
       const cx0 = xs[c], cx1 = xs[c + 1] - 1;
       const cy0 = ys[r], cy1 = ys[r + 1] - 1;
-      let ax = cx1, ay = cy1, bx = cx0, by = cy0;
-      for (let y = cy0; y <= cy1; y++) for (let x = cx0; x <= cx1; x++) {
-        if (data[(y * W + x) * 4 + 3] < cut) continue;
+      const cw = cx1 - cx0 + 1, ch = cy1 - cy0 + 1;
+
+      // Sao ô ra riêng rồi mới quét rác: quét trên cả khung thì mẩu vật bên
+      // cạnh bị biên ô cắt còn một sợi vẫn thuộc về cụm lớn của nó, không bị
+      // coi là rác, và cái sợi đó kéo khung bao của ô này rộng thêm cả chục
+      // pixel — mặt lệch hẳn sang một bên khi ghép.
+      const cell = new Uint8Array(cw * ch * 4);
+      for (let y = 0; y < ch; y++) {
+        const src = ((cy0 + y) * W + cx0) * 4;
+        cell.set(data.subarray(src, src + cw * 4), y * cw * 4);
+      }
+      if (minArea) despeckle(cell, cw, ch, minArea);
+
+      let ax = cw - 1, ay = ch - 1, bx = 0, by = 0;
+      for (let y = 0; y < ch; y++) for (let x = 0; x < cw; x++) {
+        if (cell[(y * cw + x) * 4 + 3] < cut) continue;
         if (x < ax) ax = x; if (x > bx) bx = x;
         if (y < ay) ay = y; if (y > by) by = y;
       }
@@ -130,11 +177,11 @@ function sliceByGrid(img, { rows, cols, trim }) {
       const w = bx - ax + 1, h = by - ay + 1;
       const out = new Uint8Array(w * h * 4);
       for (let y = 0; y < h; y++) {
-        const src = ((ay + y) * W + ax) * 4;
-        out.set(data.subarray(src, src + w * 4), y * w * 4);
+        const src = ((ay + y) * cw + ax) * 4;
+        out.set(cell.subarray(src, src + w * 4), y * w * 4);
       }
       if (trim) trimGlow(out, trim);
-      cells.push({ w, h, x: ax, y: ay, data: out });
+      cells.push({ w, h, x: cx0 + ax, y: cy0 + ay, data: out });
     }
   }
   return cells;
@@ -237,7 +284,10 @@ function withBackgroundCleared(img, options) {
 export function splitSheet(img, options = {}) {
   if (options.mode === 'grid') {
     const src = options.bgTest ? withBackgroundCleared(img, options) : img;
-    return sliceByGrid(src, { rows: options.rows ?? 1, cols: options.cols ?? 1, trim: options.trim ?? 0 });
+    return sliceByGrid(src, {
+      rows: options.rows ?? 1, cols: options.cols ?? 1,
+      trim: options.trim ?? 0, minArea: options.minArea ?? 0,
+    });
   }
   if (options.mode === 'gaps') {
     // Tấm không có alpha thật thì phải dựng alpha từ nền trước, không thì cả

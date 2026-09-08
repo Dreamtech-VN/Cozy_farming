@@ -10,7 +10,7 @@
  */
 import { el, showOverlay, hideOverlay, bindSubmit } from '../ui/ui.js';
 import { atlas } from '../render/atlas.js';
-import { drawLook, drawThumb, lookOptions, defaultLook, randomLook, SKIN_TONES } from '../render/paperdoll.js';
+import { drawLook, drawThumb, lookOptions, defaultLook, randomLook, SKIN_TONES, EYE_COLOURS } from '../render/paperdoll.js';
 
 const GENDERS = [
   { id: 'a', code: 'm', label: 'Nam', icon: 'male' },
@@ -43,12 +43,26 @@ function plazaPointIn(box) {
  * Vẽ bằng canvas chứ không ghép thẻ <img> chồng nhau: đổi tông da phải sửa
  * từng pixel, mà ba mảnh còn phải căn theo mốc đo được trong atlas.
  */
+// Nhân vật cao bao nhiêu so với tranh nền, đo trên bản mẫu: cao chừng 37% bề
+// ngang tranh. Buộc vào tranh chứ không đặt một số pixel cố định — tranh phủ
+// theo bề ngang nên màn rộng hơn là tranh to hơn, nhân vật phải to theo.
+const CHAR_OF_BG = 0.37;
+
 function stage(get, { width = 300, height = 400, onPlaza = false } = {}) {
   const canvas = el('canvas', { width: width * 2, height: height * 2, class: 'cc-stage' });
+  let box = { w: width, h: height, charH: height - 60 };
   const draw = () => {
+    const dpr = 2;
+    if (canvas.width !== Math.round(box.w * dpr)) {
+      canvas.width = Math.round(box.w * dpr);
+      canvas.height = Math.round(box.h * dpr);
+      canvas.style.width = `${box.w}px`;
+      canvas.style.height = `${box.h}px`;
+    }
     const ctx = canvas.getContext('2d');
-    ctx.setTransform(2, 0, 0, 2, 0, 0);
-    ctx.clearRect(0, 0, width, height);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, box.w, box.h);
+    const { w: width, h: height } = box;
     const groundY = height - 26;
 
     // Bóng đổ dưới chân: không có thì nhân vật như dán lên tranh nền.
@@ -61,7 +75,7 @@ function stage(get, { width = 300, height = 400, onPlaza = false } = {}) {
     ctx.fill();
     ctx.restore();
 
-    if (!drawLook(ctx, atlas, get(), { x: width / 2, groundY, height: height - 60 })) {
+    if (!drawLook(ctx, atlas, get(), { x: width / 2, groundY, height: box.charH })) {
       // Art chưa tới nơi: vẽ lại khi trang tải xong, không có vòng lặp nào lo hộ.
       atlas.ensurePage('parts')?.then(draw);
     }
@@ -75,8 +89,12 @@ function stage(get, { width = 300, height = 400, onPlaza = false } = {}) {
     const stageBox = canvas.parentElement.getBoundingClientRect();
     const backdrop = document.getElementById('overlay').getBoundingClientRect();
     const point = plazaPointIn(backdrop);
-    canvas.style.left = `${backdrop.left - stageBox.left + point.x - width / 2}px`;
-    canvas.style.top = `${backdrop.top - stageBox.top + point.y - (height - 26)}px`;
+    // Cỡ khung vẽ bám theo cỡ nhân vật, chừa chỗ cho tóc dựng và bóng đổ.
+    const charH = backdrop.width * CHAR_OF_BG;
+    box = { w: Math.round(charH * 0.9), h: Math.round(charH + 40), charH };
+    draw();
+    canvas.style.left = `${backdrop.left - stageBox.left + point.x - box.w / 2}px`;
+    canvas.style.top = `${backdrop.top - stageBox.top + point.y - (box.h - 26)}px`;
     return true;
   };
   if (onPlaza) {
@@ -176,12 +194,8 @@ export function showCharacterScreen(game, characters) {
       hair: chooser('Kiểu tóc', [], {
         selected: () => look.hair,
         onPick: (name) => { look = { ...look, hair: name }; preview.draw(); },
-        thumb: (ctx, name, box) => drawThumb(ctx, atlas, name, { ...box, face: look.face, skin: look.skin }),
-      }),
-      face: chooser('Khuôn mặt', [], {
-        selected: () => look.face,
-        onPick: (name) => { look = { ...look, face: name }; preview.draw(); rows.hair.refresh(); },
-        thumb: (ctx, name, box) => drawThumb(ctx, atlas, name, { ...box, skin: look.skin }),
+        thumb: (ctx, name, box) => drawThumb(ctx, atlas, name,
+          { ...box, face: look.face, skin: look.skin, eyes: look.eyes }),
       }),
       outfit: chooser('Trang phục', [], {
         selected: () => look.outfit,
@@ -190,12 +204,14 @@ export function showCharacterScreen(game, characters) {
       }),
     };
 
-    const skinRow = el('div', { class: 'cc-skins', role: 'radiogroup', 'aria-label': 'Màu da' },
-      SKIN_TONES.map((tone, i) => el('button', {
-        class: 'cc-skin', type: 'button', role: 'radio', style: `--tone:${tone}`,
-        'aria-checked': i === look.skin ? 'true' : 'false', 'aria-label': `Màu da ${i + 1}`,
+    /** Hàng ô màu: dùng chung cho màu da và màu mắt. */
+    const swatches = (label, colours, get, set) => el('div',
+      { class: 'cc-skins', role: 'radiogroup', 'aria-label': label },
+      colours.map(({ hex, name }, i) => el('button', {
+        class: 'cc-skin', type: 'button', role: 'radio', style: `--tone:${hex}`,
+        'aria-checked': i === get() ? 'true' : 'false', 'aria-label': name, title: name,
         onClick: (event) => {
-          look = { ...look, skin: i };
+          set(i);
           for (const sibling of event.currentTarget.parentElement.children) sibling.setAttribute('aria-checked', 'false');
           event.currentTarget.setAttribute('aria-checked', 'true');
           preview.draw();
@@ -203,10 +219,16 @@ export function showCharacterScreen(game, characters) {
         },
       })));
 
+    const skinRow = swatches('Màu da',
+      SKIN_TONES.map((hex, i) => ({ hex, name: `Màu da ${i + 1}` })),
+      () => look.skin, (i) => { look = { ...look, skin: i }; });
+    const eyeRow = swatches('Màu mắt',
+      EYE_COLOURS.map(({ hex, label }) => ({ hex, name: label })),
+      () => look.eyes, (i) => { look = { ...look, eyes: i }; });
+
     const repaintChoosers = () => {
       const options = lookOptions(atlas, look.gender);
       rows.hair.rebuild(options.hair);
-      rows.face.rebuild(options.face);
       rows.outfit.rebuild(options.outfit);
     };
 
@@ -215,6 +237,9 @@ export function showCharacterScreen(game, characters) {
       repaintChoosers();
       for (const [i, node] of [...skinRow.children].entries()) {
         node.setAttribute('aria-checked', i === look.skin ? 'true' : 'false');
+      }
+      for (const [i, node] of [...eyeRow.children].entries()) {
+        node.setAttribute('aria-checked', i === look.eyes ? 'true' : 'false');
       }
       preview.draw();
     };
@@ -244,7 +269,8 @@ export function showCharacterScreen(game, characters) {
           nickname: nickname.value.trim(),
           appearance: {
             body_type: GENDERS.find((g) => g.code === look.gender).id,
-            face: look.face, hair: look.hair, outfit: look.outfit, skin: look.skin,
+            face: look.face, hair: look.hair, outfit: look.outfit,
+            skin: look.skin, eyes: look.eyes,
           },
         });
         // Token cũ chưa gắn nhân vật nào, phải thay bằng phiên mới.
@@ -273,7 +299,7 @@ export function showCharacterScreen(game, characters) {
         el('div', { class: 'cc-panel' }, [
           el('h2', { text: 'Chọn ngoại hình' }),
           rows.hair.node,
-          rows.face.node,
+          el('div', { class: 'cc-row' }, [el('span', { class: 'cc-label', text: 'Màu mắt' }), eyeRow]),
           el('div', { class: 'cc-row' }, [el('span', { class: 'cc-label', text: 'Màu da' }), skinRow]),
           rows.outfit.node,
           el('div', { class: 'cc-name-row' }, [
