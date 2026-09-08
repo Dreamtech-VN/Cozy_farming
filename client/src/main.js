@@ -8,6 +8,7 @@ import { i18n, t, formatNumber } from './core/i18n.js';
 import { settings } from './core/settings.js';
 import { atlas } from './render/atlas.js';
 import { showLoading } from './scenes/loading.js';
+import { showServerSelect } from './scenes/servers.js';
 import { audio } from './core/audio.js';
 import { Input } from './core/input.js';
 import { WorldRenderer } from './render/world.js';
@@ -180,7 +181,13 @@ class Game {
     });
   }
 
-  async enterGame() {
+  async enterGame({ pickServer = true } = {}) {
+    if (pickServer) {
+      // Chọn server TRƯỚC khi tải: tải xong 25 MB rồi mới hỏi đổi server thì
+      // đổi xong lại phải tải lại từ đầu.
+      const account = await this.api.get('/v1/account').catch(() => null);
+      await showServerSelect(this, account);
+    }
     // Chặn ở màn chờ tới khi tải xong art. Vào thẳng rồi để cảnh vật hiện dần
     // trông như game lỗi.
     await showLoading();
@@ -211,6 +218,23 @@ class Game {
       // ngoài các điểm gọi tường minh vẫn quét lại định kỳ cho chắc.
       setInterval(() => this.refreshQuests(), 20_000);
     }
+  }
+
+  /**
+   * Rời thế giới, quay về màn chọn server.
+   *
+   * Đổi server nghĩa là vào lại từ đầu, nên phải cắt kết nối và dọn HUD chứ
+   * không chỉ đổi một biến — để nguyên thì người chơi vẫn đang đứng trong map
+   * của server cũ.
+   */
+  async backToServerSelect() {
+    closePanel();
+    this.realtime.close();
+    this.players.clear();
+    this.currentMap = null;
+    this.chatDock?.hide();
+    document.getElementById('hud').classList.add('hidden');
+    await this.enterGame();
   }
 
   async enterMap(mapId, spawnId = 'spawn_default', channel = 1) {

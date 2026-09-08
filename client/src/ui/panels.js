@@ -773,14 +773,15 @@ function accountTab(game, pane, rerender) {
     ]));
 
     // --- Đổi server ---
-    pane.append(settingRow('Server', null,
-      account.servers.length > 1
-        ? el('div', { class: 'seg' }, account.servers.map((server) => el('button', {
-            class: 'seg-btn', type: 'button', text: server.name,
-            'aria-pressed': location.origin === server.url ? 'true' : 'false',
-            onClick: () => { location.href = server.url; },
-          })))
-        : el('span', { class: 'tag', text: account.servers[0]?.name ?? 'Mặc định' })));
+    // Quay về MÀN CHỌN SERVER bên ngoài chứ không đổi tại chỗ: đổi server là
+    // vào lại từ đầu, và màn ngoài đó mới là nơi hiển thị danh sách đầy đủ.
+    pane.append(settingRow('Server', null, el('div', { class: 'row-actions' }, [
+      el('span', { class: 'tag', text: account.servers?.[0]?.name ?? 'Sunny-1' }),
+      el('button', {
+        class: 'small', type: 'button', text: 'Đổi server',
+        onClick: () => game.backToServerSelect(),
+      }),
+    ])));
 
     // --- Ngôn ngữ ---
     pane.append(settingRow('Ngôn ngữ', null,

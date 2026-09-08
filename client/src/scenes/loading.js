@@ -5,8 +5,9 @@
  * nên chặn ở đây tới khi tải xong — nhưng phải cho thấy CÒN BAO LÂU: thanh chạy
  * theo số byte thật, không phải vòng xoay đoán mò.
  *
- * Dùng chung tranh nền với màn đăng nhập, không dùng tranh splash: splash để hai
- * nhân vật ở GIỮA, đúng chỗ dải phủ mờ, nên họ nhoè thành một vệt sau tấm thẻ.
+ * Tranh nền riêng cho màn này, có sẵn chỗ cho thanh tiến độ ở đáy giữa — thẻ
+ * thật đặt đúng chỗ đó. Không dùng tranh key art: nó để hai nhân vật ở GIỮA,
+ * đúng chỗ dải phủ mờ, nên họ nhoè thành một vệt sau tấm thẻ.
  */
 import { el, showOverlay, hideOverlay } from '../ui/ui.js';
 import { atlas } from '../render/atlas.js';
@@ -34,7 +35,7 @@ export async function showLoading() {
     el('p', { class: 'lead', text: 'Tải xong một lần, lần sau vào sẽ nhanh vì trình duyệt giữ lại.' }),
     track,
     el('div', { class: 'progress-row' }, [pct, size]),
-  ]), { backdrop: 'entry' });
+  ]), { backdrop: 'loading' });
 
   await atlas.preloadAll(({ loaded, total: all }) => {
     const ratio = all ? Math.min(1, loaded / all) : 1;

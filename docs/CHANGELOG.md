@@ -3,6 +3,37 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.20.0 — 2026-09-08
+
+### Thêm — màn chọn server
+`client/src/scenes/servers.js`, hiện SAU khi đăng nhập và TRƯỚC khi tải thế giới
+— chọn xong mới tải, chứ tải 25 MB rồi mới hỏi đổi server thì đổi xong lại phải
+tải lại từ đầu.
+
+Mục "Server" trong Cài đặt giờ **quay về màn này** thay vì đổi tại chỗ: đổi
+server nghĩa là bỏ phiên chơi và vào lại từ đầu, nên nó thuộc về luồng vào game.
+`backToServerSelect()` cắt kết nối, dọn HUD và khung chat rồi mới hiện màn chọn —
+để nguyên thì người chơi vẫn đang đứng trong map của server cũ.
+
+Chưa cấu hình `SERVERS` thì vẫn hiện một mục "Sunny-1"; hàng server chỉ bấm được
+khi thật sự có nhiều hơn một, chứ cho bấm mà không có gì để đổi là hứa suông.
+
+### Sửa — ba lỗi giao diện màn ngoài game
+- **Màn chờ tải dùng nhầm tranh.** Bản mẫu có tranh riêng cho màn này, với chỗ
+  đặt thanh tiến độ ở đáy giữa. Nay dùng đúng tranh đó (`loading.png`) và đặt
+  thẻ vào đúng chỗ, thay vì thẻ giữa màn hình trên tranh đăng nhập.
+- **Thẻ đăng nhập che chân logo.** Logo trong tranh chiếm tới 40% chiều cao kể
+  cả dải chữ "Small Town · Big Happiness", `padding-top: 13vh` là chưa đủ.
+- **Nút "Bắt đầu" ra màu gỗ thay vì xanh.** `button.primary` có độ ưu tiên cao
+  hơn `.server-start`, nên `border-image` khung gỗ 9-slice (có phần `fill`) vẫn
+  vẽ đè lên `background`. Đổi selector thành `button.server-start`.
+
+### Sửa
+- `ChatDock` thiếu `hide()` (chỉ có `show()`), làm `backToServerSelect()` ném
+  lỗi giữa chừng và không bao giờ tới được màn chọn server.
+- Dải phủ mờ ở màn chờ tải nới rộng ra 78%: thanh tiến độ và con số phần trăm
+  vẽ chết trong tranh trải rộng hơn dải cũ nên mép phải còn sót chữ "%".
+
 ## 0.19.1 — 2026-09-08
 
 ### Sửa — màn chờ tải dùng nhầm tranh nền

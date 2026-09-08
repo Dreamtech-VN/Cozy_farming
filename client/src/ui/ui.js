@@ -96,12 +96,12 @@ export function confirmAction(message) {
 export const overlay = document.getElementById('overlay');
 
 /**
- * @param backdrop 'entry' | null — tranh nền cho các màn ngoài game.
+ * @param backdrop 'entry' | 'server' | 'loading' | null — tranh nền cho các màn ngoài game.
  *   Match-3 cũng dùng lớp phủ này nhưng nó nằm TRONG game, không được dán tranh
  *   màn đăng nhập lên, nên tranh nền là thứ phải xin chứ không mặc định.
  */
 export function showOverlay(node, { backdrop = null } = {}) {
-  overlay.classList.remove('backdrop-entry');
+  overlay.classList.remove('backdrop-entry', 'backdrop-server', 'backdrop-loading');
   if (backdrop) overlay.classList.add(`backdrop-${backdrop}`);
   overlay.replaceChildren(node);
   overlay.classList.remove('hidden');
@@ -109,7 +109,7 @@ export function showOverlay(node, { backdrop = null } = {}) {
 
 export function hideOverlay() {
   overlay.classList.add('hidden');
-  overlay.classList.remove('backdrop-entry');
+  overlay.classList.remove('backdrop-entry', 'backdrop-server', 'backdrop-loading');
   overlay.replaceChildren();
 }
 

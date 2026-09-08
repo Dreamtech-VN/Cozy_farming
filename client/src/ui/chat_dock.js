@@ -57,6 +57,10 @@ export class ChatDock {
 
   show() { this.root.classList.remove('hidden'); }
 
+  /** Rời thế giới (đổi server) thì phải giấu đi, không thì khung chat treo lơ
+   *  lửng trên màn chọn server. */
+  hide() { this.root.classList.add('hidden'); }
+
   /** Nạp lịch sử của kênh đang chọn. */
   async loadHistory() {
     const channel = this.scope;

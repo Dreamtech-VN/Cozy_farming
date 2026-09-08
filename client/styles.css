@@ -1032,13 +1032,77 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
    mất luôn inset:0 và cả khung nhìn vỡ theo. */
 #overlay.backdrop-entry {
   background: #6fc0ee center / cover no-repeat;
-  /* Đẩy thẻ xuống để không che chân chữ của logo trong tranh. */
-  padding-top: clamp(16px, 13vh, 150px);
+  /* Đẩy thẻ xuống dưới logo. Logo trong tranh chiếm tới 40% chiều cao (kể cả
+     dải chữ "Small Town · Big Happiness"), nên 13vh là chưa đủ — thẻ vẫn cắt
+     ngang chân chữ. */
+  padding-top: clamp(16px, 42vh, 380px);
   /* `safe` cứu trường hợp thẻ cao hơn khung nhìn: căn giữa thường sẽ cắt cụt
      phần thò ra ở ĐẦU TRÊN và không cuộn tới được. */
   align-items: safe center;
 }
 #overlay.backdrop-entry { background-image: url('/assets/ui/entry.png'); }
+
+/* Màn chọn server dùng chung tranh với đăng nhập, nhưng đặt nội dung ĐÚNG chỗ
+   hàng server và nút vẽ chết trong tranh (khoảng 46–75% chiều cao) để che hẳn
+   chúng, thay vì nằm dưới và để lộ vệt mờ phía trên. */
+#overlay.backdrop-server {
+  background: #6fc0ee center / cover no-repeat url('/assets/ui/entry.png');
+  /* Neo từ TRÊN xuống chứ không căn giữa: cần đặt đúng vào khoảng 40–60% chiều
+     cao, chỗ hàng server và nút vẽ chết trong tranh, để che hẳn chúng. Căn giữa
+     thì nội dung luôn rơi xuống dưới và vệt mờ lộ ra phía trên. */
+  align-items: flex-start;
+  padding-top: clamp(16px, 40vh, 420px);
+}
+#overlay.backdrop-server::before {
+  content: '';
+  position: absolute;
+  top: 34%;
+  bottom: 8%;
+  left: 50%;
+  translate: -50% 0;
+  width: clamp(420px, 58vw, 760px);
+  backdrop-filter: blur(22px) saturate(.85);
+  -webkit-backdrop-filter: blur(22px) saturate(.85);
+  /* Đậm hơn hẳn dải phủ ở màn đăng nhập: chỗ này giao diện vẽ chết là một
+     thanh gần đen, phủ nhạt thì chỉ thành vệt xám nhoè chứ không tan đi. */
+  background: linear-gradient(90deg, rgba(20, 36, 52, 0), rgba(20, 36, 52, .58) 18%, rgba(20, 36, 52, .58) 82%, rgba(20, 36, 52, 0));
+  mask-image:
+    linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent),
+    linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+  pointer-events: none;
+}
+#overlay.backdrop-server > * { position: relative; z-index: 1; }
+
+/* Màn chờ tải có tranh riêng: thanh tiến độ trong tranh nằm ở ĐÁY giữa, nên
+   thẻ thật đặt đúng chỗ đó thay vì giữa màn hình. */
+#overlay.backdrop-loading {
+  background: #6fc0ee center / cover no-repeat url('/assets/ui/loading.png');
+  align-items: flex-end;
+  padding-bottom: clamp(12px, 6vh, 70px);
+}
+#overlay.backdrop-loading::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  bottom: 0;
+  height: 34%;
+  /* Rộng hơn dải ở màn đăng nhập: thanh tiến độ và con số phần trăm vẽ chết
+     trong tranh trải rộng tới ~72% bề ngang, dải hẹp thì mép phải còn sót chữ. */
+  width: clamp(480px, 78vw, 1120px);
+  backdrop-filter: blur(22px) saturate(.85);
+  -webkit-backdrop-filter: blur(22px) saturate(.85);
+  background: linear-gradient(90deg, rgba(24, 42, 60, 0), rgba(24, 42, 60, .32) 14%, rgba(24, 42, 60, .32) 86%, rgba(24, 42, 60, 0));
+  mask-image:
+    linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent),
+    linear-gradient(0deg, #000 70%, transparent);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+  pointer-events: none;
+}
+#overlay.backdrop-loading > * { position: relative; z-index: 1; }
 
 /* Bắt đầu từ 36% chiều cao trở xuống: logo trong tranh nằm ở khoảng 5–33%, phủ
    mờ lên đó là xoá mất luôn thương hiệu. Giao diện vẽ chết nằm ở 46–75% nên
@@ -1131,3 +1195,48 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
 .card.entry .actions { margin-top: 12px; }
 .card.entry button.primary,
 .card.entry .actions button:not(.primary) { padding: 10px 18px; }
+
+/* Màn chọn server: không dùng thẻ trắng như đăng nhập — bản mẫu để một hàng
+   server và một nút to nổi thẳng trên tranh, dưới logo. */
+.server-pick {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: min(520px, 92%);
+}
+button.server-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border: 2px solid rgba(255, 255, 255, .18);
+  border-image: none;
+  border-radius: 16px;
+  background: rgba(22, 30, 38, .82);
+  color: #fdf6e6;
+  font: 600 17px var(--font-body);
+  cursor: pointer;
+}
+button.server-row:disabled { cursor: default; }
+.server-dot {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: #4ade5f;
+  box-shadow: 0 0 8px rgba(74, 222, 95, .9);
+  flex: none;
+}
+.server-name { flex: 1; text-align: left; }
+.server-hint { font-size: 14px; font-weight: 600; color: var(--gold); }
+button.server-start {
+  /* Phải tắt border-image: .primary dùng ảnh khung gỗ 9-slice có phần FILL, nó
+     vẽ đè lên background nên nút chỉ còn thấy màu gỗ. */
+  border-image: none;
+  padding: 16px 24px;
+  border-radius: 18px;
+  border: 2px solid #2f8f3a;
+  background: linear-gradient(180deg, #6fdc63, #3fae43);
+  color: #12360f;
+  font: 800 22px var(--font-display);
+  box-shadow: 0 5px 0 #2b7a30;
+  cursor: pointer;
+}
+button.server-start:active { transform: translateY(3px); box-shadow: 0 2px 0 #2b7a30; }
