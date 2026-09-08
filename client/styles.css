@@ -1339,6 +1339,11 @@ button.primary.big-cta:active:not(:disabled) { transform: translateY(2px); box-s
 .ico-eye { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6Z" fill="none" stroke="black" stroke-width="2"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="black" stroke-width="2"/></svg>'); }
 .ico-eye-off { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6Z" fill="none" stroke="black" stroke-width="2"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="black" stroke-width="2"/><path d="M4 20 20 4" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>'); }
 .ico-leaf { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4C10 4 4 9 4 16c0 2 1 4 1 4s2-8 15-11c0 0-6 3-9 8 6 1 9-3 9-13Z" fill="black"/></svg>'); }
+.ico-caret-left { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'); }
+.ico-caret-right { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'); }
+.ico-male { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="10" cy="14" r="5.5" fill="none" stroke="black" stroke-width="2"/><path d="M14.5 9.5 20 4m-5 0h5v5" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'); }
+.ico-female { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5" fill="none" stroke="black" stroke-width="2"/><path d="M12 15v6m-3-3h6" fill="none" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>'); }
+.ico-dice { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="black" stroke-width="2"/><circle cx="8.5" cy="8.5" r="1.6"/><circle cx="15.5" cy="15.5" r="1.6"/><circle cx="15.5" cy="8.5" r="1.6"/><circle cx="8.5" cy="15.5" r="1.6"/></svg>'); }
 .ico-bulb { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-3.5 10.9V17h7v-3.1A6 6 0 0 0 12 3Z" fill="none" stroke="black" stroke-width="2" stroke-linejoin="round"/><path d="M9.5 20h5" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>'); }
 
 /* Logo thương hiệu giữ nguyên màu gốc nên không ăn currentColor. */
@@ -1349,3 +1354,151 @@ button.primary.big-cta:active:not(:disabled) { transform: translateY(2px); box-s
 
 .leaf-mark { color: #8bc34a; }
 .leaf-mark.right { transform: scaleX(-1); }
+
+/* --- Màn tạo nhân vật: bàn bên trái để ngắm người, bảng bên phải để chọn --- */
+
+/* Màn này có tranh nền RIÊNG: quảng trường trống với vòng gạch để nhân vật
+   đứng lên. Không dùng chung tranh với màn đăng nhập được — tranh đó đã có sẵn
+   hai bạn nhỏ ngồi hai bên, nhân vật mình vừa ghép đứng vào là chồng người lên
+   người. Tranh gốc rất ngang (640×208) nên neo ĐÁY và phủ theo bề ngang, phần
+   trời phía trên nối bằng màu lấy từ chính mép trên của tranh. */
+#overlay.backdrop-character {
+  /* `cover` chứ không phải phủ theo bề ngang rồi nối trời: tranh rất ngang nên
+     nối trời để lộ một đường ngang rõ mồn một, mà hai gốc cây ở hai mép tranh
+     thì cụt ngang ngay chỗ nối. `cover` là tỉ lệ NHỎ NHẤT còn phủ kín, tức là
+     mờ ít nhất trong các cách phủ kín. */
+  background: #9bdcf7 bottom center / cover no-repeat url('/assets/ui/create.png');
+  justify-content: center;
+  padding-top: 0;
+}
+.char-create {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
+  align-items: center;
+  gap: clamp(12px, 3vw, 36px);
+  width: min(1180px, 96%);
+  height: 100%;
+  padding: clamp(8px, 2vh, 20px) 0;
+}
+/* Biển tiêu đề và nút giới tính neo vào GÓC cột trái, còn nhân vật đứng giữa —
+   xếp thành một cột dọc thì nhân vật bị đẩy lệch khỏi vòng gạch trong tranh. */
+.cc-left { position: relative; display: flex; align-items: flex-end; justify-content: center; height: 100%; min-width: 0; }
+.cc-signs { position: absolute; top: 0; left: 0; text-align: left; }
+.cc-title {
+  margin: 0;
+  padding: 8px 26px;
+  font: 800 clamp(19px, 2.2vw, 26px) var(--font-display);
+  color: #5b3a1e;
+  background: #f6dfae;
+  border: 3px solid #b07b3e;
+  border-radius: 14px;
+  box-shadow: 0 4px 0 #8d5f2c;
+}
+.cc-step {
+  margin: 8px 0 0;
+  padding: 5px 16px;
+  display: inline-block;
+  font: 700 13px var(--font-body);
+  color: #6b4a26;
+  background: #fbeed0;
+  border: 2px solid #c99a5c;
+  border-radius: 11px;
+}
+.cc-gender { position: absolute; top: clamp(100px, 16vh, 140px); left: 0; display: flex; flex-direction: column; gap: 10px; }
+.cc-sex {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  width: 66px; padding: 0;
+  border: 0; border-image: none; background: none;
+  color: #fdf6e6; font: 700 12px var(--font-body);
+  text-shadow: 0 2px 4px rgba(12, 26, 40, .75);
+  cursor: pointer;
+}
+.cc-orb {
+  display: grid; place-items: center;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: #b9c2cc;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .6), 0 3px 8px rgba(12, 26, 40, .35);
+}
+.cc-orb .ico { width: 26px; height: 26px; color: #fff; }
+/* Chưa chọn thì để xám: hai nút cùng sáng thì không biết mình đang là ai. */
+.cc-sex.s-m[aria-checked="true"] .cc-orb { background: #2f80ed; box-shadow: 0 0 0 3px #d6e8ff, 0 3px 10px rgba(20, 60, 120, .5); }
+.cc-sex.s-f[aria-checked="true"] .cc-orb { background: #ef5da8; box-shadow: 0 0 0 3px #ffd9ec, 0 3px 10px rgba(120, 20, 70, .5); }
+.cc-stage { width: min(300px, 100%); height: auto; flex: none; }
+
+.cc-panel {
+  align-self: center;
+  display: flex; flex-direction: column; gap: 9px;
+  padding: 14px 16px;
+  border-radius: 22px;
+  border: 3px solid #c99a5c;
+  background: rgba(255, 250, 236, .96);
+  box-shadow: 0 10px 26px rgba(16, 34, 50, .28);
+  max-height: 100%;
+  overflow: auto;
+}
+.cc-panel h2 {
+  margin: 0 0 2px;
+  text-align: center;
+  font: 800 19px var(--font-display);
+  color: #6b4a26;
+}
+.cc-row { display: flex; flex-direction: column; gap: 5px; }
+.cc-label { font: 700 13.5px var(--font-body); color: #6b563f; }
+.cc-strip { display: flex; align-items: center; gap: 4px; }
+.cc-cells { display: flex; gap: 6px; flex: 1; min-width: 0; }
+.cc-cell {
+  flex: 1; min-width: 0; aspect-ratio: 1;
+  padding: 0; border: 2px solid #e3d5bb; border-image: none; border-radius: 12px;
+  background: #fdf6e6; cursor: pointer;
+}
+.cc-cell[aria-checked="true"] { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(245, 207, 106, .5); }
+.cc-cell canvas { width: 100%; height: 100%; display: block; }
+.cc-arrow {
+  flex: none; width: 24px; height: 24px; padding: 0;
+  display: grid; place-items: center;
+  border: 0; border-image: none; background: none;
+  color: var(--gold); cursor: pointer;
+}
+.cc-arrow .ico { width: 20px; height: 20px; }
+
+.cc-skins { display: flex; gap: 8px; }
+.cc-skin {
+  width: 46px; height: 38px; padding: 0;
+  border: 2px solid #e3d5bb; border-image: none; border-radius: 12px;
+  background: var(--tone); cursor: pointer;
+}
+.cc-skin[aria-checked="true"] { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(245, 207, 106, .5); }
+
+.cc-name-row { display: flex; gap: 8px; align-items: center; margin-top: 2px; }
+.cc-name {
+  flex: 1; min-width: 0;
+  padding: 10px 14px;
+  border: 2px solid #dcd0b8; border-radius: 14px;
+  background: #f6f2e9; font: inherit; color: #4a3524;
+}
+.cc-name:focus-visible { outline: none; border-color: var(--gold); background: #fff; }
+.cc-dice {
+  flex: none; width: 44px; height: 44px; padding: 0;
+  display: grid; place-items: center;
+  border: 2px solid #dcd0b8; border-image: none; border-radius: 14px;
+  background: #f6f2e9; color: #8d6b45; cursor: pointer;
+}
+.cc-dice .ico { width: 22px; height: 22px; }
+button.primary.cc-go {
+  border-image: none;
+  padding: 11px 24px;
+  border-radius: 16px;
+  font: 800 19px var(--font-display);
+}
+.char-create .error { color: #b3261e; font-size: 13.5px; }
+
+/* Màn hình thấp hoặc hẹp: xếp dọc, bảng chọn xuống dưới người. */
+@media (max-width: 860px), (max-height: 560px) {
+  .char-create { grid-template-columns: 1fr; align-content: start; overflow: auto; }
+  .cc-left { height: auto; padding-top: 96px; }
+  .cc-signs, .cc-gender { position: static; }
+  .cc-gender { flex-direction: row; margin: 0 auto 6px; }
+  .cc-left { flex-direction: column; align-items: center; }
+  .cc-stage { width: min(200px, 60%); }
+}

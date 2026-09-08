@@ -155,6 +155,7 @@ export class WorldRenderer {
         scale: depthScale(map, player.y),
         equipment: player.equipment,
         bodyType: player.bodyType,
+        appearance: player.appearance,
         facing: player.facing,
         state: player.state,
         phase: player.phase ?? 0,

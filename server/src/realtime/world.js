@@ -112,6 +112,9 @@ export function createWorld(ctx) {
     state: member.state,
     equipment: member.equipment,
     body_type: member.body_type,
+    // Ngoại hình đi kèm luôn trong bản tin thành viên: người khác phải vẽ được
+    // đúng nhân vật ngay khi thấy, chứ không phải hỏi thêm một request nữa.
+    appearance: member.appearance,
   });
 
   function join(conn, instanceId, character) {
@@ -137,6 +140,7 @@ export function createWorld(ctx) {
       nickname: character.nickname,
       level: character.level,
       body_type: character.body_type,
+      appearance: character.appearance ? JSON.parse(character.appearance) : null,
       equipment: getEquipment(db, character.id),
       x: character.last_x,
       y: character.last_y,

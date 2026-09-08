@@ -5,71 +5,208 @@
  * nhân vật — gộp vào bước đăng ký là khoá cứng người chơi vào server đầu tiên
  * họ gặp.
  *
- * Một màn lo hai việc: chưa có nhân vật thì hiện form tạo, có rồi thì hiện thẻ
+ * Một màn lo hai việc: chưa có nhân vật thì hiện bàn tạo, có rồi thì hiện thẻ
  * nhân vật để bấm vào chơi. Tách hai màn thì phần lớn giao diện lặp lại y hệt.
  */
 import { el, showOverlay, hideOverlay, bindSubmit } from '../ui/ui.js';
-import { drawAvatar } from '../render/avatar.js';
+import { atlas } from '../render/atlas.js';
+import { drawLook, drawThumb, lookOptions, defaultLook, randomLook, SKIN_TONES } from '../render/paperdoll.js';
 
-const HEROES = [{ id: 'a', label: 'Bạn nam' }, { id: 'b', label: 'Bạn nữ' }];
+const GENDERS = [
+  { id: 'a', code: 'm', label: 'Nam', icon: 'male' },
+  { id: 'b', code: 'f', label: 'Nữ', icon: 'female' },
+];
 
-function previewCanvas(game, get) {
-  const canvas = el('canvas', { width: 220, height: 280, class: 'hero-preview' });
+const genderOf = (bodyType) => GENDERS.find((g) => g.id === bodyType) ?? GENDERS[0];
+
+/**
+ * Khung xem trước nhân vật.
+ *
+ * Vẽ bằng canvas chứ không ghép thẻ <img> chồng nhau: đổi tông da phải sửa
+ * từng pixel, mà ba mảnh còn phải căn theo mốc đo được trong atlas.
+ */
+function stage(get, { width = 300, height = 400 } = {}) {
+  const canvas = el('canvas', { width: width * 2, height: height * 2, class: 'cc-stage' });
   const draw = () => {
     const ctx = canvas.getContext('2d');
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.translate(canvas.width / 2, canvas.height - 20);
-    ctx.scale(2.2, 2.2);
-    drawAvatar(ctx, game.content, { bodyType: get(), facing: 1, state: 'idle', phase: 0 });
+    ctx.setTransform(2, 0, 0, 2, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+    const groundY = height - 26;
+
+    // Bóng đổ dưới chân: không có thì nhân vật như dán lên tranh nền.
+    ctx.save();
+    ctx.translate(width / 2, groundY);
+    ctx.scale(1, 0.18);
+    ctx.beginPath();
+    ctx.arc(0, 0, width * 0.2, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(46, 66, 42, .18)';
+    ctx.fill();
+    ctx.restore();
+
+    if (!drawLook(ctx, atlas, get(), { x: width / 2, groundY, height: height - 60 })) {
+      // Art chưa tới nơi: vẽ lại khi trang tải xong, không có vòng lặp nào lo hộ.
+      atlas.ensurePage('parts')?.then(draw);
+    }
   };
   draw();
   return { canvas, draw };
 }
 
+/** Một hàng lựa chọn: ô xem trước cuộn ngang, hai nút mũi tên hai đầu. */
+function chooser(label, names, { selected, onPick, thumb, perPage = 4 }) {
+  let start = 0;
+  const cells = el('div', { class: 'cc-cells' });
+  const arrow = (dir) => el('button', {
+    class: `cc-arrow ${dir < 0 ? 'left' : 'right'}`, type: 'button',
+    'aria-label': dir < 0 ? `${label}: lùi lại` : `${label}: xem tiếp`,
+    onClick: () => {
+      // Cuộn vòng: danh sách ngắn, đi tới cuối rồi chặn lại thì nút chết mà
+      // không rõ vì sao.
+      start = (start + dir * perPage + names.length) % names.length;
+      render();
+    },
+  }, [el('i', { class: `ico ico-caret-${dir < 0 ? 'left' : 'right'}` })]);
+
+  const render = () => {
+    const shown = Array.from({ length: Math.min(perPage, names.length) },
+      (_, i) => names[(start + i) % names.length]);
+    cells.replaceChildren(...shown.map((name) => {
+      const canvas = el('canvas', { width: 128, height: 128 });
+      const paint = () => {
+        const ctx = canvas.getContext('2d');
+        ctx.setTransform(2, 0, 0, 2, 0, 0);
+        ctx.clearRect(0, 0, 64, 64);
+        if (!thumb(ctx, name, { x: 2, y: 2, w: 60, h: 60 })) atlas.ensurePage('parts')?.then(paint);
+      };
+      paint();
+      return el('button', {
+        class: 'cc-cell', type: 'button', role: 'radio',
+        'aria-checked': name === selected() ? 'true' : 'false',
+        'aria-label': name,
+        onClick: () => { onPick(name); refresh(); },
+      }, [canvas]);
+    }));
+  };
+  const refresh = () => {
+    for (const cell of cells.children) {
+      cell.setAttribute('aria-checked', cell.getAttribute('aria-label') === selected() ? 'true' : 'false');
+    }
+  };
+  render();
+
+  return {
+    node: el('div', { class: 'cc-row' }, [
+      el('span', { class: 'cc-label', text: label }),
+      el('div', { class: 'cc-strip' }, [arrow(-1), cells, arrow(1)]),
+    ]),
+    refresh,
+    rebuild: (next) => { names = next; start = 0; render(); },
+  };
+}
+
+function showExisting(game, character, resolve) {
+  const look = character.appearance ?? null;
+  const { canvas } = stage(() => look ?? defaultLook(atlas, genderOf(character.body_type).code),
+    { width: 200, height: 260 });
+  showOverlay(el('div', { class: 'char-pick' }, [
+    canvas,
+    el('div', { class: 'char-card' }, [
+      el('strong', { class: 'char-name', text: character.nickname }),
+      el('span', { class: 'char-meta', text: `Cấp ${character.level}` }),
+    ]),
+    el('button', {
+      class: 'primary server-start', type: 'button', text: 'Vào game',
+      onClick: () => { hideOverlay(); resolve(null); },
+    }),
+  ]), { backdrop: 'character' });
+}
+
 export function showCharacterScreen(game, characters) {
   return new Promise((resolve) => {
-    if (characters.length) {
-      const c = characters[0];
-      const { canvas } = previewCanvas(game, () => c.body_type);
-      showOverlay(el('div', { class: 'char-pick' }, [
-        canvas,
-        el('div', { class: 'char-card' }, [
-          el('strong', { class: 'char-name', text: c.nickname }),
-          el('span', { class: 'char-meta', text: `Cấp ${c.level}` }),
-        ]),
-        el('button', {
-          class: 'primary server-start', type: 'button', text: 'Vào game',
-          onClick: () => { hideOverlay(); resolve(null); },
-        }),
-      ]), { backdrop: 'character' });
-      return;
-    }
+    if (characters.length) return showExisting(game, characters[0], resolve);
 
-    let bodyType = 'a';
-    const nickname = el('input', { type: 'text', maxlength: '16', placeholder: 'tên hiển thị trong game' });
+    let look = defaultLook(atlas, 'm');
+    const preview = stage(() => look);
     const error = el('div', { class: 'error hidden' });
-    const { canvas, draw } = previewCanvas(game, () => bodyType);
+    const nickname = el('input', {
+      type: 'text', maxlength: '16', class: 'cc-name',
+      placeholder: 'Nhập tên nhân vật…', 'aria-label': 'Tên nhân vật',
+    });
 
-    const picker = el('div', { class: 'hero-picker', role: 'radiogroup', 'aria-label': 'Chọn nhân vật' },
-      HEROES.map((hero) => el('button', {
-        class: 'hero-option', type: 'button', role: 'radio', text: hero.label,
-        'aria-checked': bodyType === hero.id ? 'true' : 'false',
+    const rows = {
+      hair: chooser('Kiểu tóc', [], {
+        selected: () => look.hair,
+        onPick: (name) => { look = { ...look, hair: name }; preview.draw(); },
+        thumb: (ctx, name, box) => drawThumb(ctx, atlas, name, { ...box, face: look.face, skin: look.skin }),
+      }),
+      face: chooser('Khuôn mặt', [], {
+        selected: () => look.face,
+        onPick: (name) => { look = { ...look, face: name }; preview.draw(); rows.hair.refresh(); },
+        thumb: (ctx, name, box) => drawThumb(ctx, atlas, name, { ...box, skin: look.skin }),
+      }),
+      outfit: chooser('Trang phục', [], {
+        selected: () => look.outfit,
+        onPick: (name) => { look = { ...look, outfit: name }; preview.draw(); },
+        thumb: (ctx, name, box) => drawThumb(ctx, atlas, name, { ...box, skin: look.skin }),
+      }),
+    };
+
+    const skinRow = el('div', { class: 'cc-skins', role: 'radiogroup', 'aria-label': 'Màu da' },
+      SKIN_TONES.map((tone, i) => el('button', {
+        class: 'cc-skin', type: 'button', role: 'radio', style: `--tone:${tone}`,
+        'aria-checked': i === look.skin ? 'true' : 'false', 'aria-label': `Màu da ${i + 1}`,
         onClick: (event) => {
-          bodyType = hero.id;
+          look = { ...look, skin: i };
           for (const sibling of event.currentTarget.parentElement.children) sibling.setAttribute('aria-checked', 'false');
           event.currentTarget.setAttribute('aria-checked', 'true');
-          draw();
+          preview.draw();
+          repaintChoosers();
         },
       })));
 
-    const create = el('button', { class: 'primary server-start', type: 'button', text: 'Tạo nhân vật' });
+    const repaintChoosers = () => {
+      const options = lookOptions(atlas, look.gender);
+      rows.hair.rebuild(options.hair);
+      rows.face.rebuild(options.face);
+      rows.outfit.rebuild(options.outfit);
+    };
+
+    const applyLook = (next) => {
+      look = next;
+      repaintChoosers();
+      for (const [i, node] of [...skinRow.children].entries()) {
+        node.setAttribute('aria-checked', i === look.skin ? 'true' : 'false');
+      }
+      preview.draw();
+    };
+
+    const genderPicker = el('div', { class: 'cc-gender', role: 'radiogroup', 'aria-label': 'Giới tính' },
+      GENDERS.map((g) => el('button', {
+        class: `cc-sex s-${g.code}`, type: 'button', role: 'radio',
+        'aria-checked': g.code === look.gender ? 'true' : 'false',
+        onClick: (event) => {
+          if (g.code === look.gender) return;
+          for (const sibling of event.currentTarget.parentElement.children) sibling.setAttribute('aria-checked', 'false');
+          event.currentTarget.setAttribute('aria-checked', 'true');
+          // Mảnh art của hai giới không dùng chung được, nên đổi giới là dựng
+          // lại cả bộ chứ không giữ lựa chọn cũ.
+          applyLook(defaultLook(atlas, g.code));
+        },
+        // Vòng tròn là cái BỌC ngoài, không phải nền của icon: `.ico` tô bằng
+        // mask nên đặt nền lên chính nó thì nền cũng bị mask nốt, còn lại mỗi
+        // nét vẽ.
+      }, [el('span', { class: 'cc-orb' }, [el('i', { class: `ico ico-${g.icon}` })]), el('span', { text: g.label })])));
+
+    const create = el('button', { class: 'primary cc-go', type: 'button', text: 'Tiếp theo' });
     bindSubmit(create, async () => {
       error.classList.add('hidden');
       try {
         const made = await game.api.post('/v1/characters', {
           nickname: nickname.value.trim(),
-          appearance: { body_type: bodyType },
+          appearance: {
+            body_type: GENDERS.find((g) => g.code === look.gender).id,
+            face: look.face, hair: look.hair, outfit: look.outfit, skin: look.skin,
+          },
         });
         // Token cũ chưa gắn nhân vật nào, phải thay bằng phiên mới.
         game.api.setSession(made.session);
@@ -81,13 +218,36 @@ export function showCharacterScreen(game, characters) {
       }
     });
 
-    showOverlay(el('div', { class: 'char-pick' }, [
-      canvas,
-      picker,
-      el('div', { class: 'field' }, [el('label', { text: 'Tên nhân vật' }), nickname]),
-      error,
-      create,
-    ]), { backdrop: 'character' });
+    showOverlay(el('div', { class: 'char-create' }, [
+      el('div', { class: 'cc-left' }, [
+        el('div', { class: 'cc-signs' }, [
+          el('h1', { class: 'cc-title', text: 'Tạo nhân vật' }),
+          el('p', { class: 'cc-step', text: 'Chọn ngoại hình và đặt tên' }),
+        ]),
+        genderPicker,
+        preview.canvas,
+      ]),
+      el('div', { class: 'cc-panel' }, [
+        el('h2', { text: 'Chọn ngoại hình' }),
+        rows.hair.node,
+        rows.face.node,
+        el('div', { class: 'cc-row' }, [el('span', { class: 'cc-label', text: 'Màu da' }), skinRow]),
+        rows.outfit.node,
+        el('div', { class: 'cc-name-row' }, [
+          nickname,
+          el('button', {
+            class: 'cc-dice', type: 'button', 'aria-label': 'Ngoại hình ngẫu nhiên',
+            onClick: () => applyLook(randomLook(atlas, look.gender)),
+          }, [el('i', { class: 'ico ico-dice' })]),
+        ]),
+        error,
+        create,
+      ]),
+    ]), { backdrop: 'character', logo: false });
+
+    // Trang art nhân vật có thể chưa về; dựng danh sách lại khi nó tới nơi.
+    if (!lookOptions(atlas, 'm').face.length) atlas.ensurePage('parts')?.then(() => applyLook(defaultLook(atlas, look.gender)));
+    else repaintChoosers();
     nickname.focus();
   });
 }

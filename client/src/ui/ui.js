@@ -100,12 +100,14 @@ export const overlay = document.getElementById('overlay');
  *   Match-3 cũng dùng lớp phủ này nhưng nó nằm TRONG game, không được dán tranh
  *   màn đăng nhập lên, nên tranh nền là thứ phải xin chứ không mặc định.
  */
-export function showOverlay(node, { backdrop = null } = {}) {
+export function showOverlay(node, { backdrop = null, logo = true } = {}) {
   overlay.classList.remove('backdrop-entry', 'backdrop-server', 'backdrop-character', 'backdrop-loading');
   if (backdrop) overlay.classList.add(`backdrop-${backdrop}`);
   // Logo là ảnh rời, gắn ở đây một chỗ cho mọi màn ngoài game — nhét vào từng
   // màn thì bốn nơi phải nhớ cùng một việc.
-  overlay.replaceChildren(...(backdrop
+  // Màn tạo nhân vật tự có biển gỗ tiêu đề của nó và cần hết chiều cao cho
+  // nhân vật, nên tắt logo — chứ không phải màn nào có tranh nền cũng đội logo.
+  overlay.replaceChildren(...(backdrop && logo
     ? [el('img', { class: 'entry-logo', src: '/assets/ui/logo.png', alt: 'Sunny Town' }), node]
     : [node]));
   overlay.classList.remove('hidden');

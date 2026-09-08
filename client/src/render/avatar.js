@@ -10,6 +10,7 @@
  * khi trang art kịp tải xong.
  */
 import { atlas } from './atlas.js';
+import { drawLook } from './paperdoll.js';
 
 const AVATAR_HEIGHT = 96;
 
@@ -84,8 +85,22 @@ export function drawAvatar(ctx, content, options) {
   ctx.restore();
 
   let drawn = false;
+  const look = options.appearance;
+  if (look?.outfit && look?.face) {
+    // Nhân vật do người chơi tự ghép: vẽ lại từ ba mảnh chứ không có sprite
+    // dựng sẵn nào cả. Biến hình phải tự áp ở đây vì drawLook chỉ biết vẽ
+    // đứng yên — cùng công thức với atlas.character(), gốc đặt ở CHÂN.
+    const { bob = 0, lean = 0, squash = 1 } = transformFor(state, phase);
+    ctx.save();
+    ctx.scale(facing * scale, scale);
+    ctx.translate(0, bob);
+    if (lean) ctx.rotate(lean);
+    if (squash !== 1) ctx.scale(1 / squash, squash);
+    drawn = drawLook(ctx, atlas, look, { x: 0, groundY: 0, height: AVATAR_HEIGHT });
+    ctx.restore();
+  }
   const name = spriteOf(options);
-  if (atlas.hasSprite(name)) {
+  if (!drawn && atlas.hasSprite(name)) {
     ctx.save();
     ctx.scale(facing * scale, scale);
     drawn = atlas.character(ctx, name, 0, 0, AVATAR_HEIGHT, transformFor(state, phase));
@@ -271,5 +286,7 @@ export function drawAvatarPortrait(canvas, content, options) {
 
   // Chân dung vẽ đúng một lần lúc cập nhật HUD. Nếu art nhân vật chưa tải xong
   // thì lần vẽ đó rơi vào bản dự phòng rồi nằm im mãi — phải tự hẹn vẽ lại.
-  atlas.pendingFor(spriteOf(options))?.then(() => drawAvatarPortrait(canvas, content, options));
+  // Nhân vật ghép nằm ở trang art khác với sprite dựng sẵn, nên chờ đúng trang
+  // của thứ SẼ vẽ, không thì chân dung đứng im ở hình dự phòng.
+  atlas.pendingFor(options.appearance?.outfit ?? spriteOf(options))?.then(() => drawAvatarPortrait(canvas, content, options));
 }

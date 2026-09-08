@@ -200,6 +200,7 @@ class Game {
     this.self.equipment = profile.equipment;
     this.self.nickname = profile.nickname;
     this.self.bodyType = profile.body_type;
+    this.self.appearance = profile.appearance;
     this.profile = profile;
 
     document.getElementById('hud').classList.remove('hidden');
@@ -352,6 +353,7 @@ class Game {
 
     drawAvatarPortrait(document.getElementById('avatar-portrait'), this.content, {
       bodyType: this.self.bodyType,
+      appearance: profile.appearance,
       equipment: profile.equipment,
     });
 

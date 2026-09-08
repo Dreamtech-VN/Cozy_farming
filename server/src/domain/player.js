@@ -16,6 +16,37 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const USERNAME_RE = /^[a-zA-Z0-9_]{3,20}$/;
 const NICKNAME_RE = /^[\p{L}\p{N} _-]{2,16}$/u;
 
+// Ngoại hình gồm ba tên mảnh art và một chỉ số tông da. Máy chủ KHÔNG biết
+// atlas có những mảnh nào — nó nằm bên client — nên chỉ kiểm dạng tên và tính
+// nhất quán với giới, đủ để không nhận rác vào cơ sở dữ liệu.
+const PART_RE = { face: /^face_[mf]_\d{2}$/, hair: /^hair_[mf]_\d{2}$/, outfit: /^outfit_[mf]_\d{2}$/ };
+const SKIN_COUNT = 4;
+
+export function validateAppearance(appearance = {}) {
+  const bodyType = appearance?.body_type === 'b' ? 'b' : 'a';
+  const sex = bodyType === 'b' ? 'f' : 'm';
+  const look = { body_type: bodyType, skin: 0 };
+  for (const [slot, re] of Object.entries(PART_RE)) {
+    const value = appearance?.[slot];
+    if (value === undefined || value === null) continue;
+    if (typeof value !== 'string' || !re.test(value)) throw badRequest(`Ngoại hình không hợp lệ: ${slot}`);
+    // Mảnh của giới kia ghép vào thì đầu một đằng thân một nẻo.
+    if (value.split('_')[1] !== sex) throw badRequest(`Ngoại hình không hợp lệ: ${slot} không thuộc giới đã chọn`);
+    look[slot] = value;
+  }
+  const skin = Number(appearance?.skin ?? 0);
+  if (!Number.isInteger(skin) || skin < 0 || skin >= SKIN_COUNT) throw badRequest('Ngoại hình không hợp lệ: màu da');
+  look.skin = skin;
+  return look;
+}
+
+/** Bản ghi nhân vật kèm ngoại hình đã tách khỏi JSON. */
+function withLook(row) {
+  if (!row) return row;
+  const { appearance, ...rest } = row;
+  return { ...rest, appearance: appearance ? JSON.parse(appearance) : null };
+}
+
 export function validateNickname(nickname) {
   if (typeof nickname !== 'string' || !NICKNAME_RE.test(nickname.trim())) {
     throw badRequest('Nickname phải dài 2–16 ký tự, chỉ gồm chữ, số, khoảng trắng, gạch dưới hoặc gạch ngang');
@@ -51,8 +82,8 @@ export async function register(db, { username, password, email }) {
 }
 
 export function listCharacters(db, userId) {
-  return db.prepare('SELECT id, nickname, body_type, level, last_map_id, created_at FROM characters WHERE user_id = ? ORDER BY created_at')
-    .all(userId);
+  return db.prepare('SELECT id, nickname, body_type, appearance, level, last_map_id, created_at FROM characters WHERE user_id = ? ORDER BY created_at')
+    .all(userId).map(withLook);
 }
 
 /** Tạo nhân vật cho một tài khoản đã có, kèm toàn bộ quà khởi đầu (doc 09). */
@@ -60,15 +91,16 @@ export function createCharacter(db, content, userId, { nickname, appearance }) {
   const nick = validateNickname(nickname);
   if (db.prepare('SELECT 1 AS ok FROM characters WHERE nickname = ?').get(nick)) throw conflict('Nickname đã có người dùng');
 
+  const look = validateAppearance(appearance);
   const now = Date.now();
   const characterId = newId('chr');
   const startMap = content.maps.find((m) => m.map_id === 'map_city_plaza') ?? content.maps[0];
   const spawn = startMap.spawn_points.find((s) => s.id === 'spawn_default');
 
   transaction(db, () => {
-    db.prepare(`INSERT INTO characters (id, user_id, nickname, body_type, level, xp, last_map_id, last_x, last_y, created_at, updated_at)
-                VALUES (?, ?, ?, ?, 1, 0, ?, ?, ?, ?, ?)`)
-      .run(characterId, userId, nick, appearance?.body_type ?? 'a', startMap.map_id, spawn.x, spawn.y, now, now);
+    db.prepare(`INSERT INTO characters (id, user_id, nickname, body_type, appearance, level, xp, last_map_id, last_x, last_y, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, 1, 0, ?, ?, ?, ?, ?)`)
+      .run(characterId, userId, nick, look.body_type, JSON.stringify(look), startMap.map_id, spawn.x, spawn.y, now, now);
 
     // Grant khởi đầu (doc 09).
     for (const [currencyId, amount] of Object.entries(content.economy.starting_grant)) {
@@ -95,7 +127,7 @@ export function createCharacter(db, content, userId, { nickname, appearance }) {
   });
 
   logEvent(db, characterId, 'login', { first_session: true });
-  return db.prepare('SELECT * FROM characters WHERE id = ?').get(characterId);
+  return withLook(db.prepare('SELECT * FROM characters WHERE id = ?').get(characterId));
 }
 
 /** Ghép lựa chọn tạo nhân vật với danh sách cosmetic hợp lệ; thiếu thì lấy mặc định. */
@@ -200,6 +232,7 @@ export function getProfile(db, content, characterId) {
     level: character.level,
     xp: character.xp,
     body_type: character.body_type,
+    appearance: character.appearance ? JSON.parse(character.appearance) : null,
     position: { map_id: character.last_map_id, x: character.last_x, y: character.last_y },
     equipment: getEquipment(db, characterId),
     wardrobe,

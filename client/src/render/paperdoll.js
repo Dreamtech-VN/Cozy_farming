@@ -137,3 +137,69 @@ export function drawLook(ctx, atlas, look, { x, groundY, height }) {
   }
   return true;
 }
+
+/** Tên các lựa chọn có thật trong atlas, theo giới. Đọc từ atlas chứ không
+ *  chép tay: thêm kiểu tóc vào bảng art là màn tạo nhân vật có thêm lựa chọn. */
+export function lookOptions(atlas, gender) {
+  const index = atlas.meta?.sprites?.index ?? {};
+  const pick = (prefix) => Object.keys(index)
+    .filter((n) => n.startsWith(`${prefix}_${gender}_`) && !n.endsWith('_back'))
+    .sort();
+  return { face: pick('face'), hair: pick('hair'), outfit: pick('outfit') };
+}
+
+/** Bộ ngoại hình mở màn: mảnh đầu tiên của mỗi loại, da sáng nhất. */
+export function defaultLook(atlas, gender) {
+  const options = lookOptions(atlas, gender);
+  return {
+    gender,
+    face: options.face[0],
+    hair: options.hair[0],
+    outfit: options.outfit[0],
+    skin: 0,
+  };
+}
+
+/** Bộ ngoại hình ngẫu nhiên — nút xúc xắc ở màn tạo nhân vật. */
+export function randomLook(atlas, gender) {
+  const options = lookOptions(atlas, gender);
+  const any = (list) => list[Math.floor(Math.random() * list.length)];
+  return {
+    gender,
+    face: any(options.face),
+    hair: any(options.hair),
+    outfit: any(options.outfit),
+    skin: Math.floor(Math.random() * SKIN_TONES.length),
+  };
+}
+
+/**
+ * Vẽ MỘT mảnh vừa khít trong khung, dùng cho ô chọn.
+ *
+ * Ô chọn kiểu tóc phải thấy cả khuôn mặt mới biết tóc ôm đầu thế nào, nên
+ * `face` truyền vào thì vẽ mặt trước rồi mới úp tóc lên.
+ */
+export function drawThumb(ctx, atlas, name, { x, y, w, h, face = null, skin = 0 }) {
+  const part = atlas.part(name);
+  if (!part) return false;
+  const head = face ? atlas.part(face) : null;
+  if (face && !head) return false;
+
+  const s = Math.min(w / part.rect.w, h / part.rect.h);
+  const cx = x + w / 2;
+  const bottom = y + h - (h - part.rect.h * s) / 2;
+
+  if (head) {
+    // Cùng cách căn như lúc ghép người: đáy lỗ khoét trùng cằm.
+    const hole = part.rect.hole;
+    const chin = hole ? bottom - (part.rect.h - hole.y - hole.h) * s : bottom;
+    const faceS = s * FACE_FIT;
+    const src = source(head, skin);
+    ctx.drawImage(src.img, src.sx, src.sy, head.rect.w, head.rect.h,
+      cx - head.rect.w * faceS / 2, chin - head.rect.h * faceS, head.rect.w * faceS, head.rect.h * faceS);
+  }
+  const src = source(part, head ? 0 : skin);
+  ctx.drawImage(src.img, src.sx, src.sy, part.rect.w, part.rect.h,
+    cx - part.rect.w * s / 2, bottom - part.rect.h * s, part.rect.w * s, part.rect.h * s);
+  return true;
+}
