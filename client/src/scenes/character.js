@@ -20,12 +20,29 @@ const GENDERS = [
 const genderOf = (bodyType) => GENDERS.find((g) => g.id === bodyType) ?? GENDERS[0];
 
 /**
+ * Tâm vòng gạch trong tranh nền, đo trên chính file create.png.
+ *
+ * Tranh phủ kiểu `cover` nên vị trí vòng gạch trên màn hình đổi theo tỉ lệ
+ * khung nhìn — đặt nhân vật bằng một con số CSS cố định thì màn khác tỉ lệ là
+ * lệch ra khỏi vòng ngay. Tính lại theo đúng công thức của `cover`.
+ */
+const PLAZA = { w: 640, h: 208, x: 273, y: 186 };
+
+function plazaPointIn(box) {
+  const s = Math.max(box.width / PLAZA.w, box.height / PLAZA.h);
+  return {
+    x: (box.width - PLAZA.w * s) / 2 + PLAZA.x * s,   // background-position: center
+    y: (box.height - PLAZA.h * s) + PLAZA.y * s,      // ... bottom
+  };
+}
+
+/**
  * Khung xem trước nhân vật.
  *
  * Vẽ bằng canvas chứ không ghép thẻ <img> chồng nhau: đổi tông da phải sửa
  * từng pixel, mà ba mảnh còn phải căn theo mốc đo được trong atlas.
  */
-function stage(get, { width = 300, height = 400 } = {}) {
+function stage(get, { width = 300, height = 400, onPlaza = false } = {}) {
   const canvas = el('canvas', { width: width * 2, height: height * 2, class: 'cc-stage' });
   const draw = () => {
     const ctx = canvas.getContext('2d');
@@ -49,7 +66,28 @@ function stage(get, { width = 300, height = 400 } = {}) {
     }
   };
   draw();
-  return { canvas, draw };
+
+  // Đứng đúng giữa vòng gạch: quy chân nhân vật về điểm vừa tính trong toạ độ
+  // của khung nền, rồi đổi sang toạ độ của thẻ cha.
+  const place = () => {
+    if (!canvas.isConnected) return false;
+    const stageBox = canvas.parentElement.getBoundingClientRect();
+    const backdrop = document.getElementById('overlay').getBoundingClientRect();
+    const point = plazaPointIn(backdrop);
+    canvas.style.left = `${backdrop.left - stageBox.left + point.x - width / 2}px`;
+    canvas.style.top = `${backdrop.top - stageBox.top + point.y - (height - 26)}px`;
+    return true;
+  };
+  if (onPlaza) {
+    canvas.classList.add('on-plaza');
+    place();
+    // Đổi cỡ cửa sổ là vòng gạch chạy chỗ khác, phải đặt lại. Tự gỡ khi màn
+    // đóng — màn ngoài game không có chỗ nào dọn dẹp hộ.
+    const onResize = () => { if (!place()) removeEventListener('resize', onResize); };
+    addEventListener('resize', onResize);
+    requestAnimationFrame(place);
+  }
+  return { canvas, draw, place };
 }
 
 /** Một hàng lựa chọn: ô xem trước cuộn ngang, hai nút mũi tên hai đầu. */
@@ -126,7 +164,7 @@ export function showCharacterScreen(game, characters) {
     if (characters.length) return showExisting(game, characters[0], resolve);
 
     let look = defaultLook(atlas, 'm');
-    const preview = stage(() => look);
+    const preview = stage(() => look, { onPlaza: true });
     const error = el('div', { class: 'error hidden' });
     const nickname = el('input', {
       type: 'text', maxlength: '16', class: 'cc-name',
@@ -197,7 +235,7 @@ export function showCharacterScreen(game, characters) {
         // nét vẽ.
       }, [el('span', { class: 'cc-orb' }, [el('i', { class: `ico ico-${g.icon}` })]), el('span', { text: g.label })])));
 
-    const create = el('button', { class: 'primary cc-go', type: 'button', text: 'Tiếp theo' });
+    const create = el('button', { class: 'primary cc-go', type: 'button', text: 'Đến thị trấn' });
     bindSubmit(create, async () => {
       error.classList.add('hidden');
       try {
@@ -227,18 +265,23 @@ export function showCharacterScreen(game, characters) {
         genderPicker,
         preview.canvas,
       ]),
-      el('div', { class: 'cc-panel' }, [
-        el('h2', { text: 'Chọn ngoại hình' }),
-        rows.hair.node,
-        rows.face.node,
-        el('div', { class: 'cc-row' }, [el('span', { class: 'cc-label', text: 'Màu da' }), skinRow]),
-        rows.outfit.node,
-        el('div', { class: 'cc-name-row' }, [
-          nickname,
-          el('button', {
-            class: 'cc-dice', type: 'button', 'aria-label': 'Ngoại hình ngẫu nhiên',
-            onClick: () => applyLook(randomLook(atlas, look.gender)),
-          }, [el('i', { class: 'ico ico-dice' })]),
+      // Nút vào game nằm NGOÀI bảng chọn: nó không phải một lựa chọn ngoại
+      // hình, nó là bước tiếp theo — nhét chung vào bảng thì nó trôi theo phần
+      // cuộn của bảng và lẫn vào đám ô chọn.
+      el('div', { class: 'cc-side' }, [
+        el('div', { class: 'cc-panel' }, [
+          el('h2', { text: 'Chọn ngoại hình' }),
+          rows.hair.node,
+          rows.face.node,
+          el('div', { class: 'cc-row' }, [el('span', { class: 'cc-label', text: 'Màu da' }), skinRow]),
+          rows.outfit.node,
+          el('div', { class: 'cc-name-row' }, [
+            nickname,
+            el('button', {
+              class: 'cc-dice', type: 'button', 'aria-label': 'Ngoại hình ngẫu nhiên',
+              onClick: () => applyLook(randomLook(atlas, look.gender)),
+            }, [el('i', { class: 'ico ico-dice' })]),
+          ]),
         ]),
         error,
         create,

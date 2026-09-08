@@ -1404,37 +1404,46 @@ button.primary.big-cta:active:not(:disabled) { transform: translateY(2px); box-s
   border: 2px solid #c99a5c;
   border-radius: 11px;
 }
-.cc-gender { position: absolute; top: clamp(100px, 16vh, 140px); left: 0; display: flex; flex-direction: column; gap: 10px; }
+.cc-gender { position: absolute; top: clamp(104px, 17vh, 152px); left: 0; display: flex; flex-direction: column; gap: 14px; }
 .cc-sex {
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-  width: 66px; padding: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  width: 84px; padding: 0;
   border: 0; border-image: none; background: none;
-  color: #fdf6e6; font: 700 12px var(--font-body);
+  color: #fdf6e6; font: 700 14px var(--font-body);
   text-shadow: 0 2px 4px rgba(12, 26, 40, .75);
   cursor: pointer;
 }
 .cc-orb {
   display: grid; place-items: center;
-  width: 48px; height: 48px;
+  width: 72px; height: 72px;
   border-radius: 50%;
   background: #b9c2cc;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, .6), 0 3px 8px rgba(12, 26, 40, .35);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, .6), 0 4px 10px rgba(12, 26, 40, .35);
 }
-.cc-orb .ico { width: 26px; height: 26px; color: #fff; }
+.cc-orb .ico { width: 40px; height: 40px; color: #fff; }
 /* Chưa chọn thì để xám: hai nút cùng sáng thì không biết mình đang là ai. */
-.cc-sex.s-m[aria-checked="true"] .cc-orb { background: #2f80ed; box-shadow: 0 0 0 3px #d6e8ff, 0 3px 10px rgba(20, 60, 120, .5); }
-.cc-sex.s-f[aria-checked="true"] .cc-orb { background: #ef5da8; box-shadow: 0 0 0 3px #ffd9ec, 0 3px 10px rgba(120, 20, 70, .5); }
+.cc-sex.s-m[aria-checked="true"] .cc-orb { background: #2f80ed; box-shadow: 0 0 0 4px #d6e8ff, 0 4px 12px rgba(20, 60, 120, .5); }
+.cc-sex.s-f[aria-checked="true"] .cc-orb { background: #ef5da8; box-shadow: 0 0 0 4px #ffd9ec, 0 4px 12px rgba(120, 20, 70, .5); }
 .cc-stage { width: min(300px, 100%); height: auto; flex: none; }
+/* Đứng trên vòng gạch: vị trí do JS đặt theo đúng công thức `cover` của tranh
+   nền, nên phải thoát khỏi dòng chảy bố cục. */
+.cc-stage.on-plaza { position: absolute; }
+.cc-left { overflow: visible; }
 
-.cc-panel {
+.cc-side {
   align-self: center;
+  display: flex; flex-direction: column; gap: 10px;
+  max-height: 100%;
+  min-height: 0;
+}
+.cc-panel {
   display: flex; flex-direction: column; gap: 9px;
   padding: 14px 16px;
   border-radius: 22px;
   border: 3px solid #c99a5c;
   background: rgba(255, 250, 236, .96);
   box-shadow: 0 10px 26px rgba(16, 34, 50, .28);
-  max-height: 100%;
+  min-height: 0;
   overflow: auto;
 }
 .cc-panel h2 {
@@ -1485,20 +1494,53 @@ button.primary.big-cta:active:not(:disabled) { transform: translateY(2px); box-s
   background: #f6f2e9; color: #8d6b45; cursor: pointer;
 }
 .cc-dice .ico { width: 22px; height: 22px; }
+/* Nút vào game: dáng viên thuốc xanh như nút "Bắt đầu" ở màn chọn server —
+   cùng một việc thì cùng một hình. */
 button.primary.cc-go {
+  flex: none;
   border-image: none;
-  padding: 11px 24px;
-  border-radius: 16px;
-  font: 800 19px var(--font-display);
+  padding: 14px 24px;
+  border-radius: 18px;
+  border: 2px solid #2f8f3a;
+  background: linear-gradient(180deg, #6fdc63, #3fae43);
+  color: #12360f;
+  font: 800 21px var(--font-display);
+  box-shadow: 0 5px 0 #2b7a30;
 }
-.char-create .error { color: #b3261e; font-size: 13.5px; }
+button.primary.cc-go:active { transform: translateY(3px); box-shadow: 0 2px 0 #2b7a30; }
+.char-create .error {
+  flex: none;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(255, 249, 240, .95);
+  color: #b3261e;
+  font-size: 13.5px;
+  text-align: center;
+}
 
 /* Màn hình thấp hoặc hẹp: xếp dọc, bảng chọn xuống dưới người. */
 @media (max-width: 860px), (max-height: 560px) {
-  .char-create { grid-template-columns: 1fr; align-content: start; overflow: auto; }
-  .cc-left { height: auto; padding-top: 96px; }
+  /* Xếp dọc: cả trang cuộn một lần, KHÔNG để bảng chọn tự cuộn bên trong —
+     khung cuộn lồng khung cuộn thì nửa số hàng chọn nằm ngoài tầm mắt mà
+     không có gì báo là còn nữa. */
+  /* Xếp dọc thì bỏ lưới, dùng flex. Lưới có chiều cao xác định sẽ NÉN các hàng
+     cho vừa khung thay vì để chúng cao bằng nội dung, mà hai khối trong lưới
+     lại canh giữa hàng — nên chúng tràn ra hai phía và chồng lên nhau. */
+  .char-create {
+    display: flex; flex-direction: column; align-items: center;
+    height: auto; min-height: 100%; overflow: auto;
+  }
+  .cc-left, .cc-side { width: 100%; flex: none; align-self: stretch; }
+  .cc-left { height: auto; flex-direction: column; align-items: center; padding-top: 8px; }
   .cc-signs, .cc-gender { position: static; }
-  .cc-gender { flex-direction: row; margin: 0 auto 6px; }
-  .cc-left { flex-direction: column; align-items: center; }
+  .cc-gender { flex-direction: row; margin: 8px auto; }
+  /* Không còn chỗ nào là "vòng gạch" để đứng lên — trả nhân vật về giữa cột. */
+  .cc-stage.on-plaza { position: static; }
   .cc-stage { width: min(200px, 60%); }
+  .cc-side { max-height: none; }
+  .cc-panel { max-height: none; overflow: visible; }
+  /* Bảng rộng ra thì ô chọn phình theo vì nó chia đều bề ngang; chặn lại kẻo
+     một cái đầu to bằng nửa màn hình. */
+  .cc-cells { justify-content: center; }
+  .cc-cell { max-width: 86px; }
 }
