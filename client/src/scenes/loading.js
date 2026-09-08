@@ -44,7 +44,10 @@ export async function showLoading() {
     ]),
     track,
     el('div', { class: 'load-foot' }, [
-      el('span', { class: 'load-tip', text: `💡 ${TIPS[Math.floor(Math.random() * TIPS.length)]}` }),
+      el('span', { class: 'load-tip' }, [
+        el('i', { class: 'ico ico-bulb' }),
+        el('span', { text: TIPS[Math.floor(Math.random() * TIPS.length)] }),
+      ]),
       size,
     ]),
   ]), { backdrop: 'loading' });

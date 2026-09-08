@@ -1165,7 +1165,11 @@ button.server-start:active { transform: translateY(3px); box-shadow: 0 2px 0 #2b
   -webkit-text-stroke: 2px #2b4a6b;
   paint-order: stroke fill;
 }
-.load-tip { text-align: center; }
+.load-tip {
+  /* Icon và chữ nằm cùng hàng, canh giữa theo trục dọc: nếu để chữ chảy tự do
+     thì cái bóng đèn tụt xuống đáy dòng khi mẹo dài quá một dòng. */
+  display: inline-flex; align-items: center; gap: 6px; text-align: center;
+}
 .load-size { opacity: .9; font-variant-numeric: tabular-nums; white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) {
   .load-fill { transition: none; animation: none; }
@@ -1305,3 +1309,35 @@ button.primary.big-cta:active:not(:disabled) { transform: translateY(2px); box-s
 .s-apple .social-mark { color: #111; }
 
 .foot-link { margin: 10px 0 0; text-align: center; font-size: 13.5px; color: #7b6650; }
+
+/* --- Bộ icon CSS ---
+   Vẽ bằng `mask-image` với hình dạng nhúng thẳng trong CSS: nét sắc ở mọi cỡ,
+   ăn màu theo `color` của phần tử cha, và không thêm file nào phải tải.
+   Trước đây chỗ này dùng emoji — emoji mỗi hệ điều hành vẽ một kiểu, không đổi
+   được màu, và cỡ chữ khác cỡ icon nên căn hàng luôn lệch. */
+.ico {
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  vertical-align: -0.2em;
+  background-color: currentColor;
+  -webkit-mask: var(--ico) center / contain no-repeat;
+  mask: var(--ico) center / contain no-repeat;
+}
+.ico-mail { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="black" stroke-width="2" stroke-linejoin="round" d="M3 6h18v12H3z"/><path fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m3 7 9 6 9-6"/></svg>'); }
+.ico-lock { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2" fill="none" stroke="black" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>'); }
+.ico-user { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="black" stroke-width="2"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="none" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>'); }
+.ico-eye { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6Z" fill="none" stroke="black" stroke-width="2"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="black" stroke-width="2"/></svg>'); }
+.ico-eye-off { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6Z" fill="none" stroke="black" stroke-width="2"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="black" stroke-width="2"/><path d="M4 20 20 4" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>'); }
+.ico-leaf { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4C10 4 4 9 4 16c0 2 1 4 1 4s2-8 15-11c0 0-6 3-9 8 6 1 9-3 9-13Z" fill="black"/></svg>'); }
+.ico-bulb { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-3.5 10.9V17h7v-3.1A6 6 0 0 0 12 3Z" fill="none" stroke="black" stroke-width="2" stroke-linejoin="round"/><path d="M9.5 20h5" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>'); }
+
+/* Logo thương hiệu giữ nguyên màu gốc nên không ăn currentColor. */
+.ico-brand { background-color: transparent; -webkit-mask: none; mask: none; background: var(--ico) center / contain no-repeat; }
+.ico-google { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="%23EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.3 13.2 17.6 9.5 24 9.5Z"/><path fill="%234285F4" d="M46.1 24.6c0-1.6-.1-3.2-.4-4.6H24v9.1h12.4c-.5 2.9-2.1 5.3-4.6 6.9l7.6 5.9c4.4-4.1 6.7-10.1 6.7-17.3Z"/><path fill="%23FBBC05" d="M10.4 28.6a14.6 14.6 0 0 1 0-9.3l-7.8-6.1a24 24 0 0 0 0 21.5l7.8-6.1Z"/><path fill="%2334A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.9 2.3-8.3 2.3-6.4 0-11.7-3.7-13.6-9.9l-7.8 6.1C6.5 42.6 14.6 48 24 48Z"/></svg>'); }
+.ico-facebook { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="%231877F2"/><path fill="white" d="M15.4 12.6h-2.2V20H10v-7.4H8.4V9.8H10V8.2c0-2.1 1-3.4 3.4-3.4h2v2.8h-1.3c-.9 0-1 .3-1 1v1.2h2.3l-.3 2.8Z"/></svg>'); }
+.ico-apple { --ico: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23111" d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.9-1.4-.1-2.8.9-3.5.9-.7 0-1.9-.8-3.1-.8-1.6 0-3 .9-3.8 2.4-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3.1-.7 1.4 0 1.8.7 3.1.7 1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.7 0 0-2.5-1-2.6-3.7ZM14.1 5.8c.6-.8 1.1-1.9 1-3-1 0-2.1.6-2.8 1.5-.6.7-1.1 1.9-1 2.9 1.1.1 2.2-.6 2.8-1.4Z"/></svg>'); }
+
+.leaf-mark { color: #8bc34a; }
+.leaf-mark.right { transform: scaleX(-1); }

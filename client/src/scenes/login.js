@@ -7,24 +7,28 @@
  */
 import { el, showOverlay, hideOverlay, bindSubmit, toast } from '../ui/ui.js';
 
+// Hai chiếc lá hai bên tiêu đề là một hình lật ngược nhau: dùng cùng một icon
+// mà không lật thì cả hai cùng chĩa một hướng, nhìn như lỗi hơn là trang trí.
+const leaf = (side) => el('i', { class: `ico ico-leaf leaf-mark ${side}` });
+
 /** Ô nhập có biểu tượng bên trái, và nút hiện/ẩn cho ô mật khẩu. */
 function field(icon, attrs, { reveal = false } = {}) {
   const input = el('input', attrs);
-  const kids = [el('span', { class: 'in-icon', text: icon }), input];
+  const kids = [el('i', { class: `ico ico-${icon} in-icon` }), input];
   if (reveal) {
     // Nút hiện mật khẩu: gõ sai trên bàn phím ảo là chuyện thường, không cho
     // xem lại thì chỉ còn cách xoá hết gõ lại.
+    const glyph = el('i', { class: 'ico ico-eye' });
     const eye = el('button', {
       class: 'in-eye', type: 'button', 'aria-label': 'Hiện mật khẩu', 'aria-pressed': 'false',
-      text: '🙈',
       onClick: () => {
         const shown = input.type === 'text';
         input.type = shown ? 'password' : 'text';
-        eye.textContent = shown ? '🙈' : '👁';
+        glyph.className = shown ? 'ico ico-eye' : 'ico ico-eye-off';
         eye.setAttribute('aria-pressed', String(!shown));
         eye.setAttribute('aria-label', shown ? 'Hiện mật khẩu' : 'Ẩn mật khẩu');
       },
-    });
+    }, [glyph]);
     kids.push(eye);
   }
   return { row: el('div', { class: 'in-row' }, kids), input };
@@ -41,14 +45,10 @@ function checkbox(labelNode, checked = false) {
  * rõ vì sao — bày nút bấm vào không có gì xảy ra thì tệ hơn là không bày.
  */
 function socialRow(providers) {
-  const list = [
-    ['google', 'Google', 'G'],
-    ['facebook', 'Facebook', 'f'],
-    ['apple', 'Apple', ''],
-  ];
+  const list = [['google', 'Google'], ['facebook', 'Facebook'], ['apple', 'Apple']];
   return el('div', { class: 'social' }, [
     el('div', { class: 'social-sep' }, [el('span', { text: 'hoặc tiếp tục với' })]),
-    el('div', { class: 'social-row' }, list.map(([id, label, mark]) => {
+    el('div', { class: 'social-row' }, list.map(([id, label]) => {
       const ready = providers.includes(id);
       return el('button', {
         class: `social-btn s-${id}`,
@@ -56,7 +56,7 @@ function socialRow(providers) {
         disabled: !ready,
         title: ready ? `Đăng nhập bằng ${label}` : `${label} chưa được cấu hình trên máy chủ này`,
         onClick: () => toast(`Đăng nhập bằng ${label} chưa mở`, 'warn'),
-      }, [el('span', { class: 'social-mark', text: mark }), el('span', { text: label })]);
+      }, [el('i', { class: `ico ico-brand ico-${id} social-mark` }), el('span', { text: label })]);
     })),
   ]);
 }
@@ -73,8 +73,8 @@ async function fetchProviders(game) {
 export async function showLogin(game) {
   const providers = await fetchProviders(game);
   const error = el('div', { class: 'error hidden' });
-  const id = field('✉', { type: 'text', autocomplete: 'username', placeholder: 'Email hoặc tên đăng nhập' });
-  const pass = field('🔒', { type: 'password', autocomplete: 'current-password', placeholder: 'Mật khẩu' }, { reveal: true });
+  const id = field('mail', { type: 'text', autocomplete: 'username', placeholder: 'Email hoặc tên đăng nhập' });
+  const pass = field('lock', { type: 'password', autocomplete: 'current-password', placeholder: 'Mật khẩu' }, { reveal: true });
   const remember = checkbox(el('span', { text: 'Ghi nhớ đăng nhập' }), true);
 
   const go = el('button', { class: 'primary big-cta', type: 'button', text: 'Đăng nhập' });
@@ -97,7 +97,7 @@ export async function showLogin(game) {
   pass.input.addEventListener('keydown', (event) => { if (event.key === 'Enter') go.click(); });
 
   showOverlay(el('div', { class: 'card entry' }, [
-    el('h1', { text: '🌿 Chào mừng trở lại! 🌿' }),
+    el('h1', {}, [leaf('left'), el('span', { text: 'Chào mừng trở lại!' }), leaf('right')]),
     el('p', { class: 'lead', text: 'Đăng nhập để tiếp tục hành trình ở Sunny Town.' }),
     id.row,
     pass.row,
@@ -124,10 +124,10 @@ export async function showLogin(game) {
 export async function showRegister(game) {
   const providers = await fetchProviders(game);
   const error = el('div', { class: 'error hidden' });
-  const username = field('👤', { type: 'text', autocomplete: 'username', placeholder: 'Tên đăng nhập' });
-  const email = field('✉', { type: 'email', autocomplete: 'email', placeholder: 'Email (không bắt buộc)' });
-  const pass = field('🔒', { type: 'password', autocomplete: 'new-password', placeholder: 'Mật khẩu' }, { reveal: true });
-  const confirm = field('🔒', { type: 'password', autocomplete: 'new-password', placeholder: 'Nhập lại mật khẩu' }, { reveal: true });
+  const username = field('user', { type: 'text', autocomplete: 'username', placeholder: 'Tên đăng nhập' });
+  const email = field('mail', { type: 'email', autocomplete: 'email', placeholder: 'Email (không bắt buộc)' });
+  const pass = field('lock', { type: 'password', autocomplete: 'new-password', placeholder: 'Mật khẩu' }, { reveal: true });
+  const confirm = field('lock', { type: 'password', autocomplete: 'new-password', placeholder: 'Nhập lại mật khẩu' }, { reveal: true });
   const terms = checkbox(el('span', {}, [
     el('span', { text: 'Tôi đồng ý với ' }),
     el('button', { class: 'link', type: 'button', text: 'Điều khoản', onClick: () => toast('Trang điều khoản chưa có', 'warn') }),
@@ -159,7 +159,7 @@ export async function showRegister(game) {
   bindSubmit(go, submit);
 
   showOverlay(el('div', { class: 'card entry' }, [
-    el('h1', { text: '🌿 Tạo tài khoản 🌿' }),
+    el('h1', {}, [leaf('left'), el('span', { text: 'Tạo tài khoản' }), leaf('right')]),
     el('p', { class: 'lead', text: 'Gia nhập Sunny Town và bắt đầu hành trình.' }),
     username.row,
     email.row,
@@ -168,7 +168,8 @@ export async function showRegister(game) {
     terms.node,
     error,
     go,
-    socialRow(providers),
+    // Màn đăng ký KHÔNG bày phần mạng xã hội: đăng nhập bằng nhà cung cấp đã
+    // tự tạo tài khoản nếu chưa có, nên bày ở đây là lặp lại đúng một việc.
     el('p', { class: 'foot-link' }, [
       el('span', { text: 'Đã có tài khoản? ' }),
       el('button', { class: 'link', type: 'button', text: 'Đăng nhập', onClick: () => showLogin(game) }),
