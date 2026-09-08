@@ -41,11 +41,17 @@ export async function createPlayer(server, overrides = {}) {
   const username = overrides.username ?? `tester${n}${Date.now() % 100000}`;
   // Nickname tối đa 16 ký tự (doc 04) nên phần ngẫu nhiên phải ngắn.
   const nickname = overrides.nickname ?? `P${n}_${Date.now().toString(36).slice(-6)}`;
-  const res = await server.post('/v1/auth/register', {
-    body: { username, password: 'super-secret-1', nickname, ...overrides.appearance ? { appearance: overrides.appearance } : {} },
-  });
+  // Hai bước: đăng ký ra TÀI KHOẢN, rồi mới tạo nhân vật — đúng luồng thật
+  // (đăng nhập → chọn server → nhân vật).
+  const res = await server.post('/v1/auth/register', { body: { username, password: 'super-secret-1' } });
   if (res.status !== 201) throw new Error('đăng ký thất bại: ' + JSON.stringify(res.body));
-  return { ...res.body, username, password: 'super-secret-1', nickname };
+
+  const made = await server.post('/v1/characters', {
+    token: res.body.access_token,
+    body: { nickname, ...overrides.appearance ? { appearance: overrides.appearance } : {} },
+  });
+  if (made.status !== 201) throw new Error('tạo nhân vật thất bại: ' + JSON.stringify(made.body));
+  return { ...made.body.session, username, password: 'super-secret-1', nickname };
 }
 
 /** Cấp thẳng tài nguyên cho test khỏi phải cày. */

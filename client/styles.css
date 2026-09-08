@@ -1048,6 +1048,36 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
 }
 #overlay.backdrop-server > * { position: relative; z-index: 1; }
 
+/* Màn nhân vật dùng chung tranh và dải phủ với màn chọn server, nhưng nội dung
+   cao hơn (có ô xem trước nhân vật) nên phải neo cao hơn — giữ nguyên 40% thì
+   nội dung tụt xuống và hàng server vẽ chết hở ra phía trên. */
+#overlay.backdrop-character {
+  background: #6fc0ee center / cover no-repeat url('/assets/ui/entry.png');
+  align-items: flex-start;
+  padding-top: clamp(16px, 35vh, 370px);
+}
+#overlay.backdrop-character::before {
+  content: '';
+  position: absolute;
+  /* 34% chứ không cao hơn: logo trong tranh kết thúc ở 33%, phủ mờ leo lên trên
+     đó là làm xám chân chữ. */
+  top: 34%;
+  bottom: 4%;
+  left: 50%;
+  translate: -50% 0;
+  width: clamp(420px, 58vw, 760px);
+  backdrop-filter: blur(22px) saturate(.85);
+  -webkit-backdrop-filter: blur(22px) saturate(.85);
+  background: linear-gradient(90deg, rgba(20, 36, 52, 0), rgba(20, 36, 52, .58) 18%, rgba(20, 36, 52, .58) 82%, rgba(20, 36, 52, 0));
+  mask-image:
+    linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent),
+    linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+  pointer-events: none;
+}
+#overlay.backdrop-character > * { position: relative; z-index: 1; }
+
 /* Màn chờ tải có tranh riêng: thanh tiến độ trong tranh nằm ở ĐÁY giữa, nên
    thẻ thật đặt đúng chỗ đó thay vì giữa màn hình. */
 #overlay.backdrop-loading {
@@ -1255,3 +1285,39 @@ button.server-start:active { transform: translateY(3px); box-shadow: 0 2px 0 #2b
 @media (prefers-reduced-motion: reduce) {
   .load-fill { transition: none; animation: none; }
 }
+
+/* Màn nhân vật: dùng chung tranh nền với màn chọn server. Không bọc thẻ trắng —
+   nhân vật là thứ phải nhìn thấy rõ, thẻ chỉ làm nền rối thêm. */
+.char-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  width: min(430px, 92%);
+}
+.hero-preview {
+  width: 112px;
+  height: 142px;
+  align-self: center;
+  filter: drop-shadow(0 8px 16px rgba(16, 34, 50, .45));
+}
+.char-card {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: rgba(22, 30, 38, .82);
+  border: 2px solid rgba(255, 255, 255, .18);
+  color: #fdf6e6;
+}
+.char-name { font: 700 18px var(--font-body); }
+.char-meta { font-size: 14px; color: var(--gold); font-weight: 700; }
+.char-pick .field label { color: #fdf6e6; text-shadow: 0 2px 4px rgba(12, 26, 40, .8); }
+.char-pick .field input {
+  background: rgba(255, 253, 247, .96);
+  border: 2px solid rgba(255, 255, 255, .35);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+.char-pick .error { color: #ffd9d9; text-shadow: 0 2px 4px rgba(12, 26, 40, .8); }

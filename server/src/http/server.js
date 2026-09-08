@@ -100,10 +100,15 @@ export function createHttpServer(ctx) {
 
       const { route, params } = matched;
       const body = ['POST', 'PATCH'].includes(req.method) ? await readBody(req) : {};
-      const character = route.auth === false ? null : authenticate(ctx.db, req.headers.authorization);
+      // `character: false` cho route chạy được khi tài khoản chưa có nhân vật.
+      const auth = route.auth === false
+        ? null
+        : authenticate(ctx.db, req.headers.authorization, { requireCharacter: route.character !== false });
 
       const result = await route.handler({
-        ctx, params, body, query: url.searchParams, character,
+        ctx, params, body, query: url.searchParams,
+        character: auth?.character ?? null,
+        userId: auth?.userId ?? null,
         headers: req.headers,
         idempotencyKey: req.headers['idempotency-key'] ?? null,
       });

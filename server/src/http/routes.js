@@ -49,12 +49,24 @@ export function registerRoutes(router, ctx) {
   }, { auth: false });
 
   // ---------- Auth (doc 15 §Auth) ----------
+  // Đăng ký chỉ tạo TÀI KHOẢN. Nhân vật tạo ở bước riêng, sau khi chọn server.
   router.post('/v1/auth/register', async ({ body }) => {
-    const created = await player.register(db, content, body);
+    const created = await player.register(db, body);
     const user = db.prepare('SELECT * FROM users WHERE id = ?').get(created.user_id);
-    const character = db.prepare('SELECT * FROM characters WHERE id = ?').get(created.character_id);
-    return { status: 201, body: player.issueSession(db, user, character, body.device) };
+    return { status: 201, body: player.issueSession(db, user, null, body.device) };
   }, { auth: false });
+
+  // ---------- Nhân vật (doc 04) ----------
+  router.get('/v1/characters', ({ userId }) => ({
+    body: { characters: player.listCharacters(db, userId) },
+  }), { character: false });
+
+  router.post('/v1/characters', ({ userId, body }) => {
+    const character = player.createCharacter(db, content, userId, body);
+    const user = db.prepare('SELECT * FROM users WHERE id = ?').get(userId);
+    // Phiên phải cấp LẠI: token gắn với nhân vật, phiên cũ chưa có nhân vật nào.
+    return { status: 201, body: { character, session: player.issueSession(db, user, character, body.device) } };
+  }, { character: false });
 
   router.post('/v1/auth/login', async ({ body }) => ({ body: await player.login(db, body) }), { auth: false });
   router.post('/v1/auth/refresh', ({ body }) => ({ body: player.refreshSession(db, body.refresh_token) }), { auth: false });
@@ -64,7 +76,9 @@ export function registerRoutes(router, ctx) {
   }));
 
   // ---------- Tài khoản (doc 22 §Account) ----------
-  router.get('/v1/account', ({ character }) => ({ body: account.getAccount(db, ctx.config, character.user_id) }));
+  // Không đòi nhân vật: màn chọn server đọc danh sách server từ đây, mà lúc đó
+  // tài khoản mới tạo còn chưa có nhân vật nào.
+  router.get('/v1/account', ({ userId }) => ({ body: account.getAccount(db, ctx.config, userId) }), { character: false });
   router.post('/v1/account/links', ({ character, body }) => ({
     body: account.linkIdentity(db, ctx.config, character.user_id, body),
   }));

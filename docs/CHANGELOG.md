@@ -3,6 +3,37 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.21.0 — 2026-09-08
+
+### Đổi — tách đăng ký tài khoản khỏi tạo nhân vật
+
+Luồng vào game giờ là: **đăng nhập → chọn server → nhân vật → tải → thế giới**.
+Nhân vật thuộc về một server cụ thể, nên hỏi tên nhân vật ngay ở bước đăng ký là
+khoá cứng người chơi vào server đầu tiên họ gặp.
+
+**Server**
+- `register()` chỉ tạo TÀI KHOẢN; phần tạo nhân vật kèm quà khởi đầu tách ra
+  thành `createCharacter(db, content, userId, ...)`.
+- `login()` cấp phiên được cả khi tài khoản CHƯA có nhân vật; token mang
+  `chr: null`, và `character_id`/`nickname` trong phiên trả về là `null` —
+  client dựa vào đó để biết phải đưa người chơi tới bước tạo nhân vật.
+- `authenticate()` nhận cờ `requireCharacter`; route khai `character: false` cho
+  những đường chạy được khi chưa có nhân vật. Trả về `{ userId, character }`
+  thay vì trả thẳng character.
+- Thêm `GET /v1/characters` và `POST /v1/characters`. Tạo xong phải **cấp lại
+  phiên**: token gắn với nhân vật, mà phiên cũ chưa gắn nhân vật nào.
+- `GET /v1/account` chuyển sang `character: false` — màn chọn server đọc danh
+  sách server từ đây, lúc đó tài khoản mới tạo còn chưa có nhân vật.
+
+**Client**
+- Màn đăng ký chỉ còn tên đăng nhập và mật khẩu.
+- `client/src/scenes/character.js`: một màn lo hai việc — chưa có nhân vật thì
+  hiện form tạo (chọn nam/nữ, xem trước, đặt tên), có rồi thì hiện thẻ nhân vật
+  để bấm vào chơi. Tách hai màn thì phần lớn giao diện lặp lại y hệt.
+
+Helper test `createPlayer` đổi sang hai bước, nên 119 test cũ chạy đúng luồng mới
+mà không phải sửa từng test.
+
 ## 0.20.1 — 2026-09-08
 
 ### Đổi — thanh tải bám đúng bản mẫu

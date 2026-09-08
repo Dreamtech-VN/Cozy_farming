@@ -22,24 +22,42 @@ export function validateNickname(nickname) {
   return nickname.trim();
 }
 
-export async function register(db, content, { username, password, nickname, appearance }) {
+/**
+ * Tạo TÀI KHOẢN, chưa có nhân vật.
+ *
+ * Tách khỏi việc tạo nhân vật vì luồng vào game là: đăng nhập → chọn server →
+ * mới tới nhân vật. Nhân vật thuộc về một server cụ thể, nên gộp vào bước đăng
+ * ký là khoá cứng người chơi vào server đầu tiên họ gặp.
+ */
+export async function register(db, { username, password }) {
   if (!USERNAME_RE.test(username ?? '')) throw badRequest('Username phải dài 3–20 ký tự (chữ, số, gạch dưới)');
   if (typeof password !== 'string' || password.length < 8) throw badRequest('Mật khẩu tối thiểu 8 ký tự');
-  const nick = validateNickname(nickname);
-
   if (db.prepare('SELECT 1 AS ok FROM users WHERE username = ?').get(username)) throw conflict('Username đã tồn tại');
-  if (db.prepare('SELECT 1 AS ok FROM characters WHERE nickname = ?').get(nick)) throw conflict('Nickname đã có người dùng');
 
   const passwordHash = await hashPassword(password);
   const now = Date.now();
   const userId = newId('usr');
+  db.prepare('INSERT INTO users (id, username, password_hash, created_at) VALUES (?, ?, ?, ?)')
+    .run(userId, username, passwordHash, now);
+  return { user_id: userId };
+}
+
+export function listCharacters(db, userId) {
+  return db.prepare('SELECT id, nickname, body_type, level, last_map_id, created_at FROM characters WHERE user_id = ? ORDER BY created_at')
+    .all(userId);
+}
+
+/** Tạo nhân vật cho một tài khoản đã có, kèm toàn bộ quà khởi đầu (doc 09). */
+export function createCharacter(db, content, userId, { nickname, appearance }) {
+  const nick = validateNickname(nickname);
+  if (db.prepare('SELECT 1 AS ok FROM characters WHERE nickname = ?').get(nick)) throw conflict('Nickname đã có người dùng');
+
+  const now = Date.now();
   const characterId = newId('chr');
   const startMap = content.maps.find((m) => m.map_id === 'map_city_plaza') ?? content.maps[0];
   const spawn = startMap.spawn_points.find((s) => s.id === 'spawn_default');
 
   transaction(db, () => {
-    db.prepare('INSERT INTO users (id, username, password_hash, created_at) VALUES (?, ?, ?, ?)')
-      .run(userId, username, passwordHash, now);
     db.prepare(`INSERT INTO characters (id, user_id, nickname, body_type, level, xp, last_map_id, last_x, last_y, created_at, updated_at)
                 VALUES (?, ?, ?, ?, 1, 0, ?, ?, ?, ?, ?)`)
       .run(characterId, userId, nick, appearance?.body_type ?? 'a', startMap.map_id, spawn.x, spawn.y, now, now);
@@ -69,7 +87,7 @@ export async function register(db, content, { username, password, nickname, appe
   });
 
   logEvent(db, characterId, 'login', { first_session: true });
-  return { user_id: userId, character_id: characterId };
+  return db.prepare('SELECT * FROM characters WHERE id = ?').get(characterId);
 }
 
 /** Ghép lựa chọn tạo nhân vật với danh sách cosmetic hợp lệ; thiếu thì lấy mặc định. */
@@ -90,10 +108,12 @@ export async function login(db, { username, password, device }) {
   if (user.status !== 'active') throw unauthorized('Tài khoản đang bị khoá');
   if (!(await verifyPassword(password ?? '', user.password_hash))) throw unauthorized('Sai tài khoản hoặc mật khẩu');
 
-  const character = db.prepare('SELECT * FROM characters WHERE user_id = ?').get(user.id);
+  // Có thể CHƯA có nhân vật: tài khoản tạo xong là đăng nhập được ngay, nhân
+  // vật tạo sau, ở bước sau khi chọn server.
+  const character = db.prepare('SELECT * FROM characters WHERE user_id = ?').get(user.id) ?? null;
   const now = Date.now();
   db.prepare('UPDATE users SET last_login_at = ? WHERE id = ?').run(now, user.id);
-  logEvent(db, character.id, 'login', {});
+  if (character) logEvent(db, character.id, 'login', {});
   return issueSession(db, user, character, device);
 }
 
@@ -104,11 +124,13 @@ export function issueSession(db, user, character, device) {
     .run(newId('ses'), user.id, hashRefreshToken(refresh), device ?? null, now, now + config.refreshTokenTtlSeconds * 1000);
 
   return {
-    access_token: issueToken({ sub: user.id, chr: character.id }, config.accessTokenTtlSeconds),
+    access_token: issueToken({ sub: user.id, chr: character?.id ?? null }, config.accessTokenTtlSeconds),
     refresh_token: refresh,
     expires_in: config.accessTokenTtlSeconds,
-    character_id: character.id,
-    nickname: character.nickname,
+    // null khi tài khoản chưa có nhân vật — client dựa vào đây để biết phải
+    // đưa người chơi tới bước tạo nhân vật.
+    character_id: character?.id ?? null,
+    nickname: character?.nickname ?? null,
   };
 }
 
@@ -133,15 +155,20 @@ export function logout(db, refreshToken) {
 }
 
 /** Xác thực access token cho mỗi request; trả về character đang hoạt động. */
-export function authenticate(db, authorizationHeader) {
+/**
+ * @param requireCharacter false cho các route chạy được khi tài khoản CHƯA có
+ *   nhân vật (danh sách nhân vật, tạo nhân vật). Mặc định true vì gần như mọi
+ *   route còn lại đều thao tác trên nhân vật.
+ */
+export function authenticate(db, authorizationHeader, { requireCharacter = true } = {}) {
   const token = /^Bearer (.+)$/i.exec(authorizationHeader ?? '')?.[1];
   const payload = token ? verifyToken(token) : null;
   if (!payload) throw unauthorized();
-  const character = db.prepare('SELECT * FROM characters WHERE id = ?').get(payload.chr);
-  if (!character) throw unauthorized();
   const user = db.prepare('SELECT status FROM users WHERE id = ?').get(payload.sub);
   if (user?.status !== 'active') throw unauthorized('Tài khoản đang bị khoá');
-  return character;
+  const character = payload.chr ? db.prepare('SELECT * FROM characters WHERE id = ?').get(payload.chr) ?? null : null;
+  if (requireCharacter && !character) throw unauthorized();
+  return { userId: payload.sub, character };
 }
 
 export function getEquipment(db, characterId) {

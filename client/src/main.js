@@ -9,6 +9,7 @@ import { settings } from './core/settings.js';
 import { atlas } from './render/atlas.js';
 import { showLoading } from './scenes/loading.js';
 import { showServerSelect } from './scenes/servers.js';
+import { showCharacterScreen } from './scenes/character.js';
 import { audio } from './core/audio.js';
 import { Input } from './core/input.js';
 import { WorldRenderer } from './render/world.js';
@@ -187,6 +188,9 @@ class Game {
       // đổi xong lại phải tải lại từ đầu.
       const account = await this.api.get('/v1/account').catch(() => null);
       await showServerSelect(this, account);
+      // Rồi mới tới nhân vật: nhân vật thuộc về một server cụ thể.
+      const { characters } = await this.api.get('/v1/characters');
+      await showCharacterScreen(this, characters);
     }
     // Chặn ở màn chờ tới khi tải xong art. Vào thẳng rồi để cảnh vật hiện dần
     // trông như game lỗi.
