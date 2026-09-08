@@ -373,9 +373,11 @@ export class WorldRenderer {
       for (let i = 0; i < cols; i++) {
         const x = platform.x + i * step;
         ctx.save();
-        // Bệ hẹp hơn một tile thì phải co ngang, không thì thò ra ngoài mép bệ.
+        // Co theo CẢ HAI chiều cho khớp kích thước bệ. Trước đây chỉ co ngang
+        // nên tile cao 48px vẽ đè lên cái bệ khai báo cao 24px: hình cao gấp
+        // đôi vùng va chạm thật, nhìn ra một mảng đất cỏ lơ lửng giữa trời.
         ctx.translate(x, platform.y);
-        ctx.scale(step / size, 1);
+        ctx.scale(step / size, platform.h / size);
         atlas.tile(ctx, hashCol(map.map_id, i) % 3, 0, 0, TILE_SCALE);
         ctx.restore();
       }

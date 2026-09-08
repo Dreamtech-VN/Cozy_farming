@@ -26,15 +26,24 @@ class Atlas {
       img.onerror = () => reject(new Error(`không nạp được ${file}`));
       img.src = `${BASE}/${file}`;
     });
-    const [tiles, props, crops, parts, city] = await Promise.all([
+    // Art sinh bằng code chỉ vài chục KB, chờ được. Trang art vẽ sẵn thì nặng
+    // vài MB — chờ nó xong mới cho vào game là bắt người chơi nhìn màn hình
+    // trắng. Nạp nền, và vì `prop()` đã tự rơi về art sinh bằng code khi chưa
+    // có sprite nên thế giới vẽ được ngay rồi tự đẹp lên khi trang tới nơi.
+    const [tiles, props, crops, parts] = await Promise.all([
       load(meta.tiles.file), load(meta.props.file), load(meta.crops.file), load(meta.parts.file),
-      meta.city ? load(meta.city.file) : Promise.resolve(null),
     ]);
-    this.images = { tiles, props, crops, parts, city };
+    this.images = { tiles, props, crops, parts, sprites: null };
     this.partIndex = new Map(meta.parts.names.map((name, i) => [name, i]));
     this.propIndex = new Map(meta.props.names.map((name, i) => [name, i]));
     this.cropIndex = new Map(meta.crops.kinds.map((name, i) => [name, i]));
     this.ready = true;
+
+    if (meta.sprites) {
+      this.spritesPending = load(meta.sprites.file)
+        .then((img) => { this.images.sprites = img; })
+        .catch((error) => { console.warn('không nạp được art vẽ sẵn, dùng art sinh bằng code:', error.message); });
+    }
   }
 
   /** Một ô tileset, vẽ phóng to `scale` lần tại (x, y). */
@@ -66,21 +75,21 @@ class Atlas {
    * @returns true nếu vẽ được, false nếu không có tên này.
    */
   sprite(ctx, name, x, groundY, scale = 1) {
-    const rect = this.meta?.city?.sprites?.[name];
-    if (!rect || !this.images.city) return false;
+    const rect = this.meta?.sprites?.sprites?.[name];
+    if (!rect || !this.images.sprites) return false;
     const k = (scale * SPRITE_UNIT) / rect.h;
     const w = rect.w * k;
     const h = rect.h * k;
-    ctx.drawImage(this.images.city, rect.x, rect.y, rect.w, rect.h, x - w / 2, groundY - h, w, h);
+    ctx.drawImage(this.images.sprites, rect.x, rect.y, rect.w, rect.h, x - w / 2, groundY - h, w, h);
     return true;
   }
 
   hasSprite(name) {
-    return Boolean(this.meta?.city?.sprites?.[name]);
+    return Boolean(this.meta?.sprites?.sprites?.[name]);
   }
 
   spriteNames() {
-    return Object.keys(this.meta?.city?.sprites ?? {});
+    return Object.keys(this.meta?.sprites?.sprites ?? {});
   }
 
   crop(ctx, kind, stage, x, groundY, scale = 1) {

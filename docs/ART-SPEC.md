@@ -125,21 +125,23 @@ Bộ Cozy UI Pack đã mua đang dùng cho HUD, không cần sinh thêm.
 
 ## Đã có gì rồi
 
-`art-src/sheets/city.png` — 106 vật phố xá, đã đặt tên 105 và lắp vào game:
-nhà cửa, cửa hàng, trụ sở, xe cộ, cây chậu, bụi, đèn đường, thùng rác, ghế...
+**213 vật** đã lắp vào game, gộp từ hai tấm:
+
+- `city.png` — nhà cửa, cửa hàng, trụ sở, xe cộ, đèn đường, thùng rác, ghế.
+- `village.png` — cây thiên nhiên, đá, khúc gỗ, nấm, giếng phun, ao, cổng,
+  giàn hoa, sạp chợ, thùng rau, bao tải, tàu thuyền.
 
 Còn thiếu, xếp theo mức ảnh hưởng:
 
 | Cần | Vì sao gấp |
 | --- | --- |
-| **Nhân vật** | Đang là art sinh bằng code, đứng cạnh nhà vẽ tay thì lệch hẳn phong cách — đây là chỗ chỏi mắt nhất hiện giờ |
+| **Nhân vật** | Đang là art sinh bằng code, đứng cạnh cảnh vật vẽ tay thì lệch hẳn — đây là chỗ chỏi mắt nhất hiện giờ |
 | **Tile mặt đất** | Cỏ và đất chiếm nhiều diện tích màn hình nhất, cũng vẫn là art sinh bằng code |
 | **Cây trồng** | 12 cây × 4 giai đoạn, là thứ người chơi nhìn lâu nhất trong game nông trại |
-| Vật thiên nhiên | Đá, gốc cây, khúc gỗ, nấm, đống rơm, giếng, rương — tấm phố xá không có |
 
-Tấm tiếp theo nên gộp **tile mặt đất + vật thiên nhiên** vào một ảnh (cùng cách
-bày như tấm phố: các vật rời nhau trên nền phẳng một màu, cách nhau ít nhất 20px).
-Nhân vật thì phải để riêng vì có yêu cầu về khung hình.
+Cả ba phần này đều KHÔNG bày chung một tấm được như cảnh vật: nhân vật cần đúng
+số khung, tile cần ghép liền được, cây trồng cần đủ bộ 4 giai đoạn cùng góc nhìn.
+Xem mục 2, 3 và 4.
 
 ## Gửi file thế nào
 

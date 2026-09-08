@@ -3,6 +3,33 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.14.0 — 2026-09-08
+
+### Thêm — tấm art thứ hai, 213 vật
+`art-src/sheets/village.png`: cây cối thiên nhiên (cọ, liễu, anh đào, thông,
+tre), đá, khúc gỗ, nấm, giếng phun, ao, cổng, giàn hoa, sạp chợ, thùng rau,
+thùng rượu, bao tải, máy bán hàng, tàu thuyền, xe cộ.
+
+- `import-art.mjs` gom MỌI tấm trong `art-src/sheets/` vào cùng một trang atlas.
+  Tên sprite là một không gian tên chung nên trùng tên giữa hai tấm làm lệnh
+  chết ngay, thay vì để cái này lặng lẽ đè cái kia lúc chạy.
+- Mục atlas đổi tên `city` → `sprites`: nó không còn là art riêng của một tấm.
+- Cảnh vật từng map viết lại theo bộ mới — rừng có thông/liễu/anh đào, khúc gỗ,
+  đá, nấm và ao; nông trại có nhà kính, tháp nước, giàn hoa, bao tải.
+
+### Sửa
+- **Trang art nạp nền, không chặn vào game.** Trang sprite nặng 7,3 MB; chờ nó
+  xong mới cho vào là bắt người chơi nhìn màn hình trắng. Art sinh bằng code chỉ
+  vài chục KB nên vẫn chờ, và vì `prop()` tự rơi về art sinh bằng code khi chưa
+  có sprite nên thế giới vẽ được ngay rồi tự đẹp lên khi trang tới nơi.
+- **Bệ đứng vẽ cao gấp đôi vùng va chạm thật.** `#drawPlatforms` chỉ co tile
+  theo chiều ngang, nên tile cao 48px vẽ đè lên cái bệ khai báo `h: 24` — nhìn
+  ra một mảng đất cỏ lơ lửng giữa trời. Giờ co theo cả hai chiều.
+
+### Còn thiếu
+Nhân vật và tile mặt đất vẫn là art sinh bằng code — đứng cạnh cảnh vật vẽ tay
+thì lệch hẳn phong cách. Quy cách để sinh hai phần đó ở `docs/ART-SPEC.md`.
+
 ## 0.13.0 — 2026-09-08
 
 ### Thêm — nhập art vẽ sẵn
