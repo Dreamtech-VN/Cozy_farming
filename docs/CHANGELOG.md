@@ -3,6 +3,44 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.19.0 — 2026-09-08
+
+### Đổi — nhìn ngang nhưng đi được bốn hướng
+
+Trước đây map là platformer nhìn ngang: có trọng lực, nhảy, và bệ đứng trèo lên
+được. Nay trục dọc là **CHIỀU SÂU** chứ không phải độ cao.
+
+- Bỏ trọng lực, bỏ nhảy, bỏ platform. Không trèo lên nóc nhà được nữa, và cảnh
+  vật phía sau luôn là nền chứ không thành chỗ đứng.
+- `maps.json`: bỏ `platforms`, thêm `walk_depth` — dải đất đi được tính từ
+  `ground_y` (mép trước) lùi về sau.
+- Đi chéo không nhanh hơn đi thẳng; trục dọc đi chậm hơn ngang (0,55×) vì cùng
+  một quãng trên màn hình ứng với quãng xa hơn trong không gian.
+- Thu nhỏ theo chiều sâu 12%: không có nó thì đi lùi vào trong nhìn như trượt
+  ngang trên kính, mắt không đọc ra chiều sâu.
+- Server đổi `standsOnSurface` thành `insideWalkBand`.
+- `ArrowUp`/`W` và `ArrowDown`/`S` giờ là đi lên/xuống, không còn là nhảy.
+
+### Sửa — ba lỗi kéo theo, đều lộ ra khi chụp màn hình
+- **Camera vẫn bám trục dọc** nên đi lùi vào trong làm cả thế giới trôi xuống và
+  nhân vật lơ lửng giữa trời. Camera dọc giờ neo cố định vào mép trước của dải.
+- **Mặt sàn chỉ vẽ một vạch ở `ground_y`** trong khi dải sâu 150px, nên đứng ở
+  mép sau là đứng trên nền trời. Sàn giờ lát kín cả dải. Phải thêm tile **cỏ
+  đặc** (`grass_fill_a/b`) vì `grass_top` vốn là mép cỏ CÓ đất bên dưới — lát nó
+  cho cả dải thì mỗi hàng lộ một vạch đất, sàn thành sọc ngang. Tile này tô màu
+  phẳng, không chuyển màu dọc: nó lát chồng theo chiều dọc nên chuyển màu sẽ tạo
+  đường nối ở mỗi mối ghép.
+- **Nhà bị mặt sàn cắt cụt chân**: lớp giữa vẽ trước sàn. Nhà đứng ở mép sau tức
+  là đứng TRÊN sàn, nên phải vẽ sau sàn.
+
+### Sửa — sprite nhân vật vẫn bị xén
+Nhánh cắt theo màu vứt thẳng các cụm nhỏ hơn `minArea` TRƯỚC khi gộp, nên một
+chỏm tóc tách rời bị mất luôn và khung bao co lại, cắt vật phẳng một đường. Nay
+gộp cụm nhỏ vào cụm lớn ở sát bên trước, chỉ vứt cụm nhỏ đứng một mình.
+
+Nhân đây kiểm lại vùng nghi là lỗi trong tóc nhân vật nữ: **ảnh gốc có ô caro ở
+đúng chỗ đó**, tức là tóc thật sự có khe hở. Không phải lỗi cắt.
+
 ## 0.18.0 — 2026-09-08
 
 ### Thêm — tranh nền cho các màn ngoài game

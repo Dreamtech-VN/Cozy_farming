@@ -1,14 +1,15 @@
 /** Điều khiển bằng bàn phím. Game chạy ở màn hình ngang, không có nút cảm ứng. */
 export class Input {
   constructor() {
-    this.keys = { left: false, right: false, jump: false, action: false };
+    this.keys = { left: false, right: false, up: false, down: false, action: false };
     this.actionPressed = false;
     this.enabled = true;
 
     const map = {
       ArrowLeft: 'left', KeyA: 'left',
       ArrowRight: 'right', KeyD: 'right',
-      Space: 'jump', ArrowUp: 'jump', KeyW: 'jump',
+      ArrowUp: 'up', KeyW: 'up',
+      ArrowDown: 'down', KeyS: 'down',
       KeyE: 'action', Enter: 'action',
     };
 

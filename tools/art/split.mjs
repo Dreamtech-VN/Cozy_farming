@@ -189,7 +189,28 @@ export function splitSheet(img, options = {}) {
   // trục kia — phần rời của cùng một vật gần như luôn nằm thẳng trên/dưới thân nó.
   // Gộp thuần theo khoảng cách thì hai chiếc xe đỗ cạnh nhau cũng dính làm một.
   const OVERLAP = 0.4;
+  // Cụm nhỏ KHÔNG vứt thẳng: một chỏm tóc, một sợi tách rời hay cái nơ nối với
+  // thân bằng vài pixel mờ đều thành cụm riêng bé tí. Vứt trước rồi mới gộp là
+  // mất luôn phần đó, và vì khung bao co lại nên vật bị cắt PHẲNG một đường —
+  // đúng lỗi đỉnh tóc bị xén. Gộp cụm nhỏ vào cụm lớn ở sát bên trước đã.
   let merged = boxes.filter((b) => b.area >= MIN_AREA);
+  for (const bit of boxes.filter((b) => b.area < MIN_AREA)) {
+    let host = -1; let bestGap = Infinity;
+    for (let i = 0; i < merged.length; i++) {
+      const a = merged[i];
+      const gapX = Math.max(a.x0 - bit.x1, bit.x0 - a.x1, 0);
+      const gapY = Math.max(a.y0 - bit.y1, bit.y0 - a.y1, 0);
+      const gap = Math.max(gapX, gapY);
+      if (gap <= GAP && gap < bestGap) { bestGap = gap; host = i; }
+    }
+    if (host === -1) continue; // hạt bụi thật, đứng một mình giữa nền
+    const a = merged[host];
+    merged[host] = {
+      x0: Math.min(a.x0, bit.x0), y0: Math.min(a.y0, bit.y0),
+      x1: Math.max(a.x1, bit.x1), y1: Math.max(a.y1, bit.y1),
+      area: a.area + bit.area,
+    };
+  }
   let changed = true;
   while (changed) {
     changed = false;

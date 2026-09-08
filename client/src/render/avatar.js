@@ -50,7 +50,6 @@ function transformFor(state, phase) {
       lean: step * (heavy ? 0.05 : 0.03),
     };
   }
-  if (state === 'jump') return { bob: 0, squash: 1.06, lean: 0 };
   if (state === 'sit') return { bob: 0, squash: 0.86, lean: 0 };
   if (state === 'farm') return { bob: 0, squash: 0.94, lean: 0.1 };
   // Đứng yên vẫn phải thở, không thì nhìn như game đơ.
@@ -65,7 +64,7 @@ function spriteOf({ sprite, bodyType }) {
 
 /**
  * @param ctx canvas 2d context, đã dịch gốc toạ độ về chân nhân vật.
- * @param options.state idle | walk | run | jump | sit | farm
+ * @param options.state idle | walk | run | sit | farm
  * @param options.phase 0..1 — pha animation.
  * @param options.sprite tên sprite nhân vật; bỏ trống thì suy từ trang phục.
  */

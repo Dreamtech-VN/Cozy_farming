@@ -22,9 +22,9 @@ import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
 import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openLiveOps, openMenu, openMail, openSettings, openDaily, energyLine } from './ui/panels.js';
 
-const GRAVITY = 1800;
+// Trục dọc là chiều sâu, không phải độ cao — đi lùi vào trong chậm hơn đi ngang.
+const DEPTH_SPEED = 0.55;
 const RUN_SPEED = 260;
-const JUMP_SPEED = 620;
 const INTERACT_RANGE = 90;
 
 class Game {
@@ -34,7 +34,7 @@ class Game {
     this.input = new Input();
     this.canvas = document.getElementById('stage');
     this.players = new Map();
-    this.self = { x: 0, y: 0, vx: 0, vy: 0, facing: 1, state: 'idle', phase: 0, equipment: {}, onGround: true };
+    this.self = { x: 0, y: 0, vx: 0, vy: 0, facing: 1, state: 'idle', phase: 0, equipment: {} };
     this.currentMap = null;
     this.farm = null;
     this.paused = false;
@@ -345,39 +345,38 @@ class Game {
     const map = this.currentMap;
     const self = this.self;
 
-    const direction = (this.input.keys.right ? 1 : 0) - (this.input.keys.left ? 1 : 0);
-    self.vx = direction * RUN_SPEED;
-    if (direction !== 0) self.facing = direction;
+    // Nhìn ngang nhưng đi được BỐN HƯỚNG trong một dải đất (doc 03).
+    //
+    // Không có trọng lực, không có nhảy, không có platform: đi lên là lùi vào
+    // trong theo chiều sâu chứ không phải bay lên. Nhờ vậy không ai trèo được
+    // lên nóc nhà, và cảnh vật phía sau luôn là nền chứ không thành chỗ đứng.
+    const dirX = (this.input.keys.right ? 1 : 0) - (this.input.keys.left ? 1 : 0);
+    const dirY = (this.input.keys.down ? 1 : 0) - (this.input.keys.up ? 1 : 0);
+    if (dirX !== 0) self.facing = dirX;
 
-    if (this.input.keys.jump && self.onGround) {
-      self.vy = -JUMP_SPEED;
-      self.onGround = false;
-    }
+    // Đi chéo không được nhanh hơn đi thẳng.
+    const len = Math.hypot(dirX, dirY) || 1;
+    self.vx = (dirX / len) * RUN_SPEED;
+    // Trục dọc là CHIỀU SÂU nên đi chậm hơn: cùng một quãng đường trên màn hình
+    // ứng với quãng đường xa hơn trong không gian, đi bằng tốc độ ngang sẽ thấy
+    // như trượt.
+    self.vy = (dirY / len) * RUN_SPEED * DEPTH_SPEED;
 
-    self.vy += GRAVITY * dt;
+    const backY = map.ground_y - (map.walk_depth ?? 0);
     self.x = Math.max(20, Math.min(map.width - 20, self.x + self.vx * dt));
-    self.y += self.vy * dt;
+    self.y = Math.max(backY, Math.min(map.ground_y, self.y + self.vy * dt));
 
-    // Va chạm: mặt đất và các platform (doc 03).
-    const surfaces = [{ x: -1e6, y: map.ground_y, w: 2e6 }, ...(map.platforms ?? []).map((p) => ({ x: p.x, y: p.y, w: p.w }))];
-    self.onGround = false;
-    for (const surface of surfaces) {
-      const within = self.x >= surface.x - 6 && self.x <= surface.x + surface.w + 6;
-      if (within && self.vy >= 0 && self.y >= surface.y && self.y - self.vy * dt <= surface.y + 12) {
-        self.y = surface.y;
-        self.vy = 0;
-        self.onGround = true;
-        break;
-      }
-    }
+    const moving = dirX !== 0 || dirY !== 0;
+    self.state = moving ? 'walk' : 'idle';
+    self.phase = (self.phase + dt * (moving ? 2.6 : 1)) % 1;
 
-    self.state = !self.onGround ? 'jump' : direction !== 0 ? 'run' : 'idle';
-    self.phase = (self.phase + dt * (self.state === 'run' ? 3.2 : 1)) % 1;
-
-    if (self.state !== this.lastSentState || Math.abs(self.x - (this.lastSentX ?? 0)) > 1) {
+    if (self.state !== this.lastSentState
+      || Math.abs(self.x - (this.lastSentX ?? 0)) > 1
+      || Math.abs(self.y - (this.lastSentY ?? 0)) > 1) {
       this.realtime.sendMove({ x: Math.round(self.x), y: Math.round(self.y), facing: self.facing, state: self.state });
       this.lastSentState = self.state;
       this.lastSentX = self.x;
+      this.lastSentY = self.y;
     }
 
     // Nội suy vị trí người chơi khác.

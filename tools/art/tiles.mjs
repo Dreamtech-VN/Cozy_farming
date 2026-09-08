@@ -11,6 +11,8 @@ export const TILE_NAMES = [
   'dirt_a', 'dirt_b',
   'stone_a', 'stone_b',
   'water_a', 'water_b',
+  // Thêm CUỐI danh sách để chỉ số của các tile cũ không đổi.
+  'grass_fill_a', 'grass_fill_b',
 ];
 
 /** Nhiễu cố định theo toạ độ — cùng một tile luôn ra cùng một hoa văn. */
@@ -36,6 +38,25 @@ function grassTop(px, ox, variant) {
     const y = 8 + Math.floor(noise(i, variant, 23) * 6);
     px.set(ox + x, y, P.dirtDark);
     px.set(ox + x + 1, y, P.dirtDark);
+  }
+}
+
+/**
+ * Cỏ đặc, dùng lát mặt sàn của dải đi được.
+ *
+ * Khác `grass_top` ở chỗ KHÔNG có đất bên dưới: lát grass_top cho cả dải thì
+ * mỗi hàng lại lộ ra một vạch đất, mặt sàn thành ra sọc ngang.
+ */
+function grassFill(px, ox, variant) {
+  // Màu PHẲNG chứ không chuyển màu dọc: tile này lát chồng nhau theo chiều dọc,
+  // chuyển màu sẽ tạo một đường nối rõ mồn một ở mỗi mối ghép.
+  px.rect(ox, 0, TILE, TILE, P.grass);
+  for (let i = 0; i < 14; i++) {
+    const x = 1 + Math.floor(noise(i, variant, 71) * (TILE - 2));
+    const y = 1 + Math.floor(noise(i, variant, 83) * (TILE - 2));
+    const bright = noise(i, variant, 97) > 0.45;
+    px.set(ox + x, y, bright ? P.grassLight : P.grassDark);
+    if (!bright) px.set(ox + x, y + 1, P.grassDark);
   }
 }
 
@@ -77,6 +98,7 @@ export function drawTiles(px) {
     (o) => dirt(px, o, 0), (o) => dirt(px, o, 1),
     (o) => stone(px, o, 0), (o) => stone(px, o, 1),
     (o) => water(px, o, 0), (o) => water(px, o, 1),
+    (o) => grassFill(px, o, 0), (o) => grassFill(px, o, 1),
   ];
   draw.forEach((fn, i) => fn(i * TILE));
 }

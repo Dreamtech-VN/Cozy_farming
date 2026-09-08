@@ -10,6 +10,8 @@ import { atlas } from './atlas.js';
 
 /** Tile 16px phóng 3 lần: đủ to để thấy rõ pixel mà không vỡ hình. */
 const TILE_SCALE = 3;
+// Chỉ số của tile cỏ đặc trong tileset (xem tools/art/tiles.mjs).
+const GRASS_FILL = 9;
 
 /** Chọn biến thể tile cố định theo cột, để cùng một chỗ luôn ra cùng hoa văn. */
 const hashCol = (mapId, col) => Math.abs(hashString(`${mapId}:${col}`));
@@ -31,7 +33,10 @@ const hashCol = (mapId, col) => Math.abs(hashString(`${mapId}:${col}`));
 const LAYERS = {
   hillsFar:  { factor: 0.12, slot: 300, baseY: -96, kinds: ['tree_big', 'tree_small'], scale: [1.5, 2.2], skip: 0.1, haze: 0.62 },
   hillsNear: { factor: 0.30, slot: 260, baseY: -58, kinds: ['tree_big', 'bush', 'rock'], scale: [1.5, 2.2], skip: 0.15, haze: 0.34 },
-  mid:       { factor: 0.55, slot: 300, baseY: 0, kinds: ['house', 'stall', 'tree_big', 'tree_small', 'haystack'], scale: [1.8, 2.6], skip: 0.2, haze: 0.1 },
+  // Cảnh vật lớp giữa đứng ở MÉP SAU của dải đi được, không phải mép trước:
+  // như vậy mọi vị trí người chơi đứng được đều ở phía trước nó, khỏi phải xen
+  // nhân vật vào giữa dãy nhà theo độ sâu.
+  mid:       { factor: 0.55, slot: 300, anchor: 'walkBack', baseY: 0, kinds: ['house', 'stall', 'tree_big', 'tree_small', 'haystack'], scale: [1.8, 2.6], skip: 0.2, haze: 0.1 },
   /*
    * Tiền cảnh: chỉ một viền cỏ ở SÁT MÉP DƯỚI màn hình.
    *
@@ -111,10 +116,13 @@ export class WorldRenderer {
     const halfW = this.viewWidth / 2;
     this.camera.x = map.width < this.viewWidth ? map.width / 2 : Math.max(halfW, Math.min(map.width - halfW, target.x));
 
-    // Camera dọc bám người chơi và chỉ chặn phía TRÊN (không lộ ra ngoài trời của
-    // map). Phía dưới cứ để tràn: nền đất được vẽ kéo dài xuống hết khung nhìn,
-    // nên màn hình dọc không bị dồn hết cảnh vật xuống đáy.
-    this.camera.y = Math.max(this.anchorY - 40, target.y);
+    // Camera dọc neo vào MÉP TRƯỚC của dải đất, KHÔNG bám người chơi.
+    //
+    // Trục dọc giờ là chiều sâu chứ không phải độ cao: bám theo thì đi lùi vào
+    // trong làm cả thế giới trôi xuống và nhân vật lơ lửng giữa trời. Neo cố
+    // định thì dải đất đứng yên, người chơi đi lùi chỉ nhỏ lại và lùi lên trong
+    // khung — đúng cảm giác đi sâu vào trong.
+    this.camera.y = Math.max(this.anchorY - 40, map.ground_y);
   }
 
   render(map, { players, self, farm, hintTarget, time }) {
@@ -130,17 +138,21 @@ export class WorldRenderer {
 
     this.#drawBackground(map, time);
     this.#drawGround(map);
-    this.#drawPlatforms(map);
+    // Nhà cửa dựng trên mép sau của sàn, nên vẽ sau sàn — vẽ trước thì sàn phủ
+    // lên và cắt cụt chân nhà.
+    this.#drawLayer(map, 'mid', time);
     if (farm) this.#drawFarm(map, farm, time);
     this.#drawObjects(map, hintTarget);
     this.#drawPortals(map, hintTarget);
     this.#drawNpcs(map, hintTarget, time);
 
+    // Xếp theo y: ai đứng gần mép trước thì vẽ sau, che người phía sau.
     const everyone = [...players, self].sort((a, b) => a.y - b.y);
     for (const player of everyone) {
       ctx.save();
       ctx.translate(player.x, player.y);
       drawAvatar(ctx, this.content, {
+        scale: depthScale(map, player.y),
         equipment: player.equipment,
         bodyType: player.bodyType,
         facing: player.facing,
@@ -266,7 +278,9 @@ export class WorldRenderer {
       // camera đang ở đâu.
       const anchorBase = spec.anchor === 'viewBottom'
         ? this.camera.y + (this.viewHeight - this.anchorY)
-        : map.ground_y;
+        : spec.anchor === 'walkBack'
+          ? map.ground_y - (map.walk_depth ?? 0)
+          : map.ground_y;
       const y = anchorBase + spec.baseY;
       atlas.prop(ctx, kind, x, y, scale);
     }
@@ -302,7 +316,8 @@ export class WorldRenderer {
 
     this.#drawLayer(map, 'hillsFar', time);
     this.#drawLayer(map, 'hillsNear', time);
-    this.#drawLayer(map, 'mid', time);
+    // Lớp giữa KHÔNG vẽ ở đây: nó đứng ở mép sau của dải đi được, tức là đứng
+    // TRÊN mặt sàn, nên phải vẽ sau mặt sàn. Xem render().
   }
 
   /** Một dải đồi liền mạch; các mảnh chồng lên nhau nên không thành gò rời rạc. */
@@ -331,9 +346,15 @@ export class WorldRenderer {
     // nếu chỉ fill tới map.height thì lộ ra khoảng trời ở dưới chân nhân vật.
     const depth = map.height - map.ground_y + this.viewHeight + 400;
 
+    // Mặt sàn phải phủ HẾT dải đi được, không chỉ một vạch ở ground_y: dải sâu
+    // 150px mà chỉ vẽ cỏ ở mép trước thì người chơi đi lùi vào trong sẽ đứng
+    // lửng lơ trên nền trời.
+    const walk = map.walk_depth ?? 0;
+    const top = map.ground_y - walk;
+
     if (!atlas.ready) {
       ctx.fillStyle = map.theme.ground;
-      ctx.fillRect(-200, map.ground_y, map.width + 400, depth);
+      ctx.fillRect(-200, top, map.width + 400, depth + walk);
       return;
     }
 
@@ -347,45 +368,26 @@ export class WorldRenderer {
     const viewBottom = this.camera.y + (this.viewHeight - this.anchorY);
     const left = Math.floor((viewLeft - size) / size) * size;
     const right = viewLeft + this.viewWidth + size;
-    const rows = Math.ceil(depth / size);
+    // Số hàng cỏ phủ dải đi được, làm tròn LÊN để mép sau không hở một vệt.
+    const grassRows = Math.ceil(walk / size);
+    const rows = grassRows + Math.ceil(depth / size);
     const seed = hashString(map.map_id);
+    const startY = map.ground_y - grassRows * size;
 
     for (let x = left; x < right; x += size) {
       const col = Math.round(x / size);
       for (let row = 0; row < rows; row++) {
-        const y = map.ground_y + row * size;
+        const y = startY + row * size;
         if (y > viewBottom + size) break;
-        // Hàng đầu là mặt cỏ (3 biến thể), các hàng dưới là đất (2 biến thể).
-        const index = row === 0
-          ? Math.abs(hashString(`${seed}:${col}`)) % 3
-          : 3 + (Math.abs(hashString(`${seed}:${col}:${row}`)) % 2);
+        // Ba tầng: sàn cỏ đặc cho dải đi được, một hàng mép cỏ đúng ở
+        // `ground_y`, rồi mặt cắt đất phía dưới.
+        const pick = Math.abs(hashString(`${seed}:${col}:${row}`));
+        const index = row < grassRows
+          ? GRASS_FILL + (pick % 2)          // sàn cỏ đặc
+          : row === grassRows
+            ? pick % 3                       // mép cỏ ở ground_y
+            : 3 + (pick % 2);                // đất
         atlas.tile(ctx, index, x, y, TILE_SCALE);
-      }
-    }
-  }
-
-  #drawPlatforms(map) {
-    const ctx = this.ctx;
-    for (const platform of map.platforms ?? []) {
-      if (!atlas.ready) {
-        ctx.fillStyle = shade(map.theme.ground, -8);
-        roundRect(ctx, platform.x, platform.y, platform.w, platform.h, 6);
-        continue;
-      }
-      // Bệ đứng lát bằng chính tile mặt đất, khỏi lạc chất với nền.
-      const size = atlas.meta.tiles.size * TILE_SCALE;
-      const cols = Math.max(1, Math.round(platform.w / size));
-      const step = platform.w / cols;
-      for (let i = 0; i < cols; i++) {
-        const x = platform.x + i * step;
-        ctx.save();
-        // Co theo CẢ HAI chiều cho khớp kích thước bệ. Trước đây chỉ co ngang
-        // nên tile cao 48px vẽ đè lên cái bệ khai báo cao 24px: hình cao gấp
-        // đôi vùng va chạm thật, nhìn ra một mảng đất cỏ lơ lửng giữa trời.
-        ctx.translate(x, platform.y);
-        ctx.scale(step / size, platform.h / size);
-        atlas.tile(ctx, hashCol(map.map_id, i) % 3, 0, 0, TILE_SCALE);
-        ctx.restore();
       }
     }
   }
@@ -471,6 +473,7 @@ export class WorldRenderer {
       // NPC không có tủ đồ: sprite khai thẳng trong data map. `palette` giữ lại
       // cho đường lui vẽ bằng hình khối khi art chưa tải xong.
       drawAvatar(ctx, this.content, {
+        scale: depthScale(map, npc.y),
         sprite: npc.sprite,
         equipment: {},
         palette: { body: npc.palette[0], top: npc.palette[1], hair: npc.palette[2] },
@@ -558,6 +561,20 @@ function seededRandom(seed) {
 
 /** Làm sáng/tối một màu hex — dùng để dựng bảng màu phái sinh cho từng map. */
 /** Trộn hai màu hex theo tỉ lệ — dùng cho phối cảnh trên không của các dải đồi. */
+/**
+ * Thu nhỏ theo chiều sâu: đứng càng lùi vào trong thì càng nhỏ.
+ *
+ * Không có nó thì đi lùi vào trong nhìn như trượt ngang trên kính — mắt không
+ * đọc ra chiều sâu, chỉ thấy nhân vật đổi chỗ. 12% là đủ để cảm được mà không
+ * làm nhân vật ở mép sau bé như đồ chơi.
+ */
+export function depthScale(map, y) {
+  const depth = map.walk_depth ?? 0;
+  if (!depth) return 1;
+  const back = (map.ground_y - y) / depth;
+  return 1 - Math.max(0, Math.min(1, back)) * 0.12;
+}
+
 export function mixColour(a, b, k) {
   const parse = (hex) => {
     const v = hex.replace('#', '');

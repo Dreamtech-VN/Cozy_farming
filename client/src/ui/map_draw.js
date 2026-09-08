@@ -25,7 +25,7 @@ const COLORS = {
 function fitTransform(canvas, map, padding) {
   // Chỉ lấy dải có nội dung theo chiều dọc. Map cao 720 nhưng mặt đất ở 600 nên
   // hơn 80% chiều cao là trời trống — vẽ cả vào bản đồ thì chỉ tổ phí khung.
-  const highest = Math.min(map.ground_y - 40, ...(map.platforms ?? []).map((p) => p.y - 30));
+  const highest = map.ground_y - (map.walk_depth ?? 0) - 40;
   const top = Math.max(0, Math.min(highest, map.ground_y - 260));
   const bottom = Math.min(map.height, map.ground_y + 70);
   const span = Math.max(1, bottom - top);
@@ -78,11 +78,6 @@ export function drawAreaMap(canvas, map, { self, players = [], detail = false } 
   ctx.fillStyle = 'rgba(255, 255, 255, .28)';
   ctx.fillRect(fit.x(0), fit.y(map.ground_y), map.width * fit.scale, Math.max(1.5 * dpr, 2 * dpr));
 
-  for (const platform of map.platforms ?? []) {
-    ctx.fillStyle = COLORS.platform;
-    ctx.fillRect(fit.x(platform.x), fit.y(platform.y), platform.w * fit.scale,
-      Math.max(3 * dpr, platform.h * fit.scaleY));
-  }
 
   ctx.textAlign = 'center';
   ctx.font = `600 ${11 * dpr}px system-ui, sans-serif`;

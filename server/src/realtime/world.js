@@ -194,7 +194,7 @@ export function createWorld(ctx) {
 
     let corrected = false;
     if (distance > maxDistance) corrected = true;
-    if (!standsOnSurface(map, clampedX, clampedY)) corrected = true;
+    if (!insideWalkBand(map, clampedY)) corrected = true;
 
     if (corrected) {
       member.conn.sendJson({ type: 'position_correction', x: member.x, y: member.y });
@@ -202,20 +202,22 @@ export function createWorld(ctx) {
       member.x = clampedX;
       member.y = clampedY;
       member.facing = payload.facing === -1 ? -1 : 1;
-      member.state = ['idle', 'walk', 'run', 'jump', 'sit', 'farm'].includes(payload.state) ? payload.state : 'idle';
+      member.state = ['idle', 'walk', 'run', 'sit', 'farm'].includes(payload.state) ? payload.state : 'idle';
     }
     member.lastMoveAt = now;
     member.lastSeenAt = now;
   }
 
-  /** Đứng trên mặt đất hoặc trên một platform (doc 03 — collision). */
-  function standsOnSurface(map, x, y) {
-    if (Math.abs(y - map.ground_y) <= 8) return true;
-    for (const platform of map.platforms ?? []) {
-      if (x >= platform.x - 8 && x <= platform.x + platform.w + 8 && Math.abs(y - platform.y) <= 8) return true;
-    }
-    // Cho phép ở trên không (đang nhảy) miễn là không rơi xuyên đất.
-    return y < map.ground_y;
+  /**
+   * Trong dải đất đi được (doc 03 — collision).
+   *
+   * Không còn platform: nhìn ngang nhưng trục dọc là CHIỀU SÂU, nên hợp lệ
+   * nghĩa là nằm giữa mép trước (`ground_y`) và mép sau (`ground_y -
+   * walk_depth`). Kiểm ở server vì client chỉ là bản dự đoán.
+   */
+  function insideWalkBand(map, y) {
+    const back = map.ground_y - (map.walk_depth ?? 0);
+    return y >= back - 8 && y <= map.ground_y + 8;
   }
 
   function handleChat(member, payload) {

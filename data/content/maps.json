@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "comment": "Doc 03 — map 2D side-view. ground_y là mặt đất mặc định; platforms là các bệ đứng thêm.",
+  "comment": "Doc 03 — map nhìn ngang nhưng đi được bốn hướng. ground_y là mép TRƯỚC của dải đất, walk_depth là độ sâu lùi về sau. Không có platform: trục dọc là chiều sâu chứ không phải độ cao, nên không trèo lên nóc nhà được.",
   "world": {
     "comment": "Doc 03/16 — map public chia thành nhiều khu (channel); doc 03 — weather/day-night flags.",
     "channel_count": 20,
@@ -96,14 +96,6 @@
           "id": "spawn_from_farm_village",
           "x": 180,
           "y": 600
-        }
-      ],
-      "platforms": [
-        {
-          "x": 900,
-          "y": 470,
-          "w": 260,
-          "h": 24
         }
       ],
       "portals": [
@@ -202,7 +194,8 @@
           "plant_flowerbed_stone",
           "prop_birdbath"
         ]
-      }
+      },
+      "walk_depth": 150
     },
     {
       "map_id": "map_city_shopping",
@@ -235,7 +228,6 @@
           "y": 600
         }
       ],
-      "platforms": [],
       "portals": [
         {
           "portal_id": "portal_shopping_plaza",
@@ -315,7 +307,8 @@
           "cart_icecream",
           "prop_lamppost"
         ]
-      }
+      },
+      "walk_depth": 150
     },
     {
       "map_id": "map_farm_village",
@@ -348,7 +341,6 @@
           "y": 610
         }
       ],
-      "platforms": [],
       "portals": [
         {
           "portal_id": "portal_village_plaza",
@@ -432,7 +424,8 @@
           "barrels_stack",
           "stall_kiosk"
         ]
-      }
+      },
+      "walk_depth": 150
     },
     {
       "map_id": "map_player_farm",
@@ -460,7 +453,6 @@
           "y": 610
         }
       ],
-      "platforms": [],
       "portals": [
         {
           "portal_id": "portal_farm_village",
@@ -513,7 +505,8 @@
           "prop_trellis",
           "prop_gate_wood"
         ]
-      }
+      },
+      "walk_depth": 150
     },
     {
       "map_id": "map_forest",
@@ -539,20 +532,6 @@
           "id": "spawn_default",
           "x": 200,
           "y": 600
-        }
-      ],
-      "platforms": [
-        {
-          "x": 1200,
-          "y": 470,
-          "w": 300,
-          "h": 24
-        },
-        {
-          "x": 1750,
-          "y": 380,
-          "w": 220,
-          "h": 24
         }
       ],
       "portals": [
@@ -617,7 +596,8 @@
           "prop_birdbath",
           "plant_bamboo"
         ]
-      }
+      },
+      "walk_depth": 150
     }
   ]
 }
