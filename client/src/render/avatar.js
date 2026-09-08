@@ -269,4 +269,8 @@ export function drawAvatarPortrait(canvas, content, options) {
   ctx.scale(zoom, zoom);
   drawAvatar(ctx, content, { ...options, facing: 1, state: 'idle', phase: 0, nickname: null, emote: null });
   ctx.restore();
+
+  // Chân dung vẽ đúng một lần lúc cập nhật HUD. Nếu art nhân vật chưa tải xong
+  // thì lần vẽ đó rơi vào bản dự phòng rồi nằm im mãi — phải tự hẹn vẽ lại.
+  atlas.pendingFor(spriteOf(options))?.then(() => drawAvatarPortrait(canvas, content, options));
 }

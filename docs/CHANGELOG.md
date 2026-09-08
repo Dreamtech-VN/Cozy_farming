@@ -3,6 +3,45 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.18.0 — 2026-09-08
+
+### Thêm — tranh nền cho các màn ngoài game
+`art-src/ui/entry.png` và `splash.png` làm nền cho màn đăng nhập, tạo tài khoản
+và màn chờ tải. Game có tên: **Sunny Town** (logo nằm sẵn trong tranh).
+
+Bản mẫu có ô nhập và nút **vẽ chết vào tranh** — không bấm được. Nên phủ mờ dải
+giữa để phần đó tan vào nền rồi đặt form thật đè lên. Vùng phủ tính theo phần
+trăm bề ngang nên co giãn màn hình vẫn che đúng chỗ, và bắt đầu từ 36% chiều cao
+trở xuống để không xoá mất logo (logo nằm ở 5–33%, giao diện vẽ chết ở 46–75%).
+
+- `tools/prep-ui.mjs` (`npm run prep-ui`) — thu nhỏ và nén ảnh nền.
+- **Bộ ghi PNG có thêm chế độ bảng màu** (`toIndexedPng`): median cut 256 màu +
+  khuếch tán sai số Floyd–Steinberg. Ảnh nền **1.941 KB → 498 KB (−74%)**. Cần
+  thiết vì ảnh này hiện ra trước cả màn chờ tải — đúng lúc không được phép chậm.
+  Không dùng cho sprite: bảng màu chỉ giữ được một mức alpha cho mỗi ô màu.
+- Thẻ ngoài game đổi sang kiểu trắng bo tròn với nút chính vàng, thay cho khung
+  gỗ vốn là phong cách trong game và đặt lên tranh sáng thì nặng và tối.
+
+### Bỏ — chọn màu từng bộ phận khi tạo nhân vật
+Nhân vật là art vẽ sẵn nguyên bộ, đổi "màu da" hay "màu tóc" không làm hình đổi
+gì cả. Để lại là mời người chơi bấm vào thứ vô tác dụng. Chỉ còn chọn nhân vật.
+Trang phục vẫn ghi mặc định vào `appearance` nên mô hình dữ liệu không đổi.
+
+### Sửa
+- **`position: relative` trong quy tắc tranh nền đè mất `position: absolute` của
+  `#overlay`**, làm mất `inset: 0` và vỡ cả khung nhìn — thẻ nằm ngoài màn hình,
+  không bấm được.
+- **Thẻ cao hơn khung nhìn bị cắt cụt đầu trên và không cuộn tới được** — lỗi
+  kinh điển của flex căn giữa. Dùng `align-items: safe center`.
+- **Chân dung trên HUD trống trơn** khi art nhân vật tới sau. Chân dung vẽ đúng
+  một lần lúc cập nhật HUD, không có vòng lặp nào vẽ lại hộ; nay tự hẹn vẽ lại
+  qua `atlas.pendingFor()`. Đo được: 0% lúc đầu → 44% sau khi art tới.
+- **Trang nhân vật tải hai lần**: khởi động sớm cho ô xem trước ở màn tạo tài
+  khoản, rồi `preloadAll()` tải lại lần nữa vì chỉ kiểm ảnh đã xong chứ không
+  kiểm lượt tải đang chạy dở. Mất thêm đúng 2,2 MB.
+- Mép vùng phủ mờ mờ dần cả bốn phía; chỉ mờ dần hai bên thì mép trên thành một
+  đường kẻ ngang cắt ngang tranh.
+
 ## 0.17.1 — 2026-09-08
 
 ### Sửa — sprite nhân vật bị xén cụt góc

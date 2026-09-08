@@ -217,3 +217,107 @@ export function readPng(buffer) {
   }
   return { width, height, data };
 }
+
+/**
+ * Ghi PNG dùng BẢNG MÀU (tối đa 256 màu) thay vì màu thật.
+ *
+ * Dành cho ảnh nền lớn: art vẽ tay có chuyển màu mềm nên mỗi pixel một giá trị
+ * khác nhau, deflate gần như không nén được. Rút về 256 màu cộng với khuếch tán
+ * sai số làm ảnh nén được gấp mấy lần mà mắt gần như không phân biệt — nhất là
+ * khi ảnh còn bị phủ mờ và bị giao diện che một phần.
+ *
+ * Không dùng cho sprite: sprite cần alpha mượt ở mép, mà bảng màu chỉ giữ được
+ * một mức alpha cho mỗi ô màu.
+ */
+export function toIndexedPng(width, height, data, maxColours = 256) {
+  // Cắt đôi hộp màu theo trục trải rộng nhất (median cut). Đơn giản, không cần
+  // vòng lặp hội tụ như k-means, và ổn định: cùng đầu vào ra cùng bảng màu.
+  const pixels = [];
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i + 3] < 128) continue; // pixel trong suốt không tham gia chọn màu
+    pixels.push([data[i], data[i + 1], data[i + 2]]);
+  }
+  let boxes = [pixels];
+  while (boxes.length < maxColours - 1) {
+    let pick = -1; let spread = -1; let axis = 0;
+    boxes.forEach((box, i) => {
+      if (box.length < 2) return;
+      for (let c = 0; c < 3; c++) {
+        let lo = 255; let hi = 0;
+        for (const p of box) { if (p[c] < lo) lo = p[c]; if (p[c] > hi) hi = p[c]; }
+        if (hi - lo > spread) { spread = hi - lo; pick = i; axis = c; }
+      }
+    });
+    if (pick === -1 || spread <= 0) break;
+    const box = boxes[pick];
+    box.sort((a, b) => a[axis] - b[axis]);
+    const mid = box.length >> 1;
+    boxes.splice(pick, 1, box.slice(0, mid), box.slice(mid));
+  }
+
+  const palette = boxes.filter((b) => b.length).map((box) => {
+    const sum = [0, 0, 0];
+    for (const p of box) { sum[0] += p[0]; sum[1] += p[1]; sum[2] += p[2]; }
+    return sum.map((v) => Math.round(v / box.length));
+  });
+  palette.unshift([0, 0, 0]); // ô 0 dành cho pixel trong suốt
+
+  const nearest = (r, g, b) => {
+    let best = 1; let bestDist = Infinity;
+    for (let i = 1; i < palette.length; i++) {
+      const p = palette[i];
+      const d = (p[0] - r) ** 2 + (p[1] - g) ** 2 + (p[2] - b) ** 2;
+      if (d < bestDist) { bestDist = d; best = i; }
+    }
+    return best;
+  };
+
+  // Khuếch tán sai số Floyd–Steinberg: không có nó thì vùng trời chuyển màu
+  // mềm bị vỡ thành từng dải rõ mồn một.
+  const work = Float32Array.from(data);
+  const indexed = new Uint8Array(width * height);
+  const spread = (x, y, er, eg, eb, k) => {
+    if (x < 0 || y < 0 || x >= width || y >= height) return;
+    const i = (y * width + x) * 4;
+    work[i] += er * k; work[i + 1] += eg * k; work[i + 2] += eb * k;
+  };
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const i = (y * width + x) * 4;
+      if (data[i + 3] < 128) { indexed[y * width + x] = 0; continue; }
+      const r = Math.max(0, Math.min(255, work[i]));
+      const g = Math.max(0, Math.min(255, work[i + 1]));
+      const b = Math.max(0, Math.min(255, work[i + 2]));
+      const idx = nearest(r, g, b);
+      indexed[y * width + x] = idx;
+      const er = r - palette[idx][0], eg = g - palette[idx][1], eb = b - palette[idx][2];
+      spread(x + 1, y, er, eg, eb, 7 / 16);
+      spread(x - 1, y + 1, er, eg, eb, 3 / 16);
+      spread(x, y + 1, er, eg, eb, 5 / 16);
+      spread(x + 1, y + 1, er, eg, eb, 1 / 16);
+    }
+  }
+
+  const raw = Buffer.alloc(height * (width + 1));
+  for (let y = 0; y < height; y++) {
+    raw[y * (width + 1)] = 0; // ảnh bảng màu: lọc theo dòng gần như không giúp gì
+    Buffer.from(indexed.buffer, y * width, width).copy(raw, y * (width + 1) + 1);
+  }
+
+  const plte = Buffer.alloc(palette.length * 3);
+  palette.forEach((p, i) => { plte[i * 3] = p[0]; plte[i * 3 + 1] = p[1]; plte[i * 3 + 2] = p[2]; });
+  const trns = Buffer.from([0]); // chỉ ô 0 trong suốt
+
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(width, 0);
+  ihdr.writeUInt32BE(height, 4);
+  ihdr[8] = 8; ihdr[9] = 3; ihdr[10] = 0; ihdr[11] = 0; ihdr[12] = 0;
+  return Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    chunk('IHDR', ihdr),
+    chunk('PLTE', plte),
+    chunk('tRNS', trns),
+    chunk('IDAT', deflateSync(raw, { level: 9 })),
+    chunk('IEND', Buffer.alloc(0)),
+  ]);
+}

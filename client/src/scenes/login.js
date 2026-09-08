@@ -25,7 +25,7 @@ export function showLogin(game) {
     }
   };
 
-  const card = el('div', { class: 'card' }, [
+  const card = el('div', { class: 'card entry' }, [
     el('h1', { text: 'Chào mừng trở lại' }),
     el('p', { class: 'lead', text: 'Đăng nhập để vào thế giới và chăm sóc nông trại của bạn.' }),
     error,
@@ -38,7 +38,7 @@ export function showLogin(game) {
   ]);
 
   password.addEventListener('keydown', (event) => { if (event.key === 'Enter') submit(); });
-  showOverlay(card);
+  showOverlay(card, { backdrop: 'entry' });
 }
 
 export function showRegister(game) {
@@ -54,7 +54,7 @@ export function showRegister(game) {
   for (const slot of slots) appearance[slot] = defaults.find((item) => item.slot === slot)?.item_id;
 
   const preview = el('canvas', { width: 200, height: 260 });
-  preview.style.cssText = 'width:150px;height:195px;display:block;margin:0 auto 12px';
+  preview.style.cssText = 'width:112px;height:146px;display:block;margin:0 auto 8px';
 
   const drawPreview = () => {
     const ctx = preview.getContext('2d');
@@ -92,24 +92,11 @@ export function showRegister(game) {
       }))),
   ]);
 
-  const pickers = slots.map((slot) => {
-    const options = defaults.filter((item) => item.slot === slot);
-    if (options.length <= 1) return null;
-    const row = el('div', { class: 'swatches' }, options.map((item) =>
-      el('button', {
-        class: 'swatch', type: 'button', title: t(item.name_key),
-        style: `background:${item.colors[0]}`,
-        'aria-pressed': appearance[slot] === item.item_id ? 'true' : 'false',
-        onClick: (event) => {
-          appearance[slot] = item.item_id;
-          for (const sibling of event.currentTarget.parentElement.children) sibling.setAttribute('aria-pressed', 'false');
-          event.currentTarget.setAttribute('aria-pressed', 'true');
-          drawPreview();
-        },
-      })));
-    return el('div', { class: 'field' }, [el('label', { text: SLOT_LABEL[slot] }), row]);
-  }).filter(Boolean);
-  pickers.unshift(heroPicker);
+  // Không còn picker màu theo slot: nhân vật là art vẽ sẵn nguyên bộ, đổi "màu
+  // da" hay "màu tóc" không làm hình đổi gì cả. Để lại là lừa người chơi bấm
+  // vào thứ vô tác dụng. Trang phục vẫn ghi mặc định vào `appearance` nên mô
+  // hình dữ liệu không đổi, chờ khi nào có art tháo rời được thì mở lại.
+  const pickers = [heroPicker];
 
   const submit = async () => {
     error.classList.add('hidden');
@@ -129,9 +116,9 @@ export function showRegister(game) {
     }
   };
 
-  showOverlay(el('div', { class: 'card' }, [
+  showOverlay(el('div', { class: 'card entry' }, [
     el('h1', { text: 'Tạo nhân vật' }),
-    el('p', { class: 'lead', text: 'Chọn ngoại hình khởi đầu — bạn có thể đổi lại bất cứ lúc nào trong game.' }),
+    el('p', { class: 'lead', text: 'Chọn nhân vật và đặt tên để bắt đầu.' }),
     error,
     preview,
     el('div', { class: 'field' }, [el('label', { text: 'Tên đăng nhập' }), username]),
@@ -142,7 +129,7 @@ export function showRegister(game) {
       el('button', { class: 'ghost', type: 'button', text: 'Đã có tài khoản', onClick: () => showLogin(game) }),
       el('button', { class: 'primary', type: 'button', text: 'Bắt đầu chơi', onClick: submit }),
     ]),
-  ]));
+  ]), { backdrop: 'entry' });
   drawPreview();
 }
 

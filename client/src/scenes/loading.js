@@ -26,12 +26,12 @@ export async function showLoading() {
     'aria-valuenow': '0',
   }, [bar]);
 
-  showOverlay(el('div', { class: 'card loading-card' }, [
+  showOverlay(el('div', { class: 'card entry loading-card' }, [
     el('h1', { text: 'Đang tải thế giới' }),
     el('p', { class: 'lead', text: 'Tải xong một lần, lần sau vào sẽ nhanh vì trình duyệt giữ lại.' }),
     track,
     el('div', { class: 'progress-row' }, [pct, size]),
-  ]));
+  ]), { backdrop: 'splash' });
 
   await atlas.preloadAll(({ loaded, total: all }) => {
     const ratio = all ? Math.min(1, loaded / all) : 1;

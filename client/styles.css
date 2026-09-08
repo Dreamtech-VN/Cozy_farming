@@ -1023,3 +1023,116 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
   border-color: var(--gold);
   background: var(--cream);
 }
+
+/* Tranh nền cho các màn ngoài game. Giao diện trong tranh (ô nhập, nút) là hình
+   VẼ CHẾT, không bấm được — nên phủ mờ dải giữa để nó tan vào nền, rồi đặt form
+   thật đè lên. Phủ theo phần trăm bề ngang nên co giãn màn hình vẫn che đúng
+   chỗ, khác với căn theo pixel cố định. */
+/* KHÔNG đặt position ở đây: #overlay đã là absolute, ghi đè thành relative là
+   mất luôn inset:0 và cả khung nhìn vỡ theo. */
+#overlay.backdrop-entry,
+#overlay.backdrop-splash {
+  background: #6fc0ee center / cover no-repeat;
+  /* Đẩy thẻ xuống để không che chân chữ của logo trong tranh. */
+  padding-top: clamp(16px, 13vh, 150px);
+  /* `safe` cứu trường hợp thẻ cao hơn khung nhìn: căn giữa thường sẽ cắt cụt
+     phần thò ra ở ĐẦU TRÊN và không cuộn tới được. */
+  align-items: safe center;
+}
+#overlay.backdrop-entry { background-image: url('/assets/ui/entry.png'); }
+#overlay.backdrop-splash { background-image: url('/assets/ui/splash.png'); }
+
+/* Bắt đầu từ 36% chiều cao trở xuống: logo trong tranh nằm ở khoảng 5–33%, phủ
+   mờ lên đó là xoá mất luôn thương hiệu. Giao diện vẽ chết nằm ở 46–75% nên
+   36% là đủ sớm để che hết. */
+#overlay.backdrop-entry::before,
+#overlay.backdrop-splash::before {
+  content: '';
+  position: absolute;
+  top: 36%;
+  bottom: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: clamp(420px, 58vw, 760px);
+  backdrop-filter: blur(22px) saturate(.85);
+  -webkit-backdrop-filter: blur(22px) saturate(.85);
+  background: linear-gradient(90deg, rgba(24, 42, 60, 0), rgba(24, 42, 60, .28) 18%, rgba(24, 42, 60, .28) 82%, rgba(24, 42, 60, 0));
+  /* Mép mờ dần hai bên để không thành một khối chữ nhật cắm giữa tranh. */
+  /* Mờ dần ở CẢ BỐN phía. Chỉ mờ dần hai bên thì mép trên thành một đường kẻ
+     ngang cắt ngang tranh. Hai lớp mặt nạ giao nhau cho ra vùng mờ mép mềm. */
+  mask-image:
+    linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent),
+    linear-gradient(180deg, transparent, #000 14%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+  pointer-events: none;
+}
+#overlay.backdrop-entry > *,
+#overlay.backdrop-splash > * { position: relative; z-index: 1; }
+
+/* Trình duyệt không có backdrop-filter thì phủ đặc hơn để chữ vẽ chết không
+   lộ ra sau form. */
+@supports not (backdrop-filter: blur(1px)) {
+  #overlay.backdrop-entry::before,
+  #overlay.backdrop-splash::before {
+    background: linear-gradient(90deg, rgba(20, 36, 52, 0), rgba(20, 36, 52, .82) 18%, rgba(20, 36, 52, .82) 82%, rgba(20, 36, 52, 0));
+  }
+}
+
+/* Thẻ cho các màn ngoài game. Khung gỗ là phong cách TRONG game, đặt lên tranh
+   sáng màu này thì nặng và tối; bản mẫu dùng thẻ trắng bo tròn. */
+.card.entry {
+  border: 0;
+  border-image: none;
+  padding: 26px 26px 24px;
+  border-radius: 22px;
+  background: rgba(255, 253, 247, .96);
+  box-shadow: 0 18px 44px rgba(18, 40, 58, .3), inset 0 1px 0 rgba(255, 255, 255, .8);
+  width: min(430px, 100%);
+}
+.card.entry h1 { color: #4a3524; text-shadow: none; }
+.card.entry p.lead { color: #7b6650; }
+.card.entry label { color: #6b563f; }
+.card.entry .field input {
+  background: #fff;
+  border: 2px solid #e3d7c4;
+  border-radius: 12px;
+}
+.card.entry .field input:focus-visible { border-color: var(--gold); }
+/* Nút chính to bản, vàng — theo đúng bản mẫu màn đăng nhập. */
+.card.entry .actions { gap: 10px; }
+.card.entry button.primary {
+  background: linear-gradient(180deg, #ffc94d, #f0a52a);
+  border: 2px solid #d98f18;
+  border-radius: 14px;
+  color: #4a3010;
+  font-size: 16px;
+  padding: 12px 18px;
+  box-shadow: 0 4px 0 #c07f16;
+}
+.card.entry button.primary:active { transform: translateY(2px); box-shadow: 0 2px 0 #c07f16; }
+
+/* Nút phụ trên màn ngoài game: viền nhạt, nền trắng — để nút chính vàng là thứ
+   duy nhất hút mắt. */
+.card.entry .actions button:not(.primary) {
+  background: #fff;
+  border: 2px solid #e3d7c4;
+  border-image: none;
+  border-radius: 14px;
+  color: #6b563f;
+  font-size: 15px;
+  padding: 12px 18px;
+  box-shadow: none;
+}
+.card.entry .actions button:not(.primary):hover { border-color: var(--gold); }
+
+/* Thẻ ngoài game phải lọt khung nhìn ở màn hình 720px: nén khoảng cách giữa các
+   trường lại, không thì phần nút bị đẩy xuống dưới mép và người chơi tưởng
+   trang bị lỗi. */
+.card.entry { padding: 20px 24px 20px; }
+.card.entry p.lead { margin-bottom: 10px; }
+.card.entry .field { margin-bottom: 8px; }
+.card.entry .field input { padding: 9px 12px; }
+.card.entry .actions { margin-top: 12px; }
+.card.entry button.primary,
+.card.entry .actions button:not(.primary) { padding: 10px 18px; }

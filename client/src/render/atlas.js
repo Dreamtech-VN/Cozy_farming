@@ -39,7 +39,10 @@ class Atlas {
     this.cropIndex = new Map(meta.crops.kinds.map((name, i) => [name, i]));
     this.ready = true;
 
-    // Trang art vẽ sẵn tải riêng — xem preloadAll().
+    // Trang nhân vật tải ngay: màn tạo tài khoản có ô xem trước nhân vật, mà
+    // nó hiện ra TRƯỚC màn chờ tải. Không có trang này thì ô xem trước rơi về
+    // hình khối dự phòng, người chơi chọn nhân vật mà không thấy mặt.
+    this.ensurePage('chars');
   }
 
   /** Tổng số byte của mọi trang art, biết trước nên thanh tiến độ chạy đều. */
@@ -65,7 +68,17 @@ class Atlas {
     report();
 
     await Promise.all(pages.map(async ([page, info]) => {
-      if (this.#pageImages.has(page)) return;
+      if (this.#pageImages.has(page)) { loaded += info.bytes ?? 0; report(); return; }
+      // Trang đã đang tải dở (trang nhân vật khởi động sớm cho ô xem trước ở màn
+      // tạo tài khoản) thì CHỜ lượt tải đó, đừng tải lần nữa — tải hai lần là
+      // mất thêm đúng bằng dung lượng trang.
+      const inFlight = this.#pages.get(page);
+      if (inFlight) {
+        await inFlight;
+        loaded += info.bytes ?? 0;
+        report();
+        return;
+      }
       try {
         const res = await fetch(`${BASE}/${info.file}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -204,6 +217,18 @@ class Atlas {
     ctx.drawImage(img, rect.x, rect.y, rect.w, rect.h, -w / 2, -height, w, height);
     ctx.restore();
     return true;
+  }
+
+  /**
+   * Lời hứa cho trang chứa sprite này, nếu nó CHƯA sẵn sàng; null nếu đã có.
+   *
+   * Dành cho chỗ vẽ đúng một lần (chân dung trên HUD): không có vòng lặp nào vẽ
+   * lại hộ, nên phải tự đăng ký vẽ lại khi art tới nơi.
+   */
+  pendingFor(name) {
+    const rect = this.meta?.sprites?.index?.[name];
+    if (!rect || this.#pageImages.has(rect.page)) return null;
+    return this.ensurePage(rect.page);
   }
 
   hasSprite(name) {
