@@ -3,6 +3,22 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.17.1 — 2026-09-08
+
+### Sửa — sprite nhân vật bị xén cụt góc
+Tóc, mũ và vai NPC bị cắt bằng một đường thẳng ở góc trên. Nguyên nhân: bộ cắt
+theo dải trống dùng **cùng một ngưỡng alpha** cho hai việc vốn cần ngưỡng ngược
+nhau.
+
+- Tìm khe giữa các vật cần ngưỡng CAO (252): quầng sáng mờ phải bị coi là trống,
+  không thì 103 nhân vật dính thành một khối.
+- Đo khung bao của vật cần ngưỡng THẤP (40): mép tóc mềm alpha thấp vẫn là hình.
+  Đo bằng ngưỡng cao thì mép mềm nằm ngoài khung và bị xén.
+
+Tách thành `alphaCut` và `boxCut`, và nới vùng đo khung ra ngoài dải một chút vì
+mép mềm thường tràn qua ranh giới khe. `npc_casual_01` từ 51×127 lên 55×145 —
+phần chênh đúng là chỗ trước đây bị mất.
+
 ## 0.17.0 — 2026-09-08
 
 ### Thêm — nhân vật và NPC vẽ sẵn, bỏ hệ paperdoll

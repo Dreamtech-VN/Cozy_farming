@@ -31,7 +31,15 @@ function trimGlow(rgba, cut) {
 
 function sliceByGaps(img, { alphaCut, minRun, minSize, trim }) {
   const { width: W, height: H, data } = img;
+  // HAI ngưỡng cho hai việc khác nhau:
+  //  - `alphaCut` cao, để TÌM KHE giữa các vật: quầng sáng mờ phải bị coi là
+  //    trống, không thì mọi thứ dính vào nhau.
+  //  - `boxCut` thấp, để ĐO KHUNG BAO của vật: mép tóc mềm có alpha thấp nhưng
+  //    vẫn là hình. Đo khung bằng ngưỡng cao thì mép mềm nằm ngoài khung và bị
+  //    xén cụt bằng một đường thẳng — đúng lỗi tóc mất góc.
+  const boxCut = Math.max(1, trim || 24);
   const solidAt = (x, y) => data[(y * W + x) * 4 + 3] >= alphaCut;
+  const visibleAt = (x, y) => data[(y * W + x) * 4 + 3] >= boxCut;
 
   const bands = (from, to, along, cross, isSolid) => {
     const out = [];
@@ -58,9 +66,14 @@ function sliceByGaps(img, { alphaCut, minRun, minSize, trim }) {
   for (const [y0, y1] of rows) {
     for (const [x0, x1] of bands(0, W - 1, 'x', [y0, y1], (x, y) => solidAt(x, y))) {
       // Cắt sát nội dung thật trong ô, không giữ nguyên khung dải.
+      // Nới khung ra ngoài dải một chút: mép mềm của vật thường tràn qua ranh
+      // giới khe, mà khe đã đủ rộng nên không sợ ăn sang vật bên cạnh.
+      const pad = Math.max(2, minRun);
+      const sx0 = Math.max(0, x0 - pad), sx1 = Math.min(W - 1, x1 + pad);
+      const sy0 = Math.max(0, y0 - pad), sy1 = Math.min(H - 1, y1 + pad);
       let ax = x1, ay = y1, bx = x0, by = y0;
-      for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
-        if (!solidAt(x, y)) continue;
+      for (let y = sy0; y <= sy1; y++) for (let x = sx0; x <= sx1; x++) {
+        if (!visibleAt(x, y)) continue;
         if (x < ax) ax = x; if (x > bx) bx = x;
         if (y < ay) ay = y; if (y > by) by = y;
       }
