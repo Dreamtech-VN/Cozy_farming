@@ -28,18 +28,23 @@ export const EYE_COLOURS = [
   { id: 'ho_phach', label: 'Hổ phách', hex: '#d99a2b' },
 ];
 
-// Cằm lún vào cổ áo bao nhiêu pixel (tính theo art gốc).
+// Cằm chờm xuống mảnh trang phục mấy pixel (tính theo art gốc).
 //
-// Phải sâu chừng này vì hai mảnh không khớp viền nhau: mép dưới mảnh mặt là
-// đường cong CẰM, còn mép trên mảnh trang phục là đường VAI võng xuống ở giữa —
-// chồng nông thì hai bên cổ còn một vệt hở nhìn thấu qua nền. Đo bằng cách vẽ
-// trên nền hồng chói: 12 vẫn còn vệt, 18 thì kín.
-const NECK_OVERLAP = 18;
+// Mảnh trang phục KHÔNG cụt ngang ở vai: nó có sẵn một khúc CỔ nhô lên ở giữa.
+// Nên không phải vẽ thêm cổ — chỉ cần cằm chờm xuống vừa đủ dính vào khúc cổ
+// ấy. Chờm nông thì còn một vệt hở hình cung ngay dưới hàm, chờm sâu thì nuốt
+// mất cổ và nhân vật cụt đầu vào vai. Vẽ trên nền hồng chói để đo: 4 và 6 vẫn
+// còn vệt, 8 thì kín mà cổ vẫn hiện.
+const NECK_OVERLAP = 8;
 
 // Khuôn mặt trên tấm gốc vẽ TO hơn cái đầu mà các kiểu tóc ôm quanh — bày
 // riêng một khung để nhìn cho rõ nên nó được vẽ rộng ra. Đội thẳng thì đỉnh
-// đầu trọc nhô ra ngoài mái tóc. Hệ số này đo bằng mắt trên cả 11 kiểu tóc.
-const FACE_FIT = 0.86;
+// đầu trọc nhô ra ngoài mái tóc.
+//
+// Chỉnh bằng cách PHÓNG TÓC chứ không thu nhỏ mặt. Thu mặt thì cái đầu bé lại
+// so với thân, mà khúc cổ trên mảnh trang phục lại vẽ vừa cái đầu cỡ thật —
+// cằm hụt không với tới cổ, hở ra một vệt nhìn thấu nền ngay dưới hàm.
+const HAIR_FIT = 1.16;
 
 const BASE_SKIN = [254, 232, 210];
 
@@ -206,10 +211,11 @@ export function lookParts(atlas, look) {
 function naturalHeight({ outfit, face, hair }) {
   // Từ cằm lên đỉnh: tóc thường cao hơn đầu trọc, nhưng kiểu tóc sát đầu thì
   // không — lấy cái nào cao hơn.
-  const hairAboveChin = hair?.rect.hole ? hair.rect.hole.y + hair.rect.hole.h : 0;
-  const aboveChin = Math.max(face.rect.h * FACE_FIT, hairAboveChin);
+  const hairAboveChin = hair?.rect.hole ? (hair.rect.hole.y + hair.rect.hole.h) * HAIR_FIT : 0;
+  const aboveChin = Math.max(face.rect.h, hairAboveChin);
   return outfit.rect.h - NECK_OVERLAP + aboveChin;
 }
+
 
 /**
  * Vẽ nhân vật ghép, neo ĐÁY GIỮA tại (x, groundY), cao đúng `height`.
@@ -231,26 +237,25 @@ export function drawLook(ctx, atlas, look, { x, groundY, height }) {
 
   const bodyW = outfit.rect.w * s;
   const bodyTop = groundY - outfit.rect.h * s;
-  put(outfit, x - bodyW / 2, bodyTop, { skin: tone });
-
   const chinY = bodyTop + NECK_OVERLAP * s;
-  const faceS = s * FACE_FIT;
-  const faceW = face.rect.w * faceS;
-  putAt(face, x - faceW / 2, chinY - face.rect.h * faceS, faceS, { skin: tone, eyes: look.eyes ?? 0 });
+  const faceW = face.rect.w * s;
+
+  put(outfit, x - bodyW / 2, bodyTop, { skin: tone });
+  put(face, x - faceW / 2, chinY - face.rect.h * s, { skin: tone, eyes: look.eyes ?? 0 });
 
   if (hair) {
     // Căn theo LỖ khoét trên mảnh tóc: tâm lỗ trùng tâm mặt, đáy lỗ trùng cằm.
     const hole = hair.rect.hole;
-    const hairW = hair.rect.w * s;
+    const hairS = s * HAIR_FIT;
     const hairX = hole
-      ? x - (hole.x + hole.w / 2) * s
-      : x - hairW / 2;
+      ? x - (hole.x + hole.w / 2) * hairS
+      : x - hair.rect.w * hairS / 2;
     const hairY = hole
-      ? chinY - (hole.y + hole.h) * s
-      : chinY - hair.rect.h * s;
+      ? chinY - (hole.y + hole.h) * hairS
+      : chinY - hair.rect.h * hairS;
     // Tóc KHÔNG đổi theo tông da: tóc vàng và da gần như trùng màu nên phép
     // thử da bắt luôn cả mái tóc, chọn da ngăm là tóc vàng thành tóc nâu.
-    put(hair, hairX, hairY, {});
+    putAt(hair, hairX, hairY, hairS, {});
   }
   return true;
 }
@@ -312,10 +317,11 @@ export function drawThumb(ctx, atlas, name, { x, y, w, h, face = null, skin = 0,
   const bottom = y + h - (h - part.rect.h * s) / 2;
 
   if (head) {
-    // Cùng cách căn như lúc ghép người: đáy lỗ khoét trùng cằm.
+    // Cùng cách căn như lúc ghép người: đáy lỗ khoét trùng cằm, mặt vẽ cỡ thật
+    // còn tóc thì đã to sẵn theo HAIR_FIT nên ở đây mặt nhỏ lại tương ứng.
     const hole = part.rect.hole;
     const chin = hole ? bottom - (part.rect.h - hole.y - hole.h) * s : bottom;
-    const faceS = s * FACE_FIT;
+    const faceS = s / HAIR_FIT;
     const src = source(head, { skin, eyes });
     ctx.drawImage(src.img, src.sx, src.sy, head.rect.w, head.rect.h,
       cx - head.rect.w * faceS / 2, chin - head.rect.h * faceS, head.rect.w * faceS, head.rect.h * faceS);
