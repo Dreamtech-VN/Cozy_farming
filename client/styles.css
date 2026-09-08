@@ -1070,14 +1070,17 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
 .server-pick {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  width: min(520px, 92%);
+  gap: 14px;
+  /* 520px là quá rộng cho một dòng tên server và một nút: hàng gần như trống
+     ở giữa, còn cả cụm thì kéo ngang che mất hai nhân vật trong tranh. Hẹp
+     lại vừa đủ chữ. */
+  width: min(360px, 84%);
 }
 button.server-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 20px;
+  gap: 10px;
+  padding: 12px 16px;
   border: 2px solid rgba(255, 255, 255, .18);
   border-image: none;
   border-radius: 16px;
@@ -1094,17 +1097,17 @@ button.server-row:disabled { cursor: default; }
   flex: none;
 }
 .server-name { flex: 1; text-align: left; }
-.server-hint { font-size: 14px; font-weight: 600; color: var(--gold); }
+.server-hint { font-size: 13px; font-weight: 600; color: var(--gold); }
 button.server-start {
   /* Phải tắt border-image: .primary dùng ảnh khung gỗ 9-slice có phần FILL, nó
      vẽ đè lên background nên nút chỉ còn thấy màu gỗ. */
   border-image: none;
-  padding: 16px 24px;
+  padding: 13px 24px;
   border-radius: 18px;
   border: 2px solid #2f8f3a;
   background: linear-gradient(180deg, #6fdc63, #3fae43);
   color: #12360f;
-  font: 800 22px var(--font-display);
+  font: 800 20px var(--font-display);
   box-shadow: 0 5px 0 #2b7a30;
   cursor: pointer;
 }
