@@ -22,17 +22,18 @@ const genderOf = (bodyType) => GENDERS.find((g) => g.id === bodyType) ?? GENDERS
 /**
  * Tâm vòng gạch trong tranh nền, đo trên chính file create.png.
  *
- * Tranh phủ kiểu `cover` nên vị trí vòng gạch trên màn hình đổi theo tỉ lệ
- * khung nhìn — đặt nhân vật bằng một con số CSS cố định thì màn khác tỉ lệ là
- * lệch ra khỏi vòng ngay. Tính lại theo đúng công thức của `cover`.
+ * Vị trí vòng gạch trên màn hình đổi theo bề ngang khung nhìn — đặt nhân vật
+ * bằng một con số CSS cố định thì màn cỡ khác là lệch ra khỏi vòng ngay. Tính
+ * theo đúng cách phủ của CSS: `100% auto` neo đáy, tức là tranh kéo vừa bề
+ * ngang, cao theo tỉ lệ, dính đáy.
  */
 const PLAZA = { w: 640, h: 208, x: 273, y: 186 };
 
 function plazaPointIn(box) {
-  const s = Math.max(box.width / PLAZA.w, box.height / PLAZA.h);
+  const s = box.width / PLAZA.w;
   return {
-    x: (box.width - PLAZA.w * s) / 2 + PLAZA.x * s,   // background-position: center
-    y: (box.height - PLAZA.h * s) + PLAZA.y * s,      // ... bottom
+    x: PLAZA.x * s,
+    y: box.height - PLAZA.h * s + PLAZA.y * s,
   };
 }
 

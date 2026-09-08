@@ -1363,11 +1363,16 @@ button.primary.big-cta:active:not(:disabled) { transform: translateY(2px); box-s
    người. Tranh gốc rất ngang (640×208) nên neo ĐÁY và phủ theo bề ngang, phần
    trời phía trên nối bằng màu lấy từ chính mép trên của tranh. */
 #overlay.backdrop-character {
-  /* `cover` chứ không phải phủ theo bề ngang rồi nối trời: tranh rất ngang nên
-     nối trời để lộ một đường ngang rõ mồn một, mà hai gốc cây ở hai mép tranh
-     thì cụt ngang ngay chỗ nối. `cover` là tỉ lệ NHỎ NHẤT còn phủ kín, tức là
-     mờ ít nhất trong các cách phủ kín. */
-  background: #9bdcf7 bottom center / cover no-repeat url('/assets/ui/create.png');
+  /* Phủ theo BỀ NGANG, không dùng `cover`: `cover` phải phóng tranh lên 3,5 lần
+     mới kín màn hình và cắt mất hơn 40% bề ngang — đúng phần có cây, biển gỗ
+     và cột đèn, tức là toàn bộ trang trí. Phủ theo bề ngang thì giữ đủ tranh,
+     phần trời phía trên nối bằng dải màu lấy từ chính mép trên tranh, còn mép
+     trên tranh thì đã cho tan dần lúc đóng gói nên không lộ đường cắt. */
+  background:
+    url('/assets/ui/leaves.png') left top / clamp(200px, 24vw, 340px) auto no-repeat,
+    url('/assets/ui/leaves.png') right top / clamp(170px, 20vw, 290px) auto no-repeat,
+    url('/assets/ui/create.png') bottom center / 100% auto no-repeat,
+    linear-gradient(#8ccdf7 0%, #6fbdf3 55%, #6abff6 100%) no-repeat;
   justify-content: center;
   padding-top: 0;
 }

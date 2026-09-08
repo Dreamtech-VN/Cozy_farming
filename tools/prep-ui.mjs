@@ -87,6 +87,34 @@ const MAX_W = 1440;
 // Logo hiện ra cỡ nửa bề ngang màn hình, giữ nguyên 1774px là phí băng thông.
 const MAX_W_BY_FILE = { 'logo.png': 760 };
 
+// Mép nào của tranh bị CẮT ngang giữa hình thì cho tan dần, không thì lộ một
+// đường thẳng tắp giữa vòm lá hay giữa dãy lâu đài. Số là bề dày dải tan.
+//
+//  - create.png: phủ theo bề ngang rồi nối trời phía trên, mép trên là chỗ nối.
+//  - leaves.png: cắt ra từ một bảng phụ kiện xếp sát nhau nên mép dưới và mép
+//    trái xén vào giữa tán lá; hai mép kia thì đúng dáng lá.
+const FADE_BY_FILE = {
+  'create.png': { top: 36 },
+  'leaves.png': { bottom: 18, left: 22 },
+};
+
+/** Cho một mép tan dần vào trong suốt, theo đường cong mượt hai đầu. */
+function fadeEdge(img, side, span) {
+  const { w, h, data } = img;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const depth = side === 'top' ? y : side === 'bottom' ? h - 1 - y
+        : side === 'left' ? x : w - 1 - x;
+      if (depth >= span) continue;
+      const t = depth / span;
+      // smoothstep: tắt hẳn ở mép và ăn khớp mượt vào phần đục, chứ tuyến tính
+      // thì vẫn thấy chỗ chuyển thành một vệt.
+      const p = (y * w + x) * 4 + 3;
+      data[p] = Math.round(data[p] * t * t * (3 - 2 * t));
+    }
+  }
+}
+
 if (!existsSync(SRC)) { console.log('chưa có art-src/ui/ — bỏ qua'); process.exit(0); }
 mkdirSync(OUT, { recursive: true });
 
@@ -98,6 +126,7 @@ for (const file of readdirSync(SRC).filter((f) => f.endsWith('.png') && !f.start
   const img = { w: raw.width, h: raw.height, data: raw.data };
   const maxW = MAX_W_BY_FILE[file] ?? MAX_W;
   const small = img.w > maxW ? downscale(img, img.w / maxW) : img;
+  for (const [side, span] of Object.entries(FADE_BY_FILE[file] ?? {})) fadeEdge(small, side, span);
   const full = new Pixels(small.w, small.h);
   full.data.set(small.data);
   // So cả hai cách rồi lấy cái nhẹ hơn: ảnh ít màu thì màu thật đã đủ nhỏ, ảnh
