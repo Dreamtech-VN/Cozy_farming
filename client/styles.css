@@ -1242,12 +1242,17 @@ button.server-start:active { transform: translateY(3px); box-shadow: 0 2px 0 #2b
   grid-template-columns: 34px 1fr auto;
   align-items: center;
   margin-bottom: 8px;
-  border: 2px solid #e6dcc9;
+  /* Viền phải đủ đậm để thấy được trên nền kem của thẻ: để nhạt quá thì ô
+     đang gõ (viền vàng) trông như có khung còn mấy ô kia như không có, cả
+     cụm nhìn so le dù kích thước y hệt nhau. */
+  border: 2px solid #dcd0b8;
   border-radius: 14px;
   background: #f6f2e9;
 }
 .in-row:focus-within { border-color: var(--gold); background: #fff; }
-.in-icon { text-align: center; font-size: 15px; opacity: .5; }
+/* Icon là inline-block cỡ cố định nên nằm ở đầu cột chứ không tự vào giữa —
+   text-align không kéo nó vào, phải canh bằng justify-self. */
+.in-icon { justify-self: center; font-size: 15px; opacity: .55; }
 .in-row input {
   border: 0;
   background: none;
