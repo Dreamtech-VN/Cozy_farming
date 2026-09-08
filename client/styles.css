@@ -1030,8 +1030,7 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
    chỗ, khác với căn theo pixel cố định. */
 /* KHÔNG đặt position ở đây: #overlay đã là absolute, ghi đè thành relative là
    mất luôn inset:0 và cả khung nhìn vỡ theo. */
-#overlay.backdrop-entry,
-#overlay.backdrop-splash {
+#overlay.backdrop-entry {
   background: #6fc0ee center / cover no-repeat;
   /* Đẩy thẻ xuống để không che chân chữ của logo trong tranh. */
   padding-top: clamp(16px, 13vh, 150px);
@@ -1040,13 +1039,11 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
   align-items: safe center;
 }
 #overlay.backdrop-entry { background-image: url('/assets/ui/entry.png'); }
-#overlay.backdrop-splash { background-image: url('/assets/ui/splash.png'); }
 
 /* Bắt đầu từ 36% chiều cao trở xuống: logo trong tranh nằm ở khoảng 5–33%, phủ
    mờ lên đó là xoá mất luôn thương hiệu. Giao diện vẽ chết nằm ở 46–75% nên
    36% là đủ sớm để che hết. */
-#overlay.backdrop-entry::before,
-#overlay.backdrop-splash::before {
+#overlay.backdrop-entry::before {
   content: '';
   position: absolute;
   top: 36%;
@@ -1067,14 +1064,12 @@ button.primary:active:not(:disabled), button.ghost:active:not(:disabled) { trans
   -webkit-mask-composite: source-in;
   pointer-events: none;
 }
-#overlay.backdrop-entry > *,
-#overlay.backdrop-splash > * { position: relative; z-index: 1; }
+#overlay.backdrop-entry > * { position: relative; z-index: 1; }
 
 /* Trình duyệt không có backdrop-filter thì phủ đặc hơn để chữ vẽ chết không
    lộ ra sau form. */
 @supports not (backdrop-filter: blur(1px)) {
-  #overlay.backdrop-entry::before,
-  #overlay.backdrop-splash::before {
+  #overlay.backdrop-entry::before {
     background: linear-gradient(90deg, rgba(20, 36, 52, 0), rgba(20, 36, 52, .82) 18%, rgba(20, 36, 52, .82) 82%, rgba(20, 36, 52, 0));
   }
 }

@@ -21,7 +21,9 @@ const MAX_W = 1440;
 if (!existsSync(SRC)) { console.log('chưa có art-src/ui/ — bỏ qua'); process.exit(0); }
 mkdirSync(OUT, { recursive: true });
 
-for (const file of readdirSync(SRC).filter((f) => f.endsWith('.png')).sort()) {
+// Tên bắt đầu bằng `_` là tranh giữ lại tham khảo, KHÔNG đóng gói: mỗi tranh nền
+// là nửa MB tải về trước cả màn chờ, không dùng thì đừng bắt người chơi tải.
+for (const file of readdirSync(SRC).filter((f) => f.endsWith('.png') && !f.startsWith('_')).sort()) {
   const raw = readPng(readFileSync(join(SRC, file)));
   // downscale() dùng {w,h} như sprite, còn readPng() trả {width,height}.
   const img = { w: raw.width, h: raw.height, data: raw.data };

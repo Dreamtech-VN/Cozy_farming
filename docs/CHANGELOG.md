@@ -3,6 +3,17 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.19.1 — 2026-09-08
+
+### Sửa — màn chờ tải dùng nhầm tranh nền
+Tranh splash để hai nhân vật ở GIỮA, đúng chỗ dải phủ mờ, nên họ nhoè thành một
+vệt sau tấm thẻ. Dải phủ mờ vốn thiết kế cho tranh có nhân vật hai bên. Màn chờ
+tải giờ dùng chung tranh với màn đăng nhập.
+
+`splash.png` không còn dùng nên không đóng gói nữa — đổi tên thành `_splash.png`
+trong `art-src/ui/`, và `prep-ui` bỏ qua tệp bắt đầu bằng `_`. Mỗi tranh nền là
+nửa MB tải về TRƯỚC cả màn chờ; không dùng thì đừng bắt người chơi tải.
+
 ## 0.19.0 — 2026-09-08
 
 ### Đổi — nhìn ngang nhưng đi được bốn hướng
