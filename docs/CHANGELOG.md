@@ -3,6 +3,47 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.13.0 — 2026-09-08
+
+### Thêm — nhập art vẽ sẵn
+
+Art trong game trước nay sinh hết bằng code (`tools/art/`), và nó trông đúng như
+vậy. Bản này mở đường thứ hai: nhập ảnh vẽ sẵn. Hai đường chạy song song — vật
+nào có art vẽ sẵn thì dùng, chưa có thì vẫn rơi về art sinh bằng code, nên
+chuyển dần từng phần được chứ không phải thay một lượt.
+
+- `tools/art/split.mjs` — cắt một tấm ảnh gộp thành từng vật rời, nền trong
+  suốt. Loang nền từ VIỀN ảnh vào nên mảng màu trùng nền nhưng nằm TRONG vật
+  vẫn giữ nguyên; cắt theo lưới cố định thì sai ngay vì ảnh sinh bằng model
+  không bao giờ đều ô. Mép khử răng cưa quy ra alpha theo khoảng cách màu.
+- `tools/import-art.mjs` (`npm run import-art`) — cắt, xếp kệ vào một trang
+  atlas 2048px và ghi bản kê. Xếp theo chiều cao giảm dần nên cùng đầu vào ra
+  cùng bố cục, diff của atlas đọc được.
+- `tools/split-sheet.mjs` — công cụ soi bằng mắt trước khi đặt tên.
+- `art-src/sheets/city.png` + `city.names.json` — 106 vật, đặt tên 105.
+- `Pixels` biết ĐỌC PNG (`readPng`), trước chỉ ghi được.
+
+### Thêm — cảnh vật theo từng map
+`maps.json` có trường `scenery`: mỗi map khai báo lớp nền rải vật gì. Trước đây
+danh sách nằm cứng trong `world.js` nên đi từ phố sang rừng vẫn thấy y hệt nhau.
+Validator bắt tên sprite không tồn tại — sai tên thì client chỉ lặng lẽ không vẽ,
+vào game thấy map trống mà không có lỗi nào.
+
+### Sửa
+- `Pixels.toPng()` chọn bộ lọc theo từng dòng thay vì luôn dùng filter 0 (None).
+  Với art chuyển màu mềm thì mỗi pixel một trị khác nhau, deflate gần như không
+  nén được gì: trang atlas 5.392 KB xuống 3.826 KB (−29%).
+- `gen-art.mjs` giữ lại các mục do lệnh khác ghi trong `atlas.json`. Trước đó
+  chạy `npm run art` là xoá sạch art vẽ sẵn, mà lỗi đó im lặng.
+- Luật gộp cụm trong bộ cắt: chỉ gộp khi hai khung chồng nhau rõ trên một trục
+  và sát nhau trên trục kia. Gộp thuần theo khoảng cách làm hai chiếc xe đỗ
+  cạnh nhau dính thành một vật.
+
+### Còn thiếu
+Tấm art này là bộ **phố xá**. Nhân vật, tile mặt đất và cây trồng vẫn là art
+sinh bằng code, nên đứng cạnh nhà cửa vẽ tay thì lệch hẳn phong cách. Cần thêm
+một tấm nữa cho ba phần đó — quy cách trong `docs/ART-SPEC.md`.
+
 ## 0.12.0 — 2026-09-08
 
 ### Thêm — nhân vật vẽ theo kiểu paperdoll

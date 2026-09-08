@@ -5,6 +5,9 @@
  * Trả về danh sách issue; caller quyết định fail build hay chỉ cảnh báo.
  */
 
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+
 const err = (rule, message) => ({ severity: 'error', rule, message });
 const warn = (rule, message) => ({ severity: 'warning', rule, message });
 
@@ -18,8 +21,27 @@ function checkDuplicates(issues, rows, key, label) {
   }
 }
 
+/**
+ * Tên sprite client biết vẽ, đọc từ bản kê atlas.
+ *
+ * Tên cảnh vật sai thì client chỉ lặng lẽ không vẽ gì — vào game thấy map trống
+ * mà không có lỗi nào. Bắt ở đây để build chết ngay, đúng tinh thần "content
+ * sai thì server không khởi động" của doc 18.
+ */
+function knownSpriteNames() {
+  const path = join(process.cwd(), 'client', 'assets', 'world', 'atlas.json');
+  if (!existsSync(path)) return null;
+  try {
+    const atlas = JSON.parse(readFileSync(path, 'utf8'));
+    return new Set([...(atlas.props?.names ?? []), ...Object.keys(atlas.city?.sprites ?? {})]);
+  } catch {
+    return null;
+  }
+}
+
 export function validateContent(content) {
   const issues = [];
+  const sprites = knownSpriteNames();
 
   checkDuplicates(issues, content.crops, 'crop_id', 'crops');
   checkDuplicates(issues, content.items, 'item_id', 'items');
@@ -58,6 +80,17 @@ export function validateContent(content) {
   // --- Map ---
   for (const map of content.maps) {
     if (!map.spawn_points?.length) issues.push(err('invalid_map', `map ${map.map_id}: thiếu spawn_points`));
+    if (sprites && map.scenery) {
+      for (const [layer, kinds] of Object.entries(map.scenery)) {
+        if (!Array.isArray(kinds) || !kinds.length) {
+          issues.push(err('invalid_map', `map ${map.map_id}: scenery.${layer} phải là mảng không rỗng`));
+          continue;
+        }
+        for (const kind of kinds) {
+          if (!sprites.has(kind)) issues.push(err('missing_reference', `map ${map.map_id}: scenery.${layer} trỏ tới sprite không có "${kind}"`));
+        }
+      }
+    }
     const spawnIds = new Set(map.spawn_points.map((s) => s.id));
     for (const spawn of map.spawn_points) {
       if (spawn.x < 0 || spawn.x > map.width) issues.push(err('invalid_range', `map ${map.map_id}: spawn ${spawn.id} nằm ngoài map`));

@@ -123,6 +123,24 @@ Cứ gửi, tôi lắp rồi bổ sung khung sau.
 
 Bộ Cozy UI Pack đã mua đang dùng cho HUD, không cần sinh thêm.
 
+## Đã có gì rồi
+
+`art-src/sheets/city.png` — 106 vật phố xá, đã đặt tên 105 và lắp vào game:
+nhà cửa, cửa hàng, trụ sở, xe cộ, cây chậu, bụi, đèn đường, thùng rác, ghế...
+
+Còn thiếu, xếp theo mức ảnh hưởng:
+
+| Cần | Vì sao gấp |
+| --- | --- |
+| **Nhân vật** | Đang là art sinh bằng code, đứng cạnh nhà vẽ tay thì lệch hẳn phong cách — đây là chỗ chỏi mắt nhất hiện giờ |
+| **Tile mặt đất** | Cỏ và đất chiếm nhiều diện tích màn hình nhất, cũng vẫn là art sinh bằng code |
+| **Cây trồng** | 12 cây × 4 giai đoạn, là thứ người chơi nhìn lâu nhất trong game nông trại |
+| Vật thiên nhiên | Đá, gốc cây, khúc gỗ, nấm, đống rơm, giếng, rương — tấm phố xá không có |
+
+Tấm tiếp theo nên gộp **tile mặt đất + vật thiên nhiên** vào một ảnh (cùng cách
+bày như tấm phố: các vật rời nhau trên nền phẳng một màu, cách nhau ít nhất 20px).
+Nhân vật thì phải để riêng vì có yêu cầu về khung hình.
+
 ## Gửi file thế nào
 
 Đẩy vào repo theo đúng cây thư mục trên:
@@ -137,3 +155,12 @@ art-src/
 
 Không cần đủ hết mới gửi. Có file nào tôi lắp file đó, phần còn thiếu vẫn dùng
 art cũ cho tới khi có ảnh thay thế.
+
+**Gửi cả tấm gộp cũng được** — không cần tự cắt. Bày các vật rời nhau trên một
+nền phẳng một màu, cách nhau ít nhất 20px, rồi để nguyên một file. `npm run
+import-art` tự tách nền, cắt từng vật và đóng vào atlas; tôi chỉ phải đặt tên
+trong `<tấm>.names.json`.
+
+Hai điều kiện để bộ tách chạy đúng:
+- Nền **phẳng một màu**, không hoa văn, không đổ bóng ra nền.
+- Các vật **không chạm nhau**. Chạm là dính thành một vật.

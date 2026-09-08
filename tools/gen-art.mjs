@@ -5,7 +5,7 @@
  * Art là CODE chứ không phải file nhị phân rơi vào repo: sửa một màu trong
  * palette là chạy lại lệnh này, mọi thứ đồng bộ ngay, và diff vẫn đọc được.
  */
-import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { Pixels } from './art/png.mjs';
 import { drawTiles, TILE, TILE_NAMES } from './art/tiles.mjs';
@@ -43,7 +43,14 @@ console.log(write('crops.png', crops));
 console.log(write('parts.png', parts));
 
 // Bản kê để client biết ô nào là gì mà không phải chép cứng chỉ số.
+//
+// GIỮ LẠI các mục do lệnh khác ghi (art vẽ sẵn nhập bằng import-art.mjs). Ghi đè
+// cả file thì mỗi lần chạy `npm run art` lại xoá mất art vẽ sẵn, mà lỗi đó im
+// lặng — chỉ lộ ra khi vào game thấy cảnh vật biến mất.
+const atlasPath = join(OUT, 'atlas.json');
+const existing = existsSync(atlasPath) ? JSON.parse(readFileSync(atlasPath, 'utf8')) : {};
 const atlas = {
+  ...existing,
   comment: 'Sinh bằng tools/gen-art.mjs — đừng sửa tay, sửa trong tools/art/ rồi chạy npm run art.',
   tiles: { file: 'tiles.png', size: TILE, names: TILE_NAMES },
   props: { file: 'props.png', cell: CELL, cols: PROP_COLS, names: PROP_NAMES },
@@ -61,5 +68,5 @@ const atlas = {
     zOrder: Object.fromEntries(PARTS.map((p) => [p.name, p.z])),
   },
 };
-writeFileSync(join(OUT, 'atlas.json'), JSON.stringify(atlas, null, 2) + '\n');
+writeFileSync(atlasPath, JSON.stringify(atlas, null, 2) + '\n');
 console.log('atlas.json   bản kê ô');

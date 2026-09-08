@@ -6,6 +6,11 @@
  */
 const BASE = '/assets/world';
 
+// Art vẽ sẵn mỗi vật một cỡ. Quy hết về chiều cao chuẩn này rồi mới nhân tỉ lệ
+// của lớp, nên `scale: 2` nghĩa như nhau dù là cái ghế hay toà nhà — nếu lấy
+// thẳng pixel gốc thì toà nhà 232px và cái nón 40px lệch nhau gần 6 lần.
+const SPRITE_UNIT = 64;
+
 class Atlas {
   constructor() {
     this.ready = false;
@@ -21,10 +26,11 @@ class Atlas {
       img.onerror = () => reject(new Error(`không nạp được ${file}`));
       img.src = `${BASE}/${file}`;
     });
-    const [tiles, props, crops, parts] = await Promise.all([
+    const [tiles, props, crops, parts, city] = await Promise.all([
       load(meta.tiles.file), load(meta.props.file), load(meta.crops.file), load(meta.parts.file),
+      meta.city ? load(meta.city.file) : Promise.resolve(null),
     ]);
-    this.images = { tiles, props, crops, parts };
+    this.images = { tiles, props, crops, parts, city };
     this.partIndex = new Map(meta.parts.names.map((name, i) => [name, i]));
     this.propIndex = new Map(meta.props.names.map((name, i) => [name, i]));
     this.cropIndex = new Map(meta.crops.kinds.map((name, i) => [name, i]));
@@ -37,8 +43,14 @@ class Atlas {
     ctx.drawImage(this.images.tiles, index * size, 0, size, size, x, y, size * scale, size * scale);
   }
 
-  /** Prop neo ở ĐÁY GIỮA: mọi thứ trong side-view đều đứng trên mặt đất. */
+  /**
+   * Prop neo ở ĐÁY GIỮA: mọi thứ trong side-view đều đứng trên mặt đất.
+   *
+   * Ưu tiên art VẼ SẴN nếu có tên đó, không thì rơi về art sinh bằng code. Nhờ
+   * vậy thay art là việc thêm tên vào bản kê, không phải sửa chỗ gọi.
+   */
   prop(ctx, name, x, groundY, scale = 1) {
+    if (this.sprite(ctx, name, x, groundY, scale)) return;
     const index = this.propIndex.get(name);
     if (index === undefined) return;
     const { cell, cols } = this.meta.props;
@@ -46,6 +58,29 @@ class Atlas {
     const sy = Math.floor(index / cols) * cell;
     const size = cell * scale;
     ctx.drawImage(this.images.props, sx, sy, cell, cell, x - size / 2, groundY - size, size, size);
+  }
+
+  /**
+   * Vẽ một sprite art vẽ sẵn. Mỗi sprite có kích thước riêng nên tỉ lệ tính
+   * theo CHIỀU CAO chuẩn, không theo ô: art vẽ sẵn không nằm trong lưới đều.
+   * @returns true nếu vẽ được, false nếu không có tên này.
+   */
+  sprite(ctx, name, x, groundY, scale = 1) {
+    const rect = this.meta?.city?.sprites?.[name];
+    if (!rect || !this.images.city) return false;
+    const k = (scale * SPRITE_UNIT) / rect.h;
+    const w = rect.w * k;
+    const h = rect.h * k;
+    ctx.drawImage(this.images.city, rect.x, rect.y, rect.w, rect.h, x - w / 2, groundY - h, w, h);
+    return true;
+  }
+
+  hasSprite(name) {
+    return Boolean(this.meta?.city?.sprites?.[name]);
+  }
+
+  spriteNames() {
+    return Object.keys(this.meta?.city?.sprites ?? {});
   }
 
   crop(ctx, kind, stage, x, groundY, scale = 1) {

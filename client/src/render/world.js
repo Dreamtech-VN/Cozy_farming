@@ -25,6 +25,9 @@ const hashCol = (mapId, col) => Math.abs(hashString(`${mapId}:${col}`));
  * tác (đài phun, bảng tin, máy game) — nhìn thấy ở nền rồi chạy tới bấm không
  * được thì ức chế. Vật tương tác chỉ nằm ở lớp mặt sân.
  */
+// Hình học của từng lớp khai báo ở đây; DANH SÁCH VẬT thì lấy từ data của map
+// (`scenery` trong maps.json). Trước đây danh sách nằm cứng trong code nên map
+// nào cũng rải đúng một bộ, đi từ phố sang rừng vẫn thấy y hệt nhau.
 const LAYERS = {
   hillsFar:  { factor: 0.12, slot: 300, baseY: -96, kinds: ['tree_big', 'tree_small'], scale: [1.5, 2.2], skip: 0.1, haze: 0.62 },
   hillsNear: { factor: 0.30, slot: 260, baseY: -58, kinds: ['tree_big', 'bush', 'rock'], scale: [1.5, 2.2], skip: 0.15, haze: 0.34 },
@@ -221,6 +224,11 @@ export class WorldRenderer {
    * Vẽ một lớp cảnh: chia thế giới thành ô, mỗi ô băm ra biến thể/vị trí/cỡ.
    * Chỉ dựng những ô lọt vào khung nhìn nên map rộng bao nhiêu cũng vậy.
    */
+  /** Vật của lớp: ưu tiên khai báo trong data map, không có thì dùng mặc định. */
+  #kindsFor(map, name) {
+    return map.scenery?.[name] ?? LAYERS[name].kinds;
+  }
+
   #drawLayer(map, name, time) {
     if (!atlas.ready) return;
     const ctx = this.ctx;
@@ -238,10 +246,11 @@ export class WorldRenderer {
     // "gần" chứ không phải "vật cản".
     if (name === 'fore') { ctx.filter = 'blur(3px)'; ctx.globalAlpha = 0.9; }
 
+    const kinds = this.#kindsFor(map, name);
     for (let slot = from; slot <= to; slot++) {
       if (slotHash(map.map_id, name, slot, 'skip') < spec.skip) continue;
       const pick = slotHash(map.map_id, name, slot, 'kind');
-      const kind = spec.kinds[Math.floor(pick * spec.kinds.length) % spec.kinds.length];
+      const kind = kinds[Math.floor(pick * kinds.length) % kinds.length];
       const jitter = (slotHash(map.map_id, name, slot, 'x') - 0.5) * spec.slot * 0.7;
       const [lo, hi] = spec.scale;
       const scale = lo + slotHash(map.map_id, name, slot, 's') * (hi - lo);

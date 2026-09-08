@@ -4,7 +4,9 @@
   "private": true,
   "description": "2D Social MMO — Farming + Social + Match-3. Server, client và content pipeline theo bộ tài liệu thiết kế trong docs/.",
   "type": "module",
-  "engines": { "node": ">=22.5.0" },
+  "engines": {
+    "node": ">=22.5.0"
+  },
   "scripts": {
     "start": "node server/src/index.js",
     "dev": "NODE_ENV=development LOG_LEVEL=debug node --watch server/src/index.js",
@@ -15,7 +17,8 @@
     "art": "node tools/gen-art.mjs",
     "fonts": "node tools/fetch-fonts.mjs",
     "seed": "node tools/seed-dev.mjs",
-    "docs:import": "node tools/docx-to-markdown.mjs"
+    "docs:import": "node tools/docx-to-markdown.mjs",
+    "import-art": "node tools/import-art.mjs"
   },
   "dependencies": {},
   "devDependencies": {}
