@@ -15,16 +15,25 @@ export class Api {
     this.baseUrl = baseUrl;
     this.session = null;
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = (localStorage.getItem(STORAGE_KEY) ?? sessionStorage.getItem(STORAGE_KEY));
       if (stored) this.session = JSON.parse(stored);
     } catch { /* storage bị chặn — chạy không nhớ phiên */ }
   }
 
-  setSession(session) {
+  /**
+   * @param remember true thì giữ qua các lần mở trình duyệt (localStorage),
+   *   false thì chỉ giữ trong tab đang mở (sessionStorage). Máy dùng chung mà
+   *   luôn nhớ là người sau mở lên vào thẳng tài khoản người trước.
+   */
+  setSession(session, { remember = true } = {}) {
     this.session = session;
     try {
-      if (session) localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
-      else localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(STORAGE_KEY);
+      sessionStorage.removeItem(STORAGE_KEY);
+      if (session) {
+        const store = remember ? localStorage : sessionStorage;
+        store.setItem(STORAGE_KEY, JSON.stringify(session));
+      }
     } catch { /* bỏ qua */ }
   }
 

@@ -69,6 +69,12 @@ export function registerRoutes(router, ctx) {
   }, { character: false });
 
   router.post('/v1/auth/login', async ({ body }) => ({ body: await player.login(db, body) }), { auth: false });
+
+  // Màn đăng nhập cần biết nhà cung cấp nào đã cấu hình để bật/tắt nút tương
+  // ứng — hỏi trước khi đăng nhập nên không thể đòi token.
+  router.get('/v1/auth/providers', () => ({
+    body: { providers: ctx.config.oauthProviders },
+  }), { auth: false });
   router.post('/v1/auth/refresh', ({ body }) => ({ body: player.refreshSession(db, body.refresh_token) }), { auth: false });
   router.post('/v1/auth/logout', ({ body }) => ({ body: player.logout(db, body.refresh_token) }), { auth: false });
   router.post('/v1/auth/password', async ({ character, body }) => ({

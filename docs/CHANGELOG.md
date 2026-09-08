@@ -3,6 +3,36 @@
 Theo *Update rule* trong Document Control: mọi thay đổi hệ thống phải cập nhật
 tài liệu và changelog tương ứng.
 
+## 0.23.0 — 2026-09-08
+
+### Thêm — màn đăng nhập/đăng ký dựng theo bản mẫu
+
+- Ô nhập có biểu tượng bên trái và nút hiện/ẩn cho ô mật khẩu. Gõ sai trên bàn
+  phím ảo là chuyện thường; không cho xem lại thì chỉ còn cách xoá hết gõ lại.
+- "Ghi nhớ đăng nhập" quyết định lưu phiên ở `localStorage` (giữ qua các lần mở
+  trình duyệt) hay `sessionStorage` (chỉ trong tab đang mở). Máy dùng chung mà
+  luôn nhớ là người sau mở lên vào thẳng tài khoản người trước.
+- Đăng ký có thêm ô nhập lại mật khẩu và ô đồng ý điều khoản, kiểm ngay tại chỗ.
+- Nút chính dáng viên thuốc, vàng, to bản; ba nút mạng xã hội; liên kết chuyển
+  qua lại giữa hai màn.
+
+### Thêm — email cho tài khoản
+Migration `005_user_email.sql`. Email **không bắt buộc**: bắt buộc là chặn luôn
+đường đăng ký nhanh chỉ bằng username. Ràng buộc UNIQUE có điều kiện
+`WHERE email IS NOT NULL` nên nhiều tài khoản không email vẫn cùng tồn tại.
+
+Đăng nhập nhận **cả username lẫn email trong một ô** — người chơi không nhớ mình
+đã đăng ký bằng cái nào, bắt chọn đúng ô chỉ tổ sinh lỗi đăng nhập.
+
+### Chưa mở, và nói rõ trong giao diện
+- **Đăng nhập bằng Google/Facebook/Apple**: `GET /v1/auth/providers` (không cần
+  token) trả về danh sách nhà cung cấp đã cấu hình; chưa cấu hình thì nút để MỜ
+  kèm giải thích. Bày nút bấm vào không có gì xảy ra thì tệ hơn là không bày.
+  Cần đặt biến môi trường `OAUTH_PROVIDERS` và nối luồng OAuth thật.
+- **Quên mật khẩu**: cần hạ tầng gửi email mà máy chủ chưa nối. Bấm vào báo rõ
+  thay vì mở một biểu mẫu không dẫn tới đâu.
+- Trang Điều khoản và Chính sách riêng tư chưa có nội dung.
+
 ## 0.22.0 — 2026-09-08
 
 ### Đổi — nền sạch + logo rời, bỏ hết phủ mờ

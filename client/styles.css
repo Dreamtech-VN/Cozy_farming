@@ -1213,11 +1213,13 @@ button.server-start:active { transform: translateY(3px); box-shadow: 0 2px 0 #2b
   background: #6fc0ee center / cover no-repeat url('/assets/ui/entry.png');
   flex-direction: column;
   align-items: center;
-  gap: clamp(8px, 2.5vh, 28px);
-  padding-top: clamp(10px, 4vh, 44px);
+  gap: clamp(4px, 1.5vh, 18px);
+  padding-top: clamp(8px, 2.5vh, 30px);
 }
+/* Logo co theo CẢ chiều cao khung nhìn: màn thấp thì form đăng ký (4 ô + điều
+   khoản + 3 nút mạng xã hội) không còn chỗ, logo phải nhường. */
 .entry-logo {
-  width: min(380px, 46vw);
+  width: min(320px, 40vw, 46vh);
   height: auto;
   flex: none;
   filter: drop-shadow(0 8px 18px rgba(14, 40, 62, .35));
@@ -1226,3 +1228,80 @@ button.server-start:active { transform: translateY(3px); box-shadow: 0 2px 0 #2b
 }
 /* Màn chờ tải neo xuống đáy như bản mẫu; các màn khác đứng ngay dưới logo. */
 #overlay.backdrop-loading { justify-content: space-between; padding-bottom: clamp(10px, 5vh, 56px); }
+
+/* --- Màn ngoài game: ô nhập, nút mạng xã hội, liên kết --- */
+
+/* Ô nhập có biểu tượng bên trái. Dùng grid chứ không dùng position tuyệt đối:
+   ô có thêm nút hiện mật khẩu bên phải, grid tự chừa chỗ cho cả hai. */
+.in-row {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  margin-bottom: 8px;
+  border: 2px solid #e6dcc9;
+  border-radius: 14px;
+  background: #f6f2e9;
+}
+.in-row:focus-within { border-color: var(--gold); background: #fff; }
+.in-icon { text-align: center; font-size: 15px; opacity: .5; }
+.in-row input {
+  border: 0;
+  background: none;
+  padding: 10px 4px;
+  font: inherit;
+  color: #4a3524;
+  min-width: 0;
+}
+.in-row input:focus-visible { outline: none; }
+.in-eye {
+  border: 0; background: none; cursor: pointer;
+  padding: 6px 12px; font-size: 15px; line-height: 1;
+}
+
+.row-between { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 2px 0 12px; }
+.check { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: #6b563f; cursor: pointer; }
+.check input { width: 17px; height: 17px; accent-color: #2f80ed; flex: none; }
+button.link {
+  border: 0; background: none; padding: 0; cursor: pointer;
+  font: inherit; font-size: 13.5px; font-weight: 700; color: #2f80ed;
+}
+button.link:hover { text-decoration: underline; }
+
+/* Nút chính to bản, dáng viên thuốc — theo bản mẫu. */
+button.primary.big-cta {
+  width: 100%;
+  border-image: none;
+  border: 2px solid #d98f18;
+  border-radius: 999px;
+  padding: 11px 20px;
+  background: linear-gradient(180deg, #ffd76a, #f2a625);
+  color: #5a3a08;
+  font: 800 19px var(--font-display);
+  box-shadow: 0 4px 0 #c07f16;
+}
+button.primary.big-cta:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 2px 0 #c07f16; }
+
+.social { margin-top: 10px; }
+/* Chữ "hoặc tiếp tục với" nằm giữa một đường kẻ: đường kẻ vẽ bằng pseudo hai
+   bên để chữ luôn ở giữa dù dài ngắn thế nào. */
+.social-sep { display: flex; align-items: center; gap: 10px; color: #8a7659; font-size: 12.5px; }
+.social-sep::before, .social-sep::after { content: ''; flex: 1; height: 1px; background: #e3d7c4; }
+.social-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+.social-btn {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  padding: 8px 6px;
+  border: 2px solid #e3d7c4;
+  border-image: none;
+  border-radius: 12px;
+  background: #fff;
+  font: 700 13px var(--font-body);
+  color: #4a3524;
+  cursor: pointer;
+}
+.social-btn:disabled { opacity: .45; cursor: not-allowed; }
+.social-mark { font-weight: 800; font-size: 15px; line-height: 1; }
+.s-google .social-mark { color: #ea4335; }
+.s-facebook .social-mark { color: #1877f2; }
+.s-apple .social-mark { color: #111; }
+
+.foot-link { margin: 10px 0 0; text-align: center; font-size: 13.5px; color: #7b6650; }

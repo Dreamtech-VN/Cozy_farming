@@ -12,6 +12,7 @@ import { createFarm } from './farm.js';
 import { getWallet, getInventory, regenerateEnergy } from './economy.js';
 import { logEvent } from './analytics.js';
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const USERNAME_RE = /^[a-zA-Z0-9_]{3,20}$/;
 const NICKNAME_RE = /^[\p{L}\p{N} _-]{2,16}$/u;
 
@@ -29,16 +30,23 @@ export function validateNickname(nickname) {
  * mới tới nhân vật. Nhân vật thuộc về một server cụ thể, nên gộp vào bước đăng
  * ký là khoá cứng người chơi vào server đầu tiên họ gặp.
  */
-export async function register(db, { username, password }) {
+export async function register(db, { username, password, email }) {
   if (!USERNAME_RE.test(username ?? '')) throw badRequest('Username phải dài 3–20 ký tự (chữ, số, gạch dưới)');
   if (typeof password !== 'string' || password.length < 8) throw badRequest('Mật khẩu tối thiểu 8 ký tự');
+
+  // Email KHÔNG bắt buộc: bắt buộc là chặn luôn đường đăng ký nhanh chỉ bằng
+  // username. Có thì phải hợp lệ và chưa ai dùng.
+  const mail = typeof email === 'string' && email.trim() ? email.trim().toLowerCase() : null;
+  if (mail && !EMAIL_RE.test(mail)) throw badRequest('Email không hợp lệ');
+
   if (db.prepare('SELECT 1 AS ok FROM users WHERE username = ?').get(username)) throw conflict('Username đã tồn tại');
+  if (mail && db.prepare('SELECT 1 AS ok FROM users WHERE email = ?').get(mail)) throw conflict('Email đã được dùng');
 
   const passwordHash = await hashPassword(password);
   const now = Date.now();
   const userId = newId('usr');
-  db.prepare('INSERT INTO users (id, username, password_hash, created_at) VALUES (?, ?, ?, ?)')
-    .run(userId, username, passwordHash, now);
+  db.prepare('INSERT INTO users (id, username, email, password_hash, created_at) VALUES (?, ?, ?, ?, ?)')
+    .run(userId, username, mail, passwordHash, now);
   return { user_id: userId };
 }
 
@@ -103,7 +111,12 @@ export function normalizeAppearance(content, appearance = {}) {
 }
 
 export async function login(db, { username, password, device }) {
-  const user = db.prepare('SELECT * FROM users WHERE username = ?').get(username ?? '');
+  // Nhận cả username lẫn email trong cùng một ô — người chơi không nhớ mình đã
+  // đăng ký bằng cái nào, bắt chọn đúng ô chỉ tổ sinh lỗi đăng nhập.
+  const id = (username ?? '').trim();
+  const user = id.includes('@')
+    ? db.prepare('SELECT * FROM users WHERE email = ?').get(id.toLowerCase())
+    : db.prepare('SELECT * FROM users WHERE username = ?').get(id);
   if (!user) throw unauthorized('Sai tài khoản hoặc mật khẩu');
   if (user.status !== 'active') throw unauthorized('Tài khoản đang bị khoá');
   if (!(await verifyPassword(password ?? '', user.password_hash))) throw unauthorized('Sai tài khoản hoặc mật khẩu');
