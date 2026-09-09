@@ -1,0 +1,112 @@
+{
+  "comment": "Bộ art nhân vật (bản Spine). Mỗi tấm chỉ chứa MỘT loại mảnh của MỘT giới, mỗi món là một cụm rời — nên cắt theo CỤM (`mode: blob`) chứ không theo lưới: khung bao của hai món cạnh nhau vẫn chồng lên nhau (búi tóc kiểu này thò ngang sang mái tóc kiểu kia) dù hai hình không chạm nhau pixel nào, mà cắt lưới thì khung nào cũng dính một lát của hàng xóm. Nền caro vẽ chết vào ảnh nên bắt nền theo tính chất \"xám và sáng\". `scale` thu nhỏ CÙNG MỘT tỉ lệ cho mọi tấm của bộ: các mảnh phải ghép vào nhau nên tương quan cỡ giữa chúng là thật, không được quy mỗi mảnh về một chiều cao.",
+  "source": "avatar_f_outfit.png",
+  "page": "parts",
+  "regions": [
+    {
+      "what": "trang phục nữ, cả người trừ đầu — 1",
+      "rect": [
+        9,
+        9,
+        476,
+        677
+      ],
+      "split": {
+        "mode": "blob",
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "minArea": 1500
+      },
+      "names": {
+        "0": "outfit_f_01"
+      },
+      "measure": "collar"
+    },
+    {
+      "what": "trang phục nữ, cả người trừ đầu — 2",
+      "rect": [
+        485,
+        25,
+        398,
+        662
+      ],
+      "split": {
+        "mode": "blob",
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "minArea": 1500
+      },
+      "names": {
+        "0": "outfit_f_02"
+      },
+      "measure": "collar"
+    },
+    {
+      "what": "trang phục nữ, cả người trừ đầu — 3",
+      "rect": [
+        894,
+        12,
+        431,
+        680
+      ],
+      "split": {
+        "mode": "blob",
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "minArea": 1500
+      },
+      "names": {
+        "0": "outfit_f_03"
+      },
+      "measure": "collar"
+    },
+    {
+      "what": "trang phục nữ, cả người trừ đầu — 4",
+      "rect": [
+        1350,
+        13,
+        428,
+        680
+      ],
+      "split": {
+        "mode": "blob",
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "minArea": 1500
+      },
+      "names": {
+        "0": "outfit_f_04"
+      },
+      "measure": "collar"
+    },
+    {
+      "what": "trang phục nữ, cả người trừ đầu — 5",
+      "rect": [
+        1793,
+        12,
+        452,
+        674
+      ],
+      "split": {
+        "mode": "blob",
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "minArea": 1500
+      },
+      "names": {
+        "0": "outfit_f_05"
+      },
+      "measure": "collar"
+    }
+  ]
+}

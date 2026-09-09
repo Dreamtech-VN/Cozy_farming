@@ -188,6 +188,106 @@ function sliceByGrid(img, { rows, cols, trim, minArea }) {
 }
 
 /**
+ * Cắt theo CỤM LIÊN THÔNG trong một khung.
+ *
+ * Bộ art nhân vật mới bày mỗi món một cụm rời, nhưng KHUNG BAO của hai món
+ * cạnh nhau vẫn chồng lên nhau — tóc búi của kiểu này thò sang ngang chỗ mái
+ * tóc kiểu kia, dù hai hình không chạm nhau một pixel nào. Cắt theo lưới thì
+ * khung nào cũng dính một lát của hàng xóm; cắt theo khe thì không có khe.
+ *
+ * Cắt theo cụm là đúng bản chất: khoanh một khung rộng quanh món cần lấy rồi
+ * chỉ giữ lại cụm liên thông của nó, phần hàng xóm lọt vào khung tự rụng.
+ *
+ * `keep`:
+ *   'largest' — giữ một cụm to nhất (tóc, thân, đầu: mỗi món một cụm).
+ *   'all'     — giữ mọi cụm đủ lớn rồi co khung về hợp của chúng (đôi mắt là
+ *               hai cụm rời nhưng phải ra MỘT mảnh thì khoảng cách hai mắt mới
+ *               giữ nguyên).
+ */
+function sliceByBlob(img, { minArea = 500, keep = 'largest', trim }) {
+  const { width: W, height: H, data } = img;
+  const cut = Math.max(1, trim || 24);
+  const label = new Int32Array(W * H).fill(-1);
+  const queue = new Int32Array(W * H);
+  const clusters = [];
+  for (let start = 0; start < W * H; start++) {
+    if (label[start] >= 0 || data[start * 4 + 3] <= 40) continue;
+    let qh = 0, qt = 0;
+    queue[qt++] = start; label[start] = start;
+    const cluster = [start];
+    while (qh < qt) {
+      const i = queue[qh++];
+      const x = i % W, y = (i / W) | 0;
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        const nx = x + dx, ny = y + dy;
+        if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
+        const j = ny * W + nx;
+        if (label[j] >= 0 || data[j * 4 + 3] <= 40) continue;
+        label[j] = start; queue[qt++] = j; cluster.push(j);
+      }
+    }
+    clusters.push(cluster);
+  }
+  clusters.sort((a, b) => b.length - a.length);
+  const wanted = keep === 'all'
+    ? clusters.filter((c) => c.length >= minArea)
+    : clusters.slice(0, 1).filter((c) => c.length >= minArea);
+  if (!wanted.length) return [];
+
+  const mask = new Uint8Array(W * H);
+  let ax = W - 1, ay = H - 1, bx = 0, by = 0;
+  for (const cluster of wanted) {
+    for (const i of cluster) {
+      mask[i] = 1;
+      const x = i % W, y = (i / W) | 0;
+      if (x < ax) ax = x; if (x > bx) bx = x;
+      if (y < ay) ay = y; if (y > by) by = y;
+    }
+  }
+  // Mép mềm (alpha thấp) không nằm trong cụm vì phép gom bỏ qua alpha <= 40,
+  // nhưng nó vẫn là hình: nới khung ra vài pixel rồi đo lại cho sát.
+  const PAD = 3;
+  ax = Math.max(0, ax - PAD); ay = Math.max(0, ay - PAD);
+  bx = Math.min(W - 1, bx + PAD); by = Math.min(H - 1, by + PAD);
+  const w = bx - ax + 1, h = by - ay + 1;
+  const out = new Uint8Array(w * h * 4);
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const src = ((ay + y) * W + (ax + x)) * 4;
+      const dst = (y * w + x) * 4;
+      // Chỉ chép pixel thuộc cụm đã chọn, cộng mép mềm quanh nó — hàng xóm lọt
+      // vào khung phải biến mất hẳn, không thì cắt theo cụm cũng như cắt lưới.
+      let near = mask[(ay + y) * W + (ax + x)] === 1;
+      if (!near) {
+        for (let dy = -PAD; dy <= PAD && !near; dy++) for (let dx = -PAD; dx <= PAD && !near; dx++) {
+          const nx = ax + x + dx, ny = ay + y + dy;
+          if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
+          if (mask[ny * W + nx]) near = true;
+        }
+      }
+      if (!near) continue;
+      out.set(data.subarray(src, src + 4), dst);
+    }
+  }
+  if (trim) trimGlow(out, trim);
+  // Co lại lần nữa: vòng nới PAD ở trên có thể để lại hàng trống ở mép.
+  let tx = w - 1, ty = h - 1, ux = 0, uy = 0;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    if (out[(y * w + x) * 4 + 3] < cut) continue;
+    if (x < tx) tx = x; if (x > ux) ux = x;
+    if (y < ty) ty = y; if (y > uy) uy = y;
+  }
+  if (ux < tx) return [];
+  const fw = ux - tx + 1, fh = uy - ty + 1;
+  const fin = new Uint8Array(fw * fh * 4);
+  for (let y = 0; y < fh; y++) {
+    const src = ((ty + y) * w + tx) * 4;
+    fin.set(out.subarray(src, src + fw * 4), y * fw * 4);
+  }
+  return [{ w: fw, h: fh, x: ax + tx, y: ay + ty, data: fin }];
+}
+
+/**
  * Mặt nạ nền (1 = nền, loang từ viền ảnh vào) kèm cách suy alpha cho pixel
  * thuộc vật — hai thứ này phải đi cùng nhau vì cùng dựa trên một phép thử nền.
  *
@@ -301,6 +401,60 @@ function backgroundMask(img, options = {}) {
     }
   }
 
+
+  // TÚI NỀN NẰM TRONG DÁNG (chỗ da trần).
+  //
+  // Cánh tay và bắp chân để trần trên mảnh trang phục chỉ được vẽ NÉT VIỀN,
+  // ruột bên trong vẫn là ô caro. Nét viền khép kín nên phép loang từ ngoài vào
+  // không tới được — cắt xong thì ruột tay ruột chân giữ nguyên ô caro, thành
+  // hai mảng lưới xám giữa bộ đồ.
+  //
+  // Nhận ra chúng bằng chính CÁI LÀM NÊN ô caro: nền chỉ có đúng hai sắc, một
+  // sáng một sẫm, chuyển nhau bằng cạnh vuông sắc lẹm. Vải trắng thì chuyển
+  // mượt và ngả màu theo bộ đồ, nên không bao giờ có được cả hai sắc trung tính
+  // ấy cùng lúc với tỉ lệ ngang nhau. Đo hai sắc từ chính phần nền thật của tấm
+  // chứ không ghi số chết: mỗi tấm một sắc caro hơi khác.
+  const pocket = new Uint8Array(W * H);
+  if (BG_TEST === 'light') {
+    const tally = new Map();
+    for (let i = 0; i < W * H; i++) if (isBg[i]) {
+      const v = data[i * 4];
+      tally.set(v, (tally.get(v) ?? 0) + 1);
+    }
+    const ranked = [...tally.entries()].sort((a, b) => b[1] - a[1]).map(([v]) => v);
+    const light = ranked[0] ?? 254;
+    const dark = ranked.find((v) => Math.abs(v - light) > 6) ?? light - 16;
+    const NEAR = 4;
+    const isTone = (v, t) => Math.abs(v - t) <= NEAR;
+
+    const seenPix = new Uint8Array(W * H);
+    const stack = new Int32Array(W * H);
+    for (let start = 0; start < W * H; start++) {
+      if (seenPix[start] || isBg[start] || !near(start * 4)) continue;
+      let qh = 0, qt = 0;
+      seenPix[start] = 1; stack[qt++] = start;
+      const cluster = [start];
+      let nLight = 0, nDark = 0;
+      while (qh < qt) {
+        const i = stack[qh++];
+        const v = data[i * 4];
+        if (isTone(v, light)) nLight++; else if (isTone(v, dark)) nDark++;
+        const x = i % W, y = (i / W) | 0;
+        for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+          const nx = x + dx, ny = y + dy;
+          if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
+          const j = ny * W + nx;
+          if (seenPix[j] || isBg[j] || !near(j * 4)) continue;
+          seenPix[j] = 1; stack[qt++] = j; cluster.push(j);
+        }
+      }
+      const n = cluster.length;
+      if (n < 200) continue;
+      if (nLight / n < 0.2 || nDark / n < 0.2) continue;
+      for (const i of cluster) pocket[i] = 1;
+    }
+  }
+
   // Mép khử răng cưa: pixel càng gần màu nền thì càng trong, nếu không vật sẽ
   // có viền lởm chởm màu nền cũ khi đặt lên nền khác. Cắt theo alpha thì giữ
   // nguyên alpha gốc; cắt theo màu thì suy alpha từ khoảng cách màu.
@@ -313,7 +467,7 @@ function backgroundMask(img, options = {}) {
     const dist = Math.sqrt((data[p] - bg[0]) ** 2 + (data[p + 1] - bg[1]) ** 2 + (data[p + 2] - bg[2]) ** 2);
     return dist >= TOL * 2 ? 255 : Math.round((dist / (TOL * 2)) * 255);
   };
-  return { isBg, alphaAt };
+  return { isBg, alphaAt, pocket };
 }
 
 /**
@@ -325,13 +479,37 @@ function backgroundMask(img, options = {}) {
  */
 function withBackgroundCleared(img, options) {
   const { width: W, height: H } = img;
-  const { isBg, alphaAt } = backgroundMask(img, options);
+  const { isBg, alphaAt, pocket } = backgroundMask(img, options);
   const data = new Uint8Array(img.data);
-  for (let i = 0; i < W * H; i++) data[i * 4 + 3] = isBg[i] ? 0 : alphaAt(i * 4);
-  return { width: W, height: H, data };
+  // Túi caro nằm trong dáng cũng là nền: xoá đi thì cánh tay trần thành lỗ
+  // rỗng, và cái LỖ ấy chính là mặt nạ da cần tô — trả kèm ra ngoài.
+  for (let i = 0; i < W * H; i++) data[i * 4 + 3] = (isBg[i] || pocket[i]) ? 0 : alphaAt(i * 4);
+  return { width: W, height: H, data, pocket };
 }
 
 export function splitSheet(img, options = {}) {
+  if (options.mode === 'blob') {
+    const src = options.bgTest ? withBackgroundCleared(img, options) : img;
+    const cells = sliceByBlob(src, {
+      minArea: options.minArea ?? 500,
+      keep: options.keep ?? 'largest',
+      trim: options.trim ?? 0,
+    });
+    // Cắt kèm mặt nạ da trần theo đúng khung từng mảnh: chỗ ghép cần nó để vẽ
+    // lót tay chân, mà nó chỉ có nghĩa khi nằm đúng toạ độ của mảnh.
+    if (src.pocket) {
+      for (const cell of cells) {
+        const mask = new Uint8Array(cell.w * cell.h);
+        for (let y = 0; y < cell.h; y++) {
+          for (let x = 0; x < cell.w; x++) {
+            mask[y * cell.w + x] = src.pocket[(cell.y + y) * img.width + (cell.x + x)];
+          }
+        }
+        cell.pocket = mask;
+      }
+    }
+    return cells;
+  }
   if (options.mode === 'grid') {
     const src = options.bgTest ? withBackgroundCleared(img, options) : img;
     return sliceByGrid(src, {

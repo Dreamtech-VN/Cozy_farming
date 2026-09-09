@@ -86,8 +86,8 @@ export function drawAvatar(ctx, content, options) {
 
   let drawn = false;
   const look = options.appearance;
-  if (look?.outfit && look?.face) {
-    // Nhân vật do người chơi tự ghép: vẽ lại từ ba mảnh chứ không có sprite
+  if (look?.outfit) {
+    // Nhân vật do người chơi tự ghép: vẽ lại từ từng mảnh chứ không có sprite
     // dựng sẵn nào cả. Biến hình phải tự áp ở đây vì drawLook chỉ biết vẽ
     // đứng yên — cùng công thức với atlas.character(), gốc đặt ở CHÂN.
     const { bob = 0, lean = 0, squash = 1 } = transformFor(state, phase);

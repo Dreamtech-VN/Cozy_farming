@@ -1,0 +1,112 @@
+{
+  "comment": "Bộ art nhân vật (bản Spine). Mỗi tấm chỉ chứa MỘT loại mảnh của MỘT giới, mỗi món là một cụm rời — nên cắt theo CỤM (`mode: blob`) chứ không theo lưới: khung bao của hai món cạnh nhau vẫn chồng lên nhau (búi tóc kiểu này thò ngang sang mái tóc kiểu kia) dù hai hình không chạm nhau pixel nào, mà cắt lưới thì khung nào cũng dính một lát của hàng xóm. Nền caro vẽ chết vào ảnh nên bắt nền theo tính chất \"xám và sáng\". `scale` thu nhỏ CÙNG MỘT tỉ lệ cho mọi tấm của bộ: các mảnh phải ghép vào nhau nên tương quan cỡ giữa chúng là thật, không được quy mỗi mảnh về một chiều cao.",
+  "source": "avatar_f_eye.png",
+  "page": "parts",
+  "regions": [
+    {
+      "what": "mắt nữ, năm màu — mỗi mảnh là CẢ ĐÔI mắt — 1",
+      "rect": [
+        4,
+        4,
+        401,
+        164
+      ],
+      "split": {
+        "mode": "blob",
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "keep": "all",
+        "minArea": 5000
+      },
+      "names": {
+        "0": "eyes_f_01"
+      }
+    },
+    {
+      "what": "mắt nữ, năm màu — mỗi mảnh là CẢ ĐÔI mắt — 2",
+      "rect": [
+        455,
+        4,
+        397,
+        164
+      ],
+      "split": {
+        "mode": "blob",
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "keep": "all",
+        "minArea": 5000
+      },
+      "names": {
+        "0": "eyes_f_02"
+      }
+    },
+    {
+      "what": "mắt nữ, năm màu — mỗi mảnh là CẢ ĐÔI mắt — 3",
+      "rect": [
+        902,
+        4,
+        396,
+        164
+      ],
+      "split": {
+        "mode": "blob",
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "keep": "all",
+        "minArea": 5000
+      },
+      "names": {
+        "0": "eyes_f_03"
+      }
+    },
+    {
+      "what": "mắt nữ, năm màu — mỗi mảnh là CẢ ĐÔI mắt — 4",
+      "rect": [
+        1359,
+        4,
+        399,
+        164
+      ],
+      "split": {
+        "mode": "blob",
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "keep": "all",
+        "minArea": 5000
+      },
+      "names": {
+        "0": "eyes_f_04"
+      }
+    },
+    {
+      "what": "mắt nữ, năm màu — mỗi mảnh là CẢ ĐÔI mắt — 5",
+      "rect": [
+        1804,
+        4,
+        396,
+        164
+      ],
+      "split": {
+        "mode": "blob",
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "keep": "all",
+        "minArea": 5000
+      },
+      "names": {
+        "0": "eyes_f_05"
+      }
+    }
+  ]
+}

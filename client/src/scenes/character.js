@@ -10,7 +10,7 @@
  */
 import { el, showOverlay, hideOverlay, bindSubmit } from '../ui/ui.js';
 import { atlas } from '../render/atlas.js';
-import { drawLook, drawThumb, lookOptions, defaultLook, randomLook, SKIN_TONES, EYE_COLOURS } from '../render/paperdoll.js';
+import { drawLook, drawThumb, lookOptions, defaultLook, randomLook, skinTones, eyesName, EYE_COLOURS } from '../render/paperdoll.js';
 
 const GENDERS = [
   { id: 'a', code: 'm', label: 'Nam', icon: 'male' },
@@ -196,8 +196,7 @@ export function showCharacterScreen(game, characters) {
       hair: chooser('Kiểu tóc', [], {
         selected: () => look.hair,
         onPick: (name) => { look = { ...look, hair: name }; preview.draw(); },
-        thumb: (ctx, name, box) => drawThumb(ctx, atlas, name,
-          { ...box, face: look.face, skin: look.skin, eyes: look.eyes }),
+        thumb: (ctx, name, box) => drawThumb(ctx, atlas, name, { ...box, look }),
       }),
       eyes: chooser('Màu mắt', EYE_COLOURS.map((_, i) => String(i)), {
         selected: () => String(look.eyes),
@@ -208,15 +207,15 @@ export function showCharacterScreen(game, characters) {
         },
         // Bày CHÍNH khuôn mặt với từng màu mắt, không bày ô màu trơn: chọn mắt
         // thì phải thấy con mắt trên mặt, chứ một ô màu thì không biết nó ra sao.
-        thumb: (ctx, name, box) => drawThumb(ctx, atlas, look.face,
-          { ...box, skin: look.skin, eyes: Number(name) }),
+        thumb: (ctx, name, box) => drawThumb(ctx, atlas, eyesName(look.gender, Number(name)),
+          { ...box, look: { ...look, hair: null } }),
         nameOf: (name) => EYE_COLOURS[Number(name)].label,
         perPage: 5,
       }),
       outfit: chooser('Trang phục', [], {
         selected: () => look.outfit,
         onPick: (name) => { look = { ...look, outfit: name }; preview.draw(); },
-        thumb: (ctx, name, box) => drawThumb(ctx, atlas, name, { ...box, skin: look.skin }),
+        thumb: (ctx, name, box) => drawThumb(ctx, atlas, name, { ...box, look }),
       }),
     };
 
@@ -235,8 +234,10 @@ export function showCharacterScreen(game, characters) {
         },
       })));
 
+    // Ô màu da lấy màu THẬT của từng mảnh đầu trong atlas, không phải bảng mã
+    // chép tay: đổi bảng art là ô chọn tự đúng theo.
     const skinRow = swatches('Màu da',
-      SKIN_TONES.map((hex, i) => ({ hex, name: `Màu da ${i + 1}` })),
+      skinTones(atlas, look.gender).map((hex, i) => ({ hex, name: `Màu da ${i + 1}` })),
       () => look.skin, (i) => { look = { ...look, skin: i }; });
 
 
@@ -252,7 +253,11 @@ export function showCharacterScreen(game, characters) {
     const applyLook = (next) => {
       look = next;
       repaintChoosers();
+      // Hai giới có bảng tông da riêng nên đổi giới là đổi cả màu của ô chọn,
+      // không chỉ đổi ô nào đang chọn.
+      const tones = skinTones(atlas, look.gender);
       for (const [i, node] of [...skinRow.children].entries()) {
+        node.style.setProperty('--tone', tones[i]);
         node.setAttribute('aria-checked', i === look.skin ? 'true' : 'false');
       }
       preview.draw();
@@ -283,7 +288,7 @@ export function showCharacterScreen(game, characters) {
           nickname: nickname.value.trim(),
           appearance: {
             body_type: GENDERS.find((g) => g.code === look.gender).id,
-            face: look.face, hair: look.hair, outfit: look.outfit,
+            hair: look.hair, outfit: look.outfit,
             skin: look.skin, eyes: look.eyes,
           },
         });
@@ -330,7 +335,7 @@ export function showCharacterScreen(game, characters) {
     ]), { backdrop: 'character', logo: false });
 
     // Trang art nhân vật có thể chưa về; dựng danh sách lại khi nó tới nơi.
-    if (!lookOptions(atlas, 'm').face.length) atlas.ensurePage('parts')?.then(() => applyLook(defaultLook(atlas, look.gender)));
+    if (!lookOptions(atlas, 'm').outfit.length) atlas.ensurePage('parts')?.then(() => applyLook(defaultLook(atlas, look.gender)));
     else repaintChoosers();
     nickname.focus();
   });

@@ -16,11 +16,15 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const USERNAME_RE = /^[a-zA-Z0-9_]{3,20}$/;
 const NICKNAME_RE = /^[\p{L}\p{N} _-]{2,16}$/u;
 
-// Ngoại hình gồm ba tên mảnh art và một chỉ số tông da. Máy chủ KHÔNG biết
-// atlas có những mảnh nào — nó nằm bên client — nên chỉ kiểm dạng tên và tính
-// nhất quán với giới, đủ để không nhận rác vào cơ sở dữ liệu.
-const PART_RE = { face: /^face_[mf]_\d{2}$/, hair: /^hair_[mf]_\d{2}$/, outfit: /^outfit_[mf]_\d{2}$/ };
-const SKIN_COUNT = 4;
+// Ngoại hình gồm hai tên mảnh art và hai chỉ số. Máy chủ KHÔNG biết atlas có
+// những mảnh nào — nó nằm bên client — nên chỉ kiểm dạng tên và tính nhất quán
+// với giới, đủ để không nhận rác vào cơ sở dữ liệu.
+//
+// Không có `face` nữa: bộ art nhân vật gồm một cái đầu trơn cho mỗi tông da,
+// còn nét mặt là mảnh MẮT chồng lên trên — nên "khuôn mặt" chính là cặp
+// (tông da, màu mắt), cả hai đều là chỉ số chứ không phải tên mảnh.
+const PART_RE = { hair: /^hair_[mf]_\d{2}$/, outfit: /^outfit_[mf]_\d{2}$/ };
+const SKIN_COUNT = 5;
 const EYE_COUNT = 5;
 
 export function validateAppearance(appearance = {}) {

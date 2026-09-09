@@ -14,7 +14,7 @@ import { join } from 'node:path';
 import { readPng, Pixels } from './art/png.mjs';
 import { splitSheet } from './art/split.mjs';
 import { downscale } from './art/resize.mjs';
-import { stripHead, chinRow, widthAtRow } from './art/head.mjs';
+import { chinRow, collarSlot, headCap, pocketPiece, skinTone, dropHairlines } from './art/head.mjs';
 
 
 /** Cắt một khung con khỏi tấm gộp, giữ nguyên pixel. */
@@ -82,22 +82,45 @@ for (const file of sheets) {
     pieces.forEach((raw, i) => {
       const name = area.names[String(i)];
       if (!name) return;
-      const piece = maxHeight && raw.h > maxHeight ? { ...raw, ...downscale(raw, raw.h / maxHeight) } : raw;
-      // Mảnh tóc là cả cái đầu đội tóc; khoét mặt đi mới chồng được lên khuôn
-      // mặt tự chọn, và khung lỗ khoét được chính là mốc căn.
-      const hole = area.strip === 'head' ? stripHead(piece) : null;
-      // Mảnh mặt có sẵn khúc cổ: ghi lại dòng cằm để chỗ ghép biết đặt tóc.
-      const chin = area.measure === 'chin' ? chinRow(piece) : null;
-      // Bề ngang khúc cổ: mốc quy tỉ lệ giữa mảnh mặt và mảnh thân. Mảnh mặt
-      // đo ở giữa khúc cổ (dưới cằm), mảnh thân đo ở dòng thứ tư tính từ mép
-      // trên — mép trên chính là đỉnh khúc cổ nhô lên giữa hai vai.
-      const neck = area.measure === 'chin' ? widthAtRow(piece, (chin ?? piece.h - 1) + (piece.h - (chin ?? piece.h - 1)) * 0.5)
-        : area.measure === 'neck' ? widthAtRow(piece, 4) : null;
+      // `scale` thu nhỏ CÙNG MỘT tỉ lệ cho mọi mảnh của bộ art, khác `maxHeight`
+      // là quy mỗi mảnh về một chiều cao. Bộ nhân vật phải dùng `scale`: các
+      // mảnh ghép vào nhau nên chúng phải giữ nguyên tương quan cỡ với nhau,
+      // quy về cùng chiều cao là cái đầu to bằng cả bộ quần áo.
+      const factor = area.split?.scale ?? 0;
+      const piece = factor > 1 ? { ...raw, ...downscale(raw, factor) }
+        : maxHeight && raw.h > maxHeight ? { ...raw, ...downscale(raw, raw.h / maxHeight) } : raw;
+      // Mảnh đầu nam có sẵn khúc cổ nối xuống, nên đáy mảnh là hết cổ chứ không
+      // phải cằm: ghi lại dòng cằm để chỗ ghép biết đặt đôi mắt ở đâu.
+      const chin = area.measure === 'cap' ? chinRow(piece) : null;
+      // Mốc của bộ nhân vật mới. Đo từ chính hình chứ không chép tay, để thêm
+      // kiểu tóc hay bộ đồ mới là ghép đúng ngay, không phải dò lại số.
+      // Nét mồ côi phải xoá TRƯỚC khi đo mốc: một sợi thả xuống tận gấu váy
+      // kéo khung bao rộng ra, mà khung bao là mốc căn đầu với thân.
+      if (area.measure === 'collar') dropHairlines(piece);
+      const extra = {};
+      if (area.measure === 'collar') Object.assign(extra, collarSlot(piece));
+      if (area.measure === 'cap') Object.assign(extra, headCap(piece));
+      if (area.measure === 'cap' && name.startsWith('head_')) Object.assign(extra, skinTone(piece));
       if (seen.has(name)) throw new Error(`tên sprite "${name}" có ở cả ${seen.get(name)} và ${maps.source}`);
       seen.set(name, maps.source);
       if (!pages.has(page)) pages.set(page, []);
-      pages.get(page).push({ ...piece, name, hole, chin, neck });
+      pages.get(page).push({ ...piece, name, chin, ...extra });
       count++;
+      // Tay chân trần trên mảnh trang phục chỉ có nét viền, ruột là nền. Tách
+      // ruột ấy ra một mảnh TRẮNG cùng cỡ, vẽ lót bên dưới rồi nhân với tông da
+      // người chơi chọn — nhờ vậy một bộ đồ hợp với cả năm tông, khỏi phải nhập
+      // năm bản.
+      if (area.measure === 'collar') {
+        const raw_limbs = raw.pocket ? pocketPiece(raw.pocket, raw.w, raw.h) : null;
+        const limbs = raw_limbs && factor > 1 ? { ...raw_limbs, ...downscale(raw_limbs, factor) } : raw_limbs;
+        if (limbs) {
+          const limbName = `${name}_limbs`;
+          if (seen.has(limbName)) throw new Error(`tên sprite "${limbName}" trùng`);
+          seen.set(limbName, maps.source);
+          pages.get(page).push({ ...limbs, name: limbName, chin: null });
+          count++;
+        }
+      }
     });
   }
   console.log(`${maps.source.padEnd(14)} → ${page.padEnd(8)} ${String(cut).padStart(3)} vật cắt được, ${count} đặt tên`);
@@ -140,9 +163,10 @@ for (const [page, items] of [...pages].sort()) {
   pageFiles[page] = { file, bytes: buf.length };
   for (const piece of sorted) {
     index[piece.name] = { page, x: piece.ax, y: piece.ay, w: piece.w, h: piece.h };
-    if (piece.hole) index[piece.name].hole = piece.hole;
     if (piece.chin != null) index[piece.name].chin = piece.chin;
-    if (piece.neck != null) index[piece.name].neck = piece.neck;
+    if (piece.collar) index[piece.name].collar = piece.collar;
+    if (piece.cap) index[piece.name].cap = piece.cap;
+    if (piece.tone) index[piece.name].tone = piece.tone;
   }
   console.log(`${file.padEnd(22)} ${ATLAS_W}×${atlasH}  ${(buf.length / 1024 / 1024).toFixed(1)} MB · ${items.length} vật`);
 }

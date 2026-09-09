@@ -1,151 +1,9 @@
 /**
- * Khoét phần ĐẦU ra khỏi mảnh tóc, và trả lại khung của cái lỗ vừa khoét.
+ * Đo mốc ghép trên từng mảnh art nhân vật.
  *
- * Mảnh tóc trên tấm gốc không phải chỉ có tóc: nó là cả cái đầu đội tóc, phần
- * mặt tô kín màu da. Vẽ thẳng lên nhân vật thì mảng da đó đè mất khuôn mặt bên
- * dưới. Khoét đi thì còn đúng phần tóc, mà cái LỖ vừa khoét lại chính là chỗ
- * khuôn mặt phải nằm — nên hàm trả về khung lỗ để dùng làm mốc căn, khỏi phải
- * chỉnh tay từng kiểu tóc.
+ * Bộ art không kèm bộ xương nên không có mốc nào cho sẵn: mọi chỗ nối giữa các
+ * mảnh đều phải suy ra từ chính hình, đo một lần lúc nhập art rồi ghi vào atlas.
  */
-
-/** Da người trong tấm này: sáng, ngả đỏ, R > G >= B và chênh lệch vừa phải. */
-function isSkin(r, g, b) {
-  return r >= 185 && r > g && g >= b && r - b >= 15 && r - b <= 95 && r - g <= 45;
-}
-
-export function stripHead(piece) {
-  const { w: W, h: H, data } = piece;
-  const skinAt = (i) => data[i * 4 + 3] > 128 && isSkin(data[i * 4], data[i * 4 + 1], data[i * 4 + 2]);
-
-  // Mồi loang: pixel da gần tâm khuôn mặt nhất. Khuôn mặt nằm ở nửa dưới mảnh
-  // tóc — nửa trên là đỉnh tóc. Dò xoáy ốc ra ngoài từ điểm đoán.
-  let seed = -1;
-  const cx = W >> 1, cy = Math.round(H * 0.68);
-  for (let r = 0; r < Math.max(W, H) && seed < 0; r++) {
-    for (let dy = -r; dy <= r && seed < 0; dy++) {
-      for (let dx = -r; dx <= r && seed < 0; dx++) {
-        if (Math.max(Math.abs(dx), Math.abs(dy)) !== r) continue;
-        const x = cx + dx, y = cy + dy;
-        if (x < 0 || y < 0 || x >= W || y >= H) continue;
-        if (skinAt(y * W + x)) seed = y * W + x;
-      }
-    }
-  }
-  if (seed < 0) return null; // tóc nhìn từ sau: không có mặt để khoét
-
-  // Hai lần loang, chọn cái đúng.
-  //
-  // Loang rộng (chỉ hỏi "có phải da không") là cách duy nhất khoét sạch những
-  // kiểu tóc mà mặt có nhiều mảng sáng tối, nhưng với tóc VÀNG thì nó lem
-  // thẳng vào tóc: da trong bóng (244,216,189) và tóc vàng (248,217,187) gần
-  // như trùng màu. Loang hẹp (bám sát màu điểm mồi) thì không lem, nhưng bỏ
-  // sót nửa khuôn mặt ở mấy kiểu tóc kia.
-  //
-  // Phân biệt bằng một điều luôn đúng với bộ art này: ĐỈNH ĐẦU bao giờ cũng là
-  // tóc. Lỗ khoét mà ăn lên tới đỉnh nghĩa là đã lem vào tóc — lúc đó mới hạ
-  // xuống dùng bản hẹp.
-  const TOL = 30;
-  const s0 = data[seed * 4], s1 = data[seed * 4 + 1], s2 = data[seed * 4 + 2];
-  const nearSeed = (i) => Math.abs(data[i * 4] - s0) <= TOL
-    && Math.abs(data[i * 4 + 1] - s1) <= TOL && Math.abs(data[i * 4 + 2] - s2) <= TOL;
-
-  const queue = new Int32Array(W * H);
-  const fill = (tight) => {
-    const mask = new Uint8Array(W * H);
-    let qh = 0, qt = 0;
-    mask[seed] = 1; queue[qt++] = seed;
-    let x0 = W, y0 = H, x1 = 0, y1 = 0;
-    while (qh < qt) {
-      const i = queue[qh++];
-      const x = i % W, y = (i / W) | 0;
-      if (x < x0) x0 = x; if (x > x1) x1 = x;
-      if (y < y0) y0 = y; if (y > y1) y1 = y;
-      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
-        const nx = x + dx, ny = y + dy;
-        if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
-        const j = ny * W + nx;
-        if (mask[j] || !skinAt(j) || (tight && !nearSeed(j))) continue;
-        mask[j] = 1; queue[qt++] = j;
-      }
-    }
-    return { mask, x0, y0, x1, y1 };
-  };
-
-  const CROWN = 0.18; // phần đỉnh mảnh tóc, tính theo chiều cao
-  let spread = fill(false);
-  if (spread.y0 < H * CROWN) spread = fill(true);
-  const { mask: hole, x0, y0, x1, y1 } = spread;
-
-  // Mắt, lông mày, miệng vẽ sẵn trong một vài mảnh tóc là những đảo nằm LỌT
-  // trong vùng da. Xoá da mà để chúng lại thì khuôn mặt mới đội thêm một đôi
-  // mắt cũ. Quét lại: cụm nào nằm gọn trong khung lỗ và không chạm mép mảnh
-  // thì cũng là mặt cũ, xoá nốt.
-  const seenPix = new Uint8Array(W * H);
-  let qh = 0, qt = 0;
-  for (let sy = y0; sy <= y1; sy++) {
-    for (let sx = x0; sx <= x1; sx++) {
-      const start = sy * W + sx;
-      if (seenPix[start] || hole[start] || data[start * 4 + 3] <= 128) continue;
-      qh = 0; qt = 0; queue[qt++] = start; seenPix[start] = 1;
-      const cluster = [start];
-      let outside = false;
-      while (qh < qt) {
-        const i = queue[qh++];
-        const x = i % W, y = (i / W) | 0;
-        if (x < x0 || x > x1 || y < y0 || y > y1) outside = true;
-        for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
-          const nx = x + dx, ny = y + dy;
-          if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
-          const j = ny * W + nx;
-          if (seenPix[j] || hole[j] || data[j * 4 + 3] <= 128) continue;
-          seenPix[j] = 1; queue[qt++] = j; cluster.push(j);
-        }
-      }
-      if (!outside) for (const i of cluster) hole[i] = 1;
-    }
-  }
-
-  // Đo khung SAU khi đã gom cả mắt mũi miệng vào lỗ: loang màu da dừng lại ở
-  // đôi mắt vẽ sẵn, nên khung đo trước đó mới chỉ là một bên má.
-  let hx0 = W, hy0 = H, hx1 = 0, hy1 = 0;
-  for (let i = 0; i < W * H; i++) {
-    if (!hole[i]) continue;
-    data[i * 4 + 3] = 0;
-    const x = i % W, y = (i / W) | 0;
-    if (x < hx0) hx0 = x; if (x > hx1) hx1 = x;
-    if (y < hy0) hy0 = y; if (y > hy1) hy1 = y;
-  }
-  return { x: hx0, y: hy0, w: hx1 - hx0 + 1, h: hy1 - hy0 + 1 };
-}
-
-/**
- * Xoá nét viền dưới cằm của mảnh khuôn mặt.
- *
- * Mảnh mặt được cắt rời nên có nét viền khép KÍN vòng quanh đầu, kể cả dưới
- * cằm. Art vẽ liền thì không thế: nét hàm chạy xuống rồi thành nét cổ, dưới
- * cằm không có nét nào cắt ngang. Ghép mảnh mặt lên thân mà giữ nguyên nét ấy
- * thì nó nằm vắt ngang khúc cổ thành một vòng tối — nhìn đúng như đầu với thân
- * hở ra một đường, dù không hở pixel nào.
- *
- * Chỉ xoá ở khoảng GIỮA (chỗ khúc cổ đi qua) và chỉ vài pixel ngoài cùng; hai
- * bên hàm vẫn còn nét, vì ở đó hàm giáp nền thật.
- */
-export function openChin(piece, { width = 0.5, depth = 3 } = {}) {
-  const { w: W, h: H, data } = piece;
-  const half = Math.round((W * width) / 2);
-  const dark = (i) => 0.2126 * data[i * 4] + 0.7152 * data[i * 4 + 1] + 0.0722 * data[i * 4 + 2] < 165;
-  for (let x = Math.round(W / 2) - half; x <= Math.round(W / 2) + half; x++) {
-    if (x < 0 || x >= W) continue;
-    let removed = 0;
-    for (let y = H - 1; y >= 0 && removed < depth; y--) {
-      const i = y * W + x;
-      if (data[i * 4 + 3] < 40) continue;   // chưa tới hình
-      if (!dark(i)) break;                   // hết nét viền, tới phần da
-      data[i * 4 + 3] = 0;
-      removed++;
-    }
-  }
-}
 
 /**
  * Dòng CẰM trên mảnh khuôn mặt có sẵn khúc cổ.
@@ -179,16 +37,170 @@ export function chinRow(piece) {
 }
 
 /**
- * Bề ngang hình ở một dòng.
+ * Chỗ CẮM ĐẦU trên mảnh trang phục.
  *
- * Dùng để đo khúc cổ — mốc quy tỉ lệ giữa mảnh mặt và mảnh trang phục. Hai
- * mảnh vẽ ở hai độ phân giải khác nhau, nhưng chỗ chúng NỐI vào nhau là khúc
- * cổ, nên cho hai khúc cổ bằng nhau là hai mảnh khớp nhau.
+ * Mảnh trang phục của bộ art mới là cả người trừ cái đầu, và chỗ cao nhất của
+ * nó chính là miệng cổ áo — chỗ khúc cổ chui lên. Nên mốc lấy ngay ở đó: hàng
+ * trên cùng có hình, tâm ngang của hình trên hàng ấy, và bề ngang miệng cổ.
+ *
+ * Đo tâm bằng TRUNG VỊ của mấy hàng đầu chứ không lấy một hàng: hàng trên cùng
+ * của mấy bộ có mũ trùm hay khăn quàng chỉ là một chỏm lệch sang bên.
  */
-export function widthAtRow(piece, row) {
+export function collarSlot(piece) {
   const { w: W, h: H, data } = piece;
-  const y = Math.min(H - 1, Math.max(0, Math.round(row)));
+  const rows = [];
+  for (let y = 0; y < H; y++) {
+    let x0 = W, x1 = -1;
+    for (let x = 0; x < W; x++) if (data[(y * W + x) * 4 + 3] > 128) { if (x < x0) x0 = x; x1 = x; }
+    if (x1 >= x0) rows.push({ y, x0, x1 });
+    if (rows.length >= Math.max(8, Math.round(H * 0.06))) break;
+  }
+  if (!rows.length) return {};
+  const mid = rows.map((r) => (r.x0 + r.x1) / 2).sort((a, b) => a - b);
+  return {
+    collar: {
+      x: Math.round(mid[mid.length >> 1]),
+      y: rows[0].y,
+      w: rows[0].x1 - rows[0].x0 + 1,
+    },
+  };
+}
+
+/**
+ * Khung SỌ của một mảnh đầu hoặc một mảnh tóc.
+ *
+ * Bộ art mới không có mảnh tóc nào bọc sẵn cái đầu để khoét lấy lỗ căn, nên
+ * mốc phải suy từ dáng: cả đầu lẫn tóc đều là một khối tròn, chỗ PHÌNH RỘNG
+ * NHẤT của tóc chính là chỗ nó ôm quanh chỗ phình rộng nhất của đầu. Ghi lại
+ * đỉnh, hàng rộng nhất và tâm ngang tại hàng đó là đủ để đặt tóc lên đầu mà
+ * không phải chỉnh tay từng kiểu.
+ */
+export function headCap(piece) {
+  const { w: W, h: H, data } = piece;
+  let top = -1, wide = 0, wideW = 0, wideCx = W / 2;
+  for (let y = 0; y < H; y++) {
+    let x0 = W, x1 = -1, n = 0;
+    for (let x = 0; x < W; x++) if (data[(y * W + x) * 4 + 3] > 128) { if (x < x0) x0 = x; x1 = x; n++; }
+    if (x1 < x0) continue;
+    if (top < 0) top = y;
+    const span = x1 - x0 + 1;
+    if (span > wideW) { wideW = span; wide = y; wideCx = (x0 + x1) / 2; }
+  }
+  if (top < 0) return {};
+  return { cap: { top, wide, w: wideW, cx: Math.round(wideCx) } };
+}
+
+/**
+ * Mặt nạ da trần thành một mảnh vẽ được.
+ *
+ * `pocket` từ khâu tách nền đánh dấu chỗ ruột tay ruột chân — vốn là ô caro nằm
+ * lọt trong nét viền. Đổ TRẮNG vào đó rồi vẽ lót dưới mảnh trang phục và nhân
+ * với tông da người chơi chọn: một bộ đồ hợp cả năm tông, khỏi nhập năm bản.
+ *
+ * Nới ra một pixel để chui xuống dưới nét viền — tô đúng khít thì giữa mảng da
+ * và nét viền còn một sợi trong suốt, phóng to lên là một đường sáng chạy dọc
+ * cánh tay.
+ */
+export function pocketPiece(mask, W, H) {
   let n = 0;
-  for (let x = 0; x < W; x++) if (data[(y * W + x) * 4 + 3] > 128) n++;
-  return n;
+  for (let i = 0; i < mask.length; i++) if (mask[i]) n++;
+  if (n < 64) return null;
+  const data = new Uint8Array(W * H * 4);
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      let on = mask[y * W + x] === 1;
+      if (!on) {
+        for (let dy = -1; dy <= 1 && !on; dy++) for (let dx = -1; dx <= 1 && !on; dx++) {
+          const nx = x + dx, ny = y + dy;
+          if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
+          if (mask[ny * W + nx]) on = true;
+        }
+      }
+      if (!on) continue;
+      const i = (y * W + x) * 4;
+      data[i] = 255; data[i + 1] = 255; data[i + 2] = 255; data[i + 3] = 255;
+    }
+  }
+  return { w: W, h: H, data };
+}
+
+/**
+ * TÔNG DA của một mảnh đầu.
+ *
+ * Năm mảnh đầu là năm tông vẽ sẵn, không phải một tông nhuộm lại — nên chỗ ghép
+ * không cần nhuộm cái đầu. Nhưng tay chân trần trên mảnh trang phục thì lại
+ * phải nhuộm cho khớp, mà "khớp" nghĩa là khớp với CHÍNH mảnh đầu đang đội. Nên
+ * đo tông ngay lúc nhập art và ghi vào atlas, khỏi chép tay năm mã màu rồi lệch
+ * lúc nào không biết.
+ *
+ * Lấy màu HAY GẶP NHẤT ở giữa má chứ không lấy trung bình: trung bình của cả
+ * khuôn mặt bị nét viền tối và mảng sáng kéo lệch đi.
+ */
+export function skinTone(piece) {
+  const { w: W, h: H, data } = piece;
+  const tally = new Map();
+  for (let y = Math.round(H * 0.35); y < Math.round(H * 0.6); y++) {
+    for (let x = Math.round(W * 0.35); x < Math.round(W * 0.65); x++) {
+      const i = (y * W + x) * 4;
+      if (data[i + 3] < 250) continue;
+      const key = (data[i] << 16) | (data[i + 1] << 8) | data[i + 2];
+      tally.set(key, (tally.get(key) ?? 0) + 1);
+    }
+  }
+  if (!tally.size) return {};
+  let best = 0, bestN = -1;
+  for (const [key, n] of tally) if (n > bestN) { best = key; bestN = n; }
+  return { tone: `#${best.toString(16).padStart(6, '0')}` };
+}
+
+/**
+ * Xoá NÉT SỢI TÓC trên mảnh trang phục.
+ *
+ * Ở vài bộ đồ nữ, cánh tay trần chỉ còn đúng một nét viền ngoài — không có nét
+ * trong, không có mảng màu nào, chỉ một sợi cong thả từ ống tay xuống. Đó là
+ * vết sót của khâu tách nhân vật khỏi tấm gốc chứ không phải hình: cắt ra thì
+ * nhân vật trông như có hai sợi dây thay cho hai cánh tay.
+ *
+ * Nhận ra bằng BỀ DÀY, không phải bằng màu: nét sót mảnh đúng một hai pixel,
+ * còn mọi thứ khác trên bộ đồ — kể cả dây mũ, quai túi, dây giày — đều dày hơn
+ * thế. (Thử bằng màu thì hỏng: vải sẫm như áo nỉ đỏ hay quần đen cũng "tối" y
+ * như nét viền, xoá theo màu là bay mất nửa bộ đồ.)
+ *
+ * Cách đo bề dày: xói mòn mặt nạ đi `core` pixel rồi giữ lại phần nằm trong
+ * `reach` pixel quanh cái lõi còn sót. Sợi mảnh không còn lõi nào nên rụng cả;
+ * mảng dày thì lõi còn nguyên, và toàn bộ mảng nằm sát lõi nên giữ được hết.
+ */
+export function dropHairlines(piece, { core = 1, reach = 2 } = {}) {
+  const { w: W, h: H, data } = piece;
+  const on = (x, y) => x >= 0 && y >= 0 && x < W && y < H && data[(y * W + x) * 4 + 3] >= 40;
+
+  const eroded = new Uint8Array(W * H);
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      if (!on(x, y)) continue;
+      let solid = true;
+      for (let dy = -core; dy <= core && solid; dy++) {
+        for (let dx = -core; dx <= core && solid; dx++) if (!on(x + dx, y + dy)) solid = false;
+      }
+      if (solid) eroded[y * W + x] = 1;
+    }
+  }
+
+  let dropped = 0;
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      const i = y * W + x;
+      if (data[i * 4 + 3] < 40) continue;
+      let keep = false;
+      for (let dy = -reach; dy <= reach && !keep; dy++) {
+        for (let dx = -reach; dx <= reach && !keep; dx++) {
+          const nx = x + dx, ny = y + dy;
+          if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
+          if (eroded[ny * W + nx]) keep = true;
+        }
+      }
+      if (!keep) { data[i * 4 + 3] = 0; dropped++; }
+    }
+  }
+  return dropped;
 }
