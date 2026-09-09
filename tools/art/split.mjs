@@ -252,58 +252,51 @@ function backgroundMask(img, options = {}) {
     const x = i % W, y = (i / W) | 0;
     push(x - 1, y); push(x + 1, y); push(x, y - 1); push(x, y + 1);
   }
-  // BÀO MÒN MỘT PIXEL ngoài cùng.
+  // TÍNH LẠI ALPHA CHO MÉP (khử nhiễm nền).
   //
-  // Hàng pixel ngoài cùng của vật là màu vật PHA với ô caro. Với nét viền tối
-  // thì pha ra màu nhạt, còn với da người — vốn đã sáng — thì pha ra một màu
-  // gần như da, không phép thử màu nào tách được. Kết quả là quanh đầu còn một
-  // quầng sáng mảnh, đặt lên nền màu là hiện ra thành viền trắng, nhìn như
-  // hình bị cắt dán. Art ở đây vẽ mềm nên bỏ hẳn một pixel không mất nét gì.
+  // Nền caro vẽ chết vào ảnh, nên hàng pixel ngoài cùng của vật là màu vật PHA
+  // với ô caro. Cắt nhị phân thì giữ nguyên màu pha ấy — quanh đầu hiện một
+  // quầng sáng, đặt lên nền màu là lộ viền trắng. Bào bớt một pixel thì hết
+  // quầng nhưng mép cụt và nhoè.
+  //
+  // Làm đúng thì phải GỠ nền ra khỏi màu pha: pixel mép có màu C = a·F + (1-a)·B,
+  // trong đó B là màu nền ngay cạnh (biết được, vì đã có mặt nạ nền) và F là
+  // màu thật của vật (lấy từ pixel nằm sâu hơn một lớp). Giải ra a, rồi ghi lại
+  // pixel bằng màu F với độ đục a. Mép nhờ vậy vừa mượt vừa không dính màu nền.
+  const rim = new Float32Array(W * H).fill(-1);
   if (BG_TEST === 'light') {
-    const grow = [];
+    const edge = [];
     for (let y = 0; y < H; y++) {
       for (let x = 0; x < W; x++) {
         const i = y * W + x;
         if (isBg[i]) continue;
+        let bgN = 0, br = 0, bg_ = 0, bb = 0;
         for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
           const nx = x + dx, ny = y + dy;
           if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
-          if (isBg[ny * W + nx]) { grow.push(i); dy = 2; break; }
+          const j = ny * W + nx;
+          if (!isBg[j]) continue;
+          bgN++; br += data[j * 4]; bg_ += data[j * 4 + 1]; bb += data[j * 4 + 2];
         }
+        if (bgN) edge.push([i, br / bgN, bg_ / bgN, bb / bgN]);
       }
     }
-    for (const i of grow) isBg[i] = 1;
-  }
-
-  // QUẦNG SÁNG Ở MÉP.
-  //
-  // Loang nền dừng ở ngưỡng "xám và sáng", nên hàng pixel ngoài cùng của vật —
-  // chỗ nét viền hoà với ô caro — vẫn được coi là vật và giữ nguyên màu nhợt
-  // của nó. Trên nền kem thì không thấy gì, nhưng đặt nhân vật lên nền xanh
-  // trong game là hiện ra một vòng sáng quanh mép, rõ nhất là dưới cằm.
-  //
-  // Cho những pixel SÁT NỀN mà nhạt màu và sáng như nền trong dần đi. Chỉ xét
-  // pixel sát nền: áo trắng nằm bên trong tuy cũng sáng và nhạt màu nhưng
-  // không đụng nền nên giữ nguyên.
-  const rim = new Float32Array(W * H).fill(-1);
-  if (BG_TEST === 'light') {
-    for (let y = 0; y < H; y++) {
-      for (let x = 0; x < W; x++) {
-        const i = y * W + x;
-        if (isBg[i]) continue;
-        let touches = false;
-        for (let dy = -1; dy <= 1 && !touches; dy++) for (let dx = -1; dx <= 1; dx++) {
-          const nx = x + dx, ny = y + dy;
-          if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
-          if (isBg[ny * W + nx]) { touches = true; break; }
-        }
-        if (!touches) continue;
-        const p = i * 4;
-        const mx = Math.max(data[p], data[p + 1], data[p + 2]);
-        const mn = Math.min(data[p], data[p + 1], data[p + 2]);
-        const dark = Math.min(1, Math.max(0, (LIGHT_MIN + 4 - mn) / 30));
-        const colour = Math.min(1, Math.max(0, (mx - mn - LIGHT_SAT * 0.7) / 15));
-        rim[i] = Math.max(dark, colour);
+    // Bộ art này vật nào cũng có NÉT VIỀN TỐI bao quanh, nên hàng pixel ngoài
+    // cùng luôn là nét viền pha với nền sáng. Dựa vào đó suy độ đục: càng tối
+    // so với nền thì càng đục. Rồi GỠ phần nền ra khỏi màu — giữ nguyên màu nét
+    // viền chứ không thay bằng màu bên trong, vì bản thân nét viền là hàng
+    // ngoài cùng: thay đi là mất nét, mép hiện thành đường chấm chấm.
+    const LUM_LINE = 60;
+    const lum = (r, g, b) => 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    for (const [i, bR, bG, bB] of edge) {
+      const p = i * 4;
+      const lb = lum(bR, bG, bB);
+      const a = Math.min(1, Math.max(0, (lb - lum(data[p], data[p + 1], data[p + 2])) / (lb - LUM_LINE)));
+      rim[i] = a;
+      if (a < 0.02 || a > 0.98) continue;
+      for (let c = 0; c < 3; c++) {
+        const b = c === 0 ? bR : c === 1 ? bG : bB;
+        data[p + c] = Math.min(255, Math.max(0, Math.round((data[p + c] - (1 - a) * b) / a)));
       }
     }
   }
