@@ -14,7 +14,7 @@ import { join } from 'node:path';
 import { readPng, Pixels } from './art/png.mjs';
 import { splitSheet } from './art/split.mjs';
 import { downscale } from './art/resize.mjs';
-import { stripHead, openChin } from './art/head.mjs';
+import { stripHead, chinRow, widthAtRow } from './art/head.mjs';
 
 
 /** Cắt một khung con khỏi tấm gộp, giữ nguyên pixel. */
@@ -55,6 +55,17 @@ for (const file of sheets) {
   const maps = JSON.parse(readFileSync(join(SHEETS, file), 'utf8'));
   const page = maps.page ?? 'outdoor';
   const sheet = readPng(readFileSync(join(SHEETS, maps.source)));
+  // Nhãn dán trên tấm ("Nam", "Nữ", tên từng ô) nằm lẫn trong khung cần cắt.
+  // Bôi trắng trước: trắng trơn thì phép thử nền coi là nền, khỏi phải né bằng
+  // cách thu hẹp khung rồi cắt cụt mất hình.
+  for (const [bx, by, bw, bh] of maps.blank ?? []) {
+    for (let y = by; y < by + bh; y++) {
+      for (let x = bx; x < bx + bw; x++) {
+        const i = (y * sheet.width + x) * 4;
+        sheet.data[i] = 255; sheet.data[i + 1] = 255; sheet.data[i + 2] = 255; sheet.data[i + 3] = 255;
+      }
+    }
+  }
   // Tấm bảng thành phần chia sẵn thành nhiều KHUNG, mỗi khung một kiểu bày và
   // một nhãn vẽ chết ở góc. Cắt cả tấm một lần là nhãn cũng thành sprite, còn
   // tham số hợp với khung tóc thì hỏng ở khung mặt. Nên cắt theo từng khung.
@@ -75,12 +86,17 @@ for (const file of sheets) {
       // Mảnh tóc là cả cái đầu đội tóc; khoét mặt đi mới chồng được lên khuôn
       // mặt tự chọn, và khung lỗ khoét được chính là mốc căn.
       const hole = area.strip === 'head' ? stripHead(piece) : null;
-      // Mảnh mặt: bỏ nét viền dưới cằm để ghép lên cổ không lộ vòng tối.
-      if (area.strip === 'chin') openChin(piece);
+      // Mảnh mặt có sẵn khúc cổ: ghi lại dòng cằm để chỗ ghép biết đặt tóc.
+      const chin = area.measure === 'chin' ? chinRow(piece) : null;
+      // Bề ngang khúc cổ: mốc quy tỉ lệ giữa mảnh mặt và mảnh thân. Mảnh mặt
+      // đo ở giữa khúc cổ (dưới cằm), mảnh thân đo ở dòng thứ tư tính từ mép
+      // trên — mép trên chính là đỉnh khúc cổ nhô lên giữa hai vai.
+      const neck = area.measure === 'chin' ? widthAtRow(piece, (chin ?? piece.h - 1) + (piece.h - (chin ?? piece.h - 1)) * 0.5)
+        : area.measure === 'neck' ? widthAtRow(piece, 4) : null;
       if (seen.has(name)) throw new Error(`tên sprite "${name}" có ở cả ${seen.get(name)} và ${maps.source}`);
       seen.set(name, maps.source);
       if (!pages.has(page)) pages.set(page, []);
-      pages.get(page).push({ ...piece, name, hole });
+      pages.get(page).push({ ...piece, name, hole, chin, neck });
       count++;
     });
   }
@@ -125,6 +141,8 @@ for (const [page, items] of [...pages].sort()) {
   for (const piece of sorted) {
     index[piece.name] = { page, x: piece.ax, y: piece.ay, w: piece.w, h: piece.h };
     if (piece.hole) index[piece.name].hole = piece.hole;
+    if (piece.chin != null) index[piece.name].chin = piece.chin;
+    if (piece.neck != null) index[piece.name].neck = piece.neck;
   }
   console.log(`${file.padEnd(22)} ${ATLAS_W}×${atlasH}  ${(buf.length / 1024 / 1024).toFixed(1)} MB · ${items.length} vật`);
 }

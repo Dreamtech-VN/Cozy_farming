@@ -146,3 +146,49 @@ export function openChin(piece, { width = 0.5, depth = 3 } = {}) {
     }
   }
 }
+
+/**
+ * Dòng CẰM trên mảnh khuôn mặt có sẵn khúc cổ.
+ *
+ * Mảnh mặt kiểu này gồm đầu và một khúc cổ, nên đáy mảnh là hết cổ chứ không
+ * phải cằm. Lúc ghép cần cả hai mốc: đáy để lún vào cổ áo, còn cằm để đặt mái
+ * tóc. Cằm tìm bằng chỗ hình PHÌNH RA: từ dưới lên, khúc cổ hẹp và đều, tới
+ * cằm thì bề ngang nhảy vọt vì có thêm hai bên hàm.
+ *
+ * @returns {number|null} chỉ số dòng cằm, null nếu không tìm ra khúc cổ.
+ */
+export function chinRow(piece) {
+  const { w: W, h: H, data } = piece;
+  const widths = [];
+  for (let y = 0; y < H; y++) {
+    let n = 0;
+    for (let x = 0; x < W; x++) if (data[(y * W + x) * 4 + 3] > 128) n++;
+    widths.push(n);
+  }
+  // Cằm: đi xuống từ chỗ ĐẦU RỘNG NHẤT, dừng ở hàng đầu tiên hẹp còn chưa tới
+  // 30% bề ngang đầu — dưới ngưỡng đó là đã sang khúc cổ.
+  //
+  // Không lấy mốc theo bề ngang khúc cổ: cổ mỗi mảnh một khác, có mảnh rất hẹp
+  // nên ngưỡng tụt xuống tận chân cổ. Còn đi từ mép trên xuống thì dừng nhầm
+  // ngay ở đỉnh đầu, vì đỉnh đầu cũng hẹp.
+  let widest = 0;
+  for (let y = 0; y < H; y++) if (widths[y] > widths[widest]) widest = y;
+  const cut = widths[widest] * 0.3;
+  for (let y = widest; y < H; y++) if (widths[y] < cut) return y;
+  return null;
+}
+
+/**
+ * Bề ngang hình ở một dòng.
+ *
+ * Dùng để đo khúc cổ — mốc quy tỉ lệ giữa mảnh mặt và mảnh trang phục. Hai
+ * mảnh vẽ ở hai độ phân giải khác nhau, nhưng chỗ chúng NỐI vào nhau là khúc
+ * cổ, nên cho hai khúc cổ bằng nhau là hai mảnh khớp nhau.
+ */
+export function widthAtRow(piece, row) {
+  const { w: W, h: H, data } = piece;
+  const y = Math.min(H - 1, Math.max(0, Math.round(row)));
+  let n = 0;
+  for (let x = 0; x < W; x++) if (data[(y * W + x) * 4 + 3] > 128) n++;
+  return n;
+}

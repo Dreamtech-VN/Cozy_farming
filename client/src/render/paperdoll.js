@@ -28,13 +28,18 @@ export const EYE_COLOURS = [
   { id: 'ho_phach', label: 'Hổ phách', hex: '#d99a2b' },
 ];
 
-// Cằm chờm xuống mảnh trang phục mấy pixel (tính theo art gốc).
+// Chân cổ lún vào cổ áo mấy pixel (tính theo mảnh trang phục).
 //
-// KHÔNG vẽ thêm cổ. Mảnh trang phục vốn đã có khúc cổ vẽ sẵn — có khối, có nét
-// viền, có bóng — nên việc ở đây chỉ là đặt cằm xuống vừa chạm nó. Tôi đã thử
-// vá bằng một mẩu cổ tô tay: mảng màu phẳng không ăn nhập với nét vẽ chung
-// quanh, nhìn ra ngay là miếng dán, mà chờm sâu cho kín thì lại nuốt mất cổ.
-const NECK_OVERLAP = 8;
+// Mảnh khuôn mặt nay có sẵn KHÚC CỔ, nên không phải vá gì: chỉ việc cho chân
+// cổ lún vào trong cổ áo vài pixel là hai mảnh liền mạch.
+const NECK_OVERLAP = 6;
+
+// Chiều cao ĐẦU (từ đỉnh tới cằm) quy về đơn vị của mảnh trang phục.
+//
+// Mảnh mặt vẽ ở tấm riêng, độ phân giải gấp bốn lần tấm thân và tóc, nên không
+// so trực tiếp được. Quy theo chiều cao đầu: bộ mảnh mặt cũ cắt từ cùng tấm với
+// tóc có đầu cao 84 đơn vị, nên đầu mới cũng phải cao 84 thì mới vừa mái tóc.
+const HEAD_UNIT = 84;
 
 // Khuôn mặt trên tấm gốc vẽ TO hơn cái đầu mà các kiểu tóc ôm quanh — bày
 // riêng một khung để nhìn cho rõ nên nó được vẽ rộng ra. Đội thẳng thì đỉnh
@@ -199,20 +204,30 @@ function source(part, { skin = 0, eyes = 0 } = {}) {
  */
 export function lookParts(atlas, look) {
   const outfit = atlas.part(look.outfit);
-  const face = atlas.part(look.face);
+  // Nhân vật tạo từ trước có thể trỏ vào mảnh mặt đã bị thay (bộ cũ có 9 nét
+  // mặt, bộ mới 4). Rơi về nét mặt đầu tiên còn hơn không vẽ được gì.
+  const sex = look.face?.split('_')[1] === 'f' ? 'f' : 'm';
+  const face = atlas.part(look.face) ?? atlas.part(`face_${sex}_01`);
   const hair = look.hair ? atlas.part(look.hair) : null;
   if (!outfit || !face) return null;
   if (look.hair && !hair) return null;
   return { outfit, face, hair };
 }
 
-/** Chiều cao tự nhiên của bộ ngoại hình theo pixel art gốc. */
+/** Tỉ lệ vẽ mảnh mặt so với mảnh trang phục, quy theo chiều cao đầu. */
+function faceRatio(face) {
+  return HEAD_UNIT / (face.rect.chin ?? face.rect.h);
+}
+
+/** Chiều cao tự nhiên của bộ ngoại hình, theo đơn vị của mảnh trang phục. */
 function naturalHeight({ outfit, face, hair }) {
+  const k = faceRatio(face);
+  const neckLen = (face.rect.h - (face.rect.chin ?? face.rect.h)) * k;
   // Từ cằm lên đỉnh: tóc thường cao hơn đầu trọc, nhưng kiểu tóc sát đầu thì
   // không — lấy cái nào cao hơn.
   const hairAboveChin = hair?.rect.hole ? (hair.rect.hole.y + hair.rect.hole.h) * HAIR_FIT : 0;
-  const aboveChin = Math.max(face.rect.h, hairAboveChin);
-  return outfit.rect.h - NECK_OVERLAP + aboveChin;
+  const aboveChin = Math.max(HEAD_UNIT, hairAboveChin);
+  return outfit.rect.h - NECK_OVERLAP + neckLen + aboveChin;
 }
 
 
@@ -228,7 +243,11 @@ export function lookLayout(atlas, look, { groundY, height }) {
   if (!parts) return null;
   const s = height / naturalHeight(parts);
   const bodyTop = groundY - parts.outfit.rect.h * s;
-  return { s, bodyTop, chinY: bodyTop + NECK_OVERLAP * s, parts };
+  const k = faceRatio(parts.face);
+  const chin = parts.face.rect.chin ?? parts.face.rect.h;
+  // Chân cổ lún vào cổ áo; cằm nằm cao hơn chân cổ đúng bằng khúc cổ.
+  const faceBottom = bodyTop + NECK_OVERLAP * s;
+  return { s, bodyTop, faceBottom, faceScale: s * k, chinY: faceBottom - (parts.face.rect.h - chin) * s * k, parts };
 }
 
 /**
@@ -251,11 +270,14 @@ export function drawLook(ctx, atlas, look, { x, groundY, height }) {
 
   const bodyW = outfit.rect.w * s;
   const bodyTop = groundY - outfit.rect.h * s;
-  const chinY = bodyTop + NECK_OVERLAP * s;
-  const faceW = face.rect.w * s;
+  const faceS = s * faceRatio(face);
+  const chin = face.rect.chin ?? face.rect.h;
+  const faceBottom = bodyTop + NECK_OVERLAP * s;
+  const chinY = faceBottom - (face.rect.h - chin) * faceS;
+  const faceW = face.rect.w * faceS;
 
   put(outfit, x - bodyW / 2, bodyTop, { skin: tone });
-  put(face, x - faceW / 2, chinY - face.rect.h * s, { skin: tone, eyes: look.eyes ?? 0 });
+  putAt(face, x - faceW / 2, faceBottom - face.rect.h * faceS, faceS, { skin: tone, eyes: look.eyes ?? 0 });
 
   if (hair) {
     // Căn theo LỖ khoét trên mảnh tóc: tâm lỗ trùng tâm mặt, đáy lỗ trùng cằm.
@@ -335,10 +357,14 @@ export function drawThumb(ctx, atlas, name, { x, y, w, h, face = null, skin = 0,
     // còn tóc thì đã to sẵn theo HAIR_FIT nên ở đây mặt nhỏ lại tương ứng.
     const hole = part.rect.hole;
     const chin = hole ? bottom - (part.rect.h - hole.y - hole.h) * s : bottom;
-    const faceS = s / HAIR_FIT;
+    // Giữ đúng tương quan cỡ như lúc ghép người: ở đó tóc vẽ với tỉ lệ
+    // s·HAIR_FIT còn mặt vẽ với s·HEAD_UNIT/cằm, nên ở đây — tóc đang vẽ đúng
+    // cỡ ô — mặt phải nhỏ đi theo đúng tỉ số ấy.
+    const headChin = head.rect.chin ?? head.rect.h;
+    const faceS = (s * HEAD_UNIT) / (headChin * HAIR_FIT);
     const src = source(head, { skin, eyes });
     ctx.drawImage(src.img, src.sx, src.sy, head.rect.w, head.rect.h,
-      cx - head.rect.w * faceS / 2, chin - head.rect.h * faceS, head.rect.w * faceS, head.rect.h * faceS);
+      cx - head.rect.w * faceS / 2, chin - headChin * faceS, head.rect.w * faceS, head.rect.h * faceS);
   }
   const src = source(part, head ? {} : { skin, eyes });
   ctx.drawImage(src.img, src.sx, src.sy, part.rect.w, part.rect.h,
