@@ -206,7 +206,7 @@ export function lookLayout(atlas, look, { groundY, height }) {
  * Vẽ nhân vật ghép, neo ĐÁY GIỮA tại (x, groundY), cao đúng `height`.
  * @returns true nếu vẽ được, false nếu art chưa sẵn sàng.
  */
-export function drawLook(ctx, atlas, look, { x, groundY, height }) {
+export function drawLook(ctx, atlas, look, { x, groundY, height, swing = 0 }) {
   const layout = lookLayout(atlas, look, { groundY, height });
   if (!layout) return false;
   const { s, bodyTop, headTop, parts } = layout;
@@ -223,6 +223,10 @@ export function drawLook(ctx, atlas, look, { x, groundY, height }) {
 
   // Tay vẽ TRƯỚC bộ đồ: ống tay áo che phần nào thì che, thò ra bao nhiêu là do
   // chính bộ đồ quyết định — áo dài tay chỉ hở bàn tay, váy hai dây thì hở cả tay.
+  //
+  // Tay là mảnh RỜI và đã có mốc `socket` (tâm đầu vai), nên đánh tay lúc đi chỉ
+  // là xoay quanh cái mốc ấy — không cần bộ xương, không cần thư viện ngoài.
+  // Hai tay ngược pha nhau, đúng như người đi thật.
   if (arms) {
     const fit = ARM[sex].fit * s;
     const shoulderY = bodyTop + ARM[sex].dy * outfit.rect.h * s;
@@ -230,8 +234,22 @@ export function drawLook(ctx, atlas, look, { x, groundY, height }) {
     arms.forEach((arm, i) => {
       const img = reskinned(arm, arm.rect.tone ?? '#f0c8a8', head.rect.tone ?? '#f0c8a8');
       const side = i === 0 ? -1 : 1;
-      put(arm, x + side * shoulderX - arm.rect.socket.x * fit,
-        shoulderY - arm.rect.socket.y * fit, fit, img, 0, 0);
+      const socketX = x + side * shoulderX;
+      if (!swing) {
+        put(arm, socketX - arm.rect.socket.x * fit,
+          shoulderY - arm.rect.socket.y * fit, fit, img, 0, 0);
+        return;
+      }
+      ctx.save();
+      ctx.translate(socketX, shoulderY);
+      // Hai tay xoay CÙNG chiều một góc: nhìn từ trước thì tay này khép vào,
+      // tay kia xoè ra — đó chính là hình chiếu của nhịp đánh tay ngược pha.
+      // Nhân với `side` là hai tay cùng khép hoặc cùng xoè, thành vỗ cánh.
+      ctx.rotate(swing);
+      ctx.drawImage(img, 0, 0, arm.rect.w, arm.rect.h,
+        -arm.rect.socket.x * fit, -arm.rect.socket.y * fit,
+        arm.rect.w * fit, arm.rect.h * fit);
+      ctx.restore();
     });
   }
   if (limbs) put(limbs, bodyX, bodyTop, s, tinted(limbs, head.rect.tone ?? '#f0c8a8'), 0, 0);

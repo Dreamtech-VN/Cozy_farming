@@ -49,12 +49,16 @@ function transformFor(state, phase) {
       bob: -lift * (heavy ? 5 : 3),
       squash: 1 + lift * (heavy ? 0.05 : 0.03),
       lean: step * (heavy ? 0.05 : 0.03),
+      // Đánh tay theo đúng nhịp chân. Chỉ tay động chứ chân thì không: chân
+      // nằm liền trong mảnh trang phục, không tách rời ra được như tay.
+      swing: step * (heavy ? 0.32 : 0.22),
     };
   }
   if (state === 'sit') return { bob: 0, squash: 0.86, lean: 0 };
   if (state === 'farm') return { bob: 0, squash: 0.94, lean: 0.1 };
   // Đứng yên vẫn phải thở, không thì nhìn như game đơ.
-  return { bob: 0, squash: 1 + Math.sin(phase * Math.PI * 2) * 0.008, lean: 0 };
+  const breath = Math.sin(phase * Math.PI * 2);
+  return { bob: 0, squash: 1 + breath * 0.008, lean: 0, swing: breath * 0.02 };
 }
 
 /** Sprite của nhân vật: NPC khai trong data map, người chơi theo giới tính. */
@@ -90,13 +94,13 @@ export function drawAvatar(ctx, content, options) {
     // Nhân vật do người chơi tự ghép: vẽ lại từ từng mảnh chứ không có sprite
     // dựng sẵn nào cả. Biến hình phải tự áp ở đây vì drawLook chỉ biết vẽ
     // đứng yên — cùng công thức với atlas.character(), gốc đặt ở CHÂN.
-    const { bob = 0, lean = 0, squash = 1 } = transformFor(state, phase);
+    const { bob = 0, lean = 0, squash = 1, swing = 0 } = transformFor(state, phase);
     ctx.save();
     ctx.scale(facing * scale, scale);
     ctx.translate(0, bob);
     if (lean) ctx.rotate(lean);
     if (squash !== 1) ctx.scale(1 / squash, squash);
-    drawn = drawLook(ctx, atlas, look, { x: 0, groundY: 0, height: AVATAR_HEIGHT });
+    drawn = drawLook(ctx, atlas, look, { x: 0, groundY: 0, height: AVATAR_HEIGHT, swing });
     ctx.restore();
   }
   const name = spriteOf(options);
