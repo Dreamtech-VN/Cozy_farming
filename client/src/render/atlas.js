@@ -150,10 +150,17 @@ class Atlas {
   #pages = new Map();
   #pageImages = new Map();
 
-  /** Một ô tileset, vẽ phóng to `scale` lần tại (x, y). */
-  tile(ctx, index, x, y, scale) {
+  /**
+   * Một ô tileset, vẽ phóng to `scale` lần tại (x, y).
+   *
+   * `bleed` nới ô ra mấy pixel về phía dưới-phải để hai ô cạnh nhau chồng lên
+   * nhau: camera đứng ở toạ độ lẻ nên mỗi ô rơi vào nửa pixel, vẽ đúng khít thì
+   * giữa hai ô hở một khe sáng. Chỉ dùng được với tile đã khâu mép liền.
+   */
+  tile(ctx, index, x, y, scale, bleed = 0) {
     const size = this.meta.tiles.size;
-    ctx.drawImage(this.images.tiles, index * size, 0, size, size, x, y, size * scale, size * scale);
+    const out = size * scale + bleed;
+    ctx.drawImage(this.images.tiles, index * size, 0, size, size, x, y, out, out);
   }
 
   /**

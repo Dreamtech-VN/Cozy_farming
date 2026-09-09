@@ -14,6 +14,7 @@ import { join } from 'node:path';
 import { readPng, Pixels } from './art/png.mjs';
 import { splitSheet } from './art/split.mjs';
 import { downscale } from './art/resize.mjs';
+import { makeTile } from './art/tileset.mjs';
 import { chinRow, collarSlot, headCap, pocketPiece, skinTone, dropHairlines, chainLimb, cuffSlot } from './art/head.mjs';
 
 
@@ -203,6 +204,37 @@ for (const [page, items] of [...pages].sort()) {
 
 const atlasPath = join(OUT, 'atlas.json');
 const atlas = JSON.parse(readFileSync(atlasPath, 'utf8'));
+
+// TILESET vẽ sẵn, đè lên bộ sinh bằng code.
+//
+// Cùng một nguyên tắc với sprite: có art vẽ sẵn thì dùng art, chưa có thì vẫn
+// chạy bằng art sinh bằng code. Giữ NGUYÊN tên và thứ tự ô của bộ cũ — world.js
+// gọi tile theo CHỈ SỐ, đổi thứ tự là mặt đất hoá ra mặt nước.
+const TILES = join(ROOT, 'art-src', 'tiles');
+if (existsSync(join(TILES, 'tiles.json'))) {
+  const cfg = JSON.parse(readFileSync(join(TILES, 'tiles.json'), 'utf8'));
+  const names = Object.keys(cfg.tiles);
+  const old = atlas.tiles?.names ?? [];
+  if (old.length && (old.length !== names.length || old.some((n, i) => n !== names[i]))) {
+    throw new Error(`tileset vẽ sẵn phải giữ đúng tên và thứ tự của bộ cũ:\n  cũ: ${old.join(', ')}\n  mới: ${names.join(', ')}`);
+  }
+  const sheets = new Map();
+  const size = cfg.size;
+  const strip = new Pixels(names.length * size, size);
+  names.forEach((name, i) => {
+    const spec = { blend: cfg.blend, ...cfg.tiles[name] };
+    if (!sheets.has(spec.source)) sheets.set(spec.source, readPng(readFileSync(join(TILES, spec.source))));
+    const tile = makeTile(sheets.get(spec.source), spec, size);
+    for (let y = 0; y < size; y++) {
+      const src = y * size * 4;
+      strip.data.set(tile.data.subarray(src, src + size * 4), (y * strip.width + i * size) * 4);
+    }
+  });
+  const buf = strip.toPng();
+  writeFileSync(join(OUT, 'tiles.png'), buf);
+  atlas.tiles = { file: 'tiles.png', size, names };
+  console.log(`tiles.png            ${strip.width}×${size}  ${(buf.length / 1024).toFixed(0)} KB · ${names.length} ô`);
+}
 atlas.sprites = {
   comment: 'Art vẽ sẵn, đóng gói bằng tools/import-art.mjs từ art-src/sheets/. Neo ĐÁY GIỮA. Mỗi sprite ghi rõ nằm ở trang nào để client nạp đúng trang cần.',
   pages: pageFiles,

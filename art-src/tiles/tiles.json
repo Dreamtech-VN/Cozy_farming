@@ -1,0 +1,119 @@
+{
+  "comment": "Bộ tile mặt đất, cắt từ art vẽ sẵn thay cho tileset sinh bằng code. Art trong gói là những PHIẾN đất rời có nét viền tối bao quanh, lát cạnh nhau là hiện ra hàng rào kẻ ô — nên mỗi ô lấy RUỘT phiến rồi khâu mép cho liền (xem tools/art/tileset.mjs). Giữ NGUYÊN tên và thứ tự 11 ô của tileset cũ: world.js gọi tile theo CHỈ SỐ, đổi thứ tự là mặt đất hoá ra mặt nước. Mặt sàn đi được (grass_fill) lấy DẢI CỎ PHẲNG trên phiến, không lấy đỉnh gò cũng không lấy hàng bụi lá: sàn phủ kín cả một mảng rộng nên hoa văn càng đều càng tốt — đỉnh gò có vệt sáng ở giữa, lát ra thành lưới bánh; bụi lá thì sẫm hơn mép cỏ hẳn một bậc (101,121,26 so với 162,170,34), nhìn ra bờ giậu chứ không ra bãi cỏ. Dải cỏ chỉ cao 20px nên phóng lên 48px hơi mờ, mà mờ lại đúng ý: mặt sàn phải lùi ra sau cho vật thể nổi lên. Biến thể _b lấy CÙNG một phiến với _a, chỉ dịch ngang. Mỗi cột trên tấm là một kiểu phiến khác nhau (đầu trái / khúc giữa / đầu phải) nên lấy hai cột làm hai biến thể thì mặt đất lát ra thành từng vạt rõ rệt, không phải đổi hoa văn cho đỡ lặp.",
+  "size": 48,
+  "blend": 12,
+  "tiles": {
+    "grass_top_a": {
+      "source": "ground.png",
+      "rect": [
+        58,
+        51,
+        176,
+        62
+      ],
+      "seam": "x"
+    },
+    "grass_top_b": {
+      "source": "ground.png",
+      "rect": [
+        300,
+        52,
+        176,
+        62
+      ],
+      "seam": "x"
+    },
+    "grass_top_c": {
+      "source": "ground.png",
+      "rect": [
+        540,
+        51,
+        170,
+        62
+      ],
+      "seam": "x"
+    },
+    "dirt_a": {
+      "source": "ground.png",
+      "rect": [
+        58,
+        404,
+        120,
+        54
+      ],
+      "seam": "xy"
+    },
+    "dirt_b": {
+      "source": "ground.png",
+      "rect": [
+        122,
+        404,
+        120,
+        54
+      ],
+      "seam": "xy"
+    },
+    "stone_a": {
+      "source": "ground.png",
+      "rect": [
+        58,
+        1301,
+        120,
+        48
+      ],
+      "seam": "xy"
+    },
+    "stone_b": {
+      "source": "ground.png",
+      "rect": [
+        122,
+        1301,
+        120,
+        48
+      ],
+      "seam": "xy"
+    },
+    "water_a": {
+      "source": "water.png",
+      "rect": [
+        55,
+        60,
+        110,
+        98
+      ],
+      "seam": "xy"
+    },
+    "water_b": {
+      "source": "water.png",
+      "rect": [
+        105,
+        60,
+        110,
+        98
+      ],
+      "seam": "xy"
+    },
+    "grass_fill_a": {
+      "source": "ground.png",
+      "rect": [
+        58,
+        55,
+        176,
+        20
+      ],
+      "seam": "xy",
+      "blend": 6
+    },
+    "grass_fill_b": {
+      "source": "ground.png",
+      "rect": [
+        112,
+        54,
+        176,
+        20
+      ],
+      "seam": "xy",
+      "blend": 6
+    }
+  }
+}

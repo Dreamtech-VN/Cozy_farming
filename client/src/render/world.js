@@ -8,8 +8,14 @@ import { t } from '../core/i18n.js';
 import { settings } from '../core/settings.js';
 import { atlas } from './atlas.js';
 
-/** Tile 16px phóng 3 lần: đủ to để thấy rõ pixel mà không vỡ hình. */
-const TILE_SCALE = 3;
+/**
+ * Ô đất trên màn hình rộng bao nhiêu pixel.
+ *
+ * Buộc theo cỡ MÀN HÌNH chứ không phải theo cỡ ô trong file: tileset sinh bằng
+ * code là ô 16px, tileset cắt từ art vẽ sẵn là ô 48px — chốt một con số phóng
+ * thì đổi bảng art là mặt đất to gấp ba.
+ */
+const TILE_PX = 48;
 // Chỉ số của tile cỏ đặc trong tileset (xem tools/art/tiles.mjs).
 const GRASS_FILL = 9;
 
@@ -364,7 +370,8 @@ export class WorldRenderer {
     // hàng nghìn lệnh drawImage vô ích.
     // camera.x/y là TÂM khung nhìn (xem followCamera), không phải mép trái/trên
     // — lấy nhầm là nửa màn hình bên trái không được lát tile nào.
-    const size = atlas.meta.tiles.size * TILE_SCALE;
+    const scale = TILE_PX / atlas.meta.tiles.size;
+    const size = TILE_PX;
     const viewLeft = this.camera.x - this.viewWidth / 2;
     const viewBottom = this.camera.y + (this.viewHeight - this.anchorY);
     const left = Math.floor((viewLeft - size) / size) * size;
@@ -388,7 +395,10 @@ export class WorldRenderer {
           : row === grassRows
             ? pick % 3                       // mép cỏ ở ground_y
             : 3 + (pick % 2);                // đất
-        atlas.tile(ctx, index, x, y, TILE_SCALE);
+        // Vẽ TRÙM RA 1px: camera đứng ở toạ độ lẻ nên mỗi ô rơi vào nửa pixel,
+        // vẽ đúng khít thì giữa hai ô hở một khe sáng thấy cả nền trời. Tile đã
+        // khâu mép liền nên chồng nhau 1px không thấy gì.
+        atlas.tile(ctx, index, x, y, scale, 1);
       }
     }
   }
