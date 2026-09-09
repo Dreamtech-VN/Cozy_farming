@@ -14,7 +14,7 @@ import { join } from 'node:path';
 import { readPng, Pixels } from './art/png.mjs';
 import { splitSheet } from './art/split.mjs';
 import { downscale } from './art/resize.mjs';
-import { chinRow, collarSlot, headCap, pocketPiece, skinTone, dropHairlines } from './art/head.mjs';
+import { chinRow, collarSlot, headCap, pocketPiece, skinTone, dropHairlines, chainLimb } from './art/head.mjs';
 
 
 /** Cắt một khung con khỏi tấm gộp, giữ nguyên pixel. */
@@ -123,6 +123,26 @@ for (const file of sheets) {
       }
     });
   }
+  // NỐI CHI: tấm sườn cơ thể bày từng khúc rời, nhưng game chỉ cần cả cánh tay.
+  // Nối ngay ở khâu nhập chứ không nối lúc vẽ: chỗ nối đo trên hình, đo một lần
+  // rồi thôi, mà atlas cũng đỡ ba mảnh vụn cho mỗi cánh tay.
+  for (const job of maps.compose ?? []) {
+    const bucket = pages.get(page) ?? [];
+    const parts = job.chain.map((n) => bucket.find((piece) => piece.name === n));
+    if (parts.some((piece) => !piece)) throw new Error(`nối "${job.name}": thiếu khúc ${job.chain.join(', ')}`);
+    const limb = chainLimb(parts, { overlap: job.overlap ?? 4 });
+    if (seen.has(job.name)) throw new Error(`tên sprite "${job.name}" trùng`);
+    seen.set(job.name, maps.source);
+    // Khúc rời chỉ là nguyên liệu, không vào atlas.
+    for (const part of parts) {
+      bucket.splice(bucket.indexOf(part), 1);
+      seen.delete(part.name);
+      count--;
+    }
+    bucket.push({ ...limb, name: job.name, chin: null, ...skinTone(limb) });
+    count++;
+  }
+
   console.log(`${maps.source.padEnd(14)} → ${page.padEnd(8)} ${String(cut).padStart(3)} vật cắt được, ${count} đặt tên`);
 }
 
@@ -167,6 +187,7 @@ for (const [page, items] of [...pages].sort()) {
     if (piece.collar) index[piece.name].collar = piece.collar;
     if (piece.cap) index[piece.name].cap = piece.cap;
     if (piece.tone) index[piece.name].tone = piece.tone;
+    if (piece.socket) index[piece.name].socket = piece.socket;
   }
   console.log(`${file.padEnd(22)} ${ATLAS_W}×${atlasH}  ${(buf.length / 1024 / 1024).toFixed(1)} MB · ${items.length} vật`);
 }

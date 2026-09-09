@@ -204,3 +204,86 @@ export function dropHairlines(piece, { core = 1, reach = 2 } = {}) {
   }
   return dropped;
 }
+
+/** Tâm ngang của mấy hàng đặc đầu tiên tính từ một đầu mảnh. */
+function capOf(piece, fromTop, rows = 4) {
+  const { w: W, h: H, data } = piece;
+  const seen = [];
+  for (let k = 0; k < H && seen.length < rows; k++) {
+    const y = fromTop ? k : H - 1 - k;
+    let x0 = W, x1 = -1;
+    for (let x = 0; x < W; x++) if (data[(y * W + x) * 4 + 3] > 128) { if (x < x0) x0 = x; x1 = x; }
+    if (x1 >= x0) seen.push({ y, cx: (x0 + x1) / 2 });
+  }
+  if (!seen.length) return { x: W / 2, y: fromTop ? 0 : H - 1 };
+  const cx = seen.reduce((a, r) => a + r.cx, 0) / seen.length;
+  return { x: cx, y: seen[0].y };
+}
+
+/** Đường kính ống ở khúc cuối mảnh — bề ngang lớn nhất trong một phần tư dưới. */
+function tubeWidth(piece) {
+  const { w: W, h: H, data } = piece;
+  let best = 0;
+  for (let y = Math.floor(H * 0.75); y < H; y++) {
+    let x0 = W, x1 = -1;
+    for (let x = 0; x < W; x++) if (data[(y * W + x) * 4 + 3] > 128) { if (x < x0) x0 = x; x1 = x; }
+    if (x1 >= x0 && x1 - x0 + 1 > best) best = x1 - x0 + 1;
+  }
+  return best;
+}
+
+/**
+ * Nối mấy KHÚC CHI rời thành một cánh tay liền.
+ *
+ * Tấm sườn cơ thể bày từng khúc một — bắp tay, cẳng tay, bàn tay — mỗi khúc là
+ * một ống có hai đầu bịt hình bầu dục. Nối bằng chính hai cái đầu ấy: tâm đầu
+ * TRÊN của khúc dưới đặt trùng tâm đầu DƯỚI của khúc trên. Không phải số chỉnh
+ * tay, mà đo trên hình, nên khúc nào thon khúc nào to đều nối đúng chỗ.
+ *
+ * Chồng lấn vài pixel để cái bầu dục hở của khúc trên bị khúc dưới che đi —
+ * nối đúng khít thì chỗ nối hiện ra một vành tối như khớp búp bê.
+ *
+ * @returns mảnh đã nối, kèm `socket` là tâm đầu trên của khúc đầu tiên — chỗ
+ *          cắm vào vai.
+ */
+export function chainLimb(parts, { overlap = null } = {}) {
+  if (!parts.length) return null;
+  const at = [{ x: 0, y: 0 }];
+  for (let i = 1; i < parts.length; i++) {
+    const bot = capOf(parts[i - 1], false);
+    const top = capOf(parts[i], true);
+    // Chồng lấn đo theo BỀ NGANG ống, không ghi số chết: cái bầu dục bịt đầu
+    // ống cao chừng một phần ba đường kính ống, ống to thì bầu dục cũng to.
+    const sink = overlap ?? Math.round(tubeWidth(parts[i - 1]) * 0.45);
+    at.push({
+      x: at[i - 1].x + bot.x - top.x,
+      y: at[i - 1].y + bot.y - top.y - sink,
+    });
+  }
+  const x0 = Math.min(...at.map((p) => p.x));
+  const y0 = Math.min(...at.map((p) => p.y));
+  const x1 = Math.max(...at.map((p, i) => p.x + parts[i].w));
+  const y1 = Math.max(...at.map((p, i) => p.y + parts[i].h));
+  const W = Math.ceil(x1 - x0), H = Math.ceil(y1 - y0);
+  const data = new Uint8Array(W * H * 4);
+  parts.forEach((part, i) => {
+    const ox = Math.round(at[i].x - x0), oy = Math.round(at[i].y - y0);
+    for (let y = 0; y < part.h; y++) {
+      for (let x = 0; x < part.w; x++) {
+        const s = (y * part.w + x) * 4;
+        const a = part.data[s + 3];
+        if (!a) continue;
+        const d = ((oy + y) * W + ox + x) * 4;
+        if (d < 0 || d >= data.length) continue;
+        const k = a / 255;
+        for (let c = 0; c < 3; c++) data[d + c] = Math.round(part.data[s + c] * k + data[d + c] * (1 - k));
+        data[d + 3] = Math.max(data[d + 3], a);
+      }
+    }
+  });
+  const head = capOf(parts[0], true);
+  return {
+    w: W, h: H, data,
+    socket: { x: Math.round(head.x - x0), y: Math.round(at[0].y - y0 + head.y) },
+  };
+}

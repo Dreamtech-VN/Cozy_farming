@@ -1,0 +1,141 @@
+{
+  "comment": "Sườn cơ thể, cắt từ tấm BASE_PARTS của gói art. Chỉ lấy phần CÁNH TAY: trang phục đã có sẵn thân, chân và giày, chỉ thiếu tay trần — mà tay trên tấm trang phục nữ thì không được vẽ. Tấm nguồn cắt sát dải cánh tay trước khi vào repo (nam từ 420,500; nữ từ 494,425 trên tấm gốc 2304×1536), phần còn lại của sườn chưa dùng tới nên không mang vào. Từng khúc rời được `compose` nối lại thành một cánh tay liền ngay lúc nhập, nối theo tâm hai đầu ống chứ không theo số chỉnh tay.",
+  "source": "avatar_f_arm.png",
+  "page": "parts",
+  "regions": [
+    {
+      "what": "cánh tay nữ — arm_up_f_l",
+      "rect": [
+        278,
+        7,
+        149,
+        208
+      ],
+      "split": {
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "mode": "blob"
+      },
+      "names": {
+        "0": "arm_up_f_l"
+      }
+    },
+    {
+      "what": "cánh tay nữ — arm_up_f_r",
+      "rect": [
+        875,
+        6,
+        148,
+        207
+      ],
+      "split": {
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "mode": "blob"
+      },
+      "names": {
+        "0": "arm_up_f_r"
+      }
+    },
+    {
+      "what": "cánh tay nữ — arm_lo_f_l",
+      "rect": [
+        229,
+        235,
+        115,
+        179
+      ],
+      "split": {
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "mode": "blob"
+      },
+      "names": {
+        "0": "arm_lo_f_l"
+      }
+    },
+    {
+      "what": "cánh tay nữ — arm_lo_f_r",
+      "rect": [
+        958,
+        234,
+        115,
+        179
+      ],
+      "split": {
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "mode": "blob"
+      },
+      "names": {
+        "0": "arm_lo_f_r"
+      }
+    },
+    {
+      "what": "cánh tay nữ — hand_f_l",
+      "rect": [
+        6,
+        241,
+        102,
+        142
+      ],
+      "split": {
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "mode": "blob"
+      },
+      "names": {
+        "0": "hand_f_l"
+      }
+    },
+    {
+      "what": "cánh tay nữ — hand_f_r",
+      "rect": [
+        1191,
+        240,
+        101,
+        142
+      ],
+      "split": {
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "mode": "blob"
+      },
+      "names": {
+        "0": "hand_f_r"
+      }
+    }
+  ],
+  "compose": [
+    {
+      "what": "cánh tay bên trái màn hình",
+      "name": "arm_f_l",
+      "chain": [
+        "arm_up_f_l",
+        "arm_lo_f_l",
+        "hand_f_l"
+      ]
+    },
+    {
+      "what": "cánh tay bên phải màn hình",
+      "name": "arm_f_r",
+      "chain": [
+        "arm_up_f_r",
+        "arm_lo_f_r",
+        "hand_f_r"
+      ]
+    }
+  ]
+}

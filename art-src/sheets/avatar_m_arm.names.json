@@ -1,0 +1,101 @@
+{
+  "comment": "Sườn cơ thể, cắt từ tấm BASE_PARTS của gói art. Chỉ lấy phần CÁNH TAY: trang phục đã có sẵn thân, chân và giày, chỉ thiếu tay trần — mà tay trên tấm trang phục nữ thì không được vẽ. Tấm nguồn cắt sát dải cánh tay trước khi vào repo (nam từ 420,500; nữ từ 494,425 trên tấm gốc 2304×1536), phần còn lại của sườn chưa dùng tới nên không mang vào. Từng khúc rời được `compose` nối lại thành một cánh tay liền ngay lúc nhập, nối theo tâm hai đầu ống chứ không theo số chỉnh tay.",
+  "source": "avatar_m_arm.png",
+  "page": "parts",
+  "regions": [
+    {
+      "what": "cánh tay nam — arm_up_m_l",
+      "rect": [
+        135,
+        7,
+        165,
+        231
+      ],
+      "split": {
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "mode": "blob"
+      },
+      "names": {
+        "0": "arm_up_m_l"
+      }
+    },
+    {
+      "what": "cánh tay nam — arm_up_m_r",
+      "rect": [
+        1115,
+        6,
+        167,
+        232
+      ],
+      "split": {
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "mode": "blob"
+      },
+      "names": {
+        "0": "arm_up_m_r"
+      }
+    },
+    {
+      "what": "cánh tay nam — arm_lo_m_l",
+      "rect": [
+        6,
+        238,
+        172,
+        220
+      ],
+      "split": {
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "mode": "blob"
+      },
+      "names": {
+        "0": "arm_lo_m_l"
+      }
+    },
+    {
+      "what": "cánh tay nam — arm_lo_m_r",
+      "rect": [
+        1243,
+        238,
+        172,
+        220
+      ],
+      "split": {
+        "bgTest": "light",
+        "lightMin": 225,
+        "lightSat": 10,
+        "scale": 2.6,
+        "mode": "blob"
+      },
+      "names": {
+        "0": "arm_lo_m_r"
+      }
+    }
+  ],
+  "compose": [
+    {
+      "what": "cánh tay bên trái màn hình",
+      "name": "arm_m_l",
+      "chain": [
+        "arm_up_m_l",
+        "arm_lo_m_l"
+      ]
+    },
+    {
+      "what": "cánh tay bên phải màn hình",
+      "name": "arm_m_r",
+      "chain": [
+        "arm_up_m_r",
+        "arm_lo_m_r"
+      ]
+    }
+  ]
+}
