@@ -287,3 +287,72 @@ export function chainLimb(parts, { overlap = null } = {}) {
     socket: { x: Math.round(head.x - x0), y: Math.round(at[0].y - y0 + head.y) },
   };
 }
+
+/**
+ * MIỆNG ỐNG TAY trên mảnh trang phục — chỗ bàn tay thò ra.
+ *
+ * Tấm trang phục vẽ cả người MẶC ĐỒ, tay áo đã vẽ sẵn tới cổ tay: cái thiếu chỉ
+ * là bàn tay. Nhét nguyên một cánh tay lấy từ tấm sườn vào sau áo là sai — sau
+ * ống tay áo đã có tay rồi, và bàn tay sẽ rơi ở chỗ cánh tay lạ ấy kết thúc chứ
+ * không phải ở miệng ống tay.
+ *
+ * Tìm miệng ống tay bằng chỗ mép ngoài của dáng TỤT VÀO đột ngột: đi từ vai
+ * xuống, mép ngoài chạy dọc ống tay rồi rơi hẳn vào trong khi hết ống tay, vì
+ * dưới đó chỉ còn thân với quần.
+ *
+ * Chỉ dò trong khoảng 38%–56% chiều cao, vì trên thân người này cổ tay bao giờ
+ * cũng nằm ngay dưới ngang hông. Ngoài khoảng ấy thì chỗ tụt là thứ khác: trên
+ * nữa là mép áo cộc tay (hở cả cẳng tay, phải vẽ cả cánh tay chứ không phải mỗi
+ * bàn tay), dưới nữa là gấu váy xoè ra — mà gấu váy còn tụt mạnh hơn cả ống tay
+ * nên không lấy chỗ tụt MẠNH NHẤT được, phải lấy chỗ tụt đầu tiên trong khoảng.
+ *
+ * @returns {{cuff:{l?:{x,y,w},r?:{x,y,w}}}|{}} vắng một bên nghĩa là bên ấy
+ *          không có ống tay (váy hai dây, áo cộc tay) — chỗ ghép sẽ vẽ cả cánh
+ *          tay thay vì chỉ bàn tay.
+ */
+export function cuffSlot(piece, { minDrop = 10 } = {}) {
+  const { w: W, h: H, data } = piece;
+  const on = (x, y) => data[(y * W + x) * 4 + 3] > 128;
+  const edge = (y, side) => {
+    for (let k = 0; k < W; k++) {
+      const x = side < 0 ? k : W - 1 - k;
+      if (on(x, y)) return x;
+    }
+    return null;
+  };
+  const runs = (y) => {
+    const out = []; let s = -1;
+    for (let x = 0; x < W; x++) {
+      if (on(x, y)) { if (s < 0) s = x; } else if (s >= 0) { out.push([s, x - 1]); s = -1; }
+    }
+    if (s >= 0) out.push([s, W - 1]);
+    return out;
+  };
+
+  const cuff = {};
+  for (const side of [-1, 1]) {
+    // Lấy chỗ tụt ĐẦU TIÊN tính từ vai xuống, không lấy chỗ tụt mạnh nhất: đi
+    // từ trên xuống thì bao giờ cũng gặp hết ống tay trước, còn gấu váy nằm
+    // dưới nữa mà lại tụt mạnh hơn — lấy mạnh nhất là cắm bàn tay vào gấu váy.
+    let best = null;
+    for (let y = Math.round(H * 0.38); y <= Math.round(H * 0.56) && !best; y++) {
+      const a = edge(y, side), b = edge(y + 3, side);
+      if (a == null || b == null) continue;
+      const drop = side < 0 ? b - a : a - b;      // dương = mép tụt vào trong
+      if (drop >= minDrop) best = { y, drop, x: a };
+    }
+    if (!best) continue;
+    // Bề ngang miệng ống đo ở vài dòng TRÊN chỗ tụt: đúng dòng tụt thì ống đã
+    // cụt mất một nửa. Lấy mảng ngoài cùng nếu nó rời khỏi thân, không thì
+    // đành lấy một khúc từ mép ngoài vào.
+    const probe = Math.max(0, best.y - 3);
+    const list = runs(probe).filter(([p, q]) => q - p >= 2);
+    const body = list.reduce((m, c) => (c[1] - c[0] > m[1] - m[0] ? c : m), list[0] ?? [0, 0]);
+    const outer = side < 0 ? list[0] : list[list.length - 1];
+    const sleeve = outer && outer !== body ? outer : null;
+    const w = sleeve ? sleeve[1] - sleeve[0] + 1 : Math.max(8, Math.round(W * 0.09));
+    const x = sleeve ? Math.round((sleeve[0] + sleeve[1]) / 2) : best.x - side * Math.round(w / 2);
+    cuff[side < 0 ? 'l' : 'r'] = { x, y: best.y, w };
+  }
+  return Object.keys(cuff).length ? { cuff } : {};
+}

@@ -14,7 +14,7 @@ import { join } from 'node:path';
 import { readPng, Pixels } from './art/png.mjs';
 import { splitSheet } from './art/split.mjs';
 import { downscale } from './art/resize.mjs';
-import { chinRow, collarSlot, headCap, pocketPiece, skinTone, dropHairlines, chainLimb } from './art/head.mjs';
+import { chinRow, collarSlot, headCap, pocketPiece, skinTone, dropHairlines, chainLimb, cuffSlot } from './art/head.mjs';
 
 
 /** Cắt một khung con khỏi tấm gộp, giữ nguyên pixel. */
@@ -98,7 +98,15 @@ for (const file of sheets) {
       // kéo khung bao rộng ra, mà khung bao là mốc căn đầu với thân.
       if (area.measure === 'collar') dropHairlines(piece);
       const extra = {};
-      if (area.measure === 'collar') Object.assign(extra, collarSlot(piece));
+      // `cuff: false` trong <tấm>.names.json: khai thẳng là bộ này KHÔNG có ống
+      // tay dài tới cổ tay, đừng dò. Dò tự động đúng 9/10 bộ, bộ còn lại có cái
+      // túi đeo chéo mà đáy túi tụt vào đúng ngang hông y như cổ tay — chuyện
+      // riêng của một bức tranh thì khai ở cạnh bức tranh, đừng nống thuật toán
+      // ra cho vừa nó rồi làm hỏng chín bộ kia.
+      if (area.measure === 'collar') {
+        Object.assign(extra, collarSlot(piece));
+        if (area.cuff !== false) Object.assign(extra, cuffSlot(piece));
+      }
       if (area.measure === 'cap') Object.assign(extra, headCap(piece));
       if (area.measure === 'cap' && name.startsWith('head_')) Object.assign(extra, skinTone(piece));
       if (seen.has(name)) throw new Error(`tên sprite "${name}" có ở cả ${seen.get(name)} và ${maps.source}`);
@@ -188,6 +196,7 @@ for (const [page, items] of [...pages].sort()) {
     if (piece.cap) index[piece.name].cap = piece.cap;
     if (piece.tone) index[piece.name].tone = piece.tone;
     if (piece.socket) index[piece.name].socket = piece.socket;
+    if (piece.cuff) index[piece.name].cuff = piece.cuff;
   }
   console.log(`${file.padEnd(22)} ${ATLAS_W}×${atlasH}  ${(buf.length / 1024 / 1024).toFixed(1)} MB · ${items.length} vật`);
 }

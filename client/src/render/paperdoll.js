@@ -32,6 +32,12 @@ const HAIR_LIFT = 0.3;
 /** Chân đầu lún vào cổ áo bao nhiêu, tính theo chiều cao mảnh đầu. */
 const NECK_SINK = 0.075;
 
+/** Bàn tay vẽ to hơn miệng ống tay bao nhiêu — nắm tay bao giờ cũng dày hơn cổ tay. */
+const HAND_FIT = 1.25;
+
+/** Bàn tay thụt lên trong ống tay bao nhiêu, tính theo bề ngang miệng ống. */
+const HAND_SINK = 0.35;
+
 /**
  * Chỗ cắm CÁNH TAY và cỡ vẽ nó, theo giới.
  *
@@ -166,8 +172,18 @@ export function lookParts(atlas, look) {
   const limbs = atlas.part(`${look.outfit}_limbs`) ?? null;
   // Cánh tay nối sẵn từ tấm sườn cơ thể, vẽ lót dưới bộ đồ: tấm trang phục là
   // người CỤT TAY (mấy bộ nữ còn không có cả nét tay), nên tay phải lấy từ sườn.
+  //
+  // Nhưng chỉ bộ nào HỞ TAY mới cần cả cánh tay. Tấm trang phục vẽ cả người mặc
+  // đồ, tay áo đã có sẵn tới cổ tay ở tám trên mười bộ — chỗ ấy chỉ thiếu mỗi
+  // BÀN TAY, mà bàn tay phải nằm đúng miệng ống tay (mốc `cuff` đo lúc nhập
+  // art) chứ không phải ở chỗ một cánh tay lạ tình cờ kết thúc.
   const arms = ['l', 'r'].map((side) => atlas.part(`arm_${sex}_${side}`));
-  return { sex, outfit, head, eyes, hair, limbs, arms: arms.every(Boolean) ? arms : null };
+  const hands = ['l', 'r'].map((side) => atlas.part(`hand_${sex}_${side}`));
+  return {
+    sex, outfit, head, eyes, hair, limbs,
+    arms: arms.every(Boolean) ? arms : null,
+    hands: hands.every(Boolean) ? hands : null,
+  };
 }
 
 /** Chiều cao tự nhiên của bộ ngoại hình, theo đơn vị của mảnh art. */
@@ -210,7 +226,7 @@ export function drawLook(ctx, atlas, look, { x, groundY, height, swing = 0 }) {
   const layout = lookLayout(atlas, look, { groundY, height });
   if (!layout) return false;
   const { s, bodyTop, headTop, parts } = layout;
-  const { sex, outfit, head, eyes, hair, limbs, arms } = parts;
+  const { sex, outfit, head, eyes, hair, limbs, arms, hands } = parts;
 
   const put = (part, dx, dy, scale = s, img = part.img, sx = part.rect.x, sy = part.rect.y) => {
     ctx.drawImage(img, sx, sy, part.rect.w, part.rect.h,
@@ -227,32 +243,45 @@ export function drawLook(ctx, atlas, look, { x, groundY, height, swing = 0 }) {
   // Tay là mảnh RỜI và đã có mốc `socket` (tâm đầu vai), nên đánh tay lúc đi chỉ
   // là xoay quanh cái mốc ấy — không cần bộ xương, không cần thư viện ngoài.
   // Hai tay ngược pha nhau, đúng như người đi thật.
-  if (arms) {
-    const fit = ARM[sex].fit * s;
-    const shoulderY = bodyTop + ARM[sex].dy * outfit.rect.h * s;
-    const shoulderX = ARM[sex].dx * outfit.rect.h * s;
-    arms.forEach((arm, i) => {
-      const img = reskinned(arm, arm.rect.tone ?? '#f0c8a8', head.rect.tone ?? '#f0c8a8');
-      const side = i === 0 ? -1 : 1;
-      const socketX = x + side * shoulderX;
-      if (!swing) {
-        put(arm, socketX - arm.rect.socket.x * fit,
-          shoulderY - arm.rect.socket.y * fit, fit, img, 0, 0);
-        return;
-      }
+  const tone = head.rect.tone ?? '#f0c8a8';
+  const cuffs = outfit.rect.cuff ?? {};
+  ['l', 'r'].forEach((side, i) => {
+    const cuff = cuffs[side];
+    const dir = i === 0 ? -1 : 1;
+    if (cuff && hands) {
+      // Có ống tay: chỉ thò BÀN TAY ra, vẽ vừa đúng miệng ống rồi thụt lên cho
+      // ống tay che lấy cổ tay. Cỡ bàn tay đo từ miệng ống chứ không ướm tay —
+      // ống rộng thì bàn tay to theo, mỗi bộ một khác mà vẫn khớp.
+      const hand = hands[i];
+      const hs = (cuff.w * HAND_FIT * s) / hand.rect.w;
+      const hx = bodyX + cuff.x * s;
+      const hy = bodyTop + (cuff.y - cuff.w * HAND_SINK) * s;
+      // Ống tay áo nằm im nên bàn tay cũng chỉ lắc nhẹ theo nhịp, không vung.
       ctx.save();
-      ctx.translate(socketX, shoulderY);
-      // Hai tay xoay CÙNG chiều một góc: nhìn từ trước thì tay này khép vào,
-      // tay kia xoè ra — đó chính là hình chiếu của nhịp đánh tay ngược pha.
-      // Nhân với `side` là hai tay cùng khép hoặc cùng xoè, thành vỗ cánh.
-      ctx.rotate(swing);
-      ctx.drawImage(img, 0, 0, arm.rect.w, arm.rect.h,
-        -arm.rect.socket.x * fit, -arm.rect.socket.y * fit,
-        arm.rect.w * fit, arm.rect.h * fit);
+      ctx.translate(hx, hy);
+      if (swing) ctx.rotate(swing * 0.5);
+      ctx.drawImage(reskinned(hand, hand.rect.tone ?? tone, tone),
+        0, 0, hand.rect.w, hand.rect.h,
+        -hand.rect.w * hs / 2, 0, hand.rect.w * hs, hand.rect.h * hs);
       ctx.restore();
-    });
-  }
-  if (limbs) put(limbs, bodyX, bodyTop, s, tinted(limbs, head.rect.tone ?? '#f0c8a8'), 0, 0);
+      return;
+    }
+    if (!arms) return;
+    // Không có ống tay (váy hai dây, áo cộc tay): vẽ cả cánh tay từ vai xuống.
+    const arm = arms[i];
+    const fit = ARM[sex].fit * s;
+    const socketX = x + dir * ARM[sex].dx * outfit.rect.h * s;
+    const socketY = bodyTop + ARM[sex].dy * outfit.rect.h * s;
+    const img = reskinned(arm, arm.rect.tone ?? tone, tone);
+    ctx.save();
+    ctx.translate(socketX, socketY);
+    if (swing) ctx.rotate(swing);
+    ctx.drawImage(img, 0, 0, arm.rect.w, arm.rect.h,
+      -arm.rect.socket.x * fit, -arm.rect.socket.y * fit,
+      arm.rect.w * fit, arm.rect.h * fit);
+    ctx.restore();
+  });
+  if (limbs) put(limbs, bodyX, bodyTop, s, tinted(limbs, tone), 0, 0);
   put(outfit, bodyX, bodyTop);
   put(head, x - head.rect.cap.cx * s, headTop);
 
@@ -314,18 +343,29 @@ export function drawThumb(ctx, atlas, name, { x, y, w, h, look = null }) {
     const dy = y + (h - part.rect.h * s) / 2;
     const head = atlas.part(headName(sex, look?.skin ?? 0));
     const tone = head?.rect.tone ?? '#f0c8a8';
-    // Cùng thứ tự lớp như lúc ghép người, để ô chọn cho thấy đúng cái sẽ hiện ra.
+    // Cùng phép ghép như lúc dựng người, để ô chọn cho thấy đúng cái sẽ hiện ra:
+    // bộ có ống tay thì chỉ thò bàn tay, bộ hở tay thì cả cánh tay.
     const cx = dx + part.rect.collar.x * s;
-    for (const [i, side] of ['l', 'r'].entries()) {
+    const cuffs = part.rect.cuff ?? {};
+    ['l', 'r'].forEach((side, i) => {
+      const cuff = cuffs[side];
+      const hand = atlas.part(`hand_${sex}_${side}`);
+      if (cuff && hand) {
+        const hs = (cuff.w * HAND_FIT * s) / hand.rect.w;
+        ctx.drawImage(reskinned(hand, hand.rect.tone ?? tone, tone),
+          0, 0, hand.rect.w, hand.rect.h,
+          dx + cuff.x * s - hand.rect.w * hs / 2, dy + (cuff.y - cuff.w * HAND_SINK) * s,
+          hand.rect.w * hs, hand.rect.h * hs);
+        return;
+      }
       const arm = atlas.part(`arm_${sex}_${side}`);
-      if (!arm) continue;
+      if (!arm) return;
       const fit = ARM[sex].fit * s;
-      const img = reskinned(arm, arm.rect.tone ?? '#f0c8a8', tone);
       const sx = cx + (i === 0 ? -1 : 1) * ARM[sex].dx * part.rect.h * s;
-      ctx.drawImage(img, 0, 0, arm.rect.w, arm.rect.h,
+      ctx.drawImage(reskinned(arm, arm.rect.tone ?? tone, tone), 0, 0, arm.rect.w, arm.rect.h,
         sx - arm.rect.socket.x * fit, dy + ARM[sex].dy * part.rect.h * s - arm.rect.socket.y * fit,
         arm.rect.w * fit, arm.rect.h * fit);
-    }
+    });
     const limbs = atlas.part(`${name}_limbs`);
     if (limbs) {
       const canvas = tinted(limbs, tone);
