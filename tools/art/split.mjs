@@ -252,6 +252,29 @@ function backgroundMask(img, options = {}) {
     const x = i % W, y = (i / W) | 0;
     push(x - 1, y); push(x + 1, y); push(x, y - 1); push(x, y + 1);
   }
+  // BÀO MÒN MỘT PIXEL ngoài cùng.
+  //
+  // Hàng pixel ngoài cùng của vật là màu vật PHA với ô caro. Với nét viền tối
+  // thì pha ra màu nhạt, còn với da người — vốn đã sáng — thì pha ra một màu
+  // gần như da, không phép thử màu nào tách được. Kết quả là quanh đầu còn một
+  // quầng sáng mảnh, đặt lên nền màu là hiện ra thành viền trắng, nhìn như
+  // hình bị cắt dán. Art ở đây vẽ mềm nên bỏ hẳn một pixel không mất nét gì.
+  if (BG_TEST === 'light') {
+    const grow = [];
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        const i = y * W + x;
+        if (isBg[i]) continue;
+        for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+          const nx = x + dx, ny = y + dy;
+          if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
+          if (isBg[ny * W + nx]) { grow.push(i); dy = 2; break; }
+        }
+      }
+    }
+    for (const i of grow) isBg[i] = 1;
+  }
+
   // QUẦNG SÁNG Ở MÉP.
   //
   // Loang nền dừng ở ngưỡng "xám và sáng", nên hàng pixel ngoài cùng của vật —

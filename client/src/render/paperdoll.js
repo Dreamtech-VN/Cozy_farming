@@ -268,14 +268,6 @@ export function drawLook(ctx, atlas, look, { x, groundY, height }) {
   const neckH = 16 * s;
   ctx.fillStyle = `rgb(${rgb.map((c) => Math.round(c * 0.97)).join(',')})`;
   ctx.fillRect(x - neckW / 2, neckTop, neckW, neckH);
-  // Nét viền hai bên: cả bộ art đều có nét bao, mẩu cổ trơn không viền nhìn ra
-  // ngay là miếng dán chứ không phải hình vẽ.
-  ctx.strokeStyle = 'rgba(74, 48, 34, .9)';
-  ctx.lineWidth = Math.max(1, 1.6 * s);
-  ctx.beginPath();
-  ctx.moveTo(x - neckW / 2, neckTop); ctx.lineTo(x - neckW / 2, neckTop + neckH);
-  ctx.moveTo(x + neckW / 2, neckTop); ctx.lineTo(x + neckW / 2, neckTop + neckH);
-  ctx.stroke();
 
   put(outfit, x - bodyW / 2, bodyTop, { skin: tone });
   put(face, x - faceW / 2, chinY - face.rect.h * s, { skin: tone, eyes: look.eyes ?? 0 });

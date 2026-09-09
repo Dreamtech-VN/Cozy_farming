@@ -117,3 +117,32 @@ export function stripHead(piece) {
   }
   return { x: hx0, y: hy0, w: hx1 - hx0 + 1, h: hy1 - hy0 + 1 };
 }
+
+/**
+ * Xoá nét viền dưới cằm của mảnh khuôn mặt.
+ *
+ * Mảnh mặt được cắt rời nên có nét viền khép KÍN vòng quanh đầu, kể cả dưới
+ * cằm. Art vẽ liền thì không thế: nét hàm chạy xuống rồi thành nét cổ, dưới
+ * cằm không có nét nào cắt ngang. Ghép mảnh mặt lên thân mà giữ nguyên nét ấy
+ * thì nó nằm vắt ngang khúc cổ thành một vòng tối — nhìn đúng như đầu với thân
+ * hở ra một đường, dù không hở pixel nào.
+ *
+ * Chỉ xoá ở khoảng GIỮA (chỗ khúc cổ đi qua) và chỉ vài pixel ngoài cùng; hai
+ * bên hàm vẫn còn nét, vì ở đó hàm giáp nền thật.
+ */
+export function openChin(piece, { width = 0.5, depth = 3 } = {}) {
+  const { w: W, h: H, data } = piece;
+  const half = Math.round((W * width) / 2);
+  const dark = (i) => 0.2126 * data[i * 4] + 0.7152 * data[i * 4 + 1] + 0.0722 * data[i * 4 + 2] < 165;
+  for (let x = Math.round(W / 2) - half; x <= Math.round(W / 2) + half; x++) {
+    if (x < 0 || x >= W) continue;
+    let removed = 0;
+    for (let y = H - 1; y >= 0 && removed < depth; y--) {
+      const i = y * W + x;
+      if (data[i * 4 + 3] < 40) continue;   // chưa tới hình
+      if (!dark(i)) break;                   // hết nét viền, tới phần da
+      data[i * 4 + 3] = 0;
+      removed++;
+    }
+  }
+}

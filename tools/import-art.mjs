@@ -14,7 +14,7 @@ import { join } from 'node:path';
 import { readPng, Pixels } from './art/png.mjs';
 import { splitSheet } from './art/split.mjs';
 import { downscale } from './art/resize.mjs';
-import { stripHead } from './art/head.mjs';
+import { stripHead, openChin } from './art/head.mjs';
 
 
 /** Cắt một khung con khỏi tấm gộp, giữ nguyên pixel. */
@@ -75,6 +75,8 @@ for (const file of sheets) {
       // Mảnh tóc là cả cái đầu đội tóc; khoét mặt đi mới chồng được lên khuôn
       // mặt tự chọn, và khung lỗ khoét được chính là mốc căn.
       const hole = area.strip === 'head' ? stripHead(piece) : null;
+      // Mảnh mặt: bỏ nét viền dưới cằm để ghép lên cổ không lộ vòng tối.
+      if (area.strip === 'chin') openChin(piece);
       if (seen.has(name)) throw new Error(`tên sprite "${name}" có ở cả ${seen.get(name)} và ${maps.source}`);
       seen.set(name, maps.source);
       if (!pages.has(page)) pages.set(page, []);
