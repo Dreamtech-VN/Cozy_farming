@@ -27,7 +27,7 @@ const genderOf = (bodyType) => GENDERS.find((g) => g.id === bodyType) ?? GENDERS
  * đúng cách phủ của CSS: `cover` neo giữa-đáy, tức là phóng theo tỉ lệ LỚN hơn
  * trong hai chiều rồi cắt bớt phần thừa.
  */
-const PLAZA = { w: 656, h: 252, x: 282, y: 231 };
+const PLAZA = { w: 1536, h: 1024, x: 755, y: 832 };
 
 function plazaPointIn(box) {
   const s = Math.max(box.width / PLAZA.w, box.height / PLAZA.h);
@@ -46,7 +46,7 @@ function plazaPointIn(box) {
 // Nhân vật cao bao nhiêu so với CHIỀU CAO tranh nền, đo trên bản mẫu. Buộc vào
 // tranh chứ không đặt một số pixel cố định: tranh phủ kín màn nên màn to hơn là
 // tranh to hơn, nhân vật phải to theo cho đúng tỉ lệ với vòng gạch nó đứng lên.
-const CHAR_OF_BG = 0.60;
+const CHAR_OF_BG = 0.52;
 
 function stage(get, { width = 300, height = 400, onPlaza = false } = {}) {
   const canvas = el('canvas', { width: width * 2, height: height * 2, class: 'cc-stage' });

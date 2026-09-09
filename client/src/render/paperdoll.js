@@ -35,10 +35,10 @@ export const EYE_COLOURS = [
 // gần thẳng, hai đường không khớp nên chờm nông thì còn một vệt hở hình cung
 // ngay dưới hàm. Trước tôi khép vệt ấy bằng cách chờm sâu 8 pixel — kín, nhưng
 // nuốt gần hết cổ. Nay chờm nông và bịt vệt bằng một mẩu cổ vẽ thêm ở dưới.
-const NECK_OVERLAP = 3;
+const NECK_OVERLAP = 5;
 
 // Bề ngang mẩu cổ nối, tính theo bề ngang khuôn mặt.
-const NECK_W = 0.32;
+const NECK_W = 0.45;
 
 // Khuôn mặt trên tấm gốc vẽ TO hơn cái đầu mà các kiểu tóc ôm quanh — bày
 // riêng một khung để nhìn cho rõ nên nó được vẽ rộng ra. Đội thẳng thì đỉnh

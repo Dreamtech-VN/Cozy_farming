@@ -252,13 +252,47 @@ function backgroundMask(img, options = {}) {
     const x = i % W, y = (i / W) | 0;
     push(x - 1, y); push(x + 1, y); push(x, y - 1); push(x, y + 1);
   }
+  // QUẦNG SÁNG Ở MÉP.
+  //
+  // Loang nền dừng ở ngưỡng "xám và sáng", nên hàng pixel ngoài cùng của vật —
+  // chỗ nét viền hoà với ô caro — vẫn được coi là vật và giữ nguyên màu nhợt
+  // của nó. Trên nền kem thì không thấy gì, nhưng đặt nhân vật lên nền xanh
+  // trong game là hiện ra một vòng sáng quanh mép, rõ nhất là dưới cằm.
+  //
+  // Cho những pixel SÁT NỀN mà nhạt màu và sáng như nền trong dần đi. Chỉ xét
+  // pixel sát nền: áo trắng nằm bên trong tuy cũng sáng và nhạt màu nhưng
+  // không đụng nền nên giữ nguyên.
+  const rim = new Float32Array(W * H).fill(-1);
+  if (BG_TEST === 'light') {
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        const i = y * W + x;
+        if (isBg[i]) continue;
+        let touches = false;
+        for (let dy = -1; dy <= 1 && !touches; dy++) for (let dx = -1; dx <= 1; dx++) {
+          const nx = x + dx, ny = y + dy;
+          if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
+          if (isBg[ny * W + nx]) { touches = true; break; }
+        }
+        if (!touches) continue;
+        const p = i * 4;
+        const mx = Math.max(data[p], data[p + 1], data[p + 2]);
+        const mn = Math.min(data[p], data[p + 1], data[p + 2]);
+        const dark = Math.min(1, Math.max(0, (LIGHT_MIN + 4 - mn) / 30));
+        const colour = Math.min(1, Math.max(0, (mx - mn - LIGHT_SAT * 0.7) / 15));
+        rim[i] = Math.max(dark, colour);
+      }
+    }
+  }
+
   // Mép khử răng cưa: pixel càng gần màu nền thì càng trong, nếu không vật sẽ
   // có viền lởm chởm màu nền cũ khi đặt lên nền khác. Cắt theo alpha thì giữ
   // nguyên alpha gốc; cắt theo màu thì suy alpha từ khoảng cách màu.
   const alphaAt = (p) => {
-    // Nhị phân với nền caro: ảnh gốc cao gấp nhiều lần cỡ vẽ trong game nên
-    // bước thu nhỏ tự làm mượt mép, không cần suy alpha từ khoảng cách màu.
-    if (BG_TEST === 'light') return 255;
+    if (BG_TEST === 'light') {
+      const edge = rim[p >> 2];
+      return edge < 0 ? 255 : Math.round(255 * edge);
+    }
     if (hasAlpha) return data[p + 3];
     const dist = Math.sqrt((data[p] - bg[0]) ** 2 + (data[p + 1] - bg[1]) ** 2 + (data[p + 2] - bg[2]) ** 2);
     return dist >= TOL * 2 ? 255 : Math.round((dist / (TOL * 2)) * 255);
