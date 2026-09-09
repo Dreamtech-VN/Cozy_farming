@@ -30,15 +30,11 @@ export const EYE_COLOURS = [
 
 // Cằm chờm xuống mảnh trang phục mấy pixel (tính theo art gốc).
 //
-// Để NÔNG cho cái cổ hiện ra rõ. Mảnh trang phục có sẵn một khúc cổ nhô lên,
-// nhưng mép dưới mảnh mặt là đường cong CẰM còn mép trên khúc cổ là một đường
-// gần thẳng, hai đường không khớp nên chờm nông thì còn một vệt hở hình cung
-// ngay dưới hàm. Trước tôi khép vệt ấy bằng cách chờm sâu 8 pixel — kín, nhưng
-// nuốt gần hết cổ. Nay chờm nông và bịt vệt bằng một mẩu cổ vẽ thêm ở dưới.
-const NECK_OVERLAP = 12;
-
-// Bề ngang mẩu cổ nối, tính theo bề ngang khuôn mặt.
-const NECK_W = 0.32;
+// KHÔNG vẽ thêm cổ. Mảnh trang phục vốn đã có khúc cổ vẽ sẵn — có khối, có nét
+// viền, có bóng — nên việc ở đây chỉ là đặt cằm xuống vừa chạm nó. Tôi đã thử
+// vá bằng một mẩu cổ tô tay: mảng màu phẳng không ăn nhập với nét vẽ chung
+// quanh, nhìn ra ngay là miếng dán, mà chờm sâu cho kín thì lại nuốt mất cổ.
+const NECK_OVERLAP = 8;
 
 // Khuôn mặt trên tấm gốc vẽ TO hơn cái đầu mà các kiểu tóc ôm quanh — bày
 // riêng một khung để nhìn cho rõ nên nó được vẽ rộng ra. Đội thẳng thì đỉnh
@@ -257,17 +253,6 @@ export function drawLook(ctx, atlas, look, { x, groundY, height }) {
   const bodyTop = groundY - outfit.rect.h * s;
   const chinY = bodyTop + NECK_OVERLAP * s;
   const faceW = face.rect.w * s;
-
-  // Mẩu cổ nối cằm với thân, vẽ DƯỚI mảnh trang phục nên chỉ hiện đúng ở chỗ
-  // hở; cổ áo che phần dưới, cằm che phần trên. Bề ngang lấy theo khuôn mặt để
-  // không thò ra ngoài hàm.
-  const neckW = faceW * NECK_W;
-  const hex = SKIN_TONES[tone] ?? SKIN_TONES[0];
-  const rgb = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
-  const neckTop = chinY - 5 * s;
-  const neckH = 16 * s;
-  ctx.fillStyle = `rgb(${rgb.map((c) => Math.round(c * 0.97)).join(',')})`;
-  ctx.fillRect(x - neckW / 2, neckTop, neckW, neckH);
 
   put(outfit, x - bodyW / 2, bodyTop, { skin: tone });
   put(face, x - faceW / 2, chinY - face.rect.h * s, { skin: tone, eyes: look.eyes ?? 0 });
