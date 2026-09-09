@@ -35,10 +35,10 @@ export const EYE_COLOURS = [
 // gần thẳng, hai đường không khớp nên chờm nông thì còn một vệt hở hình cung
 // ngay dưới hàm. Trước tôi khép vệt ấy bằng cách chờm sâu 8 pixel — kín, nhưng
 // nuốt gần hết cổ. Nay chờm nông và bịt vệt bằng một mẩu cổ vẽ thêm ở dưới.
-const NECK_OVERLAP = 5;
+const NECK_OVERLAP = 12;
 
 // Bề ngang mẩu cổ nối, tính theo bề ngang khuôn mặt.
-const NECK_W = 0.45;
+const NECK_W = 0.32;
 
 // Khuôn mặt trên tấm gốc vẽ TO hơn cái đầu mà các kiểu tóc ôm quanh — bày
 // riêng một khung để nhìn cho rõ nên nó được vẽ rộng ra. Đội thẳng thì đỉnh
@@ -221,6 +221,21 @@ function naturalHeight({ outfit, face, hair }) {
 
 
 /**
+ * Các mốc dựng hình: tỉ lệ vẽ, mép trên mảnh trang phục, và cằm.
+ *
+ * Tách ra để chỗ khác đo lại được — bài kiểm tra dò lỗ hở ở khúc cổ cần biết
+ * chính xác khúc cổ nằm ở đâu, mà đoán lại công thức thì hai bên lệch nhau lúc
+ * nào không hay.
+ */
+export function lookLayout(atlas, look, { groundY, height }) {
+  const parts = lookParts(atlas, look);
+  if (!parts) return null;
+  const s = height / naturalHeight(parts);
+  const bodyTop = groundY - parts.outfit.rect.h * s;
+  return { s, bodyTop, chinY: bodyTop + NECK_OVERLAP * s, parts };
+}
+
+/**
  * Vẽ nhân vật ghép, neo ĐÁY GIỮA tại (x, groundY), cao đúng `height`.
  * @returns true nếu vẽ được, false nếu art chưa sẵn sàng.
  */
@@ -249,8 +264,18 @@ export function drawLook(ctx, atlas, look, { x, groundY, height }) {
   const neckW = faceW * NECK_W;
   const hex = SKIN_TONES[tone] ?? SKIN_TONES[0];
   const rgb = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+  const neckTop = chinY - 5 * s;
+  const neckH = 16 * s;
   ctx.fillStyle = `rgb(${rgb.map((c) => Math.round(c * 0.97)).join(',')})`;
-  ctx.fillRect(x - neckW / 2, chinY - 5 * s, neckW, 16 * s);
+  ctx.fillRect(x - neckW / 2, neckTop, neckW, neckH);
+  // Nét viền hai bên: cả bộ art đều có nét bao, mẩu cổ trơn không viền nhìn ra
+  // ngay là miếng dán chứ không phải hình vẽ.
+  ctx.strokeStyle = 'rgba(74, 48, 34, .9)';
+  ctx.lineWidth = Math.max(1, 1.6 * s);
+  ctx.beginPath();
+  ctx.moveTo(x - neckW / 2, neckTop); ctx.lineTo(x - neckW / 2, neckTop + neckH);
+  ctx.moveTo(x + neckW / 2, neckTop); ctx.lineTo(x + neckW / 2, neckTop + neckH);
+  ctx.stroke();
 
   put(outfit, x - bodyW / 2, bodyTop, { skin: tone });
   put(face, x - faceW / 2, chinY - face.rect.h * s, { skin: tone, eyes: look.eyes ?? 0 });
