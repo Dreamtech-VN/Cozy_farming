@@ -22,17 +22,17 @@ const genderOf = (bodyType) => GENDERS.find((g) => g.id === bodyType) ?? GENDERS
 /**
  * Tâm vòng gạch trong tranh nền, đo trên chính file create.png.
  *
- * Vị trí vòng gạch trên màn hình đổi theo bề ngang khung nhìn — đặt nhân vật
- * bằng một con số CSS cố định thì màn cỡ khác là lệch ra khỏi vòng ngay. Tính
- * theo đúng cách phủ của CSS: `100% auto` neo đáy, tức là tranh kéo vừa bề
- * ngang, cao theo tỉ lệ, dính đáy.
+ * Vị trí vòng gạch trên màn hình đổi theo tỉ lệ khung nhìn — đặt nhân vật bằng
+ * một con số CSS cố định thì màn cỡ khác là lệch ra khỏi vòng ngay. Tính theo
+ * đúng cách phủ của CSS: `cover` neo giữa-đáy, tức là phóng theo tỉ lệ LỚN hơn
+ * trong hai chiều rồi cắt bớt phần thừa.
  */
-const PLAZA = { w: 655, h: 220, x: 283, y: 199 };
+const PLAZA = { w: 656, h: 252, x: 282, y: 231 };
 
 function plazaPointIn(box) {
-  const s = box.width / PLAZA.w;
+  const s = Math.max(box.width / PLAZA.w, box.height / PLAZA.h);
   return {
-    x: PLAZA.x * s,
+    x: (box.width - PLAZA.w * s) / 2 + PLAZA.x * s,
     y: box.height - PLAZA.h * s + PLAZA.y * s,
   };
 }
@@ -43,10 +43,10 @@ function plazaPointIn(box) {
  * Vẽ bằng canvas chứ không ghép thẻ <img> chồng nhau: đổi tông da phải sửa
  * từng pixel, mà ba mảnh còn phải căn theo mốc đo được trong atlas.
  */
-// Nhân vật cao bao nhiêu so với tranh nền, đo trên bản mẫu: cao chừng 37% bề
-// ngang tranh. Buộc vào tranh chứ không đặt một số pixel cố định — tranh phủ
-// theo bề ngang nên màn rộng hơn là tranh to hơn, nhân vật phải to theo.
-const CHAR_OF_BG = 0.37;
+// Nhân vật cao bao nhiêu so với CHIỀU CAO tranh nền, đo trên bản mẫu. Buộc vào
+// tranh chứ không đặt một số pixel cố định: tranh phủ kín màn nên màn to hơn là
+// tranh to hơn, nhân vật phải to theo cho đúng tỉ lệ với vòng gạch nó đứng lên.
+const CHAR_OF_BG = 0.60;
 
 function stage(get, { width = 300, height = 400, onPlaza = false } = {}) {
   const canvas = el('canvas', { width: width * 2, height: height * 2, class: 'cc-stage' });
@@ -90,10 +90,8 @@ function stage(get, { width = 300, height = 400, onPlaza = false } = {}) {
     const overlay = document.getElementById('overlay');
     const backdrop = overlay.getBoundingClientRect();
     const point = plazaPointIn(backdrop);
-    // Mép trên của tranh nền, để dải trời nối lên trên kết thúc đúng chỗ đó.
-    overlay.style.setProperty('--bg-top', `${backdrop.height - PLAZA.h * (backdrop.width / PLAZA.w)}px`);
     // Cỡ khung vẽ bám theo cỡ nhân vật, chừa chỗ cho tóc dựng và bóng đổ.
-    const charH = backdrop.width * CHAR_OF_BG;
+    const charH = PLAZA.h * Math.max(backdrop.width / PLAZA.w, backdrop.height / PLAZA.h) * CHAR_OF_BG;
     box = { w: Math.round(charH * 0.9), h: Math.round(charH + 40), charH };
     draw();
     canvas.style.left = `${backdrop.left - stageBox.left + point.x - box.w / 2}px`;

@@ -93,10 +93,7 @@ const MAX_W_BY_FILE = { 'logo.png': 760 };
 //  - create.png: phủ theo bề ngang rồi nối trời phía trên, mép trên là chỗ nối.
 //  - leaves.png: cắt ra từ một bảng phụ kiện xếp sát nhau nên mép dưới và mép
 //    trái xén vào giữa tán lá; hai mép kia thì đúng dáng lá.
-const FADE_BY_FILE = {
-  'create.png': { top: 14 },
-  'leaves.png': { bottom: 18, left: 22 },
-};
+const FADE_BY_FILE = {};
 
 /** Cho một mép tan dần vào trong suốt, theo đường cong mượt hai đầu. */
 function fadeEdge(img, side, span) {
