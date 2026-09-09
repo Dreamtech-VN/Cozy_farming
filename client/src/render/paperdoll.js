@@ -45,8 +45,8 @@ const NECK_SINK = 0.075;
  * chiều cao thân thì thay bảng art vẫn còn đúng.
  */
 const ARM = {
-  m: { fit: 0.82, dx: 0.128, dy: 0.106 },
-  f: { fit: 0.70, dx: 0.140, dy: 0.101 },
+  m: { fit: 0.86, dx: 0.102, dy: 0.121 },
+  f: { fit: 0.82, dx: 0.085, dy: 0.124 },
 };
 
 /**

@@ -416,17 +416,36 @@ function backgroundMask(img, options = {}) {
   // chứ không ghi số chết: mỗi tấm một sắc caro hơi khác.
   const pocket = new Uint8Array(W * H);
   if (BG_TEST === 'light') {
-    const tally = new Map();
-    for (let i = 0; i < W * H; i++) if (isBg[i]) {
-      const v = data[i * 4];
-      tally.set(v, (tally.get(v) ?? 0) + 1);
+    // Nhận ra bằng chính cái làm nên ô caro: NÓ TUẦN HOÀN. Cứ nửa chu kì lại
+    // đảo sắc, nên hai pixel cách nhau nửa chu kì gần như luôn khác sắc. Vải
+    // thì chuyển mượt, hai pixel cách nhau chừng ấy vẫn gần bằng nhau.
+    //
+    // Thử theo hai SẮC thì không ăn thua: ô caro trên bộ tấm này bị làm mờ nên
+    // sắc trải thành một dải liên tục 240–255, mặt trước áo sơ mi trắng cũng
+    // rơi đúng vào dải ấy — cắt xong là thủng một mảng giữa ngực áo.
+    //
+    // Nửa chu kì đo từ chính phần nền của tấm (thử mọi khoảng cách, lấy khoảng
+    // nào làm nền dao động mạnh nhất), không ghi số chết: tấm khác ô caro khác.
+    const swing = (test, gap) => {
+      let sum = 0, n = 0;
+      for (let y = 0; y < H; y++) {
+        for (let x = 0; x + gap < W; x++) {
+          const i = y * W + x, j = i + gap;
+          if (!test(i) || !test(j)) continue;
+          sum += Math.abs(data[i * 4] - data[j * 4]);
+          n++;
+        }
+      }
+      return n > 200 ? sum / n : 0;
+    };
+    const isBgAt = (i) => isBg[i] === 1;
+    let half = 0, bgSwing = 0;
+    for (let gap = 6; gap <= 28; gap += 2) {
+      const v = swing(isBgAt, gap);
+      if (v > bgSwing) { bgSwing = v; half = gap; }
     }
-    const ranked = [...tally.entries()].sort((a, b) => b[1] - a[1]).map(([v]) => v);
-    const light = ranked[0] ?? 254;
-    const dark = ranked.find((v) => Math.abs(v - light) > 6) ?? light - 16;
-    const NEAR = 4;
-    const isTone = (v, t) => Math.abs(v - t) <= NEAR;
 
+    const MATCH = 0.55; // túi caro dao động gần bằng nền; vải kém xa
     const seenPix = new Uint8Array(W * H);
     const stack = new Int32Array(W * H);
     for (let start = 0; start < W * H; start++) {
@@ -434,11 +453,8 @@ function backgroundMask(img, options = {}) {
       let qh = 0, qt = 0;
       seenPix[start] = 1; stack[qt++] = start;
       const cluster = [start];
-      let nLight = 0, nDark = 0;
       while (qh < qt) {
         const i = stack[qh++];
-        const v = data[i * 4];
-        if (isTone(v, light)) nLight++; else if (isTone(v, dark)) nDark++;
         const x = i % W, y = (i / W) | 0;
         for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
           const nx = x + dx, ny = y + dy;
@@ -448,9 +464,10 @@ function backgroundMask(img, options = {}) {
           seenPix[j] = 1; stack[qt++] = j; cluster.push(j);
         }
       }
-      const n = cluster.length;
-      if (n < 200) continue;
-      if (nLight / n < 0.2 || nDark / n < 0.2) continue;
+      if (cluster.length < 1500 || !half) continue;
+      const mark = new Uint8Array(W * H);
+      for (const i of cluster) mark[i] = 1;
+      if (swing((i) => mark[i] === 1, half) < bgSwing * MATCH) continue;
       for (const i of cluster) pocket[i] = 1;
     }
   }
