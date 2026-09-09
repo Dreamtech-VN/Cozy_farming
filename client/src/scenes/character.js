@@ -27,7 +27,7 @@ const genderOf = (bodyType) => GENDERS.find((g) => g.id === bodyType) ?? GENDERS
  * theo đúng cách phủ của CSS: `100% auto` neo đáy, tức là tranh kéo vừa bề
  * ngang, cao theo tỉ lệ, dính đáy.
  */
-const PLAZA = { w: 640, h: 208, x: 273, y: 186 };
+const PLAZA = { w: 655, h: 220, x: 283, y: 199 };
 
 function plazaPointIn(box) {
   const s = box.width / PLAZA.w;
