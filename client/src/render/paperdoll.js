@@ -30,12 +30,15 @@ export const EYE_COLOURS = [
 
 // Cằm chờm xuống mảnh trang phục mấy pixel (tính theo art gốc).
 //
-// Mảnh trang phục KHÔNG cụt ngang ở vai: nó có sẵn một khúc CỔ nhô lên ở giữa.
-// Nên không phải vẽ thêm cổ — chỉ cần cằm chờm xuống vừa đủ dính vào khúc cổ
-// ấy. Chờm nông thì còn một vệt hở hình cung ngay dưới hàm, chờm sâu thì nuốt
-// mất cổ và nhân vật cụt đầu vào vai. Vẽ trên nền hồng chói để đo: 4 và 6 vẫn
-// còn vệt, 8 thì kín mà cổ vẫn hiện.
-const NECK_OVERLAP = 8;
+// Để NÔNG cho cái cổ hiện ra rõ. Mảnh trang phục có sẵn một khúc cổ nhô lên,
+// nhưng mép dưới mảnh mặt là đường cong CẰM còn mép trên khúc cổ là một đường
+// gần thẳng, hai đường không khớp nên chờm nông thì còn một vệt hở hình cung
+// ngay dưới hàm. Trước tôi khép vệt ấy bằng cách chờm sâu 8 pixel — kín, nhưng
+// nuốt gần hết cổ. Nay chờm nông và bịt vệt bằng một mẩu cổ vẽ thêm ở dưới.
+const NECK_OVERLAP = 3;
+
+// Bề ngang mẩu cổ nối, tính theo bề ngang khuôn mặt.
+const NECK_W = 0.32;
 
 // Khuôn mặt trên tấm gốc vẽ TO hơn cái đầu mà các kiểu tóc ôm quanh — bày
 // riêng một khung để nhìn cho rõ nên nó được vẽ rộng ra. Đội thẳng thì đỉnh
@@ -44,7 +47,7 @@ const NECK_OVERLAP = 8;
 // Chỉnh bằng cách PHÓNG TÓC chứ không thu nhỏ mặt. Thu mặt thì cái đầu bé lại
 // so với thân, mà khúc cổ trên mảnh trang phục lại vẽ vừa cái đầu cỡ thật —
 // cằm hụt không với tới cổ, hở ra một vệt nhìn thấu nền ngay dưới hàm.
-const HAIR_FIT = 1.16;
+const HAIR_FIT = 1.06;
 
 const BASE_SKIN = [254, 232, 210];
 
@@ -239,6 +242,15 @@ export function drawLook(ctx, atlas, look, { x, groundY, height }) {
   const bodyTop = groundY - outfit.rect.h * s;
   const chinY = bodyTop + NECK_OVERLAP * s;
   const faceW = face.rect.w * s;
+
+  // Mẩu cổ nối cằm với thân, vẽ DƯỚI mảnh trang phục nên chỉ hiện đúng ở chỗ
+  // hở; cổ áo che phần dưới, cằm che phần trên. Bề ngang lấy theo khuôn mặt để
+  // không thò ra ngoài hàm.
+  const neckW = faceW * NECK_W;
+  const hex = SKIN_TONES[tone] ?? SKIN_TONES[0];
+  const rgb = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+  ctx.fillStyle = `rgb(${rgb.map((c) => Math.round(c * 0.97)).join(',')})`;
+  ctx.fillRect(x - neckW / 2, chinY - 5 * s, neckW, 16 * s);
 
   put(outfit, x - bodyW / 2, bodyTop, { skin: tone });
   put(face, x - faceW / 2, chinY - face.rect.h * s, { skin: tone, eyes: look.eyes ?? 0 });

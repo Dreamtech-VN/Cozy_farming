@@ -111,7 +111,7 @@ function stage(get, { width = 300, height = 400, onPlaza = false } = {}) {
 }
 
 /** Một hàng lựa chọn: ô xem trước cuộn ngang, hai nút mũi tên hai đầu. */
-function chooser(label, names, { selected, onPick, thumb, perPage = 4 }) {
+function chooser(label, names, { selected, onPick, thumb, perPage = 4, nameOf = (n) => n }) {
   let start = 0;
   const cells = el('div', { class: 'cc-cells' });
   const arrow = (dir) => el('button', {
@@ -140,14 +140,15 @@ function chooser(label, names, { selected, onPick, thumb, perPage = 4 }) {
       return el('button', {
         class: 'cc-cell', type: 'button', role: 'radio',
         'aria-checked': name === selected() ? 'true' : 'false',
-        'aria-label': name,
+        'aria-label': nameOf(name),
+        'data-value': name,
         onClick: () => { onPick(name); refresh(); },
       }, [canvas]);
     }));
   };
   const refresh = () => {
     for (const cell of cells.children) {
-      cell.setAttribute('aria-checked', cell.getAttribute('aria-label') === selected() ? 'true' : 'false');
+      cell.setAttribute('aria-checked', cell.dataset.value === selected() ? 'true' : 'false');
     }
   };
   render();
@@ -198,6 +199,20 @@ export function showCharacterScreen(game, characters) {
         thumb: (ctx, name, box) => drawThumb(ctx, atlas, name,
           { ...box, face: look.face, skin: look.skin, eyes: look.eyes }),
       }),
+      eyes: chooser('Màu mắt', EYE_COLOURS.map((_, i) => String(i)), {
+        selected: () => String(look.eyes),
+        onPick: (name) => {
+          look = { ...look, eyes: Number(name) };
+          preview.draw();
+          rows.hair.refresh();
+        },
+        // Bày CHÍNH khuôn mặt với từng màu mắt, không bày ô màu trơn: chọn mắt
+        // thì phải thấy con mắt trên mặt, chứ một ô màu thì không biết nó ra sao.
+        thumb: (ctx, name, box) => drawThumb(ctx, atlas, look.face,
+          { ...box, skin: look.skin, eyes: Number(name) }),
+        nameOf: (name) => EYE_COLOURS[Number(name)].label,
+        perPage: 5,
+      }),
       outfit: chooser('Trang phục', [], {
         selected: () => look.outfit,
         onPick: (name) => { look = { ...look, outfit: name }; preview.draw(); },
@@ -223,14 +238,15 @@ export function showCharacterScreen(game, characters) {
     const skinRow = swatches('Màu da',
       SKIN_TONES.map((hex, i) => ({ hex, name: `Màu da ${i + 1}` })),
       () => look.skin, (i) => { look = { ...look, skin: i }; });
-    const eyeRow = swatches('Màu mắt',
-      EYE_COLOURS.map(({ hex, label }) => ({ hex, name: label })),
-      () => look.eyes, (i) => { look = { ...look, eyes: i }; });
+
 
     const repaintChoosers = () => {
       const options = lookOptions(atlas, look.gender);
       rows.hair.rebuild(options.hair);
       rows.outfit.rebuild(options.outfit);
+      // Ô mắt vẽ chính khuôn mặt đang chọn nên đổi giới hay đổi tông da là
+      // phải vẽ lại, dù danh sách màu không đổi.
+      rows.eyes.rebuild(EYE_COLOURS.map((_, i) => String(i)));
     };
 
     const applyLook = (next) => {
@@ -238,9 +254,6 @@ export function showCharacterScreen(game, characters) {
       repaintChoosers();
       for (const [i, node] of [...skinRow.children].entries()) {
         node.setAttribute('aria-checked', i === look.skin ? 'true' : 'false');
-      }
-      for (const [i, node] of [...eyeRow.children].entries()) {
-        node.setAttribute('aria-checked', i === look.eyes ? 'true' : 'false');
       }
       preview.draw();
     };
@@ -300,7 +313,7 @@ export function showCharacterScreen(game, characters) {
         el('div', { class: 'cc-panel' }, [
           el('h2', { text: 'Chọn ngoại hình' }),
           rows.hair.node,
-          el('div', { class: 'cc-row' }, [el('span', { class: 'cc-label', text: 'Màu mắt' }), eyeRow]),
+          rows.eyes.node,
           el('div', { class: 'cc-row' }, [el('span', { class: 'cc-label', text: 'Màu da' }), skinRow]),
           rows.outfit.node,
           el('div', { class: 'cc-name-row' }, [
