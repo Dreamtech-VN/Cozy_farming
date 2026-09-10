@@ -275,6 +275,62 @@ export function openAreaMap(game) {
   });
 }
 
+/**
+ * Trạm xe buýt: bảng đồ tuyến, bấm vào bến là đi.
+ *
+ * Đứng vào trạm là bảng đồ tự bật, nên đây vừa là bảng chỉ đường vừa là vé xe.
+ * Bến đi được đúng bằng các cửa ngõ của map đang đứng — không thêm đường tắt
+ * nào, chỉ đổi cách chọn: trước phải đi tới đúng đầu map mới sang được nơi kia,
+ * giờ trạm nào cũng đón được mọi chuyến của khu ấy.
+ *
+ * Vẫn để một hàng nút bên dưới bảng đồ. Ô trên bảng đồ bé bằng đầu ngón tay,
+ * bấm trượt trên điện thoại là chuyện thường; hàng nút là đường chắc chắn.
+ */
+export function openBusStop(game, portal) {
+  const map = game.currentMap;
+  const stops = (map?.portals ?? []).filter((p) => p.target_map_id);
+  const go = async (stop) => {
+    closePanel();
+    try { await game.enterMap(stop.target_map_id, stop.target_spawn); }
+    catch (err) { toast(err.message, 'bad'); }
+  };
+
+  showPanel('Trạm xe buýt', async (body) => {
+    body.append(el('p', { class: 'sub', style: 'margin:0 0 10px',
+      text: `Đang đợi ở ${t(portal.label_key)}. Chọn bến muốn tới.` }));
+    body.append(emptyState('Đang tải…'));
+    const atlas = await game.api.get('/v1/world/atlas');
+    body.replaceChildren();
+
+    const canvas = el('canvas', { class: 'map-view' });
+    canvas.style.cssText = 'width:100%;aspect-ratio:16/9;cursor:pointer';
+    body.append(canvas);
+
+    const reachable = new Set(stops.map((s) => s.target_map_id));
+    let hits = [];
+    const redraw = () => { hits = drawWorldAtlas(canvas, atlas, map?.map_id, { reachable }); };
+    requestAnimationFrame(redraw);
+    addEventListener('resize', () => { if (canvas.isConnected) redraw(); });
+
+    canvas.addEventListener('click', (event) => {
+      const box = canvas.getBoundingClientRect();
+      const px = event.clientX - box.left;
+      const py = event.clientY - box.top;
+      const hit = hits.find((h) => px >= h.x && px <= h.x + h.w && py >= h.y && py <= h.y + h.h);
+      if (!hit) return;
+      const stop = stops.find((s) => s.target_map_id === hit.map_id);
+      if (!stop) { toast('Trạm này không có chuyến tới đó.'); return; }
+      if (hit.locked) { toast('Bến đó chưa mở khoá.', 'bad'); return; }
+      go(stop);
+    });
+
+    body.append(el('div', { class: 'row', style: 'flex-wrap:wrap;margin-top:10px' },
+      stops.map((stop) => el('button', {
+        class: 'primary', type: 'button', text: t(stop.label_key), onClick: () => go(stop),
+      }))));
+  }, { key: 'bus-stop' });
+}
+
 /** Bản đồ thành phố: toàn bộ map và các cổng nối giữa chúng. */
 export function openWorldAtlas(game) {
   showPanel('Bản đồ thành phố', async (body) => {

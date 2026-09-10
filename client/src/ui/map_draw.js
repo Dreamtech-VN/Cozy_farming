@@ -146,7 +146,15 @@ export function drawAreaMap(canvas, map, { self, players = [], detail = false } 
  * Bố cục xếp theo nhóm map (City / Farming / Adventure / Event) nên thêm map mới
  * chỉ cần khai báo `group` trong data.
  */
-export function drawWorldAtlas(canvas, atlas, currentMapId) {
+/**
+ * Bản đồ thành phố. Trả về ô bấm của từng map để chỗ gọi tự dò chạm — bảng đồ ở
+ * trạm xe buýt là thứ để BẤM chứ không phải để ngắm, mà toạ độ các node chỉ có ở
+ * trong này.
+ *
+ * `reachable` là những map chuyến xe ở trạm này đi tới; tô khác đi để người chơi
+ * nhìn ra ngay đi được những đâu, khỏi bấm thử từng ô.
+ */
+export function drawWorldAtlas(canvas, atlas, currentMapId, { reachable = null } = {}) {
   const dpr = Math.min(devicePixelRatio || 1, 2);
   const cssWidth = canvas.clientWidth || canvas.width;
   const cssHeight = canvas.clientHeight || canvas.height;
@@ -190,6 +198,7 @@ export function drawWorldAtlas(canvas, atlas, currentMapId) {
     }
   }
 
+  const hits = [];
   for (const node of nodes.values()) {
     const current = node.map.map_id === currentMapId;
     const width = Math.min(columnWidth - 16, 132);
@@ -197,9 +206,10 @@ export function drawWorldAtlas(canvas, atlas, currentMapId) {
     const x = node.x - width / 2;
     const y = node.y - height / 2;
 
-    ctx.fillStyle = node.map.locked ? '#2a2320' : current ? '#2f5f42' : '#24382f';
-    ctx.strokeStyle = current ? '#7fc98a' : node.map.locked ? '#6a5252' : '#35513f';
-    ctx.lineWidth = current ? 2 : 1;
+    const ride = reachable?.has(node.map.map_id) && !node.map.locked;
+    ctx.fillStyle = node.map.locked ? '#2a2320' : current ? '#2f5f42' : ride ? '#2b4a5e' : '#24382f';
+    ctx.strokeStyle = current ? '#7fc98a' : node.map.locked ? '#6a5252' : ride ? '#7ad3f0' : '#35513f';
+    ctx.lineWidth = current || ride ? 2 : 1;
     ctx.beginPath();
     ctx.roundRect(x, y, width, height, 9);
     ctx.fill();
@@ -219,8 +229,16 @@ export function drawWorldAtlas(canvas, atlas, currentMapId) {
       ctx.fillStyle = '#7fc98a';
       ctx.font = '600 10px system-ui, sans-serif';
       ctx.fillText('đang ở đây', node.x, node.y + 13);
+    } else if (ride) {
+      ctx.fillStyle = '#7ad3f0';
+      ctx.font = '600 10px system-ui, sans-serif';
+      ctx.fillText('có chuyến', node.x, node.y + 13);
     }
+
+    hits.push({ map_id: node.map.map_id, x, y, w: width, h: height, locked: node.map.locked });
   }
+
+  return hits;
 }
 
 export { COLORS as MAP_COLORS };

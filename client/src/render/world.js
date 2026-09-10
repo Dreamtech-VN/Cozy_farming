@@ -102,7 +102,12 @@ export class WorldRenderer {
     this.map = map;
     // Nạp trước trang art chứa cảnh vật của map này. Không gọi thì sprite chỉ
     // hiện ra sau khi đã thử vẽ hụt một lần, tức là trễ mất một khung hình.
-    if (map?.scenery) atlas.ensureFor(Object.values(map.scenery).flat());
+    atlas.ensureFor([
+      ...(map?.scenery ? Object.values(map.scenery).flat() : []),
+      // Trạm xe buýt nằm ở trang art khác cảnh vật của map, mà nó là lối RA
+      // khỏi map: nạp hụt trang là người chơi đứng trước một khoảng trống.
+      ...(map?.portals ?? []).map((portal) => portal.sprite).filter(Boolean),
+    ]);
   }
 
   /** Giờ trong ngày và thời tiết lấy từ server (doc 03 — weather/day-night flags). */
@@ -597,22 +602,47 @@ export class WorldRenderer {
     }
   }
 
+  /**
+   * Chỗ sang map khác là một TRẠM XE BUÝT, không phải vệt sáng vô hình.
+   *
+   * Trước đây chỗ này vẽ một viên thuốc bán trong xanh lơ: người chơi không đoán
+   * ra đấy là gì, mà nó cũng chẳng ăn nhập với tranh nền vẽ tay. Trạm xe buýt
+   * thì tự nó nói ra công dụng — thấy mái trạm là biết đứng vào đấy để đi nơi
+   * khác, khỏi cần chú thích.
+   *
+   * `portal.sprite` khai trong data map để mỗi cửa ngõ sau này thay art riêng
+   * được (bến đò trong rừng chẳng hạn); chưa có art thì lui về viên thuốc cũ
+   * chứ không bỏ trống, vì mất dấu là mất luôn đường ra khỏi map.
+   */
   #drawPortals(map, hintTarget) {
     const ctx = this.ctx;
     for (const portal of map.portals) {
       const highlight = hintTarget?.id === portal.portal_id;
-      ctx.globalAlpha = highlight ? 0.95 : 0.65;
-      const gradient = ctx.createLinearGradient(0, portal.y - portal.h, 0, portal.y);
-      gradient.addColorStop(0, '#eaf7ff');
-      gradient.addColorStop(1, '#6fb6d8');
-      ctx.fillStyle = gradient;
-      roundRect(ctx, portal.x - portal.w / 2, portal.y - portal.h, portal.w, portal.h, portal.w / 2);
-      ctx.globalAlpha = 1;
+      const drawn = portal.sprite && (() => {
+        ctx.save();
+        if (highlight) { ctx.shadowColor = 'rgba(255,232,150,.95)'; ctx.shadowBlur = 18; }
+        const ok = atlas.ready && atlas.sprite(ctx, portal.sprite, portal.x, portal.y, portal.scale ?? 2);
+        ctx.restore();
+        return ok;
+      })();
 
+      if (!drawn) {
+        ctx.globalAlpha = highlight ? 0.95 : 0.65;
+        const gradient = ctx.createLinearGradient(0, portal.y - portal.h, 0, portal.y);
+        gradient.addColorStop(0, '#eaf7ff');
+        gradient.addColorStop(1, '#6fb6d8');
+        ctx.fillStyle = gradient;
+        roundRect(ctx, portal.x - portal.w / 2, portal.y - portal.h, portal.w, portal.h, portal.w / 2);
+        ctx.globalAlpha = 1;
+      }
+
+      // Nhãn treo trên NÓC TRẠM, không phải trên khung tương tác: mái trạm cao
+      // hơn khung nên tính theo khung là chữ nằm đè lên mái.
+      const top = drawn ? (portal.scale ?? 2) * 64 : portal.h;
       ctx.font = '600 12px system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillStyle = '#0e1a15';
-      ctx.fillText(t(portal.label_key), portal.x, portal.y - portal.h - 8);
+      ctx.fillText(t(portal.label_key), portal.x, portal.y - top - 8);
     }
   }
 

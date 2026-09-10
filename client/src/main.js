@@ -22,12 +22,15 @@ import { ChatDock } from './ui/chat_dock.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
-import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openLiveOps, openMenu, openMail, openSettings, openDaily, energyLine } from './ui/panels.js';
+import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openBusStop, openLiveOps, openMenu, openMail, openSettings, openDaily, energyLine } from './ui/panels.js';
 
 // Trục dọc là chiều sâu, không phải độ cao — đi lùi vào trong chậm hơn đi ngang.
 const DEPTH_SPEED = 0.55;
 const RUN_SPEED = 260;
 const INTERACT_RANGE = 90;
+// Bảng đồ tuyến tự bật khi ĐỨNG VÀO trạm, nên bán kính này phải hẹp hơn tầm
+// tương tác chung: rộng bằng nhau thì đi ngang qua cũng bị bảng đồ chặn mặt.
+const BUS_STOP_RANGE = 56;
 
 class Game {
   constructor() {
@@ -252,6 +255,7 @@ class Game {
     this.content.mapsById.set(map.map_id, map);
     this.players.clear();
 
+    this.busStop = 'arrived';
     this.self.x = entered.spawn.x;
     this.self.y = entered.spawn.y;
     this.self.vx = 0;
@@ -426,7 +430,7 @@ class Game {
     const self = this.self;
     const candidates = [
       ...map.npcs.map((npc) => ({ id: npc.npc_id, x: npc.x, kind: 'npc', data: npc, label: `Nói chuyện với ${t(npc.name_key)}` })),
-      ...map.portals.map((portal) => ({ id: portal.portal_id, x: portal.x, kind: 'portal', data: portal, label: t(portal.label_key) })),
+      ...map.portals.map((portal) => ({ id: portal.portal_id, x: portal.x, kind: 'portal', data: portal, label: 'Xem tuyến xe buýt' })),
       ...(map.objects ?? []).filter((o) => o.action).map((object) => ({
         id: object.object_id, x: object.x, kind: 'object', data: object, label: OBJECT_LABEL[object.action] ?? 'Tương tác',
       })),
@@ -448,12 +452,24 @@ class Game {
     }
 
     if (this.input.consumeAction() && nearest) this.#interact(nearest);
+
+    // Tới trạm là bảng đồ tuyến tự bật. Nhớ lại trạm vừa mở để đứng yên trong
+    // trạm không bị bật đi bật lại; đi khỏi trạm mới quên.
+    const stop = map.portals.find((portal) => Math.abs(portal.x - self.x) < BUS_STOP_RANGE);
+    if (!stop) this.busStop = null;
+    // 'arrived': vừa xuống xe ngay tại một trạm. Không quên ngay được, không thì
+    // vừa tới nơi bảng đồ đã bật lên mời đi tiếp.
+    else if (this.busStop !== stop.portal_id && this.busStop !== 'arrived') {
+      this.busStop = stop.portal_id;
+      openBusStop(this, stop);
+    }
   }
 
   async #interact(target) {
     try {
       if (target.kind === 'portal') {
-        await this.enterMap(target.data.target_map_id, target.data.target_spawn);
+        this.busStop = target.data.portal_id;
+        openBusStop(this, target.data);
         return;
       }
       if (target.kind === 'npc') {
