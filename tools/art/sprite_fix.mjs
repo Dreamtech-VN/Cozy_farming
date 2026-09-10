@@ -23,6 +23,60 @@ const lum = (r, g, b) => 0.299 * r + 0.587 * g + 0.114 * b;
 const chroma = (r, g, b) => { const mx = Math.max(r, g, b); return mx ? (mx - Math.min(r, g, b)) / mx : 0; };
 
 /**
+ * Gỡ VIỀN NHẠT bao ngoài — thứ khiến sprite nào cũng nhìn ra nhãn dán.
+ *
+ * Bộ art vẽ trên nền sáng. Cắt ra thì sát mép còn lại một lớp pixel pha màu
+ * nền: nó nằm NGOÀI nét viền tối mà hoạ sĩ vẽ, nên thành một đường sáng chạy
+ * quanh hình — đúng đường cắt của một cái sticker. Đo lớp pixel từ rìa vào thấy
+ * rõ, sprite nào cũng vậy:
+ *
+ *     prop_busstop  rìa 98  → trong 64      civic_hall  rìa 144 → trong 67
+ *     prop_bench    rìa 158 → trong 98      hedge_long  rìa 130 → trong 52
+ *
+ * Vật vẽ sẵn trong tranh nền không có lớp này: nét viền tối của chúng chạm
+ * thẳng vào cảnh. Nên nắn màu hay thêm bóng bao nhiêu cũng vô ích — mắt vẫn bắt
+ * được đường sáng ấy trước tiên.
+ *
+ * Phép thử là SO SÁNH chứ không phải ngưỡng tuyệt đối: chỉ bỏ pixel rìa nào
+ * SÁNG HƠN lớp ngay trong nó. Hàng rào trắng có rìa trắng thì trong cũng trắng,
+ * hiệu số bằng 0, giữ nguyên — nếu lấy ngưỡng "sáng quá thì bỏ" là gọt trụi
+ * những vật vốn màu nhạt.
+ */
+export function deFringe({ w, h, data }, { margin = 18, passes = 2 } = {}) {
+  let gone = 0;
+  for (let pass = 0; pass < passes; pass++) {
+    const a = (x, y) => (x < 0 || y < 0 || x >= w || y >= h ? 0 : data[(y * w + x) * 4 + 3]);
+    const solid = (x, y) => a(x, y) >= 128;
+    const edge = (x, y) => {
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) if (!solid(x + dx, y + dy)) return true;
+      return false;
+    };
+    const drop = [];
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        if (!solid(x, y) || !edge(x, y)) continue;
+        let sum = 0, n = 0;
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            const nx = x + dx, ny = y + dy;
+            if ((!dx && !dy) || !solid(nx, ny) || edge(nx, ny)) continue;   // chỉ lấy lớp TRONG làm mốc
+            const i = (ny * w + nx) * 4;
+            sum += lum(data[i], data[i + 1], data[i + 2]); n++;
+          }
+        }
+        if (!n) continue;
+        const i = (y * w + x) * 4;
+        if (lum(data[i], data[i + 1], data[i + 2]) > sum / n + margin) drop.push(i + 3);
+      }
+    }
+    if (!drop.length) break;
+    for (const i of drop) data[i] = 0;
+    gone += drop.length;
+  }
+  return gone;
+}
+
+/**
  * Vá mảng bị ăn mòn: pixel nửa trong nằm LỌT GIỮA toàn pixel đục thì kéo về đục.
  *
  * Chỉ vá phần ruột. Viền ngoài cũng nửa trong nhưng đấy là khử răng cưa của
@@ -35,7 +89,11 @@ export function solidify({ w, h, data }) {
     for (let x = 1; x < w - 1; x++) {
       const cur = a(x, y);
       if (cur >= 205 || cur < 12) continue;
-      if (a(x - 1, y) > 60 && a(x + 1, y) > 60 && a(x, y - 1) > 60 && a(x, y + 1) > 60) fix.push((y * w + x) * 4 + 3);
+      // Ngưỡng để rất thấp (12) vì mảng bị ăn mòn thường RỘNG và mờ đều — cả
+      // vùng cùng a=43, lấy ngưỡng cao thì hàng xóm cũng trượt, chẳng vá được
+      // gì. Pixel khử răng cưa ở rìa ngoài vẫn thoát, vì hàng xóm của nó có
+      // pixel thật sự trong suốt.
+      if (a(x - 1, y) >= 12 && a(x + 1, y) >= 12 && a(x, y - 1) >= 12 && a(x, y + 1) >= 12) fix.push((y * w + x) * 4 + 3);
     }
   }
   for (const i of fix) data[i] = 255;

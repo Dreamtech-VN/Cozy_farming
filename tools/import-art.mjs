@@ -16,7 +16,7 @@ import { splitSheet } from './art/split.mjs';
 import { downscale } from './art/resize.mjs';
 import { makeTile, wrapSeam, liftVeil } from './art/tileset.mjs';
 import { gradeToMap } from './art/grade.mjs';
-import { fixSprite } from './art/sprite_fix.mjs';
+import { fixSprite, deFringe, solidify } from './art/sprite_fix.mjs';
 import { chinRow, collarSlot, headCap, pocketPiece, skinTone, dropHairlines, chainLimb, cuffSlot } from './art/head.mjs';
 
 
@@ -104,6 +104,14 @@ for (const file of sheets) {
         : maxHeight && raw.h > maxHeight ? { ...raw, ...downscale(raw, raw.h / maxHeight) } : raw;
       // Mảnh đầu nam có sẵn khúc cổ nối xuống, nên đáy mảnh là hết cổ chứ không
       // phải cằm: ghi lại dòng cằm để chỗ ghép biết đặt đôi mắt ở đâu.
+      // Gỡ viền nhạt TRƯỚC mọi phép khác. Phải chạy trên art gốc: nắn tông kéo
+      // vùng tối lên nên hiệu số rìa/trong co lại, dò sau là dò hụt. Mà cũng
+      // phải trước `glaze` nữa — glaze hạ độ đục xuống dưới ngưỡng đục, chỗ ấy
+      // hoá ra rìa giả.
+      // Vá ruột TRƯỚC rồi mới gỡ viền. Bộ art này có nhiều mảng nhạt bị phép
+      // tách nền ăn mòn thành nửa trong suốt; không vá trước thì phép gỡ viền
+      // coi mép của mấy mảng ấy là rìa ngoài mà gọt, thủng cả ruột sprite.
+      if (maps.grade === 'map') { solidify(piece); deFringe(piece); }
       // Sửa mảnh TRƯỚC khi nắn tông: mấy phép sửa đọc màu art gốc.
       if (maps.fix?.[name]) fixSprite(piece, maps.fix[name]);
       // `grade: "map"` trong <tấm>.names.json: nắn tông mảnh này về dải sáng của
