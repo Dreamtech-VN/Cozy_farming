@@ -151,6 +151,16 @@ class Atlas {
   #pageImages = new Map();
 
   /**
+   * Chỉ số của một ô tileset theo TÊN.
+   *
+   * Tra theo tên chứ không chôn chỉ số vào chỗ gọi: bảng tile nay nối thêm ô
+   * được, mà chỉ số chôn cứng thì thêm ô là mặt đất hoá ra mặt đường.
+   */
+  tileIndex(name) {
+    return this.meta?.tiles?.names?.indexOf(name) ?? -1;
+  }
+
+  /**
    * Một ô tileset, vẽ phóng to `scale` lần tại (x, y).
    *
    * `bleed` nới ô ra mấy pixel về phía dưới-phải để hai ô cạnh nhau chồng lên

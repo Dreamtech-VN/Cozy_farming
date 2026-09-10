@@ -16,8 +16,22 @@ import { atlas } from './atlas.js';
  * thì đổi bảng art là mặt đất to gấp ba.
  */
 const TILE_PX = 48;
-// Chỉ số của tile cỏ đặc trong tileset (xem tools/art/tiles.mjs).
-const GRASS_FILL = 9;
+/**
+ * Mặt đất mặc định: bãi cỏ với mặt cắt đất bên dưới.
+ *
+ * Map khai `ground` trong maps.json thì dùng khai báo đó. Ba tầng, kể từ trên
+ * xuống: `floor` lát kín dải ĐI ĐƯỢC, `edge` đúng MỘT hàng ở `ground_y` (mép
+ * trước của dải), `below` phủ nốt phần còn lại xuống hết khung nhìn.
+ *
+ * Nhờ ba tầng này mà một thị trấn lát đá và một cánh đồng cỏ dùng chung một
+ * đoạn code: thị trấn khai lòng đường + viền đá + vệ cỏ, cánh đồng khai cỏ +
+ * mép cỏ + đất.
+ */
+const GROUND = {
+  floor: ['grass_fill_a', 'grass_fill_b'],
+  edge: ['grass_top_a', 'grass_top_b', 'grass_top_c'],
+  below: ['dirt_a', 'dirt_b'],
+};
 
 /** Chọn biến thể tile cố định theo cột, để cùng một chỗ luôn ra cùng hoa văn. */
 const hashCol = (mapId, col) => Math.abs(hashString(`${mapId}:${col}`));
@@ -376,25 +390,28 @@ export class WorldRenderer {
     const viewBottom = this.camera.y + (this.viewHeight - this.anchorY);
     const left = Math.floor((viewLeft - size) / size) * size;
     const right = viewLeft + this.viewWidth + size;
-    // Số hàng cỏ phủ dải đi được, làm tròn LÊN để mép sau không hở một vệt.
-    const grassRows = Math.ceil(walk / size);
-    const rows = grassRows + Math.ceil(depth / size);
+    // Số hàng phủ dải đi được, làm tròn LÊN để mép sau không hở một vệt.
+    const floorRows = Math.ceil(walk / size);
+    const rows = floorRows + Math.ceil(depth / size);
     const seed = hashString(map.map_id);
-    const startY = map.ground_y - grassRows * size;
+    const startY = map.ground_y - floorRows * size;
+    // Tra tile theo TÊN một lần ở đây, không tra trong vòng lặp: mỗi khung lát
+    // vài trăm ô, tra tên từng ô là quét lại mảng tên vài trăm lần.
+    const recipe = { ...GROUND, ...(map.ground ?? {}) };
+    const band = (names) => names.map((n) => atlas.tileIndex(n)).filter((i) => i >= 0);
+    const floor = band(recipe.floor);
+    const edge = band(recipe.edge);
+    const below = band(recipe.below);
+    if (!floor.length || !edge.length || !below.length) return;
 
     for (let x = left; x < right; x += size) {
       const col = Math.round(x / size);
       for (let row = 0; row < rows; row++) {
         const y = startY + row * size;
         if (y > viewBottom + size) break;
-        // Ba tầng: sàn cỏ đặc cho dải đi được, một hàng mép cỏ đúng ở
-        // `ground_y`, rồi mặt cắt đất phía dưới.
         const pick = Math.abs(hashString(`${seed}:${col}:${row}`));
-        const index = row < grassRows
-          ? GRASS_FILL + (pick % 2)          // sàn cỏ đặc
-          : row === grassRows
-            ? pick % 3                       // mép cỏ ở ground_y
-            : 3 + (pick % 2);                // đất
+        const set = row < floorRows ? floor : row === floorRows ? edge : below;
+        const index = set[pick % set.length];
         // Vẽ TRÙM RA 1px: camera đứng ở toạ độ lẻ nên mỗi ô rơi vào nửa pixel,
         // vẽ đúng khít thì giữa hai ô hở một khe sáng thấy cả nền trời. Tile đã
         // khâu mép liền nên chồng nhau 1px không thấy gì.

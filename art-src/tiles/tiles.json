@@ -1,119 +1,222 @@
 {
-  "comment": "Bộ tile mặt đất, cắt từ art vẽ sẵn thay cho tileset sinh bằng code. Art trong gói là những PHIẾN đất rời có nét viền tối bao quanh, lát cạnh nhau là hiện ra hàng rào kẻ ô — nên mỗi ô lấy RUỘT phiến rồi khâu mép cho liền (xem tools/art/tileset.mjs). Giữ NGUYÊN tên và thứ tự 11 ô của tileset cũ: world.js gọi tile theo CHỈ SỐ, đổi thứ tự là mặt đất hoá ra mặt nước. Mặt sàn đi được (grass_fill) lấy DẢI CỎ PHẲNG trên phiến, không lấy đỉnh gò cũng không lấy hàng bụi lá: sàn phủ kín cả một mảng rộng nên hoa văn càng đều càng tốt — đỉnh gò có vệt sáng ở giữa, lát ra thành lưới bánh; bụi lá thì sẫm hơn mép cỏ hẳn một bậc (101,121,26 so với 162,170,34), nhìn ra bờ giậu chứ không ra bãi cỏ. Dải cỏ chỉ cao 20px nên phóng lên 48px hơi mờ, mà mờ lại đúng ý: mặt sàn phải lùi ra sau cho vật thể nổi lên. Biến thể _b lấy CÙNG một phiến với _a, chỉ dịch ngang. Mỗi cột trên tấm là một kiểu phiến khác nhau (đầu trái / khúc giữa / đầu phải) nên lấy hai cột làm hai biến thể thì mặt đất lát ra thành từng vạt rõ rệt, không phải đổi hoa văn cho đỡ lặp.",
+  "comment": "Bộ tile mặt đất, cắt từ art vẽ sẵn thay cho tileset sinh bằng code. Art trong gói là những PHIẾN rời có nét viền tối bao quanh, lát cạnh nhau là hiện ra hàng rào kẻ ô — nên mỗi ô lấy RUỘT phiến rồi khâu mép cho liền (xem tools/art/tileset.mjs). KHUNG PHẢI GẦN VUÔNG: khâu xong là thu cả tấm về cỡ ô, tuyệt đối không cắt bớt, vì cắt là đứt đúng chỗ vừa khâu rồi lát ra hở khe trắng. Muốn hoa văn nhỏ lại thì dùng `repeat` chứ đừng lấy khung dẹt. Giữ NGUYÊN thứ tự phần đầu danh sách: ô mới chỉ được nối thêm vào cuối, vì atlas đã phát ra ngoài ghi tile theo chỉ số. Mặt sàn đi được (grass_fill) lấy DẢI CỎ PHẲNG trên phiến: sàn phủ kín một mảng rộng nên hoa văn càng đều càng tốt — đỉnh gò có vệt sáng ở giữa, lát ra thành lưới bánh; bụi lá thì sẫm hơn mép cỏ hẳn một bậc (101,121,26 so với 162,170,34), nhìn ra bờ giậu chứ không ra bãi cỏ. Biến thể _b lấy CÙNG một phiến với _a, chỉ dịch ngang: mỗi cột trên tấm là một kiểu phiến khác nhau (đầu trái / khúc giữa / đầu phải) nên lấy hai cột làm hai biến thể thì mặt đất lát ra thành từng vạt rõ rệt.",
   "size": 48,
   "blend": 12,
   "tiles": {
     "grass_top_a": {
       "source": "ground.png",
       "rect": [
-        58,
+        70,
         51,
-        176,
+        62,
         62
       ],
-      "seam": "x"
+      "seam": "x",
+      "blend": 8
     },
     "grass_top_b": {
       "source": "ground.png",
       "rect": [
-        300,
+        312,
         52,
-        176,
+        62,
         62
       ],
-      "seam": "x"
+      "seam": "x",
+      "blend": 8
     },
     "grass_top_c": {
       "source": "ground.png",
       "rect": [
-        540,
+        552,
         51,
-        170,
+        62,
         62
       ],
-      "seam": "x"
+      "seam": "x",
+      "blend": 8
     },
     "dirt_a": {
       "source": "ground.png",
       "rect": [
-        58,
+        70,
         404,
-        120,
+        54,
         54
       ],
-      "seam": "xy"
+      "seam": "xy",
+      "blend": 8
     },
     "dirt_b": {
       "source": "ground.png",
       "rect": [
-        122,
+        140,
         404,
-        120,
+        54,
         54
       ],
-      "seam": "xy"
+      "seam": "xy",
+      "blend": 8
     },
     "stone_a": {
       "source": "ground.png",
       "rect": [
-        58,
+        70,
         1301,
-        120,
+        48,
         48
       ],
-      "seam": "xy"
+      "seam": "xy",
+      "blend": 6
     },
     "stone_b": {
       "source": "ground.png",
       "rect": [
-        122,
+        140,
         1301,
-        120,
+        48,
         48
       ],
-      "seam": "xy"
+      "seam": "xy",
+      "blend": 6
     },
     "water_a": {
       "source": "water.png",
       "rect": [
-        55,
         60,
-        110,
+        58,
+        98,
         98
       ],
-      "seam": "xy"
+      "seam": "xy",
+      "blend": 12
     },
     "water_b": {
       "source": "water.png",
       "rect": [
-        105,
-        60,
         110,
+        58,
+        98,
         98
       ],
-      "seam": "xy"
+      "seam": "xy",
+      "blend": 12
     },
     "grass_fill_a": {
       "source": "ground.png",
       "rect": [
-        58,
+        70,
         55,
-        176,
+        20,
         20
       ],
       "seam": "xy",
-      "blend": 6
+      "blend": 4
     },
     "grass_fill_b": {
       "source": "ground.png",
       "rect": [
-        112,
-        54,
-        176,
+        110,
+        55,
+        20,
         20
       ],
       "seam": "xy",
-      "blend": 6
+      "blend": 4
+    },
+    "path_a": {
+      "source": "blocks.png",
+      "rect": [
+        790,
+        1690,
+        42,
+        42
+      ],
+      "seam": "xy",
+      "blend": 6,
+      "repeat": 2
+    },
+    "path_b": {
+      "source": "blocks.png",
+      "rect": [
+        832,
+        1690,
+        42,
+        42
+      ],
+      "seam": "xy",
+      "blend": 6,
+      "repeat": 2
+    },
+    "pave_a": {
+      "source": "blocks.png",
+      "rect": [
+        1232,
+        1690,
+        43,
+        43
+      ],
+      "seam": "xy",
+      "blend": 6,
+      "repeat": 2
+    },
+    "pave_b": {
+      "source": "blocks.png",
+      "rect": [
+        1275,
+        1690,
+        43,
+        43
+      ],
+      "seam": "xy",
+      "blend": 6,
+      "repeat": 2
+    },
+    "kerb_a": {
+      "source": "blocks.png",
+      "rect": [
+        690,
+        1838,
+        38,
+        38
+      ],
+      "seam": "x",
+      "blend": 4
+    },
+    "kerb_b": {
+      "source": "blocks.png",
+      "rect": [
+        730,
+        1838,
+        38,
+        38
+      ],
+      "seam": "x",
+      "blend": 4
+    },
+    "slab_a": {
+      "source": "blocks.png",
+      "rect": [
+        835,
+        777,
+        56,
+        56
+      ],
+      "seam": "xy",
+      "blend": 8,
+      "repeat": 2
+    },
+    "slab_b": {
+      "source": "blocks.png",
+      "rect": [
+        891,
+        777,
+        56,
+        56
+      ],
+      "seam": "xy",
+      "blend": 8,
+      "repeat": 2
     }
   }
 }

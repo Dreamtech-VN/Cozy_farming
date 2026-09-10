@@ -215,8 +215,11 @@ if (existsSync(join(TILES, 'tiles.json'))) {
   const cfg = JSON.parse(readFileSync(join(TILES, 'tiles.json'), 'utf8'));
   const names = Object.keys(cfg.tiles);
   const old = atlas.tiles?.names ?? [];
-  if (old.length && (old.length !== names.length || old.some((n, i) => n !== names[i]))) {
-    throw new Error(`tileset vẽ sẵn phải giữ đúng tên và thứ tự của bộ cũ:\n  cũ: ${old.join(', ')}\n  mới: ${names.join(', ')}`);
+  // Bộ mới phải bắt đầu bằng ĐÚNG danh sách cũ, ô mới chỉ được nối thêm vào
+  // cuối: atlas đã phát ra ngoài ghi tile theo chỉ số, chèn vào giữa là mặt đất
+  // của người chơi cũ hoá ra mặt nước.
+  if (old.some((n, i) => n !== names[i])) {
+    throw new Error(`tileset vẽ sẵn chỉ được NỐI THÊM vào cuối, không được đổi thứ tự:\n  cũ: ${old.join(', ')}\n  mới: ${names.join(', ')}`);
   }
   const sheets = new Map();
   const size = cfg.size;
