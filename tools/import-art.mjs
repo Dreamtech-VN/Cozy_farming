@@ -16,6 +16,7 @@ import { splitSheet } from './art/split.mjs';
 import { downscale } from './art/resize.mjs';
 import { makeTile, wrapSeam, liftVeil } from './art/tileset.mjs';
 import { gradeToMap } from './art/grade.mjs';
+import { fixSprite } from './art/sprite_fix.mjs';
 import { chinRow, collarSlot, headCap, pocketPiece, skinTone, dropHairlines, chainLimb, cuffSlot } from './art/head.mjs';
 
 
@@ -103,6 +104,8 @@ for (const file of sheets) {
         : maxHeight && raw.h > maxHeight ? { ...raw, ...downscale(raw, raw.h / maxHeight) } : raw;
       // Mảnh đầu nam có sẵn khúc cổ nối xuống, nên đáy mảnh là hết cổ chứ không
       // phải cằm: ghi lại dòng cằm để chỗ ghép biết đặt đôi mắt ở đâu.
+      // Sửa mảnh TRƯỚC khi nắn tông: mấy phép sửa đọc màu art gốc.
+      if (maps.fix?.[name]) fixSprite(piece, maps.fix[name]);
       // `grade: "map"` trong <tấm>.names.json: nắn tông mảnh này về dải sáng của
       // tranh nền map. Khai theo TẤM chứ không bật cho tất cả, vì chỉ bộ prop
       // mới vênh — tấm nhân vật là bộ art khác, mà nhân vật vốn phải nổi lên
