@@ -14,7 +14,7 @@ import { join } from 'node:path';
 import { readPng, Pixels } from './art/png.mjs';
 import { splitSheet } from './art/split.mjs';
 import { downscale } from './art/resize.mjs';
-import { makeTile } from './art/tileset.mjs';
+import { makeTile, wrapSeam, patchArea } from './art/tileset.mjs';
 import { chinRow, collarSlot, headCap, pocketPiece, skinTone, dropHairlines, chainLimb, cuffSlot } from './art/head.mjs';
 
 
@@ -70,6 +70,10 @@ for (const file of sheets) {
   // Tấm bảng thành phần chia sẵn thành nhiều KHUNG, mỗi khung một kiểu bày và
   // một nhãn vẽ chết ở góc. Cắt cả tấm một lần là nhãn cũng thành sprite, còn
   // tham số hợp với khung tóc thì hỏng ở khung mặt. Nên cắt theo từng khung.
+  // Vá tranh nền TRƯỚC khi cắt: mấy khung nét đứt trắng là ghi chú chừa chỗ
+  // đặt công trình, không phải hình.
+  for (const [rect, from] of maps.patch ?? []) patchArea(sheet, rect, from);
+
   const areas = maps.regions ?? [{ rect: null, split: maps.split, names: maps.names }];
   let count = 0;
   let cut = 0;
@@ -88,6 +92,12 @@ for (const file of sheets) {
       // mảnh ghép vào nhau nên chúng phải giữ nguyên tương quan cỡ với nhau,
       // quy về cùng chiều cao là cái đầu to bằng cả bộ quần áo.
       const factor = area.split?.scale ?? 0;
+      // Tranh nền lát ngang suốt bề rộng map nên hai mép phải nối liền được:
+      // khâu như khâu tile, hoà mấy cột cuối vào mấy cột đầu rồi cắt bỏ chúng.
+      if (area.split?.mode === 'whole' && maps.seam) {
+        const sewn = wrapSeam({ w: raw.w, h: raw.h, data: raw.data }, 'x', maps.seam);
+        raw.w = sewn.w; raw.data = sewn.data;
+      }
       const piece = factor > 1 ? { ...raw, ...downscale(raw, factor) }
         : maxHeight && raw.h > maxHeight ? { ...raw, ...downscale(raw, raw.h / maxHeight) } : raw;
       // Mảnh đầu nam có sẵn khúc cổ nối xuống, nên đáy mảnh là hết cổ chứ không

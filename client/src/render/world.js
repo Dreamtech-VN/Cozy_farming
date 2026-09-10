@@ -126,11 +126,24 @@ export class WorldRenderer {
   }
 
   /**
+   * Thu thêm một lần nữa cho vừa bức TRANH NỀN, nếu map có.
+   *
+   * `scale` ở trên quy khung nhìn theo chiều cao MAP; tranh nền lại cao hơn thế
+   * (768 so với 720), nên vẫn cụt mất trời hoặc mất lòng đường. `zoom` thu nốt
+   * phần chênh, và thu cả cảnh chứ không riêng bức tranh — nhà, người, vật đều
+   * phải nhỏ theo, không thì người to bằng cả toà nhà.
+   */
+  zoom = 1;
+
+  /**
    * Nhân vật đứng ở khoảng 76% chiều cao khung nhìn — tức camera đặt cao hơn và
    * chúc xuống. Để thấp hơn (66% như trước) thì gần một phần ba màn hình phía
    * dưới chỉ còn nền đất trống, trong khi nhà cửa và cây phía trên bị cắt ngọn.
    */
   get anchorY() { return this.viewHeight * 0.76; }
+
+  /** Bề rộng khung nhìn quy về TOẠ ĐỘ THẾ GIỚI — thu nhỏ thì nhìn được rộng hơn. */
+  get worldWidth() { return this.viewWidth / this.zoom; }
 
   followCamera(map, target) {
     const halfW = this.viewWidth / 2;
@@ -142,6 +155,19 @@ export class WorldRenderer {
     // trong làm cả thế giới trôi xuống và nhân vật lơ lửng giữa trời. Neo cố
     // định thì dải đất đứng yên, người chơi đi lùi chỉ nhỏ lại và lùi lên trong
     // khung — đúng cảm giác đi sâu vào trong.
+    //
+    // Map có tranh nền thì neo vào MÉP TRÊN CỦA TRANH, và thu cả cảnh lại vừa
+    // đúng chiều cao khung nhìn. Bức tranh vẽ trọn một cảnh từ trời xuống tận
+    // lòng đường, nên phải thấy hết: neo vào mép trước như map thường thì lòng
+    // đường tụt xuống dưới thanh chat.
+    const spec = map.backdrop;
+    if (spec) {
+      const height = spec.height ?? 768;
+      this.zoom = Math.min(1, this.viewHeight / height);
+      this.camera.y = map.ground_y - spec.ground + this.anchorY / this.zoom;
+      return;
+    }
+    this.zoom = 1;
     this.camera.y = Math.max(this.anchorY - 40, map.ground_y);
   }
 
@@ -154,13 +180,26 @@ export class WorldRenderer {
     this.#drawSky(map);
 
     ctx.save();
-    ctx.translate(this.viewWidth / 2 - this.camera.x, this.anchorY - this.camera.y);
+    // Thu/phóng quanh điểm neo, rồi mới dịch về camera: như vậy mọi thứ vẽ sau
+    // đây — tranh nền, nhà, người — cùng thu một tỉ lệ, không ai lệch ai.
+    ctx.translate(this.viewWidth / 2, this.anchorY);
+    ctx.scale(this.zoom, this.zoom);
+    ctx.translate(-this.camera.x, -this.camera.y);
 
-    this.#drawBackground(map, time);
-    this.#drawGround(map);
+    // Map có tranh nền vẽ liền thì bức tranh lo hết: trời, đồi, hàng cây, mặt
+    // đất. Không có thì dựng bằng code như cũ.
+    const backdrop = this.#drawBackdrop(map);
+    if (!backdrop) {
+      this.#drawBackground(map, time);
+      this.#drawGround(map);
+    }
     // Nhà cửa dựng trên mép sau của sàn, nên vẽ sau sàn — vẽ trước thì sàn phủ
     // lên và cắt cụt chân nhà.
-    this.#drawLayer(map, 'mid', time);
+    // Lớp cảnh rải theo lưới băm chỉ dùng cho map dựng bằng code. Map có tranh
+    // nền thì cây cối, hàng rào, bồn hoa đã nằm trong tranh — rải thêm một lớp
+    // nữa lên trên là hai bộ cảnh chồng nhau.
+    if (backdrop) this.#drawBackdropSlots(map);
+    else this.#drawLayer(map, 'mid', time);
     if (farm) this.#drawFarm(map, farm, time);
     this.#drawObjects(map, hintTarget);
     this.#drawPortals(map, hintTarget);
@@ -186,9 +225,11 @@ export class WorldRenderer {
       ctx.restore();
     }
 
-    this.#drawForeground(map);
-    // Lớp tiền cảnh lướt qua sát camera, vẽ sau cùng và không hề chặn thao tác.
-    this.#drawLayer(map, 'fore', time);
+    if (!backdrop) {
+      this.#drawForeground(map);
+      // Lớp tiền cảnh lướt qua sát camera, vẽ sau cùng và không hề chặn thao tác.
+      this.#drawLayer(map, 'fore', time);
+    }
     ctx.restore();
 
     this.#drawWorldMood(time);
@@ -257,6 +298,88 @@ export class WorldRenderer {
     gradient.addColorStop(1, map.theme.sky[1]);
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, this.viewWidth, this.viewHeight);
+  }
+
+  /**
+   * TRANH NỀN vẽ liền, lát ngang suốt bề rộng map.
+   *
+   * Map dựng theo lối này thì trời, hàng cây, quảng trường, vỉa hè, lòng đường
+   * đã nằm sẵn trong MỘT bức vẽ, đúng tỉ lệ với nhau — khỏi phải ghép từng dải
+   * rồi ướm cho khớp. Bù lại nó chỉ lát được theo chiều ngang, nên bức vẽ phải
+   * nối liền được hai mép.
+   *
+   * `ground` là dòng nào trong tranh ứng với `ground_y` của map — mốc duy nhất
+   * cần khai, vì mọi thứ khác trong tranh đã đúng chỗ so với dòng ấy rồi.
+   *
+   * @returns true nếu đã vẽ; false thì chỗ gọi vẽ nền sinh bằng code như cũ.
+   */
+  #drawBackdrop(map) {
+    const spec = map.backdrop;
+    if (!spec) return false;
+    const part = atlas.part(spec.sprite);
+    if (!part) return false;
+    const ctx = this.ctx;
+    const { rect, img } = part;
+    const top = map.ground_y - spec.ground;
+    const viewLeft = this.camera.x - this.worldWidth / 2;
+    const viewTop = this.camera.y - this.anchorY;
+    const from = Math.floor((viewLeft - this.worldWidth) / rect.w) * rect.w;
+    const to = viewLeft + this.worldWidth + rect.w;
+
+    // Trên và dưới bức vẽ: kéo dài bằng chính màu của hàng pixel đầu và cuối.
+    // Khung nhìn cao hơn bức vẽ là chuyện thường (bức 768, màn 900), mà để hở
+    // là lộ ra một vạch nền trắng ngay trên nóc trời.
+    ctx.fillStyle = spec.above ?? map.theme.sky[0];
+    ctx.fillRect(viewLeft - 40, viewTop - 40, this.worldWidth + 80, top - viewTop + 41);
+    ctx.fillStyle = spec.below ?? map.theme.ground;
+    ctx.fillRect(viewLeft - 40, top + rect.h - 1, this.worldWidth + 80, this.viewHeight + 80);
+
+    for (let x = from; x < to; x += rect.w) {
+      ctx.drawImage(img, rect.x, rect.y, rect.w, rect.h, x, top, rect.w + 1, rect.h);
+    }
+    return true;
+  }
+
+  /**
+   * Nhà đặt vào Ô CHỪA SẴN của tranh nền.
+   *
+   * Bức tranh có mấy khung nét đứt trắng — bộ art chừa chỗ để nhét công trình
+   * vào. Không nhét thì mấy cái khung ấy phơi ra giữa map. Nên chỗ đặt nhà là
+   * mốc ĐỌC TỪ TRANH (`slots`, toạ độ trong tranh), không phải rải theo lưới
+   * băm như mấy lớp cảnh sinh bằng code — rải lưới thì nhà rơi lệch khỏi khung.
+   *
+   * Tranh lát ngang bao nhiêu lần thì ô cũng lặp bấy nhiêu, nhưng CHỌN nhà theo
+   * số thứ tự ô trên cả map, nên đi hết phố không thấy ba cái nhà lặp lại.
+   */
+  #drawBackdropSlots(map) {
+    const spec = map.backdrop;
+    if (!spec?.slots?.length || !atlas.ready) return;
+    const part = atlas.part(spec.sprite);
+    if (!part) return;
+    const ctx = this.ctx;
+    const span = part.rect.w;
+    const top = map.ground_y - spec.ground;
+    // Ô chừa sẵn chỉ hợp với CÔNG TRÌNH. Lớp `mid` trộn cả bồn hoa, cột đèn,
+    // đài phun — nhét một cái bồn hoa phóng to bằng cả toà nhà vào ô là lộ ngay.
+    const kinds = map.scenery?.slots ?? this.#kindsFor(map, 'mid');
+    const viewLeft = this.camera.x - this.worldWidth / 2;
+    const from = Math.floor((viewLeft - span) / span);
+    const to = Math.ceil((viewLeft + this.worldWidth) / span);
+
+    for (let tile = from; tile <= to; tile++) {
+      spec.slots.forEach((slot, i) => {
+        const id = tile * spec.slots.length + i;
+        const pick = Math.abs(hashString(`${map.map_id}|slot|${id}`));
+        const kind = kinds[pick % kinds.length];
+        const rect = atlas.meta?.sprites?.index?.[kind];
+        if (!rect) return;
+        // Quy cỡ theo BỀ NGANG ô: ô chừa sẵn rộng bao nhiêu thì nhà rộng bấy
+        // nhiêu, cao thấp mặc nó. Quy theo chiều cao thì nhà thấp để hở hai bên
+        // khung, nhà cao thì trùm ra ngoài.
+        const scale = (slot.w / rect.w) * (rect.h / 64);
+        atlas.prop(ctx, kind, tile * span + slot.x + slot.w / 2, top + slot.y, scale);
+      });
+    }
   }
 
   /**
@@ -386,7 +509,7 @@ export class WorldRenderer {
     // — lấy nhầm là nửa màn hình bên trái không được lát tile nào.
     const scale = TILE_PX / atlas.meta.tiles.size;
     const size = TILE_PX;
-    const viewLeft = this.camera.x - this.viewWidth / 2;
+    const viewLeft = this.camera.x - this.worldWidth / 2;
     const viewBottom = this.camera.y + (this.viewHeight - this.anchorY);
     const left = Math.floor((viewLeft - size) / size) * size;
     const right = viewLeft + this.viewWidth + size;
@@ -545,8 +668,8 @@ export class WorldRenderer {
   toWorld(map, clientX, clientY) {
     const rect = this.canvas.getBoundingClientRect();
     const scale = this.scale;
-    const x = (clientX - rect.left) / scale - this.viewWidth / 2 + this.camera.x;
-    const y = (clientY - rect.top) / scale - this.anchorY + this.camera.y;
+    const x = ((clientX - rect.left) / scale - this.viewWidth / 2) / this.zoom + this.camera.x;
+    const y = ((clientY - rect.top) / scale - this.anchorY) / this.zoom + this.camera.y;
     return { x, y };
   }
 }

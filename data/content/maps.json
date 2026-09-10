@@ -193,21 +193,38 @@
           "prop_lamppost",
           "plant_flowerbed_stone",
           "prop_birdbath"
+        ],
+        "slots": [
+          "civic_hall",
+          "civic_library",
+          "civic_museum",
+          "civic_clockhouse",
+          "civic_observatory",
+          "civic_belltower"
         ]
       },
-      "walk_depth": 150,
-      "ground": {
-        "floor": [
-          "pave_a",
-          "pave_b"
-        ],
-        "edge": [
-          "kerb_a",
-          "kerb_b"
-        ],
-        "below": [
-          "grass_fill_a",
-          "grass_fill_b"
+      "walk_depth": 280,
+      "backdrop": {
+        "sprite": "backdrop_city",
+        "ground": 550,
+        "above": "#63b8f0",
+        "below": "#4a5058",
+        "slots": [
+          {
+            "x": 178,
+            "w": 243,
+            "y": 245
+          },
+          {
+            "x": 886,
+            "w": 253,
+            "y": 245
+          },
+          {
+            "x": 1638,
+            "w": 230,
+            "y": 245
+          }
         ]
       }
     },
@@ -320,21 +337,39 @@
           "cart_coffee",
           "cart_icecream",
           "prop_lamppost"
+        ],
+        "slots": [
+          "shop_bakery_open",
+          "shop_cafe",
+          "shop_book",
+          "shop_icecream",
+          "shop_theatre",
+          "shop_clothes",
+          "shop_music"
         ]
       },
-      "walk_depth": 150,
-      "ground": {
-        "floor": [
-          "slab_a",
-          "slab_b"
-        ],
-        "edge": [
-          "kerb_a",
-          "kerb_b"
-        ],
-        "below": [
-          "grass_fill_a",
-          "grass_fill_b"
+      "walk_depth": 280,
+      "backdrop": {
+        "sprite": "backdrop_city",
+        "ground": 550,
+        "above": "#63b8f0",
+        "below": "#4a5058",
+        "slots": [
+          {
+            "x": 178,
+            "w": 243,
+            "y": 245
+          },
+          {
+            "x": 886,
+            "w": 253,
+            "y": 245
+          },
+          {
+            "x": 1638,
+            "w": 230,
+            "y": 245
+          }
         ]
       }
     },

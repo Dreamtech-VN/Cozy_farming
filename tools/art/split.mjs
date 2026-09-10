@@ -505,6 +505,12 @@ function withBackgroundCleared(img, options) {
 }
 
 export function splitSheet(img, options = {}) {
+  // Cả tấm là MỘT vật, không cắt gì. Dùng cho tranh nền map: nó vốn đã là một
+  // bức vẽ liền, đem phép tách nền ra soi thì trời với đường nhựa cũng bị coi
+  // là nền mà xoá mất.
+  if (options.mode === 'whole') {
+    return [{ w: img.width, h: img.height, x: 0, y: 0, data: new Uint8Array(img.data) }];
+  }
   if (options.mode === 'blob') {
     const src = options.bgTest ? withBackgroundCleared(img, options) : img;
     const cells = sliceByBlob(src, {

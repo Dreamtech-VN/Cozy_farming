@@ -1,0 +1,50 @@
+{
+  "comment": "Tranh nền map, vẽ liền một bức chứ không ghép từ tile. Đây mới là cách map trong game mẫu dựng lên: trời, đường chân trời thành phố, hàng cây, bồn hoa, ghế đá, quảng trường lát đá, viền vỉa hè, lòng đường — tất cả nằm sẵn trong tranh, đúng tỉ lệ với nhau, khỏi phải ướm từng dải. Cắt theo `mode: whole`: đem phép tách nền ra soi thì trời với đường nhựa cũng bị coi là nền mà xoá mất. Để riêng một TRANG atlas vì nó nặng 2 MB — chỉ nạp khi vào đúng map dùng nó. `patch` chép một khúc SẠCH cùng dải đè lên mấy khung nét đứt: khung ấy là ghi chú chừa chỗ đặt công trình, để nguyên thì phơi ra giữa map mà công trình đặt vào cũng hiếm khi che kín tới từng pixel. Chép được vì tranh là một dải LẶP — hàng rào, bồn hoa, đường chân trời ở khúc nào cũng như nhau. `seam` khâu hai mép trái/phải cho lát ngang không lộ vạch nối.",
+  "source": "backdrop_city.png",
+  "page": "backdrop_city",
+  "split": {
+    "mode": "whole"
+  },
+  "names": {
+    "0": "backdrop_city"
+  },
+  "seam": 48,
+  "patch": [
+    [
+      [
+        172,
+        104,
+        254,
+        150
+      ],
+      [
+        432,
+        104
+      ]
+    ],
+    [
+      [
+        880,
+        104,
+        265,
+        150
+      ],
+      [
+        1150,
+        104
+      ]
+    ],
+    [
+      [
+        1632,
+        104,
+        242,
+        150
+      ],
+      [
+        1382,
+        104
+      ]
+    ]
+  ]
+}

@@ -117,3 +117,27 @@ export function makeTile(sheet, { rect, seam = 'xy', blend = 10, repeat = 1 }, s
   }
   return resizeTo(tile, size, size);
 }
+
+/**
+ * Vá một mảng của tranh bằng mảng KHÁC trong chính bức tranh ấy.
+ *
+ * Bộ art chừa chỗ đặt công trình bằng mấy khung nét đứt trắng vẽ đè lên tranh.
+ * Khung ấy là ghi chú cho người dựng map, không phải hình — để nguyên thì nó
+ * phơi ra giữa map, mà công trình đặt vào cũng hiếm khi che kín tới từng pixel.
+ *
+ * Không khôi phục được phần bị đè (nó bị xoá mất rồi), nhưng tranh nền là một
+ * dải LẶP: chép một khúc sạch cùng dải sang là liền, vì hàng rào, bồn hoa và
+ * đường chân trời ở khúc nào cũng như nhau.
+ */
+export function patchArea(img, [dx, dy, w, h], [sx, sy]) {
+  const { width: W, data } = img;
+  const copy = new Uint8Array(w * h * 4);
+  for (let y = 0; y < h; y++) {
+    const src = ((sy + y) * W + sx) * 4;
+    copy.set(data.subarray(src, src + w * 4), y * w * 4);
+  }
+  for (let y = 0; y < h; y++) {
+    const dst = ((dy + y) * W + dx) * 4;
+    data.set(copy.subarray(y * w * 4, (y + 1) * w * 4), dst);
+  }
+}

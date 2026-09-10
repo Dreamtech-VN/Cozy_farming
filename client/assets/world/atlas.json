@@ -79,6 +79,10 @@
   "sprites": {
     "comment": "Art vẽ sẵn, đóng gói bằng tools/import-art.mjs từ art-src/sheets/. Neo ĐÁY GIỮA. Mỗi sprite ghi rõ nằm ở trang nào để client nạp đúng trang cần.",
     "pages": {
+      "backdrop_city": {
+        "file": "sprites-backdrop_city.png",
+        "bytes": 1938084
+      },
       "chars": {
         "file": "sprites-chars.png",
         "bytes": 2314873
@@ -172,6 +176,13 @@
         "y": 2105,
         "w": 143,
         "h": 71
+      },
+      "backdrop_city": {
+        "page": "backdrop_city",
+        "x": 2,
+        "y": 2,
+        "w": 2000,
+        "h": 768
       },
       "barrel_umbrella": {
         "page": "outdoor",
