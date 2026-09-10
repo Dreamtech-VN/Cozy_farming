@@ -119,25 +119,60 @@ export function makeTile(sheet, { rect, seam = 'xy', blend = 10, repeat = 1 }, s
 }
 
 /**
- * Vá một mảng của tranh bằng mảng KHÁC trong chính bức tranh ấy.
+ * Gỡ lớp phủ mờ khỏi mấy khung nét đứt trên tranh nền.
  *
- * Bộ art chừa chỗ đặt công trình bằng mấy khung nét đứt trắng vẽ đè lên tranh.
- * Khung ấy là ghi chú cho người dựng map, không phải hình — để nguyên thì nó
- * phơi ra giữa map, mà công trình đặt vào cũng hiếm khi che kín tới từng pixel.
+ * Bộ art chừa chỗ đặt công trình bằng khung nét đứt trắng, bên trong tô một lớp
+ * phủ mờ. Nhìn thì tưởng hình bên dưới mất rồi, nên phép chữa đầu tiên là chép
+ * một khúc khác đè lên — mà tranh này VẼ TAY, khúc nào cũng khác khúc nào, chép
+ * sang là nhân đôi gốc cây với gãy nhịp hàng rào, đúng kiểu "lòi lem".
  *
- * Không khôi phục được phần bị đè (nó bị xoá mất rồi), nhưng tranh nền là một
- * dải LẶP: chép một khúc sạch cùng dải sang là liền, vì hàng rào, bồn hoa và
- * đường chân trời ở khúc nào cũng như nhau.
+ * Thật ra lớp phủ chỉ là một phép trộn tuyến tính: v = gốc·(1−a) + mực·a. Biết
+ * `a` với `mực` là giải ngược ra gốc, hàng rào và bụi cây hiện lại nguyên chỗ
+ * cũ, khỏi chép của ai.
+ *
+ * Đo `a` với `mực` bằng dải NỀN LÁT: nó chạy liền từ trong khung xuống dưới đáy
+ * khung, nên cùng một thứ mà một nửa bị phủ một nửa không — hai đầu của đúng
+ * một phép trộn. Ba khung đo ra gần như y hệt nhau nên con số là chắc.
+ *
+ * Lớp phủ không dừng gọn ở khung: nó nhoè ra ngoài chừng chục pixel. Gỡ phẳng
+ * một mực trong khung rồi thôi là để lại đúng cái quầng ấy — nhìn vẫn ra hình
+ * chữ nhật. Nên `feather` khai bề rộng vệt nhoè, và độ đậm lớp phủ dốc dần về 0
+ * qua vệt ấy, gỡ tới đâu vừa tới đó.
+ *
+ * `edge` là bề dày nét đứt. Nét vẽ đè lên trên nên gỡ phủ không cứu được, phải
+ * trám lại: nội suy ngang/dọc qua vài pixel, mắt không bắt được.
  */
-export function patchArea(img, [dx, dy, w, h], [sx, sy]) {
+export function liftVeil(img, [x0, y0, x1, y1], { alpha, ink, edge = 2, feather = 0 }) {
   const { width: W, data } = img;
-  const copy = new Uint8Array(w * h * 4);
-  for (let y = 0; y < h; y++) {
-    const src = ((sy + y) * W + sx) * 4;
-    copy.set(data.subarray(src, src + w * 4), y * w * 4);
+  // `alpha` khai riêng cho từng kênh. Lớp phủ thật thì một mực một độ đậm, mà
+  // đo ra ba số khác nhau — vì hai mốc dùng để đo (nền lát, hàng cây) không
+  // phải cùng một vật tuyệt đối. Lấy đúng ba số đo được vẫn hơn ép về một số
+  // trung bình: ép thì kênh lam thiếu lực, trong khung còn vương quầng xanh.
+  const A = Array.isArray(alpha) ? alpha : [alpha, alpha, alpha];
+  const ramp = (d) => (feather < 1 ? 1 : Math.max(0, Math.min(1, (d + feather + 0.5) / feather)));
+  for (let y = y0 - feather; y <= y1 + feather; y++) {
+    const wy = ramp(Math.min(y - y0, y1 - y));
+    for (let x = x0 - feather; x <= x1 + feather; x++) {
+      const w = Math.min(wy, ramp(Math.min(x - x0, x1 - x)));
+      if (w <= 0) continue;
+      const i = (y * W + x) * 4;
+      for (let c = 0; c < 3; c++) {
+        const a = A[c] * w;
+        data[i + c] = Math.max(0, Math.min(255, Math.round((data[i + c] - ink[c] * a) / (1 - a))));
+      }
+    }
   }
-  for (let y = 0; y < h; y++) {
-    const dst = ((dy + y) * W + dx) * 4;
-    data.set(copy.subarray(y * w * 4, (y + 1) * w * 4), dst);
+  const lerp = (di, ai, bi, t) => {
+    for (let c = 0; c < 3; c++) data[di + c] = Math.round(data[ai + c] * (1 - t) + data[bi + c] * t);
+  };
+  for (let x = x0 - edge; x <= x1 + edge; x++) {
+    for (const [a, b] of [[y0 - 1, y0 + edge], [y1 - edge, y1 + 1]]) {
+      for (let y = a + 1; y < b; y++) lerp((y * W + x) * 4, (a * W + x) * 4, (b * W + x) * 4, (y - a) / (b - a));
+    }
+  }
+  for (let y = y0 - edge; y <= y1 + edge; y++) {
+    for (const [a, b] of [[x0 - 1, x0 + edge], [x1 - edge, x1 + 1]]) {
+      for (let x = a + 1; x < b; x++) lerp((y * W + x) * 4, (y * W + a) * 4, (y * W + b) * 4, (x - a) / (b - a));
+    }
   }
 }

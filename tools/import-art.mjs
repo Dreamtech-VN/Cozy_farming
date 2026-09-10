@@ -14,7 +14,7 @@ import { join } from 'node:path';
 import { readPng, Pixels } from './art/png.mjs';
 import { splitSheet } from './art/split.mjs';
 import { downscale } from './art/resize.mjs';
-import { makeTile, wrapSeam, patchArea } from './art/tileset.mjs';
+import { makeTile, wrapSeam, liftVeil } from './art/tileset.mjs';
 import { chinRow, collarSlot, headCap, pocketPiece, skinTone, dropHairlines, chainLimb, cuffSlot } from './art/head.mjs';
 
 
@@ -70,9 +70,9 @@ for (const file of sheets) {
   // Tấm bảng thành phần chia sẵn thành nhiều KHUNG, mỗi khung một kiểu bày và
   // một nhãn vẽ chết ở góc. Cắt cả tấm một lần là nhãn cũng thành sprite, còn
   // tham số hợp với khung tóc thì hỏng ở khung mặt. Nên cắt theo từng khung.
-  // Vá tranh nền TRƯỚC khi cắt: mấy khung nét đứt trắng là ghi chú chừa chỗ
-  // đặt công trình, không phải hình.
-  for (const [rect, from] of maps.patch ?? []) patchArea(sheet, rect, from);
+  // Gỡ lớp phủ TRƯỚC khi cắt: mấy khung nét đứt trắng là ghi chú chừa chỗ đặt
+  // công trình, không phải hình — mà hình bên dưới vẫn còn, chỉ bị trộn mờ.
+  for (const box of maps.veil?.boxes ?? []) liftVeil(sheet, box, maps.veil);
 
   const areas = maps.regions ?? [{ rect: null, split: maps.split, names: maps.names }];
   let count = 0;
