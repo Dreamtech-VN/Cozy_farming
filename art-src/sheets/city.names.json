@@ -4,7 +4,7 @@
   "page": "outdoor",
   "grade": "map",
   "fix": {
-    "comment": "Trạm xe buýt vẽ như một khúc cảnh chứ không phải món đồ rời: có sẵn nền lát dưới chân, ô kính tô đặc như tường, mà phép tách nền lại ăn mòn loang lổ mấy mảng nhạt. Cắt ra dán lên map là thành cái hộp nhờ nhờ đứng trên vỉa hè. Số đo trên mảnh gốc 275×147: hai trụ trong ở x 56-66 và 203-211 nên ô kính là x 67-202; nền trong lòng trạm bắt đầu từ hàng 124 xuống, chân trụ nằm xen trong đó nên cắt theo độ sáng chứ không cắt theo ô.",
+    "comment": "Trạm xe buýt vẽ như một khúc CẢNH chứ không phải món đồ rời: có sẵn nền lát dưới chân, ô kính tô đặc như tường, mà phép tách nền lại ăn mòn loang lổ mấy mảng nhạt. Số đo trên mảnh gốc 275×147: hai trụ trong ở x 56-66 và 203-211 nên ô kính là x 67-202. Từ hàng 136 xuống là nền lát CỦA TẤM ART, cắt đi — chân trụ nằm xen trong đó ở x 3-29, 82-91, 180-189, 243-269 nên cắt theo độ sáng chứ không cắt theo ô. Dải 120-135 thì KHÁC: đấy là mặt sàn trong lòng trạm, phải giữ. Cắt nốt nó thì nền lát của map chạy thẳng qua trạm, trạm hoá ra cái khung rỗng đặt lên sàn — mái nhìn thấy mặt trên mà sàn lại không có mặt nào, hỏng phối cảnh. Giữ nguyên thì nó là một mảng sáng loè, nên làm bán trong suốt: vừa ra mặt sàn riêng, vừa ăn màu nền của map đang đứng.",
     "prop_busstop": {
       "size": [
         275,
@@ -19,9 +19,17 @@
           123,
           125,
           238
+        ],
+        [
+          14,
+          120,
+          258,
+          135,
+          165,
+          255
         ]
       ],
-      "cutGround": 124
+      "cutGround": 136
     }
   },
   "names": {

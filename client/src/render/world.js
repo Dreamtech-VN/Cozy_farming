@@ -605,8 +605,9 @@ export class WorldRenderer {
         ctx.restore();
         continue;
       }
-      ctx.fillStyle = highlight ? shade(map.theme.accent, 30) : map.theme.accent;
-      roundRect(ctx, object.x - object.w / 2, object.y - object.h, object.w, object.h, 8);
+      // Không có hình lui bằng khối màu nữa. Mọi vật trong map đều có art thật,
+      // và bài test chặn ngay nếu ai khai một tên sprite không có trong atlas —
+      // vẽ một cái hộp bo góc thay thế chỉ khiến lỗi ấy lọt ra tới người chơi.
     }
   }
 
@@ -682,19 +683,9 @@ export class WorldRenderer {
         return ok;
       })();
 
-      if (!drawn) {
-        ctx.globalAlpha = highlight ? 0.95 : 0.65;
-        const gradient = ctx.createLinearGradient(0, portal.y - portal.h, 0, portal.y);
-        gradient.addColorStop(0, '#eaf7ff');
-        gradient.addColorStop(1, '#6fb6d8');
-        ctx.fillStyle = gradient;
-        roundRect(ctx, portal.x - portal.w / 2, portal.y - portal.h, portal.w, portal.h, portal.w / 2);
-        ctx.globalAlpha = 1;
-      }
-
       // Nhãn treo trên NÓC TRẠM, không phải trên khung tương tác: mái trạm cao
       // hơn khung nên tính theo khung là chữ nằm đè lên mái.
-      const top = drawn ? (portal.scale ?? 2) * 64 : portal.h;
+      const top = drawn ? (portal.scale ?? 2) * 64 : portal.h;   // art chưa tải xong thì treo nhãn theo khung
       ctx.font = '600 12px system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillStyle = '#0e1a15';

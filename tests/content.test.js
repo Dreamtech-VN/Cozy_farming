@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { loadContent } from '../server/src/content/index.js';
 import { validateContent, collectLocalizationKeys } from '../server/src/content/validate.js';
 import { config } from '../server/src/config.js';
+import { readFileSync } from 'node:fs';
 
 const content = loadContent({ dataDir: config.dataDir, localeDir: config.localeDir });
 
@@ -62,6 +63,27 @@ describe('Content pipeline (doc 18)', () => {
         const target = content.byMap.get(portal.target_map_id);
         assert.ok(target, `${map.map_id}: portal tới ${portal.target_map_id}`);
         assert.ok(target.spawn_points.some((s) => s.id === portal.target_spawn));
+      }
+    }
+  });
+
+  // Renderer không còn vẽ hình lui bằng khối màu cho vật hay cửa ngõ nữa: mọi
+  // thứ trong map phải có art thật. Bỏ hình lui mà không có bài test này thì
+  // khai sai một cái tên là vật ấy BIẾN MẤT trên map, im lặng, không báo gì.
+  test('mọi tên sprite khai trong map đều có art thật', () => {
+    const atlas = JSON.parse(readFileSync('client/assets/world/atlas.json', 'utf8'));
+    const have = new Set(Object.keys(atlas.sprites.index));
+    for (const map of content.maps) {
+      for (const object of map.objects ?? []) {
+        if (object.sprite) assert.ok(have.has(object.sprite), `${map.map_id}: vật ${object.object_id} dùng sprite lạ "${object.sprite}"`);
+      }
+      for (const portal of map.portals) {
+        if (portal.sprite) assert.ok(have.has(portal.sprite), `${map.map_id}: cổng ${portal.portal_id} dùng sprite lạ "${portal.sprite}"`);
+      }
+      for (const names of Object.values(map.scenery ?? {})) {
+        for (const name of Array.isArray(names) ? names : []) {
+          assert.ok(have.has(name), `${map.map_id}: cảnh vật dùng sprite lạ "${name}"`);
+        }
       }
     }
   });
