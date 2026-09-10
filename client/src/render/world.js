@@ -15,6 +15,11 @@ import { atlas } from './atlas.js';
  * code là ô 16px, tileset cắt từ art vẽ sẵn là ô 48px — chốt một con số phóng
  * thì đổi bảng art là mặt đất to gấp ba.
  */
+// Bóng nhân vật. Hẹp và tròn hơn bóng công trình vì người đứng chân chụm, và
+// nhạt hơn vì thân người mảnh, che ít nắng hơn cái mái trạm.
+const AVATAR_FOOT = 40;
+const CHARACTER_SHADOW = { tone: 0.58, soft: 2.4, flat: 0.32 };
+
 const TILE_PX = 48;
 /**
  * Mặt đất mặc định: bãi cỏ với mặt cắt đất bên dưới.
@@ -213,6 +218,7 @@ export class WorldRenderer {
     // Xếp theo y: ai đứng gần mép trước thì vẽ sau, che người phía sau.
     const everyone = [...players, self].sort((a, b) => a.y - b.y);
     for (const player of everyone) {
+      this.#groundShadow(player.x, player.y, AVATAR_FOOT * depthScale(map, player.y), CHARACTER_SHADOW);
       ctx.save();
       ctx.translate(player.x, player.y);
       drawAvatar(ctx, this.content, {
@@ -590,6 +596,8 @@ export class WorldRenderer {
     for (const object of map.objects ?? []) {
       const highlight = hintTarget?.id === object.object_id;
       if (atlas.ready && object.sprite) {
+        const size = atlas.spriteSize(object.sprite, object.scale ?? 2);
+        if (size) this.#groundShadow(object.x, object.y + 4, size.w * 1.14);
         // Vật đang trong tầm tương tác thì sáng lên, thay cho đổi màu tô.
         ctx.save();
         if (highlight) { ctx.shadowColor = 'rgba(255,232,150,.95)'; ctx.shadowBlur = 18; }
@@ -600,6 +608,52 @@ export class WorldRenderer {
       ctx.fillStyle = highlight ? shade(map.theme.accent, 30) : map.theme.accent;
       roundRect(ctx, object.x - object.w / 2, object.y - object.h, object.w, object.h, 8);
     }
+  }
+
+  /**
+   * Bóng đổ dưới chân vật đứng trên nền.
+   *
+   * Thiếu nó thì vật nào cũng như dán lên sàn — sprite sạch, màu đúng tông, mà
+   * vẫn không đứng trong tranh. Mọi vật vẽ sẵn trong tranh nền đều có bóng.
+   *
+   * Hình dạng đo từ CÁI GHẾ và BỒN HOA trong tranh nền, vì chúng cũng là vật
+   * đứng chân trên nền lát như trạm xe buýt: bóng rộng hơn vật chừng 1.2 lần,
+   * nông (sâu bằng ~5% bề rộng), làm nền tối còn khoảng 0.6, lõi tối khá đều rồi
+   * mới tắt nhanh ở rìa.
+   *
+   * KHÔNG lấy bóng CÂY làm mẫu dù cây cũng có bóng: tán cây ở trên cao nên bóng
+   * nó loang rộng 50px mà chỉ tối còn 0.84 — mượn số ấy cho trạm là ra một vệt
+   * mờ chứ không ra chỗ chân chạm đất.
+   *
+   * Vẽ bằng phép NHÂN lên chính mặt nền chứ không tô một vệt xám đè lên: tô đè
+   * thì bóng mang màu mình tự đặt, trên nền lát xám thì tạm được, sang map nền
+   * cỏ là lộ ngay. Nhân thì nền nào cũng tối đi đúng chừng ấy phần.
+   */
+  #groundShadow(x, groundY, width, { tone = 0.4, soft = 3, flat = 0.05 } = {}) {
+    const ctx = this.ctx;
+    const rx = width / 2;
+    // `flat` là tỉ lệ sâu/rộng. Vật bè ra như trạm xe buýt thì bóng gần như một
+    // vệt (0.05); người đứng thẳng chân chụm thì bóng gần tròn (0.3).
+    const depth = width * flat;
+    ctx.save();
+    ctx.globalCompositeOperation = 'multiply';
+    // Tâm bóng nằm DƯỚI chỗ chân chạm, không phải trùng. Bóng ghế trong tranh
+    // nền trải trọn từ chỗ chân chạm xuống dưới, không có tí nào ở phía trên.
+    // Đặt trùng chân thì nửa bóng chui vào trong trạm — mà trạm nay đã nhìn
+    // xuyên được, nên nó hiện ra thành vệt tối lơ lửng sau tấm kính.
+    ctx.translate(x, groundY + depth * 0.5);
+    ctx.scale(1, depth / rx);
+    const fade = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
+    for (const d of [0, 0.25, 0.5, 0.7, 0.85, 1]) {
+      const k = 1 - (1 - tone) * (1 - d ** soft);
+      const v = Math.round(k * 255);
+      fade.addColorStop(d, `rgb(${v},${v},${v})`);
+    }
+    ctx.fillStyle = fade;
+    ctx.beginPath();
+    ctx.arc(0, 0, rx, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
   }
 
   /**
@@ -618,10 +672,12 @@ export class WorldRenderer {
     const ctx = this.ctx;
     for (const portal of map.portals) {
       const highlight = hintTarget?.id === portal.portal_id;
-      const drawn = portal.sprite && (() => {
+      const size = portal.sprite && atlas.ready ? atlas.spriteSize(portal.sprite, portal.scale ?? 2) : null;
+      if (size) this.#groundShadow(portal.x, portal.y, size.w * 1.14);
+      const drawn = size && (() => {
         ctx.save();
         if (highlight) { ctx.shadowColor = 'rgba(255,232,150,.95)'; ctx.shadowBlur = 18; }
-        const ok = atlas.ready && atlas.sprite(ctx, portal.sprite, portal.x, portal.y, portal.scale ?? 2);
+        const ok = atlas.sprite(ctx, portal.sprite, portal.x, portal.y, portal.scale ?? 2);
         ctx.restore();
         return ok;
       })();
@@ -649,6 +705,7 @@ export class WorldRenderer {
   #drawNpcs(map, hintTarget, time) {
     const ctx = this.ctx;
     for (const npc of map.npcs) {
+      this.#groundShadow(npc.x, npc.y, AVATAR_FOOT * depthScale(map, npc.y), CHARACTER_SHADOW);
       ctx.save();
       ctx.translate(npc.x, npc.y);
       // NPC không có tủ đồ: sprite khai thẳng trong data map. `palette` giữ lại

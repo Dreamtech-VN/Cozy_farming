@@ -195,6 +195,14 @@ class Atlas {
    * theo CHIỀU CAO chuẩn, không theo ô: art vẽ sẵn không nằm trong lưới đều.
    * @returns true nếu vẽ được, false nếu không có tên này.
    */
+  /** Cỡ sprite sẽ vẽ ra, để chỗ gọi biết mà đặt bóng đổ cho vừa. */
+  spriteSize(name, scale = 1) {
+    const rect = this.meta?.sprites?.index?.[name];
+    if (!rect) return null;
+    const k = (scale * SPRITE_UNIT) / rect.h;
+    return { w: rect.w * k, h: rect.h * k };
+  }
+
   sprite(ctx, name, x, groundY, scale = 1) {
     const rect = this.meta?.sprites?.index?.[name];
     if (!rect) return false;
