@@ -182,7 +182,7 @@ export class WorldRenderer {
     this.camera.y = Math.max(this.anchorY - 40, map.ground_y);
   }
 
-  render(map, { players, self, farm, hintTarget, time }) {
+  render(map, { players, self, farm, hintTarget, guide, time }) {
     const ctx = this.ctx;
     const scale = this.scale;
     ctx.setTransform(this.dpr * scale, 0, 0, this.dpr * scale, 0, 0);
@@ -249,7 +249,68 @@ export class WorldRenderer {
     }
     ctx.restore();
 
+    this.#drawGuide(map, guide, time);
     this.#drawWorldMood(time);
+  }
+
+  /**
+   * Mũi tên chỉ nơi cần tới cho nhiệm vụ đang làm.
+   *
+   * Bảng nhiệm vụ nói "nói chuyện với bác Tư" — người mới không biết bác Tư đứng
+   * map nào, mà map nào cũng phải bắt xe buýt mới sang được. Thiếu mũi tên thì
+   * bước đầu tiên của game đã là một câu đố về địa lý.
+   *
+   * Server đã giải sẵn thành chỗ phải đi NGAY TRÊN MAP ĐANG ĐỨNG (xem
+   * `domain/guide.js`): cùng map thì là chính mục tiêu, khác map thì là cái trạm
+   * xe buýt bắt đầu đường đi. Ở đây chỉ còn việc vẽ.
+   *
+   * Vẽ ở toạ độ MÀN HÌNH, không phải toạ độ thế giới: khi đích nằm ngoài khung
+   * nhìn thì mũi tên phải nằm ở MÉP MÀN HÌNH mà chỉ ra ngoài — mốc ấy là mốc
+   * màn hình, không có nghĩa gì trong thế giới.
+   */
+  #drawGuide(map, guide, time) {
+    const x = guide?.step?.x;
+    if (x == null) return;                       // "cứ ở map này là được": không có gì để chỉ
+    const ctx = this.ctx;
+    const screenX = this.viewWidth / 2 + (x - this.camera.x) * this.zoom;
+    const bob = Math.sin(time * 3.4) * 5;
+    const margin = 34;
+    const offLeft = screenX < margin;
+    const offRight = screenX > this.viewWidth - margin;
+    const px = offLeft ? margin : offRight ? this.viewWidth - margin : screenX;
+    // Đích trong khung thì mũi tên treo trên đầu nó và chúc xuống; ngoài khung
+    // thì nằm ở mép và chỉ ngang ra phía phải đi.
+    const py = offLeft || offRight ? this.anchorY - 40 : this.anchorY - 150 + bob;
+    const angle = offLeft ? Math.PI / 2 : offRight ? -Math.PI / 2 : 0;
+
+    ctx.save();
+    ctx.translate(px, py + (offLeft || offRight ? bob : 0));
+    ctx.rotate(angle);
+    ctx.beginPath();
+    ctx.moveTo(0, 14);
+    ctx.lineTo(-11, -8);
+    ctx.lineTo(11, -8);
+    ctx.closePath();
+    ctx.fillStyle = '#f2c94c';
+    ctx.strokeStyle = 'rgba(30,24,10,.85)';
+    ctx.lineWidth = 2.5;
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
+
+    // Ngoài khung thì kèm chữ: mũi tên trơ ở mép không nói được là đi tới đâu.
+    if (!offLeft && !offRight) return;
+    const label = guide.step.portal_id ? t(guide.target.name_key) : t(guide.target.label_key ?? guide.target.name_key);
+    ctx.save();
+    ctx.font = '700 12px system-ui, sans-serif';
+    ctx.textAlign = offLeft ? 'left' : 'right';
+    ctx.fillStyle = 'rgba(20,16,8,.72)';
+    const width = ctx.measureText(label).width + 14;
+    const bx = offLeft ? margin - 12 : this.viewWidth - margin - width + 12;
+    roundRect(ctx, bx, py + 18, width, 20, 7);
+    ctx.fillStyle = '#ffe9a8';
+    ctx.fillText(label, offLeft ? bx + 7 : bx + width - 7, py + 32);
+    ctx.restore();
   }
 
   /**

@@ -362,7 +362,9 @@ class Game {
   /** Bảng nhiệm vụ trên HUD. Gọi lại sau mỗi hành động có thể đổi tiến độ. */
   async refreshQuests() {
     try {
-      const { quests } = await this.api.get('/v1/quests');
+      const { quests, guide } = await this.api.get('/v1/quests');
+      // Chỉ dẫn do server giải, gắn kèm danh sách nhiệm vụ nên luôn khớp với nó.
+      this.guide = guide ?? null;
       renderQuestTracker(this, quests, {
         onOpen: () => { closePanel(); openQuests(this); markActiveMenu('menu'); },
         onClaim: (questId) => claimFromTracker(this, questId),
@@ -590,6 +592,7 @@ class Game {
           self: { ...this.self, emote: this.#emoteFor(this.characterId, now) },
           farm: this.farm,
           hintTarget: this.hintTarget,
+          guide: this.guide,
           time: this.time,
         });
       }

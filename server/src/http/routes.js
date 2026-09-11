@@ -7,6 +7,7 @@ import * as player from '../domain/player.js';
 import * as farm from '../domain/farm.js';
 import * as match3 from '../domain/match3.js';
 import * as quest from '../domain/quest.js';
+import { guideFor } from '../domain/guide.js';
 import * as social from '../domain/social.js';
 import * as shop from '../domain/shop.js';
 import * as account from '../domain/account.js';
@@ -229,7 +230,13 @@ export function registerRoutes(router, ctx) {
   }));
 
   // ---------- Quest (doc 11) ----------
-  router.get('/v1/quests', ({ character }) => ({ body: { quests: quest.listQuests(db, content, character.id) } }));
+  // Chỉ dẫn đi kèm luôn danh sách nhiệm vụ chứ không tách endpoint: client đã
+  // gọi lại `/v1/quests` sau mỗi hành động và sau mỗi lần đổi map, nên gắn vào
+  // đây là mũi tên tự đồng bộ, khỏi lo hai nguồn lệch nhau.
+  router.get('/v1/quests', ({ character }) => {
+    const quests = quest.listQuests(db, content, character.id);
+    return { body: { quests, guide: guideFor(content, quests, character.last_map_id) } };
+  });
 
   router.post('/v1/quests/:questId/claim', ({ character, params }) => {
     const result = quest.claimQuest(db, content, character.id, params.questId);
