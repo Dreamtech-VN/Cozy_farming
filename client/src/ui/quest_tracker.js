@@ -8,19 +8,39 @@ import { t } from '../core/i18n.js';
 const MAX_ROWS = 4;
 
 /** Cốt truyện trước, rồi phụ, rồi hằng ngày/tuần — thứ tự người chơi quan tâm. */
-const TYPE_ORDER = { main: 0, side: 1, daily: 2, weekly: 3, event: 4, achievement: 5 };
+const TYPE_ORDER = { newbie: 0, main: 1, side: 2, daily: 3, weekly: 4, event: 5, achievement: 6 };
 
-const TYPE_LABEL = { main: 'Cốt truyện', side: 'Phụ', daily: 'Hằng ngày', weekly: 'Hằng tuần', event: 'Sự kiện', achievement: 'Thành tựu' };
+const TYPE_LABEL = { newbie: 'Tân thủ', main: 'Cốt truyện', side: 'Phụ', daily: 'Hằng ngày', weekly: 'Hằng tuần', event: 'Sự kiện', achievement: 'Thành tựu' };
 
 /** Tab lọc theo nhóm loại nhiệm vụ. */
 const TABS = [
-  { key: 'main', label: 'Chính', types: ['main'] },
+  // Tân thủ đi CHUNG tab với cốt truyện chứ không có tab riêng: nó chỉ sống bảy
+  // ngày rồi hết, mà cả hai đều là "việc dẫn mình đi tiếp". Thêm một tab chỉ
+  // dùng được một tuần là bắt mọi người chơi cũ mang nó mãi mãi.
+  { key: 'main', label: 'Chính', types: ['newbie', 'main'] },
   { key: 'side', label: 'Phụ', types: ['side', 'event', 'achievement'] },
   { key: 'daily', label: 'Ngày', types: ['daily', 'weekly'] },
 ];
 
 /** Tab đang chọn và trạng thái thu gọn được nhớ giữa các lần vẽ lại. */
 const state = { tab: 'main', collapsed: false };
+
+/**
+ * Còn bao lâu hết hạn, dạng "còn 5h20". `null` khi nhiệm vụ không reset.
+ *
+ * Đây là thứ biến "nhiệm vụ ngày" thành "việc trong ngày": không có đồng hồ thì
+ * người chơi không biết mình còn bao lâu, mà không biết thì không thấy gấp.
+ * Dưới một giờ mới hiện phút — trên một giờ mà đếm từng phút chỉ tổ sốt ruột.
+ */
+function timeLeft(expiresAt) {
+  if (!expiresAt) return null;
+  const left = expiresAt - Date.now();
+  if (left <= 0) return null;
+  const hours = Math.floor(left / 3_600_000);
+  const minutes = Math.floor((left % 3_600_000) / 60_000);
+  const text = hours > 0 ? `còn ${hours}h${String(minutes).padStart(2, '0')}` : `còn ${minutes} phút`;
+  return el('span', { class: `qt-clock ${hours < 1 ? 'urgent' : ''}`.trim(), text: ` · ${text}` });
+}
 
 /** Nhiệm vụ đã hoàn thành nhưng chưa nhận thưởng phải lên đầu. */
 function pickVisible(quests, tab) {
@@ -107,6 +127,9 @@ export function renderQuestTracker(game, quests, { onOpen, onClaim }) {
         el('p', { class: 'qt-desc' }, [
           el('span', { text: t(quest.desc_key) }),
           el('span', { class: 'qt-count', text: ` (${progress.current}/${progress.total})` }),
+          // Chỉ hiện đồng hồ khi việc CHƯA xong: đã xong rồi thì phần thưởng nằm
+          // đó chờ, giục thêm chỉ làm người chơi tưởng mình sắp mất nó.
+          done ? null : timeLeft(quest.expires_at),
         ]),
       ]);
       }),

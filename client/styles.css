@@ -478,6 +478,9 @@ html, body {
 }
 .qt-tag.t-daily, .qt-tag.t-weekly { color: #9de07f; }
 .qt-tag.t-event, .qt-tag.t-achievement { color: #ffd27a; }
+/* Tân thủ nằm chung tab với cốt truyện nên phải khác màu, không thì hai loại
+   việc rất khác nhau trông như một. */
+.qt-tag.t-newbie { color: #7fd5e8; }
 .qt-name {
   flex: 1 1 auto; min-width: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
@@ -1578,3 +1581,8 @@ button.primary.cc-go:active { transform: translateY(3px); box-shadow: 0 2px 0 #2
 }
 #onboarding-card .ob-skip:hover { opacity: 1; }
 @media (max-width: 760px) { #onboarding-card { width: 240px; } }
+
+/* Đồng hồ đếm ngược của việc trong ngày. Dưới một giờ thì đổi màu — đấy là lúc
+   con số bắt đầu có nghĩa, còn "còn 9h" thì nhắc cũng như không. */
+.qt-clock { opacity: .7; font-variant-numeric: tabular-nums; }
+.qt-clock.urgent { opacity: 1; color: #f2a65a; font-weight: 700; }
