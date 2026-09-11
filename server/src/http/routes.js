@@ -11,12 +11,14 @@ import { guideFor } from '../domain/guide.js';
 import * as onboarding from '../domain/onboarding.js';
 import * as achievements from '../domain/achievements.js';
 import * as stats from '../domain/stats.js';
+import * as storage from '../domain/storage.js';
 import * as social from '../domain/social.js';
 import * as shop from '../domain/shop.js';
 import * as account from '../domain/account.js';
 import * as mail from '../domain/mail.js';
 import * as daily from '../domain/daily.js';
-import { getWallet, regenerateEnergy } from '../domain/economy.js';
+import { getWallet, regenerateEnergy, applyChange } from '../domain/economy.js';
+import { transaction } from '../db/index.js';
 import { worldState } from '../domain/world_clock.js';
 import { logEvent, summarize } from '../domain/analytics.js';
 
@@ -239,6 +241,45 @@ export function registerRoutes(router, ctx) {
   // Chỉ dẫn đi kèm luôn danh sách nhiệm vụ chứ không tách endpoint: client đã
   // gọi lại `/v1/quests` sau mỗi hành động và sau mỗi lần đổi map, nên gắn vào
   // đây là mũi tên tự đồng bộ, khỏi lo hai nguồn lệch nhau.
+  router.get('/v1/storage', ({ character }) => ({
+    body: { items: storage.list(db, content, character.id) },
+  }));
+
+  /**
+   * Cất vào kho / lấy ra khỏi kho.
+   *
+   * Cả hai đi qua `applyChange` cho phần TÚI, nên vẫn được ghi nhật ký giao dịch
+   * như mọi thay đổi vật phẩm khác — kho không phải cái cửa hậu né mất kiểm toán.
+   */
+  router.post('/v1/storage/deposit', ({ character, body }) => {
+    const count = Math.floor(Number(body?.count ?? 0));
+    if (!body?.item_id || !(count > 0)) throw badRequest('thiếu item_id hoặc count');
+    return {
+      body: transaction(db, () => {
+        // Rút khỏi túi TRƯỚC: hết đồ thì `applyChange` ném lỗi và cả giao dịch
+        // bị huỷ, không có cửa nào nhân đôi vật phẩm.
+        applyChange(db, content, character.id, { items: [{ item_id: body.item_id, count: -count }] }, { kind: 'storage_deposit' });
+        const { overflow } = storage.add(db, content, character.id, body.item_id, count);
+        if (overflow > 0) throw badRequest('Kho đầy', { overflow });
+        return { item_id: body.item_id, count, stored: storage.amountIn(db, character.id, body.item_id) };
+      }),
+    };
+  });
+
+  router.post('/v1/storage/withdraw', ({ character, body }) => {
+    const count = Math.floor(Number(body?.count ?? 0));
+    if (!body?.item_id || !(count > 0)) throw badRequest('thiếu item_id hoặc count');
+    return {
+      body: transaction(db, () => {
+        storage.take(db, character.id, body.item_id, count);
+        // Túi đầy thì `applyChange` lại đẩy ngược vào kho — vô hại, chỉ là lấy
+        // ra không được, chứ không mất đồ.
+        applyChange(db, content, character.id, { items: [{ item_id: body.item_id, count }] }, { kind: 'storage_withdraw' });
+        return { item_id: body.item_id, count, stored: storage.amountIn(db, character.id, body.item_id) };
+      }),
+    };
+  });
+
   router.get('/v1/achievements', ({ character }) => ({
     body: { achievements: achievements.list(db, content, character.id), stats: stats.all(db, character.id) },
   }));

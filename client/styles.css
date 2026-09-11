@@ -1602,3 +1602,9 @@ button.primary.cc-go:active { transform: translateY(3px); box-shadow: 0 2px 0 #2
 .row.rank .rank-no { min-width: 26px; text-align: right; opacity: .7; font-variant-numeric: tabular-nums; }
 .row.rank.mine { box-shadow: inset 0 0 0 1.5px rgba(127, 201, 138, .6); }
 .row.rank.mine .rank-no { opacity: 1; }
+
+/* Kho: hai cột cạnh nhau, hẹp thì xuống hàng. Phải thấy CẢ HAI bên cùng lúc mới
+   quyết định được cất gì. */
+.store-cols { align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.store-col { min-width: 200px; }
+.store-col > .title { margin-bottom: 5px; opacity: .8; font-size: 12px; text-transform: uppercase; letter-spacing: .3px; }

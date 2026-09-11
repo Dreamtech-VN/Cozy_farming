@@ -7,6 +7,7 @@
  */
 import { newId } from '../lib/ids.js';
 import { transaction } from '../db/index.js';
+import * as storage from './storage.js';
 import { badRequest, conflict } from '../lib/errors.js';
 
 /** XP cần để lên cấp tiếp theo (doc 09 — level_curve). */
@@ -36,17 +37,37 @@ function addCurrencyRaw(db, content, characterId, currencyId, delta, now) {
   return capped;
 }
 
+/**
+ * Cộng/bớt vật phẩm trong TÚI. Phần vượt sức chứa chảy vào KHO.
+ *
+ * Trước đây dòng này là `Math.min(next, item.stack_max)` — quá sức chứa thì cắt
+ * phăng phần thừa, im lặng. Thu hoạch vào một chồng đã đầy là mất trắng số dôi
+ * ra, không báo, không ghi vào đâu cả. Người chơi chỉ thấy "sao thu hoạch mà
+ * không thêm được mấy".
+ *
+ * Nay phần dôi vào kho; đầy cả kho thì NÉM LỖI, cả giao dịch bị huỷ. Thà hỏng to
+ * còn hơn âm thầm nuốt đồ — hỏng to thì còn biết mà sửa, còn nuốt thì không ai
+ * phát hiện ra.
+ */
 function addItemRaw(db, content, characterId, itemId, delta, now) {
   const item = content.byItem.get(itemId);
   if (!item) throw badRequest(`item không tồn tại: ${itemId}`);
   const current = db.prepare('SELECT quantity FROM inventories WHERE character_id = ? AND item_id = ?').get(characterId, itemId)?.quantity ?? 0;
   const next = current + delta;
   if (next < 0) throw conflict('Không đủ vật phẩm', { item_id: itemId, required: -delta, available: current });
-  const capped = Math.min(next, item.stack_max);
+
+  const kept = Math.min(next, item.stack_max);
+  const spill = next - kept;
+  if (spill > 0) {
+    const { overflow } = storage.add(db, content, characterId, itemId, spill, now);
+    if (overflow > 0) {
+      throw conflict('Túi và kho đều đầy', { item_id: itemId, overflow });
+    }
+  }
   db.prepare(`INSERT INTO inventories (character_id, item_id, quantity, updated_at) VALUES (?, ?, ?, ?)
               ON CONFLICT (character_id, item_id) DO UPDATE SET quantity = excluded.quantity, updated_at = excluded.updated_at`)
-    .run(characterId, itemId, capped, now);
-  return capped;
+    .run(characterId, itemId, kept, now);
+  return kept;
 }
 
 function addXpRaw(db, content, characterId, xp, now) {

@@ -341,6 +341,52 @@ export function openBusStop(game, portal) {
 }
 
 /**
+ * Kho.
+ *
+ * Có hai danh sách cạnh nhau — túi và kho — chứ không phải một danh sách với nút
+ * "chuyển". Người chơi cần thấy CẢ HAI bên cùng lúc để quyết định cất gì; một
+ * danh sách thì phải nhớ bên kia đang có gì, mà nhớ thì sẽ nhầm.
+ */
+export function openStorage(game) {
+  showPanel('Kho', async (body, rerender) => {
+    body.append(emptyState('Đang tải…'));
+    const [inventory, store] = await Promise.all([
+      game.api.get('/v1/player/inventory'),
+      game.api.get('/v1/storage'),
+    ]);
+    body.replaceChildren();
+
+    const move = async (path, itemId, count) => {
+      try {
+        await game.api.post(path, { item_id: itemId, count });
+        rerender();
+      } catch (err) { toast(err.message, 'bad'); }
+    };
+
+    const column = (title, entries, { action, label }) => el('div', { class: 'grow store-col' }, [
+      el('div', { class: 'title', text: title }),
+      entries.length === 0
+        ? emptyState('Trống.')
+        : el('div', {}, entries.map((entry) => el('div', { class: 'row' }, [
+            el('span', { class: 'grow', text: itemName(game, entry.item_id) }),
+            el('span', { class: 'sub', text: formatNumber(entry.quantity) }),
+            el('button', {
+              class: 'ghost', type: 'button', text: label,
+              onClick: () => move(action, entry.item_id, entry.quantity),
+            }),
+          ]))),
+    ]);
+
+    body.append(el('p', { class: 'sub', style: 'margin:0 0 8px',
+      text: 'Thu hoạch quá sức chứa của túi thì phần dôi tự vào kho, không mất đi đâu cả.' }));
+    body.append(el('div', { class: 'row store-cols' }, [
+      column('Túi đồ', (inventory.items ?? []).filter((i) => i.quantity > 0), { action: '/v1/storage/deposit', label: 'Cất →' }),
+      column('Kho', store.items ?? [], { action: '/v1/storage/withdraw', label: '← Lấy' }),
+    ]));
+  });
+}
+
+/**
  * Thành tựu: mốc dài hạn, nhiều bậc.
  *
  * Mỗi thành tựu chỉ hiện ĐÚNG MỘT bậc đang làm dở, không phải cả bảng bốn bậc.

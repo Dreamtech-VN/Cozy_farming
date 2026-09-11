@@ -54,6 +54,7 @@ export function buildMenuPanel(game, body, handlers, badges = {}) {
     { key: 'inventory', icon: 'bag', label: 'Túi đồ', run: handlers.inventory },
     { key: 'mail', icon: 'mail', label: 'Thư', run: handlers.mail },
     { key: 'map', icon: 'map', label: 'Bản đồ', run: handlers.map },
+    { key: 'storage', icon: 'home', label: 'Kho', run: handlers.storage },
     { key: 'achievements', icon: 'quest', label: 'Thành tựu', run: handlers.achievements },
     { key: 'leaderboard', icon: 'level', label: 'Xếp hạng', run: handlers.leaderboard },
   ];

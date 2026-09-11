@@ -24,7 +24,7 @@ import { renderOnboarding, onboardingDone } from './ui/onboarding.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
-import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openBusStop, openAchievements, openLeaderboards, openLiveOps, openMenu, openMail, openSettings, openDaily, energyLine } from './ui/panels.js';
+import { openQuests, openInventory, openFarm, openSocial, openProfile, openShop, harvest, openAreaMap, openBusStop, openStorage, openAchievements, openLeaderboards, openLiveOps, openMenu, openMail, openSettings, openDaily, energyLine } from './ui/panels.js';
 
 // Trục dọc là chiều sâu, không phải độ cao — đi lùi vào trong chậm hơn đi ngang.
 const DEPTH_SPEED = 0.55;
@@ -101,6 +101,7 @@ class Game {
       inventory: () => { openInventory(this); markActiveMenu('menu'); },
       mail: () => { openMail(this); markActiveMenu('menu'); },
       map: () => { openAreaMap(this); markActiveMenu('menu'); },
+      storage: () => { openStorage(this); markActiveMenu('menu'); },
       achievements: () => { openAchievements(this); markActiveMenu('menu'); },
       leaderboard: () => { openLeaderboards(this); markActiveMenu('menu'); },
     };
