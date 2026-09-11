@@ -44,6 +44,15 @@ class AudioBus {
   /** Nghe thử khi kéo thanh âm lượng nhạc. */
   previewMusic() { this.#blip(440, 0.3, 'music'); }
 
+  /**
+   * Lên cấp: ba nốt đi lên. Một nốt đơn nghe ra "xong việc", ba nốt đi lên mới
+   * nghe ra "được thêm" — cùng một bus, chỉ khác cách xếp nốt.
+   */
+  levelUp() { [523, 659, 784].forEach((hz, i) => setTimeout(() => this.#blip(hz, 0.22, 'sfx'), i * 90)); }
+
+  /** Thu hoạch: hai nốt ngắn, khô, không ngân — để bấm liên tục không thành ù. */
+  harvest() { [740, 988].forEach((hz, i) => setTimeout(() => this.#blip(hz, 0.07, 'sfx'), i * 55)); }
+
   #blip(frequency, seconds, channel) {
     const ctx = this.#ensure();
     if (!ctx || settings.value.audio.muted) return;

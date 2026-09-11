@@ -6,6 +6,7 @@ import { buildMenuPanel } from './hud_menu.js';
 import { i18n } from '../core/i18n.js';
 import { settings, GRAPHICS_PRESETS } from '../core/settings.js';
 import { audio } from '../core/audio.js';
+import { fx } from '../render/fx.js';
 
 const itemName = (game, itemId) => t(game.content.itemsById.get(itemId)?.name_key ?? itemId);
 const cosmeticName = (game, itemId) => t(game.content.avatarItemsById.get(itemId)?.name_key ?? itemId);
@@ -188,6 +189,11 @@ export async function harvest(game, plotId, refresh) {
   try {
     const result = await game.api.post('/v1/farm/harvest', { plot_id: plotId });
     const gained = result.harvested.map((h) => `${h.count} ${itemName(game, h.item_id)}`).join(', ');
+    // Nông sản không nằm trong ví nên phép so ví ở `refreshPlayer` không thấy;
+    // báo riêng ở đây. Xu với XP thì để chỗ ấy lo, khỏi báo hai lần.
+    for (const h of result.harvested) fx.pop(game.self.x, game.self.y - 130, `+${h.count} ${itemName(game, h.item_id)}`, 'item');
+    fx.burst(game.self.x, game.self.y - 40, '#9fe6a0');
+    audio.harvest();
     toast(`Thu hoạch: ${gained}`, 'good');
     await game.refreshPlayer();
     await game.refreshFarm();

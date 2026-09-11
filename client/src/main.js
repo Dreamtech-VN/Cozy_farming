@@ -7,6 +7,7 @@ import { Realtime } from './net/realtime.js';
 import { i18n, t, formatNumber } from './core/i18n.js';
 import { settings } from './core/settings.js';
 import { atlas } from './render/atlas.js';
+import { fx } from './render/fx.js';
 import { showLoading } from './scenes/loading.js';
 import { showServerSelect } from './scenes/servers.js';
 import { showCharacterScreen } from './scenes/character.js';
@@ -216,7 +217,7 @@ class Game {
     await openDaily(this, { auto: true });
     if (!this.running) {
       this.running = true;
-      this.#loop();
+      this.#loop();   // đã chạy từ màn đăng nhập thì lệnh này không làm gì
       // Sĩ số khu đổi khi người khác ra vào, nên làm mới định kỳ thay vì chỉ đọc
       // một lần lúc vào map.
       // Đồng hồ chạy cục bộ mỗi giây; hỏi lại server mỗi phút để không trôi lệch.
@@ -297,9 +298,42 @@ class Game {
   }
 
   async refreshPlayer() {
+    const before = this.profile;
     this.profile = await this.api.get('/v1/player/profile');
     this.self.equipment = this.profile.equipment;
+    this.#popGains(before, this.profile);
     this.#updateHud();
+  }
+
+  /**
+   * Số bay lên khi ví hoặc XP đổi.
+   *
+   * Đặt ở ĐÂY chứ không ở từng chỗ gọi, vì mọi nguồn thu — thu hoạch, bán hàng,
+   * nhận nhiệm vụ, điểm danh, thắng match-3 — đều phải gọi `refreshPlayer` để
+   * cập nhật HUD. Móc một chỗ là phủ hết, mà thêm nguồn thu mới sau này cũng
+   * không phải nhớ móc thêm.
+   *
+   * Chỉ báo phần TĂNG. Tiêu tiền thì người chơi vừa tự bấm mua, đã biết mình
+   * tiêu; bắn thêm một số đỏ bay lên chỉ khiến màn hình ồn.
+   */
+  #popGains(before, after) {
+    if (!before) return;                       // lần nạp đầu: không có gì để so
+    const { x, y } = this.self;
+    const head = y - 104;
+    const LABEL = { coin: 'xu', gem: 'ngọc', energy: 'năng lượng' };
+    for (const [currency, label] of Object.entries(LABEL)) {
+      const delta = (after.wallet?.[currency] ?? 0) - (before.wallet?.[currency] ?? 0);
+      if (delta > 0) fx.pop(x, head, `+${formatNumber(delta)} ${label}`, currency === 'gem' ? 'gem' : 'coin');
+    }
+    // XP so sánh theo TỔNG tích luỹ, không theo `xp` trong cấp: lên cấp thì `xp`
+    // bị trừ đi phần đã tiêu, hiệu số hoá ra âm dù người chơi vừa được thưởng.
+    if (after.level > before.level) {
+      fx.pop(x, head - 26, `Cấp ${after.level}!`, 'level');
+      fx.burst(x, y - 48);
+      audio.levelUp();
+    } else if (after.xp > before.xp) {
+      fx.pop(x, head, `+${after.xp - before.xp} XP`, 'xp');
+    }
   }
 
   /** Nhớ số thư chưa đọc để chấm đỏ trên nút Menu khớp với hòm thư. */
@@ -517,7 +551,20 @@ class Game {
     });
   }
 
+  /**
+   * Vòng vẽ. Gọi bao nhiêu lần cũng chỉ chạy MỘT chuỗi.
+   *
+   * Trước đây có hai chỗ gọi: màn đăng nhập gọi một lần không chốt gì, vào game
+   * gọi lần nữa. Thế là hai chuỗi requestAnimationFrame cùng cộng `dt` vào
+   * `this.time` và cùng gọi `#step` — thế giới mô phỏng GẤP ĐÔI tốc độ. Không ai
+   * nhận ra vì nó không sai ở chỗ nào rõ rệt: nhân vật chỉ đi nhanh hơn dự tính,
+   * mưa rơi nhanh hơn, phủ sắc ngày đêm trôi nhanh hơn. Chỉ tới khi thêm hiệu
+   * ứng số bay lên, thấy nó tắt trước khi kịp đọc, dò ra đồng hồ chạy 3.6 lần
+   * thực tế, mới lần ngược lại được tới đây.
+   */
   #loop() {
+    if (this.looping) return;
+    this.looping = true;
     let last = performance.now();
     let lastDraw = 0;
     const frame = (now) => {

@@ -4,6 +4,7 @@
  * mọi hình vẽ đều sinh theo data của map nên thêm map mới không cần sửa code.
  */
 import { drawAvatar, roundRect } from './avatar.js';
+import { fx } from './fx.js';
 import { t } from '../core/i18n.js';
 import { settings } from '../core/settings.js';
 import { atlas } from './atlas.js';
@@ -235,6 +236,11 @@ export class WorldRenderer {
       });
       ctx.restore();
     }
+
+    // Phản hồi vẽ SAU người và vật nhưng TRƯỚC lớp tiền cảnh: số phải nổi lên
+    // trên nhân vật mới đọc được, nhưng vẫn phải bị bụi cây tiền cảnh che như
+    // mọi thứ khác, không thì nó nổi lềnh bềnh ngoài thế giới.
+    fx.draw(ctx, time);
 
     if (!backdrop) {
       this.#drawForeground(map);
