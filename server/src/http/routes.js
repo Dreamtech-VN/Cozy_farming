@@ -8,6 +8,7 @@ import * as farm from '../domain/farm.js';
 import * as match3 from '../domain/match3.js';
 import * as quest from '../domain/quest.js';
 import { guideFor } from '../domain/guide.js';
+import * as onboarding from '../domain/onboarding.js';
 import * as social from '../domain/social.js';
 import * as shop from '../domain/shop.js';
 import * as account from '../domain/account.js';
@@ -40,6 +41,9 @@ export function registerRoutes(router, ctx) {
       dialogues: content.dialogues,
       economy: { currencies: content.economy.currencies, level_curve: content.economy.level_curve, farm: content.economy.farm },
       feature_flags: content.liveops.feature_flags,
+      // Client cần danh sách bước để hiện "3/6"; nội dung bước thì lấy theo
+      // từng lần gọi /v1/onboarding vì nó phụ thuộc tiến trình của nhân vật.
+      onboarding: content.onboarding,
     },
   }), { auth: false });
 
@@ -233,6 +237,20 @@ export function registerRoutes(router, ctx) {
   // Chỉ dẫn đi kèm luôn danh sách nhiệm vụ chứ không tách endpoint: client đã
   // gọi lại `/v1/quests` sau mỗi hành động và sau mỗi lần đổi map, nên gắn vào
   // đây là mũi tên tự đồng bộ, khỏi lo hai nguồn lệch nhau.
+  router.get('/v1/onboarding', ({ character }) => ({
+    body: { step: onboarding.currentStep(db, content, character.id) },
+  }));
+
+  router.post('/v1/onboarding/report', ({ character, body }) => {
+    if (!body?.event) throw badRequest('thiếu event');
+    return { body: onboarding.report(db, content, character.id, String(body.event)) };
+  });
+
+  router.post('/v1/onboarding/skip', ({ character }) => {
+    onboarding.skip(db, character.id);
+    return { body: { step: null } };
+  });
+
   router.get('/v1/quests', ({ character }) => {
     const quests = quest.listQuests(db, content, character.id);
     return { body: { quests, guide: guideFor(content, quests, character.last_map_id) } };
@@ -299,6 +317,9 @@ export function registerRoutes(router, ctx) {
   router.get('/v1/liveops/config', () => ({
     body: {
       feature_flags: content.liveops.feature_flags,
+      // Client cần danh sách bước để hiện "3/6"; nội dung bước thì lấy theo
+      // từng lần gọi /v1/onboarding vì nó phụ thuộc tiến trình của nhân vật.
+      onboarding: content.onboarding,
       seasons: content.liveops.seasons,
       events: content.liveops.events.filter((e) => Date.parse(e.ends_at) > Date.now()),
     },

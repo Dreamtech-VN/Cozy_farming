@@ -1549,3 +1549,32 @@ button.primary.cc-go:active { transform: translateY(3px); box-shadow: 0 2px 0 #2
   .cc-cells { justify-content: center; }
   .cc-cell { max-width: 86px; }
 }
+
+/* Thẻ hướng dẫn người mới. Cùng chất liệu với bảng nhiệm vụ để không thành một
+   mảnh giao diện lạc lõng, nhưng viền vàng cho nổi hơn — nó là thứ DUY NHẤT
+   người mới cần nhìn trong vài phút đầu. */
+#onboarding-card {
+  pointer-events: auto;
+  width: 268px;
+  padding: 9px 11px;
+  border-radius: 11px;
+  background: var(--plate-soft);
+  -webkit-backdrop-filter: var(--plate-blur);
+  backdrop-filter: var(--plate-blur);
+  box-shadow: inset 0 0 0 1.5px rgba(242, 201, 76, .55), var(--plate-shadow);
+}
+#onboarding-card .ob-head {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: .3px;
+  color: #f2c94c; text-transform: uppercase;
+}
+#onboarding-card .ob-step { margin-left: auto; opacity: .75; font-weight: 600; }
+#onboarding-card .ob-name { margin-top: 3px; font-weight: 700; font-size: 14px; }
+#onboarding-card .ob-desc { margin-top: 2px; font-size: 12px; opacity: .85; line-height: 1.35; }
+#onboarding-card .ob-skip {
+  margin-top: 7px; font-size: 11px; opacity: .6;
+  background: none; border: 0; padding: 0; cursor: pointer; color: inherit;
+  text-decoration: underline;
+}
+#onboarding-card .ob-skip:hover { opacity: 1; }
+@media (max-width: 760px) { #onboarding-card { width: 240px; } }

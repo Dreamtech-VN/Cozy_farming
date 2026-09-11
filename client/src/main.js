@@ -20,6 +20,7 @@ import { WorldClock } from './core/world_clock.js';
 import { renderQuestTracker, claimFromTracker } from './ui/quest_tracker.js';
 import { buildHudMenus, markActiveMenu, markMenuBadge } from './ui/hud_menu.js';
 import { ChatDock } from './ui/chat_dock.js';
+import { renderOnboarding, onboardingDone } from './ui/onboarding.js';
 import { Match3Scene } from './scenes/match3.js';
 import { showLogin } from './scenes/login.js';
 import { toast, closePanel } from './ui/ui.js';
@@ -213,6 +214,7 @@ class Game {
 
     await this.enterMap(profile.position.map_id, 'spawn_default');
     this.#updateHud();
+    await this.refreshOnboarding();
     // Mỏ neo đầu phiên: vào game là có thứ để nhận ngay.
     await openDaily(this, { auto: true });
     if (!this.running) {
@@ -257,6 +259,7 @@ class Game {
     this.players.clear();
 
     this.busStop = 'arrived';
+    this.reportOnboarding('travel');
     this.self.x = entered.spawn.x;
     this.self.y = entered.spawn.y;
     this.self.vx = 0;
@@ -359,6 +362,40 @@ class Game {
     location.reload();
   }
 
+  /** Bước hướng dẫn hiện tại, lấy từ server. */
+  async refreshOnboarding() {
+    try {
+      const { step } = await this.api.get('/v1/onboarding');
+      this.#showOnboarding(step);
+    } catch { /* mất mạng thì giữ nguyên thẻ cũ */ }
+  }
+
+  /**
+   * Báo vừa làm một việc. Server tự lọc: sự kiện không đúng bước đang chờ thì
+   * không nhích, nên chỗ gọi cứ bắn thoải mái, khỏi tự kiểm tra.
+   *
+   * Không chờ kết quả ở chỗ gọi: hướng dẫn là thứ phụ, không được làm chậm hay
+   * làm hỏng hành động chính chỉ vì mạng chập.
+   */
+  reportOnboarding(event) {
+    if (this.onboardingStep == null) return;          // đã xong hoặc đã bỏ qua
+    this.api.post('/v1/onboarding/report', { event })
+      .then((res) => { if (res.advanced) { onboardingDone(); this.#showOnboarding(res.step); } })
+      .catch(() => { /* im lặng: không đáng làm phiền người chơi */ });
+  }
+
+  async skipOnboarding() {
+    this.#showOnboarding(null);
+    try { await this.api.post('/v1/onboarding/skip', {}); } catch { /* lần sau vào lại sẽ hiện lại */ }
+  }
+
+  #showOnboarding(step) {
+    this.onboardingStep = step;
+    const all = this.content.onboarding ?? [];
+    const index = step ? all.findIndex((s) => s.step_id === step.step_id) : -1;
+    renderOnboarding(this, step, { index: index < 0 ? null : index, total: all.length || null });
+  }
+
   /** Bảng nhiệm vụ trên HUD. Gọi lại sau mỗi hành động có thể đổi tiến độ. */
   async refreshQuests() {
     try {
@@ -423,6 +460,14 @@ class Game {
     const dirX = (this.input.keys.right ? 1 : 0) - (this.input.keys.left ? 1 : 0);
     const dirY = (this.input.keys.down ? 1 : 0) - (this.input.keys.up ? 1 : 0);
     if (dirX !== 0) self.facing = dirX;
+
+    // Bước hướng dẫn "biết đi" xong khi đã đi được một QUÃNG, không phải khi
+    // vừa chạm phím. Chạm phím thì lỡ tay cũng tính là xong, mà người chơi chưa
+    // kịp thấy nhân vật nhúc nhích.
+    if (this.onboardingStep?.event === 'move' && (dirX || dirY)) {
+      this.walked = (this.walked ?? 0) + RUN_SPEED * dt;
+      if (this.walked > 220) this.reportOnboarding('move');
+    }
 
     // Đi chéo không được nhanh hơn đi thẳng.
     const len = Math.hypot(dirX, dirY) || 1;
@@ -509,6 +554,7 @@ class Game {
         return;
       }
       if (target.kind === 'npc') {
+        this.reportOnboarding('talk');
         const result = await this.api.post(`/v1/npcs/${target.data.npc_id}/talk`, {});
         if (result.dialogue) {
           for (const line of result.dialogue.lines) toast(`${t(target.data.name_key)}: ${t(line)}`);

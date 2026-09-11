@@ -1,0 +1,41 @@
+{
+  "comment": "Hướng dẫn người mới. Mỗi bước là một việc PHẢI TỰ LÀM, không phải một trang chữ bấm Tiếp. Bước xong khi client báo đúng `event`, nên thứ tự trong danh sách này là thứ tự thật người chơi đi qua. Thêm/bớt bước chỉ cần sửa file này; `step_id` là tên chứ không phải số thứ tự để chèn bước vào giữa không làm người chơi đang dở nhảy lung tung.",
+  "steps": [
+    {
+      "step_id": "move",
+      "name_key": "onboarding.move.name",
+      "desc_key": "onboarding.move.desc",
+      "event": "move"
+    },
+    {
+      "step_id": "talk",
+      "name_key": "onboarding.talk.name",
+      "desc_key": "onboarding.talk.desc",
+      "event": "talk"
+    },
+    {
+      "step_id": "quests",
+      "name_key": "onboarding.quests.name",
+      "desc_key": "onboarding.quests.desc",
+      "event": "open_quests"
+    },
+    {
+      "step_id": "travel",
+      "name_key": "onboarding.travel.name",
+      "desc_key": "onboarding.travel.desc",
+      "event": "travel"
+    },
+    {
+      "step_id": "plant",
+      "name_key": "onboarding.plant.name",
+      "desc_key": "onboarding.plant.desc",
+      "event": "plant"
+    },
+    {
+      "step_id": "harvest",
+      "name_key": "onboarding.harvest.name",
+      "desc_key": "onboarding.harvest.desc",
+      "event": "harvest"
+    }
+  ]
+}

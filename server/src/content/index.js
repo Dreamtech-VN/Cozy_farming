@@ -7,7 +7,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { validateContent } from './validate.js';
 
-const FILES = ['crops', 'items', 'avatar_items', 'maps', 'match3_levels', 'quests', 'shops', 'economy', 'liveops', 'giftcodes'];
+const FILES = ['crops', 'items', 'avatar_items', 'maps', 'match3_levels', 'quests', 'shops', 'economy', 'liveops', 'giftcodes', 'onboarding'];
 
 const indexBy = (rows, key) => new Map(rows.map((row) => [row[key], row]));
 
@@ -43,6 +43,7 @@ export function loadContent({ dataDir, localeDir }) {
     shops: raw.shops.shops,
     economy: raw.economy,
     liveops: raw.liveops,
+    onboarding: raw.onboarding.steps,
     mails: raw.liveops.mails ?? [],
     locales,
 

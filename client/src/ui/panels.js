@@ -12,6 +12,7 @@ const itemName = (game, itemId) => t(game.content.itemsById.get(itemId)?.name_ke
 const cosmeticName = (game, itemId) => t(game.content.avatarItemsById.get(itemId)?.name_key ?? itemId);
 
 export function openQuests(game) {
+  game.reportOnboarding('open_quests');
   showPanel('Nhiệm vụ', async (body, rerender) => {
     body.append(emptyState('Đang tải…'));
     const { quests } = await game.api.get('/v1/quests');
@@ -171,6 +172,7 @@ function openSeedPicker(game, plot, seeds, refresh) {
         onClick: async () => {
           try {
             await game.api.post('/v1/farm/plant', { plot_id: plot.plot_id, crop_id: crop.crop_id });
+            game.reportOnboarding('plant');
             toast(`Đã gieo ${t(crop.name_key)}`, 'good');
             openFarm(game);
           } catch (err) { toast(err.message, 'bad'); }
@@ -194,6 +196,7 @@ export async function harvest(game, plotId, refresh) {
     for (const h of result.harvested) fx.pop(game.self.x, game.self.y - 130, `+${h.count} ${itemName(game, h.item_id)}`, 'item');
     fx.burst(game.self.x, game.self.y - 40, '#9fe6a0');
     audio.harvest();
+    game.reportOnboarding('harvest');
     toast(`Thu hoạch: ${gained}`, 'good');
     await game.refreshPlayer();
     await game.refreshFarm();
