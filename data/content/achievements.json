@@ -1,0 +1,67 @@
+{
+  "comment": "Mốc dài hạn, đọc từ `character_stats` nên không tự đếm lấy — cùng một con số với bảng xếp hạng. Mỗi thành tựu có nhiều BẬC: bậc sau mở ra khi bậc trước xong, nên một thành tựu đi theo người chơi suốt chứ không xong một phát rồi biến mất. Ngưỡng lên theo cấp số nhân chứ không cộng đều: cộng đều thì bậc cuối tới quá sớm rồi hết chuyện.",
+  "achievements": [
+    {
+      "achievement_id": "ach_harvest",
+      "stat": "count:harvest",
+      "name_key": "ach.harvest.name",
+      "desc_key": "ach.harvest.desc",
+      "tiers": [
+        { "tier": 1, "goal": 25, "reward": { "coin": 200, "xp": 30 } },
+        { "tier": 2, "goal": 120, "reward": { "coin": 600, "xp": 90 } },
+        { "tier": 3, "goal": 500, "reward": { "coin": 1800, "xp": 260, "gem": 10 } },
+        { "tier": 4, "goal": 2000, "reward": { "coin": 6000, "xp": 700, "gem": 30 } }
+      ]
+    },
+    {
+      "achievement_id": "ach_match3",
+      "stat": "count:match3_win",
+      "name_key": "ach.match3.name",
+      "desc_key": "ach.match3.desc",
+      "tiers": [
+        { "tier": 1, "goal": 5, "reward": { "coin": 200, "xp": 30 } },
+        { "tier": 2, "goal": 30, "reward": { "coin": 600, "xp": 90 } },
+        { "tier": 3, "goal": 120, "reward": { "coin": 1800, "xp": 260, "gem": 10 } },
+        { "tier": 4, "goal": 500, "reward": { "coin": 6000, "xp": 700, "gem": 30 } }
+      ]
+    },
+    {
+      "achievement_id": "ach_talk",
+      "stat": "count:talk_npc",
+      "name_key": "ach.talk.name",
+      "desc_key": "ach.talk.desc",
+      "tiers": [
+        { "tier": 1, "goal": 10, "reward": { "coin": 150, "xp": 25 } },
+        { "tier": 2, "goal": 60, "reward": { "coin": 500, "xp": 80 } },
+        { "tier": 3, "goal": 250, "reward": { "coin": 1500, "xp": 220, "gem": 8 } }
+      ]
+    },
+    {
+      "achievement_id": "ach_travel",
+      "stat": "count:visit_map",
+      "name_key": "ach.travel.name",
+      "desc_key": "ach.travel.desc",
+      "tiers": [
+        { "tier": 1, "goal": 15, "reward": { "coin": 150, "xp": 25 } },
+        { "tier": 2, "goal": 80, "reward": { "coin": 500, "xp": 80 } },
+        { "tier": 3, "goal": 300, "reward": { "coin": 1500, "xp": 220, "gem": 8 } }
+      ]
+    },
+    {
+      "achievement_id": "ach_shop",
+      "stat": "count:buy_item",
+      "name_key": "ach.shop.name",
+      "desc_key": "ach.shop.desc",
+      "tiers": [
+        { "tier": 1, "goal": 20, "reward": { "coin": 150, "xp": 25 } },
+        { "tier": 2, "goal": 100, "reward": { "coin": 500, "xp": 80 } },
+        { "tier": 3, "goal": 400, "reward": { "coin": 1500, "xp": 220, "gem": 8 } }
+      ]
+    }
+  ],
+  "leaderboards": [
+    { "board_id": "level", "key": "level", "name_key": "board.level" },
+    { "board_id": "harvest", "key": "count:harvest", "name_key": "board.harvest" },
+    { "board_id": "match3", "key": "count:match3_win", "name_key": "board.match3" }
+  ]
+}

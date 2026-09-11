@@ -9,6 +9,8 @@ import * as match3 from '../domain/match3.js';
 import * as quest from '../domain/quest.js';
 import { guideFor } from '../domain/guide.js';
 import * as onboarding from '../domain/onboarding.js';
+import * as achievements from '../domain/achievements.js';
+import * as stats from '../domain/stats.js';
 import * as social from '../domain/social.js';
 import * as shop from '../domain/shop.js';
 import * as account from '../domain/account.js';
@@ -237,6 +239,26 @@ export function registerRoutes(router, ctx) {
   // Chỉ dẫn đi kèm luôn danh sách nhiệm vụ chứ không tách endpoint: client đã
   // gọi lại `/v1/quests` sau mỗi hành động và sau mỗi lần đổi map, nên gắn vào
   // đây là mũi tên tự đồng bộ, khỏi lo hai nguồn lệch nhau.
+  router.get('/v1/achievements', ({ character }) => ({
+    body: { achievements: achievements.list(db, content, character.id), stats: stats.all(db, character.id) },
+  }));
+
+  router.post('/v1/achievements/:achievementId/claim', ({ character, params }) => ({
+    body: achievements.claim(db, content, character.id, params.achievementId),
+  }));
+
+  router.get('/v1/leaderboards', ({ character }) => ({
+    body: {
+      boards: content.leaderboards.map((board) => ({
+        ...board,
+        entries: stats.top(db, board.key, 20),
+        // Hạng của chính mình kèm luôn: người chơi hạng 900 mà chỉ thấy top 20
+        // thì bảng xếp hạng chẳng nói gì với họ.
+        me: stats.rankOf(db, board.key, character.id),
+      })),
+    },
+  }));
+
   router.get('/v1/onboarding', ({ character }) => ({
     body: { step: onboarding.currentStep(db, content, character.id) },
   }));

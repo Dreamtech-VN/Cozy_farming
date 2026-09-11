@@ -340,6 +340,102 @@ export function openBusStop(game, portal) {
   }, { key: 'bus-stop' });
 }
 
+/**
+ * Thành tựu: mốc dài hạn, nhiều bậc.
+ *
+ * Mỗi thành tựu chỉ hiện ĐÚNG MỘT bậc đang làm dở, không phải cả bảng bốn bậc.
+ * Người chơi cần biết "còn bao nhiêu nữa" chứ không cần nhìn ba bậc đã xong và
+ * một bậc còn xa lắc cùng lúc.
+ */
+export function openAchievements(game) {
+  showPanel('Thành tựu', async (body, rerender) => {
+    body.append(emptyState('Đang tải…'));
+    const { achievements } = await game.api.get('/v1/achievements');
+    body.replaceChildren();
+
+    for (const ach of achievements) {
+      const done = ach.tier === null;
+      const ratio = done ? 1 : Math.min(1, ach.value / ach.goal);
+      body.append(el('div', { class: `row ach ${ach.claimable ? 'ready' : ''}`.trim() }, [
+        el('div', { class: 'grow' }, [
+          el('div', { class: 'title' }, [
+            el('span', { text: t(ach.name_key) }),
+            // Bậc mấy trên mấy: cho thấy đây là chặng đường dài chứ không phải
+            // một cái công tắc bật/tắt.
+            el('span', { class: 'sub', text: done ? ' · đã xong hết' : ` · bậc ${ach.tier}/${ach.total_tiers}` }),
+          ]),
+          el('div', { class: 'sub', text: t(ach.desc_key) }),
+          el('div', { class: 'ach-bar' }, [el('i', { style: `width:${ratio * 100}%` })]),
+          el('div', { class: 'sub', text: done ? `${formatNumber(ach.value)}` : `${formatNumber(ach.value)} / ${formatNumber(ach.goal)}` }),
+        ]),
+        ach.claimable
+          ? el('button', {
+              class: 'primary', type: 'button', text: 'Nhận',
+              onClick: async () => {
+                try {
+                  await game.api.post(`/v1/achievements/${ach.achievement_id}/claim`, {});
+                  await game.refreshPlayer();
+                  rerender();
+                } catch (err) { toast(err.message, 'bad'); }
+              },
+            })
+          : null,
+      ]));
+    }
+  });
+}
+
+/**
+ * Bảng xếp hạng.
+ *
+ * Kèm hạng của CHÍNH MÌNH ở cuối mỗi bảng, kể cả khi không lọt top: người chơi
+ * hạng 900 mà chỉ thấy hai mươi cái tên lạ thì bảng này chẳng nói gì với họ.
+ */
+export function openLeaderboards(game) {
+  showPanel('Xếp hạng', async (body) => {
+    body.append(emptyState('Đang tải…'));
+    const { boards } = await game.api.get('/v1/leaderboards');
+    body.replaceChildren();
+
+    let active = boards[0]?.board_id;
+    const list = el('div', {});
+    const draw = () => {
+      const board = boards.find((b) => b.board_id === active);
+      list.replaceChildren();
+      if (!board?.entries.length) { list.append(emptyState('Chưa có ai trên bảng này.')); return; }
+      for (const entry of board.entries) {
+        const mine = entry.character_id === game.characterId;
+        list.append(el('div', { class: `row rank ${mine ? 'mine' : ''}`.trim() }, [
+          el('span', { class: 'rank-no', text: `${entry.rank}` }),
+          el('span', { class: 'grow', text: entry.nickname }),
+          el('span', { text: formatNumber(entry.value) }),
+        ]));
+      }
+      const inTop = board.entries.some((e) => e.character_id === game.characterId);
+      if (board.me && !inTop) {
+        list.append(el('div', { class: 'row rank mine' }, [
+          el('span', { class: 'rank-no', text: `${board.me.rank}` }),
+          el('span', { class: 'grow', text: 'Bạn' }),
+          el('span', { text: formatNumber(board.me.value) }),
+        ]));
+      }
+    };
+
+    body.append(el('div', { class: 'row', style: 'flex-wrap:wrap;gap:6px' }, boards.map((board) =>
+      el('button', {
+        class: board.board_id === active ? 'primary' : 'ghost', type: 'button', text: t(board.name_key),
+        onClick: (event) => {
+          active = board.board_id;
+          for (const node of event.currentTarget.parentElement.children) node.className = 'ghost';
+          event.currentTarget.className = 'primary';
+          draw();
+        },
+      }))));
+    body.append(list);
+    draw();
+  });
+}
+
 /** Bản đồ thành phố: toàn bộ map và các cổng nối giữa chúng. */
 export function openWorldAtlas(game) {
   showPanel('Bản đồ thành phố', async (body) => {

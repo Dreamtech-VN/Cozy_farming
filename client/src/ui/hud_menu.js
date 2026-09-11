@@ -54,6 +54,8 @@ export function buildMenuPanel(game, body, handlers, badges = {}) {
     { key: 'inventory', icon: 'bag', label: 'Túi đồ', run: handlers.inventory },
     { key: 'mail', icon: 'mail', label: 'Thư', run: handlers.mail },
     { key: 'map', icon: 'map', label: 'Bản đồ', run: handlers.map },
+    { key: 'achievements', icon: 'quest', label: 'Thành tựu', run: handlers.achievements },
+    { key: 'leaderboard', icon: 'level', label: 'Xếp hạng', run: handlers.leaderboard },
   ];
   body.append(el('div', { class: 'menu-grid' }, items.map((item) => el('button', {
     class: 'menu-item', type: 'button', 'data-key': item.key, onClick: () => item.run(game),

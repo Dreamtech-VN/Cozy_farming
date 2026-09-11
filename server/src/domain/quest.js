@@ -6,6 +6,7 @@
 import { transaction } from '../db/index.js';
 import { applyChange } from './economy.js';
 import { badRequest, conflict, notFound } from '../lib/errors.js';
+import { bump, statKey } from './stats.js';
 
 /** Quest daily/weekly reset theo chu kỳ; period_key giữ tiến độ của chu kỳ hiện tại. */
 export function periodKey(type, now = Date.now()) {
@@ -117,6 +118,9 @@ export function listQuests(db, content, characterId, now = Date.now()) {
  * type: harvest | collect | match3_win | visit_map | talk_npc | reach_level | buy_item
  */
 export function trackProgress(db, content, characterId, type, target, amount = 1, now = Date.now()) {
+  // Cộng số liệu tích luỹ ở ĐÂY, trước khi lọc nhiệm vụ: thành tựu và bảng xếp
+  // hạng phải đếm mọi lần làm, kể cả khi chẳng nhiệm vụ nào đang cần việc ấy.
+  bump(db, characterId, statKey(type), amount, now);
   const updated = [];
   for (const quest of content.quests) {
     if (!quest.objectives.some((o) => o.type === type)) continue;
