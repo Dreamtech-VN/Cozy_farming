@@ -316,7 +316,8 @@ export function registerRoutes(router, ctx) {
 
   router.get('/v1/quests', ({ character }) => {
     const quests = quest.listQuests(db, content, character.id);
-    return { body: { quests, guide: guideFor(content, quests, character.last_map_id) } };
+    const phase = worldState(content, character.last_map_id).phase;
+    return { body: { quests, guide: guideFor(content, quests, character.last_map_id, phase) } };
   });
 
   router.post('/v1/quests/:questId/claim', ({ character, params }) => {

@@ -15,6 +15,18 @@
  * phía một map khác, người chơi đi theo là đâm vào mép map.
  */
 
+/**
+ * Chỗ NPC đang đứng, theo pha trong ngày.
+ *
+ * NPC có lịch sinh hoạt nên toạ độ trong data chỉ là chỗ mặc định. Mũi tên chỉ
+ * dẫn phải hỏi đúng câu hỏi này, không thì nó chỉ vào chỗ NPC đứng lúc bình
+ * minh trong khi người ta đã đi chợ từ lâu.
+ *
+ * Luật đơn giản đến mức client chép lại một dòng cũng không thành trùng lặp
+ * logic: tra bảng theo pha, không có thì về mặc định.
+ */
+export const npcXAt = (npc, phase) => npc.schedule?.[phase] ?? npc.x;
+
 /** Map của nhiệm vụ nông trại: map nào có luống cây thì là nông trại người chơi. */
 const farmMap = (content) => content.maps.find((m) => m.farm_layout);
 
@@ -28,12 +40,12 @@ const match3Spot = (content) => {
 };
 
 /** Mục tiêu này bảo người chơi đi đâu? `null` nghĩa là không gắn với chỗ nào. */
-function placeOf(content, objective) {
+function placeOf(content, objective, phase) {
   switch (objective.type) {
     case 'talk_npc': {
       for (const map of content.maps) {
         const npc = map.npcs.find((n) => n.npc_id === objective.target);
-        if (npc) return { map, x: npc.x, label_key: npc.name_key };
+        if (npc) return { map, x: npcXAt(npc, phase), label_key: npc.name_key };
       }
       return null;
     }
@@ -98,12 +110,13 @@ function nextObjective(quests) {
 
 /**
  * @param fromMapId map người chơi đang đứng.
+ * @param phase pha trong ngày — NPC có lịch sinh hoạt nên chỗ đứng đổi theo giờ.
  * @returns null khi không có gì để chỉ — client hiểu là ẩn mũi tên đi.
  */
-export function guideFor(content, quests, fromMapId) {
+export function guideFor(content, quests, fromMapId, phase = 'day') {
   const next = nextObjective(quests);
   if (!next) return null;
-  const place = placeOf(content, next.objective);
+  const place = placeOf(content, next.objective, phase);
   if (!place) return null;
 
   const sameMap = place.map.map_id === fromMapId;

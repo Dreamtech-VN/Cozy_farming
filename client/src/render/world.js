@@ -182,7 +182,7 @@ export class WorldRenderer {
     this.camera.y = Math.max(this.anchorY - 40, map.ground_y);
   }
 
-  render(map, { players, self, farm, hintTarget, guide, time }) {
+  render(map, { players, self, farm, hintTarget, npcs, guide, time }) {
     const ctx = this.ctx;
     const scale = this.scale;
     ctx.setTransform(this.dpr * scale, 0, 0, this.dpr * scale, 0, 0);
@@ -214,7 +214,7 @@ export class WorldRenderer {
     if (farm) this.#drawFarm(map, farm, time);
     this.#drawObjects(map, hintTarget);
     this.#drawPortals(map, hintTarget);
-    this.#drawNpcs(map, hintTarget, time);
+    this.#drawNpcs(map, npcs ?? map.npcs, hintTarget, time);
 
     // Xếp theo y: ai đứng gần mép trước thì vẽ sau, che người phía sau.
     const everyone = [...players, self].sort((a, b) => a.y - b.y);
@@ -760,9 +760,14 @@ export class WorldRenderer {
     }
   }
 
-  #drawNpcs(map, hintTarget, time) {
+  /**
+   * NPC. Vị trí lấy từ danh sách SỐNG do `main.js` mô phỏng, không phải từ data
+   * map: NPC có lịch sinh hoạt nên chỗ đứng đổi theo giờ, và chúng ĐI tới chỗ
+   * mới chứ không nhảy cóc.
+   */
+  #drawNpcs(map, npcs, hintTarget, time) {
     const ctx = this.ctx;
-    for (const npc of map.npcs) {
+    for (const npc of npcs) {
       this.#groundShadow(npc.x, npc.y, AVATAR_FOOT * depthScale(map, npc.y), CHARACTER_SHADOW);
       ctx.save();
       ctx.translate(npc.x, npc.y);
@@ -773,10 +778,11 @@ export class WorldRenderer {
         sprite: npc.sprite,
         equipment: {},
         palette: { body: npc.palette[0], top: npc.palette[1], hair: npc.palette[2] },
-        facing: -1,
-        state: 'idle',
-        // Mỗi NPC lệch pha thở một chút, không thì cả map phập phồng cùng nhịp.
-        phase: (time * 0.35 + npc.x * 0.01) % 1,
+        facing: npc.facing ?? -1,
+        state: npc.walking ? 'run' : 'idle',
+        // Đang đi thì dùng nhịp bước riêng của NPC ấy; đứng yên thì mỗi người
+        // lệch pha thở một chút, không thì cả map phập phồng cùng nhịp.
+        phase: npc.walking ? (npc.phase ?? 0) : (time * 0.35 + (npc.x0 ?? npc.x) * 0.01) % 1,
         nickname: t(npc.name_key),
       });
       ctx.restore();

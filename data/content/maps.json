@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "comment": "Doc 03 — map nhìn ngang nhưng đi được bốn hướng. ground_y là mép TRƯỚC của dải đất, walk_depth là độ sâu lùi về sau. Không có platform: trục dọc là chiều sâu chứ không phải độ cao, nên không trèo lên nóc nhà được.",
+  "comment": "Doc 03 — map nhìn ngang nhưng đi được bốn hướng. ground_y là mép TRƯỚC của dải đất, walk_depth là độ sâu lùi về sau. Không có platform: trục dọc là chiều sâu chứ không phải độ cao, nên không trèo lên nóc nhà được. · `schedule` của NPC khai chỗ đứng theo từng pha trong ngày; thiếu pha nào thì về `x` mặc định. Suy thẳng từ đồng hồ thế giới nên không lưu state, mọi người chơi thấy NPC ở cùng một chỗ. NPC KHÔNG đổi map: nhiệm vụ và mũi tên chỉ dẫn đều trỏ tới map của NPC, đi lạc map là người chơi tìm không ra.",
   "world": {
     "comment": "Doc 03/16 — map public chia thành nhiều khu (channel); doc 03 — weather/day-night flags.",
     "channel_count": 20,
@@ -136,7 +136,13 @@
             "#e0576f",
             "#3a2c26"
           ],
-          "sprite": "npc_casual_11"
+          "sprite": "npc_casual_11",
+          "schedule": {
+            "dawn": 380,
+            "day": 520,
+            "dusk": 900,
+            "night": 300
+          }
         },
         {
           "npc_id": "npc_shop_keeper",
@@ -150,7 +156,13 @@
             "#4a86c8",
             "#c8763c"
           ],
-          "sprite": "npc_office_07"
+          "sprite": "npc_office_07",
+          "schedule": {
+            "dawn": 1500,
+            "day": 1500,
+            "dusk": 1180,
+            "night": 1620
+          }
         }
       ],
       "objects": [
@@ -290,7 +302,13 @@
             "#6f5ad0",
             "#3a2c26"
           ],
-          "sprite": "npc_casual_06"
+          "sprite": "npc_casual_06",
+          "schedule": {
+            "dawn": 560,
+            "day": 700,
+            "dusk": 1020,
+            "night": 460
+          }
         },
         {
           "npc_id": "npc_arcade_bo",
@@ -304,7 +322,13 @@
             "#59b06a",
             "#c8763c"
           ],
-          "sprite": "npc_kid_09"
+          "sprite": "npc_kid_09",
+          "schedule": {
+            "dawn": 1300,
+            "day": 1300,
+            "dusk": 980,
+            "night": 1420
+          }
         }
       ],
       "objects": [
@@ -461,7 +485,13 @@
             "#8a9a45",
             "#3a2c26"
           ],
-          "sprite": "npc_worker_13"
+          "sprite": "npc_worker_13",
+          "schedule": {
+            "dawn": 380,
+            "day": 620,
+            "dusk": 1020,
+            "night": 300
+          }
         }
       ],
       "objects": [
@@ -651,7 +681,13 @@
             "#3f7a3c",
             "#4a3a2a"
           ],
-          "sprite": "npc_elder_15"
+          "sprite": "npc_elder_15",
+          "schedule": {
+            "dawn": 620,
+            "day": 900,
+            "dusk": 1280,
+            "night": 700
+          }
         }
       ],
       "objects": [

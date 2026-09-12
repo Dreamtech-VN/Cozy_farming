@@ -33,6 +33,8 @@ const INTERACT_RANGE = 90;
 // Bảng đồ tuyến tự bật khi ĐỨNG VÀO trạm, nên bán kính này phải hẹp hơn tầm
 // tương tác chung: rộng bằng nhau thì đi ngang qua cũng bị bảng đồ chặn mặt.
 const BUS_STOP_RANGE = 56;
+// NPC đi chậm hơn người chơi (260): họ đang sống chứ không vội đi đâu.
+const NPC_SPEED = 78;
 
 class Game {
   constructor() {
@@ -257,6 +259,7 @@ class Game {
       this.api.post(`/v1/maps/${mapId}/enter`, { spawn_id: spawnId, channel }),
     ]);
     this.currentMap = map;
+    this.#resetNpcs(map);
     this.renderer.setMap(map);
     this.content.mapsById.set(map.map_id, map);
     this.players.clear();
@@ -363,6 +366,39 @@ class Game {
     try { await this.api.post('/v1/auth/logout', {}); } catch { /* hết hạn rồi thì thôi */ }
     this.api.setSession(null);
     location.reload();
+  }
+
+  /**
+   * NPC có lịch sinh hoạt: mỗi pha trong ngày một chỗ đứng.
+   *
+   * Giữ trạng thái sống riêng thay vì vẽ thẳng từ data map, vì NPC phải ĐI tới
+   * chỗ mới chứ không nhảy cóc. Nhảy cóc thì đúng vị trí nhưng làng trông như
+   * ảnh chụp bị thay, mất hẳn cái cảm giác có người đang sống ở đó.
+   */
+  #resetNpcs(map) {
+    this.npcs = (map.npcs ?? []).map((npc) => ({ ...npc, walking: false, facing: -1, phase: Math.random() }));
+  }
+
+  /** Chỗ NPC phải đứng lúc này. Cùng một luật với `guide.js` ở server. */
+  #npcTarget(npc) {
+    return npc.schedule?.[this.world?.phase] ?? npc.x0 ?? npc.x;
+  }
+
+  #stepNpcs(dt) {
+    for (const npc of this.npcs ?? []) {
+      // Nhớ chỗ mặc định một lần: `npc.x` bị ghi đè khi NPC đi, nên lần sau tra
+      // bảng lịch mà thiếu pha thì không còn gì để lui về.
+      npc.x0 ??= npc.x;
+      const target = this.#npcTarget(npc);
+      const gap = target - npc.x;
+      if (Math.abs(gap) < 2) { npc.walking = false; continue; }
+      // Đi chậm hơn người chơi: NPC đang sống chứ không vội đi đâu.
+      const step = Math.sign(gap) * Math.min(Math.abs(gap), NPC_SPEED * dt);
+      npc.x += step;
+      npc.facing = Math.sign(step);
+      npc.walking = true;
+      npc.phase = (npc.phase + dt * 2.2) % 1;
+    }
   }
 
   /** Bước hướng dẫn hiện tại, lấy từ server. */
@@ -505,6 +541,7 @@ class Game {
       player.phase = (player.phase + dt * (player.state === 'run' ? 3.2 : 1)) % 1;
     }
 
+    this.#stepNpcs(dt);
     this.#updateInteraction();
   }
 
@@ -513,7 +550,7 @@ class Game {
     const map = this.currentMap;
     const self = this.self;
     const candidates = [
-      ...map.npcs.map((npc) => ({ id: npc.npc_id, x: npc.x, kind: 'npc', data: npc, label: `Nói chuyện với ${t(npc.name_key)}` })),
+      ...(this.npcs ?? []).map((npc) => ({ id: npc.npc_id, x: npc.x, kind: 'npc', data: npc, label: `Nói chuyện với ${t(npc.name_key)}` })),
       ...map.portals.map((portal) => ({ id: portal.portal_id, x: portal.x, kind: 'portal', data: portal, label: 'Xem tuyến xe buýt' })),
       ...(map.objects ?? []).filter((o) => o.action).map((object) => ({
         id: object.object_id, x: object.x, kind: 'object', data: object, label: OBJECT_LABEL[object.action] ?? 'Tương tác',
@@ -641,6 +678,7 @@ class Game {
           self: { ...this.self, emote: this.#emoteFor(this.characterId, now) },
           farm: this.farm,
           hintTarget: this.hintTarget,
+          npcs: this.npcs,
           guide: this.guide,
           time: this.time,
         });

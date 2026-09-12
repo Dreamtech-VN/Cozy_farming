@@ -37,6 +37,30 @@ describe('Chỉ dẫn nhiệm vụ', () => {
     assert.equal(portal.target_map_id, 'map_farm_village');
   });
 
+  test('NPC có lịch sinh hoạt thì mũi tên chỉ theo giờ, không chỉ chỗ mặc định', () => {
+    const npc = content.byMap.get('map_farm_village').npcs.find((n) => n.npc_id === 'npc_farmer_tu');
+    assert.ok(npc.schedule, 'bác Tư phải có lịch, không thì bài test này vô nghĩa');
+    const quests = active({ type: 'talk_npc', target: 'npc_farmer_tu' });
+    // Không hỏi đúng câu này thì mũi tên chỉ vào chỗ NPC đứng lúc bình minh
+    // trong khi người ta đã ra đồng từ lâu.
+    for (const phase of ['dawn', 'day', 'dusk', 'night']) {
+      const guide = guideFor(content, quests, 'map_farm_village', phase);
+      assert.equal(guide.step.x, npc.schedule[phase], `pha ${phase}`);
+    }
+  });
+
+  test('NPC không đổi map dù đi đâu trong ngày', () => {
+    // Nhiệm vụ và mũi tên đều trỏ tới MAP của NPC; đi lạc map là người chơi tìm
+    // không ra, mà chuỗi cốt truyện thì kẹt.
+    for (const map of content.maps) {
+      for (const npc of map.npcs) {
+        for (const key of Object.keys(npc.schedule ?? {})) {
+          assert.equal(typeof npc.schedule[key], 'number', `${npc.npc_id}.${key} phải là toạ độ x, không phải map`);
+        }
+      }
+    }
+  });
+
   test('mục tiêu không gắn với chỗ nào thì không chỉ bừa', () => {
     assert.equal(guideFor(content, active({ type: 'reach_level', target: '5' }), 'map_city_plaza'), null);
   });
